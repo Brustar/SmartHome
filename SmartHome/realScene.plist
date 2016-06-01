@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>rects</key>
+	<array>
+		<dict>
+			<key>image</key>
+			<string>real1.png</string>
+			<key>rect</key>
+			<string>{{0, 0}, {200, 400}}</string>
+		</dict>
+		<dict>
+			<key>image</key>
+			<string>real2.png</string>
+			<key>rect</key>
+			<string>{{300, 0}, {200, 400}}</string>
+		</dict>
+		<dict>
+			<key>image</key>
+			<string>real3.png</string>
+			<key>rect</key>
+			<string>{{600, 0}, {200, 400}}</string>
+		</dict>
+	</array>
+</dict>
+</plist>
