@@ -96,6 +96,7 @@
 
     NSString *cmd=@"hello firefly2";
     [sock.socket writeData:[PackManager fireflyProtocol:cmd] withTimeout:1 tag:1];
+    [sock.socket readDataToData:[AsyncSocket CRLFData] withTimeout:1 tag:1];
 }
 
 -(IBAction)sendSearchBroadcast:(id)sender

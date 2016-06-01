@@ -10,6 +10,6 @@
 
 @interface PackManager : NSObject
 
-+ (NSData *) fireflyProtocol:(NSString *)cmd
++ (NSData *) fireflyProtocol:(NSString *)cmd;
 
 @end
