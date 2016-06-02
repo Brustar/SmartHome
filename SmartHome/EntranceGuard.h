@@ -6,8 +6,13 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 // 门禁
 
-#import "Device.h"
+#import <Foundation/Foundation.h>
 
-@interface EntranceGuard : Device
+@interface EntranceGuard : NSObject
+
+//设备id
+@property (nonatomic) int deviceID;
+//开关状态
+@property (nonatomic) bool isPoweron;
 
 @end

@@ -6,8 +6,15 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
-#import "AVMedia.h"
+#import <Foundation/Foundation.h>
 
-@interface DVD : AVMedia
+@interface DVD : NSObject
+
+//设备id
+@property (nonatomic) int deviceID;
+//开关状态
+@property (nonatomic) bool isPoweron;
+//音量
+@property (nonatomic) int volume;
 
 @end

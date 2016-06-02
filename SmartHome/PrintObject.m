@@ -19,8 +19,7 @@
     for(int i = 0;i < propsCount; i++)
     {
         objc_property_t prop = props[i];
-        NSString
-        *propName = [NSString stringWithUTF8String:property_getName(prop)];
+        NSString *propName = [NSString stringWithUTF8String:property_getName(prop)];
         id value = [obj valueForKey:propName];
         if(value == nil)
         {

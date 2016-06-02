@@ -89,7 +89,7 @@
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="percent" destination="P8g-FG-I83" id="Ivt-cW-XuT"/>
+                        <outlet property="openvalue" destination="P8g-FG-I83" id="sRk-J6-G9i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S9q-xz-hr7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -465,6 +465,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="6oM-hP-QPh"/>
+        <segue reference="Ljm-Ca-u9B"/>
     </inferredMetricsTieBreakers>
 </document>

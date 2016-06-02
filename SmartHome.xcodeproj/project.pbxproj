@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0F01D5411CDC6C8A00DAC267 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F01D5401CDC6C8A00DAC267 /* Device.m */; };
 		0F01D5441CDC6CA600DAC267 /* Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F01D5431CDC6CA600DAC267 /* Scene.m */; };
 		0F032D491CC9B12700D1920D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F032D481CC9B12700D1920D /* main.m */; };
 		0F032D4C1CC9B12700D1920D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F032D4B1CC9B12700D1920D /* AppDelegate.m */; };
@@ -95,7 +94,6 @@
 		0FCFB3951CF2943100B37DD3 /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFB3941CF2943100B37DD3 /* Camera.m */; };
 		0FCFB3981CF2947500B37DD3 /* EntranceGuard.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFB3971CF2947500B37DD3 /* EntranceGuard.m */; };
 		0FCFB39B1CF2950D00B37DD3 /* BgMusic.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFB39A1CF2950D00B37DD3 /* BgMusic.m */; };
-		0FCFB39E1CF2954E00B37DD3 /* AVMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFB39D1CF2954E00B37DD3 /* AVMedia.m */; };
 		0FF410DA1CDAE67100C7F4A1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410D91CDAE67100C7F4A1 /* CoreLocation.framework */; };
 		0FF410DC1CDAF76300C7F4A1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410DB1CDAF76300C7F4A1 /* CoreBluetooth.framework */; };
 		F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB411D00029900AB04BE /* DetailViewController.m */; };
@@ -125,8 +123,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0F01D53F1CDC6C8A00DAC267 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
-		0F01D5401CDC6C8A00DAC267 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
 		0F01D5421CDC6CA600DAC267 /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
 		0F01D5431CDC6CA600DAC267 /* Scene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Scene.m; sourceTree = "<group>"; };
 		0F032D441CC9B12700D1920D /* SmartHome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartHome.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -297,8 +293,6 @@
 		0FCFB3971CF2947500B37DD3 /* EntranceGuard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntranceGuard.m; sourceTree = "<group>"; };
 		0FCFB3991CF2950D00B37DD3 /* BgMusic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BgMusic.h; sourceTree = "<group>"; };
 		0FCFB39A1CF2950D00B37DD3 /* BgMusic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BgMusic.m; sourceTree = "<group>"; };
-		0FCFB39C1CF2954E00B37DD3 /* AVMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVMedia.h; sourceTree = "<group>"; };
-		0FCFB39D1CF2954E00B37DD3 /* AVMedia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVMedia.m; sourceTree = "<group>"; };
 		0FCFB39F1CF2D38800B37DD3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		0FCFB3A11CF2D39300B37DD3 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		0FF410D91CDAE67100C7F4A1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -357,10 +351,6 @@
 		0F01D53E1CDC6C4B00DAC267 /* entity */ = {
 			isa = PBXGroup;
 			children = (
-				0F01D53F1CDC6C8A00DAC267 /* Device.h */,
-				0F01D5401CDC6C8A00DAC267 /* Device.m */,
-				0FCFB39C1CF2954E00B37DD3 /* AVMedia.h */,
-				0FCFB39D1CF2954E00B37DD3 /* AVMedia.m */,
 				0F01D5421CDC6CA600DAC267 /* Scene.h */,
 				0F01D5431CDC6CA600DAC267 /* Scene.m */,
 				0FAF8FED1CE18C41000557BD /* IBeacon.h */,
@@ -519,6 +509,8 @@
 		0F43B0FE1CF3E93700F3D9F0 /* storeboard */ = {
 			isa = PBXGroup;
 			children = (
+				F6359AFA1CFFBC910035EB31 /* DetailTableViewCell.xib */,
+				F6359AFF1CFFC4DC0035EB31 /* ColourTableViewCell.xib */,
 				0F032D561CC9B12700D1920D /* Main.storyboard */,
 				F6359AFA1CFFBC910035EB31 /* DetailTableViewCell.xib */,
 				F6359AFF1CFFC4DC0035EB31 /* ColourTableViewCell.xib */,
@@ -843,7 +835,6 @@
 				0FAF8FFB1CE1D9BC000557BD /* UploadManager.m in Sources */,
 				F6359B001CFFC4DC0035EB31 /* ColourTableViewCell.m in Sources */,
 				0FAF8FF21CE18CE2000557BD /* IBeaconController.m in Sources */,
-				0FCFB39E1CF2954E00B37DD3 /* AVMedia.m in Sources */,
 				0FAF74C61CEEA17C00432713 /* UIImage+CoreGraphics.m in Sources */,
 				0FAF98A71CE40F3C009BDBB5 /* QRToggleTorchButton.m in Sources */,
 				0F25FE5E1CEB0C0A0063E834 /* SceneList.m in Sources */,
@@ -856,7 +847,6 @@
 				0FAF74C31CEEA17C00432713 /* HRColorMapView.m in Sources */,
 				0FADA44A1CEBF8AE00777901 /* SceneManager.m in Sources */,
 				0F01D5441CDC6CA600DAC267 /* Scene.m in Sources */,
-				0F01D5411CDC6C8A00DAC267 /* Device.m in Sources */,
 				0FCFB3831CF28FCB00B37DD3 /* Curtain.m in Sources */,
 				0FC0FFDD1CF57E58000F71D5 /* TouchImage.m in Sources */,
 				0FCFB3951CF2943100B37DD3 /* Camera.m in Sources */,

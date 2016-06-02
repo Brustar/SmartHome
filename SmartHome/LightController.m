@@ -20,16 +20,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title=@"场景-灯";
     
+    self.bright.continuous = NO;
+    [self.bright addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
-    self.title=@"添加场景-灯";
-  
-    UISegmentedControl *button = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"save", nil]];
-    button.momentary = YES;
-    [button addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
-    
-    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithCustomView:button];
-    self.navigationItem.rightBarButtonItem = menuButton;
+     [self.power addTarget:self action:@selector(save:)forControlEvents:UIControlEventValueChanged];
     
     self.detailCell = [[[NSBundle mainBundle] loadNibNamed:@"DetailTableViewCell" owner:self options:nil] lastObject];
     
@@ -38,24 +34,26 @@
     
     self.cell = [[[NSBundle mainBundle] loadNibNamed:@"ColourTableViewCell" owner:self options:nil] lastObject];
     
-    NSLog(@"接收到的值为: %d",  [self.sceneid intValue]);
     if ([self.sceneid intValue]>0) {
         self.favorite.hidden=NO;
         self.remove.hidden=NO;
-        button.hidden=NO;
         
         Scene *scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
-        Light *device=[scene.devices firstObject];
-        self.detailCell.bright.value=device.brightness/100.0;
-        self.detailCell.power.on=device.isPoweron;
-        
-        self.cell.colourView.backgroundColor=[UIColor colorWithRed:[[device.color firstObject] intValue]/255.0 green:[[device.color objectAtIndex:1] intValue]/255.0  blue:[[device.color lastObject] intValue]/255.0  alpha:1];
+        for(id device in scene.devices)
+        {
+            if ([device isKindOfClass:[Light class]]) {
+                self.detailCell.bright.value=((Light*)device).brightness/100.0;
+                self.detailCell.power.on=((Light*)device).isPoweron;
+                self.cell.colourView.backgroundColor=[UIColor colorWithRed:[[((Light*)device).color firstObject] intValue]/255.0 green:[[((Light*)device).color objectAtIndex:1] intValue]/255.0  blue:[[((Light*)device).color lastObject] intValue]/255.0  alpha:1];
+            }
+        }
     }
     
     
     self.tableView.scrollEnabled = NO;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
     
 }
 
@@ -74,9 +72,9 @@
     [scene setHouseID:3];
     [scene setPicID:66];
     [scene setReadonly:NO];
-    NSMutableArray *array=[NSMutableArray arrayWithObject:device];
-    [scene setDevices:array];
-    [[NSUserDefaults standardUserDefaults] setObject:scene forKey:@"sceneID"];
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device id:device.deviceID];
+    [scene setDevices:devices];
     [[SceneManager defaultManager] addScenen:scene withName:@"" withPic:@""];
 }
 
@@ -141,6 +139,7 @@
 
 - (void)setSelectedColor:(UIColor *)color
 {
+    [self save:nil];
     self.cell.colourView.backgroundColor = color;
 }
 
@@ -193,7 +192,7 @@
 //设置cell行高
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 50;
+    return 44;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

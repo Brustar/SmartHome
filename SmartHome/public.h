@@ -10,7 +10,6 @@
 #import "IbeaconManager.h"
 #import "VolumeManager.h"
 #import "DownloadManager.h"
-#import "Device.h"
 #import "Scene.h"
 
 #ifndef public_h
