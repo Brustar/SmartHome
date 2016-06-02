@@ -52,7 +52,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:@"device" sender:self];
+    NSString *segua=@"Lighter";
+    if (indexPath.row==0) {
+        segua=@"Lighter";
+    }else if (indexPath.row==2){
+        segua=@"Curtain";
+    }
+    [self performSegueWithIdentifier:segua sender:self];
 }
 
 
