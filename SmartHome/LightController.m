@@ -44,7 +44,7 @@
             if ([device isKindOfClass:[Light class]]) {
                 self.detailCell.bright.value=((Light*)device).brightness/100.0;
                 self.detailCell.power.on=((Light*)device).isPoweron;
-                self.detailCell.backgroundColor=[UIColor colorWithRed:[[((Light*)device).color firstObject] intValue]/255.0 green:[[((Light*)device).color objectAtIndex:1] intValue]/255.0  blue:[[((Light*)device).color lastObject] intValue]/255.0  alpha:1];
+                self.cell.colourView.backgroundColor=[UIColor colorWithRed:[[((Light*)device).color firstObject] intValue]/255.0 green:[[((Light*)device).color objectAtIndex:1] intValue]/255.0  blue:[[((Light*)device).color lastObject] intValue]/255.0  alpha:1];
             }
         }
     }
