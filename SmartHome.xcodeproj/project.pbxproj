@@ -24,6 +24,7 @@
 		0F43B1001CF3ED4B00F3D9F0 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F43B0FF1CF3ED4B00F3D9F0 /* CoreTelephony.framework */; };
 		0F43B1031CF4055300F3D9F0 /* IATConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F43B1021CF4055300F3D9F0 /* IATConfig.m */; };
 		0F43B1061CF4078300F3D9F0 /* ISRDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F43B1051CF4078300F3D9F0 /* ISRDataHelper.m */; };
+		0F4B49801CFEB13500D93DD2 /* CurtainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4B497F1CFEB13500D93DD2 /* CurtainController.m */; };
 		0F91AA171CDC798700094C25 /* PrintObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F91AA161CDC798700094C25 /* PrintObject.m */; };
 		0F9ADF671CE2CFF40052F3BC /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9ADF501CE2CFF40052F3BC /* ASIAuthenticationDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0F9ADF681CE2CFF40052F3BC /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9ADF531CE2CFF40052F3BC /* ASIDataCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -146,6 +147,8 @@
 		0F43B1021CF4055300F3D9F0 /* IATConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IATConfig.m; sourceTree = "<group>"; };
 		0F43B1041CF4078300F3D9F0 /* ISRDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISRDataHelper.h; sourceTree = "<group>"; };
 		0F43B1051CF4078300F3D9F0 /* ISRDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISRDataHelper.m; sourceTree = "<group>"; };
+		0F4B497E1CFEB13500D93DD2 /* CurtainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurtainController.h; sourceTree = "<group>"; };
+		0F4B497F1CFEB13500D93DD2 /* CurtainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurtainController.m; sourceTree = "<group>"; };
 		0F91AA151CDC798700094C25 /* PrintObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintObject.h; sourceTree = "<group>"; };
 		0F91AA161CDC798700094C25 /* PrintObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintObject.m; sourceTree = "<group>"; };
 		0F9ADF4F1CE2CFF40052F3BC /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = ASIHTTPRequest/ASIAuthenticationDialog.h; sourceTree = SOURCE_ROOT; };
@@ -402,6 +405,7 @@
 				0F01D53E1CDC6C4B00DAC267 /* entity */,
 				0FB205E41CDC302E00B5E87E /* public */,
 				0F43B0FE1CF3E93700F3D9F0 /* storeboard */,
+				0F032D471CC9B12700D1920D /* Supporting Files */,
 				0F032D4A1CC9B12700D1920D /* AppDelegate.h */,
 				0F032D4B1CC9B12700D1920D /* AppDelegate.m */,
 				0FAF98A81CE410E8009BDBB5 /* LoginController.h */,
@@ -422,7 +426,6 @@
 				0FAF74AC1CEE9A9600432713 /* LightController.m */,
 				0FAF98BC1CE466B0009BDBB5 /* SmartHome.entitlements */,
 				0F032D591CC9B12700D1920D /* Assets.xcassets */,
-				0F032D471CC9B12700D1920D /* Supporting Files */,
 				0FC0FFD11CF539BC000F71D5 /* realScene.plist */,
 				0FC0FFD61CF553AD000F71D5 /* planeScene.plist */,
 				0FC0FFD81CF577C0000F71D5 /* RealScene.h */,
@@ -431,6 +434,8 @@
 				0FB42E1D1CF681A7007DE64F /* planeScene.m */,
 				0FC0FFDB1CF57E58000F71D5 /* TouchImage.h */,
 				0FC0FFDC1CF57E58000F71D5 /* TouchImage.m */,
+				0F4B497E1CFEB13500D93DD2 /* CurtainController.h */,
+				0F4B497F1CFEB13500D93DD2 /* CurtainController.m */,
 			);
 			path = SmartHome;
 			sourceTree = "<group>";
@@ -800,6 +805,7 @@
 				0FC0FFDA1CF577C0000F71D5 /* RealScene.m in Sources */,
 				0FAF74C41CEEA17C00432713 /* HRColorPickerView.m in Sources */,
 				0FCFB3981CF2947500B37DD3 /* EntranceGuard.m in Sources */,
+				0F4B49801CFEB13500D93DD2 /* CurtainController.m in Sources */,
 				0FCFB3921CF293D800B37DD3 /* Netv.m in Sources */,
 				0FAF8FFB1CE1D9BC000557BD /* UploadManager.m in Sources */,
 				0FAF8FF21CE18CE2000557BD /* IBeaconController.m in Sources */,

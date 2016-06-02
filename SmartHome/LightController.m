@@ -64,6 +64,7 @@
     [scene setReadonly:NO];
     NSMutableArray *array=[NSMutableArray arrayWithObject:device];
     [scene setDevices:array];
+    [[NSUserDefaults standardUserDefaults] setObject:scene forKey:@"sceneID"];
     [[SceneManager defaultManager] addScenen:scene withName:@"" withPic:@""];
 }
 

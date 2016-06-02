@@ -94,7 +94,7 @@
     sock.socket.userData = SocketOfflineByServer;
     [sock socketConnectHost];
 
-    NSString *cmd=@"hello firefly2";
+    NSString *cmd=@"hello firefly2\r\n\r";
     [sock.socket writeData:[PackManager fireflyProtocol:cmd] withTimeout:1 tag:1];
     [sock.socket readDataToData:[AsyncSocket CRLFData] withTimeout:1 tag:1];
 }
