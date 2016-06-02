@@ -7,9 +7,12 @@
 //
 
 #import "LightController.h"
+#import "DetailViewController.h"
 
-@interface LightController ()
 
+@interface LightController ()<UITableViewDelegate,UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic,assign) CGFloat brightValue;
 @end
 
 @implementation LightController
@@ -24,13 +27,13 @@
     
      [self.power addTarget:self action:@selector(save:)forControlEvents:UIControlEventValueChanged];
     
-     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeColor:)];
-    self.color.userInteractionEnabled=YES;
-    [self.color addGestureRecognizer:singleTap];
-    self.bright.value=0;
+    self.detailCell = [[[NSBundle mainBundle] loadNibNamed:@"DetailTableViewCell" owner:self options:nil] lastObject];
+    
     self.favorite.hidden=YES;
     self.remove.hidden=YES;
-
+    
+    self.cell = [[[NSBundle mainBundle] loadNibNamed:@"ColourTableViewCell" owner:self options:nil] lastObject];
+    
     if ([self.sceneid intValue]>0) {
         self.favorite.hidden=NO;
         self.remove.hidden=NO;
@@ -39,22 +42,28 @@
         for(id device in scene.devices)
         {
             if ([device isKindOfClass:[Light class]]) {
-                self.bright.value=((Light*)device).brightness/100.0;
-                self.power.on=((Light*)device).isPoweron;
-                self.color.backgroundColor=[UIColor colorWithRed:[[((Light*)device).color firstObject] intValue]/255.0 green:[[((Light*)device).color objectAtIndex:1] intValue]/255.0  blue:[[((Light*)device).color lastObject] intValue]/255.0  alpha:1];
+                self.detailCell.bright.value=((Light*)device).brightness/100.0;
+                self.detailCell.power.on=((Light*)device).isPoweron;
+                self.detailCell.backgroundColor=[UIColor colorWithRed:[[((Light*)device).color firstObject] intValue]/255.0 green:[[((Light*)device).color objectAtIndex:1] intValue]/255.0  blue:[[((Light*)device).color lastObject] intValue]/255.0  alpha:1];
             }
         }
     }
+    
+    
+    self.tableView.scrollEnabled = NO;
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
 }
 
 -(IBAction)save:(id)sender
 {
     Light *device=[[Light alloc] init];
     [device setDeviceID:1];
-    [device setIsPoweron:self.power.isOn];
-    NSArray *colors=[self changeUIColorToRGB:self.color.backgroundColor];
+    [device setIsPoweron: self.detailCell.power.isOn];
+    NSArray *colors=[self changeUIColorToRGB:self.cell.colourView.backgroundColor];
     [device setColor:colors];
-    [device setBrightness:self.bright.value*100];
+    [device setBrightness:self.detailCell.bright.value*100];
     
     Scene *scene=[[Scene alloc] init];
     [scene setSceneID:2];
@@ -72,10 +81,10 @@
 {
     Light *device=[[Light alloc] init];
     [device setDeviceID:1];
-    [device setIsPoweron:self.power.isOn];
-    NSArray *colors=[self changeUIColorToRGB:self.color.backgroundColor];
+    [device setIsPoweron: self.detailCell.power.isOn];
+    NSArray *colors=[self changeUIColorToRGB:self.cell.colourView.backgroundColor];
     [device setColor:colors];
-    [device setBrightness:self.bright.value*100];
+    [device setBrightness:self.detailCell.bright.value*100];
     Scene *scene=[[Scene alloc] init];
     [scene setSceneID:[self.sceneid intValue]];
     [scene setRoomID:4];
@@ -122,17 +131,78 @@
 
 -(IBAction)changeColor:(id)sender
 {
-    HRSampleColorPickerViewController *controller= [[HRSampleColorPickerViewController alloc] initWithColor:self.color.backgroundColor fullColor:NO];
+    HRSampleColorPickerViewController *controller= [[HRSampleColorPickerViewController alloc] initWithColor:self.cell.backgroundColor fullColor:NO];
     controller.delegate = self;
-    [self.navigationController pushViewController:controller
-                                         animated:YES];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)setSelectedColor:(UIColor *)color
 {
-    self.color.backgroundColor = color;
     [self save:nil];
+    self.cell.colourView.backgroundColor = color;
 }
+
+
+
+#pragma mark - UITableViewDelegate
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 3;
+}
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row == 0)
+    {
+        
+        self.detailCell.label.text = @"射灯";
+        self.detailCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return self.detailCell;
+    } else if(indexPath.row == 1)
+    {
+        self.cell.lable.text = @"自定义颜色";
+        
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeColor:)];
+        self.cell.colourView.userInteractionEnabled=YES;
+        [self.cell.colourView addGestureRecognizer:singleTap];
+        self.cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return self.cell;
+    }
+        
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
+        
+    }
+      cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+      UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 5, 100, 30)];
+      [cell.contentView addSubview:label];
+      label.text = @"详细信息";
+    
+      return cell;
+    
+}
+//设置cell行高
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.row == 2)
+    {
+        DetailViewController *detailVC = [[DetailViewController alloc]init];
+        [self.navigationController pushViewController:detailVC animated:YES];
+    }
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

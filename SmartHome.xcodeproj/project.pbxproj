@@ -96,6 +96,13 @@
 		0FCFB39B1CF2950D00B37DD3 /* BgMusic.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFB39A1CF2950D00B37DD3 /* BgMusic.m */; };
 		0FF410DA1CDAE67100C7F4A1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410D91CDAE67100C7F4A1 /* CoreLocation.framework */; };
 		0FF410DC1CDAF76300C7F4A1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410DB1CDAF76300C7F4A1 /* CoreBluetooth.framework */; };
+		F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB411D00029900AB04BE /* DetailViewController.m */; };
+		F6359AFB1CFFBC910035EB31 /* DetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6359AF91CFFBC910035EB31 /* DetailTableViewCell.m */; };
+		F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6359AFA1CFFBC910035EB31 /* DetailTableViewCell.xib */; };
+		F6359B001CFFC4DC0035EB31 /* ColourTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6359AFE1CFFC4DC0035EB31 /* ColourTableViewCell.m */; };
+		F6359B011CFFC4DC0035EB31 /* ColourTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6359AFF1CFFC4DC0035EB31 /* ColourTableViewCell.xib */; };
+		F66EB2D21CFEB9E300AC53CE /* Detail.m in Sources */ = {isa = PBXBuildFile; fileRef = F66EB2D11CFEB9E300AC53CE /* Detail.m */; };
+		F66EB2D51CFED0A900AC53CE /* DetailList.m in Sources */ = {isa = PBXBuildFile; fileRef = F66EB2D41CFED0A900AC53CE /* DetailList.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -290,6 +297,18 @@
 		0FCFB3A11CF2D39300B37DD3 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		0FF410D91CDAE67100C7F4A1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0FF410DB1CDAF76300C7F4A1 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		F60FDB401D00029900AB04BE /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		F60FDB411D00029900AB04BE /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		F6359AF81CFFBC910035EB31 /* DetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTableViewCell.h; sourceTree = "<group>"; };
+		F6359AF91CFFBC910035EB31 /* DetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewCell.m; sourceTree = "<group>"; };
+		F6359AFA1CFFBC910035EB31 /* DetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailTableViewCell.xib; sourceTree = "<group>"; };
+		F6359AFD1CFFC4DC0035EB31 /* ColourTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColourTableViewCell.h; sourceTree = "<group>"; };
+		F6359AFE1CFFC4DC0035EB31 /* ColourTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColourTableViewCell.m; sourceTree = "<group>"; };
+		F6359AFF1CFFC4DC0035EB31 /* ColourTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ColourTableViewCell.xib; sourceTree = "<group>"; };
+		F66EB2D01CFEB9E300AC53CE /* Detail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Detail.h; sourceTree = "<group>"; };
+		F66EB2D11CFEB9E300AC53CE /* Detail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Detail.m; sourceTree = "<group>"; };
+		F66EB2D31CFED0A900AC53CE /* DetailList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailList.h; sourceTree = "<group>"; };
+		F66EB2D41CFED0A900AC53CE /* DetailList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailList.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -356,6 +375,10 @@
 				0FCFB3971CF2947500B37DD3 /* EntranceGuard.m */,
 				0FCFB3991CF2950D00B37DD3 /* BgMusic.h */,
 				0FCFB39A1CF2950D00B37DD3 /* BgMusic.m */,
+				F66EB2D01CFEB9E300AC53CE /* Detail.h */,
+				F66EB2D11CFEB9E300AC53CE /* Detail.m */,
+				F66EB2D31CFED0A900AC53CE /* DetailList.h */,
+				F66EB2D41CFED0A900AC53CE /* DetailList.m */,
 			);
 			name = entity;
 			sourceTree = "<group>";
@@ -414,6 +437,12 @@
 				0FC7FDCA1CED9D5A00F91BDF /* DeviceList.m */,
 				0FAF74AB1CEE9A9600432713 /* LightController.h */,
 				0FAF74AC1CEE9A9600432713 /* LightController.m */,
+				F60FDB401D00029900AB04BE /* DetailViewController.h */,
+				F60FDB411D00029900AB04BE /* DetailViewController.m */,
+				F6359AF81CFFBC910035EB31 /* DetailTableViewCell.h */,
+				F6359AF91CFFBC910035EB31 /* DetailTableViewCell.m */,
+				F6359AFD1CFFC4DC0035EB31 /* ColourTableViewCell.h */,
+				F6359AFE1CFFC4DC0035EB31 /* ColourTableViewCell.m */,
 				0FAF98BC1CE466B0009BDBB5 /* SmartHome.entitlements */,
 				0F032D591CC9B12700D1920D /* Assets.xcassets */,
 				0FC0FFD11CF539BC000F71D5 /* realScene.plist */,
@@ -480,6 +509,8 @@
 		0F43B0FE1CF3E93700F3D9F0 /* storeboard */ = {
 			isa = PBXGroup;
 			children = (
+				F6359AFA1CFFBC910035EB31 /* DetailTableViewCell.xib */,
+				F6359AFF1CFFC4DC0035EB31 /* ColourTableViewCell.xib */,
 				0F032D561CC9B12700D1920D /* Main.storyboard */,
 				0F032D5B1CC9B12700D1920D /* LaunchScreen.storyboard */,
 			);
@@ -754,7 +785,9 @@
 				0F032D5D1CC9B12700D1920D /* LaunchScreen.storyboard in Resources */,
 				0F032D5A1CC9B12700D1920D /* Assets.xcassets in Resources */,
 				0F032D581CC9B12700D1920D /* Main.storyboard in Resources */,
+				F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */,
 				0FC0FFD21CF539BC000F71D5 /* realScene.plist in Resources */,
+				F6359B011CFFC4DC0035EB31 /* ColourTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -798,6 +831,7 @@
 				0F4B49801CFEB13500D93DD2 /* CurtainController.m in Sources */,
 				0FCFB3921CF293D800B37DD3 /* Netv.m in Sources */,
 				0FAF8FFB1CE1D9BC000557BD /* UploadManager.m in Sources */,
+				F6359B001CFFC4DC0035EB31 /* ColourTableViewCell.m in Sources */,
 				0FAF8FF21CE18CE2000557BD /* IBeaconController.m in Sources */,
 				0FAF74C61CEEA17C00432713 /* UIImage+CoreGraphics.m in Sources */,
 				0FAF98A71CE40F3C009BDBB5 /* QRToggleTorchButton.m in Sources */,
@@ -816,12 +850,16 @@
 				0FCFB3951CF2943100B37DD3 /* Camera.m in Sources */,
 				0FAF8FEF1CE18C41000557BD /* IBeacon.m in Sources */,
 				0FB93C5D1CE560FF00EF86E3 /* AsyncSocket.m in Sources */,
+				F66EB2D21CFEB9E300AC53CE /* Detail.m in Sources */,
 				0FB205E91CDC312A00B5E87E /* IOManager.m in Sources */,
 				0FC7FDCB1CED9D5A00F91BDF /* DeviceList.m in Sources */,
 				0FAF74C01CEEA17C00432713 /* HRBrightnessSlider.m in Sources */,
 				0F9ADF6B1CE2CFF40052F3BC /* ASIFormDataRequest.m in Sources */,
+				F66EB2D51CFED0A900AC53CE /* DetailList.m in Sources */,
 				0FB42E1E1CF681A7007DE64F /* planeScene.m in Sources */,
 				0FC0FFED1CF5A29C000F71D5 /* FMDatabaseQueue.m in Sources */,
+				F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */,
+				F6359AFB1CFFBC910035EB31 /* DetailTableViewCell.m in Sources */,
 				0F9ADF701CE2CFF40052F3BC /* Reachability.m in Sources */,
 				0F43B1061CF4078300F3D9F0 /* ISRDataHelper.m in Sources */,
 				0FAF98BB1CE4626E009BDBB5 /* GTMBase64.m in Sources */,
@@ -991,8 +1029,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SmartHome/SmartHome.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: shi zi (75UU58685N)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: shi zi (75UU58685N)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1011,8 +1049,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SmartHome/SmartHome.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: shi zi (75UU58685N)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: shi zi (75UU58685N)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
