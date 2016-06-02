@@ -11,12 +11,14 @@
 #import "public.h"
 #import "SceneManager.h"
 #import "Light.h"
-
+#import "ColourTableViewCell.h"
+#import "DetailTableViewCell.h"
 @interface LightController : UIViewController<HRColorPickerViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UISlider *bright;
 @property (strong, nonatomic) IBOutlet UISwitch *power;
-@property (strong, nonatomic) IBOutlet UIView *color;
+@property (strong, nonatomic) IBOutlet ColourTableViewCell *cell;
+@property (strong, nonatomic) IBOutlet DetailTableViewCell *detailCell;
 @property (strong, nonatomic) IBOutlet HRColorPickerView *colorPickerView;
 
 @property (nonatomic,weak) NSString *sceneid;
