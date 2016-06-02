@@ -7,6 +7,7 @@
 //
 
 #import "SceneManager.h"
+#import "RegexKitLite.h"
 
 @implementation SceneManager
 
@@ -75,33 +76,91 @@
     
 }
 
--(Scene *)readSceneByID:(int)sceneid
+- (Scene *)readSceneByID:(int)sceneid
 {
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, sceneid]];
     NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfFile:scenePath];
-    Scene *scene=[[Scene alloc] init];
-    scene.sceneID=sceneid;
-    scene.readonly=[dictionary objectForKey:@"readonly"];
-    scene.picID=[[dictionary objectForKey:@"picID"] intValue];
-    scene.roomID=[[dictionary objectForKey:@"roomID"] intValue];
-    scene.houseID=[[dictionary objectForKey:@"houseID"] intValue];
-    Light *device=[[Light alloc] init];
-    NSDictionary *dic=[[dictionary objectForKey:@"devices"] firstObject];
-    device.color=[dic objectForKey:@"color"];
-    device.brightness=[[dic objectForKey:@"brightness"] intValue];
-    device.isPoweron=[dic objectForKey:@"isPoweron"];
-    /*
-    device.HDMIID=[[dic objectForKey:@"HDMIID"] intValue];
-    device.channelID=[[dic objectForKey:@"channelID"] intValue];
-    device.delay=[[dic objectForKey:@"delay"] intValue];
-    device.deviceID=[[dic objectForKey:@"deviceID"] intValue];
-    device.temperature=[[dic objectForKey:@"temperature"] intValue];
-    device.timer=[[dic objectForKey:@"timer"] intValue];
-    device.volume=[[dic objectForKey:@"volume"] intValue];
-    */
-    NSArray *devices=[NSArray arrayWithObjects:device, nil];
-    scene.devices=devices;
-    return scene;
+    if (dictionary) {
+        Scene *scene=[[Scene alloc] init];
+        scene.sceneID=sceneid;
+        scene.readonly=[dictionary objectForKey:@"readonly"];
+        scene.picID=[[dictionary objectForKey:@"picID"] intValue];
+        scene.roomID=[[dictionary objectForKey:@"roomID"] intValue];
+        scene.houseID=[[dictionary objectForKey:@"houseID"] intValue];
+        
+        NSMutableArray *devices=[[NSMutableArray alloc] init];
+        for (NSDictionary *dic in [dictionary objectForKey:@"devices"]) {
+            if ([dic objectForKey:@"color"]) {
+                Light *device=[[Light alloc] init];
+                device.deviceID=[[dic objectForKey:@"deviceID"] intValue];
+                device.color=[dic objectForKey:@"color"];
+                device.brightness=[[dic objectForKey:@"brightness"] intValue];
+                device.isPoweron=[[dic objectForKey:@"isPoweron"] boolValue];
+                [devices addObject:device];
+            }
+            if ([dic objectForKey:@"openvalue"]) {
+                Curtain *device=[[Curtain alloc] init];
+                device.openvalue=[[dic objectForKey:@"openvalue"] intValue];
+                [devices addObject:device];
+            }
+            
+        }
+        scene.devices=devices;
+        return scene;
+    }
+    else{
+        return nil;
+    }
+}
+
+-(NSArray *)addDevice2Scene:(Scene *)scene withDeivce:(id)device id:(int)deviceID
+{
+    NSArray *array;
+    if ([self readSceneByID:scene.sceneID]) {
+        scene=[self readSceneByID:scene.sceneID];
+        array=scene.devices;
+        if (![array containsObject:device]) {
+            int i=[self inArray:[self allDeviceIDs:scene.sceneID] device:deviceID];
+            if (i>=0) {
+                NSMutableArray *arr=[array mutableCopy];
+                [arr replaceObjectAtIndex:i withObject:device];
+                array=arr;
+            }else{
+                array=[array arrayByAddingObject:device];
+            }
+            
+        }
+    }else{
+        array=[NSArray arrayWithObject:device];
+    }
+    return array;
+}
+
+-(NSArray*)allDeviceIDs:(int)sceneid
+{
+    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, sceneid]];
+    NSString *xml=[[NSString alloc] initWithContentsOfFile:scenePath encoding:NSUTF8StringEncoding error:nil];
+    if (xml) {
+        
+        NSString *regexString  = @"<key>deviceID</key>\\s*<integer>(\\d+)</integer>";
+        NSArray  *matchArray   = NULL;
+        matchArray = [xml componentsMatchedByRegex:regexString capture:1L];
+        NSLog(@"matchArray: %@", matchArray);
+        return matchArray;
+    }
+    return nil;
+}
+
+-(int)inArray:(NSArray *)array device:(int)deviceID
+{
+    int index=0;
+    for (NSString *ID in array) {
+        if ([ID intValue]==deviceID) {
+            return index;
+        }
+        index++;
+    }
+    return -1;
 }
 
 @end

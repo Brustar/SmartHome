@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SceneManager.h"
+#import "Curtain.h"
 
 @interface CurtainController : UIViewController
 
-@property (strong, nonatomic) IBOutlet UISlider *percent;
+@property (strong, nonatomic) IBOutlet UISlider *openvalue;
 
 @end

@@ -17,15 +17,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title=@"添加场景-灯";
+    self.title=@"场景-灯";
     
-    UISegmentedControl *button = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"save", nil]];
-    button.momentary = YES;
-    [button addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
+    self.bright.continuous = NO;
+    [self.bright addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
-    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithCustomView:button];
-    
-    self.navigationItem.rightBarButtonItem = menuButton;
+     [self.power addTarget:self action:@selector(save:)forControlEvents:UIControlEventValueChanged];
     
      UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeColor:)];
     self.color.userInteractionEnabled=YES;
@@ -33,18 +30,20 @@
     self.bright.value=0;
     self.favorite.hidden=YES;
     self.remove.hidden=YES;
-    
-    NSLog(@"接收到的值为: %d",  [self.sceneid intValue]);
+
     if ([self.sceneid intValue]>0) {
         self.favorite.hidden=NO;
         self.remove.hidden=NO;
-        button.hidden=NO;
         
         Scene *scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
-        Light *device=[scene.devices firstObject];
-        self.bright.value=device.brightness/100;
-        self.power.on=device.isPoweron;
-        self.color.backgroundColor=[UIColor colorWithRed:[[device.color firstObject] intValue]/255.0 green:[[device.color objectAtIndex:1] intValue]/255.0  blue:[[device.color lastObject] intValue]/255.0  alpha:1];
+        for(id device in scene.devices)
+        {
+            if ([device isKindOfClass:[Light class]]) {
+                self.bright.value=((Light*)device).brightness/100.0;
+                self.power.on=((Light*)device).isPoweron;
+                self.color.backgroundColor=[UIColor colorWithRed:[[((Light*)device).color firstObject] intValue]/255.0 green:[[((Light*)device).color objectAtIndex:1] intValue]/255.0  blue:[[((Light*)device).color lastObject] intValue]/255.0  alpha:1];
+            }
+        }
     }
 }
 
@@ -56,15 +55,16 @@
     NSArray *colors=[self changeUIColorToRGB:self.color.backgroundColor];
     [device setColor:colors];
     [device setBrightness:self.bright.value*100];
+    
     Scene *scene=[[Scene alloc] init];
     [scene setSceneID:2];
     [scene setRoomID:4];
     [scene setHouseID:3];
     [scene setPicID:66];
     [scene setReadonly:NO];
-    NSMutableArray *array=[NSMutableArray arrayWithObject:device];
-    [scene setDevices:array];
-    [[NSUserDefaults standardUserDefaults] setObject:scene forKey:@"sceneID"];
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device id:device.deviceID];
+    [scene setDevices:devices];
     [[SceneManager defaultManager] addScenen:scene withName:@"" withPic:@""];
 }
 
@@ -131,6 +131,7 @@
 - (void)setSelectedColor:(UIColor *)color
 {
     self.color.backgroundColor = color;
+    [self save:nil];
 }
 
 - (void)didReceiveMemoryWarning {

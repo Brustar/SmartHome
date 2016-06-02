@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "public.h"
 #import "Light.h"
+#import "Curtain.h"
 #import "FMDB.h"
 
 @interface SceneManager : NSObject
@@ -23,6 +24,8 @@
 
 - (void) favoriteScenen:(Scene *)newScene withName:(NSString *)name;
 
--(Scene *)readSceneByID:(int)sceneid;
+- (Scene *)readSceneByID:(int)sceneid;
+
+-(NSArray *)addDevice2Scene:(Scene *)scene withDeivce:(id)device id:(int)deviceID;
 
 @end
