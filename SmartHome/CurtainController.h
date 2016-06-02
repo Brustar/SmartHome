@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "SceneManager.h"
 #import "Curtain.h"
-
+#import "CurtainTableViewCell.h"
 @interface CurtainController : UIViewController
 
 @property (strong, nonatomic) IBOutlet UISlider *openvalue;
-
+@property (strong, nonatomic) IBOutlet CurtainTableViewCell *cell;
 @end
