@@ -451,10 +451,8 @@
 				F60FDB411D00029900AB04BE /* DetailViewController.m */,
 				F6359AF81CFFBC910035EB31 /* DetailTableViewCell.h */,
 				F6359AF91CFFBC910035EB31 /* DetailTableViewCell.m */,
-				F6359AFA1CFFBC910035EB31 /* DetailTableViewCell.xib */,
 				F6359AFD1CFFC4DC0035EB31 /* ColourTableViewCell.h */,
 				F6359AFE1CFFC4DC0035EB31 /* ColourTableViewCell.m */,
-				F6359AFF1CFFC4DC0035EB31 /* ColourTableViewCell.xib */,
 				0FAF98BC1CE466B0009BDBB5 /* SmartHome.entitlements */,
 				0F032D591CC9B12700D1920D /* Assets.xcassets */,
 				0FC0FFD11CF539BC000F71D5 /* realScene.plist */,
@@ -522,6 +520,8 @@
 			isa = PBXGroup;
 			children = (
 				0F032D561CC9B12700D1920D /* Main.storyboard */,
+				F6359AFA1CFFBC910035EB31 /* DetailTableViewCell.xib */,
+				F6359AFF1CFFC4DC0035EB31 /* ColourTableViewCell.xib */,
 				0F032D5B1CC9B12700D1920D /* LaunchScreen.storyboard */,
 			);
 			name = storeboard;
