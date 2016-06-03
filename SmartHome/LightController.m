@@ -29,14 +29,17 @@
     
     self.detailCell = [[[NSBundle mainBundle] loadNibNamed:@"DetailTableViewCell" owner:self options:nil] lastObject];
     
-    self.favorite.hidden=YES;
-    self.remove.hidden=YES;
+    UISegmentedControl *button = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"收藏", nil]];
+    button.momentary = YES;
+    [button addTarget:self action:@selector(favorite:) forControlEvents:UIControlEventValueChanged];
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    self.navigationItem.rightBarButtonItem = menuButton;
+    button.hidden=YES;
     
     self.cell = [[[NSBundle mainBundle] loadNibNamed:@"ColourTableViewCell" owner:self options:nil] lastObject];
     
     if ([self.sceneid intValue]>0) {
-        self.favorite.hidden=NO;
-        self.remove.hidden=NO;
+        button.hidden=NO;
         
         Scene *scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
         for(id device in scene.devices)
@@ -95,14 +98,6 @@
     NSMutableArray *array=[NSMutableArray arrayWithObject:device];
     [scene setDevices:array];
     [[SceneManager defaultManager] favoriteScenen:scene withName:@"睡觉模式"];
-}
-
--(IBAction)remove:(id)sender
-{
-    Scene *scene=[[Scene alloc] init];
-    [scene setSceneID:[self.sceneid intValue]];
-    [scene setReadonly:NO];
-    [[SceneManager defaultManager] delScenen:scene];
 }
 
 //将UIColor转换为RGB值

@@ -7,6 +7,8 @@
 //
 
 #import "DeviceList.h"
+#import "Scene.h"
+#import "SceneManager.h"
 
 @interface DeviceList ()
 
@@ -20,6 +22,22 @@
     self.devices=[NSArray arrayWithObjects:@"灯" ,@"电视" ,@"窗帘" ,@"DVD" ,@"摄像头" ,@"门禁" ,@"空调" ,@"机顶盒",@"收音机" ,nil];
     self.title=@"设备列表";
     self.tableView.rowHeight=44;
+    
+    if (self.sceneid>0) {
+        UISegmentedControl *button = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"删除", nil]];
+        button.momentary = YES;
+        [button addTarget:self action:@selector(remove:) forControlEvents:UIControlEventValueChanged];
+        UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+        self.navigationItem.rightBarButtonItem = menuButton;
+    }
+}
+
+-(IBAction)remove:(id)sender
+{
+    Scene *scene=[[Scene alloc] init];
+    [scene setSceneID:[self.sceneid intValue]];
+    [scene setReadonly:NO];
+    [[SceneManager defaultManager] delScenen:scene];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -21,9 +21,7 @@
     UISegmentedControl *button = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"new", nil]];
     button.momentary = YES;
     [button addTarget:self action:@selector(addScene:) forControlEvents:UIControlEventValueChanged];
-    
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithCustomView:button];
-    
     self.navigationItem.rightBarButtonItem = menuButton;
     
     UISegmentedControl *but = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"framework", nil]];

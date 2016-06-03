@@ -139,28 +139,6 @@
                                     <segment title="吊灯"/>
                                 </segments>
                             </segmentedControl>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wyv-iu-CzR">
-                                <rect key="frame" x="416" y="322" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="SLb-bK-HND"/>
-                                    <constraint firstAttribute="height" constant="30" id="gCB-sc-qXz"/>
-                                </constraints>
-                                <state key="normal" title="收藏"/>
-                                <connections>
-                                    <action selector="favorite:" destination="XoM-8d-Bbi" eventType="touchUpInside" id="JPb-Nd-ggL"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KB1-Lp-olY">
-                                <rect key="frame" x="469" y="322" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="GGf-YD-51W"/>
-                                    <constraint firstAttribute="height" constant="30" id="NzW-Vs-mao"/>
-                                </constraints>
-                                <state key="normal" title="删除"/>
-                                <connections>
-                                    <action selector="remove:" destination="XoM-8d-Bbi" eventType="touchUpInside" id="gtj-nW-nEG"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Kef-hB-18O">
                                 <rect key="frame" x="40" y="152" width="520" height="150"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -187,15 +165,9 @@
                             <constraint firstItem="bzi-0u-K76" firstAttribute="top" secondItem="IjH-wu-aJD" secondAttribute="bottom" constant="34" id="Ocn-nH-67c"/>
                             <constraint firstItem="Kef-hB-18O" firstAttribute="leading" secondItem="XaO-uy-F8E" secondAttribute="leading" constant="40" id="bcS-JN-bdw"/>
                             <constraint firstItem="Kef-hB-18O" firstAttribute="top" secondItem="bzi-0u-K76" secondAttribute="bottom" constant="26" id="ozs-yd-BSq"/>
-                            <constraint firstItem="Wyv-iu-CzR" firstAttribute="top" secondItem="Kef-hB-18O" secondAttribute="bottom" constant="20" id="pXx-FX-SG9"/>
-                            <constraint firstItem="KB1-Lp-olY" firstAttribute="leading" secondItem="Wyv-iu-CzR" secondAttribute="trailing" constant="23" id="ppH-tJ-tVu"/>
-                            <constraint firstAttribute="trailing" secondItem="KB1-Lp-olY" secondAttribute="trailing" constant="101" id="sD0-fd-2g3"/>
-                            <constraint firstItem="KB1-Lp-olY" firstAttribute="top" secondItem="Kef-hB-18O" secondAttribute="bottom" constant="20" id="z1L-v3-8Dg"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="favorite" destination="Wyv-iu-CzR" id="j7y-aF-GFH"/>
-                        <outlet property="remove" destination="KB1-Lp-olY" id="Kle-GX-n4x"/>
                         <outlet property="tableView" destination="Kef-hB-18O" id="TjF-Zk-8dM"/>
                     </connections>
                 </viewController>

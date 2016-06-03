@@ -24,6 +24,5 @@
 @property (nonatomic,weak) NSString *sceneid;
 
 @property (strong, nonatomic) IBOutlet UIButton *favorite;
-@property (strong, nonatomic) IBOutlet UIButton *remove;
 
 @end
