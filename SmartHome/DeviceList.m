@@ -96,14 +96,14 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+        id theSegue = segue.destinationViewController;
+        [theSegue setValue:self.sceneid forKey:@"sceneid"];
+
 }
-*/
 
 @end

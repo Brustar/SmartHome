@@ -12,4 +12,6 @@
 
 @property (strong, nonatomic) NSArray *devices;
 
+@property (nonatomic,weak) NSString *sceneid;
+
 @end

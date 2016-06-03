@@ -462,7 +462,6 @@
 				0F4B497F1CFEB13500D93DD2 /* CurtainController.m */,
 				F60FDB431D003FD500AB04BE /* CurtainTableViewCell.h */,
 				F60FDB441D003FD500AB04BE /* CurtainTableViewCell.m */,
-				F60FDB451D003FD500AB04BE /* CurtainTableViewCell.xib */,
 			);
 			path = SmartHome;
 			sourceTree = "<group>";
@@ -519,6 +518,7 @@
 			children = (
 				0F032D561CC9B12700D1920D /* Main.storyboard */,
 				F6359AFA1CFFBC910035EB31 /* DetailTableViewCell.xib */,
+				F60FDB451D003FD500AB04BE /* CurtainTableViewCell.xib */,
 				F6359AFF1CFFC4DC0035EB31 /* ColourTableViewCell.xib */,
 				0F032D5B1CC9B12700D1920D /* LaunchScreen.storyboard */,
 			);
