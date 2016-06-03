@@ -100,6 +100,7 @@
             }
             if ([dic objectForKey:@"openvalue"]) {
                 Curtain *device=[[Curtain alloc] init];
+                device.deviceID=[[dic objectForKey:@"deviceID"] intValue];
                 device.openvalue=[[dic objectForKey:@"openvalue"] intValue];
                 [devices addObject:device];
             }

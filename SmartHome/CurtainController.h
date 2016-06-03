@@ -12,6 +12,6 @@
 #import "CurtainTableViewCell.h"
 @interface CurtainController : UIViewController
 
-@property (strong, nonatomic) IBOutlet UISlider *openvalue;
 @property (strong, nonatomic) IBOutlet CurtainTableViewCell *cell;
+@property (nonatomic,weak) NSString *sceneid;
 @end

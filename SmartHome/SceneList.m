@@ -66,12 +66,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:@"editScene" sender:self];
+    [self performSegueWithIdentifier:@"newScene" sender:self];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if([segue.identifier isEqualToString:@"editScene"])
+    if([segue.identifier isEqualToString:@"newScene"])
     {
         id theSegue = segue.destinationViewController;
         [theSegue setValue:@"2" forKey:@"sceneid"];

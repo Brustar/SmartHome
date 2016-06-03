@@ -28,6 +28,17 @@
     self.cell.slider.continuous = NO;
     [self.cell.slider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
+    if ([self.sceneid intValue]>0) {
+        
+        Scene *scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+        for(int i=0;i<[scene.devices count];i++)
+        {
+            if ([[scene.devices objectAtIndex:i] isKindOfClass:[Curtain class]]) {
+                self.cell.slider.value=((Curtain*)[scene.devices objectAtIndex:i]).openvalue/100.0;
+            }
+        }
+    }
+    
 }
 
 -(IBAction)save:(id)sender
