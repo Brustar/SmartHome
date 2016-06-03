@@ -24,7 +24,7 @@
     }
     NSMutableArray *array = [NSMutableArray array];
    
-    FMResultSet *resultSet = [db executeQuery:@"selected * from Devices"];
+    FMResultSet *resultSet = [db executeQuery:@"select * from Devices"];
     while ([resultSet next])
     {
         Detail *detail = [Detail new];

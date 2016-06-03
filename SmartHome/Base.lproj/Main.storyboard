@@ -139,6 +139,9 @@
                                     <segment title="射灯"/>
                                     <segment title="吊灯"/>
                                 </segments>
+                                <connections>
+                                    <action selector="selectTypeOfLight:" destination="XoM-8d-Bbi" eventType="valueChanged" id="ksH-Kb-vIV"/>
+                                </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wyv-iu-CzR">
                                 <rect key="frame" x="416" y="322" width="30" height="30"/>
@@ -197,6 +200,7 @@
                     <connections>
                         <outlet property="favorite" destination="Wyv-iu-CzR" id="j7y-aF-GFH"/>
                         <outlet property="remove" destination="KB1-Lp-olY" id="Kle-GX-n4x"/>
+                        <outlet property="segmentLight" destination="bzi-0u-K76" id="bVX-JE-y5V"/>
                         <outlet property="tableView" destination="Kef-hB-18O" id="TjF-Zk-8dM"/>
                     </connections>
                 </viewController>

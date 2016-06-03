@@ -86,6 +86,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(indexPath.row == 1)
     {
         DetailViewController *detailVC = [[DetailViewController alloc]init];

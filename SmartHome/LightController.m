@@ -13,6 +13,10 @@
 @interface LightController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,assign) CGFloat brightValue;
+
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentLight;
+- (IBAction)selectTypeOfLight:(UISegmentedControl *)sender;
+
 @end
 
 @implementation LightController
@@ -196,6 +200,8 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(indexPath.row == 2)
     {
         DetailViewController *detailVC = [[DetailViewController alloc]init];
@@ -203,21 +209,19 @@
     }
 }
 
+- (IBAction)selectTypeOfLight:(UISegmentedControl *)sender {
+    
+    if(0 == sender.selectedSegmentIndex)
+    {
+        self.detailCell.label.text = @"射灯";
+    }else {
+        self.detailCell.label.text = @"吊灯";
+    }
+}
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end

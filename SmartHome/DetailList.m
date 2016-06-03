@@ -29,7 +29,9 @@
     {
         [array addObject:[resultSet stringForColumn:@"NAME"]];
         [array addObject:[resultSet stringForColumn:@"sn"]];
-        NSDate *dateBirth = [resultSet dateForColumn:@"purchase"];
+        NSDate *dateBirth = [resultSet dateForColumn:@"birth"];
+        
+        NSLog(@"\n\n\n\n %@\n\n\n",[resultSet dateForColumn:@"birth"]);
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc]init];
         [dateFormat setDateFormat:@"yyyy.MM.dd"];
         NSString *birth = [dateFormat stringFromDate:dateBirth];

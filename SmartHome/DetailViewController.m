@@ -26,6 +26,12 @@
     return _detailArray;
     
 }
+-(void)setLightID:(NSInteger)lightID
+{
+    _lightID = lightID;
+    self.detailArray = [DetailList getDetailListWithID:lightID];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self detailArray];
@@ -36,8 +42,6 @@
     
     self.tableView.backgroundColor = [UIColor colorWithRed:170/255.0 green:170/255.0 blue:170/255.0 alpha:1];
     self.tableView.tableFooterView = [UIView new];
-    self.tableView.scrollEnabled = NO;
-    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
