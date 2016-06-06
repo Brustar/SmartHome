@@ -21,7 +21,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title=@"场景-灯";
     
     self.bright.continuous = NO;
     [self.bright addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];

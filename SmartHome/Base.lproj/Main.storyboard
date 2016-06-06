@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--场景列表-->
         <scene sceneID="uuJ-g8-6hy">
             <objects>
                 <tableViewController id="c0j-K3-msG" customClass="SceneList" sceneMemberID="viewController">
@@ -28,7 +28,7 @@
                             <outlet property="delegate" destination="c0j-K3-msG" id="ZRG-bd-eX9"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="I4n-Ma-U9M">
+                    <navigationItem key="navigationItem" title="场景列表" id="I4n-Ma-U9M">
                         <barButtonItem key="leftBarButtonItem" title="framework" id="Czl-gj-TdL">
                             <connections>
                                 <action selector="framework:" destination="c0j-K3-msG" id="i5E-Km-d77"/>
@@ -96,7 +96,7 @@
             </objects>
             <point key="canvasLocation" x="2408" y="-1830"/>
         </scene>
-        <!--Title-->
+        <!--设备列表-->
         <scene sceneID="lON-ch-XiU">
             <objects>
                 <tableViewController id="e4k-qP-WhS" customClass="DeviceList" sceneMemberID="viewController">
@@ -119,7 +119,7 @@
                             <outlet property="delegate" destination="e4k-qP-WhS" id="WXM-tY-ysQ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Title" id="R8Z-Hy-Ilq">
+                    <navigationItem key="navigationItem" title="设备列表" id="R8Z-Hy-Ilq">
                         <barButtonItem key="rightBarButtonItem" enabled="NO" title="删除" id="M1z-6a-s8y">
                             <connections>
                                 <action selector="remove:" destination="e4k-qP-WhS" id="rLt-9N-wX3"/>
@@ -136,7 +136,7 @@
             </objects>
             <point key="canvasLocation" x="2413" y="-1165"/>
         </scene>
-        <!--Title-->
+        <!--场景-灯-->
         <scene sceneID="de5-5P-663">
             <objects>
                 <viewController id="XoM-8d-Bbi" customClass="LightController" sceneMemberID="viewController">
@@ -186,7 +186,7 @@
                             <constraint firstItem="Kef-hB-18O" firstAttribute="top" secondItem="bzi-0u-K76" secondAttribute="bottom" constant="26" id="ozs-yd-BSq"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="CoB-eY-kkG">
+                    <navigationItem key="navigationItem" title="场景-灯" id="CoB-eY-kkG">
                         <barButtonItem key="rightBarButtonItem" enabled="NO" title="收藏" id="xD2-JX-03I">
                             <connections>
                                 <action selector="favorite:" destination="XoM-8d-Bbi" id="HwK-AI-MQf"/>

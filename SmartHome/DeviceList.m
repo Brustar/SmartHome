@@ -21,7 +21,7 @@
 {
     
     self.devices=[NSArray arrayWithObjects:@"灯" ,@"电视" ,@"窗帘" ,@"DVD" ,@"摄像头" ,@"门禁" ,@"空调" ,@"机顶盒",@"收音机" ,nil];
-    self.title=@"设备列表";
+    
     self.tableView.rowHeight=44;
     
     if (self.sceneid>0) {
