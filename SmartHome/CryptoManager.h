@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonCryptor.h>
-#import "GTMBase64.h"
+#import "MF_Base64Additions.h"
 
 @interface CryptoManager : NSObject
 

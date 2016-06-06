@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "public.h"
 #import "Light.h"
-#import "ASIHTTPRequest.h"
 #import "AsyncUdpSocket.h"
 
 @interface IBeaconController : UIViewController

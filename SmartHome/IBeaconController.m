@@ -8,7 +8,6 @@
 
 #import "IBeaconController.h"
 #import "SocketManager.h"
-#import "ASIFormDataRequest.h"
 #import "PackManager.h"
 
 @implementation IBeaconController
@@ -47,37 +46,13 @@
     NSString *path=[cachepath stringByAppendingPathComponent:@"0b7b02087bf40ad1f0dd605a572c11dfa9ecce4a.jpg"];
     
     NSURL *url = [NSURL URLWithString:@"http://localhost:3000/upload"];
-    ASIFormDataRequest *requestForm = [[ASIFormDataRequest alloc] initWithURL:url];
-    
-    [requestForm setFile:path forKey:@"upload"];
-    
-    [requestForm startSynchronous];
-    __block ASIHTTPRequest *req=requestForm;
-    [requestForm setCompletionBlock :^{
-        
-        NSLog(@"upload success");
-    }];
-    [requestForm setFailedBlock :^{
-        NSError *error = [req error];
-        NSLog ( @"error:%@" ,[error userInfo ]);
-    }];
+
 }
 
 - (IBAction)http:(id)sender
 {
     NSURL *url = [NSURL URLWithString:@"http://localhost:3000/json"];
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    __block ASIHTTPRequest *req=request;
-    [request startAsynchronous];
-    [request setCompletionBlock :^{
-        NSDictionary *weatherDic = [NSJSONSerialization JSONObjectWithData:[req responseData] options:NSJSONReadingMutableLeaves error:nil];
-        NSDictionary *weatherInfo = weatherDic[@"abc"];
-        NSLog(@"weatherInfo字典里面的内容为--》%@,%@",weatherInfo, weatherDic );
-    }];
-    [request setFailedBlock :^{
-        NSError *error = [req error];
-        NSLog ( @"error:%@" ,[error userInfo ]);
-    }];
+    
 }
 
 -(IBAction)tcp:(id)sender

@@ -42,7 +42,7 @@
     if (cryptStatus == kCCSuccess) {
         NSData *data = [NSData dataWithBytes:buffer length:(NSUInteger)numBytesEncrypted];
         
-        ciphertext = [[NSString alloc] initWithData:[GTMBase64 encodeData:data] encoding:NSUTF8StringEncoding];
+        ciphertext = [MF_Base64Codec base64StringFromData:data];//[[NSString alloc] initWithData:[GTMBase64 encodeData:data] encoding:NSUTF8StringEncoding];
     }
     return ciphertext;
 }
@@ -50,7 +50,7 @@
 //解密
 - (NSString *) decryptDES:(NSString*)cipherText key:(NSString*)key
 {
-    NSData* cipherData = [GTMBase64 decodeString:cipherText];
+    NSData* cipherData = [MF_Base64Codec dataFromBase64String:cipherText];//[GTMBase64 decodeString:cipherText];
     unsigned char buffer[1024];
     memset(buffer, 0, sizeof(char));
     size_t numBytesDecrypted = 0;
