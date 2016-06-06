@@ -28,7 +28,18 @@
                             <outlet property="delegate" destination="c0j-K3-msG" id="ZRG-bd-eX9"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="I4n-Ma-U9M"/>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="I4n-Ma-U9M">
+                        <barButtonItem key="leftBarButtonItem" title="framework" id="Czl-gj-TdL">
+                            <connections>
+                                <action selector="framework:" destination="c0j-K3-msG" id="i5E-Km-d77"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="HzN-zF-VPp">
+                            <connections>
+                                <action selector="addScene:" destination="c0j-K3-msG" id="LPK-Yu-rPH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="e4k-qP-WhS" kind="show" identifier="newScene" id="LGa-bm-HeP"/>
                         <segue destination="mdZ-A8-8hK" kind="show" identifier="framework" id="UhH-Zj-Z9R"/>
@@ -85,7 +96,7 @@
             </objects>
             <point key="canvasLocation" x="2408" y="-1830"/>
         </scene>
-        <!--Device List-->
+        <!--Title-->
         <scene sceneID="lON-ch-XiU">
             <objects>
                 <tableViewController id="e4k-qP-WhS" customClass="DeviceList" sceneMemberID="viewController">
@@ -108,7 +119,15 @@
                             <outlet property="delegate" destination="e4k-qP-WhS" id="WXM-tY-ysQ"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Title" id="R8Z-Hy-Ilq">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="删除" id="M1z-6a-s8y">
+                            <connections>
+                                <action selector="remove:" destination="e4k-qP-WhS" id="rLt-9N-wX3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="delbutt" destination="M1z-6a-s8y" id="MeQ-fl-A8I"/>
                         <segue destination="XoM-8d-Bbi" kind="show" identifier="Lighter" id="Ljm-Ca-u9B"/>
                         <segue destination="zTh-tS-8xs" kind="show" identifier="Curtain" id="XfJ-Rv-8cE"/>
                     </connections>
@@ -117,7 +136,7 @@
             </objects>
             <point key="canvasLocation" x="2413" y="-1165"/>
         </scene>
-        <!--Light Controller-->
+        <!--Title-->
         <scene sceneID="de5-5P-663">
             <objects>
                 <viewController id="XoM-8d-Bbi" customClass="LightController" sceneMemberID="viewController">
@@ -167,7 +186,15 @@
                             <constraint firstItem="Kef-hB-18O" firstAttribute="top" secondItem="bzi-0u-K76" secondAttribute="bottom" constant="26" id="ozs-yd-BSq"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="CoB-eY-kkG">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="收藏" id="xD2-JX-03I">
+                            <connections>
+                                <action selector="favorite:" destination="XoM-8d-Bbi" id="HwK-AI-MQf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="favButt" destination="xD2-JX-03I" id="UHS-Tt-inE"/>
                         <outlet property="tableView" destination="Kef-hB-18O" id="TjF-Zk-8dM"/>
                     </connections>
                 </viewController>

@@ -11,6 +11,7 @@
 #import "SceneManager.h"
 
 @interface DeviceList ()
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *delbutt;
 
 @end
 
@@ -24,11 +25,7 @@
     self.tableView.rowHeight=44;
     
     if (self.sceneid>0) {
-        UISegmentedControl *button = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"删除", nil]];
-        button.momentary = YES;
-        [button addTarget:self action:@selector(remove:) forControlEvents:UIControlEventValueChanged];
-        UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithCustomView:button];
-        self.navigationItem.rightBarButtonItem = menuButton;
+        _delbutt.enabled=YES;
     }
 }
 

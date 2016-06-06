@@ -11,6 +11,7 @@
 
 
 @interface LightController ()<UITableViewDelegate,UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *favButt;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,assign) CGFloat brightValue;
 @end
@@ -29,17 +30,10 @@
     
     self.detailCell = [[[NSBundle mainBundle] loadNibNamed:@"DetailTableViewCell" owner:self options:nil] lastObject];
     
-    UISegmentedControl *button = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"收藏", nil]];
-    button.momentary = YES;
-    [button addTarget:self action:@selector(favorite:) forControlEvents:UIControlEventValueChanged];
-    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithCustomView:button];
-    self.navigationItem.rightBarButtonItem = menuButton;
-    button.hidden=YES;
-    
     self.cell = [[[NSBundle mainBundle] loadNibNamed:@"ColourTableViewCell" owner:self options:nil] lastObject];
     
     if ([self.sceneid intValue]>0) {
-        button.hidden=NO;
+        _favButt.enabled=YES;
         
         Scene *scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
         for(id device in scene.devices)
