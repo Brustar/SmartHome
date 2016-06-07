@@ -79,7 +79,26 @@
     NSString *cachepath=[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject];
     NSString *path=[cachepath stringByAppendingPathComponent:@"0b7b02087bf40ad1f0dd605a572c11dfa9ecce4a.jpg"];
     
-    NSURL *url = [NSURL URLWithString:@"http://localhost:3000/upload"];
+    NSString *URL = @"http://localhost:3000/upload";
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    // 实际上就是AFN没有对响应数据做任何处理的情况
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    // formData是遵守了AFMultipartFormData的对象
+    [manager POST:URL parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
+        // 将本地的文件上传至服务器
+        //NSURL *fileURL = [NSURL URLWithString:path];
+        NSData *fileData = [NSData dataWithContentsOfFile:path];
+        [formData appendPartWithFileData:fileData name:@"upload" fileName:@"a.jpg" mimeType:@"multipart/form-data"];
+        //[formData appendPartWithFileURL:fileURL name:@"upload" error:NULL];
+    } progress:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSLog(@"完成 %@", result);
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        NSLog(@"错误 %@", error.localizedDescription);
+    }];
 
 }
 
