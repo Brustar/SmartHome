@@ -44,7 +44,6 @@
 		0FAF8FEF1CE18C41000557BD /* IBeacon.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF8FEE1CE18C41000557BD /* IBeacon.m */; };
 		0FAF8FF21CE18CE2000557BD /* IBeaconController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF8FF11CE18CE2000557BD /* IBeaconController.m */; };
 		0FAF8FF51CE1B514000557BD /* VolumeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF8FF41CE1B514000557BD /* VolumeManager.m */; };
-		0FAF8FF81CE1C759000557BD /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF8FF71CE1C759000557BD /* DownloadManager.m */; };
 		0FAF8FFB1CE1D9BC000557BD /* UploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF8FFA1CE1D9BC000557BD /* UploadManager.m */; };
 		0FAF98A31CE40F3C009BDBB5 /* QRCameraSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF98991CE40F3C009BDBB5 /* QRCameraSwitchButton.m */; };
 		0FAF98A41CE40F3C009BDBB5 /* QRCodeReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF989B1CE40F3C009BDBB5 /* QRCodeReader.m */; };
@@ -174,8 +173,6 @@
 		0FAF8FF11CE18CE2000557BD /* IBeaconController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBeaconController.m; sourceTree = "<group>"; };
 		0FAF8FF31CE1B514000557BD /* VolumeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeManager.h; sourceTree = "<group>"; };
 		0FAF8FF41CE1B514000557BD /* VolumeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VolumeManager.m; sourceTree = "<group>"; };
-		0FAF8FF61CE1C759000557BD /* DownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadManager.h; sourceTree = "<group>"; };
-		0FAF8FF71CE1C759000557BD /* DownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadManager.m; sourceTree = "<group>"; };
 		0FAF8FF91CE1D9BC000557BD /* UploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadManager.h; sourceTree = "<group>"; };
 		0FAF8FFA1CE1D9BC000557BD /* UploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadManager.m; sourceTree = "<group>"; };
 		0FAF98981CE40F3C009BDBB5 /* QRCameraSwitchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QRCameraSwitchButton.h; path = QRCodeReader/QRCameraSwitchButton.h; sourceTree = SOURCE_ROOT; };
@@ -526,8 +523,6 @@
 				0FCF43301CE09039009BFDD9 /* IbeaconManager.m */,
 				0FAF8FF31CE1B514000557BD /* VolumeManager.h */,
 				0FAF8FF41CE1B514000557BD /* VolumeManager.m */,
-				0FAF8FF61CE1C759000557BD /* DownloadManager.h */,
-				0FAF8FF71CE1C759000557BD /* DownloadManager.m */,
 				0FAF8FF91CE1D9BC000557BD /* UploadManager.h */,
 				0FAF8FFA1CE1D9BC000557BD /* UploadManager.m */,
 				0FAF98B41CE45EC9009BDBB5 /* CryptoManager.h */,
@@ -812,7 +807,6 @@
 				0FAF98A51CE40F3C009BDBB5 /* QRCodeReaderView.m in Sources */,
 				0FAF74AD1CEE9A9600432713 /* LightController.m in Sources */,
 				0F032D491CC9B12700D1920D /* main.m in Sources */,
-				0FAF8FF81CE1C759000557BD /* DownloadManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

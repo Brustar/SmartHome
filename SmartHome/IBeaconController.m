@@ -31,14 +31,47 @@
     [[AudioManager defaultManager] addSongsToMusicPlayer];
 }
 
+-(NSURLSessionDownloadTask *)task{
+    
+    if (!_task) {
+        
+        AFHTTPSessionManager *session=[AFHTTPSessionManager manager];
+        
+        NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://120.25.226.186:32812/resources/videos/minion_01.mp4"]];
+        
+        _task=[session downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+            
+            //下载进度
+            NSLog(@"%@",downloadProgress);
+            
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                
+                //self.pro.progress=downloadProgress.fractionCompleted;
+                
+            }];
+            
+        } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+            
+            //下载到哪个文件夹
+            NSString *cachePath=NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
+            
+            NSString *fileName=[cachePath stringByAppendingPathComponent:response.suggestedFilename];
+            
+            return [NSURL fileURLWithPath:fileName];
+            
+        } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+            
+            //下载完成了
+            NSLog(@"下载完成了 %@",filePath);
+        }];
+    }
+    
+    return _task;
+}
+
 - (IBAction)download:(id)sender
 {
-    DownloadManager *down=[DownloadManager defaultManager];
-    NSURL *url=[NSURL URLWithString:@"http://imgsrc.baidu.com/baike/pic/item/0b7b02087bf40ad1f0dd605a572c11dfa9ecce4a.jpg"];
-    [down download:url completion:^(){
-        //[IOManager writeImage:@"a.jpg" image:image];
-        NSLog(@"load.");
-    }];
+    [self.task resume]; 
 }
 
 -(IBAction)upload:(id)sender

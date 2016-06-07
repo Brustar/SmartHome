@@ -18,4 +18,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *myLabel;
 @property (strong, nonatomic) IBOutlet UILabel *volumeLabel;
 
+@property(nonatomic,strong) NSURLSessionDownloadTask *task;
+
 @end

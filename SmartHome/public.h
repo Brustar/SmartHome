@@ -9,7 +9,6 @@
 #import "AudioManager.h"
 #import "IbeaconManager.h"
 #import "VolumeManager.h"
-#import "DownloadManager.h"
 #import "Scene.h"
 
 #ifndef public_h
