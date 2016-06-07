@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AFNetworking.h>
 #import "public.h"
 #import "Light.h"
 #import "AsyncUdpSocket.h"

@@ -8,10 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSString (MyExtensions)
-- (NSString *) md5;
-@end
-
 @interface DownloadManager : NSObject
 
 + (id)defaultManager;

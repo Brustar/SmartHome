@@ -9,6 +9,7 @@
 #import "IBeaconController.h"
 #import "SocketManager.h"
 #import "PackManager.h"
+#import "CryptoManager.h"
 
 @implementation IBeaconController
 
@@ -49,10 +50,28 @@
 
 }
 
+- (IBAction)Des:(id)sender {
+    NSString *str=@"hello";
+    NSLog(@"abc:%@",[str encryptDESWithkey:@"123"]);
+    
+    NSString *tar=@"1dWH2gyT/kc=";
+    NSLog(@"dec:%@",[tar decryptDESBykey:@"123"]);
+    
+    //NSLog(@"md5:%@",[str md5]);
+}
+
 - (IBAction)http:(id)sender
 {
-    NSURL *url = [NSURL URLWithString:@"http://localhost:3000/json"];
-    
+    NSString *url = @"http://localhost:3000/json";
+    // GET
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    // 将数据作为参数传入
+    //NSDictionary *dict = @{@"username":@"12",@"pwd":@"13"};
+    [mgr GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSLog(@"success:%@",responseObject);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"failure:%@",error);
+    }];
 }
 
 -(IBAction)tcp:(id)sender
