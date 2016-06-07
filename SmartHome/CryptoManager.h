@@ -18,7 +18,5 @@
 - (NSString *) encryptDESWithkey:(NSString *)key;
 //解密
 - (NSString *) decryptDESBykey:(NSString*)key;
-//普通字符串转换为十六进制的。
-- (NSString *)hexStringFromString;
 
 @end
