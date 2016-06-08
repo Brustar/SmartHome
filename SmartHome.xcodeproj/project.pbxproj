@@ -30,6 +30,8 @@
 		0FA0FD661D057C430041CE96 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA0FD651D057C430041CE96 /* AddressBook.framework */; };
 		0FA658F81CD98EF5005AC4B4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA658F21CD98D79005AC4B4 /* AudioToolbox.framework */; };
 		0FA658FC1CD9DB3F005AC4B4 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA658FB1CD9DB3F005AC4B4 /* MediaPlayer.framework */; };
+		0FABF91C1D06AA35000892D8 /* TVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FABF91B1D06AA35000892D8 /* TVController.m */; };
+		0FABF91F1D06AA4E000892D8 /* DVDController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FABF91E1D06AA4E000892D8 /* DVDController.m */; };
 		0FADA44A1CEBF8AE00777901 /* SceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FADA4491CEBF8AE00777901 /* SceneManager.m */; };
 		0FAF74AD1CEE9A9600432713 /* LightController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF74AC1CEE9A9600432713 /* LightController.m */; };
 		0FAF74BF1CEEA17C00432713 /* HRBrightnessCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF74B01CEEA17C00432713 /* HRBrightnessCursor.m */; };
@@ -145,6 +147,10 @@
 		0FA0FD651D057C430041CE96 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		0FA658F21CD98D79005AC4B4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		0FA658FB1CD9DB3F005AC4B4 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		0FABF91A1D06AA35000892D8 /* TVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVController.h; sourceTree = "<group>"; };
+		0FABF91B1D06AA35000892D8 /* TVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVController.m; sourceTree = "<group>"; };
+		0FABF91D1D06AA4E000892D8 /* DVDController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVDController.h; sourceTree = "<group>"; };
+		0FABF91E1D06AA4E000892D8 /* DVDController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVDController.m; sourceTree = "<group>"; };
 		0FADA4481CEBF8AE00777901 /* SceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneManager.h; sourceTree = "<group>"; };
 		0FADA4491CEBF8AE00777901 /* SceneManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneManager.m; sourceTree = "<group>"; };
 		0FAF74AB1CEE9A9600432713 /* LightController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightController.h; sourceTree = "<group>"; };
@@ -403,6 +409,10 @@
 				0F4B497F1CFEB13500D93DD2 /* CurtainController.m */,
 				F60FDB431D003FD500AB04BE /* CurtainTableViewCell.h */,
 				F60FDB441D003FD500AB04BE /* CurtainTableViewCell.m */,
+				0FABF91A1D06AA35000892D8 /* TVController.h */,
+				0FABF91B1D06AA35000892D8 /* TVController.m */,
+				0FABF91D1D06AA4E000892D8 /* DVDController.h */,
+				0FABF91E1D06AA4E000892D8 /* DVDController.m */,
 			);
 			path = SmartHome;
 			sourceTree = "<group>";
@@ -757,6 +767,7 @@
 				0FAF74C51CEEA17C00432713 /* HRHSVColorUtil.m in Sources */,
 				0FAF98A41CE40F3C009BDBB5 /* QRCodeReader.m in Sources */,
 				F60FDB461D003FD500AB04BE /* CurtainTableViewCell.m in Sources */,
+				0FABF91F1D06AA4E000892D8 /* DVDController.m in Sources */,
 				0F43B1031CF4055300F3D9F0 /* IATConfig.m in Sources */,
 				0F25178A1CFD8C6500491A6C /* PackManager.m in Sources */,
 				0FAF74C11CEEA17C00432713 /* HRColorCursor.m in Sources */,
@@ -777,6 +788,7 @@
 				0FAF8FF51CE1B514000557BD /* VolumeManager.m in Sources */,
 				0F032D4C1CC9B12700D1920D /* AppDelegate.m in Sources */,
 				0FB205ED1CDC3D3700B5E87E /* AudioManager.m in Sources */,
+				0FABF91C1D06AA35000892D8 /* TVController.m in Sources */,
 				0FAF74C31CEEA17C00432713 /* HRColorMapView.m in Sources */,
 				0FADA44A1CEBF8AE00777901 /* SceneManager.m in Sources */,
 				0F01D5441CDC6CA600DAC267 /* Scene.m in Sources */,

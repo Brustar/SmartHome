@@ -60,8 +60,6 @@
             return [NSURL fileURLWithPath:fileName];
             
         } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
-            
-            //下载完成了
             NSLog(@"下载完成了 %@",filePath);
         }];
     }
