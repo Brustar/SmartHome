@@ -17,15 +17,15 @@
 
 @implementation DetailViewController
 
--(NSArray *)detailArray
-{
-    if(!_detailArray)
-    {
-        _detailArray = [DetailList getDetailListWithID:2];
-    }
-    return _detailArray;
-    
-}
+//-(NSArray *)detailArray
+//{
+//    if(!_detailArray)
+//    {
+//        _detailArray = [DetailList getDetailListWithID:2];
+//    }
+//    return _detailArray;
+//    
+//}
 -(void)setDeviceID:(NSInteger)deviceID
 {
     _deviceID = deviceID;

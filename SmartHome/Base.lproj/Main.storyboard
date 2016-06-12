@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CGT-uk-3fD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CGT-uk-3fD">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -36,7 +36,7 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="McD-CR-zMJ" id="zIE-Ca-Xkn">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -80,14 +80,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3oz-0f-vMP">
-                                <rect key="frame" x="260" y="98" width="81" height="29"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="81" id="rHv-N5-O4F"/>
-                                </constraints>
+                                <rect key="frame" x="220" y="98" width="161" height="29"/>
                                 <segments>
                                     <segment title="前窗"/>
                                     <segment title="侧窗"/>
+                                    <segment title="落地窗"/>
                                 </segments>
+                                <connections>
+                                    <action selector="selectedTypeOfCurtain:" destination="zTh-tS-8xs" eventType="valueChanged" id="ReL-jj-Ju8"/>
+                                </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Iwa-8I-ryX">
                                 <rect key="frame" x="40" y="152" width="520" height="100"/>
@@ -99,11 +100,11 @@
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="3oz-0f-vMP" firstAttribute="centerX" secondItem="TVu-du-OFL" secondAttribute="centerX" id="5P0-ux-XVY"/>
-                            <constraint firstItem="Iwa-8I-ryX" firstAttribute="top" secondItem="3oz-0f-vMP" secondAttribute="bottom" constant="26" id="BVc-cG-bUl"/>
+                            <constraint firstItem="Iwa-8I-ryX" firstAttribute="top" secondItem="3oz-0f-vMP" secondAttribute="bottom" constant="26" id="LEM-h2-AE5"/>
                             <constraint firstItem="Iwa-8I-ryX" firstAttribute="leading" secondItem="TVu-du-OFL" secondAttribute="leading" constant="40" id="YdI-3A-esZ"/>
-                            <constraint firstItem="3oz-0f-vMP" firstAttribute="top" secondItem="Sge-O6-aH1" secondAttribute="bottom" constant="34" id="fEQ-6q-2cP"/>
+                            <constraint firstItem="3oz-0f-vMP" firstAttribute="centerX" secondItem="TVu-du-OFL" secondAttribute="centerX" id="oKA-99-J9p"/>
                             <constraint firstAttribute="trailing" secondItem="Iwa-8I-ryX" secondAttribute="trailing" constant="40" id="sy9-CK-Cr5"/>
+                            <constraint firstItem="3oz-0f-vMP" firstAttribute="top" secondItem="Sge-O6-aH1" secondAttribute="bottom" constant="34" id="vJ7-AS-asE"/>
                         </constraints>
                     </view>
                     <connections>
@@ -396,7 +397,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="详细信息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMe-7B-zmA">
                                         <rect key="frame" x="8" y="12" width="68" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jji-h1-TzF">
@@ -435,7 +436,7 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wef-mM-DaF" id="vvq-pE-B1n">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -483,8 +484,11 @@
                                 </constraints>
                                 <segments>
                                     <segment title="射灯"/>
-                                    <segment title="吊灯"/>
+                                    <segment title="廊灯"/>
                                 </segments>
+                                <connections>
+                                    <action selector="selectTypeOfLight:" destination="XoM-8d-Bbi" eventType="valueChanged" id="EkB-Gs-NTJ"/>
+                                </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Kef-hB-18O">
                                 <rect key="frame" x="40" y="152" width="520" height="150"/>
@@ -497,7 +501,7 @@
                                         <rect key="frame" x="0.0" y="28" width="520" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Win-25-T3N" id="jGy-9v-hay">
-                                            <rect key="frame" x="0.0" y="0.0" width="520" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="520" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>

@@ -572,12 +572,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0F032D771CC9B12700D1920D /* Build configuration list for PBXNativeTarget "SmartHome" */;
 			buildPhases = (
-				6984B7368FBF635163F6D0CF /* 📦 Check Pods Manifest.lock */,
+				6984B7368FBF635163F6D0CF /* [CP] Check Pods Manifest.lock */,
 				0F032D401CC9B12700D1920D /* Sources */,
 				0F032D411CC9B12700D1920D /* Frameworks */,
 				0F032D421CC9B12700D1920D /* Resources */,
-				9C97EFC5A754784A9B85D9D0 /* 📦 Embed Pods Frameworks */,
-				901B98770BA9652E39727DC8 /* 📦 Copy Pods Resources */,
+				9C97EFC5A754784A9B85D9D0 /* [CP] Embed Pods Frameworks */,
+				901B98770BA9652E39727DC8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -709,14 +709,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6984B7368FBF635163F6D0CF /* 📦 Check Pods Manifest.lock */ = {
+		6984B7368FBF635163F6D0CF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -724,14 +724,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		901B98770BA9652E39727DC8 /* 📦 Copy Pods Resources */ = {
+		901B98770BA9652E39727DC8 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -739,14 +739,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9C97EFC5A754784A9B85D9D0 /* 📦 Embed Pods Frameworks */ = {
+		9C97EFC5A754784A9B85D9D0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
