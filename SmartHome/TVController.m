@@ -41,6 +41,7 @@
 - (IBAction)detail:(id)sender {
     DetailViewController *detailVC = [[DetailViewController alloc]init];
     detailVC.deviceID = 5;
+
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
