@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "public.h"
 
 @interface DVDController : UIViewController
 
 @property (nonatomic,weak) NSString *sceneid;
+
+@property (strong, nonatomic) IBeacon *beacon;
 
 @end
