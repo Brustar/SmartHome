@@ -29,22 +29,18 @@
     {
         [array addObject:[resultSet stringForColumn:@"NAME"]];
         [array addObject:[resultSet stringForColumn:@"sn"]];
-        NSDate *dateBirth = [resultSet dateForColumn:@"birth"];
         
-        NSLog(@"\n\n\n\n %@\n\n\n",[resultSet dateForColumn:@"birth"]);
-        NSDateFormatter *dateFormat = [[NSDateFormatter alloc]init];
-        [dateFormat setDateFormat:@"yyyy.MM.dd"];
-        NSString *birth = [dateFormat stringFromDate:dateBirth];
+        
+        NSString *birth = [resultSet stringForColumn:@"birth"];
         [array addObject:birth];
 
-        NSDate *dateGuarantee= [resultSet dateForColumn:@"guarantee"];
-        NSString *guarantee = [dateFormat stringFromDate:dateGuarantee];
+       
+        NSString *guarantee = [resultSet stringForColumn:@"guarantee"];
         [array addObject:guarantee];
 
-                [array addObject:[resultSet stringForColumn:@"model"]];
+        [array addObject:[resultSet stringForColumn:@"model"]];
         [array addObject:[NSString stringWithFormat:@"%.2f",[resultSet doubleForColumn:@"price"]]];
-        NSDate *date = [resultSet dateForColumn:@"purchase"];
-        NSString *purchase = [dateFormat stringFromDate:date];
+        NSString *purchase = [resultSet stringForColumn:@"purchase"];
         [array addObject:purchase];
         
         [array addObject: [resultSet stringForColumn:@"producer"]];

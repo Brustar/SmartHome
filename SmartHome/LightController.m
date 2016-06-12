@@ -205,6 +205,7 @@
     if(indexPath.row == 2)
     {
         DetailViewController *detailVC = [[DetailViewController alloc]init];
+        detailVC.deviceID = 1;
         [self.navigationController pushViewController:detailVC animated:YES];
     }
 }
@@ -214,9 +215,10 @@
     if(0 == sender.selectedSegmentIndex)
     {
         self.detailCell.label.text = @"射灯";
-    }else {
-        self.detailCell.label.text = @"吊灯";
-    }
+    }else  if (1 == sender.selectedSegmentIndex){
+        self.detailCell.label.text = @"廊灯";
+    }else
+        self.detailCell.label.text  = @"吊灯";
 }
 
 

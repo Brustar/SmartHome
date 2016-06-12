@@ -26,10 +26,10 @@
     return _detailArray;
     
 }
--(void)setLightID:(NSInteger)lightID
+-(void)setDeviceID:(NSInteger)deviceID
 {
-    _lightID = lightID;
-    self.detailArray = [DetailList getDetailListWithID:lightID];
+    _deviceID = deviceID;
+    self.detailArray = [DetailList getDetailListWithID:deviceID];
 }
 
 - (void)viewDidLoad {

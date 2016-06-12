@@ -11,6 +11,8 @@
 #import "DetailViewController.h"
 @interface CurtainController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentCurtain;
+- (IBAction)selectedTypeOfCurtain:(UISegmentedControl *)sender;
 
 @end
 
@@ -101,22 +103,24 @@
     if(indexPath.row == 1)
     {
         DetailViewController *detailVC = [[DetailViewController alloc]init];
+        detailVC.deviceID = 2;
         [self.navigationController pushViewController:detailVC animated:YES];
     }
+}
+
+- (IBAction)selectedTypeOfCurtain:(UISegmentedControl *)sender {
+    if( 0 == sender.selectedSegmentIndex)
+    {
+       self.cell.label.text = @"前窗";
+    }else if( 1 == sender.selectedSegmentIndex)
+        {
+            self.cell.label.text = @"侧窗";
+        }else
+            self.cell.label.text = @"落地窗";
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
