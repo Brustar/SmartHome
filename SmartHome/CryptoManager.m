@@ -23,11 +23,11 @@
             ];
 }
 
-- (NSString *) encryptDES:(NSString *)plainText key:(NSString *)key
+- (NSString *) encryptDESWithkey:(NSString *)key
 {
     NSString *ciphertext = nil;
-    const char *textBytes = [plainText UTF8String];
-    NSUInteger dataLength = [plainText length];
+    const char *textBytes = [self UTF8String];
+    NSUInteger dataLength = [self length];
     unsigned char buffer[1024];
     memset(buffer, 0, sizeof(char));
     Byte iv[] = {1,2,3,4,5,6,7,8};
@@ -42,15 +42,18 @@
     if (cryptStatus == kCCSuccess) {
         NSData *data = [NSData dataWithBytes:buffer length:(NSUInteger)numBytesEncrypted];
         
-        ciphertext = [[NSString alloc] initWithData:[GTMBase64 encodeData:data] encoding:NSUTF8StringEncoding];
+        ciphertext = [MF_Base64Codec base64StringFromData:data];
+        //ciphertext = [[NSString alloc] initWithData:[GTMBase64 encodeData:data] encoding:NSUTF8StringEncoding];
     }
+    
     return ciphertext;
 }
 
 //解密
-- (NSString *) decryptDES:(NSString*)cipherText key:(NSString*)key
+- (NSString *) decryptDESBykey:(NSString*)key
 {
-    NSData* cipherData = [GTMBase64 decodeString:cipherText];
+    NSData* cipherData = [MF_Base64Codec dataFromBase64String:self];
+    //NSData* cipherData =[GTMBase64 decodeString:self];
     unsigned char buffer[1024];
     memset(buffer, 0, sizeof(char));
     size_t numBytesDecrypted = 0;

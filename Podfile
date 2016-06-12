@@ -1,2 +1,9 @@
-platform :ios , 6.0
-pod 'ProtocolBuffers', '~> 1.9.7'
+platform :ios, '8.0'
+
+target 'SmartHome' do
+	pod "AFNetworking", "3.1.0"
+	pod 'FMDB', '~> 2.3'
+	pod 'RegexKitLite', '~> 4.0'
+	pod 'Base64'
+	pod 'CocoaAsyncSocket', :git => 'https://github.com/robbiehanson/CocoaAsyncSocket.git', :commit => 'c0bbcbcc5e039ca5d732f9844bf95c3d8ee31a5b'
+end

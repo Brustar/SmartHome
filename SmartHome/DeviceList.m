@@ -7,8 +7,11 @@
 //
 
 #import "DeviceList.h"
+#import "Scene.h"
+#import "SceneManager.h"
 
 @interface DeviceList ()
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *delbutt;
 
 @end
 
@@ -18,8 +21,20 @@
 {
     
     self.devices=[NSArray arrayWithObjects:@"灯" ,@"电视" ,@"窗帘" ,@"DVD" ,@"摄像头" ,@"门禁" ,@"空调" ,@"机顶盒",@"收音机" ,nil];
-    self.title=@"设备列表";
+    self.segues=[NSArray arrayWithObjects:@"Lighter" ,@"TV" ,@"Curtain" ,@"DVD" ,nil];
     self.tableView.rowHeight=44;
+    
+    if (self.sceneid>0) {
+        _delbutt.enabled=YES;
+    }
+}
+
+-(IBAction)remove:(id)sender
+{
+    Scene *scene=[[Scene alloc] init];
+    [scene setSceneID:[self.sceneid intValue]];
+    [scene setReadonly:NO];
+    [[SceneManager defaultManager] delScenen:scene];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,10 +68,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *segua=@"Lighter";
-    if (indexPath.row==0) {
-        segua=@"Lighter";
-    }else if (indexPath.row==2){
-        segua=@"Curtain";
+    if (indexPath.row<4) {
+        segua=[self.segues objectAtIndex:indexPath.row];
     }
     [self performSegueWithIdentifier:segua sender:self];
 }

@@ -15,24 +15,7 @@
 {
     
     self.scenes=[NSArray arrayWithObjects:@"清晨" ,@"睡眠" ,@"约会" ,@"用餐" ,@"派对" ,@"影院" ,@"欢迎" ,@"离家" ,nil];
-    self.title=@"场景列表";
     self.tableView.rowHeight=44;
-    
-    UISegmentedControl *button = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"new", nil]];
-    button.momentary = YES;
-    [button addTarget:self action:@selector(addScene:) forControlEvents:UIControlEventValueChanged];
-    
-    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithCustomView:button];
-    
-    self.navigationItem.rightBarButtonItem = menuButton;
-    
-    UISegmentedControl *but = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"framework", nil]];
-    but.momentary = YES;
-    [but addTarget:self action:@selector(framework:) forControlEvents:UIControlEventValueChanged];
-    
-    UIBarButtonItem *frameworkButton = [[UIBarButtonItem alloc] initWithCustomView:but];
-    
-    self.navigationItem.leftBarButtonItem = frameworkButton;
     
 }
 

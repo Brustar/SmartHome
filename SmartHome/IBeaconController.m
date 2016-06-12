@@ -8,8 +8,8 @@
 
 #import "IBeaconController.h"
 #import "SocketManager.h"
-#import "ASIFormDataRequest.h"
 #import "PackManager.h"
+#import "CryptoManager.h"
 
 @implementation IBeaconController
 
@@ -31,14 +31,45 @@
     [[AudioManager defaultManager] addSongsToMusicPlayer];
 }
 
+-(NSURLSessionDownloadTask *)task{
+    
+    if (!_task) {
+        
+        AFHTTPSessionManager *session=[AFHTTPSessionManager manager];
+        
+        NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://120.25.226.186:32812/resources/videos/minion_01.mp4"]];
+        
+        _task=[session downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+            
+            //下载进度
+            NSLog(@"%@",downloadProgress);
+            
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                
+                //self.pro.progress=downloadProgress.fractionCompleted;
+                
+            }];
+            
+        } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+            
+            //下载到哪个文件夹
+            NSString *cachePath=NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
+            
+            NSString *fileName=[cachePath stringByAppendingPathComponent:response.suggestedFilename];
+            
+            return [NSURL fileURLWithPath:fileName];
+            
+        } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+            NSLog(@"下载完成了 %@",filePath);
+        }];
+    }
+    
+    return _task;
+}
+
 - (IBAction)download:(id)sender
 {
-    DownloadManager *down=[DownloadManager defaultManager];
-    NSURL *url=[NSURL URLWithString:@"http://imgsrc.baidu.com/baike/pic/item/0b7b02087bf40ad1f0dd605a572c11dfa9ecce4a.jpg"];
-    [down download:url completion:^(){
-        //[IOManager writeImage:@"a.jpg" image:image];
-        NSLog(@"load.");
-    }];
+    [self.task resume]; 
 }
 
 -(IBAction)upload:(id)sender
@@ -46,37 +77,50 @@
     NSString *cachepath=[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject];
     NSString *path=[cachepath stringByAppendingPathComponent:@"0b7b02087bf40ad1f0dd605a572c11dfa9ecce4a.jpg"];
     
-    NSURL *url = [NSURL URLWithString:@"http://localhost:3000/upload"];
-    ASIFormDataRequest *requestForm = [[ASIFormDataRequest alloc] initWithURL:url];
+    NSString *URL = @"http://localhost:3000/upload";
     
-    [requestForm setFile:path forKey:@"upload"];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    // 实际上就是AFN没有对响应数据做任何处理的情况
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
-    [requestForm startSynchronous];
-    __block ASIHTTPRequest *req=requestForm;
-    [requestForm setCompletionBlock :^{
+    // formData是遵守了AFMultipartFormData的对象
+    [manager POST:URL parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
-        NSLog(@"upload success");
+        // 将本地的文件上传至服务器
+        //NSURL *fileURL = [NSURL URLWithString:path];
+        NSData *fileData = [NSData dataWithContentsOfFile:path];
+        [formData appendPartWithFileData:fileData name:@"upload" fileName:@"a.jpg" mimeType:@"multipart/form-data"];
+        //[formData appendPartWithFileURL:fileURL name:@"upload" error:NULL];
+    } progress:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
+        NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSLog(@"完成 %@", result);
+    } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        NSLog(@"错误 %@", error.localizedDescription);
     }];
-    [requestForm setFailedBlock :^{
-        NSError *error = [req error];
-        NSLog ( @"error:%@" ,[error userInfo ]);
-    }];
+
+}
+
+- (IBAction)Des:(id)sender {
+    NSString *str=@"hello";
+    NSLog(@"abc:%@",[str encryptDESWithkey:@"123"]);
+    
+    NSString *tar=@"1dWH2gyT/kc=";
+    NSLog(@"dec:%@",[tar decryptDESBykey:@"123"]);
+    
+    //NSLog(@"md5:%@",[str md5]);
 }
 
 - (IBAction)http:(id)sender
 {
-    NSURL *url = [NSURL URLWithString:@"http://localhost:3000/json"];
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    __block ASIHTTPRequest *req=request;
-    [request startAsynchronous];
-    [request setCompletionBlock :^{
-        NSDictionary *weatherDic = [NSJSONSerialization JSONObjectWithData:[req responseData] options:NSJSONReadingMutableLeaves error:nil];
-        NSDictionary *weatherInfo = weatherDic[@"abc"];
-        NSLog(@"weatherInfo字典里面的内容为--》%@,%@",weatherInfo, weatherDic );
-    }];
-    [request setFailedBlock :^{
-        NSError *error = [req error];
-        NSLog ( @"error:%@" ,[error userInfo ]);
+    NSString *url = @"http://localhost:3000/json";
+    // GET
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    // 将数据作为参数传入
+    //NSDictionary *dict = @{@"username":@"12",@"pwd":@"13"};
+    [mgr GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSLog(@"success:%@",responseObject);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"failure:%@",error);
     }];
 }
 

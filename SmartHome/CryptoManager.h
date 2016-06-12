@@ -9,8 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonCryptor.h>
-#import "GTMBase64.h"
+#import "MF_Base64Additions.h"
 
-@interface CryptoManager : NSObject
+@interface NSString (CryptoExtensions)
+
+- (NSString *) md5;
+//加密
+- (NSString *) encryptDESWithkey:(NSString *)key;
+//解密
+- (NSString *) decryptDESBykey:(NSString*)key;
 
 @end

@@ -11,6 +11,7 @@
 
 
 @interface LightController ()<UITableViewDelegate,UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *favButt;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,assign) CGFloat brightValue;
 
@@ -24,7 +25,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title=@"场景-灯";
     
     self.bright.continuous = NO;
     [self.bright addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
@@ -33,14 +33,10 @@
     
     self.detailCell = [[[NSBundle mainBundle] loadNibNamed:@"DetailTableViewCell" owner:self options:nil] lastObject];
     
-    self.favorite.hidden=YES;
-    self.remove.hidden=YES;
-    
     self.cell = [[[NSBundle mainBundle] loadNibNamed:@"ColourTableViewCell" owner:self options:nil] lastObject];
     
     if ([self.sceneid intValue]>0) {
-        self.favorite.hidden=NO;
-        self.remove.hidden=NO;
+        _favButt.enabled=YES;
         
         Scene *scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
         for(id device in scene.devices)
@@ -99,14 +95,6 @@
     NSMutableArray *array=[NSMutableArray arrayWithObject:device];
     [scene setDevices:array];
     [[SceneManager defaultManager] favoriteScenen:scene withName:@"睡觉模式"];
-}
-
--(IBAction)remove:(id)sender
-{
-    Scene *scene=[[Scene alloc] init];
-    [scene setSceneID:[self.sceneid intValue]];
-    [scene setReadonly:NO];
-    [[SceneManager defaultManager] delScenen:scene];
 }
 
 //将UIColor转换为RGB值
