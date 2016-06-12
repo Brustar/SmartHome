@@ -30,7 +30,9 @@
                                     volumeListenerCallback,
                                     (__bridge void *)(self)
                                     );
-    self.ibeacon=beacon;
+    if (!self.ibeacon) {
+        self.ibeacon=beacon;
+    }
 }
 
 void volumeListenerCallback (void *inClientData,AudioSessionPropertyID inID,UInt32 inDataSize,const void *inData)
