@@ -22,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"场景-电视";
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
@@ -39,7 +40,8 @@
 
 - (IBAction)detail:(id)sender {
     DetailViewController *detailVC = [[DetailViewController alloc]init];
-    detailVC.deviceID = 3;
+    detailVC.deviceID = 5;
+
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
