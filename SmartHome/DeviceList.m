@@ -20,8 +20,8 @@
 -(void) viewDidLoad
 {
     
-    self.devices=[NSArray arrayWithObjects:@"灯" ,@"电视" ,@"窗帘" ,@"DVD" ,@"摄像头" ,@"门禁" ,@"空调" ,@"机顶盒",@"收音机" ,nil];
-    self.segues=[NSArray arrayWithObjects:@"Lighter" ,@"TV" ,@"Curtain" ,@"DVD" ,nil];
+    self.devices=[NSArray arrayWithObjects:@"灯" , @"电视" , @"窗帘" , @"DVD" , @"机顶盒" , @"收音机" , @"摄像头" ,@"门禁" , @"空调"  , nil];
+    self.segues=[NSArray arrayWithObjects:@"Lighter" ,@"TV" ,@"Curtain" ,@"DVD" ,@"Netv",nil];
     self.tableView.rowHeight=44;
     
     if (self.sceneid>0) {
@@ -68,7 +68,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *segua=@"Lighter";
-    if (indexPath.row<4) {
+    if (indexPath.row<5) {
         segua=[self.segues objectAtIndex:indexPath.row];
     }
     [self performSegueWithIdentifier:segua sender:self];

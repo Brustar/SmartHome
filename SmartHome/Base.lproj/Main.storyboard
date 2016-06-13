@@ -5,6 +5,50 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
+        <!--Netv Controller-->
+        <scene sceneID="ZU7-cm-2nv">
+            <objects>
+                <viewController id="7uY-cb-xb4" customClass="NetvController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RcK-iN-Rk1"/>
+                        <viewControllerLayoutGuide type="bottom" id="hZ9-i8-BcI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jh4-U5-5eE">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MCD-MY-GV8">
+                                <rect key="frame" x="17" y="407" width="240" height="45"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="详细信息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kSr-F9-F1H">
+                                        <rect key="frame" x="8" y="12" width="68" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3gH-TH-NZb">
+                                        <rect key="frame" x="198" y="11" width="22" height="22"/>
+                                        <connections>
+                                            <action selector="detail:" destination="7uY-cb-xb4" eventType="touchUpInside" id="253-pJ-ZN0"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="icq-eo-pJb">
+                                <rect key="frame" x="43" y="338" width="118" height="31"/>
+                            </slider>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="volume" destination="icq-eo-pJb" id="iei-Tn-5rj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MNp-9U-ueD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1036" y="-1830"/>
+        </scene>
         <!--Controller-->
         <scene sceneID="ew2-UX-k1z">
             <objects>
@@ -484,6 +528,7 @@
                         <segue destination="zTh-tS-8xs" kind="show" identifier="Curtain" id="XfJ-Rv-8cE"/>
                         <segue destination="iP5-w8-v4Y" kind="show" identifier="TV" id="fwd-NP-2iU"/>
                         <segue destination="Ywa-Dl-EXD" kind="show" identifier="DVD" id="jQF-wZ-Ues"/>
+                        <segue destination="7uY-cb-xb4" kind="show" identifier="Netv" id="KNm-ey-xf7"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x1b-kG-51K" userLabel="First Responder" sceneMemberID="firstResponder"/>
