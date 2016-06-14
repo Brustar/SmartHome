@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GuardController : UIViewController
+@interface GuardController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+
+@property (nonatomic,weak) NSString *sceneid;
 
 @end

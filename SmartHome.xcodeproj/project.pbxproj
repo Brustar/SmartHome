@@ -19,6 +19,7 @@
 		0F180FC91D0E4E6500392F4C /* GuardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F180FC81D0E4E6500392F4C /* GuardController.m */; };
 		0F25178A1CFD8C6500491A6C /* PackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2517891CFD8C6500491A6C /* PackManager.m */; };
 		0F25FE5E1CEB0C0A0063E834 /* SceneList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F25FE5D1CEB0C0A0063E834 /* SceneList.m */; };
+		0F3CCF3B1D0F97B70058A320 /* CameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3CCF3A1D0F97B70058A320 /* CameraController.m */; };
 		0F43B0F81CF3E7BF00F3D9F0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F43B0F71CF3E7BF00F3D9F0 /* SystemConfiguration.framework */; };
 		0F43B0F91CF3E7D200F3D9F0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FCFB39F1CF2D38800B37DD3 /* AVFoundation.framework */; };
 		0F43B0FD1CF3E86A00F3D9F0 /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F43B0FC1CF3E86A00F3D9F0 /* iflyMSC.framework */; };
@@ -138,6 +139,8 @@
 		0F2517891CFD8C6500491A6C /* PackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackManager.m; sourceTree = "<group>"; };
 		0F25FE5C1CEB0C0A0063E834 /* SceneList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneList.h; sourceTree = "<group>"; };
 		0F25FE5D1CEB0C0A0063E834 /* SceneList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneList.m; sourceTree = "<group>"; };
+		0F3CCF391D0F97B70058A320 /* CameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraController.h; sourceTree = "<group>"; };
+		0F3CCF3A1D0F97B70058A320 /* CameraController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraController.m; sourceTree = "<group>"; };
 		0F43B0F71CF3E7BF00F3D9F0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		0F43B0FC1CF3E86A00F3D9F0 /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iflyMSC.framework; sourceTree = "<group>"; };
 		0F43B0FF1CF3ED4B00F3D9F0 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -428,6 +431,8 @@
 				0F180FC51D0E4E5000392F4C /* FMController.m */,
 				0F180FC71D0E4E6500392F4C /* GuardController.h */,
 				0F180FC81D0E4E6500392F4C /* GuardController.m */,
+				0F3CCF391D0F97B70058A320 /* CameraController.h */,
+				0F3CCF3A1D0F97B70058A320 /* CameraController.m */,
 			);
 			path = SmartHome;
 			sourceTree = "<group>";
@@ -788,6 +793,7 @@
 				0F180FC31D0E4C7400392F4C /* NetvController.m in Sources */,
 				0FAF74C11CEEA17C00432713 /* HRColorCursor.m in Sources */,
 				0F91AA171CDC798700094C25 /* PrintObject.m in Sources */,
+				0F3CCF3B1D0F97B70058A320 /* CameraController.m in Sources */,
 				0FC0FFDA1CF577C0000F71D5 /* RealScene.m in Sources */,
 				0FAF74C41CEEA17C00432713 /* HRColorPickerView.m in Sources */,
 				0FCFB3981CF2947500B37DD3 /* EntranceGuard.m in Sources */,
