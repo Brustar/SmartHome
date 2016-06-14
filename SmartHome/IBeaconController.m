@@ -102,12 +102,10 @@
 
 - (IBAction)Des:(id)sender {
     NSString *str=@"hello";
-    NSLog(@"abc:%@",[str encryptDESWithkey:@"123"]);
-    
-    NSString *tar=@"1dWH2gyT/kc=";
-    NSLog(@"dec:%@",[tar decryptDESBykey:@"123"]);
-    
-    //NSLog(@"md5:%@",[str md5]);
+    NSString *tar=@"ev/A2FRCkPM=";
+    NSLog(@"md5:%@",[str md5]);
+    NSLog(@"encr:%@",[str encryptWithText:@"des"]);
+    NSLog(@"dec:%@",[tar decryptWithText:@"des"]);
 }
 
 - (IBAction)http:(id)sender
