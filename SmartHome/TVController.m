@@ -10,14 +10,31 @@
 #import "DetailViewController.h"
 #import "TV.h"
 #import "SceneManager.h"
+#import "tvBrandView.h"
+#import "TVChannel.h"
+#import "tvBrandView.h"
 
-@interface TVController ()
+@interface TVController ()<UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UISlider *volume;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tvBrandViewHight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tvBrandViewWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollewContentViewWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *secondViewLeftFromContenView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *thirdViewLeftFromContenView;
+@property (weak, nonatomic) IBOutlet UIPageControl *pageController;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (nonatomic,assign) int channelViewCount;
+@property (strong, nonatomic) IBOutletCollection(tvBrandView) NSArray *tvViews;
+
+
+
 - (IBAction)mute:(id)sender;
 @end
 
 @implementation TVController
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,7 +48,47 @@
     [self.beacon addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     VolumeManager *volume=[VolumeManager defaultManager];
     [volume start:self.beacon];
+    
+    [self setChannel];
+    [self setUpConstraint];
+    
 }
+-(void)setChannel
+{
+    NSArray *channels = [TVChannel getAllChannelForFavorited];
+    NSRange range;
+    long count = channels.count;
+    int index = 0;
+    while (count > 0) {
+        if(count >= 4)
+        {
+            range.length = 4;
+        }else {
+            range.length = count;
+        }
+        count -= range.length;
+        range.location = 0;
+        tvBrandView *tvView = self.tvViews[index++];
+        tvView.channelArr= [channels subarrayWithRange:range];
+    }
+    self.channelViewCount = index;
+    
+}
+-(void)setUpConstraint
+{
+    self.tvBrandViewWidth.constant = self.view.frame.size.width *0.3;
+    self.scrollewContentViewWidth.constant = self.tvBrandViewWidth.constant * self.channelViewCount;
+    self.tvBrandViewHight.constant = self.tvBrandViewWidth.constant;
+    self.secondViewLeftFromContenView.constant = self.tvBrandViewWidth.constant;
+    self.thirdViewLeftFromContenView.constant = self.tvBrandViewWidth.constant *2;
+}
+-(void)updateViewConstraints{
+    [super updateViewConstraints];
+    
+}
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -40,7 +97,7 @@
 
 - (IBAction)detail:(id)sender {
     DetailViewController *detailVC = [[DetailViewController alloc]init];
-    detailVC.deviceID = 5;
+    detailVC.deviceID = 3;
 
     [self.navigationController pushViewController:detailVC animated:YES];
 }
@@ -84,4 +141,14 @@
         self.volume.value=[[self.beacon valueForKey:@"volume"] floatValue];
     }
 }
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGPoint point = self.scrollView.contentOffset;
+    
+    self.pageController.currentPage = round(point.x/self.scrollView.bounds.size.width);
+}
+
+
+
 @end

@@ -82,10 +82,53 @@
 		F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB411D00029900AB04BE /* DetailViewController.m */; };
 		F60FDB461D003FD500AB04BE /* CurtainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB441D003FD500AB04BE /* CurtainTableViewCell.m */; };
 		F60FDB471D003FD500AB04BE /* CurtainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F60FDB451D003FD500AB04BE /* CurtainTableViewCell.xib */; };
+		F62D89F71D0FE6C800F77F6C /* DVCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F62D89F61D0FE6C800F77F6C /* DVCollectionViewCell.m */; };
+		F62D8A001D0FF31300F77F6C /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = F62D89F91D0FF31300F77F6C /* 1.png */; };
+		F62D8A011D0FF31300F77F6C /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = F62D89FA1D0FF31300F77F6C /* 4.png */; };
+		F62D8A021D0FF31300F77F6C /* 7.png in Resources */ = {isa = PBXBuildFile; fileRef = F62D89FB1D0FF31300F77F6C /* 7.png */; };
+		F62D8A031D0FF31300F77F6C /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = F62D89FC1D0FF31300F77F6C /* 2.png */; };
+		F62D8A041D0FF31300F77F6C /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = F62D89FD1D0FF31300F77F6C /* 5.png */; };
+		F62D8A051D0FF31300F77F6C /* 8.png in Resources */ = {isa = PBXBuildFile; fileRef = F62D89FE1D0FF31300F77F6C /* 8.png */; };
+		F62D8A061D0FF31300F77F6C /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = F62D89FF1D0FF31300F77F6C /* 3.png */; };
+		F62D8A0A1D0FFA4A00F77F6C /* 9.png in Resources */ = {isa = PBXBuildFile; fileRef = F62D8A091D0FFA4A00F77F6C /* 9.png */; };
+		F62D8A0D1D0FFBFA00F77F6C /* voice_strong.png in Resources */ = {isa = PBXBuildFile; fileRef = F62D8A0B1D0FFBFA00F77F6C /* voice_strong.png */; };
+		F62D8A0E1D0FFBFA00F77F6C /* voice_weak.png in Resources */ = {isa = PBXBuildFile; fileRef = F62D8A0C1D0FFBFA00F77F6C /* voice_weak.png */; };
 		F6359AFB1CFFBC910035EB31 /* DetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6359AF91CFFBC910035EB31 /* DetailTableViewCell.m */; };
 		F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6359AFA1CFFBC910035EB31 /* DetailTableViewCell.xib */; };
 		F6359B001CFFC4DC0035EB31 /* ColourTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6359AFE1CFFC4DC0035EB31 /* ColourTableViewCell.m */; };
 		F6359B011CFFC4DC0035EB31 /* ColourTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6359AFF1CFFC4DC0035EB31 /* ColourTableViewCell.xib */; };
+		F637B7031D0E5CA70079B81E /* tvBrandView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F637B7021D0E5CA70079B81E /* tvBrandView.xib */; };
+		F637B7631D0E9C1B0079B81E /* cctv1.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B7461D0E9C1B0079B81E /* cctv1.png */; };
+		F637B7641D0E9C1B0079B81E /* cctv2.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B7471D0E9C1B0079B81E /* cctv2.png */; };
+		F637B7651D0E9C1B0079B81E /* cctv3.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B7481D0E9C1B0079B81E /* cctv3.png */; };
+		F637B7661D0E9C1B0079B81E /* MTV.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B7491D0E9C1B0079B81E /* MTV.png */; };
+		F637B7671D0E9C1B0079B81E /* 上海台.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B74A1D0E9C1B0079B81E /* 上海台.png */; };
+		F637B7681D0E9C1B0079B81E /* 内蒙台.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B74B1D0E9C1B0079B81E /* 内蒙台.png */; };
+		F637B7691D0E9C1B0079B81E /* 凤凰卫视.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B74C1D0E9C1B0079B81E /* 凤凰卫视.png */; };
+		F637B76A1D0E9C1B0079B81E /* 南方台.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B74D1D0E9C1B0079B81E /* 南方台.png */; };
+		F637B76B1D0E9C1B0079B81E /* 四川台.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B74E1D0E9C1B0079B81E /* 四川台.png */; };
+		F637B76C1D0E9C1B0079B81E /* 天津台.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B74F1D0E9C1B0079B81E /* 天津台.png */; };
+		F637B76D1D0E9C1B0079B81E /* 宁夏台.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B7501D0E9C1B0079B81E /* 宁夏台.png */; };
+		F637B76E1D0E9C1B0079B81E /* 山东台.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B7511D0E9C1B0079B81E /* 山东台.png */; };
+		F637B76F1D0E9C1B0079B81E /* 广东卫视.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B7521D0E9C1B0079B81E /* 广东卫视.png */; };
+		F637B7701D0E9C1B0079B81E /* 广东台.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B7531D0E9C1B0079B81E /* 广东台.png */; };
+		F637B7711D0E9C1B0079B81E /* 广西台.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B7541D0E9C1B0079B81E /* 广西台.png */; };
+		F637B7721D0E9C1B0079B81E /* 旅游卫视.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B7551D0E9C1B0079B81E /* 旅游卫视.png */; };
+		F637B7731D0E9C1B0079B81E /* 江苏台.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B7561D0E9C1B0079B81E /* 江苏台.png */; };
+		F637B7741D0E9C1B0079B81E /* 江西台.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B7571D0E9C1B0079B81E /* 江西台.png */; };
+		F637B7751D0E9C1B0079B81E /* 河北台.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B7581D0E9C1B0079B81E /* 河北台.png */; };
+		F637B7761D0E9C1B0079B81E /* 河南台.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B7591D0E9C1B0079B81E /* 河南台.png */; };
+		F637B7771D0E9C1B0079B81E /* 浙江台.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B75A1D0E9C1B0079B81E /* 浙江台.png */; };
+		F637B7781D0E9C1B0079B81E /* 海南台.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B75B1D0E9C1B0079B81E /* 海南台.png */; };
+		F637B7791D0E9C1B0079B81E /* 深圳台.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B75C1D0E9C1B0079B81E /* 深圳台.png */; };
+		F637B77A1D0E9C1B0079B81E /* 湖北台.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B75D1D0E9C1B0079B81E /* 湖北台.png */; };
+		F637B77B1D0E9C1B0079B81E /* 湖南台.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B75E1D0E9C1B0079B81E /* 湖南台.png */; };
+		F637B77C1D0E9C1B0079B81E /* 福建东南台.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B75F1D0E9C1B0079B81E /* 福建东南台.png */; };
+		F637B77D1D0E9C1B0079B81E /* 贵州台.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B7601D0E9C1B0079B81E /* 贵州台.png */; };
+		F637B77E1D0E9C1B0079B81E /* 辽宁台.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B7611D0E9C1B0079B81E /* 辽宁台.png */; };
+		F637B77F1D0E9C1B0079B81E /* 黑龙江台.png in Resources */ = {isa = PBXBuildFile; fileRef = F637B7621D0E9C1B0079B81E /* 黑龙江台.png */; };
+		F637B7821D0E9F4E0079B81E /* tvBrandView.m in Sources */ = {isa = PBXBuildFile; fileRef = F637B7811D0E9F4E0079B81E /* tvBrandView.m */; };
+		F637B7851D0EBC270079B81E /* TVChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = F637B7841D0EBC270079B81E /* TVChannel.m */; };
 		F66EB2D21CFEB9E300AC53CE /* Detail.m in Sources */ = {isa = PBXBuildFile; fileRef = F66EB2D11CFEB9E300AC53CE /* Detail.m */; };
 		F66EB2D51CFED0A900AC53CE /* DetailList.m in Sources */ = {isa = PBXBuildFile; fileRef = F66EB2D41CFED0A900AC53CE /* DetailList.m */; };
 		F6A08F421D0CFA5400317318 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6A08F401D0CFA5400317318 /* Main.storyboard */; };
@@ -250,12 +293,58 @@
 		F60FDB431D003FD500AB04BE /* CurtainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurtainTableViewCell.h; sourceTree = "<group>"; };
 		F60FDB441D003FD500AB04BE /* CurtainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurtainTableViewCell.m; sourceTree = "<group>"; };
 		F60FDB451D003FD500AB04BE /* CurtainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CurtainTableViewCell.xib; sourceTree = "<group>"; };
+		F62D89F51D0FE6C800F77F6C /* DVCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVCollectionViewCell.h; sourceTree = "<group>"; };
+		F62D89F61D0FE6C800F77F6C /* DVCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVCollectionViewCell.m; sourceTree = "<group>"; };
+		F62D89F91D0FF31300F77F6C /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		F62D89FA1D0FF31300F77F6C /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
+		F62D89FB1D0FF31300F77F6C /* 7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 7.png; sourceTree = "<group>"; };
+		F62D89FC1D0FF31300F77F6C /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
+		F62D89FD1D0FF31300F77F6C /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5.png; sourceTree = "<group>"; };
+		F62D89FE1D0FF31300F77F6C /* 8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8.png; sourceTree = "<group>"; };
+		F62D89FF1D0FF31300F77F6C /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
+		F62D8A091D0FFA4A00F77F6C /* 9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 9.png; sourceTree = "<group>"; };
+		F62D8A0B1D0FFBFA00F77F6C /* voice_strong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_strong.png; sourceTree = "<group>"; };
+		F62D8A0C1D0FFBFA00F77F6C /* voice_weak.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_weak.png; sourceTree = "<group>"; };
 		F6359AF81CFFBC910035EB31 /* DetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTableViewCell.h; sourceTree = "<group>"; };
 		F6359AF91CFFBC910035EB31 /* DetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewCell.m; sourceTree = "<group>"; };
 		F6359AFA1CFFBC910035EB31 /* DetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailTableViewCell.xib; sourceTree = "<group>"; };
 		F6359AFD1CFFC4DC0035EB31 /* ColourTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColourTableViewCell.h; sourceTree = "<group>"; };
 		F6359AFE1CFFC4DC0035EB31 /* ColourTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColourTableViewCell.m; sourceTree = "<group>"; };
 		F6359AFF1CFFC4DC0035EB31 /* ColourTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ColourTableViewCell.xib; sourceTree = "<group>"; };
+		F637B7021D0E5CA70079B81E /* tvBrandView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = tvBrandView.xib; sourceTree = "<group>"; };
+		F637B7461D0E9C1B0079B81E /* cctv1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cctv1.png; sourceTree = "<group>"; };
+		F637B7471D0E9C1B0079B81E /* cctv2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cctv2.png; sourceTree = "<group>"; };
+		F637B7481D0E9C1B0079B81E /* cctv3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cctv3.png; sourceTree = "<group>"; };
+		F637B7491D0E9C1B0079B81E /* MTV.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MTV.png; sourceTree = "<group>"; };
+		F637B74A1D0E9C1B0079B81E /* 上海台.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上海台.png"; sourceTree = "<group>"; };
+		F637B74B1D0E9C1B0079B81E /* 内蒙台.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "内蒙台.png"; sourceTree = "<group>"; };
+		F637B74C1D0E9C1B0079B81E /* 凤凰卫视.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "凤凰卫视.png"; sourceTree = "<group>"; };
+		F637B74D1D0E9C1B0079B81E /* 南方台.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "南方台.png"; sourceTree = "<group>"; };
+		F637B74E1D0E9C1B0079B81E /* 四川台.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "四川台.png"; sourceTree = "<group>"; };
+		F637B74F1D0E9C1B0079B81E /* 天津台.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "天津台.png"; sourceTree = "<group>"; };
+		F637B7501D0E9C1B0079B81E /* 宁夏台.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "宁夏台.png"; sourceTree = "<group>"; };
+		F637B7511D0E9C1B0079B81E /* 山东台.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "山东台.png"; sourceTree = "<group>"; };
+		F637B7521D0E9C1B0079B81E /* 广东卫视.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "广东卫视.png"; sourceTree = "<group>"; };
+		F637B7531D0E9C1B0079B81E /* 广东台.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "广东台.png"; sourceTree = "<group>"; };
+		F637B7541D0E9C1B0079B81E /* 广西台.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "广西台.png"; sourceTree = "<group>"; };
+		F637B7551D0E9C1B0079B81E /* 旅游卫视.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "旅游卫视.png"; sourceTree = "<group>"; };
+		F637B7561D0E9C1B0079B81E /* 江苏台.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "江苏台.png"; sourceTree = "<group>"; };
+		F637B7571D0E9C1B0079B81E /* 江西台.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "江西台.png"; sourceTree = "<group>"; };
+		F637B7581D0E9C1B0079B81E /* 河北台.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "河北台.png"; sourceTree = "<group>"; };
+		F637B7591D0E9C1B0079B81E /* 河南台.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "河南台.png"; sourceTree = "<group>"; };
+		F637B75A1D0E9C1B0079B81E /* 浙江台.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "浙江台.png"; sourceTree = "<group>"; };
+		F637B75B1D0E9C1B0079B81E /* 海南台.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "海南台.png"; sourceTree = "<group>"; };
+		F637B75C1D0E9C1B0079B81E /* 深圳台.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "深圳台.png"; sourceTree = "<group>"; };
+		F637B75D1D0E9C1B0079B81E /* 湖北台.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "湖北台.png"; sourceTree = "<group>"; };
+		F637B75E1D0E9C1B0079B81E /* 湖南台.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "湖南台.png"; sourceTree = "<group>"; };
+		F637B75F1D0E9C1B0079B81E /* 福建东南台.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "福建东南台.png"; sourceTree = "<group>"; };
+		F637B7601D0E9C1B0079B81E /* 贵州台.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "贵州台.png"; sourceTree = "<group>"; };
+		F637B7611D0E9C1B0079B81E /* 辽宁台.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "辽宁台.png"; sourceTree = "<group>"; };
+		F637B7621D0E9C1B0079B81E /* 黑龙江台.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "黑龙江台.png"; sourceTree = "<group>"; };
+		F637B7801D0E9F4E0079B81E /* tvBrandView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tvBrandView.h; sourceTree = "<group>"; };
+		F637B7811D0E9F4E0079B81E /* tvBrandView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tvBrandView.m; sourceTree = "<group>"; };
+		F637B7831D0EBC270079B81E /* TVChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVChannel.h; sourceTree = "<group>"; };
+		F637B7841D0EBC270079B81E /* TVChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVChannel.m; sourceTree = "<group>"; };
 		F66EB2D01CFEB9E300AC53CE /* Detail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Detail.h; sourceTree = "<group>"; };
 		F66EB2D11CFEB9E300AC53CE /* Detail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Detail.m; sourceTree = "<group>"; };
 		F66EB2D31CFED0A900AC53CE /* DetailList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailList.h; sourceTree = "<group>"; };
@@ -334,6 +423,8 @@
 				F66EB2D11CFEB9E300AC53CE /* Detail.m */,
 				F66EB2D31CFED0A900AC53CE /* DetailList.h */,
 				F66EB2D41CFED0A900AC53CE /* DetailList.m */,
+				F637B7831D0EBC270079B81E /* TVChannel.h */,
+				F637B7841D0EBC270079B81E /* TVChannel.m */,
 			);
 			name = entity;
 			sourceTree = "<group>";
@@ -342,6 +433,8 @@
 			isa = PBXGroup;
 			children = (
 				0F032D461CC9B12700D1920D /* SmartHome */,
+				F637B7451D0E9C1B0079B81E /* 电视台标 */,
+				F62D89F81D0FF31300F77F6C /* TVImage */,
 				0F032D661CC9B12700D1920D /* SmartHomeTests */,
 				0F032D711CC9B12700D1920D /* SmartHomeUITests */,
 				0F43B0F61CF3E74700F3D9F0 /* frameworks */,
@@ -373,6 +466,8 @@
 				0F032D471CC9B12700D1920D /* Supporting Files */,
 				0F032D4A1CC9B12700D1920D /* AppDelegate.h */,
 				0F032D4B1CC9B12700D1920D /* AppDelegate.m */,
+				F637B7801D0E9F4E0079B81E /* tvBrandView.h */,
+				F637B7811D0E9F4E0079B81E /* tvBrandView.m */,
 				0FAF98A81CE410E8009BDBB5 /* LoginController.h */,
 				0FAF98A91CE410E8009BDBB5 /* LoginController.m */,
 				0F43B1041CF4078300F3D9F0 /* ISRDataHelper.h */,
@@ -413,6 +508,8 @@
 				0FABF91B1D06AA35000892D8 /* TVController.m */,
 				0FABF91D1D06AA4E000892D8 /* DVDController.h */,
 				0FABF91E1D06AA4E000892D8 /* DVDController.m */,
+				F62D89F51D0FE6C800F77F6C /* DVCollectionViewCell.h */,
+				F62D89F61D0FE6C800F77F6C /* DVCollectionViewCell.m */,
 			);
 			path = SmartHome;
 			sourceTree = "<group>";
@@ -468,6 +565,7 @@
 			isa = PBXGroup;
 			children = (
 				F6A08F401D0CFA5400317318 /* Main.storyboard */,
+				F637B7021D0E5CA70079B81E /* tvBrandView.xib */,
 				F6359AFA1CFFBC910035EB31 /* DetailTableViewCell.xib */,
 				F60FDB451D003FD500AB04BE /* CurtainTableViewCell.xib */,
 				F6359AFF1CFFC4DC0035EB31 /* ColourTableViewCell.xib */,
@@ -556,6 +654,60 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		F62D89F81D0FF31300F77F6C /* TVImage */ = {
+			isa = PBXGroup;
+			children = (
+				F62D89F91D0FF31300F77F6C /* 1.png */,
+				F62D89FA1D0FF31300F77F6C /* 4.png */,
+				F62D89FB1D0FF31300F77F6C /* 7.png */,
+				F62D89FC1D0FF31300F77F6C /* 2.png */,
+				F62D89FD1D0FF31300F77F6C /* 5.png */,
+				F62D89FE1D0FF31300F77F6C /* 8.png */,
+				F62D89FF1D0FF31300F77F6C /* 3.png */,
+				F62D8A091D0FFA4A00F77F6C /* 9.png */,
+				F62D8A0B1D0FFBFA00F77F6C /* voice_strong.png */,
+				F62D8A0C1D0FFBFA00F77F6C /* voice_weak.png */,
+			);
+			name = TVImage;
+			path = SmartHome/TVImage;
+			sourceTree = "<group>";
+		};
+		F637B7451D0E9C1B0079B81E /* 电视台标 */ = {
+			isa = PBXGroup;
+			children = (
+				F637B7461D0E9C1B0079B81E /* cctv1.png */,
+				F637B7471D0E9C1B0079B81E /* cctv2.png */,
+				F637B7481D0E9C1B0079B81E /* cctv3.png */,
+				F637B7491D0E9C1B0079B81E /* MTV.png */,
+				F637B74A1D0E9C1B0079B81E /* 上海台.png */,
+				F637B74B1D0E9C1B0079B81E /* 内蒙台.png */,
+				F637B74C1D0E9C1B0079B81E /* 凤凰卫视.png */,
+				F637B74D1D0E9C1B0079B81E /* 南方台.png */,
+				F637B74E1D0E9C1B0079B81E /* 四川台.png */,
+				F637B74F1D0E9C1B0079B81E /* 天津台.png */,
+				F637B7501D0E9C1B0079B81E /* 宁夏台.png */,
+				F637B7511D0E9C1B0079B81E /* 山东台.png */,
+				F637B7521D0E9C1B0079B81E /* 广东卫视.png */,
+				F637B7531D0E9C1B0079B81E /* 广东台.png */,
+				F637B7541D0E9C1B0079B81E /* 广西台.png */,
+				F637B7551D0E9C1B0079B81E /* 旅游卫视.png */,
+				F637B7561D0E9C1B0079B81E /* 江苏台.png */,
+				F637B7571D0E9C1B0079B81E /* 江西台.png */,
+				F637B7581D0E9C1B0079B81E /* 河北台.png */,
+				F637B7591D0E9C1B0079B81E /* 河南台.png */,
+				F637B75A1D0E9C1B0079B81E /* 浙江台.png */,
+				F637B75B1D0E9C1B0079B81E /* 海南台.png */,
+				F637B75C1D0E9C1B0079B81E /* 深圳台.png */,
+				F637B75D1D0E9C1B0079B81E /* 湖北台.png */,
+				F637B75E1D0E9C1B0079B81E /* 湖南台.png */,
+				F637B75F1D0E9C1B0079B81E /* 福建东南台.png */,
+				F637B7601D0E9C1B0079B81E /* 贵州台.png */,
+				F637B7611D0E9C1B0079B81E /* 辽宁台.png */,
+				F637B7621D0E9C1B0079B81E /* 黑龙江台.png */,
+			);
+			path = "电视台标";
+			sourceTree = "<group>";
+		};
 		F6DAFF50D58D29D0493A07C7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -635,7 +787,7 @@
 				TargetAttributes = {
 					0F032D431CC9B12700D1920D = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = C33F2UX798;
+						DevelopmentTeam = C8JS65F469;
 						SystemCapabilities = {
 							com.apple.HomeKit = {
 								enabled = 1;
@@ -680,15 +832,55 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F637B7741D0E9C1B0079B81E /* 江西台.png in Resources */,
 				0FC0FFD71CF553AD000F71D5 /* planeScene.plist in Resources */,
+				F637B77F1D0E9C1B0079B81E /* 黑龙江台.png in Resources */,
 				0F032D5D1CC9B12700D1920D /* LaunchScreen.storyboard in Resources */,
+				F62D8A011D0FF31300F77F6C /* 4.png in Resources */,
+				F637B7631D0E9C1B0079B81E /* cctv1.png in Resources */,
+				F62D8A0E1D0FFBFA00F77F6C /* voice_weak.png in Resources */,
+				F637B76D1D0E9C1B0079B81E /* 宁夏台.png in Resources */,
 				F60FDB471D003FD500AB04BE /* CurtainTableViewCell.xib in Resources */,
 				F6A08F441D0CFA6100317318 /* smartDB in Resources */,
 				F6A08F421D0CFA5400317318 /* Main.storyboard in Resources */,
+				F62D8A001D0FF31300F77F6C /* 1.png in Resources */,
+				F637B76E1D0E9C1B0079B81E /* 山东台.png in Resources */,
+				F637B76A1D0E9C1B0079B81E /* 南方台.png in Resources */,
+				F637B7731D0E9C1B0079B81E /* 江苏台.png in Resources */,
+				F637B7641D0E9C1B0079B81E /* cctv2.png in Resources */,
+				F637B7761D0E9C1B0079B81E /* 河南台.png in Resources */,
 				0F032D5A1CC9B12700D1920D /* Assets.xcassets in Resources */,
+				F62D8A0A1D0FFA4A00F77F6C /* 9.png in Resources */,
+				F637B7721D0E9C1B0079B81E /* 旅游卫视.png in Resources */,
+				F637B77A1D0E9C1B0079B81E /* 湖北台.png in Resources */,
+				F637B76F1D0E9C1B0079B81E /* 广东卫视.png in Resources */,
+				F637B7681D0E9C1B0079B81E /* 内蒙台.png in Resources */,
+				F637B77E1D0E9C1B0079B81E /* 辽宁台.png in Resources */,
 				F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */,
+				F637B7671D0E9C1B0079B81E /* 上海台.png in Resources */,
+				F637B7751D0E9C1B0079B81E /* 河北台.png in Resources */,
+				F637B7651D0E9C1B0079B81E /* cctv3.png in Resources */,
 				0FC0FFD21CF539BC000F71D5 /* realScene.plist in Resources */,
+				F637B7691D0E9C1B0079B81E /* 凤凰卫视.png in Resources */,
+				F637B77D1D0E9C1B0079B81E /* 贵州台.png in Resources */,
+				F62D8A0D1D0FFBFA00F77F6C /* voice_strong.png in Resources */,
+				F637B7031D0E5CA70079B81E /* tvBrandView.xib in Resources */,
+				F637B7781D0E9C1B0079B81E /* 海南台.png in Resources */,
+				F637B76C1D0E9C1B0079B81E /* 天津台.png in Resources */,
+				F62D8A031D0FF31300F77F6C /* 2.png in Resources */,
+				F62D8A041D0FF31300F77F6C /* 5.png in Resources */,
+				F637B77B1D0E9C1B0079B81E /* 湖南台.png in Resources */,
+				F62D8A021D0FF31300F77F6C /* 7.png in Resources */,
+				F637B77C1D0E9C1B0079B81E /* 福建东南台.png in Resources */,
+				F637B76B1D0E9C1B0079B81E /* 四川台.png in Resources */,
+				F637B7791D0E9C1B0079B81E /* 深圳台.png in Resources */,
+				F62D8A061D0FF31300F77F6C /* 3.png in Resources */,
+				F62D8A051D0FF31300F77F6C /* 8.png in Resources */,
+				F637B7771D0E9C1B0079B81E /* 浙江台.png in Resources */,
+				F637B7711D0E9C1B0079B81E /* 广西台.png in Resources */,
+				F637B7701D0E9C1B0079B81E /* 广东台.png in Resources */,
 				F6359B011CFFC4DC0035EB31 /* ColourTableViewCell.xib in Resources */,
+				F637B7661D0E9C1B0079B81E /* MTV.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -766,6 +958,7 @@
 				0FCFB38F1CF293B300B37DD3 /* Radio.m in Sources */,
 				0FAF74C51CEEA17C00432713 /* HRHSVColorUtil.m in Sources */,
 				0FAF98A41CE40F3C009BDBB5 /* QRCodeReader.m in Sources */,
+				F637B7851D0EBC270079B81E /* TVChannel.m in Sources */,
 				F60FDB461D003FD500AB04BE /* CurtainTableViewCell.m in Sources */,
 				0FABF91F1D06AA4E000892D8 /* DVDController.m in Sources */,
 				0F43B1031CF4055300F3D9F0 /* IATConfig.m in Sources */,
@@ -774,6 +967,7 @@
 				0F91AA171CDC798700094C25 /* PrintObject.m in Sources */,
 				0FC0FFDA1CF577C0000F71D5 /* RealScene.m in Sources */,
 				0FAF74C41CEEA17C00432713 /* HRColorPickerView.m in Sources */,
+				F62D89F71D0FE6C800F77F6C /* DVCollectionViewCell.m in Sources */,
 				0FCFB3981CF2947500B37DD3 /* EntranceGuard.m in Sources */,
 				0F4B49801CFEB13500D93DD2 /* CurtainController.m in Sources */,
 				0FCFB3921CF293D800B37DD3 /* Netv.m in Sources */,
@@ -788,6 +982,7 @@
 				0FAF8FF51CE1B514000557BD /* VolumeManager.m in Sources */,
 				0F032D4C1CC9B12700D1920D /* AppDelegate.m in Sources */,
 				0FB205ED1CDC3D3700B5E87E /* AudioManager.m in Sources */,
+				F637B7821D0E9F4E0079B81E /* tvBrandView.m in Sources */,
 				0FABF91C1D06AA35000892D8 /* TVController.m in Sources */,
 				0FAF74C31CEEA17C00432713 /* HRColorMapView.m in Sources */,
 				0FADA44A1CEBF8AE00777901 /* SceneManager.m in Sources */,
@@ -976,6 +1171,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -998,6 +1194,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
