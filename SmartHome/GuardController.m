@@ -15,6 +15,10 @@
 @interface GuardController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UISwitch *switchView;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedGuard;
+@property (nonatomic,strong) UILabel *label;
+
+- (IBAction)selectedTypeOfGuard:(UISegmentedControl *)sender;
 
 @end
 
@@ -26,6 +30,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.scrollEnabled = NO;
+    self.title = @"门禁";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,10 +74,12 @@
         
     }
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 5, 100, 30)];
-    [cell.contentView addSubview:label];
+    
+   [cell.contentView addSubview:label];
     if(indexPath.row == 0)
     {
-        label.text = @"侧门";
+        self.label = label;
+        label.text = @"大门";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         self.switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
         cell.accessoryView = self.switchView;
@@ -81,7 +88,7 @@
         
     }else if(indexPath.row == 1){
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-        label.text = @"详细信息";
+        label.text =  @"详细信息";
     }
     return cell;
 }
@@ -102,14 +109,28 @@
     }
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)selectedTypeOfGuard:(UISegmentedControl *)sender {
+    
+    if(0 == sender.selectedSegmentIndex)
+    {
+        self.label.text = @"大门";
+    }else if( 1 == sender.selectedSegmentIndex)
+    {
+        self.label.text = @"侧门";
+    } else {
+        self.label.text = @"车库";
+    }
 }
-*/
 
+
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 @end

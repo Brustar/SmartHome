@@ -39,7 +39,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"场景-电视";
+    self.title = @"电视";
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
@@ -55,7 +55,7 @@
 }
 -(void)setChannel
 {
-    NSArray *channels = [TVChannel getAllChannelForFavorited];
+    NSArray *channels = [TVChannel getAllChannelForFavoritedForType:@"TV"];
     NSRange range;
     long count = channels.count;
     int index = 0;

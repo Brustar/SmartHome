@@ -119,6 +119,12 @@
 		F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6359AFA1CFFBC910035EB31 /* DetailTableViewCell.xib */; };
 		F6359B001CFFC4DC0035EB31 /* ColourTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6359AFE1CFFC4DC0035EB31 /* ColourTableViewCell.m */; };
 		F6359B011CFFC4DC0035EB31 /* ColourTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6359AFF1CFFC4DC0035EB31 /* ColourTableViewCell.xib */; };
+		F63ADFD31D10EFA000BE17DC /* left.png in Resources */ = {isa = PBXBuildFile; fileRef = F63ADFD01D10EFA000BE17DC /* left.png */; };
+		F63ADFD41D10EFA000BE17DC /* quiet.png in Resources */ = {isa = PBXBuildFile; fileRef = F63ADFD11D10EFA000BE17DC /* quiet.png */; };
+		F63ADFD51D10EFA000BE17DC /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = F63ADFD21D10EFA000BE17DC /* up.png */; };
+		F63AE0031D11319C00BE17DC /* FMCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F63AE0021D11319C00BE17DC /* FMCollectionViewCell.m */; };
+		F63AE0331D11540F00BE17DC /* TXHRrettyRuler.m in Sources */ = {isa = PBXBuildFile; fileRef = F63AE0301D11540F00BE17DC /* TXHRrettyRuler.m */; };
+		F63AE0341D11540F00BE17DC /* TXHRulerScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = F63AE0321D11540F00BE17DC /* TXHRulerScrollView.m */; };
 		F66EB2D21CFEB9E300AC53CE /* Detail.m in Sources */ = {isa = PBXBuildFile; fileRef = F66EB2D11CFEB9E300AC53CE /* Detail.m */; };
 		F66EB2D51CFED0A900AC53CE /* DetailList.m in Sources */ = {isa = PBXBuildFile; fileRef = F66EB2D41CFED0A900AC53CE /* DetailList.m */; };
 		F6A08F421D0CFA5400317318 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6A08F401D0CFA5400317318 /* Main.storyboard */; };
@@ -127,14 +133,14 @@
 		F6B91F721D100F1400592FB0 /* TVChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B91F701D100F1400592FB0 /* TVChannel.m */; };
 		F6B91F741D100F3B00592FB0 /* tvBrandView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6B91F731D100F3B00592FB0 /* tvBrandView.xib */; };
 		F6B91F771D100F7100592FB0 /* tvBrandView.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B91F761D100F7100592FB0 /* tvBrandView.m */; };
-		F6B91F831D100F8300592FB0 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = F6B91F791D100F8300592FB0 /* 1.png */; };
-		F6B91F841D100F8300592FB0 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = F6B91F7A1D100F8300592FB0 /* 2.png */; };
-		F6B91F851D100F8300592FB0 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = F6B91F7B1D100F8300592FB0 /* 3.png */; };
-		F6B91F861D100F8300592FB0 /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = F6B91F7C1D100F8300592FB0 /* 4.png */; };
-		F6B91F871D100F8300592FB0 /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = F6B91F7D1D100F8300592FB0 /* 5.png */; };
-		F6B91F881D100F8300592FB0 /* 7.png in Resources */ = {isa = PBXBuildFile; fileRef = F6B91F7E1D100F8300592FB0 /* 7.png */; };
-		F6B91F891D100F8300592FB0 /* 8.png in Resources */ = {isa = PBXBuildFile; fileRef = F6B91F7F1D100F8300592FB0 /* 8.png */; };
-		F6B91F8A1D100F8300592FB0 /* 9.png in Resources */ = {isa = PBXBuildFile; fileRef = F6B91F801D100F8300592FB0 /* 9.png */; };
+		F6B91F831D100F8300592FB0 /* rewind.png in Resources */ = {isa = PBXBuildFile; fileRef = F6B91F791D100F8300592FB0 /* rewind.png */; };
+		F6B91F841D100F8300592FB0 /* last.png in Resources */ = {isa = PBXBuildFile; fileRef = F6B91F7A1D100F8300592FB0 /* last.png */; };
+		F6B91F851D100F8300592FB0 /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = F6B91F7B1D100F8300592FB0 /* stop.png */; };
+		F6B91F861D100F8300592FB0 /* broadcast.png in Resources */ = {isa = PBXBuildFile; fileRef = F6B91F7C1D100F8300592FB0 /* broadcast.png */; };
+		F6B91F871D100F8300592FB0 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = F6B91F7D1D100F8300592FB0 /* pause.png */; };
+		F6B91F881D100F8300592FB0 /* fastForward.png in Resources */ = {isa = PBXBuildFile; fileRef = F6B91F7E1D100F8300592FB0 /* fastForward.png */; };
+		F6B91F891D100F8300592FB0 /* next.png in Resources */ = {isa = PBXBuildFile; fileRef = F6B91F7F1D100F8300592FB0 /* next.png */; };
+		F6B91F8A1D100F8300592FB0 /* house.png in Resources */ = {isa = PBXBuildFile; fileRef = F6B91F801D100F8300592FB0 /* house.png */; };
 		F6B91F8B1D100F8300592FB0 /* voice_strong.png in Resources */ = {isa = PBXBuildFile; fileRef = F6B91F811D100F8300592FB0 /* voice_strong.png */; };
 		F6B91F8C1D100F8300592FB0 /* voice_weak.png in Resources */ = {isa = PBXBuildFile; fileRef = F6B91F821D100F8300592FB0 /* voice_weak.png */; };
 /* End PBXBuildFile section */
@@ -340,6 +346,15 @@
 		F6359AFD1CFFC4DC0035EB31 /* ColourTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColourTableViewCell.h; sourceTree = "<group>"; };
 		F6359AFE1CFFC4DC0035EB31 /* ColourTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColourTableViewCell.m; sourceTree = "<group>"; };
 		F6359AFF1CFFC4DC0035EB31 /* ColourTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ColourTableViewCell.xib; sourceTree = "<group>"; };
+		F63ADFD01D10EFA000BE17DC /* left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left.png; sourceTree = "<group>"; };
+		F63ADFD11D10EFA000BE17DC /* quiet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = quiet.png; sourceTree = "<group>"; };
+		F63ADFD21D10EFA000BE17DC /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up.png; sourceTree = "<group>"; };
+		F63AE0011D11319C00BE17DC /* FMCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCollectionViewCell.h; sourceTree = "<group>"; };
+		F63AE0021D11319C00BE17DC /* FMCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCollectionViewCell.m; sourceTree = "<group>"; };
+		F63AE02F1D11540F00BE17DC /* TXHRrettyRuler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXHRrettyRuler.h; sourceTree = "<group>"; };
+		F63AE0301D11540F00BE17DC /* TXHRrettyRuler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXHRrettyRuler.m; sourceTree = "<group>"; };
+		F63AE0311D11540F00BE17DC /* TXHRulerScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXHRulerScrollView.h; sourceTree = "<group>"; };
+		F63AE0321D11540F00BE17DC /* TXHRulerScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXHRulerScrollView.m; sourceTree = "<group>"; };
 		F66EB2D01CFEB9E300AC53CE /* Detail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Detail.h; sourceTree = "<group>"; };
 		F66EB2D11CFEB9E300AC53CE /* Detail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Detail.m; sourceTree = "<group>"; };
 		F66EB2D31CFED0A900AC53CE /* DetailList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailList.h; sourceTree = "<group>"; };
@@ -353,14 +368,14 @@
 		F6B91F731D100F3B00592FB0 /* tvBrandView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = tvBrandView.xib; sourceTree = "<group>"; };
 		F6B91F751D100F7100592FB0 /* tvBrandView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tvBrandView.h; sourceTree = "<group>"; };
 		F6B91F761D100F7100592FB0 /* tvBrandView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tvBrandView.m; sourceTree = "<group>"; };
-		F6B91F791D100F8300592FB0 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
-		F6B91F7A1D100F8300592FB0 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
-		F6B91F7B1D100F8300592FB0 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
-		F6B91F7C1D100F8300592FB0 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
-		F6B91F7D1D100F8300592FB0 /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5.png; sourceTree = "<group>"; };
-		F6B91F7E1D100F8300592FB0 /* 7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 7.png; sourceTree = "<group>"; };
-		F6B91F7F1D100F8300592FB0 /* 8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8.png; sourceTree = "<group>"; };
-		F6B91F801D100F8300592FB0 /* 9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 9.png; sourceTree = "<group>"; };
+		F6B91F791D100F8300592FB0 /* rewind.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rewind.png; sourceTree = "<group>"; };
+		F6B91F7A1D100F8300592FB0 /* last.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = last.png; sourceTree = "<group>"; };
+		F6B91F7B1D100F8300592FB0 /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
+		F6B91F7C1D100F8300592FB0 /* broadcast.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = broadcast.png; sourceTree = "<group>"; };
+		F6B91F7D1D100F8300592FB0 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
+		F6B91F7E1D100F8300592FB0 /* fastForward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fastForward.png; sourceTree = "<group>"; };
+		F6B91F7F1D100F8300592FB0 /* next.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next.png; sourceTree = "<group>"; };
+		F6B91F801D100F8300592FB0 /* house.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = house.png; sourceTree = "<group>"; };
 		F6B91F811D100F8300592FB0 /* voice_strong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_strong.png; sourceTree = "<group>"; };
 		F6B91F821D100F8300592FB0 /* voice_weak.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_weak.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -524,10 +539,13 @@
 				0F180FC21D0E4C7400392F4C /* NetvController.m */,
 				0F180FC41D0E4E5000392F4C /* FMController.h */,
 				0F180FC51D0E4E5000392F4C /* FMController.m */,
+				F63AE0011D11319C00BE17DC /* FMCollectionViewCell.h */,
+				F63AE0021D11319C00BE17DC /* FMCollectionViewCell.m */,
 				0F180FC71D0E4E6500392F4C /* GuardController.h */,
 				0F180FC81D0E4E6500392F4C /* GuardController.m */,
 				0F3CCF391D0F97B70058A320 /* CameraController.h */,
 				0F3CCF3A1D0F97B70058A320 /* CameraController.m */,
+				F63AE02E1D11540F00BE17DC /* PrettyRulerClass */,
 				F6B91F781D100F8300592FB0 /* TVImage */,
 				F62D8A0F1D100E4900F77F6C /* 电视台标 */,
 			);
@@ -710,17 +728,31 @@
 			path = "电视台标";
 			sourceTree = "<group>";
 		};
+		F63AE02E1D11540F00BE17DC /* PrettyRulerClass */ = {
+			isa = PBXGroup;
+			children = (
+				F63AE02F1D11540F00BE17DC /* TXHRrettyRuler.h */,
+				F63AE0301D11540F00BE17DC /* TXHRrettyRuler.m */,
+				F63AE0311D11540F00BE17DC /* TXHRulerScrollView.h */,
+				F63AE0321D11540F00BE17DC /* TXHRulerScrollView.m */,
+			);
+			path = PrettyRulerClass;
+			sourceTree = "<group>";
+		};
 		F6B91F781D100F8300592FB0 /* TVImage */ = {
 			isa = PBXGroup;
 			children = (
-				F6B91F791D100F8300592FB0 /* 1.png */,
-				F6B91F7A1D100F8300592FB0 /* 2.png */,
-				F6B91F7B1D100F8300592FB0 /* 3.png */,
-				F6B91F7C1D100F8300592FB0 /* 4.png */,
-				F6B91F7D1D100F8300592FB0 /* 5.png */,
-				F6B91F7E1D100F8300592FB0 /* 7.png */,
-				F6B91F7F1D100F8300592FB0 /* 8.png */,
-				F6B91F801D100F8300592FB0 /* 9.png */,
+				F6B91F791D100F8300592FB0 /* rewind.png */,
+				F6B91F7A1D100F8300592FB0 /* last.png */,
+				F6B91F7B1D100F8300592FB0 /* stop.png */,
+				F6B91F7C1D100F8300592FB0 /* broadcast.png */,
+				F6B91F7D1D100F8300592FB0 /* pause.png */,
+				F6B91F7E1D100F8300592FB0 /* fastForward.png */,
+				F6B91F7F1D100F8300592FB0 /* next.png */,
+				F6B91F801D100F8300592FB0 /* house.png */,
+				F63ADFD01D10EFA000BE17DC /* left.png */,
+				F63ADFD11D10EFA000BE17DC /* quiet.png */,
+				F63ADFD21D10EFA000BE17DC /* up.png */,
 				F6B91F811D100F8300592FB0 /* voice_strong.png */,
 				F6B91F821D100F8300592FB0 /* voice_weak.png */,
 			);
@@ -806,7 +838,7 @@
 				TargetAttributes = {
 					0F032D431CC9B12700D1920D = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = C33F2UX798;
+						DevelopmentTeam = C8JS65F469;
 						SystemCapabilities = {
 							com.apple.HomeKit = {
 								enabled = 1;
@@ -851,52 +883,55 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6B91F891D100F8300592FB0 /* 8.png in Resources */,
+				F6B91F891D100F8300592FB0 /* next.png in Resources */,
 				F6B91F741D100F3B00592FB0 /* tvBrandView.xib in Resources */,
 				F62D8A411D100E4900F77F6C /* 浙江台.png in Resources */,
 				F62D8A3B1D100E4900F77F6C /* 广西台.png in Resources */,
 				F62D8A331D100E4900F77F6C /* 凤凰卫视.png in Resources */,
 				F6B91F8B1D100F8300592FB0 /* voice_strong.png in Resources */,
-				F6B91F841D100F8300592FB0 /* 2.png in Resources */,
+				F6B91F841D100F8300592FB0 /* last.png in Resources */,
 				0FC0FFD71CF553AD000F71D5 /* planeScene.plist in Resources */,
 				F62D8A2E1D100E4900F77F6C /* cctv2.png in Resources */,
 				F62D8A3F1D100E4900F77F6C /* 河北台.png in Resources */,
 				0F032D5D1CC9B12700D1920D /* LaunchScreen.storyboard in Resources */,
 				F62D8A321D100E4900F77F6C /* 内蒙台.png in Resources */,
-				F6B91F831D100F8300592FB0 /* 1.png in Resources */,
+				F6B91F831D100F8300592FB0 /* rewind.png in Resources */,
 				F62D8A3A1D100E4900F77F6C /* 广东台.png in Resources */,
 				F62D8A361D100E4900F77F6C /* 天津台.png in Resources */,
 				F62D8A371D100E4900F77F6C /* 宁夏台.png in Resources */,
 				F62D8A2F1D100E4900F77F6C /* cctv3.png in Resources */,
 				F62D8A481D100E4900F77F6C /* 辽宁台.png in Resources */,
-				F6B91F8A1D100F8300592FB0 /* 9.png in Resources */,
+				F6B91F8A1D100F8300592FB0 /* house.png in Resources */,
 				F62D8A341D100E4900F77F6C /* 南方台.png in Resources */,
 				F62D8A401D100E4900F77F6C /* 河南台.png in Resources */,
 				F62D8A431D100E4900F77F6C /* 深圳台.png in Resources */,
 				F60FDB471D003FD500AB04BE /* CurtainTableViewCell.xib in Resources */,
+				F63ADFD41D10EFA000BE17DC /* quiet.png in Resources */,
 				F62D8A3E1D100E4900F77F6C /* 江西台.png in Resources */,
 				F62D8A491D100E4900F77F6C /* 黑龙江台.png in Resources */,
+				F63ADFD51D10EFA000BE17DC /* up.png in Resources */,
 				F62D8A3C1D100E4900F77F6C /* 旅游卫视.png in Resources */,
 				F62D8A311D100E4900F77F6C /* 上海台.png in Resources */,
 				F6A08F441D0CFA6100317318 /* smartDB in Resources */,
 				F6A08F421D0CFA5400317318 /* Main.storyboard in Resources */,
 				F62D8A471D100E4900F77F6C /* 贵州台.png in Resources */,
-				F6B91F881D100F8300592FB0 /* 7.png in Resources */,
+				F6B91F881D100F8300592FB0 /* fastForward.png in Resources */,
 				F62D8A3D1D100E4900F77F6C /* 江苏台.png in Resources */,
 				0F032D5A1CC9B12700D1920D /* Assets.xcassets in Resources */,
 				F62D8A351D100E4900F77F6C /* 四川台.png in Resources */,
 				F62D8A441D100E4900F77F6C /* 湖北台.png in Resources */,
 				F6B91F8C1D100F8300592FB0 /* voice_weak.png in Resources */,
 				F62D8A381D100E4900F77F6C /* 山东台.png in Resources */,
-				F6B91F861D100F8300592FB0 /* 4.png in Resources */,
-				F6B91F871D100F8300592FB0 /* 5.png in Resources */,
+				F6B91F861D100F8300592FB0 /* broadcast.png in Resources */,
+				F6B91F871D100F8300592FB0 /* pause.png in Resources */,
 				F62D8A301D100E4900F77F6C /* MTV.png in Resources */,
-				F6B91F851D100F8300592FB0 /* 3.png in Resources */,
+				F6B91F851D100F8300592FB0 /* stop.png in Resources */,
 				F62D8A451D100E4900F77F6C /* 湖南台.png in Resources */,
 				F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */,
 				F62D8A421D100E4900F77F6C /* 海南台.png in Resources */,
 				F62D8A2D1D100E4900F77F6C /* cctv1.png in Resources */,
 				F62D8A391D100E4900F77F6C /* 广东卫视.png in Resources */,
+				F63ADFD31D10EFA000BE17DC /* left.png in Resources */,
 				0FC0FFD21CF539BC000F71D5 /* realScene.plist in Resources */,
 				F62D8A461D100E4900F77F6C /* 福建东南台.png in Resources */,
 				F6359B011CFFC4DC0035EB31 /* ColourTableViewCell.xib in Resources */,
@@ -1001,6 +1036,7 @@
 				0F25FE5E1CEB0C0A0063E834 /* SceneList.m in Sources */,
 				0FCFB3891CF2929900B37DD3 /* Aircon.m in Sources */,
 				0F9D238A1CEDBC500049A58C /* AddScene.m in Sources */,
+				F63AE0031D11319C00BE17DC /* FMCollectionViewCell.m in Sources */,
 				0FAF8FF51CE1B514000557BD /* VolumeManager.m in Sources */,
 				0F032D4C1CC9B12700D1920D /* AppDelegate.m in Sources */,
 				0FB205ED1CDC3D3700B5E87E /* AudioManager.m in Sources */,
@@ -1022,11 +1058,13 @@
 				0FB42E1E1CF681A7007DE64F /* planeScene.m in Sources */,
 				F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */,
 				F6359AFB1CFFBC910035EB31 /* DetailTableViewCell.m in Sources */,
+				F63AE0341D11540F00BE17DC /* TXHRulerScrollView.m in Sources */,
 				0F43B1061CF4078300F3D9F0 /* ISRDataHelper.m in Sources */,
 				0FB42E231CF6F9E8007DE64F /* SocketManager.m in Sources */,
 				0FCFB3861CF2912700B37DD3 /* TV.m in Sources */,
 				0FAF98A61CE40F3C009BDBB5 /* QRCodeReaderViewController.m in Sources */,
 				0FCF43311CE09039009BFDD9 /* IbeaconManager.m in Sources */,
+				F63AE0331D11540F00BE17DC /* TXHRrettyRuler.m in Sources */,
 				0FAF98AA1CE410E8009BDBB5 /* LoginController.m in Sources */,
 				0FCFB3801CF28F6F00B37DD3 /* Light.m in Sources */,
 				0FAF74C21CEEA17C00432713 /* HRColorInfoView.m in Sources */,

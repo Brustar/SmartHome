@@ -33,7 +33,7 @@
     return channel;
 }
 
-+(NSArray *)getAllChannelForFavorited
++(NSArray *)getAllChannelForFavoritedForType:(NSString *)type;
 {
     NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath] ;
@@ -42,7 +42,7 @@
         
     }
     
-    FMResultSet *resultSet = [db executeQuery:@"select * from Channels where isFavorite = 1"];
+    FMResultSet *resultSet = [db executeQueryWithFormat:@"select * from Channels where isFavorite = 1 and parent = %@",type];
     NSMutableArray *mutabelArr = [NSMutableArray array];
     while([resultSet next])
     {

@@ -17,5 +17,5 @@
 @property (nonatomic,assign) BOOL isFavorite;
 
 +(instancetype)getChannelFromChannelID:(NSInteger)channel_id;
-+(NSArray *)getAllChannelForFavorited;
++(NSArray *)getAllChannelForFavoritedForType:(NSString *)type;
 @end

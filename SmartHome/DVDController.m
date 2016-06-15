@@ -29,7 +29,7 @@
 {
     if(!_dvImages)
     {
-        _dvImages = @[@"1",@"2",@"3",@"4",@"5",@"1",@"7",@"8",@"9"];
+        _dvImages = @[@"rewind",@"broadcast",@"fastForward",@"last",@"pause",@"next",@"stop",@"up",@"house"];
     }
     return _dvImages;
 }
@@ -37,6 +37,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     // Do any additional setup after loading the view.
+    self.title = @"DVD";
+    
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     

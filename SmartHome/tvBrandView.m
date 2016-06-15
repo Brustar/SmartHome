@@ -37,7 +37,7 @@
 -(void)setChannelArr:(NSArray *)channelArr
 {
     _channelArr = channelArr;
-    NSArray *channels = [TVChannel getAllChannelForFavorited];
+    NSArray *channels = [TVChannel getAllChannelForFavoritedForType:@"TV"];
     int i = 0;
     for( i = 0; i < self.channelArr.count; i++)
     {
