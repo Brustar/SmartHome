@@ -1,5 +1,4 @@
 #import "RTSPPlayer.h"
-#import "Utilities.h"
 #import "AudioStreamer.h"
 
 #ifndef AVCODEC_MAX_AUDIO_FRAME_SIZE
@@ -372,7 +371,7 @@ initError:
     [_audioController _stopAudio];
     primed=NO;
 }
-
+/*
 - (void)savePPMPicture:(AVPicture)pict width:(int)width height:(int)height index:(int)iFrame
 {
     FILE *pFile;
@@ -398,5 +397,5 @@ initError:
     // Close file
     fclose(pFile);
 }
-
+*/
 @end

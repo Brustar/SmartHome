@@ -21,7 +21,6 @@
 		0F25FE5E1CEB0C0A0063E834 /* SceneList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F25FE5D1CEB0C0A0063E834 /* SceneList.m */; };
 		0F2D35BC1D114E7000C46DE5 /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2D35B71D114E7000C46DE5 /* AudioStreamer.m */; };
 		0F2D35BD1D114E7000C46DE5 /* RTSPPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2D35B91D114E7000C46DE5 /* RTSPPlayer.m */; };
-		0F2D35BE1D114E7000C46DE5 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2D35BB1D114E7000C46DE5 /* Utilities.m */; };
 		0F2D365D1D11535200C46DE5 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2D365C1D11535200C46DE5 /* libiconv.tbd */; };
 		0F2D365F1D11536E00C46DE5 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2D365E1D11536E00C46DE5 /* libbz2.tbd */; };
 		0F2D36611D1153F900C46DE5 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2D36541D11528300C46DE5 /* VideoToolbox.framework */; };
@@ -205,8 +204,6 @@
 		0F2D35B71D114E7000C46DE5 /* AudioStreamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioStreamer.m; sourceTree = "<group>"; };
 		0F2D35B81D114E7000C46DE5 /* RTSPPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTSPPlayer.h; sourceTree = "<group>"; };
 		0F2D35B91D114E7000C46DE5 /* RTSPPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTSPPlayer.m; sourceTree = "<group>"; };
-		0F2D35BA1D114E7000C46DE5 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
-		0F2D35BB1D114E7000C46DE5 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 		0F2D35DC1D11512100C46DE5 /* avcodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avcodec.h; sourceTree = "<group>"; };
 		0F2D35DD1D11512100C46DE5 /* avdct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avdct.h; sourceTree = "<group>"; };
 		0F2D35DE1D11512100C46DE5 /* avfft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avfft.h; sourceTree = "<group>"; };
@@ -726,8 +723,6 @@
 				0F2D35B71D114E7000C46DE5 /* AudioStreamer.m */,
 				0F2D35B81D114E7000C46DE5 /* RTSPPlayer.h */,
 				0F2D35B91D114E7000C46DE5 /* RTSPPlayer.m */,
-				0F2D35BA1D114E7000C46DE5 /* Utilities.h */,
-				0F2D35BB1D114E7000C46DE5 /* Utilities.m */,
 			);
 			name = FFMpegDecoder;
 			sourceTree = "<group>";
@@ -1366,7 +1361,6 @@
 				0FAF8FF21CE18CE2000557BD /* IBeaconController.m in Sources */,
 				0FAF74C61CEEA17C00432713 /* UIImage+CoreGraphics.m in Sources */,
 				0F180FC91D0E4E6500392F4C /* GuardController.m in Sources */,
-				0F2D35BE1D114E7000C46DE5 /* Utilities.m in Sources */,
 				0FAF98A71CE40F3C009BDBB5 /* QRToggleTorchButton.m in Sources */,
 				0F25FE5E1CEB0C0A0063E834 /* SceneList.m in Sources */,
 				0FCFB3891CF2929900B37DD3 /* Aircon.m in Sources */,
