@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RTSPPlayer.h"
 
 @interface CameraController : UIViewController
 
 @property (nonatomic,weak) NSString *sceneid;
+
+@property (nonatomic,strong) RTSPPlayer *video;
+
+@property (nonatomic) float lastFrameTime;
 
 @end
