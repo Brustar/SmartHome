@@ -22,7 +22,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title=@"场景-窗帘";
+    self.title=@"窗帘";
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;

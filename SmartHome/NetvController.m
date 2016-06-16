@@ -10,16 +10,40 @@
 #import "Netv.h"
 #import "DetailViewController.h"
 #import "SceneManager.h"
+#import "DVCollectionViewCell.h"
 
-@interface NetvController ()
+@interface NetvController ()<UICollectionViewDelegate,UICollectionViewDataSource>
+
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *netTvRightViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *netTvRightViewWidth;
+@property (nonatomic,strong) NSArray  *netTVImages;
 
 @end
 
 @implementation NetvController
 
+-(NSArray *)netTVImages
+{
+    if(!_netTVImages)
+    {
+        _netTVImages =  @[@"rewind",@"broadcast",@"fastForward",@"last",@"pause",@"next",@"stop",@"left",@"house",@"quiet"];
+    }
+    return _netTVImages;
+}
+
+
+-(void)updateViewConstraints
+{
+    [super updateViewConstraints];
+    self.netTvRightViewWidth.constant = 400;
+    self.netTvRightViewHeight.constant = self.netTvRightViewWidth.constant;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"机顶盒";
     
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
@@ -67,6 +91,28 @@
         self.volume.value=[[self.beacon valueForKey:@"volume"] floatValue];
     }
 }
+
+
+
+
+#pragma mark - UICollectionDelegate
+-(NSInteger )collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return 10;
+}
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *collectionCellID = @"collectionCell";
+    DVCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionCellID forIndexPath:indexPath];
+    if(!cell)
+    {
+        cell = [[DVCollectionViewCell alloc]init];
+    }
+    NSString *imageName = [NSString stringWithFormat:@"%@",self.netTVImages[indexPath.row]];
+    [cell.btn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+    return cell;
+}
+
 
 /*
 #pragma mark - Navigation
