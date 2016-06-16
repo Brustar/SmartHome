@@ -431,7 +431,7 @@
                                 </constraints>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="IzO-mL-Kzo" firstAttribute="leading" secondItem="PdJ-qC-BSR" secondAttribute="leadingMargin" constant="20" id="05T-Du-c9d"/>
                             <constraint firstItem="f8R-mp-Vnb" firstAttribute="centerX" secondItem="PdJ-qC-BSR" secondAttribute="centerX" id="C4K-4g-Rfk"/>
@@ -745,8 +745,16 @@
                     <view key="view" contentMode="scaleToFill" id="pfV-ZL-BLz">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3eF-Eo-F9S">
+                                <rect key="frame" x="10" y="80" width="426" height="320"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="imgView" destination="3eF-Eo-F9S" id="JVk-bH-1BD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZN2-9L-9Ry" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
