@@ -7,6 +7,7 @@
 //  withCount:(NSUInteger)count average:(NSUInteger)average
 
 #import "TXHRrettyRuler.h"
+#import "FMController.h"
 
 #define SHEIGHT 8 // 中间指示器顶部闭合三角形高度
 #define INDICATORCOLOR [UIColor redColor].CGColor // 中间指示器颜色
@@ -66,12 +67,12 @@
         ruleValue = scrollView.rulerCount * [scrollView.rulerAverage floatValue];
 //        return;
     }
-    if (self.rulerDeletate) {
+    if (self.rulerDelegate) {
         if (!scrollView.mode) {
             scrollView.rulerValue = ruleValue + DISTANCEMINIMUMVALUE;
         }
         scrollView.mode = NO;
-        [self.rulerDeletate txhRrettyRuler:scrollView];
+        [self.rulerDelegate txhRrettyRuler:scrollView];
     }
 }
 

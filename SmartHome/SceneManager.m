@@ -120,6 +120,7 @@
                 Radio *device=[[Radio alloc] init];
                 device.deviceID=[[dic objectForKey:@"deviceID"] intValue];
                 device.rvolume=[[dic objectForKey:@"rvolume"] intValue];
+                device.channel=[[dic objectForKey:@"channel"] floatValue];
                 [devices addObject:device];
             }
             if ([dic objectForKey:@"nvolume"]) {

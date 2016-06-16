@@ -17,7 +17,7 @@
 
 @interface TXHRrettyRuler : UIView <UIScrollViewDelegate>
 
-@property (nonatomic, assign) id <TXHRrettyRulerDelegate> rulerDeletate;
+@property (nonatomic, assign) id <TXHRrettyRulerDelegate> rulerDelegate;
 
 /*
 *  count * average = 刻度最大值

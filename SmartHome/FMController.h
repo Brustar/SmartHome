@@ -15,4 +15,6 @@
 @property (weak, nonatomic) IBOutlet UISlider *volume;
 @property (strong, nonatomic) IBeacon *beacon;
 
+-(IBAction)save:(id)sender;
+
 @end
