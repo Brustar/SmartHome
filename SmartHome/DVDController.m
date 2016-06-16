@@ -48,8 +48,7 @@
     VolumeManager *volume=[VolumeManager defaultManager];
     [volume start:self.beacon];
     
-    
-}
+    }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -104,10 +103,7 @@
 {
     static NSString *collectionCellID = @"collectionCell";
     DVCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionCellID forIndexPath:indexPath];
-    if(cell == nil)
-    {
-        cell = [[DVCollectionViewCell alloc]init];
-    }
+
     NSString *imageName = [NSString stringWithFormat:@"%@",self.dvImages[indexPath.row]];
     [cell.btn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     

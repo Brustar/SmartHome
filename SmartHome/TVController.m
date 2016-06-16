@@ -13,8 +13,8 @@
 #import "tvBrandView.h"
 #import "TVChannel.h"
 #import "tvBrandView.h"
-
-@interface TVController ()<UIScrollViewDelegate>
+#import "DVCollectionViewCell.h"
+@interface TVController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UISlider *volume;
 
@@ -28,14 +28,21 @@
 @property (nonatomic,assign) int channelViewCount;
 @property (strong, nonatomic) IBOutletCollection(tvBrandView) NSArray *tvViews;
 
-
+@property (nonatomic,strong) NSArray *btnTitles;
 
 - (IBAction)mute:(id)sender;
 @end
 
 @implementation TVController
 
-
+-(NSArray *)btnTitles
+{
+    if(!_btnTitles)
+    {
+        _btnTitles = @[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"0"];
+    }
+    return _btnTitles;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -50,8 +57,8 @@
     [volume start:self.beacon];
     
     [self setChannel];
-    [self setUpConstraint];
-    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+
 }
 -(void)setChannel
 {
@@ -59,6 +66,7 @@
     NSRange range;
     long count = channels.count;
     int index = 0;
+    range.location = 0;
     while (count > 0) {
         if(count >= 4)
         {
@@ -67,28 +75,24 @@
             range.length = count;
         }
         count -= range.length;
-        range.location = 0;
+        
         tvBrandView *tvView = self.tvViews[index++];
         tvView.channelArr= [channels subarrayWithRange:range];
+        range.location += range.length -1;
+        
     }
     self.channelViewCount = index;
     
 }
--(void)setUpConstraint
-{
+
+-(void)updateViewConstraints{
+    [super updateViewConstraints];
     self.tvBrandViewWidth.constant = self.view.frame.size.width *0.3;
     self.scrollewContentViewWidth.constant = self.tvBrandViewWidth.constant * self.channelViewCount;
     self.tvBrandViewHight.constant = self.tvBrandViewWidth.constant;
     self.secondViewLeftFromContenView.constant = self.tvBrandViewWidth.constant;
     self.thirdViewLeftFromContenView.constant = self.tvBrandViewWidth.constant *2;
 }
--(void)updateViewConstraints{
-    [super updateViewConstraints];
-    
-}
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -149,6 +153,23 @@
     self.pageController.currentPage = round(point.x/self.scrollView.bounds.size.width);
 }
 
-
+#pragma mark - UICollectionViewDelgate
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.btnTitles.count + 1;
+}
+-(UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    DVCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell" forIndexPath:indexPath];
+    if(indexPath.row == self.btnTitles.count)
+    {
+        [cell.btn setImage:[UIImage imageNamed:@"quiet"] forState:UIControlStateNormal];
+        
+    }else{
+        [cell.btn setTitle:[NSString stringWithFormat:@"%@",self.btnTitles[indexPath.row]] forState:UIControlStateNormal];
+    }
+    return cell;
+}
 
 @end
