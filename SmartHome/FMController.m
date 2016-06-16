@@ -57,6 +57,7 @@
         {
             if ([[scene.devices objectAtIndex:i] isKindOfClass:[Radio class]]) {
                 self.volume.value=((Radio*)[scene.devices objectAtIndex:i]).rvolume/100.0;
+                self.numberOfChannel.text=  [NSString stringWithFormat:@"%f", ((Radio*)[scene.devices objectAtIndex:i]).channel];
             }
         }
     }
@@ -99,6 +100,7 @@
     Radio *device=[[Radio alloc] init];
     [device setDeviceID:6];
     [device setRvolume:self.volume.value*100];
+    [device setChannel:[self.numberOfChannel.text floatValue]];
     
     Scene *scene=[[Scene alloc] init];
     [scene setSceneID:2];
