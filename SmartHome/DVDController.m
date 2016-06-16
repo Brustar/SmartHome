@@ -113,6 +113,7 @@
 {
     return 9;
 }
+
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *collectionCellID = @"collectionCell";
@@ -124,6 +125,10 @@
     return cell;
 }
 
+-(void)dealloc
+{
+    [self.beacon removeObserver:self forKeyPath:@"volume" context:nil];
+}
 /*
 #pragma mark - Navigation
 

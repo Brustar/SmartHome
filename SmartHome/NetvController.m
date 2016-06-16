@@ -123,7 +123,10 @@
     return cell;
 }
 
-
+-(void)dealloc
+{
+    [self.beacon removeObserver:self forKeyPath:@"volume" context:nil];
+}
 /*
 #pragma mark - Navigation
 
