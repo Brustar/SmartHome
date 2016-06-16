@@ -29,10 +29,7 @@
     self.detailCell.bright.continuous = NO;
     [self.detailCell.bright addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
-     [self.detailCell.power addTarget:self action:@selector(save:)forControlEvents:UIControlEventValueChanged];
-    
-    
-    
+    [self.detailCell.power addTarget:self action:@selector(save:)forControlEvents:UIControlEventValueChanged];
     self.cell = [[[NSBundle mainBundle] loadNibNamed:@"ColourTableViewCell" owner:self options:nil] lastObject];
     
     if ([self.sceneid intValue]>0) {
@@ -131,8 +128,8 @@
 
 - (void)setSelectedColor:(UIColor *)color
 {
-    [self save:nil];
     self.cell.colourView.backgroundColor = color;
+    [self save:nil];
 }
 
 

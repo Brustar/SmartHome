@@ -8,6 +8,8 @@
 
 #import "CameraController.h"
 
+#define LERP(A,B,C) ((A)*(1.0-C)+(B)*C)
+
 @interface CameraController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
 @property (nonatomic, retain) NSTimer *nextFrameTimer;
@@ -18,7 +20,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     
-        _video = [[RTSPPlayer alloc] initWithVideo:@"rtsp://admin:66396639@192.168.199.248" usesTcp:YES];
+        _video = [[RTSPPlayer alloc] initWithVideo:@"rtsp://admin:66396639@192.168.199.248" usesTcp:NO];
     
         _video.outputWidth = 426;
         _video.outputHeight = 320;
@@ -49,8 +51,6 @@
                                                          userInfo:nil
                                                           repeats:YES];
 }
-
-#define LERP(A,B,C) ((A)*(1.0-C)+(B)*C)
 
 -(void)displayNextFrame:(NSTimer *)timer
 {

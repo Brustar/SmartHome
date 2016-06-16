@@ -1,4 +1,5 @@
 Pods/
 SmartHome.xcworkspace/
 .DS_Store
+.DS_Store?
 Podfile.lock
