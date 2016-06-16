@@ -104,7 +104,30 @@
                 device.openvalue=[[dic objectForKey:@"openvalue"] intValue];
                 [devices addObject:device];
             }
-            
+            if ([dic objectForKey:@"volume"]) {
+                TV *device=[[TV alloc] init];
+                device.deviceID=[[dic objectForKey:@"deviceID"] intValue];
+                device.volume=[[dic objectForKey:@"volume"] intValue];
+                [devices addObject:device];
+            }
+            if ([dic objectForKey:@"dvolume"]) {
+                DVD *device=[[DVD alloc] init];
+                device.deviceID=[[dic objectForKey:@"deviceID"] intValue];
+                device.dvolume=[[dic objectForKey:@"dvolume"] intValue];
+                [devices addObject:device];
+            }
+            if ([dic objectForKey:@"rvolume"]) {
+                Radio *device=[[Radio alloc] init];
+                device.deviceID=[[dic objectForKey:@"deviceID"] intValue];
+                device.rvolume=[[dic objectForKey:@"rvolume"] intValue];
+                [devices addObject:device];
+            }
+            if ([dic objectForKey:@"nvolume"]) {
+                Netv *device=[[Netv alloc] init];
+                device.deviceID=[[dic objectForKey:@"deviceID"] intValue];
+                device.nvolume=[[dic objectForKey:@"nvolume"] intValue];
+                [devices addObject:device];
+            }
         }
         scene.devices=devices;
         return scene;

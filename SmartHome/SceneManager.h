@@ -10,6 +10,10 @@
 #import "public.h"
 #import "Light.h"
 #import "Curtain.h"
+#import "TV.h"
+#import "DVD.h"
+#import "Radio.h"
+#import "Netv.h"
 #import "FMDB.h"
 
 @interface SceneManager : NSObject
