@@ -441,7 +441,7 @@
             </objects>
             <point key="canvasLocation" x="2408" y="-2485"/>
         </scene>
-        <!--DVD-->
+        <!--Controller-->
         <scene sceneID="ew2-UX-k1z">
             <objects>
                 <viewController id="Ywa-Dl-EXD" customClass="DVDController" sceneMemberID="viewController">
@@ -622,7 +622,6 @@
                             <constraint firstItem="p46-C7-buw" firstAttribute="leading" secondItem="uWe-am-RCB" secondAttribute="leading" constant="30" id="wZ5-vq-Ihj"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="DVD" id="8Rc-6o-Hca"/>
                     <connections>
                         <outlet property="collectionView" destination="vtL-n8-rVd" id="TZQ-hJ-83X"/>
                         <outlet property="rightViewHight" destination="jdL-oW-AFZ" id="nWR-v6-4GH"/>

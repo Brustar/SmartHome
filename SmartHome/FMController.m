@@ -60,7 +60,9 @@
             }
         }
     }
+    
 }
+
 
 -(void)setRuleForFMChannel
 {
@@ -88,10 +90,12 @@
 {
     FMCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell" forIndexPath:indexPath];
     TVChannel *channel = self.allFavouriteChannels[indexPath.row];
-    [cell.numberBtn setTitle:[NSString stringWithFormat:@"%d",channel.channel_id] forState:UIControlStateNormal];
+    [cell.numberBtn setTitle:[NSString stringWithFormat:@"%ld",channel.channel_id] forState:UIControlStateNormal];
     [cell.nameBtn setTitle:[NSString stringWithFormat:@"%@",channel.channel_name] forState:UIControlStateNormal];
+    
     return cell;
 }
+
 
 
 -(IBAction)save:(id)sender
