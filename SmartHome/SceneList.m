@@ -57,7 +57,9 @@
     if([segue.identifier isEqualToString:@"newScene"])
     {
         id theSegue = segue.destinationViewController;
-        [theSegue setValue:@"2" forKey:@"sceneid"];
+        NSInteger row = self.tableView.indexPathForSelectedRow.row;
+        //[theSegue setValue:@"2" forKey:@"sceneid"];
+        [theSegue setValue:[NSString stringWithFormat:@"%@",self.scenes[row]] forKey:@"title"];
     }
 }
 

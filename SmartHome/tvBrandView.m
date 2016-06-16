@@ -43,7 +43,8 @@
     {
         UIButton *btn = self.channelBtns[i];
         TVChannel *channel = channels[i];
-        [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@",channel.channel_name]] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@",channel.channel_pic]] forState:UIControlStateNormal];
+        
         btn.hidden = NO;
     }
     for(;i < self.channelBtns.count; i++)
