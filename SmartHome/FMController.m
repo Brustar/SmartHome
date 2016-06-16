@@ -112,6 +112,11 @@
     [[SceneManager defaultManager] addScenen:scene withName:@"" withPic:@""];
 }
 
+-(void)dealloc
+{
+    [self.beacon removeObserver:self forKeyPath:@"volume" context:nil];
+}
+
 //-(void)scrollViewDidScroll:(UIScrollView *)scrollView
 //{
 //    CGPoint point = [self.collectionView contentOffset];

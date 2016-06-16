@@ -183,4 +183,8 @@
     return cell;
 }
 
+-(void)dealloc
+{
+    [self.beacon removeObserver:self forKeyPath:@"volume" context:nil];
+}
 @end
