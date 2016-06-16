@@ -47,6 +47,10 @@
     [self.beacon addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     VolumeManager *volume=[VolumeManager defaultManager];
     [volume start:self.beacon];
+
+    
+
+
     if ([self.sceneid intValue]>0) {
         
         Scene *scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
@@ -58,6 +62,7 @@
         }
     }
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

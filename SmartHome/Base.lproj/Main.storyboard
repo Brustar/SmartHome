@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CGT-uk-3fD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CGT-uk-3fD">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -441,7 +441,7 @@
             </objects>
             <point key="canvasLocation" x="2408" y="-2485"/>
         </scene>
-        <!--Controller-->
+        <!--DVD-->
         <scene sceneID="ew2-UX-k1z">
             <objects>
                 <viewController id="Ywa-Dl-EXD" customClass="DVDController" sceneMemberID="viewController">
@@ -622,6 +622,7 @@
                             <constraint firstItem="p46-C7-buw" firstAttribute="leading" secondItem="uWe-am-RCB" secondAttribute="leading" constant="30" id="wZ5-vq-Ihj"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="DVD" id="8Rc-6o-Hca"/>
                     <connections>
                         <outlet property="collectionView" destination="vtL-n8-rVd" id="TZQ-hJ-83X"/>
                         <outlet property="rightViewHight" destination="jdL-oW-AFZ" id="nWR-v6-4GH"/>
@@ -646,7 +647,7 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="McD-CR-zMJ" id="zIE-Ca-Xkn">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -743,6 +744,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="imgView" destination="3eF-Eo-F9S" id="JVk-bH-1BD"/>
                     </connections>
@@ -751,7 +754,7 @@
             </objects>
             <point key="canvasLocation" x="3168" y="-2485"/>
         </scene>
-        <!--Controller-->
+        <!--电视-->
         <scene sceneID="LwL-KP-DoN">
             <objects>
                 <viewController id="iP5-w8-v4Y" customClass="TVController" sceneMemberID="viewController">
@@ -1020,6 +1023,9 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" title="电视" id="ZFk-ln-GdG">
+                        <barButtonItem key="rightBarButtonItem" title="收藏当前频道" id="0o2-KW-Flo"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="pageController" destination="kVU-ah-M3k" id="lZS-bv-s9C"/>
                         <outlet property="scrollView" destination="dOx-Hd-9Mh" id="WeX-Vb-PkY"/>
@@ -1051,7 +1057,7 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wef-mM-DaF" id="vvq-pE-B1n">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -1121,7 +1127,7 @@
                                         <rect key="frame" x="0.0" y="28" width="520" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Win-25-T3N" id="jGy-9v-hay">
-                                            <rect key="frame" x="0.0" y="0.0" width="520" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="520" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
