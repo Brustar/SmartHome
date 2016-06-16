@@ -37,12 +37,12 @@
 -(void)setChannelArr:(NSArray *)channelArr
 {
     _channelArr = channelArr;
-    NSArray *channels = [TVChannel getAllChannelForFavoritedForType:@"TV"];
+    //NSArray *channels = [TVChannel getAllChannelForFavoritedForType:@"TV"];
     int i = 0;
     for( i = 0; i < self.channelArr.count; i++)
     {
         UIButton *btn = self.channelBtns[i];
-        TVChannel *channel = channels[i];
+        TVChannel *channel = channelArr[i];
         [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@",channel.channel_pic]] forState:UIControlStateNormal];
         
         btn.hidden = NO;

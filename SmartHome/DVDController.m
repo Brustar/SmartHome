@@ -48,7 +48,7 @@
     VolumeManager *volume=[VolumeManager defaultManager];
     [volume start:self.beacon];
     
-    }
+   }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

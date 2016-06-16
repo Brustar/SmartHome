@@ -78,7 +78,7 @@
         
         tvBrandView *tvView = self.tvViews[index++];
         tvView.channelArr= [channels subarrayWithRange:range];
-        range.location += range.length -1;
+        range.location += range.length;
         
     }
     self.channelViewCount = index;
