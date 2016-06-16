@@ -25,13 +25,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    self.bright.continuous = NO;
-    [self.bright addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
-    
-     [self.power addTarget:self action:@selector(save:)forControlEvents:UIControlEventValueChanged];
-    
     self.detailCell = [[[NSBundle mainBundle] loadNibNamed:@"DetailTableViewCell" owner:self options:nil] lastObject];
+    self.detailCell.bright.continuous = NO;
+    [self.detailCell.bright addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
+    
+     [self.detailCell.power addTarget:self action:@selector(save:)forControlEvents:UIControlEventValueChanged];
+    
+    
     
     self.cell = [[[NSBundle mainBundle] loadNibNamed:@"ColourTableViewCell" owner:self options:nil] lastObject];
     
@@ -54,7 +54,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    
+     self.title = @"灯";
 }
 
 -(IBAction)save:(id)sender

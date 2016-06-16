@@ -21,9 +21,6 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ybk-Pq-GuA">
-                        <rect key="frame" x="257" y="6" width="51" height="31"/>
-                    </switch>
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="i6A-fh-6Vc">
                         <rect key="frame" x="61" y="3" width="204" height="38"/>
                         <constraints>
@@ -44,6 +41,9 @@
                             <constraint firstAttribute="height" constant="20" id="RJZ-l7-2CW"/>
                         </constraints>
                     </imageView>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ybk-Pq-GuA">
+                        <rect key="frame" x="254" y="6" width="51" height="31"/>
+                    </switch>
                 </subviews>
                 <constraints>
                     <constraint firstItem="W2R-zi-pzZ" firstAttribute="leading" secondItem="i6A-fh-6Vc" secondAttribute="trailing" constant="5" id="AGl-Ho-bvY"/>

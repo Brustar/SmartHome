@@ -26,6 +26,7 @@
     if (self.sceneid>0) {
         _delbutt.enabled=YES;
     }
+   
 }
 
 -(IBAction)remove:(id)sender

@@ -14,7 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollerContentViewWidth;
 @property (nonatomic,strong) NSArray *allFavouriteChannels;
-@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
+//@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @property (weak, nonatomic) IBOutlet UILabel *numberOfChannel;
@@ -35,8 +35,8 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    long  count = self.allFavouriteChannels.count;
-    self.pageControl.numberOfPages = count % 4 == 0 ? count / 4 :count /4 + 1;
+//    long  count = self.allFavouriteChannels.count;
+//    self.pageControl.numberOfPages = count % 4 == 0 ? count / 4 :count /4 + 1;
     
     [self setRuleForFMChannel];
     
@@ -67,22 +67,18 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     FMCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell" forIndexPath:indexPath];
-    if(cell == nil)
-    {
-        cell = [[FMCollectionViewCell alloc]init];
-    }
     TVChannel *channel = self.allFavouriteChannels[indexPath.row];
     [cell.numberBtn setTitle:[NSString stringWithFormat:@"%ld",channel.channel_id] forState:UIControlStateNormal];
     [cell.nameBtn setTitle:[NSString stringWithFormat:@"%@",channel.channel_name] forState:UIControlStateNormal];
     return cell;
 }
 
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    CGPoint point = [self.collectionView contentOffset];
-    self.pageControl.currentPage =round(point.x /self.collectionView.bounds.size.width);
-    
-}
+//-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+//{
+//    CGPoint point = [self.collectionView contentOffset];
+//    self.pageControl.currentPage =round(point.x /self.collectionView.bounds.size.width);
+//    
+//}
 /*
 #pragma mark - Navigation
 

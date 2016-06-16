@@ -252,7 +252,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F3T-db-uVd">
                                 <rect key="frame" x="150" y="74" width="400" height="400"/>
                                 <subviews>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2OF-5a-iAy">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2OF-5a-iAy">
                                         <rect key="frame" x="0.0" y="0.0" width="400" height="400"/>
                                         <color key="backgroundColor" red="0.86852824080000002" green="0.86852824080000002" blue="0.86852824080000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="5" id="t6u-Nf-Y0z">
@@ -326,13 +326,6 @@
                                     <constraint firstAttribute="bottom" secondItem="2OF-5a-iAy" secondAttribute="bottom" id="uOc-gy-P64"/>
                                 </constraints>
                             </view>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="xM7-Vv-hkt">
-                                <rect key="frame" x="330" y="482" width="40" height="37"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="tFe-jr-4Rs"/>
-                                </constraints>
-                                <color key="currentPageIndicatorTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </pageControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w1H-GO-3IH">
                                 <rect key="frame" x="50" y="114" width="470" height="320"/>
                                 <subviews>
@@ -376,11 +369,9 @@
                             <constraint firstItem="fxa-EE-lhu" firstAttribute="centerX" secondItem="dOH-J4-3uM" secondAttribute="centerX" id="Lii-b5-HVj"/>
                             <constraint firstItem="hAI-Hv-xB6" firstAttribute="leading" secondItem="fxa-EE-lhu" secondAttribute="trailing" constant="8" id="MJG-eO-j8D"/>
                             <constraint firstItem="hAI-Hv-xB6" firstAttribute="centerY" secondItem="fxa-EE-lhu" secondAttribute="centerY" id="Oy4-MP-0e0"/>
-                            <constraint firstItem="xM7-Vv-hkt" firstAttribute="top" secondItem="F3T-db-uVd" secondAttribute="bottom" constant="8" id="Tdl-FP-ybC"/>
                             <constraint firstItem="9Z6-NS-UiN" firstAttribute="top" secondItem="k92-43-Qg3" secondAttribute="bottom" constant="100" id="Xug-QA-OQI"/>
                             <constraint firstItem="k92-43-Qg3" firstAttribute="top" secondItem="fxa-EE-lhu" secondAttribute="bottom" constant="50" id="co9-v2-kvU"/>
                             <constraint firstItem="fxa-EE-lhu" firstAttribute="baseline" secondItem="TgJ-dj-uwe" secondAttribute="baseline" id="oIn-tm-Lov"/>
-                            <constraint firstItem="xM7-Vv-hkt" firstAttribute="centerX" secondItem="F3T-db-uVd" secondAttribute="centerX" id="oh4-RH-kDI"/>
                             <constraint firstItem="fxa-EE-lhu" firstAttribute="leading" secondItem="TgJ-dj-uwe" secondAttribute="trailing" constant="8" id="q4T-9J-KBh"/>
                             <constraint firstAttribute="trailing" secondItem="F3T-db-uVd" secondAttribute="trailing" constant="50" id="rH4-kZ-7zR"/>
                         </constraints>
@@ -392,7 +383,6 @@
                         <outlet property="collectionView" destination="2OF-5a-iAy" id="7g1-dJ-rwG"/>
                         <outlet property="fmView" destination="w1H-GO-3IH" id="qTK-1R-qOT"/>
                         <outlet property="numberOfChannel" destination="EEA-tZ-ruW" id="Kiz-TF-Vyx"/>
-                        <outlet property="pageControl" destination="xM7-Vv-hkt" id="Urh-OO-HhM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Dk-kU-Pvb" userLabel="First Responder" sceneMemberID="firstResponder"/>
