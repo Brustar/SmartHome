@@ -16,5 +16,7 @@
 @property (nonatomic) bool isPoweron;
 //音量
 @property (nonatomic) int rvolume;
+//频道
+@property (nonatomic) float channel;
 
 @end
