@@ -58,7 +58,6 @@
             if ([[scene.devices objectAtIndex:i] isKindOfClass:[Radio class]]) {
                 self.volume.value=((Radio*)[scene.devices objectAtIndex:i]).rvolume/100.0;
                 self.numberOfChannel.text=  [NSString stringWithFormat:@"%.1f", ((Radio*)[scene.devices objectAtIndex:i]).channel];
-                NSLog(@"%@",self.numberOfChannel.text);
             }
         }
     }

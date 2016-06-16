@@ -43,7 +43,7 @@
 {
     EntranceGuard *device=[[EntranceGuard alloc] init];
     [device setDeviceID:7];
-    [device setIsPoweron: self.switchView.isOn];
+    [device setPoweron: self.switchView.isOn];
     
     Scene *scene=[[Scene alloc] init];
     [scene setSceneID:2];
@@ -83,7 +83,16 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         self.switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
         cell.accessoryView = self.switchView;
-        [self.switchView setOn:NO animated:NO];
+        if ([self.sceneid intValue]>0) {
+            
+            Scene *scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+            for(int i=0;i<[scene.devices count];i++)
+            {
+                if ([[scene.devices objectAtIndex:i] isKindOfClass:[EntranceGuard class]]) {
+                    self.switchView.on=((EntranceGuard*)[scene.devices objectAtIndex:i]).poweron;
+                }
+            }
+        }
         [self.switchView addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
         
     }else if(indexPath.row == 1){

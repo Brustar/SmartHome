@@ -15,6 +15,7 @@
 #import "Radio.h"
 #import "Netv.h"
 #import "FMDB.h"
+#import "EntranceGuard.h"
 
 @interface SceneManager : NSObject
 

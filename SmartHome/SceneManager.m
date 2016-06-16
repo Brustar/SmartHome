@@ -129,6 +129,11 @@
                 device.nvolume=[[dic objectForKey:@"nvolume"] intValue];
                 [devices addObject:device];
             }
+            if ([dic objectForKey:@"poweron"]) {
+                EntranceGuard *device=[[EntranceGuard alloc] init];
+                device.poweron=[[dic objectForKey:@"poweron"] intValue];
+                [devices addObject:device];
+            }
         }
         scene.devices=devices;
         return scene;
