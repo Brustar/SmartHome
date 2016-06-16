@@ -53,6 +53,16 @@
     [self.beacon addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     VolumeManager *volume=[VolumeManager defaultManager];
     [volume start:self.beacon];
+    if ([self.sceneid intValue]>0) {
+        
+        Scene *scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+        for(int i=0;i<[scene.devices count];i++)
+        {
+            if ([[scene.devices objectAtIndex:i] isKindOfClass:[Netv class]]) {
+                self.volume.value=((Netv*)[scene.devices objectAtIndex:i]).nvolume/100.0;
+            }
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -64,7 +74,7 @@
 {
     Netv *device=[[Netv alloc] init];
     [device setDeviceID:5];
-    [device setVolume:self.volume.value*100];
+    [device setNvolume:self.volume.value*100];
     
     Scene *scene=[[Scene alloc] init];
     [scene setSceneID:2];

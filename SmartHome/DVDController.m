@@ -47,8 +47,17 @@
     [self.beacon addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     VolumeManager *volume=[VolumeManager defaultManager];
     [volume start:self.beacon];
-    
+    if ([self.sceneid intValue]>0) {
+        
+        Scene *scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+        for(int i=0;i<[scene.devices count];i++)
+        {
+            if ([[scene.devices objectAtIndex:i] isKindOfClass:[DVD class]]) {
+                self.volume.value=((DVD*)[scene.devices objectAtIndex:i]).dvolume/100.0;
+            }
+        }
     }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -66,7 +75,7 @@
 {
     DVD *device=[[DVD alloc] init];
     [device setDeviceID:4];
-    [device setVolume:self.volume.value*100];
+    [device setDvolume:self.volume.value*100];
     
     Scene *scene=[[Scene alloc] init];
     [scene setSceneID:2];

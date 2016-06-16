@@ -58,6 +58,17 @@
     
     [self setChannel];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    if ([self.sceneid intValue]>0) {
+        
+        Scene *scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+        for(int i=0;i<[scene.devices count];i++)
+        {
+            if ([[scene.devices objectAtIndex:i] isKindOfClass:[TV class]]) {
+                self.volume.value=((TV*)[scene.devices objectAtIndex:i]).volume/100.0;
+            }
+        }
+    }
 
 }
 -(void)setChannel
