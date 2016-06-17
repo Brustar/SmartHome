@@ -16,7 +16,7 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollerContentViewWidth;
 @property (nonatomic,strong) NSArray *allFavouriteChannels;
-//@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
+
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @property (weak, nonatomic) IBOutlet UILabel *numberOfChannel;
@@ -37,10 +37,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    long  count = self.allFavouriteChannels.count;
-//    self.pageControl.numberOfPages = count % 4 == 0 ? count / 4 :count /4 + 1;
-    
-    
+
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
@@ -129,20 +126,5 @@
     [self.beacon removeObserver:self forKeyPath:@"volume" context:nil];
 }
 
-//-(void)scrollViewDidScroll:(UIScrollView *)scrollView
-//{
-//    CGPoint point = [self.collectionView contentOffset];
-//    self.pageControl.currentPage =round(point.x /self.collectionView.bounds.size.width);
-//    
-//}
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
