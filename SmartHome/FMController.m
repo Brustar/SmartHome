@@ -40,7 +40,7 @@
 //    long  count = self.allFavouriteChannels.count;
 //    self.pageControl.numberOfPages = count % 4 == 0 ? count / 4 :count /4 + 1;
     
-    [self setRuleForFMChannel];
+    
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
@@ -62,20 +62,25 @@
         }
     }
     
-}
+    [self setRuleForFMChannel];
 
+}
 
 -(void)setRuleForFMChannel
 {
+    CGFloat rule = [self.numberOfChannel.text floatValue];
+    NSLog(@"\n\n\n\n\n rule = %f",rule);
     TXHRrettyRuler *ruler = [[TXHRrettyRuler alloc] initWithFrame:CGRectMake(20, 150, self.fmView.bounds.size.width - 20 * 2, 150)];
     ruler.rulerDelegate = self;
-    [ruler showRulerScrollViewWithCount:205 average:[NSNumber numberWithFloat:0.1] currentValue:16.5f smallMode:YES];
+    [ruler showRulerScrollViewWithCount:205 average:[NSNumber numberWithFloat:0.1] currentValue:rule smallMode:YES];
     [self.fmView addSubview:ruler];
 
 }
+#warning save 进来就执行
 - (void)txhRrettyRuler:(TXHRulerScrollView *)rulerScrollView {
     self.numberOfChannel.text = [NSString stringWithFormat:@" %.1f",rulerScrollView.rulerValue];
-    //[self save:nil];
+    
+    [self save:nil];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
