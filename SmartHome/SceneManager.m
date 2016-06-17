@@ -134,6 +134,15 @@
                 device.poweron=[[dic objectForKey:@"poweron"] intValue];
                 [devices addObject:device];
             }
+            if ([dic objectForKey:@"temperature"]) {
+                Aircon *device=[[Aircon alloc] init];
+                device.temperature=[[dic objectForKey:@"temperature"] intValue];
+                device.timing=[[dic objectForKey:@"timing"] intValue];
+                device.WindLevel=[[dic objectForKey:@"WindLevel"] intValue];
+                device.Windirection=[[dic objectForKey:@"Windirection"] intValue];
+                device.mode=[[dic objectForKey:@"mode"] intValue];
+                [devices addObject:device];
+            }
         }
         scene.devices=devices;
         return scene;

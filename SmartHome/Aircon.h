@@ -22,5 +22,7 @@
 @property (nonatomic) int WindLevel;
 //模式
 @property (nonatomic) int mode;
+//定时
+@property (nonatomic) int timing;
 
 @end

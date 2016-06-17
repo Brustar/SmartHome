@@ -16,6 +16,7 @@
 #import "Netv.h"
 #import "FMDB.h"
 #import "EntranceGuard.h"
+#import "Aircon.h"
 
 @interface SceneManager : NSObject
 

@@ -6,6 +6,50 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--Air Controller-->
+        <scene sceneID="93P-EO-Ts9">
+            <objects>
+                <viewController id="4CE-Kq-vrI" customClass="AirController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dKl-9L-LgW"/>
+                        <viewControllerLayoutGuide type="bottom" id="pHJ-0u-BZX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Qay-Yr-5Kw">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dLt-Sh-pEV">
+                                <rect key="frame" x="30" y="278" width="540" height="45"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="详细信息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ghw-CC-Fm9">
+                                        <rect key="frame" x="5" y="12" width="68" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mzZ-CR-WVd">
+                                        <rect key="frame" x="488" y="12" width="22" height="22"/>
+                                        <connections>
+                                            <action selector="detail:" destination="Ywa-Dl-EXD" eventType="touchUpInside" id="CKk-k4-t9R"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dLt-Sh-pEV" firstAttribute="leading" secondItem="Qay-Yr-5Kw" secondAttribute="leadingMargin" constant="10" id="8Th-iV-jIb"/>
+                            <constraint firstItem="dLt-Sh-pEV" firstAttribute="top" secondItem="dKl-9L-LgW" secondAttribute="bottom" constant="258" id="PpV-eT-O9V"/>
+                            <constraint firstItem="dLt-Sh-pEV" firstAttribute="centerY" secondItem="Qay-Yr-5Kw" secondAttribute="centerY" id="hnh-3R-KaV"/>
+                            <constraint firstItem="dLt-Sh-pEV" firstAttribute="centerX" secondItem="Qay-Yr-5Kw" secondAttribute="centerX" id="npH-9m-RWq"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xch-RQ-hGl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1032" y="-2506"/>
+        </scene>
         <!--Netv Controller-->
         <scene sceneID="ZU7-cm-2nv">
             <objects>
@@ -388,7 +432,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Dk-kU-Pvb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1718" y="-2485"/>
+            <point key="canvasLocation" x="1745" y="-2485"/>
         </scene>
         <!--Guard Controller-->
         <scene sceneID="KMg-55-Wn4">
