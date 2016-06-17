@@ -95,8 +95,8 @@
 		0FF410DA1CDAE67100C7F4A1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410D91CDAE67100C7F4A1 /* CoreLocation.framework */; };
 		0FF410DC1CDAF76300C7F4A1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410DB1CDAF76300C7F4A1 /* CoreBluetooth.framework */; };
 		0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7B0B51D1380BF003C2D52 /* AirController.m */; };
-		0FF7B0BB1D1386EF003C2D52 /* TXHRrettyRuler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7B0B71D1386EF003C2D52 /* TXHRrettyRuler.m */; };
-		0FF7B0BC1D1386EF003C2D52 /* TXHRulerScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7B0B81D1386EF003C2D52 /* TXHRulerScrollView.m */; };
+		0FF7B0C11D13886E003C2D52 /* TXHRrettyRuler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7B0BD1D13886E003C2D52 /* TXHRrettyRuler.m */; };
+		0FF7B0C21D13886E003C2D52 /* TXHRulerScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7B0BE1D13886E003C2D52 /* TXHRulerScrollView.m */; };
 		F361579D9B9637C261531C8C /* libPods-SmartHome.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B2DBF5C92F57E3B7AD6AA3 /* libPods-SmartHome.a */; };
 		F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB411D00029900AB04BE /* DetailViewController.m */; };
 		F60FDB461D003FD500AB04BE /* CurtainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB441D003FD500AB04BE /* CurtainTableViewCell.m */; };
@@ -431,10 +431,10 @@
 		0FF410DB1CDAF76300C7F4A1 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		0FF7B0B41D1380BF003C2D52 /* AirController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirController.h; sourceTree = "<group>"; };
 		0FF7B0B51D1380BF003C2D52 /* AirController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirController.m; sourceTree = "<group>"; };
-		0FF7B0B71D1386EF003C2D52 /* TXHRrettyRuler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TXHRrettyRuler.m; path = PrettyRulerClass/TXHRrettyRuler.m; sourceTree = SOURCE_ROOT; };
-		0FF7B0B81D1386EF003C2D52 /* TXHRulerScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TXHRulerScrollView.m; path = PrettyRulerClass/TXHRulerScrollView.m; sourceTree = SOURCE_ROOT; };
-		0FF7B0B91D1386EF003C2D52 /* TXHRrettyRuler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TXHRrettyRuler.h; path = PrettyRulerClass/TXHRrettyRuler.h; sourceTree = SOURCE_ROOT; };
-		0FF7B0BA1D1386EF003C2D52 /* TXHRulerScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TXHRulerScrollView.h; path = PrettyRulerClass/TXHRulerScrollView.h; sourceTree = SOURCE_ROOT; };
+		0FF7B0BD1D13886E003C2D52 /* TXHRrettyRuler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TXHRrettyRuler.m; path = PrettyRuler/TXHRrettyRuler.m; sourceTree = SOURCE_ROOT; };
+		0FF7B0BE1D13886E003C2D52 /* TXHRulerScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TXHRulerScrollView.m; path = PrettyRuler/TXHRulerScrollView.m; sourceTree = SOURCE_ROOT; };
+		0FF7B0BF1D13886E003C2D52 /* TXHRrettyRuler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TXHRrettyRuler.h; path = PrettyRuler/TXHRrettyRuler.h; sourceTree = SOURCE_ROOT; };
+		0FF7B0C01D13886E003C2D52 /* TXHRulerScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TXHRulerScrollView.h; path = PrettyRuler/TXHRulerScrollView.h; sourceTree = SOURCE_ROOT; };
 		9B45FF693457BA21BA43CE05 /* Pods-SmartHome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.debug.xcconfig"; sourceTree = "<group>"; };
 		A4B2DBF5C92F57E3B7AD6AA3 /* libPods-SmartHome.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SmartHome.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE54136C9EEF8F51E8FBEEDE /* Pods-SmartHome.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.release.xcconfig"; sourceTree = "<group>"; };
@@ -625,7 +625,7 @@
 				0F2D35B51D114E3A00C46DE5 /* FFMpegDecoder */,
 				0FAF74AE1CEEA16700432713 /* HRColorPicker */,
 				0FAF98971CE40F27009BDBB5 /* QRCodeReader */,
-				F63AE02E1D11540F00BE17DC /* PrettyRulerClass */,
+				F63AE02E1D11540F00BE17DC /* PrettyRuler */,
 				0F01D53E1CDC6C4B00DAC267 /* entity */,
 				0FB205E41CDC302E00B5E87E /* public */,
 				0F43B0FE1CF3E93700F3D9F0 /* storeboard */,
@@ -1013,14 +1013,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		F63AE02E1D11540F00BE17DC /* PrettyRulerClass */ = {
+		F63AE02E1D11540F00BE17DC /* PrettyRuler */ = {
 			isa = PBXGroup;
 			children = (
-				0FF7B0B71D1386EF003C2D52 /* TXHRrettyRuler.m */,
-				0FF7B0B81D1386EF003C2D52 /* TXHRulerScrollView.m */,
-				0FF7B0B91D1386EF003C2D52 /* TXHRrettyRuler.h */,
-				0FF7B0BA1D1386EF003C2D52 /* TXHRulerScrollView.h */,
+				0FF7B0BD1D13886E003C2D52 /* TXHRrettyRuler.m */,
+				0FF7B0BE1D13886E003C2D52 /* TXHRulerScrollView.m */,
+				0FF7B0BF1D13886E003C2D52 /* TXHRrettyRuler.h */,
+				0FF7B0C01D13886E003C2D52 /* TXHRulerScrollView.h */,
 			);
+			name = PrettyRuler;
 			path = PrettyRulerClass;
 			sourceTree = "<group>";
 		};
@@ -1356,7 +1357,7 @@
 				0F180FC31D0E4C7400392F4C /* NetvController.m in Sources */,
 				0FAF74C11CEEA17C00432713 /* HRColorCursor.m in Sources */,
 				0F91AA171CDC798700094C25 /* PrintObject.m in Sources */,
-				0FF7B0BB1D1386EF003C2D52 /* TXHRrettyRuler.m in Sources */,
+				0FF7B0C11D13886E003C2D52 /* TXHRrettyRuler.m in Sources */,
 				0F3CCF3B1D0F97B70058A320 /* CameraController.m in Sources */,
 				0FC0FFDA1CF577C0000F71D5 /* RealScene.m in Sources */,
 				0FAF74C41CEEA17C00432713 /* HRColorPickerView.m in Sources */,
@@ -1368,7 +1369,7 @@
 				F6359B001CFFC4DC0035EB31 /* ColourTableViewCell.m in Sources */,
 				0FAF8FF21CE18CE2000557BD /* IBeaconController.m in Sources */,
 				0FAF74C61CEEA17C00432713 /* UIImage+CoreGraphics.m in Sources */,
-				0FF7B0BC1D1386EF003C2D52 /* TXHRulerScrollView.m in Sources */,
+				0FF7B0C21D13886E003C2D52 /* TXHRulerScrollView.m in Sources */,
 				0F180FC91D0E4E6500392F4C /* GuardController.m in Sources */,
 				0FAF98A71CE40F3C009BDBB5 /* QRToggleTorchButton.m in Sources */,
 				0F25FE5E1CEB0C0A0063E834 /* SceneList.m in Sources */,
