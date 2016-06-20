@@ -869,6 +869,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="Iwa-8I-ryX" id="aLb-PK-sYz"/>
+                        <segue destination="FtL-kz-2bc" kind="show" identifier="detail" id="NGA-cS-h6U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S9q-xz-hr7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1304,6 +1305,7 @@
                     <connections>
                         <outlet property="favButt" destination="xD2-JX-03I" id="UHS-Tt-inE"/>
                         <outlet property="tableView" destination="Kef-hB-18O" id="TjF-Zk-8dM"/>
+                        <segue destination="FtL-kz-2bc" kind="show" identifier="detail" id="YE7-iU-rxh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3sR-z9-1Fc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1577,6 +1579,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Ljm-Ca-u9B"/>
-        <segue reference="rjy-2u-9IW"/>
+        <segue reference="YE7-iU-rxh"/>
     </inferredMetricsTieBreakers>
 </document>

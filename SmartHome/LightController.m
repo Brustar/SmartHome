@@ -195,9 +195,7 @@
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(indexPath.row == 2)
     {
-        DetailViewController *detailVC = [[DetailViewController alloc]init];
-        detailVC.deviceid = self.deviceid;
-        [self.navigationController pushViewController:detailVC animated:YES];
+        [self performSegueWithIdentifier:@"detail" sender:self];
     }
 }
 
@@ -212,6 +210,12 @@
         self.detailCell.label.text  = @"吊灯";
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    id theSegue = segue.destinationViewController;
+    [theSegue setValue:self.deviceid forKey:@"deviceid"];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
