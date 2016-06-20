@@ -68,7 +68,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *segua=@"Lighter";
-    if (indexPath.row<8) {
+    if (indexPath.row<9) {
         segua=[self.segues objectAtIndex:indexPath.row];
     }
     [self performSegueWithIdentifier:segua sender:self];

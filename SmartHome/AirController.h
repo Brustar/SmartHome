@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface AirController : UIViewController
-
+@property (nonatomic,weak) NSString *sceneid;
 @end
