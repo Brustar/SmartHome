@@ -32,7 +32,7 @@ static long kECAirSliderTag = 100;
         {
             if ([[scene.devices objectAtIndex:i] isKindOfClass:[Aircon class]]) {
                 
-                self.showTemLabel.text=  [NSString stringWithFormat:@"%d°C", ((Aircon*)[scene.devices objectAtIndex:i]).temperature];
+                self.showTemLabel.text = [NSString stringWithFormat:@"%d°C", ((Aircon*)[scene.devices objectAtIndex:i]).temperature];
             }
         }
     }
@@ -164,12 +164,12 @@ static long kECAirSliderTag = 100;
 -(IBAction)save:(id)sender
 {
     Aircon *device = [[Aircon alloc]init];
-    [device setDeviceID:9];
+    [device setDeviceID:[self.deviceid intValue]];
     
     [device setTemperature:[self.showTemLabel.text intValue]];
     
     Scene *scene=[[Scene alloc] init];
-    [scene setSceneID:2];
+    [scene setSceneID:[self.sceneid intValue]];
     [scene setRoomID:4];
     [scene setHouseID:3];
     [scene setPicID:66];
@@ -186,14 +186,16 @@ static long kECAirSliderTag = 100;
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    id theSegue = segue.destinationViewController;
+    [theSegue setValue:self.deviceid forKey:@"deviceid"];
 }
-*/
+
 
 @end

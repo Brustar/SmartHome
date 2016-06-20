@@ -19,8 +19,8 @@
 
 -(void) viewDidLoad
 {
-    self.devices=[NSArray arrayWithObjects:@"灯" , @"电视" , @"窗帘" , @"DVD" , @"机顶盒" , @"收音机" , @"摄像头" ,@"门禁" , @"空调"  , nil];
-    self.segues=[NSArray arrayWithObjects:@"Lighter" ,@"TV" ,@"Curtain" ,@"DVD" ,@"Netv",@"FM",@"Camera",@"Guard",@"Air",nil];
+    self.devices=[NSArray arrayWithObjects:@"灯", @"窗帘" , @"电视"  , @"DVD" , @"机顶盒" , @"收音机" ,@"门禁" ,  @"摄像头"  ,@"空调" , nil];
+    self.segues=[NSArray arrayWithObjects:@"Lighter" ,@"Curtain",@"TV"  ,@"DVD" ,@"Netv",@"FM",@"Guard",@"Camera",@"Air",nil];
     self.tableView.rowHeight=44;
     
     if (self.sceneid>0) {
@@ -67,6 +67,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    self.deviceid=[NSString stringWithFormat:@"%d",indexPath.row+1];
     NSString *segua=@"Lighter";
     if (indexPath.row<9) {
         segua=[self.segues objectAtIndex:indexPath.row];
@@ -114,9 +115,9 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-        id theSegue = segue.destinationViewController;
-        [theSegue setValue:self.sceneid forKey:@"sceneid"];
-
+    id theSegue = segue.destinationViewController;
+    [theSegue setValue:self.deviceid forKey:@"deviceid"];
+    [theSegue setValue:self.sceneid forKey:@"sceneid"];
 }
 
 @end

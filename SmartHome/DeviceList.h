@@ -13,5 +13,6 @@
 @property (strong, nonatomic) NSArray *devices;
 @property (strong, nonatomic) NSArray *segues;
 @property (nonatomic,weak) NSString *sceneid;
+@property (nonatomic,strong) NSString *deviceid;
 
 @end

@@ -9,10 +9,11 @@
 #import "DetailViewController.h"
 #import "Detail.h"
 #import "DetailList.h"
-@interface DetailViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface DetailViewController ()
+
 @property (nonatomic,strong) NSArray *detailArray;
 @property (nonatomic,strong) NSArray *titleArr;
-@property (nonatomic,strong) UITableView *tableView;
+
 @end
 
 @implementation DetailViewController
@@ -26,10 +27,10 @@
 //    return _detailArray;
 //    
 //}
--(void)setDeviceID:(NSInteger)deviceID
+-(void)setDeviceid:(NSString*)deviceID
 {
-    _deviceID = deviceID;
-    self.detailArray = [DetailList getDetailListWithID:deviceID];
+    _deviceid = deviceID;
+    self.detailArray = [DetailList getDetailListWithID:[deviceID intValue]];
 }
 
 - (void)viewDidLoad {
@@ -38,13 +39,13 @@
     self.navigationItem.title = @"详细信息";
     self.titleArr = @[@"设备",@"序列号",@"生产日期",@"保修截止日期",@"型号",@"购买价格",@"购买日期",@"生产厂商",@"保修电话",@"功率",@"输入电流",@"输入电压",@"社区推荐"];
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(40, 0, self.view.frame.size.width - 80, self.view.frame.size.height)];
+    //self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(40, 0, self.view.frame.size.width - 80, self.view.frame.size.height)];
     
     self.tableView.backgroundColor = [UIColor colorWithRed:170/255.0 green:170/255.0 blue:170/255.0 alpha:1];
     self.tableView.tableFooterView = [UIView new];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    [self.view addSubview:self.tableView];
+
     self.view.backgroundColor = self.tableView.backgroundColor;
     
 }

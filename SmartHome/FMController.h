@@ -14,7 +14,7 @@
 @property (nonatomic,weak) NSString *sceneid;
 @property (weak, nonatomic) IBOutlet UISlider *volume;
 @property (strong, nonatomic) IBeacon *beacon;
-
+@property (nonatomic,weak) NSString *deviceid;
 -(IBAction)save:(id)sender;
 
 @end

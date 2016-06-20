@@ -12,7 +12,7 @@
 @interface DVDController : UIViewController
 
 @property (nonatomic,weak) NSString *sceneid;
-
+@property (nonatomic,weak) NSString *deviceid;
 @property (strong, nonatomic) IBeacon *beacon;
 
 @end

@@ -12,7 +12,7 @@
 @interface TVController : UIViewController
 
 @property (nonatomic,weak) NSString *sceneid;
-
+@property (nonatomic,strong) NSString *deviceid;
 @property (strong, nonatomic) IBeacon *beacon;
 
 

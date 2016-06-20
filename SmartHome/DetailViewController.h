@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DetailViewController : UIViewController
-@property (nonatomic,assign) NSInteger deviceID;
+@interface DetailViewController : UITableViewController
+@property (nonatomic,weak) NSString* deviceid;
 @end

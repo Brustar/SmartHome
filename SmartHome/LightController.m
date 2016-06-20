@@ -62,7 +62,7 @@
 -(IBAction)save:(id)sender
 {
     Light *device=[[Light alloc] init];
-    [device setDeviceID:1];
+    [device setDeviceID:[self.deviceid intValue]];
     [device setIsPoweron: self.detailCell.power.isOn];
     NSArray *colors=[self changeUIColorToRGB:self.cell.colourView.backgroundColor];
     [device setColor:colors];
@@ -83,7 +83,7 @@
 -(IBAction)favorite:(id)sender
 {
     Light *device=[[Light alloc] init];
-    [device setDeviceID:1];
+    [device setDeviceID:[self.deviceid intValue]];
     [device setIsPoweron: self.detailCell.power.isOn];
     NSArray *colors=[self changeUIColorToRGB:self.cell.colourView.backgroundColor];
     [device setColor:colors];
@@ -196,7 +196,7 @@
     if(indexPath.row == 2)
     {
         DetailViewController *detailVC = [[DetailViewController alloc]init];
-        detailVC.deviceID = 1;
+        detailVC.deviceid = self.deviceid;
         [self.navigationController pushViewController:detailVC animated:YES];
     }
 }

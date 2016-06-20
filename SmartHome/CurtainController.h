@@ -13,5 +13,8 @@
 @interface CurtainController : UIViewController
 
 @property (strong, nonatomic) IBOutlet CurtainTableViewCell *cell;
+
 @property (nonatomic,weak) NSString *sceneid;
+@property (nonatomic,weak) NSString *deviceid;
+
 @end

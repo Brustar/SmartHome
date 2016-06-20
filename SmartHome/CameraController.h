@@ -12,7 +12,7 @@
 @interface CameraController : UIViewController
 
 @property (nonatomic,weak) NSString *sceneid;
-
+@property (nonatomic,weak) NSString *deviceid;
 @property (nonatomic,strong) RTSPPlayer *video;
 
 @property (nonatomic) float lastFrameTime;

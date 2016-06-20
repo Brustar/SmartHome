@@ -42,11 +42,11 @@
 -(IBAction)save:(id)sender
 {
     EntranceGuard *device=[[EntranceGuard alloc] init];
-    [device setDeviceID:7];
+    [device setDeviceID:[self.deviceid intValue]];
     [device setPoweron: self.switchView.isOn];
     
     Scene *scene=[[Scene alloc] init];
-    [scene setSceneID:2];
+    [scene setSceneID:[self.sceneid intValue]];
     [scene setRoomID:4];
     [scene setHouseID:3];
     [scene setPicID:66];
@@ -113,7 +113,7 @@
     if(indexPath.row == 1)
     {
         DetailViewController *detailVC = [[DetailViewController alloc]init];
-        detailVC.deviceID = 7;
+        detailVC.deviceid = @"7";
         [self.navigationController pushViewController:detailVC animated:YES];
     }
 }
@@ -133,13 +133,15 @@
 }
 
 
-/*
+
  #pragma mark - Navigation
  
  // In a storyboard-based application, you will often want to do a little preparation before navigation
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
  // Get the new view controller using [segue destinationViewController].
  // Pass the selected object to the new view controller.
+     id theSegue = segue.destinationViewController;
+     [theSegue setValue:self.deviceid forKey:@"deviceid"];
  }
- */
+
 @end

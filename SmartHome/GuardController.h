@@ -11,5 +11,6 @@
 @interface GuardController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,weak) NSString *sceneid;
+@property (nonatomic,weak) NSString *deviceid;
 
 @end

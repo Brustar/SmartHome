@@ -110,21 +110,14 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)detail:(id)sender {
-    DetailViewController *detailVC = [[DetailViewController alloc]init];
-    detailVC.deviceID = 3;
-
-    [self.navigationController pushViewController:detailVC animated:YES];
-}
-
 -(IBAction)save:(id)sender
 {
     TV *device=[[TV alloc] init];
-    [device setDeviceID:3];
+    [device setDeviceID:[self.deviceid intValue]];
     [device setVolume:self.volume.value*100];
     
     Scene *scene=[[Scene alloc] init];
-    [scene setSceneID:2];
+    [scene setSceneID:[self.sceneid intValue]];
     [scene setRoomID:4];
     [scene setHouseID:3];
     [scene setPicID:66];
@@ -135,15 +128,17 @@
     [[SceneManager defaultManager] addScenen:scene withName:@"" withPic:@""];
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    id theSegue = segue.destinationViewController;
+    [theSegue setValue:self.deviceid forKey:@"deviceid"];
 }
-*/
+
 
 - (IBAction)mute:(id)sender {
     self.volume.value=0.0;

@@ -46,11 +46,11 @@
 -(IBAction)save:(id)sender
 {
     Curtain *device=[[Curtain alloc] init];
-    [device setDeviceID:2];
+    [device setDeviceID:[self.deviceid intValue]];
     [device setOpenvalue:self.cell.slider.value*100];
     
     Scene *scene=[[Scene alloc] init];
-    [scene setSceneID:2];
+    [scene setSceneID:[self.sceneid intValue]];
     [scene setRoomID:4];
     [scene setHouseID:3];
     [scene setPicID:66];
@@ -103,7 +103,7 @@
     if(indexPath.row == 1)
     {
         DetailViewController *detailVC = [[DetailViewController alloc]init];
-        detailVC.deviceID = 2;
+        detailVC.deviceid = self.deviceid;
         [self.navigationController pushViewController:detailVC animated:YES];
     }
 }
