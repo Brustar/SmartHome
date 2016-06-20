@@ -7,7 +7,6 @@
 //
 
 #import "TVController.h"
-#import "DetailViewController.h"
 #import "TV.h"
 #import "SceneManager.h"
 #import "tvBrandView.h"

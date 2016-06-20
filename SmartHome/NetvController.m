@@ -8,7 +8,6 @@
 
 #import "NetvController.h"
 #import "Netv.h"
-#import "DetailViewController.h"
 #import "SceneManager.h"
 #import "DVCollectionViewCell.h"
 

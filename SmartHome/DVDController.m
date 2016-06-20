@@ -7,7 +7,6 @@
 //
 
 #import "DVDController.h"
-#import "DetailViewController.h"
 #import "DVD.h"
 #import "SceneManager.h"
 #import "DVCollectionViewCell.h"

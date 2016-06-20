@@ -7,7 +7,6 @@
 //
 
 #import "GuardController.h"
-#import "DetailViewController.h"
 #import "EntranceGuard.h"
 #import "Scene.h"
 #import "SceneManager.h"
@@ -112,9 +111,7 @@
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(indexPath.row == 1)
     {
-        DetailViewController *detailVC = [[DetailViewController alloc]init];
-        detailVC.deviceid = @"7";
-        [self.navigationController pushViewController:detailVC animated:YES];
+        [self performSegueWithIdentifier:@"detail" sender:self];
     }
 }
 

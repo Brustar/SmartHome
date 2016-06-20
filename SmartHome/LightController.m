@@ -7,8 +7,6 @@
 //
 
 #import "LightController.h"
-#import "DetailViewController.h"
-
 
 @interface LightController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *favButt;

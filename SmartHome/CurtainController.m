@@ -8,7 +8,7 @@
 
 #import "CurtainController.h"
 #import "CurtainTableViewCell.h"
-#import "DetailViewController.h"
+
 @interface CurtainController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentCurtain;
