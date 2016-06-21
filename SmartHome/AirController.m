@@ -9,9 +9,10 @@ static long kECAirSliderTag = 100;
 #import "AirController.h"
 #import "SceneManager.h"
 #import "Aircon.h"
+#import "RulerView.h"
 
-@interface AirController ()
-@property (weak, nonatomic) IBOutlet UIView *thermometerView;
+@interface AirController ()<RulerViewDatasource, RulerViewDelegate>
+@property (weak, nonatomic) IBOutlet RulerView *thermometerView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *modeViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *modeViewWidth;
 @property (weak, nonatomic) IBOutlet UILabel *showTemLabel;
@@ -36,130 +37,11 @@ static long kECAirSliderTag = 100;
             }
         }
     }
-
+    self.thermometerView.datasource = self;
+    self.thermometerView.delegate = self;
+    
+    [self.thermometerView updateCurrentValue:24];
 }
-
--(void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-    [self buildThermometer];
-    [self loadAirConditionHistory];
-    
-    
-}
-
-//设置空调温度刻度尺
--(void)buildThermometer
-{
-    for (UIView *sub in _thermometerView.subviews) {
-        [sub removeFromSuperview];
-    }
-    _thermometerView.backgroundColor = [UIColor clearColor];
-    CGFloat widthShort = 30;
-    CGFloat widthLong = 40;
-    CGFloat widthSlider = 46;
-    CGFloat lineHeight = 3;
-    CGFloat sliderHeight = 7;
-    
-    int spaceCount = 43 - 18;
-    CGFloat space = (_thermometerView.bounds.size.height - (spaceCount+1) * lineHeight) / spaceCount;
-    
-    CGFloat oriX = _thermometerView.bounds.size.width - widthShort;
-    CGFloat oriY = 0;
-    CGFloat lineWidth = widthShort;
-    NSString *lineImage = @"air_line_short";
-    for (int i = 43; i > 17; i--) {
-        if (i % 5 == 0) {
-            lineWidth = widthLong;
-            lineImage = @"air_line_long";
-        }
-        else {
-            lineWidth = widthShort;
-            lineImage = @"air_line_short";
-        }
-        oriX = _thermometerView.bounds.size.width - lineWidth;
-        UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(oriX, oriY, lineWidth, lineHeight)];
-        line.userInteractionEnabled = YES;
-        line.tag = i;
-        line.image = [UIImage imageNamed:lineImage];
-
-        [_thermometerView addSubview:line];
-        
-        oriY += line.bounds.size.height + space;
-    }
-    
-    UIView *view = [_thermometerView viewWithTag:30];
-    CGFloat sliderY = view.center.y - sliderHeight/2;
-    CGFloat sliderX = _thermometerView.bounds.size.width - widthSlider;
-    UIImageView *slider = [[UIImageView alloc] initWithFrame:CGRectMake(sliderX, sliderY, widthSlider, sliderHeight)];
-    slider.tag = kECAirSliderTag;
-    slider.image = [UIImage imageNamed:@"air_line_slider"];
-    [_thermometerView addSubview:slider];
-}
-//获取空调的状态
-- (void)loadAirConditionHistory {
-    unsigned int temperature = [self.showTemLabel.text intValue];
-   [self setTemperature:temperature];
-    
-}
-- (void)setTemperature:(unsigned int)temperature {
-    self.showTemLabel.text= [NSString stringWithFormat:@"%d℃", temperature];
-    
-    UIView *slider = [_thermometerView viewWithTag:kECAirSliderTag];
-    if (temperature >= 18 && temperature <= 43) {
-        CGFloat centerY = (43.0f-temperature)/(43.0f-18.0f) * _thermometerView.bounds.size.height;
-        slider.center = CGPointMake(slider.center.x, centerY);
-        
-        
-    }
-    else {
-        slider.hidden = YES;
-    }
-}
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
-    tap.numberOfTapsRequired = 1;
-    [self.thermometerView addGestureRecognizer:tap];
-    
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
-    [self.thermometerView addGestureRecognizer:pan];
-}
-- (void)tap:(UITapGestureRecognizer *)tapGesture {
-    UIView *slider = [_thermometerView viewWithTag:kECAirSliderTag];
-    slider.hidden = NO;
-    CGPoint point = [tapGesture locationInView:_thermometerView];
-    CGFloat centerY = point.y;
-    slider.center = CGPointMake(slider.center.x, centerY);
-    
-    [self updateShow:YES];
-}
-- (void)updateShow:(BOOL)isSetTemperatureRightNow {
-    UIView *slider = [_thermometerView viewWithTag:kECAirSliderTag];
-    CGFloat centerY = slider.center.y;
-    unsigned int curTemperature = (int)43 - (43 - 18) * (centerY / _thermometerView.bounds.size.height);
-    self.showTemLabel.text = [NSString stringWithFormat:@"%d℃", curTemperature];
-    [self save:nil];
-    
-}
-
-- (void)pan:(UIPanGestureRecognizer *)panGesture {
-    UIView *slider = [self.thermometerView viewWithTag:kECAirSliderTag];
-    slider.hidden = NO;
-    CGPoint point = [panGesture locationInView:self.thermometerView];
-    CGFloat centerY = point.y;
-    centerY = centerY < 0 ? 0 : centerY;
-    centerY = centerY > self.thermometerView.bounds.size.height ? self.thermometerView.bounds.size.height : centerY;
-    slider.center = CGPointMake(slider.center.x, centerY);
-    
-    BOOL isSetTemperatureRightNow = NO;
-    if (panGesture.state == UIGestureRecognizerStateEnded || panGesture.state == UIGestureRecognizerStateCancelled) {
-        isSetTemperatureRightNow = YES;
-    }
-    [self updateShow:isSetTemperatureRightNow];
-}
-
 
 -(IBAction)save:(id)sender
 {
@@ -195,6 +77,83 @@ static long kECAirSliderTag = 100;
     // Pass the selected object to the new view controller.
     id theSegue = segue.destinationViewController;
     [theSegue setValue:self.deviceid forKey:@"deviceid"];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.thermometerView reloadView];
+}
+
+#pragma mark - RulerViewDelegate
+
+- (void)rulerView:(RulerView *)rulerView didChangedCurrentValue:(CGFloat)currentValue {
+    NSInteger value = round(currentValue);
+    
+    NSString *valueString = [NSString stringWithFormat:@"%d ℃", (int)value];
+    
+    self.showTemLabel.text = valueString;
+}
+
+#pragma mark - RulerViewDatasrouce
+
+#pragma mark - Item setting
+
+- (RulerItemModel *)rulerViewRulerItemModel:(RulerView *)rulerView {
+    RulerItemModel *itemModel = [[RulerItemModel alloc] init];
+    
+    itemModel.itemLineColor = [UIColor blackColor];
+    itemModel.itemMaxLineWidth = 30;
+    itemModel.itemMinLineWidth = 20;
+    itemModel.itemMiddleLineWidth = 24;
+    itemModel.itemLineHeight = 1;
+    itemModel.itemNumberOfRows = 16;
+    itemModel.itemHeight = 60;
+    itemModel.itemWidth = itemModel.itemMaxLineWidth;
+    
+    return itemModel;
+}
+
+#pragma mark - Ruler setting
+
+- (CGFloat)rulerViewMaxValue:(RulerView *)rulerView {
+    return 32;
+}
+
+- (CGFloat)rulerViewMinValue:(RulerView *)rulerView {
+    return 16;
+}
+
+- (UIFont *)rulerViewTextLabelFont:(RulerView *)rulerView {
+    return [UIFont systemFontOfSize:11.f];
+}
+
+- (UIColor *)rulerViewTextLabelColor:(RulerView *)rulerView {
+    return [UIColor magentaColor];
+}
+
+- (CGFloat)rulerViewTextlabelLeftMargin:(RulerView *)rulerView {
+    return 4.f;
+}
+
+- (CGFloat)rulerViewItemScrollViewDecelerationRate:(RulerView *)rulerView {
+    return 0;
+}
+
+#pragma mark - Left tag setting
+
+- (CGFloat)rulerViewLeftTagLineWidth:(RulerView *)rulerView {
+    return 50;
+}
+
+- (CGFloat)rulerViewLeftTagLineHeight:(RulerView *)rulerView {
+    return 2;
+}
+
+- (UIColor *)rulerViewLeftTagLineColor:(RulerView *)rulerView {
+    return [UIColor redColor];
+}
+
+- (CGFloat)rulerViewLeftTagTopMargin:(RulerView *)rulerView {
+    return 300;
 }
 
 

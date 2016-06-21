@@ -5,7 +5,6 @@
 //  Created by Brustar on 16/6/13.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
-
 #import "FMController.h"
 #import "FMCollectionViewCell.h"
 #import "TVChannel.h"
@@ -60,7 +59,6 @@
     }
     
     [self setRuleForFMChannel];
-
 }
 
 -(void)setRuleForFMChannel
