@@ -62,7 +62,7 @@
 
 -(IBAction)changeButton:(id)sender
 {
-    self.currentButton=((UIButton *)sender).tag;
+    self.currentButton=(int)((UIButton *)sender).tag;
     [self.paramView reloadData];
 }
 
@@ -116,7 +116,7 @@
     if (oldCell.accessoryType == UITableViewCellAccessoryCheckmark) {
         oldCell.accessoryType = UITableViewCellAccessoryNone;
     }
-    self.currentIndex=indexPath.row;
+    self.currentIndex=(int)indexPath.row;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -138,7 +138,6 @@
 }
 
 #pragma mark - RulerViewDelegate
-
 - (void)rulerView:(RulerView *)rulerView didChangedCurrentValue:(CGFloat)currentValue {
     NSInteger value = round(currentValue);
     
@@ -147,10 +146,7 @@
     self.showTemLabel.text = valueString;
 }
 
-#pragma mark - RulerViewDatasrouce
-
 #pragma mark - Item setting
-
 - (RulerItemModel *)rulerViewRulerItemModel:(RulerView *)rulerView {
     RulerItemModel *itemModel = [[RulerItemModel alloc] init];
     
@@ -209,6 +205,4 @@
 - (CGFloat)rulerViewLeftTagTopMargin:(RulerView *)rulerView {
     return 300;
 }
-
-
 @end
