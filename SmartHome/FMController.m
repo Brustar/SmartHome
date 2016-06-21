@@ -124,6 +124,14 @@
     [[SceneManager defaultManager] addScenen:scene withName:@"" withPic:@""];
 }
 
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if([keyPath isEqualToString:@"volume"])
+    {
+        self.volume.value=[[self.beacon valueForKey:@"volume"] floatValue];
+    }
+}
+
 -(void)dealloc
 {
     [self.beacon removeObserver:self forKeyPath:@"volume" context:nil];
