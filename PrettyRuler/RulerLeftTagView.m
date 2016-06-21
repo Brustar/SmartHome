@@ -14,7 +14,7 @@
 @property (nonatomic) CGFloat tagLineHeight;
 @property (strong, nonatomic) UIColor *tagLineColor;
 
-@property (strong, nonatomic) UIImageView *arrowImageView;
+//@property (strong, nonatomic) UIImageView *arrowImageView;
 
 @end
 
@@ -50,7 +50,7 @@
     };
     
     CGContextStrokeLineSegments(ctx, topLinePoints, 2);
-    
+    /*
     if (!_arrowImageView) {
         _arrowImageView = [[UIImageView alloc] init];
         _arrowImageView.image = [UIImage imageNamed:@"arrow_img.png"];
@@ -60,6 +60,7 @@
     }
     
     _arrowImageView.frame = CGRectMake(0, _tagLineHeight, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds) - _tagLineHeight);
+     */
 }
 
 - (void)updateWithTagLineWidth:(CGFloat)tagLineWidth tagLineHeight:(CGFloat)tagLineHeight tagLineColor:(UIColor *)tagLineColor {

@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dLt-Sh-pEV">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dLt-Sh-pEV" userLabel="detail">
                                 <rect key="frame" x="30" y="505" width="540" height="45"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="详细信息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ghw-CC-Fm9">
@@ -44,7 +44,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gfi-oc-vSx">
-                                <rect key="frame" x="50" y="84" width="305" height="150"/>
+                                <rect key="frame" x="50" y="84" width="405" height="150"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="are-Ou-OXr">
                                         <rect key="frame" x="20" y="10" width="97" height="130"/>
@@ -60,69 +60,157 @@
                                     <constraint firstItem="are-Ou-OXr" firstAttribute="leading" secondItem="Gfi-oc-vSx" secondAttribute="leading" constant="20" id="rEx-Rh-wjw"/>
                                     <constraint firstAttribute="bottom" secondItem="are-Ou-OXr" secondAttribute="bottom" constant="10" id="uke-2o-vF4"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fB6-RG-7NF">
-                                <rect key="frame" x="90" y="314" width="200" height="200"/>
+                                <rect key="frame" x="50" y="254" width="400" height="400"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="Nwq-kh-oRp"/>
-                                    <constraint firstAttribute="width" constant="200" id="Sz0-as-yYf"/>
+                                    <constraint firstAttribute="height" constant="400" id="Nwq-kh-oRp"/>
+                                    <constraint firstAttribute="width" constant="400" id="Sz0-as-yYf"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="soL-aj-mPJ">
-                                <rect key="frame" x="395" y="319" width="121" height="121"/>
+                                <rect key="frame" x="295" y="254" width="150" height="150"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nVn-KX-ScM">
-                                        <rect key="frame" x="77" y="21" width="30" height="30"/>
-                                        <state key="normal" title="风向"/>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPa-gN-f2a">
-                                        <rect key="frame" x="77" y="83" width="30" height="30"/>
-                                        <state key="normal" title="模式"/>
+                                        <rect key="frame" x="97" y="108" width="50" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="qrX-2H-cwj"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="模式">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                <integer key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JZj-Me-Ekk">
-                                        <rect key="frame" x="22" y="83" width="30" height="30"/>
-                                        <state key="normal" title="定时"/>
-                                    </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="owQ-SK-BR5" customClass="RulerView">
-                                        <rect key="frame" x="93" y="-245" width="100" height="421"/>
+                                        <rect key="frame" x="22" y="108" width="50" height="34"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="100" id="I6J-hh-8ss"/>
+                                            <constraint firstAttribute="width" constant="50" id="F6J-Vg-UMY"/>
                                         </constraints>
-                                    </view>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="定时">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                <integer key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LDt-w6-Ydg">
-                                        <rect key="frame" x="22" y="21" width="30" height="30"/>
-                                        <state key="normal" title="风速"/>
+                                        <rect key="frame" x="22" y="42" width="50" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="2le-Vs-kEt"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="风速">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                <integer key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nVn-KX-ScM">
+                                        <rect key="frame" x="97" y="42" width="50" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="b1x-DQ-eA8"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="风向">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                <integer key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="owQ-SK-BR5" firstAttribute="top" secondItem="soL-aj-mPJ" secondAttribute="top" constant="-245" id="3bP-z8-ped"/>
                                     <constraint firstItem="JZj-Me-Ekk" firstAttribute="top" secondItem="LDt-w6-Ydg" secondAttribute="bottom" constant="32" id="9Ug-5r-CpP"/>
-                                    <constraint firstItem="owQ-SK-BR5" firstAttribute="leading" secondItem="JZj-Me-Ekk" secondAttribute="trailing" constant="41" id="CsV-Wb-qyb"/>
+                                    <constraint firstItem="LDt-w6-Ydg" firstAttribute="leading" secondItem="soL-aj-mPJ" secondAttribute="leading" constant="22" id="E0p-iZ-cdU"/>
                                     <constraint firstItem="JZj-Me-Ekk" firstAttribute="leading" secondItem="LDt-w6-Ydg" secondAttribute="leading" id="TQ0-hV-gfk"/>
                                     <constraint firstItem="JZj-Me-Ekk" firstAttribute="bottom" secondItem="soL-aj-mPJ" secondAttribute="bottomMargin" id="bCu-qp-0b2"/>
                                     <constraint firstItem="JZj-Me-Ekk" firstAttribute="baseline" secondItem="HPa-gN-f2a" secondAttribute="baseline" id="cTo-lF-Hqr"/>
                                     <constraint firstItem="HPa-gN-f2a" firstAttribute="leading" secondItem="JZj-Me-Ekk" secondAttribute="trailing" constant="25" id="ef0-5A-mjc"/>
-                                    <constraint firstAttribute="trailing" secondItem="owQ-SK-BR5" secondAttribute="trailing" constant="-72" id="lvD-lL-8pu"/>
-                                    <constraint firstAttribute="bottom" secondItem="owQ-SK-BR5" secondAttribute="bottom" constant="-55" id="xeq-Sb-Jgx"/>
+                                    <constraint firstAttribute="width" constant="150" id="fJi-EX-lmQ"/>
+                                    <constraint firstItem="LDt-w6-Ydg" firstAttribute="baseline" secondItem="nVn-KX-ScM" secondAttribute="baseline" id="scD-La-I6K"/>
+                                    <constraint firstItem="HPa-gN-f2a" firstAttribute="leading" secondItem="nVn-KX-ScM" secondAttribute="leading" id="uUL-XM-Qxl"/>
+                                    <constraint firstAttribute="height" constant="150" id="yOw-9f-H8g"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="owQ-SK-BR5" customClass="RulerView">
+                                <rect key="frame" x="490" y="74" width="100" height="421"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="q5G-KG-rhJ"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.84653141359999995" green="0.84653141359999995" blue="0.84653141359999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="dLt-Sh-pEV" secondAttribute="trailing" constant="30" id="4gH-h1-73V"/>
-                            <constraint firstAttribute="trailing" secondItem="Gfi-oc-vSx" secondAttribute="trailing" constant="245" id="62K-JO-Fhm"/>
-                            <constraint firstItem="soL-aj-mPJ" firstAttribute="leading" secondItem="Qay-Yr-5Kw" secondAttribute="leading" constant="395" id="7Mg-1l-X4o"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="soL-aj-mPJ" secondAttribute="trailing" constant="64" id="EOP-E4-nhV"/>
-                            <constraint firstItem="fB6-RG-7NF" firstAttribute="top" secondItem="Gfi-oc-vSx" secondAttribute="bottom" constant="80" id="IJX-Ni-htz"/>
+                            <constraint firstItem="soL-aj-mPJ" firstAttribute="leading" secondItem="owQ-SK-BR5" secondAttribute="trailing" constant="10" id="51Z-2w-7Ib"/>
+                            <constraint firstItem="owQ-SK-BR5" firstAttribute="leading" secondItem="soL-aj-mPJ" secondAttribute="trailing" constant="45" id="5VZ-vv-cMV"/>
+                            <constraint firstAttribute="trailing" secondItem="Gfi-oc-vSx" secondAttribute="trailing" constant="145" id="62K-JO-Fhm"/>
+                            <constraint firstItem="soL-aj-mPJ" firstAttribute="leading" secondItem="Qay-Yr-5Kw" secondAttribute="leading" constant="300" id="7Mg-1l-X4o"/>
+                            <constraint firstItem="dLt-Sh-pEV" firstAttribute="top" secondItem="owQ-SK-BR5" secondAttribute="bottom" constant="10" id="7vS-FN-I8T"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="soL-aj-mPJ" secondAttribute="trailing" constant="145" id="EOP-E4-nhV"/>
+                            <constraint firstItem="soL-aj-mPJ" firstAttribute="top" secondItem="Gfi-oc-vSx" secondAttribute="bottom" constant="20" id="Guc-sV-5wJ"/>
+                            <constraint firstItem="fB6-RG-7NF" firstAttribute="top" secondItem="Gfi-oc-vSx" secondAttribute="bottom" constant="20" id="IJX-Ni-htz"/>
+                            <constraint firstItem="owQ-SK-BR5" firstAttribute="top" secondItem="dKl-9L-LgW" secondAttribute="bottom" constant="10" id="KpN-LM-Rdb"/>
                             <constraint firstItem="Gfi-oc-vSx" firstAttribute="leading" secondItem="Qay-Yr-5Kw" secondAttribute="leading" constant="50" id="VKQ-cj-9Yy"/>
-                            <constraint firstItem="soL-aj-mPJ" firstAttribute="top" secondItem="dKl-9L-LgW" secondAttribute="bottom" constant="255" id="YqT-Td-Gwo"/>
+                            <constraint firstItem="fB6-RG-7NF" firstAttribute="leading" secondItem="Qay-Yr-5Kw" secondAttribute="leading" constant="50" id="Vbl-cT-8Li"/>
+                            <constraint firstItem="soL-aj-mPJ" firstAttribute="top" secondItem="dKl-9L-LgW" secondAttribute="bottom" constant="200" id="YqT-Td-Gwo"/>
+                            <constraint firstItem="pHJ-0u-BZX" firstAttribute="top" secondItem="owQ-SK-BR5" secondAttribute="bottom" constant="10" id="Zpj-8j-45y"/>
+                            <constraint firstAttribute="trailing" secondItem="owQ-SK-BR5" secondAttribute="trailing" constant="10" id="af9-HZ-R1G"/>
                             <constraint firstItem="pHJ-0u-BZX" firstAttribute="top" secondItem="dLt-Sh-pEV" secondAttribute="bottom" constant="50" id="dvJ-D9-8xA"/>
                             <constraint firstItem="Gfi-oc-vSx" firstAttribute="top" secondItem="dKl-9L-LgW" secondAttribute="bottom" constant="20" id="eZe-UY-Zbd"/>
-                            <constraint firstItem="dLt-Sh-pEV" firstAttribute="top" secondItem="soL-aj-mPJ" secondAttribute="bottom" constant="65" id="gzf-Wv-MHI"/>
-                            <constraint firstItem="fB6-RG-7NF" firstAttribute="leading" secondItem="Qay-Yr-5Kw" secondAttribute="leadingMargin" constant="70" id="kqC-Xy-Irn"/>
+                            <constraint firstItem="dLt-Sh-pEV" firstAttribute="top" secondItem="soL-aj-mPJ" secondAttribute="bottom" constant="100" id="gzf-Wv-MHI"/>
+                            <constraint firstItem="fB6-RG-7NF" firstAttribute="leading" secondItem="Qay-Yr-5Kw" secondAttribute="leadingMargin" constant="50" id="kqC-Xy-Irn"/>
                             <constraint firstItem="dLt-Sh-pEV" firstAttribute="leading" secondItem="Qay-Yr-5Kw" secondAttribute="leading" constant="30" id="vJC-VW-3v6"/>
+                            <constraint firstItem="owQ-SK-BR5" firstAttribute="leading" secondItem="soL-aj-mPJ" secondAttribute="leading" constant="-10" id="zVH-no-Eff"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="kqC-Xy-Irn"/>
+                                <exclude reference="51Z-2w-7Ib"/>
+                                <exclude reference="7Mg-1l-X4o"/>
+                                <exclude reference="EOP-E4-nhV"/>
+                                <exclude reference="YqT-Td-Gwo"/>
+                                <exclude reference="zVH-no-Eff"/>
+                                <exclude reference="gzf-Wv-MHI"/>
+                                <exclude reference="Zpj-8j-45y"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="showTemLabel" destination="are-Ou-OXr" id="ryd-SC-APU"/>
