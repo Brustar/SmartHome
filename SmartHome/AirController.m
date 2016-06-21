@@ -5,7 +5,7 @@
 //  Created by Brustar on 16/6/17.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
-static long kECAirSliderTag = 100;
+
 #import "AirController.h"
 #import "SceneManager.h"
 #import "Aircon.h"
@@ -13,8 +13,6 @@ static long kECAirSliderTag = 100;
 
 @interface AirController ()<RulerViewDatasource, RulerViewDelegate>
 @property (weak, nonatomic) IBOutlet RulerView *thermometerView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *modeViewHeight;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *modeViewWidth;
 @property (weak, nonatomic) IBOutlet UILabel *showTemLabel;
 
 @end
@@ -23,8 +21,6 @@ static long kECAirSliderTag = 100;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.modeViewWidth.constant = 320;
-    self.modeViewHeight.constant = self.modeViewWidth.constant;
     
     if ([self.sceneid intValue]>0) {
         
