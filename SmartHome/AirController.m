@@ -11,9 +11,10 @@
 #import "Aircon.h"
 #import "RulerView.h"
 
-@interface AirController ()<RulerViewDatasource, RulerViewDelegate>
+@interface AirController ()<RulerViewDatasource, RulerViewDelegate,UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet RulerView *thermometerView;
 @property (weak, nonatomic) IBOutlet UILabel *showTemLabel;
+@property (weak, nonatomic) IBOutlet UITableView *paramView;
 
 @end
 
@@ -21,7 +22,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.params=@[@[@"制冷",@"制热",@"抽湿",@"自动"],@[@"高风",@"中风",@"低风"],@[@"向上",@"向下"],@[@"0.5H",@"1H",@"2H",@"3H"]];
+    self.paramView.scrollEnabled=NO;
     if ([self.sceneid intValue]>0) {
         
         Scene *scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
@@ -58,15 +60,71 @@
     [[SceneManager defaultManager] addScenen:scene withName:@"" withPic:@""];
 }
 
+-(IBAction)changeButton:(id)sender
+{
+    self.currentButton=((UIButton *)sender).tag;
+    [self.paramView reloadData];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - tableView
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.params[self.currentButton] count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+    }
+    cell.textLabel.text= [self.params[self.currentButton] objectAtIndex:indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
+- (UITableViewCellAccessoryType)tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row==self.currentIndex){
+        return UITableViewCellAccessoryCheckmark;
+    }
+    else{
+        return UITableViewCellAccessoryNone;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    if(indexPath.row==self.currentIndex){
+        return;
+    }
+    NSIndexPath *oldIndexPath = [NSIndexPath indexPathForRow:self.currentIndex
+                                                   inSection:0];
+    UITableViewCell *newCell = [tableView cellForRowAtIndexPath:indexPath];
+    if (newCell.accessoryType == UITableViewCellAccessoryNone) {
+        newCell.accessoryType = UITableViewCellAccessoryCheckmark;
+
+    }
+    UITableViewCell *oldCell = [tableView cellForRowAtIndexPath:oldIndexPath];
+    if (oldCell.accessoryType == UITableViewCellAccessoryCheckmark) {
+        oldCell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    self.currentIndex=indexPath.row;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50;
+}
 
 #pragma mark - Navigation
-
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].

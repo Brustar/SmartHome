@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Air Controller-->
+        <!--Data Source-->
         <scene sceneID="93P-EO-Ts9">
             <objects>
                 <viewController id="4CE-Kq-vrI" customClass="AirController" sceneMemberID="viewController">
@@ -42,6 +42,11 @@
                                     <constraint firstItem="Ghw-CC-Fm9" firstAttribute="centerY" secondItem="dLt-Sh-pEV" secondAttribute="centerY" id="mHo-i2-64o"/>
                                     <constraint firstItem="Ghw-CC-Fm9" firstAttribute="leading" secondItem="dLt-Sh-pEV" secondAttribute="leading" constant="5" id="wKk-Hk-oDe"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gfi-oc-vSx">
                                 <rect key="frame" x="50" y="84" width="405" height="150"/>
@@ -66,11 +71,11 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fB6-RG-7NF">
-                                <rect key="frame" x="50" y="254" width="400" height="400"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fB6-RG-7NF" customClass="UITableView">
+                                <rect key="frame" x="50" y="254" width="400" height="200"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="400" id="Nwq-kh-oRp"/>
+                                    <constraint firstAttribute="height" constant="200" id="Nwq-kh-oRp"/>
                                     <constraint firstAttribute="width" constant="400" id="Sz0-as-yYf"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -78,6 +83,10 @@
                                         <integer key="value" value="20"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="dataSource" destination="4CE-Kq-vrI" id="e9b-Em-G5d"/>
+                                    <outlet property="delegate" destination="4CE-Kq-vrI" id="Jeh-dG-sgL"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="soL-aj-mPJ">
                                 <rect key="frame" x="295" y="254" width="150" height="150"/>
@@ -99,8 +108,11 @@
                                                 <integer key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="changeButton:" destination="4CE-Kq-vrI" eventType="touchUpInside" id="DH7-xM-M5V"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JZj-Me-Ekk">
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JZj-Me-Ekk">
                                         <rect key="frame" x="22" y="108" width="50" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="F6J-Vg-UMY"/>
@@ -117,8 +129,11 @@
                                                 <integer key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="changeButton:" destination="4CE-Kq-vrI" eventType="touchUpInside" id="8OI-So-c6E"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LDt-w6-Ydg">
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LDt-w6-Ydg">
                                         <rect key="frame" x="22" y="42" width="50" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="2le-Vs-kEt"/>
@@ -135,8 +150,11 @@
                                                 <integer key="value" value="10"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="changeButton:" destination="4CE-Kq-vrI" eventType="touchUpInside" id="Qxo-H1-mMQ"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nVn-KX-ScM">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nVn-KX-ScM">
                                         <rect key="frame" x="97" y="42" width="50" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="b1x-DQ-eA8"/>
@@ -153,6 +171,9 @@
                                                 <integer key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="changeButton:" destination="4CE-Kq-vrI" eventType="touchUpInside" id="etd-Ra-HhN"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -168,8 +189,8 @@
                                     <constraint firstAttribute="height" constant="150" id="yOw-9f-H8g"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="owQ-SK-BR5" customClass="RulerView">
-                                <rect key="frame" x="490" y="74" width="100" height="421"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="owQ-SK-BR5" customClass="RulerView">
+                                <rect key="frame" x="490" y="72" width="100" height="421"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="q5G-KG-rhJ"/>
                                 </constraints>
@@ -213,6 +234,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="paramView" destination="fB6-RG-7NF" id="dUK-St-A1r"/>
                         <outlet property="showTemLabel" destination="are-Ou-OXr" id="ryd-SC-APU"/>
                         <outlet property="thermometerView" destination="owQ-SK-BR5" id="ycw-N1-kEH"/>
                     </connections>

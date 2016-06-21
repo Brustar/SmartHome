@@ -12,5 +12,8 @@
 
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic,weak) NSString *deviceid;
+@property (nonatomic,strong) NSArray *params;
+@property (nonatomic) int currentIndex;
+@property (nonatomic) int currentButton;
 
 @end

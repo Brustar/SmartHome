@@ -17,7 +17,6 @@
 @property (nonatomic,strong) NSArray *allFavouriteChannels;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-
 @property (weak, nonatomic) IBOutlet UILabel *numberOfChannel;
 @property (weak, nonatomic) IBOutlet UIView *fmView;
 
