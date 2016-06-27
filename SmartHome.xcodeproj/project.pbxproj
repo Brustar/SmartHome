@@ -85,6 +85,7 @@
 		0FC0FFDD1CF57E58000F71D5 /* TouchImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC0FFDC1CF57E58000F71D5 /* TouchImage.m */; };
 		0FC7FDC11CED6CC700F91BDF /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC7FDC01CED6CC700F91BDF /* libsqlite3.tbd */; };
 		0FC7FDCB1CED9D5A00F91BDF /* DeviceList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC7FDCA1CED9D5A00F91BDF /* DeviceList.m */; };
+		0FCAA40C1D1945BB00C1E58C /* BgMusicController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCAA40B1D1945BB00C1E58C /* BgMusicController.m */; };
 		0FCF43311CE09039009BFDD9 /* IbeaconManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCF43301CE09039009BFDD9 /* IbeaconManager.m */; };
 		0FCFB3801CF28F6F00B37DD3 /* Light.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFB37F1CF28F6F00B37DD3 /* Light.m */; };
 		0FCFB3831CF28FCB00B37DD3 /* Curtain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFB3821CF28FCB00B37DD3 /* Curtain.m */; };
@@ -96,11 +97,11 @@
 		0FCFB3951CF2943100B37DD3 /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFB3941CF2943100B37DD3 /* Camera.m */; };
 		0FCFB3981CF2947500B37DD3 /* EntranceGuard.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFB3971CF2947500B37DD3 /* EntranceGuard.m */; };
 		0FCFB39B1CF2950D00B37DD3 /* BgMusic.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFB39A1CF2950D00B37DD3 /* BgMusic.m */; };
+		0FEE12761D20C53400811947 /* TXHRulerScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEE12721D20C53400811947 /* TXHRulerScrollView.m */; };
+		0FEE12771D20C53400811947 /* TXHRrettyRuler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEE12741D20C53400811947 /* TXHRrettyRuler.m */; };
 		0FF410DA1CDAE67100C7F4A1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410D91CDAE67100C7F4A1 /* CoreLocation.framework */; };
 		0FF410DC1CDAF76300C7F4A1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410DB1CDAF76300C7F4A1 /* CoreBluetooth.framework */; };
 		0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7B0B51D1380BF003C2D52 /* AirController.m */; };
-		0FF7B0C11D13886E003C2D52 /* TXHRrettyRuler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7B0BD1D13886E003C2D52 /* TXHRrettyRuler.m */; };
-		0FF7B0C21D13886E003C2D52 /* TXHRulerScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7B0BE1D13886E003C2D52 /* TXHRulerScrollView.m */; };
 		F361579D9B9637C261531C8C /* libPods-SmartHome.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B2DBF5C92F57E3B7AD6AA3 /* libPods-SmartHome.a */; };
 		F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB411D00029900AB04BE /* DetailViewController.m */; };
 		F60FDB461D003FD500AB04BE /* CurtainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB441D003FD500AB04BE /* CurtainTableViewCell.m */; };
@@ -373,6 +374,8 @@
 		0FC7FDC01CED6CC700F91BDF /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		0FC7FDC91CED9D5A00F91BDF /* DeviceList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceList.h; sourceTree = "<group>"; };
 		0FC7FDCA1CED9D5A00F91BDF /* DeviceList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceList.m; sourceTree = "<group>"; };
+		0FCAA40A1D1945BB00C1E58C /* BgMusicController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BgMusicController.h; sourceTree = "<group>"; };
+		0FCAA40B1D1945BB00C1E58C /* BgMusicController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BgMusicController.m; sourceTree = "<group>"; };
 		0FCF432F1CE09039009BFDD9 /* IbeaconManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IbeaconManager.h; sourceTree = "<group>"; };
 		0FCF43301CE09039009BFDD9 /* IbeaconManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IbeaconManager.m; sourceTree = "<group>"; };
 		0FCFB37E1CF28F6F00B37DD3 /* Light.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Light.h; sourceTree = "<group>"; };
@@ -397,14 +400,14 @@
 		0FCFB39A1CF2950D00B37DD3 /* BgMusic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BgMusic.m; sourceTree = "<group>"; };
 		0FCFB39F1CF2D38800B37DD3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		0FCFB3A11CF2D39300B37DD3 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		0FEE12721D20C53400811947 /* TXHRulerScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TXHRulerScrollView.m; path = PrettyRuler/TXHRulerScrollView.m; sourceTree = SOURCE_ROOT; };
+		0FEE12731D20C53400811947 /* TXHRulerScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TXHRulerScrollView.h; path = PrettyRuler/TXHRulerScrollView.h; sourceTree = SOURCE_ROOT; };
+		0FEE12741D20C53400811947 /* TXHRrettyRuler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TXHRrettyRuler.m; path = PrettyRuler/TXHRrettyRuler.m; sourceTree = SOURCE_ROOT; };
+		0FEE12751D20C53400811947 /* TXHRrettyRuler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TXHRrettyRuler.h; path = PrettyRuler/TXHRrettyRuler.h; sourceTree = SOURCE_ROOT; };
 		0FF410D91CDAE67100C7F4A1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0FF410DB1CDAF76300C7F4A1 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		0FF7B0B41D1380BF003C2D52 /* AirController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirController.h; sourceTree = "<group>"; };
 		0FF7B0B51D1380BF003C2D52 /* AirController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirController.m; sourceTree = "<group>"; };
-		0FF7B0BD1D13886E003C2D52 /* TXHRrettyRuler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TXHRrettyRuler.m; path = PrettyRuler/TXHRrettyRuler.m; sourceTree = SOURCE_ROOT; };
-		0FF7B0BE1D13886E003C2D52 /* TXHRulerScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TXHRulerScrollView.m; path = PrettyRuler/TXHRulerScrollView.m; sourceTree = SOURCE_ROOT; };
-		0FF7B0BF1D13886E003C2D52 /* TXHRrettyRuler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TXHRrettyRuler.h; path = PrettyRuler/TXHRrettyRuler.h; sourceTree = SOURCE_ROOT; };
-		0FF7B0C01D13886E003C2D52 /* TXHRulerScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TXHRulerScrollView.h; path = PrettyRuler/TXHRulerScrollView.h; sourceTree = SOURCE_ROOT; };
 		9B45FF693457BA21BA43CE05 /* Pods-SmartHome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.debug.xcconfig"; sourceTree = "<group>"; };
 		A4B2DBF5C92F57E3B7AD6AA3 /* libPods-SmartHome.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SmartHome.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE54136C9EEF8F51E8FBEEDE /* Pods-SmartHome.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.release.xcconfig"; sourceTree = "<group>"; };
@@ -616,6 +619,8 @@
 				0F3CCF3A1D0F97B70058A320 /* CameraController.m */,
 				0FF7B0B41D1380BF003C2D52 /* AirController.h */,
 				0FF7B0B51D1380BF003C2D52 /* AirController.m */,
+				0FCAA40A1D1945BB00C1E58C /* BgMusicController.h */,
+				0FCAA40B1D1945BB00C1E58C /* BgMusicController.m */,
 			);
 			path = SmartHome;
 			sourceTree = "<group>";
@@ -942,6 +947,10 @@
 		F63AE02E1D11540F00BE17DC /* PrettyRuler */ = {
 			isa = PBXGroup;
 			children = (
+				0FEE12721D20C53400811947 /* TXHRulerScrollView.m */,
+				0FEE12731D20C53400811947 /* TXHRulerScrollView.h */,
+				0FEE12741D20C53400811947 /* TXHRrettyRuler.m */,
+				0FEE12751D20C53400811947 /* TXHRrettyRuler.h */,
 				0F96A15C1D17F37C00E1594F /* RulerItem.h */,
 				0F96A15D1D17F37C00E1594F /* RulerItem.m */,
 				0F96A15E1D17F37C00E1594F /* RulerItemModel.h */,
@@ -950,10 +959,6 @@
 				0F96A1611D17F37C00E1594F /* RulerLeftTagView.m */,
 				0F96A1621D17F37C00E1594F /* RulerView.h */,
 				0F96A1631D17F37C00E1594F /* RulerView.m */,
-				0FF7B0BD1D13886E003C2D52 /* TXHRrettyRuler.m */,
-				0FF7B0BE1D13886E003C2D52 /* TXHRulerScrollView.m */,
-				0FF7B0BF1D13886E003C2D52 /* TXHRrettyRuler.h */,
-				0FF7B0C01D13886E003C2D52 /* TXHRulerScrollView.h */,
 			);
 			name = PrettyRuler;
 			path = PrettyRulerClass;
@@ -987,12 +992,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0F032D771CC9B12700D1920D /* Build configuration list for PBXNativeTarget "SmartHome" */;
 			buildPhases = (
+				7B4EC63A298C6E6A66AD1643 /* 📦 Check Pods Manifest.lock */,
 				6984B7368FBF635163F6D0CF /* [CP] Check Pods Manifest.lock */,
 				0F032D401CC9B12700D1920D /* Sources */,
 				0F032D411CC9B12700D1920D /* Frameworks */,
 				0F032D421CC9B12700D1920D /* Resources */,
 				9C97EFC5A754784A9B85D9D0 /* [CP] Embed Pods Frameworks */,
 				901B98770BA9652E39727DC8 /* [CP] Copy Pods Resources */,
+				96D783ECF2FC5954ED57287C /* 📦 Embed Pods Frameworks */,
+				4ABB1A0B0312B56BE2774A85 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1125,6 +1133,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		4ABB1A0B0312B56BE2774A85 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		6984B7368FBF635163F6D0CF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1133,6 +1156,21 @@
 			inputPaths = (
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		7B4EC63A298C6E6A66AD1643 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1153,6 +1191,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		96D783ECF2FC5954ED57287C /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9C97EFC5A754784A9B85D9D0 /* [CP] Embed Pods Frameworks */ = {
@@ -1179,20 +1232,22 @@
 			files = (
 				0FAF74BF1CEEA17C00432713 /* HRBrightnessCursor.m in Sources */,
 				0FAF98A31CE40F3C009BDBB5 /* QRCameraSwitchButton.m in Sources */,
+				0FEE12761D20C53400811947 /* TXHRulerScrollView.m in Sources */,
 				0FCFB38F1CF293B300B37DD3 /* Radio.m in Sources */,
 				0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */,
+				0FCAA40C1D1945BB00C1E58C /* BgMusicController.m in Sources */,
 				0FAF74C51CEEA17C00432713 /* HRHSVColorUtil.m in Sources */,
 				0FAF98A41CE40F3C009BDBB5 /* QRCodeReader.m in Sources */,
 				0F2D35BC1D114E7000C46DE5 /* AudioStreamer.m in Sources */,
 				F60FDB461D003FD500AB04BE /* CurtainTableViewCell.m in Sources */,
 				0FABF91F1D06AA4E000892D8 /* DVDController.m in Sources */,
+				0FEE12771D20C53400811947 /* TXHRrettyRuler.m in Sources */,
 				0F43B1031CF4055300F3D9F0 /* IATConfig.m in Sources */,
 				0F25178A1CFD8C6500491A6C /* PackManager.m in Sources */,
 				F6B91F721D100F1400592FB0 /* TVChannel.m in Sources */,
 				0F180FC31D0E4C7400392F4C /* NetvController.m in Sources */,
 				0FAF74C11CEEA17C00432713 /* HRColorCursor.m in Sources */,
 				0F91AA171CDC798700094C25 /* PrintObject.m in Sources */,
-				0FF7B0C11D13886E003C2D52 /* TXHRrettyRuler.m in Sources */,
 				0F3CCF3B1D0F97B70058A320 /* CameraController.m in Sources */,
 				0FC0FFDA1CF577C0000F71D5 /* RealScene.m in Sources */,
 				0FAF74C41CEEA17C00432713 /* HRColorPickerView.m in Sources */,
@@ -1205,7 +1260,6 @@
 				F6359B001CFFC4DC0035EB31 /* ColourTableViewCell.m in Sources */,
 				0FAF8FF21CE18CE2000557BD /* IBeaconController.m in Sources */,
 				0FAF74C61CEEA17C00432713 /* UIImage+CoreGraphics.m in Sources */,
-				0FF7B0C21D13886E003C2D52 /* TXHRulerScrollView.m in Sources */,
 				0F180FC91D0E4E6500392F4C /* GuardController.m in Sources */,
 				0FAF98A71CE40F3C009BDBB5 /* QRToggleTorchButton.m in Sources */,
 				0F25FE5E1CEB0C0A0063E834 /* SceneList.m in Sources */,

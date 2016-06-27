@@ -163,7 +163,6 @@
 }
 
 #pragma mark - Ruler setting
-
 - (CGFloat)rulerViewMaxValue:(RulerView *)rulerView {
     return 32;
 }
@@ -189,7 +188,6 @@
 }
 
 #pragma mark - Left tag setting
-
 - (CGFloat)rulerViewLeftTagLineWidth:(RulerView *)rulerView {
     return 50;
 }
