@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+enum AIR_TARGET
+{
+    mode,
+    direction,
+    level,
+    timing
+};
+
 @interface AirController : UIViewController
 
 @property (nonatomic,weak) NSString *sceneid;
@@ -15,5 +23,10 @@
 @property (nonatomic,strong) NSArray *params;
 @property (nonatomic) int currentIndex;
 @property (nonatomic) int currentButton;
+
+@property (nonatomic) int currentMode;
+@property (nonatomic) int currentLevel;
+@property (nonatomic) int currentDirection;
+@property (nonatomic) int currentTiming;
 
 @end
