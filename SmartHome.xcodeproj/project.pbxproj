@@ -79,6 +79,8 @@
 		0FB205ED1CDC3D3700B5E87E /* AudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB205EC1CDC3D3700B5E87E /* AudioManager.m */; };
 		0FB42E1E1CF681A7007DE64F /* planeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB42E1D1CF681A7007DE64F /* planeScene.m */; };
 		0FB42E231CF6F9E8007DE64F /* SocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB42E221CF6F9E8007DE64F /* SocketManager.m */; };
+		0FBEFE271D24A5020084244F /* netconfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0FBEFE261D24A5020084244F /* netconfig.plist */; };
+		0FBEFE2A1D24F0C10084244F /* DialogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FBEFE291D24F0C10084244F /* DialogManager.m */; };
 		0FC0FFD21CF539BC000F71D5 /* realScene.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0FC0FFD11CF539BC000F71D5 /* realScene.plist */; };
 		0FC0FFD71CF553AD000F71D5 /* planeScene.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0FC0FFD61CF553AD000F71D5 /* planeScene.plist */; };
 		0FC0FFDA1CF577C0000F71D5 /* RealScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC0FFD91CF577C0000F71D5 /* RealScene.m */; };
@@ -366,6 +368,10 @@
 		0FB42E1D1CF681A7007DE64F /* planeScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = planeScene.m; sourceTree = "<group>"; };
 		0FB42E211CF6F9E8007DE64F /* SocketManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketManager.h; sourceTree = "<group>"; };
 		0FB42E221CF6F9E8007DE64F /* SocketManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketManager.m; sourceTree = "<group>"; };
+		0FBEFE261D24A5020084244F /* netconfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = netconfig.plist; sourceTree = "<group>"; };
+		0FBEFE281D24F0C10084244F /* DialogManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogManager.h; sourceTree = "<group>"; };
+		0FBEFE291D24F0C10084244F /* DialogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogManager.m; sourceTree = "<group>"; };
+		0FBEFE2B1D24F3100084244F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		0FC0FFD11CF539BC000F71D5 /* realScene.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = realScene.plist; sourceTree = "<group>"; };
 		0FC0FFD61CF553AD000F71D5 /* planeScene.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = planeScene.plist; sourceTree = "<group>"; };
 		0FC0FFD81CF577C0000F71D5 /* RealScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealScene.h; sourceTree = "<group>"; };
@@ -554,7 +560,6 @@
 		0F032D461CC9B12700D1920D /* SmartHome */ = {
 			isa = PBXGroup;
 			children = (
-				F6A08F431D0CFA6100317318 /* smartDB */,
 				0F2D35D91D11512100C46DE5 /* FFmpeg-iOS */,
 				0F2D35B51D114E3A00C46DE5 /* FFMpegDecoder */,
 				0FAF74AE1CEEA16700432713 /* HRColorPicker */,
@@ -588,10 +593,6 @@
 				F6359AF91CFFBC910035EB31 /* DetailTableViewCell.m */,
 				F6359AFD1CFFC4DC0035EB31 /* ColourTableViewCell.h */,
 				F6359AFE1CFFC4DC0035EB31 /* ColourTableViewCell.m */,
-				0FAF98BC1CE466B0009BDBB5 /* SmartHome.entitlements */,
-				0F032D591CC9B12700D1920D /* Assets.xcassets */,
-				0FC0FFD11CF539BC000F71D5 /* realScene.plist */,
-				0FC0FFD61CF553AD000F71D5 /* planeScene.plist */,
 				0FC0FFD81CF577C0000F71D5 /* RealScene.h */,
 				0FC0FFD91CF577C0000F71D5 /* RealScene.m */,
 				0FB42E1C1CF681A7007DE64F /* planeScene.h */,
@@ -633,8 +634,15 @@
 		0F032D471CC9B12700D1920D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0FBEFE2B1D24F3100084244F /* PrefixHeader.pch */,
+				F6A08F431D0CFA6100317318 /* smartDB */,
+				0F032D591CC9B12700D1920D /* Assets.xcassets */,
+				0FC0FFD11CF539BC000F71D5 /* realScene.plist */,
+				0FC0FFD61CF553AD000F71D5 /* planeScene.plist */,
+				0FAF98BC1CE466B0009BDBB5 /* SmartHome.entitlements */,
 				0F032D5E1CC9B12700D1920D /* Info.plist */,
 				0F032D481CC9B12700D1920D /* main.m */,
+				0FBEFE261D24A5020084244F /* netconfig.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -936,6 +944,8 @@
 				0FB42E221CF6F9E8007DE64F /* SocketManager.m */,
 				0F2517881CFD8C6500491A6C /* PackManager.h */,
 				0F2517891CFD8C6500491A6C /* PackManager.m */,
+				0FBEFE281D24F0C10084244F /* DialogManager.h */,
+				0FBEFE291D24F0C10084244F /* DialogManager.m */,
 			);
 			name = public;
 			sourceTree = "<group>";
@@ -1109,6 +1119,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6B91F741D100F3B00592FB0 /* tvBrandView.xib in Resources */,
+				0FBEFE271D24A5020084244F /* netconfig.plist in Resources */,
 				0FC0FFD71CF553AD000F71D5 /* planeScene.plist in Resources */,
 				0F032D5D1CC9B12700D1920D /* LaunchScreen.storyboard in Resources */,
 				F60FDB471D003FD500AB04BE /* CurtainTableViewCell.xib in Resources */,
@@ -1242,6 +1253,7 @@
 				0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */,
 				0FCAA40C1D1945BB00C1E58C /* BgMusicController.m in Sources */,
 				0FAF74C51CEEA17C00432713 /* HRHSVColorUtil.m in Sources */,
+				0FBEFE2A1D24F0C10084244F /* DialogManager.m in Sources */,
 				0FAF98A41CE40F3C009BDBB5 /* QRCodeReader.m in Sources */,
 				0F2D35BC1D114E7000C46DE5 /* AudioStreamer.m in Sources */,
 				F60FDB461D003FD500AB04BE /* CurtainTableViewCell.m in Sources */,
@@ -1463,6 +1475,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/SmartHome/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -1499,6 +1513,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/SmartHome/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",

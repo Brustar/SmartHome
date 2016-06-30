@@ -5,8 +5,6 @@
 //  Created by Brustar on 16/5/18.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
 #import "public.h"
 #import "Light.h"
 #import "Curtain.h"

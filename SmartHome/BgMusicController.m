@@ -9,6 +9,7 @@
 #import "BgMusicController.h"
 
 @interface BgMusicController ()
+@property (weak, nonatomic) IBOutlet UISlider *volume;
 
 @end
 
@@ -17,11 +18,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.beacon=[[IBeacon alloc] init];
+    [self.beacon addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+    VolumeManager *volume=[VolumeManager defaultManager];
+    [volume start:self.beacon];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if([keyPath isEqualToString:@"volume"])
+    {
+        self.volume.value=[[self.beacon valueForKey:@"volume"] floatValue];
+    }
+}
+
+-(void)dealloc
+{
+    [self.beacon removeObserver:self forKeyPath:@"volume" context:nil];
 }
 
 /*

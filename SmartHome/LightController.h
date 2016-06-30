@@ -5,8 +5,6 @@
 //  Created by Brustar on 16/5/20.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
-
-#import <UIKit/UIKit.h>
 #import "HRSampleColorPickerViewController.h"
 #import "public.h"
 #import "SceneManager.h"

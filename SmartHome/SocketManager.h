@@ -5,8 +5,6 @@
 //  Created by Brustar on 16/5/26.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
 #import "AsyncSocket.h"
 
 enum{

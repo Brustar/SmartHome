@@ -5,9 +5,6 @@
 //  Created by Brustar on 16/5/6.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 #import "Scene.h"
 #import "PrintObject.h"
 
@@ -16,6 +13,7 @@
 + (NSString *) scenesPath;
 + (NSString *) favoritePath;
 + (NSString *) sqlitePath;
++ (NSString *) httpAddr;
 + (void) copyFile:(NSString *)file to:(NSString *)newFile;
 
 + (void) writeScene:(NSString *)sceneFile string:(NSString *)sceneData;

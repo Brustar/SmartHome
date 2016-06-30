@@ -562,6 +562,9 @@
                             <constraint firstItem="XU6-KE-sbu" firstAttribute="centerX" secondItem="R1c-YG-dl6" secondAttribute="centerX" id="hED-ot-A80"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="volume" destination="D33-xY-Acr" id="uv2-C0-F4n"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f4M-4j-Lpa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -601,6 +604,9 @@
                                         <state key="normal" title="登录">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="login:" destination="Q07-ua-pDl" eventType="touchUpInside" id="4pb-75-gKH"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="82O-jp-Idf">
                                         <rect key="frame" x="280" y="101" width="60" height="30"/>
@@ -686,6 +692,10 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="pwd" destination="vT0-j6-1o1" id="z5S-ZR-Cjb"/>
+                        <outlet property="user" destination="y1v-G2-n8Q" id="YxF-ok-OxV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7jA-yB-cch" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -34,6 +34,18 @@
     return [IOManager newPath:@"db"];
 }
 
++ (NSString *) httpAddr
+{
+    NSString *path=[[NSBundle mainBundle] pathForResource:@"netconfig" ofType:@"plist"];
+    NSDictionary *dic = [[NSDictionary alloc] initWithContentsOfFile:path];
+    NSString *server= [NSString stringWithFormat:@"http://%@" , dic[@"httpServer"]];
+    int port=[dic[@"httpPort"] intValue];
+    if(port == 0 || port == 80){
+        return server;
+    }
+    return [NSString stringWithFormat:@"%@:%d/",server,port];
+}
+
 + (void) copyFile:(NSString *)file to:(NSString *)newFile
 {
     NSString *path = [[NSBundle mainBundle] pathForResource:file ofType:@""];
