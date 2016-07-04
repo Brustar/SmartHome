@@ -5,9 +5,6 @@
 //  Created by Brustar on 16/5/6.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
-
-#import<Foundation/Foundation.h>
-
 @interface PrintObject : NSObject
 
 //通过对象返回一个NSDictionary，键是属性名称，值是属性值。

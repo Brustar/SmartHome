@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>tcpPort</key>
+	<string></string>
+	<key>tcpServer</key>
+	<string></string>
+	<key>httpPort</key>
+	<integer>3000</integer>
+	<key>httpServer</key>
+	<string>192.168.0.163</string>
+</dict>
+</plist>

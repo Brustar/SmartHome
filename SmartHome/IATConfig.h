@@ -6,8 +6,6 @@
 //  Copyright (c) 2015年 iflytek. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface IATConfig : NSObject
 
 +(IATConfig *)sharedInstance;

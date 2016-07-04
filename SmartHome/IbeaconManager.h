@@ -5,8 +5,6 @@
 //  Created by Brustar on 16/5/9.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
 #import<CoreLocation/CoreLocation.h>
 #import "IBeacon.h"
 

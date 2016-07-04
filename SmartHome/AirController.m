@@ -32,6 +32,10 @@
             if ([[scene.devices objectAtIndex:i] isKindOfClass:[Aircon class]]) {
                 
                 self.showTemLabel.text = [NSString stringWithFormat:@"%d°C", ((Aircon*)[scene.devices objectAtIndex:i]).temperature];
+                self.currentMode=((Aircon*)[scene.devices objectAtIndex:i]).mode;
+                self.currentLevel=((Aircon*)[scene.devices objectAtIndex:i]).WindLevel;
+                self.currentDirection=((Aircon*)[scene.devices objectAtIndex:i]).Windirection;
+                self.currentTiming=((Aircon*)[scene.devices objectAtIndex:i]).timing;
             }
         }
     }
@@ -45,6 +49,10 @@
 {
     Aircon *device = [[Aircon alloc]init];
     [device setDeviceID:[self.deviceid intValue]];
+    [device setMode:self.currentMode];
+    [device setWindLevel:self.currentLevel];
+    [device setWindirection:self.currentDirection];
+    [device setTiming:self.currentTiming];
     
     [device setTemperature:[self.showTemLabel.text intValue]];
     
@@ -62,6 +70,20 @@
 
 -(IBAction)changeButton:(id)sender
 {
+    if ([self.sceneid intValue]>0) {
+    if (self.currentButton == mode) {
+        self.currentIndex = self.currentMode - 1;
+    }
+    if (self.currentButton == level) {
+        self.currentIndex = self.currentLevel - 1;
+    }
+    if (self.currentButton == direction) {
+        self.currentIndex = self.currentDirection - 1;
+    }
+    if (self.currentButton == timing) {
+        self.currentIndex = self.currentTiming - 1;
+    }
+    }
     self.currentButton=(int)((UIButton *)sender).tag;
     [self.paramView reloadData];
 }
@@ -117,6 +139,21 @@
         oldCell.accessoryType = UITableViewCellAccessoryNone;
     }
     self.currentIndex=(int)indexPath.row;
+    
+    if (self.currentButton == mode) {
+        self.currentMode = self.currentIndex+1;
+    }
+    if (self.currentButton == level) {
+        self.currentLevel = self.currentIndex+1;
+    }
+    if (self.currentButton == direction) {
+        self.currentDirection = self.currentIndex+1;
+    }
+    if (self.currentButton == timing) {
+        self.currentTiming = self.currentIndex+1;
+    }
+    
+    [self save:nil];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -144,6 +181,7 @@
     NSString *valueString = [NSString stringWithFormat:@"%d ℃", (int)value];
     
     self.showTemLabel.text = valueString;
+    //[self save:nil];
 }
 
 #pragma mark - Item setting
@@ -163,7 +201,6 @@
 }
 
 #pragma mark - Ruler setting
-
 - (CGFloat)rulerViewMaxValue:(RulerView *)rulerView {
     return 32;
 }
@@ -189,7 +226,6 @@
 }
 
 #pragma mark - Left tag setting
-
 - (CGFloat)rulerViewLeftTagLineWidth:(RulerView *)rulerView {
     return 50;
 }

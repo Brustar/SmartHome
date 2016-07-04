@@ -2,267 +2,78 @@
 //  LoginController.m
 //  SmartHome
 //
-//  Created by Brustar on 16/5/12.
+//  Created by Brustar on 16/6/29.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
 #import "LoginController.h"
-#import "QRCodeReaderViewController.h"
-#import "QRCodeReader.h"
-#import "RegexKitLite.h"
+#import <AFNetworking.h>
+#import "IOManager.h"
+#import "CryptoManager.h"
+#import "DialogManager.h"
 
+@interface LoginController ()
+@property (weak, nonatomic) IBOutlet UITextField *user;
+@property (weak, nonatomic) IBOutlet UITextField *pwd;
 
-#import <QuartzCore/QuartzCore.h>
-#import <AVFoundation/AVAudioSession.h>
-#import <AudioToolbox/AudioSession.h>
-#import "iflyMSC/IFlySpeechConstant.h"
-#import "iflyMSC/IFlySpeechUtility.h"
-#import "iflyMSC/IFlySpeechSynthesizer.h"
-#import "iflyMSC/IFlySpeechRecognizer.h"
-#import "IATConfig.h"
-#import "ISRDataHelper.h"
+@end
 
 @implementation LoginController
 
--(void)viewDidLoad
-{
-    //通过appid连接讯飞语音服务器，把@"53b5560a"换成你申请的appid
-    NSString *initString = [[NSString alloc] initWithFormat:@"appid=%@,timeout=%@",@"5743ac2d",@"20000"];
-    //所有服务启动前，需要确保执行createUtility
-    [IFlySpeechUtility createUtility:initString];
-    
-    //创建合成对象，为单例模式
-    _iFlySpeechSynthesizer = [IFlySpeechSynthesizer sharedInstance];
-    _iFlySpeechSynthesizer.delegate = self;
-    
-    //设置语音合成的参数
-    //合成的语速,取值范围 0~100
-    [_iFlySpeechSynthesizer setParameter:@"50" forKey:[IFlySpeechConstant SPEED]];
-    //合成的音量;取值范围 0~100
-    [_iFlySpeechSynthesizer setParameter:@"50" forKey:[IFlySpeechConstant VOLUME]];
-    //发音人,默认为”xiaoyan”;可以设置的参数列表可参考个性化发音人列表
-    [_iFlySpeechSynthesizer setParameter:@"xiaoyan" forKey:[IFlySpeechConstant VOICE_NAME]];
-    //音频采样率,目前支持的采样率有 16000 和 8000
-    [_iFlySpeechSynthesizer setParameter:@"8000" forKey:[IFlySpeechConstant SAMPLE_RATE]];
-    ////asr_audio_path保存录音文件路径，如不再需要，设置value为nil表示取消，默认目录是documents
-    [_iFlySpeechSynthesizer setParameter:@"tts.pcm" forKey:[IFlySpeechConstant TTS_AUDIO_PATH]];
-    
-    //隐藏键盘，点击空白处
-    UITapGestureRecognizer *tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
-    tapGr.cancelsTouchesInView = NO;
-    [self.view addGestureRecognizer:tapGr];
-    
-    _textView.layer.borderWidth = 0.5f;
-    _textView.layer.borderColor = [[UIColor whiteColor] CGColor];
-    [_textView.layer setCornerRadius:7.0f];
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
 }
 
-- (IBAction)Start:(id)sender
-{
-    //启动合成会话
-    [_iFlySpeechSynthesizer startSpeaking:self.content.text];
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
--(void)initRecognizer
+- (IBAction)login:(id)sender
 {
-    NSLog(@"%s",__func__);
-        
-        //单例模式，无UI的实例
-        if (_iFlySpeechRecognizer == nil) {
-            _iFlySpeechRecognizer = [IFlySpeechRecognizer sharedInstance];
-            
-            [_iFlySpeechRecognizer setParameter:@"" forKey:[IFlySpeechConstant PARAMS]];
-            
-            //设置听写模式
-            [_iFlySpeechRecognizer setParameter:@"iat" forKey:[IFlySpeechConstant IFLY_DOMAIN]];
-        }
-        _iFlySpeechRecognizer.delegate = self;
-        
-        if (_iFlySpeechRecognizer != nil) {
-            IATConfig *instance = [IATConfig sharedInstance];
-            
-            //设置最长录音时间
-            [_iFlySpeechRecognizer setParameter:instance.speechTimeout forKey:[IFlySpeechConstant SPEECH_TIMEOUT]];
-            //设置后端点
-            [_iFlySpeechRecognizer setParameter:instance.vadEos forKey:[IFlySpeechConstant VAD_EOS]];
-            //设置前端点
-            [_iFlySpeechRecognizer setParameter:instance.vadBos forKey:[IFlySpeechConstant VAD_BOS]];
-            //网络等待时间
-            [_iFlySpeechRecognizer setParameter:@"20000" forKey:[IFlySpeechConstant NET_TIMEOUT]];
-            
-            //设置采样率，推荐使用16K
-            [_iFlySpeechRecognizer setParameter:instance.sampleRate forKey:[IFlySpeechConstant SAMPLE_RATE]];
-            
-            if ([instance.language isEqualToString:[IATConfig chinese]]) {
-                //设置语言
-                [_iFlySpeechRecognizer setParameter:instance.language forKey:[IFlySpeechConstant LANGUAGE]];
-                //设置方言
-                [_iFlySpeechRecognizer setParameter:instance.accent forKey:[IFlySpeechConstant ACCENT]];
-            }else if ([instance.language isEqualToString:[IATConfig english]]) {
-                [_iFlySpeechRecognizer setParameter:instance.language forKey:[IFlySpeechConstant LANGUAGE]];
-            }
-            //设置是否返回标点符号
-            [_iFlySpeechRecognizer setParameter:instance.dot forKey:[IFlySpeechConstant ASR_PTT]];
-            
-        }
-    }
-
--(IBAction)record:(id)sender
-{
-    [_textView setText:@""];
-    [_textView resignFirstResponder];
-    //self.isCanceled = NO;
-    
-    if(_iFlySpeechRecognizer == nil)
+    if ([self.user.text isEqualToString:@""])
     {
-        [self initRecognizer];
+        [DialogManager showMessage:@"请输入用户名或手机号"];
+        return;
     }
     
-    [_iFlySpeechRecognizer cancel];
-    
-    //设置音频来源为麦克风
-    [_iFlySpeechRecognizer setParameter:IFLY_AUDIO_SOURCE_MIC forKey:@"audio_source"];
-    
-    //设置听写结果格式为json
-    [_iFlySpeechRecognizer setParameter:@"json" forKey:[IFlySpeechConstant RESULT_TYPE]];
-    
-    //保存录音文件，保存在sdk工作路径中，如未设置工作路径，则默认保存在library/cache下
-    [_iFlySpeechRecognizer setParameter:@"asr.pcm" forKey:[IFlySpeechConstant ASR_AUDIO_PATH]];
-    
-    [_iFlySpeechRecognizer setDelegate:self];
-    
-    BOOL ret = [_iFlySpeechRecognizer startListening];
-    
-    if (ret) {
-        
-    }else{
-        NSLog(@"启动识别服务失败，请稍后重试");//可能是上次请求未结束，暂不支持多路并发
+    if ([self.pwd.text isEqualToString:@""])
+    {
+        [DialogManager showMessage:@"请输入密码"];
+        return;
     }
-
-}
-
-- (void) onError:(IFlySpeechError *) error
-{
-}
-
-- (void) onResults:(NSArray *) results isLast:(BOOL)isLast
-{
     
-    NSMutableString *resultString = [[NSMutableString alloc] init];
-    NSDictionary *dic = results[0];
-    for (NSString *key in dic) {
-        [resultString appendFormat:@"%@",key];
-    }
-    _result =[NSString stringWithFormat:@"%@%@", _textView.text,resultString];
-    NSString * resultFromJson =  [ISRDataHelper stringFromJson:resultString];
-    _textView.text = [NSString stringWithFormat:@"%@%@", _textView.text,resultFromJson];
-    
-    if (isLast){
-        NSLog(@"听写结果(json)：%@测试",  self.result);
-    }
-    NSLog(@"_result=%@",_result);
-    NSLog(@"resultFromJson=%@",resultFromJson);
-    NSLog(@"isLast=%d,_textView.text=%@",isLast,_textView.text);
-}
-
--(void)viewTapped:(UITapGestureRecognizer*)tapGr
-{
-    [self.content resignFirstResponder];
-}
-
--(IBAction)scan:(id)sender
-{
-    if ([QRCodeReader supportsMetadataObjectTypes:@[AVMetadataObjectTypeQRCode]]) {
-        static QRCodeReaderViewController *vc = nil;
-        static dispatch_once_t onceToken;
-        
-        dispatch_once(&onceToken, ^{
-            QRCodeReader *reader = [QRCodeReader readerWithMetadataObjectTypes:@[AVMetadataObjectTypeQRCode]];
-            vc                   = [QRCodeReaderViewController readerWithCancelButtonTitle:@"取消" codeReader:reader startScanningAtLoad:YES showSwitchCameraButton:YES showTorchButton:YES];
-            vc.modalPresentationStyle = UIModalPresentationFormSheet;
-        });
-        vc.delegate = self;
-        
-        [vc setCompletionWithBlock:^(NSString *resultAsString) {
-            NSLog(@"Completion with result: %@", resultAsString);
-        }];
-        
-        [self presentViewController:vc animated:YES completion:NULL];
-    }
-    else {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"标题" message:@"不能打开摄像头，请确认授权使用摄像头" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:nil];
-        [alert addAction:okAction];
-    }
-}
-
-#pragma mark - QRCodeReader Delegate Methods
-- (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result
-{
-        //二维码的格式是  systemid@主人身份或者是客人身份
-    [self dismissViewControllerAnimated:YES completion:^{
-        NSArray* list = [result componentsSeparatedByString:@"@"];
-        if([list count] > 1) //&& [ECUtil checkNumber:list[0]] && [ECUtil checkNumber:list[1]])
-        {
-            self.systemLabel.text = list[0];
-            NSString *role;
-            if ([@"1" isEqualToString:list[1]]) {
-                role=@"主人";
-            }else{
-                role=@"客人";
-            }
-            self.roleLabel.text = role;
-        }
-        else
-        {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"非法的二维码" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
-            [alert addAction:okAction];
-        }
+    NSString *url = [NSString stringWithFormat:@"%@login",[IOManager httpAddr]];
+    // GET
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    // 将数据作为参数传入
+    NSDictionary *dict = @{@"username":self.user.text,@"pwd":[self.pwd.text md5]};
+    [mgr POST:url parameters:dict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSLog(@"success:%@",responseObject);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"failure:%@",error);
     }];
 }
 
-- (void)readerDidCancel:(QRCodeReaderViewController *)reader
-{
-    [self dismissViewControllerAnimated:YES completion:NULL];
-}
-
-
-#pragma mark - IFlySpeechSynthesizerDelegate
-//开始播放
-- (void) onSpeakBegin
+- (IBAction)reg:(id)sender
 {
     
 }
 
-//缓冲进度
-- (void) onBufferProgress:(int) progress message:(NSString *)msg
-{
-    NSLog(@"bufferProgress:%d,message:%@",progress,msg);
-}
-
-//播放进度
-- (void) onSpeakProgress:(int) progress
-{
-    NSLog(@"play progress:%d",progress);
-}
-
-//暂停播放
-- (void) onSpeakPaused
+- (IBAction)forgotPWD:(id)sender
 {
     
 }
 
-//恢复播放
-- (void) onSpeakResumed
-{
-    
-}
+/*
+#pragma mark - Navigation
 
-//结束回调
-- (void) onCompleted:(IFlySpeechError *) error
-{
-    
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
 }
+*/
 
 @end
