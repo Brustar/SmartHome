@@ -88,6 +88,7 @@
     NSString *url = [NSString stringWithFormat:@"%@reg",[IOManager httpAddr]];
     [mgr POST:url parameters:dict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSLog(@"success:%@",responseObject);
+        
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"failure:%@",error);
     }];
