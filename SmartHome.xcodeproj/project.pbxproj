@@ -17,6 +17,7 @@
 		0F180FC31D0E4C7400392F4C /* NetvController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F180FC21D0E4C7400392F4C /* NetvController.m */; };
 		0F180FC61D0E4E5000392F4C /* FMController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F180FC51D0E4E5000392F4C /* FMController.m */; };
 		0F180FC91D0E4E6500392F4C /* GuardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F180FC81D0E4E6500392F4C /* GuardController.m */; };
+		0F1F3BC71D2B601400B2641C /* FavorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F1F3BC61D2B601400B2641C /* FavorController.m */; };
 		0F25178A1CFD8C6500491A6C /* PackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2517891CFD8C6500491A6C /* PackManager.m */; };
 		0F25FE5E1CEB0C0A0063E834 /* SceneList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F25FE5D1CEB0C0A0063E834 /* SceneList.m */; };
 		0F2D35BC1D114E7000C46DE5 /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2D35B71D114E7000C46DE5 /* AudioStreamer.m */; };
@@ -167,6 +168,8 @@
 		0F180FC51D0E4E5000392F4C /* FMController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMController.m; sourceTree = "<group>"; };
 		0F180FC71D0E4E6500392F4C /* GuardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuardController.h; sourceTree = "<group>"; };
 		0F180FC81D0E4E6500392F4C /* GuardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuardController.m; sourceTree = "<group>"; };
+		0F1F3BC51D2B601400B2641C /* FavorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavorController.h; sourceTree = "<group>"; };
+		0F1F3BC61D2B601400B2641C /* FavorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavorController.m; sourceTree = "<group>"; };
 		0F2517881CFD8C6500491A6C /* PackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackManager.h; sourceTree = "<group>"; };
 		0F2517891CFD8C6500491A6C /* PackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackManager.m; sourceTree = "<group>"; };
 		0F25FE5C1CEB0C0A0063E834 /* SceneList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneList.h; sourceTree = "<group>"; };
@@ -647,6 +650,8 @@
 				F65DB3401D2B5AB2002A815C /* RegisterViewController.m */,
 				0F4B3BFE1D2A13870002E75E /* MSGController.h */,
 				0F4B3BFF1D2A13870002E75E /* MSGController.m */,
+				0F1F3BC51D2B601400B2641C /* FavorController.h */,
+				0F1F3BC61D2B601400B2641C /* FavorController.m */,
 			);
 			path = SmartHome;
 			sourceTree = "<group>";
@@ -1269,6 +1274,7 @@
 				0FAF74BF1CEEA17C00432713 /* HRBrightnessCursor.m in Sources */,
 				0FAF98A31CE40F3C009BDBB5 /* QRCameraSwitchButton.m in Sources */,
 				0FEE12761D20C53400811947 /* TXHRulerScrollView.m in Sources */,
+				0F1F3BC71D2B601400B2641C /* FavorController.m in Sources */,
 				0FCFB38F1CF293B300B37DD3 /* Radio.m in Sources */,
 				0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */,
 				0FCAA40C1D1945BB00C1E58C /* BgMusicController.m in Sources */,
