@@ -10,7 +10,7 @@
 #import <AFNetworking.h>
 #import "CryptoManager.h"
 #import "IOManager.h"
-#import "DialogManager.h"
+#import "MBProgressHUD+NJ.h"
 
 @interface RegisterDetailController ()
 @property (weak, nonatomic) IBOutlet UITextField *authorNum;
@@ -35,7 +35,7 @@
 - (IBAction)clickRegisterBtn:(id)sender {
     if(![self.passWord.text isEqualToString:self.pwdAgain.text])
     {
-        [DialogManager showMessage:@"两次密码不匹配"];
+        [MBProgressHUD showError:@"两次密码不匹配"];
         return;
     }
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];

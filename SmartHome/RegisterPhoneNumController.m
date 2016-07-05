@@ -8,7 +8,7 @@
 
 #import "RegisterPhoneNumController.h"
 #import "RegisterDetailController.h"
-#import "DialogManager.h"
+#import "MBProgressHUD+NJ.h"
 @interface RegisterPhoneNumController ()
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewTopLeadingConstraint;
 @property (weak, nonatomic) IBOutlet UIView *usderAndMasterView;
@@ -38,7 +38,7 @@
     
     if([self.phoneNumTextField.text isEqualToString:@""])
     {
-        [DialogManager showMessage:@"请输入手机号"];
+        [MBProgressHUD showError:@"请输入手机号"];
         return;
     }
     RegisterDetailController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"registerDetail"];
