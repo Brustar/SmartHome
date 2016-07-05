@@ -73,17 +73,8 @@
         UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleDone target:self action:@selector(cancel:)];
         self.navigationItem.leftBarButtonItem = left;
     }
-    
-    UIActivityIndicatorView *aiv = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    self.waitingIndicator = aiv;
-    
-    self.waitingIndicator.center = CGPointMake(self.view.bounds.size.width / 2, self.view.bounds.size.height / 2);
-    [self.waitingIndicator setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin];
-    [self.view addSubview:self.waitingIndicator];
-    [self.waitingIndicator setHidesWhenStopped:YES];
-    [self.waitingIndicator startAnimating];
-    
-    [self.view bringSubviewToFront:self.waitingIndicator];
+
+    [MBProgressHUD showMessage:@"loading..."];
     
     if([self.html isEqualToString:@""]){
         NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:self.oauthUrl]
@@ -99,7 +90,6 @@
 {
     [super viewDidUnload];
     [self setWebView:nil];
-    [self setWaitingIndicator:nil];
 }
 
 #pragma mark - UIWebView delegate
@@ -110,12 +100,12 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    [self.waitingIndicator stopAnimating];
+    [MBProgressHUD hideHUD];
 }
 
 //oAuth2
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
-    [self.waitingIndicator stopAnimating];
+    [MBProgressHUD hideHUD];
 }
 
 #pragma mark Action
