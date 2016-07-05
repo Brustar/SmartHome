@@ -62,20 +62,6 @@
     }];
 }
 
-- (IBAction)reg:(id)sender
-{
-    CGRect rect = self.view.bounds;
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:rect];
-    //webView.delegate = self;
-    //webView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-    [self.view addSubview:webView];
-    
-    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:@""]
-                                            cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
-                                        timeoutInterval:60.0];
-    [webView loadRequest:request];
-}
-
 - (IBAction)forgotPWD:(id)sender
 {
     [WebManager show:@"http://3g.cn"];

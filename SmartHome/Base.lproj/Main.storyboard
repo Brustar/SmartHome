@@ -1204,7 +1204,6 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <state key="normal" title="没有帐号？立即注册"/>
                                         <connections>
-                                            <action selector="reg:" destination="Q07-ua-pDl" eventType="touchUpInside" id="08E-P2-YRI"/>
                                             <segue destination="RVJ-AU-hAB" kind="show" id="Y2K-I7-hbJ"/>
                                         </connections>
                                     </button>
