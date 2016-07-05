@@ -10,7 +10,8 @@
 #import <AFNetworking.h>
 #import "CryptoManager.h"
 #import "IOManager.h"
-#import "DialogManager.h"
+#import "MBProgressHUD+NJ.h"
+#import "FinishRegisterViewController.h"
 
 @interface RegisterDetailController ()
 @property (weak, nonatomic) IBOutlet UITextField *authorNum;
@@ -73,24 +74,36 @@
 - (IBAction)clickRegisterBtn:(id)sender {
     if([self.authorNum.text isEqualToString:@""]|| [self.userName.text isEqualToString:@""]||[self.passWord.text isEqualToString:@""])
     {
-        [DialogManager showMessage:@"信息不能为空"];
+        [MBProgressHUD showError:@"信息不能为空"];
         return;
     }
     
     if(![self.passWord.text isEqualToString:self.pwdAgain.text])
     {
-        [DialogManager showMessage:@"两次密码不匹配"];
+        [MBProgressHUD showError:@"两次密码不匹配"];
         return;
     }
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     NSString *deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"smartToken"];
+    if(self.MasterID == nil)
+    {
+        self.MasterID = @"";
+    }
+   
     NSDictionary *dict = @{@"QRCode":self.MasterID,@"CName":self.userName.text,@"CPassword":[self.passWord.text md5],@"CTellNumber":self.phoneStr,@"CType":[NSNumber numberWithInt:self.cType],@"AuthorCode":self.authorNum.text,@"pushtoken":deviceToken};
     NSString *url = [NSString stringWithFormat:@"%@reg",[IOManager httpAddr]];
+    
     [mgr POST:url parameters:dict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSLog(@"success:%@",responseObject);
+
+        [self performSegueWithIdentifier:@"finishedSegue" sender:self];
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"failure:%@",error);
+        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"注册失败" message:@"请重新注册" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"" style:UIAlertActionStyleCancel handler:nil];
+        [alertVC addAction:action];
+        [self presentViewController:alertVC animated:YES completion:nil];
     }];
 
 }

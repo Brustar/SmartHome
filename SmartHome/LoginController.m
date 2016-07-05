@@ -10,7 +10,8 @@
 #import <AFNetworking.h>
 #import "IOManager.h"
 #import "CryptoManager.h"
-#import "DialogManager.h"
+#import "MBProgressHUD+NJ.h"
+#import "WebManager.h"
 
 @interface LoginController ()
 @property (weak, nonatomic) IBOutlet UITextField *user;
@@ -34,13 +35,13 @@
 {
     if ([self.user.text isEqualToString:@""])
     {
-        [DialogManager showMessage:@"请输入用户名或手机号"];
+        [MBProgressHUD showError:@"请输入用户名或手机号"];
         return;
     }
     
     if ([self.pwd.text isEqualToString:@""])
     {
-        [DialogManager showMessage:@"请输入密码"];
+        [MBProgressHUD showError:@"请输入密码"];
         return;
     }
     
@@ -54,40 +55,17 @@
         if ([responseObject[@"Result"] intValue]==1) {
             [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"AuthorToken"] forKey:@"token"];
         }
-        [DialogManager showMessage:responseObject[@"Msg"]];
+        [MBProgressHUD showSuccess:responseObject[@"Msg"]];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"failure:%@",error);
-        [DialogManager showMessage:@"网络错误"];
+        [MBProgressHUD showError:@"网络错误"];
     }];
-}
-
-- (IBAction)reg:(id)sender
-{
-    CGRect rect = self.view.bounds;
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:rect];
-    //webView.delegate = self;
-    //webView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-    [self.view addSubview:webView];
-    
-    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:@""]
-                                            cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
-                                        timeoutInterval:60.0];
-    [webView loadRequest:request];
 }
 
 - (IBAction)forgotPWD:(id)sender
 {
-    [DialogManager showWeb:@"http://3g.cn"];
+    [WebManager show:@"http://3g.cn"];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

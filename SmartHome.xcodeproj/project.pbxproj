@@ -17,6 +17,8 @@
 		0F180FC31D0E4C7400392F4C /* NetvController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F180FC21D0E4C7400392F4C /* NetvController.m */; };
 		0F180FC61D0E4E5000392F4C /* FMController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F180FC51D0E4E5000392F4C /* FMController.m */; };
 		0F180FC91D0E4E6500392F4C /* GuardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F180FC81D0E4E6500392F4C /* GuardController.m */; };
+		0F1F3BC71D2B601400B2641C /* FavorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F1F3BC61D2B601400B2641C /* FavorController.m */; };
+		0F1F3BCA1D2B85EA00B2641C /* MBProgressHUD+NJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F1F3BC91D2B85EA00B2641C /* MBProgressHUD+NJ.m */; };
 		0F25178A1CFD8C6500491A6C /* PackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2517891CFD8C6500491A6C /* PackManager.m */; };
 		0F25FE5E1CEB0C0A0063E834 /* SceneList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F25FE5D1CEB0C0A0063E834 /* SceneList.m */; };
 		0F2D35BC1D114E7000C46DE5 /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2D35B71D114E7000C46DE5 /* AudioStreamer.m */; };
@@ -81,7 +83,7 @@
 		0FB42E1E1CF681A7007DE64F /* planeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB42E1D1CF681A7007DE64F /* planeScene.m */; };
 		0FB42E231CF6F9E8007DE64F /* SocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB42E221CF6F9E8007DE64F /* SocketManager.m */; };
 		0FBEFE271D24A5020084244F /* netconfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0FBEFE261D24A5020084244F /* netconfig.plist */; };
-		0FBEFE2A1D24F0C10084244F /* DialogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FBEFE291D24F0C10084244F /* DialogManager.m */; };
+		0FBEFE2A1D24F0C10084244F /* WebManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FBEFE291D24F0C10084244F /* WebManager.m */; };
 		0FC0FFD21CF539BC000F71D5 /* realScene.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0FC0FFD11CF539BC000F71D5 /* realScene.plist */; };
 		0FC0FFD71CF553AD000F71D5 /* planeScene.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0FC0FFD61CF553AD000F71D5 /* planeScene.plist */; };
 		0FC0FFDA1CF577C0000F71D5 /* RealScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC0FFD91CF577C0000F71D5 /* RealScene.m */; };
@@ -118,6 +120,7 @@
 		F65DB3411D2B5AB2002A815C /* RegisterDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65DB33C1D2B5AB2002A815C /* RegisterDetailController.m */; };
 		F65DB3421D2B5AB2002A815C /* RegisterPhoneNumController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65DB33E1D2B5AB2002A815C /* RegisterPhoneNumController.m */; };
 		F65DB3431D2B5AB2002A815C /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65DB3401D2B5AB2002A815C /* RegisterViewController.m */; };
+		F65DB3471D2BB7CD002A815C /* FinishRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65DB3461D2BB7CD002A815C /* FinishRegisterViewController.m */; };
 		F66EB2D21CFEB9E300AC53CE /* Detail.m in Sources */ = {isa = PBXBuildFile; fileRef = F66EB2D11CFEB9E300AC53CE /* Detail.m */; };
 		F66EB2D51CFED0A900AC53CE /* DetailList.m in Sources */ = {isa = PBXBuildFile; fileRef = F66EB2D41CFED0A900AC53CE /* DetailList.m */; };
 		F6A08F421D0CFA5400317318 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6A08F401D0CFA5400317318 /* Main.storyboard */; };
@@ -167,6 +170,10 @@
 		0F180FC51D0E4E5000392F4C /* FMController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMController.m; sourceTree = "<group>"; };
 		0F180FC71D0E4E6500392F4C /* GuardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuardController.h; sourceTree = "<group>"; };
 		0F180FC81D0E4E6500392F4C /* GuardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuardController.m; sourceTree = "<group>"; };
+		0F1F3BC51D2B601400B2641C /* FavorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavorController.h; sourceTree = "<group>"; };
+		0F1F3BC61D2B601400B2641C /* FavorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavorController.m; sourceTree = "<group>"; };
+		0F1F3BC81D2B85EA00B2641C /* MBProgressHUD+NJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+NJ.h"; sourceTree = "<group>"; };
+		0F1F3BC91D2B85EA00B2641C /* MBProgressHUD+NJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+NJ.m"; sourceTree = "<group>"; };
 		0F2517881CFD8C6500491A6C /* PackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackManager.h; sourceTree = "<group>"; };
 		0F2517891CFD8C6500491A6C /* PackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackManager.m; sourceTree = "<group>"; };
 		0F25FE5C1CEB0C0A0063E834 /* SceneList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneList.h; sourceTree = "<group>"; };
@@ -375,8 +382,8 @@
 		0FB42E211CF6F9E8007DE64F /* SocketManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketManager.h; sourceTree = "<group>"; };
 		0FB42E221CF6F9E8007DE64F /* SocketManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketManager.m; sourceTree = "<group>"; };
 		0FBEFE261D24A5020084244F /* netconfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = netconfig.plist; sourceTree = "<group>"; };
-		0FBEFE281D24F0C10084244F /* DialogManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogManager.h; sourceTree = "<group>"; };
-		0FBEFE291D24F0C10084244F /* DialogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogManager.m; sourceTree = "<group>"; };
+		0FBEFE281D24F0C10084244F /* WebManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebManager.h; sourceTree = "<group>"; };
+		0FBEFE291D24F0C10084244F /* WebManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebManager.m; sourceTree = "<group>"; };
 		0FBEFE2B1D24F3100084244F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		0FC0FFD11CF539BC000F71D5 /* realScene.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = realScene.plist; sourceTree = "<group>"; };
 		0FC0FFD61CF553AD000F71D5 /* planeScene.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = planeScene.plist; sourceTree = "<group>"; };
@@ -445,6 +452,8 @@
 		F65DB33E1D2B5AB2002A815C /* RegisterPhoneNumController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterPhoneNumController.m; sourceTree = "<group>"; };
 		F65DB33F1D2B5AB2002A815C /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		F65DB3401D2B5AB2002A815C /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		F65DB3451D2BB7CD002A815C /* FinishRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinishRegisterViewController.h; sourceTree = "<group>"; };
+		F65DB3461D2BB7CD002A815C /* FinishRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinishRegisterViewController.m; sourceTree = "<group>"; };
 		F66EB2D01CFEB9E300AC53CE /* Detail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Detail.h; sourceTree = "<group>"; };
 		F66EB2D11CFEB9E300AC53CE /* Detail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Detail.m; sourceTree = "<group>"; };
 		F66EB2D31CFED0A900AC53CE /* DetailList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailList.h; sourceTree = "<group>"; };
@@ -645,8 +654,12 @@
 				F65DB33E1D2B5AB2002A815C /* RegisterPhoneNumController.m */,
 				F65DB33F1D2B5AB2002A815C /* RegisterViewController.h */,
 				F65DB3401D2B5AB2002A815C /* RegisterViewController.m */,
+				F65DB3451D2BB7CD002A815C /* FinishRegisterViewController.h */,
+				F65DB3461D2BB7CD002A815C /* FinishRegisterViewController.m */,
 				0F4B3BFE1D2A13870002E75E /* MSGController.h */,
 				0F4B3BFF1D2A13870002E75E /* MSGController.m */,
+				0F1F3BC51D2B601400B2641C /* FavorController.h */,
+				0F1F3BC61D2B601400B2641C /* FavorController.m */,
 			);
 			path = SmartHome;
 			sourceTree = "<group>";
@@ -964,8 +977,10 @@
 				0FB42E221CF6F9E8007DE64F /* SocketManager.m */,
 				0F2517881CFD8C6500491A6C /* PackManager.h */,
 				0F2517891CFD8C6500491A6C /* PackManager.m */,
-				0FBEFE281D24F0C10084244F /* DialogManager.h */,
-				0FBEFE291D24F0C10084244F /* DialogManager.m */,
+				0FBEFE281D24F0C10084244F /* WebManager.h */,
+				0FBEFE291D24F0C10084244F /* WebManager.m */,
+				0F1F3BC81D2B85EA00B2641C /* MBProgressHUD+NJ.h */,
+				0F1F3BC91D2B85EA00B2641C /* MBProgressHUD+NJ.m */,
 			);
 			name = public;
 			sourceTree = "<group>";
@@ -1027,7 +1042,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0F032D771CC9B12700D1920D /* Build configuration list for PBXNativeTarget "SmartHome" */;
 			buildPhases = (
-				7B4EC63A298C6E6A66AD1643 /* 📦 Check Pods Manifest.lock */,
+				7B4EC63A298C6E6A66AD1643 /* [CP] Check Pods Manifest.lock */,
 				6984B7368FBF635163F6D0CF /* [CP] Check Pods Manifest.lock */,
 				0F032D401CC9B12700D1920D /* Sources */,
 				0F032D411CC9B12700D1920D /* Frameworks */,
@@ -1199,14 +1214,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		7B4EC63A298C6E6A66AD1643 /* 📦 Check Pods Manifest.lock */ = {
+		7B4EC63A298C6E6A66AD1643 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1269,11 +1284,12 @@
 				0FAF74BF1CEEA17C00432713 /* HRBrightnessCursor.m in Sources */,
 				0FAF98A31CE40F3C009BDBB5 /* QRCameraSwitchButton.m in Sources */,
 				0FEE12761D20C53400811947 /* TXHRulerScrollView.m in Sources */,
+				0F1F3BC71D2B601400B2641C /* FavorController.m in Sources */,
 				0FCFB38F1CF293B300B37DD3 /* Radio.m in Sources */,
 				0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */,
 				0FCAA40C1D1945BB00C1E58C /* BgMusicController.m in Sources */,
 				0FAF74C51CEEA17C00432713 /* HRHSVColorUtil.m in Sources */,
-				0FBEFE2A1D24F0C10084244F /* DialogManager.m in Sources */,
+				0FBEFE2A1D24F0C10084244F /* WebManager.m in Sources */,
 				0FAF98A41CE40F3C009BDBB5 /* QRCodeReader.m in Sources */,
 				0F2D35BC1D114E7000C46DE5 /* AudioStreamer.m in Sources */,
 				F60FDB461D003FD500AB04BE /* CurtainTableViewCell.m in Sources */,
@@ -1302,12 +1318,14 @@
 				0FAF98A71CE40F3C009BDBB5 /* QRToggleTorchButton.m in Sources */,
 				0F25FE5E1CEB0C0A0063E834 /* SceneList.m in Sources */,
 				0FCFB3891CF2929900B37DD3 /* Aircon.m in Sources */,
+				0F1F3BCA1D2B85EA00B2641C /* MBProgressHUD+NJ.m in Sources */,
 				0F9D238A1CEDBC500049A58C /* AddScene.m in Sources */,
 				F63AE0031D11319C00BE17DC /* FMCollectionViewCell.m in Sources */,
 				0FAF8FF51CE1B514000557BD /* VolumeManager.m in Sources */,
 				0F2D35BD1D114E7000C46DE5 /* RTSPPlayer.m in Sources */,
 				0F032D4C1CC9B12700D1920D /* AppDelegate.m in Sources */,
 				0FB205ED1CDC3D3700B5E87E /* AudioManager.m in Sources */,
+				F65DB3471D2BB7CD002A815C /* FinishRegisterViewController.m in Sources */,
 				0F180FC61D0E4E5000392F4C /* FMController.m in Sources */,
 				0FABF91C1D06AA35000892D8 /* TVController.m in Sources */,
 				0FAF74C31CEEA17C00432713 /* HRColorMapView.m in Sources */,
