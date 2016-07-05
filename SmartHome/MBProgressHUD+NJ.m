@@ -24,7 +24,7 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
     hud.labelText = text;
     // 设置图片
-    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"MBProgressHUD.bundle/%@", icon]]];
+    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:icon]];
     // 再设置模式
     hud.mode = MBProgressHUDModeCustomView;
     
