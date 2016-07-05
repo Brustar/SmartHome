@@ -100,12 +100,30 @@
 
 }
 
+- (IBAction)logout:(id)sender
+{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"token"];
+}
+
 - (IBAction)Des:(id)sender {
     NSString *str=@"hello";
     NSString *tar=@"ev/A2FRCkPM=";
     NSLog(@"md5:%@",[str md5]);
     NSLog(@"encr:%@",[str encryptWithText:@"des"]);
     NSLog(@"dec:%@",[tar decryptWithText:@"des"]);
+}
+
+- (IBAction)homekit:(id)sender {
+    HMHomeManager *homeManager = [[HMHomeManager alloc] init];
+    homeManager.delegate = self;
+    HMAccessoryBrowser *accessoryBrowser = [[HMAccessoryBrowser alloc] init];
+    accessoryBrowser.delegate = self;
+    [accessoryBrowser startSearchingForNewAccessories];
+}
+
+- (void)accessoryBrowser:(HMAccessoryBrowser *)browser didFindNewAccessory:(HMAccessory *)accessory
+{
+    NSLog(@"found one");
 }
 
 - (IBAction)http:(id)sender

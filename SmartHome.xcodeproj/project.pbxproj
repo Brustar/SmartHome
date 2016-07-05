@@ -38,6 +38,7 @@
 		0F43B1001CF3ED4B00F3D9F0 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F43B0FF1CF3ED4B00F3D9F0 /* CoreTelephony.framework */; };
 		0F43B1031CF4055300F3D9F0 /* IATConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F43B1021CF4055300F3D9F0 /* IATConfig.m */; };
 		0F43B1061CF4078300F3D9F0 /* ISRDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F43B1051CF4078300F3D9F0 /* ISRDataHelper.m */; };
+		0F4B3C001D2A13870002E75E /* MSGController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4B3BFF1D2A13870002E75E /* MSGController.m */; };
 		0F4B49801CFEB13500D93DD2 /* CurtainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4B497F1CFEB13500D93DD2 /* CurtainController.m */; };
 		0F91AA171CDC798700094C25 /* PrintObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F91AA161CDC798700094C25 /* PrintObject.m */; };
 		0F96A1641D17F37C00E1594F /* RulerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F96A15D1D17F37C00E1594F /* RulerItem.m */; };
@@ -289,6 +290,8 @@
 		0F43B1021CF4055300F3D9F0 /* IATConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IATConfig.m; sourceTree = "<group>"; };
 		0F43B1041CF4078300F3D9F0 /* ISRDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISRDataHelper.h; sourceTree = "<group>"; };
 		0F43B1051CF4078300F3D9F0 /* ISRDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISRDataHelper.m; sourceTree = "<group>"; };
+		0F4B3BFE1D2A13870002E75E /* MSGController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSGController.h; sourceTree = "<group>"; };
+		0F4B3BFF1D2A13870002E75E /* MSGController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGController.m; sourceTree = "<group>"; };
 		0F4B497E1CFEB13500D93DD2 /* CurtainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurtainController.h; sourceTree = "<group>"; };
 		0F4B497F1CFEB13500D93DD2 /* CurtainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurtainController.m; sourceTree = "<group>"; };
 		0F91AA151CDC798700094C25 /* PrintObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintObject.h; sourceTree = "<group>"; };
@@ -453,6 +456,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FAF98BE1CE466B0009BDBB5 /* HomeKit.framework in Frameworks */,
 				0F2D36731D11555100C46DE5 /* libavdevice.a in Frameworks */,
 				0F2D36741D11555100C46DE5 /* libavfilter.a in Frameworks */,
 				0F2D36751D11555100C46DE5 /* libavformat.a in Frameworks */,
@@ -471,7 +475,6 @@
 				0FA658F81CD98EF5005AC4B4 /* AudioToolbox.framework in Frameworks */,
 				0FC7FDC11CED6CC700F91BDF /* libsqlite3.tbd in Frameworks */,
 				0FAF98B31CE42A3B009BDBB5 /* libicucore.tbd in Frameworks */,
-				0FAF98BE1CE466B0009BDBB5 /* HomeKit.framework in Frameworks */,
 				0F9ADF721CE2DC020052F3BC /* libz.tbd in Frameworks */,
 				0FF410DC1CDAF76300C7F4A1 /* CoreBluetooth.framework in Frameworks */,
 				0FF410DA1CDAE67100C7F4A1 /* CoreLocation.framework in Frameworks */,
@@ -627,6 +630,8 @@
 				0FCAA40B1D1945BB00C1E58C /* BgMusicController.m */,
 				0FC3DE831D236CFF00A03482 /* LoginController.h */,
 				0FC3DE841D236CFF00A03482 /* LoginController.m */,
+				0F4B3BFE1D2A13870002E75E /* MSGController.h */,
+				0F4B3BFF1D2A13870002E75E /* MSGController.m */,
 			);
 			path = SmartHome;
 			sourceTree = "<group>";
@@ -1297,6 +1302,7 @@
 				F6B91F771D100F7100592FB0 /* tvBrandView.m in Sources */,
 				0FCFB3951CF2943100B37DD3 /* Camera.m in Sources */,
 				0FAF8FEF1CE18C41000557BD /* IBeacon.m in Sources */,
+				0F4B3C001D2A13870002E75E /* MSGController.m in Sources */,
 				F66EB2D21CFEB9E300AC53CE /* Detail.m in Sources */,
 				0F96A1671D17F37C00E1594F /* RulerView.m in Sources */,
 				0FB205E91CDC312A00B5E87E /* IOManager.m in Sources */,

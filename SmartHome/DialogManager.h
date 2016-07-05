@@ -15,4 +15,6 @@
 
 + (void)showMessage:(NSString *)message;
 
++ (void)showWeb:(NSString *)url;
+
 @end
