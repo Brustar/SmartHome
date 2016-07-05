@@ -51,19 +51,33 @@
     NSDictionary *dict = @{@"username":self.user.text,@"pwd":[self.pwd.text md5]};
     [mgr POST:url parameters:dict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSLog(@"success:%@",responseObject);
+        if ([responseObject[@"Result"] intValue]==1) {
+            [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"AuthorToken"] forKey:@"token"];
+        }
+        [DialogManager showMessage:responseObject[@"Msg"]];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"failure:%@",error);
+        [DialogManager showMessage:@"网络错误"];
     }];
 }
 
 - (IBAction)reg:(id)sender
 {
+    CGRect rect = self.view.bounds;
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:rect];
+    //webView.delegate = self;
+    //webView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+    [self.view addSubview:webView];
     
+    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:@""]
+                                            cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                        timeoutInterval:60.0];
+    [webView loadRequest:request];
 }
 
 - (IBAction)forgotPWD:(id)sender
 {
-    
+    [DialogManager showWeb:@"http://3g.cn"];
 }
 
 /*

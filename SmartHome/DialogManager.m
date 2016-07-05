@@ -38,4 +38,17 @@
     }];
 }
 
++ (void)showWeb:(NSString *)url
+{
+    UIWindow * window = [UIApplication sharedApplication].keyWindow;
+    CGRect rect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:rect];
+    [window addSubview:webView];
+    
+    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]
+                                            cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                        timeoutInterval:60.0];
+    [webView loadRequest:request];
+}
+
 @end

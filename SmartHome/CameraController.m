@@ -21,7 +21,7 @@
 {
     
         _video = [[RTSPPlayer alloc] initWithVideo:@"rtsp://admin:66396639@192.168.199.248" usesTcp:NO];
-    
+        //_video = [[RTSPPlayer alloc] initWithVideo:@"rtsp://admin:abc123456789@192.168.199.108" usesTcp:NO];
         _video.outputWidth = 426;
         _video.outputHeight = 320;
     
