@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface FinishRegisterViewController : UIViewController
-
+@property(nonatomic,strong) NSString *userStr;
 @end

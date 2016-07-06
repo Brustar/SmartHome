@@ -11,10 +11,11 @@
 #import "QRCodeReader.h"
 #import "QRCodeReaderViewController.h"
 #import "RegisterPhoneNumController.h"
-
+#import "WebManager.h"
 @interface RegisterViewController ()<QRCodeReaderDelegate>
 @property(nonatomic,strong) NSString *userType;
 @property(nonatomic,strong) NSString *masterId;
+@property(nonatomic,strong) NSString *role;
 @end
 
 @implementation RegisterViewController
@@ -26,13 +27,7 @@
 }
 
 
-- (IBAction)clickDirectRegisterBtn:(id)sender {
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        RegisterPhoneNumController *reg = [storyBoard instantiateViewControllerWithIdentifier:@"RegisterPhoneNumController"];
-    
-    [self.navigationController pushViewController:reg animated:YES];
 
-}
 
 
 - (IBAction)scanCode:(id)sender {
@@ -64,22 +59,20 @@
 
 - (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result
 {
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    RegisterPhoneNumController *reg = [storyBoard instantiateViewControllerWithIdentifier:@"RegisterPhoneNumController"];
-      [self dismissViewControllerAnimated:YES completion:^{
+     [self dismissViewControllerAnimated:YES completion:^{
       
       NSArray* list = [result componentsSeparatedByString:@"@"];
         if([list count] > 1)
         {
             self.masterId = list[0];
-            [reg setValue:self.masterId forKey:@"masterStr"];
-            NSString *role;
+            //[reg setValue:self.masterId forKey:@"masterStr"];
+            
             if ([@"1" isEqualToString:list[1]]) {
-                role=@"主人";
+                self.role=@"主人";
             }else{
-                role=@"客人";
+                self.role=@"客人";
             }
-            [reg setValue:role forKey:@"suerTypeStr"];
+            //[reg setValue:role forKey:@"suerTypeStr"];
         }
         else
         {
@@ -89,7 +82,7 @@
         }
 
     }];
-    [self.navigationController pushViewController:reg animated:YES];
+    [self performSegueWithIdentifier:@"scanQCSegue" sender:self];
     
 }
 
@@ -97,6 +90,18 @@
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    RegisterPhoneNumController *reg = segue.destinationViewController;
+    reg.masterStr = self.masterId;
+    reg.suerTypeStr = self.role;
+}
+
+//加载到服务协议h5界面
+- (IBAction)serviceAgreement:(id)sender {
+    [WebManager show:@""];
+}
+
 
 
 - (void)didReceiveMemoryWarning {

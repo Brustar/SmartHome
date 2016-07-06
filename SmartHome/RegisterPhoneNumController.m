@@ -10,6 +10,7 @@
 #import "RegisterDetailController.h"
 #import "MBProgressHUD+NJ.h"
 #import "RegexKitLite.h"
+#import "WebManager.h"
 
 @interface RegisterPhoneNumController ()
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewTopLeadingConstraint;
@@ -72,6 +73,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
    
+}
+//加载到服务协议h5界面
+- (IBAction)serviceAgreement:(id)sender {
+    [WebManager show:@""];
 }
 
 

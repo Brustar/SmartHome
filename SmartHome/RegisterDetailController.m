@@ -12,6 +12,7 @@
 #import "IOManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "FinishRegisterViewController.h"
+#import "WebManager.h"
 
 @interface RegisterDetailController ()
 @property (weak, nonatomic) IBOutlet UITextField *authorNum;
@@ -40,7 +41,7 @@
 
 #pragma  mark - 手机验证码
 - (IBAction)sendAuothCode:(id)sender {
-    __block int timeout=30; //倒计时时间
+    __block int timeout=59; //倒计时时间
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     self._timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
     dispatch_source_set_timer(self._timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
@@ -83,6 +84,7 @@
         [MBProgressHUD showError:@"两次密码不匹配"];
         return;
     }
+    //发送注册请求
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     NSString *deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"smartToken"];
     if(self.MasterID == nil)
@@ -101,17 +103,26 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"failure:%@",error);
         UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"注册失败" message:@"请重新注册" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *action = [UIAlertAction actionWithTitle:@"" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [alertVC dismissViewControllerAnimated:YES completion:nil];
+        }];
         [alertVC addAction:action];
         [self presentViewController:alertVC animated:YES completion:nil];
     }];
 
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    FinishRegisterViewController *vc = segue.destinationViewController;
+    vc.userStr = self.userName.text;
+}
 
+- (IBAction)serviceAgreement:(id)sender {
+    [WebManager show:@""];
+}
 
-
-
+//加载到服务协议h5界面
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

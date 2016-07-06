@@ -9,6 +9,7 @@
 #import "FinishRegisterViewController.h"
 
 @interface FinishRegisterViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *userName;
 
 @end
 
@@ -16,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.userName.text = self.userStr;
 }
 
 - (void)didReceiveMemoryWarning {
