@@ -112,6 +112,8 @@
 		F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB411D00029900AB04BE /* DetailViewController.m */; };
 		F60FDB461D003FD500AB04BE /* CurtainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB441D003FD500AB04BE /* CurtainTableViewCell.m */; };
 		F60FDB471D003FD500AB04BE /* CurtainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F60FDB451D003FD500AB04BE /* CurtainTableViewCell.xib */; };
+		F62D5D401D2CE2F800C1E070 /* MyCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62D5D3F1D2CE2F800C1E070 /* MyCenterViewController.m */; };
+		F62D5D431D2CE4C600C1E070 /* MyCenterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F62D5D421D2CE4C600C1E070 /* MyCenterTableViewCell.m */; };
 		F6359AFB1CFFBC910035EB31 /* DetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6359AF91CFFBC910035EB31 /* DetailTableViewCell.m */; };
 		F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6359AFA1CFFBC910035EB31 /* DetailTableViewCell.xib */; };
 		F6359B001CFFC4DC0035EB31 /* ColourTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6359AFE1CFFC4DC0035EB31 /* ColourTableViewCell.m */; };
@@ -438,6 +440,10 @@
 		F60FDB431D003FD500AB04BE /* CurtainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurtainTableViewCell.h; sourceTree = "<group>"; };
 		F60FDB441D003FD500AB04BE /* CurtainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurtainTableViewCell.m; sourceTree = "<group>"; };
 		F60FDB451D003FD500AB04BE /* CurtainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CurtainTableViewCell.xib; sourceTree = "<group>"; };
+		F62D5D3E1D2CE2F800C1E070 /* MyCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCenterViewController.h; sourceTree = "<group>"; };
+		F62D5D3F1D2CE2F800C1E070 /* MyCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCenterViewController.m; sourceTree = "<group>"; };
+		F62D5D411D2CE4C600C1E070 /* MyCenterTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCenterTableViewCell.h; sourceTree = "<group>"; };
+		F62D5D421D2CE4C600C1E070 /* MyCenterTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCenterTableViewCell.m; sourceTree = "<group>"; };
 		F6359AF81CFFBC910035EB31 /* DetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTableViewCell.h; sourceTree = "<group>"; };
 		F6359AF91CFFBC910035EB31 /* DetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewCell.m; sourceTree = "<group>"; };
 		F6359AFA1CFFBC910035EB31 /* DetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailTableViewCell.xib; sourceTree = "<group>"; };
@@ -660,6 +666,10 @@
 				0F4B3BFF1D2A13870002E75E /* MSGController.m */,
 				0F1F3BC51D2B601400B2641C /* FavorController.h */,
 				0F1F3BC61D2B601400B2641C /* FavorController.m */,
+				F62D5D3E1D2CE2F800C1E070 /* MyCenterViewController.h */,
+				F62D5D3F1D2CE2F800C1E070 /* MyCenterViewController.m */,
+				F62D5D411D2CE4C600C1E070 /* MyCenterTableViewCell.h */,
+				F62D5D421D2CE4C600C1E070 /* MyCenterTableViewCell.m */,
 			);
 			path = SmartHome;
 			sourceTree = "<group>";
@@ -1304,6 +1314,7 @@
 				0F3CCF3B1D0F97B70058A320 /* CameraController.m in Sources */,
 				0FC0FFDA1CF577C0000F71D5 /* RealScene.m in Sources */,
 				0FAF74C41CEEA17C00432713 /* HRColorPickerView.m in Sources */,
+				F62D5D401D2CE2F800C1E070 /* MyCenterViewController.m in Sources */,
 				0FCFB3981CF2947500B37DD3 /* EntranceGuard.m in Sources */,
 				F65DB3431D2B5AB2002A815C /* RegisterViewController.m in Sources */,
 				0F4B49801CFEB13500D93DD2 /* CurtainController.m in Sources */,
@@ -1364,6 +1375,7 @@
 				0FAF98B61CE45EC9009BDBB5 /* CryptoManager.m in Sources */,
 				0FAF98A51CE40F3C009BDBB5 /* QRCodeReaderView.m in Sources */,
 				0FAF74AD1CEE9A9600432713 /* LightController.m in Sources */,
+				F62D5D431D2CE4C600C1E070 /* MyCenterTableViewCell.m in Sources */,
 				0F96A1651D17F37C00E1594F /* RulerItemModel.m in Sources */,
 				0F032D491CC9B12700D1920D /* main.m in Sources */,
 			);
