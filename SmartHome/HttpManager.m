@@ -25,9 +25,7 @@
 - (void) sendPost:(NSString *)url param:(NSDictionary *)params
 {
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    if([[AFNetworkReachabilityManager sharedManager] isReachable]){
-        [MBProgressHUD showMessage:@"请稍候..."];
-    }
+    [MBProgressHUD showMessage:@"请稍候..."];
     [mgr POST:url parameters:params progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         [MBProgressHUD hideHUD];
         NSLog(@"success:%@",responseObject);
@@ -38,21 +36,15 @@
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"failure:%@",error);
-        if(![[AFNetworkReachabilityManager sharedManager] isReachable]){
-            [MBProgressHUD showError:@"网络不可用，请检查当前网络设置"];
-        }else{
-            [MBProgressHUD hideHUD];
-            [MBProgressHUD showError:@"网络请求错误"];
-        }
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:@"网络请求错误"];
     }];
 }
 
 - (void) sendGet:(NSString *)url param:(NSDictionary *)params
 {
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    if([[AFNetworkReachabilityManager sharedManager] isReachable]){
-        [MBProgressHUD showMessage:@"请稍候..."];
-    }
+    [MBProgressHUD showMessage:@"请稍候..."];
     [mgr GET:url parameters:params progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         [MBProgressHUD hideHUD];
         NSLog(@"success:%@",responseObject);
@@ -63,12 +55,8 @@
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"failure:%@",error);
-        if(![[AFNetworkReachabilityManager sharedManager] isReachable]){
-            [MBProgressHUD showError:@"网络不可用，请检查当前网络设置"];
-        }else{
-            [MBProgressHUD hideHUD];
-            [MBProgressHUD showError:@"网络请求错误"];
-        }
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:@"网络请求错误"];
     }];
 }
 
