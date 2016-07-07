@@ -7,7 +7,6 @@
 //
 
 #import "LoginController.h"
-#import <AFNetworking.h>
 #import "IOManager.h"
 #import "CryptoManager.h"
 #import "MBProgressHUD+NJ.h"
@@ -46,23 +45,18 @@
     }
     
     NSString *url = [NSString stringWithFormat:@"%@login",[IOManager httpAddr]];
-    // GET
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    // 将数据作为参数传入
     NSDictionary *dict = @{@"username":self.user.text,@"pwd":[self.pwd.text md5]};
-    [MBProgressHUD showMessage:@"请稍候..."];
-    [mgr POST:url parameters:dict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        [MBProgressHUD hideHUD];
-        NSLog(@"success:%@",responseObject);
-        if ([responseObject[@"Result"] intValue]==1) {
-            [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"AuthorToken"] forKey:@"token"];
-        }
-        [MBProgressHUD showSuccess:responseObject[@"Msg"]];
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        [MBProgressHUD hideHUD];
-        NSLog(@"failure:%@",error);
-        [MBProgressHUD showError:@"网络错误"];
-    }];
+    HttpManager *http=[HttpManager defaultManager];
+    http.delegate=self;
+    [http sendPost:url param:dict];
+}
+
+-(void) httpHandler:(id) responseObject
+{
+    if ([responseObject[@"Result"] intValue]==1) {
+        [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"AuthorToken"] forKey:@"token"];
+    }
+    [MBProgressHUD showSuccess:responseObject[@"Msg"]];
 }
 
 - (IBAction)forgotPWD:(id)sender
