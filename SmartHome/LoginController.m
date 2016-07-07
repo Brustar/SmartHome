@@ -50,13 +50,16 @@
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     // 将数据作为参数传入
     NSDictionary *dict = @{@"username":self.user.text,@"pwd":[self.pwd.text md5]};
+    [MBProgressHUD showMessage:@"请稍候..."];
     [mgr POST:url parameters:dict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        [MBProgressHUD hideHUD];
         NSLog(@"success:%@",responseObject);
         if ([responseObject[@"Result"] intValue]==1) {
             [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"AuthorToken"] forKey:@"token"];
         }
         [MBProgressHUD showSuccess:responseObject[@"Msg"]];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [MBProgressHUD hideHUD];
         NSLog(@"failure:%@",error);
         [MBProgressHUD showError:@"网络错误"];
     }];
