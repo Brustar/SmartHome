@@ -56,7 +56,11 @@
     [mgr GET:url parameters:params progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         [MBProgressHUD hideHUD];
         NSLog(@"success:%@",responseObject);
-        [self.delegate httpHandler:responseObject];
+        if (self.tag>0) {
+            [self.delegate httpHandler:responseObject tag:self.tag];
+        }else{
+            [self.delegate httpHandler:responseObject];
+        }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"failure:%@",error);
         if(![[AFNetworkReachabilityManager sharedManager] isReachable]){
