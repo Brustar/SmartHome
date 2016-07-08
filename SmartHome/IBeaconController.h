@@ -6,10 +6,11 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 #import <AFNetworking.h>
+#import "SocketManager.h"
 #import <HomeKit/HomeKit.h>
 #import "public.h"
 #import "Light.h"
-#import "AsyncUdpSocket.h"
+#import <Reachability/Reachability.h> 
 
 @interface IBeaconController : UIViewController<HMHomeManagerDelegate,HMAccessoryBrowserDelegate>
 
@@ -18,5 +19,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *volumeLabel;
 
 @property(nonatomic,strong) NSURLSessionDownloadTask *task;
+@property(nonatomic,strong) SocketManager *sock;
+
+@property(nonatomic,strong) Reachability *hostReach;
 
 @end

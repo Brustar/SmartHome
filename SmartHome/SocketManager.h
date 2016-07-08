@@ -24,4 +24,6 @@ enum{
 -(void)socketConnectHost;// socket连接
 -(void)cutOffSocket; // 断开socket连接
 
+-(void)initUDP:(int)port;
+
 @end

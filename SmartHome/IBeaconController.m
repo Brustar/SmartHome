@@ -7,9 +7,9 @@
 //
 
 #import "IBeaconController.h"
-#import "SocketManager.h"
-#import "PackManager.h"
 #import "CryptoManager.h"
+#import "PackManager.h"
+#import "NetStatusManager.h"
 
 @implementation IBeaconController
 
@@ -24,6 +24,48 @@
     [self.beacon addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:NULL];
     VolumeManager *volume=[VolumeManager defaultManager];
     [volume start:self.beacon];
+    
+    
+    //开启网络状况的监听
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name: kReachabilityChangedNotification object: nil];
+    self.hostReach = [Reachability reachabilityWithHostname:@"www.apple.com"];
+    [self.hostReach startNotifier];  //开始监听,会启动一个run loop
+    [self updateInterfaceWithReachability: self.hostReach];
+}
+
+//监听到网络状态改变
+- (void) reachabilityChanged: (NSNotification* )note
+{
+    Reachability* curReach = [note object];
+    NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
+    [self updateInterfaceWithReachability: curReach];
+}
+
+
+//处理连接改变后的情况
+- (void) updateInterfaceWithReachability: (Reachability*) curReach
+{
+    //对连接改变做出响应的处理动作。
+    NetworkStatus status = [curReach currentReachabilityStatus];
+    if(status == ReachableViaWWAN)
+    {
+        printf("\n3g/2G\n");
+        NSLog(@"外出模式");
+    }
+    else if(status == ReachableViaWiFi)
+    {
+        printf("\nwifi\n");
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"tcpPort"] intValue]>0) {
+            NSLog(@"在家模式");
+        }else{
+            NSLog(@"外出模式");
+        }
+    }else
+    {
+        printf("\n无网络\n");
+        NSLog(@"离线模式");
+    }
+    
 }
 
 - (IBAction)addSongsToMusicPlayer:(id)sender
@@ -140,66 +182,38 @@
     }];
 }
 
--(IBAction)tcp:(id)sender
+-(IBAction)initTcp:(id)sender
 {
-    SocketManager *sock=[SocketManager defaultManager];
-    sock.socketHost = @"192.168.1.183";// host设定
-    sock.socketPort = 1000;// port设定
+    self.sock=[SocketManager defaultManager];
+    self.sock.socketHost = [[NSUserDefaults standardUserDefaults] objectForKey:@"tcpServer"];
+    self.sock.socketPort = [[[NSUserDefaults standardUserDefaults] objectForKey:@"tcpPort"] intValue];
     
     // 在连接前先进行手动断开
-    sock.socket.userData = SocketOfflineByUser;
-    [sock cutOffSocket];
+    [self.sock cutOffSocket];
     
     // 确保断开后再连，如果对一个正处于连接状态的socket进行连接，会出现崩溃
-    sock.socket.userData = SocketOfflineByServer;
-    [sock socketConnectHost];
+    [self.sock socketConnectHost];
+}
 
-    NSString *cmd=@"hello firefly2\r\n\r";
-    [sock.socket writeData:[PackManager fireflyProtocol:cmd] withTimeout:1 tag:1];
-    [sock.socket readDataToData:[AsyncSocket CRLFData] withTimeout:1 tag:1];
+-(IBAction)sendMsg:(id)sender
+{
+    NSString *cmd=@"EC00000000FF0000FFEA";
+    [self.sock.socket writeData:[PackManager dataFormHexString:cmd] withTimeout:1 tag:1];
+    [self.sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1];
+}
+
+-(IBAction)disconnect:(id)sender
+{
+    [self.sock cutOffSocket];
 }
 
 -(IBAction)sendSearchBroadcast:(id)sender
 {
-        NSString* bchost=@"255.255.255.255"; //这里发送广播
-        [self sendToUDPServer:@"hello udp" address:bchost port:10000];
-}
-
--(void)sendToUDPServer:(NSString*) msg address:(NSString*)address port:(int)port{
-    AsyncUdpSocket *udpSocket=[[AsyncUdpSocket alloc]initWithDelegate:self]; //得到udp util
-    NSLog(@"address:%@,port:%d,msg:%@",address,port,msg);
-    //receiveWithTimeout is necessary or you won't receive anything
-    [udpSocket receiveWithTimeout:10 tag:2]; //设置超时10秒
-    [udpSocket enableBroadcast:YES error:nil]; //如果你发送广播，这里必须先enableBroadcast
-    NSData *data=[msg dataUsingEncoding:NSUTF8StringEncoding];
-    [udpSocket sendData:data toHost:address port:port withTimeout:10 tag:1]; //发送udp
-}
-
--(BOOL)onUdpSocket:(AsyncUdpSocket *)sock didReceiveData:(NSData *)data withTag:(long)tag fromHost:(NSString *)host port:(UInt16)port
-{
-    NSString* rData= [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"onUdpSocket:didReceiveData:---%@",rData);
-    return YES;
-}
-
--(void)onUdpSocket:(AsyncUdpSocket *)sock didNotSendDataWithTag:(long)tag dueToError:(NSError *)error
-{
-    NSLog(@"didNotSendDataWithTag----");
-}
-
--(void)onUdpSocket:(AsyncUdpSocket *)sock didNotReceiveDataWithTag:(long)tag dueToError:(NSError *)error
-{
-    NSLog(@"didNotReceiveDataWithTag----");
-}
-
--(void)onUdpSocket:(AsyncUdpSocket *)sock didSendDataWithTag:(long)tag
-{
-    NSLog(@"didSendDataWithTag----");
-}
-
--(void)onUdpSocketDidClose:(AsyncUdpSocket *)sock
-{
-    NSLog(@"onUdpSocketDidClose----");
+    NSString *str =@"ec80000000ff0006c0a8c7ef1f4167ea";
+    NSData *data =[PackManager dataFormHexString:str];
+    NSLog(@"Data:%@,checksum:%i",data,[PackManager checkProtocol:data cmd:0x80]);
+    
+    NSLog(@"wifi:%@",[NetStatusManager getWifiName]);
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -251,5 +265,12 @@
     return @"";
 }
 
+
+-(void)dealloc
+{
+    [self.beacon removeObserver:self forKeyPath:@"beacons" context:NULL];
+    [self.beacon removeObserver:self forKeyPath:@"volume" context:NULL];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
+}
 
 @end

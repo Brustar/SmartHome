@@ -62,7 +62,7 @@
                                         <rect key="frame" x="0.0" y="188" width="200" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qhV-Qt-CdL" id="mN9-7M-659">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gWF-aN-2ue">
@@ -2612,7 +2612,14 @@
                                 <rect key="frame" x="47" y="434" width="30" height="30"/>
                                 <state key="normal" title="TCP"/>
                                 <connections>
-                                    <action selector="tcp:" destination="mdZ-A8-8hK" eventType="touchUpInside" id="XHo-qK-XsN"/>
+                                    <action selector="initTcp:" destination="mdZ-A8-8hK" eventType="touchUpInside" id="bGp-ia-Jki"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AZL-HN-olq">
+                                <rect key="frame" x="164" y="477" width="34" height="30"/>
+                                <state key="normal" title="send"/>
+                                <connections>
+                                    <action selector="sendMsg:" destination="mdZ-A8-8hK" eventType="touchUpInside" id="iD3-UM-HdW"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BEt-YS-FeM">
@@ -2702,6 +2709,13 @@
                                 <state key="normal" title="favors"/>
                                 <connections>
                                     <segue destination="Gao-Z1-8TJ" kind="show" id="obl-4N-tQd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vre-DY-ycn">
+                                <rect key="frame" x="141" y="521" width="76" height="30"/>
+                                <state key="normal" title="disconnect"/>
+                                <connections>
+                                    <action selector="disconnect:" destination="mdZ-A8-8hK" eventType="touchUpInside" id="ns8-xw-s6T"/>
                                 </connections>
                             </button>
                         </subviews>
