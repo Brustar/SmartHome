@@ -561,8 +561,8 @@
 				F66EB2D11CFEB9E300AC53CE /* Detail.m */,
 				F66EB2D31CFED0A900AC53CE /* DetailList.h */,
 				F66EB2D41CFED0A900AC53CE /* DetailList.m */,
-				F6B91F701D100F1400592FB0 /* TVChannel.m */,
 				F6B91F711D100F1400592FB0 /* TVChannel.h */,
+				F6B91F701D100F1400592FB0 /* TVChannel.m */,
 			);
 			name = entity;
 			sourceTree = "<group>";

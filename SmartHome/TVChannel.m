@@ -33,7 +33,7 @@
     return channel;
 }
 
-+(NSArray *)getAllChannelForFavoritedForType:(NSString *)type;
++(NSMutableArray *)getAllChannelForFavoritedForType:(NSString *)type;
 {
     NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath] ;
@@ -59,8 +59,36 @@
     [db close];
     
     return mutabelArr;
-    
 }
 
++(BOOL)deleteChannelForChannelID:(NSInteger)channel_id
+{
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath] ;
+    BOOL isSuccess = false;
+    if([db open])
+    {
+         isSuccess = [db executeQueryWithFormat:@"delete from Channels where Channel_id = %ld",channel_id];
+        [db close];
+    }
+    return isSuccess;
+}
++(BOOL)upDateChannelForChannelID:(NSInteger)channel_id andNewChannel_Name:(NSString *)newName
+{
+    
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath] ;
+    BOOL isSuccess = false;
+    
+    if([db open])
+    {
+        NSString *execute = [NSString stringWithFormat:@"update Channels set Channel_name = '%@' where Channel_id = %ld",newName,channel_id];
+        
+        isSuccess = [db executeUpdate:execute];
+        [db close];
+    }
+  
+    return isSuccess;
+}
 
 @end

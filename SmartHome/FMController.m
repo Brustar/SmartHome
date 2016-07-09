@@ -10,24 +10,33 @@
 #import "TVChannel.h"
 #import "TXHRrettyRuler.h"
 #import "SceneManager.h"
-
-@interface FMController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate,TXHRrettyRulerDelegate>
+#import "MBProgressHUD+NJ.h"
+@interface FMController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate,TXHRrettyRulerDelegate,UIGestureRecognizerDelegate,FMCollectionViewCellDelegate>
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollerContentViewWidth;
-@property (nonatomic,strong) NSArray *allFavouriteChannels;
+@property (nonatomic,strong) NSMutableArray *allFavouriteChannels;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UILabel *numberOfChannel;
 @property (weak, nonatomic) IBOutlet UIView *fmView;
 
+@property (weak, nonatomic) IBOutlet UIView *coverView;
+
+@property (weak, nonatomic) IBOutlet UITextField *channelNameEdit;
+@property (weak, nonatomic) IBOutlet UITextField *channelIDEdit;
+
+@property (weak, nonatomic) IBOutlet UIView *editView;
+@property (weak, nonatomic) IBOutlet UILabel *hzLabel;
+
 @end
 
 @implementation FMController
 
--(NSArray *)allFavouriteChannels
+-(NSMutableArray *)allFavouriteChannels
 {
     if(!_allFavouriteChannels)
     {
+        _allFavouriteChannels = [NSMutableArray array];
         _allFavouriteChannels = [TVChannel getAllChannelForFavoritedForType:@"FM"];
         
     }
@@ -35,7 +44,9 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.hzLabel.transform = CGAffineTransformMakeRotation(M_PI/2 + M_PI);
+    self.collectionView.pagingEnabled = YES;
+    
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
@@ -56,6 +67,7 @@
             }
         }
     }
+   // [self.collectionView registerClass:[FMCollectionViewCell class] forCellWithReuseIdentifier:@"collectionCell"];
     
     [self setRuleForFMChannel];
 }
@@ -64,7 +76,7 @@
 {
     CGFloat rule = [self.numberOfChannel.text floatValue];
     NSLog(@"\n\n\n\n\n rule = %f",rule);
-    TXHRrettyRuler *ruler = [[TXHRrettyRuler alloc] initWithFrame:CGRectMake(20, 150, self.fmView.bounds.size.width - 20 * 2, 150)];
+    TXHRrettyRuler *ruler = [[TXHRrettyRuler alloc] initWithFrame:CGRectMake(30, 150, self.fmView.bounds.size.width - 30 * 2, 150)];
     ruler.rulerDelegate = self;
     [ruler showRulerScrollViewWithCount:205 average:[NSNumber numberWithFloat:0.1] currentValue:rule smallMode:YES];
     [self.fmView addSubview:ruler];
@@ -85,17 +97,92 @@
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.allFavouriteChannels.count;
+    if(self.allFavouriteChannels.count % 4 == 0)
+    {
+        return [self.allFavouriteChannels count];
+    }else {
+        int i = 4 - self.allFavouriteChannels.count % 4;
+        return self.allFavouriteChannels.count + i;
+    }
+    
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     FMCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell" forIndexPath:indexPath];
-    TVChannel *channel = self.allFavouriteChannels[indexPath.row];
-    [cell.numberBtn setTitle:[NSString stringWithFormat:@"%ld",channel.channel_id] forState:UIControlStateNormal];
-    [cell.nameBtn setTitle:[NSString stringWithFormat:@"%@",channel.channel_name] forState:UIControlStateNormal];
+    
+    cell.delegate = self;
+    [cell hiddenBtns];
+    if(indexPath.row > self.allFavouriteChannels.count - 1 )
+    {
+        cell.chanelNum.text = nil;
+        cell.channelName.text = nil;
+        //cell.backgroundColor = [UIColor lightGrayColor];
+        [cell unUseLongPressGesture];
+    }else{
+        TVChannel *channel = self.allFavouriteChannels[indexPath.row];
+        cell.chanelNum.text = [NSString stringWithFormat:@"%ld",channel.channel_id];
+        cell.channelName.text = [NSString stringWithFormat:@"%@",channel.channel_name];
+        [cell useLongPressGesture];
+    }
     
     return cell;
 }
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    FMCollectionViewCell *cell =(FMCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    
+    [cell hiddenBtns];
+    [cell unUseLongPressGesture];
+}
+//- (CGPoint)collectionView:(UICollectionView *)collectionView targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset
+//{
+//    CGPoint point = CGPointMake(proposedContentOffset.x *2, proposedContentOffset.y);
+//    return point;
+//}
+
+#pragma mark - -(void)unUseLongPressGesture
+-(void)FmDeleteAction:(FMCollectionViewCell *)cell
+{
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+    TVChannel *channel = [self.allFavouriteChannels objectAtIndex: indexPath.row];
+    BOOL isSuccess = [TVChannel deleteChannelForChannelID:channel.channel_id];
+    if(!isSuccess)
+    {
+        [MBProgressHUD showError:@"删除失败，请稍后再试"];
+    
+        return;
+    }
+    
+    [self.allFavouriteChannels removeObject:channel];
+    [self.collectionView reloadData];
+}
+
+-(void)FmEditAction:(FMCollectionViewCell *)cell
+{
+    self.coverView.hidden = NO;
+    self.editView.hidden = NO;
+    self.channelNameEdit.text = cell.channelName.text;
+    self.channelIDEdit.text = cell.chanelNum.text;
+    
+}
+//编辑FM频道
+- (IBAction)cancelEdit:(id)sender {
+    self.coverView.hidden = YES;
+    self.editView.hidden = YES;
+}
+- (IBAction)sureEdit:(id)sender {
+    BOOL isSuccess =[TVChannel upDateChannelForChannelID:[self.channelIDEdit.text intValue] andNewChannel_Name:self.channelNameEdit.text];
+    if(!isSuccess)
+    {
+        [MBProgressHUD showError:@"编辑失败，请稍后再试"];
+        
+        return;
+    }
+    self.allFavouriteChannels = [TVChannel getAllChannelForFavoritedForType:@"FM"];
+    [self cancelEdit:nil];
+    [self.collectionView reloadData];
+}
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].

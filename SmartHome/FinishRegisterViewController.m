@@ -11,6 +11,7 @@
 @interface FinishRegisterViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 
+
 @end
 
 @implementation FinishRegisterViewController
