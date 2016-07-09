@@ -184,27 +184,29 @@
 
 -(IBAction)initTcp:(id)sender
 {
-    self.sock=[SocketManager defaultManager];
-    self.sock.socketHost = [[NSUserDefaults standardUserDefaults] objectForKey:@"tcpServer"];
-    self.sock.socketPort = [[[NSUserDefaults standardUserDefaults] objectForKey:@"tcpPort"] intValue];
+    SocketManager *sock=[SocketManager defaultManager];
+    sock.socketHost = [[NSUserDefaults standardUserDefaults] objectForKey:@"tcpServer"];
+    sock.socketPort = [[[NSUserDefaults standardUserDefaults] objectForKey:@"tcpPort"] intValue];
     
     // 在连接前先进行手动断开
-    [self.sock cutOffSocket];
+    [sock cutOffSocket];
     
     // 确保断开后再连，如果对一个正处于连接状态的socket进行连接，会出现崩溃
-    [self.sock socketConnectHost];
+    [sock socketConnectHost];
 }
 
 -(IBAction)sendMsg:(id)sender
 {
     NSString *cmd=@"EC00000000FF0000FFEA";
-    [self.sock.socket writeData:[PackManager dataFormHexString:cmd] withTimeout:1 tag:1];
-    [self.sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:[PackManager dataFormHexString:cmd] withTimeout:1 tag:1];
+    [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1];
 }
 
 -(IBAction)disconnect:(id)sender
 {
-    [self.sock cutOffSocket];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock cutOffSocket];
 }
 
 -(IBAction)sendSearchBroadcast:(id)sender

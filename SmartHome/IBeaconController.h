@@ -19,7 +19,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *volumeLabel;
 
 @property(nonatomic,strong) NSURLSessionDownloadTask *task;
-@property(nonatomic,strong) SocketManager *sock;
 
 @property(nonatomic,strong) Reachability *hostReach;
 
