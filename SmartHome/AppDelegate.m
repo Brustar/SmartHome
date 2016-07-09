@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "IOManager.h"
+#import "SocketManager.h"
 
 @interface AppDelegate ()
 
@@ -27,10 +28,11 @@
         [application registerUserNotificationSettings:notiSettings];
         
     } else{ // ios7
-        [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge                                       |UIRemoteNotificationTypeSound                                      |UIRemoteNotificationTypeAlert)];
+        [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound                                      |UIRemoteNotificationTypeAlert)];
     } ;
     
     [IOManager copyFile:@"smartDB" to:@"smartDB"];
+    [[SocketManager defaultManager] initUDP:40000];
     return YES;
 }
 

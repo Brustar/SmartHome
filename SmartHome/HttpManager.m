@@ -9,6 +9,7 @@
 #import "HttpManager.h"
 #import <AFNetworking.h>
 #import "MBProgressHUD+NJ.h"
+#import "NetStatusManager.h"
 
 @implementation HttpManager
 
@@ -24,6 +25,10 @@
 
 - (void) sendPost:(NSString *)url param:(NSDictionary *)params
 {
+    if (![NetStatusManager reachable]) {
+        [MBProgressHUD showError:@"当前网络不可用，请检查你的网络设置"];
+        return;
+    }
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     [MBProgressHUD showMessage:@"请稍候..."];
     [mgr POST:url parameters:params progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -43,6 +48,10 @@
 
 - (void) sendGet:(NSString *)url param:(NSDictionary *)params
 {
+    if (![NetStatusManager reachable]) {
+        [MBProgressHUD showError:@"当前网络不可用，请检查你的网络设置"];
+        return;
+    }
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     [MBProgressHUD showMessage:@"请稍候..."];
     [mgr GET:url parameters:params progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {

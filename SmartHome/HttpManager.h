@@ -23,7 +23,6 @@
 @property (nonatomic) int tag;
 
 + (id)defaultManager;
-
 - (void) sendPost:(NSString *)url param:(NSDictionary *)params;
 - (void) sendGet:(NSString *)url param:(NSDictionary *)params;
 
