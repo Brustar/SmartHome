@@ -27,7 +27,7 @@
 
 @end
 
-@implementation RegisterDetailController
+@implementation RegisterDetailController 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -85,7 +85,7 @@
         return;
     }
     //发送注册请求
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+   
     NSString *deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"smartToken"];
     if(self.MasterID == nil)
     {
@@ -95,21 +95,23 @@
     NSDictionary *dict = @{@"QRCode":self.MasterID,@"CName":self.userName.text,@"CPassword":[self.passWord.text md5],@"CTellNumber":self.phoneStr,@"CType":[NSNumber numberWithInt:self.cType],@"AuthorCode":self.authorNum.text,@"pushtoken":deviceToken};
     NSString *url = [NSString stringWithFormat:@"%@reg",[IOManager httpAddr]];
     
-    [mgr POST:url parameters:dict progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSLog(@"success:%@",responseObject);
-
+    HttpManager *http=[HttpManager defaultManager];
+    http.delegate=self;
+    [http sendPost:url param:dict];
+    
+    
+  
+}
+-(void)httpHandler:(id)responseObject
+{
+    if([responseObject[@"Result"] intValue] == 0)
+    {
+        [MBProgressHUD showError:responseObject[@"Msg"]];
+        return;
+    }else{
+        [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"AuthorToken"] forKey:@"token"];
         [self performSegueWithIdentifier:@"finishedSegue" sender:self];
-        
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        NSLog(@"failure:%@",error);
-        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"注册失败" message:@"请重新注册" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [alertVC dismissViewControllerAnimated:YES completion:nil];
-        }];
-        [alertVC addAction:action];
-        [self presentViewController:alertVC animated:YES completion:nil];
-    }];
-
+    }
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

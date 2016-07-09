@@ -7,7 +7,9 @@
 //
 #import "public.h"
 
+
 @interface FMController : UIViewController
+
 
 @property (nonatomic,weak) NSString *sceneid;
 @property (weak, nonatomic) IBOutlet UISlider *volume;

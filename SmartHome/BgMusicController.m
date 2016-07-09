@@ -11,6 +11,7 @@
 @interface BgMusicController ()
 @property (weak, nonatomic) IBOutlet UISlider *volume;
 
+
 @end
 
 @implementation BgMusicController
