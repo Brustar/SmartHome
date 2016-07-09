@@ -11,7 +11,7 @@
 #import "CryptoManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "WebManager.h"
-
+#import "RegexKitLite.h"
 @interface LoginController ()
 @property (weak, nonatomic) IBOutlet UITextField *user;
 @property (weak, nonatomic) IBOutlet UITextField *pwd;
@@ -44,8 +44,13 @@
         return;
     }
     
-    NSString *url = [NSString stringWithFormat:@"%@login",[IOManager httpAddr]];
-    NSDictionary *dict = @{@"username":self.user.text,@"pwd":[self.pwd.text md5]};
+    NSString *url = [NSString stringWithFormat:@"%@UserLogin. aspx",[IOManager httpAddr]];
+    int type = 1;
+    if([self isMobileNumber:self.user.text])
+    {
+        type = 0;
+    }
+    NSDictionary *dict = @{@"Account":self.user.text,@"Type":[NSNumber numberWithInt:type],@"Password":[self.pwd.text md5]};
     HttpManager *http=[HttpManager defaultManager];
     http.delegate=self;
     [http sendPost:url param:dict];
@@ -57,6 +62,13 @@
         [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"AuthorToken"] forKey:@"token"];
     }
     [MBProgressHUD showSuccess:responseObject[@"Msg"]];
+}
+
+
+- (BOOL)isMobileNumber:(NSString *)mobileNum
+{
+    NSString *regex=@"^1[3|4|5|7|8]\\d{9}$";
+    return [mobileNum isMatchedByRegex:regex];
 }
 
 - (IBAction)forgotPWD:(id)sender

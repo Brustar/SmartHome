@@ -10,7 +10,8 @@
 #import "CryptoManager.h"
 #import "PackManager.h"
 #import "NetStatusManager.h"
-
+#import "HttpManager.h"
+#import "MBProgressHUD+NJ.h"
 @implementation IBeaconController
 
 -(void) viewDidLoad
@@ -144,9 +145,23 @@
 
 - (IBAction)logout:(id)sender
 {
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"token"];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *dict = @{@"UserName":[defaults objectForKey:@"userName"],@"UserTellNumber":[defaults objectForKey:@"password"]};
+    
+    NSString *url = [NSString stringWithFormat:@"%@UserLogOut. aspx",[IOManager httpAddr]];
+    HttpManager *http=[HttpManager defaultManager];
+    http.delegate=self;
+    [http sendPost:url param:dict];
+    
 }
-
+-(void) httpHandler:(id) responseObject
+{
+    if([responseObject[@"Result"] intValue] == 1)
+    {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"token"];
+    }
+    [MBProgressHUD showSuccess:responseObject[@"Msg"]];
+}
 - (IBAction)Des:(id)sender {
     NSString *str=@"hello";
     NSString *tar=@"ev/A2FRCkPM=";

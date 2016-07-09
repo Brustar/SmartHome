@@ -638,12 +638,12 @@
 				F60FDB441D003FD500AB04BE /* CurtainTableViewCell.m */,
 				0FABF91A1D06AA35000892D8 /* TVController.h */,
 				0FABF91B1D06AA35000892D8 /* TVController.m */,
+				F6B91F751D100F7100592FB0 /* tvBrandView.h */,
+				F6B91F761D100F7100592FB0 /* tvBrandView.m */,
 				0FABF91D1D06AA4E000892D8 /* DVDController.h */,
 				0FABF91E1D06AA4E000892D8 /* DVDController.m */,
 				F6B91F6D1D100EF700592FB0 /* DVCollectionViewCell.h */,
 				F6B91F6E1D100EF700592FB0 /* DVCollectionViewCell.m */,
-				F6B91F751D100F7100592FB0 /* tvBrandView.h */,
-				F6B91F761D100F7100592FB0 /* tvBrandView.m */,
 				0F180FC11D0E4C7400392F4C /* NetvController.h */,
 				0F180FC21D0E4C7400392F4C /* NetvController.m */,
 				0F180FC41D0E4E5000392F4C /* FMController.h */,
@@ -1062,7 +1062,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0F032D771CC9B12700D1920D /* Build configuration list for PBXNativeTarget "SmartHome" */;
 			buildPhases = (
-				22E4FF7C74861624FBD7E7CB /* 📦 Check Pods Manifest.lock */,
+				22E4FF7C74861624FBD7E7CB /* [CP] Check Pods Manifest.lock */,
 				7B4EC63A298C6E6A66AD1643 /* [CP] Check Pods Manifest.lock */,
 				6984B7368FBF635163F6D0CF /* [CP] Check Pods Manifest.lock */,
 				0F032D401CC9B12700D1920D /* Sources */,
@@ -1205,14 +1205,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		22E4FF7C74861624FBD7E7CB /* 📦 Check Pods Manifest.lock */ = {
+		22E4FF7C74861624FBD7E7CB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;

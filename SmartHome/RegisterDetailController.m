@@ -13,8 +13,9 @@
 #import "MBProgressHUD+NJ.h"
 #import "FinishRegisterViewController.h"
 #import "WebManager.h"
+#import "RegexKitLite.h"
 
-@interface RegisterDetailController ()
+@interface RegisterDetailController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *authorNum;
 @property (weak, nonatomic) IBOutlet UITextField *userName;
 @property (weak, nonatomic) IBOutlet UITextField *passWord;
@@ -37,6 +38,7 @@
     {
         self.cType = 0;
     }else self.cType = 1;
+    self.passWord.delegate = self;
 }
 
 #pragma  mark - 手机验证码
@@ -84,6 +86,9 @@
         [MBProgressHUD showError:@"两次密码不匹配"];
         return;
     }
+    
+    
+        
     //发送注册请求
    
     NSString *deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"smartToken"];
@@ -92,8 +97,9 @@
         self.MasterID = @"";
     }
    
-    NSDictionary *dict = @{@"QRCode":self.MasterID,@"CName":self.userName.text,@"CPassword":[self.passWord.text md5],@"CTellNumber":self.phoneStr,@"CType":[NSNumber numberWithInt:self.cType],@"AuthorCode":self.authorNum.text,@"pushtoken":deviceToken};
-    NSString *url = [NSString stringWithFormat:@"%@reg",[IOManager httpAddr]];
+    NSDictionary *dict = @{@"QRCode":self.MasterID,@"UserName":self.userName.text,@"Password":[self.passWord.text md5],@"UserTellNumber":self.phoneStr,@"UserType":[NSNumber numberWithInt:self.cType],@"pushtoken":deviceToken};
+    NSString *url = [NSString stringWithFormat:@"%@UserRegist.aspx",[IOManager httpAddr]];
+   
     
     HttpManager *http=[HttpManager defaultManager];
     http.delegate=self;
@@ -106,11 +112,16 @@
 {
     if([responseObject[@"Result"] intValue] == 0)
     {
-        [MBProgressHUD showError:responseObject[@"Msg"]];
-        return;
-    }else{
         [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"AuthorToken"] forKey:@"token"];
+        [[NSUserDefaults standardUserDefaults] setObject:self.userName.text forKey:@"userName"];
+        [[NSUserDefaults standardUserDefaults]  setObject:self.passWord.text forKey:@"password"];
+       
         [self performSegueWithIdentifier:@"finishedSegue" sender:self];
+        
+       
+    }else{
+        [MBProgressHUD showError:responseObject[@"Msg"]];
+        
     }
 }
 
@@ -120,11 +131,23 @@
     vc.userStr = self.userName.text;
 }
 
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if(![self.passWord.text isMatchedByRegex:@"^(?![^a-z]+$)(?![^A-Z]+$)(?!\\D+$).{8,15}$"])
+    {
+        [MBProgressHUD showError:@"密码必须是由大小写、数字组成且不少于8位数"];
+    }
+}
+//加载到服务协议h5界面
 - (IBAction)serviceAgreement:(id)sender {
     [WebManager show:@""];
 }
 
-//加载到服务协议h5界面
+
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

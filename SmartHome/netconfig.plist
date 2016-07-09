@@ -7,8 +7,8 @@
 	<key>tcpServer</key>
 	<string></string>
 	<key>httpPort</key>
-	<integer>3000</integer>
+	<integer>8088</integer>
 	<key>httpServer</key>
-	<string>192.168.199.203</string>
+	<string>115.28.151.85</string>
 </dict>
 </plist>

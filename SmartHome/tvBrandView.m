@@ -10,7 +10,9 @@
 #import "TVChannel.h"
 @interface tvBrandView()
 @property (strong, nonatomic) IBOutlet UIView *view;
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *channelBtns;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *imageView;
+@property (nonatomic,strong) UILongPressGestureRecognizer *lgr;
+
 
 @end
 
@@ -27,7 +29,6 @@
     return self;
 }
 
-
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -37,25 +38,32 @@
 -(void)setChannelArr:(NSArray *)channelArr
 {
     _channelArr = channelArr;
-    //NSArray *channels = [TVChannel getAllChannelForFavoritedForType:@"TV"];
+    
     int i = 0;
     for( i = 0; i < self.channelArr.count; i++)
     {
-        UIButton *btn = self.channelBtns[i];
+        UIImageView *img = self.imageView[i];
         TVChannel *channel = channelArr[i];
-        [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@",channel.channel_pic]] forState:UIControlStateNormal];
         
-        btn.hidden = NO;
+        img.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",channel.channel_pic]];
+        img.hidden = NO;
     }
-    for(;i < self.channelBtns.count; i++)
+    for(;i < self.imageView.count; i++)
     {
-        UIButton *btn = self.channelBtns[i];
-        btn.hidden = YES;
+        UIImageView *img = self.imageView[i];
+        img.hidden = YES;
     }
 
 }
 
-
-
+-(void)useLongPressGesture
+{
+    self.lgr = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPressGesture:)];
+    
+}
+-(void)handleLongPressGesture:(UILongPressGestureRecognizer *)lgr
+{
+    
+}
 
 @end

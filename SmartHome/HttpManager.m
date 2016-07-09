@@ -40,10 +40,12 @@
             [self.delegate httpHandler:responseObject];
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        NSLog(@"failure:%@",error);
+        NSLog(@"failure:%@",error.userInfo);
         [MBProgressHUD hideHUD];
         [MBProgressHUD showError:@"网络请求错误"];
+        
     }];
+    
 }
 
 - (void) sendGet:(NSString *)url param:(NSDictionary *)params
