@@ -59,10 +59,13 @@
 + (void) handleUDP:(NSData *)data
 {
     if ([PackManager checkProtocol:data cmd:0x80]) {
+        NSData *masterID=[data subdataWithRange:NSMakeRange(3, 4)];
         NSData *ip=[data subdataWithRange:NSMakeRange(8, 4)];
         NSData *port=[data subdataWithRange:NSMakeRange(12, 2)];
         
+        
         NSUserDefaults *dic=[NSUserDefaults standardUserDefaults];
+        [dic setValue:[PackManager NSDataToIP:masterID] forKey:@"masterID"];
         [dic setValue:[PackManager NSDataToIP:ip] forKey:@"tcpServer"];
         [dic setValue:[NSNumber numberWithLong:[PackManager NSDataToUInt:port]] forKey:@"tcpPort"];
     }

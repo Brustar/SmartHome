@@ -47,19 +47,33 @@
 {
     //对连接改变做出响应的处理动作。
     NetworkStatus status = [curReach currentReachabilityStatus];
+    SocketManager *sock=[SocketManager defaultManager];
     if(status == ReachableViaWWAN)
     {
-        printf("\n3g/2G\n");
+        printf("\n3g/4G/2G\n");
+        if (sock.netMode==outDoor) {
+            return;
+        }
+        //connect master
+        NSUserDefaults *userdefault=[NSUserDefaults standardUserDefaults];
+        [sock initTcp:[userdefault objectForKey:@"tcpServer"] port:[[userdefault objectForKey:@"tcpPort"] intValue] mode:atHome];
         NSLog(@"外出模式");
     }
     else if(status == ReachableViaWiFi)
     {
         printf("\nwifi\n");
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"tcpPort"] intValue]>0) {
-            NSLog(@"在家模式");
-        }else{
+        if (sock.netMode==atHome) {
+            
+            return;
+        }else if (sock.netMode==outDoor){
             NSLog(@"外出模式");
+            
+        }else{
+            
         }
+        //connect cloud
+        [sock initTcp:[IOManager tcpAddr] port:[IOManager tcpPort] mode:outDoor];
+        NSLog(@"在家模式");
     }else
     {
         printf("\n无网络\n");
@@ -185,19 +199,16 @@
 -(IBAction)initTcp:(id)sender
 {
     SocketManager *sock=[SocketManager defaultManager];
-    sock.socketHost = [[NSUserDefaults standardUserDefaults] objectForKey:@"tcpServer"];
-    sock.socketPort = [[[NSUserDefaults standardUserDefaults] objectForKey:@"tcpPort"] intValue];
+    NSUserDefaults *userdefault=[NSUserDefaults standardUserDefaults];
     
-    // 在连接前先进行手动断开
-    [sock cutOffSocket];
-    
-    // 确保断开后再连，如果对一个正处于连接状态的socket进行连接，会出现崩溃
-    [sock socketConnectHost];
+    //[sock initTcp:[userdefault objectForKey:@"tcpServer"] port:[[userdefault objectForKey:@"tcpPort"] intValue] mode:atHome];
+    [sock initTcp:[IOManager tcpAddr] port:[IOManager tcpPort] mode:outDoor];
 }
 
 -(IBAction)sendMsg:(id)sender
 {
-    NSString *cmd=@"EC00000000FF0000FFEA";
+    //NSString *cmd=@"EC00000000FF0000FFEA";
+    NSString *cmd=@"hello";
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:[PackManager dataFormHexString:cmd] withTimeout:1 tag:1];
     [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1];

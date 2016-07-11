@@ -46,6 +46,20 @@
     return [NSString stringWithFormat:@"%@:%d/",server,port];
 }
 
++ (NSString *) tcpAddr
+{
+    NSString *path=[[NSBundle mainBundle] pathForResource:@"netconfig" ofType:@"plist"];
+    NSDictionary *dic = [[NSDictionary alloc] initWithContentsOfFile:path];
+    return [NSString stringWithFormat:@"%@",dic[@"tcpServer"]];
+}
+
++ (int) tcpPort
+{
+    NSString *path=[[NSBundle mainBundle] pathForResource:@"netconfig" ofType:@"plist"];
+    NSDictionary *dic = [[NSDictionary alloc] initWithContentsOfFile:path];
+    return [dic[@"tcpPort"] intValue];
+}
+
 + (void) copyFile:(NSString *)file to:(NSString *)newFile
 {
     NSString *path = [[NSBundle mainBundle] pathForResource:file ofType:@""];

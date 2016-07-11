@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>tcpPort</key>
-	<string></string>
+	<string>8000</string>
 	<key>tcpServer</key>
-	<string></string>
+	<string>120.204.196.224</string>
 	<key>httpPort</key>
 	<integer>3000</integer>
 	<key>httpServer</key>

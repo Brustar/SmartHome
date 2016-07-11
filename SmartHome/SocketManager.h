@@ -12,6 +12,13 @@ enum{
     SocketOfflineByUser,  // 用户主动cut
 };
 
+enum{
+    offLine,  //离线
+    atHome,// 在家模式
+    outDoor,  // 户外模式
+    
+};
+
 @interface SocketManager : NSObject
 
 @property (nonatomic, strong) AsyncSocket    *socket;       // socket
@@ -20,10 +27,13 @@ enum{
 
 @property (nonatomic, retain) NSTimer        *connectTimer; // 计时器
 
+@property (nonatomic) int        netMode;
+
 + (id)defaultManager;
--(void)socketConnectHost;// socket连接
+-(void)socketConnectHost:(int)mode;// socket连接
 -(void)cutOffSocket; // 断开socket连接
 
 -(void)initUDP:(int)port;
+-(void)initTcp:(NSString *)addr port:(int)port mode:(int)mode;
 
 @end

@@ -23,8 +23,9 @@
 }
 
 // socket连接
--(void)socketConnectHost{
+-(void)socketConnectHost:(int)mode{
     self.socket = [[AsyncSocket alloc] initWithDelegate:self];
+    self.netMode=mode;
     NSError *error = nil;
     [self.socket connectToHost:self.socketHost onPort:self.socketPort withTimeout:3 error:&error];
 }
@@ -58,6 +59,18 @@
     [udpSocket receiveWithTimeout:5000 tag:1]; //接收数据
 }
 
+-(void)initTcp:(NSString *)addr port:(int)port mode:(int)mode
+{
+    self.socketHost = addr;
+    self.socketPort = port;
+    
+    // 在连接前先进行手动断开
+    [self cutOffSocket];
+    
+    // 确保断开后再连，如果对一个正处于连接状态的socket进行连接，会出现崩溃
+    [self socketConnectHost:mode];
+}
+
 #pragma mark  - TCP delegate
 -(void)onSocket:(AsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port
 {
@@ -82,7 +95,7 @@
 {
     NSLog(@"sorry the connect is failure %ld",sock.userData);
     if (sock.userData == SocketOfflineByServer) {// 服务器掉线，重连
-        [self socketConnectHost];
+        [self socketConnectHost:self.netMode];
     }else if (sock.userData == SocketOfflineByUser) {// 如果由用户断开，不进行重连
         return;
     }
