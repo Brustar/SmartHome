@@ -12,6 +12,7 @@
 #import "NetStatusManager.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
+#import "RegexKitLite.h"
 @implementation IBeaconController
 
 -(void) viewDidLoad
@@ -145,10 +146,10 @@
 
 - (IBAction)logout:(id)sender
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *dict = @{@"UserName":[defaults objectForKey:@"userName"],@"UserTellNumber":[defaults objectForKey:@"password"]};
+   
     
-    NSString *url = [NSString stringWithFormat:@"%@UserLogOut. aspx",[IOManager httpAddr]];
+    NSDictionary *dict = @{@"UserID":[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"]};
+    NSString *url = [NSString stringWithFormat:@"%@UserLogOut.aspx",[IOManager httpAddr]];
     HttpManager *http=[HttpManager defaultManager];
     http.delegate=self;
     [http sendPost:url param:dict];
@@ -156,7 +157,7 @@
 }
 -(void) httpHandler:(id) responseObject
 {
-    if([responseObject[@"Result"] intValue] == 1)
+    if([responseObject[@"Result"] intValue] == 0)
     {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"token"];
     }

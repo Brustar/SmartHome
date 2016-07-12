@@ -44,13 +44,14 @@
         return;
     }
     
-    NSString *url = [NSString stringWithFormat:@"%@UserLogin. aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@UserLogin.aspx",[IOManager httpAddr]];
     int type = 1;
     if([self isMobileNumber:self.user.text])
     {
-        type = 0;
+        type = 2;
     }
     NSDictionary *dict = @{@"Account":self.user.text,@"Type":[NSNumber numberWithInt:type],@"Password":[self.pwd.text md5]};
+    [[NSUserDefaults standardUserDefaults] setObject:self.user.text forKey:@"Account"];
     HttpManager *http=[HttpManager defaultManager];
     http.delegate=self;
     [http sendPost:url param:dict];
@@ -58,8 +59,9 @@
 
 -(void) httpHandler:(id) responseObject
 {
-    if ([responseObject[@"Result"] intValue]==1) {
+    if ([responseObject[@"Result"] intValue]==0) {
         [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"AuthorToken"] forKey:@"token"];
+        [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"UserID"] forKey:@"UserID"];
     }
     [MBProgressHUD showSuccess:responseObject[@"Msg"]];
 }

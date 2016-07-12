@@ -9,7 +9,7 @@
 #import "FMCollectionViewCell.h"
 
 
-@interface FMCollectionViewCell ()
+@interface FMCollectionViewCell ()<UIGestureRecognizerDelegate>
 @property (nonatomic,strong) UILongPressGestureRecognizer *longPrss;
 @end
 @implementation FMCollectionViewCell

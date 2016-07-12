@@ -121,6 +121,9 @@
 		F6359B001CFFC4DC0035EB31 /* ColourTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6359AFE1CFFC4DC0035EB31 /* ColourTableViewCell.m */; };
 		F6359B011CFFC4DC0035EB31 /* ColourTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6359AFF1CFFC4DC0035EB31 /* ColourTableViewCell.xib */; };
 		F63AE0031D11319C00BE17DC /* FMCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F63AE0021D11319C00BE17DC /* FMCollectionViewCell.m */; };
+		F65AF6D41D3370770048A4E5 /* ProfieFaultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65AF6D31D3370770048A4E5 /* ProfieFaultsViewController.m */; };
+		F65AF6DA1D3375700048A4E5 /* ProfieFaultsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F65AF6D91D3375700048A4E5 /* ProfieFaultsCell.m */; };
+		F65B7D271D34E9E00059CFA4 /* MySettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65B7D261D34E9E00059CFA4 /* MySettingViewController.m */; };
 		F65DB3411D2B5AB2002A815C /* RegisterDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65DB33C1D2B5AB2002A815C /* RegisterDetailController.m */; };
 		F65DB3421D2B5AB2002A815C /* RegisterPhoneNumController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65DB33E1D2B5AB2002A815C /* RegisterPhoneNumController.m */; };
 		F65DB3431D2B5AB2002A815C /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65DB3401D2B5AB2002A815C /* RegisterViewController.m */; };
@@ -458,6 +461,12 @@
 		F6359AFF1CFFC4DC0035EB31 /* ColourTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ColourTableViewCell.xib; sourceTree = "<group>"; };
 		F63AE0011D11319C00BE17DC /* FMCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCollectionViewCell.h; sourceTree = "<group>"; };
 		F63AE0021D11319C00BE17DC /* FMCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCollectionViewCell.m; sourceTree = "<group>"; };
+		F65AF6D21D3370770048A4E5 /* ProfieFaultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfieFaultsViewController.h; sourceTree = "<group>"; };
+		F65AF6D31D3370770048A4E5 /* ProfieFaultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfieFaultsViewController.m; sourceTree = "<group>"; };
+		F65AF6D81D3375700048A4E5 /* ProfieFaultsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfieFaultsCell.h; sourceTree = "<group>"; };
+		F65AF6D91D3375700048A4E5 /* ProfieFaultsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfieFaultsCell.m; sourceTree = "<group>"; };
+		F65B7D251D34E9E00059CFA4 /* MySettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySettingViewController.h; sourceTree = "<group>"; };
+		F65B7D261D34E9E00059CFA4 /* MySettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySettingViewController.m; sourceTree = "<group>"; };
 		F65DB33B1D2B5AB2002A815C /* RegisterDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterDetailController.h; sourceTree = "<group>"; };
 		F65DB33C1D2B5AB2002A815C /* RegisterDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterDetailController.m; sourceTree = "<group>"; };
 		F65DB33D1D2B5AB2002A815C /* RegisterPhoneNumController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterPhoneNumController.h; sourceTree = "<group>"; };
@@ -672,10 +681,16 @@
 				0F4B3BFF1D2A13870002E75E /* MSGController.m */,
 				0F1F3BC51D2B601400B2641C /* FavorController.h */,
 				0F1F3BC61D2B601400B2641C /* FavorController.m */,
+				F65AF6D21D3370770048A4E5 /* ProfieFaultsViewController.h */,
+				F65AF6D31D3370770048A4E5 /* ProfieFaultsViewController.m */,
+				F65AF6D81D3375700048A4E5 /* ProfieFaultsCell.h */,
+				F65AF6D91D3375700048A4E5 /* ProfieFaultsCell.m */,
 				F62D5D3E1D2CE2F800C1E070 /* MyCenterViewController.h */,
 				F62D5D3F1D2CE2F800C1E070 /* MyCenterViewController.m */,
 				F62D5D411D2CE4C600C1E070 /* MyCenterTableViewCell.h */,
 				F62D5D421D2CE4C600C1E070 /* MyCenterTableViewCell.m */,
+				F65B7D251D34E9E00059CFA4 /* MySettingViewController.h */,
+				F65B7D261D34E9E00059CFA4 /* MySettingViewController.m */,
 			);
 			path = SmartHome;
 			sourceTree = "<group>";
@@ -1330,6 +1345,7 @@
 				0FAF98A41CE40F3C009BDBB5 /* QRCodeReader.m in Sources */,
 				0F2D35BC1D114E7000C46DE5 /* AudioStreamer.m in Sources */,
 				F60FDB461D003FD500AB04BE /* CurtainTableViewCell.m in Sources */,
+				F65AF6DA1D3375700048A4E5 /* ProfieFaultsCell.m in Sources */,
 				0FABF91F1D06AA4E000892D8 /* DVDController.m in Sources */,
 				0FEE12771D20C53400811947 /* TXHRrettyRuler.m in Sources */,
 				0F43B1031CF4055300F3D9F0 /* IATConfig.m in Sources */,
@@ -1377,6 +1393,7 @@
 				0FAF8FEF1CE18C41000557BD /* IBeacon.m in Sources */,
 				0F4B3C001D2A13870002E75E /* MSGController.m in Sources */,
 				F66EB2D21CFEB9E300AC53CE /* Detail.m in Sources */,
+				F65AF6D41D3370770048A4E5 /* ProfieFaultsViewController.m in Sources */,
 				0F96A1671D17F37C00E1594F /* RulerView.m in Sources */,
 				0FB205E91CDC312A00B5E87E /* IOManager.m in Sources */,
 				0FC7FDCB1CED9D5A00F91BDF /* DeviceList.m in Sources */,
@@ -1390,6 +1407,7 @@
 				0F43B1061CF4078300F3D9F0 /* ISRDataHelper.m in Sources */,
 				0FB42E231CF6F9E8007DE64F /* SocketManager.m in Sources */,
 				0FCFB3861CF2912700B37DD3 /* TV.m in Sources */,
+				F65B7D271D34E9E00059CFA4 /* MySettingViewController.m in Sources */,
 				F65DB3411D2B5AB2002A815C /* RegisterDetailController.m in Sources */,
 				0FAF98A61CE40F3C009BDBB5 /* QRCodeReaderViewController.m in Sources */,
 				0F96A1661D17F37C00E1594F /* RulerLeftTagView.m in Sources */,

@@ -115,6 +115,8 @@
         [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"AuthorToken"] forKey:@"token"];
         [[NSUserDefaults standardUserDefaults] setObject:self.userName.text forKey:@"userName"];
         [[NSUserDefaults standardUserDefaults]  setObject:self.passWord.text forKey:@"password"];
+        [[NSUserDefaults standardUserDefaults] setObject:self.phoneNumber.text forKey:@"UserTellNumber"];
+        [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"UserID"] forKey:@"UserID"];
        
         [self performSegueWithIdentifier:@"finishedSegue" sender:self];
         

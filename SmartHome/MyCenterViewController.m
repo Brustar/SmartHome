@@ -12,6 +12,8 @@
 #import "MyCenterTableViewCell.h"
 #import "MSGController.h"
 #import "FavorController.h"
+#import "ProfieFaultsViewController.h"
+
 @interface MyCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) NSArray *titlArr;
 @property(nonatomic,strong) NSArray *images;
@@ -40,13 +42,19 @@
     self.scrollView.frame = CGRectMake(200, 0, self.view.frame.size.width - 200, self.view.frame.size.height);
     self.scrollView.contentSize = CGSizeMake(widtht *self.titlArr.count, hight);
     UIStoryboard *sy = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    ProfieFaultsViewController *faultVC = [sy instantiateViewControllerWithIdentifier:@"MyDefaultViewController"];
+    faultVC.view.frame = self.scrollView.bounds;
+    [self.scrollView addSubview:faultVC.view];
+    [self addChildViewController:faultVC];
+    
     MSGController *msgVC = [sy instantiateViewControllerWithIdentifier:@"msgController"];
-    msgVC.view.frame = self.scrollView.bounds;
+    msgVC.view.frame = CGRectMake(widtht, 0, widtht, hight);
     [self.scrollView addSubview:msgVC.view];
     [self addChildViewController:msgVC];
     
     FavorController *favor = [sy instantiateViewControllerWithIdentifier:@"favorController"];
-    favor.view.frame = CGRectMake(widtht, 0, widtht, hight);
+    favor.view.frame = CGRectMake(widtht * 2, 0, widtht, hight);
     [self.scrollView addSubview:favor.view];
     [self addChildViewController:favor];
     
