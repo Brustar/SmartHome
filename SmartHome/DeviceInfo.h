@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface IBeacon : NSObject
+@interface DeviceInfo : NSObject
 {
     NSArray *beacons;
     float volume;
 }
+
++ (id)defaultManager;
 @end

@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.beacon=[[IBeacon alloc] init];
+    self.beacon=[[DeviceInfo alloc] init];
     [self.beacon addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     VolumeManager *volume=[VolumeManager defaultManager];
     [volume start:self.beacon];

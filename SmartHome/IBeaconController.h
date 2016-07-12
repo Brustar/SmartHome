@@ -12,9 +12,8 @@
 #import "Light.h"
 #import <Reachability/Reachability.h> 
 
-@interface IBeaconController : UIViewController<HMHomeManagerDelegate,HMAccessoryBrowserDelegate>
+@interface IBeaconController : UIViewController<HMHomeManagerDelegate,HMAccessoryBrowserDelegate,TcpRecvDelegate>
 
-@property (strong, nonatomic) IBeacon *beacon;
 @property (strong, nonatomic) IBOutlet UILabel *myLabel;
 @property (strong, nonatomic) IBOutlet UILabel *volumeLabel;
 

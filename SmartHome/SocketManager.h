@@ -19,6 +19,12 @@ enum{
     
 };
 
+@protocol TcpRecvDelegate<NSObject>
+
+-(void)recv:(NSData *)data withTag:(long)tag;
+
+@end
+
 @interface SocketManager : NSObject
 
 @property (nonatomic, strong) AsyncSocket    *socket;       // socket
@@ -26,14 +32,14 @@ enum{
 @property (nonatomic, assign) UInt16         socketPort;    // socket的prot
 
 @property (nonatomic, retain) NSTimer        *connectTimer; // 计时器
-
+@property (nonatomic,strong) id delegate;
 @property (nonatomic) int        netMode;
 
 + (id)defaultManager;
--(void)socketConnectHost:(int)mode;// socket连接
+-(void)socketConnectHost;// socket连接
 -(void)cutOffSocket; // 断开socket连接
 
 -(void)initUDP:(int)port;
--(void)initTcp:(NSString *)addr port:(int)port mode:(int)mode;
+-(void)initTcp:(NSString *)addr port:(int)port mode:(int)mode delegate:(id)delegate;
 
 @end

@@ -22,7 +22,7 @@
     return sharedInstance;
 }
 
--(void) start:(IBeacon *)beacon
+-(void) start:(DeviceInfo *)beacon
 {
     self.beaconArr = [[NSArray alloc] init];
     self.locationmanager = [[CLLocationManager alloc] init];//初始化

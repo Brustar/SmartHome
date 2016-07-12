@@ -22,7 +22,7 @@
     return sharedInstance;
 }
 
--(void) start:(IBeacon *)beacon
+-(void) start:(DeviceInfo *)beacon
 {
     AudioSessionInitialize(NULL, NULL, NULL, NULL);
     AudioSessionSetActive(true);
