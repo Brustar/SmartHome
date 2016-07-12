@@ -99,11 +99,12 @@
 {
     if(self.allFavouriteChannels.count % 4 == 0)
     {
-        return [self.allFavouriteChannels count];
-    }else {
+        return self.allFavouriteChannels.count;
+    }else{
         int i = 4 - self.allFavouriteChannels.count % 4;
         return self.allFavouriteChannels.count + i;
-    }
+        
+    };
     
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
