@@ -14,6 +14,8 @@
 + (NSString *) favoritePath;
 + (NSString *) sqlitePath;
 + (NSString *) httpAddr;
++ (NSString *) tcpAddr;
++ (int) tcpPort;
 + (void) copyFile:(NSString *)file to:(NSString *)newFile;
 
 + (void) writeScene:(NSString *)sceneFile string:(NSString *)sceneData;

@@ -17,15 +17,15 @@
 
 -(void) viewDidLoad
 {
-    self.beacon=[[IBeacon alloc] init];
-    [self.beacon addObserver:self forKeyPath:@"beacons" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:NULL];
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    [device addObserver:self forKeyPath:@"beacons" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:NULL];
     
     IbeaconManager *beaconManager=[IbeaconManager defaultManager];
-    [beaconManager start:self.beacon];
+    [beaconManager start:device];
     
-    [self.beacon addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:NULL];
+    [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:NULL];
     VolumeManager *volume=[VolumeManager defaultManager];
-    [volume start:self.beacon];
+    [volume start:device];
     
     
     //开启网络状况的监听
@@ -49,19 +49,33 @@
 {
     //对连接改变做出响应的处理动作。
     NetworkStatus status = [curReach currentReachabilityStatus];
+    SocketManager *sock=[SocketManager defaultManager];
     if(status == ReachableViaWWAN)
     {
-        printf("\n3g/2G\n");
+        printf("\n3g/4G/2G\n");
+        if (sock.netMode==outDoor) {
+            return;
+        }
+        //connect master
+        NSUserDefaults *userdefault=[NSUserDefaults standardUserDefaults];
+        [sock initTcp:[userdefault objectForKey:@"tcpServer"] port:[[userdefault objectForKey:@"tcpPort"] intValue] mode:atHome delegate:self];
         NSLog(@"外出模式");
     }
     else if(status == ReachableViaWiFi)
     {
         printf("\nwifi\n");
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"tcpPort"] intValue]>0) {
-            NSLog(@"在家模式");
-        }else{
+        if (sock.netMode==atHome) {
+            
+            return;
+        }else if (sock.netMode==outDoor){
             NSLog(@"外出模式");
+            
+        }else{
+            
         }
+        //connect cloud
+        [sock initTcp:[IOManager tcpAddr] port:[IOManager tcpPort] mode:outDoor delegate:self];
+        NSLog(@"在家模式");
     }else
     {
         printf("\n无网络\n");
@@ -201,22 +215,25 @@
 -(IBAction)initTcp:(id)sender
 {
     SocketManager *sock=[SocketManager defaultManager];
-    sock.socketHost = [[NSUserDefaults standardUserDefaults] objectForKey:@"tcpServer"];
-    sock.socketPort = [[[NSUserDefaults standardUserDefaults] objectForKey:@"tcpPort"] intValue];
+    NSUserDefaults *userdefault=[NSUserDefaults standardUserDefaults];
     
-    // 在连接前先进行手动断开
-    [sock cutOffSocket];
-    
-    // 确保断开后再连，如果对一个正处于连接状态的socket进行连接，会出现崩溃
-    [sock socketConnectHost];
+    [sock initTcp:[userdefault objectForKey:@"tcpServer"] port:[[userdefault objectForKey:@"tcpPort"] intValue] mode:atHome delegate:self];
+    //[sock initTcp:[IOManager tcpAddr] port:[IOManager tcpPort] mode:outDoor delegate:self];
 }
 
 -(IBAction)sendMsg:(id)sender
 {
-    NSString *cmd=@"EC00000000FF0000FFEA";
+    //NSString *cmd=@"EC00000000FF0000FFEA";
+    NSString *cmd=@"EC00000001000000EA";
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:[PackManager dataFormHexString:cmd] withTimeout:1 tag:1];
     [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1];
+    //[sock.socket readDataToData:[AsyncSocket ZeroData] withTimeout:1 tag:1];
+}
+
+-(void)recv:(NSData *)data withTag:(long)tag
+{
+    NSLog(@"data:%@,tag:%ld",data,tag);
 }
 
 -(IBAction)disconnect:(id)sender
@@ -239,7 +256,8 @@
     if([keyPath isEqualToString:@"beacons"])
     {
         NSString *position;
-        NSArray *beacons=[self.beacon valueForKey:@"beacons"];
+        DeviceInfo *device=[DeviceInfo defaultManager];
+        NSArray *beacons=[device valueForKey:@"beacons"];
         for (CLBeacon *beacon in beacons) {
             NSString *str;
             switch (beacon.proximity) {
@@ -269,7 +287,8 @@
     
     if([keyPath isEqualToString:@"volume"])
     {
-        self.volumeLabel.text=[NSString stringWithFormat:@"%@",[self.beacon valueForKey:@"volume"]];
+        DeviceInfo *device=[DeviceInfo defaultManager];
+        self.volumeLabel.text=[NSString stringWithFormat:@"%@",[device valueForKey:@"volume"]];
     }
 }
 
@@ -286,8 +305,9 @@
 
 -(void)dealloc
 {
-    [self.beacon removeObserver:self forKeyPath:@"beacons" context:NULL];
-    [self.beacon removeObserver:self forKeyPath:@"volume" context:NULL];
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    [device removeObserver:self forKeyPath:@"beacons" context:NULL];
+    [device removeObserver:self forKeyPath:@"volume" context:NULL];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
 }
 

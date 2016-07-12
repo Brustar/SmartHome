@@ -48,10 +48,10 @@
     [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
     
-    self.beacon=[[IBeacon alloc] init];
-    [self.beacon addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     VolumeManager *volume=[VolumeManager defaultManager];
-    [volume start:self.beacon];
+    [volume start:device];
     if ([self.sceneid intValue]>0) {
         
         Scene *scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
@@ -91,7 +91,8 @@
 {
     if([keyPath isEqualToString:@"volume"])
     {
-        self.volume.value=[[self.beacon valueForKey:@"volume"] floatValue];
+        DeviceInfo *device=[DeviceInfo defaultManager];
+        self.volume.value=[[device valueForKey:@"volume"] floatValue];
     }
 }
 
@@ -118,7 +119,8 @@
 
 -(void)dealloc
 {
-    [self.beacon removeObserver:self forKeyPath:@"volume" context:nil];
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    [device removeObserver:self forKeyPath:@"volume" context:nil];
 }
 
 #pragma mark - Navigation

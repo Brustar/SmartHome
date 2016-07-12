@@ -5,13 +5,13 @@
 //  Created by Brustar on 16/5/10.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
-#import "IBeacon.h"
+#import "DeviceInfo.h"
 
 @interface VolumeManager : NSObject
 
 + (id)defaultManager;
--(void) start:(IBeacon *)beacon;
+-(void) start:(DeviceInfo *)beacon;
 
-@property (strong, nonatomic) IBeacon *ibeacon;
+@property (strong, nonatomic) DeviceInfo *ibeacon;
 
 @end

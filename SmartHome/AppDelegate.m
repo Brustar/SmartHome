@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "IOManager.h"
 #import "SocketManager.h"
+#import "DeviceInfo.h"
 
 @interface AppDelegate ()
 
@@ -33,6 +34,7 @@
     
     [IOManager copyFile:@"smartDB" to:@"smartDB"];
     [[SocketManager defaultManager] initUDP:40000];
+    [[DeviceInfo defaultManager] deviceGenaration];
     return YES;
 }
 

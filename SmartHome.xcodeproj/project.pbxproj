@@ -67,7 +67,7 @@
 		0FAF74C51CEEA17C00432713 /* HRHSVColorUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF74BC1CEEA17C00432713 /* HRHSVColorUtil.m */; };
 		0FAF74C61CEEA17C00432713 /* UIImage+CoreGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF74BE1CEEA17C00432713 /* UIImage+CoreGraphics.m */; };
 		0FAF74C91CEEB37200432713 /* HRSampleColorPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF74C81CEEB37200432713 /* HRSampleColorPickerViewController.m */; };
-		0FAF8FEF1CE18C41000557BD /* IBeacon.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF8FEE1CE18C41000557BD /* IBeacon.m */; };
+		0FAF8FEF1CE18C41000557BD /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF8FEE1CE18C41000557BD /* DeviceInfo.m */; };
 		0FAF8FF21CE18CE2000557BD /* IBeaconController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF8FF11CE18CE2000557BD /* IBeaconController.m */; };
 		0FAF8FF51CE1B514000557BD /* VolumeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF8FF41CE1B514000557BD /* VolumeManager.m */; };
 		0FAF8FFB1CE1D9BC000557BD /* UploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF8FFA1CE1D9BC000557BD /* UploadManager.m */; };
@@ -357,8 +357,8 @@
 		0FAF74BE1CEEA17C00432713 /* UIImage+CoreGraphics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CoreGraphics.m"; sourceTree = "<group>"; };
 		0FAF74C71CEEB37200432713 /* HRSampleColorPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRSampleColorPickerViewController.h; sourceTree = "<group>"; };
 		0FAF74C81CEEB37200432713 /* HRSampleColorPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRSampleColorPickerViewController.m; sourceTree = "<group>"; };
-		0FAF8FED1CE18C41000557BD /* IBeacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBeacon.h; sourceTree = "<group>"; };
-		0FAF8FEE1CE18C41000557BD /* IBeacon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBeacon.m; sourceTree = "<group>"; };
+		0FAF8FED1CE18C41000557BD /* DeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceInfo.h; sourceTree = "<group>"; };
+		0FAF8FEE1CE18C41000557BD /* DeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInfo.m; sourceTree = "<group>"; };
 		0FAF8FF01CE18CE2000557BD /* IBeaconController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBeaconController.h; sourceTree = "<group>"; };
 		0FAF8FF11CE18CE2000557BD /* IBeaconController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBeaconController.m; sourceTree = "<group>"; };
 		0FAF8FF31CE1B514000557BD /* VolumeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeManager.h; sourceTree = "<group>"; };
@@ -544,8 +544,6 @@
 			children = (
 				0F01D5421CDC6CA600DAC267 /* Scene.h */,
 				0F01D5431CDC6CA600DAC267 /* Scene.m */,
-				0FAF8FED1CE18C41000557BD /* IBeacon.h */,
-				0FAF8FEE1CE18C41000557BD /* IBeacon.m */,
 				0FCFB37E1CF28F6F00B37DD3 /* Light.h */,
 				0FCFB37F1CF28F6F00B37DD3 /* Light.m */,
 				0FCFB3811CF28FCB00B37DD3 /* Curtain.h */,
@@ -988,6 +986,8 @@
 			isa = PBXGroup;
 			children = (
 				0FB205EA1CDC350D00B5E87E /* public.h */,
+				0FAF8FED1CE18C41000557BD /* DeviceInfo.h */,
+				0FAF8FEE1CE18C41000557BD /* DeviceInfo.m */,
 				0FB205E71CDC312A00B5E87E /* IOManager.h */,
 				0FB205E81CDC312A00B5E87E /* IOManager.m */,
 				0FB205EB1CDC3D3700B5E87E /* AudioManager.h */,
@@ -1390,7 +1390,7 @@
 				0FC0FFDD1CF57E58000F71D5 /* TouchImage.m in Sources */,
 				F6B91F771D100F7100592FB0 /* tvBrandView.m in Sources */,
 				0FCFB3951CF2943100B37DD3 /* Camera.m in Sources */,
-				0FAF8FEF1CE18C41000557BD /* IBeacon.m in Sources */,
+				0FAF8FEF1CE18C41000557BD /* DeviceInfo.m in Sources */,
 				0F4B3C001D2A13870002E75E /* MSGController.m in Sources */,
 				F66EB2D21CFEB9E300AC53CE /* Detail.m in Sources */,
 				F65AF6D41D3370770048A4E5 /* ProfieFaultsViewController.m in Sources */,

@@ -23,7 +23,8 @@
 }
 
 // socket连接
--(void)socketConnectHost{
+-(void)socketConnectHost
+{
     self.socket = [[AsyncSocket alloc] initWithDelegate:self];
     NSError *error = nil;
     [self.socket connectToHost:self.socketHost onPort:self.socketPort withTimeout:3 error:&error];
@@ -58,6 +59,19 @@
     [udpSocket receiveWithTimeout:5000 tag:1]; //接收数据
 }
 
+-(void)initTcp:(NSString *)addr port:(int)port mode:(int)mode delegate:(id)delegate
+{
+    self.socketHost = addr;
+    self.socketPort = port;
+    self.delegate=delegate;
+    self.netMode=mode;
+    // 在连接前先进行手动断开
+    [self cutOffSocket];
+    
+    // 确保断开后再连，如果对一个正处于连接状态的socket进行连接，会出现崩溃
+    [self socketConnectHost];
+}
+
 #pragma mark  - TCP delegate
 -(void)onSocket:(AsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port
 {
@@ -71,6 +85,7 @@
 {
     //NSString *recv=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSLog(@"received data:%@",data);
+    [self.delegate recv:data withTag:tag];
 }
 
 -(void)onSocket:(AsyncSocket *)sock didReadPartialDataOfLength:(long)partialLength tag:(long)tag

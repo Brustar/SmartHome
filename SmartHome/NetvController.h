@@ -12,6 +12,5 @@
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic,weak) NSString *deviceid;
 @property (weak, nonatomic) IBOutlet UISlider *volume;
-@property (strong, nonatomic) IBeacon *beacon;
 
 @end

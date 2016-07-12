@@ -9,6 +9,6 @@
 
 @interface BgMusicController : UIViewController
 
-@property (strong, nonatomic) IBeacon *beacon;
+@property (strong, nonatomic) DeviceInfo *beacon;
 
 @end
