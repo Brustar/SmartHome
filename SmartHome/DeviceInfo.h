@@ -8,11 +8,48 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DeviceInfo : NSObject
-{
-    NSArray *beacons;
-    float volume;
-}
+enum{
+    UNKNOWN,
+    iPhone,
+    iPhone3G,
+    iPhone3GS,
+    iPhone4,
+    iPhone4S,
+    iPhone5,
+    iPhone5C,
+    iPhone5S,
+    iPhoneSE,
+    iPhone6,
+    iPhone6S,
+    iPhone6Plus,
+    iPhone6SPlus,
+    
+    iPod,
+    iPod2,
+    iPod3,
+    iPod4,
+    iPod5,
+    
+    iPad,
+    iPad2,
+    iPad3,
+    iPad4,
+    iPadMini,
+    iPadMini2,
+    iPadMini3,
+    iPadAir,
+    iPadAir2,
+    iPadPro
+};
 
-+ (id)defaultManager;
+@interface DeviceInfo : NSObject
+
+@property (nonatomic, strong) NSArray *beacons;
+@property (nonatomic) float volume;
+@property (nonatomic) int reachbility;
+@property (nonatomic) int genaration;
+
++ (id) defaultManager;
+- (void) deviceGenaration;
+
 @end

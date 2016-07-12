@@ -535,8 +535,6 @@
 			children = (
 				0F01D5421CDC6CA600DAC267 /* Scene.h */,
 				0F01D5431CDC6CA600DAC267 /* Scene.m */,
-				0FAF8FED1CE18C41000557BD /* DeviceInfo.h */,
-				0FAF8FEE1CE18C41000557BD /* DeviceInfo.m */,
 				0FCFB37E1CF28F6F00B37DD3 /* Light.h */,
 				0FCFB37F1CF28F6F00B37DD3 /* Light.m */,
 				0FCFB3811CF28FCB00B37DD3 /* Curtain.h */,
@@ -973,6 +971,8 @@
 			isa = PBXGroup;
 			children = (
 				0FB205EA1CDC350D00B5E87E /* public.h */,
+				0FAF8FED1CE18C41000557BD /* DeviceInfo.h */,
+				0FAF8FEE1CE18C41000557BD /* DeviceInfo.m */,
 				0FB205E71CDC312A00B5E87E /* IOManager.h */,
 				0FB205E81CDC312A00B5E87E /* IOManager.m */,
 				0FB205EB1CDC3D3700B5E87E /* AudioManager.h */,

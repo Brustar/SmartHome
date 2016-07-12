@@ -77,7 +77,7 @@
     if (!(hexString && [hexString length] > 0 && [hexString length]%2 == 0)) {
         return nil;
     }
-    Byte tempbyt[1]={0};
+    Byte tempbyte[1]={0};
     NSMutableData* bytes=[NSMutableData data];
     for(int i=0;i<[hexString length];i++)
     {
@@ -100,8 +100,8 @@
         else
             return nil;
         
-        tempbyt[0] = int_ch1+int_ch2;  ///将转化后的数放入Byte数组里
-        [bytes appendBytes:tempbyt length:1];
+        tempbyte[0] = int_ch1+int_ch2;  ///将转化后的数放入Byte数组里
+        [bytes appendBytes:tempbyte length:1];
     }
     return bytes;
 }
