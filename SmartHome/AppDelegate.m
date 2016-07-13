@@ -10,6 +10,7 @@
 #import "IOManager.h"
 #import "SocketManager.h"
 #import "DeviceInfo.h"
+#import "PackManager.h"
 
 @interface AppDelegate ()
 
@@ -34,13 +35,13 @@
     
     [IOManager copyFile:@"smartDB" to:@"smartDB"];
     [[SocketManager defaultManager] initUDP:40000];
-    [[DeviceInfo defaultManager] deviceGenaration];
     return YES;
 }
 
 -(void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken{
     NSLog(@"deviceToken: %@", deviceToken);
-    [[NSUserDefaults standardUserDefaults] setObject:deviceToken forKey:@"smartToken"];
+    DeviceInfo *info=[DeviceInfo defaultManager];
+    info.pushToken=[PackManager hexStringFromData:deviceToken];
 }
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
