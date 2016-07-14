@@ -48,6 +48,11 @@ enum{
 @property (nonatomic) float volume;
 @property (nonatomic) int reachbility;
 @property (nonatomic) int genaration;
+@property (nonatomic, strong) NSString *pushToken;
+
+@property (nonatomic) long masterID;
+@property (nonatomic, strong) NSString *masterIP;
+@property (nonatomic) int masterPort;
 
 + (id) defaultManager;
 - (void) deviceGenaration;

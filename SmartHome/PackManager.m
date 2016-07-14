@@ -7,6 +7,7 @@
 //
 
 #import "PackManager.h"
+#import "DeviceInfo.h"
 
 @implementation PackManager
 
@@ -64,10 +65,10 @@
         NSData *port=[data subdataWithRange:NSMakeRange(12, 2)];
         
         
-        NSUserDefaults *dic=[NSUserDefaults standardUserDefaults];
-        [dic setValue:[PackManager NSDataToIP:masterID] forKey:@"masterID"];
-        [dic setValue:[PackManager NSDataToIP:ip] forKey:@"tcpServer"];
-        [dic setValue:[NSNumber numberWithLong:[PackManager NSDataToUInt:port]] forKey:@"tcpPort"];
+        DeviceInfo *info=[DeviceInfo defaultManager];
+        info.masterID=(long)[PackManager NSDataToUInt:masterID];
+        info.masterIP=[PackManager NSDataToIP:ip];
+        info.masterPort=(int)[PackManager NSDataToUInt:port];
     }
 }
 
