@@ -163,6 +163,7 @@
    
     
     NSDictionary *dict = @{@"UserID":[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"]};
+    
     NSString *url = [NSString stringWithFormat:@"%@UserLogOut.aspx",[IOManager httpAddr]];
     HttpManager *http=[HttpManager defaultManager];
     http.delegate=self;

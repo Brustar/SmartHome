@@ -11,6 +11,7 @@
 @interface MySettingViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) NSArray *titleArr;
+
 @end
 
 @implementation MySettingViewController
@@ -18,9 +19,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.titleArr = @[@"推送设置",@"权限控制",@"系统设置",@"系统信息",@"去评价",@"关于我们",@"退出"];
+    self.tableView.tableFooterView = [UIView new];
+    self.tableView.backgroundColor =  [UIColor colorWithRed:241/255.0 green:240/255.0 blue:246/255.0 alpha:1];
+
     // Do any additional setup after loading the view.
 }
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -32,6 +38,10 @@
     return 6;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if(section == 2)
+    {
+        return 2;
+    }
     return 1;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -62,6 +72,7 @@
             break;
         default:
             title = @"退出";
+            cell.textLabel.textColor = [UIColor redColor];
             break;
     }
     cell.textLabel.text = title;
@@ -70,9 +81,51 @@
 }
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 40)];
+    UIView *view = [[UIView alloc]init];
+    if(section == 1)
+    {
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 15, 400, 20)];
+        label.font = [UIFont systemFontOfSize:15];
+        label.text = @"请在“设置->通知中心”中更改";
+        label.textColor = [UIColor grayColor];
+        [view addSubview:label];
+    }
+    
+    
+    view.backgroundColor = [UIColor colorWithRed:241/255.0 green:240/255.0 blue:246/255.0 alpha:1];
     return view;
 }
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if(section == 4 || section == 5)
+    {
+        return 25;
+    }
+    return 50;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 60;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row == 0)
+    {
+        self.pushVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"PushSettingController"];
+        self.pushVC.view.frame = self.view.bounds;
+        [self.view addSubview:self.pushVC.view];
+        
+    }
+}
+
+
+//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    self.pushVC = segue.destinationViewController;
+//    
+//    self.pushVC.view.frame = CGRectMake(100, 100, 200, 400);
+//    [self.view addSubview:self.pushVC.view];
+//    
+//    
+//}
 /*
 #pragma mark - Navigation
 

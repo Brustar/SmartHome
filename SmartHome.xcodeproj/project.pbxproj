@@ -121,6 +121,9 @@
 		F6359B001CFFC4DC0035EB31 /* ColourTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6359AFE1CFFC4DC0035EB31 /* ColourTableViewCell.m */; };
 		F6359B011CFFC4DC0035EB31 /* ColourTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6359AFF1CFFC4DC0035EB31 /* ColourTableViewCell.xib */; };
 		F63AE0031D11319C00BE17DC /* FMCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F63AE0021D11319C00BE17DC /* FMCollectionViewCell.m */; };
+		F651640D1D3766C900A6F5FA /* MyEnergyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F651640C1D3766C900A6F5FA /* MyEnergyViewController.m */; };
+		F65164101D37672700A6F5FA /* MyEnergyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F651640F1D37672700A6F5FA /* MyEnergyCell.m */; };
+		F65164141D3780C500A6F5FA /* TVLogoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F65164131D3780C500A6F5FA /* TVLogoCell.m */; };
 		F65AF6D41D3370770048A4E5 /* ProfieFaultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65AF6D31D3370770048A4E5 /* ProfieFaultsViewController.m */; };
 		F65AF6DA1D3375700048A4E5 /* ProfieFaultsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F65AF6D91D3375700048A4E5 /* ProfieFaultsCell.m */; };
 		F65B7D271D34E9E00059CFA4 /* MySettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65B7D261D34E9E00059CFA4 /* MySettingViewController.m */; };
@@ -130,12 +133,13 @@
 		F65DB3471D2BB7CD002A815C /* FinishRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65DB3461D2BB7CD002A815C /* FinishRegisterViewController.m */; };
 		F66EB2D21CFEB9E300AC53CE /* Detail.m in Sources */ = {isa = PBXBuildFile; fileRef = F66EB2D11CFEB9E300AC53CE /* Detail.m */; };
 		F66EB2D51CFED0A900AC53CE /* DetailList.m in Sources */ = {isa = PBXBuildFile; fileRef = F66EB2D41CFED0A900AC53CE /* DetailList.m */; };
+		F69C82301D35D214002DE6D7 /* PushSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = F69C822F1D35D214002DE6D7 /* PushSettingController.m */; };
+		F69C82331D363376002DE6D7 /* ServiceRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F69C82321D363376002DE6D7 /* ServiceRecordViewController.m */; };
+		F69C82361D363A4D002DE6D7 /* ServiceRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F69C82351D363A4D002DE6D7 /* ServiceRecordCell.m */; };
 		F6A08F421D0CFA5400317318 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6A08F401D0CFA5400317318 /* Main.storyboard */; };
 		F6A08F441D0CFA6100317318 /* smartDB in Resources */ = {isa = PBXBuildFile; fileRef = F6A08F431D0CFA6100317318 /* smartDB */; };
 		F6B91F6F1D100EF700592FB0 /* DVCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B91F6E1D100EF700592FB0 /* DVCollectionViewCell.m */; };
 		F6B91F721D100F1400592FB0 /* TVChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B91F701D100F1400592FB0 /* TVChannel.m */; };
-		F6B91F741D100F3B00592FB0 /* tvBrandView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6B91F731D100F3B00592FB0 /* tvBrandView.xib */; };
-		F6B91F771D100F7100592FB0 /* tvBrandView.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B91F761D100F7100592FB0 /* tvBrandView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -461,6 +465,12 @@
 		F6359AFF1CFFC4DC0035EB31 /* ColourTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ColourTableViewCell.xib; sourceTree = "<group>"; };
 		F63AE0011D11319C00BE17DC /* FMCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCollectionViewCell.h; sourceTree = "<group>"; };
 		F63AE0021D11319C00BE17DC /* FMCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCollectionViewCell.m; sourceTree = "<group>"; };
+		F651640B1D3766C900A6F5FA /* MyEnergyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEnergyViewController.h; sourceTree = "<group>"; };
+		F651640C1D3766C900A6F5FA /* MyEnergyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEnergyViewController.m; sourceTree = "<group>"; };
+		F651640E1D37672700A6F5FA /* MyEnergyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEnergyCell.h; sourceTree = "<group>"; };
+		F651640F1D37672700A6F5FA /* MyEnergyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEnergyCell.m; sourceTree = "<group>"; };
+		F65164121D3780C500A6F5FA /* TVLogoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVLogoCell.h; sourceTree = "<group>"; };
+		F65164131D3780C500A6F5FA /* TVLogoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVLogoCell.m; sourceTree = "<group>"; };
 		F65AF6D21D3370770048A4E5 /* ProfieFaultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfieFaultsViewController.h; sourceTree = "<group>"; };
 		F65AF6D31D3370770048A4E5 /* ProfieFaultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfieFaultsViewController.m; sourceTree = "<group>"; };
 		F65AF6D81D3375700048A4E5 /* ProfieFaultsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfieFaultsCell.h; sourceTree = "<group>"; };
@@ -479,15 +489,18 @@
 		F66EB2D11CFEB9E300AC53CE /* Detail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Detail.m; sourceTree = "<group>"; };
 		F66EB2D31CFED0A900AC53CE /* DetailList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailList.h; sourceTree = "<group>"; };
 		F66EB2D41CFED0A900AC53CE /* DetailList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailList.m; sourceTree = "<group>"; };
+		F69C822E1D35D214002DE6D7 /* PushSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushSettingController.h; sourceTree = "<group>"; };
+		F69C822F1D35D214002DE6D7 /* PushSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushSettingController.m; sourceTree = "<group>"; };
+		F69C82311D363376002DE6D7 /* ServiceRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceRecordViewController.h; sourceTree = "<group>"; };
+		F69C82321D363376002DE6D7 /* ServiceRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceRecordViewController.m; sourceTree = "<group>"; };
+		F69C82341D363A4D002DE6D7 /* ServiceRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceRecordCell.h; sourceTree = "<group>"; };
+		F69C82351D363A4D002DE6D7 /* ServiceRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceRecordCell.m; sourceTree = "<group>"; };
 		F6A08F411D0CFA5400317318 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F6A08F431D0CFA6100317318 /* smartDB */ = {isa = PBXFileReference; lastKnownFileType = file; path = smartDB; sourceTree = "<group>"; };
 		F6B91F6D1D100EF700592FB0 /* DVCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVCollectionViewCell.h; sourceTree = "<group>"; };
 		F6B91F6E1D100EF700592FB0 /* DVCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVCollectionViewCell.m; sourceTree = "<group>"; };
 		F6B91F701D100F1400592FB0 /* TVChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVChannel.m; sourceTree = "<group>"; };
 		F6B91F711D100F1400592FB0 /* TVChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVChannel.h; sourceTree = "<group>"; };
-		F6B91F731D100F3B00592FB0 /* tvBrandView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = tvBrandView.xib; sourceTree = "<group>"; };
-		F6B91F751D100F7100592FB0 /* tvBrandView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tvBrandView.h; sourceTree = "<group>"; };
-		F6B91F761D100F7100592FB0 /* tvBrandView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tvBrandView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -645,8 +658,8 @@
 				F60FDB441D003FD500AB04BE /* CurtainTableViewCell.m */,
 				0FABF91A1D06AA35000892D8 /* TVController.h */,
 				0FABF91B1D06AA35000892D8 /* TVController.m */,
-				F6B91F751D100F7100592FB0 /* tvBrandView.h */,
-				F6B91F761D100F7100592FB0 /* tvBrandView.m */,
+				F65164121D3780C500A6F5FA /* TVLogoCell.h */,
+				F65164131D3780C500A6F5FA /* TVLogoCell.m */,
 				0FABF91D1D06AA4E000892D8 /* DVDController.h */,
 				0FABF91E1D06AA4E000892D8 /* DVDController.m */,
 				F6B91F6D1D100EF700592FB0 /* DVCollectionViewCell.h */,
@@ -683,12 +696,22 @@
 				F65AF6D31D3370770048A4E5 /* ProfieFaultsViewController.m */,
 				F65AF6D81D3375700048A4E5 /* ProfieFaultsCell.h */,
 				F65AF6D91D3375700048A4E5 /* ProfieFaultsCell.m */,
+				F69C82311D363376002DE6D7 /* ServiceRecordViewController.h */,
+				F69C82321D363376002DE6D7 /* ServiceRecordViewController.m */,
+				F69C82341D363A4D002DE6D7 /* ServiceRecordCell.h */,
+				F69C82351D363A4D002DE6D7 /* ServiceRecordCell.m */,
+				F651640B1D3766C900A6F5FA /* MyEnergyViewController.h */,
+				F651640C1D3766C900A6F5FA /* MyEnergyViewController.m */,
+				F651640E1D37672700A6F5FA /* MyEnergyCell.h */,
+				F651640F1D37672700A6F5FA /* MyEnergyCell.m */,
 				F62D5D3E1D2CE2F800C1E070 /* MyCenterViewController.h */,
 				F62D5D3F1D2CE2F800C1E070 /* MyCenterViewController.m */,
 				F62D5D411D2CE4C600C1E070 /* MyCenterTableViewCell.h */,
 				F62D5D421D2CE4C600C1E070 /* MyCenterTableViewCell.m */,
 				F65B7D251D34E9E00059CFA4 /* MySettingViewController.h */,
 				F65B7D261D34E9E00059CFA4 /* MySettingViewController.m */,
+				F69C822E1D35D214002DE6D7 /* PushSettingController.h */,
+				F69C822F1D35D214002DE6D7 /* PushSettingController.m */,
 			);
 			path = SmartHome;
 			sourceTree = "<group>";
@@ -931,7 +954,6 @@
 			children = (
 				F6A08F401D0CFA5400317318 /* Main.storyboard */,
 				F6359AFA1CFFBC910035EB31 /* DetailTableViewCell.xib */,
-				F6B91F731D100F3B00592FB0 /* tvBrandView.xib */,
 				F60FDB451D003FD500AB04BE /* CurtainTableViewCell.xib */,
 				F6359AFF1CFFC4DC0035EB31 /* ColourTableViewCell.xib */,
 				0F032D5B1CC9B12700D1920D /* LaunchScreen.storyboard */,
@@ -1189,7 +1211,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6B91F741D100F3B00592FB0 /* tvBrandView.xib in Resources */,
 				0FBEFE271D24A5020084244F /* netconfig.plist in Resources */,
 				0FC0FFD71CF553AD000F71D5 /* planeScene.plist in Resources */,
 				0F032D5D1CC9B12700D1920D /* LaunchScreen.storyboard in Resources */,
@@ -1332,8 +1353,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F65164141D3780C500A6F5FA /* TVLogoCell.m in Sources */,
 				0FAF74BF1CEEA17C00432713 /* HRBrightnessCursor.m in Sources */,
 				0FAF98A31CE40F3C009BDBB5 /* QRCameraSwitchButton.m in Sources */,
+				F651640D1D3766C900A6F5FA /* MyEnergyViewController.m in Sources */,
 				0F477FC61D2F94B3004FA361 /* NetStatusManager.m in Sources */,
 				0FEE12761D20C53400811947 /* TXHRulerScrollView.m in Sources */,
 				0F1F3BC71D2B601400B2641C /* FavorController.m in Sources */,
@@ -1388,7 +1411,6 @@
 				0F01D5441CDC6CA600DAC267 /* Scene.m in Sources */,
 				0FCFB3831CF28FCB00B37DD3 /* Curtain.m in Sources */,
 				0FC0FFDD1CF57E58000F71D5 /* TouchImage.m in Sources */,
-				F6B91F771D100F7100592FB0 /* tvBrandView.m in Sources */,
 				0FCFB3951CF2943100B37DD3 /* Camera.m in Sources */,
 				0FAF8FEF1CE18C41000557BD /* DeviceInfo.m in Sources */,
 				0F4B3C001D2A13870002E75E /* MSGController.m in Sources */,
@@ -1408,6 +1430,7 @@
 				0FB42E231CF6F9E8007DE64F /* SocketManager.m in Sources */,
 				0FCFB3861CF2912700B37DD3 /* TV.m in Sources */,
 				F65B7D271D34E9E00059CFA4 /* MySettingViewController.m in Sources */,
+				F69C82301D35D214002DE6D7 /* PushSettingController.m in Sources */,
 				F65DB3411D2B5AB2002A815C /* RegisterDetailController.m in Sources */,
 				0FAF98A61CE40F3C009BDBB5 /* QRCodeReaderViewController.m in Sources */,
 				0F96A1661D17F37C00E1594F /* RulerLeftTagView.m in Sources */,
@@ -1420,8 +1443,11 @@
 				0FCFB38C1CF293A500B37DD3 /* DVD.m in Sources */,
 				0FAF98B61CE45EC9009BDBB5 /* CryptoManager.m in Sources */,
 				0FAF98A51CE40F3C009BDBB5 /* QRCodeReaderView.m in Sources */,
+				F69C82331D363376002DE6D7 /* ServiceRecordViewController.m in Sources */,
 				0FAF74AD1CEE9A9600432713 /* LightController.m in Sources */,
 				F62D5D431D2CE4C600C1E070 /* MyCenterTableViewCell.m in Sources */,
+				F69C82361D363A4D002DE6D7 /* ServiceRecordCell.m in Sources */,
+				F65164101D37672700A6F5FA /* MyEnergyCell.m in Sources */,
 				0F96A1651D17F37C00E1594F /* RulerItemModel.m in Sources */,
 				0F032D491CC9B12700D1920D /* main.m in Sources */,
 			);

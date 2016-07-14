@@ -45,6 +45,7 @@
     }
     
     NSString *url = [NSString stringWithFormat:@"%@UserLogin.aspx",[IOManager httpAddr]];
+    
     int type = 1;
     if([self isMobileNumber:self.user.text])
     {

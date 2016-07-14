@@ -9,27 +9,30 @@
 #import "TVController.h"
 #import "TV.h"
 #import "SceneManager.h"
-#import "tvBrandView.h"
 #import "TVChannel.h"
-#import "tvBrandView.h"
 #import "DVCollectionViewCell.h"
-@interface TVController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
+#import "TVLogoCell.h"
+#import "MBProgressHUD+NJ.h"
+@interface TVController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,TVLogoCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UISlider *volume;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tvBrandViewHight;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tvBrandViewWidth;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollewContentViewWidth;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *secondViewLeftFromContenView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *thirdViewLeftFromContenView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageController;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (nonatomic,assign) int channelViewCount;
-@property (strong, nonatomic) IBOutletCollection(tvBrandView) NSArray *tvViews;
+
+@property (weak, nonatomic) IBOutlet UICollectionView *tvLogoCollectionView;
+@property (weak, nonatomic) IBOutlet UICollectionView *numbersCollectionView;
 
 @property (nonatomic,strong) NSArray *btnTitles;
 
+@property (nonatomic,strong) NSMutableArray *allFavourTVChannels;
 - (IBAction)mute:(id)sender;
+//编辑电视属性
+@property (weak, nonatomic) IBOutlet UITextField *channelName;
+
+@property (weak, nonatomic) IBOutlet UITextField *channeID;
+@property (weak, nonatomic) IBOutlet UIImageView *channelImageView;
+@property (weak, nonatomic) IBOutlet UIView *editView;
+@property (weak, nonatomic) IBOutlet UIView *coverView;
+
 @end
 
 @implementation TVController
@@ -41,7 +44,20 @@
         _btnTitles = @[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"0"];
     }
     return _btnTitles;
+    
+    
+    
 }
+-(NSMutableArray*)allFavourTVChannels
+{
+    if(!_allFavourTVChannels)
+    {
+        _allFavourTVChannels = [NSMutableArray array];
+        _allFavourTVChannels = [TVChannel getAllChannelForFavoritedForType:@"TV"];
+    }
+    return _allFavourTVChannels;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -55,7 +71,6 @@
     VolumeManager *volume=[VolumeManager defaultManager];
     [volume start:device];
     
-    [self setChannel];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     if ([self.sceneid intValue]>0) {
@@ -70,39 +85,7 @@
     }
 
 }
--(void)setChannel
-{
-    NSArray *channels = [TVChannel getAllChannelForFavoritedForType:@"TV"];
-    NSRange range;
-    long count = channels.count;
-    int index = 0;
-    range.location = 0;
-    while (count > 0) {
-        if(count >= 4)
-        {
-            range.length = 4;
-        }else {
-            range.length = count;
-        }
-        count -= range.length;
-        
-        tvBrandView *tvView = self.tvViews[index++];
-        tvView.channelArr= [channels subarrayWithRange:range];
-        range.location += range.length;
-        
-    }
-    self.channelViewCount = index;
-    
-}
 
--(void)updateViewConstraints{
-    [super updateViewConstraints];
-    self.tvBrandViewWidth.constant = self.view.frame.size.width *0.3;
-    self.scrollewContentViewWidth.constant = self.tvBrandViewWidth.constant * self.channelViewCount;
-    self.tvBrandViewHight.constant = self.tvBrandViewWidth.constant;
-    self.secondViewLeftFromContenView.constant = self.tvBrandViewWidth.constant;
-    self.thirdViewLeftFromContenView.constant = self.tvBrandViewWidth.constant *2;
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -130,10 +113,9 @@
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+   
     id theSegue = segue.destinationViewController;
     [theSegue setValue:self.deviceid forKey:@"deviceid"];
 }
@@ -152,21 +134,47 @@
     }
 }
 
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    CGPoint point = self.scrollView.contentOffset;
-    
-    self.pageController.currentPage = round(point.x/self.scrollView.bounds.size.width);
-}
+
 
 #pragma mark - UICollectionViewDelgate
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+    if(collectionView == self.tvLogoCollectionView)
+    {
+        if(self.allFavourTVChannels.count % 4 == 0)
+        {
+            return self.allFavourTVChannels.count;
+        }else{
+            int i = 4 - self.allFavourTVChannels.count % 4;
+            return  self.allFavourTVChannels.count + i;
+
+        }
+    }
     return self.btnTitles.count + 1;
 }
 -(UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if(collectionView  == self.tvLogoCollectionView)
+    {
+        TVLogoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"tvLogoCell" forIndexPath:indexPath];
+        cell.delegate = self;
+        cell.editBtn.hidden = YES;
+        cell.deleteBtn.hidden = YES;
+        if(indexPath.row > self.allFavourTVChannels.count -1)
+        {
+            cell.imgView.image = [UIImage imageNamed:@""];
+            [cell unUseLongPressGesture];
+        }else{
+            TVChannel *channel = self.allFavourTVChannels[indexPath.row];
+            cell.imgView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",channel.channel_pic]];
+            [cell useLongPressGesture];
+            
+            
+        }
+        
+        return cell;
+        
+    }
     DVCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell" forIndexPath:indexPath];
     if(indexPath.row == self.btnTitles.count)
     {
@@ -177,6 +185,47 @@
     }
     return cell;
 }
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    if(collectionView == self.tvLogoCollectionView)
+    {
+        TVLogoCell *cell =(TVLogoCell*)[collectionView cellForItemAtIndexPath:indexPath];
+        cell.deleteBtn.hidden = YES;
+        cell.editBtn.hidden = YES;
+        [cell unUseLongPressGesture];
+    }
+}
+
+#pragma mark -- TVLogoCellDelegate
+-(void)tvDeleteAction:(TVLogoCell *)cell
+{
+    NSIndexPath *indexPath = [self.tvLogoCollectionView indexPathForCell:cell];
+    TVChannel *channel = self.allFavourTVChannels[indexPath.row];
+    BOOL isSuccess = [TVChannel deleteChannelForChannelID:channel.channel_id];
+    if(!isSuccess)
+    {
+        [MBProgressHUD showError:@"删除失败，请稍后再试"];
+        return;
+    }
+    [self.allFavourTVChannels removeObject:channel];
+    [self.tvLogoCollectionView reloadData];
+    
+}
+-(void)tvEditAction:(TVLogoCell *)cell
+{
+    NSIndexPath *indexPath = [self.tvLogoCollectionView indexPathForCell:cell];
+    TVChannel *channel = self.allFavourTVChannels[indexPath.row];
+    self.channelImageView.image = cell.imgView.image;
+    self.channelName.text = channel.channel_name;
+    self.channeID.text = [NSString stringWithFormat:@"%ld",channel.channel_id];
+    self.coverView.hidden = NO;
+    self.editView.hidden = NO;
+}
+//编辑完成后上传频道
+- (IBAction)clickSureBtnAfterEdited:(id)sender {
+    self.coverView.hidden = YES;
+    self.editView.hidden = YES;
+}
+
 
 -(void)dealloc
 {

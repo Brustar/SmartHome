@@ -8,8 +8,10 @@
 
 #import "ProfieFaultsViewController.h"
 #import "ProfieFaultsCell.h"
+#import "HttpManager.h"
+#import "IOManager.h"
 
-@interface ProfieFaultsViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ProfieFaultsViewController ()<UITableViewDelegate,UITableViewDataSource,HttpDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,assign) BOOL isEditing;
 @property (weak, nonatomic) IBOutlet UIView *footerView;
@@ -26,8 +28,16 @@
     self.footerView.hidden = YES;
     self.Mydefaults = [NSMutableArray arrayWithObjects:@"123", @"345", @"4324", nil];
     self.tableView.tableFooterView = self.footerView;
+    
+    [self sendRequest];
+    
 }
-
+-(void)sendRequest
+{
+    NSString *url = [NSString stringWithFormat:@"%@GetMyBreakdown. ashx",[IOManager httpAddr]];
+    NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    NSString *userID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"];
+}
 
 #pragma mark -UITableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
