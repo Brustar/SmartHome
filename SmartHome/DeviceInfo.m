@@ -84,11 +84,11 @@
     self.genaration = UNKNOWN;
 }
 
--(NSData *) action:(NSNumber *)action deviceID:(NSString *)deviceID
+-(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID
 {
     Proto proto=createProto();
     proto.cmd=0x03;
-    proto.action.state=[action intValue];
+    proto.action.state=action;
     ProtocolManager *manager=[ProtocolManager defaultManager];
     proto.deviceID=[[manager queryProtocol:deviceID] intValue];
     proto.deviceType=[manager queryAction:deviceID];
@@ -96,21 +96,183 @@
     return dataFromProtocol(proto);
 }
 
+-(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID value:(uint8_t)value
+{
+    Proto proto=createProto();
+    proto.cmd=0x03;
+    proto.action.state=action;
+    proto.action.RValue=value;
+    ProtocolManager *manager=[ProtocolManager defaultManager];
+    proto.deviceID=[[manager queryProtocol:deviceID] intValue];
+    proto.deviceType=[manager queryAction:deviceID];
+    proto.masterID=self.masterID;
+    return dataFromProtocol(proto);
+}
+
+#pragma mark - public
+//TV,DVD,NETV,BGMusic
+-(NSData *) previous:(NSString *)deviceID
+{
+    return [self action:PROTOCOL_PREVIOUS deviceID:deviceID];
+}
+
+-(NSData *) forward:(NSString *)deviceID
+{
+    return [self action:PROTOCOL_FORWARD deviceID:deviceID];
+}
+
+-(NSData *) backward:(NSString *)deviceID
+{
+    return [self action:PROTOCOL_BACKWARD deviceID:deviceID];
+}
+
+-(NSData *) next:(NSString *)deviceID
+{
+    return [self action:PROTOCOL_FORWARD deviceID:deviceID];
+}
+
+-(NSData *) play:(NSString *)deviceID
+{
+    return [self action:PROTOCOL_PLAY deviceID:deviceID];
+}
+
+-(NSData *) pause:(NSString *)deviceID
+{
+    return [self action:PROTOCOL_PAUSE deviceID:deviceID];
+}
+
+-(NSData *) stop:(NSString *)deviceID
+{
+    return [self action:PROTOCOL_STOP deviceID:deviceID];
+}
+
+-(NSData *) changeVolume:(uint8_t)percent deviceID:(NSString *)deviceID
+{
+    return [self action:PROTOCOL_VOLUME deviceID:deviceID value:percent];
+}
+
+//TV,DVD,NETV
+-(NSData *) sweepLeft:(NSString *)deviceID
+{
+    return [self action:PROTOCOL_LEFT deviceID:deviceID];
+}
+
+-(NSData *) sweepRight:(NSString *)deviceID
+{
+    return [self action:PROTOCOL_RIGHT deviceID:deviceID];
+}
+
+-(NSData *) sweepUp:(NSString *)deviceID
+{
+    return [self action:PROTOCOL_UP deviceID:deviceID];
+}
+
+-(NSData *) sweepDown:(NSString *)deviceID
+{
+    return [self action:PROTOCOL_DOWN deviceID:deviceID];
+}
 
 #pragma mark - lighter
--(NSData *) toogleLight:(bool)toogle deviceID:(NSString *)deviceID
+-(NSData *) toogleLight:(uint8_t)toogle deviceID:(NSString *)deviceID
 {
-    return [self action:[NSNumber numberWithBool:toogle] deviceID:deviceID];
+    return [self action:toogle deviceID:deviceID];
 }
 
--(NSData *) changeColor:(long)color deviceID:(NSString *)deviceID
+-(NSData *) changeColor:(uint8_t)color deviceID:(NSString *)deviceID
 {
-    return [self action:[NSNumber numberWithLong:color] deviceID:deviceID];
+    return [self action:color deviceID:deviceID];
 }
 
--(NSData *) changeBright:(int)bright deviceID:(NSString *)deviceID
+-(NSData *) changeBright:(uint8_t)bright deviceID:(NSString *)deviceID
 {
-    return [self action:[NSNumber numberWithInt:bright] deviceID:deviceID];
+    return [self action:bright deviceID:deviceID];
+}
+
+#pragma mark - curtain
+-(NSData *) roll:(uint8_t)percent deviceID:(NSString *)deviceID
+{
+    return [self action:0x2A deviceID:deviceID value:percent];
+}
+
+-(NSData *) open:(NSString *)deviceID
+{
+    return [self action:0x64 deviceID:deviceID];
+}
+
+-(NSData *) close:(NSString *)deviceID
+{
+    return [self action:0x00 deviceID:deviceID];
+}
+
+#pragma mark - TV
+-(NSData *) switchProgram:(uint8_t)program deviceID:(NSString *)deviceID
+{
+    return [self action:0x3A deviceID:deviceID value:program];
+}
+
+-(NSData *) changeTVolume:(uint8_t)percent deviceID:(NSString *)deviceID
+{
+    return [self action:0x3A deviceID:deviceID value:percent];
+}
+
+#pragma mark - DVD
+-(NSData *) home:(NSString *)deviceID
+{
+    return [self action:0x20 deviceID:deviceID];
+}
+
+-(NSData *) pop:(NSString *)deviceID
+{
+    return [self action:0x30 deviceID:deviceID];
+}
+
+#pragma mark - NETV
+-(NSData *) NETVhome:(NSString *)deviceID
+{
+    return [self action:0x11 deviceID:deviceID];
+}
+
+-(NSData *) back:(NSString *)deviceID
+{
+    return [self action:0x10 deviceID:deviceID];
+}
+
+#pragma mark - FM
+-(NSData *) switchFMProgram:(uint8_t)program deviceID:(NSString *)deviceID
+{
+    return [self action:program deviceID:deviceID];
+}
+
+#pragma mark - Guard
+-(NSData *) toogle:(uint8_t)toogle deviceID:(NSString *)deviceID
+{
+    return [self action:toogle deviceID:deviceID];
+}
+
+#pragma mark - Air
+-(NSData *) toogleAirCon:(uint8_t)toogle deviceID:(NSString *)deviceID
+{
+    return [self action:toogle deviceID:deviceID];
+}
+-(NSData *) changeTemperature:(uint8_t)temperature deviceID:(NSString *)deviceID
+{
+    return [self action:temperature deviceID:deviceID];
+}
+-(NSData *) changeDirect:(uint8_t)direct deviceID:(NSString *)deviceID
+{
+    return [self action:direct deviceID:deviceID];
+}
+-(NSData *) changeSpeed:(uint8_t)speed deviceID:(NSString *)deviceID
+{
+    return [self action:speed deviceID:deviceID];
+}
+-(NSData *) changeMode:(uint8_t)mode deviceID:(NSString *)deviceID
+{
+    return [self action:mode deviceID:deviceID];
+}
+-(NSData *) changeInterval:(uint8_t)interval deviceID:(NSString *)deviceID
+{
+    return [self action:interval deviceID:deviceID];
 }
 
 @end

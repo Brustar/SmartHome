@@ -31,6 +31,25 @@ typedef struct Protocol Proto;
 #define PROTOCOL_HEAD 0xEC
 #define PROTOCOL_TAIL 0xEA
 
+#define PROTOCOL_OFF 0x00
+#define PROTOCOL_ON 0x01
+
+#define PROTOCOL_PLAY 0x02
+#define PROTOCOL_PAUSE 0x03
+#define PROTOCOL_STOP 0x04
+
+#define PROTOCOL_LEFT 0x05
+#define PROTOCOL_RIGHT 0x06
+#define PROTOCOL_UP 0x07
+#define PROTOCOL_DOWN 0x08
+
+#define PROTOCOL_PREVIOUS 0x09
+#define PROTOCOL_NEXT 0x0A
+#define PROTOCOL_FORWARD 0x0B
+#define PROTOCOL_BACKWARD 0x0C
+
+#define PROTOCOL_VOLUME 0xAA
+
 @interface PackManager : NSObject
 
 NSData *dataFromProtocol(Proto protcol);
