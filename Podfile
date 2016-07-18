@@ -8,6 +8,7 @@ target 'SmartHome' do
 	pod 'MBProgressHUD'
 	pod 'Reachability', '~> 3.0.0'
 	#pod 'QRCodeReader'
+	pod ‘KxMenu’
 	#pod 'PrettyRuler', '~> 2.1.1'
 	pod 'CocoaAsyncSocket', :git => 'https://github.com/robbiehanson/CocoaAsyncSocket.git', :commit => 'c0bbcbcc5e039ca5d732f9844bf95c3d8ee31a5b'
 end

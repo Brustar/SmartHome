@@ -12,17 +12,24 @@
 #import "NetStatusManager.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
+<<<<<<< HEAD
+#import "ProtocolManager.h"
+#import "UIImageView+AFNetworking.h" 
+
+=======
+#import "RegexKitLite.h"
+>>>>>>> b958762ce3b4c53dc4a50d424ed9705aeeb9cbec
 @implementation IBeaconController
 
 -(void) viewDidLoad
 {
     DeviceInfo *device=[DeviceInfo defaultManager];
-    [device addObserver:self forKeyPath:@"beacons" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:NULL];
+    [device addObserver:self forKeyPath:@"beacons" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     
     IbeaconManager *beaconManager=[IbeaconManager defaultManager];
     [beaconManager start:device];
     
-    [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:NULL];
+    [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     VolumeManager *volume=[VolumeManager defaultManager];
     [volume start:device];
     
@@ -32,6 +39,9 @@
     self.hostReach = [Reachability reachabilityWithHostname:@"www.apple.com"];
     [self.hostReach startNotifier];  //开始监听,会启动一个run loop
     [self updateInterfaceWithReachability: self.hostReach];
+    NSURL *url=[NSURL URLWithString:@"http://e-cloudcn.com/img/cj_kt.jpg"];
+    [self.imagev setImageWithURL:url];
+
 }
 
 //监听到网络状态改变
@@ -159,10 +169,11 @@
 
 - (IBAction)logout:(id)sender
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *dict = @{@"UserName":[defaults objectForKey:@"userName"],@"UserTellNumber":[defaults objectForKey:@"password"]};
+   
     
-    NSString *url = [NSString stringWithFormat:@"%@UserLogOut. aspx",[IOManager httpAddr]];
+    NSDictionary *dict = @{@"UserID":[[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"]};
+    
+    NSString *url = [NSString stringWithFormat:@"%@UserLogOut.aspx",[IOManager httpAddr]];
     HttpManager *http=[HttpManager defaultManager];
     http.delegate=self;
     [http sendPost:url param:dict];
@@ -170,7 +181,7 @@
 }
 -(void) httpHandler:(id) responseObject
 {
-    if([responseObject[@"Result"] intValue] == 1)
+    if([responseObject[@"Result"] intValue] == 0)
     {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"token"];
     }
@@ -223,11 +234,19 @@
 -(IBAction)sendMsg:(id)sender
 {
     //NSString *cmd=@"EC00000000FF0000FFEA";
-    NSString *cmd=@"EC00000001000000EA";
+    NSString *cmd=@"EC040101EA";
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:[PackManager dataFormHexString:cmd] withTimeout:1 tag:1];
     [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1];
-    //[sock.socket readDataToData:[AsyncSocket ZeroData] withTimeout:1 tag:1];
+    
+    //self.timer =  [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(myLog:) userInfo:nil repeats:YES];
+}
+
+-(IBAction)myLog:(id)sender
+{
+    NSLog(@"log...");
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket readDataWithTimeout:-1 tag:1];
 }
 
 -(void)recv:(NSData *)data withTag:(long)tag
@@ -243,11 +262,27 @@
 
 -(IBAction)sendSearchBroadcast:(id)sender
 {
-    NSString *str =@"ec80000000ff0006c0a8c7ef1f4167ea";
+    NSString *str =@"ec8ff600c0a8c7ef1f4167ea";
     NSData *data =[PackManager dataFormHexString:str];
-    NSLog(@"Data:%@,checksum:%i",data,[PackManager checkProtocol:data cmd:0x80]);
+    Proto proto=protocolFromData(data);
+    NSLog(@"cmd:%d,action:%d",proto.masterID,proto.action.G);
     
-    NSLog(@"wifi:%@",[NetStatusManager getWifiName]);
+    NSLog(@"Data:%@,proto:%@",data,[NSData dataWithBytes:&proto length:sizeof(proto)]);
+    
+    Proto pro;
+    pro.head=0xEC;
+    pro.tail=0xEA;
+    pro.cmd=1;
+    pro.deviceID=2;
+    pro.deviceType=3;
+    pro.masterID=4;
+    pro.action.state=5;
+    pro.action.RValue=1;
+    NSLog(@"pro:%@",dataFromProtocol(pro));
+    
+    ProtocolManager *protos = [ProtocolManager defaultManager];
+    [protos fetchAll];
+    [protos trace];
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -308,6 +343,7 @@
     [device removeObserver:self forKeyPath:@"beacons" context:NULL];
     [device removeObserver:self forKeyPath:@"volume" context:NULL];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
+    [self.timer invalidate];
 }
 
 @end

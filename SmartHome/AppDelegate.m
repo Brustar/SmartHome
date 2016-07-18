@@ -34,7 +34,15 @@
     } ;
     
     [IOManager copyFile:@"smartDB" to:@"smartDB"];
-    [[SocketManager defaultManager] initUDP:40000];
+    
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    [device netReachbility];
+    
+    if (device.masterID) {
+        [device initConfig];
+    }
+    
+    
     return YES;
 }
 

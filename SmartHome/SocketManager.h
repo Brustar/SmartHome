@@ -39,7 +39,7 @@ enum{
 -(void)socketConnectHost;// socket连接
 -(void)cutOffSocket; // 断开socket连接
 
--(void)initUDP:(int)port;
 -(void)initTcp:(NSString *)addr port:(int)port mode:(int)mode delegate:(id)delegate;
+- (void) connectAfterLogined;
 
 @end

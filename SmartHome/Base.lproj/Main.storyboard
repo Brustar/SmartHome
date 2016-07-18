@@ -63,7 +63,7 @@
                                         <rect key="frame" x="0.0" y="188" width="200" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qhV-Qt-CdL" id="mN9-7M-659">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gWF-aN-2ue">
@@ -2873,10 +2873,14 @@
                                     <action selector="disconnect:" destination="mdZ-A8-8hK" eventType="touchUpInside" id="ns8-xw-s6T"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gvf-C3-f9V">
+                                <rect key="frame" x="259" y="210" width="240" height="128"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="imagev" destination="Gvf-C3-f9V" id="RDn-ID-xKq"/>
                         <outlet property="myLabel" destination="tcO-hr-fB2" id="x2o-bs-UsG"/>
                         <outlet property="volumeLabel" destination="14e-S8-kZe" id="kpw-M8-fOw"/>
                     </connections>

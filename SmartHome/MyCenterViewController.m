@@ -12,6 +12,11 @@
 #import "MyCenterTableViewCell.h"
 #import "MSGController.h"
 #import "FavorController.h"
+#import "ProfieFaultsViewController.h"
+#import "MySettingViewController.h"
+#import "ServiceRecordViewController.h"
+#import "MyEnergyViewController.h"
+
 @interface MyCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) NSArray *titlArr;
 @property(nonatomic,strong) NSArray *images;
@@ -40,16 +45,32 @@
     self.scrollView.frame = CGRectMake(200, 0, self.view.frame.size.width - 200, self.view.frame.size.height);
     self.scrollView.contentSize = CGSizeMake(widtht *self.titlArr.count, hight);
     UIStoryboard *sy = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    MSGController *msgVC = [sy instantiateViewControllerWithIdentifier:@"msgController"];
-    msgVC.view.frame = self.scrollView.bounds;
-    [self.scrollView addSubview:msgVC.view];
-    [self addChildViewController:msgVC];
+    
+    ProfieFaultsViewController *faultVC = [sy instantiateViewControllerWithIdentifier:@"MyDefaultViewController"];
+    [self addSubViewAndController:faultVC withNum:0];
+    
+    ServiceRecordViewController *recordVC = [sy instantiateViewControllerWithIdentifier:@"ServiceRecordViewController"];
+    [self addSubViewAndController:recordVC withNum:1];
+    
+    MyEnergyViewController *energyVC = [sy instantiateViewControllerWithIdentifier:@"MyEnergyViewController"];
+    [self addSubViewAndController:energyVC withNum:2];
     
     FavorController *favor = [sy instantiateViewControllerWithIdentifier:@"favorController"];
-    favor.view.frame = CGRectMake(widtht, 0, widtht, hight);
-    [self.scrollView addSubview:favor.view];
-    [self addChildViewController:favor];
+    [self addSubViewAndController:favor withNum:3];
     
+    MSGController *msgVC = [sy instantiateViewControllerWithIdentifier:@"msgController"];
+    [self addSubViewAndController:msgVC withNum:4];
+    
+    MySettingViewController *settingVC = [sy instantiateViewControllerWithIdentifier:@"settingViewController"];
+    [self addSubViewAndController:settingVC withNum:5];
+    
+    
+}
+-(void) addSubViewAndController:(UIViewController*)subVC withNum:(int)i
+{
+    subVC.view.frame = CGRectMake(widtht * i, 0, widtht, hight);
+    [self.scrollView addSubview:subVC.view];
+    [self addChildViewController:subVC];
     
 }
 

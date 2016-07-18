@@ -49,15 +49,19 @@
         [MBProgressHUD showError:@"请输入合法的手机号码"];
         return;
     }
-    RegisterDetailController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"registerDetail"];
-    
+    [self performSegueWithIdentifier:@"registerDetaiSegue" sender:self];
+   
+
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    RegisterDetailController *vc = segue.destinationViewController;
     vc.MasterID = self.masterStr;
     vc.phoneStr = self.phoneNumTextField.text;
     vc.userType = self.suerTypeStr;
-
-    [self.navigationController pushViewController:vc animated:YES];
+    
 }
-
 #pragma mark -判断手机号是否合法
 - (BOOL)isMobileNumber:(NSString *)mobileNum
 {

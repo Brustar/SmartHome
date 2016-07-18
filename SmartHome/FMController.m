@@ -27,6 +27,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *editView;
 @property (weak, nonatomic) IBOutlet UILabel *hzLabel;
+@property (weak, nonatomic) IBOutlet UIPageControl *pageController;
 
 @end
 
@@ -67,7 +68,7 @@
             }
         }
     }
-   // [self.collectionView registerClass:[FMCollectionViewCell class] forCellWithReuseIdentifier:@"collectionCell"];
+    [self setUpPageController];
     
     [self setRuleForFMChannel];
 }
@@ -91,6 +92,18 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+//设置pageController
+-(void)setUpPageController
+{
+    self.pageController.numberOfPages = [self.collectionView numberOfItemsInSection:0] / 4;
+    self.pageController.pageIndicatorTintColor = [UIColor whiteColor];
+    self.pageController.currentPageIndicatorTintColor = [UIColor blackColor];
+}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    CGPoint point = scrollView.contentOffset;
+    self.pageController.currentPage = round(point.x/scrollView.bounds.size.width);
 }
 
 #pragma mark - UICollectionDelegate
@@ -135,11 +148,7 @@
     [cell hiddenBtns];
     [cell unUseLongPressGesture];
 }
-//- (CGPoint)collectionView:(UICollectionView *)collectionView targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset
-//{
-//    CGPoint point = CGPointMake(proposedContentOffset.x *2, proposedContentOffset.y);
-//    return point;
-//}
+
 
 #pragma mark - -(void)unUseLongPressGesture
 -(void)FmDeleteAction:(FMCollectionViewCell *)cell
@@ -217,6 +226,7 @@
     {
         DeviceInfo *device=[DeviceInfo defaultManager];
         self.volume.value=[[device valueForKey:@"volume"] floatValue];
+        [self save:nil];
     }
 }
 

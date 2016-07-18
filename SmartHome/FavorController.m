@@ -79,7 +79,6 @@
     cell.textLabel.text=[self.favors objectAtIndex:indexPath.row];
     return cell;
     
-    return cell;
 }
 
 

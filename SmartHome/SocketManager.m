@@ -9,6 +9,10 @@
 #import "SocketManager.h"
 #import "AsyncUdpSocket.h"
 #import "PackManager.h"
+#import "IOManager.h"
+#import "DeviceInfo.h"
+#import <Reachability/Reachability.h>
+#import "MBProgressHUD+NJ.h"
 
 @implementation SocketManager
 
@@ -38,7 +42,8 @@
 }
 
 // 心跳连接
--(void)longConnectToSocket{
+-(void)longConnectToSocket
+{
     // 根据服务器要求发送固定格式的数据，假设为指令@"longConnect"，但是一般不会是这么简单的指令
     NSString *longConnect = @"longConnect\r\n";
     NSData   *dataStream  = [longConnect dataUsingEncoding:NSUTF8StringEncoding];
@@ -46,7 +51,7 @@
     [self.socket readDataToData:[AsyncSocket CRLFData] withTimeout:1 tag:1];
 }
 
--(void)initUDP:(int)port
+-(void)connectUDP:(int)port
 {
     NSError *bindError = nil;
     AsyncUdpSocket *udpSocket=[[AsyncUdpSocket alloc]initWithDelegate:self];
@@ -72,6 +77,65 @@
     [self socketConnectHost];
 }
 
+- (void) connectTcp
+{
+    //请求协调服务器
+    [self initTcp:[IOManager tcpAddr] port:[IOManager tcpPort] mode:outDoor delegate:nil];
+    Proto proto=createProto();
+    proto.cmd=0x00;
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    proto.masterID=device.masterID;
+    NSData *data=dataFromProtocol(proto);
+    [self.socket writeData:data withTimeout:1 tag:1000];
+    [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1000];
+}
+
+- (void) connectAfterLogined
+{
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    
+    if (device.reachbility == ReachableViaWiFi) {
+        [self connectUDP:40000];
+    }else if (device.reachbility == ReachableViaWWAN){
+        [self connectTcp];
+    }else{
+        [MBProgressHUD showError:@"当前网络不可用，请检查你的网络设置"];
+    }
+}
+
+- (void) handleUDP:(NSData *)data
+{
+    if ([PackManager checkProtocol:data cmd:0x80]) {
+        //Proto proto=protocolFromData(data);
+
+        NSData *masterID=[data subdataWithRange:NSMakeRange(3, 4)];
+        NSData *ip=[data subdataWithRange:NSMakeRange(8, 4)];
+        NSData *port=[data subdataWithRange:NSMakeRange(12, 2)];
+        
+        
+        DeviceInfo *info=[DeviceInfo defaultManager];
+        info.masterID=(long)[PackManager NSDataToUInt:masterID];
+        info.masterIP=[PackManager NSDataToIP:ip];
+        info.masterPort=(int)[PackManager NSDataToUInt:port];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:[PackManager NSDataToUInt:masterID]] forKey:@"masterID"];
+        [self initTcp:[PackManager NSDataToIP:ip] port:(int)[PackManager NSDataToUInt:port] mode:atHome delegate:nil];
+    }else{
+        [self connectTcp];
+    }
+}
+
+- (void) handleTCP:(NSData *)data
+{
+    if ([PackManager checkProtocol:data cmd:0x00]) {
+        NSData *ip=[data subdataWithRange:NSMakeRange(8, 4)];
+        NSData *port=[data subdataWithRange:NSMakeRange(12, 2)];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:[PackManager NSDataToIP:ip] forKey:@"subIP"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:[PackManager NSDataToUInt:port]] forKey:@"subPort"];
+        [self initTcp:[PackManager NSDataToIP:ip] port:(int)[PackManager NSDataToUInt:port] mode:outDoor delegate:nil];
+    }
+}
+
 #pragma mark  - TCP delegate
 -(void)onSocket:(AsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port
 {
@@ -85,6 +149,10 @@
 {
     //NSString *recv=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSLog(@"received data:%@",data);
+    if (tag==1000) {
+        [self handleTCP:data];
+        return;
+    }
     [self.delegate recv:data withTag:tag];
 }
 
@@ -107,7 +175,7 @@
 -(BOOL)onUdpSocket:(AsyncUdpSocket *)sock didReceiveData:(NSData *)data withTag:(long)tag fromHost:(NSString *)host port:(UInt16)port
 {
     NSLog(@"onUdpSocket:%@",data);
-    [PackManager handleUDP:data];
+    [self handleUDP:data];
     return YES;
 }
 
@@ -129,6 +197,7 @@
 -(void)onUdpSocketDidClose:(AsyncUdpSocket *)sock
 {
     NSLog(@"onUdpSocketDidClose.");
+    [self connectTcp];
 }
 
 @end

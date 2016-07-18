@@ -11,7 +11,9 @@
 #import "Light.h"
 #import "ColourTableViewCell.h"
 #import "DetailTableViewCell.h"
-@interface LightController : UIViewController<HRColorPickerViewControllerDelegate>
+#import "SocketManager.h"
+
+@interface LightController : UIViewController<HRColorPickerViewControllerDelegate,TcpRecvDelegate>
 
 @property (strong, nonatomic) IBOutlet ColourTableViewCell *cell;
 @property (strong, nonatomic) IBOutlet DetailTableViewCell *detailCell;

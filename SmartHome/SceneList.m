@@ -17,6 +17,7 @@
     self.scenes=[NSArray arrayWithObjects:@"清晨" ,@"睡眠" ,@"约会" ,@"用餐" ,@"派对" ,@"影院" ,@"欢迎" ,@"离家" ,nil];
     self.tableView.rowHeight=44;
     
+    NSLog(@"subip:%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"subIP"]);
 }
 
 -(IBAction)framework:(id)sender

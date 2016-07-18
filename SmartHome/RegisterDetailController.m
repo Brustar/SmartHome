@@ -11,7 +11,7 @@
 #import "CryptoManager.h"
 #import "IOManager.h"
 #import "MBProgressHUD+NJ.h"
-#import "FinishRegisterViewController.h"
+
 #import "WebManager.h"
 #import "RegexKitLite.h"
 
@@ -25,6 +25,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *auothCodeBtn;
 
 @property (nonatomic,strong) dispatch_source_t _timer;
+
+@property (weak, nonatomic) IBOutlet UIView *coverView;
 
 @end
 
@@ -115,6 +117,8 @@
         [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"AuthorToken"] forKey:@"token"];
         [[NSUserDefaults standardUserDefaults] setObject:self.userName.text forKey:@"userName"];
         [[NSUserDefaults standardUserDefaults]  setObject:self.passWord.text forKey:@"password"];
+        [[NSUserDefaults standardUserDefaults] setObject:self.phoneNumber.text forKey:@"UserTellNumber"];
+        [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"UserID"] forKey:@"UserID"];
        
         [self performSegueWithIdentifier:@"finishedSegue" sender:self];
         
@@ -125,11 +129,7 @@
     }
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    FinishRegisterViewController *vc = segue.destinationViewController;
-    vc.userStr = self.userName.text;
-}
+
 
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -143,6 +143,9 @@
 - (IBAction)serviceAgreement:(id)sender {
     [WebManager show:@""];
 }
+
+
+
 
 
 

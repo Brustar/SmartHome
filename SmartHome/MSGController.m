@@ -8,65 +8,82 @@
 
 #import "MSGController.h"
 #import "IOManager.h"
-
-@interface MSGController ()
-
+#import "MsgCell.h"
+#import "HttpManager.h"
+@interface MSGController ()<HttpDelegate>
+@property(nonatomic,strong) NSMutableArray *msgArr;
+@property(nonatomic,strong) NSMutableArray *timesArr;
 @end
 
 @implementation MSGController
-
+-(NSMutableArray *)msgArr
+{
+    if(!_msgArr)
+    {
+        _msgArr = [NSMutableArray array];
+        
+    }
+    return _msgArr;
+}
+-(NSMutableArray *)timesArr
+{
+    if(!_timesArr)
+    {
+        _timesArr = [NSMutableArray array];
+    }
+    return _timesArr;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.msgs = [[NSMutableArray alloc] init];
-    NSString *url = [NSString stringWithFormat:@"%@msgs",[IOManager httpAddr]];
-    // GET
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    [mgr GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSLog(@"success:%@",responseObject);
-        for (id obj in responseObject) {
-            [self.msgs addObject:obj[@"title"]];
-        }
-        [self.tableView reloadData];
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        NSLog(@"failure:%@",error);
-    }];
+    [self sendRequest];
+    
+   
 }
+-(void)sendRequest
+{
+    NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    NSString *userID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"];
+    NSString *url = [NSString stringWithFormat:@"%@GetNotifyMessage.aspx?Author=%@&UserID%d",[IOManager httpAddr],authorToken,[userID intValue]];
+    HttpManager *http=[HttpManager defaultManager];
+    http.delegate = self;
+    [http sendGet:url param:nil];
+
+}
+-(void)httpHandler:(id)responseObject
+{
+    NSDictionary *dic = responseObject[@"messageInfo"];
+    NSArray *msgList = dic[@"messageList"];
+    for(NSDictionary *dicDetail in msgList)
+    {
+        NSString *description = dicDetail[@"description"];
+        NSString *createDate = dicDetail[@"createDate"];
+        [self.msgArr addObject:description];
+        [self.timesArr addObject:createDate];
+    }
+
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 #pragma mark - Table view data source
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.msgs count];
+    return self.msgArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
-    cell.textLabel.text=[self.msgs objectAtIndex:indexPath.row];
-    cell.detailTextLabel.text=@"发送于周六";
+    static NSString *CellIdentifier = @"msgCell";
+    MsgCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    cell.title.text = self.msgArr[indexPath.row];
+    cell.timeLable.text = self.timesArr[indexPath.row];
     return cell;
 }
 
