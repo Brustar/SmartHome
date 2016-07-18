@@ -8,7 +8,6 @@
 
 #import "AccessSettingController.h"
 #import "areaSettingCell.h"
-#import "accessCell.h"
 @interface AccessSettingController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *userTableView;
 @property (nonatomic,strong) NSMutableArray *userArr;
@@ -80,9 +79,12 @@
         cell.areaLabel.text = self.areasArr[indexPath.row];
         return cell;
     }
-    accessCell *cell =[tableView dequeueReusableCellWithIdentifier:@"accessSettingCell" forIndexPath:indexPath];
-    cell.title.text = self.userArr[indexPath.row];
-    cell.subTitle.text = self.managerType[indexPath.row];
+
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"accessSettingCell" forIndexPath:indexPath];
+    cell.textLabel.text = self.userArr[indexPath.row];
+    cell.detailTextLabel.text = self.managerType[indexPath.row];
+    
+    
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -90,9 +92,9 @@
     self.areaTableView.hidden = NO;
     if(tableView == self.userTableView)
     {
-        accessCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-        self.userName.text = cell.title.text;
-        if([cell.subTitle.text isEqualToString:@"主人用户"])
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        self.userName.text = cell.textLabel.text;
+        if([cell.detailTextLabel.text isEqualToString:@"主人用户"])
         {
             [self.identityType setTitle:@"可转化为普通身份" forState:UIControlStateNormal];
         }else [self.identityType setTitle:@"可转化为主人身份" forState:UIControlStateNormal];

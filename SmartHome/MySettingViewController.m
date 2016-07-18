@@ -8,10 +8,14 @@
 
 #import "MySettingViewController.h"
 #import "AccessSettingController.h"
+#import "SystemSettingViewController.h"
+#import "systemInfomationController.h"
 @interface MySettingViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) NSArray *titleArr;
 @property (nonatomic,strong) AccessSettingController *accessVC;
+@property (nonatomic,strong) SystemSettingViewController *sySetVC;
+@property (nonatomic,strong) systemInfomationController *inforVC;
 @end
 
 @implementation MySettingViewController
@@ -108,6 +112,12 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self goToViewController:indexPath];
+    
+    
+}
+-(void)goToViewController:(NSIndexPath *)indexPath
+{
     UIStoryboard *sy = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     if(indexPath.section == 0)
     {
@@ -115,33 +125,33 @@
         self.pushVC.view.frame = self.view.bounds;
         [self.view addSubview:self.pushVC.view];
         
+        
     }else if(indexPath.section == 1)
     {
-        self.accessVC = [sy instantiateViewControllerWithIdentifier:@"AccessSettingController"];
-        self.accessVC.view.frame = self.view.bounds;
-        [self.view addSubview:self.accessVC.view];
+        
+            self.accessVC = [sy instantiateViewControllerWithIdentifier:@"AccessSettingController"];
+            self.accessVC.view.frame = self.view.bounds;
+            [self.view addSubview:self.accessVC.view];
+        
+        
+        
+    }else if(indexPath.section == 2)
+    {
+        if(indexPath.row == 0)
+        {
+            self.sySetVC = [sy instantiateViewControllerWithIdentifier:@"SystemSettingViewController"];
+            self.sySetVC.view.frame = self.view.bounds;
+            [self.view addSubview:self.sySetVC.view];
+        }else {
+            self.inforVC = [sy instantiateViewControllerWithIdentifier:@"systemInfomationController"];
+            self.inforVC.view.frame = self.view.bounds;
+            [self.view addSubview:self.inforVC.view];
+        }
     }
-    
+
 }
 
 
-//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    self.pushVC = segue.destinationViewController;
-//    
-//    self.pushVC.view.frame = CGRectMake(100, 100, 200, 400);
-//    [self.view addSubview:self.pushVC.view];
-//    
-//    
-//}
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

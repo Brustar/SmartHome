@@ -118,7 +118,6 @@
 		F62D5D431D2CE4C600C1E070 /* MyCenterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F62D5D421D2CE4C600C1E070 /* MyCenterTableViewCell.m */; };
 		F630C35F1D38B4FF008880BB /* AccessSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = F630C35E1D38B4FF008880BB /* AccessSettingController.m */; };
 		F630C3621D38C3E5008880BB /* areaSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F630C3611D38C3E5008880BB /* areaSettingCell.m */; };
-		F630C3651D38CA31008880BB /* accessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F630C3641D38CA31008880BB /* accessCell.m */; };
 		F6359AFB1CFFBC910035EB31 /* DetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6359AF91CFFBC910035EB31 /* DetailTableViewCell.m */; };
 		F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6359AFA1CFFBC910035EB31 /* DetailTableViewCell.xib */; };
 		F6359B001CFFC4DC0035EB31 /* ColourTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6359AFE1CFFC4DC0035EB31 /* ColourTableViewCell.m */; };
@@ -137,6 +136,10 @@
 		F65DB3421D2B5AB2002A815C /* RegisterPhoneNumController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65DB33E1D2B5AB2002A815C /* RegisterPhoneNumController.m */; };
 		F66EB2D21CFEB9E300AC53CE /* Detail.m in Sources */ = {isa = PBXBuildFile; fileRef = F66EB2D11CFEB9E300AC53CE /* Detail.m */; };
 		F66EB2D51CFED0A900AC53CE /* DetailList.m in Sources */ = {isa = PBXBuildFile; fileRef = F66EB2D41CFED0A900AC53CE /* DetailList.m */; };
+		F67F1F711D3C69DC00F2B7E5 /* SystemSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F67F1F701D3C69DC00F2B7E5 /* SystemSettingViewController.m */; };
+		F67F1F741D3C6AA200F2B7E5 /* SystemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F67F1F731D3C6AA200F2B7E5 /* SystemCell.m */; };
+		F67F1F771D3C719D00F2B7E5 /* systemInfomationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F67F1F761D3C719D00F2B7E5 /* systemInfomationController.m */; };
+		F67F1F7A1D3C802B00F2B7E5 /* AboutUsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F67F1F791D3C802B00F2B7E5 /* AboutUsController.m */; };
 		F69C82301D35D214002DE6D7 /* PushSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = F69C822F1D35D214002DE6D7 /* PushSettingController.m */; };
 		F69C82331D363376002DE6D7 /* ServiceRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F69C82321D363376002DE6D7 /* ServiceRecordViewController.m */; };
 		F69C82361D363A4D002DE6D7 /* ServiceRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F69C82351D363A4D002DE6D7 /* ServiceRecordCell.m */; };
@@ -464,8 +467,6 @@
 		F630C35E1D38B4FF008880BB /* AccessSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccessSettingController.m; sourceTree = "<group>"; };
 		F630C3601D38C3E5008880BB /* areaSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = areaSettingCell.h; sourceTree = "<group>"; };
 		F630C3611D38C3E5008880BB /* areaSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = areaSettingCell.m; sourceTree = "<group>"; };
-		F630C3631D38CA31008880BB /* accessCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = accessCell.h; sourceTree = "<group>"; };
-		F630C3641D38CA31008880BB /* accessCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = accessCell.m; sourceTree = "<group>"; };
 		F6359AF81CFFBC910035EB31 /* DetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTableViewCell.h; sourceTree = "<group>"; };
 		F6359AF91CFFBC910035EB31 /* DetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewCell.m; sourceTree = "<group>"; };
 		F6359AFA1CFFBC910035EB31 /* DetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailTableViewCell.xib; sourceTree = "<group>"; };
@@ -499,6 +500,14 @@
 		F66EB2D11CFEB9E300AC53CE /* Detail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Detail.m; sourceTree = "<group>"; };
 		F66EB2D31CFED0A900AC53CE /* DetailList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailList.h; sourceTree = "<group>"; };
 		F66EB2D41CFED0A900AC53CE /* DetailList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailList.m; sourceTree = "<group>"; };
+		F67F1F6F1D3C69DC00F2B7E5 /* SystemSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemSettingViewController.h; sourceTree = "<group>"; };
+		F67F1F701D3C69DC00F2B7E5 /* SystemSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemSettingViewController.m; sourceTree = "<group>"; };
+		F67F1F721D3C6AA200F2B7E5 /* SystemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemCell.h; sourceTree = "<group>"; };
+		F67F1F731D3C6AA200F2B7E5 /* SystemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemCell.m; sourceTree = "<group>"; };
+		F67F1F751D3C719D00F2B7E5 /* systemInfomationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = systemInfomationController.h; sourceTree = "<group>"; };
+		F67F1F761D3C719D00F2B7E5 /* systemInfomationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = systemInfomationController.m; sourceTree = "<group>"; };
+		F67F1F781D3C802B00F2B7E5 /* AboutUsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsController.h; sourceTree = "<group>"; };
+		F67F1F791D3C802B00F2B7E5 /* AboutUsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsController.m; sourceTree = "<group>"; };
 		F69C822E1D35D214002DE6D7 /* PushSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushSettingController.h; sourceTree = "<group>"; };
 		F69C822F1D35D214002DE6D7 /* PushSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushSettingController.m; sourceTree = "<group>"; };
 		F69C82311D363376002DE6D7 /* ServiceRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceRecordViewController.h; sourceTree = "<group>"; };
@@ -723,8 +732,14 @@
 				F630C35E1D38B4FF008880BB /* AccessSettingController.m */,
 				F630C3601D38C3E5008880BB /* areaSettingCell.h */,
 				F630C3611D38C3E5008880BB /* areaSettingCell.m */,
-				F630C3631D38CA31008880BB /* accessCell.h */,
-				F630C3641D38CA31008880BB /* accessCell.m */,
+				F67F1F6F1D3C69DC00F2B7E5 /* SystemSettingViewController.h */,
+				F67F1F701D3C69DC00F2B7E5 /* SystemSettingViewController.m */,
+				F67F1F721D3C6AA200F2B7E5 /* SystemCell.h */,
+				F67F1F731D3C6AA200F2B7E5 /* SystemCell.m */,
+				F67F1F751D3C719D00F2B7E5 /* systemInfomationController.h */,
+				F67F1F761D3C719D00F2B7E5 /* systemInfomationController.m */,
+				F67F1F781D3C802B00F2B7E5 /* AboutUsController.h */,
+				F67F1F791D3C802B00F2B7E5 /* AboutUsController.m */,
 				F65838D21D39D3BB004210AC /* WelcomeController.h */,
 				F65838D31D39D3BB004210AC /* WelcomeController.m */,
 			);
@@ -1388,6 +1403,7 @@
 				0FABF91F1D06AA4E000892D8 /* DVDController.m in Sources */,
 				0FEE12771D20C53400811947 /* TXHRrettyRuler.m in Sources */,
 				0F43B1031CF4055300F3D9F0 /* IATConfig.m in Sources */,
+				F67F1F7A1D3C802B00F2B7E5 /* AboutUsController.m in Sources */,
 				0F25178A1CFD8C6500491A6C /* PackManager.m in Sources */,
 				F6B91F721D100F1400592FB0 /* TVChannel.m in Sources */,
 				0F295A601D2E092900F23F21 /* HttpManager.m in Sources */,
@@ -1419,8 +1435,9 @@
 				0F2D35BD1D114E7000C46DE5 /* RTSPPlayer.m in Sources */,
 				0F032D4C1CC9B12700D1920D /* AppDelegate.m in Sources */,
 				0FB205ED1CDC3D3700B5E87E /* AudioManager.m in Sources */,
-				F630C3651D38CA31008880BB /* accessCell.m in Sources */,
+				F67F1F711D3C69DC00F2B7E5 /* SystemSettingViewController.m in Sources */,
 				0F180FC61D0E4E5000392F4C /* FMController.m in Sources */,
+				F67F1F771D3C719D00F2B7E5 /* systemInfomationController.m in Sources */,
 				0FABF91C1D06AA35000892D8 /* TVController.m in Sources */,
 				0FAF74C31CEEA17C00432713 /* HRColorMapView.m in Sources */,
 				0FADA44A1CEBF8AE00777901 /* SceneManager.m in Sources */,
@@ -1437,6 +1454,7 @@
 				0FC7FDCB1CED9D5A00F91BDF /* DeviceList.m in Sources */,
 				0FAF74C01CEEA17C00432713 /* HRBrightnessSlider.m in Sources */,
 				F66EB2D51CFED0A900AC53CE /* DetailList.m in Sources */,
+				F67F1F741D3C6AA200F2B7E5 /* SystemCell.m in Sources */,
 				0FC3DE851D236CFF00A03482 /* LoginController.m in Sources */,
 				0FB42E1E1CF681A7007DE64F /* planeScene.m in Sources */,
 				F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */,

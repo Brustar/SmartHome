@@ -1,14 +1,14 @@
 //
-//  accessCell.m
+//  SystemCell.m
 //  SmartHome
 //
-//  Created by 逸云科技 on 16/7/15.
+//  Created by 逸云科技 on 16/7/18.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
-#import "accessCell.h"
+#import "SystemCell.h"
 
-@implementation accessCell
+@implementation SystemCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
