@@ -12,11 +12,8 @@
 #import "MBProgressHUD+NJ.h"
 #import "WebManager.h"
 #import "RegexKitLite.h"
-<<<<<<< HEAD
 #import "SocketManager.h"
 
-@interface LoginController ()
-=======
 #import "QRCodeReaderDelegate.h"
 #import "QRCodeReader.h"
 #import "QRCodeReaderViewController.h"
@@ -25,7 +22,7 @@
 #import "ProfieFaultsViewController.h"
 #import "ServiceRecordViewController.h"
 @interface LoginController ()<QRCodeReaderDelegate>
->>>>>>> b958762ce3b4c53dc4a50d424ed9705aeeb9cbec
+
 @property (weak, nonatomic) IBOutlet UITextField *user;
 @property (weak, nonatomic) IBOutlet UITextField *pwd;
 @property (weak, nonatomic) IBOutlet UIView *coverView;
@@ -80,14 +77,20 @@
 -(void) httpHandler:(id) responseObject
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     if ([responseObject[@"Result"] intValue]==1) {
         [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"AuthorToken"] forKey:@"token"];
         [[SocketManager defaultManager] connectAfterLogined];
 =======
+=======
+>>>>>>> b958762ce3b4c53dc4a50d424ed9705aeeb9cbec
     if ([responseObject[@"Result"] intValue]==0) {
         [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
         [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"UserID"] forKey:@"UserID"];
         
+<<<<<<< HEAD
+>>>>>>> b958762ce3b4c53dc4a50d424ed9705aeeb9cbec
+=======
 >>>>>>> b958762ce3b4c53dc4a50d424ed9705aeeb9cbec
     }
     [MBProgressHUD showError:responseObject[@"Msg"]];
