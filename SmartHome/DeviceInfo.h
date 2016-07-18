@@ -96,19 +96,13 @@ enum{
 -(NSData *) home:(NSString *)deviceID; //主页
 -(NSData *) pop:(NSString *)deviceID; //出仓
 
--(NSData *) changeDVDVolume:(uint8_t)percent deviceID:(NSString *)deviceID; //mute:pecent=0
-
 #pragma mark - NETV
 -(NSData *) NETVhome:(NSString *)deviceID; //主页
 
 -(NSData *) back:(NSString *)deviceID;
 
--(NSData *) changeNETVolume:(uint8_t)percent deviceID:(NSString *)deviceID; //mute:pecent=0
-
 #pragma mark - FM
 -(NSData *) switchFMProgram:(uint8_t)program deviceID:(NSString *)deviceID; //切换台
-
--(NSData *) changeFMVolume:(uint8_t)percent deviceID:(NSString *)deviceID; //mute:pecent=0
 
 #pragma mark - Guard
 -(NSData *) toogle:(uint8_t)toogle deviceID:(NSString *)deviceID;
