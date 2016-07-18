@@ -13,7 +13,8 @@
 #import "DVCollectionViewCell.h"
 #import "TVLogoCell.h"
 #import "MBProgressHUD+NJ.h"
-@interface TVController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,TVLogoCellDelegate>
+#import "KxMenu.h"
+@interface TVController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,TVLogoCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UISlider *volume;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageController;
@@ -24,14 +25,16 @@
 @property (nonatomic,strong) NSArray *btnTitles;
 
 @property (nonatomic,strong) NSMutableArray *allFavourTVChannels;
+@property (nonatomic,strong) TVLogoCell *cell;
 - (IBAction)mute:(id)sender;
 //编辑电视属性
 @property (weak, nonatomic) IBOutlet UITextField *channelName;
-
 @property (weak, nonatomic) IBOutlet UITextField *channeID;
-@property (weak, nonatomic) IBOutlet UIImageView *channelImageView;
 @property (weak, nonatomic) IBOutlet UIView *editView;
 @property (weak, nonatomic) IBOutlet UIView *coverView;
+@property (weak, nonatomic) IBOutlet UIButton *editChannelImgBtn;
+
+- (IBAction)editChannelImgBtn:(UIButton *)sender;
 
 @end
 
@@ -83,14 +86,10 @@
             }
         }
     }
+    [self setUpPageController];
 
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 -(IBAction)save:(id)sender
 {
@@ -113,7 +112,6 @@
 
 #pragma mark - Navigation
 
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
    
     id theSegue = segue.destinationViewController;
@@ -133,8 +131,17 @@
         self.volume.value=[[device valueForKey:@"volume"] floatValue];
     }
 }
-
-
+//设置pageController
+-(void)setUpPageController
+{
+    self.pageController.numberOfPages = [self.tvLogoCollectionView numberOfItemsInSection:0] / 4;
+    self.pageController.pageIndicatorTintColor = [UIColor whiteColor];
+    self.pageController.currentPageIndicatorTintColor = [UIColor blackColor];
+}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    CGPoint point = scrollView.contentOffset;
+    self.pageController.currentPage = round(point.x/scrollView.bounds.size.width);
+}
 
 #pragma mark - UICollectionViewDelgate
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -158,8 +165,7 @@
     {
         TVLogoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"tvLogoCell" forIndexPath:indexPath];
         cell.delegate = self;
-        cell.editBtn.hidden = YES;
-        cell.deleteBtn.hidden = YES;
+        [cell hiddenEditBtnAndDeleteBtn];
         if(indexPath.row > self.allFavourTVChannels.count -1)
         {
             cell.imgView.image = [UIImage imageNamed:@""];
@@ -189,8 +195,7 @@
     if(collectionView == self.tvLogoCollectionView)
     {
         TVLogoCell *cell =(TVLogoCell*)[collectionView cellForItemAtIndexPath:indexPath];
-        cell.deleteBtn.hidden = YES;
-        cell.editBtn.hidden = YES;
+        [cell hiddenEditBtnAndDeleteBtn];
         [cell unUseLongPressGesture];
     }
 }
@@ -198,6 +203,8 @@
 #pragma mark -- TVLogoCellDelegate
 -(void)tvDeleteAction:(TVLogoCell *)cell
 {
+    
+    self.cell = cell;
     NSIndexPath *indexPath = [self.tvLogoCollectionView indexPathForCell:cell];
     TVChannel *channel = self.allFavourTVChannels[indexPath.row];
     BOOL isSuccess = [TVChannel deleteChannelForChannelID:channel.channel_id];
@@ -214,22 +221,100 @@
 {
     NSIndexPath *indexPath = [self.tvLogoCollectionView indexPathForCell:cell];
     TVChannel *channel = self.allFavourTVChannels[indexPath.row];
-    self.channelImageView.image = cell.imgView.image;
+    [self.editChannelImgBtn setBackgroundImage:cell.imgView.image forState:UIControlStateNormal];
     self.channelName.text = channel.channel_name;
     self.channeID.text = [NSString stringWithFormat:@"%ld",channel.channel_id];
+    [self showCoverView];
+}
+
+-(void)showCoverView
+{
     self.coverView.hidden = NO;
     self.editView.hidden = NO;
 }
-//编辑完成后上传频道
-- (IBAction)clickSureBtnAfterEdited:(id)sender {
+-(void)hiddenCoverView{
     self.coverView.hidden = YES;
     self.editView.hidden = YES;
 }
 
+#pragma mark -编辑电视频道
+//编辑完成后上传频道
+- (IBAction)clickSureBtnAfterEdited:(id)sender {
+    [self hiddenCoverView];
+    
+}
+- (IBAction)cancelEdit:(id)sender {
+    [self hiddenCoverView];
+   
+    
+}
+
+
+
+
+- (IBAction)editChannelImgBtn:(UIButton *)sender {
+    UIButton *btn = sender;
+    UIView *view = btn.superview;
+    CGFloat y = view.frame.origin.y -(view.frame.size.width - btn.frame.size.width);
+    [KxMenu showMenuInView:self.view fromRect:CGRectMake(view.frame.origin.x, y , view.frame.size.width, view.frame.size.height) menuItems:@[
+                                                                      [KxMenuItem menuItem:@"预置台标"
+                                                                                     image:nil
+                                                                                    target:self
+                                                                                    action:@selector(preset:)],
+                                                                      [KxMenuItem menuItem:@"本地图库"
+                                                                                     image:nil
+                                                                                    target:self
+                                                                                    action:@selector(selectPhoto:)],
+                                                                      [KxMenuItem menuItem:@"现在拍摄"
+                                                                                     image:nil
+                                                                                    target:self
+                                                                                    action:@selector(takePhoto:)],
+                                                                      ]];
+
+                                                                      
+                                        
+    
+}
+-(void)preset:(KxMenuItem *)item{
+    
+}
+- (void)selectPhoto:(KxMenuItem *)item {
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+}
+
+- (void)takePhoto:(KxMenuItem *)item {
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+}
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+    UIImage *chooseImg = info[UIImagePickerControllerEditedImage];
+    [self.editChannelImgBtn setBackgroundImage:chooseImg forState:UIControlStateNormal];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
 
 -(void)dealloc
 {
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device removeObserver:self forKeyPath:@"volume" context:nil];
 }
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
 @end

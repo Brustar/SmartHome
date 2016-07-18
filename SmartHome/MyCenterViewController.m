@@ -16,6 +16,7 @@
 #import "MySettingViewController.h"
 #import "ServiceRecordViewController.h"
 #import "MyEnergyViewController.h"
+
 @interface MyCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) NSArray *titlArr;
 @property(nonatomic,strong) NSArray *images;

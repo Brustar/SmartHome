@@ -1,25 +1,38 @@
 //
-//  FinishRegisterViewController.m
+//  WelcomeController.m
 //  SmartHome
 //
-//  Created by 逸云科技 on 16/7/5.
+//  Created by 逸云科技 on 16/7/16.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
-#import "FinishRegisterViewController.h"
+#import "WelcomeController.h"
 
-@interface FinishRegisterViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *userName;
+@interface WelcomeController ()
 
+@property (weak, nonatomic) IBOutlet UIView *coverView;
+
+@property (weak, nonatomic) IBOutlet UIView *knowView;
 
 @end
 
-@implementation FinishRegisterViewController
+@implementation WelcomeController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.userName.text = self.userStr;
+    
+    
 }
+
+
+- (IBAction)clickWeKnowBtn:(id)sender {
+    
+    self.coverView.hidden = YES;
+    self.knowView.hidden = YES;
+}
+- (IBAction)clickloginBtn:(id)sender {
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -34,6 +34,11 @@
     self.editBtn.hidden = NO;
     self.deleteBtn.hidden = NO;
 }
+-(void)hiddenEditBtnAndDeleteBtn
+{
+    self.editBtn.hidden = YES;
+    self.deleteBtn.hidden =YES;
+}
 -(void)unUseLongPressGesture
 {
     if(self.lgPress != nil)

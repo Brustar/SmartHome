@@ -11,10 +11,13 @@
 #import "HttpManager.h"
 #import "IOManager.h"
 
+
 @interface ProfieFaultsViewController ()<UITableViewDelegate,UITableViewDataSource,HttpDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,assign) BOOL isEditing;
 @property (weak, nonatomic) IBOutlet UIView *footerView;
+@property (nonatomic,strong) NSMutableArray *faultArr;
+@property (nonatomic,strong) NSMutableArray *timesArr;
 - (IBAction)clickCancleBtn:(id)sender;
 - (IBAction)clickSureBtn:(id)sender;
 
@@ -22,11 +25,24 @@
 @end
 
 @implementation ProfieFaultsViewController
-
+-(NSMutableArray*)faultArr
+{
+    if(!_faultArr){
+        _faultArr = [NSMutableArray array];
+    }
+    return _faultArr;
+}
+-(NSMutableArray *)timesArr{
+    if(!_timesArr)
+    {
+        _timesArr = [NSMutableArray array];
+        
+    }
+    return _timesArr;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.footerView.hidden = YES;
-    self.Mydefaults = [NSMutableArray arrayWithObjects:@"123", @"345", @"4324", nil];
     self.tableView.tableFooterView = self.footerView;
     
     [self sendRequest];
@@ -34,14 +50,37 @@
 }
 -(void)sendRequest
 {
-    NSString *url = [NSString stringWithFormat:@"%@GetMyBreakdown. ashx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     NSString *userID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"];
+     NSString *url = [NSString stringWithFormat:@"%@GetBreakdownMessage.aspx?AuthorToken=%@&UserID=%d",[IOManager httpAddr],auothorToken,[userID intValue]];
+    
+    HttpManager *http=[HttpManager defaultManager];
+    http.delegate = self;
+    [http sendGet:url param:nil];
+    
+    
 }
+-(void)httpHandler:(id)responseObject
+{
+    NSDictionary *dic = responseObject[@"messageInfo"];
+    NSArray *msgList = dic[@"messageList"];
+    for(NSDictionary *dicDetail in msgList)
+    {
+        NSString *description = dicDetail[@"description"];
+        NSString *createDate = dicDetail[@"createDate"];
+        [self.faultArr addObject:description];
+        [self.timesArr addObject:createDate];
+    }
+    
+}
+
+
+    
+
 
 #pragma mark -UITableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.Mydefaults.count;
+    return self.faultArr.count;
 }
 
 
@@ -49,8 +88,8 @@
 {
     ProfieFaultsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProfieDefaultCell" forIndexPath:indexPath];
     
-    cell.title.text = self.Mydefaults[indexPath.row];
-    cell.dateLabel.text = @"2016-7-9";
+    cell.title.text = self.faultArr[indexPath.row];
+    cell.dateLabel.text = self.timesArr[indexPath.row];
     
     if (self.isEditing) {
         cell.alertImageView.hidden = YES;
@@ -129,14 +168,18 @@
 - (IBAction)clickSureBtn:(id)sender {
     //放置要删除的对象
     NSMutableArray *deleteArray = [NSMutableArray array];
+    NSMutableArray *deletedTime = [NSMutableArray array];
     // 要删除的row
     NSArray *selectedArray = [self.tableView indexPathsForSelectedRows];
     
     for (NSIndexPath *indexPath in selectedArray) {
-        [deleteArray addObject:self.Mydefaults[indexPath.row]];
+        //[deleteArray addObject:self.Mydefaults[indexPath.row]];
+        [deleteArray addObject:self.faultArr[indexPath.row]];
+        [deletedTime addObject:self.timesArr[indexPath.row]];
     }
     // 先删除数据源
-    [self.Mydefaults removeObjectsInArray:deleteArray];
+    [self.faultArr removeObjectsInArray:deleteArray];
+    [self.timesArr removeObjectsInArray:deletedTime];
     
     [self clickCancleBtn:nil];
 }

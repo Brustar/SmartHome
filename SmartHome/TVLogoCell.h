@@ -25,4 +25,5 @@
 
 -(void)useLongPressGesture;
 -(void)unUseLongPressGesture;
+-(void)hiddenEditBtnAndDeleteBtn;
 @end

@@ -7,11 +7,11 @@
 //
 
 #import "MySettingViewController.h"
-
+#import "AccessSettingController.h"
 @interface MySettingViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) NSArray *titleArr;
-
+@property (nonatomic,strong) AccessSettingController *accessVC;
 @end
 
 @implementation MySettingViewController
@@ -107,13 +107,21 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row == 0)
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UIStoryboard *sy = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    if(indexPath.section == 0)
     {
-        self.pushVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"PushSettingController"];
+        self.pushVC = [sy instantiateViewControllerWithIdentifier:@"PushSettingController"];
         self.pushVC.view.frame = self.view.bounds;
         [self.view addSubview:self.pushVC.view];
         
+    }else if(indexPath.section == 1)
+    {
+        self.accessVC = [sy instantiateViewControllerWithIdentifier:@"AccessSettingController"];
+        self.accessVC.view.frame = self.view.bounds;
+        [self.view addSubview:self.accessVC.view];
     }
+    
 }
 
 
