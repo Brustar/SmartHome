@@ -1448,11 +1448,7 @@
 				F65DB3421D2B5AB2002A815C /* RegisterPhoneNumController.m in Sources */,
 				F6359AFB1CFFBC910035EB31 /* DetailTableViewCell.m in Sources */,
 				0F43B1061CF4078300F3D9F0 /* ISRDataHelper.m in Sources */,
-<<<<<<< HEAD
-				0F3576751D363188003334E0 /* ProtocolManager.m in Sources */,
-=======
 				F65838DA1D3A2A43004210AC /* MsgCell.m in Sources */,
->>>>>>> b958762ce3b4c53dc4a50d424ed9705aeeb9cbec
 				0FB42E231CF6F9E8007DE64F /* SocketManager.m in Sources */,
 				0FCFB3861CF2912700B37DD3 /* TV.m in Sources */,
 				F65B7D271D34E9E00059CFA4 /* MySettingViewController.m in Sources */,
