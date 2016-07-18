@@ -35,6 +35,7 @@
     if([keyPath isEqualToString:@"volume"])
     {
         self.volume.value=[[self.beacon valueForKey:@"volume"] floatValue];
+        //[self save:nil];
     }
 }
 

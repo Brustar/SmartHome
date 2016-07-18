@@ -8,6 +8,9 @@
 
 #import "DeviceInfo.h"
 #import "sys/utsname.h"
+#import <Reachability/Reachability.h>
+#import "PackManager.h"
+#import "ProtocolManager.h"
 
 @implementation DeviceInfo
 
@@ -20,6 +23,19 @@
     });
     
     return sharedInstance;
+}
+
+- (void) netReachbility
+{
+    Reachability *curReach = [Reachability reachabilityWithHostname:@"www.apple.com"];
+    NetworkStatus status = [curReach currentReachabilityStatus];
+    self.reachbility=status;
+}
+
+-(void)initConfig
+{
+    //更新设备，房间，场景表
+    
 }
 
 - (void) deviceGenaration
@@ -66,6 +82,35 @@
 
     NSLog(@"NOTE: Unknown device type: %@", deviceString);
     self.genaration = UNKNOWN;
+}
+
+-(NSData *) action:(NSNumber *)action deviceID:(NSString *)deviceID
+{
+    Proto proto=createProto();
+    proto.cmd=0x03;
+    proto.action.state=[action intValue];
+    ProtocolManager *manager=[ProtocolManager defaultManager];
+    proto.deviceID=[[manager queryProtocol:deviceID] intValue];
+    proto.deviceType=[manager queryAction:deviceID];
+    proto.masterID=self.masterID;
+    return dataFromProtocol(proto);
+}
+
+
+#pragma mark - lighter
+-(NSData *) toogleLight:(bool)toogle deviceID:(NSString *)deviceID
+{
+    return [self action:[NSNumber numberWithBool:toogle] deviceID:deviceID];
+}
+
+-(NSData *) changeColor:(long)color deviceID:(NSString *)deviceID
+{
+    return [self action:[NSNumber numberWithLong:color] deviceID:deviceID];
+}
+
+-(NSData *) changeBright:(int)bright deviceID:(NSString *)deviceID
+{
+    return [self action:[NSNumber numberWithInt:bright] deviceID:deviceID];
 }
 
 @end

@@ -11,6 +11,31 @@
 
 @implementation PackManager
 
+NSData *dataFromProtocol(Proto protcol)
+{
+    // make a NSData object
+    return [NSData dataWithBytes:&protcol length:sizeof(protcol)];
+}
+
+Proto protocolFromData(NSData *data)
+{
+    // make a new Protocol
+    Proto proto;
+    [data getBytes:&proto length:sizeof(proto)];
+    return proto;
+}
+
+Proto createProto()
+{
+    Proto proto;
+    proto.head=PROTOCOL_HEAD;
+    proto.tail=PROTOCOL_TAIL;
+    DeviceInfo *info=[DeviceInfo defaultManager];
+    
+    proto.masterID=info.masterID;
+    return proto;
+}
+
 + (NSData *) fireflyProtocol:(NSString *)cmd
 {
     NSData* bytes = [cmd dataUsingEncoding:NSUTF8StringEncoding];
@@ -37,7 +62,7 @@
     NSData *head = [data subdataWithRange:NSMakeRange(0, 1)];
     NSData *cmd = [data subdataWithRange:NSMakeRange(1, 1)];
     NSData *tail = [data subdataWithRange:NSMakeRange([data length]-1, 1)];
-    return [self NSDataToUInt:head]==0xEC && [self NSDataToUInt:cmd]==value && [self NSDataToUInt:tail]==0xEA && [self checkSum:data];
+    return [self NSDataToUInt:head]==0xEC && [self NSDataToUInt:cmd]==value && [self NSDataToUInt:tail]==0xEA;
 }
 
 + (long) NSDataToUInt:(NSData *)data
@@ -55,21 +80,6 @@
     NSData *ip4=[ip subdataWithRange:NSMakeRange(3, 1)];
     
     return [NSString stringWithFormat:@"%ld.%ld.%ld.%ld",[self NSDataToUInt:ip1],[self NSDataToUInt:ip2],[self NSDataToUInt:ip3],[self NSDataToUInt:ip4]];
-}
-
-+ (void) handleUDP:(NSData *)data
-{
-    if ([PackManager checkProtocol:data cmd:0x80]) {
-        NSData *masterID=[data subdataWithRange:NSMakeRange(3, 4)];
-        NSData *ip=[data subdataWithRange:NSMakeRange(8, 4)];
-        NSData *port=[data subdataWithRange:NSMakeRange(12, 2)];
-        
-        
-        DeviceInfo *info=[DeviceInfo defaultManager];
-        info.masterID=(long)[PackManager NSDataToUInt:masterID];
-        info.masterIP=[PackManager NSDataToIP:ip];
-        info.masterPort=(int)[PackManager NSDataToUInt:port];
-    }
 }
 
 + (NSData*)dataFormHexString:(NSString*)hexString

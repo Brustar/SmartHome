@@ -14,11 +14,12 @@
 
 @interface IBeaconController : UIViewController<HMHomeManagerDelegate,HMAccessoryBrowserDelegate,TcpRecvDelegate>
 
+@property (weak, nonatomic) IBOutlet UIImageView *imagev;
 @property (strong, nonatomic) IBOutlet UILabel *myLabel;
 @property (strong, nonatomic) IBOutlet UILabel *volumeLabel;
 
 @property(nonatomic,strong) NSURLSessionDownloadTask *task;
-
+@property (nonatomic, retain) NSTimer *timer;
 @property(nonatomic,strong) Reachability *hostReach;
 
 @end

@@ -226,6 +226,7 @@
     {
         DeviceInfo *device=[DeviceInfo defaultManager];
         self.volume.value=[[device valueForKey:@"volume"] floatValue];
+        [self save:nil];
     }
 }
 

@@ -7,6 +7,9 @@
 //
 
 #import "LightController.h"
+#import "PackManager.h"
+#import "SocketManager.h"
+#import "ProtocolManager.h"
 
 @interface LightController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *favButt;
@@ -59,6 +62,13 @@
 
 -(IBAction)save:(id)sender
 {
+    if ([sender isEqual:self.detailCell.power]) {
+        NSData *data=[[DeviceInfo defaultManager] toogleLight:self.detailCell.power.isOn deviceID:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1];
+    }
+    
     Light *device=[[Light alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setIsPoweron: self.detailCell.power.isOn];
@@ -76,6 +86,11 @@
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device id:device.deviceID];
     [scene setDevices:devices];
     [[SceneManager defaultManager] addScenen:scene withName:@"" withPic:@""];
+}
+
+-(void)recv:(NSData *)data withTag:(long)tag
+{
+    
 }
 
 -(IBAction)favorite:(id)sender

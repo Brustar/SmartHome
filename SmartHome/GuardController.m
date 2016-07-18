@@ -10,6 +10,9 @@
 #import "EntranceGuard.h"
 #import "Scene.h"
 #import "SceneManager.h"
+#import "PackManager.h"
+#import "SocketManager.h"
+#import "ProtocolManager.h"
 
 @interface GuardController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -30,6 +33,10 @@
     self.tableView.dataSource = self;
     self.tableView.scrollEnabled = NO;
     self.title = @"门禁";
+    
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock initTcp:[IOManager tcpAddr] port:[IOManager tcpPort] mode:outDoor delegate:self];
+    self.timer =  [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(myLog:) userInfo:nil repeats:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,6 +47,18 @@
 
 -(IBAction)save:(id)sender
 {
+    if ([sender isEqual:self.switchView]) {
+        Proto proto=createProto();
+        proto.cmd=0x02;
+        proto.action.state=self.switchView.isOn;
+        //ProtocolManager *manager=[ProtocolManager defaultManager];
+        proto.deviceID=0x40;//[[manager queryProtocol:@"开关灯_开"] intValue];
+        proto.deviceType=0x01;
+        NSData *data=dataFromProtocol(proto);
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1];
+    }
     EntranceGuard *device=[[EntranceGuard alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setPoweron: self.switchView.isOn];
@@ -54,6 +73,18 @@
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device id:device.deviceID];
     [scene setDevices:devices];
     [[SceneManager defaultManager] addScenen:scene withName:@"" withPic:@""];
+}
+
+-(IBAction)myLog:(id)sender
+{
+    //NSLog(@"log...");
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket readDataWithTimeout:-1 tag:1];
+}
+
+-(void)recv:(NSData *)data withTag:(long)tag
+{
+    
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -132,7 +163,6 @@
 
 
  #pragma mark - Navigation
- 
  // In a storyboard-based application, you will often want to do a little preparation before navigation
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
  // Get the new view controller using [segue destinationViewController].
@@ -140,5 +170,10 @@
      id theSegue = segue.destinationViewController;
      [theSegue setValue:self.deviceid forKey:@"deviceid"];
  }
+
+-(void) dealloc
+{
+    [self.timer invalidate];
+}
 
 @end
