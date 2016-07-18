@@ -21,6 +21,7 @@
 		0F1F3BCA1D2B85EA00B2641C /* MBProgressHUD+NJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F1F3BC91D2B85EA00B2641C /* MBProgressHUD+NJ.m */; };
 		0F25178A1CFD8C6500491A6C /* PackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2517891CFD8C6500491A6C /* PackManager.m */; };
 		0F25FE5E1CEB0C0A0063E834 /* SceneList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F25FE5D1CEB0C0A0063E834 /* SceneList.m */; };
+		0F290B751D3C8947006584D5 /* ProtocolManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3576741D363188003334E0 /* ProtocolManager.m */; };
 		0F295A601D2E092900F23F21 /* HttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F295A5F1D2E092900F23F21 /* HttpManager.m */; };
 		0F2D35BC1D114E7000C46DE5 /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2D35B71D114E7000C46DE5 /* AudioStreamer.m */; };
 		0F2D35BD1D114E7000C46DE5 /* RTSPPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2D35B91D114E7000C46DE5 /* RTSPPlayer.m */; };
@@ -34,7 +35,6 @@
 		0F2D36771D11555100C46DE5 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2D36701D11555100C46DE5 /* libswresample.a */; };
 		0F2D36781D11555100C46DE5 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2D36711D11555100C46DE5 /* libswscale.a */; };
 		0F2D36791D11555100C46DE5 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2D36721D11555100C46DE5 /* libavcodec.a */; };
-		0F3576751D363188003334E0 /* ProtocolManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3576741D363188003334E0 /* ProtocolManager.m */; };
 		0F3CCF3B1D0F97B70058A320 /* CameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3CCF3A1D0F97B70058A320 /* CameraController.m */; };
 		0F43B0F81CF3E7BF00F3D9F0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F43B0F71CF3E7BF00F3D9F0 /* SystemConfiguration.framework */; };
 		0F43B0F91CF3E7D200F3D9F0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FCFB39F1CF2D38800B37DD3 /* AVFoundation.framework */; };
@@ -1119,6 +1119,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0F032D771CC9B12700D1920D /* Build configuration list for PBXNativeTarget "SmartHome" */;
 			buildPhases = (
+				9E5B0BAA933708A69B87E6AE /* 📦 Check Pods Manifest.lock */,
 				22E4FF7C74861624FBD7E7CB /* [CP] Check Pods Manifest.lock */,
 				7B4EC63A298C6E6A66AD1643 /* [CP] Check Pods Manifest.lock */,
 				6984B7368FBF635163F6D0CF /* [CP] Check Pods Manifest.lock */,
@@ -1366,6 +1367,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		9E5B0BAA933708A69B87E6AE /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1373,6 +1389,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F290B751D3C8947006584D5 /* ProtocolManager.m in Sources */,
 				F65164141D3780C500A6F5FA /* TVLogoCell.m in Sources */,
 				0FAF74BF1CEEA17C00432713 /* HRBrightnessCursor.m in Sources */,
 				0FAF98A31CE40F3C009BDBB5 /* QRCameraSwitchButton.m in Sources */,

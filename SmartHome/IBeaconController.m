@@ -12,17 +12,10 @@
 #import "NetStatusManager.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
-<<<<<<< HEAD
-<<<<<<< HEAD
 #import "ProtocolManager.h"
-#import "UIImageView+AFNetworking.h" 
+#import "UIImageView+AFNetworking.h"
+#import "RegexKitLite.h"
 
-=======
-#import "RegexKitLite.h"
->>>>>>> b958762ce3b4c53dc4a50d424ed9705aeeb9cbec
-=======
-#import "RegexKitLite.h"
->>>>>>> b958762ce3b4c53dc4a50d424ed9705aeeb9cbec
 @implementation IBeaconController
 
 -(void) viewDidLoad
