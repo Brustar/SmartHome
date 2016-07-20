@@ -89,10 +89,43 @@
     }
     [self setUpPageController];
     
-    CATransition *animation = [CATransition animation];
-    animation.type=@"rippleEffect";
-    animation.duration = 0.5f;
-    [self.touchpad.layer addAnimation:animation forKey:@"animation"];
+    UISwipeGestureRecognizer *recognizer;
+    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [[self touchpad] addGestureRecognizer:recognizer];
+    
+    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    [[self touchpad] addGestureRecognizer:recognizer];
+    
+    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionUp)];
+    [[self touchpad] addGestureRecognizer:recognizer];
+    
+    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionDown)];
+    [[self touchpad] addGestureRecognizer:recognizer];
+}
+
+- (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
+    switch (recognizer.direction) {
+        case UISwipeGestureRecognizerDirectionLeft:
+            NSLog(@"Left");
+            break;
+        case UISwipeGestureRecognizerDirectionRight:
+            NSLog(@"right");
+            break;
+        case UISwipeGestureRecognizerDirectionUp:
+            NSLog(@"up");
+            break;
+        case UISwipeGestureRecognizerDirectionDown:
+            NSLog(@"down");
+            break;
+            
+        default:
+            break;
+    }
+    [SCWaveAnimationView waveAnimationAtDirection:recognizer.direction view:self.touchpad];
 }
 
 

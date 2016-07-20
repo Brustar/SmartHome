@@ -28,4 +28,7 @@
 }
 + (void) waveAnimationAtPosition:(CGPoint)position;
 + (void) waveAnimationAtPosition:(CGPoint)position forView:(UIView*)view;
+
++ (void) waveAnimationAtDirection:(UISwipeGestureRecognizerDirection)direction view:(UIView*)view;
++ (void) waveAnimationAtDirection:(UISwipeGestureRecognizerDirection)direction forView:(UIView*)view;
 @end

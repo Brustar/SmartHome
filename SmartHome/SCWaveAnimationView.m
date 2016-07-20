@@ -77,7 +77,14 @@
 
 + (void) waveAnimationAtPosition:(CGPoint)position
 {
-	[self waveAnimationAtPosition:position forView:[[UIApplication sharedApplication] keyWindow]];
+    Globals *global=[Globals sharedGlobals];
+    global.animationDuration=0.5;
+    global.numberOfWaves=1;
+    global.spawnInterval=0.25;
+    global.spawnSize=6;
+    global.scaleFactor=8;
+    global.shadowRadius=2;
+    [self waveAnimationAtPosition:position forView:[[UIApplication sharedApplication] keyWindow]];
 }
 
 + (void) waveAnimationAtPosition:(CGPoint)position forView:(UIView*)view
@@ -89,19 +96,54 @@
 	}
 }
 
++ (void) waveAnimationAtDirection:(UISwipeGestureRecognizerDirection)direction view:(UIView*)view
+{
+    Globals *global=[Globals sharedGlobals];
+    global.animationDuration=1.5;
+    global.numberOfWaves=2;
+    global.spawnInterval=0.15;
+    global.spawnSize=100;
+    global.scaleFactor=6;
+    global.shadowRadius=2;
+    [self waveAnimationAtDirection:direction forView:view];
+}
+
++ (void) waveAnimationAtDirection:(UISwipeGestureRecognizerDirection)direction forView:(UIView*)view
+{
+    SCWaveAnimationView* waveAnimationView = [[self alloc] initWithFrame:CGRectMake(0, 0, 400, 400)];
+    int x=0,y=0;
+    switch (direction) {
+        case UISwipeGestureRecognizerDirectionLeft:
+            x=300;
+            y=150;
+            break;
+        case UISwipeGestureRecognizerDirectionRight:
+            x=0;
+            y=150;
+            break;
+        case UISwipeGestureRecognizerDirectionUp:
+            x=150;
+            y=300;
+            break;
+        case UISwipeGestureRecognizerDirectionDown:
+            x=150;
+            y=0;
+            break;
+        default:
+            break;
+    }
+    [waveAnimationView setCenter:CGPointMake(x, y)];
+    if (nil != view) {
+        [view addSubview:waveAnimationView];
+    }
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
 		wavesSpawned = 0;
 		wavesDone = 0;
-        Globals *global=[Globals sharedGlobals];
-        global.animationDuration=0.4;
-        global.numberOfWaves=2;
-        global.spawnInterval=0.15;
-        global.spawnSize=6;
-        global.scaleFactor=8;
-        global.shadowRadius=2;
 
 #if kDebugCoordinates==1
 		UIView* xView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 1)];
@@ -117,7 +159,7 @@
 		[self spawnWave];
 		if (1<[[Globals sharedGlobals] numberOfWaves]) {
             double spawnInterval = [[Globals sharedGlobals] spawnInterval];
-            if (!spawnInterval > kAnimationDuration*1.25) {
+            if (spawnInterval <= kAnimationDuration*1.25) {
                 spawnInterval = kAnimationDuration*1.25;
             }
             timer = [NSTimer scheduledTimerWithTimeInterval:spawnInterval target:self selector:@selector(spawnWave) userInfo:nil repeats:YES];
