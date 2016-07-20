@@ -38,6 +38,10 @@
         //[self save:nil];
     }
 }
+- (IBAction)pause:(id)sender {
+    
+    
+}
 
 -(void)dealloc
 {

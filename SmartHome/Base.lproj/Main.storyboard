@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="QoB-0E-qDZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="iP5-w8-v4Y">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -2512,7 +2512,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XU6-KE-sbu">
-                                <rect key="frame" x="75" y="80" width="450" height="140"/>
+                                <rect key="frame" x="0.0" y="80" width="600" height="140"/>
                                 <subviews>
                                     <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="D33-xY-Acr">
                                         <rect key="frame" x="135" y="81" width="238" height="31"/>
@@ -2530,26 +2530,34 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="voice_weak" translatesAutoresizingMaskIntoConstraints="NO" id="Zsw-Vy-cRx">
                                         <rect key="frame" x="96" y="80" width="33" height="32"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="broadcast" translatesAutoresizingMaskIntoConstraints="NO" id="SWj-De-1Iy">
-                                        <rect key="frame" x="280" y="34" width="32" height="32"/>
-                                    </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="last" translatesAutoresizingMaskIntoConstraints="NO" id="aMU-cJ-BVz">
                                         <rect key="frame" x="138" y="34" width="32" height="32"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pause" translatesAutoresizingMaskIntoConstraints="NO" id="ZBU-eb-zDp">
-                                        <rect key="frame" x="207" y="34" width="32" height="32"/>
-                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zrP-p9-4Zz" userLabel="pause">
+                                        <rect key="frame" x="209" y="36" width="32" height="32"/>
+                                        <state key="normal" image="pause"/>
+                                        <connections>
+                                            <action selector="pause:" destination="ozV-GP-Vrh" eventType="touchUpInside" id="lsg-Zr-1kW"/>
+                                        </connections>
+                                    </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="voice_strong" translatesAutoresizingMaskIntoConstraints="NO" id="G8B-ww-PY9">
                                         <rect key="frame" x="379" y="81" width="39" height="32"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="next" translatesAutoresizingMaskIntoConstraints="NO" id="mCP-KC-dMy">
                                         <rect key="frame" x="348" y="33" width="32" height="32"/>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UKG-Nx-bM2">
+                                        <rect key="frame" x="277" y="36" width="32" height="32"/>
+                                        <state key="normal" image="broadcast"/>
+                                        <connections>
+                                            <action selector="play:" destination="ozV-GP-Vrh" eventType="touchUpInside" id="Csz-kg-JRu"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="140" id="6gg-tE-Wbx"/>
-                                    <constraint firstAttribute="width" constant="450" id="MSH-4S-r50"/>
+                                    <constraint firstAttribute="width" constant="600" id="MSH-4S-r50"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -3890,6 +3898,7 @@
                         <outlet property="editView" destination="Izc-wa-SEs" id="2Yp-OX-OER"/>
                         <outlet property="numbersCollectionView" destination="8FO-uN-8dL" id="oG7-EX-9Ul"/>
                         <outlet property="pageController" destination="kVU-ah-M3k" id="lZS-bv-s9C"/>
+                        <outlet property="touchpad" destination="s3x-g6-uS1" id="Im8-QQ-IyP"/>
                         <outlet property="tvLogoCollectionView" destination="BMQ-UB-8M2" id="vYG-SE-Uxl"/>
                         <outlet property="volume" destination="jdw-mK-XVY" id="jmR-8u-VSS"/>
                     </connections>
@@ -4561,8 +4570,8 @@
         <image name="voice_weak.png" width="10" height="10"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OyR-fk-zed"/>
         <segue reference="Ljm-Ca-u9B"/>
-        <segue reference="dA1-We-bRA"/>
+        <segue reference="dRU-hd-aVS"/>
+        <segue reference="OyR-fk-zed"/>
     </inferredMetricsTieBreakers>
 </document>

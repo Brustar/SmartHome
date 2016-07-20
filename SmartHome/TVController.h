@@ -6,11 +6,14 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 #import "public.h"
-
+#import "SCWaveAnimationView.h"
 
 @interface TVController : UIViewController
 
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic,strong) NSString *deviceid;
+
+@property (nonatomic, retain) NSTimer *timer;
+@property (nonatomic) int retChannel;
 
 @end

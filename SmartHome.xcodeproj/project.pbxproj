@@ -106,6 +106,8 @@
 		0FCFB3951CF2943100B37DD3 /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFB3941CF2943100B37DD3 /* Camera.m */; };
 		0FCFB3981CF2947500B37DD3 /* EntranceGuard.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFB3971CF2947500B37DD3 /* EntranceGuard.m */; };
 		0FCFB39B1CF2950D00B37DD3 /* BgMusic.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFB39A1CF2950D00B37DD3 /* BgMusic.m */; };
+		0FD3DEAA1D3F183D00AF7765 /* SCWaveAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD3DEA91D3F183D00AF7765 /* SCWaveAnimationView.m */; };
+		0FD3DEAD1D3F186800AF7765 /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD3DEAC1D3F186800AF7765 /* Globals.m */; };
 		0FEE12761D20C53400811947 /* TXHRulerScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEE12721D20C53400811947 /* TXHRulerScrollView.m */; };
 		0FEE12771D20C53400811947 /* TXHRrettyRuler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEE12741D20C53400811947 /* TXHRrettyRuler.m */; };
 		0FF410DA1CDAE67100C7F4A1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410D91CDAE67100C7F4A1 /* CoreLocation.framework */; };
@@ -446,6 +448,10 @@
 		0FCFB39A1CF2950D00B37DD3 /* BgMusic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BgMusic.m; sourceTree = "<group>"; };
 		0FCFB39F1CF2D38800B37DD3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		0FCFB3A11CF2D39300B37DD3 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		0FD3DEA81D3F182600AF7765 /* SCWaveAnimationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCWaveAnimationView.h; sourceTree = "<group>"; };
+		0FD3DEA91D3F183D00AF7765 /* SCWaveAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCWaveAnimationView.m; sourceTree = "<group>"; };
+		0FD3DEAB1D3F186800AF7765 /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
+		0FD3DEAC1D3F186800AF7765 /* Globals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Globals.m; sourceTree = "<group>"; };
 		0FEE12721D20C53400811947 /* TXHRulerScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TXHRulerScrollView.m; path = PrettyRuler/TXHRulerScrollView.m; sourceTree = SOURCE_ROOT; };
 		0FEE12731D20C53400811947 /* TXHRulerScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TXHRulerScrollView.h; path = PrettyRuler/TXHRulerScrollView.h; sourceTree = SOURCE_ROOT; };
 		0FEE12741D20C53400811947 /* TXHRrettyRuler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TXHRrettyRuler.m; path = PrettyRuler/TXHRrettyRuler.m; sourceTree = SOURCE_ROOT; };
@@ -634,6 +640,7 @@
 		0F032D461CC9B12700D1920D /* SmartHome */ = {
 			isa = PBXGroup;
 			children = (
+				0FD3DEA61D3F181000AF7765 /* SCWave */,
 				0F2D35D91D11512100C46DE5 /* FFmpeg-iOS */,
 				0F2D35B51D114E3A00C46DE5 /* FFMpegDecoder */,
 				0FAF74AE1CEEA16700432713 /* HRColorPicker */,
@@ -1077,6 +1084,17 @@
 			name = public;
 			sourceTree = "<group>";
 		};
+		0FD3DEA61D3F181000AF7765 /* SCWave */ = {
+			isa = PBXGroup;
+			children = (
+				0FD3DEA81D3F182600AF7765 /* SCWaveAnimationView.h */,
+				0FD3DEA91D3F183D00AF7765 /* SCWaveAnimationView.m */,
+				0FD3DEAB1D3F186800AF7765 /* Globals.h */,
+				0FD3DEAC1D3F186800AF7765 /* Globals.m */,
+			);
+			name = SCWave;
+			sourceTree = "<group>";
+		};
 		5CEAD34143E7289FAFA6E86D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1408,6 +1426,7 @@
 				F65164141D3780C500A6F5FA /* TVLogoCell.m in Sources */,
 				0FAF74BF1CEEA17C00432713 /* HRBrightnessCursor.m in Sources */,
 				0FAF98A31CE40F3C009BDBB5 /* QRCameraSwitchButton.m in Sources */,
+				0FD3DEAA1D3F183D00AF7765 /* SCWaveAnimationView.m in Sources */,
 				F651640D1D3766C900A6F5FA /* MyEnergyViewController.m in Sources */,
 				0F477FC61D2F94B3004FA361 /* NetStatusManager.m in Sources */,
 				0FEE12761D20C53400811947 /* TXHRulerScrollView.m in Sources */,
@@ -1457,6 +1476,7 @@
 				0F2D35BD1D114E7000C46DE5 /* RTSPPlayer.m in Sources */,
 				0F032D4C1CC9B12700D1920D /* AppDelegate.m in Sources */,
 				0FB205ED1CDC3D3700B5E87E /* AudioManager.m in Sources */,
+				0FD3DEAD1D3F186800AF7765 /* Globals.m in Sources */,
 				F67F1F711D3C69DC00F2B7E5 /* SystemSettingViewController.m in Sources */,
 				0F180FC61D0E4E5000392F4C /* FMController.m in Sources */,
 				F67F1F771D3C719D00F2B7E5 /* systemInfomationController.m in Sources */,

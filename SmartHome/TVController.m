@@ -15,6 +15,7 @@
 #import "MBProgressHUD+NJ.h"
 #import "KxMenu.h"
 @interface TVController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,TVLogoCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@property (weak, nonatomic) IBOutlet UIView *touchpad;
 
 @property (weak, nonatomic) IBOutlet UISlider *volume;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageController;
@@ -87,7 +88,11 @@
         }
     }
     [self setUpPageController];
-
+    
+    CATransition *animation = [CATransition animation];
+    animation.type=@"rippleEffect";
+    animation.duration = 0.5f;
+    [self.touchpad.layer addAnimation:animation forKey:@"animation"];
 }
 
 
@@ -189,6 +194,7 @@
         
     }else{
         [cell.btn setTitle:[NSString stringWithFormat:@"%@",self.btnTitles[indexPath.row]] forState:UIControlStateNormal];
+        [cell.btn addTarget:self action:@selector(btntouched:) forControlEvents:UIControlEventTouchUpInside];
     }
     return cell;
 }
@@ -201,10 +207,33 @@
     }
 }
 
+-(IBAction)btntouched:(id)sender
+{
+    UIButton *button=(UIButton *)sender;
+    if ([self.timer isValid]) {
+        self.retChannel = self.retChannel*10+[button.titleLabel.text intValue];
+        NSLog(@"%d",self.retChannel);
+    }else{
+        button.backgroundColor = [UIColor grayColor];
+        self.timer=[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(changecolor) userInfo:sender repeats:NO];
+        self.retChannel=[button.titleLabel.text intValue];
+    }
+}
+
+-(IBAction)changecolor
+{
+    UIButton *button=[self.timer userInfo];
+    button.backgroundColor = [UIColor clearColor];
+    if (self.retChannel<10) {
+        self.retChannel=[button.titleLabel.text intValue];
+        NSLog(@"%d",self.retChannel);
+    }
+    [self.timer invalidate];
+}
+
 #pragma mark -- TVLogoCellDelegate
 -(void)tvDeleteAction:(TVLogoCell *)cell
 {
-    
     self.cell = cell;
     NSIndexPath *indexPath = [self.tvLogoCollectionView indexPathForCell:cell];
     TVChannel *channel = self.allFavourTVChannels[indexPath.row];
@@ -305,6 +334,18 @@
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark -
+#pragma mark touch detection
+- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    CGPoint touchPoint = [[touches anyObject] locationInView:[[UIApplication sharedApplication] keyWindow]];
+    CGRect rect=[self.touchpad convertRect:self.touchpad.bounds toView:self.view];
+    if (CGRectContainsPoint(rect,touchPoint)) {
+        NSLog(@"%.0fx%.0fpx", touchPoint.x, touchPoint.y);
+        [SCWaveAnimationView waveAnimationAtPosition:touchPoint];
+    }
 }
 
 -(void)dealloc
