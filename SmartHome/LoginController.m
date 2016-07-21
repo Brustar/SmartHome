@@ -7,7 +7,6 @@
 //
 
 #import "LoginController.h"
-#import "IOManager.h"
 #import "CryptoManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "WebManager.h"
@@ -21,6 +20,7 @@
 #import "MSGController.h"
 #import "ProfieFaultsViewController.h"
 #import "ServiceRecordViewController.h"
+
 @interface LoginController ()<QRCodeReaderDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *user;

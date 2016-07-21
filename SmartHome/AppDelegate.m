@@ -7,9 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "IOManager.h"
 #import "SocketManager.h"
-#import "DeviceInfo.h"
 #import "PackManager.h"
 
 @interface AppDelegate ()

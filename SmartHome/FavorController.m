@@ -7,7 +7,7 @@
 //
 
 #import "FavorController.h"
-#import "IOManager.h"
+
 @interface FavorController ()
 
 @end

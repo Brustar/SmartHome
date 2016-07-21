@@ -8,7 +8,6 @@
 #import "ProtocolManager.h"
 #import "PackManager.h"
 #import "FMDatabase.h"
-#import "IOManager.h"
 
 @implementation ProtocolManager
 

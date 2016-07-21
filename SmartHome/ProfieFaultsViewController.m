@@ -9,7 +9,6 @@
 #import "ProfieFaultsViewController.h"
 #import "ProfieFaultsCell.h"
 #import "HttpManager.h"
-#import "IOManager.h"
 
 
 @interface ProfieFaultsViewController ()<UITableViewDelegate,UITableViewDataSource,HttpDelegate>

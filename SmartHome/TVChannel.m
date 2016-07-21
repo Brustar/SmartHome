@@ -7,9 +7,9 @@
 //
 
 #import "TVChannel.h"
-#import "IOManager.h"
 #import "FMDatabase.h"
 #import "FMResultSet.h"
+
 @implementation TVChannel
 
 +(instancetype)getChannelFromChannelID:(NSInteger)channel_ID

@@ -7,7 +7,6 @@
 //
 
 #import "MSGController.h"
-#import "IOManager.h"
 #import "MsgCell.h"
 #import "HttpManager.h"
 @interface MSGController ()<HttpDelegate>
