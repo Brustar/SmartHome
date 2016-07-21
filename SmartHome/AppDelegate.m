@@ -23,12 +23,18 @@
     {
         //IOS8
         //创建UIUserNotificationSettings，并设置消息的显示类类型
-        UIUserNotificationSettings *notiSettings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIRemoteNotificationTypeSound) categories:nil];
+        UIUserNotificationSettings *notiSettings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIUserNotificationTypeSound) categories:nil];
         
         [application registerUserNotificationSettings:notiSettings];
         
-    } else{ // ios7
-        [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound                                      |UIRemoteNotificationTypeAlert)];
+    } else{
+        UIUserNotificationType notificationTypes = (UIUserNotificationTypeAlert|
+                                                    UIUserNotificationTypeSound|
+                                                    UIUserNotificationTypeBadge);
+        
+        UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:notificationTypes
+                                                                                             categories:nil];
+        [application registerUserNotificationSettings:notificationSettings];
     } ;
     
     [IOManager copyFile:@"smartDB" to:@"smartDB"];
@@ -41,7 +47,6 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"masterID"]) {
         [device initConfig];
     }
-    
     
     return YES;
 }
