@@ -95,8 +95,8 @@
         // [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
         
         //2 ask the provider to set the BadgeNumber to zero
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        NSString *deviceTokenStr = [userDefaults objectForKey:@"DeviceTokenStringKEY"];
+        //NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        //NSString *deviceTokenStr = [userDefaults objectForKey:@"DeviceTokenStringKEY"];
         //[self resetBadgeNumberOnProviderWithDeviceToken:deviceTokenStr];
     });
     
