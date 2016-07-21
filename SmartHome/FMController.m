@@ -11,6 +11,8 @@
 #import "TXHRrettyRuler.h"
 #import "SceneManager.h"
 #import "MBProgressHUD+NJ.h"
+#import "VolumeManager.h"
+
 @interface FMController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate,TXHRrettyRulerDelegate,UIGestureRecognizerDelegate,FMCollectionViewCellDelegate>
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollerContentViewWidth;

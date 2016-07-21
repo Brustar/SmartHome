@@ -7,6 +7,7 @@
 //
 
 #import "BgMusicController.h"
+#import "VolumeManager.h"
 
 @interface BgMusicController ()
 @property (weak, nonatomic) IBOutlet UISlider *volume;

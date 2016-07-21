@@ -5,8 +5,6 @@
 //  Created by Brustar on 16/6/7.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
-#import "public.h"
-#import "SCWaveAnimationView.h"
 
 @interface TVController : UIViewController
 

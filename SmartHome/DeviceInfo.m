@@ -34,10 +34,13 @@
 
 -(void)initConfig
 {
-    //更新设备，房间，场景表
+    //先判断版本号
+    
+    //更新设备，房间，场景表，写入sqlite
     
 }
 
+//取设备机型
 - (void) deviceGenaration
 {
     struct utsname systemInfo;
@@ -80,8 +83,7 @@
     
     if ([deviceString isEqualToString:@"iPad6,3"] || [deviceString isEqualToString:@"iPad6,4"] || [deviceString isEqualToString:@"iPad6,7"] || [deviceString isEqualToString:@"iPad6,8"]) self.genaration = iPadPro;
 
-    NSLog(@"NOTE: Unknown device type: %@", deviceString);
-    self.genaration = UNKNOWN;
+    NSLog(@"NOTE: device type: %@", deviceString);
 }
 
 -(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID

@@ -10,6 +10,7 @@
 #import "Netv.h"
 #import "SceneManager.h"
 #import "DVCollectionViewCell.h"
+#import "VolumeManager.h"
 
 @interface NetvController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 

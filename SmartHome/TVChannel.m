@@ -54,7 +54,6 @@
         //channel.parent =[resultSet stringForColumn:@"parent"];
         [mutabelArr addObject:channel];
     }
-    NSLog(@"------------%ld",mutabelArr.count);
     [db closeOpenResultSets];
     [db close];
     

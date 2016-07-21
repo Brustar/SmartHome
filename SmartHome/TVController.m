@@ -14,6 +14,9 @@
 #import "TVLogoCell.h"
 #import "MBProgressHUD+NJ.h"
 #import "KxMenu.h"
+#import "VolumeManager.h"
+#import "SCWaveAnimationView.h"
+
 @interface TVController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,TVLogoCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *touchpad;
 
@@ -251,6 +254,7 @@
         self.timer=[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(changecolor) userInfo:sender repeats:NO];
         self.retChannel=[button.titleLabel.text intValue];
     }
+    
 }
 
 -(IBAction)changecolor

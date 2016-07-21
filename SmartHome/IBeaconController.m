@@ -15,6 +15,9 @@
 #import "ProtocolManager.h"
 #import "UIImageView+AFNetworking.h"
 #import "RegexKitLite.h"
+#import "IbeaconManager.h"
+#import "VolumeManager.h"
+#import "AudioManager.h"
 
 @implementation IBeaconController
 

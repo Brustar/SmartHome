@@ -37,8 +37,10 @@
     
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device netReachbility];
+    [device deviceGenaration];
     
-    if (device.masterID) {
+    //登录后每次系统启动自动更新云端配置，第一次安装此处不更新，登录的时候再更新
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"masterID"]) {
         [device initConfig];
     }
     
