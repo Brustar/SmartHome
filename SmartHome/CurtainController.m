@@ -41,6 +41,7 @@
         }
     }
     
+    
 }
 
 -(IBAction)save:(id)sender
@@ -89,7 +90,7 @@
     label.text = @"详细信息";
         
     return cell;
-
+  
     
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -123,6 +124,7 @@
     id theSegue = segue.destinationViewController;
     [theSegue setValue:self.deviceid forKey:@"deviceid"];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

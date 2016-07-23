@@ -11,6 +11,7 @@
 #import "DetailList.h"
 @interface DetailViewController ()
 
+
 @property (nonatomic,strong) NSArray *detailArray;
 @property (nonatomic,strong) NSArray *titleArr;
 

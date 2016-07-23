@@ -31,7 +31,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SystemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SystemCell" forIndexPath:indexPath];
+    SystemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.title.text = self.titles[indexPath.row];
    
     return cell;

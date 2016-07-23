@@ -13,7 +13,7 @@
 #import "WebManager.h"
 #import "RegexKitLite.h"
 #import "SocketManager.h"
-
+#import "ScenseController.h"
 #import "QRCodeReaderDelegate.h"
 #import "QRCodeReader.h"
 #import "QRCodeReaderViewController.h"
@@ -21,6 +21,7 @@
 #import "MSGController.h"
 #import "ProfieFaultsViewController.h"
 #import "ServiceRecordViewController.h"
+#import "ECloudTabBarController.h"
 @interface LoginController ()<QRCodeReaderDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *user;
@@ -80,6 +81,10 @@
     if ([responseObject[@"Result"] intValue]==0) {
         [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
         [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"UserID"] forKey:@"UserID"];
+        
+        ECloudTabBarController *ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ECloudTabBarController"];
+        [self.navigationController pushViewController:ecloudVC animated:YES];
+        
     }
     [MBProgressHUD showError:responseObject[@"Msg"]];
 }

@@ -36,19 +36,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.msgs = [[NSMutableArray alloc] init];
-    [self sendRequest];
+    
+    //[self sendRequest];
     
    
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    //[self sendRequest];
 }
 -(void)sendRequest
 {
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     NSString *userID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"];
-    NSString *url = [NSString stringWithFormat:@"%@GetNotifyMessage.aspx?Author=%@&UserID%d",[IOManager httpAddr],authorToken,[userID intValue]];
+    NSString *url = [NSString stringWithFormat:@"%@GetNotifyMessage.aspx",[IOManager httpAddr]];
+    NSDictionary *dic = @{@"AuthorToken":authorToken,@"UserID":userID};
     HttpManager *http=[HttpManager defaultManager];
     http.delegate = self;
-    [http sendGet:url param:nil];
+    [http sendPost:url param:dic];
 
 }
 -(void)httpHandler:(id)responseObject
@@ -61,7 +67,9 @@
         NSString *createDate = dicDetail[@"createDate"];
         [self.msgArr addObject:description];
         [self.timesArr addObject:createDate];
+       
     }
+     [self.tableView reloadData];
 
 }
 

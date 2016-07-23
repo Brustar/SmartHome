@@ -10,12 +10,15 @@
 #import "AccessSettingController.h"
 #import "SystemSettingViewController.h"
 #import "systemInfomationController.h"
-@interface MySettingViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "AboutUsController.h"
+
+@interface MySettingViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) NSArray *titleArr;
 @property (nonatomic,strong) AccessSettingController *accessVC;
 @property (nonatomic,strong) SystemSettingViewController *sySetVC;
 @property (nonatomic,strong) systemInfomationController *inforVC;
+@property (nonatomic,strong) AboutUsController *aboutVC;
 @end
 
 @implementation MySettingViewController
@@ -147,11 +150,42 @@
             self.inforVC.view.frame = self.view.bounds;
             [self.view addSubview:self.inforVC.view];
         }
+    }else if(indexPath.section == 3)
+    {
+        [self gotoAppStoreToComment];
+    
+    }else if(indexPath.section == 4)
+    {
+        self.aboutVC = [sy instantiateViewControllerWithIdentifier:@"AboutUsController"];
+        self.aboutVC.view.frame = self.view.bounds;
+        [self.view addSubview:self.aboutVC.view];
     }
 
 }
+-(void)gotoAppStoreToComment
+{
+    NSString *str = [NSString stringWithFormat:@"https://itunes.apple.com/cn/app/yi-yun-zhi-jia/id1034629669?mt=8"];
+    NSURL * url = [NSURL URLWithString:str];
+    
+    if ([[UIApplication sharedApplication] canOpenURL:url])
+    {
+        [[UIApplication sharedApplication] openURL:url];
+    }
+    else
+    {
+        NSLog(@"can not open");
+    }
+}
 
 
+-(void)removeAllSubViewFromMySettingController
+{
+    [self.accessVC.view removeFromSuperview];
+    [self.pushVC.view removeFromSuperview];
+    [self.sySetVC.view removeFromSuperview];
+    [self.inforVC.view removeFromSuperview];
+    [self.aboutVC.view removeFromSuperview];
+}
 
 
 @end

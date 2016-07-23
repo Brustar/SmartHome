@@ -2,3 +2,4 @@ Pods/
 SmartHome.xcworkspace/
 .DS_Store
 Podfile.lock
+SmartHome/Base.lpro

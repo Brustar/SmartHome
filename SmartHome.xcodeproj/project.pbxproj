@@ -93,7 +93,6 @@
 		0FC0FFDD1CF57E58000F71D5 /* TouchImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC0FFDC1CF57E58000F71D5 /* TouchImage.m */; };
 		0FC3DE851D236CFF00A03482 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC3DE841D236CFF00A03482 /* LoginController.m */; };
 		0FC7FDC11CED6CC700F91BDF /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC7FDC01CED6CC700F91BDF /* libsqlite3.tbd */; };
-		0FC7FDCB1CED9D5A00F91BDF /* DeviceList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC7FDCA1CED9D5A00F91BDF /* DeviceList.m */; };
 		0FCAA40C1D1945BB00C1E58C /* BgMusicController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCAA40B1D1945BB00C1E58C /* BgMusicController.m */; };
 		0FCF43311CE09039009BFDD9 /* IbeaconManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCF43301CE09039009BFDD9 /* IbeaconManager.m */; };
 		0FCFB3801CF28F6F00B37DD3 /* Light.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFB37F1CF28F6F00B37DD3 /* Light.m */; };
@@ -134,13 +133,26 @@
 		F65B7D271D34E9E00059CFA4 /* MySettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65B7D261D34E9E00059CFA4 /* MySettingViewController.m */; };
 		F65DB3411D2B5AB2002A815C /* RegisterDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65DB33C1D2B5AB2002A815C /* RegisterDetailController.m */; };
 		F65DB3421D2B5AB2002A815C /* RegisterPhoneNumController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65DB33E1D2B5AB2002A815C /* RegisterPhoneNumController.m */; };
+		F6642A781D41F55E0003D56B /* ScenseSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6642A771D41F55E0003D56B /* ScenseSplitViewController.m */; };
+		F6642A7E1D41FBA00003D56B /* AddScenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6642A7D1D41FBA00003D56B /* AddScenceController.m */; };
+		F6642A811D4220100003D56B /* DeviceListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6642A801D4220100003D56B /* DeviceListController.m */; };
+		F66596DA1D3F12FB0082716A /* EnergyOfDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = F66596D91D3F12FB0082716A /* EnergyOfDeviceController.m */; };
+		F66596DD1D3F1DAD0082716A /* EnegryOfDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F66596DC1D3F1DAD0082716A /* EnegryOfDeviceCell.m */; };
+		F66596E01D3F25610082716A /* ScenseController.m in Sources */ = {isa = PBXBuildFile; fileRef = F66596DF1D3F25610082716A /* ScenseController.m */; };
+		F66596E31D3F25810082716A /* ScenseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F66596E21D3F25810082716A /* ScenseCell.m */; };
+		F66596E61D3F5DBC0082716A /* AddNewScenseController.m in Sources */ = {isa = PBXBuildFile; fileRef = F66596E51D3F5DBC0082716A /* AddNewScenseController.m */; };
+		F66596E91D3F72CA0082716A /* AddSenseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F66596E81D3F72CA0082716A /* AddSenseCell.m */; };
 		F66EB2D21CFEB9E300AC53CE /* Detail.m in Sources */ = {isa = PBXBuildFile; fileRef = F66EB2D11CFEB9E300AC53CE /* Detail.m */; };
 		F66EB2D51CFED0A900AC53CE /* DetailList.m in Sources */ = {isa = PBXBuildFile; fileRef = F66EB2D41CFED0A900AC53CE /* DetailList.m */; };
+		F6755A4C1D4063FA002394F3 /* ECloudTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F6755A4B1D4063FA002394F3 /* ECloudTabBar.m */; };
+		F6755A4F1D406552002394F3 /* ECloudTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6755A4E1D406552002394F3 /* ECloudTabBarController.m */; };
+		F6755A581D40D450002394F3 /* ECloudButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F6755A571D40D450002394F3 /* ECloudButton.m */; };
+		F6755A5E1D40D576002394F3 /* ECloudMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = F6755A5D1D40D576002394F3 /* ECloudMoreView.m */; };
 		F67F1F711D3C69DC00F2B7E5 /* SystemSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F67F1F701D3C69DC00F2B7E5 /* SystemSettingViewController.m */; };
 		F67F1F741D3C6AA200F2B7E5 /* SystemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F67F1F731D3C6AA200F2B7E5 /* SystemCell.m */; };
 		F67F1F771D3C719D00F2B7E5 /* systemInfomationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F67F1F761D3C719D00F2B7E5 /* systemInfomationController.m */; };
-		F67F1F7A1D3C802B00F2B7E5 /* AboutUsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F67F1F791D3C802B00F2B7E5 /* AboutUsController.m */; };
 		F67F1F7E1D3CABBC00F2B7E5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F67F1F7C1D3CABBC00F2B7E5 /* Main.storyboard */; };
+		F67F1F811D3CC46C00F2B7E5 /* AboutUsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F67F1F801D3CC46C00F2B7E5 /* AboutUsController.m */; };
 		F69C82301D35D214002DE6D7 /* PushSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = F69C822F1D35D214002DE6D7 /* PushSettingController.m */; };
 		F69C82331D363376002DE6D7 /* ServiceRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F69C82321D363376002DE6D7 /* ServiceRecordViewController.m */; };
 		F69C82361D363A4D002DE6D7 /* ServiceRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F69C82351D363A4D002DE6D7 /* ServiceRecordCell.m */; };
@@ -418,8 +430,6 @@
 		0FC3DE831D236CFF00A03482 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
 		0FC3DE841D236CFF00A03482 /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
 		0FC7FDC01CED6CC700F91BDF /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		0FC7FDC91CED9D5A00F91BDF /* DeviceList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceList.h; sourceTree = "<group>"; };
-		0FC7FDCA1CED9D5A00F91BDF /* DeviceList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceList.m; sourceTree = "<group>"; };
 		0FCAA40A1D1945BB00C1E58C /* BgMusicController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BgMusicController.h; sourceTree = "<group>"; };
 		0FCAA40B1D1945BB00C1E58C /* BgMusicController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BgMusicController.m; sourceTree = "<group>"; };
 		0FCF432F1CE09039009BFDD9 /* IbeaconManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IbeaconManager.h; sourceTree = "<group>"; };
@@ -498,19 +508,45 @@
 		F65DB33C1D2B5AB2002A815C /* RegisterDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterDetailController.m; sourceTree = "<group>"; };
 		F65DB33D1D2B5AB2002A815C /* RegisterPhoneNumController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterPhoneNumController.h; sourceTree = "<group>"; };
 		F65DB33E1D2B5AB2002A815C /* RegisterPhoneNumController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterPhoneNumController.m; sourceTree = "<group>"; };
+		F6642A761D41F55E0003D56B /* ScenseSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScenseSplitViewController.h; sourceTree = "<group>"; };
+		F6642A771D41F55E0003D56B /* ScenseSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScenseSplitViewController.m; sourceTree = "<group>"; };
+		F6642A7C1D41FBA00003D56B /* AddScenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddScenceController.h; sourceTree = "<group>"; };
+		F6642A7D1D41FBA00003D56B /* AddScenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddScenceController.m; sourceTree = "<group>"; };
+		F6642A7F1D4220100003D56B /* DeviceListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceListController.h; sourceTree = "<group>"; };
+		F6642A801D4220100003D56B /* DeviceListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceListController.m; sourceTree = "<group>"; };
+		F66596D81D3F12FB0082716A /* EnergyOfDeviceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergyOfDeviceController.h; sourceTree = "<group>"; };
+		F66596D91D3F12FB0082716A /* EnergyOfDeviceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnergyOfDeviceController.m; sourceTree = "<group>"; };
+		F66596DB1D3F1DAD0082716A /* EnegryOfDeviceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnegryOfDeviceCell.h; sourceTree = "<group>"; };
+		F66596DC1D3F1DAD0082716A /* EnegryOfDeviceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnegryOfDeviceCell.m; sourceTree = "<group>"; };
+		F66596DE1D3F25610082716A /* ScenseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScenseController.h; sourceTree = "<group>"; };
+		F66596DF1D3F25610082716A /* ScenseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScenseController.m; sourceTree = "<group>"; };
+		F66596E11D3F25810082716A /* ScenseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScenseCell.h; sourceTree = "<group>"; };
+		F66596E21D3F25810082716A /* ScenseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScenseCell.m; sourceTree = "<group>"; };
+		F66596E41D3F5DBC0082716A /* AddNewScenseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewScenseController.h; sourceTree = "<group>"; };
+		F66596E51D3F5DBC0082716A /* AddNewScenseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewScenseController.m; sourceTree = "<group>"; };
+		F66596E71D3F72CA0082716A /* AddSenseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddSenseCell.h; sourceTree = "<group>"; };
+		F66596E81D3F72CA0082716A /* AddSenseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddSenseCell.m; sourceTree = "<group>"; };
 		F66EB2D01CFEB9E300AC53CE /* Detail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Detail.h; sourceTree = "<group>"; };
 		F66EB2D11CFEB9E300AC53CE /* Detail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Detail.m; sourceTree = "<group>"; };
 		F66EB2D31CFED0A900AC53CE /* DetailList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailList.h; sourceTree = "<group>"; };
 		F66EB2D41CFED0A900AC53CE /* DetailList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailList.m; sourceTree = "<group>"; };
+		F6755A4A1D4063FA002394F3 /* ECloudTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECloudTabBar.h; sourceTree = "<group>"; };
+		F6755A4B1D4063FA002394F3 /* ECloudTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECloudTabBar.m; sourceTree = "<group>"; };
+		F6755A4D1D406552002394F3 /* ECloudTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECloudTabBarController.h; sourceTree = "<group>"; };
+		F6755A4E1D406552002394F3 /* ECloudTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECloudTabBarController.m; sourceTree = "<group>"; };
+		F6755A561D40D450002394F3 /* ECloudButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECloudButton.h; sourceTree = "<group>"; };
+		F6755A571D40D450002394F3 /* ECloudButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECloudButton.m; sourceTree = "<group>"; };
+		F6755A5C1D40D576002394F3 /* ECloudMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECloudMoreView.h; sourceTree = "<group>"; };
+		F6755A5D1D40D576002394F3 /* ECloudMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECloudMoreView.m; sourceTree = "<group>"; };
 		F67F1F6F1D3C69DC00F2B7E5 /* SystemSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemSettingViewController.h; sourceTree = "<group>"; };
 		F67F1F701D3C69DC00F2B7E5 /* SystemSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemSettingViewController.m; sourceTree = "<group>"; };
 		F67F1F721D3C6AA200F2B7E5 /* SystemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemCell.h; sourceTree = "<group>"; };
 		F67F1F731D3C6AA200F2B7E5 /* SystemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemCell.m; sourceTree = "<group>"; };
 		F67F1F751D3C719D00F2B7E5 /* systemInfomationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = systemInfomationController.h; sourceTree = "<group>"; };
 		F67F1F761D3C719D00F2B7E5 /* systemInfomationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = systemInfomationController.m; sourceTree = "<group>"; };
-		F67F1F781D3C802B00F2B7E5 /* AboutUsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsController.h; sourceTree = "<group>"; };
-		F67F1F791D3C802B00F2B7E5 /* AboutUsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsController.m; sourceTree = "<group>"; };
 		F67F1F7D1D3CABBC00F2B7E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F67F1F7F1D3CC46C00F2B7E5 /* AboutUsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsController.h; sourceTree = "<group>"; };
+		F67F1F801D3CC46C00F2B7E5 /* AboutUsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsController.m; sourceTree = "<group>"; };
 		F69C822E1D35D214002DE6D7 /* PushSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushSettingController.h; sourceTree = "<group>"; };
 		F69C822F1D35D214002DE6D7 /* PushSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushSettingController.m; sourceTree = "<group>"; };
 		F69C82311D363376002DE6D7 /* ServiceRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceRecordViewController.h; sourceTree = "<group>"; };
@@ -657,8 +693,6 @@
 				0F25FE5D1CEB0C0A0063E834 /* SceneList.m */,
 				0F9D23881CEDBC500049A58C /* AddScene.h */,
 				0F9D23891CEDBC500049A58C /* AddScene.m */,
-				0FC7FDC91CED9D5A00F91BDF /* DeviceList.h */,
-				0FC7FDCA1CED9D5A00F91BDF /* DeviceList.m */,
 				0FAF74AB1CEE9A9600432713 /* LightController.h */,
 				0FAF74AC1CEE9A9600432713 /* LightController.m */,
 				F60FDB401D00029900AB04BE /* DetailViewController.h */,
@@ -674,8 +708,8 @@
 				0FC0FFDB1CF57E58000F71D5 /* TouchImage.h */,
 				0FC0FFDC1CF57E58000F71D5 /* TouchImage.m */,
 				0F4B497E1CFEB13500D93DD2 /* CurtainController.h */,
-				0F4B497F1CFEB13500D93DD2 /* CurtainController.m */,
 				F60FDB431D003FD500AB04BE /* CurtainTableViewCell.h */,
+				0F4B497F1CFEB13500D93DD2 /* CurtainController.m */,
 				F60FDB441D003FD500AB04BE /* CurtainTableViewCell.m */,
 				0FABF91A1D06AA35000892D8 /* TVController.h */,
 				0FABF91B1D06AA35000892D8 /* TVController.m */,
@@ -721,6 +755,10 @@
 				F69C82351D363A4D002DE6D7 /* ServiceRecordCell.m */,
 				F651640B1D3766C900A6F5FA /* MyEnergyViewController.h */,
 				F651640C1D3766C900A6F5FA /* MyEnergyViewController.m */,
+				F66596D81D3F12FB0082716A /* EnergyOfDeviceController.h */,
+				F66596D91D3F12FB0082716A /* EnergyOfDeviceController.m */,
+				F66596DB1D3F1DAD0082716A /* EnegryOfDeviceCell.h */,
+				F66596DC1D3F1DAD0082716A /* EnegryOfDeviceCell.m */,
 				F651640E1D37672700A6F5FA /* MyEnergyCell.h */,
 				F651640F1D37672700A6F5FA /* MyEnergyCell.m */,
 				F62D5D3E1D2CE2F800C1E070 /* MyCenterViewController.h */,
@@ -741,10 +779,24 @@
 				F67F1F731D3C6AA200F2B7E5 /* SystemCell.m */,
 				F67F1F751D3C719D00F2B7E5 /* systemInfomationController.h */,
 				F67F1F761D3C719D00F2B7E5 /* systemInfomationController.m */,
-				F67F1F781D3C802B00F2B7E5 /* AboutUsController.h */,
-				F67F1F791D3C802B00F2B7E5 /* AboutUsController.m */,
+				F67F1F7F1D3CC46C00F2B7E5 /* AboutUsController.h */,
+				F67F1F801D3CC46C00F2B7E5 /* AboutUsController.m */,
 				F65838D21D39D3BB004210AC /* WelcomeController.h */,
 				F65838D31D39D3BB004210AC /* WelcomeController.m */,
+				F66596DE1D3F25610082716A /* ScenseController.h */,
+				F66596DF1D3F25610082716A /* ScenseController.m */,
+				F66596E11D3F25810082716A /* ScenseCell.h */,
+				F66596E21D3F25810082716A /* ScenseCell.m */,
+				F66596E41D3F5DBC0082716A /* AddNewScenseController.h */,
+				F66596E51D3F5DBC0082716A /* AddNewScenseController.m */,
+				F66596E71D3F72CA0082716A /* AddSenseCell.h */,
+				F66596E81D3F72CA0082716A /* AddSenseCell.m */,
+				F6642A761D41F55E0003D56B /* ScenseSplitViewController.h */,
+				F6642A771D41F55E0003D56B /* ScenseSplitViewController.m */,
+				F6642A7C1D41FBA00003D56B /* AddScenceController.h */,
+				F6642A7D1D41FBA00003D56B /* AddScenceController.m */,
+				F6642A7F1D4220100003D56B /* DeviceListController.h */,
+				F6642A801D4220100003D56B /* DeviceListController.m */,
 			);
 			path = SmartHome;
 			sourceTree = "<group>";
@@ -1073,6 +1125,14 @@
 				0F477FC51D2F94B3004FA361 /* NetStatusManager.m */,
 				0F3576731D363188003334E0 /* ProtocolManager.h */,
 				0F3576741D363188003334E0 /* ProtocolManager.m */,
+				F6755A4A1D4063FA002394F3 /* ECloudTabBar.h */,
+				F6755A4B1D4063FA002394F3 /* ECloudTabBar.m */,
+				F6755A4D1D406552002394F3 /* ECloudTabBarController.h */,
+				F6755A4E1D406552002394F3 /* ECloudTabBarController.m */,
+				F6755A561D40D450002394F3 /* ECloudButton.h */,
+				F6755A571D40D450002394F3 /* ECloudButton.m */,
+				F6755A5C1D40D576002394F3 /* ECloudMoreView.h */,
+				F6755A5D1D40D576002394F3 /* ECloudMoreView.m */,
 			);
 			name = public;
 			sourceTree = "<group>";
@@ -1418,6 +1478,7 @@
 				0FAF74C51CEEA17C00432713 /* HRHSVColorUtil.m in Sources */,
 				0FBEFE2A1D24F0C10084244F /* WebManager.m in Sources */,
 				F630C35F1D38B4FF008880BB /* AccessSettingController.m in Sources */,
+				F6642A811D4220100003D56B /* DeviceListController.m in Sources */,
 				0FAF98A41CE40F3C009BDBB5 /* QRCodeReader.m in Sources */,
 				0F2D35BC1D114E7000C46DE5 /* AudioStreamer.m in Sources */,
 				F60FDB461D003FD500AB04BE /* CurtainTableViewCell.m in Sources */,
@@ -1425,8 +1486,9 @@
 				0FABF91F1D06AA4E000892D8 /* DVDController.m in Sources */,
 				0FEE12771D20C53400811947 /* TXHRrettyRuler.m in Sources */,
 				0F43B1031CF4055300F3D9F0 /* IATConfig.m in Sources */,
-				F67F1F7A1D3C802B00F2B7E5 /* AboutUsController.m in Sources */,
+				F66596DD1D3F1DAD0082716A /* EnegryOfDeviceCell.m in Sources */,
 				0F25178A1CFD8C6500491A6C /* PackManager.m in Sources */,
+				F67F1F811D3CC46C00F2B7E5 /* AboutUsController.m in Sources */,
 				F6B91F721D100F1400592FB0 /* TVChannel.m in Sources */,
 				0F295A601D2E092900F23F21 /* HttpManager.m in Sources */,
 				0F180FC31D0E4C7400392F4C /* NetvController.m in Sources */,
@@ -1434,6 +1496,7 @@
 				0F91AA171CDC798700094C25 /* PrintObject.m in Sources */,
 				0F3CCF3B1D0F97B70058A320 /* CameraController.m in Sources */,
 				0FC0FFDA1CF577C0000F71D5 /* RealScene.m in Sources */,
+				F6755A4F1D406552002394F3 /* ECloudTabBarController.m in Sources */,
 				0FAF74C41CEEA17C00432713 /* HRColorPickerView.m in Sources */,
 				F62D5D401D2CE2F800C1E070 /* MyCenterViewController.m in Sources */,
 				F630C3621D38C3E5008880BB /* areaSettingCell.m in Sources */,
@@ -1446,6 +1509,7 @@
 				F6359B001CFFC4DC0035EB31 /* ColourTableViewCell.m in Sources */,
 				0FAF8FF21CE18CE2000557BD /* IBeaconController.m in Sources */,
 				0FAF74C61CEEA17C00432713 /* UIImage+CoreGraphics.m in Sources */,
+				F66596E61D3F5DBC0082716A /* AddNewScenseController.m in Sources */,
 				0F180FC91D0E4E6500392F4C /* GuardController.m in Sources */,
 				0FAF98A71CE40F3C009BDBB5 /* QRToggleTorchButton.m in Sources */,
 				0F25FE5E1CEB0C0A0063E834 /* SceneList.m in Sources */,
@@ -1467,19 +1531,22 @@
 				0FCFB3831CF28FCB00B37DD3 /* Curtain.m in Sources */,
 				0FC0FFDD1CF57E58000F71D5 /* TouchImage.m in Sources */,
 				0FCFB3951CF2943100B37DD3 /* Camera.m in Sources */,
+				F6755A4C1D4063FA002394F3 /* ECloudTabBar.m in Sources */,
 				0FAF8FEF1CE18C41000557BD /* DeviceInfo.m in Sources */,
 				0F4B3C001D2A13870002E75E /* MSGController.m in Sources */,
 				F66EB2D21CFEB9E300AC53CE /* Detail.m in Sources */,
 				F65AF6D41D3370770048A4E5 /* ProfieFaultsViewController.m in Sources */,
 				0F96A1671D17F37C00E1594F /* RulerView.m in Sources */,
 				0FB205E91CDC312A00B5E87E /* IOManager.m in Sources */,
-				0FC7FDCB1CED9D5A00F91BDF /* DeviceList.m in Sources */,
+				F66596DA1D3F12FB0082716A /* EnergyOfDeviceController.m in Sources */,
 				0FAF74C01CEEA17C00432713 /* HRBrightnessSlider.m in Sources */,
 				F66EB2D51CFED0A900AC53CE /* DetailList.m in Sources */,
 				F67F1F741D3C6AA200F2B7E5 /* SystemCell.m in Sources */,
 				0FC3DE851D236CFF00A03482 /* LoginController.m in Sources */,
+				F66596E31D3F25810082716A /* ScenseCell.m in Sources */,
 				0FB42E1E1CF681A7007DE64F /* planeScene.m in Sources */,
 				F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */,
+				F66596E91D3F72CA0082716A /* AddSenseCell.m in Sources */,
 				F65DB3421D2B5AB2002A815C /* RegisterPhoneNumController.m in Sources */,
 				F6359AFB1CFFBC910035EB31 /* DetailTableViewCell.m in Sources */,
 				0F43B1061CF4078300F3D9F0 /* ISRDataHelper.m in Sources */,
@@ -1491,6 +1558,7 @@
 				F65DB3411D2B5AB2002A815C /* RegisterDetailController.m in Sources */,
 				0FAF98A61CE40F3C009BDBB5 /* QRCodeReaderViewController.m in Sources */,
 				0F96A1661D17F37C00E1594F /* RulerLeftTagView.m in Sources */,
+				F6642A7E1D41FBA00003D56B /* AddScenceController.m in Sources */,
 				0FCF43311CE09039009BFDD9 /* IbeaconManager.m in Sources */,
 				0FAF98AA1CE410E8009BDBB5 /* LoginQRController.m in Sources */,
 				0FCFB3801CF28F6F00B37DD3 /* Light.m in Sources */,
@@ -1499,9 +1567,13 @@
 				0FAF74C91CEEB37200432713 /* HRSampleColorPickerViewController.m in Sources */,
 				0FCFB38C1CF293A500B37DD3 /* DVD.m in Sources */,
 				0FAF98B61CE45EC9009BDBB5 /* CryptoManager.m in Sources */,
+				F6642A781D41F55E0003D56B /* ScenseSplitViewController.m in Sources */,
 				F65838D41D39D3BB004210AC /* WelcomeController.m in Sources */,
+				F6755A581D40D450002394F3 /* ECloudButton.m in Sources */,
 				0FAF98A51CE40F3C009BDBB5 /* QRCodeReaderView.m in Sources */,
 				F69C82331D363376002DE6D7 /* ServiceRecordViewController.m in Sources */,
+				F66596E01D3F25610082716A /* ScenseController.m in Sources */,
+				F6755A5E1D40D576002394F3 /* ECloudMoreView.m in Sources */,
 				0FAF74AD1CEE9A9600432713 /* LightController.m in Sources */,
 				F62D5D431D2CE4C600C1E070 /* MyCenterTableViewCell.m in Sources */,
 				F69C82361D363A4D002DE6D7 /* ServiceRecordCell.m in Sources */,

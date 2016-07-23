@@ -44,28 +44,24 @@
 {
     self.scrollView.frame = CGRectMake(200, 0, self.view.frame.size.width - 200, self.view.frame.size.height);
     self.scrollView.contentSize = CGSizeMake(widtht *self.titlArr.count, hight);
-    UIStoryboard *sy = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
-    ProfieFaultsViewController *faultVC = [sy instantiateViewControllerWithIdentifier:@"MyDefaultViewController"];
-    [self addSubViewAndController:faultVC withNum:0];
-    
-    ServiceRecordViewController *recordVC = [sy instantiateViewControllerWithIdentifier:@"ServiceRecordViewController"];
-    [self addSubViewAndController:recordVC withNum:1];
-    
-    MyEnergyViewController *energyVC = [sy instantiateViewControllerWithIdentifier:@"MyEnergyViewController"];
-    [self addSubViewAndController:energyVC withNum:2];
-    
-    FavorController *favor = [sy instantiateViewControllerWithIdentifier:@"favorController"];
-    [self addSubViewAndController:favor withNum:3];
-    
-    MSGController *msgVC = [sy instantiateViewControllerWithIdentifier:@"msgController"];
-    [self addSubViewAndController:msgVC withNum:4];
-    
-    MySettingViewController *settingVC = [sy instantiateViewControllerWithIdentifier:@"settingViewController"];
-    [self addSubViewAndController:settingVC withNum:5];
+    [self addSubController:@"MyDefaultViewController" withNum:0];
+    [self addSubController:@"ServiceRecordViewController" withNum:1];
+    [self addSubController:@"MyEnergyViewController" withNum:2];
+    [self addSubController:@"favorController" withNum:3];
+    [self addSubController:@"msgController" withNum:4];
+    [self addSubController:@"settingViewController" withNum:5];
     
     
 }
+
+- (void)addSubController:(NSString *)controllerName withNum:(int) num
+{
+    UIStoryboard *sy = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    UIViewController *childController = [sy instantiateViewControllerWithIdentifier:controllerName];
+    [self addSubViewAndController:childController withNum:num];
+}
+
 -(void) addSubViewAndController:(UIViewController*)subVC withNum:(int)i
 {
     subVC.view.frame = CGRectMake(widtht * i, 0, widtht, hight);
@@ -95,8 +91,18 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+    if (5 == indexPath.row) {
+        
+        MySettingViewController *settingVC = self.childViewControllers[5];
+        [settingVC removeAllSubViewFromMySettingController];
+        
+    }
+    if(2 == indexPath.row)
+    {
+        MyEnergyViewController *enegrgyVC = self.childViewControllers[2];
+        [enegrgyVC removeAllSubViewFromMyEnergyViewController];
+    }
     self.scrollView.contentOffset = CGPointMake(widtht * indexPath.row, 0);
-    
 }
 
 - (void)didReceiveMemoryWarning {

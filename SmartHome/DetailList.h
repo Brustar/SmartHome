@@ -26,5 +26,5 @@
 @property (nonatomic,strong) NSString *protocol;
 
 +(NSArray *)getDetailListWithID:(NSInteger) ID;
-
++(NSArray *)getDeviceForModel:(NSString *)str;
 @end

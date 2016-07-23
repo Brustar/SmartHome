@@ -8,6 +8,8 @@
 
 #import "AccessSettingController.h"
 #import "areaSettingCell.h"
+#import "IOManager.h"
+
 @interface AccessSettingController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *userTableView;
 @property (nonatomic,strong) NSMutableArray *userArr;
@@ -28,8 +30,7 @@
     if(!_userArr)
     {
         _userArr = [NSMutableArray array];
-        NSArray *arr = @[@"Eclud",@"Iphone",@"Stone"];
-        [_userArr addObjectsFromArray:arr];
+       
         
     }
     return _userArr;
@@ -38,8 +39,6 @@
     if(!_managerType)
     {
         _managerType = [NSMutableArray array];
-        NSArray *arr = @[@"主人用户",@"普通用户",@"普通用户"];
-        [_managerType addObjectsFromArray:arr];
         
     }
     return _managerType;
@@ -56,6 +55,13 @@
     [super viewDidLoad];
     self.areaTableView.tableHeaderView = self.headView;
     self.areaTableView.hidden = YES;
+    [self sendRequest];
+}
+-(void)sendRequest
+{
+    NSString *url = [NSString stringWithFormat:@"%@GetAllUserInfo.aspx",[IOManager httpAddr]];
+    
+    
 }
 
 #pragma mark - UITableViewDelegate

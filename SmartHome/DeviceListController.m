@@ -1,32 +1,46 @@
 //
-//  DeviceList.m
+//  DeviceListController.m
 //  SmartHome
 //
-//  Created by Brustar on 16/5/19.
+//  Created by 逸云科技 on 16/7/22.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
-#import "DeviceList.h"
+#import "DeviceListController.h"
 #import "Scene.h"
 #import "SceneManager.h"
+@interface DeviceListController ()<UITableViewDelegate,UITableViewDataSource,UISplitViewControllerDelegate>
 
-@interface DeviceList ()
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *delbutt;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHight;
 
 @end
 
-@implementation DeviceList
+@implementation DeviceListController
 
 -(void) viewDidLoad
+
 {
+    
     self.devices=[NSArray arrayWithObjects:@"灯", @"窗帘" , @"电视"  , @"DVD" , @"机顶盒" , @"收音机" ,@"门禁" ,  @"摄像头"  ,@"空调" , nil];
     self.segues=[NSArray arrayWithObjects:@"Lighter" ,@"Curtain",@"TV"  ,@"DVD" ,@"Netv",@"FM",@"Guard",@"Camera",@"Air",nil];
     self.tableView.rowHeight=44;
+    self.tableViewHight.constant = self.devices.count * self.tableView.rowHeight;
+//    
+//    if (self.sceneid>0) {
+//        _delbutt.enabled=YES;
+//    }
+    self.tableView.tableFooterView = [UIView new];
+    self.tableView.layer.cornerRadius = 10;
+    self.tableView.layer.masksToBounds = YES;
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
     
-    if (self.sceneid>0) {
-        _delbutt.enabled=YES;
-    }
-   
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
 }
 
 -(IBAction)remove:(id)sender
@@ -41,6 +55,11 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+#pragma mark - SplitViewControllerDelegate
+-(void)splitViewController:(UISplitViewController *)svc willChangeToDisplayMode:(UISplitViewControllerDisplayMode)displayMode{
+    
+}
+
 
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -66,49 +85,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.deviceid=[NSString stringWithFormat:@"%d",indexPath.row+1];
+    self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
+    //self.splitViewController.minimumPrimaryColumnWidth = self.view.frame.size.width;
+    self.deviceid=[NSString stringWithFormat:@"%ld",indexPath.row+1];
     NSString *segua=@"Lighter";
     if (indexPath.row<9) {
         segua=[self.segues objectAtIndex:indexPath.row];
     }
     [self performSegueWithIdentifier:segua sender:self];
 }
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 
 #pragma mark - Navigation
 
@@ -118,5 +103,6 @@
     [theSegue setValue:self.deviceid forKey:@"deviceid"];
     [theSegue setValue:self.sceneid forKey:@"sceneid"];
 }
+
 
 @end

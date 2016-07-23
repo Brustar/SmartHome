@@ -193,12 +193,14 @@
     return cell;
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
     if(collectionView == self.tvLogoCollectionView)
     {
         TVLogoCell *cell =(TVLogoCell*)[collectionView cellForItemAtIndexPath:indexPath];
         [cell hiddenEditBtnAndDeleteBtn];
-        [cell unUseLongPressGesture];
+        
     }
+
 }
 
 #pragma mark -- TVLogoCellDelegate
@@ -306,6 +308,7 @@
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
+
 
 -(void)dealloc
 {
