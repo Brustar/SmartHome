@@ -92,7 +92,7 @@
         
     //发送注册请求
    
-    NSString *deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"smartToken"];
+    NSString *deviceToken = [[DeviceInfo defaultManager] pushToken];
     if(self.MasterID == nil)
     {
         self.MasterID = @"";
@@ -113,11 +113,8 @@
 {
     if([responseObject[@"Result"] intValue] == 0)
     {
-        [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"AuthorToken"] forKey:@"token"];
-        [[NSUserDefaults standardUserDefaults] setObject:self.userName.text forKey:@"userName"];
-        [[NSUserDefaults standardUserDefaults]  setObject:self.passWord.text forKey:@"password"];
-        [[NSUserDefaults standardUserDefaults] setObject:self.phoneNumber.text forKey:@"UserTellNumber"];
-        [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"UserID"] forKey:@"UserID"];
+        [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
+        [IOManager writeUserdefault:responseObject[@"UserID"] forKey:@"UserID"];
        
         [self performSegueWithIdentifier:@"finishedSegue" sender:self];
         

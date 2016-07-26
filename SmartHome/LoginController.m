@@ -67,7 +67,6 @@
         type = 2;
     }
     NSDictionary *dict = @{@"Account":self.user.text,@"Type":[NSNumber numberWithInt:type],@"Password":[self.pwd.text md5]};
-    [[NSUserDefaults standardUserDefaults] setObject:self.user.text forKey:@"Account"];
     HttpManager *http=[HttpManager defaultManager];
     http.delegate=self;
     [http sendPost:url param:dict];
@@ -78,8 +77,13 @@
 {
 
     if ([responseObject[@"Result"] intValue]==0) {
-        [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
-        [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"UserID"] forKey:@"UserID"];
+        [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
+        [IOManager writeUserdefault:responseObject[@"masterID"] forKey:@"masterID"];
+        [IOManager writeUserdefault:responseObject[@"UserID"] forKey:@"UserID"];
+        //连接socket
+        [[SocketManager defaultManager] connectAfterLogined];
+        //更新配置
+        [[DeviceInfo defaultManager] initConfig];
     }
     [MBProgressHUD showError:responseObject[@"Msg"]];
 }
