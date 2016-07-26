@@ -59,77 +59,62 @@ enum{
 - (void) initConfig;
 - (void) netReachbility;
 
+#pragma mark - public
+
+//TV,DVD,NETV,BGMusic
+-(NSData *) previous:(NSString *)deviceID;
+-(NSData *) forward:(NSString *)deviceID; //快进
+-(NSData *) backward:(NSString *)deviceID; //快退
+-(NSData *) next:(NSString *)deviceID;
+
+-(NSData *) play:(NSString *)deviceID;
+-(NSData *) pause:(NSString *)deviceID;
+-(NSData *) stop:(NSString *)deviceID;
+
+-(NSData *) changeVolume:(uint8_t)percent deviceID:(NSString *)deviceID; //mute:pecent=0
+
+//TV,DVD,NETV
+-(NSData *) sweepLeft:(NSString *)deviceID;
+-(NSData *) sweepRight:(NSString *)deviceID;
+-(NSData *) sweepUp:(NSString *)deviceID;
+-(NSData *) sweepDown:(NSString *)deviceID;
+
 #pragma mark - lighter
--(NSData *) toogleLight:(bool)toogle deviceID:(NSString *)deviceID;
--(NSData *) changeColor:(long)color deviceID:(NSString *)deviceID;
--(NSData *) changeBright:(int)bright deviceID:(NSString *)deviceID;
+-(NSData *) toogleLight:(uint8_t)toogle deviceID:(NSString *)deviceID;
+-(NSData *) changeColor:(uint8_t)color deviceID:(NSString *)deviceID;
+-(NSData *) changeBright:(uint8_t)bright deviceID:(NSString *)deviceID;
 
 #pragma mark - curtain
--(NSData *) roll:(int)percent; //开:percent=100,关percent=0
--(NSData *) open;
--(NSData *) close;
+-(NSData *) roll:(uint8_t)percent deviceID:(NSString *)deviceID; //开:percent=100,关percent=0
+-(NSData *) open:(NSString *)deviceID;
+-(NSData *) close:(NSString *)deviceID;
 
 #pragma mark - TV
--(NSData *) switchProgram:(int)program; //切换台
--(NSData *) sweepLeft;
--(NSData *) sweepRight;
--(NSData *) sweepUp;
--(NSData *) sweepDown;
-
--(NSData *) changeTVolume:(int)percent; //mute:pecent=0
+-(NSData *) switchProgram:(uint8_t)program deviceID:(NSString *)deviceID; //切换台
 
 #pragma mark - DVD
--(NSData *) home; //主页
--(NSData *) play;
--(NSData *) pause;
--(NSData *) stop;
--(NSData *) previous;
--(NSData *) next;
--(NSData *) first;
--(NSData *) last;
--(NSData *) pop; //出仓
-
-
--(NSData *) DVDsweepLeft;
--(NSData *) DVDsweepRight;
--(NSData *) DVDsweepUp;
--(NSData *) DVDsweepDown;
-
--(NSData *) changeDVDVolume:(int)percent; //mute:pecent=0
+-(NSData *) home:(NSString *)deviceID; //主页
+-(NSData *) pop:(NSString *)deviceID; //出仓
 
 #pragma mark - NETV
--(NSData *) NETVhome; //主页
--(NSData *) NETVplay;
--(NSData *) NETVpause;
--(NSData *) NETVstop;
--(NSData *) NETVprevious;
--(NSData *) NETVnext;
--(NSData *) NETVfirst;
--(NSData *) NETVlast;
--(NSData *) NETVpop; //出仓
--(NSData *) back;
+-(NSData *) NETVhome:(NSString *)deviceID; //主页
 
--(NSData *) NETVsweepLeft;
--(NSData *) NETVsweepRight;
--(NSData *) NETVsweepUp;
--(NSData *) NETVsweepDown;
-
--(NSData *) changeNETVolume:(int)percent; //mute:pecent=0
+-(NSData *) back:(NSString *)deviceID;
 
 #pragma mark - FM
--(NSData *) switchFMProgram:(long)program; //切换台
-
--(NSData *) changeFMVolume:(int)percent; //mute:pecent=0
+-(NSData *) switchFMProgram:(uint8_t)program deviceID:(NSString *)deviceID; //切换台
 
 #pragma mark - Guard
--(NSData *) toogle:(bool)toogle;
+-(NSData *) toogle:(uint8_t)toogle deviceID:(NSString *)deviceID;
 
 #pragma mark - Air
--(NSData *) toogleAirCon:(bool)toogle; //开:1,关:0
--(NSData *) changeTemperature:(int)temperature;
--(NSData *) changeDirect:(int)direct;
--(NSData *) changeSpeed:(int)speed;
--(NSData *) changeMode:(int)mode;
--(NSData *) changeInterval:(int)interval;
+-(NSData *) toogleAirCon:(uint8_t)toogle deviceID:(NSString *)deviceID; //开:1,关:0
+-(NSData *) changeTemperature:(uint8_t)temperature deviceID:(NSString *)deviceID;
+-(NSData *) changeDirect:(uint8_t)direct deviceID:(NSString *)deviceID;
+-(NSData *) changeSpeed:(uint8_t)speed deviceID:(NSString *)deviceID;
+-(NSData *) changeMode:(uint8_t)mode deviceID:(NSString *)deviceID;
+-(NSData *) changeInterval:(uint8_t)interval deviceID:(NSString *)deviceID;
+
+#pragma mark - BGMusic CALL PUBLIC
 
 @end

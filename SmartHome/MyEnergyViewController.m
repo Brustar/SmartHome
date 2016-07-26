@@ -60,7 +60,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"我的能耗";
+    
     self.footView.hidden = YES;
+    [self setNavi];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = self.footView;
     self.selectedDeviceTableView.tableFooterView = [UIView new];
     
@@ -70,10 +74,14 @@
     self.subMedia = [DetailList getDeviceForModel:@"影音"];
     self.subProtect = [DetailList getDeviceForModel:@"安防"];
     self.subEnvironmetn = [DetailList getDeviceForModel:@"环境"];
-    
-    
     self.selectedDeviceTableView.hidden = YES;
-    // Do any additional setup after loading the view.
+    
+}
+-(void)setNavi
+{
+    UIBarButtonItem *listItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"memu"] style:UIBarButtonItemStylePlain target:self action:@selector(selectedDevice:)];
+    UIBarButtonItem *editItem = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(clickEditBtn:)];
+    self.navigationItem.rightBarButtonItems = @[listItem,editItem];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

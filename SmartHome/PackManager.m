@@ -7,7 +7,6 @@
 //
 
 #import "PackManager.h"
-#import "DeviceInfo.h"
 
 @implementation PackManager
 

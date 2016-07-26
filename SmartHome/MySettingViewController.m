@@ -26,10 +26,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"设置";
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     self.tableView.tableFooterView = [UIView new];
     self.tableView.backgroundColor =  [UIColor colorWithRed:241/255.0 green:240/255.0 blue:246/255.0 alpha:1];
 
-    // Do any additional setup after loading the view.
+   
 }
 
 
@@ -121,34 +124,38 @@
 }
 -(void)goToViewController:(NSIndexPath *)indexPath
 {
-    UIStoryboard *sy = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    //UIStoryboard *sy = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+   // pushSegue accessSegue systemSetSegue systemInfoSegue aboutSegue
     if(indexPath.section == 0)
     {
-        self.pushVC = [sy instantiateViewControllerWithIdentifier:@"PushSettingController"];
-        self.pushVC.view.frame = self.view.bounds;
-        [self.view addSubview:self.pushVC.view];
+//        self.pushVC = [sy instantiateViewControllerWithIdentifier:@"PushSettingController"];
+//        self.pushVC.view.frame = self.view.bounds;
+//        [self.view addSubview:self.pushVC.view];
+        [self performSegueWithIdentifier:@"pushSegue" sender:self];
         
         
     }else if(indexPath.section == 1)
     {
         
-            self.accessVC = [sy instantiateViewControllerWithIdentifier:@"AccessSettingController"];
-            self.accessVC.view.frame = self.view.bounds;
-            [self.view addSubview:self.accessVC.view];
-        
+//            self.accessVC = [sy instantiateViewControllerWithIdentifier:@"AccessSettingController"];
+//            self.accessVC.view.frame = self.view.bounds;
+//            [self.view addSubview:self.accessVC.view];
+        [self performSegueWithIdentifier:@"accessSegue" sender:self];
         
         
     }else if(indexPath.section == 2)
     {
         if(indexPath.row == 0)
         {
-            self.sySetVC = [sy instantiateViewControllerWithIdentifier:@"SystemSettingViewController"];
-            self.sySetVC.view.frame = self.view.bounds;
-            [self.view addSubview:self.sySetVC.view];
+//            self.sySetVC = [sy instantiateViewControllerWithIdentifier:@"SystemSettingViewController"];
+//            self.sySetVC.view.frame = self.view.bounds;
+//            [self.view addSubview:self.sySetVC.view];
+            [self performSegueWithIdentifier:@"systemSetSegue" sender:self];
         }else {
-            self.inforVC = [sy instantiateViewControllerWithIdentifier:@"systemInfomationController"];
-            self.inforVC.view.frame = self.view.bounds;
-            [self.view addSubview:self.inforVC.view];
+//            self.inforVC = [sy instantiateViewControllerWithIdentifier:@"systemInfomationController"];
+//            self.inforVC.view.frame = self.view.bounds;
+//            [self.view addSubview:self.inforVC.view];
+            [self performSegueWithIdentifier:@"systemInfoSegue" sender:self];
         }
     }else if(indexPath.section == 3)
     {
@@ -156,9 +163,10 @@
     
     }else if(indexPath.section == 4)
     {
-        self.aboutVC = [sy instantiateViewControllerWithIdentifier:@"AboutUsController"];
-        self.aboutVC.view.frame = self.view.bounds;
-        [self.view addSubview:self.aboutVC.view];
+//        self.aboutVC = [sy instantiateViewControllerWithIdentifier:@"AboutUsController"];
+//        self.aboutVC.view.frame = self.view.bounds;
+//        [self.view addSubview:self.aboutVC.view];
+         [self performSegueWithIdentifier:@"aboutSegue" sender:self];
     }
 
 }
@@ -178,14 +186,14 @@
 }
 
 
--(void)removeAllSubViewFromMySettingController
-{
-    [self.accessVC.view removeFromSuperview];
-    [self.pushVC.view removeFromSuperview];
-    [self.sySetVC.view removeFromSuperview];
-    [self.inforVC.view removeFromSuperview];
-    [self.aboutVC.view removeFromSuperview];
-}
+//-(void)removeAllSubViewFromMySettingController
+//{
+//    [self.accessVC.view removeFromSuperview];
+//    [self.pushVC.view removeFromSuperview];
+//    [self.sySetVC.view removeFromSuperview];
+//    [self.inforVC.view removeFromSuperview];
+//    [self.aboutVC.view removeFromSuperview];
+//}
 
 
 @end

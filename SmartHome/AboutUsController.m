@@ -23,8 +23,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
+    self.title = @"关于我们";
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
+    self.navigationItem.leftBarButtonItem = returnItem;
+
     self.tableView.tableHeaderView = self.headView;
     
     self.titles = @[@"版本说明",@"隐私安全政策"];
@@ -44,8 +47,8 @@
     return cell;
 }
 
-- (IBAction)returnToSetting:(id)sender {
-    [self.view removeFromSuperview];
+- (IBAction)clickRetunBtn:(id)sender {
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 

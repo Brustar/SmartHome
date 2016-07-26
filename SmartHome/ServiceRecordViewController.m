@@ -8,7 +8,6 @@
 
 #import "ServiceRecordViewController.h"
 #import "ServiceRecordCell.h"
-#import "IOManager.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 @interface ServiceRecordViewController ()<UITableViewDelegate,UITableViewDataSource,HttpDelegate>
@@ -19,7 +18,8 @@
 
 @property (nonatomic,strong) NSMutableArray *recoreds;
 @property (nonatomic,strong) NSMutableArray *times;
-
+@property (weak, nonatomic) IBOutlet UIView *footView;
+@property (nonatomic,assign) BOOL isEditing;
 - (IBAction)clickGoodCommnet:(id)sender;
 
 - (IBAction)clickStillHaveFault:(id)sender;
@@ -46,23 +46,29 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.tableFooterView = [UIView new];
+    self.title = @"我的维修";
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.tableView.tableFooterView = self.footView;
+    self.footView.hidden = YES;
     self.coverView.hidden = YES;
     self.commentView.hidden = YES;
+    [self setNavi];
    // [self sendRequest];
     }
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:YES];
-   // [self sendRequest];
+
+-(void)setNavi{
+    UIBarButtonItem *editBtn = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(startEdit:)];
+    self.navigationItem.rightBarButtonItem = editBtn;
+    [self sendRequest];
 }
+
 -(void)sendRequest
 {
     
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSString *userID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"];
+    NSString *userHostID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserHostID"];
     NSString *url = [NSString stringWithFormat:@"%@GetMaintainMessage.aspx",[IOManager httpAddr]];
-    NSDictionary *dic = @{@"AuthorToken":auothorToken,@"UserID":userID};
+    NSDictionary *dic = @{@"AuthorToken":auothorToken,@"UserHostID":userHostID};
     HttpManager *http=[HttpManager defaultManager];
    
     http.delegate = self;
@@ -114,6 +120,54 @@
 {
     return 50;
 }
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+-(void)startEdit:(UIBarButtonItem *)barBtnItem
+{
+    self.tableView.allowsMultipleSelectionDuringEditing = YES;
+    self.tableView.editing = YES;
+    self.footView.hidden = NO;
+    self.isEditing = NO;
+    [self.tableView reloadData];
+}
+- (IBAction)clickCancelDeleteBtn:(id)sender {
+    
+    // 允许多个编辑
+    self.tableView.allowsMultipleSelectionDuringEditing = NO;
+    // 允许编辑
+    self.tableView.editing = NO;
+    //  self.tableView.tableFooterView = nil;
+    self.footView.hidden = YES;
+    self.isEditing = NO;
+    [self.tableView reloadData];
+
+
+}
+- (IBAction)clickSureDeleteBtn:(id)sender {
+    //放置要删除的对象
+    NSMutableArray *deleteArray = [NSMutableArray array];
+    NSMutableArray *deletedTime = [NSMutableArray array];
+    // 要删除的row
+    NSArray *selectedArray = [self.tableView indexPathsForSelectedRows];
+    
+    for (NSIndexPath *indexPath in selectedArray) {
+        //[deleteArray addObject:self.Mydefaults[indexPath.row]];
+        [deleteArray addObject:self.recoreds[indexPath.row]];
+        [deletedTime addObject:self.times[indexPath.row]];
+    }
+    // 先删除数据源
+    [self.recoreds removeObjectsInArray:deleteArray];
+    [self.times removeObjectsInArray:deletedTime];
+    
+    [self clickCancelDeleteBtn:nil];
+}
+
 - (IBAction)clickGoodCommnet:(id)sender {
 }
 

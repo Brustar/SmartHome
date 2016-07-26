@@ -10,6 +10,7 @@
 #import "DVD.h"
 #import "SceneManager.h"
 #import "DVCollectionViewCell.h"
+#import "VolumeManager.h"
 
 #define size 437
 @interface DVDController ()<UICollectionViewDelegate,UICollectionViewDataSource>

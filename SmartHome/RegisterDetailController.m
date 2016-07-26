@@ -9,9 +9,8 @@
 #import "RegisterDetailController.h"
 #import <AFNetworking.h>
 #import "CryptoManager.h"
-#import "IOManager.h"
 #import "MBProgressHUD+NJ.h"
-
+#import "IOManager.h"
 #import "WebManager.h"
 #import "RegexKitLite.h"
 
@@ -27,6 +26,8 @@
 @property (nonatomic,strong) dispatch_source_t _timer;
 
 @property (weak, nonatomic) IBOutlet UIView *coverView;
+@property (weak, nonatomic) IBOutlet UIView *regSuccessView;
+@property (weak, nonatomic) IBOutlet UIButton *goHomeBtn;
 
 @end
 
@@ -93,13 +94,13 @@
         
     //发送注册请求
    
-    NSString *deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"smartToken"];
+    NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     if(self.MasterID == nil)
     {
         self.MasterID = @"";
     }
-   
-    NSDictionary *dict = @{@"QRCode":self.MasterID,@"UserName":self.userName.text,@"Password":[self.passWord.text md5],@"UserTellNumber":self.phoneStr,@"UserType":[NSNumber numberWithInt:self.cType],@"pushtoken":deviceToken};
+    
+    NSDictionary *dict = @{@"HostID":self.MasterID,@"UserName":self.userName.text,@"Password":[self.passWord.text md5],@"UserTellNumber":self.phoneStr,@"UserType":[NSNumber numberWithInt:self.cType],@"pushtoken":authorToken};
     NSString *url = [NSString stringWithFormat:@"%@UserRegist.aspx",[IOManager httpAddr]];
    
     
@@ -114,13 +115,14 @@
 {
     if([responseObject[@"Result"] intValue] == 0)
     {
-        [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"AuthorToken"] forKey:@"token"];
+        
         [[NSUserDefaults standardUserDefaults] setObject:self.userName.text forKey:@"userName"];
-        [[NSUserDefaults standardUserDefaults]  setObject:self.passWord.text forKey:@"password"];
+        [[NSUserDefaults standardUserDefaults] setObject:self.passWord.text forKey:@"password"];
         [[NSUserDefaults standardUserDefaults] setObject:self.phoneNumber.text forKey:@"UserTellNumber"];
         [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"UserID"] forKey:@"UserID"];
-       
-        [self performSegueWithIdentifier:@"finishedSegue" sender:self];
+        [IOManager writeUserdefault:self.MasterID forkey:@"HostID"];
+        self.coverView.hidden = NO;
+        self.regSuccessView.hidden = NO;
         
        
     }else{

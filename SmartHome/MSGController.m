@@ -7,12 +7,14 @@
 //
 
 #import "MSGController.h"
-#import "IOManager.h"
 #import "MsgCell.h"
 #import "HttpManager.h"
 @interface MSGController ()<HttpDelegate>
 @property(nonatomic,strong) NSMutableArray *msgArr;
 @property(nonatomic,strong) NSMutableArray *timesArr;
+
+@property (weak, nonatomic) IBOutlet UIView *footView;
+
 @end
 
 @implementation MSGController
@@ -35,23 +37,20 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    //[self sendRequest];
-    
+    self.title = @"我的消息";
+    self.tableView.tableFooterView = self.footView;
+    UIBarButtonItem *editBtn = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(startEdit:)];
+    self.navigationItem.rightBarButtonItem = editBtn;
+    [self sendRequest];
    
 }
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:YES];
-    //[self sendRequest];
-}
+
 -(void)sendRequest
 {
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSString *userID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"];
+    NSString *userID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserHostID"];
     NSString *url = [NSString stringWithFormat:@"%@GetNotifyMessage.aspx",[IOManager httpAddr]];
-    NSDictionary *dic = @{@"AuthorToken":authorToken,@"UserID":userID};
+    NSDictionary *dic = @{@"AuthorToken":authorToken,@"UserHostID":userID};
     HttpManager *http=[HttpManager defaultManager];
     http.delegate = self;
     [http sendPost:url param:dic];
@@ -94,5 +93,57 @@
     cell.timeLable.text = self.timesArr[indexPath.row];
     return cell;
 }
+
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+
+//编辑操作
+-(void)startEdit:(UIBarButtonItem *)btn
+{
+    
+    self.tableView.allowsMultipleSelectionDuringEditing = YES;
+    self.tableView.editing = YES;
+    self.footView.hidden = NO;
+    [self.tableView reloadData];
+}
+- (IBAction)clickCancelBtn:(id)sender {
+    // 允许多个编辑
+    self.tableView.allowsMultipleSelectionDuringEditing = NO;
+    // 允许编辑
+    self.tableView.editing = NO;
+    //  self.tableView.tableFooterView = nil;
+    self.footView.hidden = YES;
+   
+    [self.tableView reloadData];
+
+}
+
+- (IBAction)clickDeleteBtn:(id)sender {
+    //放置要删除的对象
+    NSMutableArray *deleteArray = [NSMutableArray array];
+    NSMutableArray *deletedTime = [NSMutableArray array];
+    // 要删除的row
+    NSArray *selectedArray = [self.tableView indexPathsForSelectedRows];
+    
+    for (NSIndexPath *indexPath in selectedArray) {
+        //[deleteArray addObject:self.Mydefaults[indexPath.row]];
+        [deleteArray addObject:self.msgArr[indexPath.row]];
+        [deletedTime addObject:self.timesArr[indexPath.row]];
+    }
+    // 先删除数据源
+    [self.msgArr removeObjectsInArray:deleteArray];
+    [self.timesArr removeObjectsInArray:deletedTime];
+    
+    [self clickCancelBtn:nil];
+
+}
+
+
 
 @end

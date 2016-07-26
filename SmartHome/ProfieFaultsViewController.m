@@ -9,7 +9,6 @@
 #import "ProfieFaultsViewController.h"
 #import "ProfieFaultsCell.h"
 #import "HttpManager.h"
-#import "IOManager.h"
 
 
 @interface ProfieFaultsViewController ()<UITableViewDelegate,UITableViewDataSource,HttpDelegate>
@@ -43,22 +42,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.footerView.hidden = YES;
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = self.footerView;
-    
-    //[self sendRequest];
+    [self sendRequest];
     
 }
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:YES];
-   // [self sendRequest];
-}
+
 -(void)sendRequest
 {
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSString *userID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"];
+    NSString *userHostID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserHostID"];
      NSString *url = [NSString stringWithFormat:@"%@GetBreakdownMessage.aspx",[IOManager httpAddr]];
-    NSDictionary *dict = @{@"AuthorToken":auothorToken,@"UserID":userID};
+    NSDictionary *dict = @{@"AuthorToken":auothorToken,@"UserHostID":userHostID};
     
     HttpManager *http=[HttpManager defaultManager];
     http.delegate = self;

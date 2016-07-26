@@ -9,8 +9,8 @@
 #import "DetailList.h"
 #import "FMDatabase.h"
 #import "FMResultSet.h"
-#import "IOManager.h"
 #import "Detail.h"
+
 @implementation DetailList
 
 +(NSArray *)getDetailListWithID:(NSInteger)ID

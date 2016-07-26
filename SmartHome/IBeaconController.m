@@ -15,6 +15,9 @@
 #import "ProtocolManager.h"
 #import "UIImageView+AFNetworking.h"
 #import "RegexKitLite.h"
+#import "IbeaconManager.h"
+#import "VolumeManager.h"
+#import "AudioManager.h"
 
 @implementation IBeaconController
 
@@ -230,7 +233,7 @@
 -(IBAction)sendMsg:(id)sender
 {
     //NSString *cmd=@"EC00000000FF0000FFEA";
-    NSString *cmd=@"EC040101EA";
+    NSString *cmd=@"EC060101000000000000EA";
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:[PackManager dataFormHexString:cmd] withTimeout:1 tag:1];
     [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1];

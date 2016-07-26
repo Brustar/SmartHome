@@ -6,7 +6,6 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 #import<CoreLocation/CoreLocation.h>
-#import "DeviceInfo.h"
 
 #define BEACONUUID @"FDA50693-A4E2-4FB1-AFCF-C6EB07647825"//iBeacon的uuid可以换成自己设备的uuid
 

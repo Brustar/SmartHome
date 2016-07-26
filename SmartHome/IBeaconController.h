@@ -8,7 +8,6 @@
 #import <AFNetworking.h>
 #import "SocketManager.h"
 #import <HomeKit/HomeKit.h>
-#import "public.h"
 #import "Light.h"
 #import <Reachability/Reachability.h> 
 

@@ -9,7 +9,6 @@
 #import "Detail.h"
 #import "FMDatabase.h"
 #import "FMResultSet.h"
-#import "IOManager.h"
 
 @implementation Detail
 

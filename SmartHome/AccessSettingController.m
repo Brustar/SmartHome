@@ -9,8 +9,8 @@
 #import "AccessSettingController.h"
 #import "areaSettingCell.h"
 #import "IOManager.h"
-
-@interface AccessSettingController ()<UITableViewDelegate,UITableViewDataSource>
+#import "HttpManager.h"
+@interface AccessSettingController ()<UITableViewDelegate,UITableViewDataSource,HttpDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *userTableView;
 @property (nonatomic,strong) NSMutableArray *userArr;
 
@@ -53,6 +53,10 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"权限控制";
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
+    self.navigationItem.leftBarButtonItem = returnItem;
     self.areaTableView.tableHeaderView = self.headView;
     self.areaTableView.hidden = YES;
     [self sendRequest];
@@ -60,10 +64,28 @@
 -(void)sendRequest
 {
     NSString *url = [NSString stringWithFormat:@"%@GetAllUserInfo.aspx",[IOManager httpAddr]];
-    
-    
-}
+    NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    NSString *userID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"];
+     NSDictionary *dict = @{@"AuthorToken":auothorToken,@"UserID":userID};
+    HttpManager *http=[HttpManager defaultManager];
+    http.delegate = self;
+    http.tag = 1;
+    [http sendPost:url param:dict];
 
+}
+-(void)httpHandler:(id)responseObject tag:(int)tag
+{
+    NSDictionary *dic = responseObject[@"HomeInfo"];
+    NSArray *arr = dic[@"UserInfo"];
+    for(NSDictionary *userDetail in arr)
+    {
+        NSString *userName = userDetail[@"UserName"];
+        NSString *userType = userDetail[@"UserType"];
+        [self.userArr addObject:userName];
+        [self.managerType addObject:userType];
+    }
+    [self.userTableView reloadData];
+}
 #pragma mark - UITableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -164,8 +186,10 @@
     [alertVC addAction:sureAction];
     
 }
+
 - (IBAction)clickRetunBtn:(id)sender {
-    [self.view removeFromSuperview];
+    //[self.view removeFromSuperview];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 

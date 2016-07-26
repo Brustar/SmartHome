@@ -6,10 +6,7 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 #import "IOManager.h"
-#import "AudioManager.h"
-#import "IbeaconManager.h"
-#import "VolumeManager.h"
-#import "Scene.h"
+#import "DeviceInfo.h"
 
 #ifndef public_h
 #define public_h

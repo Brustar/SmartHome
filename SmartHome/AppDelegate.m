@@ -7,9 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "IOManager.h"
 #import "SocketManager.h"
-#import "DeviceInfo.h"
 #import "PackManager.h"
 
 @interface AppDelegate ()
@@ -25,23 +23,30 @@
     {
         //IOS8
         //创建UIUserNotificationSettings，并设置消息的显示类类型
-        UIUserNotificationSettings *notiSettings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIRemoteNotificationTypeSound) categories:nil];
+        UIUserNotificationSettings *notiSettings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIUserNotificationTypeSound) categories:nil];
         
         [application registerUserNotificationSettings:notiSettings];
         
-    } else{ // ios7
-        [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound                                      |UIRemoteNotificationTypeAlert)];
+    } else{
+        UIUserNotificationType notificationTypes = (UIUserNotificationTypeAlert|
+                                                    UIUserNotificationTypeSound|
+                                                    UIUserNotificationTypeBadge);
+        
+        UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:notificationTypes
+                                                                                             categories:nil];
+        [application registerUserNotificationSettings:notificationSettings];
     } ;
     
     [IOManager copyFile:@"smartDB" to:@"smartDB"];
     
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device netReachbility];
+    [device deviceGenaration];
     
-    if (device.masterID) {
+    //登录后每次系统启动自动更新云端配置，第一次安装此处不更新，登录的时候再更新
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"masterID"]) {
         [device initConfig];
     }
-    
     
     return YES;
 }
@@ -90,8 +95,8 @@
         // [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
         
         //2 ask the provider to set the BadgeNumber to zero
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        NSString *deviceTokenStr = [userDefaults objectForKey:@"DeviceTokenStringKEY"];
+        //NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        //NSString *deviceTokenStr = [userDefaults objectForKey:@"DeviceTokenStringKEY"];
         //[self resetBadgeNumberOnProviderWithDeviceToken:deviceTokenStr];
     });
     

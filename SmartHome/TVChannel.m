@@ -7,9 +7,9 @@
 //
 
 #import "TVChannel.h"
-#import "IOManager.h"
 #import "FMDatabase.h"
 #import "FMResultSet.h"
+
 @implementation TVChannel
 
 +(instancetype)getChannelFromChannelID:(NSInteger)channel_ID
@@ -54,7 +54,6 @@
         //channel.parent =[resultSet stringForColumn:@"parent"];
         [mutabelArr addObject:channel];
     }
-    NSLog(@"------------%ld",mutabelArr.count);
     [db closeOpenResultSets];
     [db close];
     

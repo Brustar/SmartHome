@@ -7,7 +7,6 @@
 //
 
 #import "LoginController.h"
-#import "IOManager.h"
 #import "CryptoManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "WebManager.h"
@@ -21,7 +20,9 @@
 #import "MSGController.h"
 #import "ProfieFaultsViewController.h"
 #import "ServiceRecordViewController.h"
+#import "RegisterDetailController.h"
 #import "ECloudTabBarController.h"
+
 @interface LoginController ()<QRCodeReaderDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *user;
@@ -67,7 +68,8 @@
     {
         type = 2;
     }
-    NSDictionary *dict = @{@"Account":self.user.text,@"Type":[NSNumber numberWithInt:type],@"Password":[self.pwd.text md5]};
+    NSString *hostID = [[NSUserDefaults standardUserDefaults] objectForKey:@"HostID"];
+    NSDictionary *dict = @{@"Account":self.user.text,@"Type":[NSNumber numberWithInt:type],@"Password":[self.pwd.text md5],@"HostID":hostID};
     [[NSUserDefaults standardUserDefaults] setObject:self.user.text forKey:@"Account"];
     HttpManager *http=[HttpManager defaultManager];
     http.delegate=self;
@@ -80,7 +82,7 @@
 
     if ([responseObject[@"Result"] intValue]==0) {
         [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
-        [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"UserID"] forKey:@"UserID"];
+        [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"UserHostID"] forKey:@"UserHostID"];
         
         ECloudTabBarController *ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ECloudTabBarController"];
         [self.navigationController pushViewController:ecloudVC animated:YES];
@@ -140,36 +142,46 @@
 
 - (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result
 {
-        NSArray* list = [result componentsSeparatedByString:@"@"];
-        if([list count] > 1)
-        {
-            self.masterId = list[0];
-            //[reg setValue:self.masterId forKey:@"masterStr"];
-            
-            if ([@"1" isEqualToString:list[1]]) {
-                self.role=@"主人";
-            }else{
-                self.role=@"客人";
+    UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    RegisterPhoneNumController *registVC = [story instantiateViewControllerWithIdentifier:@"RegisterPhoneNumController"];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.navigationController pushViewController:registVC animated:YES];
+         NSArray* list = [result componentsSeparatedByString:@"@"];
+            if([list count] > 1)
+            {
+                self.masterId = list[0];
+                [registVC setValue:self.masterId forKey:@"masterStr"];
+                                if ([@"1" isEqualToString:list[1]]) {
+                    self.role=@"主人";
+                }else{
+                    self.role=@"客人";
+                }
+                [registVC setValue:self.role forKey:@"suerTypeStr"];
             }
-            //[reg setValue:role forKey:@"suerTypeStr"];
-        }
-        else
-        {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"非法的二维码" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
-            [alert addAction:okAction];
-        }
-        
+            else
+            {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"非法的二维码" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+                [alert addAction:okAction];
+                [self presentViewController:alert animated:YES completion:nil];
+            }
+
+    }];
+    
     
 }
-
-
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    RegisterPhoneNumController *reg = segue.destinationViewController;
-    reg.masterStr = self.masterId;
-    reg.suerTypeStr = self.role;
+    self.coverView.hidden = YES;
+    self.registerView.hidden = YES;
 }
+
+//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    RegisterPhoneNumController *reg = segue.destinationViewController;
+//    reg.masterStr = self.masterId;
+//    reg.suerTypeStr = self.role;
+//}
 - (void)readerDidCancel:(QRCodeReaderViewController *)reader
 {
     [self dismissViewControllerAnimated:YES completion:NULL];

@@ -5,7 +5,7 @@
 	<key>tcpPort</key>
 	<string>8000</string>
 	<key>tcpServer</key>
-	<string>192.168.199.216</string>
+	<string>120.204.196.189</string>
 	<key>httpPort</key>
 	<integer>8088</integer>
 	<key>httpServer</key>

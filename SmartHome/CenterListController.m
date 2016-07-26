@@ -1,81 +1,67 @@
 //
-//  FavorController.m
+//  CenterListController.m
 //  SmartHome
 //
-//  Created by Brustar on 16/7/5.
+//  Created by 逸云科技 on 16/7/23.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
-#import "FavorController.h"
+#import "CenterListController.h"
 
-@interface FavorController ()
+@interface CenterListController ()
+@property (nonatomic,strong) NSArray *titlArr;
+@property (nonatomic,strong) NSArray *images;
 
 @end
 
-@implementation FavorController
+@implementation CenterListController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     self.title = @"我的收藏";
-    [self loadScene];
+     self.titlArr = @[@"我的故障",@"我的保修记录",@"我的能耗",@"我的收藏",@"我的消息",@"设置"];
+    self.images = @[@"my",@"energy",@"record",@"store",@"message",@"setting"];
+     self.splitViewController.maximumPrimaryColumnWidth = 250;
+    self.tableView.tableFooterView = [UIView new];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    
-}
-
-- (void)loadScene;
-{
-    self.favors=[NSMutableArray new];
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath] ;
-    if (![db open]) {
-        NSLog(@"Could not open db.");
-        
-    }
-    
-    FMResultSet *resultSet = [db executeQueryWithFormat:@"select * from Scenes where isFavorite = 1"];
-    while([resultSet next])
-    {
-        /*
-        Scene *scene = [Scene new];
-        scene.sceneID = [[resultSet stringForColumn:@"sceneID"] intValue];
-        scene.roomID = [resultSet intForColumn:@"roomID"];
-        scene.picID = [[resultSet stringForColumn:@"picID"] intValue];
-        scene.houseID = [resultSet boolForColumn:@"houseID"];
-        */
-        [self.favors addObject:[resultSet stringForColumn:@"name"]];
-    }
-    [self.tableView reloadData];
-    [db closeOpenResultSets];
-    [db close];
 }
 
 #pragma mark - Table view data source
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return  1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.favors.count;
+   return  self.titlArr.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil)
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if(!cell)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    cell.textLabel.text=[self.favors objectAtIndex:indexPath.row];
-    return cell;
+    cell.textLabel.text = self.titlArr[indexPath.row];
+    cell.imageView.image = [UIImage imageNamed:self.images[indexPath.row]];
     
+    return cell;
 }
-
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if([self.delegate respondsToSelector:@selector(CenterListController:selected:)])
+    {
+        [self.delegate CenterListController:self selected:indexPath.row ];
+    }
+}
 
 /*
 // Override to support conditional editing of the table view.
