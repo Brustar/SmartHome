@@ -42,26 +42,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.footerView.hidden = YES;
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = self.footerView;
-    
     [self sendRequest];
     
 }
+
 -(void)sendRequest
 {
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSString *userID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"];
-     NSString *url = [NSString stringWithFormat:@"%@GetBreakdownMessage.aspx?AuthorToken=%@&UserID=%d",[IOManager httpAddr],auothorToken,[userID intValue]];
+    NSString *userHostID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserHostID"];
+     NSString *url = [NSString stringWithFormat:@"%@GetBreakdownMessage.aspx",[IOManager httpAddr]];
+    NSDictionary *dict = @{@"AuthorToken":auothorToken,@"UserHostID":userHostID};
     
     HttpManager *http=[HttpManager defaultManager];
     http.delegate = self;
-    [http sendGet:url param:nil];
+    [http sendPost:url param:dict];
     
     
 }
 -(void)httpHandler:(id)responseObject
 {
-    NSDictionary *dic = responseObject[@"messageInfo"];
+       NSDictionary *dic = responseObject[@"messageInfo"];
     NSArray *msgList = dic[@"messageList"];
     for(NSDictionary *dicDetail in msgList)
     {
@@ -70,11 +72,11 @@
         [self.faultArr addObject:description];
         [self.timesArr addObject:createDate];
     }
-    
+    [self.tableView reloadData];
+  
+
+
 }
-
-
-    
 
 
 #pragma mark -UITableViewDelegate

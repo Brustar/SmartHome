@@ -10,4 +10,6 @@
 
 @interface MyEnergyViewController : UIViewController
 
+-(void)removeAllSubViewFromMyEnergyViewController;
+
 @end

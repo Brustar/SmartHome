@@ -59,5 +59,37 @@
     return array;
 
 }
++(NSArray *)getDeviceForModel:(NSString *)str
+{
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath] ;
+    if (![db open]) {
+        NSLog(@"Could not open db.");
+        
+    }
+    NSMutableArray *array = [NSMutableArray array];
+    
+    NSString *strTemp = [NSString stringWithFormat:@"SELECT * FROM Devices where model='%@'", str];
+    
+    FMResultSet *resultSet = [db executeQuery:strTemp];
+    
+    while([resultSet next])
+    {
+        DetailList *list = [[DetailList alloc] init];
+        list.ID = [resultSet intForColumn:@"ID"];
+        list.name = [resultSet stringForColumn:@"NAME"];
+        list.sn = [resultSet stringForColumn:@"sn"];
+        
+        [array addObject:list];
+    }
+    
+    
+    [db closeOpenResultSets];
+    [db close];
+    
+    
+    return array;
+
+}
 
 @end

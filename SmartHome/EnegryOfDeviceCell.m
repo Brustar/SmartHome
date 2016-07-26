@@ -1,14 +1,14 @@
 //
-//  MyCenterTableViewCell.m
+//  EnegryOfDeviceCell.m
 //  SmartHome
 //
-//  Created by 逸云科技 on 16/7/6.
+//  Created by 逸云科技 on 16/7/20.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
-#import "MyCenterTableViewCell.h"
+#import "EnegryOfDeviceCell.h"
 
-@implementation MyCenterTableViewCell
+@implementation EnegryOfDeviceCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

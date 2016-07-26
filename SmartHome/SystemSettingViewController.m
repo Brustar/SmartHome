@@ -18,6 +18,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"使用习惯";
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
+    self.navigationItem.leftBarButtonItem = returnItem;
+
     // Do any additional setup after loading the view.
     self.titles = @[@"开启向导",@"开启每日提示",@"开启智能过滤",@"全部场景静音"];
     self.tableView.tableFooterView = [UIView new];
@@ -31,14 +36,14 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SystemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SystemCell" forIndexPath:indexPath];
+    SystemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.title.text = self.titles[indexPath.row];
    
     return cell;
     
 }
-- (IBAction)returnToSetting:(id)sender {
-    [self.view removeFromSuperview];
+- (IBAction)clickRetunBtn:(id)sender {
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 - (void)didReceiveMemoryWarning {

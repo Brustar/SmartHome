@@ -235,12 +235,14 @@
     return cell;
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
     if(collectionView == self.tvLogoCollectionView)
     {
         TVLogoCell *cell =(TVLogoCell*)[collectionView cellForItemAtIndexPath:indexPath];
         [cell hiddenEditBtnAndDeleteBtn];
-        [cell unUseLongPressGesture];
+        
     }
+
 }
 
 -(IBAction)btntouched:(id)sender
@@ -368,10 +370,6 @@
     [self.editChannelImgBtn setBackgroundImage:chooseImg forState:UIControlStateNormal];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
--(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [picker dismissViewControllerAnimated:YES completion:nil];
-}
 
 #pragma mark -
 #pragma mark touch detection
@@ -384,6 +382,7 @@
         [SCWaveAnimationView waveAnimationAtPosition:touchPoint];
     }
 }
+
 
 -(void)dealloc
 {

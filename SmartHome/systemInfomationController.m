@@ -17,6 +17,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"系统信息";
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
+    self.navigationItem.leftBarButtonItem = returnItem;
+
     self.titles = @[@"家庭名称",@"主机编号",@"主机品牌",@"主机型号"];
     self.tableView.tableFooterView = [UIView new];
     // Do any additional setup after loading the view.
@@ -35,8 +40,8 @@
     cell.detailTextLabel.text = @"逸云智家";
     return  cell;
 }
-- (IBAction)retunToSetting:(id)sender {
-    [self.view removeFromSuperview];
+- (IBAction)clickRetunBtn:(id)sender {
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 - (void)didReceiveMemoryWarning {

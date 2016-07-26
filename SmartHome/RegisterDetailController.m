@@ -10,7 +10,7 @@
 #import <AFNetworking.h>
 #import "CryptoManager.h"
 #import "MBProgressHUD+NJ.h"
-
+#import "IOManager.h"
 #import "WebManager.h"
 #import "RegexKitLite.h"
 
@@ -26,6 +26,8 @@
 @property (nonatomic,strong) dispatch_source_t _timer;
 
 @property (weak, nonatomic) IBOutlet UIView *coverView;
+@property (weak, nonatomic) IBOutlet UIView *regSuccessView;
+@property (weak, nonatomic) IBOutlet UIButton *goHomeBtn;
 
 @end
 
@@ -91,14 +93,13 @@
     
         
     //发送注册请求
-   
-    NSString *deviceToken = [[DeviceInfo defaultManager] pushToken];
+    NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     if(self.MasterID == nil)
     {
         self.MasterID = @"";
     }
-   
-    NSDictionary *dict = @{@"QRCode":self.MasterID,@"UserName":self.userName.text,@"Password":[self.passWord.text md5],@"UserTellNumber":self.phoneStr,@"UserType":[NSNumber numberWithInt:self.cType],@"pushtoken":deviceToken};
+    
+    NSDictionary *dict = @{@"HostID":self.MasterID,@"UserName":self.userName.text,@"Password":[self.passWord.text md5],@"UserTellNumber":self.phoneStr,@"UserType":[NSNumber numberWithInt:self.cType],@"pushtoken":authorToken};
     NSString *url = [NSString stringWithFormat:@"%@UserRegist.aspx",[IOManager httpAddr]];
    
     
@@ -115,10 +116,9 @@
     {
         [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
         [IOManager writeUserdefault:responseObject[@"UserID"] forKey:@"UserID"];
-       
-        [self performSegueWithIdentifier:@"finishedSegue" sender:self];
-        
-       
+        [IOManager writeUserdefault:self.MasterID forKey:@"HostID"];
+        self.coverView.hidden = NO;
+        self.regSuccessView.hidden = NO;
     }else{
         [MBProgressHUD showError:responseObject[@"Msg"]];
         

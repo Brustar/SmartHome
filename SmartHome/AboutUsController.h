@@ -1,5 +1,5 @@
 //
-//  AboutUsController.h
+//  AboutUsView.h
 //  SmartHome
 //
 //  Created by 逸云科技 on 16/7/18.

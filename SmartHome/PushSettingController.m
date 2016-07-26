@@ -24,6 +24,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"推送控制";
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
+    self.navigationItem.leftBarButtonItem = returnItem;
     self.coverView.hidden = YES;
     self.pushTypeView.hidden = YES;
     
@@ -197,7 +201,8 @@
 
 
 - (IBAction)clickRetunBtn:(id)sender {
-    [self.view removeFromSuperview];
+    //[self.view removeFromSuperview];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 

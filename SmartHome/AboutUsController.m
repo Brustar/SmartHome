@@ -1,5 +1,5 @@
 //
-//  AboutUsController.m
+//  AboutUsView.m
 //  SmartHome
 //
 //  Created by 逸云科技 on 16/7/18.
@@ -8,23 +8,38 @@
 
 #import "AboutUsController.h"
 
-@interface AboutUsController ()<UITableViewDelegate,UITableViewDataSource>
+@interface AboutUsController ()<UITableViewDataSource,UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) NSArray *titles;
+
+@property (weak, nonatomic) IBOutlet UILabel *version;
+@property (weak, nonatomic) IBOutlet UIImageView *headImg;
+@property (weak, nonatomic) IBOutlet UIView *footView;
+@property (weak, nonatomic) IBOutlet UIView *headView;
+
 @end
 
 @implementation AboutUsController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.titles = @[@"版本说明",@"隐私安全政策"];
-}
+    self.title = @"关于我们";
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
+    self.navigationItem.leftBarButtonItem = returnItem;
 
+    self.tableView.tableHeaderView = self.headView;
+    
+    self.titles = @[@"版本说明",@"隐私安全政策"];
+    self.version.text =[NSString stringWithFormat:@"版本号%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+    
+    // Do any additional setup after loading the view.
+}
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.titles.count;
-    
 }
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
@@ -32,12 +47,9 @@
     return cell;
 }
 
-
-
-
-
-
-
+- (IBAction)clickRetunBtn:(id)sender {
+    [self.navigationController popViewControllerAnimated:NO];
+}
 
 
 - (void)didReceiveMemoryWarning {
