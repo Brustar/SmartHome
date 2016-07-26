@@ -9,6 +9,7 @@
 #import "MSGController.h"
 #import "MsgCell.h"
 #import "HttpManager.h"
+#import "MBProgressHUD+NJ.h"
 @interface MSGController ()<HttpDelegate>
 @property(nonatomic,strong) NSMutableArray *msgArr;
 @property(nonatomic,strong) NSMutableArray *timesArr;
@@ -58,17 +59,26 @@
 }
 -(void)httpHandler:(id)responseObject
 {
-    NSDictionary *dic = responseObject[@"messageInfo"];
-    NSArray *msgList = dic[@"messageList"];
-    for(NSDictionary *dicDetail in msgList)
+    if ([responseObject[@"Result"] intValue]==0)
     {
-        NSString *description = dicDetail[@"description"];
-        NSString *createDate = dicDetail[@"createDate"];
-        [self.msgArr addObject:description];
-        [self.timesArr addObject:createDate];
-       
+        NSDictionary *dic = responseObject[@"messageInfo"];
+        NSArray *msgList = dic[@"messageList"];
+        for(NSDictionary *dicDetail in msgList)
+        {
+            NSString *description = dicDetail[@"description"];
+            NSString *createDate = dicDetail[@"createDate"];
+            [self.msgArr addObject:description];
+            [self.timesArr addObject:createDate];
+           
+
+        }
+        
+        [self.tableView reloadData];
+    }else{
+        [MBProgressHUD showError:responseObject[@"Msg"]];
     }
-     [self.tableView reloadData];
+
+    
 
 }
 

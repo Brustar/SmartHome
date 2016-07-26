@@ -7,6 +7,8 @@
 //
 
 #import "PushSettingController.h"
+#import "HttpManager.h"
+#import "MBProgressHUD+NJ.h"
 
 @interface PushSettingController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -17,11 +19,28 @@
 @property (nonatomic,strong) UIButton *selectedBtn;
 - (IBAction)selectPsuhTypeBtn:(UIButton *)sender;
 @property(nonatomic,strong) NSIndexPath *indexPath;
+@property (nonatomic,strong) NSMutableArray *names;
+@property (nonatomic,strong) NSMutableArray *typeNames;
 
 @end
 
 @implementation PushSettingController
-
+-(NSMutableArray *)names
+{
+    if(!_names)
+    {
+        _names = [NSMutableArray array];
+    }
+    return  _names;
+}
+-(NSMutableArray *)typeName
+{
+    if(!_typeNames)
+    {
+        _typeNames = [NSMutableArray array];
+    }
+    return _typeNames;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"推送控制";
@@ -30,8 +49,38 @@
     self.navigationItem.leftBarButtonItem = returnItem;
     self.coverView.hidden = YES;
     self.pushTypeView.hidden = YES;
+ //   [self sendRequest];
+}
+-(void)sendRequest
+{
+    NSString *url = [NSString stringWithFormat:@"%@GetUserNotify.aspx",[IOManager httpAddr]];
+    NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    NSString *userHostID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserHostID"];
+    NSDictionary *dict = @{@"AuthorToken":auothorToken,@"UserHostID":userHostID};
+    HttpManager *http=[HttpManager defaultManager];
+    http.delegate = self;
+    [http sendPost:url param:dict];
     
 }
+-(void)httpHandler:(id)responseObject
+{
+    if ([responseObject[@"Result"] intValue]==0){
+        NSDictionary *dic = responseObject[@"HomeInfo"];
+        NSArray *arr = dic[@"UserInfo"];
+        for(NSDictionary *userDetail in arr)
+        {
+            NSString *userName = userDetail[@"name"];
+            NSString *userType = userDetail[@"typeName"];
+            [self.names addObject:userName];
+            [self.typeNames addObject:userType];
+        }
+        [self.tableView reloadData];
+    }else {
+        [MBProgressHUD showError:responseObject[@"Msg"]];
+
+    }
+}
+
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
         return 4;
