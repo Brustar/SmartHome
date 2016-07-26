@@ -33,12 +33,17 @@
     VolumeManager *volume=[VolumeManager defaultManager];
     [volume start:device];
     
-    
+    if (device.reachbility==NotReachable) {
+        self.volumeLabel.text=@"断网";
+    }else{
+        self.volumeLabel.text=@"正常";
+    }
     //开启网络状况的监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name: kReachabilityChangedNotification object: nil];
     self.hostReach = [Reachability reachabilityWithHostname:@"www.apple.com"];
     [self.hostReach startNotifier];  //开始监听,会启动一个run loop
     [self updateInterfaceWithReachability: self.hostReach];
+    
     NSURL *url=[NSURL URLWithString:@"http://e-cloudcn.com/img/cj_kt.jpg"];
     [self.imagev setImageWithURL:url];
 

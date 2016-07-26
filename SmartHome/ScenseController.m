@@ -9,6 +9,9 @@
 #import "ScenseController.h"
 #import "ScenseCell.h"
 #import "ScenseSplitViewController.h"
+#import <Reachability/Reachability.h>
+#import "SocketManager.h"
+
 @interface ScenseController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *addSceseBtn;
@@ -24,6 +27,53 @@
     
     self.scenes=[NSArray arrayWithObjects:@"清晨" ,@"睡眠" ,@"约会" ,@"用餐" ,@"派对" ,@"影院" ,@"欢迎" ,@"离家" ,nil];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    //开启网络状况的监听
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityUpdate:) name: kReachabilityChangedNotification object: nil];
+    Reachability *hostReach = [Reachability reachabilityWithHostname:@"www.apple.com"];
+    [hostReach startNotifier];  //开始监听,会启动一个run loop
+    [self updateInterfaceWithReachability: hostReach];
+}
+
+//监听到网络状态改变
+- (void) reachabilityUpdate: (NSNotification* )note
+{
+    Reachability* curReach = [note object];
+    NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
+    [self updateInterfaceWithReachability: curReach];
+}
+
+
+//处理连接改变后的情况
+- (void) updateInterfaceWithReachability: (Reachability*) curReach
+{
+    //对连接改变做出响应的处理动作。
+    NetworkStatus status = [curReach currentReachabilityStatus];
+    SocketManager *sock=[SocketManager defaultManager];
+    if(status == ReachableViaWWAN)
+    {
+        if (sock.netMode==outDoor) {
+            return;
+        }
+        NSLog(@"外出模式");
+        //connect cloud
+        NSUserDefaults *userdefault=[NSUserDefaults standardUserDefaults];
+        [sock initTcp:[userdefault objectForKey:@"subIP"] port:[[userdefault objectForKey:@"subPort"] intValue] mode:outDoor delegate:self];
+    }
+    else if(status == ReachableViaWiFi)
+    {
+        if (sock.netMode==atHome) {
+            NSLog(@"在家模式");
+            return;
+        }else if (sock.netMode==outDoor){
+            NSLog(@"外出模式");
+        }
+        //connect master
+        [sock connectUDP:UDP_PORT];
+    }else{
+        NSLog(@"离线模式");
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -70,7 +120,10 @@
 }
 
 
-
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
+}
 
 
 /*
