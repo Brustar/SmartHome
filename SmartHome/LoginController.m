@@ -68,6 +68,7 @@
     {
         type = 2;
     }
+
     NSString *hostID = [[NSUserDefaults standardUserDefaults] objectForKey:@"HostID"];
     NSDictionary *dict = @{@"Account":self.user.text,@"Type":[NSNumber numberWithInt:type],@"Password":[self.pwd.text md5],@"HostID":hostID};
     [[NSUserDefaults standardUserDefaults] setObject:self.user.text forKey:@"Account"];
@@ -81,12 +82,17 @@
 {
 
     if ([responseObject[@"Result"] intValue]==0) {
-        [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
-        [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"UserHostID"] forKey:@"UserHostID"];
+        [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
+        [IOManager writeUserdefault:responseObject[@"masterID"] forKey:@"masterID"];
+        [IOManager writeUserdefault:responseObject[@"UserID"] forKey:@"UserID"];
+        //连接socket
+        [[SocketManager defaultManager] connectAfterLogined];
+        //更新配置
+        [[DeviceInfo defaultManager] initConfig];
+
         
         ECloudTabBarController *ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ECloudTabBarController"];
         [self.navigationController pushViewController:ecloudVC animated:YES];
-        
     }
     [MBProgressHUD showError:responseObject[@"Msg"]];
 }

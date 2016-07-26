@@ -93,7 +93,6 @@
     
         
     //发送注册请求
-   
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     if(self.MasterID == nil)
     {
@@ -115,16 +114,11 @@
 {
     if([responseObject[@"Result"] intValue] == 0)
     {
-        
-        [[NSUserDefaults standardUserDefaults] setObject:self.userName.text forKey:@"userName"];
-        [[NSUserDefaults standardUserDefaults] setObject:self.passWord.text forKey:@"password"];
-        [[NSUserDefaults standardUserDefaults] setObject:self.phoneNumber.text forKey:@"UserTellNumber"];
-        [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"UserID"] forKey:@"UserID"];
-        [IOManager writeUserdefault:self.MasterID forkey:@"HostID"];
+        [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
+        [IOManager writeUserdefault:responseObject[@"UserID"] forKey:@"UserID"];
+        [IOManager writeUserdefault:self.MasterID forKey:@"HostID"];
         self.coverView.hidden = NO;
         self.regSuccessView.hidden = NO;
-        
-       
     }else{
         [MBProgressHUD showError:responseObject[@"Msg"]];
         

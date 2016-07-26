@@ -67,7 +67,7 @@
         }
         //connect master
         NSUserDefaults *userdefault=[NSUserDefaults standardUserDefaults];
-        [sock initTcp:[userdefault objectForKey:@"tcpServer"] port:[[userdefault objectForKey:@"tcpPort"] intValue] mode:atHome delegate:self];
+        [sock initTcp:[userdefault objectForKey:@"subIP"] port:[[userdefault objectForKey:@"subPort"] intValue] mode:atHome delegate:self];
         NSLog(@"外出模式");
     }
     else if(status == ReachableViaWiFi)
@@ -182,7 +182,7 @@
 {
     if([responseObject[@"Result"] intValue] == 0)
     {
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"token"];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"AuthorToken"];
     }
     [MBProgressHUD showSuccess:responseObject[@"Msg"]];
 }
@@ -197,14 +197,41 @@
 - (IBAction)homekit:(id)sender {
     HMHomeManager *homeManager = [[HMHomeManager alloc] init];
     homeManager.delegate = self;
+    NSLog(@"home:%lu",(unsigned long)homeManager.homes.count);
+    /*
+    [homeManager addHomeWithName:@"家庭 of Yeals"
+                    completionHandler:^(HMHome *home, NSError *error) {
+                        if (error != nil) {
+                            // Failed to add a home
+                            NSLog(@"error:%@",error);
+                        } else {
+                            // Successfully added a home
+                            NSLog(@"add home.");
+                            NSString *roomName = @"Office";
+                            [home addRoomWithName:roomName completionHandler:^(HMRoom
+                                                                               *room, NSError *error) {
+                                if (error != nil) {
+                                    // Failed to add a room to a home
+                                } else {
+                                    // Successfully added a room to a home
+                                    NSLog(@"add room.");
+                                } }];
+                        } }];
+    
     HMAccessoryBrowser *accessoryBrowser = [[HMAccessoryBrowser alloc] init];
     accessoryBrowser.delegate = self;
     [accessoryBrowser startSearchingForNewAccessories];
+     */
 }
 
 - (void)accessoryBrowser:(HMAccessoryBrowser *)browser didFindNewAccessory:(HMAccessory *)accessory
 {
-    NSLog(@"found one");
+    NSLog(@"found one.");
+}
+
+- (void)homeManagerDidUpdateHomes:(HMHomeManager *)manager
+{
+    NSLog(@"update home.%ld",[manager.homes count]);
 }
 
 - (IBAction)http:(id)sender
@@ -226,17 +253,27 @@
     SocketManager *sock=[SocketManager defaultManager];
     NSUserDefaults *userdefault=[NSUserDefaults standardUserDefaults];
     
-    [sock initTcp:[userdefault objectForKey:@"tcpServer"] port:[[userdefault objectForKey:@"tcpPort"] intValue] mode:atHome delegate:self];
+    [sock initTcp:[userdefault objectForKey:@"subIP"] port:[[userdefault objectForKey:@"subPort"] intValue] mode:atHome delegate:self];
     //[sock initTcp:[IOManager tcpAddr] port:[IOManager tcpPort] mode:outDoor delegate:self];
 }
 
 -(IBAction)sendMsg:(id)sender
 {
     //NSString *cmd=@"EC00000000FF0000FFEA";
-    NSString *cmd=@"EC060101000000000000EA";
+    NSString *cmd=@"EC81010100000000000080EA";
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:[PackManager dataFormHexString:cmd] withTimeout:1 tag:1];
     [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1];
+    
+    //self.timer =  [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(myLog:) userInfo:nil repeats:YES];
+}
+
+-(IBAction)sendAuth:(id)sender
+{
+    NSString *cmd=@"ECFE010100000000000000EA";
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:[PackManager dataFormHexString:cmd] withTimeout:1 tag:2];
+    [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:2];
     
     //self.timer =  [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(myLog:) userInfo:nil repeats:YES];
 }
@@ -251,6 +288,15 @@
 -(void)recv:(NSData *)data withTag:(long)tag
 {
     NSLog(@"data:%@,tag:%ld",data,tag);
+    SocketManager *sock=[SocketManager defaultManager];
+    if (tag==1) {
+        [sock handleUDP:data];
+    }
+    
+    if (tag==2) {
+        
+    }
+    
 }
 
 -(IBAction)disconnect:(id)sender

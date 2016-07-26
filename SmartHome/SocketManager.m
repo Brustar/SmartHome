@@ -52,8 +52,8 @@
 -(void)connectUDP:(int)port
 {
     NSError *bindError = nil;
-    AsyncUdpSocket *udpSocket=[[AsyncUdpSocket alloc]initWithDelegate:self];
-    [udpSocket bindToPort:40000 error:&bindError];
+    AsyncUdpSocket *udpSocket=[[AsyncUdpSocket alloc] initWithDelegate:self];
+    [udpSocket bindToPort:port error:&bindError];
     
     if (bindError) {
         NSLog(@"bindError = %@",bindError);
@@ -66,8 +66,8 @@
 {
     self.socketHost = addr;
     self.socketPort = port;
-    self.delegate=delegate;
-    self.netMode=mode;
+    self.delegate = delegate;
+    self.netMode = mode;
     // 在连接前先进行手动断开
     [self cutOffSocket];
     
@@ -93,7 +93,7 @@
     DeviceInfo *device=[DeviceInfo defaultManager];
     
     if (device.reachbility == ReachableViaWiFi) {
-        [self connectUDP:40000];
+        [self connectUDP:UDP_PORT];
     }else if (device.reachbility == ReachableViaWWAN){
         [self connectTcp];
     }else{
@@ -103,19 +103,19 @@
 
 - (void) handleUDP:(NSData *)data
 {
-    if ([PackManager checkProtocol:data cmd:0x80]) {
+    if ([PackManager checkProtocol:data cmd:0x80] || [PackManager checkProtocol:data cmd:0x81]) {
         //Proto proto=protocolFromData(data);
 
-        NSData *masterID=[data subdataWithRange:NSMakeRange(3, 4)];
-        NSData *ip=[data subdataWithRange:NSMakeRange(8, 4)];
-        NSData *port=[data subdataWithRange:NSMakeRange(12, 2)];
+        NSData *masterID=[data subdataWithRange:NSMakeRange(2, 2)];
+        NSData *ip=[data subdataWithRange:NSMakeRange(4, 4)];
+        NSData *port=[data subdataWithRange:NSMakeRange(8, 2)];
         
         
         DeviceInfo *info=[DeviceInfo defaultManager];
         info.masterID=(long)[PackManager NSDataToUInt:masterID];
         info.masterIP=[PackManager NSDataToIP:ip];
         info.masterPort=(int)[PackManager NSDataToUInt:port];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:[PackManager NSDataToUInt:masterID]] forKey:@"masterID"];
+        [IOManager writeUserdefault:[NSNumber numberWithLong:[PackManager NSDataToUInt:masterID]] forKey:@"masterID"];
         [self initTcp:[PackManager NSDataToIP:ip] port:(int)[PackManager NSDataToUInt:port] mode:atHome delegate:nil];
     }else{
         [self connectTcp];
@@ -128,8 +128,8 @@
         NSData *ip=[data subdataWithRange:NSMakeRange(8, 4)];
         NSData *port=[data subdataWithRange:NSMakeRange(12, 2)];
         
-        [[NSUserDefaults standardUserDefaults] setObject:[PackManager NSDataToIP:ip] forKey:@"subIP"];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:[PackManager NSDataToUInt:port]] forKey:@"subPort"];
+        [IOManager writeUserdefault:[PackManager NSDataToIP:ip] forKey:@"subIP"];
+        [IOManager writeUserdefault:[NSNumber numberWithLong:[PackManager NSDataToUInt:port]] forKey:@"subPort"];
         [self initTcp:[PackManager NSDataToIP:ip] port:(int)[PackManager NSDataToUInt:port] mode:outDoor delegate:nil];
     }
 }

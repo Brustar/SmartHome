@@ -116,7 +116,7 @@
     NSAssert(ret,@"删除文件失败");
 }
 
-+ (void) writeUserdefault:(id)object forkey:(NSString *)key
++ (void) writeUserdefault:(id)object forKey:(NSString *)key
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:object forKey:key];
