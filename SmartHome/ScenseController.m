@@ -22,6 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.addSceseBtn.layer.cornerRadius = self.addSceseBtn.bounds.size.width / 2.0;
     self.addSceseBtn.layer.masksToBounds = YES;
     

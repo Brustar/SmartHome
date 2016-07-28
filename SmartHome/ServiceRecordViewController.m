@@ -77,17 +77,22 @@
 }
 -(void)httpHandler:(id)responseObject
 {
-    NSDictionary *dic = responseObject[@"messageInfo"];
-    NSArray *msgList = dic[@"messageList"];
-    for(NSDictionary *dicDetail in msgList)
+    if([responseObject[@"Result"] intValue]==0)
     {
-        NSString *description = dicDetail[@"description"];
-        NSString *createDate = dicDetail[@"createDate"];
-        [self.recoreds addObject:description];
-        [self.times addObject:createDate];
+        NSDictionary *dic = responseObject[@"messageInfo"];
+        NSArray *msgList = dic[@"messageList"];
+        for(NSDictionary *dicDetail in msgList)
+        {
+            NSString *description = dicDetail[@"description"];
+            NSString *createDate = dicDetail[@"createDate"];
+            [self.recoreds addObject:description];
+            [self.times addObject:createDate];
+        }
+        [self.tableView reloadData];
+
+    }else{
+        [MBProgressHUD showError:responseObject[@"Msg"]];
     }
-    [self.tableView reloadData];
-  
 }
 
 - (void)didReceiveMemoryWarning {

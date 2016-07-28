@@ -84,7 +84,7 @@
     if ([responseObject[@"Result"] intValue]==0) {
         [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
         [IOManager writeUserdefault:responseObject[@"masterID"] forKey:@"masterID"];
-        [IOManager writeUserdefault:responseObject[@"UserID"] forKey:@"UserID"];
+        [IOManager writeUserdefault:responseObject[@"UserHostID"] forKey:@"UserHostID"];
         //连接socket
         [[SocketManager defaultManager] connectAfterLogined];
         //更新配置
@@ -92,7 +92,9 @@
 
         
         ECloudTabBarController *ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ECloudTabBarController"];
-        [self.navigationController pushViewController:ecloudVC animated:YES];
+        [self presentViewController:ecloudVC animated:YES completion:nil];
+           
+    
     }
     [MBProgressHUD showError:responseObject[@"Msg"]];
 }
@@ -182,12 +184,7 @@
     self.registerView.hidden = YES;
 }
 
-//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    RegisterPhoneNumController *reg = segue.destinationViewController;
-//    reg.masterStr = self.masterId;
-//    reg.suerTypeStr = self.role;
-//}
+
 - (void)readerDidCancel:(QRCodeReaderViewController *)reader
 {
     [self dismissViewControllerAnimated:YES completion:NULL];

@@ -10,6 +10,7 @@
 #import "areaSettingCell.h"
 #import "IOManager.h"
 #import "HttpManager.h"
+#import "MBProgressHUD+NJ.h"
 @interface AccessSettingController ()<UITableViewDelegate,UITableViewDataSource,HttpDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *userTableView;
 @property (nonatomic,strong) NSMutableArray *userArr;
@@ -65,26 +66,32 @@
 {
     NSString *url = [NSString stringWithFormat:@"%@GetAllUserInfo.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSString *userID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserID"];
-     NSDictionary *dict = @{@"AuthorToken":auothorToken,@"UserID":userID};
+    NSString *userHostID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserHostID"];
+     NSDictionary *dict = @{@"AuthorToken":auothorToken,@"UserHostID":userHostID};
     HttpManager *http=[HttpManager defaultManager];
     http.delegate = self;
-    http.tag = 1;
+   // http.tag = 1;
     [http sendPost:url param:dict];
 
 }
--(void)httpHandler:(id)responseObject tag:(int)tag
+-(void)httpHandler:(id)responseObject
 {
-    NSDictionary *dic = responseObject[@"HomeInfo"];
-    NSArray *arr = dic[@"UserInfo"];
-    for(NSDictionary *userDetail in arr)
+    if([responseObject[@"Result"] intValue]==0)
     {
-        NSString *userName = userDetail[@"UserName"];
-        NSString *userType = userDetail[@"UserType"];
-        [self.userArr addObject:userName];
-        [self.managerType addObject:userType];
+        NSDictionary *dic = responseObject[@"HomeInfo"];
+        NSArray *arr = dic[@"UserInfo"];
+        for(NSDictionary *userDetail in arr)
+        {
+            NSString *userName = userDetail[@"UserName"];
+            NSString *userType = userDetail[@"UserType"];
+            [self.userArr addObject:userName];
+            [self.managerType addObject:userType];
+        }
+        [self.userTableView reloadData];
+    }else{
+        [MBProgressHUD showError:responseObject[@"Msg"]];
     }
-    [self.userTableView reloadData];
+
 }
 #pragma mark - UITableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
