@@ -11,7 +11,7 @@
 #import "Light.h"
 #import <Reachability/Reachability.h> 
 
-@interface IBeaconController : UIViewController<HMHomeManagerDelegate,HMAccessoryBrowserDelegate,TcpRecvDelegate>
+@interface IBeaconController : UIViewController<HMHomeManagerDelegate, HMHomeDelegate, HMAccessoryDelegate,TcpRecvDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imagev;
 @property (strong, nonatomic) IBOutlet UILabel *myLabel;
@@ -20,5 +20,8 @@
 @property(nonatomic,strong) NSURLSessionDownloadTask *task;
 @property (nonatomic, retain) NSTimer *timer;
 @property(nonatomic,strong) Reachability *hostReach;
+
+@property (nonatomic, strong) HMHomeManager *homeManager;
+@property (nonatomic, strong) HMHome *primaryHome;
 
 @end

@@ -7,8 +7,6 @@
 //
 #import "AsyncSocket.h"
 
-#define UDP_PORT 40000
-
 enum{
     SocketOfflineByServer,// 服务器掉线，默认为0
     SocketOfflineByUser,  // 用户主动cut

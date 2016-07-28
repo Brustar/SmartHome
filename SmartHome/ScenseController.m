@@ -69,7 +69,7 @@
             NSLog(@"外出模式");
         }
         //connect master
-        [sock connectUDP:UDP_PORT];
+        [sock connectUDP:[IOManager udpPort]];
     }else{
         NSLog(@"离线模式");
     }

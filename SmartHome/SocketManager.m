@@ -93,7 +93,7 @@
     DeviceInfo *device=[DeviceInfo defaultManager];
     
     if (device.reachbility == ReachableViaWiFi) {
-        [self connectUDP:UDP_PORT];
+        [self connectUDP:[IOManager udpPort]];
     }else if (device.reachbility == ReachableViaWWAN){
         [self connectTcp];
     }else{

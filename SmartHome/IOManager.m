@@ -60,6 +60,13 @@
     return [dic[@"tcpPort"] intValue];
 }
 
++ (int) udpPort
+{
+    NSString *path=[[NSBundle mainBundle] pathForResource:@"netconfig" ofType:@"plist"];
+    NSDictionary *dic = [[NSDictionary alloc] initWithContentsOfFile:path];
+    return [dic[@"udpPort"] intValue];
+}
+
 + (void) copyFile:(NSString *)file to:(NSString *)newFile
 {
     NSString *path = [[NSBundle mainBundle] pathForResource:file ofType:@""];

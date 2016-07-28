@@ -2,8 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>udpPort</key>
+	<integer>40000</integer>
 	<key>tcpPort</key>
-	<string>8000</string>
+	<integer>8000</integer>
 	<key>tcpServer</key>
 	<string>192.168.199.219</string>
 	<key>httpPort</key>

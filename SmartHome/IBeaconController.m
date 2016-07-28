@@ -200,9 +200,8 @@
 }
 
 - (IBAction)homekit:(id)sender {
-    HMHomeManager *homeManager = [[HMHomeManager alloc] init];
-    homeManager.delegate = self;
-    NSLog(@"home:%lu",(unsigned long)homeManager.homes.count);
+    self.homeManager = [[HMHomeManager alloc] init];
+    self.homeManager.delegate = self;
     /*
     [homeManager addHomeWithName:@"家庭 of Yeals"
                     completionHandler:^(HMHome *home, NSError *error) {
@@ -236,7 +235,17 @@
 
 - (void)homeManagerDidUpdateHomes:(HMHomeManager *)manager
 {
-    NSLog(@"update home.%ld",[manager.homes count]);
+    if (manager.primaryHome) {
+        self.primaryHome = manager.primaryHome;
+        self.primaryHome.delegate = self;
+        
+        for (HMAccessory *accessory in self.homeManager.primaryHome.accessories) {
+            NSLog(@"home:%@",accessory.name);
+            //[accessories addObject:accessory];
+            //accessory.delegate = self;
+            //[self.tableView reloadData];
+        }
+    }
 }
 
 - (IBAction)http:(id)sender
