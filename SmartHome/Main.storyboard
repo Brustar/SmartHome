@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="mdZ-A8-8hK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2lV-M1-cea">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -4594,6 +4594,12 @@ layer.masksToBoundslayer.masksToBounds
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="device:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j8A-wT-ZZd">
+                                <rect key="frame" x="265" y="178" width="176" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PsO-qq-pN2">
                                 <rect key="frame" x="25" y="157" width="73" height="30"/>
                                 <state key="normal" title="play music"/>
@@ -4730,11 +4736,19 @@ layer.masksToBoundslayer.masksToBounds
                                 <rect key="frame" x="164" y="178" width="34" height="63"/>
                                 <state key="normal" title="login"/>
                             </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="udo-sr-pK1">
+                                <rect key="frame" x="457" y="173" width="51" height="31"/>
+                                <connections>
+                                    <action selector="changeLockState:" destination="mdZ-A8-8hK" eventType="valueChanged" id="moH-bD-X64"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="deviceLabel" destination="j8A-wT-ZZd" id="5VM-cr-NUg"/>
                         <outlet property="myLabel" destination="tcO-hr-fB2" id="x2o-bs-UsG"/>
+                        <outlet property="powerSwitch" destination="udo-sr-pK1" id="tnh-Kw-iFo"/>
                         <outlet property="volumeLabel" destination="14e-S8-kZe" id="kpw-M8-fOw"/>
                     </connections>
                 </viewController>
@@ -5017,7 +5031,7 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rjy-2u-9IW"/>
-        <segue reference="bKA-jZ-hQY"/>
+        <segue reference="fHn-Cm-7Q7"/>
+        <segue reference="dd4-O7-1s4"/>
     </inferredMetricsTieBreakers>
 </document>

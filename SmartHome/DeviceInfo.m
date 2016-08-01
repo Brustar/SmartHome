@@ -34,6 +34,9 @@
 
 -(void)initConfig
 {
+    //缓存协议
+    [[ProtocolManager defaultManager] fetchAll];
+    [[ProtocolManager defaultManager] trace];
     //先判断版本号
     
     //更新设备，房间，场景表，写入sqlite
@@ -89,25 +92,26 @@
 -(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID
 {
     Proto proto=createProto();
+    ProtocolManager *manager=[ProtocolManager defaultManager];
     proto.cmd=0x03;
     proto.action.state=action;
-    ProtocolManager *manager=[ProtocolManager defaultManager];
-    proto.deviceID=[[manager queryProtocol:deviceID] intValue];
-    proto.deviceType=[manager queryAction:deviceID];
-    proto.masterID=self.masterID;
+    
+    proto.deviceID=CFSwapInt16BigToHost([manager queryDeviceHexIDs:deviceID]);
+    proto.deviceType=[[manager queryDeviceTypes:deviceID] intValue];
+    proto.masterID=CFSwapInt16BigToHost(0x22b8);//self.masterID;
     return dataFromProtocol(proto);
 }
 
 -(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID value:(uint8_t)value
 {
     Proto proto=createProto();
+    ProtocolManager *manager=[ProtocolManager defaultManager];
     proto.cmd=0x03;
     proto.action.state=action;
     proto.action.RValue=value;
-    ProtocolManager *manager=[ProtocolManager defaultManager];
-    proto.deviceID=[[manager queryProtocol:deviceID] intValue];
-    proto.deviceType=[manager queryAction:deviceID];
-    proto.masterID=self.masterID;
+    proto.deviceID=CFSwapInt16BigToHost([[manager queryDeviceTypes:deviceID] intValue]);
+    proto.deviceType=[manager queryDeviceHexIDs:deviceID];
+    proto.masterID=CFSwapInt16BigToHost(self.masterID);
     return dataFromProtocol(proto);
 }
 

@@ -18,6 +18,7 @@
 #import "IbeaconManager.h"
 #import "VolumeManager.h"
 #import "AudioManager.h"
+#import "AppDelegate.h"
 
 @implementation IBeaconController
 
@@ -202,35 +203,6 @@
 - (IBAction)homekit:(id)sender {
     self.homeManager = [[HMHomeManager alloc] init];
     self.homeManager.delegate = self;
-    /*
-    [homeManager addHomeWithName:@"家庭 of Yeals"
-                    completionHandler:^(HMHome *home, NSError *error) {
-                        if (error != nil) {
-                            // Failed to add a home
-                            NSLog(@"error:%@",error);
-                        } else {
-                            // Successfully added a home
-                            NSLog(@"add home.");
-                            NSString *roomName = @"Office";
-                            [home addRoomWithName:roomName completionHandler:^(HMRoom
-                                                                               *room, NSError *error) {
-                                if (error != nil) {
-                                    // Failed to add a room to a home
-                                } else {
-                                    // Successfully added a room to a home
-                                    NSLog(@"add room.");
-                                } }];
-                        } }];
-    
-    HMAccessoryBrowser *accessoryBrowser = [[HMAccessoryBrowser alloc] init];
-    accessoryBrowser.delegate = self;
-    [accessoryBrowser startSearchingForNewAccessories];
-     */
-}
-
-- (void)accessoryBrowser:(HMAccessoryBrowser *)browser didFindNewAccessory:(HMAccessory *)accessory
-{
-    NSLog(@"found one.");
 }
 
 - (void)homeManagerDidUpdateHomes:(HMHomeManager *)manager
@@ -240,11 +212,32 @@
         self.primaryHome.delegate = self;
         
         for (HMAccessory *accessory in self.homeManager.primaryHome.accessories) {
-            NSLog(@"home:%@",accessory.name);
-            //[accessories addObject:accessory];
-            //accessory.delegate = self;
-            //[self.tableView reloadData];
+            for (HMService *service in accessory.services) {
+                if ([service.serviceType isEqualToString:HMServiceTypeOutlet]) {
+                    self.deviceLabel.text=service.name;
+                    for (HMCharacteristic *characterstic in service.characteristics) {
+                        if ([characterstic.characteristicType isEqualToString:HMCharacteristicTypePowerState]) {
+                            self.powerSwitch.on=[characterstic.value boolValue];
+                            self.characteristic=characterstic;
+                        }
+                    }
+                }
+            }
         }
+    }
+}
+
+-(IBAction)changeLockState:(id)sender{
+    if ([self.characteristic.characteristicType isEqualToString:HMCharacteristicTypeTargetLockMechanismState]  || [self.characteristic.characteristicType isEqualToString:HMCharacteristicTypePowerState]) {
+        
+        BOOL changedLockState = ![self.characteristic.value boolValue];
+        
+        [self.characteristic writeValue:[NSNumber numberWithBool:changedLockState] completionHandler:^(NSError *error){
+            
+            if(error != nil){
+                NSLog(@"error in writing characterstic: %@",error);
+            }
+        }];
     }
 }
 
@@ -334,7 +327,7 @@
     pro.cmd=1;
     pro.deviceID=2;
     pro.deviceType=3;
-    pro.masterID=4;
+    pro.masterID=0x4433;
     pro.action.state=5;
     pro.action.RValue=1;
     NSLog(@"pro:%@",dataFromProtocol(pro));
@@ -342,6 +335,13 @@
     ProtocolManager *protos = [ProtocolManager defaultManager];
     [protos fetchAll];
     [protos trace];
+    
+    
+    int tmp1 = 1;
+    int tmp2 = CFSwapInt32BigToHost(tmp1);
+    NSData* data1 = [NSData dataWithBytes:&tmp1 length:sizeof(tmp1)];
+    NSData* data2 = [NSData dataWithBytes:&tmp2 length:sizeof(tmp2)];
+    NSLog(@"%@ %@", data1, data2);
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context

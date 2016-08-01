@@ -8,17 +8,20 @@
 
 @interface ProtocolManager : NSObject
 
-@property (strong, nonatomic) NSMutableDictionary* Protocols;
-@property (strong, nonatomic) NSMutableDictionary* actions;
+@property (strong, nonatomic) NSMutableDictionary* deviceTypes;
+@property (strong, nonatomic) NSMutableDictionary* deviceStates;
+@property (strong, nonatomic) NSMutableDictionary* deviceHexIDs;
 
 + (id) defaultManager;
 
 - (void) fetchAll;
 
--(NSString*) queryProtocol:(NSString*)Key;
--(void) addProtocol:(NSString*)device key:(NSString*) key;
--(Byte) queryAction:(NSString*)Key;
--(void) addAction:(NSString*)action Key:(NSString*) Key;
+-(NSString*) queryDeviceTypes:(NSString*)Key;
+-(void) addDeviceTypes:(NSString*)device key:(NSString*) key;
+-(NSString *) queryDeviceStates:(NSString*)Key;
+-(void) addDeviceStates:(NSString*)action Key:(NSString*) Key;
+-(Byte) queryDeviceHexIDs:(NSString*)Key;
+-(void) addDeviceHexIDs:(NSString*)action Key:(NSString*) Key;
 -(void) trace;
 
 @end

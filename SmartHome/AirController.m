@@ -10,6 +10,9 @@
 #import "SceneManager.h"
 #import "Aircon.h"
 #import "RulerView.h"
+#import "SocketManager.h"
+#import "ProtocolManager.h"
+#import "PackManager.h"
 
 @interface AirController ()<RulerViewDatasource, RulerViewDelegate,UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet RulerView *thermometerView;
@@ -22,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.params=@[@[@"制冷",@"制热",@"抽湿",@"自动"],@[@"高风",@"中风",@"低风"],@[@"向上",@"向下"],@[@"0.5H",@"1H",@"2H",@"3H"]];
+    self.params=@[@[@"制冷",@"制热",@"抽湿",@"自动"],@[@"向上",@"向下"],@[@"高风",@"中风",@"低风"],@[@"0.5H",@"1H",@"2H",@"3H"]];
     self.paramView.scrollEnabled=NO;
     if ([self.sceneid intValue]>0) {
         
@@ -43,6 +46,12 @@
     self.thermometerView.delegate = self;
     
     [self.thermometerView updateCurrentValue:24];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock initTcp:[IOManager tcpAddr] port:[IOManager tcpPort] mode:outDoor delegate:nil];
+    
+    NSString *cmd=@"ECFE22B800000000000000EA";
+    [sock.socket writeData:[PackManager dataFormHexString:cmd] withTimeout:1 tag:1];
+    [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1];
 }
 
 -(IBAction)save:(id)sender
@@ -142,18 +151,41 @@
     
     if (self.currentButton == mode) {
         self.currentMode = self.currentIndex+1;
+        self.actKey=@"mode";
     }
     if (self.currentButton == level) {
         self.currentLevel = self.currentIndex+1;
+        self.actKey=@"speed";
     }
     if (self.currentButton == direction) {
         self.currentDirection = self.currentIndex+1;
+        self.actKey=@"direction";
     }
     if (self.currentButton == timing) {
         self.currentTiming = self.currentIndex+1;
+        self.actKey=@"timing";
     }
+    NSData *data=[self createCmd];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+    [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1];
     
     [self save:nil];
+}
+
+-(NSData *)createCmd
+{
+    NSString *key=[NSString stringWithFormat:@"%@_%@",self.actKey,self.deviceid];
+    ProtocolManager *manager=[ProtocolManager defaultManager];
+    NSArray *cmds=[[manager queryDeviceStates:key] componentsSeparatedByString:@","];
+    
+    NSData* data = [PackManager dataFormHexString:[cmds objectAtIndex:self.currentIndex]];
+    Byte* bytes = (Byte*)([data bytes]);
+    
+    uint8_t cmd=bytes[0];
+    
+    return [[DeviceInfo defaultManager] changeMode:cmd
+                                                  deviceID:key];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -5,9 +5,9 @@
 	<key>udpPort</key>
 	<integer>40000</integer>
 	<key>tcpPort</key>
-	<integer>8000</integer>
+	<real>7000</real>
 	<key>tcpServer</key>
-	<string>192.168.199.219</string>
+	<string>192.168.199.216</string>
 	<key>httpPort</key>
 	<integer>8088</integer>
 	<key>httpServer</key>
