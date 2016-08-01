@@ -7,8 +7,6 @@
 //
 #import "AsyncSocket.h"
 
-#define UDP_PORT 40000
-
 enum{
     SocketOfflineByServer,// 服务器掉线，默认为0
     SocketOfflineByUser,  // 用户主动cut
@@ -44,6 +42,7 @@ enum{
 -(void)initTcp:(NSString *)addr port:(int)port mode:(int)mode delegate:(id)delegate;
 - (void) connectAfterLogined;
 -(void)connectUDP:(int)port;
+-(void)connectTcp;
 - (void) handleUDP:(NSData *)data;
 
 @end

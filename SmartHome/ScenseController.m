@@ -74,7 +74,7 @@
 
         }
         //connect master
-        [sock connectUDP:UDP_PORT];
+        [sock connectUDP:[IOManager udpPort]];
     }else{
         [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
 

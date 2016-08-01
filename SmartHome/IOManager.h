@@ -16,6 +16,7 @@
 + (NSString *) httpAddr;
 + (NSString *) tcpAddr;
 + (int) tcpPort;
++ (int) udpPort;
 + (void) copyFile:(NSString *)file to:(NSString *)newFile;
 
 + (void) writeScene:(NSString *)sceneFile string:(NSString *)sceneData;

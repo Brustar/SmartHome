@@ -156,7 +156,7 @@
     }
 }
 
--(void)textFieldDidEndEditing:(UITextField *)textField
+- (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if(![self.passWord.text isMatchedByRegex:@"^(?![^a-z]+$)(?![^A-Z]+$)(?!\\D+$).{8,15}$"])
     {
