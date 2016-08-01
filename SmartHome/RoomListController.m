@@ -15,12 +15,63 @@
 @property (weak, nonatomic) IBOutlet UIButton *repeatBtn;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic,strong) NSArray *hours;
+@property (nonatomic,strong) NSArray *minutes;
+@property (nonatomic,assign) BOOL isForenoon;
+@property (nonatomic,strong) NSArray *noon;
 @end
 
 @implementation RoomListController
 
+-(NSArray *)hours
+{
+    if(!_hours)
+    {
+        NSMutableArray *arr = [NSMutableArray array];
+        for(int i = 0; i< 24; i++)
+        {
+            if(i < 10){
+                [arr addObject:[NSString stringWithFormat:@"0%d",i]];
+            }else{
+                [arr addObject:[NSString stringWithFormat:@"%d",i]];
+            }
+            
+        }
+        _hours = [arr copy];
+    }
+    return _hours;
+}
+-(NSArray *)minutes
+{
+    if(!_minutes)
+    {
+        NSMutableArray *arr = [NSMutableArray array];
+        for(int i = 0; i< 60; i++)
+        {
+            if(i < 10){
+                [arr addObject:[NSString stringWithFormat:@"0%d",i]];
+            }else{
+                [arr addObject:[NSString stringWithFormat:@"%d",i]];
+            }
+
+        }
+        _minutes = [arr copy];
+
+    }
+    return _minutes;
+}
+-(NSArray *)noon{
+    if(!_noon)
+    {
+        _noon = @[@"AM",@"PM"];
+    }
+    return _noon;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.timeView.layer.cornerRadius = 10;
+    self.timeView.layer.masksToBounds = YES;
+
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = [UIView new];
     self.rooms = @[@"客厅",@"主卧",@"书房"];
@@ -60,6 +111,14 @@
     }
 }
 - (IBAction)clickFixTimeBtn:(id)sender {
+    UIButton *btn = (UIButton *)sender;
+    btn.selected = !btn.selected;
+    if(btn.selected)
+    {
+        self.timeView.hidden = YES;
+    }else {
+        self.timeView.hidden =  NO;
+    }
 }
 
 #pragma  mark - UIPickerViewDelegate
@@ -71,27 +130,40 @@
 {
     if(component == 0)
     {
-        return 24;
+        return self.hours.count;
     }else if(component == 1)
     {
-        return 60;
+        return self.minutes.count;
     }else {
         return 2;
     }
 }
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    if(component == 0 || component== 1)
+    if(component == 0 )
     {
-        return [NSString stringWithFormat:@"0%ld",row];
+        return self.hours[row];
+    }else if(component == 1){
+        return self.minutes[row];
     }else {
-        if(row == 0)
-        {
-            return @"上午";
-        }else return @"下午";
+        return self.noon[row];
     }
 }
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    if(component == 0)
+    {
+        int hour = [self.hours[row] intValue];
+        if(hour <12 || hour == 12)
+        {
+            [pickerView selectRow:0 inComponent:2 animated:YES];
+        }else {
+            [pickerView selectRow:1 inComponent:2 animated:YES];
 
+        }
+        
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
