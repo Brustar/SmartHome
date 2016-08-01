@@ -7,10 +7,10 @@
 //
 
 #import "ScenseSplitViewController.h"
-#import "AddScenceController.h"
+#import "RoomListController.h"
 #import "DeviceListController.h"
 
-@interface ScenseSplitViewController () <AddScenceControllerDelegate,UISplitViewControllerDelegate>
+@interface ScenseSplitViewController () <RoomListControllerDelegate,UISplitViewControllerDelegate>
 
 @end
 @implementation ScenseSplitViewController
@@ -24,10 +24,10 @@
    
    
     UINavigationController *roomListNav = [self.childViewControllers firstObject];
-    AddScenceController *addScenceVC = [roomListNav.childViewControllers firstObject];
-    addScenceVC.delegate = self;
+    RoomListController *roomListVC  = [roomListNav.childViewControllers firstObject];
+    roomListVC.delegate = self;
 }
--(void)AddScenceControllerDelegate:(AddScenceController *)scenseCV SelectedRoom:(NSInteger)RoomID
+-(void)RoomListControllerDelegate:(RoomListController *)roomListCV SelectedRoom:(NSInteger)RoomID
 {
     UINavigationController *deviceList = [self.childViewControllers lastObject];
     DeviceListController *deviceVC = [deviceList.childViewControllers firstObject];

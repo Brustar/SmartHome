@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) NSMutableArray *habits;
 @property (nonatomic,strong) NSMutableArray *opens;
+@property (nonatomic,strong) NSMutableArray *recordIDs;
+@property (nonatomic,strong) NSNumber *recordID;
 @end
 
 @implementation SystemSettingViewController
@@ -36,6 +38,14 @@
     }
     return _opens;
 }
+-(NSMutableArray *)recordIDs
+{
+    if(!_recordIDs)
+    {
+        _recordIDs = [NSMutableArray array];
+    }
+    return _recordIDs;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"使用习惯";
@@ -43,8 +53,6 @@
     UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
     self.navigationItem.leftBarButtonItem = returnItem;
 
-    // Do any additional setup after loading the view.
-    //self.titles = @[@"开启向导",@"开启每日提示",@"开启智能过滤",@"全部场景静音"];
     self.tableView.tableFooterView = [UIView new];
     [self sendRequest];
 }
@@ -56,28 +64,40 @@
     NSDictionary *dict = @{@"AuthorToken":auothorToken,@"UserHostID":userHostID};
     HttpManager *http=[HttpManager defaultManager];
     http.delegate = self;
-    // http.tag = 1;
+     http.tag = 1;
     [http sendPost:url param:dict];
     
 }
--(void)httpHandler:(id)responseObject
+-(void)httpHandler:(id)responseObject tag:(int)tag
 {
-    if([responseObject[@"Result"] intValue]==0)
+    if(tag == 1)
     {
-        NSDictionary *dic = responseObject[@"HomeInfo"];
-        NSArray *arr = dic[@"UserInfo"];
-        for(NSDictionary *userDetail in arr)
+        if([responseObject[@"Result"] intValue]==0)
         {
-            NSString *names = userDetail[@"name"];
-            NSString *isOpens = userDetail[@"IsOpen"];
-            [self.habits addObject:names];
-            [self.opens addObject:isOpens];
+            NSDictionary *messageInfo = responseObject[@"messageInfo"];
+            NSArray *listMsg = messageInfo[@"listMessage"];
+            for(NSDictionary *userDetail in listMsg)
+            {
+    
+                [self.habits addObject:userDetail[@"name"]];
+                [self.opens addObject:userDetail[@"isOpen"]];
+                [self.recordIDs addObject:userDetail[@"recordId"]];
+            }
+            [self.tableView reloadData];
+        }else{
+            [MBProgressHUD showError:responseObject[@"Msg"]];
         }
-        [self.tableView reloadData];
-    }else{
-        [MBProgressHUD showError:responseObject[@"Msg"]];
-    }
 
+    }else if(tag == 2 || tag == 3)
+    {
+         if([responseObject[@"Result"] intValue]==0)
+         {
+             [MBProgressHUD showSuccess:@"设置权限成功"];
+         }else{
+             [MBProgressHUD showError:responseObject[@"Msg"]];
+         }
+    }
+    
 }
 
 
@@ -90,15 +110,42 @@
 {
     SystemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.title.text = self.habits[indexPath.row];
-    NSString *str = self.opens[indexPath.row];
-    if([str isEqualToString:@"1"])
+    
+    NSNumber *openNum = self.opens[indexPath.row];
+    if([openNum intValue] == 1)
     {
         cell.turnSwitch.on = YES;
     }else{
         cell.turnSwitch.on = NO;
     }
+    cell.turnSwitch.tag = [self.recordIDs[indexPath.row] integerValue];
+    [cell.turnSwitch addTarget:self action:@selector(changSwithchValue:) forControlEvents:UIControlEventValueChanged];
+    
+    
     return cell;
     
+}
+
+-(void)changSwithchValue:(UISwitch*)sender
+{
+    if(sender.isOn)
+    {
+        [self sendRequsetForChangSwitch:[NSNumber numberWithInt:1] withTag:2 andSwitch:sender];
+    }else{
+        [self sendRequsetForChangSwitch:[NSNumber numberWithInt:2] withTag:3 andSwitch:sender];
+    }
+}
+-(void)sendRequsetForChangSwitch:(NSNumber *)num withTag:(int)tag andSwitch:(UISwitch *)sender
+{
+    NSString *url = [NSString stringWithFormat:@"%@UserHobitSetting.aspx",[IOManager httpAddr]];
+    NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    NSNumber *recordID = [NSNumber numberWithInteger:sender.tag];
+    NSDictionary *dict = @{@"AuthorToken":auothorToken,@"IsOpen":num,@"RecordID":recordID};
+    HttpManager *http=[HttpManager defaultManager];
+    http.delegate = self;
+    http.tag = tag;
+    [http sendPost:url param:dict];
+
 }
 - (IBAction)clickRetunBtn:(id)sender {
     [self.navigationController popViewControllerAnimated:NO];

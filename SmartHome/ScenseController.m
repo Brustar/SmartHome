@@ -15,6 +15,7 @@
 @interface ScenseController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *addSceseBtn;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *netBarBtn;
 
 @end
 
@@ -65,13 +66,18 @@
     {
         if (sock.netMode==atHome) {
             NSLog(@"在家模式");
+            [self.netBarBtn setImage:[UIImage imageNamed:@"wifi"]];
             return;
         }else if (sock.netMode==outDoor){
             NSLog(@"外出模式");
+            [self.netBarBtn setImage:[UIImage imageNamed:@"4g"]];
+
         }
         //connect master
         [sock connectUDP:UDP_PORT];
     }else{
+        [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
+
         NSLog(@"离线模式");
     }
     

@@ -54,30 +54,35 @@
     NSDictionary *dic = @{@"AuthorToken":authorToken,@"UserHostID":userID};
     HttpManager *http=[HttpManager defaultManager];
     http.delegate = self;
+    http.tag = 1;
     [http sendPost:url param:dic];
 
 }
--(void)httpHandler:(id)responseObject
+-(void)httpHandler:(id)responseObject tag:(int)tag
 {
-    if ([responseObject[@"Result"] intValue]==0)
+    if(tag == 1)
     {
-        NSDictionary *dic = responseObject[@"messageInfo"];
-        NSArray *msgList = dic[@"messageList"];
-        for(NSDictionary *dicDetail in msgList)
+        if ([responseObject[@"Result"] intValue]==0)
         {
-            NSString *description = dicDetail[@"description"];
-            NSString *createDate = dicDetail[@"createDate"];
-            [self.msgArr addObject:description];
-            [self.timesArr addObject:createDate];
-           
-
+            NSDictionary *dic = responseObject[@"messageInfo"];
+            NSArray *msgList = dic[@"messageList"];
+            for(NSDictionary *dicDetail in msgList)
+            {
+                NSString *description = dicDetail[@"description"];
+                NSString *createDate = dicDetail[@"createDate"];
+                [self.msgArr addObject:description];
+                [self.timesArr addObject:createDate];
+                
+                
+            }
+            
+            [self.tableView reloadData];
+        }else{
+            [MBProgressHUD showError:responseObject[@"Msg"]];
         }
-        
-        [self.tableView reloadData];
-    }else{
-        [MBProgressHUD showError:responseObject[@"Msg"]];
-    }
 
+    }
+    
     
 
 }

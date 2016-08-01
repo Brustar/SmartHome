@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIView *footerView;
 @property (nonatomic,strong) NSMutableArray *faultArr;
 @property (nonatomic,strong) NSMutableArray *timesArr;
+@property (nonatomic,strong) NSMutableArray *recordIDs;
 - (IBAction)clickCancleBtn:(id)sender;
 - (IBAction)clickSureBtn:(id)sender;
 
@@ -39,46 +40,65 @@
     }
     return _timesArr;
 }
+-(NSMutableArray *)recordIDs{
+    if(!_recordIDs)
+    {
+        _recordIDs = [NSMutableArray array];
+    }
+    return _recordIDs;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.footerView.hidden = YES;
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = self.footerView;
-    [self sendRequest];
     
-}
-
--(void)sendRequest
-{
+    //获取所欲故障信息
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     NSString *userHostID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserHostID"];
-     NSString *url = [NSString stringWithFormat:@"%@GetBreakdownMessage.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@GetBreakdownMessage.aspx",[IOManager httpAddr]];
     NSDictionary *dict = @{@"AuthorToken":auothorToken,@"UserHostID":userHostID};
-    
+    [self sendRequest:url andDict:dict WithTag:1];
+}
+
+-(void)sendRequest:(NSString *)url andDict:(NSDictionary *)dict WithTag:(int)tag
+{
     HttpManager *http=[HttpManager defaultManager];
     http.delegate = self;
+    http.tag = tag;
     [http sendPost:url param:dict];
     
     
 }
--(void)httpHandler:(id)responseObject
+-(void)httpHandler:(id)responseObject tag:(int)tag
 {
-    if([responseObject[@"Result"] intValue]==0)
+    if(tag == 1)
     {
-        NSDictionary *dic = responseObject[@"messageInfo"];
-        NSArray *msgList = dic[@"messageList"];
-        for(NSDictionary *dicDetail in msgList)
+        if([responseObject[@"Result"] intValue]==0)
         {
-            NSString *description = dicDetail[@"description"];
-            NSString *createDate = dicDetail[@"createDate"];
-            [self.faultArr addObject:description];
-            [self.timesArr addObject:createDate];
+            NSDictionary *dic = responseObject[@"messageInfo"];
+            NSArray *msgList = dic[@"messageList"];
+            for(NSDictionary *dicDetail in msgList)
+            {
+                [self.faultArr addObject:dicDetail[@"description"]];
+                [self.timesArr addObject:dicDetail[@"createDate"]];
+                [self.recordIDs addObject:dicDetail[@"id"]];
+            }
+            [self.tableView reloadData];
+        }else{
+            [MBProgressHUD showError:responseObject[@"Msg"]];
         }
-        [self.tableView reloadData];
-    }else{
-        [MBProgressHUD showError:responseObject[@"Msg"]];
+
+    }else if(tag == 2){
+        if([responseObject[@"Result"] intValue]==0)
+        {
+            [MBProgressHUD showSuccess:@"上报成功"];
+        }else {
+            [MBProgressHUD showError:responseObject[@"Msg"]];
+        }
     }
-    
+
+        
     
 
 
@@ -116,10 +136,15 @@
            [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
            UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"发送故障信息" message:@"确定要发送此故障信息吗？" preferredStyle:UIAlertControllerStyleAlert];
            [self presentViewController:alertVC animated:YES completion:nil];
-           UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+           UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                //确定后发送上传故障信息
+               NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+               NSString *url = [NSString stringWithFormat:@"%@UploadBreakdown.aspx",[IOManager httpAddr]];
+               NSString *recordID = self.recordIDs[indexPath.row];
+               NSDictionary *dict = @{@"AuthorToken":auothorToken,@"RecordID":recordID};
+               [self sendRequest:url andDict:dict WithTag:2];
            }];
-           UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+           UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                [alertVC dismissViewControllerAnimated:YES completion:nil];
            }];
            [alertVC addAction:sureAction];

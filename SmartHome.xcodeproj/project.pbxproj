@@ -116,6 +116,8 @@
 		F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB411D00029900AB04BE /* DetailViewController.m */; };
 		F60FDB461D003FD500AB04BE /* CurtainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB441D003FD500AB04BE /* CurtainTableViewCell.m */; };
 		F60FDB471D003FD500AB04BE /* CurtainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F60FDB451D003FD500AB04BE /* CurtainTableViewCell.xib */; };
+		F625A6181D4C8EF700B696E5 /* ProfireListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F625A6171D4C8EF700B696E5 /* ProfireListController.m */; };
+		F625A61B1D4C99EC00B696E5 /* RoomListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F625A61A1D4C99EC00B696E5 /* RoomListController.m */; };
 		F630C35F1D38B4FF008880BB /* AccessSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = F630C35E1D38B4FF008880BB /* AccessSettingController.m */; };
 		F630C3621D38C3E5008880BB /* areaSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F630C3611D38C3E5008880BB /* areaSettingCell.m */; };
 		F6359AFB1CFFBC910035EB31 /* DetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6359AF91CFFBC910035EB31 /* DetailTableViewCell.m */; };
@@ -124,7 +126,6 @@
 		F6359B011CFFC4DC0035EB31 /* ColourTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6359AFF1CFFC4DC0035EB31 /* ColourTableViewCell.xib */; };
 		F635CCB81D43494C0078B148 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F635CCB71D43494C0078B148 /* Main.storyboard */; };
 		F635CCBB1D4356650078B148 /* MyCenterSplitController.m in Sources */ = {isa = PBXBuildFile; fileRef = F635CCBA1D4356650078B148 /* MyCenterSplitController.m */; };
-		F635CCCA1D43591B0078B148 /* CenterListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F635CCC91D43591B0078B148 /* CenterListController.m */; };
 		F63AE0031D11319C00BE17DC /* FMCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F63AE0021D11319C00BE17DC /* FMCollectionViewCell.m */; };
 		F651640D1D3766C900A6F5FA /* MyEnergyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F651640C1D3766C900A6F5FA /* MyEnergyViewController.m */; };
 		F65164101D37672700A6F5FA /* MyEnergyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F651640F1D37672700A6F5FA /* MyEnergyCell.m */; };
@@ -137,7 +138,6 @@
 		F65DB3411D2B5AB2002A815C /* RegisterDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65DB33C1D2B5AB2002A815C /* RegisterDetailController.m */; };
 		F65DB3421D2B5AB2002A815C /* RegisterPhoneNumController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65DB33E1D2B5AB2002A815C /* RegisterPhoneNumController.m */; };
 		F6642A781D41F55E0003D56B /* ScenseSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6642A771D41F55E0003D56B /* ScenseSplitViewController.m */; };
-		F6642A7E1D41FBA00003D56B /* AddScenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6642A7D1D41FBA00003D56B /* AddScenceController.m */; };
 		F6642A811D4220100003D56B /* DeviceListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6642A801D4220100003D56B /* DeviceListController.m */; };
 		F66596DA1D3F12FB0082716A /* EnergyOfDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = F66596D91D3F12FB0082716A /* EnergyOfDeviceController.m */; };
 		F66596DD1D3F1DAD0082716A /* EnegryOfDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F66596DC1D3F1DAD0082716A /* EnegryOfDeviceCell.m */; };
@@ -479,6 +479,10 @@
 		F60FDB431D003FD500AB04BE /* CurtainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurtainTableViewCell.h; sourceTree = "<group>"; };
 		F60FDB441D003FD500AB04BE /* CurtainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurtainTableViewCell.m; sourceTree = "<group>"; };
 		F60FDB451D003FD500AB04BE /* CurtainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CurtainTableViewCell.xib; sourceTree = "<group>"; };
+		F625A6161D4C8EF700B696E5 /* ProfireListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfireListController.h; sourceTree = "<group>"; };
+		F625A6171D4C8EF700B696E5 /* ProfireListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfireListController.m; sourceTree = "<group>"; };
+		F625A6191D4C99EC00B696E5 /* RoomListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomListController.h; sourceTree = "<group>"; };
+		F625A61A1D4C99EC00B696E5 /* RoomListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomListController.m; sourceTree = "<group>"; };
 		F630C35D1D38B4FF008880BB /* AccessSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccessSettingController.h; sourceTree = "<group>"; };
 		F630C35E1D38B4FF008880BB /* AccessSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccessSettingController.m; sourceTree = "<group>"; };
 		F630C3601D38C3E5008880BB /* areaSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = areaSettingCell.h; sourceTree = "<group>"; };
@@ -492,8 +496,6 @@
 		F635CCB71D43494C0078B148 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		F635CCB91D4356650078B148 /* MyCenterSplitController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCenterSplitController.h; sourceTree = "<group>"; };
 		F635CCBA1D4356650078B148 /* MyCenterSplitController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCenterSplitController.m; sourceTree = "<group>"; };
-		F635CCC81D43591B0078B148 /* CenterListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterListController.h; sourceTree = "<group>"; };
-		F635CCC91D43591B0078B148 /* CenterListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterListController.m; sourceTree = "<group>"; };
 		F63AE0011D11319C00BE17DC /* FMCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCollectionViewCell.h; sourceTree = "<group>"; };
 		F63AE0021D11319C00BE17DC /* FMCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCollectionViewCell.m; sourceTree = "<group>"; };
 		F651640B1D3766C900A6F5FA /* MyEnergyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEnergyViewController.h; sourceTree = "<group>"; };
@@ -518,8 +520,6 @@
 		F65DB33E1D2B5AB2002A815C /* RegisterPhoneNumController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterPhoneNumController.m; sourceTree = "<group>"; };
 		F6642A761D41F55E0003D56B /* ScenseSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScenseSplitViewController.h; sourceTree = "<group>"; };
 		F6642A771D41F55E0003D56B /* ScenseSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScenseSplitViewController.m; sourceTree = "<group>"; };
-		F6642A7C1D41FBA00003D56B /* AddScenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddScenceController.h; sourceTree = "<group>"; };
-		F6642A7D1D41FBA00003D56B /* AddScenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddScenceController.m; sourceTree = "<group>"; };
 		F6642A7F1D4220100003D56B /* DeviceListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceListController.h; sourceTree = "<group>"; };
 		F6642A801D4220100003D56B /* DeviceListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceListController.m; sourceTree = "<group>"; };
 		F66596D81D3F12FB0082716A /* EnergyOfDeviceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergyOfDeviceController.h; sourceTree = "<group>"; };
@@ -799,14 +799,14 @@
 				F66596E81D3F72CA0082716A /* AddSenseCell.m */,
 				F6642A761D41F55E0003D56B /* ScenseSplitViewController.h */,
 				F6642A771D41F55E0003D56B /* ScenseSplitViewController.m */,
-				F6642A7C1D41FBA00003D56B /* AddScenceController.h */,
-				F6642A7D1D41FBA00003D56B /* AddScenceController.m */,
+				F625A6191D4C99EC00B696E5 /* RoomListController.h */,
+				F625A61A1D4C99EC00B696E5 /* RoomListController.m */,
 				F6642A7F1D4220100003D56B /* DeviceListController.h */,
 				F6642A801D4220100003D56B /* DeviceListController.m */,
 				F635CCB91D4356650078B148 /* MyCenterSplitController.h */,
 				F635CCBA1D4356650078B148 /* MyCenterSplitController.m */,
-				F635CCC81D43591B0078B148 /* CenterListController.h */,
-				F635CCC91D43591B0078B148 /* CenterListController.m */,
+				F625A6161D4C8EF700B696E5 /* ProfireListController.h */,
+				F625A6171D4C8EF700B696E5 /* ProfireListController.m */,
 			);
 			path = SmartHome;
 			sourceTree = "<group>";
@@ -1536,8 +1536,10 @@
 				0F180FC91D0E4E6500392F4C /* GuardController.m in Sources */,
 				0FAF98A71CE40F3C009BDBB5 /* QRToggleTorchButton.m in Sources */,
 				0F25FE5E1CEB0C0A0063E834 /* SceneList.m in Sources */,
+				F625A6181D4C8EF700B696E5 /* ProfireListController.m in Sources */,
 				0FCFB3891CF2929900B37DD3 /* Aircon.m in Sources */,
 				0F1F3BCA1D2B85EA00B2641C /* MBProgressHUD+NJ.m in Sources */,
+				F625A61B1D4C99EC00B696E5 /* RoomListController.m in Sources */,
 				0F9D238A1CEDBC500049A58C /* AddScene.m in Sources */,
 				F63AE0031D11319C00BE17DC /* FMCollectionViewCell.m in Sources */,
 				0FAF8FF51CE1B514000557BD /* VolumeManager.m in Sources */,
@@ -1583,7 +1585,6 @@
 				F65DB3411D2B5AB2002A815C /* RegisterDetailController.m in Sources */,
 				0FAF98A61CE40F3C009BDBB5 /* QRCodeReaderViewController.m in Sources */,
 				0F96A1661D17F37C00E1594F /* RulerLeftTagView.m in Sources */,
-				F6642A7E1D41FBA00003D56B /* AddScenceController.m in Sources */,
 				0FCF43311CE09039009BFDD9 /* IbeaconManager.m in Sources */,
 				0FAF98AA1CE410E8009BDBB5 /* LoginQRController.m in Sources */,
 				0FCFB3801CF28F6F00B37DD3 /* Light.m in Sources */,
@@ -1601,7 +1602,6 @@
 				F66596E01D3F25610082716A /* ScenseController.m in Sources */,
 				F6755A5E1D40D576002394F3 /* ECloudMoreView.m in Sources */,
 				0FAF74AD1CEE9A9600432713 /* LightController.m in Sources */,
-				F635CCCA1D43591B0078B148 /* CenterListController.m in Sources */,
 				F69C82361D363A4D002DE6D7 /* ServiceRecordCell.m in Sources */,
 				F65164101D37672700A6F5FA /* MyEnergyCell.m in Sources */,
 				0F96A1651D17F37C00E1594F /* RulerItemModel.m in Sources */,

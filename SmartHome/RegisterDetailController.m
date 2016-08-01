@@ -92,15 +92,6 @@
         NSString *url = [NSString stringWithFormat:@"%@ObtainAuthCode.aspx",[IOManager httpAddr]];
         [http sendPost:url param:dict];
     }
-//        else if([self.authorNum.text isEqualToString:@""]){
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"系统提示"
-//                                                            message:@"电话号码不能为空"
-//                                                           delegate:self
-//                                                  cancelButtonTitle:@"确定"
-//                                                  otherButtonTitles:nil];
-//            //显示AlertView
-//            [alert show];
-//        }
     
 }
 - (IBAction)clickRegisterBtn:(id)sender {
@@ -152,7 +143,7 @@
         if([responseObject[@"Result"] intValue] == 0)
         {
             [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
-            [IOManager writeUserdefault:responseObject[@"UserID"] forKey:@"UserID"];
+            //[IOManager writeUserdefault:responseObject[@"UserID"] forKey:@"UserID"];
             [IOManager writeUserdefault:self.MasterID forKey:@"HostID"];
             [IOManager writeUserdefault:responseObject[@"UserHostID"] forKey:@"UserHostID"];
             self.coverView.hidden = NO;

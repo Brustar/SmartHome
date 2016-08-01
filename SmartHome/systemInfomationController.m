@@ -7,7 +7,7 @@
 //
 
 #import "systemInfomationController.h"
-
+#import "HttpManager.h"
 @interface systemInfomationController ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) NSArray *titles;
@@ -24,7 +24,6 @@
 
     self.titles = @[@"家庭名称",@"主机编号",@"主机品牌",@"主机型号"];
     self.tableView.tableFooterView = [UIView new];
-    // Do any additional setup after loading the view.
 }
 
 

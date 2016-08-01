@@ -7,14 +7,14 @@
 //
 
 #import "MyCenterSplitController.h"
-#import "CenterListController.h"
+#import "ProfireListController.h"
 #import "ServiceRecordViewController.h"
 #import "ProfieFaultsViewController.h"
 #import "FavorController.h"
 #import "MySettingViewController.h"
 #import "EnergyOfDeviceController.h"
 #import "MSGController.h"
-@interface MyCenterSplitController ()<CenterListControllerDelegate>
+@interface MyCenterSplitController ()<ProfireListControllerDelegate>
 @property (nonatomic, strong) UINavigationController *detailNavigation;
 @end
 
@@ -26,14 +26,15 @@
     
     
     UINavigationController *centerListNav = [self.childViewControllers firstObject];
-    CenterListController *centerListVC = [centerListNav.childViewControllers firstObject];
+    ProfireListController *centerListVC = [centerListNav.childViewControllers firstObject];
+    
     centerListVC.delegate = self;
     self.detailNavigation = [self.childViewControllers lastObject];
 }
 
 
 
--(void)CenterListController:(CenterListController *)centerListVC selected:(NSInteger)row
+-(void)ProfireListController:(ProfireListController *)centerListVC selected:(NSInteger)row
 {
     UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
@@ -65,14 +66,17 @@
              [self.detailNavigation setViewControllers:@[msgVC] animated:NO];
         }
            break;
-        default:{
+        case 5:{
             MySettingViewController *setVC = [story instantiateViewControllerWithIdentifier:@"settingViewController"];
             [self.detailNavigation setViewControllers:@[setVC] animated:NO];
         }
             break;
+        default:
+            break;
+           
+       
+
     }
-  
-    
 }
 
 - (void)didReceiveMemoryWarning {

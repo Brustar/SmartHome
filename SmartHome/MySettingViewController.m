@@ -11,7 +11,9 @@
 #import "SystemSettingViewController.h"
 #import "systemInfomationController.h"
 #import "AboutUsController.h"
-
+#import "HttpManager.h"
+#import "MBProgressHUD+NJ.h"
+#import "AppDelegate.h"
 @interface MySettingViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) NSArray *titleArr;
@@ -19,6 +21,7 @@
 @property (nonatomic,strong) SystemSettingViewController *sySetVC;
 @property (nonatomic,strong) systemInfomationController *inforVC;
 @property (nonatomic,strong) AboutUsController *aboutVC;
+
 @end
 
 @implementation MySettingViewController
@@ -124,22 +127,16 @@
 }
 -(void)goToViewController:(NSIndexPath *)indexPath
 {
-    //UIStoryboard *sy = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-   // pushSegue accessSegue systemSetSegue systemInfoSegue aboutSegue
+    
     if(indexPath.section == 0)
     {
-//        self.pushVC = [sy instantiateViewControllerWithIdentifier:@"PushSettingController"];
-//        self.pushVC.view.frame = self.view.bounds;
-//        [self.view addSubview:self.pushVC.view];
+
         [self performSegueWithIdentifier:@"pushSegue" sender:self];
         
         
     }else if(indexPath.section == 1)
     {
-        
-//            self.accessVC = [sy instantiateViewControllerWithIdentifier:@"AccessSettingController"];
-//            self.accessVC.view.frame = self.view.bounds;
-//            [self.view addSubview:self.accessVC.view];
+
         [self performSegueWithIdentifier:@"accessSegue" sender:self];
         
         
@@ -147,14 +144,9 @@
     {
         if(indexPath.row == 0)
         {
-//            self.sySetVC = [sy instantiateViewControllerWithIdentifier:@"SystemSettingViewController"];
-//            self.sySetVC.view.frame = self.view.bounds;
-//            [self.view addSubview:self.sySetVC.view];
+
             [self performSegueWithIdentifier:@"systemSetSegue" sender:self];
         }else {
-//            self.inforVC = [sy instantiateViewControllerWithIdentifier:@"systemInfomationController"];
-//            self.inforVC.view.frame = self.view.bounds;
-//            [self.view addSubview:self.inforVC.view];
             [self performSegueWithIdentifier:@"systemInfoSegue" sender:self];
         }
     }else if(indexPath.section == 3)
@@ -163,13 +155,47 @@
     
     }else if(indexPath.section == 4)
     {
-//        self.aboutVC = [sy instantiateViewControllerWithIdentifier:@"AboutUsController"];
-//        self.aboutVC.view.frame = self.view.bounds;
-//        [self.view addSubview:self.aboutVC.view];
+
          [self performSegueWithIdentifier:@"aboutSegue" sender:self];
+    }else {
+        //退出发送请求
+        
+        NSDictionary *dict = @{@"UserHostID":[[NSUserDefaults standardUserDefaults] objectForKey:@"UserHostID"]};
+        
+        NSString *url = [NSString stringWithFormat:@"%@UserLogOut.aspx",[IOManager httpAddr]];
+        HttpManager *http=[HttpManager defaultManager];
+        http.delegate=self;
+        [http sendPost:url param:dict];
+     
     }
 
 }
+
+-(void) httpHandler:(id) responseObject
+{
+    if([responseObject[@"Result"] intValue] == 0)
+    {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"AuthorToken"];
+        [self exitApplication];
+        
+    }else {
+        [MBProgressHUD showSuccess:responseObject[@"Msg"]];
+    }
+    
+}
+- (void)exitApplication {
+    AppDelegate *app = [UIApplication sharedApplication].delegate;
+    UIWindow *window = app.window;
+    
+    [UIView animateWithDuration:1.0f animations:^{
+        window.alpha = 0;
+        window.frame = CGRectMake(0, window.bounds.size.width, 0, 0);
+    } completion:^(BOOL finished) {
+        exit(0);
+    }];
+    
+}
+
 -(void)gotoAppStoreToComment
 {
     NSString *str = [NSString stringWithFormat:@"https://itunes.apple.com/cn/app/yi-yun-zhi-jia/id1034629669?mt=8"];
@@ -186,14 +212,7 @@
 }
 
 
-//-(void)removeAllSubViewFromMySettingController
-//{
-//    [self.accessVC.view removeFromSuperview];
-//    [self.pushVC.view removeFromSuperview];
-//    [self.sySetVC.view removeFromSuperview];
-//    [self.inforVC.view removeFromSuperview];
-//    [self.aboutVC.view removeFromSuperview];
-//}
+
 
 
 @end

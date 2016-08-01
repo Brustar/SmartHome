@@ -21,7 +21,9 @@
 @property(nonatomic,strong) NSIndexPath *indexPath;
 @property (nonatomic,strong) NSMutableArray *names;
 @property (nonatomic,strong) NSMutableArray *typeNames;
-
+@property (nonatomic,strong) NSMutableArray *notifyWay;
+@property (nonatomic,strong) NSMutableArray *recordIDs;
+@property (nonatomic,assign) NSInteger tag;
 @end
 
 @implementation PushSettingController
@@ -33,7 +35,7 @@
     }
     return  _names;
 }
--(NSMutableArray *)typeName
+-(NSMutableArray *)typeNames
 {
     if(!_typeNames)
     {
@@ -41,6 +43,22 @@
     }
     return _typeNames;
 }
+-(NSMutableArray *)notifyWay
+{
+    if(!_notifyWay)
+    {
+        _notifyWay = [NSMutableArray array];
+    }
+    return _notifyWay;
+}
+-(NSMutableArray *)recordIDs{
+    if(!_recordIDs)
+    {
+        _recordIDs = [NSMutableArray array];
+    }
+    return _recordIDs;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"推送控制";
@@ -49,136 +67,94 @@
     self.navigationItem.leftBarButtonItem = returnItem;
     self.coverView.hidden = YES;
     self.pushTypeView.hidden = YES;
- //   [self sendRequest];
+    [self sendRequest];
 }
+
+//获得所有设置请求
 -(void)sendRequest
 {
-    NSString *url = [NSString stringWithFormat:@"%@GetUserNotify.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@GetUserNotifySettings.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     NSString *userHostID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserHostID"];
     NSDictionary *dict = @{@"AuthorToken":auothorToken,@"UserHostID":userHostID};
     HttpManager *http=[HttpManager defaultManager];
+    http.tag = 1;
     http.delegate = self;
     [http sendPost:url param:dict];
     
 }
--(void)httpHandler:(id)responseObject
+-(void)httpHandler:(id)responseObject tag:(int)tag
 {
-    if ([responseObject[@"Result"] intValue]==0){
-        NSDictionary *dic = responseObject[@"HomeInfo"];
-        NSArray *arr = dic[@"UserInfo"];
-        for(NSDictionary *userDetail in arr)
-        {
-            NSString *userName = userDetail[@"name"];
-            NSString *userType = userDetail[@"typeName"];
-            [self.names addObject:userName];
-            [self.typeNames addObject:userType];
+    if(tag == 1)
+    {
+        if ([responseObject[@"Result"] intValue]==0){
+            NSArray *messageInfo = responseObject[@"messageInfo"];
+            for(NSDictionary *typeName in messageInfo)
+            {
+                NSString *typeN = typeName[@"typeName"];
+                [self.typeNames addObject:typeN];
+                NSArray *infoList = typeName[@"infoList"];
+                NSMutableArray *itemNames = [NSMutableArray array];
+                NSMutableArray *itemIDs = [NSMutableArray array];
+                NSMutableArray *records = [NSMutableArray array];
+                for(NSDictionary *item in infoList)
+                {
+                    NSString *itemName = item[@"itemName"];
+                    NSNumber *itemID = item[@"notifyWay"];
+                    NSNumber  *recordID = item[@"recordId"];
+                    [itemNames addObject:itemName];
+                    [itemIDs addObject:itemID];
+                    [records addObject:recordID];
+                }
+                [self.names addObject:itemNames];
+                [self.notifyWay addObject:itemIDs];
+                [self.recordIDs addObject:records];
+            }
+            [self.tableView reloadData];
+            
+        }else {
+            [MBProgressHUD showError:responseObject[@"Msg"]];
+            
         }
-        [self.tableView reloadData];
-    }else {
-        [MBProgressHUD showError:responseObject[@"Msg"]];
-
+ 
+    }else if(tag == 2)
+    {
+        if ([responseObject[@"Result"] intValue]==0)
+        {
+            [MBProgressHUD showSuccess:@"修改成功"];
+        }else {
+            [MBProgressHUD showError:responseObject[@"Msg"]];
+        }
     }
+    
 }
 
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-        return 4;
+    return self.typeNames.count;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
-    if(section == 0 || section == 2)
-    {
-        return 4;
-    }else if(section == 1)
-    {
-        return 6;
-    }else {
-        return 1;
-    }
+    NSArray *item = self.names[section];
+    return item.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-       UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pushSettingCell" forIndexPath:indexPath];
-    NSString *str;
-    switch (indexPath.section) {
-        case 0:
-        {
-            switch (indexPath.row) {
-                case 0:
-                    str = @"陌生人开门";
-                    break;
-                case 1:
-                    str = @"侵入主卧";
-                    break;
-                case 2:
-                    str = @"侵入窗户";
-                    break;
-                case 3:
-                    str = @"侵入阳台";
-                    break;
-                default:
-                    break;
-            }
-        }
-            break;
-        case 1:
-            {
-                switch (indexPath.row) {
-                    case 0:
-                        str = @"温度报警";
-                        break;
-                    case 1:
-                        str = @"漏水";
-                        break;
-                    case 2:
-                        str = @"漏电";
-                        break;
-                    case 3:
-                        str = @"漏气";
-                        break;
-                    case 4:
-                        str = @"中控主机断电";
-                        break;
-
-                    case 5:
-                        str = @"成员长时间静止某处，需急救状态";
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-            break;
-
-            case 2:
-                {
-                    switch (indexPath.row) {
-                        case 0:
-                            str = @"噪音告警";
-                            break;
-                        case 1:
-                            str = @"推荐新品";
-                            break;
-                        case 2:
-                            str = @"推荐场景";
-                            break;
-                        case 3:
-                            str = @"pm2.5告警";
-                            break;
-                        default:
-                            break;
- 
-                    }
-                }
-            break;
-            
-            
-        default:str = @"小朋友回家";
-            break;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pushSettingCell" forIndexPath:indexPath];
+    NSArray *item = self.names[indexPath.section];
+    NSArray *notiWay = self.notifyWay[indexPath.section];
+    cell.textLabel.text = item[indexPath.row];
+    NSNumber *num = notiWay[indexPath.row];
+    if([num intValue] == 1)
+    {
+        cell.detailTextLabel.text = @"信息";
+    }else if([num intValue] == 2)
+    {
+        cell.detailTextLabel.text = @"短信";
+    }else {
+        cell.detailTextLabel.text = @"不通知";
     }
-    cell.textLabel.text = str;
+    
     return cell;
 }
 
@@ -190,18 +166,7 @@
         titleLabe.textColor = [UIColor grayColor];
         titleLabe.font = [UIFont systemFontOfSize:18];
         [view addSubview:titleLabe];
-        NSString *titleStr;
-        if(section == 0)
-        {
-            titleStr = @"侵入";
-        }else if(section == 1)
-        {
-            titleStr =@"安全";
-        }else if(section == 2)
-        {
-            titleStr = @"普通";
-        }else titleStr = @"位置";
-        titleLabe.text = titleStr;
+        titleLabe.text = self.typeNames[section];
         return view;
 
 }
@@ -230,22 +195,44 @@
         sender.selected = YES;
         self.selectedBtn = sender;
         [self.selectedBtn setImage:[UIImage imageNamed:@"correct"] forState:UIControlStateSelected];
-    
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:self.indexPath];
-        if(sender.tag == 0)
-        {
-            cell.detailTextLabel.text = @"短信";
-        }else if(sender.tag == 1)
-        {
-            cell.detailTextLabel.text = @"App推送";
-        }else{
-            cell.detailTextLabel.text = @"不推送";
-        }
-    
+        self.tag = sender.tag;
 }
+//设置通知类型请求
+-(void)setUserNotifyWay:(NSInteger)way andRecord:(NSNumber *)recoredID
+{
+    
+    NSString *url = [NSString stringWithFormat:@"%@NotificationSetting.aspx",[IOManager httpAddr]];
+    NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    NSDictionary *dict = @{@"AuthorToken":auothorToken,@"NotifyWay":[NSNumber numberWithInteger:way],@"RecordID":recoredID};
+    HttpManager *http=[HttpManager defaultManager];
+    http.tag = 2;
+    http.delegate = self;
+    [http sendPost:url param:dict];
+}
+
+
+
 - (IBAction)clickSureBtn:(id)sender {
     self.coverView.hidden = YES;
     self.pushTypeView.hidden = YES;
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:self.indexPath];
+    NSArray *item = self.recordIDs[self.indexPath.section];
+    NSNumber *recordID = item[self.indexPath.row];
+    if(self.tag == 0)
+    {
+        cell.detailTextLabel.text = @"信息";
+        [self setUserNotifyWay:1 andRecord:recordID];
+        
+    }else if(self.tag == 1)
+    {
+        cell.detailTextLabel.text = @"短信";
+        [self setUserNotifyWay:2 andRecord:recordID];
+    }else{
+        cell.detailTextLabel.text = @"不通知";
+        [self setUserNotifyWay:3 andRecord:recordID];
+    }
+
+    
 }
 
 

@@ -11,7 +11,8 @@
 #import <Reachability/Reachability.h>
 #import "PackManager.h"
 #import "ProtocolManager.h"
-
+#import "HttpManager.h"
+#import "MBProgressHUD+NJ.h"
 @implementation DeviceInfo
 
 + (id)defaultManager
@@ -35,11 +36,29 @@
 -(void)initConfig
 {
     //先判断版本号
+    NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    NSString *userHostID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserHostID"];
+    NSString *url = [NSString stringWithFormat:@"%@GetConfigVersion.aspx",[IOManager httpAddr]];
+    NSDictionary *dict = @{@"AuthorToken":authorToken,@"UserHostID":userHostID};
+   HttpManager *http = [HttpManager defaultManager];
+    http.delegate = self;
+    [http sendPost:url param:dict];
     
     //更新设备，房间，场景表，写入sqlite
     
 }
-
+-(void) httpHandler:(id) responseObject{
+    if([responseObject[@"Result"] intValue] == 0)
+    {
+        [IOManager writeUserdefault:responseObject[@"vEquipment"] forKey:@"vEquipment"];
+        [IOManager writeUserdefault:responseObject[@"vRoom"] forKey:@"vRoom"];
+        [IOManager writeUserdefault:responseObject[@"vScene"] forKey:@"vScene"];
+        [IOManager writeUserdefault:responseObject[@"vTVChannel"] forKey:@"vTVChannel"];
+        [IOManager writeUserdefault:responseObject[@"vClient"] forKey:@"vClient"];
+    }else{
+        [MBProgressHUD showError:responseObject[@"Msg"]];
+    }
+}
 //取设备机型
 - (void) deviceGenaration
 {

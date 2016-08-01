@@ -11,5 +11,5 @@
 @interface MySettingViewController : UIViewController
 @property (nonatomic,strong) PushSettingController *pushVC;
 
--(void)removeAllSubViewFromMySettingController;
+
 @end
