@@ -36,9 +36,7 @@
         UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:notificationTypes
                                                                                              categories:nil];
         [application registerUserNotificationSettings:notificationSettings];
-    } ;
-    
-    [IOManager copyFile:@"smartDB" to:@"smartDB"];
+    };
     
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device netReachbility];
@@ -48,9 +46,7 @@
         [[SocketManager defaultManager] connectUDP:[IOManager udpPort]];
     }
     //登录后每次系统启动自动更新云端配置，第一次安装此处不更新，登录的时候再更新
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"masterID"]) {
-        [device initConfig];
-    }
+    [device initConfig];
     
     return YES;
 }

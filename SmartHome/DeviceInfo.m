@@ -13,6 +13,8 @@
 #import "ProtocolManager.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
+#import "FMDatabase.h"
+
 @implementation DeviceInfo
 
 + (id)defaultManager
@@ -35,21 +37,55 @@
 
 -(void)initConfig
 {
-    //缓存协议
-    [[ProtocolManager defaultManager] fetchAll];
-    [[ProtocolManager defaultManager] trace];
+    //创建sqlite数据库及结构
+    [self initSQlite];
+    
     //先判断版本号
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     NSString *userHostID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserHostID"];
     NSString *url = [NSString stringWithFormat:@"%@GetConfigVersion.aspx",[IOManager httpAddr]];
+    /*
     NSDictionary *dict = @{@"AuthorToken":authorToken,@"UserHostID":userHostID};
-   HttpManager *http = [HttpManager defaultManager];
+    
+    HttpManager *http = [HttpManager defaultManager];
     http.delegate = self;
     [http sendPost:url param:dict];
+    */
+    //更新设备，房间，场景表，protocol,写入sqlite
     
-    //更新设备，房间，场景表，写入sqlite
-    
+    //缓存协议
+    [[ProtocolManager defaultManager] fetchAll];
 }
+
+-(void)initSQlite
+{
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath] ;
+    if ([db open]) {
+        NSString *sqlRom=@"CREATE TABLE IF NOT EXISTS Rooms(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"PM25\" INTEGER, \"NOISE\" INTEGER, \"TEMPTURE\" INTEGER, \"CO2\" INTEGER, \"moisture\" INTEGER)";
+        NSString *sqlChannel=@"CREATE TABLE IF NOT EXISTS Channels (\"id\" INTEGER PRIMARY KEY  NOT NULL  UNIQUE , \"Channel_name\" TEXT, \"Channel_id\" INTEGER, \"Channel_pic\" TEXT, \"parent\" CHAR(2) NOT NULL  DEFAULT TV, \"isFavorite\" BOOL DEFAULT 0);";
+        NSString *sqlDevice=@"CREATE TABLE IF NOT EXISTS Devices(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"sn\" TEXT, \"birth\" DATETIME, \"guarantee\" DATETIME, \"model\" TEXT, \"price\" FLOAT, \"purchase\" DATETIME, \"producer\" TEXT, \"gua_tel\" TEXT, \"power\" INTEGER, \"current\" FLOAT, \"voltage\" INTEGER, \"protocol\" TEXT)";
+        NSString *sqlScene=@"CREATE TABLE IF NOT EXISTS \"Scenes\" (\"ID\" INT PRIMARY KEY  NOT NULL ,\"NAME\" TEXT NOT NULL ,\"room\" INT NOT NULL ,\"pic\" CHAR(50) DEFAULT (null) ,\"isFavorite\" Key Boolean DEFAULT (0) )";
+        NSString *sqlProtocol=@"CREATE TABLE IF NOT EXISTS [t_protocol_config]([rid] [int] IDENTITY(1,1) NOT NULL,[eid] [int] NULL,[enumber] [varchar](64) NULL,[ename] [varchar](64) NULL,[etype] [varchar](64) NULL,[actname] [varchar](256) NULL,[actcode] [varchar](256) NULL, \"actKey\" VARCHAR)";
+        NSArray *sqls=@[sqlRom,sqlChannel,sqlDevice,sqlScene,sqlProtocol];
+        //4.创表
+        
+        for (NSString *sql in sqls) {
+            BOOL result=[db executeUpdate:sql];
+            if (result) {
+                NSLog(@"创表Channels成功");
+            }else{
+                NSLog(@"创表Channels失败");
+            }
+        }
+    }else{
+        NSLog(@"Could not open db.");
+    }
+    
+    [db closeOpenResultSets];
+    [db close];
+}
+
 -(void) httpHandler:(id) responseObject{
     if([responseObject[@"Result"] intValue] == 0)
     {
