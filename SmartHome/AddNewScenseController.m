@@ -6,6 +6,7 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
+
 #import "AddNewScenseController.h"
 #import "Detail.h"
 #import "AddSenseCell.h"

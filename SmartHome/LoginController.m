@@ -23,22 +23,33 @@
 #import "RegisterDetailController.h"
 #import "ECloudTabBarController.h"
 
-@interface LoginController ()<QRCodeReaderDelegate>
+@interface LoginController ()<QRCodeReaderDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITextField *user;
 @property (weak, nonatomic) IBOutlet UITextField *pwd;
 @property (weak, nonatomic) IBOutlet UIView *coverView;
 @property (weak, nonatomic) IBOutlet UIView *registerView;
 
-@property(nonatomic,strong) NSString *userType;
+@property(nonatomic,assign) NSInteger userType;
 @property(nonatomic,strong) NSString *masterId;
 @property(nonatomic,strong) NSString *role;
+@property(nonatomic,strong) NSMutableArray *hostIDS;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @end
 
 @implementation LoginController
-
+-(NSMutableArray *)hostIDS
+{
+    if(!_hostIDS)
+    {
+        _hostIDS = [NSMutableArray array];
+    }
+    return _hostIDS;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.tableFooterView = [UIView new];
     // Do any additional setup after loading the view.
 }
 
@@ -63,42 +74,89 @@
     
     NSString *url = [NSString stringWithFormat:@"%@UserLogin.aspx",[IOManager httpAddr]];
     
-    int type = 1;
+    self.userType = 1;
     if([self isMobileNumber:self.user.text])
     {
-        type = 2;
+        self.userType = 2;
     }
 
-    NSString *hostID = [[NSUserDefaults standardUserDefaults] objectForKey:@"HostID"];
-    NSDictionary *dict = @{@"Account":self.user.text,@"Type":[NSNumber numberWithInt:type],@"Password":[self.pwd.text md5],@"HostID":hostID};
+    
+    NSDictionary *dict = @{@"Account":self.user.text,@"Type":[NSNumber numberWithInteger:self.userType],@"Password":[self.pwd.text md5]};
     [[NSUserDefaults standardUserDefaults] setObject:self.user.text forKey:@"Account"];
     HttpManager *http=[HttpManager defaultManager];
     http.delegate=self;
+    http.tag = 1;
     [http sendPost:url param:dict];
     
 }
 
--(void) httpHandler:(id) responseObject
+-(void) httpHandler:(id) responseObject tag:(int)tag
 {
-
-    if ([responseObject[@"Result"] intValue]==0) {
-        [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
-        [IOManager writeUserdefault:responseObject[@"masterID"] forKey:@"masterID"];
-        [IOManager writeUserdefault:responseObject[@"UserHostID"] forKey:@"UserHostID"];
-        //连接socket
-        [[SocketManager defaultManager] connectAfterLogined];
-        //更新配置
-        [[DeviceInfo defaultManager] initConfig];
-
+    if(tag == 1)
+    {
+        if ([responseObject[@"Result"] intValue]==0) {
+            
+           NSArray *hostList = responseObject[@"HostList"];
+           for(NSDictionary *hostID in hostList)
+           {
+               [self.hostIDS addObject:hostID[@"hostId"]];
+           }
         
-        ECloudTabBarController *ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ECloudTabBarController"];
-        [self presentViewController:ecloudVC animated:YES completion:nil];
-           
-    
+            NSInteger count = self.hostIDS.count;
+            
+            if(count == 1)
+            {
+                //直接登录主机
+                [self sendRequestToHostWithTag:2 andRow:0];
+                //连接socket
+                [[SocketManager defaultManager] connectAfterLogined];
+                //更新配置
+                [[DeviceInfo defaultManager] initConfig];
+                
+                
+                [self goToViewController];
+            }else{
+                self.tableView.hidden = NO;
+                self.coverView.hidden = NO;
+                [self.tableView reloadData];
+            }
+            
+        }else{
+            [MBProgressHUD showError:responseObject[@"Msg"]];
+        }
+        
+    }else if(tag == 2 || tag == 3)
+    {
+        if ([responseObject[@"Result"] intValue]==0)
+        {
+            NSString *str = responseObject[@"AuthorToken"];
+            [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
+            
+            self.tableView.hidden = YES;
+            self.coverView.hidden = YES;
+            [self goToViewController];
+        }
+        
     }
-    [MBProgressHUD showError:responseObject[@"Msg"]];
+   
 }
+-(void)goToViewController;
+{
+    ECloudTabBarController *ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ECloudTabBarController"];
+    [self presentViewController:ecloudVC animated:YES completion:nil];
 
+}
+-(void)sendRequestToHostWithTag:(int)tag andRow:(int)row
+{
+    NSString *url = [NSString stringWithFormat:@"%@UserLoginHost.aspx",[IOManager httpAddr]];
+
+    NSDictionary *dict = @{@"Account":self.user.text,@"Type":[NSNumber numberWithInteger:self.userType],@"Password":[self.pwd.text md5],@"HostID":self.hostIDS[row]};
+    [[NSUserDefaults standardUserDefaults] setObject:self.user.text forKey:@"Account"];
+    HttpManager *http=[HttpManager defaultManager];
+    http.delegate=self;
+    http.tag = tag;
+    [http sendPost:url param:dict];
+}
 
 - (BOOL)isMobileNumber:(NSString *)mobileNum
 {
@@ -184,7 +242,25 @@
     self.registerView.hidden = YES;
 }
 
-
+#pragma  mark -UITableViewDelegate
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.hostIDS.count;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if(!cell)
+    {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    }
+    cell.textLabel.text = self.hostIDS[indexPath.row];
+    return cell;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    int row =(int)indexPath.row;
+    [self sendRequestToHostWithTag:3 andRow:row];
+}
 - (void)readerDidCancel:(QRCodeReaderViewController *)reader
 {
     [self dismissViewControllerAnimated:YES completion:NULL];

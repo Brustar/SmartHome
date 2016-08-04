@@ -75,8 +75,7 @@
 {
     NSString *url = [NSString stringWithFormat:@"%@GetUserNotifySettings.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSString *userHostID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserHostID"];
-    NSDictionary *dict = @{@"AuthorToken":auothorToken,@"UserHostID":userHostID};
+    NSDictionary *dict = @{@"AuthorToken":auothorToken};
     HttpManager *http=[HttpManager defaultManager];
     http.tag = 1;
     http.delegate = self;

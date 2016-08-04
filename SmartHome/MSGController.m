@@ -49,9 +49,8 @@
 -(void)sendRequest
 {
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSString *userID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserHostID"];
     NSString *url = [NSString stringWithFormat:@"%@GetNotifyMessage.aspx",[IOManager httpAddr]];
-    NSDictionary *dic = @{@"AuthorToken":authorToken,@"UserHostID":userID};
+    NSDictionary *dic = @{@"AuthorToken":authorToken};
     HttpManager *http=[HttpManager defaultManager];
     http.delegate = self;
     http.tag = 1;

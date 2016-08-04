@@ -98,8 +98,7 @@
 {
     
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSString *userHostID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserHostID"];
-     NSDictionary *dict = @{@"AuthorToken":auothorToken,@"UserHostID":userHostID};
+    NSDictionary *dict = @{@"AuthorToken":auothorToken};
     HttpManager *http=[HttpManager defaultManager];
     http.delegate = self;
     http.tag = i;
@@ -350,8 +349,8 @@
 {
     NSString *url = [NSString stringWithFormat:@"%@UserEdit.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSString *userHostID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserHostID"];
-    NSDictionary *dict = @{@"AuthorToken":auothorToken,@"UserHostID":userHostID,@"OType":[NSNumber numberWithInteger:type]};
+    
+    NSDictionary *dict = @{@"AuthorToken":auothorToken,@"OType":[NSNumber numberWithInteger:type]};
     HttpManager *http=[HttpManager defaultManager];
     http.delegate = self;
     http.tag = tag;

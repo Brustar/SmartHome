@@ -53,11 +53,10 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = self.footerView;
     
-    //获取所欲故障信息
+    //获取所有故障信息
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSString *userHostID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserHostID"];
     NSString *url = [NSString stringWithFormat:@"%@GetBreakdownMessage.aspx",[IOManager httpAddr]];
-    NSDictionary *dict = @{@"AuthorToken":auothorToken,@"UserHostID":userHostID};
+    NSDictionary *dict = @{@"AuthorToken":auothorToken};
     [self sendRequest:url andDict:dict WithTag:1];
 }
 

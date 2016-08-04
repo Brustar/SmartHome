@@ -66,9 +66,8 @@
 {
     
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSString *userHostID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserHostID"];
     NSString *url = [NSString stringWithFormat:@"%@GetMaintainMessage.aspx",[IOManager httpAddr]];
-    NSDictionary *dic = @{@"AuthorToken":auothorToken,@"UserHostID":userHostID};
+    NSDictionary *dic = @{@"AuthorToken":auothorToken};
     HttpManager *http=[HttpManager defaultManager];
    
     http.delegate = self;

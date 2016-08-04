@@ -10,6 +10,7 @@
 #import "MyEnergyCell.h"
 #import "DetailList.h"
 #import "EnergyOfDeviceController.h"
+#import "HttpManager.h"
 
 #define CellItemCol 2
 #define CellItemMarginY 10
@@ -58,6 +59,22 @@
     return _times;
 }
 
+//获得所有的设备
+-(void)getAllDeviceds{
+    NSString *url = [NSString stringWithFormat:@"%@GetEquipmentsInfo.ashx",[IOManager httpAddr]];
+    NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]};
+    HttpManager *http = [HttpManager defaultManager];
+    http.delegate = self;
+    [http sendPost:url param:dic];
+    
+}
+-(void) httpHandler:(id) responseObject
+{
+    if([responseObject[@"Result"] intValue] == 0)
+    {
+        
+    }
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"我的能耗";

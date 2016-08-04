@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "HttpManager.h"
 @interface MyEnergyViewController : UIViewController
 
 -(void)removeAllSubViewFromMyEnergyViewController;

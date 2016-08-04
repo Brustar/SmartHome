@@ -9,6 +9,7 @@
 
 #import "RoomListController.h"
 #import "AddSenseCell.h"
+#import "FixTimeRepeatController.h"
 @interface RoomListController ()<UITableViewDataSource,UITableViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 @property (nonatomic,strong) NSArray *rooms;
 @property (weak, nonatomic) IBOutlet UIView *timeView;
@@ -19,6 +20,8 @@
 @property (nonatomic,strong) NSArray *minutes;
 @property (nonatomic,assign) BOOL isForenoon;
 @property (nonatomic,strong) NSArray *noon;
+@property (nonatomic,strong) FixTimeRepeatController *fixTimeVC;
+@property (nonatomic,strong) NSMutableArray *weeks;
 @end
 
 @implementation RoomListController
@@ -67,6 +70,23 @@
     }
     return _noon;
 }
+-(FixTimeRepeatController *)fixTimeVC
+{
+    if(!_fixTimeVC)
+    {
+        UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        _fixTimeVC = [story instantiateViewControllerWithIdentifier:@"FixTimeRepeatController"];
+    }
+    return _fixTimeVC;
+}
+-(NSMutableArray *)weeks
+{
+    if(!_weeks)
+    {
+        _weeks = [NSMutableArray array];
+    }
+    return _weeks;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.timeView.layer.cornerRadius = 10;
@@ -79,6 +99,7 @@
     [self.tableView selectRowAtIndexPath:0 animated:YES scrollPosition:UITableViewScrollPositionTop];
     self.splitViewController.maximumPrimaryColumnWidth = 250;
     self.tableView.backgroundColor = backGroudColour;
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectWeek:) name:@"SelectWeek" object:nil];
   
 }
 #pragma mark - Table view data source
@@ -164,20 +185,36 @@
         
     }
 }
+- (IBAction)settingRepeatTime:(UIButton *)sender {
+    self.fixTimeVC.modalPresentationStyle = UIModalPresentationPopover;
+    self.fixTimeVC.popoverPresentationController.sourceView = sender;
+    self.fixTimeVC.popoverPresentationController.sourceRect = sender.bounds;
+   
+    self.fixTimeVC.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionLeft;
+    [self presentViewController:self.fixTimeVC animated:YES completion:nil];
+}
+- (void)selectWeek:(NSNotification *)noti
+{
+    NSDictionary *dict = noti.userInfo;
+    NSString *strWeek = dict[@"week"];
+    NSString *strSelect = dict[@"select"];
+    
 
+    if([strSelect isEqualToString:@"1"])
+    {
+        [self.weeks addObject:strWeek];
+    }
+    
+    
+}
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

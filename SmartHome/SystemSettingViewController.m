@@ -60,8 +60,7 @@
 {
     NSString *url = [NSString stringWithFormat:@"%@GetUserHabit.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSString *userHostID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserHostID"];
-    NSDictionary *dict = @{@"AuthorToken":auothorToken,@"UserHostID":userHostID};
+    NSDictionary *dict = @{@"AuthorToken":auothorToken};
     HttpManager *http=[HttpManager defaultManager];
     http.delegate = self;
      http.tag = 1;

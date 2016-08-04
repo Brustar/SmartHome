@@ -14,4 +14,5 @@
 
 
 +(NSArray *)getAllDetails;
++(NSArray *)getAllDevicesWith:(NSDictionary *)responseObject;
 @end
