@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="QoB-0E-qDZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="p6P-yg-max">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -4697,6 +4697,80 @@ layer.masksToBoundslayer.masksToBounds
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3sR-z9-1Fc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2028" y="-8713"/>
+        </scene>
+        <!--Root View Controller-->
+        <scene sceneID="Yl2-ai-mcK">
+            <objects>
+                <tableViewController id="52q-Ns-bKL" customClass="PluginController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ieq-bU-82C">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PluginCell" id="7Ed-8z-Sjo" customClass="PluginCell">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7Ed-8z-Sjo" id="SS8-y4-os6">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yrv-IB-lVL">
+                                            <rect key="frame" x="531" y="6.5" width="51" height="31"/>
+                                        </switch>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j78-aI-1bw">
+                                            <rect key="frame" x="20" y="11" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="j78-aI-1bw" firstAttribute="centerY" secondItem="SS8-y4-os6" secondAttribute="centerY" id="Cif-Qt-tPa"/>
+                                        <constraint firstAttribute="trailing" secondItem="yrv-IB-lVL" secondAttribute="trailing" constant="20" id="RMG-IX-T4R"/>
+                                        <constraint firstItem="j78-aI-1bw" firstAttribute="leading" secondItem="SS8-y4-os6" secondAttribute="leading" constant="20" id="fsP-yd-Wbf"/>
+                                        <constraint firstItem="yrv-IB-lVL" firstAttribute="centerY" secondItem="SS8-y4-os6" secondAttribute="centerY" id="gCW-yB-D6n"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="label" destination="j78-aI-1bw" id="HGB-oc-9Ga"/>
+                                    <outlet property="power" destination="yrv-IB-lVL" id="P8N-rX-9nd"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="52q-Ns-bKL" id="6jg-NK-bmS"/>
+                            <outlet property="delegate" destination="52q-Ns-bKL" id="brW-TP-lx1"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="Bag-CE-Qo6">
+                        <barButtonItem key="leftBarButtonItem" title="reload" systemItem="refresh" id="hsn-yq-fK3">
+                            <connections>
+                                <action selector="sendCmd:" destination="52q-Ns-bKL" id="Yfo-7Z-Azd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ChA-LE-1W8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2750" y="-7909"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="7Ok-KF-ZQY">
+            <objects>
+                <navigationController id="p6P-yg-max" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WjW-89-PxU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="52q-Ns-bKL" kind="relationship" relationship="rootViewController" id="WDl-UJ-Up2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nDX-yb-jMD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1930" y="-7909"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RMF-0E-kAV">
