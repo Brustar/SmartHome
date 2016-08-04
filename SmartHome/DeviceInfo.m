@@ -69,13 +69,12 @@
         NSString *sqlProtocol=@"CREATE TABLE IF NOT EXISTS [t_protocol_config]([rid] [int] IDENTITY(1,1) NOT NULL,[eid] [int] NULL,[enumber] [varchar](64) NULL,[ename] [varchar](64) NULL,[etype] [varchar](64) NULL,[actname] [varchar](256) NULL,[actcode] [varchar](256) NULL, \"actKey\" VARCHAR)";
         NSArray *sqls=@[sqlRom,sqlChannel,sqlDevice,sqlScene,sqlProtocol];
         //4.创表
-        
         for (NSString *sql in sqls) {
             BOOL result=[db executeUpdate:sql];
             if (result) {
-                NSLog(@"创表Channels成功");
+                NSLog(@"创表成功");
             }else{
-                NSLog(@"创表Channels失败");
+                NSLog(@"创表失败");
             }
         }
     }else{

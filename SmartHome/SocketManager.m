@@ -29,7 +29,7 @@
 {
     self.socket = [[AsyncSocket alloc] initWithDelegate:self];
     NSError *error = nil;
-    [self.socket connectToHost:self.socketHost onPort:self.socketPort withTimeout:3 error:&error];
+    [self.socket connectToHost:self.socketHost onPort:self.socketPort error:&error];
 }
 
 // 切断socket
@@ -51,8 +51,13 @@
 
 -(void)connectUDP:(int)port
 {
+    [self connectUDP:port delegate:self];
+}
+
+-(void)connectUDP:(int)port delegate:(id)delegate
+{
     NSError *bindError = nil;
-    AsyncUdpSocket *udpSocket=[[AsyncUdpSocket alloc] initWithDelegate:self];
+    AsyncUdpSocket *udpSocket=[[AsyncUdpSocket alloc] initWithDelegate:delegate];
     [udpSocket bindToPort:port error:&bindError];
     
     if (bindError) {
@@ -163,7 +168,7 @@
 {
     NSLog(@"sorry the connect is failure %ld",sock.userData);
     if (sock.userData == SocketOfflineByServer) {// 服务器掉线，重连
-        [self socketConnectHost];
+        //[self socketConnectHost];
     }else if (sock.userData == SocketOfflineByUser) {// 如果由用户断开，不进行重连
         return;
     }
