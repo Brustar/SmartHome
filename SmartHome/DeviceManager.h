@@ -12,5 +12,10 @@
 
 +(NSArray *)parseDevicesResult:(id)result;
 +(NSArray *)getAllDevicesInfo;
-+ (NSArray *)getDeviceModel;
+//得到所有设备的模型
++(NSArray *)getDeviceModel;
+//获取所有设备种类
++(NSArray *)getTypeNameForDevice;
++ (NSArray *)getDeviceType;
+
 @end

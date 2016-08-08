@@ -6,8 +6,12 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 #define backGroudColour [UIColor colorWithRed:55/255.0 green:73/255.0 blue:91/255.0 alpha:1]
+
 #import "EditSceneController.h"
 #import "EditSceneCell.h"
+#import "LightController.h"
+#import "CurtainController.h"
+#import "TVController.h"
 @interface EditSceneController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITableView *subDeviceTableView;
@@ -20,8 +24,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *graphicBtn;
 @property (weak, nonatomic) IBOutlet UIButton *stopBtn;
 @property (weak, nonatomic) IBOutlet UIButton *addDeviceBtn;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (nonatomic,strong) NSArray *subTypeArr;
 
+@property (weak, nonatomic) IBOutlet UIView *devicelView;
+@property (nonatomic,strong) LightController *ligthVC;
+@property (nonatomic,strong) NSArray *controllersVC;
 @end
 
 @implementation EditSceneController
@@ -34,8 +41,24 @@
     }
     return _devicesTypes;
 }
+-(NSArray *)controllersVC
+{
+    if(!_controllersVC)
+    {
+        UIStoryboard *sy = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        LightController *ligthVC = [sy instantiateViewControllerWithIdentifier:@"LightController"];
+        CurtainController *curtainVC = [sy instantiateViewControllerWithIdentifier:@"CurtainController"];
+        TVController *tv = [sy instantiateViewControllerWithIdentifier:@"TVController"];
+        _controllersVC = @[ligthVC,curtainVC,tv];
+    }
+    
+    return _controllersVC;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.subTypeArr = @[@"照明",@"窗帘"];
     self.tableView.tableFooterView = self.footerView;
     self.tableView.backgroundColor = backGroudColour;
     self.subDeviceTableView.backgroundColor = backGroudColour;
@@ -66,6 +89,17 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 120;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row < 3)
+    {
+        UIViewController *vc = self.controllersVC[indexPath.row];
+        vc.view.frame = self.devicelView.frame;
+        [self.view addSubview:vc.view];
+        [self addChildViewController:vc];
+    }
+    
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

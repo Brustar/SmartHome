@@ -108,21 +108,27 @@
     NSArray *deviceArr = [DeviceManager getAllDevicesInfo];
     if (deviceArr == nil) {
         [self sendRequestForGettingConfigInfos:@"GetEquipmentsInfo.aspx" withTag:4];
+    }else {
+        //获取房间配置信息
+        [self gainRoomInfo];
+        
+        
     }
     
-    //获取房间配置信息
+    
+    
+}
+//获取房间配置信息
+-(void)gainRoomInfo{
     NSDictionary *roomDic = [RoomManager getAllRoomsInfo];
     if(roomDic == nil)
     {
         [self sendRequestForGettingConfigInfos:@"GetRoomsConfig.aspx" withTag:5];
-    }else {
-        
-        [self goToViewController];
     }
-    //获取电视频道配置信息
+    [self goToViewController];
     
-}
 
+}
 
 -(void) httpHandler:(id) responseObject tag:(int)tag
 {
@@ -181,6 +187,9 @@
             
             [IOManager writeConfigInfo:@"devices" configFile:@"deviceConfig.plist" array:messageInfo];
             
+            //获取房间配置信息
+            [self gainRoomInfo];
+            
         }else{
             [MBProgressHUD showError:responseObject[@"Msg"]];
         }
@@ -192,7 +201,6 @@
             NSDictionary *messageInfo = responseObject[@"messageInfo"];
             
             [IOManager writeConfigInfo:@"rooms" configFile:@"roomConfig.plist" dictionary:messageInfo];
-            
             [self goToViewController];
             
         }else{

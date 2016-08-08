@@ -9,6 +9,7 @@
 #import "DeviceListController.h"
 #import "Scene.h"
 #import "SceneManager.h"
+#import "DeviceManager.h"
 @interface DeviceListController ()<UITableViewDelegate,UITableViewDataSource,UISplitViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -22,7 +23,8 @@
 
 {
     
-    self.devices=[NSArray arrayWithObjects:@"灯", @"窗帘" , @"电视"  , @"DVD" , @"机顶盒" , @"收音机" ,@"门禁" ,  @"摄像头"  ,@"空调" , nil];
+    //self.devices=[NSArray arrayWithObjects:@"灯", @"窗帘" , @"电视"  , @"DVD" , @"机顶盒" , @"收音机" ,@"门禁" ,  @"摄像头"  ,@"空调" , nil];
+    self.devices = [DeviceManager getDeviceType];
     self.segues=[NSArray arrayWithObjects:@"Lighter" ,@"Curtain",@"TV"  ,@"DVD" ,@"Netv",@"FM",@"Guard",@"Camera",@"Air",nil];
     self.tableView.rowHeight=44;
     self.tableViewHight.constant = self.devices.count * self.tableView.rowHeight;
@@ -55,10 +57,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-#pragma mark - SplitViewControllerDelegate
--(void)splitViewController:(UISplitViewController *)svc willChangeToDisplayMode:(UISplitViewControllerDisplayMode)displayMode{
-    
-}
+
 
 
 #pragma mark - Table view data source
