@@ -60,13 +60,62 @@
      self.title = @"灯";
 }
 
+- (NSDictionary *)getRGBDictionaryByColor:(UIColor *)originColor
+{
+    CGFloat r=0,g=0,b=0,a=0;
+    if ([originColor respondsToSelector:@selector(getRed:green:blue:alpha:)]) {
+        [originColor getRed:&r green:&g blue:&b alpha:&a];
+    }
+    else {
+        const CGFloat *components = CGColorGetComponents(originColor.CGColor);
+        r = components[0];
+        g = components[1];
+        b = components[2];
+        a = components[3];
+    }
+    
+    return @{@"R":@(r),
+             @"G":@(g),
+             @"B":@(b),
+             @"A":@(a)};
+}
+
 -(IBAction)save:(id)sender
 {
+    ProtocolManager *manager=[ProtocolManager defaultManager];
     if ([sender isEqual:self.detailCell.power]) {
         NSData *data=[[DeviceInfo defaultManager] toogleLight:self.detailCell.power.isOn deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
         [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1];
+    }
+    
+    if ([sender isEqual:self.detailCell.bright]) {
+        NSString *key=[NSString stringWithFormat:@"bright_%@",self.deviceid];
+        NSData* daty = [PackManager dataFormHexString:[manager queryDeviceStates:key]];
+        
+        uint8_t cmd=[PackManager dataToUint:daty];
+        NSData *data=[[DeviceInfo defaultManager] changeBright:cmd deviceID:self.deviceid value:self.detailCell.bright.value];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:2];
+        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:2];
+    }
+    
+    if ([sender isEqual:self.cell.colourView]) {
+        NSString *key=[NSString stringWithFormat:@"color_%@",self.deviceid];
+        NSData* daty = [PackManager dataFormHexString:[manager queryDeviceStates:key]];
+        
+        uint8_t cmd=[PackManager dataToUint:daty];
+        UIColor *color = self.cell.colourView.backgroundColor;
+        NSDictionary *colorDic = [self getRGBDictionaryByColor:color];
+        int r = [colorDic[@"R"] floatValue] * 255;
+        int g = [colorDic[@"G"] floatValue] * 255;
+        int b = [colorDic[@"B"] floatValue] * 255;
+
+        NSData *data=[[DeviceInfo defaultManager] changeColor:cmd deviceID:self.deviceid R:r G:g B:b];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:3];
+        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:3];
     }
     
     Light *device=[[Light alloc] init];

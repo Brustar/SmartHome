@@ -124,4 +124,11 @@ Proto createProto()
             stringByReplacingOccurrencesOfString: @" " withString: @""];
 }
 
++(uint8_t)dataToUint:(NSData *)data
+{
+    Byte* bytes = (Byte*)([data bytes]);
+    
+    return bytes[0];
+}
+
 @end

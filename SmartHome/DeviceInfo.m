@@ -145,8 +145,23 @@
     proto.cmd=0x03;
     proto.action.state=action;
     proto.action.RValue=value;
-    proto.deviceID=CFSwapInt16BigToHost([[manager queryDeviceTypes:deviceID] intValue]);
-    proto.deviceType=[manager queryDeviceHexIDs:deviceID];
+    proto.deviceType=CFSwapInt16BigToHost([[manager queryDeviceTypes:deviceID] intValue]);
+    proto.deviceID=[manager queryDeviceHexIDs:deviceID];
+    proto.masterID=CFSwapInt16BigToHost(self.masterID);
+    return dataFromProtocol(proto);
+}
+
+-(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID R:(uint8_t)red  G:(uint8_t)green B:(uint8_t)blue
+{
+    Proto proto=createProto();
+    ProtocolManager *manager=[ProtocolManager defaultManager];
+    proto.cmd=0x03;
+    proto.action.state=action;
+    proto.action.RValue=red;
+    proto.action.B=blue;
+    proto.action.G=green;
+    proto.deviceType=CFSwapInt16BigToHost([[manager queryDeviceTypes:deviceID] intValue]);
+    proto.deviceID=[manager queryDeviceHexIDs:deviceID];
     proto.masterID=CFSwapInt16BigToHost(self.masterID);
     return dataFromProtocol(proto);
 }
@@ -220,25 +235,25 @@
     return [self action:toogle deviceID:deviceID];
 }
 
--(NSData *) changeColor:(uint8_t)color deviceID:(NSString *)deviceID
+-(NSData *) changeColor:(uint8_t)color deviceID:(NSString *)deviceID R:(uint8_t)red  G:(uint8_t)green B:(uint8_t)blue
 {
     return [self action:color deviceID:deviceID];
 }
 
--(NSData *) changeBright:(uint8_t)bright deviceID:(NSString *)deviceID
+-(NSData *) changeBright:(uint8_t)action deviceID:(NSString *)deviceID value:(uint8_t)bright
 {
-    return [self action:bright deviceID:deviceID];
+    return [self action:action deviceID:deviceID value:bright];
 }
 
 #pragma mark - curtain
--(NSData *) roll:(uint8_t)percent deviceID:(NSString *)deviceID
+-(NSData *) roll:(uint8_t)action deviceID:(NSString *)deviceID value:(uint8_t)percent
 {
-    return [self action:0x2A deviceID:deviceID value:percent];
+    return [self action:action deviceID:deviceID value:percent];
 }
 
 -(NSData *) open:(NSString *)deviceID
 {
-    return [self action:0x64 deviceID:deviceID];
+    return [self action:0x01 deviceID:deviceID];
 }
 
 -(NSData *) close:(NSString *)deviceID

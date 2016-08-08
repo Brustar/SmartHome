@@ -180,9 +180,8 @@
     NSArray *cmds=[[manager queryDeviceStates:key] componentsSeparatedByString:@","];
     
     NSData* data = [PackManager dataFormHexString:[cmds objectAtIndex:self.currentIndex]];
-    Byte* bytes = (Byte*)([data bytes]);
     
-    uint8_t cmd=bytes[0];
+    uint8_t cmd=[PackManager dataToUint:data];
     
     return [[DeviceInfo defaultManager] changeMode:cmd
                                                   deviceID:key];

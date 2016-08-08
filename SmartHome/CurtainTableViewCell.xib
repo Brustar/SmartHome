@@ -20,43 +20,54 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="tNT-YH-Tpj">
+                    <slider opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="tNT-YH-Tpj">
                         <rect key="frame" x="58" y="7" width="204" height="31"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="200" id="Ikh-7O-auW"/>
                         </constraints>
                     </slider>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="curtain_weak" translatesAutoresizingMaskIntoConstraints="NO" id="Mtg-8w-nJQ">
-                        <rect key="frame" x="30" y="7" width="20" height="30"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8pT-n9-oYX">
+                        <rect key="frame" x="74" y="7" width="20" height="30"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="20" id="t3T-7j-XNS"/>
-                            <constraint firstAttribute="height" constant="30" id="zx7-4J-0CO"/>
+                            <constraint firstAttribute="width" constant="20" id="PWC-vD-B2F"/>
+                            <constraint firstAttribute="height" constant="30" id="iTN-qe-tAd"/>
                         </constraints>
-                    </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="curtain" translatesAutoresizingMaskIntoConstraints="NO" id="Km7-cw-6t4">
+                        <state key="normal" backgroundImage="curtain_weak"/>
+                    </button>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="i5X-4V-Nt6">
                         <rect key="frame" x="270" y="7" width="20" height="30"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dFO-Zi-fiB">
+                                <rect key="frame" x="0.0" y="0.0" width="20" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="QwE-jy-ZyX"/>
+                                    <constraint firstAttribute="width" constant="20" id="bmZ-5s-oEU"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="curtain"/>
+                            </button>
+                        </subviews>
                         <constraints>
-                            <constraint firstAttribute="width" constant="20" id="3lK-RA-hcg"/>
-                            <constraint firstAttribute="height" constant="30" id="W1W-Du-x7q"/>
+                            <constraint firstAttribute="height" constant="30" id="00Q-oX-NnE"/>
+                            <constraint firstAttribute="width" constant="20" id="yvE-Xd-VaS"/>
                         </constraints>
-                    </imageView>
+                    </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Mtg-8w-nJQ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="8WK-yt-uGn"/>
-                    <constraint firstAttribute="trailing" secondItem="Km7-cw-6t4" secondAttribute="trailing" constant="30" id="9ox-SL-KlP"/>
                     <constraint firstAttribute="bottom" secondItem="wSV-oJ-oCF" secondAttribute="bottom" constant="3" id="BpN-A0-N95"/>
                     <constraint firstItem="wSV-oJ-oCF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="KNJ-rf-wPX"/>
-                    <constraint firstItem="Km7-cw-6t4" firstAttribute="leading" secondItem="tNT-YH-Tpj" secondAttribute="trailing" constant="10" id="OFh-JX-Wd2"/>
                     <constraint firstItem="wSV-oJ-oCF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="TKH-aZ-TXC"/>
-                    <constraint firstItem="tNT-YH-Tpj" firstAttribute="leading" secondItem="Mtg-8w-nJQ" secondAttribute="trailing" constant="10" id="d4W-ZY-OJc"/>
+                    <constraint firstItem="i5X-4V-Nt6" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="WTe-NP-oYY"/>
+                    <constraint firstAttribute="trailing" secondItem="i5X-4V-Nt6" secondAttribute="trailing" constant="30" id="ZOO-N4-esG"/>
+                    <constraint firstItem="8pT-n9-oYX" firstAttribute="leading" secondItem="wSV-oJ-oCF" secondAttribute="trailing" constant="30" id="cLA-yk-02u"/>
+                    <constraint firstItem="8pT-n9-oYX" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="dQu-4s-1DD"/>
                     <constraint firstItem="tNT-YH-Tpj" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="nH2-jA-Mef"/>
-                    <constraint firstItem="Km7-cw-6t4" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="oj0-0j-nLI"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="close" destination="8pT-n9-oYX" id="QKk-hb-cpr"/>
                 <outlet property="label" destination="wSV-oJ-oCF" id="bUa-kH-Jsg"/>
+                <outlet property="open" destination="i5X-4V-Nt6" id="gDd-44-ufr"/>
+                <outlet property="openn" destination="dFO-Zi-fiB" id="AkC-EZ-Exa"/>
                 <outlet property="slider" destination="tNT-YH-Tpj" id="efJ-Ru-ZA9"/>
             </connections>
             <point key="canvasLocation" x="682" y="523"/>

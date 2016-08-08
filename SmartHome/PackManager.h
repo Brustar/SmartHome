@@ -65,4 +65,6 @@ Proto createProto();
 + (NSData*)dataFormHexString:(NSString*)hexString;
 + (NSString *)hexStringFromData:(NSData*)data;
 
++(uint8_t)dataToUint:(NSData *)data;
+
 @end
