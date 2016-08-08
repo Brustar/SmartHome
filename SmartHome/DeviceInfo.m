@@ -14,6 +14,7 @@
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "FMDatabase.h"
+#import "DeviceManager.h"
 
 @implementation DeviceInfo
 
@@ -44,19 +45,12 @@
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     NSString *userHostID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserHostID"];
     NSString *url = [NSString stringWithFormat:@"%@GetConfigVersion.aspx",[IOManager httpAddr]];
-    /*
-    NSDictionary *dict = @{@"AuthorToken":authorToken,@"UserHostID":userHostID};
     
-    HttpManager *http = [HttpManager defaultManager];
-    http.delegate = self;
-    [http sendPost:url param:dict];
-    */
+    
     //更新设备，房间，场景表，protocol,写入sqlite
-    
     //缓存协议
     [[ProtocolManager defaultManager] fetchAll];
 }
-
 -(void)initSQlite
 {
     NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
@@ -85,18 +79,6 @@
     [db close];
 }
 
--(void) httpHandler:(id) responseObject{
-    if([responseObject[@"Result"] intValue] == 0)
-    {
-        [IOManager writeUserdefault:responseObject[@"vEquipment"] forKey:@"vEquipment"];
-        [IOManager writeUserdefault:responseObject[@"vRoom"] forKey:@"vRoom"];
-        [IOManager writeUserdefault:responseObject[@"vScene"] forKey:@"vScene"];
-        [IOManager writeUserdefault:responseObject[@"vTVChannel"] forKey:@"vTVChannel"];
-        [IOManager writeUserdefault:responseObject[@"vClient"] forKey:@"vClient"];
-    }else{
-        [MBProgressHUD showError:responseObject[@"Msg"]];
-    }
-}
 //取设备机型
 - (void) deviceGenaration
 {

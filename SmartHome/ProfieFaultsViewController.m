@@ -95,11 +95,16 @@
         }else {
             [MBProgressHUD showError:responseObject[@"Msg"]];
         }
+    }else if(tag == 3)
+    {
+        if([responseObject[@"Result"] intValue]==0)
+        {
+            [MBProgressHUD showSuccess:@"删除成功"];
+            
+        }else {
+            [MBProgressHUD showError:responseObject[@"Msg"]];
+        }
     }
-
-        
-    
-
 
 
 }
@@ -201,6 +206,7 @@
     //放置要删除的对象
     NSMutableArray *deleteArray = [NSMutableArray array];
     NSMutableArray *deletedTime = [NSMutableArray array];
+    NSMutableArray *deletedID =[NSMutableArray array];
     // 要删除的row
     NSArray *selectedArray = [self.tableView indexPathsForSelectedRows];
     
@@ -208,12 +214,49 @@
         //[deleteArray addObject:self.Mydefaults[indexPath.row]];
         [deleteArray addObject:self.faultArr[indexPath.row]];
         [deletedTime addObject:self.timesArr[indexPath.row]];
+        [deletedID addObject:self.recordIDs[indexPath.row]];
     }
     // 先删除数据源
     [self.faultArr removeObjectsInArray:deleteArray];
     [self.timesArr removeObjectsInArray:deletedTime];
+    [self.recordIDs removeObject:deletedID];
+    
+    if(deletedID.count != 0)
+    {
+        [self sendDeleteRequestWithArray:[deletedID copy]];
+    }else {
+        [MBProgressHUD showError:@"请选择要删除的记录"];
+    }
+
     
     [self clickCancleBtn:nil];
+}
+-(void)sendDeleteRequestWithArray:(NSArray *)deleteArr;
+{
+    NSString *url = [NSString stringWithFormat:@"%@EditPersonalInformation.aspx",[IOManager httpAddr]];
+    
+    NSString *recoreds = @"";
+    
+    for(int i = 0 ;i < deleteArr.count; i++)
+    {
+        if(i == deleteArr.count - 1)
+        {
+            NSString *record = [NSString stringWithFormat:@"%@",deleteArr[i]];
+            recoreds = [recoreds stringByAppendingString:record];
+            
+        }else {
+            NSString *record = [NSString stringWithFormat:@"%@,",deleteArr[i]];
+            recoreds = [recoreds stringByAppendingString:record];
+        }
+    }
+    
+    
+    NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"RecordIDList":recoreds,@"Type":[NSNumber numberWithInt:3]};
+    HttpManager *http = [HttpManager defaultManager];
+    http.delegate = self;
+    http.tag = 3;
+    [http sendPost:url param:dic];
+    
 }
 
 

@@ -22,7 +22,8 @@
 #import "ServiceRecordViewController.h"
 #import "RegisterDetailController.h"
 #import "ECloudTabBarController.h"
-
+#import "DeviceManager.h"
+#import "RoomManager.h"
 @interface LoginController ()<QRCodeReaderDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITextField *user;
@@ -89,6 +90,39 @@
     [http sendPost:url param:dict];
     
 }
+//获取设备配置信息
+- (void)sendRequestForGettingConfigInfos:(NSString *)str withTag:(int)tag;
+{
+    NSString *url = [NSString stringWithFormat:@"%@%@",[IOManager httpAddr],str];
+
+    NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]};
+    HttpManager *http = [HttpManager defaultManager];
+    http.delegate = self;
+    http.tag = tag;
+    [http sendPost:url param:dic];
+}
+- (void)checkVersion
+{
+    // 检测版本号
+    //获取设备配置信息
+    NSArray *deviceArr = [DeviceManager getAllDevicesInfo];
+    if (deviceArr == nil) {
+        [self sendRequestForGettingConfigInfos:@"GetEquipmentsInfo.aspx" withTag:4];
+    }
+    
+    //获取房间配置信息
+    NSDictionary *roomDic = [RoomManager getAllRoomsInfo];
+    if(roomDic == nil)
+    {
+        [self sendRequestForGettingConfigInfos:@"GetRoomsConfig.aspx" withTag:5];
+    }else {
+        
+        [self goToViewController];
+    }
+    //获取电视频道配置信息
+    
+}
+
 
 -(void) httpHandler:(id) responseObject tag:(int)tag
 {
@@ -96,22 +130,18 @@
     {
         if ([responseObject[@"Result"] intValue]==0) {
             
-           NSArray *hostList = responseObject[@"HostList"];
-           for(NSDictionary *hostID in hostList)
-           {
-               [self.hostIDS addObject:hostID[@"hostId"]];
-           }
-        
+            NSArray *hostList = responseObject[@"HostList"];
+            for(NSDictionary *hostID in hostList)
+            {
+                [self.hostIDS addObject:hostID[@"hostId"]];
+            }
+            
             NSInteger count = self.hostIDS.count;
             
             if(count == 1)
             {
                 //直接登录主机
                 [self sendRequestToHostWithTag:2 andRow:0];
-                //连接socket
-                [[SocketManager defaultManager] connectAfterLogined];
-                //更新配置
-                [[DeviceInfo defaultManager] initConfig];
                 
                 
                 [self goToViewController];
@@ -121,6 +151,11 @@
                 [self.tableView reloadData];
             }
             
+            //连接socket
+            [[SocketManager defaultManager] connectAfterLogined];
+            //更新配置
+            [[DeviceInfo defaultManager] initConfig];
+            
         }else{
             [MBProgressHUD showError:responseObject[@"Msg"]];
         }
@@ -129,17 +164,46 @@
     {
         if ([responseObject[@"Result"] intValue]==0)
         {
-            NSString *str = responseObject[@"AuthorToken"];
+           
             [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
             
             self.tableView.hidden = YES;
             self.coverView.hidden = YES;
-            [self goToViewController];
+            
+            [self checkVersion];
         }
         
+    }else if (tag == 4){
+        if([responseObject[@"Result"] intValue] == 0)
+        {
+            //写数据到plist文件
+            NSArray *messageInfo = responseObject[@"messageInfo"];
+            
+            [IOManager writeConfigInfo:@"devices" configFile:@"deviceConfig.plist" array:messageInfo];
+            
+        }else{
+            [MBProgressHUD showError:responseObject[@"Msg"]];
+        }
+        
+    }else if (tag == 5){
+        if([responseObject[@"Result"] intValue] == 0)
+        {
+            //写数据到plist文件
+            NSDictionary *messageInfo = responseObject[@"messageInfo"];
+            
+            [IOManager writeConfigInfo:@"rooms" configFile:@"roomConfig.plist" dictionary:messageInfo];
+            
+            [self goToViewController];
+            
+        }else{
+            [MBProgressHUD showError:responseObject[@"Msg"]];
+        }
+
     }
    
 }
+
+
 -(void)goToViewController;
 {
     ECloudTabBarController *ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ECloudTabBarController"];

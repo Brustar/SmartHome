@@ -11,13 +11,16 @@
 #import "DetailList.h"
 #import "EnergyOfDeviceController.h"
 #import "HttpManager.h"
+#import "DeviceManager.h"
+#import "Device.h"
+#import "DeviceInfo.h"
 
 #define CellItemCol 2
 #define CellItemMarginY 10
 #define CellItemViewHeight 50
 #define CellItemViewWidth  120
 
-@interface MyEnergyViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface MyEnergyViewController ()<UITableViewDelegate,UITableViewDataSource,HttpDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *footView;
 @property (nonatomic,strong) NSMutableArray *energys;
@@ -35,6 +38,7 @@
 @property (nonatomic,strong) NSArray *subMedia;
 @property (nonatomic,strong) NSArray *subProtect;
 @property (nonatomic,strong) NSArray *subEnvironmetn;
+@property (nonatomic,strong) NSArray *devicesInfo;
 @end
 
 @implementation MyEnergyViewController
@@ -58,21 +62,30 @@
     }
     return _times;
 }
+-(NSArray *)devicesInfo{
+    if(!_devicesInfo)
+    {
+        _devicesInfo = [DeviceManager getAllDevicesInfo];
+    }
+    return _devicesInfo;
+}
 
-//获得所有的设备
--(void)getAllDeviceds{
-    NSString *url = [NSString stringWithFormat:@"%@GetEquipmentsInfo.ashx",[IOManager httpAddr]];
-    NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]};
+-(void)getEnger{
+    NSString *url = [NSString stringWithFormat:@"%@GetEnergyMessage.aspx",[IOManager httpAddr]];
+    NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"Date":@"2016-07-11",@"EquipmentIdList":@"15"};
     HttpManager *http = [HttpManager defaultManager];
     http.delegate = self;
+    http.tag = 1;
     [http sendPost:url param:dic];
-    
 }
--(void) httpHandler:(id) responseObject
+-(void)httpHandler:(id)responseObject tag:(int)tag
 {
-    if([responseObject[@"Result"] intValue] == 0)
+    if(tag == 1)
     {
-        
+        if([responseObject[@"Result"] intValue] == 0)
+        {
+            
+        }
     }
 }
 - (void)viewDidLoad {
@@ -93,13 +106,16 @@
     self.subEnvironmetn = [DetailList getDeviceForModel:@"环境"];
     self.selectedDeviceTableView.hidden = YES;
     
+    [self getEnger];
 }
+
 -(void)setNavi
 {
     UIBarButtonItem *listItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"memu"] style:UIBarButtonItemStylePlain target:self action:@selector(selectedDevice:)];
     UIBarButtonItem *editItem = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(clickEditBtn:)];
     self.navigationItem.rightBarButtonItems = @[listItem,editItem];
 }
+
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -197,8 +213,7 @@
 -(void)goToEngerOfDevice:(UIButton *)btn
 {
     self.engerOfDeviceVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EnergyOfDeviceController"];
-    self.engerOfDeviceVC.view.frame = self.view.bounds;
-    [self.view addSubview:self.engerOfDeviceVC.view];
+    [self.navigationController pushViewController:self.engerOfDeviceVC animated:NO];
     
 }
 

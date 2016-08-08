@@ -24,6 +24,11 @@
     return [IOManager newPath:@"scenes"];
 }
 
+
++ (NSString *)configPath:(NSString *)configPath {
+    return [IOManager newPath:configPath];
+}
+
 + (NSString *) favoritePath
 {
     return [IOManager newPath:@"favorite"];
@@ -100,6 +105,21 @@
     NSDictionary *dic = [PrintObject getObjectData:sceneData];
     BOOL ret = [dic writeToFile:scenePath atomically:YES];
     NSAssert(ret,@"写文件失败");
+}
+
++ (void) writeConfigInfo:(NSString *)path configFile:(NSString *)configFile array:(NSArray *)configData
+{
+    NSString *configPath = [[IOManager newPath:path] stringByAppendingPathComponent:configFile];
+    BOOL ret = [configData writeToFile:configPath atomically:YES];
+    NSAssert(ret,@"写文件失败");
+
+}
++ (void) writeConfigInfo:(NSString *)path configFile:(NSString *)configFile dictionary:(NSDictionary *)configData
+{
+    NSString *configPath = [[IOManager newPath:path] stringByAppendingPathComponent:configFile];
+    BOOL ret = [configData writeToFile:configPath atomically:YES];
+    NSAssert(ret,@"写文件失败");
+
 }
 
 + (void) writeJpg:(UIImage *)jpg path:(NSString *)jpgPath

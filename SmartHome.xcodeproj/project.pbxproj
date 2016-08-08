@@ -45,7 +45,6 @@
 		0F477FC61D2F94B3004FA361 /* NetStatusManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F477FC51D2F94B3004FA361 /* NetStatusManager.m */; };
 		0F4B3C001D2A13870002E75E /* MSGController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4B3BFF1D2A13870002E75E /* MSGController.m */; };
 		0F4B49801CFEB13500D93DD2 /* CurtainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4B497F1CFEB13500D93DD2 /* CurtainController.m */; };
-		0F7BD9BC1D51DB7000D8F961 /* PluginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7BD9BB1D51DB7000D8F961 /* PluginController.m */; };
 		0F91AA171CDC798700094C25 /* PrintObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F91AA161CDC798700094C25 /* PrintObject.m */; };
 		0F96A1641D17F37C00E1594F /* RulerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F96A15D1D17F37C00E1594F /* RulerItem.m */; };
 		0F96A1651D17F37C00E1594F /* RulerItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F96A15F1D17F37C00E1594F /* RulerItemModel.m */; };
@@ -118,6 +117,9 @@
 		F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB411D00029900AB04BE /* DetailViewController.m */; };
 		F60FDB461D003FD500AB04BE /* CurtainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB441D003FD500AB04BE /* CurtainTableViewCell.m */; };
 		F60FDB471D003FD500AB04BE /* CurtainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F60FDB451D003FD500AB04BE /* CurtainTableViewCell.xib */; };
+		F6251F711D541885000A5A47 /* PluginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6251F701D541885000A5A47 /* PluginViewController.m */; };
+		F6251F741D541D8A000A5A47 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = F6251F731D541D8A000A5A47 /* Device.m */; };
+		F6251F771D542508000A5A47 /* DeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6251F761D542508000A5A47 /* DeviceManager.m */; };
 		F625A6181D4C8EF700B696E5 /* ProfireListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F625A6171D4C8EF700B696E5 /* ProfireListController.m */; };
 		F625A61B1D4C99EC00B696E5 /* RoomListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F625A61A1D4C99EC00B696E5 /* RoomListController.m */; };
 		F630C35F1D38B4FF008880BB /* AccessSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = F630C35E1D38B4FF008880BB /* AccessSettingController.m */; };
@@ -129,6 +131,7 @@
 		F635CCBB1D4356650078B148 /* MyCenterSplitController.m in Sources */ = {isa = PBXBuildFile; fileRef = F635CCBA1D4356650078B148 /* MyCenterSplitController.m */; };
 		F63AE0031D11319C00BE17DC /* FMCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F63AE0021D11319C00BE17DC /* FMCollectionViewCell.m */; };
 		F64111DC1D4F1E6100E8099D /* FixTimeRepeatController.m in Sources */ = {isa = PBXBuildFile; fileRef = F64111DB1D4F1E6100E8099D /* FixTimeRepeatController.m */; };
+		F64487DD1D55BA3C00EF2CFC /* RoomManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F64487DC1D55BA3C00EF2CFC /* RoomManager.m */; };
 		F651640D1D3766C900A6F5FA /* MyEnergyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F651640C1D3766C900A6F5FA /* MyEnergyViewController.m */; };
 		F65164101D37672700A6F5FA /* MyEnergyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F651640F1D37672700A6F5FA /* MyEnergyCell.m */; };
 		F65164141D3780C500A6F5FA /* TVLogoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F65164131D3780C500A6F5FA /* TVLogoCell.m */; };
@@ -347,8 +350,6 @@
 		0F4B3BFF1D2A13870002E75E /* MSGController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGController.m; sourceTree = "<group>"; };
 		0F4B497E1CFEB13500D93DD2 /* CurtainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurtainController.h; sourceTree = "<group>"; };
 		0F4B497F1CFEB13500D93DD2 /* CurtainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurtainController.m; sourceTree = "<group>"; };
-		0F7BD9BA1D51DB7000D8F961 /* PluginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginController.h; sourceTree = "<group>"; };
-		0F7BD9BB1D51DB7000D8F961 /* PluginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginController.m; sourceTree = "<group>"; };
 		0F91AA151CDC798700094C25 /* PrintObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintObject.h; sourceTree = "<group>"; };
 		0F91AA161CDC798700094C25 /* PrintObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintObject.m; sourceTree = "<group>"; };
 		0F96A15C1D17F37C00E1594F /* RulerItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RulerItem.h; path = PrettyRuler/RulerItem.h; sourceTree = SOURCE_ROOT; };
@@ -487,6 +488,12 @@
 		F60FDB431D003FD500AB04BE /* CurtainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurtainTableViewCell.h; sourceTree = "<group>"; };
 		F60FDB441D003FD500AB04BE /* CurtainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurtainTableViewCell.m; sourceTree = "<group>"; };
 		F60FDB451D003FD500AB04BE /* CurtainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CurtainTableViewCell.xib; sourceTree = "<group>"; };
+		F6251F6F1D541885000A5A47 /* PluginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginViewController.h; sourceTree = "<group>"; };
+		F6251F701D541885000A5A47 /* PluginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginViewController.m; sourceTree = "<group>"; };
+		F6251F721D541D8A000A5A47 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
+		F6251F731D541D8A000A5A47 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
+		F6251F751D542508000A5A47 /* DeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceManager.h; sourceTree = "<group>"; };
+		F6251F761D542508000A5A47 /* DeviceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceManager.m; sourceTree = "<group>"; };
 		F625A6161D4C8EF700B696E5 /* ProfireListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfireListController.h; sourceTree = "<group>"; };
 		F625A6171D4C8EF700B696E5 /* ProfireListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfireListController.m; sourceTree = "<group>"; };
 		F625A6191D4C99EC00B696E5 /* RoomListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomListController.h; sourceTree = "<group>"; };
@@ -507,6 +514,8 @@
 		F63AE0021D11319C00BE17DC /* FMCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCollectionViewCell.m; sourceTree = "<group>"; };
 		F64111DA1D4F1E6100E8099D /* FixTimeRepeatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixTimeRepeatController.h; sourceTree = "<group>"; };
 		F64111DB1D4F1E6100E8099D /* FixTimeRepeatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixTimeRepeatController.m; sourceTree = "<group>"; };
+		F64487DB1D55BA3C00EF2CFC /* RoomManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomManager.h; sourceTree = "<group>"; };
+		F64487DC1D55BA3C00EF2CFC /* RoomManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomManager.m; sourceTree = "<group>"; };
 		F651640B1D3766C900A6F5FA /* MyEnergyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEnergyViewController.h; sourceTree = "<group>"; };
 		F651640C1D3766C900A6F5FA /* MyEnergyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEnergyViewController.m; sourceTree = "<group>"; };
 		F651640E1D37672700A6F5FA /* MyEnergyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEnergyCell.h; sourceTree = "<group>"; };
@@ -662,6 +671,8 @@
 				F66EB2D41CFED0A900AC53CE /* DetailList.m */,
 				F6B91F711D100F1400592FB0 /* TVChannel.h */,
 				F6B91F701D100F1400592FB0 /* TVChannel.m */,
+				F6251F721D541D8A000A5A47 /* Device.h */,
+				F6251F731D541D8A000A5A47 /* Device.m */,
 			);
 			name = entity;
 			sourceTree = "<group>";
@@ -826,8 +837,8 @@
 				F635CCBA1D4356650078B148 /* MyCenterSplitController.m */,
 				F625A6161D4C8EF700B696E5 /* ProfireListController.h */,
 				F625A6171D4C8EF700B696E5 /* ProfireListController.m */,
-				0F7BD9BA1D51DB7000D8F961 /* PluginController.h */,
-				0F7BD9BB1D51DB7000D8F961 /* PluginController.m */,
+				F6251F6F1D541885000A5A47 /* PluginViewController.h */,
+				F6251F701D541885000A5A47 /* PluginViewController.m */,
 				0FA1E09C1D533BFA001CA819 /* PluginCell.h */,
 				0FA1E09D1D533BFA001CA819 /* PluginCell.m */,
 			);
@@ -1157,6 +1168,10 @@
 				0F477FC51D2F94B3004FA361 /* NetStatusManager.m */,
 				0F3576731D363188003334E0 /* ProtocolManager.h */,
 				0F3576741D363188003334E0 /* ProtocolManager.m */,
+				F6251F751D542508000A5A47 /* DeviceManager.h */,
+				F6251F761D542508000A5A47 /* DeviceManager.m */,
+				F64487DB1D55BA3C00EF2CFC /* RoomManager.h */,
+				F64487DC1D55BA3C00EF2CFC /* RoomManager.m */,
 				F6755A4A1D4063FA002394F3 /* ECloudTabBar.h */,
 				F6755A4B1D4063FA002394F3 /* ECloudTabBar.m */,
 				F6755A4D1D406552002394F3 /* ECloudTabBarController.h */,
@@ -1542,7 +1557,6 @@
 				0FAF74C11CEEA17C00432713 /* HRColorCursor.m in Sources */,
 				0F91AA171CDC798700094C25 /* PrintObject.m in Sources */,
 				0F3CCF3B1D0F97B70058A320 /* CameraController.m in Sources */,
-				0F7BD9BC1D51DB7000D8F961 /* PluginController.m in Sources */,
 				0FC0FFDA1CF577C0000F71D5 /* RealScene.m in Sources */,
 				F6755A4F1D406552002394F3 /* ECloudTabBarController.m in Sources */,
 				0FAF74C41CEEA17C00432713 /* HRColorPickerView.m in Sources */,
@@ -1592,7 +1606,9 @@
 				F66596DA1D3F12FB0082716A /* EnergyOfDeviceController.m in Sources */,
 				0FAF74C01CEEA17C00432713 /* HRBrightnessSlider.m in Sources */,
 				F635CCBB1D4356650078B148 /* MyCenterSplitController.m in Sources */,
+				F6251F741D541D8A000A5A47 /* Device.m in Sources */,
 				F66EB2D51CFED0A900AC53CE /* DetailList.m in Sources */,
+				F6251F771D542508000A5A47 /* DeviceManager.m in Sources */,
 				F67F1F741D3C6AA200F2B7E5 /* SystemCell.m in Sources */,
 				0FC3DE851D236CFF00A03482 /* LoginController.m in Sources */,
 				F66596E31D3F25810082716A /* ScenseCell.m in Sources */,
@@ -1604,6 +1620,7 @@
 				0F43B1061CF4078300F3D9F0 /* ISRDataHelper.m in Sources */,
 				F65838DA1D3A2A43004210AC /* MsgCell.m in Sources */,
 				0FB42E231CF6F9E8007DE64F /* SocketManager.m in Sources */,
+				F64487DD1D55BA3C00EF2CFC /* RoomManager.m in Sources */,
 				0FCFB3861CF2912700B37DD3 /* TV.m in Sources */,
 				F65B7D271D34E9E00059CFA4 /* MySettingViewController.m in Sources */,
 				F69C82301D35D214002DE6D7 /* PushSettingController.m in Sources */,
@@ -1630,6 +1647,7 @@
 				F69C82361D363A4D002DE6D7 /* ServiceRecordCell.m in Sources */,
 				F65164101D37672700A6F5FA /* MyEnergyCell.m in Sources */,
 				0F96A1651D17F37C00E1594F /* RulerItemModel.m in Sources */,
+				F6251F711D541885000A5A47 /* PluginViewController.m in Sources */,
 				0F032D491CC9B12700D1920D /* main.m in Sources */,
 				F64111DC1D4F1E6100E8099D /* FixTimeRepeatController.m in Sources */,
 			);

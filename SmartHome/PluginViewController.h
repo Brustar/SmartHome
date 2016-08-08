@@ -1,15 +1,13 @@
 //
-//  PluginController.h
+//  PluginViewController.h
 //  SmartHome
 //
-//  Created by Brustar on 16/8/3.
+//  Created by 逸云科技 on 16/8/5.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface PluginController : UITableViewController
-
+@interface PluginViewController : UIViewController
 @property (strong, nonatomic) NSMutableArray *devices;
-
 @end

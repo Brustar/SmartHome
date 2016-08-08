@@ -18,6 +18,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = [UIView new];
     
     self.tableView.tableHeaderView = self.headView;
@@ -41,7 +43,7 @@
 }
 
 - (IBAction)clickRetunBtn:(id)sender {
-    [self.view removeFromSuperview];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 - (void)didReceiveMemoryWarning {

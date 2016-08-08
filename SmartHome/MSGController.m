@@ -13,7 +13,7 @@
 @interface MSGController ()<HttpDelegate>
 @property(nonatomic,strong) NSMutableArray *msgArr;
 @property(nonatomic,strong) NSMutableArray *timesArr;
-
+@property(nonatomic,strong) NSMutableArray *recordIDs;
 @property (weak, nonatomic) IBOutlet UIView *footView;
 
 @end
@@ -35,6 +35,15 @@
         _timesArr = [NSMutableArray array];
     }
     return _timesArr;
+}
+-(NSMutableArray *)recordIDs
+{
+    if(!_recordIDs)
+    {
+        _recordIDs = [NSMutableArray array];
+    }
+    return _recordIDs;
+
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -67,12 +76,9 @@
             NSArray *msgList = dic[@"messageList"];
             for(NSDictionary *dicDetail in msgList)
             {
-                NSString *description = dicDetail[@"description"];
-                NSString *createDate = dicDetail[@"createDate"];
-                [self.msgArr addObject:description];
-                [self.timesArr addObject:createDate];
-                
-                
+                [self.msgArr addObject:dicDetail[@"description"]];
+                [self.timesArr addObject:dicDetail[@"createDate"]];
+                [self.recordIDs addObject:dicDetail[@"id"]];
             }
             
             [self.tableView reloadData];
@@ -80,7 +86,17 @@
             [MBProgressHUD showError:responseObject[@"Msg"]];
         }
 
+    }else if(tag == 2)
+    {
+        if([responseObject[@"Result"] intValue]==0)
+        {
+            [MBProgressHUD showSuccess:@"删除成功"];
+            
+        }else {
+            [MBProgressHUD showError:responseObject[@"Msg"]];
+        }
     }
+
     
     
 
@@ -142,22 +158,60 @@
     //放置要删除的对象
     NSMutableArray *deleteArray = [NSMutableArray array];
     NSMutableArray *deletedTime = [NSMutableArray array];
+    NSMutableArray *deletedID =[NSMutableArray array];
+    
     // 要删除的row
     NSArray *selectedArray = [self.tableView indexPathsForSelectedRows];
     
     for (NSIndexPath *indexPath in selectedArray) {
-        //[deleteArray addObject:self.Mydefaults[indexPath.row]];
+       
         [deleteArray addObject:self.msgArr[indexPath.row]];
         [deletedTime addObject:self.timesArr[indexPath.row]];
+        [deletedID addObject:self.recordIDs[indexPath.row]];
     }
     // 先删除数据源
     [self.msgArr removeObjectsInArray:deleteArray];
     [self.timesArr removeObjectsInArray:deletedTime];
     
+    if(deletedID.count != 0)
+    {
+        [self sendDeleteRequestWithArray:[deletedID copy]];
+    }else {
+        [MBProgressHUD showError:@"请选择要删除的记录"];
+    }
+    
+    
     [self clickCancelBtn:nil];
 
 }
 
+-(void)sendDeleteRequestWithArray:(NSArray *)deleteArr;
+{
+    NSString *url = [NSString stringWithFormat:@"%@EditPersonalInformation.aspx",[IOManager httpAddr]];
+    
+    NSString *recoreds = @"";
+    
+    for(int i = 0 ;i < deleteArr.count; i++)
+    {
+        if(i == deleteArr.count - 1)
+        {
+            NSString *record = [NSString stringWithFormat:@"%@",deleteArr[i]];
+            recoreds = [recoreds stringByAppendingString:record];
+            
+        }else {
+            NSString *record = [NSString stringWithFormat:@"%@,",deleteArr[i]];
+            recoreds = [recoreds stringByAppendingString:record];
+        }
+    }
+    
+    
+    NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"RecordIDList":recoreds,@"Type":[NSNumber numberWithInt:1]};
+    HttpManager *http = [HttpManager defaultManager];
+    http.delegate = self;
+    http.tag = 2;
+    [http sendPost:url param:dic];
+    
+}
 
 
 @end
