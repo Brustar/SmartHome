@@ -10,6 +10,8 @@
 #import "Scene.h"
 #import "SceneManager.h"
 #import "DeviceManager.h"
+#import "Device.h"
+#import "MBProgressHUD+NJ.h"
 @interface DeviceListController ()<UITableViewDelegate,UITableViewDataSource,UISplitViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -19,24 +21,35 @@
 
 @implementation DeviceListController
 
+-(void)setRoomid:(NSInteger)roomid
+{
+    _roomid = roomid;
+    self.devices = [DeviceManager devicesByRoomId:roomid];
+    self.tableViewHight.constant = self.devices.count * self.tableView.rowHeight;
+    if(self.isViewLoaded)
+    {
+        
+       [self.tableView reloadData];
+    }
+    
+}
+    
+
+
 -(void) viewDidLoad
 
 {
     
-    //self.devices=[NSArray arrayWithObjects:@"灯", @"窗帘" , @"电视"  , @"DVD" , @"机顶盒" , @"收音机" ,@"门禁" ,  @"摄像头"  ,@"空调" , nil];
-    self.devices = [DeviceManager getDeviceType];
+    
+    
     self.segues=[NSArray arrayWithObjects:@"Lighter" ,@"Curtain",@"TV"  ,@"DVD" ,@"Netv",@"FM",@"Guard",@"Camera",@"Air",nil];
     self.tableView.rowHeight=44;
-    self.tableViewHight.constant = self.devices.count * self.tableView.rowHeight;
-//    
-//    if (self.sceneid>0) {
-//        _delbutt.enabled=YES;
-//    }
     self.tableView.tableFooterView = [UIView new];
     self.tableView.layer.cornerRadius = 10;
     self.tableView.layer.masksToBounds = YES;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
+    
+    
     
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -44,7 +57,6 @@
     [super viewWillAppear:YES];
     self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
 }
-
 -(IBAction)remove:(id)sender
 {
     Scene *scene=[[Scene alloc] init];
@@ -57,8 +69,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
+ 
+#pragma mark - SplitViewController
 
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -66,7 +78,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.devices count];
+    return self.devices.count;
 }
 
 
@@ -78,14 +90,14 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-    cell.textLabel.text=[self.devices objectAtIndex:indexPath.row];
+    Device *device = self.devices[indexPath.row];
+    cell.textLabel.text=device.eName;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
-    //self.splitViewController.minimumPrimaryColumnWidth = self.view.frame.size.width;
     self.deviceid=[NSString stringWithFormat:@"%ld",indexPath.row+1];
     NSString *segua=@"Lighter";
     if (indexPath.row<9) {

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PushSettingController.h"
 @interface MySettingViewController : UIViewController
-@property (nonatomic,strong) PushSettingController *pushVC;
+
 
 
 @end

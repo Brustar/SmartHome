@@ -20,7 +20,6 @@
 #import "iflyMSC/IFlySpeechSynthesizer.h"
 #import "iflyMSC/IFlySpeechRecognizer.h"
 #import "IATConfig.h"
-#import "ISRDataHelper.h"
 
 @implementation LoginQRController
 
@@ -154,7 +153,7 @@
         [resultString appendFormat:@"%@",key];
     }
     _result =[NSString stringWithFormat:@"%@%@", _textView.text,resultString];
-    NSString * resultFromJson =  [ISRDataHelper stringFromJson:resultString];
+    NSString * resultFromJson =  [NSJSONSerialization JSONObjectWithData:[resultString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];//[ISRDataHelper stringFromJson:resultString];
     _textView.text = [NSString stringWithFormat:@"%@%@", _textView.text,resultFromJson];
     
     if (isLast){

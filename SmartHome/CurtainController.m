@@ -8,6 +8,9 @@
 
 #import "CurtainController.h"
 #import "CurtainTableViewCell.h"
+#import "PackManager.h"
+#import "ProtocolManager.h"
+#import "SocketManager.h"
 
 @interface CurtainController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -29,6 +32,8 @@
     self.cell = [[[NSBundle mainBundle] loadNibNamed:@"CurtainTableViewCell" owner:self options:nil] lastObject];
     self.cell.slider.continuous = NO;
     [self.cell.slider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
+    [self.cell.open addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
+    [self.cell.close addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
     if ([self.sceneid intValue]>0) {
         
@@ -46,9 +51,43 @@
 
 -(IBAction)save:(id)sender
 {
+    ProtocolManager *manager=[ProtocolManager defaultManager];
+    if ([sender isEqual:self.cell.slider]) {
+        NSString *key=[NSString stringWithFormat:@"location_%@",self.deviceid];
+        NSData* daty = [PackManager dataFormHexString:[manager queryDeviceStates:key]];
+        
+        uint8_t cmd=[PackManager dataToUint:daty];
+        NSData *data=[[DeviceInfo defaultManager] roll:cmd deviceID:self.deviceid value:self.cell.slider.value * 100];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:2];
+        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:2];
+    }
+    
+    if ([sender isEqual:self.cell.open]) {
+        NSData *data=[[DeviceInfo defaultManager] open:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:2];
+        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:2];
+    }
+    
+    if ([sender isEqual:self.cell.close]) {
+        NSData *data=[[DeviceInfo defaultManager] close:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:2];
+        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:2];
+    }
+    
     Curtain *device=[[Curtain alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
-    [device setOpenvalue:self.cell.slider.value*100];
+    [device setOpenvalue:self.cell.slider.value * 100];
+    
+    if ([sender isEqual:self.cell.open]) {
+        [device setOpenvalue:100];
+    }
+    
+    if ([sender isEqual:self.cell.close]) {
+        [device setOpenvalue:0];
+    }
     
     Scene *scene=[[Scene alloc] init];
     [scene setSceneID:[self.sceneid intValue]];

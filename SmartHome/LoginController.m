@@ -104,6 +104,16 @@
 - (void)checkVersion
 {
     // 检测版本号
+    NSString *strUrl =@"GetConfigVersion. aspx";
+    NSString *vEquipment = [[NSUserDefaults standardUserDefaults] objectForKey:@"vEquipment"];
+    NSString *vRoom = [[NSUserDefaults standardUserDefaults] objectForKey:@"vRoom"];
+    NSString *vScene = [[NSUserDefaults standardUserDefaults] objectForKey:@"vScene"];
+    NSString *vTVChannel = [[NSUserDefaults standardUserDefaults] objectForKey:@"vTVChannel"];
+    NSString *vFMChannel = [[NSUserDefaults standardUserDefaults] objectForKey:@"vFMChannel"];
+    NSString *vClient = [[NSUserDefaults standardUserDefaults] objectForKey:@"vClient"];
+    
+    
+    
     //获取设备配置信息
     NSArray *deviceArr = [DeviceManager getAllDevicesInfo];
     if (deviceArr == nil) {
@@ -111,6 +121,7 @@
     }else {
         //获取房间配置信息
         [self gainRoomInfo];
+        
         
         
     }
@@ -125,11 +136,14 @@
     {
         [self sendRequestForGettingConfigInfos:@"GetRoomsConfig.aspx" withTag:5];
     }
-    [self goToViewController];
+    [self gainScenesInfo];
     
 
 }
-
+//获取场景配置信息
+-(void)gainScenesInfo{
+    [self sendRequestForGettingConfigInfos:@"GetScenes.aspx" withTag:6];
+}
 -(void) httpHandler:(id) responseObject tag:(int)tag
 {
     if(tag == 1)
@@ -201,12 +215,21 @@
             NSDictionary *messageInfo = responseObject[@"messageInfo"];
             
             [IOManager writeConfigInfo:@"rooms" configFile:@"roomConfig.plist" dictionary:messageInfo];
-            [self goToViewController];
+            
+            //获取场景配置信息
+            [self gainScenesInfo];
+           
             
         }else{
             [MBProgressHUD showError:responseObject[@"Msg"]];
         }
 
+    }else if(tag == 6)
+    {
+        if([responseObject[@"Result"] intValue] == 0)
+        {
+             [self goToViewController];
+        }
     }
    
 }

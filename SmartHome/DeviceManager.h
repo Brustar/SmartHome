@@ -14,8 +14,7 @@
 +(NSArray *)getAllDevicesInfo;
 //得到所有设备的模型
 +(NSArray *)getDeviceModel;
-//获取所有设备种类
-+(NSArray *)getTypeNameForDevice;
-+ (NSArray *)getDeviceType;
+//根据房间ID的到该房间的所有设备
++(NSArray *)devicesByRoomId:(NSInteger)roomId;
 
 @end

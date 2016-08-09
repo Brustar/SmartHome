@@ -7,15 +7,14 @@
 //
 
 #define bgColour [UIColor colorWithRed:248/255.0 green:248/255.0 blue:250/255.0 alpha:1]
-
-
 #define ECloudTabBarItemCount  8
 
 
 #import "ECloudTabBar.h"
 #import "ECloudButton.h"
 #import "ECloudMoreView.h"
-
+#import "RoomManager.h"
+#import "Room.h"
 
 @interface ECloudTabBar () <ECloudMoreViewDelegate>
 @property (nonatomic, weak) UIView *rightView;
@@ -28,7 +27,7 @@
 
 @property (nonatomic, strong) ECloudMoreView *moreView;
 
-@property (nonatomic,strong) NSArray *roomName;
+@property (nonatomic,strong) NSArray *rooms;
 @end
 
 @implementation ECloudTabBar
@@ -76,10 +75,14 @@
 
 -(void)setUpLeftView
 {
-    self.roomName = @[@"客厅",@"主卧",@"儿童房",@"客卧",@"书房",@"品茶室",@"全屋",@"佛堂",@"瑜伽房"];
-    NSArray *imgs = @[@"drawing room",@"masterBedRoom",@"childrenRoom",@"guestBedRoom",@"bookRoom",@"teaRoom",@"wholeHouse",@"teaRoom",@"bookRoom"];
-    for (int i = 0; i < self.roomName.count; i++) {
-        ECloudButton *button = [[ECloudButton alloc] initWithTitle:self.roomName[i]  normalImage:imgs[i] selectImage:imgs[i]];
+   
+  
+    
+    self.rooms = [RoomManager getRoomModels];
+    
+    for (int i = 0; i < self.rooms.count; i++) {
+        Room *room = self.rooms[i];
+        ECloudButton *button = [[ECloudButton alloc] initWithTitle:room.rName  normalImage:room.imgUrl selectImage:room.imgUrl];
         if (0 == i) {
             self.selectButton = button;
         }
@@ -88,7 +91,7 @@
         
         [self setUpButtonParams:button];
         
-        if (i == ECloudTabBarItemCount - 1 && self.roomName.count > 8) {
+        if (i == ECloudTabBarItemCount - 1 && self.rooms.count > 8) {
             ECloudButton *lastButton = [[ECloudButton alloc] initWithTitle:@"更多" normalImage:@"more" selectImage:@"more"];
             [lastButton setTitleColor:[UIColor colorWithRed:97/255.0 green:176/255.0 blue:162/255.0 alpha:1] forState:UIControlStateNormal];
             lastButton.titleLabel.font = [UIFont systemFontOfSize:16];

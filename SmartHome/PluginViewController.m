@@ -59,6 +59,7 @@
 
 -(void)discoveryDevice:(NSData *)data
 {
+    [self.devices removeAllObjects];
     //fe01 0001 0016 0002 313710c8a5a505004b1200 98831069354304004b1200 de00ff
     NSData *length=[data subdataWithRange:NSMakeRange(6, 2)];
     for (int i; i<[PackManager NSDataToUInt:length]; i++) {
@@ -85,8 +86,8 @@
     [data appendData:addr];
     NSString *tail=@"011e00ff";
     [data appendData:[PackManager dataFormHexString:tail]];
-    [sock.socket writeData:data withTimeout:-1 tag:0];
-    [sock.socket readDataToData:[NSData dataWithBytes:"\xFF" length:1] withTimeout:-1 tag:0];
+    [sock.socket writeData:data withTimeout:-1 tag:1];
+    [sock.socket readDataToData:[NSData dataWithBytes:"\xFF" length:1] withTimeout:-1 tag:1];
 }
 
 #pragma mark  - TCP delegate
@@ -111,7 +112,7 @@
     PluginCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     
-    cell.label.text =[NSString stringWithFormat:@"插座%li",indexPath.row];
+    cell.label.text =[NSString stringWithFormat:@"插座%li",(long)indexPath.row];
     cell.power.tag=indexPath.row;
     [cell.power addTarget:self action:@selector(switchDevice:) forControlEvents:UIControlEventValueChanged];
     return cell;

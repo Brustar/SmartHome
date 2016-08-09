@@ -58,6 +58,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.subTypeArr = @[@"照明",@"窗帘"];
     self.tableView.tableFooterView = self.footerView;
     self.tableView.backgroundColor = backGroudColour;
