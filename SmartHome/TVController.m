@@ -16,6 +16,8 @@
 #import "KxMenu.h"
 #import "VolumeManager.h"
 #import "SCWaveAnimationView.h"
+#import "ProtocolManager.h"
+#import "SocketManager.h"
 
 @interface TVController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,TVLogoCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *touchpad;
@@ -86,7 +88,7 @@
         for(int i=0;i<[scene.devices count];i++)
         {
             if ([[scene.devices objectAtIndex:i] isKindOfClass:[TV class]]) {
-                self.volume.value=((TV*)[scene.devices objectAtIndex:i]).volume/100.0;
+                self.volume.value=((TV *)[scene.devices objectAtIndex:i]).volume/100.0;
             }
         }
     }
@@ -152,7 +154,6 @@
 
 
 #pragma mark - Navigation
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
    
     id theSegue = segue.destinationViewController;
@@ -162,6 +163,11 @@
 
 - (IBAction)mute:(id)sender {
     self.volume.value=0.0;
+    
+    NSData *data=[[DeviceInfo defaultManager] changeTVolume:0x00 deviceID:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+    [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1];
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -173,6 +179,7 @@
         [self save:nil];
     }
 }
+
 //设置pageController
 -(void)setUpPageController
 {
@@ -180,6 +187,7 @@
     self.pageController.pageIndicatorTintColor = [UIColor whiteColor];
     self.pageController.currentPageIndicatorTintColor = [UIColor blackColor];
 }
+
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGPoint point = scrollView.contentOffset;
     self.pageController.currentPage = round(point.x/scrollView.bounds.size.width);
@@ -196,11 +204,11 @@
         }else{
             int i = 4 - self.allFavourTVChannels.count % 4;
             return  self.allFavourTVChannels.count + i;
-
         }
     }
     return self.btnTitles.count + 1;
 }
+
 -(UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if(collectionView  == self.tvLogoCollectionView)
@@ -216,17 +224,15 @@
             TVChannel *channel = self.allFavourTVChannels[indexPath.row];
             cell.imgView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",channel.channel_pic]];
             [cell useLongPressGesture];
-            
-            
         }
         
         return cell;
-        
     }
     DVCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell" forIndexPath:indexPath];
     if(indexPath.row == self.btnTitles.count)
     {
         [cell.btn setImage:[UIImage imageNamed:@"quiet"] forState:UIControlStateNormal];
+        [cell.btn addTarget:self action:@selector(mute:) forControlEvents:UIControlEventTouchUpInside];
         
     }else{
         [cell.btn setTitle:[NSString stringWithFormat:@"%@",self.btnTitles[indexPath.row]] forState:UIControlStateNormal];
@@ -234,13 +240,20 @@
     }
     return cell;
 }
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
     
     if(collectionView == self.tvLogoCollectionView)
     {
         TVLogoCell *cell =(TVLogoCell*)[collectionView cellForItemAtIndexPath:indexPath];
         [cell hiddenEditBtnAndDeleteBtn];
         
+        int channelValue=[[self.allFavourTVChannels objectAtIndex:indexPath.row] channelValue];
+        NSData *data=[[DeviceInfo defaultManager] switchProgram:channelValue deviceID:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1];
     }
 
 }
@@ -257,9 +270,13 @@
         self.retChannel=[button.titleLabel.text intValue];
     }
     
+    NSData *data=[[DeviceInfo defaultManager] switchProgram:self.retChannel deviceID:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+    [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1];
 }
 
--(IBAction)changecolor
+-(void)changecolor
 {
     UIButton *button=[self.timer userInfo];
     button.backgroundColor = [UIColor clearColor];
@@ -270,7 +287,7 @@
     [self.timer invalidate];
 }
 
-#pragma mark -- TVLogoCellDelegate
+#pragma mark - TVLogoCellDelegate
 -(void)tvDeleteAction:(TVLogoCell *)cell
 {
     self.cell = cell;
@@ -292,7 +309,7 @@
     TVChannel *channel = self.allFavourTVChannels[indexPath.row];
     [self.editChannelImgBtn setBackgroundImage:cell.imgView.image forState:UIControlStateNormal];
     self.channelName.text = channel.channel_name;
-    self.channeID.text = [NSString stringWithFormat:@"%ld",channel.channel_id];
+    self.channeID.text = [NSString stringWithFormat:@"%d",(int)channel.channel_id];
     [self showCoverView];
 }
 
@@ -301,27 +318,26 @@
     self.coverView.hidden = NO;
     self.editView.hidden = NO;
 }
+
 -(void)hiddenCoverView{
     self.coverView.hidden = YES;
     self.editView.hidden = YES;
 }
 
-#pragma mark -编辑电视频道
+#pragma mark - 编辑电视频道
 //编辑完成后上传频道
-- (IBAction)clickSureBtnAfterEdited:(id)sender {
+- (IBAction)clickSureBtnAfterEdited:(id)sender
+{
     [self hiddenCoverView];
     
 }
-- (IBAction)cancelEdit:(id)sender {
+- (IBAction)cancelEdit:(id)sender
+{
     [self hiddenCoverView];
-   
-    
 }
 
-
-
-
-- (IBAction)editChannelImgBtn:(UIButton *)sender {
+- (IBAction)editChannelImgBtn:(UIButton *)sender
+{
     UIButton *btn = sender;
     UIView *view = btn.superview;
     CGFloat y = view.frame.origin.y -(view.frame.size.width - btn.frame.size.width);
@@ -339,14 +355,12 @@
                                                                                     target:self
                                                                                     action:@selector(takePhoto:)],
                                                                       ]];
-
-                                                                      
-                                        
-    
 }
+
 -(void)preset:(KxMenuItem *)item{
     
 }
+
 - (void)selectPhoto:(KxMenuItem *)item {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
@@ -364,6 +378,7 @@
     
     [self presentViewController:picker animated:YES completion:NULL];
 }
+
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     UIImage *chooseImg = info[UIImagePickerControllerEditedImage];
@@ -371,8 +386,7 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark -
-#pragma mark touch detection
+#pragma mark - touch detection
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     CGPoint touchPoint = [[touches anyObject] locationInView:[[UIApplication sharedApplication] keyWindow]];
@@ -383,16 +397,15 @@
     }
 }
 
-
 -(void)dealloc
 {
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device removeObserver:self forKeyPath:@"volume" context:nil];
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
    
 }
-
 
 @end

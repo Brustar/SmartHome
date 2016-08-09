@@ -14,7 +14,9 @@
 @property (nonatomic,assign) NSInteger channel_id;
 @property (nonatomic,strong) NSString *channel_pic;
 @property (nonatomic,strong) NSString *parent;
+@property (nonatomic,assign) int channelValue;
 @property (nonatomic,assign) BOOL isFavorite;
+
 
 +(instancetype)getChannelFromChannelID:(NSInteger)channel_id;
 +(NSMutableArray *)getAllChannelForFavoritedForType:(NSString *)type;

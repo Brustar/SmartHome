@@ -15,6 +15,7 @@
 #import "MBProgressHUD+NJ.h"
 #import "FMDatabase.h"
 #import "DeviceManager.h"
+#import "HttpManager.h"
 
 @implementation DeviceInfo
 
@@ -42,26 +43,57 @@
     [self initSQlite];
     
     //先判断版本号
-    NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSString *userHostID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserHostID"];
-    NSString *url = [NSString stringWithFormat:@"%@GetConfigVersion.aspx",[IOManager httpAddr]];
-    
     
     //更新设备，房间，场景表，protocol,写入sqlite
     //缓存协议
-    [[ProtocolManager defaultManager] fetchAll];
+    NSString *url = [NSString stringWithFormat:@"%@GetProtocolConfig.aspx",[IOManager httpAddr]];
+    id ver=[[NSUserDefaults standardUserDefaults] objectForKey:@"protocolVer"];
+    NSDictionary *param = @{@"version":[NSString stringWithFormat:@"%@" ,ver]};
+    HttpManager *http=[HttpManager defaultManager];
+    http.delegate=self;
+    http.tag = 1;
+    [http sendPost:url param:param];
+    
 }
+
+-(void) httpHandler:(id) responseObject tag:(int)tag
+{
+    if(tag == 1)
+    {
+        NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+        FMDatabase *db = [FMDatabase databaseWithPath:dbPath] ;
+        if([responseObject[@"Result"] isEqualToString:@"0"]){
+            if ([db open]) {
+                [db executeQuery:@"delete from t_protocol_config"];
+                int i=0;
+                for (NSDictionary *dic in responseObject[@"messageInfo"]) {
+                    NSString *sql=[NSString stringWithFormat:@"insert into t_protocol_config values(%d,%@,%@,'%@','%@','%@','%@','%@')",i++,dic[@"pId"],dic[@"pId"],dic[@"typeName"],dic[@"typeId"],dic[@"actName"],dic[@"actNameKey"],dic[@"actCode"]];
+                    BOOL result=[db executeUpdate:sql];
+                    if (result) {
+                        NSLog(@"insert 成功");
+                    }else{
+                        NSLog(@"insert 失败");
+                    }
+                }
+                [IOManager writeUserdefault:responseObject[@"Ver"] forKey:@"protocolVer"];
+            }
+        }
+        [[ProtocolManager defaultManager] fetchAll];
+        [db close];
+    }
+}
+
 -(void)initSQlite
 {
     NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath] ;
     if ([db open]) {
-        NSString *sqlRom=@"CREATE TABLE IF NOT EXISTS Rooms(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"PM25\" INTEGER, \"NOISE\" INTEGER, \"TEMPTURE\" INTEGER, \"CO2\" INTEGER, \"moisture\" INTEGER)";
-        NSString *sqlChannel=@"CREATE TABLE IF NOT EXISTS Channels (\"id\" INTEGER PRIMARY KEY  NOT NULL  UNIQUE , \"Channel_name\" TEXT, \"Channel_id\" INTEGER, \"Channel_pic\" TEXT, \"parent\" CHAR(2) NOT NULL  DEFAULT TV, \"isFavorite\" BOOL DEFAULT 0);";
+        NSString *sqlRoom=@"CREATE TABLE IF NOT EXISTS Rooms(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"PM25\" INTEGER, \"NOISE\" INTEGER, \"TEMPTURE\" INTEGER, \"CO2\" INTEGER, \"moisture\" INTEGER)";
+        NSString *sqlChannel=@"CREATE TABLE IF NOT EXISTS Channels (\"id\" INTEGER PRIMARY KEY  NOT NULL  UNIQUE , \"Channel_name\" TEXT, \"Channel_id\" INTEGER, \"Channel_pic\" TEXT, \"parent\" CHAR(2) NOT NULL  DEFAULT TV,\"channelValue\" INTEGER DEFAULT 0, \"isFavorite\" BOOL DEFAULT 0);";
         NSString *sqlDevice=@"CREATE TABLE IF NOT EXISTS Devices(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"sn\" TEXT, \"birth\" DATETIME, \"guarantee\" DATETIME, \"model\" TEXT, \"price\" FLOAT, \"purchase\" DATETIME, \"producer\" TEXT, \"gua_tel\" TEXT, \"power\" INTEGER, \"current\" FLOAT, \"voltage\" INTEGER, \"protocol\" TEXT)";
         NSString *sqlScene=@"CREATE TABLE IF NOT EXISTS \"Scenes\" (\"ID\" INT PRIMARY KEY  NOT NULL ,\"NAME\" TEXT NOT NULL ,\"room\" INT NOT NULL ,\"pic\" CHAR(50) DEFAULT (null) ,\"isFavorite\" Key Boolean DEFAULT (0) )";
         NSString *sqlProtocol=@"CREATE TABLE IF NOT EXISTS [t_protocol_config]([rid] [int] IDENTITY(1,1) NOT NULL,[eid] [int] NULL,[enumber] [varchar](64) NULL,[ename] [varchar](64) NULL,[etype] [varchar](64) NULL,[actname] [varchar](256) NULL,[actcode] [varchar](256) NULL, \"actKey\" VARCHAR)";
-        NSArray *sqls=@[sqlRom,sqlChannel,sqlDevice,sqlScene,sqlProtocol];
+        NSArray *sqls=@[sqlRoom,sqlChannel,sqlDevice,sqlScene,sqlProtocol];
         //4.创表
         for (NSString *sql in sqls) {
             BOOL result=[db executeUpdate:sql];
@@ -75,7 +107,6 @@
         NSLog(@"Could not open db.");
     }
     
-    [db closeOpenResultSets];
     [db close];
 }
 
@@ -132,7 +163,7 @@
     proto.cmd=0x03;
     proto.action.state=action;
     
-    proto.deviceID=CFSwapInt16BigToHost([manager queryDeviceHexIDs:deviceID]);
+    proto.deviceID=CFSwapInt16BigToHost([deviceID intValue]);
     proto.deviceType=[[manager queryDeviceTypes:deviceID] intValue];
     proto.masterID=CFSwapInt16BigToHost(0x22b8);//self.masterID;
     return dataFromProtocol(proto);
@@ -146,7 +177,7 @@
     proto.action.state=action;
     proto.action.RValue=value;
     proto.deviceType=CFSwapInt16BigToHost([[manager queryDeviceTypes:deviceID] intValue]);
-    proto.deviceID=[manager queryDeviceHexIDs:deviceID];
+    proto.deviceID=[deviceID intValue];
     proto.masterID=CFSwapInt16BigToHost(self.masterID);
     return dataFromProtocol(proto);
 }
@@ -161,7 +192,7 @@
     proto.action.B=blue;
     proto.action.G=green;
     proto.deviceType=CFSwapInt16BigToHost([[manager queryDeviceTypes:deviceID] intValue]);
-    proto.deviceID=[manager queryDeviceHexIDs:deviceID];
+    proto.deviceID=[deviceID intValue];
     proto.masterID=CFSwapInt16BigToHost(self.masterID);
     return dataFromProtocol(proto);
 }
