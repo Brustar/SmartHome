@@ -167,6 +167,7 @@
 		F69C82301D35D214002DE6D7 /* PushSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = F69C822F1D35D214002DE6D7 /* PushSettingController.m */; };
 		F69C82331D363376002DE6D7 /* ServiceRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F69C82321D363376002DE6D7 /* ServiceRecordViewController.m */; };
 		F69C82361D363A4D002DE6D7 /* ServiceRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F69C82351D363A4D002DE6D7 /* ServiceRecordCell.m */; };
+		F6A1C02E1D586D7500856E00 /* Room.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A1C02D1D586D7500856E00 /* Room.m */; };
 		F6B91F6F1D100EF700592FB0 /* DVCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B91F6E1D100EF700592FB0 /* DVCollectionViewCell.m */; };
 		F6B91F721D100F1400592FB0 /* TVChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B91F701D100F1400592FB0 /* TVChannel.m */; };
 /* End PBXBuildFile section */
@@ -584,6 +585,8 @@
 		F69C82321D363376002DE6D7 /* ServiceRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceRecordViewController.m; sourceTree = "<group>"; };
 		F69C82341D363A4D002DE6D7 /* ServiceRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceRecordCell.h; sourceTree = "<group>"; };
 		F69C82351D363A4D002DE6D7 /* ServiceRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceRecordCell.m; sourceTree = "<group>"; };
+		F6A1C02C1D586D7500856E00 /* Room.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Room.h; sourceTree = "<group>"; };
+		F6A1C02D1D586D7500856E00 /* Room.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Room.m; sourceTree = "<group>"; };
 		F6B91F6D1D100EF700592FB0 /* DVCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVCollectionViewCell.h; sourceTree = "<group>"; };
 		F6B91F6E1D100EF700592FB0 /* DVCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVCollectionViewCell.m; sourceTree = "<group>"; };
 		F6B91F701D100F1400592FB0 /* TVChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVChannel.m; sourceTree = "<group>"; };
@@ -672,6 +675,8 @@
 				F6B91F701D100F1400592FB0 /* TVChannel.m */,
 				F6251F721D541D8A000A5A47 /* Device.h */,
 				F6251F731D541D8A000A5A47 /* Device.m */,
+				F6A1C02C1D586D7500856E00 /* Room.h */,
+				F6A1C02D1D586D7500856E00 /* Room.m */,
 			);
 			name = entity;
 			sourceTree = "<group>";
@@ -1636,6 +1641,7 @@
 				F6642A781D41F55E0003D56B /* ScenseSplitViewController.m in Sources */,
 				F673EBD21D45E976001270FB /* VerifyCodeView.m in Sources */,
 				F65838D41D39D3BB004210AC /* WelcomeController.m in Sources */,
+				F6A1C02E1D586D7500856E00 /* Room.m in Sources */,
 				F6755A581D40D450002394F3 /* ECloudButton.m in Sources */,
 				0FAF98A51CE40F3C009BDBB5 /* QRCodeReaderView.m in Sources */,
 				F69C82331D363376002DE6D7 /* ServiceRecordViewController.m in Sources */,
@@ -1810,7 +1816,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FFmpeg-iOS/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1848,7 +1854,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FFmpeg-iOS/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

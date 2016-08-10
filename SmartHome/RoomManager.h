@@ -9,5 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface RoomManager : NSObject
-+(NSDictionary *)getAllRoomsInfo;
+
++(NSArray *)getAllRoomsInfo;
+
+
 @end

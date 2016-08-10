@@ -99,7 +99,7 @@
     self.selectedDeviceTableView.tableFooterView = [UIView new];
     
     self.deviceType = @[@"全部设备",@"照明设备",@"影音设备",@"安防设备",@"环境设备"];
-    // self.subLigths = [DetailList getDeviceForModel:@"照明"];
+    
     self.subLigths = @[@"1",@"3",@"2",@"4"];
     self.subMedia = [DetailList getDeviceForModel:@"影音"];
     self.subProtect = [DetailList getDeviceForModel:@"安防"];

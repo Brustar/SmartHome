@@ -10,6 +10,9 @@
 #import "RoomListController.h"
 #import "AddSenseCell.h"
 #import "FixTimeRepeatController.h"
+#import "RoomManager.h"
+#import "Room.h"
+
 @interface RoomListController ()<UITableViewDataSource,UITableViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 @property (nonatomic,strong) NSArray *rooms;
 @property (weak, nonatomic) IBOutlet UIView *timeView;
@@ -22,6 +25,7 @@
 @property (nonatomic,strong) NSArray *noon;
 @property (nonatomic,strong) FixTimeRepeatController *fixTimeVC;
 @property (nonatomic,strong) NSMutableArray *weeks;
+
 @end
 
 @implementation RoomListController
@@ -87,20 +91,30 @@
     }
     return _weeks;
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.timeView.layer.cornerRadius = 10;
     self.timeView.layer.masksToBounds = YES;
-
+    
+    //self.rooms = [RoomManager getRoomModels];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = [UIView new];
-    self.rooms = @[@"客厅",@"主卧",@"书房"];
+   
     
+
     [self.tableView selectRowAtIndexPath:0 animated:YES scrollPosition:UITableViewScrollPositionTop];
     self.splitViewController.maximumPrimaryColumnWidth = 250;
     self.tableView.backgroundColor = backGroudColour;
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectWeek:) name:@"SelectWeek" object:nil];
-  
+
+   }
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:YES];
+    //默认选中第一行
+//     NSIndexPath *selectedIndexPath  = [NSIndexPath indexPathForRow:0 inSection:0];
+//     [self.tableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
 }
 #pragma mark - Table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -111,7 +125,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     AddSenseCell *cell = [tableView dequeueReusableCellWithIdentifier:@"roomListCell" forIndexPath:indexPath];
-    cell.roomName.text = self.rooms[indexPath.row];
+   
+
+    Room *room = self.rooms[indexPath.row];
+    cell.roomName.text = room.rName;
     
     
     return cell;
@@ -126,20 +143,23 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //当点击某一行时，通过房间ID获得所有的设备
-    if([self.delegate respondsToSelector:@selector(RoomListControllerDelegate:SelectedRoom:)])
+   if([self.delegate respondsToSelector:@selector(RoomListControllerDelegate:SelectedRoom:)])
     {
-        [self.delegate RoomListControllerDelegate:self SelectedRoom:indexPath.row];
+        Room *room = self.rooms[indexPath.row];
+        [self.delegate RoomListControllerDelegate:self SelectedRoom:room.rId];
     }
+    
 }
 - (IBAction)clickFixTimeBtn:(id)sender {
     UIButton *btn = (UIButton *)sender;
-    btn.selected = !btn.selected;
+    
     if(btn.selected)
     {
         self.timeView.hidden = YES;
     }else {
         self.timeView.hidden =  NO;
     }
+    btn.selected = !btn.selected;
 }
 
 #pragma  mark - UIPickerViewDelegate
@@ -214,6 +234,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
+}
+
+- (IBAction)gotoLastViewController:(id)sender {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

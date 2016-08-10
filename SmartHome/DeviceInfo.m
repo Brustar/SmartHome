@@ -43,6 +43,7 @@
     [self initSQlite];
     
     //先判断版本号
+
     
     //更新设备，房间，场景表，protocol,写入sqlite
     //缓存协议
@@ -88,10 +89,11 @@
     NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath] ;
     if ([db open]) {
-        NSString *sqlRoom=@"CREATE TABLE IF NOT EXISTS Rooms(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"PM25\" INTEGER, \"NOISE\" INTEGER, \"TEMPTURE\" INTEGER, \"CO2\" INTEGER, \"moisture\" INTEGER)";
-        NSString *sqlChannel=@"CREATE TABLE IF NOT EXISTS Channels (\"id\" INTEGER PRIMARY KEY  NOT NULL  UNIQUE , \"Channel_name\" TEXT, \"Channel_id\" INTEGER, \"Channel_pic\" TEXT, \"parent\" CHAR(2) NOT NULL  DEFAULT TV,\"channelValue\" INTEGER DEFAULT 0, \"isFavorite\" BOOL DEFAULT 0);";
-        NSString *sqlDevice=@"CREATE TABLE IF NOT EXISTS Devices(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"sn\" TEXT, \"birth\" DATETIME, \"guarantee\" DATETIME, \"model\" TEXT, \"price\" FLOAT, \"purchase\" DATETIME, \"producer\" TEXT, \"gua_tel\" TEXT, \"power\" INTEGER, \"current\" FLOAT, \"voltage\" INTEGER, \"protocol\" TEXT)";
-        NSString *sqlScene=@"CREATE TABLE IF NOT EXISTS \"Scenes\" (\"ID\" INT PRIMARY KEY  NOT NULL ,\"NAME\" TEXT NOT NULL ,\"room\" INT NOT NULL ,\"pic\" CHAR(50) DEFAULT (null) ,\"isFavorite\" Key Boolean DEFAULT (0) )";
+
+        NSString *sqlRoom=@"CREATE TABLE IF NOT EXISTS Rooms(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"PM25\" INTEGER, \"NOISE\" INTEGER, \"TEMPTURE\" INTEGER, \"CO2\" INTEGER, \"moisture\" INTEGER, \"imgUrl\" TEXT)";
+        NSString *sqlChannel=@"CREATE TABLE IF NOT EXISTS Channels (\"id\" INTEGER PRIMARY KEY  NOT NULL  UNIQUE , \"Channel_name\" TEXT, \"Channel_id\" INTEGER, \"Channel_pic\" TEXT, \"parent\" CHAR(2) NOT NULL  DEFAULT TV, \"isFavorite\" BOOL DEFAULT 0, \"eqNumber\" INTEGER, \"rate\" FLOAT)";
+        NSString *sqlDevice=@"CREATE TABLE IF NOT EXISTS Devices(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"sn\" TEXT, \"birth\" DATETIME, \"guarantee\" DATETIME, \"model\" TEXT, \"price\" FLOAT, \"purchase\" DATETIME, \"producer\" TEXT, \"gua_tel\" TEXT, \"power\" INTEGER, \"current\" FLOAT, \"voltage\" INTEGER, \"protocol\" TEXT, \"rID\" INTEGER, \"eNumber\" INTEGER, \"hTypeId\" INTEGER, \"subTypeId\" INTEGER, \"typeName\" TEXT, \"subTypeName\" TEXT)";
+        NSString *sqlScene=@"CREATE TABLE IF NOT EXISTS \"Scenes\" (\"ID\" INT PRIMARY KEY  NOT NULL ,\"NAME\" TEXT NOT NULL ,\"room\" INT NOT NULL ,\"pic\" CHAR(50) DEFAULT (null) ,\"isFavorite\" Key Boolean DEFAULT (0), \"eId\" INTEGER, \"startTime\" TEXT, \"astronomicalTime\" TEXT, \"weekValue\" TEXT, \"weekRepeat\" INTEGER, \"rId\" INTEGER)";
         NSString *sqlProtocol=@"CREATE TABLE IF NOT EXISTS [t_protocol_config]([rid] [int] IDENTITY(1,1) NOT NULL,[eid] [int] NULL,[enumber] [varchar](64) NULL,[ename] [varchar](64) NULL,[etype] [varchar](64) NULL,[actname] [varchar](256) NULL,[actcode] [varchar](256) NULL, \"actKey\" VARCHAR)";
         NSArray *sqls=@[sqlRoom,sqlChannel,sqlDevice,sqlScene,sqlProtocol];
         //4.创表

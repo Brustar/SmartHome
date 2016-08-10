@@ -40,6 +40,7 @@
 @property (weak, nonatomic) IBOutlet UIView *coverView;
 @property (weak, nonatomic) IBOutlet UIButton *editChannelImgBtn;
 
+
 - (IBAction)editChannelImgBtn:(UIButton *)sender;
 
 @end
@@ -71,6 +72,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"电视";
+   
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     

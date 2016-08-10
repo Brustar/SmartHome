@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="前窗" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wSV-oJ-oCF">
@@ -20,7 +20,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <slider opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="tNT-YH-Tpj">
+                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="tNT-YH-Tpj">
                         <rect key="frame" x="58" y="7" width="204" height="31"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="200" id="Ikh-7O-auW"/>
@@ -55,6 +55,7 @@
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="wSV-oJ-oCF" secondAttribute="bottom" constant="3" id="BpN-A0-N95"/>
                     <constraint firstItem="wSV-oJ-oCF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="KNJ-rf-wPX"/>
+                    <constraint firstItem="tNT-YH-Tpj" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="NPV-3I-kLm"/>
                     <constraint firstItem="wSV-oJ-oCF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="TKH-aZ-TXC"/>
                     <constraint firstItem="i5X-4V-Nt6" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="WTe-NP-oYY"/>
                     <constraint firstAttribute="trailing" secondItem="i5X-4V-Nt6" secondAttribute="trailing" constant="30" id="ZOO-N4-esG"/>
