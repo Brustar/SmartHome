@@ -78,7 +78,7 @@
    
   
     
-    self.rooms = [RoomManager getRoomModels];
+   // self.rooms = [RoomManager getRoomModels];
     
     for (int i = 0; i < self.rooms.count; i++) {
         Room *room = self.rooms[i];

@@ -97,7 +97,7 @@
     self.timeView.layer.cornerRadius = 10;
     self.timeView.layer.masksToBounds = YES;
     
-    self.rooms = [RoomManager getRoomModels];
+    //self.rooms = [RoomManager getRoomModels];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = [UIView new];
    

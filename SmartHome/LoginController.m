@@ -24,6 +24,9 @@
 #import "ECloudTabBarController.h"
 #import "DeviceManager.h"
 #import "RoomManager.h"
+#import "FMDatabase.h"
+
+
 @interface LoginController ()<QRCodeReaderDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITextField *user;
@@ -36,6 +39,14 @@
 @property(nonatomic,strong) NSString *role;
 @property(nonatomic,strong) NSMutableArray *hostIDS;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic,assign) int vEquipmentsLast;
+@property (nonatomic,assign) int vRoomLast;
+@property (nonatomic,assign) int vSceneLast;
+@property (nonatomic,assign) int vTVChannelLast;
+@property (nonatomic,assign) int vFMChannellLast;
+@property (nonatomic,assign) int vClientlLast;
+
+
 
 @end
 
@@ -101,48 +112,56 @@
     http.tag = tag;
     [http sendPost:url param:dic];
 }
-- (void)checkVersion
+
+
+//判断版本号
+-(void)judgeVersion:(NSDictionary *)responseObject
 {
-    // 检测版本号
-    NSString *strUrl =@"GetConfigVersion. aspx";
-    NSString *vEquipment = [[NSUserDefaults standardUserDefaults] objectForKey:@"vEquipment"];
-    NSString *vRoom = [[NSUserDefaults standardUserDefaults] objectForKey:@"vRoom"];
-    NSString *vScene = [[NSUserDefaults standardUserDefaults] objectForKey:@"vScene"];
-    NSString *vTVChannel = [[NSUserDefaults standardUserDefaults] objectForKey:@"vTVChannel"];
-    NSString *vFMChannel = [[NSUserDefaults standardUserDefaults] objectForKey:@"vFMChannel"];
-    NSString *vClient = [[NSUserDefaults standardUserDefaults] objectForKey:@"vClient"];
+    self.vEquipmentsLast = [responseObject[@"vEquipment"] intValue];
+    self.vRoomLast = [responseObject[@"vRoom"] intValue];
+    self.vSceneLast = [responseObject[@"vScene"] intValue];
+    self.vTVChannelLast = [responseObject[@"vTVChannel"] intValue];
+    self.vFMChannellLast = [responseObject[@"vFMChannel"] intValue];
+    self.vClientlLast = [responseObject[@"vClient"] intValue];
     
+    int vEquipment = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vEquipment"] intValue];
+    int vRoom = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vRoom"] intValue];
+    int vScene = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vScene"] intValue];
+    int vTVChannel = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vTVChannel"] intValue];
+    int vFMChannel = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vFMChannel"] intValue];
+    int vClient = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vClient"] intValue];
     
-    
-    //获取设备配置信息
-    NSArray *deviceArr = [DeviceManager getAllDevicesInfo];
-    if (deviceArr == nil) {
-        [self sendRequestForGettingConfigInfos:@"GetEquipmentsInfo.aspx" withTag:4];
-    }else {
-        //获取房间配置信息
-        [self gainRoomInfo];
-        
-        
-        
-    }
-    
-    
-    
-}
-//获取房间配置信息
--(void)gainRoomInfo{
-    NSDictionary *roomDic = [RoomManager getAllRoomsInfo];
-    if(roomDic == nil)
+    if(self.vEquipmentsLast > vEquipment)
     {
-        [self sendRequestForGettingConfigInfos:@"GetRoomsConfig.aspx" withTag:5];
+      // 更新设备
+        [IOManager writeUserdefault:[NSNumber numberWithInt:self.vEquipmentsLast] forKey:@"vEquipment"];
+        [self sendRequestForGettingConfigInfos:@"GetEquipmentsInfo.aspx" withTag:5];
+    }else if(self.vRoomLast > vRoom)
+    {
+        //更新房间
+        [self updateRoomInfo];
+    }else if(self.vSceneLast > vScene)
+    {
+        //更新场景
+        [self updateSceneInfo];
+        
+    }else {
+        [self goToViewController];
     }
-    [self gainScenesInfo];
-    
+  
 
 }
-//获取场景配置信息
--(void)gainScenesInfo{
-    [self sendRequestForGettingConfigInfos:@"GetScenes.aspx" withTag:6];
+//更新房间配置信息
+-(void)updateRoomInfo{
+    
+    [IOManager writeUserdefault:[NSNumber numberWithInt:self.vRoomLast] forKey:@"vRoom"];
+    [self sendRequestForGettingConfigInfos:@"GetRoomsConfig.aspx" withTag:6];
+}
+//更新场景配置信息
+-(void)updateSceneInfo
+{
+    [IOManager writeUserdefault:[NSNumber numberWithInt:self.vSceneLast] forKey:@"vRoom"];
+    [self sendRequestForGettingConfigInfos:@"GetScenes.aspx" withTag:7];
 }
 -(void) httpHandler:(id) responseObject tag:(int)tag
 {
@@ -190,45 +209,140 @@
             self.tableView.hidden = YES;
             self.coverView.hidden = YES;
             
-            [self checkVersion];
+            //检查版本号
+            [self sendRequestForGettingConfigInfos:@"GetConfigVersion.aspx" withTag:4];
         }
         
-    }else if (tag == 4){
-        if([responseObject[@"Result"] intValue] == 0)
+    }else if(tag == 4){
+        if([responseObject[@"Result"] intValue]==0)
         {
-            //写数据到plist文件
-            NSArray *messageInfo = responseObject[@"messageInfo"];
+                       //判断版本号
+            [self judgeVersion:(responseObject)];
             
-            [IOManager writeConfigInfo:@"devices" configFile:@"deviceConfig.plist" array:messageInfo];
-            
-            //获取房间配置信息
-            [self gainRoomInfo];
-            
-        }else{
-            [MBProgressHUD showError:responseObject[@"Msg"]];
         }
         
     }else if (tag == 5){
         if([responseObject[@"Result"] intValue] == 0)
         {
-            //写数据到plist文件
-            NSDictionary *messageInfo = responseObject[@"messageInfo"];
+           
+            //写设备配置信息到sql
             
-            [IOManager writeConfigInfo:@"rooms" configFile:@"roomConfig.plist" dictionary:messageInfo];
+            NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+            FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+            if([db open])
+            {
+                
+                NSArray *messageInfo =  responseObject[@"messageInfo"];
+                for(NSDictionary *dic in messageInfo)
+                {
+                   NSInteger rId = [dic[@"rId"] integerValue];
+                    NSArray *equipmentList = dic[@"equipmentList"];
+                    for(NSDictionary *equip in equipmentList)
+                    {
+                        NSString *sql = [NSString stringWithFormat:@"insert into Devices values(%d,'%@',%@,%@,%@,%@,%@,%@,%@,'%@',%@,%@,%@,%@,%ld,%@,%@,%@,'%@','%@')",[equip[@"eId"] intValue],equip[@"eName"],NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,rId,equip[@"eNumber"],equip[@"hTypeId"],equip[@"subTypeId"],equip[@"typeName"],equip[@"subTypeName"]];
+                        
+                        BOOL result = [db executeUpdate:sql];
+                        if(result)
+                        {
+                            NSLog(@"insert 成功");
+                        }else{
+                            NSLog(@"insert 失败");
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            [db close];
+            //判断房间版本
+            int vRoom = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vRoom"] intValue];
+            if(self.vRoomLast > vRoom)
+            {
+                [self updateRoomInfo];
+            }
+
             
-            //获取场景配置信息
-            [self gainScenesInfo];
+        }else{
+            [MBProgressHUD showError:responseObject[@"Msg"]];
+        }
+        
+    }else if (tag == 6){
+        if([responseObject[@"Result"] intValue] == 0)
+        {
+            //写房间配置信息到sql
+            NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+            FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+            if([db open])
+            {
+                NSDictionary *messageInfo = responseObject[@"messageInfo"];
+                NSArray *roomList = messageInfo[@"roomList"];
+                for(NSDictionary *roomDic in roomList)
+                {
+                    NSString *sql = [NSString stringWithFormat:@"insert into Rooms values(%d,'%@',%@,%@,%@,%@,%@,'%@')",[roomDic[@"rId"] intValue],roomDic[@"rName"],NULL,NULL,NULL,NULL,NULL,roomDic[@"imgUrl"]];
+                    BOOL result = [db executeUpdate:sql];
+                    if(result)
+                    {
+                        NSLog(@"insert 成功");
+                    }else{
+                        NSLog(@"insert 失败");
+                    }
+                }
+            }
+            [db close];
+            
+            //更新场景配置信息
+            [self updateSceneInfo];
            
             
         }else{
             [MBProgressHUD showError:responseObject[@"Msg"]];
         }
 
-    }else if(tag == 6)
+    }else if(tag == 7)
     {
         if([responseObject[@"Result"] intValue] == 0)
         {
-             [self goToViewController];
+            NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+            FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+            if([db open])
+            {
+                NSDictionary *messageInfo = responseObject[@"messageInfo"];
+                NSInteger rId = [messageInfo[@"rId"] integerValue];
+                NSString *rName = messageInfo[@"rName"];
+                NSArray *sceneList = messageInfo[@"c_sceneInfoList"];
+                for(NSDictionary *dic in sceneList)
+                {
+                    NSInteger sId = [dic[@"sId"] integerValue];
+                    NSString *sName = dic[@"sName"];
+                    NSString *urlImg = dic[@"urlImage"];
+                    NSString *startTime = dic[@"startTime"];
+                    NSString *astronomicalTime = dic[@"astronomicalTime"];
+                    NSString *weakValue = dic[@"weekValue"];
+                    NSInteger weekRepeat = [dic[@"weekRepeat"] integerValue];
+                    NSArray *deviceList = dic[@"sceeqList"];
+                    for(NSDictionary *equDic in deviceList)
+                    {
+                        NSInteger eId = [equDic[@"eId"] integerValue];
+                        NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%ld,'%@',%ld,'%@',%@,%ld,'%@','%@','%@',%ld,'%@')",sId,sName,rId,urlImg,NULL,eId,startTime,astronomicalTime,weakValue,weekRepeat,rName];
+                        BOOL result = [db executeUpdate:sql];
+                        if(result)
+                        {
+                            NSLog(@"insert 成功");
+                        }else{
+                            NSLog(@"insert 失败");
+                        }
+
+                    }
+                    
+                   
+                }
+            }
+            [db close];
+            [self goToViewController];
+            
+        }else{
+            [MBProgressHUD showError:responseObject[@"Msg"]];
         }
     }
    

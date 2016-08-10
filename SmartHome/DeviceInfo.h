@@ -91,6 +91,7 @@ enum{
 
 #pragma mark - TV
 -(NSData *) switchProgram:(uint8_t)program deviceID:(NSString *)deviceID; //切换台
+-(NSData *) changeTVolume:(uint8_t)percent deviceID:(NSString *)deviceID;
 
 #pragma mark - DVD
 -(NSData *) home:(NSString *)deviceID; //主页

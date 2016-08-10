@@ -91,7 +91,7 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     Device *device = self.devices[indexPath.row];
-    cell.textLabel.text=device.eName;
+    cell.textLabel.text=device.name;
     return cell;
 }
 

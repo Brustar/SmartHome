@@ -8,46 +8,56 @@
 
 #import "DeviceManager.h"
 #import "Device.h"
+#import "FMDatabase.h"
 @implementation DeviceManager
-+(NSArray *)parseDevicesResult:(id)result
-{
-    NSArray *deviceArray = result[@"messageInfo"];
-    NSMutableArray *mutabArr = [NSMutableArray array];
-    for(NSDictionary *deviceDic in deviceArray)
-    {
-        Device *device = [Device new];
-        [device setValuesForKeysWithDictionary:deviceDic];
-        [mutabArr addObject:device];
-    }
-    return [mutabArr copy];
-}
-//从缓存中获取所有设备信息
+
+//从数据中获取所有设备信息
 +(NSArray *)getAllDevicesInfo{
-    NSString *devicePath = [[IOManager configPath:@"devices"] stringByAppendingPathComponent:@"deviceConfig.plist"];
-    return [NSArray arrayWithContentsOfFile:devicePath];
-}
-
-
-+ (NSArray *)getDeviceModel
-{
-    NSMutableArray *arrayReturn = [NSMutableArray array];
+   
     
-    NSArray *deviceInfos = [self getAllDevicesInfo];
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
     
-    for (NSDictionary *dict in deviceInfos) {
-        NSArray *deviceModels = dict[@"equipmentList"];
-        for (NSDictionary *deviceModel in deviceModels) {
-            Device *device = [Device deviceWithDict:deviceModel];
-            [arrayReturn addObject:device];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+     NSMutableArray *deviceModels = [NSMutableArray array];
+    if([db open])
+    {
+        FMResultSet *resultSet = [db executeQuery:@"select * from Devices"];
+       
+        while ([resultSet next]){
+            Device *device = [Device new];
+            device.eID = [resultSet intForColumn:@"ID"];
+            device.name = [resultSet stringForColumn:@"NAME"];
+            device.sn = [resultSet stringForColumn:@"sn"];
+            device.birth = [resultSet stringForColumn:@"birth"];
+            device.guarantee = [resultSet stringForColumn:@"guarantee"];
+            device.model = [resultSet stringForColumn:@""];
+            device.price = [resultSet doubleForColumn:@"price"];
+            device.purchase = [resultSet stringForColumn:@"purchase"];
+            device.producer = [resultSet stringForColumn:@"producer"];
+            device.gua_tel = [resultSet stringForColumn:@"gua_tel"];
+            device.power = [resultSet intForColumn:@"power"];
+            device.current = [resultSet doubleForColumn:@"current"];
+            device.voltagge = [resultSet intForColumn:@"voltagge"];
+            device.protocol = [resultSet stringForColumn:@"protocol"];
+            device.rID = [resultSet intForColumn:@"rID"];
+            device.eNumber = [resultSet intForColumn:@"eNumber"];
+            device.hTypeId = [resultSet intForColumn:@"hTypeId"];
+            device.subTypeId = [resultSet intForColumn:@"subTypeId"];
+            device.typeName = [resultSet stringForColumn:@""];
+            device.subTypeName = [resultSet stringForColumn:@"subTypeName"];
+            
+            [deviceModels addObject:device];
+            
         }
-    }
     
-    if (arrayReturn.count == 0 ) {
-        return nil;
+        
     }
+    [db close];
+    return [deviceModels copy];
     
-    return [arrayReturn copy];
+    
 }
+
 
 
 

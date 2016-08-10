@@ -11,6 +11,11 @@
 @interface Room : NSObject
 @property (nonatomic,assign) int rId;
 @property (nonatomic,strong) NSString *rName;
+@property (nonatomic,assign) NSInteger pm25;
+@property (nonatomic,assign) NSInteger noise;
+@property (nonatomic,assign) NSInteger tempture;
+@property (nonatomic,assign) NSInteger co2;
+@property (nonatomic,assign) NSInteger moisture;
 @property (nonatomic,strong) NSString *imgUrl;
 
 

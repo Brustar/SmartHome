@@ -18,7 +18,6 @@
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath] ;
     if (![db open]) {
         NSLog(@"Could not open db.");
-        
     }
     FMResultSet *resultSet = [db executeQueryWithFormat:@"select * from Channels where id=%ld", channel_ID];
     TVChannel *channel = [TVChannel new];
@@ -27,6 +26,7 @@
     channel.channel_pic = [resultSet stringForColumn:@"Channel_pic"];
     channel.isFavorite = [resultSet boolForColumn:@"isFavorite"];
     channel.parent =[resultSet stringForColumn:@"parent"];
+    channel.channelValue=[resultSet intForColumn:@"channelValue"];
     [db closeOpenResultSets];
     [db close];
     
@@ -51,6 +51,7 @@
         channel.channel_id = [resultSet intForColumn:@"Channel_id"];
         channel.channel_pic = [resultSet stringForColumn:@"Channel_pic"];
         channel.isFavorite = [resultSet boolForColumn:@"isFavorite"];
+        channel.channelValue=[resultSet intForColumn:@"channelValue"];
         //channel.parent =[resultSet stringForColumn:@"parent"];
         [mutabelArr addObject:channel];
     }
@@ -72,6 +73,7 @@
     }
     return isSuccess;
 }
+
 +(BOOL)upDateChannelForChannelID:(NSInteger)channel_id andNewChannel_Name:(NSString *)newName
 {
     
