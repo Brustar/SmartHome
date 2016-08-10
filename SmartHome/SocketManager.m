@@ -62,6 +62,7 @@
     
     if (bindError) {
         NSLog(@"bindError = %@",bindError);
+        return;
     }
     
     [udpSocket receiveWithTimeout:5000 tag:1]; //接收数据

@@ -8,6 +8,7 @@
 
 #import "BgMusicController.h"
 #import "VolumeManager.h"
+#import "SocketManager.h"
 
 @interface BgMusicController ()
 @property (weak, nonatomic) IBOutlet UISlider *volume;
@@ -39,6 +40,7 @@
         //[self save:nil];
     }
 }
+
 - (IBAction)pause:(id)sender {
     
     

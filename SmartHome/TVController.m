@@ -113,23 +113,33 @@
 }
 
 - (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
+    NSData *data=nil;
     switch (recognizer.direction) {
         case UISwipeGestureRecognizerDirectionLeft:
+            data=[[DeviceInfo defaultManager] sweepLeft:self.deviceid];
             NSLog(@"Left");
             break;
         case UISwipeGestureRecognizerDirectionRight:
+            data=[[DeviceInfo defaultManager] sweepRight:self.deviceid];
             NSLog(@"right");
             break;
         case UISwipeGestureRecognizerDirectionUp:
+            data=[[DeviceInfo defaultManager] sweepUp:self.deviceid];
             NSLog(@"up");
             break;
         case UISwipeGestureRecognizerDirectionDown:
+            data=[[DeviceInfo defaultManager] sweepDown:self.deviceid];
             NSLog(@"down");
             break;
             
         default:
             break;
     }
+    
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+    [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1];
+    
     [SCWaveAnimationView waveAnimationAtDirection:recognizer.direction view:self.touchpad];
 }
 

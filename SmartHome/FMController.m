@@ -12,6 +12,7 @@
 #import "SceneManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "VolumeManager.h"
+#import "SocketManager.h"
 
 @interface FMController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate,TXHRrettyRulerDelegate,UIGestureRecognizerDelegate,FMCollectionViewCellDelegate>
 
@@ -85,7 +86,8 @@
     [self.fmView addSubview:ruler];
 
 }
-#warning save 进来就执行
+
+//warning save 进来就执行
 - (void)txhRrettyRuler:(TXHRulerScrollView *)rulerScrollView {
     self.numberOfChannel.text = [NSString stringWithFormat:@" %.1f",rulerScrollView.rulerValue];
     
@@ -103,6 +105,7 @@
     self.pageController.pageIndicatorTintColor = [UIColor whiteColor];
     self.pageController.currentPageIndicatorTintColor = [UIColor blackColor];
 }
+
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGPoint point = scrollView.contentOffset;
     self.pageController.currentPage = round(point.x/scrollView.bounds.size.width);
@@ -205,6 +208,11 @@
 
 -(IBAction)save:(id)sender
 {
+    NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volume.value*100 deviceID:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+    [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1];
+    
     Radio *device=[[Radio alloc] init];
     [device setDeviceID:6];
     [device setRvolume:self.volume.value*100];

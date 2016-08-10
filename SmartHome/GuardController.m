@@ -36,7 +36,6 @@
     
     SocketManager *sock=[SocketManager defaultManager];
     [sock initTcp:[IOManager tcpAddr] port:[IOManager tcpPort] mode:outDoor delegate:self];
-    self.timer =  [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(myLog:) userInfo:nil repeats:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,13 +47,7 @@
 -(IBAction)save:(id)sender
 {
     if ([sender isEqual:self.switchView]) {
-        Proto proto=createProto();
-        proto.cmd=0x02;
-        proto.action.state=self.switchView.isOn;
-        //ProtocolManager *manager=[ProtocolManager defaultManager];
-        proto.deviceID=0x40;//[[manager queryProtocol:@"开关灯_开"] intValue];
-        proto.deviceType=0x01;
-        NSData *data=dataFromProtocol(proto);
+        NSData *data=[[DeviceInfo defaultManager] toogle:self.switchView.isOn deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
         [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1];
@@ -73,13 +66,6 @@
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device id:device.deviceID];
     [scene setDevices:devices];
     [[SceneManager defaultManager] addScenen:scene withName:@"" withPic:@""];
-}
-
--(IBAction)myLog:(id)sender
-{
-    //NSLog(@"log...");
-    SocketManager *sock=[SocketManager defaultManager];
-    [sock.socket readDataWithTimeout:-1 tag:1];
 }
 
 -(void)recv:(NSData *)data withTag:(long)tag

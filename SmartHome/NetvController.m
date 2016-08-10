@@ -11,6 +11,7 @@
 #import "SceneManager.h"
 #import "DVCollectionViewCell.h"
 #import "VolumeManager.h"
+#import "SocketManager.h"
 
 @interface NetvController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
@@ -72,6 +73,11 @@
 
 -(IBAction)save:(id)sender
 {
+    NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volume.value*100 deviceID:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+    [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1];
+    
     Netv *device=[[Netv alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setNvolume:self.volume.value*100];
@@ -116,7 +122,52 @@
     }
     NSString *imageName = [NSString stringWithFormat:@"%@",self.netTVImages[indexPath.row]];
     [cell.btn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+    cell.btn.tag=indexPath.row;
+    [cell.btn addTarget:self action:@selector(control:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
+}
+
+-(IBAction)control:(id)sender
+{
+    NSData *data=nil;
+    switch (((UIButton *)sender).tag) {
+        case 0:
+            data=[[DeviceInfo defaultManager] backward:self.deviceid];
+            break;
+        case 1:
+            data=[[DeviceInfo defaultManager] play:self.deviceid];
+            break;
+        case 2:
+            data=[[DeviceInfo defaultManager] forward:self.deviceid];
+            break;
+        case 3:
+            data=[[DeviceInfo defaultManager] previous:self.deviceid];
+            break;
+        case 4:
+            data=[[DeviceInfo defaultManager] pause:self.deviceid];
+            break;
+        case 5:
+            data=[[DeviceInfo defaultManager] next:self.deviceid];
+            break;
+        case 6:
+            data=[[DeviceInfo defaultManager] stop:self.deviceid];
+            break;
+        case 7:
+            data=[[DeviceInfo defaultManager] back:self.deviceid];
+            break;
+        case 8:
+            data=[[DeviceInfo defaultManager] NETVhome:self.deviceid];
+            break;
+        case 9:
+            data=[[DeviceInfo defaultManager] changeTVolume:0x00 deviceID:self.deviceid];
+            break;
+            
+        default:
+            break;
+    }
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+    [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1];
 }
 
 -(void)dealloc
