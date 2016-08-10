@@ -99,8 +99,8 @@
     DeviceInfo *device=[DeviceInfo defaultManager];
     
     if (device.reachbility == ReachableViaWiFi) {
-        [self connectUDP:[IOManager udpPort]];
-    }else if (device.reachbility == ReachableViaWWAN){
+        //[self connectUDP:[IOManager udpPort]];
+    //}else if (device.reachbility == ReachableViaWWAN){
         [self connectTcp];
     }else{
         [MBProgressHUD showError:@"当前网络不可用，请检查你的网络设置"];
@@ -151,13 +151,15 @@
 
 - (void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
 {
-    //NSString *recv=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"received data:%@",data);
+    NSLog(@"received %ld data:%@",tag,data);
     if (tag==1000) {
         [self handleTCP:data];
-        return;
+    }else{
+        [self.delegate recv:data withTag:tag];
     }
-    [self.delegate recv:data withTag:tag];
+    
+    //[self.socket readDataWithTimeout:30 tag:0];
+    [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:5 tag:0];
 }
 
 -(void)onSocket:(AsyncSocket *)sock didReadPartialDataOfLength:(long)partialLength tag:(long)tag
