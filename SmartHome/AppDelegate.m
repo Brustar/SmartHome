@@ -41,11 +41,11 @@
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device netReachbility];
     [device deviceGenaration];
-    device.masterID=0x22b8;
+    //device.masterID=0x22b8;
     
     if (device.reachbility==ReachableViaWiFi) {
-        //[[SocketManager defaultManager] connectUDP:[IOManager udpPort]];
-        [[SocketManager defaultManager] connectTcp];
+        [[SocketManager defaultManager] connectUDP:[IOManager udpPort]];
+        //[[SocketManager defaultManager] connectTcp];
     }
     //登录后每次系统启动自动更新云端配置，第一次安装此处不更新，登录的时候再更新
     [device initConfig];

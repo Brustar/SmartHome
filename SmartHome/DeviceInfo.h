@@ -54,6 +54,8 @@ enum{
 @property (nonatomic, strong) NSString *masterIP;
 @property (nonatomic) int masterPort;
 
+@property (nonatomic) int connectState;
+
 + (id) defaultManager;
 - (void) deviceGenaration;
 - (void) initConfig;

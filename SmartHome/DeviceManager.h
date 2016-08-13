@@ -32,5 +32,5 @@
 + (NSString *)getTVDeviceIDWithRoomID:(NSInteger)roomID;
 
 +(NSArray *)getDeviceByTypeName:(NSString  *)typeName andRoomID:(NSInteger)roomID;
-
++(NSString *)getEType:(NSInteger)eID;
 @end

@@ -277,5 +277,23 @@
     return [array copy];
 }
 
++(NSString *)getEType:(NSInteger)eID
+{
+    NSString * htypeID;
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT htypeID FROM Devices where ID = %ld",eID];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            htypeID = [resultSet stringForColumn:@"htypeID"];
+        }
+    }
+    [db close];
+    return htypeID;
+}
+
 
 @end

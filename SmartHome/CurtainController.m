@@ -97,7 +97,7 @@
     }
     
     self.segmentCurtain.selectedSegmentIndex = 0;
-    //self.deviceid=[self.curtainIds objectAtIndex:self.segmentCurtain.selectedSegmentIndex][0];
+    self.deviceid=[self.curtainIDArr objectAtIndex:self.segmentCurtain.selectedSegmentIndex];
 }
 
 -(IBAction)save:(id)sender
@@ -111,14 +111,14 @@
         NSData *data=[[DeviceInfo defaultManager] roll:cmd deviceID:self.deviceid value:self.cell.slider.value * 100];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
-        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:2];
+        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:2];
     }
     
     if ([sender isEqual:self.cell.open]) {
         NSData *data=[[DeviceInfo defaultManager] open:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
-        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:2];
+        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:2];
     }
     
     if ([sender isEqual:self.cell.close]) {

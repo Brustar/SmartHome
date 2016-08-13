@@ -118,6 +118,7 @@
     }
     
     self.segmentLight.selectedSegmentIndex = 0;
+    self.deviceid = [self.lIDs objectAtIndex:self.segmentLight.selectedSegmentIndex];
 }
 
 - (NSDictionary *)getRGBDictionaryByColor:(UIColor *)originColor
@@ -147,7 +148,7 @@
         NSData *data=[[DeviceInfo defaultManager] toogleLight:self.detailCell.power.isOn deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
-        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1];
+        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:1];
     }
     
     if ([sender isEqual:self.detailCell.bright]) {
@@ -158,7 +159,7 @@
         NSData *data=[[DeviceInfo defaultManager] changeBright:cmd deviceID:self.deviceid value:self.detailCell.bright.value];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
-        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:2];
+        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:2];
     }
     
     if ([sender isEqual:self.cell.colourView]) {
@@ -175,7 +176,7 @@
         NSData *data=[[DeviceInfo defaultManager] changeColor:cmd deviceID:self.deviceid R:r G:g B:b];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:3];
-        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:3];
+        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:3];
     }
     
     Light *device=[[Light alloc] init];

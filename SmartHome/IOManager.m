@@ -102,7 +102,7 @@
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
     NSDictionary *dic = [PrintObject getObjectData:sceneData];
     BOOL ret = [dic writeToFile:scenePath atomically:YES];
-    NSAssert(ret,@"写文件失败");
+    //NSAssert(ret,@"写文件失败");
 }
 
 

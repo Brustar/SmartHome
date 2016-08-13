@@ -51,7 +51,7 @@
     
     NSString *cmd=@"ECFE22B800000000000000EA";
     [sock.socket writeData:[PackManager dataFormHexString:cmd] withTimeout:1 tag:1];
-    [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1];
+    [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:1];
 }
 
 -(IBAction)save:(id)sender
@@ -174,7 +174,7 @@
     NSData *data=[self createCmd];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
-    [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1];
+    [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:1];
     
     [self save:nil];
 }
