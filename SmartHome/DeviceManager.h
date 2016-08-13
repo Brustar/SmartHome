@@ -17,7 +17,11 @@
 //根据房间ID的到该房间的所有设备
 +(NSArray *)devicesByRoomId:(NSInteger)roomId;
 
+//根据设备ID获取设备名称
 +(NSString *)deviceNameByDeviceID:(int)eId;
+
+//根据设备ID获取设备类别
++(NSString *)deviceTypeNameByDeviceID:(int)eId;
 
 +(NSArray *)deviceSubTypeByRoomId:(NSInteger)roomID;
 
@@ -29,8 +33,10 @@
 + (NSArray *)getCurtainTypeNameWithRoomID:(NSInteger)roomID;
 + (NSArray *)getCurtainWithTypeName:(NSString *)typeName roomID:(NSInteger)roomID;
 
-+ (NSString *)getTVDeviceIDWithRoomID:(NSInteger)roomID;
++ (NSString *)deviceIDWithRoomID:(NSInteger)roomID withType:(NSString *)type;
 
+
+//根据设备类别和房间ID获取设备的所有ID
 +(NSArray *)getDeviceByTypeName:(NSString  *)typeName andRoomID:(NSInteger)roomID;
 +(NSString *)getEType:(NSInteger)eID;
 @end

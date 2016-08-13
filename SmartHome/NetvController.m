@@ -13,6 +13,7 @@
 #import "VolumeManager.h"
 #import "SocketManager.h"
 #import "SCWaveAnimationView.h"
+#import "DeviceManager.h"
 
 @interface NetvController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
@@ -34,7 +35,14 @@
     return _netTVImages;
 }
 
-
+- (void)setRoomID:(int)roomID
+{
+    _roomID = roomID;
+    
+    self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"机顶盒"];
+    
+    
+}
 -(void)updateViewConstraints
 {
     [super updateViewConstraints];

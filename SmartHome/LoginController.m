@@ -39,12 +39,12 @@
 @property(nonatomic,strong) NSString *role;
 @property(nonatomic,strong) NSMutableArray *hostIDS;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic,assign) int vEquipmentsLast;
-@property (nonatomic,assign) int vRoomLast;
-@property (nonatomic,assign) int vSceneLast;
-@property (nonatomic,assign) int vTVChannelLast;
-@property (nonatomic,assign) int vFMChannellLast;
-@property (nonatomic,assign) int vClientlLast;
+@property (nonatomic,strong) NSString *vEquipmentsLast;
+@property (nonatomic,strong) NSString *vRoomLast;
+@property (nonatomic,strong) NSString *vSceneLast;
+@property (nonatomic,strong) NSString *vTVChannelLast;
+@property (nonatomic,strong) NSString *vFMChannellLast;
+@property (nonatomic,strong) NSString *vClientlLast;
 
 
 
@@ -119,52 +119,52 @@
 {
     if ( 4 == tag)
     {
-        self.vEquipmentsLast = [responseObject[@"vEquipment"] intValue];
-        self.vRoomLast = [responseObject[@"vRoom"] intValue];
-        self.vSceneLast = [responseObject[@"vScene"] intValue];
-        self.vTVChannelLast = [responseObject[@"vTVChannel"] intValue];
-        self.vFMChannellLast = [responseObject[@"vFMChannel"] intValue];
-        self.vClientlLast = [responseObject[@"vClient"] intValue];
+        self.vEquipmentsLast = responseObject[@"vEquipment"];
+        self.vRoomLast = responseObject[@"vRoom"];
+        self.vSceneLast = responseObject[@"vScene"];
+        self.vTVChannelLast = responseObject[@"vTVChannel"];
+        self.vFMChannellLast = responseObject[@"vFMChannel"];
+        self.vClientlLast = responseObject[@"vClient"];
     }
     
-    int vEquipment = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vEquipment"] intValue];
-    int vRoom = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vRoom"] intValue];
-    int vScene = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vScene"] intValue];
-    int vTVChannel = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vTVChannel"] intValue];
-    int vFMChannel = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vFMChannel"] intValue];
-    int vClient = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vClient"] intValue];
+    NSString *vEquipment = [[NSUserDefaults standardUserDefaults] objectForKey:@"vEquipment"] ;
+    NSString *vRoom = [[NSUserDefaults standardUserDefaults] objectForKey:@"vRoom"];
+    NSString *vScene = [[NSUserDefaults standardUserDefaults] objectForKey:@"vScene"];
+    NSString *vTVChannel = [[NSUserDefaults standardUserDefaults] objectForKey:@"vTVChannel"];
+    NSString *vFMChannel = [[NSUserDefaults standardUserDefaults] objectForKey:@"vFMChannel"];
+    NSString *vClient = [[NSUserDefaults standardUserDefaults] objectForKey:@"vClient"];
     
     
     switch (tag) {
         case 4:
-            if(self.vEquipmentsLast > vEquipment)
+            if(![self.vEquipmentsLast isEqualToString:vEquipment])
             {
                 // 更新设备
-                [IOManager writeUserdefault:[NSNumber numberWithInt:self.vEquipmentsLast] forKey:@"vEquipment"];
+                [IOManager writeUserdefault:self.vEquipmentsLast forKey:@"vEquipment"];
                 [self sendRequestForGettingConfigInfos:@"GetEquipmentsInfo.aspx" withTag:5];
                 return;
             }
         case 5:
-            if(self.vRoomLast > vRoom)
+            if(![self.vRoomLast isEqualToString:vRoom])
             {
                 //更新房间
                 [self updateRoomInfo];
                 return;
             }
         case 6:
-            if(self.vSceneLast > vScene)
+            if(![self.vSceneLast isEqualToString:vScene])
             {
                 //更新场景
                 [self updateSceneInfo];
                 return;
             }
         case 7:
-            if(self.vTVChannelLast > vTVChannel){
+            if(![self.vTVChannelLast isEqualToString:vTVChannel]){
                 [self updateTVChannelsInfo];
                 return;
             }
         case 8:
-            if(self.vFMChannellLast > vFMChannel){
+            if(![self.vFMChannellLast isEqualToString:vFMChannel]){
                 [self updateFMChannelsInfo];
                 return;
             }
@@ -178,25 +178,25 @@
 //更新房间配置信息
 -(void)updateRoomInfo{
     
-    [IOManager writeUserdefault:[NSNumber numberWithInt:self.vRoomLast] forKey:@"vRoom"];
+    [IOManager writeUserdefault:self.vRoomLast forKey:@"vRoom"];
     [self sendRequestForGettingConfigInfos:@"GetRoomsConfig.aspx" withTag:6];
 }
 //更新场景配置信息
 -(void)updateSceneInfo
 {
-    [IOManager writeUserdefault:[NSNumber numberWithInt:self.vSceneLast] forKey:@"vScene"];
+    [IOManager writeUserdefault:self.vSceneLast forKey:@"vScene"];
     [self sendRequestForGettingConfigInfos:@"GetScenes.aspx" withTag:7];
 }
 //更新电视频道配置信息
 -(void)updateTVChannelsInfo
 {
-    [IOManager writeUserdefault:[NSNumber numberWithInt:self.vTVChannelLast] forKey:@"vTVChannel"];
+    [IOManager writeUserdefault:self.vTVChannelLast forKey:@"vTVChannel"];
     [self sendRequestForGettingConfigInfos:@"GetTVChannels.aspx" withTag:8];
 }
 //更新FM频道配置信息
 -(void)updateFMChannelsInfo
 {
-    [IOManager writeUserdefault:[NSNumber numberWithInt:self.vFMChannellLast] forKey:@"vFMChannel"];
+    [IOManager writeUserdefault:self.vFMChannellLast forKey:@"vFMChannel"];
     [self sendRequestForGettingConfigInfos:@"GetFMChannels.aspx" withTag:9];
 }
 //写设备配置信息到sql
@@ -223,7 +223,7 @@
             }
             for(NSDictionary *equip in equipmentList)
             {
-                NSString *sql = [NSString stringWithFormat:@"insert into Devices values(%d,'%@',%@,%@,%@,%@,%@,%@,%@,'%@',%@,%@,%@,%@,%ld,'%@',%@,%@,'%@','%@')",[equip[@"eId"] intValue],equip[@"eName"],NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,rId,equip[@"eNumber"],equip[@"hTypeId"],equip[@"subTypeId"],equip[@"typeName"],equip[@"subTypeName"]];
+                NSString *sql = [NSString stringWithFormat:@"insert into Devices values(%d,'%@',%@,%@,%@,%@,%@,%@,%@,'%@',%@,%@,%@,%@,%ld,'%@','%@',%@,'%@','%@')",[equip[@"eId"] intValue],equip[@"eName"],NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,rId,equip[@"eNumber"],equip[@"hTypeId"],equip[@"subTypeId"],equip[@"typeName"],equip[@"subTypeName"]];
                 
                 BOOL result = [db executeUpdate:sql];
                 if(result)
@@ -378,6 +378,7 @@
     }
     [db close];
 }
+
 
 -(void) httpHandler:(id) responseObject tag:(int)tag
 {

@@ -13,6 +13,7 @@
 #import "VolumeManager.h"
 #import "SocketManager.h"
 #import "SCWaveAnimationView.h"
+#import "DeviceManager.h"
 
 #define size 437
 @interface DVDController ()<UICollectionViewDelegate,UICollectionViewDataSource>
@@ -35,6 +36,15 @@
     }
     return _dvImages;
 }
+- (void)setRoomID:(int)roomID
+{
+    _roomID = roomID;
+    
+    self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"DVD"];
+    
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

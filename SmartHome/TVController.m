@@ -52,7 +52,7 @@
 
 -(NSArray *)btnTitles
 {
-    if(!_btnTitles)
+    if(!_btnTitles)   
     {
         _btnTitles = @[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"0"];
     }
@@ -79,7 +79,9 @@
 {
     _roomID = roomID;
     
-    self.deviceid = [DeviceManager getTVDeviceIDWithRoomID:self.roomID];
+    self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"电视"];
+    //self.deviceid = [DeviceManager getDeviceByTypeName:@"TV" andRoomID:self.roomID];
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

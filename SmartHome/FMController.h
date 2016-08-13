@@ -11,7 +11,7 @@
 @property (nonatomic,weak) NSString *sceneid;
 @property (weak, nonatomic) IBOutlet UISlider *volume;
 @property (nonatomic,weak) NSString *deviceid;
-
+@property (nonatomic,assign) int roomID;
 -(IBAction)save:(id)sender;
 
 @end

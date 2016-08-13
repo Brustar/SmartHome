@@ -13,6 +13,8 @@
 #import "MBProgressHUD+NJ.h"
 #import "VolumeManager.h"
 #import "SocketManager.h"
+#import "DeviceManager.h"
+
 
 @interface FMController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate,TXHRrettyRulerDelegate,UIGestureRecognizerDelegate,FMCollectionViewCellDelegate>
 
@@ -50,6 +52,15 @@
         
     }
     return _allFavouriteChannels;
+}
+
+- (void)setRoomID:(int)roomID
+{
+    _roomID = roomID;
+    
+    self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"FM"];
+    
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
