@@ -60,7 +60,7 @@ enum{
 - (void) netReachbility;
 
 #pragma mark - public
-
+-(NSData *) author;
 //TV,DVD,NETV,BGMusic
 -(NSData *) previous:(NSString *)deviceID;
 -(NSData *) forward:(NSString *)deviceID; //快进

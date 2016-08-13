@@ -53,8 +53,8 @@
 {
     SocketManager *sock=[SocketManager defaultManager];
     NSString *cmd=@"fe000001000000000100ff";
-    [sock.socket writeData:[PackManager dataFormHexString:cmd] withTimeout:-1 tag:0];
-    [sock.socket readDataToData:[NSData dataWithBytes:"\xFF" length:1] withTimeout:-1 tag:0];
+    [sock.socket writeData:[PackManager dataFormHexString:cmd] withTimeout:-1 tag:1];
+    [sock.socket readDataToData:[NSData dataWithBytes:"\xFF" length:1] withTimeout:-1 tag:1];
 }
 
 -(void)discoveryDevice:(NSData *)data

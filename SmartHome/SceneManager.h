@@ -30,10 +30,11 @@
 
 - (Scene *)readSceneByID:(int)sceneid;
 
--(NSArray *)addDevice2Scene:(Scene *)scene withDeivce:(id)device id:(int)deviceID;
+-(NSArray *)addDevice2Scene:(Scene *)scene withDeivce:(id)device withId:(int)deviceID;
 
-//得到所有场景模型
+
 +(NSArray *)allSceneModels;
 +(NSArray *)devicesBySceneID:(int)sId;
+
 
 @end

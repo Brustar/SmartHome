@@ -31,7 +31,7 @@ Proto createProto()
     proto.tail=PROTOCOL_TAIL;
     DeviceInfo *info=[DeviceInfo defaultManager];
     
-    proto.masterID=info.masterID;
+    proto.masterID=CFSwapInt16BigToHost(info.masterID);
     return proto;
 }
 
@@ -59,7 +59,7 @@ Proto createProto()
 + (BOOL) checkProtocol:(NSData *)data cmd:(long)value
 {
     NSData *head = [data subdataWithRange:NSMakeRange(0, 1)];
-    NSData *cmd = [data subdataWithRange:NSMakeRange(1, 1)];
+    NSData *cmd = [data subdataWithRange:NSMakeRange(2, 1)];
     NSData *tail = [data subdataWithRange:NSMakeRange([data length]-1, 1)];
     return [self NSDataToUInt:head]==0xEC && [self NSDataToUInt:cmd]==value && [self NSDataToUInt:tail]==0xEA;
 }

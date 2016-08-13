@@ -153,7 +153,7 @@
     }
 }
 
--(NSArray *)addDevice2Scene:(Scene *)scene withDeivce:(id)device id:(int)deviceID
+-(NSArray *)addDevice2Scene:(Scene *)scene withDeivce:(id)device withId:(int)deviceID
 {
     NSArray *array;
     if ([self readSceneByID:scene.sceneID]) {

@@ -63,9 +63,6 @@
      [self.detailCell.power addTarget:self action:@selector(save:)forControlEvents:UIControlEventValueChanged];
     
      self.cell = [[[NSBundle mainBundle] loadNibNamed:@"ColourTableViewCell" owner:self options:nil] lastObject];
-
-    
-
     
     if ([self.sceneid intValue]>0) {
         _favButt.enabled=YES;
@@ -88,6 +85,23 @@
     
     [self setupSegmentLight];
      self.title = @"灯";
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toogleLighter:) name:@"light" object:nil];
+}
+
+-(IBAction)toogleLighter:(id)sender
+{
+    NSDictionary *dic = (NSDictionary *)sender;
+    int state = [dic[@"state"] intValue];
+    if (state == 0x00 || state == 0x01) {
+        self.detailCell.power.on = (bool)state;
+    }
+    if (state == 0x0a) {
+        
+    }
+    if (state == 0x0b) {
+        
+    }
 }
 - (void)setupSegmentLight
 {
@@ -178,14 +192,18 @@
     [scene setPicID:66];
     [scene setReadonly:NO];
     
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device id:device.deviceID];
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
     [scene setDevices:devices];
     [[SceneManager defaultManager] addScenen:scene withName:@"" withPic:@""];
 }
 
+#pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
-    
+    if (tag == 0) {
+        Proto proto=protocolFromData(data);
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"light" object:self userInfo:@{@"state":@(proto.action.state)}];
+    }
 }
 
 -(IBAction)favorite:(id)sender
@@ -265,10 +283,8 @@
         self.detailCell.label.text = self.lNames[self.segmentLight.selectedSegmentIndex];
         self.detailCell.selectionStyle = UITableViewCellSelectionStyleNone;
         return self.detailCell;
-    } else if(indexPath.row == 1)
-    {
+    } else if(indexPath.row == 1){
         self.cell.lable.text = @"自定义颜色";
-        
         UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeColor:)];
         self.cell.colourView.userInteractionEnabled=YES;
         [self.cell.colourView addGestureRecognizer:singleTap];
@@ -324,5 +340,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"light" object:nil];
 }
 @end
