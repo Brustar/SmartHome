@@ -17,20 +17,42 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentCurtain;
 - (IBAction)selectedTypeOfCurtain:(UISegmentedControl *)sender;
-@property (nonatomic,strong) NSArray *curtainNames;
 
-@property (nonatomic, strong) NSMutableArray *curtainIds;
+@property (nonatomic,strong) NSMutableArray *curNames;
+
+@property (nonatomic,strong) NSMutableArray *curtainIDArr;
 @end
 
 @implementation CurtainController
 
-- (NSMutableArray *)curtainIds
+
+-(NSMutableArray *)curtainIDArr
 {
-    if (_curtainIds == nil) {
-        _curtainIds = [NSMutableArray array];
+    if(!_curtainIDArr)
+    {
+        _curtainIDArr = [NSMutableArray array];
+        [_curtainIDArr addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"开合帘" andRoomID:self.roomID]];
+         [_curtainIDArr addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"卷帘" andRoomID:self.roomID]];
+        
     }
-    return _curtainIds;
+    return _curtainIDArr;
 }
+
+-(NSMutableArray *)curNames
+{
+    if(!_curNames)
+    {
+        _curNames = [NSMutableArray array];
+        for(int i = 0; i < self.curtainIDArr.count; i++)
+        {
+            int curtainID = [self.curtainIDArr[i] intValue];
+            [_curNames addObject:[DeviceManager deviceNameByDeviceID:curtainID]];
+        }
+        
+    }
+    return _curNames;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -59,23 +81,23 @@
 }
 - (void)setupSegmentCurtain
 {
-    self.curtainNames = [DeviceManager getCurtainTypeNameWithRoomID:self.roomID];
-    if (self.curtainNames == nil) {
+    
+    if (self.curNames == nil) {
         return;
     }
     
     [self.segmentCurtain removeAllSegments];
     
-    for ( int i = 0; i < self.curtainNames.count; i++) {
-        [self.segmentCurtain insertSegmentWithTitle:self.curtainNames[i] atIndex:i animated:NO];
+    for ( int i = 0; i < self.curNames.count; i++) {
+        [self.segmentCurtain insertSegmentWithTitle:self.curNames[i] atIndex:i animated:NO];
         
-        NSArray *curtains = [DeviceManager getCurtainWithTypeName:self.curtainNames[i] roomID:self.roomID];
+       
         
-        [self.curtainIds addObject:curtains];
+       
     }
     
     self.segmentCurtain.selectedSegmentIndex = 0;
-    self.deviceid=[self.curtainIds objectAtIndex:self.segmentCurtain.selectedSegmentIndex][0];
+    //self.deviceid=[self.curtainIds objectAtIndex:self.segmentCurtain.selectedSegmentIndex][0];
 }
 
 -(IBAction)save:(id)sender
@@ -145,7 +167,7 @@
     if(indexPath.row == 0)
     {
         self.cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.cell.label.text = self.curtainNames[self.segmentCurtain.selectedSegmentIndex];
+        self.cell.label.text = self.curNames[self.segmentCurtain.selectedSegmentIndex];
         return self.cell;
     }
     
@@ -181,7 +203,7 @@
 }
 
 - (IBAction)selectedTypeOfCurtain:(UISegmentedControl *)sender {
-    self.cell.label.text = self.curtainNames[sender.selectedSegmentIndex];
+    self.cell.label.text = self.curNames[sender.selectedSegmentIndex];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
