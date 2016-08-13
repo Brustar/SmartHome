@@ -167,7 +167,6 @@
     
     proto.deviceID=CFSwapInt16BigToHost([deviceID intValue]);
     proto.deviceType=[[manager queryDeviceTypes:deviceID] intValue];
-    proto.masterID=CFSwapInt16BigToHost(0x22b8);//self.masterID;
     return dataFromProtocol(proto);
 }
 
@@ -180,7 +179,6 @@
     proto.action.RValue=value;
     proto.deviceType=CFSwapInt16BigToHost([[manager queryDeviceTypes:deviceID] intValue]);
     proto.deviceID=[deviceID intValue];
-    proto.masterID=CFSwapInt16BigToHost(self.masterID);
     return dataFromProtocol(proto);
 }
 
@@ -195,7 +193,13 @@
     proto.action.G=green;
     proto.deviceType=CFSwapInt16BigToHost([[manager queryDeviceTypes:deviceID] intValue]);
     proto.deviceID=[deviceID intValue];
-    proto.masterID=CFSwapInt16BigToHost(self.masterID);
+    return dataFromProtocol(proto);
+}
+
+-(NSData *) author
+{
+    Proto proto=createProto();
+    proto.cmd=0x84;
     return dataFromProtocol(proto);
 }
 

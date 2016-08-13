@@ -225,9 +225,15 @@
     [scene setPicID:66];
     [scene setReadonly:NO];
     
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device id:device.deviceID];
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
     [scene setDevices:devices];
     [[SceneManager defaultManager] addScenen:scene withName:@"" withPic:@""];
+}
+
+#pragma mark - TCP recv delegate
+-(void)recv:(NSData *)data withTag:(long)tag
+{
+    
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context

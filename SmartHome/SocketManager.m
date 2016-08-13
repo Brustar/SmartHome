@@ -86,9 +86,9 @@
     //请求协调服务器
     [self initTcp:[IOManager tcpAddr] port:[IOManager tcpPort] mode:outDoor delegate:nil];
     Proto proto=createProto();
-    proto.cmd=0x00;
+    proto.cmd=0x82;
     DeviceInfo *device=[DeviceInfo defaultManager];
-    proto.masterID=device.masterID;
+    proto.masterID=CFSwapInt16BigToHost(device.masterID);
     NSData *data=dataFromProtocol(proto);
     [self.socket writeData:data withTimeout:1 tag:1000];
     [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1000];
@@ -99,8 +99,8 @@
     DeviceInfo *device=[DeviceInfo defaultManager];
     
     if (device.reachbility == ReachableViaWiFi) {
-        //[self connectUDP:[IOManager udpPort]];
-    //}else if (device.reachbility == ReachableViaWWAN){
+        [self connectUDP:[IOManager udpPort]];
+    }else if (device.reachbility == ReachableViaWWAN){
         [self connectTcp];
     }else{
         [MBProgressHUD showError:@"当前网络不可用，请检查你的网络设置"];
@@ -130,13 +130,16 @@
 
 - (void) handleTCP:(NSData *)data
 {
-    if ([PackManager checkProtocol:data cmd:0x00]) {
-        NSData *ip=[data subdataWithRange:NSMakeRange(8, 4)];
-        NSData *port=[data subdataWithRange:NSMakeRange(12, 2)];
+    if (![PackManager checkProtocol:data cmd:0xef]) {
+        NSData *ip=[data subdataWithRange:NSMakeRange(4, 4)];
+        NSData *port=[data subdataWithRange:NSMakeRange(8, 2)];
         
         [IOManager writeUserdefault:[PackManager NSDataToIP:ip] forKey:@"subIP"];
         [IOManager writeUserdefault:[NSNumber numberWithLong:[PackManager NSDataToUInt:port]] forKey:@"subPort"];
         [self initTcp:[PackManager NSDataToIP:ip] port:(int)[PackManager NSDataToUInt:port] mode:outDoor delegate:nil];
+        
+        [self.socket writeData:[[DeviceInfo defaultManager] author] withTimeout:1 tag:0];
+        [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:0];
     }
 }
 

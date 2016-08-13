@@ -12,6 +12,7 @@
 #import "DVCollectionViewCell.h"
 #import "VolumeManager.h"
 #import "SocketManager.h"
+#import "SCWaveAnimationView.h"
 
 #define size 437
 @interface DVDController ()<UICollectionViewDelegate,UICollectionViewDataSource>
@@ -19,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightViewWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightViewHight;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-
+@property (weak, nonatomic) IBOutlet UIView *touchpad;
 @property (nonatomic,strong) NSArray *dvImages;
 
 @end
@@ -62,8 +63,55 @@
             }
         }
     }
+    
+    UISwipeGestureRecognizer *recognizer;
+    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [[self touchpad] addGestureRecognizer:recognizer];
+    
+    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    [[self touchpad] addGestureRecognizer:recognizer];
+    
+    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionUp)];
+    [[self touchpad] addGestureRecognizer:recognizer];
+    
+    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionDown)];
+    [[self touchpad] addGestureRecognizer:recognizer];
 }
 
+- (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
+    NSData *data=nil;
+    switch (recognizer.direction) {
+        case UISwipeGestureRecognizerDirectionLeft:
+            data=[[DeviceInfo defaultManager] sweepLeft:self.deviceid];
+            NSLog(@"Left");
+            break;
+        case UISwipeGestureRecognizerDirectionRight:
+            data=[[DeviceInfo defaultManager] sweepRight:self.deviceid];
+            NSLog(@"right");
+            break;
+        case UISwipeGestureRecognizerDirectionUp:
+            data=[[DeviceInfo defaultManager] sweepUp:self.deviceid];
+            NSLog(@"up");
+            break;
+        case UISwipeGestureRecognizerDirectionDown:
+            data=[[DeviceInfo defaultManager] sweepDown:self.deviceid];
+            NSLog(@"down");
+            break;
+            
+        default:
+            break;
+    }
+    
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+    [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1];
+    
+    [SCWaveAnimationView waveAnimationAtDirection:recognizer.direction view:self.touchpad];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -95,9 +143,15 @@
     [scene setPicID:66];
     [scene setReadonly:NO];
     
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device id:device.deviceID];
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
     [scene setDevices:devices];
     [[SceneManager defaultManager] addScenen:scene withName:@"" withPic:@""];
+}
+
+#pragma mark - TCP recv delegate
+-(void)recv:(NSData *)data withTag:(long)tag
+{
+    
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -185,5 +239,15 @@
     [theSegue setValue:self.deviceid forKey:@"deviceid"];
 }
 
+#pragma mark - touch detection
+- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    CGPoint touchPoint = [[touches anyObject] locationInView:[[UIApplication sharedApplication] keyWindow]];
+    CGRect rect=[self.touchpad convertRect:self.touchpad.bounds toView:self.view];
+    if (CGRectContainsPoint(rect,touchPoint)) {
+        NSLog(@"%.0fx%.0fpx", touchPoint.x, touchPoint.y);
+        [SCWaveAnimationView waveAnimationAtPosition:touchPoint];
+    }
+}
 
 @end
