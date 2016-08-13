@@ -46,7 +46,7 @@
      [self.detailCell.power addTarget:self action:@selector(save:)forControlEvents:UIControlEventValueChanged];
     
      self.cell = [[[NSBundle mainBundle] loadNibNamed:@"ColourTableViewCell" owner:self options:nil] lastObject];
-    
+    self.deviceid=[self.lightIds objectAtIndex:0];
     if ([self.sceneid intValue]>0) {
         _favButt.enabled=YES;
         
@@ -172,7 +172,7 @@
     [device setBrightness:self.detailCell.bright.value*100];
     
     Scene *scene=[[Scene alloc] init];
-    [scene setSceneID:2];
+    [scene setSceneID:[self.sceneid intValue]];
     [scene setRoomID:4];
     [scene setHouseID:3];
     [scene setPicID:66];
@@ -311,6 +311,7 @@
 - (IBAction)selectTypeOfLight:(UISegmentedControl *)sender {
     
    self.detailCell.label.text = self.lightNames[sender.selectedSegmentIndex];
+    self.deviceid=[self.lightIds objectAtIndex:sender.selectedSegmentIndex];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

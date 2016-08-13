@@ -36,7 +36,6 @@
     // Do any additional setup after loading the view.
     
     self.title=@"窗帘";
-    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.cell = [[[NSBundle mainBundle] loadNibNamed:@"CurtainTableViewCell" owner:self options:nil] lastObject];
@@ -76,6 +75,7 @@
     }
     
     self.segmentCurtain.selectedSegmentIndex = 0;
+    self.deviceid=[self.curtainIds objectAtIndex:self.segmentCurtain.selectedSegmentIndex][0];
 }
 
 -(IBAction)save:(id)sender
