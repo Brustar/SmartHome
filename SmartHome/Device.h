@@ -22,7 +22,7 @@
 @property (nonatomic,strong) NSString *gua_tel;
 @property (nonatomic,assign) NSInteger power;
 @property (nonatomic,assign) double current;
-@property (nonatomic,assign) NSInteger voltagge;
+@property (nonatomic,assign) NSInteger voltage;
 @property (nonatomic,strong) NSString *protocol;
 @property (nonatomic,assign) NSInteger rID;
 @property (nonatomic,assign) NSInteger eNumber;
@@ -30,8 +30,6 @@
 @property (nonatomic,assign) NSInteger subTypeId;
 @property (nonatomic,strong) NSString *typeName;
 @property (nonatomic,strong) NSString *subTypeName;
-
-
 
 + (instancetype)deviceWithDict:(NSDictionary *)dict;
 @end

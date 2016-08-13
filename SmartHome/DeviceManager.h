@@ -17,4 +17,15 @@
 //根据房间ID的到该房间的所有设备
 +(NSArray *)devicesByRoomId:(NSInteger)roomId;
 
++(NSArray *)deviceSubTypeByRoomId:(NSInteger)roomID;
+
+
++ (NSArray *)getLightTypeNameWithRoomID:(NSInteger)roomID;
++ (NSArray *)getLightWithTypeName:(NSString *)typeName roomID:(NSInteger)roomID;
+
+
++ (NSArray *)getCurtainTypeNameWithRoomID:(NSInteger)roomID;
++ (NSArray *)getCurtainWithTypeName:(NSString *)typeName roomID:(NSInteger)roomID;
+
++ (NSString *)getTVDeviceIDWithRoomID:(NSInteger)roomID;
 @end

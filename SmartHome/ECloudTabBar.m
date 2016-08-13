@@ -78,11 +78,12 @@
    
   
     
-   // self.rooms = [RoomManager getRoomModels];
+    self.rooms = [RoomManager getAllRoomsInfo];
     
     for (int i = 0; i < self.rooms.count; i++) {
         Room *room = self.rooms[i];
         ECloudButton *button = [[ECloudButton alloc] initWithTitle:room.rName  normalImage:room.imgUrl selectImage:room.imgUrl];
+        button.highlighted = YES;
         if (0 == i) {
             self.selectButton = button;
         }

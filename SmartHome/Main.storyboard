@@ -1265,7 +1265,6 @@
                                         <connections>
                                             <outlet property="imgView" destination="8Qk-1L-fKL" id="k1m-GJ-RYi"/>
                                             <outlet property="scenseName" destination="6XR-ed-UGM" id="4bC-5E-NFc"/>
-                                            <segue destination="6a7-1m-tB7" kind="show" id="ZZD-ht-99Y"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -1310,6 +1309,7 @@
                         <outlet property="addSceseBtn" destination="sTc-nu-9cp" id="kkY-9L-RDO"/>
                         <outlet property="collectionView" destination="qck-Xh-eYG" id="IfN-A9-DXb"/>
                         <outlet property="netBarBtn" destination="mCL-Ia-Vaf" id="lUi-ca-OaP"/>
+                        <segue destination="6a7-1m-tB7" kind="show" identifier="sceneDetailSegue" id="PRs-sg-E1F"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d1m-d3-jT3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3710,8 +3710,8 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k92-43-Qg3">
-                                <rect key="frame" x="30" y="455" width="540" height="45"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k92-43-Qg3">
+                                <rect key="frame" x="30" y="406" width="540" height="45"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="详细信息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m9k-Do-RGs">
                                         <rect key="frame" x="5" y="12" width="68" height="21"/>
@@ -3735,21 +3735,21 @@
                                     <constraint firstAttribute="trailing" secondItem="dhk-xY-XBb" secondAttribute="trailing" constant="30" id="tfa-tn-14o"/>
                                 </constraints>
                             </view>
-                            <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="fxa-EE-lhu">
-                                <rect key="frame" x="98" y="375" width="404" height="31"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="fxa-EE-lhu">
+                                <rect key="frame" x="98" y="326" width="404" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="400" id="ltG-JJ-U64"/>
                                 </constraints>
                             </slider>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="voice_weak.png" translatesAutoresizingMaskIntoConstraints="NO" id="TgJ-dj-uwe">
-                                <rect key="frame" x="60" y="373" width="32" height="32"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_weak.png" translatesAutoresizingMaskIntoConstraints="NO" id="TgJ-dj-uwe">
+                                <rect key="frame" x="60" y="324" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="YYq-jQ-xBB"/>
                                     <constraint firstAttribute="width" constant="32" id="qPW-ga-MgR"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="voice_strong.png" translatesAutoresizingMaskIntoConstraints="NO" id="hAI-Hv-xB6">
-                                <rect key="frame" x="508" y="374" width="32" height="32"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_strong.png" translatesAutoresizingMaskIntoConstraints="NO" id="hAI-Hv-xB6">
+                                <rect key="frame" x="508" y="325" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="32" id="8TZ-Qn-61g"/>
                                     <constraint firstAttribute="height" constant="32" id="XOp-uA-deQ"/>
@@ -3846,31 +3846,39 @@
                                             <outlet property="delegate" destination="2yR-Tc-bp1" id="Rqs-Na-V6n"/>
                                         </connections>
                                     </collectionView>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您还没有收藏任何频道" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tWi-EU-Hza">
+                                        <rect key="frame" x="75" y="185" width="250" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.86852824080000002" green="0.86852824080000002" blue="0.86852824080000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="2OF-5a-iAy" secondAttribute="trailing" id="49H-Gc-eui"/>
                                     <constraint firstAttribute="height" constant="400" id="5Zn-2h-VJV"/>
+                                    <constraint firstItem="tWi-EU-Hza" firstAttribute="centerX" secondItem="F3T-db-uVd" secondAttribute="centerX" id="FvY-3d-z7Q"/>
                                     <constraint firstItem="2OF-5a-iAy" firstAttribute="top" secondItem="F3T-db-uVd" secondAttribute="top" id="JJE-ZE-ZYa"/>
                                     <constraint firstItem="2OF-5a-iAy" firstAttribute="leading" secondItem="F3T-db-uVd" secondAttribute="leading" id="Wu1-eV-hZp"/>
+                                    <constraint firstItem="tWi-EU-Hza" firstAttribute="centerY" secondItem="F3T-db-uVd" secondAttribute="centerY" id="f0j-M9-pzZ"/>
                                     <constraint firstAttribute="width" constant="400" id="q1V-Av-63e"/>
                                     <constraint firstAttribute="bottom" secondItem="2OF-5a-iAy" secondAttribute="bottom" id="uOc-gy-P64"/>
                                 </constraints>
                             </view>
-                            <pageControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="RN9-fb-vhN">
-                                <rect key="frame" x="325" y="308" width="50" height="37"/>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="RN9-fb-vhN">
+                                <rect key="frame" x="325" y="259" width="50" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="GCA-zi-ZWw"/>
                                     <constraint firstAttribute="width" constant="50" id="ksh-RU-TMr"/>
                                 </constraints>
                             </pageControl>
-                            <view hidden="YES" alpha="0.5" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lON-fn-lEV">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <view hidden="YES" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lON-fn-lEV">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <color key="backgroundColor" red="0.90309139530000004" green="0.90309139530000004" blue="0.90309139530000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.7725490196" green="0.7725490196" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yS3-on-uXb">
-                                <rect key="frame" x="175" y="225" width="250" height="150"/>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yS3-on-uXb">
+                                <rect key="frame" x="175" y="201" width="250" height="150"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="频道名称：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXY-HZ-1tW">
                                         <rect key="frame" x="20" y="40" width="85" height="21"/>
@@ -3980,6 +3988,7 @@
                         <outlet property="hzLabel" destination="u64-yT-FNg" id="Vdr-am-wKl"/>
                         <outlet property="numberOfChannel" destination="EEA-tZ-ruW" id="Kiz-TF-Vyx"/>
                         <outlet property="pageController" destination="RN9-fb-vhN" id="AqT-88-8sX"/>
+                        <outlet property="unstoreLabel" destination="tWi-EU-Hza" id="4Dp-uK-E6e"/>
                         <outlet property="volume" destination="fxa-EE-lhu" id="ayj-at-x4s"/>
                     </connections>
                 </viewController>
@@ -4315,6 +4324,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="segmentCurtain" destination="3oz-0f-vMP" id="Xbn-hR-raD"/>
                         <outlet property="tableView" destination="Iwa-8I-ryX" id="aLb-PK-sYz"/>
                         <segue destination="FtL-kz-2bc" kind="show" identifier="detail" id="NGA-cS-h6U"/>
                     </connections>
@@ -4508,15 +4518,23 @@
                                             <outlet property="delegate" destination="iP5-w8-v4Y" id="YxY-cn-9TE"/>
                                         </connections>
                                     </collectionView>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您还没有收藏任何频道" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ACw-5V-J3S">
+                                        <rect key="frame" x="25" y="135" width="250" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="BMQ-UB-8M2" secondAttribute="trailing" id="5QB-gf-u0s"/>
                                     <constraint firstItem="BMQ-UB-8M2" firstAttribute="top" secondItem="oeK-04-ZAZ" secondAttribute="top" id="7G0-Br-zmN"/>
+                                    <constraint firstItem="ACw-5V-J3S" firstAttribute="centerX" secondItem="oeK-04-ZAZ" secondAttribute="centerX" id="AfP-zG-K8w"/>
                                     <constraint firstAttribute="bottom" secondItem="BMQ-UB-8M2" secondAttribute="bottom" id="Dpe-bH-AIw"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="220" id="Mca-wQ-VHk"/>
                                     <constraint firstItem="BMQ-UB-8M2" firstAttribute="leading" secondItem="oeK-04-ZAZ" secondAttribute="leading" id="ZMb-4J-Udj"/>
                                     <constraint firstAttribute="width" constant="300" id="bve-Gx-QqW"/>
+                                    <constraint firstItem="ACw-5V-J3S" firstAttribute="centerY" secondItem="oeK-04-ZAZ" secondAttribute="centerY" id="lx1-rE-O8I"/>
                                     <constraint firstAttribute="height" constant="300" id="zw8-L0-UdD"/>
                                 </constraints>
                             </view>
@@ -4755,6 +4773,7 @@
                         <outlet property="numbersCollectionView" destination="8FO-uN-8dL" id="oG7-EX-9Ul"/>
                         <outlet property="pageController" destination="kVU-ah-M3k" id="lZS-bv-s9C"/>
                         <outlet property="tvLogoCollectionView" destination="BMQ-UB-8M2" id="vYG-SE-Uxl"/>
+                        <outlet property="unstoreLabel" destination="ACw-5V-J3S" id="yOQ-Go-9cv"/>
                         <outlet property="volume" destination="jdw-mK-XVY" id="jmR-8u-VSS"/>
                     </connections>
                 </viewController>
@@ -4891,6 +4910,7 @@ layer.masksToBoundslayer.masksToBounds
                     </navigationItem>
                     <connections>
                         <outlet property="favButt" destination="xD2-JX-03I" id="UHS-Tt-inE"/>
+                        <outlet property="segmentLight" destination="bzi-0u-K76" id="BOr-Ze-HV8"/>
                         <outlet property="tableView" destination="Kef-hB-18O" id="TjF-Zk-8dM"/>
                         <segue destination="FtL-kz-2bc" kind="show" identifier="detail" id="YE7-iU-rxh"/>
                     </connections>
@@ -5667,8 +5687,8 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="bKA-jZ-hQY"/>
+        <segue reference="YE7-iU-rxh"/>
         <segue reference="yTT-Nf-qWA"/>
-        <segue reference="fHn-Cm-7Q7"/>
-        <segue reference="dRU-hd-aVS"/>
     </inferredMetricsTieBreakers>
 </document>

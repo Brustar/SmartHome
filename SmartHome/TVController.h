@@ -13,5 +13,6 @@
 
 @property (nonatomic, retain) NSTimer *timer;
 @property (nonatomic) int retChannel;
+@property (nonatomic,assign) int roomID;
 
 @end

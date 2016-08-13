@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface TVChannel : NSObject
-@property (nonatomic,assign) NSInteger ID;
-@property (nonatomic,strong)  NSString *channel_name;
+//设备ID，设备编号，频道名字，频道ID，频道图片，频道父类，是否收藏
+@property (nonatomic,assign) NSInteger eID;
+@property (nonatomic,assign) NSInteger eqNumber;
+@property (nonatomic,strong) NSString *channel_name;
 @property (nonatomic,assign) NSInteger channel_id;
 @property (nonatomic,strong) NSString *channel_pic;
 @property (nonatomic,strong) NSString *parent;

@@ -11,16 +11,26 @@
 #import "PackManager.h"
 #import "ProtocolManager.h"
 #import "SocketManager.h"
+#import "DeviceManager.h"
 
 @interface CurtainController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentCurtain;
 - (IBAction)selectedTypeOfCurtain:(UISegmentedControl *)sender;
+@property (nonatomic,strong) NSArray *curtainNames;
 
+@property (nonatomic, strong) NSMutableArray *curtainIds;
 @end
 
 @implementation CurtainController
 
+- (NSMutableArray *)curtainIds
+{
+    if (_curtainIds == nil) {
+        _curtainIds = [NSMutableArray array];
+    }
+    return _curtainIds;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -46,7 +56,26 @@
         }
     }
     
+     [self setupSegmentCurtain];
+}
+- (void)setupSegmentCurtain
+{
+    self.curtainNames = [DeviceManager getCurtainTypeNameWithRoomID:self.roomID];
+    if (self.curtainNames == nil) {
+        return;
+    }
     
+    [self.segmentCurtain removeAllSegments];
+    
+    for ( int i = 0; i < self.curtainNames.count; i++) {
+        [self.segmentCurtain insertSegmentWithTitle:self.curtainNames[i] atIndex:i animated:NO];
+        
+        NSArray *curtains = [DeviceManager getCurtainWithTypeName:self.curtainNames[i] roomID:self.roomID];
+        
+        [self.curtainIds addObject:curtains];
+    }
+    
+    self.segmentCurtain.selectedSegmentIndex = 0;
 }
 
 -(IBAction)save:(id)sender
@@ -109,25 +138,24 @@
 {
     if(indexPath.row == 0)
     {
-        
         self.cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.cell.label.text = self.curtainNames[self.segmentCurtain.selectedSegmentIndex];
         return self.cell;
-    
     }
     
     static NSString *CellIdentifier = @"Cell";
-        
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
-            
+        
     }
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 5, 100, 30)];
     [cell.contentView addSubview:label];
     label.text = @"详细信息";
-        
+    
     return cell;
   
     
@@ -147,14 +175,7 @@
 }
 
 - (IBAction)selectedTypeOfCurtain:(UISegmentedControl *)sender {
-    if( 0 == sender.selectedSegmentIndex)
-    {
-       self.cell.label.text = @"前窗";
-    }else if( 1 == sender.selectedSegmentIndex)
-        {
-            self.cell.label.text = @"侧窗";
-        }else
-            self.cell.label.text = @"落地窗";
+    self.cell.label.text = self.curtainNames[sender.selectedSegmentIndex];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
