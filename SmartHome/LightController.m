@@ -16,28 +16,45 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *favButt;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,assign) CGFloat brightValue;
-@property (nonatomic,strong) NSArray *lightNames;
 
-@property (nonatomic, strong) NSMutableArray *lightIds;
-
+@property (nonatomic,strong) NSMutableArray *lIDs;
+@property (nonatomic,strong) NSMutableArray *lNames;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentLight;
 - (IBAction)selectTypeOfLight:(UISegmentedControl *)sender;
 
 @end
 
 @implementation LightController
-- (NSMutableArray *)lightIds
-{
-    if (_lightIds == nil) {
-        _lightIds = [NSMutableArray array];
-    }
-    return _lightIds;
-}
 
+-(NSMutableArray *)lIDs
+{
+    if(!_lIDs)
+    {
+        _lIDs = [NSMutableArray array];
+        [_lIDs addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"开关" andRoomID:self.roomID]];
+        [_lIDs addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"调光" andRoomID:self.roomID]];
+        [_lIDs addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"调色" andRoomID:self.roomID]];
+    }
+    return _lIDs;
+}
+-(NSMutableArray *)lNames
+{
+    if(!_lNames)
+    {
+        _lNames = [NSMutableArray array];
+        for(int i = 0; i < self.lIDs.count; i++)
+        {
+            int lID = [self.lIDs[i] intValue];
+            NSString *name = [DeviceManager deviceNameByDeviceID:lID];
+            [_lNames addObject:name];
+        }
+    }
+    return _lNames;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
     self.detailCell = [[[NSBundle mainBundle] loadNibNamed:@"DetailTableViewCell" owner:self options:nil] lastObject];
     self.detailCell.bright.continuous = NO;
     [self.detailCell.bright addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
@@ -74,19 +91,16 @@
 }
 - (void)setupSegmentLight
 {
-    self.lightNames = [DeviceManager getLightTypeNameWithRoomID:self.roomID];
-    if (self.lightNames == nil) {
+    
+    if (self.lNames == nil) {
         return;
     }
     
     [self.segmentLight removeAllSegments];
     
-    for ( int i = 0; i < self.lightNames.count; i++) {
-        [self.segmentLight insertSegmentWithTitle:self.lightNames[i] atIndex:i animated:NO];
-        
-        NSArray *lights = [DeviceManager getLightWithTypeName:self.lightNames[i] roomID:self.roomID];
-        
-        [self.lightIds addObject:lights];
+    for ( int i = 0; i < self.lNames.count; i++) {
+        [self.segmentLight insertSegmentWithTitle:self.lNames[i] atIndex:i animated:NO];
+    
     }
     
     self.segmentLight.selectedSegmentIndex = 0;
@@ -245,9 +259,10 @@
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if(indexPath.row == 0)
     {
-        self.detailCell.label.text = self.lightNames[self.segmentLight.selectedSegmentIndex];
+        self.detailCell.label.text = self.lNames[self.segmentLight.selectedSegmentIndex];
         self.detailCell.selectionStyle = UITableViewCellSelectionStyleNone;
         return self.detailCell;
     } else if(indexPath.row == 1)
@@ -294,7 +309,9 @@
 
 - (IBAction)selectTypeOfLight:(UISegmentedControl *)sender {
     
-   self.detailCell.label.text = self.lightNames[sender.selectedSegmentIndex];
+   self.detailCell.label.text = self.lNames[sender.selectedSegmentIndex];
+    
+   
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
