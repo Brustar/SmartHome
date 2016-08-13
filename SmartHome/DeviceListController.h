@@ -12,6 +12,6 @@
 @property (strong, nonatomic) NSArray *devices;
 @property (strong, nonatomic) NSArray *segues;
 @property (nonatomic,weak) NSString *sceneid;
-@property (nonatomic,strong) NSString *deviceid;
+@property (nonatomic,assign) int deviceid;
 @property (nonatomic,assign) NSInteger roomid;
 @end

@@ -18,9 +18,12 @@
 #import "SCWaveAnimationView.h"
 #import "ProtocolManager.h"
 #import "SocketManager.h"
+#import "DeviceManager.h"
 
 @interface TVController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,TVLogoCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *touchpad;
+@property (weak, nonatomic) IBOutlet UILabel *unstoreLabel;
+
 
 @property (weak, nonatomic) IBOutlet UISlider *volume;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageController;
@@ -64,10 +67,20 @@
     {
         _allFavourTVChannels = [NSMutableArray array];
         _allFavourTVChannels = [TVChannel getAllChannelForFavoritedForType:@"TV"];
+        if(_allFavourTVChannels == nil || _allFavourTVChannels.count == 0)
+        {
+            self.unstoreLabel.hidden = NO;
+            self.tvLogoCollectionView.backgroundColor = [UIColor whiteColor];
+        }
     }
     return _allFavourTVChannels;
 }
-
+- (void)setRoomID:(int)roomID
+{
+    _roomID = roomID;
+    
+    self.deviceid = [DeviceManager getTVDeviceIDWithRoomID:self.roomID];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

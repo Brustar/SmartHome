@@ -32,8 +32,9 @@
 
 -(NSArray *)addDevice2Scene:(Scene *)scene withDeivce:(id)device withId:(int)deviceID;
 
-//得到所有场景模型
-//+(NSArray *)getSceneModels;
+
++(NSArray *)allSceneModels;
++(NSArray *)devicesBySceneID:(int)sId;
 
 
 @end

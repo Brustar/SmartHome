@@ -10,11 +10,15 @@
 #import "PackManager.h"
 #import "SocketManager.h"
 #import "ProtocolManager.h"
+#import "DeviceManager.h"
 
 @interface LightController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *favButt;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,assign) CGFloat brightValue;
+@property (nonatomic,strong) NSArray *lightNames;
+
+@property (nonatomic, strong) NSMutableArray *lightIds;
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentLight;
 - (IBAction)selectTypeOfLight:(UISegmentedControl *)sender;
@@ -22,6 +26,14 @@
 @end
 
 @implementation LightController
+- (NSMutableArray *)lightIds
+{
+    if (_lightIds == nil) {
+        _lightIds = [NSMutableArray array];
+    }
+    return _lightIds;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -54,6 +66,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
+    [self setupSegmentLight];
      self.title = @"灯";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toogleLighter:) name:@"light" object:nil];
@@ -72,6 +85,25 @@
     if (state == 0x0b) {
         
     }
+}
+- (void)setupSegmentLight
+{
+    self.lightNames = [DeviceManager getLightTypeNameWithRoomID:self.roomID];
+    if (self.lightNames == nil) {
+        return;
+    }
+    
+    [self.segmentLight removeAllSegments];
+    
+    for ( int i = 0; i < self.lightNames.count; i++) {
+        [self.segmentLight insertSegmentWithTitle:self.lightNames[i] atIndex:i animated:NO];
+        
+        NSArray *lights = [DeviceManager getLightWithTypeName:self.lightNames[i] roomID:self.roomID];
+        
+        [self.lightIds addObject:lights];
+    }
+    
+    self.segmentLight.selectedSegmentIndex = 0;
 }
 
 - (NSDictionary *)getRGBDictionaryByColor:(UIColor *)originColor
@@ -233,8 +265,7 @@
 {
     if(indexPath.row == 0)
     {
-        
-        self.detailCell.label.text = @"射灯";
+        self.detailCell.label.text = self.lightNames[self.segmentLight.selectedSegmentIndex];
         self.detailCell.selectionStyle = UITableViewCellSelectionStyleNone;
         return self.detailCell;
     } else if(indexPath.row == 1){
@@ -245,7 +276,7 @@
         self.cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return self.cell;
     }
-        
+    
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -254,12 +285,12 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
         
     }
-      cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-      UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 5, 100, 30)];
-      [cell.contentView addSubview:label];
-      label.text = @"详细信息";
+    cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 5, 100, 30)];
+    [cell.contentView addSubview:label];
+    label.text = @"详细信息";
     
-      return cell;
+    return cell;
     
 }
 //设置cell行高
@@ -279,13 +310,7 @@
 
 - (IBAction)selectTypeOfLight:(UISegmentedControl *)sender {
     
-    if(0 == sender.selectedSegmentIndex)
-    {
-        self.detailCell.label.text = @"射灯";
-    }else  if (1 == sender.selectedSegmentIndex){
-        self.detailCell.label.text = @"廊灯";
-    }else
-        self.detailCell.label.text  = @"吊灯";
+   self.detailCell.label.text = self.lightNames[sender.selectedSegmentIndex];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

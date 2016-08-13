@@ -11,12 +11,14 @@
 #import "ScenseSplitViewController.h"
 #import <Reachability/Reachability.h>
 #import "SocketManager.h"
-
+#import "SceneManager.h"
+#import "Scene.h"
 @interface ScenseController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *addSceseBtn;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *netBarBtn;
-
+@property (nonatomic,assign) int selectedSID;
+@property (nonatomic,assign) int selectedDID;
 @end
 
 @implementation ScenseController
@@ -27,7 +29,7 @@
     self.addSceseBtn.layer.cornerRadius = self.addSceseBtn.bounds.size.width / 2.0;
     self.addSceseBtn.layer.masksToBounds = YES;
     
-    self.scenes=[NSArray arrayWithObjects:@"清晨" ,@"睡眠" ,@"约会" ,@"用餐" ,@"派对" ,@"影院" ,@"欢迎" ,@"离家" ,nil];
+    self.scenes = [SceneManager allSceneModels];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     //开启网络状况的监听
@@ -94,22 +96,27 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ScenseCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"scenseCell" forIndexPath:indexPath];
-    cell.scenseName.text = self.scenes[indexPath.row];
+    Scene *scene = self.scenes[indexPath.row];
+    cell.scenseName.text = scene.sceneName;
     return cell;
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+
 {
-    //[self performSegueWithIdentifier:@"newScene" sender:self];
+    Scene *scene = self.scenes[indexPath.row];
+    self.selectedSID = scene.sceneID;
+    self.selectedDID = scene.eID;
+    [self performSegueWithIdentifier:@"sceneDetailSegue" sender:self];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if([segue.identifier isEqualToString:@"newScene"])
+    if([segue.identifier isEqualToString:@"sceneDetailSegue"])
     {
         id theSegue = segue.destinationViewController;
-        //        NSInteger row = self.tableView.indexPathForSelectedRow.row;
-        [theSegue setValue:@"2" forKey:@"sceneid"];
-        //        [theSegue setValue:[NSString stringWithFormat:@"%@",self.scenes[row]] forKey:@"title"];
+        
+        [theSegue setValue:[NSNumber numberWithInt:self.selectedSID] forKey:@"sceneID"];
+        [theSegue setValue:[NSNumber numberWithInt:self.selectedDID] forKey:@"deviceID"];
     }
 }
 
@@ -125,7 +132,6 @@
     ScenseSplitViewController *splitVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ScenseSplitViewController"];
     [self presentViewController:splitVC animated:YES completion:nil];
 }
-
 
 -(void)dealloc
 {

@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIView *fmView;
 
 @property (weak, nonatomic) IBOutlet UIView *coverView;
+@property (weak, nonatomic) IBOutlet UILabel *unstoreLabel;
 
 @property (weak, nonatomic) IBOutlet UITextField *channelNameEdit;
 @property (weak, nonatomic) IBOutlet UITextField *channelIDEdit;
@@ -42,6 +43,10 @@
     {
         _allFavouriteChannels = [NSMutableArray array];
         _allFavouriteChannels = [TVChannel getAllChannelForFavoritedForType:@"FM"];
+        if(_allFavouriteChannels == nil || _allFavouriteChannels.count == 0)
+        {
+            self.unstoreLabel.hidden = NO;
+        }
         
     }
     return _allFavouriteChannels;
@@ -91,7 +96,7 @@
 - (void)txhRrettyRuler:(TXHRulerScrollView *)rulerScrollView {
     self.numberOfChannel.text = [NSString stringWithFormat:@" %.1f",rulerScrollView.rulerValue];
     
-    [self save:nil];
+   // [self save:nil];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

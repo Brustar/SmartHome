@@ -12,7 +12,7 @@
 #import "FMDatabase.h"
 @implementation RoomManager
 
-//从缓存中获取房间配置信息
+//从数据库中获取房间配置信息
 +(NSArray *)getAllRoomsInfo
 {
     NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];

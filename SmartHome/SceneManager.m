@@ -8,7 +8,8 @@
 
 #import "SceneManager.h"
 #import "RegexKitLite.h"
-
+#import "Device.h"
+#import "DeviceManager.h"
 @implementation SceneManager
 
 + (id) defaultManager
@@ -200,6 +201,52 @@
         index++;
     }
     return -1;
+}
+
++(NSArray *)allSceneModels
+{
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    NSMutableArray *sceneModles = [NSMutableArray array];
+    if([db open])
+    {
+        FMResultSet *resultSet = [db executeQuery:@"select * from Scenes"];
+        while([resultSet next])
+        {
+            Scene *scene = [Scene new];
+            scene.sceneID = [resultSet intForColumn:@"ID"];
+            scene.sceneName = [resultSet stringForColumn:@"NAME"];
+            scene.roomID = [resultSet intForColumn:@"room"];
+            scene.picID = [resultSet intForColumn:@"pic"];
+            scene.isFavorite = [resultSet boolForColumn:@"isFavorite"];
+            scene.eID = [resultSet intForColumn:@"eId"];
+            scene.startTime = [resultSet stringForColumn:@"startTime"];
+            scene.astronomicalTime = [resultSet stringForColumn:@"astronomicalTime"];
+            scene.weekValue = [resultSet stringForColumn:@"weekValue"];
+            scene.weekRepeat = [resultSet intForColumn:@"weekRepeat"];
+            scene.roomID = [resultSet intForColumn:@"rId"];
+           
+            [sceneModles addObject:scene];
+            
+        }
+    }
+    [db close];
+    return [sceneModles copy];
+}
+//根据场景中的设备ID获得该场景中的所有设备
++(NSArray *)devicesBySceneID:(int)sId
+{
+    NSArray *devices = [NSArray array];
+    NSArray *arrs = [self allSceneModels];
+    for(Scene *scene in arrs)
+    {
+        if(scene.sceneID == sId)
+        {
+           devices = [DeviceManager devicesByRoomId:scene.eID];
+        }
+    }
+    return devices;
 }
 
 @end

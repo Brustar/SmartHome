@@ -12,6 +12,9 @@
 #import "LightController.h"
 #import "CurtainController.h"
 #import "TVController.h"
+#import "DeviceManager.h"
+#import "Device.h"
+#import "SceneManager.h"
 @interface EditSceneController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITableView *subDeviceTableView;
@@ -29,18 +32,11 @@
 @property (weak, nonatomic) IBOutlet UIView *devicelView;
 @property (nonatomic,strong) LightController *ligthVC;
 @property (nonatomic,strong) NSArray *controllersVC;
+@property (nonatomic,strong) NSArray *devices;
 @end
 
 @implementation EditSceneController
--(NSArray *)devicesTypes
-{
-    if(!_devicesTypes)
-    {
-        //从数据库中获取设备种类
-        _devicesTypes = @[@"照明",@"影音",@"安防",@"其他"];
-    }
-    return _devicesTypes;
-}
+
 -(NSArray *)controllersVC
 {
     if(!_controllersVC)
@@ -54,17 +50,30 @@
     
     return _controllersVC;
 }
+-(NSArray *)devices
+{
+    if(!_devices)
+    {
+        //根据场景ID得到所有的设备类
+        _devices = [SceneManager devicesBySceneID:self.sceneID];
+        for(Device *device in _devices)
 
+        {
+            
+        }
+    }
+    return _devices;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.subTypeArr = @[@"照明",@"窗帘"];
+    self.subTypeArr = @[@"照明",@"影音"];
     self.tableView.tableFooterView = self.footerView;
     self.tableView.backgroundColor = backGroudColour;
     self.subDeviceTableView.backgroundColor = backGroudColour;
     self.view.backgroundColor = backGroudColour;
-}
+    }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

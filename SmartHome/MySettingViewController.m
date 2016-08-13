@@ -165,7 +165,7 @@
         NSString *url = [NSString stringWithFormat:@"%@UserLogOut.aspx",[IOManager httpAddr]];
         HttpManager *http=[HttpManager defaultManager];
         http.delegate=self;
-        http.tag = 0;
+        http.tag = 1;
         [http sendPost:url param:dict];
      
     }

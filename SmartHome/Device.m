@@ -15,4 +15,5 @@
     [device setValuesForKeysWithDictionary:dict];
     return device;
 }
+
 @end
