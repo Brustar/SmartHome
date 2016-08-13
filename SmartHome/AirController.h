@@ -27,4 +27,6 @@ enum AIR_TARGET
 @property (nonatomic) int currentDirection;
 @property (nonatomic) int currentTiming;
 
+@property (nonatomic,assign) int roomID;
+
 @end

@@ -53,6 +53,24 @@
     }
     return eName;
 }
++(NSString *)deviceTypeNameByDeviceID:(int)eId
+{
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    NSString *typeName;
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT typeName FROM Devices where ID = %d",eId];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+            typeName = [resultSet stringForColumn:@"typeName"];
+        }
+    }
+    return typeName;
+}
+
+
 +(Device*)deviceMdoelByFMResultSet:(FMResultSet *)resultSet
 {
     Device *device = [Device new];
@@ -235,24 +253,24 @@
 
 
 
-+ (NSString *)getTVDeviceIDWithRoomID:(NSInteger)roomID
++ (NSString *)deviceIDWithRoomID:(NSInteger)roomID withType:(NSString *)type
 {
-    NSString *TVDevice = nil;
+    NSString *deviceID = nil;
     
     NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld where typeName = \"电视\"",roomID];
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and typeName = \'%@\'",roomID,type];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
             int tvID = [resultSet intForColumn:@"ID"];
-            TVDevice = [NSString stringWithFormat:@"%d", tvID];
+            deviceID = [NSString stringWithFormat:@"%d", tvID];
         }
     }
     [db close];
-    return [TVDevice copy];
+    return deviceID;
 }
 
 

@@ -13,6 +13,8 @@
 #import "SocketManager.h"
 #import "ProtocolManager.h"
 #import "PackManager.h"
+#import "DeviceManager.h"
+
 
 @interface AirController ()<RulerViewDatasource, RulerViewDelegate,UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet RulerView *thermometerView;
@@ -23,6 +25,14 @@
 
 @implementation AirController
 
+- (void)setRoomID:(int)roomID
+{
+    _roomID = roomID;
+    
+    self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"空调"];
+    
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.params=@[@[@"制冷",@"制热",@"抽湿",@"自动"],@[@"向上",@"向下"],@[@"高风",@"中风",@"低风"],@[@"0.5H",@"1H",@"2H",@"3H"]];

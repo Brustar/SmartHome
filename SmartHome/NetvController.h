@@ -12,4 +12,5 @@
 @property (nonatomic,weak) NSString *deviceid;
 @property (weak, nonatomic) IBOutlet UISlider *volume;
 
+@property (nonatomic,assign) int roomID;
 @end

@@ -9,7 +9,7 @@
 @interface TVController : UIViewController
 
 @property (nonatomic,weak) NSString *sceneid;
-@property (nonatomic,strong) NSString *deviceid;
+@property (nonatomic,assign) NSString *deviceid;
 
 @property (nonatomic, retain) NSTimer *timer;
 @property (nonatomic) int retChannel;
