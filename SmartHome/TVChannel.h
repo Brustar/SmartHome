@@ -14,6 +14,7 @@
 @property (nonatomic,assign) NSInteger eqNumber;
 @property (nonatomic,strong) NSString *channel_name;
 @property (nonatomic,assign) NSInteger channel_id;
+@property (nonatomic,assign) NSInteger channel_number;
 @property (nonatomic,strong) NSString *channel_pic;
 @property (nonatomic,strong) NSString *parent;
 @property (nonatomic,assign) int channelValue;

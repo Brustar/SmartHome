@@ -353,17 +353,17 @@
         for(NSDictionary *dicInfo in messageInfo)
         {
             int eqId = [dicInfo[@"eqId"] intValue];
-            int eqNumber = [dicInfo[@"eqNumber"] intValue];
+            NSString *eqNumber = dicInfo[@"eqNumber"];
             NSArray *channelInfo = dicInfo[@"channelInfo"];
             if(channelInfo == nil || channelInfo .count == 0 )
             {
                 return;
             }
-            int i;
+            
             for(NSDictionary *channel in channelInfo)
             {
                 
-                NSString *sql = [NSString stringWithFormat:@"insert into Channels values(%d,%d,'%@',%d,'%@','%@',%d,%d)",i++,eqId,channel[@"cName"],[channel[@"cId"] intValue],channel[@"imgUrl"],parent,0,eqNumber];
+                NSString *sql = [NSString stringWithFormat:@"insert into Channels values(%d,%d,%d,'%@','%@','%@',%d,'%@')",[channel[@"cId"] intValue],eqId,[channel[@"cNumber"] intValue],channel[@"cName"],channel[@"imgUrl"],parent,1,eqNumber];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {

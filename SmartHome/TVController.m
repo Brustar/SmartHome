@@ -20,6 +20,8 @@
 #import "SocketManager.h"
 #import "DeviceManager.h"
 #import "HttpManager.h"
+#import "ChannelManager.h"
+#import "MBProgressHUD+NJ.h"
 @interface TVController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,TVLogoCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *touchpad;
 @property (weak, nonatomic) IBOutlet UILabel *unstoreLabel;
@@ -38,11 +40,11 @@
 - (IBAction)mute:(id)sender;
 //编辑电视属性
 @property (weak, nonatomic) IBOutlet UITextField *channelName;
-@property (weak, nonatomic) IBOutlet UITextField *channeID;
+@property (weak, nonatomic) IBOutlet UITextField *channeNumber;
 @property (weak, nonatomic) IBOutlet UIView *editView;
 @property (weak, nonatomic) IBOutlet UIView *coverView;
 @property (weak, nonatomic) IBOutlet UIButton *editChannelImgBtn;
-
+@property (nonatomic,strong) NSString *eNumber;
 
 - (IBAction)editChannelImgBtn:(UIButton *)sender;
 
@@ -66,7 +68,7 @@
     if(!_allFavourTVChannels)
     {
         _allFavourTVChannels = [NSMutableArray array];
-        _allFavourTVChannels = [TVChannel getAllChannelForFavoritedForType:@"TV"];
+        _allFavourTVChannels = [ChannelManager getAllChannelForFavoritedForType:@"TV"];
         if(_allFavourTVChannels == nil || _allFavourTVChannels.count == 0)
         {
             self.unstoreLabel.hidden = NO;
@@ -87,7 +89,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"电视";
-   
+     self.eNumber = [DeviceManager getENumber:[self.deviceid intValue]];
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
@@ -242,6 +244,7 @@
             int i = 4 - self.allFavourTVChannels.count % 4;
             return  self.allFavourTVChannels.count + i;
         }
+       
     }
     return self.btnTitles.count + 1;
 }
@@ -330,14 +333,16 @@
     self.cell = cell;
     NSIndexPath *indexPath = [self.tvLogoCollectionView indexPathForCell:cell];
     TVChannel *channel = self.allFavourTVChannels[indexPath.row];
-    BOOL isSuccess = [TVChannel deleteChannelForChannelID:channel.channel_id];
-    if(!isSuccess)
-    {
-        [MBProgressHUD showError:@"删除失败，请稍后再试"];
-        return;
-    }
-    [self.allFavourTVChannels removeObject:channel];
-    [self.tvLogoCollectionView reloadData];
+    
+    //发送删除频道请求
+    NSString *url = [NSString stringWithFormat:@"%@FMChannelRemove.aspx",[IOManager httpAddr]];
+    NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    NSDictionary *dic = @{@"AuthorToken":authorToken,@"RecordID":[NSNumber numberWithInteger:channel.channel_id]};
+    HttpManager *http = [HttpManager defaultManager];
+    http.delegate = self;
+    http.tag = 2;
+    [http sendPost:url param:dic];
+   
     
 }
 -(void)tvEditAction:(TVLogoCell *)cell
@@ -346,7 +351,7 @@
     TVChannel *channel = self.allFavourTVChannels[indexPath.row];
     [self.editChannelImgBtn setBackgroundImage:cell.imgView.image forState:UIControlStateNormal];
     self.channelName.text = channel.channel_name;
-    self.channeID.text = [NSString stringWithFormat:@"%d",(int)channel.channel_id];
+    self.channeNumber.text = [NSString stringWithFormat:@"%ld",channel.channel_number];
     [self showCoverView];
 }
 
@@ -362,12 +367,82 @@
 }
 
 #pragma mark - 编辑电视频道
-//编辑完成后上传频道
+//编辑完成后保存频道
 - (IBAction)clickSureBtnAfterEdited:(id)sender
+
 {
+   
+    NSString *url = [NSString stringWithFormat:@"%@TVChannelUpload.aspx",[IOManager httpAddr]];
+    NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    NSDictionary *dic = @{@"AuthorToken":authorToken,@"EID":self.deviceid,@"Cnumber":self.channeNumber.text,@"CName":self.channelName.text,@"ImgFileName":self.editChannelImgBtn.currentBackgroundImage,@"ImgFile":@""};
+    HttpManager *http = [HttpManager defaultManager];
+    http.delegate = self;
+    http.tag = 1;
+    [http sendPost:url param:dic];
+
     [self hiddenCoverView];
     
 }
+-(void) httpHandler:(id) responseObject tag:(int)tag
+{
+    if(tag == 1)
+    {
+        if([responseObject[@"Result"] intValue] == 0)
+        {
+            //保存成功后存到数据库
+            [self writeTVChannelsConfigDataToSQL:responseObject withParent:@"TV"];
+            self.allFavourTVChannels = [ChannelManager getAllChannelForFavoritedForType:@"TV"];
+            [self.tvLogoCollectionView reloadData];
+            
+            
+        }else{
+            [MBProgressHUD showError:@"Msg"];
+        }
+    }else if(tag == 2)
+    {
+        if([responseObject[@"Result"] intValue] == 0)
+        {
+            //从数据库中删除数据
+            NSIndexPath *indexPath = [self.tvLogoCollectionView indexPathForCell:self.cell];
+            TVChannel *channel = self.allFavourTVChannels[indexPath.row];
+            BOOL isSuccess = [TVChannel deleteChannelForChannelID:channel.channel_id];
+            if(!isSuccess)
+            {
+                [MBProgressHUD showError:@"删除失败，请稍后再试"];
+                return;
+            }
+            [self.allFavourTVChannels removeObject:channel];
+            [self.tvLogoCollectionView reloadData];
+            
+        }else{
+            [MBProgressHUD showError:responseObject[@"Msg"]];
+        }
+    }
+}
+
+-(void)writeTVChannelsConfigDataToSQL:(NSDictionary *)responseObject withParent:(NSString *)parent
+{
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    if([db open])
+    {
+        int cNumber = [self.channeNumber.text intValue];
+        NSString *sql = [NSString stringWithFormat:@"insert into Channels values(%d,%d,%d,'%@','%@','%@',%d,'%@')",[responseObject[@"cld"] intValue],[self.deviceid intValue],cNumber,self.channelName,responseObject[@"imgUrl"],parent,1,self.eNumber];
+                BOOL result = [db executeUpdate:sql];
+                if(result)
+                {
+                    NSLog(@"insert 成功");
+                }else{
+                    NSLog(@"insert 失败");
+                }
+                
+        
+            
+        
+    }
+    [db close];
+}
+
 - (IBAction)cancelEdit:(id)sender
 {
     [self hiddenCoverView];
@@ -435,13 +510,9 @@
 }
 
 - (IBAction)storeTVChannel:(UIBarButtonItem *)sender {
+ 
+    self.editView.hidden = NO;
     
-    NSString *url = [NSString stringWithFormat:@"%@TVChannelUpload.aspx",[IOManager httpAddr]];
-    NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]};
-    HttpManager *http = [HttpManager defaultManager];
-    http.delegate = self;
-    http.tag = 1;
-    [http sendPost:url param:dic];
 }
 
 

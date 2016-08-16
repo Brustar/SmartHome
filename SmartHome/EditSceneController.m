@@ -36,7 +36,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *devicelView;
 @property (nonatomic,strong) LightController *ligthVC;
-@property (nonatomic,strong) NSArray *controllersVC;
+
 //当前房间当前场景的所有设备
 @property (nonatomic,strong) NSArray *devices;
 //当前房间当前场景的所有设备类别的子类
@@ -45,19 +45,7 @@
 
 @implementation EditSceneController
 
--(NSArray *)controllersVC
-{
-    if(!_controllersVC)
-    {
-        UIStoryboard *sy = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        LightController *ligthVC = [sy instantiateViewControllerWithIdentifier:@"LightController"];
-        CurtainController *curtainVC = [sy instantiateViewControllerWithIdentifier:@"CurtainController"];
-        TVController *tv = [sy instantiateViewControllerWithIdentifier:@"TVController"];
-        _controllersVC = @[ligthVC,curtainVC,tv];
-    }
-    
-    return _controllersVC;
-}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
