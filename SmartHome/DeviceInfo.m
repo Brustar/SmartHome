@@ -161,43 +161,42 @@
 -(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID withCode:(NSString *)actcode
 {
     Proto proto=createProto();
-    ProtocolManager *manager=[ProtocolManager defaultManager];
-    if (self.connectState == 1) {
+    if (self.connectState == atHome) {
         proto.cmd=0x04;
-    }else if (self.connectState == 2){
+    }else if (self.connectState == outDoor){
         proto.cmd=0x03;
     }
     proto.action.state=action;
-    proto.deviceID=CFSwapInt16BigToHost([deviceID intValue]);
+    NSString *enumber=[DeviceManager getENumber:[deviceID integerValue]];
     NSString *eid=[DeviceManager getEType:[deviceID integerValue]];
-    proto.deviceType=[[manager queryDeviceTypes:[NSString stringWithFormat:@"%@_%@",actcode,eid]] intValue];
+    proto.deviceID=CFSwapInt16BigToHost([PackManager NSDataToUint16:enumber]);
+    proto.deviceType=[PackManager NSDataToUint8:eid];
     return dataFromProtocol(proto);
 }
 
 -(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID value:(uint8_t)value withCode:(NSString *)actcode
 {
     Proto proto=createProto();
-    ProtocolManager *manager=[ProtocolManager defaultManager];
-    if (self.connectState == 1) {
+    if (self.connectState == atHome) {
         proto.cmd=0x04;
-    }else if (self.connectState == 2){
+    }else if (self.connectState == outDoor){
         proto.cmd=0x03;
     }
     proto.action.state=action;
     proto.action.RValue=value;
     NSString *eid=[DeviceManager getEType:[deviceID integerValue]];
-    proto.deviceType=CFSwapInt16BigToHost([[manager queryDeviceTypes:[NSString stringWithFormat:@"%@_%@",actcode,eid]] intValue]);
-    proto.deviceID=[deviceID intValue];
+    NSString *enumber=[DeviceManager getENumber:[deviceID integerValue]];
+    proto.deviceID=CFSwapInt16BigToHost([PackManager NSDataToUint16:enumber]);
+    proto.deviceType=[PackManager NSDataToUint8:eid];
     return dataFromProtocol(proto);
 }
 
 -(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID R:(uint8_t)red  G:(uint8_t)green B:(uint8_t)blue withCode:(NSString *)actcode
 {
     Proto proto=createProto();
-    ProtocolManager *manager=[ProtocolManager defaultManager];
-    if (self.connectState == 1) {
+    if (self.connectState == atHome) {
         proto.cmd=0x04;
-    }else if (self.connectState == 2){
+    }else if (self.connectState == outDoor){
         proto.cmd=0x03;
     }
     proto.action.state=action;
@@ -205,15 +204,23 @@
     proto.action.B=blue;
     proto.action.G=green;
     NSString *eid=[DeviceManager getEType:[deviceID integerValue]];
-    proto.deviceType=CFSwapInt16BigToHost([[manager queryDeviceTypes:[NSString stringWithFormat:@"%@_%@",actcode,eid]] intValue]);
-    proto.deviceID=[deviceID intValue];
+    NSString *enumber=[DeviceManager getENumber:[deviceID integerValue]];
+    proto.deviceID=CFSwapInt16BigToHost([PackManager NSDataToUint16:enumber]);
+    proto.deviceType=[PackManager NSDataToUint8:eid];
     return dataFromProtocol(proto);
 }
 
 -(NSData *) author
 {
     Proto proto=createProto();
-    proto.cmd=0x84;
+    if (self.connectState==outDoor) {
+        proto.cmd=0x83;
+    }else if (self.connectState==atHome){
+        proto.cmd=0x84;
+    }
+    proto.deviceType=0x00;
+    proto.deviceID=0x00;
+    
     return dataFromProtocol(proto);
 }
 

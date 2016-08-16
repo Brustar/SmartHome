@@ -12,13 +12,6 @@ enum{
     SocketOfflineByUser,  // 用户主动cut
 };
 
-enum{
-    offLine,  //离线
-    atHome,// 在家模式
-    outDoor,  // 户外模式
-    
-};
-
 @protocol TcpRecvDelegate<NSObject>
 
 -(void)recv:(NSData *)data withTag:(long)tag;

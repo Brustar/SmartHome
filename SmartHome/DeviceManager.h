@@ -39,4 +39,5 @@
 //根据设备类别和房间ID获取设备的所有ID
 +(NSArray *)getDeviceByTypeName:(NSString  *)typeName andRoomID:(NSInteger)roomID;
 +(NSString *)getEType:(NSInteger)eID;
++(NSString *)getENumber:(NSInteger)eID;
 @end

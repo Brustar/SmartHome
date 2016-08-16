@@ -297,7 +297,7 @@
 
 +(NSString *)getEType:(NSInteger)eID
 {
-    NSString * htypeID;
+    NSString * htypeID=nil;
     NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
     if([db open])
@@ -311,6 +311,24 @@
     }
     [db close];
     return htypeID;
+}
+
++(NSString *)getENumber:(NSInteger)eID
+{
+    NSString * enumber=nil;
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT enumber FROM Devices where ID = %ld",eID];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            enumber = [resultSet stringForColumn:@"enumber"];
+        }
+    }
+    [db close];
+    return enumber;
 }
 
 

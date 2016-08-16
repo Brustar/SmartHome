@@ -121,6 +121,9 @@
         [IOManager writeUserdefault:[NSNumber numberWithLong:[PackManager NSDataToUInt:masterID]] forKey:@"masterID"];
         [self initTcp:[PackManager NSDataToIP:ip] port:(int)[PackManager NSDataToUInt:port] mode:atHome delegate:nil];
         info.connectState = atHome;
+        [self.socket writeData:[[DeviceInfo defaultManager] author] withTimeout:-1 tag:0];
+        [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:0];
+        
     }else{
         [self connectTcp];
         info.connectState = outDoor;

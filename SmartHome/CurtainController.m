@@ -102,13 +102,13 @@
 
 -(IBAction)save:(id)sender
 {
-    ProtocolManager *manager=[ProtocolManager defaultManager];
+    //ProtocolManager *manager=[ProtocolManager defaultManager];
     if ([sender isEqual:self.cell.slider]) {
-        NSString *key=[NSString stringWithFormat:@"location_%@",self.deviceid];
+        /*NSString *key=[NSString stringWithFormat:@"location_%@",self.deviceid];
         NSData* daty = [PackManager dataFormHexString:[manager queryDeviceStates:key]];
         
-        uint8_t cmd=[PackManager dataToUint:daty];
-        NSData *data=[[DeviceInfo defaultManager] roll:cmd deviceID:self.deviceid value:self.cell.slider.value * 100];
+        uint8_t cmd=[PackManager dataToUint:daty];*/
+        NSData *data=[[DeviceInfo defaultManager] roll:0x2A deviceID:self.deviceid value:self.cell.slider.value * 100];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
         [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:2];
@@ -146,6 +146,14 @@
     [scene setHouseID:3];
     [scene setPicID:66];
     [scene setReadonly:NO];
+    
+    
+    [scene setStartTime:@""];
+    [scene setWeekValue:@""];
+    [scene setAstronomicalTime:@""];
+    [scene setWeekRepeat:0];
+    [scene setRoomName:@""];
+    [scene setSceneName:@""];
     
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
     [scene setDevices:devices];
@@ -204,6 +212,7 @@
 
 - (IBAction)selectedTypeOfCurtain:(UISegmentedControl *)sender {
     self.cell.label.text = self.curNames[sender.selectedSegmentIndex];
+    self.deviceid=[self.curtainIDArr objectAtIndex:self.segmentCurtain.selectedSegmentIndex];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
