@@ -250,5 +250,36 @@
     }
     return devices;
 }
++ (NSArray *)getAllSceneWithRoomID:(int)roomID
+{
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    NSMutableArray *sceneModles = [NSMutableArray array];
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"select * from Scenes where rId=%d", roomID];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while([resultSet next])
+        {
+            Scene *scene = [Scene new];
+            scene.sceneID = [resultSet intForColumn:@"ID"];
+            scene.sceneName = [resultSet stringForColumn:@"NAME"];
+            scene.roomID = [resultSet intForColumn:@"room"];
+            scene.picID = [resultSet intForColumn:@"pic"];
+            scene.isFavorite = [resultSet boolForColumn:@"isFavorite"];
+            scene.eID = [resultSet intForColumn:@"eId"];
+            scene.startTime = [resultSet stringForColumn:@"startTime"];
+            scene.astronomicalTime = [resultSet stringForColumn:@"astronomicalTime"];
+            scene.weekValue = [resultSet stringForColumn:@"weekValue"];
+            scene.weekRepeat = [resultSet intForColumn:@"weekRepeat"];
+            scene.roomName = [resultSet stringForColumn:@"rId"];
+            
+            [sceneModles addObject:scene];
+        }
+    }
+    [db close];
+    return [sceneModles copy];
+}
 
 @end

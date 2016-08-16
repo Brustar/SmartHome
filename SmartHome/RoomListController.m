@@ -91,13 +91,21 @@
     }
     return _weeks;
 }
+-(NSArray *)rooms
+{
+    if(!_rooms)
+    {
+        _rooms = [RoomManager getAllRoomsInfo];
+    }
+    return _rooms;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.timeView.layer.cornerRadius = 10;
     self.timeView.layer.masksToBounds = YES;
     
-    self.rooms = [RoomManager getAllRoomsInfo];
+
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = [UIView new];
    
@@ -109,12 +117,18 @@
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectWeek:) name:@"SelectWeek" object:nil];
 
    }
--(void)viewDidAppear:(BOOL)animated
+-(void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:YES];
+    [super viewWillAppear:animated];
     //默认选中第一行
-//     NSIndexPath *selectedIndexPath  = [NSIndexPath indexPathForRow:0 inSection:0];
-//     [self.tableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    NSIndexPath *selectedIndexPath  = [NSIndexPath indexPathForRow:0 inSection:0];
+    [self.tableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    
+    if([self.delegate respondsToSelector:@selector(RoomListControllerDelegate:SelectedRoom:)])
+    {
+        Room *room = self.rooms[0];
+        [self.delegate RoomListControllerDelegate:self SelectedRoom:room.rId];
+    }
 }
 #pragma mark - Table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

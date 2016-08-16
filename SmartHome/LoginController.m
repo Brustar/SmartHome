@@ -286,7 +286,7 @@
             NSArray *sceneList = messageDic[@"c_sceneInfoList"];
             for(NSDictionary *dic in sceneList)
             {
-                NSInteger sId = [dic[@"sId"] integerValue];
+                NSString *sId = dic[@"sId"];
                 NSString *sName = dic[@"sName"];
                 NSString *urlImg = dic[@"urlImage"];
                 NSString *startTime = dic[@"startTime"];
@@ -318,7 +318,7 @@
                         for(NSDictionary *eList in sceeqList)
                         {
                             NSInteger eId = [eList[@"eId"] integerValue];
-                            NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%ld,'%@',%ld,'%@',%@,%ld,'%@','%@','%@',%ld,'%@')",sId,sName,rId,urlImg,NULL,eId,startTime,astronomicalTime,weakValue,weekRepeat,rName];
+                            NSString *sql = [NSString stringWithFormat:@"insert into Scenes values('%@','%@','%@','%@',%@,%ld,'%@','%@','%@',%ld,%ld)",sId,sName,rName,urlImg,NULL,eId,startTime,astronomicalTime,weakValue,weekRepeat,rId];
                             BOOL result = [db executeUpdate:sql];
                             if(result)
                             {
@@ -353,17 +353,17 @@
         for(NSDictionary *dicInfo in messageInfo)
         {
             int eqId = [dicInfo[@"eqId"] intValue];
-            int eqNumber = [dicInfo[@"eqNumber"] intValue];
+            NSString *eqNumber = dicInfo[@"eqNumber"];
             NSArray *channelInfo = dicInfo[@"channelInfo"];
             if(channelInfo == nil || channelInfo .count == 0 )
             {
                 return;
             }
-            int i;
+            
             for(NSDictionary *channel in channelInfo)
             {
                 
-                NSString *sql = [NSString stringWithFormat:@"insert into Channels values(%d,%d,'%@',%d,'%@','%@',%d,%d)",i++,eqId,channel[@"cName"],[channel[@"cId"] intValue],channel[@"imgUrl"],parent,0,eqNumber];
+                NSString *sql = [NSString stringWithFormat:@"insert into Channels values(%d,%d,%d,'%@','%@','%@',%d,'%@')",[channel[@"cId"] intValue],eqId,[channel[@"cNumber"] intValue],channel[@"cName"],channel[@"imgUrl"],parent,1,eqNumber];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {

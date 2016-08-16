@@ -142,6 +142,7 @@
 		F65B7D271D34E9E00059CFA4 /* MySettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65B7D261D34E9E00059CFA4 /* MySettingViewController.m */; };
 		F65DB3411D2B5AB2002A815C /* RegisterDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65DB33C1D2B5AB2002A815C /* RegisterDetailController.m */; };
 		F65DB3421D2B5AB2002A815C /* RegisterPhoneNumController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65DB33E1D2B5AB2002A815C /* RegisterPhoneNumController.m */; };
+		F65FF4AB1D61C57100C12271 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65FF4A91D61AC3D00C12271 /* SearchViewController.m */; };
 		F6642A781D41F55E0003D56B /* ScenseSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6642A771D41F55E0003D56B /* ScenseSplitViewController.m */; };
 		F6642A811D4220100003D56B /* DeviceListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6642A801D4220100003D56B /* DeviceListController.m */; };
 		F66596DA1D3F12FB0082716A /* EnergyOfDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = F66596D91D3F12FB0082716A /* EnergyOfDeviceController.m */; };
@@ -151,6 +152,7 @@
 		F66596E61D3F5DBC0082716A /* AddNewScenseController.m in Sources */ = {isa = PBXBuildFile; fileRef = F66596E51D3F5DBC0082716A /* AddNewScenseController.m */; };
 		F66596E91D3F72CA0082716A /* AddSenseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F66596E81D3F72CA0082716A /* AddSenseCell.m */; };
 		F668AF251D53413B0079587F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F668AF241D53413B0079587F /* Main.storyboard */; };
+		F6690BF61D62EC3F0098B0EE /* ChannelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6690BF51D62EC3F0098B0EE /* ChannelManager.m */; };
 		F66CADE51D5D8654001E66EC /* DeviceType.m in Sources */ = {isa = PBXBuildFile; fileRef = F66CADE41D5D8654001E66EC /* DeviceType.m */; };
 		F66DFF281D5184730005E882 /* EditSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = F66DFF271D5184730005E882 /* EditSceneController.m */; };
 		F66DFF2B1D5188BF0005E882 /* EditSceneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F66DFF2A1D5188BF0005E882 /* EditSceneCell.m */; };
@@ -537,6 +539,8 @@
 		F65DB33C1D2B5AB2002A815C /* RegisterDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterDetailController.m; sourceTree = "<group>"; };
 		F65DB33D1D2B5AB2002A815C /* RegisterPhoneNumController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterPhoneNumController.h; sourceTree = "<group>"; };
 		F65DB33E1D2B5AB2002A815C /* RegisterPhoneNumController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterPhoneNumController.m; sourceTree = "<group>"; };
+		F65FF4A81D61AC3D00C12271 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		F65FF4A91D61AC3D00C12271 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		F6642A761D41F55E0003D56B /* ScenseSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScenseSplitViewController.h; sourceTree = "<group>"; };
 		F6642A771D41F55E0003D56B /* ScenseSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScenseSplitViewController.m; sourceTree = "<group>"; };
 		F6642A7F1D4220100003D56B /* DeviceListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceListController.h; sourceTree = "<group>"; };
@@ -554,6 +558,8 @@
 		F66596E71D3F72CA0082716A /* AddSenseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddSenseCell.h; sourceTree = "<group>"; };
 		F66596E81D3F72CA0082716A /* AddSenseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddSenseCell.m; sourceTree = "<group>"; };
 		F668AF241D53413B0079587F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		F6690BF41D62EC3F0098B0EE /* ChannelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelManager.h; sourceTree = "<group>"; };
+		F6690BF51D62EC3F0098B0EE /* ChannelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelManager.m; sourceTree = "<group>"; };
 		F66CADE31D5D8654001E66EC /* DeviceType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceType.h; sourceTree = "<group>"; };
 		F66CADE41D5D8654001E66EC /* DeviceType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceType.m; sourceTree = "<group>"; };
 		F66DFF261D5184730005E882 /* EditSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditSceneController.h; sourceTree = "<group>"; };
@@ -848,6 +854,8 @@
 				F6251F701D541885000A5A47 /* PluginViewController.m */,
 				0FA1E09C1D533BFA001CA819 /* PluginCell.h */,
 				0FA1E09D1D533BFA001CA819 /* PluginCell.m */,
+				F65FF4A81D61AC3D00C12271 /* SearchViewController.h */,
+				F65FF4A91D61AC3D00C12271 /* SearchViewController.m */,
 			);
 			path = SmartHome;
 			sourceTree = "<group>";
@@ -1180,6 +1188,8 @@
 				F6251F761D542508000A5A47 /* DeviceManager.m */,
 				F64487DB1D55BA3C00EF2CFC /* RoomManager.h */,
 				F64487DC1D55BA3C00EF2CFC /* RoomManager.m */,
+				F6690BF41D62EC3F0098B0EE /* ChannelManager.h */,
+				F6690BF51D62EC3F0098B0EE /* ChannelManager.m */,
 				F6755A4A1D4063FA002394F3 /* ECloudTabBar.h */,
 				F6755A4B1D4063FA002394F3 /* ECloudTabBar.m */,
 				F6755A4D1D406552002394F3 /* ECloudTabBarController.h */,
@@ -1330,7 +1340,6 @@
 				TargetAttributes = {
 					0F032D431CC9B12700D1920D = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = C8JS65F469;
 						SystemCapabilities = {
 							com.apple.HomeKit = {
 								enabled = 1;
@@ -1573,6 +1582,7 @@
 				F630C3621D38C3E5008880BB /* areaSettingCell.m in Sources */,
 				0FCFB3981CF2947500B37DD3 /* EntranceGuard.m in Sources */,
 				0F4B49801CFEB13500D93DD2 /* CurtainController.m in Sources */,
+				F6690BF61D62EC3F0098B0EE /* ChannelManager.m in Sources */,
 				0FCFB3921CF293D800B37DD3 /* Netv.m in Sources */,
 				F6B91F6F1D100EF700592FB0 /* DVCollectionViewCell.m in Sources */,
 				0F96A1641D17F37C00E1594F /* RulerItem.m in Sources */,
@@ -1647,6 +1657,7 @@
 				F6642A781D41F55E0003D56B /* ScenseSplitViewController.m in Sources */,
 				F673EBD21D45E976001270FB /* VerifyCodeView.m in Sources */,
 				F65838D41D39D3BB004210AC /* WelcomeController.m in Sources */,
+				F65FF4AB1D61C57100C12271 /* SearchViewController.m in Sources */,
 				F6A1C02E1D586D7500856E00 /* Room.m in Sources */,
 				F6755A581D40D450002394F3 /* ECloudButton.m in Sources */,
 				0FAF98A51CE40F3C009BDBB5 /* QRCodeReaderView.m in Sources */,

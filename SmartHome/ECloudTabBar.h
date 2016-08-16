@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ECloudButton.h"
 @protocol ECloudTabBarDelegate <NSObject>
 
 - (void)tabBarDidSelectButtonWithType:(NSInteger)type subType:(NSInteger)subType;
@@ -16,6 +16,6 @@
 @end
 
 @interface ECloudTabBar : UIView
-
+@property (nonatomic, strong) ECloudButton *selectButton;
 @property (nonatomic,weak) id<ECloudTabBarDelegate>delegate;
 @end

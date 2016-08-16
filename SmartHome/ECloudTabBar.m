@@ -23,8 +23,6 @@
 
 @property (nonatomic, weak) UIView *separatorLine;
 
-@property (nonatomic, weak) UIButton *selectButton;
-
 @property (nonatomic, strong) ECloudMoreView *moreView;
 
 @property (nonatomic,strong) NSArray *rooms;
@@ -88,7 +86,7 @@
             self.selectButton = button;
         }
         button.type = 0;
-        button.subType = i;
+        button.subType = room.rId;
         
         [self setUpButtonParams:button];
         
