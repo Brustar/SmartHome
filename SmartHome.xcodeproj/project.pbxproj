@@ -142,6 +142,7 @@
 		F65B7D271D34E9E00059CFA4 /* MySettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65B7D261D34E9E00059CFA4 /* MySettingViewController.m */; };
 		F65DB3411D2B5AB2002A815C /* RegisterDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65DB33C1D2B5AB2002A815C /* RegisterDetailController.m */; };
 		F65DB3421D2B5AB2002A815C /* RegisterPhoneNumController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65DB33E1D2B5AB2002A815C /* RegisterPhoneNumController.m */; };
+		F65FF4AB1D61C57100C12271 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65FF4A91D61AC3D00C12271 /* SearchViewController.m */; };
 		F6642A781D41F55E0003D56B /* ScenseSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6642A771D41F55E0003D56B /* ScenseSplitViewController.m */; };
 		F6642A811D4220100003D56B /* DeviceListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6642A801D4220100003D56B /* DeviceListController.m */; };
 		F66596DA1D3F12FB0082716A /* EnergyOfDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = F66596D91D3F12FB0082716A /* EnergyOfDeviceController.m */; };
@@ -537,6 +538,8 @@
 		F65DB33C1D2B5AB2002A815C /* RegisterDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterDetailController.m; sourceTree = "<group>"; };
 		F65DB33D1D2B5AB2002A815C /* RegisterPhoneNumController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterPhoneNumController.h; sourceTree = "<group>"; };
 		F65DB33E1D2B5AB2002A815C /* RegisterPhoneNumController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterPhoneNumController.m; sourceTree = "<group>"; };
+		F65FF4A81D61AC3D00C12271 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		F65FF4A91D61AC3D00C12271 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		F6642A761D41F55E0003D56B /* ScenseSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScenseSplitViewController.h; sourceTree = "<group>"; };
 		F6642A771D41F55E0003D56B /* ScenseSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScenseSplitViewController.m; sourceTree = "<group>"; };
 		F6642A7F1D4220100003D56B /* DeviceListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceListController.h; sourceTree = "<group>"; };
@@ -848,6 +851,8 @@
 				F6251F701D541885000A5A47 /* PluginViewController.m */,
 				0FA1E09C1D533BFA001CA819 /* PluginCell.h */,
 				0FA1E09D1D533BFA001CA819 /* PluginCell.m */,
+				F65FF4A81D61AC3D00C12271 /* SearchViewController.h */,
+				F65FF4A91D61AC3D00C12271 /* SearchViewController.m */,
 			);
 			path = SmartHome;
 			sourceTree = "<group>";
@@ -1330,7 +1335,6 @@
 				TargetAttributes = {
 					0F032D431CC9B12700D1920D = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = C8JS65F469;
 						SystemCapabilities = {
 							com.apple.HomeKit = {
 								enabled = 1;
@@ -1647,6 +1651,7 @@
 				F6642A781D41F55E0003D56B /* ScenseSplitViewController.m in Sources */,
 				F673EBD21D45E976001270FB /* VerifyCodeView.m in Sources */,
 				F65838D41D39D3BB004210AC /* WelcomeController.m in Sources */,
+				F65FF4AB1D61C57100C12271 /* SearchViewController.m in Sources */,
 				F6A1C02E1D586D7500856E00 /* Room.m in Sources */,
 				F6755A581D40D450002394F3 /* ECloudButton.m in Sources */,
 				0FAF98A51CE40F3C009BDBB5 /* QRCodeReaderView.m in Sources */,

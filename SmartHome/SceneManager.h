@@ -33,8 +33,10 @@
 -(NSArray *)addDevice2Scene:(Scene *)scene withDeivce:(id)device withId:(int)deviceID;
 
 
+//得到所有场景
 +(NSArray *)allSceneModels;
 +(NSArray *)devicesBySceneID:(int)sId;
 
-
+//根据房间ID的到所有的场景
++ (NSArray *)getAllSceneWithRoomID:(int)roomID;
 @end

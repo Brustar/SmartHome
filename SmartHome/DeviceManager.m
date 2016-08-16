@@ -296,4 +296,177 @@
 }
 
 
++ (NSArray *)getDeviceSubTypeNameWithRoomID:(int)roomID sceneID:(int)sceneID
+{
+    NSMutableArray *subTypeNames = [NSMutableArray array];
+    
+    NSArray *deviceIDs = [self getDeviceIDWithRoomID:roomID sceneID:sceneID];
+    
+    for (NSString *deviceID in deviceIDs) {
+        NSString *subTypeName = [self getDeviceSubTypeNameWithID:[deviceID intValue]];
+        
+        BOOL isSame = false;
+        for (NSString *tempSubTypeName in subTypeNames) {
+            if ([tempSubTypeName isEqualToString:subTypeName]) {
+                isSame = true;
+                break;
+            }
+        }
+        if (isSame) {
+            continue;
+        }
+        
+        [subTypeNames addObject:subTypeName];
+    }
+    
+    if (subTypeNames.count < 1) {
+        return nil;
+    }
+    
+    return [subTypeNames copy];
+}
++ (NSString *)getDeviceSubTypeNameWithID:(int)ID
+{
+    NSString *subTypeName = nil;
+    
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT subTypeName FROM Devices where ID = %d",ID];
+        
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            subTypeName = [resultSet stringForColumn:@"subTypeName"];
+        }
+    }
+    
+    return subTypeName;
+}
+
++ (NSArray *)getDeviceIDWithRoomID:(int)roomID sceneID:(int)sceneID
+{
+    NSMutableArray *deviceIDs = [NSMutableArray array];
+    
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT eId FROM Scenes where rId = %d and ID = %d",roomID, sceneID];
+        
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+            NSString *deviceID = [resultSet stringForColumn:@"eId"];
+            
+            [deviceIDs addObject:deviceID];
+        }
+    }
+    
+    if (deviceIDs.count < 1) {
+        return nil;
+    }
+    
+    return [deviceIDs copy];
+}
++ (Device *)getDeviceWithDeviceID:(int) deviceID
+{
+    Device *device = nil;
+    
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT * FROM Devices where ID = %d",deviceID];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            device = [self deviceMdoelByFMResultSet:resultSet];
+        }
+    }
+    
+    return device;
+}
+
+
++ (NSArray *)getDeviceWithRoomID:(int)roomID sceneID:(int)sceneID
+{
+    NSMutableArray *devices = [NSMutableArray array];
+    
+    NSArray *deviceIDs = [self getDeviceIDWithRoomID:roomID sceneID:sceneID];
+    
+    for (NSString *deviceID in deviceIDs) {
+        Device *device = [self getDeviceWithDeviceID:[deviceID intValue]];
+        
+        [devices addObject:device];
+    }
+    
+    if (devices.count < 1) {
+        return nil;
+    }
+    
+    return [devices copy];
+}
+
+
++ (NSArray *)getDeviceTypeNameWithRoomID:(int)roomID sceneID:(int)sceneID subTypeName:(NSString *)subTypeName
+{
+    NSMutableArray *typeNames = [NSMutableArray array];
+    
+    NSArray *deviceIDs = [self getDeviceIDWithRoomID:roomID sceneID:sceneID];
+    
+    for (NSString *deviceID in deviceIDs) {
+        NSString *typeName = [self getDeviceTypeNameWithID:deviceID];
+        
+        if ([typeName isEqualToString:@"开关"] || [typeName isEqualToString:@"调色"] || [typeName isEqualToString:@"调光"]) {
+            typeName = @"灯光";
+        } else if ([typeName isEqualToString:@"开合帘"] || [typeName isEqualToString:@"卷帘"]) {
+            typeName = @"窗帘";
+        }
+        
+        BOOL isSame = false;
+        for (NSString *tempTypeName in typeNames) {
+            if ([tempTypeName isEqualToString:typeName]) {
+                isSame = true;
+                break;
+            }
+        }
+        if (isSame) {
+            continue;
+        }
+        
+        [typeNames addObject:typeName];
+    }
+    
+    if (typeNames.count < 1) {
+        return nil;
+    }
+    
+    return [typeNames copy];
+}
++ (NSString *)getDeviceTypeNameWithID:(NSString *)ID
+{
+    NSString *typeName = nil;
+    
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT typeName FROM Devices where ID = %@",ID];
+        
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            typeName = [resultSet stringForColumn:@"typeName"];
+        }
+    }
+    
+    return typeName;
+}
+
+
 @end

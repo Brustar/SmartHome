@@ -19,6 +19,17 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *netBarBtn;
 @property (nonatomic,assign) int selectedSID;
 @property (nonatomic,assign) int selectedDID;
+@property (nonatomic,assign) int roomID;
+//collecitonView中的scenes
+@property (nonatomic,strong) NSArray *collectionScenes;
+//场景置顶的两个Btn
+
+@property (weak, nonatomic) IBOutlet UIButton *firstButton;
+@property (weak, nonatomic) IBOutlet UIButton *secondButton;
+
+
+
+
 @end
 
 @implementation ScenseController
@@ -28,8 +39,10 @@
     
     self.addSceseBtn.layer.cornerRadius = self.addSceseBtn.bounds.size.width / 2.0;
     self.addSceseBtn.layer.masksToBounds = YES;
-    
-    self.scenes = [SceneManager allSceneModels];
+    self.firstButton.hidden = YES;
+    self.secondButton.hidden = YES;
+
+   
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     //开启网络状况的监听
@@ -37,7 +50,64 @@
     Reachability *hostReach = [Reachability reachabilityWithHostname:@"www.apple.com"];
     [hostReach startNotifier];  //开始监听,会启动一个run loop
     [self updateInterfaceWithReachability: hostReach];
+    
+    
+    
+    [self reachNotification];
 }
+
+-(void)setUpSceneButton
+{
+    if(self.scenes.count == 0)
+    {
+        self.firstButton.hidden = YES;
+        self.secondButton.hidden = YES;
+    }else if(self.scenes .count == 1)
+    {
+        self.secondButton.hidden = YES;
+        self.firstButton.hidden = NO;
+        Scene *scene = self.scenes[0];
+        [self.firstButton setTitle:scene.sceneName forState:UIControlStateNormal];
+    }else {
+        Scene *scene = self.scenes[0];
+        [self.firstButton setTitle:scene.sceneName forState:UIControlStateNormal];
+        Scene *scondScene = self.scenes[1];
+        [self.secondButton setTitle:scondScene.sceneName forState:UIControlStateNormal];
+        self.firstButton.hidden = NO;
+        self.secondButton.hidden = NO;
+        
+        }
+}
+
+- (void)reachNotification
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subTypeNotification:) name:@"subType" object:nil];
+}
+
+
+- (void)subTypeNotification:(NSNotification *)notification
+{
+    NSDictionary *dict = notification.userInfo;
+    
+    self.roomID = [dict[@"subType"] intValue];
+    
+    self.scenes = [SceneManager getAllSceneWithRoomID:self.roomID];
+    [self setUpSceneButton];
+    if(self.scenes.count > 2)
+    {
+        NSMutableArray *arr = [NSMutableArray array];
+        for (int i = 2; i < self.scenes.count ; i++)
+        {
+            [arr addObject:self.scenes[i]];
+        }
+        self.collectionScenes = [arr copy];
+    }else {
+        self.collectionScenes = nil;
+    }
+  
+    [self.collectionView reloadData];
+}
+
 
 //监听到网络状态改变
 - (void) reachabilityUpdate: (NSNotification* )note
@@ -91,19 +161,20 @@
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.scenes.count;
+   
+    return self.collectionScenes.count;
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ScenseCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"scenseCell" forIndexPath:indexPath];
-    Scene *scene = self.scenes[indexPath.row];
+    Scene *scene = self.collectionScenes[indexPath.row];
     cell.scenseName.text = scene.sceneName;
     return cell;
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 
 {
-    Scene *scene = self.scenes[indexPath.row];
+    Scene *scene = self.collectionScenes[indexPath.row];
     self.selectedSID = scene.sceneID;
     self.selectedDID = scene.eID;
     [self performSegueWithIdentifier:@"sceneDetailSegue" sender:self];
@@ -117,27 +188,34 @@
         
         [theSegue setValue:[NSNumber numberWithInt:self.selectedSID] forKey:@"sceneID"];
         [theSegue setValue:[NSNumber numberWithInt:self.selectedDID] forKey:@"deviceID"];
+        [theSegue setValue:[NSNumber numberWithInt:self.roomID] forKey:@"roomID"];
     }
 }
 
 - (IBAction)storeScense:(id)sender {
 }
 
-//- (IBAction)addSencesBtn:(id)sender {
-//    [self performSegueWithIdentifier:@"addScene" sender:self];
-//
-//}
+
 - (IBAction)addScence:(id)sender {
     
     ScenseSplitViewController *splitVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ScenseSplitViewController"];
     [self presentViewController:splitVC animated:YES completion:nil];
 }
 
--(void)dealloc
+- (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (IBAction)clickFirstButton:(UIButton *)sender {
+}
+
+- (IBAction)clickSecondBtn:(UIButton *)sender {
+    Scene *scene = self.scenes[sender.tag];
+    self.selectedSID = scene.sceneID;
+    self.selectedDID = scene.eID;
+    [self performSegueWithIdentifier:@"sceneDetailSegue" sender:self];
+}
 
 /*
 #pragma mark - Navigation

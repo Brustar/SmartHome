@@ -1180,16 +1180,20 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7pK-9M-4j1">
                                 <rect key="frame" x="0.0" y="64" width="264" height="487"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9wT-KE-UNt">
+                                    <button opaque="NO" tag="1" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9wT-KE-UNt">
                                         <rect key="frame" x="40" y="260" width="200" height="200"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="0Ok-es-jog"/>
                                             <constraint firstAttribute="height" constant="200" id="qnn-Ah-brs"/>
                                         </constraints>
-                                        <state key="normal" image="place">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <inset key="titleEdgeInsets" minX="0.0" minY="145" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="休闲" backgroundImage="place">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="clickSecondBtn:" destination="uQg-ex-x78" eventType="touchUpInside" id="N47-RT-2Ea"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTc-nu-9cp">
                                         <rect key="frame" x="57" y="500" width="150" height="150"/>
@@ -1210,7 +1214,13 @@
                                             <constraint firstAttribute="height" constant="200" id="BZJ-ga-Tz8"/>
                                             <constraint firstAttribute="width" constant="200" id="mjO-7q-A7s"/>
                                         </constraints>
-                                        <state key="normal" image="place"/>
+                                        <inset key="titleEdgeInsets" minX="0.0" minY="145" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="离开" backgroundImage="place">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="clickSecondBtn:" destination="uQg-ex-x78" eventType="touchUpInside" id="eqv-g4-5f0"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.9100608093" green="0.9100608093" blue="0.9100608093" alpha="1" colorSpace="calibratedRGB"/>
@@ -1295,9 +1305,15 @@
                         <rightBarButtonItems>
                             <barButtonItem image="media" id="26e-71-HWR">
                                 <color key="tintColor" red="0.79703493698197081" green="0.36546725970272009" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <segue destination="ozV-GP-Vrh" kind="show" id="5K5-wE-mZz"/>
+                                </connections>
                             </barButtonItem>
                             <barButtonItem image="search" id="GGd-sH-OnS">
                                 <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="VGt-yN-ZQ6" kind="show" id="xzH-2q-p9C"/>
+                                </connections>
                             </barButtonItem>
                             <barButtonItem image="wifi" id="mCL-Ia-Vaf">
                                 <color key="tintColor" red="0.081403144220000001" green="0.1208483534" blue="0.35128205130000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1308,7 +1324,9 @@
                     <connections>
                         <outlet property="addSceseBtn" destination="sTc-nu-9cp" id="kkY-9L-RDO"/>
                         <outlet property="collectionView" destination="qck-Xh-eYG" id="IfN-A9-DXb"/>
+                        <outlet property="firstButton" destination="faQ-zk-VrB" id="q2o-s4-doF"/>
                         <outlet property="netBarBtn" destination="mCL-Ia-Vaf" id="lUi-ca-OaP"/>
+                        <outlet property="secondButton" destination="9wT-KE-UNt" id="Ogj-2X-fyq"/>
                         <segue destination="6a7-1m-tB7" kind="show" identifier="sceneDetailSegue" id="PRs-sg-E1F"/>
                     </connections>
                 </viewController>
@@ -3361,6 +3379,43 @@
             </objects>
             <point key="canvasLocation" x="1923" y="-10168"/>
         </scene>
+        <!--Search View Controller-->
+        <scene sceneID="DTU-ec-GTe">
+            <objects>
+                <viewController id="VGt-yN-ZQ6" customClass="SearchViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PAy-ER-a9R"/>
+                        <viewControllerLayoutGuide type="bottom" id="1uW-GG-qDJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5sm-fF-UGd">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="j0y-S7-MPt">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="VGt-yN-ZQ6" id="kNt-Vb-ZFl"/>
+                                    <outlet property="delegate" destination="VGt-yN-ZQ6" id="PuW-83-QPv"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="j0y-S7-MPt" firstAttribute="leading" secondItem="5sm-fF-UGd" secondAttribute="leading" id="3z5-id-Hhg"/>
+                            <constraint firstAttribute="trailing" secondItem="j0y-S7-MPt" secondAttribute="trailing" id="eez-HW-vAC"/>
+                            <constraint firstItem="1uW-GG-qDJ" firstAttribute="top" secondItem="j0y-S7-MPt" secondAttribute="bottom" id="h7f-Sv-8QE"/>
+                            <constraint firstItem="j0y-S7-MPt" firstAttribute="top" secondItem="PAy-ER-a9R" secondAttribute="bottom" id="whN-KY-qas"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="j0y-S7-MPt" id="MCi-CU-hg6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g6q-KU-Aap" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2737" y="-8001"/>
+        </scene>
         <!--Bg Music Controller-->
         <scene sceneID="F81-F1-NYo">
             <objects>
@@ -3428,7 +3483,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f4M-4j-Lpa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2783" y="-3015"/>
+            <point key="canvasLocation" x="2737" y="-7288"/>
         </scene>
         <!--登录-->
         <scene sceneID="cKe-d7-Tzx">
@@ -4762,7 +4817,11 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="电视" id="ZFk-ln-GdG">
-                        <barButtonItem key="rightBarButtonItem" title="收藏当前频道" id="0o2-KW-Flo"/>
+                        <barButtonItem key="rightBarButtonItem" title="收藏当前频道" id="0o2-KW-Flo">
+                            <connections>
+                                <action selector="storeTVChannel:" destination="iP5-w8-v4Y" id="HSQ-ry-r4O"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="channeID" destination="4Lj-dU-RJf" id="BnU-2D-zTm"/>
@@ -5504,7 +5563,7 @@ layer.masksToBoundslayer.masksToBounds
                                                 </constraints>
                                                 <state key="normal" image="add"/>
                                                 <connections>
-                                                    <segue destination="2lV-M1-cea" kind="show" id="yTT-Nf-qWA"/>
+                                                    <segue destination="2lV-M1-cea" kind="show" identifier="deviceListSegue" id="yTT-Nf-qWA"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -5687,8 +5746,9 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="5K5-wE-mZz"/>
         <segue reference="yTT-Nf-qWA"/>
-        <segue reference="NGA-cS-h6U"/>
+        <segue reference="dRU-hd-aVS"/>
         <segue reference="bKA-jZ-hQY"/>
     </inferredMetricsTieBreakers>
 </document>

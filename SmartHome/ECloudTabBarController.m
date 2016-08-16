@@ -10,12 +10,13 @@
 #import "ECloudTabBar.h"
 #import "ScenseController.h"
 @interface ECloudTabBarController ()<ECloudTabBarDelegate>
-
+@property (nonatomic,strong) ECloudTabBar *cloudTabBar;
 @end
 
 @implementation ECloudTabBarController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     ECloudTabBar *tabBar = [[ECloudTabBar alloc] init];
     tabBar.delegate = self;
@@ -23,6 +24,12 @@
     
     [self.tabBar addSubview:tabBar];
     //[self setValue:tabBar forKey:@"tabBar"];
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self tabBarDidSelectButtonWithType:self.cloudTabBar.selectButton.type subType:self.cloudTabBar.selectButton.subType];
 }
 
 - (void)tabBarDidSelectButtonWithType:(NSInteger)type subType:(NSInteger)subType
@@ -36,7 +43,7 @@
         NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:str, @"subType", nil];
         
         NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-        [center postNotificationName:@"subtype" object:nil userInfo:dict];
+        [center postNotificationName:@"subType" object:nil userInfo:dict];
     }
 }
 

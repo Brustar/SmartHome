@@ -286,7 +286,7 @@
             NSArray *sceneList = messageDic[@"c_sceneInfoList"];
             for(NSDictionary *dic in sceneList)
             {
-                NSInteger sId = [dic[@"sId"] integerValue];
+                NSString *sId = dic[@"sId"];
                 NSString *sName = dic[@"sName"];
                 NSString *urlImg = dic[@"urlImage"];
                 NSString *startTime = dic[@"startTime"];
@@ -318,7 +318,7 @@
                         for(NSDictionary *eList in sceeqList)
                         {
                             NSInteger eId = [eList[@"eId"] integerValue];
-                            NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%ld,'%@',%ld,'%@',%@,%ld,'%@','%@','%@',%ld,'%@')",sId,sName,rId,urlImg,NULL,eId,startTime,astronomicalTime,weakValue,weekRepeat,rName];
+                            NSString *sql = [NSString stringWithFormat:@"insert into Scenes values('%@','%@','%@','%@',%@,%ld,'%@','%@','%@',%ld,%ld)",sId,sName,rName,urlImg,NULL,eId,startTime,astronomicalTime,weakValue,weekRepeat,rId];
                             BOOL result = [db executeUpdate:sql];
                             if(result)
                             {
