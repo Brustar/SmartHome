@@ -55,7 +55,7 @@
     EntranceGuard *device=[[EntranceGuard alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setPoweron: self.switchView.isOn];
-    
+    if ([self.sceneid intValue]>0) {
     Scene *scene=[[Scene alloc] init];
     [scene setSceneID:[self.sceneid intValue]];
     [scene setRoomID:4];
@@ -66,6 +66,7 @@
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
     [scene setDevices:devices];
     [[SceneManager defaultManager] addScenen:scene withName:@"" withPic:@""];
+    }
 }
 
 #pragma mark - TCP recv delegate

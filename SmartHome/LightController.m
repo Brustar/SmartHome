@@ -177,6 +177,8 @@
         [sock.socket writeData:data withTimeout:1 tag:3];
         [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:3];
     }
+    if ([self.sceneid intValue]>0) {
+        
     
     Light *device=[[Light alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
@@ -186,7 +188,7 @@
     [device setBrightness:self.detailCell.bright.value*100];
     
     Scene *scene=[[Scene alloc] init];
-    [scene setSceneID:2];//[self.sceneid intValue]];
+    [scene setSceneID:[self.sceneid intValue]];
     [scene setRoomID:4];
     [scene setHouseID:3];
     [scene setPicID:66];
@@ -202,6 +204,7 @@
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
     [scene setDevices:devices];
     [[SceneManager defaultManager] addScenen:scene withName:@"" withPic:@""];
+    }
 }
 
 #pragma mark - TCP recv delegate
