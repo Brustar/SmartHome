@@ -118,6 +118,7 @@
     }
     
     self.segmentLight.selectedSegmentIndex = 0;
+    self.deviceid = [self.lIDs objectAtIndex:self.segmentLight.selectedSegmentIndex];
 }
 
 - (NSDictionary *)getRGBDictionaryByColor:(UIColor *)originColor
@@ -147,18 +148,17 @@
         NSData *data=[[DeviceInfo defaultManager] toogleLight:self.detailCell.power.isOn deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
-        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1];
+        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:1];
     }
     
     if ([sender isEqual:self.detailCell.bright]) {
-        NSString *key=[NSString stringWithFormat:@"bright_%@",self.deviceid];
-        NSData* daty = [PackManager dataFormHexString:[manager queryDeviceStates:key]];
-        
-        uint8_t cmd=[PackManager dataToUint:daty];
-        NSData *data=[[DeviceInfo defaultManager] changeBright:cmd deviceID:self.deviceid value:self.detailCell.bright.value];
+        //NSString *key=[NSString stringWithFormat:@"bright_%@",self.deviceid];
+        //NSData* daty = [PackManager dataFormHexString:[manager queryDeviceStates:key]];
+        //uint8_t cmd=[PackManager dataToUint:daty];
+        NSData *data=[[DeviceInfo defaultManager] changeBright:0x1a deviceID:self.deviceid value:self.detailCell.bright.value*100];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
-        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:2];
+        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:2];
     }
     
     if ([sender isEqual:self.cell.colourView]) {
@@ -175,7 +175,7 @@
         NSData *data=[[DeviceInfo defaultManager] changeColor:cmd deviceID:self.deviceid R:r G:g B:b];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:3];
-        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:3];
+        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:3];
     }
     
     Light *device=[[Light alloc] init];
@@ -186,11 +186,18 @@
     [device setBrightness:self.detailCell.bright.value*100];
     
     Scene *scene=[[Scene alloc] init];
-    [scene setSceneID:2];
+    [scene setSceneID:2];//[self.sceneid intValue]];
     [scene setRoomID:4];
     [scene setHouseID:3];
     [scene setPicID:66];
     [scene setReadonly:NO];
+    
+    [scene setStartTime:@""];
+    [scene setWeekValue:@""];
+    [scene setAstronomicalTime:@""];
+    [scene setWeekRepeat:0];
+    [scene setRoomName:@""];
+    [scene setSceneName:@""];
     
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
     [scene setDevices:devices];
@@ -326,8 +333,7 @@
 - (IBAction)selectTypeOfLight:(UISegmentedControl *)sender {
     
    self.detailCell.label.text = self.lNames[sender.selectedSegmentIndex];
-    
-   
+    self.deviceid = [self.lIDs objectAtIndex:self.segmentLight.selectedSegmentIndex];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

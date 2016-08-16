@@ -46,7 +46,7 @@
     NSString *longConnect = @"longConnect\r\n";
     NSData   *dataStream  = [longConnect dataUsingEncoding:NSUTF8StringEncoding];
     [self.socket writeData:dataStream withTimeout:1 tag:1];
-    [self.socket readDataToData:[AsyncSocket CRLFData] withTimeout:1 tag:1];
+    [self.socket readDataToData:[AsyncSocket CRLFData] withTimeout:-1 tag:1];
 }
 
 -(void)connectUDP:(int)port
@@ -91,7 +91,7 @@
     proto.masterID=CFSwapInt16BigToHost(device.masterID);
     NSData *data=dataFromProtocol(proto);
     [self.socket writeData:data withTimeout:1 tag:1000];
-    [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1000];
+    [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:1000];
 }
 
 - (void) connectAfterLogined
@@ -109,22 +109,24 @@
 
 - (void) handleUDP:(NSData *)data
 {
+    DeviceInfo *info=[DeviceInfo defaultManager];
     if ([PackManager checkProtocol:data cmd:0x80] || [PackManager checkProtocol:data cmd:0x81]) {
-        //Proto proto=protocolFromData(data);
-
         NSData *masterID=[data subdataWithRange:NSMakeRange(2, 2)];
         NSData *ip=[data subdataWithRange:NSMakeRange(4, 4)];
         NSData *port=[data subdataWithRange:NSMakeRange(8, 2)];
         
-        
-        DeviceInfo *info=[DeviceInfo defaultManager];
         info.masterID=(long)[PackManager NSDataToUInt:masterID];
         info.masterIP=[PackManager NSDataToIP:ip];
         info.masterPort=(int)[PackManager NSDataToUInt:port];
         [IOManager writeUserdefault:[NSNumber numberWithLong:[PackManager NSDataToUInt:masterID]] forKey:@"masterID"];
         [self initTcp:[PackManager NSDataToIP:ip] port:(int)[PackManager NSDataToUInt:port] mode:atHome delegate:nil];
+        info.connectState = atHome;
+        [self.socket writeData:[[DeviceInfo defaultManager] author] withTimeout:-1 tag:0];
+        [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:0];
+        
     }else{
         [self connectTcp];
+        info.connectState = outDoor;
     }
 }
 
@@ -138,8 +140,8 @@
         [IOManager writeUserdefault:[NSNumber numberWithLong:[PackManager NSDataToUInt:port]] forKey:@"subPort"];
         [self initTcp:[PackManager NSDataToIP:ip] port:(int)[PackManager NSDataToUInt:port] mode:outDoor delegate:nil];
         
-        [self.socket writeData:[[DeviceInfo defaultManager] author] withTimeout:1 tag:0];
-        [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:0];
+        [self.socket writeData:[[DeviceInfo defaultManager] author] withTimeout:-1 tag:0];
+        [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:0];
     }
 }
 
@@ -162,7 +164,7 @@
     }
     
     //[self.socket readDataWithTimeout:30 tag:0];
-    [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:5 tag:0];
+    [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:0];
 }
 
 -(void)onSocket:(AsyncSocket *)sock didReadPartialDataOfLength:(long)partialLength tag:(long)tag

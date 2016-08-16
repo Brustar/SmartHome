@@ -221,11 +221,13 @@
             scene.picID = [resultSet intForColumn:@"pic"];
             scene.isFavorite = [resultSet boolForColumn:@"isFavorite"];
             scene.eID = [resultSet intForColumn:@"eId"];
+            
             scene.startTime = [resultSet stringForColumn:@"startTime"];
             scene.astronomicalTime = [resultSet stringForColumn:@"astronomicalTime"];
             scene.weekValue = [resultSet stringForColumn:@"weekValue"];
             scene.weekRepeat = [resultSet intForColumn:@"weekRepeat"];
-            scene.roomID = [resultSet intForColumn:@"rId"];
+            
+             scene.roomID = [resultSet intForColumn:@"rId"];
            
             [sceneModles addObject:scene];
             

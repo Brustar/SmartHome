@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 
 enum{
+    offLine,  //离线
+    atHome,// 在家模式
+    outDoor,  // 户外模式
+};
+
+enum{
     UNKNOWN,
     iPhone,
     iPhone3G,
@@ -53,6 +59,8 @@ enum{
 @property (nonatomic) long masterID;
 @property (nonatomic, strong) NSString *masterIP;
 @property (nonatomic) int masterPort;
+
+@property (nonatomic) int connectState;
 
 + (id) defaultManager;
 - (void) deviceGenaration;

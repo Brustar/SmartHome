@@ -13,7 +13,9 @@
 NSData *dataFromProtocol(Proto protcol)
 {
     // make a NSData object
-    return [NSData dataWithBytes:&protcol length:sizeof(protcol)];
+    NSData *data = [NSData dataWithBytes:&protcol length:sizeof(protcol)];
+    NSLog(@"tcp sent:%@",data);
+    return data;
 }
 
 Proto protocolFromData(NSData *data)
@@ -59,7 +61,7 @@ Proto createProto()
 + (BOOL) checkProtocol:(NSData *)data cmd:(long)value
 {
     NSData *head = [data subdataWithRange:NSMakeRange(0, 1)];
-    NSData *cmd = [data subdataWithRange:NSMakeRange(2, 1)];
+    NSData *cmd = [data subdataWithRange:NSMakeRange(1, 1)];
     NSData *tail = [data subdataWithRange:NSMakeRange([data length]-1, 1)];
     return [self NSDataToUInt:head]==0xEC && [self NSDataToUInt:cmd]==value && [self NSDataToUInt:tail]==0xEA;
 }
@@ -129,6 +131,20 @@ Proto createProto()
     Byte* bytes = (Byte*)([data bytes]);
     
     return bytes[0];
+}
+
++ (uint8_t) NSDataToUint8:(NSString *)string
+{
+    NSString *result = [NSString stringWithFormat:@"0x%@",string];
+    unsigned char ret = strtoul([result UTF8String],0,16);
+    return ret;
+}
+
++ (uint16_t) NSDataToUint16:(NSString *)string
+{
+    NSString *result = [NSString stringWithFormat:@"0x%@",string];
+    unsigned short ret = strtoul([result UTF8String],0,16);
+    return ret;
 }
 
 @end

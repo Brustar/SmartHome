@@ -36,7 +36,7 @@
     FMResultSet *resultSet = [db executeQueryWithFormat:@"select * from t_protocol_config"];
     while([resultSet next])
     {
-        NSString *key=[NSString stringWithFormat:@"%@_%@",[resultSet stringForColumn:@"actKey"],[resultSet stringForColumn:@"eid"]];
+        NSString *key=[NSString stringWithFormat:@"%@_%@",[resultSet stringForColumn:@"actKey"],[resultSet stringForColumn:@"etype"]];
         NSString *type =[NSString stringWithFormat:@"%@",[resultSet stringForColumn:@"etype"]];
         NSString *state = [resultSet stringForColumn:@"actcode"];
         NSString *hexID = [resultSet stringForColumn:@"enumber"];

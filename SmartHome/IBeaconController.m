@@ -270,7 +270,7 @@
     NSString *cmd=@"EC81010100000000000080EA";
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:[PackManager dataFormHexString:cmd] withTimeout:1 tag:1];
-    [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:1];
+    [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:1];
     
     //self.timer =  [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(myLog:) userInfo:nil repeats:YES];
 }
@@ -280,7 +280,7 @@
     NSString *cmd=@"ECFE010100000000000000EA";
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:[PackManager dataFormHexString:cmd] withTimeout:1 tag:2];
-    [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:2];
+    [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:2];
     
     //self.timer =  [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(myLog:) userInfo:nil repeats:YES];
 }
