@@ -21,7 +21,7 @@
     ECloudTabBar *tabBar = [[ECloudTabBar alloc] init];
     tabBar.delegate = self;
     tabBar.frame = self.tabBar.bounds;
-    
+    self.cloudTabBar = tabBar;
     [self.tabBar addSubview:tabBar];
     //[self setValue:tabBar forKey:@"tabBar"];
 }

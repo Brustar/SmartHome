@@ -63,6 +63,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [UIView new];
+    self.user.text = [[NSUserDefaults  standardUserDefaults] objectForKey:@"Account"];
+    self.userType = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Type"] intValue];
+    self.pwd.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"Password"];
     // Do any additional setup after loading the view.
 }
 
@@ -95,7 +98,9 @@
 
     
     NSDictionary *dict = @{@"Account":self.user.text,@"Type":[NSNumber numberWithInteger:self.userType],@"Password":[self.pwd.text md5]};
-    [[NSUserDefaults standardUserDefaults] setObject:self.user.text forKey:@"Account"];
+    [IOManager writeUserdefault:self.user.text forKey:@"Account"];
+    [IOManager writeUserdefault:[NSNumber numberWithInteger:self.userType] forKey:@"Type"];
+    [IOManager writeUserdefault:self.pwd.text forKey:@"Password"];
     HttpManager *http=[HttpManager defaultManager];
     http.delegate=self;
     http.tag = 1;
