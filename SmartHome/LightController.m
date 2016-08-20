@@ -86,21 +86,25 @@
     [self setupSegmentLight];
      self.title = @"灯";
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toogleLighter:) name:@"light" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncLight:) name:@"light" object:nil];
+    
+    SocketManager *sock=[SocketManager defaultManager];
+    sock.delegate=self;
 }
 
--(IBAction)toogleLighter:(id)sender
+-(IBAction)syncLight:(id)sender
 {
-    NSDictionary *dic = (NSDictionary *)sender;
+    NSNotification * notice = (NSNotification *)sender;
+    NSDictionary *dic= [notice userInfo];
     int state = [dic[@"state"] intValue];
     if (state == 0x00 || state == 0x01) {
         self.detailCell.power.on = (bool)state;
     }
     if (state == 0x0a) {
-        
+        self.detailCell.bright.value=[dic[@"r"] intValue];
     }
     if (state == 0x0b) {
-        
+        self.cell.colourView.backgroundColor=[UIColor colorWithRed:[dic[@"r"] intValue]/255.0 green:[dic[@"g"] intValue]/255.0  blue:[dic[@"b"] intValue]/255.0  alpha:1];
     }
 }
 - (void)setupSegmentLight
@@ -210,9 +214,12 @@
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
-    if (tag == 0) {
-        Proto proto=protocolFromData(data);
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"light" object:self userInfo:@{@"state":@(proto.action.state)}];
+    Proto proto=protocolFromData(data);
+    if (tag == 0 && (proto.action.state == 0x00 || proto.action.state == 0x01 || proto.action.state == 0x0b || proto.action.state == 0x0a)) {
+        //创建一个消息对象
+        NSNotification * notice = [NSNotification notificationWithName:@"light" object:nil userInfo:@{@"state":@(proto.action.state),@"r":@(proto.action.RValue),@"g":@(proto.action.G),@"b":@(proto.action.B)}];
+        //发送消息
+        [[NSNotificationCenter defaultCenter] postNotification:notice];
     }
 }
 
