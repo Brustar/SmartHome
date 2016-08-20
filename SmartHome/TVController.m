@@ -129,6 +129,12 @@
     recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionDown)];
     [[self touchpad] addGestureRecognizer:recognizer];
+    
+    NSData *data=[[DeviceInfo defaultManager] open:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+    [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:1];
+    
 }
 
 - (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
@@ -201,7 +207,8 @@
 }
 
 
-- (IBAction)mute:(id)sender {
+- (IBAction)mute:(id)sender
+{
     self.volume.value=0.0;
     
     NSData *data=[[DeviceInfo defaultManager] changeTVolume:0x00 deviceID:self.deviceid];
