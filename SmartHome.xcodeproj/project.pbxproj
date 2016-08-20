@@ -1340,6 +1340,7 @@
 				TargetAttributes = {
 					0F032D431CC9B12700D1920D = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = C8JS65F469;
 						SystemCapabilities = {
 							com.apple.HomeKit = {
 								enabled = 1;
@@ -1833,7 +1834,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FFmpeg-iOS/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1871,7 +1872,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FFmpeg-iOS/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
