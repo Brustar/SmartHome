@@ -30,6 +30,7 @@
     self.socket = [[AsyncSocket alloc] initWithDelegate:self];
     NSError *error = nil;
     [self.socket connectToHost:self.socketHost onPort:self.socketPort error:&error];
+    NSLog(@"tcp port:%d",self.socketPort);
 }
 
 // 切断socket
@@ -51,7 +52,9 @@
 
 -(void)connectUDP:(int)port
 {
-    [self connectUDP:port delegate:self];
+    [self connectTcp];
+    
+    //[self connectUDP:port delegate:self];
 }
 
 -(void)connectUDP:(int)port delegate:(id)delegate
@@ -85,11 +88,10 @@
 {
     //请求协调服务器
     [self initTcp:[IOManager tcpAddr] port:[IOManager tcpPort] mode:outDoor delegate:nil];
-    Proto proto=createProto();
-    proto.cmd=0x82;
     DeviceInfo *device=[DeviceInfo defaultManager];
-    proto.masterID=CFSwapInt16BigToHost(device.masterID);
-    NSData *data=dataFromProtocol(proto);
+    device.connectState = outDoor;
+    device.masterPort=[IOManager tcpPort];
+    NSData *data=[device author];
     [self.socket writeData:data withTimeout:1 tag:1000];
     [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:1000];
 }
@@ -111,6 +113,7 @@
 {
     DeviceInfo *info=[DeviceInfo defaultManager];
     if ([PackManager checkProtocol:data cmd:0x80] || [PackManager checkProtocol:data cmd:0x81]) {
+        info.connectState = atHome;
         NSData *masterID=[data subdataWithRange:NSMakeRange(2, 2)];
         NSData *ip=[data subdataWithRange:NSMakeRange(4, 4)];
         NSData *port=[data subdataWithRange:NSMakeRange(8, 2)];
@@ -139,7 +142,8 @@
         [IOManager writeUserdefault:[PackManager NSDataToIP:ip] forKey:@"subIP"];
         [IOManager writeUserdefault:[NSNumber numberWithLong:[PackManager NSDataToUInt:port]] forKey:@"subPort"];
         [self initTcp:[PackManager NSDataToIP:ip] port:(int)[PackManager NSDataToUInt:port] mode:outDoor delegate:nil];
-        
+        DeviceInfo *device=[DeviceInfo defaultManager];
+        device.masterPort=(int)[PackManager NSDataToUInt:port];
         [self.socket writeData:[[DeviceInfo defaultManager] author] withTimeout:-1 tag:0];
         [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:0];
     }
@@ -177,6 +181,8 @@
     NSLog(@"sorry the connect is failure %ld",sock.userData);
     if (sock.userData == SocketOfflineByServer) {// 服务器掉线，重连
         [self socketConnectHost];
+        [self.socket writeData:[[DeviceInfo defaultManager] author] withTimeout:-1 tag:0];
+        [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:0];
     }else if (sock.userData == SocketOfflineByUser) {// 如果由用户断开，不进行重连
         return;
     }

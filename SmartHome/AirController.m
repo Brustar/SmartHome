@@ -66,6 +66,7 @@
 
 -(IBAction)save:(id)sender
 {
+    if ([self.sceneid intValue]>0) {
     Aircon *device = [[Aircon alloc]init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setMode:self.currentMode];
@@ -85,6 +86,7 @@
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
     [scene setDevices:devices];
     [[SceneManager defaultManager] addScenen:scene withName:@"" withPic:@""];
+    }
 }
 
 #pragma mark - TCP recv delegate

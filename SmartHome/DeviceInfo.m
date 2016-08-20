@@ -214,7 +214,11 @@
 {
     Proto proto=createProto();
     if (self.connectState==outDoor) {
-        proto.cmd=0x83;
+        if (self.masterPort==[IOManager tcpPort]) {
+            proto.cmd=0x82;
+        }else{
+            proto.cmd=0x85;
+        }
     }else if (self.connectState==atHome){
         proto.cmd=0x84;
     }

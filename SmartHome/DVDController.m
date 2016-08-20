@@ -48,19 +48,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    // Do any additional setup after loading the view.
     self.title = @"DVD";
     
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
-    
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     VolumeManager *volume=[VolumeManager defaultManager];
     [volume start:device];
-
-    
 
 
     if ([self.sceneid intValue]>0) {
@@ -90,6 +86,14 @@
     recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionDown)];
     [[self touchpad] addGestureRecognizer:recognizer];
+    
+    [SCWaveAnimationView waveAnimationAtDirection:recognizer.direction view:self.touchpad];
+    
+    
+    NSData *data=[[DeviceInfo defaultManager] open:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+    [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:1];
 }
 
 - (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
@@ -141,7 +145,7 @@
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
     [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:1];
-    
+    if ([self.sceneid intValue]>0) {
     DVD *device=[[DVD alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setDvolume:self.volume.value*100];
@@ -156,6 +160,7 @@
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
     [scene setDevices:devices];
     [[SceneManager defaultManager] addScenen:scene withName:@"" withPic:@""];
+    }
 }
 
 #pragma mark - TCP recv delegate

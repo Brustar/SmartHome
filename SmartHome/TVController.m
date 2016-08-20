@@ -129,6 +129,12 @@
     recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionDown)];
     [[self touchpad] addGestureRecognizer:recognizer];
+    
+    NSData *data=[[DeviceInfo defaultManager] open:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+    [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:1];
+    
 }
 
 - (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
@@ -169,7 +175,7 @@
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
     [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:1];
-    
+    if ([self.sceneid intValue]>0) {
     TV *device=[[TV alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setVolume:self.volume.value*100];
@@ -184,6 +190,7 @@
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
     [scene setDevices:devices];
     [[SceneManager defaultManager] addScenen:scene withName:@"" withPic:@""];
+    }
 }
 
 #pragma mark - TCP recv delegate
@@ -200,7 +207,8 @@
 }
 
 
-- (IBAction)mute:(id)sender {
+- (IBAction)mute:(id)sender
+{
     self.volume.value=0.0;
     
     NSData *data=[[DeviceInfo defaultManager] changeTVolume:0x00 deviceID:self.deviceid];
