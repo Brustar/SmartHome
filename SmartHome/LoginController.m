@@ -25,7 +25,8 @@
 #import "DeviceManager.h"
 #import "RoomManager.h"
 #import "FMDatabase.h"
-
+#import "DeviceInfo.h"
+#import "PackManager.h"
 
 @interface LoginController ()<QRCodeReaderDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -387,19 +388,22 @@
         if ([responseObject[@"Result"] intValue]==0) {
             
             NSArray *hostList = responseObject[@"HostList"];
+            DeviceInfo *info=[DeviceInfo defaultManager];
+            
             for(NSDictionary *hostID in hostList)
             {
+                
                 [self.hostIDS addObject:hostID[@"hostId"]];
             }
             
+            NSString *mid = self.hostIDS[1];
+            info.masterID =[PackManager NSDataToUint16:mid];
             NSInteger count = self.hostIDS.count;
             
             if(count == 1)
             {
                 //直接登录主机
                 [self sendRequestToHostWithTag:2 andRow:0];
-                
-                
                 [self goToViewController];
             }else{
                 self.tableView.hidden = NO;
