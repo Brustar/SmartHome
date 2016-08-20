@@ -20,6 +20,7 @@
 #import "SceneManager.h"
 #import "DeviceListController.h"
 #import "AirController.h"
+#import "HttpManager.h"
 @interface EditSceneController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITableView *subDeviceTableView;
@@ -196,6 +197,8 @@
     }];
     [alertVC addAction:saveAction];
     UIAlertAction *saveNewAction = [UIAlertAction actionWithTitle:@"另存为新场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //另存为场景
+        
         
     }];
     [alertVC addAction:saveNewAction];

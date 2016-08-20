@@ -263,6 +263,7 @@
         }else{
             TVChannel *channel = self.allFavourTVChannels[indexPath.row];
             cell.imgView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",channel.channel_pic]];
+            cell.label.text = channel.channel_name;
             
             [cell useLongPressGesture];
         }
@@ -374,16 +375,21 @@
 
 {
    
+    [self sendStoreChannelRequest];
+    
+}
+
+-(void)sendStoreChannelRequest
+{
     NSString *url = [NSString stringWithFormat:@"%@TVChannelUpload.aspx",[IOManager httpAddr]];
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSDictionary *dic = @{@"AuthorToken":authorToken,@"EID":self.deviceid,@"Cnumber":self.channeNumber.text,@"CName":self.channelName.text,@"ImgFileName":self.editChannelImgBtn.currentBackgroundImage,@"ImgFile":@""};
+    NSDictionary *dic = @{@"AuthorToken":authorToken,@"EID":self.deviceid,@"Cnumber":self.channeNumber.text,@"CName":self.channelName.text,@"ImgFileName":@"store",@"ImgFile":@""};
     HttpManager *http = [HttpManager defaultManager];
     http.delegate = self;
     http.tag = 1;
     [http sendPost:url param:dic];
-
-    [self hiddenCoverView];
     
+    [self hiddenCoverView];
 }
 -(void) httpHandler:(id) responseObject tag:(int)tag
 {
@@ -512,8 +518,10 @@
 }
 
 - (IBAction)storeTVChannel:(UIBarButtonItem *)sender {
- 
+    self.channelName.text = nil;
+    self.channeNumber.text = nil;
     self.editView.hidden = NO;
+    [self sendStoreChannelRequest];
     
 }
 
