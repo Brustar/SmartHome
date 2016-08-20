@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
 @property (weak, nonatomic) IBOutlet UIButton *deleteBtn;
 @property (weak, nonatomic) IBOutlet UIButton *editBtn;
+@property (weak, nonatomic) IBOutlet UILabel *label;
 
 @property(nonatomic,weak) id<TVLogoCellDelegate> delegate;
 

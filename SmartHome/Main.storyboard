@@ -4523,7 +4523,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g39-Ua-ADa">
-                                                            <rect key="frame" x="0.0" y="0.0" width="148" height="148"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="148" height="118"/>
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRh-ao-FG8">
                                                             <rect key="frame" x="8" y="5" width="30" height="30"/>
@@ -4547,15 +4547,27 @@
                                                                 <action selector="doEditBtn:" destination="mzw-uE-haa" eventType="touchUpInside" id="J8j-qU-QeJ"/>
                                                             </connections>
                                                         </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxX-lJ-e6H">
+                                                            <rect key="frame" x="0.0" y="118" width="148" height="30"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="hv8-HM-4DH"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="fRh-ao-FG8" firstAttribute="leading" secondItem="mzw-uE-haa" secondAttribute="leading" constant="8" id="4mP-ks-XBb"/>
-                                                    <constraint firstAttribute="bottom" secondItem="g39-Ua-ADa" secondAttribute="bottom" id="GZe-wm-Gcb"/>
+                                                    <constraint firstItem="nxX-lJ-e6H" firstAttribute="leading" secondItem="mzw-uE-haa" secondAttribute="leading" id="Di7-CX-fjl"/>
+                                                    <constraint firstAttribute="bottom" secondItem="g39-Ua-ADa" secondAttribute="bottom" constant="30" id="GZe-wm-Gcb"/>
                                                     <constraint firstItem="hW9-fN-0qC" firstAttribute="top" secondItem="mzw-uE-haa" secondAttribute="top" constant="5" id="Iuz-An-tac"/>
                                                     <constraint firstItem="g39-Ua-ADa" firstAttribute="top" secondItem="mzw-uE-haa" secondAttribute="top" id="J2G-Q3-fc3"/>
+                                                    <constraint firstAttribute="bottom" secondItem="nxX-lJ-e6H" secondAttribute="bottom" id="K1C-dE-X8Y"/>
+                                                    <constraint firstAttribute="trailing" secondItem="nxX-lJ-e6H" secondAttribute="trailing" id="OrS-Lb-WgE"/>
                                                     <constraint firstAttribute="trailing" secondItem="g39-Ua-ADa" secondAttribute="trailing" id="hRq-Pp-lt6"/>
                                                     <constraint firstItem="g39-Ua-ADa" firstAttribute="leading" secondItem="mzw-uE-haa" secondAttribute="leading" id="jHk-Oj-CEo"/>
                                                     <constraint firstItem="fRh-ao-FG8" firstAttribute="top" secondItem="mzw-uE-haa" secondAttribute="top" constant="5" id="l5t-V2-CZn"/>
@@ -4565,6 +4577,7 @@
                                                     <outlet property="deleteBtn" destination="fRh-ao-FG8" id="56O-Np-eDs"/>
                                                     <outlet property="editBtn" destination="hW9-fN-0qC" id="BUU-qr-8oM"/>
                                                     <outlet property="imgView" destination="g39-Ua-ADa" id="urx-Iz-FF5"/>
+                                                    <outlet property="label" destination="nxX-lJ-e6H" id="IGW-ma-CWl"/>
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>
@@ -4740,7 +4753,6 @@
                                         <state key="normal" title="取消"/>
                                         <connections>
                                             <action selector="cancelEdit:" destination="iP5-w8-v4Y" eventType="touchUpInside" id="y7r-QE-LlH"/>
-                                            <action selector="clickSureBtnAfterEdited:" destination="iP5-w8-v4Y" eventType="touchUpInside" id="5yw-Tw-GBh"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -5752,9 +5764,9 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yTT-Nf-qWA"/>
         <segue reference="5K5-wE-mZz"/>
-        <segue reference="dA1-We-bRA"/>
+        <segue reference="yTT-Nf-qWA"/>
+        <segue reference="dRU-hd-aVS"/>
         <segue reference="bKA-jZ-hQY"/>
     </inferredMetricsTieBreakers>
 </document>
