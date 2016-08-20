@@ -263,8 +263,10 @@
         }else{
             TVChannel *channel = self.allFavourTVChannels[indexPath.row];
             cell.imgView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",channel.channel_pic]];
+            
             [cell useLongPressGesture];
         }
+        
         
         return cell;
     }

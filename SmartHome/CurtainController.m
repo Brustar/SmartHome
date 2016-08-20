@@ -66,7 +66,7 @@
     [self.cell.open addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     [self.cell.close addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
-    if ([self.sceneid intValue]>0) {
+    if ([self.sceneid intValue] >0) {
         
         Scene *scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
         for(int i=0;i<[scene.devices count];i++)

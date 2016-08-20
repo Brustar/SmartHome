@@ -5606,7 +5606,13 @@ layer.masksToBoundslayer.masksToBounds
                             <constraint firstItem="J7V-cJ-e6i" firstAttribute="top" secondItem="oHk-s8-HdJ" secondAttribute="bottom" id="wrm-Zb-hBW"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="场景" id="B3W-c2-Cel"/>
+                    <navigationItem key="navigationItem" title="场景" id="B3W-c2-Cel">
+                        <barButtonItem key="rightBarButtonItem" title="保存" id="d18-6E-MCK">
+                            <connections>
+                                <action selector="saveScene:" destination="6a7-1m-tB7" id="UoQ-1k-6dh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="addDeviceBtn" destination="2ix-hZ-Oqk" id="6YV-p9-gQ4"/>
                         <outlet property="devicelView" destination="oHk-s8-HdJ" id="gLo-yA-SXK"/>
@@ -5746,9 +5752,9 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5K5-wE-mZz"/>
         <segue reference="yTT-Nf-qWA"/>
-        <segue reference="dRU-hd-aVS"/>
+        <segue reference="5K5-wE-mZz"/>
+        <segue reference="dA1-We-bRA"/>
         <segue reference="bKA-jZ-hQY"/>
     </inferredMetricsTieBreakers>
 </document>

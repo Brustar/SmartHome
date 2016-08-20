@@ -48,6 +48,8 @@
         if(_allFavouriteChannels == nil || _allFavouriteChannels.count == 0)
         {
             self.unstoreLabel.hidden = NO;
+            self.collectionView.backgroundColor = [UIColor whiteColor];
+            
         }
         
     }

@@ -19,6 +19,7 @@
 #import "Device.h"
 #import "SceneManager.h"
 #import "DeviceListController.h"
+#import "AirController.h"
 @interface EditSceneController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITableView *subDeviceTableView;
@@ -115,16 +116,22 @@
         if([typeName isEqualToString:@"电视"])
         {
             TVController *tVC = [storyBoard instantiateViewControllerWithIdentifier:@"TVController"];
+            tVC.sceneid =[NSString stringWithFormat:@"%d",self.sceneID];
+            
             [self addViewAndVC:tVC];
             
         }else if([typeName isEqualToString:@"灯光"])
         {
             LightController *ligthVC = [storyBoard instantiateViewControllerWithIdentifier:@"LightController"];
+            ligthVC.roomID = self.roomID;
+            ligthVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
             [self addViewAndVC:ligthVC];
 
         }else if([typeName isEqualToString:@"窗帘"])
         {
             CurtainController *curtainVC = [storyBoard instantiateViewControllerWithIdentifier:@"CurtainController"];
+            curtainVC.roomID = self.roomID;
+            curtainVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
             [self addViewAndVC:curtainVC];
 
             
@@ -132,15 +139,26 @@
         {
             
             DVDController *dvdVC = [storyBoard instantiateViewControllerWithIdentifier:@"DVDController"];
+            dvdVC.roomID = self.roomID;
+            dvdVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
             [self addViewAndVC:dvdVC];
 
         }else if([typeName isEqualToString:@"FM"])
         {
              FMController *fmVC = [storyBoard instantiateViewControllerWithIdentifier:@"FMController"];
+            fmVC.roomID = self.roomID;
+            fmVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
             [self addViewAndVC:fmVC];
 
-        }else {
+        }else if([typeName isEqualToString:@"空调"])
+        {
+            AirController *airVC = [storyBoard instantiateViewControllerWithIdentifier:@"AirController"];
+            airVC.roomID = self.roomID;
+            airVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+        }else{
             NetvController *netVC = [storyBoard instantiateViewControllerWithIdentifier:@"NetvController"];
+            netVC.roomID = self.roomID;
+            netVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
             [self addViewAndVC:netVC];
 
         }
@@ -169,9 +187,28 @@
         [theSegue setValue:[NSNumber numberWithInt:self.roomID] forKey:@"roomid"];
     }
        
-   
-    
 }
+
+- (IBAction)saveScene:(UIBarButtonItem *)sender {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请选择" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *saveAction = [UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertVC addAction:saveAction];
+    UIAlertAction *saveNewAction = [UIAlertAction actionWithTitle:@"另存为新场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertVC addAction:saveNewAction];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [alertVC dismissViewControllerAnimated:YES completion:nil];
+    }];
+    [alertVC addAction:cancelAction];
+    [self presentViewController:alertVC animated:YES completion:nil];
+}
+
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
