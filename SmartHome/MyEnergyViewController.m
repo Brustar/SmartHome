@@ -34,34 +34,13 @@
 @property (weak, nonatomic) IBOutlet UITableView *selectedDeviceTableView;
 @property (nonatomic,strong) NSArray *deviceType;
 @property (nonatomic,strong) NSArray *subDevice;
-@property (nonatomic,strong) NSArray *subLigths;
-@property (nonatomic,strong) NSArray *subMedia;
-@property (nonatomic,strong) NSArray *subProtect;
-@property (nonatomic,strong) NSArray *subEnvironmetn;
 @property (nonatomic,strong) NSArray *devicesInfo;
+
 @end
 
 @implementation MyEnergyViewController
 
--(NSMutableArray *)energys
-{
-    if(!_energys)
-    {
-        _energys = [NSMutableArray array];
-        [_energys addObjectsFromArray:@[@"123",@"222",@"333"]];
-    }
-    return _energys;
-}
 
--(NSMutableArray *)times
-{
-    if(!_times)
-    {
-        _times = [NSMutableArray array];
-        [_times addObjectsFromArray:@[@"2016-8-9",@"2016-5-3",@"2016-7-9"]];
-    }
-    return _times;
-}
 -(NSArray *)devicesInfo{
     if(!_devicesInfo)
     {
@@ -70,43 +49,39 @@
     return _devicesInfo;
 }
 
--(void)getEnger{
-    NSString *url = [NSString stringWithFormat:@"%@GetEnergyMessage.aspx",[IOManager httpAddr]];
-    NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"Date":@"2016-07-11",@"EquipmentIdList":@"15"};
-    HttpManager *http = [HttpManager defaultManager];
-    http.delegate = self;
-    http.tag = 1;
-    [http sendPost:url param:dic];
-}
--(void)httpHandler:(id)responseObject tag:(int)tag
-{
-    if(tag == 1)
-    {
-        if([responseObject[@"Result"] intValue] == 0)
-        {
-            
-        }
-    }
-}
+//-(void)getEnger{
+//    NSString *url = [NSString stringWithFormat:@"%@GetEnergyMessage.aspx",[IOManager httpAddr]];
+//    NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"Date":@"2016-07-11",@"EquipmentIdList":@"15"};
+//    HttpManager *http = [HttpManager defaultManager];
+//    http.delegate = self;
+//    http.tag = 1;
+//    [http sendPost:url param:dic];
+//}
+//-(void)httpHandler:(id)responseObject tag:(int)tag
+//{
+//    if(tag == 1)
+//    {
+//        if([responseObject[@"Result"] intValue] == 0)
+//        {
+//            
+//        }
+//    }
+//}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"我的能耗";
-    
+   
     self.footView.hidden = YES;
     [self setNavi];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = self.footView;
     self.selectedDeviceTableView.tableFooterView = [UIView new];
     
-    self.deviceType = @[@"全部设备",@"照明设备",@"影音设备",@"安防设备",@"环境设备"];
+    self.deviceType = [DeviceManager getAllDeviceSubTypes];
     
-    self.subLigths = @[@"1",@"3",@"2",@"4"];
-    self.subMedia = [DetailList getDeviceForModel:@"影音"];
-    self.subProtect = [DetailList getDeviceForModel:@"安防"];
-    self.subEnvironmetn = [DetailList getDeviceForModel:@"环境"];
     self.selectedDeviceTableView.hidden = YES;
     
-    [self getEnger];
+    //[self getEnger];
 }
 
 -(void)setNavi
@@ -121,7 +96,7 @@
 {
     if(tableView == self.selectedDeviceTableView)
     {
-        return self.deviceType.count;
+        return self.deviceType.count + 1;
     }
     return 1;
 }
@@ -131,7 +106,7 @@
     {
         return 1;
     }
-    return self.energys.count;
+    return 0;
 
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -139,7 +114,7 @@
     if(tableView == self.tableView)
     {
         MyEnergyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyEnergyCell" forIndexPath:indexPath];
-        cell.timeLabel.text = self.energys[indexPath.row];
+        //cell.timeLabel.text = self.energys[indexPath.row];
         return cell;
     }else{
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" ];
@@ -150,19 +125,13 @@
             {
                 NSArray *arrry = @[@"全部设备"];
                 [self setButtnonInCell:cell andSubDevie:arrry];
-            }else if(indexPath.section == 1)
-            {
-                [self setButtnonInCell:cell andSubDevie:self.subLigths];
-            }else if(indexPath.section == 2)
-            {
-                [self setButtnonInCell:cell andSubDevie:self.subMedia];
-            }else if(indexPath.section == 3)
-            {
-                [self setButtnonInCell:cell andSubDevie:self.subProtect];
-            }else
-            {
-                [self setButtnonInCell:cell andSubDevie:self.subEnvironmetn];
+            }else{
+                NSString *typeName = self.deviceType[indexPath.section -1];
+                NSArray *deviceNames = [DeviceManager getAllDeviceNameBysubType:typeName];
+                [self setButtnonInCell:cell andSubDevie:deviceNames];
             }
+            
+        
         }
         
         return cell;
@@ -202,7 +171,9 @@
         [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         
         btn.frame = CGRectMake(30, 10, 80, 30);
-        [btn setTitle:@"1eddeee" forState:UIControlStateNormal];
+        [btn setTitle:devices[i] forState:UIControlStateNormal];
+        NSInteger eId = [DeviceManager deviceIDByDeviceName:devices[i]];
+        btn.tag = eId;
         [btn addTarget:self action:@selector(goToEngerOfDevice:) forControlEvents:UIControlEventTouchUpInside];
         
         [view addSubview:btn];
@@ -213,6 +184,7 @@
 -(void)goToEngerOfDevice:(UIButton *)btn
 {
     self.engerOfDeviceVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EnergyOfDeviceController"];
+    self.engerOfDeviceVC.eId = btn.tag;
     [self.navigationController pushViewController:self.engerOfDeviceVC animated:NO];
     
 }
@@ -227,29 +199,15 @@
 {
     if(tableView == self.selectedDeviceTableView)
     {
-        //        NSArray *b = A[indexPath.section];
-        //        return [self tableViewCellHeight:b.count]
-        
-        switch (indexPath.section) {
-            case 0:
-                return [self tableViewCellHeight:1];
-                
-            case 1:
-                return [self tableViewCellHeight:self.subLigths.count];
-                
-            case 2:
-                return [self tableViewCellHeight:self.subMedia.count];
-                
-            case 3:
-                return [self tableViewCellHeight:self.subProtect.count];
-                
-            case 4:
-                return [self tableViewCellHeight:self.subEnvironmetn.count];
-                
-            default:
-                break;
+        //NSArray *b = A[indexPath.section];
+        //return [self tableViewCellHeight:b.count]
+        if(indexPath.section == 0)
+        {
+            return 44;
         }
-        
+        NSString *typeName = self.deviceType[indexPath.section];
+        NSArray *deviceNames = [DeviceManager getAllDeviceNameBysubType:typeName];
+        return [self tableViewCellHeight:deviceNames.count];
     }
     return 44;
     

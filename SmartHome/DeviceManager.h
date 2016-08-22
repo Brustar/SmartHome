@@ -19,7 +19,8 @@
 
 //根据设备ID获取设备名称
 +(NSString *)deviceNameByDeviceID:(int)eId;
-
+//根据设备名字查找设备ID
++(NSInteger)deviceIDByDeviceName:(NSString *)deviceName;
 //根据设备ID获取设备类别
 +(NSString *)deviceTypeNameByDeviceID:(int)eId;
 
@@ -42,10 +43,14 @@
 
 //根据房间ID和场景ID获得设备
 + (NSArray *)getDeviceWithRoomID:(int)roomID sceneID:(int)sceneID;
-//根据房间ID和场景ID获得设备
+//根据房间ID和场景ID获得设备父类和子类
 + (NSArray *)getDeviceSubTypeNameWithRoomID:(int)roomID sceneID:(int)sceneID;
 + (NSArray *)getDeviceTypeNameWithRoomID:(int)roomID sceneID:(int)sceneID subTypeName:(NSString *)subTypeName;
 
+
+//得到所有设备父类和具体的设备
++(NSArray *)getAllDeviceSubTypes;
++(NSArray *)getAllDeviceNameBysubType:(NSString *)subTypeName;
 
 
 +(NSString *)getEType:(NSInteger)eID;

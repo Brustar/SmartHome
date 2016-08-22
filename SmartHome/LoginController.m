@@ -97,7 +97,7 @@
     }
 
     
-    NSDictionary *dict = @{@"Account":self.user.text,@"Type":[NSNumber numberWithInteger:self.userType],@"Password":self.pwd.text};
+    NSDictionary *dict = @{@"Account":self.user.text,@"Type":[NSNumber numberWithInteger:self.userType],@"Password":[self.pwd.text md5]};
     [IOManager writeUserdefault:self.user.text forKey:@"Account"];
     [IOManager writeUserdefault:[NSNumber numberWithInteger:self.userType] forKey:@"Type"];
     [IOManager writeUserdefault:self.pwd.text forKey:@"Password"];
@@ -391,7 +391,7 @@
     if(tag == 1)
     {
         if ([responseObject[@"Result"] intValue]==0) {
-            
+            [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
             NSArray *hostList = responseObject[@"HostList"];
             DeviceInfo *info=[DeviceInfo defaultManager];
             
@@ -430,7 +430,6 @@
         if ([responseObject[@"Result"] intValue]==0)
         {
             
-            [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
             
             self.tableView.hidden = YES;
             self.coverView.hidden = YES;
@@ -521,7 +520,8 @@
 {
     NSString *url = [NSString stringWithFormat:@"%@UserLoginHost.aspx",[IOManager httpAddr]];
 
-    NSDictionary *dict = @{@"Account":self.user.text,@"Type":[NSNumber numberWithInteger:self.userType],@"Password":self.pwd.text,@"HostID":self.hostIDS[row]};
+    NSDictionary *dict = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"HostID":self.hostIDS[row]};
+    
     [[NSUserDefaults standardUserDefaults] setObject:self.user.text forKey:@"Account"];
     HttpManager *http=[HttpManager defaultManager];
     http.delegate=self;
@@ -537,7 +537,7 @@
 
 - (IBAction)forgotPWD:(id)sender
 {
-    [WebManager show:@"http://3g.cn"];
+    [WebManager show:@"http://115.28.151.85:8088/forgotpwd/Index.aspx"];
 }
 
 //注册

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface EnergyOfDeviceController : UIViewController
-
+@property (nonatomic,assign) NSInteger eId;
 @end
