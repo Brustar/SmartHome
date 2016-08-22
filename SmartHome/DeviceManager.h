@@ -50,5 +50,6 @@
 
 +(NSString *)getEType:(NSInteger)eID;
 +(NSString *)getENumber:(NSInteger)eID;
++(NSString *)getDeviceIDByENumber:(NSInteger)eID masterID:(NSInteger)mID;
 
 @end

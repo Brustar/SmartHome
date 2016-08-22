@@ -331,6 +331,24 @@
     return enumber;
 }
 
++(NSString *)getDeviceIDByENumber:(NSInteger)eID masterID:(NSInteger)mID
+{
+    NSString *deviceID=nil;
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where enumber = %ld and masterID=%ld",eID,mID];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            deviceID = [resultSet stringForColumn:@"ID"];
+        }
+    }
+    [db close];
+    return deviceID;
+}
+
 
 + (NSArray *)getDeviceSubTypeNameWithRoomID:(int)roomID sceneID:(int)sceneID
 {

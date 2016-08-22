@@ -147,8 +147,7 @@
         }
         scene.devices=devices;
         return scene;
-    }
-    else{
+    }else{
         return nil;
     }
 }
@@ -250,6 +249,7 @@
     }
     return devices;
 }
+
 + (NSArray *)getAllSceneWithRoomID:(int)roomID
 {
     NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];

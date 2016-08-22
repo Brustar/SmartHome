@@ -173,6 +173,7 @@
     [self addChildViewController:vc];
     
 }
+
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
      cell.backgroundColor = backGroudColour;
