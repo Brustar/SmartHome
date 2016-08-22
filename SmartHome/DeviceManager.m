@@ -53,6 +53,25 @@
     }
     return eName;
 }
+
++(NSInteger)deviceIDByDeviceName:(NSString *)deviceName
+{
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    NSInteger eId;
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices NAME = '%@'",deviceName];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+            eId = [resultSet intForColumn:@"ID"];
+        }
+    }
+    return eId;
+
+}
+
 +(NSString *)deviceTypeNameByDeviceID:(int)eId
 {
     NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
@@ -379,6 +398,62 @@
     
     return [subTypeNames copy];
 }
+
++(NSArray *)getAllDeviceSubTypes
+{
+    NSMutableArray *subTypeNames = [NSMutableArray array];
+    NSArray *deviceIDs = [self getAllDevicesIds];
+    for(NSString *deviceID in deviceIDs)
+    {
+        NSString *subTypeName = [self getDeviceSubTypeNameWithID:[deviceID intValue]];
+        BOOL isSame = false;
+        for (NSString *tempSubTypeName in subTypeNames) {
+            if ([tempSubTypeName isEqualToString:subTypeName]) {
+                isSame = true;
+                break;
+            }
+        }
+        if (isSame) {
+            continue;
+        }
+        
+        [subTypeNames addObject:subTypeName];
+        
+    }
+    if(subTypeNames.count < 1)
+    {
+        return  nil;
+    }
+    
+    return subTypeNames;
+}
++(NSArray *)getAllDevicesIds
+{
+    NSMutableArray *deviceIDs = [NSMutableArray array];
+    
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    
+    if([db open])
+    {
+        NSString *sql = @"SELECT eId FROM Scenes";
+        
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+            NSString *deviceID = [resultSet stringForColumn:@"eId"];
+            
+            [deviceIDs addObject:deviceID];
+        }
+    }
+    
+    if (deviceIDs.count < 1) {
+        return nil;
+    }
+    
+    return [deviceIDs copy];
+
+}
 + (NSString *)getDeviceSubTypeNameWithID:(int)ID
 {
     NSString *subTypeName = nil;
@@ -501,6 +576,34 @@
     
     return [typeNames copy];
 }
+
++(NSArray *)getAllDeviceNameBysubType:(NSString *)subTypeName
+{
+    NSMutableArray *typeNames = [NSMutableArray array];
+    NSArray *deviceIDs = [self getAllDevicesIds];
+    for (NSString *deviceID in deviceIDs) {
+        NSString *typeName = [self getDeviceTypeNameWithID:deviceID];
+        BOOL isSame = false;
+        for (NSString *tempTypeName in typeNames) {
+            if ([tempTypeName isEqualToString:typeName]) {
+                isSame = true;
+                break;
+            }
+        }
+        if (isSame) {
+            continue;
+        }
+        
+        [typeNames addObject:typeName];
+    }
+    
+    if (typeNames.count < 1) {
+        return nil;
+    }
+    
+    return [typeNames copy];
+}
+
 + (NSString *)getDeviceTypeNameWithID:(NSString *)ID
 {
     NSString *typeName = nil;

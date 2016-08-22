@@ -2119,7 +2119,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fm6-kA-D9a">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fm6-kA-D9a">
                                 <rect key="frame" x="100" y="164" width="400" height="200"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="veB-gj-0ZR">
@@ -2321,7 +2321,7 @@
                                     <constraint firstAttribute="trailing" secondItem="iPN-RN-2GQ" secondAttribute="trailing" id="yG4-jE-PCx"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aXm-Qu-dt0">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aXm-Qu-dt0">
                                 <rect key="frame" x="100" y="364" width="400" height="30"/>
                                 <color key="backgroundColor" red="0.18264051610000001" green="0.62103239529999998" blue="0.3035301621" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -2379,7 +2379,7 @@
                                         <state key="normal" title="开始雄霸天下吧！！！"/>
                                         <connections>
                                             <action selector="regsiterSuccess:" destination="h56-WK-SJ6" eventType="touchUpInside" id="g9H-2F-r1q"/>
-                                            <segue destination="ga3-WY-Bjj" kind="show" identifier="goHomeSegue" id="goB-IY-upK"/>
+                                            <segue destination="Q07-ua-pDl" kind="show" id="fXQ-oW-cHz"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -2430,7 +2430,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PTf-Ah-L6s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2024" y="-3532"/>
+            <point key="canvasLocation" x="2024" y="-3575"/>
         </scene>
         <!--Register Phone Num Controller-->
         <scene sceneID="itO-mh-d9F">
@@ -5764,9 +5764,10 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5K5-wE-mZz"/>
         <segue reference="yTT-Nf-qWA"/>
+        <segue reference="5K5-wE-mZz"/>
         <segue reference="dRU-hd-aVS"/>
+        <segue reference="fXQ-oW-cHz"/>
         <segue reference="bKA-jZ-hQY"/>
     </inferredMetricsTieBreakers>
 </document>
