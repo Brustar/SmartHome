@@ -295,29 +295,19 @@
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if(indexPath.row == 0)
     {
-        int lightID = [self.lIDs[self.segmentLight.selectedSegmentIndex] intValue];
-        NSString *lightSubName = [DeviceManager deviceTypeNameByDeviceID:lightID];
-        
-        if ([lightSubName isEqualToString:@"开关"]) {
-            self.detailCell.label.text = self.lNames[self.segmentLight.selectedSegmentIndex];
-            self.detailCell.selectionStyle = UITableViewCellSelectionStyleNone;
-            self.detailCell.power.hidden = NO;
-            self.detailCell.bright.hidden = YES;
-        } else if ([lightSubName isEqualToString:@"调光"]) {
-            self.detailCell.label.text = self.lNames[self.segmentLight.selectedSegmentIndex];
-            self.detailCell.selectionStyle = UITableViewCellSelectionStyleNone;
-            self.detailCell.power.hidden = YES;
-            self.detailCell.bright.hidden = NO;
-        } else if ([lightSubName isEqualToString:@"调色"]) {
-            self.cell.lable.text = @"自定义颜色";
-            UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeColor:)];
-            self.cell.colourView.userInteractionEnabled=YES;
-            [self.cell.colourView addGestureRecognizer:singleTap];
-            self.cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            return self.cell;
-        }
+        self.detailCell.label.text = self.lNames[self.segmentLight.selectedSegmentIndex];
+        self.detailCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return self.detailCell;
+    } else if(indexPath.row == 1){
+        self.cell.lable.text = @"自定义颜色";
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeColor:)];
+        self.cell.colourView.userInteractionEnabled=YES;
+        [self.cell.colourView addGestureRecognizer:singleTap];
+        self.cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return self.cell;
     }
     
     static NSString *CellIdentifier = @"Cell";
@@ -335,8 +325,7 @@
     
     return cell;
     
-}
-//设置cell行高
+}//设置cell行高
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 44;
