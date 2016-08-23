@@ -369,6 +369,27 @@
 }
 
 
++(int)saveMaxSceneId:(NSString *)name
+{
+    int sceneID=1;
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"select max(id) as id from scenes"];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            sceneID = [resultSet intForColumn:@"ID"];
+        }
+        
+        sql=[NSString stringWithFormat:@"insert into Scenes values(%d,'%@',null,null,null,null,null,null,null,null,null)",sceneID,name];
+        [db executeUpdate:sql];
+    }
+    [db close];
+    return sceneID;
+}
+
 + (NSArray *)getDeviceSubTypeNameWithRoomID:(int)roomID sceneID:(int)sceneID
 {
     NSMutableArray *subTypeNames = [NSMutableArray array];

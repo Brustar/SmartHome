@@ -27,8 +27,8 @@
 @property(nonatomic,strong)NSString *astronomicalTime;
 //每周运行时间
 @property(nonatomic,strong)NSString *weekValue;
-//是否每周重复（1 重复，2 不重复）
-@property(nonatomic,assign) NSInteger weekRepeat;
+//是否每周重复（1 重复，0 不重复）
+@property(nonatomic,assign) BOOL weekRepeat;
 //是否为收藏场景
 @property(nonatomic,assign) BOOL isFavorite;
 //设备ID

@@ -92,7 +92,7 @@
         NSString *sqlRoom=@"CREATE TABLE IF NOT EXISTS Rooms(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"PM25\" INTEGER, \"NOISE\" INTEGER, \"TEMPTURE\" INTEGER, \"CO2\" INTEGER, \"moisture\" INTEGER, \"imgUrl\" TEXT)";
         NSString *sqlChannel=@"CREATE TABLE IF NOT EXISTS Channels (\"id\" INTEGER PRIMARY KEY  NOT NULL  UNIQUE ,\"eqId\" INTEGER,\"cNumber\" INTEGER, \"Channel_name\" TEXT,\"Channel_pic\" TEXT, \"parent\" CHAR(2) NOT NULL  DEFAULT TV, \"isFavorite\" BOOL DEFAULT 0, \"eqNumber\" TEXT)";
         NSString *sqlDevice=@"CREATE TABLE IF NOT EXISTS Devices(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"sn\" TEXT, \"birth\" DATETIME, \"guarantee\" DATETIME, \"model\" TEXT, \"price\" FLOAT, \"purchase\" DATETIME, \"producer\" TEXT, \"gua_tel\" TEXT, \"power\" INTEGER, \"current\" FLOAT, \"voltage\" INTEGER, \"protocol\" TEXT, \"rID\" INTEGER, \"eNumber\" TEXT, \"hTypeId\" TEXT, \"subTypeId\" INTEGER, \"typeName\" TEXT, \"subTypeName\" TEXT, \"masterID\" TEXT)";
-        NSString *sqlScene=@"CREATE TABLE IF NOT EXISTS \"Scenes\" (\"ID\" INT PRIMARY KEY  NOT NULL ,\"NAME\" TEXT NOT NULL ,\"roomName\" TEXT NOT NULL ,\"pic\" CHAR(50) DEFAULT (null) ,\"isFavorite\" Key Boolean DEFAULT (0), \"eId\" INTEGER, \"startTime\" TEXT, \"astronomicalTime\" TEXT, \"weekValue\" TEXT, \"weekRepeat\" INTEGER, \"rId\" INTEGER)";
+        NSString *sqlScene=@"CREATE TABLE IF NOT EXISTS \"Scenes\" (\"ID\" INT PRIMARY KEY  NOT NULL ,\"NAME\" TEXT NOT NULL ,\"roomName\" TEXT,\"pic\" CHAR(50) DEFAULT (null) ,\"isFavorite\" Key Boolean DEFAULT (0), \"eId\" INTEGER, \"startTime\" TEXT, \"astronomicalTime\" TEXT, \"weekValue\" TEXT, \"weekRepeat\" INTEGER, \"rId\" INTEGER)";
         //NSString *sqlProtocol=@"CREATE TABLE IF NOT EXISTS [t_protocol_config]([rid] [int] IDENTITY(1,1) NOT NULL,[eid] [int] NULL,[enumber] [varchar](64) NULL,[ename] [varchar](64) NULL,[etype] [varchar](64) NULL,[actname] [varchar](256) NULL,[actcode] [varchar](256) NULL, \"actKey\" VARCHAR)";
         NSArray *sqls=@[sqlRoom,sqlChannel,sqlDevice,sqlScene];//,sqlProtocol];
         //4.创表
@@ -157,7 +157,7 @@
     NSLog(@"NOTE: device type: %@", deviceString);
 }
 
--(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID withCode:(NSString *)actcode
+-(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID
 {
     Proto proto=createProto();
     if (self.connectState == atHome) {
@@ -173,7 +173,7 @@
     return dataFromProtocol(proto);
 }
 
--(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID value:(uint8_t)value withCode:(NSString *)actcode
+-(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID value:(uint8_t)value
 {
     Proto proto=createProto();
     if (self.connectState == atHome) {
@@ -190,7 +190,7 @@
     return dataFromProtocol(proto);
 }
 
--(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID R:(uint8_t)red  G:(uint8_t)green B:(uint8_t)blue withCode:(NSString *)actcode
+-(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID R:(uint8_t)red  G:(uint8_t)green B:(uint8_t)blue
 {
     Proto proto=createProto();
     if (self.connectState == atHome) {
@@ -231,166 +231,166 @@
 //TV,DVD,NETV,BGMusic
 -(NSData *) previous:(NSString *)deviceID
 {
-    return [self action:PROTOCOL_PREVIOUS deviceID:deviceID withCode:@""];
+    return [self action:PROTOCOL_PREVIOUS deviceID:deviceID];
 }
 
 -(NSData *) forward:(NSString *)deviceID
 {
-    return [self action:PROTOCOL_FORWARD deviceID:deviceID withCode:@""];
+    return [self action:PROTOCOL_FORWARD deviceID:deviceID];
 }
 
 -(NSData *) backward:(NSString *)deviceID
 {
-    return [self action:PROTOCOL_BACKWARD deviceID:deviceID withCode:@""];
+    return [self action:PROTOCOL_BACKWARD deviceID:deviceID];
 }
 
 -(NSData *) next:(NSString *)deviceID
 {
-    return [self action:PROTOCOL_FORWARD deviceID:deviceID withCode:@""];
+    return [self action:PROTOCOL_FORWARD deviceID:deviceID];
 }
 
 -(NSData *) play:(NSString *)deviceID
 {
-    return [self action:PROTOCOL_PLAY deviceID:deviceID withCode:@""];
+    return [self action:PROTOCOL_PLAY deviceID:deviceID];
 }
 
 -(NSData *) pause:(NSString *)deviceID
 {
-    return [self action:PROTOCOL_PAUSE deviceID:deviceID withCode:@""];
+    return [self action:PROTOCOL_PAUSE deviceID:deviceID];
 }
 
 -(NSData *) stop:(NSString *)deviceID
 {
-    return [self action:PROTOCOL_STOP deviceID:deviceID withCode:@""];
+    return [self action:PROTOCOL_STOP deviceID:deviceID];
 }
 
 -(NSData *) changeVolume:(uint8_t)percent deviceID:(NSString *)deviceID
 {
-    return [self action:PROTOCOL_VOLUME deviceID:deviceID value:percent withCode:@""];
+    return [self action:PROTOCOL_VOLUME deviceID:deviceID value:percent];
 }
 
 //TV,DVD,NETV
 -(NSData *) sweepLeft:(NSString *)deviceID
 {
-    return [self action:PROTOCOL_LEFT deviceID:deviceID withCode:@""];
+    return [self action:PROTOCOL_LEFT deviceID:deviceID];
 }
 
 -(NSData *) sweepRight:(NSString *)deviceID
 {
-    return [self action:PROTOCOL_RIGHT deviceID:deviceID withCode:@""];
+    return [self action:PROTOCOL_RIGHT deviceID:deviceID];
 }
 
 -(NSData *) sweepUp:(NSString *)deviceID
 {
-    return [self action:PROTOCOL_UP deviceID:deviceID withCode:@""];
+    return [self action:PROTOCOL_UP deviceID:deviceID];
 }
 
 -(NSData *) sweepDown:(NSString *)deviceID
 {
-    return [self action:PROTOCOL_DOWN deviceID:deviceID withCode:@""];
+    return [self action:PROTOCOL_DOWN deviceID:deviceID];
 }
 
 #pragma mark - lighter
 -(NSData *) toogleLight:(uint8_t)toogle deviceID:(NSString *)deviceID
 {
-    return [self action:toogle deviceID:deviceID withCode:@"switch"];
+    return [self action:toogle deviceID:deviceID];
 }
 
 -(NSData *) changeColor:(uint8_t)color deviceID:(NSString *)deviceID R:(uint8_t)red  G:(uint8_t)green B:(uint8_t)blue
 {
-    return [self action:color deviceID:deviceID withCode:@""];
+    return [self action:color deviceID:deviceID];
 }
 
 -(NSData *) changeBright:(uint8_t)action deviceID:(NSString *)deviceID value:(uint8_t)bright
 {
-    return [self action:action deviceID:deviceID value:bright withCode:@""];
+    return [self action:action deviceID:deviceID value:bright];
 }
 
 #pragma mark - curtain
 -(NSData *) roll:(uint8_t)action deviceID:(NSString *)deviceID value:(uint8_t)percent
 {
-    return [self action:action deviceID:deviceID value:percent withCode:@""];
+    return [self action:action deviceID:deviceID value:percent];
 }
 
 -(NSData *) open:(NSString *)deviceID
 {
-    return [self action:0x01 deviceID:deviceID withCode:@""];
+    return [self action:0x01 deviceID:deviceID];
 }
 
 -(NSData *) close:(NSString *)deviceID
 {
-    return [self action:0x00 deviceID:deviceID withCode:@""];
+    return [self action:0x00 deviceID:deviceID];
 }
 
 #pragma mark - TV
 -(NSData *) switchProgram:(uint8_t)program deviceID:(NSString *)deviceID
 {
-    return [self action:0x3A deviceID:deviceID value:program withCode:@""];
+    return [self action:0x3A deviceID:deviceID value:program];
 }
 
 -(NSData *) changeTVolume:(uint8_t)percent deviceID:(NSString *)deviceID
 {
-    return [self action:0x3A deviceID:deviceID value:percent withCode:@""];
+    return [self action:0xAA deviceID:deviceID value:percent];
 }
 
 #pragma mark - DVD
 -(NSData *) home:(NSString *)deviceID
 {
-    return [self action:0x20 deviceID:deviceID withCode:@""];
+    return [self action:0x11 deviceID:deviceID];
 }
 
 -(NSData *) pop:(NSString *)deviceID
 {
-    return [self action:0x30 deviceID:deviceID withCode:@""];
+    return [self action:0x20 deviceID:deviceID];
 }
 
 #pragma mark - NETV
 -(NSData *) NETVhome:(NSString *)deviceID
 {
-    return [self action:0x11 deviceID:deviceID withCode:@""];
+    return [self action:0x11 deviceID:deviceID];
 }
 
 -(NSData *) back:(NSString *)deviceID
 {
-    return [self action:0x10 deviceID:deviceID withCode:@""];
+    return [self action:0x10 deviceID:deviceID];
 }
 
 #pragma mark - FM
 -(NSData *) switchFMProgram:(uint8_t)program deviceID:(NSString *)deviceID
 {
-    return [self action:program deviceID:deviceID withCode:@""];
+    return [self action:program deviceID:deviceID];
 }
 
 #pragma mark - Guard
 -(NSData *) toogle:(uint8_t)toogle deviceID:(NSString *)deviceID
 {
-    return [self action:toogle deviceID:deviceID withCode:@""];
+    return [self action:toogle deviceID:deviceID];
 }
 
 #pragma mark - Air
 -(NSData *) toogleAirCon:(uint8_t)toogle deviceID:(NSString *)deviceID
 {
-    return [self action:toogle deviceID:deviceID withCode:@""];
+    return [self action:toogle deviceID:deviceID];
 }
 -(NSData *) changeTemperature:(uint8_t)temperature deviceID:(NSString *)deviceID
 {
-    return [self action:temperature deviceID:deviceID withCode:@""];
+    return [self action:temperature deviceID:deviceID];
 }
 -(NSData *) changeDirect:(uint8_t)direct deviceID:(NSString *)deviceID
 {
-    return [self action:direct deviceID:deviceID withCode:@""];
+    return [self action:direct deviceID:deviceID];
 }
 -(NSData *) changeSpeed:(uint8_t)speed deviceID:(NSString *)deviceID
 {
-    return [self action:speed deviceID:deviceID withCode:@""];
+    return [self action:speed deviceID:deviceID];
 }
 -(NSData *) changeMode:(uint8_t)mode deviceID:(NSString *)deviceID
 {
-    return [self action:mode deviceID:deviceID withCode:@""];
+    return [self action:mode deviceID:deviceID];
 }
 -(NSData *) changeInterval:(uint8_t)interval deviceID:(NSString *)deviceID
 {
-    return [self action:interval deviceID:deviceID withCode:@""];
+    return [self action:interval deviceID:deviceID];
 }
 
 @end

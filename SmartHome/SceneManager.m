@@ -26,8 +26,11 @@
 
 - (void) addScenen:(Scene *)scene withName:(NSString *)name withPic:(NSString *)picurl
 {
-    
-    [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, scene.sceneID ] scene:scene];
+    if (name) {
+        int sceneid=[DeviceManager saveMaxSceneId:name];
+        scene.sceneID=sceneid;
+    }
+    [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, scene.sceneID] scene:scene];
     //同步云端
     
     //上传文件

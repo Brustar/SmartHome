@@ -50,12 +50,11 @@
         NSData *data=[[DeviceInfo defaultManager] toogle:self.switchView.isOn deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
-        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:1];
     }
     EntranceGuard *device=[[EntranceGuard alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setPoweron: self.switchView.isOn];
-    if ([self.sceneid intValue]>0) {
+    
     Scene *scene=[[Scene alloc] init];
     [scene setSceneID:[self.sceneid intValue]];
     [scene setRoomID:4];
@@ -65,8 +64,8 @@
     
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
     [scene setDevices:devices];
-    [[SceneManager defaultManager] addScenen:scene withName:@"" withPic:@""];
-    }
+    [[SceneManager defaultManager] addScenen:scene withName:nil withPic:@""];
+    
 }
 
 #pragma mark - TCP recv delegate

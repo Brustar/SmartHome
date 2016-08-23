@@ -229,8 +229,7 @@
     NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volume.value*100 deviceID:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
-    [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:1];
-    if ([self.sceneid intValue]>0) {
+    
     Radio *device=[[Radio alloc] init];
     [device setDeviceID:6];
     [device setRvolume:self.volume.value*100];
@@ -245,8 +244,8 @@
     
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
     [scene setDevices:devices];
-    [[SceneManager defaultManager] addScenen:scene withName:@"" withPic:@""];
-    }
+    [[SceneManager defaultManager] addScenen:scene withName:nil withPic:@""];
+    
 }
 
 #pragma mark - TCP recv delegate

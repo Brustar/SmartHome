@@ -111,7 +111,6 @@
         NSData *data=[[DeviceInfo defaultManager] roll:0x2A deviceID:self.deviceid value:self.cell.slider.value * 100];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
-        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:2];
     }
     
     if ([sender isEqual:self.cell.open]) {
@@ -119,7 +118,6 @@
         NSData *data=[[DeviceInfo defaultManager] open:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
-        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:2];
     }
     
     if ([sender isEqual:self.cell.close]) {
@@ -127,9 +125,8 @@
         NSData *data=[[DeviceInfo defaultManager] close:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
-        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:1 tag:2];
     }
-    if ([self.sceneid intValue]>0) {
+    
     
     Curtain *device=[[Curtain alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
@@ -160,8 +157,8 @@
     
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
     [scene setDevices:devices];
-    [[SceneManager defaultManager] addScenen:scene withName:@"" withPic:@""];
-    }
+    [[SceneManager defaultManager] addScenen:scene withName:nil withPic:@""];
+    
 }
 
 #pragma mark - TCP recv delegate

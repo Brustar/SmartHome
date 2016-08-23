@@ -62,7 +62,7 @@
     [self.detailCell.bright addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
 
-     [self.detailCell.power addTarget:self action:@selector(save:)forControlEvents:UIControlEventValueChanged];
+     [self.detailCell.power addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
      self.cell = [[[NSBundle mainBundle] loadNibNamed:@"ColourTableViewCell" owner:self options:nil] lastObject];
     
@@ -159,14 +159,12 @@
         NSData *data=[[DeviceInfo defaultManager] toogleLight:self.detailCell.power.isOn deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
-        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:1];
     }
     
     if ([sender isEqual:self.detailCell.bright]) {
         NSData *data=[[DeviceInfo defaultManager] changeBright:0x1a deviceID:self.deviceid value:self.detailCell.bright.value*100];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
-        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:2];
     }
     
     if ([sender isEqual:self.cell.colourView]) {
@@ -179,10 +177,7 @@
         NSData *data=[[DeviceInfo defaultManager] changeColor:0x1B deviceID:self.deviceid R:r G:g B:b];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:3];
-        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:3];
     }
-    if ([self.sceneid intValue]>0) {
-        
     
     Light *device=[[Light alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
@@ -207,8 +202,7 @@
     
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
     [scene setDevices:devices];
-    [[SceneManager defaultManager] addScenen:scene withName:@"" withPic:@""];
-    }
+    [[SceneManager defaultManager] addScenen:scene withName:nil withPic:@""];
 }
 
 #pragma mark - TCP recv delegate
