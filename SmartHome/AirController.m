@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *showTemLabel;
 @property (weak, nonatomic) IBOutlet UILabel *wetLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pmLabel;
+@property (weak, nonatomic) IBOutlet UILabel *noiseLabel;
 @property (weak, nonatomic) IBOutlet UITableView *paramView;
 
 @end
@@ -111,6 +112,10 @@
         if (proto.action.state==0x7F) {
             NSString *valueString = [NSString stringWithFormat:@"%d ug/m",proto.action.RValue];
             self.pmLabel.text = valueString;
+        }
+        if (proto.action.state==0x7E) {
+            NSString *valueString = [NSString stringWithFormat:@"%d db",proto.action.RValue];
+            self.noiseLabel.text = valueString;
         }
     }
 }

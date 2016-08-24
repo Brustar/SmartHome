@@ -15,6 +15,6 @@
 //开关状态
 @property (nonatomic) bool isPoweron;
 //音量
-@property (nonatomic) int volume;
+@property (nonatomic) int bgvolume;
 
 @end

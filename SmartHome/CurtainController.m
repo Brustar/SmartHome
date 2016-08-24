@@ -103,7 +103,7 @@
 -(IBAction)save:(id)sender
 {
     if ([sender isEqual:self.cell.slider]) {
-        NSData *data=[[DeviceInfo defaultManager] roll:0x2A deviceID:self.deviceid value:self.cell.slider.value * 100];
+        NSData *data=[[DeviceInfo defaultManager] roll:self.cell.slider.value * 100 deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
     }

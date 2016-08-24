@@ -52,9 +52,9 @@
 
 -(void)connectUDP:(int)port
 {
-    [self connectTcp];
+    //[self connectTcp];
     
-    //[self connectUDP:port delegate:self];
+    [self connectUDP:port delegate:self];
 }
 
 -(void)connectUDP:(int)port delegate:(id)delegate

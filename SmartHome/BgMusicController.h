@@ -9,5 +9,7 @@
 @interface BgMusicController : UIViewController
 
 @property (strong, nonatomic) DeviceInfo *beacon;
+@property (nonatomic,weak) NSString *sceneid;
+@property (nonatomic,weak) NSString *deviceid;
 
 @end

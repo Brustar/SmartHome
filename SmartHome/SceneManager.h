@@ -15,6 +15,7 @@
 #import "FMDB.h"
 #import "EntranceGuard.h"
 #import "Aircon.h"
+#import "BgMusic.h"
 
 @interface SceneManager : NSObject
 
