@@ -368,7 +368,24 @@
     return deviceID;
 }
 
-
++(int) getSceneID:(NSString *)name
+{
+    NSString *sql=[NSString stringWithFormat:@"select id from Scenes where name='%@'" ,name];
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    int sceneid=0;
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    if([db open])
+    {
+        FMResultSet *resultSet = [db executeQuery:sql];
+        
+        if([resultSet next])
+        {
+            sceneid = [resultSet intForColumn:@"id"];
+        }
+    }
+    [db close];
+    return sceneid;
+}
 +(int)saveMaxSceneId:(NSString *)name
 {
     int sceneID=1;
