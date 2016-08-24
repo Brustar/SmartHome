@@ -249,6 +249,10 @@
     }
 }
 
+- (IBAction)storeFMChannel:(id)sender {
+}
+
+
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {

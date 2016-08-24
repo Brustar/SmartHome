@@ -2444,7 +2444,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jMf-6l-yHK">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jMf-6l-yHK">
                                 <rect key="frame" x="100" y="164" width="400" height="220"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欢迎注册逸云系统" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z7G-kS-gVb">
@@ -2602,7 +2602,7 @@
                                     <constraint firstItem="hRF-3g-Hca" firstAttribute="leading" secondItem="jMf-6l-yHK" secondAttribute="leading" constant="5" id="zGi-kQ-21G"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQf-8J-1Ym">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQf-8J-1Ym">
                                 <rect key="frame" x="100" y="404" width="400" height="30"/>
                                 <color key="backgroundColor" red="0.18264051614458393" green="0.62103239528795817" blue="0.30353016214555956" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -3344,6 +3344,7 @@
                     <connections>
                         <outlet property="netTvRightViewHeight" destination="co5-Fg-2qI" id="rfe-ze-QZk"/>
                         <outlet property="netTvRightViewWidth" destination="k4a-3q-ppa" id="zYZ-Ou-sLj"/>
+                        <outlet property="touchpad" destination="BMZ-RJ-Krn" id="Ey3-Yv-nao"/>
                         <outlet property="volume" destination="icq-eo-pJb" id="iei-Tn-5rj"/>
                     </connections>
                 </viewController>
@@ -4031,7 +4032,11 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="收音机" id="ehX-Fd-xlh">
-                        <barButtonItem key="rightBarButtonItem" title="收藏当前频道" id="Gdq-4C-AFH"/>
+                        <barButtonItem key="rightBarButtonItem" title="收藏当前频道" id="Gdq-4C-AFH">
+                            <connections>
+                                <action selector="storeFMChannel:" destination="2yR-Tc-bp1" id="NHY-O6-I1R"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="channelIDEdit" destination="3hU-Ct-M9e" id="kEL-Hn-XVY"/>
@@ -4288,6 +4293,7 @@
                         <outlet property="collectionView" destination="vtL-n8-rVd" id="TZQ-hJ-83X"/>
                         <outlet property="rightViewHight" destination="jdL-oW-AFZ" id="nWR-v6-4GH"/>
                         <outlet property="rightViewWidth" destination="01u-mC-kUF" id="fHU-hz-Pnj"/>
+                        <outlet property="touchpad" destination="7IF-Y9-cO3" id="QyI-Ej-kNQ"/>
                         <outlet property="volume" destination="p7K-ra-ARX" id="lp8-4Q-4ZH"/>
                     </connections>
                 </viewController>
@@ -4843,6 +4849,7 @@
                         <outlet property="editView" destination="Izc-wa-SEs" id="2Yp-OX-OER"/>
                         <outlet property="numbersCollectionView" destination="8FO-uN-8dL" id="oG7-EX-9Ul"/>
                         <outlet property="pageController" destination="kVU-ah-M3k" id="lZS-bv-s9C"/>
+                        <outlet property="touchpad" destination="s3x-g6-uS1" id="WQl-ac-Rk7"/>
                         <outlet property="tvLogoCollectionView" destination="BMQ-UB-8M2" id="vYG-SE-Uxl"/>
                         <outlet property="unstoreLabel" destination="ACw-5V-J3S" id="yOQ-Go-9cv"/>
                         <outlet property="volume" destination="jdw-mK-XVY" id="jmR-8u-VSS"/>
@@ -5764,9 +5771,9 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yTT-Nf-qWA"/>
         <segue reference="5K5-wE-mZz"/>
-        <segue reference="dRU-hd-aVS"/>
+        <segue reference="yTT-Nf-qWA"/>
+        <segue reference="dA1-We-bRA"/>
         <segue reference="fXQ-oW-cHz"/>
         <segue reference="bKA-jZ-hQY"/>
     </inferredMetricsTieBreakers>
