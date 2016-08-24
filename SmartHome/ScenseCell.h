@@ -8,8 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@class ScenseCell;
+@protocol ScenseCellDelegate <NSObject>
+
+-(void)delteSceneAction:(ScenseCell *)sceneCell;
+
+@end
+
+
 @interface ScenseCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
 @property (weak, nonatomic) IBOutlet UILabel *scenseName;
+@property (weak, nonatomic) IBOutlet UIButton *deleteBtn;
+@property(nonatomic,weak) id<ScenseCellDelegate> delegate;
 
+-(void)useLongPressGestureRecognizer;
+-(void)unUserLongPressGestureRecognizer;
 @end

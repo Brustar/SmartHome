@@ -9,5 +9,8 @@
 #import "Scene.h"
 
 @implementation Scene
-
+//+(instancetype)sceneModleByDict:(NSDictionary *)dict
+//{
+//    
+//}
 @end

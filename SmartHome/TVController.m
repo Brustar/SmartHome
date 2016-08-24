@@ -347,7 +347,7 @@
     TVChannel *channel = self.allFavourTVChannels[indexPath.row];
     
     //发送删除频道请求
-    NSString *url = [NSString stringWithFormat:@"%@FMChannelRemove.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@TVChannelRemove.aspx",[IOManager httpAddr]];
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     NSDictionary *dic = @{@"AuthorToken":authorToken,@"RecordID":[NSNumber numberWithInteger:channel.channel_id]};
     HttpManager *http = [HttpManager defaultManager];

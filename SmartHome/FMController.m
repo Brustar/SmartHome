@@ -14,6 +14,7 @@
 #import "VolumeManager.h"
 #import "SocketManager.h"
 #import "DeviceManager.h"
+#import "HttpManager.h"
 
 
 @interface FMController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate,TXHRrettyRulerDelegate,UIGestureRecognizerDelegate,FMCollectionViewCellDelegate>
@@ -34,6 +35,9 @@
 @property (weak, nonatomic) IBOutlet UIView *editView;
 @property (weak, nonatomic) IBOutlet UILabel *hzLabel;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageController;
+@property (nonatomic,strong) NSString *eNumber;
+
+@property (nonatomic,strong) FMCollectionViewCell *cell;
 
 @end
 
@@ -72,7 +76,7 @@
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
-    
+    self.eNumber = [DeviceManager getENumber:[self.deviceid intValue]];
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     VolumeManager *volume=[VolumeManager defaultManager];
@@ -174,20 +178,32 @@
 
 
 #pragma mark - -(void)unUseLongPressGesture
+//删除FM频道
 -(void)FmDeleteAction:(FMCollectionViewCell *)cell
 {
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+    self.cell = cell;
+    
     TVChannel *channel = [self.allFavouriteChannels objectAtIndex: indexPath.row];
-    BOOL isSuccess = [TVChannel deleteChannelForChannelID:channel.channel_id];
-    if(!isSuccess)
-    {
-        [MBProgressHUD showError:@"删除失败，请稍后再试"];
+    //发送删除频道请求
+    NSString *url = [NSString stringWithFormat:@"%@FMChannelRemove.aspx",[IOManager httpAddr]];
+    NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    NSDictionary *dic = @{@"AuthorToken":authorToken,@"RecordID":[NSNumber numberWithInteger:channel.channel_id]};
+    HttpManager *http = [HttpManager defaultManager];
+    http.delegate = self;
+    http.tag = 2;
+    [http sendPost:url param:dic];
     
-        return;
-    }
-    
-    [self.allFavouriteChannels removeObject:channel];
-    [self.collectionView reloadData];
+//    BOOL isSuccess = [TVChannel deleteChannelForChannelID:channel.channel_id];
+//    if(!isSuccess)
+//    {
+//        [MBProgressHUD showError:@"删除失败，请稍后再试"];
+//    
+//        return;
+//    }
+//    
+//    [self.allFavouriteChannels removeObject:channel];
+//    [self.collectionView reloadData];
 }
 
 -(void)FmEditAction:(FMCollectionViewCell *)cell
@@ -204,16 +220,18 @@
     self.editView.hidden = YES;
 }
 - (IBAction)sureEdit:(id)sender {
-    BOOL isSuccess =[TVChannel upDateChannelForChannelID:[self.channelIDEdit.text intValue] andNewChannel_Name:self.channelNameEdit.text];
-    if(!isSuccess)
-    {
-        [MBProgressHUD showError:@"编辑失败，请稍后再试"];
-        
-        return;
-    }
-    self.allFavouriteChannels = [TVChannel getAllChannelForFavoritedForType:@"FM"];
-    [self cancelEdit:nil];
-    [self.collectionView reloadData];
+    
+    [self sendStoreChannelRequest];
+//    BOOL isSuccess =[TVChannel upDateChannelForChannelID:[self.channelIDEdit.text intValue] andNewChannel_Name:self.channelNameEdit.text];
+//    if(!isSuccess)
+//    {
+//        [MBProgressHUD showError:@"编辑失败，请稍后再试"];
+//        
+//        return;
+//    }
+//    self.allFavouriteChannels = [TVChannel getAllChannelForFavoritedForType:@"FM"];
+//    [self cancelEdit:nil];
+//    [self.collectionView reloadData];
 }
 
 
@@ -247,11 +265,89 @@
     [[SceneManager defaultManager] addScenen:scene withName:nil withPic:@""];
     
 }
-
+//收藏当前频道
 - (IBAction)storeFMChannel:(id)sender {
+    self.editView.hidden = NO;
+    self.channelIDEdit.text = self.numberOfChannel.text;
+    
+}
+-(void)sendStoreChannelRequest
+{
+    
+    NSString *url = [NSString stringWithFormat:@"%@FMChannelUpload.aspx",[IOManager httpAddr]];
+    NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    NSDictionary *dic = @{@"AuthorToken":authorToken,@"EID":self.deviceid,@"Cnumber":self.numberOfChannel.text,@"CName":self.channelNameEdit.text,@"ImgFileName":@"store",@"ImgFile":@""};
+    HttpManager *http = [HttpManager defaultManager];
+    http.delegate = self;
+    http.tag = 1;
+    [http sendPost:url param:dic];
+
+    
+    
+}
+-(void) httpHandler:(id) responseObject tag:(int)tag
+{
+    if(tag == 1)
+    {
+        if([responseObject[@"Result"] intValue] == 0)
+        {
+            //保存成功后存到数据库
+            [self writeFMChannelsConfigDataToSQL:responseObject withParent:@"FM"];
+            self.editView.hidden = YES;
+            [self.collectionView reloadData];
+        }else{
+            [MBProgressHUD showError:@"Msg"];
+        }
+
+    }else if(tag == 2)
+    {
+        if([responseObject[@"Result"] intValue] == 0)
+        {
+            NSIndexPath *indexPath = [self.collectionView indexPathForCell:self.cell];
+            TVChannel *channel = self.allFavouriteChannels[indexPath.row];
+            BOOL isSuccess = [TVChannel deleteChannelForChannelID:channel.channel_id];
+            if(!isSuccess)
+            {
+                [MBProgressHUD showError:@"删除失败，请稍后再试"];
+                return;
+            }
+            [self.allFavouriteChannels removeObject:channel];
+            [self.collectionView reloadData];
+            
+        }else{
+            [MBProgressHUD showError:@"Msg"];
+        }
+
+    }
+}
+-(void)writeTVChannelsConfigDataToSQL:(NSDictionary *)responseObject withParent:(NSString *)parent
+{
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    if([db open])
+    {
+        int cNumber = [self.numberOfChannel.text intValue];
+        NSString *sql = [NSString stringWithFormat:@"insert into Channels values(%d,%d,%d,'%@','%@','%@',%d,'%@')",[responseObject[@"cld"] intValue],[self.deviceid intValue],cNumber,self.channelNameEdit.text,responseObject[@"imgUrl"],parent,1,self.eNumber];
+        BOOL result = [db executeUpdate:sql];
+        if(result)
+        {
+            NSLog(@"insert 成功");
+        }else{
+            NSLog(@"insert 失败");
+        }
+        
+        
+        
+        
+    }
+    [db close];
 }
 
 
+-(void)writeFMChannelsConfigDataToSQL:(NSDictionary *)responseObject withParent:(NSString *)parent
+{
+    
+}
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {

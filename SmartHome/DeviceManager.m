@@ -380,7 +380,7 @@
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
-            sceneID = [resultSet intForColumn:@"ID"];
+            sceneID = [resultSet intForColumn:@"ID"]+1;
         }
         
         sql=[NSString stringWithFormat:@"insert into Scenes values(%d,'%@',null,null,null,null,null,null,null,null,null)",sceneID,name];

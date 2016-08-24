@@ -10,6 +10,7 @@
 #import "RegexKitLite.h"
 #import "Device.h"
 #import "DeviceManager.h"
+#import "HttpManager.h"
 @implementation SceneManager
 
 + (id) defaultManager
@@ -32,7 +33,13 @@
     }
     [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, scene.sceneID] scene:scene];
     //同步云端
+    NSString *url = [NSString stringWithFormat:@"%@SceneUpload.aspx",[IOManager httpAddr]];
+    NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]};
+    HttpManager *http = [HttpManager defaultManager];
+    http.delegate = self;
     
+    [http sendPost:url param:dic];
+
     //上传文件
     
 }
@@ -44,7 +51,14 @@
         [IOManager removeFile:filePath];
     }
     //同步云端
-    
+   
+    NSString *url = [NSString stringWithFormat:@"%@SceneDelete.aspx",[IOManager httpAddr]];
+    NSDictionary *dict = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"SID":[NSNumber numberWithInt:scene.sceneID]};
+    HttpManager *http=[HttpManager defaultManager];
+    http.delegate=self;
+    //http.tag = 1;
+    [http sendPost:url param:dict];
+
     //上传文件
 }
 
@@ -285,4 +299,18 @@
     return [sceneModles copy];
 }
 
+
++(BOOL)deleteScene:(int)sceneId
+{
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath] ;
+    BOOL isSuccess = false;
+    if([db open])
+    {
+        isSuccess = [db executeQueryWithFormat:@"delete from Scenes where ID = %d",sceneId];
+        [db close];
+    }
+    return isSuccess;
+
+}
 @end

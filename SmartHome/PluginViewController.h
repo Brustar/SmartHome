@@ -10,4 +10,6 @@
 
 @interface PluginViewController : UIViewController
 @property (strong, nonatomic) NSMutableArray *devices;
+@property (nonatomic,assign) int roomID;
+@property (nonatomic,weak) NSString *sceneid;
 @end
