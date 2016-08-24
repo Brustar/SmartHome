@@ -13,6 +13,7 @@
 #import "PackManager.h"
 #import "SocketManager.h"
 #import "ProtocolManager.h"
+#import "DeviceManager.h"
 
 @interface GuardController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -71,7 +72,13 @@
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
-    
+    Proto proto=protocolFromData(data);
+    NSString *devID=[DeviceManager getDeviceIDByENumber:proto.deviceID masterID:[[DeviceInfo defaultManager] masterID]];
+    if (tag==0 && [devID isEqualToString:self.deviceid]) {
+        if (proto.action.state == 0x01 || proto.action.state == 0x00) {
+            self.switchView.on=proto.action.state;
+        }
+    }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

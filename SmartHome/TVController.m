@@ -204,7 +204,9 @@
 {
     Proto proto=protocolFromData(data);
     if (tag==0) {
-        
+        if (proto.action.state == 0x02 || proto.action.state == 0x03 || proto.action.state == 0x04) {
+            self.volume.value=proto.action.RValue/100.0;
+        }
     }
 }
 

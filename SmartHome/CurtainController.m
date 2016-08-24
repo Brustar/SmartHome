@@ -102,12 +102,7 @@
 
 -(IBAction)save:(id)sender
 {
-    //ProtocolManager *manager=[ProtocolManager defaultManager];
     if ([sender isEqual:self.cell.slider]) {
-        /*NSString *key=[NSString stringWithFormat:@"location_%@",self.deviceid];
-        NSData* daty = [PackManager dataFormHexString:[manager queryDeviceStates:key]];
-        
-        uint8_t cmd=[PackManager dataToUint:daty];*/
         NSData *data=[[DeviceInfo defaultManager] roll:0x2A deviceID:self.deviceid value:self.cell.slider.value * 100];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
@@ -165,8 +160,11 @@
 -(void)recv:(NSData *)data withTag:(long)tag
 {
     Proto proto=protocolFromData(data);
-    if (tag==0) {
-        
+    NSString *devID=[DeviceManager getDeviceIDByENumber:proto.deviceID masterID:[[DeviceInfo defaultManager] masterID]];
+    if (tag==0 && [devID isEqualToString:self.deviceid] ){
+        if (proto.action.state == 0x2A) {
+            self.cell.slider.value=proto.action.RValue/100.0;
+        }
     }
 }
 
