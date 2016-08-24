@@ -117,7 +117,6 @@
     
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
-    [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:1];
     
     [SCWaveAnimationView waveAnimationAtDirection:recognizer.direction view:self.touchpad];
 }
@@ -133,8 +132,7 @@
     NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volume.value*100 deviceID:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
-    [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:1];
-    if ([self.sceneid intValue]>0) {
+    
     Netv *device=[[Netv alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setNvolume:self.volume.value*100];
@@ -148,8 +146,8 @@
     
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
     [scene setDevices:devices];
-    [[SceneManager defaultManager] addScenen:scene withName:@"" withPic:@""];
-    }
+    [[SceneManager defaultManager] addScenen:scene withName:nil withPic:@""];
+    
 }
 
 #pragma mark - TCP recv delegate
@@ -228,7 +226,6 @@
     }
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
-    [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:1];
 }
 
 -(void)dealloc

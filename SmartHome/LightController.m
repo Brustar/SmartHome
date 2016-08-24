@@ -20,6 +20,7 @@
 @property (nonatomic,strong) NSMutableArray *lIDs;
 @property (nonatomic,strong) NSMutableArray *lNames;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentLight;
+
 - (IBAction)selectTypeOfLight:(UISegmentedControl *)sender;
 
 @end
@@ -37,6 +38,7 @@
     }
     return _lIDs;
 }
+
 -(NSMutableArray *)lNames
 {
     if(!_lNames)
@@ -60,22 +62,14 @@
     [self.detailCell.bright addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
 
-     [self.detailCell.power addTarget:self action:@selector(save:)forControlEvents:UIControlEventValueChanged];
+     [self.detailCell.power addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
      self.cell = [[[NSBundle mainBundle] loadNibNamed:@"ColourTableViewCell" owner:self options:nil] lastObject];
     
     if ([self.sceneid intValue]>0) {
         _favButt.enabled=YES;
         
-        Scene *scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
-        for(id device in scene.devices)
-        {
-            if ([device isKindOfClass:[Light class]]) {
-                self.detailCell.bright.value=((Light*)device).brightness/100.0;
-                self.detailCell.power.on=((Light*)device).isPoweron;
-                self.cell.colourView.backgroundColor=[UIColor colorWithRed:[[((Light*)device).color firstObject] intValue]/255.0 green:[[((Light*)device).color objectAtIndex:1] intValue]/255.0  blue:[[((Light*)device).color lastObject] intValue]/255.0  alpha:1];
-            }
-        }
+        [self syncUI];
     }
     
     
@@ -90,6 +84,19 @@
     
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
+}
+
+-(void) syncUI
+{
+    Scene *scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+    for(id device in scene.devices)
+    {
+        if ([device isKindOfClass:[Light class]] && ((Light*)device).deviceID== [self.deviceid intValue]) {
+            self.detailCell.bright.value=((Light*)device).brightness/100.0;
+            self.detailCell.power.on=((Light*)device).isPoweron;
+            self.cell.colourView.backgroundColor=[UIColor colorWithRed:[[((Light*)device).color firstObject] intValue]/255.0 green:[[((Light*)device).color objectAtIndex:1] intValue]/255.0  blue:[[((Light*)device).color lastObject] intValue]/255.0  alpha:1];
+        }
+    }
 }
 
 -(IBAction)syncLight:(id)sender
@@ -107,6 +114,7 @@
         self.cell.colourView.backgroundColor=[UIColor colorWithRed:[dic[@"r"] intValue]/255.0 green:[dic[@"g"] intValue]/255.0  blue:[dic[@"b"] intValue]/255.0  alpha:1];
     }
 }
+
 - (void)setupSegmentLight
 {
     
@@ -147,42 +155,29 @@
 
 -(IBAction)save:(id)sender
 {
-    ProtocolManager *manager=[ProtocolManager defaultManager];
     if ([sender isEqual:self.detailCell.power]) {
         NSData *data=[[DeviceInfo defaultManager] toogleLight:self.detailCell.power.isOn deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
-        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:1];
     }
     
     if ([sender isEqual:self.detailCell.bright]) {
-        //NSString *key=[NSString stringWithFormat:@"bright_%@",self.deviceid];
-        //NSData* daty = [PackManager dataFormHexString:[manager queryDeviceStates:key]];
-        //uint8_t cmd=[PackManager dataToUint:daty];
         NSData *data=[[DeviceInfo defaultManager] changeBright:0x1a deviceID:self.deviceid value:self.detailCell.bright.value*100];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
-        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:2];
     }
     
     if ([sender isEqual:self.cell.colourView]) {
-        NSString *key=[NSString stringWithFormat:@"color_%@",self.deviceid];
-        NSData* daty = [PackManager dataFormHexString:[manager queryDeviceStates:key]];
-        
-        uint8_t cmd=[PackManager dataToUint:daty];
         UIColor *color = self.cell.colourView.backgroundColor;
         NSDictionary *colorDic = [self getRGBDictionaryByColor:color];
         int r = [colorDic[@"R"] floatValue] * 255;
         int g = [colorDic[@"G"] floatValue] * 255;
         int b = [colorDic[@"B"] floatValue] * 255;
 
-        NSData *data=[[DeviceInfo defaultManager] changeColor:cmd deviceID:self.deviceid R:r G:g B:b];
+        NSData *data=[[DeviceInfo defaultManager] changeColor:0x1B deviceID:self.deviceid R:r G:g B:b];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:3];
-        [sock.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:3];
     }
-    if ([self.sceneid intValue]>0) {
-        
     
     Light *device=[[Light alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
@@ -207,15 +202,15 @@
     
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
     [scene setDevices:devices];
-    [[SceneManager defaultManager] addScenen:scene withName:@"" withPic:@""];
-    }
+    [[SceneManager defaultManager] addScenen:scene withName:nil withPic:@""];
 }
 
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
     Proto proto=protocolFromData(data);
-    if (tag == 0 && (proto.action.state == 0x00 || proto.action.state == 0x01 || proto.action.state == 0x0b || proto.action.state == 0x0a)) {
+    NSString *devID=[DeviceManager getDeviceIDByENumber:proto.deviceID masterID:[[DeviceInfo defaultManager] masterID]];
+    if (tag == 0 && [devID isEqualToString:self.deviceid] && (proto.action.state == 0x00 || proto.action.state == 0x01 || proto.action.state == 0x0b || proto.action.state == 0x0a)) {
         //创建一个消息对象
         NSNotification * notice = [NSNotification notificationWithName:@"light" object:nil userInfo:@{@"state":@(proto.action.state),@"r":@(proto.action.RValue),@"g":@(proto.action.G),@"b":@(proto.action.B)}];
         //发送消息
@@ -341,8 +336,9 @@
 
 - (IBAction)selectTypeOfLight:(UISegmentedControl *)sender {
     
-   self.detailCell.label.text = self.lNames[sender.selectedSegmentIndex];
+    self.detailCell.label.text = self.lNames[sender.selectedSegmentIndex];
     self.deviceid = [self.lIDs objectAtIndex:self.segmentLight.selectedSegmentIndex];
+    [self syncUI];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
