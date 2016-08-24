@@ -74,7 +74,7 @@
             scrollView.rulerValue = ruleValue + DISTANCEMINIMUMVALUE;
         }
         scrollView.mode = NO;
-        [self.rulerDelegate txhRrettyRuler:scrollView];
+        //[self.rulerDelegate txhRrettyRuler:scrollView];
     }
 }
 
@@ -84,6 +84,9 @@
 
 - (void)scrollViewDidEndDragging:(TXHRulerScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     [self animationRebound:scrollView];
+    if (self.rulerDelegate) {
+        [self.rulerDelegate txhRrettyRuler:scrollView];
+    }
 }
 
 - (void)animationRebound:(TXHRulerScrollView *)scrollView {

@@ -19,6 +19,8 @@
 @interface AirController ()<RulerViewDatasource, RulerViewDelegate,UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet RulerView *thermometerView;
 @property (weak, nonatomic) IBOutlet UILabel *showTemLabel;
+@property (weak, nonatomic) IBOutlet UILabel *wetLabel;
+@property (weak, nonatomic) IBOutlet UILabel *pmLabel;
 @property (weak, nonatomic) IBOutlet UITableView *paramView;
 
 @end
@@ -56,11 +58,9 @@
     self.thermometerView.delegate = self;
     
     [self.thermometerView updateCurrentValue:24];
-    SocketManager *sock=[SocketManager defaultManager];
-    [sock initTcp:[IOManager tcpAddr] port:[IOManager tcpPort] mode:outDoor delegate:nil];
     
-    NSString *cmd=@"ECFE22B800000000000000EA";
-    [sock.socket writeData:[PackManager dataFormHexString:cmd] withTimeout:1 tag:1];
+    SocketManager *sock=[SocketManager defaultManager];
+    sock.delegate=self;
 }
 
 -(IBAction)save:(id)sender
@@ -84,6 +84,14 @@
     
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
     [scene setDevices:devices];
+    
+    [scene setStartTime:@""];
+    [scene setWeekValue:@""];
+    [scene setAstronomicalTime:@""];
+    [scene setWeekRepeat:0];
+    [scene setRoomName:@""];
+    [scene setSceneName:@""];
+    
     [[SceneManager defaultManager] addScenen:scene withName:nil withPic:@""];
     
 }
@@ -91,7 +99,20 @@
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
-    
+    Proto proto=protocolFromData(data);
+    if (tag==0) {
+        if (proto.action.state==0x7A) {
+            [self.thermometerView updateCurrentValue:proto.action.RValue];
+        }
+        if (proto.action.state==0x8A) {
+            NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
+            self.wetLabel.text = valueString;
+        }
+        if (proto.action.state==0x7F) {
+            NSString *valueString = [NSString stringWithFormat:@"%d ug/m",proto.action.RValue];
+            self.pmLabel.text = valueString;
+        }
+    }
 }
 
 -(IBAction)changeButton:(id)sender
@@ -165,42 +186,33 @@
         oldCell.accessoryType = UITableViewCellAccessoryNone;
     }
     self.currentIndex=(int)indexPath.row;
-    
+    uint8_t cmd=0x00;
     if (self.currentButton == mode) {
         self.currentMode = self.currentIndex+1;
-        self.actKey=@"mode";
+        cmd = 0x39+self.currentIndex;
     }
     if (self.currentButton == level) {
         self.currentLevel = self.currentIndex+1;
-        self.actKey=@"speed";
+        cmd = 0x35+self.currentIndex;
     }
     if (self.currentButton == direction) {
         self.currentDirection = self.currentIndex+1;
-        self.actKey=@"direction";
+        cmd = 0x43+self.currentIndex;
     }
     if (self.currentButton == timing) {
         self.currentTiming = self.currentIndex+1;
-        self.actKey=@"timing";
     }
-    NSData *data=[self createCmd];
+    NSData *data=[self createCmd:cmd];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
     
     [self save:nil];
 }
 
--(NSData *)createCmd
+-(NSData *)createCmd:(uint8_t) cmd
 {
-    NSString *key=[NSString stringWithFormat:@"%@_%@",self.actKey,self.deviceid];
-    ProtocolManager *manager=[ProtocolManager defaultManager];
-    NSArray *cmds=[[manager queryDeviceStates:key] componentsSeparatedByString:@","];
-    
-    NSData* data = [PackManager dataFormHexString:[cmds objectAtIndex:self.currentIndex]];
-    
-    uint8_t cmd=[PackManager dataToUint:data];
-    
     return [[DeviceInfo defaultManager] changeMode:cmd
-                                                  deviceID:key];
+                                                  deviceID:self.deviceid];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -228,7 +240,12 @@
     NSString *valueString = [NSString stringWithFormat:@"%d ℃", (int)value];
     
     self.showTemLabel.text = valueString;
-    //[self save:nil];
+    
+    NSData *data=[[DeviceInfo defaultManager] changeTemperature:0x6A deviceID:self.deviceid value:value];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+    
+    [self save:nil];
 }
 
 #pragma mark - Item setting

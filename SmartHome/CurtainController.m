@@ -164,7 +164,10 @@
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
-    
+    Proto proto=protocolFromData(data);
+    if (tag==0) {
+        
+    }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

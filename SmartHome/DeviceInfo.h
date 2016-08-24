@@ -118,7 +118,7 @@ enum{
 
 #pragma mark - Air
 -(NSData *) toogleAirCon:(uint8_t)toogle deviceID:(NSString *)deviceID; //开:1,关:0
--(NSData *) changeTemperature:(uint8_t)temperature deviceID:(NSString *)deviceID;
+-(NSData *) changeTemperature:(uint8_t)action deviceID:(NSString *)deviceID value:(uint8_t)temperature;
 -(NSData *) changeDirect:(uint8_t)direct deviceID:(NSString *)deviceID;
 -(NSData *) changeSpeed:(uint8_t)speed deviceID:(NSString *)deviceID;
 -(NSData *) changeMode:(uint8_t)mode deviceID:(NSString *)deviceID;

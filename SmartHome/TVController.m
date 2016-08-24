@@ -22,6 +22,8 @@
 #import "HttpManager.h"
 #import "ChannelManager.h"
 #import "MBProgressHUD+NJ.h"
+#import "PackManager.h"
+
 @interface TVController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,TVLogoCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *touchpad;
 @property (weak, nonatomic) IBOutlet UILabel *unstoreLabel;
@@ -200,7 +202,10 @@
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
-    
+    Proto proto=protocolFromData(data);
+    if (tag==0) {
+        
+    }
 }
 
 #pragma mark - Navigation

@@ -372,9 +372,9 @@
 {
     return [self action:toogle deviceID:deviceID];
 }
--(NSData *) changeTemperature:(uint8_t)temperature deviceID:(NSString *)deviceID
+-(NSData *) changeTemperature:(uint8_t)action deviceID:(NSString *)deviceID value:(uint8_t)temperature
 {
-    return [self action:temperature deviceID:deviceID];
+    return [self action:action deviceID:deviceID value:temperature];
 }
 -(NSData *) changeDirect:(uint8_t)direct deviceID:(NSString *)deviceID
 {

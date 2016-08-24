@@ -14,6 +14,7 @@
 #import "SocketManager.h"
 #import "SCWaveAnimationView.h"
 #import "DeviceManager.h"
+#import "PackManager.h"
 
 #define size 437
 @interface DVDController ()<UICollectionViewDelegate,UICollectionViewDataSource>
@@ -171,7 +172,10 @@
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
-    
+    Proto proto=protocolFromData(data);
+    if (tag==0) {
+        
+    }
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
