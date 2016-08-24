@@ -14,6 +14,7 @@
 #import "IATConfig.h"
 
 @interface VoiceOrderController ()
+@property (weak, nonatomic) IBOutlet UIView *exmapleView;
 
 @end
 
@@ -69,6 +70,7 @@
 }
 
 - (IBAction)startVoice:(id)sender {
+    self.exmapleView.hidden = YES;
     [_textView setText:@""];
     [_textView resignFirstResponder];
     //self.isCanceled = NO;

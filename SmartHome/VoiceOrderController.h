@@ -21,5 +21,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *content;
 @property (nonatomic, strong) IFlySpeechRecognizer *iFlySpeechRecognizer;//不带界面的识别对象
 @property (strong, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 
 @end

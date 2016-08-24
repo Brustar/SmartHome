@@ -83,7 +83,7 @@
                                     <outlet property="delegate" destination="9fE-YS-CKY" id="k7p-6F-yjE"/>
                                 </connections>
                             </tableView>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JnV-9I-K3a">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JnV-9I-K3a">
                                 <rect key="frame" x="10" y="220" width="580" height="300"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a2c-Cd-2bV">
@@ -1073,11 +1073,19 @@
                                             <action selector="startVoice:" destination="6M2-qc-UnH" eventType="touchUpInside" id="Go8-6g-r8Z"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQb-uU-8p0">
+                                        <rect key="frame" x="279" y="233" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="u0A-1I-atc" firstAttribute="centerX" secondItem="7oS-aH-530" secondAttribute="centerX" id="A0T-E4-xVO"/>
                                     <constraint firstAttribute="bottom" secondItem="u0A-1I-atc" secondAttribute="bottom" constant="50" id="Bnz-TP-IWP"/>
+                                    <constraint firstItem="lQb-uU-8p0" firstAttribute="centerY" secondItem="7oS-aH-530" secondAttribute="centerY" id="Nzl-DT-TkX"/>
+                                    <constraint firstItem="lQb-uU-8p0" firstAttribute="centerX" secondItem="7oS-aH-530" secondAttribute="centerX" id="qAi-m9-rfC"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1101,6 +1109,10 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="exmapleView" destination="w5a-ug-Nvl" id="W78-tx-j0e"/>
+                        <outlet property="resultLabel" destination="lQb-uU-8p0" id="QEv-dR-Mmq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8n5-ZM-1Vi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
