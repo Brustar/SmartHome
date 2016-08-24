@@ -14,7 +14,10 @@
 #import "VolumeManager.h"
 #import "SocketManager.h"
 #import "DeviceManager.h"
+
 #import "HttpManager.h"
+
+#import "PackManager.h"
 
 
 @interface FMController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate,TXHRrettyRulerDelegate,UIGestureRecognizerDelegate,FMCollectionViewCellDelegate>
@@ -104,17 +107,17 @@
     NSLog(@"\n\n\n\n\n rule = %f",rule);
     TXHRrettyRuler *ruler = [[TXHRrettyRuler alloc] initWithFrame:CGRectMake(30, 150, self.fmView.bounds.size.width - 30 * 2, 150)];
     ruler.rulerDelegate = self;
-    [ruler showRulerScrollViewWithCount:205 average:[NSNumber numberWithFloat:0.1] currentValue:rule smallMode:YES];
+    [ruler showRulerScrollViewWithCount:205 average:[NSNumber numberWithFloat:0.1] currentValue:rule smallMode:NO];
     [self.fmView addSubview:ruler];
 
 }
 
-//warning save 进来就执行
 - (void)txhRrettyRuler:(TXHRulerScrollView *)rulerScrollView {
     self.numberOfChannel.text = [NSString stringWithFormat:@" %.1f",rulerScrollView.rulerValue];
     
-   // [self save:nil];
+    [self save:nil];
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -262,6 +265,14 @@
     
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
     [scene setDevices:devices];
+    
+    [scene setStartTime:@""];
+    [scene setWeekValue:@""];
+    [scene setAstronomicalTime:@""];
+    [scene setWeekRepeat:0];
+    [scene setRoomName:@""];
+    [scene setSceneName:@""];
+    
     [[SceneManager defaultManager] addScenen:scene withName:nil withPic:@""];
     
 }
@@ -351,7 +362,12 @@
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
-    
+    Proto proto=protocolFromData(data);
+    if (tag==0) {
+        if (proto.action.state == 0x02 || proto.action.state == 0x03 || proto.action.state == 0x04) {
+            self.volume.value=proto.action.RValue/100.0;
+        }
+    }
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context

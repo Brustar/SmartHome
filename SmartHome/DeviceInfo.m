@@ -296,20 +296,20 @@
     return [self action:toogle deviceID:deviceID];
 }
 
--(NSData *) changeColor:(uint8_t)color deviceID:(NSString *)deviceID R:(uint8_t)red  G:(uint8_t)green B:(uint8_t)blue
+-(NSData *) changeColor:(NSString *)deviceID R:(uint8_t)red  G:(uint8_t)green B:(uint8_t)blue
 {
-    return [self action:color deviceID:deviceID];
+    return [self action:0x1B deviceID:deviceID R:red G:green B:blue];
 }
 
--(NSData *) changeBright:(uint8_t)action deviceID:(NSString *)deviceID value:(uint8_t)bright
+-(NSData *) changeBright:(uint8_t)bright deviceID:(NSString *)deviceID
 {
-    return [self action:action deviceID:deviceID value:bright];
+    return [self action:0x1a deviceID:deviceID value:bright];
 }
 
 #pragma mark - curtain
--(NSData *) roll:(uint8_t)action deviceID:(NSString *)deviceID value:(uint8_t)percent
+-(NSData *) roll:(uint8_t)percent deviceID:(NSString *)deviceID
 {
-    return [self action:action deviceID:deviceID value:percent];
+    return [self action:0x2A deviceID:deviceID value:percent];
 }
 
 -(NSData *) open:(NSString *)deviceID
@@ -372,9 +372,9 @@
 {
     return [self action:toogle deviceID:deviceID];
 }
--(NSData *) changeTemperature:(uint8_t)temperature deviceID:(NSString *)deviceID
+-(NSData *) changeTemperature:(uint8_t)action deviceID:(NSString *)deviceID value:(uint8_t)temperature
 {
-    return [self action:temperature deviceID:deviceID];
+    return [self action:action deviceID:deviceID value:temperature];
 }
 -(NSData *) changeDirect:(uint8_t)direct deviceID:(NSString *)deviceID
 {

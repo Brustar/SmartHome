@@ -162,7 +162,7 @@
     }
     
     if ([sender isEqual:self.detailCell.bright]) {
-        NSData *data=[[DeviceInfo defaultManager] changeBright:0x1a deviceID:self.deviceid value:self.detailCell.bright.value*100];
+        NSData *data=[[DeviceInfo defaultManager] changeBright:self.detailCell.bright.value*100 deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
     }
@@ -174,7 +174,7 @@
         int g = [colorDic[@"G"] floatValue] * 255;
         int b = [colorDic[@"B"] floatValue] * 255;
 
-        NSData *data=[[DeviceInfo defaultManager] changeColor:0x1B deviceID:self.deviceid R:r G:g B:b];
+        NSData *data=[[DeviceInfo defaultManager] changeColor:self.deviceid R:r G:g B:b];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:3];
     }

@@ -1008,10 +1008,10 @@
             </objects>
             <point key="canvasLocation" x="2024" y="-5009"/>
         </scene>
-        <!--View Controller-->
+        <!--Voice Order Controller-->
         <scene sceneID="1EU-Xo-LXK">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="6M2-qc-UnH" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="6M2-qc-UnH" customClass="VoiceOrderController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wyO-jI-p7c"/>
                         <viewControllerLayoutGuide type="bottom" id="6fe-pe-xuL"/>
@@ -1063,12 +1063,15 @@
                                     <constraint firstItem="A43-AW-JWF" firstAttribute="top" secondItem="w5a-ug-Nvl" secondAttribute="top" id="wfM-ip-V4J"/>
                                 </constraints>
                             </view>
-                            <view alpha="0.59999999999999998" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7oS-aH-530">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                            <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7oS-aH-530">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u0A-1I-atc">
-                                        <rect key="frame" x="287" y="504" width="26" height="26"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u0A-1I-atc">
+                                        <rect key="frame" x="287" y="411" width="26" height="26"/>
                                         <state key="normal" backgroundImage="voice"/>
+                                        <connections>
+                                            <action selector="startVoice:" destination="6M2-qc-UnH" eventType="touchUpInside" id="Go8-6g-r8Z"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -3041,6 +3044,12 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="噪音" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fP8-7C-lvM">
+                                        <rect key="frame" x="148" y="52" width="26" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -3218,9 +3227,12 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="noiseLabel" destination="fP8-7C-lvM" id="dDF-W6-xgF"/>
                         <outlet property="paramView" destination="fB6-RG-7NF" id="dUK-St-A1r"/>
+                        <outlet property="pmLabel" destination="CCZ-WO-cpq" id="jaH-8x-9g1"/>
                         <outlet property="showTemLabel" destination="are-Ou-OXr" id="ryd-SC-APU"/>
                         <outlet property="thermometerView" destination="owQ-SK-BR5" id="ycw-N1-kEH"/>
+                        <outlet property="wetLabel" destination="zuE-4E-epK" id="ahH-q9-seS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xch-RQ-hGl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4622,7 +4634,7 @@
                                                                 <constraint firstAttribute="height" constant="30" id="hv8-HM-4DH"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -6004,10 +6016,10 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5K5-wE-mZz"/>
         <segue reference="yTT-Nf-qWA"/>
-        <segue reference="fHn-Cm-7Q7"/>
-        <segue reference="YE7-iU-rxh"/>
+        <segue reference="dd4-O7-1s4"/>
+        <segue reference="bKA-jZ-hQY"/>
+        <segue reference="vhu-OT-LO5"/>
         <segue reference="fXQ-oW-cHz"/>
     </inferredMetricsTieBreakers>
 </document>

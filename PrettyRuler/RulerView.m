@@ -132,7 +132,7 @@
         [_itemScrollView setContentOffset:CGPointMake(0, scrollY) animated:YES];
         
         if ([_delegate respondsToSelector:@selector(rulerView:didChangedCurrentValue:)]) {
-            [_delegate rulerView:self didChangedCurrentValue:_maxValue+_minValue-_currentValue];
+            //[_delegate rulerView:self didChangedCurrentValue:_maxValue+_minValue-_currentValue];
         }
     }
 }
@@ -142,13 +142,13 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 //    NSLog(@"did scroll");
     
-    [self valueAtScrollPoint:scrollView.contentOffset];
+    //[self valueAtScrollPoint:scrollView.contentOffset];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
 //    NSLog(@"did end decelerating");
     
-    [self valueAtScrollPoint:scrollView.contentOffset];
+    //[self valueAtScrollPoint:scrollView.contentOffset];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {

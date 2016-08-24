@@ -93,6 +93,7 @@
 		0FC0FFDA1CF577C0000F71D5 /* RealScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC0FFD91CF577C0000F71D5 /* RealScene.m */; };
 		0FC0FFDD1CF57E58000F71D5 /* TouchImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC0FFDC1CF57E58000F71D5 /* TouchImage.m */; };
 		0FC3DE851D236CFF00A03482 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC3DE841D236CFF00A03482 /* LoginController.m */; };
+		0FC41BAF1D6DA3DD000D4451 /* VoiceOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC41BAE1D6DA3DD000D4451 /* VoiceOrderController.m */; };
 		0FC7FDC11CED6CC700F91BDF /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC7FDC01CED6CC700F91BDF /* libsqlite3.tbd */; };
 		0FCAA40C1D1945BB00C1E58C /* BgMusicController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCAA40B1D1945BB00C1E58C /* BgMusicController.m */; };
 		0FCF43311CE09039009BFDD9 /* IbeaconManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCF43301CE09039009BFDD9 /* IbeaconManager.m */; };
@@ -444,6 +445,8 @@
 		0FC0FFDC1CF57E58000F71D5 /* TouchImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchImage.m; sourceTree = "<group>"; };
 		0FC3DE831D236CFF00A03482 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
 		0FC3DE841D236CFF00A03482 /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
+		0FC41BAD1D6DA3DD000D4451 /* VoiceOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceOrderController.h; sourceTree = "<group>"; };
+		0FC41BAE1D6DA3DD000D4451 /* VoiceOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceOrderController.m; sourceTree = "<group>"; };
 		0FC7FDC01CED6CC700F91BDF /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		0FCAA40A1D1945BB00C1E58C /* BgMusicController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BgMusicController.h; sourceTree = "<group>"; };
 		0FCAA40B1D1945BB00C1E58C /* BgMusicController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BgMusicController.m; sourceTree = "<group>"; };
@@ -856,6 +859,8 @@
 				0FA1E09D1D533BFA001CA819 /* PluginCell.m */,
 				F65FF4A81D61AC3D00C12271 /* SearchViewController.h */,
 				F65FF4A91D61AC3D00C12271 /* SearchViewController.m */,
+				0FC41BAD1D6DA3DD000D4451 /* VoiceOrderController.h */,
+				0FC41BAE1D6DA3DD000D4451 /* VoiceOrderController.m */,
 			);
 			path = SmartHome;
 			sourceTree = "<group>";
@@ -1614,6 +1619,7 @@
 				0FAF74C31CEEA17C00432713 /* HRColorMapView.m in Sources */,
 				0FADA44A1CEBF8AE00777901 /* SceneManager.m in Sources */,
 				0F01D5441CDC6CA600DAC267 /* Scene.m in Sources */,
+				0FC41BAF1D6DA3DD000D4451 /* VoiceOrderController.m in Sources */,
 				0FCFB3831CF28FCB00B37DD3 /* Curtain.m in Sources */,
 				0FC0FFDD1CF57E58000F71D5 /* TouchImage.m in Sources */,
 				0FCFB3951CF2943100B37DD3 /* Camera.m in Sources */,

@@ -10,7 +10,12 @@
 #import "RegexKitLite.h"
 #import "Device.h"
 #import "DeviceManager.h"
+
 #import "HttpManager.h"
+
+#import "SocketManager.h"
+
+
 @implementation SceneManager
 
 + (id) defaultManager
@@ -147,6 +152,12 @@
                 device.nvolume=[[dic objectForKey:@"nvolume"] intValue];
                 [devices addObject:device];
             }
+            if ([dic objectForKey:@"bgvolume"]) {
+                BgMusic *device=[[BgMusic alloc] init];
+                device.deviceID=[[dic objectForKey:@"deviceID"] intValue];
+                device.bgvolume=[[dic objectForKey:@"bgvolume"] intValue];
+                [devices addObject:device];
+            }
             if ([dic objectForKey:@"poweron"]) {
                 EntranceGuard *device=[[EntranceGuard alloc] init];
                 device.poweron=[[dic objectForKey:@"poweron"] intValue];
@@ -166,6 +177,134 @@
         return scene;
     }else{
         return nil;
+    }
+}
+
+-(void) startScene:(int)sceneid
+{
+    NSData *data=nil;
+    SocketManager *sock=[SocketManager defaultManager];
+    
+    Scene *scene=[self readSceneByID:sceneid];
+    for (id device in scene.devices) {
+        if ([device isKindOfClass:[TV class]]) {
+            TV *tv=(TV *)device;
+            NSString *deviceid=[NSString stringWithFormat:@"%d", tv.deviceID];
+            data=[[DeviceInfo defaultManager] open:deviceid];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+            if (tv.volume>0) {
+                data=[[DeviceInfo defaultManager] changeTVolume:tv.volume*100 deviceID:deviceid];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+            }
+            if (tv.channelID>0) {
+                data=[[DeviceInfo defaultManager] switchProgram:tv.channelID deviceID:deviceid];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+            }
+        }
+        
+        if ([device isKindOfClass:[DVD class]]) {
+            DVD *dvd=(DVD *)device;
+            NSString *deviceid=[NSString stringWithFormat:@"%d", dvd.deviceID];
+            data=[[DeviceInfo defaultManager] open:deviceid];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+            if (dvd.dvolume>0) {
+                data=[[DeviceInfo defaultManager] changeTVolume:dvd.dvolume*100 deviceID:deviceid];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+            }
+        }
+        
+        if ([device isKindOfClass:[Netv class]]) {
+            Netv *netv=(Netv *)device;
+            NSString *deviceid=[NSString stringWithFormat:@"%d", netv.deviceID];
+            data=[[DeviceInfo defaultManager] open:deviceid];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+            if (netv.nvolume>0) {
+                data=[[DeviceInfo defaultManager] changeTVolume:netv.nvolume*100 deviceID:deviceid];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+            }
+        }
+        
+        if ([device isKindOfClass:[Radio class]]) {
+            Radio *fm=(Radio *)device;
+            NSString *deviceid=[NSString stringWithFormat:@"%d", fm.deviceID];
+            data=[[DeviceInfo defaultManager] open:deviceid];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+            if (fm.rvolume>0) {
+                data=[[DeviceInfo defaultManager] changeTVolume:fm.rvolume*100 deviceID:deviceid];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+            }
+            if (fm.channel>0) {
+                data=[[DeviceInfo defaultManager] switchProgram:fm.channel deviceID:deviceid];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+            }
+        }
+        
+        if ([device isKindOfClass:[BgMusic class]]) {
+            BgMusic *music=(BgMusic *)device;
+            NSString *deviceid=[NSString stringWithFormat:@"%d", music.deviceID];
+            data=[[DeviceInfo defaultManager] open:deviceid];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+            if (music.bgvolume>0) {
+                data=[[DeviceInfo defaultManager] changeTVolume:music.bgvolume*100 deviceID:deviceid];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+            }
+        }
+        
+        if ([device isKindOfClass:[Light class]]) {
+            Light *light=(Light *)device;
+            NSString *deviceid=[NSString stringWithFormat:@"%d", light.deviceID];
+            data=[[DeviceInfo defaultManager] toogleLight:light.isPoweron deviceID:deviceid];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+            if (light.brightness>0) {
+                data=[[DeviceInfo defaultManager] changeBright:light.brightness*100 deviceID:deviceid];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+            }
+            if ([light.color count]>0) {
+                int r = [[light.color firstObject] floatValue] * 255;
+                int g = [[light.color objectAtIndex:1] floatValue] * 255;
+                int b = [[light.color lastObject] floatValue] * 255;
+                
+                NSData *data=[[DeviceInfo defaultManager] changeColor:deviceid R:r G:g B:b];
+                [sock.socket writeData:data withTimeout:1 tag:3];
+            }
+        }
+        
+        if ([device isKindOfClass:[Curtain class]]) {
+            Curtain *curtain=(Curtain *)device;
+            NSString *deviceid=[NSString stringWithFormat:@"%d", curtain.deviceID];
+            if (curtain.openvalue>0) {
+                data=[[DeviceInfo defaultManager] roll:curtain.openvalue*100 deviceID:deviceid];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+            }
+        }
+        
+        if ([device isKindOfClass:[EntranceGuard class]]) {
+            EntranceGuard *guard=(EntranceGuard *)device;
+            NSString *deviceid=[NSString stringWithFormat:@"%d", guard.deviceID];
+            if (guard.poweron) {
+                data=[[DeviceInfo defaultManager] toogle:guard.poweron deviceID:deviceid];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+            }
+        }
+        
+        if ([device isKindOfClass:[Aircon class]]) {
+            Aircon *aircon=(Aircon *)device;
+            NSString *deviceid=[NSString stringWithFormat:@"%d", aircon.deviceID];
+            data=[[DeviceInfo defaultManager] toogleAirCon:aircon.isPoweron deviceID:deviceid];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+            if (aircon.mode>=0) {
+                data=[[DeviceInfo defaultManager] changeMode:0x39+aircon.mode deviceID:deviceid];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+            }
+            if (aircon.WindLevel>=0) {
+                data=[[DeviceInfo defaultManager] changeMode:0x43+aircon.mode deviceID:deviceid];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+            }
+            if (aircon.Windirection>=0) {
+                data=[[DeviceInfo defaultManager] changeMode:0x35+aircon.mode deviceID:deviceid];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+            }
+        }
     }
 }
 

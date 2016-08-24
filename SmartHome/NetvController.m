@@ -14,6 +14,7 @@
 #import "SocketManager.h"
 #import "SCWaveAnimationView.h"
 #import "DeviceManager.h"
+#import "PackManager.h"
 
 @interface NetvController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
@@ -153,7 +154,12 @@
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
-    
+    Proto proto=protocolFromData(data);
+    if (tag==0) {
+        if (proto.action.state == 0x02 || proto.action.state == 0x03 || proto.action.state == 0x04) {
+            self.volume.value=proto.action.RValue/100.0;
+        }
+    }
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context

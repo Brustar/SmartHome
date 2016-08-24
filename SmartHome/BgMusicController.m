@@ -9,6 +9,10 @@
 #import "BgMusicController.h"
 #import "VolumeManager.h"
 #import "SocketManager.h"
+#import "SceneManager.h"
+#import "BgMusic.h"
+#import "PackManager.h"
+#import "DeviceInfo.h"
 
 @interface BgMusicController ()
 @property (weak, nonatomic) IBOutlet UISlider *volume;
@@ -25,6 +29,20 @@
     [self.beacon addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     VolumeManager *volume=[VolumeManager defaultManager];
     [volume start:self.beacon];
+    
+    if ([self.sceneid intValue]>0) {
+        
+        Scene *scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+        for(int i=0;i<[scene.devices count];i++)
+        {
+            if ([[scene.devices objectAtIndex:i] isKindOfClass:[BgMusic class]]) {
+                self.volume.value=((BgMusic*)[scene.devices objectAtIndex:i]).bgvolume/100.0;
+            }
+        }
+    }
+    
+    SocketManager *sock=[SocketManager defaultManager];
+    sock.delegate=self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,13 +55,73 @@
     if([keyPath isEqualToString:@"volume"])
     {
         self.volume.value=[[self.beacon valueForKey:@"volume"] floatValue];
-        //[self save:nil];
+        [self save:nil];
     }
 }
 
-- (IBAction)pause:(id)sender {
+-(IBAction)save:(id)sender
+{
+    NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volume.value*100 deviceID:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
     
+    BgMusic *device=[[BgMusic alloc] init];
+    [device setDeviceID:[self.deviceid intValue]];
+    [device setBgvolume:self.volume.value*100];
     
+    Scene *scene=[[Scene alloc] init];
+    [scene setSceneID:[self.sceneid intValue]];
+    [scene setRoomID:4];
+    [scene setHouseID:3];
+    [scene setPicID:66];
+    [scene setReadonly:NO];
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
+    [scene setDevices:devices];
+    
+    [scene setStartTime:@""];
+    [scene setWeekValue:@""];
+    [scene setAstronomicalTime:@""];
+    [scene setWeekRepeat:0];
+    [scene setRoomName:@""];
+    [scene setSceneName:@""];
+    
+    [[SceneManager defaultManager] addScenen:scene withName:nil withPic:@""];
+}
+
+#pragma mark - TCP recv delegate
+-(void)recv:(NSData *)data withTag:(long)tag
+{
+    Proto proto=protocolFromData(data);
+    if (tag==0) {
+        if (proto.action.state == 0x02 || proto.action.state == 0x03 || proto.action.state == 0x04) {
+            self.volume.value=proto.action.RValue/100.0;
+        }
+    }
+}
+
+- (IBAction)nextMusic:(id)sender {
+    NSData *data=[[DeviceInfo defaultManager] next:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
+- (IBAction)previousMusic:(id)sender {
+    NSData *data=[[DeviceInfo defaultManager] previous:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
+- (IBAction)pauseMusic:(id)sender {
+    NSData *data=[[DeviceInfo defaultManager] pause:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
+- (IBAction)playMusic:(id)sender {
+    NSData *data=[[DeviceInfo defaultManager] play:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
 -(void)dealloc

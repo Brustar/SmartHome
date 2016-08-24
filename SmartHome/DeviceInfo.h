@@ -89,11 +89,11 @@ enum{
 
 #pragma mark - lighter
 -(NSData *) toogleLight:(uint8_t)toogle deviceID:(NSString *)deviceID;
--(NSData *) changeColor:(uint8_t)color deviceID:(NSString *)deviceID R:(uint8_t)red  G:(uint8_t)green B:(uint8_t)blue;
--(NSData *) changeBright:(uint8_t)action deviceID:(NSString *)deviceID value:(uint8_t)bright;
+-(NSData *) changeColor:(NSString *)deviceID R:(uint8_t)red  G:(uint8_t)green B:(uint8_t)blue;
+-(NSData *) changeBright:(uint8_t)bright deviceID:(NSString *)deviceID;
 
 #pragma mark - curtain
--(NSData *) roll:(uint8_t)action deviceID:(NSString *)deviceID value:(uint8_t)percent; //开:percent=100,关percent=0
+-(NSData *) roll:(uint8_t)percent deviceID:(NSString *)deviceID; //开:percent=100,关percent=0
 -(NSData *) open:(NSString *)deviceID;
 -(NSData *) close:(NSString *)deviceID;
 
@@ -118,7 +118,7 @@ enum{
 
 #pragma mark - Air
 -(NSData *) toogleAirCon:(uint8_t)toogle deviceID:(NSString *)deviceID; //开:1,关:0
--(NSData *) changeTemperature:(uint8_t)temperature deviceID:(NSString *)deviceID;
+-(NSData *) changeTemperature:(uint8_t)action deviceID:(NSString *)deviceID value:(uint8_t)temperature;
 -(NSData *) changeDirect:(uint8_t)direct deviceID:(NSString *)deviceID;
 -(NSData *) changeSpeed:(uint8_t)speed deviceID:(NSString *)deviceID;
 -(NSData *) changeMode:(uint8_t)mode deviceID:(NSString *)deviceID;
