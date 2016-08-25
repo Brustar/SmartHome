@@ -312,7 +312,7 @@
         TVLogoCell *cell =(TVLogoCell*)[collectionView cellForItemAtIndexPath:indexPath];
         [cell hiddenEditBtnAndDeleteBtn];
         
-        int channelValue=[[self.allFavourTVChannels objectAtIndex:indexPath.row] channelValue];
+        int channelValue=(int)[[self.allFavourTVChannels objectAtIndex:indexPath.row] channel_number];
         NSData *data=[[DeviceInfo defaultManager] switchProgram:channelValue deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
@@ -326,15 +326,14 @@
     if ([self.timer isValid]) {
         self.retChannel = self.retChannel*10+[button.titleLabel.text intValue];
         NSLog(@"%d",self.retChannel);
+        NSData *data=[[DeviceInfo defaultManager] switchProgram:self.retChannel deviceID:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
     }else{
         button.backgroundColor = [UIColor grayColor];
         self.timer=[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(changecolor) userInfo:sender repeats:NO];
         self.retChannel=[button.titleLabel.text intValue];
     }
-    
-    NSData *data=[[DeviceInfo defaultManager] switchProgram:self.retChannel deviceID:self.deviceid];
-    SocketManager *sock=[SocketManager defaultManager];
-    [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
 -(void)changecolor
@@ -344,6 +343,9 @@
     if (self.retChannel<10) {
         self.retChannel=[button.titleLabel.text intValue];
         NSLog(@"%d",self.retChannel);
+        NSData *data=[[DeviceInfo defaultManager] switchProgram:self.retChannel deviceID:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
     }
     [self.timer invalidate];
 }
