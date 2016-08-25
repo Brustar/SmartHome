@@ -57,5 +57,6 @@
 +(NSString *)getENumber:(NSInteger)eID;
 +(NSString *)getDeviceIDByENumber:(NSInteger)eID masterID:(NSInteger)mID;
 +(int)saveMaxSceneId:(NSString *)name;
++(int) getSceneID:(NSString *)name;
 
 @end

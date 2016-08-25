@@ -41,6 +41,6 @@
 //根据房间ID的到所有的场景
 + (NSArray *)getAllSceneWithRoomID:(int)roomID;
 
-
+-(void) startScene:(int)sceneid;
 
 @end

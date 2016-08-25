@@ -12,6 +12,10 @@
 #import "iflyMSC/IFlySpeechSynthesizer.h"
 #import "iflyMSC/IFlySpeechRecognizer.h"
 #import "IATConfig.h"
+#import "FMDatabase.h"
+#import "SceneManager.h"
+#import "DeviceManager.h"
+#import "RegexKitLite.h"
 
 @interface VoiceOrderController ()
 @property (weak, nonatomic) IBOutlet UIView *exmapleView;
@@ -23,6 +27,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    //通过appid连接讯飞语音服务器，把@"53b5560a"换成你申请的appid
+    NSString *initString = [[NSString alloc] initWithFormat:@"appid=%@,timeout=%@",@"5743ac2d",@"20000"];
+    //所有服务启动前，需要确保执行createUtility
+    [IFlySpeechUtility createUtility:initString];
+    
+    //创建合成对象，为单例模式
+    _iFlySpeechSynthesizer = [IFlySpeechSynthesizer sharedInstance];
+    _iFlySpeechSynthesizer.delegate = self;
+    
+    //设置语音合成的参数
+    //合成的语速,取值范围 0~100
+    [_iFlySpeechSynthesizer setParameter:@"50" forKey:[IFlySpeechConstant SPEED]];
+    //合成的音量;取值范围 0~100
+    [_iFlySpeechSynthesizer setParameter:@"50" forKey:[IFlySpeechConstant VOLUME]];
+    //发音人,默认为”xiaoyan”;可以设置的参数列表可参考个性化发音人列表
+    [_iFlySpeechSynthesizer setParameter:@"xiaoyan" forKey:[IFlySpeechConstant VOICE_NAME]];
+    //音频采样率,目前支持的采样率有 16000 和 8000
+    [_iFlySpeechSynthesizer setParameter:@"8000" forKey:[IFlySpeechConstant SAMPLE_RATE]];
+    ////asr_audio_path保存录音文件路径，如不再需要，设置value为nil表示取消，默认目录是documents
+    [_iFlySpeechSynthesizer setParameter:@"tts.pcm" forKey:[IFlySpeechConstant TTS_AUDIO_PATH]];
 }
 
 -(void)initRecognizer
@@ -71,8 +95,8 @@
 
 - (IBAction)startVoice:(id)sender {
     self.exmapleView.hidden = YES;
-    [_textView setText:@""];
-    [_textView resignFirstResponder];
+    [self.resultLabel setText:@""];
+    [self.resultLabel resignFirstResponder];
     //self.isCanceled = NO;
     
     if(_iFlySpeechRecognizer == nil)
@@ -120,16 +144,53 @@
     for (NSString *key in dic) {
         [resultString appendFormat:@"%@",key];
     }
-    NSString *result =[NSString stringWithFormat:@"%@%@", _textView.text,resultString];
-    NSString * resultFromJson =  [NSJSONSerialization JSONObjectWithData:[resultString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
-    _textView.text = [NSString stringWithFormat:@"%@%@", _textView.text,resultFromJson];
+    NSString *result =[NSString stringWithFormat:@"%@%@", self.resultLabel.text,resultString];
+    NSLog(@"_result=%@",result);
+    NSString * resultFromJson =  [self stringFromJson:resultString];
+    result= [NSString stringWithFormat:@"%@%@", self.resultLabel.text,resultFromJson];
+    self.resultLabel.text = [result stringByMatching:@"^([\\u4e00-\\u9fa5]*).*" capture:1L];
     
     if (isLast){
         NSLog(@"听写结果(json)：%@测试", result);
     }
-    NSLog(@"_result=%@",result);
+    
     NSLog(@"resultFromJson=%@",resultFromJson);
-    NSLog(@"isLast=%d,_textView.text=%@",isLast,_textView.text);
+    NSLog(@"isLast=%d,_textView.text=%@",isLast,self.resultLabel.text);
+    
+    int sceneid=[DeviceManager getSceneID:self.resultLabel.text];
+    if (sceneid>0) {
+        [[SceneManager defaultManager] startScene:sceneid];
+    }else{
+        //self.resultLabel.text=@"不能识别此指令";
+    }
+}
+
+
+- (NSString *)stringFromJson:(NSString*)params
+{
+    if (params == NULL) {
+        return nil;
+    }
+    
+    NSMutableString *tempStr = [[NSMutableString alloc] init];
+    NSDictionary *resultDic  = [NSJSONSerialization JSONObjectWithData:    //返回的格式必须为utf8的,否则发生未知错误
+                                [params dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:nil];
+    
+    if (resultDic!= nil) {
+        NSArray *wordArray = [resultDic objectForKey:@"ws"];
+        
+        for (int i = 0; i < [wordArray count]; i++) {
+            NSDictionary *wsDic = [wordArray objectAtIndex: i];
+            NSArray *cwArray = [wsDic objectForKey:@"cw"];
+            
+            for (int j = 0; j < [cwArray count]; j++) {
+                NSDictionary *wDic = [cwArray objectAtIndex:j];
+                NSString *str = [wDic objectForKey:@"w"];
+                [tempStr appendString: str];
+            }
+        }
+    }
+    return tempStr;
 }
 
 #pragma mark - IFlySpeechSynthesizerDelegate
