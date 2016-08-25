@@ -386,6 +386,27 @@
     [db close];
     return sceneid;
 }
+
++(int) getRoomID:(int)sceneID
+{
+    NSString *sql=[NSString stringWithFormat:@"select rId from Scenes where ID=%d" ,sceneID];
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    int roomId=0;
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    if([db open])
+    {
+        FMResultSet *resultSet = [db executeQuery:sql];
+        
+        if([resultSet next])
+        {
+            roomId = [resultSet intForColumn:@"rId"];
+        }
+    }
+    [db close];
+    return roomId;
+
+}
+
 +(int)saveMaxSceneId:(NSString *)name
 {
     int sceneID=1;

@@ -1277,7 +1277,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0F032D771CC9B12700D1920D /* Build configuration list for PBXNativeTarget "SmartHome" */;
 			buildPhases = (
-				9E5B0BAA933708A69B87E6AE /* 📦 Check Pods Manifest.lock */,
+				9E5B0BAA933708A69B87E6AE /* [CP] Check Pods Manifest.lock */,
 				22E4FF7C74861624FBD7E7CB /* [CP] Check Pods Manifest.lock */,
 				7B4EC63A298C6E6A66AD1643 /* [CP] Check Pods Manifest.lock */,
 				6984B7368FBF635163F6D0CF /* [CP] Check Pods Manifest.lock */,
@@ -1525,14 +1525,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9E5B0BAA933708A69B87E6AE /* 📦 Check Pods Manifest.lock */ = {
+		9E5B0BAA933708A69B87E6AE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;

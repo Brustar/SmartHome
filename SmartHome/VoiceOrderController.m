@@ -16,10 +16,19 @@
 #import "SceneManager.h"
 #import "DeviceManager.h"
 #import "RegexKitLite.h"
+#import "SCSiriWaveformView.h"
+#import <AVFoundation/AVFoundation.h>
+
 
 @interface VoiceOrderController ()
 @property (weak, nonatomic) IBOutlet UIView *exmapleView;
+@property (weak, nonatomic) IBOutlet UILabel *sampleLabel;
 
+@property (nonatomic,assign) int sceneID;
+
+@property (weak, nonatomic) IBOutlet SCSiriWaveformView *waveformView;
+
+@property (nonatomic, strong) AVAudioRecorder *recorder;
 @end
 
 @implementation VoiceOrderController
@@ -47,8 +56,42 @@
     [_iFlySpeechSynthesizer setParameter:@"8000" forKey:[IFlySpeechConstant SAMPLE_RATE]];
     ////asr_audio_path保存录音文件路径，如不再需要，设置value为nil表示取消，默认目录是documents
     [_iFlySpeechSynthesizer setParameter:@"tts.pcm" forKey:[IFlySpeechConstant TTS_AUDIO_PATH]];
+    
+    
+    
+    [self setUpWaveLine];
 }
+-(void)setUpWaveLine
+{
+    NSDictionary *settings = @{AVSampleRateKey:          [NSNumber numberWithFloat: 44100.0],
+                               AVFormatIDKey:            [NSNumber numberWithInt: kAudioFormatAppleLossless],
+                               AVNumberOfChannelsKey:    [NSNumber numberWithInt: 2],
+                               AVEncoderAudioQualityKey: [NSNumber numberWithInt: AVAudioQualityMin]};
+    
+    NSError *error;
+    NSURL *url = [NSURL fileURLWithPath:@"/dev/null"];
+    self.recorder = [[AVAudioRecorder alloc] initWithURL:url settings:settings error:&error];
+    
+    if(error) {
+        NSLog(@"Ups, could not create recorder %@", error);
+        return;
+    }
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:&error];
+    
+    if (error) {
+        NSLog(@"Error setting category: %@", [error description]);
+        return;
+    }
+    
+    CADisplayLink *displaylink = [CADisplayLink displayLinkWithTarget:self selector:@selector(updateMeters)];
+    [displaylink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+    
+    [self.waveformView setWaveColor:[UIColor whiteColor]];
+    [self.waveformView setPrimaryWaveLineWidth:3.0f];
+    [self.waveformView setSecondaryWaveLineWidth:1.0];
+    
 
+}
 -(void)initRecognizer
 {
     NSLog(@"%s",__func__);
@@ -94,6 +137,12 @@
 }
 
 - (IBAction)startVoice:(id)sender {
+    
+    [self.recorder prepareToRecord];
+    [self.recorder setMeteringEnabled:YES];
+    [self.recorder record];
+
+    self.sampleLabel.text = @"";
     self.exmapleView.hidden = YES;
     [self.resultLabel setText:@""];
     [self.resultLabel resignFirstResponder];
@@ -130,6 +179,27 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (void)updateMeters
+{
+    CGFloat normalizedValue;
+    [self.recorder updateMeters];
+    normalizedValue = [self _normalizedPowerLevelFromDecibels:[self.recorder averagePowerForChannel:0]];
+    
+    [self.waveformView updateWithLevel:normalizedValue];
+}
+
+#pragma mark - Private
+
+- (CGFloat)_normalizedPowerLevelFromDecibels:(CGFloat)decibels
+{
+    if (decibels < -60.0f || decibels == 0.0f) {
+        return 0.0f;
+    }
+    
+    return powf((powf(10.0f, 0.05f * decibels) - powf(10.0f, 0.05f * -60.0f)) * (1.0f / (1.0f - powf(10.0f, 0.05f * -60.0f))), 1.0f / 2.0f);
+}
+
+
 
 #pragma mark - IFlySpeechRecognizerDelegate
 - (void) onError:(IFlySpeechError *) error
@@ -138,7 +208,8 @@
 
 - (void) onResults:(NSArray *) results isLast:(BOOL)isLast
 {
-    
+    self.resultLabel.hidden = NO;
+    [self.recorder stop];
     NSMutableString *resultString = [[NSMutableString alloc] init];
     NSDictionary *dic = results[0];
     for (NSString *key in dic) {
@@ -157,11 +228,15 @@
     NSLog(@"resultFromJson=%@",resultFromJson);
     NSLog(@"isLast=%d,_textView.text=%@",isLast,self.resultLabel.text);
     
-    int sceneid=[DeviceManager getSceneID:self.resultLabel.text];
-    if (sceneid>0) {
-        [[SceneManager defaultManager] startScene:sceneid];
+    self.sceneID =[DeviceManager getSceneID:self.resultLabel.text];
+    if (self.sceneID>0) {
+        self.sampleLabel.text = @"找到匹配项";
+        [[SceneManager defaultManager] startScene:self.sceneID];
+        [self performSegueWithIdentifier:@"sceneSegue" sender:self];
+        
     }else{
         //self.resultLabel.text=@"不能识别此指令";
+        self.sampleLabel.text = @"找不到匹配项，请重新说";
     }
 }
 
@@ -191,6 +266,16 @@
         }
     }
     return tempStr;
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    id theSegue = segue.destinationViewController;
+    [theSegue setValue:[NSNumber numberWithInt:self.sceneID] forKey:@"sceneID"];
+    int roomId = [DeviceManager getRoomID:self.sceneID];
+    
+    [theSegue setValue:[NSNumber numberWithInt:roomId] forKey:@"roomID"];
+    
 }
 
 #pragma mark - IFlySpeechSynthesizerDelegate
@@ -229,5 +314,6 @@
 {
     
 }
+
 
 @end
