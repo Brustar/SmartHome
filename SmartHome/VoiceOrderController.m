@@ -13,8 +13,9 @@
 #import "iflyMSC/IFlySpeechRecognizer.h"
 #import "IATConfig.h"
 #import "FMDatabase.h"
-#import "DeviceManager.h"
 #import "SceneManager.h"
+#import "DeviceManager.h"
+#import "RegexKitLite.h"
 
 @interface VoiceOrderController ()
 @property (weak, nonatomic) IBOutlet UIView *exmapleView;
@@ -144,13 +145,15 @@
         [resultString appendFormat:@"%@",key];
     }
     NSString *result =[NSString stringWithFormat:@"%@%@", self.resultLabel.text,resultString];
+    NSLog(@"_result=%@",result);
     NSString * resultFromJson =  [self stringFromJson:resultString];
-    self.resultLabel.text = [NSString stringWithFormat:@"%@%@", self.resultLabel.text,resultFromJson];
+    result= [NSString stringWithFormat:@"%@%@", self.resultLabel.text,resultFromJson];
+    self.resultLabel.text = [result stringByMatching:@"^([\\u4e00-\\u9fa5]*).*" capture:1L];
     
     if (isLast){
         NSLog(@"听写结果(json)：%@测试", result);
     }
-    NSLog(@"_result=%@",result);
+    
     NSLog(@"resultFromJson=%@",resultFromJson);
     NSLog(@"isLast=%d,_textView.text=%@",isLast,self.resultLabel.text);
     
@@ -158,7 +161,7 @@
     if (sceneid>0) {
         [[SceneManager defaultManager] startScene:sceneid];
     }else{
-        self.resultLabel.text=@"no action";
+        //self.resultLabel.text=@"不能识别此指令";
     }
 }
 
