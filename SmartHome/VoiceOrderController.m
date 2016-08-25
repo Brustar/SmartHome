@@ -148,7 +148,7 @@
     NSLog(@"_result=%@",result);
     NSString * resultFromJson =  [self stringFromJson:resultString];
     result= [NSString stringWithFormat:@"%@%@", self.resultLabel.text,resultFromJson];
-    self.resultLabel.text = [result stringByMatching:@"^([\\u4e00-\\u9fa5]*).*" capture:1L];
+    self.resultLabel.text = [result stringByMatching:@"^([\\u4e00-\\u9fa5]+).*" capture:1L];
     
     if (isLast){
         NSLog(@"听写结果(json)：%@测试", result);
@@ -191,43 +191,6 @@
         }
     }
     return tempStr;
-}
-
-#pragma mark - IFlySpeechSynthesizerDelegate
-//开始播放
-- (void) onSpeakBegin
-{
-    
-}
-
-//缓冲进度
-- (void) onBufferProgress:(int) progress message:(NSString *)msg
-{
-    NSLog(@"bufferProgress:%d,message:%@",progress,msg);
-}
-
-//播放进度
-- (void) onSpeakProgress:(int) progress
-{
-    NSLog(@"play progress:%d",progress);
-}
-
-//暂停播放
-- (void) onSpeakPaused
-{
-    
-}
-
-//恢复播放
-- (void) onSpeakResumed
-{
-    
-}
-
-//结束回调
-- (void) onCompleted:(IFlySpeechError *) error
-{
-    
 }
 
 @end

@@ -13,7 +13,7 @@
 @class IFlyDataUploader;
 @class IFlySpeechRecognizer;
 
-@interface VoiceOrderController : UIViewController<IFlySpeechSynthesizerDelegate,IFlySpeechRecognizerDelegate>
+@interface VoiceOrderController : UIViewController<IFlySpeechRecognizerDelegate>
 
 
 //声明语音合成的对象
