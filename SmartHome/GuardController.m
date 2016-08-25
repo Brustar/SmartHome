@@ -36,7 +36,7 @@
     self.title = @"门禁";
     
     SocketManager *sock=[SocketManager defaultManager];
-    [sock initTcp:[IOManager tcpAddr] port:[IOManager tcpPort] mode:outDoor delegate:self];
+    sock.delegate=self;
 }
 
 - (void)didReceiveMemoryWarning {

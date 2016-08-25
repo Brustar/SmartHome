@@ -77,8 +77,12 @@
         }
     }
     
-     [self setupSegmentCurtain];
+    [self setupSegmentCurtain];
+    
+    SocketManager *sock=[SocketManager defaultManager];
+    sock.delegate=self;
 }
+
 - (void)setupSegmentCurtain
 {
     
