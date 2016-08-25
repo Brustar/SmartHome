@@ -194,9 +194,11 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ScenseCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"scenseCell" forIndexPath:indexPath];
+    [cell.powerBtn addTarget:self action:@selector(startSceneAction:) forControlEvents:UIControlEventTouchUpInside];
     cell.delegate = self;
     Scene *scene = self.collectionScenes[indexPath.row];
     cell.scenseName.text = scene.sceneName;
+    cell.powerBtn.tag = scene.sceneID;
     [cell useLongPressGestureRecognizer];
 
    
@@ -212,7 +214,11 @@
     self.selectedDID = scene.eID;
     [self performSegueWithIdentifier:@"sceneDetailSegue" sender:self];
 }
-
+-(void)startSceneAction:(UIButton *)btn{
+    int sceneId = (int)btn.tag;
+    [btn setTintColor:[UIColor redColor]];
+    [[SceneManager defaultManager] startScene:sceneId];
+}
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if([segue.identifier isEqualToString:@"sceneDetailSegue"])
@@ -258,6 +264,14 @@
     Scene *scene = self.scenes[sender.tag];
     [[SceneManager defaultManager] delScenen:scene];
 
+}
+
+
+- (IBAction)clickSartSceneBtn:(UIButton *)sender {
+    
+    Scene *scene = self.scenes[sender.tag];
+    [sender setTintColor:[UIColor redColor]];
+    [[SceneManager defaultManager] startScene:scene.sceneID];
 }
 
 -(void) httpHandler:(id) responseObject
