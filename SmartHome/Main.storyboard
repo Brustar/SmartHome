@@ -1076,7 +1076,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQb-uU-8p0">
                                         <rect key="frame" x="279" y="233" width="42" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -1233,16 +1233,29 @@
                                                     <action selector="clickDeleteBtn:" destination="uQg-ex-x78" eventType="touchUpInside" id="j73-XE-VE0"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ng-zv-C2G">
+                                                <rect key="frame" x="150" y="150" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="T7f-7B-0gs"/>
+                                                    <constraint firstAttribute="height" constant="40" id="cCq-6G-7rz"/>
+                                                </constraints>
+                                                <state key="normal" backgroundImage="startScene"/>
+                                                <connections>
+                                                    <action selector="clickSartSceneBtn:" destination="uQg-ex-x78" eventType="touchUpInside" id="kHc-x2-iPU"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="faQ-zk-VrB" secondAttribute="trailing" id="1gf-qd-J50"/>
                                             <constraint firstAttribute="bottom" secondItem="faQ-zk-VrB" secondAttribute="bottom" id="7uM-TH-g6f"/>
+                                            <constraint firstAttribute="trailing" secondItem="7ng-zv-C2G" secondAttribute="trailing" constant="10" id="G25-X3-C4t"/>
                                             <constraint firstAttribute="trailing" secondItem="76z-kd-q6i" secondAttribute="trailing" constant="10" id="I1F-nV-40H"/>
                                             <constraint firstAttribute="width" constant="200" id="QFX-2O-q6h"/>
                                             <constraint firstItem="faQ-zk-VrB" firstAttribute="leading" secondItem="0gT-5P-4ZF" secondAttribute="leading" id="YLV-d2-ZGT"/>
                                             <constraint firstAttribute="height" constant="200" id="ZH1-oT-ejd"/>
                                             <constraint firstItem="faQ-zk-VrB" firstAttribute="top" secondItem="0gT-5P-4ZF" secondAttribute="top" id="cO8-7B-Fi3"/>
+                                            <constraint firstAttribute="bottom" secondItem="7ng-zv-C2G" secondAttribute="bottom" constant="10" id="hBo-qu-dpB"/>
                                             <constraint firstItem="76z-kd-q6i" firstAttribute="top" secondItem="0gT-5P-4ZF" secondAttribute="top" constant="10" id="sV2-Mr-PiW"/>
                                         </constraints>
                                     </view>
@@ -1271,13 +1284,26 @@
                                                     <action selector="clickDeleteBtn:" destination="uQg-ex-x78" eventType="touchUpInside" id="0m0-Hq-Lwt"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aDl-jO-rD0">
+                                                <rect key="frame" x="150" y="150" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="hEb-sT-ugV"/>
+                                                    <constraint firstAttribute="height" constant="40" id="taC-7h-Byp"/>
+                                                </constraints>
+                                                <state key="normal" backgroundImage="startScene"/>
+                                                <connections>
+                                                    <action selector="clickSartSceneBtn:" destination="uQg-ex-x78" eventType="touchUpInside" id="T34-BQ-jpf"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="9wT-KE-UNt" firstAttribute="top" secondItem="NYw-mL-dFl" secondAttribute="top" id="3Ag-Rl-u4p"/>
                                             <constraint firstItem="9wT-KE-UNt" firstAttribute="leading" secondItem="NYw-mL-dFl" secondAttribute="leading" id="3ig-16-WFu"/>
                                             <constraint firstItem="dgU-Oy-Gjq" firstAttribute="top" secondItem="NYw-mL-dFl" secondAttribute="top" constant="10" id="Dl6-H2-FWr"/>
+                                            <constraint firstAttribute="trailing" secondItem="aDl-jO-rD0" secondAttribute="trailing" constant="10" id="X13-oW-1f4"/>
                                             <constraint firstAttribute="trailing" secondItem="9wT-KE-UNt" secondAttribute="trailing" id="YPI-Oh-snB"/>
+                                            <constraint firstAttribute="bottom" secondItem="aDl-jO-rD0" secondAttribute="bottom" constant="10" id="a88-bs-dn2"/>
                                             <constraint firstAttribute="bottom" secondItem="9wT-KE-UNt" secondAttribute="bottom" id="d6v-5N-q8c"/>
                                             <constraint firstAttribute="width" constant="200" id="iMA-Mx-jRh"/>
                                             <constraint firstAttribute="height" constant="200" id="qem-tX-1LW"/>
@@ -1333,6 +1359,14 @@
                                                         <action selector="doDeleteAction:" destination="Eod-yw-lD7" eventType="touchUpInside" id="Q4i-jY-yLq"/>
                                                     </connections>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hll-1L-2KJ">
+                                                    <rect key="frame" x="141" y="150" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="PSE-Fe-lbg"/>
+                                                        <constraint firstAttribute="width" constant="40" id="pGp-eg-25O"/>
+                                                    </constraints>
+                                                    <state key="normal" backgroundImage="startScene"/>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -1342,14 +1376,17 @@
                                             <constraint firstItem="6XR-ed-UGM" firstAttribute="centerX" secondItem="Eod-yw-lD7" secondAttribute="centerX" id="DQn-aA-lZR"/>
                                             <constraint firstAttribute="bottom" secondItem="8Qk-1L-fKL" secondAttribute="bottom" id="JxT-ua-ifB"/>
                                             <constraint firstAttribute="trailing" secondItem="8Qk-1L-fKL" secondAttribute="trailing" id="aqd-6w-SbO"/>
+                                            <constraint firstAttribute="trailing" secondItem="Hll-1L-2KJ" secondAttribute="trailing" constant="19" id="eXq-RE-mw1"/>
                                             <constraint firstAttribute="bottom" secondItem="6XR-ed-UGM" secondAttribute="bottom" constant="20" id="fDe-gS-ltz"/>
                                             <constraint firstItem="5s8-Ha-NOz" firstAttribute="top" secondItem="Eod-yw-lD7" secondAttribute="top" constant="10" id="h8A-ea-o4x"/>
                                             <constraint firstAttribute="trailing" secondItem="5s8-Ha-NOz" secondAttribute="trailing" constant="10" id="mYn-EQ-U2f"/>
                                             <constraint firstItem="8Qk-1L-fKL" firstAttribute="leading" secondItem="Eod-yw-lD7" secondAttribute="leading" id="nwC-JO-APr"/>
+                                            <constraint firstAttribute="bottom" secondItem="Hll-1L-2KJ" secondAttribute="bottom" constant="10" id="tpG-XO-i4C"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="deleteBtn" destination="5s8-Ha-NOz" id="Zhz-3F-TFG"/>
                                             <outlet property="imgView" destination="8Qk-1L-fKL" id="k1m-GJ-RYi"/>
+                                            <outlet property="powerBtn" destination="Hll-1L-2KJ" id="RWP-BD-viz"/>
                                             <outlet property="scenseName" destination="6XR-ed-UGM" id="4bC-5E-NFc"/>
                                         </connections>
                                     </collectionViewCell>
@@ -3059,7 +3096,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="噪音" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fP8-7C-lvM">
                                         <rect key="frame" x="148" y="52" width="26" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -4985,7 +5022,7 @@ layer.masksToBoundslayer.masksToBounds
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="保存场景" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5e-XO-eDO">
                                         <rect key="frame" x="85" y="15" width="80" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入场景名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iws-jn-V5x">
@@ -5753,7 +5790,7 @@ layer.masksToBoundslayer.masksToBounds
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请输入收藏的场景名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l5q-wM-fwE">
                                                 <rect key="frame" x="24" y="20" width="153" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="61d-Yu-JLL">
@@ -5797,7 +5834,7 @@ layer.masksToBoundslayer.masksToBounds
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="另存为场景" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6t-VY-ocm">
                                                 <rect key="frame" x="48" y="15" width="105" height="26"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入场景名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oBJ-Gf-PFK">
@@ -6008,6 +6045,7 @@ layer.masksToBoundslayer.masksToBounds
         <image name="place" width="235" height="205"/>
         <image name="placeholder" width="45" height="45"/>
         <image name="search" width="32" height="32"/>
+        <image name="startScene" width="32" height="32"/>
         <image name="storeImg" width="32" height="32"/>
         <image name="switch" width="32" height="32"/>
         <image name="tv_down" width="10" height="7"/>
@@ -6028,10 +6066,10 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="5K5-wE-mZz"/>
         <segue reference="yTT-Nf-qWA"/>
         <segue reference="dd4-O7-1s4"/>
         <segue reference="bKA-jZ-hQY"/>
-        <segue reference="vhu-OT-LO5"/>
         <segue reference="fXQ-oW-cHz"/>
     </inferredMetricsTieBreakers>
 </document>

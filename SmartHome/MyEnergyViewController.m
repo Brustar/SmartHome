@@ -14,6 +14,8 @@
 #import "DeviceManager.h"
 #import "Device.h"
 #import "DeviceInfo.h"
+#import "MBProgressHUD+NJ.h"
+
 
 #define CellItemCol 2
 #define CellItemMarginY 10
@@ -48,25 +50,94 @@
     }
     return _devicesInfo;
 }
+//使用时间最长的
+-(void)longestUsed{
+    NSString *url = [NSString stringWithFormat:@"%@GetEnergyMessage.aspx",[IOManager httpAddr]];
+    NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"Date":@"2016-07-11",@"EquipmentIdList":@"15"};
+    HttpManager *http = [HttpManager defaultManager];
+    http.delegate = self;
+    http.tag = 1;
+    [http sendPost:url param:dic];
+}
+//能耗最大的
+-(void)maxEnergyConsumption
+{
+    NSString *url = [NSString stringWithFormat:@"%@GetEnergyMessage.aspx",[IOManager httpAddr]];
+    NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"Date":@"2016-07-11",@"EquipmentIdList":@"15"};
+    HttpManager *http = [HttpManager defaultManager];
+    http.delegate = self;
+    http.tag = 2;
+    [http sendPost:url param:dic];
 
-//-(void)getEnger{
-//    NSString *url = [NSString stringWithFormat:@"%@GetEnergyMessage.aspx",[IOManager httpAddr]];
-//    NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"Date":@"2016-07-11",@"EquipmentIdList":@"15"};
-//    HttpManager *http = [HttpManager defaultManager];
-//    http.delegate = self;
-//    http.tag = 1;
-//    [http sendPost:url param:dic];
-//}
-//-(void)httpHandler:(id)responseObject tag:(int)tag
-//{
-//    if(tag == 1)
-//    {
-//        if([responseObject[@"Result"] intValue] == 0)
-//        {
-//            
-//        }
-//    }
-//}
+}
+//使用次数最多的
+-(void)MaximumFrequencyOfuse
+{
+    NSString *url = [NSString stringWithFormat:@"%@GetEnergyMessage.aspx",[IOManager httpAddr]];
+    NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"Date":@"2016-07-11",@"EquipmentIdList":@"15"};
+    HttpManager *http = [HttpManager defaultManager];
+    http.delegate = self;
+    http.tag = 3;
+    [http sendPost:url param:dic];
+}
+//本月能耗超出上月的
+-(void)totalEnegryBeyondLastMonth
+{
+    NSString *url = [NSString stringWithFormat:@"%@GetEnergyMessage.aspx",[IOManager httpAddr]];
+    NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"Date":@"2016-07-11",@"EquipmentIdList":@"15"};
+    HttpManager *http = [HttpManager defaultManager];
+    http.delegate = self;
+    http.tag = 4;
+    [http sendPost:url param:dic];
+}
+-(void)httpHandler:(id)responseObject tag:(int)tag
+{
+    if(tag == 1)
+    {
+        if([responseObject[@"Result"] intValue] == 0)
+        {
+            
+        }else {
+            [MBProgressHUD showError:responseObject[@"Msg"]];
+        }
+    }else if(tag == 2)
+    {
+        if([responseObject[@"Result"] intValue] == 0)
+        {
+            
+        }else {
+            [MBProgressHUD showError:responseObject[@"Msg"]];
+        }
+    }else if(tag == 3)
+    {
+        if([responseObject[@"Result"] intValue] == 0)
+        {
+            
+        }else {
+            [MBProgressHUD showError:responseObject[@"Msg"]];
+        }
+    }else if(tag == 4)
+    {
+        if([responseObject[@"Result"] intValue] == 0)
+        {
+            
+        }else {
+            [MBProgressHUD showError:responseObject[@"Msg"]];
+        }
+    }else if(tag == 5)
+    {
+        if([responseObject[@"Result"] intValue] == 0)
+        {
+            
+        }else {
+            [MBProgressHUD showError:responseObject[@"Msg"]];
+        }
+    }
+
+
+
+
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"我的能耗";
@@ -81,7 +152,7 @@
     
     self.selectedDeviceTableView.hidden = YES;
     
-    //[self getEnger];
+    
 }
 
 -(void)setNavi
@@ -106,7 +177,7 @@
     {
         return 1;
     }
-    return 0;
+    return 4;
 
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
