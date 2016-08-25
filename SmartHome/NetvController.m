@@ -90,6 +90,9 @@
     recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionDown)];
     [[self touchpad] addGestureRecognizer:recognizer];
+    
+    SocketManager *sock=[SocketManager defaultManager];
+    sock.delegate=self;
 }
 
 - (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{

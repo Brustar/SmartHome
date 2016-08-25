@@ -99,6 +99,9 @@
     [self setUpPageController];
     
     [self setRuleForFMChannel];
+    
+    SocketManager *sock=[SocketManager defaultManager];
+    sock.delegate=self;
 }
 
 -(void)setRuleForFMChannel

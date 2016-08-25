@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<<<<<<< HEAD
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="6M2-qc-UnH">
+=======
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="iP5-w8-v4Y">
+>>>>>>> d24bfcbe08e232cdb77283ea7128427bc4558802
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -5693,6 +5697,13 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
+<<<<<<< HEAD
+=======
+        <segue reference="yTT-Nf-qWA"/>
+        <segue reference="5K5-wE-mZz"/>
+        <segue reference="dRU-hd-aVS"/>
+        <segue reference="bKA-jZ-hQY"/>
+>>>>>>> d24bfcbe08e232cdb77283ea7128427bc4558802
         <segue reference="fXQ-oW-cHz"/>
         <segue reference="mRk-xU-xJj"/>
         <segue reference="CtP-7b-vUS"/>

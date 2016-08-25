@@ -219,7 +219,7 @@
     NSLog(@"_result=%@",result);
     NSString * resultFromJson =  [self stringFromJson:resultString];
     result= [NSString stringWithFormat:@"%@%@", self.resultLabel.text,resultFromJson];
-    self.resultLabel.text = [result stringByMatching:@"^([\\u4e00-\\u9fa5]*).*" capture:1L];
+    self.resultLabel.text = [result stringByMatching:@"^([\\u4e00-\\u9fa5]+).*" capture:1L];
     
     if (isLast){
         NSLog(@"听写结果(json)：%@测试", result);
@@ -268,6 +268,7 @@
     return tempStr;
 }
 
+<<<<<<< HEAD
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     id theSegue = segue.destinationViewController;
@@ -316,4 +317,6 @@
 }
 
 
+=======
+>>>>>>> d24bfcbe08e232cdb77283ea7128427bc4558802
 @end
