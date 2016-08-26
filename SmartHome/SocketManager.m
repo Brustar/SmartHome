@@ -71,12 +71,11 @@
     [udpSocket receiveWithTimeout:5000 tag:1]; //接收数据
 }
 
--(void)initTcp:(NSString *)addr port:(int)port mode:(int)mode delegate:(id)delegate
+-(void)initTcp:(NSString *)addr port:(int)port delegate:(id)delegate
 {
     self.socketHost = addr;
     self.socketPort = port;
     self.delegate = delegate;
-    self.netMode = mode;
     // 在连接前先进行手动断开
     [self cutOffSocket];
     
@@ -87,7 +86,7 @@
 - (void) connectTcp
 {
     //请求协调服务器
-    [self initTcp:[IOManager tcpAddr] port:[IOManager tcpPort] mode:outDoor delegate:nil];
+    [self initTcp:[IOManager tcpAddr] port:[IOManager tcpPort] delegate:nil];
     DeviceInfo *device=[DeviceInfo defaultManager];
     device.connectState = outDoor;
     device.masterPort=[IOManager tcpPort];
@@ -122,11 +121,9 @@
         info.masterIP=[PackManager NSDataToIP:ip];
         info.masterPort=(int)[PackManager NSDataToUInt:port];
         [IOManager writeUserdefault:[NSNumber numberWithLong:[PackManager NSDataToUInt:masterID]] forKey:@"masterID"];
-        [self initTcp:[PackManager NSDataToIP:ip] port:(int)[PackManager NSDataToUInt:port] mode:atHome delegate:nil];
-        info.connectState = atHome;
+        [self initTcp:[PackManager NSDataToIP:ip] port:(int)[PackManager NSDataToUInt:port] delegate:nil];
     }else{
         [self connectTcp];
-        info.connectState = outDoor;
     }
 }
 
@@ -138,7 +135,7 @@
         
         [IOManager writeUserdefault:[PackManager NSDataToIP:ip] forKey:@"subIP"];
         [IOManager writeUserdefault:[NSNumber numberWithLong:[PackManager NSDataToUInt:port]] forKey:@"subPort"];
-        [self initTcp:[PackManager NSDataToIP:ip] port:(int)[PackManager NSDataToUInt:port] mode:outDoor delegate:nil];
+        [self initTcp:[PackManager NSDataToIP:ip] port:(int)[PackManager NSDataToUInt:port] delegate:nil];
         DeviceInfo *device=[DeviceInfo defaultManager];
         device.masterPort=(int)[PackManager NSDataToUInt:port];
     }
@@ -148,6 +145,12 @@
 -(void)onSocket:(AsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port
 {
     NSLog(@"socket连接成功,host:%@,port:%d",host,port);
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    if ([self.socketHost isEqualToString:[IOManager tcpAddr]]) {
+        device.connectState=outDoor;
+    }else{
+        device.connectState=atHome;
+    }
     [self.socket writeData:[[DeviceInfo defaultManager] author] withTimeout:-1 tag:0];
     [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:0];
     // 每隔30s像服务器发送心跳包
@@ -177,6 +180,8 @@
 {
     NSLog(@"sorry the connect is failure %ld",sock.userData);
     if (sock.userData == SocketOfflineByServer) {// 服务器掉线，重连
+        DeviceInfo *device=[DeviceInfo defaultManager];
+        device.connectState=offLine;
         [self socketConnectHost];
     }else if (sock.userData == SocketOfflineByUser) {// 如果由用户断开，不进行重连
         return;

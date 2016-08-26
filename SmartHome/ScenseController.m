@@ -156,34 +156,50 @@
     //对连接改变做出响应的处理动作。
     NetworkStatus status = [curReach currentReachabilityStatus];
     SocketManager *sock=[SocketManager defaultManager];
+    DeviceInfo *info = [DeviceInfo defaultManager];
     if(status == ReachableViaWWAN)
     {
-        if (sock.netMode==outDoor) {
+        if (info.connectState==outDoor) {
+            NSLog(@"外出模式");
+            [self.netBarBtn setImage:[UIImage imageNamed:@"out"]];
             return;
         }
-        NSLog(@"外出模式");
-        [self.netBarBtn setImage:[UIImage imageNamed:@"out"]];
-               //connect cloud
-        NSUserDefaults *userdefault=[NSUserDefaults standardUserDefaults];
-        [sock initTcp:[userdefault objectForKey:@"subIP"] port:[[userdefault objectForKey:@"subPort"] intValue] mode:outDoor delegate:self];
+        if (info.connectState==offLine) {
+            NSLog(@"离线模式");
+            [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
+        
+            //connect cloud
+            NSUserDefaults *userdefault=[NSUserDefaults standardUserDefaults];
+            [sock initTcp:[userdefault objectForKey:@"subIP"] port:[[userdefault objectForKey:@"subPort"] intValue] delegate:self];
+        }
     }
     else if(status == ReachableViaWiFi)
     {
-        if (sock.netMode==atHome) {
+        if (info.connectState==atHome) {
             NSLog(@"在家模式");
             [self.netBarBtn setImage:[UIImage imageNamed:@"atHome"]];
             return;
-        }else if (sock.netMode==outDoor){
+        }else if (info.connectState==outDoor){
             NSLog(@"外出模式");
             [self.netBarBtn setImage:[UIImage imageNamed:@"out"]];
-
         }
-        //connect master
-        [sock connectUDP:[IOManager udpPort]];
+        if (info.connectState==offLine) {
+            NSLog(@"离线模式");
+            [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
+            
+            int sed = (arc4random() % 2) + 1;
+            if (sed == 1) {
+                //connect master
+                [sock connectUDP:[IOManager udpPort]];
+            }else{
+                //connect cloud
+                [sock connectTcp];
+            }
+            
+        }
     }else{
-        [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
-
         NSLog(@"离线模式");
+        [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
     }
     
 }

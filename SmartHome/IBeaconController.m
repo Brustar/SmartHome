@@ -43,7 +43,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name: kReachabilityChangedNotification object: nil];
     self.hostReach = [Reachability reachabilityWithHostname:@"www.apple.com"];
     [self.hostReach startNotifier];  //开始监听,会启动一个run loop
-    [self updateInterfaceWithReachability: self.hostReach];
+    //[self updateInterfaceWithReachability: self.hostReach];
     
     NSURL *url=[NSURL URLWithString:@"http://e-cloudcn.com/img/cj_kt.jpg"];
     [self.imagev setImageWithURL:url];
@@ -55,10 +55,10 @@
 {
     Reachability* curReach = [note object];
     NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
-    [self updateInterfaceWithReachability: curReach];
+    //[self updateInterfaceWithReachability: curReach];
 }
 
-
+/*
 //处理连接改变后的情况
 - (void) updateInterfaceWithReachability: (Reachability*) curReach
 {
@@ -98,7 +98,7 @@
     }
     
 }
-
+*/
 - (IBAction)addSongsToMusicPlayer:(id)sender
 {
     [[AudioManager defaultManager] addSongsToMusicPlayer];
@@ -260,7 +260,7 @@
     SocketManager *sock=[SocketManager defaultManager];
     NSUserDefaults *userdefault=[NSUserDefaults standardUserDefaults];
     
-    [sock initTcp:[userdefault objectForKey:@"subIP"] port:[[userdefault objectForKey:@"subPort"] intValue] mode:atHome delegate:self];
+    [sock initTcp:[userdefault objectForKey:@"subIP"] port:[[userdefault objectForKey:@"subPort"] intValue] delegate:self];
     //[sock initTcp:[IOManager tcpAddr] port:[IOManager tcpPort] mode:outDoor delegate:self];
 }
 

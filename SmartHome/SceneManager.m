@@ -43,7 +43,7 @@
     HttpManager *http = [HttpManager defaultManager];
     http.delegate = self;
     
-    [http sendPost:url param:dic];
+    //[http sendPost:url param:dic];
 
     //上传文件
     

@@ -44,7 +44,7 @@
     
     
     SocketManager *sock=[SocketManager defaultManager];
-    [sock initTcp:[PackManager NSDataToIP:ip] port:1234 mode:atHome delegate:self];
+    [sock initTcp:[PackManager NSDataToIP:ip] port:1234 delegate:self];
     
     [self sendCmd:nil];
 }

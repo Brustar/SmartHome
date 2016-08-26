@@ -199,7 +199,7 @@
 {
     Proto proto=createProto();
     if (self.connectState==outDoor) {
-        if (self.masterPort==[IOManager tcpPort]) {
+        if ([self.masterIP isEqualToString:[IOManager tcpAddr]]) {
             proto.cmd=0x82;
         }else{
             proto.cmd=0x85;
