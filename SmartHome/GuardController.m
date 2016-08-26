@@ -113,7 +113,7 @@
             for(int i=0;i<[scene.devices count];i++)
             {
                 if ([[scene.devices objectAtIndex:i] isKindOfClass:[EntranceGuard class]]) {
-                    self.switchView.on=((EntranceGuard*)[scene.devices objectAtIndex:i]).poweron;
+                    self.switchView.on=((EntranceGuard*)[scene.devices objectAtIndex:i]).unlock;
                 }
             }
         }
