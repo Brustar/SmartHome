@@ -28,7 +28,7 @@
     if([resultSet next])
     {
         [array addObject:[resultSet stringForColumn:@"NAME"]];
-       // [array addObject:[resultSet stringForColumn:@"sn"]];
+//      [array addObject:[resultSet stringForColumn:@"sn"]];
         
         
 //        NSString *birth = [resultSet stringForColumn:@"birth"];

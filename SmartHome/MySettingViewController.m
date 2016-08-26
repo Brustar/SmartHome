@@ -14,6 +14,7 @@
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "AppDelegate.h"
+#import "SocketManager.h"
 @interface MySettingViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) NSArray *titleArr;
@@ -177,25 +178,16 @@
     if([responseObject[@"Result"] intValue] == 0)
     {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"AuthorToken"];
-        [self exitApplication];
+        [[SocketManager defaultManager] cutOffSocket];
+        self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
+        [self performSegueWithIdentifier:@"goLogin" sender:self];
         
     }else {
         [MBProgressHUD showSuccess:responseObject[@"Msg"]];
     }
     
 }
-- (void)exitApplication {
-    AppDelegate *app = [UIApplication sharedApplication].delegate;
-    UIWindow *window = app.window;
-    
-    [UIView animateWithDuration:1.0f animations:^{
-        window.alpha = 0;
-        window.frame = CGRectMake(0, window.bounds.size.width, 0, 0);
-    } completion:^(BOOL finished) {
-        exit(0);
-    }];
-    
-}
+
 
 -(void)gotoAppStoreToComment
 {

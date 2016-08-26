@@ -404,6 +404,7 @@
             
             if(count == 1)
             {
+               
                 //直接登录主机
                 [self sendRequestToHostWithTag:2 andRow:0];
                 [self goToViewController];
@@ -415,8 +416,7 @@
             
             //连接socket
             [[SocketManager defaultManager] connectAfterLogined];
-            //更新配置
-            //[[DeviceInfo defaultManager] initConfig];
+            
             
         }else{
             [MBProgressHUD showError:responseObject[@"Msg"]];
@@ -427,7 +427,7 @@
         if ([responseObject[@"Result"] intValue]==0)
         {
             
-            
+            [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
             self.tableView.hidden = YES;
             self.coverView.hidden = YES;
             

@@ -10,7 +10,7 @@
 #import "RegexKitLite.h"
 #import "Device.h"
 #import "DeviceManager.h"
-
+#import "MBProgressHUD+NJ.h"
 #import "HttpManager.h"
 
 #import "SocketManager.h"
@@ -42,18 +42,45 @@
     NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]};
     HttpManager *http = [HttpManager defaultManager];
     http.delegate = self;
+    http.tag = 1;
     
     [http sendPost:url param:dic];
 
     //上传文件
     
 }
+-(void) httpHandler:(id) responseObject tag:(int)tag
+{
+    if(tag == 1)
+    {
+        if([responseObject[@"Result"] intValue] == 0)
+        {
+            [MBProgressHUD showSuccess:@"场景保存成功"];
+        }else{
+            [MBProgressHUD showError: responseObject[@"Msg"]];
+        }
+    }else if(tag == 2)
+    {
+        if([responseObject[@"Result"] intValue] == 0)
+        {
+            [MBProgressHUD showSuccess:@"场景保存成功"];
+        }else{
+            [MBProgressHUD showError: responseObject[@"Msg"]];
+        }
+    }
+
+}
 
 - (void) delScenen:(Scene *)scene
 {
     if (!scene.readonly) {
         NSString *filePath=[NSString stringWithFormat:@"%@/%@_%d.plist",[IOManager scenesPath], SCENE_FILE_NAME, scene.sceneID];
-        [IOManager removeFile:filePath];
+        NSData *data = [NSData dataWithContentsOfFile:filePath];
+        if(data)
+        {
+            [IOManager removeFile:filePath];
+        }
+       
     }
     //同步云端
    
@@ -61,7 +88,7 @@
     NSDictionary *dict = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"SID":[NSNumber numberWithInt:scene.sceneID]};
     HttpManager *http=[HttpManager defaultManager];
     http.delegate=self;
-    //http.tag = 1;
+    http.tag = 2;
     [http sendPost:url param:dict];
 
     //上传文件

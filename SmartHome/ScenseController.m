@@ -13,8 +13,7 @@
 #import "SocketManager.h"
 #import "SceneManager.h"
 #import "Scene.h"
-#import "HttpManager.h"
-#import "MBProgressHUD+NJ.h"
+
 @interface ScenseController ()<UICollectionViewDelegate,UICollectionViewDataSource,ScenseCellDelegate,UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *addSceseBtn;
@@ -125,18 +124,23 @@
     
     self.scenes = [SceneManager getAllSceneWithRoomID:self.roomID];
     [self setUpSceneButton];
-    if(self.scenes.count > 2)
+    [self judgeScensCount:self.scenes];
+    
+}
+-(void)judgeScensCount:(NSArray *)scenes
+{
+    if(scenes.count > 2)
     {
         NSMutableArray *arr = [NSMutableArray array];
-        for (int i = 2; i < self.scenes.count ; i++)
+        for (int i = 2; i < scenes.count ; i++)
         {
-            [arr addObject:self.scenes[i]];
+            [arr addObject:scenes[i]];
         }
         self.collectionScenes = [arr copy];
     }else {
         self.collectionScenes = nil;
     }
-  
+    
     [self.collectionView reloadData];
 }
 
@@ -269,6 +273,9 @@
 - (IBAction)clickDeleteBtn:(UIButton *)sender {
     Scene *scene = self.scenes[sender.tag];
     [[SceneManager defaultManager] delScenen:scene];
+    self.scenes = [SceneManager getAllSceneWithRoomID:self.roomID];
+    [self setUpSceneButton];
+    [self judgeScensCount:self.scenes];
 
 }
 
@@ -280,19 +287,6 @@
     [[SceneManager defaultManager] startScene:scene.sceneID];
 }
 
--(void) httpHandler:(id) responseObject
-{
-        if ([responseObject[@"Result"] intValue]==0)
-        {
-            [MBProgressHUD showSuccess:@"删除成功"];
-            
-            self.scenes = [SceneManager getAllSceneWithRoomID:self.roomID];
-            [self.collectionView reloadData];
-        }else{
-            [MBProgressHUD showError:responseObject[@"Msg"]];
-        }
-    
-}
 /*
 #pragma mark - Navigation
 

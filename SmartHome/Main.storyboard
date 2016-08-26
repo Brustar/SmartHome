@@ -2852,6 +2852,7 @@
                         <segue destination="fx1-cN-ha4" kind="show" identifier="systemSetSegue" animates="NO" id="X0t-V6-3GC"/>
                         <segue destination="Uul-Ht-qNS" kind="show" identifier="systemInfoSegue" animates="NO" id="Avv-0r-EKb"/>
                         <segue destination="CWv-aV-jBo" kind="show" identifier="aboutSegue" animates="NO" id="Dqh-Ra-hYs"/>
+                        <segue destination="Q07-ua-pDl" kind="presentation" identifier="goLogin" id="uCb-ME-O7C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fZn-X2-474" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4629,7 +4630,7 @@
                                                                 <action selector="doEditBtn:" destination="mzw-uE-haa" eventType="touchUpInside" id="J8j-qU-QeJ"/>
                                                             </connections>
                                                         </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxX-lJ-e6H">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxX-lJ-e6H">
                                                             <rect key="frame" x="0.0" y="118" width="148" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="hv8-HM-4DH"/>
@@ -5007,7 +5008,7 @@ layer.masksToBoundslayer.masksToBounds
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.86852824080000002" green="0.86852824080000002" blue="0.86852824080000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="IOK-k0-c5l" firstAttribute="leading" secondItem="KCo-FH-E4U" secondAttribute="leading" constant="20" id="5qr-z8-7Aj"/>
                                     <constraint firstItem="IOK-k0-c5l" firstAttribute="top" secondItem="iws-jn-V5x" secondAttribute="bottom" constant="20" id="JcQ-Sl-S8w"/>
@@ -5713,9 +5714,9 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PRs-sg-E1F"/>
-        <segue reference="fXQ-oW-cHz"/>
         <segue reference="CtP-7b-vUS"/>
         <segue reference="dA1-We-bRA"/>
+        <segue reference="uCb-ME-O7C"/>
+        <segue reference="mRk-xU-xJj"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -124,7 +124,7 @@
        self.subTypeArr =  [DeviceManager getDeviceTypeNameWithRoomID:self.roomID sceneID:self.sceneID subTypeName:self.devicesTypes[indexPath.row]];
         NSString *typeName = self.subTypeArr[indexPath.row];
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        if([typeName isEqualToString:@"电视"])
+        if([typeName isEqualToString:@"网络电视"])
         {
             TVController *tVC = [storyBoard instantiateViewControllerWithIdentifier:@"TVController"];
             tVC.sceneid =[NSString stringWithFormat:@"%d",self.sceneID];

@@ -64,7 +64,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
+    //self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
      self.tableViewHight.constant = self.deviceTypes.count * self.tableView.rowHeight;
 }
 -(IBAction)remove:(id)sender
@@ -117,7 +117,7 @@
         segue = @"Lighter";
     }else if([typeName isEqualToString:@"窗帘"]){
         segue = @"Curtain";
-    }else if([typeName isEqualToString:@"电视"]){
+    }else if([typeName isEqualToString:@"网络电视"]){
         segue = @"TV";
     }else if([typeName isEqualToString:@"空调"]){
         segue = @"Air";
@@ -189,6 +189,7 @@
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
+   // bAlbumListViewStatus = NO;
     self.sceneImg = info[UIImagePickerControllerEditedImage];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }

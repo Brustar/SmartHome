@@ -12,6 +12,8 @@
 #import "ProtocolManager.h"
 #import "DeviceManager.h"
 #import "Device.h"
+#import "HttpManager.h"
+#import "MBProgressHUD+NJ.h"
 @interface LightController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *favButt;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -214,7 +216,6 @@
     [scene setDevices:devices];
     [[SceneManager defaultManager] addScenen:scene withName:nil withPic:@""];
 }
-
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {

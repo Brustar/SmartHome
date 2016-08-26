@@ -14,7 +14,7 @@
 #import "VolumeManager.h"
 #import "SocketManager.h"
 #import "DeviceManager.h"
-
+#import "ChannelManager.h"
 #import "HttpManager.h"
 
 #import "PackManager.h"
@@ -51,7 +51,7 @@
     if(!_allFavouriteChannels)
     {
         _allFavouriteChannels = [NSMutableArray array];
-        _allFavouriteChannels = [TVChannel getAllChannelForFavoritedForType:@"FM"];
+        _allFavouriteChannels = [ChannelManager getAllChannelForFavoritedForType:@"FM"];
         if(_allFavouriteChannels == nil || _allFavouriteChannels.count == 0)
         {
             self.unstoreLabel.hidden = NO;
@@ -116,9 +116,9 @@
 }
 
 - (void)txhRrettyRuler:(TXHRulerScrollView *)rulerScrollView {
-    self.numberOfChannel.text = [NSString stringWithFormat:@" %.1f",rulerScrollView.rulerValue];
+    self.numberOfChannel.text = [NSString stringWithFormat:@"%.1f",rulerScrollView.rulerValue];
     
-    [self save:nil];
+  //  [self save:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -163,8 +163,7 @@
     {
         cell.chanelNum.text = nil;
         cell.channelName.text = nil;
-        //cell.backgroundColor = [UIColor lightGrayColor];
-        [cell unUseLongPressGesture];
+        cell.userInteractionEnabled = NO;
     }else{
         TVChannel *channel = self.allFavouriteChannels[indexPath.row];
         cell.chanelNum.text = [NSString stringWithFormat:@"%ld",channel.channel_id];
@@ -179,7 +178,7 @@
     FMCollectionViewCell *cell =(FMCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     
     [cell hiddenBtns];
-    [cell unUseLongPressGesture];
+    [cell useLongPressGesture];
 }
 
 
@@ -200,16 +199,6 @@
     http.tag = 2;
     [http sendPost:url param:dic];
     
-//    BOOL isSuccess = [TVChannel deleteChannelForChannelID:channel.channel_id];
-//    if(!isSuccess)
-//    {
-//        [MBProgressHUD showError:@"删除失败，请稍后再试"];
-//    
-//        return;
-//    }
-//    
-//    [self.allFavouriteChannels removeObject:channel];
-//    [self.collectionView reloadData];
 }
 
 -(void)FmEditAction:(FMCollectionViewCell *)cell
@@ -228,22 +217,11 @@
 - (IBAction)sureEdit:(id)sender {
     
     [self sendStoreChannelRequest];
-//    BOOL isSuccess =[TVChannel upDateChannelForChannelID:[self.channelIDEdit.text intValue] andNewChannel_Name:self.channelNameEdit.text];
-//    if(!isSuccess)
-//    {
-//        [MBProgressHUD showError:@"编辑失败，请稍后再试"];
-//        
-//        return;
-//    }
-//    self.allFavouriteChannels = [TVChannel getAllChannelForFavoritedForType:@"FM"];
-//    [self cancelEdit:nil];
-//    [self.collectionView reloadData];
 }
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    
     id theSegue = segue.destinationViewController;
     [theSegue setValue:self.deviceid forKey:@"deviceid"];
 }
@@ -290,7 +268,7 @@
     
     NSString *url = [NSString stringWithFormat:@"%@FMChannelUpload.aspx",[IOManager httpAddr]];
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSDictionary *dic = @{@"AuthorToken":authorToken,@"EID":self.deviceid,@"Cnumber":self.numberOfChannel.text,@"CName":self.channelNameEdit.text,@"ImgFileName":@"store",@"ImgFile":@""};
+    NSDictionary *dic = @{@"AuthorToken":authorToken,@"EID":self.deviceid,@"CNumber":self.numberOfChannel.text,@"CName":self.channelNameEdit.text,@"ImgFileName":@"store",@"ImgFile":@""};
     HttpManager *http = [HttpManager defaultManager];
     http.delegate = self;
     http.tag = 1;
@@ -308,6 +286,9 @@
             //保存成功后存到数据库
             [self writeFMChannelsConfigDataToSQL:responseObject withParent:@"FM"];
             self.editView.hidden = YES;
+            self.unstoreLabel.hidden = YES;
+            self.collectionView.backgroundColor = [UIColor lightGrayColor];
+            self.allFavouriteChannels = [ChannelManager getAllChannelForFavoritedForType:@"FM"];
             [self.collectionView reloadData];
         }else{
             [MBProgressHUD showError:@"Msg"];
@@ -319,7 +300,7 @@
         {
             NSIndexPath *indexPath = [self.collectionView indexPathForCell:self.cell];
             TVChannel *channel = self.allFavouriteChannels[indexPath.row];
-            BOOL isSuccess = [TVChannel deleteChannelForChannelID:channel.channel_id];
+            BOOL isSuccess = [ChannelManager deleteChannelForChannelID:channel.channel_id];
             if(!isSuccess)
             {
                 [MBProgressHUD showError:@"删除失败，请稍后再试"];
@@ -329,19 +310,22 @@
             [self.collectionView reloadData];
             
         }else{
-            [MBProgressHUD showError:@"Msg"];
+            [MBProgressHUD showError:responseObject[@"Msg"]];
         }
 
     }
 }
--(void)writeTVChannelsConfigDataToSQL:(NSDictionary *)responseObject withParent:(NSString *)parent
+
+
+
+-(void)writeFMChannelsConfigDataToSQL:(NSDictionary *)responseObject withParent:(NSString *)parent
 {
     NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
     if([db open])
     {
         int cNumber = [self.numberOfChannel.text intValue];
-        NSString *sql = [NSString stringWithFormat:@"insert into Channels values(%d,%d,%d,'%@','%@','%@',%d,'%@')",[responseObject[@"cld"] intValue],[self.deviceid intValue],cNumber,self.channelNameEdit.text,responseObject[@"imgUrl"],parent,1,self.eNumber];
+        NSString *sql = [NSString stringWithFormat:@"insert into Channels values(%d,%d,%d,'%@','%@','%@',%d,'%@')",[responseObject[@"fmId"] intValue],[self.deviceid intValue],cNumber,self.channelNameEdit.text,responseObject[@"imgUrl"],parent,1,self.eNumber];
         BOOL result = [db executeUpdate:sql];
         if(result)
         {
@@ -355,12 +339,7 @@
         
     }
     [db close];
-}
 
-
--(void)writeFMChannelsConfigDataToSQL:(NSDictionary *)responseObject withParent:(NSString *)parent
-{
-    
 }
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag

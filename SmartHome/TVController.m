@@ -23,6 +23,7 @@
 #import "ChannelManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "PackManager.h"
+#import "ChannelManager.h"
 
 @interface TVController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,TVLogoCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *touchpad;
@@ -83,7 +84,7 @@
 {
     _roomID = roomID;
     
-    self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"电视"];
+    self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"网络电视"];
     //self.deviceid = [DeviceManager getDeviceByTypeName:@"TV" andRoomID:self.roomID];
     
 }
@@ -278,8 +279,9 @@
         [cell hiddenEditBtnAndDeleteBtn];
         if(indexPath.row > self.allFavourTVChannels.count -1)
         {
-            cell.imgView.image = [UIImage imageNamed:@""];
-            [cell unUseLongPressGesture];
+            cell.label.text = @"";
+            cell.imgView.image = nil;
+            cell.userInteractionEnabled = NO;
         }else{
             TVChannel *channel = self.allFavourTVChannels[indexPath.row];
             cell.imgView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",channel.channel_pic]];
@@ -311,6 +313,7 @@
     {
         TVLogoCell *cell =(TVLogoCell*)[collectionView cellForItemAtIndexPath:indexPath];
         [cell hiddenEditBtnAndDeleteBtn];
+        [cell useLongPressGesture];
         
         int channelValue=(int)[[self.allFavourTVChannels objectAtIndex:indexPath.row] channel_number];
         NSData *data=[[DeviceInfo defaultManager] switchProgram:channelValue deviceID:self.deviceid];
@@ -420,6 +423,8 @@
             //保存成功后存到数据库
             [self writeTVChannelsConfigDataToSQL:responseObject withParent:@"TV"];
             self.allFavourTVChannels = [ChannelManager getAllChannelForFavoritedForType:@"TV"];
+            self.unstoreLabel.hidden = YES;
+            self.tvLogoCollectionView.backgroundColor = [UIColor lightGrayColor];
             [self.tvLogoCollectionView reloadData];
             
             
@@ -433,7 +438,7 @@
             //从数据库中删除数据
             NSIndexPath *indexPath = [self.tvLogoCollectionView indexPathForCell:self.cell];
             TVChannel *channel = self.allFavourTVChannels[indexPath.row];
-            BOOL isSuccess = [TVChannel deleteChannelForChannelID:channel.channel_id];
+            BOOL isSuccess = [ChannelManager deleteChannelForChannelID:channel.channel_id];
             if(!isSuccess)
             {
                 [MBProgressHUD showError:@"删除失败，请稍后再试"];
@@ -455,7 +460,7 @@
     if([db open])
     {
         int cNumber = [self.channeNumber.text intValue];
-        NSString *sql = [NSString stringWithFormat:@"insert into Channels values(%d,%d,%d,'%@','%@','%@',%d,'%@')",[responseObject[@"cld"] intValue],[self.deviceid intValue],cNumber,self.channelName,responseObject[@"imgUrl"],parent,1,self.eNumber];
+        NSString *sql = [NSString stringWithFormat:@"insert into Channels values(%d,%d,%d,'%@','%@','%@',%d,'%@')",[responseObject[@"cId"] intValue],[self.deviceid intValue],cNumber,self.channelName.text,responseObject[@"imgUrl"],parent,1,self.eNumber];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {
@@ -538,10 +543,10 @@
 }
 
 - (IBAction)storeTVChannel:(UIBarButtonItem *)sender {
-    self.channelName.text = nil;
-    self.channeNumber.text = nil;
+//    self.channelName.text = nil;
+//    self.channeNumber.text = nil;
     self.editView.hidden = NO;
-    [self sendStoreChannelRequest];
+//    [self sendStoreChannelRequest];
     
 }
 
