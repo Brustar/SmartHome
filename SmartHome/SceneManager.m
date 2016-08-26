@@ -321,7 +321,11 @@
             data=[[DeviceInfo defaultManager] toogleAirCon:aircon.isPoweron deviceID:deviceid];
             [sock.socket writeData:data withTimeout:1 tag:1];
             if (aircon.mode>=0) {
-                data=[[DeviceInfo defaultManager] changeMode:0x39+aircon.mode deviceID:deviceid];
+                if (aircon.mode==0) {
+                    data=[[DeviceInfo defaultManager] changeMode:0x39+aircon.mode deviceID:deviceid];
+                }else{
+                    data=[[DeviceInfo defaultManager] changeMode:0x3F+aircon.mode deviceID:deviceid];
+                }
                 [sock.socket writeData:data withTimeout:1 tag:1];
             }
             if (aircon.WindLevel>=0) {

@@ -168,44 +168,30 @@
     proto.action.state=action;
     NSString *enumber=[DeviceManager getENumber:[deviceID integerValue]];
     NSString *eid=[DeviceManager getEType:[deviceID integerValue]];
-    proto.deviceID=CFSwapInt16BigToHost(0x0010);//CFSwapInt16BigToHost([PackManager NSDataToUint16:enumber]);
-    proto.deviceType=0x31;//[PackManager NSDataToUint8:eid];
+    proto.deviceID=CFSwapInt16BigToHost([PackManager NSDataToUint16:enumber]); //CFSwapInt16BigToHost(0x0010);
+    proto.deviceType=[PackManager NSDataToUint8:eid]; //0x31;
     return dataFromProtocol(proto);
 }
 
 -(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID value:(uint8_t)value
 {
-    Proto proto=createProto();
-    if (self.connectState == atHome) {
-        proto.cmd=0x04;
-    }else if (self.connectState == outDoor){
-        proto.cmd=0x03;
-    }
-    proto.action.state=action;
+    
+    NSData *data = [self action:action deviceID:deviceID];
+    Proto proto = protocolFromData(data);
+    
     proto.action.RValue=value;
-    NSString *eid=[DeviceManager getEType:[deviceID integerValue]];
-    NSString *enumber=[DeviceManager getENumber:[deviceID integerValue]];
-    proto.deviceID=CFSwapInt16BigToHost(0x0010);//CFSwapInt16BigToHost([PackManager NSDataToUint16:enumber]);
-    proto.deviceType=0x31;//[PackManager NSDataToUint8:eid];
     return dataFromProtocol(proto);
 }
 
 -(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID R:(uint8_t)red  G:(uint8_t)green B:(uint8_t)blue
 {
-    Proto proto=createProto();
-    if (self.connectState == atHome) {
-        proto.cmd=0x04;
-    }else if (self.connectState == outDoor){
-        proto.cmd=0x03;
-    }
-    proto.action.state=action;
+    NSData *data = [self action:action deviceID:deviceID];
+    Proto proto = protocolFromData(data);
+    
     proto.action.RValue=red;
     proto.action.B=blue;
     proto.action.G=green;
-    NSString *eid=[DeviceManager getEType:[deviceID integerValue]];
-    NSString *enumber=[DeviceManager getENumber:[deviceID integerValue]];
-    proto.deviceID=CFSwapInt16BigToHost([PackManager NSDataToUint16:enumber]);
-    proto.deviceType=[PackManager NSDataToUint8:eid];
+
     return dataFromProtocol(proto);
 }
 
