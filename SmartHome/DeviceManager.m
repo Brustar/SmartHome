@@ -145,7 +145,7 @@
         {
             NSString *typeName = [resultSet stringForColumn:@"typeName"];
             
-            if ([typeName isEqualToString:@"开关"]||[typeName isEqualToString:@"调色"]||[typeName isEqualToString:@"调光"]) {
+            if ([typeName isEqualToString:@"开关灯"]||[typeName isEqualToString:@"调色灯"]||[typeName isEqualToString:@"调光灯"]) {
                 typeName = @"灯光";
             }
             else if ([typeName isEqualToString:@"开合帘"] || [typeName isEqualToString:@"卷帘"]) {
@@ -585,7 +585,10 @@
     NSMutableArray *devices = [NSMutableArray array];
     
     NSArray *deviceIDs = [self getDeviceIDWithRoomID:roomID sceneID:sceneID];
-    
+    if(deviceIDs.count == 0 || deviceIDs == nil)
+    {
+        return 0;
+    }
     for (NSString *deviceID in deviceIDs) {
         Device *device = [self getDeviceWithDeviceID:[deviceID intValue]];
         
@@ -593,7 +596,7 @@
     }
     
     if (devices.count < 1) {
-        return nil;
+        return 0;
     }
     
     return [devices copy];
@@ -609,7 +612,7 @@
     for (NSString *deviceID in deviceIDs) {
         NSString *typeName = [self getDeviceTypeNameWithID:deviceID];
         
-        if ([typeName isEqualToString:@"开关"] || [typeName isEqualToString:@"调色"] || [typeName isEqualToString:@"调光"]) {
+        if ([typeName isEqualToString:@"开关灯"] || [typeName isEqualToString:@"调色灯"] || [typeName isEqualToString:@"调光灯"]) {
             typeName = @"灯光";
         } else if ([typeName isEqualToString:@"开合帘"] || [typeName isEqualToString:@"卷帘"]) {
             typeName = @"窗帘";

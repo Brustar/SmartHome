@@ -28,27 +28,27 @@
     if([resultSet next])
     {
         [array addObject:[resultSet stringForColumn:@"NAME"]];
-        [array addObject:[resultSet stringForColumn:@"sn"]];
+       // [array addObject:[resultSet stringForColumn:@"sn"]];
         
         
-        NSString *birth = [resultSet stringForColumn:@"birth"];
-        [array addObject:birth];
-
-       
-        NSString *guarantee = [resultSet stringForColumn:@"guarantee"];
-        [array addObject:guarantee];
-
-        [array addObject:[resultSet stringForColumn:@"model"]];
-        [array addObject:[NSString stringWithFormat:@"%.2f",[resultSet doubleForColumn:@"price"]]];
-        NSString *purchase = [resultSet stringForColumn:@"purchase"];
-        [array addObject:purchase];
-        
-        [array addObject: [resultSet stringForColumn:@"producer"]];
-        [array addObject: [resultSet stringForColumn:@"gua_tel"]];
-        [array addObject: [NSString stringWithFormat:@"%d",[resultSet intForColumn:@"power"]]];
-        [array addObject: [NSString stringWithFormat:@"%.2f",[resultSet doubleForColumn:@"current"]]];
-        [array addObject: [NSString stringWithFormat:@"%d",[resultSet intForColumn:@"voltage"]]];
-        [array addObject: [resultSet stringForColumn:@"protocol"]];
+//        NSString *birth = [resultSet stringForColumn:@"birth"];
+//        [array addObject:birth];
+//
+//       
+//        NSString *guarantee = [resultSet stringForColumn:@"guarantee"];
+//        [array addObject:guarantee];
+//
+//        [array addObject:[resultSet stringForColumn:@"model"]];
+//        [array addObject:[NSString stringWithFormat:@"%.2f",[resultSet doubleForColumn:@"price"]]];
+//        NSString *purchase = [resultSet stringForColumn:@"purchase"];
+//        [array addObject:purchase];
+//        
+//        [array addObject: [resultSet stringForColumn:@"producer"]];
+//        [array addObject: [resultSet stringForColumn:@"gua_tel"]];
+//        [array addObject: [NSString stringWithFormat:@"%d",[resultSet intForColumn:@"power"]]];
+//        [array addObject: [NSString stringWithFormat:@"%.2f",[resultSet doubleForColumn:@"current"]]];
+//        [array addObject: [NSString stringWithFormat:@"%d",[resultSet intForColumn:@"voltage"]]];
+//        [array addObject: [resultSet stringForColumn:@"protocol"]];
     }
     
    

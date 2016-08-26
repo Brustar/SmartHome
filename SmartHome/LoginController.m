@@ -225,7 +225,7 @@
             NSArray *equipmentList = dic[@"equipmentList"];
             if(equipmentList.count ==0 || equipmentList == nil)
             {
-                return;
+                continue;
             }
             for(NSDictionary *equip in equipmentList)
             {

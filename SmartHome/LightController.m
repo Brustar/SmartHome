@@ -11,7 +11,7 @@
 #import "SocketManager.h"
 #import "ProtocolManager.h"
 #import "DeviceManager.h"
-
+#import "Device.h"
 @interface LightController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *favButt;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -32,10 +32,20 @@
     if(!_lIDs)
     {
         _lIDs = [NSMutableArray array];
-        [_lIDs addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"开关" andRoomID:self.roomID]];
-        [_lIDs addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"调光" andRoomID:self.roomID]];
-        [_lIDs addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"调色" andRoomID:self.roomID]];
-    }
+       
+           if(self.sceneid > 0)
+           {
+            [_lIDs addObjectsFromArray:[DeviceManager getDeviceIDWithRoomID:self.roomID sceneID:[self.sceneid intValue]]];
+               
+               
+           }else{
+               [_lIDs addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"开关灯" andRoomID:self.roomID]];
+               [_lIDs addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"调光灯" andRoomID:self.roomID]];
+               [_lIDs addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"调色灯" andRoomID:self.roomID]];
+
+           }
+        
+        }
     return _lIDs;
 }
 
