@@ -48,7 +48,7 @@
 @property (weak, nonatomic) IBOutlet UIView *coverView;
 @property (weak, nonatomic) IBOutlet UIButton *editChannelImgBtn;
 @property (nonatomic,strong) NSString *eNumber;
-
+@property (nonatomic,strong) UIImage *chooseImg;
 - (IBAction)editChannelImgBtn:(UIButton *)sender;
 
 @end
@@ -460,7 +460,7 @@
     if([db open])
     {
         int cNumber = [self.channeNumber.text intValue];
-        NSString *sql = [NSString stringWithFormat:@"insert into Channels values(%d,%d,%d,'%@','%@','%@',%d,'%@')",[responseObject[@"cId"] intValue],[self.deviceid intValue],cNumber,self.channelName.text,responseObject[@"imgUrl"],parent,1,self.eNumber];
+        NSString *sql = [NSString stringWithFormat:@"insert into Channels values(%d,%d,%d,'%@','%@','%@',%d,'%@')",[responseObject[@"cId"] intValue],[self.deviceid intValue],cNumber,self.channelName.text,self.chooseImg,parent,1,self.eNumber];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {
@@ -526,8 +526,8 @@
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
-    UIImage *chooseImg = info[UIImagePickerControllerEditedImage];
-    [self.editChannelImgBtn setBackgroundImage:chooseImg forState:UIControlStateNormal];
+    self.chooseImg = info[UIImagePickerControllerEditedImage];
+    [self.editChannelImgBtn setBackgroundImage:self.chooseImg forState:UIControlStateNormal];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 

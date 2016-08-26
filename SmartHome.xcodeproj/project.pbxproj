@@ -121,6 +121,7 @@
 		F60FDB461D003FD500AB04BE /* CurtainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB441D003FD500AB04BE /* CurtainTableViewCell.m */; };
 		F60FDB471D003FD500AB04BE /* CurtainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F60FDB451D003FD500AB04BE /* CurtainTableViewCell.xib */; };
 		F623378D1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F623378C1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.m */; };
+		F62337901D70675B00ADAD00 /* TVIconController.m in Sources */ = {isa = PBXBuildFile; fileRef = F623378F1D70675B00ADAD00 /* TVIconController.m */; };
 		F6251F711D541885000A5A47 /* PluginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6251F701D541885000A5A47 /* PluginViewController.m */; };
 		F6251F741D541D8A000A5A47 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = F6251F731D541D8A000A5A47 /* Device.m */; };
 		F6251F771D542508000A5A47 /* DeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6251F761D542508000A5A47 /* DeviceManager.m */; };
@@ -503,6 +504,8 @@
 		F60FDB451D003FD500AB04BE /* CurtainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CurtainTableViewCell.xib; sourceTree = "<group>"; };
 		F623378B1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImagePickerController+LandScapeImagePicker.h"; sourceTree = "<group>"; };
 		F623378C1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImagePickerController+LandScapeImagePicker.m"; sourceTree = "<group>"; };
+		F623378E1D70675B00ADAD00 /* TVIconController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVIconController.h; sourceTree = "<group>"; };
+		F623378F1D70675B00ADAD00 /* TVIconController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVIconController.m; sourceTree = "<group>"; };
 		F6251F6F1D541885000A5A47 /* PluginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginViewController.h; sourceTree = "<group>"; };
 		F6251F701D541885000A5A47 /* PluginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginViewController.m; sourceTree = "<group>"; };
 		F6251F721D541D8A000A5A47 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
@@ -874,6 +877,8 @@
 				F65FF4A91D61AC3D00C12271 /* SearchViewController.m */,
 				0FC41BAD1D6DA3DD000D4451 /* VoiceOrderController.h */,
 				0FC41BAE1D6DA3DD000D4451 /* VoiceOrderController.m */,
+				F623378E1D70675B00ADAD00 /* TVIconController.h */,
+				F623378F1D70675B00ADAD00 /* TVIconController.m */,
 			);
 			path = SmartHome;
 			sourceTree = "<group>";
@@ -1650,6 +1655,7 @@
 				0F180FC61D0E4E5000392F4C /* FMController.m in Sources */,
 				F67F1F771D3C719D00F2B7E5 /* systemInfomationController.m in Sources */,
 				0FABF91C1D06AA35000892D8 /* TVController.m in Sources */,
+				F62337901D70675B00ADAD00 /* TVIconController.m in Sources */,
 				0FAF74C31CEEA17C00432713 /* HRColorMapView.m in Sources */,
 				0FADA44A1CEBF8AE00777901 /* SceneManager.m in Sources */,
 				0F01D5441CDC6CA600DAC267 /* Scene.m in Sources */,
