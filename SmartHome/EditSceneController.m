@@ -166,7 +166,7 @@
             AirController *airVC = [storyBoard instantiateViewControllerWithIdentifier:@"AirController"];
             airVC.roomID = self.roomID;
             airVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        }else if([typeName isEqualToString:@"电视盒子"]){
+        }else if([typeName isEqualToString:@"机顶盒"]){
             NetvController *netVC = [storyBoard instantiateViewControllerWithIdentifier:@"NetvController"];
             netVC.roomID = self.roomID;
             netVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];

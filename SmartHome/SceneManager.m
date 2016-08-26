@@ -48,7 +48,7 @@
     http.delegate = self;
     http.tag = 1;
     
-    //[http sendPost:url param:dic];
+    [http sendPost:url param:dic];
 
     //上传文件
     

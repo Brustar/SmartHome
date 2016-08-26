@@ -407,7 +407,7 @@
                
                 //直接登录主机
                 [self sendRequestToHostWithTag:2 andRow:0];
-                [self goToViewController];
+                //[self goToViewController];
             }else{
                 self.tableView.hidden = NO;
                 self.coverView.hidden = NO;
@@ -420,10 +420,10 @@
 
             
         }else{
-            [MBProgressHUD showError:responseObject[@"Msg"]];
-        }
+                [MBProgressHUD showError:responseObject[@"Msg"]];
+            }
         
-    }else if(tag == 2 || tag == 3)
+    }else if(tag == 2 || tag == 3 )
     {
         if ([responseObject[@"Result"] intValue]==0)
         {
