@@ -352,10 +352,7 @@
     if([db open])
     {
         NSArray *messageInfo = responseObject[@"messageInfo"];
-        if(messageInfo == nil || messageInfo.count == 0 )
-        {
-            return;
-        }
+       
         for(NSDictionary *dicInfo in messageInfo)
         {
             int eqId = [dicInfo[@"eqId"] intValue];
@@ -401,7 +398,7 @@
                 [self.hostIDS addObject:hostID[@"hostId"]];
             }
             
-            NSString *mid = self.hostIDS[1];
+            NSString *mid = self.hostIDS[0];
             info.masterID =[PackManager NSDataToUint16:mid];
             NSInteger count = self.hostIDS.count;
             
@@ -604,6 +601,7 @@
             }
 
     }];
+    [self presentViewController:registVC animated:YES completion:nil];
     
     
 }

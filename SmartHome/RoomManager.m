@@ -21,7 +21,8 @@
     NSMutableArray *roomList = [NSMutableArray array];
     if([db open])
     {
-        FMResultSet *resultSet = [db executeQuery:@"select * from Rooms"];
+        NSString *sql = @"select * from Rooms";
+        FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next]) {
             Room *room = [Room new];
             room.rId = [resultSet intForColumn:@"ID"];

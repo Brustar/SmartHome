@@ -42,6 +42,8 @@
         self.cType = 0;
     }else self.cType = 1;
     self.passWord.delegate = self;
+    
+    
 }
 
 #pragma  mark - 手机验证码
@@ -110,13 +112,14 @@
     
         
     //发送注册请求
-    NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    DeviceInfo *info=[DeviceInfo defaultManager];
+    
     if(self.MasterID == nil)
     {
         self.MasterID = @"";
     }
     
-    NSDictionary *dict = @{@"HostID":self.MasterID,@"UserName":self.userName.text,@"Password":[self.passWord.text md5],@"UserTellNumber":self.phoneStr,@"UserType":[NSNumber numberWithInt:self.cType],@"AuthCode":self.authorNum.text,@"pushtoken":authorToken};
+    NSDictionary *dict = @{@"HostID":self.MasterID,@"UserName":self.userName.text,@"Password":[self.passWord.text md5],@"UserTellNumber":self.phoneStr,@"UserType":[NSNumber numberWithInt:self.cType],@"AuthCode":self.authorNum.text,@"Pushtoken":info.pushToken};
     NSString *url = [NSString stringWithFormat:@"%@UserRegist.aspx",[IOManager httpAddr]];
    
     
@@ -143,7 +146,6 @@
         if([responseObject[@"Result"] intValue] == 0)
         {
             [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
-            //[IOManager writeUserdefault:responseObject[@"UserID"] forKey:@"UserID"];
             [IOManager writeUserdefault:self.MasterID forKey:@"HostID"];
             [IOManager writeUserdefault:responseObject[@"UserHostID"] forKey:@"UserHostID"];
             self.coverView.hidden = NO;

@@ -36,7 +36,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self detailArray];
+    //[self detailArray];
     self.navigationItem.title = @"详细信息";
     self.titleArr = @[@"设备",@"序列号",@"生产日期",@"保修截止日期",@"型号",@"购买价格",@"购买日期",@"生产厂商",@"保修电话",@"功率",@"输入电流",@"输入电压",@"社区推荐"];
     
@@ -65,13 +65,25 @@
     return 2;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if(section == 0)
-    {
-        return 1;
-    }
     
-    return self.detailArray.count -1;
+    if(self.detailArray.count == 0 || self.detailArray == nil)
+    {
+        return 0;
+    }else{
+        if(section == 0)
+        {
+            return 1;
+        }else {
+            
+            
+            return self.detailArray.count -1;
+        }
+    }
+
 }
+    
+    
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"Cell";
@@ -85,10 +97,17 @@
     if(indexPath.section == 0)
     {
         cell.textLabel.text= self.titleArr[0];
+        
         cell.detailTextLabel.text = self.detailArray[0];
+        
+       
     }else{
         cell.textLabel.text= self.titleArr[indexPath.row +1];
+        
         cell.detailTextLabel.text = self.detailArray[indexPath.row +1];
+       
+        
+        
         if(indexPath.row == 7)
         {
             cell.detailTextLabel.textColor = [UIColor blueColor];
