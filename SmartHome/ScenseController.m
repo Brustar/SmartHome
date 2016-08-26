@@ -157,7 +157,8 @@
             return;
         }
         NSLog(@"外出模式");
-        //connect cloud
+        [self.netBarBtn setImage:[UIImage imageNamed:@"out"]];
+               //connect cloud
         NSUserDefaults *userdefault=[NSUserDefaults standardUserDefaults];
         [sock initTcp:[userdefault objectForKey:@"subIP"] port:[[userdefault objectForKey:@"subPort"] intValue] mode:outDoor delegate:self];
     }

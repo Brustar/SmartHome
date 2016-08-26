@@ -268,7 +268,7 @@
     return tempStr;
 }
 
-<<<<<<< HEAD
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     id theSegue = segue.destinationViewController;
@@ -317,6 +317,5 @@
 }
 
 
-=======
->>>>>>> d24bfcbe08e232cdb77283ea7128427bc4558802
+
 @end

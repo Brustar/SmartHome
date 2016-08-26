@@ -216,7 +216,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
    
     id theSegue = segue.destinationViewController;
-    [theSegue setValue:self.deviceid forKey:@"deviceid"];
+    [theSegue setValue:@"1" forKey:@"deviceid"];
 }
 
 

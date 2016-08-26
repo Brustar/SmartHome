@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<<<<<<< HEAD
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="6M2-qc-UnH">
-=======
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="iP5-w8-v4Y">
->>>>>>> d24bfcbe08e232cdb77283ea7128427bc4558802
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Q07-ua-pDl">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -87,7 +83,7 @@
                                     <outlet property="delegate" destination="9fE-YS-CKY" id="k7p-6F-yjE"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JnV-9I-K3a">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JnV-9I-K3a">
                                 <rect key="frame" x="10" y="220" width="580" height="300"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a2c-Cd-2bV">
@@ -2556,8 +2552,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jMf-6l-yHK">
-                                <rect key="frame" x="100" y="164" width="400" height="220"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jMf-6l-yHK">
+                                <rect key="frame" x="100" y="120" width="400" height="220"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欢迎注册逸云系统" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z7G-kS-gVb">
                                         <rect key="frame" x="144" y="20" width="112" height="17"/>
@@ -2714,8 +2710,8 @@
                                     <constraint firstItem="hRF-3g-Hca" firstAttribute="leading" secondItem="jMf-6l-yHK" secondAttribute="leading" constant="5" id="zGi-kQ-21G"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQf-8J-1Ym">
-                                <rect key="frame" x="100" y="404" width="400" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQf-8J-1Ym">
+                                <rect key="frame" x="100" y="360" width="400" height="30"/>
                                 <color key="backgroundColor" red="0.18264051614458393" green="0.62103239528795817" blue="0.30353016214555956" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="400" id="Ni6-FB-gwC"/>
@@ -4970,8 +4966,8 @@ layer.masksToBoundslayer.masksToBounds
                                     <outlet property="delegate" destination="2lV-M1-cea" id="aQY-il-9k5"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KCo-FH-E4U">
-                                <rect key="frame" x="175" y="225" width="250" height="150"/>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KCo-FH-E4U">
+                                <rect key="frame" x="175" y="200" width="250" height="200"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="保存场景" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5e-XO-eDO">
                                         <rect key="frame" x="85" y="15" width="80" height="24"/>
@@ -4994,6 +4990,20 @@ layer.masksToBoundslayer.masksToBounds
                                             <action selector="selectSceneImg:" destination="2lV-M1-cea" eventType="touchUpInside" id="GU4-sK-oow"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lNt-cV-cLb">
+                                        <rect key="frame" x="20" y="150" width="46" height="30"/>
+                                        <state key="normal" title="取消"/>
+                                        <connections>
+                                            <action selector="canleStore:" destination="2lV-M1-cea" eventType="touchUpInside" id="fPM-dL-2Gp"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jst-Ke-Grk">
+                                        <rect key="frame" x="184" y="150" width="46" height="30"/>
+                                        <state key="normal" title="确定"/>
+                                        <connections>
+                                            <action selector="sureStoreScene:" destination="2lV-M1-cea" eventType="touchUpInside" id="HXB-N3-6Du"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -5003,10 +5013,14 @@ layer.masksToBoundslayer.masksToBounds
                                     <constraint firstAttribute="trailing" secondItem="IOK-k0-c5l" secondAttribute="trailing" constant="20" id="OPl-sk-PJJ"/>
                                     <constraint firstAttribute="trailing" secondItem="iws-jn-V5x" secondAttribute="trailing" constant="20" id="PFs-Nz-9j2"/>
                                     <constraint firstItem="iws-jn-V5x" firstAttribute="top" secondItem="b5e-XO-eDO" secondAttribute="bottom" constant="20" id="YOl-BC-gAd"/>
-                                    <constraint firstAttribute="height" constant="150" id="dFC-dF-jEH"/>
+                                    <constraint firstItem="lNt-cV-cLb" firstAttribute="leading" secondItem="KCo-FH-E4U" secondAttribute="leading" constant="20" id="Z2S-GB-fWR"/>
+                                    <constraint firstAttribute="trailing" secondItem="jst-Ke-Grk" secondAttribute="trailing" constant="20" id="Ze9-gu-3jq"/>
+                                    <constraint firstAttribute="bottom" secondItem="jst-Ke-Grk" secondAttribute="bottom" constant="20" id="ais-lp-caC"/>
+                                    <constraint firstAttribute="height" constant="200" id="dFC-dF-jEH"/>
                                     <constraint firstItem="b5e-XO-eDO" firstAttribute="centerX" secondItem="KCo-FH-E4U" secondAttribute="centerX" id="fxU-3h-3Ca"/>
                                     <constraint firstItem="b5e-XO-eDO" firstAttribute="top" secondItem="KCo-FH-E4U" secondAttribute="top" constant="15" id="g4y-kp-KdC"/>
                                     <constraint firstItem="iws-jn-V5x" firstAttribute="leading" secondItem="KCo-FH-E4U" secondAttribute="leading" constant="20" id="pPy-t3-kEe"/>
+                                    <constraint firstAttribute="bottom" secondItem="lNt-cV-cLb" secondAttribute="bottom" constant="20" id="uvb-VS-McH"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -5026,7 +5040,7 @@ layer.masksToBoundslayer.masksToBounds
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="设备列表" id="csR-K7-glI">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="mHy-0A-wly">
+                        <barButtonItem key="rightBarButtonItem" title="保存" id="mHy-0A-wly">
                             <connections>
                                 <action selector="storeScene:" destination="2lV-M1-cea" id="YIY-Bo-iZt"/>
                             </connections>
@@ -5697,16 +5711,9 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-<<<<<<< HEAD
-=======
-        <segue reference="yTT-Nf-qWA"/>
-        <segue reference="5K5-wE-mZz"/>
-        <segue reference="dRU-hd-aVS"/>
-        <segue reference="bKA-jZ-hQY"/>
->>>>>>> d24bfcbe08e232cdb77283ea7128427bc4558802
+        <segue reference="PRs-sg-E1F"/>
         <segue reference="fXQ-oW-cHz"/>
-        <segue reference="mRk-xU-xJj"/>
         <segue reference="CtP-7b-vUS"/>
-        <segue reference="dd4-O7-1s4"/>
+        <segue reference="dA1-We-bRA"/>
     </inferredMetricsTieBreakers>
 </document>

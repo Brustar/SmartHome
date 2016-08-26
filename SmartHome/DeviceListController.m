@@ -19,7 +19,7 @@
 #import "PrintObject.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
-@interface DeviceListController ()<UITableViewDelegate,UITableViewDataSource,UISplitViewControllerDelegate>
+@interface DeviceListController ()<UITableViewDelegate,UITableViewDataSource,UISplitViewControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHight;
@@ -167,12 +167,15 @@
 
 }
 - (void)selectPhoto:(KxMenuItem *)item {
+    
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+        return;
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     
-    [self presentViewController:picker animated:YES completion:NULL];
+    [self presentViewController:picker animated:YES completion:nil];
 }
 
 - (void)takePhoto:(KxMenuItem *)item {
@@ -181,7 +184,7 @@
     picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     
-    [self presentViewController:picker animated:YES completion:NULL];
+    [self presentViewController:picker animated:YES completion:nil];
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
@@ -192,7 +195,10 @@
 
 
 - (IBAction)storeScene:(id)sender {
+    self.saveSceneView.hidden = NO;
     
+}
+- (IBAction)sureStoreScene:(id)sender {
     NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
@@ -200,10 +206,15 @@
     Scene *scene = [[Scene alloc]init];
     [scene setValuesForKeysWithDictionary:plistDic];
     NSString *imgStr = [self UIimageToStr:self.sceneImg];
-  
-    [[SceneManager defaultManager] addScenen:scene withName:self.sceneName.text withPic:imgStr];
     
+    [[SceneManager defaultManager] addScenen:scene withName:self.sceneName.text withPic:imgStr];
+
 }
+
+- (IBAction)canleStore:(id)sender {
+    self.saveSceneView.hidden = YES;
+}
+
 -(NSString *)UIimageToStr:(UIImage *)img
 {
     NSData *data = UIImageJPEGRepresentation(img,1.0f);

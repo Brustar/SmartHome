@@ -22,8 +22,8 @@
         
     }
     NSMutableArray *array = [NSMutableArray array];
-    
-    FMResultSet *resultSet = [db executeQueryWithFormat:@"select * from Devices where ID=%ld", (long)ID];
+    NSString *sql = [NSString stringWithFormat:@"select * from Devices where ID=%ld",(long)ID];
+    FMResultSet *resultSet = [db executeQuery:sql];
     
     if([resultSet next])
     {
