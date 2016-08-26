@@ -33,6 +33,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *firstDeleteBtn;
 @property (weak, nonatomic) IBOutlet UIButton *secondDeleteBtn;
 
+@property (weak, nonatomic) IBOutlet UIView *firstView;
+@property (weak, nonatomic) IBOutlet UIView *secondView;
 
 
 @end
@@ -44,8 +46,8 @@
     
     self.addSceseBtn.layer.cornerRadius = self.addSceseBtn.bounds.size.width / 2.0;
     self.addSceseBtn.layer.masksToBounds = YES;
-    self.firstButton.hidden = YES;
-    self.secondButton.hidden = YES;
+    self.firstView.hidden = YES;
+    self.secondView.hidden = YES;
 
    
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -71,11 +73,11 @@
 }
 -(void)handleLongPressGesture:(UILongPressGestureRecognizer *)lgrs
 {
-    if(self.firstButton.hidden == NO)
+    if(self.firstView.hidden == NO)
     {
         self.firstDeleteBtn.hidden = NO;
     }
-    if(self.secondButton.hidden == NO)
+    if(self.secondView.hidden == NO)
     {
         self.secondDeleteBtn.hidden = NO;
     }
@@ -85,23 +87,26 @@
 {
     if(self.scenes.count == 0)
     {
-        self.firstButton.hidden = YES;
-        self.secondButton.hidden = YES;
+        self.firstView.hidden = YES;
+        self.secondView.hidden = YES;
+
     }else if(self.scenes .count == 1)
     {
-        self.secondButton.hidden = YES;
-        self.firstButton.hidden = NO;
+        self.secondView.hidden = YES;
+        self.firstView.hidden = NO;
         Scene *scene = self.scenes[0];
+        //self.firstButton.tag = scene.sceneID;
         [self.firstButton setTitle:scene.sceneName forState:UIControlStateNormal];
         
     }else {
         Scene *scene = self.scenes[0];
+        self.firstButton.tag = scene.sceneID;
         [self.firstButton setTitle:scene.sceneName forState:UIControlStateNormal];
         Scene *scondScene = self.scenes[1];
         [self.secondButton setTitle:scondScene.sceneName forState:UIControlStateNormal];
-        
-        self.firstButton.hidden = NO;
-        self.secondButton.hidden = NO;
+        self.secondButton.tag = scondScene.sceneID;
+        self.firstView.hidden = NO;
+        self.secondView.hidden = NO;
         
         }
 }
@@ -227,7 +232,7 @@
         id theSegue = segue.destinationViewController;
         
         [theSegue setValue:[NSNumber numberWithInt:self.selectedSID] forKey:@"sceneID"];
-        [theSegue setValue:[NSNumber numberWithInt:self.selectedDID] forKey:@"deviceID"];
+        //[theSegue setValue:[NSNumber numberWithInt:self.selectedDID] forKey:@"deviceID"];
         [theSegue setValue:[NSNumber numberWithInt:self.roomID] forKey:@"roomID"];
     }
 }
@@ -255,9 +260,9 @@
 }
 
 - (IBAction)clickSceneBtn:(UIButton *)sender {
-    Scene *scene = self.scenes[sender.tag];
-    self.selectedSID = scene.sceneID;
-    self.selectedDID = scene.eID;
+   // Scene *scene = self.scenes[sender.tag];
+    self.selectedSID =(int)sender.tag;
+    //self.selectedDID = scene.eID;
     [self performSegueWithIdentifier:@"sceneDetailSegue" sender:self];
 }
 
