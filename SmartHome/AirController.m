@@ -38,7 +38,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.params=@[@[@"制冷",@"制热",@"抽湿",@"自动"],@[@"向上",@"向下"],@[@"高风",@"中风",@"低风"],@[@"0.5H",@"1H",@"2H",@"3H"]];
+    self.params=@[@[@"制热",@"制冷",@"抽湿",@"自动"],@[@"向上",@"向下"],@[@"高风",@"中风",@"低风"],@[@"0.5H",@"1H",@"2H",@"3H"]];
     self.paramView.scrollEnabled=NO;
     if ([self.sceneid intValue]>0) {
         
@@ -194,7 +194,11 @@
     uint8_t cmd=0x00;
     if (self.currentButton == mode) {
         self.currentMode = self.currentIndex+1;
-        cmd = 0x39+self.currentIndex;
+        if (self.currentIndex==0) {
+            cmd = 0x39+self.currentIndex;
+        }else{
+            cmd = 0x3F+self.currentIndex;
+        }
     }
     if (self.currentButton == level) {
         self.currentLevel = self.currentIndex+1;

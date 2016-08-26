@@ -168,44 +168,30 @@
     proto.action.state=action;
     NSString *enumber=[DeviceManager getENumber:[deviceID integerValue]];
     NSString *eid=[DeviceManager getEType:[deviceID integerValue]];
-    proto.deviceID=CFSwapInt16BigToHost([PackManager NSDataToUint16:enumber]);
-    proto.deviceType=[PackManager NSDataToUint8:eid];
+    proto.deviceID=CFSwapInt16BigToHost([PackManager NSDataToUint16:enumber]); //CFSwapInt16BigToHost(0x0010);
+    proto.deviceType=[PackManager NSDataToUint8:eid]; //0x31;
     return dataFromProtocol(proto);
 }
 
 -(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID value:(uint8_t)value
 {
-    Proto proto=createProto();
-    if (self.connectState == atHome) {
-        proto.cmd=0x04;
-    }else if (self.connectState == outDoor){
-        proto.cmd=0x03;
-    }
-    proto.action.state=action;
+    
+    NSData *data = [self action:action deviceID:deviceID];
+    Proto proto = protocolFromData(data);
+    
     proto.action.RValue=value;
-    NSString *eid=[DeviceManager getEType:[deviceID integerValue]];
-    NSString *enumber=[DeviceManager getENumber:[deviceID integerValue]];
-    proto.deviceID=CFSwapInt16BigToHost([PackManager NSDataToUint16:enumber]);
-    proto.deviceType=[PackManager NSDataToUint8:eid];
     return dataFromProtocol(proto);
 }
 
 -(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID R:(uint8_t)red  G:(uint8_t)green B:(uint8_t)blue
 {
-    Proto proto=createProto();
-    if (self.connectState == atHome) {
-        proto.cmd=0x04;
-    }else if (self.connectState == outDoor){
-        proto.cmd=0x03;
-    }
-    proto.action.state=action;
+    NSData *data = [self action:action deviceID:deviceID];
+    Proto proto = protocolFromData(data);
+    
     proto.action.RValue=red;
     proto.action.B=blue;
     proto.action.G=green;
-    NSString *eid=[DeviceManager getEType:[deviceID integerValue]];
-    NSString *enumber=[DeviceManager getENumber:[deviceID integerValue]];
-    proto.deviceID=CFSwapInt16BigToHost([PackManager NSDataToUint16:enumber]);
-    proto.deviceType=[PackManager NSDataToUint8:eid];
+
     return dataFromProtocol(proto);
 }
 
@@ -213,7 +199,7 @@
 {
     Proto proto=createProto();
     if (self.connectState==outDoor) {
-        if (self.masterPort==[IOManager tcpPort]) {
+        if (self.masterPort == [IOManager tcpPort]) {
             proto.cmd=0x82;
         }else{
             proto.cmd=0x85;
@@ -223,7 +209,10 @@
     }
     proto.deviceType=0x00;
     proto.deviceID=0x00;
-    
+    proto.action.state=0x00;
+    proto.action.RValue=0x00;
+    proto.action.G=0x00;
+    proto.action.B=0x00;
     return dataFromProtocol(proto);
 }
 
@@ -361,10 +350,16 @@
     return [self action:program deviceID:deviceID];
 }
 
-#pragma mark - Guard
+#pragma mark - Guard / Projector
 -(NSData *) toogle:(uint8_t)toogle deviceID:(NSString *)deviceID
 {
     return [self action:toogle deviceID:deviceID];
+}
+
+#pragma mark - Screen
+-(NSData *) drop:(uint8_t)droped deviceID:(NSString *)deviceID
+{
+    return [self action:0x34-droped deviceID:deviceID];
 }
 
 #pragma mark - Air

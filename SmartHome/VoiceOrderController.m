@@ -43,7 +43,6 @@
     
     //创建合成对象，为单例模式
     _iFlySpeechSynthesizer = [IFlySpeechSynthesizer sharedInstance];
-    _iFlySpeechSynthesizer.delegate = self;
     
     //设置语音合成的参数
     //合成的语速,取值范围 0~100
@@ -219,7 +218,7 @@
     NSLog(@"_result=%@",result);
     NSString * resultFromJson =  [self stringFromJson:resultString];
     result= [NSString stringWithFormat:@"%@%@", self.resultLabel.text,resultFromJson];
-    self.resultLabel.text = [result stringByMatching:@"^([\\u4e00-\\u9fa5]+).*" capture:1L];
+    self.resultLabel.text = [result stringByMatching:@"^([\\u4e00-\\u9fa5\\w]+).*" capture:1L];
     
     if (isLast){
         NSLog(@"听写结果(json)：%@测试", result);
@@ -235,7 +234,6 @@
         [self performSegueWithIdentifier:@"sceneSegue" sender:self];
         
     }else{
-        //self.resultLabel.text=@"不能识别此指令";
         self.sampleLabel.text = @"找不到匹配项，请重新说";
     }
 }
@@ -268,7 +266,6 @@
     return tempStr;
 }
 
-
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     id theSegue = segue.destinationViewController;
@@ -278,44 +275,5 @@
     [theSegue setValue:[NSNumber numberWithInt:roomId] forKey:@"roomID"];
     
 }
-
-#pragma mark - IFlySpeechSynthesizerDelegate
-//开始播放
-- (void) onSpeakBegin
-{
-    
-}
-
-//缓冲进度
-- (void) onBufferProgress:(int) progress message:(NSString *)msg
-{
-    NSLog(@"bufferProgress:%d,message:%@",progress,msg);
-}
-
-//播放进度
-- (void) onSpeakProgress:(int) progress
-{
-    NSLog(@"play progress:%d",progress);
-}
-
-//暂停播放
-- (void) onSpeakPaused
-{
-    
-}
-
-//恢复播放
-- (void) onSpeakResumed
-{
-    
-}
-
-//结束回调
-- (void) onCompleted:(IFlySpeechError *) error
-{
-    
-}
-
-
 
 @end

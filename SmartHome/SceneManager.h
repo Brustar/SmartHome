@@ -35,7 +35,6 @@
 
 -(void) startScene:(int)sceneid;
 
-
 //得到所有场景
 +(NSArray *)allSceneModels;
 +(NSArray *)devicesBySceneID:(int)sId;

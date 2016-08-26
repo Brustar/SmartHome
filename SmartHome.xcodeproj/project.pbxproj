@@ -92,6 +92,8 @@
 		0FC0FFD71CF553AD000F71D5 /* planeScene.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0FC0FFD61CF553AD000F71D5 /* planeScene.plist */; };
 		0FC0FFDA1CF577C0000F71D5 /* RealScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC0FFD91CF577C0000F71D5 /* RealScene.m */; };
 		0FC0FFDD1CF57E58000F71D5 /* TouchImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC0FFDC1CF57E58000F71D5 /* TouchImage.m */; };
+		0FC119771D6FE5E0001DA19A /* Screen.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC119761D6FE5E0001DA19A /* Screen.m */; };
+		0FC1197A1D6FE61C001DA19A /* Projector.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC119791D6FE61C001DA19A /* Projector.m */; };
 		0FC3DE851D236CFF00A03482 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC3DE841D236CFF00A03482 /* LoginController.m */; };
 		0FC41BAF1D6DA3DD000D4451 /* VoiceOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC41BAE1D6DA3DD000D4451 /* VoiceOrderController.m */; };
 		0FC7FDC11CED6CC700F91BDF /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC7FDC01CED6CC700F91BDF /* libsqlite3.tbd */; };
@@ -444,6 +446,10 @@
 		0FC0FFD91CF577C0000F71D5 /* RealScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealScene.m; sourceTree = "<group>"; };
 		0FC0FFDB1CF57E58000F71D5 /* TouchImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchImage.h; sourceTree = "<group>"; };
 		0FC0FFDC1CF57E58000F71D5 /* TouchImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchImage.m; sourceTree = "<group>"; };
+		0FC119751D6FE5E0001DA19A /* Screen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Screen.h; sourceTree = "<group>"; };
+		0FC119761D6FE5E0001DA19A /* Screen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Screen.m; sourceTree = "<group>"; };
+		0FC119781D6FE61C001DA19A /* Projector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Projector.h; sourceTree = "<group>"; };
+		0FC119791D6FE61C001DA19A /* Projector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Projector.m; sourceTree = "<group>"; };
 		0FC3DE831D236CFF00A03482 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
 		0FC3DE841D236CFF00A03482 /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
 		0FC41BAD1D6DA3DD000D4451 /* VoiceOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceOrderController.h; sourceTree = "<group>"; };
@@ -694,6 +700,10 @@
 				F6A1C02D1D586D7500856E00 /* Room.m */,
 				F66CADE31D5D8654001E66EC /* DeviceType.h */,
 				F66CADE41D5D8654001E66EC /* DeviceType.m */,
+				0FC119751D6FE5E0001DA19A /* Screen.h */,
+				0FC119761D6FE5E0001DA19A /* Screen.m */,
+				0FC119781D6FE61C001DA19A /* Projector.h */,
+				0FC119791D6FE61C001DA19A /* Projector.m */,
 			);
 			name = entity;
 			sourceTree = "<group>";
@@ -1282,6 +1292,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0F032D771CC9B12700D1920D /* Build configuration list for PBXNativeTarget "SmartHome" */;
 			buildPhases = (
+				4B5F56A8FA12D4BD7D28AF3D /* 📦 Check Pods Manifest.lock */,
 				9E5B0BAA933708A69B87E6AE /* [CP] Check Pods Manifest.lock */,
 				22E4FF7C74861624FBD7E7CB /* [CP] Check Pods Manifest.lock */,
 				7B4EC63A298C6E6A66AD1643 /* [CP] Check Pods Manifest.lock */,
@@ -1455,6 +1466,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		4B5F56A8FA12D4BD7D28AF3D /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		6984B7368FBF635163F6D0CF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1596,6 +1622,7 @@
 				0F4B49801CFEB13500D93DD2 /* CurtainController.m in Sources */,
 				F6690BF61D62EC3F0098B0EE /* ChannelManager.m in Sources */,
 				0FCFB3921CF293D800B37DD3 /* Netv.m in Sources */,
+				0FC1197A1D6FE61C001DA19A /* Projector.m in Sources */,
 				F6B91F6F1D100EF700592FB0 /* DVCollectionViewCell.m in Sources */,
 				0F96A1641D17F37C00E1594F /* RulerItem.m in Sources */,
 				0FAF8FFB1CE1D9BC000557BD /* UploadManager.m in Sources */,
@@ -1612,6 +1639,7 @@
 				0F1F3BCA1D2B85EA00B2641C /* MBProgressHUD+NJ.m in Sources */,
 				F625A61B1D4C99EC00B696E5 /* RoomListController.m in Sources */,
 				0F9D238A1CEDBC500049A58C /* AddScene.m in Sources */,
+				0FC119771D6FE5E0001DA19A /* Screen.m in Sources */,
 				F63AE0031D11319C00BE17DC /* FMCollectionViewCell.m in Sources */,
 				0FAF8FF51CE1B514000557BD /* VolumeManager.m in Sources */,
 				0F2D35BD1D114E7000C46DE5 /* RTSPPlayer.m in Sources */,
@@ -1846,7 +1874,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FFmpeg-iOS/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1884,7 +1912,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FFmpeg-iOS/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

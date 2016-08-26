@@ -54,7 +54,7 @@
     }
     EntranceGuard *device=[[EntranceGuard alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
-    [device setPoweron: self.switchView.isOn];
+    [device setUnlock: self.switchView.isOn];
     
     Scene *scene=[[Scene alloc] init];
     [scene setSceneID:[self.sceneid intValue]];
@@ -113,7 +113,7 @@
             for(int i=0;i<[scene.devices count];i++)
             {
                 if ([[scene.devices objectAtIndex:i] isKindOfClass:[EntranceGuard class]]) {
-                    self.switchView.on=((EntranceGuard*)[scene.devices objectAtIndex:i]).poweron;
+                    self.switchView.on=((EntranceGuard*)[scene.devices objectAtIndex:i]).unlock;
                 }
             }
         }

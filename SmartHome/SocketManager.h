@@ -26,14 +26,12 @@ enum{
 
 @property (nonatomic, retain) NSTimer        *connectTimer; // 计时器
 @property (nonatomic,strong) id delegate;
-@property (nonatomic) int        netMode;
 
 + (id)defaultManager;
 -(void)socketConnectHost;// socket连接
 -(void)cutOffSocket; // 断开socket连接
 
--(void)initTcp:(NSString *)addr port:(int)port mode:(int)mode delegate:(id)delegate;
-- (void) connectAfterLogined;
+-(void)initTcp:(NSString *)addr port:(int)port delegate:(id)delegate;
 -(void)connectUDP:(int)port;
 -(void)connectUDP:(int)port delegate:(id)delegate;
 -(void)connectTcp;

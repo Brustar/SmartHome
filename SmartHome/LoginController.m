@@ -414,9 +414,10 @@
                 [self.tableView reloadData];
             }
             
-            //连接socket
-            [[SocketManager defaultManager] connectAfterLogined];
             
+         
+            
+
             
         }else{
             [MBProgressHUD showError:responseObject[@"Msg"]];

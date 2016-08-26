@@ -5714,9 +5714,9 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CtP-7b-vUS"/>
-        <segue reference="dA1-We-bRA"/>
-        <segue reference="uCb-ME-O7C"/>
         <segue reference="mRk-xU-xJj"/>
+        <segue reference="CtP-7b-vUS"/>
+        <segue reference="dd4-O7-1s4"/>
+        <segue reference="fXQ-oW-cHz"/>
     </inferredMetricsTieBreakers>
 </document>

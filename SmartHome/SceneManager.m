@@ -10,9 +10,13 @@
 #import "RegexKitLite.h"
 #import "Device.h"
 #import "DeviceManager.h"
-#import "MBProgressHUD+NJ.h"
-#import "HttpManager.h"
 
+#import "MBProgressHUD+NJ.h"
+
+#import "Screen.h"
+
+#import "HttpManager.h"
+#import "Projector.h"
 #import "SocketManager.h"
 
 
@@ -44,7 +48,7 @@
     http.delegate = self;
     http.tag = 1;
     
-    [http sendPost:url param:dic];
+    //[http sendPost:url param:dic];
 
     //上传文件
     
@@ -140,7 +144,7 @@
         
         NSMutableArray *devices=[[NSMutableArray alloc] init];
         for (NSDictionary *dic in [dictionary objectForKey:@"devices"]) {
-            if ([dic objectForKey:@"color"]) {
+            if ([dic objectForKey:@"isPoweron"]) {
                 Light *device=[[Light alloc] init];
                 device.deviceID=[[dic objectForKey:@"deviceID"] intValue];
                 device.color=[dic objectForKey:@"color"];
@@ -185,9 +189,9 @@
                 device.bgvolume=[[dic objectForKey:@"bgvolume"] intValue];
                 [devices addObject:device];
             }
-            if ([dic objectForKey:@"poweron"]) {
+            if ([dic objectForKey:@"unlock"]) {
                 EntranceGuard *device=[[EntranceGuard alloc] init];
-                device.poweron=[[dic objectForKey:@"poweron"] intValue];
+                device.unlock=[[dic objectForKey:@"unlock"] intValue];
                 [devices addObject:device];
             }
             if ([dic objectForKey:@"temperature"]) {
@@ -197,6 +201,16 @@
                 device.WindLevel=[[dic objectForKey:@"WindLevel"] intValue];
                 device.Windirection=[[dic objectForKey:@"Windirection"] intValue];
                 device.mode=[[dic objectForKey:@"mode"] intValue];
+                [devices addObject:device];
+            }
+            if ([dic objectForKey:@"Dropped"]) {
+                Screen *device=[[Screen alloc] init];
+                device.Dropped=[[dic objectForKey:@"Dropped"] intValue];
+                [devices addObject:device];
+            }
+            if ([dic objectForKey:@"showed"]) {
+                Projector *device=[[Projector alloc] init];
+                device.showed=[[dic objectForKey:@"showed"] intValue];
                 [devices addObject:device];
             }
         }
@@ -308,8 +322,26 @@
         if ([device isKindOfClass:[EntranceGuard class]]) {
             EntranceGuard *guard=(EntranceGuard *)device;
             NSString *deviceid=[NSString stringWithFormat:@"%d", guard.deviceID];
-            if (guard.poweron) {
-                data=[[DeviceInfo defaultManager] toogle:guard.poweron deviceID:deviceid];
+            if (guard.unlock) {
+                data=[[DeviceInfo defaultManager] toogle:guard.unlock deviceID:deviceid];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+            }
+        }
+        
+        if ([device isKindOfClass:[Screen class]]) {
+            Screen *screen=(Screen *)device;
+            NSString *deviceid=[NSString stringWithFormat:@"%d", screen.deviceID];
+            if (screen.Dropped) {
+                data=[[DeviceInfo defaultManager] drop:screen.Dropped deviceID:deviceid];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+            }
+        }
+        
+        if ([device isKindOfClass:[Projector class]]) {
+            Projector *projector=(Projector *)device;
+            NSString *deviceid=[NSString stringWithFormat:@"%d", projector.deviceID];
+            if (projector.showed) {
+                data=[[DeviceInfo defaultManager] toogle:projector.showed deviceID:deviceid];
                 [sock.socket writeData:data withTimeout:1 tag:1];
             }
         }
@@ -320,7 +352,11 @@
             data=[[DeviceInfo defaultManager] toogleAirCon:aircon.isPoweron deviceID:deviceid];
             [sock.socket writeData:data withTimeout:1 tag:1];
             if (aircon.mode>=0) {
-                data=[[DeviceInfo defaultManager] changeMode:0x39+aircon.mode deviceID:deviceid];
+                if (aircon.mode==0) {
+                    data=[[DeviceInfo defaultManager] changeMode:0x39+aircon.mode deviceID:deviceid];
+                }else{
+                    data=[[DeviceInfo defaultManager] changeMode:0x3F+aircon.mode deviceID:deviceid];
+                }
                 [sock.socket writeData:data withTimeout:1 tag:1];
             }
             if (aircon.WindLevel>=0) {
