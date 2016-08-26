@@ -222,7 +222,7 @@
     
     if (isLast){
         NSLog(@"听写结果(json)：%@测试", result);
-    }
+    
     
     NSLog(@"resultFromJson=%@",resultFromJson);
     NSLog(@"isLast=%d,_textView.text=%@",isLast,self.resultLabel.text);
@@ -235,6 +235,7 @@
         
     }else{
         self.sampleLabel.text = @"找不到匹配项，请重新说";
+    }
     }
 }
 

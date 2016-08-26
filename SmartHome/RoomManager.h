@@ -10,6 +10,7 @@
 
 @interface RoomManager : NSObject
 
+
 +(NSArray *)getAllRoomsInfo;
 
 

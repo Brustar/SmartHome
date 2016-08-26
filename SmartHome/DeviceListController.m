@@ -19,6 +19,7 @@
 #import "PrintObject.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
+#import "UIImagePickerController+LandScapeImagePicker.h"
 @interface DeviceListController ()<UITableViewDelegate,UITableViewDataSource,UISplitViewControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -44,7 +45,6 @@
     }
     
 }
-    
 
 
 -(void) viewDidLoad
@@ -64,7 +64,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    //self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
+    self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAutomatic;
      self.tableViewHight.constant = self.deviceTypes.count * self.tableView.rowHeight;
 }
 -(IBAction)remove:(id)sender
@@ -130,9 +130,12 @@
     }else if([typeName isEqualToString:@"智能插座"]) {
         segue = @"pluginSegue";
     }
-    else {
-        segue = @"Guard";
+    else if([typeName isEqualToString:@"机顶盒"])
+    {
+        segue = @"Netv";
 
+    }else{
+        segue = @"Guard";
     }
 
     
@@ -166,6 +169,7 @@
                                                                                                                                              ]];
 
 }
+
 - (void)selectPhoto:(KxMenuItem *)item {
     
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
@@ -174,7 +178,8 @@
     picker.delegate = self;
     picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    
+    [picker shouldAutorotate];
+    [picker supportedInterfaceOrientations];
     [self presentViewController:picker animated:YES completion:nil];
 }
 
@@ -183,6 +188,7 @@
     picker.delegate = self;
     picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    
     
     [self presentViewController:picker animated:YES completion:nil];
 }
