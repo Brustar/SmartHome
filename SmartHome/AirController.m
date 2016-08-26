@@ -93,7 +93,7 @@
     [scene setRoomName:@""];
     [scene setSceneName:@""];
     
-    [[SceneManager defaultManager] addScenen:scene withName:nil withPic:@""];
+    //[[SceneManager defaultManager] addScenen:scene withName:nil withPic:@""];
     
 }
 
