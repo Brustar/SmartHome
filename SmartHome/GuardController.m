@@ -54,7 +54,7 @@
     }
     EntranceGuard *device=[[EntranceGuard alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
-    [device setPoweron: self.switchView.isOn];
+    [device setUnlock: self.switchView.isOn];
     
     Scene *scene=[[Scene alloc] init];
     [scene setSceneID:[self.sceneid intValue]];

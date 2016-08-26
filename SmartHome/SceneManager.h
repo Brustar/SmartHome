@@ -33,10 +33,9 @@
 
 -(NSArray *)addDevice2Scene:(Scene *)scene withDeivce:(id)device withId:(int)deviceID;
 
-<<<<<<< HEAD
+
 -(void) startScene:(int)sceneid;
-=======
->>>>>>> d24bfcbe08e232cdb77283ea7128427bc4558802
+
 //得到所有场景
 +(NSArray *)allSceneModels;
 +(NSArray *)devicesBySceneID:(int)sId;

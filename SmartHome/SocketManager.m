@@ -30,7 +30,7 @@
     self.socket = [[AsyncSocket alloc] initWithDelegate:self];
     NSError *error = nil;
     [self.socket connectToHost:self.socketHost onPort:self.socketPort error:&error];
-    NSLog(@"tcp port:%d",self.socketPort);
+    //NSLog(@"tcp port:%d",self.socketPort);
 }
 
 // 切断socket
@@ -124,9 +124,6 @@
         [IOManager writeUserdefault:[NSNumber numberWithLong:[PackManager NSDataToUInt:masterID]] forKey:@"masterID"];
         [self initTcp:[PackManager NSDataToIP:ip] port:(int)[PackManager NSDataToUInt:port] mode:atHome delegate:nil];
         info.connectState = atHome;
-        [self.socket writeData:[[DeviceInfo defaultManager] author] withTimeout:-1 tag:0];
-        [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:0];
-        
     }else{
         [self connectTcp];
         info.connectState = outDoor;
@@ -144,8 +141,6 @@
         [self initTcp:[PackManager NSDataToIP:ip] port:(int)[PackManager NSDataToUInt:port] mode:outDoor delegate:nil];
         DeviceInfo *device=[DeviceInfo defaultManager];
         device.masterPort=(int)[PackManager NSDataToUInt:port];
-        [self.socket writeData:[[DeviceInfo defaultManager] author] withTimeout:-1 tag:0];
-        [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:0];
     }
 }
 
@@ -153,6 +148,8 @@
 -(void)onSocket:(AsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port
 {
     NSLog(@"socket连接成功,host:%@,port:%d",host,port);
+    [self.socket writeData:[[DeviceInfo defaultManager] author] withTimeout:-1 tag:0];
+    [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:0];
     // 每隔30s像服务器发送心跳包
     //self.connectTimer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(longConnectToSocket) userInfo:nil repeats:YES];
     //[self.connectTimer fire];
@@ -181,8 +178,6 @@
     NSLog(@"sorry the connect is failure %ld",sock.userData);
     if (sock.userData == SocketOfflineByServer) {// 服务器掉线，重连
         [self socketConnectHost];
-        [self.socket writeData:[[DeviceInfo defaultManager] author] withTimeout:-1 tag:0];
-        [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:0];
     }else if (sock.userData == SocketOfflineByUser) {// 如果由用户断开，不进行重连
         return;
     }

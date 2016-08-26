@@ -168,8 +168,8 @@
     proto.action.state=action;
     NSString *enumber=[DeviceManager getENumber:[deviceID integerValue]];
     NSString *eid=[DeviceManager getEType:[deviceID integerValue]];
-    proto.deviceID=CFSwapInt16BigToHost([PackManager NSDataToUint16:enumber]);
-    proto.deviceType=[PackManager NSDataToUint8:eid];
+    proto.deviceID=CFSwapInt16BigToHost(0x0010);//CFSwapInt16BigToHost([PackManager NSDataToUint16:enumber]);
+    proto.deviceType=0x31;//[PackManager NSDataToUint8:eid];
     return dataFromProtocol(proto);
 }
 
@@ -185,8 +185,8 @@
     proto.action.RValue=value;
     NSString *eid=[DeviceManager getEType:[deviceID integerValue]];
     NSString *enumber=[DeviceManager getENumber:[deviceID integerValue]];
-    proto.deviceID=CFSwapInt16BigToHost([PackManager NSDataToUint16:enumber]);
-    proto.deviceType=[PackManager NSDataToUint8:eid];
+    proto.deviceID=CFSwapInt16BigToHost(0x0010);//CFSwapInt16BigToHost([PackManager NSDataToUint16:enumber]);
+    proto.deviceType=0x31;//[PackManager NSDataToUint8:eid];
     return dataFromProtocol(proto);
 }
 
@@ -223,7 +223,10 @@
     }
     proto.deviceType=0x00;
     proto.deviceID=0x00;
-    
+    proto.action.state=0x00;
+    proto.action.RValue=0x00;
+    proto.action.G=0x00;
+    proto.action.B=0x00;
     return dataFromProtocol(proto);
 }
 
@@ -361,10 +364,16 @@
     return [self action:program deviceID:deviceID];
 }
 
-#pragma mark - Guard
+#pragma mark - Guard / Projector
 -(NSData *) toogle:(uint8_t)toogle deviceID:(NSString *)deviceID
 {
     return [self action:toogle deviceID:deviceID];
+}
+
+#pragma mark - Screen
+-(NSData *) drop:(uint8_t)droped deviceID:(NSString *)deviceID
+{
+    return [self action:0x34-droped deviceID:deviceID];
 }
 
 #pragma mark - Air
