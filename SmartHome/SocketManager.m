@@ -30,7 +30,6 @@
     self.socket = [[AsyncSocket alloc] initWithDelegate:self];
     NSError *error = nil;
     [self.socket connectToHost:self.socketHost onPort:self.socketPort error:&error];
-    //NSLog(@"tcp port:%d",self.socketPort);
 }
 
 // 切断socket
@@ -88,31 +87,19 @@
     //请求协调服务器
     [self initTcp:[IOManager tcpAddr] port:[IOManager tcpPort] delegate:nil];
     DeviceInfo *device=[DeviceInfo defaultManager];
-    device.connectState = outDoor;
     device.masterPort=[IOManager tcpPort];
+    device.masterIP=[IOManager tcpAddr];
+    device.connectState=outDoor;
+    
     NSData *data=[device author];
     [self.socket writeData:data withTimeout:1 tag:1000];
     [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:1000];
-}
-
-- (void) connectAfterLogined
-{
-    DeviceInfo *device=[DeviceInfo defaultManager];
-    
-    if (device.reachbility == ReachableViaWiFi) {
-        [self connectUDP:[IOManager udpPort]];
-    }else if (device.reachbility == ReachableViaWWAN){
-        [self connectTcp];
-    }else{
-        [MBProgressHUD showError:@"当前网络不可用，请检查你的网络设置"];
-    }
 }
 
 - (void) handleUDP:(NSData *)data
 {
     DeviceInfo *info=[DeviceInfo defaultManager];
     if ([PackManager checkProtocol:data cmd:0x80] || [PackManager checkProtocol:data cmd:0x81]) {
-        info.connectState = atHome;
         NSData *masterID=[data subdataWithRange:NSMakeRange(2, 2)];
         NSData *ip=[data subdataWithRange:NSMakeRange(4, 4)];
         NSData *port=[data subdataWithRange:NSMakeRange(8, 2)];
@@ -120,8 +107,13 @@
         info.masterID=(long)[PackManager NSDataToUInt:masterID];
         info.masterIP=[PackManager NSDataToIP:ip];
         info.masterPort=(int)[PackManager NSDataToUInt:port];
+        info.connectState=atHome;
+        
         [IOManager writeUserdefault:[NSNumber numberWithLong:[PackManager NSDataToUInt:masterID]] forKey:@"masterID"];
         [self initTcp:[PackManager NSDataToIP:ip] port:(int)[PackManager NSDataToUInt:port] delegate:nil];
+        
+        [self.socket writeData:[[DeviceInfo defaultManager] author] withTimeout:-1 tag:0];
+        [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:0];
     }else{
         [self connectTcp];
     }
@@ -138,6 +130,10 @@
         [self initTcp:[PackManager NSDataToIP:ip] port:(int)[PackManager NSDataToUInt:port] delegate:nil];
         DeviceInfo *device=[DeviceInfo defaultManager];
         device.masterPort=(int)[PackManager NSDataToUInt:port];
+        device.masterIP = [PackManager NSDataToIP:ip];
+        
+        [self.socket writeData:[[DeviceInfo defaultManager] author] withTimeout:-1 tag:0];
+        [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:0];
     }
 }
 
@@ -146,16 +142,11 @@
 {
     NSLog(@"socket连接成功,host:%@,port:%d",host,port);
     DeviceInfo *device=[DeviceInfo defaultManager];
-    if ([self.socketHost isEqualToString:[IOManager tcpAddr]]) {
+    if ([host isEqualToString:[IOManager tcpAddr]]) {
         device.connectState=outDoor;
     }else{
         device.connectState=atHome;
     }
-    [self.socket writeData:[[DeviceInfo defaultManager] author] withTimeout:-1 tag:0];
-    [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:0];
-    // 每隔30s像服务器发送心跳包
-    //self.connectTimer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(longConnectToSocket) userInfo:nil repeats:YES];
-    //[self.connectTimer fire];
 }
 
 - (void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag

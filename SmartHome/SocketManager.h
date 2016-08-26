@@ -32,7 +32,6 @@ enum{
 -(void)cutOffSocket; // 断开socket连接
 
 -(void)initTcp:(NSString *)addr port:(int)port delegate:(id)delegate;
-- (void) connectAfterLogined;
 -(void)connectUDP:(int)port;
 -(void)connectUDP:(int)port delegate:(id)delegate;
 -(void)connectTcp;

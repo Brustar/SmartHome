@@ -414,7 +414,7 @@
             }
             
             //连接socket
-            [[SocketManager defaultManager] connectAfterLogined];
+            //[[SocketManager defaultManager] connectAfterLogined];
             //更新配置
             //[[DeviceInfo defaultManager] initConfig];
             
