@@ -21,6 +21,8 @@
 @property (nonatomic,strong)NSString *roomName;
 //场景图片id
 @property (nonatomic) int picID;
+
+@property (nonatomic,strong) NSString *picName;
 //场景开始时间
 @property(nonatomic,strong)NSString *startTime;
 //天文时间

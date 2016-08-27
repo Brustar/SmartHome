@@ -16,4 +16,8 @@
 - (NSUInteger)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskAll;
 }
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
 @end

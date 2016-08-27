@@ -64,16 +64,7 @@
         }else{
             [MBProgressHUD showError: responseObject[@"Msg"]];
         }
-    }else if(tag == 2)
-    {
-        if([responseObject[@"Result"] intValue] == 0)
-        {
-            [MBProgressHUD showSuccess:@"场景保存成功"];
-        }else{
-            [MBProgressHUD showError: responseObject[@"Msg"]];
-        }
     }
-
 }
 
 - (void) delScenen:(Scene *)scene
@@ -87,15 +78,7 @@
         }
        
     }
-    //同步云端
    
-    NSString *url = [NSString stringWithFormat:@"%@SceneDelete.aspx",[IOManager httpAddr]];
-    NSDictionary *dict = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"SID":[NSNumber numberWithInt:scene.sceneID]};
-    HttpManager *http=[HttpManager defaultManager];
-    http.delegate=self;
-    http.tag = 2;
-    [http sendPost:url param:dict];
-
     //上传文件
 }
 
@@ -436,8 +419,9 @@
             Scene *scene = [Scene new];
             scene.sceneID = [resultSet intForColumn:@"ID"];
             scene.sceneName = [resultSet stringForColumn:@"NAME"];
-            scene.roomID = [resultSet intForColumn:@"room"];
-            scene.picID = [resultSet intForColumn:@"pic"];
+            scene.roomID = [resultSet intForColumn:@"roomName"];
+            scene.picID = [resultSet intForColumn:@"picId"];
+            scene.picName =[resultSet stringForColumn:@"pic"];
             scene.isFavorite = [resultSet boolForColumn:@"isFavorite"];
             scene.eID = [resultSet intForColumn:@"eId"];
             
@@ -476,32 +460,61 @@
     
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
     NSMutableArray *sceneModles = [NSMutableArray array];
+   
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"select * from Scenes where rId=%d", roomID];
         FMResultSet *resultSet = [db executeQuery:sql];
         while([resultSet next])
         {
-            Scene *scene = [Scene new];
-            scene.sceneID = [resultSet intForColumn:@"ID"];
-            scene.sceneName = [resultSet stringForColumn:@"NAME"];
-            scene.roomID = [resultSet intForColumn:@"room"];
-            scene.picID = [resultSet intForColumn:@"pic"];
-            scene.isFavorite = [resultSet boolForColumn:@"isFavorite"];
-            scene.eID = [resultSet intForColumn:@"eId"];
-            scene.startTime = [resultSet stringForColumn:@"startTime"];
-            scene.astronomicalTime = [resultSet stringForColumn:@"astronomicalTime"];
-            scene.weekValue = [resultSet stringForColumn:@"weekValue"];
-            scene.weekRepeat = [resultSet intForColumn:@"weekRepeat"];
-            scene.roomName = [resultSet stringForColumn:@"rId"];
             
+           Scene *scene = [SceneManager parseScene:resultSet];
             [sceneModles addObject:scene];
         }
+        
     }
     [db close];
     return [sceneModles copy];
 }
-
++(Scene*)parseScene:(FMResultSet *)resultSet
+{
+    
+        Scene *scene = [Scene new];
+        scene.sceneID = [resultSet intForColumn:@"ID"];
+        scene.sceneName = [resultSet stringForColumn:@"NAME"];
+        scene.roomID = [resultSet intForColumn:@"roomName"];
+        scene.picID = [resultSet intForColumn:@"picId"];
+        scene.picName =[resultSet stringForColumn:@"pic"];
+        scene.isFavorite = [resultSet boolForColumn:@"isFavorite"];
+        scene.eID = [resultSet intForColumn:@"eId"];
+        scene.startTime = [resultSet stringForColumn:@"startTime"];
+        scene.astronomicalTime = [resultSet stringForColumn:@"astronomicalTime"];
+        scene.weekValue = [resultSet stringForColumn:@"weekValue"];
+        scene.weekRepeat = [resultSet intForColumn:@"weekRepeat"];
+        scene.roomName = [resultSet stringForColumn:@"rId"];
+        
+    return scene;
+    
+}
++(Scene *)sceneBySceneID:(int)sId
+{
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    Scene *scene = [Scene new];
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"select * from Scenes where ID = %d",sId];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        
+        if(resultSet)
+        {
+            scene = [SceneManager parseScene:resultSet];
+        }
+     
+    }
+    return scene;
+}
 
 +(BOOL)deleteScene:(int)sceneId
 {

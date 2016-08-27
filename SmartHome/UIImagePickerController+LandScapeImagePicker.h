@@ -11,5 +11,5 @@
 @interface UIImagePickerController (LandScapeImagePicker)
 - (BOOL)shouldAutorotate;
 - (NSUInteger)supportedInterfaceOrientations;
-
+- (BOOL)prefersStatusBarHidden;
 @end

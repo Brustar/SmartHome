@@ -1352,8 +1352,8 @@
                                                         <action selector="doDeleteAction:" destination="Eod-yw-lD7" eventType="touchUpInside" id="Q4i-jY-yLq"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hll-1L-2KJ">
-                                                    <rect key="frame" x="141" y="150" width="40" height="40"/>
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hll-1L-2KJ">
+                                                    <rect key="frame" x="141" y="152" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="PSE-Fe-lbg"/>
                                                         <constraint firstAttribute="width" constant="40" id="pGp-eg-25O"/>
@@ -1432,10 +1432,12 @@
                         <outlet property="collectionView" destination="qck-Xh-eYG" id="IfN-A9-DXb"/>
                         <outlet property="firstButton" destination="faQ-zk-VrB" id="q2o-s4-doF"/>
                         <outlet property="firstDeleteBtn" destination="76z-kd-q6i" id="SzN-f4-e45"/>
+                        <outlet property="firstPowerBtn" destination="7ng-zv-C2G" id="V9v-fr-Pg7"/>
                         <outlet property="firstView" destination="0gT-5P-4ZF" id="OIJ-0p-Bmz"/>
                         <outlet property="netBarBtn" destination="mCL-Ia-Vaf" id="lUi-ca-OaP"/>
                         <outlet property="secondButton" destination="9wT-KE-UNt" id="Ogj-2X-fyq"/>
                         <outlet property="secondDeleteBtn" destination="dgU-Oy-Gjq" id="A2C-Px-8fq"/>
+                        <outlet property="secondPowerBtn" destination="aDl-jO-rD0" id="zmn-ki-xt9"/>
                         <outlet property="secondView" destination="NYw-mL-dFl" id="ixJ-vP-Gyu"/>
                         <segue destination="6a7-1m-tB7" kind="show" identifier="sceneDetailSegue" id="PRs-sg-E1F"/>
                     </connections>
@@ -5837,7 +5839,7 @@ layer.masksToBoundslayer.masksToBounds
     <inferredMetricsTieBreakers>
         <segue reference="dRU-hd-aVS"/>
         <segue reference="CtP-7b-vUS"/>
-        <segue reference="mRk-xU-xJj"/>
+        <segue reference="PRs-sg-E1F"/>
         <segue reference="TBd-30-Hkx"/>
     </inferredMetricsTieBreakers>
 </document>

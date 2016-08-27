@@ -38,7 +38,7 @@
 //得到所有场景
 +(NSArray *)allSceneModels;
 +(NSArray *)devicesBySceneID:(int)sId;
-
++(Scene *)sceneBySceneID:(int)sId;
 //根据房间ID的到所有的场景
 + (NSArray *)getAllSceneWithRoomID:(int)roomID;
 

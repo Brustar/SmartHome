@@ -25,6 +25,9 @@
 #import "PackManager.h"
 #import "ChannelManager.h"
 #import "TVIconController.h"
+
+
+
 @interface TVController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,TVLogoCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,TVIconControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *touchpad;
 @property (weak, nonatomic) IBOutlet UILabel *unstoreLabel;
@@ -50,6 +53,7 @@
 @property (nonatomic,strong) NSString *eNumber;
 @property (nonatomic,strong) UIImage *chooseImg;
 - (IBAction)editChannelImgBtn:(UIButton *)sender;
+
 
 @end
 
@@ -502,9 +506,14 @@
 }
 
 -(void)preset:(KxMenuItem *)item{
-    
+    TVIconController *iconVC = [[TVIconController alloc]init];
+    iconVC.delegate = self;
+    [self presentViewController:iconVC animated:YES completion:nil];
 }
-
+-(void)tvIconController:(TVIconController *)iconVC withImgName:(NSString *)imgName
+{
+    self.chooseImg = [UIImage imageNamed:imgName];
+}
 - (void)selectPhoto:(KxMenuItem *)item {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
