@@ -158,6 +158,8 @@
     [scene setWeekRepeat:0];
     [scene setRoomName:@""];
     [scene setSceneName:@""];
+    [scene setPicName:@""];
+    
     [[SceneManager defaultManager] addScenen:scene withName:nil withPic:@""];
     
 }

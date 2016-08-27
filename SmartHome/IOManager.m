@@ -128,6 +128,15 @@
     NSAssert(ret,@"删除文件失败");
 }
 
++(void) removeTempFile
+{
+    NSString *filePath=[NSString stringWithFormat:@"%@/%@_0.plist",[self scenesPath], SCENE_FILE_NAME];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if([fileManager fileExistsAtPath:filePath]== YES){
+        [IOManager removeFile:filePath];
+    }
+}
+
 + (void) writeUserdefault:(id)object forKey:(NSString *)key
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

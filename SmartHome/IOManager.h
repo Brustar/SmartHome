@@ -26,7 +26,7 @@
 + (void) writeJpg:(UIImage *)jpg path:(NSString *)jpgPath;
 + (void) writePng:(UIImage *)png path:(NSString *)pngPath;
 + (void) removeFile:(NSString *)file;
-
++ (void) removeTempFile;
 + (void) writeUserdefault:(id)object forKey:(NSString *)key;
 
 @end
