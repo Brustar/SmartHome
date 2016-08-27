@@ -24,8 +24,8 @@
 #import "MBProgressHUD+NJ.h"
 #import "PackManager.h"
 #import "ChannelManager.h"
-
-@interface TVController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,TVLogoCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+#import "TVIconController.h"
+@interface TVController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,TVLogoCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,TVIconControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *touchpad;
 @property (weak, nonatomic) IBOutlet UILabel *unstoreLabel;
 
@@ -215,7 +215,6 @@
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-   
     id theSegue = segue.destinationViewController;
     [theSegue setValue:@"1" forKey:@"deviceid"];
 }
