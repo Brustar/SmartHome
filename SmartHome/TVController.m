@@ -161,9 +161,9 @@
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionDown)];
     [[self touchpad] addGestureRecognizer:recognizer];
     
-    NSData *data=[[DeviceInfo defaultManager] open:self.deviceid];
+    //NSData *data=[[DeviceInfo defaultManager] open:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
-    [sock.socket writeData:data withTimeout:1 tag:1];
+    //[sock.socket writeData:data withTimeout:1 tag:1];
     
     sock.delegate=self;
 }
