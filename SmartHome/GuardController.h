@@ -9,7 +9,7 @@
 
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic,weak) NSString *deviceid;
-
+@property (nonatomic,assign) int roomID;
 @property (nonatomic, retain) NSTimer *timer;
 
 @end
