@@ -39,7 +39,7 @@
 @property (nonatomic,strong) NSArray *devicesInfo;
 
 @property (nonatomic,strong) NSMutableArray *enegers;
-
+@property (nonatomic,strong) NSString *overEneger;
 
 @end
 
@@ -79,13 +79,15 @@
         if([responseObject[@"Result"] intValue] == 0)
         {
             NSArray *message = responseObject[@"messageInfo"];
-           
+            NSDictionary *overDic = @{@"overEngry":responseObject[@"energyPoor"]};
             for(NSDictionary *dic in message)
             {
                 NSDictionary *energy = @{@"ename":dic[@"ename"],@"hour":dic[@"minute_time"],@"times":dic[@"number"],@"energy":dic[@"energy"]};
+                
                 [self.enegers addObject:energy];
                 
             }
+            [self.enegers addObject:overDic];
             [self.tableView reloadData];
         }else {
             [MBProgressHUD showError:responseObject[@"Msg"]];
@@ -140,43 +142,49 @@
 {
     if(tableView == self.tableView)
     {
+        
         MyEnergyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyEnergyCell" forIndexPath:indexPath];
+       
         NSDictionary *dic = self.enegers[indexPath.row];
         
-        NSString *ename = dic[@"ename"];
-        int hour = [dic[@"hour"] intValue];
-        int times = [dic[@"times"] intValue];
-        NSString *energy = dic[@"energy"];
-        cell.totalLabel.text = energy ;
-        
-        switch (indexPath.row) {
-            case 0:
-            {
+        if(indexPath.row == self.enegers.count - 1)
+        {
+            cell.titleLabel.text = @"本月总能耗超出上月";
+            cell.timeLabel.text = [NSString stringWithFormat:@"超出上月的能耗:%@",dic[@"overEngry"]];
+            cell.totalLabel.text = @"";
+        }else{
+            NSString *ename = dic[@"ename"];
+            int hour = [dic[@"hour"] intValue];
+            int times = [dic[@"times"] intValue];
+            
+            NSString *energy = dic[@"energy"];
+            cell.totalLabel.text = energy ;
+            
+            switch (indexPath.row) {
+                case 0:
+                {
+                    
+                    cell.titleLabel.text = [NSString stringWithFormat:@"%@使用时间最长",ename];
+                    cell.timeLabel.text = [NSString stringWithFormat:@"累计时间:%d分钟",hour];
+                }
+                    break;
+                case 1:
+                {
+                    cell.titleLabel.text = [NSString stringWithFormat:@"%@能耗最大",ename];
+                    cell.timeLabel.text = [NSString stringWithFormat:@"累计使用:%d分钟",hour];
+                }
+                    break;
+                default:
+                {
+                    cell.titleLabel.text = [NSString stringWithFormat:@"%@使用次数最多",ename];
+                    cell.timeLabel.text = [NSString stringWithFormat:@"累计使用次数:%d",times];
+                }
+                    break;
                 
-                cell.timeLabel.text = [NSString stringWithFormat:@"%@使用时间最长",ename];
-                cell.timeLabel.text = [NSString stringWithFormat:@"累计时间:%d",hour];
             }
-                break;
-            case 1:
-            {
-                cell.timeLabel.text = [NSString stringWithFormat:@"%@能耗最大",ename];
-                cell.timeLabel.text = [NSString stringWithFormat:@"累计使用:%d",hour];
-            }
-                break;
-            case 2:
-            {
-                cell.timeLabel.text = [NSString stringWithFormat:@"%@使用次数最多",ename];
-                cell.timeLabel.text = [NSString stringWithFormat:@"累计使用次数:%d",times];
-            }
-                break;
-            default:
-            {
-                cell.timeLabel.text = [NSString stringWithFormat:@"%@本月总能耗超出上月",ename];
-                cell.timeLabel.text = @"节约能量，从我做起";
-            }
-                break;
+
         }
-        return cell;
+                return cell;
     
     }else{
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" ];

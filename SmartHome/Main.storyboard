@@ -5552,7 +5552,7 @@ layer.masksToBoundslayer.masksToBounds
                                     <constraint firstItem="B5E-kC-l50" firstAttribute="top" secondItem="TFn-fO-cqz" secondAttribute="top" id="er1-aq-PHJ"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oHk-s8-HdJ">
+                            <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oHk-s8-HdJ">
                                 <rect key="frame" x="100" y="64" width="400" height="487"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w2q-sH-9zj">
@@ -5623,14 +5623,17 @@ layer.masksToBoundslayer.masksToBounds
                                                     <action selector="selectSceneImg:" destination="6a7-1m-tB7" eventType="touchUpInside" id="4FU-R6-8nQ"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mxJ-a4-HnC">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mxJ-a4-HnC">
                                                 <rect key="frame" x="20" y="120" width="46" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="46" id="hXR-61-nb2"/>
+                                                </constraints>
                                                 <state key="normal" title="确定"/>
                                                 <connections>
                                                     <action selector="sureStoreNewScene:" destination="6a7-1m-tB7" eventType="touchUpInside" id="EN2-KY-6XR"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b6g-cx-WHj">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b6g-cx-WHj">
                                                 <rect key="frame" x="134" y="120" width="46" height="30"/>
                                                 <state key="normal" title="取消"/>
                                                 <connections>
@@ -5641,6 +5644,7 @@ layer.masksToBoundslayer.masksToBounds
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="mxJ-a4-HnC" firstAttribute="leading" secondItem="my8-UG-gsP" secondAttribute="leading" constant="20" id="1sK-rh-jn0"/>
+                                            <constraint firstItem="b6g-cx-WHj" firstAttribute="leading" secondItem="mxJ-a4-HnC" secondAttribute="trailing" constant="68" id="3CM-WB-V9e"/>
                                             <constraint firstItem="C6t-VY-ocm" firstAttribute="top" secondItem="my8-UG-gsP" secondAttribute="top" constant="15" id="5YY-M3-w9Z"/>
                                             <constraint firstAttribute="trailing" secondItem="UIG-QY-aY4" secondAttribute="trailing" constant="20" id="71X-HH-Qd8"/>
                                             <constraint firstItem="C6t-VY-ocm" firstAttribute="centerX" secondItem="my8-UG-gsP" secondAttribute="centerX" id="HLV-as-TE4"/>
@@ -5666,10 +5670,10 @@ layer.masksToBoundslayer.masksToBounds
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="my8-UG-gsP" firstAttribute="leading" secondItem="w2q-sH-9zj" secondAttribute="leading" id="3mH-Q7-6WJ"/>
                                     <constraint firstItem="w2q-sH-9zj" firstAttribute="centerY" secondItem="oHk-s8-HdJ" secondAttribute="centerY" id="6M3-NX-2hh"/>
                                     <constraint firstItem="w2q-sH-9zj" firstAttribute="centerX" secondItem="oHk-s8-HdJ" secondAttribute="centerX" id="BYf-TD-dxB"/>
-                                    <constraint firstItem="my8-UG-gsP" firstAttribute="centerX" secondItem="oHk-s8-HdJ" secondAttribute="centerX" id="P3D-cr-XGW"/>
-                                    <constraint firstItem="my8-UG-gsP" firstAttribute="centerY" secondItem="oHk-s8-HdJ" secondAttribute="centerY" id="Rwk-Dz-t2E"/>
+                                    <constraint firstItem="my8-UG-gsP" firstAttribute="top" secondItem="w2q-sH-9zj" secondAttribute="top" id="DTh-Xr-gca"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -5702,7 +5706,6 @@ layer.masksToBoundslayer.masksToBounds
                         <outlet property="graphicBtn" destination="1WI-6F-VHp" id="els-JD-QLe"/>
                         <outlet property="realObjBtn" destination="wvP-dM-R4D" id="4Bx-xw-Zmu"/>
                         <outlet property="stopBtn" destination="EVf-MO-Vi3" id="onW-kI-YLe"/>
-                        <outlet property="storeNewScene" destination="my8-UG-gsP" id="ZAZ-GJ-zA5"/>
                         <outlet property="storeNewSceneName" destination="oBJ-Gf-PFK" id="wOD-7R-qEh"/>
                         <outlet property="subDeviceTableView" destination="B5E-kC-l50" id="ajz-2T-eY1"/>
                         <outlet property="tableView" destination="L2z-33-ecs" id="HJx-fn-pct"/>

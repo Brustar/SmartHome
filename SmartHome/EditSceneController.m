@@ -250,7 +250,7 @@
     [alertVC addAction:saveAction];
     UIAlertAction *saveNewAction = [UIAlertAction actionWithTitle:@"另存为新场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //另存为场景，新的场景ID
-        self.storeNewScene.hidden = NO;
+        self.favorView.hidden = NO;
         
     }];
     [alertVC addAction:saveNewAction];
