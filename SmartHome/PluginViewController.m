@@ -94,7 +94,7 @@
 -(void)recv:(NSData *)data withTag:(long)tag
 {
     NSLog(@"data:%@,tag:%ld",data,tag);
-    if (tag==0) {
+    if (tag==1) {
         [self discoveryDevice:data];
     }
 }

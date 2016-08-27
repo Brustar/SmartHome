@@ -168,8 +168,8 @@
     proto.action.state=action;
     NSString *enumber=[DeviceManager getENumber:[deviceID integerValue]];
     NSString *eid=[DeviceManager getEType:[deviceID integerValue]];
-    proto.deviceID=CFSwapInt16BigToHost([PackManager NSDataToUint16:enumber]); //CFSwapInt16BigToHost(0x0010);
-    proto.deviceType=[PackManager NSDataToUint8:eid]; //0x31;
+    proto.deviceID=CFSwapInt16BigToHost([PackManager NSDataToUint16:enumber]);
+    proto.deviceType=[PackManager NSDataToUint8:eid];
     return dataFromProtocol(proto);
 }
 
