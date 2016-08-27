@@ -24,6 +24,34 @@
 #import "KxMenu.h"
 #import "MBProgressHUD+NJ.h"
 #import "PluginViewController.h"
+
+@interface UIImagePickerController (LandScapeImagePicker)
+
+- (UIStatusBarStyle)preferredStatusBarStyle;
+- (NSUInteger)supportedInterfaceOrientations;
+- (BOOL)prefersStatusBarHidden;
+@end
+
+@implementation UIImagePickerController (LandScapeImagePicker)
+
+- (NSUInteger) supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskLandscape;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
+
+@end
+
+
 @interface EditSceneController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITableView *subDeviceTableView;
