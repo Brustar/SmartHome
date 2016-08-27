@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class TVIconController;
+@protocol TVIconControllerDelegate <NSObject>
+
+-(void)tvIconController:(TVIconController *)iconVC withImgName:(NSString *)imgName;
+@end
 @interface TVIconController : UIViewController
+
+@property(nonatomic,weak)id<TVIconControllerDelegate> delegate;
 
 @end

@@ -238,6 +238,7 @@
     Scene *scene = self.collectionScenes[indexPath.row];
     self.selectedSID = scene.sceneID;
     self.selectedDID = scene.eID;
+    [[SceneManager defaultManager] startScene:scene.eID];
     [self performSegueWithIdentifier:@"sceneDetailSegue" sender:self];
 }
 -(void)startSceneAction:(UIButton *)btn{
@@ -281,8 +282,10 @@
 
 - (IBAction)clickSceneBtn:(UIButton *)sender {
    // Scene *scene = self.scenes[sender.tag];
+    
     self.selectedSID =(int)sender.tag;
     //self.selectedDID = scene.eID;
+    [[SceneManager defaultManager] startScene:(int)sender.tag];
     [self performSegueWithIdentifier:@"sceneDetailSegue" sender:self];
 }
 

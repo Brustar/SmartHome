@@ -40,7 +40,9 @@
     UIImageView *imageView = [cell viewWithTag:1];
     imageView.image = [UIImage imageNamed:self.tvIcons[indexPath.row]];
     return cell;
-
+}
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
     
 }
 /*
