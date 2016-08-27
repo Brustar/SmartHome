@@ -25,7 +25,31 @@
 #import "PackManager.h"
 #import "ChannelManager.h"
 #import "TVIconController.h"
+@interface UIImagePickerController (LandScapeImagePicker)
 
+- (UIStatusBarStyle)preferredStatusBarStyle;
+- (NSUInteger)supportedInterfaceOrientations;
+- (BOOL)prefersStatusBarHidden;
+@end
+
+@implementation UIImagePickerController (LandScapeImagePicker)
+
+- (NSUInteger) supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskLandscape;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
+
+@end
 
 
 @interface TVController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,TVLogoCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,TVIconControllerDelegate>
