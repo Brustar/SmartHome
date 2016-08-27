@@ -39,16 +39,17 @@
     if (name) {
         int sceneid=[DeviceManager saveMaxSceneId:name];
         scene.sceneID=sceneid;
+        //同步云端
+        NSString *url = [NSString stringWithFormat:@"%@SceneUpload.aspx",[IOManager httpAddr]];
+        NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]};
+        HttpManager *http = [HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = 1;
+        
+        [http sendPost:url param:dic];
     }
     [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, scene.sceneID] scene:scene];
-    //同步云端
-    NSString *url = [NSString stringWithFormat:@"%@SceneUpload.aspx",[IOManager httpAddr]];
-    NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]};
-    HttpManager *http = [HttpManager defaultManager];
-    http.delegate = self;
-    http.tag = 1;
-    
-    [http sendPost:url param:dic];
+   
 
     //上传文件
     

@@ -8,15 +8,17 @@
 
 #import "TVIconController.h"
 
-@interface TVIconController ()
-
+@interface TVIconController ()<UICollectionViewDelegate,UICollectionViewDataSource>
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (nonatomic,strong) NSArray *tvIcons;
 @end
 
 @implementation TVIconController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.tvIcons = @[@"cctv1.png", @"cctv2.png", @"cctv3.png", @"fengHuang.png", @"fuJian.png", @"guangDong.png", @"guangXi.png", @"guiZhou.png", @"haiNan.png", @"heBei.png", @"heiLongjiang.png", @"heNan.png", @"huBei.png", @"huNan.png", @"jiangSu.png", @"jiangXi.png", @"liaoNing.png", @"shanDong.png", @"shangHai.png", @"shenZhen.png", @"siChuan.png", @"south.png", @"tianJin.png", @"travel.png", @"zheJiang.png", @"guangDongWeiShi.png", @"MTV.png", @"neiMenggu.png", @"ningXia.png"];
+    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,6 +26,23 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.tvIcons.count;
+}
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    UIImageView *imageView = [cell viewWithTag:1];
+    imageView.image = [UIImage imageNamed:self.tvIcons[indexPath.row]];
+    return cell;
+
+    
+}
 /*
 #pragma mark - Navigation
 
