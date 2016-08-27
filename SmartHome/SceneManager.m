@@ -148,7 +148,11 @@
             if ([dic objectForKey:@"isPoweron"]) {
                 Light *device=[[Light alloc] init];
                 device.deviceID=[[dic objectForKey:@"deviceID"] intValue];
-                device.color=[dic objectForKey:@"color"];
+                if ([dic objectForKey:@"color"]) {
+                    device.color=[dic objectForKey:@"color"];
+                }else{
+                    device.color=@[];
+                }
                 device.brightness=[[dic objectForKey:@"brightness"] intValue];
                 device.isPoweron=[[dic objectForKey:@"isPoweron"] boolValue];
                 [devices addObject:device];
