@@ -258,6 +258,11 @@
     return [self action:PROTOCOL_VOLUME deviceID:deviceID value:percent];
 }
 
+-(NSData *) mute:(NSString *)deviceID
+{
+    return [self action:PROTOCOL_MUTE deviceID:deviceID];
+}
+
 //TV,DVD,NETV
 -(NSData *) sweepLeft:(NSString *)deviceID
 {
@@ -342,6 +347,11 @@
 -(NSData *) back:(NSString *)deviceID
 {
     return [self action:0x10 deviceID:deviceID];
+}
+
+-(NSData *) confirm:(NSString *)deviceID
+{
+    return [self action:0x09 deviceID:deviceID];
 }
 
 #pragma mark - FM

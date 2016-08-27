@@ -80,7 +80,7 @@ enum{
 -(NSData *) stop:(NSString *)deviceID;
 
 -(NSData *) changeVolume:(uint8_t)percent deviceID:(NSString *)deviceID; //mute:pecent=0
-
+-(NSData *) mute:(NSString *)deviceID;
 //TV,DVD,NETV
 -(NSData *) sweepLeft:(NSString *)deviceID;
 -(NSData *) sweepRight:(NSString *)deviceID;
@@ -107,7 +107,7 @@ enum{
 
 #pragma mark - NETV
 -(NSData *) NETVhome:(NSString *)deviceID; //主页
-
+-(NSData *) confirm:(NSString *)deviceID; //确定
 -(NSData *) back:(NSString *)deviceID;
 
 #pragma mark - FM

@@ -195,7 +195,9 @@
     [device setDeviceID:[self.deviceid intValue]];
     [device setIsPoweron: self.detailCell.power.isOn];
     NSArray *colors=[self changeUIColorToRGB:self.cell.colourView.backgroundColor];
-    [device setColor:colors];
+    if (colors) {
+        [device setColor:colors];
+    }
     [device setBrightness:self.detailCell.bright.value*100];
     
     Scene *scene=[[Scene alloc] init];

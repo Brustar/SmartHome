@@ -49,6 +49,7 @@ typedef struct Protocol Proto;
 #define PROTOCOL_BACKWARD 0x16
 
 #define PROTOCOL_VOLUME 0xAA
+#define PROTOCOL_MUTE 0x04
 
 @interface PackManager : NSObject
 
