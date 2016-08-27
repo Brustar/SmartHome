@@ -428,7 +428,7 @@
         if ([responseObject[@"Result"] intValue]==0)
         {
             
-            [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
+           // [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
             self.tableView.hidden = YES;
             self.coverView.hidden = YES;
             

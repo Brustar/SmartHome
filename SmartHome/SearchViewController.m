@@ -36,6 +36,7 @@
     searchBar.placeholder = @"请输入搜索关键字";
     searchBar.delegate = self;
     self.navigationItem.titleView = searchBar;
+    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 #pragma mark - SearchBarDelegate
@@ -54,7 +55,7 @@
 {
     if(tag == 1)
     {
-        if(responseObject[@"Result"] == 0)
+        if([responseObject[@"Result"]intValue] == 0)
         {
             //解析搜索返回来的信息
             self.deviceInfos = responseObject[@"messageInfo"];
@@ -87,10 +88,7 @@
     return cell;
     
 }
-//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-//{
-//    return self.deviceTypes[section];
-//}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
    NSDictionary *dic = self.deviceInfos[indexPath.row];
@@ -145,7 +143,11 @@
 
 }
 
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
 
+}
 
 
 - (void)didReceiveMemoryWarning {
