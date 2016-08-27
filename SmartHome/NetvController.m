@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *netTvRightViewWidth;
 @property (nonatomic,strong) NSArray  *netTVImages;
 
+
 @end
 
 @implementation NetvController
@@ -263,5 +264,10 @@
         [SCWaveAnimationView waveAnimationAtPosition:touchPoint];
     }
 }
+- (IBAction)confromBtn:(UIButton *)sender {
+}
+
+
+
 
 @end

@@ -3409,6 +3409,9 @@
                                         <state key="normal" title="确定">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="confromBtn:" destination="7uY-cb-xb4" eventType="touchUpInside" id="4eL-tg-pRj"/>
+                                        </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tv_up" translatesAutoresizingMaskIntoConstraints="NO" id="jKr-Vc-288">
                                         <rect key="frame" x="95" y="10" width="10" height="55"/>
@@ -5833,7 +5836,7 @@ layer.masksToBoundslayer.masksToBounds
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="CtP-7b-vUS"/>
-        <segue reference="NGA-cS-h6U"/>
+        <segue reference="rjy-2u-9IW"/>
         <segue reference="mRk-xU-xJj"/>
         <segue reference="TBd-30-Hkx"/>
     </inferredMetricsTieBreakers>
