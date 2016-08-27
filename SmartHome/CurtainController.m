@@ -164,9 +164,9 @@
 -(void)recv:(NSData *)data withTag:(long)tag
 {
     Proto proto=protocolFromData(data);
-    NSString *devID=[DeviceManager getDeviceIDByENumber:proto.deviceID masterID:[[DeviceInfo defaultManager] masterID]];
-    if (tag==0 && [devID isEqualToString:self.deviceid] ){
-        if (proto.action.state == 0x2A) {
+    if (tag==0 && proto.action.state == 0x2A) {
+        NSString *devID=[DeviceManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID) masterID:[[DeviceInfo defaultManager] masterID]];
+        if ([devID intValue]==[self.deviceid intValue]) {
             self.cell.slider.value=proto.action.RValue/100.0;
         }
     }

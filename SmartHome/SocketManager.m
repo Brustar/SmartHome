@@ -142,11 +142,13 @@
 {
     NSLog(@"socket连接成功,host:%@,port:%d",host,port);
     DeviceInfo *device=[DeviceInfo defaultManager];
-    if ([host isEqualToString:[IOManager tcpAddr]]) {
+    if ([host isEqualToString:[IOManager tcpAddr]] && port == device.masterPort) {
         device.connectState=outDoor;
     }else{
         device.connectState=atHome;
     }
+    [self.socket writeData:[[DeviceInfo defaultManager] author] withTimeout:-1 tag:0];
+    [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:0];
 }
 
 - (void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
@@ -170,12 +172,10 @@
 -(void)onSocketDidDisconnect:(AsyncSocket *)sock
 {
     NSLog(@"sorry the connect is failure %ld",sock.userData);
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    device.connectState=offLine;
     if (sock.userData == SocketOfflineByServer) {// 服务器掉线，重连
-        DeviceInfo *device=[DeviceInfo defaultManager];
-        device.connectState=offLine;
         [self socketConnectHost];
-        [self.socket writeData:[[DeviceInfo defaultManager] author] withTimeout:-1 tag:0];
-        [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:0];
     }else if (sock.userData == SocketOfflineByUser) {// 如果由用户断开，不进行重连
         return;
     }

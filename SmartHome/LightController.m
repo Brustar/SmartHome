@@ -222,12 +222,16 @@
 -(void)recv:(NSData *)data withTag:(long)tag
 {
     Proto proto=protocolFromData(data);
-    NSString *devID=[DeviceManager getDeviceIDByENumber:proto.deviceID masterID:[[DeviceInfo defaultManager] masterID]];
-    if (tag == 0 && [devID isEqualToString:self.deviceid] && (proto.action.state == 0x00 || proto.action.state == 0x01 || proto.action.state == 0x0b || proto.action.state == 0x0a)) {
-        //创建一个消息对象
-        NSNotification * notice = [NSNotification notificationWithName:@"light" object:nil userInfo:@{@"state":@(proto.action.state),@"r":@(proto.action.RValue),@"g":@(proto.action.G),@"b":@(proto.action.B)}];
-        //发送消息
-        [[NSNotificationCenter defaultCenter] postNotification:notice];
+    
+    
+    if (tag == 0 && (proto.action.state == 0x00 || proto.action.state == 0x01 || proto.action.state == 0x0b || proto.action.state == 0x0a)) {
+        NSString *devID=[DeviceManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID) masterID:[[DeviceInfo defaultManager] masterID]];
+        if ([devID intValue]==[self.deviceid intValue]) {
+            //创建一个消息对象
+            NSNotification * notice = [NSNotification notificationWithName:@"light" object:nil userInfo:@{@"state":@(proto.action.state),@"r":@(proto.action.RValue),@"g":@(proto.action.G),@"b":@(proto.action.B)}];
+            //发送消息
+            [[NSNotificationCenter defaultCenter] postNotification:notice];
+        }
     }
 }
 
