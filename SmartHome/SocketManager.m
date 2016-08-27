@@ -174,6 +174,8 @@
         DeviceInfo *device=[DeviceInfo defaultManager];
         device.connectState=offLine;
         [self socketConnectHost];
+        [self.socket writeData:[[DeviceInfo defaultManager] author] withTimeout:-1 tag:0];
+        [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:0];
     }else if (sock.userData == SocketOfflineByUser) {// 如果由用户断开，不进行重连
         return;
     }
