@@ -213,33 +213,34 @@
 -(IBAction)control:(id)sender
 {
     NSData *data=nil;
+    DeviceInfo *device=[DeviceInfo defaultManager];
     switch (((UIButton *)sender).tag) {
         case 0:
-            data=[[DeviceInfo defaultManager] backward:self.deviceid];
+            data=[device backward:self.deviceid];
             break;
         case 1:
-            data=[[DeviceInfo defaultManager] play:self.deviceid];
+            data=[device play:self.deviceid];
             break;
         case 2:
-            data=[[DeviceInfo defaultManager] forward:self.deviceid];
+            data=[device forward:self.deviceid];
             break;
         case 3:
-            data=[[DeviceInfo defaultManager] previous:self.deviceid];
+            data=[device previous:self.deviceid];
             break;
         case 4:
-            data=[[DeviceInfo defaultManager] pause:self.deviceid];
+            data=[device pause:self.deviceid];
             break;
         case 5:
-            data=[[DeviceInfo defaultManager] next:self.deviceid];
+            data=[device next:self.deviceid];
             break;
         case 6:
-            data=[[DeviceInfo defaultManager] stop:self.deviceid];
+            data=[device stop:self.deviceid];
             break;
         case 7:
-            data=[[DeviceInfo defaultManager] pop:self.deviceid];
+            data=[device pop:self.deviceid];
             break;
         case 8:
-            data=[[DeviceInfo defaultManager] home:self.deviceid];
+            data=[device home:self.deviceid];
             break;
             
         default:

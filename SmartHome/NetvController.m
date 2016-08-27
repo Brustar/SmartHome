@@ -265,10 +265,11 @@
         [SCWaveAnimationView waveAnimationAtPosition:touchPoint];
     }
 }
+
 - (IBAction)confromBtn:(UIButton *)sender {
+    NSData *data=[[DeviceInfo defaultManager] confirm:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
 }
-
-
-
 
 @end

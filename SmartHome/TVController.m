@@ -40,7 +40,7 @@
 
 @property (nonatomic,strong) NSMutableArray *allFavourTVChannels;
 @property (nonatomic,strong) TVLogoCell *cell;
-- (IBAction)mute:(id)sender;
+
 //编辑电视属性
 @property (weak, nonatomic) IBOutlet UITextField *channelName;
 @property (weak, nonatomic) IBOutlet UITextField *channeNumber;
@@ -221,11 +221,11 @@
 }
 
 
-- (IBAction)mute:(id)sender
+- (IBAction)domute:(id)sender
 {
     self.volume.value=0.0;
     
-    NSData *data=[[DeviceInfo defaultManager] changeTVolume:0x00 deviceID:self.deviceid];
+    NSData *data=[[DeviceInfo defaultManager] mute:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
@@ -297,7 +297,7 @@
     if(indexPath.row == self.btnTitles.count)
     {
         [cell.btn setImage:[UIImage imageNamed:@"quiet"] forState:UIControlStateNormal];
-        [cell.btn addTarget:self action:@selector(mute:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn addTarget:self action:@selector(domute:) forControlEvents:UIControlEventTouchUpInside];
         
     }else{
         [cell.btn setTitle:[NSString stringWithFormat:@"%@",self.btnTitles[indexPath.row]] forState:UIControlStateNormal];
