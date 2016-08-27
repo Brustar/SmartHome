@@ -37,13 +37,14 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-    UIImageView *imageView = [cell viewWithTag:1];
-    imageView.image = [UIImage imageNamed:self.tvIcons[indexPath.row]];
+    
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, cell.backgroundView.bounds.size.width, cell.backgroundView.bounds.size.height)];
+    [cell.backgroundView addSubview:imageView];
     return cell;
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    [self.delegate tvIconController:self withImgName:self.tvIcons[indexPath.row]];
 }
 /*
 #pragma mark - Navigation

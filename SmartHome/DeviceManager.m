@@ -84,6 +84,13 @@
         while ([resultSet next])
         {
             typeName = [resultSet stringForColumn:@"typeName"];
+            if ([typeName isEqualToString:@"开关灯"]||[typeName isEqualToString:@"调色灯"]||[typeName isEqualToString:@"调光灯"]) {
+                typeName = @"灯光";
+            }else if ([typeName isEqualToString:@"开合帘"] || [typeName isEqualToString:@"卷帘"]) {
+                typeName = @"窗帘";
+            }
+
+            
         }
     }
     return typeName;
