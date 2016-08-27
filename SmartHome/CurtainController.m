@@ -153,6 +153,7 @@
     [scene setWeekRepeat:0];
     [scene setRoomName:@""];
     [scene setSceneName:@""];
+    [scene setPicName:@""];
     
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
     [scene setDevices:devices];
@@ -164,10 +165,13 @@
 -(void)recv:(NSData *)data withTag:(long)tag
 {
     Proto proto=protocolFromData(data);
-    if (tag==0 && proto.action.state == 0x2A) {
+    if (tag==0 && (proto.action.state == 0x2A || proto.action.state == 0x00 || proto.action.state == 0x01)) {
         NSString *devID=[DeviceManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID) masterID:[[DeviceInfo defaultManager] masterID]];
         if ([devID intValue]==[self.deviceid intValue]) {
             self.cell.slider.value=proto.action.RValue/100.0;
+            if (proto.action.state == 0x01) {
+                self.cell.slider.value=1;
+            }
         }
     }
 }

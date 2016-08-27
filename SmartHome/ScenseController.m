@@ -277,8 +277,7 @@
 
 - (IBAction)addScence:(id)sender {
     
-    NSString *filePath=[NSString stringWithFormat:@"%@/%@_0.plist",[IOManager scenesPath], SCENE_FILE_NAME];
-    [IOManager removeFile:filePath];
+    [IOManager removeTempFile];
     ScenseSplitViewController *splitVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ScenseSplitViewController"];
     [self presentViewController:splitVC animated:YES completion:nil];
 }
