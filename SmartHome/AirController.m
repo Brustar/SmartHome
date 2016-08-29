@@ -76,23 +76,14 @@
     
     [device setTemperature:[self.showTemLabel.text intValue]];
     
-    Scene *scene=[[Scene alloc] init];
+    Scene *scene=[[Scene alloc] initWhithoutSchedule];
     [scene setSceneID:[self.sceneid intValue]];
     [scene setRoomID:4];
     [scene setHouseID:3];
-    [scene setPicID:66];
     [scene setReadonly:NO];
     
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
     [scene setDevices:devices];
-    
-    [scene setStartTime:@""];
-    [scene setWeekValue:@""];
-    [scene setAstronomicalTime:@""];
-    [scene setWeekRepeat:0];
-    [scene setRoomName:@""];
-    [scene setSceneName:@""];
-    [scene setPicName:@""];
     
     [[SceneManager defaultManager] addScenen:scene withName:nil withPic:@""];
     
@@ -102,6 +93,11 @@
 -(void)recv:(NSData *)data withTag:(long)tag
 {
     Proto proto=protocolFromData(data);
+    
+    if (proto.masterID != [[DeviceInfo defaultManager] masterID]) {
+        return;
+    }
+    
     if (tag==0) {
         if (proto.action.state==0x7A) {
             //[self.thermometerView updateCurrentValue:(CGFloat)proto.action.RValue];

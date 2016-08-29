@@ -19,9 +19,7 @@
 @property (nonatomic) int roomID;
 //房间名称
 @property (nonatomic,strong)NSString *roomName;
-//场景图片id
-@property (nonatomic) int picID;
-
+//场景图片url
 @property (nonatomic,strong) NSString *picName;
 //场景开始时间
 @property(nonatomic,strong)NSString *startTime;
@@ -41,5 +39,7 @@
 @property (nonatomic) bool readonly;
 //设备列表
 @property (strong,nonatomic) NSArray *devices;
+
+- (instancetype)initWhithoutSchedule;
 
 @end

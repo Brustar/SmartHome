@@ -167,19 +167,21 @@
 
 -(IBAction)save:(id)sender
 {
+    NSString *etype = [DeviceManager getEType:[self.deviceid intValue]];
+    
     if ([sender isEqual:self.detailCell.power]) {
         NSData *data=[[DeviceInfo defaultManager] toogleLight:self.detailCell.power.isOn deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
     }
     
-    if ([sender isEqual:self.detailCell.bright]) {
+    if (![etype isEqualToString:@"01"] && [sender isEqual:self.detailCell.bright]) {
         NSData *data=[[DeviceInfo defaultManager] changeBright:self.detailCell.bright.value*100 deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
     }
     
-    if ([sender isEqual:self.cell.colourView]) {
+    if ([etype isEqualToString:@"03"] && [sender isEqual:self.cell.colourView]) {
         UIColor *color = self.cell.colourView.backgroundColor;
         NSDictionary *colorDic = [self getRGBDictionaryByColor:color];
         int r = [colorDic[@"R"] floatValue] * 255;
@@ -196,24 +198,22 @@
     [device setIsPoweron: self.detailCell.power.isOn];
     NSArray *colors=[self changeUIColorToRGB:self.cell.colourView.backgroundColor];
     if (colors) {
-        [device setColor:colors];
+        if ([etype isEqualToString:@"03"]) {
+            [device setColor:colors];
+        }
+        [device setColor:@[]];
     }
-    [device setBrightness:self.detailCell.bright.value*100];
     
-    Scene *scene=[[Scene alloc] init];
+    if (![etype isEqualToString:@"01"])
+    {
+        [device setBrightness:self.detailCell.bright.value*100];
+    }
+    Scene *scene=[[Scene alloc] initWhithoutSchedule];
     [scene setSceneID:[self.sceneid intValue]];
     [scene setRoomID:4];
     [scene setHouseID:3];
-    [scene setPicID:66];
-    [scene setReadonly:NO];
     
-    [scene setStartTime:@""];
-    [scene setWeekValue:@""];
-    [scene setAstronomicalTime:@""];
-    [scene setWeekRepeat:0];
-    [scene setRoomName:@""];
-    [scene setSceneName:@""];
-    [scene setPicName:@""];
+    [scene setReadonly:NO];
     
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
     [scene setDevices:devices];
@@ -223,7 +223,9 @@
 -(void)recv:(NSData *)data withTag:(long)tag
 {
     Proto proto=protocolFromData(data);
-    
+    if (proto.masterID != [[DeviceInfo defaultManager] masterID]) {
+        return;
+    }
     
     if (tag == 0 && (proto.action.state == 0x00 || proto.action.state == 0x01 || proto.action.state == 0x0b || proto.action.state == 0x0a)) {
         NSString *devID=[DeviceManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID) masterID:[[DeviceInfo defaultManager] masterID]];
@@ -234,25 +236,6 @@
             [[NSNotificationCenter defaultCenter] postNotification:notice];
         }
     }
-}
-
--(IBAction)favorite:(id)sender
-{
-    Light *device=[[Light alloc] init];
-    [device setDeviceID:[self.deviceid intValue]];
-    [device setIsPoweron: self.detailCell.power.isOn];
-    NSArray *colors=[self changeUIColorToRGB:self.cell.colourView.backgroundColor];
-    [device setColor:colors];
-    [device setBrightness:self.detailCell.bright.value*100];
-    Scene *scene=[[Scene alloc] init];
-    [scene setSceneID:[self.sceneid intValue]];
-    [scene setRoomID:4];
-    [scene setHouseID:3];
-    [scene setPicID:66];
-    [scene setReadonly:NO];
-    NSMutableArray *array=[NSMutableArray arrayWithObject:device];
-    [scene setDevices:array];
-    [[SceneManager defaultManager] favoriteScenen:scene withName:@"睡觉模式"];
 }
 
 //将UIColor转换为RGB值

@@ -122,7 +122,7 @@
         Scene *scene=[[Scene alloc] init];
         scene.sceneID=sceneid;
         scene.readonly=[dictionary objectForKey:@"readonly"];
-        scene.picID=[[dictionary objectForKey:@"picID"] intValue];
+        scene.picName=[dictionary objectForKey:@"picName"];
         scene.roomID=[[dictionary objectForKey:@"roomID"] intValue];
         scene.houseID=[[dictionary objectForKey:@"houseID"] intValue];
         
@@ -489,7 +489,7 @@
             scene.sceneID = [resultSet intForColumn:@"ID"];
             scene.sceneName = [resultSet stringForColumn:@"NAME"];
             scene.roomID = [resultSet intForColumn:@"roomName"];
-            scene.picID = [resultSet intForColumn:@"picId"];
+            
             scene.picName =[resultSet stringForColumn:@"pic"];
             scene.isFavorite = [resultSet boolForColumn:@"isFavorite"];
             scene.eID = [resultSet intForColumn:@"eId"];
@@ -552,7 +552,7 @@
         scene.sceneID = [resultSet intForColumn:@"ID"];
         scene.sceneName = [resultSet stringForColumn:@"NAME"];
         scene.roomID = [resultSet intForColumn:@"roomName"];
-        scene.picID = [resultSet intForColumn:@"picId"];
+        
         scene.picName =[resultSet stringForColumn:@"pic"];
         scene.isFavorite = [resultSet boolForColumn:@"isFavorite"];
         scene.eID = [resultSet intForColumn:@"eId"];

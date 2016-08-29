@@ -9,8 +9,20 @@
 #import "Scene.h"
 
 @implementation Scene
-//+(instancetype)sceneModleByDict:(NSDictionary *)dict
-//{
-//    
-//}
+
+- (instancetype)initWhithoutSchedule
+{
+    self=[super init];
+    if (self) {
+        [self setStartTime:@""];
+        [self setWeekValue:@""];
+        [self setAstronomicalTime:@""];
+        [self setWeekRepeat:0];
+        [self setRoomName:@""];
+        [self setSceneName:@""];
+        [self setPicName:@""];
+    }
+    return self;
+}
+
 @end
