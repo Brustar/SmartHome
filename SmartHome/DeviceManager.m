@@ -413,10 +413,37 @@
     return roomId;
 
 }
++(NSString*)getSceneName:(int)sceneID
+{
+    NSString *sql=[NSString stringWithFormat:@"select NAME from Scenes where ID=%d" ,sceneID];
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    NSString *sceneName;
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    if([db open])
+    {
+        FMResultSet *resultSet = [db executeQuery:sql];
+        
+        if([resultSet next])
+        {
+            sceneName = [resultSet stringForColumn:@"NAME"];
+        }
+    }
+    [db close];
+    return sceneName;
 
-+(int)saveMaxSceneId:(NSString *)name
+}
+
++(int)saveMaxSceneId:(Scene *)scene name:(NSString *)name pic:(NSString *)img
 {
     int sceneID=1;
+    NSArray *devices = scene.devices;
+    NSMutableString *eIdStr = [[NSMutableString alloc]init];
+    for(NSDictionary *deviceDic in devices)
+    {
+        [eIdStr appendString:[NSString stringWithFormat:@"%@,",deviceDic[@"deviceID"]]];
+    }
+    
+    
     NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
     if([db open])
@@ -428,7 +455,7 @@
             sceneID = [resultSet intForColumn:@"ID"]+1;
         }
         
-        sql=[NSString stringWithFormat:@"insert into Scenes values(%d,'%@',null,null,null,null,null,null,null,null,null)",sceneID,name];
+        sql=[NSString stringWithFormat:@"insert into Scenes values(%d,'%@',null,'%@',null,'%@',null,null,null,null,%d)",sceneID,name,img,eIdStr,scene.roomID];
         [db executeUpdate:sql];
     }
     [db close];
@@ -442,6 +469,10 @@
     NSArray *deviceIDs = [self getDeviceIDWithRoomID:roomID sceneID:sceneID];
     
     for (NSString *deviceID in deviceIDs) {
+        if([deviceID isEqualToString:@""])
+        {
+            break;
+        }
         NSString *subTypeName = [self getDeviceSubTypeNameWithID:[deviceID intValue]];
         
         BOOL isSame = false;
@@ -560,7 +591,9 @@
             
             
         }
+        
        deviceIDs = [deviceIDStr componentsSeparatedByString:@","];
+    
     }
     
     if (deviceIDs.count < 1) {
@@ -600,7 +633,10 @@
     }
     for (NSString *deviceID in deviceIDs) {
         Device *device = [self getDeviceWithDeviceID:[deviceID intValue]];
-        
+        if([deviceID isEqualToString:@""]|| deviceID == nil)
+        {
+            break;
+        }
         [devices addObject:device];
     }
     

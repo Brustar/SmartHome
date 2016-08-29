@@ -31,8 +31,23 @@
     if(!_curtainIDArr)
     {
         _curtainIDArr = [NSMutableArray array];
-        [_curtainIDArr addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"开合帘" andRoomID:self.roomID]];
-         [_curtainIDArr addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"卷帘" andRoomID:self.roomID]];
+        if(self.sceneid > 0)
+        {
+            NSArray *curtainArr = [DeviceManager getDeviceIDWithRoomID:self.roomID sceneID:[self.sceneid intValue]];
+            for(int i = 0; i <curtainArr.count; i++)
+            {
+                NSString *typeName = [DeviceManager deviceTypeNameByDeviceID:[curtainArr[i] intValue]];
+                if([typeName isEqualToString:@"窗帘"])
+                {
+                    [_curtainIDArr addObject:curtainArr[i]];
+                }
+            }
+
+        }else{
+            [_curtainIDArr addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"开合帘" andRoomID:self.roomID]];
+            [_curtainIDArr addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"卷帘" andRoomID:self.roomID]];
+        }
+        
         
     }
     return _curtainIDArr;

@@ -114,7 +114,8 @@
         self.firstPowerBtn.tag = scene.sceneID;
         self.firstDeleteBtn.tag = scene.sceneID;
         [self.firstButton setTitle:scene.sceneName forState:UIControlStateNormal];
-        [self.firstButton setBackgroundImage:[UIImage imageNamed:scene.picName] forState:UIControlStateNormal];
+        UIImage *image = [self getImgByUrl:scene.picName];
+        [self.firstButton setBackgroundImage:image forState:UIControlStateNormal];
         
     }else {
         Scene *scene = self.scenes[0];
@@ -122,10 +123,12 @@
         self.firstPowerBtn.tag = scene.sceneID;
         self.firstDeleteBtn.tag = scene.sceneID;
         [self.firstButton setTitle:scene.sceneName forState:UIControlStateNormal];
-        [self.firstButton setBackgroundImage:[UIImage imageNamed:scene.picName] forState:UIControlStateNormal];
+        UIImage *image = [self getImgByUrl:scene.picName];
+        [self.firstButton setBackgroundImage:image forState:UIControlStateNormal];
         Scene *scondScene = self.scenes[1];
         [self.secondButton setTitle:scondScene.sceneName forState:UIControlStateNormal];
-        [self.secondButton setBackgroundImage:[UIImage imageNamed:scondScene.picName] forState:UIControlStateNormal];
+        image = [self getImgByUrl:scondScene.picName];
+        [self.secondButton setBackgroundImage:image forState:UIControlStateNormal];
         self.secondButton.tag = scondScene.sceneID;
         self.secondPowerBtn.tag = scondScene.sceneID;
         self.secondDeleteBtn.tag = scondScene.sceneID;
@@ -153,6 +156,13 @@
     [self judgeScensCount:self.scenes];
     
 }
+-(UIImage *)getImgByUrl:(NSString *)url
+{
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+    return [UIImage imageWithData:data];
+    
+}
+
 -(void)judgeScensCount:(NSArray *)scenes
 {
     if(scenes.count > 2)
@@ -250,6 +260,7 @@
     cell.delegate = self;
     Scene *scene = self.collectionScenes[indexPath.row];
     cell.scenseName.text = scene.sceneName;
+    cell.backgroundColor = [UIColor colorWithPatternImage:[self getImgByUrl:scene.picName]];
     cell.powerBtn.tag = scene.sceneID;
     [cell useLongPressGestureRecognizer];
 
@@ -280,6 +291,8 @@
         
         [theSegue setValue:[NSNumber numberWithInt:self.selectedSID] forKey:@"sceneID"];
         [theSegue setValue:[NSNumber numberWithInt:self.roomID] forKey:@"roomID"];
+    
+        
     }
 }
 
@@ -303,7 +316,21 @@
 {
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:sceneCell];
     int row = (int)indexPath.row;
-    [[SceneManager defaultManager] delScenen:self.collectionScenes[row]];
+    Scene *scene = self.collectionScenes[row];
+    [[SceneManager defaultManager] delScenen:scene];
+    
+    //同步云端
+    
+    NSString *url = [NSString stringWithFormat:@"%@SceneDelete.aspx",[IOManager httpAddr]];
+    NSDictionary *dict = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"SID":[NSNumber numberWithInt:scene.sceneID]};
+    HttpManager *http=[HttpManager defaultManager];
+    http.delegate=self;
+    http.tag = 2;
+    [http sendPost:url param:dict];
+    
+    self.scenes = [SceneManager getAllSceneWithRoomID:self.roomID];
+    [self.collectionView reloadData];
+
 }
 
 - (IBAction)clickSceneBtn:(UIButton *)sender {

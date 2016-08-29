@@ -56,7 +56,8 @@
 +(NSString *)getEType:(NSInteger)eID;
 +(NSString *)getENumber:(NSInteger)eID;
 +(NSString *)getDeviceIDByENumber:(NSInteger)eID masterID:(NSInteger)mID;
-+(int)saveMaxSceneId:(NSString *)name;
++(int)saveMaxSceneId:(Scene *)scene name:name pic:(NSString *)img;
 +(int) getSceneID:(NSString *)name;
 +(int) getRoomID:(int)sceneID;
++(NSString *)getSceneName:(int)sceneID;
 @end

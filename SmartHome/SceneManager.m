@@ -37,7 +37,8 @@
 - (void) addScenen:(Scene *)scene withName:(NSString *)name withPic:(NSString *)picurl
 {
     if (name) {
-        int sceneid=[DeviceManager saveMaxSceneId:name];
+        
+        int sceneid=[DeviceManager saveMaxSceneId:scene name:name pic:picurl];
         scene.sceneID=sceneid;
         //同步云端
         NSString *url = [NSString stringWithFormat:@"%@SceneUpload.aspx",[IOManager httpAddr]];
@@ -61,9 +62,10 @@
         if([responseObject[@"Result"] intValue] == 0)
         {
             [MBProgressHUD showSuccess:@"场景保存成功"];
-        }else{
-            [MBProgressHUD showError: responseObject[@"Msg"]];
-        }
+       }
+ //           else{
+//            [MBProgressHUD showError: responseObject[@"Msg"]];
+//        }
     }
 }
 

@@ -12,4 +12,5 @@
 @property(nonatomic,assign) int sceneID;
 @property(nonatomic,assign) int deviceID;
 @property(nonatomic,assign) int roomID;
+
 @end

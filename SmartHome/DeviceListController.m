@@ -206,6 +206,7 @@
     
 }
 - (IBAction)sureStoreScene:(id)sender {
+    self.saveSceneView.hidden = YES;
     NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];

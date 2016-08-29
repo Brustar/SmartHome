@@ -94,7 +94,7 @@
     self.tableView.backgroundColor = backGroudColour;
     self.subDeviceTableView.backgroundColor = backGroudColour;
     self.view.backgroundColor = backGroudColour;
-    
+    self.title= [DeviceManager getSceneName:self.sceneID];
     [self setupData];
     }
 
