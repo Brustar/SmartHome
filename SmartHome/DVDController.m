@@ -88,9 +88,6 @@
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionDown)];
     [[self touchpad] addGestureRecognizer:recognizer];
     
-    [SCWaveAnimationView waveAnimationAtDirection:recognizer.direction view:self.touchpad];
-    
-    
     //NSData *data=[[DeviceInfo defaultManager] open:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
