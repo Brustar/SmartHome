@@ -26,6 +26,7 @@
     UINavigationController *roomListNav = [self.childViewControllers firstObject];
     RoomListController *roomListVC  = [roomListNav.childViewControllers firstObject];
     roomListVC.delegate = self;
+    self.presentsWithGesture = NO;
 }
 -(void)RoomListControllerDelegate:(RoomListController *)roomListCV SelectedRoom:(NSInteger)RoomID
 {

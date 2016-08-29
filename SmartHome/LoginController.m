@@ -98,9 +98,9 @@
 
     
     NSDictionary *dict = @{@"Account":self.user.text,@"Type":[NSNumber numberWithInteger:self.userType],@"Password":[self.pwd.text md5]};
-    [IOManager writeUserdefault:self.user.text forKey:@"Account"];
+    //[IOManager writeUserdefault:self.user.text forKey:@"Account"];
     [IOManager writeUserdefault:[NSNumber numberWithInteger:self.userType] forKey:@"Type"];
-    [IOManager writeUserdefault:self.pwd.text forKey:@"Password"];
+    //[IOManager writeUserdefault:self.pwd.text forKey:@"Password"];
     HttpManager *http=[HttpManager defaultManager];
     http.delegate=self;
     http.tag = 1;
@@ -300,47 +300,42 @@
                 NSString *weakValue = dic[@"weekValue"];
                 NSInteger weekRepeat = [dic[@"weekRepeat"] integerValue];
                 NSArray *deviceList = dic[@"scceqSubTypeList"];
-                if(deviceList.count == 0 || deviceList == nil)
-                {
-                    return;
-                }
-                
+               
+                NSMutableString *strEid = [[NSMutableString alloc]init];
+
                 for(NSDictionary *equDic in deviceList)
                 {
                     NSArray *sceeqTypeList = equDic[@"sceeqTypeList"];
-                    if(sceeqTypeList.count == 0 || sceeqTypeList == nil)
-                    {
-                        return;
-                    }
-                    
-                    for(NSDictionary *typeList in sceeqTypeList)
+                                                           for(NSDictionary *typeList in sceeqTypeList)
                     {
                         NSArray *sceeqList = typeList[@"sceeqList"];
-                        if(sceeqList.count == 0 || sceeqList == nil)
+                                                for(NSDictionary *eList in sceeqList)
                         {
-                            return;
-                        }
-                        
-                        for(NSDictionary *eList in sceeqList)
-                        {
+                            
                             NSInteger eId = [eList[@"eId"] integerValue];
-                            NSString *sql = [NSString stringWithFormat:@"insert into Scenes values('%@','%@','%@','%@',%@,%ld,'%@','%@','%@',%ld,%ld)",sId,sName,rName,urlImg,NULL,eId,startTime,astronomicalTime,weakValue,weekRepeat,rId];
-                            BOOL result = [db executeUpdate:sql];
-                            if(result)
-                            {
-                                NSLog(@"insert 成功");
-                            }else{
-                                NSLog(@"insert 失败");
-                            }
+                           [strEid appendString:[NSString stringWithFormat:@"%ld,",eId]];
                             
                         }
+                       
                     }
+                    
                 }
+                NSString *str = [strEid copy];
+                NSString *strEids = [str substringToIndex:[str length] - 1];
+                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values('%@','%@','%@','%@',%@,'%@','%@','%@','%@',%ld,%ld)",sId,sName,rName,urlImg,NULL,strEids,startTime,astronomicalTime,weakValue,weekRepeat,rId];
+                BOOL result = [db executeUpdate:sql];
+                if(result)
+                {
+                    NSLog(@"insert 成功");
+                }else{
+                    NSLog(@"insert 失败");
+                }
+
             }
 
         }
     }
-        
+    
        [db close];
     
 }
@@ -580,7 +575,7 @@
     UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     RegisterPhoneNumController *registVC = [story instantiateViewControllerWithIdentifier:@"RegisterPhoneNumController"];
     [self dismissViewControllerAnimated:YES completion:^{
-        [self.navigationController pushViewController:registVC animated:YES];
+        
          NSArray* list = [result componentsSeparatedByString:@"@"];
             if([list count] > 1)
             {

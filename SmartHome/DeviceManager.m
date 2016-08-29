@@ -543,7 +543,7 @@
 
 + (NSArray *)getDeviceIDWithRoomID:(int)roomID sceneID:(int)sceneID
 {
-    NSMutableArray *deviceIDs = [NSMutableArray array];
+    NSArray *deviceIDs;
     
     NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
@@ -553,12 +553,14 @@
         NSString *sql = [NSString stringWithFormat:@"SELECT eId FROM Scenes where rId = %d and ID = %d",roomID, sceneID];
         
         FMResultSet *resultSet = [db executeQuery:sql];
+        NSString *deviceIDStr;
         while ([resultSet next])
         {
-            NSString *deviceID = [resultSet stringForColumn:@"eId"];
+            deviceIDStr = [resultSet stringForColumn:@"eId"];
             
-            [deviceIDs addObject:deviceID];
+            
         }
+       deviceIDs = [deviceIDStr componentsSeparatedByString:@","];
     }
     
     if (deviceIDs.count < 1) {

@@ -52,7 +52,7 @@
 @end
 
 
-@interface EditSceneController ()<UITableViewDelegate,UITableViewDataSource>
+@interface EditSceneController ()<UITableViewDelegate,UITableViewDataSource,UIPopoverControllerDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITableView *subDeviceTableView;
 
@@ -80,7 +80,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *favorSceneName;
 @property (nonatomic,strong)UIImage *selectSceneImg;
 @property (weak, nonatomic) IBOutlet UITextField *storeNewSceneName;
-
+@property (weak, nonatomic) UIViewController *currentViewController;
 @end
 
 @implementation EditSceneController
@@ -211,10 +211,15 @@
 
 -(void )addViewAndVC:(UIViewController *)vc
 {
+    if (self.currentViewController != nil) {
+        [self.currentViewController.view removeFromSuperview];
+        [self.currentViewController removeFromParentViewController];
+    }
+
     vc.view.frame = self.devicelView.frame;
     [self.view addSubview:vc.view];
     [self addChildViewController:vc];
-    
+     self.currentViewController = vc;
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -244,21 +249,22 @@
         
         Scene *scene = [[Scene alloc]init];
         [scene setValuesForKeysWithDictionary:plistDic];
-
+        
         [[SceneManager defaultManager] editScenen:scene];
     }];
     [alertVC addAction:saveAction];
     UIAlertAction *saveNewAction = [UIAlertAction actionWithTitle:@"另存为新场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //另存为场景，新的场景ID
-        self.favorView.hidden = NO;
+        [self.view bringSubviewToFront:self.devicelView];
         
+        self.storeNewScene.hidden = NO;
     }];
     [alertVC addAction:saveNewAction];
     UIAlertAction *favScene = [UIAlertAction actionWithTitle:@"收藏场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    
+        
         self.favorView.hidden = NO;
         
-        
+        [self.view bringSubviewToFront:self.devicelView];
     }];
     [alertVC addAction:favScene];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -270,20 +276,33 @@
 
 - (IBAction)sureFavorScence:(id)sender {
     
+    if ([self.favorSceneName.text isEqualToString:@""]) {
+        [MBProgressHUD showError:@"场景名不能为空!"];
+        return;
+    }
+    
     Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
     [[SceneManager defaultManager] favoriteScenen:scene withName:self.favorSceneName.text];
     self.favorView.hidden = YES;
+    self.storeNewScene.hidden = YES;
+    
+    [self.view bringSubviewToFront:self.currentViewController.view];
+
 }
 
 - (IBAction)cancelFavorScene:(id)sender {
     self.favorView.hidden = YES;
     self.storeNewScene.hidden = YES;
+    [self.view bringSubviewToFront:self.currentViewController.view];
 }
 - (IBAction)selectSceneImg:(id)sender {
     UIButton *btn = sender;
     UIView *view = btn.superview;
-    CGFloat y = view.frame.origin.y -(view.frame.size.width - btn.frame.size.width);
-    [KxMenu showMenuInView:self.view fromRect:CGRectMake(view.frame.origin.x, y , view.frame.size.width, view.frame.size.height) menuItems:@[
+    CGFloat w = view.frame.size.width;
+    CGFloat h = view.frame.size.height;
+    CGFloat y = btn.frame.origin.y + btn.frame.size.height / 2 - 10;
+    CGFloat x = btn.center.x - w / 2 - 30;
+    [KxMenu showMenuInView:view fromRect:CGRectMake(x, y , w, h) menuItems:@[
                                                                                                                                              [KxMenuItem menuItem:@"本地图库"
                                                                                                                                                             image:nil
                                                                                                                                                            target:self
@@ -321,6 +340,11 @@
 
 - (IBAction)sureStoreNewScene:(id)sender {
     
+    if ([self.storeNewSceneName.text isEqualToString:@""]) {
+        [MBProgressHUD showError:@"场景名不能为空!"];
+        return;
+    }
+    
     NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
@@ -329,7 +353,10 @@
     [scene setValuesForKeysWithDictionary:plistDic];
     NSString *imgStr = [self UIimageToStr:self.selectSceneImg];
     [[SceneManager defaultManager] addScenen:scene withName:self.storeNewSceneName.text withPic:imgStr];
-}
+    
+    self.storeNewScene.hidden = YES;
+    
+    [self.view bringSubviewToFront:self.currentViewController.view];}
 -(NSString *)UIimageToStr:(UIImage *)img
 {
     NSData *data = UIImageJPEGRepresentation(img,1.0f);
@@ -350,6 +377,9 @@
     [MBProgressHUD showError:responseObject[@"Msg"]];
     
     
+}
+- (IBAction)clickStopBtn:(id)sender {
+    [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];
 }
 
 - (void)didReceiveMemoryWarning {

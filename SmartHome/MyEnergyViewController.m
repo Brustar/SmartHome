@@ -150,8 +150,8 @@
         if(indexPath.row == self.enegers.count - 1)
         {
             cell.titleLabel.text = @"本月总能耗超出上月";
-            cell.timeLabel.text = [NSString stringWithFormat:@"超出上月的能耗:%@",dic[@"overEngry"]];
-            cell.totalLabel.text = @"";
+            cell.timeLabel.text =@"节约能耗，从我做起";
+            cell.totalLabel.text = [NSString stringWithFormat:@"超出上月的能耗:%@",dic[@"overEngry"]];
         }else{
             NSString *ename = dic[@"ename"];
             int hour = [dic[@"hour"] intValue];

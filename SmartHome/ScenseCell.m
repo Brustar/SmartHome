@@ -8,7 +8,7 @@
 
 #import "ScenseCell.h"
 
-@interface ScenseCell ()
+@interface ScenseCell ()<UIGestureRecognizerDelegate>
 @property(nonatomic,strong)UILongPressGestureRecognizer *lpgr;
 
 @end
@@ -20,7 +20,7 @@
     self.lpgr.delegate = self;
     [self addGestureRecognizer:self.lpgr];
 }
--(void)handleLongPress:(UILongPressGestureRecognizer *)lgr
+-(void)handleLongPressGesture:(UILongPressGestureRecognizer *)lgr
 {
    
     self.deleteBtn.hidden = NO;

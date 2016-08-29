@@ -14,7 +14,7 @@
 //从数据中获取所有设备信息
 +(NSArray *)getAllDevicesInfo;
 
-//根据房间ID的到该房间的所有设备
+//根据房间ID得到该房间的所有设备
 +(NSArray *)devicesByRoomId:(NSInteger)roomId;
 
 //根据设备ID获取设备名称

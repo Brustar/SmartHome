@@ -21,7 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *addSceseBtn;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *netBarBtn;
 @property (nonatomic,assign) int selectedSID;
-@property (nonatomic,assign) int selectedDID;
+
 @property (nonatomic,assign) int roomID;
 //collecitonView中的scenes
 @property (nonatomic,strong) NSArray *collectionScenes;
@@ -71,18 +71,29 @@
 
 -(void)addGestureRecognizer:(UILongPressGestureRecognizer *)lpgr
 {
-    self.firstDeleteBtn.hidden = NO;
-    self.secondDeleteBtn.hidden = NO;
+    UILongPressGestureRecognizer *secondLong = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
+    secondLong.minimumPressDuration = 1;
+    secondLong.delegate = self;
+    
+    
+    [self.firstButton addGestureRecognizer:lpgr];
+    
+    [self.secondButton addGestureRecognizer:secondLong];
+
 }
 -(void)handleLongPressGesture:(UILongPressGestureRecognizer *)lgrs
 {
-    if(self.firstView.hidden == NO)
+    if (self.lpgr == lgrs)
     {
-        self.firstDeleteBtn.hidden = NO;
-    }
-    if(self.secondView.hidden == NO)
-    {
-        self.secondDeleteBtn.hidden = NO;
+        if(self.firstView.hidden == NO)
+        {
+            self.firstDeleteBtn.hidden = NO;
+        }
+    } else {
+        if(self.secondView.hidden == NO)
+        {
+            self.secondDeleteBtn.hidden = NO;
+        }
     }
 }
 
@@ -92,11 +103,12 @@
     {
         self.firstView.hidden = YES;
         self.secondView.hidden = YES;
-
+        
     }else if(self.scenes .count == 1)
     {
         self.secondView.hidden = YES;
         self.firstView.hidden = NO;
+        self.firstDeleteBtn.hidden = YES;
         Scene *scene = self.scenes[0];
         self.firstButton.tag = scene.sceneID;
         self.firstPowerBtn.tag = scene.sceneID;
@@ -118,9 +130,10 @@
         self.secondPowerBtn.tag = scondScene.sceneID;
         self.secondDeleteBtn.tag = scondScene.sceneID;
         self.firstView.hidden = NO;
+        self.firstDeleteBtn.hidden = YES;
         self.secondView.hidden = NO;
-        
-        }
+        self.secondDeleteBtn.hidden = YES;
+    }
 }
 
 - (void)reachNotification
@@ -250,8 +263,7 @@
     cell.deleteBtn.hidden = YES;
     Scene *scene = self.collectionScenes[indexPath.row];
     self.selectedSID = scene.sceneID;
-    self.selectedDID = scene.eID;
-    [[SceneManager defaultManager] startScene:scene.eID];
+    [[SceneManager defaultManager] startScene:scene.sceneID];
     [self performSegueWithIdentifier:@"sceneDetailSegue" sender:self];
 }
 -(void)startSceneAction:(UIButton *)btn{
@@ -266,7 +278,6 @@
         id theSegue = segue.destinationViewController;
         
         [theSegue setValue:[NSNumber numberWithInt:self.selectedSID] forKey:@"sceneID"];
-        //[theSegue setValue:[NSNumber numberWithInt:self.selectedDID] forKey:@"deviceID"];
         [theSegue setValue:[NSNumber numberWithInt:self.roomID] forKey:@"roomID"];
     }
 }
@@ -297,6 +308,8 @@
 - (IBAction)clickSceneBtn:(UIButton *)sender {
    
     
+    self.firstDeleteBtn.hidden = YES;
+    self.secondDeleteBtn.hidden = YES;
     self.selectedSID =(int)sender.tag;
     //self.selectedDID = scene.eID;
     [[SceneManager defaultManager] startScene:self.selectedSID];
