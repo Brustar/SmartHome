@@ -619,7 +619,7 @@
     NSArray *deviceIDs = [self getDeviceIDWithRoomID:roomID sceneID:sceneID];
     
     for (NSString *deviceID in deviceIDs) {
-        NSString *typeName = [self getDeviceTypeNameWithID:deviceID];
+        NSString *typeName = [self getDeviceTypeNameWithID:deviceID subTypeName:subTypeName];
         
         if ([typeName isEqualToString:@"开关灯"] || [typeName isEqualToString:@"调色灯"] || [typeName isEqualToString:@"调光灯"]) {
             typeName = @"灯光";
@@ -637,8 +637,12 @@
         if (isSame) {
             continue;
         }
+        if([typeName isEqualToString:@""] || typeName == nil)
+        {
+            continue;
+        }
+         [typeNames addObject:typeName];
         
-        [typeNames addObject:typeName];
     }
     
     if (typeNames.count < 1) {
@@ -653,7 +657,7 @@
     NSMutableArray *typeNames = [NSMutableArray array];
     NSArray *deviceIDs = [self getAllDevicesIds];
     for (NSString *deviceID in deviceIDs) {
-        NSString *typeName = [self getDeviceTypeNameWithID:deviceID];
+        NSString *typeName = [self getDeviceTypeNameWithID:deviceID subTypeName:subTypeName];
         BOOL isSame = false;
         for (NSString *tempTypeName in typeNames) {
             if ([tempTypeName isEqualToString:typeName]) {
@@ -674,8 +678,7 @@
     
     return [typeNames copy];
 }
-
-+ (NSString *)getDeviceTypeNameWithID:(NSString *)ID
++ (NSString *)getDeviceTypeNameWithID:(NSString *)ID subTypeName:(NSString *)subTypeName
 {
     NSString *typeName = nil;
     
@@ -684,17 +687,16 @@
     
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT typeName FROM Devices where ID = %@",ID];
+        NSString *sql = [NSString stringWithFormat:@"SELECT typeName FROM Devices where ID = %@ and subTypeName = '%@'",ID, subTypeName];
         
         FMResultSet *resultSet = [db executeQuery:sql];
-        if ([resultSet next])
+        while ([resultSet next])
         {
             typeName = [resultSet stringForColumn:@"typeName"];
         }
     }
     
-    return typeName;
-}
+    return typeName;}
 
 
 @end

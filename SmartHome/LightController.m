@@ -37,7 +37,11 @@
        
            if(self.sceneid > 0)
            {
-            [_lIDs addObjectsFromArray:[DeviceManager getDeviceIDWithRoomID:self.roomID sceneID:[self.sceneid intValue]]];
+            NSArray *lightArr = [DeviceManager getDeviceIDWithRoomID:self.roomID sceneID:[self.sceneid intValue]];
+//               for(int i = 0; i <lightArr.count; i++)
+//               {
+//                   
+//               }
                
                
            }else{

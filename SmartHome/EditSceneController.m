@@ -146,10 +146,17 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+    if(tableView == self.tableView)
+    {
+        
+    self.subTypeArr =  [DeviceManager getDeviceTypeNameWithRoomID:self.roomID sceneID:self.sceneID subTypeName:self.devicesTypes[indexPath.row]];
+    [self.subDeviceTableView reloadData];
+    }
     if(tableView == self.subDeviceTableView)
         
     {
-       self.subTypeArr =  [DeviceManager getDeviceTypeNameWithRoomID:self.roomID sceneID:self.sceneID subTypeName:self.devicesTypes[indexPath.row]];
+        //灯光，窗帘，DVD，网络电视
+      
         NSString *typeName = self.subTypeArr[indexPath.row];
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         if([typeName isEqualToString:@"网络电视"])
@@ -207,6 +214,8 @@
             [self addViewAndVC:pluginVC];
         }
     }
+    
+    
 }
 
 -(void )addViewAndVC:(UIViewController *)vc
