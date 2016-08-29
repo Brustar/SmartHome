@@ -289,7 +289,7 @@
             data=[[DeviceInfo defaultManager] open:deviceid];
             [sock.socket writeData:data withTimeout:1 tag:1];
             if (tv.volume>0) {
-                data=[[DeviceInfo defaultManager] changeTVolume:tv.volume*100 deviceID:deviceid];
+                data=[[DeviceInfo defaultManager] changeTVolume:tv.volume deviceID:deviceid];
                 [sock.socket writeData:data withTimeout:1 tag:1];
             }
             if (tv.channelID>0) {
@@ -304,7 +304,7 @@
             data=[[DeviceInfo defaultManager] open:deviceid];
             [sock.socket writeData:data withTimeout:1 tag:1];
             if (dvd.dvolume>0) {
-                data=[[DeviceInfo defaultManager] changeTVolume:dvd.dvolume*100 deviceID:deviceid];
+                data=[[DeviceInfo defaultManager] changeTVolume:dvd.dvolume deviceID:deviceid];
                 [sock.socket writeData:data withTimeout:1 tag:1];
             }
         }
@@ -315,7 +315,7 @@
             data=[[DeviceInfo defaultManager] open:deviceid];
             [sock.socket writeData:data withTimeout:1 tag:1];
             if (netv.nvolume>0) {
-                data=[[DeviceInfo defaultManager] changeTVolume:netv.nvolume*100 deviceID:deviceid];
+                data=[[DeviceInfo defaultManager] changeTVolume:netv.nvolume deviceID:deviceid];
                 [sock.socket writeData:data withTimeout:1 tag:1];
             }
         }
@@ -326,7 +326,7 @@
             data=[[DeviceInfo defaultManager] open:deviceid];
             [sock.socket writeData:data withTimeout:1 tag:1];
             if (fm.rvolume>0) {
-                data=[[DeviceInfo defaultManager] changeTVolume:fm.rvolume*100 deviceID:deviceid];
+                data=[[DeviceInfo defaultManager] changeTVolume:fm.rvolume deviceID:deviceid];
                 [sock.socket writeData:data withTimeout:1 tag:1];
             }
             if (fm.channel>0) {
@@ -341,7 +341,7 @@
             data=[[DeviceInfo defaultManager] open:deviceid];
             [sock.socket writeData:data withTimeout:1 tag:1];
             if (music.bgvolume>0) {
-                data=[[DeviceInfo defaultManager] changeTVolume:music.bgvolume*100 deviceID:deviceid];
+                data=[[DeviceInfo defaultManager] changeTVolume:music.bgvolume deviceID:deviceid];
                 [sock.socket writeData:data withTimeout:1 tag:1];
             }
         }
@@ -352,7 +352,7 @@
             data=[[DeviceInfo defaultManager] toogleLight:light.isPoweron deviceID:deviceid];
             [sock.socket writeData:data withTimeout:1 tag:1];
             if (light.brightness>0) {
-                data=[[DeviceInfo defaultManager] changeBright:light.brightness*100 deviceID:deviceid];
+                data=[[DeviceInfo defaultManager] changeBright:light.brightness deviceID:deviceid];
                 [sock.socket writeData:data withTimeout:1 tag:1];
             }
             if ([light.color count]>0) {
@@ -369,7 +369,7 @@
             Curtain *curtain=(Curtain *)device;
             NSString *deviceid=[NSString stringWithFormat:@"%d", curtain.deviceID];
             if (curtain.openvalue>0) {
-                data=[[DeviceInfo defaultManager] roll:curtain.openvalue*100 deviceID:deviceid];
+                data=[[DeviceInfo defaultManager] roll:curtain.openvalue deviceID:deviceid];
                 [sock.socket writeData:data withTimeout:1 tag:1];
             }
         }
