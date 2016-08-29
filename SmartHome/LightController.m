@@ -38,10 +38,14 @@
            if(self.sceneid > 0)
            {
             NSArray *lightArr = [DeviceManager getDeviceIDWithRoomID:self.roomID sceneID:[self.sceneid intValue]];
-//               for(int i = 0; i <lightArr.count; i++)
-//               {
-//                   
-//               }
+               for(int i = 0; i <lightArr.count; i++)
+               {
+                   NSString *typeName = [DeviceManager deviceTypeNameByDeviceID:[lightArr[i] intValue]];
+                   if([typeName isEqualToString:@"灯光"])
+                   {
+                       [_lIDs addObject:lightArr[i]];
+                   }
+               }
                
                
            }else{
@@ -214,8 +218,8 @@
     }
     Scene *scene=[[Scene alloc] initWhithoutSchedule];
     [scene setSceneID:[self.sceneid intValue]];
-    [scene setRoomID:4];
-    [scene setHouseID:3];
+    [scene setRoomID:self.roomID];
+    [scene setMasterID:[[DeviceInfo defaultManager] masterID]];
     
     [scene setReadonly:NO];
     
