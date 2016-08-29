@@ -24,4 +24,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *favorite;
 @property (nonatomic,assign) int roomID;
 
+@property (strong, nonatomic) Scene *scene;
+
 @end

@@ -238,9 +238,9 @@
     [device setChannel:[self.numberOfChannel.text floatValue]];
     
     Scene *scene=[[Scene alloc] initWhithoutSchedule];
-    [scene setSceneID:2];
-    [scene setRoomID:4];
-    [scene setHouseID:3];
+    [scene setSceneID:[self.sceneid intValue]];
+    [scene setRoomID:self.roomID];
+    [scene setMasterID:[[DeviceInfo defaultManager] masterID]];
     
     [scene setReadonly:NO];
     
