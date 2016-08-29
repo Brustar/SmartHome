@@ -7,6 +7,7 @@
 //
 #import "TouchImage.h"
 
+//实景控制
 @interface RealScene : UIViewController
 
 @property (strong, nonatomic) IBOutlet TouchImage *realimg;

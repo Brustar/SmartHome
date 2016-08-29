@@ -7,6 +7,7 @@
 //
 #import "TouchImage.h"
 
+//平面图，我的家
 @interface planeScene : UIViewController
 
 @property (strong, nonatomic) IBOutlet TouchImage *planeimg;
