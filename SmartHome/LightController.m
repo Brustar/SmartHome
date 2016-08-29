@@ -82,10 +82,10 @@
     [self.detailCell.bright addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
 
-     [self.detailCell.power addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
+    [self.detailCell.power addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
-     self.cell = [[[NSBundle mainBundle] loadNibNamed:@"ColourTableViewCell" owner:self options:nil] lastObject];
-    
+    self.cell = [[[NSBundle mainBundle] loadNibNamed:@"ColourTableViewCell" owner:self options:nil] lastObject];
+    self.scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     if ([self.sceneid intValue]>0) {
         _favButt.enabled=YES;
         
@@ -108,8 +108,8 @@
 
 -(void) syncUI
 {
-    Scene *scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
-    for(id device in scene.devices)
+    
+    for(id device in self.scene.devices)
     {
         if ([device isKindOfClass:[Light class]] && ((Light*)device).deviceID== [self.deviceid intValue]) {
             self.detailCell.bright.value=((Light*)device).brightness/100.0;

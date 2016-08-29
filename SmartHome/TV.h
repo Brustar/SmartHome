@@ -11,7 +11,7 @@
 //设备id
 @property (nonatomic) int deviceID;
 //开关状态
-@property (nonatomic) bool isPoweron;
+@property (nonatomic) bool poweron;
 //视频源id
 @property (nonatomic) int HDMIID;
 //频道id
