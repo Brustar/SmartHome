@@ -132,8 +132,8 @@
 {
     NSString *filePath=[NSString stringWithFormat:@"%@/%@_0.plist",[self scenesPath], SCENE_FILE_NAME];
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    if([fileManager fileExistsAtPath:filePath]== YES){
-        [IOManager removeFile:filePath];
+    if([fileManager fileExistsAtPath:filePath] == YES){
+        [self removeFile:filePath];
     }
 }
 

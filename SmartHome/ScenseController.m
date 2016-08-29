@@ -204,7 +204,7 @@
             NSLog(@"离线模式");
             [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
             
-            int sed = (arc4random() % 2) + 1;
+            int sed = (arc4random() % 3) + 1;
             if (sed == 1) {
                 //connect master
                 [sock connectUDP:[IOManager udpPort]];
@@ -250,8 +250,8 @@
     cell.deleteBtn.hidden = YES;
     Scene *scene = self.collectionScenes[indexPath.row];
     self.selectedSID = scene.sceneID;
-    self.selectedDID = scene.eID;
-    [[SceneManager defaultManager] startScene:scene.eID];
+    //self.selectedDID = scene.eID;
+    [[SceneManager defaultManager] startScene:scene.sceneID];
     [self performSegueWithIdentifier:@"sceneDetailSegue" sender:self];
 }
 -(void)startSceneAction:(UIButton *)btn{

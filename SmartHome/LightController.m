@@ -210,8 +210,8 @@
     }
     Scene *scene=[[Scene alloc] initWhithoutSchedule];
     [scene setSceneID:[self.sceneid intValue]];
-    [scene setRoomID:4];
-    [scene setHouseID:3];
+    [scene setRoomID:self.roomID];
+    [scene setMasterID:[[DeviceInfo defaultManager] masterID]];
     
     [scene setReadonly:NO];
     

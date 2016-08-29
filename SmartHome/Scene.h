@@ -31,10 +31,8 @@
 @property(nonatomic,assign) BOOL weekRepeat;
 //是否为收藏场景
 @property(nonatomic,assign) BOOL isFavorite;
-//设备ID
-@property(nonatomic,assign) int eID;
 //户型id
-@property (nonatomic) int houseID;
+@property (nonatomic) long masterID;
 //是否系统场景
 @property (nonatomic) bool readonly;
 //设备列表

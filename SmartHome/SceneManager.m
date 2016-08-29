@@ -124,7 +124,7 @@
         scene.readonly=[dictionary objectForKey:@"readonly"];
         scene.picName=[dictionary objectForKey:@"picName"];
         scene.roomID=[[dictionary objectForKey:@"roomID"] intValue];
-        scene.houseID=[[dictionary objectForKey:@"houseID"] intValue];
+        scene.masterID=[[dictionary objectForKey:@"masterID"] intValue];
         
         NSMutableArray *devices=[[NSMutableArray alloc] init];
         for (NSDictionary *dic in [dictionary objectForKey:@"devices"]) {
@@ -492,7 +492,6 @@
             
             scene.picName =[resultSet stringForColumn:@"pic"];
             scene.isFavorite = [resultSet boolForColumn:@"isFavorite"];
-            scene.eID = [resultSet intForColumn:@"eId"];
             
             scene.startTime = [resultSet stringForColumn:@"startTime"];
             scene.astronomicalTime = [resultSet stringForColumn:@"astronomicalTime"];
@@ -517,7 +516,7 @@
     {
         if(scene.sceneID == sId)
         {
-           devices = [DeviceManager devicesByRoomId:scene.eID];
+           devices = [DeviceManager devicesByRoomId:scene.roomID];
         }
     }
     return devices;
@@ -555,7 +554,7 @@
         
         scene.picName =[resultSet stringForColumn:@"pic"];
         scene.isFavorite = [resultSet boolForColumn:@"isFavorite"];
-        scene.eID = [resultSet intForColumn:@"eId"];
+        
         scene.startTime = [resultSet stringForColumn:@"startTime"];
         scene.astronomicalTime = [resultSet stringForColumn:@"astronomicalTime"];
         scene.weekValue = [resultSet stringForColumn:@"weekValue"];
