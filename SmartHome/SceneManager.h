@@ -43,4 +43,8 @@
 //根据房间ID的到所有的场景
 + (NSArray *)getAllSceneWithRoomID:(int)roomID;
 
+
+//从数据库中删除场景
++(BOOL)deleteScene:(int)sceneId;
+
 @end

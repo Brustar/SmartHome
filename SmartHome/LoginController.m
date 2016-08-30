@@ -66,12 +66,12 @@
     self.user.text = [[NSUserDefaults  standardUserDefaults] objectForKey:@"Account"];
     self.userType = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Type"] intValue];
     self.pwd.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"Password"];
-    // Do any additional setup after loading the view.
+   
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
 - (IBAction)login:(id)sender
@@ -128,6 +128,7 @@
         self.vEquipmentsLast = [responseObject[@"vEquipment"] intValue];
         self.vRoomLast = [responseObject[@"vRoom"] intValue];
         self.vSceneLast = [responseObject[@"vScene"] intValue];
+        //self.vSceneLast = 5;
         self.vTVChannelLast = [responseObject[@"vTVChannel"] intValue];
         self.vFMChannellLast = [responseObject[@"vFMChannel"] intValue];
         self.vClientlLast = [responseObject[@"vClient"] intValue];
@@ -143,7 +144,7 @@
     
     switch (tag) {
         case 4:
-            if(self.vEquipmentsLast > vEquipment)
+            if(self.vEquipmentsLast < vEquipment)
             {
                 // 更新设备
                 [IOManager writeUserdefault:[NSNumber numberWithInt:self.vEquipmentsLast] forKey:@"vEquipment"];
@@ -151,26 +152,26 @@
                 return;
             }
         case 5:
-            if(self.vRoomLast > vRoom)
+            if(self.vRoomLast < vRoom)
             {
                 //更新房间
                 [self updateRoomInfo];
                 return;
             }
         case 6:
-            if(self.vSceneLast > vScene)
+            if(self.vSceneLast < vScene)
             {
                 //更新场景
                 [self updateSceneInfo];
                 return;
             }
         case 7:
-            if(self.vTVChannelLast > vTVChannel){
+            if(self.vTVChannelLast < vTVChannel){
                 [self updateTVChannelsInfo];
                 return;
             }
         case 8:
-            if(self.vFMChannellLast > vFMChannel){
+            if(self.vFMChannellLast < vFMChannel){
                 [self updateFMChannelsInfo];
                 return;
             }
@@ -294,6 +295,8 @@
             {
                 NSString *sId = dic[@"sId"];
                 NSString *sName = dic[@"sName"];
+                int sType = [dic[@"sType"] intValue];
+                
                 NSString *urlImg = dic[@"urlImage"];
                 NSString *startTime = dic[@"startTime"];
                 NSString *astronomicalTime = dic[@"astronomicalTime"];
@@ -321,8 +324,15 @@
                     
                 }
                 NSString *str = [strEid copy];
-                NSString *strEids = [str substringToIndex:[str length] - 1];
-                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values('%@','%@','%@','%@',%@,'%@','%@','%@','%@',%ld,%ld)",sId,sName,rName,urlImg,NULL,strEids,startTime,astronomicalTime,weakValue,weekRepeat,rId];
+                NSString *strEids;
+                if(str.length != 0)
+                {
+                   strEids = [str substringToIndex:[str length] - 1];
+                   
+                }else{
+                   strEids = @"";
+                }
+                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values('%@','%@','%@','%@',%@,'%@','%@','%@','%@',%ld,%ld,%d)",sId,sName,rName,urlImg,NULL,strEids,startTime,astronomicalTime,weakValue,weekRepeat,rId,sType];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {
@@ -331,6 +341,7 @@
                     NSLog(@"insert 失败");
                 }
 
+                
             }
 
         }

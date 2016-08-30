@@ -1234,17 +1234,6 @@
                                                     <action selector="clickSceneBtn:" destination="uQg-ex-x78" eventType="touchUpInside" id="OBh-pK-zpT"/>
                                                 </connections>
                                             </button>
-                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="76z-kd-q6i">
-                                                <rect key="frame" x="150" y="10" width="40" height="40"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="40" id="rMO-kS-9hB"/>
-                                                    <constraint firstAttribute="height" constant="40" id="xtv-tx-RCk"/>
-                                                </constraints>
-                                                <state key="normal" backgroundImage="delete"/>
-                                                <connections>
-                                                    <action selector="clickDeleteBtn:" destination="uQg-ex-x78" eventType="touchUpInside" id="j73-XE-VE0"/>
-                                                </connections>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ng-zv-C2G">
                                                 <rect key="frame" x="150" y="150" width="40" height="40"/>
                                                 <constraints>
@@ -1262,13 +1251,11 @@
                                             <constraint firstAttribute="trailing" secondItem="faQ-zk-VrB" secondAttribute="trailing" id="1gf-qd-J50"/>
                                             <constraint firstAttribute="bottom" secondItem="faQ-zk-VrB" secondAttribute="bottom" id="7uM-TH-g6f"/>
                                             <constraint firstAttribute="trailing" secondItem="7ng-zv-C2G" secondAttribute="trailing" constant="10" id="G25-X3-C4t"/>
-                                            <constraint firstAttribute="trailing" secondItem="76z-kd-q6i" secondAttribute="trailing" constant="10" id="I1F-nV-40H"/>
                                             <constraint firstAttribute="width" constant="200" id="QFX-2O-q6h"/>
                                             <constraint firstItem="faQ-zk-VrB" firstAttribute="leading" secondItem="0gT-5P-4ZF" secondAttribute="leading" id="YLV-d2-ZGT"/>
                                             <constraint firstAttribute="height" constant="200" id="ZH1-oT-ejd"/>
                                             <constraint firstItem="faQ-zk-VrB" firstAttribute="top" secondItem="0gT-5P-4ZF" secondAttribute="top" id="cO8-7B-Fi3"/>
                                             <constraint firstAttribute="bottom" secondItem="7ng-zv-C2G" secondAttribute="bottom" constant="10" id="hBo-qu-dpB"/>
-                                            <constraint firstItem="76z-kd-q6i" firstAttribute="top" secondItem="0gT-5P-4ZF" secondAttribute="top" constant="10" id="sV2-Mr-PiW"/>
                                         </constraints>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NYw-mL-dFl">
@@ -1283,17 +1270,6 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="clickSceneBtn:" destination="uQg-ex-x78" eventType="touchUpInside" id="g1d-jK-5Kh"/>
-                                                </connections>
-                                            </button>
-                                            <button hidden="YES" opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgU-Oy-Gjq">
-                                                <rect key="frame" x="150" y="10" width="40" height="40"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="40" id="drl-QA-ZKO"/>
-                                                    <constraint firstAttribute="height" constant="40" id="t8a-55-AQo"/>
-                                                </constraints>
-                                                <state key="normal" backgroundImage="delete"/>
-                                                <connections>
-                                                    <action selector="clickDeleteBtn:" destination="uQg-ex-x78" eventType="touchUpInside" id="0m0-Hq-Lwt"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aDl-jO-rD0">
@@ -1312,14 +1288,12 @@
                                         <constraints>
                                             <constraint firstItem="9wT-KE-UNt" firstAttribute="top" secondItem="NYw-mL-dFl" secondAttribute="top" id="3Ag-Rl-u4p"/>
                                             <constraint firstItem="9wT-KE-UNt" firstAttribute="leading" secondItem="NYw-mL-dFl" secondAttribute="leading" id="3ig-16-WFu"/>
-                                            <constraint firstItem="dgU-Oy-Gjq" firstAttribute="top" secondItem="NYw-mL-dFl" secondAttribute="top" constant="10" id="Dl6-H2-FWr"/>
                                             <constraint firstAttribute="trailing" secondItem="aDl-jO-rD0" secondAttribute="trailing" constant="10" id="X13-oW-1f4"/>
                                             <constraint firstAttribute="trailing" secondItem="9wT-KE-UNt" secondAttribute="trailing" id="YPI-Oh-snB"/>
                                             <constraint firstAttribute="bottom" secondItem="aDl-jO-rD0" secondAttribute="bottom" constant="10" id="a88-bs-dn2"/>
                                             <constraint firstAttribute="bottom" secondItem="9wT-KE-UNt" secondAttribute="bottom" id="d6v-5N-q8c"/>
                                             <constraint firstAttribute="width" constant="200" id="iMA-Mx-jRh"/>
                                             <constraint firstAttribute="height" constant="200" id="qem-tX-1LW"/>
-                                            <constraint firstAttribute="trailing" secondItem="dgU-Oy-Gjq" secondAttribute="trailing" constant="10" id="uHK-21-znt"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -1360,17 +1334,6 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5s8-Ha-NOz">
-                                                    <rect key="frame" x="150" y="10" width="40" height="40"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="FVR-H7-Nyy"/>
-                                                        <constraint firstAttribute="width" constant="40" id="p6g-FJ-Js8"/>
-                                                    </constraints>
-                                                    <state key="normal" backgroundImage="delete"/>
-                                                    <connections>
-                                                        <action selector="doDeleteAction:" destination="Eod-yw-lD7" eventType="touchUpInside" id="Q4i-jY-yLq"/>
-                                                    </connections>
-                                                </button>
                                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hll-1L-2KJ">
                                                     <rect key="frame" x="141" y="152" width="40" height="40"/>
                                                     <constraints>
@@ -1390,13 +1353,10 @@
                                             <constraint firstAttribute="trailing" secondItem="8Qk-1L-fKL" secondAttribute="trailing" id="aqd-6w-SbO"/>
                                             <constraint firstAttribute="trailing" secondItem="Hll-1L-2KJ" secondAttribute="trailing" constant="19" id="eXq-RE-mw1"/>
                                             <constraint firstAttribute="bottom" secondItem="6XR-ed-UGM" secondAttribute="bottom" constant="20" id="fDe-gS-ltz"/>
-                                            <constraint firstItem="5s8-Ha-NOz" firstAttribute="top" secondItem="Eod-yw-lD7" secondAttribute="top" constant="10" id="h8A-ea-o4x"/>
-                                            <constraint firstAttribute="trailing" secondItem="5s8-Ha-NOz" secondAttribute="trailing" constant="10" id="mYn-EQ-U2f"/>
                                             <constraint firstItem="8Qk-1L-fKL" firstAttribute="leading" secondItem="Eod-yw-lD7" secondAttribute="leading" id="nwC-JO-APr"/>
                                             <constraint firstAttribute="bottom" secondItem="Hll-1L-2KJ" secondAttribute="bottom" constant="10" id="tpG-XO-i4C"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="deleteBtn" destination="5s8-Ha-NOz" id="Zhz-3F-TFG"/>
                                             <outlet property="imgView" destination="8Qk-1L-fKL" id="k1m-GJ-RYi"/>
                                             <outlet property="powerBtn" destination="Hll-1L-2KJ" id="RWP-BD-viz"/>
                                             <outlet property="scenseName" destination="6XR-ed-UGM" id="4bC-5E-NFc"/>
@@ -1450,12 +1410,10 @@
                         <outlet property="addSceseBtn" destination="sTc-nu-9cp" id="kkY-9L-RDO"/>
                         <outlet property="collectionView" destination="qck-Xh-eYG" id="IfN-A9-DXb"/>
                         <outlet property="firstButton" destination="faQ-zk-VrB" id="q2o-s4-doF"/>
-                        <outlet property="firstDeleteBtn" destination="76z-kd-q6i" id="SzN-f4-e45"/>
                         <outlet property="firstPowerBtn" destination="7ng-zv-C2G" id="V9v-fr-Pg7"/>
                         <outlet property="firstView" destination="0gT-5P-4ZF" id="OIJ-0p-Bmz"/>
                         <outlet property="netBarBtn" destination="mCL-Ia-Vaf" id="lUi-ca-OaP"/>
                         <outlet property="secondButton" destination="9wT-KE-UNt" id="Ogj-2X-fyq"/>
-                        <outlet property="secondDeleteBtn" destination="dgU-Oy-Gjq" id="A2C-Px-8fq"/>
                         <outlet property="secondPowerBtn" destination="aDl-jO-rD0" id="zmn-ki-xt9"/>
                         <outlet property="secondView" destination="NYw-mL-dFl" id="ixJ-vP-Gyu"/>
                         <segue destination="6a7-1m-tB7" kind="show" identifier="sceneDetailSegue" id="PRs-sg-E1F"/>
@@ -2250,7 +2208,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fm6-kA-D9a">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fm6-kA-D9a">
                                 <rect key="frame" x="100" y="164" width="400" height="200"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="veB-gj-0ZR">
@@ -2452,7 +2410,7 @@
                                     <constraint firstAttribute="trailing" secondItem="iPN-RN-2GQ" secondAttribute="trailing" id="yG4-jE-PCx"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aXm-Qu-dt0">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aXm-Qu-dt0">
                                 <rect key="frame" x="100" y="364" width="400" height="30"/>
                                 <color key="backgroundColor" red="0.18264051610000001" green="0.62103239529999998" blue="0.3035301621" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -2574,7 +2532,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jMf-6l-yHK">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jMf-6l-yHK">
                                 <rect key="frame" x="100" y="120" width="400" height="220"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欢迎注册逸云系统" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z7G-kS-gVb">
@@ -2732,7 +2690,7 @@
                                     <constraint firstItem="hRF-3g-Hca" firstAttribute="leading" secondItem="jMf-6l-yHK" secondAttribute="leading" constant="5" id="zGi-kQ-21G"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQf-8J-1Ym">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQf-8J-1Ym">
                                 <rect key="frame" x="100" y="360" width="400" height="30"/>
                                 <color key="backgroundColor" red="0.18264051614458393" green="0.62103239528795817" blue="0.30353016214555956" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -5716,11 +5674,24 @@ layer.masksToBoundslayer.masksToBounds
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="场景" id="B3W-c2-Cel">
-                        <barButtonItem key="rightBarButtonItem" title="保存" id="d18-6E-MCK">
-                            <connections>
-                                <action selector="saveScene:" destination="6a7-1m-tB7" id="UoQ-1k-6dh"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="保存" id="d18-6E-MCK">
+                                <connections>
+                                    <action selector="saveScene:" destination="6a7-1m-tB7" id="UoQ-1k-6dh"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="删除" id="cOx-l9-9rp">
+                                <connections>
+                                    <action selector="deleteScene:" destination="6a7-1m-tB7" id="cTO-ft-HDY"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="media" id="Ntd-4X-k5x">
+                                <color key="tintColor" red="0.79703493700000005" green="0.36546725969999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <segue destination="ozV-GP-Vrh" kind="show" id="U1p-eR-Biy"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="addDeviceBtn" destination="2ix-hZ-Oqk" id="6YV-p9-gQ4"/>
@@ -5866,8 +5837,9 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PRs-sg-E1F"/>
         <segue reference="yTT-Nf-qWA"/>
+        <segue reference="PRs-sg-E1F"/>
+        <segue reference="5K5-wE-mZz"/>
         <segue reference="Dar-JF-33y"/>
         <segue reference="fXQ-oW-cHz"/>
     </inferredMetricsTieBreakers>

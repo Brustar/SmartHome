@@ -46,13 +46,13 @@
 @implementation MyEnergyViewController
 
 
-//-(NSArray *)devicesInfo{
-//    if(!_devicesInfo)
-//    {
-//        _devicesInfo = [DeviceManager getAllDevicesInfo];
-//    }
-//    return _devicesInfo;
-//}
+-(NSArray *)devicesInfo{
+    if(!_devicesInfo)
+    {
+        _devicesInfo = [DeviceManager getAllDevicesInfo];
+    }
+    return _devicesInfo;
+}
 
 -(NSMutableArray *)enegers
 {
@@ -106,7 +106,7 @@
     
     [self sendRequestToGetEenrgy];
     
-   // self.deviceType = [DeviceManager getAllDeviceSubTypes];
+    self.deviceType = [DeviceManager getAllDeviceSubTypes];
     
     self.selectedDeviceTableView.hidden = YES;
     
@@ -191,15 +191,15 @@
         if(!cell)
         {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-//            if(indexPath.section == 0)
-//            {
-//                NSArray *arrry = @[@"全部设备"];
-//                [self setButtnonInCell:cell andSubDevie:arrry];
-//            }else{
-//                NSString *typeName = self.deviceType[indexPath.section -1];
-//                NSArray *deviceNames = [DeviceManager getAllDeviceNameBysubType:typeName];
-//                [self setButtnonInCell:cell andSubDevie:deviceNames];
-//            }
+            if(indexPath.section == 0)
+            {
+                NSArray *arrry = @[@"全部设备"];
+                [self setButtnonInCell:cell andSubDevie:arrry];
+            }else{
+                NSString *typeName = self.deviceType[indexPath.section -1];
+                NSArray *deviceNames = [DeviceManager getAllDeviceNameBysubType:typeName];
+                [self setButtnonInCell:cell andSubDevie:deviceNames];
+            }
             
         
         }
@@ -210,6 +210,47 @@
 
  
 }
+-(void)setButtnonInCell:(UITableViewCell *)cell andSubDevie:(NSArray *)devices;
+{
+    CGFloat viewW = CellItemViewWidth;
+    CGFloat viewH = CellItemViewHeight;
+    CGFloat startX = 10;
+    CGFloat marginX = (cell.frame.size.width - CellItemCol * viewW - 2 * startX)/(CellItemCol-1);
+    CGFloat marginY = 10;
+    int count = (int)devices.count;
+    for(int i = 0; i < count; i++)
+    {
+        int row = i / CellItemCol;
+        int loc = i % CellItemCol;
+        
+        CGFloat orignX = startX +(marginX + viewW) * loc;
+        CGFloat orignY = marginY +(marginY + viewH) * row;
+        
+        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(orignX, orignY, viewW, viewH)];
+        view.userInteractionEnabled = YES;
+        //view.backgroundColor = [UIColor redColor];
+        [cell.contentView addSubview:view];
+        
+        //创建View的子视图
+        UIImageView *img = [[UIImageView alloc]initWithFrame:CGRectMake(0,10, 30, 30)];
+        img.image = [UIImage imageNamed:@"placeholder"];
+        [img setContentMode:UIViewContentModeScaleAspectFit];
+        [view addSubview:img];
+        
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        
+        btn.frame = CGRectMake(30, 10, 80, 30);
+        [btn setTitle:devices[i] forState:UIControlStateNormal];
+        NSInteger eId = [DeviceManager deviceIDByDeviceName:devices[i]];
+        btn.tag = eId;
+        [btn addTarget:self action:@selector(goToEngerOfDevice:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [view addSubview:btn];
+    }
+    
+}
+
 
 -(void)goToEngerOfDevice:(UIButton *)btn
 {
@@ -225,40 +266,40 @@
 }
 
 
-//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if(tableView == self.selectedDeviceTableView)
-//    {
-//        //NSArray *b = A[indexPath.section];
-//        //return [self tableViewCellHeight:b.count]
-//        if(indexPath.section == 0)
-//        {
-//            return 44;
-//        }
-//        NSString *typeName = self.deviceType[indexPath.section];
-//        NSArray *deviceNames = [DeviceManager getAllDeviceNameBysubType:typeName];
-//        return [self tableViewCellHeight:deviceNames.count];
-//    }
-//    return 44;
-//    
-//}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(tableView == self.selectedDeviceTableView)
+    {
+        //NSArray *b = A[indexPath.section];
+        //return [self tableViewCellHeight:b.count]
+        if(indexPath.section == 0)
+        {
+            return 44;
+        }
+        NSString *typeName = self.deviceType[indexPath.section];
+        NSArray *deviceNames = [DeviceManager getAllDeviceNameBysubType:typeName];
+        return [self tableViewCellHeight:deviceNames.count];
+    }
+    return 44;
+    
+}
 
-//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-//{
-//    if(tableView == self.selectedDeviceTableView)
-//    {
-//        if(section == 0)
-//        {
-//            return nil;
-//        }else {
-//            return self.deviceType[section];
-//
-//        }
-//        
-//    }
-//    
-//    return nil;
-//}
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if(tableView == self.selectedDeviceTableView)
+    {
+        if(section == 0)
+        {
+            return nil;
+        }else {
+            return self.deviceType[section];
+
+        }
+        
+    }
+    
+    return nil;
+}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -276,61 +317,61 @@
     return UITableViewCellEditingStyleDelete;
 }
 
-//- (IBAction)clickEditBtn:(id)sender {
-//    // 允许多个编辑
-//    self.tableView.allowsMultipleSelectionDuringEditing = YES;
-//    // 允许编辑
-//    self.tableView.editing = YES;
-//    
-//    self.footView.hidden = NO;
-//    self.isEditing = YES;
-//    [self.tableView reloadData];
-//}
-//
-//- (IBAction)clickCancleBtn:(id)sender {
-//    // 允许多个编辑
-//    self.tableView.allowsMultipleSelectionDuringEditing = NO;
-//    // 允许编辑
-//    self.tableView.editing = NO;
-//    //  self.tableView.tableFooterView = nil;
-//    self.footView.hidden = YES;
-//    self.isEditing = NO;
-//    [self.tableView reloadData];
-//
-//}
-//
-//- (IBAction)clickSureBtn:(id)sender {
-//    //放置要删除的对象
-//    NSMutableArray *deleteArray = [NSMutableArray array];
-//    NSMutableArray *deletedTime = [NSMutableArray array];
-//    // 要删除的row
-//    NSArray *selectedArray = [self.tableView indexPathsForSelectedRows];
-//    
-//    for (NSIndexPath *indexPath in selectedArray) {
-//        //[deleteArray addObject:self.Mydefaults[indexPath.row]];
-//        [deleteArray addObject:self.energys[indexPath.row]];
-//        [deletedTime addObject:self.times[indexPath.row]];
-//    }
-//    // 先删除数据源
-//    [self.energys removeObjectsInArray:deleteArray];
-//    [self.times removeObjectsInArray:deletedTime];
-//    
-//    [self clickCancleBtn:nil];
-//
-//}
+- (IBAction)clickEditBtn:(id)sender {
+    // 允许多个编辑
+    self.tableView.allowsMultipleSelectionDuringEditing = YES;
+    // 允许编辑
+    self.tableView.editing = YES;
+    
+    self.footView.hidden = NO;
+    self.isEditing = YES;
+    [self.tableView reloadData];
+}
 
-//- (IBAction)selectedDevice:(id)sender {
-//    self.selectedDeviceTableView.hidden = !self.selectedDeviceTableView.hidden;
-//}
-//
-//-(void)removeAllSubViewFromMyEnergyViewController
-//{
-//    [self.engerOfDeviceVC.view removeFromSuperview];
-//}
-//
-//- (void)didReceiveMemoryWarning {
-//    [super didReceiveMemoryWarning];
-//   
-//}
+- (IBAction)clickCancleBtn:(id)sender {
+    // 允许多个编辑
+    self.tableView.allowsMultipleSelectionDuringEditing = NO;
+    // 允许编辑
+    self.tableView.editing = NO;
+    //  self.tableView.tableFooterView = nil;
+    self.footView.hidden = YES;
+    self.isEditing = NO;
+    [self.tableView reloadData];
+
+}
+
+- (IBAction)clickSureBtn:(id)sender {
+    //放置要删除的对象
+    NSMutableArray *deleteArray = [NSMutableArray array];
+    NSMutableArray *deletedTime = [NSMutableArray array];
+    // 要删除的row
+    NSArray *selectedArray = [self.tableView indexPathsForSelectedRows];
+    
+    for (NSIndexPath *indexPath in selectedArray) {
+        //[deleteArray addObject:self.Mydefaults[indexPath.row]];
+        [deleteArray addObject:self.energys[indexPath.row]];
+        [deletedTime addObject:self.times[indexPath.row]];
+    }
+    // 先删除数据源
+    [self.energys removeObjectsInArray:deleteArray];
+    [self.times removeObjectsInArray:deletedTime];
+    
+    [self clickCancleBtn:nil];
+
+}
+
+- (IBAction)selectedDevice:(id)sender {
+    self.selectedDeviceTableView.hidden = !self.selectedDeviceTableView.hidden;
+}
+
+-(void)removeAllSubViewFromMyEnergyViewController
+{
+    [self.engerOfDeviceVC.view removeFromSuperview];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+   
+}
 
 @end
