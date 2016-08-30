@@ -412,6 +412,44 @@
     return sceneid;
 }
 
++(bool) getReadOnly:(int)sceneid
+{
+    NSString *sql=[NSString stringWithFormat:@"select readonly from Scenes where id=%d" ,sceneid];
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    bool readonly=false;
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    if([db open])
+    {
+        FMResultSet *resultSet = [db executeQuery:sql];
+        
+        if([resultSet next])
+        {
+            readonly = [resultSet boolForColumn:@"readonly"];
+        }
+    }
+    [db close];
+    return readonly;
+}
+
++(NSString *) getSnumber:(int)sceneid
+{
+    NSString *sql=[NSString stringWithFormat:@"select snumber from Scenes where id=%d" ,sceneid];
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    NSString *snumber=nil;
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    if([db open])
+    {
+        FMResultSet *resultSet = [db executeQuery:sql];
+        
+        if([resultSet next])
+        {
+            snumber = [resultSet stringForColumn:@"readonly"];
+        }
+    }
+    [db close];
+    return snumber;
+}
+
 +(int) getRoomID:(int)sceneID
 {
     NSString *sql=[NSString stringWithFormat:@"select rId from Scenes where ID=%d" ,sceneID];

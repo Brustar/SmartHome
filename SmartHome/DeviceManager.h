@@ -61,4 +61,8 @@
 +(int) getSceneID:(NSString *)name;
 +(int) getRoomID:(int)sceneID;
 +(NSString *)getSceneName:(int)sceneID;
+
++(bool) getReadOnly:(int)sceneid;
++(NSString *) getSnumber:(int)sceneid;
+
 @end
