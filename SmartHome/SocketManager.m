@@ -104,13 +104,13 @@
         NSData *ip=[data subdataWithRange:NSMakeRange(4, 4)];
         NSData *port=[data subdataWithRange:NSMakeRange(8, 2)];
         
-        info.masterID=(long)[PackManager NSDataToUInt:masterID];
+        info.masterID=(long)[PackManager dataToUInt16:masterID];
         info.masterIP=[PackManager NSDataToIP:ip];
-        info.masterPort=(int)[PackManager NSDataToUInt:port];
+        info.masterPort=(int)[PackManager dataToUInt16:port];
         info.connectState=atHome;
         
-        [IOManager writeUserdefault:[NSNumber numberWithLong:[PackManager NSDataToUInt:masterID]] forKey:@"masterID"];
-        [self initTcp:[PackManager NSDataToIP:ip] port:(int)[PackManager NSDataToUInt:port] delegate:nil];
+        [IOManager writeUserdefault:[NSNumber numberWithLong:[PackManager dataToUInt16:masterID]] forKey:@"masterID"];
+        [self initTcp:[PackManager NSDataToIP:ip] port:(int)[PackManager dataToUInt16:port] delegate:nil];
         
         [self.socket writeData:[[DeviceInfo defaultManager] author] withTimeout:-1 tag:0];
         [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:0];
@@ -126,10 +126,10 @@
         NSData *port=[data subdataWithRange:NSMakeRange(8, 2)];
         
         [IOManager writeUserdefault:[PackManager NSDataToIP:ip] forKey:@"subIP"];
-        [IOManager writeUserdefault:[NSNumber numberWithLong:[PackManager NSDataToUInt:port]] forKey:@"subPort"];
-        [self initTcp:[PackManager NSDataToIP:ip] port:(int)[PackManager NSDataToUInt:port] delegate:nil];
+        [IOManager writeUserdefault:[NSNumber numberWithLong:[PackManager dataToUInt16:port]] forKey:@"subPort"];
+        [self initTcp:[PackManager NSDataToIP:ip] port:(int)[PackManager dataToUInt16:port] delegate:nil];
         DeviceInfo *device=[DeviceInfo defaultManager];
-        device.masterPort=(int)[PackManager NSDataToUInt:port];
+        device.masterPort=(int)[PackManager dataToUInt16:port];
         device.masterIP = [PackManager NSDataToIP:ip];
         
         [self.socket writeData:[[DeviceInfo defaultManager] author] withTimeout:-1 tag:0];

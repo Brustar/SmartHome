@@ -157,12 +157,15 @@
     NSLog(@"NOTE: device type: %@", deviceString);
 }
 
--(NSData *)startScenenAtMaster:(long)sceneid
+-(NSData *)startScenenAtMaster:(int)sceneid
 {
+    NSString *snumber=[DeviceManager getSnumber:sceneid];
+    uint16_t sid=[PackManager NSDataToUint16:snumber];
+    
     uint8_t cmd=0x89;
     Proto proto=createProto();
     proto.cmd=cmd;
-    proto.deviceID=CFSwapInt16BigToHost(sceneid);
+    proto.deviceID=CFSwapInt16BigToHost(sid);
     proto.deviceType=cmd;
     proto.action.state=0x00;
     proto.action.RValue=0x00;

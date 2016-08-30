@@ -53,9 +53,9 @@ Proto createProto()
     NSData *sum = [data subdataWithRange:NSMakeRange([data length]-2, 1)];
     long ret=0x00;
     for (int i=1; i<[data length]-2; i++) {
-        ret = ret ^ [self NSDataToUInt:[data subdataWithRange:NSMakeRange(i, 1)]];
+        ret = ret ^ [self dataToUInt16:[data subdataWithRange:NSMakeRange(i, 1)]];
     }
-    return [self NSDataToUInt:sum]==ret;
+    return [self dataToUInt16:sum]==ret;
 }
 
 + (BOOL) checkProtocol:(NSData *)data cmd:(long)value
@@ -63,10 +63,10 @@ Proto createProto()
     NSData *head = [data subdataWithRange:NSMakeRange(0, 1)];
     NSData *cmd = [data subdataWithRange:NSMakeRange(1, 1)];
     NSData *tail = [data subdataWithRange:NSMakeRange([data length]-1, 1)];
-    return [self NSDataToUInt:head]==0xEC && [self NSDataToUInt:cmd]==value && [self NSDataToUInt:tail]==0xEA;
+    return [self dataToUInt16:head]==0xEC && [self dataToUInt16:cmd]==value && [self dataToUInt16:tail]==0xEA;
 }
 
-+ (long) NSDataToUInt:(NSData *)data
++ (uint16_t) dataToUInt16:(NSData *)data
 {
     NSString *result = [NSString stringWithFormat:@"0x%@",[[data description] substringWithRange:NSMakeRange(1, [[data description] length]-2)]];
     unsigned long ret = strtoul([result UTF8String],0,16);
@@ -80,7 +80,7 @@ Proto createProto()
     NSData *ip3=[ip subdataWithRange:NSMakeRange(2, 1)];
     NSData *ip4=[ip subdataWithRange:NSMakeRange(3, 1)];
     
-    return [NSString stringWithFormat:@"%ld.%ld.%ld.%ld",[self NSDataToUInt:ip1],[self NSDataToUInt:ip2],[self NSDataToUInt:ip3],[self NSDataToUInt:ip4]];
+    return [NSString stringWithFormat:@"%hu.%hu.%hu.%hu",[self dataToUInt16:ip1],[self dataToUInt16:ip2],[self dataToUInt16:ip3],[self dataToUInt16:ip4]];
 }
 
 + (NSData*)dataFormHexString:(NSString*)hexString
@@ -126,7 +126,7 @@ Proto createProto()
             stringByReplacingOccurrencesOfString: @" " withString: @""];
 }
 
-+(uint8_t)dataToUint:(NSData *)data
++(uint8_t)dataToUint8:(NSData *)data
 {
     Byte* bytes = (Byte*)([data bytes]);
     

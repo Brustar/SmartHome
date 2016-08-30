@@ -58,16 +58,23 @@ Proto protocolFromData(NSData *data);
 Proto createProto();
 
 + (NSData *) fireflyProtocol:(NSString *)cmd;
-+ (long) NSDataToUInt:(NSData *)data;
+
 + (NSString *) NSDataToIP:(NSData *)ip;
 + (BOOL) checkSum:(NSData *)data;
 + (BOOL) checkProtocol:(NSData *)data cmd:(long)value;
 
+//字符串转NSData
 + (NSData*)dataFormHexString:(NSString*)hexString;
+//NSData转字符串
 + (NSString *)hexStringFromData:(NSData*)data;
 
-+(uint8_t)dataToUint:(NSData *)data;
+//NSData转uint8_t
++(uint8_t)dataToUint8:(NSData *)data;
+//NSData转uint16_t
++ (uint16_t) dataToUInt16:(NSData *)data;
+//字符串转uint8_t
 + (uint8_t) NSDataToUint8:(NSString *)string;
+//字符串转uint16_t
 + (uint16_t) NSDataToUint16:(NSString *)string;
 
 @end
