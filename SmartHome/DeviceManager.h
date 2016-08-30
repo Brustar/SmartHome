@@ -52,6 +52,7 @@
 +(NSArray *)getAllDeviceSubTypes;
 +(NSArray *)getAllDeviceNameBysubType:(NSString *)subTypeName;
 
++(NSString *)getUrlByDeviceId:(int)eId;
 
 +(NSString *)getEType:(NSInteger)eID;
 +(NSString *)getENumber:(NSInteger)eID;

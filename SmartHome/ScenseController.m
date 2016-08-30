@@ -276,25 +276,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
--(void)delteSceneAction:(ScenseCell *)sceneCell
-{
-    NSIndexPath *indexPath = [self.collectionView indexPathForCell:sceneCell];
-    int row = (int)indexPath.row;
-    Scene *scene = self.collectionScenes[row];
-    [[SceneManager defaultManager] delScenen:scene];
-    
-    //同步云端
-    
-    NSString *url = [NSString stringWithFormat:@"%@SceneDelete.aspx",[IOManager httpAddr]];
-    NSDictionary *dict = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"SID":[NSNumber numberWithInt:scene.sceneID]};
-    HttpManager *http=[HttpManager defaultManager];
-    http.delegate=self;
-    http.tag = 2;
-    [http sendPost:url param:dict];
-    
-   
 
-}
 
 - (IBAction)clickSceneBtn:(UIButton *)sender {
    

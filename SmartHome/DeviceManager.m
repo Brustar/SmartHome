@@ -54,6 +54,24 @@
     return eName;
 }
 
++(NSString *)getUrlByDeviceId:(int)eId
+{
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    NSString *url;
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT url FROM Devices where ID = %d and hTypeId = 45",eId];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+            url = [resultSet stringForColumn:@"url"];
+        }
+    }
+    return url;
+
+}
+
 +(NSInteger)deviceIDByDeviceName:(NSString *)deviceName
 {
     NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
