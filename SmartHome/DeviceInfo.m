@@ -157,6 +157,20 @@
     NSLog(@"NOTE: device type: %@", deviceString);
 }
 
+-(NSData *)startScenenAtMaster:(int)sceneid
+{
+    uint8_t cmd=0x89;
+    Proto proto=createProto();
+    proto.cmd=cmd;
+    proto.deviceID=sceneid;
+    proto.deviceType=cmd;
+    proto.action.state=0x00;
+    proto.action.RValue=0x00;
+    proto.action.G=0x00;
+    proto.action.B=0x00;
+    return dataFromProtocol(proto);
+}
+
 -(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID
 {
     Proto proto=createProto();

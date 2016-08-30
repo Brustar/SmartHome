@@ -280,6 +280,13 @@
 {
     NSData *data=nil;
     SocketManager *sock=[SocketManager defaultManager];
+    //面板场景
+    if ([DeviceManager getReadOnly:sceneid]) {
+        
+        data = [[DeviceInfo defaultManager] startScenenAtMaster:sceneid];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+        return;
+    }
     
     Scene *scene=[self readSceneByID:sceneid];
     for (id device in scene.devices) {
