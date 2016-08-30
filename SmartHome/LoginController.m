@@ -128,6 +128,7 @@
         self.vEquipmentsLast = [responseObject[@"vEquipment"] intValue];
         self.vRoomLast = [responseObject[@"vRoom"] intValue];
         self.vSceneLast = [responseObject[@"vScene"] intValue];
+        //self.vSceneLast = 5;
         self.vTVChannelLast = [responseObject[@"vTVChannel"] intValue];
         self.vFMChannellLast = [responseObject[@"vFMChannel"] intValue];
         self.vClientlLast = [responseObject[@"vClient"] intValue];
@@ -143,7 +144,7 @@
     
     switch (tag) {
         case 4:
-            if(self.vEquipmentsLast > vEquipment)
+            if(self.vEquipmentsLast < vEquipment)
             {
                 // 更新设备
                 [IOManager writeUserdefault:[NSNumber numberWithInt:self.vEquipmentsLast] forKey:@"vEquipment"];
@@ -151,26 +152,26 @@
                 return;
             }
         case 5:
-            if(self.vRoomLast > vRoom)
+            if(self.vRoomLast < vRoom)
             {
                 //更新房间
                 [self updateRoomInfo];
                 return;
             }
         case 6:
-            if(self.vSceneLast > vScene)
+            if(self.vSceneLast < vScene)
             {
                 //更新场景
                 [self updateSceneInfo];
                 return;
             }
         case 7:
-            if(self.vTVChannelLast > vTVChannel){
+            if(self.vTVChannelLast < vTVChannel){
                 [self updateTVChannelsInfo];
                 return;
             }
         case 8:
-            if(self.vFMChannellLast > vFMChannel){
+            if(self.vFMChannellLast < vFMChannel){
                 [self updateFMChannelsInfo];
                 return;
             }
@@ -323,7 +324,14 @@
                     
                 }
                 NSString *str = [strEid copy];
-                NSString *strEids = [str substringToIndex:[str length] - 1];
+                NSString *strEids;
+                if(str.length != 0)
+                {
+                   strEids = [str substringToIndex:[str length] - 1];
+                   
+                }else{
+                   strEids = @"";
+                }
                 NSString *sql = [NSString stringWithFormat:@"insert into Scenes values('%@','%@','%@','%@',%@,'%@','%@','%@','%@',%ld,%ld,%d)",sId,sName,rName,urlImg,NULL,strEids,startTime,astronomicalTime,weakValue,weekRepeat,rId,sType];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
@@ -333,6 +341,7 @@
                     NSLog(@"insert 失败");
                 }
 
+                
             }
 
         }
