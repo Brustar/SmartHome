@@ -98,9 +98,9 @@
 
     
     NSDictionary *dict = @{@"Account":self.user.text,@"Type":[NSNumber numberWithInteger:self.userType],@"Password":[self.pwd.text md5]};
-    //[IOManager writeUserdefault:self.user.text forKey:@"Account"];
+    [IOManager writeUserdefault:self.user.text forKey:@"Account"];
     [IOManager writeUserdefault:[NSNumber numberWithInteger:self.userType] forKey:@"Type"];
-    //[IOManager writeUserdefault:self.pwd.text forKey:@"Password"];
+    [IOManager writeUserdefault:self.pwd.text forKey:@"Password"];
     HttpManager *http=[HttpManager defaultManager];
     http.delegate=self;
     http.tag = 1;
@@ -144,7 +144,7 @@
     
     switch (tag) {
         case 4:
-            if(self.vEquipmentsLast < vEquipment)
+            if(self.vEquipmentsLast > vEquipment)
             {
                 // 更新设备
                 [IOManager writeUserdefault:[NSNumber numberWithInt:self.vEquipmentsLast] forKey:@"vEquipment"];
@@ -152,26 +152,26 @@
                 return;
             }
         case 5:
-            if(self.vRoomLast < vRoom)
+            if(self.vRoomLast > vRoom)
             {
                 //更新房间
                 [self updateRoomInfo];
                 return;
             }
         case 6:
-            if(self.vSceneLast < vScene)
+            if(self.vSceneLast > vScene)
             {
                 //更新场景
                 [self updateSceneInfo];
                 return;
             }
         case 7:
-            if(self.vTVChannelLast < vTVChannel){
+            if(self.vTVChannelLast > vTVChannel){
                 [self updateTVChannelsInfo];
                 return;
             }
         case 8:
-            if(self.vFMChannellLast < vFMChannel){
+            if(self.vFMChannellLast > vFMChannel){
                 [self updateFMChannelsInfo];
                 return;
             }
@@ -230,7 +230,7 @@
             }
             for(NSDictionary *equip in equipmentList)
             {
-                NSString *sql = [NSString stringWithFormat:@"insert into Devices values(%d,'%@',%@,%@,%@,%@,%@,%@,%@,'%@',%@,%@,%@,%@,%ld,'%@','%@',%@,'%@','%@','%04lx')",[equip[@"eId"] intValue],equip[@"eName"],NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,rId,equip[@"eNumber"],equip[@"hTypeId"],equip[@"subTypeId"],equip[@"typeName"],equip[@"subTypeName"],[[DeviceInfo defaultManager] masterID]];
+                NSString *sql = [NSString stringWithFormat:@"insert into Devices values(%d,'%@',%@,%@,%@,%@,%@,%@,%@,'%@',%@,%@,%@,%@,%ld,'%@','%@',%@,'%@','%@','%04lx','%@')",[equip[@"eId"] intValue],equip[@"eName"],NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,rId,equip[@"eNumber"],equip[@"hTypeId"],equip[@"subTypeId"],equip[@"typeName"],equip[@"subTypeName"],[[DeviceInfo defaultManager] masterID],equip[@"url"]];
                 
                 BOOL result = [db executeUpdate:sql];
                 if(result)

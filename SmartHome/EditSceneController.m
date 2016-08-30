@@ -383,26 +383,40 @@
              [SceneManager deleteScene:self.sceneID];
 
          }
+        [self.navigationController popViewControllerAnimated:YES];
     }
     
     
 }
 - (IBAction)clickStopBtn:(id)sender {
     [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
+
 }
 
 - (IBAction)deleteScene:(UIBarButtonItem *)sender {
-    Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
-    [[SceneManager defaultManager] delScenen:scene];
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"确定删除吗" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *sureAction =  [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
+        [[SceneManager defaultManager] delScenen:scene];
+        
+        NSString *url = [NSString stringWithFormat:@"%@SceneDelete.aspx",[IOManager httpAddr]];
+        NSDictionary *dict = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"SID":[NSNumber numberWithInt:scene.sceneID]};
+        HttpManager *http=[HttpManager defaultManager];
+        http.delegate=self;
+        http.tag = 2;
+        [http sendPost:url param:dict];
+
+    }];
+    [alertVC addAction:sureAction];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [alertVC dismissViewControllerAnimated:YES completion:nil];
+    }];
+    [alertVC addAction:cancelAction];
+    [self presentViewController:alertVC animated:YES completion:nil];
     
-    NSString *url = [NSString stringWithFormat:@"%@SceneDelete.aspx",[IOManager httpAddr]];
-    NSDictionary *dict = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"SID":[NSNumber numberWithInt:scene.sceneID]};
-    HttpManager *http=[HttpManager defaultManager];
-    http.delegate=self;
-    http.tag = 2;
-    [http sendPost:url param:dict];
-}
+   }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

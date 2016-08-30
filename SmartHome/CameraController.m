@@ -7,7 +7,7 @@
 //
 
 #import "CameraController.h"
-
+#import "DeviceManager.h"
 #define LERP(A,B,C) ((A)*(1.0-C)+(B)*C)
 
 @interface CameraController ()
@@ -19,8 +19,11 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"摄像头"];
     
-        _video = [[RTSPPlayer alloc] initWithVideo:@"rtsp://admin:66396639@192.168.199.248" usesTcp:NO];
+    NSString *url = [DeviceManager getUrlByDeviceId:[self.deviceid intValue]];
+    
+        _video = [[RTSPPlayer alloc] initWithVideo:url usesTcp:NO];
         _video.outputWidth = 426;
         _video.outputHeight = 320;
     

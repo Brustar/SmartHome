@@ -125,7 +125,7 @@
         segue = @"DVD";
     }else if([typeName isEqualToString:@"FM"]){
         segue = @"FM";
-    }else if([typeName isEqualToString:@"监控"]){
+    }else if([typeName isEqualToString:@"摄像头"]){
         segue = @"Camera";
     }else if([typeName isEqualToString:@"智能插座"]) {
         segue = @"pluginSegue";
