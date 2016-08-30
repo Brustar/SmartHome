@@ -364,8 +364,8 @@
     [[SceneManager defaultManager] addScenen:scene withName:self.storeNewSceneName.text withPic:imgStr];
     
     self.storeNewScene.hidden = YES;
-    
     [self.view bringSubviewToFront:self.currentViewController.view];}
+       
 -(NSString *)UIimageToStr:(UIImage *)img
 {
     NSData *data = UIImageJPEGRepresentation(img,1.0f);
@@ -373,22 +373,35 @@
     return str;
 }
 
--(void)httpHandler:(id) responseObject
+-(void)httpHandler:(id) responseObject tag:(int)tag
 {
-    
-    if(responseObject[@"Result"] == 0)
+    if((tag = 2))
     {
-        self.storeNewScene.hidden = YES;
-        [MBProgressHUD showSuccess:@"创建场景成功"];
-        
-        
+         if([responseObject[@"Result"] intValue] == 0)
+         {
+             [MBProgressHUD showSuccess:@"场景删除成功"];
+             [SceneManager deleteScene:self.sceneID];
+
+         }
     }
-    [MBProgressHUD showError:responseObject[@"Msg"]];
     
     
 }
 - (IBAction)clickStopBtn:(id)sender {
     [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)deleteScene:(UIBarButtonItem *)sender {
+    Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
+    [[SceneManager defaultManager] delScenen:scene];
+    
+    NSString *url = [NSString stringWithFormat:@"%@SceneDelete.aspx",[IOManager httpAddr]];
+    NSDictionary *dict = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"SID":[NSNumber numberWithInt:scene.sceneID]};
+    HttpManager *http=[HttpManager defaultManager];
+    http.delegate=self;
+    http.tag = 2;
+    [http sendPost:url param:dict];
 }
 
 - (void)didReceiveMemoryWarning {

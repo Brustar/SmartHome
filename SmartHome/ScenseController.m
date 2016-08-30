@@ -30,9 +30,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *firstButton;
 @property (weak, nonatomic) IBOutlet UIButton *secondButton;
 
-@property(nonatomic,strong)UILongPressGestureRecognizer *lpgr;
-@property (weak, nonatomic) IBOutlet UIButton *firstDeleteBtn;
-@property (weak, nonatomic) IBOutlet UIButton *secondDeleteBtn;
+
+
 @property (weak, nonatomic) IBOutlet UIButton *firstPowerBtn;
 @property (weak, nonatomic) IBOutlet UIButton *secondPowerBtn;
 
@@ -55,10 +54,7 @@
    
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    self.lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
-    self.lpgr.minimumPressDuration = 1.0; //seconds	设置响应时间
-    self.lpgr.delegate = self;
-    [self addGestureRecognizer:self.lpgr];
+   
     
     //开启网络状况的监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityUpdate:) name: kReachabilityChangedNotification object: nil];
@@ -69,33 +65,6 @@
     [self reachNotification];
 }
 
--(void)addGestureRecognizer:(UILongPressGestureRecognizer *)lpgr
-{
-    UILongPressGestureRecognizer *secondLong = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
-    secondLong.minimumPressDuration = 1;
-    secondLong.delegate = self;
-    
-    
-    [self.firstButton addGestureRecognizer:lpgr];
-    
-    [self.secondButton addGestureRecognizer:secondLong];
-
-}
--(void)handleLongPressGesture:(UILongPressGestureRecognizer *)lgrs
-{
-    if (self.lpgr == lgrs)
-    {
-        if(self.firstView.hidden == NO)
-        {
-            self.firstDeleteBtn.hidden = NO;
-        }
-    } else {
-        if(self.secondView.hidden == NO)
-        {
-            self.secondDeleteBtn.hidden = NO;
-        }
-    }
-}
 
 -(void)setUpSceneButton
 {
@@ -108,11 +77,10 @@
     {
         self.secondView.hidden = YES;
         self.firstView.hidden = NO;
-        self.firstDeleteBtn.hidden = YES;
         Scene *scene = self.scenes[0];
         self.firstButton.tag = scene.sceneID;
         self.firstPowerBtn.tag = scene.sceneID;
-        self.firstDeleteBtn.tag = scene.sceneID;
+    
         [self.firstButton setTitle:scene.sceneName forState:UIControlStateNormal];
         UIImage *image = [self getImgByUrl:scene.picName];
         [self.firstButton setBackgroundImage:image forState:UIControlStateNormal];
@@ -121,8 +89,7 @@
         Scene *scene = self.scenes[0];
         self.firstButton.tag = scene.sceneID;
         self.firstPowerBtn.tag = scene.sceneID;
-        self.firstDeleteBtn.tag = scene.sceneID;
-        [self.firstButton setTitle:scene.sceneName forState:UIControlStateNormal];
+                [self.firstButton setTitle:scene.sceneName forState:UIControlStateNormal];
         UIImage *image = [self getImgByUrl:scene.picName];
         [self.firstButton setBackgroundImage:image forState:UIControlStateNormal];
         Scene *scondScene = self.scenes[1];
@@ -131,11 +98,11 @@
         [self.secondButton setBackgroundImage:image forState:UIControlStateNormal];
         self.secondButton.tag = scondScene.sceneID;
         self.secondPowerBtn.tag = scondScene.sceneID;
-        self.secondDeleteBtn.tag = scondScene.sceneID;
+       
         self.firstView.hidden = NO;
-        self.firstDeleteBtn.hidden = YES;
+       
         self.secondView.hidden = NO;
-        self.secondDeleteBtn.hidden = YES;
+        
     }
 }
 
@@ -257,21 +224,19 @@
 {
     ScenseCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"scenseCell" forIndexPath:indexPath];
     [cell.powerBtn addTarget:self action:@selector(startSceneAction:) forControlEvents:UIControlEventTouchUpInside];
-    cell.delegate = self;
+    
     Scene *scene = self.collectionScenes[indexPath.row];
     cell.scenseName.text = scene.sceneName;
     cell.backgroundColor = [UIColor colorWithPatternImage:[self getImgByUrl:scene.picName]];
     cell.powerBtn.tag = scene.sceneID;
-    [cell useLongPressGestureRecognizer];
-
+   
    
     return cell;
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 
 {
-    ScenseCell *cell = (ScenseCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
-    cell.deleteBtn.hidden = YES;
+    
     Scene *scene = self.collectionScenes[indexPath.row];
     self.selectedSID = scene.sceneID;
 
@@ -296,8 +261,7 @@
     }
 }
 
-- (IBAction)storeScense:(id)sender {
-}
+
 
 
 - (IBAction)addScence:(id)sender {
@@ -328,61 +292,16 @@
     http.tag = 2;
     [http sendPost:url param:dict];
     
-    self.scenes = [SceneManager getAllSceneWithRoomID:self.roomID];
-    [self.collectionView reloadData];
+   
 
 }
 
 - (IBAction)clickSceneBtn:(UIButton *)sender {
    
     
-    self.firstDeleteBtn.hidden = YES;
-    self.secondDeleteBtn.hidden = YES;
     self.selectedSID =(int)sender.tag;
-    //self.selectedDID = scene.eID;
     [[SceneManager defaultManager] startScene:self.selectedSID];
     [self performSegueWithIdentifier:@"sceneDetailSegue" sender:self];
-}
-
-- (IBAction)clickDeleteBtn:(UIButton *)sender {
-   
-    for(Scene *scene in self.scenes)
-    {
-        if(scene.sceneID == (int)sender.tag)
-        {
-            [[SceneManager defaultManager] delScenen:scene];
-            //同步云端
-            
-            NSString *url = [NSString stringWithFormat:@"%@SceneDelete.aspx",[IOManager httpAddr]];
-            NSDictionary *dict = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"SID":[NSNumber numberWithInt:scene.sceneID]};
-            HttpManager *http=[HttpManager defaultManager];
-            http.delegate=self;
-            http.tag = 2;
-            [http sendPost:url param:dict];
-
-            self.scenes = [SceneManager getAllSceneWithRoomID:self.roomID];
-            [self setUpSceneButton];
-            [self judgeScensCount:self.scenes];
-        }
-           
-    }
-    
-}
--(void) httpHandler:(id) responseObject tag:(int)tag
-{
-    if(tag == 2)
-    {
-        if([responseObject[@"Result"] intValue] == 0)
-            {
-                [MBProgressHUD showSuccess:@"场景删除成功"];
-                self.scenes = [SceneManager getAllSceneWithRoomID:self.roomID];
-                [self setUpSceneButton];
-                [self judgeScensCount:self.scenes];
-            }else{
-                    [MBProgressHUD showError: responseObject[@"Msg"]];
-                }
-            }
-
 }
 
 - (IBAction)clickSartSceneBtn:(UIButton *)sender {

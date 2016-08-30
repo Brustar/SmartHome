@@ -229,20 +229,7 @@
     NSString *str = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     return str;
 }
-//-(void)httpHandler:(id) responseObject
-//{
-//   
-//    if(responseObject[@"Result"] == 0)
-//    {
-//        self.saveSceneView.hidden = YES;
-//        [MBProgressHUD showSuccess:@"创建场景成功"];
-//       
-//        
-//    }
-//        [MBProgressHUD showError:responseObject[@"Msg"]];
-//    
-//    
-//}
+
 
 
 @end

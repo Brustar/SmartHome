@@ -66,12 +66,12 @@
     self.user.text = [[NSUserDefaults  standardUserDefaults] objectForKey:@"Account"];
     self.userType = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Type"] intValue];
     self.pwd.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"Password"];
-    // Do any additional setup after loading the view.
+   
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
 - (IBAction)login:(id)sender
@@ -294,6 +294,8 @@
             {
                 NSString *sId = dic[@"sId"];
                 NSString *sName = dic[@"sName"];
+                int sType = [dic[@"sType"] intValue];
+                
                 NSString *urlImg = dic[@"urlImage"];
                 NSString *startTime = dic[@"startTime"];
                 NSString *astronomicalTime = dic[@"astronomicalTime"];
@@ -322,7 +324,7 @@
                 }
                 NSString *str = [strEid copy];
                 NSString *strEids = [str substringToIndex:[str length] - 1];
-                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values('%@','%@','%@','%@',%@,'%@','%@','%@','%@',%ld,%ld)",sId,sName,rName,urlImg,NULL,strEids,startTime,astronomicalTime,weakValue,weekRepeat,rId];
+                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values('%@','%@','%@','%@',%@,'%@','%@','%@','%@',%ld,%ld,%d)",sId,sName,rName,urlImg,NULL,strEids,startTime,astronomicalTime,weakValue,weekRepeat,rId,sType];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {
