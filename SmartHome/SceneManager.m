@@ -62,20 +62,11 @@
         if([responseObject[@"Result"] intValue] == 0)
         {
             [MBProgressHUD showSuccess:@"场景保存成功"];
-            AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-            
-            ScenseController *sv = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ScenseController"];
-            
-            appDelegate.window.rootViewController = sv.navigationController;
-            [appDelegate.window makeKeyWindow];
-            
             
        }
             else{
             [MBProgressHUD showError: responseObject[@"Msg"]];
-                AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-                appDelegate.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ScenseController"];
-                [appDelegate.window makeKeyWindow];
+               
        }
     }
 }

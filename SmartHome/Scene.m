@@ -21,6 +21,7 @@
         [self setRoomName:@""];
         [self setSceneName:@""];
         [self setPicName:@""];
+        [self setReadonly:1];
     }
     return self;
 }

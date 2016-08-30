@@ -64,7 +64,12 @@
     
     [self reachNotification];
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+     self.scenes = [SceneManager getAllSceneWithRoomID:self.roomID];
+    [self.collectionView reloadData];
+}
 
 -(void)setUpSceneButton
 {
@@ -227,7 +232,17 @@
     
     Scene *scene = self.collectionScenes[indexPath.row];
     cell.scenseName.text = scene.sceneName;
-    cell.backgroundColor = [UIColor colorWithPatternImage:[self getImgByUrl:scene.picName]];
+    //cell.backgroundColor = [UIColor colorWithPatternImage:[self getImgByUrl:scene.picName]];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        NSData * data = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:scene.sceneName]];
+        UIImage *image = [[UIImage alloc]initWithData:data];
+        if (data != nil) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                 cell.backgroundView = [[UIImageView alloc]initWithImage:image];
+            });
+        }
+    });
     cell.powerBtn.tag = scene.sceneID;
    
    

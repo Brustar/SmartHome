@@ -127,8 +127,8 @@
     {
         self.vEquipmentsLast = [responseObject[@"vEquipment"] intValue];
         self.vRoomLast = [responseObject[@"vRoom"] intValue];
-        self.vSceneLast = [responseObject[@"vScene"] intValue];
-        //self.vSceneLast = 5;
+        //self.vSceneLast = [responseObject[@"vScene"] intValue];
+        self.vSceneLast = 20;
         self.vTVChannelLast = [responseObject[@"vTVChannel"] intValue];
         self.vFMChannellLast = [responseObject[@"vFMChannel"] intValue];
         self.vClientlLast = [responseObject[@"vClient"] intValue];
@@ -137,6 +137,8 @@
     int vEquipment = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vEquipment"] intValue] ;
     int vRoom = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vRoom"] intValue];
     int vScene = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vScene"] intValue];
+    
+    
     int vTVChannel = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vTVChannel"] intValue];
     int vFMChannel = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vFMChannel"] intValue];
     int vClient = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vClient"] intValue];
@@ -296,6 +298,13 @@
                 NSString *sId = dic[@"sId"];
                 NSString *sName = dic[@"sName"];
                 int sType = [dic[@"sType"] intValue];
+                bool readOnly;
+                if(sType == 1)
+                {
+                    readOnly = 0;
+                }else{
+                    readOnly = 1;
+                }
                 
                 NSString *urlImg = dic[@"urlImage"];
                 NSString *startTime = dic[@"startTime"];
@@ -332,7 +341,7 @@
                 }else{
                    strEids = @"";
                 }
-                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values('%@','%@','%@','%@',%@,'%@','%@','%@','%@',%ld,%ld,%d)",sId,sName,rName,urlImg,NULL,strEids,startTime,astronomicalTime,weakValue,weekRepeat,rId,sType];
+                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values('%@','%@','%@','%@',%@,'%@','%@','%@','%@',%ld,%ld,%d)",sId,sName,rName,urlImg,NULL,strEids,startTime,astronomicalTime,weakValue,weekRepeat,rId,readOnly];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {

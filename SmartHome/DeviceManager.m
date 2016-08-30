@@ -472,8 +472,8 @@
         {
             sceneID = [resultSet intForColumn:@"ID"]+1;
         }
-        //2表示是自定义的场景，1表示是默认场景
-        sql=[NSString stringWithFormat:@"insert into Scenes values(%d,'%@',null,'%@',null,'%@',null,null,null,null,%d,%d)",sceneID,name,img,eIdStr,scene.roomID,2];
+        //1表示是自定义的场景，0表示是默认场景
+        sql=[NSString stringWithFormat:@"insert into Scenes values(%d,'%@',null,'%@',null,'%@',null,null,null,null,%d,%d)",sceneID,name,img,eIdStr,scene.roomID,1];
         [db executeUpdate:sql];
     }
     [db close];
