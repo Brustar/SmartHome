@@ -280,6 +280,16 @@
     return [self action:PROTOCOL_MUTE deviceID:deviceID];
 }
 
+-(NSData *) volumeUp:(NSString *)deviceID
+{
+    return [self action:PROTOCOL_VOLUME_UP deviceID:deviceID];
+}
+
+-(NSData *) volumeDown:(NSString *)deviceID
+{
+    return [self action:PROTOCOL_VOLUME_DOWN deviceID:deviceID];
+}
+
 //TV,DVD,NETV
 -(NSData *) sweepLeft:(NSString *)deviceID
 {

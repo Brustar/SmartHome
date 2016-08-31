@@ -99,6 +99,7 @@
 		0FC41BAF1D6DA3DD000D4451 /* VoiceOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC41BAE1D6DA3DD000D4451 /* VoiceOrderController.m */; };
 		0FC7FDC11CED6CC700F91BDF /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC7FDC01CED6CC700F91BDF /* libsqlite3.tbd */; };
 		0FCAA40C1D1945BB00C1E58C /* BgMusicController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCAA40B1D1945BB00C1E58C /* BgMusicController.m */; };
+		0FCD77721D7681CB00121BF1 /* KEVolumeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCD77711D7681CB00121BF1 /* KEVolumeUtil.m */; };
 		0FCF43311CE09039009BFDD9 /* IbeaconManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCF43301CE09039009BFDD9 /* IbeaconManager.m */; };
 		0FCFB3801CF28F6F00B37DD3 /* Light.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFB37F1CF28F6F00B37DD3 /* Light.m */; };
 		0FCFB3831CF28FCB00B37DD3 /* Curtain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFB3821CF28FCB00B37DD3 /* Curtain.m */; };
@@ -461,6 +462,8 @@
 		0FC7FDC01CED6CC700F91BDF /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		0FCAA40A1D1945BB00C1E58C /* BgMusicController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BgMusicController.h; sourceTree = "<group>"; };
 		0FCAA40B1D1945BB00C1E58C /* BgMusicController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BgMusicController.m; sourceTree = "<group>"; };
+		0FCD77701D7681CB00121BF1 /* KEVolumeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KEVolumeUtil.h; sourceTree = "<group>"; };
+		0FCD77711D7681CB00121BF1 /* KEVolumeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KEVolumeUtil.m; sourceTree = "<group>"; };
 		0FCF432F1CE09039009BFDD9 /* IbeaconManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IbeaconManager.h; sourceTree = "<group>"; };
 		0FCF43301CE09039009BFDD9 /* IbeaconManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IbeaconManager.m; sourceTree = "<group>"; };
 		0FCFB37E1CF28F6F00B37DD3 /* Light.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Light.h; sourceTree = "<group>"; };
@@ -1230,6 +1233,8 @@
 				F673EBD11D45E976001270FB /* VerifyCodeView.m */,
 				F623378B1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.h */,
 				F623378C1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.m */,
+				0FCD77701D7681CB00121BF1 /* KEVolumeUtil.h */,
+				0FCD77711D7681CB00121BF1 /* KEVolumeUtil.m */,
 			);
 			name = public;
 			sourceTree = "<group>";
@@ -1643,6 +1648,7 @@
 				0FAF74C61CEEA17C00432713 /* UIImage+CoreGraphics.m in Sources */,
 				F66596E61D3F5DBC0082716A /* AddNewScenseController.m in Sources */,
 				0F180FC91D0E4E6500392F4C /* GuardController.m in Sources */,
+				0FCD77721D7681CB00121BF1 /* KEVolumeUtil.m in Sources */,
 				0FAF98A71CE40F3C009BDBB5 /* QRToggleTorchButton.m in Sources */,
 				0F25FE5E1CEB0C0A0063E834 /* SceneList.m in Sources */,
 				F625A6181D4C8EF700B696E5 /* ProfireListController.m in Sources */,
