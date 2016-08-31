@@ -24,6 +24,8 @@
 //根据设备ID获取设备类别
 +(NSString *)deviceTypeNameByDeviceID:(int)eId;
 
++(NSString *)getNameWithID:(int)eId;
+
 +(NSArray *)deviceSubTypeByRoomId:(NSInteger)roomID;
 
 
@@ -65,4 +67,11 @@
 +(bool) getReadOnly:(int)sceneid;
 +(NSString *) getSnumber:(int)sceneid;
 
++(NSArray *)getDeviceIDBySubName:(NSString *)subName;
+
+//------------------------------------------------
+//根据场景ID找到文件和设备ID
++(NSArray *)getDeviceIDsBySeneId:(int)SceneId;
++(NSArray *)getSubTydpeBySceneID:(int)sceneId;
++(NSArray *)getDeviceTypeNameWithScenID:(int)sceneId subTypeName:(NSString *)subTypeName;
 @end

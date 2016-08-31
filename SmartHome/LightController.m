@@ -37,7 +37,8 @@
        
            if(self.sceneid > 0)
            {
-            NSArray *lightArr = [DeviceManager getDeviceIDWithRoomID:self.roomID sceneID:[self.sceneid intValue]];
+           // NSArray *lightArr = [DeviceManager getDeviceIDWithRoomID:self.roomID sceneID:[self.sceneid intValue]];
+               NSArray *lightArr = [DeviceManager getDeviceIDsBySeneId:[self.sceneid intValue]];
                for(int i = 0; i <lightArr.count; i++)
                {
                    NSString *typeName = [DeviceManager deviceTypeNameByDeviceID:[lightArr[i] intValue]];

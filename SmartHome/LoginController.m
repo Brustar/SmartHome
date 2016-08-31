@@ -287,61 +287,19 @@
     if([db open])
     {
         NSArray *messageInfo = responseObject[@"messageInfo"];
-        
-        for(NSDictionary *messageDic in  messageInfo)
+        for(NSDictionary *messageDic in messageInfo)
         {
-            NSInteger rId = [messageDic[@"rId"] integerValue];
-            NSString *rName = messageDic[@"rName"];
-            NSArray *sceneList = messageDic[@"c_sceneInfoList"];
-            for(NSDictionary *dic in sceneList)
+            int rId = [messageDic[@"rId"] intValue];
+            NSString *rName =  messageDic[@"rName"];
+            NSArray *c_sceneInfoList = messageDic[@"c_sceneInfoList"];
+            for(NSDictionary *sceneInfoDic in c_sceneInfoList)
             {
-                NSString *sId = dic[@"sId"];
-                NSString *sName = dic[@"sName"];
-                int sType = [dic[@"sType"] intValue];
-                bool readOnly;
-                if(sType == 1)
-                {
-                    readOnly = 0;
-                }else{
-                    readOnly = 1;
-                }
-                
-                NSString *urlImg = dic[@"urlImage"];
-                NSString *startTime = dic[@"startTime"];
-                NSString *astronomicalTime = dic[@"astronomicalTime"];
-                NSString *weakValue = dic[@"weekValue"];
-                NSInteger weekRepeat = [dic[@"weekRepeat"] integerValue];
-                NSArray *deviceList = dic[@"scceqSubTypeList"];
-               
-                NSMutableString *strEid = [[NSMutableString alloc]init];
-
-                for(NSDictionary *equDic in deviceList)
-                {
-                    NSArray *sceeqTypeList = equDic[@"sceeqTypeList"];
-                                                           for(NSDictionary *typeList in sceeqTypeList)
-                    {
-                        NSArray *sceeqList = typeList[@"sceeqList"];
-                                                for(NSDictionary *eList in sceeqList)
-                        {
-                            
-                            NSInteger eId = [eList[@"eId"] integerValue];
-                           [strEid appendString:[NSString stringWithFormat:@"%ld,",eId]];
-                            
-                        }
-                       
-                    }
-                    
-                }
-                NSString *str = [strEid copy];
-                NSString *strEids;
-                if(str.length != 0)
-                {
-                   strEids = [str substringToIndex:[str length] - 1];
-                   
-                }else{
-                   strEids = @"";
-                }
-                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values('%@','%@','%@','%@',%@,'%@','%@','%@','%@',%ld,%ld,%d)",sId,sName,rName,urlImg,NULL,strEids,startTime,astronomicalTime,weakValue,weekRepeat,rId,readOnly];
+                int sId = [sceneInfoDic[@"sId"] intValue];
+                NSString *sName = sceneInfoDic[@"sName"];
+                int sType = [sceneInfoDic[@"sType"] intValue];
+                NSString *sNumber = sceneInfoDic[@"sNumber"];
+                NSString *urlImage = sceneInfoDic[@"urlImage"];
+                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,'%@')",sId,sName,rName,urlImage,rId,sType,sNumber];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {
@@ -350,13 +308,13 @@
                     NSLog(@"insert 失败");
                 }
 
-                
             }
-
         }
+    
+      
     }
     
-       [db close];
+    [db close];
     
 }
 //写电视频道配置信息到SQL

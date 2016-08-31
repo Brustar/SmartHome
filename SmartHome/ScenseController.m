@@ -67,7 +67,10 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-     self.scenes = [SceneManager getAllSceneWithRoomID:self.roomID];
+    
+    self.scenes = [SceneManager getScensByRoomId:self.roomID];
+    [self setUpSceneButton];
+    [self judgeScensCount:self.scenes];
     [self.collectionView reloadData];
 }
 
@@ -94,7 +97,7 @@
         Scene *scene = self.scenes[0];
         self.firstButton.tag = scene.sceneID;
         self.firstPowerBtn.tag = scene.sceneID;
-                [self.firstButton setTitle:scene.sceneName forState:UIControlStateNormal];
+        [self.firstButton setTitle:scene.sceneName forState:UIControlStateNormal];
         UIImage *image = [self getImgByUrl:scene.picName];
         [self.firstButton setBackgroundImage:image forState:UIControlStateNormal];
         Scene *scondScene = self.scenes[1];
@@ -123,7 +126,8 @@
     
     self.roomID = [dict[@"subType"] intValue];
     
-    self.scenes = [SceneManager getAllSceneWithRoomID:self.roomID];
+    self.scenes = [SceneManager getScensByRoomId:self.roomID];
+   
     [self setUpSceneButton];
     [self judgeScensCount:self.scenes];
     

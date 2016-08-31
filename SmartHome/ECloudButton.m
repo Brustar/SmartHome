@@ -15,8 +15,8 @@
     if (self = [super init]) {
         [self setTitle:title forState:UIControlStateNormal];
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
-        [self setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-        
+        [self setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+
         [self setImage:[UIImage imageNamed:normalImage] forState:UIControlStateNormal];
         
         [self setImage:[UIImage imageNamed:selectImage] forState:UIControlStateSelected];

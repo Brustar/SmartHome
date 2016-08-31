@@ -75,7 +75,9 @@
 @property (weak, nonatomic) IBOutlet UIView *coverView;
 @property (weak, nonatomic) IBOutlet UIButton *editChannelImgBtn;
 @property (nonatomic,strong) NSString *eNumber;
-@property (nonatomic,strong) UIImage *chooseImg;
+@property (nonatomic,strong) NSString *chooseImg;
+
+
 - (IBAction)editChannelImgBtn:(UIButton *)sender;
 
 
@@ -112,7 +114,18 @@
 {
     _roomID = roomID;
     
-    self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"网络电视"];
+    //self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"网络电视"];
+    NSArray *tvArr = [DeviceManager getDeviceIDsBySeneId:[self.sceneid intValue]];
+    for(int i = 0; i <tvArr.count; i++)
+    {
+        NSString *typeName = [DeviceManager deviceTypeNameByDeviceID:[tvArr[i] intValue]];
+        if([typeName isEqualToString:@"网络电视"])
+        {
+            self.deviceid = tvArr[i];
+        }
+    }
+
+    
     //self.deviceid = [DeviceManager getDeviceByTypeName:@"TV" andRoomID:self.roomID];
     
 }
@@ -166,6 +179,7 @@
     //[sock.socket writeData:data withTimeout:1 tag:1];
     
     sock.delegate=self;
+    
 }
 
 - (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
@@ -242,8 +256,15 @@
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    id theSegue = segue.destinationViewController;
-    [theSegue setValue:@"1" forKey:@"deviceid"];
+    if([segue.identifier isEqualToString:@"detailSegue"])
+    {
+        id theSegue = segue.destinationViewController;
+        [theSegue setValue:@"1" forKey:@"deviceid"];
+    }else{
+        TVIconController *iconVC = segue.destinationViewController;
+        iconVC.delegate = self;
+    }
+    
 }
 
 
@@ -310,7 +331,9 @@
             cell.userInteractionEnabled = NO;
         }else{
             TVChannel *channel = self.allFavourTVChannels[indexPath.row];
-            cell.imgView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",channel.channel_pic]];
+//            NSData * data = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:channel.channel_pic]];
+//            UIImage *image = [[UIImage alloc]initWithData:data];
+            cell.imgView.image = [UIImage imageNamed:channel.channel_pic];
             cell.label.text = channel.channel_name;
             
             [cell useLongPressGesture];
@@ -386,6 +409,17 @@
     NSIndexPath *indexPath = [self.tvLogoCollectionView indexPathForCell:cell];
     TVChannel *channel = self.allFavourTVChannels[indexPath.row];
     
+    //从数据库中删除数据
+    BOOL isSuccess = [ChannelManager deleteChannelForChannelID:channel.channel_id];
+    if(!isSuccess)
+    {
+        [MBProgressHUD showError:@"删除失败，请稍后再试"];
+        return;
+    }
+    [self.allFavourTVChannels removeObject:channel];
+    [self.tvLogoCollectionView reloadData];
+
+    
     //发送删除频道请求
     NSString *url = [NSString stringWithFormat:@"%@TVChannelRemove.aspx",[IOManager httpAddr]];
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
@@ -432,7 +466,7 @@
 {
     NSString *url = [NSString stringWithFormat:@"%@TVChannelUpload.aspx",[IOManager httpAddr]];
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSDictionary *dic = @{@"AuthorToken":authorToken,@"EID":self.deviceid,@"Cnumber":self.channeNumber.text,@"CName":self.channelName.text,@"ImgFileName":@"store",@"ImgFile":@""};
+    NSDictionary *dic = @{@"AuthorToken":authorToken,@"EID":self.deviceid,@"Cnumber":self.channeNumber.text,@"CName":self.channelName.text,@"ImgFileName":self.chooseImg,@"ImgFile":@""};
     HttpManager *http = [HttpManager defaultManager];
     http.delegate = self;
     http.tag = 1;
@@ -461,17 +495,6 @@
     {
         if([responseObject[@"Result"] intValue] == 0)
         {
-            //从数据库中删除数据
-            NSIndexPath *indexPath = [self.tvLogoCollectionView indexPathForCell:self.cell];
-            TVChannel *channel = self.allFavourTVChannels[indexPath.row];
-            BOOL isSuccess = [ChannelManager deleteChannelForChannelID:channel.channel_id];
-            if(!isSuccess)
-            {
-                [MBProgressHUD showError:@"删除失败，请稍后再试"];
-                return;
-            }
-            [self.allFavourTVChannels removeObject:channel];
-            [self.tvLogoCollectionView reloadData];
             
         }else{
             [MBProgressHUD showError:responseObject[@"Msg"]];
@@ -529,13 +552,13 @@
 }
 
 -(void)preset:(KxMenuItem *)item{
-    TVIconController *iconVC = [[TVIconController alloc]init];
-    iconVC.delegate = self;
-    [self presentViewController:iconVC animated:YES completion:nil];
+    [self performSegueWithIdentifier:@"TVSegue" sender:self];
 }
 -(void)tvIconController:(TVIconController *)iconVC withImgName:(NSString *)imgName
 {
-    self.chooseImg = [UIImage imageNamed:imgName];
+    
+    self.chooseImg = imgName;
+    [self.editChannelImgBtn setBackgroundImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
 }
 - (void)selectPhoto:(KxMenuItem *)item {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
@@ -557,8 +580,8 @@
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
-    self.chooseImg = info[UIImagePickerControllerEditedImage];
-    [self.editChannelImgBtn setBackgroundImage:self.chooseImg forState:UIControlStateNormal];
+    self.chooseImg = info[UIImagePickerControllerMediaURL];
+    [self.editChannelImgBtn setBackgroundImage:[UIImage imageNamed:self.chooseImg] forState:UIControlStateNormal];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -574,10 +597,8 @@
 }
 
 - (IBAction)storeTVChannel:(UIBarButtonItem *)sender {
-//    self.channelName.text = nil;
-//    self.channeNumber.text = nil;
-    self.editView.hidden = NO;
-//    [self sendStoreChannelRequest];
+    
+    [self showCoverView];
     
 }
 

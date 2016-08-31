@@ -33,7 +33,7 @@
         _curtainIDArr = [NSMutableArray array];
         if(self.sceneid > 0)
         {
-            NSArray *curtainArr = [DeviceManager getDeviceIDWithRoomID:self.roomID sceneID:[self.sceneid intValue]];
+            NSArray *curtainArr = [DeviceManager getDeviceIDsBySeneId:[self.sceneid intValue]];
             for(int i = 0; i <curtainArr.count; i++)
             {
                 NSString *typeName = [DeviceManager deviceTypeNameByDeviceID:[curtainArr[i] intValue]];
