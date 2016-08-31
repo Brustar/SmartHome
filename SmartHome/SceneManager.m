@@ -656,4 +656,31 @@
     }
     return [sceneIds copy];
 }
+
++(NSArray *)getFavorScene
+{
+    NSMutableArray *scens = [NSMutableArray array];
+    
+    
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    if([db open])
+    {
+        FMResultSet *resultSet = [db executeQuery:@"select * from Scenes where isFavorite = 1"];
+        while ([resultSet next]) {
+            Scene *scene = [Scene new];
+            scene.sceneName = [resultSet stringForColumn:@"NAME"];
+            scene.sceneID = [resultSet intForColumn:@"ID"];
+            scene.picName = [resultSet stringForColumn:@"pic"];
+            scene.roomName = [resultSet stringForColumn:@"roomName"];
+            [scens addObject:scene];
+        }
+    }
+    
+    
+    return [scens copy];
+    
+
+}
 @end

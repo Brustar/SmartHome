@@ -2,13 +2,12 @@
 //  FavorController.h
 //  SmartHome
 //
-//  Created by Brustar on 16/7/5.
+//  Created by 逸云科技 on 16/8/31.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
-#import <FMDB.h>
 
-@interface FavorController : UITableViewController
+#import <UIKit/UIKit.h>
 
-@property (nonatomic,strong) NSMutableArray *favors;
+@interface FavorController : UIViewController
 
 @end
