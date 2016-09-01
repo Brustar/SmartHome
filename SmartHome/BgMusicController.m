@@ -13,6 +13,7 @@
 #import "BgMusic.h"
 #import "PackManager.h"
 #import "DeviceInfo.h"
+#import "KEVolumeUtil.h"
 
 @interface BgMusicController ()
 @property (weak, nonatomic) IBOutlet UISlider *volume;
@@ -55,16 +56,28 @@
     if([keyPath isEqualToString:@"volume"])
     {
         self.volume.value=[[self.beacon valueForKey:@"volume"] floatValue];
+        
+        KEVolumeUtil *volumeManager=[KEVolumeUtil shareInstance];
+        NSData *data=nil;
+        if (volumeManager.willup) {
+            data = [[DeviceInfo defaultManager] volumeUp:self.deviceid];
+        }else{
+            data = [[DeviceInfo defaultManager] volumeDown:self.deviceid];
+        }
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+        
         [self save:nil];
     }
 }
 
 -(IBAction)save:(id)sender
 {
-    NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volume.value*100 deviceID:self.deviceid];
-    SocketManager *sock=[SocketManager defaultManager];
-    [sock.socket writeData:data withTimeout:1 tag:1];
-    
+    if ([sender isEqual:self.volume]) {
+        NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volume.value*100 deviceID:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
     BgMusic *device=[[BgMusic alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setBgvolume:self.volume.value*100];
@@ -91,7 +104,7 @@
     }
     
     if (tag==0) {
-        if (proto.action.state == 0x02 || proto.action.state == 0x03 || proto.action.state == 0x04) {
+        if (proto.action.state == PROTOCOL_VOLUME_UP || proto.action.state == PROTOCOL_VOLUME_DOWN || proto.action.state == PROTOCOL_MUTE) {
             self.volume.value=proto.action.RValue/100.0;
         }
     }

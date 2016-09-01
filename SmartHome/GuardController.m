@@ -81,7 +81,7 @@
         return;
     }
     
-    if (tag==0 && (proto.action.state == 0x01 || proto.action.state == 0x00)) {
+    if (tag==0 && (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON)) {
         NSString *devID=[DeviceManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID) masterID:[[DeviceInfo defaultManager] masterID]];
         if ([devID intValue]==[self.deviceid intValue]) {
             self.switchView.on=proto.action.state;

@@ -176,11 +176,11 @@
         return;
     }
     
-    if (tag==0 && (proto.action.state == 0x2A || proto.action.state == 0x00 || proto.action.state == 0x01)) {
+    if (tag==0 && (proto.action.state == 0x2A || proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON)) {
         NSString *devID=[DeviceManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID) masterID:[[DeviceInfo defaultManager] masterID]];
         if ([devID intValue]==[self.deviceid intValue]) {
             self.cell.slider.value=proto.action.RValue/100.0;
-            if (proto.action.state == 0x01) {
+            if (proto.action.state == PROTOCOL_ON) {
                 self.cell.slider.value=1;
             }
         }

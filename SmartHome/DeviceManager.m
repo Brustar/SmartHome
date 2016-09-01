@@ -429,7 +429,7 @@
 
 +(bool) getReadOnly:(int)sceneid
 {
-    NSString *sql=[NSString stringWithFormat:@"select readonly from Scenes where id=%d" ,sceneid];
+    NSString *sql=[NSString stringWithFormat:@"select stype from Scenes where id=%d" ,sceneid];
     NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
     bool readonly=false;
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
@@ -439,7 +439,7 @@
         
         if([resultSet next])
         {
-            readonly = [resultSet boolForColumn:@"readonly"];
+            readonly = [resultSet boolForColumn:@"stype"];
         }
     }
     [db close];
@@ -458,7 +458,7 @@
         
         if([resultSet next])
         {
-            snumber = [resultSet stringForColumn:@"readonly"];
+            snumber = [resultSet stringForColumn:@"snumber"];
         }
     }
     [db close];

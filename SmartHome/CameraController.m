@@ -23,7 +23,7 @@
     
     NSString *url = [DeviceManager getUrlByDeviceId:[self.deviceid intValue]];
     
-        _video = [[RTSPPlayer alloc] initWithVideo:url usesTcp:NO];
+        _video = [[RTSPPlayer alloc] initWithVideo:url usesTcp:YES];
         _video.outputWidth = 426;
         _video.outputHeight = 320;
     

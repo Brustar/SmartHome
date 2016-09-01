@@ -69,7 +69,7 @@ enum{
 
 #pragma mark - public
 -(NSData *) author;
--(NSData *)startScenenAtMaster:(long)sceneid;
+-(NSData *)startScenenAtMaster:(int)sceneid;
 
 //TV,DVD,NETV,BGMusic
 -(NSData *) previous:(NSString *)deviceID;
@@ -83,6 +83,9 @@ enum{
 
 -(NSData *) changeVolume:(uint8_t)percent deviceID:(NSString *)deviceID; //mute:pecent=0
 -(NSData *) mute:(NSString *)deviceID;
+-(NSData *) volumeUp:(NSString *)deviceID;
+-(NSData *) volumeDown:(NSString *)deviceID;
+
 //TV,DVD,NETV
 -(NSData *) sweepLeft:(NSString *)deviceID;
 -(NSData *) sweepRight:(NSString *)deviceID;

@@ -15,6 +15,7 @@
 #import "SCWaveAnimationView.h"
 #import "DeviceManager.h"
 #import "PackManager.h"
+#import "KEVolumeUtil.h"
 
 @interface NetvController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
@@ -134,10 +135,11 @@
 
 -(IBAction)save:(id)sender
 {
-    NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volume.value*100 deviceID:self.deviceid];
-    SocketManager *sock=[SocketManager defaultManager];
-    [sock.socket writeData:data withTimeout:1 tag:1];
-    
+    if ([sender isEqual:self.volume]) {
+        NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volume.value*100 deviceID:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
     Netv *device=[[Netv alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setNvolume:self.volume.value*100];
@@ -166,7 +168,7 @@
     }
     
     if (tag==0) {
-        if (proto.action.state == 0x02 || proto.action.state == 0x03 || proto.action.state == 0x04) {
+        if (proto.action.state == PROTOCOL_VOLUME_UP || proto.action.state == PROTOCOL_DOWN || proto.action.state == PROTOCOL_MUTE) {
             self.volume.value=proto.action.RValue/100.0;
         }
     }
@@ -178,6 +180,17 @@
     {
         DeviceInfo *device=[DeviceInfo defaultManager];
         self.volume.value=[[device valueForKey:@"volume"] floatValue];
+        
+        KEVolumeUtil *volumeManager=[KEVolumeUtil shareInstance];
+        NSData *data=nil;
+        if (volumeManager.willup) {
+            data = [device volumeUp:self.deviceid];
+        }else{
+            data = [device volumeDown:self.deviceid];
+        }
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+        
         [self save:nil];
     }
 }
