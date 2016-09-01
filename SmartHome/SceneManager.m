@@ -123,7 +123,7 @@
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, sceneid]];
     NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfFile:scenePath];
     if (dictionary) {
-        Scene *scene=[[Scene alloc] init];
+        Scene *scene=[[Scene alloc] initWhithoutSchedule];
         scene.sceneID=sceneid;
         scene.readonly=[dictionary objectForKey:@"readonly"];
         scene.picName=[dictionary objectForKey:@"picName"];
