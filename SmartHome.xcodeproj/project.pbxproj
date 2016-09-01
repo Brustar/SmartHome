@@ -21,7 +21,6 @@
 		0F1F3BCA1D2B85EA00B2641C /* MBProgressHUD+NJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F1F3BC91D2B85EA00B2641C /* MBProgressHUD+NJ.m */; };
 		0F25178A1CFD8C6500491A6C /* PackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2517891CFD8C6500491A6C /* PackManager.m */; };
 		0F25FE5E1CEB0C0A0063E834 /* SceneList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F25FE5D1CEB0C0A0063E834 /* SceneList.m */; };
-		0F290B751D3C8947006584D5 /* ProtocolManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3576741D363188003334E0 /* ProtocolManager.m */; };
 		0F295A601D2E092900F23F21 /* HttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F295A5F1D2E092900F23F21 /* HttpManager.m */; };
 		0F2D35BC1D114E7000C46DE5 /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2D35B71D114E7000C46DE5 /* AudioStreamer.m */; };
 		0F2D35BD1D114E7000C46DE5 /* RTSPPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2D35B91D114E7000C46DE5 /* RTSPPlayer.m */; };
@@ -44,6 +43,8 @@
 		0F477FC61D2F94B3004FA361 /* NetStatusManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F477FC51D2F94B3004FA361 /* NetStatusManager.m */; };
 		0F4B3C001D2A13870002E75E /* MSGController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4B3BFF1D2A13870002E75E /* MSGController.m */; };
 		0F4B49801CFEB13500D93DD2 /* CurtainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4B497F1CFEB13500D93DD2 /* CurtainController.m */; };
+		0F6AB86F1D782D9D0041E39C /* SunCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6AB86C1D782D9D0041E39C /* SunCount.m */; };
+		0F6AB8701D782D9D0041E39C /* SunString.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6AB86E1D782D9D0041E39C /* SunString.m */; };
 		0F7E2E161D581AC400A47D5D /* UITest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F7E2E151D581AC400A47D5D /* UITest.storyboard */; };
 		0F91AA171CDC798700094C25 /* PrintObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F91AA161CDC798700094C25 /* PrintObject.m */; };
 		0F96A1641D17F37C00E1594F /* RulerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F96A15D1D17F37C00E1594F /* RulerItem.m */; };
@@ -345,8 +346,6 @@
 		0F2D36701D11555100C46DE5 /* libswresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswresample.a; path = "FFmpeg-iOS/lib/libswresample.a"; sourceTree = "<group>"; };
 		0F2D36711D11555100C46DE5 /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswscale.a; path = "FFmpeg-iOS/lib/libswscale.a"; sourceTree = "<group>"; };
 		0F2D36721D11555100C46DE5 /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavcodec.a; path = "FFmpeg-iOS/lib/libavcodec.a"; sourceTree = "<group>"; };
-		0F3576731D363188003334E0 /* ProtocolManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolManager.h; sourceTree = "<group>"; };
-		0F3576741D363188003334E0 /* ProtocolManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolManager.m; sourceTree = "<group>"; };
 		0F3CCF391D0F97B70058A320 /* CameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraController.h; sourceTree = "<group>"; };
 		0F3CCF3A1D0F97B70058A320 /* CameraController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraController.m; sourceTree = "<group>"; };
 		0F43B0F71CF3E7BF00F3D9F0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -360,6 +359,10 @@
 		0F4B3BFF1D2A13870002E75E /* MSGController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGController.m; sourceTree = "<group>"; };
 		0F4B497E1CFEB13500D93DD2 /* CurtainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurtainController.h; sourceTree = "<group>"; };
 		0F4B497F1CFEB13500D93DD2 /* CurtainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurtainController.m; sourceTree = "<group>"; };
+		0F6AB86B1D782D9D0041E39C /* SunCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SunCount.h; sourceTree = "<group>"; };
+		0F6AB86C1D782D9D0041E39C /* SunCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SunCount.m; sourceTree = "<group>"; };
+		0F6AB86D1D782D9D0041E39C /* SunString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SunString.h; sourceTree = "<group>"; };
+		0F6AB86E1D782D9D0041E39C /* SunString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SunString.m; sourceTree = "<group>"; };
 		0F7E2E151D581AC400A47D5D /* UITest.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UITest.storyboard; sourceTree = "<group>"; };
 		0F91AA151CDC798700094C25 /* PrintObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintObject.h; sourceTree = "<group>"; };
 		0F91AA161CDC798700094C25 /* PrintObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintObject.m; sourceTree = "<group>"; };
@@ -748,6 +751,7 @@
 		0F032D461CC9B12700D1920D /* SmartHome */ = {
 			isa = PBXGroup;
 			children = (
+				0F6AB86A1D782D9D0041E39C /* Astronomy */,
 				0FD3DEA61D3F181000AF7765 /* SCWave */,
 				0F2D35D91D11512100C46DE5 /* FFmpeg-iOS */,
 				0F2D35B51D114E3A00C46DE5 /* FFMpegDecoder */,
@@ -1139,6 +1143,17 @@
 			name = storeboard;
 			sourceTree = "<group>";
 		};
+		0F6AB86A1D782D9D0041E39C /* Astronomy */ = {
+			isa = PBXGroup;
+			children = (
+				0F6AB86B1D782D9D0041E39C /* SunCount.h */,
+				0F6AB86C1D782D9D0041E39C /* SunCount.m */,
+				0F6AB86D1D782D9D0041E39C /* SunString.h */,
+				0F6AB86E1D782D9D0041E39C /* SunString.m */,
+			);
+			path = Astronomy;
+			sourceTree = SOURCE_ROOT;
+		};
 		0FAF74AE1CEEA16700432713 /* HRColorPicker */ = {
 			isa = PBXGroup;
 			children = (
@@ -1216,8 +1231,6 @@
 				0F295A5F1D2E092900F23F21 /* HttpManager.m */,
 				0F477FC41D2F94B3004FA361 /* NetStatusManager.h */,
 				0F477FC51D2F94B3004FA361 /* NetStatusManager.m */,
-				0F3576731D363188003334E0 /* ProtocolManager.h */,
-				0F3576741D363188003334E0 /* ProtocolManager.m */,
 				F6251F751D542508000A5A47 /* DeviceManager.h */,
 				F6251F761D542508000A5A47 /* DeviceManager.m */,
 				F64487DB1D55BA3C00EF2CFC /* RoomManager.h */,
@@ -1598,7 +1611,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F290B751D3C8947006584D5 /* ProtocolManager.m in Sources */,
 				F65164141D3780C500A6F5FA /* TVLogoCell.m in Sources */,
 				0FAF74BF1CEEA17C00432713 /* HRBrightnessCursor.m in Sources */,
 				0FAF98A31CE40F3C009BDBB5 /* QRCameraSwitchButton.m in Sources */,
@@ -1608,6 +1620,7 @@
 				0FEE12761D20C53400811947 /* TXHRulerScrollView.m in Sources */,
 				0FCFB38F1CF293B300B37DD3 /* Radio.m in Sources */,
 				0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */,
+				0F6AB8701D782D9D0041E39C /* SunString.m in Sources */,
 				0FCAA40C1D1945BB00C1E58C /* BgMusicController.m in Sources */,
 				0FAF74C51CEEA17C00432713 /* HRHSVColorUtil.m in Sources */,
 				0FBEFE2A1D24F0C10084244F /* WebManager.m in Sources */,
@@ -1705,6 +1718,7 @@
 				F645BD471D76E3D8005BFB7A /* FavorController.m in Sources */,
 				0FB42E231CF6F9E8007DE64F /* SocketManager.m in Sources */,
 				F64487DD1D55BA3C00EF2CFC /* RoomManager.m in Sources */,
+				0F6AB86F1D782D9D0041E39C /* SunCount.m in Sources */,
 				0FCFB3861CF2912700B37DD3 /* TV.m in Sources */,
 				F65B7D271D34E9E00059CFA4 /* MySettingViewController.m in Sources */,
 				F69C82301D35D214002DE6D7 /* PushSettingController.m in Sources */,

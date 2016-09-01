@@ -10,7 +10,6 @@
 #import "sys/utsname.h"
 #import <Reachability/Reachability.h>
 #import "PackManager.h"
-#import "ProtocolManager.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "FMDatabase.h"
@@ -78,7 +77,7 @@
                 [IOManager writeUserdefault:responseObject[@"Ver"] forKey:@"protocolVer"];
             }
         }
-        //[[ProtocolManager defaultManager] fetchAll];
+        
         [db close];
     }
 }

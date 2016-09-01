@@ -9,7 +9,6 @@
 #import "CurtainController.h"
 #import "CurtainTableViewCell.h"
 #import "PackManager.h"
-#import "ProtocolManager.h"
 #import "SocketManager.h"
 #import "DeviceManager.h"
 

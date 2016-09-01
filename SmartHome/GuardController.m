@@ -12,7 +12,6 @@
 #import "SceneManager.h"
 #import "PackManager.h"
 #import "SocketManager.h"
-#import "ProtocolManager.h"
 #import "DeviceManager.h"
 
 @interface GuardController ()

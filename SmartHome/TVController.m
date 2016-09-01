@@ -16,7 +16,6 @@
 #import "KxMenu.h"
 #import "VolumeManager.h"
 #import "SCWaveAnimationView.h"
-#import "ProtocolManager.h"
 #import "SocketManager.h"
 #import "DeviceManager.h"
 #import "HttpManager.h"

@@ -10,12 +10,16 @@
 #import <HomeKit/HomeKit.h>
 #import "Light.h"
 #import <Reachability/Reachability.h> 
+#import <CoreLocation/CoreLocation.h>
 
-@interface IBeaconController : UIViewController<HMHomeManagerDelegate, HMHomeDelegate,HMAccessoryBrowserDelegate, HMAccessoryDelegate,TcpRecvDelegate>
+@interface IBeaconController : UIViewController<HMHomeManagerDelegate, HMHomeDelegate,HMAccessoryBrowserDelegate, HMAccessoryDelegate,TcpRecvDelegate,CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imagev;
 @property (strong, nonatomic) IBOutlet UILabel *myLabel;
 @property (strong, nonatomic) IBOutlet UILabel *volumeLabel;
+
+@property (strong, nonatomic) IBOutlet UILabel *myLocatoinInfo;
+@property (strong,nonatomic) CLLocationManager *lm;
 
 @property(nonatomic,strong) NSURLSessionDownloadTask *task;
 @property (nonatomic, retain) NSTimer *timer;
@@ -26,5 +30,7 @@
 @property (nonatomic, strong) HMHomeManager *homeManager;
 @property (nonatomic, strong) HMHome *primaryHome;
 @property (nonatomic, strong) HMCharacteristic *characteristic;
+
+- (IBAction)start:(id)sender;
 
 @end
