@@ -30,6 +30,7 @@
     
     centerListVC.delegate = self;
     self.detailNavigation = [self.childViewControllers lastObject];
+    self.presentsWithGesture = NO;
 }
 
 
