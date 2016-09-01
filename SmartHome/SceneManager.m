@@ -86,7 +86,7 @@
     //上传文件
 }
 
-//保证newScene的ID不变
+//保证newScene的ID不变f
 - (void) editScenen:(Scene *)newScene
 {
     [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, newScene.sceneID ] scene:newScene];
@@ -100,8 +100,8 @@
     NSString *scenePath=[[IOManager favoritePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, newScene.sceneID ]];
     NSDictionary *dic = [PrintObject getObjectData:newScene];
     BOOL ret = [dic writeToFile:scenePath atomically:YES];
-    if(ret)
-    {
+    //if(ret)
+    //{
         //写sqlite更新场景文件名
         NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
         FMDatabase *db = [FMDatabase databaseWithPath:dbPath] ;
@@ -109,12 +109,12 @@
             NSLog(@"Could not open db.");
             return ;
         }
-        [db executeUpdate:@"UPDATE Scenes SET name = ? , isFavorite = 1 WHERE id = ?",name,[NSNumber numberWithInt:newScene.sceneID]];
+        [db executeUpdate:@"UPDATE Scenes SET name = ? , isFavorite = 1 WHERE id = ?",name,[NSNumber numberWithInt:newScene.sceneID]];                                  
         [db close];
         //同步云端
         
         //上传文件
-    }
+    //}
     
 }
 

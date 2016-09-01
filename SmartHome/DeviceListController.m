@@ -64,7 +64,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAutomatic;
+    self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
      self.tableViewHight.constant = self.deviceTypes.count * self.tableView.rowHeight;
 }
 -(IBAction)remove:(id)sender

@@ -20,9 +20,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.title = @"我的收藏";
+    self.splitViewController.presentsWithGesture = NO;
+   
     self.scens = [SceneManager getFavorScene];
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+     self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAutomatic;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -46,6 +54,7 @@
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
     Scene *scene = self.scens[indexPath.row];
     self.selectID = scene.sceneID;
     [self performSegueWithIdentifier:@"favorSegue" sender:self];

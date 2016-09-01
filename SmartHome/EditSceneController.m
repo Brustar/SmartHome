@@ -276,10 +276,9 @@
     [alertVC addAction:saveNewAction];
     UIAlertAction *favScene = [UIAlertAction actionWithTitle:@"收藏场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        self.favorView.hidden = NO;
-       
         
-        [self.view bringSubviewToFront:self.devicelView];
+        [self favorScene];
+        
     }];
     [alertVC addAction:favScene];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -288,7 +287,35 @@
     [alertVC addAction:cancelAction];
     [self presentViewController:alertVC animated:YES completion:nil];
 }
+-(void)favorScene{
+     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"收藏场景" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:  UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        UITextField *nameTextFiel = alert.textFields[0];
+        nameTextFiel.placeholder = @"请输入场景名";
+        if(nameTextFiel.text)
+        {
+            Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
+            scene.sceneName = nameTextFiel.text;
+            
+            [[SceneManager defaultManager] favoriteScenen:scene withName:self.favorSceneName.text];
+           
 
+        }
+       
+    }];
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:action1];
+    [alert addAction:action2];
+    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.textColor = [UIColor blackColor];
+        textField.placeholder = @"场景名";
+    }];
+    [self presentViewController:alert animated:YES completion:nil];
+
+
+
+}
 - (IBAction)sureFavorScence:(id)sender {
     
     if ([self.favorSceneName.text isEqualToString:@""]) {
@@ -298,7 +325,7 @@
     
     Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
     scene.sceneName = self.favorSceneName.text;
-    scene.sceneID = [self.favorSeneID.text intValue];
+   // scene.sceneID = [self.favorSeneID.text intValue];
     [[SceneManager defaultManager] favoriteScenen:scene withName:self.favorSceneName.text];
     self.favorView.hidden = YES;
     self.storeNewScene.hidden = YES;
