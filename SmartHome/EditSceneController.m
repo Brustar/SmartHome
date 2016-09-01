@@ -52,7 +52,7 @@
 @end
 
 
-@interface EditSceneController ()<UITableViewDelegate,UITableViewDataSource,UIPopoverControllerDelegate,UINavigationControllerDelegate>
+@interface EditSceneController ()<UITableViewDelegate,UITableViewDataSource,UIPopoverControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITableView *subDeviceTableView;
 
@@ -80,6 +80,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *favorSceneName;
 @property (nonatomic,strong)UIImage *selectSceneImg;
 @property (weak, nonatomic) IBOutlet UITextField *storeNewSceneName;
+@property (weak, nonatomic) IBOutlet UITextField *favorSeneID;
 @property (weak, nonatomic) UIViewController *currentViewController;
 @end
 
@@ -276,6 +277,7 @@
     UIAlertAction *favScene = [UIAlertAction actionWithTitle:@"收藏场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         self.favorView.hidden = NO;
+       
         
         [self.view bringSubviewToFront:self.devicelView];
     }];
@@ -295,6 +297,8 @@
     }
     
     Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
+    scene.sceneName = self.favorSceneName.text;
+    scene.sceneID = [self.favorSeneID.text intValue];
     [[SceneManager defaultManager] favoriteScenen:scene withName:self.favorSceneName.text];
     self.favorView.hidden = YES;
     self.storeNewScene.hidden = YES;

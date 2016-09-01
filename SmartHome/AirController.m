@@ -189,7 +189,7 @@
         oldCell.accessoryType = UITableViewCellAccessoryNone;
     }
     self.currentIndex=(int)indexPath.row;
-    uint8_t cmd=0x00;
+    uint8_t cmd=0;
     if (self.currentButton == mode) {
         self.currentMode = self.currentIndex+1;
         if (self.currentIndex==0) {

@@ -168,7 +168,7 @@
     }
     
     if (tag==0) {
-        if (proto.action.state == 0x02 || proto.action.state == 0x03 || proto.action.state == 0x04) {
+        if (proto.action.state == PROTOCOL_VOLUME_UP || proto.action.state == PROTOCOL_DOWN || proto.action.state == PROTOCOL_MUTE) {
             self.volume.value=proto.action.RValue/100.0;
         }
     }

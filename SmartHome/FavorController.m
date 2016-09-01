@@ -2,115 +2,65 @@
 //  FavorController.m
 //  SmartHome
 //
-//  Created by Brustar on 16/7/5.
+//  Created by 逸云科技 on 16/8/31.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
 #import "FavorController.h"
-
+#import "Scene.h"
+#import "ScenseCell.h"
+#import "SceneManager.h"
 @interface FavorController ()
-
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (nonatomic,strong) NSArray *scens;
+@property (nonatomic,assign )int selectID;
 @end
 
 @implementation FavorController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     self.title = @"我的收藏";
-    [self loadScene];
+    self.scens = [SceneManager getFavorScene];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    
 }
-
-- (void)loadScene;
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    self.favors=[NSMutableArray new];
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath] ;
-    if (![db open]) {
-        NSLog(@"Could not open db.");
-        
-    }
-    
-    FMResultSet *resultSet = [db executeQueryWithFormat:@"select * from Scenes where isFavorite = 1"];
-    while([resultSet next])
-    {
-        /*
-        Scene *scene = [Scene new];
-        scene.sceneID = [[resultSet stringForColumn:@"sceneID"] intValue];
-        scene.roomID = [resultSet intForColumn:@"roomID"];
-        scene.picID = [[resultSet stringForColumn:@"picID"] intValue];
-        scene.houseID = [resultSet boolForColumn:@"houseID"];
-        */
-        [self.favors addObject:[resultSet stringForColumn:@"name"]];
-    }
-    [self.tableView reloadData];
-    [db closeOpenResultSets];
-    [db close];
-}
-
-#pragma mark - Table view data source
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.favors.count;
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.scens.count;
 }
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
-    cell.textLabel.text=[self.favors objectAtIndex:indexPath.row];
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    ScenseCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    
+    Scene *scene = self.scens[indexPath.row];
+    cell.scenseName.text = scene.sceneName;
+    
     return cell;
+}
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    Scene *scene = self.scens[indexPath.row];
+    self.selectID = scene.sceneID;
+    [self performSegueWithIdentifier:@"favorSegue" sender:self];
     
 }
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+        id theSegue = segue.destinationViewController;
+        
+        [theSegue setValue:[NSNumber numberWithInt:self.selectID] forKey:@"sceneID"];
+//        [theSegue setValue:[NSNumber numberWithInt:self.roomID] forKey:@"roomID"];
+    
+        
+    
 }
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 /*
 #pragma mark - Navigation
 

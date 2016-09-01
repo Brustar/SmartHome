@@ -18,7 +18,6 @@
 		0F180FC31D0E4C7400392F4C /* NetvController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F180FC21D0E4C7400392F4C /* NetvController.m */; };
 		0F180FC61D0E4E5000392F4C /* FMController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F180FC51D0E4E5000392F4C /* FMController.m */; };
 		0F180FC91D0E4E6500392F4C /* GuardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F180FC81D0E4E6500392F4C /* GuardController.m */; };
-		0F1F3BC71D2B601400B2641C /* FavorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F1F3BC61D2B601400B2641C /* FavorController.m */; };
 		0F1F3BCA1D2B85EA00B2641C /* MBProgressHUD+NJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F1F3BC91D2B85EA00B2641C /* MBProgressHUD+NJ.m */; };
 		0F25178A1CFD8C6500491A6C /* PackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F2517891CFD8C6500491A6C /* PackManager.m */; };
 		0F25FE5E1CEB0C0A0063E834 /* SceneList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F25FE5D1CEB0C0A0063E834 /* SceneList.m */; };
@@ -139,6 +138,7 @@
 		F63AE0031D11319C00BE17DC /* FMCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F63AE0021D11319C00BE17DC /* FMCollectionViewCell.m */; };
 		F64111DC1D4F1E6100E8099D /* FixTimeRepeatController.m in Sources */ = {isa = PBXBuildFile; fileRef = F64111DB1D4F1E6100E8099D /* FixTimeRepeatController.m */; };
 		F64487DD1D55BA3C00EF2CFC /* RoomManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F64487DC1D55BA3C00EF2CFC /* RoomManager.m */; };
+		F645BD471D76E3D8005BFB7A /* FavorController.m in Sources */ = {isa = PBXBuildFile; fileRef = F645BD461D76E3D8005BFB7A /* FavorController.m */; };
 		F651640D1D3766C900A6F5FA /* MyEnergyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F651640C1D3766C900A6F5FA /* MyEnergyViewController.m */; };
 		F65164101D37672700A6F5FA /* MyEnergyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F651640F1D37672700A6F5FA /* MyEnergyCell.m */; };
 		F65164141D3780C500A6F5FA /* TVLogoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F65164131D3780C500A6F5FA /* TVLogoCell.m */; };
@@ -223,8 +223,6 @@
 		0F180FC51D0E4E5000392F4C /* FMController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMController.m; sourceTree = "<group>"; };
 		0F180FC71D0E4E6500392F4C /* GuardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuardController.h; sourceTree = "<group>"; };
 		0F180FC81D0E4E6500392F4C /* GuardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuardController.m; sourceTree = "<group>"; };
-		0F1F3BC51D2B601400B2641C /* FavorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavorController.h; sourceTree = "<group>"; };
-		0F1F3BC61D2B601400B2641C /* FavorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavorController.m; sourceTree = "<group>"; };
 		0F1F3BC81D2B85EA00B2641C /* MBProgressHUD+NJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+NJ.h"; sourceTree = "<group>"; };
 		0F1F3BC91D2B85EA00B2641C /* MBProgressHUD+NJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+NJ.m"; sourceTree = "<group>"; };
 		0F2517881CFD8C6500491A6C /* PackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackManager.h; sourceTree = "<group>"; };
@@ -540,6 +538,8 @@
 		F64111DB1D4F1E6100E8099D /* FixTimeRepeatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixTimeRepeatController.m; sourceTree = "<group>"; };
 		F64487DB1D55BA3C00EF2CFC /* RoomManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomManager.h; sourceTree = "<group>"; };
 		F64487DC1D55BA3C00EF2CFC /* RoomManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomManager.m; sourceTree = "<group>"; };
+		F645BD451D76E3D8005BFB7A /* FavorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavorController.h; sourceTree = "<group>"; };
+		F645BD461D76E3D8005BFB7A /* FavorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavorController.m; sourceTree = "<group>"; };
 		F651640B1D3766C900A6F5FA /* MyEnergyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEnergyViewController.h; sourceTree = "<group>"; };
 		F651640C1D3766C900A6F5FA /* MyEnergyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEnergyViewController.m; sourceTree = "<group>"; };
 		F651640E1D37672700A6F5FA /* MyEnergyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEnergyCell.h; sourceTree = "<group>"; };
@@ -815,10 +815,10 @@
 				F65DB33C1D2B5AB2002A815C /* RegisterDetailController.m */,
 				0F4B3BFE1D2A13870002E75E /* MSGController.h */,
 				0F4B3BFF1D2A13870002E75E /* MSGController.m */,
+				F645BD451D76E3D8005BFB7A /* FavorController.h */,
+				F645BD461D76E3D8005BFB7A /* FavorController.m */,
 				F65838D81D3A2A43004210AC /* MsgCell.h */,
 				F65838D91D3A2A43004210AC /* MsgCell.m */,
-				0F1F3BC51D2B601400B2641C /* FavorController.h */,
-				0F1F3BC61D2B601400B2641C /* FavorController.m */,
 				F65AF6D21D3370770048A4E5 /* ProfieFaultsViewController.h */,
 				F65AF6D31D3370770048A4E5 /* ProfieFaultsViewController.m */,
 				F65AF6D81D3375700048A4E5 /* ProfieFaultsCell.h */,
@@ -1601,7 +1601,6 @@
 				F651640D1D3766C900A6F5FA /* MyEnergyViewController.m in Sources */,
 				0F477FC61D2F94B3004FA361 /* NetStatusManager.m in Sources */,
 				0FEE12761D20C53400811947 /* TXHRulerScrollView.m in Sources */,
-				0F1F3BC71D2B601400B2641C /* FavorController.m in Sources */,
 				0FCFB38F1CF293B300B37DD3 /* Radio.m in Sources */,
 				0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */,
 				0FCAA40C1D1945BB00C1E58C /* BgMusicController.m in Sources */,
@@ -1697,6 +1696,7 @@
 				F65DB3421D2B5AB2002A815C /* RegisterPhoneNumController.m in Sources */,
 				F6359AFB1CFFBC910035EB31 /* DetailTableViewCell.m in Sources */,
 				F65838DA1D3A2A43004210AC /* MsgCell.m in Sources */,
+				F645BD471D76E3D8005BFB7A /* FavorController.m in Sources */,
 				0FB42E231CF6F9E8007DE64F /* SocketManager.m in Sources */,
 				F64487DD1D55BA3C00EF2CFC /* RoomManager.m in Sources */,
 				0FCFB3861CF2912700B37DD3 /* TV.m in Sources */,

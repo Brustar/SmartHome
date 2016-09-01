@@ -299,7 +299,7 @@
                 int sType = [sceneInfoDic[@"sType"] intValue];
                 NSString *sNumber = sceneInfoDic[@"sNumber"];
                 NSString *urlImage = sceneInfoDic[@"urlImage"];
-                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,'%@')",sId,sName,rName,urlImage,rId,sType,sNumber];
+                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,'%@',%d)",sId,sName,rName,urlImage,rId,sType,sNumber,0];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {

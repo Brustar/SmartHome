@@ -124,7 +124,7 @@
     NSNotification * notice = (NSNotification *)sender;
     NSDictionary *dic= [notice userInfo];
     int state = [dic[@"state"] intValue];
-    if (state == 0x00 || state == 0x01) {
+    if (state == PROTOCOL_OFF || state == PROTOCOL_ON) {
         self.detailCell.power.on = (bool)state;
     }
     if (state == 0x0a) {
