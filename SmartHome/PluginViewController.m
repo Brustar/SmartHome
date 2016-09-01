@@ -124,4 +124,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)dealloc
+{
+    [[SocketManager defaultManager] cutOffSocket];
+}
+
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RfX-cu-vkU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="mdZ-A8-8hK">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -230,12 +230,26 @@
                                     <action selector="changeLockState:" destination="mdZ-A8-8hK" eventType="valueChanged" id="moH-bD-X64"/>
                                 </connections>
                             </switch>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tYD-4k-7T5">
+                                <rect key="frame" x="274" y="279" width="32" height="30"/>
+                                <state key="normal" title="start"/>
+                                <connections>
+                                    <action selector="start:" destination="mdZ-A8-8hK" eventType="touchUpInside" id="7tf-Nn-Pyu"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kdz-mb-ZfG">
+                                <rect key="frame" x="292" y="355" width="214" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="deviceLabel" destination="j8A-wT-ZZd" id="5VM-cr-NUg"/>
                         <outlet property="myLabel" destination="tcO-hr-fB2" id="x2o-bs-UsG"/>
+                        <outlet property="myLocatoinInfo" destination="Kdz-mb-ZfG" id="yAC-vv-1yM"/>
                         <outlet property="powerSwitch" destination="udo-sr-pK1" id="tnh-Kw-iFo"/>
                         <outlet property="volumeLabel" destination="14e-S8-kZe" id="kpw-M8-fOw"/>
                     </connections>

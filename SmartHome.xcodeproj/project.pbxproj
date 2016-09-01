@@ -43,6 +43,8 @@
 		0F477FC61D2F94B3004FA361 /* NetStatusManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F477FC51D2F94B3004FA361 /* NetStatusManager.m */; };
 		0F4B3C001D2A13870002E75E /* MSGController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4B3BFF1D2A13870002E75E /* MSGController.m */; };
 		0F4B49801CFEB13500D93DD2 /* CurtainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4B497F1CFEB13500D93DD2 /* CurtainController.m */; };
+		0F6AB86F1D782D9D0041E39C /* SunCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6AB86C1D782D9D0041E39C /* SunCount.m */; };
+		0F6AB8701D782D9D0041E39C /* SunString.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6AB86E1D782D9D0041E39C /* SunString.m */; };
 		0F7E2E161D581AC400A47D5D /* UITest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F7E2E151D581AC400A47D5D /* UITest.storyboard */; };
 		0F91AA171CDC798700094C25 /* PrintObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F91AA161CDC798700094C25 /* PrintObject.m */; };
 		0F96A1641D17F37C00E1594F /* RulerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F96A15D1D17F37C00E1594F /* RulerItem.m */; };
@@ -356,6 +358,10 @@
 		0F4B3BFF1D2A13870002E75E /* MSGController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGController.m; sourceTree = "<group>"; };
 		0F4B497E1CFEB13500D93DD2 /* CurtainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurtainController.h; sourceTree = "<group>"; };
 		0F4B497F1CFEB13500D93DD2 /* CurtainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurtainController.m; sourceTree = "<group>"; };
+		0F6AB86B1D782D9D0041E39C /* SunCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SunCount.h; sourceTree = "<group>"; };
+		0F6AB86C1D782D9D0041E39C /* SunCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SunCount.m; sourceTree = "<group>"; };
+		0F6AB86D1D782D9D0041E39C /* SunString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SunString.h; sourceTree = "<group>"; };
+		0F6AB86E1D782D9D0041E39C /* SunString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SunString.m; sourceTree = "<group>"; };
 		0F7E2E151D581AC400A47D5D /* UITest.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UITest.storyboard; sourceTree = "<group>"; };
 		0F91AA151CDC798700094C25 /* PrintObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintObject.h; sourceTree = "<group>"; };
 		0F91AA161CDC798700094C25 /* PrintObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintObject.m; sourceTree = "<group>"; };
@@ -742,6 +748,7 @@
 		0F032D461CC9B12700D1920D /* SmartHome */ = {
 			isa = PBXGroup;
 			children = (
+				0F6AB86A1D782D9D0041E39C /* Astronomy */,
 				0FD3DEA61D3F181000AF7765 /* SCWave */,
 				0F2D35D91D11512100C46DE5 /* FFmpeg-iOS */,
 				0F2D35B51D114E3A00C46DE5 /* FFMpegDecoder */,
@@ -1132,6 +1139,17 @@
 			);
 			name = storeboard;
 			sourceTree = "<group>";
+		};
+		0F6AB86A1D782D9D0041E39C /* Astronomy */ = {
+			isa = PBXGroup;
+			children = (
+				0F6AB86B1D782D9D0041E39C /* SunCount.h */,
+				0F6AB86C1D782D9D0041E39C /* SunCount.m */,
+				0F6AB86D1D782D9D0041E39C /* SunString.h */,
+				0F6AB86E1D782D9D0041E39C /* SunString.m */,
+			);
+			path = Astronomy;
+			sourceTree = SOURCE_ROOT;
 		};
 		0FAF74AE1CEEA16700432713 /* HRColorPicker */ = {
 			isa = PBXGroup;
@@ -1597,6 +1615,7 @@
 				0FEE12761D20C53400811947 /* TXHRulerScrollView.m in Sources */,
 				0FCFB38F1CF293B300B37DD3 /* Radio.m in Sources */,
 				0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */,
+				0F6AB8701D782D9D0041E39C /* SunString.m in Sources */,
 				0FCAA40C1D1945BB00C1E58C /* BgMusicController.m in Sources */,
 				0FAF74C51CEEA17C00432713 /* HRHSVColorUtil.m in Sources */,
 				0FBEFE2A1D24F0C10084244F /* WebManager.m in Sources */,
@@ -1693,6 +1712,7 @@
 				F645BD471D76E3D8005BFB7A /* FavorController.m in Sources */,
 				0FB42E231CF6F9E8007DE64F /* SocketManager.m in Sources */,
 				F64487DD1D55BA3C00EF2CFC /* RoomManager.m in Sources */,
+				0F6AB86F1D782D9D0041E39C /* SunCount.m in Sources */,
 				0FCFB3861CF2912700B37DD3 /* TV.m in Sources */,
 				F65B7D271D34E9E00059CFA4 /* MySettingViewController.m in Sources */,
 				F69C82301D35D214002DE6D7 /* PushSettingController.m in Sources */,

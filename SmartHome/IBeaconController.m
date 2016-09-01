@@ -18,6 +18,7 @@
 #import "VolumeManager.h"
 #import "AudioManager.h"
 #import "AppDelegate.h"
+#import "SunCount.h"
 
 @implementation IBeaconController
 
@@ -46,7 +47,33 @@
     
     NSURL *url=[NSURL URLWithString:@"http://e-cloudcn.com/img/cj_kt.jpg"];
     [self.imagev setImageWithURL:url];
+    
+    
+    if ([CLLocationManager locationServicesEnabled]) {
+        self.lm = [[CLLocationManager alloc]init];
+        self.lm.delegate = self;
+        // 最小距离
+        self.lm.distanceFilter=kCLDistanceFilterNone;
+    }else{
+        NSLog(@"定位服务不可利用");
+    }
 
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+    didUpdateToLocation:(CLLocation *)newLocation
+           fromLocation:(CLLocation *)oldLocation{
+    self.myLocatoinInfo.text = [NSString stringWithFormat:@"[%f,%f]",newLocation.coordinate.latitude,newLocation.coordinate.longitude];
+    [SunCount sunrisetWithLongitude:newLocation.coordinate.longitude andLatitude:newLocation.coordinate.latitude
+                        andResponse:^(SunString *str){
+                            NSLog(@"%@,%@",str.sunrise,str.sunset);
+                        }];
+}
+
+- (IBAction)start:(id)sender {
+    if (self.lm!=nil) {
+        [self.lm startUpdatingLocation];
+    }
 }
 
 //监听到网络状态改变
