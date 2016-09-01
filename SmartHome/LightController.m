@@ -9,11 +9,11 @@
 #import "LightController.h"
 #import "PackManager.h"
 #import "SocketManager.h"
-#import "ProtocolManager.h"
 #import "DeviceManager.h"
 #import "Device.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
+
 @interface LightController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *favButt;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;

@@ -11,7 +11,6 @@
 #import "Aircon.h"
 #import "RulerView.h"
 #import "SocketManager.h"
-#import "ProtocolManager.h"
 #import "PackManager.h"
 #import "DeviceManager.h"
 

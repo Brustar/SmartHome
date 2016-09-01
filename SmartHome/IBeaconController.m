@@ -12,7 +12,6 @@
 #import "NetStatusManager.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
-#import "ProtocolManager.h"
 #import "UIImageView+AFNetworking.h"
 #import "RegexKitLite.h"
 #import "IbeaconManager.h"
@@ -331,11 +330,6 @@
     pro.action.state=5;
     pro.action.RValue=1;
     NSLog(@"pro:%@",dataFromProtocol(pro));
-    
-    ProtocolManager *protos = [ProtocolManager defaultManager];
-    [protos fetchAll];
-    [protos trace];
-    
     
     int tmp1 = 1;
     int tmp2 = CFSwapInt32BigToHost(tmp1);
