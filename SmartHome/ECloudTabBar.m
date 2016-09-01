@@ -159,7 +159,8 @@
     if ([self.delegate respondsToSelector:@selector(tabBarDidSelectButtonWithType:subType:)]) {
         [self.delegate tabBarDidSelectButtonWithType:button.type subType:button.subType];
     }
-    
+    button.selected = YES;
+    self.selectButton.selected = NO;
     self.selectButton = button;
 }
 - (void)layoutSubviews

@@ -62,20 +62,11 @@
         if([responseObject[@"Result"] intValue] == 0)
         {
             [MBProgressHUD showSuccess:@"场景保存成功"];
-            AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-            
-            ScenseController *sv = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ScenseController"];
-            
-            appDelegate.window.rootViewController = sv.navigationController;
-            [appDelegate.window makeKeyWindow];
-            
             
        }
             else{
             [MBProgressHUD showError: responseObject[@"Msg"]];
-                AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-                appDelegate.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ScenseController"];
-                [appDelegate.window makeKeyWindow];
+               
        }
     }
 }
@@ -610,10 +601,57 @@
     BOOL isSuccess = false;
     if([db open])
     {
-        isSuccess = [db executeQueryWithFormat:@"delete from Scenes where ID = %d",sceneId];
+        isSuccess = [db executeUpdateWithFormat:@"delete from Scenes where ID = %d",sceneId];
         [db close];
     }
     return isSuccess;
 
+}
+//根据房间ID获取该房间所有的场景
++(NSArray *)getScensByRoomId:(int)roomId
+{
+    NSMutableArray *scens = [NSMutableArray array];
+    
+      
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+        
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    if([db open])
+    {
+        FMResultSet *resultSet = [db executeQueryWithFormat:@"select * from Scenes where rId = %d",roomId];
+        while ([resultSet next]) {
+            Scene *scene = [Scene new];
+            scene.sceneName = [resultSet stringForColumn:@"NAME"];
+            scene.sceneID = [resultSet intForColumn:@"ID"];
+            scene.picName = [resultSet stringForColumn:@"pic"];
+            scene.roomName = [resultSet stringForColumn:@"roomName"];
+            [scens addObject:scene];
+        }
+    }
+    
+    
+    return [scens copy];
+    
+    
+    
+}
+//得到数据库中所有的场景ID
++(NSArray *)getAllSceneIdsFromSql
+{
+    NSMutableArray *sceneIds = [NSMutableArray array];
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    if([db open])
+    {
+        NSString *sql = @"select ID from Scenes";
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next]) {
+            int scendID = [resultSet intForColumn:@"ID"];
+            [sceneIds addObject: [NSNumber numberWithInt:scendID]];
+        }
+        [db close];
+    }
+    return [sceneIds copy];
 }
 @end

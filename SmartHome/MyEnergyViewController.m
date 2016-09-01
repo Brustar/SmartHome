@@ -35,6 +35,7 @@
 //选择设备能耗属性
 @property (weak, nonatomic) IBOutlet UITableView *selectedDeviceTableView;
 @property (nonatomic,strong) NSArray *deviceType;
+@property (nonatomic,strong) NSMutableArray *deviceIDs;
 @property (nonatomic,strong) NSArray *subDevice;
 @property (nonatomic,strong) NSArray *devicesInfo;
 
@@ -109,7 +110,14 @@
     self.deviceType = [DeviceManager getAllDeviceSubTypes];
     
     self.selectedDeviceTableView.hidden = YES;
+    self.deviceIDs = [NSMutableArray array];
     
+    for (NSString *subName in self.deviceType) {
+        NSArray *subNameID = [DeviceManager getDeviceIDBySubName:subName];
+        [self.deviceIDs addObject:subNameID];
+    }
+    
+    self.selectedDeviceTableView.hidden = YES;
     
 }
 
@@ -123,18 +131,22 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-//    if(tableView == self.selectedDeviceTableView)
-//    {
-//        return self.deviceType.count + 1;
-//    }
+    if(tableView == self.selectedDeviceTableView)
+    {
+        return self.deviceType.count + 1;
+    }
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    if(tableView == self.selectedDeviceTableView)
-//    {
-//        return 1;
-//    }
+    if(tableView == self.selectedDeviceTableView)
+    {
+        if(section == 0)
+        {
+            return 0;
+        }
+        return 1;
+    }
     return self.enegers.count;
 
 }
@@ -191,33 +203,30 @@
         if(!cell)
         {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-            if(indexPath.section == 0)
-            {
-                NSArray *arrry = @[@"全部设备"];
-                [self setButtnonInCell:cell andSubDevie:arrry];
-            }else{
-                NSString *typeName = self.deviceType[indexPath.section -1];
-                NSArray *deviceNames = [DeviceManager getAllDeviceNameBysubType:typeName];
-                [self setButtnonInCell:cell andSubDevie:deviceNames];
-            }
-            
-        
+        }
+        if(indexPath.section != 0)
+        {
+            [self setButtnonInCell:cell deviceIDs:self.deviceIDs[indexPath.section - 1]];
         }
         
         return cell;
+
     }
 
 
  
 }
--(void)setButtnonInCell:(UITableViewCell *)cell andSubDevie:(NSArray *)devices;
+-(void)setButtnonInCell:(UITableViewCell *)cell deviceIDs:(NSArray *)deviceIDs;
 {
     CGFloat viewW = CellItemViewWidth;
     CGFloat viewH = CellItemViewHeight;
     CGFloat startX = 10;
     CGFloat marginX = (cell.frame.size.width - CellItemCol * viewW - 2 * startX)/(CellItemCol-1);
     CGFloat marginY = 10;
-    int count = (int)devices.count;
+    int count = (int)deviceIDs.count;
+    
+    int viewCount = (int)cell.contentView.subviews.count;
+    
     for(int i = 0; i < count; i++)
     {
         int row = i / CellItemCol;
@@ -226,31 +235,76 @@
         CGFloat orignX = startX +(marginX + viewW) * loc;
         CGFloat orignY = marginY +(marginY + viewH) * row;
         
-        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(orignX, orignY, viewW, viewH)];
-        view.userInteractionEnabled = YES;
-        //view.backgroundColor = [UIColor redColor];
-        [cell.contentView addSubview:view];
+        UIView *view = nil;
+        UIImageView *img = nil;
+        UIButton *btn = nil;
         
-        //创建View的子视图
-        UIImageView *img = [[UIImageView alloc]initWithFrame:CGRectMake(0,10, 30, 30)];
+        if ( i < viewCount )
+        {
+            view = cell.contentView.subviews[i];
+            
+            img = view.subviews[0];
+            
+            btn = view.subviews[1];
+        }
+        else
+        {
+            view = [[UIView alloc] init];
+            view.userInteractionEnabled = YES;
+            [cell.contentView addSubview:view];
+            
+            img = [[UIImageView alloc]initWithFrame:CGRectMake(0,10, 30, 30)];
+            [view addSubview:img];
+            
+            btn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [btn addTarget:self action:@selector(goToEngerOfDevice:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [view addSubview:btn];
+        }
+        
+        view.frame = CGRectMake(orignX, orignY, viewW, viewH);
+        
         img.image = [UIImage imageNamed:@"placeholder"];
         [img setContentMode:UIViewContentModeScaleAspectFit];
-        [view addSubview:img];
         
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         
         btn.frame = CGRectMake(30, 10, 80, 30);
-        [btn setTitle:devices[i] forState:UIControlStateNormal];
-        NSInteger eId = [DeviceManager deviceIDByDeviceName:devices[i]];
-        btn.tag = eId;
-        [btn addTarget:self action:@selector(goToEngerOfDevice:) forControlEvents:UIControlEventTouchUpInside];
+        NSString *title = [DeviceManager getNameWithID:[deviceIDs[i] intValue]];
+        [btn setTitle:title forState:UIControlStateNormal];
+        btn.tag = [deviceIDs[i] intValue];
         
-        [view addSubview:btn];
+        view.hidden = NO;
     }
     
+    for (int i = count; i < cell.contentView.subviews.count; i++) {
+        UIView *view = cell.contentView.subviews[i];
+        view.hidden = YES;
+    }
 }
 
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if(tableView == self.selectedDeviceTableView)
+    {
+        UIView *view = [[UIView alloc]init];
+        view.backgroundColor = [UIColor lightGrayColor];
+        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 10, view.bounds.size.width, view.bounds.size.height)];
+        if(section == 0)
+        {
+            [button setTitle:@"全部设备" forState:UIControlStateNormal];
+        }else {
+            [button setTitle:self.deviceType[section -1] forState:UIControlStateNormal];
+            
+
+        }
+
+        [view addSubview:button];
+        return view;
+    }
+    return nil;
+   
+}
 
 -(void)goToEngerOfDevice:(UIButton *)btn
 {
@@ -276,30 +330,22 @@
         {
             return 44;
         }
-        NSString *typeName = self.deviceType[indexPath.section];
-        NSArray *deviceNames = [DeviceManager getAllDeviceNameBysubType:typeName];
-        return [self tableViewCellHeight:deviceNames.count];
+        return [self tableViewCellHeight:[self.deviceIDs[indexPath.section - 1] count]];
+
     }
     return 44;
     
 }
 
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    if(tableView == self.selectedDeviceTableView)
-    {
-        if(section == 0)
-        {
-            return nil;
-        }else {
-            return self.deviceType[section];
-
-        }
-        
-    }
-    
-    return nil;
-}
+//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+//{
+//    if(tableView == self.selectedDeviceTableView)
+//    {
+//        
+//    }
+//    
+//    return nil;
+//}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

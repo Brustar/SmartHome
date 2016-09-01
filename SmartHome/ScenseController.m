@@ -64,7 +64,15 @@
     
     [self reachNotification];
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    
+    self.scenes = [SceneManager getScensByRoomId:self.roomID];
+    [self setUpSceneButton];
+    [self judgeScensCount:self.scenes];
+    [self.collectionView reloadData];
+}
 
 -(void)setUpSceneButton
 {
@@ -89,7 +97,7 @@
         Scene *scene = self.scenes[0];
         self.firstButton.tag = scene.sceneID;
         self.firstPowerBtn.tag = scene.sceneID;
-                [self.firstButton setTitle:scene.sceneName forState:UIControlStateNormal];
+        [self.firstButton setTitle:scene.sceneName forState:UIControlStateNormal];
         UIImage *image = [self getImgByUrl:scene.picName];
         [self.firstButton setBackgroundImage:image forState:UIControlStateNormal];
         Scene *scondScene = self.scenes[1];
@@ -118,7 +126,8 @@
     
     self.roomID = [dict[@"subType"] intValue];
     
-    self.scenes = [SceneManager getAllSceneWithRoomID:self.roomID];
+    self.scenes = [SceneManager getScensByRoomId:self.roomID];
+   
     [self setUpSceneButton];
     [self judgeScensCount:self.scenes];
     
@@ -227,7 +236,17 @@
     
     Scene *scene = self.collectionScenes[indexPath.row];
     cell.scenseName.text = scene.sceneName;
-    cell.backgroundColor = [UIColor colorWithPatternImage:[self getImgByUrl:scene.picName]];
+    //cell.backgroundColor = [UIColor colorWithPatternImage:[self getImgByUrl:scene.picName]];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        NSData * data = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:scene.sceneName]];
+        UIImage *image = [[UIImage alloc]initWithData:data];
+        if (data != nil) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                 cell.backgroundView = [[UIImageView alloc]initWithImage:image];
+            });
+        }
+    });
     cell.powerBtn.tag = scene.sceneID;
    
    

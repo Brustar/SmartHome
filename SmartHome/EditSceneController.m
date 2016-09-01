@@ -101,11 +101,14 @@
 
 - (void)setupData
 {
-    self.devices = [DeviceManager getDeviceWithRoomID:self.roomID sceneID:self.sceneID];
+   // self.devices = [DeviceManager getDeviceWithRoomID:self.roomID sceneID:self.sceneID];
     
-    self.devicesTypes = [DeviceManager getDeviceSubTypeNameWithRoomID:self.roomID sceneID:self.sceneID];
     
-    self.subTypeArr = [DeviceManager getDeviceTypeNameWithRoomID:self.roomID sceneID:self.sceneID subTypeName:self.devicesTypes[0]];
+    //self.devicesTypes = [DeviceManager getDeviceSubTypeNameWithRoomID:self.roomID sceneID:self.sceneID];
+    self.devicesTypes = [DeviceManager getSubTydpeBySceneID:self.sceneID];
+    
+    //self.subTypeArr = [DeviceManager getDeviceTypeNameWithRoomID:self.roomID sceneID:self.sceneID subTypeName:self.devicesTypes[0]];
+    self.subTypeArr = [DeviceManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.devicesTypes[0]];
     
     [self.tableView reloadData];
     [self.subDeviceTableView reloadData];
@@ -149,7 +152,8 @@
     if(tableView == self.tableView)
     {
         
-    self.subTypeArr =  [DeviceManager getDeviceTypeNameWithRoomID:self.roomID sceneID:self.sceneID subTypeName:self.devicesTypes[indexPath.row]];
+   // self.subTypeArr =  [DeviceManager getDeviceTypeNameWithRoomID:self.roomID sceneID:self.sceneID subTypeName:self.devicesTypes[indexPath.row]];
+     self.subTypeArr = [DeviceManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.devicesTypes[indexPath.row]];
     [self.subDeviceTableView reloadData];
     }
     if(tableView == self.subDeviceTableView)
@@ -380,9 +384,12 @@
          if([responseObject[@"Result"] intValue] == 0)
          {
              [MBProgressHUD showSuccess:@"场景删除成功"];
-             [SceneManager deleteScene:self.sceneID];
+             
 
+         }else{
+             [MBProgressHUD showError:responseObject[@"Msg"]];
          }
+        
         [self.navigationController popViewControllerAnimated:YES];
     }
     
@@ -396,7 +403,8 @@
 
 - (IBAction)deleteScene:(UIBarButtonItem *)sender {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"确定删除吗" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *sureAction =  [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction *sureAction =  [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [SceneManager deleteScene:self.sceneID];
         
         Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
         [[SceneManager defaultManager] delScenen:scene];

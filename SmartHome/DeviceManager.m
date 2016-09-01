@@ -113,7 +113,22 @@
     }
     return typeName;
 }
-
++ (NSString *)getNameWithID:(int)eId
+{
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    NSString *typeName = nil;
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT NAME FROM Devices where ID = %d",eId];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            typeName = [resultSet stringForColumn:@"NAME"];
+        }
+    }
+    return typeName;
+}
 
 +(Device*)deviceMdoelByFMResultSet:(FMResultSet *)resultSet
 {
@@ -414,7 +429,7 @@
 
 +(bool) getReadOnly:(int)sceneid
 {
-    NSString *sql=[NSString stringWithFormat:@"select readonly from Scenes where id=%d" ,sceneid];
+    NSString *sql=[NSString stringWithFormat:@"select stype from Scenes where id=%d" ,sceneid];
     NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
     bool readonly=false;
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
@@ -424,7 +439,7 @@
         
         if([resultSet next])
         {
-            readonly = [resultSet boolForColumn:@"readonly"];
+            readonly = [resultSet boolForColumn:@"stype"];
         }
     }
     [db close];
@@ -443,7 +458,7 @@
         
         if([resultSet next])
         {
-            snumber = [resultSet stringForColumn:@"readonly"];
+            snumber = [resultSet stringForColumn:@"snumber"];
         }
     }
     [db close];
@@ -510,8 +525,8 @@
         {
             sceneID = [resultSet intForColumn:@"ID"]+1;
         }
-        //2表示是自定义的场景，1表示是默认场景
-        sql=[NSString stringWithFormat:@"insert into Scenes values(%d,'%@',null,'%@',null,'%@',null,null,null,null,%d,%d)",sceneID,name,img,eIdStr,scene.roomID,2];
+        
+        sql=[NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,null)",sceneID,name,scene.roomName,img,scene.roomID,2];
         [db executeUpdate:sql];
     }
     [db close];
@@ -555,7 +570,29 @@
 +(NSArray *)getAllDeviceSubTypes
 {
     NSMutableArray *subTypeNames = [NSMutableArray array];
-    NSArray *deviceIDs = [self getAllDevicesIds];
+    NSMutableArray *deviceIDArr = [NSMutableArray array];
+    
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    
+    if([db open])
+    {
+        NSString *sql = @"SELECT ID FROM Devices";
+        
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+            int deviceID = [resultSet intForColumn:@"ID"];
+            
+            [deviceIDArr addObject:[NSNumber numberWithInt:deviceID]];
+        }
+    }
+    
+    if (deviceIDArr.count < 1) {
+        return nil;
+    }
+
+    NSArray *deviceIDs = [deviceIDArr copy];
     for(NSString *deviceID in deviceIDs)
     {
         NSString *subTypeName = [self getDeviceSubTypeNameWithID:[deviceID intValue]];
@@ -788,7 +825,136 @@
         }
     }
     
-    return typeName;}
+    return typeName;
+}
 
++ (NSArray *)getDeviceIDBySubName:(NSString *)subName
+{
+    NSMutableArray *subNames = [NSMutableArray array];
+    
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where subTypeName = '%@'", subName];
+        
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+            NSString *ID = [resultSet stringForColumn:@"ID"];
+            [subNames addObject:ID];
+        }
+    }
+    
+    if (subNames.count < 1) {
+        return nil;
+    }
+    
+    return [subNames copy];
+}
 
+//根据场景ID得到改场景下的所有的设备ID
++(NSArray *)getDeviceIDsBySeneId:(int)SceneId;
+{
+    NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,SceneId];
+    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+    NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfFile:scenePath];
+    if(dictionary)
+    {
+        NSMutableArray *deviceIds=[[NSMutableArray alloc] init];
+        for (NSDictionary *dic in [dictionary objectForKey:@"devices"])
+        {
+            int deviceID;
+        
+            if([dic objectForKey:@"deviceID"])
+            {
+                deviceID = [dic[@"deviceID"] intValue];
+               
+            }
+            [deviceIds addObject:[NSNumber numberWithInt:deviceID]];
+            
+        }
+        return [deviceIds copy];
+    }else{
+        return nil;
+    }
+    
+}
+//根据场景ID，得到该场景下的所有设备SubTypeName
++(NSArray *)getSubTydpeBySceneID:(int)sceneId
+{
+    NSMutableArray *subTypeNames = [NSMutableArray array];
+
+    NSArray *deviceIDs = [self getDeviceIDsBySeneId:sceneId];
+    for(NSNumber *deviceID in deviceIDs)
+    {
+        if(deviceID)
+        {
+            NSString *subTypeName = [self getDeviceSubTypeNameWithID:[deviceID intValue]];
+            if(subTypeName)
+            {
+                BOOL isSame = false;
+                for(NSString *tempSubTypeName in subTypeNames) {
+                    if ([tempSubTypeName isEqualToString:subTypeName]) {
+                        isSame = true;
+                        break;
+                    }
+                }
+                if (isSame) {
+                    continue;
+                }
+                
+                [subTypeNames addObject:subTypeName];
+
+            }
+        }
+    }
+    if(subTypeNames.count < 1)
+    {
+        return nil;
+    }
+    return [subTypeNames copy];
+}
+//根据场景ID，得到该场景下的设备子类
++(NSArray *)getDeviceTypeNameWithScenID:(int)sceneId subTypeName:(NSString *)subTypeName
+{
+    NSMutableArray *typeNames = [NSMutableArray array];
+    NSArray *deviceIDs = [self getDeviceIDsBySeneId:sceneId];
+    for(NSString *devcieID in deviceIDs)
+    {
+        if(devcieID)
+        {
+            NSString *typeName = [self getDeviceTypeNameWithID:devcieID subTypeName:subTypeName];
+            if ([typeName isEqualToString:@"开关灯"] || [typeName isEqualToString:@"调色灯"] || [typeName isEqualToString:@"调光灯"]) {
+                typeName = @"灯光";
+            } else if ([typeName isEqualToString:@"开合帘"] || [typeName isEqualToString:@"卷帘"]) {
+                typeName = @"窗帘";
+            }
+            BOOL isSame = false;
+            for (NSString *tempTypeName in typeNames) {
+                if ([tempTypeName isEqualToString:typeName]) {
+                    isSame = true;
+                    break;
+                }
+            }
+            if (isSame) {
+                continue;
+            }
+            if([typeName isEqualToString:@""] || typeName == nil)
+            {
+                continue;
+            }
+            [typeNames addObject:typeName];
+
+            
+        }
+        
+    }
+    if (typeNames.count < 1) {
+        return nil;
+    }
+    
+    return [typeNames copy];
+}
 @end

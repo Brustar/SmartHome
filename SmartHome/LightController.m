@@ -37,7 +37,8 @@
        
            if(self.sceneid > 0)
            {
-            NSArray *lightArr = [DeviceManager getDeviceIDWithRoomID:self.roomID sceneID:[self.sceneid intValue]];
+           // NSArray *lightArr = [DeviceManager getDeviceIDWithRoomID:self.roomID sceneID:[self.sceneid intValue]];
+               NSArray *lightArr = [DeviceManager getDeviceIDsBySeneId:[self.sceneid intValue]];
                for(int i = 0; i <lightArr.count; i++)
                {
                    NSString *typeName = [DeviceManager deviceTypeNameByDeviceID:[lightArr[i] intValue]];
@@ -234,7 +235,7 @@
         return;
     }
     
-    if (tag == 0 && (proto.action.state == 0x00 || proto.action.state == 0x01 || proto.action.state == 0x0b || proto.action.state == 0x0a)) {
+    if (tag == 0 && (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON || proto.action.state == 0x0b || proto.action.state == 0x0a)) {
         NSString *devID=[DeviceManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID) masterID:[[DeviceInfo defaultManager] masterID]];
         if ([devID intValue]==[self.deviceid intValue]) {
             //创建一个消息对象

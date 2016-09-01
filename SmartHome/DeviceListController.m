@@ -216,6 +216,7 @@
     NSString *imgStr = [self UIimageToStr:self.sceneImg];
     
     [[SceneManager defaultManager] addScenen:scene withName:self.sceneName.text withPic:imgStr];
+    [self.navigationController popViewControllerAnimated: YES];
 
 }
 
