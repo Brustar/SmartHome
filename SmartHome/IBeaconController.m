@@ -66,7 +66,7 @@
     self.myLocatoinInfo.text = [NSString stringWithFormat:@"[%f,%f]",newLocation.coordinate.latitude,newLocation.coordinate.longitude];
     [SunCount sunrisetWithLongitude:newLocation.coordinate.longitude andLatitude:newLocation.coordinate.latitude
                         andResponse:^(SunString *str){
-                            NSLog(@"%@,%@",str.sunrise,str.sunset);
+                            NSLog(@"%@,%@,%@,%@",str.dayspring, str.sunrise,str.sunset,str.dusk);
                         }];
 }
 

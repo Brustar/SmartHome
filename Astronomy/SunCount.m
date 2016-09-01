@@ -84,6 +84,26 @@ typedef void(^sunString)(SunString *sunStr);
     }
     sunString.sunrise = [NSString stringWithFormat:@"%@:%@",hourStr,minuteStr];
     
+    
+    int springMin=minute-24;
+    int springHour=hour;
+    if (springMin<0) {
+        springMin+=60;
+        springHour-=1;
+    }
+    
+    if (springHour < 10) {
+        hourStr = [NSString stringWithFormat:@"0%d",springHour];
+    }else {
+        hourStr = [NSString stringWithFormat:@"%d",springHour];
+    }
+    if (springMin < 10) {
+        minuteStr = [NSString stringWithFormat:@"0%d",springMin];
+    }else {
+        minuteStr = [NSString stringWithFormat:@"%d",springMin];
+    }
+    sunString.dayspring = [NSString stringWithFormat:@"%@:%@",hourStr,minuteStr];
+    
     hour = sunCount.sunset+zone;
     minute = (sunCount.sunset - hour+zone)*60;
     if( hour > 24 ) hour -= 24;
@@ -102,6 +122,26 @@ typedef void(^sunString)(SunString *sunStr);
         minuteStr = [NSString stringWithFormat:@"%d",minute];
     }
     sunString.sunset = [NSString stringWithFormat:@"%@:%@",hourStr,minuteStr];
+    
+    
+    int duskMin=minute+24;
+    int duskHour=hour;
+    if (duskMin>=60) {
+        duskMin-=60;
+        duskHour+=1;
+    }
+    
+    if (duskHour < 10) {
+        hourStr = [NSString stringWithFormat:@"0%d",duskHour];
+    }else {
+        hourStr = [NSString stringWithFormat:@"%d",duskHour];
+    }
+    if (duskMin < 10) {
+        minuteStr = [NSString stringWithFormat:@"0%d",duskMin];
+    }else {
+        minuteStr = [NSString stringWithFormat:@"%d",duskMin];
+    }
+    sunString.dusk = [NSString stringWithFormat:@"%@:%@",hourStr,minuteStr];
     
     responseBlock(sunString);
     

@@ -13,5 +13,9 @@
 @property(nonatomic, strong) NSString *sunrise;
 
 @property(nonatomic, strong) NSString *sunset;
+//日出时间与天亮时间差地球自转6°,自转6°的时间=6/360*24*60=24 分钟
+@property(nonatomic, strong) NSString *dayspring;
+
+@property(nonatomic, strong) NSString *dusk;
 
 @end
