@@ -40,9 +40,13 @@
 }
 - (void)setRoomID:(int)roomID
 {
-    _roomID = roomID;
     
-    self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"DVD"];
+    _roomID = roomID;
+    if(roomID)
+    {
+        self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"DVD"];
+    }
+    
     
     
 }

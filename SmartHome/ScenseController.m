@@ -15,8 +15,11 @@
 #import "Scene.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
-
-@interface ScenseController ()<UICollectionViewDelegate,UICollectionViewDataSource,ScenseCellDelegate,UIGestureRecognizerDelegate>
+#import "SearchViewController.h"
+#import "ECSearchView.h"
+#import "RoomManager.h"
+#import "IbeaconManager.h"
+@interface ScenseController ()<UICollectionViewDelegate,UICollectionViewDataSource,ScenseCellDelegate,UIGestureRecognizerDelegate,UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *addSceseBtn;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *netBarBtn;
@@ -38,10 +41,22 @@
 @property (weak, nonatomic) IBOutlet UIView *firstView;
 @property (weak, nonatomic) IBOutlet UIView *secondView;
 
+@property (nonatomic,strong) UISearchController *searchVC;
 
 @end
 
 @implementation ScenseController
+
+
+
+-(UISearchController *)searchVC{
+    if(!_searchVC)
+    {
+        _searchVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SearchViewController"];
+        
+    }
+    return _searchVC;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -51,8 +66,7 @@
     self.firstView.hidden = YES;
     self.secondView.hidden = YES;
 
-   
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     
    
     
@@ -63,7 +77,8 @@
     [self updateInterfaceWithReachability: hostReach];
     
     [self reachNotification];
-}
+    
+    }
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
@@ -292,6 +307,9 @@
 
 - (void)dealloc
 {
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    [device removeObserver:self forKeyPath:@"beacons" context:NULL];
+
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -311,6 +329,16 @@
     [sender setTintColor:[UIColor redColor]];
     [[SceneManager defaultManager] startScene:(int)sender.tag];
 }
+
+
+//搜索功能
+- (IBAction)startSearch:(UIBarButtonItem *)sender {
+
+    
+    [self.navigationController pushViewController:self.searchVC animated:NO];
+    
+}
+
 
 /*
 #pragma mark - Navigation

@@ -115,18 +115,20 @@
 - (void)setRoomID:(int)roomID
 {
     _roomID = roomID;
-    
-    //self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"网络电视"];
-    NSArray *tvArr = [DeviceManager getDeviceIDsBySeneId:[self.sceneid intValue]];
-    for(int i = 0; i <tvArr.count; i++)
-    {
-        NSString *typeName = [DeviceManager deviceTypeNameByDeviceID:[tvArr[i] intValue]];
-        if([typeName isEqualToString:@"网络电视"])
+    if(roomID){
+        //self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"网络电视"];
+        NSArray *tvArr = [DeviceManager getDeviceIDsBySeneId:[self.sceneid intValue]];
+        for(int i = 0; i <tvArr.count; i++)
         {
-            self.deviceid = tvArr[i];
+            NSString *typeName = [DeviceManager deviceTypeNameByDeviceID:[tvArr[i] intValue]];
+            if([typeName isEqualToString:@"网络电视"])
+            {
+                self.deviceid = tvArr[i];
+            }
         }
-    }
 
+    }
+    
     
     //self.deviceid = [DeviceManager getDeviceByTypeName:@"TV" andRoomID:self.roomID];
     

@@ -66,8 +66,11 @@
 - (void)setRoomID:(int)roomID
 {
     _roomID = roomID;
+    if(roomID)
+    {
+        self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"FM"];
+    }
     
-    self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"FM"];
     
     
 }

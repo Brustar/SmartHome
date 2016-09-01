@@ -34,7 +34,11 @@
     self.tableView.dataSource = self;
     self.tableView.scrollEnabled = NO;
     self.title = @"门禁";
-    self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"智能门锁"];
+    if(self.roomID)
+    {
+        self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"智能门锁"];
+
+    }
     
 
     SocketManager *sock=[SocketManager defaultManager];

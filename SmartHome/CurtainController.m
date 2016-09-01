@@ -43,9 +43,11 @@
                 }
             }
 
-        }else{
+        }else if(self.roomID){
             [_curtainIDArr addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"开合帘" andRoomID:self.roomID]];
             [_curtainIDArr addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"卷帘" andRoomID:self.roomID]];
+        }else{
+            [_curtainIDArr addObject:self.deviceid];
         }
         
         

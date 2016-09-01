@@ -265,13 +265,27 @@
         }
         for(NSDictionary *roomDic in roomList)
         {
-            NSString *sql = [NSString stringWithFormat:@"insert into Rooms values(%d,'%@',%@,%@,%@,%@,%@,'%@')",[roomDic[@"rId"] intValue],roomDic[@"rName"],NULL,NULL,NULL,NULL,NULL,roomDic[@"imgUrl"]];
-            BOOL result = [db executeUpdate:sql];
-            if(result)
+            if(roomDic)
             {
-                NSLog(@"insert 成功");
-            }else{
-                NSLog(@"insert 失败");
+                int  ibeacon ;
+                if([roomDic[@"rName"] isEqualToString:@"测试区"])
+                {
+                    ibeacon = 10002;
+                }else if([roomDic[@"rName"] isEqualToString:@"健身房"])
+                {
+                    ibeacon = 10001;
+                }else{
+                    ibeacon = 0;
+                }
+                NSString *sql = [NSString stringWithFormat:@"insert into Rooms values(%d,'%@',null,null,null,null,null,'%@',%d)",[roomDic[@"rId"] intValue],roomDic[@"rName"],roomDic[@"imgUrl"],ibeacon];
+                BOOL result = [db executeUpdate:sql];
+                if(result)
+                {
+                    NSLog(@"insert 成功");
+                }else{
+                    NSLog(@"insert 失败");
+                }
+
             }
         }
     }

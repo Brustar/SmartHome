@@ -49,11 +49,13 @@
                }
                
                
-           }else{
+           }else if(self.roomID > 0){
                [_lIDs addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"开关灯" andRoomID:self.roomID]];
                [_lIDs addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"调光灯" andRoomID:self.roomID]];
                [_lIDs addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"调色灯" andRoomID:self.roomID]];
 
+           }else{
+               [_lIDs addObject:self.deviceid];
            }
         
         }

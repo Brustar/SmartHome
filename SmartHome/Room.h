@@ -17,7 +17,7 @@
 @property (nonatomic,assign) NSInteger co2;
 @property (nonatomic,assign) NSInteger moisture;
 @property (nonatomic,strong) NSString *imgUrl;
-
+@property (nonatomic,assign) int ibeacon;
 
 
 +(instancetype)roomWithDict:(NSDictionary *)dict;

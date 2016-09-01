@@ -174,6 +174,7 @@
 		F67F1F741D3C6AA200F2B7E5 /* SystemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F67F1F731D3C6AA200F2B7E5 /* SystemCell.m */; };
 		F67F1F771D3C719D00F2B7E5 /* systemInfomationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F67F1F761D3C719D00F2B7E5 /* systemInfomationController.m */; };
 		F67F1F811D3CC46C00F2B7E5 /* AboutUsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F67F1F801D3CC46C00F2B7E5 /* AboutUsController.m */; };
+		F68A5DD81D782D8400601612 /* ECSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = F68A5DD71D782D8400601612 /* ECSearchView.m */; };
 		F69C82301D35D214002DE6D7 /* PushSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = F69C822F1D35D214002DE6D7 /* PushSettingController.m */; };
 		F69C82331D363376002DE6D7 /* ServiceRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F69C82321D363376002DE6D7 /* ServiceRecordViewController.m */; };
 		F69C82361D363A4D002DE6D7 /* ServiceRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F69C82351D363A4D002DE6D7 /* ServiceRecordCell.m */; };
@@ -609,6 +610,8 @@
 		F67F1F761D3C719D00F2B7E5 /* systemInfomationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = systemInfomationController.m; sourceTree = "<group>"; };
 		F67F1F7F1D3CC46C00F2B7E5 /* AboutUsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsController.h; sourceTree = "<group>"; };
 		F67F1F801D3CC46C00F2B7E5 /* AboutUsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsController.m; sourceTree = "<group>"; };
+		F68A5DD61D782D8400601612 /* ECSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSearchView.h; sourceTree = "<group>"; };
+		F68A5DD71D782D8400601612 /* ECSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSearchView.m; sourceTree = "<group>"; };
 		F69C822E1D35D214002DE6D7 /* PushSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushSettingController.h; sourceTree = "<group>"; };
 		F69C822F1D35D214002DE6D7 /* PushSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushSettingController.m; sourceTree = "<group>"; };
 		F69C82311D363376002DE6D7 /* ServiceRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceRecordViewController.h; sourceTree = "<group>"; };
@@ -1235,6 +1238,8 @@
 				F623378C1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.m */,
 				0FCD77701D7681CB00121BF1 /* KEVolumeUtil.h */,
 				0FCD77711D7681CB00121BF1 /* KEVolumeUtil.m */,
+				F68A5DD61D782D8400601612 /* ECSearchView.h */,
+				F68A5DD71D782D8400601612 /* ECSearchView.m */,
 			);
 			name = public;
 			sourceTree = "<group>";
@@ -1661,6 +1666,7 @@
 				0F2D35BD1D114E7000C46DE5 /* RTSPPlayer.m in Sources */,
 				0F032D4C1CC9B12700D1920D /* AppDelegate.m in Sources */,
 				0FB205ED1CDC3D3700B5E87E /* AudioManager.m in Sources */,
+				F68A5DD81D782D8400601612 /* ECSearchView.m in Sources */,
 				0FD3DEAD1D3F186800AF7765 /* Globals.m in Sources */,
 				F67F1F711D3C69DC00F2B7E5 /* SystemSettingViewController.m in Sources */,
 				0F180FC61D0E4E5000392F4C /* FMController.m in Sources */,

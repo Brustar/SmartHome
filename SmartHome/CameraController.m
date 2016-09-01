@@ -19,7 +19,11 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"摄像头"];
+    if(self.roomID)
+    {
+        self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"摄像头"];
+    }
+    
     
     NSString *url = [DeviceManager getUrlByDeviceId:[self.deviceid intValue]];
     

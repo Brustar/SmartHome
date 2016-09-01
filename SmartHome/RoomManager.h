@@ -13,5 +13,6 @@
 
 +(NSArray *)getAllRoomsInfo;
 
++(int)getRoomIDByRoomName:(NSString *)rName;
 
 @end

@@ -79,7 +79,7 @@
     NSInteger eId;
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices NAME = '%@'",deviceName];
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where NAME = '%@'",deviceName];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {

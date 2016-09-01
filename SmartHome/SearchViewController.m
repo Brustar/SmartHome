@@ -18,14 +18,18 @@
 #import "FMController.h"
 #import "DeviceManager.h"
 #import "PluginViewController.h"
-
+#import "FMDatabase.h"
+#import "MBProgressHUD+NJ.h"
+#import "AirController.h"
+#import "CameraController.h"
 @interface SearchViewController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 //搜索到的设备类别
 @property (nonatomic,strong) NSArray *deviceTypes;
 //某个类别的下的设备
 @property (nonatomic,strong) NSArray *devices;
 @property (nonatomic,strong) NSArray *deviceInfos;
+@property (nonatomic,strong) NSArray *searchResult;
 @end
 
 @implementation SearchViewController
@@ -42,28 +46,33 @@
 #pragma mark - SearchBarDelegate
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
-   
-    NSDictionary *dict = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"InputName":searchBar.text};
-    NSString *url = [NSString stringWithFormat:@"%@Search.aspx",[IOManager httpAddr]];
-    HttpManager *http=[HttpManager defaultManager];
-    http.delegate=self;
-    http.tag = 1;
-    [http sendPost:url param:dict];
-    
-}
--(void) httpHandler:(id) responseObject tag:(int)tag
-{
-    if(tag == 1)
+    NSArray *tables=@[@"Devices",@"Scenes"];
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    NSMutableArray *result = [NSMutableArray array];
+    if([db open])
     {
-        if([responseObject[@"Result"]intValue] == 0)
+        for(int i = 0; i < tables.count; i++)
         {
-            //解析搜索返回来的信息
-            self.deviceInfos = responseObject[@"messageInfo"];
-            
-        }else {
-            [MBProgressHUD showError:responseObject[@"Msg"]];
+            if(searchBar.text)
+            {
+                NSString *sql = [NSString stringWithFormat:@"select * from %@ where NAME like '%%%@%%'",tables[i],searchBar.text];
+                FMResultSet *resultSet = [db executeQuery:sql];
+                while([resultSet next])
+                {
+                    NSString *name = [resultSet stringForColumn:@"NAME"];
+                    [result addObject:name];
+                }
+
+            }
         }
+        self.searchResult = [result copy];
+        [db close];
+       
     }
+    [self.tableView reloadData];
+    
+    
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -72,7 +81,7 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.deviceInfos.count;
+    return self.searchResult.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -82,36 +91,39 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"cell"];
         
     }
-    NSDictionary *dic = self.deviceInfos[indexPath.row];
-    cell.textLabel.text = dic[@"eName"];
-    cell.detailTextLabel.text = dic[@"rName"];
+    
+    cell.textLabel.text = self.searchResult[indexPath.row];
+    cell.textLabel.textAlignment = NSTextAlignmentLeft;
+    
     return cell;
     
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   NSDictionary *dic = self.deviceInfos[indexPath.row];
-    int eId = [dic[@"eId"] intValue];
+   
+    int eId =(int)[DeviceManager deviceIDByDeviceName:self.searchResult[indexPath.row]];
     NSString *typeName = [DeviceManager deviceTypeNameByDeviceID:eId];
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    if([typeName isEqualToString:@"电视"])
+    if([typeName isEqualToString:@"网络电视"])
     {
         TVController *tVC = [storyBoard instantiateViewControllerWithIdentifier:@"TVController"];
-        //传递房间ID
-        tVC.roomID = [dic[@"rId"] intValue];
+        
+        tVC.deviceid = [NSString stringWithFormat:@"%d",eId];
         [self.navigationController pushViewController:tVC animated:YES];
         
     }else if([typeName isEqualToString:@"灯光"])
     {
         LightController *ligthVC = [storyBoard instantiateViewControllerWithIdentifier:@"LightController"];
-        ligthVC.roomID = [dic[@"rId"] intValue];
+        
+        ligthVC.deviceid = [NSString stringWithFormat:@"%d",eId];
         [self.navigationController pushViewController:ligthVC animated:YES];
         
     }else if([typeName isEqualToString:@"窗帘"])
     {
         CurtainController *curtainVC = [storyBoard instantiateViewControllerWithIdentifier:@"CurtainController"];
-        curtainVC.roomID = [dic[@"rId"] intValue];
+       
+        curtainVC.deviceid = [NSString stringWithFormat:@"%d",eId];
         [self.navigationController pushViewController:curtainVC animated:YES];
         
         
@@ -120,25 +132,44 @@
     {
         
         DVDController *dvdVC = [storyBoard instantiateViewControllerWithIdentifier:@"DVDController"];
-        dvdVC.roomID = [dic[@"rId"] intValue];
+       
+        dvdVC.deviceid = [NSString stringWithFormat:@"%d",eId];
         [self.navigationController pushViewController:dvdVC animated:YES];
         
     }else if([typeName isEqualToString:@"FM"])
     {
         FMController *fmVC = [storyBoard instantiateViewControllerWithIdentifier:@"FMController"];
-        fmVC.roomID = [dic[@"rId"] intValue];
+       
+        fmVC.deviceid = [NSString stringWithFormat:@"%d",eId];
         [self.navigationController pushViewController:fmVC animated:YES];
         
         
     }else if([typeName isEqualToString:@"机顶盒"]){
         NetvController *netVC = [storyBoard instantiateViewControllerWithIdentifier:@"NetvController"];
-        netVC.roomID = [dic[@"rId"] intValue];
+        netVC.deviceid = [NSString stringWithFormat:@"%d",eId];
         [self.navigationController pushViewController:netVC animated:YES];
         
+    }else if([typeName isEqualToString:@"空调"]){
+        
+        AirController *airVC = [storyBoard instantiateViewControllerWithIdentifier:@"AirController"];
+        airVC.deviceid = [NSString stringWithFormat:@"%d",eId];
+        [self.navigationController pushViewController:airVC animated:YES];
+    }else if([typeName isEqualToString:@"摄像头"]){
+        CameraController *camerVC = [storyBoard instantiateViewControllerWithIdentifier:@"CameraController"];
+        camerVC.deviceid = [NSString stringWithFormat:@"%d",eId];
+       
+
+    }else if([typeName isEqualToString:@"智能门锁"]) {
+        
+        GuardController *guardVC = [storyBoard instantiateViewControllerWithIdentifier:@"GuardController"];
+        guardVC.deviceid = [NSString stringWithFormat:@"%d",eId];
+        [self.navigationController pushViewController:guardVC animated:YES];
+       
     }else{
         PluginViewController *pluginVC = [storyBoard instantiateViewControllerWithIdentifier:@"PluginViewController"];
-        pluginVC.roomID = [dic[@"rId"] intValue];
-         [self.navigationController pushViewController:pluginVC animated:YES];
+        
+        [self.navigationController pushViewController:pluginVC animated:YES];
+        
     }
 
 }

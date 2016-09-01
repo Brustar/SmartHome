@@ -24,6 +24,8 @@
 #import "KxMenu.h"
 #import "MBProgressHUD+NJ.h"
 #import "PluginViewController.h"
+#import "CameraController.h"
+#import "GuardController.h"
 
 @interface UIImagePickerController (LandScapeImagePicker)
 
@@ -76,11 +78,11 @@
 //当前房间当前场景的所有设备类别的子类
 @property (nonatomic,strong) NSArray *typeArray;
 
-@property (weak, nonatomic) IBOutlet UIView *favorView;
-@property (weak, nonatomic) IBOutlet UITextField *favorSceneName;
+
+
 @property (nonatomic,strong)UIImage *selectSceneImg;
 @property (weak, nonatomic) IBOutlet UITextField *storeNewSceneName;
-@property (weak, nonatomic) IBOutlet UITextField *favorSeneID;
+
 @property (weak, nonatomic) UIViewController *currentViewController;
 @end
 
@@ -212,11 +214,24 @@
             netVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
             [self addViewAndVC:netVC];
 
-        }else {
+        }else if([typeName isEqualToString:@"摄像头"]){
+             CameraController *camerVC = [storyBoard instantiateViewControllerWithIdentifier:@"CameraController"];
+            camerVC.roomID = self.roomID;
+            camerVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+            [self addViewAndVC:camerVC];
+           
+        }else if([typeName isEqualToString:@"智能门锁"]){
+            GuardController *guardVC = [storyBoard instantiateViewControllerWithIdentifier:@"GuardController"];
+            guardVC.roomID = self.roomID;
+            guardVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+            [self addViewAndVC:guardVC];
+        
+        }else{
             PluginViewController *pluginVC = [storyBoard instantiateViewControllerWithIdentifier:@"PluginViewController"];
             pluginVC.roomID = self.roomID;
             pluginVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
             [self addViewAndVC:pluginVC];
+
         }
     }
     
@@ -298,7 +313,7 @@
             Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
             scene.sceneName = nameTextFiel.text;
             
-            [[SceneManager defaultManager] favoriteScenen:scene withName:self.favorSceneName.text];
+            [[SceneManager defaultManager] favoriteScenen:scene withName:scene.sceneName];
            
 
         }
@@ -316,26 +331,9 @@
 
 
 }
-- (IBAction)sureFavorScence:(id)sender {
-    
-    if ([self.favorSceneName.text isEqualToString:@""]) {
-        [MBProgressHUD showError:@"场景名不能为空!"];
-        return;
-    }
-    
-    Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
-    scene.sceneName = self.favorSceneName.text;
-   // scene.sceneID = [self.favorSeneID.text intValue];
-    [[SceneManager defaultManager] favoriteScenen:scene withName:self.favorSceneName.text];
-    self.favorView.hidden = YES;
-    self.storeNewScene.hidden = YES;
-    
-    [self.view bringSubviewToFront:self.currentViewController.view];
 
-}
-
-- (IBAction)cancelFavorScene:(id)sender {
-    self.favorView.hidden = YES;
+- (IBAction)cancelSaveScene:(id)sender {
+    
     self.storeNewScene.hidden = YES;
     [self.view bringSubviewToFront:self.currentViewController.view];
 }

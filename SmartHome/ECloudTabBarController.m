@@ -9,8 +9,11 @@
 #import "ECloudTabBarController.h"
 #import "ECloudTabBar.h"
 #import "ScenseController.h"
+
+
 @interface ECloudTabBarController ()<ECloudTabBarDelegate>
 @property (nonatomic,strong) ECloudTabBar *cloudTabBar;
+@property (nonatomic,assign) NSString *ibeaconStr;
 @end
 
 @implementation ECloudTabBarController
@@ -35,7 +38,6 @@
 - (void)tabBarDidSelectButtonWithType:(NSInteger)type subType:(NSInteger)subType
 {
     NSLog(@"%ld  %ld", type, subType);
-    
     self.selectedIndex = type;
     if(self.selectedIndex == 0)
     {
@@ -46,6 +48,9 @@
         [center postNotificationName:@"subType" object:nil userInfo:dict];
     }
 }
+
+
+
 
 
 - (void)didReceiveMemoryWarning {

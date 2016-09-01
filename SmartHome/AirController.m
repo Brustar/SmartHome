@@ -31,8 +31,11 @@
 - (void)setRoomID:(int)roomID
 {
     _roomID = roomID;
+    if(roomID)
+    {
+        self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"空调"];
+    }
     
-    self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"空调"];
     
     
 }

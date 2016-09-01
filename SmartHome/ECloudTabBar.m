@@ -16,6 +16,7 @@
 #import "RoomManager.h"
 #import "Room.h"
 
+#import "IbeaconManager.h"
 @interface ECloudTabBar () <ECloudMoreViewDelegate>
 @property (nonatomic, weak) UIView *rightView;
 
@@ -26,6 +27,8 @@
 @property (nonatomic, strong) ECloudMoreView *moreView;
 
 @property (nonatomic,strong) NSArray *rooms;
+@property(nonatomic,strong) NSString *ibeaconStr;
+@property (nonatomic,assign) int roomId;
 @end
 
 @implementation ECloudTabBar
@@ -34,6 +37,12 @@
 {
     if (self = [super init]) {
         self.userInteractionEnabled = YES;
+        DeviceInfo *device=[DeviceInfo defaultManager];
+        [device addObserver:self forKeyPath:@"beacons" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+        
+        IbeaconManager *beaconManager=[IbeaconManager defaultManager];
+        [beaconManager start:device];
+
         [self setUpView];
     }
     return self;
@@ -195,6 +204,68 @@
     
     self.separatorLine.frame = CGRectMake(self.leftView.frame.size.width, y, 2, height);
 }
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if([keyPath isEqualToString:@"beacons"])
+    {
+        NSString *position;
+        DeviceInfo *device=[DeviceInfo defaultManager];
+        NSArray *beacons=[device valueForKey:@"beacons"];
+        for (CLBeacon *beacon in beacons) {
+            NSString *str;
+            switch (beacon.proximity) {
+                case CLProximityNear:
+                    str = @"近";
+                    position=[self beaconInfo:beacon distance:str];
+                    break;
+                case CLProximityImmediate:
+                    str = @"超近";
+                    position=[self beaconInfo:beacon distance:str];
+                    break;
+                case CLProximityFar:
+                    str = @"远";
+                    position=[self beaconInfo:beacon distance:str];
+                    break;
+                case CLProximityUnknown:
+                    str = @"不见了";
+                    position=[self beaconInfo:beacon distance:str];
+                    break;
+                default:
+                    break;
+            }
+            
+        }
+        self.ibeaconStr = position;
+       
+        if(self.ibeaconStr)
+        {
+            self.roomId = [RoomManager getRoomIDByRoomName:self.ibeaconStr];
+            for(ECloudButton *btn in self.leftView.subviews)
+            {
+                if(btn.subType == self.roomId)
+                {
+                    [self buttonOnClick:btn];
+                    return;
+                }
+                    
+            }
+        }
+    }
+    
+    
+}
+
+-(NSString *) beaconInfo:(CLBeacon *)beacon distance:(NSString *)dis
+{
+    if ([beacon.major intValue]==10002) {
+        return [NSString stringWithFormat:@"测试区"];
+    }else if ([beacon.major intValue]==10001) {
+        return [NSString stringWithFormat:@"健身房"];
+    }
+    return @"";
+}
+
 
 
 @end
