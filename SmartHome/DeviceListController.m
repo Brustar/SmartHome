@@ -211,7 +211,7 @@
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
     
-    Scene *scene = [[Scene alloc]init];
+    Scene *scene = [[Scene alloc]initWhithoutSchedule];
     [scene setValuesForKeysWithDictionary:plistDic];
     NSString *imgStr = [self UIimageToStr:self.sceneImg];
     

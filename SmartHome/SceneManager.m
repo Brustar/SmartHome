@@ -100,8 +100,8 @@
     NSString *scenePath=[[IOManager favoritePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, newScene.sceneID ]];
     NSDictionary *dic = [PrintObject getObjectData:newScene];
     BOOL ret = [dic writeToFile:scenePath atomically:YES];
-    //if(ret)
-    //{
+    if(ret)
+    {
         //写sqlite更新场景文件名
         NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
         FMDatabase *db = [FMDatabase databaseWithPath:dbPath] ;
@@ -114,7 +114,7 @@
         //同步云端
         
         //上传文件
-    //}
+    }
     
 }
 
