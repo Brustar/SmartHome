@@ -7,6 +7,7 @@
 //
 
 #import "TouchImage.h"
+#import "planeScene.h"
 
 @implementation TouchImage
 
@@ -51,7 +52,17 @@
 
 -(void) planeHandle:(CGPoint)point
 {
-    [self.delegate performSegueWithIdentifier:@"toDevice" sender:self.delegate];
+    NSString *path=[[NSBundle mainBundle] pathForResource:@"planeScene" ofType:@"plist"];
+    NSDictionary *dic = [[NSDictionary alloc] initWithContentsOfFile:path];
+    for (NSDictionary *rect in dic[@"rects"]) {
+        NSString *rectstr=rect[@"rect"];
+        CGRect rt=CGRectFromString(rectstr);
+        if (CGRectContainsPoint(rt,point)) {
+            ((planeScene *)self.delegate).deviceID=[rect[@"deviceID"] intValue];
+        }
+    }
+    
+    [self.delegate performSegueWithIdentifier:@"" sender:self.delegate];
 }
 
 @end

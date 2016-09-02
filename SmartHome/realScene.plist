@@ -5,18 +5,24 @@
 	<key>rects</key>
 	<array>
 		<dict>
+			<key>deviceID</key>
+			<integer>10</integer>
 			<key>image</key>
 			<string>real1.png</string>
 			<key>rect</key>
 			<string>{{0, 0}, {200, 400}}</string>
 		</dict>
 		<dict>
+			<key>deviceID</key>
+			<integer>11</integer>
 			<key>image</key>
 			<string>real2.png</string>
 			<key>rect</key>
 			<string>{{300, 0}, {200, 400}}</string>
 		</dict>
 		<dict>
+			<key>deviceID</key>
+			<integer>10</integer>
 			<key>image</key>
 			<string>real3.png</string>
 			<key>rect</key>
