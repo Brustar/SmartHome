@@ -8,7 +8,7 @@
 @interface UploadManager : NSObject
 
 + (id)defaultManager;
-- (void)uploadImage:(UIImage *) img url:(NSURL*) url completion:(void (^)())completion;
-- (void)uploadScene:(NSString *)sceneFile url:(NSURL*) url completion:(void (^)())completion;
+- (void)uploadImage:(UIImage *) img url:(NSString *) url completion:(void (^)(id responseObject))completion;
+- (void)uploadScene:(NSString *)sceneFile url:(NSString *) url completion:(void (^)())completion;
 
 @end
