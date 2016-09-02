@@ -40,7 +40,7 @@
     }];
 }
 
-- (void)uploadScene:(NSData *)sceneData url:(NSString *) url completion:(void (^)())completion
+- (void)uploadScene:(NSData *)sceneData url:(NSString *) url completion:(void (^)(id responseObject))completion
 {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     // 实际上就是AFN没有对响应数据做任何处理的情况

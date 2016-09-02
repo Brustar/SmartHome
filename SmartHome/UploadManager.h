@@ -9,6 +9,6 @@
 
 + (id)defaultManager;
 - (void)uploadImage:(UIImage *) img url:(NSString *) url completion:(void (^)(id responseObject))completion;
-- (void)uploadScene:(NSString *)sceneFile url:(NSString *) url completion:(void (^)())completion;
+- (void)uploadScene:(NSData *)sceneData url:(NSString *) url completion:(void (^)(id responseObject))completion;
 
 @end
