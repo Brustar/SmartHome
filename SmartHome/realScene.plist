@@ -7,6 +7,8 @@
 		<dict>
 			<key>deviceID</key>
 			<integer>10</integer>
+			<key>roomID</key>
+			<integer>11</integer>
 			<key>image</key>
 			<string>real1.png</string>
 			<key>rect</key>
@@ -15,6 +17,8 @@
 		<dict>
 			<key>deviceID</key>
 			<integer>11</integer>
+			<key>roomID</key>
+			<integer>0</integer>
 			<key>image</key>
 			<string>real2.png</string>
 			<key>rect</key>
@@ -23,6 +27,8 @@
 		<dict>
 			<key>deviceID</key>
 			<integer>10</integer>
+			<key>roomID</key>
+			<integer>0</integer>
 			<key>image</key>
 			<string>real3.png</string>
 			<key>rect</key>

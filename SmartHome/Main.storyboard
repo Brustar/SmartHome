@@ -20,9 +20,9 @@
                     </tabBar>
                     <connections>
                         <segue destination="ez8-GB-AeD" kind="relationship" relationship="viewControllers" id="sa4-D6-iWJ"/>
-                        <segue destination="PKx-j8-TtA" kind="relationship" relationship="viewControllers" id="9R3-7q-oOv"/>
+                        <segue destination="F6f-3x-kGl" kind="relationship" relationship="viewControllers" id="9R3-7q-oOv"/>
                         <segue destination="Ffr-Sd-AHJ" kind="relationship" relationship="viewControllers" id="1ZE-49-Chp"/>
-                        <segue destination="VSl-sp-0lG" kind="relationship" relationship="viewControllers" id="g1D-HS-lbY"/>
+                        <segue destination="Zfz-y6-NGu" kind="relationship" relationship="viewControllers" id="g1D-HS-lbY"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o8q-7b-JCt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -278,7 +278,7 @@
             </objects>
             <point key="canvasLocation" x="473" y="-8684"/>
         </scene>
-        <!--Item-->
+        <!--实景控制-->
         <scene sceneID="Op0-dx-UUW">
             <objects>
                 <viewController id="VSl-sp-0lG" customClass="RealScene" sceneMemberID="viewController">
@@ -289,13 +289,42 @@
                     <view key="view" contentMode="scaleToFill" id="g1c-pq-r9r">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="035-Db-6RP">
+                                <rect key="frame" x="0.0" y="64" width="200" height="487"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="Lza-SA-h0s"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="VSl-sp-0lG" id="X0Z-vY-gkJ"/>
+                                    <outlet property="delegate" destination="VSl-sp-0lG" id="hU4-Ga-n40"/>
+                                </connections>
+                            </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hqY-q2-hC0" customClass="TouchImage">
+                                <rect key="frame" x="200" y="64" width="400" height="487"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="puT-lx-Cxs" firstAttribute="top" secondItem="hqY-q2-hC0" secondAttribute="bottom" id="MGs-15-8bW"/>
+                            <constraint firstAttribute="trailing" secondItem="hqY-q2-hC0" secondAttribute="trailing" id="ThF-00-r5p"/>
+                            <constraint firstItem="035-Db-6RP" firstAttribute="leading" secondItem="g1c-pq-r9r" secondAttribute="leading" id="VU4-YA-46T"/>
+                            <constraint firstItem="hqY-q2-hC0" firstAttribute="leading" secondItem="035-Db-6RP" secondAttribute="trailing" id="bli-wB-g8G"/>
+                            <constraint firstItem="035-Db-6RP" firstAttribute="top" secondItem="tki-AG-XwB" secondAttribute="bottom" id="h1A-ih-QIC"/>
+                            <constraint firstItem="puT-lx-Cxs" firstAttribute="top" secondItem="035-Db-6RP" secondAttribute="bottom" id="iiG-qZ-TAO"/>
+                            <constraint firstItem="hqY-q2-hC0" firstAttribute="top" secondItem="tki-AG-XwB" secondAttribute="bottom" id="rlr-3c-z39"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="SEe-Bd-wRL"/>
+                    <navigationItem key="navigationItem" title="实景控制" id="JHv-If-gKW"/>
+                    <connections>
+                        <outlet property="realimg" destination="hqY-q2-hC0" id="5ay-YO-nBD"/>
+                        <outlet property="roomTable" destination="035-Db-6RP" id="zMe-NT-k3R"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3MQ-oF-LZI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1573" y="-7948"/>
+            <point key="canvasLocation" x="-761" y="-7948"/>
         </scene>
         <!--Scense Split View Controller-->
         <scene sceneID="y4N-BA-L5r">
@@ -308,9 +337,9 @@
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xAQ-MM-RVa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-906" y="-7948"/>
+            <point key="canvasLocation" x="-94" y="-7948"/>
         </scene>
-        <!--Item-->
+        <!--平面图-->
         <scene sceneID="kxl-u0-hZx">
             <objects>
                 <viewController id="PKx-j8-TtA" customClass="planeScene" sceneMemberID="viewController">
@@ -322,11 +351,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="sV4-NP-96y"/>
+                    <navigationItem key="navigationItem" title="平面图" id="Wd3-IM-2Le"/>
+                    <connections>
+                        <segue destination="4CE-Kq-vrI" kind="show" identifier="plane_Air" id="G19-fh-mhQ"/>
+                        <segue destination="zTh-tS-8xs" kind="show" identifier="pane_Curtain" id="prf-0G-qDF"/>
+                        <segue destination="7uY-cb-xb4" kind="show" identifier="plane_NetTv" id="rGG-nI-6is"/>
+                        <segue destination="4lO-41-8MY" kind="show" identifier="plane_Camera" id="Daf-E8-hDH"/>
+                        <segue destination="7d8-3b-SzA" kind="show" identifier="plane_Guard" id="fzi-se-X8b"/>
+                        <segue destination="iP5-w8-v4Y" kind="show" identifier="plane_TV" id="H3V-Ty-dBS"/>
+                        <segue destination="2yR-Tc-bp1" kind="show" identifier="plane_FM" id="f9b-hn-w5L"/>
+                        <segue destination="RfX-cu-vkU" kind="show" identifier="plane_Plugin" id="dSv-oV-mNG"/>
+                        <segue destination="XoM-8d-Bbi" kind="show" identifier="plane_Light" id="ZSJ-0K-dfQ"/>
+                        <segue destination="Ywa-Dl-EXD" kind="show" identifier="plane_DVD" id="lwe-sH-sqk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qkj-5d-5HX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-86" y="-7939"/>
+            <point key="canvasLocation" x="1418" y="-7948"/>
         </scene>
         <!--Service Record View Controller-->
         <scene sceneID="NC9-b5-BpK">
@@ -1122,7 +1163,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8n5-ZM-1Vi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="584" y="-7980"/>
+            <point key="canvasLocation" x="2208" y="-7980"/>
         </scene>
         <!--System Infomation Controller-->
         <scene sceneID="ki9-Lv-eta">
@@ -3606,7 +3647,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g6q-KU-Aap" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2737" y="-8001"/>
+            <point key="canvasLocation" x="4361" y="-8001"/>
         </scene>
         <!--Bg Music Controller-->
         <scene sceneID="F81-F1-NYo">
@@ -4492,6 +4533,24 @@
             </objects>
             <point key="canvasLocation" x="2793" y="-8732"/>
         </scene>
+        <!--Amplifier Controller-->
+        <scene sceneID="61G-Is-3Ur">
+            <objects>
+                <viewController id="l2p-Yb-hup" customClass="AmplifierController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="T9K-nR-fLb"/>
+                        <viewControllerLayoutGuide type="bottom" id="isp-nj-MB5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5vV-DY-PWM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DDA-S3-Ys4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-889" y="-9413"/>
+        </scene>
         <!--Curtain Controller-->
         <scene sceneID="jqh-YQ-htx">
             <objects>
@@ -5299,7 +5358,7 @@ layer.masksToBoundslayer.masksToBounds
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M4r-vO-pYk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1294" y="-7994"/>
+            <point key="canvasLocation" x="2918" y="-7994"/>
         </scene>
         <!--场景-->
         <scene sceneID="7n3-qf-uvO">
@@ -5634,7 +5693,7 @@ layer.masksToBoundslayer.masksToBounds
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e5s-xD-1Tt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1992" y="-8001"/>
+            <point key="canvasLocation" x="3616" y="-8001"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YYw-xW-Ubc">
@@ -5806,6 +5865,44 @@ layer.masksToBoundslayer.masksToBounds
             </objects>
             <point key="canvasLocation" x="-892" y="-8684"/>
         </scene>
+        <!--Item-->
+        <scene sceneID="U6M-jh-NZg">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="F6f-3x-kGl" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="sV4-NP-96y"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Zg1-GR-H7J">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="PKx-j8-TtA" kind="relationship" relationship="rootViewController" id="W8H-pn-WvG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gLz-IK-nIK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="598" y="-7968"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="1dG-Xx-bPE">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Zfz-y6-NGu" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="SEe-Bd-wRL"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8ZO-dJ-doP">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="VSl-sp-0lG" kind="relationship" relationship="rootViewController" id="RL9-ES-2DW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vL1-cS-JHd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1573" y="-7948"/>
+        </scene>
     </scenes>
     <resources>
         <image name="add" width="64" height="64"/>
@@ -5841,10 +5938,20 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PRs-sg-E1F"/>
+        <segue reference="dSv-oV-mNG"/>
         <segue reference="5K5-wE-mZz"/>
+        <segue reference="mRk-xU-xJj"/>
         <segue reference="yTT-Nf-qWA"/>
-        <segue reference="YE7-iU-rxh"/>
+        <segue reference="H3V-Ty-dBS"/>
+        <segue reference="ZSJ-0K-dfQ"/>
+        <segue reference="lwe-sH-sqk"/>
+        <segue reference="fzi-se-X8b"/>
+        <segue reference="prf-0G-qDF"/>
+        <segue reference="G19-fh-mhQ"/>
+        <segue reference="rGG-nI-6is"/>
+        <segue reference="Daf-E8-hDH"/>
+        <segue reference="f9b-hn-w5L"/>
+        <segue reference="NGA-cS-h6U"/>
         <segue reference="fXQ-oW-cHz"/>
     </inferredMetricsTieBreakers>
 </document>

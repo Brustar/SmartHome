@@ -15,6 +15,9 @@
     // Initialization code
     
 }
+- (IBAction)brightValueChanged:(id)sender {
+    self.valueLabel.text = [NSString stringWithFormat:@"%.0f%%",self.bright.value *100];
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

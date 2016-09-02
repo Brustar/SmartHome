@@ -7,23 +7,60 @@
 //
 
 #import "RealScene.h"
+#import "RoomManager.h"
+#import "Room.h"
 
-@interface RealScene ()
-
+@interface RealScene ()<UITableViewDelegate,UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UITableView *roomTable;
+@property (nonatomic,strong) NSArray *rooms;
 @end
 
 @implementation RealScene
 
+-(NSArray *)rooms
+{
+    if(!_rooms)
+    {
+        _rooms = [RoomManager getAllRoomsInfo];
+    }
+    return _rooms;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     // Do any additional setup after loading the view.
-    self.realimg=[[TouchImage alloc] initWithFrame:CGRectMake(100, 40, 625, 500)];
+    //self.realimg=[[TouchImage alloc] initWithFrame:CGRectMake(100, 40, 625, 500)];
     self.realimg.image =[UIImage imageNamed:@"real.png"];
     self.realimg.userInteractionEnabled=YES;
     self.realimg.viewFrom=REAL_IMAGE;
     [self.view addSubview:self.realimg];
 }
 
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.rooms.count;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if(!cell)
+    {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    }
+    
+    Room *room = self.rooms[indexPath.row];
+    cell.textLabel.text = room.rName;
+    return cell;
+}
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

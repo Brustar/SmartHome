@@ -27,7 +27,11 @@
     self.planeimg.delegate=self;
     [self.view addSubview:self.planeimg];
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

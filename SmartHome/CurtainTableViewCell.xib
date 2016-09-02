@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -12,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="前窗" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wSV-oJ-oCF">
@@ -26,6 +26,9 @@
                         <constraints>
                             <constraint firstAttribute="width" constant="300" id="Ikh-7O-auW"/>
                         </constraints>
+                        <connections>
+                            <action selector="brightValueChanged:" destination="KGk-i7-Jjw" eventType="valueChanged" id="M2L-dN-d7z"/>
+                        </connections>
                     </slider>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8pT-n9-oYX">
                         <rect key="frame" x="-40" y="7" width="20" height="30"/>
@@ -43,6 +46,12 @@
                         </constraints>
                         <state key="normal" backgroundImage="curtain"/>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v0o-gc-D44">
+                        <rect key="frame" x="258" y="11" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="tNT-YH-Tpj" firstAttribute="leading" secondItem="8pT-n9-oYX" secondAttribute="trailing" constant="30" id="0ra-0z-u3c"/>
@@ -50,7 +59,9 @@
                     <constraint firstItem="dFO-Zi-fiB" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="9gG-D4-wlZ"/>
                     <constraint firstAttribute="bottom" secondItem="wSV-oJ-oCF" secondAttribute="bottom" constant="3" id="BpN-A0-N95"/>
                     <constraint firstItem="wSV-oJ-oCF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="KNJ-rf-wPX"/>
+                    <constraint firstItem="v0o-gc-D44" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Lxn-Ff-WYp"/>
                     <constraint firstItem="tNT-YH-Tpj" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="NPV-3I-kLm"/>
+                    <constraint firstAttribute="trailing" secondItem="v0o-gc-D44" secondAttribute="trailing" constant="20" id="QbY-MP-FGJ"/>
                     <constraint firstItem="wSV-oJ-oCF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="TKH-aZ-TXC"/>
                     <constraint firstItem="8pT-n9-oYX" firstAttribute="leading" secondItem="wSV-oJ-oCF" secondAttribute="trailing" constant="30" id="cLA-yk-02u"/>
                     <constraint firstItem="8pT-n9-oYX" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="dQu-4s-1DD"/>
@@ -69,6 +80,7 @@
                 <outlet property="label" destination="wSV-oJ-oCF" id="bUa-kH-Jsg"/>
                 <outlet property="open" destination="dFO-Zi-fiB" id="rHa-eJ-nDS"/>
                 <outlet property="slider" destination="tNT-YH-Tpj" id="efJ-Ru-ZA9"/>
+                <outlet property="valueLabel" destination="v0o-gc-D44" id="3nQ-hN-evr"/>
             </connections>
             <point key="canvasLocation" x="682" y="523"/>
         </tableViewCell>

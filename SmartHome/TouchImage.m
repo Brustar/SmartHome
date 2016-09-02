@@ -9,8 +9,12 @@
 #import "TouchImage.h"
 
 #import "planeScene.h"
+#import "DeviceManager.h"
 
 
+@interface TouchImage()
+@property (nonatomic,assign) int deviceID;
+@end
 @implementation TouchImage
 
 /*
@@ -59,14 +63,51 @@
     NSDictionary *dic = [[NSDictionary alloc] initWithContentsOfFile:path];
     for (NSDictionary *rect in dic[@"rects"]) {
         NSString *rectstr=rect[@"rect"];
+        
         CGRect rt=CGRectFromString(rectstr);
         if (CGRectContainsPoint(rt,point)) {
             ((planeScene *)self.delegate).deviceID=[rect[@"deviceID"] intValue];
+            self.deviceID = [rect[@"deviceID"] intValue];
+             NSString *typeName = [DeviceManager deviceTypeNameByDeviceID:self.deviceID];
+            NSString *segue;
+            if([typeName isEqualToString:@"灯光"]){
+                segue = @"plane_Light";
+            }else if([typeName isEqualToString:@"窗帘"]){
+                segue = @"pane_Curtain";
+            }else if([typeName isEqualToString:@"网络电视"]){
+                segue = @"plane_TV";
+            }else if([typeName isEqualToString:@"空调"]){
+                segue = @"plane_Air";
+            }else if([typeName isEqualToString:@"DVD"]){
+                segue = @"DVD";
+            }else if([typeName isEqualToString:@"FM"]){
+                segue = @"plane_FM";
+            }else if([typeName isEqualToString:@"摄像头"]){
+                segue = @"plane_Camera";
+            }else if([typeName isEqualToString:@"智能插座"]) {
+                segue = @"plane_Plugin";
+            }
+            else if([typeName isEqualToString:@"机顶盒"])
+            {
+                segue = @"plane_NetTv";
+                
+            }else if([typeName isEqualToString:@"DVD"]){
+                segue = @"plane_DVD";
+                
+            }else{
+                segue = @"plane_Guard";
+            }
+
+            [self.delegate performSegueWithIdentifier:segue sender:self.delegate];
+
         }
     }
     
-    [self.delegate performSegueWithIdentifier:@"" sender:self.delegate];
-
 }
-
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    id theSegue = segue.destinationViewController;
+    [theSegue setValue:[NSNumber numberWithInt:self.deviceID] forKey:@"deviceid"];
+    
+}
 @end

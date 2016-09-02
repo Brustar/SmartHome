@@ -20,6 +20,9 @@
 #import "SocketManager.h"
 #import "AppDelegate.h"
 #import "ScenseController.h"
+#import "AFHTTPSessionManager.h"
+#import "UploadManager.h"
+#import "MBProgressHUD+NJ.h"
 @implementation SceneManager
 
 + (id) defaultManager
@@ -41,13 +44,36 @@
         int sceneid=[DeviceManager saveMaxSceneId:scene name:name pic:picurl];
         scene.sceneID=sceneid;
         //同步云端
-        NSString *url = [NSString stringWithFormat:@"%@SceneUpload.aspx",[IOManager httpAddr]];
-        NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]};
-        HttpManager *http = [HttpManager defaultManager];
-        http.delegate = self;
-        http.tag = 1;
+        NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
+        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+        NSString *URL = [NSString stringWithFormat:@"%@SceneAdd.aspx",[IOManager httpAddr]];
         
-        [http sendPost:url param:dic];
+        
+        
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        // 实际上就是AFN没有对响应数据做任何处理的情况
+        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        NSDictionary *parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ScenceFile":scenePath};
+        // formData是遵守了AFMultipartFormData的对象
+        [manager POST:URL parameters:parameter constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            
+            // 将本地的文件上传至服务器
+            NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
+            NSString *fileName = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,scene.sceneID];
+            [formData appendPartWithFileData:fileData name:@"upload" fileName:fileName mimeType:@"multipart/form-data"];
+            
+        } progress:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
+           // NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+           
+            [MBProgressHUD showSuccess:@"上传文件成功"];
+
+        } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+            NSLog(@"错误 %@", error.localizedDescription);
+            [MBProgressHUD showSuccess:error.localizedDescription];
+
+        }];
+        
+  
     }
     [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, scene.sceneID] scene:scene];
    
@@ -55,21 +81,11 @@
     //上传文件
     
 }
--(void) httpHandler:(id) responseObject tag:(int)tag
+
+
+-(void)upLoadFile
 {
-    if(tag == 1)
-    {
-        if([responseObject[@"Result"] intValue] == 0)
-        {
-            [MBProgressHUD showSuccess:@"场景保存成功"];
-            
-       }
-            else{
-            [MBProgressHUD showError: responseObject[@"Msg"]];
-               
-       }
-    }
-}
+   }
 
 - (void) delScenen:(Scene *)scene
 {

@@ -33,12 +33,12 @@
 
 - (void)uploadScene:(NSString *)sceneFile url:(NSURL*) url completion:(void (^)())completion
 {
-    /*
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setFile:sceneFile forKey:@"scene"];
-    [request startAsynchronous];
-    [request setCompletionBlock:completion];
-     */
+    
+//    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+//    [request setFile:sceneFile forKey:@"scene"];
+//    [request startAsynchronous];
+//    [request setCompletionBlock:completion];
+    
 }
 
 @end
