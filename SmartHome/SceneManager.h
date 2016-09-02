@@ -16,6 +16,7 @@
 #import "EntranceGuard.h"
 #import "Aircon.h"
 #import "BgMusic.h"
+#import "Amplifier.h"
 
 @interface SceneManager : NSObject
 

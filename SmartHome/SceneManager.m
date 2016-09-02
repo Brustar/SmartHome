@@ -221,6 +221,11 @@
                 device.showed=[[dic objectForKey:@"showed"] intValue];
                 [devices addObject:device];
             }
+            if ([dic objectForKey:@"waiting"]) {
+                Amplifier *device=[[Amplifier alloc] init];
+                device.waiting=[[dic objectForKey:@"waiting"] intValue];
+                [devices addObject:device];
+            }
         }
         scene.devices=devices;
         return scene;
@@ -421,6 +426,15 @@
             NSString *deviceid=[NSString stringWithFormat:@"%d", projector.deviceID];
             if (projector.showed) {
                 data=[[DeviceInfo defaultManager] toogle:projector.showed deviceID:deviceid];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+            }
+        }
+        
+        if ([device isKindOfClass:[Amplifier class]]) {
+            Amplifier *projector=(Amplifier *)device;
+            NSString *deviceid=[NSString stringWithFormat:@"%d", projector.deviceID];
+            if (projector.waiting) {
+                data=[[DeviceInfo defaultManager] toogle:projector.waiting deviceID:deviceid];
                 [sock.socket writeData:data withTimeout:1 tag:1];
             }
         }
