@@ -7,7 +7,7 @@
 //
 
 #import "TouchImage.h"
-
+#import "DeviceManager.h"
 @implementation TouchImage
 
 /*
@@ -51,7 +51,7 @@
 
 -(void) planeHandle:(CGPoint)point
 {
-    [self.delegate performSegueWithIdentifier:@"toDevice" sender:self.delegate];
+       [self.delegate performSegueWithIdentifier:@"toDevice" sender:self.delegate];
 }
 
 @end
