@@ -22,7 +22,40 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self initPlugin];
+    //[self initPlugin];
+    [self initHomekitPlugin];
+}
+
+-(void)initHomekitPlugin
+{
+    self.homeManager = [[HMHomeManager alloc] init];
+    self.homeManager.delegate = self;
+    
+    self.devices=[NSMutableArray new];
+}
+
+- (void)homeManagerDidUpdateHomes:(HMHomeManager *)manager
+{
+    if (manager.primaryHome) {
+        self.primaryHome = manager.primaryHome;
+        self.primaryHome.delegate = self;
+        
+        for (HMAccessory *accessory in self.homeManager.primaryHome.accessories) {
+            for (HMService *service in accessory.services) {
+                if ([service.serviceType isEqualToString:HMServiceTypeOutlet]) {
+                    //self.deviceLabel.text=service.name;
+                    [self.devices addObject: [NSString stringWithFormat:@"%@(浇花)", service.name]];
+                    for (HMCharacteristic *characterstic in service.characteristics) {
+                        if ([characterstic.characteristicType isEqualToString:HMCharacteristicTypePowerState]) {
+                            //self.powerSwitch.on=[characterstic.value boolValue];
+                            self.characteristic=characterstic;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    [self.tableView reloadData];
 }
 
 -(void)initPlugin
@@ -73,6 +106,22 @@
 
 -(IBAction)switchDevice:(id)sender
 {
+
+        if ([self.characteristic.characteristicType isEqualToString:HMCharacteristicTypeTargetLockMechanismState]  || [self.characteristic.characteristicType isEqualToString:HMCharacteristicTypePowerState]) {
+            
+            BOOL changedLockState = ![self.characteristic.value boolValue];
+            
+            [self.characteristic writeValue:[NSNumber numberWithBool:changedLockState] completionHandler:^(NSError *error){
+                
+                if(error != nil){
+                    NSLog(@"error in writing characterstic: %@",error);
+                }
+            }];
+        }
+}
+
+/*
+-(IBAction)switchDevice:(id)sender{
     UISwitch *sw=(UISwitch *)sender;
     SocketManager *sock=[SocketManager defaultManager];
     NSString *cmd=@"FE00000000040001";//
@@ -90,7 +139,7 @@
     [sock.socket writeData:data withTimeout:-1 tag:1];
     [sock.socket readDataToData:[NSData dataWithBytes:"\xFF" length:1] withTimeout:-1 tag:1];
 }
-
+*/
 #pragma mark  - TCP delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
@@ -113,8 +162,9 @@
     PluginCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     
-    cell.label.text =[NSString stringWithFormat:@"插座%li",(long)indexPath.row];
+    cell.label.text =[self.devices objectAtIndex:indexPath.row];//[NSString stringWithFormat:@"插座%li",(long)indexPath.row];
     cell.power.tag=indexPath.row;
+    cell.power.on=[self.characteristic.value boolValue];
     [cell.power addTarget:self action:@selector(switchDevice:) forControlEvents:UIControlEventValueChanged];
     return cell;
 }
