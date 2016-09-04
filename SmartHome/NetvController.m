@@ -154,7 +154,7 @@
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
     [scene setDevices:devices];
     
-    [[SceneManager defaultManager] addScenen:scene withName:nil withPic:@""];
+    [[SceneManager defaultManager] addScene:scene withName:nil withPic:@""];
     
 }
 

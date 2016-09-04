@@ -1,4 +1,4 @@
-//
+ //
 //  UploadFile.m
 //  02.Post上传
 //
@@ -50,11 +50,11 @@
     // formData是遵守了AFMultipartFormData的对象
     [manager POST:url parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         // 将本地的文件上传至服务器
-        [formData appendPartWithFileData:sceneData name:@"upload" fileName:fileName mimeType:@"multipart/form-data"];
+        [formData appendPartWithFileData:sceneData name:@"ScenceFile" fileName:fileName mimeType:@"multipart/form-data"];
     } progress:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSLog(@"完成 %@", result);
-        [MBProgressHUD showSuccess:@"增加场景成功"];
+        
         //completion(responseObject);
     } failure:^(NSURLSessionDataTask *operation, NSError *error) {
         NSLog(@"错误 %@", error.localizedDescription);

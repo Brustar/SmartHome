@@ -279,7 +279,7 @@
         Scene *scene = [[Scene alloc]init];
         [scene setValuesForKeysWithDictionary:plistDic];
         
-        [[SceneManager defaultManager] editScenen:scene];
+        [[SceneManager defaultManager] editScene:scene];
     }];
     [alertVC addAction:saveAction];
     UIAlertAction *saveNewAction = [UIAlertAction actionWithTitle:@"另存为新场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -313,7 +313,7 @@
             Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
             scene.sceneName = nameTextFiel.text;
             
-            [[SceneManager defaultManager] favoriteScenen:scene withName:scene.sceneName];
+            [[SceneManager defaultManager] favoriteScene:scene withName:scene.sceneName];
            
 
         }
@@ -394,7 +394,7 @@
     Scene *scene = [[Scene alloc]initWhithoutSchedule];
     [scene setValuesForKeysWithDictionary:plistDic];
     NSString *imgStr = [self UIimageToStr:self.selectSceneImg];
-    [[SceneManager defaultManager] addScenen:scene withName:self.storeNewSceneName.text withPic:imgStr];
+    [[SceneManager defaultManager] addScene:scene withName:self.storeNewSceneName.text withPic:imgStr];
     
     self.storeNewScene.hidden = YES;
     [self.view bringSubviewToFront:self.currentViewController.view];}
@@ -436,7 +436,7 @@
         [SceneManager deleteScene:self.sceneID];
         
         Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
-        [[SceneManager defaultManager] delScenen:scene];
+        [[SceneManager defaultManager] delScene:scene];
         
         NSString *url = [NSString stringWithFormat:@"%@SceneDelete.aspx",[IOManager httpAddr]];
         NSDictionary *dict = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"SID":[NSNumber numberWithInt:scene.sceneID]};

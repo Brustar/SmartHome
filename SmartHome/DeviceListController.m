@@ -74,7 +74,7 @@
     Scene *scene=[[Scene alloc] init];
     [scene setSceneID:[self.sceneid intValue]];
     [scene setReadonly:NO];
-    [[SceneManager defaultManager] delScenen:scene];
+    [[SceneManager defaultManager] delScene:scene];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -213,55 +213,17 @@
 - (IBAction)sureStoreScene:(id)sender {
     self.saveSceneView.hidden = YES;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fixTimeNotification:) name:@"fixTime" object:nil];
-    
-
-    
-    
-    
-//    NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
-//    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
-//    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
-//
-//    Scene *scene = [[Scene alloc]initWhithoutSchedule];
-//    [scene setValuesForKeysWithDictionary:plistDic];
-//    NSString *imgStr = [self UIimageToStr:self.sceneImg];
-//    
-//    [[SceneManager defaultManager] addScenen:scene withName:self.sceneName.text withPic:imgStr];
-    [self.navigationController popViewControllerAnimated: YES];
-
-}
--(void)fixTimeNotification:(NSNotification *)notif
-{
-    NSDictionary *dic = notif.userInfo;
     NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
-    //1表示定时，2表示不定时
-    if([dic[@"isPane"] intValue] == 2)
-    {
-        
-        
-        Scene *scene = [[Scene alloc]initWhithoutSchedule];
-        [scene setValuesForKeysWithDictionary:plistDic];
-        NSString *imgStr = [self UIimageToStr:self.sceneImg];
-        if(self.sceneName.text)
-        {
-            int sceneid=[DeviceManager saveMaxSceneId:scene name:self.sceneName pic:imgStr];
-            scene.sceneID=sceneid;
-            NSString *URL = [NSString stringWithFormat:@"%@SceneAdd.aspx",[IOManager httpAddr]];
-             NSDictionary *parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":scene.sceneName,@"ScenceFile":scenePath,@"PlistID":[NSNumber numberWithInt:scene.sceneID],@"ImgFile":scene.picName,@"PlistID":[NSNumber numberWithInt:scene.sceneID],@"isPlan":@"1",@"StartTime":dic[@"StartTime"],@"AstronomicalTime":dic[@"AstronomicalTime"],@"PlanType":dic[@"PlanType"],@"WeekValue":@"0"};
-            
-            NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
-            NSString *fileName = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,scene.sceneID];
-            [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName completion:nil];
-        }
-        
 
-        [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, scene.sceneID] scene:scene];
+    Scene *scene = [[Scene alloc]initWhithoutSchedule];
+    [scene setValuesForKeysWithDictionary:plistDic];
+    NSString *imgStr = [self UIimageToStr:self.sceneImg];
+    
+    [[SceneManager defaultManager] addScene:scene withName:self.sceneName.text withPic:imgStr];
+    
 
-
-    }
 }
 - (IBAction)canleStore:(id)sender {
     self.saveSceneView.hidden = YES;
@@ -273,6 +235,7 @@
     NSString *str = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     return str;
 }
+
 
 
 

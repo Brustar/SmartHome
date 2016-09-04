@@ -192,7 +192,7 @@
     {
         if (info.connectState==outDoor) {
             NSLog(@"外出模式");
-            [self.netBarBtn setImage:[UIImage imageNamed:@"out"]];
+            [self.netBarBtn setImage:[UIImage imageNamed:@"wifi"]];
             return;
         }
         if (info.connectState==offLine) {
@@ -212,7 +212,7 @@
             return;
         }else if (info.connectState==outDoor){
             NSLog(@"外出模式");
-            [self.netBarBtn setImage:[UIImage imageNamed:@"out"]];
+            [self.netBarBtn setImage:[UIImage imageNamed:@"wifi"]];
         }
         if (info.connectState==offLine) {
             NSLog(@"离线模式");

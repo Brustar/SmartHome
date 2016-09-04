@@ -22,13 +22,13 @@
 
 + (id) defaultManager;
 
-- (void) addScenen:(Scene *)scene withName:(NSString *)name withPic:(NSString *)picurl;
+- (void) addScene:(Scene *)scene withName:(NSString *)name withPic:(NSString *)picurl;
 
-- (void) delScenen:(Scene *)scene;
+- (void) delScene:(Scene *)scene;
 
-- (void) editScenen:(Scene *)scene;
+- (void) editScene:(Scene *)scene;
 
-- (void) favoriteScenen:(Scene *)newScene withName:(NSString *)name;
+- (void) favoriteScene:(Scene *)newScene withName:(NSString *)name;
 
 - (Scene *)readSceneByID:(int)sceneid;
 

@@ -37,7 +37,7 @@
     return sharedInstance;
 }
 
-- (void) addScenen:(Scene *)scene withName:(NSString *)name withPic:(NSString *)picurl
+- (void) addScene:(Scene *)scene withName:(NSString *)name withPic:(NSString *)picurl
 {
     if (name) {
         
@@ -47,14 +47,21 @@
         NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
         NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
         NSString *URL = [NSString stringWithFormat:@"%@SceneAdd.aspx",[IOManager httpAddr]];
+        NSString *fileName = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,scene.sceneID];
+        NSDictionary *parameter;
+        if(scene.isPlan == 1)
+        {
+            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":@"store.png",@"isPlan":[NSNumber numberWithInt:1],@"StartTime":scene.startTime,@"AstronomicalTime":scene.astronomicalTime,@"PlanType":[NSNumber numberWithInt:scene.planType],@"WeekValue":@"1",@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
+        }else{
+            
+            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":@"store.png",@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:2],@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
+        }
         
-               NSDictionary *parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ScenceFile":scenePath,@"PlistID":[NSNumber numberWithInt:scene.sceneID],@"ImgFile":scene.picName,@"isPlan":@"2"};
         
         
         
         
         NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
-        NSString *fileName = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,scene.sceneID];
         [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName completion:nil];
         
         
@@ -72,7 +79,7 @@
 {
    }
 
-- (void) delScenen:(Scene *)scene
+- (void) delScene:(Scene *)scene
 {
     if (!scene.readonly) {
         NSString *filePath=[NSString stringWithFormat:@"%@/%@_%d.plist",[IOManager scenesPath], SCENE_FILE_NAME, scene.sceneID];
@@ -88,7 +95,7 @@
 }
 
 //保证newScene的ID不变f
-- (void) editScenen:(Scene *)newScene
+- (void) editScene:(Scene *)newScene
 {
     [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, newScene.sceneID ] scene:newScene];
     //同步云端
@@ -96,7 +103,7 @@
     //上传文件
 }
 
-- (void) favoriteScenen:(Scene *)newScene withName:(NSString *)name
+- (void) favoriteScene:(Scene *)newScene withName:(NSString *)name
 {
     NSString *scenePath=[[IOManager favoritePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, newScene.sceneID ]];
     NSDictionary *dic = [PrintObject getObjectData:newScene];

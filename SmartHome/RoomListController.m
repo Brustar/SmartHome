@@ -14,6 +14,8 @@
 #import "Room.h"
 #import <CoreLocation/CoreLocation.h>
 #import "SunCount.h"
+#import "Scene.h"
+#import "SceneManager.h"
 @interface RoomListController ()<UITableViewDataSource,UITableViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,CLLocationManagerDelegate>
 @property (nonatomic,strong) NSArray *rooms;
 @property (weak, nonatomic) IBOutlet UIView *timeView;
@@ -37,6 +39,10 @@
 @property (strong,nonatomic) CLLocationManager *lm;
 @property (nonatomic,strong) NSMutableArray *timeDict;
 @property (nonatomic,strong) NSArray *antronomicalTimes;
+@property (nonatomic,strong) Scene *scene;
+
+@property (nonatomic,assign) int selectedRoomId;
+
 @end
 
 @implementation RoomListController
@@ -51,6 +57,7 @@
         }
     }
     return _timeDict;
+    
 }
 -(NSArray *)hours
 {
@@ -121,7 +128,14 @@
     }
     return _rooms;
 }
-
+-(Scene *)scene
+{
+    if(!_scene)
+    {
+        _scene = [[Scene alloc] initWhithoutSchedule];
+    }
+    return _scene;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.timeView.layer.cornerRadius = 10;
@@ -191,6 +205,7 @@
     {
         Room *room = self.rooms[indexPath.row];
         [self.delegate RoomListControllerDelegate:self SelectedRoom:room.rId];
+        self.selectedRoomId = room.rId;
     }
     
 }
@@ -239,6 +254,25 @@
         }
         
     }
+    
+    NSString *hour = self.hours[[self.pickerTime selectedRowInComponent:0]];
+    NSString *min = self.minutes[[self.pickerTime selectedRowInComponent:1]];
+    NSString *noon = self.noon[[self.pickerTime selectedRowInComponent:2]];
+    NSString *time = [NSString stringWithFormat:@"%@:%@ %@", hour, min, noon];
+    
+    if (self.startTimeBtn.enabled)
+        
+    {
+        [self.startTimeBtn setTitle:time forState:UIControlStateNormal];
+        
+        self.endTimeBtn.enabled = YES;
+    } else {
+        
+        self.startTimeBtn.enabled  = YES;
+    }
+    
+
+    
 }
 - (IBAction)settingRepeatTime:(UIButton *)sender {
     self.fixTimeVC.modalPresentationStyle = UIModalPresentationPopover;
@@ -337,12 +371,12 @@
     }else {
         self.timeView.hidden =  NO;
         NSString  *astronomicealTime;
-        NSDictionary *dic;
         int isPlane;
+        int playType;
         if([self.startTimeBtn.titleLabel.text isEqualToString:@"设置"])
         {
             isPlane = 2;
-            dic = @{@"isPane":[NSNumber numberWithInt:isPlane]};
+            
         }else{
             if([self.startTimeBtn.titleLabel.text isEqualToString:@"黎明"]){
                 astronomicealTime = @"1";
@@ -353,7 +387,7 @@
             }else {
                 astronomicealTime = @"4";
             }
-            int playType;
+            
             if(astronomicealTime)
             {
                 playType = 2;
@@ -361,14 +395,18 @@
                 playType = 1;
             }
             isPlane = 1;
-            dic = @{@"astronomicealTime":astronomicealTime,@"playType":[NSNumber numberWithInt:playType],@"startTIme":self.startTimeBtn.titleLabel.text,@"eendTime":self.endTimeBtn.titleLabel.text,@"isPane":[NSNumber numberWithInt:isPlane]};
+            
         }
-
-        
-        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    
-        [center postNotificationName:@"fixTime" object:nil userInfo:dic];
-
+      
+        Scene *scene = [[Scene alloc]initWhithoutSchedule];
+        [scene setIsPlan:isPlane];
+        [scene setRoomID:self.selectedRoomId];
+        [scene setPlanType:playType];
+        [scene setStartTime:self.startTimeBtn.titleLabel.text];
+        [scene setReadonly: NO];
+        [scene setWeekRepeat:YES];
+        [scene setWeekValue:self.repeatBtn.titleLabel.text];
+        [[SceneManager defaultManager] addScene:scene withName:nil withPic:@""];
         
     }
     btn.selected = !btn.selected;
@@ -377,48 +415,21 @@
 - (IBAction)setTimeOnClick:(UIButton *)sender {
     
     if (sender == self.startTimeBtn) {
-        self.startTimeBtn.enabled = NO;
-        self.endTimeBtn.enabled = YES;
+       
+        self.startTimeBtn.enabled = YES;
+        self.endTimeBtn.enabled = NO;
     }
     else {
-        self.endTimeBtn.enabled = NO;
-        self.startTimeBtn.enabled = YES;
+        self.endTimeBtn.enabled = YES;
+        self.startTimeBtn.enabled = NO;
     }
     
-    if (self.pickTimeView.hidden) {
-        self.pickTimeView.hidden = NO;
-    }
+    self.pickTimeView.hidden = !self.pickTimeView.hidden;
 }
 
-- (IBAction)cnacelSetTime:(id)sender {
-    self.startTimeBtn.enabled = YES;
-    self.endTimeBtn.enabled = YES;
-    self.pickTimeView.hidden = YES;
 
-}
 
-- (IBAction)sureSetTIme:(id)sender {
-    
-    NSString *hour = self.hours[[self.pickerTime selectedRowInComponent:0]];
-    NSString *min = self.minutes[[self.pickerTime selectedRowInComponent:1]];
-    NSString *noon = self.noon[[self.pickerTime selectedRowInComponent:2]];
-    NSString *time = [NSString stringWithFormat:@"%@:%@ %@", hour, min, noon];
-    
-    if (!self.startTimeBtn.enabled) {
-        [self.startTimeBtn setTitle:time forState:UIControlStateNormal];
-    } else {
-        [self.endTimeBtn setTitle:time forState:UIControlStateNormal];
-    }
-    
-    self.startTimeBtn.enabled = YES;
-    self.endTimeBtn.enabled = YES;
-    
-    self.pickTimeView.hidden = YES;
-    
-    
-    
-    
-}
+
 
 - (IBAction)setAstromomicalTime:(id)sender {
     
