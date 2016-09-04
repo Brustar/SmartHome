@@ -94,8 +94,12 @@
             }else if([typeName isEqualToString:@"DVD"]){
                 segue = @"plane_DVD";
                 
+            }else if([typeName isEqualToString:@"功放"]){
+                segue = @"pane_amplifer";
+               
             }else{
                 segue = @"plane_Guard";
+
             }
 
             [self.delegate performSegueWithIdentifier:segue sender:self.delegate];

@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#define SCENE_FILE_NAME @"ecloud_scene"
+#define SCENE_FILE_NAME [[NSUserDefaults standardUserDefaults] objectForKey:@"hostId"]
+
 
 @interface Scene : NSObject
 //场景id

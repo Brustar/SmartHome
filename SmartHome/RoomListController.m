@@ -12,8 +12,9 @@
 #import "FixTimeRepeatController.h"
 #import "RoomManager.h"
 #import "Room.h"
-
-@interface RoomListController ()<UITableViewDataSource,UITableViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
+#import <CoreLocation/CoreLocation.h>
+#import "SunCount.h"
+@interface RoomListController ()<UITableViewDataSource,UITableViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,CLLocationManagerDelegate>
 @property (nonatomic,strong) NSArray *rooms;
 @property (weak, nonatomic) IBOutlet UIView *timeView;
 @property (weak, nonatomic) IBOutlet UIButton *repeatBtn;
@@ -27,10 +28,30 @@
 //@property (nonatomic,strong) NSMutableArray *weeks;
 @property (nonatomic,strong) NSMutableDictionary *weeks;
 
+
+@property (weak, nonatomic) IBOutlet UIButton *startTimeBtn;
+
+@property (weak, nonatomic) IBOutlet UIButton *endTimeBtn;
+@property (weak, nonatomic) IBOutlet UIView *pickTimeView;
+@property (weak, nonatomic) IBOutlet UIPickerView *pickerTime;
+@property (strong,nonatomic) CLLocationManager *lm;
+@property (nonatomic,strong) NSMutableArray *timeDict;
+@property (nonatomic,strong) NSArray *antronomicalTimes;
 @end
 
 @implementation RoomListController
 
+-(NSMutableArray *)timeDict
+{
+    if(!_timeDict)
+    {
+        if(!_timeDict)
+        {
+            _timeDict = [NSMutableDictionary dictionary];
+        }
+    }
+    return _timeDict;
+}
 -(NSArray *)hours
 {
     if(!_hours)
@@ -110,7 +131,15 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = [UIView new];
    
-    
+    if ([CLLocationManager locationServicesEnabled]) {
+        self.lm = [[CLLocationManager alloc]init];
+        self.lm.delegate = self;
+        // 最小距离
+        self.lm.distanceFilter=kCLDistanceFilterNone;
+    }else{
+        NSLog(@"定位服务不可利用");
+    }
+
 
     [self.tableView selectRowAtIndexPath:0 animated:YES scrollPosition:UITableViewScrollPositionTop];
     self.splitViewController.maximumPrimaryColumnWidth = 250;
@@ -165,17 +194,7 @@
     }
     
 }
-- (IBAction)clickFixTimeBtn:(id)sender {
-    UIButton *btn = (UIButton *)sender;
-    
-    if(btn.selected)
-    {
-        self.timeView.hidden = YES;
-    }else {
-        self.timeView.hidden =  NO;
-    }
-    btn.selected = !btn.selected;
-}
+
 
 #pragma  mark - UIPickerViewDelegate
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -306,6 +325,134 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
+}
+
+
+- (IBAction)clickFixTimeBtn:(id)sender {
+    UIButton *btn = (UIButton *)sender;
+    
+    if(btn.selected)
+    {
+        self.timeView.hidden = YES;
+    }else {
+        self.timeView.hidden =  NO;
+        NSString  *astronomicealTime;
+        NSDictionary *dic;
+        int isPlane;
+        if([self.startTimeBtn.titleLabel.text isEqualToString:@"设置"])
+        {
+            isPlane = 2;
+            dic = @{@"isPane":[NSNumber numberWithInt:isPlane]};
+        }else{
+            if([self.startTimeBtn.titleLabel.text isEqualToString:@"黎明"]){
+                astronomicealTime = @"1";
+            }else if([self.startTimeBtn.titleLabel.text isEqualToString:@"日出"]){
+                astronomicealTime = @"2";
+            }else if([self.startTimeBtn.titleLabel.text isEqualToString:@"日落"]){
+                astronomicealTime = @"3";
+            }else {
+                astronomicealTime = @"4";
+            }
+            int playType;
+            if(astronomicealTime)
+            {
+                playType = 2;
+            }else{
+                playType = 1;
+            }
+            isPlane = 1;
+            dic = @{@"astronomicealTime":astronomicealTime,@"playType":[NSNumber numberWithInt:playType],@"startTIme":self.startTimeBtn.titleLabel.text,@"eendTime":self.endTimeBtn.titleLabel.text,@"isPane":[NSNumber numberWithInt:isPlane]};
+        }
+
+        
+        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    
+        [center postNotificationName:@"fixTime" object:nil userInfo:dic];
+
+        
+    }
+    btn.selected = !btn.selected;
+}
+
+- (IBAction)setTimeOnClick:(UIButton *)sender {
+    
+    if (sender == self.startTimeBtn) {
+        self.startTimeBtn.enabled = NO;
+        self.endTimeBtn.enabled = YES;
+    }
+    else {
+        self.endTimeBtn.enabled = NO;
+        self.startTimeBtn.enabled = YES;
+    }
+    
+    if (self.pickTimeView.hidden) {
+        self.pickTimeView.hidden = NO;
+    }
+}
+
+- (IBAction)cnacelSetTime:(id)sender {
+    self.startTimeBtn.enabled = YES;
+    self.endTimeBtn.enabled = YES;
+    self.pickTimeView.hidden = YES;
+
+}
+
+- (IBAction)sureSetTIme:(id)sender {
+    
+    NSString *hour = self.hours[[self.pickerTime selectedRowInComponent:0]];
+    NSString *min = self.minutes[[self.pickerTime selectedRowInComponent:1]];
+    NSString *noon = self.noon[[self.pickerTime selectedRowInComponent:2]];
+    NSString *time = [NSString stringWithFormat:@"%@:%@ %@", hour, min, noon];
+    
+    if (!self.startTimeBtn.enabled) {
+        [self.startTimeBtn setTitle:time forState:UIControlStateNormal];
+    } else {
+        [self.endTimeBtn setTitle:time forState:UIControlStateNormal];
+    }
+    
+    self.startTimeBtn.enabled = YES;
+    self.endTimeBtn.enabled = YES;
+    
+    self.pickTimeView.hidden = YES;
+    
+    
+    
+    
+}
+
+- (IBAction)setAstromomicalTime:(id)sender {
+    
+    if (self.lm!=nil) {
+        [self.lm startUpdatingLocation];
+    }
+    UIButton *btn = (UIButton *)sender;
+    if(btn.tag == 0)
+    {
+        [self.startTimeBtn setTitle:@"黎明" forState:UIControlStateNormal];
+        
+        
+    }else if(btn.tag == 1)
+    {
+        [self.startTimeBtn setTitle:@"日出" forState:UIControlStateNormal];
+        
+    }else if(btn.tag == 2)
+    {
+        [self.startTimeBtn setTitle:@"日落" forState:UIControlStateNormal];
+        
+    }else{
+        [self.startTimeBtn setTitle:@"黄昏" forState:UIControlStateNormal];
+    }
+
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+    didUpdateToLocation:(CLLocation *)newLocation
+           fromLocation:(CLLocation *)oldLocation{
+    [SunCount sunrisetWithLongitude:newLocation.coordinate.longitude andLatitude:newLocation.coordinate.latitude
+                        andResponse:^(SunString *str){
+                            NSLog(@"%@,%@,%@,%@",str.dayspring, str.sunrise,str.sunset,str.dusk);
+                            self.antronomicalTimes = @[str.dayspring,str.sunrise,str.sunset,str.dusk];
+                        }];
 }
 
 - (IBAction)gotoLastViewController:(id)sender {

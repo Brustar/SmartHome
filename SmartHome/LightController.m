@@ -82,7 +82,7 @@
     
     self.detailCell = [[[NSBundle mainBundle] loadNibNamed:@"DetailTableViewCell" owner:self options:nil] lastObject];
     //self.detailCell.bright.continuous = NO;
-    [self.detailCell.bright addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside| UIControlEventTouchUpOutside];
+    [self.detailCell.bright addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
 
     [self.detailCell.power addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];

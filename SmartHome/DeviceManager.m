@@ -530,6 +530,7 @@
         [db executeUpdate:sql];
     }
     [db close];
+ 
     return sceneID;
 }
 
@@ -857,6 +858,8 @@
 //根据场景ID得到改场景下的所有的设备ID
 +(NSArray *)getDeviceIDsBySeneId:(int)SceneId;
 {
+   
+    
     NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,SceneId];
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
     NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfFile:scenePath];

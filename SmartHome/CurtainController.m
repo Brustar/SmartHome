@@ -78,7 +78,7 @@
     self.tableView.dataSource = self;
     self.cell = [[[NSBundle mainBundle] loadNibNamed:@"CurtainTableViewCell" owner:self options:nil] lastObject];
     //self.cell.slider.continuous = NO;
-    [self.cell.slider addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpOutside|UIControlEventTouchUpInside];
+    [self.cell.slider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     [self.cell.open addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.cell.close addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     

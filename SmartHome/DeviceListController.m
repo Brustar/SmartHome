@@ -20,6 +20,8 @@
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "UIImagePickerController+LandScapeImagePicker.h"
+#import "AmplifierController.h"
+#import "UploadManager.h"
 @interface DeviceListController ()<UITableViewDelegate,UITableViewDataSource,UISplitViewControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -134,6 +136,9 @@
     {
         segue = @"Netv";
 
+    }else if([typeName isEqualToString:@"功放"]){
+        segue = @"amplifierSegue";
+        
     }else{
         segue = @"Guard";
     }
@@ -207,19 +212,57 @@
 }
 - (IBAction)sureStoreScene:(id)sender {
     self.saveSceneView.hidden = YES;
-    NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
-    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
-    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
     
-    Scene *scene = [[Scene alloc]initWhithoutSchedule];
-    [scene setValuesForKeysWithDictionary:plistDic];
-    NSString *imgStr = [self UIimageToStr:self.sceneImg];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fixTimeNotification:) name:@"fixTime" object:nil];
     
-    [[SceneManager defaultManager] addScenen:scene withName:self.sceneName.text withPic:imgStr];
+
+    
+    
+    
+//    NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
+//    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+//    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+//
+//    Scene *scene = [[Scene alloc]initWhithoutSchedule];
+//    [scene setValuesForKeysWithDictionary:plistDic];
+//    NSString *imgStr = [self UIimageToStr:self.sceneImg];
+//    
+//    [[SceneManager defaultManager] addScenen:scene withName:self.sceneName.text withPic:imgStr];
     [self.navigationController popViewControllerAnimated: YES];
 
 }
+-(void)fixTimeNotification:(NSNotification *)notif
+{
+    NSDictionary *dic = notif.userInfo;
+    NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
+    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+    //1表示定时，2表示不定时
+    if([dic[@"isPane"] intValue] == 2)
+    {
+        
+        
+        Scene *scene = [[Scene alloc]initWhithoutSchedule];
+        [scene setValuesForKeysWithDictionary:plistDic];
+        NSString *imgStr = [self UIimageToStr:self.sceneImg];
+        if(self.sceneName.text)
+        {
+            int sceneid=[DeviceManager saveMaxSceneId:scene name:self.sceneName pic:imgStr];
+            scene.sceneID=sceneid;
+            NSString *URL = [NSString stringWithFormat:@"%@SceneAdd.aspx",[IOManager httpAddr]];
+             NSDictionary *parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":scene.sceneName,@"ScenceFile":scenePath,@"PlistID":[NSNumber numberWithInt:scene.sceneID],@"ImgFile":scene.picName,@"PlistID":[NSNumber numberWithInt:scene.sceneID],@"isPlan":@"1",@"StartTime":dic[@"StartTime"],@"AstronomicalTime":dic[@"AstronomicalTime"],@"PlanType":dic[@"PlanType"],@"WeekValue":@"0"};
+            
+            NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
+            NSString *fileName = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,scene.sceneID];
+            [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName completion:nil];
+        }
+        
 
+        [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, scene.sceneID] scene:scene];
+
+
+    }
+}
 - (IBAction)canleStore:(id)sender {
     self.saveSceneView.hidden = YES;
 }

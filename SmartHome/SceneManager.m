@@ -48,37 +48,22 @@
         NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
         NSString *URL = [NSString stringWithFormat:@"%@SceneAdd.aspx",[IOManager httpAddr]];
         
+               NSDictionary *parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ScenceFile":scenePath,@"PlistID":[NSNumber numberWithInt:scene.sceneID],@"ImgFile":scene.picName,@"isPlan":@"2"};
         
         
-        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-        // 实际上就是AFN没有对响应数据做任何处理的情况
-        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-        NSDictionary *parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ScenceFile":scenePath};
-        // formData是遵守了AFMultipartFormData的对象
-        [manager POST:URL parameters:parameter constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-            
-            // 将本地的文件上传至服务器
-            NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
-            NSString *fileName = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,scene.sceneID];
-            [formData appendPartWithFileData:fileData name:@"upload" fileName:fileName mimeType:@"multipart/form-data"];
-            
-        } progress:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
-           // NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-           
-            [MBProgressHUD showSuccess:@"上传文件成功"];
-
-        } failure:^(NSURLSessionDataTask *operation, NSError *error) {
-            NSLog(@"错误 %@", error.localizedDescription);
-            [MBProgressHUD showSuccess:error.localizedDescription];
-
-        }];
+        
+        
+        NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
+        NSString *fileName = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,scene.sceneID];
+        [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName completion:nil];
+        
         
   
     }
     [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, scene.sceneID] scene:scene];
    
 
-    //上传文件
+    
     
 }
 

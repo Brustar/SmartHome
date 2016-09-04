@@ -27,7 +27,7 @@
 #import "FMDatabase.h"
 #import "DeviceInfo.h"
 #import "PackManager.h"
-
+#import "IbeaconManager.h"
 @interface LoginController ()<QRCodeReaderDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITextField *user;
@@ -313,6 +313,13 @@
                 int sType = [sceneInfoDic[@"sType"] intValue];
                 NSString *sNumber = sceneInfoDic[@"sNumber"];
                 NSString *urlImage = sceneInfoDic[@"urlImage"];
+                if(sceneInfoDic[@"urlPlist"])
+                {
+                    NSString *urlPlist = sceneInfoDic[@"urlPlist"];
+                    [self downloadPlsit:urlPlist];
+
+                }
+                
                 NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,'%@',%d)",sId,sName,rName,urlImage,rId,sType,sNumber,0];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
@@ -329,6 +336,38 @@
     }
     
     [db close];
+    
+}
+//下载场景plist文件到本地
+-(void)downloadPlsit:(NSString *)urlPlist
+
+{
+    AFHTTPSessionManager *session=[AFHTTPSessionManager manager];
+    
+    NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:urlPlist]];
+    NSURLSessionDownloadTask *task=[session downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+        //下载进度
+        NSLog(@"%@",downloadProgress);
+        
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            
+            //self.pro.progress=downloadProgress.fractionCompleted;
+            
+        }];
+        
+    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        
+        //下载到哪个文件夹
+        NSString *path = [[IOManager scenesPath] stringByAppendingPathComponent:response.suggestedFilename];
+    
+    
+        return [NSURL fileURLWithPath:path];
+        
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        NSLog(@"下载完成了 %@",filePath);
+    }];
+    [task resume];
     
 }
 //写电视频道配置信息到SQL
@@ -393,6 +432,7 @@
             {
                
                 //直接登录主机
+                
                 [self sendRequestToHostWithTag:2 andRow:0];
                 //[self goToViewController];
             }else{
@@ -415,7 +455,7 @@
         if ([responseObject[@"Result"] intValue]==0)
         {
             
-           // [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
+            
             self.tableView.hidden = YES;
             self.coverView.hidden = YES;
             
@@ -504,9 +544,9 @@
 -(void)sendRequestToHostWithTag:(int)tag andRow:(int)row
 {
     NSString *url = [NSString stringWithFormat:@"%@UserLoginHost.aspx",[IOManager httpAddr]];
-
-    NSDictionary *dict = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"HostID":self.hostIDS[row]};
     
+    NSDictionary *dict = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"HostID":self.hostIDS[row]};
+    [IOManager writeUserdefault:self.hostIDS[row] forKey:@"hostId"];
     [[NSUserDefaults standardUserDefaults] setObject:self.user.text forKey:@"Account"];
     HttpManager *http=[HttpManager defaultManager];
     http.delegate=self;

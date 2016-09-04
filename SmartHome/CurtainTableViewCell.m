@@ -18,6 +18,15 @@
 
 - (IBAction)brightValueChanged:(id)sender {
     self.valueLabel.text = [NSString stringWithFormat:@"%.0f%%",self.slider.value *100];
+    if([self.open isSelected])
+    {
+        self.valueLabel.text = @"100%";
+        
+    }
+    if([self.close isSelected])
+    {
+        self.valueLabel.text = @"0%";
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

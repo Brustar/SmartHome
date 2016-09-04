@@ -8,7 +8,7 @@
 
 #import "UploadManager.h"
 #import <AFNetworking.h>
-
+#import "MBProgressHUD+NJ.h"
 @implementation UploadManager
 
 + (id)defaultManager {
@@ -40,30 +40,25 @@
     }];
 }
 
-- (void)uploadScene:(NSData *)sceneData url:(NSString *) url completion:(void (^)(id responseObject))completion
+- (void)uploadScene:(NSData *)sceneData url:(NSString *) url dic:(NSDictionary *)dic fileName:(NSString *)fileName completion:(void (^)(id responseObject))completion
 
 {
-    
-    //    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-//    [request setFile:sceneFile forKey:@"scene"];
-//    [request startAsynchronous];
-//    [request setCompletionBlock:completion];
-    
-
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     // 实际上就是AFN没有对响应数据做任何处理的情况
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
     // formData是遵守了AFMultipartFormData的对象
-    [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [manager POST:url parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         // 将本地的文件上传至服务器
-        [formData appendPartWithFileData:sceneData name:@"upload" fileName:@"a.plist" mimeType:@"multipart/form-data"];
+        [formData appendPartWithFileData:sceneData name:@"upload" fileName:fileName mimeType:@"multipart/form-data"];
     } progress:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSLog(@"完成 %@", result);
-        completion(responseObject);
+        [MBProgressHUD showSuccess:@"增加场景成功"];
+        //completion(responseObject);
     } failure:^(NSURLSessionDataTask *operation, NSError *error) {
         NSLog(@"错误 %@", error.localizedDescription);
+        [MBProgressHUD showError:error.localizedDescription];
     }];
 
 }
