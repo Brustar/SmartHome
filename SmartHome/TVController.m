@@ -293,10 +293,9 @@
         }else{
             data = [device volumeDown:self.deviceid];
         }
-        for (int i=0; i<5; i++) {
-            SocketManager *sock=[SocketManager defaultManager];
-            [sock.socket writeData:data withTimeout:1 tag:1];
-        }
+        
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
         
         [self save:nil];
     }

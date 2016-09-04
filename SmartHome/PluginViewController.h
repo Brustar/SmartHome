@@ -5,11 +5,15 @@
 //  Created by 逸云科技 on 16/8/5.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
+#import <HomeKit/HomeKit.h>
 
-#import <UIKit/UIKit.h>
+@interface PluginViewController : UIViewController<HMHomeManagerDelegate, HMHomeDelegate>
 
-@interface PluginViewController : UIViewController
 @property (strong, nonatomic) NSMutableArray *devices;
 @property (nonatomic,assign) int roomID;
 @property (nonatomic,weak) NSString *sceneid;
+@property (nonatomic, strong) HMHomeManager *homeManager;
+@property (nonatomic, strong) HMHome *primaryHome;
+@property (nonatomic, strong) HMCharacteristic *characteristic;
+
 @end

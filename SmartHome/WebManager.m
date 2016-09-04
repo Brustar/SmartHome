@@ -95,6 +95,11 @@
 #pragma mark - UIWebView delegate
 - (BOOL)webView:(UIWebView *)aWebView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
+    if([request.URL.scheme isEqualToString:@"ecloud"])
+    {
+        [self cancel:nil];
+        return NO;
+    }
     return YES;
 }
 

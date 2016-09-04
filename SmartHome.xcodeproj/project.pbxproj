@@ -45,7 +45,7 @@
 		0F4B49801CFEB13500D93DD2 /* CurtainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4B497F1CFEB13500D93DD2 /* CurtainController.m */; };
 		0F6AB86F1D782D9D0041E39C /* SunCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6AB86C1D782D9D0041E39C /* SunCount.m */; };
 		0F6AB8701D782D9D0041E39C /* SunString.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6AB86E1D782D9D0041E39C /* SunString.m */; };
-		0F7E2E161D581AC400A47D5D /* UITest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F7E2E151D581AC400A47D5D /* UITest.storyboard */; };
+		0F7E2E161D581AC400A47D5D /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F7E2E151D581AC400A47D5D /* iPhone.storyboard */; };
 		0F91AA171CDC798700094C25 /* PrintObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F91AA161CDC798700094C25 /* PrintObject.m */; };
 		0F96A1641D17F37C00E1594F /* RulerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F96A15D1D17F37C00E1594F /* RulerItem.m */; };
 		0F96A1651D17F37C00E1594F /* RulerItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F96A15F1D17F37C00E1594F /* RulerItemModel.m */; };
@@ -364,7 +364,7 @@
 		0F6AB86C1D782D9D0041E39C /* SunCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SunCount.m; sourceTree = "<group>"; };
 		0F6AB86D1D782D9D0041E39C /* SunString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SunString.h; sourceTree = "<group>"; };
 		0F6AB86E1D782D9D0041E39C /* SunString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SunString.m; sourceTree = "<group>"; };
-		0F7E2E151D581AC400A47D5D /* UITest.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UITest.storyboard; sourceTree = "<group>"; };
+		0F7E2E151D581AC400A47D5D /* iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhone.storyboard; sourceTree = "<group>"; };
 		0F91AA151CDC798700094C25 /* PrintObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintObject.h; sourceTree = "<group>"; };
 		0F91AA161CDC798700094C25 /* PrintObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintObject.m; sourceTree = "<group>"; };
 		0F96A15C1D17F37C00E1594F /* RulerItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RulerItem.h; path = PrettyRuler/RulerItem.h; sourceTree = SOURCE_ROOT; };
@@ -1143,7 +1143,7 @@
 				F60FDB451D003FD500AB04BE /* CurtainTableViewCell.xib */,
 				F6359AFF1CFFC4DC0035EB31 /* ColourTableViewCell.xib */,
 				0F032D5B1CC9B12700D1920D /* LaunchScreen.storyboard */,
-				0F7E2E151D581AC400A47D5D /* UITest.storyboard */,
+				0F7E2E151D581AC400A47D5D /* iPhone.storyboard */,
 			);
 			name = storeboard;
 			sourceTree = "<group>";
@@ -1448,7 +1448,7 @@
 				0FC0FFD71CF553AD000F71D5 /* planeScene.plist in Resources */,
 				0F032D5D1CC9B12700D1920D /* LaunchScreen.storyboard in Resources */,
 				F60FDB471D003FD500AB04BE /* CurtainTableViewCell.xib in Resources */,
-				0F7E2E161D581AC400A47D5D /* UITest.storyboard in Resources */,
+				0F7E2E161D581AC400A47D5D /* iPhone.storyboard in Resources */,
 				0F032D5A1CC9B12700D1920D /* Assets.xcassets in Resources */,
 				F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */,
 				F668AF251D53413B0079587F /* Main.storyboard in Resources */,

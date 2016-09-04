@@ -43,12 +43,22 @@
     [device netReachbility];
     [device deviceGenaration];
     
-    if (device.reachbility==ReachableViaWiFi) {
-        [[SocketManager defaultManager] connectUDP:[IOManager udpPort]];
-    }
     //登录后每次系统启动自动更新云端配置，第一次安装此处不更新，登录的时候再更新
     [device initConfig];
     
+    // Override point for customization after application launch.
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+        UIViewController* viewcontroller = [secondStoryBoard instantiateViewControllerWithIdentifier:@"main"];
+        self.window.rootViewController = viewcontroller;
+        [self.window makeKeyAndVisible];
+        return YES;
+    }
+    //iPad连本地
+    if (device.reachbility==ReachableViaWiFi) {
+        [[SocketManager defaultManager] connectUDP:[IOManager udpPort]];
+    }
     return YES;
 }
 

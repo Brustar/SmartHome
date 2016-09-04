@@ -40,19 +40,6 @@
 {
     //创建sqlite数据库及结构
     [self initSQlite];
-    
-    //先判断版本号
-    //更新设备，房间，场景表，protocol,写入sqlite
-    //缓存协议
-    /*
-    NSString *url = [NSString stringWithFormat:@"%@GetProtocolConfig.aspx",[IOManager httpAddr]];
-    id ver=[[NSUserDefaults standardUserDefaults] objectForKey:@"protocolVer"];
-    NSDictionary *param = @{@"version":[NSString stringWithFormat:@"%@" ,ver]};
-    HttpManager *http=[HttpManager defaultManager];
-    http.delegate=self;
-    http.tag = 1;
-    [http sendPost:url param:param];
-    */
 }
 
 -(void) httpHandler:(id) responseObject tag:(int)tag
