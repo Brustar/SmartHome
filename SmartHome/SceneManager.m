@@ -258,71 +258,14 @@
     SocketManager *sock=[SocketManager defaultManager];
     
     Scene *scene=[self readSceneByID:sceneid];
-    for (id device in scene.devices) {
-        
+    for (id device in scene.devices)
+    {
         if ([device respondsToSelector:@selector(deviceID)])
         {
             NSString *deviceid=[NSString stringWithFormat:@"%d", [device deviceID]];
             data=[[DeviceInfo defaultManager] close:deviceid];
             [sock.socket writeData:data withTimeout:1 tag:1];
         }
-        /*
-        if ([device isKindOfClass:[TV class]]) {
-            TV *tv=(TV *)device;
-            NSString *deviceid=[NSString stringWithFormat:@"%d", tv.deviceID];
-            data=[[DeviceInfo defaultManager] close:deviceid];
-            [sock.socket writeData:data withTimeout:1 tag:1];
-        }
-        
-        if ([device isKindOfClass:[DVD class]]) {
-            DVD *dvd=(DVD *)device;
-            NSString *deviceid=[NSString stringWithFormat:@"%d", dvd.deviceID];
-            data=[[DeviceInfo defaultManager] close:deviceid];
-            [sock.socket writeData:data withTimeout:1 tag:1];
-        }
-        
-        if ([device isKindOfClass:[Netv class]]) {
-            Netv *netv=(Netv *)device;
-            NSString *deviceid=[NSString stringWithFormat:@"%d", netv.deviceID];
-            data=[[DeviceInfo defaultManager] close:deviceid];
-            [sock.socket writeData:data withTimeout:1 tag:1];
-        }
-        
-        if ([device isKindOfClass:[Radio class]]) {
-            Radio *fm=(Radio *)device;
-            NSString *deviceid=[NSString stringWithFormat:@"%d", fm.deviceID];
-            data=[[DeviceInfo defaultManager] close:deviceid];
-            [sock.socket writeData:data withTimeout:1 tag:1];
-        }
-        
-        if ([device isKindOfClass:[BgMusic class]]) {
-            BgMusic *music=(BgMusic *)device;
-            NSString *deviceid=[NSString stringWithFormat:@"%d", music.deviceID];
-            data=[[DeviceInfo defaultManager] close:deviceid];
-            [sock.socket writeData:data withTimeout:1 tag:1];
-        }
-        
-        if ([device isKindOfClass:[Light class]]) {
-            Light *light=(Light *)device;
-            NSString *deviceid=[NSString stringWithFormat:@"%d", light.deviceID];
-            data=[[DeviceInfo defaultManager] toogleLight:false deviceID:deviceid];
-            [sock.socket writeData:data withTimeout:1 tag:1];
-        }
-        
-        if ([device isKindOfClass:[Projector class]]) {
-            Projector *projector=(Projector *)device;
-            NSString *deviceid=[NSString stringWithFormat:@"%d", projector.deviceID];
-            data=[[DeviceInfo defaultManager] toogle:false deviceID:deviceid];
-            [sock.socket writeData:data withTimeout:1 tag:1];
-        }
-        
-        if ([device isKindOfClass:[Aircon class]]) {
-            Aircon *aircon=(Aircon *)device;
-            NSString *deviceid=[NSString stringWithFormat:@"%d", aircon.deviceID];
-            data=[[DeviceInfo defaultManager] toogleAirCon:false deviceID:deviceid];
-            [sock.socket writeData:data withTimeout:1 tag:1];
-        }
-         */
     }
 }
 
