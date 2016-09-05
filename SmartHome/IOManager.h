@@ -8,6 +8,8 @@
 #import "Scene.h"
 #import "PrintObject.h"
 
+#define FileHashDefaultChunkSizeForReadingData 1024*8
+
 @interface IOManager : NSObject
 
 + (NSString *) scenesPath;
@@ -15,7 +17,7 @@
 + (NSString *) sqlitePath;
 + (NSString *) httpAddr;
 + (NSString *) tcpAddr;
-+ (NSString *)configPath:(NSString *)configPath;
+
 + (int) tcpPort;
 + (int) udpPort;
 
@@ -28,5 +30,6 @@
 + (void) removeFile:(NSString *)file;
 + (void) removeTempFile;
 + (void) writeUserdefault:(id)object forKey:(NSString *)key;
++ (NSString*) fileMD5:(NSString*)path;
 
 @end

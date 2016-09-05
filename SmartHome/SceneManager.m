@@ -233,6 +233,14 @@
     
     Scene *scene=[self readSceneByID:sceneid];
     for (id device in scene.devices) {
+        
+        if ([device respondsToSelector:@selector(deviceID)])
+        {
+            NSString *deviceid=[NSString stringWithFormat:@"%d", [device deviceID]];
+            data=[[DeviceInfo defaultManager] close:deviceid];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+        }
+        /*
         if ([device isKindOfClass:[TV class]]) {
             TV *tv=(TV *)device;
             NSString *deviceid=[NSString stringWithFormat:@"%d", tv.deviceID];
@@ -288,6 +296,7 @@
             data=[[DeviceInfo defaultManager] toogleAirCon:false deviceID:deviceid];
             [sock.socket writeData:data withTimeout:1 tag:1];
         }
+         */
     }
 }
 
