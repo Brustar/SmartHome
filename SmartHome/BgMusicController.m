@@ -17,6 +17,7 @@
 
 @interface BgMusicController ()
 @property (weak, nonatomic) IBOutlet UISlider *volume;
+@property (weak, nonatomic) IBOutlet UILabel *voiceValue;
 
 
 @end
@@ -77,6 +78,7 @@
         NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volume.value*100 deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
+        self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
     }
     BgMusic *device=[[BgMusic alloc] init];
     [device setDeviceID:[self.deviceid intValue]];

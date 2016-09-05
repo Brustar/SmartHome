@@ -163,14 +163,14 @@
         {
             cell.titleLabel.text = @"本月总能耗超出上月";
             cell.timeLabel.text =@"节约能耗，从我做起";
-            cell.totalLabel.text = [NSString stringWithFormat:@"超出上月的能耗:%@",dic[@"overEngry"]];
+            cell.totalLabel.text = [NSString stringWithFormat:@"超出上月的能耗:%@%",dic[@"overEngry"]];
         }else{
             NSString *ename = dic[@"ename"];
             int hour = [dic[@"hour"] intValue];
             int times = [dic[@"times"] intValue];
             
             NSString *energy = dic[@"energy"];
-            cell.totalLabel.text = energy ;
+            cell.totalLabel.text = [NSString stringWithFormat:@"总计:%@kw/h",energy]; ;
             
             switch (indexPath.row) {
                 case 0:

@@ -126,6 +126,8 @@
         NSData *data=[[DeviceInfo defaultManager] roll:self.cell.slider.value * 100 deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
+        
+        
     }
     
     if ([sender isEqual:self.cell.open]) {
@@ -133,6 +135,8 @@
         NSData *data=[[DeviceInfo defaultManager] open:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
+        self.cell.valueLabel.text = @"100%";
+
     }
     
     if ([sender isEqual:self.cell.close]) {
@@ -140,6 +144,7 @@
         NSData *data=[[DeviceInfo defaultManager] close:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
+        self.cell.valueLabel.text = @"0%";
     }
     
     

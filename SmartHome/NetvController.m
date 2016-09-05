@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *netTvRightViewWidth;
 @property (nonatomic,strong) NSArray  *netTVImages;
 
+@property (weak, nonatomic) IBOutlet UILabel *voiceValue;
 
 @end
 
@@ -137,6 +138,7 @@
 {
     if ([sender isEqual:self.volume]) {
         NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volume.value*100 deviceID:self.deviceid];
+        self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
     }

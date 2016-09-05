@@ -11,5 +11,8 @@
 @property (weak, nonatomic) IBOutlet UISlider *bright;
 @property (weak, nonatomic) IBOutlet UISwitch *power;
 @property (weak, nonatomic) IBOutlet UILabel *valueLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *lightImg;
+@property (weak, nonatomic) IBOutlet UIImageView *brightImg;
+
 
 @end

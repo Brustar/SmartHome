@@ -113,6 +113,25 @@
     }
     return typeName;
 }
+
++(NSString*)lightTypeNameByDeviceID:(int)eId
+{
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    NSString *typeName;
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT typeName FROM Devices where ID = %d",eId];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+            typeName = [resultSet stringForColumn:@"typeName"];
+                        
+        }
+    }
+    return typeName;
+}
+
 + (NSString *)getNameWithID:(int)eId
 {
     NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];

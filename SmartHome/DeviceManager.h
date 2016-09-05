@@ -24,6 +24,7 @@
 //根据设备ID获取设备类别
 +(NSString *)deviceTypeNameByDeviceID:(int)eId;
 
++(NSString*)lightTypeNameByDeviceID:(int)eId;
 +(NSString *)getNameWithID:(int)eId;
 
 +(NSArray *)deviceSubTypeByRoomId:(NSInteger)roomID;

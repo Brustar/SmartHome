@@ -183,6 +183,15 @@
         NSData *data=[[DeviceInfo defaultManager] toogleLight:self.detailCell.power.isOn deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
+        BOOL isOn = self.detailCell.power.isOn;
+        
+        if (isOn) {
+            self.detailCell.bright.value = 1;
+        } else {
+            self.detailCell.bright.value = 0;
+        }
+        
+        self.detailCell.valueLabel.text = [NSString stringWithFormat:@"%d%%", (int)(self.detailCell.bright.value * 100)];
     }
     
     if (![etype isEqualToString:@"01"] && [sender isEqual:self.detailCell.bright]) {
@@ -297,17 +306,40 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    NSString *typeName = [DeviceManager lightTypeNameByDeviceID:[self.deviceid intValue]];
+    if ([typeName isEqualToString:@"调色灯"]) {
+        return 3;
+    }
     return 2;
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+    NSString *typeName = [DeviceManager lightTypeNameByDeviceID:[self.deviceid intValue]];
+    
     if(indexPath.row == 0)
     {
         self.detailCell.label.text = self.lNames[self.segmentLight.selectedSegmentIndex];
+        
+        if ([typeName isEqualToString:@"开关灯"] || [typeName isEqualToString:@"调色灯"]) {
+            self.detailCell.bright.hidden = YES;
+            self.detailCell.lightImg.hidden = YES;
+            self.detailCell.brightImg.hidden = YES;
+            self.detailCell.power.hidden = NO;
+            self.detailCell.valueLabel.hidden = YES;
+        } else if ([typeName isEqualToString:@"调光灯"]) {
+            self.detailCell.bright.hidden = NO;
+            self.detailCell.lightImg.hidden = NO;
+            self.detailCell.brightImg.hidden = NO;
+            self.detailCell.power.hidden = NO;
+            self.detailCell.valueLabel.hidden = NO;
+        }
+        
         self.detailCell.selectionStyle = UITableViewCellSelectionStyleNone;
         return self.detailCell;
-    } else if(indexPath.row == 1){
+    }
+    
+    if (indexPath.row == 1 && [typeName isEqualToString:@"调色灯"]) {
         self.cell.lable.text = @"自定义颜色";
         UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeColor:)];
         self.cell.colourView.userInteractionEnabled=YES;
@@ -339,7 +371,15 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    NSString *typeName = [DeviceManager lightTypeNameByDeviceID:[self.deviceid intValue]];
+    
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == 1)
+    {
+        if([typeName isEqualToString:@"调色灯"])
+            return;
+        [self performSegueWithIdentifier:@"detail" sender:self];
+    }
     if(indexPath.row == 2)
     {
         [self performSegueWithIdentifier:@"detail" sender:self];
@@ -351,6 +391,7 @@
     self.detailCell.label.text = self.lNames[sender.selectedSegmentIndex];
     self.deviceid = [self.lIDs objectAtIndex:self.segmentLight.selectedSegmentIndex];
     [self syncUI];
+    [self.tableView reloadData];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

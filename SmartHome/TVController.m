@@ -56,6 +56,7 @@
 @interface TVController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,TVLogoCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,TVIconControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *touchpad;
 @property (weak, nonatomic) IBOutlet UILabel *unstoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *voiceValue;
 
 
 @property (weak, nonatomic) IBOutlet UISlider *volume;
@@ -217,6 +218,7 @@
 {
     if ([sender isEqual:self.volume]) {
         NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volume.value*100 deviceID:self.deviceid];
+        self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
     }
