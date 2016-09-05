@@ -608,18 +608,19 @@
         Scene *scene = [Scene new];
         scene.sceneID = [resultSet intForColumn:@"ID"];
         scene.sceneName = [resultSet stringForColumn:@"NAME"];
-        scene.roomID = [resultSet intForColumn:@"roomName"];
+        scene.roomName = [resultSet stringForColumn:@"roomName"];
         
         scene.picName =[resultSet stringForColumn:@"pic"];
         scene.isFavorite = [resultSet boolForColumn:@"isFavorite"];
-        
-        scene.startTime = [resultSet stringForColumn:@"startTime"];
-        scene.astronomicalTime = [resultSet stringForColumn:@"astronomicalTime"];
-        scene.weekValue = [resultSet stringForColumn:@"weekValue"];
-        scene.weekRepeat = [resultSet intForColumn:@"weekRepeat"];
-        scene.roomName = [resultSet stringForColumn:@"rId"];
-        
-    return scene;
+    int rID = [resultSet intForColumn:@"rId"];
+        scene.roomID = [resultSet intForColumn:@"rId"];
+        int sType = [resultSet intForColumn:@"sType"];
+        if(sType == 1)
+        {
+            scene.readonly = YES;
+        }
+    
+        return scene;
     
 }
 +(Scene *)sceneBySceneID:(int)sId

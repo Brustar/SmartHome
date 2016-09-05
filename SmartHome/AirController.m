@@ -102,7 +102,6 @@
     
     if (tag==0) {
         if (proto.action.state==0x7A) {
-            //[self.thermometerView updateCurrentValue:(CGFloat)proto.action.RValue];
             self.showTemLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
         }
         if (proto.action.state==0x8A) {

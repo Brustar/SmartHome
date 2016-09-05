@@ -72,6 +72,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *devicelView;
 @property (nonatomic,strong) LightController *ligthVC;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *deleteBtn;
 
 //当前房间当前场景的所有设备
 @property (nonatomic,strong) NSArray *devices;
@@ -98,6 +99,11 @@
     self.subDeviceTableView.backgroundColor = backGroudColour;
     self.view.backgroundColor = backGroudColour;
     self.title= [DeviceManager getSceneName:self.sceneID];
+    Scene *scene = [SceneManager sceneBySceneID:self.sceneID];
+    if(scene.readonly == YES)
+    {
+        [self.deleteBtn setEnabled:NO];
+    }
     [self setupData];
     }
 
