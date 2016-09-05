@@ -511,7 +511,10 @@
     NSMutableString *eIdStr = [[NSMutableString alloc]init];
     for(NSDictionary *deviceDic in devices)
     {
+        
         [eIdStr appendString:[NSString stringWithFormat:@"%@,",deviceDic[@"deviceID"]]];
+        
+        
     }
     
     

@@ -14,6 +14,7 @@
 
 @interface RealScene ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *roomTable;
+
 //温度
 @property (weak, nonatomic) IBOutlet UILabel *tempLabel;
 //湿度
@@ -22,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *pmLabel;
 //噪音
 @property (weak, nonatomic) IBOutlet UILabel *noiseLabel;
+
 
 @property (nonatomic,strong) NSArray *rooms;
 @end

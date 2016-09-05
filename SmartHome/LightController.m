@@ -218,6 +218,7 @@
     {
         [device setBrightness:self.detailCell.bright.value*100];
     }
+
     
     [_scene setSceneID:[self.sceneid intValue]];
     [_scene setRoomID:self.roomID];

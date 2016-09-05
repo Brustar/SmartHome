@@ -49,9 +49,9 @@
         NSString *URL = [NSString stringWithFormat:@"%@SceneAdd.aspx",[IOManager httpAddr]];
         NSString *fileName = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,scene.sceneID];
         NSDictionary *parameter;
-        if(scene.isPlan == 1)
+        if(scene.startTime)
         {
-            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":@"store.png",@"isPlan":[NSNumber numberWithInt:1],@"StartTime":scene.startTime,@"AstronomicalTime":scene.astronomicalTime,@"PlanType":[NSNumber numberWithInt:scene.planType],@"WeekValue":@"1",@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
+            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":@"store.png",@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:1],@"StartTime":scene.startTime,@"AstronomicalTime":scene.astronomicalTime,@"PlanType":[NSNumber numberWithInt:scene.planType],@"WeekValue":scene.weekValue,@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
         }else{
             
             parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":@"store.png",@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:2],@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
@@ -131,7 +131,33 @@
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, sceneid]];
     NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfFile:scenePath];
     if (dictionary) {
-        Scene *scene=[[Scene alloc] initWhithoutSchedule];
+        Scene *scene=nil;
+        if ([dictionary objectForKey:@"startTime"]) {
+            scene=[[Scene alloc] init];
+            [scene setStartTime:[dictionary objectForKey:@"startTime"]];
+            if([dictionary objectForKey:@"planType"])
+            {
+                [scene setPlanType:[[dictionary objectForKey:@"planType"] intValue]];
+            }
+            if([dictionary objectForKey:@"weekValue"])
+            {
+                [scene setWeekValue:[dictionary objectForKey:@"weekValue"]];
+            }else{
+                [scene setWeekValue:@""];
+            }
+            if([dictionary objectForKey:@"astronomicalTime"])
+            {
+
+                [scene setAstronomicalTime:[dictionary objectForKey:@"astronomicalTime"]];
+            }else{
+                [scene setWeekValue:@""];
+            }
+            [scene setRoomName:@""];
+            [scene setSceneName:@""];
+            
+        }else{
+            scene=[[Scene alloc] initWhithoutSchedule];
+        }
         scene.sceneID=sceneid;
         scene.readonly=[dictionary objectForKey:@"readonly"];
         scene.picName=[dictionary objectForKey:@"picName"];
@@ -591,18 +617,19 @@
         Scene *scene = [Scene new];
         scene.sceneID = [resultSet intForColumn:@"ID"];
         scene.sceneName = [resultSet stringForColumn:@"NAME"];
-        scene.roomID = [resultSet intForColumn:@"roomName"];
+        scene.roomName = [resultSet stringForColumn:@"roomName"];
         
         scene.picName =[resultSet stringForColumn:@"pic"];
         scene.isFavorite = [resultSet boolForColumn:@"isFavorite"];
-        
-        scene.startTime = [resultSet stringForColumn:@"startTime"];
-        scene.astronomicalTime = [resultSet stringForColumn:@"astronomicalTime"];
-        scene.weekValue = [resultSet stringForColumn:@"weekValue"];
-        scene.weekRepeat = [resultSet intForColumn:@"weekRepeat"];
-        scene.roomName = [resultSet stringForColumn:@"rId"];
-        
-    return scene;
+    int rID = [resultSet intForColumn:@"rId"];
+        scene.roomID = [resultSet intForColumn:@"rId"];
+        int sType = [resultSet intForColumn:@"sType"];
+        if(sType == 1)
+        {
+            scene.readonly = YES;
+        }
+    
+        return scene;
     
 }
 +(Scene *)sceneBySceneID:(int)sId

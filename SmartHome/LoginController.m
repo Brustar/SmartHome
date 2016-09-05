@@ -96,8 +96,8 @@
         self.userType = 2;
     }
 
-    
-    NSDictionary *dict = @{@"Account":self.user.text,@"Type":[NSNumber numberWithInteger:self.userType],@"Password":[self.pwd.text md5]};
+    DeviceInfo *info=[DeviceInfo defaultManager];
+    NSDictionary *dict = @{@"Account":self.user.text,@"Type":[NSNumber numberWithInteger:self.userType],@"Password":[self.pwd.text md5],@"pushtoken":info.pushToken};
     [IOManager writeUserdefault:self.user.text forKey:@"Account"];
     [IOManager writeUserdefault:[NSNumber numberWithInteger:self.userType] forKey:@"Type"];
     [IOManager writeUserdefault:self.pwd.text forKey:@"Password"];

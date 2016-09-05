@@ -52,7 +52,7 @@
     if(!cell)
     {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
-          [self sendNotification:indexPath.row select:1];
+          [self sendNotification:indexPath.row select:0];
         
     }
          cell.textLabel.text = self.weekDays[indexPath.row];

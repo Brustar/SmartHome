@@ -36,7 +36,9 @@
 @property (nonatomic) long masterID;
 //是否系统场景
 @property (nonatomic) bool readonly;
-@property (nonatomic,assign) int isPlan;
+//是否定时
+//@property (nonatomic,assign) int isPlan;
+//定时类型
 @property (nonatomic,assign) int planType;
 //设备列表
 @property (strong,nonatomic) NSArray *devices;
