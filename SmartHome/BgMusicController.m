@@ -33,7 +33,7 @@
     
     if ([self.sceneid intValue]>0) {
         
-        Scene *scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+        _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
         for(int i=0;i<[scene.devices count];i++)
         {
             if ([[scene.devices objectAtIndex:i] isKindOfClass:[BgMusic class]]) {
@@ -82,16 +82,15 @@
     [device setDeviceID:[self.deviceid intValue]];
     [device setBgvolume:self.volume.value*100];
     
-    Scene *scene=[[Scene alloc] initWhithoutSchedule];
-    [scene setSceneID:[self.sceneid intValue]];
-    [scene setRoomID:self.roomID];
-    [scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-    [scene setReadonly:NO];
+    [_scene setSceneID:[self.sceneid intValue]];
+    [_scene setRoomID:self.roomID];
+    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+    [_scene setReadonly:NO];
     
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
-    [scene setDevices:devices];
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
     
-    [[SceneManager defaultManager] addScene:scene withName:nil withPic:@""];
+    [[SceneManager defaultManager] addScene:_scene withName:nil withPic:@""];
 }
 
 #pragma mark - TCP recv delegate

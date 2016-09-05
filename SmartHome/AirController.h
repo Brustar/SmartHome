@@ -28,5 +28,6 @@ enum AIR_TARGET
 @property (nonatomic) int currentTiming;
 
 @property (nonatomic,assign) int roomID;
+@property (strong, nonatomic) Scene *scene;
 
 @end

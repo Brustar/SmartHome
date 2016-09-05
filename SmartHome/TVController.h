@@ -12,7 +12,7 @@
 @property (nonatomic,assign) NSString *deviceid;
 
 @property (nonatomic,assign) NSString *deviceNumber;
-
+@property (strong, nonatomic) Scene *scene;
 @property (nonatomic, retain) NSTimer *timer;
 @property (nonatomic) int retChannel;
 @property (nonatomic,assign) int roomID;

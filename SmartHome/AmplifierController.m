@@ -9,6 +9,10 @@
 #import "AmplifierController.h"
 #import "DetailTableViewCell.h"
 #import "DeviceManager.h"
+#import "SocketManager.h"
+#import "Amplifier.h"
+#import "SceneManager.h"
+#import "PackManager.h"
 
 @interface AmplifierController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -72,6 +76,48 @@
     // Do any additional setup after loading the view.
 }
 
+-(IBAction)save:(id)sender
+{
+    if ([sender isEqual:self.switchView]) {
+        NSData *data=[[DeviceInfo defaultManager] toogle:self.switchView.isOn deviceID:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
+    Amplifier *device=[[Amplifier alloc] init];
+    [device setDeviceID:[self.deviceid intValue]];
+    [device setWaiting: self.switchView.isOn];
+    
+    
+    [_scene setSceneID:[self.sceneid intValue]];
+    [_scene setRoomID:self.roomID];
+    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+    
+    [_scene setReadonly:NO];
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    
+    [[SceneManager defaultManager] addScene:_scene withName:nil withPic:@""];
+    
+}
+
+#pragma mark - TCP recv delegate
+-(void)recv:(NSData *)data withTag:(long)tag
+{
+    Proto proto=protocolFromData(data);
+    
+    if (proto.masterID != [[DeviceInfo defaultManager] masterID]) {
+        return;
+    }
+    
+    if (tag==0 && (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON)) {
+        NSString *devID=[DeviceManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID) masterID:[[DeviceInfo defaultManager] masterID]];
+        if ([devID intValue]==[self.deviceid intValue]) {
+            self.switchView.on=proto.action.state;
+        }
+    }
+}
+
 -(void)setupSegmenAmplifier
 {
     if(self.amplifierNames == nil)
@@ -100,6 +146,20 @@
         DetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         self.cell = cell;
         self.cell.label.text = self.amplifierNames[self.segment.selectedSegmentIndex];
+        
+        
+        self.switchView = cell.power;//[[UISwitch alloc] initWithFrame:CGRectZero];
+        if ([self.sceneid intValue]>0) {
+            
+            _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+            for(int i=0;i<[_scene.devices count];i++)
+            {
+                if ([[_scene.devices objectAtIndex:i] isKindOfClass:[Amplifier class]]) {
+                    cell.power.on=((Amplifier *)[_scene.devices objectAtIndex:i]).waiting;
+                }
+            }
+        }
+        [cell.power addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
         
         return cell;
     }else{

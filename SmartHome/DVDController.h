@@ -11,4 +11,6 @@
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic,weak) NSString *deviceid;
 @property (nonatomic,assign) int roomID;
+
+@property (strong, nonatomic) Scene *scene;
 @end
