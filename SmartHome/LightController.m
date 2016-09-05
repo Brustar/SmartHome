@@ -218,6 +218,9 @@
     {
         [device setBrightness:self.detailCell.bright.value*100];
     }
+    if (self.scene) {
+        
+    }
     Scene *scene=[[Scene alloc] initWhithoutSchedule];
     [scene setSceneID:[self.sceneid intValue]];
     [scene setRoomID:self.roomID];

@@ -51,7 +51,7 @@
         NSDictionary *parameter;
         if(scene.isPlan == 1)
         {
-            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":@"store.png",@"isPlan":[NSNumber numberWithInt:1],@"StartTime":scene.startTime,@"AstronomicalTime":scene.astronomicalTime,@"PlanType":[NSNumber numberWithInt:scene.planType],@"WeekValue":@"1",@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
+            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":@"store.png",@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:1],@"StartTime":scene.startTime,@"AstronomicalTime":scene.astronomicalTime,@"PlanType":[NSNumber numberWithInt:scene.planType],@"WeekValue":scene.weekValue,@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
         }else{
             
             parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":@"store.png",@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:2],@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
@@ -131,7 +131,30 @@
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, sceneid]];
     NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfFile:scenePath];
     if (dictionary) {
-        Scene *scene=[[Scene alloc] initWhithoutSchedule];
+        Scene *scene=nil;
+        if ([dictionary objectForKey:@"startTime"]) {
+            scene=[[Scene alloc] init];
+            [scene setStartTime:[dictionary objectForKey:@"startTime"]];
+            if([dictionary objectForKey:@"planType"])
+            {
+                [scene setPlanType:[[dictionary objectForKey:@"planType"] intValue]];
+            }
+            if([dictionary objectForKey:@"weekValue"])
+            {
+                [scene setWeekValue:[dictionary objectForKey:@"weekValue"]];
+            }else{
+                [scene setWeekValue:@""];
+            }
+            if([dictionary objectForKey:@"astronomicalTime"])
+            {
+                [scene setWeekValue:[dictionary objectForKey:@"astronomicalTime"]];
+            }else{
+                [scene setWeekValue:@""];
+            }
+            
+        }else{
+            scene=[[Scene alloc] initWhithoutSchedule];
+        }
         scene.sceneID=sceneid;
         scene.readonly=[dictionary objectForKey:@"readonly"];
         scene.picName=[dictionary objectForKey:@"picName"];

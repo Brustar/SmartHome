@@ -37,7 +37,7 @@
 @property (weak, nonatomic) IBOutlet UIView *pickTimeView;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerTime;
 @property (strong,nonatomic) CLLocationManager *lm;
-@property (nonatomic,strong) NSMutableArray *timeDict;
+
 @property (nonatomic,strong) NSArray *antronomicalTimes;
 @property (nonatomic,strong) Scene *scene;
 
@@ -47,18 +47,7 @@
 
 @implementation RoomListController
 
--(NSMutableArray *)timeDict
-{
-    if(!_timeDict)
-    {
-        if(!_timeDict)
-        {
-            _timeDict = [NSMutableDictionary dictionary];
-        }
-    }
-    return _timeDict;
-    
-}
+
 -(NSArray *)hours
 {
     if(!_hours)
@@ -205,7 +194,7 @@
     {
         Room *room = self.rooms[indexPath.row];
         [self.delegate RoomListControllerDelegate:self SelectedRoom:room.rId];
-        self.selectedRoomId = room.rId;
+       // self.selectedRoomId = room.rId;
     }
     
 }
@@ -260,20 +249,18 @@
     NSString *noon = self.noon[[self.pickerTime selectedRowInComponent:2]];
     NSString *time = [NSString stringWithFormat:@"%@:%@ %@", hour, min, noon];
     
-    if (self.startTimeBtn.enabled)
-        
-    {
+    
+    if (self.startTimeBtn.selected) {
         [self.startTimeBtn setTitle:time forState:UIControlStateNormal];
-        
-        self.endTimeBtn.enabled = YES;
     } else {
-        
-        self.startTimeBtn.enabled  = YES;
+        [self.endTimeBtn setTitle:time forState:UIControlStateNormal];
     }
     
-
+    [self save];
     
 }
+
+
 - (IBAction)settingRepeatTime:(UIButton *)sender {
     self.fixTimeVC.modalPresentationStyle = UIModalPresentationPopover;
     self.fixTimeVC.popoverPresentationController.sourceView = sender;
@@ -352,7 +339,10 @@
     }
     
     [self.repeatBtn setTitle:display forState:UIControlStateNormal];
-}- (void)dealloc
+    [self save];
+    
+}
+- (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -371,6 +361,7 @@
     }else {
         self.timeView.hidden =  NO;
         NSString  *astronomicealTime;
+        NSDictionary *dic;
         int isPlane;
         int playType;
         if([self.startTimeBtn.titleLabel.text isEqualToString:@"设置"])
@@ -395,18 +386,11 @@
                 playType = 1;
             }
             isPlane = 1;
+            dic = @{@"astronomicealTime":astronomicealTime,@"playType":[NSNumber numberWithInt:playType],@"startTIme":self.startTimeBtn.titleLabel.text,@"eendTime":self.endTimeBtn.titleLabel.text,@"isPane":[NSNumber numberWithInt:isPlane]};
             
         }
       
-        Scene *scene = [[Scene alloc]initWhithoutSchedule];
-        [scene setIsPlan:isPlane];
-        [scene setRoomID:self.selectedRoomId];
-        [scene setPlanType:playType];
-        [scene setStartTime:self.startTimeBtn.titleLabel.text];
-        [scene setReadonly: NO];
-        [scene setWeekRepeat:YES];
-        [scene setWeekValue:self.repeatBtn.titleLabel.text];
-        [[SceneManager defaultManager] addScene:scene withName:nil withPic:@""];
+       
         
     }
     btn.selected = !btn.selected;
@@ -414,17 +398,132 @@
 
 - (IBAction)setTimeOnClick:(UIButton *)sender {
     
-    if (sender == self.startTimeBtn) {
-       
-        self.startTimeBtn.enabled = YES;
-        self.endTimeBtn.enabled = NO;
+    if (sender == self.startTimeBtn)
+    {
+        if (self.startTimeBtn.selected)
+        {
+            self.startTimeBtn.selected = NO;
+        }
+        else {
+            self.startTimeBtn.selected = YES;
+            self.endTimeBtn.selected = NO;
+        }
     }
     else {
-        self.endTimeBtn.enabled = YES;
-        self.startTimeBtn.enabled = NO;
+        if (self.endTimeBtn.selected) {
+            self.endTimeBtn.selected = NO;
+        }
+        else {
+            self.startTimeBtn.selected = NO;
+            self.endTimeBtn.selected = YES;
+            
+            
+        }
     }
     
-    self.pickTimeView.hidden = !self.pickTimeView.hidden;
+    if (self.startTimeBtn.selected || self.endTimeBtn.selected) {
+        self.pickTimeView.hidden = NO;
+        
+    } else {
+        self.pickTimeView.hidden = YES;
+    }
+
+}
+
+- (void) save {
+    int startType = 0;
+    
+    NSString *startTimeType = self.startTimeBtn.titleLabel.text;
+    if ([startTimeType isEqualToString:@"设置"]) {
+        startType = 0;
+    } else if ([startTimeType isEqualToString:@"黎明"]) {
+        startType = 1;
+    } else if ([startTimeType isEqualToString:@"日出"]) {
+        startType = 2;
+    } else if ([startTimeType isEqualToString:@"日落"]) {
+        startType = 3;
+    } else if ([startTimeType isEqualToString:@"黄昏"]) {
+        startType = 4;
+    } else {
+        startType = 5;
+    }
+    
+    if (startType == 0) {
+        return;
+    }
+    
+//    int endType = 0;
+//    
+//    NSString *endTimeType = self.endTimeBtn.titleLabel.text;
+//    if ([endTimeType isEqualToString:@"设置"]) {
+//        endType = 0;
+//    } else if ([endTimeType isEqualToString:@"黎明"]) {
+//        endType = 1;
+//    } else if ([endTimeType isEqualToString:@"日出"]) {
+//        endType = 2;
+//    } else if ([endTimeType isEqualToString:@"日落"]) {
+//        endType = 3;
+//    } else if ([endTimeType isEqualToString:@"黄昏"]) {
+//        endType = 4;
+//    } else {
+//        endType = 5;
+//    }
+    
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    
+    param[@"IsPlan"] = @"1";
+    if (startType == 5) {
+        NSDate *senddate = [NSDate date];
+        NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
+        [dateformatter setDateFormat:@"YYYY-MM-dd"];
+        NSString *locationString = [dateformatter stringFromDate:senddate];
+        
+        NSString *startTime = [NSString stringWithFormat:@"%@ %@", locationString, [self.startTimeBtn.titleLabel.text substringToIndex:5]];
+        
+        param[@"StartTime"] = startTime;
+        param[@"PlanType"] = @1;
+    } else {
+        param[@"AstronomicalTime"] = [NSNumber numberWithInteger:startType];
+        param[@"PlanType"] = @2;
+    }
+    
+    int week[ 7 ] = {0};
+    
+    for (NSString *key in [self.weeks allKeys]) {
+        int index = [key intValue];
+        int select = [self.weeks[key] intValue];
+        
+        week[index] = select;
+    }
+    
+    NSMutableString *weekValue = [NSMutableString string];
+    
+    BOOL isRepeat = false;
+    
+    for (int i = 0; i < 7; i++) {
+        if (week[i]) {
+            NSString *temp = [NSString stringWithFormat:@"%d", i];
+            [weekValue appendString:temp];
+            isRepeat = true;
+        }
+    }
+    
+    param[@"WeekValue"] = weekValue;
+    
+    Scene *scene=[[Scene alloc] initWhithoutSchedule];
+    scene.weekValue = param[@"WeekValue"];
+    scene.planType = [param[@"PlanType"] intValue];
+    if (scene.planType == 1) {
+        scene.startTime = param[@"StartTime"];
+    } else {
+        scene.astronomicalTime = param[@"AstronomicalTime"];
+    }
+    scene.weekRepeat = isRepeat;
+    [scene setDevices:@[]];
+    
+    [scene setReadonly:NO];
+    
+    [[SceneManager defaultManager] addScene:scene withName:nil withPic:@""];
 }
 
 
@@ -453,6 +552,7 @@
     }else{
         [self.startTimeBtn setTitle:@"黄昏" forState:UIControlStateNormal];
     }
+    [self save];
 
 }
 

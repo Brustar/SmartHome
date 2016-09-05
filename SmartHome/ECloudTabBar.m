@@ -94,6 +94,7 @@
         button.highlighted = YES;
         if (0 == i) {
             self.selectButton = button;
+            self.selectButton.selected = YES;
         }
         button.type = 0;
         button.subType = room.rId;
