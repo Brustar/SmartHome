@@ -12,5 +12,6 @@
 @property (weak, nonatomic) IBOutlet UISlider *volume;
 @property (nonatomic,weak) NSString *deviceid;
 @property (nonatomic,assign) int roomID;
+@property (strong, nonatomic) Scene *scene;
 
 @end

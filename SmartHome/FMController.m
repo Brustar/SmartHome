@@ -90,12 +90,12 @@
     // Do any additional setup after loading the view.
     if ([self.sceneid intValue]>0) {
         
-        Scene *scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
-        for(int i=0;i<[scene.devices count];i++)
+        _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+        for(int i=0;i<[_scene.devices count];i++)
         {
-            if ([[scene.devices objectAtIndex:i] isKindOfClass:[Radio class]]) {
-                self.volume.value=((Radio*)[scene.devices objectAtIndex:i]).rvolume/100.0;
-                self.numberOfChannel.text=  [NSString stringWithFormat:@"%.1f", ((Radio*)[scene.devices objectAtIndex:i]).channel];
+            if ([[_scene.devices objectAtIndex:i] isKindOfClass:[Radio class]]) {
+                self.volume.value=((Radio*)[_scene.devices objectAtIndex:i]).rvolume/100.0;
+                self.numberOfChannel.text=  [NSString stringWithFormat:@"%.1f", ((Radio*)[_scene.devices objectAtIndex:i]).channel];
             }
         }
     }
@@ -240,17 +240,16 @@
     [device setRvolume:self.volume.value*100];
     [device setChannel:[self.numberOfChannel.text floatValue]];
     
-    Scene *scene=[[Scene alloc] initWhithoutSchedule];
-    [scene setSceneID:[self.sceneid intValue]];
-    [scene setRoomID:self.roomID];
-    [scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+    [_scene setSceneID:[self.sceneid intValue]];
+    [_scene setRoomID:self.roomID];
+    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
     
-    [scene setReadonly:NO];
+    [_scene setReadonly:NO];
     
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
-    [scene setDevices:devices];
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
     
-    [[SceneManager defaultManager] addScene:scene withName:nil withPic:@""];
+    [[SceneManager defaultManager] addScene:_scene withName:nil withPic:@""];
     
 }
 //收藏当前频道

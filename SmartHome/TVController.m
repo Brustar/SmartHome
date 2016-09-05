@@ -150,11 +150,11 @@
     
     if ([self.sceneid intValue]>0) {
         
-        Scene *scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
-        for(int i=0;i<[scene.devices count];i++)
+        _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+        for(int i=0;i<[_scene.devices count];i++)
         {
-            if ([[scene.devices objectAtIndex:i] isKindOfClass:[TV class]]) {
-                self.volume.value=((TV *)[scene.devices objectAtIndex:i]).volume/100.0;
+            if ([[_scene.devices objectAtIndex:i] isKindOfClass:[TV class]]) {
+                self.volume.value=((TV *)[_scene.devices objectAtIndex:i]).volume/100.0;
             }
         }
     }
@@ -225,17 +225,17 @@
     [device setDeviceID:[self.deviceid intValue]];
     [device setVolume:self.volume.value*100];
     
-    Scene *scene=[[Scene alloc] initWhithoutSchedule];
-    [scene setSceneID:[self.sceneid intValue]];
-    [scene setRoomID:self.roomID];
-    [scene setMasterID:[[DeviceInfo defaultManager] masterID]];
     
-    [scene setReadonly:NO];
+    [_scene setSceneID:[self.sceneid intValue]];
+    [_scene setRoomID:self.roomID];
+    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
     
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
-    [scene setDevices:devices];
+    [_scene setReadonly:NO];
     
-    [[SceneManager defaultManager] addScene:scene withName:nil withPic:@""];
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    
+    [[SceneManager defaultManager] addScene:_scene withName:nil withPic:@""];
     
 }
 

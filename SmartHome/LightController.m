@@ -218,19 +218,17 @@
     {
         [device setBrightness:self.detailCell.bright.value*100];
     }
-    if (self.scene) {
-        
-    }
-    Scene *scene=[[Scene alloc] initWhithoutSchedule];
-    [scene setSceneID:[self.sceneid intValue]];
-    [scene setRoomID:self.roomID];
-    [scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+
     
-    [scene setReadonly:NO];
+    [_scene setSceneID:[self.sceneid intValue]];
+    [_scene setRoomID:self.roomID];
+    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
     
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
-    [scene setDevices:devices];
-    [[SceneManager defaultManager] addScene:scene withName:nil withPic:@""];
+    [_scene setReadonly:NO];
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    [[SceneManager defaultManager] addScene:_scene withName:nil withPic:@""];
 }
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag

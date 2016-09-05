@@ -84,11 +84,11 @@
     
     if ([self.sceneid intValue] >0) {
         
-        Scene *scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
-        for(int i=0;i<[scene.devices count];i++)
+        _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+        for(int i=0;i<[_scene.devices count];i++)
         {
-            if ([[scene.devices objectAtIndex:i] isKindOfClass:[Curtain class]]) {
-                self.cell.slider.value=((Curtain*)[scene.devices objectAtIndex:i]).openvalue/100.0;
+            if ([[_scene.devices objectAtIndex:i] isKindOfClass:[Curtain class]]) {
+                self.cell.slider.value=((Curtain*)[_scene.devices objectAtIndex:i]).openvalue/100.0;
             }
         }
     }
@@ -155,16 +155,16 @@
         [device setOpenvalue:0];
     }
     
-    Scene *scene=[[Scene alloc] initWhithoutSchedule];
-    [scene setSceneID:[self.sceneid intValue]];
-    [scene setRoomID:self.roomID];
-    [scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-
-    [scene setReadonly:NO];
     
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
-    [scene setDevices:devices];
-    [[SceneManager defaultManager] addScene:scene withName:nil withPic:@""];
+    [_scene setSceneID:[self.sceneid intValue]];
+    [_scene setRoomID:self.roomID];
+    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+
+    [_scene setReadonly:NO];
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    [[SceneManager defaultManager] addScene:_scene withName:nil withPic:@""];
     
 }
 
