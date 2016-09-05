@@ -31,6 +31,7 @@
 - (void) favoriteScene:(Scene *)newScene withName:(NSString *)name;
 
 - (Scene *)readSceneByID:(int)sceneid;
+-(void)saveAsNewScene:(Scene *)scene withName:(NSString *)name withPic:(NSString *)picurl;
 
 -(NSArray *)addDevice2Scene:(Scene *)scene withDeivce:(id)device withId:(int)deviceID;
 
