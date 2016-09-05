@@ -283,7 +283,7 @@
         scene.devices=devices;
         return scene;
     }else{
-        return nil;
+        return [[Scene alloc] initWhithoutSchedule];
     }
 }
 
@@ -475,6 +475,10 @@
     if ([self readSceneByID:scene.sceneID]) {
         scene=[self readSceneByID:scene.sceneID];
         array=scene.devices;
+        if (!array) {
+            array= [NSArray new];
+        }
+        
         if (![array containsObject:device]) {
             int i=[self inArray:[self allDeviceIDs:scene.sceneID] device:deviceID];
             if (i>=0) {
