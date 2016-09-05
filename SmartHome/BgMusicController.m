@@ -34,10 +34,10 @@
     if ([self.sceneid intValue]>0) {
         
         _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
-        for(int i=0;i<[scene.devices count];i++)
+        for(int i=0;i<[_scene.devices count];i++)
         {
-            if ([[scene.devices objectAtIndex:i] isKindOfClass:[BgMusic class]]) {
-                self.volume.value=((BgMusic*)[scene.devices objectAtIndex:i]).bgvolume/100.0;
+            if ([[_scene.devices objectAtIndex:i] isKindOfClass:[BgMusic class]]) {
+                self.volume.value=((BgMusic*)[_scene.devices objectAtIndex:i]).bgvolume/100.0;
             }
         }
     }
