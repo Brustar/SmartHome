@@ -49,7 +49,7 @@
         NSString *URL = [NSString stringWithFormat:@"%@SceneAdd.aspx",[IOManager httpAddr]];
         NSString *fileName = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,scene.sceneID];
         NSDictionary *parameter;
-        if(scene.isPlan == 1)
+        if(scene.startTime)
         {
             parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":@"store.png",@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:1],@"StartTime":scene.startTime,@"AstronomicalTime":scene.astronomicalTime,@"PlanType":[NSNumber numberWithInt:scene.planType],@"WeekValue":scene.weekValue,@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
         }else{
@@ -147,10 +147,13 @@
             }
             if([dictionary objectForKey:@"astronomicalTime"])
             {
-                [scene setWeekValue:[dictionary objectForKey:@"astronomicalTime"]];
+
+                [scene setAstronomicalTime:[dictionary objectForKey:@"astronomicalTime"]];
             }else{
                 [scene setWeekValue:@""];
             }
+            [scene setRoomName:@""];
+            [scene setSceneName:@""];
             
         }else{
             scene=[[Scene alloc] initWhithoutSchedule];

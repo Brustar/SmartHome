@@ -37,7 +37,7 @@
 //是否系统场景
 @property (nonatomic) bool readonly;
 //是否定时
-@property (nonatomic,assign) int isPlan;
+//@property (nonatomic,assign) int isPlan;
 //定时类型
 @property (nonatomic,assign) int planType;
 //设备列表

@@ -23,6 +23,7 @@
 #import "AirController.h"
 #import "CameraController.h"
 #import "AmplifierController.h"
+#import "MBProgressHUD+NJ.h"
 @interface SearchViewController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
 
 //搜索到的设备类别
@@ -172,10 +173,12 @@
         amplifier.deviceid = [NSString stringWithFormat:@"%d",eId];
         [self.navigationController pushViewController:amplifier animated:YES];
         
-    }else{
+    }else if([typeName isEqualToString:@"智能单品"]){
         PluginViewController *pluginVC = [storyBoard instantiateViewControllerWithIdentifier:@"PluginViewController"];
     
         [self.navigationController pushViewController:pluginVC animated:YES];
+    }else{
+        [MBProgressHUD showError:@"没有结果匹配"];
     }
 
 }

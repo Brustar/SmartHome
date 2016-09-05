@@ -12,6 +12,7 @@
 
 @interface RealScene ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *roomTable;
+
 @property (nonatomic,strong) NSArray *rooms;
 @end
 

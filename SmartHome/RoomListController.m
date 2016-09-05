@@ -482,6 +482,7 @@
         
         param[@"StartTime"] = startTime;
         param[@"PlanType"] = @1;
+       
     } else {
         param[@"AstronomicalTime"] = [NSNumber numberWithInteger:startType];
         param[@"PlanType"] = @2;
@@ -511,14 +512,19 @@
     param[@"WeekValue"] = weekValue;
     
     Scene *scene=[[Scene alloc] initWhithoutSchedule];
-    scene.weekValue = param[@"WeekValue"];
-    scene.planType = [param[@"PlanType"] intValue];
+    [scene setWeekValue:param[@"WeekValue"]];
+    [scene setPlanType:[param[@"PlanType"] intValue]];
+   // [scene setIsPlan:[param[@"isPlan"] intValue]];
+    
     if (scene.planType == 1) {
-        scene.startTime = param[@"StartTime"];
+        
+        [scene setStartTime:param[@"StartTime"]];
     } else {
-        scene.astronomicalTime = param[@"AstronomicalTime"];
+    
+        [scene setAstronomicalTime:param[@"AstronomicalTime"]];
     }
-    scene.weekRepeat = isRepeat;
+    [scene setWeekRepeat:isRepeat];
+    
     [scene setDevices:@[]];
     
     [scene setReadonly:NO];
