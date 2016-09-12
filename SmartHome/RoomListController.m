@@ -452,22 +452,7 @@
         return;
     }
     
-//    int endType = 0;
-//    
-//    NSString *endTimeType = self.endTimeBtn.titleLabel.text;
-//    if ([endTimeType isEqualToString:@"设置"]) {
-//        endType = 0;
-//    } else if ([endTimeType isEqualToString:@"黎明"]) {
-//        endType = 1;
-//    } else if ([endTimeType isEqualToString:@"日出"]) {
-//        endType = 2;
-//    } else if ([endTimeType isEqualToString:@"日落"]) {
-//        endType = 3;
-//    } else if ([endTimeType isEqualToString:@"黄昏"]) {
-//        endType = 4;
-//    } else {
-//        endType = 5;
-//    }
+
     
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     

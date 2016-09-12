@@ -21,20 +21,20 @@
     return sharedInstance;
 }
 
-- (void)uploadImage:(UIImage *) img url:(NSString *) url completion:(void (^)(id responseObject))completion
+- (void)uploadImage:(UIImage *) img url:(NSString *) url dic:(NSDictionary *)dic completion:(void (^)(id responseObject))completion
 {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     // 实际上就是AFN没有对响应数据做任何处理的情况
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
     // formData是遵守了AFMultipartFormData的对象
-    [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [manager POST:url parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         // 将本地的文件上传至服务器
-        [formData appendPartWithFileData:UIImagePNGRepresentation(img) name:@"upload" fileName:@"a.png" mimeType:@"multipart/form-data"];
+        [formData appendPartWithFileData:UIImagePNGRepresentation(img) name:@"imageFile" fileName:dic[@"ImgFile"] mimeType:@"multipart/form-data"];
     } progress:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
         NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSLog(@"完成 %@", result);
-        completion(responseObject);
+       // completion(responseObject);
     } failure:^(NSURLSessionDataTask *operation, NSError *error) {
         NSLog(@"错误 %@", error.localizedDescription);
     }];
