@@ -51,8 +51,6 @@
 
 -(void)connectUDP:(int)port
 {
-    //[self connectTcp];
-    
     [self connectUDP:port delegate:self];
 }
 
