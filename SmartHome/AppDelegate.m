@@ -57,7 +57,9 @@
     }
     //iPad连本地
     if (device.reachbility==ReachableViaWiFi) {
-        [[SocketManager defaultManager] connectUDP:[IOManager udpPort]];
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+            [[SocketManager defaultManager] connectUDP:[IOManager udpPort]];
+        }
     }
     return YES;
 }
@@ -115,7 +117,11 @@
 
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
 {
-    return UIInterfaceOrientationMaskAll;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        return UIInterfaceOrientationMaskLandscapeRight;
+    }else{
+        return UIInterfaceOrientationMaskPortrait;
+    }
 }
 
 

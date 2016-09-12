@@ -19,7 +19,9 @@
 #import "ECSearchView.h"
 #import "RoomManager.h"
 #import "IbeaconManager.h"
+
 @interface ScenseController ()<UICollectionViewDelegate,UICollectionViewDataSource,ScenseCellDelegate,UIGestureRecognizerDelegate,UISearchBarDelegate>
+
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *addSceseBtn;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *netBarBtn;
@@ -78,7 +80,8 @@
     
     [self reachNotification];
     
-    }
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
@@ -219,7 +222,7 @@
             [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
             
             int sed = (arc4random() % 3) + 1;
-            if (sed == 1) {
+            if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad && sed == 1) {
                 //connect master
                 [sock connectUDP:[IOManager udpPort]];
             }else{
