@@ -25,7 +25,8 @@
 #import "ChannelManager.h"
 #import "TVIconController.h"
 #import "KEVolumeUtil.h"
-
+#import "UIImage+UiimageToString.h"
+#import "UploadManager.h"
 @interface UIImagePickerController (LandScapeImagePicker)
 
 - (UIStatusBarStyle)preferredStatusBarStyle;
@@ -78,6 +79,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *editChannelImgBtn;
 @property (nonatomic,strong) NSString *eNumber;
 @property (nonatomic,strong) NSString *chooseImg;
+@property (nonatomic,strong) UIImage *chooseImage;
 
 
 - (IBAction)editChannelImgBtn:(UIButton *)sender;
@@ -116,17 +118,21 @@
 {
     _roomID = roomID;
     if(roomID){
-        //self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"网络电视"];
-        NSArray *tvArr = [DeviceManager getDeviceIDsBySeneId:[self.sceneid intValue]];
-        for(int i = 0; i <tvArr.count; i++)
+        self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"网络电视"];
+        if(self.sceneid > 0)
         {
-            NSString *typeName = [DeviceManager deviceTypeNameByDeviceID:[tvArr[i] intValue]];
-            if([typeName isEqualToString:@"网络电视"])
+            NSArray *tvArr = [DeviceManager getDeviceIDsBySeneId:[self.sceneid intValue]];
+            for(int i = 0; i <tvArr.count; i++)
             {
-                self.deviceid = tvArr[i];
+                NSString *typeName = [DeviceManager deviceTypeNameByDeviceID:[tvArr[i] intValue]];
+                if([typeName isEqualToString:@"网络电视"])
+                {
+                    self.deviceid = tvArr[i];
+                }
             }
-        }
 
+        }
+        
     }
     
     
@@ -474,10 +480,20 @@
 
 {
    
-    [self sendStoreChannelRequest];
+   // [self sendStoreChannelRequest];
     
+    NSData *imageDate = UIImageJPEGRepresentation(self.chooseImage, 1);
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"yyyyMMddHHmmss";
+    NSString *str = [formatter stringFromDate:[NSDate date]];
+    NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
+    
+    NSString *url = [NSString stringWithFormat:@"%@TVChannelUpload.aspx",[IOManager httpAddr]];
+    NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    NSDictionary *dic = @{@"AuthorToken":authorToken,@"EID":self.deviceid,@"Cnumber":self.channeNumber.text,@"CName":self.channelName.text,@"ImgFileName":fileName,@"ImgFile":@""};
+    
+    [[UploadManager defaultManager] uploadImage:self.chooseImage url:url dic:dic completion:nil];
 }
-
 -(void)sendStoreChannelRequest
 {
     NSString *url = [NSString stringWithFormat:@"%@TVChannelUpload.aspx",[IOManager httpAddr]];
@@ -505,8 +521,8 @@
             
             
         }else{
-            [MBProgressHUD showError:@"Msg"];
-        }
+            [MBProgressHUD showError:responseObject[@"Msg"]];
+    }
     }else if(tag == 2)
     {
         if([responseObject[@"Result"] intValue] == 0)
@@ -596,9 +612,14 @@
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
-    self.chooseImg = info[UIImagePickerControllerMediaURL];
-    [self.editChannelImgBtn setBackgroundImage:[UIImage imageNamed:self.chooseImg] forState:UIControlStateNormal];
+    self.chooseImg =[UIImage ImageToBase64Str:info[UIImagePickerControllerEditedImage]];
+    self.chooseImage = info[UIImagePickerControllerEditedImage];
+    [self.editChannelImgBtn setBackgroundImage:info[UIImagePickerControllerEditedImage] forState:UIControlStateNormal];
     [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
 #pragma mark - touch detection
@@ -614,6 +635,8 @@
 
 - (IBAction)storeTVChannel:(UIBarButtonItem *)sender {
     
+    self.channelName.text = nil;
+    self.channeNumber.text = nil;
     [self showCoverView];
     
 }

@@ -47,6 +47,7 @@
 @property (nonatomic,assign) int vFMChannellLast;
 @property (nonatomic,assign) int vClientlLast;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint;
 
 
 @end
@@ -62,6 +63,8 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.widthConstraint.constant = [[UIScreen mainScreen] bounds].size.width *0.6;
+    
     self.tableView.tableFooterView = [UIView new];
     self.user.text = [[NSUserDefaults  standardUserDefaults] objectForKey:@"Account"];
     self.userType = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Type"] intValue];
@@ -259,6 +262,7 @@
     {
         NSDictionary *messageInfo = responseObject[@"messageInfo"];
         NSArray *roomList = messageInfo[@"roomList"];
+        
         if(roomList.count == 0 || roomList == nil)
         {
             return;
@@ -301,8 +305,11 @@
     if([db open])
     {
         NSArray *messageInfo = responseObject[@"messageInfo"];
+
         for(NSDictionary *messageDic in messageInfo)
         {
+           
+
             int rId = [messageDic[@"rId"] intValue];
             NSString *rName =  messageDic[@"rName"];
             NSArray *c_sceneInfoList = messageDic[@"c_sceneInfoList"];
@@ -324,7 +331,7 @@
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {
-                    NSLog(@"insert 成功");
+                    NSLog(@"insert 成功"); 
                 }else{
                     NSLog(@"insert 失败");
                 }
@@ -381,6 +388,7 @@
        
         for(NSDictionary *dicInfo in messageInfo)
         {
+            NSString  *masterID = dicInfo[@"MasterID"];
             int eqId = [dicInfo[@"eqId"] intValue];
             NSString *eqNumber = dicInfo[@"eqNumber"];
             NSArray *channelInfo = dicInfo[@"channelInfo"];
@@ -423,24 +431,15 @@
                 
                 [self.hostIDS addObject:hostID[@"hostId"]];
             }
-            
+            [IOManager writeUserdefault:[self.hostIDS copy] forKey:@"HostIDS"];
             NSString *mid = self.hostIDS[0];
             info.masterID =[PackManager NSDataToUint16:mid];
             NSInteger count = self.hostIDS.count;
-            
-            if(count == 1)
-            {
-               
-                //直接登录主机
+            //直接登录主机
                 
-                [self sendRequestToHostWithTag:2 andRow:0];
-                //[self goToViewController];
-            }else{
-                self.tableView.hidden = NO;
-                self.coverView.hidden = NO;
-                [self.tableView reloadData];
-            }
-            
+            [self sendRequestToHostWithTag:2 andRow:0];
+            //[self goToViewController];
+          
             
          
             
@@ -450,7 +449,7 @@
                 [MBProgressHUD showError:responseObject[@"Msg"]];
             }
         
-    }else if(tag == 2 || tag == 3 )
+    }else if(tag == 2 )
     {
         if ([responseObject[@"Result"] intValue]==0)
         {
@@ -637,6 +636,7 @@
 {
     self.coverView.hidden = YES;
     self.registerView.hidden = YES;
+    [self.view endEditing:YES];
 }
 
 #pragma  mark -UITableViewDelegate

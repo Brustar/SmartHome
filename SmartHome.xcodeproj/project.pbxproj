@@ -183,6 +183,8 @@
 		F6A1C02E1D586D7500856E00 /* Room.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A1C02D1D586D7500856E00 /* Room.m */; };
 		F6B91F6F1D100EF700592FB0 /* DVCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B91F6E1D100EF700592FB0 /* DVCollectionViewCell.m */; };
 		F6B91F721D100F1400592FB0 /* TVChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B91F701D100F1400592FB0 /* TVChannel.m */; };
+		F6BF2AED1D86556500A3C9D5 /* HostIDSController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6BF2AEC1D86556500A3C9D5 /* HostIDSController.m */; };
+		F6BF2AF11D86B17400A3C9D5 /* UIImage+UiimageToString.m in Sources */ = {isa = PBXBuildFile; fileRef = F6BF2AF01D86B17400A3C9D5 /* UIImage+UiimageToString.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -630,6 +632,10 @@
 		F6B91F6E1D100EF700592FB0 /* DVCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVCollectionViewCell.m; sourceTree = "<group>"; };
 		F6B91F701D100F1400592FB0 /* TVChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVChannel.m; sourceTree = "<group>"; };
 		F6B91F711D100F1400592FB0 /* TVChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVChannel.h; sourceTree = "<group>"; };
+		F6BF2AEB1D86556500A3C9D5 /* HostIDSController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostIDSController.h; sourceTree = "<group>"; };
+		F6BF2AEC1D86556500A3C9D5 /* HostIDSController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostIDSController.m; sourceTree = "<group>"; };
+		F6BF2AEF1D86B17400A3C9D5 /* UIImage+UiimageToString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UiimageToString.h"; sourceTree = "<group>"; };
+		F6BF2AF01D86B17400A3C9D5 /* UIImage+UiimageToString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UiimageToString.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -899,6 +905,8 @@
 				F623378F1D70675B00ADAD00 /* TVIconController.m */,
 				F60E71C81D796BE6008863DB /* AmplifierController.h */,
 				F60E71C91D796BE6008863DB /* AmplifierController.m */,
+				F6BF2AEB1D86556500A3C9D5 /* HostIDSController.h */,
+				F6BF2AEC1D86556500A3C9D5 /* HostIDSController.m */,
 			);
 			path = SmartHome;
 			sourceTree = "<group>";
@@ -1258,6 +1266,8 @@
 				0FCD77711D7681CB00121BF1 /* KEVolumeUtil.m */,
 				F68A5DD61D782D8400601612 /* ECSearchView.h */,
 				F68A5DD71D782D8400601612 /* ECSearchView.m */,
+				F6BF2AEF1D86B17400A3C9D5 /* UIImage+UiimageToString.h */,
+				F6BF2AF01D86B17400A3C9D5 /* UIImage+UiimageToString.m */,
 			);
 			name = public;
 			sourceTree = "<group>";
@@ -1330,7 +1340,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0F032D771CC9B12700D1920D /* Build configuration list for PBXNativeTarget "SmartHome" */;
 			buildPhases = (
-				4B5F56A8FA12D4BD7D28AF3D /* 📦 Check Pods Manifest.lock */,
+				4B5F56A8FA12D4BD7D28AF3D /* [CP] Check Pods Manifest.lock */,
 				9E5B0BAA933708A69B87E6AE /* [CP] Check Pods Manifest.lock */,
 				22E4FF7C74861624FBD7E7CB /* [CP] Check Pods Manifest.lock */,
 				7B4EC63A298C6E6A66AD1643 /* [CP] Check Pods Manifest.lock */,
@@ -1504,14 +1514,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4B5F56A8FA12D4BD7D28AF3D /* 📦 Check Pods Manifest.lock */ = {
+		4B5F56A8FA12D4BD7D28AF3D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1673,6 +1683,7 @@
 				0F180FC91D0E4E6500392F4C /* GuardController.m in Sources */,
 				0FCD77721D7681CB00121BF1 /* KEVolumeUtil.m in Sources */,
 				0FAF98A71CE40F3C009BDBB5 /* QRToggleTorchButton.m in Sources */,
+				F6BF2AF11D86B17400A3C9D5 /* UIImage+UiimageToString.m in Sources */,
 				0F25FE5E1CEB0C0A0063E834 /* SceneList.m in Sources */,
 				F625A6181D4C8EF700B696E5 /* ProfireListController.m in Sources */,
 				0FCFB3891CF2929900B37DD3 /* Aircon.m in Sources */,
@@ -1691,6 +1702,7 @@
 				0F180FC61D0E4E5000392F4C /* FMController.m in Sources */,
 				F67F1F771D3C719D00F2B7E5 /* systemInfomationController.m in Sources */,
 				0FABF91C1D06AA35000892D8 /* TVController.m in Sources */,
+				F6BF2AED1D86556500A3C9D5 /* HostIDSController.m in Sources */,
 				F62337901D70675B00ADAD00 /* TVIconController.m in Sources */,
 				0FAF74C31CEEA17C00432713 /* HRColorMapView.m in Sources */,
 				0FADA44A1CEBF8AE00777901 /* SceneManager.m in Sources */,

@@ -17,7 +17,7 @@
 #import "PackManager.h"
 #import "KEVolumeUtil.h"
 
-#define size 437
+#define size 350
 @interface DVDController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UISlider *volume;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightViewWidth;

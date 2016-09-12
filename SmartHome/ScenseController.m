@@ -19,6 +19,7 @@
 #import "ECSearchView.h"
 #import "RoomManager.h"
 #import "IbeaconManager.h"
+#import "HostIDSController.h"
 @interface ScenseController ()<UICollectionViewDelegate,UICollectionViewDataSource,ScenseCellDelegate,UIGestureRecognizerDelegate,UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *addSceseBtn;
@@ -43,12 +44,20 @@
 
 @property (nonatomic,strong) UISearchController *searchVC;
 
+@property(nonatomic,strong)HostIDSController *hostVC;
 @end
 
 @implementation ScenseController
 
 
-
+-(HostIDSController *)hostVC
+{
+    if(!_hostVC)
+    {
+        _hostVC =  [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"HostIDSController"];
+    }
+    return _hostVC;
+}
 -(UISearchController *)searchVC{
     if(!_searchVC)
     {
@@ -78,7 +87,40 @@
     
     [self reachNotification];
     
-    }
+    [self setNavi];
+    
+}
+
+
+-(void)setNavi
+{
+    UIButton *titleButton = [[UIButton alloc]init];
+    titleButton.frame = CGRectMake(0, 0, 250, 40);
+    [titleButton setTitle:@"逸云智家" forState:UIControlStateNormal];
+    [titleButton setImage:[UIImage imageNamed:@"down"] forState:UIControlStateNormal];
+    
+   // [titleButton setImage:[UIImage imageNamed:@"up"] forState:UIControlStateSelected];
+    [titleButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    titleButton.imageEdgeInsets = UIEdgeInsetsMake(0, 180, 0, 0);
+    
+    [titleButton addTarget:self action:@selector(clickTitleButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.navigationItem.titleView = titleButton;
+}
+-(void)clickTitleButton:(UIButton *)btn
+{
+   
+    
+    
+    self.hostVC.modalPresentationStyle = UIModalPresentationPopover;
+    self.hostVC.popoverPresentationController.sourceView = btn;
+    self.hostVC.popoverPresentationController.sourceRect = btn.bounds;
+    
+    self.hostVC.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionDown;
+    
+    [self presentViewController:self.hostVC animated:YES completion:nil];
+    
+}
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
@@ -150,6 +192,8 @@
 -(UIImage *)getImgByUrl:(NSString *)url
 {
     NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+   
+    
     return [UIImage imageWithData:data];
     
 }
@@ -251,14 +295,14 @@
     
     Scene *scene = self.collectionScenes[indexPath.row];
     cell.scenseName.text = scene.sceneName;
-    //cell.backgroundColor = [UIColor colorWithPatternImage:[self getImgByUrl:scene.picName]];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
-        NSData * data = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:scene.sceneName]];
+        NSData * data = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:scene.picName]];
         UIImage *image = [[UIImage alloc]initWithData:data];
         if (data != nil) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                 cell.backgroundView = [[UIImageView alloc]initWithImage:image];
+                cell.imgView.image = image;
             });
         }
     });
