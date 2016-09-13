@@ -21,7 +21,7 @@
     //self.planeimg=[[TouchImage alloc] initWithFrame:CGRectMake(100, 40, 625, 500)];
     self.planeimg = [[TouchImage alloc]initWithFrame:self.view.frame];
     self.planeimg.contentMode = UIViewContentModeScaleAspectFit;
-    self.planeimg.image =[UIImage imageNamed:@"plane.png"];
+    self.planeimg.image =[UIImage imageNamed:@"ecloud_2"];
     self.planeimg.userInteractionEnabled=YES;
     self.planeimg.viewFrom=PLANE_IMAGE;
     self.planeimg.delegate=self;

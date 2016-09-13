@@ -39,6 +39,10 @@
 {
     NSLog(@"%ld  %ld", type, subType);
     self.selectedIndex = type;
+    if(type!= self.selectedIndex)
+    {
+        self.selectedIndex = type;
+    }
     if(self.selectedIndex == 0)
     {
         NSString *str = [NSString stringWithFormat:@"%ld", subType];
