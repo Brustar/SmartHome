@@ -66,6 +66,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"幕布";
+    self.tableView.tableFooterView = [UIView new];
     [self setupSeguentScreenCurtain];
 }
 

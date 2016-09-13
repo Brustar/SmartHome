@@ -10,4 +10,5 @@
 
 @interface EnergyOfDeviceController : UIViewController
 @property (nonatomic,assign) NSInteger eId;
+@property (nonatomic,strong) NSArray *eIds;
 @end

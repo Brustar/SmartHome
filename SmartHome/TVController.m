@@ -105,7 +105,7 @@
     if(!_allFavourTVChannels)
     {
         _allFavourTVChannels = [NSMutableArray array];
-        _allFavourTVChannels = [ChannelManager getAllChannelForFavoritedForType:@"TV"];
+        _allFavourTVChannels = [ChannelManager getAllChannelForFavoritedForType:@"TV" deviceID:[self.deviceid intValue]];
         if(_allFavourTVChannels == nil || _allFavourTVChannels.count == 0)
         {
             self.unstoreLabel.hidden = NO;
@@ -481,41 +481,41 @@
 {
    
    // [self sendStoreChannelRequest];
-    
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"yyyyMMddHHmmss";
-    NSString *str = [formatter stringFromDate:[NSDate date]];
-    NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
-    
-    NSData *imageDate = UIImageJPEGRepresentation(self.chooseImage, 1);
-    NSString* documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *filePath = [documentPath stringByAppendingPathComponent:fileName];
-    
-    
-    [self saveImage:self.chooseImage withName:fileName];
-    
-    NSString *url = [NSString stringWithFormat:@"%@TVChannelUpload.aspx",[IOManager httpAddr]];
-    NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSDictionary *dic = @{@"AuthorToken":authorToken,@"EID":self.deviceid,@"Cnumber":self.channeNumber.text,@"CName":self.channelName.text,@"ImgFileName":fileName,@"ImgFile":@""};
-    
-    [[UploadManager defaultManager] uploadImage:self.chooseImage url:url dic:dic completion:nil];
+    if(self.chooseImg)
+    {
+        [self sendStoreChannelRequest];
+    }else{
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyyMMddHHmmss";
+        NSString *str = [formatter stringFromDate:[NSDate date]];
+        NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
+
+        [self saveImage:self.chooseImage withName:fileName];
+        
+        NSString *url = [NSString stringWithFormat:@"%@TVChannelUpload.aspx",[IOManager httpAddr]];
+        NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+        NSDictionary *dic = @{@"AuthorToken":authorToken,@"EID":self.deviceid,@"Cnumber":self.channeNumber.text,@"CName":self.channelName.text,@"ImgFileName":fileName,@"ImgFile":@""};
+        
+        [[UploadManager defaultManager] uploadImage:self.chooseImage url:url dic:dic fileName:fileName completion:nil];
+    }
+   
     [self hiddenCoverView];
 }
 
 
-//-(void)sendStoreChannelRequest
-//{
-//    NSString *url = [NSString stringWithFormat:@"%@TVChannelUpload.aspx",[IOManager httpAddr]];
-//    NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-//    NSDictionary *dic = @{@"AuthorToken":authorToken,@"EID":self.deviceid,@"Cnumber":self.channeNumber.text,@"CName":self.channelName.text,@"ImgFileName":self.chooseImg,@"ImgFile":@""};
-//    HttpManager *http = [HttpManager defaultManager];
-//    http.delegate = self;
-//    http.tag = 1;
-//    [http sendPost:url param:dic];
-//    
-//    [self hiddenCoverView];
-//}
+-(void)sendStoreChannelRequest
+{
+    NSString *url = [NSString stringWithFormat:@"%@TVChannelUpload.aspx",[IOManager httpAddr]];
+    NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    NSDictionary *dic = @{@"AuthorToken":authorToken,@"EID":self.deviceid,@"Cnumber":self.channeNumber.text,@"CName":self.channelName.text,@"ImgFileName":self.chooseImg,@"ImgFile":@""};
+    HttpManager *http = [HttpManager defaultManager];
+    http.delegate = self;
+    http.tag = 1;
+    [http sendPost:url param:dic];
+    
+    [self hiddenCoverView];
+}
 -(void) httpHandler:(id) responseObject tag:(int)tag
 {
     if(tag == 1)
@@ -524,7 +524,7 @@
         {
             //保存成功后存到数据库
             [self writeTVChannelsConfigDataToSQL:responseObject withParent:@"TV"];
-            self.allFavourTVChannels = [ChannelManager getAllChannelForFavoritedForType:@"TV"];
+            self.allFavourTVChannels = [ChannelManager getAllChannelForFavoritedForType:@"TV" deviceID:[self.deviceid intValue]];
             self.unstoreLabel.hidden = YES;
             self.tvLogoCollectionView.backgroundColor = [UIColor lightGrayColor];
             [self.tvLogoCollectionView reloadData];
@@ -624,7 +624,7 @@
 {
     //self.chooseImg =[UIImage ImageToBase64Str:info[UIImagePickerControllerEditedImage]];
     
-    self.chooseImg = info[UIImagePickerControllerEditedImage];
+    //self.chooseImg = info[UIImagePickerControllerEditedImage];
     self.chooseImage = info[UIImagePickerControllerEditedImage];
   
     [self.editChannelImgBtn setBackgroundImage:info[UIImagePickerControllerEditedImage] forState:UIControlStateNormal];

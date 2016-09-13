@@ -66,6 +66,7 @@
     [super viewDidLoad];
     [super viewDidLoad];
     self.title = @"投影";
+    self.tableView.tableFooterView = [UIView new];
     [self setupSeguentProject];
 
 }
