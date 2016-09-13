@@ -139,10 +139,15 @@
     }else if([typeName isEqualToString:@"功放"]){
         segue = @"amplifierSegue";
         
-    }else if([segue isEqualToString:@"背景音乐"]){
+    }else if([typeName isEqualToString:@"背景音乐"]){
         segue = @"musicSegue";
         
-    }else{
+    }else if([typeName isEqualToString:@"幕布"]){
+        segue = @"screenCurtain";
+    }else if([typeName isEqualToString:@"投影"]){
+        segue = @"projectSegue";
+        
+    }else {
         segue = @"Guard";
     }
 

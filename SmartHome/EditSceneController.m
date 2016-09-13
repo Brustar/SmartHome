@@ -26,6 +26,8 @@
 #import "PluginViewController.h"
 #import "CameraController.h"
 #import "GuardController.h"
+#import "ScreenCurtainController.h"
+#import "ProjectController.h"
 
 @interface UIImagePickerController (LandScapeImagePicker)
 
@@ -232,12 +234,24 @@
             guardVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
             [self addViewAndVC:guardVC];
         
+        }else if([typeName isEqualToString:@"幕布"]){
+            ScreenCurtainController *screenCurtainVC = [storyBoard instantiateViewControllerWithIdentifier:@"ScreenCurtainController"];
+            screenCurtainVC.roomID = self.roomID;
+            screenCurtainVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+            [self addViewAndVC:screenCurtainVC];
+           
+
+        }else if([typeName isEqualToString:@"投影"])
+        {
+            ProjectController *projectVC = [storyBoard instantiateViewControllerWithIdentifier:@"ProjectController"];
+            projectVC.roomID = self.roomID;
+            projectVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+            [self addViewAndVC:projectVC];
         }else{
             PluginViewController *pluginVC = [storyBoard instantiateViewControllerWithIdentifier:@"PluginViewController"];
             pluginVC.roomID = self.roomID;
             pluginVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
             [self addViewAndVC:pluginVC];
-
         }
     }
     

@@ -123,6 +123,8 @@
 		F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB411D00029900AB04BE /* DetailViewController.m */; };
 		F60FDB461D003FD500AB04BE /* CurtainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB441D003FD500AB04BE /* CurtainTableViewCell.m */; };
 		F60FDB471D003FD500AB04BE /* CurtainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F60FDB451D003FD500AB04BE /* CurtainTableViewCell.xib */; };
+		F61896381D87B06300DBE6CD /* ScreenCurtainController.m in Sources */ = {isa = PBXBuildFile; fileRef = F61896371D87B06300DBE6CD /* ScreenCurtainController.m */; };
+		F618963B1D87B08300DBE6CD /* ProjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = F618963A1D87B08300DBE6CD /* ProjectController.m */; };
 		F623378D1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F623378C1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.m */; };
 		F62337901D70675B00ADAD00 /* TVIconController.m in Sources */ = {isa = PBXBuildFile; fileRef = F623378F1D70675B00ADAD00 /* TVIconController.m */; };
 		F6251F711D541885000A5A47 /* PluginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6251F701D541885000A5A47 /* PluginViewController.m */; };
@@ -515,6 +517,10 @@
 		F60FDB431D003FD500AB04BE /* CurtainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurtainTableViewCell.h; sourceTree = "<group>"; };
 		F60FDB441D003FD500AB04BE /* CurtainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurtainTableViewCell.m; sourceTree = "<group>"; };
 		F60FDB451D003FD500AB04BE /* CurtainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CurtainTableViewCell.xib; sourceTree = "<group>"; };
+		F61896361D87B06300DBE6CD /* ScreenCurtainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenCurtainController.h; sourceTree = "<group>"; };
+		F61896371D87B06300DBE6CD /* ScreenCurtainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenCurtainController.m; sourceTree = "<group>"; };
+		F61896391D87B08300DBE6CD /* ProjectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectController.h; sourceTree = "<group>"; };
+		F618963A1D87B08300DBE6CD /* ProjectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectController.m; sourceTree = "<group>"; };
 		F623378B1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImagePickerController+LandScapeImagePicker.h"; sourceTree = "<group>"; };
 		F623378C1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImagePickerController+LandScapeImagePicker.m"; sourceTree = "<group>"; };
 		F623378E1D70675B00ADAD00 /* TVIconController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVIconController.h; sourceTree = "<group>"; };
@@ -907,6 +913,10 @@
 				F60E71C91D796BE6008863DB /* AmplifierController.m */,
 				F6BF2AEB1D86556500A3C9D5 /* HostIDSController.h */,
 				F6BF2AEC1D86556500A3C9D5 /* HostIDSController.m */,
+				F61896361D87B06300DBE6CD /* ScreenCurtainController.h */,
+				F61896371D87B06300DBE6CD /* ScreenCurtainController.m */,
+				F61896391D87B08300DBE6CD /* ProjectController.h */,
+				F618963A1D87B08300DBE6CD /* ProjectController.m */,
 			);
 			path = SmartHome;
 			sourceTree = "<group>";
@@ -1627,6 +1637,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F65164141D3780C500A6F5FA /* TVLogoCell.m in Sources */,
+				F61896381D87B06300DBE6CD /* ScreenCurtainController.m in Sources */,
 				0FAF74BF1CEEA17C00432713 /* HRBrightnessCursor.m in Sources */,
 				0FAF98A31CE40F3C009BDBB5 /* QRCameraSwitchButton.m in Sources */,
 				0FD3DEAA1D3F183D00AF7765 /* SCWaveAnimationView.m in Sources */,
@@ -1634,6 +1645,7 @@
 				0F477FC61D2F94B3004FA361 /* NetStatusManager.m in Sources */,
 				0FEE12761D20C53400811947 /* TXHRulerScrollView.m in Sources */,
 				0FCFB38F1CF293B300B37DD3 /* Radio.m in Sources */,
+				F618963B1D87B08300DBE6CD /* ProjectController.m in Sources */,
 				0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */,
 				0F6AB8701D782D9D0041E39C /* SunString.m in Sources */,
 				0FCAA40C1D1945BB00C1E58C /* BgMusicController.m in Sources */,

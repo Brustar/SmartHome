@@ -73,6 +73,7 @@
     self.title = @"功放";
     
     [self setupSegmenAmplifier];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -145,7 +146,7 @@
     {
         DetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         self.cell = cell;
-        self.cell.label.text = self.amplifierNames[self.segment.selectedSegmentIndex];
+        cell.label.text = self.amplifierNames[self.segment.selectedSegmentIndex];
         
         
         self.switchView = cell.power;//[[UISwitch alloc] initWithFrame:CGRectZero];
@@ -167,7 +168,7 @@
         if(!cell)
         {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"recell"];
-            cell.textLabel.text = @"详细信息";
+            
         }
         
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
@@ -198,6 +199,7 @@
     UISegmentedControl *segment = (UISegmentedControl*)sender;
     self.cell.label.text = self.amplifierNames[segment.selectedSegmentIndex];
     self.deviceid=[self.amplifierIDArr objectAtIndex:self.segment.selectedSegmentIndex];
+    [self.tableView reloadData];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

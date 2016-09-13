@@ -1,4 +1,4 @@
-//
+ //
 //  TVController.m
 //  SmartHome
 //
@@ -482,30 +482,40 @@
    
    // [self sendStoreChannelRequest];
     
-    NSData *imageDate = UIImageJPEGRepresentation(self.chooseImage, 1);
+    
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"yyyyMMddHHmmss";
     NSString *str = [formatter stringFromDate:[NSDate date]];
     NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
+    
+    NSData *imageDate = UIImageJPEGRepresentation(self.chooseImage, 1);
+    NSString* documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [documentPath stringByAppendingPathComponent:fileName];
+    
+    
+    [self saveImage:self.chooseImage withName:fileName];
     
     NSString *url = [NSString stringWithFormat:@"%@TVChannelUpload.aspx",[IOManager httpAddr]];
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     NSDictionary *dic = @{@"AuthorToken":authorToken,@"EID":self.deviceid,@"Cnumber":self.channeNumber.text,@"CName":self.channelName.text,@"ImgFileName":fileName,@"ImgFile":@""};
     
     [[UploadManager defaultManager] uploadImage:self.chooseImage url:url dic:dic completion:nil];
-}
--(void)sendStoreChannelRequest
-{
-    NSString *url = [NSString stringWithFormat:@"%@TVChannelUpload.aspx",[IOManager httpAddr]];
-    NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSDictionary *dic = @{@"AuthorToken":authorToken,@"EID":self.deviceid,@"Cnumber":self.channeNumber.text,@"CName":self.channelName.text,@"ImgFileName":self.chooseImg,@"ImgFile":@""};
-    HttpManager *http = [HttpManager defaultManager];
-    http.delegate = self;
-    http.tag = 1;
-    [http sendPost:url param:dic];
-    
     [self hiddenCoverView];
 }
+
+
+//-(void)sendStoreChannelRequest
+//{
+//    NSString *url = [NSString stringWithFormat:@"%@TVChannelUpload.aspx",[IOManager httpAddr]];
+//    NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+//    NSDictionary *dic = @{@"AuthorToken":authorToken,@"EID":self.deviceid,@"Cnumber":self.channeNumber.text,@"CName":self.channelName.text,@"ImgFileName":self.chooseImg,@"ImgFile":@""};
+//    HttpManager *http = [HttpManager defaultManager];
+//    http.delegate = self;
+//    http.tag = 1;
+//    [http sendPost:url param:dic];
+//    
+//    [self hiddenCoverView];
+//}
 -(void) httpHandler:(id) responseObject tag:(int)tag
 {
     if(tag == 1)
@@ -612,14 +622,27 @@
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
-    self.chooseImg =[UIImage ImageToBase64Str:info[UIImagePickerControllerEditedImage]];
+    //self.chooseImg =[UIImage ImageToBase64Str:info[UIImagePickerControllerEditedImage]];
+    
+    self.chooseImg = info[UIImagePickerControllerEditedImage];
     self.chooseImage = info[UIImagePickerControllerEditedImage];
+  
     [self.editChannelImgBtn setBackgroundImage:info[UIImagePickerControllerEditedImage] forState:UIControlStateNormal];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+-(void)saveImage:(UIImage *)currentImage withName:(NSString *)imageName
+{
+    NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
+    // 获取沙盒目录
+    
+    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:imageName];
+    // 将图片写入文件
+    
+    [imageData writeToFile:fullPath atomically:NO];
 }
 
 #pragma mark - touch detection
