@@ -182,7 +182,6 @@
             }
             if([dictionary objectForKey:@"astronomicalTime"])
             {
-
                 [scene setAstronomicalTime:[dictionary objectForKey:@"astronomicalTime"]];
             }else{
                 [scene setWeekValue:@""];
