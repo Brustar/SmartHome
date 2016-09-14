@@ -27,6 +27,7 @@
 #import "KEVolumeUtil.h"
 #import "UIImage+UiimageToString.h"
 #import "UploadManager.h"
+#import "UIImageView+WebCache.h"
 @interface UIImagePickerController (LandScapeImagePicker)
 
 - (UIStatusBarStyle)preferredStatusBarStyle;
@@ -353,9 +354,10 @@
             cell.userInteractionEnabled = NO;
         }else{
             TVChannel *channel = self.allFavourTVChannels[indexPath.row];
-//            NSData * data = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:channel.channel_pic]];
-//            UIImage *image = [[UIImage alloc]initWithData:data];
-            cell.imgView.image = [UIImage imageNamed:channel.channel_pic];
+           
+            //cell.imgView.image = [UIImage imageNamed:channel.channel_pic];
+            [cell.imgView sd_setImageWithURL:[NSURL URLWithString:channel.channel_pic] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+            
             cell.label.text = channel.channel_name;
             
             [cell useLongPressGesture];
@@ -497,7 +499,9 @@
         NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
         NSDictionary *dic = @{@"AuthorToken":authorToken,@"EID":self.deviceid,@"Cnumber":self.channeNumber.text,@"CName":self.channelName.text,@"ImgFileName":fileName,@"ImgFile":@""};
         
-        [[UploadManager defaultManager] uploadImage:self.chooseImage url:url dic:dic fileName:fileName completion:nil];
+        [[UploadManager defaultManager] uploadImage:self.chooseImage url:url dic:dic fileName:fileName completion:^(id responseObject) {
+            [self storChannelToSql:responseObject];
+        }];
     }
    
     [self hiddenCoverView];
@@ -516,19 +520,23 @@
     
     [self hiddenCoverView];
 }
+-(void)storChannelToSql:(NSDictionary *)responseObject
+{
+    //保存成功后存到数据库
+    [self writeTVChannelsConfigDataToSQL:responseObject withParent:@"TV"];
+    self.allFavourTVChannels = [ChannelManager getAllChannelForFavoritedForType:@"TV" deviceID:[self.deviceid intValue]];
+    self.unstoreLabel.hidden = YES;
+    self.tvLogoCollectionView.backgroundColor = [UIColor lightGrayColor];
+    [self.tvLogoCollectionView reloadData];
+
+}
 -(void) httpHandler:(id) responseObject tag:(int)tag
 {
     if(tag == 1)
     {
         if([responseObject[@"Result"] intValue] == 0)
         {
-            //保存成功后存到数据库
-            [self writeTVChannelsConfigDataToSQL:responseObject withParent:@"TV"];
-            self.allFavourTVChannels = [ChannelManager getAllChannelForFavoritedForType:@"TV" deviceID:[self.deviceid intValue]];
-            self.unstoreLabel.hidden = YES;
-            self.tvLogoCollectionView.backgroundColor = [UIColor lightGrayColor];
-            [self.tvLogoCollectionView reloadData];
-            
+            [self storChannelToSql:responseObject];
             
         }else{
             [MBProgressHUD showError:responseObject[@"Msg"]];
@@ -622,9 +630,7 @@
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
-    //self.chooseImg =[UIImage ImageToBase64Str:info[UIImagePickerControllerEditedImage]];
     
-    //self.chooseImg = info[UIImagePickerControllerEditedImage];
     self.chooseImage = info[UIImagePickerControllerEditedImage];
   
     [self.editChannelImgBtn setBackgroundImage:info[UIImagePickerControllerEditedImage] forState:UIControlStateNormal];

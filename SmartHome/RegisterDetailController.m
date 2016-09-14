@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIView *coverView;
 @property (weak, nonatomic) IBOutlet UIView *regSuccessView;
 @property (weak, nonatomic) IBOutlet UIButton *goHomeBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewWidthConstraint;
 
 @end
 
@@ -36,6 +37,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"注册";
+    
+    self.viewWidthConstraint.constant = [[UIScreen mainScreen] bounds].size.width * 0.8;
+    
     self.phoneNumber.text = self.phoneStr;
     if([self.userType isEqualToString:@"客人"])
     {

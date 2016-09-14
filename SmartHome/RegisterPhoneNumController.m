@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumTextField;
 @property (weak, nonatomic) IBOutlet UITextField *imgeVerifyField;
 @property (weak, nonatomic) IBOutlet VerifyCodeView *imgVerifyView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewWidthConstraint;
 
 
 @end
@@ -37,7 +38,7 @@
         self.viewTopLeadingConstraint.constant = 80;
         
     }
-
+    self.viewWidthConstraint.constant = [[UIScreen mainScreen] bounds].size.width * 0.8;
     
     
     
