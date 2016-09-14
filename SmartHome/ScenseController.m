@@ -21,7 +21,7 @@
 #import "IbeaconManager.h"
 #import "HostIDSController.h"
 #import "UIImageView+WebCache.h"
-
+#import <SDWebImage/UIButton+WebCache.h>
 
 @interface ScenseController ()<UICollectionViewDelegate,UICollectionViewDataSource,ScenseCellDelegate,UIGestureRecognizerDelegate,UISearchBarDelegate>
 
@@ -150,10 +150,9 @@
         Scene *scene = self.scenes[0];
         self.firstButton.tag = scene.sceneID;
         self.firstPowerBtn.tag = scene.sceneID;
-    
+        [self.firstButton.imageView sd_setImageWithURL:[NSURL URLWithString:scene.picName] placeholderImage:[UIImage imageNamed:@"placeholder"]];
         [self.firstButton setTitle:scene.sceneName forState:UIControlStateNormal];
-        UIImage *image = [self getImgByUrl:scene.picName];
-        [self.firstButton setBackgroundImage:image forState:UIControlStateNormal];
+        [self.firstButton sd_setBackgroundImageWithURL:[NSURL URLWithString:scene.picName] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholder"]];
         
         
     }else {
@@ -164,9 +163,9 @@
         UIImage *image = [self getImgByUrl:scene.picName];
         [self.firstButton setBackgroundImage:image forState:UIControlStateNormal];
         Scene *scondScene = self.scenes[1];
-        [self.secondButton setTitle:scondScene.sceneName forState:UIControlStateNormal];
-        image = [self getImgByUrl:scondScene.picName];
-        [self.secondButton setBackgroundImage:image forState:UIControlStateNormal];
+        
+        [self.secondButton sd_setBackgroundImageWithURL:[NSURL URLWithString:scene.picName] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholder"]];
+       
         self.secondButton.tag = scondScene.sceneID;
         self.secondPowerBtn.tag = scondScene.sceneID;
        

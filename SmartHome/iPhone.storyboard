@@ -98,7 +98,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="QTu-MY-vPd" kind="custom" customClass="RBStoryboardModalSegue" id="HTL-wO-Nna"/>
+                                    <segue destination="QTu-MY-vPd" kind="custom" customClass="RBStoryboardModalSegue" id="WeN-Qz-0Az"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTb-fL-HlO">
@@ -166,10 +166,30 @@
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="storyboardName" value="Main"/>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="needsTopLayoutGuide" value="YES"/>
-                        <userDefinedRuntimeAttribute type="string" keyPath="sceneIdentifier" value="LoginController"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="sceneIdentifier" value="loginNavigationController"/>
                     </userDefinedRuntimeAttributes>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NPP-uk-dJ7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1811" y="-1091"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="4Qf-sa-6K1">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GmB-s2-i3t" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DHH-VG-rDg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="storyboardName" value="Main"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="needsTopLayoutGuide" value="YES"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="sceneIdentifier" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ylH-gs-tVM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1400" y="-1082"/>
         </scene>

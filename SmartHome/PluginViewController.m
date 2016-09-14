@@ -14,7 +14,8 @@
 
 @interface PluginViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
+@property (nonatomic,strong) PluginCell *cell;
 @end
 
 @implementation PluginViewController
@@ -24,8 +25,22 @@
     
     //[self initPlugin];
     [self initHomekitPlugin];
+    [self setupSegment];
 }
-
+-(void)setupSegment
+{
+    if(self.devices == nil || self.devices.count == 0)
+    {
+        return;
+    }
+    [self.segment removeAllSegments];
+    for(int i = 0; i < self.devices.count; i++)
+    {
+        [self.segment insertSegmentWithTitle:self.devices[i] atIndex:i animated:NO];
+    }
+    self.segment.selectedSegmentIndex = 0;
+    
+}
 -(void)initHomekitPlugin
 {
     self.homeManager = [[HMHomeManager alloc] init];
@@ -160,7 +175,7 @@
 {
     static NSString *CellIdentifier = @"PluginCell";
     PluginCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
+    self.cell = cell;
     
     cell.label.text =[self.devices objectAtIndex:indexPath.row];//[NSString stringWithFormat:@"插座%li",(long)indexPath.row];
     cell.power.tag=indexPath.row;
@@ -168,6 +183,17 @@
     [cell.power addTarget:self action:@selector(switchDevice:) forControlEvents:UIControlEventValueChanged];
     return cell;
 }
+
+- (IBAction)selectedSingProduct:(UISegmentedControl *)sender {
+    
+    self.cell.label.text = self.devices[sender.selectedSegmentIndex];
+    [self.tableView reloadData];
+}
+
+
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -63,7 +63,13 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.widthConstraint.constant = [[UIScreen mainScreen] bounds].size.width *0.6;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    {
+        self.widthConstraint.constant = [[UIScreen mainScreen] bounds].size.width *0.8;
+
+    }else{
+        self.widthConstraint.constant = 400;
+    }
     
     self.tableView.tableFooterView = [UIView new];
     self.user.text = [[NSUserDefaults  standardUserDefaults] objectForKey:@"Account"];
@@ -100,7 +106,14 @@
     }
 
     DeviceInfo *info=[DeviceInfo defaultManager];
-    NSDictionary *dict = @{@"Account":self.user.text,@"Type":[NSNumber numberWithInteger:self.userType],@"Password":[self.pwd.text md5],@"pushtoken":info.pushToken};
+    NSString *pushToken;
+    if(info.pushToken)
+    {
+        pushToken = info.pushToken;
+    }else{
+        pushToken = @"";
+    }
+    NSDictionary *dict = @{@"Account":self.user.text,@"Type":[NSNumber numberWithInteger:self.userType],@"Password":[self.pwd.text md5],@"pushtoken":pushToken};
     [IOManager writeUserdefault:self.user.text forKey:@"Account"];
     [IOManager writeUserdefault:[NSNumber numberWithInteger:self.userType] forKey:@"Type"];
     [IOManager writeUserdefault:self.pwd.text forKey:@"Password"];
