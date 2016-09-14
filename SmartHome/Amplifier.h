@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+//功放
 @interface Amplifier : NSObject
 
 //设备id

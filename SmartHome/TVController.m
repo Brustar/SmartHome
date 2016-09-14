@@ -143,7 +143,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"电视";
-     self.eNumber = [DeviceManager getENumber:[self.deviceid intValue]];
+    self.eNumber = [DeviceManager getENumber:[self.deviceid intValue]];
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
