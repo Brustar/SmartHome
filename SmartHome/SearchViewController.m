@@ -24,6 +24,8 @@
 #import "CameraController.h"
 #import "AmplifierController.h"
 #import "MBProgressHUD+NJ.h"
+#import "ScreenCurtainController.h"
+#import "ProjectController.h"
 @interface SearchViewController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
 
 //搜索到的设备类别
@@ -177,6 +179,16 @@
         PluginViewController *pluginVC = [storyBoard instantiateViewControllerWithIdentifier:@"PluginViewController"];
     
         [self.navigationController pushViewController:pluginVC animated:YES];
+    }else if([typeName isEqualToString:@"幕布"]){
+        ScreenCurtainController *screenCurtainVC = [storyBoard instantiateViewControllerWithIdentifier:@"ScreenCurtainController"];
+        screenCurtainVC.deviceid = [NSString stringWithFormat:@"%d",eId];
+        [self.navigationController pushViewController:screenCurtainVC animated:YES];
+        
+    }else if([typeName isEqualToString:@"投影"])
+    {
+        ProjectController *projectVC = [storyBoard instantiateViewControllerWithIdentifier:@"ProjectController"];
+        projectVC.deviceid = [NSString stringWithFormat:@"%d",eId];
+        [self.navigationController pushViewController:projectVC animated:YES];
     }else{
         [MBProgressHUD showError:@"没有结果匹配"];
     }

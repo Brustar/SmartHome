@@ -20,7 +20,7 @@
 #import "RoomManager.h"
 #import "IbeaconManager.h"
 #import "HostIDSController.h"
-
+#import "UIImageView+WebCache.h"
 
 
 @interface ScenseController ()<UICollectionViewDelegate,UICollectionViewDataSource,ScenseCellDelegate,UIGestureRecognizerDelegate,UISearchBarDelegate>
@@ -103,7 +103,7 @@
     [titleButton setTitle:@"逸云智家" forState:UIControlStateNormal];
     [titleButton setImage:[UIImage imageNamed:@"down"] forState:UIControlStateNormal];
     
-   // [titleButton setImage:[UIImage imageNamed:@"up"] forState:UIControlStateSelected];
+  
     [titleButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     titleButton.imageEdgeInsets = UIEdgeInsetsMake(0, 180, 0, 0);
     
@@ -154,6 +154,7 @@
         [self.firstButton setTitle:scene.sceneName forState:UIControlStateNormal];
         UIImage *image = [self getImgByUrl:scene.picName];
         [self.firstButton setBackgroundImage:image forState:UIControlStateNormal];
+        
         
     }else {
         Scene *scene = self.scenes[0];
@@ -300,17 +301,8 @@
     
     Scene *scene = self.collectionScenes[indexPath.row];
     cell.scenseName.text = scene.sceneName;
-    
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        
-        NSData * data = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:scene.picName]];
-        UIImage *image = [[UIImage alloc]initWithData:data];
-        if (data != nil) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                cell.imgView.image = image;
-            });
-        }
-    });
+
+    [cell.imgView sd_setImageWithURL:[NSURL URLWithString: scene.picName] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     cell.powerBtn.tag = scene.sceneID;
    
    

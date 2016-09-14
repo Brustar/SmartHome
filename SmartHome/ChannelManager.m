@@ -10,7 +10,7 @@
 #import "FMDatabase.h"
 #import "FMResultSet.h"
 @implementation ChannelManager
-+(NSMutableArray *)getAllChannelForFavoritedForType:(NSString *)type;
++(NSMutableArray *)getAllChannelForFavoritedForType:(NSString *)type deviceID:(int)deviceID
 {
         NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
         FMDatabase *db = [FMDatabase databaseWithPath:dbPath] ;
@@ -19,7 +19,7 @@
    
         }
     
-        FMResultSet *resultSet = [db executeQueryWithFormat:@"select * from Channels where isFavorite = 1 and parent = %@",type];
+        FMResultSet *resultSet = [db executeQueryWithFormat:@"select * from Channels where isFavorite = 1 and eqId = %d and parent = %@",deviceID,type];
         NSMutableArray *mutabelArr = [NSMutableArray array];
         while([resultSet next])
         {

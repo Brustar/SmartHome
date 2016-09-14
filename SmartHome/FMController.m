@@ -52,7 +52,7 @@
     if(!_allFavouriteChannels)
     {
         _allFavouriteChannels = [NSMutableArray array];
-        _allFavouriteChannels = [ChannelManager getAllChannelForFavoritedForType:@"FM"];
+        _allFavouriteChannels = [ChannelManager getAllChannelForFavoritedForType:@"FM" deviceID:[self.deviceid intValue]];
         if(_allFavouriteChannels == nil || _allFavouriteChannels.count == 0)
         {
             self.unstoreLabel.hidden = NO;
@@ -286,7 +286,7 @@
             self.editView.hidden = YES;
             self.unstoreLabel.hidden = YES;
             self.collectionView.backgroundColor = [UIColor lightGrayColor];
-            self.allFavouriteChannels = [ChannelManager getAllChannelForFavoritedForType:@"FM"];
+            self.allFavouriteChannels = [ChannelManager getAllChannelForFavoritedForType:@"FM" deviceID:[self.deviceid intValue]];
             [self.collectionView reloadData];
         }else{
             [MBProgressHUD showError:@"Msg"];

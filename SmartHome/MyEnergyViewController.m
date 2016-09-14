@@ -104,6 +104,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = self.footView;
     self.selectedDeviceTableView.tableFooterView = [UIView new];
+    self.selectedDeviceTableView.sectionHeaderHeight = 44;
     
     [self sendRequestToGetEenrgy];
     
@@ -268,8 +269,9 @@
         [img setContentMode:UIViewContentModeScaleAspectFit];
         
         [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        
-        btn.frame = CGRectMake(30, 10, 80, 30);
+        btn.titleLabel.font = [UIFont systemFontOfSize:15];
+        btn.titleLabel.textAlignment =NSTextAlignmentLeft;
+        btn.frame = CGRectMake(30, 10, 120, 30);
         NSString *title = [DeviceManager getNameWithID:[deviceIDs[i] intValue]];
         [btn setTitle:title forState:UIControlStateNormal];
         btn.tag = [deviceIDs[i] intValue];
@@ -288,6 +290,7 @@
     if(tableView == self.selectedDeviceTableView)
     {
         UIView *view = [[UIView alloc]init];
+        view.frame = CGRectMake(0, 0, self.selectedDeviceTableView.frame.size.width, 44);
         view.backgroundColor = [UIColor lightGrayColor];
         UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 10, view.bounds.size.width, view.bounds.size.height)];
         if(section == 0)
@@ -298,6 +301,9 @@
             
 
         }
+        button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        button.tag = section;
+        [button addTarget:self action:@selector(handleHeaderButton:) forControlEvents:UIControlEventTouchUpInside];
 
         [view addSubview:button];
         return view;
@@ -305,11 +311,30 @@
     return nil;
    
 }
-
+-(void)handleHeaderButton:(UIButton *)btn
+{
+    NSMutableArray *eIDs = [NSMutableArray array];
+    
+    if (btn.tag == 0) {
+        for(int i = 0; i < self.selectedDeviceTableView.numberOfSections - 2; i++) {
+            [eIDs addObjectsFromArray:self.deviceIDs[i]];
+        }
+    } else {
+        eIDs = self.deviceIDs[btn.tag - 1];
+    }
+    
+    self.engerOfDeviceVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EnergyOfDeviceController"];
+    
+    self.engerOfDeviceVC.eIds = eIDs;
+    [self.navigationController pushViewController:self.engerOfDeviceVC animated:NO];
+}
 -(void)goToEngerOfDevice:(UIButton *)btn
 {
     self.engerOfDeviceVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EnergyOfDeviceController"];
-    self.engerOfDeviceVC.eId = btn.tag;
+    
+    NSString *eid = [NSString stringWithFormat:@"%ld",btn.tag];
+    
+    self.engerOfDeviceVC.eIds = @[eid];
     [self.navigationController pushViewController:self.engerOfDeviceVC animated:NO];
     
 }
