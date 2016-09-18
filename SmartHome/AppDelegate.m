@@ -76,7 +76,7 @@
     NSLog(@"token error:  %@",str);
     
     //如果device token获取失败则需要重新获取一次
-    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(registerForRemoteNotificationToGetToken) userInfo:nil repeats:NO];
+    //[NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(registerForRemoteNotificationToGetToken) userInfo:nil repeats:NO];
 }
 
 //向服务器申请发送token 判断事前有没有发送过
