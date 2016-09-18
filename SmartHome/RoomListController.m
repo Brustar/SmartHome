@@ -514,7 +514,7 @@
     
     [scene setReadonly:NO];
     
-    [[SceneManager defaultManager] addScene:scene withName:nil withPic:@""];
+    [[SceneManager defaultManager] addScene:scene withName:nil withImage:[UIImage imageNamed:@""]];
 }
 
 

@@ -67,7 +67,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *realObjBtn;
 @property (weak, nonatomic) IBOutlet UIButton *graphicBtn;
 @property (weak, nonatomic) IBOutlet UIButton *stopBtn;
-@property (weak, nonatomic) IBOutlet UIButton *addDeviceBtn;
 @property (nonatomic,assign) NSInteger selectedRow;
 @property (nonatomic,strong) NSArray *subTypeArr;
 @property (weak, nonatomic) IBOutlet UIView *storeNewScene;

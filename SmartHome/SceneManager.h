@@ -22,7 +22,9 @@
 
 + (id) defaultManager;
 
-- (void) addScene:(Scene *)scene withName:(NSString *)name withPic:(NSString *)picurl;
+//- (void) addScene:(Scene *)scene withName:(NSString *)name withPic:(NSString *)picurl;
+- (void) addScene:(Scene *)scene withName:(NSString *)name withImage:(UIImage *)image;
+
 
 - (void) delScene:(Scene *)scene;
 

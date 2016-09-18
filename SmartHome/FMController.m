@@ -252,7 +252,7 @@
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
     [_scene setDevices:devices];
     
-    [[SceneManager defaultManager] addScene:_scene withName:nil withPic:@""];
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
     
 }
 //收藏当前频道
@@ -305,6 +305,12 @@
                 return;
             }
             [self.allFavouriteChannels removeObject:channel];
+            if(self.allFavouriteChannels.count == 0 || self.allFavouriteChannels == nil)
+            {
+                self.unstoreLabel.hidden = NO;
+                self.collectionView.backgroundColor = [UIColor whiteColor];
+
+            }
             [self.collectionView reloadData];
             
         }else{

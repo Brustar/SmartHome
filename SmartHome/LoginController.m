@@ -470,7 +470,7 @@
             
             self.tableView.hidden = YES;
             self.coverView.hidden = YES;
-            
+            [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
             //检查版本号
             [self sendRequestForGettingConfigInfos:@"GetConfigVersion.aspx" withTag:4];
         }

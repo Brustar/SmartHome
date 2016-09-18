@@ -37,12 +37,58 @@
     return sharedInstance;
 }
 
-- (void) addScene:(Scene *)scene withName:(NSString *)name withPic:(NSString *)picurl
+//- (void) addScene:(Scene *)scene withName:(NSString *)name withPic:(NSString *)picurl
+//{
+//    if (name) {
+//        
+//        int sceneid=[DeviceManager saveMaxSceneId:scene name:name pic:picurl];
+//        scene.sceneID=sceneid;
+//        //同步云端
+//        NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
+//        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+//        NSString *URL = [NSString stringWithFormat:@"%@SceneAdd.aspx",[IOManager httpAddr]];
+//        NSString *fileName = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,scene.sceneID];
+//        NSDictionary *parameter;
+//        if(![scene.startTime isEqualToString:@""])
+//        {
+//            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":@"store.png",@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:1],@"StartTime":scene.startTime,@"AstronomicalTime":scene.astronomicalTime,@"PlanType":[NSNumber numberWithInt:scene.planType],@"WeekValue":scene.weekValue,@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
+//        }else{
+//            
+//            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":@"store.png",@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:2],@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
+//        }
+//        
+//        NSURL *imgUrl = [NSURL URLWithString:picurl];
+//        NSData *imgData = [NSData dataWithContentsOfURL:imgUrl];
+//      
+//        
+//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//        formatter.dateFormat = @"yyyyMMddHHmmss";
+//        NSString *str = [formatter stringFromDate:[NSDate date]];
+//        NSString *imgFileName = [NSString stringWithFormat:@"%@.png", str];
+//        
+//        
+//        NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
+//        [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName imgData:imgData imgFileName:imgFileName completion:nil];
+//        
+//        
+//  
+//    }
+//    [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, scene.sceneID] scene:scene];
+//   
+//}
+
+- (void) addScene:(Scene *)scene withName:(NSString *)name withImage:(UIImage *)image
 {
     if (name) {
         
-        int sceneid=[DeviceManager saveMaxSceneId:scene name:name pic:picurl];
+        int sceneid=[DeviceManager saveMaxSceneId:scene name:name pic:@""];
         scene.sceneID=sceneid;
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyyMMddHHmmss";
+        NSString *str = [formatter stringFromDate:[NSDate date]];
+        NSString *imgFileName = [NSString stringWithFormat:@"%@.png", str];
+
         //同步云端
         NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
         NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
@@ -51,25 +97,45 @@
         NSDictionary *parameter;
         if(![scene.startTime isEqualToString:@""])
         {
-            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":@"store.png",@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:1],@"StartTime":scene.startTime,@"AstronomicalTime":scene.astronomicalTime,@"PlanType":[NSNumber numberWithInt:scene.planType],@"WeekValue":scene.weekValue,@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
+            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":imgFileName,@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:1],@"StartTime":scene.startTime,@"AstronomicalTime":scene.astronomicalTime,@"PlanType":[NSNumber numberWithInt:scene.planType],@"WeekValue":scene.weekValue,@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
         }else{
             
-            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":@"store.png",@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:2],@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
+            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":imgFileName,@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:2],@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
         }
         
+        
+        NSData *imgData = UIImagePNGRepresentation(image);
         
         
         
         
         NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
-        [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName completion:nil];
+        [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName imgData:imgData imgFileName:imgFileName completion:^(id responseObject) {
+            //插入数据库
+            
+            NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+            FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+            if([db open])
+            {
+               
+                NSString *sql = [NSString stringWithFormat:@"update Scenes set pic = '%@' where ID = %d",responseObject[@"ImgUrl"],scene.sceneID];
+               BOOL result = [db executeUpdate:sql];
+                if(result)
+                {
+                    NSLog(@"更新成功");
+                }
+                
+            }
+            [db close];
+
+        }];
         
         
-  
+        
     }
     [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, scene.sceneID] scene:scene];
-   
 }
+
 
 -(void)saveAsNewScene:(Scene *)scene withName:(NSString *)name withPic:(NSString *)picurl
 {
@@ -98,14 +164,13 @@
         
         
         NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
-        [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName completion:nil];
+       // [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName completion:nil];
         
         
         
     }
     [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, scene.sceneID] scene:scene];
 
-    
 }
 
 

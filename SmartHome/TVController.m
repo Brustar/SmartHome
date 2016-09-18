@@ -244,7 +244,7 @@
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
     [_scene setDevices:devices];
     
-    [[SceneManager defaultManager] addScene:_scene withName:nil withPic:@""];
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
     
 }
 
@@ -482,7 +482,7 @@
 
 {
    
-   // [self sendStoreChannelRequest];
+   
     if(self.chooseImg)
     {
         [self sendStoreChannelRequest];
@@ -556,10 +556,11 @@
 {
     NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    int cNumber = [self.channeNumber.text intValue];
     if([db open])
     {
-        int cNumber = [self.channeNumber.text intValue];
-        NSString *sql = [NSString stringWithFormat:@"insert into Channels values(%d,%d,%d,'%@','%@','%@',%d,'%@')",[responseObject[@"cId"] intValue],[self.deviceid intValue],cNumber,self.channelName.text,self.chooseImg,parent,1,self.eNumber];
+       
+        NSString *sql = [NSString stringWithFormat:@"insert into Channels values(%d,%d,%d,'%@','%@','%@',%d,'%@')",[responseObject[@"cId"] intValue],[self.deviceid intValue],cNumber,self.channelName.text,responseObject[@"imgUrl"],parent,1,self.eNumber];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {
@@ -577,6 +578,9 @@
 
 - (IBAction)cancelEdit:(id)sender
 {
+    self.channelName.text = nil;
+    self.channeNumber.text = nil;
+    [self.editChannelImgBtn setBackgroundImage:[UIImage imageNamed:@"placeholder"] forState:UIControlStateNormal];
     [self hiddenCoverView];
 }
 
@@ -664,8 +668,7 @@
 
 - (IBAction)storeTVChannel:(UIBarButtonItem *)sender {
     
-    self.channelName.text = nil;
-    self.channeNumber.text = nil;
+    
     [self showCoverView];
     
 }
