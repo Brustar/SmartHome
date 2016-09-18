@@ -150,7 +150,7 @@
         Scene *scene = self.scenes[0];
         self.firstButton.tag = scene.sceneID;
         self.firstPowerBtn.tag = scene.sceneID;
-        [self.firstButton.imageView sd_setImageWithURL:[NSURL URLWithString:scene.picName] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        
         [self.firstButton setTitle:scene.sceneName forState:UIControlStateNormal];
         [self.firstButton sd_setBackgroundImageWithURL:[NSURL URLWithString:scene.picName] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholder"]];
         
@@ -160,12 +160,12 @@
         self.firstButton.tag = scene.sceneID;
         self.firstPowerBtn.tag = scene.sceneID;
         [self.firstButton setTitle:scene.sceneName forState:UIControlStateNormal];
-        UIImage *image = [self getImgByUrl:scene.picName];
-        [self.firstButton setBackgroundImage:image forState:UIControlStateNormal];
+        [self.firstButton sd_setBackgroundImageWithURL:[NSURL URLWithString:scene.picName] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        
         Scene *scondScene = self.scenes[1];
         
-        [self.secondButton sd_setBackgroundImageWithURL:[NSURL URLWithString:scene.picName] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholder"]];
-       
+        [self.secondButton sd_setBackgroundImageWithURL:[NSURL URLWithString:scondScene.picName] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        [self.secondButton setTitle:scondScene.sceneName forState:UIControlStateNormal];
         self.secondButton.tag = scondScene.sceneID;
         self.secondPowerBtn.tag = scondScene.sceneID;
        
@@ -194,14 +194,7 @@
     [self judgeScensCount:self.scenes];
     
 }
--(UIImage *)getImgByUrl:(NSString *)url
-{
-    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
-   
-    
-    return [UIImage imageWithData:data];
-    
-}
+
 
 -(void)judgeScensCount:(NSArray *)scenes
 {

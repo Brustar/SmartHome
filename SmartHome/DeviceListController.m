@@ -28,9 +28,14 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHight;
 @property (nonatomic,strong) NSArray *deviceTypes;
 @property (weak, nonatomic) IBOutlet UIView *saveSceneView;
+@property (weak, nonatomic) IBOutlet UIImageView *sceneImgView;
 @property (weak, nonatomic) IBOutlet UITextField *sceneName;
 @property (weak, nonatomic) IBOutlet UIButton *selectSceneImg;
+
 @property (nonatomic,strong)UIImage *sceneImg;
+@property (nonatomic, assign) CGRect detialFrame;
+@property (nonatomic, assign) BOOL isSetDetialFrame;
+
 @end
 
 @implementation DeviceListController
@@ -48,12 +53,21 @@
     
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    if (!self.isSetDetialFrame) {
+        self.detialFrame = self.navigationController.view.bounds;
+        self.isSetDetialFrame = YES;
+    }
+}
 
 -(void) viewDidLoad
 
 {
    
-    self.segues=[NSArray arrayWithObjects:@"Lighter" ,@"Curtain",@"TV"  ,@"DVD" ,@"Netv",@"FM",@"Guard",@"Camera",@"Air",@"pluginSegue",nil];
+    
     self.tableView.rowHeight=44;
     self.tableView.tableFooterView = [UIView new];
     self.tableView.layer.cornerRadius = 10;
@@ -66,9 +80,13 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    
+    self.navigationController.view.bounds = self.detialFrame;
+    
     self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
-     self.tableViewHight.constant = self.deviceTypes.count * self.tableView.rowHeight;
+    self.tableViewHight.constant = self.deviceTypes.count * self.tableView.rowHeight;
 }
+
 -(IBAction)remove:(id)sender
 {
     Scene *scene=[[Scene alloc] init];
@@ -209,7 +227,7 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
    // bAlbumListViewStatus = NO;
-    self.sceneImg = info[UIImagePickerControllerEditedImage];
+    self.sceneImgView.image = info[UIImagePickerControllerEditedImage];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -227,9 +245,11 @@
 
     Scene *scene = [[Scene alloc]initWhithoutSchedule];
     [scene setValuesForKeysWithDictionary:plistDic];
-    NSString *imgStr = [self UIimageToStr:self.sceneImg];
+    NSString *imgStr = [self UIimageToStr:self.sceneImgView.image];
     
-    [[SceneManager defaultManager] addScene:scene withName:self.sceneName.text withPic:imgStr];
+    //[[SceneManager defaultManager] addScene:scene withName:self.sceneName.text withPic:imgStr];
+    [[SceneManager defaultManager] addScene:scene withName:self.sceneName.text withImage:self.sceneImgView.image];
+    
     
 
 }
