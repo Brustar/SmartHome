@@ -28,7 +28,7 @@
 +(NSString *)getNameWithID:(int)eId;
 
 +(NSArray *)deviceSubTypeByRoomId:(NSInteger)roomID;
-
++(NSArray *)deviceIdsByRoomId:(int)roomID;
 
 + (NSArray *)getLightTypeNameWithRoomID:(NSInteger)roomID;
 + (NSArray *)getLightWithTypeName:(NSString *)typeName roomID:(NSInteger)roomID;
@@ -38,7 +38,10 @@
 + (NSArray *)getCurtainWithTypeName:(NSString *)typeName roomID:(NSInteger)roomID;
 
 + (NSString *)deviceIDWithRoomID:(NSInteger)roomID withType:(NSString *)type;
-
+//根据房间ID 获取所有的设备大类
++(NSArray*)getSubTypeNameByRoomID:(int)rID;
+//根据房间ID 和设备大类找到对应的设备小类
++(NSArray *)getDeviceTypeName:(int)rID subTypeName:(NSString *)subTypeName;
 
 //根据设备类别和房间ID获取设备的所有ID
 +(NSArray *)getDeviceByTypeName:(NSString  *)typeName andRoomID:(NSInteger)roomID;

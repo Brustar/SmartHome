@@ -111,14 +111,10 @@
 
 - (void)setupData
 {
-   // self.devices = [DeviceManager getDeviceWithRoomID:self.roomID sceneID:self.sceneID];
-    
-    
-    //self.devicesTypes = [DeviceManager getDeviceSubTypeNameWithRoomID:self.roomID sceneID:self.sceneID];
+   
     self.devicesTypes = [DeviceManager getSubTydpeBySceneID:self.sceneID];
     
-    //self.subTypeArr = [DeviceManager getDeviceTypeNameWithRoomID:self.roomID sceneID:self.sceneID subTypeName:self.devicesTypes[0]];
-    self.subTypeArr = [DeviceManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.devicesTypes[0]];
+       self.subTypeArr = [DeviceManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.devicesTypes[0]];
     
     [self.tableView reloadData];
     [self.subDeviceTableView reloadData];

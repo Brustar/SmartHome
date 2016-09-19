@@ -194,8 +194,18 @@
                 return;
             }
         default:
-            [self goToViewController];
+        {
+            if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+            {
+                [self performSegueWithIdentifier:@"goToIphoneScene" sender:self];
+                
+            }else{
+                [self goToViewController];
+            }
+            
             break;
+        }
+            
     }
     
     
@@ -536,8 +546,14 @@
            
             
             [self writeTVChannelsConfigDataToSQL:responseObject withParent:@"FM"];
+            if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+            {
+                [self performSegueWithIdentifier:@"goToIphoneScene" sender:self];
+            }else{
+                [self goToViewController];
+            }
+
             
-            [self goToViewController];
         }else{
             [MBProgressHUD showError:responseObject[@"Msg"]];
         }
