@@ -165,7 +165,7 @@
     [self.tableView reloadData];
 }
 
--(IBAction)switchDevice:(id)sender
+-(IBAction)switchHomekitDevice:(id)sender
 {
 
         if ([self.characteristic.characteristicType isEqualToString:HMCharacteristicTypeTargetLockMechanismState]  || [self.characteristic.characteristicType isEqualToString:HMCharacteristicTypePowerState]) {
@@ -181,10 +181,9 @@
         }
 }
 
-/*
 -(IBAction)switchDevice:(id)sender{
     UISwitch *sw=(UISwitch *)sender;
-    SocketManager *sock=[SocketManager defaultManager];
+    /*
     NSString *cmd=@"FE00000000040001";//
     NSMutableData *data=[NSMutableData new];
     [data appendData:[PackManager dataFormHexString:cmd]];
@@ -197,10 +196,13 @@
     [data appendData:addr];
     NSString *tail=@"011e00ff";
     [data appendData:[PackManager dataFormHexString:tail]];
+     */
+    NSData *data=[[DeviceInfo defaultManager] toogle:sw.on deviceID:_deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:-1 tag:1];
-    [sock.socket readDataToData:[NSData dataWithBytes:"\xFF" length:1] withTimeout:-1 tag:1];
+    
 }
-*/
+
 #pragma mark  - TCP delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
@@ -227,7 +229,7 @@
         cell.label.text = self.plugNames[indexPath.row];
         
         cell.power.tag=indexPath.row;
-        cell.power.on=[self.characteristic.value boolValue];
+        //cell.power.on=[self.characteristic.value boolValue];
         [cell.power addTarget:self action:@selector(switchDevice:) forControlEvents:UIControlEventValueChanged];
         return  cell;
     }

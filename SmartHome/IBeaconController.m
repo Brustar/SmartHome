@@ -311,13 +311,14 @@ void* kk(void *msg)
 
 - (IBAction)http:(id)sender
 {
+    /*
     if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
         NSLog(@"你的手机支持3D Touch!");
     }
     else {
         NSLog(@"你的手机暂不支持3D Touch!");
     }
-    return;
+    */
     [NSThread detachNewThreadWithBlock:^(){
         NSLog(@"current thread:%@",[NSThread currentThread]);
         
