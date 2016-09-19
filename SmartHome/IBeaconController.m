@@ -58,6 +58,19 @@
     }else{
         NSLog(@"定位服务不可利用");
     }
+    
+    
+}
+
+-(void)GCD
+{
+    dispatch_async(dispatch_get_global_queue(0,0), ^{
+       NSLog(@"gcd thread:%@",[NSThread currentThread]);
+    });
+}
+
+-(void) muiltThread
+{
     [self performSelectorInBackground:@selector(action) withObject:self];
     
     NSThread *thread = [[NSThread alloc] initWithBlock:^(){
@@ -71,7 +84,7 @@
     
     NSTimer *timer = [NSTimer timerWithTimeInterval:1 repeats:YES block:^(NSTimer *timer){
         NSLog(@"timer thread:%@",[NSThread currentThread]);
-
+        
         NSLog(@"hello.");
     }];
     [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
@@ -298,6 +311,13 @@ void* kk(void *msg)
 
 - (IBAction)http:(id)sender
 {
+    if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
+        NSLog(@"你的手机支持3D Touch!");
+    }
+    else {
+        NSLog(@"你的手机暂不支持3D Touch!");
+    }
+    return;
     [NSThread detachNewThreadWithBlock:^(){
         NSLog(@"current thread:%@",[NSThread currentThread]);
         
