@@ -69,27 +69,27 @@
     });
 }
 
--(void) muiltThread
-{
-    [self performSelectorInBackground:@selector(action) withObject:self];
-    
-    NSThread *thread = [[NSThread alloc] initWithBlock:^(){
-        [NSThread sleepForTimeInterval:3];
-        NSLog(@"current thread:%@",[NSThread currentThread]);
-    }];
-    [thread start];
-    
-    pthread_t t;
-    pthread_create(&t, NULL, kk, "abc");
-    
-    NSTimer *timer = [NSTimer timerWithTimeInterval:1 repeats:YES block:^(NSTimer *timer){
-        NSLog(@"timer thread:%@",[NSThread currentThread]);
-        
-        NSLog(@"hello.");
-    }];
-    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
-    //[timer fire];
-}
+//-(void) muiltThread
+//{
+//    [self performSelectorInBackground:@selector(action) withObject:self];
+//    
+//    NSThread *thread = [[NSThread alloc] initWithBlock:^(){
+//        [NSThread sleepForTimeInterval:3];
+//        NSLog(@"current thread:%@",[NSThread currentThread]);
+//    }];
+//    [thread start];
+//    
+//    pthread_t t;
+//    pthread_create(&t, NULL, kk, "abc");
+//    
+//    NSTimer *timer = [NSTimer timerWithTimeInterval:1 repeats:YES block:^(NSTimer *timer){
+//        NSLog(@"timer thread:%@",[NSThread currentThread]);
+//        
+//        NSLog(@"hello.");
+//    }];
+//    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+//    //[timer fire];
+//}
 
 void* kk(void *msg)
 {
@@ -318,7 +318,7 @@ void* kk(void *msg)
         NSLog(@"你的手机暂不支持3D Touch!");
     }
     return;
-    [NSThread detachNewThreadWithBlock:^(){
+  //  [NSThread detachNewThreadWithBlock:^(){
         NSLog(@"current thread:%@",[NSThread currentThread]);
         
         NSString *url = @"http://localhost:3000/json";
@@ -331,7 +331,7 @@ void* kk(void *msg)
         } failure:^(NSURLSessionDataTask *task, NSError *error) {
             NSLog(@"failure:%@",error);
         }];
-    }];
+   // }];
     
     
 }

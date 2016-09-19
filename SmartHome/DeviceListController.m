@@ -57,10 +57,10 @@
 {
     [super viewDidAppear:animated];
     
-//    if (!self.isSetDetialFrame) {
-//        self.detialFrame = self.navigationController.view.bounds;
-//        self.isSetDetialFrame = YES;
-//    }
+    if (!self.isSetDetialFrame) {
+        self.detialFrame = self.navigationController.view.bounds;
+        self.isSetDetialFrame = YES;
+    }
 }
 
 -(void) viewDidLoad
@@ -80,11 +80,11 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-//    if(self.isSetDetialFrame)
-//    {
-//        self.navigationController.view.bounds = self.detialFrame;
-//        
-//    }
+    if(self.isSetDetialFrame)
+    {
+        self.navigationController.view.bounds = self.detialFrame;
+        
+    }
     
     self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
     self.tableViewHight.constant = self.deviceTypes.count * self.tableView.rowHeight;

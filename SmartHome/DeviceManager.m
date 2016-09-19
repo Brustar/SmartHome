@@ -191,6 +191,7 @@
     return [arr copy];
 }
 
+
 +(NSArray *)deviceSubTypeByRoomId:(NSInteger)roomID
 {
     NSMutableArray *subTypes = [NSMutableArray array];
@@ -226,7 +227,48 @@
     
     return [subTypes copy];
 }
++(NSArray*)getSubTypeNameByRoomID:(int)rID
+{
+    NSMutableArray *subTypes = [NSMutableArray array];
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT distinct subTypeName FROM Devices where rID = %d",rID];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+            NSString *subTypeName = [resultSet stringForColumn:@"subTypeName"];
+            [subTypes addObject:subTypeName];
 
+        }
+    }
+    return [subTypes copy];
+
+}
++(NSArray *)deviceIdsByRoomId:(int)roomID
+{
+    
+    NSMutableArray *deviceDIs = [NSMutableArray array];
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld",roomID];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+            int deviceID = [resultSet intForColumn:@"ID"];
+            
+            
+                [deviceDIs addObject:[NSNumber numberWithInt:deviceID]];
+            
+        }
+    }
+    
+    return [deviceDIs copy];
+
+}
 
 
 + (NSArray *)getLightTypeNameWithRoomID:(NSInteger)roomID
@@ -802,6 +844,47 @@
     }
     
     return [typeNames copy];
+}
+
++(NSArray *)getDeviceTypeName:(int)rID subTypeName:(NSString *)subTypeName
+{
+    NSMutableArray *typeNames = [NSMutableArray array];
+    
+    NSArray *deviceIDs = [DeviceManager deviceIdsByRoomId:rID];
+    
+    for (NSString *deviceID in deviceIDs) {
+        NSString *typeName = [self getDeviceTypeNameWithID:deviceID subTypeName:subTypeName];
+        
+        if ([typeName isEqualToString:@"开关灯"] || [typeName isEqualToString:@"调色灯"] || [typeName isEqualToString:@"调光灯"]) {
+            typeName = @"灯光";
+        } else if ([typeName isEqualToString:@"开合帘"] || [typeName isEqualToString:@"卷帘"]) {
+            typeName = @"窗帘";
+        }
+        
+        BOOL isSame = false;
+        for (NSString *tempTypeName in typeNames) {
+            if ([tempTypeName isEqualToString:typeName]) {
+                isSame = true;
+                break;
+            }
+        }
+        if (isSame) {
+            continue;
+        }
+        if([typeName isEqualToString:@""] || typeName == nil)
+        {
+            continue;
+        }
+        [typeNames addObject:typeName];
+        
+    }
+    
+    if (typeNames.count < 1) {
+        return nil;
+    }
+    
+    return [typeNames copy];
+
 }
 
 +(NSArray *)getAllDeviceNameBysubType:(NSString *)subTypeName

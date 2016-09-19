@@ -1334,7 +1334,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8n5-ZM-1Vi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2038" y="-7980"/>
+            <point key="canvasLocation" x="1993" y="-7198"/>
         </scene>
         <!--System Infomation Controller-->
         <scene sceneID="ki9-Lv-eta">
@@ -3013,6 +3013,29 @@
             </objects>
             <point key="canvasLocation" x="1249" y="-3608"/>
         </scene>
+        <!--Storyboard Link-->
+        <scene sceneID="F1l-Aq-QUs">
+            <objects>
+                <viewController id="hox-Sh-Dr1" customClass="RBStoryboardLink" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kk0-c6-cOY"/>
+                        <viewControllerLayoutGuide type="bottom" id="gR8-IC-Eo9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YT7-X5-Q5R">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="storyboardName" value="iPhone"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="needsTopLayoutGuide" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="sceneIdentifier" value="iphoneSceneController"/>
+                    </userDefinedRuntimeAttributes>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FBC-Ow-nho" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1244" y="-2831"/>
+        </scene>
         <!--My Setting View Controller-->
         <scene sceneID="1XM-de-2CR">
             <objects>
@@ -4300,6 +4323,7 @@
                         <outlet property="tableView" destination="Izq-Rd-4wr" id="vjd-BI-xXq"/>
                         <outlet property="user" destination="y1v-G2-n8Q" id="YxF-ok-OxV"/>
                         <outlet property="widthConstraint" destination="8Fh-m9-6rF" id="pQI-pL-Ya2"/>
+                        <segue destination="hox-Sh-Dr1" kind="custom" identifier="goToIphoneScene" customClass="RBStoryboardModalSegue" id="YB5-M9-HR3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7jA-yB-cch" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -6068,7 +6092,7 @@ layer.masksToBoundslayer.masksToBounds
                                                 </constraints>
                                                 <state key="normal" image="add"/>
                                                 <connections>
-                                                    <segue destination="2lV-M1-cea" kind="show" id="ya3-gG-p8O"/>
+                                                    <segue destination="2lV-M1-cea" kind="show" identifier="deviceListSegue" id="ya3-gG-p8O"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -6222,7 +6246,7 @@ layer.masksToBoundslayer.masksToBounds
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e5s-xD-1Tt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1940" y="-8009"/>
+            <point key="canvasLocation" x="1984" y="-7968"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YYw-xW-Ubc">
