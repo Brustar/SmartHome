@@ -14,6 +14,6 @@
 @property (nonatomic) int deviceID;
 
 //升降
-@property (nonatomic) bool Dropped;
+@property (nonatomic) bool dropped;
 
 @end

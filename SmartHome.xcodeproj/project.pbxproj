@@ -113,6 +113,7 @@
 		0FCFB39B1CF2950D00B37DD3 /* BgMusic.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFB39A1CF2950D00B37DD3 /* BgMusic.m */; };
 		0FD3DEAA1D3F183D00AF7765 /* SCWaveAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD3DEA91D3F183D00AF7765 /* SCWaveAnimationView.m */; };
 		0FD3DEAD1D3F186800AF7765 /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD3DEAC1D3F186800AF7765 /* Globals.m */; };
+		0FDC40991D8E7CCF0009EC46 /* test.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FDC40981D8E7CCF0009EC46 /* test.storyboard */; };
 		0FEE12761D20C53400811947 /* TXHRulerScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEE12721D20C53400811947 /* TXHRulerScrollView.m */; };
 		0FEE12771D20C53400811947 /* TXHRrettyRuler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEE12741D20C53400811947 /* TXHRrettyRuler.m */; };
 		0FF410DA1CDAE67100C7F4A1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410D91CDAE67100C7F4A1 /* CoreLocation.framework */; };
@@ -499,6 +500,7 @@
 		0FD3DEA91D3F183D00AF7765 /* SCWaveAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCWaveAnimationView.m; sourceTree = "<group>"; };
 		0FD3DEAB1D3F186800AF7765 /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
 		0FD3DEAC1D3F186800AF7765 /* Globals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Globals.m; sourceTree = "<group>"; };
+		0FDC40981D8E7CCF0009EC46 /* test.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = test.storyboard; sourceTree = "<group>"; };
 		0FEE12721D20C53400811947 /* TXHRulerScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TXHRulerScrollView.m; path = PrettyRuler/TXHRulerScrollView.m; sourceTree = SOURCE_ROOT; };
 		0FEE12731D20C53400811947 /* TXHRulerScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TXHRulerScrollView.h; path = PrettyRuler/TXHRulerScrollView.h; sourceTree = SOURCE_ROOT; };
 		0FEE12741D20C53400811947 /* TXHRrettyRuler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TXHRrettyRuler.m; path = PrettyRuler/TXHRrettyRuler.m; sourceTree = SOURCE_ROOT; };
@@ -1162,6 +1164,7 @@
 				F6359AFF1CFFC4DC0035EB31 /* ColourTableViewCell.xib */,
 				0F032D5B1CC9B12700D1920D /* LaunchScreen.storyboard */,
 				0F7E2E151D581AC400A47D5D /* iPhone.storyboard */,
+				0FDC40981D8E7CCF0009EC46 /* test.storyboard */,
 			);
 			name = storeboard;
 			sourceTree = "<group>";
@@ -1350,6 +1353,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0F032D771CC9B12700D1920D /* Build configuration list for PBXNativeTarget "SmartHome" */;
 			buildPhases = (
+				526834747F80F77E4EA860E8 /* 📦 Check Pods Manifest.lock */,
 				4B5F56A8FA12D4BD7D28AF3D /* [CP] Check Pods Manifest.lock */,
 				9E5B0BAA933708A69B87E6AE /* [CP] Check Pods Manifest.lock */,
 				22E4FF7C74861624FBD7E7CB /* [CP] Check Pods Manifest.lock */,
@@ -1469,6 +1473,7 @@
 				0F032D5D1CC9B12700D1920D /* LaunchScreen.storyboard in Resources */,
 				F60FDB471D003FD500AB04BE /* CurtainTableViewCell.xib in Resources */,
 				0F7E2E161D581AC400A47D5D /* iPhone.storyboard in Resources */,
+				0FDC40991D8E7CCF0009EC46 /* test.storyboard in Resources */,
 				0F032D5A1CC9B12700D1920D /* Assets.xcassets in Resources */,
 				F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */,
 				F668AF251D53413B0079587F /* Main.storyboard in Resources */,
@@ -1532,6 +1537,21 @@
 			inputPaths = (
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		526834747F80F77E4EA860E8 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1942,7 +1962,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FFmpeg-iOS/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1980,7 +2000,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FFmpeg-iOS/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

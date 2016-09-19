@@ -76,7 +76,7 @@
     NSLog(@"token error:  %@",str);
     
     //如果device token获取失败则需要重新获取一次
-    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(registerForRemoteNotificationToGetToken) userInfo:nil repeats:NO];
+    //[NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(registerForRemoteNotificationToGetToken) userInfo:nil repeats:NO];
 }
 
 //向服务器申请发送token 判断事前有没有发送过
@@ -121,12 +121,19 @@
         return UIInterfaceOrientationMaskAll;
     }else{
         return UIInterfaceOrientationMaskPortrait;
-    
-
     }
 }
 
-
+- (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void(^)(BOOL succeeded))completionHandler{
+    //判断先前我们设置的唯一标识
+    if([shortcutItem.type isEqualToString:@"-11.UITouchText.share"]){
+        NSArray *arr = @[@"hello 3D Touch"];
+        UIActivityViewController *vc = [[UIActivityViewController alloc]initWithActivityItems:arr applicationActivities:nil];
+        //设置当前的VC 为rootVC
+        [self.window.rootViewController presentViewController:vc animated:YES completion:^{
+        }];
+    }
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

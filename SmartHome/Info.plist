@@ -50,5 +50,16 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeShare</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Share</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>-11.UITouchText.share</string>
+		</dict>
+	</array>
 </dict>
 </plist>

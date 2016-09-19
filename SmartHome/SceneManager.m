@@ -352,9 +352,9 @@
                 device.mode=[[dic objectForKey:@"mode"] intValue];
                 [devices addObject:device];
             }
-            if ([dic objectForKey:@"Dropped"]) {
+            if ([dic objectForKey:@"dropped"]) {
                 Screen *device=[[Screen alloc] init];
-                device.Dropped=[[dic objectForKey:@"Dropped"] intValue];
+                device.dropped=[[dic objectForKey:@"dropped"] intValue];
                 [devices addObject:device];
             }
             if ([dic objectForKey:@"showed"]) {
@@ -508,8 +508,8 @@
         if ([device isKindOfClass:[Screen class]]) {
             Screen *screen=(Screen *)device;
             NSString *deviceid=[NSString stringWithFormat:@"%d", screen.deviceID];
-            if (screen.Dropped) {
-                data=[[DeviceInfo defaultManager] drop:screen.Dropped deviceID:deviceid];
+            if (screen.dropped) {
+                data=[[DeviceInfo defaultManager] drop:screen.dropped deviceID:deviceid];
                 [sock.socket writeData:data withTimeout:1 tag:1];
             }
         }

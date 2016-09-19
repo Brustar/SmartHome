@@ -19,6 +19,7 @@
 #import "AudioManager.h"
 #import "AppDelegate.h"
 #import "SunCount.h"
+#import <pthread.h>
 
 @implementation IBeaconController
 
@@ -57,7 +58,48 @@
     }else{
         NSLog(@"定位服务不可利用");
     }
+    
+    
+}
 
+-(void)GCD
+{
+    dispatch_async(dispatch_get_global_queue(0,0), ^{
+       NSLog(@"gcd thread:%@",[NSThread currentThread]);
+    });
+}
+
+-(void) muiltThread
+{
+    [self performSelectorInBackground:@selector(action) withObject:self];
+    
+    NSThread *thread = [[NSThread alloc] initWithBlock:^(){
+        [NSThread sleepForTimeInterval:3];
+        NSLog(@"current thread:%@",[NSThread currentThread]);
+    }];
+    [thread start];
+    
+    pthread_t t;
+    pthread_create(&t, NULL, kk, "abc");
+    
+    NSTimer *timer = [NSTimer timerWithTimeInterval:1 repeats:YES block:^(NSTimer *timer){
+        NSLog(@"timer thread:%@",[NSThread currentThread]);
+        
+        NSLog(@"hello.");
+    }];
+    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+    //[timer fire];
+}
+
+void* kk(void *msg)
+{
+    NSLog(@"pthread:%@,%s",[NSThread currentThread],msg);
+    return NULL;
+}
+
+-(void)action
+{
+    NSLog(@"current thread:%@",[NSThread currentThread]);
 }
 
 - (void)locationManager:(CLLocationManager *)manager
@@ -269,16 +311,29 @@
 
 - (IBAction)http:(id)sender
 {
-    NSString *url = @"http://localhost:3000/json";
-    // GET
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    // 将数据作为参数传入
-    //NSDictionary *dict = @{@"username":@"12",@"pwd":@"13"};
-    [mgr GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSLog(@"success:%@",responseObject);
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        NSLog(@"failure:%@",error);
+    if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
+        NSLog(@"你的手机支持3D Touch!");
+    }
+    else {
+        NSLog(@"你的手机暂不支持3D Touch!");
+    }
+    return;
+    [NSThread detachNewThreadWithBlock:^(){
+        NSLog(@"current thread:%@",[NSThread currentThread]);
+        
+        NSString *url = @"http://localhost:3000/json";
+        // GET
+        AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+        // 将数据作为参数传入
+        //NSDictionary *dict = @{@"username":@"12",@"pwd":@"13"};
+        [mgr GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+            NSLog(@"success:%@",responseObject);
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            NSLog(@"failure:%@",error);
+        }];
     }];
+    
+    
 }
 
 -(IBAction)initTcp:(id)sender
