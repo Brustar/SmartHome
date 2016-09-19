@@ -136,8 +136,8 @@
     [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, scene.sceneID] scene:scene];
 }
 
-
--(void)saveAsNewScene:(Scene *)scene withName:(NSString *)name withPic:(NSString *)picurl
+//另存为
+-(void)saveAsNewScene:(Scene *)scene withName:(NSString *)name withPic:(UIImage *)image
 {
     if (name) {
         
@@ -147,16 +147,22 @@
         NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
         NSString *URL = [NSString stringWithFormat:@"%@SceneAdd.aspx",[IOManager httpAddr]];
         
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyyMMddHHmmss";
+        NSString *str = [formatter stringFromDate:[NSDate date]];
+        NSString *imgFileName = [NSString stringWithFormat:@"%@.png", str];
+        NSData *imgData = UIImagePNGRepresentation(image);
+        
         NSDictionary *parameter;
-        int sceneid=[DeviceManager saveMaxSceneId:scene name:name pic:picurl];
+        int sceneid=[DeviceManager saveMaxSceneId:scene name:name pic:@""];
         scene.sceneID=sceneid;
         NSString *fileName = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,scene.sceneID];
         if(![scene.startTime isEqualToString:@""] )
         {
-            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":@"store.png",@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:1],@"StartTime":scene.startTime,@"AstronomicalTime":scene.astronomicalTime,@"PlanType":[NSNumber numberWithInt:scene.planType],@"WeekValue":scene.weekValue,@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
+            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":imgFileName,@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:1],@"StartTime":scene.startTime,@"AstronomicalTime":scene.astronomicalTime,@"PlanType":[NSNumber numberWithInt:scene.planType],@"WeekValue":scene.weekValue,@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
         }else{
             
-            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":@"store.png",@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:2],@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
+            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":imgFileName,@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:2],@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
         }
         
         
@@ -164,7 +170,25 @@
         
         
         NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
-       // [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName completion:nil];
+        [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName imgData:imgData imgFileName:imgFileName completion:^(id responseObject) {
+            
+            
+            NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+            FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+            if([db open])
+            {
+                
+                NSString *sql = [NSString stringWithFormat:@"update Scenes set pic = '%@' where ID = %d",responseObject[@"ImgUrl"],scene.sceneID];
+                BOOL result = [db executeUpdate:sql];
+                if(result)
+                {
+                    NSLog(@"更新成功");
+                }
+                
+            }
+            [db close];
+            
+        }];
         
         
         

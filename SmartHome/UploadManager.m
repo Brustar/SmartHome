@@ -34,9 +34,17 @@
         // 将本地的文件上传至服务器
         [formData appendPartWithFileData:UIImagePNGRepresentation(img) name:@"ImgFile" fileName:fileName mimeType:@"multipart/form-data"];
     } progress:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
-        NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"完成 %@", result);
-         completion(responseObject);
+        
+        //NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+       
+        id result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        int resultValue =[result[@"Result"] intValue];
+        NSLog(@"完成 %d", resultValue);
+        if (resultValue == 0) {
+            completion(result);
+        }else{
+            [MBProgressHUD showError:result[@"Msg"]];
+        }
     } failure:^(NSURLSessionDataTask *operation, NSError *error) {
         NSLog(@"错误 %@", error.localizedDescription);
     }];
@@ -59,10 +67,19 @@
         [formData appendPartWithFileData:imgData name:@"ImgFile" fileName:imgFileName mimeType:@"multipart/form-data"];
         
     } progress:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
-        NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"完成 %@", result);
         
-        completion(responseObject);
+  
+        id result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        int resultValue =[result[@"Result"] intValue];
+        NSLog(@"完成 %d", resultValue);
+        if (resultValue == 0) {
+            completion(result);
+        }else{
+            [MBProgressHUD showError:result[@"Msg"]];
+        }
+
+        
+       
     } failure:^(NSURLSessionDataTask *operation, NSError *error) {
         NSLog(@"错误 %@", error.localizedDescription);
         [MBProgressHUD showError:error.localizedDescription];

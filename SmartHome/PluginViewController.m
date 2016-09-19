@@ -11,14 +11,59 @@
 #import "AsyncUdpSocket.h"
 #import "PackManager.h"
 #import "PluginCell.h"
+#import "DeviceManager.h"
 
 @interface PluginViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
 @property (nonatomic,strong) PluginCell *cell;
+@property (nonatomic,strong) NSMutableArray *plugNames;
+@property (nonatomic,strong) NSMutableArray *plugDeviceIds;
 @end
 
 @implementation PluginViewController
+
+
+-(NSMutableArray *)plugDeviceIds
+{
+   if(!_plugDeviceIds)
+   {
+       _plugDeviceIds = [NSMutableArray array];
+       if(self.sceneid > 0)
+       {
+           NSArray *plugArr = [DeviceManager getDeviceIDsBySeneId:[self.sceneid intValue]];
+           for(int i = 0; i < plugArr.count; i++)
+           {
+               NSString *typeName = [DeviceManager deviceTypeNameByDeviceID:[plugArr[i] intValue]];
+               if([typeName isEqualToString:@"智能插座"])
+               {
+                   [_plugDeviceIds addObject:plugArr[i]];
+               }
+               
+           }
+       }else if(self.roomID > 0)
+       {
+           [_plugDeviceIds addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"智能插座" andRoomID:self.roomID]];
+       }else{
+           [_plugDeviceIds addObject:self.deviceid];
+       }
+   }
+    return _plugDeviceIds;
+}
+-(NSMutableArray *)plugNames
+{
+    if(!_plugNames)
+    {
+        _plugNames = [NSMutableArray array];
+        for(int i = 0; i < self.plugDeviceIds.count; i++)
+        {
+            int plugId = [self.plugDeviceIds[i] intValue];
+            NSString *name = [DeviceManager deviceNameByDeviceID:plugId];
+            [_plugNames addObject:name];
+        }
+    }
+    return _plugNames;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,16 +74,17 @@
 }
 -(void)setupSegment
 {
-    if(self.devices == nil || self.devices.count == 0)
+    if(self.plugNames == nil || self.plugNames.count == 0)
     {
         return;
     }
     [self.segment removeAllSegments];
-    for(int i = 0; i < self.devices.count; i++)
+    for(int i = 0; i < self.plugNames.count; i++)
     {
-        [self.segment insertSegmentWithTitle:self.devices[i] atIndex:i animated:NO];
+        [self.segment insertSegmentWithTitle:self.plugNames[i] atIndex:i animated:NO];
     }
     self.segment.selectedSegmentIndex = 0;
+    self.deviceid = [ self.plugDeviceIds objectAtIndex:self.segment.selectedSegmentIndex];
     
 }
 -(void)initHomekitPlugin
@@ -167,26 +213,50 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.devices count];
+    return 2;
     
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"PluginCell";
-    PluginCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    self.cell = cell;
+    if(indexPath.row == 0)
+    {
+        static NSString *CellIdentifier = @"PluginCell";
+        PluginCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+        self.cell = cell;
+        cell.label.text = self.plugNames[indexPath.row];
+        
+        cell.power.tag=indexPath.row;
+        cell.power.on=[self.characteristic.value boolValue];
+        [cell.power addTarget:self action:@selector(switchDevice:) forControlEvents:UIControlEventValueChanged];
+        return  cell;
+    }
     
-    cell.label.text =[self.devices objectAtIndex:indexPath.row];//[NSString stringWithFormat:@"插座%li",(long)indexPath.row];
-    cell.power.tag=indexPath.row;
-    cell.power.on=[self.characteristic.value boolValue];
-    [cell.power addTarget:self action:@selector(switchDevice:) forControlEvents:UIControlEventValueChanged];
-    return cell;
+    
+
+   
+    else{
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"recell"];
+        if(!cell)
+        {
+            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"recell"];
+            
+        }
+        
+        cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20, 5, 100, 30)];
+        [cell.contentView addSubview:label];
+        label.text = @"详细信息";
+        return cell;
+
+    }
+   
 }
 
 - (IBAction)selectedSingProduct:(UISegmentedControl *)sender {
     
     self.cell.label.text = self.devices[sender.selectedSegmentIndex];
+    self.deviceid = [self.plugDeviceIds objectAtIndex: self.segment.selectedSegmentIndex];
     [self.tableView reloadData];
 }
 

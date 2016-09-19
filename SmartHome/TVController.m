@@ -355,7 +355,7 @@
         }else{
             TVChannel *channel = self.allFavourTVChannels[indexPath.row];
            
-            //cell.imgView.image = [UIImage imageNamed:channel.channel_pic];
+           
             [cell.imgView sd_setImageWithURL:[NSURL URLWithString:channel.channel_pic] placeholderImage:[UIImage imageNamed:@"placeholder"]];
             
             cell.label.text = channel.channel_name;
@@ -560,7 +560,7 @@
     if([db open])
     {
        
-        NSString *sql = [NSString stringWithFormat:@"insert into Channels values(%d,%d,%d,'%@','%@','%@',%d,'%@')",[responseObject[@"cId"] intValue],[self.deviceid intValue],cNumber,self.channelName.text,responseObject[@"imgUrl"],parent,1,self.eNumber];
+        NSString *sql = [NSString stringWithFormat:@"insert into Channels values(%d,%d,%d,%d,'%@','%@','%@',%d,'%@')",[responseObject[@"cId"] intValue],[self.deviceid intValue],0,cNumber,self.channelName.text,responseObject[@"imgUrl"],parent,1,self.eNumber];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {
@@ -570,7 +570,7 @@
                 }
                 
         
-            
+             
         
     }
     [db close];

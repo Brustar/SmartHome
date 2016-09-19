@@ -22,7 +22,7 @@
 
 + (id) defaultManager;
 
-//- (void) addScene:(Scene *)scene withName:(NSString *)name withPic:(NSString *)picurl;
+
 - (void) addScene:(Scene *)scene withName:(NSString *)name withImage:(UIImage *)image;
 
 
@@ -33,7 +33,7 @@
 - (void) favoriteScene:(Scene *)newScene withName:(NSString *)name;
 
 - (Scene *)readSceneByID:(int)sceneid;
--(void)saveAsNewScene:(Scene *)scene withName:(NSString *)name withPic:(NSString *)picurl;
+-(void)saveAsNewScene:(Scene *)scene withName:(NSString *)name withPic:(UIImage *)image;
 
 -(NSArray *)addDevice2Scene:(Scene *)scene withDeivce:(id)device withId:(int)deviceID;
 

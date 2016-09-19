@@ -412,9 +412,8 @@
     
     Scene *scene = [[Scene alloc]initWhithoutSchedule];
     [scene setValuesForKeysWithDictionary:plistDic];
-    NSString *imgStr = [self UIimageToStr:self.selectSceneImg];
-    //[[SceneManager defaultManager] addScene:scene withName:self.storeNewSceneName.text withPic:imgStr];
-    [[SceneManager defaultManager] saveAsNewScene:scene withName:self.storeNewSceneName.text withPic:imgStr];
+   
+   // [[SceneManager defaultManager] saveAsNewScene:scene withName:self.storeNewSceneName.text withPic:imgStr];
     
     self.storeNewScene.hidden = YES;
     [self.view bringSubviewToFront:self.currentViewController.view];}

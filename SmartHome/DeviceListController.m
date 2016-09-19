@@ -57,10 +57,10 @@
 {
     [super viewDidAppear:animated];
     
-    if (!self.isSetDetialFrame) {
-        self.detialFrame = self.navigationController.view.bounds;
-        self.isSetDetialFrame = YES;
-    }
+//    if (!self.isSetDetialFrame) {
+//        self.detialFrame = self.navigationController.view.bounds;
+//        self.isSetDetialFrame = YES;
+//    }
 }
 
 -(void) viewDidLoad
@@ -80,8 +80,11 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    
-    self.navigationController.view.bounds = self.detialFrame;
+//    if(self.isSetDetialFrame)
+//    {
+//        self.navigationController.view.bounds = self.detialFrame;
+//        
+//    }
     
     self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
     self.tableViewHight.constant = self.deviceTypes.count * self.tableView.rowHeight;
@@ -245,9 +248,7 @@
 
     Scene *scene = [[Scene alloc]initWhithoutSchedule];
     [scene setValuesForKeysWithDictionary:plistDic];
-    NSString *imgStr = [self UIimageToStr:self.sceneImgView.image];
     
-    //[[SceneManager defaultManager] addScene:scene withName:self.sceneName.text withPic:imgStr];
     [[SceneManager defaultManager] addScene:scene withName:self.sceneName.text withImage:self.sceneImgView.image];
     
     
@@ -257,12 +258,6 @@
     self.saveSceneView.hidden = YES;
 }
 
--(NSString *)UIimageToStr:(UIImage *)img
-{
-    NSData *data = UIImageJPEGRepresentation(img,1.0f);
-    NSString *str = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    return str;
-}
 
 
 

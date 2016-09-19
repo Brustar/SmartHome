@@ -401,7 +401,7 @@
        
         for(NSDictionary *dicInfo in messageInfo)
         {
-            NSString  *masterID = dicInfo[@"MasterID"];
+            //NSString  *masterID = dicInfo[@"MasterID"];
             int eqId = [dicInfo[@"eqId"] intValue];
             NSString *eqNumber = dicInfo[@"eqNumber"];
             NSArray *channelInfo = dicInfo[@"channelInfo"];
@@ -413,7 +413,7 @@
             for(NSDictionary *channel in channelInfo)
             {
                 
-                NSString *sql = [NSString stringWithFormat:@"insert into Channels values(%d,%d,%d,'%@','%@','%@',%d,'%@')",[channel[@"cId"] intValue],eqId,[channel[@"cNumber"] intValue],channel[@"cName"],channel[@"imgUrl"],parent,1,eqNumber];
+                NSString *sql = [NSString stringWithFormat:@"insert into Channels values(%d,%d,%d,%d,'%@','%@','%@',%d,'%@')",[channel[@"cId"] intValue],eqId,0,[channel[@"cNumber"] intValue],channel[@"cName"],channel[@"imgUrl"],parent,1,eqNumber];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {
