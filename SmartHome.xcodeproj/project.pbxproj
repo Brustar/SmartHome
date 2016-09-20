@@ -79,7 +79,6 @@
 		0FAF98A51CE40F3C009BDBB5 /* QRCodeReaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF989E1CE40F3C009BDBB5 /* QRCodeReaderView.m */; };
 		0FAF98A61CE40F3C009BDBB5 /* QRCodeReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF98A01CE40F3C009BDBB5 /* QRCodeReaderViewController.m */; };
 		0FAF98A71CE40F3C009BDBB5 /* QRToggleTorchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF98A21CE40F3C009BDBB5 /* QRToggleTorchButton.m */; };
-		0FAF98AA1CE410E8009BDBB5 /* LoginQRController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF98A91CE410E8009BDBB5 /* LoginQRController.m */; };
 		0FAF98B31CE42A3B009BDBB5 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FAF98B21CE42A3B009BDBB5 /* libicucore.tbd */; };
 		0FAF98B61CE45EC9009BDBB5 /* CryptoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF98B51CE45EC9009BDBB5 /* CryptoManager.m */; };
 		0FAF98BE1CE466B0009BDBB5 /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FAF98BD1CE466B0009BDBB5 /* HomeKit.framework */; };
@@ -435,8 +434,6 @@
 		0FAF98A01CE40F3C009BDBB5 /* QRCodeReaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QRCodeReaderViewController.m; path = QRCodeReader/QRCodeReaderViewController.m; sourceTree = SOURCE_ROOT; };
 		0FAF98A11CE40F3C009BDBB5 /* QRToggleTorchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QRToggleTorchButton.h; path = QRCodeReader/QRToggleTorchButton.h; sourceTree = SOURCE_ROOT; };
 		0FAF98A21CE40F3C009BDBB5 /* QRToggleTorchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QRToggleTorchButton.m; path = QRCodeReader/QRToggleTorchButton.m; sourceTree = SOURCE_ROOT; };
-		0FAF98A81CE410E8009BDBB5 /* LoginQRController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginQRController.h; sourceTree = "<group>"; };
-		0FAF98A91CE410E8009BDBB5 /* LoginQRController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginQRController.m; sourceTree = "<group>"; };
 		0FAF98B21CE42A3B009BDBB5 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		0FAF98B41CE45EC9009BDBB5 /* CryptoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CryptoManager.h; sourceTree = "<group>"; };
 		0FAF98B51CE45EC9009BDBB5 /* CryptoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CryptoManager.m; sourceTree = "<group>"; };
@@ -789,8 +786,6 @@
 				F64EF7F81D8FB710003C1C48 /* IphoneControllers */,
 				0F032D4A1CC9B12700D1920D /* AppDelegate.h */,
 				0F032D4B1CC9B12700D1920D /* AppDelegate.m */,
-				0FAF98A81CE410E8009BDBB5 /* LoginQRController.h */,
-				0FAF98A91CE410E8009BDBB5 /* LoginQRController.m */,
 				0F43B1011CF4055300F3D9F0 /* IATConfig.h */,
 				0F43B1021CF4055300F3D9F0 /* IATConfig.m */,
 				0FAF8FF01CE18CE2000557BD /* IBeaconController.h */,
@@ -1798,7 +1793,6 @@
 				0FAF98A61CE40F3C009BDBB5 /* QRCodeReaderViewController.m in Sources */,
 				0F96A1661D17F37C00E1594F /* RulerLeftTagView.m in Sources */,
 				0FCF43311CE09039009BFDD9 /* IbeaconManager.m in Sources */,
-				0FAF98AA1CE410E8009BDBB5 /* LoginQRController.m in Sources */,
 				0FCFB3801CF28F6F00B37DD3 /* Light.m in Sources */,
 				0FAF74C21CEEA17C00432713 /* HRColorInfoView.m in Sources */,
 				0FCFB39B1CF2950D00B37DD3 /* BgMusic.m in Sources */,
