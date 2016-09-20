@@ -12,7 +12,7 @@
 
 @implementation VolumeManager
 
-+ (id)defaultManager {
++ (instancetype)defaultManager {
     static VolumeManager *sharedInstance = nil;
     static dispatch_once_t once;
     dispatch_once(&once, ^{

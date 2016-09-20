@@ -27,7 +27,7 @@ enum{
 @property (nonatomic, retain) NSTimer        *connectTimer; // 计时器
 @property (nonatomic,strong) id delegate;
 
-+ (id)defaultManager;
++ (instancetype)defaultManager;
 -(void)socketConnectHost;// socket连接
 -(void)cutOffSocket; // 断开socket连接
 

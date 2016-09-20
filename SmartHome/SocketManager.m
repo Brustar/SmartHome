@@ -14,7 +14,7 @@
 
 @implementation SocketManager
 
-+ (id)defaultManager {
++ (instancetype)defaultManager {
     static SocketManager *sharedInstance = nil;
     static dispatch_once_t once;
     dispatch_once(&once, ^{

@@ -13,7 +13,7 @@
 
 @implementation HttpManager
 
-+ (id)defaultManager
++ (instancetype)defaultManager
 {
     static HttpManager *sharedInstance = nil;
     static dispatch_once_t once;

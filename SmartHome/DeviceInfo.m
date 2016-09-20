@@ -18,7 +18,7 @@
 
 @implementation DeviceInfo
 
-+ (id)defaultManager
++ (instancetype)defaultManager
 {
     static DeviceInfo *sharedInstance = nil;
     static dispatch_once_t once;

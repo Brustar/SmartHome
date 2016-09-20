@@ -311,6 +311,7 @@ void* kk(void *msg)
 
 - (IBAction)http:(id)sender
 {
+    /*
     if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
         NSLog(@"你的手机支持3D Touch!");
     }
@@ -333,7 +334,7 @@ void* kk(void *msg)
         }];
    // }];
     
-    
+    */
 }
 
 -(IBAction)initTcp:(id)sender

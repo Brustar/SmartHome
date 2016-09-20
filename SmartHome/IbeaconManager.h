@@ -19,7 +19,7 @@
 
 @property (strong, nonatomic) DeviceInfo *ibeacon;
 
-+ (id)defaultManager;
++ (instancetype)defaultManager;
 -(void) start:(DeviceInfo *)beacon;
 
 @end

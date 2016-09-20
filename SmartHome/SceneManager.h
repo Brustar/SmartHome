@@ -20,7 +20,7 @@
 
 @interface SceneManager : NSObject
 
-+ (id) defaultManager;
++ (instancetype) defaultManager;
 
 
 - (void) addScene:(Scene *)scene withName:(NSString *)name withImage:(UIImage *)image;
