@@ -10,7 +10,7 @@
 
 @implementation AudioManager
 
-+ (id)defaultManager {
++ (instancetype)defaultManager {
     static AudioManager *sharedInstance = nil;
     static dispatch_once_t once;
     dispatch_once(&once, ^{

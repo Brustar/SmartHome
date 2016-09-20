@@ -22,7 +22,7 @@
 @property (strong, nonatomic) id delegate;
 @property (nonatomic) int tag;
 @property(nonatomic,assign)BOOL isPhotoLibrary;
-+ (id)defaultManager;
++ (instancetype)defaultManager;
 - (void) sendPost:(NSString *)url param:(NSDictionary *)params;
 - (void) sendGet:(NSString *)url param:(NSDictionary *)params;
 

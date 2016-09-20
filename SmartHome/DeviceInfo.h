@@ -62,7 +62,7 @@ enum{
 
 @property (nonatomic) int connectState;
 
-+ (id) defaultManager;
++ (instancetype) defaultManager;
 - (void) deviceGenaration;
 - (void) initConfig;
 - (void) netReachbility;

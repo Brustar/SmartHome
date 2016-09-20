@@ -334,7 +334,7 @@ void* kk(void *msg)
         }];
    // }];
     
-    
+    */
 }
 
 -(IBAction)initTcp:(id)sender

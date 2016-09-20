@@ -25,7 +25,7 @@
 #import "MBProgressHUD+NJ.h"
 @implementation SceneManager
 
-+ (id) defaultManager
++ (instancetype) defaultManager
 {
     static SceneManager *sharedInstance = nil;
     static dispatch_once_t once;

@@ -10,7 +10,7 @@
 
 @implementation IbeaconManager
 
-+ (id)defaultManager
++ (instancetype)defaultManager
 {
     static IbeaconManager *sharedInstance = nil;
     static dispatch_once_t once;

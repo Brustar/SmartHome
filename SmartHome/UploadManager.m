@@ -11,7 +11,7 @@
 #import "MBProgressHUD+NJ.h"
 @implementation UploadManager
 
-+ (id)defaultManager {
++ (instancetype)defaultManager {
     static UploadManager *sharedInstance = nil;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
