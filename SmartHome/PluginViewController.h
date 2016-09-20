@@ -16,5 +16,6 @@
 @property (nonatomic, strong) HMHomeManager *homeManager;
 @property (nonatomic, strong) HMHome *primaryHome;
 @property (nonatomic, strong) HMCharacteristic *characteristic;
+@property (nonatomic,assign) BOOL isAddDevice;
 
 @end

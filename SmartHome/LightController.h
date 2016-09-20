@@ -23,6 +23,7 @@
 @property (nonatomic,weak) NSString *deviceid;
 @property (strong, nonatomic) IBOutlet UIButton *favorite;
 @property (nonatomic,assign) int roomID;
+@property (nonatomic,assign) BOOL isAddDevice;
 
 @property (strong, nonatomic) Scene *scene;
 

@@ -8,11 +8,20 @@
 
 #import "CurtainTableViewCell.h"
 
+@interface CurtainTableViewCell ()
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *sliderWidthConstraint;
+
+@end
 @implementation CurtainTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    {
+        self.sliderWidthConstraint.constant = [[UIScreen mainScreen] bounds].size.width *0.3;
+        
+    }
+
 }
 
 

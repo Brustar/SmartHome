@@ -5097,7 +5097,7 @@
                                 </constraints>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.7725490196" green="0.7725490196" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Iwa-8I-ryX" firstAttribute="top" secondItem="3oz-0f-vMP" secondAttribute="bottom" constant="26" id="LEM-h2-AE5"/>
                             <constraint firstItem="Iwa-8I-ryX" firstAttribute="leading" secondItem="TVu-du-OFL" secondAttribute="leading" constant="40" id="YdI-3A-esZ"/>
@@ -5108,7 +5108,10 @@
                     </view>
                     <connections>
                         <outlet property="segmentCurtain" destination="3oz-0f-vMP" id="Xbn-hR-raD"/>
+                        <outlet property="segmentTopConstraint" destination="vJ7-AS-asE" id="tsG-fd-7oM"/>
                         <outlet property="tableView" destination="Iwa-8I-ryX" id="aLb-PK-sYz"/>
+                        <outlet property="tableViewLeftConstraint" destination="YdI-3A-esZ" id="zva-d2-3dl"/>
+                        <outlet property="tableViewRightConstraint" destination="sy9-CK-Cr5" id="4R0-Un-WoZ"/>
                         <segue destination="FtL-kz-2bc" kind="show" identifier="detail" id="NGA-cS-h6U"/>
                     </connections>
                 </viewController>
@@ -5818,8 +5821,11 @@ layer.masksToBoundslayer.masksToBounds
                     </navigationItem>
                     <connections>
                         <outlet property="favButt" destination="xD2-JX-03I" id="UHS-Tt-inE"/>
+                        <outlet property="segementTopConstraints" destination="Ocn-nH-67c" id="XVK-7g-RUQ"/>
                         <outlet property="segmentLight" destination="bzi-0u-K76" id="BOr-Ze-HV8"/>
                         <outlet property="tableView" destination="Kef-hB-18O" id="TjF-Zk-8dM"/>
+                        <outlet property="tableViewLeftContraints" destination="bcS-JN-bdw" id="Z75-Yo-tRu"/>
+                        <outlet property="tableViewRightConstraints" destination="80r-8q-5G4" id="kXf-wW-Fep"/>
                         <segue destination="FtL-kz-2bc" kind="show" identifier="detail" id="YE7-iU-rxh"/>
                     </connections>
                 </viewController>
@@ -6491,21 +6497,21 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="tt4-nB-rfe"/>
-        <segue reference="ya3-gG-p8O"/>
         <segue reference="mRk-xU-xJj"/>
-        <segue reference="Daf-E8-hDH"/>
+        <segue reference="ya3-gG-p8O"/>
         <segue reference="U1p-eR-Biy"/>
-        <segue reference="a9T-LN-ZVX"/>
-        <segue reference="Vzc-yi-Jnw"/>
-        <segue reference="JQm-bA-TWz"/>
-        <segue reference="l23-e3-J0C"/>
-        <segue reference="pWG-oz-Opr"/>
-        <segue reference="X9P-hg-DXo"/>
+        <segue reference="tt4-nB-rfe"/>
         <segue reference="vdf-Gi-dZf"/>
-        <segue reference="fHn-Cm-7Q7"/>
+        <segue reference="JQm-bA-TWz"/>
+        <segue reference="pWG-oz-Opr"/>
+        <segue reference="l23-e3-J0C"/>
+        <segue reference="X9P-hg-DXo"/>
         <segue reference="vKk-7C-VKf"/>
-        <segue reference="dRU-hd-aVS"/>
+        <segue reference="fHn-Cm-7Q7"/>
+        <segue reference="Vzc-yi-Jnw"/>
+        <segue reference="a9T-LN-ZVX"/>
+        <segue reference="NGA-cS-h6U"/>
+        <segue reference="Daf-E8-hDH"/>
         <segue reference="TBd-30-Hkx"/>
     </inferredMetricsTieBreakers>
 </document>

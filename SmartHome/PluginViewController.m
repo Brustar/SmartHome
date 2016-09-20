@@ -29,7 +29,7 @@
    if(!_plugDeviceIds)
    {
        _plugDeviceIds = [NSMutableArray array];
-       if(self.sceneid > 0)
+       if(self.sceneid > 0 && !self.isAddDevice)
        {
            NSArray *plugArr = [DeviceManager getDeviceIDsBySeneId:[self.sceneid intValue]];
            for(int i = 0; i < plugArr.count; i++)

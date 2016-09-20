@@ -1,4 +1,4 @@
-//
+ //
 //  SceneManager.m
 //  SmartHome
 //
@@ -37,46 +37,6 @@
     return sharedInstance;
 }
 
-//- (void) addScene:(Scene *)scene withName:(NSString *)name withPic:(NSString *)picurl
-//{
-//    if (name) {
-//        
-//        int sceneid=[DeviceManager saveMaxSceneId:scene name:name pic:picurl];
-//        scene.sceneID=sceneid;
-//        //同步云端
-//        NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
-//        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
-//        NSString *URL = [NSString stringWithFormat:@"%@SceneAdd.aspx",[IOManager httpAddr]];
-//        NSString *fileName = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,scene.sceneID];
-//        NSDictionary *parameter;
-//        if(![scene.startTime isEqualToString:@""])
-//        {
-//            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":@"store.png",@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:1],@"StartTime":scene.startTime,@"AstronomicalTime":scene.astronomicalTime,@"PlanType":[NSNumber numberWithInt:scene.planType],@"WeekValue":scene.weekValue,@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
-//        }else{
-//            
-//            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":@"store.png",@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:2],@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
-//        }
-//        
-//        NSURL *imgUrl = [NSURL URLWithString:picurl];
-//        NSData *imgData = [NSData dataWithContentsOfURL:imgUrl];
-//      
-//        
-//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//        formatter.dateFormat = @"yyyyMMddHHmmss";
-//        NSString *str = [formatter stringFromDate:[NSDate date]];
-//        NSString *imgFileName = [NSString stringWithFormat:@"%@.png", str];
-//        
-//        
-//        NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
-//        [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName imgData:imgData imgFileName:imgFileName completion:nil];
-//        
-//        
-//  
-//    }
-//    [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, scene.sceneID] scene:scene];
-//   
-//}
-
 - (void) addScene:(Scene *)scene withName:(NSString *)name withImage:(UIImage *)image
 {
     if (name) {
@@ -111,7 +71,9 @@
         
         NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
         [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName imgData:imgData imgFileName:imgFileName completion:^(id responseObject) {
+            
             //插入数据库
+        
             
             NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
             FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
@@ -134,17 +96,19 @@
         
     }
     [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, scene.sceneID] scene:scene];
+    
+    
 }
 
-//另存为
+//另存为(保存为一个新的场景）
 -(void)saveAsNewScene:(Scene *)scene withName:(NSString *)name withPic:(UIImage *)image
 {
     if (name) {
         
         
         //同步云端
-        NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,scene.sceneID];
-        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+        NSString *fileName = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,scene.sceneID];
+        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:fileName];
         NSString *URL = [NSString stringWithFormat:@"%@SceneAdd.aspx",[IOManager httpAddr]];
         
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -156,7 +120,7 @@
         NSDictionary *parameter;
         int sceneid=[DeviceManager saveMaxSceneId:scene name:name pic:@""];
         scene.sceneID=sceneid;
-        NSString *fileName = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,scene.sceneID];
+       
         if(![scene.startTime isEqualToString:@""] )
         {
             parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":imgFileName,@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:1],@"StartTime":scene.startTime,@"AstronomicalTime":scene.astronomicalTime,@"PlanType":[NSNumber numberWithInt:scene.planType],@"WeekValue":scene.weekValue,@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
@@ -223,8 +187,22 @@
 {
     [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, newScene.sceneID ] scene:newScene];
     //同步云端
+    NSString *fileName = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,newScene.sceneID];
+    newScene.sceneName = [DeviceManager getSceneName:newScene.sceneID];
+    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:fileName];
+     NSDictionary *parameter;
+    if(newScene.isPlan == 1)
     
-    //上传文件
+    {
+        parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":newScene.sceneName,@"ImgName":newScene.picName,@"ScenceFile":fileName,@"RoomID":[NSNumber numberWithInt:newScene.roomID],@"IsPlan":@"1",@"StartTime":newScene.startTime,@"AstronomicalTime":newScene.astronomicalTime,@"PlanType":[NSNumber numberWithInt:newScene.planType],@"WeekValue":newScene.weekValue,@"ScenceID":[NSNumber numberWithInt:newScene.sceneID]};
+    }else{
+        parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":newScene.sceneName,@"ImgName":newScene.picName,@"ScenceFile":fileName,@"RoomID":[NSNumber numberWithInt:newScene.roomID],@"IsPlan":@"2",@"ScenceID":[NSNumber numberWithInt:newScene.sceneID]};
+    }
+    NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
+    NSString *URL = [NSString stringWithFormat:@"%@SceneEdit.aspx",[IOManager httpAddr]];
+    [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName imgData:nil imgFileName:@"" completion:nil];
+    
+  
 }
 
 - (void) favoriteScene:(Scene *)newScene withName:(NSString *)name

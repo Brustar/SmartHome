@@ -61,17 +61,25 @@
     // formData是遵守了AFMultipartFormData的对象
     [manager POST:url parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         // 将本地的文件上传至服务器
-        [formData appendPartWithFileData:sceneData name:@"ScenceFile" fileName:fileName mimeType:@"multipart/form-data"];
-    
+        if(sceneData)
+        {
+            [formData appendPartWithFileData:sceneData name:@"ScenceFile" fileName:fileName mimeType:@"multipart/form-data"];
+        }
         
-        [formData appendPartWithFileData:imgData name:@"ImgFile" fileName:imgFileName mimeType:@"multipart/form-data"];
+    
+        if(imgData)
+        {
+            [formData appendPartWithFileData:imgData name:@"ImgFile" fileName:imgFileName mimeType:@"multipart/form-data"];
+        }
+            
+        
         
     } progress:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
         
-  
+        NSString *str = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         id result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         int resultValue =[result[@"Result"] intValue];
-        NSLog(@"完成 %d", resultValue);
+        NSLog(@"完成 %@", str);
         if (resultValue == 0) {
             completion(result);
         }else{

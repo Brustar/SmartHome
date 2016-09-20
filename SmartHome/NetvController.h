@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UISlider *volume;
 @property (strong, nonatomic) Scene *scene;
 @property (nonatomic,assign) int roomID;
+@property (nonatomic,assign) BOOL isAddDevice;
 
 @end

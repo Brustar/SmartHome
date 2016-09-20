@@ -12,7 +12,15 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+     {
+         self.brightWidthConstraint.constant = 100;
+         
+     }else {
+         self.brightWidthConstraint.constant = 200;
+     }
+    
+    
     
 }
 - (IBAction)brightValueChanged:(id)sender {

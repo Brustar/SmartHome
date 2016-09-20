@@ -150,10 +150,28 @@
             </objects>
             <point key="canvasLocation" x="913.60000000000002" y="-440.19999999999999"/>
         </scene>
-        <!--Main Controller-->
+        <!--Iphone Main Controller-->
+        <scene sceneID="fjS-pe-LwS">
+            <objects>
+                <viewController storyboardIdentifier="IphoneMainController" id="2si-ky-nN2" customClass="IphoneMainController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="slv-ux-4IF"/>
+                        <viewControllerLayoutGuide type="bottom" id="OP7-EL-rcf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1wI-ON-Bnp">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Bc-RO-TA4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1400" y="194"/>
+        </scene>
+        <!--Iphonr Left Controller-->
         <scene sceneID="q1T-dz-uwb">
             <objects>
-                <viewController id="31O-AC-ar5" customClass="MainController" sceneMemberID="viewController">
+                <viewController id="31O-AC-ar5" customClass="IphonrLeftController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="N4L-O0-Y41"/>
                         <viewControllerLayoutGuide type="bottom" id="Gw0-PA-KmT"/>
@@ -320,25 +338,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dlQ-7l-shb">
-                                <rect key="frame" x="0.0" y="64" width="270" height="80"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="mWZ-aZ-AhP"/>
                                 </constraints>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1DX-aD-anb">
-                                <rect key="frame" x="270" y="112" width="50" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="0CA-Sm-YAZ"/>
-                                </constraints>
-                                <state key="normal" image="startScene"/>
-                            </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7fc-tC-vwt">
-                                <rect key="frame" x="0.0" y="144" width="320" height="29"/>
-                                <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
-                                </segments>
-                            </segmentedControl>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Awj-hg-hMO">
                                 <rect key="frame" x="0.0" y="518" width="320" height="50"/>
                                 <constraints>
@@ -346,7 +350,7 @@
                                 </constraints>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gov-9L-qGq">
-                                <rect key="frame" x="0.0" y="172" width="320" height="346"/>
+                                <rect key="frame" x="0.0" y="144" width="320" height="374"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -354,19 +358,14 @@
                         <constraints>
                             <constraint firstItem="dlQ-7l-shb" firstAttribute="top" secondItem="5kj-Jc-yE4" secondAttribute="bottom" id="1pP-6j-OoW"/>
                             <constraint firstItem="puK-Tu-xPi" firstAttribute="top" secondItem="Awj-hg-hMO" secondAttribute="bottom" id="2kE-te-SqM"/>
-                            <constraint firstItem="7fc-tC-vwt" firstAttribute="leading" secondItem="QLD-lc-d2O" secondAttribute="leading" id="6gR-bm-cco"/>
-                            <constraint firstItem="Gov-9L-qGq" firstAttribute="top" secondItem="7fc-tC-vwt" secondAttribute="bottom" id="Gip-Ck-94J"/>
-                            <constraint firstAttribute="trailing" secondItem="1DX-aD-anb" secondAttribute="trailing" id="HmM-EN-Q2K"/>
-                            <constraint firstItem="1DX-aD-anb" firstAttribute="bottom" secondItem="dlQ-7l-shb" secondAttribute="bottom" id="Lxi-SR-xWO"/>
+                            <constraint firstItem="Gov-9L-qGq" firstAttribute="top" secondItem="dlQ-7l-shb" secondAttribute="bottom" id="5mK-uB-Wiz"/>
                             <constraint firstItem="dlQ-7l-shb" firstAttribute="leading" secondItem="QLD-lc-d2O" secondAttribute="leading" id="n71-Nf-p5v"/>
                             <constraint firstItem="Gov-9L-qGq" firstAttribute="leading" secondItem="QLD-lc-d2O" secondAttribute="leading" id="oq1-qa-fiC"/>
                             <constraint firstItem="Awj-hg-hMO" firstAttribute="top" secondItem="Gov-9L-qGq" secondAttribute="bottom" id="qFU-wN-QOb"/>
-                            <constraint firstAttribute="trailing" secondItem="7fc-tC-vwt" secondAttribute="trailing" id="r7A-Wv-Mr7"/>
-                            <constraint firstItem="7fc-tC-vwt" firstAttribute="top" secondItem="dlQ-7l-shb" secondAttribute="bottom" id="tPg-Fh-ij8"/>
                             <constraint firstAttribute="trailing" secondItem="Gov-9L-qGq" secondAttribute="trailing" id="tqt-5A-3bU"/>
                             <constraint firstAttribute="trailing" secondItem="Awj-hg-hMO" secondAttribute="trailing" id="vTU-6k-4Ot"/>
                             <constraint firstItem="Awj-hg-hMO" firstAttribute="leading" secondItem="QLD-lc-d2O" secondAttribute="leading" id="vm8-Wp-3nr"/>
-                            <constraint firstAttribute="trailing" secondItem="dlQ-7l-shb" secondAttribute="trailing" constant="50" id="zhn-A0-w4i"/>
+                            <constraint firstAttribute="trailing" secondItem="dlQ-7l-shb" secondAttribute="trailing" id="zhn-A0-w4i"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="mpu-ns-BTA"/>
@@ -374,7 +373,6 @@
                         <outlet property="detailView" destination="Gov-9L-qGq" id="5CR-qK-fVn"/>
                         <outlet property="roomScrollView" destination="Awj-hg-hMO" id="YbO-Sa-Scx"/>
                         <outlet property="scrollView" destination="dlQ-7l-shb" id="Wuy-mY-59x"/>
-                        <outlet property="typeSegment" destination="7fc-tC-vwt" id="8sY-sE-Yfs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xxd-Ux-BxW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -483,7 +481,6 @@
     </scenes>
     <resources>
         <image name="media" width="48" height="48"/>
-        <image name="startScene" width="32" height="32"/>
         <image name="u13" width="92" height="37"/>
         <image name="u4" width="120" height="70"/>
         <image name="u6" width="120" height="70"/>

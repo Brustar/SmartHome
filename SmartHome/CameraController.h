@@ -14,5 +14,6 @@
 @property (nonatomic,strong) RTSPPlayer *video;
 @property (nonatomic,assign) int roomID;
 @property (nonatomic) float lastFrameTime;
+@property (nonatomic,assign) BOOL isAddDevice;
 
 @end

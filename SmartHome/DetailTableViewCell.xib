@@ -22,23 +22,23 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="i6A-fh-6Vc">
-                        <rect key="frame" x="61" y="3" width="204" height="38"/>
+                        <rect key="frame" x="111" y="3" width="104" height="38"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="200" id="qNV-ZV-Kdn"/>
+                            <constraint firstAttribute="width" constant="100" id="qNV-ZV-Kdn"/>
                         </constraints>
                         <connections>
                             <action selector="brightValueChanged:" destination="KGk-i7-Jjw" eventType="valueChanged" id="oS0-at-Tz1"/>
                         </connections>
                     </slider>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="light_weak" translatesAutoresizingMaskIntoConstraints="NO" id="Ppm-lW-L1P">
-                        <rect key="frame" x="43" y="14" width="15" height="15"/>
+                        <rect key="frame" x="93" y="14" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="tMY-LM-1pX"/>
                             <constraint firstAttribute="width" constant="15" id="tNu-gC-WtR"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="light" translatesAutoresizingMaskIntoConstraints="NO" id="W2R-zi-pzZ">
-                        <rect key="frame" x="268" y="12" width="20" height="20"/>
+                        <rect key="frame" x="218" y="12" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="O2F-lu-AnI"/>
                             <constraint firstAttribute="height" constant="20" id="RJZ-l7-2CW"/>
@@ -47,8 +47,8 @@
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ybk-Pq-GuA">
                         <rect key="frame" x="257" y="6" width="51" height="31"/>
                     </switch>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpW-U6-wT0">
-                        <rect key="frame" x="12" y="11" width="11" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpW-U6-wT0">
+                        <rect key="frame" x="49" y="11" width="24" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -75,6 +75,7 @@
             <connections>
                 <outlet property="bright" destination="i6A-fh-6Vc" id="yPJ-9V-8Lm"/>
                 <outlet property="brightImg" destination="W2R-zi-pzZ" id="dRg-gr-ATv"/>
+                <outlet property="brightWidthConstraint" destination="qNV-ZV-Kdn" id="Wfd-9j-gRs"/>
                 <outlet property="label" destination="kOF-8j-27P" id="iVr-m3-BP9"/>
                 <outlet property="lightImg" destination="Ppm-lW-L1P" id="Eq0-3n-tjP"/>
                 <outlet property="power" destination="ybk-Pq-GuA" id="QkY-CA-vwg"/>

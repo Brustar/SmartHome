@@ -183,6 +183,8 @@
 {
     id theSegue = segue.destinationViewController;
     [theSegue setValue:[NSNumber numberWithInt:(int)self.roomid] forKey:@"roomID"];
+    [theSegue setValue:self.sceneid forKey:@"sceneid"];
+    [theSegue setValue:@"YES" forKey:@"isAddDevice"];
     
 }
 

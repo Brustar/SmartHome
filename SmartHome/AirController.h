@@ -29,5 +29,6 @@ enum AIR_TARGET
 
 @property (nonatomic,assign) int roomID;
 @property (strong, nonatomic) Scene *scene;
+@property (nonatomic,assign) BOOL isAddDevice;
 
 @end

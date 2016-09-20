@@ -16,5 +16,6 @@
 @property (nonatomic, retain) NSTimer *timer;
 @property (nonatomic) int retChannel;
 @property (nonatomic,assign) int roomID;
+@property (nonatomic,assign) BOOL isAddDevice;
 
 @end

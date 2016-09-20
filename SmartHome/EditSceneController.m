@@ -279,6 +279,7 @@
     {
         id theSegue = segue.destinationViewController;
         [theSegue setValue:[NSNumber numberWithInt:self.roomID] forKey:@"roomid"];
+        [theSegue setValue:[NSNumber numberWithInt:self.sceneID] forKey:@"sceneid"];
     }
        
 }
@@ -287,7 +288,7 @@
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请选择" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *saveAction = [UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //场景ID不变
-        NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
+        NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
         NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
         NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
         
@@ -409,7 +410,7 @@
     Scene *scene = [[Scene alloc]initWhithoutSchedule];
     [scene setValuesForKeysWithDictionary:plistDic];
    
-   // [[SceneManager defaultManager] saveAsNewScene:scene withName:self.storeNewSceneName.text withPic:imgStr];
+    [[SceneManager defaultManager] saveAsNewScene:scene withName:self.storeNewSceneName.text withPic:self.selectSceneImg];
     
     self.storeNewScene.hidden = YES;
     [self.view bringSubviewToFront:self.currentViewController.view];}

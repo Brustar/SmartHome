@@ -28,7 +28,7 @@
     if(!_screenCurtainIds)
     {
         _screenCurtainIds = [NSMutableArray array];
-        if(self.sceneid > 0 )
+        if(self.sceneid > 0 && !_isAddDevice )
         {
             NSArray *screenCurtain = [DeviceManager getDeviceIDsBySeneId:[self.sceneid intValue]];
             for(int i = 0; i < screenCurtain.count; i++)

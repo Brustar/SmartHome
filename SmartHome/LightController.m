@@ -23,6 +23,12 @@
 @property (nonatomic,strong) NSMutableArray *lNames;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentLight;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *segementTopConstraints;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewRightConstraints;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewLeftContraints;
+
+
 - (IBAction)selectTypeOfLight:(UISegmentedControl *)sender;
 
 @end
@@ -35,9 +41,9 @@
     {
         _lIDs = [NSMutableArray array];
        
-           if(self.sceneid > 0)
+           if(self.sceneid > 0 && !self.isAddDevice)
            {
-           // NSArray *lightArr = [DeviceManager getDeviceIDWithRoomID:self.roomID sceneID:[self.sceneid intValue]];
+           
                NSArray *lightArr = [DeviceManager getDeviceIDsBySeneId:[self.sceneid intValue]];
                for(int i = 0; i <lightArr.count; i++)
                {
@@ -79,7 +85,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self setUpConstraints];
     self.detailCell = [[[NSBundle mainBundle] loadNibNamed:@"DetailTableViewCell" owner:self options:nil] lastObject];
     self.detailCell.bright.continuous = NO;
     [self.detailCell.bright addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
@@ -106,6 +112,18 @@
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
 }
+-(void)setUpConstraints
+{
+   
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    {
+        self.segementTopConstraints.constant = 0;
+        self.tableViewLeftContraints.constant = 0;
+        self.tableViewRightConstraints.constant = 0;
+       
+    }
+}
+
 
 -(void) syncUI
 {
@@ -309,8 +327,10 @@
     NSString *typeName = [DeviceManager lightTypeNameByDeviceID:[self.deviceid intValue]];
     if ([typeName isEqualToString:@"调色灯"]) {
         return 3;
+    }else{
+        return 2;
     }
-    return 2;
+    
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -333,6 +353,10 @@
             self.detailCell.brightImg.hidden = NO;
             self.detailCell.power.hidden = NO;
             self.detailCell.valueLabel.hidden = NO;
+        }
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+        {
+            self.detailCell.valueLabel.hidden = YES;
         }
         
         self.detailCell.selectionStyle = UITableViewCellSelectionStyleNone;

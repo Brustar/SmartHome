@@ -17,8 +17,11 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentCurtain;
 - (IBAction)selectedTypeOfCurtain:(UISegmentedControl *)sender;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *segmentTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewLeftConstraint;
 @property (nonatomic,strong) NSMutableArray *curNames;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewRightConstraint;
 @property (nonatomic,strong) NSMutableArray *curtainIDArr;
 @end
 
@@ -30,7 +33,7 @@
     if(!_curtainIDArr)
     {
         _curtainIDArr = [NSMutableArray array];
-        if(self.sceneid > 0)
+        if(self.sceneid > 0 && !self.isAddDevice)
         {
             NSArray *curtainArr = [DeviceManager getDeviceIDsBySeneId:[self.sceneid intValue]];
             for(int i = 0; i <curtainArr.count; i++)
@@ -42,7 +45,7 @@
                 }
             }
 
-        }else if(self.roomID){
+        }else if(self.roomID ){
             [_curtainIDArr addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"开合帘" andRoomID:self.roomID]];
             [_curtainIDArr addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"卷帘" andRoomID:self.roomID]];
         }else{
@@ -68,9 +71,21 @@
     }
     return _curNames;
 }
+-(void)setUpConstraint
+{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    {
+        self.segmentTopConstraint.constant = 0;
+        self.tableViewLeftConstraint.constant = 0;
+        self.tableViewRightConstraint.constant = 0;
+        
+    }
 
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setUpConstraint];
     // Do any additional setup after loading the view.
     
     self.title=@"窗帘";

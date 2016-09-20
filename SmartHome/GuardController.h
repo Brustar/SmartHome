@@ -12,5 +12,6 @@
 @property (nonatomic,assign) int roomID;
 @property (nonatomic, retain) NSTimer *timer;
 @property (strong, nonatomic) Scene *scene;
+@property (nonatomic,assign) BOOL isAddDevice;
 
 @end

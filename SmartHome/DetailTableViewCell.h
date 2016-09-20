@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *lightImg;
 @property (weak, nonatomic) IBOutlet UIImageView *brightImg;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *brightWidthConstraint;
 
 @end

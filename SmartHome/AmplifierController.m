@@ -30,7 +30,7 @@
     {
         _amplifierIDArr = [NSMutableArray array];
         
-        if(self.sceneid > 0)
+        if(self.sceneid > 0 && !self.isAddDevice)
         {
             NSArray *amplifiers = [DeviceManager getDeviceIDsBySeneId:[self.sceneid intValue]];
             for(int i = 0; i<amplifiers.count; i++)

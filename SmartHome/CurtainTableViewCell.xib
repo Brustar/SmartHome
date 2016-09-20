@@ -31,7 +31,7 @@
                         </connections>
                     </slider>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8pT-n9-oYX">
-                        <rect key="frame" x="-40" y="7" width="20" height="30"/>
+                        <rect key="frame" x="-30" y="7" width="20" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="PWC-vD-B2F"/>
                             <constraint firstAttribute="height" constant="30" id="iTN-qe-tAd"/>
@@ -39,23 +39,23 @@
                         <state key="normal" backgroundImage="curtain_weak"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dFO-Zi-fiB">
-                        <rect key="frame" x="340" y="7" width="20" height="30"/>
+                        <rect key="frame" x="330" y="7" width="20" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="28V-dT-p8x"/>
                             <constraint firstAttribute="width" constant="20" id="M5x-k3-Z5D"/>
                         </constraints>
                         <state key="normal" backgroundImage="curtain"/>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v0o-gc-D44">
-                        <rect key="frame" x="289" y="11" width="11" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v0o-gc-D44">
+                        <rect key="frame" x="276" y="11" width="24" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="tNT-YH-Tpj" firstAttribute="leading" secondItem="8pT-n9-oYX" secondAttribute="trailing" constant="30" id="0ra-0z-u3c"/>
-                    <constraint firstItem="dFO-Zi-fiB" firstAttribute="leading" secondItem="tNT-YH-Tpj" secondAttribute="trailing" constant="30" id="9Cd-S3-XK3"/>
+                    <constraint firstItem="tNT-YH-Tpj" firstAttribute="leading" secondItem="8pT-n9-oYX" secondAttribute="trailing" constant="20" id="0ra-0z-u3c"/>
+                    <constraint firstItem="dFO-Zi-fiB" firstAttribute="leading" secondItem="tNT-YH-Tpj" secondAttribute="trailing" constant="20" id="9Cd-S3-XK3"/>
                     <constraint firstItem="dFO-Zi-fiB" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="9gG-D4-wlZ"/>
                     <constraint firstAttribute="bottom" secondItem="wSV-oJ-oCF" secondAttribute="bottom" constant="3" id="BpN-A0-N95"/>
                     <constraint firstItem="wSV-oJ-oCF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="KNJ-rf-wPX"/>
@@ -80,6 +80,7 @@
                 <outlet property="label" destination="wSV-oJ-oCF" id="bUa-kH-Jsg"/>
                 <outlet property="open" destination="dFO-Zi-fiB" id="rHa-eJ-nDS"/>
                 <outlet property="slider" destination="tNT-YH-Tpj" id="efJ-Ru-ZA9"/>
+                <outlet property="sliderWidthConstraint" destination="Ikh-7O-auW" id="ph7-fm-4VF"/>
                 <outlet property="valueLabel" destination="v0o-gc-D44" id="3nQ-hN-evr"/>
             </connections>
             <point key="canvasLocation" x="682" y="523"/>

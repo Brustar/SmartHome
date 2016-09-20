@@ -26,7 +26,7 @@
     if(!_projectIds)
     {
         _projectIds = [NSMutableArray array];
-        if(self.sceneid > 0 )
+        if(self.sceneid > 0 && self.isAddDevice)
         {
             NSArray *projects = [DeviceManager getDeviceIDsBySeneId:[self.sceneid intValue]];
             for(int i = 0; i < projects.count; i++)
