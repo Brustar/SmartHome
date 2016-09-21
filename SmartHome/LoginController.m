@@ -437,7 +437,7 @@
     DeviceInfo *info=[DeviceInfo defaultManager];
     if ([responseObject[@"Result"] intValue]==0)
     {
-        info.db=@"smartDB";
+        info.db=SMART_DB;
     }
     
     if(tag == 1)

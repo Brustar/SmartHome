@@ -242,7 +242,9 @@
             [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
         
             //connect cloud
-            [sock connectTcp];
+            if ([info.db isEqualToString:SMART_DB]) {
+                [sock connectTcp];
+            }
         }
     }
     else if(status == ReachableViaWiFi)
@@ -258,7 +260,7 @@
         if (info.connectState==offLine) {
             NSLog(@"离线模式");
             [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
-            
+            if ([info.db isEqualToString:SMART_DB]) {
             int sed = (arc4random() % 3) + 1;
             if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad && sed == 1) {
                 //connect master
@@ -267,7 +269,7 @@
                 //connect cloud
                 [sock connectTcp];
             }
-            
+            }
         }
     }else{
         NSLog(@"离线模式");

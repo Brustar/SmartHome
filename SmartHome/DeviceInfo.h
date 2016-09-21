@@ -48,6 +48,8 @@ enum{
     iPadPro
 };
 
+#define SMART_DB @"smartDB"
+
 @interface DeviceInfo : NSObject
 
 @property (nonatomic, strong) NSArray *beacons;
