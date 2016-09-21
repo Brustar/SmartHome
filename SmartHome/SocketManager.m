@@ -123,8 +123,6 @@
         NSData *ip=[data subdataWithRange:NSMakeRange(4, 4)];
         NSData *port=[data subdataWithRange:NSMakeRange(8, 2)];
         
-        [IOManager writeUserdefault:[PackManager NSDataToIP:ip] forKey:@"subIP"];
-        [IOManager writeUserdefault:[NSNumber numberWithLong:[PackManager dataToUInt16:port]] forKey:@"subPort"];
         [self initTcp:[PackManager NSDataToIP:ip] port:(int)[PackManager dataToUInt16:port] delegate:nil];
         DeviceInfo *device=[DeviceInfo defaultManager];
         device.masterPort=(int)[PackManager dataToUInt16:port];

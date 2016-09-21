@@ -71,7 +71,6 @@
 		0FAF74C61CEEA17C00432713 /* UIImage+CoreGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF74BE1CEEA17C00432713 /* UIImage+CoreGraphics.m */; };
 		0FAF74C91CEEB37200432713 /* HRSampleColorPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF74C81CEEB37200432713 /* HRSampleColorPickerViewController.m */; };
 		0FAF8FEF1CE18C41000557BD /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF8FEE1CE18C41000557BD /* DeviceInfo.m */; };
-		0FAF8FF21CE18CE2000557BD /* IBeaconController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF8FF11CE18CE2000557BD /* IBeaconController.m */; };
 		0FAF8FF51CE1B514000557BD /* VolumeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF8FF41CE1B514000557BD /* VolumeManager.m */; };
 		0FAF8FFB1CE1D9BC000557BD /* UploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF8FFA1CE1D9BC000557BD /* UploadManager.m */; };
 		0FAF98A31CE40F3C009BDBB5 /* QRCameraSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF98991CE40F3C009BDBB5 /* QRCameraSwitchButton.m */; };
@@ -417,8 +416,6 @@
 		0FAF74C81CEEB37200432713 /* HRSampleColorPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRSampleColorPickerViewController.m; sourceTree = "<group>"; };
 		0FAF8FED1CE18C41000557BD /* DeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceInfo.h; sourceTree = "<group>"; };
 		0FAF8FEE1CE18C41000557BD /* DeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInfo.m; sourceTree = "<group>"; };
-		0FAF8FF01CE18CE2000557BD /* IBeaconController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBeaconController.h; sourceTree = "<group>"; };
-		0FAF8FF11CE18CE2000557BD /* IBeaconController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBeaconController.m; sourceTree = "<group>"; };
 		0FAF8FF31CE1B514000557BD /* VolumeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeManager.h; sourceTree = "<group>"; };
 		0FAF8FF41CE1B514000557BD /* VolumeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VolumeManager.m; sourceTree = "<group>"; };
 		0FAF8FF91CE1D9BC000557BD /* UploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadManager.h; sourceTree = "<group>"; };
@@ -786,8 +783,6 @@
 				0F032D4B1CC9B12700D1920D /* AppDelegate.m */,
 				0F43B1011CF4055300F3D9F0 /* IATConfig.h */,
 				0F43B1021CF4055300F3D9F0 /* IATConfig.m */,
-				0FAF8FF01CE18CE2000557BD /* IBeaconController.h */,
-				0FAF8FF11CE18CE2000557BD /* IBeaconController.m */,
 				0F25FE5C1CEB0C0A0063E834 /* SceneList.h */,
 				0F25FE5D1CEB0C0A0063E834 /* SceneList.m */,
 				0F9D23881CEDBC500049A58C /* AddScene.h */,
@@ -1726,7 +1721,6 @@
 				0F96A1641D17F37C00E1594F /* RulerItem.m in Sources */,
 				0FAF8FFB1CE1D9BC000557BD /* UploadManager.m in Sources */,
 				F6359B001CFFC4DC0035EB31 /* ColourTableViewCell.m in Sources */,
-				0FAF8FF21CE18CE2000557BD /* IBeaconController.m in Sources */,
 				0FA1E09E1D533BFA001CA819 /* PluginCell.m in Sources */,
 				0FAF74C61CEEA17C00432713 /* UIImage+CoreGraphics.m in Sources */,
 				F66596E61D3F5DBC0082716A /* AddNewScenseController.m in Sources */,

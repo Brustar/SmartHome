@@ -242,8 +242,7 @@
             [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
         
             //connect cloud
-            NSUserDefaults *userdefault=[NSUserDefaults standardUserDefaults];
-            [sock initTcp:[userdefault objectForKey:@"subIP"] port:[[userdefault objectForKey:@"subPort"] intValue] delegate:self];
+            [sock connectTcp];
         }
     }
     else if(status == ReachableViaWiFi)
