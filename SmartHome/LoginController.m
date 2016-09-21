@@ -157,7 +157,7 @@
     
     int vTVChannel = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vTVChannel"] intValue];
     int vFMChannel = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vFMChannel"] intValue];
-    int vClient = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vClient"] intValue];
+    //int vClient = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vClient"] intValue];
     
     
     switch (tag) {
@@ -662,6 +662,7 @@
 {
     return self.hostIDS.count;
 }
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if(!cell)
@@ -671,11 +672,13 @@
     cell.textLabel.text = self.hostIDS[indexPath.row];
     return cell;
 }
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     int row =(int)indexPath.row;
     [self sendRequestToHostWithTag:3 andRow:row];
 }
+
 - (void)readerDidCancel:(QRCodeReaderViewController *)reader
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
