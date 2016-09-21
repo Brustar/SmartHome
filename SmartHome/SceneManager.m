@@ -600,6 +600,7 @@
             
         }
     }
+    [db closeOpenResultSets];
     [db close];
     return [sceneModles copy];
 }
@@ -633,8 +634,8 @@
            Scene *scene = [SceneManager parseScene:resultSet];
             [sceneModles addObject:scene];
         }
-        
     }
+    [db closeOpenResultSets];
     [db close];
     return [sceneModles copy];
 }
@@ -673,6 +674,8 @@
         }
      
     }
+    [db closeOpenResultSets];
+    [db close];
     return scene;
 }
 
@@ -684,6 +687,7 @@
     {
         isSuccess = [db executeUpdateWithFormat:@"delete from Scenes where ID = %d",sceneId];
     }
+    [db closeOpenResultSets];
     [db close];
     return isSuccess;
 
@@ -705,6 +709,7 @@
             [scens addObject:scene];
         }
     }
+    [db closeOpenResultSets];
     [db close];
     return [scens copy];
 }
@@ -722,6 +727,7 @@
             [sceneIds addObject: [NSNumber numberWithInt:scendID]];
         }
     }
+    [db closeOpenResultSets];
     [db close];
     return [sceneIds copy];
 }
@@ -742,7 +748,7 @@
             [scens addObject:scene];
         }
     }
-    
+    [db closeOpenResultSets];
     [db close];
     return [scens copy];
 }

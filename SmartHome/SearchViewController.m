@@ -26,6 +26,7 @@
 #import "MBProgressHUD+NJ.h"
 #import "ScreenCurtainController.h"
 #import "ProjectController.h"
+
 @interface SearchViewController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
 
 //搜索到的设备类别
@@ -70,6 +71,7 @@
         }
         self.searchResult = [result copy];
     }
+    [db closeOpenResultSets];
     [db close];
     [self.tableView reloadData];
 }

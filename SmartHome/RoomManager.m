@@ -40,8 +40,8 @@
                 [roomList addObject:room];
         }
     }
+    [db closeOpenResultSets];
     [db close];
-    
     return [roomList copy];
 }
 
@@ -59,6 +59,7 @@
             rID = [resultSet intForColumn:@"ID"];
         }
     }
+    [db closeOpenResultSets];
     [db close];
     return rID;
 }

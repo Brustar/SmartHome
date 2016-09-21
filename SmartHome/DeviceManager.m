@@ -29,14 +29,10 @@
         FMResultSet *resultSet = [db executeQuery:@"select * from Devices"];
         
         while ([resultSet next]){
-            
-            
             [deviceModels addObject:[self deviceMdoelByFMResultSet:resultSet]];
-            
         }
-        
-        
     }
+    [db closeOpenResultSets];
     [db close];
     return [deviceModels copy];
 }
@@ -54,6 +50,7 @@
             eName = [resultSet stringForColumn:@"NAME"];
         }
     }
+    [db closeOpenResultSets];
     [db close];
     return eName;
 }
@@ -71,6 +68,7 @@
             url = [resultSet stringForColumn:@"url"];
         }
     }
+    [db closeOpenResultSets];
     [db close];
     return url;
 
@@ -89,6 +87,7 @@
             eId = [resultSet intForColumn:@"ID"];
         }
     }
+    [db closeOpenResultSets];
     [db close];
     return eId;
 
@@ -110,10 +109,9 @@
             }else if ([typeName isEqualToString:@"开合帘"] || [typeName isEqualToString:@"卷帘"]) {
                 typeName = @"窗帘";
             }
-
-            
         }
     }
+    [db closeOpenResultSets];
     [db close];
     return typeName;
 }
@@ -132,6 +130,7 @@
                         
         }
     }
+    [db closeOpenResultSets];
     [db close];
     return typeName;
 }
@@ -149,6 +148,7 @@
             typeName = [resultSet stringForColumn:@"NAME"];
         }
     }
+    [db closeOpenResultSets];
     [db close];
     return typeName;
 }
@@ -227,6 +227,7 @@
             }
         }
     }
+    [db closeOpenResultSets];
     [db close];
     return [subTypes copy];
 }
@@ -245,6 +246,7 @@
 
         }
     }
+    [db closeOpenResultSets];
     [db close];
     return [subTypes copy];
 
@@ -267,6 +269,7 @@
             
         }
     }
+    [db closeOpenResultSets];
     [db close];
     return [deviceDIs copy];
 
@@ -292,6 +295,7 @@
     if (lightNames.count < 1) {
         return nil;
     }
+    [db closeOpenResultSets];
     [db close];
     return [lightNames copy];
 }
@@ -315,6 +319,7 @@
     if (lights.count < 1) {
         return nil;
     }
+    [db closeOpenResultSets];
     [db close];
     return [lights copy];
 }
@@ -340,6 +345,7 @@
     if (curtainNames.count < 1) {
         return nil;
     }
+    [db closeOpenResultSets];
     [db close];
     return [curtainNames copy];
 }
@@ -363,6 +369,7 @@
     if (curtains.count < 1) {
         return nil;
     }
+    [db closeOpenResultSets];
     [db close];
     return [curtains copy];
 }
@@ -382,6 +389,7 @@
             deviceID = [NSString stringWithFormat:@"%d", tvID];
         }
     }
+    [db closeOpenResultSets];
     [db close];
     return deviceID;
 }
@@ -400,9 +408,8 @@
             int eId = [resultSet intForColumn:@"ID"];
             [array addObject:[NSNumber numberWithInt:eId]];
         }
-        
-        
     }
+    [db closeOpenResultSets];
     [db close];
     return [array copy];
 }
@@ -420,6 +427,7 @@
             htypeID = [resultSet stringForColumn:@"htypeID"];
         }
     }
+    [db closeOpenResultSets];
     [db close];
     return htypeID;
 }
@@ -437,6 +445,7 @@
             enumber = [resultSet stringForColumn:@"enumber"];
         }
     }
+    [db closeOpenResultSets];
     [db close];
     return enumber;
 }
@@ -454,6 +463,7 @@
             deviceID = [resultSet stringForColumn:@"ID"];
         }
     }
+    [db closeOpenResultSets];
     [db close];
     return deviceID;
 }
@@ -472,6 +482,7 @@
             sceneid = [resultSet intForColumn:@"id"];
         }
     }
+    [db closeOpenResultSets];
     [db close];
     return sceneid;
 }
@@ -491,6 +502,7 @@
             readonly = [resultSet boolForColumn:@"stype"];
         }
     }
+    [db closeOpenResultSets];
     [db close];
     return readonly;
 }
@@ -510,6 +522,7 @@
             snumber = [resultSet stringForColumn:@"snumber"];
         }
     }
+    [db closeOpenResultSets];
     [db close];
     return snumber;
 }
@@ -529,6 +542,7 @@
             roomId = [resultSet intForColumn:@"rId"];
         }
     }
+    [db closeOpenResultSets];
     [db close];
     return roomId;
 
@@ -548,6 +562,7 @@
             sceneName = [resultSet stringForColumn:@"NAME"];
         }
     }
+    [db closeOpenResultSets];
     [db close];
     return sceneName;
 
@@ -619,7 +634,8 @@
             [deviceIDArr addObject:[NSNumber numberWithInt:deviceID]];
         }
     }
-    
+    [db closeOpenResultSets];
+    [db close];
     if (deviceIDArr.count < 1) {
         return nil;
     }
@@ -646,7 +662,7 @@
     {
         return  nil;
     }
-    [db close];
+    
     return subTypeNames;
 }
 
@@ -668,11 +684,12 @@
             [deviceIDs addObject:deviceID];
         }
     }
-    
+    [db closeOpenResultSets];
+    [db close];
     if (deviceIDs.count < 1) {
         return nil;
     }
-    [db close];
+    
     return [deviceIDs copy];
 
 }
@@ -692,6 +709,7 @@
             subTypeName = [resultSet stringForColumn:@"subTypeName"];
         }
     }
+    [db closeOpenResultSets];
     [db close];
     return subTypeName;
 }
@@ -718,11 +736,12 @@
        deviceIDs = [deviceIDStr componentsSeparatedByString:@","];
     
     }
-    
+    [db closeOpenResultSets];
+    [db close];
     if (deviceIDs.count < 1) {
         return nil;
     }
-    [db close];
+    
     return [deviceIDs copy];
 }
 
@@ -740,6 +759,7 @@
             device = [self deviceMdoelByFMResultSet:resultSet];
         }
     }
+    [db closeOpenResultSets];
     [db close];
     return device;
 }
@@ -894,6 +914,7 @@
             typeName = [resultSet stringForColumn:@"typeName"];
         }
     }
+    [db closeOpenResultSets];
     [db close];
     return typeName;
 }
@@ -915,11 +936,12 @@
             [subNames addObject:ID];
         }
     }
-    
+    [db closeOpenResultSets];
+    [db close];
     if (subNames.count < 1) {
         return nil;
     }
-    [db close];
+    
     return [subNames copy];
 }
 
@@ -1062,6 +1084,29 @@
     [self initSQlite];
     FMDatabase *db = [self connetdb];
     if ([db open]) {
+        int count=0;
+        NSString *sql = @"SELECT count(*) as count FROM Rooms";
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            count += [resultSet intForColumn:@"count"];
+        }
+        sql = @"SELECT count(*) as count FROM devices";
+        resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            count += [resultSet intForColumn:@"count"];
+        }
+
+        sql = @"SELECT count(*) as count FROM scenes";
+        resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            count += [resultSet intForColumn:@"count"];
+        }
+        [db closeOpenResultSets];
+        if (count == 0) {
+            
         //insert rooms
         NSArray *sqls=@[@"INSERT INTO \"Rooms\" VALUES(1,'主卧',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0);",
         @"INSERT INTO \"Rooms\" VALUES(2,'影音室',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0);",
@@ -1077,6 +1122,8 @@
                 NSLog(@"写入表ROOMS失败");
             }
         }
+            
+        
         //insert devices
         sqls=@[@"INSERT INTO \"Devices\" VALUES(51,'卧室开关灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0036','01',1,'开关灯','照明','00ff','');",
         @"INSERT INTO \"Devices\" VALUES(52,'卧室调光灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0015','02',1,'调光灯','照明','00ff','');",
@@ -1140,6 +1187,8 @@
             }else{
                 NSLog(@"写入表scenes失败");
             }
+        }
+            
         }
     }else{
         NSLog(@"Could not open db.");
