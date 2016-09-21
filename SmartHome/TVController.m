@@ -554,8 +554,7 @@
 
 -(void)writeTVChannelsConfigDataToSQL:(NSDictionary *)responseObject withParent:(NSString *)parent
 {
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [DeviceManager connetdb];
     int cNumber = [self.channeNumber.text intValue];
     if([db open])
     {
@@ -568,10 +567,6 @@
                 }else{
                     NSLog(@"insert 失败");
                 }
-                
-        
-             
-        
     }
     [db close];
 }

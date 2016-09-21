@@ -238,8 +238,7 @@
 -(void)writDevicesConfigDatesToSQL:(NSDictionary *)responseObject
 {
     
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [DeviceManager connetdb];
     if([db open])
     {
         
@@ -274,13 +273,12 @@
         
     }
     [db close];
-    
 }
+
 //写房间配置信息到SQL
 -(void)writeRoomsConfigDataToSQL:(NSDictionary *)responseObject
 {
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [DeviceManager connetdb];
     if([db open])
     {
         NSDictionary *messageInfo = responseObject[@"messageInfo"];
@@ -317,14 +315,12 @@
         }
     }
     [db close];
-    
 }
 
 //写场景配置信息到SQL
 -(void)writeScensConfigDataToSQL:(NSDictionary *)responseObject
 {
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [DeviceManager connetdb];
     if([db open])
     {
         NSArray *messageInfo = responseObject[@"messageInfo"];
@@ -361,13 +357,11 @@
 
             }
         }
-    
-      
     }
     
     [db close];
-    
 }
+
 //下载场景plist文件到本地
 -(void)downloadPlsit:(NSString *)urlPlist
 
@@ -403,8 +397,7 @@
 //写电视频道配置信息到SQL
 -(void)writeTVChannelsConfigDataToSQL:(NSDictionary *)responseObject withParent:(NSString *)parent
 {
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [DeviceManager connetdb];
     if([db open])
     {
         NSArray *messageInfo = responseObject[@"messageInfo"];
@@ -438,7 +431,6 @@
     }
     [db close];
 }
-
 
 -(void) httpHandler:(id) responseObject tag:(int)tag
 {

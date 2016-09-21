@@ -73,10 +73,7 @@
         [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName imgData:imgData imgFileName:imgFileName completion:^(id responseObject) {
             
             //插入数据库
-        
-            
-            NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-            FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+            FMDatabase *db = [DeviceManager connetdb];
             if([db open])
             {
                
@@ -89,11 +86,7 @@
                 
             }
             [db close];
-
         }];
-        
-        
-        
     }
     [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, scene.sceneID] scene:scene];
     
@@ -128,17 +121,10 @@
             
             parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":imgFileName,@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:2],@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
         }
-        
-        
-        
-        
-        
+
         NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
         [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName imgData:imgData imgFileName:imgFileName completion:^(id responseObject) {
-            
-            
-            NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-            FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+            FMDatabase *db = [DeviceManager connetdb];
             if([db open])
             {
                 
@@ -153,9 +139,7 @@
             [db close];
             
         }];
-        
-        
-        
+
     }
     [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, scene.sceneID] scene:scene];
 
@@ -213,8 +197,7 @@
     if(ret)
     {
         //写sqlite更新场景文件名
-        NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-        FMDatabase *db = [FMDatabase databaseWithPath:dbPath] ;
+        FMDatabase *db = [DeviceManager connetdb];
         if (![db open]) {
             NSLog(@"Could not open db.");
             return ;
@@ -591,9 +574,7 @@
 
 +(NSArray *)allSceneModels
 {
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [DeviceManager connetdb];
     NSMutableArray *sceneModles = [NSMutableArray array];
     if([db open])
     {
@@ -639,9 +620,7 @@
 
 + (NSArray *)getAllSceneWithRoomID:(int)roomID
 {
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [DeviceManager connetdb];
     NSMutableArray *sceneModles = [NSMutableArray array];
    
     if([db open])
@@ -681,9 +660,7 @@
 }
 +(Scene *)sceneBySceneID:(int)sId
 {
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [DeviceManager connetdb];
     Scene *scene = [Scene new];
     if([db open])
     {
@@ -701,14 +678,13 @@
 
 +(BOOL)deleteScene:(int)sceneId
 {
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath] ;
+    FMDatabase *db = [DeviceManager connetdb];
     BOOL isSuccess = false;
     if([db open])
     {
         isSuccess = [db executeUpdateWithFormat:@"delete from Scenes where ID = %d",sceneId];
-        [db close];
     }
+    [db close];
     return isSuccess;
 
 }
@@ -716,11 +692,7 @@
 +(NSArray *)getScensByRoomId:(int)roomId
 {
     NSMutableArray *scens = [NSMutableArray array];
-    
-      
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-        
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [DeviceManager connetdb];
     if([db open])
     {
         FMResultSet *resultSet = [db executeQueryWithFormat:@"select * from Scenes where rId = %d",roomId];
@@ -733,20 +705,14 @@
             [scens addObject:scene];
         }
     }
-    
-    
+    [db close];
     return [scens copy];
-    
-    
-    
 }
 //得到数据库中所有的场景ID
 +(NSArray *)getAllSceneIdsFromSql
 {
     NSMutableArray *sceneIds = [NSMutableArray array];
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [DeviceManager connetdb];
     if([db open])
     {
         NSString *sql = @"select ID from Scenes";
@@ -755,19 +721,15 @@
             int scendID = [resultSet intForColumn:@"ID"];
             [sceneIds addObject: [NSNumber numberWithInt:scendID]];
         }
-        [db close];
     }
+    [db close];
     return [sceneIds copy];
 }
 
 +(NSArray *)getFavorScene
 {
     NSMutableArray *scens = [NSMutableArray array];
-    
-    
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [DeviceManager connetdb];
     if([db open])
     {
         FMResultSet *resultSet = [db executeQuery:@"select * from Scenes where isFavorite = 1"];
@@ -781,9 +743,7 @@
         }
     }
     
-    
+    [db close];
     return [scens copy];
-    
-
 }
 @end

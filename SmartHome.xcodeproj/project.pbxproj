@@ -117,6 +117,7 @@
 		0FF410DA1CDAE67100C7F4A1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410D91CDAE67100C7F4A1 /* CoreLocation.framework */; };
 		0FF410DC1CDAF76300C7F4A1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410DB1CDAF76300C7F4A1 /* CoreBluetooth.framework */; };
 		0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7B0B51D1380BF003C2D52 /* AirController.m */; };
+		0FF92B661D9224640098DD54 /* TVChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF92B651D9224640098DD54 /* TVChannel.m */; };
 		F361579D9B9637C261531C8C /* libPods-SmartHome.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B2DBF5C92F57E3B7AD6AA3 /* libPods-SmartHome.a */; };
 		F60E71CA1D796BE6008863DB /* AmplifierController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60E71C91D796BE6008863DB /* AmplifierController.m */; };
 		F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB411D00029900AB04BE /* DetailViewController.m */; };
@@ -170,7 +171,6 @@
 		F66CADE51D5D8654001E66EC /* DeviceType.m in Sources */ = {isa = PBXBuildFile; fileRef = F66CADE41D5D8654001E66EC /* DeviceType.m */; };
 		F66DFF281D5184730005E882 /* EditSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = F66DFF271D5184730005E882 /* EditSceneController.m */; };
 		F66DFF2B1D5188BF0005E882 /* EditSceneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F66DFF2A1D5188BF0005E882 /* EditSceneCell.m */; };
-		F66EB2D21CFEB9E300AC53CE /* Detail.m in Sources */ = {isa = PBXBuildFile; fileRef = F66EB2D11CFEB9E300AC53CE /* Detail.m */; };
 		F66EB2D51CFED0A900AC53CE /* DetailList.m in Sources */ = {isa = PBXBuildFile; fileRef = F66EB2D41CFED0A900AC53CE /* DetailList.m */; };
 		F673EBD21D45E976001270FB /* VerifyCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F673EBD11D45E976001270FB /* VerifyCodeView.m */; };
 		F6755A4C1D4063FA002394F3 /* ECloudTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F6755A4B1D4063FA002394F3 /* ECloudTabBar.m */; };
@@ -187,7 +187,6 @@
 		F69C82361D363A4D002DE6D7 /* ServiceRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F69C82351D363A4D002DE6D7 /* ServiceRecordCell.m */; };
 		F6A1C02E1D586D7500856E00 /* Room.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A1C02D1D586D7500856E00 /* Room.m */; };
 		F6B91F6F1D100EF700592FB0 /* DVCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B91F6E1D100EF700592FB0 /* DVCollectionViewCell.m */; };
-		F6B91F721D100F1400592FB0 /* TVChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B91F701D100F1400592FB0 /* TVChannel.m */; };
 		F6BF2AED1D86556500A3C9D5 /* HostIDSController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6BF2AEC1D86556500A3C9D5 /* HostIDSController.m */; };
 		F6BF2AF11D86B17400A3C9D5 /* UIImage+UiimageToString.m in Sources */ = {isa = PBXBuildFile; fileRef = F6BF2AF01D86B17400A3C9D5 /* UIImage+UiimageToString.m */; };
 /* End PBXBuildFile section */
@@ -508,6 +507,9 @@
 		0FF410DB1CDAF76300C7F4A1 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		0FF7B0B41D1380BF003C2D52 /* AirController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirController.h; sourceTree = "<group>"; };
 		0FF7B0B51D1380BF003C2D52 /* AirController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirController.m; sourceTree = "<group>"; };
+		0FF92B631D9222220098DD54 /* DeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceManager.h; sourceTree = "<group>"; };
+		0FF92B641D9224640098DD54 /* TVChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVChannel.h; sourceTree = "<group>"; };
+		0FF92B651D9224640098DD54 /* TVChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVChannel.m; sourceTree = "<group>"; };
 		9B45FF693457BA21BA43CE05 /* Pods-SmartHome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.debug.xcconfig"; sourceTree = "<group>"; };
 		A4B2DBF5C92F57E3B7AD6AA3 /* libPods-SmartHome.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SmartHome.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE54136C9EEF8F51E8FBEEDE /* Pods-SmartHome.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.release.xcconfig"; sourceTree = "<group>"; };
@@ -530,7 +532,6 @@
 		F6251F701D541885000A5A47 /* PluginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginViewController.m; sourceTree = "<group>"; };
 		F6251F721D541D8A000A5A47 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
 		F6251F731D541D8A000A5A47 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
-		F6251F751D542508000A5A47 /* DeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceManager.h; sourceTree = "<group>"; };
 		F6251F761D542508000A5A47 /* DeviceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceManager.m; sourceTree = "<group>"; };
 		F625A6161D4C8EF700B696E5 /* ProfireListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfireListController.h; sourceTree = "<group>"; };
 		F625A6171D4C8EF700B696E5 /* ProfireListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfireListController.m; sourceTree = "<group>"; };
@@ -611,8 +612,6 @@
 		F66DFF271D5184730005E882 /* EditSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditSceneController.m; sourceTree = "<group>"; };
 		F66DFF291D5188BF0005E882 /* EditSceneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditSceneCell.h; sourceTree = "<group>"; };
 		F66DFF2A1D5188BF0005E882 /* EditSceneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditSceneCell.m; sourceTree = "<group>"; };
-		F66EB2D01CFEB9E300AC53CE /* Detail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Detail.h; sourceTree = "<group>"; };
-		F66EB2D11CFEB9E300AC53CE /* Detail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Detail.m; sourceTree = "<group>"; };
 		F66EB2D31CFED0A900AC53CE /* DetailList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailList.h; sourceTree = "<group>"; };
 		F66EB2D41CFED0A900AC53CE /* DetailList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailList.m; sourceTree = "<group>"; };
 		F673EBD01D45E976001270FB /* VerifyCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifyCodeView.h; sourceTree = "<group>"; };
@@ -645,8 +644,6 @@
 		F6A1C02D1D586D7500856E00 /* Room.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Room.m; sourceTree = "<group>"; };
 		F6B91F6D1D100EF700592FB0 /* DVCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVCollectionViewCell.h; sourceTree = "<group>"; };
 		F6B91F6E1D100EF700592FB0 /* DVCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVCollectionViewCell.m; sourceTree = "<group>"; };
-		F6B91F701D100F1400592FB0 /* TVChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVChannel.m; sourceTree = "<group>"; };
-		F6B91F711D100F1400592FB0 /* TVChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVChannel.h; sourceTree = "<group>"; };
 		F6BF2AEB1D86556500A3C9D5 /* HostIDSController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostIDSController.h; sourceTree = "<group>"; };
 		F6BF2AEC1D86556500A3C9D5 /* HostIDSController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostIDSController.m; sourceTree = "<group>"; };
 		F6BF2AEF1D86B17400A3C9D5 /* UIImage+UiimageToString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UiimageToString.h"; sourceTree = "<group>"; };
@@ -705,6 +702,8 @@
 		0F01D53E1CDC6C4B00DAC267 /* entity */ = {
 			isa = PBXGroup;
 			children = (
+				0FF92B641D9224640098DD54 /* TVChannel.h */,
+				0FF92B651D9224640098DD54 /* TVChannel.m */,
 				0F01D5421CDC6CA600DAC267 /* Scene.h */,
 				0F01D5431CDC6CA600DAC267 /* Scene.m */,
 				0FCFB37E1CF28F6F00B37DD3 /* Light.h */,
@@ -727,12 +726,8 @@
 				0FCFB3971CF2947500B37DD3 /* EntranceGuard.m */,
 				0FCFB3991CF2950D00B37DD3 /* BgMusic.h */,
 				0FCFB39A1CF2950D00B37DD3 /* BgMusic.m */,
-				F66EB2D01CFEB9E300AC53CE /* Detail.h */,
-				F66EB2D11CFEB9E300AC53CE /* Detail.m */,
 				F66EB2D31CFED0A900AC53CE /* DetailList.h */,
 				F66EB2D41CFED0A900AC53CE /* DetailList.m */,
-				F6B91F711D100F1400592FB0 /* TVChannel.h */,
-				F6B91F701D100F1400592FB0 /* TVChannel.m */,
 				F6251F721D541D8A000A5A47 /* Device.h */,
 				F6251F731D541D8A000A5A47 /* Device.m */,
 				F6A1C02C1D586D7500856E00 /* Room.h */,
@@ -1262,7 +1257,7 @@
 				0F295A5F1D2E092900F23F21 /* HttpManager.m */,
 				0F477FC41D2F94B3004FA361 /* NetStatusManager.h */,
 				0F477FC51D2F94B3004FA361 /* NetStatusManager.m */,
-				F6251F751D542508000A5A47 /* DeviceManager.h */,
+				0FF92B631D9222220098DD54 /* DeviceManager.h */,
 				F6251F761D542508000A5A47 /* DeviceManager.m */,
 				F64487DB1D55BA3C00EF2CFC /* RoomManager.h */,
 				F64487DC1D55BA3C00EF2CFC /* RoomManager.m */,
@@ -1708,7 +1703,6 @@
 				F66CADE51D5D8654001E66EC /* DeviceType.m in Sources */,
 				0F25178A1CFD8C6500491A6C /* PackManager.m in Sources */,
 				F67F1F811D3CC46C00F2B7E5 /* AboutUsController.m in Sources */,
-				F6B91F721D100F1400592FB0 /* TVChannel.m in Sources */,
 				0F295A601D2E092900F23F21 /* HttpManager.m in Sources */,
 				0F180FC31D0E4C7400392F4C /* NetvController.m in Sources */,
 				F623378D1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.m in Sources */,
@@ -1719,6 +1713,7 @@
 				0FC0FFDA1CF577C0000F71D5 /* RealScene.m in Sources */,
 				F6755A4F1D406552002394F3 /* ECloudTabBarController.m in Sources */,
 				0FAF74C41CEEA17C00432713 /* HRColorPickerView.m in Sources */,
+				0FF92B661D9224640098DD54 /* TVChannel.m in Sources */,
 				0F11654F1D7418EE00A01B8F /* Amplifier.m in Sources */,
 				F630C3621D38C3E5008880BB /* areaSettingCell.m in Sources */,
 				0FCFB3981CF2947500B37DD3 /* EntranceGuard.m in Sources */,
@@ -1769,7 +1764,6 @@
 				F6755A4C1D4063FA002394F3 /* ECloudTabBar.m in Sources */,
 				0FAF8FEF1CE18C41000557BD /* DeviceInfo.m in Sources */,
 				0F4B3C001D2A13870002E75E /* MSGController.m in Sources */,
-				F66EB2D21CFEB9E300AC53CE /* Detail.m in Sources */,
 				F65AF6D41D3370770048A4E5 /* ProfieFaultsViewController.m in Sources */,
 				0F96A1671D17F37C00E1594F /* RulerView.m in Sources */,
 				0FB205E91CDC312A00B5E87E /* IOManager.m in Sources */,
@@ -1984,7 +1978,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FFmpeg-iOS/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -2022,7 +2016,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FFmpeg-iOS/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

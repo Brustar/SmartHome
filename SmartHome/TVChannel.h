@@ -20,10 +20,4 @@
 @property (nonatomic,assign) int channelValue;
 @property (nonatomic,assign) BOOL isFavorite;
 
-
-+(instancetype)getChannelFromChannelID:(NSInteger)channel_id;
-+(NSMutableArray *)getAllChannelForFavoritedForType:(NSString *)type;
-+(BOOL)deleteChannelForChannelID:(NSInteger)channel_id;
-+(BOOL)upDateChannelForChannelID:(NSInteger)channel_id andNewChannel_Name:(NSString *)newName;
-
 @end

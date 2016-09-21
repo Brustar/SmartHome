@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FMDatabase.h"
 
 @interface DeviceManager : NSObject
 
-
++(FMDatabase *) connetdb;
 //从数据中获取所有设备信息
 +(NSArray *)getAllDevicesInfo;
 
@@ -78,4 +79,7 @@
 +(NSArray *)getDeviceIDsBySeneId:(int)SceneId;
 +(NSArray *)getSubTydpeBySceneID:(int)sceneId;
 +(NSArray *)getDeviceTypeNameWithScenID:(int)sceneId subTypeName:(NSString *)subTypeName;
+
++(void)initSQlite;
++(void)initDemoSQlite;
 @end

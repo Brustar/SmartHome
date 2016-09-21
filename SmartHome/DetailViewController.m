@@ -7,10 +7,9 @@
 //
 
 #import "DetailViewController.h"
-#import "Detail.h"
 #import "DetailList.h"
-@interface DetailViewController ()
 
+@interface DetailViewController ()
 
 @property (nonatomic,strong) NSArray *detailArray;
 @property (nonatomic,strong) NSArray *titleArr;

@@ -9,14 +9,16 @@
 #import "ChannelManager.h"
 #import "FMDatabase.h"
 #import "FMResultSet.h"
+#import "DeviceManager.h"
+#import "TVChannel.h"
+
 @implementation ChannelManager
 +(NSMutableArray *)getAllChannelForFavoritedForType:(NSString *)type deviceID:(int)deviceID
 {
-        NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-        FMDatabase *db = [FMDatabase databaseWithPath:dbPath] ;
+        FMDatabase *db = [DeviceManager connetdb];
         if (![db open]) {
-           NSLog(@"Could not open db");
-   
+            NSLog(@"Could not open db");
+            return nil;
         }
     
         FMResultSet *resultSet = [db executeQueryWithFormat:@"select * from Channels where isFavorite = 1 and eqId = %d and parent = %@",deviceID,type];
@@ -43,22 +45,19 @@
 
 +(BOOL)deleteChannelForChannelID:(NSInteger)channel_id
 {
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath] ;
+    FMDatabase *db = [DeviceManager connetdb];
     BOOL isSuccess = false;
     if([db open])
     {
         isSuccess = [db executeUpdateWithFormat:@"delete from Channels where id = %ld",channel_id];
-        [db close];
     }
+    [db close];
     return isSuccess;
 }
 
 +(BOOL)upDateChannelForChannelID:(NSInteger)channel_id andNewChannel_Name:(NSString *)newName
 {
-    
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath] ;
+    FMDatabase *db = [DeviceManager connetdb];
     BOOL isSuccess = false;
     
     if([db open])
@@ -66,23 +65,9 @@
         NSString *execute = [NSString stringWithFormat:@"update Channels set Channel_name = '%@' where Channel_id = %ld",newName,channel_id];
         
         isSuccess = [db executeUpdate:execute];
-        [db close];
     }
-    
+    [db close];
     return isSuccess;
 }
-
-
-//+(TVChannel *)TVChannelByChannelID:(int)channelID andParent:(NSString *)parent
-//{
-//    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-//    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
-//    if([db open])
-//    {
-//        NSString *sql = [NSString stringWithFormat:@"select from Channels where id = %d and parent = '%@'",channelID,parent];
-//    }
-//    
-//
-//}
 
 @end

@@ -10,14 +10,14 @@
 #import "IOManager.h"
 #import "Room.h"
 #import "FMDatabase.h"
+#import "DeviceManager.h"
+
 @implementation RoomManager
 
 //根据主机ID获取房间配置信息
 +(NSArray *)getAllRoomsInfo
 {
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [DeviceManager connetdb];
     NSMutableArray *roomList = [NSMutableArray array];
     if([db open])
     {
@@ -38,9 +38,6 @@
                 room.ibeacon = [resultSet intForColumn:@"ibeacon"];
                 
                 [roomList addObject:room];
-
-           
-            
         }
     }
     [db close];
@@ -51,8 +48,7 @@
 
 +(int)getRoomIDByRoomName:(NSString *)rName;
 {
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [DeviceManager connetdb];
     int rID ;
     if([db open])
     {
@@ -63,8 +59,8 @@
             rID = [resultSet intForColumn:@"ID"];
         }
     }
+    [db close];
     return rID;
-
 }
 
 @end

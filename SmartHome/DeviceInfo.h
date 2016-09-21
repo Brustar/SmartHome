@@ -59,7 +59,7 @@ enum{
 @property (nonatomic) long masterID;
 @property (nonatomic, strong) NSString *masterIP;
 @property (nonatomic) int masterPort;
-
+@property (nonatomic, strong) NSString *db;
 @property (nonatomic) int connectState;
 
 + (instancetype) defaultManager;

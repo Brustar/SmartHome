@@ -51,8 +51,7 @@
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
     NSArray *tables=@[@"Devices",@"Scenes"];
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [DeviceManager connetdb];
     NSMutableArray *result = [NSMutableArray array];
     if([db open])
     {
@@ -67,16 +66,12 @@
                     NSString *name = [resultSet stringForColumn:@"NAME"];
                     [result addObject:name];
                 }
-
             }
         }
         self.searchResult = [result copy];
-        [db close];
-       
     }
+    [db close];
     [self.tableView reloadData];
-    
-    
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

@@ -7,7 +7,6 @@
 //
 #import "FMController.h"
 #import "FMCollectionViewCell.h"
-#import "TVChannel.h"
 #import "TXHRrettyRuler.h"
 #import "SceneManager.h"
 #import "MBProgressHUD+NJ.h"
@@ -16,9 +15,8 @@
 #import "DeviceManager.h"
 #import "ChannelManager.h"
 #import "HttpManager.h"
-
 #import "PackManager.h"
-
+#import "TVChannel.h"
 
 @interface FMController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate,TXHRrettyRulerDelegate,UIGestureRecognizerDelegate,FMCollectionViewCellDelegate>
 
@@ -324,8 +322,7 @@
 
 -(void)writeFMChannelsConfigDataToSQL:(NSDictionary *)responseObject withParent:(NSString *)parent
 {
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [DeviceManager connetdb];
     if([db open])
     {
         int cNumber = [self.numberOfChannel.text intValue];
@@ -337,13 +334,8 @@
         }else{
             NSLog(@"insert 失败");
         }
-        
-        
-        
-        
     }
     [db close];
-
 }
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag

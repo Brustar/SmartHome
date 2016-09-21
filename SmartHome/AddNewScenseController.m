@@ -8,7 +8,6 @@
 
 
 #import "AddNewScenseController.h"
-#import "Detail.h"
 #import "AddSenseCell.h"
 #import "LightController.h"
 

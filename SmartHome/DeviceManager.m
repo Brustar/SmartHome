@@ -8,17 +8,21 @@
 
 #import "DeviceManager.h"
 #import "Device.h"
-#import "FMDatabase.h"
 #import "DeviceType.h"
+#import "DeviceInfo.h"
+
 @implementation DeviceManager
+
++(FMDatabase *)connetdb
+{
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:[[DeviceInfo defaultManager] db]];
+    
+    return [FMDatabase databaseWithPath:dbPath];
+}
 
 //从数据中获取所有设备信息
 +(NSArray *)getAllDevicesInfo{
-    
-    
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     NSMutableArray *deviceModels = [NSMutableArray array];
     if([db open])
     {
@@ -39,8 +43,7 @@
 
 +(NSString *)deviceNameByDeviceID:(int)eId
 {
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     NSString *eName;
     if([db open])
     {
@@ -51,13 +54,13 @@
             eName = [resultSet stringForColumn:@"NAME"];
         }
     }
+    [db close];
     return eName;
 }
 
 +(NSString *)getUrlByDeviceId:(int)eId
 {
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     NSString *url;
     if([db open])
     {
@@ -68,14 +71,14 @@
             url = [resultSet stringForColumn:@"url"];
         }
     }
+    [db close];
     return url;
 
 }
 
 +(NSInteger)deviceIDByDeviceName:(NSString *)deviceName
 {
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     NSInteger eId;
     if([db open])
     {
@@ -86,14 +89,14 @@
             eId = [resultSet intForColumn:@"ID"];
         }
     }
+    [db close];
     return eId;
 
 }
 
 +(NSString *)deviceTypeNameByDeviceID:(int)eId
 {
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     NSString *typeName;
     if([db open])
     {
@@ -111,13 +114,13 @@
             
         }
     }
+    [db close];
     return typeName;
 }
 
 +(NSString*)lightTypeNameByDeviceID:(int)eId
 {
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     NSString *typeName;
     if([db open])
     {
@@ -129,13 +132,13 @@
                         
         }
     }
+    [db close];
     return typeName;
 }
 
 + (NSString *)getNameWithID:(int)eId
 {
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     NSString *typeName = nil;
     if([db open])
     {
@@ -146,6 +149,7 @@
             typeName = [resultSet stringForColumn:@"NAME"];
         }
     }
+    [db close];
     return typeName;
 }
 
@@ -195,8 +199,7 @@
 +(NSArray *)deviceSubTypeByRoomId:(NSInteger)roomID
 {
     NSMutableArray *subTypes = [NSMutableArray array];
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld",roomID];
@@ -224,14 +227,13 @@
             }
         }
     }
-    
+    [db close];
     return [subTypes copy];
 }
 +(NSArray*)getSubTypeNameByRoomID:(int)rID
 {
     NSMutableArray *subTypes = [NSMutableArray array];
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT distinct subTypeName FROM Devices where rID = %d",rID];
@@ -243,6 +245,7 @@
 
         }
     }
+    [db close];
     return [subTypes copy];
 
 }
@@ -250,11 +253,10 @@
 {
     
     NSMutableArray *deviceDIs = [NSMutableArray array];
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld",roomID];
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %d",roomID];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
@@ -265,7 +267,7 @@
             
         }
     }
-    
+    [db close];
     return [deviceDIs copy];
 
 }
@@ -275,8 +277,7 @@
 {
     NSMutableArray *lightNames = [NSMutableArray array];
     
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld and typeName in (\"开关\",\"调色\",\"调光\")",roomID];
@@ -291,17 +292,15 @@
     if (lightNames.count < 1) {
         return nil;
     }
-    
+    [db close];
     return [lightNames copy];
 }
-
 
 + (NSArray *)getLightWithTypeName:(NSString *)typeName roomID:(NSInteger)roomID
 {
     NSMutableArray *lights = [NSMutableArray array];
     
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and typeName = \"%@\"",roomID, typeName];
@@ -316,7 +315,7 @@
     if (lights.count < 1) {
         return nil;
     }
-    
+    [db close];
     return [lights copy];
 }
 
@@ -326,8 +325,7 @@
 {
     NSMutableArray *curtainNames = [NSMutableArray array];
     
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld and typeName in (\"开合帘\",\"卷帘\")",roomID];
@@ -342,17 +340,15 @@
     if (curtainNames.count < 1) {
         return nil;
     }
-    
+    [db close];
     return [curtainNames copy];
 }
-
 
 + (NSArray *)getCurtainWithTypeName:(NSString *)typeName roomID:(NSInteger)roomID
 {
     NSMutableArray *curtains = [NSMutableArray array];
     
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and typeName = \"%@\"",roomID, typeName];
@@ -367,18 +363,15 @@
     if (curtains.count < 1) {
         return nil;
     }
-    
+    [db close];
     return [curtains copy];
 }
-
-
 
 + (NSString *)deviceIDWithRoomID:(NSInteger)roomID withType:(NSString *)type
 {
     NSString *deviceID = nil;
     
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and typeName = \'%@\'",roomID,type];
@@ -397,8 +390,7 @@
 +(NSArray *)getDeviceByTypeName:(NSString  *)typeName andRoomID:(NSInteger)roomID
 {
     NSMutableArray *array = [NSMutableArray array];
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and typeName = \'%@\'",roomID,typeName];
@@ -418,8 +410,7 @@
 +(NSString *)getEType:(NSInteger)eID
 {
     NSString * htypeID=nil;
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT htypeID FROM Devices where ID = %ld",eID];
@@ -436,8 +427,7 @@
 +(NSString *)getENumber:(NSInteger)eID
 {
     NSString * enumber=nil;
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT enumber FROM Devices where ID = %ld",eID];
@@ -454,8 +444,7 @@
 +(NSString *)getDeviceIDByENumber:(NSInteger)eID masterID:(NSInteger)mID
 {
     NSString *deviceID=nil;
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where upper(enumber) = upper('%04lx') and masterID='%04lx'",eID,mID];
@@ -472,9 +461,8 @@
 +(int) getSceneID:(NSString *)name
 {
     NSString *sql=[NSString stringWithFormat:@"select id from Scenes where name='%@'" ,name];
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
     int sceneid=0;
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     if([db open])
     {
         FMResultSet *resultSet = [db executeQuery:sql];
@@ -491,9 +479,9 @@
 +(bool) getReadOnly:(int)sceneid
 {
     NSString *sql=[NSString stringWithFormat:@"select stype from Scenes where id=%d" ,sceneid];
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    
     bool readonly=false;
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     if([db open])
     {
         FMResultSet *resultSet = [db executeQuery:sql];
@@ -510,9 +498,9 @@
 +(NSString *) getSnumber:(int)sceneid
 {
     NSString *sql=[NSString stringWithFormat:@"select snumber from Scenes where id=%d" ,sceneid];
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    
     NSString *snumber=nil;
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     if([db open])
     {
         FMResultSet *resultSet = [db executeQuery:sql];
@@ -529,9 +517,9 @@
 +(int) getRoomID:(int)sceneID
 {
     NSString *sql=[NSString stringWithFormat:@"select rId from Scenes where ID=%d" ,sceneID];
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    
     int roomId=0;
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     if([db open])
     {
         FMResultSet *resultSet = [db executeQuery:sql];
@@ -548,9 +536,9 @@
 +(NSString*)getSceneName:(int)sceneID
 {
     NSString *sql=[NSString stringWithFormat:@"select NAME from Scenes where ID=%d" ,sceneID];
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    
     NSString *sceneName;
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     if([db open])
     {
         FMResultSet *resultSet = [db executeQuery:sql];
@@ -572,28 +560,8 @@
     NSMutableString *eIdStr = [[NSMutableString alloc]init];
     for(NSDictionary *deviceDic in devices)
     {
-        
         [eIdStr appendString:[NSString stringWithFormat:@"%@,",deviceDic[@"deviceID"]]];
-        
-        
     }
-    
-    
-//    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-//    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
-//    if([db open])
-//    {
-//        NSString *sql = [NSString stringWithFormat:@"select max(id) as id from scenes"];
-//        FMResultSet *resultSet = [db executeQuery:sql];
-//        if ([resultSet next])
-//        {
-//            sceneID = [resultSet intForColumn:@"ID"]+1;
-//        }
-//        
-//        sql=[NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,null,null)",sceneID,name,scene.roomName,img,scene.roomID,2];
-//        [db executeUpdate:sql];
-//    }
-//    [db close];
  
     return sceneID;
 }
@@ -637,8 +605,7 @@
     NSMutableArray *subTypeNames = [NSMutableArray array];
     NSMutableArray *deviceIDArr = [NSMutableArray array];
     
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     
     if([db open])
     {
@@ -679,15 +646,15 @@
     {
         return  nil;
     }
-    
+    [db close];
     return subTypeNames;
 }
+
 +(NSArray *)getAllDevicesIds
 {
     NSMutableArray *deviceIDs = [NSMutableArray array];
     
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     
     if([db open])
     {
@@ -705,7 +672,7 @@
     if (deviceIDs.count < 1) {
         return nil;
     }
-    
+    [db close];
     return [deviceIDs copy];
 
 }
@@ -713,8 +680,7 @@
 {
     NSString *subTypeName = nil;
     
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     
     if([db open])
     {
@@ -726,7 +692,7 @@
             subTypeName = [resultSet stringForColumn:@"subTypeName"];
         }
     }
-    
+    [db close];
     return subTypeName;
 }
 
@@ -734,8 +700,7 @@
 {
     NSArray *deviceIDs;
     
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     
     if([db open])
     {
@@ -757,15 +722,15 @@
     if (deviceIDs.count < 1) {
         return nil;
     }
-    
+    [db close];
     return [deviceIDs copy];
 }
+
 + (Device *)getDeviceWithDeviceID:(int) deviceID
 {
     Device *device = nil;
     
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT * FROM Devices where ID = %d",deviceID];
@@ -775,7 +740,7 @@
             device = [self deviceMdoelByFMResultSet:resultSet];
         }
     }
-    
+    [db close];
     return device;
 }
 
@@ -917,8 +882,7 @@
 {
     NSString *typeName = nil;
     
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     
     if([db open])
     {
@@ -930,7 +894,7 @@
             typeName = [resultSet stringForColumn:@"typeName"];
         }
     }
-    
+    [db close];
     return typeName;
 }
 
@@ -938,8 +902,7 @@
 {
     NSMutableArray *subNames = [NSMutableArray array];
     
-    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    FMDatabase *db = [self connetdb];
     
     if([db open])
     {
@@ -956,7 +919,7 @@
     if (subNames.count < 1) {
         return nil;
     }
-    
+    [db close];
     return [subNames copy];
 }
 
@@ -989,6 +952,7 @@
     }
     
 }
+
 //根据场景ID，得到该场景下的所有设备SubTypeName
 +(NSArray *)getSubTydpeBySceneID:(int)sceneId
 {
@@ -1024,6 +988,7 @@
     }
     return [subTypeNames copy];
 }
+
 //根据场景ID，得到该场景下的设备子类
 +(NSArray *)getDeviceTypeNameWithScenID:(int)sceneId subTypeName:(NSString *)subTypeName
 {
@@ -1054,8 +1019,6 @@
                 continue;
             }
             [typeNames addObject:typeName];
-
-            
         }
         
     }
@@ -1065,4 +1028,123 @@
     
     return [typeNames copy];
 }
+
++(void)initSQlite
+{
+    FMDatabase *db = [self connetdb];
+    if ([db open]) {
+        
+        NSString *sqlRoom=@"CREATE TABLE IF NOT EXISTS Rooms(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"PM25\" INTEGER, \"NOISE\" INTEGER, \"TEMPTURE\" INTEGER, \"CO2\" INTEGER, \"moisture\" INTEGER, \"imgUrl\" TEXT,\"ibeacon\" INTEGER)";
+        NSString *sqlChannel=@"CREATE TABLE IF NOT EXISTS Channels (\"id\" INTEGER PRIMARY KEY  NOT NULL  UNIQUE ,\"eqId\" INTEGER,\"channelValue\" INTEGER,\"cNumber\" INTEGER, \"Channel_name\" TEXT,\"Channel_pic\" TEXT, \"parent\" CHAR(2) NOT NULL  DEFAULT TV, \"isFavorite\" BOOL DEFAULT 0, \"eqNumber\" TEXT)";
+        NSString *sqlDevice=@"CREATE TABLE IF NOT EXISTS Devices(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"sn\" TEXT, \"birth\" DATETIME, \"guarantee\" DATETIME, \"model\" TEXT, \"price\" FLOAT, \"purchase\" DATETIME, \"producer\" TEXT, \"gua_tel\" TEXT, \"power\" INTEGER, \"current\" FLOAT, \"voltage\" INTEGER, \"protocol\" TEXT, \"rID\" INTEGER, \"eNumber\" TEXT, \"hTypeId\" TEXT, \"subTypeId\" INTEGER, \"typeName\" TEXT, \"subTypeName\" TEXT, \"masterID\" TEXT, \"url\" TEXT)";
+        NSString *sqlScene=@"CREATE TABLE IF NOT EXISTS \"Scenes\" (\"ID\" INT PRIMARY KEY  NOT NULL ,\"NAME\" TEXT NOT NULL ,\"roomName\" TEXT,\"pic\" TEXT DEFAULT (null) ,\"rId\" INTEGER,\"sType\" INTEGER, \"snumber\" TEXT,\"isFavorite\" BOOL)";
+        
+        //NSString *sqlProtocol=@"CREATE TABLE IF NOT EXISTS [t_protocol_config]([rid] [int] IDENTITY(1,1) NOT NULL,[eid] [int] NULL,[enumber] [varchar](64) NULL,[ename] [varchar](64) NULL,[etype] [varchar](64) NULL,[actname] [varchar](256) NULL,[actcode] [varchar](256) NULL, \"actKey\" VARCHAR)";
+        NSArray *sqls=@[sqlRoom,sqlChannel,sqlDevice,sqlScene];//,sqlProtocol];
+        //4.创表
+        for (NSString *sql in sqls) {
+            BOOL result=[db executeUpdate:sql];
+            if (result) {
+                NSLog(@"创表成功");
+            }else{
+                NSLog(@"创表失败");
+            }
+        }
+    }else{
+        NSLog(@"Could not open db.");
+    }
+    
+    [db close];
+}
+
++(void)initDemoSQlite
+{
+    [self initSQlite];
+    FMDatabase *db = [self connetdb];
+    if ([db open]) {
+        //insert rooms
+        NSArray *sqls=@[@"INSERT INTO \"Rooms\" VALUES(1,'主卧',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0);",
+        @"INSERT INTO \"Rooms\" VALUES(2,'影音室',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0);",
+        @"INSERT INTO \"Rooms\" VALUES(3,'小孩房',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0);",
+        @"INSERT INTO \"Rooms\" VALUES(4,'测试区',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',10002);",
+        @"INSERT INTO \"Rooms\" VALUES(5,'车库',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0);",
+          @"INSERT INTO \"Rooms\" VALUES(6,'健身房',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',10001);"];
+        for (NSString *sql in sqls) {
+            BOOL result=[db executeUpdate:sql];
+            if (result) {
+                NSLog(@"写入表ROOMS成功");
+            }else{
+                NSLog(@"写入表ROOMS失败");
+            }
+        }
+        //insert devices
+        sqls=@[@"INSERT INTO \"Devices\" VALUES(51,'卧室开关灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0036','01',1,'开关灯','照明','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(52,'卧室调光灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0015','02',1,'调光灯','照明','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(53,'卧室调色灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0016','03',1,'调色灯','照明','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(54,'卧室电视',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0017','12',3,'网络电视','影音','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(55,'卧室空调',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0018','31',2,'空调','环境','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(56,'卧室纱帘',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0019','21',1,'开合帘','照明','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(57,'卧室遮光帘',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0020','21',1,'开合帘','照明','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(58,'卧室卷帘',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0021','22',1,'卷帘','照明','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(59,'影音室DVD',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0022','13',3,'DVD','影音','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(60,'影音室FM',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0023','15',3,'FM','影音','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(61,'影音室背景音乐',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0024','14',3,'背景音乐','影音','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(62,'影音室投影',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0025','16',3,'投影','影音','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(63,'影音室幕布',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0026','17',3,'幕布','影音','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(38,'墙边调光灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0001','02',1,'调光灯','照明','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(39,'投影上调光灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0002','02',1,'调光灯','照明','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(40,'沙发上调光灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0003','02',1,'调光灯','照明','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(41,'测试区电视',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0005','12',3,'网络电视','影音','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(42,'测试区DVD',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0006','13',3,'DVD','影音','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(43,'测试区背景音乐',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0007','14',3,'背景音乐','影音','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(44,'测试区FM',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0008','15',3,'FM','影音','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(45,'测试区机顶盒',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0009','11',3,'机顶盒','影音','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(46,'测试区空调',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0010','31',2,'空调','环境','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(47,'测试区投影',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0011','16',3,'投影','影音','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(48,'测试区幕布',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0012','17',3,'幕布','影音','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(49,'测试摄像头',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0013','45',4,'摄像头','安防','00ff','rtsp://admin:stone123@flysun158.6655.la:8184');",
+        @"INSERT INTO \"Devices\" VALUES(50,'测试区纱帘',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'02BA','21',1,'开合帘','照明','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(70,'测试区智能门锁',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0033','40',4,'智能门锁','安防','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(71,'测试区智能插座',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0034','41',5,'智能插座','智能单品','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(73,'测试区功放',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0014','18',3,'功放','影音','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(37,'测试区开关灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0101','01',1,'开关灯','照明','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(64,'车库温湿度感应器',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0027','50',6,'温湿度感应器','感应器','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(65,'车库动静感应器',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0028','51',6,'动静感应器','感应器','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(66,'车库照度感应器',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0029','52',6,'照度感应器','感应器','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(67,'车库燃气监测',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0030','56',6,'燃气监测','感应器','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(68,'车库噪音感应器',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0031','54',6,'噪音感应器','感应器','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(69,'车库烟雾感应器',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0032','57',6,'烟雾感应器','感应器','00ff','');",
+        @"INSERT INTO \"Devices\" VALUES(72,'健身房PM2.5监测',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,6,'0035','55',6,'PM2.5监测','感应器','00ff','');"];
+        for (NSString *sql in sqls) {
+            BOOL result=[db executeUpdate:sql];
+            if (result) {
+                NSLog(@"写入表Devices成功");
+            }else{
+                NSLog(@"写入表Devices失败");
+            }
+        }
+        //insert scenes
+        
+        sqls=@[@"INSERT INTO \"Scenes\" VALUES(10,'DVD','测试区','http://115.28.151.85:8088/DefaultFiles/images/scene/moving.jpg',4,1,'0003',0);",
+        @"INSERT INTO \"Scenes\" VALUES(11,'工作','测试区','http://115.28.151.85:8088/DefaultFiles/images/scene/relax.jpg',4,1,'0004',0);",
+        @"INSERT INTO \"Scenes\" VALUES(12,'午休','测试区','http://115.28.151.85:8088/DefaultFiles/images/scene/sleep.jpg',4,1,'0005',0);",
+        @"INSERT INTO \"Scenes\" VALUES(13,'离开','测试区','http://115.28.151.85:8088/DefaultFiles/images/scene/away.jpg',4,1,'0006',0);",
+        @"INSERT INTO \"Scenes\" VALUES(14,'欢迎','测试区','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',4,1,'0001',0);",
+        @"INSERT INTO \"Scenes\" VALUES(15,'投影','测试区','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',4,1,'0002',0);",
+        @"INSERT INTO \"Scenes\" VALUES(53,'离开','车库','http://115.28.151.85:8088/UploadFiles/images/scene/cctv1.png',5,2,'',0);"];
+        
+        for (NSString *sql in sqls) {
+            BOOL result=[db executeUpdate:sql];
+            if (result) {
+                NSLog(@"写入表scenes成功");
+            }else{
+                NSLog(@"写入表scenes失败");
+            }
+        }
+    }else{
+        NSLog(@"Could not open db.");
+    }
+    [db close];
+}
+
 @end

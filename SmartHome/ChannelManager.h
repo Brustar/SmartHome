@@ -6,8 +6,6 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "TVChannel.h"
 @interface ChannelManager : NSObject
 
 +(NSMutableArray *)getAllChannelForFavoritedForType:(NSString *)type deviceID:(int)deviceID;
@@ -15,5 +13,5 @@
 +(BOOL)upDateChannelForChannelID:(NSInteger)channel_id andNewChannel_Name:(NSString *)newName;
 
 //根据频道ID和父类找到对应的频道类
-+(TVChannel *)TVChannelByChannelID:(int)channelID andParent:(NSString *)parent;
+//+(TVChannel *)TVChannelByChannelID:(int)channelID andParent:(NSString *)parent;
 @end
