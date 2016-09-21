@@ -434,12 +434,17 @@
 
 -(void) httpHandler:(id) responseObject tag:(int)tag
 {
+    DeviceInfo *info=[DeviceInfo defaultManager];
+    if ([responseObject[@"Result"] intValue]==0)
+    {
+        info.db=@"smartDB";
+    }
+    
     if(tag == 1)
     {
         if ([responseObject[@"Result"] intValue]==0) {
             [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
             NSArray *hostList = responseObject[@"HostList"];
-            DeviceInfo *info=[DeviceInfo defaultManager];
             
             for(NSDictionary *hostID in hostList)
             {
@@ -449,17 +454,11 @@
             [IOManager writeUserdefault:[self.hostIDS copy] forKey:@"HostIDS"];
             NSString *mid = self.hostIDS[0];
             info.masterID =[PackManager NSDataToUint16:mid];
-            NSInteger count = self.hostIDS.count;
+            //NSInteger count = self.hostIDS.count;
             //直接登录主机
                 
             [self sendRequestToHostWithTag:2 andRow:0];
             //[self goToViewController];
-          
-            
-         
-            
-
-            
         }else{
                 [MBProgressHUD showError:responseObject[@"Msg"]];
             }
@@ -552,8 +551,6 @@
     }
     
 }
-
-
 
 -(void)goToViewController;
 {

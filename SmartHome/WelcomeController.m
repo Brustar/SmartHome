@@ -7,6 +7,8 @@
 //
 
 #import "WelcomeController.h"
+#import "DeviceInfo.h"
+#import "DeviceManager.h"
 
 @interface WelcomeController ()
 
@@ -30,9 +32,15 @@
     self.coverView.hidden = YES;
     self.knowView.hidden = YES;
 }
+
 - (IBAction)clickloginBtn:(id)sender {
 }
 
+- (IBAction)demo:(id)sender {
+    DeviceInfo *info=[DeviceInfo defaultManager];
+    info.db=@"demoDB";
+    [DeviceManager initDemoSQlite];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
