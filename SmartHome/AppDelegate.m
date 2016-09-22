@@ -56,12 +56,13 @@
         [self.window makeKeyAndVisible];
         return YES;
     }
+    /*
     //iPad连本地
     if (device.reachbility==ReachableViaWiFi) {
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
             [[SocketManager defaultManager] connectUDP:[IOManager udpPort]];
         }
-    }
+    }*/
     return YES;
 }
 

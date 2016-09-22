@@ -52,7 +52,6 @@
 		0F96A1661D17F37C00E1594F /* RulerLeftTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F96A1611D17F37C00E1594F /* RulerLeftTagView.m */; };
 		0F96A1671D17F37C00E1594F /* RulerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F96A1631D17F37C00E1594F /* RulerView.m */; };
 		0F9ADF721CE2DC020052F3BC /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9ADF711CE2DC020052F3BC /* libz.tbd */; };
-		0F9D238A1CEDBC500049A58C /* AddScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9D23891CEDBC500049A58C /* AddScene.m */; };
 		0FA0FD661D057C430041CE96 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA0FD651D057C430041CE96 /* AddressBook.framework */; };
 		0FA1E09E1D533BFA001CA819 /* PluginCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA1E09D1D533BFA001CA819 /* PluginCell.m */; };
 		0FA658F81CD98EF5005AC4B4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA658F21CD98D79005AC4B4 /* AudioToolbox.framework */; };
@@ -382,8 +381,6 @@
 		0F96A1621D17F37C00E1594F /* RulerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RulerView.h; path = PrettyRuler/RulerView.h; sourceTree = SOURCE_ROOT; };
 		0F96A1631D17F37C00E1594F /* RulerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RulerView.m; path = PrettyRuler/RulerView.m; sourceTree = SOURCE_ROOT; };
 		0F9ADF711CE2DC020052F3BC /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		0F9D23881CEDBC500049A58C /* AddScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddScene.h; sourceTree = "<group>"; };
-		0F9D23891CEDBC500049A58C /* AddScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddScene.m; sourceTree = "<group>"; };
 		0FA0FD651D057C430041CE96 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		0FA1E09C1D533BFA001CA819 /* PluginCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginCell.h; sourceTree = "<group>"; };
 		0FA1E09D1D533BFA001CA819 /* PluginCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginCell.m; sourceTree = "<group>"; };
@@ -788,8 +785,6 @@
 				0F43B1021CF4055300F3D9F0 /* IATConfig.m */,
 				0F25FE5C1CEB0C0A0063E834 /* SceneList.h */,
 				0F25FE5D1CEB0C0A0063E834 /* SceneList.m */,
-				0F9D23881CEDBC500049A58C /* AddScene.h */,
-				0F9D23891CEDBC500049A58C /* AddScene.m */,
 				0FAF74AB1CEE9A9600432713 /* LightController.h */,
 				0FAF74AC1CEE9A9600432713 /* LightController.m */,
 				F60FDB401D00029900AB04BE /* DetailViewController.h */,
@@ -1739,7 +1734,6 @@
 				0FCFB3891CF2929900B37DD3 /* Aircon.m in Sources */,
 				0F1F3BCA1D2B85EA00B2641C /* MBProgressHUD+NJ.m in Sources */,
 				F625A61B1D4C99EC00B696E5 /* RoomListController.m in Sources */,
-				0F9D238A1CEDBC500049A58C /* AddScene.m in Sources */,
 				0FC119771D6FE5E0001DA19A /* Screen.m in Sources */,
 				F63AE0031D11319C00BE17DC /* FMCollectionViewCell.m in Sources */,
 				0FAF8FF51CE1B514000557BD /* VolumeManager.m in Sources */,

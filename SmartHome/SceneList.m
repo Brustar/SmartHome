@@ -7,7 +7,6 @@
 //
 
 #import "SceneList.h"
-#import "AddScene.h"
 
 @implementation SceneList
 
