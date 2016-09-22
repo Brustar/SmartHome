@@ -37,6 +37,7 @@
     DeviceInfo *info=[DeviceInfo defaultManager];
     info.db=@"demoDB";
     [SQLManager initDemoSQlite];
+    
     //跳转到SceneControll
     [self performSegueWithIdentifier:@"gotoMainController" sender:self];
     
