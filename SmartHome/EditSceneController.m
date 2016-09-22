@@ -165,13 +165,55 @@
     EditSceneCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EditSceneCell" forIndexPath:indexPath];
     if(tableView == self.tableView)
     {
-        cell.label.text = self.devicesTypes[indexPath.row];
-        [cell.button setBackgroundImage:[UIImage imageNamed:@"store"] forState:UIControlStateNormal];
+        NSString *subType  = self.devicesTypes[indexPath.row];
+        cell.label.text = subType;
+        if([subType isEqualToString:@"照明"])
+        {
+            [cell.button setBackgroundImage:[UIImage imageNamed:@"lights"] forState:UIControlStateNormal];
+        }else if([subType isEqualToString:@"环境"])
+        {
+            [cell.button setBackgroundImage:[UIImage imageNamed:@"environment"] forState:UIControlStateNormal];
+        }else if([subType isEqualToString:@"影音"])
+            
+        {
+            [cell.button setBackgroundImage:[UIImage imageNamed:@"medio"] forState:UIControlStateNormal];
+        }else if ([subType isEqualToString:@"安防"]){
+            [cell.button setBackgroundImage:[UIImage imageNamed:@"safe"] forState:UIControlStateNormal];
+        }else{
+            [cell.button setBackgroundImage:[UIImage imageNamed:@"others"] forState:UIControlStateNormal];
+        }
+
     }else {
         //根据设备子类数据
-        cell.label.text = self.subTypeArr[indexPath.row];
-        [cell.button setBackgroundImage:[UIImage imageNamed:@"store"] forState:UIControlStateNormal];
-    }
+        
+        NSString *type  = self.subTypeArr[indexPath.row];
+        cell.label.text = type;
+        if([type isEqualToString:@"灯光"])
+        {
+            [cell.button setBackgroundImage:[UIImage imageNamed:@"lamp"] forState:UIControlStateNormal];
+        }else if([type isEqualToString:@"窗帘"])
+        {
+            [cell.button setBackgroundImage:[UIImage imageNamed:@"curtain"] forState:UIControlStateNormal];
+        }else if([type isEqualToString:@"空调"])
+            
+        {
+            [cell.button setBackgroundImage:[UIImage imageNamed:@"air"] forState:UIControlStateNormal];
+        }else if ([type isEqualToString:@"FM"]){
+            [cell.button setBackgroundImage:[UIImage imageNamed:@"fm"] forState:UIControlStateNormal];
+        }else if([type isEqualToString:@"网络电视"]){
+            [cell.button setBackgroundImage:[UIImage imageNamed:@"TV"] forState:UIControlStateNormal];
+        }else if ([type isEqualToString:@"智能门锁"]){
+            [cell.button setBackgroundImage:[UIImage imageNamed:@"guard"] forState:UIControlStateNormal];
+        }else  if ([type isEqualToString:@"DVD"]){
+            [cell.button setBackgroundImage:[UIImage imageNamed:@"DVD"] forState:UIControlStateNormal];
+        }else {
+            [cell.button setBackgroundImage:[UIImage imageNamed:@"safe"] forState:UIControlStateNormal];
+        }
+
+
+
+        
+               }
     
     return cell;
 }
@@ -185,8 +227,9 @@
     if(tableView == self.tableView)
     {
         
-   // self.subTypeArr =  [DeviceManager getDeviceTypeNameWithRoomID:self.roomID sceneID:self.sceneID subTypeName:self.devicesTypes[indexPath.row]];
+   
      self.subTypeArr = [SQLManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.devicesTypes[indexPath.row]];
+     
     [self.subDeviceTableView reloadData];
     }
     if(tableView == self.subDeviceTableView)

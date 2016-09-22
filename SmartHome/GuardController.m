@@ -6,6 +6,8 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
+#define guardType @"智能门锁"
+
 #import "GuardController.h"
 #import "EntranceGuard.h"
 #import "Scene.h"
@@ -14,17 +16,64 @@
 #import "SocketManager.h"
 #import "SQLManager.h"
 
+
+
 @interface GuardController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UISwitch *switchView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedGuard;
 @property (nonatomic,strong) UILabel *label;
+@property (nonatomic,strong) NSMutableArray *guardNames;
+@property (nonatomic,strong) NSMutableArray *guardIDs;
 
 - (IBAction)selectedTypeOfGuard:(UISegmentedControl *)sender;
 
 @end
-
 @implementation GuardController
+
+-(NSMutableArray *)guardIDs
+{
+    if(!_guardIDs)
+    {
+        _guardIDs = [NSMutableArray array];
+        if(self.sceneid > 0 && self.isAddDevice)
+        {
+            NSArray *guard = [SQLManager getDeviceIDsBySeneId:[self.sceneid intValue]];
+            for(int i = 0; i < guard.count; i++)
+            {
+                NSString *typeName = [SQLManager deviceTypeNameByDeviceID:[guard[i] intValue]];
+                if([typeName isEqualToString:guardType])
+                {
+                    [_guardIDs addObject:guard[i]];
+                }
+                
+            }
+        }else if(self.roomID)
+        {
+            [_guardIDs addObjectsFromArray:[SQLManager getDeviceByTypeName:guardType andRoomID:self.roomID]];
+        }else{
+            [_guardIDs addObject:self.deviceid];
+        }
+        
+    }
+    return _guardIDs;
+}
+-(NSMutableArray *)guardNames
+{
+    if(!_guardNames)
+    {
+        
+        _guardNames = [NSMutableArray array];
+        
+        for(int i = 0; i < self.guardIDs.count; i++)
+        {
+            int guardId = [self.guardIDs[i] intValue];
+            [_guardNames addObject:[SQLManager deviceNameByDeviceID:guardId]];
+        }
+
+    }
+    return _guardNames;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -32,16 +81,27 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.scrollEnabled = NO;
-    self.title = @"门禁";
-    if(self.roomID)
-    {
-        self.deviceid = [SQLManager deviceIDWithRoomID:self.roomID withType:@"智能门锁"];
-
-    }
+    self.title = guardType;
     
+    [self setupSegmentGuard];
 
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
+}
+
+-(void)setupSegmentGuard
+{
+    if(self.guardNames == nil || self.guardNames.count == 0)
+    {
+        return;
+    }
+    [self.segmentedGuard removeAllSegments];
+    for(int i = 0; i < self.guardNames.count;i++)
+    {
+        [self.segmentedGuard insertSegmentWithTitle:self.guardNames[i] atIndex:i animated:NO];
+    }
+    self.segmentedGuard.selectedSegmentIndex = 0;
+    self.deviceid = [self.guardIDs objectAtIndex:self.segmentedGuard.selectedSegmentIndex];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -108,13 +168,13 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
         
     }
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 5, 100, 30)];
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 5, 150, 30)];
     
    [cell.contentView addSubview:label];
     if(indexPath.row == 0)
     {
         self.label = label;
-        label.text = @"大门";
+        label.text = self.guardNames[self.segmentedGuard.selectedSegmentIndex];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         self.switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
         cell.accessoryView = self.switchView;
@@ -154,19 +214,14 @@
 
 - (IBAction)selectedTypeOfGuard:(UISegmentedControl *)sender {
     
-    if(0 == sender.selectedSegmentIndex)
-    {
-        self.label.text = @"大门";
-    }else if( 1 == sender.selectedSegmentIndex)
-    {
-        self.label.text = @"侧门";
-    } else {
-        self.label.text = @"车库";
-    }
+    UISegmentedControl *segment = (UISegmentedControl*)sender;
+    self.label.text = self.guardNames[segment.selectedSegmentIndex];
+    self.deviceid=[self.guardIDs objectAtIndex:self.segmentedGuard.selectedSegmentIndex];
+    [self.tableView reloadData];
 }
 
 
-
+    
  #pragma mark - Navigation
  // In a storyboard-based application, you will often want to do a little preparation before navigation
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

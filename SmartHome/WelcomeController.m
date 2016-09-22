@@ -38,6 +38,7 @@
     info.db=@"demoDB";
     [SQLManager initDemoSQlite];
     //跳转到SceneControll
+    [self performSegueWithIdentifier:@"goSceneVC" sender:self];
     
 }
 
