@@ -263,10 +263,10 @@
         self.userName.text = cell.textLabel.text;
         if([cell.detailTextLabel.text isEqualToString:@"管理员"])
         {
-            [self.identityType setTitle:@"可转化为普通身份" forState:UIControlStateNormal];
+            [self.identityType setTitle:@"转化为普通身份" forState:UIControlStateNormal];
         }else
         {
-            [self.identityType setTitle:@"可转化为主人身份" forState:UIControlStateNormal];
+            [self.identityType setTitle:@"转化为主人身份" forState:UIControlStateNormal];
 
         }
     }
@@ -372,10 +372,10 @@
         if([type isEqualToString:@"普通身份"])
         {
             [self deleteOrChangeManagerType:3 withTag:4];
-            sender.titleLabel.text = @"可转化为主人身份";
+            sender.titleLabel.text = @"转化为主人身份";
         }else{
             [self deleteOrChangeManagerType:2 withTag:5];
-            sender.titleLabel.text= @"可转化为普通身份";
+            sender.titleLabel.text= @"转化为普通身份";
         }
         [alertVC dismissViewControllerAnimated:YES completion:nil];
     }];
