@@ -5,6 +5,8 @@
 	<key>rects</key>
 	<array>
 		<dict>
+			<key>poweron</key>
+			<false/>
 			<key>deviceID</key>
 			<integer>10</integer>
 			<key>roomID</key>
@@ -13,6 +15,8 @@
 			<string>real1.png</string>
 			<key>rect</key>
 			<string>{{0, 0}, {200, 400}}</string>
+			<key>nextImg</key>
+			<string>real2.png</string>
 		</dict>
 		<dict>
 			<key>deviceID</key>
@@ -23,6 +27,10 @@
 			<string>real2.png</string>
 			<key>rect</key>
 			<string>{{300, 0}, {200, 400}}</string>
+			<key>poweron</key>
+			<true/>
+			<key>nextImg</key>
+			<string>real3.png</string>
 		</dict>
 		<dict>
 			<key>deviceID</key>
@@ -33,6 +41,10 @@
 			<string>real3.png</string>
 			<key>rect</key>
 			<string>{{600, 0}, {200, 400}}</string>
+			<key>poweron</key>
+			<false/>
+			<key>nextImg</key>
+			<string>real1.png</string>
 		</dict>
 	</array>
 </dict>

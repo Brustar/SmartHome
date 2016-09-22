@@ -14,7 +14,7 @@
 #import "MBProgressHUD+NJ.h"
 
 #import "Screen.h"
-
+#import "WinOpener.h"
 #import "HttpManager.h"
 #import "Projector.h"
 #import "SocketManager.h"
@@ -23,6 +23,7 @@
 #import "AFHTTPSessionManager.h"
 #import "UploadManager.h"
 #import "MBProgressHUD+NJ.h"
+
 @implementation SceneManager
 
 + (instancetype) defaultManager
@@ -339,6 +340,12 @@
                 device.waiting=[[dic objectForKey:@"waiting"] intValue];
                 [devices addObject:device];
             }
+            
+            if ([dic objectForKey:@"pushing"]) {
+                WinOpener *device=[[WinOpener alloc] init];
+                device.pushing=[[dic objectForKey:@"pushing"] intValue];
+                [devices addObject:device];
+            }
         }
         scene.devices=devices;
         return scene;
@@ -500,6 +507,15 @@
             NSString *deviceid=[NSString stringWithFormat:@"%d", projector.deviceID];
             if (projector.waiting) {
                 data=[[DeviceInfo defaultManager] toogle:projector.waiting deviceID:deviceid];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+            }
+        }
+        
+        if ([device isKindOfClass:[WinOpener class]]) {
+            WinOpener *opener=(WinOpener *)device;
+            NSString *deviceid=[NSString stringWithFormat:@"%d", opener.deviceID];
+            if (opener.pushing) {
+                data=[[DeviceInfo defaultManager] toogle:opener.pushing deviceID:deviceid];
                 [sock.socket writeData:data withTimeout:1 tag:1];
             }
         }

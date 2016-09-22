@@ -11,6 +11,9 @@
 #import "WindowSlidingController.h"
 #import "DetailTableViewCell.h"
 #import "SQLManager.h"
+#import "SocketManager.h"
+#import "WinOpener.h"
+#import "SceneManager.h"
 
 @interface WindowSlidingController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
@@ -85,6 +88,32 @@
     self.segment.selectedSegmentIndex = 0;
     self.deviceid = [self.windowSlidIds objectAtIndex:self.segment.selectedSegmentIndex];
 }
+
+-(IBAction)save:(id)sender
+{
+    if ([sender isEqual:self.cell.power]) {
+        NSData *data=[[DeviceInfo defaultManager] toogle:self.cell.power.isOn deviceID:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
+    WinOpener *device=[[WinOpener alloc] init];
+    [device setDeviceID:[self.deviceid intValue]];
+    [device setPushing: self.cell.power.isOn];
+    
+    
+    [_scene setSceneID:[self.sceneid intValue]];
+    [_scene setRoomID:self.roomID];
+    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+    
+    [_scene setReadonly:NO];
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+    
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 2;
@@ -96,6 +125,17 @@
     {
         DetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         cell.label.text = self.windowSlidNames[self.segment.selectedSegmentIndex];
+        if ([self.sceneid intValue]>0) {
+            
+            _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+            for(int i=0;i<[_scene.devices count];i++)
+            {
+                if ([[_scene.devices objectAtIndex:i] isKindOfClass:[WinOpener class]]) {
+                    cell.power.on=((WinOpener *)[_scene.devices objectAtIndex:i]).pushing;
+                }
+            }
+        }
+        [cell.power addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
         self.cell = cell;
         return cell;
         

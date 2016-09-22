@@ -94,6 +94,7 @@
 		0FC1197A1D6FE61C001DA19A /* Projector.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC119791D6FE61C001DA19A /* Projector.m */; };
 		0FC3DE851D236CFF00A03482 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC3DE841D236CFF00A03482 /* LoginController.m */; };
 		0FC41BAF1D6DA3DD000D4451 /* VoiceOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC41BAE1D6DA3DD000D4451 /* VoiceOrderController.m */; };
+		0FC5CC6C1D93CB9600839D8F /* WinOpener.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC5CC6B1D93CB9600839D8F /* WinOpener.m */; };
 		0FC7FDC11CED6CC700F91BDF /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC7FDC01CED6CC700F91BDF /* libsqlite3.tbd */; };
 		0FCAA40C1D1945BB00C1E58C /* BgMusicController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCAA40B1D1945BB00C1E58C /* BgMusicController.m */; };
 		0FCD77721D7681CB00121BF1 /* KEVolumeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCD77711D7681CB00121BF1 /* KEVolumeUtil.m */; };
@@ -461,6 +462,8 @@
 		0FC3DE841D236CFF00A03482 /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
 		0FC41BAD1D6DA3DD000D4451 /* VoiceOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceOrderController.h; sourceTree = "<group>"; };
 		0FC41BAE1D6DA3DD000D4451 /* VoiceOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceOrderController.m; sourceTree = "<group>"; };
+		0FC5CC6A1D93CB9600839D8F /* WinOpener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WinOpener.h; sourceTree = "<group>"; };
+		0FC5CC6B1D93CB9600839D8F /* WinOpener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WinOpener.m; sourceTree = "<group>"; };
 		0FC7FDC01CED6CC700F91BDF /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		0FCAA40A1D1945BB00C1E58C /* BgMusicController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BgMusicController.h; sourceTree = "<group>"; };
 		0FCAA40B1D1945BB00C1E58C /* BgMusicController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BgMusicController.m; sourceTree = "<group>"; };
@@ -699,6 +702,8 @@
 		0F01D53E1CDC6C4B00DAC267 /* entity */ = {
 			isa = PBXGroup;
 			children = (
+				0FC5CC6A1D93CB9600839D8F /* WinOpener.h */,
+				0FC5CC6B1D93CB9600839D8F /* WinOpener.m */,
 				0FF92B641D9224640098DD54 /* TVChannel.h */,
 				0FF92B651D9224640098DD54 /* TVChannel.m */,
 				0F01D5421CDC6CA600DAC267 /* Scene.h */,
@@ -1808,6 +1813,7 @@
 				F65164101D37672700A6F5FA /* MyEnergyCell.m in Sources */,
 				0F96A1651D17F37C00E1594F /* RulerItemModel.m in Sources */,
 				F6251F711D541885000A5A47 /* PluginViewController.m in Sources */,
+				0FC5CC6C1D93CB9600839D8F /* WinOpener.m in Sources */,
 				0F032D491CC9B12700D1920D /* main.m in Sources */,
 				F64111DC1D4F1E6100E8099D /* FixTimeRepeatController.m in Sources */,
 			);
