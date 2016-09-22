@@ -26,7 +26,8 @@
 #import "ProjectController.h"
 #import "IphoneRoomView.h"
 #import "MBProgressHUD+NJ.h"
-
+#import "AmplifierController.h"
+#import "WindowSlidingController.h"
 @interface IphoneDeviceListController ()<IphoneRoomViewDelegate>
 
 
@@ -186,7 +187,17 @@
         projectVC.roomID = roomID;
         
         [self addViewAndVC:projectVC];
-    }else{
+    }else if([typeName isEqualToString:@"功放"]){
+        AmplifierController *amplifierVC = [storyBoard instantiateViewControllerWithIdentifier:@"AmplifierController"];
+        amplifierVC.roomID = roomID;
+        [self addViewAndVC:amplifierVC];
+       
+    }else if([typeName isEqualToString:@"智能推窗器"])
+    {
+        WindowSlidingController *windowSlidVC = [storyBoard instantiateViewControllerWithIdentifier:@"WindowSlidingController"];
+        windowSlidVC.roomID = roomID;
+        [self addViewAndVC:windowSlidVC];
+    }else {
         PluginViewController *pluginVC = [storyBoard instantiateViewControllerWithIdentifier:@"PluginViewController"];
         pluginVC.roomID = roomID;
         

@@ -16,6 +16,7 @@
 @property (nonatomic,strong) NSMutableArray *screenCurtainNames;
 @property (nonatomic,strong) NSMutableArray *screenCurtainIds;
 @property (nonatomic,strong) DetailTableViewCell *cell;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableHightConstraint;
 
 @end
 
@@ -64,7 +65,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"幕布";
-    self.tableView.tableFooterView = [UIView new];
+    
+    self.tableHightConstraint.constant = 100;
+    
+    
     [self setupSeguentScreenCurtain];
 }
 
