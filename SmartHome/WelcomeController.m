@@ -22,10 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
 }
-
 
 - (IBAction)clickWeKnowBtn:(id)sender {
     
@@ -40,6 +37,8 @@
     DeviceInfo *info=[DeviceInfo defaultManager];
     info.db=@"demoDB";
     [DeviceManager initDemoSQlite];
+    //跳转到SceneControll
+    
 }
 
 - (void)didReceiveMemoryWarning {
