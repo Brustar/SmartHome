@@ -171,7 +171,7 @@
             int times = [dic[@"times"] intValue];
             
             NSString *energy = dic[@"energy"];
-            cell.totalLabel.text = [NSString stringWithFormat:@"总计:%@kw/h",energy]; ;
+            cell.totalLabel.text = [NSString stringWithFormat:@"总计:%@KWH",energy]; ;
             
             switch (indexPath.row) {
                 case 0:
