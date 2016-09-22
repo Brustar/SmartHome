@@ -40,7 +40,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *secondButton;
 
 
-
 @property (weak, nonatomic) IBOutlet UIButton *firstPowerBtn;
 @property (weak, nonatomic) IBOutlet UIButton *secondPowerBtn;
 

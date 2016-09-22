@@ -193,7 +193,7 @@
             [cell.button setBackgroundImage:[UIImage imageNamed:@"lamp"] forState:UIControlStateNormal];
         }else if([type isEqualToString:@"窗帘"])
         {
-            [cell.button setBackgroundImage:[UIImage imageNamed:@"curtain"] forState:UIControlStateNormal];
+            [cell.button setBackgroundImage:[UIImage imageNamed:@"curtainType"] forState:UIControlStateNormal];
         }else if([type isEqualToString:@"空调"])
             
         {
