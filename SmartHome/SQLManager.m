@@ -6,12 +6,13 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
-#import "DeviceManager.h"
+#import "SQLManager.h"
 #import "Device.h"
 #import "DeviceType.h"
 #import "DeviceInfo.h"
+#import "Room.h"
 
-@implementation DeviceManager
+@implementation SQLManager
 
 +(FMDatabase *)connetdb
 {
@@ -577,7 +578,22 @@
     {
         [eIdStr appendString:[NSString stringWithFormat:@"%@,",deviceDic[@"deviceID"]]];
     }
- 
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"select max(id) as id from scenes"];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            sceneID = [resultSet intForColumn:@"ID"]+1;
+        }
+        
+        sql=[NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,null,null)",sceneID,name,scene.roomName,img,scene.roomID,2];
+        [db executeUpdate:sql];
+    }
+    [db close];
+
     return sceneID;
 }
 
@@ -835,7 +851,7 @@
 {
     NSMutableArray *typeNames = [NSMutableArray array];
     
-    NSArray *deviceIDs = [DeviceManager deviceIdsByRoomId:rID];
+    NSArray *deviceIDs = [SQLManager deviceIdsByRoomId:rID];
     
     for (NSString *deviceID in deviceIDs) {
         NSString *typeName = [self getDeviceTypeNameWithID:deviceID subTypeName:subTypeName];
@@ -1195,5 +1211,268 @@
     }
     [db close];
 }
+
++(NSArray *)allSceneModels
+{
+    FMDatabase *db = [SQLManager connetdb];
+    NSMutableArray *sceneModles = [NSMutableArray array];
+    if([db open])
+    {
+        FMResultSet *resultSet = [db executeQuery:@"select * from Scenes"];
+        while([resultSet next])
+        {
+            Scene *scene = [Scene new];
+            scene.sceneID = [resultSet intForColumn:@"ID"];
+            scene.sceneName = [resultSet stringForColumn:@"NAME"];
+            scene.roomID = [resultSet intForColumn:@"roomName"];
+            
+            scene.picName =[resultSet stringForColumn:@"pic"];
+            scene.isFavorite = [resultSet boolForColumn:@"isFavorite"];
+            
+            scene.startTime = [resultSet stringForColumn:@"startTime"];
+            scene.astronomicalTime = [resultSet stringForColumn:@"astronomicalTime"];
+            scene.weekValue = [resultSet stringForColumn:@"weekValue"];
+            scene.weekRepeat = [resultSet intForColumn:@"weekRepeat"];
+            
+            scene.roomID = [resultSet intForColumn:@"rId"];
+            
+            [sceneModles addObject:scene];
+            
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return [sceneModles copy];
+}
+//根据场景中的设备ID获得该场景中的所有设备
++(NSArray *)devicesBySceneID:(int)sId
+{
+    NSArray *devices = [NSArray array];
+    NSArray *arrs = [self allSceneModels];
+    for(Scene *scene in arrs)
+    {
+        if(scene.sceneID == sId)
+        {
+            devices = [SQLManager devicesByRoomId:scene.roomID];
+        }
+    }
+    return devices;
+}
+
++ (NSArray *)getAllSceneWithRoomID:(int)roomID
+{
+    FMDatabase *db = [SQLManager connetdb];
+    NSMutableArray *sceneModles = [NSMutableArray array];
+    
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"select * from Scenes where rId=%d", roomID];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while([resultSet next])
+        {
+            
+            Scene *scene = [SQLManager parseScene:resultSet];
+            [sceneModles addObject:scene];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return [sceneModles copy];
+}
++(Scene*)parseScene:(FMResultSet *)resultSet
+{
+    
+    Scene *scene = [Scene new];
+    scene.sceneID = [resultSet intForColumn:@"ID"];
+    scene.sceneName = [resultSet stringForColumn:@"NAME"];
+    scene.roomName = [resultSet stringForColumn:@"roomName"];
+    
+    scene.picName =[resultSet stringForColumn:@"pic"];
+    scene.isFavorite = [resultSet boolForColumn:@"isFavorite"];
+    scene.roomID = [resultSet intForColumn:@"rId"];
+    int sType = [resultSet intForColumn:@"sType"];
+    if(sType == 1)
+    {
+        scene.readonly = YES;
+    }
+    
+    return scene;
+    
+}
++(Scene *)sceneBySceneID:(int)sId
+{
+    FMDatabase *db = [SQLManager connetdb];
+    Scene *scene = [Scene new];
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"select * from Scenes where ID = %d",sId];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        
+        while([resultSet next])
+        {
+            scene = [SQLManager parseScene:resultSet];
+        }
+        
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return scene;
+}
++(BOOL)deleteScene:(int)sceneId
+{
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath] ;
+    BOOL isSuccess = false;
+    if([db open])
+    {
+        isSuccess = [db executeUpdateWithFormat:@"delete from Scenes where ID = %d",sceneId];
+        [db close];
+    }
+    return isSuccess;
+    
+}
+//根据房间ID获取该房间所有的场景
++(NSArray *)getScensByRoomId:(int)roomId
+{
+    NSMutableArray *scens = [NSMutableArray array];
+    
+    
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    if([db open])
+    {
+        FMResultSet *resultSet = [db executeQueryWithFormat:@"select * from Scenes where rId = %d",roomId];
+        while ([resultSet next]) {
+            Scene *scene = [Scene new];
+            scene.sceneName = [resultSet stringForColumn:@"NAME"];
+            scene.sceneID = [resultSet intForColumn:@"ID"];
+            scene.picName = [resultSet stringForColumn:@"pic"];
+            scene.roomName = [resultSet stringForColumn:@"roomName"];
+            [scens addObject:scene];
+        }
+    }
+    
+    
+    return [scens copy];
+    
+    
+    
+}
+//得到数据库中所有的场景ID
++(NSArray *)getAllSceneIdsFromSql
+{
+    NSMutableArray *sceneIds = [NSMutableArray array];
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    if([db open])
+    {
+        NSString *sql = @"select ID from Scenes";
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next]) {
+            int scendID = [resultSet intForColumn:@"ID"];
+            [sceneIds addObject: [NSNumber numberWithInt:scendID]];
+        }
+        [db close];
+    }
+    return [sceneIds copy];
+}
+
++(NSArray *)getFavorScene
+{
+    NSMutableArray *scens = [NSMutableArray array];
+    
+    
+    NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:@"smartDB"];
+    
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    if([db open])
+    {
+        FMResultSet *resultSet = [db executeQuery:@"select * from Scenes where isFavorite = 1"];
+        while ([resultSet next]) {
+            Scene *scene = [Scene new];
+            scene.sceneName = [resultSet stringForColumn:@"NAME"];
+            scene.sceneID = [resultSet intForColumn:@"ID"];
+            scene.picName = [resultSet stringForColumn:@"pic"];
+            scene.roomName = [resultSet stringForColumn:@"roomName"];
+            [scens addObject:scene];
+        }
+    }
+    
+    
+    return [scens copy];
+    
+    
+}
+
+
++(NSArray *)getAllRoomsInfo
+{
+    FMDatabase *db = [SQLManager connetdb];
+    NSMutableArray *roomList = [NSMutableArray array];
+    if([db open])
+    {
+        NSString *sql = @"select * from Rooms";
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next]) {
+            
+            
+            Room *room = [Room new];
+            room.rId = [resultSet intForColumn:@"ID"];
+            room.rName = [resultSet stringForColumn:@"NAME"];
+            room.pm25 = [resultSet intForColumn:@"PM25"];
+            room.noise = [resultSet intForColumn:@"NOISE"];
+            room.tempture = [resultSet intForColumn:@"TEMPTURE"];
+            room.co2 = [resultSet intForColumn:@"CO2"];
+            room.moisture = [resultSet intForColumn:@"moisture"];
+            room.imgUrl = [resultSet stringForColumn:@"imgUrl"];
+            room.ibeacon = [resultSet intForColumn:@"ibeacon"];
+            
+            [roomList addObject:room];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return [roomList copy];
+}
+
+
++(int)getRoomIDByRoomName:(NSString *)rName;
+{
+    FMDatabase *db = [SQLManager connetdb];
+    int rID ;
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Rooms where Name = '%@'",rName];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            rID = [resultSet intForColumn:@"ID"];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return rID;
+}
++(NSString *)getRoomNameByRoomID:(int) rId
+{
+    FMDatabase *db = [SQLManager connetdb];
+    NSString *rName ;
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Rooms where ID = %d",rId];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            rName = [resultSet stringForColumn:@"roomName"];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return rName;
+    
+}
+
 
 @end

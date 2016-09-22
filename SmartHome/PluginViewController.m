@@ -11,7 +11,7 @@
 #import "AsyncUdpSocket.h"
 #import "PackManager.h"
 #import "PluginCell.h"
-#import "DeviceManager.h"
+#import "SQLManager.h"
 
 @interface PluginViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -31,10 +31,10 @@
        _plugDeviceIds = [NSMutableArray array];
        if(self.sceneid > 0 && !self.isAddDevice)
        {
-           NSArray *plugArr = [DeviceManager getDeviceIDsBySeneId:[self.sceneid intValue]];
+           NSArray *plugArr = [SQLManager getDeviceIDsBySeneId:[self.sceneid intValue]];
            for(int i = 0; i < plugArr.count; i++)
            {
-               NSString *typeName = [DeviceManager deviceTypeNameByDeviceID:[plugArr[i] intValue]];
+               NSString *typeName = [SQLManager deviceTypeNameByDeviceID:[plugArr[i] intValue]];
                if([typeName isEqualToString:@"智能插座"])
                {
                    [_plugDeviceIds addObject:plugArr[i]];
@@ -43,7 +43,7 @@
            }
        }else if(self.roomID > 0)
        {
-           [_plugDeviceIds addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"智能插座" andRoomID:self.roomID]];
+           [_plugDeviceIds addObjectsFromArray:[SQLManager getDeviceByTypeName:@"智能插座" andRoomID:self.roomID]];
        }else{
            [_plugDeviceIds addObject:self.deviceid];
        }
@@ -58,7 +58,7 @@
         for(int i = 0; i < self.plugDeviceIds.count; i++)
         {
             int plugId = [self.plugDeviceIds[i] intValue];
-            NSString *name = [DeviceManager deviceNameByDeviceID:plugId];
+            NSString *name = [SQLManager deviceNameByDeviceID:plugId];
             [_plugNames addObject:name];
         }
     }

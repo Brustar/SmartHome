@@ -9,7 +9,7 @@
 #import "DeviceListController.h"
 #import "Scene.h"
 #import "SceneManager.h"
-#import "DeviceManager.h"
+#import "SQLManager.h"
 #import "Device.h"
 #import "MBProgressHUD+NJ.h"
 #import "DeviceType.h"
@@ -43,7 +43,7 @@
 -(void)setRoomid:(NSInteger)roomid
 {
     _roomid = roomid;
-    self.deviceTypes = [DeviceManager deviceSubTypeByRoomId:_roomid];
+    self.deviceTypes = [SQLManager deviceSubTypeByRoomId:_roomid];
     self.tableViewHight.constant = self.deviceTypes.count * self.tableView.rowHeight;
     if(self.isViewLoaded)
     {
@@ -168,7 +168,10 @@
     }else if([typeName isEqualToString:@"投影"]){
         segue = @"projectSegue";
         
-    }else {
+    }else if([typeName isEqualToString:@"智能推窗器"]){
+        segue = @"windowSlider";
+        
+    }else{
         segue = @"Guard";
     }
 

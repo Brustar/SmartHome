@@ -6,13 +6,13 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
-#import "ScenseCell.h"
+#import "SceneCell.h"
 
-@interface ScenseCell ()<UIGestureRecognizerDelegate>
+@interface SceneCell ()<UIGestureRecognizerDelegate>
 @property(nonatomic,strong)UILongPressGestureRecognizer *lpgr;
 
 @end
-@implementation ScenseCell
+@implementation SceneCell
 
 
 @end

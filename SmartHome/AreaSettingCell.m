@@ -6,9 +6,9 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
-#import "areaSettingCell.h"
+#import "AreaSettingCell.h"
 
-@implementation areaSettingCell
+@implementation AreaSettingCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

@@ -230,7 +230,7 @@
 
 
     }
-    areaSettingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"areaSettingCell" forIndexPath:indexPath];
+    AreaSettingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"areaSettingCell" forIndexPath:indexPath];
     self.recoredId = self.recoredIDs[indexPath.row];
     [cell.exchangeSwitch addTarget:self action:@selector(switchChange:) forControlEvents:UIControlEventValueChanged];
     cell.areaLabel.text = self.areasArr[indexPath.row];

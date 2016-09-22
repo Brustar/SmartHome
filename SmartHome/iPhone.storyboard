@@ -216,16 +216,10 @@
                         <viewControllerLayoutGuide type="top" id="EeW-N4-5gV"/>
                         <viewControllerLayoutGuide type="bottom" id="QbR-vL-uYg"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="S0x-sS-gOT">
+                    <view key="view" contentMode="scaleToFill" id="S0x-sS-gOT" customClass="IphoneRoomView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kev-Fw-iCu">
-                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Ehq-fw-XIf"/>
-                                </constraints>
-                            </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hbp-wY-ZBG">
                                 <rect key="frame" x="0.0" y="64" width="320" height="50"/>
                                 <color key="backgroundColor" red="1" green="0.56939600459999995" blue="0.12608335909999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -234,7 +228,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Aho-98-0G3">
-                                <rect key="frame" x="10" y="124" width="300" height="394"/>
+                                <rect key="frame" x="10" y="124" width="300" height="384"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4Pz-do-UQt">
                                     <size key="itemSize" width="123" height="114"/>
@@ -243,7 +237,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell" id="UlW-QX-Wif" customClass="ScenseCell">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell" id="UlW-QX-Wif" customClass="SceneCell">
                                         <rect key="frame" x="0.0" y="0.0" width="123" height="114"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -282,19 +276,26 @@
                                     <outlet property="delegate" destination="2FT-fL-R4c" id="9k7-3y-y5p"/>
                                 </connections>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ueV-XT-5wh" customClass="IphoneRoomView">
+                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="vWh-YQ-O5f"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Kev-Fw-iCu" secondAttribute="trailing" id="CQz-Ia-GG6"/>
+                            <constraint firstAttribute="trailing" secondItem="ueV-XT-5wh" secondAttribute="trailing" id="6t8-xe-Rp8"/>
                             <constraint firstAttribute="trailing" secondItem="Hbp-wY-ZBG" secondAttribute="trailing" id="IVj-8k-bmw"/>
-                            <constraint firstItem="QbR-vL-uYg" firstAttribute="top" secondItem="Kev-Fw-iCu" secondAttribute="bottom" id="SpQ-ii-D7o"/>
-                            <constraint firstItem="Kev-Fw-iCu" firstAttribute="leading" secondItem="S0x-sS-gOT" secondAttribute="leading" id="SvO-bh-gcQ"/>
+                            <constraint firstItem="ueV-XT-5wh" firstAttribute="leading" secondItem="S0x-sS-gOT" secondAttribute="leading" id="JhQ-D4-CuM"/>
                             <constraint firstItem="Hbp-wY-ZBG" firstAttribute="leading" secondItem="S0x-sS-gOT" secondAttribute="leading" id="Tuf-dH-41h"/>
                             <constraint firstItem="Hbp-wY-ZBG" firstAttribute="top" secondItem="EeW-N4-5gV" secondAttribute="bottom" id="Txe-eo-m7V"/>
                             <constraint firstItem="Aho-98-0G3" firstAttribute="leading" secondItem="S0x-sS-gOT" secondAttribute="leading" constant="10" id="W4D-W1-EZS"/>
+                            <constraint firstItem="ueV-XT-5wh" firstAttribute="top" secondItem="Aho-98-0G3" secondAttribute="bottom" constant="10" id="evk-RI-4zP"/>
                             <constraint firstItem="Aho-98-0G3" firstAttribute="top" secondItem="Hbp-wY-ZBG" secondAttribute="bottom" constant="10" id="one-uT-lFN"/>
                             <constraint firstAttribute="trailing" secondItem="Aho-98-0G3" secondAttribute="trailing" constant="10" id="sqB-me-IXm"/>
-                            <constraint firstItem="Kev-Fw-iCu" firstAttribute="top" secondItem="Aho-98-0G3" secondAttribute="bottom" id="xvF-Fo-cra"/>
+                            <constraint firstItem="QbR-vL-uYg" firstAttribute="top" secondItem="ueV-XT-5wh" secondAttribute="bottom" id="tlX-j1-Gm4"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="场景" id="XoG-g2-KYf">
@@ -310,7 +311,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="Aho-98-0G3" id="Ijk-lo-dAa"/>
-                        <outlet property="scrollerView" destination="Kev-Fw-iCu" id="kW0-w9-b0W"/>
+                        <outlet property="roomView" destination="ueV-XT-5wh" id="kVL-ZE-UyR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U47-Xi-iD1" userLabel="First Responder" sceneMemberID="firstResponder"/>

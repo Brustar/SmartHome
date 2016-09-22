@@ -17,7 +17,7 @@
 #import "VolumeManager.h"
 #import "SCWaveAnimationView.h"
 #import "SocketManager.h"
-#import "DeviceManager.h"
+#import "SQLManager.h"
 #import "HttpManager.h"
 #import "ChannelManager.h"
 #import "MBProgressHUD+NJ.h"
@@ -119,13 +119,13 @@
 {
     _roomID = roomID;
     if(roomID){
-        self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"网络电视"];
+        self.deviceid = [SQLManager deviceIDWithRoomID:self.roomID withType:@"网络电视"];
         if(self.sceneid > 0)
         {
-            NSArray *tvArr = [DeviceManager getDeviceIDsBySeneId:[self.sceneid intValue]];
+            NSArray *tvArr = [SQLManager getDeviceIDsBySeneId:[self.sceneid intValue]];
             for(int i = 0; i <tvArr.count; i++)
             {
-                NSString *typeName = [DeviceManager deviceTypeNameByDeviceID:[tvArr[i] intValue]];
+                NSString *typeName = [SQLManager deviceTypeNameByDeviceID:[tvArr[i] intValue]];
                 if([typeName isEqualToString:@"网络电视"])
                 {
                     self.deviceid = tvArr[i];
@@ -144,7 +144,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"电视";
-    self.eNumber = [DeviceManager getENumber:[self.deviceid intValue]];
+    self.eNumber = [SQLManager getENumber:[self.deviceid intValue]];
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
@@ -554,7 +554,7 @@
 
 -(void)writeTVChannelsConfigDataToSQL:(NSDictionary *)responseObject withParent:(NSString *)parent
 {
-    FMDatabase *db = [DeviceManager connetdb];
+    FMDatabase *db = [SQLManager connetdb];
     int cNumber = [self.channeNumber.text intValue];
     if([db open])
     {

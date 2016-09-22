@@ -8,7 +8,7 @@
 
 #import "ProjectController.h"
 #import "DetailTableViewCell.h"
-#import "DeviceManager.h"
+#import "SQLManager.h"
 
 @interface ProjectController ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
@@ -28,10 +28,10 @@
         _projectIds = [NSMutableArray array];
         if(self.sceneid > 0 && self.isAddDevice)
         {
-            NSArray *projects = [DeviceManager getDeviceIDsBySeneId:[self.sceneid intValue]];
+            NSArray *projects = [SQLManager getDeviceIDsBySeneId:[self.sceneid intValue]];
             for(int i = 0; i < projects.count; i++)
             {
-                NSString *typeName = [DeviceManager deviceTypeNameByDeviceID:[projects[i] intValue]];
+                NSString *typeName = [SQLManager deviceTypeNameByDeviceID:[projects[i] intValue]];
                 if([typeName isEqualToString:@"投影"])
                 {
                     [_projectIds addObject:projects[i]];
@@ -40,7 +40,7 @@
             }
         }else if(self.roomID)
         {
-            [_projectIds addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"投影" andRoomID:self.roomID]];
+            [_projectIds addObjectsFromArray:[SQLManager getDeviceByTypeName:@"投影" andRoomID:self.roomID]];
         }else{
             [_projectIds addObject:self.deviceid];
         }
@@ -55,7 +55,7 @@
         for(int i = 0; i < self.projectIds.count; i++)
         {
             int projectID = [self.projectIds[i] intValue];
-            [_projectNames addObject:[DeviceManager deviceNameByDeviceID:projectID]];
+            [_projectNames addObject:[SQLManager deviceNameByDeviceID:projectID]];
         }
         
     }

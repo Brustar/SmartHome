@@ -8,7 +8,7 @@
 
 #import "EnergyOfDeviceController.h"
 #import "EnegryOfDeviceCell.h"
-#import "DeviceManager.h"
+#import "SQLManager.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 

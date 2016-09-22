@@ -10,14 +10,14 @@
 #import "IOManager.h"
 #import "Room.h"
 #import "FMDatabase.h"
-#import "DeviceManager.h"
+#import "SQLManager.h"
 
 @implementation RoomManager
 
 //根据主机ID获取房间配置信息
 +(NSArray *)getAllRoomsInfo
 {
-    FMDatabase *db = [DeviceManager connetdb];
+    FMDatabase *db = [SQLManager connetdb];
     NSMutableArray *roomList = [NSMutableArray array];
     if([db open])
     {
@@ -48,7 +48,7 @@
 
 +(int)getRoomIDByRoomName:(NSString *)rName;
 {
-    FMDatabase *db = [DeviceManager connetdb];
+    FMDatabase *db = [SQLManager connetdb];
     int rID ;
     if([db open])
     {
@@ -63,5 +63,22 @@
     [db close];
     return rID;
 }
++(NSString *)getRoomNameByRoomID:(int) rId
+{
+    FMDatabase *db = [SQLManager connetdb];
+    NSString *rName ;
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Rooms where ID = %d",rId];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            rName = [resultSet stringForColumn:@"roomName"];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return rName;
 
+}
 @end

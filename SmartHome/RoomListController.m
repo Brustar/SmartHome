@@ -16,6 +16,7 @@
 #import "SunCount.h"
 #import "Scene.h"
 #import "SceneManager.h"
+#import "SQLManager.h"
 @interface RoomListController ()<UITableViewDataSource,UITableViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,CLLocationManagerDelegate>
 @property (nonatomic,strong) NSArray *rooms;
 @property (weak, nonatomic) IBOutlet UIView *timeView;
@@ -113,7 +114,7 @@
 {
     if(!_rooms)
     {
-        _rooms = [RoomManager getAllRoomsInfo];
+        _rooms = [SQLManager getAllRoomsInfo];
     }
     return _rooms;
 }

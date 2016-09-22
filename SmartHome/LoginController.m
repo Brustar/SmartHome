@@ -12,7 +12,7 @@
 #import "WebManager.h"
 #import "RegexKitLite.h"
 #import "SocketManager.h"
-#import "ScenseController.h"
+#import "SceneController.h"
 #import "QRCodeReaderDelegate.h"
 #import "QRCodeReader.h"
 #import "QRCodeReaderViewController.h"
@@ -22,7 +22,7 @@
 #import "ServiceRecordViewController.h"
 #import "RegisterDetailController.h"
 #import "ECloudTabBarController.h"
-#import "DeviceManager.h"
+#import "SQLManager.h"
 #import "RoomManager.h"
 #import "FMDatabase.h"
 #import "DeviceInfo.h"
@@ -238,7 +238,7 @@
 -(void)writDevicesConfigDatesToSQL:(NSDictionary *)responseObject
 {
     
-    FMDatabase *db = [DeviceManager connetdb];
+    FMDatabase *db = [SQLManager connetdb];
     if([db open])
     {
         
@@ -278,7 +278,7 @@
 //写房间配置信息到SQL
 -(void)writeRoomsConfigDataToSQL:(NSDictionary *)responseObject
 {
-    FMDatabase *db = [DeviceManager connetdb];
+    FMDatabase *db = [SQLManager connetdb];
     if([db open])
     {
         NSDictionary *messageInfo = responseObject[@"messageInfo"];
@@ -320,7 +320,7 @@
 //写场景配置信息到SQL
 -(void)writeScensConfigDataToSQL:(NSDictionary *)responseObject
 {
-    FMDatabase *db = [DeviceManager connetdb];
+    FMDatabase *db = [SQLManager connetdb];
     if([db open])
     {
         NSArray *messageInfo = responseObject[@"messageInfo"];
@@ -397,7 +397,7 @@
 //写电视频道配置信息到SQL
 -(void)writeTVChannelsConfigDataToSQL:(NSDictionary *)responseObject withParent:(NSString *)parent
 {
-    FMDatabase *db = [DeviceManager connetdb];
+    FMDatabase *db = [SQLManager connetdb];
     if([db open])
     {
         NSArray *messageInfo = responseObject[@"messageInfo"];

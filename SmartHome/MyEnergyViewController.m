@@ -11,7 +11,7 @@
 #import "DetailList.h"
 #import "EnergyOfDeviceController.h"
 #import "HttpManager.h"
-#import "DeviceManager.h"
+#import "SQLManager.h"
 #import "Device.h"
 #import "DeviceInfo.h"
 #import "MBProgressHUD+NJ.h"
@@ -50,7 +50,7 @@
 -(NSArray *)devicesInfo{
     if(!_devicesInfo)
     {
-        _devicesInfo = [DeviceManager getAllDevicesInfo];
+        _devicesInfo = [SQLManager getAllDevicesInfo];
     }
     return _devicesInfo;
 }
@@ -108,13 +108,13 @@
     
     [self sendRequestToGetEenrgy];
     
-    self.deviceType = [DeviceManager getAllDeviceSubTypes];
+    self.deviceType = [SQLManager getAllDeviceSubTypes];
     
     self.selectedDeviceTableView.hidden = YES;
     self.deviceIDs = [NSMutableArray array];
     
     for (NSString *subName in self.deviceType) {
-        NSArray *subNameID = [DeviceManager getDeviceIDBySubName:subName];
+        NSArray *subNameID = [SQLManager getDeviceIDBySubName:subName];
         [self.deviceIDs addObject:subNameID];
     }
     
@@ -272,7 +272,7 @@
         btn.titleLabel.font = [UIFont systemFontOfSize:15];
         btn.titleLabel.textAlignment =NSTextAlignmentLeft;
         btn.frame = CGRectMake(30, 10, 120, 30);
-        NSString *title = [DeviceManager getNameWithID:[deviceIDs[i] intValue]];
+        NSString *title = [SQLManager getNameWithID:[deviceIDs[i] intValue]];
         [btn setTitle:title forState:UIControlStateNormal];
         btn.tag = [deviceIDs[i] intValue];
         

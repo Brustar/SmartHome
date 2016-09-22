@@ -9,13 +9,13 @@
 #import "DetailList.h"
 #import "FMDatabase.h"
 #import "FMResultSet.h"
-#import "DeviceManager.h"
+#import "SQLManager.h"
 
 @implementation DetailList
 
 +(NSArray *)getDetailListWithID:(NSInteger)ID
 {
-    FMDatabase *db = [DeviceManager connetdb];
+    FMDatabase *db = [SQLManager connetdb];
     if (![db open]) {
         NSLog(@"Could not open db.");
         return nil;
@@ -38,7 +38,7 @@
 
 +(NSArray *)getDeviceForModel:(NSString *)str
 {
-    FMDatabase *db = [DeviceManager connetdb];
+    FMDatabase *db = [SQLManager connetdb];
     if (![db open]) {
         NSLog(@"Could not open db.");
         return nil;

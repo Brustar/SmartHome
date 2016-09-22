@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface areaSettingCell : UITableViewCell
+@interface AreaSettingCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *areaLabel;
 

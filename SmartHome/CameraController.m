@@ -7,7 +7,7 @@
 //
 
 #import "CameraController.h"
-#import "DeviceManager.h"
+#import "SQLManager.h"
 #define LERP(A,B,C) ((A)*(1.0-C)+(B)*C)
 
 @interface CameraController ()
@@ -21,11 +21,11 @@
 {
     if(self.roomID)
     {
-        self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"摄像头"];
+        self.deviceid = [SQLManager deviceIDWithRoomID:self.roomID withType:@"摄像头"];
     }
     
     
-    NSString *url = [DeviceManager getUrlByDeviceId:[self.deviceid intValue]];
+    NSString *url = [SQLManager getUrlByDeviceId:[self.deviceid intValue]];
     
         _video = [[RTSPPlayer alloc] initWithVideo:url usesTcp:YES];
         _video.outputWidth = 426;

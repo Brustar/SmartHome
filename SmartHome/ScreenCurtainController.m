@@ -8,9 +8,7 @@
 
 #import "ScreenCurtainController.h"
 #import "DetailTableViewCell.h"
-#import "DeviceManager.h"
-
-
+#import "SQLManager.h"
 
 @interface ScreenCurtainController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -30,10 +28,10 @@
         _screenCurtainIds = [NSMutableArray array];
         if(self.sceneid > 0 && !_isAddDevice )
         {
-            NSArray *screenCurtain = [DeviceManager getDeviceIDsBySeneId:[self.sceneid intValue]];
+            NSArray *screenCurtain = [SQLManager getDeviceIDsBySeneId:[self.sceneid intValue]];
             for(int i = 0; i < screenCurtain.count; i++)
             {
-                NSString *typeName = [DeviceManager deviceTypeNameByDeviceID:[screenCurtain[i] intValue]];
+                NSString *typeName = [SQLManager deviceTypeNameByDeviceID:[screenCurtain[i] intValue]];
                 if([typeName isEqualToString:@"幕布"])
                 {
                     [_screenCurtainIds addObject:screenCurtain[i]];
@@ -42,7 +40,7 @@
             }
         }else if(self.roomID)
         {
-            [_screenCurtainIds addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"幕布" andRoomID:self.roomID]];
+            [_screenCurtainIds addObjectsFromArray:[SQLManager getDeviceByTypeName:@"幕布" andRoomID:self.roomID]];
         }else{
             [_screenCurtainIds addObject:self.deviceid];
         }
@@ -57,7 +55,7 @@
         for(int i = 0; i < self.screenCurtainIds.count; i++)
         {
             int screenCurtainID = [self.screenCurtainIds[i] intValue];
-            [_screenCurtainNames addObject:[DeviceManager deviceNameByDeviceID:screenCurtainID]];
+            [_screenCurtainNames addObject:[SQLManager deviceNameByDeviceID:screenCurtainID]];
         }
  
     }

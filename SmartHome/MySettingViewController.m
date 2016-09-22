@@ -20,7 +20,7 @@
 @property (nonatomic,strong) NSArray *titleArr;
 @property (nonatomic,strong) AccessSettingController *accessVC;
 @property (nonatomic,strong) SystemSettingViewController *sySetVC;
-@property (nonatomic,strong) systemInfomationController *inforVC;
+@property (nonatomic,strong) SystemInfomationController *inforVC;
 @property (nonatomic,strong) AboutUsController *aboutVC;
 
 @end

@@ -12,7 +12,7 @@
 #import "SceneManager.h"
 #import "PackManager.h"
 #import "SocketManager.h"
-#import "DeviceManager.h"
+#import "SQLManager.h"
 
 @interface GuardController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -35,7 +35,7 @@
     self.title = @"门禁";
     if(self.roomID)
     {
-        self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"智能门锁"];
+        self.deviceid = [SQLManager deviceIDWithRoomID:self.roomID withType:@"智能门锁"];
 
     }
     
@@ -85,7 +85,7 @@
     }
     
     if (tag==0 && (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON)) {
-        NSString *devID=[DeviceManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID) masterID:[[DeviceInfo defaultManager] masterID]];
+        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID) masterID:[[DeviceInfo defaultManager] masterID]];
         if ([devID intValue]==[self.deviceid intValue]) {
             self.switchView.on=proto.action.state;
         }

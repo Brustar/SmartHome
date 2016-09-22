@@ -14,7 +14,7 @@
 #import "IATConfig.h"
 #import "FMDatabase.h"
 #import "SceneManager.h"
-#import "DeviceManager.h"
+#import "SQLManager.h"
 #import "RegexKitLite.h"
 #import "SCSiriWaveformView.h"
 #import <AVFoundation/AVFoundation.h>
@@ -227,7 +227,7 @@
     NSLog(@"resultFromJson=%@",resultFromJson);
     NSLog(@"isLast=%d,_textView.text=%@",isLast,self.resultLabel.text);
     
-    self.sceneID =[DeviceManager getSceneID:self.resultLabel.text];
+    self.sceneID =[SQLManager getSceneID:self.resultLabel.text];
     if (self.sceneID>0) {
         self.sampleLabel.text = @"找到匹配项";
         [[SceneManager defaultManager] startScene:self.sceneID];
@@ -271,7 +271,7 @@
 {
     id theSegue = segue.destinationViewController;
     [theSegue setValue:[NSNumber numberWithInt:self.sceneID] forKey:@"sceneID"];
-    int roomId = [DeviceManager getRoomID:self.sceneID];
+    int roomId = [SQLManager getRoomID:self.sceneID];
     
     [theSegue setValue:[NSNumber numberWithInt:roomId] forKey:@"roomID"];
     

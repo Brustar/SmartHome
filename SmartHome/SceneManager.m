@@ -9,7 +9,7 @@
 #import "SceneManager.h"
 #import "RegexKitLite.h"
 #import "Device.h"
-#import "DeviceManager.h"
+#import "SQLManager.h"
 
 #import "MBProgressHUD+NJ.h"
 
@@ -19,7 +19,7 @@
 #import "Projector.h"
 #import "SocketManager.h"
 #import "AppDelegate.h"
-#import "ScenseController.h"
+#import "SceneController.h"
 #import "AFHTTPSessionManager.h"
 #import "UploadManager.h"
 #import "MBProgressHUD+NJ.h"
@@ -41,8 +41,8 @@
 {
     if (name) {
         
-        int sceneid=[DeviceManager saveMaxSceneId:scene name:name pic:@""];
-        scene.sceneID=sceneid;
+      // int sceneid=[SQLManager saveMaxSceneId:scene name:name pic:@""];
+       // scene.sceneID=sceneid;
         
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"yyyyMMddHHmmss";
@@ -57,10 +57,10 @@
         NSDictionary *parameter;
         if(![scene.startTime isEqualToString:@""])
         {
-            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":imgFileName,@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:1],@"StartTime":scene.startTime,@"AstronomicalTime":scene.astronomicalTime,@"PlanType":[NSNumber numberWithInt:scene.planType],@"WeekValue":scene.weekValue,@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
+            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":imgFileName,@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:1],@"StartTime":scene.startTime,@"AstronomicalTime":scene.astronomicalTime,@"PlanType":[NSNumber numberWithInt:scene.planType],@"WeekValue":scene.weekValue,@"RoomID":[NSNumber numberWithInt:scene.roomID]};
         }else{
             
-            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":imgFileName,@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:2],@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
+            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":imgFileName,@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:2],@"RoomID":[NSNumber numberWithInt:scene.roomID]};
         }
         
         
@@ -72,12 +72,16 @@
         NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
         [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName imgData:imgData imgFileName:imgFileName completion:^(id responseObject) {
             
+            [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, [responseObject[@"SID"] intValue]] scene:scene];
+            NSString *roomName = [SQLManager getRoomNameByRoomID:[responseObject[@"SID"] intValue]];
             //插入数据库
-            FMDatabase *db = [DeviceManager connetdb];
+            FMDatabase *db = [SQLManager connetdb];
             if([db open])
             {
                
-                NSString *sql = [NSString stringWithFormat:@"update Scenes set pic = '%@' where ID = %d",responseObject[@"ImgUrl"],scene.sceneID];
+              
+                
+                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,'%@',%d)",[responseObject[@"SID"] intValue],name,roomName,responseObject[@"ImgUrl"] ,scene.roomID,2,@"0",0];
                BOOL result = [db executeUpdate:sql];
                 if(result)
                 {
@@ -111,7 +115,7 @@
         NSData *imgData = UIImagePNGRepresentation(image);
         
         NSDictionary *parameter;
-        int sceneid=[DeviceManager saveMaxSceneId:scene name:name pic:@""];
+        int sceneid=[SQLManager saveMaxSceneId:scene name:name pic:@""];
         scene.sceneID=sceneid;
        
         if(![scene.startTime isEqualToString:@""] )
@@ -124,7 +128,9 @@
 
         NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
         [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName imgData:imgData imgFileName:imgFileName completion:^(id responseObject) {
-            FMDatabase *db = [DeviceManager connetdb];
+            
+             [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, [responseObject[@"SID"] intValue]] scene:scene];
+            FMDatabase *db = [SQLManager connetdb];
             if([db open])
             {
                 
@@ -166,13 +172,13 @@
     //上传文件
 }
 
-//保证newScene的ID不变f
+//保证newScene的ID不变
 - (void) editScene:(Scene *)newScene
 {
     [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, newScene.sceneID ] scene:newScene];
     //同步云端
     NSString *fileName = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,newScene.sceneID];
-    newScene.sceneName = [DeviceManager getSceneName:newScene.sceneID];
+    newScene.sceneName = [SQLManager getSceneName:newScene.sceneID];
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:fileName];
      NSDictionary *parameter;
     if(newScene.isPlan == 1)
@@ -184,7 +190,9 @@
     }
     NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
     NSString *URL = [NSString stringWithFormat:@"%@SceneEdit.aspx",[IOManager httpAddr]];
-    [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName imgData:nil imgFileName:@"" completion:nil];
+    [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName imgData:nil imgFileName:@"" completion:^(id responseObject) {
+        
+    }];
     
   
 }
@@ -196,19 +204,22 @@
     BOOL ret = [dic writeToFile:scenePath atomically:YES];
     if(ret)
     {
-        //写sqlite更新场景文件名
-        FMDatabase *db = [DeviceManager connetdb];
+       // 写sqlite更新场景文件名
+        FMDatabase *db = [SQLManager connetdb];
         if (![db open]) {
             NSLog(@"Could not open db.");
             return ;
         }
-        [db executeUpdate:@"UPDATE Scenes SET name = ? , isFavorite = 1 WHERE id = ?",name,[NSNumber numberWithInt:newScene.sceneID]];                                  
+        BOOL result =[db executeUpdate:@"UPDATE Scenes SET isFavorite = 1 WHERE id = ?",[NSNumber numberWithInt:newScene.sceneID]];
+        if(result)
+        {
+            NSLog(@"收藏成功");
+        }
         [db close];
         //同步云端
         
         //上传文件
     }
-    
 }
 
 - (Scene *)readSceneByID:(int)sceneid
@@ -358,7 +369,7 @@
     NSData *data=nil;
     SocketManager *sock=[SocketManager defaultManager];
     //面板场景
-    if ([DeviceManager getReadOnly:sceneid]) {
+    if ([SQLManager getReadOnly:sceneid]) {
         data = [[DeviceInfo defaultManager] startScenenAtMaster:sceneid];
         [sock.socket writeData:data withTimeout:1 tag:1];
         return;
@@ -572,184 +583,5 @@
     return -1;
 }
 
-+(NSArray *)allSceneModels
-{
-    FMDatabase *db = [DeviceManager connetdb];
-    NSMutableArray *sceneModles = [NSMutableArray array];
-    if([db open])
-    {
-        FMResultSet *resultSet = [db executeQuery:@"select * from Scenes"];
-        while([resultSet next])
-        {
-            Scene *scene = [Scene new];
-            scene.sceneID = [resultSet intForColumn:@"ID"];
-            scene.sceneName = [resultSet stringForColumn:@"NAME"];
-            scene.roomID = [resultSet intForColumn:@"roomName"];
-            
-            scene.picName =[resultSet stringForColumn:@"pic"];
-            scene.isFavorite = [resultSet boolForColumn:@"isFavorite"];
-            
-            scene.startTime = [resultSet stringForColumn:@"startTime"];
-            scene.astronomicalTime = [resultSet stringForColumn:@"astronomicalTime"];
-            scene.weekValue = [resultSet stringForColumn:@"weekValue"];
-            scene.weekRepeat = [resultSet intForColumn:@"weekRepeat"];
-            
-             scene.roomID = [resultSet intForColumn:@"rId"];
-           
-            [sceneModles addObject:scene];
-            
-        }
-    }
-    [db closeOpenResultSets];
-    [db close];
-    return [sceneModles copy];
-}
-//根据场景中的设备ID获得该场景中的所有设备
-+(NSArray *)devicesBySceneID:(int)sId
-{
-    NSArray *devices = [NSArray array];
-    NSArray *arrs = [self allSceneModels];
-    for(Scene *scene in arrs)
-    {
-        if(scene.sceneID == sId)
-        {
-           devices = [DeviceManager devicesByRoomId:scene.roomID];
-        }
-    }
-    return devices;
-}
 
-+ (NSArray *)getAllSceneWithRoomID:(int)roomID
-{
-    FMDatabase *db = [DeviceManager connetdb];
-    NSMutableArray *sceneModles = [NSMutableArray array];
-   
-    if([db open])
-    {
-        NSString *sql = [NSString stringWithFormat:@"select * from Scenes where rId=%d", roomID];
-        FMResultSet *resultSet = [db executeQuery:sql];
-        while([resultSet next])
-        {
-            
-           Scene *scene = [SceneManager parseScene:resultSet];
-            [sceneModles addObject:scene];
-        }
-    }
-    [db closeOpenResultSets];
-    [db close];
-    return [sceneModles copy];
-}
-+(Scene*)parseScene:(FMResultSet *)resultSet
-{
-    
-        Scene *scene = [Scene new];
-        scene.sceneID = [resultSet intForColumn:@"ID"];
-        scene.sceneName = [resultSet stringForColumn:@"NAME"];
-        scene.roomName = [resultSet stringForColumn:@"roomName"];
-        
-        scene.picName =[resultSet stringForColumn:@"pic"];
-        scene.isFavorite = [resultSet boolForColumn:@"isFavorite"];
-        scene.roomID = [resultSet intForColumn:@"rId"];
-        int sType = [resultSet intForColumn:@"sType"];
-        if(sType == 1)
-        {
-            scene.readonly = YES;
-        }
-    
-        return scene;
-    
-}
-+(Scene *)sceneBySceneID:(int)sId
-{
-    FMDatabase *db = [DeviceManager connetdb];
-    Scene *scene = [Scene new];
-    if([db open])
-    {
-        NSString *sql = [NSString stringWithFormat:@"select * from Scenes where ID = %d",sId];
-        FMResultSet *resultSet = [db executeQuery:sql];
-        
-        while([resultSet next])
-        {
-            scene = [SceneManager parseScene:resultSet];
-        }
-     
-    }
-    [db closeOpenResultSets];
-    [db close];
-    return scene;
-}
-
-+(BOOL)deleteScene:(int)sceneId
-{
-    FMDatabase *db = [DeviceManager connetdb];
-    BOOL isSuccess = false;
-    if([db open])
-    {
-        isSuccess = [db executeUpdateWithFormat:@"delete from Scenes where ID = %d",sceneId];
-    }
-    [db closeOpenResultSets];
-    [db close];
-    return isSuccess;
-
-}
-//根据房间ID获取该房间所有的场景
-+(NSArray *)getScensByRoomId:(int)roomId
-{
-    NSMutableArray *scens = [NSMutableArray array];
-    FMDatabase *db = [DeviceManager connetdb];
-    if([db open])
-    {
-        FMResultSet *resultSet = [db executeQueryWithFormat:@"select * from Scenes where rId = %d",roomId];
-        while ([resultSet next]) {
-            Scene *scene = [Scene new];
-            scene.sceneName = [resultSet stringForColumn:@"NAME"];
-            scene.sceneID = [resultSet intForColumn:@"ID"];
-            scene.picName = [resultSet stringForColumn:@"pic"];
-            scene.roomName = [resultSet stringForColumn:@"roomName"];
-            [scens addObject:scene];
-        }
-    }
-    [db closeOpenResultSets];
-    [db close];
-    return [scens copy];
-}
-//得到数据库中所有的场景ID
-+(NSArray *)getAllSceneIdsFromSql
-{
-    NSMutableArray *sceneIds = [NSMutableArray array];
-    FMDatabase *db = [DeviceManager connetdb];
-    if([db open])
-    {
-        NSString *sql = @"select ID from Scenes";
-        FMResultSet *resultSet = [db executeQuery:sql];
-        while ([resultSet next]) {
-            int scendID = [resultSet intForColumn:@"ID"];
-            [sceneIds addObject: [NSNumber numberWithInt:scendID]];
-        }
-    }
-    [db closeOpenResultSets];
-    [db close];
-    return [sceneIds copy];
-}
-
-+(NSArray *)getFavorScene
-{
-    NSMutableArray *scens = [NSMutableArray array];
-    FMDatabase *db = [DeviceManager connetdb];
-    if([db open])
-    {
-        FMResultSet *resultSet = [db executeQuery:@"select * from Scenes where isFavorite = 1"];
-        while ([resultSet next]) {
-            Scene *scene = [Scene new];
-            scene.sceneName = [resultSet stringForColumn:@"NAME"];
-            scene.sceneID = [resultSet intForColumn:@"ID"];
-            scene.picName = [resultSet stringForColumn:@"pic"];
-            scene.roomName = [resultSet stringForColumn:@"roomName"];
-            [scens addObject:scene];
-        }
-    }
-    [db closeOpenResultSets];
-    [db close];
-    return [scens copy];
-}
 @end

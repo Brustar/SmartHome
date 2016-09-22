@@ -11,8 +11,5 @@
 @interface RoomManager : NSObject
 
 
-+(NSArray *)getAllRoomsInfo;
-
-+(int)getRoomIDByRoomName:(NSString *)rName;
 
 @end

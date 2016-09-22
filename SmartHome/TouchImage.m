@@ -9,7 +9,7 @@
 #import "TouchImage.h"
 
 #import "planeScene.h"
-#import "DeviceManager.h"
+#import "SQLManager.h"
 
 
 @interface TouchImage()
@@ -68,7 +68,7 @@
         if (CGRectContainsPoint(rt,point)) {
             ((planeScene *)self.delegate).deviceID=[rect[@"deviceID"] intValue];
             self.deviceID = [rect[@"deviceID"] intValue];
-             NSString *typeName = [DeviceManager deviceTypeNameByDeviceID:self.deviceID];
+             NSString *typeName = [SQLManager deviceTypeNameByDeviceID:self.deviceID];
             NSString *segue;
             if([typeName isEqualToString:@"灯光"]){
                 segue = @"plane_Light";

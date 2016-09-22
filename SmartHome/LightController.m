@@ -9,7 +9,7 @@
 #import "LightController.h"
 #import "PackManager.h"
 #import "SocketManager.h"
-#import "DeviceManager.h"
+#import "SQLManager.h"
 #import "Device.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
@@ -44,10 +44,10 @@
            if(self.sceneid > 0 && !self.isAddDevice)
            {
            
-               NSArray *lightArr = [DeviceManager getDeviceIDsBySeneId:[self.sceneid intValue]];
+               NSArray *lightArr = [SQLManager getDeviceIDsBySeneId:[self.sceneid intValue]];
                for(int i = 0; i <lightArr.count; i++)
                {
-                   NSString *typeName = [DeviceManager deviceTypeNameByDeviceID:[lightArr[i] intValue]];
+                   NSString *typeName = [SQLManager deviceTypeNameByDeviceID:[lightArr[i] intValue]];
                    if([typeName isEqualToString:@"灯光"])
                    {
                        [_lIDs addObject:lightArr[i]];
@@ -56,9 +56,9 @@
                
                
            }else if(self.roomID > 0){
-               [_lIDs addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"开关灯" andRoomID:self.roomID]];
-               [_lIDs addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"调光灯" andRoomID:self.roomID]];
-               [_lIDs addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"调色灯" andRoomID:self.roomID]];
+               [_lIDs addObjectsFromArray:[SQLManager getDeviceByTypeName:@"开关灯" andRoomID:self.roomID]];
+               [_lIDs addObjectsFromArray:[SQLManager getDeviceByTypeName:@"调光灯" andRoomID:self.roomID]];
+               [_lIDs addObjectsFromArray:[SQLManager getDeviceByTypeName:@"调色灯" andRoomID:self.roomID]];
 
            }else{
                [_lIDs addObject:self.deviceid];
@@ -76,7 +76,7 @@
         for(int i = 0; i < self.lIDs.count; i++)
         {
             int lID = [self.lIDs[i] intValue];
-            NSString *name = [DeviceManager deviceNameByDeviceID:lID];
+            NSString *name = [SQLManager deviceNameByDeviceID:lID];
             [_lNames addObject:name];
         }
     }
@@ -195,7 +195,7 @@
 
 -(IBAction)save:(id)sender
 {
-    NSString *etype = [DeviceManager getEType:[self.deviceid intValue]];
+    NSString *etype = [SQLManager getEType:[self.deviceid intValue]];
     
     if ([sender isEqual:self.detailCell.power]) {
         NSData *data=[[DeviceInfo defaultManager] toogleLight:self.detailCell.power.isOn deviceID:self.deviceid];
@@ -266,7 +266,7 @@
     }
     
     if (tag == 0 && (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON || proto.action.state == 0x0b || proto.action.state == 0x0a)) {
-        NSString *devID=[DeviceManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID) masterID:[[DeviceInfo defaultManager] masterID]];
+        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID) masterID:[[DeviceInfo defaultManager] masterID]];
         if ([devID intValue]==[self.deviceid intValue]) {
             //创建一个消息对象
             NSNotification * notice = [NSNotification notificationWithName:@"light" object:nil userInfo:@{@"state":@(proto.action.state),@"r":@(proto.action.RValue),@"g":@(proto.action.G),@"b":@(proto.action.B)}];
@@ -324,7 +324,7 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSString *typeName = [DeviceManager lightTypeNameByDeviceID:[self.deviceid intValue]];
+    NSString *typeName = [SQLManager lightTypeNameByDeviceID:[self.deviceid intValue]];
     if ([typeName isEqualToString:@"调色灯"]) {
         return 3;
     }else{
@@ -335,7 +335,7 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    NSString *typeName = [DeviceManager lightTypeNameByDeviceID:[self.deviceid intValue]];
+    NSString *typeName = [SQLManager lightTypeNameByDeviceID:[self.deviceid intValue]];
     
     if(indexPath.row == 0)
     {
@@ -397,7 +397,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSString *typeName = [DeviceManager lightTypeNameByDeviceID:[self.deviceid intValue]];
+    NSString *typeName = [SQLManager lightTypeNameByDeviceID:[self.deviceid intValue]];
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 1)

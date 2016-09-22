@@ -15,7 +15,7 @@
 #import "DVDController.h"
 #import "NetvController.h"
 #import "FMController.h"
-#import "DeviceManager.h"
+#import "SQLManager.h"
 #import "Device.h"
 #import "SceneManager.h"
 #import "DeviceListController.h"
@@ -28,6 +28,8 @@
 #import "GuardController.h"
 #import "ScreenCurtainController.h"
 #import "ProjectController.h"
+#import "AmplifierController.h"
+#import "WindowSlidingController.h"
 
 @interface UIImagePickerController (LandScapeImagePicker)
 
@@ -87,6 +89,31 @@
 
 @property (weak, nonatomic) UIViewController *currentViewController;
 @end
+@interface UIImagePickerController (LandScapeImagePicker)
+
+- (UIStatusBarStyle)preferredStatusBarStyle;
+- (NSUInteger)supportedInterfaceOrientations;
+- (BOOL)prefersStatusBarHidden;
+@end
+
+@implementation UIImagePickerController (LandScapeImagePicker)
+
+- (NSUInteger) supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskLandscape;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
+
+@end
 
 @implementation EditSceneController
 
@@ -99,8 +126,8 @@
     self.tableView.backgroundColor = backGroudColour;
     self.subDeviceTableView.backgroundColor = backGroudColour;
     self.view.backgroundColor = backGroudColour;
-    self.title= [DeviceManager getSceneName:self.sceneID];
-    Scene *scene = [SceneManager sceneBySceneID:self.sceneID];
+    self.title= [SQLManager getSceneName:self.sceneID];
+    Scene *scene = [SQLManager sceneBySceneID:self.sceneID];
     if(scene.readonly == YES)
     {
         [self.deleteBtn setEnabled:NO];
@@ -112,9 +139,9 @@
 - (void)setupData
 {
    
-    self.devicesTypes = [DeviceManager getSubTydpeBySceneID:self.sceneID];
+    self.devicesTypes = [SQLManager getSubTydpeBySceneID:self.sceneID];
     
-       self.subTypeArr = [DeviceManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.devicesTypes[0]];
+       self.subTypeArr = [SQLManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.devicesTypes[0]];
     
     [self.tableView reloadData];
     [self.subDeviceTableView reloadData];
@@ -159,7 +186,7 @@
     {
         
    // self.subTypeArr =  [DeviceManager getDeviceTypeNameWithRoomID:self.roomID sceneID:self.sceneID subTypeName:self.devicesTypes[indexPath.row]];
-     self.subTypeArr = [DeviceManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.devicesTypes[indexPath.row]];
+     self.subTypeArr = [SQLManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.devicesTypes[indexPath.row]];
     [self.subDeviceTableView reloadData];
     }
     if(tableView == self.subDeviceTableView)
@@ -242,6 +269,18 @@
             projectVC.roomID = self.roomID;
             projectVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
             [self addViewAndVC:projectVC];
+        }else if([typeName isEqualToString:@"功放"]){
+            AmplifierController *amplifierVC = [storyBoard instantiateViewControllerWithIdentifier:@"AmplifierController"];
+            amplifierVC.roomID = self.roomID;
+            amplifierVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+            [self addViewAndVC:amplifierVC];
+            
+        }else if([typeName isEqualToString:@"智能推窗器"]){
+            WindowSlidingController *windowSlidVC = [storyBoard instantiateViewControllerWithIdentifier:@"WindowSlidingController"];
+            windowSlidVC.roomID = self.roomID;
+            windowSlidVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+            [self addViewAndVC:windowSlidVC];
+            
         }else{
             PluginViewController *pluginVC = [storyBoard instantiateViewControllerWithIdentifier:@"PluginViewController"];
             pluginVC.roomID = self.roomID;
@@ -322,26 +361,23 @@
      UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"收藏场景" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:  UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
-        UITextField *nameTextFiel = alert.textFields[0];
-        nameTextFiel.placeholder = @"请输入场景名";
-        if(nameTextFiel.text)
-        {
-            Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
-            scene.sceneName = nameTextFiel.text;
-            
-            [[SceneManager defaultManager] favoriteScene:scene withName:scene.sceneName];
-           
+//        UITextField *nameTextFiel = alert.textFields[0];
+//        nameTextFiel.placeholder = @"请输入场景名";
 
-        }
+
+            Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
+        
+        
+            [[SceneManager defaultManager] favoriteScene:scene withName:scene.sceneName];
+        
+
+
        
     }];
     UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     [alert addAction:action1];
     [alert addAction:action2];
-    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-        textField.textColor = [UIColor blackColor];
-        textField.placeholder = @"场景名";
-    }];
+    
     [self presentViewController:alert animated:YES completion:nil];
 
 
@@ -449,7 +485,7 @@
 - (IBAction)deleteScene:(UIBarButtonItem *)sender {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"确定删除吗" message:@"" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *sureAction =  [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [SceneManager deleteScene:self.sceneID];
+        [SQLManager deleteScene:self.sceneID];
         
         Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
         [[SceneManager defaultManager] delScene:scene];

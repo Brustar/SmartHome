@@ -12,7 +12,7 @@
 #import "MBProgressHUD+NJ.h"
 #import "VolumeManager.h"
 #import "SocketManager.h"
-#import "DeviceManager.h"
+#import "SQLManager.h"
 #import "ChannelManager.h"
 #import "HttpManager.h"
 #import "PackManager.h"
@@ -67,7 +67,7 @@
     _roomID = roomID;
     if(roomID)
     {
-        self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"FM"];
+        self.deviceid = [SQLManager deviceIDWithRoomID:self.roomID withType:@"FM"];
     }
     
     
@@ -81,7 +81,7 @@
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
-    self.eNumber = [DeviceManager getENumber:[self.deviceid intValue]];
+    self.eNumber = [SQLManager getENumber:[self.deviceid intValue]];
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     VolumeManager *volume=[VolumeManager defaultManager];
@@ -322,7 +322,7 @@
 
 -(void)writeFMChannelsConfigDataToSQL:(NSDictionary *)responseObject withParent:(NSString *)parent
 {
-    FMDatabase *db = [DeviceManager connetdb];
+    FMDatabase *db = [SQLManager connetdb];
     if([db open])
     {
         int cNumber = [self.numberOfChannel.text intValue];

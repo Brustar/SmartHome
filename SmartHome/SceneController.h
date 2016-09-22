@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ScenseController : UIViewController
+@interface SceneController : UIViewController
 @property (strong, nonatomic) NSArray *scenes;
 @end

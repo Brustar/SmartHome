@@ -9,86 +9,63 @@
 #import "IphoneSceneController.h"
 #import "RoomManager.h"
 #import "Room.h"
-#import "ScenseCell.h"
-#import "SceneManager.h"
+#import "SceneCell.h"
+#import "SQLManager.h"
 #import "Scene.h"
+#import "IphoneRoomView.h"
 #import "UIImageView+WebCache.h"
 
 #define cellWidth self.collectionView.frame.size.width / 2.0 - 10
 #define  minSpace 20
-@interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollerView;
+@interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate>
+@property (strong, nonatomic) IBOutlet IphoneRoomView *roomView;
+
+
 @property (nonatomic,strong) NSArray *roomList;
 @property (nonatomic,strong) UIButton *selectedRoomBtn;
 @property (nonatomic,strong) NSArray *scenes;
-
+@property (nonatomic, assign) int roomIndex;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
 
 @implementation IphoneSceneController
 
--(NSArray *)scenes
-{
-    if(!_scenes)
-    {
-        _scenes = [SceneManager getScensByRoomId:(int)self.selectedRoomBtn.tag];
-    }
-    return _scenes;
-}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.roomList = [RoomManager getAllRoomsInfo];
+    self.roomList = [SQLManager getAllRoomsInfo];
     
-    [self setUpScrollerView];
+    [self setUpRoomView];
 }
 
--(void)setUpScrollerView
+-(void)setUpRoomView
 {
-    self.scrollerView.delegate = self;
-    self.scrollerView.bounces= NO;
-    self.scrollerView.showsHorizontalScrollIndicator = NO;
-    self.scrollerView.showsVerticalScrollIndicator = NO;
-    self.scrollerView.backgroundColor = [UIColor lightGrayColor];
-    CGFloat widthBtn;
-    if(self.roomList.count > 4)
-    {
-        widthBtn = self.scrollerView.frame.size.width / 4.0;
-    }else{
-        widthBtn = self.scrollerView.frame.size.width / self.roomList.count;
-    }
+    NSMutableArray *roomNames = [NSMutableArray array];
     
-    for(int i = 0 ; i < self.roomList.count; i++)
-    {
-        UIButton *button =  [[UIButton alloc]init];
-        button.frame = CGRectMake(widthBtn * i, 0, widthBtn, self.scrollerView.frame.size.height);
-        Room *room = self.roomList[i];
-        button.tag = room.rId;
-        [button setTitle:room.rName forState:UIControlStateNormal];
-                [button addTarget:self action:@selector(selectedRoom:) forControlEvents:UIControlEventTouchUpInside];
-        if(i == 0)
-        {
-            button.selected = YES;
-            [button setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
-            self.selectedRoomBtn = button;
-        }
-        [self.scrollerView addSubview:button];
+    for (Room *room in self.roomList) {
+        NSString *roomName = room.rName;
+        [roomNames addObject:roomName];
     }
+    self.roomView.dataArray = roomNames;
     
-    self.scrollerView.contentSize = CGSizeMake(widthBtn * self.roomList.count, self.scrollerView.bounds.size.height);
+    self.roomView.delegate = self;
+    
+    [self.roomView setSelectButton:0];
+    
+    [self iphoneRoomView:self.roomView didSelectButton:0];
 }
 
--(void)selectedRoom:(UIButton *)btn
+- (void)iphoneRoomView:(UIView *)view didSelectButton:(int)index
 {
-    self.selectedRoomBtn.selected = NO;
-    btn.selected = YES;
-    self.selectedRoomBtn = btn;
-    [self.selectedRoomBtn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
-    self.scenes = [SceneManager getScensByRoomId:(int)btn.tag];
+    self.roomIndex = index;
+    Room *room = self.roomList[index];
+    self.scenes = [SQLManager getScensByRoomId:room.rId];
     [self.collectionView reloadData];
-
+    
 }
+
+
 #pragma  mark - UICollectionViewDelegate
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -96,7 +73,7 @@
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ScenseCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell" forIndexPath:indexPath];
+    SceneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell" forIndexPath:indexPath];
     Scene *scene = self.scenes[indexPath.row];
     cell.scenseName.text = scene.sceneName;
     
@@ -123,10 +100,7 @@
     return minSpace;
 }
 
-- (IBAction)goToMainController:(id)sender {
-    
 
-}
 
 
 

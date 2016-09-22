@@ -8,8 +8,8 @@
 
 #import "FavorController.h"
 #import "Scene.h"
-#import "ScenseCell.h"
-#import "SceneManager.h"
+#import "SceneCell.h"
+#import "SQLManager.h"
 @interface FavorController ()
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic,strong) NSArray *scens;
@@ -24,7 +24,7 @@
     self.title = @"我的收藏";
     self.splitViewController.presentsWithGesture = NO;
    
-    self.scens = [SceneManager getFavorScene];
+    self.scens = [SQLManager getFavorScene];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -45,7 +45,8 @@
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ScenseCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    
+    SceneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     
     Scene *scene = self.scens[indexPath.row];
     cell.scenseName.text = scene.sceneName;

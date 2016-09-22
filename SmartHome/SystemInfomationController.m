@@ -8,12 +8,12 @@
 
 #import "systemInfomationController.h"
 #import "HttpManager.h"
-@interface systemInfomationController ()<UITableViewDataSource,UITableViewDelegate>
+@interface SystemInfomationController ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) NSArray *titles;
 @end
 
-@implementation systemInfomationController
+@implementation SystemInfomationController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

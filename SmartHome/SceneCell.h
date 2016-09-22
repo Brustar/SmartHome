@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class ScenseCell;
+@class SceneCell;
 @protocol ScenseCellDelegate <NSObject>
 
 
@@ -16,7 +16,7 @@
 @end
 
 
-@interface ScenseCell : UICollectionViewCell
+@interface SceneCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
 @property (weak, nonatomic) IBOutlet UILabel *scenseName;
 

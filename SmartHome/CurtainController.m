@@ -10,7 +10,7 @@
 #import "CurtainTableViewCell.h"
 #import "PackManager.h"
 #import "SocketManager.h"
-#import "DeviceManager.h"
+#import "SQLManager.h"
 
 @interface CurtainController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -35,10 +35,10 @@
         _curtainIDArr = [NSMutableArray array];
         if(self.sceneid > 0 && !self.isAddDevice)
         {
-            NSArray *curtainArr = [DeviceManager getDeviceIDsBySeneId:[self.sceneid intValue]];
+            NSArray *curtainArr = [SQLManager getDeviceIDsBySeneId:[self.sceneid intValue]];
             for(int i = 0; i <curtainArr.count; i++)
             {
-                NSString *typeName = [DeviceManager deviceTypeNameByDeviceID:[curtainArr[i] intValue]];
+                NSString *typeName = [SQLManager deviceTypeNameByDeviceID:[curtainArr[i] intValue]];
                 if([typeName isEqualToString:@"窗帘"])
                 {
                     [_curtainIDArr addObject:curtainArr[i]];
@@ -46,8 +46,8 @@
             }
 
         }else if(self.roomID ){
-            [_curtainIDArr addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"开合帘" andRoomID:self.roomID]];
-            [_curtainIDArr addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"卷帘" andRoomID:self.roomID]];
+            [_curtainIDArr addObjectsFromArray:[SQLManager getDeviceByTypeName:@"开合帘" andRoomID:self.roomID]];
+            [_curtainIDArr addObjectsFromArray:[SQLManager getDeviceByTypeName:@"卷帘" andRoomID:self.roomID]];
         }else{
             [_curtainIDArr addObject:self.deviceid];
         }
@@ -65,7 +65,7 @@
         for(int i = 0; i < self.curtainIDArr.count; i++)
         {
             int curtainID = [self.curtainIDArr[i] intValue];
-            [_curNames addObject:[DeviceManager deviceNameByDeviceID:curtainID]];
+            [_curNames addObject:[SQLManager deviceNameByDeviceID:curtainID]];
         }
         
     }
@@ -198,7 +198,7 @@
     }
     
     if (tag==0 && (proto.action.state == 0x2A || proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON)) {
-        NSString *devID=[DeviceManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID) masterID:[[DeviceInfo defaultManager] masterID]];
+        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID) masterID:[[DeviceInfo defaultManager] masterID]];
         if ([devID intValue]==[self.deviceid intValue]) {
             self.cell.slider.value=proto.action.RValue/100.0;
             if (proto.action.state == PROTOCOL_ON) {

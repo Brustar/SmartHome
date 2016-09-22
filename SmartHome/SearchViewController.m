@@ -16,7 +16,7 @@
 #import "CurtainController.h"
 #import "GuardController.h"
 #import "FMController.h"
-#import "DeviceManager.h"
+#import "SQLManager.h"
 #import "PluginViewController.h"
 #import "FMDatabase.h"
 #import "MBProgressHUD+NJ.h"
@@ -52,7 +52,7 @@
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
     NSArray *tables=@[@"Devices",@"Scenes"];
-    FMDatabase *db = [DeviceManager connetdb];
+    FMDatabase *db = [SQLManager connetdb];
     NSMutableArray *result = [NSMutableArray array];
     if([db open])
     {
@@ -103,8 +103,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
    
-    int eId =(int)[DeviceManager deviceIDByDeviceName:self.searchResult[indexPath.row]];
-    NSString *typeName = [DeviceManager deviceTypeNameByDeviceID:eId];
+    int eId =(int)[SQLManager deviceIDByDeviceName:self.searchResult[indexPath.row]];
+    NSString *typeName = [SQLManager deviceTypeNameByDeviceID:eId];
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     if([typeName isEqualToString:@"网络电视"])
     {

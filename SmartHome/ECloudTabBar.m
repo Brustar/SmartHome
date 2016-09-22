@@ -15,6 +15,7 @@
 #import "ECloudMoreView.h"
 #import "RoomManager.h"
 #import "Room.h"
+#import "SQLManager.h"
 
 #import "IbeaconManager.h"
 @interface ECloudTabBar () <ECloudMoreViewDelegate>
@@ -85,7 +86,7 @@
    
   
     
-    self.rooms = [RoomManager getAllRoomsInfo];
+    self.rooms = [SQLManager getAllRoomsInfo];
 
     for (int i = 0; i < self.rooms.count; i++) {
         Room *room = self.rooms[i];
@@ -241,7 +242,7 @@
        
         if(self.ibeaconStr)
         {
-            self.roomId = [RoomManager getRoomIDByRoomName:self.ibeaconStr];
+            self.roomId = [SQLManager getRoomIDByRoomName:self.ibeaconStr];
             for(ECloudButton *btn in self.leftView.subviews)
             {
                 if(btn.subType == self.roomId)

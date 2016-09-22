@@ -12,7 +12,7 @@
 #import "RulerView.h"
 #import "SocketManager.h"
 #import "PackManager.h"
-#import "DeviceManager.h"
+#import "SQLManager.h"
 
 
 @interface AirController ()<RulerViewDatasource, RulerViewDelegate,UITableViewDataSource,UITableViewDelegate>
@@ -32,7 +32,7 @@
     _roomID = roomID;
     if(roomID)
     {
-        self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"空调"];
+        self.deviceid = [SQLManager deviceIDWithRoomID:self.roomID withType:@"空调"];
     }
     
     

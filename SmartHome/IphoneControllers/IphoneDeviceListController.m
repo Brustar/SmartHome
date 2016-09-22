@@ -9,7 +9,7 @@
 
 
 #import "IphoneDeviceListController.h"
-#import "DeviceManager.h"
+#import "SQLManager.h"
 #import "RoomManager.h"
 #import "Room.h"
 #import "LightController.h"
@@ -49,7 +49,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.rooms = [RoomManager getAllRoomsInfo];
+    self.rooms = [SQLManager getAllRoomsInfo];
     
     [self setUpRoomScrollerView];
     //   [self setUpScrollerView];
@@ -89,7 +89,7 @@
     if (view == self.iphoneRoomView) {
         self.roomIndex = index;
         Room *room = self.rooms[index];
-        self.deviceTypes = [DeviceManager deviceSubTypeByRoomId:room.rId];
+        self.deviceTypes = [SQLManager deviceSubTypeByRoomId:room.rId];
         [self setUpScrollerView];
     } else {
         if (self.deviceTypes.count < 1) {
@@ -213,7 +213,7 @@
     btn.selected = YES;
     self.selectedRoomBtn = btn;
     [self.selectedRoomBtn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
-    self.deviceTypes = [DeviceManager deviceSubTypeByRoomId:btn.tag]
+    self.deviceTypes = [SQLManager deviceSubTypeByRoomId:btn.tag]
     ;
     
     [self setUpScrollerView];

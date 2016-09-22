@@ -12,7 +12,7 @@
 #import "PackManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "FMDatabase.h"
-#import "DeviceManager.h"
+#import "SQLManager.h"
 
 @implementation DeviceInfo
 
@@ -37,7 +37,7 @@
 -(void)initConfig
 {
     //创建sqlite数据库及结构
-    [DeviceManager initSQlite];
+    [SQLManager initSQlite];
 }
 
 //取设备机型
@@ -88,7 +88,7 @@
 
 -(NSData *)startScenenAtMaster:(int)sceneid
 {
-    NSString *snumber=[DeviceManager getSnumber:sceneid];
+    NSString *snumber=[SQLManager getSnumber:sceneid];
     uint16_t sid=[PackManager NSDataToUint16:snumber];
     
     uint8_t cmd=0x89;
@@ -112,8 +112,8 @@
         proto.cmd=0x03;
     }
     proto.action.state=action;
-    NSString *enumber=[DeviceManager getENumber:[deviceID integerValue]];
-    NSString *eid=[DeviceManager getEType:[deviceID integerValue]];
+    NSString *enumber=[SQLManager getENumber:[deviceID integerValue]];
+    NSString *eid=[SQLManager getEType:[deviceID integerValue]];
     proto.deviceID=CFSwapInt16BigToHost([PackManager NSDataToUint16:enumber]);
     proto.deviceType=[PackManager NSDataToUint8:eid];
     return dataFromProtocol(proto);

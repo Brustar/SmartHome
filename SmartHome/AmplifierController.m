@@ -8,7 +8,7 @@
 
 #import "AmplifierController.h"
 #import "DetailTableViewCell.h"
-#import "DeviceManager.h"
+#import "SQLManager.h"
 #import "SocketManager.h"
 #import "Amplifier.h"
 #import "SceneManager.h"
@@ -32,10 +32,10 @@
         
         if(self.sceneid > 0 && !self.isAddDevice)
         {
-            NSArray *amplifiers = [DeviceManager getDeviceIDsBySeneId:[self.sceneid intValue]];
+            NSArray *amplifiers = [SQLManager getDeviceIDsBySeneId:[self.sceneid intValue]];
             for(int i = 0; i<amplifiers.count; i++)
             {
-                NSString *typeName = [DeviceManager deviceTypeNameByDeviceID:[amplifiers[i] intValue]];
+                NSString *typeName = [SQLManager deviceTypeNameByDeviceID:[amplifiers[i] intValue]];
                 if([typeName isEqualToString:@"功放"])
                 {
                     [_amplifierIDArr addObject:amplifiers[i]];
@@ -44,7 +44,7 @@
             }
         }else if(self.roomID)
         {
-            [_amplifierIDArr addObjectsFromArray:[DeviceManager getDeviceByTypeName:@"功放" andRoomID:self.roomID]];
+            [_amplifierIDArr addObjectsFromArray:[SQLManager getDeviceByTypeName:@"功放" andRoomID:self.roomID]];
         }else{
             [_amplifierIDArr addObject:self.deviceid];
         }
@@ -61,7 +61,7 @@
         for(int i = 0; i < self.amplifierIDArr.count; i++)
         {
             int amplifierID = [self.amplifierIDArr[i] intValue];
-            [_amplifierNames addObject:[DeviceManager deviceNameByDeviceID:amplifierID]];
+            [_amplifierNames addObject:[SQLManager deviceNameByDeviceID:amplifierID]];
         }
     }
     return _amplifierNames;
@@ -112,7 +112,7 @@
     }
     
     if (tag==0 && (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON)) {
-        NSString *devID=[DeviceManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID) masterID:[[DeviceInfo defaultManager] masterID]];
+        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID) masterID:[[DeviceInfo defaultManager] masterID]];
         if ([devID intValue]==[self.deviceid intValue]) {
             self.switchView.on=proto.action.state;
         }

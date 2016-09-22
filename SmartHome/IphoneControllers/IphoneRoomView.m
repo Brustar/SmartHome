@@ -143,7 +143,7 @@
         CGFloat buttonX = scrollW;
         
         button.frame = CGRectMake(buttonX, buttonY, buttonW, buttonH);
-        //[button setBackgroundColor:[UIColor greenColor]];
+        [button setBackgroundColor:[UIColor lightGrayColor]];
         
         scrollW += buttonW;
     }

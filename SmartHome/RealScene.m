@@ -11,6 +11,7 @@
 #import "Room.h"
 #import "PackManager.h"
 #import "SocketManager.h"
+#import "SQLManager.h"
 
 @interface RealScene ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *roomTable;
@@ -34,7 +35,7 @@
 {
     if(!_rooms)
     {
-        _rooms = [RoomManager getAllRoomsInfo];
+        _rooms = [SQLManager getAllRoomsInfo];
     }
     return _rooms;
 }

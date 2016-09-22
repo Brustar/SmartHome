@@ -40,16 +40,5 @@
 -(void) startScene:(int)sceneid;
 -(void) poweroffAllDevice:(int)sceneid;
 
-//得到所有场景
-+(NSArray *)allSceneModels;
-+(NSArray *)devicesBySceneID:(int)sId;
-+(Scene *)sceneBySceneID:(int)sId;
-//根据房间ID的到所有的场景
-+ (NSArray *)getAllSceneWithRoomID:(int)roomID;
 
-
-//从数据库中删除场景
-+(BOOL)deleteScene:(int)sceneId;
-+(NSArray *)getScensByRoomId:(int)roomId;
-+(NSArray *)getFavorScene;
 @end

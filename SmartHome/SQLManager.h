@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "FMDatabase.h"
 
-@interface DeviceManager : NSObject
+@interface SQLManager : NSObject
 
 +(FMDatabase *) connetdb;
 //从数据中获取所有设备信息
@@ -82,4 +82,25 @@
 
 +(void)initSQlite;
 +(void)initDemoSQlite;
+
+
+
+//得到所有场景
++(NSArray *)allSceneModels;
++(NSArray *)devicesBySceneID:(int)sId;
++(Scene *)sceneBySceneID:(int)sId;
+//根据房间ID的到所有的场景
++ (NSArray *)getAllSceneWithRoomID:(int)roomID;
+
+
+//从数据库中删除场景
++(BOOL)deleteScene:(int)sceneId;
++(NSArray *)getScensByRoomId:(int)roomId;
++(NSArray *)getFavorScene;
+
++(NSArray *)getAllRoomsInfo;
+
++(int)getRoomIDByRoomName:(NSString *)rName;
++(NSString *)getRoomNameByRoomID:(int) rId;
+
 @end

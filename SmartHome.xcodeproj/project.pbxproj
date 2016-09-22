@@ -128,11 +128,11 @@
 		F62337901D70675B00ADAD00 /* TVIconController.m in Sources */ = {isa = PBXBuildFile; fileRef = F623378F1D70675B00ADAD00 /* TVIconController.m */; };
 		F6251F711D541885000A5A47 /* PluginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6251F701D541885000A5A47 /* PluginViewController.m */; };
 		F6251F741D541D8A000A5A47 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = F6251F731D541D8A000A5A47 /* Device.m */; };
-		F6251F771D542508000A5A47 /* DeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6251F761D542508000A5A47 /* DeviceManager.m */; };
+		F6251F771D542508000A5A47 /* SQLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6251F761D542508000A5A47 /* SQLManager.m */; };
 		F625A6181D4C8EF700B696E5 /* ProfireListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F625A6171D4C8EF700B696E5 /* ProfireListController.m */; };
 		F625A61B1D4C99EC00B696E5 /* RoomListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F625A61A1D4C99EC00B696E5 /* RoomListController.m */; };
 		F630C35F1D38B4FF008880BB /* AccessSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = F630C35E1D38B4FF008880BB /* AccessSettingController.m */; };
-		F630C3621D38C3E5008880BB /* areaSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F630C3611D38C3E5008880BB /* areaSettingCell.m */; };
+		F630C3621D38C3E5008880BB /* AreaSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F630C3611D38C3E5008880BB /* AreaSettingCell.m */; };
 		F6359AFB1CFFBC910035EB31 /* DetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6359AF91CFFBC910035EB31 /* DetailTableViewCell.m */; };
 		F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6359AFA1CFFBC910035EB31 /* DetailTableViewCell.xib */; };
 		F6359B001CFFC4DC0035EB31 /* ColourTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6359AFE1CFFC4DC0035EB31 /* ColourTableViewCell.m */; };
@@ -161,8 +161,8 @@
 		F6642A811D4220100003D56B /* DeviceListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6642A801D4220100003D56B /* DeviceListController.m */; };
 		F66596DA1D3F12FB0082716A /* EnergyOfDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = F66596D91D3F12FB0082716A /* EnergyOfDeviceController.m */; };
 		F66596DD1D3F1DAD0082716A /* EnegryOfDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F66596DC1D3F1DAD0082716A /* EnegryOfDeviceCell.m */; };
-		F66596E01D3F25610082716A /* ScenseController.m in Sources */ = {isa = PBXBuildFile; fileRef = F66596DF1D3F25610082716A /* ScenseController.m */; };
-		F66596E31D3F25810082716A /* ScenseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F66596E21D3F25810082716A /* ScenseCell.m */; };
+		F66596E01D3F25610082716A /* SceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = F66596DF1D3F25610082716A /* SceneController.m */; };
+		F66596E31D3F25810082716A /* SceneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F66596E21D3F25810082716A /* SceneCell.m */; };
 		F66596E61D3F5DBC0082716A /* AddNewScenseController.m in Sources */ = {isa = PBXBuildFile; fileRef = F66596E51D3F5DBC0082716A /* AddNewScenseController.m */; };
 		F66596E91D3F72CA0082716A /* AddSenseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F66596E81D3F72CA0082716A /* AddSenseCell.m */; };
 		F668AF251D53413B0079587F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F668AF241D53413B0079587F /* Main.storyboard */; };
@@ -171,6 +171,7 @@
 		F66DFF281D5184730005E882 /* EditSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = F66DFF271D5184730005E882 /* EditSceneController.m */; };
 		F66DFF2B1D5188BF0005E882 /* EditSceneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F66DFF2A1D5188BF0005E882 /* EditSceneCell.m */; };
 		F66EB2D51CFED0A900AC53CE /* DetailList.m in Sources */ = {isa = PBXBuildFile; fileRef = F66EB2D41CFED0A900AC53CE /* DetailList.m */; };
+		F67091BC1D93BF300002DDC5 /* WindowSlidingController.m in Sources */ = {isa = PBXBuildFile; fileRef = F67091BB1D93BF300002DDC5 /* WindowSlidingController.m */; };
 		F673EBD21D45E976001270FB /* VerifyCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F673EBD11D45E976001270FB /* VerifyCodeView.m */; };
 		F6755A4C1D4063FA002394F3 /* ECloudTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F6755A4B1D4063FA002394F3 /* ECloudTabBar.m */; };
 		F6755A4F1D406552002394F3 /* ECloudTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6755A4E1D406552002394F3 /* ECloudTabBarController.m */; };
@@ -178,7 +179,7 @@
 		F6755A5E1D40D576002394F3 /* ECloudMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = F6755A5D1D40D576002394F3 /* ECloudMoreView.m */; };
 		F67F1F711D3C69DC00F2B7E5 /* SystemSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F67F1F701D3C69DC00F2B7E5 /* SystemSettingViewController.m */; };
 		F67F1F741D3C6AA200F2B7E5 /* SystemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F67F1F731D3C6AA200F2B7E5 /* SystemCell.m */; };
-		F67F1F771D3C719D00F2B7E5 /* systemInfomationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F67F1F761D3C719D00F2B7E5 /* systemInfomationController.m */; };
+		F67F1F771D3C719D00F2B7E5 /* SystemInfomationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F67F1F761D3C719D00F2B7E5 /* SystemInfomationController.m */; };
 		F67F1F811D3CC46C00F2B7E5 /* AboutUsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F67F1F801D3CC46C00F2B7E5 /* AboutUsController.m */; };
 		F68A5DD81D782D8400601612 /* ECSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = F68A5DD71D782D8400601612 /* ECSearchView.m */; };
 		F69C82301D35D214002DE6D7 /* PushSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = F69C822F1D35D214002DE6D7 /* PushSettingController.m */; };
@@ -504,7 +505,7 @@
 		0FF410DB1CDAF76300C7F4A1 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		0FF7B0B41D1380BF003C2D52 /* AirController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirController.h; sourceTree = "<group>"; };
 		0FF7B0B51D1380BF003C2D52 /* AirController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirController.m; sourceTree = "<group>"; };
-		0FF92B631D9222220098DD54 /* DeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceManager.h; sourceTree = "<group>"; };
+		0FF92B631D9222220098DD54 /* SQLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLManager.h; sourceTree = "<group>"; };
 		0FF92B641D9224640098DD54 /* TVChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVChannel.h; sourceTree = "<group>"; };
 		0FF92B651D9224640098DD54 /* TVChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVChannel.m; sourceTree = "<group>"; };
 		9B45FF693457BA21BA43CE05 /* Pods-SmartHome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.debug.xcconfig"; sourceTree = "<group>"; };
@@ -529,15 +530,14 @@
 		F6251F701D541885000A5A47 /* PluginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginViewController.m; sourceTree = "<group>"; };
 		F6251F721D541D8A000A5A47 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
 		F6251F731D541D8A000A5A47 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
-		F6251F761D542508000A5A47 /* DeviceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceManager.m; sourceTree = "<group>"; };
+		F6251F761D542508000A5A47 /* SQLManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLManager.m; sourceTree = "<group>"; };
 		F625A6161D4C8EF700B696E5 /* ProfireListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfireListController.h; sourceTree = "<group>"; };
 		F625A6171D4C8EF700B696E5 /* ProfireListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfireListController.m; sourceTree = "<group>"; };
 		F625A6191D4C99EC00B696E5 /* RoomListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomListController.h; sourceTree = "<group>"; };
 		F625A61A1D4C99EC00B696E5 /* RoomListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomListController.m; sourceTree = "<group>"; };
 		F630C35D1D38B4FF008880BB /* AccessSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccessSettingController.h; sourceTree = "<group>"; };
 		F630C35E1D38B4FF008880BB /* AccessSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccessSettingController.m; sourceTree = "<group>"; };
-		F630C3601D38C3E5008880BB /* areaSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = areaSettingCell.h; sourceTree = "<group>"; };
-		F630C3611D38C3E5008880BB /* areaSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = areaSettingCell.m; sourceTree = "<group>"; };
+		F630C3611D38C3E5008880BB /* AreaSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaSettingCell.m; sourceTree = "<group>"; };
 		F6359AF81CFFBC910035EB31 /* DetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTableViewCell.h; sourceTree = "<group>"; };
 		F6359AF91CFFBC910035EB31 /* DetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewCell.m; sourceTree = "<group>"; };
 		F6359AFA1CFFBC910035EB31 /* DetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailTableViewCell.xib; sourceTree = "<group>"; };
@@ -592,10 +592,10 @@
 		F66596D91D3F12FB0082716A /* EnergyOfDeviceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnergyOfDeviceController.m; sourceTree = "<group>"; };
 		F66596DB1D3F1DAD0082716A /* EnegryOfDeviceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnegryOfDeviceCell.h; sourceTree = "<group>"; };
 		F66596DC1D3F1DAD0082716A /* EnegryOfDeviceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnegryOfDeviceCell.m; sourceTree = "<group>"; };
-		F66596DE1D3F25610082716A /* ScenseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScenseController.h; sourceTree = "<group>"; };
-		F66596DF1D3F25610082716A /* ScenseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScenseController.m; sourceTree = "<group>"; };
-		F66596E11D3F25810082716A /* ScenseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScenseCell.h; sourceTree = "<group>"; };
-		F66596E21D3F25810082716A /* ScenseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScenseCell.m; sourceTree = "<group>"; };
+		F66596DE1D3F25610082716A /* SceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneController.h; sourceTree = "<group>"; };
+		F66596DF1D3F25610082716A /* SceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneController.m; sourceTree = "<group>"; };
+		F66596E11D3F25810082716A /* SceneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneCell.h; sourceTree = "<group>"; };
+		F66596E21D3F25810082716A /* SceneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneCell.m; sourceTree = "<group>"; };
 		F66596E41D3F5DBC0082716A /* AddNewScenseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewScenseController.h; sourceTree = "<group>"; };
 		F66596E51D3F5DBC0082716A /* AddNewScenseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewScenseController.m; sourceTree = "<group>"; };
 		F66596E71D3F72CA0082716A /* AddSenseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddSenseCell.h; sourceTree = "<group>"; };
@@ -611,6 +611,9 @@
 		F66DFF2A1D5188BF0005E882 /* EditSceneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditSceneCell.m; sourceTree = "<group>"; };
 		F66EB2D31CFED0A900AC53CE /* DetailList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailList.h; sourceTree = "<group>"; };
 		F66EB2D41CFED0A900AC53CE /* DetailList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailList.m; sourceTree = "<group>"; };
+		F67091B91D9375620002DDC5 /* AreaSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaSettingCell.h; sourceTree = "<group>"; };
+		F67091BA1D93BF300002DDC5 /* WindowSlidingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindowSlidingController.h; sourceTree = "<group>"; };
+		F67091BB1D93BF300002DDC5 /* WindowSlidingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WindowSlidingController.m; sourceTree = "<group>"; };
 		F673EBD01D45E976001270FB /* VerifyCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifyCodeView.h; sourceTree = "<group>"; };
 		F673EBD11D45E976001270FB /* VerifyCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyCodeView.m; sourceTree = "<group>"; };
 		F6755A4A1D4063FA002394F3 /* ECloudTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECloudTabBar.h; sourceTree = "<group>"; };
@@ -625,8 +628,8 @@
 		F67F1F701D3C69DC00F2B7E5 /* SystemSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemSettingViewController.m; sourceTree = "<group>"; };
 		F67F1F721D3C6AA200F2B7E5 /* SystemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemCell.h; sourceTree = "<group>"; };
 		F67F1F731D3C6AA200F2B7E5 /* SystemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemCell.m; sourceTree = "<group>"; };
-		F67F1F751D3C719D00F2B7E5 /* systemInfomationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = systemInfomationController.h; sourceTree = "<group>"; };
-		F67F1F761D3C719D00F2B7E5 /* systemInfomationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = systemInfomationController.m; sourceTree = "<group>"; };
+		F67F1F751D3C719D00F2B7E5 /* SystemInfomationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemInfomationController.h; sourceTree = "<group>"; };
+		F67F1F761D3C719D00F2B7E5 /* SystemInfomationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemInfomationController.m; sourceTree = "<group>"; };
 		F67F1F7F1D3CC46C00F2B7E5 /* AboutUsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsController.h; sourceTree = "<group>"; };
 		F67F1F801D3CC46C00F2B7E5 /* AboutUsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsController.m; sourceTree = "<group>"; };
 		F68A5DD61D782D8400601612 /* ECSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSearchView.h; sourceTree = "<group>"; };
@@ -861,22 +864,22 @@
 				F69C822F1D35D214002DE6D7 /* PushSettingController.m */,
 				F630C35D1D38B4FF008880BB /* AccessSettingController.h */,
 				F630C35E1D38B4FF008880BB /* AccessSettingController.m */,
-				F630C3601D38C3E5008880BB /* areaSettingCell.h */,
-				F630C3611D38C3E5008880BB /* areaSettingCell.m */,
+				F67091B91D9375620002DDC5 /* AreaSettingCell.h */,
+				F630C3611D38C3E5008880BB /* AreaSettingCell.m */,
 				F67F1F6F1D3C69DC00F2B7E5 /* SystemSettingViewController.h */,
 				F67F1F701D3C69DC00F2B7E5 /* SystemSettingViewController.m */,
 				F67F1F721D3C6AA200F2B7E5 /* SystemCell.h */,
 				F67F1F731D3C6AA200F2B7E5 /* SystemCell.m */,
-				F67F1F751D3C719D00F2B7E5 /* systemInfomationController.h */,
-				F67F1F761D3C719D00F2B7E5 /* systemInfomationController.m */,
+				F67F1F751D3C719D00F2B7E5 /* SystemInfomationController.h */,
+				F67F1F761D3C719D00F2B7E5 /* SystemInfomationController.m */,
 				F67F1F7F1D3CC46C00F2B7E5 /* AboutUsController.h */,
 				F67F1F801D3CC46C00F2B7E5 /* AboutUsController.m */,
 				F65838D21D39D3BB004210AC /* WelcomeController.h */,
 				F65838D31D39D3BB004210AC /* WelcomeController.m */,
-				F66596DE1D3F25610082716A /* ScenseController.h */,
-				F66596DF1D3F25610082716A /* ScenseController.m */,
-				F66596E11D3F25810082716A /* ScenseCell.h */,
-				F66596E21D3F25810082716A /* ScenseCell.m */,
+				F66596DE1D3F25610082716A /* SceneController.h */,
+				F66596DF1D3F25610082716A /* SceneController.m */,
+				F66596E11D3F25810082716A /* SceneCell.h */,
+				F66596E21D3F25810082716A /* SceneCell.m */,
 				F66DFF261D5184730005E882 /* EditSceneController.h */,
 				F66DFF271D5184730005E882 /* EditSceneController.m */,
 				F66DFF291D5188BF0005E882 /* EditSceneCell.h */,
@@ -915,6 +918,8 @@
 				F61896371D87B06300DBE6CD /* ScreenCurtainController.m */,
 				F61896391D87B08300DBE6CD /* ProjectController.h */,
 				F618963A1D87B08300DBE6CD /* ProjectController.m */,
+				F67091BA1D93BF300002DDC5 /* WindowSlidingController.h */,
+				F67091BB1D93BF300002DDC5 /* WindowSlidingController.m */,
 			);
 			path = SmartHome;
 			sourceTree = "<group>";
@@ -1252,8 +1257,8 @@
 				0F295A5F1D2E092900F23F21 /* HttpManager.m */,
 				0F477FC41D2F94B3004FA361 /* NetStatusManager.h */,
 				0F477FC51D2F94B3004FA361 /* NetStatusManager.m */,
-				0FF92B631D9222220098DD54 /* DeviceManager.h */,
-				F6251F761D542508000A5A47 /* DeviceManager.m */,
+				0FF92B631D9222220098DD54 /* SQLManager.h */,
+				F6251F761D542508000A5A47 /* SQLManager.m */,
 				F64487DB1D55BA3C00EF2CFC /* RoomManager.h */,
 				F64487DC1D55BA3C00EF2CFC /* RoomManager.m */,
 				F6690BF41D62EC3F0098B0EE /* ChannelManager.h */,
@@ -1710,7 +1715,7 @@
 				0FAF74C41CEEA17C00432713 /* HRColorPickerView.m in Sources */,
 				0FF92B661D9224640098DD54 /* TVChannel.m in Sources */,
 				0F11654F1D7418EE00A01B8F /* Amplifier.m in Sources */,
-				F630C3621D38C3E5008880BB /* areaSettingCell.m in Sources */,
+				F630C3621D38C3E5008880BB /* AreaSettingCell.m in Sources */,
 				0FCFB3981CF2947500B37DD3 /* EntranceGuard.m in Sources */,
 				F64EF8011D8FDCE7003C1C48 /* IphoneDeviceListController.m in Sources */,
 				0F4B49801CFEB13500D93DD2 /* CurtainController.m in Sources */,
@@ -1719,6 +1724,7 @@
 				0FC1197A1D6FE61C001DA19A /* Projector.m in Sources */,
 				F6B91F6F1D100EF700592FB0 /* DVCollectionViewCell.m in Sources */,
 				0F96A1641D17F37C00E1594F /* RulerItem.m in Sources */,
+				F67091BC1D93BF300002DDC5 /* WindowSlidingController.m in Sources */,
 				0FAF8FFB1CE1D9BC000557BD /* UploadManager.m in Sources */,
 				F6359B001CFFC4DC0035EB31 /* ColourTableViewCell.m in Sources */,
 				0FA1E09E1D533BFA001CA819 /* PluginCell.m in Sources */,
@@ -1744,7 +1750,7 @@
 				0FD3DEAD1D3F186800AF7765 /* Globals.m in Sources */,
 				F67F1F711D3C69DC00F2B7E5 /* SystemSettingViewController.m in Sources */,
 				0F180FC61D0E4E5000392F4C /* FMController.m in Sources */,
-				F67F1F771D3C719D00F2B7E5 /* systemInfomationController.m in Sources */,
+				F67F1F771D3C719D00F2B7E5 /* SystemInfomationController.m in Sources */,
 				0FABF91C1D06AA35000892D8 /* TVController.m in Sources */,
 				F6BF2AED1D86556500A3C9D5 /* HostIDSController.m in Sources */,
 				F62337901D70675B00ADAD00 /* TVIconController.m in Sources */,
@@ -1766,10 +1772,10 @@
 				F635CCBB1D4356650078B148 /* MyCenterSplitController.m in Sources */,
 				F6251F741D541D8A000A5A47 /* Device.m in Sources */,
 				F66EB2D51CFED0A900AC53CE /* DetailList.m in Sources */,
-				F6251F771D542508000A5A47 /* DeviceManager.m in Sources */,
+				F6251F771D542508000A5A47 /* SQLManager.m in Sources */,
 				F67F1F741D3C6AA200F2B7E5 /* SystemCell.m in Sources */,
 				0FC3DE851D236CFF00A03482 /* LoginController.m in Sources */,
-				F66596E31D3F25810082716A /* ScenseCell.m in Sources */,
+				F66596E31D3F25810082716A /* SceneCell.m in Sources */,
 				0FB42E1E1CF681A7007DE64F /* planeScene.m in Sources */,
 				F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */,
 				F66596E91D3F72CA0082716A /* AddSenseCell.m in Sources */,
@@ -1801,7 +1807,7 @@
 				F6755A581D40D450002394F3 /* ECloudButton.m in Sources */,
 				0FAF98A51CE40F3C009BDBB5 /* QRCodeReaderView.m in Sources */,
 				F69C82331D363376002DE6D7 /* ServiceRecordViewController.m in Sources */,
-				F66596E01D3F25610082716A /* ScenseController.m in Sources */,
+				F66596E01D3F25610082716A /* SceneController.m in Sources */,
 				F6755A5E1D40D576002394F3 /* ECloudMoreView.m in Sources */,
 				0FAF74AD1CEE9A9600432713 /* LightController.m in Sources */,
 				F69C82361D363A4D002DE6D7 /* ServiceRecordCell.m in Sources */,
@@ -1972,7 +1978,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FFmpeg-iOS/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -2010,7 +2016,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FFmpeg-iOS/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

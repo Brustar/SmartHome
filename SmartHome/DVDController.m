@@ -13,7 +13,7 @@
 #import "VolumeManager.h"
 #import "SocketManager.h"
 #import "SCWaveAnimationView.h"
-#import "DeviceManager.h"
+#import "SQLManager.h"
 #import "PackManager.h"
 #import "KEVolumeUtil.h"
 
@@ -45,7 +45,7 @@
     _roomID = roomID;
     if(roomID)
     {
-        self.deviceid = [DeviceManager deviceIDWithRoomID:self.roomID withType:@"DVD"];
+        self.deviceid = [SQLManager deviceIDWithRoomID:self.roomID withType:@"DVD"];
     }
     
     

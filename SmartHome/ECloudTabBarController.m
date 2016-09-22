@@ -8,7 +8,7 @@
 
 #import "ECloudTabBarController.h"
 #import "ECloudTabBar.h"
-#import "ScenseController.h"
+#import "SceneController.h"
 
 
 @interface ECloudTabBarController ()<ECloudTabBarDelegate>

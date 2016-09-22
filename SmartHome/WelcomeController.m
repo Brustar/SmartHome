@@ -8,7 +8,7 @@
 
 #import "WelcomeController.h"
 #import "DeviceInfo.h"
-#import "DeviceManager.h"
+#import "SQLManager.h"
 
 @interface WelcomeController ()
 
@@ -36,7 +36,7 @@
 - (IBAction)demo:(id)sender {
     DeviceInfo *info=[DeviceInfo defaultManager];
     info.db=@"demoDB";
-    [DeviceManager initDemoSQlite];
+    [SQLManager initDemoSQlite];
     //跳转到SceneControll
     
 }

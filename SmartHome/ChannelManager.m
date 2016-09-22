@@ -9,13 +9,13 @@
 #import "ChannelManager.h"
 #import "FMDatabase.h"
 #import "FMResultSet.h"
-#import "DeviceManager.h"
+#import "SQLManager.h"
 #import "TVChannel.h"
 
 @implementation ChannelManager
 +(NSMutableArray *)getAllChannelForFavoritedForType:(NSString *)type deviceID:(int)deviceID
 {
-        FMDatabase *db = [DeviceManager connetdb];
+        FMDatabase *db = [SQLManager connetdb];
         if (![db open]) {
             NSLog(@"Could not open db");
             return nil;
@@ -45,7 +45,7 @@
 
 +(BOOL)deleteChannelForChannelID:(NSInteger)channel_id
 {
-    FMDatabase *db = [DeviceManager connetdb];
+    FMDatabase *db = [SQLManager connetdb];
     BOOL isSuccess = false;
     if([db open])
     {
@@ -57,7 +57,7 @@
 
 +(BOOL)upDateChannelForChannelID:(NSInteger)channel_id andNewChannel_Name:(NSString *)newName
 {
-    FMDatabase *db = [DeviceManager connetdb];
+    FMDatabase *db = [SQLManager connetdb];
     BOOL isSuccess = false;
     
     if([db open])

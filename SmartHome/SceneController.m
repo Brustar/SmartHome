@@ -6,12 +6,12 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
-#import "ScenseController.h"
-#import "ScenseCell.h"
+#import "SceneController.h"
+#import "SceneCell.h"
 #import "ScenseSplitViewController.h"
 #import <Reachability/Reachability.h>
 #import "SocketManager.h"
-#import "SceneManager.h"
+#import "SQLManager.h"
 #import "Scene.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
@@ -21,9 +21,10 @@
 #import "IbeaconManager.h"
 #import "HostIDSController.h"
 #import "UIImageView+WebCache.h"
+#import "SceneManager.h"
 #import <SDWebImage/UIButton+WebCache.h>
 
-@interface ScenseController ()<UICollectionViewDelegate,UICollectionViewDataSource,ScenseCellDelegate,UIGestureRecognizerDelegate,UISearchBarDelegate>
+@interface SceneController ()<UICollectionViewDelegate,UICollectionViewDataSource,ScenseCellDelegate,UIGestureRecognizerDelegate,UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *addSceseBtn;
@@ -51,7 +52,7 @@
 @property(nonatomic,strong)HostIDSController *hostVC;
 @end
 
-@implementation ScenseController
+@implementation SceneController
 
 
 -(HostIDSController *)hostVC
@@ -130,7 +131,7 @@
 {
     [super viewWillAppear:YES];
     
-    self.scenes = [SceneManager getScensByRoomId:self.roomID];
+    self.scenes = [SQLManager getScensByRoomId:self.roomID];
     [self setUpSceneButton];
     [self judgeScensCount:self.scenes];
     [self.collectionView reloadData];
@@ -188,7 +189,7 @@
     
     self.roomID = [dict[@"subType"] intValue];
     
-    self.scenes = [SceneManager getScensByRoomId:self.roomID];
+    self.scenes = [SQLManager getScensByRoomId:self.roomID];
    
     [self setUpSceneButton];
     [self judgeScensCount:self.scenes];
@@ -289,7 +290,7 @@
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ScenseCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"scenseCell" forIndexPath:indexPath];
+    SceneCell*cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"scenseCell" forIndexPath:indexPath];
     [cell.powerBtn addTarget:self action:@selector(startSceneAction:) forControlEvents:UIControlEventTouchUpInside];
     
     Scene *scene = self.collectionScenes[indexPath.row];
