@@ -8,7 +8,7 @@
 
 #import "IphoneMainController.h"
 #import "IphoneSceneController.h"
-
+#import "IphoneDeviceListController.h"
 
 @interface IphoneMainController ()<UITableViewDelegate ,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -17,7 +17,7 @@
 
 @property (nonatomic, weak) UIViewController *selectController;
 
-@property (nonatomic, strong) UIView *cover;
+@property (nonatomic, strong) UIButton *cover;
 @end
 
 @implementation IphoneMainController
@@ -26,14 +26,14 @@
     [super viewDidLoad];
     self.titleArr = @[@"场景",@"设备",@"实景",@"我的"];
     self.tableView.tableFooterView = [UIView new];
-    
+    self.tableView.tableHeaderView = self.headView;
     [self setupChilderController];
     
     [self.view sendSubviewToBack:self.tableView];
 }
 
 
-- (UIView *)cover {
+- (UIButton *)cover {
     if (_cover == nil) {
         UIButton *cover = [[UIButton alloc] init];
         [cover addTarget:self action:@selector(coverOnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -47,6 +47,10 @@
     IphoneSceneController *scene = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
     [self setupVc:scene title:@"场景"];
     
+    IphoneDeviceListController *deviceList = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"IphoneDeviceListController"];
+    [self setupVc:deviceList title:@"设备"];
+    
+    self.selectController = self.childViewControllers[0];
     [self.view addSubview:self.selectController.view];
     [self.view bringSubviewToFront:self.selectController.view];
 }
@@ -57,9 +61,9 @@
     
     UIButton *button = [[UIButton alloc] init];
     
-    [button setTitle:@"sdaf" forState:UIControlStateNormal];
+    [button setTitle:@"菜单" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    button.bounds = CGRectMake(0, 0, 30, 30);
+    button.bounds = CGRectMake(0, 0, 50, 30);
     
     
     [button addTarget:self action:@selector(leftButtonOnClick) forControlEvents:UIControlEventTouchUpInside];
@@ -69,8 +73,6 @@
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     
     [self addChildViewController:nav];
-    
-    self.selectController = nav;
 }
 
 
@@ -78,7 +80,7 @@
     [UIView animateWithDuration:0.3 animations:^{
         UIView *showingView = self.selectController.view;
         
-        showingView.transform = CGAffineTransformMakeTranslation(300, 0);
+        showingView.transform = CGAffineTransformMakeTranslation(150, 0);
         
         self.cover.frame = showingView.bounds;
         [showingView addSubview:self.cover];
@@ -113,12 +115,26 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self.selectController.view removeFromSuperview];
     
+    UIViewController *showViewController = self.childViewControllers[indexPath.row];
+    
+    [self.view addSubview:showViewController.view];
+    
+    [self.view bringSubviewToFront:showViewController.view];
+    
+    showViewController.view.transform = CGAffineTransformMakeTranslation(150, 0);
+    
+    self.selectController = showViewController;
+    
+    [self coverOnClick:self.cover];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 
 
