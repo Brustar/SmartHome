@@ -948,7 +948,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wgV-0Y-0LL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1058" y="-6499"/>
+            <point key="canvasLocation" x="482" y="-4856"/>
         </scene>
         <!--智能插座-->
         <scene sceneID="2hn-m6-5qA">
@@ -1309,14 +1309,14 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u0A-1I-atc">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u0A-1I-atc">
                                 <rect key="frame" x="287" y="495" width="26" height="26"/>
                                 <state key="normal" backgroundImage="voice"/>
                                 <connections>
                                     <action selector="startVoice:" destination="6M2-qc-UnH" eventType="touchUpInside" id="Go8-6g-r8Z"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e5h-vv-81n" customClass="SCSiriWaveformView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e5h-vv-81n" customClass="SCSiriWaveformView">
                                 <rect key="frame" x="0.0" y="600" width="1024" height="80"/>
                                 <color key="backgroundColor" red="0.90309139530000004" green="0.90309139530000004" blue="0.90309139530000004" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -3102,6 +3102,7 @@
                         <segue destination="Uul-Ht-qNS" kind="show" identifier="systemInfoSegue" animates="NO" id="Avv-0r-EKb"/>
                         <segue destination="CWv-aV-jBo" kind="show" identifier="aboutSegue" animates="NO" id="Dqh-Ra-hYs"/>
                         <segue destination="Q07-ua-pDl" kind="presentation" identifier="goLogin" id="uCb-ME-O7C"/>
+                        <segue destination="QoB-0E-qDZ" kind="show" identifier="goWelcomeSegue" id="QEN-bV-PrH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fZn-X2-474" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -6619,22 +6620,22 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="uCb-ME-O7C"/>
         <segue reference="nIi-Kc-QDm"/>
-        <segue reference="TBd-30-Hkx"/>
         <segue reference="PRs-sg-E1F"/>
-        <segue reference="ya3-gG-p8O"/>
         <segue reference="U1p-eR-Biy"/>
+        <segue reference="ya3-gG-p8O"/>
         <segue reference="fHn-Cm-7Q7"/>
-        <segue reference="Vzc-yi-Jnw"/>
+        <segue reference="vKk-7C-VKf"/>
         <segue reference="a9T-LN-ZVX"/>
-        <segue reference="JQm-bA-TWz"/>
+        <segue reference="Vzc-yi-Jnw"/>
         <segue reference="pWG-oz-Opr"/>
+        <segue reference="JQm-bA-TWz"/>
         <segue reference="tt4-nB-rfe"/>
         <segue reference="vdf-Gi-dZf"/>
-        <segue reference="tdV-sS-d5j"/>
         <segue reference="l23-e3-J0C"/>
+        <segue reference="tdV-sS-d5j"/>
         <segue reference="X9P-hg-DXo"/>
-        <segue reference="vKk-7C-VKf"/>
-        <segue reference="fbq-wi-BCv"/>
+        <segue reference="dRU-hd-aVS"/>
     </inferredMetricsTieBreakers>
 </document>

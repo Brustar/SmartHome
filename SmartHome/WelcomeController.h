@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface WelcomeController : UIViewController
-
+@property (weak, nonatomic) IBOutlet UIView *coverView;
 @end
