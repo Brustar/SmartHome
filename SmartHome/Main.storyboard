@@ -1348,7 +1348,7 @@
         <!--System Infomation Controller-->
         <scene sceneID="ki9-Lv-eta">
             <objects>
-                <viewController storyboardIdentifier="systemInfomationController" id="Uul-Ht-qNS" customClass="systemInfomationController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="systemInfomationController" id="Uul-Ht-qNS" customClass="SystemInfomationController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eMF-gp-IqK"/>
                         <viewControllerLayoutGuide type="bottom" id="emj-GD-RSn"/>
@@ -1401,7 +1401,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tableView" destination="JUh-F6-onw" id="B9O-ad-5mL"/>
+                        <outlet property="tableView" destination="JUh-F6-onw" id="Grm-bh-lzo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GTT-LP-n26" userLabel="First Responder" sceneMemberID="firstResponder"/>
