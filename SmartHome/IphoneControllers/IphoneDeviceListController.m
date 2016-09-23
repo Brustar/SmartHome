@@ -28,6 +28,7 @@
 #import "MBProgressHUD+NJ.h"
 #import "AmplifierController.h"
 #import "WindowSlidingController.h"
+#import "BgMusicController.h"
 @interface IphoneDeviceListController ()<IphoneRoomViewDelegate>
 
 
@@ -197,6 +198,11 @@
         WindowSlidingController *windowSlidVC = [storyBoard instantiateViewControllerWithIdentifier:@"WindowSlidingController"];
         windowSlidVC.roomID = roomID;
         [self addViewAndVC:windowSlidVC];
+    }else if([typeName isEqualToString:@"背景音乐"]){
+        BgMusicController *bgMusicVC = [storyBoard instantiateViewControllerWithIdentifier:@"BgMusicController"];
+        bgMusicVC.roomID = roomID;
+        [self addViewAndVC:bgMusicVC];
+        
     }else {
         PluginViewController *pluginVC = [storyBoard instantiateViewControllerWithIdentifier:@"PluginViewController"];
         pluginVC.roomID = roomID;

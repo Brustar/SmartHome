@@ -108,6 +108,9 @@
                                 <state key="normal" title="体验" backgroundImage="u6">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="demo:" destination="chj-yx-pDz" eventType="touchUpInside" id="aSV-Hy-zKU"/>
+                                </connections>
                             </button>
                             <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7mD-HX-ILk">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -144,6 +147,7 @@
                     <connections>
                         <outlet property="coverView" destination="7mD-HX-ILk" id="gtl-ow-dOU"/>
                         <outlet property="knowView" destination="EPi-Ac-O75" id="ird-RI-pu3"/>
+                        <segue destination="2si-ky-nN2" kind="modal" identifier="iphoneMainSegue" id="HFl-Hk-i9X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PuJ-ch-2K5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -199,6 +203,7 @@
                             <constraint firstAttribute="trailing" secondItem="61Y-v8-Oyq" secondAttribute="trailing" id="ehk-c3-6SV"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="uqb-rH-JlL"/>
                     <connections>
                         <outlet property="headView" destination="7fi-Ur-C1D" id="fKR-LT-Gnd"/>
                         <outlet property="tableView" destination="61Y-v8-Oyq" id="R9E-ZB-BHj"/>
@@ -416,6 +421,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NPP-uk-dJ7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1811" y="-1091"/>
+        </scene>
+        <!--IphoneTV Controller-->
+        <scene sceneID="XGy-Zh-J7y">
+            <objects>
+                <viewController id="4f1-Ce-GRA" customClass="IphoneTVController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="03X-sV-G3u"/>
+                        <viewControllerLayoutGuide type="bottom" id="EBn-6d-uzY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="m4c-Ac-EqV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4DV-ro-34x" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2223" y="-1082"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4Qf-sa-6K1">
