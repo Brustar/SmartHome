@@ -98,11 +98,13 @@
 {
     
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSDictionary *dict = @{@"AuthorToken":auothorToken};
-    HttpManager *http=[HttpManager defaultManager];
-    http.delegate = self;
-    http.tag = i;
-    [http sendPost:url param:dict];
+    if (auothorToken) {
+        NSDictionary *dict = @{@"AuthorToken":auothorToken};
+        HttpManager *http=[HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = i;
+        [http sendPost:url param:dict];
+    }
 
 }
 -(void)httpHandler:(id)responseObject tag:(int)tag
@@ -349,13 +351,13 @@
 {
     NSString *url = [NSString stringWithFormat:@"%@UserEdit.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    
-    NSDictionary *dict = @{@"AuthorToken":auothorToken,@"OType":[NSNumber numberWithInteger:type]};
-    HttpManager *http=[HttpManager defaultManager];
-    http.delegate = self;
-    http.tag = tag;
-    [http sendPost:url param:dict];
-
+    if (auothorToken) {
+        NSDictionary *dict = @{@"AuthorToken":auothorToken,@"OType":[NSNumber numberWithInteger:type]};
+        HttpManager *http=[HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = tag;
+        [http sendPost:url param:dict];
+    }
 }
 
 //点击转换身份按钮

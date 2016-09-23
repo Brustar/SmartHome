@@ -59,12 +59,13 @@
 {
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     NSString *url = [NSString stringWithFormat:@"%@GetNotifyMessage.aspx",[IOManager httpAddr]];
-    NSDictionary *dic = @{@"AuthorToken":authorToken};
-    HttpManager *http=[HttpManager defaultManager];
-    http.delegate = self;
-    http.tag = 1;
-    [http sendPost:url param:dic];
-
+    if (authorToken) {
+        NSDictionary *dic = @{@"AuthorToken":authorToken};
+        HttpManager *http=[HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = 1;
+        [http sendPost:url param:dic];
+    }
 }
 -(void)httpHandler:(id)responseObject tag:(int)tag
 {
@@ -85,7 +86,6 @@
         }else{
             [MBProgressHUD showError:responseObject[@"Msg"]];
         }
-
     }else if(tag == 2)
     {
         if([responseObject[@"Result"] intValue]==0)

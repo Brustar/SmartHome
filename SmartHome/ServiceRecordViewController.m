@@ -71,8 +71,10 @@
     
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     NSString *str = @"GetMaintainMessage.aspx";
-    NSDictionary *dic = @{@"AuthorToken":auothorToken};
-    [self sendRequest:dic andUrlStr:str with:1];
+    if (auothorToken) {
+        NSDictionary *dic = @{@"AuthorToken":auothorToken};
+        [self sendRequest:dic andUrlStr:str with:1];
+    }
 }
 
 -(void)sendRequest:(NSDictionary *)dic andUrlStr:(NSString *)str with:(int)tag

@@ -60,12 +60,13 @@
 {
     NSString *url = [NSString stringWithFormat:@"%@GetUserHabit.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    if (auothorToken) {
     NSDictionary *dict = @{@"AuthorToken":auothorToken};
     HttpManager *http=[HttpManager defaultManager];
     http.delegate = self;
-     http.tag = 1;
+    http.tag = 1;
     [http sendPost:url param:dict];
-    
+    }
 }
 -(void)httpHandler:(id)responseObject tag:(int)tag
 {
@@ -139,12 +140,13 @@
     NSString *url = [NSString stringWithFormat:@"%@UserHobitSetting.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     NSNumber *recordID = [NSNumber numberWithInteger:sender.tag];
+    if (auothorToken) {
     NSDictionary *dict = @{@"AuthorToken":auothorToken,@"IsOpen":num,@"RecordID":recordID};
     HttpManager *http=[HttpManager defaultManager];
     http.delegate = self;
     http.tag = tag;
     [http sendPost:url param:dict];
-
+    }
 }
 - (IBAction)clickRetunBtn:(id)sender {
     [self.navigationController popViewControllerAnimated:NO];

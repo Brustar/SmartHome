@@ -75,12 +75,13 @@
 {
     NSString *url = [NSString stringWithFormat:@"%@GetUserNotifySettings.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSDictionary *dict = @{@"AuthorToken":auothorToken};
-    HttpManager *http=[HttpManager defaultManager];
-    http.tag = 1;
-    http.delegate = self;
-    [http sendPost:url param:dict];
-    
+    if (auothorToken) {
+        NSDictionary *dict = @{@"AuthorToken":auothorToken};
+        HttpManager *http=[HttpManager defaultManager];
+        http.tag = 1;
+        http.delegate = self;
+        [http sendPost:url param:dict];
+    }
 }
 -(void)httpHandler:(id)responseObject tag:(int)tag
 {
@@ -202,11 +203,13 @@
     
     NSString *url = [NSString stringWithFormat:@"%@NotificationSetting.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    if (auothorToken) {
     NSDictionary *dict = @{@"AuthorToken":auothorToken,@"NotifyWay":[NSNumber numberWithInteger:way],@"RecordID":recoredID};
     HttpManager *http=[HttpManager defaultManager];
     http.tag = 2;
     http.delegate = self;
     [http sendPost:url param:dict];
+    }
 }
 
 

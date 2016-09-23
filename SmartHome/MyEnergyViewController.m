@@ -67,11 +67,14 @@
 -(void)sendRequestToGetEenrgy
 {
     NSString *url = [NSString stringWithFormat:@"%@EnergyAnalysis.aspx",[IOManager httpAddr]];
-    NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]};
-    HttpManager *http = [HttpManager defaultManager];
-    http.delegate = self;
-    http.tag =1;
-    [http sendPost:url param:dic];
+    NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    if (authorToken) {
+        NSDictionary *dic = @{@"AuthorToken":authorToken};
+        HttpManager *http = [HttpManager defaultManager];
+        http.delegate = self;
+        http.tag =1;
+        [http sendPost:url param:dic];
+    }
 }
 -(void)httpHandler:(id)responseObject tag:(int)tag
 {

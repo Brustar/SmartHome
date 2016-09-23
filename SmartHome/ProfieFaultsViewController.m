@@ -58,7 +58,7 @@
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     NSString *url = [NSString stringWithFormat:@"%@GetBreakdownMessage.aspx",[IOManager httpAddr]];
     
-    if ([[[DeviceInfo defaultManager] db] isEqualToString:SMART_DB]) {
+    if (auothorToken) {
         NSDictionary *dict = @{@"AuthorToken":auothorToken};
     
         [self sendRequest:url andDict:dict WithTag:1];
@@ -150,8 +150,10 @@
                NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
                NSString *url = [NSString stringWithFormat:@"%@UploadBreakdown.aspx",[IOManager httpAddr]];
                NSString *recordID = self.recordIDs[indexPath.row];
-               NSDictionary *dict = @{@"AuthorToken":auothorToken,@"RecordID":recordID};
-               [self sendRequest:url andDict:dict WithTag:2];
+               if (auothorToken) {
+                   NSDictionary *dict = @{@"AuthorToken":auothorToken,@"RecordID":recordID};
+                   [self sendRequest:url andDict:dict WithTag:2];
+               }
            }];
            UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                [alertVC dismissViewControllerAnimated:YES completion:nil];
