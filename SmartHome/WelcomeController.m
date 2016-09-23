@@ -22,8 +22,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+   
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+//    self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
+//    self.view.frame = [[UIScreen mainScreen] bounds];
+    
+    }
 - (IBAction)clickWeKnowBtn:(id)sender {
     
     self.coverView.hidden = YES;
