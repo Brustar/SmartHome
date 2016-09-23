@@ -38,8 +38,14 @@
     info.db=@"demoDB";
     [SQLManager initDemoSQlite];
     
-    //跳转到SceneControll
-    [self performSegueWithIdentifier:@"gotoMainController" sender:self];
+    if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    {
+        [self performSegueWithIdentifier:@"iphoneMainSegue" sender:self];
+    }else{
+       
+        [self performSegueWithIdentifier:@"gotoMainController" sender:self];
+    }
+    
     
 }
 
