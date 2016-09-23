@@ -145,6 +145,7 @@
             [self performSegueWithIdentifier:@"systemSetSegue" sender:self];
         }else {
             [self performSegueWithIdentifier:@"systemInfoSegue" sender:self];
+            return;
         }
     }else if(indexPath.section == 3)
     {
