@@ -179,6 +179,8 @@
     if([segue.identifier isEqualToString:@"goWelcomeSegue"])
     {
         WelcomeController *welcomeVC = segue.destinationViewController;
+        
+
         welcomeVC.coverView.hidden = YES;
     }
 }

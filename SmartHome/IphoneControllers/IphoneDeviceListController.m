@@ -18,7 +18,7 @@
 #import "DVDController.h"
 #import "NetvController.h"
 #import "FMController.h"
-#import "AirController.h"
+#import "IphoneAirController.h"
 #import "PluginViewController.h"
 #import "CameraController.h"
 #import "GuardController.h"
@@ -154,8 +154,9 @@
         
     }else if([typeName isEqualToString:@"空调"])
     {
-        AirController *airVC = [storyBoard instantiateViewControllerWithIdentifier:@"AirController"];
+        IphoneAirController *airVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneAirController"];
         airVC.roomID = roomID;
+        [self addViewAndVC:airVC];
         
     }else if([typeName isEqualToString:@"机顶盒"]){
         NetvController *netVC = [storyBoard instantiateViewControllerWithIdentifier:@"NetvController"];

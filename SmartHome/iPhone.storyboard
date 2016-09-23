@@ -339,18 +339,18 @@
                                 <rect key="frame" x="0.0" y="144" width="320" height="374"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cph-wv-9vg" customClass="IphoneRoomView">
-                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="msR-vL-Mmz"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPQ-5e-iR2" customClass="IphoneRoomView">
                                 <rect key="frame" x="0.0" y="64" width="320" height="80"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="e2h-Zn-7EH"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cph-wv-9vg" customClass="IphoneRoomView">
+                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="msR-vL-Mmz"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -564,6 +564,66 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4DV-ro-34x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2223" y="-1082"/>
+        </scene>
+        <!--Iphone Air Controller-->
+        <scene sceneID="Nsx-vO-5MX">
+            <objects>
+                <viewController storyboardIdentifier="IphoneAirController" id="d9A-H8-Fkt" customClass="IphoneAirController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eyj-Ci-Bhh"/>
+                        <viewControllerLayoutGuide type="bottom" id="qyX-cJ-9vt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RqH-Kr-i6v">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Phd-cd-8vX">
+                                <rect key="frame" x="26" y="65" width="186" height="175"/>
+                                <color key="backgroundColor" red="1" green="0.56939600459999995" blue="0.12608335909999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iVr-6f-FMT">
+                                <rect key="frame" x="250" y="70" width="50" height="448"/>
+                                <color key="backgroundColor" red="0.7725490196" green="0.7725490196" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="P3a-V3-nZx"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h3J-PW-brE">
+                                <rect key="frame" x="50" y="438" width="30" height="30"/>
+                                <state key="normal" title="模式"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uhD-Vk-4f7">
+                                <rect key="frame" x="50" y="488" width="30" height="30"/>
+                                <state key="normal" title="定时"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLK-OJ-ifc">
+                                <rect key="frame" x="170" y="488" width="30" height="30"/>
+                                <state key="normal" title="风向"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7IK-y1-nkp">
+                                <rect key="frame" x="170" y="438" width="30" height="30"/>
+                                <state key="normal" title="风速"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="uhD-Vk-4f7" firstAttribute="leading" secondItem="RqH-Kr-i6v" secondAttribute="leading" constant="50" id="3oo-Nz-uyR"/>
+                            <constraint firstItem="iVr-6f-FMT" firstAttribute="leading" secondItem="hLK-OJ-ifc" secondAttribute="trailing" constant="50" id="9r0-Un-voP"/>
+                            <constraint firstAttribute="trailing" secondItem="iVr-6f-FMT" secondAttribute="trailing" constant="20" id="IyV-Mk-GvH"/>
+                            <constraint firstItem="hLK-OJ-ifc" firstAttribute="trailing" secondItem="7IK-y1-nkp" secondAttribute="trailing" id="Jb1-Am-Cdy"/>
+                            <constraint firstItem="uhD-Vk-4f7" firstAttribute="leading" secondItem="h3J-PW-brE" secondAttribute="leading" id="Kk2-TW-E6S"/>
+                            <constraint firstItem="qyX-cJ-9vt" firstAttribute="top" secondItem="uhD-Vk-4f7" secondAttribute="bottom" constant="50" id="hua-dI-dWd"/>
+                            <constraint firstItem="iVr-6f-FMT" firstAttribute="top" secondItem="eyj-Ci-Bhh" secondAttribute="bottom" constant="50" id="iNb-3h-5gB"/>
+                            <constraint firstItem="uhD-Vk-4f7" firstAttribute="top" secondItem="h3J-PW-brE" secondAttribute="bottom" constant="20" id="kHA-1g-MeZ"/>
+                            <constraint firstItem="qyX-cJ-9vt" firstAttribute="top" secondItem="iVr-6f-FMT" secondAttribute="bottom" constant="50" id="lrT-2e-lpe"/>
+                            <constraint firstItem="hLK-OJ-ifc" firstAttribute="top" secondItem="7IK-y1-nkp" secondAttribute="bottom" constant="20" id="oWm-Ak-tlm"/>
+                            <constraint firstItem="qyX-cJ-9vt" firstAttribute="top" secondItem="hLK-OJ-ifc" secondAttribute="bottom" constant="50" id="y1v-tH-zZO"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XYH-6k-971" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2667" y="-1082"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4Qf-sa-6K1">

@@ -2443,7 +2443,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fm6-kA-D9a">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fm6-kA-D9a">
                                 <rect key="frame" x="100" y="120" width="400" height="200"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="veB-gj-0ZR">
@@ -2645,7 +2645,7 @@
                                     <constraint firstAttribute="trailing" secondItem="iPN-RN-2GQ" secondAttribute="trailing" id="yG4-jE-PCx"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aXm-Qu-dt0">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aXm-Qu-dt0">
                                 <rect key="frame" x="100" y="320" width="400" height="30"/>
                                 <color key="backgroundColor" red="0.18264051610000001" green="0.62103239529999998" blue="0.3035301621" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -2778,7 +2778,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jMf-6l-yHK">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jMf-6l-yHK">
                                 <rect key="frame" x="100" y="120" width="400" height="220"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欢迎注册逸云系统" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z7G-kS-gVb">
@@ -2936,7 +2936,7 @@
                                     <constraint firstItem="hRF-3g-Hca" firstAttribute="leading" secondItem="jMf-6l-yHK" secondAttribute="leading" constant="5" id="zGi-kQ-21G"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQf-8J-1Ym">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQf-8J-1Ym">
                                 <rect key="frame" x="100" y="360" width="400" height="30"/>
                                 <color key="backgroundColor" red="0.18264051614458393" green="0.62103239528795817" blue="0.30353016214555956" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>

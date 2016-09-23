@@ -132,6 +132,7 @@
 		F625A6181D4C8EF700B696E5 /* ProfireListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F625A6171D4C8EF700B696E5 /* ProfireListController.m */; };
 		F625A61B1D4C99EC00B696E5 /* RoomListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F625A61A1D4C99EC00B696E5 /* RoomListController.m */; };
 		F62CD87A1D94BE99001C66CE /* IphoneTVController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CD8791D94BE99001C66CE /* IphoneTVController.m */; };
+		F62CD87D1D950453001C66CE /* IphoneAirController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CD87C1D950453001C66CE /* IphoneAirController.m */; };
 		F630C35F1D38B4FF008880BB /* AccessSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = F630C35E1D38B4FF008880BB /* AccessSettingController.m */; };
 		F630C3621D38C3E5008880BB /* AreaSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F630C3611D38C3E5008880BB /* AreaSettingCell.m */; };
 		F6359AFB1CFFBC910035EB31 /* DetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6359AF91CFFBC910035EB31 /* DetailTableViewCell.m */; };
@@ -538,6 +539,8 @@
 		F625A61A1D4C99EC00B696E5 /* RoomListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomListController.m; sourceTree = "<group>"; };
 		F62CD8781D94BE99001C66CE /* IphoneTVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneTVController.h; sourceTree = "<group>"; };
 		F62CD8791D94BE99001C66CE /* IphoneTVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneTVController.m; sourceTree = "<group>"; };
+		F62CD87B1D950453001C66CE /* IphoneAirController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneAirController.h; sourceTree = "<group>"; };
+		F62CD87C1D950453001C66CE /* IphoneAirController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneAirController.m; sourceTree = "<group>"; };
 		F630C35D1D38B4FF008880BB /* AccessSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccessSettingController.h; sourceTree = "<group>"; };
 		F630C35E1D38B4FF008880BB /* AccessSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccessSettingController.m; sourceTree = "<group>"; };
 		F630C3611D38C3E5008880BB /* AreaSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaSettingCell.m; sourceTree = "<group>"; };
@@ -1341,6 +1344,8 @@
 				F646C0B81D91173000DF1728 /* IphoneRoomView.m */,
 				F62CD8781D94BE99001C66CE /* IphoneTVController.h */,
 				F62CD8791D94BE99001C66CE /* IphoneTVController.m */,
+				F62CD87B1D950453001C66CE /* IphoneAirController.h */,
+				F62CD87C1D950453001C66CE /* IphoneAirController.m */,
 			);
 			path = IphoneControllers;
 			sourceTree = "<group>";
@@ -1794,6 +1799,7 @@
 				0FCFB3861CF2912700B37DD3 /* TV.m in Sources */,
 				F65B7D271D34E9E00059CFA4 /* MySettingViewController.m in Sources */,
 				F69C82301D35D214002DE6D7 /* PushSettingController.m in Sources */,
+				F62CD87D1D950453001C66CE /* IphoneAirController.m in Sources */,
 				F65DB3411D2B5AB2002A815C /* RegisterDetailController.m in Sources */,
 				0FAF98A61CE40F3C009BDBB5 /* QRCodeReaderViewController.m in Sources */,
 				0F96A1661D17F37C00E1594F /* RulerLeftTagView.m in Sources */,
