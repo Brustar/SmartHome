@@ -156,15 +156,19 @@
          [self performSegueWithIdentifier:@"aboutSegue" sender:self];
     }else {
         //退出发送请求
+        NSString *authorToken =[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+        if (authorToken) {
+            NSDictionary *dict = @{@"AuthorToken":authorToken};
         
-        NSDictionary *dict = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]};
-        
-        NSString *url = [NSString stringWithFormat:@"%@UserLogOut.aspx",[IOManager httpAddr]];
-        HttpManager *http=[HttpManager defaultManager];
-        http.delegate=self;
-        http.tag = 1;
-        [http sendPost:url param:dict];
-     
+            NSString *url = [NSString stringWithFormat:@"%@UserLogOut.aspx",[IOManager httpAddr]];
+            HttpManager *http=[HttpManager defaultManager];
+            http.delegate=self;
+            http.tag = 1;
+            [http sendPost:url param:dict];
+        }else{
+            //跳转到欢迎页
+            [self performSegueWithIdentifier:@"" sender:self];
+        }
     }
 
 }

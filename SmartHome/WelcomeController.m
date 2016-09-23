@@ -42,11 +42,9 @@
     {
         [self performSegueWithIdentifier:@"iphoneMainSegue" sender:self];
     }else{
-       
         [self performSegueWithIdentifier:@"gotoMainController" sender:self];
     }
-    
-    
+
 }
 
 - (void)didReceiveMemoryWarning {
