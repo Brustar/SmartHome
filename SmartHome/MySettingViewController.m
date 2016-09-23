@@ -15,6 +15,7 @@
 #import "MBProgressHUD+NJ.h"
 #import "AppDelegate.h"
 #import "SocketManager.h"
+#import "WelcomeController.h"
 
 @interface MySettingViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate>
 
@@ -168,12 +169,19 @@
             [http sendPost:url param:dict];
         }else{
             //跳转到欢迎页
-            [self performSegueWithIdentifier:@"" sender:self];
+            [self performSegueWithIdentifier:@"goWelcomeSegue" sender:self];
         }
     }
 
 }
-
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"goWelcomeSegue"])
+    {
+        WelcomeController *welcomeVC = segue.destinationViewController;
+        welcomeVC.coverView.hidden = YES;
+    }
+}
 -(void) httpHandler:(id) responseObject tag:(int)tag
 {
     if([responseObject[@"Result"] intValue] == 0)

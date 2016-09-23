@@ -7,21 +7,59 @@
 //
 
 #import "IphoneTVController.h"
+#import "IphoneRoomView.h"
+#import "ChannelManager.h"
+#import "TVChannel.h"
 
 @interface IphoneTVController ()
+@property (weak, nonatomic) IBOutlet UISlider *volumeSlider;
+@property (weak, nonatomic) IBOutlet UIButton *lastBtn;
+@property (weak, nonatomic) IBOutlet UIButton *nextBtn;
+@property (weak, nonatomic) IBOutlet IphoneRoomView *channelView;
+@property (nonatomic,strong) NSMutableArray *allFavourTVChannels;
 
 @end
 
 @implementation IphoneTVController
 
+-(NSMutableArray*)allFavourTVChannels
+{
+    if(!_allFavourTVChannels)
+    {
+        _allFavourTVChannels = [NSMutableArray array];
+        _allFavourTVChannels = [ChannelManager getAllChannelForFavoritedForType:@"TV" deviceID:[self.deviceid intValue]];
+        if(_allFavourTVChannels == nil || _allFavourTVChannels.count == 0)
+        {
+            
+        }
+    }
+    return _allFavourTVChannels;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.volumeSlider.transform = CGAffineTransformMakeRotation(M_PI/2);
+    [self setUpChannelView];
+}
+
+-(void)setUpChannelView
+{
+    NSMutableArray *channelImg = [NSMutableArray array];
+    for(TVChannel *channel in self.allFavourTVChannels)
+    {
+        NSString *imgUrl = channel.channel_pic;
+        [channelImg addObject:imgUrl];
+        
+    }
+    self.channelView.dataArray = channelImg;
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+
 }
 
 /*

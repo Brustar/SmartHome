@@ -12,7 +12,7 @@
 
 @interface WelcomeController ()
 
-@property (weak, nonatomic) IBOutlet UIView *coverView;
+
 
 @property (weak, nonatomic) IBOutlet UIView *knowView;
 

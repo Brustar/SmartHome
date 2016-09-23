@@ -14,7 +14,7 @@
 #import "Room.h"
 #import "LightController.h"
 #import "CurtainController.h"
-#import "TVController.h"
+#import "IphoneTVController.h"
 #import "DVDController.h"
 #import "NetvController.h"
 #import "FMController.h"
@@ -115,10 +115,10 @@
     Room *room = self.rooms[self.roomIndex];
     int roomID = room.rId;
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
+    UIStoryboard *iphoneBoard  = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     if([typeName isEqualToString:@"网络电视"])
     {
-        TVController *tVC = [storyBoard instantiateViewControllerWithIdentifier:@"TVController"];
+        IphoneTVController *tVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneTVController"];
         tVC.roomID = roomID;
         
         [self addViewAndVC:tVC];
