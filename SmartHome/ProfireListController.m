@@ -9,9 +9,6 @@
 #define selectedColour  [UIColor colorWithRed:30/255.0 green:52/255.0 blue:70/255.0 alpha:1]
 #import "ProfireListController.h"
 
-
-
-
 @interface ProfireListController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *headView;
@@ -36,6 +33,7 @@
     self.tableView.tableHeaderView = self.headView;
     [self.tableView setSeparatorColor:[UIColor clearColor]];
 }
+
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -49,8 +47,6 @@
     {
         [self.delegate ProfireListController:self selected:selectedIndexPath.row ];
     }
-    
-   
 }
 #pragma mark - Table view data source
 
@@ -65,9 +61,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    
 
-    
     if(!cell)
     {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
@@ -79,6 +73,7 @@
     cell.selectedBackgroundView.backgroundColor = selectedColour;
     return cell;
 }
+
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -86,16 +81,18 @@
     
     cell.textLabel.textColor = [UIColor colorWithRed:152/255.0 green:172/255.0 blue:195/255.0 alpha:1];
 }
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 50;
 }
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     if([self.delegate respondsToSelector:@selector(ProfireListController:selected:)])
     {
-        [self.delegate ProfireListController:self selected:indexPath.row ];
+        [self.delegate ProfireListController:self selected:indexPath.row];
     }
 }
 

@@ -15,7 +15,9 @@
 #import "MBProgressHUD+NJ.h"
 #import "AppDelegate.h"
 #import "SocketManager.h"
+
 @interface MySettingViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) NSArray *titleArr;
 @property (nonatomic,strong) AccessSettingController *accessVC;
@@ -27,7 +29,6 @@
 
 @implementation MySettingViewController
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"设置";
@@ -35,12 +36,7 @@
     
     self.tableView.tableFooterView = [UIView new];
     self.tableView.backgroundColor =  [UIColor colorWithRed:241/255.0 green:240/255.0 blue:246/255.0 alpha:1];
-
-   
 }
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

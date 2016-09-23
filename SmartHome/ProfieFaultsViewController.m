@@ -10,6 +10,7 @@
 #import "ProfieFaultsCell.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
+#import "DeviceInfo.h"
 
 @interface ProfieFaultsViewController ()<UITableViewDelegate,UITableViewDataSource,HttpDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -56,8 +57,12 @@
     //获取所有故障信息
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     NSString *url = [NSString stringWithFormat:@"%@GetBreakdownMessage.aspx",[IOManager httpAddr]];
-    NSDictionary *dict = @{@"AuthorToken":auothorToken};
-    [self sendRequest:url andDict:dict WithTag:1];
+    
+    if ([[[DeviceInfo defaultManager] db] isEqualToString:SMART_DB]) {
+        NSDictionary *dict = @{@"AuthorToken":auothorToken};
+    
+        [self sendRequest:url andDict:dict WithTag:1];
+    }
 }
 
 -(void)sendRequest:(NSString *)url andDict:(NSDictionary *)dict WithTag:(int)tag

@@ -14,6 +14,7 @@
 #import "MySettingViewController.h"
 #import "EnergyOfDeviceController.h"
 #import "MSGController.h"
+
 @interface MyCenterSplitController ()<ProfireListControllerDelegate>
 @property (nonatomic, strong) UINavigationController *detailNavigation;
 @end
