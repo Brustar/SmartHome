@@ -23,13 +23,13 @@
             ];
 }
 
-- (NSString *)encryptWithText:(NSString *)key
+- (NSString *)encryptWithDes:(NSString *)key
 {
     //kCCEncrypt 加密
     return [self encrypt:key encryptOrDecrypt:kCCEncrypt];
 }
 
-- (NSString *)decryptWithText:(NSString *)key
+- (NSString *)decryptWithDes:(NSString *)key
 {
     //kCCDecrypt 解密
     return [self encrypt:key encryptOrDecrypt:kCCDecrypt];
@@ -43,7 +43,6 @@
     if (encryptOperation == kCCDecrypt)//传递过来的是decrypt 解码
     {
         //解码 base64
-        //NSData *decryptData = [GTMBase64 decodeData:[sText dataUsingEncoding:NSUTF8StringEncoding]];//转成utf-8并decode
         NSData *decryptData = [MF_Base64Codec dataFromBase64String:self];
         dataInLength = [decryptData length];
         dataIn = [decryptData bytes];
@@ -96,7 +95,7 @@
     {
         //编码 base64
         NSData *data = [NSData dataWithBytes:(const void *)dataOut length:(NSUInteger)dataOutMoved];
-        result = [MF_Base64Codec base64StringFromData:data];//[GTMBase64 stringByEncodingData:data];
+        result = [MF_Base64Codec base64StringFromData:data];
     }
     
     return result;

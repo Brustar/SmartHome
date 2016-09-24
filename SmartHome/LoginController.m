@@ -28,6 +28,8 @@
 #import "DeviceInfo.h"
 #import "PackManager.h"
 #import "IbeaconManager.h"
+#import "CryptoManager.h"
+
 @interface LoginController ()<QRCodeReaderDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITextField *user;
@@ -621,6 +623,7 @@
 
 - (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result
 {
+    result=[result decryptWithDes:@"ecloud88"];
     UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     RegisterPhoneNumController *registVC = [story instantiateViewControllerWithIdentifier:@"RegisterPhoneNumController"];
     [self dismissViewControllerAnimated:YES completion:^{

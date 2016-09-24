@@ -13,7 +13,7 @@
 
 - (NSString *) md5;
 //加密
-- (NSString *)encryptWithText:(NSString *)key;
-- (NSString *)decryptWithText:(NSString *)key;
+- (NSString *)encryptWithDes:(NSString *)key;
+- (NSString *)decryptWithDes:(NSString *)key;
 
 @end

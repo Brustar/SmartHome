@@ -10,7 +10,6 @@
 #import "SocketManager.h"
 #import "PackManager.h"
 #import "HttpManager.h"
-#import <Reachability/Reachability.h>
 
 @interface AppDelegate ()
 
@@ -63,6 +62,7 @@
             [[SocketManager defaultManager] connectUDP:[IOManager udpPort]];
         }
     }*/
+
     return YES;
 }
 

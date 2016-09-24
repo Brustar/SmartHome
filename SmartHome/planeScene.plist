@@ -9,18 +9,24 @@
 			<integer>51</integer>
 			<key>rect</key>
 			<string>{{0, 0}, {200, 40}}</string>
+			<key>poweron</key>
+			<false/>
 		</dict>
 		<dict>
 			<key>deviceID</key>
 			<real>0</real>
 			<key>rect</key>
 			<string>{{300, 0}, {200, 40}}</string>
+			<key>poweron</key>
+			<true/>
 		</dict>
 		<dict>
 			<key>deviceID</key>
 			<real>0</real>
 			<key>rect</key>
 			<string>{{600, 0}, {200, 40}}</string>
+			<key>poweron</key>
+			<false/>
 		</dict>
 	</array>
 </dict>
