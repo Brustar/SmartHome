@@ -623,7 +623,7 @@
 
 - (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result
 {
-    result=[result decryptWithDes:@"ecloud88"];
+    result=[result decryptWithDes:DES_KEY];
     UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     RegisterPhoneNumController *registVC = [story instantiateViewControllerWithIdentifier:@"RegisterPhoneNumController"];
     [self dismissViewControllerAnimated:YES completion:^{

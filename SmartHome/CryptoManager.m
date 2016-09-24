@@ -9,6 +9,7 @@
 #import "CryptoManager.h"
 
 @implementation NSString (CryptoExtensions)
+
 - (NSString *) md5
 {
     const char *cStr = [self UTF8String];

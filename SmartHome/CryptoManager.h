@@ -9,6 +9,8 @@
 #import <CommonCrypto/CommonCryptor.h>
 #import "MF_Base64Additions.h"
 
+#define DES_KEY @"ecloud88"
+
 @interface NSString (CryptoExtensions)
 
 - (NSString *) md5;
