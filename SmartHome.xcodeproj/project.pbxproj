@@ -131,6 +131,9 @@
 		F6251F771D542508000A5A47 /* SQLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6251F761D542508000A5A47 /* SQLManager.m */; };
 		F625A6181D4C8EF700B696E5 /* ProfireListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F625A6171D4C8EF700B696E5 /* ProfireListController.m */; };
 		F625A61B1D4C99EC00B696E5 /* RoomListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F625A61A1D4C99EC00B696E5 /* RoomListController.m */; };
+		F6280D4A1D961C62009108ED /* IphoneAddTVChannelController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6280D491D961C62009108ED /* IphoneAddTVChannelController.m */; };
+		F6280D4D1D9651CE009108ED /* IphoneFMController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6280D4C1D9651CE009108ED /* IphoneFMController.m */; };
+		F6280D531D966218009108ED /* IphoneAddFmController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6280D521D966218009108ED /* IphoneAddFmController.m */; };
 		F62CD87A1D94BE99001C66CE /* IphoneTVController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CD8791D94BE99001C66CE /* IphoneTVController.m */; };
 		F62CD87D1D950453001C66CE /* IphoneAirController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CD87C1D950453001C66CE /* IphoneAirController.m */; };
 		F630C35F1D38B4FF008880BB /* AccessSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = F630C35E1D38B4FF008880BB /* AccessSettingController.m */; };
@@ -153,6 +156,7 @@
 		F65164141D3780C500A6F5FA /* TVLogoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F65164131D3780C500A6F5FA /* TVLogoCell.m */; };
 		F65838D41D39D3BB004210AC /* WelcomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65838D31D39D3BB004210AC /* WelcomeController.m */; };
 		F65838DA1D3A2A43004210AC /* MsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F65838D91D3A2A43004210AC /* MsgCell.m */; };
+		F659110C1D967383002CFBB7 /* IphoneNetTvController.m in Sources */ = {isa = PBXBuildFile; fileRef = F659110B1D967383002CFBB7 /* IphoneNetTvController.m */; };
 		F65AF6D41D3370770048A4E5 /* ProfieFaultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65AF6D31D3370770048A4E5 /* ProfieFaultsViewController.m */; };
 		F65AF6DA1D3375700048A4E5 /* ProfieFaultsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F65AF6D91D3375700048A4E5 /* ProfieFaultsCell.m */; };
 		F65B7D271D34E9E00059CFA4 /* MySettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65B7D261D34E9E00059CFA4 /* MySettingViewController.m */; };
@@ -537,6 +541,12 @@
 		F625A6171D4C8EF700B696E5 /* ProfireListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfireListController.m; sourceTree = "<group>"; };
 		F625A6191D4C99EC00B696E5 /* RoomListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomListController.h; sourceTree = "<group>"; };
 		F625A61A1D4C99EC00B696E5 /* RoomListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomListController.m; sourceTree = "<group>"; };
+		F6280D481D961C62009108ED /* IphoneAddTVChannelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneAddTVChannelController.h; sourceTree = "<group>"; };
+		F6280D491D961C62009108ED /* IphoneAddTVChannelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneAddTVChannelController.m; sourceTree = "<group>"; };
+		F6280D4B1D9651CE009108ED /* IphoneFMController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneFMController.h; sourceTree = "<group>"; };
+		F6280D4C1D9651CE009108ED /* IphoneFMController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneFMController.m; sourceTree = "<group>"; };
+		F6280D511D966218009108ED /* IphoneAddFmController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneAddFmController.h; sourceTree = "<group>"; };
+		F6280D521D966218009108ED /* IphoneAddFmController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneAddFmController.m; sourceTree = "<group>"; };
 		F62CD8781D94BE99001C66CE /* IphoneTVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneTVController.h; sourceTree = "<group>"; };
 		F62CD8791D94BE99001C66CE /* IphoneTVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneTVController.m; sourceTree = "<group>"; };
 		F62CD87B1D950453001C66CE /* IphoneAirController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneAirController.h; sourceTree = "<group>"; };
@@ -578,6 +588,8 @@
 		F65838D31D39D3BB004210AC /* WelcomeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeController.m; sourceTree = "<group>"; };
 		F65838D81D3A2A43004210AC /* MsgCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgCell.h; sourceTree = "<group>"; };
 		F65838D91D3A2A43004210AC /* MsgCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgCell.m; sourceTree = "<group>"; };
+		F659110A1D967383002CFBB7 /* IphoneNetTvController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneNetTvController.h; sourceTree = "<group>"; };
+		F659110B1D967383002CFBB7 /* IphoneNetTvController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneNetTvController.m; sourceTree = "<group>"; };
 		F65AF6D21D3370770048A4E5 /* ProfieFaultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfieFaultsViewController.h; sourceTree = "<group>"; };
 		F65AF6D31D3370770048A4E5 /* ProfieFaultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfieFaultsViewController.m; sourceTree = "<group>"; };
 		F65AF6D81D3375700048A4E5 /* ProfieFaultsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfieFaultsCell.h; sourceTree = "<group>"; };
@@ -1344,8 +1356,16 @@
 				F646C0B81D91173000DF1728 /* IphoneRoomView.m */,
 				F62CD8781D94BE99001C66CE /* IphoneTVController.h */,
 				F62CD8791D94BE99001C66CE /* IphoneTVController.m */,
+				F6280D481D961C62009108ED /* IphoneAddTVChannelController.h */,
+				F6280D491D961C62009108ED /* IphoneAddTVChannelController.m */,
+				F6280D4B1D9651CE009108ED /* IphoneFMController.h */,
+				F6280D4C1D9651CE009108ED /* IphoneFMController.m */,
+				F6280D511D966218009108ED /* IphoneAddFmController.h */,
+				F6280D521D966218009108ED /* IphoneAddFmController.m */,
 				F62CD87B1D950453001C66CE /* IphoneAirController.h */,
 				F62CD87C1D950453001C66CE /* IphoneAirController.m */,
+				F659110A1D967383002CFBB7 /* IphoneNetTvController.h */,
+				F659110B1D967383002CFBB7 /* IphoneNetTvController.m */,
 			);
 			path = IphoneControllers;
 			sourceTree = "<group>";
@@ -1680,14 +1700,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6280D4A1D961C62009108ED /* IphoneAddTVChannelController.m in Sources */,
 				F65164141D3780C500A6F5FA /* TVLogoCell.m in Sources */,
 				F61896381D87B06300DBE6CD /* ScreenCurtainController.m in Sources */,
 				0FAF74BF1CEEA17C00432713 /* HRBrightnessCursor.m in Sources */,
 				0FAF98A31CE40F3C009BDBB5 /* QRCameraSwitchButton.m in Sources */,
+				F6280D4D1D9651CE009108ED /* IphoneFMController.m in Sources */,
 				0FD3DEAA1D3F183D00AF7765 /* SCWaveAnimationView.m in Sources */,
 				F651640D1D3766C900A6F5FA /* MyEnergyViewController.m in Sources */,
 				0F477FC61D2F94B3004FA361 /* NetStatusManager.m in Sources */,
 				0FEE12761D20C53400811947 /* TXHRulerScrollView.m in Sources */,
+				F659110C1D967383002CFBB7 /* IphoneNetTvController.m in Sources */,
 				F64EF7FB1D8FB738003C1C48 /* IphoneMainController.m in Sources */,
 				0FCFB38F1CF293B300B37DD3 /* Radio.m in Sources */,
 				F618963B1D87B08300DBE6CD /* ProjectController.m in Sources */,
@@ -1723,6 +1746,7 @@
 				0FC0FFDA1CF577C0000F71D5 /* RealScene.m in Sources */,
 				F6755A4F1D406552002394F3 /* ECloudTabBarController.m in Sources */,
 				0FAF74C41CEEA17C00432713 /* HRColorPickerView.m in Sources */,
+				F6280D531D966218009108ED /* IphoneAddFmController.m in Sources */,
 				0FF92B661D9224640098DD54 /* TVChannel.m in Sources */,
 				0F11654F1D7418EE00A01B8F /* Amplifier.m in Sources */,
 				F630C3621D38C3E5008880BB /* AreaSettingCell.m in Sources */,

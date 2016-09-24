@@ -7,8 +7,10 @@
 //
 
 #import "IphoneAirController.h"
-
-@interface IphoneAirController ()
+#import "RulerView.h"
+@interface IphoneAirController ()<RulerViewDatasource, RulerViewDelegate>
+@property (weak, nonatomic) IBOutlet RulerView *thermometerView;
+@property (weak, nonatomic) IBOutlet UILabel *showTemLabel;
 
 @end
 
@@ -16,14 +18,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.thermometerView.datasource = self;
+    self.thermometerView.delegate = self;
+    [self.thermometerView updateCurrentValue:24];
 }
+
+#pragma mark - RulerViewDelegate
+- (void)rulerView:(RulerView *)rulerView didChangedCurrentValue:(CGFloat)currentValue {
+    NSInteger value = round(currentValue);
+    
+    NSString *valueString = [NSString stringWithFormat:@"%d ℃", (int)value];
+    
+    self.showTemLabel.text = valueString;
+    
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.thermometerView reloadView];
+}
 /*
 #pragma mark - Navigation
 

@@ -16,7 +16,7 @@
 #import "CurtainController.h"
 #import "IphoneTVController.h"
 #import "DVDController.h"
-#import "NetvController.h"
+#import "IphoneNetTvController.h"
 #import "FMController.h"
 #import "IphoneAirController.h"
 #import "PluginViewController.h"
@@ -148,7 +148,7 @@
         
     }else if([typeName isEqualToString:@"FM"])
     {
-        FMController *fmVC = [storyBoard instantiateViewControllerWithIdentifier:@"FMController"];
+        FMController *fmVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneFMController"];
         fmVC.roomID = roomID;
         [self addViewAndVC:fmVC];
         
@@ -159,7 +159,7 @@
         [self addViewAndVC:airVC];
         
     }else if([typeName isEqualToString:@"机顶盒"]){
-        NetvController *netVC = [storyBoard instantiateViewControllerWithIdentifier:@"NetvController"];
+        IphoneNetTvController *netVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneNetTvController"];
         netVC.roomID = roomID;
         
         [self addViewAndVC:netVC];

@@ -11,6 +11,7 @@
 @interface IphoneRoomView ()
 @property (nonatomic,strong) NSMutableArray *btns;
 @property (nonatomic, weak) UIButton *selectedButton;
+@property (nonatomic, assign) int selectedButtonCount;
 @end
 @implementation IphoneRoomView
 

@@ -326,7 +326,7 @@
     if([db open])
     {
         int cNumber = [self.numberOfChannel.text intValue];
-        NSString *sql = [NSString stringWithFormat:@"insert into Channels values(%d,%d,%d,'%@','%@','%@',%d,'%@')",[responseObject[@"fmId"] intValue],[self.deviceid intValue],cNumber,self.channelNameEdit.text,responseObject[@"imgUrl"],parent,1,self.eNumber];
+        NSString *sql = [NSString stringWithFormat:@"insert into Channels values(%d,%d,%d,%d,'%@','%@','%@',%d,'%@')",[responseObject[@"fmId"] intValue],[self.deviceid intValue],0,cNumber,self.channelNameEdit.text,responseObject[@"imgUrl"],parent,1,self.eNumber];
         BOOL result = [db executeUpdate:sql];
         if(result)
         {

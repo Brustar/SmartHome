@@ -430,20 +430,9 @@
 -(void)tvDeleteAction:(TVLogoCell *)cell
 {
     self.cell = cell;
+    
     NSIndexPath *indexPath = [self.tvLogoCollectionView indexPathForCell:cell];
     TVChannel *channel = self.allFavourTVChannels[indexPath.row];
-    
-    //从数据库中删除数据
-    BOOL isSuccess = [ChannelManager deleteChannelForChannelID:channel.channel_id];
-    if(!isSuccess)
-    {
-        [MBProgressHUD showError:@"删除失败，请稍后再试"];
-        return;
-    }
-    [self.allFavourTVChannels removeObject:channel];
-    [self.tvLogoCollectionView reloadData];
-
-    
     //发送删除频道请求
     NSString *url = [NSString stringWithFormat:@"%@TVChannelRemove.aspx",[IOManager httpAddr]];
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
@@ -545,7 +534,19 @@
     {
         if([responseObject[@"Result"] intValue] == 0)
         {
+            NSIndexPath *indexPath = [self.tvLogoCollectionView indexPathForCell:self.cell];
+            TVChannel *channel = self.allFavourTVChannels[indexPath.row];
             
+            //从数据库中删除数据
+            BOOL isSuccess = [ChannelManager deleteChannelForChannelID:channel.channel_id];
+            if(!isSuccess)
+            {
+                [MBProgressHUD showError:@"删除失败，请稍后再试"];
+                return;
+            }
+            [self.allFavourTVChannels removeObject:channel];
+            [self.tvLogoCollectionView reloadData];
+
         }else{
             [MBProgressHUD showError:responseObject[@"Msg"]];
         }

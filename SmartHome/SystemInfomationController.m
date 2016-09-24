@@ -10,6 +10,8 @@
 #import "HttpManager.h"
 @interface SystemInfomationController ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+
 @property (nonatomic,strong) NSArray *titles;
 @end
 
