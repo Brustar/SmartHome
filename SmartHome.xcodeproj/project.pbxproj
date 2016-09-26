@@ -194,7 +194,6 @@
 		F6A1C02E1D586D7500856E00 /* Room.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A1C02D1D586D7500856E00 /* Room.m */; };
 		F6B91F6F1D100EF700592FB0 /* DVCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B91F6E1D100EF700592FB0 /* DVCollectionViewCell.m */; };
 		F6BF2AED1D86556500A3C9D5 /* HostIDSController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6BF2AEC1D86556500A3C9D5 /* HostIDSController.m */; };
-		F6BF2AF11D86B17400A3C9D5 /* UIImage+UiimageToString.m in Sources */ = {isa = PBXBuildFile; fileRef = F6BF2AF01D86B17400A3C9D5 /* UIImage+UiimageToString.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -664,8 +663,6 @@
 		F6B91F6E1D100EF700592FB0 /* DVCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVCollectionViewCell.m; sourceTree = "<group>"; };
 		F6BF2AEB1D86556500A3C9D5 /* HostIDSController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostIDSController.h; sourceTree = "<group>"; };
 		F6BF2AEC1D86556500A3C9D5 /* HostIDSController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostIDSController.m; sourceTree = "<group>"; };
-		F6BF2AEF1D86B17400A3C9D5 /* UIImage+UiimageToString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UiimageToString.h"; sourceTree = "<group>"; };
-		F6BF2AF01D86B17400A3C9D5 /* UIImage+UiimageToString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UiimageToString.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1297,8 +1294,6 @@
 				0FCD77711D7681CB00121BF1 /* KEVolumeUtil.m */,
 				F68A5DD61D782D8400601612 /* ECSearchView.h */,
 				F68A5DD71D782D8400601612 /* ECSearchView.m */,
-				F6BF2AEF1D86B17400A3C9D5 /* UIImage+UiimageToString.h */,
-				F6BF2AF01D86B17400A3C9D5 /* UIImage+UiimageToString.m */,
 			);
 			name = public;
 			sourceTree = "<group>";
@@ -1767,7 +1762,6 @@
 				0F180FC91D0E4E6500392F4C /* GuardController.m in Sources */,
 				0FCD77721D7681CB00121BF1 /* KEVolumeUtil.m in Sources */,
 				0FAF98A71CE40F3C009BDBB5 /* QRToggleTorchButton.m in Sources */,
-				F6BF2AF11D86B17400A3C9D5 /* UIImage+UiimageToString.m in Sources */,
 				0F25FE5E1CEB0C0A0063E834 /* SceneList.m in Sources */,
 				F625A6181D4C8EF700B696E5 /* ProfireListController.m in Sources */,
 				0FCFB3891CF2929900B37DD3 /* Aircon.m in Sources */,

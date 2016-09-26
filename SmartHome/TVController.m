@@ -25,9 +25,9 @@
 #import "ChannelManager.h"
 #import "TVIconController.h"
 #import "KEVolumeUtil.h"
-#import "UIImage+UiimageToString.h"
 #import "UploadManager.h"
 #import "UIImageView+WebCache.h"
+
 @interface UIImagePickerController (LandScapeImagePicker)
 
 - (UIStatusBarStyle)preferredStatusBarStyle;
