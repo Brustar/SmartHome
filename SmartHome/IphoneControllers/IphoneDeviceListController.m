@@ -15,7 +15,7 @@
 #import "LightController.h"
 #import "CurtainController.h"
 #import "IphoneTVController.h"
-#import "DVDController.h"
+#import "IphoneDVDController.h"
 #import "IphoneNetTvController.h"
 #import "FMController.h"
 #import "IphoneAirController.h"
@@ -114,6 +114,11 @@
 {
     Room *room = self.rooms[self.roomIndex];
     int roomID = room.rId;
+    [self goDeviceByRoomID:roomID typeName:typeName];
+    
+}
+-(void)goDeviceByRoomID:(int)roomID typeName:(NSString *)typeName
+{
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIStoryboard *iphoneBoard  = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     if([typeName isEqualToString:@"网络电视"])
@@ -141,7 +146,7 @@
     }else if([typeName isEqualToString:@"DVD"])
     {
         
-        DVDController *dvdVC = [storyBoard instantiateViewControllerWithIdentifier:@"DVDController"];
+        IphoneDVDController *dvdVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneDVDController"];
         dvdVC.roomID = roomID;
         
         [self addViewAndVC:dvdVC];
@@ -193,7 +198,7 @@
         AmplifierController *amplifierVC = [storyBoard instantiateViewControllerWithIdentifier:@"AmplifierController"];
         amplifierVC.roomID = roomID;
         [self addViewAndVC:amplifierVC];
-       
+        
     }else if([typeName isEqualToString:@"智能推窗器"])
     {
         WindowSlidingController *windowSlidVC = [storyBoard instantiateViewControllerWithIdentifier:@"WindowSlidingController"];
@@ -210,7 +215,7 @@
         
         [self addViewAndVC:pluginVC];
     }
-    
+
 }
 -(void )addViewAndVC:(UIViewController *)vc
 {

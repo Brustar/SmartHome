@@ -1,30 +1,32 @@
 //
-//  IphoneNetTvController.m
+//  IphoneDVDController.m
 //  SmartHome
 //
-//  Created by 逸云科技 on 16/9/24.
+//  Created by 逸云科技 on 16/9/26.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
-#import "IphoneNetTvController.h"
+#import "IphoneDVDController.h"
 
-@interface IphoneNetTvController ()
-@property (weak, nonatomic) IBOutlet UIImageView *voiceWeakImg;
+@interface IphoneDVDController ()
 @property (weak, nonatomic) IBOutlet UIImageView *voiceStrongImg;
-@property (weak, nonatomic) IBOutlet UIView *touchpad;
-//那6个控制按钮，button的tag值不一样，分别是0 到 5
+@property (weak, nonatomic) IBOutlet UIImageView *voiceWeakImg;
+@property (weak, nonatomic) IBOutlet UIView *touchPad;
+@property (weak, nonatomic) IBOutlet UISlider *volume;
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
 
+
 @end
 
-@implementation IphoneNetTvController
+@implementation IphoneDVDController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.volume.transform = CGAffineTransformMakeRotation(M_PI/2);
     self.voiceWeakImg.transform = CGAffineTransformMakeRotation(M_PI/2);
     self.voiceStrongImg.transform = CGAffineTransformMakeRotation(M_PI/2);
+    
 
 }
 

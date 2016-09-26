@@ -18,15 +18,30 @@
 @interface BgMusicController ()
 @property (weak, nonatomic) IBOutlet UISlider *volume;
 @property (weak, nonatomic) IBOutlet UILabel *voiceValue;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *voiceWeakLeftConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *voiceStrongRightConstraint;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewLeftConstraint;
 
 @end
 
 @implementation BgMusicController
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    {
+        self.voiceStrongRightConstraint.constant = [[UIScreen mainScreen] bounds].size.width * 0.05;
+        self.voiceWeakLeftConstraint.constant = self.voiceStrongRightConstraint.constant;
+        self.viewLeftConstraint.constant = 20;
+    }
+
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    
     self.beacon=[[DeviceInfo alloc] init];
     [self.beacon addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     VolumeManager *volume=[VolumeManager defaultManager];

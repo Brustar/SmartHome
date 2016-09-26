@@ -169,6 +169,7 @@
             [http sendPost:url param:dict];
         }else{
             //跳转到欢迎页
+            self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
             [self performSegueWithIdentifier:@"goWelcomeSegue" sender:self];
         }
     }
@@ -179,9 +180,9 @@
     if([segue.identifier isEqualToString:@"goWelcomeSegue"])
     {
         WelcomeController *welcomeVC = segue.destinationViewController;
-        
-
         welcomeVC.coverView.hidden = YES;
+        
+        
     }
 }
 -(void) httpHandler:(id) responseObject tag:(int)tag
@@ -192,6 +193,7 @@
         [[SocketManager defaultManager] cutOffSocket];
         self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
         [self performSegueWithIdentifier:@"goLogin" sender:self];
+        
         
     }else {
         [MBProgressHUD showSuccess:responseObject[@"Msg"]];

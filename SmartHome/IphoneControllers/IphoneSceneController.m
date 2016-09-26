@@ -69,22 +69,37 @@
 #pragma  mark - UICollectionViewDelegate
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.scenes.count;
+    return self.scenes.count + 1;
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     SceneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell" forIndexPath:indexPath];
-    Scene *scene = self.scenes[indexPath.row];
-    cell.scenseName.text = scene.sceneName;
     
-    [cell.imgView sd_setImageWithURL:[NSURL URLWithString: scene.picName] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    cell.layer.cornerRadius = 20;
+    cell.layer.masksToBounds = YES;
+    if(indexPath.row == self.scenes.count)
+    {
+        cell.scenseName.text = @"添加场景";
+    }else{
+        Scene *scene = self.scenes[indexPath.row];
+        cell.scenseName.text = scene.sceneName;
+    }
+    //[cell.imgView sd_setImageWithURL:[NSURL URLWithString: scene.picName] placeholderImage:[UIImage imageNamed:@"placeholder"]];
 
     return cell;
 }
 
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row == self.scenes.count)
+    {
+        [self performSegueWithIdentifier:@"iphoneAddSceneSegue" sender:self];
+    }
+}
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(cellWidth, cellWidth );
+    return CGSizeMake(cellWidth, 80 );
 }
 
 - (void)didReceiveMemoryWarning {
@@ -100,7 +115,17 @@
     return minSpace;
 }
 
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    Room *room = self.roomList[self.roomIndex];
+    id theSegue = segue.destinationViewController;
+    [theSegue setValue:[NSNumber numberWithInt:room.rId] forKey:@"roomId"];
+}
 
 
 
