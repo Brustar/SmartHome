@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DeviceOfFixTimerViewController : UIViewController
+@class DeviceOfFixTimerViewController;
+@protocol deviceOfFixTimerViewControllerDelegate <NSObject>
 
+-(void)DeviceOfFixTimerViewController:(DeviceOfFixTimerViewController *)vc andName:(NSString *)deviceName;
+
+@end
+
+@interface DeviceOfFixTimerViewController : UIViewController
+@property (nonatomic,weak) id<deviceOfFixTimerViewControllerDelegate> delegate;
 @end
