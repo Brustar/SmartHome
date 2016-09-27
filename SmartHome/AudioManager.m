@@ -20,6 +20,14 @@
     return sharedInstance;
 }
 
+-(NSMutableArray *)songs
+{
+    if (_songs == nil) {
+        _songs=[NSMutableArray new];
+    }
+    return _songs;
+}
+
 -(NSArray *)allSongs
 {
     MPMediaQuery *everything = [[MPMediaQuery alloc] init];
@@ -27,8 +35,22 @@
     for (MPMediaItem *song in itemsFromGenericQuery) {
         NSString *songTitle = [song valueForProperty: MPMediaItemPropertyTitle];
         NSLog (@"%@", songTitle);
+        [self.songs addObject:songTitle];
     }
     return itemsFromGenericQuery;
+}
+
+-(void)initMusicAndPlay
+{
+    if ([self.songs count]==0) {
+        MPMediaItemCollection *mediaItemCollection = [[MPMediaItemCollection alloc] initWithItems:[self allSongs]];
+    
+        _musicPlayer = [MPMusicPlayerController applicationMusicPlayer];
+        [_musicPlayer setShuffleMode: MPMusicShuffleModeOff];
+        [_musicPlayer setRepeatMode: MPMusicRepeatModeNone];
+        [_musicPlayer setQueueWithItemCollection:mediaItemCollection];
+        [_musicPlayer play];
+    }
 }
 
 - (void)addSongsToMusicPlayer:(UINavigationController *)controller

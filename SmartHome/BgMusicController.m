@@ -19,6 +19,7 @@
 @interface BgMusicController ()
 @property (weak, nonatomic) IBOutlet UISlider *volume;
 @property (weak, nonatomic) IBOutlet UILabel *voiceValue;
+@property (weak, nonatomic) IBOutlet UILabel *songTitle;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *voiceWeakLeftConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *voiceStrongRightConstraint;
 
@@ -37,11 +38,12 @@
         self.voiceWeakLeftConstraint.constant = self.voiceStrongRightConstraint.constant;
         self.viewLeftConstraint.constant = 20;
     }
-
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.volume.continuous = NO;
+    [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
     self.beacon=[[DeviceInfo alloc] init];
     [self.beacon addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
@@ -61,19 +63,18 @@
     
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
+    AudioManager *audio=[AudioManager defaultManager];
+    [audio initMusicAndPlay];
+    self.songTitle.text=[audio.songs objectAtIndex:[audio.musicPlayer indexOfNowPlayingItem]];
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if([keyPath isEqualToString:@"volume"])
     {
-        self.volume.value=[[self.beacon valueForKey:@"volume"] floatValue];
-        
+        self.volume.value=[[self.beacon valueForKey:@"volume"] floatValue]*100;
+        /*
         KEVolumeUtil *volumeManager=[KEVolumeUtil shareInstance];
         NSData *data=nil;
         if (volumeManager.willup) {
@@ -83,7 +84,8 @@
         }
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
-        
+        */
+        self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
         [self save:nil];
     }
 }
@@ -132,7 +134,9 @@
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
     
-    [[[AudioManager defaultManager] musicPlayer] skipToNextItem];
+    AudioManager *audio= [AudioManager defaultManager];
+    [[audio musicPlayer] skipToNextItem];
+    self.songTitle.text=[audio.songs objectAtIndex:[audio.musicPlayer indexOfNowPlayingItem]];
 }
 
 - (IBAction)previousMusic:(id)sender {
@@ -140,7 +144,9 @@
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
     
-    [[[AudioManager defaultManager] musicPlayer] skipToPreviousItem];
+    AudioManager *audio= [AudioManager defaultManager];
+    [[audio musicPlayer] skipToPreviousItem];
+    self.songTitle.text=[audio.songs objectAtIndex:[audio.musicPlayer indexOfNowPlayingItem]];
 }
 
 - (IBAction)pauseMusic:(id)sender {

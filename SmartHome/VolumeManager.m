@@ -38,6 +38,7 @@ void volumeListenerCallback (void *inClientData,AudioSessionPropertyID inID,UInt
     const float *volumePointer = inData;
     float volume = *volumePointer;
     NSLog(@"volumeListenerCallback %f", volume);
+    
     KEVolumeUtil *manager=[KEVolumeUtil shareInstance];
     NSLog(@"systemVolumeValue %f", [manager systemVolumeValue]);
     manager.willup = volume > [manager systemVolumeValue];
