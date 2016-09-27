@@ -9,6 +9,7 @@
 #import "WelcomeController.h"
 #import "DeviceInfo.h"
 #import "SQLManager.h"
+#import "AudioManager.h"
 
 @interface WelcomeController ()
 

@@ -63,7 +63,9 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-    <key>NSCameraUsageDescription</key>
-    <string>cameraDesciption</string>
+	<key>NSCameraUsageDescription</key>
+	<string>cameraDescription</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>mediaDescription</string>
 </dict>
 </plist>

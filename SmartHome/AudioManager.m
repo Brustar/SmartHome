@@ -31,29 +31,29 @@
     return itemsFromGenericQuery;
 }
 
-- (void)addSongsToMusicPlayer
+- (void)addSongsToMusicPlayer:(UINavigationController *)controller
 {
     MPMediaPickerController *mpController = [[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeMusic];
     mpController.delegate = self;
-    mpController.prompt = @"Add songs to play";
+    mpController.prompt = @"";
     mpController.allowsPickingMultipleItems = YES;
-    [[[[UIApplication sharedApplication] keyWindow] rootViewController] presentModalViewController:mpController animated:YES];
+    
+    [controller presentViewController:mpController animated:YES completion:nil];
 }
 
 - (void)mediaPicker:(MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection
 {
-    MPMusicPlayerController* musicPlayer =
-    [MPMusicPlayerController applicationMusicPlayer];
-    [musicPlayer setShuffleMode: MPMusicShuffleModeOff];
-    [musicPlayer setRepeatMode: MPMusicRepeatModeNone];
-    [musicPlayer setQueueWithItemCollection:mediaItemCollection];
-    [musicPlayer play];
-    [[[[UIApplication sharedApplication] keyWindow] rootViewController] dismissModalViewControllerAnimated:YES];
+    _musicPlayer = [MPMusicPlayerController applicationMusicPlayer];
+    [_musicPlayer setShuffleMode: MPMusicShuffleModeOff];
+    [_musicPlayer setRepeatMode: MPMusicRepeatModeNone];
+    [_musicPlayer setQueueWithItemCollection:mediaItemCollection];
+    [_musicPlayer play];
+    [mediaPicker dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)mediaPickerDidCancel:(MPMediaPickerController *)mediaPicker
 {
-    [[[[UIApplication sharedApplication] keyWindow] rootViewController] dismissModalViewControllerAnimated:YES];
+    [mediaPicker dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

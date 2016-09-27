@@ -341,9 +341,6 @@
 
 - (void)dealloc
 {
-    DeviceInfo *device=[DeviceInfo defaultManager];
-    [device removeObserver:self forKeyPath:@"beacons" context:NULL];
-
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

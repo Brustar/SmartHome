@@ -9,7 +9,9 @@
 
 @interface AudioManager : NSObject<MPMediaPickerControllerDelegate>
 
+@property(nonatomic,strong)MPMusicPlayerController* musicPlayer;
+
 + (instancetype)defaultManager;
-- (void)addSongsToMusicPlayer;
+- (void)addSongsToMusicPlayer:(UIViewController *)controller;
 
 @end

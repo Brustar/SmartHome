@@ -131,29 +131,37 @@
     NSData *data=[[DeviceInfo defaultManager] next:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
+    
+    [[[AudioManager defaultManager] musicPlayer] skipToNextItem];
 }
 
 - (IBAction)previousMusic:(id)sender {
     NSData *data=[[DeviceInfo defaultManager] previous:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
+    
+    [[[AudioManager defaultManager] musicPlayer] skipToPreviousItem];
 }
 
 - (IBAction)pauseMusic:(id)sender {
     NSData *data=[[DeviceInfo defaultManager] pause:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
+    
+    [[[AudioManager defaultManager] musicPlayer] pause];
 }
 
 - (IBAction)playMusic:(id)sender {
     NSData *data=[[DeviceInfo defaultManager] play:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
+    
+    [[[AudioManager defaultManager] musicPlayer] play];
 }
 
 - (IBAction)addSongsToMusicPlayer:(id)sender
 {
-    [[AudioManager defaultManager] addSongsToMusicPlayer];
+    [[AudioManager defaultManager] addSongsToMusicPlayer:self.navigationController];
 }
 
 -(void)dealloc
