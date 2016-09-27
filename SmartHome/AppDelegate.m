@@ -10,6 +10,7 @@
 #import "SocketManager.h"
 #import "PackManager.h"
 #import "HttpManager.h"
+#import "IOManager.h"
 
 @interface AppDelegate ()
 

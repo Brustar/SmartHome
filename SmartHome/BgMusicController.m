@@ -14,6 +14,7 @@
 #import "PackManager.h"
 #import "DeviceInfo.h"
 #import "KEVolumeUtil.h"
+#import "AudioManager.h"
 
 @interface BgMusicController ()
 @property (weak, nonatomic) IBOutlet UISlider *volume;
@@ -148,6 +149,11 @@
     NSData *data=[[DeviceInfo defaultManager] play:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
+- (IBAction)addSongsToMusicPlayer:(id)sender
+{
+    [[AudioManager defaultManager] addSongsToMusicPlayer];
 }
 
 -(void)dealloc

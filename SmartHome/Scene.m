@@ -20,6 +20,7 @@
         [self setRoomName:@""];
         [self setSceneName:@""];
         [self setPicName:@""];
+        [self setSchedules:@[]];
     }
     return self;
 }
