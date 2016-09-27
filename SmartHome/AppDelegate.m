@@ -112,7 +112,7 @@
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        return UIInterfaceOrientationMaskLandscape;
+        return UIInterfaceOrientationMaskAll;
     }else{
         return UIInterfaceOrientationMaskPortrait;
     }

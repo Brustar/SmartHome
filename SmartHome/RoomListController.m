@@ -17,6 +17,7 @@
 #import "Scene.h"
 #import "SceneManager.h"
 #import "SQLManager.h"
+#import "DeviceOfFixTimerViewController.h"
 @interface RoomListController ()<UITableViewDataSource,UITableViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,CLLocationManagerDelegate>
 @property (nonatomic,strong) NSArray *rooms;
 @property (weak, nonatomic) IBOutlet UIView *timeView;
@@ -43,7 +44,10 @@
 @property (nonatomic,strong) Scene *scene;
 
 @property (nonatomic,assign) int selectedRoomId;
+//定时的设备
+@property (weak, nonatomic) IBOutlet UILabel *fixTimeDevice;
 
+@property (nonatomic,strong) DeviceOfFixTimerViewController *deviceOfTimeVC;
 @end
 
 @implementation RoomListController
@@ -102,6 +106,15 @@
     }
     return _fixTimeVC;
 }
+-(DeviceOfFixTimerViewController *)deviceOfTimeVC
+{
+    if(!_deviceOfTimeVC)
+    {
+        UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        _deviceOfTimeVC = [story instantiateViewControllerWithIdentifier:@"DeviceOfFixTimerViewController"];
+    }
+    return _deviceOfTimeVC;
+}
 -(NSMutableDictionary *)weeks
 {
     if(!_weeks)
@@ -149,7 +162,7 @@
     self.splitViewController.maximumPrimaryColumnWidth = 250;
     self.tableView.backgroundColor = backGroudColour;
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectWeek:) name:@"SelectWeek" object:nil];
-
+    self.view.backgroundColor = backGroudColour;
    }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -563,5 +576,16 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
+//选择已经添加的设备
+- (IBAction)selectedDevice:(id)sender {
+    UIButton *btn = sender;
+    self.deviceOfTimeVC.modalPresentationStyle = UIModalPresentationPopover;
+    self.deviceOfTimeVC.popoverPresentationController.sourceView = sender;
+    self.deviceOfTimeVC.popoverPresentationController.sourceRect = btn.bounds;
+    
+    self.deviceOfTimeVC.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionLeft;
+    [self presentViewController:self.deviceOfTimeVC animated:YES completion:nil];
+}
 
 @end

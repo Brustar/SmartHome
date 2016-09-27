@@ -27,10 +27,27 @@
 
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *repeatBtns;
-
+@property (nonatomic,strong) NSMutableDictionary *dic;
+@property (nonatomic,strong) NSMutableString *repeatTime;
 @end
 
 @implementation IphoneFixTimerController
+-(NSMutableString *)repeatTime
+{
+    if(!_repeatTime)
+    {
+        _repeatTime = [NSMutableString string];
+    }
+    return _repeatTime;
+}
+-(NSMutableDictionary *)dic
+{
+    if(!_dic)
+    {
+        _dic =[NSMutableDictionary dictionary];
+    }
+    return _dic;
+}
 -(NSArray *)hours
 {
     if(!_hours)
@@ -91,7 +108,7 @@
     if(btn.selected)
     {
         [self.astronomicalBut setImage:[UIImage imageNamed:@"selected"] forState:UIControlStateSelected];
-        //self.customTimeBtn.enabled = NO;
+        self.customTimeBtn.enabled = NO;
         self.astronomicalHight.constant = 50;
         for(UIButton *btn in self.astronmicalTypes)
         {
@@ -100,7 +117,7 @@
 
     }else{
         [self.astronomicalBut setImage:[UIImage imageNamed:@"unselected"] forState:UIControlStateSelected];
-        //self.customTimeBtn.enabled = YES;
+        self.customTimeBtn.enabled = YES;
         self.astronomicalHight.constant = 0;
         for(UIButton *btn in self.astronmicalTypes)
         {
@@ -117,16 +134,33 @@
         [self.customTimeBtn setImage:[UIImage imageNamed:@"selected"] forState:UIControlStateSelected];
         self.customView.hidden = NO;
         self.customViewHight.constant = 300;
-        //self.astronomicalBut.enabled = NO;
+        self.astronomicalBut.enabled = NO;
     }else{
         [self.customTimeBtn setImage:[UIImage imageNamed:@"unselected"] forState:UIControlStateSelected];
         self.customView.hidden = YES;
         self.customViewHight.constant = 0;
+        self.astronomicalBut.enabled = YES;
     }
     
 }
-- (IBAction)selectedRepeatTime:(id)sender {
+- (IBAction)selectedTypeOfAstronomical:(id)sender {
     
+    UIButton *btn = sender;
+    btn.selected = YES;
+    int astronomicalTime =(int) btn.tag;
+    [self.dic setObject:@"astronomicalTime" forKey:[NSNumber numberWithInt:astronomicalTime]];
+}
+
+- (IBAction)selectedRepeatTime:(id)sender {
+    UIButton *btn = sender;
+    btn.selected = !btn.selected;
+    if(btn.selected)
+    {
+        
+    }
+    
+}
+- (IBAction)saveFixTime:(id)sender {
     
 }
 

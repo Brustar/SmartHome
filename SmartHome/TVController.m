@@ -39,17 +39,20 @@
 
 - (NSUInteger) supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationMaskLandscape;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+        return UIInterfaceOrientationMaskLandscape;
+    else
+        return UIInterfaceOrientationMaskPortrait;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 
 - (BOOL)prefersStatusBarHidden
 {
-    return YES;
+    return NO;
 }
 
 @end

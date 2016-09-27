@@ -145,6 +145,7 @@
 		F635CCBB1D4356650078B148 /* MyCenterSplitController.m in Sources */ = {isa = PBXBuildFile; fileRef = F635CCBA1D4356650078B148 /* MyCenterSplitController.m */; };
 		F63AE0031D11319C00BE17DC /* FMCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F63AE0021D11319C00BE17DC /* FMCollectionViewCell.m */; };
 		F64111DC1D4F1E6100E8099D /* FixTimeRepeatController.m in Sources */ = {isa = PBXBuildFile; fileRef = F64111DB1D4F1E6100E8099D /* FixTimeRepeatController.m */; };
+		F6423C221D9A4B7400AAB3CE /* DeviceOfFixTimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6423C211D9A4B7400AAB3CE /* DeviceOfFixTimerViewController.m */; };
 		F64487DD1D55BA3C00EF2CFC /* RoomManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F64487DC1D55BA3C00EF2CFC /* RoomManager.m */; };
 		F645BD471D76E3D8005BFB7A /* FavorController.m in Sources */ = {isa = PBXBuildFile; fileRef = F645BD461D76E3D8005BFB7A /* FavorController.m */; };
 		F646C0B91D91173000DF1728 /* IphoneRoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = F646C0B81D91173000DF1728 /* IphoneRoomView.m */; };
@@ -569,6 +570,8 @@
 		F63AE0021D11319C00BE17DC /* FMCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCollectionViewCell.m; sourceTree = "<group>"; };
 		F64111DA1D4F1E6100E8099D /* FixTimeRepeatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixTimeRepeatController.h; sourceTree = "<group>"; };
 		F64111DB1D4F1E6100E8099D /* FixTimeRepeatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixTimeRepeatController.m; sourceTree = "<group>"; };
+		F6423C201D9A4B7400AAB3CE /* DeviceOfFixTimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceOfFixTimerViewController.h; sourceTree = "<group>"; };
+		F6423C211D9A4B7400AAB3CE /* DeviceOfFixTimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceOfFixTimerViewController.m; sourceTree = "<group>"; };
 		F64487DB1D55BA3C00EF2CFC /* RoomManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomManager.h; sourceTree = "<group>"; };
 		F64487DC1D55BA3C00EF2CFC /* RoomManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomManager.m; sourceTree = "<group>"; };
 		F645BD451D76E3D8005BFB7A /* FavorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavorController.h; sourceTree = "<group>"; };
@@ -920,6 +923,8 @@
 				F625A6191D4C99EC00B696E5 /* RoomListController.h */,
 				F625A61A1D4C99EC00B696E5 /* RoomListController.m */,
 				F64111DA1D4F1E6100E8099D /* FixTimeRepeatController.h */,
+				F6423C201D9A4B7400AAB3CE /* DeviceOfFixTimerViewController.h */,
+				F6423C211D9A4B7400AAB3CE /* DeviceOfFixTimerViewController.m */,
 				F64111DB1D4F1E6100E8099D /* FixTimeRepeatController.m */,
 				F6642A7F1D4220100003D56B /* DeviceListController.h */,
 				F6642A801D4220100003D56B /* DeviceListController.m */,
@@ -1825,6 +1830,7 @@
 				0FC3DE851D236CFF00A03482 /* LoginController.m in Sources */,
 				F66596E31D3F25810082716A /* SceneCell.m in Sources */,
 				0FB42E1E1CF681A7007DE64F /* planeScene.m in Sources */,
+				F6423C221D9A4B7400AAB3CE /* DeviceOfFixTimerViewController.m in Sources */,
 				F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */,
 				F66596E91D3F72CA0082716A /* AddSenseCell.m in Sources */,
 				F65DB3421D2B5AB2002A815C /* RegisterPhoneNumController.m in Sources */,

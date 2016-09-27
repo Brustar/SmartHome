@@ -13,27 +13,14 @@
 @interface CameraController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
 @property (nonatomic, retain) NSTimer *nextFrameTimer;
+@property (nonatomic,strong) NSMutableArray *cameraIds;
 @end
 
 @implementation CameraController
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    if(self.roomID)
-    {
-        self.deviceid = [SQLManager deviceIDWithRoomID:self.roomID withType:@"摄像头"];
-    }
     
-    
-    NSString *url = [SQLManager getUrlByDeviceId:[self.deviceid intValue]];
-    
-        _video = [[RTSPPlayer alloc] initWithVideo:url usesTcp:YES];
-        _video.outputWidth = 426;
-        _video.outputHeight = 320;
-    
-        NSLog(@"video duration: %f",_video.duration);
-        NSLog(@"video size: %d x %d", _video.sourceWidth, _video.sourceHeight);
-
 }
 
 - (void)viewDidLoad {
