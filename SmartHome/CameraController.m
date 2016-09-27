@@ -10,9 +10,10 @@
 #import "SQLManager.h"
 #define LERP(A,B,C) ((A)*(1.0-C)+(B)*C)
 
-@interface CameraController ()
+@interface CameraController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
 @property (nonatomic, retain) NSTimer *nextFrameTimer;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic,strong) NSMutableArray *cameraIds;
 @end
 
@@ -25,7 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+   
     
     [_imgView setContentMode:UIViewContentModeScaleAspectFit];
     [self playButtonAction:nil];
@@ -34,7 +35,7 @@
 -(IBAction)playButtonAction:(id)sender {
     _lastFrameTime = -1;
     
-    // seek to 0.0 seconds
+    
     [_video seekTime:0.0];
     
     [_nextFrameTimer invalidate];
@@ -67,14 +68,15 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma  mark - UICollectionDelegate
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return 2;
 }
-*/
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell" forIndexPath:indexPath];
+    return cell;
+}
 
 @end

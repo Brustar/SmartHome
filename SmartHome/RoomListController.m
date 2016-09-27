@@ -18,7 +18,7 @@
 #import "SceneManager.h"
 #import "SQLManager.h"
 #import "DeviceOfFixTimerViewController.h"
-@interface RoomListController ()<UITableViewDataSource,UITableViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,CLLocationManagerDelegate>
+@interface RoomListController ()<UITableViewDataSource,UITableViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,CLLocationManagerDelegate,deviceOfFixTimerViewControllerDelegate>
 @property (nonatomic,strong) NSArray *rooms;
 @property (weak, nonatomic) IBOutlet UIView *timeView;
 @property (weak, nonatomic) IBOutlet UIButton *repeatBtn;
@@ -281,6 +281,7 @@
     self.fixTimeVC.popoverPresentationController.sourceRect = sender.bounds;
    
     self.fixTimeVC.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionLeft;
+    
     [self presentViewController:self.fixTimeVC animated:YES completion:nil];
 }
 - (void)selectWeek:(NSNotification *)noti
@@ -444,6 +445,7 @@
 
 }
 
+//定时保存
 - (void) save {
     int startType = 0;
     
@@ -513,7 +515,7 @@
     Scene *scene=[[Scene alloc] initWhithoutSchedule];
     [scene setWeekValue:param[@"WeekValue"]];
     [scene setPlanType:[param[@"PlanType"] intValue]];
-   // [scene setIsPlan:[param[@"isPlan"] intValue]];
+   
     
     if (scene.planType == 1) {
         
@@ -579,13 +581,18 @@
 
 //选择已经添加的设备
 - (IBAction)selectedDevice:(id)sender {
-    UIButton *btn = sender;
-    self.deviceOfTimeVC.modalPresentationStyle = UIModalPresentationPopover;
-    self.deviceOfTimeVC.popoverPresentationController.sourceView = sender;
-    self.deviceOfTimeVC.popoverPresentationController.sourceRect = btn.bounds;
     
-    self.deviceOfTimeVC.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionLeft;
+    self.deviceOfTimeVC.modalPresentationStyle = UIModalPresentationPopover;
+    self.deviceOfTimeVC.popoverPresentationController.sourceView = self.fixTimeDevice;
+    self.deviceOfTimeVC.popoverPresentationController.sourceRect = self.fixTimeDevice.bounds;
+    
+    self.deviceOfTimeVC.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionUp;
+    self.deviceOfTimeVC.delegate = self;
     [self presentViewController:self.deviceOfTimeVC animated:YES completion:nil];
+}
+-(void)DeviceOfFixTimerViewController:(DeviceOfFixTimerViewController *)vc andName:(NSString *)deviceName
+{
+    self.fixTimeDevice.text = deviceName;
 }
 
 @end
