@@ -93,6 +93,24 @@
     return eId;
 
 }
++(NSString *)deviceUrlByDeviceID:(int)deviceID
+{
+    FMDatabase *db = [self connetdb];
+    NSString *url;
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT url FROM Devices where ID = %d",deviceID];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+            url = [resultSet stringForColumn:@"url"];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return url;
+
+}
 
 +(NSString *)deviceTypeNameByDeviceID:(int)eId
 {

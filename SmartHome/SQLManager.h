@@ -22,6 +22,8 @@
 +(NSString *)deviceNameByDeviceID:(int)eId;
 //根据设备名字查找设备ID
 +(NSInteger)deviceIDByDeviceName:(NSString *)deviceName;
+//根据设备ID查到摄像头的URl
++(NSString *)deviceUrlByDeviceID:(int)deviceID;
 //根据设备ID获取设备类别
 +(NSString *)deviceTypeNameByDeviceID:(int)eId;
 
