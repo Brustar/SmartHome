@@ -4287,7 +4287,7 @@
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="D33-xY-Acr">
                                         <rect key="frame" x="141" y="101" width="112" height="31"/>
                                     </slider>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOB-rg-gAp">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="qqqqqqqqqqqqqqq" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOB-rg-gAp">
                                         <rect key="frame" x="90" y="60" width="34" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -4297,7 +4297,7 @@
                                         <rect key="frame" x="100" y="100" width="33" height="32"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I8z-Et-kfD">
-                                        <rect key="frame" x="185" y="70" width="24" height="21"/>
+                                        <rect key="frame" x="185" y="80" width="24" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -4382,7 +4382,7 @@
                                     <constraint firstItem="iVz-O0-GMu" firstAttribute="top" secondItem="XU6-KE-sbu" secondAttribute="top" constant="10" id="X2k-oL-OED"/>
                                     <constraint firstItem="G8B-ww-PY9" firstAttribute="centerY" secondItem="D33-xY-Acr" secondAttribute="centerY" id="cX9-hA-Gd7"/>
                                     <constraint firstAttribute="trailing" secondItem="iVz-O0-GMu" secondAttribute="trailing" constant="80" id="eW4-pu-x3e"/>
-                                    <constraint firstItem="D33-xY-Acr" firstAttribute="top" secondItem="I8z-Et-kfD" secondAttribute="bottom" constant="10" id="k2a-KD-4j1"/>
+                                    <constraint firstItem="D33-xY-Acr" firstAttribute="top" secondItem="I8z-Et-kfD" secondAttribute="bottom" id="k2a-KD-4j1"/>
                                     <constraint firstItem="Zsw-Vy-cRx" firstAttribute="leading" secondItem="XU6-KE-sbu" secondAttribute="leading" constant="100" id="n9c-If-WLW"/>
                                     <constraint firstItem="nOB-rg-gAp" firstAttribute="leading" secondItem="EBc-9X-X8r" secondAttribute="trailing" constant="10" id="uh9-FH-0mI"/>
                                     <constraint firstAttribute="trailing" secondItem="G8B-ww-PY9" secondAttribute="trailing" constant="100" id="ysF-75-u3Y"/>
