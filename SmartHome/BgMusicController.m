@@ -42,7 +42,16 @@
     AudioManager *audio=[AudioManager defaultManager];
     [audio initMusicAndPlay];
     self.songTitle.text=[audio.songs objectAtIndex:[audio.musicPlayer indexOfNowPlayingItem]];
-     
+}
+
+#pragma mark - 通知
+/**
+ *  添加通知
+ */
+-(void)addNotification{
+    AudioManager *audio=[AudioManager defaultManager];
+    NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
+    [notificationCenter addObserver:self selector:@selector(playbackStateChange:) name:MPMusicPlayerControllerPlaybackStateDidChangeNotification object:audio.musicPlayer];
 }
 
 - (void)viewDidLoad {
@@ -73,6 +82,11 @@
     [info addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     VolumeManager *volume=[VolumeManager defaultManager];
     [volume start];
+    
+    AudioManager *audio=[AudioManager defaultManager];
+    [NSTimer scheduledTimerWithTimeInterval:1.0 repeats:YES block:^(NSTimer *timer){
+        self.songTitle.text=[audio.songs objectAtIndex:[audio.musicPlayer indexOfNowPlayingItem]];
+    }];
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -144,8 +158,11 @@
     [sock.socket writeData:data withTimeout:1 tag:1];
     
     AudioManager *audio= [AudioManager defaultManager];
-    [[audio musicPlayer] skipToNextItem];
-    self.songTitle.text=[audio.songs objectAtIndex:[audio.musicPlayer indexOfNowPlayingItem]];
+    
+    if ([[audio musicPlayer] indexOfNowPlayingItem]<audio.songs.count-1) {
+        [[audio musicPlayer] skipToNextItem];
+        self.songTitle.text=[audio.songs objectAtIndex:[audio.musicPlayer indexOfNowPlayingItem]];
+    }
 }
 
 - (IBAction)previousMusic:(id)sender {
@@ -154,8 +171,10 @@
     [sock.socket writeData:data withTimeout:1 tag:1];
     
     AudioManager *audio= [AudioManager defaultManager];
-    [[audio musicPlayer] skipToPreviousItem];
-    self.songTitle.text=[audio.songs objectAtIndex:[audio.musicPlayer indexOfNowPlayingItem]];
+    if ([[audio musicPlayer] indexOfNowPlayingItem]>0) {
+        [[audio musicPlayer] skipToPreviousItem];
+        self.songTitle.text=[audio.songs objectAtIndex:[audio.musicPlayer indexOfNowPlayingItem]];
+    }
 }
 
 - (IBAction)pauseMusic:(id)sender {

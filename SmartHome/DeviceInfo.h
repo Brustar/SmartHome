@@ -57,7 +57,7 @@ enum{
 @property (nonatomic) int reachbility;
 @property (nonatomic) int genaration;
 @property (nonatomic, strong) NSString *pushToken;
-
+@property (nonatomic, strong) NSArray *beacons;
 @property (nonatomic) long masterID;
 @property (nonatomic, strong) NSString *masterIP;
 @property (nonatomic) int masterPort;
