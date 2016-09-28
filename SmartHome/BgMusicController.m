@@ -15,6 +15,7 @@
 #import "DeviceInfo.h"
 #import "KEVolumeUtil.h"
 #import "AudioManager.h"
+#import "SQLManager.h"
 
 @interface BgMusicController ()
 @property (weak, nonatomic) IBOutlet UISlider *volume;
@@ -42,6 +43,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSArray *bgmusicIDS = [SQLManager getDeviceByTypeName:@"背景音乐" andRoomID:self.roomID];
+    self.deviceid = bgmusicIDS[0];
+    
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     

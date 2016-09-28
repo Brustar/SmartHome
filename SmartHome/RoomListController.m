@@ -581,7 +581,7 @@
 
 //选择已经添加的设备
 - (IBAction)selectedDevice:(id)sender {
-    
+    self.timeView.hidden = YES;
     self.deviceOfTimeVC.modalPresentationStyle = UIModalPresentationPopover;
     self.deviceOfTimeVC.popoverPresentationController.sourceView = self.fixTimeDevice;
     self.deviceOfTimeVC.popoverPresentationController.sourceRect = self.fixTimeDevice.bounds;
@@ -593,6 +593,7 @@
 -(void)DeviceOfFixTimerViewController:(DeviceOfFixTimerViewController *)vc andName:(NSString *)deviceName
 {
     self.fixTimeDevice.text = deviceName;
+    self.timeView.hidden = NO;
 }
 
 @end

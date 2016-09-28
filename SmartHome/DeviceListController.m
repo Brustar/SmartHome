@@ -22,13 +22,14 @@
 #import "UIImagePickerController+LandScapeImagePicker.h"
 #import "AmplifierController.h"
 #import "UploadManager.h"
+
 @interface DeviceListController ()<UITableViewDelegate,UITableViewDataSource,UISplitViewControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHight;
 @property (nonatomic,strong) NSArray *deviceTypes;
 @property (weak, nonatomic) IBOutlet UIView *saveSceneView;
-@property (weak, nonatomic) IBOutlet UIImageView *sceneImgView;
+
 @property (weak, nonatomic) IBOutlet UITextField *sceneName;
 @property (weak, nonatomic) IBOutlet UIButton *selectSceneImg;
 
@@ -73,7 +74,7 @@
     self.tableView.layer.cornerRadius = 10;
     self.tableView.layer.masksToBounds = YES;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
+   
     
     
 }
@@ -190,14 +191,12 @@
     [theSegue setValue:@"YES" forKey:@"isAddDevice"];
     
 }
-
-- (IBAction)selectSceneImg:(id)sender {
-    
+- (IBAction)selectedSceneImage:(id)sender {
     UIButton *btn = sender;
     UIView *view = btn.superview;
     CGFloat y = view.frame.origin.y -(view.frame.size.width - btn.frame.size.width);
     [KxMenu showMenuInView:self.view fromRect:CGRectMake(view.frame.origin.x, y , view.frame.size.width, view.frame.size.height) menuItems:@[
-                                                                                                                                                                                                                                            [KxMenuItem menuItem:@"本地图库"
+                                                                                                                                             [KxMenuItem menuItem:@"本地图库"
                                                                                                                                                             image:nil
                                                                                                                                                            target:self
                                                                                                                                                            action:@selector(selectPhoto:)],
@@ -206,8 +205,8 @@
                                                                                                                                                            target:self
                                                                                                                                                            action:@selector(takePhoto:)],
                                                                                                                                              ]];
-
 }
+
 
 - (void)selectPhoto:(KxMenuItem *)item {
     
@@ -234,8 +233,9 @@
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
-   // bAlbumListViewStatus = NO;
-    self.sceneImgView.image = info[UIImagePickerControllerEditedImage];
+   
+   
+    [self.selectSceneImg setBackgroundImage:info[UIImagePickerControllerEditedImage] forState:UIControlStateNormal];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -254,7 +254,7 @@
     Scene *scene = [[Scene alloc]initWhithoutSchedule];
     [scene setValuesForKeysWithDictionary:plistDic];
     
-    [[SceneManager defaultManager] addScene:scene withName:self.sceneName.text withImage:self.sceneImgView.image];
+    [[SceneManager defaultManager] addScene:scene withName:self.sceneName.text withImage:self.selectSceneImg.currentBackgroundImage];
     
     
 

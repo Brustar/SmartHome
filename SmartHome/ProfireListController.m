@@ -14,12 +14,17 @@
 @property (weak, nonatomic) IBOutlet UIView *headView;
 @property (nonatomic,strong) NSArray *titlArr;
 @property (nonatomic,strong) NSArray *images;
+
+@property (weak, nonatomic) IBOutlet UILabel *userName;
+
+
 @end
 
 @implementation ProfireListController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.userName.text = [[NSUserDefaults  standardUserDefaults] objectForKey:@"Account"];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.titlArr = @[@"我的故障",@"我的保修记录",@"我的能耗",@"我的收藏",@"我的消息",@"设置"];

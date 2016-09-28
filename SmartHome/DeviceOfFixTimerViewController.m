@@ -22,24 +22,23 @@
     self.tableView.tableFooterView = [UIView new];
     
 }
--(NSArray *)deviceNames
-{
-    if(!_deviceNames)
-    {
-        NSMutableArray *names = [NSMutableArray array];
-        NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
-        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
-        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
-        NSArray *array = plistDic[@"devices"];
-        for(NSDictionary *dic in array)
-        {
-            NSString *name = [SQLManager deviceNameByDeviceID:[dic[@"deviceID"] intValue]];
-            [names addObject:name];
-        }
-        _deviceNames = [names copy];
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    //[self.tableView reloadData];
+    NSMutableArray *names = [NSMutableArray array];
+    NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
+    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+    NSArray *array = plistDic[@"devices"];
+    for(NSDictionary *dic in array)
+    {
+        NSString *name = [SQLManager deviceNameByDeviceID:[dic[@"deviceID"] intValue]];
+        [names addObject:name];
     }
-    return _deviceNames;
+    self.deviceNames = [names copy];
+    [self.tableView reloadData];
 }
 -(CGSize)preferredContentSize
 {
@@ -93,6 +92,7 @@
         [self.delegate DeviceOfFixTimerViewController:self andName:self.deviceNames[indexPath.row - 1]];
 
     }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
