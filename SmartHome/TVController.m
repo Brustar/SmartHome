@@ -26,6 +26,7 @@
 #import "TVIconController.h"
 #import "UploadManager.h"
 #import "UIImageView+WebCache.h"
+#import "IQKeyBoardManager.h"
 
 @interface UIImagePickerController (LandScapeImagePicker)
 
@@ -145,6 +146,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+
     self.title = @"电视";
     self.eNumber = [SQLManager getENumber:[self.deviceid intValue]];
     self.volume.continuous = NO;

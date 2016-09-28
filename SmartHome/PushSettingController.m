@@ -24,6 +24,8 @@
 @property (nonatomic,strong) NSMutableArray *notifyWay;
 @property (nonatomic,strong) NSMutableArray *recordIDs;
 @property (nonatomic,assign) NSInteger tag;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *typeBtns;
+
 @end
 
 @implementation PushSettingController
@@ -176,10 +178,33 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+//    self.selectedBtn.selected = NO;
+//    [self.selectedBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     self.indexPath = indexPath;
     self.coverView.hidden = NO;
     self.pushTypeView.hidden = NO;
+    
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    NSString *type = cell.detailTextLabel.text;
+    UIButton *btn;
+    if([type isEqualToString:@"信息"])
+    {
+        btn = self.typeBtns[0];
+    }if([type isEqualToString:@"短信"])
+    {
+        self.selectedBtn = self.typeBtns[1];
+
+        
+    }else{
+        self.selectedBtn = self.typeBtns[2];
+
+    }
+    
+     [self.selectedBtn setImage:[UIImage imageNamed:@"correct"] forState:UIControlStateSelected];
+   // self.selectedBtn = btn;
+   
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -239,10 +264,15 @@
 
 
 - (IBAction)clickRetunBtn:(id)sender {
-    //[self.view removeFromSuperview];
+    
     [self.navigationController popViewControllerAnimated:NO];
 }
 
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    self.coverView.hidden = YES;
+    self.pushTypeView.hidden = YES;
 
+}
 
 @end

@@ -46,8 +46,7 @@
         }else{
             [_cameraIds addObject: self.deviceid];
         }
-        
-    }
+            }
     return _cameraIds;
 }
 
@@ -126,7 +125,7 @@
     self.cell = cell;
     self.index = (int)indexPath.row;
     cell.imgView.userInteractionEnabled = YES;
-    cell.imgView.image = [UIImage imageNamed:@"placeholder"];
+    
     
     [self playButtonAction:nil];
     return cell;

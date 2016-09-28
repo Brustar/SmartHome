@@ -14,7 +14,11 @@
 #import "PackManager.h"
 #import "DeviceInfo.h"
 #import "AudioManager.h"
+
+#import "SQLManager.h"
+
 #import <AVFoundation/AVFoundation.h>
+
 
 @interface BgMusicController ()
 @property (weak, nonatomic) IBOutlet UISlider *volume;
@@ -56,11 +60,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    NSArray *bgmusicIDS = [SQLManager getDeviceByTypeName:@"背景音乐" andRoomID:self.roomID];
+    self.deviceid = bgmusicIDS[0];
+    
+
     
     
     float vol = [[AVAudioSession sharedInstance] outputVolume];
     self.volume.value=vol*100;
     self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
+
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     

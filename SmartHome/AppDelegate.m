@@ -11,7 +11,7 @@
 #import "PackManager.h"
 #import "HttpManager.h"
 #import "IOManager.h"
-
+#import "IQKeyboardManager.h"
 @interface AppDelegate ()
 
 @end
@@ -55,6 +55,11 @@
         self.window.rootViewController = viewcontroller;
         [self.window makeKeyAndVisible];
     }
+    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
+    manager.enable = YES;
+    manager.shouldResignOnTouchOutside = YES;
+    manager.shouldToolbarUsesTextFieldTintColor = YES;
+    manager.enableAutoToolbar = YES;
     
     return YES;
 }
