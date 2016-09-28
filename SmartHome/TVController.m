@@ -24,7 +24,6 @@
 #import "PackManager.h"
 #import "ChannelManager.h"
 #import "TVIconController.h"
-#import "KEVolumeUtil.h"
 #import "UploadManager.h"
 #import "UIImageView+WebCache.h"
 #import "IQKeyBoardManager.h"
@@ -158,7 +157,7 @@
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     VolumeManager *volume=[VolumeManager defaultManager];
-    [volume start:device];
+    [volume start];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
@@ -299,8 +298,8 @@
     if([keyPath isEqualToString:@"volume"])
     {
         DeviceInfo *device=[DeviceInfo defaultManager];
-        self.volume.value=[[device valueForKey:@"volume"] floatValue];
-        
+        self.volume.value=[[device valueForKey:@"volume"] floatValue]*100;
+        /*
         KEVolumeUtil *volumeManager=[KEVolumeUtil shareInstance];
         NSData *data=nil;
         if (volumeManager.willup) {
@@ -311,7 +310,7 @@
         
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
-        
+        */
         [self save:nil];
     }
 }

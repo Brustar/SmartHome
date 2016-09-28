@@ -8,7 +8,6 @@
 
 #import "VolumeManager.h"
 #import <AudioToolbox/AudioSession.h>
-#import "KEVolumeUtil.h"
 
 @implementation VolumeManager
 
@@ -22,7 +21,7 @@
     return sharedInstance;
 }
 
--(void) start:(DeviceInfo *)beacon
+-(void) start
 {
     AudioSessionInitialize(NULL, NULL, NULL, NULL);
     AudioSessionSetActive(true);
@@ -30,7 +29,6 @@
                                     volumeListenerCallback,
                                     (__bridge void *)(self)
                                     );
-    self.ibeacon=beacon;
 }
 
 void volumeListenerCallback (void *inClientData,AudioSessionPropertyID inID,UInt32 inDataSize,const void *inData)
@@ -38,13 +36,8 @@ void volumeListenerCallback (void *inClientData,AudioSessionPropertyID inID,UInt
     const float *volumePointer = inData;
     float volume = *volumePointer;
     NSLog(@"volumeListenerCallback %f", volume);
-    
-    KEVolumeUtil *manager=[KEVolumeUtil shareInstance];
-    NSLog(@"systemVolumeValue %f", [manager systemVolumeValue]);
-    manager.willup = volume > [manager systemVolumeValue];
-    [manager volumeValue];
 
-    [((__bridge VolumeManager *)inClientData).ibeacon setValue:[NSString stringWithFormat:@"%f",volume] forKey:@"volume"];
+    [[DeviceInfo defaultManager] setValue:[NSString stringWithFormat:@"%f",volume] forKey:@"volume"];
 }
 
 @end

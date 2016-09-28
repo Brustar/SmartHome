@@ -85,7 +85,7 @@
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     VolumeManager *volume=[VolumeManager defaultManager];
-    [volume start:device];
+    [volume start];
     // Do any additional setup after loading the view.
     if ([self.sceneid intValue]>0) {
         
@@ -358,7 +358,7 @@
     if([keyPath isEqualToString:@"volume"])
     {
         DeviceInfo *device=[DeviceInfo defaultManager];
-        self.volume.value=[[device valueForKey:@"volume"] floatValue];
+        self.volume.value=[[device valueForKey:@"volume"] floatValue]*100;
         [self save:nil];
     }
 }

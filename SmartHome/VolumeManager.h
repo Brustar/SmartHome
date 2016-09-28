@@ -9,8 +9,6 @@
 @interface VolumeManager : NSObject
 
 + (instancetype)defaultManager;
--(void) start:(DeviceInfo *)beacon;
-
-@property (strong, nonatomic) DeviceInfo *ibeacon;
+-(void) start;
 
 @end

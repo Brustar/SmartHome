@@ -49,6 +49,7 @@
         [_musicPlayer setShuffleMode: MPMusicShuffleModeOff];
         [_musicPlayer setRepeatMode: MPMusicRepeatModeNone];
         [_musicPlayer setQueueWithItemCollection:mediaItemCollection];
+        
         [_musicPlayer play];
     }
 }

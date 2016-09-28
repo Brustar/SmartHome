@@ -15,7 +15,7 @@
 #import "SCWaveAnimationView.h"
 #import "SQLManager.h"
 #import "PackManager.h"
-#import "KEVolumeUtil.h"
+#import "Light.h"
 
 #define size 350
 @interface DVDController ()<UICollectionViewDelegate,UICollectionViewDataSource>
@@ -63,7 +63,7 @@
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     VolumeManager *volume=[VolumeManager defaultManager];
-    [volume start:device];
+    [volume start];
 
 
     if ([self.sceneid intValue]>0) {
@@ -191,8 +191,8 @@
     if([keyPath isEqualToString:@"volume"])
     {
         DeviceInfo *device=[DeviceInfo defaultManager];
-        self.volume.value=[[device valueForKey:@"volume"] floatValue];
-        
+        self.volume.value=[[device valueForKey:@"volume"] floatValue]*100;
+        /*
         KEVolumeUtil *volumeManager=[KEVolumeUtil shareInstance];
         NSData *data=nil;
         if (volumeManager.willup) {
@@ -202,7 +202,7 @@
         }
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
-        
+        */
         [self save:nil];
     }
 }
@@ -236,6 +236,7 @@
             break;
         case 1:
             data=[device play:self.deviceid];
+            [self poweroffAllLighter];
             break;
         case 2:
             data=[device forward:self.deviceid];
@@ -245,6 +246,7 @@
             break;
         case 4:
             data=[device pause:self.deviceid];
+            [self poweronAllLighter];
             break;
         case 5:
             data=[device next:self.deviceid];
@@ -254,6 +256,7 @@
             break;
         case 7:
             data=[device pop:self.deviceid];
+            [self poweronAllLighter];
             break;
         case 8:
             data=[device home:self.deviceid];
@@ -264,6 +267,30 @@
     }
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
+-(void)poweroffAllLighter
+{
+    SocketManager *sock=[SocketManager defaultManager];
+    DeviceInfo *info=[DeviceInfo defaultManager];
+    for (id device in self.scene.devices) {
+        if ([device isKindOfClass:[Light class]]) {
+            NSData *data = [info toogle:0x00 deviceID:[NSString stringWithFormat:@"%d", ((Light *)device).deviceID]];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+        }
+    }
+}
+
+-(void)poweronAllLighter
+{
+    SocketManager *sock=[SocketManager defaultManager];
+    DeviceInfo *info=[DeviceInfo defaultManager];
+    for (id device in self.scene.devices) {
+        if ([device isKindOfClass:[Light class]]) {
+            NSData *data = [info toogle:0x01 deviceID:[NSString stringWithFormat:@"%d", ((Light *)device).deviceID]];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+        }
+    }
 }
 
 -(void)dealloc
