@@ -97,6 +97,7 @@
     [NSTimer scheduledTimerWithTimeInterval:1.0 repeats:YES block:^(NSTimer *timer){
         self.songTitle.text=[audio.songs objectAtIndex:[audio.musicPlayer indexOfNowPlayingItem]];
     }];
+    
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
