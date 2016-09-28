@@ -529,6 +529,10 @@
     [scene setDevices:@[]];
     
     [scene setReadonly:NO];
+    param[@"schedules"]=@[];
+    //增加设备定时器
+    
+    [scene setSchedules:param[@"schedules"]];
     
     [[SceneManager defaultManager] addScene:scene withName:nil withImage:[UIImage imageNamed:@""]];
 }

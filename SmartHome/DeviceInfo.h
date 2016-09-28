@@ -52,7 +52,7 @@ enum{
 
 @interface DeviceInfo : NSObject
 
-@property (nonatomic, strong) NSArray *beacons;
+@property (nonatomic) bool editingScene;
 @property (nonatomic) float volume;
 @property (nonatomic) int reachbility;
 @property (nonatomic) int genaration;
