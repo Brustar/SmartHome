@@ -636,7 +636,7 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     
-    self.chooseImage = info[UIImagePickerControllerEditedImage];
+    self.chooseImage = info[UIImagePickerControllerOriginalImage];
   
     [self.editChannelImgBtn setBackgroundImage:info[UIImagePickerControllerEditedImage] forState:UIControlStateNormal];
     [picker dismissViewControllerAnimated:YES completion:nil];

@@ -29,8 +29,10 @@
 #import "PackManager.h"
 #import "IbeaconManager.h"
 #import "CryptoManager.h"
+#import "SunCount.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface LoginController ()<QRCodeReaderDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface LoginController ()<QRCodeReaderDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *user;
 @property (weak, nonatomic) IBOutlet UITextField *pwd;
@@ -51,7 +53,8 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint;
 
-
+@property (nonatomic,strong) NSArray *antronomicalTimes;
+@property (strong,nonatomic) CLLocationManager *lm;
 @end
 
 @implementation LoginController
@@ -78,15 +81,43 @@
     self.userType = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Type"] intValue];
     self.pwd.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"Password"];
    
+//    if ([CLLocationManager locationServicesEnabled]) {
+//        self.lm = [[CLLocationManager alloc]init];
+//        self.lm.delegate = self;
+//        [self.lm requestWhenInUseAuthorization];
+//        
+//        // 最小距离
+//        self.lm.distanceFilter=kCLDistanceFilterNone;
+//        [self.lm startUpdatingLocation];
+//    }else{
+//        NSLog(@"定位服务不可利用");
+//    }
+
+    
+
+   
 }
 
+-(void)setAntronomicalTimes:(NSArray *)antronomicalTimes
+{
+    _antronomicalTimes = antronomicalTimes;
+    NSString *url = [NSString stringWithFormat:@"%@UpdateAstronomicalClock.aspx",[IOManager httpAddr]];
+    NSDictionary *dic = @{@"Dawn":self.antronomicalTimes[0],@"SunRise":self.antronomicalTimes[1],@"Sunset":self.antronomicalTimes[2],@"Dusk":self.antronomicalTimes[3]};
+    HttpManager *http = [HttpManager defaultManager];
+    http.tag = 10;
+    [http sendPost:url param:dic];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
 }
 
 - (IBAction)login:(id)sender
+
 {
+    
+    
+    
     if ([self.user.text isEqualToString:@""])
     {
         [MBProgressHUD showError:@"请输入用户名或手机号"];
@@ -203,6 +234,7 @@
                 
             }else{
                 [self goToViewController];
+                
             }
             
             break;
@@ -544,14 +576,17 @@
                 [self performSegueWithIdentifier:@"goToIphoneScene" sender:self];
             }else{
                 [self goToViewController];
+               
             }
 
             
         }else{
             [MBProgressHUD showError:responseObject[@"Msg"]];
         }
+    }else if(tag == 10)
+    {
+        return;
     }
-    
 }
 
 -(void)goToViewController;
@@ -685,6 +720,20 @@
 - (void)readerDidCancel:(QRCodeReaderViewController *)reader
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+    didUpdateToLocation:(CLLocation *)newLocation
+           fromLocation:(CLLocation *)oldLocation{
+    [SunCount sunrisetWithLongitude:newLocation.coordinate.longitude andLatitude:newLocation.coordinate.latitude
+                        andResponse:^(SunString *str){
+                            NSLog(@"%@,%@,%@,%@",str.dayspring, str.sunrise,str.sunset,str.dusk);
+                            self.antronomicalTimes = @[str.dayspring,str.sunrise,str.sunset,str.dusk];
+                            
+    
+                            
+                            
+                    }];
 }
 
 @end

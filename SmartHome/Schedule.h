@@ -18,4 +18,5 @@
 //定时某设备的值，比如定时到12：00空调升一度
 @property(nonatomic) int openTovalue;
 
+- (instancetype)initWhithoutSchedule;
 @end

@@ -9,5 +9,14 @@
 #import "Schedule.h"
 
 @implementation Schedule
-
+- (instancetype)initWhithoutSchedule
+{
+    self = [super init];
+    if(self)
+    {
+        [self setStartTime:@""];
+        [self setEndTime:@""];
+    }
+    return self;
+}
 @end

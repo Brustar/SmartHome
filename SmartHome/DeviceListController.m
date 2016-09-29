@@ -234,8 +234,10 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
    
-   
-    [self.selectSceneImg setBackgroundImage:info[UIImagePickerControllerEditedImage] forState:UIControlStateNormal];
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
+    
+    
+    [self.selectSceneImg setBackgroundImage:image forState:UIControlStateNormal];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 

@@ -1486,5 +1486,25 @@
     
 }
 
-
++(BOOL)updateTotalVisited:(int)roomID
+{
+    FMDatabase *db = [SQLManager connetdb];
+    int oldTotalVisite;
+    BOOL ret;
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT totalVisited FROM Rooms where ID = %d",roomID];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            oldTotalVisite = [resultSet intForColumn:@"totalVisited"];
+        }
+    sql = [NSString stringWithFormat:@"update Rooms set totalVisited  = %d where ID = %d ",oldTotalVisite + 1,roomID];
+       ret = [db executeUpdate:sql];
+        
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return ret;
+}
 @end

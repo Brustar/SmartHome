@@ -105,4 +105,7 @@
 +(int)getRoomIDByRoomName:(NSString *)rName;
 +(NSString *)getRoomNameByRoomID:(int) rId;
 
+
+
++(BOOL)updateTotalVisited:(int)roomID;
 @end

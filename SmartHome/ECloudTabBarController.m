@@ -9,7 +9,7 @@
 #import "ECloudTabBarController.h"
 #import "ECloudTabBar.h"
 #import "SceneController.h"
-
+#import "Room.h"
 
 @interface ECloudTabBarController ()<ECloudTabBarDelegate>
 @property (nonatomic,strong) ECloudTabBar *cloudTabBar;
@@ -51,6 +51,7 @@
         NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
         [center postNotificationName:@"subType" object:nil userInfo:dict];
     }
+    
 }
 
 - (void)didReceiveMemoryWarning {

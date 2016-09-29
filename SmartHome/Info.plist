@@ -28,7 +28,9 @@
 		<true/>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>en</string>
+	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<true/>
 	<key>UIApplicationShortcutItems</key>
 	<array>
 		<dict>

@@ -93,7 +93,7 @@
         ECloudButton *button = [[ECloudButton alloc] initWithTitle:room.rName  normalImage:room.imgUrl selectImage:room.imgUrl];
         
         button.highlighted = YES;
-        if (0 == i) {
+        if (3 == i) {
             self.selectButton = button;
             self.selectButton.selected = YES;
         }
