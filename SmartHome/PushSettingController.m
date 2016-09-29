@@ -185,24 +185,24 @@
     self.coverView.hidden = NO;
     self.pushTypeView.hidden = NO;
     
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    NSString *type = cell.detailTextLabel.text;
-    UIButton *btn;
-    if([type isEqualToString:@"信息"])
+    NSArray *notiWay = self.notifyWay[indexPath.section];
+    NSNumber *num = notiWay[indexPath.row];
+    
+    if([num intValue] == 1)
     {
-        btn = self.typeBtns[0];
-    }if([type isEqualToString:@"短信"])
+        self.selectedBtn = self.typeBtns[0];
+    }else if([num intValue] == 2)
     {
         self.selectedBtn = self.typeBtns[1];
-
-        
-    }else{
+    }else {
         self.selectedBtn = self.typeBtns[2];
-
     }
     
-     [self.selectedBtn setImage:[UIImage imageNamed:@"correct"] forState:UIControlStateSelected];
-   // self.selectedBtn = btn;
+    for (UIButton *button in self.typeBtns) {
+        button.enabled = YES;
+    }
+    
+    self.selectedBtn.enabled = NO;
    
     
 }
@@ -215,12 +215,10 @@
 
 - (IBAction)selectPsuhTypeBtn:(UIButton *)sender {
     
-        self.selectedBtn.selected = NO;
-        [self.selectedBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-        sender.selected = YES;
-        self.selectedBtn = sender;
-        [self.selectedBtn setImage:[UIImage imageNamed:@"correct"] forState:UIControlStateSelected];
-        self.tag = sender.tag;
+    self.selectedBtn.enabled = YES;
+    sender.enabled = NO;
+    self.selectedBtn = sender;
+    self.tag = sender.tag;
 }
 //设置通知类型请求
 -(void)setUserNotifyWay:(NSInteger)way andRecord:(NSNumber *)recoredID

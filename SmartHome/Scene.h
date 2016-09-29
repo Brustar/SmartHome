@@ -24,6 +24,8 @@
 @property (nonatomic,strong) NSString *picName;
 //场景开始时间
 @property(nonatomic,strong)NSString *startTime;
+//场景结束时间
+@property (nonatomic,strong) NSString *endTime;
 //天文时间
 @property(nonatomic,strong)NSString *astronomicalTime;
 //每周运行时间

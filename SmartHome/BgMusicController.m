@@ -48,21 +48,13 @@
     self.songTitle.text=[audio.songs objectAtIndex:[audio.musicPlayer indexOfNowPlayingItem]];
 }
 
-#pragma mark - 通知
-/**
- *  添加通知
- */
--(void)addNotification{
-    AudioManager *audio=[AudioManager defaultManager];
-    NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
-    [notificationCenter addObserver:self selector:@selector(playbackStateChange:) name:MPMusicPlayerControllerPlaybackStateDidChangeNotification object:audio.musicPlayer];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     NSArray *bgmusicIDS = [SQLManager getDeviceByTypeName:@"背景音乐" andRoomID:self.roomID];
     self.deviceid = bgmusicIDS[0];
+    
     
 
     
@@ -92,12 +84,15 @@
     [info addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     VolumeManager *volume=[VolumeManager defaultManager];
     [volume start];
+
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateUI) userInfo:nil repeats:YES];
     
+}
+
+-(void)updateUI
+{
     AudioManager *audio=[AudioManager defaultManager];
-    [NSTimer scheduledTimerWithTimeInterval:1.0 repeats:YES block:^(NSTimer *timer){
-        self.songTitle.text=[audio.songs objectAtIndex:[audio.musicPlayer indexOfNowPlayingItem]];
-    }];
-    
+    self.songTitle.text=[audio.songs objectAtIndex:[audio.musicPlayer indexOfNowPlayingItem]];
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context

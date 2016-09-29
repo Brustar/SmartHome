@@ -583,8 +583,9 @@
     }
     [db closeOpenResultSets];
     [db close];
+    
     return sceneName;
-
+   
 }
 
 +(int)saveMaxSceneId:(Scene *)scene name:(NSString *)name pic:(NSString *)img
@@ -606,7 +607,7 @@
             sceneID = [resultSet intForColumn:@"ID"]+1;
         }
         
-        sql=[NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,null,null)",sceneID,name,scene.roomName,img,scene.roomID,2];
+        sql=[NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,null,null,null)",sceneID,name,scene.roomName,img,scene.roomID,2];
         [db executeUpdate:sql];
     }
     [db closeOpenResultSets];
