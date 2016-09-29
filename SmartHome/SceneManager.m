@@ -573,7 +573,8 @@
             array= [NSArray new];
         }
         
-        if (![array containsObject:device]) {
+        //if (![array containsObject:device]) {
+        if ([self inDeviceArray:array device:deviceID]==-1) {
             int i=[self inArray:[self allDeviceIDs:scene.sceneID] device:deviceID];
             if (i>=0) {
                 NSMutableArray *arr=[array mutableCopy];
@@ -603,6 +604,18 @@
         return matchArray;
     }
     return nil;
+}
+
+-(int)inDeviceArray:(NSArray *)array device:(int)deviceID
+{
+    int index=0;
+    for (id device in array) {
+        if ([[device valueForKey:@"deviceID"] intValue]==deviceID) {
+            return index;
+        }
+        index++;
+    }
+    return -1;
 }
 
 -(int)inArray:(NSArray *)array device:(int)deviceID
