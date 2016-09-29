@@ -1473,7 +1473,7 @@
     NSString *rName ;
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Rooms where ID = %d",rId];
+        NSString *sql = [NSString stringWithFormat:@"SELECT NAME FROM Rooms where ID = %d",rId];
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {

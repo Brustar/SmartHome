@@ -30,6 +30,7 @@
 #import "ProjectController.h"
 #import "AmplifierController.h"
 #import "WindowSlidingController.h"
+#import "BgMusicController.h"
 
 @interface UIImagePickerController (LandScapeImagePicker)
 
@@ -323,6 +324,13 @@
             windowSlidVC.roomID = self.roomID;
             windowSlidVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
             [self addViewAndVC:windowSlidVC];
+            
+        }else if([typeName isEqualToString:@"背景音乐"]){
+            BgMusicController *bgVC = [storyBoard instantiateViewControllerWithIdentifier:@"BgMusicController"];
+            bgVC.roomID = self.roomID;
+            bgVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+            [self addViewAndVC:bgVC];
+            
             
         }else{
             PluginViewController *pluginVC = [storyBoard instantiateViewControllerWithIdentifier:@"PluginViewController"];
