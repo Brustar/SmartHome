@@ -573,8 +573,7 @@
             array= [NSArray new];
         }
         
-        //if (![array containsObject:device]) {
-        if ([self inDeviceArray:array device:deviceID]==-1) {
+        //if ([self inDeviceArray:array device:deviceID]==-1) {
             int i=[self inArray:[self allDeviceIDs:scene.sceneID] device:deviceID];
             if (i>=0) {
                 NSMutableArray *arr=[array mutableCopy];
@@ -584,7 +583,7 @@
                 array=[array arrayByAddingObject:device];
             }
             
-        }
+        //}
     }else{
         array=[NSArray arrayWithObject:device];
     }
