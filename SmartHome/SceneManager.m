@@ -249,7 +249,13 @@
             {
                 [scene setAstronomicalTime:[dictionary objectForKey:@"astronomicalTime"]];
             }else{
-                [scene setWeekValue:@""];
+                [scene setAstronomicalTime:@""];
+            }
+            if([dictionary objectForKey:@"endTime"])
+            {
+                [scene setEndTime:[dictionary objectForKey:@"endTime"]];
+            }else{
+                [scene setEndTime:@""];
             }
             [scene setRoomName:@""];
             [scene setSceneName:@""];
