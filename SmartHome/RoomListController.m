@@ -159,7 +159,6 @@
     self.tableView.tableFooterView = [UIView new];
    
     
-
     [self.tableView selectRowAtIndexPath:0 animated:YES scrollPosition:UITableViewScrollPositionTop];
     self.splitViewController.maximumPrimaryColumnWidth = 250;
     self.tableView.backgroundColor = backGroudColour;
@@ -509,16 +508,6 @@
     }
      [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
 
-}
-
-- (void)locationManager:(CLLocationManager *)manager
-    didUpdateToLocation:(CLLocation *)newLocation
-           fromLocation:(CLLocation *)oldLocation{
-    [SunCount sunrisetWithLongitude:newLocation.coordinate.longitude andLatitude:newLocation.coordinate.latitude
-                        andResponse:^(SunString *str){
-                            NSLog(@"%@,%@,%@,%@",str.dayspring, str.sunrise,str.sunset,str.dusk);
-                            self.antronomicalTimes = @[str.dayspring,str.sunrise,str.sunset,str.dusk];
-                        }];
 }
 
 
