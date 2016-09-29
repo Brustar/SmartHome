@@ -94,6 +94,7 @@
     [self.detailCell.power addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
     self.cell = [[[NSBundle mainBundle] loadNibNamed:@"ColourTableViewCell" owner:self options:nil] lastObject];
+    
     [self setupSegmentLight];
     
     self.scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
