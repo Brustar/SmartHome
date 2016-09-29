@@ -129,7 +129,7 @@
     }
     BgMusic *device=[[BgMusic alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
-    [device setBgvolume:self.volume.value*100];
+    [device setBgvolume:self.volume.value];
     
     [_scene setSceneID:[self.sceneid intValue]];
     [_scene setRoomID:self.roomID];

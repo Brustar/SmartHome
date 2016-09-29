@@ -10,7 +10,7 @@
 #import "RegexKitLite.h"
 #import "Device.h"
 #import "SQLManager.h"
-
+#import "Schedule.h"
 #import "MBProgressHUD+NJ.h"
 
 #import "Screen.h"
@@ -250,7 +250,16 @@
             }
             [scene setRoomName:@""];
             [scene setSceneName:@""];
-            
+            NSMutableArray *schedules=[NSMutableArray new];
+            for (NSDictionary *sch in [dictionary objectForKey:@"schedules"]) {
+                Schedule *schedule=[[Schedule alloc] init];
+                schedule.startTime=sch[@"startTime"];
+                schedule.endTime=sch[@"endTime"];
+                schedule.deviceID=[sch[@"deviceID"] intValue];
+                schedule.openTovalue=[sch[@"openTovalue"] intValue];
+                [schedules addObject:schedule];
+            }
+            scene.schedules=schedules;
         }else{
             scene=[[Scene alloc] initWhithoutSchedule];
         }
