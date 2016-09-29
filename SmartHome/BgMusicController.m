@@ -63,10 +63,9 @@
 
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
+    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     
     if ([self.sceneid intValue]>0) {
-        
-        _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
         for(int i=0;i<[_scene.devices count];i++)
         {
             if ([[_scene.devices objectAtIndex:i] isKindOfClass:[BgMusic class]]) {
@@ -83,7 +82,7 @@
     VolumeManager *volume=[VolumeManager defaultManager];
     [volume start];
 
-    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateUI) userInfo:nil repeats:YES];
+    //[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateUI) userInfo:nil repeats:YES];
     
 }
 
@@ -185,16 +184,18 @@
     NSData *data=[[DeviceInfo defaultManager] pause:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
-    
-    [[[AudioManager defaultManager] musicPlayer] pause];
+    AudioManager *audio= [AudioManager defaultManager];
+    [[audio musicPlayer] pause];
+    self.songTitle.text=[audio.songs objectAtIndex:[audio.musicPlayer indexOfNowPlayingItem]];
 }
 
 - (IBAction)playMusic:(id)sender {
     NSData *data=[[DeviceInfo defaultManager] play:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
-    
-    [[[AudioManager defaultManager] musicPlayer] play];
+    AudioManager *audio= [AudioManager defaultManager];
+    [[audio musicPlayer] play];
+    self.songTitle.text=[audio.songs objectAtIndex:[audio.musicPlayer indexOfNowPlayingItem]];
 }
 
 - (IBAction)addSongsToMusicPlayer:(id)sender

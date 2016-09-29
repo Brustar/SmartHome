@@ -398,6 +398,7 @@
         [alertVC dismissViewControllerAnimated:YES completion:nil];
     }];
     [alertVC addAction:cancelAction];
+    [[DeviceInfo defaultManager] setEditingScene:NO];
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 -(void)favorScene{

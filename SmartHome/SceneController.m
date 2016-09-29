@@ -337,6 +337,7 @@
     [IOManager removeTempFile];
     ScenseSplitViewController *splitVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ScenseSplitViewController"];
     [self presentViewController:splitVC animated:YES completion:nil];
+    [[DeviceInfo defaultManager] setEditingScene:YES];
 }
 
 - (void)dealloc
