@@ -9,6 +9,9 @@
 #import "CameraController.h"
 #import "SQLManager.h"
 #import "SceneCell.h"
+#import "Camera.h"
+#import "SceneManager.h"
+
 #define LERP(A,B,C) ((A)*(1.0-C)+(B)*C)
 #define CELL_WIDTH self.collectionView.frame.size.width / 2.0 - 10
 #define CELL_HEIGHT self.collectionView.frame.size.height / 2.0 - 10
@@ -74,8 +77,28 @@
         [self.camerUrls addObject:url];
     }
 
-   // [_imgView setContentMode:UIViewContentModeScaleAspectFit];
-    //[self playButtonAction:nil];
+    if ([[DeviceInfo defaultManager] editingScene]) {
+        NSArray *IDS = [SQLManager getDeviceByTypeName:@"摄像头" andRoomID:self.roomID];
+        self.deviceid = IDS[0];
+        _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+        [self save:nil];
+    }
+}
+
+-(IBAction)save:(id)sender
+{
+    Camera *device=[[Camera alloc] init];
+    [device setDeviceID:[self.deviceid intValue]];
+    
+    [_scene setSceneID:[self.sceneid intValue]];
+    [_scene setRoomID:self.roomID];
+    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+    [_scene setReadonly:NO];
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
 }
 
 -(IBAction)playButtonAction:(id)sender {
