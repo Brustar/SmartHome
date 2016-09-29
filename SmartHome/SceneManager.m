@@ -82,7 +82,7 @@
                
               
                 
-                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,'%@',%d)",[responseObject[@"SID"] intValue],name,roomName,responseObject[@"ImgUrl"] ,scene.roomID,2,@"0",0];
+                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,'%@',%d,null)",[responseObject[@"SID"] intValue],name,roomName,responseObject[@"ImgUrl"] ,scene.roomID,2,@"0",0];
                BOOL result = [db executeUpdate:sql];
                 if(result)
                 {

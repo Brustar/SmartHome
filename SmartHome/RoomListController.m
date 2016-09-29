@@ -18,6 +18,7 @@
 #import "SceneManager.h"
 #import "SQLManager.h"
 #import "DeviceOfFixTimerViewController.h"
+#import "Schedule.h"
 @interface RoomListController ()<UITableViewDataSource,UITableViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,CLLocationManagerDelegate,deviceOfFixTimerViewControllerDelegate>
 @property (nonatomic,strong) NSArray *rooms;
 @property (weak, nonatomic) IBOutlet UIView *timeView;
@@ -48,6 +49,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *fixTimeDevice;
 
 @property (nonatomic,strong) DeviceOfFixTimerViewController *deviceOfTimeVC;
+@property (nonatomic, weak) Schedule *schedule;
+@property (nonatomic, assign) BOOL isSceneSetTime;
 @end
 
 @implementation RoomListController
@@ -270,7 +273,21 @@
         [self.endTimeBtn setTitle:time forState:UIControlStateNormal];
     }
     
-    [self save];
+   // [self save];
+    if (self.isSceneSetTime) {
+        if (self.startTimeBtn.selected) {
+            self.scene.startTime = time;
+        } else {
+            self.scene.endTime = time;
+        }
+    } else {
+        if (self.startTimeBtn.selected) {
+            self.schedule.startTime = time;
+        } else {
+            self.schedule.endTime = time;
+        }
+    }
+
     
 }
 
@@ -354,7 +371,20 @@
     }
     
     [self.repeatBtn setTitle:display forState:UIControlStateNormal];
-    [self save];
+   // [self save];
+    if (self.isSceneSetTime) {
+        BOOL isRepeat = false;
+        NSMutableString *weekValue = [NSMutableString string];
+        for (int i = 0; i < 7; i++) {
+            if (week[i]) {
+                NSString *temp = [NSString stringWithFormat:@"%d", i];
+                [weekValue appendString:temp];
+                isRepeat = true;
+            }
+        }
+        self.scene.weekValue = weekValue;
+    }
+
     
 }
 - (void)dealloc
@@ -547,23 +577,22 @@
         [self.lm startUpdatingLocation];
     }
     UIButton *btn = (UIButton *)sender;
-    if(btn.tag == 0)
-    {
+    if(btn.tag == 0){
         [self.startTimeBtn setTitle:@"黎明" forState:UIControlStateNormal];
-        
-        
-    }else if(btn.tag == 1)
-    {
+    }else if(btn.tag == 1){
         [self.startTimeBtn setTitle:@"日出" forState:UIControlStateNormal];
-        
-    }else if(btn.tag == 2)
-    {
+    }else if(btn.tag == 2){
         [self.startTimeBtn setTitle:@"日落" forState:UIControlStateNormal];
-        
     }else{
         [self.startTimeBtn setTitle:@"黄昏" forState:UIControlStateNormal];
     }
-    [self save];
+    
+    if (self.isSceneSetTime) {
+        self.scene.astronomicalTime = [NSString stringWithFormat:@"%ld",btn.tag + 1];
+    } else {
+        self.schedule.startTime = [NSString stringWithFormat:@"%ld",btn.tag + 1];
+    }
+  //  [self save];
 
 }
 
@@ -598,6 +627,30 @@
 {
     self.fixTimeDevice.text = deviceName;
     self.timeView.hidden = NO;
+    if ( [deviceName isEqualToString:@"场景"]) {
+        self.isSceneSetTime = YES;
+        return;
+    } else {
+        self.isSceneSetTime = NO;
+    }
+    
+    NSInteger deviceID = [SQLManager deviceIDByDeviceName:deviceName];
+    
+    for (int i = 0; i < self.scene.schedules.count; i++) {
+        Schedule *schedule = self.scene.schedules[i];
+        if (deviceID == schedule.deviceID) {
+            self.schedule = self.scene.schedules[i];
+            return;
+        }
+    }
+    
+    Schedule *schedule = [[Schedule alloc] init];
+    schedule.deviceID = (int)deviceID;
+    NSMutableArray *schedules = [NSMutableArray arrayWithArray:self.scene.schedules];
+    [schedules addObject:schedule];
+    self.scene.schedules = [schedules copy];
+    self.schedule = schedule;
+
 }
 
 @end

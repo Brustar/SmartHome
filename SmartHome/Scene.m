@@ -15,6 +15,7 @@
     self=[super init];
     if (self) {
         [self setStartTime:@""];
+        [self setEndTime:@""];
         [self setWeekValue:@""];
         [self setAstronomicalTime:@""];
         [self setRoomName:@""];

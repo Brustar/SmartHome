@@ -304,7 +304,7 @@
                 }else{
                     ibeacon = 0;
                 }
-                NSString *sql = [NSString stringWithFormat:@"insert into Rooms values(%d,'%@',null,null,null,null,null,'%@',%d)",[roomDic[@"rId"] intValue],roomDic[@"rName"],roomDic[@"imgUrl"],ibeacon];
+                NSString *sql = [NSString stringWithFormat:@"insert into Rooms values(%d,'%@',null,null,null,null,null,'%@',%d,null)",[roomDic[@"rId"] intValue],roomDic[@"rName"],roomDic[@"imgUrl"],ibeacon];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {
@@ -348,7 +348,7 @@
 
                 }
                 
-                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,'%@',%d)",sId,sName,rName,urlImage,rId,sType,sNumber,0];
+                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,'%@',%d,null)",sId,sName,rName,urlImage,rId,sType,sNumber,0];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {
