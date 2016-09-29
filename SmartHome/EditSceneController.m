@@ -126,6 +126,7 @@
     self.tableView.tableFooterView = self.footerView;
     self.tableView.backgroundColor = backGroudColour;
     self.subDeviceTableView.backgroundColor = backGroudColour;
+    [self.tableView selectRowAtIndexPath:0 animated:YES scrollPosition:UITableViewScrollPositionTop];
     self.view.backgroundColor = backGroudColour;
     self.title= [SQLManager getSceneName:self.sceneID];
     Scene *scene = [SQLManager sceneBySceneID:self.sceneID];
@@ -137,6 +138,8 @@
     }
 
 
+
+
 - (void)setupData
 {
    
@@ -146,6 +149,16 @@
     
     [self.tableView reloadData];
     [self.subDeviceTableView reloadData];
+    
+   
+}
+-(void)viewWillAppear:(BOOL)animated
+
+{
+    [super viewWillAppear:YES];
+    NSIndexPath *indexPath = 0;
+    
+    [self tableView:self.subDeviceTableView didSelectRowAtIndexPath:indexPath];
 }
 
 
@@ -210,8 +223,8 @@
         }else {
             [cell.button setBackgroundImage:[UIImage imageNamed:@"safe"] forState:UIControlStateNormal];
         }
-
-
+        
+       
 
         
                }
@@ -237,7 +250,7 @@
         
     {
         //灯光，窗帘，DVD，网络电视
-      
+    
         NSString *typeName = self.subTypeArr[indexPath.row];
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         if([typeName isEqualToString:@"网络电视"])
