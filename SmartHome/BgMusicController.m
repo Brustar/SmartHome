@@ -44,7 +44,6 @@
     }
     
     AudioManager *audio=[AudioManager defaultManager];
-    [audio initMusicAndPlay];
     
     [audio.musicPlayer beginGeneratingPlaybackNotifications];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(musicPlayerStatedChanged:) name:MPMusicPlayerControllerPlaybackStateDidChangeNotification object:audio.musicPlayer];
@@ -83,6 +82,8 @@
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
 
+    AudioManager *audio=[AudioManager defaultManager];
+    [audio initMusicAndPlay];
 }
 
 -(IBAction)save:(id)sender
@@ -131,6 +132,7 @@
 -(void)musicPlayerStatedChanged:(NSNotification *)paramNotification
 {
     NSLog(@"Player State Changed");
+    self.songTitle.text=[self titleOfNowPlaying];
     NSNumber * stateAsObject = [paramNotification.userInfo objectForKey:@"MPMusicPlayerControllerPlaybackStateKey"];
     NSInteger state = [stateAsObject integerValue];
     switch (state) {
@@ -172,12 +174,12 @@
 {
     AudioManager *audio=[AudioManager defaultManager];
     if( audio.musicPlayer == nil ) {
-        return @"music Player is nil;";
+        return @"music Player is nil.";
     }
     
     MPMediaItem* item = audio.musicPlayer.nowPlayingItem;
     if( item == nil ) {
-        return @"item is nil";
+        return @"playing.";
     }
     NSString* title = [item valueForKey:MPMediaItemPropertyTitle];
     return title;
