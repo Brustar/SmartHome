@@ -165,7 +165,7 @@
     AudioManager *audio=[AudioManager defaultManager];
     self.volume.value=audio.musicPlayer.volume*100;
     self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
-    //[self save:nil];
+    [self save:nil];
 }
 
 -(NSString*)titleOfNowPlaying
@@ -218,6 +218,7 @@
     NSData *data=[[DeviceInfo defaultManager] play:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
+    
     AudioManager *audio= [AudioManager defaultManager];
     [[audio musicPlayer] play];
 }
