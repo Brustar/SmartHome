@@ -1450,13 +1450,13 @@
 }
 
 
-+(int)getRoomIDByRoomName:(NSString *)rName;
++(int)getRoomIDByBeacon:(int)beacon;
 {
     FMDatabase *db = [SQLManager connetdb];
     int rID ;
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Rooms where Name = '%@'",rName];
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Rooms where ibeacon = %d",beacon];
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {

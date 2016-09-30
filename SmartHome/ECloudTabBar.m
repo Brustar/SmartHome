@@ -28,8 +28,9 @@
 @property (nonatomic, strong) ECloudMoreView *moreView;
 
 @property (nonatomic,strong) NSArray *rooms;
-@property(nonatomic,strong) NSString *ibeaconStr;
+
 @property (nonatomic,assign) int roomId;
+
 @end
 
 @implementation ECloudTabBar
@@ -211,7 +212,7 @@
 {
     if([keyPath isEqualToString:@"beacons"])
     {
-        NSString *position;
+        int position=0;
         DeviceInfo *device=[DeviceInfo defaultManager];
         NSArray *beacons=[device valueForKey:@"beacons"];
         for (CLBeacon *beacon in beacons) {
@@ -219,30 +220,27 @@
             switch (beacon.proximity) {
                 case CLProximityNear:
                     str = @"近";
-                    position=[self beaconInfo:beacon distance:str];
+                    position=[beacon.major intValue];
                     break;
                 case CLProximityImmediate:
                     str = @"超近";
-                    position=[self beaconInfo:beacon distance:str];
+                    position=[beacon.major intValue];
                     break;
                 case CLProximityFar:
                     str = @"远";
-                    position=[self beaconInfo:beacon distance:str];
                     break;
                 case CLProximityUnknown:
                     str = @"不见了";
-                    position=[self beaconInfo:beacon distance:str];
                     break;
                 default:
                     break;
             }
             
         }
-        self.ibeaconStr = position;
        
-        if(self.ibeaconStr)
+        if(position>0)
         {
-            self.roomId = [SQLManager getRoomIDByRoomName:self.ibeaconStr];
+            self.roomId = [SQLManager getRoomIDByBeacon:position];
             for(ECloudButton *btn in self.leftView.subviews)
             {
                 if(btn.subType == self.roomId)
@@ -256,16 +254,6 @@
     }
     
     
-}
-
--(NSString *) beaconInfo:(CLBeacon *)beacon distance:(NSString *)dis
-{
-    if ([beacon.major intValue]==10002) {
-        return [NSString stringWithFormat:@"测试区"];
-    }else if ([beacon.major intValue]==10001) {
-        return [NSString stringWithFormat:@"健身房"];
-    }
-    return @"";
 }
 
 -(void)dealloc

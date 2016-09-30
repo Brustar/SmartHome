@@ -326,17 +326,7 @@
         {
             if(roomDic)
             {
-                int  ibeacon ;
-                if([roomDic[@"rName"] isEqualToString:@"测试区"])
-                {
-                    ibeacon = 10002;
-                }else if([roomDic[@"rName"] isEqualToString:@"健身房"])
-                {
-                    ibeacon = 10001;
-                }else{
-                    ibeacon = 0;
-                }
-                NSString *sql = [NSString stringWithFormat:@"insert into Rooms values(%d,'%@',null,null,null,null,null,'%@',%d,null)",[roomDic[@"rId"] intValue],roomDic[@"rName"],roomDic[@"imgUrl"],ibeacon];
+                NSString *sql = [NSString stringWithFormat:@"insert into Rooms values(%d,'%@',null,null,null,null,null,'%@',%d,null)",[roomDic[@"rId"] intValue],roomDic[@"rName"],roomDic[@"imgUrl"],[roomDic[@"ibeacon"] intValue]];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {

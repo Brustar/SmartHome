@@ -156,9 +156,9 @@
 
 {
     [super viewWillAppear:YES];
-    NSIndexPath *indexPath = 0;
+    //NSIndexPath *indexPath = 0;
     
-    [self tableView:self.subDeviceTableView didSelectRowAtIndexPath:indexPath];
+    //[self tableView:self.subDeviceTableView didSelectRowAtIndexPath:indexPath];
 }
 
 

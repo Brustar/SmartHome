@@ -102,7 +102,7 @@
 
 +(NSArray *)getAllRoomsInfo;
 
-+(int)getRoomIDByRoomName:(NSString *)rName;
++(int)getRoomIDByBeacon:(int)beacon;
 +(NSString *)getRoomNameByRoomID:(int) rId;
 
 
