@@ -131,7 +131,8 @@
     for(id device in self.scene.devices)
     {
         if ([device isKindOfClass:[Light class]] && ((Light*)device).deviceID == [self.deviceid intValue]) {
-            self.detailCell.bright.value=((Light*)device).brightness/100.0;
+            self.detailCell.bright.value=((Light*)device).brightness;
+            self.detailCell.valueLabel.text = [NSString stringWithFormat:@"%d%%", (int)(self.detailCell.bright.value * 100)];
             self.detailCell.power.on=((Light*)device).isPoweron;
             if ([((Light*)device).color count]>2) {
                 self.cell.colourView.backgroundColor=[UIColor colorWithRed:[[((Light*)device).color firstObject] intValue]/255.0 green:[[((Light*)device).color objectAtIndex:1] intValue]/255.0  blue:[[((Light*)device).color lastObject] intValue]/255.0  alpha:1];

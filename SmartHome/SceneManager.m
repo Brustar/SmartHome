@@ -394,7 +394,7 @@
     NSData *data=nil;
     SocketManager *sock=[SocketManager defaultManager];
     //面板场景
-    if ([SQLManager getReadOnly:sceneid]) {
+    if ([SQLManager getReadOnly:sceneid]==1) {
         data = [[DeviceInfo defaultManager] startScenenAtMaster:sceneid];
         [sock.socket writeData:data withTimeout:1 tag:1];
         return;

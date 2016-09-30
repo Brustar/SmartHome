@@ -37,6 +37,8 @@
 	<true/>
 	<key>NSHomeKitUsageDescription</key>
 	<string>homekitDescription</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>photoDescription</string>
 	<key>UIApplicationShortcutItems</key>
 	<array>
 		<dict>

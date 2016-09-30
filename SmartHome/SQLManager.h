@@ -71,7 +71,7 @@
 +(int) getRoomID:(int)sceneID;
 +(NSString *)getSceneName:(int)sceneID;
 
-+(bool) getReadOnly:(int)sceneid;
++(int) getReadOnly:(int)sceneid;
 +(NSString *) getSnumber:(int)sceneid;
 
 +(NSArray *)getDeviceIDBySubName:(NSString *)subName;

@@ -70,7 +70,8 @@
         for(int i=0;i<[_scene.devices count];i++)
         {
             if ([[_scene.devices objectAtIndex:i] isKindOfClass:[BgMusic class]]) {
-                self.volume.value=((BgMusic*)[_scene.devices objectAtIndex:i]).bgvolume/100.0;
+                self.volume.value=((BgMusic*)[_scene.devices objectAtIndex:i]).bgvolume;
+                self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
             }
         }
     }

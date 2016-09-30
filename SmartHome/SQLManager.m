@@ -506,11 +506,11 @@
     return sceneid;
 }
 
-+(bool) getReadOnly:(int)sceneid
++(int) getReadOnly:(int)sceneid
 {
     NSString *sql=[NSString stringWithFormat:@"select stype from Scenes where id=%d" ,sceneid];
     
-    bool readonly=false;
+    int readonly=0;
     FMDatabase *db = [self connetdb];
     if([db open])
     {
@@ -518,7 +518,7 @@
         
         if([resultSet next])
         {
-            readonly = [resultSet boolForColumn:@"stype"];
+            readonly = [resultSet intForColumn:@"stype"];
         }
     }
     [db closeOpenResultSets];
