@@ -7,26 +7,22 @@
 //
 
 #import "BgMusicController.h"
-#import "VolumeManager.h"
 #import "SocketManager.h"
 #import "SceneManager.h"
 #import "BgMusic.h"
 #import "PackManager.h"
 #import "DeviceInfo.h"
 #import "AudioManager.h"
-
 #import "SQLManager.h"
-
 #import <AVFoundation/AVFoundation.h>
 
-
 @interface BgMusicController ()
+
 @property (weak, nonatomic) IBOutlet UISlider *volume;
 @property (weak, nonatomic) IBOutlet UILabel *voiceValue;
 @property (weak, nonatomic) IBOutlet UILabel *songTitle;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *voiceWeakLeftConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *voiceStrongRightConstraint;
-
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewLeftConstraint;
 
 @end
@@ -227,7 +223,7 @@
 
 - (IBAction)addSongsToMusicPlayer:(id)sender
 {
-    [[AudioManager defaultManager] addSongsToMusicPlayer:self.navigationController];
+    //[[AudioManager defaultManager] addSongsToMusicPlayer:self.navigationController];
 }
 
 -(void)dealloc
@@ -237,15 +233,5 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification object:audio.musicPlayer];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMusicPlayerControllerVolumeDidChangeNotification object:audio.musicPlayer];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
