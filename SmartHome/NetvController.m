@@ -66,9 +66,8 @@
     [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     VolumeManager *volume=[VolumeManager defaultManager];
     [volume start];
+    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     if ([self.sceneid intValue]>0) {
-        
-        _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
         for(int i=0;i<[_scene.devices count];i++)
         {
             if ([[_scene.devices objectAtIndex:i] isKindOfClass:[Netv class]]) {

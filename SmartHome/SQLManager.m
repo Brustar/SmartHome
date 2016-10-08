@@ -1247,11 +1247,6 @@
             scene.picName =[resultSet stringForColumn:@"pic"];
             scene.isFavorite = [resultSet boolForColumn:@"isFavorite"];
             
-            scene.startTime = [resultSet stringForColumn:@"startTime"];
-            scene.astronomicalTime = [resultSet stringForColumn:@"astronomicalTime"];
-            scene.weekValue = [resultSet stringForColumn:@"weekValue"];
-            scene.weekRepeat = [resultSet intForColumn:@"weekRepeat"];
-            
             scene.roomID = [resultSet intForColumn:@"rId"];
             
             [sceneModles addObject:scene];

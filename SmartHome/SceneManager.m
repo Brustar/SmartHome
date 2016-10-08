@@ -12,7 +12,7 @@
 #import "SQLManager.h"
 #import "Schedule.h"
 #import "MBProgressHUD+NJ.h"
-
+#import "AudioManager.h"
 #import "Screen.h"
 #import "WinOpener.h"
 #import "HttpManager.h"
@@ -56,15 +56,19 @@
         NSString *URL = [NSString stringWithFormat:@"%@SceneAdd.aspx",[IOManager httpAddr]];
         NSString *fileName = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,scene.sceneID];
         NSDictionary *parameter;
-        if(scene.isPlan == 1)
+        if(scene.schedules.count > 0)
         {
-            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":imgFileName,@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:1],@"StartTime":scene.startTime,@"EndTime":scene.endTime,@"AstronomicalTime":scene.astronomicalTime,@"PlanType":[NSNumber numberWithInt:scene.planType],@"WeekValue":scene.weekValue,@"RoomID":[NSNumber numberWithInt:scene.roomID]};
+            for (Schedule *schedule in scene.schedules) {
+                if(schedule.deviceID==0){
+                    if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID>0)
+                    {
+                        parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":imgFileName,@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:1],@"StartTime":schedule.startTime,@"EndTime":schedule.endTime,@"AstronomicalTime":[NSNumber numberWithInt:schedule.astronomicalStartID],@"PlanType":[NSNumber numberWithInt:1],@"WeekValue":schedule.weekDays,@"RoomID":[NSNumber numberWithInt:scene.roomID]};
+                    }
+                }
+            }
         }else{
-            
             parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":imgFileName,@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:2],@"RoomID":[NSNumber numberWithInt:scene.roomID]};
         }
-        
-        
         NSData *imgData = UIImagePNGRepresentation(image);
         
         
@@ -105,8 +109,6 @@
 -(void)saveAsNewScene:(Scene *)scene withName:(NSString *)name withPic:(UIImage *)image
 {
     if (name){
-        
-        
         //同步云端
         NSString *fileName = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,scene.sceneID];
         NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:fileName];
@@ -121,12 +123,17 @@
         NSDictionary *parameter;
         int sceneid=[SQLManager saveMaxSceneId:scene name:name pic:@""];
         scene.sceneID=sceneid;
-       
-        if(scene.isPlan == 1)
+        if(scene.schedules.count > 0)
         {
-            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":imgFileName,@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:1],@"StartTime":scene.startTime,@"EndTime":scene.endTime,@"AstronomicalTime":scene.astronomicalTime,@"PlanType":[NSNumber numberWithInt:scene.planType],@"WeekValue":scene.weekValue,@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
+            for (Schedule *schedule in scene.schedules) {
+                if(schedule.deviceID==0){
+                    if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID>0)
+                    {
+                        parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":imgFileName,@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:1],@"StartTime":schedule.startTime,@"EndTime":schedule.endTime,@"AstronomicalTime":[NSNumber numberWithInt:schedule.astronomicalStartID],@"PlanType":[NSNumber numberWithInt:1],@"WeekValue":schedule.weekDays,@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
+                    }
+                }
+            }
         }else{
-            
             parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":imgFileName,@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:2],@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
         }
 
@@ -173,7 +180,7 @@
        
     }
    
-    //上传文件
+    //删除云端文件
 }
 
 //保证newScene的ID不变
@@ -184,11 +191,17 @@
     NSString *fileName = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,newScene.sceneID];
     newScene.sceneName = [SQLManager getSceneName:newScene.sceneID];
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:fileName];
-     NSDictionary *parameter;
-    if(newScene.isPlan == 1)
-    
+    NSDictionary *parameter;
+    if(newScene.schedules.count > 0)
     {
-        parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":newScene.sceneName,@"ImgName":newScene.picName,@"ScenceFile":fileName,@"RoomID":[NSNumber numberWithInt:newScene.roomID],@"IsPlan":@"1",@"StartTime":newScene.startTime,@"AstronomicalTime":newScene.astronomicalTime,@"PlanType":[NSNumber numberWithInt:newScene.planType],@"WeekValue":newScene.weekValue,@"ScenceID":[NSNumber numberWithInt:newScene.sceneID]};
+        for (Schedule *schedule in newScene.schedules) {
+            if(schedule.deviceID==0){
+                if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID>0)
+                {
+                    parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":newScene.sceneName,@"ImgName":newScene.picName,@"ScenceFile":fileName,@"RoomID":[NSNumber numberWithInt:newScene.roomID],@"IsPlan":@"1",@"StartTime":schedule.startTime,@"AstronomicalTime":[NSNumber numberWithInt:schedule.astronomicalStartID],@"PlanType":[NSNumber numberWithInt:1],@"WeekValue":schedule.weekDays,@"ScenceID":[NSNumber numberWithInt:newScene.sceneID]};
+                }
+            }
+        }
     }else{
         parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":newScene.sceneName,@"ImgName":newScene.picName,@"ScenceFile":fileName,@"RoomID":[NSNumber numberWithInt:newScene.roomID],@"IsPlan":@"2",@"ScenceID":[NSNumber numberWithInt:newScene.sceneID]};
     }
@@ -234,29 +247,6 @@
         Scene *scene=nil;
         if ([dictionary objectForKey:@"startTime"]) {
             scene=[[Scene alloc] init];
-            [scene setStartTime:[dictionary objectForKey:@"startTime"]];
-            if([dictionary objectForKey:@"planType"])
-            {
-                [scene setPlanType:[[dictionary objectForKey:@"planType"] intValue]];
-            }
-            if([dictionary objectForKey:@"weekValue"])
-            {
-                [scene setWeekValue:[dictionary objectForKey:@"weekValue"]];
-            }else{
-                [scene setWeekValue:@""];
-            }
-            if([dictionary objectForKey:@"astronomicalTime"])
-            {
-                [scene setAstronomicalTime:[dictionary objectForKey:@"astronomicalTime"]];
-            }else{
-                [scene setAstronomicalTime:@""];
-            }
-            if([dictionary objectForKey:@"endTime"])
-            {
-                [scene setEndTime:[dictionary objectForKey:@"endTime"]];
-            }else{
-                [scene setEndTime:@""];
-            }
             [scene setRoomName:@""];
             [scene setSceneName:@""];
             NSMutableArray *schedules=[NSMutableArray new];
@@ -265,7 +255,10 @@
                 schedule.startTime=sch[@"startTime"];
                 schedule.endTime=sch[@"endTime"];
                 schedule.deviceID=[sch[@"deviceID"] intValue];
-                schedule.openTovalue=[sch[@"openTovalue"] intValue];
+                schedule.openToValue=[sch[@"openTovalue"] intValue];
+                schedule.astronomicalStartID=[sch[@"astronomicalStartID"] intValue];
+                schedule.astronomicalEndID=[sch[@"astronomicalEndID"] intValue];
+                schedule.weekDays=sch[@"weekDays"];
                 [schedules addObject:schedule];
             }
             scene.schedules=schedules;
@@ -387,11 +380,13 @@
             [sock.socket writeData:data withTimeout:1 tag:1];
         }
     }
+    
+    [[[AudioManager defaultManager] musicPlayer] stop];
 }
 
 -(void) startScene:(int)sceneid
 {
-    NSData *data=nil;
+    __block NSData *data=nil;
     SocketManager *sock=[SocketManager defaultManager];
     //面板场景
     if ([SQLManager getReadOnly:sceneid]==1) {
@@ -422,10 +417,14 @@
             NSString *deviceid=[NSString stringWithFormat:@"%d", dvd.deviceID];
             data=[[DeviceInfo defaultManager] open:deviceid];
             [sock.socket writeData:data withTimeout:1 tag:1];
-            if (dvd.dvolume>0) {
-                data=[[DeviceInfo defaultManager] changeTVolume:dvd.dvolume deviceID:deviceid];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                data=[[DeviceInfo defaultManager] play:deviceid];
                 [sock.socket writeData:data withTimeout:1 tag:1];
-            }
+                if (dvd.dvolume>0) {
+                    data=[[DeviceInfo defaultManager] changeTVolume:dvd.dvolume deviceID:deviceid];
+                    [sock.socket writeData:data withTimeout:1 tag:1];
+                }
+            });
         }
         
         if ([device isKindOfClass:[Netv class]]) {

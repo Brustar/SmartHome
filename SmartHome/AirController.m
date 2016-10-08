@@ -42,9 +42,9 @@
     [super viewDidLoad];
     self.params=@[@[@"制热",@"制冷",@"抽湿",@"自动"],@[@"向上",@"向下"],@[@"高风",@"中风",@"低风"],@[@"0.5H",@"1H",@"2H",@"3H"]];
     self.paramView.scrollEnabled=NO;
+    
+    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     if ([self.sceneid intValue]>0) {
-        
-        _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
         for(int i=0;i<[_scene.devices count];i++)
         {
             if ([[_scene.devices objectAtIndex:i] isKindOfClass:[Aircon class]]) {

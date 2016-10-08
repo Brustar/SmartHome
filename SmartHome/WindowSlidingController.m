@@ -125,9 +125,9 @@
     {
         DetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         cell.label.text = self.windowSlidNames[self.segment.selectedSegmentIndex];
+        
+        _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
         if ([self.sceneid intValue]>0) {
-            
-            _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
             for(int i=0;i<[_scene.devices count];i++)
             {
                 if ([[_scene.devices objectAtIndex:i] isKindOfClass:[WinOpener class]]) {

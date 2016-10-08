@@ -19,6 +19,7 @@
 #import "SQLManager.h"
 #import "DeviceOfFixTimerViewController.h"
 #import "Schedule.h"
+
 @interface RoomListController ()<UITableViewDataSource,UITableViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,CLLocationManagerDelegate,deviceOfFixTimerViewControllerDelegate>
 @property (nonatomic,strong) NSArray *rooms;
 @property (weak, nonatomic) IBOutlet UIView *timeView;
@@ -49,7 +50,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *fixTimeDevice;
 
 @property (nonatomic,strong) DeviceOfFixTimerViewController *deviceOfTimeVC;
-@property (nonatomic, weak) Schedule *schedule;
+//@property (nonatomic, weak) Schedule *schedule;
 @property (nonatomic, assign) BOOL isSceneSetTime;
 @end
 
@@ -272,22 +273,27 @@
     }
     
    // [self save];
+    Schedule *schedule=[[Schedule alloc] init];
     if (self.isSceneSetTime) {
         if (self.startTimeBtn.selected) {
+            /*
             self.scene.planType = 1;
             self.scene.isPlan = 1;
 
             self.scene.startTime = time;
+             */
+            schedule.startTime=time;
         } else {
-            self.scene.endTime = time;
+            schedule.endTime = time;
         }
-            } else {
+    } else {
         if (self.startTimeBtn.selected) {
-            self.schedule.startTime = time;
+            schedule.startTime = time;
         } else {
-            self.schedule.endTime = time;
+            schedule.endTime = time;
         }
     }
+    self.scene.schedules = @[schedule];
     [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
     
 }
@@ -302,6 +308,7 @@
     
     [self presentViewController:self.fixTimeVC animated:YES completion:nil];
 }
+
 - (void)selectWeek:(NSNotification *)noti
 {
     NSDictionary *dict = noti.userInfo;
@@ -320,7 +327,7 @@
     }
     
     NSMutableString *display = [NSMutableString string];
-    
+    Schedule *schedule=[[Schedule alloc] init];
     if (week[1] == 0 && week[2] == 0 && week[3] == 0 && week[4] == 0 && week[5] == 0 && week[0] == 0 && week[6] == 0) {
         [display appendString:@"永不"];
     }
@@ -374,18 +381,19 @@
     [self.repeatBtn setTitle:display forState:UIControlStateNormal];
  
     if (self.isSceneSetTime) {
-        BOOL isRepeat = false;
-        NSMutableString *weekValue = [NSMutableString string];
+        //BOOL isRepeat = false;
+        NSMutableArray *weekValue = [NSMutableArray array];
         for (int i = 0; i < 7; i++) {
             if (week[i]) {
-                NSString *temp = [NSString stringWithFormat:@"%d", i];
-                [weekValue appendString:temp];
-                isRepeat = true;
+                NSNumber *temp = [NSNumber numberWithInt:i];
+                [weekValue addObject:temp];
+                //isRepeat = true;
             }
         }
-        self.scene.weekValue = weekValue;
-        self.scene.isPlan = 1;
-        self.scene.weekRepeat = YES;
+        schedule.weekDays = weekValue;
+        //self.scene.isPlan = 1;
+        //self.scene.weekRepeat = YES;
+        self.scene.schedules = @[schedule];
     }
      [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
 
@@ -498,11 +506,14 @@
     }else{
         [self.startTimeBtn setTitle:@"黄昏" forState:UIControlStateNormal];
     }
-    
+    Schedule *schedule = [[Schedule alloc] initWhithoutSchedule];
     if (self.isSceneSetTime) {
+        /*
         self.scene.astronomicalTime = [NSString stringWithFormat:@"%ld",btn.tag + 1];
         self.scene.isPlan = 1;
         self.scene.planType = 2;
+        */
+        schedule.astronomicalStartID=(int)btn.tag + 1;
     } else {
        // self.schedule.startTime = [NSString stringWithFormat:@"%ld",btn.tag + 1];
     }
@@ -547,7 +558,7 @@
     for (int i = 0; i < self.scene.schedules.count; i++) {
         Schedule *schedule = self.scene.schedules[i];
         if (deviceID == schedule.deviceID) {
-            self.schedule = self.scene.schedules[i];
+            //self.schedule = self.scene.schedules[i];
             return;
         }
     }
@@ -557,7 +568,7 @@
     NSMutableArray *schedules = [NSMutableArray arrayWithArray:self.scene.schedules];
     [schedules addObject:schedule];
     self.scene.schedules = [schedules copy];
-    self.schedule = schedule;
+    //self.schedule = schedule;
    
    
 
