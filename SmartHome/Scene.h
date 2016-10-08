@@ -22,35 +22,17 @@
 @property (nonatomic,strong)NSString *roomName;
 //场景图片url
 @property (nonatomic,strong) NSString *picName;
-
 //是否为收藏场景
 @property(nonatomic,assign) BOOL isFavorite;
 //户型id
 @property (nonatomic) long masterID;
 //是否系统场景
 @property (nonatomic) bool readonly;
-
 //设备列表
 @property (strong,nonatomic) NSArray *devices;
 //设备列表
 @property (strong,nonatomic) NSArray *schedules;
 
-/*
-//场景开始时间
-@property(nonatomic,strong)NSString *startTime;
-//场景结束时间
-@property (nonatomic,strong) NSString *endTime;
-//天文时间
-@property(nonatomic,strong)NSString *astronomicalTime;
-//每周运行时间
-@property(nonatomic,strong)NSString *weekValue;
-//是否每周重复（1 重复，0 不重复）
-@property(nonatomic,assign) BOOL weekRepeat;
-//是否定时场景
-@property(nonatomic,assign) int isPlan;
-//定时类型
-@property (nonatomic,assign) int planType;
-*/
 - (instancetype)initWhithoutSchedule;
 
 @end
