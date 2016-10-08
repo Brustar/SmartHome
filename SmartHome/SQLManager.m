@@ -607,7 +607,7 @@
             sceneID = [resultSet intForColumn:@"ID"]+1;
         }
         
-        sql=[NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,null,null,null)",sceneID,name,scene.roomName,img,scene.roomID,2];
+        sql=[NSString stringWithFormat:@"insert into Scenes values(%d,'%@','','%@',%d,%d,null,null,null)",sceneID,name,img,scene.roomID,2];
         [db executeUpdate:sql];
     }
     [db closeOpenResultSets];
@@ -1298,7 +1298,6 @@
     Scene *scene = [Scene new];
     scene.sceneID = [resultSet intForColumn:@"ID"];
     scene.sceneName = [resultSet stringForColumn:@"NAME"];
-    scene.roomName = [resultSet stringForColumn:@"roomName"];
     
     scene.picName =[resultSet stringForColumn:@"pic"];
     scene.isFavorite = [resultSet boolForColumn:@"isFavorite"];
@@ -1357,7 +1356,7 @@
             scene.sceneName = [resultSet stringForColumn:@"NAME"];
             scene.sceneID = [resultSet intForColumn:@"ID"];
             scene.picName = [resultSet stringForColumn:@"pic"];
-            scene.roomName = [resultSet stringForColumn:@"roomName"];
+            
             [scens addObject:scene];
         }
     }
@@ -1402,7 +1401,6 @@
             scene.sceneName = [resultSet stringForColumn:@"NAME"];
             scene.sceneID = [resultSet intForColumn:@"ID"];
             scene.picName = [resultSet stringForColumn:@"pic"];
-            scene.roomName = [resultSet stringForColumn:@"roomName"];
             [scens addObject:scene];
         }
     }

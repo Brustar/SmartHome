@@ -247,7 +247,7 @@
         Scene *scene=nil;
         if ([dictionary objectForKey:@"startTime"]) {
             scene=[[Scene alloc] init];
-            [scene setRoomName:@""];
+            
             [scene setSceneName:@""];
             NSMutableArray *schedules=[NSMutableArray new];
             for (NSDictionary *sch in [dictionary objectForKey:@"schedules"]) {
