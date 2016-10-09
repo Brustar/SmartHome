@@ -156,10 +156,36 @@
 -(void)viewWillAppear:(BOOL)animated
 
 {
-    [super viewWillAppear:YES];
-    NSIndexPath *indexPath = 0;
     
-    [self tableView:self.subDeviceTableView didSelectRowAtIndexPath:indexPath];
+    [super viewWillAppear:YES];
+     NSIndexPath *indexPath = 0;
+    
+    for(int i = 0; i < self.devicesTypes.count; i++)
+    {
+        NSString *subTypeName = self.devicesTypes[i];
+        if([subTypeName isEqualToString:@"影音"])
+        {
+            [self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+            
+
+            self.subTypeArr = [SQLManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.devicesTypes[i]];
+            
+            for(int i = 0; i < self.subTypeArr.count; i++)
+            {
+                NSString *typeName = self.subTypeArr[i];
+                if([typeName isEqualToString:@"背景音乐"])
+                {
+                    indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+                    
+                    
+                }
+            }
+
+        }
+    }
+        [self tableView:self.subDeviceTableView didSelectRowAtIndexPath:indexPath];
+
+   
 }
 
 
