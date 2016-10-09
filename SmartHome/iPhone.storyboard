@@ -442,7 +442,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="81v-Qf-rWW">
-                                                    <rect key="frame" x="50" y="20" width="42" height="21"/>
+                                                    <rect key="frame" x="50" y="30" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -453,7 +453,7 @@
                                         <color key="backgroundColor" red="0.9100608093" green="0.9100608093" blue="0.9100608093" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="Uhs-8E-kQc" firstAttribute="centerY" secondItem="hEG-5Y-lEb" secondAttribute="centerY" id="Uyr-bo-SYb"/>
-                                            <constraint firstItem="81v-Qf-rWW" firstAttribute="top" secondItem="hEG-5Y-lEb" secondAttribute="top" constant="20" id="Vxb-t5-YxJ"/>
+                                            <constraint firstItem="81v-Qf-rWW" firstAttribute="centerY" secondItem="hEG-5Y-lEb" secondAttribute="centerY" id="cWl-Ok-tNd"/>
                                             <constraint firstItem="81v-Qf-rWW" firstAttribute="leading" secondItem="Uhs-8E-kQc" secondAttribute="trailing" constant="10" id="xR0-Mm-e22"/>
                                             <constraint firstItem="Uhs-8E-kQc" firstAttribute="leading" secondItem="hEG-5Y-lEb" secondAttribute="leading" constant="10" id="xxM-y6-Axh"/>
                                         </constraints>
@@ -972,7 +972,6 @@
                                 <rect key="frame" x="10" y="294" width="60" height="30"/>
                                 <state key="normal" title="添加设备"/>
                                 <connections>
-                                    <action selector="addDeviceAction:" destination="684-QI-OKg" eventType="touchUpInside" id="lVg-2Z-XPD"/>
                                     <segue destination="yGe-XQ-WNx" kind="push" identifier="gotoDeviceSegue" id="YuF-MW-0b0"/>
                                 </connections>
                             </button>
@@ -992,9 +991,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="添加场景" id="q8e-58-io1">
-                        <barButtonItem key="rightBarButtonItem" title="保存" id="wq5-EQ-YOT"/>
+                        <barButtonItem key="rightBarButtonItem" title="保存" id="wq5-EQ-YOT">
+                            <connections>
+                                <action selector="saveNewScene:" destination="684-QI-OKg" id="set-s1-z1e"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="sceneName" destination="aKg-0W-a5G" id="kfS-r3-74u"/>
                         <outlet property="tableView" destination="87J-VZ-ZoA" id="3MG-X0-3Jn"/>
                     </connections>
                 </viewController>

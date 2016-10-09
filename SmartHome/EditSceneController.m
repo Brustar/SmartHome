@@ -183,7 +183,8 @@
 
         }
     }
-        [self tableView:self.subDeviceTableView didSelectRowAtIndexPath:indexPath];
+    
+    [self tableView:self.subDeviceTableView didSelectRowAtIndexPath:indexPath];
 
    
 }

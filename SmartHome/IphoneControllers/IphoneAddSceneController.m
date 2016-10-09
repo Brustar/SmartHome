@@ -8,8 +8,9 @@
 
 #import "IphoneAddSceneController.h"
 #import "SQLManager.h"
-
+#import "SceneManager.h"
 @interface IphoneAddSceneController ()<UITableViewDelegate,UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UITextField *sceneName;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) NSArray *devices;
 @end
@@ -20,7 +21,6 @@
     [super viewDidLoad];
     self.tableView.tableFooterView = [UIView new];
      self.automaticallyAdjustsScrollViewInsets = NO;
-    self.devices = [self deviceAdded];
     
 }
 
@@ -28,10 +28,15 @@
     [super didReceiveMemoryWarning];
    
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    self.devices = [self deviceAdded];
+}
 - (IBAction)addDeviceAction:(id)sender {
     
 }
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if([segue.identifier isEqualToString:@"gotoDeviceSegue"])
@@ -48,8 +53,9 @@
     NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+    NSArray *devices = plistDic[@"devices"];
     NSMutableArray *deviceName = [NSMutableArray array];
-    for(NSDictionary *dic in plistDic)
+    for(NSDictionary *dic in devices)
     {
         //dic[@"deviceID"];
         NSString *name = [SQLManager deviceNameByDeviceID:[dic[@"deviceID"] intValue]];
@@ -69,8 +75,22 @@
     {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
+    cell.textLabel.text = self.devices[indexPath.row];
     
     return cell;
 }
+
+- (IBAction)saveNewScene:(id)sender {
+    NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
+    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+    
+    Scene *scene = [[Scene alloc]initWhithoutSchedule];
+    [scene setValuesForKeysWithDictionary:plistDic];
+    [[DeviceInfo defaultManager] setEditingScene:NO];
+    [[SceneManager defaultManager] addScene:scene withName:self.sceneName.text withImage:[UIImage imageNamed:@""]];
+}
+
+
 
 @end
