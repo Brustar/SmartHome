@@ -159,6 +159,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = [UIView new];
    
+ 
     
     [self.tableView selectRowAtIndexPath:0 animated:YES scrollPosition:UITableViewScrollPositionTop];
     self.splitViewController.maximumPrimaryColumnWidth = 250;
@@ -273,7 +274,7 @@
     }
     
    // [self save];
-    Schedule *schedule=[[Schedule alloc] init];
+    Schedule *schedule=[[Schedule alloc] initWhithoutSchedule];
     if (self.isSceneSetTime) {
         if (self.startTimeBtn.selected) {
             /*
@@ -327,7 +328,8 @@
     }
     
     NSMutableString *display = [NSMutableString string];
-    Schedule *schedule=[[Schedule alloc] init];
+    Schedule *schedule=[[Schedule alloc] initWhithoutSchedule];
+    
     if (week[1] == 0 && week[2] == 0 && week[3] == 0 && week[4] == 0 && week[5] == 0 && week[0] == 0 && week[6] == 0) {
         [display appendString:@"永不"];
     }
@@ -390,6 +392,7 @@
                 //isRepeat = true;
             }
         }
+       
         schedule.weekDays = weekValue;
         //self.scene.isPlan = 1;
         //self.scene.weekRepeat = YES;

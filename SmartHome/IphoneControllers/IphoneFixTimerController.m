@@ -7,6 +7,10 @@
 //
 
 #import "IphoneFixTimerController.h"
+#import "SceneManager.h"
+#import "Scene.h"
+#import "Schedule.h"
+
 
 @interface IphoneFixTimerController ()<UIPickerViewDelegate,UIPickerViewDataSource>
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *astronomicalHight;
@@ -29,9 +33,28 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *repeatBtns;
 @property (nonatomic,strong) NSMutableDictionary *dic;
 @property (nonatomic,strong) NSMutableString *repeatTime;
+@property (nonatomic, assign) BOOL isSceneSetTime;
+@property (nonatomic,strong) Scene *scene;
 @end
 
 @implementation IphoneFixTimerController
+
+-(Scene *)scene
+{
+    if(!_scene)
+    {
+        
+        NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
+        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+        
+        _scene = [[Scene alloc] initWhithoutSchedule];
+        [_scene setValuesForKeysWithDictionary:plistDic];
+        
+    }
+    return _scene;
+}
+
 -(NSMutableString *)repeatTime
 {
     if(!_repeatTime)
@@ -149,18 +172,24 @@
     btn.selected = YES;
     int astronomicalTime =(int) btn.tag;
     [self.dic setObject:@"astronomicalTime" forKey:[NSNumber numberWithInt:astronomicalTime]];
-}
+    }
 
 - (IBAction)selectedRepeatTime:(id)sender {
     UIButton *btn = sender;
     btn.selected = !btn.selected;
     if(btn.selected)
     {
+        [self.repeatTime appendString:[NSString stringWithFormat:@"%ld",btn.tag]];
+        self.repeatLabel.text = self.repeatTime;
+    }else{
+//        [self.repeatTime delete:[NSString stringWithFormat:@"%ld",btn.tag]];
+//        self.repeatLabel.text = self.repeatTime;
         
     }
     
 }
 - (IBAction)saveFixTime:(id)sender {
+    
     
 }
 
@@ -199,6 +228,24 @@
     } else {
         [self.endTimeBtn setTitle:time forState:UIControlStateNormal];
     }
+    
+    Schedule *schedule=[[Schedule alloc] initWhithoutSchedule];
+    if (self.isSceneSetTime) {
+        if (self.startTimeBtn.selected) {
+            schedule.startTime=time;
+        } else {
+            schedule.endTime = time;
+        }
+    } else {
+        if (self.startTimeBtn.selected) {
+            schedule.startTime = time;
+        } else {
+            schedule.endTime = time;
+        }
+    }
+    self.scene.schedules = @[schedule];
+    [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
+
 
 }
 - (IBAction)setTimeOnClick:(id)sender {

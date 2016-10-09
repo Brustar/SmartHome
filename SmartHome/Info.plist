@@ -31,12 +31,12 @@
 	<string>mediaDescription</string>
 	<key>NSCameraUsageDescription</key>
 	<string>cameraDescription</string>
+	<key>NSHomeKitUsageDescription</key>
+	<string>homekitDescription</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<true/>
-	<key>NSHomeKitUsageDescription</key>
-	<string>homekitDescription</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>photoDescription</string>
 	<key>UIApplicationShortcutItems</key>

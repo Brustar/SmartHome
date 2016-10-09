@@ -6540,7 +6540,7 @@ layer.masksToBoundslayer.masksToBounds
                                         </variation>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="my8-UG-gsP" firstAttribute="centerX" secondItem="oHk-s8-HdJ" secondAttribute="centerX" id="cwQ-aq-Ywa"/>
                                     <constraint firstItem="my8-UG-gsP" firstAttribute="top" secondItem="oHk-s8-HdJ" secondAttribute="top" constant="169" id="peA-un-a1X"/>

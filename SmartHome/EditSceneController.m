@@ -126,7 +126,8 @@
     self.tableView.tableFooterView = self.footerView;
     self.tableView.backgroundColor = backGroudColour;
     self.subDeviceTableView.backgroundColor = backGroudColour;
-    [self.tableView selectRowAtIndexPath:0 animated:YES scrollPosition:UITableViewScrollPositionTop];
+   // [self.tableView selectRowAtIndexPath:0 animated:YES scrollPosition:UITableViewScrollPositionTop];
+    self.devicelView.backgroundColor = [UIColor whiteColor];
     self.view.backgroundColor = backGroudColour;
     self.title= [SQLManager getSceneName:self.sceneID];
     Scene *scene = [SQLManager sceneBySceneID:self.sceneID];
@@ -156,9 +157,9 @@
 
 {
     [super viewWillAppear:YES];
-    //NSIndexPath *indexPath = 0;
+    NSIndexPath *indexPath = 0;
     
-    //[self tableView:self.subDeviceTableView didSelectRowAtIndexPath:indexPath];
+    [self tableView:self.subDeviceTableView didSelectRowAtIndexPath:indexPath];
 }
 
 
@@ -363,7 +364,7 @@
         [self.currentViewController removeFromParentViewController];
     }
 
-    vc.view.frame = self.devicelView.frame;
+    vc.view.frame = CGRectMake(100, 64, self.view.bounds.size.width - 200  , self.view.bounds.size.height);
     [self.view addSubview:vc.view];
     [self addChildViewController:vc];
      self.currentViewController = vc;
