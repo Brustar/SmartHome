@@ -20,24 +20,15 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-    if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)])
-    {
-        //IOS8
-        //创建UIUserNotificationSettings，并设置消息的显示类类型
-        UIUserNotificationSettings *notiSettings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIUserNotificationTypeSound) categories:nil];
-        
-        [application registerUserNotificationSettings:notiSettings];
-        
-    } else{
-        UIUserNotificationType notificationTypes = (UIUserNotificationTypeAlert|
-                                                    UIUserNotificationTypeSound|
-                                                    UIUserNotificationTypeBadge);
-        
-        UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:notificationTypes
-                                                                                             categories:nil];
-        [application registerUserNotificationSettings:notificationSettings];
-    };
+    //app未开启时处理推送
+    if (launchOptions) {
+        //截取apns推送的消息
+        NSDictionary* userInfo = [launchOptions objectForKey:@"UIApplicationLaunchOptionsRemoteNotificationKey"];
+        //获取推送详情
+        NSString *pushInfo = [NSString stringWithFormat:@"%@",[userInfo objectForKey:@"aps"]];
+        [self handlePush:pushInfo];
+        return YES;
+    }
     
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device netReachbility];
@@ -64,6 +55,7 @@
     return YES;
 }
 
+#pragma mark - 推送代理
 -(void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken{
     NSLog(@"deviceToken: %@", deviceToken);
     DeviceInfo *info=[DeviceInfo defaultManager];
@@ -71,12 +63,21 @@
 }
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
-    
     NSString *str = [NSString stringWithFormat: @"Error: %@", err];
     NSLog(@"token error:  %@",str);
+}
+
+//app在后台运行时
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    NSString *pushInfo=[userInfo objectForKey:@"aps"];
+    [self handlePush:pushInfo];
+}
+
+//处理推送及跳转
+-(void) handlePush:(NSString *)pushInfo
+{
     
-    //如果device token获取失败则需要重新获取一次
-    //[NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(registerForRemoteNotificationToGetToken) userInfo:nil repeats:NO];
 }
 
 //向服务器申请发送token 判断事前有没有发送过
@@ -85,8 +86,8 @@
     NSLog(@"Registering for push notifications...");
     
     //注册Device Token, 需要注册remote notification
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    if (![userDefaults boolForKey:@"DeviceTokenRegisteredKEY"])   //如果没有注册到令牌 则重新发送注册请求
+    DeviceInfo *info=[DeviceInfo defaultManager];
+    if (!info.pushToken)   //如果没有注册到令牌 则重新发送注册请求
     {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             if([[[UIDevice currentDevice]systemVersion]floatValue] >=8.0)
@@ -105,12 +106,7 @@
         if ([[UIApplication sharedApplication] applicationIconBadgeNumber] == 0) {
             return;
         }
-        // [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
-        
-        //2 ask the provider to set the BadgeNumber to zero
-        //NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        //NSString *deviceTokenStr = [userDefaults objectForKey:@"DeviceTokenStringKEY"];
-        //[self resetBadgeNumberOnProviderWithDeviceToken:deviceTokenStr];
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     });
     
 }

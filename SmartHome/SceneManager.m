@@ -402,14 +402,16 @@
             NSString *deviceid=[NSString stringWithFormat:@"%d", tv.deviceID];
             data=[[DeviceInfo defaultManager] open:deviceid];
             [sock.socket writeData:data withTimeout:1 tag:1];
-            if (tv.volume>0) {
-                data=[[DeviceInfo defaultManager] changeTVolume:tv.volume deviceID:deviceid];
-                [sock.socket writeData:data withTimeout:1 tag:1];
-            }
-            if (tv.channelID>0) {
-                data=[[DeviceInfo defaultManager] switchProgram:tv.channelID deviceID:deviceid];
-                [sock.socket writeData:data withTimeout:1 tag:1];
-            }
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                if (tv.volume>0) {
+                    data=[[DeviceInfo defaultManager] changeTVolume:tv.volume deviceID:deviceid];
+                    [sock.socket writeData:data withTimeout:1 tag:1];
+                }
+                if (tv.channelID>0) {
+                    data=[[DeviceInfo defaultManager] switchProgram:tv.channelID deviceID:deviceid];
+                    [sock.socket writeData:data withTimeout:1 tag:1];
+                }
+            });
         }
         
         if ([device isKindOfClass:[DVD class]]) {
@@ -433,8 +435,10 @@
             data=[[DeviceInfo defaultManager] open:deviceid];
             [sock.socket writeData:data withTimeout:1 tag:1];
             if (netv.nvolume>0) {
-                data=[[DeviceInfo defaultManager] changeTVolume:netv.nvolume deviceID:deviceid];
-                [sock.socket writeData:data withTimeout:1 tag:1];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    data=[[DeviceInfo defaultManager] changeTVolume:netv.nvolume deviceID:deviceid];
+                    [sock.socket writeData:data withTimeout:1 tag:1];
+                });
             }
         }
         
@@ -542,22 +546,24 @@
             NSString *deviceid=[NSString stringWithFormat:@"%d", aircon.deviceID];
             data=[[DeviceInfo defaultManager] toogleAirCon:aircon.isPoweron deviceID:deviceid];
             [sock.socket writeData:data withTimeout:1 tag:1];
-            if (aircon.mode>=0) {
-                if (aircon.mode==0) {
-                    data=[[DeviceInfo defaultManager] changeMode:0x39+aircon.mode deviceID:deviceid];
-                }else{
-                    data=[[DeviceInfo defaultManager] changeMode:0x3F+aircon.mode deviceID:deviceid];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                if (aircon.mode>=0) {
+                    if (aircon.mode==0) {
+                        data=[[DeviceInfo defaultManager] changeMode:0x39+aircon.mode deviceID:deviceid];
+                    }else{
+                        data=[[DeviceInfo defaultManager] changeMode:0x3F+aircon.mode deviceID:deviceid];
+                    }
+                    [sock.socket writeData:data withTimeout:1 tag:1];
                 }
-                [sock.socket writeData:data withTimeout:1 tag:1];
-            }
-            if (aircon.WindLevel>=0) {
-                data=[[DeviceInfo defaultManager] changeMode:0x43+aircon.mode deviceID:deviceid];
-                [sock.socket writeData:data withTimeout:1 tag:1];
-            }
-            if (aircon.Windirection>=0) {
-                data=[[DeviceInfo defaultManager] changeMode:0x35+aircon.mode deviceID:deviceid];
-                [sock.socket writeData:data withTimeout:1 tag:1];
-            }
+                if (aircon.WindLevel>=0) {
+                    data=[[DeviceInfo defaultManager] changeMode:0x43+aircon.mode deviceID:deviceid];
+                    [sock.socket writeData:data withTimeout:1 tag:1];
+                }
+                if (aircon.Windirection>=0) {
+                    data=[[DeviceInfo defaultManager] changeMode:0x35+aircon.mode deviceID:deviceid];
+                    [sock.socket writeData:data withTimeout:1 tag:1];
+                }
+            });
         }
     }
 }

@@ -21,7 +21,7 @@
 @property(nonatomic, strong) NSString* startTime;
 @property(nonatomic, strong) NSString* endTime;
 
-//每周几重复，为空@[]只表示当天运行一次（永不）
+//每周几重复，为空@[]只表示当天运行一次（永不）0 日 1 一 ...
 @property(nonatomic,strong) NSArray *weekDays;
 
 //定时某设备的值，比如定时到12：00空调升一度
