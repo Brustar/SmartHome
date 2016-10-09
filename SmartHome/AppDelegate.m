@@ -12,6 +12,8 @@
 #import "HttpManager.h"
 #import "IOManager.h"
 #import "IQKeyboardManager.h"
+#import "ECloudTabBarController.h"
+
 @interface AppDelegate ()
 
 @end
@@ -45,6 +47,14 @@
         UIViewController* viewcontroller = [secondStoryBoard instantiateViewControllerWithIdentifier:@"main"];
         self.window.rootViewController = viewcontroller;
         [self.window makeKeyAndVisible];
+    }else{
+        //已登录时
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]) {
+            ECloudTabBarController *ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ECloudTabBarController"];
+            self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+            self.window.rootViewController = ecloudVC;
+            return YES;
+        }
     }
     IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
     manager.enable = YES;
@@ -57,9 +67,9 @@
 
 #pragma mark - 推送代理
 -(void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken{
-    NSLog(@"deviceToken: %@", deviceToken);
     DeviceInfo *info=[DeviceInfo defaultManager];
     info.pushToken=[PackManager hexStringFromData:deviceToken];
+    NSLog(@"deviceToken: %@", info.pushToken);
 }
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
@@ -84,7 +94,6 @@
 - (void)registerForRemoteNotificationToGetToken
 {
     NSLog(@"Registering for push notifications...");
-    
     //注册Device Token, 需要注册remote notification
     DeviceInfo *info=[DeviceInfo defaultManager];
     if (!info.pushToken)   //如果没有注册到令牌 则重新发送注册请求
