@@ -59,17 +59,17 @@
         }
             break;
         case 3:{
-            FavorController  *favorVC = [story instantiateViewControllerWithIdentifier:@"favorController"];
+            FavorController  *favorVC = [story instantiateViewControllerWithIdentifier:@"FavorController"];
             [self.detailNavigation setViewControllers:@[favorVC] animated:NO];
         }
             break;
         case 4:{
-             MSGController  *msgVC = [story instantiateViewControllerWithIdentifier:@"msgController"];
+             MSGController  *msgVC = [story instantiateViewControllerWithIdentifier:@"MSGController"];
              [self.detailNavigation setViewControllers:@[msgVC] animated:NO];
         }
            break;
         case 5:{
-            MySettingViewController *setVC = [story instantiateViewControllerWithIdentifier:@"settingViewController"];
+            MySettingViewController *setVC = [story instantiateViewControllerWithIdentifier:@"MySettingViewController"];
             [self.detailNavigation setViewControllers:@[setVC] animated:NO];
         }
             break;

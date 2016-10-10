@@ -78,10 +78,10 @@
 @property (nonatomic,strong) LightController *ligthVC;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *deleteBtn;
 
-//当前房间当前场景的所有设备
-@property (nonatomic,strong) NSArray *devices;
-//当前房间当前场景的所有设备类别的子类
-@property (nonatomic,strong) NSArray *typeArray;
+////当前房间当前场景的所有设备
+//@property (nonatomic,strong) NSArray *devices;
+////当前房间当前场景的所有设备类别的子类
+//@property (nonatomic,strong) NSArray *typeArray;
 
 
 
@@ -89,6 +89,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *storeNewSceneName;
 
 @property (weak, nonatomic) UIViewController *currentViewController;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveBarButton;
+
 @end
 @interface UIImagePickerController (LandScapeImagePicker)
 
@@ -122,6 +124,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if(self.isFavor)
+    {
+        self.saveBarButton.enabled = NO;
+    }
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = self.footerView;
     self.tableView.backgroundColor = backGroudColour;
@@ -146,7 +152,7 @@
    
     self.devicesTypes = [SQLManager getSubTydpeBySceneID:self.sceneID];
     
-       self.subTypeArr = [SQLManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.devicesTypes[0]];
+    self.subTypeArr = [SQLManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.devicesTypes[0]];
     
     [self.tableView reloadData];
     [self.subDeviceTableView reloadData];
@@ -454,8 +460,7 @@
      UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"收藏场景" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:  UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
-//        UITextField *nameTextFiel = alert.textFields[0];
-//        nameTextFiel.placeholder = @"请输入场景名";
+
 
 
             Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
@@ -578,18 +583,26 @@
 - (IBAction)deleteScene:(UIBarButtonItem *)sender {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"确定删除吗" message:@"" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *sureAction =  [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [SQLManager deleteScene:self.sceneID];
-        
-        Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
-        [[SceneManager defaultManager] delScene:scene];
-        
-        NSString *url = [NSString stringWithFormat:@"%@SceneDelete.aspx",[IOManager httpAddr]];
-        NSDictionary *dict = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"SID":[NSNumber numberWithInt:scene.sceneID]};
-        HttpManager *http=[HttpManager defaultManager];
-        http.delegate=self;
-        http.tag = 2;
-        [http sendPost:url param:dict];
+            if(self.isFavor)
+            {
+                Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
+                [[SceneManager defaultManager] deleteFavoriteScene:scene withName:scene.sceneName];
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                [SQLManager deleteScene:self.sceneID];
+                
+                Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
+                [[SceneManager defaultManager] delScene:scene];
+                
+                NSString *url = [NSString stringWithFormat:@"%@SceneDelete.aspx",[IOManager httpAddr]];
+                NSDictionary *dict = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"SID":[NSNumber numberWithInt:scene.sceneID]};
+                HttpManager *http=[HttpManager defaultManager];
+                http.delegate=self;
+                http.tag = 2;
+                [http sendPost:url param:dict];
 
+            }
+        
     }];
     [alertVC addAction:sureAction];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {

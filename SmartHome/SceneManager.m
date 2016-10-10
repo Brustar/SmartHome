@@ -238,6 +238,28 @@
         //上传文件
     }
 }
+-(void)deleteFavoriteScene:(Scene *)scene withName:(NSString *)name
+{
+    NSString *scenePath=[[IOManager favoritePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, scene.sceneID ]];
+    NSDictionary *dic = [PrintObject getObjectData:scene];
+    BOOL ret = [dic writeToFile:scenePath atomically:YES];
+    if(ret)
+    {
+        // 写sqlite更新场景文件名
+        FMDatabase *db = [SQLManager connetdb];
+        if (![db open]) {
+            NSLog(@"Could not open db.");
+            return ;
+        }
+        BOOL result =[db executeUpdate:@"UPDATE Scenes SET isFavorite = 0 WHERE id = ?",[NSNumber numberWithInt:scene.sceneID]];
+        if(result)
+        {
+            NSLog(@"删除成功");
+        }
+        [db close];
+    }
+
+}
 
 - (Scene *)readSceneByID:(int)sceneid
 {

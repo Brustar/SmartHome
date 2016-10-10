@@ -46,7 +46,13 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 6;
+    if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    {
+        return 5;
+    }else{
+        return 6;
+    }
+    
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if(section == 2)
@@ -187,16 +193,20 @@
 }
 -(void) httpHandler:(id) responseObject tag:(int)tag
 {
-    if([responseObject[@"Result"] intValue] == 0)
+    if(tag == 1)
     {
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"AuthorToken"];
-        [[SocketManager defaultManager] cutOffSocket];
-        self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
-        [self performSegueWithIdentifier:@"goLogin" sender:self];
-        
-        
-    }else {
-        [MBProgressHUD showSuccess:responseObject[@"Msg"]];
+        if([responseObject[@"Result"] intValue] == 0)
+        {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"AuthorToken"];
+            [[SocketManager defaultManager] cutOffSocket];
+            self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
+            [self performSegueWithIdentifier:@"goLogin" sender:self];
+            
+            
+        }else {
+            [MBProgressHUD showSuccess:responseObject[@"Msg"]];
+        }
+
     }
     
 }

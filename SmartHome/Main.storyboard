@@ -2186,7 +2186,7 @@
         <!--我的-->
         <scene sceneID="bq8-Cb-pJP">
             <objects>
-                <viewController id="On0-Fj-CMk" customClass="ProfireListController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfireListController" id="On0-Fj-CMk" customClass="ProfireListController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="62d-dE-UpY"/>
                         <viewControllerLayoutGuide type="bottom" id="pod-Mb-CFk"/>
@@ -2437,7 +2437,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I88-Lr-aax">
-                                            <rect key="frame" x="150" y="42" width="46" height="30"/>
+                                            <rect key="frame" x="20" y="42" width="46" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="46" id="Pcj-5c-ayK"/>
                                                 <constraint firstAttribute="height" constant="30" id="UEF-KC-b64"/>
@@ -2451,7 +2451,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oaZ-Ls-d0Y">
-                                            <rect key="frame" x="404" y="42" width="46" height="30"/>
+                                            <rect key="frame" x="534" y="42" width="46" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="RvO-gy-elo"/>
                                                 <constraint firstAttribute="width" constant="46" id="wjw-PE-WtG"/>
@@ -2468,9 +2468,9 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="oaZ-Ls-d0Y" firstAttribute="centerY" secondItem="cAp-fj-rfO" secondAttribute="centerY" id="FUy-e2-5sy"/>
-                                        <constraint firstItem="I88-Lr-aax" firstAttribute="leading" secondItem="cAp-fj-rfO" secondAttribute="leading" constant="150" id="Wv4-Be-NdX"/>
+                                        <constraint firstItem="I88-Lr-aax" firstAttribute="leading" secondItem="cAp-fj-rfO" secondAttribute="leading" constant="20" id="Wv4-Be-NdX"/>
                                         <constraint firstItem="I88-Lr-aax" firstAttribute="centerY" secondItem="cAp-fj-rfO" secondAttribute="centerY" id="aaI-OZ-XFC"/>
-                                        <constraint firstAttribute="trailing" secondItem="oaZ-Ls-d0Y" secondAttribute="trailing" constant="150" id="mXG-xI-A5B"/>
+                                        <constraint firstAttribute="trailing" secondItem="oaZ-Ls-d0Y" secondAttribute="trailing" constant="20" id="mXG-xI-A5B"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
@@ -3164,7 +3164,7 @@
         <!--My Setting View Controller-->
         <scene sceneID="1XM-de-2CR">
             <objects>
-                <viewController storyboardIdentifier="settingViewController" id="HBZ-W0-pl1" customClass="MySettingViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MySettingViewController" id="HBZ-W0-pl1" customClass="MySettingViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="t1T-g5-zcK"/>
                         <viewControllerLayoutGuide type="bottom" id="fPP-hA-bYw"/>
@@ -3228,7 +3228,7 @@
         <!--Controller-->
         <scene sceneID="Zh9-B0-SUI">
             <objects>
-                <tableViewController storyboardIdentifier="msgController" id="0mr-hx-CLH" customClass="MSGController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MSGController" id="0mr-hx-CLH" customClass="MSGController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="19E-d9-SvD">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -6586,6 +6586,7 @@ layer.masksToBoundslayer.masksToBounds
                         <outlet property="devicelView" destination="oHk-s8-HdJ" id="gLo-yA-SXK"/>
                         <outlet property="graphicBtn" destination="1WI-6F-VHp" id="els-JD-QLe"/>
                         <outlet property="realObjBtn" destination="wvP-dM-R4D" id="4Bx-xw-Zmu"/>
+                        <outlet property="saveBarButton" destination="d18-6E-MCK" id="jcA-Q5-lVM"/>
                         <outlet property="stopBtn" destination="EVf-MO-Vi3" id="onW-kI-YLe"/>
                         <outlet property="storeNewScene" destination="my8-UG-gsP" id="Rga-z2-m3g"/>
                         <outlet property="storeNewSceneName" destination="oBJ-Gf-PFK" id="wOD-7R-qEh"/>
@@ -6636,7 +6637,7 @@ layer.masksToBoundslayer.masksToBounds
         <!--Favor Controller-->
         <scene sceneID="tIe-6o-2Tg">
             <objects>
-                <viewController storyboardIdentifier="favorController" id="Gd1-Nx-eQV" customClass="FavorController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FavorController" id="Gd1-Nx-eQV" customClass="FavorController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2tX-UU-PxC"/>
                         <viewControllerLayoutGuide type="bottom" id="UBu-pR-0MM"/>
@@ -6844,20 +6845,20 @@ layer.masksToBoundslayer.masksToBounds
     <inferredMetricsTieBreakers>
         <segue reference="uCb-ME-O7C"/>
         <segue reference="nIi-Kc-QDm"/>
-        <segue reference="PRs-sg-E1F"/>
-        <segue reference="U1p-eR-Biy"/>
+        <segue reference="wSR-hk-rTP"/>
         <segue reference="ya3-gG-p8O"/>
-        <segue reference="vKk-7C-VKf"/>
-        <segue reference="l23-e3-J0C"/>
         <segue reference="pWG-oz-Opr"/>
         <segue reference="Vzc-yi-Jnw"/>
-        <segue reference="a9T-LN-ZVX"/>
-        <segue reference="fHn-Cm-7Q7"/>
+        <segue reference="vdf-Gi-dZf"/>
+        <segue reference="vKk-7C-VKf"/>
         <segue reference="JQm-bA-TWz"/>
+        <segue reference="fHn-Cm-7Q7"/>
         <segue reference="tt4-nB-rfe"/>
+        <segue reference="a9T-LN-ZVX"/>
         <segue reference="tdV-sS-d5j"/>
         <segue reference="X9P-hg-DXo"/>
-        <segue reference="vdf-Gi-dZf"/>
-        <segue reference="NGA-cS-h6U"/>
+        <segue reference="l23-e3-J0C"/>
+        <segue reference="zpE-f9-a1R"/>
+        <segue reference="YE7-iU-rxh"/>
     </inferredMetricsTieBreakers>
 </document>

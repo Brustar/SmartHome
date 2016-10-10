@@ -24,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.userName.text = [[NSUserDefaults  standardUserDefaults] objectForKey:@"Account"];
+    self.userName.text = [[NSUserDefaults  standardUserDefaults] objectForKey:@"UserName"];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.titlArr = @[@"我的故障",@"我的保修记录",@"我的能耗",@"我的收藏",@"我的消息",@"设置"];

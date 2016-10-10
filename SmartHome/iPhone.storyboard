@@ -511,6 +511,7 @@
                         <outlet property="collectionView" destination="Aho-98-0G3" id="Ijk-lo-dAa"/>
                         <outlet property="roomView" destination="ueV-XT-5wh" id="kVL-ZE-UyR"/>
                         <segue destination="684-QI-OKg" kind="push" identifier="iphoneAddSceneSegue" id="R58-hJ-kc4"/>
+                        <segue destination="emj-YL-Hpp" kind="push" identifier="iphoneEditSegue" id="qN8-z6-Gb7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U47-Xi-iD1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1043,6 +1044,308 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7mq-tK-5f2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2217" y="197"/>
+        </scene>
+        <!--Iphone Edit Scene Controller-->
+        <scene sceneID="jJL-4i-9vO">
+            <objects>
+                <viewController id="emj-YL-Hpp" customClass="IphoneEditSceneController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kCh-e3-PMp"/>
+                        <viewControllerLayoutGuide type="bottom" id="VZ6-Ye-tsJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="f4l-Bn-A50">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Foe-4D-JYa" customClass="IphoneRoomView">
+                                <rect key="frame" x="0.0" y="64" width="320" height="80"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="SDZ-7P-Gds"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ujo-LM-7aK" customClass="IphoneRoomView">
+                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Lb1-dF-aTf"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MDX-gG-lIf">
+                                <rect key="frame" x="0.0" y="144" width="320" height="374"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ujo-LM-7aK" secondAttribute="trailing" id="3ps-mj-9J3"/>
+                            <constraint firstItem="Foe-4D-JYa" firstAttribute="leading" secondItem="f4l-Bn-A50" secondAttribute="leading" id="8hc-sR-leM"/>
+                            <constraint firstItem="Foe-4D-JYa" firstAttribute="top" secondItem="kCh-e3-PMp" secondAttribute="bottom" id="H4X-h3-Pbb"/>
+                            <constraint firstAttribute="trailing" secondItem="Foe-4D-JYa" secondAttribute="trailing" id="K7C-17-Mys"/>
+                            <constraint firstItem="MDX-gG-lIf" firstAttribute="top" secondItem="Foe-4D-JYa" secondAttribute="bottom" id="fiy-VX-8yk"/>
+                            <constraint firstItem="MDX-gG-lIf" firstAttribute="leading" secondItem="f4l-Bn-A50" secondAttribute="leading" id="jDe-Aj-bQ3"/>
+                            <constraint firstAttribute="trailing" secondItem="MDX-gG-lIf" secondAttribute="trailing" id="jX0-CH-2uG"/>
+                            <constraint firstItem="VZ6-Ye-tsJ" firstAttribute="top" secondItem="ujo-LM-7aK" secondAttribute="bottom" id="mLA-Zi-dFx"/>
+                            <constraint firstItem="ujo-LM-7aK" firstAttribute="top" secondItem="MDX-gG-lIf" secondAttribute="bottom" id="s8R-FX-kxe"/>
+                            <constraint firstItem="ujo-LM-7aK" firstAttribute="leading" secondItem="f4l-Bn-A50" secondAttribute="leading" id="tt2-Iu-meT"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="dBg-8V-T7F">
+                        <rightBarButtonItems>
+                            <barButtonItem title="Item" id="edP-E5-cIj"/>
+                            <barButtonItem title="Item" id="SxF-9l-s8g"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="detailView" destination="MDX-gG-lIf" id="ako-v0-09H"/>
+                        <outlet property="deviceTypeView" destination="ujo-LM-7aK" id="qIR-z4-onj"/>
+                        <outlet property="subTypeView" destination="Foe-4D-JYa" id="2fo-2e-P2S"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xHe-WT-B8x" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2667" y="197"/>
+        </scene>
+        <!--Iphone Profire Controller-->
+        <scene sceneID="EvH-UO-aEX">
+            <objects>
+                <viewController storyboardIdentifier="IphoneProfireController" id="gcF-dp-BGl" customClass="IphoneProfireController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KBd-Ak-oFK"/>
+                        <viewControllerLayoutGuide type="bottom" id="4iG-mv-GYo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MRe-MB-5Bd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5cQ-Hv-bu6">
+                                <rect key="frame" x="0.0" y="20" width="320" height="428"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="428" id="5yv-lN-sCP"/>
+                                </constraints>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="OBg-dv-qTP">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YuC-yL-GDW">
+                                            <rect key="frame" x="10" y="10" width="100" height="100"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="100" id="e85-e0-ogs"/>
+                                                <constraint firstAttribute="height" constant="100" id="vhP-JB-xLL"/>
+                                            </constraints>
+                                            <state key="normal" backgroundImage="placeholder"/>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="auA-aO-F2z">
+                                            <rect key="frame" x="130" y="47" width="54" height="27"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="auA-aO-F2z" firstAttribute="centerY" secondItem="YuC-yL-GDW" secondAttribute="centerY" id="47X-lU-Mmg"/>
+                                        <constraint firstItem="YuC-yL-GDW" firstAttribute="leading" secondItem="OBg-dv-qTP" secondAttribute="leading" constant="10" id="C1e-IN-G7q"/>
+                                        <constraint firstItem="auA-aO-F2z" firstAttribute="leading" secondItem="YuC-yL-GDW" secondAttribute="trailing" constant="20" id="TAv-oo-Afe"/>
+                                        <constraint firstItem="YuC-yL-GDW" firstAttribute="top" secondItem="OBg-dv-qTP" secondAttribute="top" constant="10" id="yW1-RG-7NG"/>
+                                    </constraints>
+                                </view>
+                                <connections>
+                                    <outlet property="dataSource" destination="gcF-dp-BGl" id="OC1-uo-c8B"/>
+                                    <outlet property="delegate" destination="gcF-dp-BGl" id="mGW-ZG-wfO"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="31B-4C-HtW">
+                                <rect key="frame" x="0.0" y="498" width="320" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tH0-rQ-BhE">
+                                        <rect key="frame" x="0.0" y="1" width="320" height="48"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="退出">
+                                            <color key="titleColor" red="1" green="0.074967022029999997" blue="0.050827619239999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="clickQuitButton:" destination="gcF-dp-BGl" eventType="touchUpInside" id="tlS-W1-M6I"/>
+                                            <segue destination="chj-yx-pDz" kind="modal" identifier="iphoneQuitSegue" id="V6A-ID-icl"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.7725490196" green="0.7725490196" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="tH0-rQ-BhE" secondAttribute="trailing" id="CLQ-GL-RCp"/>
+                                    <constraint firstItem="tH0-rQ-BhE" firstAttribute="leading" secondItem="31B-4C-HtW" secondAttribute="leading" id="DUf-h8-K6b"/>
+                                    <constraint firstAttribute="bottom" secondItem="tH0-rQ-BhE" secondAttribute="bottom" constant="1" id="jcb-iY-p7I"/>
+                                    <constraint firstAttribute="height" constant="50" id="oJd-BD-JUY"/>
+                                    <constraint firstItem="tH0-rQ-BhE" firstAttribute="top" secondItem="31B-4C-HtW" secondAttribute="top" constant="1" id="yUN-UF-tWA"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="31B-4C-HtW" firstAttribute="top" secondItem="5cQ-Hv-bu6" secondAttribute="bottom" constant="50" id="6sw-Fc-9zA"/>
+                            <constraint firstAttribute="trailing" secondItem="31B-4C-HtW" secondAttribute="trailing" id="BGE-Pl-AAg"/>
+                            <constraint firstAttribute="trailing" secondItem="5cQ-Hv-bu6" secondAttribute="trailing" id="EsV-qZ-kk4"/>
+                            <constraint firstItem="31B-4C-HtW" firstAttribute="leading" secondItem="MRe-MB-5Bd" secondAttribute="leading" id="Xal-gr-OE2"/>
+                            <constraint firstItem="5cQ-Hv-bu6" firstAttribute="leading" secondItem="MRe-MB-5Bd" secondAttribute="leading" id="cTe-ZF-dRc"/>
+                            <constraint firstItem="5cQ-Hv-bu6" firstAttribute="top" secondItem="KBd-Ak-oFK" secondAttribute="bottom" id="g2J-OP-uak"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="headView" destination="OBg-dv-qTP" id="n0h-0n-NTK"/>
+                        <outlet property="nameLabel" destination="auA-aO-F2z" id="Uaq-qb-56v"/>
+                        <outlet property="tableHight" destination="5yv-lN-sCP" id="N0J-lF-9Ns"/>
+                        <outlet property="tableView" destination="5cQ-Hv-bu6" id="PFs-NT-NxK"/>
+                        <segue destination="QTu-MY-vPd" kind="custom" identifier="iphoneGoLogin" customClass="RBStoryboardModalSegue" id="J5F-aP-6iz"/>
+                        <segue destination="p7n-fD-7nF" kind="custom" identifier="iphoneDefault" customClass="RBStoryboardPushSegue" id="ONO-lb-8pk"/>
+                        <segue destination="3VO-63-WT7" kind="custom" identifier="iphoneRecordSegue" customClass="RBStoryboardPushSegue" id="ceC-Qu-Z5K"/>
+                        <segue destination="AHw-cA-iyK" kind="custom" identifier="iphoneEngerSegue" customClass="RBStoryboardPushSegue" id="YWD-LL-YSx"/>
+                        <segue destination="vlC-0w-8aC" kind="custom" identifier="iphoneFavorSegue" customClass="RBStoryboardPushSegue" id="dES-tB-USC"/>
+                        <segue destination="tIa-JA-PdI" kind="custom" identifier="iphoneMsgSegue" customClass="RBStoryboardPushSegue" id="WvP-vC-yjU"/>
+                        <segue destination="dyZ-Pj-XZw" kind="custom" identifier="iphoneSettingSegue" customClass="RBStoryboardPushSegue" id="5G8-91-ua7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5JX-cY-Ui9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="925" y="226"/>
+        </scene>
+        <!--Storyboard Link-->
+        <scene sceneID="src-Al-lH9">
+            <objects>
+                <viewController id="p7n-fD-7nF" customClass="RBStoryboardLink" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RE3-OG-oP1"/>
+                        <viewControllerLayoutGuide type="bottom" id="7wa-dm-pMM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wE6-gp-6Qt">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="storyboardName" value="Main"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="needsTopLayoutGuide" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="sceneIdentifier" value="MyDefaultViewController"/>
+                    </userDefinedRuntimeAttributes>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="466-3m-XBe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="570" y="998"/>
+        </scene>
+        <!--Storyboard Link-->
+        <scene sceneID="v7W-pa-DaF">
+            <objects>
+                <viewController id="3VO-63-WT7" customClass="RBStoryboardLink" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CgH-8H-x47"/>
+                        <viewControllerLayoutGuide type="bottom" id="NHZ-uf-6BG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Sw3-PS-Hqz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="storyboardName" value="Main"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="needsTopLayoutGuide" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="sceneIdentifier" value="ServiceRecordViewController"/>
+                    </userDefinedRuntimeAttributes>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vnr-a8-fHk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="905" y="998"/>
+        </scene>
+        <!--Storyboard Link-->
+        <scene sceneID="3MF-3M-cux">
+            <objects>
+                <viewController id="AHw-cA-iyK" customClass="RBStoryboardLink" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Uev-co-IS2"/>
+                        <viewControllerLayoutGuide type="bottom" id="qXN-ds-QLi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dFF-eY-n5S">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="storyboardName" value="Main"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="needsTopLayoutGuide" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="sceneIdentifier" value="MyEnergyViewController"/>
+                    </userDefinedRuntimeAttributes>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d5M-aS-6wn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1243" y="999"/>
+        </scene>
+        <!--Storyboard Link-->
+        <scene sceneID="G9k-aR-YAh">
+            <objects>
+                <viewController id="vlC-0w-8aC" customClass="RBStoryboardLink" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="A10-Bx-qdI"/>
+                        <viewControllerLayoutGuide type="bottom" id="SUZ-mc-1fE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fDG-wi-xQR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="storyboardName" value="Main"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="needsTopLayoutGuide" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="sceneIdentifier" value="FavorController"/>
+                    </userDefinedRuntimeAttributes>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T0G-To-PCl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1573" y="999"/>
+        </scene>
+        <!--Storyboard Link-->
+        <scene sceneID="Mei-4F-cyT">
+            <objects>
+                <viewController id="tIa-JA-PdI" customClass="RBStoryboardLink" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HMm-HI-fwc"/>
+                        <viewControllerLayoutGuide type="bottom" id="UgV-9I-gVs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="aeZ-gt-Fce">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="storyboardName" value="Main"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="needsTopLayoutGuide" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="sceneIdentifier" value="MSGController"/>
+                    </userDefinedRuntimeAttributes>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ryV-yh-3iY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1904" y="998"/>
+        </scene>
+        <!--Storyboard Link-->
+        <scene sceneID="VjI-RT-O2B">
+            <objects>
+                <viewController id="dyZ-Pj-XZw" customClass="RBStoryboardLink" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kt6-2b-T88"/>
+                        <viewControllerLayoutGuide type="bottom" id="XwG-gR-jpu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cuo-N4-vZT">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="storyboardName" value="Main"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="needsTopLayoutGuide" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="sceneIdentifier" value="MySettingViewController"/>
+                    </userDefinedRuntimeAttributes>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gXB-ld-zcy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2236" y="999"/>
         </scene>
         <!--Iphone Device List Controller-->
         <scene sceneID="WEZ-X5-WaH">
@@ -2213,6 +2516,7 @@
         <image name="media" width="48" height="48"/>
         <image name="next" width="32" height="32"/>
         <image name="pause" width="32" height="32"/>
+        <image name="placeholder" width="45" height="45"/>
         <image name="rewind" width="32" height="32"/>
         <image name="tv_down" width="10" height="7"/>
         <image name="tv_left" width="9" height="10"/>
@@ -2227,4 +2531,7 @@
         <image name="voice_strong" width="39" height="32"/>
         <image name="voice_weak" width="33" height="32"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="J5F-aP-6iz"/>
+    </inferredMetricsTieBreakers>
 </document>

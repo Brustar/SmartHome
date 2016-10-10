@@ -24,12 +24,14 @@
     self.title = @"我的收藏";
     self.splitViewController.presentsWithGesture = NO;
    
-    self.scens = [SQLManager getFavorScene];
-}
+    }
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
      self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAutomatic;
+    self.scens = [SQLManager getFavorScene];
+    [self.collectionView reloadData];
+
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -66,6 +68,7 @@
         id theSegue = segue.destinationViewController;
         
         [theSegue setValue:[NSNumber numberWithInt:self.selectID] forKey:@"sceneID"];
+        [theSegue setValue:@"YES" forKey:@"isFavor"];
 //        [theSegue setValue:[NSNumber numberWithInt:self.roomID] forKey:@"roomID"];
     
         

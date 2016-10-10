@@ -468,6 +468,7 @@
     {
         if ([responseObject[@"Result"] intValue]==0) {
             [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
+            [IOManager writeUserdefault:responseObject[@"UserName"] forKey:@"UserName"];
             NSArray *hostList = responseObject[@"HostList"];
             
             for(NSDictionary *hostID in hostList)

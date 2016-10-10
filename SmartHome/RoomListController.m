@@ -50,12 +50,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *fixTimeDevice;
 
 @property (nonatomic,strong) DeviceOfFixTimerViewController *deviceOfTimeVC;
-//@property (nonatomic, weak) Schedule *schedule;
+@property (nonatomic, weak) Schedule *schedule;
 @property (nonatomic, assign) BOOL isSceneSetTime;
+
 @end
 
 @implementation RoomListController
-
 
 -(NSArray *)hours
 {
@@ -166,6 +166,28 @@
     self.tableView.backgroundColor = backGroudColour;
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectWeek:) name:@"SelectWeek" object:nil];
     self.view.backgroundColor = backGroudColour;
+    
+    Schedule *schedule = nil;
+    
+    if (self.scene.schedules.count > 0) {
+        for (Schedule *scheduleTemp in self.scene.schedules) {
+            if (scheduleTemp.deviceID == 0) {
+                schedule = scheduleTemp;
+                break;
+            }
+        }
+    }
+    
+    if (schedule == nil) {
+        schedule = [[Schedule alloc] initWhithoutSchedule];
+        schedule.deviceID = 0;
+        
+        NSMutableArray *schedules = [NSMutableArray arrayWithArray:self.scene.schedules];
+        [schedules addObject:schedule];
+        self.scene.schedules = [schedules copy];
+    }
+    
+    self.schedule = schedule;
    }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -248,6 +270,8 @@
 }
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
+    
+
     if(component == 0)
     {
         int hour = [self.hours[row] intValue];
@@ -256,7 +280,7 @@
             [pickerView selectRow:0 inComponent:2 animated:YES];
         }else {
             [pickerView selectRow:1 inComponent:2 animated:YES];
-
+            
         }
         
     }
@@ -273,28 +297,14 @@
         [self.endTimeBtn setTitle:time forState:UIControlStateNormal];
     }
     
-   // [self save];
-    Schedule *schedule=[[Schedule alloc] initWhithoutSchedule];
-    if (self.isSceneSetTime) {
-        if (self.startTimeBtn.selected) {
-            /*
-            self.scene.planType = 1;
-            self.scene.isPlan = 1;
-
-            self.scene.startTime = time;
-             */
-            schedule.startTime=time;
-        } else {
-            schedule.endTime = time;
-        }
+   
+    
+    if (self.startTimeBtn.selected) {
+        self.schedule.startTime=time;
     } else {
-        if (self.startTimeBtn.selected) {
-            schedule.startTime = time;
-        } else {
-            schedule.endTime = time;
-        }
+        self.schedule.endTime = time;
     }
-    self.scene.schedules = @[schedule];
+    
     [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
     
 }
@@ -328,7 +338,7 @@
     }
     
     NSMutableString *display = [NSMutableString string];
-    Schedule *schedule=[[Schedule alloc] initWhithoutSchedule];
+    //Schedule *schedule=[[Schedule alloc] initWhithoutSchedule];
     
     if (week[1] == 0 && week[2] == 0 && week[3] == 0 && week[4] == 0 && week[5] == 0 && week[0] == 0 && week[6] == 0) {
         [display appendString:@"永不"];
@@ -393,10 +403,7 @@
             }
         }
        
-        schedule.weekDays = weekValue;
-        //self.scene.isPlan = 1;
-        //self.scene.weekRepeat = YES;
-        self.scene.schedules = @[schedule];
+        self.schedule.weekDays = weekValue;
     }
      [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
 
@@ -509,18 +516,10 @@
     }else{
         [self.startTimeBtn setTitle:@"黄昏" forState:UIControlStateNormal];
     }
-    Schedule *schedule = [[Schedule alloc] initWhithoutSchedule];
-    if (self.isSceneSetTime) {
-        /*
-        self.scene.astronomicalTime = [NSString stringWithFormat:@"%ld",btn.tag + 1];
-        self.scene.isPlan = 1;
-        self.scene.planType = 2;
-        */
-        schedule.astronomicalStartID=(int)btn.tag + 1;
-    } else {
-       // self.schedule.startTime = [NSString stringWithFormat:@"%ld",btn.tag + 1];
-    }
-     [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
+    
+    self.schedule.astronomicalStartID=(int)btn.tag + 1;
+    
+    [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
 
 }
 
@@ -549,19 +548,19 @@
 {
     self.fixTimeDevice.text = deviceName;
     self.timeView.hidden = NO;
-    if ( [deviceName isEqualToString:@"场景"]) {
-        self.isSceneSetTime = YES;
-        return;
-    } else {
-        self.isSceneSetTime = NO;
-    }
     
-    NSInteger deviceID = [SQLManager deviceIDByDeviceName:deviceName];
+    
+    
+    NSInteger deviceID = 0;
+    
+    if (![deviceName isEqualToString:@"场景"]) {
+        deviceID = [SQLManager deviceIDByDeviceName:deviceName];
+    }
     
     for (int i = 0; i < self.scene.schedules.count; i++) {
         Schedule *schedule = self.scene.schedules[i];
         if (deviceID == schedule.deviceID) {
-            //self.schedule = self.scene.schedules[i];
+            self.schedule = self.scene.schedules[i];
             return;
         }
     }
@@ -571,10 +570,8 @@
     NSMutableArray *schedules = [NSMutableArray arrayWithArray:self.scene.schedules];
     [schedules addObject:schedule];
     self.scene.schedules = [schedules copy];
-    //self.schedule = schedule;
+    self.schedule = schedule;
    
-   
-
 }
 
 @end

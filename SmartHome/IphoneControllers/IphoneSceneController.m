@@ -26,6 +26,7 @@
 @property (nonatomic,strong) NSArray *scenes;
 @property (nonatomic, assign) int roomIndex;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (nonatomic,assign) int selectedSId;
 
 @end
 
@@ -91,10 +92,15 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row == self.scenes.count)
+        if(indexPath.row == self.scenes.count)
     {
         [self performSegueWithIdentifier:@"iphoneAddSceneSegue" sender:self];
+    }else{
+        Scene *scene = self.scenes[indexPath.row];
+        self.selectedSId = scene.sceneID;
+
     }
+    [self performSegueWithIdentifier:@"iphoneEditSegue" sender:self];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -123,8 +129,18 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     Room *room = self.roomList[self.roomIndex];
-    id theSegue = segue.destinationViewController;
-    [theSegue setValue:[NSNumber numberWithInt:room.rId] forKey:@"roomId"];
+    if([segue.identifier isEqualToString:@"iphoneAddSceneSegue"])
+    {
+        
+        id theSegue = segue.destinationViewController;
+        [theSegue setValue:[NSNumber numberWithInt:room.rId] forKey:@"roomId"];
+    }else{
+        id theSegue = segue.destinationViewController;
+        
+        [theSegue setValue:[NSNumber numberWithInt:self.selectedSId] forKey:@"sceneID"];
+        [theSegue setValue:[NSNumber numberWithInt:room.rId] forKey:@"roomID"];
+    }
+    
 }
 
 

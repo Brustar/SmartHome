@@ -31,7 +31,7 @@
 - (void) editScene:(Scene *)scene;
 
 - (void) favoriteScene:(Scene *)newScene withName:(NSString *)name;
-
+-(void)deleteFavoriteScene:(Scene *)scene withName:(NSString *)name;
 - (Scene *)readSceneByID:(int)sceneid;
 -(void)saveAsNewScene:(Scene *)scene withName:(NSString *)name withPic:(UIImage *)image;
 
