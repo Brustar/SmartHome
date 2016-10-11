@@ -13,6 +13,8 @@
 #import "IOManager.h"
 #import "IQKeyboardManager.h"
 #import "ECloudTabBarController.h"
+#import "IphoneMainController.h"
+#import "MSGController.h"
 
 @interface AppDelegate ()
 
@@ -27,8 +29,7 @@
         //截取apns推送的消息
         NSDictionary* userInfo = [launchOptions objectForKey:@"UIApplicationLaunchOptionsRemoteNotificationKey"];
         //获取推送详情
-        NSString *pushInfo = [NSString stringWithFormat:@"%@",[userInfo objectForKey:@"aps"]];
-        [self handlePush:pushInfo];
+        [self handlePush:userInfo];
         return YES;
     }
     
@@ -44,7 +45,12 @@
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-        UIViewController* viewcontroller = [secondStoryBoard instantiateViewControllerWithIdentifier:@"main"];
+        NSString *UIname=@"main";
+        //已登录时,自动登录
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]) {
+            UIname=@"IphoneMainController";
+        }
+        UIViewController* viewcontroller = [secondStoryBoard instantiateViewControllerWithIdentifier:UIname];
         self.window.rootViewController = viewcontroller;
         [self.window makeKeyAndVisible];
     }else{
@@ -80,14 +86,40 @@
 //app在后台运行时
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    NSString *pushInfo=[userInfo objectForKey:@"aps"];
-    [self handlePush:pushInfo];
+    NSLog(@"userInfo:  %@",userInfo);
+    if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
+        //alert
+        NSString *msg=[[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] description];
+        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"是否查看推送的消息" message:msg preferredStyle:UIAlertControllerStyleAlert];
+        [self.window.rootViewController presentViewController: alertVC animated:YES completion:nil];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alertVC dismissViewControllerAnimated:YES completion:nil];
+        }];
+        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //跳转
+            
+            [alertVC dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [alertVC addAction:cancelAction];
+        [alertVC addAction:sureAction];
+        
+        
+        return;
+    }
+    [self handlePush:userInfo];
 }
 
-//处理推送及跳转
--(void) handlePush:(NSString *)pushInfo
+//处理推送及跳转,发送请求更新badge 消息itemID = 123;类型typeID = 456;
+-(void) handlePush:(NSDictionary *)userInfo
 {
+    int type=[[userInfo objectForKey:@"typeID"] intValue];
+    int item=[[userInfo objectForKey:@"itemID"] intValue];
     
+    if(item && type)
+    {
+        //跳转
+        
+    }
 }
 
 //向服务器申请发送token 判断事前有没有发送过
