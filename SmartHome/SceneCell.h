@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @class SceneCell;
-@protocol ScenseCellDelegate <NSObject>
+@protocol SceneCellDelegate <NSObject>
 
-
+-(void)sceneDeleteAction:(SceneCell *)cell;
 
 @end
 
@@ -22,6 +22,11 @@
 
 
 @property (weak, nonatomic) IBOutlet UIButton *powerBtn;
+@property (weak, nonatomic) IBOutlet UIButton *deleteBtn;
 
+@property (nonatomic,weak) id<SceneCellDelegate> delegate;
+
+-(void)useLongPressGesture;
+-(void)unUseLongPressGesture;
 
 @end

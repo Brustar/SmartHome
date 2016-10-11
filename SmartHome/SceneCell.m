@@ -9,10 +9,35 @@
 #import "SceneCell.h"
 
 @interface SceneCell ()<UIGestureRecognizerDelegate>
-@property(nonatomic,strong)UILongPressGestureRecognizer *lpgr;
+@property(nonatomic,strong)UILongPressGestureRecognizer *lgPress;
 
 @end
 @implementation SceneCell
 
+-(void)useLongPressGesture
+{
+    self.lgPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
+    self.lgPress.delegate = self;
+    [self addGestureRecognizer:self.lgPress];
+}
+
+- (IBAction)doDeleteBtn:(id)sender {
+    [self.delegate sceneDeleteAction:self];
+}
+-(void)handleLongPress:(UILongPressGestureRecognizer *)lgr
+{
+    
+    self.deleteBtn.hidden = NO;
+}
+-(void)unUseLongPressGesture
+{
+    if(self.lgPress != nil)
+    {
+        [self.lgPress removeTarget:self action:@selector(handleLongPress:)];
+    }
+}
+-(void)dealloc{
+    [self unUseLongPressGesture];
+}
 
 @end

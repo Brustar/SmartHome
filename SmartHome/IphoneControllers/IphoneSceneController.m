@@ -17,7 +17,7 @@
 
 #define cellWidth self.collectionView.frame.size.width / 2.0 - 10
 #define  minSpace 20
-@interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate>
+@interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,SceneCellDelegate>
 @property (strong, nonatomic) IBOutlet IphoneRoomView *roomView;
 
 
@@ -84,8 +84,9 @@
     }else{
         Scene *scene = self.scenes[indexPath.row];
         cell.scenseName.text = scene.sceneName;
+        [cell useLongPressGesture];
     }
-    //[cell.imgView sd_setImageWithURL:[NSURL URLWithString: scene.picName] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    
 
     return cell;
 }
@@ -98,9 +99,18 @@
     }else{
         Scene *scene = self.scenes[indexPath.row];
         self.selectedSId = scene.sceneID;
+        SceneCell *cell = (SceneCell*)[collectionView cellForItemAtIndexPath:indexPath];
+        
+        [cell useLongPressGesture];
+        if(cell.deleteBtn.hidden)
+        {
+            [self performSegueWithIdentifier:@"iphoneEditSegue" sender:self];
 
+        }else{
+            cell.deleteBtn.hidden = YES;
+        }
     }
-    [self performSegueWithIdentifier:@"iphoneEditSegue" sender:self];
+    
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath

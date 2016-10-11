@@ -2186,7 +2186,7 @@
         <!--我的-->
         <scene sceneID="bq8-Cb-pJP">
             <objects>
-                <viewController storyboardIdentifier="ProfireListController" id="On0-Fj-CMk" customClass="ProfireListController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileListController" id="On0-Fj-CMk" customClass="ProfileListController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="62d-dE-UpY"/>
                         <viewControllerLayoutGuide type="bottom" id="pod-Mb-CFk"/>
@@ -6278,7 +6278,7 @@ layer.masksToBoundslayer.masksToBounds
         <!--场景-->
         <scene sceneID="7n3-qf-uvO">
             <objects>
-                <viewController id="6a7-1m-tB7" customClass="EditSceneController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditSceneController" id="6a7-1m-tB7" customClass="EditSceneController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="26g-kv-1vI"/>
                         <viewControllerLayoutGuide type="bottom" id="J7V-cJ-e6i"/>
@@ -6845,7 +6845,8 @@ layer.masksToBoundslayer.masksToBounds
     <inferredMetricsTieBreakers>
         <segue reference="uCb-ME-O7C"/>
         <segue reference="nIi-Kc-QDm"/>
-        <segue reference="wSR-hk-rTP"/>
+        <segue reference="PRs-sg-E1F"/>
+        <segue reference="U1p-eR-Biy"/>
         <segue reference="ya3-gG-p8O"/>
         <segue reference="pWG-oz-Opr"/>
         <segue reference="Vzc-yi-Jnw"/>
@@ -6858,7 +6859,6 @@ layer.masksToBoundslayer.masksToBounds
         <segue reference="tdV-sS-d5j"/>
         <segue reference="X9P-hg-DXo"/>
         <segue reference="l23-e3-J0C"/>
-        <segue reference="zpE-f9-a1R"/>
         <segue reference="YE7-iU-rxh"/>
     </inferredMetricsTieBreakers>
 </document>

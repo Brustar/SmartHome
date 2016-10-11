@@ -7,9 +7,9 @@
 //
 #define backGroudColour [UIColor colorWithRed:55/255.0 green:73/255.0 blue:91/255.0 alpha:1]
 #define selectedColour  [UIColor colorWithRed:30/255.0 green:52/255.0 blue:70/255.0 alpha:1]
-#import "ProfireListController.h"
+#import "ProfileListController.h"
 
-@interface ProfireListController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ProfileListController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *headView;
 @property (nonatomic,strong) NSArray *titlArr;
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation ProfireListController
+@implementation ProfileListController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -48,9 +48,9 @@
     
     [self.tableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     
-    if([self.delegate respondsToSelector:@selector(ProfireListController:selected:)])
+    if([self.delegate respondsToSelector:@selector(ProfileListController:selected:)])
     {
-        [self.delegate ProfireListController:self selected:selectedIndexPath.row ];
+        [self.delegate ProfileListController:self selected:selectedIndexPath.row ];
     }
 }
 #pragma mark - Table view data source
@@ -95,9 +95,9 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    if([self.delegate respondsToSelector:@selector(ProfireListController:selected:)])
+    if([self.delegate respondsToSelector:@selector(ProfileListController:selected:)])
     {
-        [self.delegate ProfireListController:self selected:indexPath.row];
+        [self.delegate ProfileListController:self selected:indexPath.row];
     }
 }
 

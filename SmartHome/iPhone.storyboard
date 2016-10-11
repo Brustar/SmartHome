@@ -447,11 +447,21 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yo8-Ha-oj8">
+                                                    <rect key="frame" x="88" y="5" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="2yc-F3-4Pm"/>
+                                                        <constraint firstAttribute="width" constant="30" id="rPC-bD-dWY"/>
+                                                    </constraints>
+                                                    <state key="normal" backgroundImage="delete"/>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <color key="backgroundColor" red="0.9100608093" green="0.9100608093" blue="0.9100608093" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="yo8-Ha-oj8" secondAttribute="trailing" constant="5" id="20j-0B-A3U"/>
+                                            <constraint firstItem="yo8-Ha-oj8" firstAttribute="top" secondItem="hEG-5Y-lEb" secondAttribute="top" constant="5" id="378-8t-4Pa"/>
                                             <constraint firstItem="Uhs-8E-kQc" firstAttribute="centerY" secondItem="hEG-5Y-lEb" secondAttribute="centerY" id="Uyr-bo-SYb"/>
                                             <constraint firstItem="81v-Qf-rWW" firstAttribute="centerY" secondItem="hEG-5Y-lEb" secondAttribute="centerY" id="cWl-Ok-tNd"/>
                                             <constraint firstItem="81v-Qf-rWW" firstAttribute="leading" secondItem="Uhs-8E-kQc" secondAttribute="trailing" constant="10" id="xR0-Mm-e22"/>
@@ -464,6 +474,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
+                                            <outlet property="deleteBtn" destination="yo8-Ha-oj8" id="TKg-ky-oWK"/>
                                             <outlet property="imgView" destination="Uhs-8E-kQc" id="oqg-jt-vlm"/>
                                             <outlet property="scenseName" destination="81v-Qf-rWW" id="X0K-Yb-d7v"/>
                                         </connections>
@@ -1057,23 +1068,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Foe-4D-JYa" customClass="IphoneRoomView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Foe-4D-JYa" customClass="IphoneTypeView">
                                 <rect key="frame" x="0.0" y="64" width="320" height="80"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="SDZ-7P-Gds"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ujo-LM-7aK" customClass="IphoneRoomView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MDX-gG-lIf">
+                                <rect key="frame" x="0.0" y="154" width="320" height="364"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ujo-LM-7aK" customClass="IphoneTypeView">
                                 <rect key="frame" x="0.0" y="518" width="320" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Lb1-dF-aTf"/>
                                 </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MDX-gG-lIf">
-                                <rect key="frame" x="0.0" y="144" width="320" height="374"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1082,7 +1093,7 @@
                             <constraint firstItem="Foe-4D-JYa" firstAttribute="leading" secondItem="f4l-Bn-A50" secondAttribute="leading" id="8hc-sR-leM"/>
                             <constraint firstItem="Foe-4D-JYa" firstAttribute="top" secondItem="kCh-e3-PMp" secondAttribute="bottom" id="H4X-h3-Pbb"/>
                             <constraint firstAttribute="trailing" secondItem="Foe-4D-JYa" secondAttribute="trailing" id="K7C-17-Mys"/>
-                            <constraint firstItem="MDX-gG-lIf" firstAttribute="top" secondItem="Foe-4D-JYa" secondAttribute="bottom" id="fiy-VX-8yk"/>
+                            <constraint firstItem="MDX-gG-lIf" firstAttribute="top" secondItem="Foe-4D-JYa" secondAttribute="bottom" constant="10" id="fiy-VX-8yk"/>
                             <constraint firstItem="MDX-gG-lIf" firstAttribute="leading" secondItem="f4l-Bn-A50" secondAttribute="leading" id="jDe-Aj-bQ3"/>
                             <constraint firstAttribute="trailing" secondItem="MDX-gG-lIf" secondAttribute="trailing" id="jX0-CH-2uG"/>
                             <constraint firstItem="VZ6-Ye-tsJ" firstAttribute="top" secondItem="ujo-LM-7aK" secondAttribute="bottom" id="mLA-Zi-dFx"/>
@@ -1092,19 +1103,28 @@
                     </view>
                     <navigationItem key="navigationItem" id="dBg-8V-T7F">
                         <rightBarButtonItems>
-                            <barButtonItem title="Item" id="edP-E5-cIj"/>
-                            <barButtonItem title="Item" id="SxF-9l-s8g"/>
+                            <barButtonItem title="保存" id="edP-E5-cIj">
+                                <connections>
+                                    <action selector="clickStoreScene:" destination="emj-YL-Hpp" id="rOP-Hm-5Kk"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="switch" id="SxF-9l-s8g">
+                                <color key="tintColor" red="1" green="0.56939600459999995" blue="0.12608335909999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="closeScene:" destination="emj-YL-Hpp" id="Y7b-35-GOA"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="detailView" destination="MDX-gG-lIf" id="ako-v0-09H"/>
-                        <outlet property="deviceTypeView" destination="ujo-LM-7aK" id="qIR-z4-onj"/>
-                        <outlet property="subTypeView" destination="Foe-4D-JYa" id="2fo-2e-P2S"/>
+                        <outlet property="deviceTypeView" destination="ujo-LM-7aK" id="fVc-VC-iyz"/>
+                        <outlet property="devicelView" destination="MDX-gG-lIf" id="dLk-ly-Ejd"/>
+                        <outlet property="subTypeView" destination="Foe-4D-JYa" id="lxP-1R-B4P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xHe-WT-B8x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2667" y="197"/>
+            <point key="canvasLocation" x="2634" y="197"/>
         </scene>
         <!--Iphone Profire Controller-->
         <scene sceneID="EvH-UO-aEX">
@@ -1401,7 +1421,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xxd-Ux-BxW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3060" y="-450"/>
+            <point key="canvasLocation" x="3037" y="-441"/>
         </scene>
         <!--场景-->
         <scene sceneID="CUS-di-Zr9">
@@ -2015,7 +2035,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ekn-dO-Tsk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3038" y="-1091"/>
+            <point key="canvasLocation" x="3037" y="-1061"/>
         </scene>
         <!--Iphone Add Fm Controller-->
         <scene sceneID="BjE-qn-wRf">
@@ -2064,7 +2084,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0y1-yr-EBx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3457" y="-1090"/>
+            <point key="canvasLocation" x="3461" y="-1061"/>
         </scene>
         <!--Iphone Air Controller-->
         <scene sceneID="Nsx-vO-5MX">
@@ -2315,7 +2335,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M8A-gF-H9v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2667" y="-436"/>
+            <point key="canvasLocation" x="2634" y="-441"/>
         </scene>
         <!--Iphone Net Tv Controller-->
         <scene sceneID="hcD-YP-Hgl">
@@ -2518,6 +2538,7 @@
         <image name="pause" width="32" height="32"/>
         <image name="placeholder" width="45" height="45"/>
         <image name="rewind" width="32" height="32"/>
+        <image name="switch" width="32" height="32"/>
         <image name="tv_down" width="10" height="7"/>
         <image name="tv_left" width="9" height="10"/>
         <image name="tv_right" width="9" height="10"/>

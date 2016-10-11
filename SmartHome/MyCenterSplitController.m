@@ -7,7 +7,7 @@
 //
 
 #import "MyCenterSplitController.h"
-#import "ProfireListController.h"
+#import "ProfileListController.h"
 #import "ServiceRecordViewController.h"
 #import "ProfieFaultsViewController.h"
 #import "FavorController.h"
@@ -15,7 +15,7 @@
 #import "EnergyOfDeviceController.h"
 #import "MSGController.h"
 
-@interface MyCenterSplitController ()<ProfireListControllerDelegate>
+@interface MyCenterSplitController ()<ProfileListControllerDelegate>
 @property (nonatomic, strong) UINavigationController *detailNavigation;
 @end
 
@@ -27,7 +27,7 @@
     
     
     UINavigationController *centerListNav = [self.childViewControllers firstObject];
-    ProfireListController *centerListVC = [centerListNav.childViewControllers firstObject];
+    ProfileListController *centerListVC = [centerListNav.childViewControllers firstObject];
     
     centerListVC.delegate = self;
     self.detailNavigation = [self.childViewControllers lastObject];
@@ -36,7 +36,7 @@
 
 
 
--(void)ProfireListController:(ProfireListController *)centerListVC selected:(NSInteger)row
+-(void)ProfileListController:(ProfileListController *)centerListVC selected:(NSInteger)row
 {
     UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     

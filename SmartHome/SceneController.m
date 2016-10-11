@@ -24,7 +24,7 @@
 #import "SceneManager.h"
 #import <SDWebImage/UIButton+WebCache.h>
 
-@interface SceneController ()<UICollectionViewDelegate,UICollectionViewDataSource,ScenseCellDelegate,UIGestureRecognizerDelegate,UISearchBarDelegate>
+@interface SceneController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIGestureRecognizerDelegate,UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *addSceseBtn;

@@ -129,13 +129,14 @@
 		F6251F711D541885000A5A47 /* PluginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6251F701D541885000A5A47 /* PluginViewController.m */; };
 		F6251F741D541D8A000A5A47 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = F6251F731D541D8A000A5A47 /* Device.m */; };
 		F6251F771D542508000A5A47 /* SQLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6251F761D542508000A5A47 /* SQLManager.m */; };
-		F625A6181D4C8EF700B696E5 /* ProfireListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F625A6171D4C8EF700B696E5 /* ProfireListController.m */; };
+		F625A6181D4C8EF700B696E5 /* ProfileListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F625A6171D4C8EF700B696E5 /* ProfileListController.m */; };
 		F625A61B1D4C99EC00B696E5 /* RoomListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F625A61A1D4C99EC00B696E5 /* RoomListController.m */; };
 		F6280D4A1D961C62009108ED /* IphoneAddTVChannelController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6280D491D961C62009108ED /* IphoneAddTVChannelController.m */; };
 		F6280D4D1D9651CE009108ED /* IphoneFMController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6280D4C1D9651CE009108ED /* IphoneFMController.m */; };
 		F6280D531D966218009108ED /* IphoneAddFmController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6280D521D966218009108ED /* IphoneAddFmController.m */; };
 		F62CD87A1D94BE99001C66CE /* IphoneTVController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CD8791D94BE99001C66CE /* IphoneTVController.m */; };
 		F62CD87D1D950453001C66CE /* IphoneAirController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CD87C1D950453001C66CE /* IphoneAirController.m */; };
+		F62CFA411DAC699D006410F7 /* IphoneTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CFA401DAC699D006410F7 /* IphoneTypeView.m */; };
 		F62E05631DAB39F80096BF00 /* IphoneProfireController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62E05621DAB39F80096BF00 /* IphoneProfireController.m */; };
 		F62E05661DAB68620096BF00 /* IphoneEditSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62E05651DAB68620096BF00 /* IphoneEditSceneController.m */; };
 		F630C35F1D38B4FF008880BB /* AccessSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = F630C35E1D38B4FF008880BB /* AccessSettingController.m */; };
@@ -543,8 +544,8 @@
 		F6251F721D541D8A000A5A47 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
 		F6251F731D541D8A000A5A47 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
 		F6251F761D542508000A5A47 /* SQLManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLManager.m; sourceTree = "<group>"; };
-		F625A6161D4C8EF700B696E5 /* ProfireListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfireListController.h; sourceTree = "<group>"; };
-		F625A6171D4C8EF700B696E5 /* ProfireListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfireListController.m; sourceTree = "<group>"; };
+		F625A6161D4C8EF700B696E5 /* ProfileListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileListController.h; sourceTree = "<group>"; };
+		F625A6171D4C8EF700B696E5 /* ProfileListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileListController.m; sourceTree = "<group>"; };
 		F625A6191D4C99EC00B696E5 /* RoomListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomListController.h; sourceTree = "<group>"; };
 		F625A61A1D4C99EC00B696E5 /* RoomListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomListController.m; sourceTree = "<group>"; };
 		F6280D481D961C62009108ED /* IphoneAddTVChannelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneAddTVChannelController.h; sourceTree = "<group>"; };
@@ -557,6 +558,8 @@
 		F62CD8791D94BE99001C66CE /* IphoneTVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneTVController.m; sourceTree = "<group>"; };
 		F62CD87B1D950453001C66CE /* IphoneAirController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneAirController.h; sourceTree = "<group>"; };
 		F62CD87C1D950453001C66CE /* IphoneAirController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneAirController.m; sourceTree = "<group>"; };
+		F62CFA3F1DAC699D006410F7 /* IphoneTypeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneTypeView.h; sourceTree = "<group>"; };
+		F62CFA401DAC699D006410F7 /* IphoneTypeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneTypeView.m; sourceTree = "<group>"; };
 		F62E05611DAB39F80096BF00 /* IphoneProfireController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneProfireController.h; sourceTree = "<group>"; };
 		F62E05621DAB39F80096BF00 /* IphoneProfireController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneProfireController.m; sourceTree = "<group>"; };
 		F62E05641DAB68620096BF00 /* IphoneEditSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneEditSceneController.h; sourceTree = "<group>"; };
@@ -938,8 +941,8 @@
 				F6642A801D4220100003D56B /* DeviceListController.m */,
 				F635CCB91D4356650078B148 /* MyCenterSplitController.h */,
 				F635CCBA1D4356650078B148 /* MyCenterSplitController.m */,
-				F625A6161D4C8EF700B696E5 /* ProfireListController.h */,
-				F625A6171D4C8EF700B696E5 /* ProfireListController.m */,
+				F625A6161D4C8EF700B696E5 /* ProfileListController.h */,
+				F625A6171D4C8EF700B696E5 /* ProfileListController.m */,
 				F6251F6F1D541885000A5A47 /* PluginViewController.h */,
 				F6251F701D541885000A5A47 /* PluginViewController.m */,
 				0FA1E09C1D533BFA001CA819 /* PluginCell.h */,
@@ -1396,6 +1399,8 @@
 				F62E05621DAB39F80096BF00 /* IphoneProfireController.m */,
 				F62E05641DAB68620096BF00 /* IphoneEditSceneController.h */,
 				F62E05651DAB68620096BF00 /* IphoneEditSceneController.m */,
+				F62CFA3F1DAC699D006410F7 /* IphoneTypeView.h */,
+				F62CFA401DAC699D006410F7 /* IphoneTypeView.m */,
 			);
 			path = IphoneControllers;
 			sourceTree = "<group>";
@@ -1814,9 +1819,10 @@
 				0F180FC91D0E4E6500392F4C /* GuardController.m in Sources */,
 				0FAF98A71CE40F3C009BDBB5 /* QRToggleTorchButton.m in Sources */,
 				0F25FE5E1CEB0C0A0063E834 /* SceneList.m in Sources */,
-				F625A6181D4C8EF700B696E5 /* ProfireListController.m in Sources */,
+				F625A6181D4C8EF700B696E5 /* ProfileListController.m in Sources */,
 				0FCFB3891CF2929900B37DD3 /* Aircon.m in Sources */,
 				F62CD87A1D94BE99001C66CE /* IphoneTVController.m in Sources */,
+				F62CFA411DAC699D006410F7 /* IphoneTypeView.m in Sources */,
 				0F1F3BCA1D2B85EA00B2641C /* MBProgressHUD+NJ.m in Sources */,
 				F625A61B1D4C99EC00B696E5 /* RoomListController.m in Sources */,
 				0FC119771D6FE5E0001DA19A /* Screen.m in Sources */,
@@ -2067,7 +2073,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FFmpeg-iOS/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -2105,7 +2111,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FFmpeg-iOS/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

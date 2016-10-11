@@ -177,16 +177,27 @@
 - (IBAction)selectedRepeatTime:(id)sender {
     UIButton *btn = sender;
     btn.selected = !btn.selected;
-    if(btn.selected)
-    {
-        [self.repeatTime appendString:[NSString stringWithFormat:@"%ld",btn.tag]];
-        self.repeatLabel.text = self.repeatTime;
-    }else{
-//        [self.repeatTime delete:[NSString stringWithFormat:@"%ld",btn.tag]];
-//        self.repeatLabel.text = self.repeatTime;
-        
+    
+    NSArray *name = [NSArray arrayWithObjects:@"日", @"一", @"二", @"三", @"四", @"五", @"六", nil];
+    
+    BOOL isFirst = true;
+    
+    [self.repeatTime setString:@""];
+    
+    for (UIButton *button in self.repeatBtns) {
+        if (button.selected) {
+            if (isFirst) {
+                isFirst = false;
+                
+                [self.repeatTime appendString:name[button.tag]];
+            } else {
+                [self.repeatTime appendString:@"、"];
+                [self.repeatTime appendString:name[button.tag]];
+            }
+        }
     }
     
+    self.repeatLabel.text = self.repeatTime;
 }
 - (IBAction)saveFixTime:(id)sender {
     
