@@ -74,6 +74,8 @@
     {
         IphoneTVController *tVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneTVController"];
         tVC.roomID = self.roomId;
+        tVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneId];
+        tVC.isAddDevice = YES;
         [self.navigationController pushViewController:tVC animated:YES];
         
         
@@ -82,12 +84,16 @@
     {
         LightController *ligthVC = [storyBoard instantiateViewControllerWithIdentifier:@"LightController"];
         ligthVC.roomID = self.roomId;
+        ligthVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneId];
+        ligthVC.isAddDevice = YES;
         [self.navigationController pushViewController:ligthVC animated:YES];
         
     }else if([typeName isEqualToString:@"窗帘"])
     {
         CurtainController *curtainVC = [storyBoard instantiateViewControllerWithIdentifier:@"CurtainController"];
         curtainVC.roomID = self.roomId;
+        curtainVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneId];
+        curtainVC.isAddDevice = YES;
          [self.navigationController pushViewController:curtainVC animated:YES];
         
         
@@ -96,6 +102,8 @@
         
         IphoneDVDController *dvdVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneDVDController"];
         dvdVC.roomID = self.roomId;
+        dvdVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneId];
+        dvdVC.isAddDevice = YES;
          [self.navigationController pushViewController:dvdVC animated:YES];
         
         
@@ -103,33 +111,44 @@
     {
         FMController *fmVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneFMController"];
         fmVC.roomID = self.roomId;
+        fmVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneId];
+        fmVC.isAddDevice = YES;
          [self.navigationController pushViewController:fmVC animated:YES];
     }else if([typeName isEqualToString:@"空调"])
     {
         IphoneAirController *airVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneAirController"];
         airVC.roomID = self.roomId;
+        airVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneId];
+        airVC.isAddDevice = YES;
         [self.navigationController pushViewController:airVC animated:YES];
         
     }else if([typeName isEqualToString:@"机顶盒"]){
         IphoneNetTvController *netVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneNetTvController"];
         netVC.roomID = self.roomId;
+        netVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneId];
         
          [self.navigationController pushViewController:netVC animated:YES];
         
     }else if([typeName isEqualToString:@"摄像头"]){
         CameraController *camerVC = [storyBoard instantiateViewControllerWithIdentifier:@"CameraController"];
         camerVC.roomID = self.roomId;
+        camerVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneId];
+        camerVC.isAddDevice = YES;
        [self.navigationController pushViewController:camerVC animated:YES];
         
     }else if([typeName isEqualToString:@"智能门锁"]){
         GuardController *guardVC = [storyBoard instantiateViewControllerWithIdentifier:@"GuardController"];
         guardVC.roomID = self.roomId;
+        guardVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneId];
+        guardVC.isAddDevice = YES;
         [self.navigationController pushViewController:guardVC animated:YES];
         
         
     }else if([typeName isEqualToString:@"幕布"]){
         ScreenCurtainController *screenCurtainVC = [storyBoard instantiateViewControllerWithIdentifier:@"ScreenCurtainController"];
         screenCurtainVC.roomID = self.roomId;
+        screenCurtainVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneId];
+        screenCurtainVC.isAddDevice = YES;
         [self.navigationController pushViewController:screenCurtainVC animated:YES];
         
         
@@ -137,26 +156,36 @@
     {
         ProjectController *projectVC = [storyBoard instantiateViewControllerWithIdentifier:@"ProjectController"];
         projectVC.roomID = self.roomId;
+        projectVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneId];
+        projectVC.isAddDevice = YES;
        [self.navigationController pushViewController:projectVC animated:YES];
         
     }else if([typeName isEqualToString:@"功放"]){
         AmplifierController *amplifierVC = [storyBoard instantiateViewControllerWithIdentifier:@"AmplifierController"];
         amplifierVC.roomID = self.roomId;
+        amplifierVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneId];
+        amplifierVC.isAddDevice = YES;
        [self.navigationController pushViewController:amplifierVC animated:YES];
         
     }else if([typeName isEqualToString:@"智能推窗器"])
     {
         WindowSlidingController *windowSlidVC = [storyBoard instantiateViewControllerWithIdentifier:@"WindowSlidingController"];
         windowSlidVC.roomID = self.roomId;
+        windowSlidVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneId];
+        windowSlidVC.isAddDevice = YES;
         [self.navigationController pushViewController:windowSlidVC animated:YES];
     }else if([typeName isEqualToString:@"背景音乐"]){
         BgMusicController *bgMusicVC = [storyBoard instantiateViewControllerWithIdentifier:@"BgMusicController"];
         bgMusicVC.roomID = self.roomId;
+        bgMusicVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneId];
+        bgMusicVC.isAddDevice = YES;
        [self.navigationController pushViewController:bgMusicVC animated:YES];
         
     }else {
         PluginViewController *pluginVC = [storyBoard instantiateViewControllerWithIdentifier:@"PluginViewController"];
         pluginVC.roomID = self.roomId;
+        pluginVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneId];
+        pluginVC.isAddDevice = YES;
        [self.navigationController pushViewController:pluginVC animated:YES];
     }
     

@@ -33,9 +33,7 @@
     [super viewWillAppear:YES];
     self.devices = [self deviceAdded];
 }
-- (IBAction)addDeviceAction:(id)sender {
-    
-}
+
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -43,7 +41,7 @@
     {
         id theSegue = segue.destinationViewController;
         [theSegue setValue:[NSNumber numberWithInt:self.roomId] forKey:@"roomId"];
-    }
+             }
     
 
 }

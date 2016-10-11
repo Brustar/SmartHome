@@ -157,6 +157,8 @@
     for (int i = 0; i < 3; i++) {
         ECloudButton *button = [[ECloudButton alloc] initWithTitle:str[i] normalImage:imgs[i] selectImage:imgs[i]];
         button.type = i + 1;
+        
+        
         [self setUpButtonParams:button];
         [button addTarget:self action:@selector(buttonOnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.rightView addSubview:button];

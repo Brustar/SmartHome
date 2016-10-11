@@ -9,8 +9,8 @@
 #import "IphoneMainController.h"
 #import "IphoneSceneController.h"
 #import "IphoneDeviceListController.h"
-
-#import "IphoneProfireController.h"
+#import "IphoneRealSceneController.h"
+#import "IphoneProfileController.h"
 @interface IphoneMainController ()<UITableViewDelegate ,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *headView;
@@ -25,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.titleArr = @[@"场景",@"设备",@"我的"];
+    self.titleArr = @[@"场景",@"设备",@"实景",@"我的"];
     self.tableView.tableFooterView = [UIView new];
     self.tableView.tableHeaderView = self.headView;
     [self setupChilderController];
@@ -51,7 +51,10 @@
     IphoneDeviceListController *deviceList = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"IphoneDeviceListController"];
     [self setupVc:deviceList title:@"设备"];
     
-    IphoneProfireController *profireList = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"IphoneProfireController"];
+    IphoneRealSceneController *realVC = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"IphoneRealSceneController"];
+    [self setupVc:realVC title:@"实景"];
+    
+    IphoneProfileController *profireList = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"IphoneProfileController"];
     [self setupVc:profireList title:@"我的"];
     
     self.selectController = self.childViewControllers[0];
@@ -103,7 +106,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return 4;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

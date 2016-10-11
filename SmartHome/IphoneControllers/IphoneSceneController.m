@@ -14,6 +14,10 @@
 #import "Scene.h"
 #import "IphoneRoomView.h"
 #import "UIImageView+WebCache.h"
+#import "SceneManager.h"
+#import "HttpManager.h"
+#import "MBProgressHUD+NJ.h"
+
 
 #define cellWidth self.collectionView.frame.size.width / 2.0 - 10
 #define  minSpace 20
@@ -27,6 +31,7 @@
 @property (nonatomic, assign) int roomIndex;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic,assign) int selectedSId;
+@property (nonatomic ,strong) SceneCell *cell;
 
 @end
 
@@ -36,7 +41,7 @@
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.roomList = [SQLManager getAllRoomsInfo];
-    
+    self.title = @"场景";
     [self setUpRoomView];
 }
 
@@ -84,6 +89,7 @@
     }else{
         Scene *scene = self.scenes[indexPath.row];
         cell.scenseName.text = scene.sceneName;
+        cell.delegate = self;
         [cell useLongPressGesture];
     }
     
@@ -93,7 +99,8 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-        if(indexPath.row == self.scenes.count)
+    
+    if(indexPath.row == self.scenes.count)
     {
         [self performSegueWithIdentifier:@"iphoneAddSceneSegue" sender:self];
     }else{
@@ -112,6 +119,43 @@
     }
     
 }
+//删除场景
+-(void)sceneDeleteAction:(SceneCell *)cell
+{
+    self.cell = cell;
+    cell.deleteBtn.hidden = YES;
+    [SQLManager deleteScene:self.selectedSId];
+    
+    Scene *scene = [[SceneManager defaultManager] readSceneByID:self.selectedSId];
+    [[SceneManager defaultManager] delScene:scene];
+    
+    NSString *url = [NSString stringWithFormat:@"%@SceneDelete.aspx",[IOManager httpAddr]];
+    NSDictionary *dict = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"SID":[NSNumber numberWithInt:scene.sceneID]};
+    HttpManager *http=[HttpManager defaultManager];
+    http.delegate=self;
+    http.tag = 1;
+    [http sendPost:url param:dict];
+}
+
+-(void)httpHandler:(id) responseObject tag:(int)tag
+{
+    if((tag = 1))
+    {
+        if([responseObject[@"Result"] intValue] == 0)
+        {
+            [MBProgressHUD showSuccess:@"场景删除成功"];
+            [self.collectionView reloadData];
+            
+            
+        }else{
+            [MBProgressHUD showError:responseObject[@"Msg"]];
+        }
+        
+        
+    }
+    
+}
+
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {

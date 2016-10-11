@@ -137,9 +137,10 @@
     self.view.backgroundColor = backGroudColour;
     self.title= [SQLManager getSceneName:self.sceneID];
     Scene *scene = [SQLManager sceneBySceneID:self.sceneID];
-    if(scene.readonly == YES)
+    if(scene.readonly == YES && !self.isFavor)
     {
         [self.deleteBtn setEnabled:NO];
+        
     }
     [self setupData];
     }
@@ -572,8 +573,9 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
     
-    
 }
+
+
 - (IBAction)clickStopBtn:(id)sender {
     [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];
     [self.navigationController popViewControllerAnimated:YES];

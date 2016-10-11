@@ -10,4 +10,5 @@
 
 @interface IphoneDevicesController : UIViewController
 @property (nonatomic,assign) int roomId;
+@property (nonatomic,assign) int sceneId;
 @end

@@ -6669,7 +6669,7 @@ layer.masksToBoundslayer.masksToBounds
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PvG-p8-71L">
                                                     <rect key="frame" x="79" y="159" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -6845,19 +6845,19 @@ layer.masksToBoundslayer.masksToBounds
     <inferredMetricsTieBreakers>
         <segue reference="uCb-ME-O7C"/>
         <segue reference="nIi-Kc-QDm"/>
-        <segue reference="PRs-sg-E1F"/>
-        <segue reference="U1p-eR-Biy"/>
+        <segue reference="wSR-hk-rTP"/>
         <segue reference="ya3-gG-p8O"/>
-        <segue reference="pWG-oz-Opr"/>
-        <segue reference="Vzc-yi-Jnw"/>
+        <segue reference="U1p-eR-Biy"/>
+        <segue reference="JQm-bA-TWz"/>
         <segue reference="vdf-Gi-dZf"/>
         <segue reference="vKk-7C-VKf"/>
-        <segue reference="JQm-bA-TWz"/>
         <segue reference="fHn-Cm-7Q7"/>
-        <segue reference="tt4-nB-rfe"/>
-        <segue reference="a9T-LN-ZVX"/>
-        <segue reference="tdV-sS-d5j"/>
+        <segue reference="pWG-oz-Opr"/>
         <segue reference="X9P-hg-DXo"/>
+        <segue reference="a9T-LN-ZVX"/>
+        <segue reference="tt4-nB-rfe"/>
+        <segue reference="Vzc-yi-Jnw"/>
+        <segue reference="tdV-sS-d5j"/>
         <segue reference="l23-e3-J0C"/>
         <segue reference="YE7-iU-rxh"/>
     </inferredMetricsTieBreakers>
