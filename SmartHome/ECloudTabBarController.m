@@ -46,7 +46,8 @@
     if(self.selectedIndex == 0)
     {
         NSString *str = [NSString stringWithFormat:@"%ld", subType];
-        NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:str, @"subType", nil];
+        NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:str, @"subType",nil ];
+       // NSDictionary *dict = @{@"type":[NSNumber numberWithInteger:type],@"subType":[NSNumber numberWithInteger:subType]};
         
         NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
         [center postNotificationName:@"subType" object:nil userInfo:dict];

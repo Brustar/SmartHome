@@ -6,13 +6,13 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
-#import "IphoneProfireController.h"
+#import "IphoneProfileController.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "SocketManager.h"
 
 #define hight 50
-@interface IphoneProfireController ()<UITableViewDelegate,UITableViewDataSource>
+@interface IphoneProfileController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIView *headView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -23,7 +23,7 @@
 @property (nonatomic,strong) NSArray *segues;
 @end
 
-@implementation IphoneProfireController
+@implementation IphoneProfileController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

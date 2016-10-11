@@ -137,7 +137,10 @@
 		F62CD87A1D94BE99001C66CE /* IphoneTVController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CD8791D94BE99001C66CE /* IphoneTVController.m */; };
 		F62CD87D1D950453001C66CE /* IphoneAirController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CD87C1D950453001C66CE /* IphoneAirController.m */; };
 		F62CFA411DAC699D006410F7 /* IphoneTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CFA401DAC699D006410F7 /* IphoneTypeView.m */; };
-		F62E05631DAB39F80096BF00 /* IphoneProfireController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62E05621DAB39F80096BF00 /* IphoneProfireController.m */; };
+		F62CFA441DAC90DD006410F7 /* IphoneSaveNewSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CFA431DAC90DD006410F7 /* IphoneSaveNewSceneController.m */; };
+		F62CFA471DAC92F3006410F7 /* IphoneRealSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CFA461DAC92F3006410F7 /* IphoneRealSceneController.m */; };
+		F62CFA4A1DAC952F006410F7 /* IphoneRoomListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CFA491DAC952F006410F7 /* IphoneRoomListController.m */; };
+		F62E05631DAB39F80096BF00 /* IphoneProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62E05621DAB39F80096BF00 /* IphoneProfileController.m */; };
 		F62E05661DAB68620096BF00 /* IphoneEditSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62E05651DAB68620096BF00 /* IphoneEditSceneController.m */; };
 		F630C35F1D38B4FF008880BB /* AccessSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = F630C35E1D38B4FF008880BB /* AccessSettingController.m */; };
 		F630C3621D38C3E5008880BB /* AreaSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F630C3611D38C3E5008880BB /* AreaSettingCell.m */; };
@@ -560,8 +563,14 @@
 		F62CD87C1D950453001C66CE /* IphoneAirController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneAirController.m; sourceTree = "<group>"; };
 		F62CFA3F1DAC699D006410F7 /* IphoneTypeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneTypeView.h; sourceTree = "<group>"; };
 		F62CFA401DAC699D006410F7 /* IphoneTypeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneTypeView.m; sourceTree = "<group>"; };
-		F62E05611DAB39F80096BF00 /* IphoneProfireController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneProfireController.h; sourceTree = "<group>"; };
-		F62E05621DAB39F80096BF00 /* IphoneProfireController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneProfireController.m; sourceTree = "<group>"; };
+		F62CFA421DAC90DD006410F7 /* IphoneSaveNewSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneSaveNewSceneController.h; sourceTree = "<group>"; };
+		F62CFA431DAC90DD006410F7 /* IphoneSaveNewSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneSaveNewSceneController.m; sourceTree = "<group>"; };
+		F62CFA451DAC92F3006410F7 /* IphoneRealSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneRealSceneController.h; sourceTree = "<group>"; };
+		F62CFA461DAC92F3006410F7 /* IphoneRealSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneRealSceneController.m; sourceTree = "<group>"; };
+		F62CFA481DAC952F006410F7 /* IphoneRoomListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneRoomListController.h; sourceTree = "<group>"; };
+		F62CFA491DAC952F006410F7 /* IphoneRoomListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneRoomListController.m; sourceTree = "<group>"; };
+		F62E05611DAB39F80096BF00 /* IphoneProfileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneProfileController.h; sourceTree = "<group>"; };
+		F62E05621DAB39F80096BF00 /* IphoneProfileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneProfileController.m; sourceTree = "<group>"; };
 		F62E05641DAB68620096BF00 /* IphoneEditSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneEditSceneController.h; sourceTree = "<group>"; };
 		F62E05651DAB68620096BF00 /* IphoneEditSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneEditSceneController.m; sourceTree = "<group>"; };
 		F630C35D1D38B4FF008880BB /* AccessSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccessSettingController.h; sourceTree = "<group>"; };
@@ -1395,12 +1404,18 @@
 				F663CA651D98D131001F87F3 /* IphoneDevicesController.m */,
 				F663CA671D990138001F87F3 /* IphoneFixTimerController.h */,
 				F663CA681D990138001F87F3 /* IphoneFixTimerController.m */,
-				F62E05611DAB39F80096BF00 /* IphoneProfireController.h */,
-				F62E05621DAB39F80096BF00 /* IphoneProfireController.m */,
+				F62E05611DAB39F80096BF00 /* IphoneProfileController.h */,
+				F62E05621DAB39F80096BF00 /* IphoneProfileController.m */,
 				F62E05641DAB68620096BF00 /* IphoneEditSceneController.h */,
 				F62E05651DAB68620096BF00 /* IphoneEditSceneController.m */,
 				F62CFA3F1DAC699D006410F7 /* IphoneTypeView.h */,
 				F62CFA401DAC699D006410F7 /* IphoneTypeView.m */,
+				F62CFA421DAC90DD006410F7 /* IphoneSaveNewSceneController.h */,
+				F62CFA431DAC90DD006410F7 /* IphoneSaveNewSceneController.m */,
+				F62CFA451DAC92F3006410F7 /* IphoneRealSceneController.h */,
+				F62CFA461DAC92F3006410F7 /* IphoneRealSceneController.m */,
+				F62CFA481DAC952F006410F7 /* IphoneRoomListController.h */,
+				F62CFA491DAC952F006410F7 /* IphoneRoomListController.m */,
 			);
 			path = IphoneControllers;
 			sourceTree = "<group>";
@@ -1755,6 +1770,7 @@
 				F65164141D3780C500A6F5FA /* TVLogoCell.m in Sources */,
 				F61896381D87B06300DBE6CD /* ScreenCurtainController.m in Sources */,
 				0FAF74BF1CEEA17C00432713 /* HRBrightnessCursor.m in Sources */,
+				F62CFA471DAC92F3006410F7 /* IphoneRealSceneController.m in Sources */,
 				0FAF98A31CE40F3C009BDBB5 /* QRCameraSwitchButton.m in Sources */,
 				F6280D4D1D9651CE009108ED /* IphoneFMController.m in Sources */,
 				0FD3DEAA1D3F183D00AF7765 /* SCWaveAnimationView.m in Sources */,
@@ -1826,7 +1842,7 @@
 				0F1F3BCA1D2B85EA00B2641C /* MBProgressHUD+NJ.m in Sources */,
 				F625A61B1D4C99EC00B696E5 /* RoomListController.m in Sources */,
 				0FC119771D6FE5E0001DA19A /* Screen.m in Sources */,
-				F62E05631DAB39F80096BF00 /* IphoneProfireController.m in Sources */,
+				F62E05631DAB39F80096BF00 /* IphoneProfileController.m in Sources */,
 				F63AE0031D11319C00BE17DC /* FMCollectionViewCell.m in Sources */,
 				0FAF8FF51CE1B514000557BD /* VolumeManager.m in Sources */,
 				0F2D35BD1D114E7000C46DE5 /* RTSPPlayer.m in Sources */,
@@ -1859,6 +1875,7 @@
 				F6251F741D541D8A000A5A47 /* Device.m in Sources */,
 				F66EB2D51CFED0A900AC53CE /* DetailList.m in Sources */,
 				F6251F771D542508000A5A47 /* SQLManager.m in Sources */,
+				F62CFA4A1DAC952F006410F7 /* IphoneRoomListController.m in Sources */,
 				F67F1F741D3C6AA200F2B7E5 /* SystemCell.m in Sources */,
 				0FC3DE851D236CFF00A03482 /* LoginController.m in Sources */,
 				F66596E31D3F25810082716A /* SceneCell.m in Sources */,
@@ -1889,6 +1906,7 @@
 				0FAF74C91CEEB37200432713 /* HRSampleColorPickerViewController.m in Sources */,
 				0FCFB38C1CF293A500B37DD3 /* DVD.m in Sources */,
 				0FAF98B61CE45EC9009BDBB5 /* CryptoManager.m in Sources */,
+				F62CFA441DAC90DD006410F7 /* IphoneSaveNewSceneController.m in Sources */,
 				F6642A781D41F55E0003D56B /* ScenseSplitViewController.m in Sources */,
 				F663CA631D98C5FE001F87F3 /* IphoneAddSceneController.m in Sources */,
 				F673EBD21D45E976001270FB /* VerifyCodeView.m in Sources */,

@@ -10,6 +10,9 @@
 #import "Scene.h"
 #import "SceneCell.h"
 #import "SQLManager.h"
+#import "UIImageView+WebCache.h"
+
+
 @interface FavorController ()
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic,strong) NSArray *scens;
@@ -52,6 +55,8 @@
     
     Scene *scene = self.scens[indexPath.row];
     cell.scenseName.text = scene.sceneName;
+    [cell.imgView sd_setImageWithURL:[NSURL URLWithString: scene.picName] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    
     
     return cell;
 }

@@ -29,6 +29,7 @@
 #import "BgMusicController.h"
 
 
+
 @interface IphoneEditSceneController ()<IphoneTypeViewDelegate>
 @property (weak, nonatomic) IBOutlet IphoneTypeView *subTypeView;
 @property (weak, nonatomic) IBOutlet IphoneTypeView *deviceTypeView;
@@ -270,7 +271,8 @@
 }
 
 
-- (IBAction)clickStoreScene:(id)sender {
+
+- (IBAction)storeScene:(id)sender {
     
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请选择" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *saveAction = [UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -287,15 +289,18 @@
     [alertVC addAction:saveAction];
     UIAlertAction *saveNewAction = [UIAlertAction actionWithTitle:@"另存为新场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //另存为场景，新的场景ID
-        [self.view bringSubviewToFront:self.devicelView];
+        //[self.view bringSubviewToFront:self.devicelView];
+        [self performSegueWithIdentifier:@"storeNewScene" sender:self];
         
-       // self.storeNewScene.hidden = NO;
     }];
     [alertVC addAction:saveNewAction];
     UIAlertAction *favScene = [UIAlertAction actionWithTitle:@"收藏场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         
-    //[self favorScene];
+        Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
+        
+        
+        [[SceneManager defaultManager] favoriteScene:scene withName:scene.sceneName];
         
     }];
     [alertVC addAction:favScene];
@@ -305,10 +310,23 @@
     [alertVC addAction:cancelAction];
     [[DeviceInfo defaultManager] setEditingScene:NO];
     [self presentViewController:alertVC animated:YES completion:nil];
-
-
 }
 
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    id theSegue = segue.destinationViewController;
+    
+    if([segue.identifier isEqualToString:@"addDeviceSegue"])
+    {
+        
+        [theSegue setValue:[NSNumber numberWithInt:self.roomID] forKey:@"roomId"];
+        [theSegue setValue:[NSNumber numberWithInt:self.sceneID] forKey:@"sceneId"];
+    }else if([segue.identifier isEqualToString:@"storeNewScene"]){
+        [theSegue setValue:[NSNumber numberWithInt:self.sceneID] forKey:@"sceneID"];
+    }
+    
+}
 
 
 
