@@ -503,9 +503,7 @@
 
 - (IBAction)setAstromomicalTime:(id)sender {
     
-    if (self.lm!=nil) {
-        [self.lm startUpdatingLocation];
-    }
+
     UIButton *btn = (UIButton *)sender;
     if(btn.tag == 0){
         [self.startTimeBtn setTitle:@"黎明" forState:UIControlStateNormal];
@@ -549,7 +547,24 @@
     self.fixTimeDevice.text = deviceName;
     self.timeView.hidden = NO;
     
+    NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
+    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
     
+    _scene = [[Scene alloc] initWhithoutSchedule];
+    [_scene setValuesForKeysWithDictionary:plistDic];
+    
+    NSMutableArray *schedulesTemp = [NSMutableArray array];
+    
+    for (NSDictionary *dict in self.scene.schedules) {
+        Schedule *schedule = [[Schedule alloc] initWhithoutSchedule];
+        
+        [schedule setValuesForKeysWithDictionary:dict];
+        
+        [schedulesTemp addObject:schedule];
+    }
+    
+    self.scene.schedules = [schedulesTemp copy];
     
     NSInteger deviceID = 0;
     
@@ -559,8 +574,9 @@
     
     for (int i = 0; i < self.scene.schedules.count; i++) {
         Schedule *schedule = self.scene.schedules[i];
+        
         if (deviceID == schedule.deviceID) {
-            self.schedule = self.scene.schedules[i];
+            self.schedule = schedule;
             return;
         }
     }

@@ -35,6 +35,7 @@
     [self tabBarDidSelectButtonWithType:self.cloudTabBar.selectButton.type subType:self.cloudTabBar.selectButton.subType];
 }
 
+
 - (void)tabBarDidSelectButtonWithType:(NSInteger)type subType:(NSInteger)subType
 {
     NSLog(@"%ld  %ld", type, subType);

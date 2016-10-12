@@ -24,6 +24,7 @@
 #import "SceneManager.h"
 #import <SDWebImage/UIButton+WebCache.h>
 
+
 @interface SceneController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIGestureRecognizerDelegate,UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -74,6 +75,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    
     self.addSceseBtn.layer.cornerRadius = self.addSceseBtn.bounds.size.width / 2.0;
     self.addSceseBtn.layer.masksToBounds = YES;
     self.firstView.hidden = YES;
@@ -123,6 +126,7 @@
     self.hostVC.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionDown;
     
     [self presentViewController:self.hostVC animated:YES completion:nil];
+    
     
 }
 

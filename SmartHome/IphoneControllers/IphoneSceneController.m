@@ -42,7 +42,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.roomList = [SQLManager getAllRoomsInfo];
     self.title = @"场景";
-    [self setUpRoomView];
+     [self setUpRoomView];
 }
 
 -(void)setUpRoomView
@@ -70,6 +70,14 @@
     [self.collectionView reloadData];
     
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    Room *room = self.roomList[self.roomIndex];
+    self.scenes = [SQLManager getScensByRoomId:room.rId];
+    [self.collectionView reloadData];
+
+}
 
 
 #pragma  mark - UICollectionViewDelegate
@@ -88,6 +96,7 @@
         cell.scenseName.text = @"添加场景";
     }else{
         Scene *scene = self.scenes[indexPath.row];
+        cell.tag = scene.sceneID;
         cell.scenseName.text = scene.sceneName;
         cell.delegate = self;
         [cell useLongPressGesture];
@@ -124,9 +133,9 @@
 {
     self.cell = cell;
     cell.deleteBtn.hidden = YES;
-    [SQLManager deleteScene:self.selectedSId];
     
-    Scene *scene = [[SceneManager defaultManager] readSceneByID:self.selectedSId];
+    [SQLManager deleteScene:(int)cell.tag];
+    Scene *scene = [[SceneManager defaultManager] readSceneByID:(int)cell.tag];
     [[SceneManager defaultManager] delScene:scene];
     
     NSString *url = [NSString stringWithFormat:@"%@SceneDelete.aspx",[IOManager httpAddr]];
@@ -143,8 +152,12 @@
     {
         if([responseObject[@"Result"] intValue] == 0)
         {
+           
             [MBProgressHUD showSuccess:@"场景删除成功"];
+            Room *room = self.roomList[self.roomIndex];
+            self.scenes = [SQLManager getScensByRoomId:room.rId];
             [self.collectionView reloadData];
+           
             
             
         }else{
@@ -188,7 +201,7 @@
         
         id theSegue = segue.destinationViewController;
         [theSegue setValue:[NSNumber numberWithInt:room.rId] forKey:@"roomId"];
-    }else{
+    }else if([segue.identifier isEqualToString:@"iphoneEditSegue"]){
         id theSegue = segue.destinationViewController;
         
         [theSegue setValue:[NSNumber numberWithInt:self.selectedSId] forKey:@"sceneID"];

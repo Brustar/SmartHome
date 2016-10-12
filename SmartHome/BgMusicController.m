@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *voiceWeakLeftConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *voiceStrongRightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewLeftConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewRightConstraint;
 
 @end
 
@@ -31,12 +32,14 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    
     [super viewWillAppear:YES];
     if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
         self.voiceStrongRightConstraint.constant = [[UIScreen mainScreen] bounds].size.width * 0.05;
         self.voiceWeakLeftConstraint.constant = self.voiceStrongRightConstraint.constant;
         self.viewLeftConstraint.constant = 20;
+        self.viewRightConstraint.constant = self.viewLeftConstraint.constant;
     }
     
     AudioManager *audio=[AudioManager defaultManager];
