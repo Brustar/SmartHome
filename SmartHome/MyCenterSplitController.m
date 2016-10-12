@@ -15,6 +15,7 @@
 #import "EnergyOfDeviceController.h"
 #import "MSGController.h"
 
+
 @interface MyCenterSplitController ()<ProfileListControllerDelegate>
 @property (nonatomic, strong) UINavigationController *detailNavigation;
 @end
@@ -59,6 +60,7 @@
         }
             break;
         case 3:{
+            
             FavorController  *favorVC = [story instantiateViewControllerWithIdentifier:@"FavorController"];
             [self.detailNavigation setViewControllers:@[favorVC] animated:NO];
         }

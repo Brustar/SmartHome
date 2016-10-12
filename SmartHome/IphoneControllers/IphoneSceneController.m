@@ -6,6 +6,10 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
+
+#define cellWidth self.collectionView.frame.size.width / 2.0 - 10
+#define  minSpace 20
+
 #import "IphoneSceneController.h"
 #import "RoomManager.h"
 #import "Room.h"
@@ -19,8 +23,7 @@
 #import "MBProgressHUD+NJ.h"
 
 
-#define cellWidth self.collectionView.frame.size.width / 2.0 - 10
-#define  minSpace 20
+
 @interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,SceneCellDelegate>
 @property (strong, nonatomic) IBOutlet IphoneRoomView *roomView;
 
@@ -198,7 +201,8 @@
     Room *room = self.roomList[self.roomIndex];
     if([segue.identifier isEqualToString:@"iphoneAddSceneSegue"])
     {
-        
+        [IOManager removeTempFile];
+
         id theSegue = segue.destinationViewController;
         [theSegue setValue:[NSNumber numberWithInt:room.rId] forKey:@"roomId"];
     }else if([segue.identifier isEqualToString:@"iphoneEditSegue"]){
