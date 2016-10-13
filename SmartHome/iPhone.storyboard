@@ -1127,7 +1127,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U4T-Wr-vpj">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U4T-Wr-vpj">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -1230,6 +1230,7 @@
                     <connections>
                         <outlet property="deviceTypeView" destination="ujo-LM-7aK" id="fVc-VC-iyz"/>
                         <outlet property="devicelView" destination="MDX-gG-lIf" id="dLk-ly-Ejd"/>
+                        <outlet property="saveBarBtn" destination="edP-E5-cIj" id="VaF-l2-GT5"/>
                         <outlet property="subTypeView" destination="Foe-4D-JYa" id="lxP-1R-B4P"/>
                         <segue destination="nA9-ci-Ug8" kind="push" identifier="storeNewScene" id="D1X-xj-n4g"/>
                     </connections>
@@ -1300,7 +1301,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TBx-j6-kBo">
                                 <rect key="frame" x="10" y="30" width="300" height="528"/>
-                                <color key="backgroundColor" red="0.90309139530000004" green="0.90309139530000004" blue="0.90309139530000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MnF-1k-Mjj">
                                     <size key="itemSize" width="107" height="90"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -1328,16 +1329,40 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNl-qA-gxq">
+                                                    <rect key="frame" x="62" y="5" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="9b6-2Q-hwI"/>
+                                                        <constraint firstAttribute="width" constant="40" id="Toh-va-q0r"/>
+                                                    </constraints>
+                                                    <state key="normal" image="delete"/>
+                                                    <connections>
+                                                        <action selector="doDeleteBtn:" destination="0I7-qS-z3S" eventType="touchUpInside" id="XWg-yq-brs"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.9100608093" green="0.9100608093" blue="0.9100608093" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
+                                            <constraint firstItem="NNl-qA-gxq" firstAttribute="top" secondItem="0I7-qS-z3S" secondAttribute="top" constant="5" id="1le-wh-cBU"/>
+                                            <constraint firstAttribute="trailing" secondItem="NNl-qA-gxq" secondAttribute="trailing" constant="5" id="H3o-Rz-Wxf"/>
                                             <constraint firstItem="ytp-cW-fgn" firstAttribute="leading" secondItem="0I7-qS-z3S" secondAttribute="leading" constant="10" id="IZE-wV-i7R"/>
                                             <constraint firstItem="9om-Bg-9xW" firstAttribute="centerY" secondItem="0I7-qS-z3S" secondAttribute="centerY" id="N2D-Mt-A9B"/>
                                             <constraint firstItem="9om-Bg-9xW" firstAttribute="leading" secondItem="ytp-cW-fgn" secondAttribute="trailing" constant="10" id="iyo-8A-ZzF"/>
                                             <constraint firstItem="ytp-cW-fgn" firstAttribute="centerY" secondItem="0I7-qS-z3S" secondAttribute="centerY" id="lsg-FU-xLa"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="deleteBtn" destination="NNl-qA-gxq" id="GnI-AL-p0U"/>
+                                            <outlet property="imgView" destination="ytp-cW-fgn" id="MI6-gd-Hyl"/>
+                                            <outlet property="scenseName" destination="9om-Bg-9xW" id="MoZ-j7-jAj"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -1357,11 +1382,12 @@
                     <navigationItem key="navigationItem" id="uK3-B5-WIS"/>
                     <connections>
                         <outlet property="collectionView" destination="TBx-j6-kBo" id="Mxu-yo-7Sq"/>
+                        <segue destination="emj-YL-Hpp" kind="push" identifier="editSceneSegue" id="vWH-k8-ixo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eq3-zI-jcF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1578" y="998"/>
+            <point key="canvasLocation" x="1565" y="986"/>
         </scene>
         <!--Iphone Profile Controller-->
         <scene sceneID="EvH-UO-aEX">
@@ -2861,6 +2887,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="J5F-aP-6iz"/>
+        <segue reference="vWH-k8-ixo"/>
         <segue reference="aTH-RA-7NZ"/>
     </inferredMetricsTieBreakers>
 </document>

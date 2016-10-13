@@ -34,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet IphoneTypeView *subTypeView;
 @property (weak, nonatomic) IBOutlet IphoneTypeView *deviceTypeView;
 @property (weak, nonatomic) IBOutlet UIView *devicelView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveBarBtn;
 
 
 @property (weak, nonatomic) UIViewController *currentViewController;
@@ -54,6 +55,10 @@
     self.typeArr = [SQLManager getSubTydpeBySceneID:self.sceneID];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.devicesTypes = [SQLManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.typeArr[0]];
+    if(self.isFavor)
+    {
+        self.saveBarBtn.enabled = NO;
+    }
     [self setupSubTypeView];
     
 }

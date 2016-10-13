@@ -18,4 +18,6 @@
 @interface ECloudTabBar : UIView
 @property (nonatomic, strong) ECloudButton *selectButton;
 @property (nonatomic,weak) id<ECloudTabBarDelegate>delegate;
+
+- (void)selectTabBarWithType:(NSInteger)type subType:(NSInteger)subType;
 @end

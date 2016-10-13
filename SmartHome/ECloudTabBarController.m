@@ -27,6 +27,8 @@
     self.cloudTabBar = tabBar;
     [self.tabBar addSubview:tabBar];
     //[self setValue:tabBar forKey:@"tabBar"];
+    
+    
 }
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -53,6 +55,8 @@
         NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
         [center postNotificationName:@"subType" object:nil userInfo:dict];
     }
+    
+    
     
 }
 

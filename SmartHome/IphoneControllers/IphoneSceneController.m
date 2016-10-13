@@ -124,6 +124,7 @@
         if(cell.deleteBtn.hidden)
         {
             [self performSegueWithIdentifier:@"iphoneEditSegue" sender:self];
+            [[SceneManager defaultManager] startScene:scene.sceneID];
 
         }else{
             cell.deleteBtn.hidden = YES;

@@ -47,9 +47,21 @@
 
         [self setUpView];
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSelectedType:) name: @"tabBar" object: nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(goToMyMsg:) name:@"myMsg" object:nil];
     return self;
 }
-
+-(void)didSelectedType:(NSNotification *)notification
+{
+    NSDictionary *dic = notification.userInfo;
+    [self selectTabBarWithType:[dic[@"type"] intValue ]subType:[dic[@"subType"] intValue]];
+}
+-(void)goToMyMsg:(NSNotification *)notification
+{
+     NSDictionary *dic = notification.userInfo;
+    [self selectTabBarWithType:[dic[@"type"] intValue ]subType:[dic[@"subType"] intValue]];
+}
 
 - (ECloudMoreView *)moreView
 {
@@ -258,10 +270,24 @@
     
 }
 
+
+- (void)selectTabBarWithType:(NSInteger)type subType:(NSInteger)subType {
+    ECloudButton *button = nil;
+    
+    if (0 == type) {
+        button = self.leftView.subviews[subType -1];
+    } else {
+        button = self.rightView.subviews[type - 1];
+    }
+    
+    [self buttonOnClick:button];
+}
+
 -(void)dealloc
 {
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device removeObserver:self forKeyPath:@"beacons" context:NULL];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

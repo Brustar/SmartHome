@@ -13,10 +13,10 @@
 #import "IphoneFavorController.h"
 #import "SQLManager.h"
 #import "SceneCell.h"
+#import "SceneManager.h"
 
 
-
-@interface IphoneFavorController ()<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface IphoneFavorController ()<UICollectionViewDelegate,UICollectionViewDataSource,SceneCellDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic,strong) NSArray *scens;
 @property (nonatomic,assign )int selectID;
@@ -53,7 +53,10 @@
     SceneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     
     Scene *scene = self.scens[indexPath.row];
+    cell.tag = scene.sceneID;
     cell.scenseName.text = scene.sceneName;
+    cell.delegate = self;
+    [cell useLongPressGesture];
     return cell;
 }
 
@@ -61,11 +64,27 @@
 {
     
     Scene *scene = self.scens[indexPath.row];
+    
     self.selectID = scene.sceneID;
-    [self performSegueWithIdentifier:@"iphoneFavorSegue" sender:self];
+    SceneCell *cell = (SceneCell*)[collectionView cellForItemAtIndexPath:indexPath];
+    [cell useLongPressGesture];
+    if(cell.deleteBtn.hidden)
+    {
+        [self performSegueWithIdentifier:@"editSceneSegue" sender:self];
+    }else{
+        cell.deleteBtn.hidden = YES;
+    }
+    
     
 }
 
+-(void)sceneDeleteAction:(SceneCell *)cell
+{
+    Scene *scene = [[SceneManager defaultManager] readSceneByID:(int)cell.tag];
+    [[SceneManager defaultManager] deleteFavoriteScene:scene withName:scene.sceneName];
+    self.scens = [SQLManager getFavorScene];
+    [self.collectionView reloadData];
+}
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -85,5 +104,12 @@
     return minSpace;
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    id theSegue = segue.destinationViewController;
+    
+    [theSegue setValue:[NSNumber numberWithInt:self.selectID] forKey:@"sceneID"];
+    [theSegue setValue:@"YES" forKey:@"isFavor"];
+}
 
 @end
