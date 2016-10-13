@@ -63,6 +63,8 @@
     
     NSLog(@"video duration: %f",_video.duration);
     NSLog(@"video size: %d x %d", _video.sourceWidth, _video.sourceHeight);
+    [self playButtonAction:nil];
+
     
 }
 - (void)viewDidLoad {
@@ -140,7 +142,7 @@
 #pragma  mark - UICollectionDelegate
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 4;
+    return 1;
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -150,7 +152,6 @@
     cell.imgView.userInteractionEnabled = YES;
     
     
-    [self playButtonAction:nil];
     return cell;
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath

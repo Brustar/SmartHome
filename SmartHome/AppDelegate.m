@@ -15,6 +15,7 @@
 #import "ECloudTabBarController.h"
 #import "IphoneMainController.h"
 #import "MSGController.h"
+#import "ECloudTabBar.h"
 
 @interface AppDelegate ()
 
@@ -37,7 +38,7 @@
     [device netReachbility];
     [device deviceGenaration];
     device.db=SMART_DB;
-    
+   
     //登录后每次系统启动自动更新云端配置，第一次安装此处不更新，登录的时候再更新
     [device initConfig];
     
@@ -62,12 +63,15 @@
             return YES;
         }
     }
+    
     IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
     manager.enable = YES;
     manager.shouldResignOnTouchOutside = YES;
     manager.shouldToolbarUsesTextFieldTintColor = YES;
     manager.enableAutoToolbar = YES;
+   
     
+
     return YES;
 }
 
@@ -118,7 +122,9 @@
     if(item && type)
     {
         //跳转
-        
+        NSDictionary *dic = @{@"type":[NSNumber numberWithInt:2],@"subType":[NSNumber numberWithInt:0]};
+        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+        [center postNotificationName:@"myMsg" object:nil userInfo:dic];
     }
 }
 

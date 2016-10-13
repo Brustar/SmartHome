@@ -176,8 +176,8 @@
     {
         self.vEquipmentsLast = [responseObject[@"vEquipment"] intValue];
         self.vRoomLast = [responseObject[@"vRoom"] intValue];
-        //self.vSceneLast = [responseObject[@"vScene"] intValue];
-        self.vSceneLast = 20;
+        self.vSceneLast = [responseObject[@"vScene"] intValue];
+        
         self.vTVChannelLast = [responseObject[@"vTVChannel"] intValue];
         self.vFMChannellLast = [responseObject[@"vFMChannel"] intValue];
         self.vClientlLast = [responseObject[@"vClient"] intValue];

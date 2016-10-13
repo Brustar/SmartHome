@@ -22,7 +22,8 @@
 #import "UIImagePickerController+LandScapeImagePicker.h"
 #import "AmplifierController.h"
 #import "UploadManager.h"
-
+#import "ECloudTabBarController.h"
+#import "ECloudTabBar.h"
 @interface DeviceListController ()<UITableViewDelegate,UITableViewDataSource,UISplitViewControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -185,10 +186,14 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    id theSegue = segue.destinationViewController;
-    [theSegue setValue:[NSNumber numberWithInt:(int)self.roomid] forKey:@"roomID"];
-    [theSegue setValue:self.sceneid forKey:@"sceneid"];
-    [theSegue setValue:@"YES" forKey:@"isAddDevice"];
+    if(![segue.identifier isEqualToString:@"deviceToSceneSegue"])
+    {
+        id theSegue = segue.destinationViewController;
+        [theSegue setValue:[NSNumber numberWithInt:(int)self.roomid] forKey:@"roomID"];
+        [theSegue setValue:self.sceneid forKey:@"sceneid"];
+        [theSegue setValue:@"YES" forKey:@"isAddDevice"];
+    }
+    
     
 }
 - (IBAction)selectedSceneImage:(id)sender {
@@ -243,9 +248,15 @@
 
 
 - (IBAction)storeScene:(id)sender {
+
     self.saveSceneView.hidden = NO;
+   [self.sceneName becomeFirstResponder];
+    
     
 }
+
+
+
 - (IBAction)sureStoreScene:(id)sender {
     self.saveSceneView.hidden = YES;
     
@@ -257,7 +268,11 @@
     [scene setValuesForKeysWithDictionary:plistDic];
     [[DeviceInfo defaultManager] setEditingScene:NO];
     [[SceneManager defaultManager] addScene:scene withName:self.sceneName.text withImage:self.selectSceneImg.currentBackgroundImage];
+    [self.splitViewController dismissViewControllerAnimated:YES completion:nil];
     
+    NSDictionary *dic = @{@"type":[NSNumber numberWithInt:0],@"subType":[NSNumber numberWithInteger:self.roomid ]};
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center postNotificationName:@"tabBar" object:nil userInfo:dic];
     
 
 }

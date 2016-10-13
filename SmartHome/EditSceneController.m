@@ -78,10 +78,7 @@
 @property (nonatomic,strong) LightController *ligthVC;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *deleteBtn;
 
-////当前房间当前场景的所有设备
-//@property (nonatomic,strong) NSArray *devices;
-////当前房间当前场景的所有设备类别的子类
-//@property (nonatomic,strong) NSArray *typeArray;
+@property (weak, nonatomic) IBOutlet UIView *coverView;
 
 
 
@@ -439,8 +436,9 @@
     UIAlertAction *saveNewAction = [UIAlertAction actionWithTitle:@"另存为新场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //另存为场景，新的场景ID
         [self.view bringSubviewToFront:self.devicelView];
-        
+        self.coverView.hidden = NO;
         self.storeNewScene.hidden = NO;
+        [self.storeNewSceneName becomeFirstResponder];
     }];
     [alertVC addAction:saveNewAction];
     UIAlertAction *favScene = [UIAlertAction actionWithTitle:@"收藏场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -486,6 +484,7 @@
 - (IBAction)cancelSaveScene:(id)sender {
     
     self.storeNewScene.hidden = YES;
+    self.coverView.hidden = YES;
     [self.view bringSubviewToFront:self.currentViewController.view];
 }
 - (IBAction)selectSceneImg:(id)sender {
@@ -548,7 +547,11 @@
     [[SceneManager defaultManager] saveAsNewScene:scene withName:self.storeNewSceneName.text withPic:self.selectSceneImg];
     
     self.storeNewScene.hidden = YES;
-    [self.view bringSubviewToFront:self.currentViewController.view];}
+    [self.view bringSubviewToFront:self.currentViewController.view];
+    [self.navigationController popViewControllerAnimated:YES];
+
+
+}
        
 -(NSString *)UIimageToStr:(UIImage *)img
 {
