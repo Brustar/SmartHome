@@ -97,6 +97,8 @@
         }];
         UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             //跳转
+            int type=[[userInfo objectForKey:@"typeID"] intValue];
+            int item=[[userInfo objectForKey:@"itemID"] intValue];
             
             [alertVC dismissViewControllerAnimated:YES completion:nil];
         }];
