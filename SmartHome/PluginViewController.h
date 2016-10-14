@@ -18,4 +18,6 @@
 @property (nonatomic, strong) HMCharacteristic *characteristic;
 @property (nonatomic,assign) BOOL isAddDevice;
 
+@property (strong, nonatomic) Scene *scene;
+
 @end

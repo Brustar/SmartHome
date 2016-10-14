@@ -12,6 +12,8 @@
 #import "PackManager.h"
 #import "PluginCell.h"
 #import "SQLManager.h"
+#import "SceneManager.h"
+#import "Plugin.h"
 
 @interface PluginViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -69,8 +71,10 @@
     [super viewDidLoad];
     
     //[self initPlugin];
-    [self initHomekitPlugin];
+    //[self initHomekitPlugin];
     [self setupSegment];
+    
+    self.scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
 }
 -(void)setupSegment
 {
@@ -203,6 +207,27 @@
     
 }
 
+-(IBAction)save:(id)sender
+{
+    [self switchDevice:sender];
+    
+    UISwitch *sw=(UISwitch *)sender;
+    Plugin *device=[[Plugin alloc] init];
+    [device setDeviceID:[self.deviceid intValue]];
+    [device setSwitchon: sw.isOn];
+    
+    
+    [_scene setSceneID:[self.sceneid intValue]];
+    [_scene setRoomID:self.roomID];
+    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+    
+    [_scene setReadonly:NO];
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+}
+
 #pragma mark  - TCP delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
@@ -230,14 +255,9 @@
         
         cell.power.tag=indexPath.row;
         //cell.power.on=[self.characteristic.value boolValue];
-        [cell.power addTarget:self action:@selector(switchDevice:) forControlEvents:UIControlEventValueChanged];
+        [cell.power addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
         return  cell;
-    }
-    
-    
-
-   
-    else{
+    }else{
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"recell"];
         if(!cell)
         {

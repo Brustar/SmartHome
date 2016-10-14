@@ -83,6 +83,7 @@
 		0FAF98BE1CE466B0009BDBB5 /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FAF98BD1CE466B0009BDBB5 /* HomeKit.framework */; };
 		0FB205E91CDC312A00B5E87E /* IOManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB205E81CDC312A00B5E87E /* IOManager.m */; };
 		0FB205ED1CDC3D3700B5E87E /* AudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB205EC1CDC3D3700B5E87E /* AudioManager.m */; };
+		0FB35C681DB0CECA00B48EA7 /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB35C671DB0CECA00B48EA7 /* Plugin.m */; };
 		0FB42E1E1CF681A7007DE64F /* planeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB42E1D1CF681A7007DE64F /* planeScene.m */; };
 		0FB42E231CF6F9E8007DE64F /* SocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB42E221CF6F9E8007DE64F /* SocketManager.m */; };
 		0FBEFE271D24A5020084244F /* netconfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0FBEFE261D24A5020084244F /* netconfig.plist */; };
@@ -459,6 +460,8 @@
 		0FB205EA1CDC350D00B5E87E /* public.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = public.h; sourceTree = "<group>"; };
 		0FB205EB1CDC3D3700B5E87E /* AudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioManager.h; sourceTree = "<group>"; };
 		0FB205EC1CDC3D3700B5E87E /* AudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioManager.m; sourceTree = "<group>"; };
+		0FB35C661DB0CECA00B48EA7 /* Plugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plugin.h; sourceTree = "<group>"; };
+		0FB35C671DB0CECA00B48EA7 /* Plugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plugin.m; sourceTree = "<group>"; };
 		0FB42E1C1CF681A7007DE64F /* planeScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = planeScene.h; sourceTree = "<group>"; };
 		0FB42E1D1CF681A7007DE64F /* planeScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = planeScene.m; sourceTree = "<group>"; };
 		0FB42E211CF6F9E8007DE64F /* SocketManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketManager.h; sourceTree = "<group>"; };
@@ -795,6 +798,8 @@
 				0F11654E1D7418EE00A01B8F /* Amplifier.m */,
 				0F8D76CE1D9A1B9700DDD063 /* Schedule.h */,
 				0F8D76CF1D9A1B9700DDD063 /* Schedule.m */,
+				0FB35C661DB0CECA00B48EA7 /* Plugin.h */,
+				0FB35C671DB0CECA00B48EA7 /* Plugin.m */,
 			);
 			name = entity;
 			sourceTree = "<group>";
@@ -1789,6 +1794,7 @@
 				0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */,
 				0F6AB8701D782D9D0041E39C /* SunString.m in Sources */,
 				0FCAA40C1D1945BB00C1E58C /* BgMusicController.m in Sources */,
+				0FB35C681DB0CECA00B48EA7 /* Plugin.m in Sources */,
 				0FAF74C51CEEA17C00432713 /* HRHSVColorUtil.m in Sources */,
 				0FBEFE2A1D24F0C10084244F /* WebManager.m in Sources */,
 				F630C35F1D38B4FF008880BB /* AccessSettingController.m in Sources */,
