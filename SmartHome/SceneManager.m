@@ -369,11 +369,13 @@
             }
             if ([dic objectForKey:@"unlock"]) {
                 EntranceGuard *device=[[EntranceGuard alloc] init];
+                device.deviceID=[[dic objectForKey:@"deviceID"] intValue];
                 device.unlock=[[dic objectForKey:@"unlock"] intValue];
                 [devices addObject:device];
             }
             if ([dic objectForKey:@"temperature"]) {
                 Aircon *device=[[Aircon alloc] init];
+                device.deviceID=[[dic objectForKey:@"deviceID"] intValue];
                 device.temperature=[[dic objectForKey:@"temperature"] intValue];
                 device.timing=[[dic objectForKey:@"timing"] intValue];
                 device.WindLevel=[[dic objectForKey:@"WindLevel"] intValue];
@@ -383,28 +385,33 @@
             }
             if ([dic objectForKey:@"dropped"]) {
                 Screen *device=[[Screen alloc] init];
+                device.deviceID=[[dic objectForKey:@"deviceID"] intValue];
                 device.dropped=[[dic objectForKey:@"dropped"] intValue];
                 [devices addObject:device];
             }
             if ([dic objectForKey:@"showed"]) {
                 Projector *device=[[Projector alloc] init];
+                device.deviceID=[[dic objectForKey:@"deviceID"] intValue];
                 device.showed=[[dic objectForKey:@"showed"] intValue];
                 [devices addObject:device];
             }
             if ([dic objectForKey:@"waiting"]) {
                 Amplifier *device=[[Amplifier alloc] init];
+                device.deviceID=[[dic objectForKey:@"deviceID"] intValue];
                 device.waiting=[[dic objectForKey:@"waiting"] intValue];
                 [devices addObject:device];
             }
             
             if ([dic objectForKey:@"pushing"]) {
                 WinOpener *device=[[WinOpener alloc] init];
+                device.deviceID=[[dic objectForKey:@"deviceID"] intValue];
                 device.pushing=[[dic objectForKey:@"pushing"] intValue];
                 [devices addObject:device];
             }
             
             if ([dic objectForKey:@"switchon"]) {
                 Plugin *device=[[Plugin alloc] init];
+                device.deviceID=[[dic objectForKey:@"deviceID"] intValue];
                 device.switchon=[[dic objectForKey:@"switchon"] intValue];
                 [devices addObject:device];
             }

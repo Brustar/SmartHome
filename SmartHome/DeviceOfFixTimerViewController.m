@@ -35,7 +35,11 @@
     for(NSDictionary *dic in array)
     {
         NSString *name = [SQLManager deviceNameByDeviceID:[dic[@"deviceID"] intValue]];
-        [names addObject:name];
+        if(name)
+        {
+            [names addObject:name];
+
+        }
     }
     self.deviceNames = [names copy];
     [self.tableView reloadData];
