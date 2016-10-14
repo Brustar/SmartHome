@@ -62,6 +62,7 @@
     self.coverView.hidden = YES;
     self.commentView.hidden = YES;
     [self setNavi];
+    
    
     }
 

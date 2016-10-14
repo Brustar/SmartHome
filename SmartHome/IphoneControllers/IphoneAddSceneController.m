@@ -111,7 +111,8 @@
     [scene setValuesForKeysWithDictionary:plistDic];
     [[DeviceInfo defaultManager] setEditingScene:NO];
     [[SceneManager defaultManager] addScene:scene withName:self.sceneName.text withImage:[UIImage imageNamed:@""]];
-    //[self.navigationController popViewControllerAnimated:YES];
+    self.navigationController.navigationBar.hidden = YES;
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
