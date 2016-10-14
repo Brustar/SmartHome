@@ -233,7 +233,8 @@
 
     }
     AreaSettingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"areaSettingCell" forIndexPath:indexPath];
-    self.recoredId = self.recoredIDs[indexPath.row];
+    
+    cell.exchangeSwitch.tag = [self.recoredIDs[indexPath.row] integerValue];
     [cell.exchangeSwitch addTarget:self action:@selector(switchChange:) forControlEvents:UIControlEventValueChanged];
     cell.areaLabel.text = self.areasArr[indexPath.row];
     NSNumber *num = self.opens[indexPath.row];
@@ -257,6 +258,7 @@
     {
         self.usrID = self.userIDArr[indexPath.row];
          NSString *url = [NSString stringWithFormat:@"%@GetUserAccessInfo.aspx",[IOManager httpAddr]];
+        self.recoredIDs = nil;
         [self sendRequest:url withTag:2];
         self.areaTableView.hidden = NO;
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -276,19 +278,22 @@
 }
 -(void)switchChange:(UISwitch *)sender
 {
+    UISwitch *exchangeSwitch = sender;
+
+    NSInteger recoredID = exchangeSwitch.tag;
     if(sender.isOn)
     {
-        [self settingAccessIsOpen:[NSNumber numberWithInt:1] tag:6];
+        [self settingAccessIsOpen:[NSNumber numberWithInt:1] tag:6 withRecoredID:recoredID];
     }else{
-        [self settingAccessIsOpen:[NSNumber numberWithInt:2] tag:7];
+        [self settingAccessIsOpen:[NSNumber numberWithInt:2] tag:7 withRecoredID:recoredID];
     }
 }
 //设置用户权限请求
--(void)settingAccessIsOpen:(NSNumber *)openNum tag:(int)tag;
+-(void)settingAccessIsOpen:(NSNumber *)openNum tag:(int)tag withRecoredID:(NSInteger)recordID
 {
     NSString *url = [NSString stringWithFormat:@"%@UserAccessSetting.aspx",[IOManager httpAddr]];
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSDictionary *dict = @{@"AuthorToken":authorToken,@"RecordID":self.recoredId,@"isOpen":openNum};
+    NSDictionary *dict = @{@"AuthorToken":authorToken,@"RecordID":[NSNumber numberWithInteger:recordID],@"isOpen":openNum};
     HttpManager *http=[HttpManager defaultManager];
     http.delegate = self;
     http.tag = tag;
