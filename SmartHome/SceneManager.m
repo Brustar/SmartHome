@@ -23,6 +23,7 @@
 #import "AFHTTPSessionManager.h"
 #import "UploadManager.h"
 #import "MBProgressHUD+NJ.h"
+#import "Plugin.h"
 
 @implementation SceneManager
 
@@ -401,6 +402,12 @@
                 device.pushing=[[dic objectForKey:@"pushing"] intValue];
                 [devices addObject:device];
             }
+            
+            if ([dic objectForKey:@"switchon"]) {
+                Plugin *device=[[Plugin alloc] init];
+                device.switchon=[[dic objectForKey:@"switchon"] intValue];
+                [devices addObject:device];
+            }
         }
         scene.devices=devices;
         return scene;
@@ -581,6 +588,15 @@
             NSString *deviceid=[NSString stringWithFormat:@"%d", opener.deviceID];
             if (opener.pushing) {
                 data=[[DeviceInfo defaultManager] toogle:opener.pushing deviceID:deviceid];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+            }
+        }
+        
+        if ([device isKindOfClass:[Plugin class]]) {
+            Plugin *plugin=(Plugin *)device;
+            NSString *deviceid=[NSString stringWithFormat:@"%d", plugin.deviceID];
+            if (plugin.switchon) {
+                data=[[DeviceInfo defaultManager] toogle:plugin.switchon deviceID:deviceid];
                 [sock.socket writeData:data withTimeout:1 tag:1];
             }
         }

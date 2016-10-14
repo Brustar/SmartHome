@@ -1142,12 +1142,12 @@
         if (count == 0) {
             
         //insert rooms
-        NSArray *sqls=@[@"INSERT INTO \"Rooms\" VALUES(1,'主卧',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0);",
-        @"INSERT INTO \"Rooms\" VALUES(2,'影音室',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0);",
-        @"INSERT INTO \"Rooms\" VALUES(3,'小孩房',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0);",
-        @"INSERT INTO \"Rooms\" VALUES(4,'测试区',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',10002);",
-        @"INSERT INTO \"Rooms\" VALUES(5,'车库',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0);",
-          @"INSERT INTO \"Rooms\" VALUES(6,'健身房',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',10001);"];
+        NSArray *sqls=@[@"INSERT INTO \"Rooms\" VALUES(1,'主卧',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0,0);",
+        @"INSERT INTO \"Rooms\" VALUES(2,'影音室',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0,0);",
+        @"INSERT INTO \"Rooms\" VALUES(3,'小孩房',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0,0);",
+        @"INSERT INTO \"Rooms\" VALUES(4,'测试区',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',10002,0);",
+        @"INSERT INTO \"Rooms\" VALUES(5,'车库',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0,0);",
+          @"INSERT INTO \"Rooms\" VALUES(6,'健身房',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',10001,0);"];
         for (NSString *sql in sqls) {
             BOOL result=[db executeUpdate:sql];
             if (result) {
@@ -1206,13 +1206,13 @@
         }
         //insert scenes
         
-        sqls=@[@"INSERT INTO \"Scenes\" VALUES(10,'DVD','测试区','http://115.28.151.85:8088/DefaultFiles/images/scene/moving.jpg',4,1,'0003',0);",
-        @"INSERT INTO \"Scenes\" VALUES(11,'工作','测试区','http://115.28.151.85:8088/DefaultFiles/images/scene/relax.jpg',4,1,'0004',0);",
-        @"INSERT INTO \"Scenes\" VALUES(12,'午休','测试区','http://115.28.151.85:8088/DefaultFiles/images/scene/sleep.jpg',4,1,'0005',0);",
-        @"INSERT INTO \"Scenes\" VALUES(13,'离开','测试区','http://115.28.151.85:8088/DefaultFiles/images/scene/away.jpg',4,1,'0006',0);",
-        @"INSERT INTO \"Scenes\" VALUES(14,'欢迎','测试区','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',4,1,'0001',0);",
-        @"INSERT INTO \"Scenes\" VALUES(15,'投影','测试区','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',4,1,'0002',0);",
-        @"INSERT INTO \"Scenes\" VALUES(53,'离开','车库','http://115.28.151.85:8088/UploadFiles/images/scene/cctv1.png',5,2,'',0);"];
+        sqls=@[@"INSERT INTO \"Scenes\" VALUES(10,'DVD','测试区','http://115.28.151.85:8088/DefaultFiles/images/scene/moving.jpg',4,1,'0003',0,0);",
+        @"INSERT INTO \"Scenes\" VALUES(11,'工作','测试区','http://115.28.151.85:8088/DefaultFiles/images/scene/relax.jpg',4,1,'0004',0,0);",
+        @"INSERT INTO \"Scenes\" VALUES(12,'午休','测试区','http://115.28.151.85:8088/DefaultFiles/images/scene/sleep.jpg',4,1,'0005',0,0);",
+        @"INSERT INTO \"Scenes\" VALUES(13,'离开','测试区','http://115.28.151.85:8088/DefaultFiles/images/scene/away.jpg',4,1,'0006',0,0);",
+        @"INSERT INTO \"Scenes\" VALUES(14,'欢迎','测试区','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',4,1,'0001',0,0);",
+        @"INSERT INTO \"Scenes\" VALUES(15,'投影','测试区','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',4,1,'0002',0,0);",
+        @"INSERT INTO \"Scenes\" VALUES(53,'离开','车库','http://115.28.151.85:8088/UploadFiles/images/scene/cctv1.png',5,2,'',0,0);"];
         
         for (NSString *sql in sqls) {
             BOOL result=[db executeUpdate:sql];

@@ -101,6 +101,15 @@
         }];
         UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             //跳转
+            int type=[[userInfo objectForKey:@"typeID"] intValue];
+            int item=[[userInfo objectForKey:@"itemID"] intValue];
+            if(item && type)
+            {
+                //跳转
+                NSDictionary *dic = @{@"type":[NSNumber numberWithInt:2],@"subType":[NSNumber numberWithInt:0]};
+                NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+                [center postNotificationName:@"myMsg" object:nil userInfo:dic];
+            }
             
             [alertVC dismissViewControllerAnimated:YES completion:nil];
         }];
