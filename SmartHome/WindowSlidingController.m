@@ -72,7 +72,7 @@
     self.title = windowType;
     self.tableView.tableFooterView = [UIView new];
     [self setupSegmentWindowSlid];
-    
+    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
 }
 -(void)setupSegmentWindowSlid
 {
