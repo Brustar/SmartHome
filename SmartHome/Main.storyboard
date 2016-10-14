@@ -3293,19 +3293,9 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vjf-IE-2Vk">
-                                            <rect key="frame" x="550" y="7" width="30" height="30"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="ONL-Qh-Crb"/>
-                                                <constraint firstAttribute="width" constant="30" id="mrH-uo-o1M"/>
-                                            </constraints>
-                                            <state key="normal" title="Button"/>
-                                        </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="vjf-IE-2Vk" firstAttribute="centerY" secondItem="uXc-Ng-yLi" secondAttribute="centerY" id="EAM-dZ-N08"/>
                                         <constraint firstItem="S9e-y2-V3e" firstAttribute="top" secondItem="uXc-Ng-yLi" secondAttribute="top" constant="5" id="EcX-Kc-MO6"/>
-                                        <constraint firstAttribute="trailing" secondItem="vjf-IE-2Vk" secondAttribute="trailing" constant="20" id="HT6-6U-agj"/>
                                         <constraint firstItem="nLu-ut-W0R" firstAttribute="leading" secondItem="uXc-Ng-yLi" secondAttribute="leading" constant="20" id="JFV-I3-i9L"/>
                                         <constraint firstItem="S9e-y2-V3e" firstAttribute="leading" secondItem="nLu-ut-W0R" secondAttribute="trailing" constant="20" id="K3A-cl-ocz"/>
                                         <constraint firstItem="nLu-ut-W0R" firstAttribute="centerY" secondItem="uXc-Ng-yLi" secondAttribute="centerY" id="NgG-ES-T4z"/>
@@ -3314,7 +3304,6 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="button" destination="vjf-IE-2Vk" id="MdZ-14-DeC"/>
                                     <outlet property="imgView" destination="nLu-ut-W0R" id="EBw-l6-TKZ"/>
                                     <outlet property="timeLable" destination="U0P-T0-FiY" id="DXg-jf-vNu"/>
                                     <outlet property="title" destination="S9e-y2-V3e" id="Frc-Dk-Ap7"/>
@@ -6101,6 +6090,7 @@ layer.masksToBoundslayer.masksToBounds
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="saveBtn" destination="mHy-0A-wly" id="Z1d-Oz-6bo"/>
                         <outlet property="saveSceneView" destination="KCo-FH-E4U" id="6q1-rg-sAA"/>
                         <outlet property="sceneName" destination="iws-jn-V5x" id="zso-5f-Vi1"/>
                         <outlet property="selectSceneImg" destination="JCd-li-Jdl" id="4gb-FP-J77"/>
@@ -6866,22 +6856,22 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JQm-bA-TWz"/>
-        <segue reference="ya3-gG-p8O"/>
-        <segue reference="wSR-hk-rTP"/>
         <segue reference="nIi-Kc-QDm"/>
-        <segue reference="TBd-30-Hkx"/>
-        <segue reference="U1p-eR-Biy"/>
-        <segue reference="tdV-sS-d5j"/>
-        <segue reference="X9P-hg-DXo"/>
-        <segue reference="fHn-Cm-7Q7"/>
-        <segue reference="pWG-oz-Opr"/>
+        <segue reference="wSR-hk-rTP"/>
+        <segue reference="ya3-gG-p8O"/>
         <segue reference="tt4-nB-rfe"/>
-        <segue reference="Vzc-yi-Jnw"/>
         <segue reference="a9T-LN-ZVX"/>
-        <segue reference="vdf-Gi-dZf"/>
+        <segue reference="fHn-Cm-7Q7"/>
+        <segue reference="tdV-sS-d5j"/>
         <segue reference="vKk-7C-VKf"/>
+        <segue reference="JQm-bA-TWz"/>
+        <segue reference="Vzc-yi-Jnw"/>
+        <segue reference="vdf-Gi-dZf"/>
+        <segue reference="zpE-f9-a1R"/>
         <segue reference="l23-e3-J0C"/>
+        <segue reference="X9P-hg-DXo"/>
+        <segue reference="pWG-oz-Opr"/>
         <segue reference="dRU-hd-aVS"/>
+        <segue reference="TBd-30-Hkx"/>
     </inferredMetricsTieBreakers>
 </document>

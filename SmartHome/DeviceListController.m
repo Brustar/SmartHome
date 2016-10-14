@@ -37,6 +37,7 @@
 @property (nonatomic,strong)UIImage *sceneImg;
 @property (nonatomic, assign) CGRect detialFrame;
 @property (nonatomic, assign) BOOL isSetDetialFrame;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveBtn;
 
 @end
 
@@ -68,7 +69,11 @@
 -(void) viewDidLoad
 
 {
-   
+    if(self.sceneid)
+    {
+        self.saveBtn.enabled = NO;
+    }
+
     
     self.tableView.rowHeight=44;
     self.tableView.tableFooterView = [UIView new];
