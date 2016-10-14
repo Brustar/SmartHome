@@ -47,6 +47,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [MBProgressHUD hideHUD];
     self.title = @"我的消息";
     self.tableView.tableFooterView = self.footView;
     UIBarButtonItem *editBtn = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(startEdit:)];

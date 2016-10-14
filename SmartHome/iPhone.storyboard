@@ -7,10 +7,10 @@
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
-        <!--IphoneDVD Controller-->
+        <!--DVD-->
         <scene sceneID="5Ph-aN-wf9">
             <objects>
-                <viewController storyboardIdentifier="IphoneDVDController" id="bmw-TJ-Y4G" customClass="IphoneDVDController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IphoneDVDController" id="bmw-TJ-Y4G" userLabel="DVD" customClass="IphoneDVDController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="k06-ee-ved"/>
                         <viewControllerLayoutGuide type="bottom" id="Lbz-cF-xcI"/>
@@ -191,78 +191,10 @@
             </objects>
             <point key="canvasLocation" x="1400" y="-1733"/>
         </scene>
-        <!--Plugin View Controller-->
-        <scene sceneID="2hn-m6-5qA">
-            <objects>
-                <viewController id="RfX-cu-vkU" customClass="PluginViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="JB6-pV-Z4i"/>
-                        <viewControllerLayoutGuide type="bottom" id="uQL-78-X1e"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="UR9-WN-xdV">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CTT-fk-gbx">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PluginCell" id="ChD-dG-1sM" customClass="PluginCell">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ChD-dG-1sM" id="dmp-mX-KHS">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Jp-w4-fax">
-                                                    <rect key="frame" x="20" y="11" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qw6-8Z-IvV">
-                                                    <rect key="frame" x="531" y="6" width="51" height="31"/>
-                                                </switch>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="2Jp-w4-fax" firstAttribute="leading" secondItem="dmp-mX-KHS" secondAttribute="leading" constant="20" id="ClY-wF-8jV"/>
-                                                <constraint firstAttribute="trailing" secondItem="Qw6-8Z-IvV" secondAttribute="trailing" constant="20" id="N4b-yF-me5"/>
-                                                <constraint firstItem="Qw6-8Z-IvV" firstAttribute="centerY" secondItem="dmp-mX-KHS" secondAttribute="centerY" id="etc-gH-vHn"/>
-                                                <constraint firstItem="2Jp-w4-fax" firstAttribute="centerY" secondItem="dmp-mX-KHS" secondAttribute="centerY" id="z5b-jd-OVf"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="label" destination="2Jp-w4-fax" id="zTr-SA-M9Y"/>
-                                            <outlet property="power" destination="Qw6-8Z-IvV" id="z2m-D8-obp"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="RfX-cu-vkU" id="lpY-33-7Cx"/>
-                                    <outlet property="delegate" destination="RfX-cu-vkU" id="RYt-FN-r8O"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="CTT-fk-gbx" firstAttribute="top" secondItem="JB6-pV-Z4i" secondAttribute="bottom" id="1LW-IR-w4a"/>
-                            <constraint firstAttribute="trailing" secondItem="CTT-fk-gbx" secondAttribute="trailing" id="IkR-w9-SLM"/>
-                            <constraint firstItem="CTT-fk-gbx" firstAttribute="leading" secondItem="UR9-WN-xdV" secondAttribute="leading" id="VCm-4G-jWY"/>
-                            <constraint firstItem="uQL-78-X1e" firstAttribute="top" secondItem="CTT-fk-gbx" secondAttribute="bottom" id="ebD-Mm-ALT"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="tableView" destination="CTT-fk-gbx" id="SLF-zm-QK5"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tO0-0q-O0I" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="916.26666666666665" y="-1074.4666666666667"/>
-        </scene>
-        <!--Welcome Controller-->
+        <!--欢迎界面-->
         <scene sceneID="yzg-bL-XFg">
             <objects>
-                <viewController storyboardIdentifier="main" id="chj-yx-pDz" customClass="WelcomeController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="main" id="chj-yx-pDz" userLabel="欢迎界面" customClass="WelcomeController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1W8-VH-ioJ"/>
                         <viewControllerLayoutGuide type="bottom" id="Kwx-8S-IHa"/>
@@ -339,10 +271,10 @@
             </objects>
             <point key="canvasLocation" x="913.60000000000002" y="-440.19999999999999"/>
         </scene>
-        <!--Iphone Main Controller-->
+        <!--侧滑主页-->
         <scene sceneID="fjS-pe-LwS">
             <objects>
-                <viewController storyboardIdentifier="IphoneMainController" id="2si-ky-nN2" customClass="IphoneMainController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IphoneMainController" id="2si-ky-nN2" userLabel="侧滑主页" customClass="IphoneMainController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="slv-ux-4IF"/>
                         <viewControllerLayoutGuide type="bottom" id="OP7-EL-rcf"/>
@@ -398,10 +330,10 @@
             </objects>
             <point key="canvasLocation" x="1400" y="-403"/>
         </scene>
-        <!--场景-->
+        <!--场景列表-->
         <scene sceneID="XQD-mv-Dgi">
             <objects>
-                <viewController storyboardIdentifier="iphoneSceneController" id="2FT-fL-R4c" customClass="IphoneSceneController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="iphoneSceneController" id="2FT-fL-R4c" userLabel="场景列表" customClass="IphoneSceneController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="EeW-N4-5gV"/>
                         <viewControllerLayoutGuide type="bottom" id="QbR-vL-uYg"/>
@@ -1049,8 +981,8 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="无" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="le0-Z5-Gzc">
-                                        <rect key="frame" x="90" y="59" width="36" height="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="无" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="le0-Z5-Gzc">
+                                        <rect key="frame" x="90" y="59" width="14" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -1115,10 +1047,10 @@
             </objects>
             <point key="canvasLocation" x="1811" y="188"/>
         </scene>
-        <!--添加设备-->
+        <!--添加设备——设备列表-->
         <scene sceneID="PfY-RB-xx1">
             <objects>
-                <viewController id="yGe-XQ-WNx" customClass="IphoneDevicesController" sceneMemberID="viewController">
+                <viewController id="yGe-XQ-WNx" userLabel="添加设备——设备列表" customClass="IphoneDevicesController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uN0-0n-QnS"/>
                         <viewControllerLayoutGuide type="bottom" id="VeB-vS-gsa"/>
@@ -1127,7 +1059,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U4T-Wr-vpj">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U4T-Wr-vpj">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -1153,10 +1085,10 @@
             </objects>
             <point key="canvasLocation" x="2223" y="188"/>
         </scene>
-        <!--Iphone Edit Scene Controller-->
+        <!--编辑场景-->
         <scene sceneID="jJL-4i-9vO">
             <objects>
-                <viewController id="emj-YL-Hpp" customClass="IphoneEditSceneController" sceneMemberID="viewController">
+                <viewController id="emj-YL-Hpp" userLabel="编辑场景" customClass="IphoneEditSceneController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kCh-e3-PMp"/>
                         <viewControllerLayoutGuide type="bottom" id="VZ6-Ye-tsJ"/>
@@ -1287,10 +1219,10 @@
             </objects>
             <point key="canvasLocation" x="3037" y="202"/>
         </scene>
-        <!--Iphone Favor Controller-->
+        <!--我的收藏-->
         <scene sceneID="vJx-Zc-c3B">
             <objects>
-                <viewController storyboardIdentifier="IphoneFavorController" id="Okv-zq-Jrm" customClass="IphoneFavorController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IphoneFavorController" id="Okv-zq-Jrm" userLabel="我的收藏" customClass="IphoneFavorController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="X7V-DB-XRs"/>
                         <viewControllerLayoutGuide type="bottom" id="eZP-hr-vsE"/>
@@ -1389,10 +1321,10 @@
             </objects>
             <point key="canvasLocation" x="1565" y="986"/>
         </scene>
-        <!--Iphone Profile Controller-->
+        <!--我的 主界面-->
         <scene sceneID="EvH-UO-aEX">
             <objects>
-                <viewController storyboardIdentifier="IphoneProfileController" id="gcF-dp-BGl" customClass="IphoneProfileController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IphoneProfileController" id="gcF-dp-BGl" userLabel="我的 主界面" customClass="IphoneProfileController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KBd-Ak-oFK"/>
                         <viewControllerLayoutGuide type="bottom" id="4iG-mv-GYo"/>
@@ -1492,10 +1424,10 @@
             </objects>
             <point key="canvasLocation" x="925" y="226"/>
         </scene>
-        <!--Storyboard Link-->
+        <!--我的故障-->
         <scene sceneID="src-Al-lH9">
             <objects>
-                <viewController id="p7n-fD-7nF" customClass="RBStoryboardLink" sceneMemberID="viewController">
+                <viewController id="p7n-fD-7nF" userLabel="我的故障" customClass="RBStoryboardLink" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RE3-OG-oP1"/>
                         <viewControllerLayoutGuide type="bottom" id="7wa-dm-pMM"/>
@@ -1515,10 +1447,10 @@
             </objects>
             <point key="canvasLocation" x="570" y="998"/>
         </scene>
-        <!--Storyboard Link-->
+        <!--保修记录-->
         <scene sceneID="v7W-pa-DaF">
             <objects>
-                <viewController id="3VO-63-WT7" customClass="RBStoryboardLink" sceneMemberID="viewController">
+                <viewController id="3VO-63-WT7" userLabel="保修记录" customClass="RBStoryboardLink" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CgH-8H-x47"/>
                         <viewControllerLayoutGuide type="bottom" id="NHZ-uf-6BG"/>
@@ -1538,10 +1470,10 @@
             </objects>
             <point key="canvasLocation" x="905" y="998"/>
         </scene>
-        <!--Storyboard Link-->
+        <!--能耗-->
         <scene sceneID="3MF-3M-cux">
             <objects>
-                <viewController id="AHw-cA-iyK" customClass="RBStoryboardLink" sceneMemberID="viewController">
+                <viewController id="AHw-cA-iyK" userLabel="能耗" customClass="RBStoryboardLink" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Uev-co-IS2"/>
                         <viewControllerLayoutGuide type="bottom" id="qXN-ds-QLi"/>
@@ -1561,10 +1493,10 @@
             </objects>
             <point key="canvasLocation" x="1243" y="999"/>
         </scene>
-        <!--Storyboard Link-->
+        <!--我的消息-->
         <scene sceneID="Mei-4F-cyT">
             <objects>
-                <viewController id="tIa-JA-PdI" customClass="RBStoryboardLink" sceneMemberID="viewController">
+                <viewController id="tIa-JA-PdI" userLabel="我的消息" customClass="RBStoryboardLink" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HMm-HI-fwc"/>
                         <viewControllerLayoutGuide type="bottom" id="UgV-9I-gVs"/>
@@ -1584,10 +1516,10 @@
             </objects>
             <point key="canvasLocation" x="1904" y="998"/>
         </scene>
-        <!--Storyboard Link-->
+        <!--设置-->
         <scene sceneID="VjI-RT-O2B">
             <objects>
-                <viewController id="dyZ-Pj-XZw" customClass="RBStoryboardLink" sceneMemberID="viewController">
+                <viewController id="dyZ-Pj-XZw" userLabel="设置" customClass="RBStoryboardLink" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kt6-2b-T88"/>
                         <viewControllerLayoutGuide type="bottom" id="XwG-gR-jpu"/>
@@ -1607,10 +1539,10 @@
             </objects>
             <point key="canvasLocation" x="2236" y="999"/>
         </scene>
-        <!--Iphone Real Scene Controller-->
+        <!--实景-->
         <scene sceneID="egV-tO-FUN">
             <objects>
-                <viewController storyboardIdentifier="IphoneRealSceneController" id="bnR-fO-WwY" customClass="IphoneRealSceneController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IphoneRealSceneController" id="bnR-fO-WwY" userLabel="实景" customClass="IphoneRealSceneController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9rn-Gm-gAp"/>
                         <viewControllerLayoutGuide type="bottom" id="uX9-KN-Itx"/>
@@ -1643,10 +1575,10 @@
             </objects>
             <point key="canvasLocation" x="3054" y="998"/>
         </scene>
-        <!--切换房间-->
+        <!--实景切换房间-->
         <scene sceneID="vva-fC-NKD">
             <objects>
-                <viewController id="oQz-jx-RGd" customClass="IphoneRoomListController" sceneMemberID="viewController">
+                <viewController id="oQz-jx-RGd" userLabel="实景切换房间" customClass="IphoneRoomListController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="86G-gb-2Ke"/>
                         <viewControllerLayoutGuide type="bottom" id="bC7-3L-8w3"/>
@@ -1681,10 +1613,10 @@
             </objects>
             <point key="canvasLocation" x="3454" y="994"/>
         </scene>
-        <!--Iphone Device List Controller-->
+        <!--设备界面-->
         <scene sceneID="WEZ-X5-WaH">
             <objects>
-                <viewController storyboardIdentifier="IphoneDeviceListController" id="AX6-CX-tbP" customClass="IphoneDeviceListController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IphoneDeviceListController" id="AX6-CX-tbP" userLabel="设备界面" customClass="IphoneDeviceListController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5kj-Jc-yE4"/>
                         <viewControllerLayoutGuide type="bottom" id="puK-Tu-xPi"/>
@@ -1737,29 +1669,10 @@
             </objects>
             <point key="canvasLocation" x="3037" y="-441"/>
         </scene>
-        <!--场景-->
-        <scene sceneID="CUS-di-Zr9">
-            <objects>
-                <viewController id="Jrc-hr-UNY" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="CqJ-pM-q2s"/>
-                        <viewControllerLayoutGuide type="bottom" id="tCk-H8-9wK"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="7Gt-Wc-T0x">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="场景" id="AdI-vK-qZi"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hds-qE-7f9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4387" y="-450"/>
-        </scene>
-        <!--Storyboard Link-->
+        <!--登录-->
         <scene sceneID="uxY-FJ-nvf">
             <objects>
-                <viewController id="QTu-MY-vPd" customClass="RBStoryboardLink" sceneMemberID="viewController">
+                <viewController id="QTu-MY-vPd" userLabel="登录" customClass="RBStoryboardLink" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qXC-PC-hOh"/>
                         <viewControllerLayoutGuide type="bottom" id="Z2f-uR-gLn"/>
@@ -1780,10 +1693,10 @@
             </objects>
             <point key="canvasLocation" x="1811" y="-1091"/>
         </scene>
-        <!--IphoneTV Controller-->
+        <!--TV-->
         <scene sceneID="XGy-Zh-J7y">
             <objects>
-                <viewController storyboardIdentifier="IphoneTVController" id="4f1-Ce-GRA" customClass="IphoneTVController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IphoneTVController" id="4f1-Ce-GRA" userLabel="TV" customClass="IphoneTVController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="03X-sV-G3u"/>
                         <viewControllerLayoutGuide type="bottom" id="EBn-6d-uzY"/>
@@ -2017,10 +1930,10 @@
             </objects>
             <point key="canvasLocation" x="2197" y="-1733"/>
         </scene>
-        <!--Storyboard Link-->
+        <!--背景音乐-->
         <scene sceneID="DYK-39-6q9">
             <objects>
-                <viewController id="JZR-2P-fBT" customClass="RBStoryboardLink" sceneMemberID="viewController">
+                <viewController id="JZR-2P-fBT" userLabel="背景音乐" customClass="RBStoryboardLink" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rhD-YK-Y1p"/>
                         <viewControllerLayoutGuide type="bottom" id="AOZ-dy-Bhh"/>
@@ -2040,10 +1953,10 @@
             </objects>
             <point key="canvasLocation" x="2222" y="-1071"/>
         </scene>
-        <!--收藏频道-->
+        <!--收藏电视频道-->
         <scene sceneID="sCY-zm-pH2">
             <objects>
-                <viewController id="LEJ-HF-EvA" customClass="IphoneAddTVChannelController" sceneMemberID="viewController">
+                <viewController id="LEJ-HF-EvA" userLabel="收藏电视频道" customClass="IphoneAddTVChannelController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1aD-hI-vfz"/>
                         <viewControllerLayoutGuide type="bottom" id="eWf-tF-DwV"/>
@@ -2052,8 +1965,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HIy-DJ-qrA">
-                                <rect key="frame" x="110" y="114" width="100" height="100"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HIy-DJ-qrA">
+                                <rect key="frame" x="110" y="70" width="100" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="cN2-Dq-uxm"/>
@@ -2064,16 +1977,16 @@
                                     <action selector="clickTokenImgeBtn:" destination="LEJ-HF-EvA" eventType="touchUpInside" id="eNG-VA-io3"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="输入频道频率" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iJx-6G-jMg">
-                                <rect key="frame" x="0.0" y="234" width="320" height="40"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="输入频道频率" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iJx-6G-jMg">
+                                <rect key="frame" x="0.0" y="190" width="320" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="PhV-y0-yTD"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="输入频道名称" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ofi-FW-eNl">
-                                <rect key="frame" x="0.0" y="294" width="320" height="40"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="输入频道名称" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ofi-FW-eNl">
+                                <rect key="frame" x="0.0" y="250" width="320" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Njx-Jz-HP6"/>
                                 </constraints>
@@ -2116,10 +2029,10 @@
             </objects>
             <point key="canvasLocation" x="2634" y="-1061"/>
         </scene>
-        <!--Storyboard Link-->
+        <!--电视图标-->
         <scene sceneID="n7E-cQ-MRw">
             <objects>
-                <viewController id="GGN-m1-Ca6" customClass="RBStoryboardLink" sceneMemberID="viewController">
+                <viewController id="GGN-m1-Ca6" userLabel="电视图标" customClass="RBStoryboardLink" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8MP-Zy-bFu"/>
                         <viewControllerLayoutGuide type="bottom" id="dDd-m8-v1a"/>
@@ -2139,10 +2052,10 @@
             </objects>
             <point key="canvasLocation" x="3161" y="-1738"/>
         </scene>
-        <!--IphoneFM Controller-->
+        <!--收音机-->
         <scene sceneID="qwT-2a-si0">
             <objects>
-                <viewController storyboardIdentifier="IphoneFMController" id="TeU-EN-VDN" customClass="IphoneFMController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IphoneFMController" id="TeU-EN-VDN" userLabel="收音机" customClass="IphoneFMController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SXp-UE-faB"/>
                         <viewControllerLayoutGuide type="bottom" id="cdC-hX-F1V"/>
@@ -2351,10 +2264,10 @@
             </objects>
             <point key="canvasLocation" x="3037" y="-1061"/>
         </scene>
-        <!--Iphone Add Fm Controller-->
+        <!--添加收音机频道-->
         <scene sceneID="BjE-qn-wRf">
             <objects>
-                <viewController id="jgS-4K-VqE" customClass="IphoneAddFmController" sceneMemberID="viewController">
+                <viewController id="jgS-4K-VqE" userLabel="添加收音机频道" customClass="IphoneAddFmController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2Ce-yN-6qh"/>
                         <viewControllerLayoutGuide type="bottom" id="qhn-lJ-vwV"/>
@@ -2400,10 +2313,10 @@
             </objects>
             <point key="canvasLocation" x="3461" y="-1061"/>
         </scene>
-        <!--Iphone Air Controller-->
+        <!--空调-->
         <scene sceneID="Nsx-vO-5MX">
             <objects>
-                <viewController storyboardIdentifier="IphoneAirController" id="d9A-H8-Fkt" customClass="IphoneAirController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IphoneAirController" id="d9A-H8-Fkt" userLabel="空调" customClass="IphoneAirController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eyj-Ci-Bhh"/>
                         <viewControllerLayoutGuide type="bottom" id="qyX-cJ-9vt"/>
@@ -2613,12 +2526,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ylH-gs-tVM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1400" y="-1082"/>
+            <point key="canvasLocation" x="1400" y="-1071"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--场景列表导航控制器-->
         <scene sceneID="mvi-Hp-xET">
             <objects>
-                <navigationController storyboardIdentifier="iphoneSceneNaviController" automaticallyAdjustsScrollViewInsets="NO" id="QEv-YW-R8k" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="iphoneSceneNaviController" automaticallyAdjustsScrollViewInsets="NO" id="QEv-YW-R8k" userLabel="场景列表导航控制器" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="JAM-56-eyZ"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vhJ-hQ-v3I">
@@ -2632,12 +2545,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b9z-6u-fxT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1811" y="-441"/>
+            <point key="canvasLocation" x="1773" y="-436"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--设备界面导航控制器-->
         <scene sceneID="73a-bV-amT">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NkX-sF-4bP" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NkX-sF-4bP" userLabel="设备界面导航控制器" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8ou-Hv-65T">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2652,10 +2565,10 @@
             </objects>
             <point key="canvasLocation" x="2634" y="-441"/>
         </scene>
-        <!--Iphone Net Tv Controller-->
+        <!--机顶盒-->
         <scene sceneID="hcD-YP-Hgl">
             <objects>
-                <viewController storyboardIdentifier="IphoneNetTvController" id="Eow-Lw-1jW" customClass="IphoneNetTvController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IphoneNetTvController" id="Eow-Lw-1jW" userLabel="机顶盒" customClass="IphoneNetTvController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yGw-9f-KzD"/>
                         <viewControllerLayoutGuide type="bottom" id="i7P-5o-mAm"/>
@@ -2840,10 +2753,10 @@
             </objects>
             <point key="canvasLocation" x="1797" y="-1727"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--实景导航控制器-->
         <scene sceneID="Fip-mo-TEI">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4pk-Vy-xfo" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4pk-Vy-xfo" userLabel="实景导航控制器" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dLd-bS-id5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2888,6 +2801,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="J5F-aP-6iz"/>
         <segue reference="vWH-k8-ixo"/>
-        <segue reference="aTH-RA-7NZ"/>
+        <segue reference="YuF-MW-0b0"/>
     </inferredMetricsTieBreakers>
 </document>

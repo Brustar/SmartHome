@@ -134,6 +134,7 @@
         NSDictionary *dic = @{@"type":[NSNumber numberWithInt:2],@"subType":[NSNumber numberWithInt:0]};
         NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
         [center postNotificationName:@"myMsg" object:nil userInfo:dic];
+        
     }
 }
 

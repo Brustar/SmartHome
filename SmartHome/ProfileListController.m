@@ -42,7 +42,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    NSInteger selectedIndex = self.titlArr.count - 1;
+    NSInteger selectedIndex = 4;
     
     NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:selectedIndex inSection:0];
     

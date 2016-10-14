@@ -391,10 +391,10 @@
             </objects>
             <point key="canvasLocation" x="-182" y="-8684"/>
         </scene>
-        <!--Fix Time Repeat Controller-->
+        <!--设置时间重复-->
         <scene sceneID="pEm-HL-Si8">
             <objects>
-                <viewController storyboardIdentifier="FixTimeRepeatController" id="by8-gu-hRX" customClass="FixTimeRepeatController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FixTimeRepeatController" id="by8-gu-hRX" userLabel="设置时间重复" customClass="FixTimeRepeatController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Xsb-4I-D2b"/>
                         <viewControllerLayoutGuide type="bottom" id="Bf0-6C-0pq"/>
@@ -535,10 +535,10 @@
             </objects>
             <point key="canvasLocation" x="-906" y="-7939"/>
         </scene>
-        <!--Scense Split View Controller-->
+        <!--房间列表和设备列表的分裂总控制器-->
         <scene sceneID="y4N-BA-L5r">
             <objects>
-                <splitViewController storyboardIdentifier="ScenseSplitViewController" id="hTM-KF-HiA" customClass="ScenseSplitViewController" sceneMemberID="viewController">
+                <splitViewController storyboardIdentifier="ScenseSplitViewController" id="hTM-KF-HiA" userLabel="房间列表和设备列表的分裂总控制器" customClass="ScenseSplitViewController" sceneMemberID="viewController">
                     <connections>
                         <segue destination="Vmq-iA-Q3Y" kind="relationship" relationship="detailViewController" id="36K-yP-UEr"/>
                         <segue destination="oWH-HG-uHb" kind="relationship" relationship="masterViewController" id="JxT-hH-6Ge"/>
@@ -546,7 +546,7 @@
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xAQ-MM-RVa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-231" y="-7939"/>
+            <point key="canvasLocation" x="-237" y="-7902"/>
         </scene>
         <!--平面图-->
         <scene sceneID="kxl-u0-hZx">
@@ -579,10 +579,10 @@
             </objects>
             <point key="canvasLocation" x="1303" y="-7214"/>
         </scene>
-        <!--Service Record View Controller-->
+        <!--保修记录-->
         <scene sceneID="NC9-b5-BpK">
             <objects>
-                <viewController storyboardIdentifier="ServiceRecordViewController" id="CDy-Nx-GXz" customClass="ServiceRecordViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ServiceRecordViewController" id="CDy-Nx-GXz" userLabel="保修记录" customClass="ServiceRecordViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OcR-OC-8XE"/>
                         <viewControllerLayoutGuide type="bottom" id="NO4-zI-zxF"/>
@@ -839,10 +839,10 @@
             </objects>
             <point key="canvasLocation" x="2061" y="-6482"/>
         </scene>
-        <!--Welcome Controller-->
+        <!--欢迎界面-->
         <scene sceneID="wYk-P2-Nf6">
             <objects>
-                <viewController id="QoB-0E-qDZ" customClass="WelcomeController" sceneMemberID="viewController">
+                <viewController id="QoB-0E-qDZ" userLabel="欢迎界面" customClass="WelcomeController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ejq-Xs-Dym"/>
                         <viewControllerLayoutGuide type="bottom" id="Gmt-sX-gwN"/>
@@ -1100,10 +1100,10 @@
             </objects>
             <point key="canvasLocation" x="2787" y="-9419"/>
         </scene>
-        <!--Push Setting Controller-->
+        <!--推送设置-->
         <scene sceneID="FUj-jV-bi0">
             <objects>
-                <viewController storyboardIdentifier="PushSettingController" id="xqo-ju-2aB" customClass="PushSettingController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PushSettingController" id="xqo-ju-2aB" userLabel="推送设置" customClass="PushSettingController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hTf-SW-4DV"/>
                         <viewControllerLayoutGuide type="bottom" id="yoP-Sk-Lz8"/>
@@ -1312,10 +1312,10 @@
             </objects>
             <point key="canvasLocation" x="2024" y="-5009"/>
         </scene>
-        <!--Voice Order Controller-->
+        <!--语音控制-->
         <scene sceneID="1EU-Xo-LXK">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="6M2-qc-UnH" customClass="VoiceOrderController" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="6M2-qc-UnH" userLabel="语音控制" customClass="VoiceOrderController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wyO-jI-p7c"/>
                         <viewControllerLayoutGuide type="bottom" id="6fe-pe-xuL"/>
@@ -1409,10 +1409,10 @@
             </objects>
             <point key="canvasLocation" x="1993" y="-7198"/>
         </scene>
-        <!--System Infomation Controller-->
+        <!--系统信息-->
         <scene sceneID="ki9-Lv-eta">
             <objects>
-                <viewController storyboardIdentifier="systemInfomationController" id="Uul-Ht-qNS" customClass="SystemInfomationController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="systemInfomationController" id="Uul-Ht-qNS" userLabel="系统信息" customClass="SystemInfomationController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eMF-gp-IqK"/>
                         <viewControllerLayoutGuide type="bottom" id="emj-GD-RSn"/>
@@ -1472,10 +1472,10 @@
             </objects>
             <point key="canvasLocation" x="1249" y="-4291"/>
         </scene>
-        <!--逸云智家-->
+        <!--逸云智家主页-->
         <scene sceneID="sfl-Qw-8lz">
             <objects>
-                <viewController storyboardIdentifier="ScenseController" id="uQg-ex-x78" customClass="SceneController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScenseController" id="uQg-ex-x78" userLabel="逸云智家主页" customClass="SceneController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zVx-k3-tkm"/>
                         <viewControllerLayoutGuide type="bottom" id="SJR-jA-IE0"/>
@@ -1485,7 +1485,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7pK-9M-4j1">
-                                <rect key="frame" x="0.0" y="64" width="264" height="487"/>
+                                <rect key="frame" x="0.0" y="64" width="264" height="536"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTc-nu-9cp">
                                         <rect key="frame" x="57" y="500" width="150" height="150"/>
@@ -1587,7 +1587,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qck-Xh-eYG">
-                                <rect key="frame" x="284" y="84" width="276" height="467"/>
+                                <rect key="frame" x="284" y="84" width="276" height="516"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="40" minimumInteritemSpacing="30" id="etg-0M-FH8">
                                     <size key="itemSize" width="200" height="200"/>
@@ -1705,10 +1705,10 @@
             </objects>
             <point key="canvasLocation" x="1244" y="-7882"/>
         </scene>
-        <!--AboutUsController-->
+        <!--关于我们-->
         <scene sceneID="8Xq-2f-B2e">
             <objects>
-                <viewController storyboardIdentifier="AboutUsController" id="CWv-aV-jBo" userLabel="AboutUsController" customClass="AboutUsController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AboutUsController" id="CWv-aV-jBo" userLabel="关于我们" customClass="AboutUsController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eEC-3e-nvB"/>
                         <viewControllerLayoutGuide type="bottom" id="f6E-uU-NBR"/>
@@ -1834,10 +1834,10 @@
             </objects>
             <point key="canvasLocation" x="2024" y="-4284"/>
         </scene>
-        <!--Device Of Fix Timer View Controller-->
+        <!--增加场景选的设备-->
         <scene sceneID="rl1-05-1UY">
             <objects>
-                <viewController storyboardIdentifier="DeviceOfFixTimerViewController" id="sPL-DC-eqQ" customClass="DeviceOfFixTimerViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DeviceOfFixTimerViewController" id="sPL-DC-eqQ" userLabel="增加场景选的设备" customClass="DeviceOfFixTimerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="G6u-g2-ao5"/>
                         <viewControllerLayoutGuide type="bottom" id="Kn6-am-0Rv"/>
@@ -1877,10 +1877,10 @@
             </objects>
             <point key="canvasLocation" x="-1613" y="-8700"/>
         </scene>
-        <!--Item-->
+        <!--我的界面分裂控制器-->
         <scene sceneID="1s5-3a-S2t">
             <objects>
-                <splitViewController id="Ffr-Sd-AHJ" customClass="MyCenterSplitController" sceneMemberID="viewController">
+                <splitViewController id="Ffr-Sd-AHJ" userLabel="我的界面分裂控制器" customClass="MyCenterSplitController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="lJ7-cj-rSL"/>
                     <connections>
                         <segue destination="Toz-uH-19K" kind="relationship" relationship="detailViewController" id="258-Ou-78G"/>
@@ -1889,12 +1889,12 @@
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IOO-E1-D2M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-237" y="-6506"/>
+            <point key="canvasLocation" x="-554" y="-6578"/>
         </scene>
-        <!--Access Setting Controller-->
+        <!--权限设置-->
         <scene sceneID="f5q-Nh-kvR">
             <objects>
-                <viewController storyboardIdentifier="AccessSettingController" id="rZU-TF-14t" customClass="AccessSettingController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AccessSettingController" id="rZU-TF-14t" userLabel="权限设置" customClass="AccessSettingController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="EWe-nX-lNS"/>
                         <viewControllerLayoutGuide type="bottom" id="ti9-Bv-buO"/>
@@ -2045,10 +2045,10 @@
             </objects>
             <point key="canvasLocation" x="-279" y="-4313"/>
         </scene>
-        <!--Energy Of Device Controller-->
+        <!--能耗中选择设备-->
         <scene sceneID="JhV-BQ-Z6a">
             <objects>
-                <viewController storyboardIdentifier="EnergyOfDeviceController" id="vmW-lb-RSr" customClass="EnergyOfDeviceController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EnergyOfDeviceController" id="vmW-lb-RSr" userLabel="能耗中选择设备" customClass="EnergyOfDeviceController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HLb-kk-ILN"/>
                         <viewControllerLayoutGuide type="bottom" id="3eL-Ny-2q1"/>
@@ -2268,10 +2268,10 @@
             </objects>
             <point key="canvasLocation" x="1317" y="-6482"/>
         </scene>
-        <!--My Energy View Controller-->
+        <!--我的能耗-->
         <scene sceneID="HvI-r8-8aK">
             <objects>
-                <viewController storyboardIdentifier="MyEnergyViewController" id="GS2-hU-zG4" customClass="MyEnergyViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyEnergyViewController" id="GS2-hU-zG4" userLabel="我的能耗" customClass="MyEnergyViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="EZb-5Y-Ea0"/>
                         <viewControllerLayoutGuide type="bottom" id="xeT-j7-0PZ"/>
@@ -2547,10 +2547,10 @@
             </objects>
             <point key="canvasLocation" x="502" y="-5737"/>
         </scene>
-        <!--Register Detail Controller-->
+        <!--注册用户名、密码等界面-->
         <scene sceneID="Lhv-hE-0VK">
             <objects>
-                <viewController storyboardIdentifier="registerDetail" id="h56-WK-SJ6" customClass="RegisterDetailController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="registerDetail" id="h56-WK-SJ6" userLabel="注册用户名、密码等界面" customClass="RegisterDetailController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dUn-Gk-eph"/>
                         <viewControllerLayoutGuide type="bottom" id="fyz-e5-v2Z"/>
@@ -2559,7 +2559,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fm6-kA-D9a">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fm6-kA-D9a">
                                 <rect key="frame" x="100" y="120" width="400" height="200"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="veB-gj-0ZR">
@@ -2761,7 +2761,7 @@
                                     <constraint firstAttribute="trailing" secondItem="iPN-RN-2GQ" secondAttribute="trailing" id="yG4-jE-PCx"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aXm-Qu-dt0">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aXm-Qu-dt0">
                                 <rect key="frame" x="100" y="320" width="400" height="30"/>
                                 <color key="backgroundColor" red="0.18264051610000001" green="0.62103239529999998" blue="0.3035301621" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -2882,10 +2882,10 @@
             </objects>
             <point key="canvasLocation" x="2024" y="-3575"/>
         </scene>
-        <!--Register Phone Num Controller-->
+        <!--注册手机号界面-->
         <scene sceneID="itO-mh-d9F">
             <objects>
-                <viewController storyboardIdentifier="RegisterPhoneNumController" id="IU4-qg-EiO" customClass="RegisterPhoneNumController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegisterPhoneNumController" id="IU4-qg-EiO" userLabel="注册手机号界面" customClass="RegisterPhoneNumController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qCP-it-Msb"/>
                         <viewControllerLayoutGuide type="bottom" id="2FB-iJ-TPN"/>
@@ -2894,7 +2894,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jMf-6l-yHK">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jMf-6l-yHK">
                                 <rect key="frame" x="100" y="120" width="400" height="220"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欢迎注册逸云系统" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z7G-kS-gVb">
@@ -3052,7 +3052,7 @@
                                     <constraint firstItem="hRF-3g-Hca" firstAttribute="leading" secondItem="jMf-6l-yHK" secondAttribute="leading" constant="5" id="zGi-kQ-21G"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQf-8J-1Ym">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQf-8J-1Ym">
                                 <rect key="frame" x="100" y="360" width="400" height="30"/>
                                 <color key="backgroundColor" red="0.18264051614458393" green="0.62103239528795817" blue="0.30353016214555956" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -3138,10 +3138,10 @@
             </objects>
             <point key="canvasLocation" x="1249" y="-3608"/>
         </scene>
-        <!--Storyboard Link-->
+        <!--跳到手机版本的主页面-->
         <scene sceneID="F1l-Aq-QUs">
             <objects>
-                <viewController id="hox-Sh-Dr1" customClass="RBStoryboardLink" sceneMemberID="viewController">
+                <viewController id="hox-Sh-Dr1" userLabel="跳到手机版本的主页面" customClass="RBStoryboardLink" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kk0-c6-cOY"/>
                         <viewControllerLayoutGuide type="bottom" id="gR8-IC-Eo9"/>
@@ -3161,10 +3161,10 @@
             </objects>
             <point key="canvasLocation" x="1244" y="-2831"/>
         </scene>
-        <!--My Setting View Controller-->
+        <!--我的设置-->
         <scene sceneID="1XM-de-2CR">
             <objects>
-                <viewController storyboardIdentifier="MySettingViewController" id="HBZ-W0-pl1" customClass="MySettingViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MySettingViewController" id="HBZ-W0-pl1" userLabel="我的设置" customClass="MySettingViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="t1T-g5-zcK"/>
                         <viewControllerLayoutGuide type="bottom" id="fPP-hA-bYw"/>
@@ -3225,10 +3225,10 @@
             </objects>
             <point key="canvasLocation" x="1249" y="-5009"/>
         </scene>
-        <!--Controller-->
+        <!--我的消息-->
         <scene sceneID="Zh9-B0-SUI">
             <objects>
-                <tableViewController storyboardIdentifier="MSGController" id="0mr-hx-CLH" customClass="MSGController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MSGController" id="0mr-hx-CLH" userLabel="我的消息" customClass="MSGController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="19E-d9-SvD">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3334,10 +3334,10 @@
             </objects>
             <point key="canvasLocation" x="-326" y="-3625"/>
         </scene>
-        <!--Project Controller-->
+        <!--投影-->
         <scene sceneID="wnh-mx-zMc">
             <objects>
-                <viewController storyboardIdentifier="ProjectController" id="dxP-oy-jnI" customClass="ProjectController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProjectController" id="dxP-oy-jnI" userLabel="投影" customClass="ProjectController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ycr-0K-ABg"/>
                         <viewControllerLayoutGuide type="bottom" id="71Z-Hy-msS"/>
@@ -3424,10 +3424,10 @@
             </objects>
             <point key="canvasLocation" x="-805" y="-10038"/>
         </scene>
-        <!--Screen Curtain Controller-->
+        <!--幕布-->
         <scene sceneID="jvM-o5-1fo">
             <objects>
-                <viewController storyboardIdentifier="ScreenCurtainController" id="FiI-Rh-bgC" customClass="ScreenCurtainController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScreenCurtainController" id="FiI-Rh-bgC" userLabel="幕布" customClass="ScreenCurtainController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vSk-3D-NSE"/>
                         <viewControllerLayoutGuide type="bottom" id="f8x-1I-ssO"/>
@@ -3515,10 +3515,10 @@
             </objects>
             <point key="canvasLocation" x="-1459" y="-10038"/>
         </scene>
-        <!--Window Sliding Controller-->
+        <!--推窗器-->
         <scene sceneID="pT2-Lg-Dhh">
             <objects>
-                <viewController storyboardIdentifier="WindowSlidingController" id="cza-pc-hZx" customClass="WindowSlidingController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WindowSlidingController" id="cza-pc-hZx" userLabel="推窗器" customClass="WindowSlidingController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZQs-sV-iUb"/>
                         <viewControllerLayoutGuide type="bottom" id="CYI-4k-9ut"/>
@@ -3605,10 +3605,10 @@
             </objects>
             <point key="canvasLocation" x="-1451" y="-9360"/>
         </scene>
-        <!--Data Source-->
+        <!--空调-->
         <scene sceneID="93P-EO-Ts9">
             <objects>
-                <viewController storyboardIdentifier="AirController" id="4CE-Kq-vrI" customClass="AirController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AirController" id="4CE-Kq-vrI" userLabel="空调" customClass="AirController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dKl-9L-LgW"/>
                         <viewControllerLayoutGuide type="bottom" id="pHJ-0u-BZX"/>
@@ -3618,7 +3618,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dLt-Sh-pEV" userLabel="detail">
-                                <rect key="frame" x="30" y="456" width="540" height="45"/>
+                                <rect key="frame" x="30" y="505" width="540" height="45"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="详细信息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ghw-CC-Fm9">
                                         <rect key="frame" x="5" y="12" width="68" height="21"/>
@@ -3902,7 +3902,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="owQ-SK-BR5" customClass="RulerView">
-                                <rect key="frame" x="490" y="74" width="100" height="372"/>
+                                <rect key="frame" x="490" y="74" width="100" height="421"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="q5G-KG-rhJ"/>
                                 </constraints>
@@ -3939,8 +3939,8 @@
                                 <exclude reference="7Mg-1l-X4o"/>
                                 <exclude reference="EOP-E4-nhV"/>
                                 <exclude reference="YqT-Td-Gwo"/>
-                                <exclude reference="gzf-Wv-MHI"/>
                                 <exclude reference="zVH-no-Eff"/>
+                                <exclude reference="gzf-Wv-MHI"/>
                                 <exclude reference="Zpj-8j-45y"/>
                             </mask>
                         </variation>
@@ -3970,7 +3970,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MCD-MY-GV8">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MCD-MY-GV8">
                                 <rect key="frame" x="30" y="456" width="540" height="45"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="详细信息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kSr-F9-F1H">
@@ -3993,7 +3993,7 @@
                                     <constraint firstAttribute="trailing" secondItem="3gH-TH-NZb" secondAttribute="trailing" constant="30" id="hvo-dL-Od8"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_weak.png" translatesAutoresizingMaskIntoConstraints="NO" id="Qmj-tg-kQi">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="voice_weak.png" translatesAutoresizingMaskIntoConstraints="NO" id="Qmj-tg-kQi">
                                 <rect key="frame" x="60" y="325" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="32" id="6h8-6L-0iP"/>
@@ -4061,7 +4061,7 @@
                                     <constraint firstItem="6nA-qq-sEd" firstAttribute="leading" secondItem="alz-F3-uN4" secondAttribute="trailing" constant="20" id="wQs-Qb-8e7"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_strong.png" translatesAutoresizingMaskIntoConstraints="NO" id="TOn-15-jq3">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="voice_strong.png" translatesAutoresizingMaskIntoConstraints="NO" id="TOn-15-jq3">
                                 <rect key="frame" x="508" y="325" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="BpN-bO-phv"/>
@@ -4113,13 +4113,13 @@
                                     <outlet property="delegate" destination="7uY-cb-xb4" id="9Np-sC-00B"/>
                                 </connections>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zv2-vL-vH9">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zv2-vL-vH9">
                                 <rect key="frame" x="288" y="295" width="24" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="icq-eo-pJb">
+                            <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="icq-eo-pJb">
                                 <rect key="frame" x="98" y="326" width="404" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="400" id="9T7-49-OKH"/>
@@ -4164,10 +4164,10 @@
             </objects>
             <point key="canvasLocation" x="461" y="-10052"/>
         </scene>
-        <!--Detail View Controller-->
+        <!--设备详情-->
         <scene sceneID="8RC-xt-jbm">
             <objects>
-                <tableViewController id="FtL-kz-2bc" customClass="DetailViewController" sceneMemberID="viewController">
+                <tableViewController id="FtL-kz-2bc" userLabel="设备详情" customClass="DetailViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="HI1-5B-dNI">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4192,10 +4192,10 @@
             </objects>
             <point key="canvasLocation" x="1993" y="-10134"/>
         </scene>
-        <!--Icon Controller-->
+        <!--电视图标-->
         <scene sceneID="236-qH-QAb">
             <objects>
-                <viewController storyboardIdentifier="TVIconController" id="M1e-LP-Frb" customClass="TVIconController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TVIconController" id="M1e-LP-Frb" userLabel="电视图标" customClass="TVIconController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5JE-9c-rM8"/>
                         <viewControllerLayoutGuide type="bottom" id="27h-Ql-iqO"/>
@@ -4205,7 +4205,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GmG-8D-WCx">
-                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" red="0.90309139530000004" green="0.90309139530000004" blue="0.90309139530000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="20" id="fGq-Jt-E9Z">
                                     <size key="itemSize" width="150" height="150"/>
@@ -4247,10 +4247,10 @@
             </objects>
             <point key="canvasLocation" x="2787" y="-10134"/>
         </scene>
-        <!--Search View Controller-->
+        <!--搜索-->
         <scene sceneID="DTU-ec-GTe">
             <objects>
-                <viewController storyboardIdentifier="SearchViewController" id="VGt-yN-ZQ6" customClass="SearchViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchViewController" id="VGt-yN-ZQ6" userLabel="搜索" customClass="SearchViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PAy-ER-a9R"/>
                         <viewControllerLayoutGuide type="bottom" id="1uW-GG-qDJ"/>
@@ -4284,10 +4284,10 @@
             </objects>
             <point key="canvasLocation" x="2925" y="-7209"/>
         </scene>
-        <!--Bg Music Controller-->
+        <!--背景音乐-->
         <scene sceneID="F81-F1-NYo">
             <objects>
-                <viewController storyboardIdentifier="BgMusicController" id="ozV-GP-Vrh" customClass="BgMusicController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BgMusicController" id="ozV-GP-Vrh" userLabel="背景音乐" customClass="BgMusicController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CME-NZ-veb"/>
                         <viewControllerLayoutGuide type="bottom" id="Qoq-l4-rZP"/>
@@ -4451,7 +4451,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="6oM-ja-ycz">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="6oM-ja-ycz">
                                 <rect key="frame" x="250" y="50" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="NFm-A4-Fz9"/>
@@ -4474,7 +4474,7 @@
                                     <action selector="registerAccount:" destination="Q07-ua-pDl" eventType="touchUpInside" id="YKV-L4-6Qa"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9YJ-co-f1J">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9YJ-co-f1J">
                                 <rect key="frame" x="100" y="200" width="400" height="200"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="用户名/手机号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y1v-G2-n8Q">
@@ -4653,10 +4653,10 @@
             </objects>
             <point key="canvasLocation" x="482" y="-3597"/>
         </scene>
-        <!--HostIDS Controller-->
+        <!--主机ID列表-->
         <scene sceneID="B19-Yo-YEk">
             <objects>
-                <viewController storyboardIdentifier="HostIDSController" id="QzJ-CZ-osM" customClass="HostIDSController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HostIDSController" id="QzJ-CZ-osM" userLabel="主机ID列表" customClass="HostIDSController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NWN-dj-ROW"/>
                         <viewControllerLayoutGuide type="bottom" id="KRO-CA-lxf"/>
@@ -4754,7 +4754,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k92-43-Qg3">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k92-43-Qg3">
                                 <rect key="frame" x="30" y="406" width="540" height="45"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="详细信息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m9k-Do-RGs">
@@ -4779,26 +4779,26 @@
                                     <constraint firstAttribute="trailing" secondItem="dhk-xY-XBb" secondAttribute="trailing" constant="30" id="tfa-tn-14o"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="an7-Yp-Ebx">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="an7-Yp-Ebx">
                                 <rect key="frame" x="288" y="295" width="24" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="fxa-EE-lhu">
+                            <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="fxa-EE-lhu">
                                 <rect key="frame" x="98" y="326" width="404" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="400" id="ltG-JJ-U64"/>
                                 </constraints>
                             </slider>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_weak.png" translatesAutoresizingMaskIntoConstraints="NO" id="TgJ-dj-uwe">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="voice_weak.png" translatesAutoresizingMaskIntoConstraints="NO" id="TgJ-dj-uwe">
                                 <rect key="frame" x="60" y="324" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="YYq-jQ-xBB"/>
                                     <constraint firstAttribute="width" constant="32" id="qPW-ga-MgR"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_strong.png" translatesAutoresizingMaskIntoConstraints="NO" id="hAI-Hv-xB6">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="voice_strong.png" translatesAutoresizingMaskIntoConstraints="NO" id="hAI-Hv-xB6">
                                 <rect key="frame" x="508" y="325" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="32" id="8TZ-Qn-61g"/>
@@ -4915,19 +4915,19 @@
                                     <constraint firstAttribute="bottom" secondItem="2OF-5a-iAy" secondAttribute="bottom" id="uOc-gy-P64"/>
                                 </constraints>
                             </view>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="RN9-fb-vhN">
+                            <pageControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="RN9-fb-vhN">
                                 <rect key="frame" x="325" y="259" width="50" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="GCA-zi-ZWw"/>
                                     <constraint firstAttribute="width" constant="50" id="ksh-RU-TMr"/>
                                 </constraints>
                             </pageControl>
-                            <view hidden="YES" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lON-fn-lEV">
+                            <view hidden="YES" alpha="0.5" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lON-fn-lEV">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <color key="backgroundColor" red="0.90309139530000004" green="0.90309139530000004" blue="0.90309139530000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.7725490196" green="0.7725490196" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yS3-on-uXb">
+                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yS3-on-uXb">
                                 <rect key="frame" x="175" y="201" width="250" height="150"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="频道名称：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXY-HZ-1tW">
@@ -5053,10 +5053,10 @@
             </objects>
             <point key="canvasLocation" x="1993" y="-9427"/>
         </scene>
-        <!--Guard Controller-->
+        <!--门锁-->
         <scene sceneID="KMg-55-Wn4">
             <objects>
-                <viewController storyboardIdentifier="GuardController" id="7d8-3b-SzA" customClass="GuardController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GuardController" id="7d8-3b-SzA" userLabel="门锁" customClass="GuardController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0Dr-Gh-QuQ"/>
                         <viewControllerLayoutGuide type="bottom" id="QtV-yW-07Y"/>
@@ -5110,10 +5110,10 @@
             </objects>
             <point key="canvasLocation" x="1208" y="-10106"/>
         </scene>
-        <!--Controller-->
+        <!--DVD-->
         <scene sceneID="ew2-UX-k1z">
             <objects>
-                <viewController storyboardIdentifier="DVDController" id="Ywa-Dl-EXD" customClass="DVDController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DVDController" id="Ywa-Dl-EXD" userLabel="DVD" customClass="DVDController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rXA-Tg-ERc"/>
                         <viewControllerLayoutGuide type="bottom" id="OYl-b2-XqS"/>
@@ -5123,7 +5123,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p46-C7-buw">
-                                <rect key="frame" x="30" y="456" width="540" height="45"/>
+                                <rect key="frame" x="30" y="505" width="540" height="45"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="详细信息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gEO-es-427">
                                         <rect key="frame" x="5" y="12" width="68" height="21"/>
@@ -5148,13 +5148,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Smz-HE-fAn">
-                                <rect key="frame" x="288" y="345" width="24" height="21"/>
+                                <rect key="frame" x="288" y="394" width="24" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="p7K-ra-ARX">
-                                <rect key="frame" x="48" y="376" width="504" height="31"/>
+                                <rect key="frame" x="48" y="425" width="504" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="500" id="OCW-at-We4"/>
                                 </constraints>
@@ -5218,14 +5218,14 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_strong.png" translatesAutoresizingMaskIntoConstraints="NO" id="raF-a3-JCh">
-                                <rect key="frame" x="558" y="375" width="32" height="32"/>
+                                <rect key="frame" x="558" y="424" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="gLB-v5-PaX"/>
                                     <constraint firstAttribute="width" constant="32" id="vaw-7z-DMu"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_weak.png" translatesAutoresizingMaskIntoConstraints="NO" id="fWx-uA-wSP">
-                                <rect key="frame" x="10" y="374" width="32" height="32"/>
+                                <rect key="frame" x="10" y="423" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="U40-a0-hqm"/>
                                     <constraint firstAttribute="width" constant="32" id="cc2-Xc-MIe"/>
@@ -5312,10 +5312,10 @@
             </objects>
             <point key="canvasLocation" x="2793" y="-8732"/>
         </scene>
-        <!--Amplifier Controller-->
+        <!--功放-->
         <scene sceneID="61G-Is-3Ur">
             <objects>
-                <viewController storyboardIdentifier="AmplifierController" id="l2p-Yb-hup" customClass="AmplifierController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AmplifierController" id="l2p-Yb-hup" userLabel="功放" customClass="AmplifierController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="T9K-nR-fLb"/>
                         <viewControllerLayoutGuide type="bottom" id="isp-nj-MB5"/>
@@ -5402,10 +5402,10 @@
             </objects>
             <point key="canvasLocation" x="-805" y="-9352"/>
         </scene>
-        <!--Curtain Controller-->
+        <!--窗帘-->
         <scene sceneID="jqh-YQ-htx">
             <objects>
-                <viewController storyboardIdentifier="CurtainController" id="zTh-tS-8xs" customClass="CurtainController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CurtainController" id="zTh-tS-8xs" userLabel="窗帘" customClass="CurtainController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Sge-O6-aH1"/>
                         <viewControllerLayoutGuide type="bottom" id="bif-FY-gnx"/>
@@ -5455,10 +5455,10 @@
             </objects>
             <point key="canvasLocation" x="-182" y="-9352"/>
         </scene>
-        <!--Camera Controller-->
+        <!--摄像头-->
         <scene sceneID="SUI-RL-XoC">
             <objects>
-                <viewController storyboardIdentifier="CameraController" id="4lO-41-8MY" customClass="CameraController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CameraController" id="4lO-41-8MY" userLabel="摄像头" customClass="CameraController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1H9-px-Izi"/>
                         <viewControllerLayoutGuide type="bottom" id="UHD-ut-wn1"/>
@@ -5587,7 +5587,7 @@
                                 </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z7C-f1-bHP">
-                                <rect key="frame" x="50" y="486" width="100" height="45"/>
+                                <rect key="frame" x="50" y="535" width="100" height="45"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="详细信息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMe-7B-zmA">
                                         <rect key="frame" x="5" y="12" width="68" height="21"/>
@@ -5773,7 +5773,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p09-yJ-sWS">
-                                <rect key="frame" x="75" y="410" width="50" height="21"/>
+                                <rect key="frame" x="75" y="459" width="50" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="8tl-Bj-UyO"/>
                                 </constraints>
@@ -5782,7 +5782,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="jdw-mK-XVY">
-                                <rect key="frame" x="98" y="441" width="4" height="31"/>
+                                <rect key="frame" x="98" y="490" width="4" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="PKa-Wi-Bxw"/>
                                 </constraints>
@@ -5797,21 +5797,21 @@
                                 <color key="currentPageIndicatorTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_weak.png" translatesAutoresizingMaskIntoConstraints="NO" id="6QC-os-Ifn">
-                                <rect key="frame" x="60" y="439" width="32" height="32"/>
+                                <rect key="frame" x="60" y="488" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="Tpa-jm-8Va"/>
                                     <constraint firstAttribute="width" constant="32" id="pAO-yc-3a0"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_strong.png" translatesAutoresizingMaskIntoConstraints="NO" id="dBK-z4-gy6">
-                                <rect key="frame" x="108" y="440" width="32" height="32"/>
+                                <rect key="frame" x="108" y="489" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="32" id="3TT-Rd-cW3"/>
                                     <constraint firstAttribute="height" constant="32" id="wSJ-y9-loH"/>
                                 </constraints>
                             </imageView>
                             <view hidden="YES" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JHx-K5-ATF">
-                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" red="0.86852824080000002" green="0.86852824080000002" blue="0.86852824080000002" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Izc-wa-SEs">
@@ -6202,10 +6202,10 @@ layer.masksToBoundslayer.masksToBounds
             </objects>
             <point key="canvasLocation" x="2028" y="-8713"/>
         </scene>
-        <!--System Setting View Controller-->
+        <!--系统设置-->
         <scene sceneID="h4P-QT-HWK">
             <objects>
-                <viewController storyboardIdentifier="SystemSettingViewController" id="fx1-cN-ha4" customClass="SystemSettingViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SystemSettingViewController" id="fx1-cN-ha4" userLabel="系统设置" customClass="SystemSettingViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zts-Ci-ZUh"/>
                         <viewControllerLayoutGuide type="bottom" id="Qzw-xf-DlA"/>
@@ -6270,10 +6270,10 @@ layer.masksToBoundslayer.masksToBounds
             </objects>
             <point key="canvasLocation" x="491" y="-4291"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--设备列表导航控制器-->
         <scene sceneID="q0A-Ma-9uf">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Vmq-iA-Q3Y" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Vmq-iA-Q3Y" userLabel="设备列表导航控制器" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="48I-yz-3Vm">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -6288,10 +6288,10 @@ layer.masksToBoundslayer.masksToBounds
             </objects>
             <point key="canvasLocation" x="2776" y="-7988"/>
         </scene>
-        <!--场景-->
+        <!--编辑场景-->
         <scene sceneID="7n3-qf-uvO">
             <objects>
-                <viewController storyboardIdentifier="EditSceneController" id="6a7-1m-tB7" customClass="EditSceneController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditSceneController" id="6a7-1m-tB7" userLabel="编辑场景" customClass="EditSceneController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="26g-kv-1vI"/>
                         <viewControllerLayoutGuide type="bottom" id="J7V-cJ-e6i"/>
@@ -6301,10 +6301,10 @@ layer.masksToBoundslayer.masksToBounds
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ffb-Ry-ChD">
-                                <rect key="frame" x="0.0" y="64" width="100" height="487"/>
+                                <rect key="frame" x="0.0" y="64" width="100" height="536"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="56" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="L2z-33-ecs">
-                                        <rect key="frame" x="0.0" y="0.0" width="100" height="367"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="416"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EditSceneCell" rowHeight="56" id="0NM-WM-5lK" customClass="EditSceneCell">
@@ -6347,7 +6347,7 @@ layer.masksToBoundslayer.masksToBounds
                                         </connections>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ddJ-q6-3mr">
-                                        <rect key="frame" x="0.0" y="367" width="100" height="120"/>
+                                        <rect key="frame" x="0.0" y="416" width="100" height="120"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wvP-dM-R4D">
                                                 <rect key="frame" x="10" y="22" width="30" height="30"/>
@@ -6404,10 +6404,10 @@ layer.masksToBoundslayer.masksToBounds
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TFn-fO-cqz">
-                                <rect key="frame" x="500" y="64" width="100" height="487"/>
+                                <rect key="frame" x="500" y="64" width="100" height="536"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="65" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B5E-kC-l50">
-                                        <rect key="frame" x="0.0" y="0.0" width="100" height="367"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="416"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EditSceneCell" rowHeight="65" id="AP5-FS-cGH" customClass="EditSceneCell">
@@ -6449,7 +6449,7 @@ layer.masksToBoundslayer.masksToBounds
                                         </connections>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NVC-Ha-Ql5">
-                                        <rect key="frame" x="0.0" y="367" width="100" height="120"/>
+                                        <rect key="frame" x="0.0" y="416" width="100" height="120"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ix-hZ-Oqk">
                                                 <rect key="frame" x="15" y="25" width="70" height="70"/>
@@ -6484,10 +6484,10 @@ layer.masksToBoundslayer.masksToBounds
                                 </constraints>
                             </view>
                             <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oHk-s8-HdJ">
-                                <rect key="frame" x="100" y="64" width="400" height="487"/>
+                                <rect key="frame" x="100" y="64" width="400" height="536"/>
                                 <subviews>
                                     <view hidden="YES" alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vMu-TP-NM8">
-                                        <rect key="frame" x="0.0" y="0.0" width="400" height="487"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="400" height="536"/>
                                         <color key="backgroundColor" red="0.7725490196" green="0.7725490196" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="my8-UG-gsP">
@@ -6618,12 +6618,12 @@ layer.masksToBoundslayer.masksToBounds
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e5s-xD-1Tt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2167" y="-7988"/>
+            <point key="canvasLocation" x="2111" y="-7988"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--登录导航控制器-->
         <scene sceneID="YYw-xW-Ubc">
             <objects>
-                <navigationController storyboardIdentifier="loginNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Eav-Oi-siU" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="loginNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Eav-Oi-siU" userLabel="登录导航控制器" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="EdW-td-YgL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -6638,10 +6638,10 @@ layer.masksToBoundslayer.masksToBounds
             </objects>
             <point key="canvasLocation" x="-298" y="-2796"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--我的故障导航控制器-->
         <scene sceneID="odf-Yb-0qA">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Toz-uH-19K" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Toz-uH-19K" userLabel="我的故障导航控制器" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gMQ-zj-DTT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -6654,12 +6654,12 @@ layer.masksToBoundslayer.masksToBounds
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xOi-g3-ncz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-272" y="-5747"/>
+            <point key="canvasLocation" x="-342" y="-5750"/>
         </scene>
-        <!--Favor Controller-->
+        <!--我的收藏-->
         <scene sceneID="tIe-6o-2Tg">
             <objects>
-                <viewController storyboardIdentifier="FavorController" id="Gd1-Nx-eQV" customClass="FavorController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FavorController" id="Gd1-Nx-eQV" userLabel="我的收藏" customClass="FavorController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2tX-UU-PxC"/>
                         <viewControllerLayoutGuide type="bottom" id="UBu-pR-0MM"/>
@@ -6669,7 +6669,7 @@ layer.masksToBoundslayer.masksToBounds
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DLR-Vw-ms7">
-                                <rect key="frame" x="20" y="84" width="560" height="467"/>
+                                <rect key="frame" x="20" y="84" width="560" height="516"/>
                                 <color key="backgroundColor" red="0.90309139530000004" green="0.90309139530000004" blue="0.90309139530000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="20" id="ajs-TL-hmt">
                                     <size key="itemSize" width="200" height="200"/>
@@ -6735,10 +6735,10 @@ layer.masksToBoundslayer.masksToBounds
             </objects>
             <point key="canvasLocation" x="-248" y="-5029"/>
         </scene>
-        <!--Item-->
+        <!--主页导航控制器-->
         <scene sceneID="4aF-XO-4eS">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ez8-GB-AeD" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ez8-GB-AeD" userLabel="主页导航控制器" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="WgC-uE-2ZL"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="OWp-fb-pZa">
@@ -6752,12 +6752,12 @@ layer.masksToBoundslayer.masksToBounds
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sNO-IT-vwL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="584" y="-7282"/>
+            <point key="canvasLocation" x="-182" y="-7190"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--我的  导航控制器-->
         <scene sceneID="4BY-90-5WK">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FSs-C7-ZJr" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FSs-C7-ZJr" userLabel="我的  导航控制器" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="TK5-7b-7Ty">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -6772,10 +6772,10 @@ layer.masksToBoundslayer.masksToBounds
             </objects>
             <point key="canvasLocation" x="491" y="-6499"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--房间列表导航控制器-->
         <scene sceneID="jdK-xT-2gl">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oWH-HG-uHb" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oWH-HG-uHb" userLabel="房间列表导航控制器" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="i0x-oL-ZiN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -6790,10 +6790,10 @@ layer.masksToBoundslayer.masksToBounds
             </objects>
             <point key="canvasLocation" x="-892" y="-8684"/>
         </scene>
-        <!--Item-->
+        <!--平面图导航控制器-->
         <scene sceneID="U6M-jh-NZg">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="F6f-3x-kGl" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="F6f-3x-kGl" userLabel="平面图导航控制器" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="sV4-NP-96y"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Zg1-GR-H7J">
@@ -6807,12 +6807,12 @@ layer.masksToBoundslayer.masksToBounds
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gLz-IK-nIK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-134" y="-7253"/>
+            <point key="canvasLocation" x="491" y="-7214"/>
         </scene>
-        <!--Item-->
+        <!--实景导航控制器-->
         <scene sceneID="1dG-Xx-bPE">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Zfz-y6-NGu" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Zfz-y6-NGu" userLabel="实景导航控制器" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="SEe-Bd-wRL"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8ZO-dJ-doP">
@@ -6868,9 +6868,9 @@ layer.masksToBoundslayer.masksToBounds
     <inferredMetricsTieBreakers>
         <segue reference="JQm-bA-TWz"/>
         <segue reference="ya3-gG-p8O"/>
-        <segue reference="PRs-sg-E1F"/>
-        <segue reference="sa4-D6-iWJ"/>
-        <segue reference="uCb-ME-O7C"/>
+        <segue reference="wSR-hk-rTP"/>
+        <segue reference="nIi-Kc-QDm"/>
+        <segue reference="TBd-30-Hkx"/>
         <segue reference="U1p-eR-Biy"/>
         <segue reference="tdV-sS-d5j"/>
         <segue reference="X9P-hg-DXo"/>
@@ -6882,6 +6882,6 @@ layer.masksToBoundslayer.masksToBounds
         <segue reference="vdf-Gi-dZf"/>
         <segue reference="vKk-7C-VKf"/>
         <segue reference="l23-e3-J0C"/>
-        <segue reference="YE7-iU-rxh"/>
+        <segue reference="dRU-hd-aVS"/>
     </inferredMetricsTieBreakers>
 </document>

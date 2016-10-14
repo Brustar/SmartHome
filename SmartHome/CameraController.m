@@ -63,8 +63,7 @@
     
     NSLog(@"video duration: %f",_video.duration);
     NSLog(@"video size: %d x %d", _video.sourceWidth, _video.sourceHeight);
-    [self playButtonAction:nil];
-
+    
     
 }
 - (void)viewDidLoad {
@@ -150,7 +149,7 @@
     self.cell = cell;
     self.index = (int)indexPath.row;
     cell.imgView.userInteractionEnabled = YES;
-    
+    [self playButtonAction:nil];
     
     return cell;
 }
