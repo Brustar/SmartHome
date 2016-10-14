@@ -611,7 +611,7 @@
         if ([device isKindOfClass:[Aircon class]]) {
             Aircon *aircon=(Aircon *)device;
             NSString *deviceid=[NSString stringWithFormat:@"%d", aircon.deviceID];
-            data=[[DeviceInfo defaultManager] toogleAirCon:aircon.isPoweron deviceID:deviceid];
+            data=[[DeviceInfo defaultManager] toogleAirCon:YES deviceID:deviceid];
             [sock.socket writeData:data withTimeout:1 tag:1];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 if (aircon.mode>=0) {
