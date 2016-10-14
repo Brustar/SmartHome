@@ -9,6 +9,4 @@
 
 @property (strong, nonatomic) NSArray *scenes;
 
-
-
 @end
