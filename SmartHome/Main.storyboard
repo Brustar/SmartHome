@@ -3639,15 +3639,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gfi-oc-vSx">
                                 <rect key="frame" x="50" y="84" width="405" height="150"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="are-Ou-OXr">
-                                        <rect key="frame" x="20" y="10" width="80" height="130"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="80" id="xtu-Ce-TOr"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UAV-TI-amn">
                                         <rect key="frame" x="100" y="20" width="285" height="110"/>
                                         <subviews>
@@ -3746,6 +3737,15 @@
                                             </mask>
                                         </variation>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="are-Ou-OXr">
+                                        <rect key="frame" x="20" y="10" width="100" height="130"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="xtu-Ce-TOr"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -5983,7 +5983,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4D4-zn-jOn">
-                                <rect key="frame" x="20" y="94" width="560" height="400"/>
+                                <rect key="frame" x="20" y="94" width="560" height="506"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="400" id="kKK-qC-Xyw"/>
@@ -5998,6 +5998,11 @@ layer.masksToBoundslayer.masksToBounds
 </string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="kKK-qC-Xyw"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="2lV-M1-cea" id="2Pd-vj-bff"/>
                                     <outlet property="delegate" destination="2lV-M1-cea" id="aQY-il-9k5"/>
@@ -6070,6 +6075,7 @@ layer.masksToBoundslayer.masksToBounds
                         <color key="backgroundColor" red="0.9100608093" green="0.9100608093" blue="0.9100608093" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="4D4-zn-jOn" firstAttribute="leading" secondItem="vfO-bg-BbX" secondAttribute="leading" constant="20" id="9X5-SF-Uz6"/>
+                            <constraint firstItem="RNH-E2-Cde" firstAttribute="top" secondItem="4D4-zn-jOn" secondAttribute="bottom" id="D9v-iz-R0c"/>
                             <constraint firstItem="KCo-FH-E4U" firstAttribute="centerY" secondItem="vfO-bg-BbX" secondAttribute="centerY" id="FTI-ui-vm5"/>
                             <constraint firstItem="RNH-E2-Cde" firstAttribute="top" secondItem="4D4-zn-jOn" secondAttribute="bottom" id="LE6-cj-FnZ"/>
                             <constraint firstItem="KCo-FH-E4U" firstAttribute="centerX" secondItem="vfO-bg-BbX" secondAttribute="centerX" id="NWa-vA-jHr"/>
@@ -6412,7 +6418,7 @@ layer.masksToBoundslayer.masksToBounds
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3O4-Wh-OrB">
                                                             <rect key="frame" x="10" y="40" width="80" height="14"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -6856,22 +6862,22 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nIi-Kc-QDm"/>
-        <segue reference="wSR-hk-rTP"/>
+        <segue reference="zpE-f9-a1R"/>
         <segue reference="ya3-gG-p8O"/>
-        <segue reference="tt4-nB-rfe"/>
+        <segue reference="wSR-hk-rTP"/>
+        <segue reference="nIi-Kc-QDm"/>
+        <segue reference="TBd-30-Hkx"/>
+        <segue reference="X9P-hg-DXo"/>
         <segue reference="a9T-LN-ZVX"/>
-        <segue reference="fHn-Cm-7Q7"/>
-        <segue reference="tdV-sS-d5j"/>
+        <segue reference="tt4-nB-rfe"/>
         <segue reference="vKk-7C-VKf"/>
-        <segue reference="JQm-bA-TWz"/>
+        <segue reference="tdV-sS-d5j"/>
+        <segue reference="l23-e3-J0C"/>
+        <segue reference="pWG-oz-Opr"/>
         <segue reference="Vzc-yi-Jnw"/>
         <segue reference="vdf-Gi-dZf"/>
-        <segue reference="zpE-f9-a1R"/>
-        <segue reference="l23-e3-J0C"/>
-        <segue reference="X9P-hg-DXo"/>
-        <segue reference="pWG-oz-Opr"/>
-        <segue reference="dRU-hd-aVS"/>
-        <segue reference="TBd-30-Hkx"/>
+        <segue reference="JQm-bA-TWz"/>
+        <segue reference="fHn-Cm-7Q7"/>
+        <segue reference="dd4-O7-1s4"/>
     </inferredMetricsTieBreakers>
 </document>
