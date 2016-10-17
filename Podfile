@@ -10,7 +10,7 @@ target 'SmartHome' do
 	#pod 'QRCodeReader'
 	pod ‘KxMenu’
 	pod ‘SCSiriWaveformView’
-       pod ‘SDWebImage’
+        pod ‘SDWebImage’
 	pod ‘IQKeyboardManager’
 	pod 'RBStoryboardLink', '~> 0.1'
 	#pod 'PrettyRuler', '~> 2.1.1'
