@@ -1,5 +1,5 @@
 //
-//  PushSettingController.h
+//  PushSettingCell.h
 //  SmartHome
 //
 //  Created by 逸云科技 on 2016/10/18.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PushSettingController : UIViewController
+@interface PushSettingCell : UITableViewCell
 
 @end
