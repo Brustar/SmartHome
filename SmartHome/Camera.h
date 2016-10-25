@@ -12,7 +12,5 @@
 
 //设备id
 @property (nonatomic) int deviceID;
-//开关状态
-@property (nonatomic) bool isPoweron;
 
 @end

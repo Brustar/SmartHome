@@ -82,7 +82,7 @@
                         }else{
                             planType = 1;
                         }
-                        parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":imgFileName,@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:1],@"StartTime":schedule.startTime,@"EndTime":schedule.endTime,@"AstronomicalTime":[NSNumber numberWithInt:schedule.astronomicalStartID],@"PlanType":[NSNumber numberWithInt:planType],@"WeekValue":schedule.weekDays,@"RoomID":[NSNumber numberWithInt:scene.roomID]};
+                        parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":imgFileName,@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:1],@"RoomID":[NSNumber numberWithInt:scene.roomID]};
                     }
                 }else{
                       parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":imgFileName,@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:2],@"RoomID":[NSNumber numberWithInt:scene.roomID]};
@@ -92,9 +92,6 @@
             parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":imgFileName,@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:2],@"RoomID":[NSNumber numberWithInt:scene.roomID]};
         }
         NSData *imgData = UIImagePNGRepresentation(image);
-        
-        
-        
         
         NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
         [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName imgData:imgData imgFileName:imgFileName completion:^(id responseObject) {
@@ -108,9 +105,6 @@
             FMDatabase *db = [SQLManager connetdb];
             if([db open])
             {
-               
-              
-                
                 NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,'%@',%d,null)",[responseObject[@"SID"] intValue],name,roomName,responseObject[@"ImgUrl"] ,scene.roomID,2,@"0",0];
                BOOL result = [db executeUpdate:sql];
                 if(result)
@@ -152,7 +146,7 @@
                 if(schedule.deviceID==0){
                     if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID>0)
                     {
-                        parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":imgFileName,@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:1],@"StartTime":schedule.startTime,@"EndTime":schedule.endTime,@"AstronomicalTime":[NSNumber numberWithInt:schedule.astronomicalStartID],@"PlanType":[NSNumber numberWithInt:1],@"WeekValue":schedule.weekDays,@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
+                        parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":imgFileName,@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:1],@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
                     }
                 }
             }

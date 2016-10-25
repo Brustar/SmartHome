@@ -65,10 +65,11 @@
     
     self.deviceTypeView.delegate = self;
     
-    [self.deviceTypeView setSelectButton:0];
+    //[self.deviceTypeView setSelectButton:0];
     
     [self iphoneRoomView:self.deviceTypeView didSelectButton:0];
 }
+
 -(void)setUpRoomScrollerView
 {
     NSMutableArray *roomNames = [NSMutableArray array];
