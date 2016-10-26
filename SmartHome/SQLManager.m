@@ -45,6 +45,7 @@
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT NAME FROM Devices where ID = %d",eId];
+        
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
@@ -222,11 +223,13 @@
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld",roomID];
+        
         FMResultSet *resultSet = [db executeQuery:sql];
+      
         while ([resultSet next])
         {
+         
             NSString *typeName = [resultSet stringForColumn:@"typeName"];
-            
             if ([typeName isEqualToString:@"开关灯"]||[typeName isEqualToString:@"调色灯"]||[typeName isEqualToString:@"调光灯"]) {
                 typeName = @"灯光";
             }
@@ -245,10 +248,14 @@
                 [subTypes addObject:typeName];
             }
         }
+        
     }
     [db closeOpenResultSets];
     [db close];
+    
+   
     return [subTypes copy];
+   
 }
 +(NSArray*)getSubTypeNameByRoomID:(int)rID
 {
@@ -278,6 +285,7 @@
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %d",roomID];
+      
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
@@ -986,10 +994,13 @@
    
     
     NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,SceneId];
+   
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
     NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfFile:scenePath];
+  
     if(dictionary)
     {
+        
         NSMutableArray *deviceIds=[[NSMutableArray alloc] init];
         for (NSDictionary *dic in [dictionary objectForKey:@"devices"])
         {

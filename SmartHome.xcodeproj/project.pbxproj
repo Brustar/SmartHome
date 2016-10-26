@@ -123,6 +123,7 @@
 		F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB411D00029900AB04BE /* DetailViewController.m */; };
 		F60FDB461D003FD500AB04BE /* CurtainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB441D003FD500AB04BE /* CurtainTableViewCell.m */; };
 		F60FDB471D003FD500AB04BE /* CurtainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F60FDB451D003FD500AB04BE /* CurtainTableViewCell.xib */; };
+		F618141D1DB5B0C7003B0741 /* PushSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = F618141C1DB5B0C7003B0741 /* PushSettingController.m */; };
 		F61896381D87B06300DBE6CD /* ScreenCurtainController.m in Sources */ = {isa = PBXBuildFile; fileRef = F61896371D87B06300DBE6CD /* ScreenCurtainController.m */; };
 		F618963B1D87B08300DBE6CD /* ProjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = F618963A1D87B08300DBE6CD /* ProjectController.m */; };
 		F623378D1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F623378C1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.m */; };
@@ -201,7 +202,6 @@
 		F67F1F771D3C719D00F2B7E5 /* SystemInfomationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F67F1F761D3C719D00F2B7E5 /* SystemInfomationController.m */; };
 		F67F1F811D3CC46C00F2B7E5 /* AboutUsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F67F1F801D3CC46C00F2B7E5 /* AboutUsController.m */; };
 		F68A5DD81D782D8400601612 /* ECSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = F68A5DD71D782D8400601612 /* ECSearchView.m */; };
-		F69C82301D35D214002DE6D7 /* PushSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = F69C822F1D35D214002DE6D7 /* PushSettingController.m */; };
 		F69C82331D363376002DE6D7 /* ServiceRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F69C82321D363376002DE6D7 /* ServiceRecordViewController.m */; };
 		F69C82361D363A4D002DE6D7 /* ServiceRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F69C82351D363A4D002DE6D7 /* ServiceRecordCell.m */; };
 		F6A1C02E1D586D7500856E00 /* Room.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A1C02D1D586D7500856E00 /* Room.m */; };
@@ -538,6 +538,8 @@
 		F60FDB431D003FD500AB04BE /* CurtainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurtainTableViewCell.h; sourceTree = "<group>"; };
 		F60FDB441D003FD500AB04BE /* CurtainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurtainTableViewCell.m; sourceTree = "<group>"; };
 		F60FDB451D003FD500AB04BE /* CurtainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CurtainTableViewCell.xib; sourceTree = "<group>"; };
+		F618141B1DB5B0C7003B0741 /* PushSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushSettingController.h; sourceTree = "<group>"; };
+		F618141C1DB5B0C7003B0741 /* PushSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushSettingController.m; sourceTree = "<group>"; };
 		F61896361D87B06300DBE6CD /* ScreenCurtainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenCurtainController.h; sourceTree = "<group>"; };
 		F61896371D87B06300DBE6CD /* ScreenCurtainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenCurtainController.m; sourceTree = "<group>"; };
 		F61896391D87B08300DBE6CD /* ProjectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectController.h; sourceTree = "<group>"; };
@@ -690,8 +692,6 @@
 		F67F1F801D3CC46C00F2B7E5 /* AboutUsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsController.m; sourceTree = "<group>"; };
 		F68A5DD61D782D8400601612 /* ECSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSearchView.h; sourceTree = "<group>"; };
 		F68A5DD71D782D8400601612 /* ECSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSearchView.m; sourceTree = "<group>"; };
-		F69C822E1D35D214002DE6D7 /* PushSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushSettingController.h; sourceTree = "<group>"; };
-		F69C822F1D35D214002DE6D7 /* PushSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushSettingController.m; sourceTree = "<group>"; };
 		F69C82311D363376002DE6D7 /* ServiceRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceRecordViewController.h; sourceTree = "<group>"; };
 		F69C82321D363376002DE6D7 /* ServiceRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceRecordViewController.m; sourceTree = "<group>"; };
 		F69C82341D363A4D002DE6D7 /* ServiceRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceRecordCell.h; sourceTree = "<group>"; };
@@ -918,8 +918,6 @@
 				F651640F1D37672700A6F5FA /* MyEnergyCell.m */,
 				F65B7D251D34E9E00059CFA4 /* MySettingViewController.h */,
 				F65B7D261D34E9E00059CFA4 /* MySettingViewController.m */,
-				F69C822E1D35D214002DE6D7 /* PushSettingController.h */,
-				F69C822F1D35D214002DE6D7 /* PushSettingController.m */,
 				F630C35D1D38B4FF008880BB /* AccessSettingController.h */,
 				F630C35E1D38B4FF008880BB /* AccessSettingController.m */,
 				F67091B91D9375620002DDC5 /* AreaSettingCell.h */,
@@ -980,6 +978,8 @@
 				F618963A1D87B08300DBE6CD /* ProjectController.m */,
 				F67091BA1D93BF300002DDC5 /* WindowSlidingController.h */,
 				F67091BB1D93BF300002DDC5 /* WindowSlidingController.m */,
+				F618141B1DB5B0C7003B0741 /* PushSettingController.h */,
+				F618141C1DB5B0C7003B0741 /* PushSettingController.m */,
 			);
 			path = SmartHome;
 			sourceTree = "<group>";
@@ -1812,6 +1812,7 @@
 				F66DFF281D5184730005E882 /* EditSceneController.m in Sources */,
 				0F43B1031CF4055300F3D9F0 /* IATConfig.m in Sources */,
 				F66596DD1D3F1DAD0082716A /* EnegryOfDeviceCell.m in Sources */,
+				F618141D1DB5B0C7003B0741 /* PushSettingController.m in Sources */,
 				F66CADE51D5D8654001E66EC /* DeviceType.m in Sources */,
 				0F25178A1CFD8C6500491A6C /* PackManager.m in Sources */,
 				F67F1F811D3CC46C00F2B7E5 /* AboutUsController.m in Sources */,
@@ -1905,7 +1906,6 @@
 				0F6AB86F1D782D9D0041E39C /* SunCount.m in Sources */,
 				0FCFB3861CF2912700B37DD3 /* TV.m in Sources */,
 				F65B7D271D34E9E00059CFA4 /* MySettingViewController.m in Sources */,
-				F69C82301D35D214002DE6D7 /* PushSettingController.m in Sources */,
 				F62CD87D1D950453001C66CE /* IphoneAirController.m in Sources */,
 				F65DB3411D2B5AB2002A815C /* RegisterDetailController.m in Sources */,
 				0FAF98A61CE40F3C009BDBB5 /* QRCodeReaderViewController.m in Sources */,
@@ -2079,6 +2079,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = C8JS65F469;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2117,6 +2118,7 @@
 				CODE_SIGN_ENTITLEMENTS = SmartHome/SmartHome.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = C8JS65F469;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -1,4 +1,4 @@
-//
+ //
 //  GuardController.m
 //  SmartHome
 //
@@ -175,6 +175,7 @@
     {
         self.label = label;
         label.text = self.guardNames[self.segmentedGuard.selectedSegmentIndex];
+//        label.text = @"智能门锁";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         self.switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
         cell.accessoryView = self.switchView;

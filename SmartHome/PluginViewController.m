@@ -284,8 +284,20 @@
 
 
 
-
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if(indexPath.row == 1)
+    {
+        [self performSegueWithIdentifier:@"detail" sender:self];
+    }
+}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    id theSegue = segue.destinationViewController;
+    [theSegue setValue:self.deviceid forKey:@"deviceid"];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

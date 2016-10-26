@@ -50,6 +50,7 @@
         [button removeFromSuperview];
         button.hidden = YES;
     }
+
     
     self.selectedButtonCount = 0;
 }
@@ -92,7 +93,10 @@
 
 
 - (void)setSelectButton:(int)index {
+    
+    
     UIButton *button = self.btns[index];
+    
     button.enabled = NO;
     
     CGPoint point = CGPointMake(button.frame.origin.x, 0);
@@ -140,7 +144,7 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    [self setViewFrame];
+//    [self setViewFrame];
 }
 
 

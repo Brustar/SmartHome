@@ -37,6 +37,7 @@
 {
     _roomId = roomId;
     self.deviceTypes = [SQLManager deviceSubTypeByRoomId:_roomId];
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
    // self.tableViewHight.constant = self.deviceTypes.count * self.tableView.rowHeight;
     if(self.isViewLoaded)
@@ -63,6 +64,7 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
     }
     cell.textLabel.text = self.deviceTypes[indexPath.row];
+
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

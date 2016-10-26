@@ -144,7 +144,7 @@
     {
         pushToken = info.pushToken;
     }else{
-        pushToken = @"";
+        pushToken = @"777";
     }
     NSDictionary *dict = @{@"Account":self.user.text,@"Type":[NSNumber numberWithInteger:self.userType],@"Password":[self.pwd.text md5],@"pushtoken":pushToken};
     [IOManager writeUserdefault:self.user.text forKey:@"Account"];

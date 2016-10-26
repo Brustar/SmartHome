@@ -59,7 +59,7 @@
     {
         self.saveBarBtn.enabled = NO;
     }
-    [self setupSubTypeView];
+//    [self setupSubTypeView];
     
 }
 
@@ -89,7 +89,7 @@
             
     }
     
-    [self.subTypeView setSelectButton:0];
+//    [self.subTypeView setSelectButton:0];
     [self iphoneTypeView:self.subTypeView didSelectButton:0];
     
 }

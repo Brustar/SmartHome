@@ -47,6 +47,7 @@
 {
     _roomid = roomid;
     self.deviceTypes = [SQLManager deviceSubTypeByRoomId:_roomid];
+   
    // self.tableViewHight.constant = (self.deviceTypes.count +1) * self.tableView.rowHeight ;
     if(self.isViewLoaded)
     {

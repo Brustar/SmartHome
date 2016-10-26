@@ -27,7 +27,6 @@
     self.voiceWeakImg.transform = CGAffineTransformMakeRotation(M_PI/2);
     self.voiceStrongImg.transform = CGAffineTransformMakeRotation(M_PI/2);
     
-
 }
 
 - (void)didReceiveMemoryWarning {

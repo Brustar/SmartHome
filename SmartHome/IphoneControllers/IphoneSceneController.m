@@ -21,13 +21,14 @@
 #import "SceneManager.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
-
+#import <Reachability/Reachability.h>
+#import "SocketManager.h"
 
 
 @interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,SceneCellDelegate>
 @property (strong, nonatomic) IBOutlet IphoneRoomView *roomView;
 
-
+@property (nonatomic,assign) int roomID;
 @property (nonatomic,strong) NSArray *roomList;
 @property (nonatomic,strong) UIButton *selectedRoomBtn;
 @property (nonatomic,strong) NSArray *scenes;
@@ -46,6 +47,92 @@
     self.roomList = [SQLManager getAllRoomsInfo];
     self.title = @"场景";
      [self setUpRoomView];
+    
+    //开启网络状况的监听
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityUpdate:) name: kReachabilityChangedNotification object: nil];
+    Reachability *hostReach = [Reachability reachabilityWithHostname:@"www.apple.com"];
+    [hostReach startNotifier];  //开始监听,会启动一个run loop
+    [self updateInterfaceWithReachability: hostReach];
+    
+    [self reachNotification];
+}
+//监听到网络状态改变
+- (void) reachabilityUpdate: (NSNotification* )note
+{
+    Reachability* curReach = [note object];
+    NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
+    [self updateInterfaceWithReachability: curReach];
+}
+//处理连接改变后的情况
+- (void) updateInterfaceWithReachability: (Reachability*) curReach
+{
+    //对连接改变做出响应的处理动作。
+    NetworkStatus status = [curReach currentReachabilityStatus];
+    SocketManager *sock=[SocketManager defaultManager];
+    DeviceInfo *info = [DeviceInfo defaultManager];
+    if(status == ReachableViaWWAN)
+    {
+        if (info.connectState==outDoor) {
+            NSLog(@"外出模式");
+//            [self.netBarBtn setImage:[UIImage imageNamed:@"wifi"]];
+            return;
+        }
+        if (info.connectState==offLine) {
+            NSLog(@"离线模式");
+//            [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
+            
+            //connect cloud
+            if ([info.db isEqualToString:SMART_DB]) {
+                [sock connectTcp];
+            }
+        }
+    }
+    else if(status == ReachableViaWiFi)
+    {
+        if (info.connectState==atHome) {
+            NSLog(@"在家模式");
+//            [self.netBarBtn setImage:[UIImage imageNamed:@"atHome"]];
+            return;
+        }else if (info.connectState==outDoor){
+            NSLog(@"外出模式");
+//            [self.netBarBtn setImage:[UIImage imageNamed:@"wifi"]];
+        }
+        if (info.connectState==offLine) {
+            NSLog(@"离线模式");
+//            [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
+            if ([info.db isEqualToString:SMART_DB]) {
+                int sed = (arc4random() % 3) + 1;
+                if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad && sed == 1) {
+                    //connect master
+                    [sock connectUDP:[IOManager udpPort]];
+                }else{
+                    //connect cloud
+                    [sock connectTcp];
+                }
+            }
+        }
+    }else{
+        NSLog(@"离线模式");
+//        [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
+    }
+    
+}
+
+- (void)reachNotification
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subTypeNotification:) name:@"subType" object:nil];
+}
+- (void)subTypeNotification:(NSNotification *)notification
+{
+    NSDictionary *dict = notification.userInfo;
+    
+    self.roomID = [dict[@"subType"] intValue];
+    
+    self.scenes = [SQLManager getScensByRoomId:self.roomID];
+    
+//    [self setUpSceneButton];
+//    [self judgeScensCount:self.scenes];
+    
 }
 
 -(void)setUpRoomView

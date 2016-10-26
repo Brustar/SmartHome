@@ -56,12 +56,14 @@
     [self setUpRoomScrollerView];
     //   [self setUpScrollerView];
     
+    
 }
 
 
 -(void)setUpScrollerView
 {
     self.deviceTypeView.dataArray = self.deviceTypes;
+    
     
     self.deviceTypeView.delegate = self;
     
@@ -79,7 +81,6 @@
         [roomNames addObject:roomName];
     }
     self.iphoneRoomView.dataArray = roomNames;
-    
     self.iphoneRoomView.delegate = self;
     
     [self.iphoneRoomView setSelectButton:0];
