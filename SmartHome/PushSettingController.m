@@ -79,7 +79,7 @@
     
     NSString *url = [NSString stringWithFormat:@"%@GetUserNotifySettings.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSLog(@"-------zxp------%@",auothorToken);
+
     if (auothorToken) {
         NSDictionary *dict = @{@"AuthorToken":auothorToken};
         HttpManager *http=[HttpManager defaultManager];
@@ -140,13 +140,13 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    NSLog(@"------66666-----%ld",self.typeNames.count);
+ 
     return self.typeNames.count;
     
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"====%ld",self.names.count);
+    
     NSArray *item = self.names[section];
     
     return item.count;

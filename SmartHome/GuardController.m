@@ -36,7 +36,7 @@
     if(!_guardIDs)
     {
         _guardIDs = [NSMutableArray array];
-        if(self.sceneid > 0 && self.isAddDevice)
+        if(self.sceneid > 0 && !self.isAddDevice)
         {
             NSArray *guard = [SQLManager getDeviceIDsBySeneId:[self.sceneid intValue]];
             for(int i = 0; i < guard.count; i++)
@@ -54,9 +54,10 @@
         }else{
             [_guardIDs addObject:self.deviceid];
         }
-        
     }
     return _guardIDs;
+    
+    
 }
 -(NSMutableArray *)guardNames
 {

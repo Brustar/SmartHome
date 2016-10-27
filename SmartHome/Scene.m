@@ -19,6 +19,8 @@
         [self setPicName:@""];
         [self setSchedules:@[]];
         [self setDevices:@[]];
+        
+        
     }
     return self;
 }

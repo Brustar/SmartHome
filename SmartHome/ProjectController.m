@@ -26,7 +26,7 @@
     if(!_projectIds)
     {
         _projectIds = [NSMutableArray array];
-        if(self.sceneid > 0 && self.isAddDevice)
+        if(self.sceneid > 0 && !self.isAddDevice)
         {
             NSArray *projects = [SQLManager getDeviceIDsBySeneId:[self.sceneid intValue]];
 
@@ -100,8 +100,8 @@
     {
         DetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
 
-        cell.label.text = self.projectNames[self.segment.selectedSegmentIndex];
-//        cell.label.text = @"投影";
+//        cell.label.text = self.projectNames[self.segment.selectedSegmentIndex];
+        cell.label.text = @"投影";
         self.cell = cell;
         return cell;
         

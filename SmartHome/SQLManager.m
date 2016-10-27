@@ -11,6 +11,7 @@
 #import "DeviceType.h"
 #import "DeviceInfo.h"
 #import "Room.h"
+#import "Scene.h"
 
 @implementation SQLManager
 
@@ -991,7 +992,7 @@
 //根据场景ID得到改场景下的所有的设备ID
 +(NSArray *)getDeviceIDsBySeneId:(int)SceneId;
 {
-   
+//   NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, sceneid]];
     
     NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,SceneId];
    
@@ -1016,6 +1017,9 @@
         }
         return [deviceIds copy];
     }else{
+       
+
+        
         return nil;
     }
     

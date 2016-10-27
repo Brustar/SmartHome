@@ -1274,6 +1274,9 @@
                                                 <constraint firstAttribute="height" constant="100" id="vhP-JB-xLL"/>
                                             </constraints>
                                             <state key="normal" backgroundImage="placeholder"/>
+                                            <connections>
+                                                <action selector="PorTraitButton:" destination="gcF-dp-BGl" eventType="touchUpInside" id="9qa-q7-nob"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="auA-aO-F2z">
                                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
@@ -1328,6 +1331,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="PorTraintButton" destination="YuC-yL-GDW" id="20n-rA-kQv"/>
                         <outlet property="headView" destination="OBg-dv-qTP" id="n0h-0n-NTK"/>
                         <outlet property="nameLabel" destination="auA-aO-F2z" id="Uaq-qb-56v"/>
                         <outlet property="tableHight" destination="5yv-lN-sCP" id="N0J-lF-9Ns"/>

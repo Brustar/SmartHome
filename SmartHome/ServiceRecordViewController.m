@@ -220,6 +220,8 @@
 
     
     [self clickCancelDeleteBtn:nil];
+    
+    [self.tableView reloadData];
 }
 
 -(void)sendDeleteRequestWithArray:(NSArray *)deleteArr;
