@@ -89,31 +89,6 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveBarButton;
 
 @end
-@interface UIImagePickerController (LandScapeImagePicker)
-
-- (UIStatusBarStyle)preferredStatusBarStyle;
-- (NSUInteger)supportedInterfaceOrientations;
-- (BOOL)prefersStatusBarHidden;
-@end
-
-@implementation UIImagePickerController (LandScapeImagePicker)
-
-- (NSUInteger) supportedInterfaceOrientations
-{
-    return UIInterfaceOrientationMaskLandscape;
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleLightContent;
-}
-
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
-}
-
-@end
 
 @implementation EditSceneController
 
@@ -255,11 +230,7 @@
         }else {
             [cell.button setBackgroundImage:[UIImage imageNamed:@"safe"] forState:UIControlStateNormal];
         }
-        
-       
-
-        
-               }
+    }
     
     return cell;
 }
@@ -272,17 +243,16 @@
     
     if(tableView == self.tableView)
     {
-        
-   
-     self.subTypeArr = [SQLManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.devicesTypes[indexPath.row]];
-     
-    [self.subDeviceTableView reloadData];
+        self.subTypeArr = [SQLManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.devicesTypes[indexPath.row]];
+        [self.subDeviceTableView reloadData];
     }
-    if(tableView == self.subDeviceTableView)
-        
-    {
-        //灯光，窗帘，DVD，网络电视
     
+    if(tableView == self.subDeviceTableView)
+    {
+        if (!self.subTypeArr) {
+            return;
+        }
+        //灯光，窗帘，DVD，网络电视
         NSString *typeName = self.subTypeArr[indexPath.row];
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         if([typeName isEqualToString:@"网络电视"])
