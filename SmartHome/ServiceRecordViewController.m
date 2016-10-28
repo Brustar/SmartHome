@@ -1,4 +1,4 @@
-//
+ //
 //  ServiceRecordViewController.m
 //  SmartHome
 //
@@ -146,7 +146,9 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ServiceRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ServiceRecordCell" forIndexPath:indexPath];
     cell.title.text = self.recoreds[indexPath.row];
-    cell.subTitle.text = self.times[indexPath.row];
+    if (self.times.count>indexPath.row) {
+        cell.subTitle.text = self.times[indexPath.row];
+    }
     cell.evaluateBtn.tag = indexPath.row;
     [cell.evaluateBtn addTarget:self action:@selector(goToComment:) forControlEvents:UIControlEventTouchUpInside];
     return cell;

@@ -64,6 +64,15 @@
     }
     return _enegers;
 }
+-(NSMutableArray *)energys
+{
+
+    if (!_energys) {
+        _energys = [NSMutableArray array];
+    }
+
+    return _energys;
+}
 -(void)sendRequestToGetEenrgy
 {
     NSString *url = [NSString stringWithFormat:@"%@EnergyAnalysis.aspx",[IOManager httpAddr]];
@@ -168,6 +177,7 @@
             cell.titleLabel.text = @"本月总能耗超出上月";
             cell.timeLabel.text =@"节约能耗，从我做起";
             cell.totalLabel.text = [NSString stringWithFormat:@"超出上月的能耗:%@%%",dic[@"overEngry"]];
+            
         }else{
             NSString *ename = dic[@"ename"];
             int hour = [dic[@"hour"] intValue];
@@ -417,18 +427,18 @@
 - (IBAction)clickSureBtn:(id)sender {
     //放置要删除的对象
     NSMutableArray *deleteArray = [NSMutableArray array];
-    NSMutableArray *deletedTime = [NSMutableArray array];
+//    NSMutableArray *deletedTime = [NSMutableArray array];
     // 要删除的row
     NSArray *selectedArray = [self.tableView indexPathsForSelectedRows];
     
     for (NSIndexPath *indexPath in selectedArray) {
         //[deleteArray addObject:self.Mydefaults[indexPath.row]];
-        [deleteArray addObject:self.energys[indexPath.row]];
-        [deletedTime addObject:self.times[indexPath.row]];
+        [deleteArray addObject:self.enegers[indexPath.row]];
+//        [deletedTime addObject:self.times[indexPath.row]];
     }
     // 先删除数据源
-    [self.energys removeObjectsInArray:deleteArray];
-    [self.times removeObjectsInArray:deletedTime];
+    [self.enegers removeObjectsInArray:deleteArray];
+//    [self.times removeObjectsInArray:deletedTime];
     
     [self clickCancleBtn:nil];
 

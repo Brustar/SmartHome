@@ -26,6 +26,11 @@
 #import "MBProgressHUD+NJ.h"
 #import "ScreenCurtainController.h"
 #import "ProjectController.h"
+#import "IphoneTVController.h"
+#import "IphoneAirController.h"
+#import "IphoneFMController.h"
+#import "IphoneDVDController.h"
+#import "IphoneNetTvController.h"
 
 @interface SearchViewController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -106,12 +111,24 @@
     int eId =(int)[SQLManager deviceIDByDeviceName:self.searchResult[indexPath.row]];
     NSString *typeName = [SQLManager deviceTypeNameByDeviceID:eId];
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    if([typeName isEqualToString:@"网络电视"])
+    UIStoryboard *iphoneBoard  = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+        if([typeName isEqualToString:@"网络电视"])
     {
-        TVController *tVC = [storyBoard instantiateViewControllerWithIdentifier:@"TVController"];
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
+            
+            IphoneTVController *tvc = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneTVController"];
+            
+            tvc.deviceid = [NSString stringWithFormat:@"%d",eId];
+            [self.navigationController pushViewController:tvc animated:YES];
+            
+        }else{
+            
+            TVController *tVC = [storyBoard instantiateViewControllerWithIdentifier:@"TVController"];
+            
+            tVC.deviceid = [NSString stringWithFormat:@"%d",eId];
+            [self.navigationController pushViewController:tVC animated:YES];
+        }
         
-        tVC.deviceid = [NSString stringWithFormat:@"%d",eId];
-        [self.navigationController pushViewController:tVC animated:YES];
         
     }else if([typeName isEqualToString:@"灯光"])
     {
@@ -131,30 +148,68 @@
         
     }else if([typeName isEqualToString:@"DVD"])
     {
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
+            
+            IphoneDVDController * IphoneDVD = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneDVDController"];
+            IphoneDVD.deviceid = [NSString stringWithFormat:@"%d",eId];
+            [self.navigationController pushViewController:IphoneDVD animated:YES];
+            
+        }else{
+            
+            DVDController *dvdVC = [storyBoard instantiateViewControllerWithIdentifier:@"DVDController"];
+            
+            dvdVC.deviceid = [NSString stringWithFormat:@"%d",eId];
+            [self.navigationController pushViewController:dvdVC animated:YES];
+        }
         
-        DVDController *dvdVC = [storyBoard instantiateViewControllerWithIdentifier:@"DVDController"];
-       
-        dvdVC.deviceid = [NSString stringWithFormat:@"%d",eId];
-        [self.navigationController pushViewController:dvdVC animated:YES];
         
     }else if([typeName isEqualToString:@"FM"])
     {
-        FMController *fmVC = [storyBoard instantiateViewControllerWithIdentifier:@"FMController"];
-       
-        fmVC.deviceid = [NSString stringWithFormat:@"%d",eId];
-        [self.navigationController pushViewController:fmVC animated:YES];
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
+            
+            IphoneFMController *IphonefmVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneFMController"];
+            
+            IphonefmVC.deviceid = [NSString stringWithFormat:@"%d",eId];
+            [self.navigationController pushViewController:IphonefmVC animated:YES];
+        }else{
+            
+            FMController *fmVC = [storyBoard instantiateViewControllerWithIdentifier:@"FMController"];
+            
+            fmVC.deviceid = [NSString stringWithFormat:@"%d",eId];
+            [self.navigationController pushViewController:fmVC animated:YES];
+        }
+      
         
         
     }else if([typeName isEqualToString:@"机顶盒"]){
-        NetvController *netVC = [storyBoard instantiateViewControllerWithIdentifier:@"NetvController"];
-        netVC.deviceid = [NSString stringWithFormat:@"%d",eId];
-        [self.navigationController pushViewController:netVC animated:YES];
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
+            IphoneNetTvController * Iphonenet = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneNetTvController"];
+            Iphonenet.deviceid = [NSString stringWithFormat:@"%d",eId];
+            [self.navigationController pushViewController:Iphonenet animated:YES];
+            
+        }else{
+            
+            NetvController *netVC = [storyBoard instantiateViewControllerWithIdentifier:@"NetvController"];
+            netVC.deviceid = [NSString stringWithFormat:@"%d",eId];
+            [self.navigationController pushViewController:netVC animated:YES];
+        }
+       
         
     }else if([typeName isEqualToString:@"空调"]){
-        
-        AirController *airVC = [storyBoard instantiateViewControllerWithIdentifier:@"AirController"];
-        airVC.deviceid = [NSString stringWithFormat:@"%d",eId];
-        [self.navigationController pushViewController:airVC animated:YES];
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
+            
+            IphoneAirController *air = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneAirController"];
+            
+            air.deviceid = [NSString stringWithFormat:@"%d",eId];
+            [self.navigationController pushViewController:air animated:YES];
+            
+        }else{
+            
+            AirController *airVC = [storyBoard instantiateViewControllerWithIdentifier:@"AirController"];
+            airVC.deviceid = [NSString stringWithFormat:@"%d",eId];
+            [self.navigationController pushViewController:airVC animated:YES];
+        }
+       
     }else if([typeName isEqualToString:@"摄像头"]){
         CameraController *camerVC = [storyBoard instantiateViewControllerWithIdentifier:@"CameraController"];
         camerVC.deviceid = [NSString stringWithFormat:@"%d",eId];

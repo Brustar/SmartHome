@@ -82,10 +82,6 @@
     self.firstView.hidden = YES;
     self.secondView.hidden = YES;
 
-    
-    
-   
-    
     //开启网络状况的监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityUpdate:) name: kReachabilityChangedNotification object: nil];
     Reachability *hostReach = [Reachability reachabilityWithHostname:@"www.apple.com"];
