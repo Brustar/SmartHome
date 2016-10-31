@@ -491,9 +491,22 @@
         NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
         NSDictionary *dic = @{@"AuthorToken":authorToken,@"EID":self.deviceid,@"Cnumber":self.channeNumber.text,@"CName":self.channelName.text,@"ImgFileName":fileName,@"ImgFile":@""};
         
-        [[UploadManager defaultManager] uploadImage:self.chooseImage url:url dic:dic fileName:fileName completion:^(id responseObject) {
-            [self storChannelToSql:responseObject];
-        }];
+        if (self.chooseImg && url && dic && fileName) {
+            
+            [[UploadManager defaultManager] uploadImage:self.chooseImage url:url dic:dic fileName:fileName completion:^(id responseObject) {
+                [self storChannelToSql:responseObject];
+            }];
+        }else{
+            
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"电视图标要添加" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:nil];
+            [alertController addAction:cancelAction];
+            [alertController addAction:okAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
+        
+       
     }
    
     [self hiddenCoverView];

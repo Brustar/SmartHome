@@ -14,6 +14,9 @@
 #import "TVChannel.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
+#import "VolumeManager.h"
+#import "SceneManager.h"
+#import "SocketManager.h"
 
 @interface IphoneFMController ()<UICollectionViewDelegate,UICollectionViewDataSource,TXHRrettyRulerDelegate,UIGestureRecognizerDelegate,FMCollectionViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *hzLabel;
@@ -57,10 +60,68 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.title = @"收音机";
+    
     self.hzLabel.transform = CGAffineTransformMakeRotation(M_PI/2 + M_PI);
     self.eNumber = [SQLManager getENumber:[self.deviceid intValue]];
     [self setRuleForFMChannel];
+    
+    
+    
+    self.volumn.continuous = NO;
+    [self.volumn addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
+    
+    self.eNumber = [SQLManager getENumber:[self.deviceid intValue]];
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+    VolumeManager *volume=[VolumeManager defaultManager];
+    [volume start];
+    // Do any additional setup after loading the view.
+    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+    if ([self.sceneid intValue]>0) {
+        for(int i=0;i<[_scene.devices count];i++)
+        {
+            if ([[_scene.devices objectAtIndex:i] isKindOfClass:[Radio class]]) {
+                self.volumn.value=((Radio*)[_scene.devices objectAtIndex:i]).rvolume/100.0;
+                self.numberOfChannel.text=  [NSString stringWithFormat:@"%.1f", ((Radio*)[_scene.devices objectAtIndex:i]).channel];
+            }
+        }
+    }
+//    [self setUpPageController];
+    
+    [self setRuleForFMChannel];
+    
+    SocketManager *sock=[SocketManager defaultManager];
+    sock.delegate=self;
 }
+
+-(IBAction)save:(id)sender
+{
+    NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volumn.value*100 deviceID:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+    
+//    self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
+    
+    Radio *device=[[Radio alloc] init];
+    [device setDeviceID:6];
+    [device setRvolume:self.volumn.value*100];
+    [device setChannel:[self.numberOfChannel.text floatValue]];
+    
+    [_scene setSceneID:[self.sceneid intValue]];
+    [_scene setRoomID:self.roomID];
+    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+    
+    [_scene setReadonly:NO];
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+    
+}
+
 -(void)setRuleForFMChannel
 {
     CGFloat rule = [self.numberOfChannel.text floatValue];
@@ -125,6 +186,15 @@
     http.delegate = self;
     http.tag = 1;
     [http sendPost:url param:dic];
+    
+}
+
+-(void)FmEditAction:(FMCollectionViewCell *)cell
+{
+//    self.coverView.hidden = NO;
+//    self.editView.hidden = NO;
+//    self.channelNameEdit.text = cell.channelName.text;
+//    self.channelIDEdit.text = cell.chanelNum.text;
     
 }
 

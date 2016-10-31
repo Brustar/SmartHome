@@ -15,12 +15,7 @@
 #import "TVController.h"
 #import "MBProgressHUD+NJ.h"
 @interface IphoneAddTVChannelController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,TVIconControllerDelegate>
-@property (weak, nonatomic) IBOutlet UIButton *addBtn;
-@property (weak, nonatomic) IBOutlet UITextField *channelNumber;
-@property (weak, nonatomic) IBOutlet UITextField *channelName;
-@property (nonatomic,strong) UIImage *chooseImage;
-@property (nonatomic,strong) NSString *chooseImgeName;
-@property (nonatomic,strong) NSString *eNumber;
+
 @end
 
 @implementation IphoneAddTVChannelController
@@ -114,12 +109,22 @@
         NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
         NSDictionary *dic = @{@"AuthorToken":authorToken,@"EID":self.deviceid,@"Cnumber":self.channelNumber.text,@"CName":self.channelName.text,@"ImgFileName":fileName,@"ImgFile":@""};
         
-        [[UploadManager defaultManager] uploadImage:self.chooseImage url:url dic:dic fileName:fileName completion:^(id responseObject) {
-            [self writeTVChannelsConfigDataToSQL:responseObject withParent:@"TV"];
+        
+        if (self.chooseImage && url && dic && fileName) {
             
-           
+            [[UploadManager defaultManager] uploadImage:self.chooseImage url:url dic:dic fileName:fileName completion:^(id responseObject) {
+                [self writeTVChannelsConfigDataToSQL:responseObject withParent:@"TV"];
+                
+            }];
+        }else{
             
-        }];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"电视图标要添加" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:nil];
+            [alertController addAction:cancelAction];
+            [alertController addAction:okAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
     }
 
 }

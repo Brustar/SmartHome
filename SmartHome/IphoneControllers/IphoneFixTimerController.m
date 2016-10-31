@@ -171,7 +171,7 @@
     {
         [self.customTimeBtn setImage:[UIImage imageNamed:@"selected"] forState:UIControlStateSelected];
         self.customView.hidden = NO;
-        self.customViewHight.constant = 300;
+        self.customViewHight.constant = 260;
         self.astronomicalBut.enabled = NO;
     }else{
         [self.customTimeBtn setImage:[UIImage imageNamed:@"unselected"] forState:UIControlStateSelected];
@@ -333,7 +333,12 @@
         }
     }
     
-
+    if (self.startTimeBtn.selected || self.endTimeBtn.selected) {
+        self.pickerTime.hidden = NO;
+        
+    } else {
+        self.pickerTime.hidden = YES;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -16,8 +16,43 @@
 #import "MBProgressHUD+NJ.h"
 #import "HttpManager.h"
 #import "IphoneAddTVChannelController.h"
+#import "TVIconController.h"
+#import "VolumeManager.h"
+#import "SceneManager.h"
+#import "SocketManager.h"
+#import "SCWaveAnimationView.h"
+#import "PackManager.h"
 
-@interface IphoneTVController ()<UICollectionViewDelegate,UICollectionViewDataSource,TVLogoCellDelegate>
+@interface UIImagePickerController (LandScapeImagePicker)
+
+- (UIStatusBarStyle)preferredStatusBarStyle;
+- (NSUInteger)supportedInterfaceOrientations;
+- (BOOL)prefersStatusBarHidden;
+@end
+
+@implementation UIImagePickerController (LandScapeImagePicker)
+
+- (NSUInteger) supportedInterfaceOrientations
+{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+        return UIInterfaceOrientationMaskLandscape;
+    else
+        return UIInterfaceOrientationMaskPortrait;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleDefault;
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return NO;
+}
+
+@end
+
+@interface IphoneTVController ()<UICollectionViewDelegate,UICollectionViewDataSource,TVLogoCellDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UISlider *volumeSlider;
 @property (weak, nonatomic) IBOutlet UIImageView *voiceStrongImg;
 
@@ -30,12 +65,17 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *tvLogoCollectionView;
 
 @property (weak, nonatomic) IBOutlet UIView *touchpad;
+
+
 @property (nonatomic,strong) TVLogoCell *cell;
 
 @end
 
 @implementation IphoneTVController
+{
+    IphoneAddTVChannelController * iphoneVC;
 
+}
 -(NSMutableArray*)allFavourTVChannels
 {
     if(!_allFavourTVChannels)
@@ -44,7 +84,7 @@
         _allFavourTVChannels = [ChannelManager getAllChannelForFavoritedForType:@"TV" deviceID:[self.deviceid intValue]];
         if(_allFavourTVChannels == nil || _allFavourTVChannels.count == 0)
         {
-            
+            self.tvLogoCollectionView.backgroundColor = [UIColor lightGrayColor];
         }
     }
     return _allFavourTVChannels;
@@ -74,11 +114,173 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.title = @"电视";
+    iphoneVC.eNumber = [SQLManager getENumber:[self.deviceid intValue]];
+    
     self.volumeSlider.transform = CGAffineTransformMakeRotation(M_PI/2);
     self.voiceWeakImg.transform = CGAffineTransformMakeRotation(M_PI/2);
     self.voiceStrongImg.transform = CGAffineTransformMakeRotation(M_PI/2);
     self.tvLogoCollectionView.bounces = NO;
+    self.volumeSlider.continuous = NO;
+    [self.volumeSlider addTarget:self action:@selector(Iphonesave:) forControlEvents:UIControlEventValueChanged];
     
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+    VolumeManager *volume=[VolumeManager defaultManager];
+    [volume start];
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+    if ([self.sceneid intValue]>0) {
+        for(int i=0;i<[_scene.devices count];i++)
+        {
+            if ([[_scene.devices objectAtIndex:i] isKindOfClass:[TV class]]) {
+                self.volumeSlider.value=((TV *)[_scene.devices objectAtIndex:i]).volume/100.0;
+            }
+        }
+    }
+    
+    UISwipeGestureRecognizer *recognizer;
+    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(IphonehandleSwipeFrom:)];
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [[self touchpad] addGestureRecognizer:recognizer];
+    
+    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(IphonehandleSwipeFrom:)];
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    [[self touchpad] addGestureRecognizer:recognizer];
+    
+    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(IphonehandleSwipeFrom:)];
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionUp)];
+    [[self touchpad] addGestureRecognizer:recognizer];
+    
+    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(IphonehandleSwipeFrom:)];
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionDown)];
+    [[self touchpad] addGestureRecognizer:recognizer];
+    
+    SocketManager *sock=[SocketManager defaultManager];
+    sock.delegate=self;
+    
+}
+
+- (void)IphonehandleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
+    NSData *data=nil;
+    switch (recognizer.direction) {
+        case UISwipeGestureRecognizerDirectionLeft:
+            data=[[DeviceInfo defaultManager] sweepLeft:self.deviceid];
+            NSLog(@"Left");
+            break;
+        case UISwipeGestureRecognizerDirectionRight:
+            data=[[DeviceInfo defaultManager] sweepRight:self.deviceid];
+            NSLog(@"right");
+            break;
+        case UISwipeGestureRecognizerDirectionUp:
+            data=[[DeviceInfo defaultManager] sweepUp:self.deviceid];
+            NSLog(@"up");
+            break;
+        case UISwipeGestureRecognizerDirectionDown:
+            data=[[DeviceInfo defaultManager] sweepDown:self.deviceid];
+            NSLog(@"down");
+            break;
+            
+        default:
+            break;
+    }
+    
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+    
+    [SCWaveAnimationView waveAnimationAtDirection:recognizer.direction view:self.touchpad];
+}
+
+
+-(IBAction)Iphonesave:(id)sender
+{
+    if ([sender isEqual:self.volumeSlider]) {
+        NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volumeSlider.value*100 deviceID:self.deviceid];
+//        self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
+    
+    TV *device=[[TV alloc] init];
+    [device setDeviceID:[self.deviceid intValue]];
+    [device setVolume:self.volumeSlider.value*100];
+    
+    
+    [_scene setSceneID:[self.sceneid intValue]];
+    [_scene setRoomID:self.roomID];
+    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+    
+    [_scene setReadonly:NO];
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+    
+}
+
+#pragma mark - TCP recv delegate
+-(void)recv:(NSData *)data withTag:(long)tag
+{
+    Proto proto=protocolFromData(data);
+    
+    if (proto.masterID != [[DeviceInfo defaultManager] masterID]) {
+        return;
+    }
+    
+    
+    if (tag==0) {
+        if (proto.action.state == PROTOCOL_VOLUME_UP || proto.action.state == PROTOCOL_VOLUME_DOWN || proto.action.state == PROTOCOL_MUTE) {
+            self.volumeSlider.value=proto.action.RValue/100.0;
+        }
+    }
+}
+
+#pragma mark - Navigation
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    if([segue.identifier isEqualToString:@"detailSegue"])
+//    {
+//        id theSegue = segue.destinationViewController;
+//        [theSegue setValue:@"1" forKey:@"deviceid"];
+//    }else{
+//        TVIconController *iconVC = segue.destinationViewController;
+//        iconVC.delegate = self;
+//    }
+//    
+//}
+
+- (IBAction)domute:(id)sender
+{
+    self.volumeSlider.value=0.0;
+    
+    NSData *data=[[DeviceInfo defaultManager] mute:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if([keyPath isEqualToString:@"volume"])
+    {
+        DeviceInfo *device=[DeviceInfo defaultManager];
+        self.volumeSlider.value=[[device valueForKey:@"volume"] floatValue]*100;
+        /*
+         KEVolumeUtil *volumeManager=[KEVolumeUtil shareInstance];
+         NSData *data=nil;
+         if (volumeManager.willup) {
+         data = [device volumeUp:self.deviceid];
+         }else{
+         data = [device volumeDown:self.deviceid];
+         }
+         
+         SocketManager *sock=[SocketManager defaultManager];
+         [sock.socket writeData:data withTimeout:1 tag:1];
+         */
+//        [self save:nil];
+        [self Iphonesave:nil];
+    }
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -98,19 +300,23 @@
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    TVLogoCell *cell =(TVLogoCell*)[collectionView cellForItemAtIndexPath:indexPath];
-    [cell hiddenEditBtnAndDeleteBtn];
-    [cell useLongPressGesture];
+    if (collectionView == self.tvLogoCollectionView) {
+        TVLogoCell *cell =(TVLogoCell*)[collectionView cellForItemAtIndexPath:indexPath];
+        [cell hiddenEditBtnAndDeleteBtn];
+        [cell useLongPressGesture];
+        
+        
+        int channelValue=(int)[[self.allFavourTVChannels objectAtIndex:indexPath.row] channel_number];
+        NSData *data=[[DeviceInfo defaultManager] switchProgram:channelValue deviceID:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
+   
 
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 
-}
-
-
+#pragma mark - TVLogoCellDelegate
 -(void)tvDeleteAction:(TVLogoCell *)cell
 {
     self.cell = cell;
@@ -129,6 +335,19 @@
     
     
 }
+
+
+-(void)tvEditAction:(TVLogoCell *)cell
+{
+    NSIndexPath *indexPath = [self.tvLogoCollectionView indexPathForCell:cell];
+    TVChannel *channel = self.allFavourTVChannels[indexPath.row];
+    [iphoneVC.addBtn setBackgroundImage:cell.imgView.image forState:UIControlStateNormal];
+    iphoneVC.channelName.text = channel.channel_name;
+    iphoneVC.channelNumber.text = [NSString stringWithFormat:@"%ld",channel.channel_number];
+  
+}
+
+
 -(void) httpHandler:(id) responseObject tag:(int)tag
 {
     if(tag == 1)
@@ -155,10 +374,36 @@
     }
 
 }
+- (IBAction)lastBtn:(id)sender {
+    NSData *data=nil;
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    data=[device forward:self.deviceid];
+    
+}
+- (IBAction)nextBtn:(id)sender {
+    NSData *data=nil;
+    DeviceInfo *device=[DeviceInfo defaultManager];
+   data=[device next:self.deviceid];
+    
+}
+
+
+#pragma mark - touch detection
+- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    CGPoint touchPoint = [[touches anyObject] locationInView:[[UIApplication sharedApplication] keyWindow]];
+    CGRect rect=[self.touchpad convertRect:self.touchpad.bounds toView:self.view];
+    if (CGRectContainsPoint(rect,touchPoint)) {
+        NSLog(@"%.0fx%.0fpx", touchPoint.x, touchPoint.y);
+        [SCWaveAnimationView waveAnimationAtPosition:touchPoint];
+    }
+}
+
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    IphoneAddTVChannelController *addVC = segue.destinationViewController;
-    addVC.deviceid = self.deviceid;
+    iphoneVC = segue.destinationViewController;
+    iphoneVC.deviceid = self.deviceid;
 }
 /*
 #pragma mark - Navigation

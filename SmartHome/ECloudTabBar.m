@@ -275,6 +275,9 @@
     ECloudButton *button = nil;
     
     if (0 == type) {
+        if (self.leftView.subviews.count<subType) {
+            return;
+        }
         button = self.leftView.subviews[subType -1];
     } else {
         button = self.rightView.subviews[type - 1];

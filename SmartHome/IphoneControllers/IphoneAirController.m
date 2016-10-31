@@ -8,21 +8,109 @@
 
 #import "IphoneAirController.h"
 #import "RulerView.h"
-@interface IphoneAirController ()<RulerViewDatasource, RulerViewDelegate>
+#import "SQLManager.h"
+#import "SceneManager.h"
+#import "SocketManager.h"
+#import "PackManager.h"
+
+@interface IphoneAirController ()<RulerViewDatasource, RulerViewDelegate,UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet RulerView *thermometerView;
 @property (weak, nonatomic) IBOutlet UILabel *showTemLabel;
+@property (weak, nonatomic) IBOutlet UITableView *paramView;
 
 @end
 
 @implementation IphoneAirController
-
+- (void)setRoomID:(int)roomID
+{
+    _roomID = roomID;
+    if(roomID)
+    {
+        self.deviceid = [SQLManager deviceIDWithRoomID:self.roomID withType:@"空调"];
+    }
+    
+    
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.params=@[@[@"制热",@"制冷",@"抽湿",@"自动"],@[@"向上",@"向下"],@[@"高风",@"中风",@"低风"],@[@"0.5H",@"1H",@"2H",@"3H"]];
+//    self.paramView.scrollEnabled=YES;
+    
+    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+    if ([self.sceneid intValue]>0) {
+        for(int i=0;i<[_scene.devices count];i++)
+        {
+            if ([[_scene.devices objectAtIndex:i] isKindOfClass:[Aircon class]]) {
+                
+                self.showTemLabel.text = [NSString stringWithFormat:@"%d°C", ((Aircon*)[_scene.devices objectAtIndex:i]).temperature];
+                self.currentMode=((Aircon*)[_scene.devices objectAtIndex:i]).mode;
+                self.currentLevel=((Aircon*)[_scene.devices objectAtIndex:i]).WindLevel;
+                self.currentDirection=((Aircon*)[_scene.devices objectAtIndex:i]).Windirection;
+                self.currentTiming=((Aircon*)[_scene.devices objectAtIndex:i]).timing;
+            }
+        }
+    }
+    
     self.thermometerView.datasource = self;
     self.thermometerView.delegate = self;
     [self.thermometerView updateCurrentValue:24];
-}
+    
+    SocketManager *sock=[SocketManager defaultManager];
+    sock.delegate=self;
 
+}
+-(IBAction)Iphonesave:(id)sender
+{
+    
+    Aircon *device = [[Aircon alloc]init];
+    [device setDeviceID:[self.deviceid intValue]];
+    [device setMode:self.currentMode];
+    [device setWindLevel:self.currentLevel];
+    [device setWindirection:self.currentDirection];
+    [device setTiming:self.currentTiming];
+    
+    [device setTemperature:[self.showTemLabel.text intValue]];
+    
+    
+    [_scene setSceneID:[self.sceneid intValue]];
+    [_scene setRoomID:self.roomID];
+    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+    [_scene setReadonly:NO];
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+    
+}
+#pragma mark - TCP recv delegate
+-(void)recv:(NSData *)data withTag:(long)tag
+{
+    Proto proto=protocolFromData(data);
+    
+    if (proto.masterID != [[DeviceInfo defaultManager] masterID]) {
+        return;
+    }
+    
+//    if (tag==0) {
+//        if (proto.action.state==0x7A) {
+//            self.showTemLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
+//        }
+//        if (proto.action.state==0x8A) {
+//            NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
+////            self.wetLabel.text = valueString;
+//        }
+//        if (proto.action.state==0x7F) {
+//            NSString *valueString = [NSString stringWithFormat:@"%d ug/m",proto.action.RValue];
+////            self.pmLabel.text = valueString;
+//        }
+//        if (proto.action.state==0x7E) {
+//            NSString *valueString = [NSString stringWithFormat:@"%d db",proto.action.RValue];
+////            self.noiseLabel.text = valueString;
+//        }
+//    }
+}
 #pragma mark - RulerViewDelegate
 - (void)rulerView:(RulerView *)rulerView didChangedCurrentValue:(CGFloat)currentValue {
     NSInteger value = round(currentValue);
@@ -33,15 +121,262 @@
     
     
 }
+- (IBAction)changeButton:(UIButton *)sender {
+    
+    if (sender.tag == 0) {
+        self.params=@[@[@"制热",@"制冷",@"抽湿",@"自动"],@[@"向上",@"向下"],@[@"高风",@"中风",@"低风"],@[@"0.5H",@"1H",@"2H",@"3H"]];
+
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您的选择是?" preferredStyle:UIAlertControllerStyleAlert];
+
+        UIAlertAction *Action1 = [UIAlertAction actionWithTitle:@"制热" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            NSLog(@"The \"Okay/Cancel\" alert's cancel action occured.");
+        }];
+        
+        UIAlertAction * Action2 = [UIAlertAction actionWithTitle:@"制冷" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            NSLog(@"The \"Okay/Cancel\" alert's other action occured.");
+        }];
+        UIAlertAction *Action3 = [UIAlertAction actionWithTitle:@"抽湿" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            NSLog(@"The \"Okay/Cancel\" alert's cancel action occured.");
+        }];
+        
+        UIAlertAction * Action4 = [UIAlertAction actionWithTitle:@"自动" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            NSLog(@"The \"Okay/Cancel\" alert's other action occured.");
+        }];
+        [alertController addAction:Action1];
+        [alertController addAction:Action2];
+        [alertController addAction:Action3];
+        [alertController addAction:Action4];
+      
+        [self presentViewController:alertController animated:YES completion:nil];
+    }if (sender.tag == 1) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您的选择是?" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *Action1 = [UIAlertAction actionWithTitle:@"向上" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            NSLog(@"The \"Okay/Cancel\" alert's cancel action occured.");
+        }];
+        
+        UIAlertAction * Action2 = [UIAlertAction actionWithTitle:@"向下" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            NSLog(@"The \"Okay/Cancel\" alert's other action occured.");
+        }];
+ 
+        [alertController addAction:Action1];
+        [alertController addAction:Action2];
+      
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+    }if (sender.tag == 2) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您的选择是?" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *Action1 = [UIAlertAction actionWithTitle:@"高风" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            NSLog(@"The \"Okay/Cancel\" alert's cancel action occured.");
+        }];
+        
+        UIAlertAction * Action2 = [UIAlertAction actionWithTitle:@"中风" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            NSLog(@"The \"Okay/Cancel\" alert's other action occured.");
+        }];
+        UIAlertAction * Action3 = [UIAlertAction actionWithTitle:@"低风" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            NSLog(@"The \"Okay/Cancel\" alert's other action occured.");
+        }];
+        [alertController addAction:Action1];
+        [alertController addAction:Action2];
+        [alertController addAction:Action3];
+        
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+    }if (sender.tag == 3) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您的选择是?" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *Action1 = [UIAlertAction actionWithTitle:@"0.5H" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            NSLog(@"The \"Okay/Cancel\" alert's cancel action occured.");
+        }];
+        
+        UIAlertAction * Action2 = [UIAlertAction actionWithTitle:@"1H" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            NSLog(@"The \"Okay/Cancel\" alert's other action occured.");
+        }];
+        UIAlertAction *Action3 = [UIAlertAction actionWithTitle:@"2H" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            NSLog(@"The \"Okay/Cancel\" alert's cancel action occured.");
+        }];
+        
+        UIAlertAction * Action4 = [UIAlertAction actionWithTitle:@"3H" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            NSLog(@"The \"Okay/Cancel\" alert's other action occured.");
+        }];
+        [alertController addAction:Action1];
+        [alertController addAction:Action2];
+        [alertController addAction:Action3];
+        [alertController addAction:Action4];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    
+}
+
+#pragma mark - tableView
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.params[self.currentButton] count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+    }
+    cell.textLabel.text= [self.params[self.currentButton] objectAtIndex:indexPath.row];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
+- (UITableViewCellAccessoryType)tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row==self.currentIndex){
+        return UITableViewCellAccessoryCheckmark;
+    }
+    else{
+        return UITableViewCellAccessoryNone;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    
+//    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+//    if(indexPath.row==self.currentIndex){
+//        return;
+//    }
+//    NSIndexPath *oldIndexPath = [NSIndexPath indexPathForRow:self.currentIndex
+//                                                   inSection:0];
+//    UITableViewCell *newCell = [tableView cellForRowAtIndexPath:indexPath];
+//    if (newCell.accessoryType == UITableViewCellAccessoryNone) {
+//        newCell.accessoryType = UITableViewCellAccessoryCheckmark;
+//        
+//    }
+//    UITableViewCell *oldCell = [tableView cellForRowAtIndexPath:oldIndexPath];
+//    if (oldCell.accessoryType == UITableViewCellAccessoryCheckmark) {
+//        oldCell.accessoryType = UITableViewCellAccessoryNone;
+//    }
+//    self.currentIndex=(int)indexPath.row;
+//    uint8_t cmd=0;
+   
+//    if (self.currentButton == ZXPMode) {
+//        self.currentMode = self.currentIndex+1;
+//        if (self.currentIndex==0) {
+//            cmd = 0x39+self.currentIndex;
+//        }else{
+//            cmd = 0x3F+self.currentIndex;
+//        }
+//    }
+//    if (self.currentButton == ZXPLevel) {
+//        self.currentLevel = self.currentIndex+1;
+//        cmd = 0x35+self.currentIndex;
+//    }
+//    if (self.currentButton == ZXPDirection) {
+//        self.currentDirection = self.currentIndex+1;
+//        cmd = 0x43+self.currentIndex;
+//    }
+//    if (self.currentButton == ZXPTiming) {
+//        self.currentTiming = self.currentIndex+1;
+//    }
+//    NSData *data=[self createCmd:cmd];
+//    SocketManager *sock=[SocketManager defaultManager];
+//    [sock.socket writeData:data withTimeout:1 tag:1];
+    
+    [self Iphonesave:nil];
+}
+
+-(NSData *)createCmd:(uint8_t) cmd
+{
+    return [[DeviceInfo defaultManager] changeMode:cmd
+                                          deviceID:self.deviceid];
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 30;
+}
+
+
+#pragma mark - Navigation
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    id theSegue = segue.destinationViewController;
+    [theSegue setValue:self.deviceid forKey:@"deviceid"];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.thermometerView reloadView];
+}
+
+#pragma mark - Item setting
+- (RulerItemModel *)rulerViewRulerItemModel:(RulerView *)rulerView {
+    RulerItemModel *itemModel = [[RulerItemModel alloc] init];
+    
+    itemModel.itemLineColor = [UIColor blackColor];
+    itemModel.itemMaxLineWidth = 30;
+    itemModel.itemMinLineWidth = 20;
+    itemModel.itemMiddleLineWidth = 24;
+    itemModel.itemLineHeight = 1;
+    itemModel.itemNumberOfRows = 16;
+    itemModel.itemHeight = 60;
+    itemModel.itemWidth = itemModel.itemMaxLineWidth;
+    
+    return itemModel;
+}
+
+
+#pragma mark - Ruler setting
+- (CGFloat)rulerViewMaxValue:(RulerView *)rulerView {
+    return 32;
+}
+
+- (CGFloat)rulerViewMinValue:(RulerView *)rulerView {
+    return 16;
+}
+
+- (UIFont *)rulerViewTextLabelFont:(RulerView *)rulerView {
+    return [UIFont systemFontOfSize:11.f];
+}
+
+- (UIColor *)rulerViewTextLabelColor:(RulerView *)rulerView {
+    return [UIColor magentaColor];
+}
+
+- (CGFloat)rulerViewTextlabelLeftMargin:(RulerView *)rulerView {
+    return 4.f;
+}
+
+- (CGFloat)rulerViewItemScrollViewDecelerationRate:(RulerView *)rulerView {
+    return 0;
+}
+
+#pragma mark - Left tag setting
+- (CGFloat)rulerViewLeftTagLineWidth:(RulerView *)rulerView {
+    return 50;
+}
+
+- (CGFloat)rulerViewLeftTagLineHeight:(RulerView *)rulerView {
+    return 2;
+}
+
+- (UIColor *)rulerViewLeftTagLineColor:(RulerView *)rulerView {
+    return [UIColor redColor];
+}
+
+- (CGFloat)rulerViewLeftTagTopMargin:(RulerView *)rulerView {
+    return 300;
+}
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self.thermometerView reloadView];
-}
+
 /*
 #pragma mark - Navigation
 

@@ -7,6 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+enum AIR_TARGETu
+{
+
+    
+    ZXPMode,
+    ZXPDirection,
+    ZXPLevel,
+    ZXPTiming,
+    
+    
+};
 
 @interface IphoneAirController : UIViewController
 @property (nonatomic,weak) NSString *sceneid;

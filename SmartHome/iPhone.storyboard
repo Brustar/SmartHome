@@ -1672,9 +1672,15 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBv-u1-ZrZ">
                                 <state key="normal" backgroundImage="last"/>
+                                <connections>
+                                    <action selector="lastBtn:" destination="4f1-Ce-GRA" eventType="touchUpInside" id="fw9-Nx-6IG"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="brD-Gf-euJ">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="brD-Gf-euJ">
                                 <state key="normal" backgroundImage="next"/>
+                                <connections>
+                                    <action selector="nextBtn:" destination="4f1-Ce-GRA" eventType="touchUpInside" id="Kon-Rf-lRo"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rq5-pr-s1s">
                                 <subviews>
@@ -2203,35 +2209,47 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h3J-PW-brE">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="T2x-Nk-GxP"/>
-                                    <constraint firstAttribute="height" constant="30" id="hdn-uE-ofv"/>
+                                    <constraint firstAttribute="width" constant="40" id="T2x-Nk-GxP"/>
+                                    <constraint firstAttribute="height" constant="40" id="hdn-uE-ofv"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="模式"/>
+                                <connections>
+                                    <action selector="changeButton:" destination="d9A-H8-Fkt" eventType="touchUpInside" id="y2G-6h-3W9"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uhD-Vk-4f7">
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uhD-Vk-4f7">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="K14-Mx-CLq"/>
-                                    <constraint firstAttribute="height" constant="30" id="vdy-uY-W6A"/>
+                                    <constraint firstAttribute="width" constant="40" id="K14-Mx-CLq"/>
+                                    <constraint firstAttribute="height" constant="40" id="vdy-uY-W6A"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="定时"/>
+                                <connections>
+                                    <action selector="changeButton:" destination="d9A-H8-Fkt" eventType="touchUpInside" id="DCF-1b-zQ8"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLK-OJ-ifc">
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLK-OJ-ifc">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="gog-k3-gUF"/>
-                                    <constraint firstAttribute="width" constant="30" id="rNV-Pf-zFL"/>
+                                    <constraint firstAttribute="height" constant="40" id="gog-k3-gUF"/>
+                                    <constraint firstAttribute="width" constant="40" id="rNV-Pf-zFL"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="风向"/>
+                                <connections>
+                                    <action selector="changeButton:" destination="d9A-H8-Fkt" eventType="touchUpInside" id="Xqq-9s-QfP"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7IK-y1-nkp">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7IK-y1-nkp">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="h2W-bo-D6H"/>
-                                    <constraint firstAttribute="height" constant="30" id="riS-Vh-cjl"/>
+                                    <constraint firstAttribute="width" constant="40" id="h2W-bo-D6H"/>
+                                    <constraint firstAttribute="height" constant="40" id="riS-Vh-cjl"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="风速"/>
+                                <connections>
+                                    <action selector="changeButton:" destination="d9A-H8-Fkt" eventType="touchUpInside" id="mXh-zc-VWN"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Phd-cd-8vX">
                                 <subviews>
@@ -2353,14 +2371,14 @@
                             <constraint firstItem="iVr-6f-FMT" firstAttribute="leading" secondItem="Phd-cd-8vX" secondAttribute="trailing" constant="10" id="KG0-6o-lJM"/>
                             <constraint firstItem="uhD-Vk-4f7" firstAttribute="leading" secondItem="h3J-PW-brE" secondAttribute="leading" id="Kk2-TW-E6S"/>
                             <constraint firstItem="Phd-cd-8vX" firstAttribute="top" secondItem="eyj-Ci-Bhh" secondAttribute="bottom" constant="20" id="NWq-Fs-Sb8"/>
-                            <constraint firstItem="7IK-y1-nkp" firstAttribute="top" secondItem="Phd-cd-8vX" secondAttribute="bottom" constant="70" id="V6w-eH-Xl1"/>
+                            <constraint firstItem="7IK-y1-nkp" firstAttribute="top" secondItem="Phd-cd-8vX" secondAttribute="bottom" constant="50" id="V6w-eH-Xl1"/>
                             <constraint firstItem="Phd-cd-8vX" firstAttribute="leading" secondItem="RqH-Kr-i6v" secondAttribute="leading" constant="10" id="dVK-Qy-jDO"/>
-                            <constraint firstItem="qyX-cJ-9vt" firstAttribute="top" secondItem="uhD-Vk-4f7" secondAttribute="bottom" constant="50" id="hua-dI-dWd"/>
-                            <constraint firstItem="iVr-6f-FMT" firstAttribute="top" secondItem="eyj-Ci-Bhh" secondAttribute="bottom" constant="50" id="iNb-3h-5gB"/>
+                            <constraint firstItem="qyX-cJ-9vt" firstAttribute="top" secondItem="uhD-Vk-4f7" secondAttribute="bottom" constant="20" id="hua-dI-dWd"/>
+                            <constraint firstItem="iVr-6f-FMT" firstAttribute="top" secondItem="eyj-Ci-Bhh" secondAttribute="bottom" constant="20" id="iNb-3h-5gB"/>
                             <constraint firstItem="uhD-Vk-4f7" firstAttribute="top" secondItem="h3J-PW-brE" secondAttribute="bottom" constant="20" id="kHA-1g-MeZ"/>
                             <constraint firstItem="qyX-cJ-9vt" firstAttribute="top" secondItem="iVr-6f-FMT" secondAttribute="bottom" constant="50" id="lrT-2e-lpe"/>
                             <constraint firstItem="hLK-OJ-ifc" firstAttribute="top" secondItem="7IK-y1-nkp" secondAttribute="bottom" constant="20" id="oWm-Ak-tlm"/>
-                            <constraint firstItem="qyX-cJ-9vt" firstAttribute="top" secondItem="hLK-OJ-ifc" secondAttribute="bottom" constant="50" id="y1v-tH-zZO"/>
+                            <constraint firstItem="qyX-cJ-9vt" firstAttribute="top" secondItem="hLK-OJ-ifc" secondAttribute="bottom" constant="20" id="y1v-tH-zZO"/>
                         </constraints>
                     </view>
                     <connections>
@@ -2370,7 +2388,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XYH-6k-971" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3461" y="-441"/>
+            <point key="canvasLocation" x="3460.5" y="-441.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4Qf-sa-6K1">
@@ -2481,6 +2499,9 @@
                                             <constraint firstAttribute="height" constant="40" id="KSI-5N-nuN"/>
                                         </constraints>
                                         <state key="normal" title="确定"/>
+                                        <connections>
+                                            <action selector="confromBtn:" destination="Eow-Lw-1jW" eventType="touchUpInside" id="Pr2-8w-X8l"/>
+                                        </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tv_up" translatesAutoresizingMaskIntoConstraints="NO" id="GXP-1f-IMh">
                                         <constraints>
