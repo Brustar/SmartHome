@@ -19,7 +19,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (nonatomic,strong) NSArray *titlArr;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableHight;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableHight;
 @property (nonatomic,strong) NSArray *images;
 @property (nonatomic,strong) NSArray *segues;
 @end
@@ -34,10 +34,10 @@
     self.nameLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserName"];
     self.titlArr = @[@"我的故障",@"我的保修记录",@"我的能耗",@"我的收藏",@"我的消息",@"设置"];
     self.images = @[@"my",@"energy",@"record",@"store",@"message",@"setting"];
-    self.tableHight.constant = self.titlArr.count * hight + self.headView.frame.size.height;
+//    self.tableHight.constant = self.titlArr.count * hight + self.headView.frame.size.height;
     self.navigationController.navigationBar.backgroundColor = [UIColor lightGrayColor];
     self.tableView.tableFooterView = [UIView new];
-    self.tableView.scrollEnabled = NO;
+//    self.tableView.scrollEnabled = NO;
     self.tableView.tableHeaderView = self.headView;
     
     self.segues = @[@"iphoneDefault",@"iphoneRecordSegue",@"iphoneEngerSegue",@"iphoneFavorSegue",@"iphoneMsgSegue",@"iphoneSettingSegue"];

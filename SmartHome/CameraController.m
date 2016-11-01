@@ -39,7 +39,7 @@
     if(!_cameraIds)
     {
         _cameraIds = [NSMutableArray array];
-        if(self.sceneid > 0)
+        if(self.sceneid > 0 && !_isAddDevice)
         {
             NSArray *camera = [SQLManager getDeviceIDsBySeneId:[self.sceneid intValue]];
             [_cameraIds addObjectsFromArray:camera];
@@ -57,7 +57,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     
-    _video = [[RTSPPlayer alloc] initWithVideo:self.camerUrls[self.index] usesTcp:NO];
+    _video = [[RTSPPlayer alloc] initWithVideo:self.camerUrls[self.index] usesTcp:YES];
     _video.outputWidth =  CELL_WIDTH;
     _video.outputHeight = CELL_HEIGHT;
     

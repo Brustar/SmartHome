@@ -46,7 +46,7 @@
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT NAME FROM Devices where ID = %d",eId];
-        
+       
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
@@ -65,6 +65,7 @@
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT url FROM Devices where ID = %d and hTypeId = 45",eId];
+       
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
