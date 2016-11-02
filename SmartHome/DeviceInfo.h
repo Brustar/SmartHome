@@ -51,17 +51,27 @@ enum{
 #define SMART_DB @"smartDB"
 
 @interface DeviceInfo : NSObject
-
+//是否编辑场景时
 @property (nonatomic) bool editingScene;
+//ios设备的音量
 @property (nonatomic) float volume;
+//设备是否能连互联网
 @property (nonatomic) int reachbility;
+//设备的apple型号
 @property (nonatomic) int genaration;
+//apn推送token
 @property (nonatomic, strong) NSString *pushToken;
+//ibeacon信息
 @property (nonatomic, strong) NSArray *beacons;
+//主机ID
 @property (nonatomic) long masterID;
+//主机ip
 @property (nonatomic, strong) NSString *masterIP;
+//主机端口
 @property (nonatomic) int masterPort;
+//演示和真实操作DB数据库名字
 @property (nonatomic, strong) NSString *db;
+//连接状态
 @property (nonatomic) int connectState;
 
 + (instancetype) defaultManager;
