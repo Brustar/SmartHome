@@ -13,4 +13,5 @@
 @property (nonatomic,strong) NSString *phoneStr;
 @property (nonatomic,strong) NSString *userType;
 @property (nonatomic,strong) NSString *MasterID;
+@property (weak, nonatomic) IBOutlet UIImageView *checkPwdImageView;
 @end

@@ -2915,6 +2915,7 @@
                     <connections>
                         <outlet property="auothCodeBtn" destination="rjl-45-xdh" id="kYq-ZZ-HSQ"/>
                         <outlet property="authorNum" destination="jn7-mw-fDz" id="Erh-IX-MER"/>
+                        <outlet property="checkPwdImageView" destination="aWb-2V-Pd8" id="n1Z-pP-Pyl"/>
                         <outlet property="coverView" destination="EfH-bz-9V6" id="yAG-pd-Qb5"/>
                         <outlet property="goHomeBtn" destination="2Xh-4w-CyT" id="cJ6-3t-IgW"/>
                         <outlet property="passWord" destination="y40-ww-MsV" id="Lbq-eE-eSe"/>
