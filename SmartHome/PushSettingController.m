@@ -114,8 +114,16 @@
                     [itemIDs addObject:itemID];
                     [records addObject:recordID];
                 }
-                [self.names addObject:itemNames];
-                [self.notifyWay addObject:itemIDs];
+                if ([self.names isEqual:itemNames]) {
+                    
+                    [self.names addObject:itemNames];
+                }
+                if ([self.notifyWay isEqual:itemIDs]) {
+                     [self.notifyWay addObject:itemIDs];
+                }
+//                if (self.recordIDs isEqual:<#(id)#>]) {
+//                    <#statements#>
+//                }
                 [self.recordIDs addObject:records];
             }
             [self.tableView reloadData];

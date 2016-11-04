@@ -1194,7 +1194,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="TVLogoCell" reuseIdentifier="IphoneEditSceneCell" id="1Ja-SK-Ke7" customClass="CollectionViewCell">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="IphoneEditSceneCell" reuseIdentifier="IphoneEditSceneCell" id="1Ja-SK-Ke7" customClass="CollectionViewCell">
                                                 <rect key="frame" x="0.0" y="2" width="60" height="51"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -1272,7 +1272,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="TVLogoCell" reuseIdentifier="IphoneEditSceneCell" id="TS4-A4-zdr" customClass="CollectionViewCell">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="IphoneSubCell" reuseIdentifier="IphoneEditSceneCell" id="TS4-A4-zdr" customClass="CollectionViewCell">
                                                 <rect key="frame" x="0.0" y="2" width="60" height="51"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -3148,29 +3148,41 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgU-YC-3GJ">
-                                <rect key="frame" x="174.5" y="611" width="26" height="26"/>
-                                <state key="normal" backgroundImage="voice"/>
-                                <connections>
-                                    <action selector="startVoice:" destination="P8H-gP-qd1" eventType="touchUpInside" id="Yur-sk-ozt"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bj5-cC-wSP" customClass="SCSiriWaveformView">
-                                <rect key="frame" x="0.0" y="600" width="375" height="70"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="0.0" y="548" width="375" height="80"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgU-YC-3GJ">
+                                        <rect key="frame" x="174" y="33" width="26" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="26" id="ab9-cX-O3i"/>
+                                            <constraint firstAttribute="height" constant="26" id="bEY-20-aQl"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="voice"/>
+                                        <connections>
+                                            <action selector="startVoice:" destination="P8H-gP-qd1" eventType="touchUpInside" id="Yur-sk-ozt"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" red="0.90309139530000004" green="0.90309139530000004" blue="0.90309139530000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="bgU-YC-3GJ" firstAttribute="centerX" secondItem="bj5-cC-wSP" secondAttribute="centerX" id="7wg-Mb-dWJ"/>
+                                    <constraint firstAttribute="width" constant="375" id="Nzz-Pe-p3S"/>
+                                    <constraint firstAttribute="bottom" secondItem="bgU-YC-3GJ" secondAttribute="bottom" constant="5" id="iSS-jy-kWU"/>
+                                    <constraint firstAttribute="height" constant="80" id="nO8-f6-827"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.90309139530000004" green="0.90309139530000004" blue="0.90309139530000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="5Ut-nH-ZUu" firstAttribute="top" secondItem="ifr-iY-xyB" secondAttribute="bottom" constant="50" id="1Tt-4G-fsh"/>
                             <constraint firstItem="VRY-JI-mma" firstAttribute="centerX" secondItem="xFW-QZ-b7Y" secondAttribute="centerX" id="9SZ-qJ-pKU"/>
-                            <constraint firstItem="eQi-dD-4Sk" firstAttribute="top" secondItem="bgU-YC-3GJ" secondAttribute="bottom" constant="30" id="DwB-dy-AxM"/>
-                            <constraint firstItem="bgU-YC-3GJ" firstAttribute="centerX" secondItem="xFW-QZ-b7Y" secondAttribute="centerX" id="V2k-FX-oRb"/>
+                            <constraint firstItem="bj5-cC-wSP" firstAttribute="leading" secondItem="xFW-QZ-b7Y" secondAttribute="leading" id="Obt-hr-oSm"/>
                             <constraint firstItem="VRY-JI-mma" firstAttribute="centerY" secondItem="xFW-QZ-b7Y" secondAttribute="centerY" id="j82-4m-hre"/>
+                            <constraint firstAttribute="trailing" secondItem="bj5-cC-wSP" secondAttribute="trailing" id="kwV-XH-c11"/>
                             <constraint firstItem="5Ut-nH-ZUu" firstAttribute="centerX" secondItem="xFW-QZ-b7Y" secondAttribute="centerX" id="mx5-xQ-cSB"/>
                             <constraint firstItem="N26-Ut-aOu" firstAttribute="centerX" secondItem="xFW-QZ-b7Y" secondAttribute="centerX" id="nJR-B6-SEP"/>
                             <constraint firstItem="N26-Ut-aOu" firstAttribute="centerY" secondItem="xFW-QZ-b7Y" secondAttribute="centerY" id="vfn-AZ-t8v"/>
+                            <constraint firstItem="eQi-dD-4Sk" firstAttribute="top" secondItem="bj5-cC-wSP" secondAttribute="bottom" constant="39" id="zxI-Ad-VUq"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="1Wf-XM-93W"/>
@@ -3183,7 +3195,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="azs-Ua-39b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4004" y="-1848"/>
+            <point key="canvasLocation" x="4003.5" y="-1848.5"/>
         </scene>
     </scenes>
     <resources>
@@ -3219,8 +3231,8 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="WeN-Qz-0Az"/>
         <segue reference="vWH-k8-ixo"/>
         <segue reference="aTH-RA-7NZ"/>
+        <segue reference="WeN-Qz-0Az"/>
     </inferredMetricsTieBreakers>
 </document>
