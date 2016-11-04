@@ -164,9 +164,9 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if(![self.passWord.text isMatchedByRegex:@"^(?![^a-z]+$)(?![^A-Z]+$)(?!\\D+$).{8,15}$"])
+    if(![self.passWord.text isMatchedByRegex:@".{6，8}$"])
     {
-        [MBProgressHUD showError:@"密码必须是由大小写、数字组成且不少于8位数"];
+        [MBProgressHUD showError:@"密码应该是6-8位字符"];
     }
 }
 //加载到服务协议h5界面
