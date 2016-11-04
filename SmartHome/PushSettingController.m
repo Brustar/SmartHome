@@ -110,22 +110,20 @@
                     NSString *itemName = item[@"itemName"];
                     NSNumber *itemID = item[@"notifyWay"];
                     NSNumber  *recordID = item[@"recordId"];
-                    [itemNames addObject:itemName];
-                    [itemIDs addObject:itemID];
-                    [records addObject:recordID];
-                }
-                if (![self.names containsObject:itemNames]) {
+                    if (![itemNames containsObject:itemName]) {
+                          [itemNames addObject:itemName];
+                    }
+                 
+                         [itemIDs addObject:itemID];
                     
-                    [self.names addObject:itemNames];
-                }
-                if (![self.notifyWay containsObject:itemIDs]) {
-                     [self.notifyWay addObject:itemIDs];
-                }
-                if (![self.recordIDs containsObject:records]) {
+                    if ([records containsObject:recordID]) {
+                        [records addObject:recordID];
+                    }
                     
-                     [self.recordIDs addObject:records];
                 }
-               
+                [self.names addObject:itemNames];
+                [self.notifyWay addObject:itemIDs];
+                [self.recordIDs addObject:records];
             }
             [self.tableView reloadData];
             
@@ -165,6 +163,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pushSettingCell" forIndexPath:indexPath];
     NSArray *item = self.names[indexPath.section];
     NSArray *notiWay = self.notifyWay[indexPath.section];
+    
     cell.textLabel.text = item[indexPath.row];
     NSNumber *num = notiWay[indexPath.row];
     if([num intValue] == 1)

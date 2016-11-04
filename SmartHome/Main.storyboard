@@ -2322,7 +2322,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rkT-mM-K1l">
-                                            <rect key="frame" x="50" y="46.5" width="35" height="33"/>
+                                            <rect key="frame" x="50" y="47" width="35" height="33"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <state key="normal" title="取消">
                                                 <color key="titleColor" red="1" green="0.56939600459999995" blue="0.12608335909999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2332,7 +2332,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uaW-z0-7Tl">
-                                            <rect key="frame" x="290" y="46.5" width="35" height="33"/>
+                                            <rect key="frame" x="290" y="47" width="35" height="33"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <state key="normal" title="确定">
                                                 <color key="titleColor" red="1" green="0.56939600459999995" blue="0.12608335909999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2410,10 +2410,11 @@
                                 </connections>
                             </tableView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pa0-aE-yn4">
-                                <rect key="frame" x="55" y="20" width="320" height="647"/>
+                                <rect key="frame" x="26" y="5" width="343" height="657"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="2SX-wl-FSR"/>
+                                    <constraint firstAttribute="width" constant="343" id="7VX-qU-HXu"/>
+                                    <constraint firstAttribute="height" constant="657" id="REX-0Z-Qdf"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="dataSource" destination="GS2-hU-zG4" id="mK9-Di-4SP"/>
@@ -2423,21 +2424,19 @@
                         </subviews>
                         <color key="backgroundColor" red="0.9100608093" green="0.9100608093" blue="0.9100608093" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Tke-RM-TdA" firstAttribute="top" secondItem="pa0-aE-yn4" secondAttribute="top" id="12p-r6-e7q"/>
                             <constraint firstAttribute="trailing" secondItem="Tke-RM-TdA" secondAttribute="trailing" id="4Mb-Nz-9PU"/>
-                            <constraint firstItem="pa0-aE-yn4" firstAttribute="top" secondItem="EZb-5Y-Ea0" secondAttribute="bottom" constant="44" id="8ON-cJ-kfv"/>
-                            <constraint firstItem="xeT-j7-0PZ" firstAttribute="top" secondItem="pa0-aE-yn4" secondAttribute="bottom" id="8Yl-mJ-O4m"/>
                             <constraint firstItem="Tke-RM-TdA" firstAttribute="leading" secondItem="AZr-oq-xEX" secondAttribute="leading" id="Azv-c8-9iC"/>
-                            <constraint firstAttribute="trailing" secondItem="pa0-aE-yn4" secondAttribute="trailing" id="MXM-1u-iOb"/>
-                            <constraint firstItem="pa0-aE-yn4" firstAttribute="top" secondItem="EZb-5Y-Ea0" secondAttribute="bottom" id="TpE-hI-Yma"/>
+                            <constraint firstItem="Tke-RM-TdA" firstAttribute="top" secondItem="EZb-5Y-Ea0" secondAttribute="bottom" id="FgO-1S-Aum"/>
+                            <constraint firstAttribute="trailing" secondItem="pa0-aE-yn4" secondAttribute="trailing" constant="6" id="Vqb-RA-XCe"/>
                             <constraint firstItem="xeT-j7-0PZ" firstAttribute="top" secondItem="Tke-RM-TdA" secondAttribute="bottom" id="evL-Xv-6tc"/>
                             <constraint firstItem="Tke-RM-TdA" firstAttribute="top" secondItem="EZb-5Y-Ea0" secondAttribute="bottom" id="gQA-Ek-F0G"/>
+                            <constraint firstItem="xeT-j7-0PZ" firstAttribute="top" secondItem="pa0-aE-yn4" secondAttribute="bottom" constant="5" id="pAU-Qm-BHs"/>
+                            <constraint firstItem="pa0-aE-yn4" firstAttribute="top" secondItem="AZr-oq-xEX" secondAttribute="top" constant="5" id="sF1-K9-IAt"/>
                             <constraint firstItem="xeT-j7-0PZ" firstAttribute="top" secondItem="Tke-RM-TdA" secondAttribute="bottom" id="zTj-5p-st5"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="gQA-Ek-F0G"/>
-                                <exclude reference="8ON-cJ-kfv"/>
                             </mask>
                         </variation>
                     </view>
@@ -2449,7 +2448,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fUN-g3-tpE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1303" y="-5727"/>
+            <point key="canvasLocation" x="1301.5999999999999" y="-5727.8860569715143"/>
         </scene>
         <!--我的故障-->
         <scene sceneID="QcZ-Q2-Nnz">
@@ -3329,13 +3328,13 @@
                                                 <constraint firstAttribute="height" constant="30" id="owo-dh-S5M"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S9e-y2-V3e">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S9e-y2-V3e">
                                             <rect key="frame" x="70" y="5" width="39.5" height="19.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U0P-T0-FiY">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U0P-T0-FiY">
                                             <rect key="frame" x="70" y="25.5" width="33" height="16"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
