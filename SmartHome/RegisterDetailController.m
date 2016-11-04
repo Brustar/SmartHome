@@ -171,7 +171,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if(![self.passWord.text isMatchedByRegex:@"\\w{6,8}"])
+    if(![self.passWord.text isMatchedByRegex:@"^\\w{6,8}$"])
     {
         self.checkPwdImageView.hidden = YES;
         [MBProgressHUD showError:@"密码应该是6-8位字符"];
