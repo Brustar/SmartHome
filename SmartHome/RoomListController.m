@@ -27,6 +27,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) NSArray *hours;
+@property (nonatomic,strong) NSArray * days;//记录定时的天数
 @property (nonatomic,strong) NSArray *minutes;
 @property (nonatomic,assign) BOOL isForenoon;
 @property (nonatomic,strong) NSArray *noon;
@@ -38,8 +39,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *startTimeBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *endTimeBtn;
-@property (weak, nonatomic) IBOutlet UIView *pickTimeView;
+
+@property (weak, nonatomic) IBOutlet UIView *dataPickerView;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerTime;
+@property (weak, nonatomic) IBOutlet UIDatePicker *dataPicker;
 @property (strong,nonatomic) CLLocationManager *lm;
 
 @property (nonatomic,strong) NSArray *antronomicalTimes;
@@ -56,7 +59,15 @@
 @end
 
 @implementation RoomListController
+-(NSArray *)days
+{
 
+    if (!_days) {
+        _days = [[NSArray array] init];
+    }
+
+    return _days;
+}
 -(NSArray *)hours
 {
     if(!_hours)
@@ -101,6 +112,8 @@
     }
     return _noon;
 }
+
+//显示周一到周日的TableView
 -(FixTimeRepeatController *)fixTimeVC
 {
     if(!_fixTimeVC)
@@ -110,6 +123,8 @@
     }
     return _fixTimeVC;
 }
+
+//显示定时选择器边的场景的名字
 -(DeviceOfFixTimerViewController *)deviceOfTimeVC
 {
     if(!_deviceOfTimeVC)
@@ -311,6 +326,13 @@
 
 
 - (IBAction)settingRepeatTime:(UIButton *)sender {
+   
+    
+    if ([self.delegate respondsToSelector:@selector(showDataPicker)]) {
+        
+        self.pickTimeView.hidden = YES;
+        [self.delegate showDataPicker];
+    }
     self.fixTimeVC.modalPresentationStyle = UIModalPresentationPopover;
     self.fixTimeVC.popoverPresentationController.sourceView = sender;
     self.fixTimeVC.popoverPresentationController.sourceRect = sender.bounds;
@@ -318,6 +340,8 @@
     self.fixTimeVC.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionLeft;
     
     [self presentViewController:self.fixTimeVC animated:YES completion:nil];
+    
+   
 }
 
 - (void)selectWeek:(NSNotification *)noti

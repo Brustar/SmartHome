@@ -225,6 +225,7 @@
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld",roomID];
+       
         
         FMResultSet *resultSet = [db executeQuery:sql];
       

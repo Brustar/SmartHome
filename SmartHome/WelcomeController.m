@@ -11,11 +11,15 @@
 #import "SQLManager.h"
 #import "AudioManager.h"
 
+
 @interface WelcomeController ()
 
 
+- (IBAction)registerBtn:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIView *knowView;
+@property (weak, nonatomic) IBOutlet UIView *registerView;
+
 
 @end
 
@@ -55,6 +59,7 @@
 
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -70,4 +75,22 @@
 }
 */
 
+-(void)viewDidLayoutSubviews
+{
+  
+
+}
+
+- (IBAction)IpadRegisterBtn:(id)sender {
+    
+    self.coverView.hidden = NO;
+    self.registerView.hidden = NO;
+    
+}
+
+- (IBAction)registerBtn:(id)sender {
+    
+    self.coverView.hidden = NO;
+    self.registerView.hidden = NO;
+}
 @end
