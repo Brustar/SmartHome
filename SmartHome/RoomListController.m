@@ -352,7 +352,7 @@
     
     self.weeks[strWeek] = strSelect;
     
-    int week[ 7 ] = {0};
+    int week[7] = {0};
     
     for (NSString *key in [self.weeks allKeys]) {
         int index = [key intValue];
