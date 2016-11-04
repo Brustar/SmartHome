@@ -5,6 +5,7 @@
 //  Created by 逸云科技 on 16/10/10.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
+#define backGroudColour [UIColor colorWithRed:55/255.0 green:73/255.0 blue:91/255.0 alpha:1]
 
 #import "IphoneEditSceneController.h"
 #import "IphoneTypeView.h"
@@ -28,34 +29,34 @@
 #import "WindowSlidingController.h"
 #import "BgMusicController.h"
 #import "CollectionViewCell.h"
+//
+//@interface UIImagePickerController (LandScapeImagePicker)
+//
+//- (UIStatusBarStyle)preferredStatusBarStyle;
+//- (NSUInteger)supportedInterfaceOrientations;
+//- (BOOL)prefersStatusBarHidden;
+//@end
+//
+//@implementation UIImagePickerController (LandScapeImagePicker)
+//
+//- (NSUInteger) supportedInterfaceOrientations
+//{
+//    return UIInterfaceOrientationMaskLandscape;
+//}
+//
+//- (UIStatusBarStyle)preferredStatusBarStyle
+//{
+//    return UIStatusBarStyleLightContent;
+//}
+//
+//- (BOOL)prefersStatusBarHidden
+//{
+//    return YES;
+//}
+//
+//@end
 
-@interface UIImagePickerController (LandScapeImagePicker)
-
-- (UIStatusBarStyle)preferredStatusBarStyle;
-- (NSUInteger)supportedInterfaceOrientations;
-- (BOOL)prefersStatusBarHidden;
-@end
-
-@implementation UIImagePickerController (LandScapeImagePicker)
-
-- (NSUInteger) supportedInterfaceOrientations
-{
-    return UIInterfaceOrientationMaskLandscape;
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleLightContent;
-}
-
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
-}
-
-@end
-
-@interface IphoneEditSceneController ()<IphoneTypeViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
+@interface IphoneEditSceneController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
 @property (weak, nonatomic) IBOutlet IphoneTypeView *subTypeView;
 @property (weak, nonatomic) IBOutlet IphoneTypeView *deviceTypeView;
@@ -80,19 +81,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = [SQLManager getSceneName:self.sceneID];
-    self.subTypeArr = [SQLManager getSubTydpeBySceneID:self.sceneID];
+  
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.devicesTypes = [SQLManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.subTypeArr[0]];
-    if(self.isFavor)
-    {
-        self.saveBarBtn.enabled = NO;
-    }
-//    [self setupSubTypeView];
-    
     self.title= [SQLManager getSceneName:self.sceneID];
-//    Scene *scene = [SQLManager sceneBySceneID:self.sceneID];
-   
+    Scene *scene = [SQLManager sceneBySceneID:self.sceneID];
+    if(scene.readonly == YES && !self.isFavor)
+    {
+//        [self.deleteBtn setEnabled:NO];
+        
+    }
     [self setupData];
 
 }
@@ -349,6 +346,12 @@
     [self addChildViewController:vc];
     self.currentViewController = vc;
 }
+-(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.backgroundColor = backGroudColour;
+
+}
+
 
 - (IBAction)closeScene:(id)sender {
     
