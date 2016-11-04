@@ -114,9 +114,18 @@
                     [itemIDs addObject:itemID];
                     [records addObject:recordID];
                 }
-                [self.names addObject:itemNames];
-                [self.notifyWay addObject:itemIDs];
-                [self.recordIDs addObject:records];
+                if (![self.names containsObject:itemNames]) {
+                    
+                    [self.names addObject:itemNames];
+                }
+                if (![self.notifyWay containsObject:itemIDs]) {
+                     [self.notifyWay addObject:itemIDs];
+                }
+                if (![self.recordIDs containsObject:records]) {
+                    
+                     [self.recordIDs addObject:records];
+                }
+               
             }
             [self.tableView reloadData];
             
