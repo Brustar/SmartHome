@@ -37,6 +37,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"注册";
+    self.checkPwdImageView.hidden = YES;
     
     self.viewWidthConstraint.constant = [[UIScreen mainScreen] bounds].size.width * 0.8;
     
@@ -113,6 +114,12 @@
         return;
     }
     
+    if(![self.passWord.text isMatchedByRegex:@".{6，8}$"])
+    {
+        [MBProgressHUD showError:@"密码应该是6-8位字符"];
+        return;
+    }
+    
     
         
     //发送注册请求
@@ -165,8 +172,10 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if(![self.passWord.text isMatchedByRegex:@".{6，8}$"])
-    {
+    {   self.checkPwdImageView.hidden = YES;
         [MBProgressHUD showError:@"密码应该是6-8位字符"];
+    }else {
+        self.checkPwdImageView.hidden = NO;
     }
 }
 //加载到服务协议h5界面

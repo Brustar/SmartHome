@@ -12,5 +12,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *phoneNumber;
 @property (nonatomic,strong) NSString *phoneStr;
 @property (nonatomic,strong) NSString *userType;
+@property (weak, nonatomic) IBOutlet UIImageView *checkPwdImageView;
 @property (nonatomic,strong) NSString *MasterID;
 @end
