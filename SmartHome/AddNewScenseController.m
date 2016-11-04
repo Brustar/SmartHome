@@ -62,6 +62,7 @@
        AddSenseCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AddSenseCell"];
         
         cell.roomName.text = self.rooms[indexPath.row];
+ 
         cell.backgroundColor = backGroudColour;
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         return cell;

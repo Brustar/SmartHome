@@ -164,9 +164,17 @@
 
 -(void)setUpRightView
 {
-    NSArray *str = @[@"我的家",@"我的",@"实景"];
-    NSArray *imgs = @[@"myHome",@"my",@"objectPic"];
-    for (int i = 0; i < 3; i++) {
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    NSArray *str,*imgs;
+    if ([device.db isEqualToString:SMART_DB]) {
+        str = @[@"我的家",@"我的",@"实景"];
+        imgs = @[@"myHome",@"my",@"objectPic"];
+    }else{
+        str = @[@"我的家"];
+        imgs = @[@"myHome"];
+    }
+    
+    for (int i = 0; i < [str count]; i++) {
         ECloudButton *button = [[ECloudButton alloc] initWithTitle:str[i] normalImage:imgs[i] selectImage:imgs[i]];
         button.type = i + 1;
         

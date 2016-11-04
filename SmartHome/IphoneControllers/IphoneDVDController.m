@@ -35,7 +35,8 @@
     _roomID = roomID;
     if(roomID)
     {
-        self.deviceid = [SQLManager deviceIDWithRoomID:roomID withType:@"DVD"];
+        self.deviceid = [SQLManager deviceIDWithRoomID:self.roomID withType:@"DVD"];
+
     }
     
     

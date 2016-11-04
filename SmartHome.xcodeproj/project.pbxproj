@@ -124,6 +124,7 @@
 		F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB411D00029900AB04BE /* DetailViewController.m */; };
 		F60FDB461D003FD500AB04BE /* CurtainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB441D003FD500AB04BE /* CurtainTableViewCell.m */; };
 		F60FDB471D003FD500AB04BE /* CurtainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F60FDB451D003FD500AB04BE /* CurtainTableViewCell.xib */; };
+		F617771D1DCC23AC00B382D4 /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F617771C1DCC23AC00B382D4 /* CollectionViewCell.m */; };
 		F618141D1DB5B0C7003B0741 /* PushSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = F618141C1DB5B0C7003B0741 /* PushSettingController.m */; };
 		F61896381D87B06300DBE6CD /* ScreenCurtainController.m in Sources */ = {isa = PBXBuildFile; fileRef = F61896371D87B06300DBE6CD /* ScreenCurtainController.m */; };
 		F618963B1D87B08300DBE6CD /* ProjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = F618963A1D87B08300DBE6CD /* ProjectController.m */; };
@@ -540,6 +541,8 @@
 		F60FDB431D003FD500AB04BE /* CurtainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurtainTableViewCell.h; sourceTree = "<group>"; };
 		F60FDB441D003FD500AB04BE /* CurtainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurtainTableViewCell.m; sourceTree = "<group>"; };
 		F60FDB451D003FD500AB04BE /* CurtainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CurtainTableViewCell.xib; sourceTree = "<group>"; };
+		F617771B1DCC23AC00B382D4 /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
+		F617771C1DCC23AC00B382D4 /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
 		F618141B1DB5B0C7003B0741 /* PushSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushSettingController.h; sourceTree = "<group>"; };
 		F618141C1DB5B0C7003B0741 /* PushSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushSettingController.m; sourceTree = "<group>"; };
 		F61896361D87B06300DBE6CD /* ScreenCurtainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenCurtainController.h; sourceTree = "<group>"; };
@@ -1427,6 +1430,8 @@
 				F62E05621DAB39F80096BF00 /* IphoneProfileController.m */,
 				F62E05641DAB68620096BF00 /* IphoneEditSceneController.h */,
 				F62E05651DAB68620096BF00 /* IphoneEditSceneController.m */,
+				F617771B1DCC23AC00B382D4 /* CollectionViewCell.h */,
+				F617771C1DCC23AC00B382D4 /* CollectionViewCell.m */,
 				F62CFA3F1DAC699D006410F7 /* IphoneTypeView.h */,
 				F62CFA401DAC699D006410F7 /* IphoneTypeView.m */,
 				F62CFA421DAC90DD006410F7 /* IphoneSaveNewSceneController.h */,
@@ -1929,6 +1934,7 @@
 				0FCFB39B1CF2950D00B37DD3 /* BgMusic.m in Sources */,
 				0FAF74C91CEEB37200432713 /* HRSampleColorPickerViewController.m in Sources */,
 				0FCFB38C1CF293A500B37DD3 /* DVD.m in Sources */,
+				F617771D1DCC23AC00B382D4 /* CollectionViewCell.m in Sources */,
 				0FAF98B61CE45EC9009BDBB5 /* CryptoManager.m in Sources */,
 				F62CFA441DAC90DD006410F7 /* IphoneSaveNewSceneController.m in Sources */,
 				F6642A781D41F55E0003D56B /* ScenseSplitViewController.m in Sources */,

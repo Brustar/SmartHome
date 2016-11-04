@@ -12,9 +12,11 @@
 @protocol  RoomListControllerDelegate <NSObject>
 
 -(void)RoomListControllerDelegate:(RoomListController *)roomListCV SelectedRoom:(NSInteger)RoomID;
+-(void)showDataPicker;
 
 @end
 
 @interface RoomListController : UIViewController
 @property (nonatomic,weak) id<RoomListControllerDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UIView *pickTimeView;
 @end
