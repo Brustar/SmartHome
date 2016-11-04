@@ -2,7 +2,7 @@
 //  PushSettingController.m
 //  SmartHome
 //
-//  Created by 逸云科技 on 2016/10/18.
+//  Created by 逸云科技 on 16/7/13.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
@@ -29,7 +29,6 @@
 @end
 
 @implementation PushSettingController
-
 -(NSMutableArray *)names
 {
     if(!_names)
@@ -73,23 +72,21 @@
     [self sendRequest];
 }
 
+
+
+
 //获得所有设置请求
 -(void)sendRequest
 {
-    
     NSString *url = [NSString stringWithFormat:@"%@GetUserNotifySettings.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-
     if (auothorToken) {
         NSDictionary *dict = @{@"AuthorToken":auothorToken};
         HttpManager *http=[HttpManager defaultManager];
         http.tag = 1;
         http.delegate = self;
         [http sendPost:url param:dict];
-        
     }
-    
-    
 }
 -(void)httpHandler:(id)responseObject tag:(int)tag
 {
@@ -114,16 +111,8 @@
                     [itemIDs addObject:itemID];
                     [records addObject:recordID];
                 }
-                if ([self.names isEqual:itemNames]) {
-                    
-                    [self.names addObject:itemNames];
-                }
-                if ([self.notifyWay isEqual:itemIDs]) {
-                     [self.notifyWay addObject:itemIDs];
-                }
-//                if (self.recordIDs isEqual:<#(id)#>]) {
-//                    <#statements#>
-//                }
+                [self.names addObject:itemNames];
+                [self.notifyWay addObject:itemIDs];
                 [self.recordIDs addObject:records];
             }
             [self.tableView reloadData];
@@ -132,7 +121,7 @@
             [MBProgressHUD showError:responseObject[@"Msg"]];
             
         }
-        
+ 
     }else if(tag == 2)
     {
         if ([responseObject[@"Result"] intValue]==0)
@@ -147,16 +136,11 @@
 
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    
- 
     return self.typeNames.count;
-    
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
     NSArray *item = self.names[section];
-    
     return item.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -181,15 +165,15 @@
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    UIView *view = [[UIView alloc]init];
-    view.backgroundColor = [UIColor colorWithRed:241/255.0 green:240/255.0 blue:246/255.0 alpha:1];
-    UILabel *titleLabe = [[UILabel alloc]initWithFrame:CGRectMake(15, 5, 200, 50)];
-    titleLabe.textColor = [UIColor grayColor];
-    titleLabe.font = [UIFont systemFontOfSize:18];
-    [view addSubview:titleLabe];
-    titleLabe.text = self.typeNames[section];
-    return view;
-    
+        UIView *view = [[UIView alloc]init];
+        view.backgroundColor = [UIColor colorWithRed:241/255.0 green:240/255.0 blue:246/255.0 alpha:1];
+        UILabel *titleLabe = [[UILabel alloc]initWithFrame:CGRectMake(15, 5, 200, 50)];
+        titleLabe.textColor = [UIColor grayColor];
+        titleLabe.font = [UIFont systemFontOfSize:18];
+        [view addSubview:titleLabe];
+        titleLabe.text = self.typeNames[section];
+        return view;
+
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
@@ -197,8 +181,8 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //    self.selectedBtn.selected = NO;
-    //    [self.selectedBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+//    self.selectedBtn.selected = NO;
+//    [self.selectedBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     self.indexPath = indexPath;
     self.coverView.hidden = NO;
@@ -222,13 +206,11 @@
     }
     
     self.selectedBtn.enabled = NO;
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    
+   
 }
 
 
@@ -246,11 +228,11 @@
     NSString *url = [NSString stringWithFormat:@"%@NotificationSetting.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     if (auothorToken) {
-        NSDictionary *dict = @{@"AuthorToken":auothorToken,@"NotifyWay":[NSNumber numberWithInteger:way],@"RecordID":recoredID};
-        HttpManager *http=[HttpManager defaultManager];
-        http.tag = 2;
-        http.delegate = self;
-        [http sendPost:url param:dict];
+    NSDictionary *dict = @{@"AuthorToken":auothorToken,@"NotifyWay":[NSNumber numberWithInteger:way],@"RecordID":recoredID};
+    HttpManager *http=[HttpManager defaultManager];
+    http.tag = 2;
+    http.delegate = self;
+    [http sendPost:url param:dict];
     }
 }
 
@@ -275,7 +257,7 @@
         cell.detailTextLabel.text = @"不通知";
         [self setUserNotifyWay:3 andRecord:recordID];
     }
-    
+
     
 }
 
@@ -289,16 +271,7 @@
 {
     self.coverView.hidden = YES;
     self.pushTypeView.hidden = YES;
-    
-}
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
 }
-*/
 
 @end
