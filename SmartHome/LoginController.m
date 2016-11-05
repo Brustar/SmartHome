@@ -476,6 +476,8 @@
                 
                 [self.hostIDS addObject:hostID[@"HostId"]];
             }
+            
+            [IOManager writeUserdefault:self.hostIDS forKey:@"HostIDS"];
             if ([self.hostIDS count]>0) {
                 NSString *mid = self.hostIDS[0];
                 [IOManager writeUserdefault:mid forKey:@"HostID"];
