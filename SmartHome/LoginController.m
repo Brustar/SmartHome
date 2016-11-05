@@ -474,7 +474,7 @@
             for(NSDictionary *hostID in hostList)
             {
                 
-                [self.hostIDS addObject:hostID[@"HostId"]];
+                [self.hostIDS addObject:hostID[@"hostId"]];
             }
             
             [IOManager writeUserdefault:self.hostIDS forKey:@"HostIDS"];
