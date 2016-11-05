@@ -611,7 +611,8 @@
 
 - (IBAction)forgotPWD:(id)sender
 {
-    [WebManager show:@"http://115.28.151.85:8088/forgotpwd/Index.aspx"];
+    
+    [WebManager show:[[IOManager httpAddr] stringByAppendingString:@"user/update_pwd.aspx"]];
 }
 
 //注册

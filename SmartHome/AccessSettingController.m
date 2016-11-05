@@ -184,7 +184,7 @@
         if([responseObject[@"Result"] intValue] == 0)
         {
             [MBProgressHUD showSuccess:@"成功转化为主人身份"];
-            self.cell.detailTextLabel.text = @"管理员";
+            self.cell.detailTextLabel.text = @"主人";
             
             
         }else{
@@ -224,7 +224,7 @@
         NSNumber *type = self.managerType[indexPath.row];
         if([type intValue] ==1)
         {
-            cell.detailTextLabel.text = @"管理员";
+            cell.detailTextLabel.text = @"主人";
         }else {
             cell.detailTextLabel.text = @"普通用户";
         }
@@ -265,7 +265,7 @@
         self.cell = cell;
         self.selectedIndexPath = indexPath;
         self.userName.text = cell.textLabel.text;
-        if([cell.detailTextLabel.text isEqualToString:@"管理员"])
+        if([cell.detailTextLabel.text isEqualToString:@"主人"])
         {
             [self.identityType setTitle:@"转化为普通身份" forState:UIControlStateNormal];
         }else
@@ -315,7 +315,7 @@
     if(tableView == self.userTableView)
     {
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-        if([cell.detailTextLabel.text isEqualToString:@"管理员"]){
+        if([cell.detailTextLabel.text isEqualToString:@"主人"]){
             return YES;
         }else {
             return NO;
