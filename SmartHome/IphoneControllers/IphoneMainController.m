@@ -25,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.titleArr = @[@"场景",@"设备",@"实景",@"我的"];
+    self.titleArr = @[@"场景",@"实景",@"我的"];
     self.tableView.tableFooterView = [UIView new];
     self.tableView.tableHeaderView = self.headView;
     [self setupChilderController];
@@ -48,8 +48,8 @@
     IphoneSceneController *scene = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
     [self setupVc:scene title:@"场景"];
     
-    IphoneDeviceListController *deviceList = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"IphoneDeviceListController"];
-    [self setupVc:deviceList title:@"设备"];
+//    IphoneDeviceListController *deviceList = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"IphoneDeviceListController"];
+//    [self setupVc:deviceList title:@"设备"];
     
     IphoneRealSceneController *realVC = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"IphoneRealSceneController"];
     [self setupVc:realVC title:@"实景"];
@@ -106,7 +106,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return 3;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

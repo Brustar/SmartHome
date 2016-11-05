@@ -479,11 +479,13 @@
                     </navigationItem>
                     <connections>
                         <outlet property="ShowSettingDataView" destination="FQI-HV-0n0" id="NH4-cp-hbC"/>
+                        <outlet property="endDataBtn" destination="49O-Vd-Cwi" id="6P1-Jx-peF"/>
                         <outlet property="endTimeBtn" destination="Hz8-DU-ZL3" id="ly7-BR-DSw"/>
                         <outlet property="fixTimeDevice" destination="fKd-dL-Bx5" id="5Yh-AI-KTa"/>
                         <outlet property="pickTimeView" destination="30F-9f-9Bv" id="oFx-dr-mk9"/>
                         <outlet property="pickerTime" destination="iCE-bj-6vB" id="VBH-ev-aHj"/>
                         <outlet property="repeatBtn" destination="hGZ-WN-Sg8" id="65H-wN-Rru"/>
+                        <outlet property="starDataBtn" destination="azl-sD-iUP" id="0fp-Ob-snC"/>
                         <outlet property="startTimeBtn" destination="0bx-iZ-CWI" id="AHl-oP-59t"/>
                         <outlet property="tableView" destination="5M9-Yx-8TU" id="tXm-lV-ZdZ"/>
                         <outlet property="timeView" destination="JnV-9I-K3a" id="hUs-r7-qiG"/>

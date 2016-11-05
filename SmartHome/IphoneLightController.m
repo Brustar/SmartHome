@@ -1,12 +1,12 @@
 //
-//  Light.m
+//  IphoneLightController.m
 //  SmartHome
 //
-//  Created by Brustar on 16/5/20.
+//  Created by 逸云科技 on 2016/11/5.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
-#import "LightController.h"
+#import "IphoneLightController.h"
 #import "PackManager.h"
 #import "SocketManager.h"
 #import "SQLManager.h"
@@ -14,57 +14,47 @@
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 
-@interface LightController ()<UITableViewDelegate,UITableViewDataSource>
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *favButt;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@interface IphoneLightController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,assign) CGFloat brightValue;
 
 @property (nonatomic,strong) NSMutableArray *lIDs;
 @property (nonatomic,strong) NSMutableArray *lNames;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentLight;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *segementTopConstraints;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewRightConstraints;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewLeftContraints;
-
-
-- (IBAction)selectTypeOfLight:(UISegmentedControl *)sender;
+@property (weak, nonatomic) IBOutlet UITableView *LightTable;
+@property (weak, nonatomic) IBOutlet UITableView *SubLightTableView;
 
 @end
 
-@implementation LightController
-
+@implementation IphoneLightController
 -(NSMutableArray *)lIDs
 {
     if(!_lIDs)
     {
         _lIDs = [NSMutableArray array];
-       
-           if(self.sceneid > 0 && !self.isAddDevice)
-           {
-           
-               NSArray *lightArr = [SQLManager getDeviceIDsBySeneId:[self.sceneid intValue]];
-               for(int i = 0; i <lightArr.count; i++)
-               {
-                   NSString *typeName = [SQLManager deviceTypeNameByDeviceID:[lightArr[i] intValue]];
-                   if([typeName isEqualToString:@"灯光"])
-                   {
-                       [_lIDs addObject:lightArr[i]];
-                   }
-               }
-               
-               
-           }else if(self.roomID > 0){
-               [_lIDs addObjectsFromArray:[SQLManager getDeviceByTypeName:@"开关灯" andRoomID:self.roomID]];
-               [_lIDs addObjectsFromArray:[SQLManager getDeviceByTypeName:@"调光灯" andRoomID:self.roomID]];
-               [_lIDs addObjectsFromArray:[SQLManager getDeviceByTypeName:@"调色灯" andRoomID:self.roomID]];
-
-           }else{
-               [_lIDs addObject:self.deviceid];
-           }
         
+        if(self.sceneid > 0 && !self.isAddDevice)
+        {
+            
+            NSArray *lightArr = [SQLManager getDeviceIDsBySeneId:[self.sceneid intValue]];
+            for(int i = 0; i <lightArr.count; i++)
+            {
+                NSString *typeName = [SQLManager deviceTypeNameByDeviceID:[lightArr[i] intValue]];
+                if([typeName isEqualToString:@"灯光"])
+                {
+                    [_lIDs addObject:lightArr[i]];
+                }
+            }
+            
+            
+        }else if(self.roomID > 0){
+            [_lIDs addObjectsFromArray:[SQLManager getDeviceByTypeName:@"开关灯" andRoomID:self.roomID]];
+            [_lIDs addObjectsFromArray:[SQLManager getDeviceByTypeName:@"调光灯" andRoomID:self.roomID]];
+            [_lIDs addObjectsFromArray:[SQLManager getDeviceByTypeName:@"调色灯" andRoomID:self.roomID]];
+            
+        }else{
+            [_lIDs addObject:self.deviceid];
         }
+        
+    }
     return _lIDs;
 }
 
@@ -85,17 +75,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    
     [self setUpConstraints];
     self.detailCell = [[[NSBundle mainBundle] loadNibNamed:@"DetailTableViewCell" owner:self options:nil] lastObject];
     self.detailCell.bright.continuous = NO;
     [self.detailCell.bright addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
-
+    
     [self.detailCell.power addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
     self.cell = [[[NSBundle mainBundle] loadNibNamed:@"ColourTableViewCell" owner:self options:nil] lastObject];
     
-    [self setupSegmentLight];
+//    [self setupSegmentLight];
     
     self.scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     if ([self.sceneid intValue]>0) {
@@ -104,9 +96,9 @@
         [self syncUI];
     }
     
-    self.tableView.scrollEnabled = NO;
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
+    self.SubLightTableView.scrollEnabled = NO;
+    self.SubLightTableView.delegate = self;
+    self.SubLightTableView.dataSource = self;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncLight:) name:@"light" object:nil];
     
@@ -115,16 +107,15 @@
 }
 -(void)setUpConstraints
 {
-   
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-    {
-        self.segementTopConstraints.constant = 0;
-        self.tableViewLeftContraints.constant = 0;
-        self.tableViewRightConstraints.constant = 0;
-       
-    }
+    
+//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+//    {
+//        self.segementTopConstraints.constant = 0;
+//        self.tableViewLeftContraints.constant = 0;
+//        self.tableViewRightConstraints.constant = 0;
+//        
+//    }
 }
-
 
 -(void) syncUI
 {
@@ -157,25 +148,23 @@
     }
 }
 
-- (void)setupSegmentLight
-{
-    
-    
-    if (self.lNames == nil) {
-        return;
-    }
-    
-    [self.segmentLight removeAllSegments];
-    
-    for ( int i = 0; i < self.lNames.count; i++) {
-        [self.segmentLight insertSegmentWithTitle:self.lNames[i] atIndex:i animated:NO];
-    
-    }
-    
-    self.segmentLight.selectedSegmentIndex = 0;
-    self.deviceid = [self.lIDs objectAtIndex:self.segmentLight.selectedSegmentIndex];
-}
-
+//- (void)setupSegmentLight
+//{
+//    
+//    if (self.lNames == nil) {
+//        return;
+//    }
+//    
+//    [self.segmentLight removeAllSegments];
+//    
+//    for ( int i = 0; i < self.lNames.count; i++) {
+//        [self.segmentLight insertSegmentWithTitle:self.lNames[i] atIndex:i animated:NO];
+//        
+//    }
+//    
+//    self.segmentLight.selectedSegmentIndex = 0;
+//    self.deviceid = [self.lIDs objectAtIndex:self.segmentLight.selectedSegmentIndex];
+//}
 - (NSDictionary *)getRGBDictionaryByColor:(UIColor *)originColor
 {
     CGFloat r=0,g=0,b=0,a=0;
@@ -227,7 +216,7 @@
         int r = [colorDic[@"R"] floatValue] * 255;
         int g = [colorDic[@"G"] floatValue] * 255;
         int b = [colorDic[@"B"] floatValue] * 255;
-
+        
         NSData *data=[[DeviceInfo defaultManager] changeColor:self.deviceid R:r G:g B:b];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:3];
@@ -248,7 +237,7 @@
     {
         [device setBrightness:self.detailCell.bright.value*100];
     }
-
+    
     
     [_scene setSceneID:[self.sceneid intValue]];
     [_scene setRoomID:self.roomID];
@@ -260,6 +249,7 @@
     [_scene setDevices:devices];
     [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
 }
+
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
@@ -313,11 +303,10 @@
 
 - (void)setSelectedColor:(UIColor *)color
 {
-
+    
     self.cell.colourView.backgroundColor = color;
     [self save:nil];
 }
-
 
 
 #pragma mark - UITableViewDelegate
@@ -402,7 +391,7 @@
     
     NSString *typeName = [SQLManager lightTypeNameByDeviceID:[self.deviceid intValue]];
     
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.SubLightTableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 1)
     {
         if([typeName isEqualToString:@"调色灯"])
@@ -418,9 +407,9 @@
 - (IBAction)selectTypeOfLight:(UISegmentedControl *)sender {
     
     self.detailCell.label.text = self.lNames[sender.selectedSegmentIndex];
-    self.deviceid = [self.lIDs objectAtIndex:self.segmentLight.selectedSegmentIndex];
+//    self.deviceid = [self.lIDs objectAtIndex:self.segmentLight.selectedSegmentIndex];
     [self syncUI];
-    [self.tableView reloadData];
+    [self.SubLightTableView reloadData];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -439,4 +428,16 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"light" object:nil];
 }
+
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
 @end
