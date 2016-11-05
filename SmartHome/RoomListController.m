@@ -618,7 +618,18 @@
 }
 
 - (IBAction)startDataBtn:(id)sender {
+    self.pickTimeView.hidden = YES;
+    
+    UIDatePicker * dataPicker = [[UIDatePicker alloc] init];
+    dataPicker.frame = CGRectMake(22+8, 304+60, 186+4, 204+20);
+    dataPicker.backgroundColor = [UIColor whiteColor];
+    dataPicker.datePickerMode = UIDatePickerModeDate;
+    [self.view addSubview:dataPicker];
+    
+    
 }
+
 - (IBAction)endDataBtn:(id)sender {
+    
 }
 @end
