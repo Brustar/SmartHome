@@ -10,7 +10,6 @@
 #import "DeviceInfo.h"
 #import "SQLManager.h"
 #import "AudioManager.h"
-#import "UIView+Uitls.h"
 
 
 @interface WelcomeController ()<UIScrollViewDelegate>
