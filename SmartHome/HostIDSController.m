@@ -65,7 +65,7 @@
     NSString *url = [NSString stringWithFormat:@"%@UserLoginHost.aspx",[IOManager httpAddr]];
     
     NSDictionary *dict = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"HostID":self.hostIDS[row]};
-    [IOManager writeUserdefault:self.hostIDS[row] forKey:@"hostId"];
+    [IOManager writeUserdefault:self.hostIDS[row] forKey:@"HostId"];
     
     HttpManager *http=[HttpManager defaultManager];
     http.delegate=self;

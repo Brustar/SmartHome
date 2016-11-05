@@ -79,7 +79,7 @@
     self.tableView.tableFooterView = [UIView new];
     self.user.text = [[NSUserDefaults  standardUserDefaults] objectForKey:@"Account"];
     self.userType = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Type"] intValue];
-    self.pwd.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"Password"];
+    self.pwd.text = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Password"] decryptWithDes:DES_KEY];
    
 //    if ([CLLocationManager locationServicesEnabled]) {
 //        self.lm = [[CLLocationManager alloc]init];
@@ -149,7 +149,7 @@
     NSDictionary *dict = @{@"Account":self.user.text,@"Type":[NSNumber numberWithInteger:self.userType],@"Password":[self.pwd.text md5],@"pushtoken":pushToken};
     [IOManager writeUserdefault:self.user.text forKey:@"Account"];
     [IOManager writeUserdefault:[NSNumber numberWithInteger:self.userType] forKey:@"Type"];
-    [IOManager writeUserdefault:self.pwd.text forKey:@"Password"];
+    [IOManager writeUserdefault:[self.pwd.text encryptWithDes:DES_KEY] forKey:@"Password"];
     HttpManager *http=[HttpManager defaultManager];
     http.delegate=self;
     http.tag = 1;
@@ -474,11 +474,13 @@
             for(NSDictionary *hostID in hostList)
             {
                 
-                [self.hostIDS addObject:hostID[@"hostId"]];
+                [self.hostIDS addObject:hostID[@"HostId"]];
             }
-            [IOManager writeUserdefault:[self.hostIDS copy] forKey:@"HostIDS"];
-            NSString *mid = self.hostIDS[0];
-            info.masterID =[PackManager NSDataToUint16:mid];
+            if ([self.hostIDS count]>0) {
+                NSString *mid = self.hostIDS[0];
+                [IOManager writeUserdefault:mid forKey:@"HostID"];
+                info.masterID =[PackManager NSDataToUint16:mid];
+            }
             //NSInteger count = self.hostIDS.count;
             //直接登录主机
                 
@@ -591,7 +593,7 @@
     NSString *url = [NSString stringWithFormat:@"%@UserLoginHost.aspx",[IOManager httpAddr]];
     
     NSDictionary *dict = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"HostID":self.hostIDS[row]};
-    [IOManager writeUserdefault:self.hostIDS[row] forKey:@"hostId"];
+    [IOManager writeUserdefault:self.hostIDS[row] forKey:@"HostId"];
     [[NSUserDefaults standardUserDefaults] setObject:self.user.text forKey:@"Account"];
     HttpManager *http=[HttpManager defaultManager];
     http.delegate=self;

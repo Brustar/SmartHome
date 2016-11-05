@@ -157,7 +157,6 @@
         if([responseObject[@"Result"] intValue] == 0)
         {
             [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
-            [IOManager writeUserdefault:self.MasterID forKey:@"HostID"];
             [IOManager writeUserdefault:responseObject[@"UserHostID"] forKey:@"UserHostID"];
             self.coverView.hidden = NO;
             self.regSuccessView.hidden = NO;
