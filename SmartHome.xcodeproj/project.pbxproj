@@ -138,9 +138,6 @@
 		F6280D4A1D961C62009108ED /* IphoneAddTVChannelController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6280D491D961C62009108ED /* IphoneAddTVChannelController.m */; };
 		F6280D4D1D9651CE009108ED /* IphoneFMController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6280D4C1D9651CE009108ED /* IphoneFMController.m */; };
 		F6280D531D966218009108ED /* IphoneAddFmController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6280D521D966218009108ED /* IphoneAddFmController.m */; };
-		F62C6F631DCDBFDC000A68BB /* IphoneLightController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62C6F621DCDBFDC000A68BB /* IphoneLightController.m */; };
-		F62C6F661DCDC116000A68BB /* IphoneDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F62C6F651DCDC116000A68BB /* IphoneDetailTableViewCell.m */; };
-		F62C6F691DCDC16A000A68BB /* IphoneColourTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F62C6F681DCDC16A000A68BB /* IphoneColourTableViewCell.m */; };
 		F62CD87A1D94BE99001C66CE /* IphoneTVController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CD8791D94BE99001C66CE /* IphoneTVController.m */; };
 		F62CD87D1D950453001C66CE /* IphoneAirController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CD87C1D950453001C66CE /* IphoneAirController.m */; };
 		F62CFA411DAC699D006410F7 /* IphoneTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CFA401DAC699D006410F7 /* IphoneTypeView.m */; };
@@ -571,12 +568,6 @@
 		F6280D4C1D9651CE009108ED /* IphoneFMController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneFMController.m; sourceTree = "<group>"; };
 		F6280D511D966218009108ED /* IphoneAddFmController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneAddFmController.h; sourceTree = "<group>"; };
 		F6280D521D966218009108ED /* IphoneAddFmController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneAddFmController.m; sourceTree = "<group>"; };
-		F62C6F611DCDBFDC000A68BB /* IphoneLightController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneLightController.h; sourceTree = "<group>"; };
-		F62C6F621DCDBFDC000A68BB /* IphoneLightController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneLightController.m; sourceTree = "<group>"; };
-		F62C6F641DCDC116000A68BB /* IphoneDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneDetailTableViewCell.h; sourceTree = "<group>"; };
-		F62C6F651DCDC116000A68BB /* IphoneDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneDetailTableViewCell.m; sourceTree = "<group>"; };
-		F62C6F671DCDC16A000A68BB /* IphoneColourTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneColourTableViewCell.h; sourceTree = "<group>"; };
-		F62C6F681DCDC16A000A68BB /* IphoneColourTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneColourTableViewCell.m; sourceTree = "<group>"; };
 		F62CD8781D94BE99001C66CE /* IphoneTVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneTVController.h; sourceTree = "<group>"; };
 		F62CD8791D94BE99001C66CE /* IphoneTVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneTVController.m; sourceTree = "<group>"; };
 		F62CD87B1D950453001C66CE /* IphoneAirController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneAirController.h; sourceTree = "<group>"; };
@@ -865,15 +856,9 @@
 				0F25FE5D1CEB0C0A0063E834 /* SceneList.m */,
 				0FAF74AB1CEE9A9600432713 /* LightController.h */,
 				0FAF74AC1CEE9A9600432713 /* LightController.m */,
-				F62C6F611DCDBFDC000A68BB /* IphoneLightController.h */,
-				F62C6F621DCDBFDC000A68BB /* IphoneLightController.m */,
 				F60FDB401D00029900AB04BE /* DetailViewController.h */,
 				F60FDB411D00029900AB04BE /* DetailViewController.m */,
 				F6359AF81CFFBC910035EB31 /* DetailTableViewCell.h */,
-				F62C6F641DCDC116000A68BB /* IphoneDetailTableViewCell.h */,
-				F62C6F651DCDC116000A68BB /* IphoneDetailTableViewCell.m */,
-				F62C6F671DCDC16A000A68BB /* IphoneColourTableViewCell.h */,
-				F62C6F681DCDC16A000A68BB /* IphoneColourTableViewCell.m */,
 				F6359AF91CFFBC910035EB31 /* DetailTableViewCell.m */,
 				F6359AFD1CFFC4DC0035EB31 /* ColourTableViewCell.h */,
 				F6359AFE1CFFC4DC0035EB31 /* ColourTableViewCell.m */,
@@ -1947,7 +1932,6 @@
 				0FCFB3801CF28F6F00B37DD3 /* Light.m in Sources */,
 				0FAF74C21CEEA17C00432713 /* HRColorInfoView.m in Sources */,
 				0FCFB39B1CF2950D00B37DD3 /* BgMusic.m in Sources */,
-				F62C6F661DCDC116000A68BB /* IphoneDetailTableViewCell.m in Sources */,
 				0FAF74C91CEEB37200432713 /* HRSampleColorPickerViewController.m in Sources */,
 				0FCFB38C1CF293A500B37DD3 /* DVD.m in Sources */,
 				F617771D1DCC23AC00B382D4 /* CollectionViewCell.m in Sources */,
@@ -1960,7 +1944,6 @@
 				F65FF4AB1D61C57100C12271 /* SearchViewController.m in Sources */,
 				F663CA5F1D98A733001F87F3 /* IphoneDVDController.m in Sources */,
 				F6A1C02E1D586D7500856E00 /* Room.m in Sources */,
-				F62C6F691DCDC16A000A68BB /* IphoneColourTableViewCell.m in Sources */,
 				F663CA661D98D131001F87F3 /* IphoneDevicesController.m in Sources */,
 				F6755A581D40D450002394F3 /* ECloudButton.m in Sources */,
 				0FAF98A51CE40F3C009BDBB5 /* QRCodeReaderView.m in Sources */,
@@ -1975,7 +1958,6 @@
 				0FC5CC6C1D93CB9600839D8F /* WinOpener.m in Sources */,
 				0F032D491CC9B12700D1920D /* main.m in Sources */,
 				F64111DC1D4F1E6100E8099D /* FixTimeRepeatController.m in Sources */,
-				F62C6F631DCDBFDC000A68BB /* IphoneLightController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

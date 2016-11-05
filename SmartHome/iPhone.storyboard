@@ -1404,7 +1404,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入场景名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6p8-dz-db0">
-                                <rect key="frame" x="0.0" y="30" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="74" width="375" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="x1V-5y-GrX"/>
                                 </constraints>
@@ -3208,32 +3208,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="X7e-VI-6JX">
-                                <rect key="frame" x="0.0" y="47" width="375" height="135"/>
+                                <rect key="frame" x="0.0" y="47" width="375" height="620"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="tYW-Cs-d4q">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tYW-Cs-d4q" id="fB7-tf-JMW">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                                <sections/>
-                            </tableView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZqR-lL-1nz">
-                                <rect key="frame" x="0.0" y="268" width="375" height="140"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="140" id="Iim-Ev-uZP"/>
-                                </constraints>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="HUZ-ys-PLj">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HUZ-ys-PLj" id="dsu-lh-l96">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -3243,13 +3225,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.86852824080000002" green="0.86852824080000002" blue="0.86852824080000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="ZqR-lL-1nz" firstAttribute="leading" secondItem="s8l-Fw-Xdc" secondAttribute="leading" id="2mg-LC-QKz"/>
-                            <constraint firstAttribute="trailing" secondItem="ZqR-lL-1nz" secondAttribute="trailing" id="I9F-1F-wie"/>
-                            <constraint firstItem="ZqR-lL-1nz" firstAttribute="top" secondItem="X7e-VI-6JX" secondAttribute="bottom" constant="86" id="KTw-zU-FNq"/>
-                            <constraint firstItem="X7e-VI-6JX" firstAttribute="leading" secondItem="s8l-Fw-Xdc" secondAttribute="leading" id="VSW-Tg-tSW"/>
-                            <constraint firstItem="X7e-VI-6JX" firstAttribute="top" secondItem="9ne-4G-Yxt" secondAttribute="bottom" constant="27" id="lDU-et-egH"/>
-                            <constraint firstItem="dcH-jN-6iw" firstAttribute="top" secondItem="ZqR-lL-1nz" secondAttribute="bottom" constant="259" id="lvp-K4-k5r"/>
-                            <constraint firstAttribute="trailing" secondItem="X7e-VI-6JX" secondAttribute="trailing" id="r8U-2c-xTl"/>
+                            <constraint firstItem="X7e-VI-6JX" firstAttribute="top" secondItem="9ne-4G-Yxt" secondAttribute="bottom" constant="27" id="L76-XD-5kI"/>
+                            <constraint firstAttribute="trailing" secondItem="X7e-VI-6JX" secondAttribute="trailing" id="QEg-nI-uHP"/>
+                            <constraint firstItem="X7e-VI-6JX" firstAttribute="leading" secondItem="s8l-Fw-Xdc" secondAttribute="leading" id="Z7P-zo-oBN"/>
+                            <constraint firstItem="dcH-jN-6iw" firstAttribute="top" secondItem="X7e-VI-6JX" secondAttribute="bottom" id="dU7-xl-N6V"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="场景-灯" id="1O3-fF-OLH">
@@ -3261,9 +3240,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="LightTable" destination="X7e-VI-6JX" id="ijO-8n-HL6"/>
-                        <outlet property="SubLightTableView" destination="ZqR-lL-1nz" id="Ddv-5H-gEQ"/>
                         <outlet property="favButt" destination="Kr9-HL-gDO" id="oNF-16-NkJ"/>
-                        <outlet property="tableView" destination="ZqR-lL-1nz" id="GDt-w6-NCf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iea-pJ-dKq" userLabel="First Responder" sceneMemberID="firstResponder"/>
