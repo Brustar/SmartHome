@@ -10,16 +10,17 @@
 #import "DeviceInfo.h"
 #import "SQLManager.h"
 #import "AudioManager.h"
+#import "UIView+Uitls.h"
 
 
-@interface WelcomeController ()
+@interface WelcomeController ()<UIScrollViewDelegate>
 
 
 - (IBAction)registerBtn:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIView *knowView;
 @property (weak, nonatomic) IBOutlet UIView *registerView;
-
+@property (nonatomic, strong) UIScrollView *pageScroll;
 
 @end
 
@@ -27,6 +28,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+   
    
 }
 -(void)viewWillAppear:(BOOL)animated

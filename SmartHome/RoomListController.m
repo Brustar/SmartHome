@@ -56,6 +56,11 @@
 @property (nonatomic, weak) Schedule *schedule;
 @property (nonatomic, assign) BOOL isSceneSetTime;
 
+- (IBAction)startDataBtn:(id)sender;//设置日期的开始按钮
+- (IBAction)endDataBtn:(id)sender;//设置日期的结束按钮
+
+@property (weak, nonatomic) IBOutlet UIView *ShowSettingDataView;
+
 @end
 
 @implementation RoomListController
@@ -328,11 +333,11 @@
 - (IBAction)settingRepeatTime:(UIButton *)sender {
    
     
-    if ([self.delegate respondsToSelector:@selector(showDataPicker)]) {
-        
-        self.pickTimeView.hidden = YES;
-        [self.delegate showDataPicker];
-    }
+//    if ([self.delegate respondsToSelector:@selector(showDataPicker)]) {
+//        
+//        self.pickTimeView.hidden = YES;
+//        [self.delegate showDataPicker];
+//    }
     self.fixTimeVC.modalPresentationStyle = UIModalPresentationPopover;
     self.fixTimeVC.popoverPresentationController.sourceView = sender;
     self.fixTimeVC.popoverPresentationController.sourceRect = sender.bounds;
@@ -446,11 +451,14 @@
 - (IBAction)clickFixTimeBtn:(id)sender {
     UIButton *btn = (UIButton *)sender;
     
+    
     if(btn.selected)
     {
         self.timeView.hidden = YES;
+        self.ShowSettingDataView.hidden = YES;
     }else {
         self.timeView.hidden =  NO;
+        self.ShowSettingDataView.hidden = NO;
         NSString  *astronomicealTime;
         NSDictionary *dic;
         int isPlane;
@@ -614,4 +622,8 @@
    
 }
 
+- (IBAction)startDataBtn:(id)sender {
+}
+- (IBAction)endDataBtn:(id)sender {
+}
 @end
