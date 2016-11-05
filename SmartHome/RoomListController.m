@@ -447,7 +447,6 @@
     
 }
 
-
 - (IBAction)clickFixTimeBtn:(id)sender {
     UIButton *btn = (UIButton *)sender;
     
@@ -457,6 +456,7 @@
         self.timeView.hidden = YES;
         self.ShowSettingDataView.hidden = YES;
     }else {
+        
         self.timeView.hidden =  NO;
         self.ShowSettingDataView.hidden = NO;
         NSString  *astronomicealTime;
@@ -530,9 +530,6 @@
 }
 
 
-
-
-
 - (IBAction)setAstromomicalTime:(id)sender {
     
 
@@ -552,8 +549,6 @@
     [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
 
 }
-
-
 
 
 - (IBAction)gotoLastViewController:(id)sender {

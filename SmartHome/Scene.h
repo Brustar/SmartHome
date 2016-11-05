@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define SCENE_FILE_NAME [[NSUserDefaults standardUserDefaults] objectForKey:@"hostId"]
+#define SCENE_FILE_NAME [[NSUserDefaults standardUserDefaults] objectForKey:@"HostId"]
 
 
 @interface Scene : NSObject
