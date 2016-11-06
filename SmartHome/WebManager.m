@@ -122,7 +122,7 @@
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
             ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ECloudTabBarController"];
         }else{
-            ecloudVC = [[UIStoryboard storyboardWithName:@"iphone" bundle:nil] instantiateViewControllerWithIdentifier:@"main"];
+            ecloudVC = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"main"];
         }
         [self.navigationController pushViewController:ecloudVC animated:YES];
     }];

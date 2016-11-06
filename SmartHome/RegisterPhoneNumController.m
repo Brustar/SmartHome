@@ -51,6 +51,26 @@
                              completion:nil];
 }
 
+//验证手机号是否已注册
+- (void)checkPhoneNumberIsExist {
+    NSDictionary *dict = @{@"TellNumber":self.phoneNumTextField.text};
+    NSString *url = [NSString stringWithFormat:@"%@AuthTellNumber.aspx",[IOManager httpAddr]];
+    NSLog(@"request URL:%@", url);
+    HttpManager *http = [HttpManager defaultManager];
+    http.tag = 1;
+    http.delegate = self;
+    [http sendPost:url param:dict];
+}
+
+- (void)httpHandler:(id)responseObject tag:(int)tag
+{
+    if([responseObject[@"Result"] intValue] == 0) { //手机号未注册，进行“下一步”操作，进入下一页面
+        [self performSegueWithIdentifier:@"registerDetaiSegue" sender:self];
+    }else if([responseObject[@"Result"] intValue] == 1){ //手机号已注册，提示用户“手机号已注册”
+        [MBProgressHUD showError:responseObject[@"Msg"]];
+    }
+}
+
 - (IBAction)clickNextBtn:(id)sender {
     
     if([self.phoneNumTextField.text isEqualToString:@""])
@@ -63,9 +83,10 @@
         [MBProgressHUD showError:@"请输入合法的手机号码"];
         return;
     }
+    
+    //手机号格式验证通过后，开始请求http接口验证手机号是否已注册
+    //[self checkPhoneNumberIsExist];
     [self performSegueWithIdentifier:@"registerDetaiSegue" sender:self];
-   
-
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
