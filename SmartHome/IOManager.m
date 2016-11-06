@@ -146,6 +146,12 @@
     [defaults synchronize];
 }
 
++ (id)getUserDefaultForKey:(NSString *)key
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    return [ud objectForKey:key];
+}
+
 + (NSString*) fileMD5:(NSString*)path
 {
     return (__bridge_transfer NSString *)FileMD5HashCreateWithPath((__bridge CFStringRef)path, FileHashDefaultChunkSizeForReadingData);
