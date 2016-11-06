@@ -12,10 +12,9 @@
 #import "AudioManager.h"
 
 
-@interface WelcomeController ()<UIScrollViewDelegate,UIGestureRecognizerDelegate>
+@interface WelcomeController ()<UIScrollViewDelegate,UIGestureRecognizerDelegate,UIPageViewControllerDelegate>
+@property (weak, nonatomic) IBOutlet UIView *knowView;
 
-
-@property (weak, nonatomic) IBOutlet UIView *knowView;//灰色覆盖视图
 @property (weak, nonatomic) IBOutlet UIView *registerView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 
@@ -124,7 +123,7 @@
 {
     if (!_imageNames) {
         _AutoScrollDelay = 2.0;
-        _imageNames =  [NSMutableArray arrayWithObjects:@"login_suishi",@"login_suidi",@"login_renheren", nil];
+        _imageNames =  [NSMutableArray arrayWithObjects:@"u8",@"u0",@"u2", nil];
         for (int i=0; i < [_imageNames count];i++) {
             NSString *imageName = [_imageNames objectAtIndex:i];
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i*self.pageScrollView.frame.size.width, -10, self.pageScrollView.frame.size.width, self.pageScrollView.frame.size.height)];
