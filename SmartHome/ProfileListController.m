@@ -27,8 +27,8 @@
     self.userName.text = [[NSUserDefaults  standardUserDefaults] objectForKey:@"UserName"];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    self.titlArr = @[@"我的故障",@"我的保修记录",@"我的能耗",@"我的收藏",@"我的消息",@"设置"];
-    self.images = @[@"my",@"energy",@"record",@"store",@"message",@"setting"];
+    self.titlArr = @[@"我的消息",@"我的保修记录",@"我的能耗",@"我的收藏",@"我的故障",@"设置"];
+    self.images = @[@"message",@"energy",@"record",@"store",@"my",@"setting"];
     self.splitViewController.maximumPrimaryColumnWidth = 250;
     
     self.navigationController.navigationBar.backgroundColor = [UIColor lightGrayColor];
@@ -42,7 +42,8 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    NSInteger selectedIndex = 4;
+    /*
+    NSInteger selectedIndex = 0;
     
     NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:selectedIndex inSection:0];
     
@@ -52,6 +53,7 @@
     {
         [self.delegate ProfileListController:self selected:selectedIndexPath.row ];
     }
+    */
 }
 #pragma mark - Table view data source
 

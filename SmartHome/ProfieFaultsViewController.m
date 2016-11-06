@@ -81,12 +81,12 @@
         if([responseObject[@"Result"] intValue]==0)
         {
             NSDictionary *dic = responseObject[@"messageInfo"];
-            NSArray *msgList = dic[@"messageList"];
-            for(NSDictionary *dicDetail in msgList)
+            
+            for(NSDictionary *dicDetail in dic)
             {
                 [self.faultArr addObject:dicDetail[@"description"]];
                 [self.timesArr addObject:dicDetail[@"createDate"]];
-                [self.recordIDs addObject:dicDetail[@"id"]];
+                [self.recordIDs addObject:dicDetail[@"status"]];
             }
             [self.tableView reloadData];
         }else{

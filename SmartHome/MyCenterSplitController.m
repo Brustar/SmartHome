@@ -43,38 +43,37 @@
     
     switch (row) {
         case 0:{
-            ProfieFaultsViewController *faultVC = [story instantiateViewControllerWithIdentifier:@"MyDefaultViewController"];
-            [self.detailNavigation setViewControllers:@[faultVC] animated:NO];
-        }
+            MSGController  *msgVC = [story instantiateViewControllerWithIdentifier:@"MSGController"];
+            [self.detailNavigation setViewControllers:@[msgVC] animated:NO];
             break;
+        }
         case 1:{
             ServiceRecordViewController  *serviceVC = [story instantiateViewControllerWithIdentifier:@"ServiceRecordViewController"];
             [self.detailNavigation setViewControllers:@[serviceVC] animated:NO];
-
-        }
             break;
+        }
         case 2:{
             EnergyOfDeviceController *enegryVC = [story instantiateViewControllerWithIdentifier:@"MyEnergyViewController"];
             [self.detailNavigation setViewControllers:@[enegryVC] animated:NO];
-
-        }
             break;
+        }
         case 3:{
             
             FavorController  *favorVC = [story instantiateViewControllerWithIdentifier:@"FavorController"];
             [self.detailNavigation setViewControllers:@[favorVC] animated:NO];
-        }
+        
             break;
-        case 4:{
-             MSGController  *msgVC = [story instantiateViewControllerWithIdentifier:@"MSGController"];
-             [self.detailNavigation setViewControllers:@[msgVC] animated:NO];
         }
-           break;
+        case 4:{
+            ProfieFaultsViewController *faultVC = [story instantiateViewControllerWithIdentifier:@"MyDefaultViewController"];
+            [self.detailNavigation setViewControllers:@[faultVC] animated:NO];
+            break;
+        }
         case 5:{
             MySettingViewController *setVC = [story instantiateViewControllerWithIdentifier:@"MySettingViewController"];
             [self.detailNavigation setViewControllers:@[setVC] animated:NO];
-        }
             break;
+        }
         default:
             break;
            

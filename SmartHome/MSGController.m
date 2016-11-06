@@ -74,17 +74,16 @@
     {
         if ([responseObject[@"Result"] intValue]==0)
         {
-            /*
+            
             NSArray *dic = responseObject[@"messageInfo"];
             
             for(NSDictionary *dicDetail in dic)
             {
-                
                 [self.msgArr addObject:dicDetail[@"description"]];
                 [self.timesArr addObject:dicDetail[@"createDate"]];
                 [self.recordIDs addObject:dicDetail[@"itemID"]];
             }
-            */
+            
             [self.tableView reloadData];
         }else{
             [MBProgressHUD showError:responseObject[@"Msg"]];

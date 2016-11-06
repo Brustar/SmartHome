@@ -327,7 +327,7 @@
     } else {
         self.schedule.endTime = time;
     }
-    
+    self.clickFixTimeBtn.tintColor=[UIColor redColor];
     [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
     
 }
@@ -643,6 +643,7 @@
         NSString *prettyDate = [dateFormat stringFromDate:myDate];
         [self.starDataBtn setTitle:prettyDate forState:UIControlStateNormal];
         self.schedule.startDate=prettyDate;
+        self.clickFixTimeBtn.tintColor=[UIColor redColor];
     }
     [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
 }
@@ -660,6 +661,7 @@
         NSString *prettyDate = [dateFormat stringFromDate:myDate];
         [self.endDataBtn setTitle:prettyDate forState:UIControlStateNormal];
         self.schedule.endDate=prettyDate;
+        self.clickFixTimeBtn.tintColor=[UIColor redColor];
     }
     
     [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
