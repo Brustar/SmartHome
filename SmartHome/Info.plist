@@ -28,17 +28,17 @@
 		<true/>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>mediaDescription</string>
+	<string>亲，我们想要访问你的音乐库哟</string>
 	<key>NSCameraUsageDescription</key>
-	<string>cameraDescription</string>
+	<string>亲，我们想要访问你的摄像头哟</string>
 	<key>NSHomeKitUsageDescription</key>
-	<string>homekitDescription</string>
+	<string>亲，我们想要访问你的HOMEKIT哟</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<true/>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>photoDescription</string>
+	<string>亲，我们想要访问你的相册哟</string>
 	<key>UIApplicationShortcutItems</key>
 	<array>
 		<dict>
@@ -70,7 +70,7 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>应用程序想要访问你的录音权限</string>
+	<string>亲，我们想要访问你的麦克风哟</string>
 	<key>UISupportedInterfaceOrientations~iphone</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
