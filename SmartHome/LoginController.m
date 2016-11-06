@@ -94,10 +94,15 @@
 //    }
 
     
-
+ UIBarButtonItem *editItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(clickEditBtn:)];
+    self.navigationItem.leftBarButtonItem = editItem;
    
 }
+-(void)clickEditBtn:(UIBarButtonItem *)bbi
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 
+}
 -(void)setAntronomicalTimes:(NSArray *)antronomicalTimes
 {
     _antronomicalTimes = antronomicalTimes;

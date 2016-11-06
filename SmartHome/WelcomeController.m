@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *RegistBtn;
 @property (weak, nonatomic) IBOutlet UIButton *LoginBtn;
 @property (weak, nonatomic) IBOutlet UIButton *iphoneBtn;//体验按钮
+@property (weak, nonatomic) IBOutlet UIButton *dismissBtn;
 
 @end
 
@@ -97,6 +98,12 @@
 
 }
 
+- (IBAction)dismissBtn:(id)sender {
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
