@@ -55,7 +55,7 @@
     self.selectedButtonCount = 0;
 }
 
-
+//添加成功之后展示的图标和名称
 - (void)addItemWithTitle:(NSString *)title imageName:(NSString *)imageName {
     UIButton *button = nil;
     

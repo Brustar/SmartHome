@@ -276,16 +276,16 @@
             
             [view addSubview:btn];
         }
-        
+        //能耗里面全部设备的图标
         view.frame = CGRectMake(orignX, orignY, viewW, viewH);
         
-        img.image = [UIImage imageNamed:@"placeholder"];
+        img.image = [UIImage imageNamed:@"logo"];
         [img setContentMode:UIViewContentModeScaleAspectFit];
         
         [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        btn.titleLabel.font = [UIFont systemFontOfSize:15];
-        btn.titleLabel.textAlignment =NSTextAlignmentLeft;
-        btn.frame = CGRectMake(30, 10, 120, 30);
+        btn.titleLabel.font = [UIFont systemFontOfSize:13];
+        btn.titleLabel.textAlignment =NSTextAlignmentRight;
+        btn.frame = CGRectMake(20, 10, 120, 30);//能耗里面Btn内容
         NSString *title = [SQLManager getNameWithID:[deviceIDs[i] intValue]];
         [btn setTitle:title forState:UIControlStateNormal];
         btn.tag = [deviceIDs[i] intValue];

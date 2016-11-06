@@ -15,7 +15,7 @@
 @interface WelcomeController ()<UIScrollViewDelegate,UIGestureRecognizerDelegate>
 
 
-@property (weak, nonatomic) IBOutlet UIView *knowView;
+@property (weak, nonatomic) IBOutlet UIView *knowView;//灰色覆盖视图
 @property (weak, nonatomic) IBOutlet UIView *registerView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 
