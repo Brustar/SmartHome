@@ -1228,8 +1228,7 @@
         @"INSERT INTO \"Scenes\" VALUES(12,'午休','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/sleep.jpg',4,1,'0005',0,0);",
         @"INSERT INTO \"Scenes\" VALUES(13,'离开','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/away.jpg',4,1,'0006',0,0);",
         @"INSERT INTO \"Scenes\" VALUES(14,'欢迎','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',4,1,'0001',0,0);",
-        @"INSERT INTO \"Scenes\" VALUES(15,'投影','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',4,1,'0002',0,0);",
-        @"INSERT INTO \"Scenes\" VALUES(53,'离开','车库','http://115.28.151.85:8088/UploadFiles/images/scene/cctv1.png',5,2,'',0,0);"];
+        @"INSERT INTO \"Scenes\" VALUES(15,'投影','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',4,1,'0002',0,0);"];
         
         for (NSString *sql in sqls) {
             BOOL result=[db executeUpdate:sql];

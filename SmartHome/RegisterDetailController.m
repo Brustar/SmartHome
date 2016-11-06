@@ -38,6 +38,7 @@
     [super viewDidLoad];
     self.title = @"注册";
     self.checkPwdImageView.hidden = YES;
+    self.passWoardImageView.hidden = YES;
     
     self.viewWidthConstraint.constant = [[UIScreen mainScreen] bounds].size.width * 0.8;
     
@@ -47,7 +48,7 @@
         self.cType = 0;
     }else self.cType = 1;
     self.passWord.delegate = self;
-    
+    self.pwdAgain.delegate = self;
     
 }
 
@@ -170,12 +171,27 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if(![self.passWord.text isMatchedByRegex:@"^.{6,8}$"])
-    {
-        self.checkPwdImageView.hidden = YES;
-        [MBProgressHUD showError:@"密码应该是6-8位字符"];
-    }else {
-        self.checkPwdImageView.hidden = NO;
+    if (textField == self.passWord) {
+        if(![self.passWord.text isMatchedByRegex:@"^.{6,8}$"])
+        {
+            self.checkPwdImageView.hidden = YES;
+            [MBProgressHUD showError:@"密码应该是6-8位字符"];
+        }else {
+            self.checkPwdImageView.hidden = NO;
+        }
+    }else if (textField == self.pwdAgain) {
+        if(![self.passWord.text isMatchedByRegex:@"^.{6,8}$"])
+        {
+            self.passWoardImageView.hidden = YES;
+            [MBProgressHUD showError:@"密码应该是6-8位字符"];
+        }else if(![self.passWord.text isEqualToString:self.pwdAgain.text])
+        {
+            self.passWoardImageView.hidden = YES;
+            [MBProgressHUD showError:@"两次密码不匹配"];
+            
+        }else {
+            self.passWoardImageView.hidden = NO;
+        }
     }
 }
 //加载到服务协议h5界面
@@ -189,7 +205,7 @@
 #pragma mark -判断手机号是否合法
 - (BOOL)isMobileNumber:(NSString *)mobileNum
 {
-    NSString *regex=@"^1[3|4|5|7|8]\\d{9}$";
+    NSString *regex=@"^1[3|4|5|6|7|8]\\d{9}$";
     return [mobileNum isMatchedByRegex:regex];
 }
 

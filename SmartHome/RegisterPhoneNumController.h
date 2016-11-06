@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HttpManager.h"
 
-@interface RegisterPhoneNumController : UIViewController
+@interface RegisterPhoneNumController : UIViewController<HttpDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *UserTypeLb;
 @property (weak, nonatomic) IBOutlet UILabel *MasterIDLb;
 
