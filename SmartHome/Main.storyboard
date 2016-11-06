@@ -2631,7 +2631,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="defaultCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfieDefaultCell" id="b3I-q3-wEC" customClass="ProfieFaultsCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="defaultCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfieDefaultCell" id="b3I-q3-wEC" customClass="ProfileFaultsCell">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b3I-q3-wEC" id="i4K-El-cBq">
