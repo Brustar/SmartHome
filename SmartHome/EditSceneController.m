@@ -479,7 +479,7 @@
     
 }
 - (void)selectPhoto:(KxMenuItem *)item {
-    ((AppDelegate *)[UIApplication sharedApplication].delegate).isPhotoLibrary = YES;
+    [DeviceInfo defaultManager].isPhotoLibrary = YES;
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
@@ -499,8 +499,13 @@
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
-    ((AppDelegate *)[UIApplication sharedApplication].delegate).isPhotoLibrary = NO;
+    [DeviceInfo defaultManager].isPhotoLibrary = NO;
     self.selectSceneImg = info[UIImagePickerControllerEditedImage];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [DeviceInfo defaultManager].isPhotoLibrary = NO;
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 

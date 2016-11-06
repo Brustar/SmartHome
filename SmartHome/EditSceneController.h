@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AppDelegate.h"
 
 @interface EditSceneController : UIViewController
 @property(nonatomic,assign) int sceneID;

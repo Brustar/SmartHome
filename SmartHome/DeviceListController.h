@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AppDelegate.h"
 
 @interface DeviceListController : UIViewController
 @property (strong, nonatomic) NSArray *devices;
