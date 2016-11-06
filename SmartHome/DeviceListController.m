@@ -220,7 +220,7 @@
 
 
 - (void)selectPhoto:(KxMenuItem *)item {
-    
+    ((AppDelegate *)[UIApplication sharedApplication].delegate).isPhotoLibrary = YES;
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
         return;
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
@@ -244,7 +244,7 @@
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
-   
+   ((AppDelegate *)[UIApplication sharedApplication].delegate).isPhotoLibrary = NO;
     UIImage *image = info[UIImagePickerControllerOriginalImage];
     
     

@@ -171,8 +171,13 @@
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        //不用all调相册会崩溃
-        return UIInterfaceOrientationMaskAll;
+        
+        if (self.isPhotoLibrary) {
+            return UIInterfaceOrientationMaskAll;
+        }else {
+            return UIInterfaceOrientationMaskLandscape;
+        }
+        
     }else{
         return UIInterfaceOrientationMaskPortrait;
     }
