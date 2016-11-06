@@ -1785,7 +1785,7 @@
                                         <rect key="frame" x="-74.5" y="0.0" width="200" height="200"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="201" height="200"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="place" translatesAutoresizingMaskIntoConstraints="NO" id="8Qk-1L-fKL">
@@ -7107,11 +7107,12 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="uCb-ME-O7C"/>
         <segue reference="nIi-Kc-QDm"/>
         <segue reference="zAF-Rq-I0I"/>
-        <segue reference="wSR-hk-rTP"/>
+        <segue reference="5K5-wE-mZz"/>
+        <segue reference="PRs-sg-E1F"/>
         <segue reference="ya3-gG-p8O"/>
-        <segue reference="U1p-eR-Biy"/>
         <segue reference="tt4-nB-rfe"/>
         <segue reference="Vzc-yi-Jnw"/>
         <segue reference="fHn-Cm-7Q7"/>
@@ -7124,6 +7125,5 @@ layer.masksToBoundslayer.masksToBounds
         <segue reference="a9T-LN-ZVX"/>
         <segue reference="tdV-sS-d5j"/>
         <segue reference="dRU-hd-aVS"/>
-        <segue reference="fXQ-oW-cHz"/>
     </inferredMetricsTieBreakers>
 </document>
