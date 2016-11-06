@@ -2577,7 +2577,7 @@
         <!--我的故障-->
         <scene sceneID="QcZ-Q2-Nnz">
             <objects>
-                <viewController storyboardIdentifier="MyDefaultViewController" id="LI1-MF-uIV" customClass="ProfileListController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyDefaultViewController" id="LI1-MF-uIV" customClass="ProfileFaultsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RU5-Vs-pdV"/>
                         <viewControllerLayoutGuide type="bottom" id="pvo-6q-qAs"/>
