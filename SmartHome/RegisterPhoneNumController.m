@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet VerifyCodeView *imgVerifyView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewWidthConstraint;
 
+@property (weak, nonatomic) IBOutlet UIButton *DissmissBtn;
 
 @end
 
@@ -42,6 +43,12 @@
     
     
     
+}
+- (IBAction)DissmissBtn:(id)sender {
+    
+    
+    [self dismissViewControllerAnimated:YES
+                             completion:nil];
 }
 
 - (IBAction)clickNextBtn:(id)sender {

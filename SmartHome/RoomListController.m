@@ -57,6 +57,7 @@
 @property (nonatomic, assign) BOOL isSceneSetTime;
 @property (weak, nonatomic) IBOutlet UIButton *starDataBtn;//设置日期的开始按钮
 @property (weak, nonatomic) IBOutlet UIButton *endDataBtn;//设置日期的结束按钮
+@property (weak, nonatomic) IBOutlet UIButton *clickFixTimeBtn;//
 
 - (IBAction)startDataBtn:(id)sender;//设置日期的开始按钮点击事件
 - (IBAction)endDataBtn:(id)sender;//设置日期的结束按钮点击事件
