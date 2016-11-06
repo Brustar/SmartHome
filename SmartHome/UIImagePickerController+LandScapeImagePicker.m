@@ -10,11 +10,15 @@
 
 @implementation UIImagePickerController (LandScapeImagePicker)
 - (BOOL)shouldAutorotate {
-    return YES;
+    return NO;
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskAll;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        return UIInterfaceOrientationMaskLandscapeRight;
+    }else{
+        return UIInterfaceOrientationMaskPortrait;
+    }
 }
 - (BOOL)prefersStatusBarHidden
 {
