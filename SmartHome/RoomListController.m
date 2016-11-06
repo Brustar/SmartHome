@@ -327,6 +327,13 @@
     } else {
         self.schedule.endTime = time;
     }
+    NSMutableArray *sches=[self.scene.schedules mutableCopy];
+    if ([sches count]==0) {
+        [sches addObject:self.schedule];
+    }else{
+        sches[0]=self.schedule;
+    }
+    self.scene.schedules = sches;
     self.clickFixTimeBtn.tintColor=[UIColor redColor];
     [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
     
@@ -645,6 +652,14 @@
         self.schedule.startDate=prettyDate;
         self.clickFixTimeBtn.tintColor=[UIColor redColor];
     }
+    
+    NSMutableArray *sches=[self.scene.schedules mutableCopy];
+    if ([sches count]==0) {
+        [sches addObject:self.schedule];
+    }else{
+        sches[0]=self.schedule;
+    }
+    self.scene.schedules = sches;
     [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
 }
 
@@ -663,6 +678,14 @@
         self.schedule.endDate=prettyDate;
         self.clickFixTimeBtn.tintColor=[UIColor redColor];
     }
+    NSMutableArray *sches=[self.scene.schedules mutableCopy];
+    if ([sches count]==0) {
+        [sches addObject:self.schedule];
+    }else{
+        sches[0]=self.schedule;
+    }
+    
+    self.scene.schedules = sches;
     
     [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
 }

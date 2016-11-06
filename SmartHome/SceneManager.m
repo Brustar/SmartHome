@@ -179,12 +179,6 @@
 
 }
 
-
--(void)upLoadFile
-{
-   
-}
-
 - (void) delScene:(Scene *)scene
 {
     if (!scene.readonly) {
@@ -196,8 +190,6 @@
         }
        
     }
-   
-    //删除云端文件
 }
 
 //保证newScene的ID不变
@@ -310,7 +302,7 @@
             scene=[[Scene alloc] initWhithoutSchedule];
         }
         scene.sceneID=sceneid;
-        scene.readonly=[dictionary objectForKey:@"readonly"];
+        scene.readonly=[[dictionary objectForKey:@"readonly"] boolValue];
         scene.picName=[dictionary objectForKey:@"picName"];
         scene.roomID=[[dictionary objectForKey:@"roomID"] intValue];
         scene.masterID=[[dictionary objectForKey:@"masterID"] intValue];

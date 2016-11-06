@@ -9,7 +9,7 @@
 #import "MyCenterSplitController.h"
 #import "ProfileListController.h"
 #import "ServiceRecordViewController.h"
-#import "ProfieFaultsViewController.h"
+#import "ProfileFaultsViewController.h"
 #import "FavorController.h"
 #import "MySettingViewController.h"
 #import "EnergyOfDeviceController.h"
@@ -43,8 +43,8 @@
     
     switch (row) {
         case 0:{
-            MSGController  *msgVC = [story instantiateViewControllerWithIdentifier:@"MSGController"];
-            [self.detailNavigation setViewControllers:@[msgVC] animated:NO];
+            ProfileFaultsViewController *faultVC = [story instantiateViewControllerWithIdentifier:@"MyDefaultViewController"];
+            [self.detailNavigation setViewControllers:@[faultVC] animated:NO];
             break;
         }
         case 1:{
@@ -65,8 +65,8 @@
             break;
         }
         case 4:{
-            ProfieFaultsViewController *faultVC = [story instantiateViewControllerWithIdentifier:@"MyDefaultViewController"];
-            [self.detailNavigation setViewControllers:@[faultVC] animated:NO];
+            MSGController  *msgVC = [story instantiateViewControllerWithIdentifier:@"MSGController"];
+            [self.detailNavigation setViewControllers:@[msgVC] animated:NO];
             break;
         }
         case 5:{

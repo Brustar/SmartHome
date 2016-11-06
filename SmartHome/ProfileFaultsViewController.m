@@ -6,15 +6,16 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
-#import "ProfieFaultsViewController.h"
-#import "ProfieFaultsCell.h"
+#import "ProfileFaultsViewController.h"
+#import "ProfileFaultsCell.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "DeviceInfo.h"
 
-@interface ProfieFaultsViewController ()<UITableViewDelegate,UITableViewDataSource,HttpDelegate>
+@interface ProfileFaultsViewController ()<UITableViewDelegate,UITableViewDataSource,HttpDelegate>
 @property (nonatomic,assign) BOOL isEditing;
 @property (weak, nonatomic) IBOutlet UIView *footerView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) NSMutableArray *faultArr;
 @property (nonatomic,strong) NSMutableArray *timesArr;
 @property (nonatomic,strong) NSMutableArray *recordIDs;
@@ -24,7 +25,7 @@
 
 @end
 
-@implementation ProfieFaultsViewController
+@implementation ProfileFaultsViewController
 -(NSMutableArray*)faultArr
 {
     if(!_faultArr){
@@ -122,7 +123,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ProfieFaultsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProfieDefaultCell" forIndexPath:indexPath];
+    ProfileFaultsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProfieDefaultCell" forIndexPath:indexPath];
     
     cell.title.text = self.faultArr[indexPath.row];
     cell.dateLabel.text = self.timesArr[indexPath.row];

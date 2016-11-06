@@ -6,9 +6,9 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
-#import "ProfieFaultsCell.h"
+#import "ProfileFaultsCell.h"
 
-@implementation ProfieFaultsCell
+@implementation ProfileFaultsCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
