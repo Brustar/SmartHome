@@ -21,6 +21,7 @@
 + (int) tcpPort;
 + (int) udpPort;
 
++ (id)getUserDefaultForKey:(NSString *)key;
 
 + (void) writeScene:(NSString *)sceneFile string:(NSString *)sceneData;
 + (void) writeScene:(NSString *)sceneFile dictionary:(NSDictionary *)sceneData;

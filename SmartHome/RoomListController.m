@@ -35,14 +35,14 @@
 //@property (nonatomic,strong) NSMutableArray *weeks;
 @property (nonatomic,strong) NSMutableDictionary *weeks;
 
-
+@property (strong, nonatomic) UIDatePicker *dataPicker;
 @property (weak, nonatomic) IBOutlet UIButton *startTimeBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *endTimeBtn;
 
 @property (weak, nonatomic) IBOutlet UIView *dataPickerView;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerTime;
-@property (weak, nonatomic) IBOutlet UIDatePicker *dataPicker;
+//@property (weak, nonatomic) IBOutlet UIDatePicker *dataPicker;
 @property (strong,nonatomic) CLLocationManager *lm;
 
 @property (nonatomic,strong) NSArray *antronomicalTimes;
@@ -182,7 +182,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = [UIView new];
    
- 
+    [self createDatePicker];
     
     [self.tableView selectRowAtIndexPath:0 animated:YES scrollPosition:UITableViewScrollPositionTop];
     self.splitViewController.maximumPrimaryColumnWidth = 250;
@@ -499,7 +499,7 @@
 }
 
 - (IBAction)setTimeOnClick:(UIButton *)sender {
-    
+    self.dataPicker.hidden = YES;
     if (sender == self.startTimeBtn)
     {
         if (self.startTimeBtn.selected)
@@ -620,19 +620,48 @@
    
 }
 
+-(void) createDatePicker
+{
+    self.dataPicker = [[UIDatePicker alloc] init];
+    self.dataPicker.frame = CGRectMake(22+8-40, 304+70, 186+4+100, 204);
+    self.dataPicker.backgroundColor = [UIColor whiteColor];
+    self.dataPicker.datePickerMode = UIDatePickerModeDate;
+    self.dataPicker.hidden = YES;
+    [self.view addSubview:self.dataPicker];
+}
+
 - (IBAction)startDataBtn:(id)sender {
     self.pickTimeView.hidden = YES;
     
-    UIDatePicker * dataPicker = [[UIDatePicker alloc] init];
-    dataPicker.frame = CGRectMake(22+8-40, 304+70, 186+4+100, 204);
-    dataPicker.backgroundColor = [UIColor whiteColor];
-    dataPicker.datePickerMode = UIDatePickerModeDate;
-    [self.view addSubview:dataPicker];
-    
-    
+    self.starDataBtn.selected =! self.starDataBtn.selected;
+    self.dataPicker.hidden = !self.starDataBtn.selected;
+    if (!self.starDataBtn.selected) {
+        NSDate *myDate = self.dataPicker.date;
+        
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"YYYY-MM-dd"];
+        NSString *prettyDate = [dateFormat stringFromDate:myDate];
+        [self.starDataBtn setTitle:prettyDate forState:UIControlStateNormal];
+        self.schedule.startDate=prettyDate;
+    }
+    [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
 }
 
 - (IBAction)endDataBtn:(id)sender {
+    self.pickTimeView.hidden = YES;
     
+    self.endDataBtn.selected =! self.endDataBtn.selected;
+    self.dataPicker.hidden = !self.endDataBtn.selected;
+    if (!self.endDataBtn.selected) {
+        NSDate *myDate = self.dataPicker.date;
+        
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"YYYY-MM-dd"];
+        NSString *prettyDate = [dateFormat stringFromDate:myDate];
+        [self.endDataBtn setTitle:prettyDate forState:UIControlStateNormal];
+        self.schedule.endDate=prettyDate;
+    }
+    
+    [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
 }
 @end

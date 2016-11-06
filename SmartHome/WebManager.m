@@ -17,8 +17,8 @@
     web.navigationController.navigationBarHidden = NO;
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     UIViewController *rootViewController = window.rootViewController;
-    [rootViewController dismissModalViewControllerAnimated:NO];
-    [rootViewController presentModalViewController:controller animated:YES];
+    [rootViewController dismissViewControllerAnimated:NO completion:nil];
+    [rootViewController presentViewController:controller animated:YES completion:nil];
 }
 
 - (id)initWithHtml:(NSString *)html
@@ -70,7 +70,7 @@
     {
         [self.navigationController setNavigationBarHidden:YES];
     }else{
-        UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleDone target:self action:@selector(cancel:)];
+        UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self action:@selector(cancel:)];
         self.navigationItem.leftBarButtonItem = left;
     }
 
@@ -116,7 +116,7 @@
 #pragma mark Action
 - (void)cancel:(id)sender
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

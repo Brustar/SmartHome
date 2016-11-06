@@ -48,20 +48,34 @@
 {
     if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
-        return 5;
+        if ([[IOManager getUserDefaultForKey:@"Type"] integerValue] == 2) { //如果是普通用户，不显示“权限控制”选项
+            return 4;
+        }
+        return 5;//如果是主人，显示“权限控制”选项
     }else{
         return 6;
     }
     
 }
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if(section == 2)
-    {
-        return 2;
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+   
+    if ([[IOManager getUserDefaultForKey:@"Type"] integerValue] == 2) { //如果是普通用户，不显示“权限控制”选项
+        if(section == 1)
+        {
+            return 2;
+        }
+    
+    }else {
+        if(section == 2)
+        {
+            return 2;
+        }
     }
+    
     return 1;
 }
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"settingCell" forIndexPath:indexPath];
     NSString *title;
@@ -70,22 +84,45 @@
             title = @"推送设置";
             break;
         case 1:
-            title = @"权限控制";
+            
+            if ([[IOManager getUserDefaultForKey:@"Type"] integerValue] == 1) {
+                title = @"权限控制";
+            }else {
+                if(indexPath.row == 0)
+                {
+                    title = @"系统设置";
+                }else {
+                    title = @"系统信息";
+                }
+            }
+            
             break;
         case 2:
         {
-            if(indexPath.row == 0)
-            {
-                title = @"系统设置";
-            }else title = @"系统信息";
+           if ([[IOManager getUserDefaultForKey:@"Type"] integerValue] == 1) {
+               if(indexPath.row == 0)
+               {
+                   title = @"系统设置";
+               }else title = @"系统信息";
+           }else {
+               title = @"去评价";
+           }
             
             break;
         }
         case 3:
-            title = @"去评价";
+            if ([[IOManager getUserDefaultForKey:@"Type"] integerValue] == 1) {
+                title = @"去评价";
+            }else {
+                title = @"关于我们";
+            }
+            
             break;
         case 4:
-            title = @"关于我们";
+            if ([[IOManager getUserDefaultForKey:@"Type"] integerValue] == 1) {
+                title = @"关于我们";
+            }
+            
             break;
         default:
             title = @"退出";
@@ -140,28 +177,47 @@
         
     }else if(indexPath.section == 1)
     {
-
-        [self performSegueWithIdentifier:@"accessSegue" sender:self];
+       if ([[IOManager getUserDefaultForKey:@"Type"] integerValue] == 1) {
+            [self performSegueWithIdentifier:@"accessSegue" sender:self];
+       }else {
+           if(indexPath.row == 0)
+           {
+               [self performSegueWithIdentifier:@"systemSetSegue" sender:self];
+           }else {
+               [self performSegueWithIdentifier:@"systemInfoSegue" sender:self];
+           }
+       }
+       
         
         
     }else if(indexPath.section == 2)
     {
-        if(indexPath.row == 0)
-        {
-
-            [self performSegueWithIdentifier:@"systemSetSegue" sender:self];
+        if ([[IOManager getUserDefaultForKey:@"Type"] integerValue] == 1) {
+            if(indexPath.row == 0)
+            {
+                [self performSegueWithIdentifier:@"systemSetSegue" sender:self];
+            }else {
+                [self performSegueWithIdentifier:@"systemInfoSegue" sender:self];
+            }
         }else {
-            [self performSegueWithIdentifier:@"systemInfoSegue" sender:self];
-            return;
+            [self gotoAppStoreToComment];
         }
+        
+        
     }else if(indexPath.section == 3)
     {
-        [self gotoAppStoreToComment];
+        if ([[IOManager getUserDefaultForKey:@"Type"] integerValue] == 1) {
+            [self gotoAppStoreToComment];
+        }else {
+            [self performSegueWithIdentifier:@"aboutSegue" sender:self];
+        }
     
     }else if(indexPath.section == 4)
     {
-
-         [self performSegueWithIdentifier:@"aboutSegue" sender:self];
+        if ([[IOManager getUserDefaultForKey:@"Type"] integerValue] == 1) {
+            [self performSegueWithIdentifier:@"aboutSegue" sender:self];
+        }
+        
     }else {
         //退出发送请求
         NSString *authorToken =[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
