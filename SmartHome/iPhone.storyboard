@@ -3245,10 +3245,10 @@
         <image name="tv_up" width="10" height="9"/>
         <image name="u0" width="750" height="1020"/>
         <image name="u13" width="92" height="37"/>
-        <image name="u2" width="324" height="575"/>
+        <image name="u2" width="750" height="1020"/>
         <image name="u4" width="120" height="70"/>
         <image name="u6" width="120" height="70"/>
-        <image name="u8" width="329" height="568"/>
+        <image name="u8" width="750" height="1020"/>
         <image name="unselected" width="23" height="23"/>
         <image name="voice" width="26" height="26"/>
         <image name="voice_strong" width="39" height="32"/>
@@ -3260,7 +3260,7 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="J5F-aP-6iz"/>
+        <segue reference="WeN-Qz-0Az"/>
         <segue reference="vWH-k8-ixo"/>
         <segue reference="YuF-MW-0b0"/>
     </inferredMetricsTieBreakers>

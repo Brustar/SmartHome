@@ -17,8 +17,8 @@
 @interface RegisterDetailController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *authorNum;
 @property (weak, nonatomic) IBOutlet UITextField *userName;
-@property (weak, nonatomic) IBOutlet UITextField *passWord;
-@property (weak, nonatomic) IBOutlet UITextField *pwdAgain;
+@property (weak, nonatomic) IBOutlet UITextField *passWord;//密码
+@property (weak, nonatomic) IBOutlet UITextField *pwdAgain;//确认密码
 @property (nonatomic,assign) int cType;
 
 @property (weak, nonatomic) IBOutlet UIButton *auothCodeBtn;
