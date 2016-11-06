@@ -43,8 +43,21 @@
     [tap addTarget:self action:@selector(tap:)];
     
     self.RegistBtn.enabled = NO;
-
+    self.knowView.hidden = YES;
+    self.coverView.hidden = YES;
     [self.view addGestureRecognizer:tap];
+    self.pageScrollView.delegate = self;
+    
+    
+    _registerBtn.layer.cornerRadius = 5.0f; //圆角半径
+    _registerBtn.layer.masksToBounds = YES; //圆角
+    _registerBtn.layer.borderWidth = 0.5f; //边框宽度
+//    _registerBtn.layer.borderColor = [kButtonBroder CGColor]; //边框颜色
+    
+//    _registerBtn.layer.cornerRadius = 5.0f; //圆角半径
+//    _registerBtn.layer.masksToBounds = YES; //圆角
+//    _registerBtn.layer.borderWidth = 0.5f; //边框宽度
+    //    _registerBtn.layer.borderColor = [kButtonBroder CGColor]; //边框颜色
    
 }
 -(void)viewWillAppear:(BOOL)animated
