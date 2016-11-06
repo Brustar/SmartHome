@@ -3142,7 +3142,7 @@
                                 <constraints>
                                     <constraint firstItem="bgU-YC-3GJ" firstAttribute="centerX" secondItem="bj5-cC-wSP" secondAttribute="centerX" id="7wg-Mb-dWJ"/>
                                     <constraint firstAttribute="width" constant="375" id="Nzz-Pe-p3S"/>
-                                    <constraint firstAttribute="bottom" secondItem="bgU-YC-3GJ" secondAttribute="bottom" constant="5" id="iSS-jy-kWU"/>
+                                    <constraint firstAttribute="bottom" secondItem="bgU-YC-3GJ" secondAttribute="bottom" constant="-5" id="iSS-jy-kWU"/>
                                     <constraint firstAttribute="height" constant="80" id="nO8-f6-827"/>
                                 </constraints>
                             </view>

@@ -2070,8 +2070,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="335" height="89"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FHD-oY-Ja1">
-                                            <rect key="frame" x="207" y="20" width="108" height="30"/>
+                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FHD-oY-Ja1">
+                                            <rect key="frame" x="217" y="20" width="108" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="108" id="ERf-jS-IPB"/>
                                                 <constraint firstAttribute="height" constant="30" id="SdL-hI-oPH"/>
@@ -2577,7 +2577,7 @@
         <!--我的故障-->
         <scene sceneID="QcZ-Q2-Nnz">
             <objects>
-                <viewController storyboardIdentifier="MyDefaultViewController" id="LI1-MF-uIV" customClass="ProfieFaultsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyDefaultViewController" id="LI1-MF-uIV" customClass="ProfileListController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RU5-Vs-pdV"/>
                         <viewControllerLayoutGuide type="bottom" id="pvo-6q-qAs"/>
