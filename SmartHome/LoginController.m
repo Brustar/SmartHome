@@ -18,7 +18,7 @@
 #import "QRCodeReaderViewController.h"
 #import "RegisterPhoneNumController.h"
 #import "MSGController.h"
-#import "ProfieFaultsViewController.h"
+#import "ProfileFaultsViewController.h"
 #import "ServiceRecordViewController.h"
 #import "RegisterDetailController.h"
 #import "ECloudTabBarController.h"

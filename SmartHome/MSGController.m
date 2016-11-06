@@ -79,9 +79,11 @@
             
             for(NSDictionary *dicDetail in dic)
             {
-                [self.msgArr addObject:dicDetail[@"description"]];
-                [self.timesArr addObject:dicDetail[@"createDate"]];
-                [self.recordIDs addObject:dicDetail[@"itemID"]];
+                if ([dicDetail isKindOfClass:[NSDictionary class]]) {
+                    [self.msgArr addObject:dicDetail[@"description"]];
+                    [self.timesArr addObject:dicDetail[@"createDate"]];
+                    [self.recordIDs addObject:dicDetail[@"itemID"]];
+                }
             }
             
             [self.tableView reloadData];

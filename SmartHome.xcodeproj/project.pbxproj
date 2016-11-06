@@ -170,8 +170,8 @@
 		F65838D41D39D3BB004210AC /* WelcomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65838D31D39D3BB004210AC /* WelcomeController.m */; };
 		F65838DA1D3A2A43004210AC /* MsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F65838D91D3A2A43004210AC /* MsgCell.m */; };
 		F659110C1D967383002CFBB7 /* IphoneNetTvController.m in Sources */ = {isa = PBXBuildFile; fileRef = F659110B1D967383002CFBB7 /* IphoneNetTvController.m */; };
-		F65AF6D41D3370770048A4E5 /* ProfieFaultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65AF6D31D3370770048A4E5 /* ProfieFaultsViewController.m */; };
-		F65AF6DA1D3375700048A4E5 /* ProfieFaultsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F65AF6D91D3375700048A4E5 /* ProfieFaultsCell.m */; };
+		F65AF6D41D3370770048A4E5 /* ProfileFaultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65AF6D31D3370770048A4E5 /* ProfileFaultsViewController.m */; };
+		F65AF6DA1D3375700048A4E5 /* ProfileFaultsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F65AF6D91D3375700048A4E5 /* ProfileFaultsCell.m */; };
 		F65B7D271D34E9E00059CFA4 /* MySettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65B7D261D34E9E00059CFA4 /* MySettingViewController.m */; };
 		F65DB3411D2B5AB2002A815C /* RegisterDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65DB33C1D2B5AB2002A815C /* RegisterDetailController.m */; };
 		F65DB3421D2B5AB2002A815C /* RegisterPhoneNumController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65DB33E1D2B5AB2002A815C /* RegisterPhoneNumController.m */; };
@@ -630,10 +630,10 @@
 		F65838D91D3A2A43004210AC /* MsgCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgCell.m; sourceTree = "<group>"; };
 		F659110A1D967383002CFBB7 /* IphoneNetTvController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneNetTvController.h; sourceTree = "<group>"; };
 		F659110B1D967383002CFBB7 /* IphoneNetTvController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneNetTvController.m; sourceTree = "<group>"; };
-		F65AF6D21D3370770048A4E5 /* ProfieFaultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfieFaultsViewController.h; sourceTree = "<group>"; };
-		F65AF6D31D3370770048A4E5 /* ProfieFaultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfieFaultsViewController.m; sourceTree = "<group>"; };
-		F65AF6D81D3375700048A4E5 /* ProfieFaultsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfieFaultsCell.h; sourceTree = "<group>"; };
-		F65AF6D91D3375700048A4E5 /* ProfieFaultsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfieFaultsCell.m; sourceTree = "<group>"; };
+		F65AF6D21D3370770048A4E5 /* ProfileFaultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileFaultsViewController.h; sourceTree = "<group>"; };
+		F65AF6D31D3370770048A4E5 /* ProfileFaultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileFaultsViewController.m; sourceTree = "<group>"; };
+		F65AF6D81D3375700048A4E5 /* ProfileFaultsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileFaultsCell.h; sourceTree = "<group>"; };
+		F65AF6D91D3375700048A4E5 /* ProfileFaultsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileFaultsCell.m; sourceTree = "<group>"; };
 		F65B7D251D34E9E00059CFA4 /* MySettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySettingViewController.h; sourceTree = "<group>"; };
 		F65B7D261D34E9E00059CFA4 /* MySettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySettingViewController.m; sourceTree = "<group>"; };
 		F65DB33B1D2B5AB2002A815C /* RegisterDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterDetailController.h; sourceTree = "<group>"; };
@@ -909,10 +909,10 @@
 				F645BD461D76E3D8005BFB7A /* FavorController.m */,
 				F65838D81D3A2A43004210AC /* MsgCell.h */,
 				F65838D91D3A2A43004210AC /* MsgCell.m */,
-				F65AF6D21D3370770048A4E5 /* ProfieFaultsViewController.h */,
-				F65AF6D31D3370770048A4E5 /* ProfieFaultsViewController.m */,
-				F65AF6D81D3375700048A4E5 /* ProfieFaultsCell.h */,
-				F65AF6D91D3375700048A4E5 /* ProfieFaultsCell.m */,
+				F65AF6D21D3370770048A4E5 /* ProfileFaultsViewController.h */,
+				F65AF6D31D3370770048A4E5 /* ProfileFaultsViewController.m */,
+				F65AF6D81D3375700048A4E5 /* ProfileFaultsCell.h */,
+				F65AF6D91D3375700048A4E5 /* ProfileFaultsCell.m */,
 				F69C82311D363376002DE6D7 /* ServiceRecordViewController.h */,
 				F69C82321D363376002DE6D7 /* ServiceRecordViewController.m */,
 				F69C82341D363A4D002DE6D7 /* ServiceRecordCell.h */,
@@ -1826,7 +1826,7 @@
 				F62E05661DAB68620096BF00 /* IphoneEditSceneController.m in Sources */,
 				F60E71CA1D796BE6008863DB /* AmplifierController.m in Sources */,
 				F60FDB461D003FD500AB04BE /* CurtainTableViewCell.m in Sources */,
-				F65AF6DA1D3375700048A4E5 /* ProfieFaultsCell.m in Sources */,
+				F65AF6DA1D3375700048A4E5 /* ProfileFaultsCell.m in Sources */,
 				F646C0B91D91173000DF1728 /* IphoneRoomView.m in Sources */,
 				0FABF91F1D06AA4E000892D8 /* DVDController.m in Sources */,
 				0FEE12771D20C53400811947 /* TXHRrettyRuler.m in Sources */,
@@ -1901,7 +1901,7 @@
 				F6755A4C1D4063FA002394F3 /* ECloudTabBar.m in Sources */,
 				0FAF8FEF1CE18C41000557BD /* DeviceInfo.m in Sources */,
 				0F4B3C001D2A13870002E75E /* MSGController.m in Sources */,
-				F65AF6D41D3370770048A4E5 /* ProfieFaultsViewController.m in Sources */,
+				F65AF6D41D3370770048A4E5 /* ProfileFaultsViewController.m in Sources */,
 				0F96A1671D17F37C00E1594F /* RulerView.m in Sources */,
 				0FB205E91CDC312A00B5E87E /* IOManager.m in Sources */,
 				F66596DA1D3F12FB0082716A /* EnergyOfDeviceController.m in Sources */,
