@@ -96,8 +96,8 @@
             NSArray *messageInfo = responseObject[@"messageInfo"];
             for(NSDictionary *typeName in messageInfo)
             {
-                NSString *typeN = typeName[@"typeName"];
-                [self.typeNames addObject:typeN];
+                //NSString *typeN = typeName[@"typeName"];
+                //[self.typeNames addObject:typeN];
                 NSArray *infoList = typeName[@"infoList"];
                 NSMutableArray *itemNames = [NSMutableArray array];
                 NSMutableArray *itemIDs = [NSMutableArray array];

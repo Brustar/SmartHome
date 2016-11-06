@@ -80,9 +80,9 @@
     {
         if([responseObject[@"Result"] intValue]==0)
         {
-            NSDictionary *dic = responseObject[@"messageInfo"];
+            NSArray *arr = responseObject[@"messageInfo"];
             
-            for(NSDictionary *dicDetail in dic)
+            for(NSDictionary *dicDetail in arr)
             {
                 [self.faultArr addObject:dicDetail[@"description"]];
                 [self.timesArr addObject:dicDetail[@"createDate"]];
