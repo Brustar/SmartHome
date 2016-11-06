@@ -59,7 +59,8 @@
 - (void)addItemWithTitle:(NSString *)title imageName:(NSString *)imageName {
     UIButton *button = nil;
     
-    if (self.selectedButtonCount < self.btns.count) {
+    if (self.selectedButtonCount < self.btns.
+        count) {
         button = self.btns[self.selectedButtonCount];
     } else {
         button = [[UIButton alloc] init];
@@ -87,7 +88,7 @@
     
     self.selectedButtonCount++;
     
-    [self setViewFrame];
+//    [self setViewFrame];
 }
 
 

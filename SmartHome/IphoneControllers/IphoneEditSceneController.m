@@ -31,7 +31,10 @@
 #import "CollectionViewCell.h"
 
 @interface IphoneEditSceneController ()<IphoneTypeViewDelegate>
+
+
 @property (weak, nonatomic) IBOutlet IphoneTypeView *subTypeView;
+
 @property (weak, nonatomic) IBOutlet IphoneTypeView *deviceTypeView;
 @property (weak, nonatomic) IBOutlet UIView *devicelView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveBarBtn;
@@ -45,6 +48,7 @@
 @property(nonatomic,strong) NSArray *devicesTypes;
 
 @property (nonatomic, assign) int typeIndex;
+
 @end
 
 @implementation IphoneEditSceneController
@@ -91,7 +95,7 @@
     }
     
 //    [self.subTypeView setSelectButton:0];
-//    [self iphoneTypeView:self.subTypeView didSelectButton:0];
+    [self iphoneTypeView:self.subTypeView didSelectButton:0];
     
 }
 -(void)setupDeviceTypeView

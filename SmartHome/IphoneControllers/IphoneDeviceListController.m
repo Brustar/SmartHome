@@ -54,7 +54,7 @@
     self.rooms = [SQLManager getAllRoomsInfo];
     
     [self setUpRoomScrollerView];
-    //   [self setUpScrollerView];
+       [self setUpScrollerView];
     
     
 }
@@ -67,7 +67,7 @@
     
     self.deviceTypeView.delegate = self;
     
-    //[self.deviceTypeView setSelectButton:0];
+    [self.deviceTypeView setSelectButton:0];
     
     [self iphoneRoomView:self.deviceTypeView didSelectButton:0];
 }

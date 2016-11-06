@@ -9,6 +9,33 @@
 #import "IphoneAddSceneController.h"
 #import "SQLManager.h"
 #import "SceneManager.h"
+
+@interface UIImagePickerController (LandScapeImagePicker)
+
+- (UIStatusBarStyle)preferredStatusBarStyle;
+- (NSUInteger)supportedInterfaceOrientations;
+- (BOOL)prefersStatusBarHidden;
+@end
+
+@implementation UIImagePickerController (LandScapeImagePicker)
+
+- (NSUInteger) supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskLandscape;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
+
+@end
+
 @interface IphoneAddSceneController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITextField *sceneName;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -18,6 +45,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *repeat;
 
 @property (weak, nonatomic) IBOutlet UIView *timeView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveNewScene;//保存按钮
 
 @end
 
@@ -25,6 +53,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if(self.isFavor)
+    {
+        self.saveNewScene.enabled = NO;
+    }
     self.tableView.tableFooterView = [UIView new];
      self.automaticallyAdjustsScrollViewInsets = NO;
   
@@ -106,6 +138,7 @@
     return cell;
 }
 
+//保存场景
 - (IBAction)saveNewScene:(id)sender {
     NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];

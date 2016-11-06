@@ -22,14 +22,14 @@
 @property (weak, nonatomic) IBOutlet UIButton *IpadRegisterBtn;
 @property (weak, nonatomic) IBOutlet UIScrollView *pageScrollView;
 @property (weak, nonatomic) IBOutlet UIButton *RegistBtn;
+@property (weak, nonatomic) IBOutlet UIButton *LoginBtn;
+@property (weak, nonatomic) IBOutlet UIButton *iphoneBtn;//体验按钮
 
 @end
 
 @implementation WelcomeController
 {
     NSArray *_imageNames;
-    NSArray *_titles;
-    
     NSTimer *_timer;
     CGFloat _AutoScrollDelay;
     BOOL _isAutoScroll;
@@ -49,14 +49,14 @@
     self.pageScrollView.delegate = self;
     
     
-    _registerBtn.layer.cornerRadius = 5.0f; //圆角半径
-    _registerBtn.layer.masksToBounds = YES; //圆角
-    _registerBtn.layer.borderWidth = 0.5f; //边框宽度
+    _LoginBtn.layer.cornerRadius = 5.0f; //圆角半径
+    _LoginBtn.layer.masksToBounds = YES; //圆角
+//    _LoginBtn.layer.borderWidth = 0.5f; //边框宽度
 //    _registerBtn.layer.borderColor = [kButtonBroder CGColor]; //边框颜色
     
-//    _registerBtn.layer.cornerRadius = 5.0f; //圆角半径
-//    _registerBtn.layer.masksToBounds = YES; //圆角
-//    _registerBtn.layer.borderWidth = 0.5f; //边框宽度
+    _iphoneBtn.layer.cornerRadius = 5.0f; //圆角半径
+    _iphoneBtn.layer.masksToBounds = YES; //圆角
+//    _iphoneBtn.layer.borderWidth = 0.5f; //边框宽度
     //    _registerBtn.layer.borderColor = [kButtonBroder CGColor]; //边框颜色
    
 }
@@ -76,8 +76,8 @@
 }
 - (IBAction)clickWeKnowBtn:(id)sender {
     
-    self.coverView.hidden = YES;
-    self.knowView.hidden = YES;
+//    self.coverView.hidden = YES;
+//    self.knowView.hidden = YES;
 }
 
 - (IBAction)clickloginBtn:(id)sender {
@@ -148,8 +148,6 @@
         }
         _pageScrollView.contentSize = CGSizeMake(_pageScrollView.frame.size.width * [_imageNames count], _pageScrollView.frame.size.height);
         _pageScrollView.contentSize = CGSizeMake(_pageScrollView.contentSize.width, 0);
-        _titles =  [NSMutableArray arrayWithObjects:@"随时",@"随地",@"每一位", nil];
-//        _titleLabel.text = [_titles objectAtIndex:0];
         [self setUpTimer];
     }
 }
@@ -193,7 +191,6 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     int index = self.pageScrollView.contentOffset.x / self.pageScrollView.frame.size.width;
-//    _titleLabel.text = [_titles objectAtIndex:index];
     _pageControl.currentPage = index;
 }
 
