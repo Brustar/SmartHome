@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <AFNetworking.h>
-@interface ProfieFaultsViewController : UIViewController
+@interface ProfieFaultsViewController : UITableViewController
 @property(nonatomic,strong) NSMutableArray *Mydefaults;
 @end

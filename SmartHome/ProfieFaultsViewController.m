@@ -13,7 +13,6 @@
 #import "DeviceInfo.h"
 
 @interface ProfieFaultsViewController ()<UITableViewDelegate,UITableViewDataSource,HttpDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,assign) BOOL isEditing;
 @property (weak, nonatomic) IBOutlet UIView *footerView;
 @property (nonatomic,strong) NSMutableArray *faultArr;

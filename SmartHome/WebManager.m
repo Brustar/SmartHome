@@ -7,6 +7,7 @@
 //
 
 #import "WebManager.h"
+#import "ECloudTabBarController.h"
 
 @implementation WebManager
 
@@ -116,7 +117,15 @@
 #pragma mark Action
 - (void)cancel:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:^{
+        UIViewController *ecloudVC;
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+            ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ECloudTabBarController"];
+        }else{
+            ecloudVC = [[UIStoryboard storyboardWithName:@"iphone" bundle:nil] instantiateViewControllerWithIdentifier:@"main"];
+        }
+        [self.navigationController pushViewController:ecloudVC animated:YES];
+    }];
 }
 
 @end
