@@ -459,6 +459,7 @@
     [self.view bringSubviewToFront:self.currentViewController.view];
 }
 - (IBAction)selectSceneImg:(id)sender {
+    
     UIButton *btn = sender;
     UIView *view = btn.superview;
     CGFloat w = view.frame.size.width;
@@ -478,6 +479,7 @@
     
 }
 - (void)selectPhoto:(KxMenuItem *)item {
+    [DeviceInfo defaultManager].isPhotoLibrary = YES;
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
@@ -497,7 +499,13 @@
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
+    [DeviceInfo defaultManager].isPhotoLibrary = NO;
     self.selectSceneImg = info[UIImagePickerControllerEditedImage];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [DeviceInfo defaultManager].isPhotoLibrary = NO;
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 

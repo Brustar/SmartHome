@@ -73,6 +73,8 @@ enum{
 @property (nonatomic, strong) NSString *db;
 //连接状态
 @property (nonatomic) int connectState;
+//判断是不是调用了相册
+@property (nonatomic, assign) BOOL isPhotoLibrary;
 
 + (instancetype) defaultManager;
 - (void) deviceGenaration;

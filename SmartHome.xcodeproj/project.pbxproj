@@ -119,6 +119,7 @@
 		0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7B0B51D1380BF003C2D52 /* AirController.m */; };
 		0FF92B661D9224640098DD54 /* TVChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF92B651D9224640098DD54 /* TVChannel.m */; };
 		CD056AB91DCCA10100EB224E /* check_alt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD056AB81DCCA10100EB224E /* check_alt@2x.png */; };
+		CD46E6B21DCED8B700A9A0BB /* UIImagePickerController+Nonrotating.m in Sources */ = {isa = PBXBuildFile; fileRef = CD46E6B11DCED8B600A9A0BB /* UIImagePickerController+Nonrotating.m */; };
 		F361579D9B9637C261531C8C /* libPods-SmartHome.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B2DBF5C92F57E3B7AD6AA3 /* libPods-SmartHome.a */; };
 		F60E71CA1D796BE6008863DB /* AmplifierController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60E71C91D796BE6008863DB /* AmplifierController.m */; };
 		F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB411D00029900AB04BE /* DetailViewController.m */; };
@@ -533,6 +534,8 @@
 		9B45FF693457BA21BA43CE05 /* Pods-SmartHome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.debug.xcconfig"; sourceTree = "<group>"; };
 		A4B2DBF5C92F57E3B7AD6AA3 /* libPods-SmartHome.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SmartHome.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD056AB81DCCA10100EB224E /* check_alt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check_alt@2x.png"; sourceTree = "<group>"; };
+		CD46E6B01DCED8B600A9A0BB /* UIImagePickerController+Nonrotating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImagePickerController+Nonrotating.h"; sourceTree = "<group>"; };
+		CD46E6B11DCED8B600A9A0BB /* UIImagePickerController+Nonrotating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImagePickerController+Nonrotating.m"; sourceTree = "<group>"; };
 		CE54136C9EEF8F51E8FBEEDE /* Pods-SmartHome.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.release.xcconfig"; sourceTree = "<group>"; };
 		F60E71C81D796BE6008863DB /* AmplifierController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmplifierController.h; sourceTree = "<group>"; };
 		F60E71C91D796BE6008863DB /* AmplifierController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmplifierController.m; sourceTree = "<group>"; };
@@ -1341,6 +1344,8 @@
 				F673EBD11D45E976001270FB /* VerifyCodeView.m */,
 				F623378B1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.h */,
 				F623378C1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.m */,
+				CD46E6B01DCED8B600A9A0BB /* UIImagePickerController+Nonrotating.h */,
+				CD46E6B11DCED8B600A9A0BB /* UIImagePickerController+Nonrotating.m */,
 				F68A5DD61D782D8400601612 /* ECSearchView.h */,
 				F68A5DD71D782D8400601612 /* ECSearchView.m */,
 			);
@@ -1926,6 +1931,7 @@
 				F62CD87D1D950453001C66CE /* IphoneAirController.m in Sources */,
 				F65DB3411D2B5AB2002A815C /* RegisterDetailController.m in Sources */,
 				0FAF98A61CE40F3C009BDBB5 /* QRCodeReaderViewController.m in Sources */,
+				CD46E6B21DCED8B700A9A0BB /* UIImagePickerController+Nonrotating.m in Sources */,
 				0F8D76D01D9A1B9700DDD063 /* Schedule.m in Sources */,
 				0F96A1661D17F37C00E1594F /* RulerLeftTagView.m in Sources */,
 				0FCF43311CE09039009BFDD9 /* IbeaconManager.m in Sources */,
