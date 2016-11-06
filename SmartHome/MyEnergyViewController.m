@@ -34,6 +34,7 @@
 - (IBAction)clickSureBtn:(id)sender;
 //选择设备能耗属性
 @property (weak, nonatomic) IBOutlet UITableView *selectedDeviceTableView;
+
 @property (nonatomic,strong) NSArray *deviceType;
 @property (nonatomic,strong) NSMutableArray *deviceIDs;
 @property (nonatomic,strong) NSArray *subDevice;

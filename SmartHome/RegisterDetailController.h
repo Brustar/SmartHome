@@ -13,5 +13,9 @@
 @property (nonatomic,strong) NSString *phoneStr;
 @property (nonatomic,strong) NSString *userType;
 @property (weak, nonatomic) IBOutlet UIImageView *checkPwdImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *passWoardImageView;//确认密码的图标
+@property (weak, nonatomic) IBOutlet UIImageView *UserNameImageVIew;//用户名图标
+@property (weak, nonatomic) IBOutlet UIImageView *PhoneNumBerImageView;//手机号图标
+
 @property (nonatomic,strong) NSString *MasterID;
 @end

@@ -232,14 +232,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4G9-SJ-3pF">
-                                <rect key="frame" x="0.0" y="-10" width="375" height="667"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4G9-SJ-3pF">
+                                <rect key="frame" x="0.0" y="-10" width="375" height="687"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gjf-MA-YFT">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gjf-MA-YFT">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="686"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="u8" translatesAutoresizingMaskIntoConstraints="NO" id="OfK-Vg-tJN">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="u8" translatesAutoresizingMaskIntoConstraints="NO" id="OfK-Vg-tJN">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="OfK-Vg-tJN" secondAttribute="height" multiplier="25:34" id="hl9-8P-DI7"/>
                                                 </constraints>
@@ -253,11 +253,11 @@
                                             <constraint firstItem="OfK-Vg-tJN" firstAttribute="top" secondItem="Gjf-MA-YFT" secondAttribute="top" id="rLR-BB-Cds"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UCL-Uw-8If" userLabel="View1">
-                                        <rect key="frame" x="750" y="0.0" width="375" height="667"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UCL-Uw-8If" userLabel="View1">
+                                        <rect key="frame" x="375" y="0.0" width="375" height="686"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="u0" translatesAutoresizingMaskIntoConstraints="NO" id="yaN-2v-doi">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="u0" translatesAutoresizingMaskIntoConstraints="NO" id="yaN-2v-doi">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="yaN-2v-doi" secondAttribute="height" multiplier="25:34" id="Fem-jy-7xI"/>
                                                 </constraints>
@@ -271,11 +271,11 @@
                                             <constraint firstItem="yaN-2v-doi" firstAttribute="leading" secondItem="UCL-Uw-8If" secondAttribute="leading" id="u57-6k-wau"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5kx-VB-3dO" userLabel="View2">
-                                        <rect key="frame" x="1500" y="0.0" width="375" height="667"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5kx-VB-3dO" userLabel="View2">
+                                        <rect key="frame" x="750" y="0.0" width="375" height="686"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="u2" translatesAutoresizingMaskIntoConstraints="NO" id="zOG-f7-R0C">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="u2" translatesAutoresizingMaskIntoConstraints="NO" id="zOG-f7-R0C">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="zOG-f7-R0C" secondAttribute="height" multiplier="25:34" id="hRS-ZZ-eM0"/>
                                                 </constraints>
