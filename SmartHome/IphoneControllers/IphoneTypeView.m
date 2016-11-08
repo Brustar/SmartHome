@@ -9,9 +9,9 @@
 #import "IphoneTypeView.h"
 
 
-#define ButtonTitleHeight  30
+#define ButtonTitleHeight  20
 
-#define ButtonImageTitleMargin  10
+#define ButtonImageTitleMargin  30
 
 
 @interface IphoneTypeView ()
@@ -20,7 +20,7 @@
 @property (nonatomic, weak) UIButton *selectedButton;
 @property (nonatomic, assign) int selectedButtonCount;
 @property (nonatomic,strong) UIScrollView *scrollView;
-
+@property (nonatomic,strong) UILabel * nameLabel;
 @end
 
 
@@ -67,28 +67,30 @@
         [self.btns addObject:button];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor redColor] forState:UIControlStateDisabled];
+        
         [button addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     button.hidden = NO;
     button.enabled = YES;
     
-    CGFloat buttonW = [UIScreen mainScreen].bounds.size.width / 4;
+    CGFloat buttonW = 30;
     
     UIImage *image = [UIImage imageNamed:imageName];
+
     [button setImage:image forState:UIControlStateNormal];
     CGFloat imageViewX = (buttonW - image.size.width) / 2;
     button.imageView.frame = CGRectMake(imageViewX, 0, image.size.width, image.size.height);
     
     [button setTitle:title forState:UIControlStateNormal];
     
-    button.titleLabel.frame = CGRectMake(0, ButtonImageTitleMargin + image.size.height, buttonW, ButtonTitleHeight);
+    button.titleLabel.frame = CGRectMake(0, 50, 30, ButtonTitleHeight);
     
     [self.scrollView addSubview:button];
     
     self.selectedButtonCount++;
     
-//    [self setViewFrame];
+    [self setViewFrame];
 }
 
 
@@ -124,16 +126,19 @@
 
 - (void)setViewFrame {
     UIButton *button = self.btns[0];
-    CGFloat buttonH = button.imageView.image.size.height + ButtonImageTitleMargin + ButtonTitleHeight;
-    CGFloat buttonY = (self.frame.size.height - buttonH) / 2;
+    CGFloat buttonH  = 30;
+//    CGFloat buttonH = button.imageView.image.size.height - ButtonImageTitleMargin - ButtonTitleHeight;
+    CGFloat buttonY = (self.frame.size.height - buttonH) / 7;
+    
     if (buttonY < 0 ) {
         buttonY = 0;
     }
-    CGFloat buttonW = [UIScreen mainScreen].bounds.size.width / 4;
+//    CGFloat buttonW = [UIScreen mainScreen].bounds.size.width / 6;
+    CGFloat buttonW = 30;
     
     for (int i = 0; i < self.selectedButtonCount; i++) {
         UIButton *button = self.btns[i];
-        CGFloat buttonX = i * buttonW;
+        CGFloat buttonX = i * (buttonW+5);
         button.frame = CGRectMake(buttonX, buttonY, buttonW, buttonH);
     }
     
@@ -145,7 +150,7 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-//    [self setViewFrame];
+    [self setViewFrame];
 }
 
 

@@ -1101,7 +1101,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xZ9-z9-F4p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1400" y="226"/>
+            <point key="canvasLocation" x="1280" y="227"/>
         </scene>
         <!--添加场景-->
         <scene sceneID="pGI-Wl-bwf">
@@ -1242,7 +1242,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="960-gK-uPK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1719" y="210"/>
+            <point key="canvasLocation" x="1725" y="210"/>
         </scene>
         <!--添加设备——设备列表-->
         <scene sceneID="PfY-RB-xx1">
@@ -3127,7 +3127,7 @@
                                 <rect key="frame" x="0.0" y="548" width="375" height="80"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgU-YC-3GJ">
-                                        <rect key="frame" x="174" y="49" width="26" height="26"/>
+                                        <rect key="frame" x="174" y="59" width="26" height="26"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="26" id="ab9-cX-O3i"/>
                                             <constraint firstAttribute="height" constant="26" id="bEY-20-aQl"/>
@@ -3260,8 +3260,8 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="WeN-Qz-0Az"/>
-        <segue reference="vWH-k8-ixo"/>
         <segue reference="YuF-MW-0b0"/>
+        <segue reference="vWH-k8-ixo"/>
+        <segue reference="WeN-Qz-0Az"/>
     </inferredMetricsTieBreakers>
 </document>

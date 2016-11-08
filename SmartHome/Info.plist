@@ -37,6 +37,8 @@
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<true/>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>亲，我们想要访问你的麦克风哟</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>亲，我们想要访问你的相册哟</string>
 	<key>UIApplicationShortcutItems</key>
@@ -69,8 +71,6 @@
 	<array>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>亲，我们想要访问你的麦克风哟</string>
 	<key>UISupportedInterfaceOrientations~iphone</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

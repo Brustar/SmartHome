@@ -96,7 +96,7 @@
             NSArray *messageInfo = responseObject[@"messageInfo"];
             for(NSDictionary *typeName in messageInfo)
             {
-                NSString *typeN = typeName[@"typeName"];
+                NSString *typeN = typeName[@"itemName"];
                 [self.typeNames addObject:typeN];
                 NSArray *infoList = typeName[@"infoList"];
                 NSMutableArray *itemNames = [NSMutableArray array];
@@ -114,7 +114,7 @@
                  
                          [itemIDs addObject:itemID];
                     
-                    if ([records containsObject:recordID]) {
+                    if (![records containsObject:recordID]) {
                         [records addObject:recordID];
                     }
                     
