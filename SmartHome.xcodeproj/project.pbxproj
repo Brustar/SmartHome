@@ -130,7 +130,6 @@
 		F618141D1DB5B0C7003B0741 /* PushSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = F618141C1DB5B0C7003B0741 /* PushSettingController.m */; };
 		F61896381D87B06300DBE6CD /* ScreenCurtainController.m in Sources */ = {isa = PBXBuildFile; fileRef = F61896371D87B06300DBE6CD /* ScreenCurtainController.m */; };
 		F618963B1D87B08300DBE6CD /* ProjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = F618963A1D87B08300DBE6CD /* ProjectController.m */; };
-		F623378D1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F623378C1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.m */; };
 		F62337901D70675B00ADAD00 /* TVIconController.m in Sources */ = {isa = PBXBuildFile; fileRef = F623378F1D70675B00ADAD00 /* TVIconController.m */; };
 		F6251F711D541885000A5A47 /* PluginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6251F701D541885000A5A47 /* PluginViewController.m */; };
 		F6251F741D541D8A000A5A47 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = F6251F731D541D8A000A5A47 /* Device.m */; };
@@ -554,8 +553,6 @@
 		F61896371D87B06300DBE6CD /* ScreenCurtainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenCurtainController.m; sourceTree = "<group>"; };
 		F61896391D87B08300DBE6CD /* ProjectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectController.h; sourceTree = "<group>"; };
 		F618963A1D87B08300DBE6CD /* ProjectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectController.m; sourceTree = "<group>"; };
-		F623378B1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImagePickerController+LandScapeImagePicker.h"; sourceTree = "<group>"; };
-		F623378C1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImagePickerController+LandScapeImagePicker.m"; sourceTree = "<group>"; };
 		F623378E1D70675B00ADAD00 /* TVIconController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVIconController.h; sourceTree = "<group>"; };
 		F623378F1D70675B00ADAD00 /* TVIconController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVIconController.m; sourceTree = "<group>"; };
 		F6251F6F1D541885000A5A47 /* PluginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginViewController.h; sourceTree = "<group>"; };
@@ -1345,8 +1342,6 @@
 				F6755A5D1D40D576002394F3 /* ECloudMoreView.m */,
 				F673EBD01D45E976001270FB /* VerifyCodeView.h */,
 				F673EBD11D45E976001270FB /* VerifyCodeView.m */,
-				F623378B1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.h */,
-				F623378C1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.m */,
 				CD46E6B01DCED8B600A9A0BB /* UIImagePickerController+Nonrotating.h */,
 				CD46E6B11DCED8B600A9A0BB /* UIImagePickerController+Nonrotating.m */,
 				F68A5DD61D782D8400601612 /* ECSearchView.h */,
@@ -1482,6 +1477,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0F032D771CC9B12700D1920D /* Build configuration list for PBXNativeTarget "SmartHome" */;
 			buildPhases = (
+				3FB63364E5E8E971F832FF9B /* 📦 Check Pods Manifest.lock */,
 				0D4CB7A112BAB6A5B4475248 /* [CP] Check Pods Manifest.lock */,
 				526834747F80F77E4EA860E8 /* [CP] Check Pods Manifest.lock */,
 				4B5F56A8FA12D4BD7D28AF3D /* [CP] Check Pods Manifest.lock */,
@@ -1654,6 +1650,21 @@
 			inputPaths = (
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3FB63364E5E8E971F832FF9B /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1845,7 +1856,6 @@
 				F67F1F811D3CC46C00F2B7E5 /* AboutUsController.m in Sources */,
 				0F295A601D2E092900F23F21 /* HttpManager.m in Sources */,
 				0F180FC31D0E4C7400392F4C /* NetvController.m in Sources */,
-				F623378D1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.m in Sources */,
 				F66DFF2B1D5188BF0005E882 /* EditSceneCell.m in Sources */,
 				0FAF74C11CEEA17C00432713 /* HRColorCursor.m in Sources */,
 				0F91AA171CDC798700094C25 /* PrintObject.m in Sources */,
