@@ -36,6 +36,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic,assign) int selectedSId;
 @property (nonatomic ,strong) SceneCell *cell;
+@property (weak, nonatomic) IBOutlet UIButton *AddSceneBtn;
 
 @end
 
@@ -173,7 +174,7 @@
 #pragma  mark - UICollectionViewDelegate
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.scenes.count + 1;
+    return self.scenes.count;
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -181,44 +182,41 @@
     
     cell.layer.cornerRadius = 20;
     cell.layer.masksToBounds = YES;
-    if(indexPath.row == self.scenes.count)
-    {
-        cell.scenseName.text = @"添加场景";
-    }else{
-        Scene *scene = self.scenes[indexPath.row];
-        cell.tag = scene.sceneID;
-        cell.scenseName.text = scene.sceneName;
-        cell.delegate = self;
-        [cell useLongPressGesture];
-    }
+
+    Scene *scene = self.scenes[indexPath.row];
+    cell.tag = scene.sceneID;
+    cell.scenseName.text = scene.sceneName;
+    cell.delegate = self;
+//    cell.imgView.image = [UIImage imageNamed:@"u2.png"];
+    [cell.imgView sd_setImageWithURL:[NSURL URLWithString: scene.picName] placeholderImage:[UIImage imageNamed:@"PL"]];
     
+    [cell useLongPressGesture];
 
     return cell;
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    Scene *scene = self.scenes[indexPath.row];
+    self.selectedSId = scene.sceneID;
+    SceneCell *cell = (SceneCell*)[collectionView cellForItemAtIndexPath:indexPath];
     
-    if(indexPath.row == self.scenes.count)
+    [cell useLongPressGesture];
+    if(cell.deleteBtn.hidden)
     {
-        [self performSegueWithIdentifier:@"iphoneAddSceneSegue" sender:self];
-    }else{
-        Scene *scene = self.scenes[indexPath.row];
-        self.selectedSId = scene.sceneID;
-        SceneCell *cell = (SceneCell*)[collectionView cellForItemAtIndexPath:indexPath];
+        [self performSegueWithIdentifier:@"iphoneEditSegue" sender:self];
+        [[SceneManager defaultManager] startScene:scene.sceneID];
         
-        [cell useLongPressGesture];
-        if(cell.deleteBtn.hidden)
-        {
-            [self performSegueWithIdentifier:@"iphoneEditSegue" sender:self];
-            [[SceneManager defaultManager] startScene:scene.sceneID];
-
-        }else{
-            cell.deleteBtn.hidden = YES;
-        }
+    }else{
+        cell.deleteBtn.hidden = YES;
     }
-    
 }
+//添加场景
+- (IBAction)AddSceneBtn:(id)sender {
+    
+    [self performSegueWithIdentifier:@"iphoneAddSceneSegue" sender:self];
+}
+
 //删除场景
 -(void)sceneDeleteAction:(SceneCell *)cell
 {
@@ -263,7 +261,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(cellWidth, 80 );
+    return CGSizeMake(cellWidth, 133);
 }
 
 - (void)didReceiveMemoryWarning {
