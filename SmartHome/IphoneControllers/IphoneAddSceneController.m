@@ -9,6 +9,7 @@
 #import "IphoneAddSceneController.h"
 #import "SQLManager.h"
 #import "SceneManager.h"
+#import "MBProgressHUD+NJ.h"
 
 @interface UIImagePickerController (LandScapeImagePicker)
 
@@ -105,7 +106,7 @@
 
 -(NSArray *)deviceAdded
 {
-    NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
+    NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
     NSArray *devices = plistDic[@"devices"];
@@ -140,16 +141,25 @@
 
 //保存场景
 - (IBAction)saveNewScene:(id)sender {
-    NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
+    
+    if ([self.sceneName.text isEqualToString:@""]) {
+        [MBProgressHUD showError:@"场景名不能为空!"];
+        return;
+    }
+    NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
+
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
     
     Scene *scene = [[Scene alloc]initWhithoutSchedule];
     [scene setValuesForKeysWithDictionary:plistDic];
     [[DeviceInfo defaultManager] setEditingScene:NO];
+//      [[SceneManager defaultManager] saveAsNewScene:scene withName:self.sceneName.text withPic:self.selectSceneImg];
     [[SceneManager defaultManager] addScene:scene withName:self.sceneName.text withImage:[UIImage imageNamed:@""]];
 //    self.navigationController.navigationBar.hidden = YES;
     [self.navigationController popViewControllerAnimated:YES];
+    
+    
 }
 
 

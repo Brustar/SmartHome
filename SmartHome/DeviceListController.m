@@ -19,7 +19,6 @@
 #import "PrintObject.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
-//#import "UIImagePickerController+LandScapeImagePicker.h"
 #import "AmplifierController.h"
 #import "UploadManager.h"
 #import "ECloudTabBarController.h"

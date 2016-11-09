@@ -40,7 +40,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *endTimeBtn;
 
-@property (weak, nonatomic) IBOutlet UIView *dataPickerView;
+
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerTime;
 //@property (weak, nonatomic) IBOutlet UIDatePicker *dataPicker;
 @property (strong,nonatomic) CLLocationManager *lm;
@@ -464,11 +464,13 @@
     if(btn.selected)
     {
         self.timeView.hidden = YES;
+        self.dataPicker.hidden = YES;
         self.ShowSettingDataView.hidden = YES;
     }else {
         
         self.timeView.hidden =  NO;
         self.ShowSettingDataView.hidden = NO;
+//        self.dataPicker.hidden = NO;
         NSString  *astronomicealTime;
         NSDictionary *dic;
         int isPlane;
@@ -637,6 +639,8 @@
     [self.view addSubview:self.dataPicker];
 }
 
+
+//开始日期的设置
 - (IBAction)startDataBtn:(id)sender {
     self.pickTimeView.hidden = YES;
     
@@ -662,7 +666,7 @@
     self.scene.schedules = sches;
     [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
 }
-
+//结束日期的时间设置
 - (IBAction)endDataBtn:(id)sender {
     self.pickTimeView.hidden = YES;
     
