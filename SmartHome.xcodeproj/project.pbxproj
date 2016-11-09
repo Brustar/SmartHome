@@ -11,7 +11,6 @@
 		0F032D491CC9B12700D1920D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F032D481CC9B12700D1920D /* main.m */; };
 		0F032D4C1CC9B12700D1920D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F032D4B1CC9B12700D1920D /* AppDelegate.m */; };
 		0F032D5A1CC9B12700D1920D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F032D591CC9B12700D1920D /* Assets.xcassets */; };
-		0F032D5D1CC9B12700D1920D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F032D5B1CC9B12700D1920D /* LaunchScreen.storyboard */; };
 		0F032D681CC9B12700D1920D /* SmartHomeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F032D671CC9B12700D1920D /* SmartHomeTests.m */; };
 		0F032D731CC9B12700D1920D /* SmartHomeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F032D721CC9B12700D1920D /* SmartHomeUITests.m */; };
 		0F11654F1D7418EE00A01B8F /* Amplifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F11654E1D7418EE00A01B8F /* Amplifier.m */; };
@@ -237,7 +236,6 @@
 		0F032D4A1CC9B12700D1920D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0F032D4B1CC9B12700D1920D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		0F032D591CC9B12700D1920D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0F032D5C1CC9B12700D1920D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0F032D5E1CC9B12700D1920D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0F032D631CC9B12700D1920D /* SmartHomeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmartHomeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F032D671CC9B12700D1920D /* SmartHomeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmartHomeTests.m; sourceTree = "<group>"; };
@@ -1232,7 +1230,6 @@
 				F6359AFA1CFFBC910035EB31 /* DetailTableViewCell.xib */,
 				F60FDB451D003FD500AB04BE /* CurtainTableViewCell.xib */,
 				F6359AFF1CFFC4DC0035EB31 /* ColourTableViewCell.xib */,
-				0F032D5B1CC9B12700D1920D /* LaunchScreen.storyboard */,
 				0F7E2E151D581AC400A47D5D /* iPhone.storyboard */,
 			);
 			name = storeboard;
@@ -1597,7 +1594,6 @@
 			files = (
 				0FBEFE271D24A5020084244F /* netconfig.plist in Resources */,
 				0FC0FFD71CF553AD000F71D5 /* planeScene.plist in Resources */,
-				0F032D5D1CC9B12700D1920D /* LaunchScreen.storyboard in Resources */,
 				F60FDB471D003FD500AB04BE /* CurtainTableViewCell.xib in Resources */,
 				0F7E2E161D581AC400A47D5D /* iPhone.storyboard in Resources */,
 				0F032D5A1CC9B12700D1920D /* Assets.xcassets in Resources */,
@@ -2013,17 +2009,6 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		0F032D5B1CC9B12700D1920D /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0F032D5C1CC9B12700D1920D /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		0F032D751CC9B12700D1920D /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -2114,11 +2099,7 @@
 			baseConfigurationReference = 9B45FF693457BA21BA43CE05 /* Pods-SmartHome.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-<<<<<<< HEAD
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
-=======
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
->>>>>>> 3777d6562720d24fbde59bece0dd82f2a4f5bee0
 				CODE_SIGN_ENTITLEMENTS = SmartHome/SmartHome.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2160,11 +2141,7 @@
 			baseConfigurationReference = CE54136C9EEF8F51E8FBEEDE /* Pods-SmartHome.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-<<<<<<< HEAD
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
-=======
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
->>>>>>> 3777d6562720d24fbde59bece0dd82f2a4f5bee0
 				CODE_SIGN_ENTITLEMENTS = SmartHome/SmartHome.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: shi zi (C8JS65F469)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

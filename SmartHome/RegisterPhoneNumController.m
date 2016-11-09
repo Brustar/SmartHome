@@ -91,8 +91,7 @@
     }
     
     //手机号格式验证通过后，开始请求http接口验证手机号是否已注册
-    //[self checkPhoneNumberIsExist];
-    [self performSegueWithIdentifier:@"registerDetaiSegue" sender:self];
+    [self checkPhoneNumberIsExist];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
