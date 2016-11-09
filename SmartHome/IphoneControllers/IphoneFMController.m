@@ -156,7 +156,7 @@
     cell.delegate = self;
     [cell hiddenBtns];
     TVChannel *channel = self.allFavouriteChannels[indexPath.row];
-    cell.chanelNum.text = [NSString stringWithFormat:@"%ld",channel.channel_id];
+    cell.chanelNum.text = [NSString stringWithFormat:@"%ld",(long)channel.channel_id];
     cell.channelName.text = [NSString stringWithFormat:@"%@",channel.channel_name];
     [cell useLongPressGesture];
     return cell;

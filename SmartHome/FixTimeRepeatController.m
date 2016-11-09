@@ -68,8 +68,8 @@
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    dict[@"week"] = [NSString stringWithFormat:@"%ld", week];
-    dict[@"select"] = [NSString stringWithFormat:@"%ld", select];
+    dict[@"week"] = [NSString stringWithFormat:@"%ld", (long)week];
+    dict[@"select"] = [NSString stringWithFormat:@"%ld", (long)select];
     
     [center postNotificationName:@"SelectWeek" object:nil userInfo:dict];
 }
