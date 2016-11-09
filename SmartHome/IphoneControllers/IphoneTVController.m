@@ -343,7 +343,7 @@
     TVChannel *channel = self.allFavourTVChannels[indexPath.row];
     [iphoneVC.addBtn setBackgroundImage:cell.imgView.image forState:UIControlStateNormal];
     iphoneVC.channelName.text = channel.channel_name;
-    iphoneVC.channelNumber.text = [NSString stringWithFormat:@"%ld",channel.channel_number];
+    iphoneVC.channelNumber.text = [NSString stringWithFormat:@"%ld",(long)channel.channel_number];
   
 }
 

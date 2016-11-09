@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "Default-Landscape.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "{32B0BDDB-F1A4-04D1-A16D-7AA142D3EFC4}.png",
       "scale" : "2x"
     },
     {

@@ -453,7 +453,7 @@
     TVChannel *channel = self.allFavourTVChannels[indexPath.row];
     [self.editChannelImgBtn setBackgroundImage:cell.imgView.image forState:UIControlStateNormal];
     self.channelName.text = channel.channel_name;
-    self.channeNumber.text = [NSString stringWithFormat:@"%ld",channel.channel_number];
+    self.channeNumber.text = [NSString stringWithFormat:@"%ld",(long)channel.channel_number];
     [self showCoverView];
 }
 

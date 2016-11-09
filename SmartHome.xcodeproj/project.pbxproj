@@ -112,6 +112,7 @@
 		0FCFB39B1CF2950D00B37DD3 /* BgMusic.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFB39A1CF2950D00B37DD3 /* BgMusic.m */; };
 		0FD3DEAA1D3F183D00AF7765 /* SCWaveAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD3DEA91D3F183D00AF7765 /* SCWaveAnimationView.m */; };
 		0FD3DEAD1D3F186800AF7765 /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD3DEAC1D3F186800AF7765 /* Globals.m */; };
+		0FE78BB61DCFB091009B4767 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FE78BB51DCFB091009B4767 /* Images.xcassets */; };
 		0FEE12761D20C53400811947 /* TXHRulerScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEE12721D20C53400811947 /* TXHRulerScrollView.m */; };
 		0FEE12771D20C53400811947 /* TXHRrettyRuler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEE12741D20C53400811947 /* TXHRrettyRuler.m */; };
 		0FF410DA1CDAE67100C7F4A1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410D91CDAE67100C7F4A1 /* CoreLocation.framework */; };
@@ -129,7 +130,6 @@
 		F618141D1DB5B0C7003B0741 /* PushSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = F618141C1DB5B0C7003B0741 /* PushSettingController.m */; };
 		F61896381D87B06300DBE6CD /* ScreenCurtainController.m in Sources */ = {isa = PBXBuildFile; fileRef = F61896371D87B06300DBE6CD /* ScreenCurtainController.m */; };
 		F618963B1D87B08300DBE6CD /* ProjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = F618963A1D87B08300DBE6CD /* ProjectController.m */; };
-		F623378D1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F623378C1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.m */; };
 		F62337901D70675B00ADAD00 /* TVIconController.m in Sources */ = {isa = PBXBuildFile; fileRef = F623378F1D70675B00ADAD00 /* TVIconController.m */; };
 		F6251F711D541885000A5A47 /* PluginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6251F701D541885000A5A47 /* PluginViewController.m */; };
 		F6251F741D541D8A000A5A47 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = F6251F731D541D8A000A5A47 /* Device.m */; };
@@ -520,6 +520,7 @@
 		0FD3DEA91D3F183D00AF7765 /* SCWaveAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCWaveAnimationView.m; sourceTree = "<group>"; };
 		0FD3DEAB1D3F186800AF7765 /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
 		0FD3DEAC1D3F186800AF7765 /* Globals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Globals.m; sourceTree = "<group>"; };
+		0FE78BB51DCFB091009B4767 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0FEE12721D20C53400811947 /* TXHRulerScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TXHRulerScrollView.m; path = PrettyRuler/TXHRulerScrollView.m; sourceTree = SOURCE_ROOT; };
 		0FEE12731D20C53400811947 /* TXHRulerScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TXHRulerScrollView.h; path = PrettyRuler/TXHRulerScrollView.h; sourceTree = SOURCE_ROOT; };
 		0FEE12741D20C53400811947 /* TXHRrettyRuler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TXHRrettyRuler.m; path = PrettyRuler/TXHRrettyRuler.m; sourceTree = SOURCE_ROOT; };
@@ -552,8 +553,6 @@
 		F61896371D87B06300DBE6CD /* ScreenCurtainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenCurtainController.m; sourceTree = "<group>"; };
 		F61896391D87B08300DBE6CD /* ProjectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectController.h; sourceTree = "<group>"; };
 		F618963A1D87B08300DBE6CD /* ProjectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectController.m; sourceTree = "<group>"; };
-		F623378B1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImagePickerController+LandScapeImagePicker.h"; sourceTree = "<group>"; };
-		F623378C1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImagePickerController+LandScapeImagePicker.m"; sourceTree = "<group>"; };
 		F623378E1D70675B00ADAD00 /* TVIconController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVIconController.h; sourceTree = "<group>"; };
 		F623378F1D70675B00ADAD00 /* TVIconController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVIconController.m; sourceTree = "<group>"; };
 		F6251F6F1D541885000A5A47 /* PluginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginViewController.h; sourceTree = "<group>"; };
@@ -989,6 +988,7 @@
 				F67091BB1D93BF300002DDC5 /* WindowSlidingController.m */,
 				F618141B1DB5B0C7003B0741 /* PushSettingController.h */,
 				F618141C1DB5B0C7003B0741 /* PushSettingController.m */,
+				0FE78BB51DCFB091009B4767 /* Images.xcassets */,
 			);
 			path = SmartHome;
 			sourceTree = "<group>";
@@ -1342,8 +1342,6 @@
 				F6755A5D1D40D576002394F3 /* ECloudMoreView.m */,
 				F673EBD01D45E976001270FB /* VerifyCodeView.h */,
 				F673EBD11D45E976001270FB /* VerifyCodeView.m */,
-				F623378B1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.h */,
-				F623378C1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.m */,
 				CD46E6B01DCED8B600A9A0BB /* UIImagePickerController+Nonrotating.h */,
 				CD46E6B11DCED8B600A9A0BB /* UIImagePickerController+Nonrotating.m */,
 				F68A5DD61D782D8400601612 /* ECSearchView.h */,
@@ -1479,6 +1477,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0F032D771CC9B12700D1920D /* Build configuration list for PBXNativeTarget "SmartHome" */;
 			buildPhases = (
+				3FB63364E5E8E971F832FF9B /* 📦 Check Pods Manifest.lock */,
 				0D4CB7A112BAB6A5B4475248 /* [CP] Check Pods Manifest.lock */,
 				526834747F80F77E4EA860E8 /* [CP] Check Pods Manifest.lock */,
 				4B5F56A8FA12D4BD7D28AF3D /* [CP] Check Pods Manifest.lock */,
@@ -1551,6 +1550,7 @@
 					0F032D431CC9B12700D1920D = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = C8JS65F469;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.HomeKit = {
 								enabled = 1;
@@ -1604,6 +1604,7 @@
 				CD056AB91DCCA10100EB224E /* check_alt@2x.png in Resources */,
 				F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */,
 				F668AF251D53413B0079587F /* Main.storyboard in Resources */,
+				0FE78BB61DCFB091009B4767 /* Images.xcassets in Resources */,
 				0FC0FFD21CF539BC000F71D5 /* realScene.plist in Resources */,
 				F6359B011CFFC4DC0035EB31 /* ColourTableViewCell.xib in Resources */,
 			);
@@ -1649,6 +1650,21 @@
 			inputPaths = (
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3FB63364E5E8E971F832FF9B /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1840,7 +1856,6 @@
 				F67F1F811D3CC46C00F2B7E5 /* AboutUsController.m in Sources */,
 				0F295A601D2E092900F23F21 /* HttpManager.m in Sources */,
 				0F180FC31D0E4C7400392F4C /* NetvController.m in Sources */,
-				F623378D1D70448700ADAD00 /* UIImagePickerController+LandScapeImagePicker.m in Sources */,
 				F66DFF2B1D5188BF0005E882 /* EditSceneCell.m in Sources */,
 				0FAF74C11CEEA17C00432713 /* HRColorCursor.m in Sources */,
 				0F91AA171CDC798700094C25 /* PrintObject.m in Sources */,
@@ -2099,9 +2114,13 @@
 			baseConfigurationReference = 9B45FF693457BA21BA43CE05 /* Pods-SmartHome.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+<<<<<<< HEAD
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
+=======
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+>>>>>>> 3777d6562720d24fbde59bece0dd82f2a4f5bee0
 				CODE_SIGN_ENTITLEMENTS = SmartHome/SmartHome.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = C8JS65F469;
@@ -2123,7 +2142,7 @@
 					"\"$(PROJECT_DIR)//FFmpeg-iOS/include\"",
 				);
 				INFOPLIST_FILE = SmartHome/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2132,6 +2151,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -2140,9 +2160,13 @@
 			baseConfigurationReference = CE54136C9EEF8F51E8FBEEDE /* Pods-SmartHome.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+<<<<<<< HEAD
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
+=======
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+>>>>>>> 3777d6562720d24fbde59bece0dd82f2a4f5bee0
 				CODE_SIGN_ENTITLEMENTS = SmartHome/SmartHome.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: shi zi (C8JS65F469)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = C8JS65F469;
 				ENABLE_BITCODE = NO;
@@ -2163,7 +2187,7 @@
 					"\"$(PROJECT_DIR)//FFmpeg-iOS/include\"",
 				);
 				INFOPLIST_FILE = SmartHome/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2172,6 +2196,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
