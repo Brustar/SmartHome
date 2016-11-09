@@ -512,7 +512,7 @@
 - (IBAction)sureStoreNewScene:(id)sender {
     
     if ([self.storeNewSceneName.text isEqualToString:@""]) {
-        [MBProgressHUD showError:@"场景名不能为空!"];
+       // [MBProgressHUD showError:@"场景名不能为空!"];
         return;
     }
     

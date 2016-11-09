@@ -53,7 +53,8 @@
 
 - (void)uploadScene:(NSData *)sceneData url:(NSString *) url dic:(NSDictionary *)dic fileName:(NSString *)fileName imgData:(NSData *)imgData imgFileName:(NSString *)imgFileName completion:(void (^)(id responseObject))completion
 
-{
+{   NSLog(@"请求URL：%@", url);
+    NSLog(@"请求参数：dic:%@", dic);
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     // 实际上就是AFN没有对响应数据做任何处理的情况
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];

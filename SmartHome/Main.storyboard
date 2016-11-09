@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QoB-0E-qDZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QoB-0E-qDZ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -4701,7 +4701,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="6oM-ja-ycz">
-                                <rect key="frame" x="138" y="94" width="100" height="100"/>
+                                <rect key="frame" x="138" y="50" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="NFm-A4-Fz9"/>
                                     <constraint firstAttribute="width" constant="100" id="TgZ-P1-nK6"/>
@@ -4716,7 +4716,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9YJ-co-f1J">
-                                <rect key="frame" x="-12.5" y="244" width="400" height="200"/>
+                                <rect key="frame" x="-12.5" y="200" width="400" height="200"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="用户名/手机号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y1v-G2-n8Q">
                                         <rect key="frame" x="20" y="25" width="360" height="30"/>
@@ -6921,7 +6921,7 @@ layer.masksToBoundslayer.masksToBounds
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="g1x-Uv-xco" customClass="SceneCell">
-                                        <rect key="frame" x="68" y="0.0" width="200" height="200"/>
+                                        <rect key="frame" x="67.5" y="0.0" width="200" height="200"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
@@ -7107,22 +7107,22 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="uCb-ME-O7C"/>
-        <segue reference="nIi-Kc-QDm"/>
-        <segue reference="zAF-Rq-I0I"/>
-        <segue reference="5K5-wE-mZz"/>
-        <segue reference="PRs-sg-E1F"/>
         <segue reference="ya3-gG-p8O"/>
-        <segue reference="tt4-nB-rfe"/>
-        <segue reference="Vzc-yi-Jnw"/>
-        <segue reference="fHn-Cm-7Q7"/>
+        <segue reference="PRs-sg-E1F"/>
+        <segue reference="nIi-Kc-QDm"/>
+        <segue reference="uCb-ME-O7C"/>
+        <segue reference="Imv-lK-YrT"/>
+        <segue reference="5K5-wE-mZz"/>
         <segue reference="X9P-hg-DXo"/>
-        <segue reference="pWG-oz-Opr"/>
-        <segue reference="l23-e3-J0C"/>
-        <segue reference="vdf-Gi-dZf"/>
-        <segue reference="JQm-bA-TWz"/>
+        <segue reference="fHn-Cm-7Q7"/>
         <segue reference="vKk-7C-VKf"/>
         <segue reference="a9T-LN-ZVX"/>
+        <segue reference="Vzc-yi-Jnw"/>
+        <segue reference="pWG-oz-Opr"/>
+        <segue reference="JQm-bA-TWz"/>
+        <segue reference="tt4-nB-rfe"/>
+        <segue reference="vdf-Gi-dZf"/>
+        <segue reference="l23-e3-J0C"/>
         <segue reference="tdV-sS-d5j"/>
         <segue reference="dRU-hd-aVS"/>
     </inferredMetricsTieBreakers>

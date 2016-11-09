@@ -28,7 +28,7 @@
 @property (nonatomic) bool readonly;
 //设备列表
 @property (strong,nonatomic) NSArray *devices;
-//设备列表
+//定时列表
 @property (strong,nonatomic) NSArray *schedules;
 
 - (instancetype)initWhithoutSchedule;

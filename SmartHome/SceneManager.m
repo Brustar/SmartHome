@@ -41,7 +41,7 @@
 
 - (void) addScene:(Scene *)scene withName:(NSString *)name withImage:(UIImage *)image
 {
-    if (name) {
+    if (name.length >0) {
         
       // int sceneid=[SQLManager saveMaxSceneId:scene name:name pic:@""];
        // scene.sceneID=sceneid;
@@ -94,6 +94,7 @@
         NSData *imgData = UIImagePNGRepresentation(image);
         
         NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
+        
         [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName imgData:imgData imgFileName:imgFileName completion:^(id responseObject) {
             scene.sceneID = [responseObject[@"SID"] intValue];
             scene.sceneName = name;
@@ -116,8 +117,11 @@
             }
             [db close];
         }];
+        
+    }else {
+        [MBProgressHUD showError:@"场景名不能为空"];
     }
-    [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, scene.sceneID] scene:scene];
+    //[IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, scene.sceneID] scene:scene];
     
     
 }

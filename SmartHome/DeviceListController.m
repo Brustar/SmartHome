@@ -269,13 +269,17 @@
 
 
 - (IBAction)sureStoreScene:(id)sender {
+    if (self.sceneName.text.length <=0) {
+        //[MBProgressHUD showError:@"场景名不能为空"];
+        return;
+    }
     self.saveSceneView.hidden = YES;
     
     NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
 
-    Scene *scene = [[Scene alloc]initWhithoutSchedule];
+    Scene *scene = [[Scene alloc] initWhithoutSchedule];
     [scene setValuesForKeysWithDictionary:plistDic];
     [[DeviceInfo defaultManager] setEditingScene:NO];
     [[SceneManager defaultManager] addScene:scene withName:self.sceneName.text withImage:self.selectSceneImg.currentBackgroundImage];
