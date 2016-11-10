@@ -14,5 +14,6 @@ target 'SmartHome' do
 	pod ‘IQKeyboardManager’
 	pod 'RBStoryboardLink', '~> 0.1'
 	#pod 'PrettyRuler', '~> 2.1.1'
-	pod 'CocoaAsyncSocket'
+#	pod 'CocoaAsyncSocket'
+    pod 'CocoaAsyncSocket', :git => 'https://github.com/robbiehanson/CocoaAsyncSocket.git', :commit => 'c0bbcbcc5e039ca5d732f9844bf95c3d8ee31a5b'
 end
