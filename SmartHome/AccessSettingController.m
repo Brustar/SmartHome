@@ -368,7 +368,7 @@
 //点击转换身份按钮
 - (IBAction)changeIdentityType:(UIButton *)sender {
     NSString *str = sender.titleLabel.text;
-    NSString *type = [str substringFromIndex:4];
+    NSString *type = [str substringFromIndex:3];
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"确定转化为%@",type]message:nil preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController: alertVC animated:YES completion:nil];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -376,7 +376,7 @@
     }];
     UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //执行转化身份操作
-        if([type isEqualToString:@"普通身份"])
+        if([str containsString:@"普通身份"])
         {
             [self deleteOrChangeManagerType:3 withTag:4];
             sender.titleLabel.text = @"转化为主人身份";
