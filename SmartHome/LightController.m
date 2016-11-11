@@ -216,6 +216,8 @@
     }
     
     if (![etype isEqualToString:@"01"] && [sender isEqual:self.detailCell.bright]) {
+        self.detailCell.power.on=self.detailCell.bright.value>0;
+        
         NSData *data=[[DeviceInfo defaultManager] changeBright:self.detailCell.bright.value*100 deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
