@@ -28,6 +28,8 @@
 + (void) writeScene:(NSString *)sceneFile scene:(Scene *)sceneData;
 + (void) writeJpg:(UIImage *)jpg path:(NSString *)jpgPath;
 + (void) writePng:(UIImage *)png path:(NSString *)pngPath;
++ (BOOL) createTempFile;
++ (BOOL) createFile:(NSString *)filePath;
 + (void) removeFile:(NSString *)file;
 + (void) removeTempFile;
 + (void) writeUserdefault:(id)object forKey:(NSString *)key;

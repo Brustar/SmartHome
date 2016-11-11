@@ -269,7 +269,7 @@
 
 - (IBAction)sureStoreScene:(id)sender {
     if (self.sceneName.text.length <=0) {
-        //[MBProgressHUD showError:@"场景名不能为空"];
+        [MBProgressHUD showError:@"场景名不能为空"];
         return;
     }
     self.saveSceneView.hidden = YES;
@@ -280,6 +280,7 @@
 
     Scene *scene = [[Scene alloc] initWhithoutSchedule];
     [scene setValuesForKeysWithDictionary:plistDic];
+    scene.roomID = _roomid;
     [[DeviceInfo defaultManager] setEditingScene:NO];
     [[SceneManager defaultManager] addScene:scene withName:self.sceneName.text withImage:self.selectSceneImg.currentBackgroundImage];
     [self.splitViewController dismissViewControllerAnimated:YES completion:nil];

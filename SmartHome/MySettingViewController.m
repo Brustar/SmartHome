@@ -254,6 +254,7 @@
         if([responseObject[@"Result"] intValue] == 0)
         {
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"AuthorToken"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             [[SocketManager defaultManager] cutOffSocket];
             self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
             [self performSegueWithIdentifier:@"goLogin" sender:self];

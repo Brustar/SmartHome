@@ -1476,7 +1476,7 @@
     [db close];
     return rID;
 }
-+(NSString *)getRoomNameByRoomID:(int) rId
++ (NSString *)getRoomNameByRoomID:(int) rId
 {
     FMDatabase *db = [SQLManager connetdb];
     NSString *rName ;
