@@ -599,13 +599,29 @@
 {
     NSString *url = [NSString stringWithFormat:@"%@UserLoginHost.aspx",[IOManager httpAddr]];
     
-    NSDictionary *dict = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"HostID":self.hostIDS[row]};
-    [IOManager writeUserdefault:self.hostIDS[row] forKey:@"HostId"];
-    [[NSUserDefaults standardUserDefaults] setObject:self.user.text forKey:@"Account"];
-    HttpManager *http=[HttpManager defaultManager];
-    http.delegate=self;
-    http.tag = tag;
-    [http sendPost:url param:dict];
+    NSString *authorToken = [IOManager getUserDefaultForKey:@"AuthorToken"];
+    NSString *hostID = self.hostIDS[row];
+    
+    NSDictionary *dict = nil;
+    if (authorToken.length >0 && hostID.length >0) {
+        
+        dict = @{@"AuthorToken":authorToken,
+                 @"HostID":hostID
+                };
+    }
+    
+    
+    [IOManager writeUserdefault:hostID forKey:@"HostId"];
+    [IOManager writeUserdefault:self.user.text forKey:@"Account"];
+    
+    if (dict) {
+        HttpManager *http = [HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = tag;
+        [http sendPost:url param:dict];
+    }else {
+        NSLog(@"请求参数dict为 nil");
+    }
 }
 
 - (BOOL)isMobileNumber:(NSString *)mobileNum

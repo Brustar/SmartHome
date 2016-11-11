@@ -17,7 +17,7 @@
 //场景名称
 @property (nonatomic,strong) NSString *sceneName;
 //房间id
-@property (nonatomic) int roomID;
+@property (nonatomic) NSInteger roomID;
 //场景图片url
 @property (nonatomic,strong) NSString *picName;
 //是否为收藏场景

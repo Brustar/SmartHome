@@ -126,8 +126,15 @@
 + (void) removeFile:(NSString *)file
 {
     NSFileManager *defaultManager = [NSFileManager defaultManager];
-    BOOL ret=[defaultManager removeItemAtPath:file error: nil];
+    BOOL ret = [defaultManager removeItemAtPath:file error: nil];
     NSAssert(ret,@"删除文件失败");
+}
+
++ (BOOL) createFile:(NSString *)filePath {
+    BOOL createFileSucceed = NO;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    createFileSucceed = [fileManager createFileAtPath:filePath contents:nil attributes:nil];
+    return createFileSucceed;
 }
 
 +(void) removeTempFile
@@ -139,11 +146,26 @@
     }
 }
 
++ (BOOL)createTempFile {
+    BOOL createSucceed = NO;
+    NSString *filePath=[NSString stringWithFormat:@"%@/%@_0.plist",[self scenesPath], SCENE_FILE_NAME];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if([fileManager fileExistsAtPath:filePath] == NO){
+        createSucceed = [self createFile:filePath];
+    }
+    
+    return createSucceed;
+}
+
+
 + (void) writeUserdefault:(id)object forKey:(NSString *)key
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:object forKey:key];
-    [defaults synchronize];
+    
+    if (object) {
+        [defaults setObject:object forKey:key];
+        [defaults synchronize];
+    }
 }
 
 + (id)getUserDefaultForKey:(NSString *)key
