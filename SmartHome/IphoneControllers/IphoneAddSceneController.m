@@ -41,9 +41,11 @@
 @property (weak, nonatomic) IBOutlet UITextField *sceneName;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) NSArray *devices;
-@property (weak, nonatomic) IBOutlet UILabel *startTime;
-@property (weak, nonatomic) IBOutlet UILabel *endTime;
-@property (weak, nonatomic) IBOutlet UILabel *repeat;
+@property (weak, nonatomic) IBOutlet UILabel *startTime;//开始时间
+@property (weak, nonatomic) IBOutlet UILabel *endTime;//结束时间
+@property (weak, nonatomic) IBOutlet UILabel *repeat;//设置重复日期
+@property (weak, nonatomic) IBOutlet UILabel *StartDayLael;//开始日期
+@property (weak, nonatomic) IBOutlet UILabel *EndDayLabel;//结束日期
 
 @property (weak, nonatomic) IBOutlet UIView *timeView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveNewScene;//保存按钮
@@ -84,6 +86,8 @@
     NSDictionary *dic = notification.userInfo;
     self.startTime.text = dic[@"startTime"];
     self.endTime.text = dic[@"endTime"];
+    self.StartDayLael.text = dic[@"startDay"];
+    self.EndDayLabel.text = dic[@"endDay"];
     self.repeat.text = dic[@"repeat"];
 }
 
@@ -97,6 +101,7 @@
     }
 
 }
+//添加定时
 - (IBAction)addFixTime:(id)sender {
     
     

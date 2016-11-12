@@ -282,6 +282,7 @@
 - (Scene *)readSceneByID:(int)sceneid
 {
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, sceneid]];
+    
     NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfFile:scenePath];
     if (dictionary) {
         Scene *scene=nil;
@@ -294,6 +295,8 @@
                 Schedule *schedule=[[Schedule alloc] init];
                 schedule.startTime=sch[@"startTime"];
                 schedule.endTime=sch[@"endTime"];
+                schedule.startDate = sch[@"startDay"];
+                schedule.endDate = sch[@"endDay"];
                 schedule.deviceID=[sch[@"deviceID"] intValue];
                 schedule.openToValue=[sch[@"openTovalue"] intValue];
                 schedule.astronomicalStartID=[sch[@"astronomicalStartID"] intValue];

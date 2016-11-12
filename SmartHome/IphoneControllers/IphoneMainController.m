@@ -11,6 +11,8 @@
 #import "IphoneDeviceListController.h"
 #import "IphoneRealSceneController.h"
 #import "IphoneProfileController.h"
+#import "IphoneFamilyViewController.h"
+
 @interface IphoneMainController ()<UITableViewDelegate ,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *headView;
@@ -25,7 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.titleArr = @[@"场景",@"实景",@"我的"];
+    self.titleArr = @[@"家庭",@"场景",@"实景",@"我的"];
 //    self.titleImage = @[@"menu_scene",@"menu_room",@"menu_device"];
     
     self.tableView.tableFooterView = [UIView new];
@@ -47,6 +49,9 @@
 
 
 - (void)setupChilderController {
+    
+    IphoneFamilyViewController * familyVC = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"iphoneFamilyViewController"];
+    [self setupVc:familyVC title:@"家庭"];
     IphoneSceneController *scene = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
     [self setupVc:scene title:@"场景"];
     
@@ -108,7 +113,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return 4;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

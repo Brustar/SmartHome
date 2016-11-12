@@ -46,7 +46,7 @@
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.roomList = [SQLManager getAllRoomsInfo];
-    self.title = @"场景";
+//    self.title = @"场景";
      [self setUpRoomView];
     
     //开启网络状况的监听
@@ -56,6 +56,9 @@
     [self updateInterfaceWithReachability: hostReach];
     
     [self reachNotification];
+    
+    _AddSceneBtn.layer.cornerRadius = _AddSceneBtn.bounds.size.width / 2.0; //圆角半径
+    _AddSceneBtn.layer.masksToBounds = YES; //圆角
 }
 //监听到网络状态改变
 - (void) reachabilityUpdate: (NSNotification* )note

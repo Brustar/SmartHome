@@ -19,17 +19,15 @@
 @property (weak, nonatomic) IBOutlet UIView *astronomicalView;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *astronmicalTypes;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerTime;
-@property (weak, nonatomic) IBOutlet UIButton *startTimeBtn;
-@property (weak, nonatomic) IBOutlet UIButton *endTimeBtn;
+@property (weak, nonatomic) IBOutlet UIButton *startTimeBtn;//开始时间
+@property (weak, nonatomic) IBOutlet UIButton *endTimeBtn;//结束时间
 @property (nonatomic,strong) NSArray *hours;
 @property (nonatomic,strong) NSArray *minutes;
 @property (weak, nonatomic) IBOutlet UIView *customView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *customViewHight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *repeatViewHight;
-
+@property (strong, nonatomic) UIDatePicker *dataPicker;//日期
 @property (weak, nonatomic) IBOutlet UILabel *repeatLabel;
-
-
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *repeatBtns;
 @property (nonatomic,strong) NSMutableDictionary *dic;
 @property (nonatomic,strong) NSMutableString *repeatTime;
@@ -37,6 +35,8 @@
 @property (nonatomic,strong) Scene *scene;
 @property (weak, nonatomic) IBOutlet UILabel *astronomyStartTime;
 @property (nonatomic,strong) Schedule *schedule;
+@property (weak, nonatomic) IBOutlet UIButton *StartDay;//开始日期
+@property (weak, nonatomic) IBOutlet UIButton *EndDay;//结束日期
 
 @end
 
@@ -123,6 +123,8 @@
     self.astronomicalHight.constant = 0;
     self.astronomicalView.hidden = YES;
     self.schedule = [[Schedule alloc]initWhithoutSchedule];
+    
+     [self createDatePicker];
     for(UIButton *btn in self.astronmicalTypes)
     {
         btn.hidden = YES;
@@ -137,6 +139,9 @@
         btn.layer.masksToBounds = YES;
     }
 }
+
+
+//天文时钟
 - (IBAction)selectedAstronomicalBtn:(id)sender {
     UIButton *btn = sender;
     btn.selected = !btn.selected;
@@ -164,6 +169,7 @@
 
     }
 }
+//自定义时段
 - (IBAction)selectedCustomTimeBtn:(id)sender {
     UIButton *btn = sender;
     btn.selected = !btn.selected;
@@ -229,6 +235,7 @@
     self.repeatLabel.text = self.repeatTime;
     
 }
+//保存设置的时间
 - (IBAction)saveFixTime:(id)sender {
     
     self.scene.schedules = @[self.schedule];
@@ -237,6 +244,8 @@
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     NSString *startTime;
     NSString *endTime;
+    NSString * startDay;
+    NSString * endDay;
     if([self.astronomyStartTime.text isEqualToString:@""])
     {
         if([self.startTimeBtn.titleLabel.text isEqualToString:@"设置"])
@@ -253,12 +262,26 @@
         }else{
             endTime = self.endTimeBtn.titleLabel.text;
         }
+        if ([self.StartDay.titleLabel.text isEqualToString:@"设置"]) {
+            startDay = @"无";
+        }else{
+            
+            startDay = self.StartDay.titleLabel.text;
+        }
+        
+        if ([self.EndDay.titleLabel.text isEqualToString:@"设置"]) {
+            
+            endDay = @"无";
+        }else{
+            
+            endDay = self.EndDay.titleLabel.text;
+        }
         
     }else{
         startTime = self.astronomyStartTime.text;
         endTime = @"无";
     }
-    NSDictionary *dic = @{@"startTime":startTime,@"endTime":endTime,@"repeat":self.repeatLabel.text};
+    NSDictionary *dic = @{@"startTime":startTime,@"endTime":endTime,@"repeat":self.repeatLabel.text,@"startDay":startDay,@"endDay":endDay};
     [center postNotificationName:@"time" object:nil userInfo:dic];
     
     [self.navigationController popViewControllerAnimated:YES];     
@@ -311,6 +334,8 @@
 
 
 }
+
+//时间的设置
 - (IBAction)setTimeOnClick:(id)sender {
     if (sender == self.startTimeBtn)
     {
@@ -339,6 +364,74 @@
     } else {
         self.pickerTime.hidden = YES;
     }
+}
+
+-(void) createDatePicker
+{
+    self.dataPicker = [[UIDatePicker alloc] init];
+    self.dataPicker.frame = CGRectMake(40, 304+70, 186+4+60, 100);
+    self.dataPicker.backgroundColor = [UIColor whiteColor];
+    self.dataPicker.datePickerMode = UIDatePickerModeDate;
+    self.dataPicker.hidden = YES;
+    [self.view addSubview:self.dataPicker];
+}
+
+
+//开始日期的设置
+- (IBAction)setDayOnClick:(id)sender {
+    
+    self.pickerTime.hidden = YES;
+    
+    self.StartDay.selected = !self.StartDay.selected;
+    self.dataPicker.hidden = !self.StartDay.selected;
+    if (!self.StartDay.selected) {
+        NSDate *myDate = self.dataPicker.date;
+        
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"YYYY-MM-dd"];
+        NSString *prettyDate = [dateFormat stringFromDate:myDate];
+        [self.StartDay setTitle:prettyDate forState:UIControlStateNormal];
+        self.schedule.startDate=prettyDate;
+//        self.clickFixTimeBtn.tintColor=[UIColor redColor];
+    }
+    
+    NSMutableArray *sches=[self.scene.schedules mutableCopy];
+    if ([sches count]==0) {
+        [sches addObject:self.schedule];
+    }else{
+        sches[0]=self.schedule;
+    }
+    self.scene.schedules = sches;
+    [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
+    
+}
+//结束日期的设置
+- (IBAction)EndDayOnClick:(id)sender {
+    
+    self.pickerTime.hidden = YES;
+    
+    self.EndDay.selected =! self.EndDay.selected;
+    self.dataPicker.hidden = !self.EndDay.selected;
+    if (!self.EndDay.selected) {
+        NSDate *myDate = self.dataPicker.date;
+        
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"YYYY-MM-dd"];
+        NSString *prettyDate = [dateFormat stringFromDate:myDate];
+        [self.EndDay setTitle:prettyDate forState:UIControlStateNormal];
+        self.schedule.endDate=prettyDate;
+//        self.clickFixTimeBtn.tintColor=[UIColor redColor];
+    }
+    NSMutableArray *sches=[self.scene.schedules mutableCopy];
+    if ([sches count]==0) {
+        [sches addObject:self.schedule];
+    }else{
+        sches[0]=self.schedule;
+    }
+    
+    self.scene.schedules = sches;
+    
+    [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
 }
 
 - (void)didReceiveMemoryWarning {

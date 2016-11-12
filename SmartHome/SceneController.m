@@ -152,7 +152,7 @@
         self.firstPowerBtn.tag = scene.sceneID;
         
         [self.firstButton setTitle:scene.sceneName forState:UIControlStateNormal];
-        [self.firstButton sd_setBackgroundImageWithURL:[NSURL URLWithString:scene.picName] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        [self.firstButton sd_setBackgroundImageWithURL:[NSURL URLWithString:scene.picName] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"PL"]];
         
         
     }else {
@@ -160,11 +160,11 @@
         self.firstButton.tag = scene.sceneID;
         self.firstPowerBtn.tag = scene.sceneID;
         [self.firstButton setTitle:scene.sceneName forState:UIControlStateNormal];
-        [self.firstButton sd_setBackgroundImageWithURL:[NSURL URLWithString:scene.picName] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        [self.firstButton sd_setBackgroundImageWithURL:[NSURL URLWithString:scene.picName] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"PL"]];
         
         Scene *scondScene = self.scenes[1];
         
-        [self.secondButton sd_setBackgroundImageWithURL:[NSURL URLWithString:scondScene.picName] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        [self.secondButton sd_setBackgroundImageWithURL:[NSURL URLWithString:scondScene.picName] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"PL"]];
         [self.secondButton setTitle:scondScene.sceneName forState:UIControlStateNormal];
         self.secondButton.tag = scondScene.sceneID;
         self.secondPowerBtn.tag = scondScene.sceneID;
