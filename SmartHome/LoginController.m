@@ -151,7 +151,14 @@
     }else{
         pushToken = @"777";
     }
-    NSDictionary *dict = @{@"Account":self.user.text,@"Type":[NSNumber numberWithInteger:self.userType],@"Password":[self.pwd.text md5],@"pushtoken":pushToken};
+    
+    //手机终端类型：1，手机 2，iPad
+    NSInteger clientType = 1;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        clientType = 2;
+    }
+    
+    NSDictionary *dict = @{@"Account":self.user.text,@"Type":[NSNumber numberWithInteger:self.userType],@"Password":[self.pwd.text md5],@"pushtoken":pushToken, @"DeviceType":@(clientType)};
     [IOManager writeUserdefault:self.user.text forKey:@"Account"];
     [IOManager writeUserdefault:[NSNumber numberWithInteger:self.userType] forKey:@"Type"];
     [IOManager writeUserdefault:[self.pwd.text encryptWithDes:DES_KEY] forKey:@"Password"];
@@ -599,13 +606,29 @@
 {
     NSString *url = [NSString stringWithFormat:@"%@UserLoginHost.aspx",[IOManager httpAddr]];
     
-    NSDictionary *dict = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"HostID":self.hostIDS[row]};
-    [IOManager writeUserdefault:self.hostIDS[row] forKey:@"HostId"];
-    [[NSUserDefaults standardUserDefaults] setObject:self.user.text forKey:@"Account"];
-    HttpManager *http=[HttpManager defaultManager];
-    http.delegate=self;
-    http.tag = tag;
-    [http sendPost:url param:dict];
+    NSString *authorToken = [IOManager getUserDefaultForKey:@"AuthorToken"];
+    NSString *hostID = self.hostIDS[row];
+    
+    NSDictionary *dict = nil;
+    if (authorToken.length >0 && hostID.length >0) {
+        
+        dict = @{@"AuthorToken":authorToken,
+                 @"HostID":hostID
+                };
+    }
+    
+    
+    [IOManager writeUserdefault:hostID forKey:@"HostId"];
+    [IOManager writeUserdefault:self.user.text forKey:@"Account"];
+    
+    if (dict) {
+        HttpManager *http = [HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = tag;
+        [http sendPost:url param:dict];
+    }else {
+        NSLog(@"请求参数dict为 nil");
+    }
 }
 
 - (BOOL)isMobileNumber:(NSString *)mobileNum

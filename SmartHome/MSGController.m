@@ -77,14 +77,18 @@
             
             NSArray *dic = responseObject[@"messageInfo"];
             
-            for(NSDictionary *dicDetail in dic)
-            {
-                if ([dicDetail isKindOfClass:[NSDictionary class]]) {
-                    [self.msgArr addObject:dicDetail[@"description"]];
-                    [self.timesArr addObject:dicDetail[@"createDate"]];
-                    [self.recordIDs addObject:dicDetail[@"itemID"]];
+            if ([dic isKindOfClass:[NSArray class]]) {
+                for(NSDictionary *dicDetail in dic)
+                {
+                    if ([dicDetail isKindOfClass:[NSDictionary class]]) {
+                        [self.msgArr addObject:dicDetail[@"description"]];
+                        [self.timesArr addObject:dicDetail[@"createDate"]];
+                        [self.recordIDs addObject:dicDetail[@"itemID"]];
+                    }
                 }
             }
+            
+            
             
             [self.tableView reloadData];
         }else{
