@@ -157,7 +157,7 @@
         segue = @"FM";
     }else if([typeName isEqualToString:@"摄像头"]){
         segue = @"Camera";
-    }else if([typeName isEqualToString:@"智能插座"]) {
+    }else if([typeName isEqualToString:@"智能门锁"]) {
         segue = @"pluginSegue";
     }
     else if([typeName isEqualToString:@"机顶盒"])
