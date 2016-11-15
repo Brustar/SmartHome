@@ -55,7 +55,9 @@
     [DeviceInfo defaultManager].isPhotoLibrary = YES;
     [self performSegueWithIdentifier:@"iphoneTvLogoSegue" sender:self];
 }
+
 - (void)IphoneSelectPhoto:(KxMenuItem *)item {
+    [DeviceInfo defaultManager].isPhotoLibrary = YES;
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
@@ -65,6 +67,7 @@
 }
 
 - (void)IphoneTakePhoto:(KxMenuItem *)item {
+    [DeviceInfo defaultManager].isPhotoLibrary = YES;
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
