@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIView *regSuccessView;
 @property (weak, nonatomic) IBOutlet UIButton *goHomeBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewWidthConstraint;
+@property (weak, nonatomic) IBOutlet UIButton *DisMissBtn;
 
 @end
 
@@ -50,6 +51,12 @@
     self.passWord.delegate = self;
     self.pwdAgain.delegate = self;
     
+    
+    
+}
+- (IBAction)DisMissBtn:(id)sender {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma  mark - 手机验证码

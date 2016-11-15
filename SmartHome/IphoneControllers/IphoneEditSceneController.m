@@ -307,10 +307,7 @@
     UIAlertAction *favScene = [UIAlertAction actionWithTitle:@"收藏场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         
-        Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
-        
-        
-        [[SceneManager defaultManager] favoriteScene:scene withName:scene.sceneName];
+        [self favorScene];
         
     }];
     [alertVC addAction:favScene];
@@ -321,7 +318,31 @@
     [[DeviceInfo defaultManager] setEditingScene:NO];
     [self presentViewController:alertVC animated:YES completion:nil];
 }
-
+-(void)favorScene{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"收藏场景" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:  UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        
+        
+        
+        Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
+        
+        
+        [[SceneManager defaultManager] favoriteScene:scene withName:scene.sceneName];
+        
+        
+        
+        
+    }];
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:action1];
+    [alert addAction:action2];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
+    
+    
+}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {

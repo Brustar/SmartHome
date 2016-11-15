@@ -2743,6 +2743,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V9E-DX-CKQ">
+                                <rect key="frame" x="0.0" y="-24" width="375" height="83"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZTu-5p-8D1">
+                                        <rect key="frame" x="8" y="48" width="46" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="HFC-eo-DhL"/>
+                                            <constraint firstAttribute="width" constant="46" id="dsp-ww-VNf"/>
+                                        </constraints>
+                                        <state key="normal" title="返回"/>
+                                        <connections>
+                                            <action selector="DisMissBtn:" destination="h56-WK-SJ6" eventType="touchUpInside" id="l5X-S4-Vx1"/>
+                                            <action selector="DissmissBtn:" destination="IU4-qg-EiO" eventType="touchUpInside" id="vb6-Te-aN1"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="ZTu-5p-8D1" secondAttribute="bottom" constant="5" id="BQd-rk-zk4"/>
+                                    <constraint firstItem="ZTu-5p-8D1" firstAttribute="leading" secondItem="V9E-DX-CKQ" secondAttribute="leading" constant="8" id="Vt5-jI-Mit"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fm6-kA-D9a">
                                 <rect key="frame" x="-12.5" y="120" width="400" height="200"/>
                                 <subviews>
@@ -3081,12 +3103,16 @@
                             <constraint firstItem="fm6-kA-D9a" firstAttribute="top" secondItem="dUn-Gk-eph" secondAttribute="bottom" constant="100" id="9an-cP-LPo"/>
                             <constraint firstItem="EfH-bz-9V6" firstAttribute="top" secondItem="DHa-yH-tTa" secondAttribute="top" id="Fp7-TF-FAh"/>
                             <constraint firstItem="fm6-kA-D9a" firstAttribute="centerX" secondItem="DHa-yH-tTa" secondAttribute="centerX" id="Fqg-Qa-KSn"/>
+                            <constraint firstItem="fm6-kA-D9a" firstAttribute="top" secondItem="V9E-DX-CKQ" secondAttribute="bottom" constant="61" id="JSd-ZW-egl"/>
                             <constraint firstItem="aXm-Qu-dt0" firstAttribute="top" secondItem="fm6-kA-D9a" secondAttribute="bottom" id="Jj3-8J-ayy"/>
                             <constraint firstItem="fyz-e5-v2Z" firstAttribute="top" secondItem="n0k-6d-JK9" secondAttribute="bottom" constant="25" id="KH5-xh-tKM"/>
+                            <constraint firstItem="V9E-DX-CKQ" firstAttribute="top" secondItem="DHa-yH-tTa" secondAttribute="top" constant="-24" id="QsQ-PF-mdf"/>
                             <constraint firstItem="Y3I-8m-L7G" firstAttribute="top" secondItem="1G3-L3-cDa" secondAttribute="bottom" id="U6Y-y1-fIC"/>
                             <constraint firstItem="1G3-L3-cDa" firstAttribute="centerX" secondItem="DHa-yH-tTa" secondAttribute="centerX" id="UqT-CX-ReN"/>
+                            <constraint firstAttribute="trailing" secondItem="V9E-DX-CKQ" secondAttribute="trailing" id="amN-Gi-csr"/>
                             <constraint firstItem="Y3I-8m-L7G" firstAttribute="leading" secondItem="MXk-2y-Q1R" secondAttribute="trailing" id="fK1-lM-j1s"/>
                             <constraint firstItem="fyz-e5-v2Z" firstAttribute="top" secondItem="EfH-bz-9V6" secondAttribute="bottom" id="fVb-nF-uc4"/>
+                            <constraint firstItem="V9E-DX-CKQ" firstAttribute="leading" secondItem="DHa-yH-tTa" secondAttribute="leading" id="iWj-gw-sRr"/>
                             <constraint firstItem="fyz-e5-v2Z" firstAttribute="top" secondItem="MXk-2y-Q1R" secondAttribute="bottom" constant="25" id="k4u-7f-Pe1"/>
                             <constraint firstItem="fyz-e5-v2Z" firstAttribute="top" secondItem="Y3I-8m-L7G" secondAttribute="bottom" constant="20" id="lVF-ji-Cw7"/>
                             <constraint firstItem="aXm-Qu-dt0" firstAttribute="width" secondItem="fm6-kA-D9a" secondAttribute="width" id="lk8-Cs-XHj"/>
@@ -3096,6 +3122,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="DisMissBtn" destination="ZTu-5p-8D1" id="BHE-tY-lrJ"/>
                         <outlet property="PhoneNumBerImageView" destination="YSc-5t-UuA" id="lyh-Yi-7qL"/>
                         <outlet property="UserNameImageVIew" destination="opf-Ic-Nfc" id="uDw-bs-9HB"/>
                         <outlet property="auothCodeBtn" destination="rjl-45-xdh" id="kYq-ZZ-HSQ"/>
@@ -3129,13 +3156,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CbZ-JN-XkU">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                                <rect key="frame" x="0.0" y="-24" width="375" height="69"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zic-D6-5lH">
-                                        <rect key="frame" x="8" y="9" width="46" height="30"/>
+                                        <rect key="frame" x="8" y="29" width="46" height="30"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="Taw-cc-o6V"/>
-                                            <constraint firstAttribute="width" constant="46" id="klm-Zv-96C"/>
+                                            <constraint firstAttribute="height" constant="30" id="GaJ-aD-z9L"/>
+                                            <constraint firstAttribute="width" constant="46" id="HDZ-fs-M2z"/>
                                         </constraints>
                                         <state key="normal" title="返回"/>
                                         <connections>
@@ -3145,10 +3172,9 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="Zic-D6-5lH" firstAttribute="leading" secondItem="CbZ-JN-XkU" secondAttribute="leading" constant="8" id="1tE-uw-rP1"/>
-                                    <constraint firstItem="Zic-D6-5lH" firstAttribute="top" secondItem="CbZ-JN-XkU" secondAttribute="top" constant="9" id="OCc-i0-WsR"/>
-                                    <constraint firstAttribute="bottom" secondItem="Zic-D6-5lH" secondAttribute="bottom" constant="10" id="bIR-so-qrJ"/>
-                                    <constraint firstAttribute="height" constant="49" id="wF0-Xf-W1k"/>
+                                    <constraint firstItem="Zic-D6-5lH" firstAttribute="leading" secondItem="CbZ-JN-XkU" secondAttribute="leading" constant="8" id="XGz-nW-cug"/>
+                                    <constraint firstAttribute="bottom" secondItem="Zic-D6-5lH" secondAttribute="bottom" constant="10" id="ghg-lb-md7"/>
+                                    <constraint firstAttribute="height" constant="69" id="wF0-Xf-W1k"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jMf-6l-yHK">
@@ -3358,7 +3384,7 @@
                             <constraint firstItem="CbZ-JN-XkU" firstAttribute="centerX" secondItem="jMf-6l-yHK" secondAttribute="centerX" id="4pZ-a3-XlN"/>
                             <constraint firstItem="jMf-6l-yHK" firstAttribute="leading" secondItem="WKh-B3-ear" secondAttribute="leading" constant="200" id="9ZE-V9-KRN"/>
                             <constraint firstItem="gQf-8J-1Ym" firstAttribute="top" secondItem="jMf-6l-yHK" secondAttribute="bottom" constant="20" id="Bd6-Hu-blj"/>
-                            <constraint firstItem="CbZ-JN-XkU" firstAttribute="top" secondItem="WKh-B3-ear" secondAttribute="top" id="HxX-at-mUX"/>
+                            <constraint firstItem="CbZ-JN-XkU" firstAttribute="top" secondItem="WKh-B3-ear" secondAttribute="top" constant="-24" id="HxX-at-mUX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gQf-8J-1Ym" secondAttribute="trailing" constant="80" id="QXz-WH-klO"/>
                             <constraint firstItem="7tw-Ss-bds" firstAttribute="leading" secondItem="M8i-Xt-Res" secondAttribute="trailing" id="VSz-UF-Rvr"/>
                             <constraint firstItem="7tw-Ss-bds" firstAttribute="centerX" secondItem="WKh-B3-ear" secondAttribute="centerX" id="Vzk-rE-mJ3"/>
@@ -3397,7 +3423,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gjm-KD-ooy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1249" y="-3608"/>
+            <point key="canvasLocation" x="1263" y="-3599"/>
         </scene>
         <!--跳到手机版本的主页面-->
         <scene sceneID="F1l-Aq-QUs">
@@ -4456,7 +4482,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GmG-8D-WCx">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" red="0.90309139530000004" green="0.90309139530000004" blue="0.90309139530000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="20" id="fGq-Jt-E9Z">
                                     <size key="itemSize" width="150" height="150"/>
@@ -5954,7 +5980,7 @@
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s3x-g6-uS1">
                                 <rect key="frame" x="250" y="280" width="300" height="300"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WHT-2U-zxg">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WHT-2U-zxg">
                                         <rect key="frame" x="135" y="137" width="30" height="27"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="3go-pA-2qg"/>
@@ -5971,7 +5997,7 @@
                                             <constraint firstAttribute="width" constant="10" id="bm1-dU-Ech"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="tv_right" translatesAutoresizingMaskIntoConstraints="NO" id="DbJ-Nz-B9O">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="tv_right" translatesAutoresizingMaskIntoConstraints="NO" id="DbJ-Nz-B9O">
                                         <rect key="frame" x="185" y="145" width="105" height="10"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="10" id="xbx-mm-uXH"/>
@@ -5983,7 +6009,7 @@
                                             <constraint firstAttribute="width" constant="10" id="nJf-wo-3we"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="tv_left" translatesAutoresizingMaskIntoConstraints="NO" id="q5Z-GG-MeS">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="tv_left" translatesAutoresizingMaskIntoConstraints="NO" id="q5Z-GG-MeS">
                                         <rect key="frame" x="10" y="145" width="105" height="10"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="10" id="fyW-tY-Tz6"/>
@@ -6427,7 +6453,7 @@ layer.masksToBoundslayer.masksToBounds
                     <navigationItem key="navigationItem" title="场景-灯" id="CoB-eY-kkG">
                         <barButtonItem key="rightBarButtonItem" enabled="NO" title="收藏" id="xD2-JX-03I">
                             <connections>
-                                <action selector="favorite:" destination="XoM-8d-Bbi" id="HwK-AI-MQf"/>
+                                <action selector="favButt:" destination="XoM-8d-Bbi" id="bJV-xw-Cby"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -7109,23 +7135,23 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zAF-Rq-I0I"/>
         <segue reference="nIi-Kc-QDm"/>
-        <segue reference="fXQ-oW-cHz"/>
-        <segue reference="5K5-wE-mZz"/>
         <segue reference="PRs-sg-E1F"/>
         <segue reference="ya3-gG-p8O"/>
-        <segue reference="pWG-oz-Opr"/>
-        <segue reference="tt4-nB-rfe"/>
-        <segue reference="vdf-Gi-dZf"/>
-        <segue reference="JQm-bA-TWz"/>
-        <segue reference="l23-e3-J0C"/>
-        <segue reference="tdV-sS-d5j"/>
-        <segue reference="X9P-hg-DXo"/>
-        <segue reference="fHn-Cm-7Q7"/>
-        <segue reference="vKk-7C-VKf"/>
-        <segue reference="Vzc-yi-Jnw"/>
-        <segue reference="a9T-LN-ZVX"/>
+        <segue reference="zpE-f9-a1R"/>
+        <segue reference="Daf-E8-hDH"/>
+        <segue reference="dSv-oV-mNG"/>
+        <segue reference="dq7-eO-a8B"/>
+        <segue reference="H3V-Ty-dBS"/>
+        <segue reference="f9b-hn-w5L"/>
+        <segue reference="G19-fh-mhQ"/>
+        <segue reference="ZSJ-0K-dfQ"/>
+        <segue reference="rGG-nI-6is"/>
+        <segue reference="lwe-sH-sqk"/>
+        <segue reference="fzi-se-X8b"/>
+        <segue reference="prf-0G-qDF"/>
         <segue reference="YE7-iU-rxh"/>
+        <segue reference="fXQ-oW-cHz"/>
+        <segue reference="Imv-lK-YrT"/>
     </inferredMetricsTieBreakers>
 </document>

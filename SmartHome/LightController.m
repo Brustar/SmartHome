@@ -15,7 +15,7 @@
 #import "MBProgressHUD+NJ.h"
 
 @interface LightController ()<UITableViewDelegate,UITableViewDataSource>
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *favButt;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *favButt;//收藏
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,assign) CGFloat brightValue;
 
@@ -116,6 +116,11 @@
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
 }
+- (IBAction)favButt:(id)sender {
+    
+    
+}
+
 -(void)setUpConstraints
 {
    

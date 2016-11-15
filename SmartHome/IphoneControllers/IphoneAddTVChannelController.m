@@ -51,6 +51,8 @@
 }
 
 -(void)Iphonepreset:(KxMenuItem *)item{
+    
+    [DeviceInfo defaultManager].isPhotoLibrary = YES;
     [self performSegueWithIdentifier:@"iphoneTvLogoSegue" sender:self];
 }
 - (void)IphoneSelectPhoto:(KxMenuItem *)item {
@@ -73,17 +75,16 @@
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
-    
-    self.chooseImage = info[UIImagePickerControllerEditedImage];
-    
+    [DeviceInfo defaultManager].isPhotoLibrary = NO;
+   
     [self.addBtn setBackgroundImage:info[UIImagePickerControllerEditedImage] forState:UIControlStateNormal];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return NO;
-
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [DeviceInfo defaultManager].isPhotoLibrary = NO;
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
+
 -(void)tvIconController:(TVIconController *)iconVC withImgName:(NSString *)imgName
 {
     self.chooseImgeName = imgName;
