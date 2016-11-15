@@ -50,7 +50,7 @@
 
 @property (nonatomic,assign) int selectedRoomId;
 //定时的设备
-@property (weak, nonatomic) IBOutlet UILabel *fixTimeDevice;
+@property (weak, nonatomic) IBOutlet UILabel *fixTimeDevice;//显示被定时的设备名字，默认为“场景”定时
 
 @property (nonatomic,strong) DeviceOfFixTimerViewController *deviceOfTimeVC;
 @property (nonatomic, weak) Schedule *schedule;
@@ -457,9 +457,27 @@
     
 }
 
+//判断是否已经选择了设备
+- (BOOL)hasSelectedDevice {
+    BOOL selected = NO;
+    NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
+    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+    NSArray *array = plistDic[@"devices"];
+    if (array.count >0) {
+        selected = YES;
+    }
+    
+    return selected;
+}
+
 - (IBAction)clickFixTimeBtn:(id)sender {
     UIButton *btn = (UIButton *)sender;
     
+    if (![self hasSelectedDevice]) {
+        [MBProgressHUD showError:@"先选择设备，再设置定时"];
+        return;
+    }
     
     if(btn.selected)
     {
@@ -469,7 +487,9 @@
     }else {
         
         self.timeView.hidden =  NO;
+        //_timeView.backgroundColor = [UIColor redColor];
         self.ShowSettingDataView.hidden = NO;
+        //_ShowSettingDataView.backgroundColor = [UIColor greenColor];
 //        self.dataPicker.hidden = NO;
         NSString  *astronomicealTime;
         NSDictionary *dic;
