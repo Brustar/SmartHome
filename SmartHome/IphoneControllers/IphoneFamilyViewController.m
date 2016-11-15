@@ -7,16 +7,29 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
+#define cellWidth self.collectionView.frame.size.width / 2.0 -20
+#define  minSpace 20
+#define  maxSpace 40
 
 #import "IphoneFamilyViewController.h"
+#import "HttpManager.h"
+#import "MBProgressHUD+NJ.h"
+#import "FamilyCell.h"
 
+@interface IphoneFamilyViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
-@interface IphoneFamilyViewController ()
-
-@property (weak, nonatomic) IBOutlet UIView *supView;
+@property (weak, nonatomic)  IBOutlet UIView *supView;
 @property (nonatomic,strong) UIScrollView * scrollView;
-@property (nonatomic,strong)UIImageView * supImageView;
+@property (nonatomic,strong) UIImageView * supImageView;
 @property (nonatomic,strong) NSArray * dataSource;
+@property (nonatomic,strong) NSMutableArray * roomIdArrs;//房间数量
+@property (nonatomic,strong) NSMutableArray * lightArrs;//
+@property (nonatomic,strong) NSMutableArray * curtainArrs;//
+@property (nonatomic,strong) NSMutableArray * musicArrs;//
+@property (nonatomic,strong) NSMutableArray * dvdArrs;//
+@property (nonatomic,strong) NSMutableArray * tvArrs;//
+@property (nonatomic,strong) NSMutableArray * tempArrs;
 
 @end
 
@@ -30,135 +43,197 @@
 
     return _dataSource;
 }
+-(NSMutableArray *)roomIdArrs
+{
+    if (!_roomIdArrs) {
+        _roomIdArrs = [NSMutableArray array];
+    }
+    
+    return _roomIdArrs;
+
+}
+-(NSMutableArray *)lightArrs
+{
+    if (!_lightArrs) {
+        _lightArrs = [NSMutableArray array];
+    }
+    return _lightArrs;
+}
+-(NSMutableArray *)curtainArrs
+{
+    if (!_curtainArrs) {
+        _curtainArrs = [NSMutableArray array];
+    }
+    
+    return _curtainArrs;
+
+}
+-(NSMutableArray *)musicArrs
+{
+    if (!_musicArrs) {
+        _musicArrs =[NSMutableArray array];
+    }
+    
+    return _musicArrs;
+}
+-(NSMutableArray *)dvdArrs
+{
+    if (!_dvdArrs) {
+        _dvdArrs = [NSMutableArray array];
+    }
+    
+    return _dvdArrs;
+
+}
+
+-(NSMutableArray *)tvArrs
+{
+    if (!_tvArrs) {
+        _tvArrs = [NSMutableArray array];
+    }
+    
+    return _tvArrs;
+
+}
+-(NSMutableArray *)tempArrs
+{
+    if (!_tempArrs) {
+        _tempArrs = [NSMutableArray array];
+    }
+    
+    return _tempArrs;
+
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-//    self.navigationController.automaticallyAdjustsScrollViewInsets = NO;
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.scrollView = [[UIScrollView alloc] init];
     self.scrollView.bounces = NO;
-    [self.supView addSubview:self.scrollView];
+
+//      [self sendRequest];
     
-    [self setSubImage];
 }
 
--(void)setSubImage
+-(void)sendRequest
 {
-
-    
-    for (int i =0 ; i < 6; i ++) { //行
-        for (int j = 0; j < 2; j++) { //列
-            
-            //父视图
-            self.supImageView = [[UIImageView alloc] init];
-            self.supImageView.frame = CGRectMake(160*j, 160*i, 155, 155);
-            self.supImageView.backgroundColor = [UIColor lightGrayColor];
-            [self.scrollView addSubview:self.supImageView];
-            
-            //子视图
-            UIImageView * imageView = [[UIImageView alloc] init];
-//            btn.frame = CGRectMake(20+100*j, 40+150*i, 75, 122);
-            imageView.frame = CGRectMake(25, 25, 100, 100);
-            imageView.backgroundColor = [UIColor colorWithRed:102/255.0 green:102/255.0 blue:0/255.0 alpha:1];
-            
-            [self.supImageView addSubview:imageView];
-            
-            imageView.layer.cornerRadius = imageView.bounds.size.width / 2.0; //圆角半径
-            imageView.layer.masksToBounds = YES; //圆角
-            
-            //灯视图
-            UIImageView * lightView = [[UIImageView alloc] init];
-            lightView.frame = CGRectMake(20, 5, 40, 40);
-            lightView.backgroundColor = [UIColor colorWithRed:41/255.0 green:159/255.0 blue:83/255.0 alpha:1];
-            lightView.layer.cornerRadius = lightView.bounds.size.width / 2.0; //圆角半径
-            lightView.layer.masksToBounds = YES; //圆角
-            [self.supImageView addSubview:lightView];
-            
-            //窗帘
-            UIImageView * curtainView = [[UIImageView alloc] init];
-            curtainView.frame = CGRectMake(90, 5, 40, 40);
-            curtainView.backgroundColor = [UIColor colorWithRed:64/255.0 green:128/255.0 blue:129/255.0 alpha:1];
-            curtainView.layer.cornerRadius = curtainView.bounds.size.width / 2.0; //圆角半径
-            curtainView.layer.masksToBounds = YES; //圆角
-            [self.supImageView addSubview:curtainView];
-            
-            //DVD
-            UIImageView * DVDView = [[UIImageView alloc] init];
-            DVDView.frame = CGRectMake(0, 70, 40, 40);
-            DVDView.backgroundColor = [UIColor colorWithRed:122/255.0 green:0/255.0 blue:255/255.0 alpha:1];
-            DVDView.layer.cornerRadius = DVDView.bounds.size.width / 2.0; //圆角半径
-            DVDView.layer.masksToBounds = YES; //圆角
-            DVDView.hidden = YES;
-            [self.supImageView addSubview:DVDView];
-            
-            //TV
-            
-            UIImageView * TVView = [[UIImageView alloc] init];
-            TVView.frame = CGRectMake(100, 100, 40, 40);
-            TVView.backgroundColor = [UIColor colorWithRed:254/255.0 green:128/255.0 blue:0/255.0 alpha:1];
-            TVView.layer.cornerRadius = TVView.bounds.size.width / 2.0; //圆角半径
-            TVView.layer.masksToBounds = YES; //圆角
-            [self.supImageView addSubview:TVView];
-            
-            //音乐
-            UIImageView * musicView = [[UIImageView alloc] init];
-            musicView.frame = CGRectMake(120, 55, 40, 40);
-            musicView.backgroundColor = [UIColor colorWithRed:135/255.0 green:18/255.0 blue:76/255.0 alpha:1];
-            musicView.layer.cornerRadius = musicView.bounds.size.width / 2.0; //圆角半径
-            musicView.layer.masksToBounds = YES; //圆角
-            musicView.hidden = YES;
-            [self.supImageView addSubview:musicView];
-            
-            //空调
-            
-            UIImageView * airView = [[UIImageView alloc] init];
-            airView.frame = CGRectMake(40, 115, 40, 40);
-            airView.backgroundColor = [UIColor colorWithRed:10/255.0 green:132/255.0 blue:255/255.0 alpha:1];
-            airView.layer.cornerRadius = airView.bounds.size.width / 2.0; //圆角半径
-            airView.layer.masksToBounds = YES; //圆角
-            [self.supImageView addSubview:airView];
-            
-            //温度Label
-            UILabel * temperature = [[UILabel alloc] init];
-            temperature.frame = CGRectMake(35, 5, 40, 30);
-            temperature.text = @"32";
-            temperature.font = [UIFont systemFontOfSize:18];
-            temperature.textAlignment = NSTextAlignmentLeft;
-            temperature.textColor = [UIColor whiteColor];
-            [imageView addSubview:temperature];
-            
-            //房间Label
-            UILabel * roomLabel = [[UILabel alloc] init];
-            roomLabel.frame = CGRectMake(35, 35, 40, 30);
-            roomLabel.text = @"卧室";
-            roomLabel.font = [UIFont systemFontOfSize:18];
-            roomLabel.textAlignment = NSTextAlignmentLeft;
-            roomLabel.textColor = [UIColor whiteColor];
-            [imageView addSubview:roomLabel];
-            
-            //使用情况Label
-            UILabel * userLabel = [[UILabel alloc] init];
-            userLabel.frame = CGRectMake(35, 65, 40, 30);
-            userLabel.text = @"86%";
-            userLabel.font = [UIFont systemFontOfSize:18];
-            userLabel.textAlignment = NSTextAlignmentLeft;
-            userLabel.textColor = [UIColor whiteColor];
-            [imageView addSubview:userLabel];
-        }
-     
-     
+    NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    NSString *url = [NSString stringWithFormat:@"%@cloud/RoomStatusList.aspx",[IOManager httpAddr]];
+    if (authorToken) {
+        NSDictionary *dic = @{@"AuthorToken":authorToken};
+        HttpManager *http=[HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = 1;
+        [http sendPost:url param:dic];
     }
+}
+-(void)httpHandler:(id)responseObject tag:(int)tag
+{
+    if(tag == 1)
+    {
+        if ([responseObject[@"Result"] intValue]==0)
+        {
+            
+            NSArray *dic = responseObject[@"list"];
+            
+            NSMutableArray * roomidArr = [NSMutableArray array];
+            NSMutableArray * lightArr =[NSMutableArray array];
+            NSMutableArray * curtainArr = [NSMutableArray array];
+            NSMutableArray * musicArr = [NSMutableArray array];
+            NSMutableArray * dvdArr = [NSMutableArray array];
+            NSMutableArray * tvArr = [NSMutableArray array];
+            NSMutableArray * tempArr = [NSMutableArray array];
+            if ([dic isKindOfClass:[NSArray class]]) {
+                for(NSDictionary *dicDetail in dic)
+                {
+                    if ([dicDetail isKindOfClass:[NSDictionary class]]) {
+                        [lightArr addObject:dicDetail[@"light"]];
+                        [curtainArr addObject:dicDetail[@"curtain"]];
+                        [roomidArr addObject:dicDetail[@"roomid"]];
+                        [dvdArr addObject:dicDetail[@"dvd"]];
+                        [tvArr addObject:dicDetail[@"tv"]];
+                        [musicArr addObject:dicDetail[@"bgmusic"]];
+                        [tempArr addObject:dicDetail[@"temperature"]];
+                     
+                    }
+                    [self.lightArrs addObject:lightArr];
+                    [self.curtainArrs addObject:curtainArr];
+                    [self.roomIdArrs addObject:roomidArr];
+                    [self.dvdArrs addObject:dvdArr];
+                    [self.tvArrs addObject:tvArr];
+                    [self.musicArrs addObject:musicArr];
+                    [self.tempArrs addObject:tempArr];
+                }
+            }
+            
+            
+            
+            [self.collectionView reloadData];
+        }else{
+            [MBProgressHUD showError:responseObject[@"Msg"]];
+        }
+    }else if(tag == 2)
+    {
+        if([responseObject[@"Result"] intValue]==0)
+        {
+            [MBProgressHUD showSuccess:@"删除成功"];
+            
+        }else {
+            [MBProgressHUD showError:responseObject[@"Msg"]];
+        }
+    }
+    
+    
+    
+    
+}
 
-    self.scrollView.frame = self.supView.bounds;
-    self.scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, self.supImageView.bounds.size.height*6+30);
 
+#pragma  mark - UICollectionViewDelegate
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+//    return self.roomIdArrs.count;
+    
+    return 12;
+
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+   FamilyCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    
+//       cell.layer.cornerRadius = cell.bounds.size.width/2.0;
+       cell.layer.masksToBounds = YES;
+
+    cell.supImageView.layer.cornerRadius = cell.supImageView.bounds.size.width / 2.0;
+    cell.subImageView.layer.cornerRadius = cell.subImageView.bounds.size.width /2.0;
+    cell.lightImageVIew.layer.cornerRadius = cell.lightImageVIew.bounds.size.width /2.0;
+    cell.curtainImageView.layer.cornerRadius = cell.curtainImageView.bounds.size.width / 2.0;
+    cell.airImageVIew.layer.cornerRadius = cell.airImageVIew.bounds.size.width / 2.0;
+    cell.DVDImageView.layer.cornerRadius = cell.DVDImageView.bounds.size.width / 2.0;
+    cell.TVImageView.layer.cornerRadius = cell.TVImageView.bounds.size.width / 2.0;
+    cell.musicImageVIew.layer.cornerRadius = cell.musicImageVIew.bounds.size.width / 2.0;
+    
+    return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(cellWidth, cellWidth);
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
+}
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return minSpace;
+}
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return maxSpace;
 }
 
 

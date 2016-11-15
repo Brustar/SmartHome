@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *headView;
 @property (nonatomic,strong) NSArray *titleArr;
-//@property (nonatomic,strong) NSArray * titleImage;
+@property (nonatomic,strong) NSArray * titleImageArr;
 @property (nonatomic, weak) UIViewController *selectController;
 
 @property (nonatomic, strong) UIButton *cover;
@@ -28,12 +28,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.titleArr = @[@"家庭",@"场景",@"实景",@"我的"];
-//    self.titleImage = @[@"menu_scene",@"menu_room",@"menu_device"];
+    self.titleImageArr = @[@"room",@"icone-2",@"scene",@"icone-1"];
     
     self.tableView.tableFooterView = [UIView new];
     self.tableView.tableHeaderView = self.headView;
     [self setupChilderController];
-    
+//    self.tableView.backgroundColor = [UIColor lightGrayColor];
     [self.view sendSubviewToBack:self.tableView];
 }
 
@@ -124,7 +124,8 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
     }
     cell.textLabel.text = self.titleArr[indexPath.row];
-//    cell.imageView.image = [UIImage imageNamed:self.titleImage[indexPath.row]];
+    cell.backgroundColor = [UIColor lightGrayColor];
+    cell.imageView.image = [UIImage imageNamed:self.titleImageArr[indexPath.row]];
     return cell;
     
 }

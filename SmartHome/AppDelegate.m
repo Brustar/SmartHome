@@ -16,8 +16,11 @@
 #import "IphoneMainController.h"
 #import "MSGController.h"
 #import "ECloudTabBar.h"
+#import "IphoneSceneController.h"
+#import "VoiceOrderController.h"
+#import "IphoneFavorController.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<UIViewControllerPreviewingDelegate >
 
 @end
 
@@ -70,7 +73,13 @@
     manager.shouldToolbarUsesTextFieldTintColor = YES;
     manager.enableAutoToolbar = YES;
    
-    
+    //动态加载自定义的ShortcutItem
+    if (application.shortcutItems.count == 0) {
+        UIMutableApplicationShortcutItem *itemThor =[[UIMutableApplicationShortcutItem alloc]initWithType:[NSString stringWithFormat:@"%@.second",[[NSBundle mainBundle] bundleIdentifier]] localizedTitle:@"语音控制" localizedSubtitle:nil icon:[UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeCloud] userInfo:nil];
+        UIMutableApplicationShortcutItem *itemBlack =[[UIMutableApplicationShortcutItem alloc]initWithType:[NSString stringWithFormat:@"%@.third",[[NSBundle mainBundle] bundleIdentifier]] localizedTitle:@"收藏场景" localizedSubtitle:nil icon:[UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeAlarm] userInfo:nil];
+        
+        application.shortcutItems = @[itemBlack,itemThor];
+    }
 
     return YES;
 }
@@ -184,14 +193,28 @@
 }
 
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void(^)(BOOL succeeded))completionHandler{
-    //判断先前我们设置的唯一标识
-    if([shortcutItem.type isEqualToString:@"-11.UITouchText.share"]){
-        NSArray *arr = @[@"hello 3D Touch"];
-        UIActivityViewController *vc = [[UIActivityViewController alloc]initWithActivityItems:arr applicationActivities:nil];
-        //设置当前的VC 为rootVC
-        [self.window.rootViewController presentViewController:vc animated:YES completion:^{
-        }];
+//    //判断先前我们设置的唯一标识
+//    if([shortcutItem.type isEqualToString:@"-11.UITouchText.share"]){
+//        NSArray *arr = @[@"hello 3D Touch"];
+//        UIActivityViewController *vc = [[UIActivityViewController alloc]initWithActivityItems:arr applicationActivities:nil];
+//        //设置当前的VC 为rootVC
+//        [self.window.rootViewController presentViewController:vc animated:YES completion:^{
+//        }];
+//    }
+//
+    
+//    application.shortcutItems
+    UIViewController * ViewVC ;
+    if ([shortcutItem isEqual:application.shortcutItems[0]]) {
+        
+            ViewVC =[[VoiceOrderController alloc] init];
+    }else if ([shortcutItem isEqual:application.shortcutItems[1]]){
+        ViewVC = [[IphoneFavorController alloc] init];
     }
+    IphoneSceneController * vc = [IphoneSceneController new];
+    [vc.navigationController popToRootViewControllerAnimated:NO];
+    vc.shortcutName =shortcutItem.localizedTitle;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ShortCut" object:nil];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -218,6 +241,22 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - UIViewControllerPreviewingDelegate
+
+- (nullable UIViewController *)previewingContext:(id <UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location
+{
+    
+    VoiceOrderController *detailVC =[[VoiceOrderController alloc] init];
+   
+    
+    return detailVC;
+}
+
+- (void)previewingContext:(id <UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit
+{
+    [self.window.rootViewController presentViewController:viewControllerToCommit animated:YES completion:nil];
 }
 
 @end
