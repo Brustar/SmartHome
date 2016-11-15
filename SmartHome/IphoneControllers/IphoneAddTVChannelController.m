@@ -37,24 +37,23 @@
                                                                                                                                              [KxMenuItem menuItem:@"预置台标"
                                                                                                                                                             image:nil
                                                                                                                                                            target:self
-                                                                                                                                                           action:@selector(preset:)],
+                                                                                                                                                           action:@selector(Iphonepreset:)],
                                                                                                                                              [KxMenuItem menuItem:@"本地图库"
                                                                                                                                                             image:nil
                                                                                                                                                            target:self
-                                                                                                                                                           action:@selector(selectPhoto:)],
+                                                                                                                                                           action:@selector(IphoneSelectPhoto:)],
                                                                                                                                              [KxMenuItem menuItem:@"现在拍摄"
                                                                                                                                                             image:nil
                                                                                                                                                            target:self
-                                                                                                                                                           action:@selector(takePhoto:)],
+                                                                                                                                                           action:@selector(IphoneTakePhoto:)],
                                                                                                                                              ]];
 
 }
 
-
--(void)preset:(KxMenuItem *)item{
+-(void)Iphonepreset:(KxMenuItem *)item{
     [self performSegueWithIdentifier:@"iphoneTvLogoSegue" sender:self];
 }
-- (void)selectPhoto:(KxMenuItem *)item {
+- (void)IphoneSelectPhoto:(KxMenuItem *)item {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
@@ -63,7 +62,7 @@
     [self presentViewController:picker animated:YES completion:NULL];
 }
 
-- (void)takePhoto:(KxMenuItem *)item {
+- (void)IphoneTakePhoto:(KxMenuItem *)item {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
@@ -80,7 +79,11 @@
     [self.addBtn setBackgroundImage:info[UIImagePickerControllerEditedImage] forState:UIControlStateNormal];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return NO;
 
+}
 -(void)tvIconController:(TVIconController *)iconVC withImgName:(NSString *)imgName
 {
     self.chooseImgeName = imgName;

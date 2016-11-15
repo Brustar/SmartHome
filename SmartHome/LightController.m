@@ -85,6 +85,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+//    self.navigationController.navigationBarHidden = YES;
     [self setUpConstraints];
     self.detailCell = [[[NSBundle mainBundle] loadNibNamed:@"DetailTableViewCell" owner:self options:nil] lastObject];
     self.detailCell.bright.continuous = NO;
@@ -107,6 +109,7 @@
     self.tableView.scrollEnabled = NO;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncLight:) name:@"light" object:nil];
     
