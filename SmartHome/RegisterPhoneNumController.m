@@ -9,9 +9,10 @@
 #import "RegisterPhoneNumController.h"
 #import "RegisterDetailController.h"
 #import "MBProgressHUD+NJ.h"
-#import "RegexKitLite.h"
+#import "NSString+RegMatch.h"
 #import "WebManager.h"
 #import "VerifyCodeView.h"
+
 @interface RegisterPhoneNumController ()<UITextFieldDelegate,UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewTopLeadingConstraint;
 @property (weak, nonatomic) IBOutlet UIView *usderAndMasterView;
@@ -84,7 +85,7 @@
         [MBProgressHUD showError:@"请输入手机号"];
         return;
     }
-    if(![self isMobileNumber:self.phoneNumTextField.text])
+    if(![self.phoneNumTextField.text isMobileNumber])
     {
         [MBProgressHUD showError:@"请输入合法的手机号码"];
         return;
@@ -102,13 +103,6 @@
     vc.userType = self.suerTypeStr;
     
 }
-#pragma mark -判断手机号是否合法
-- (BOOL)isMobileNumber:(NSString *)mobileNum
-{
-    NSString *regex=@"^1[3|4|5|7|8]\\d{9}$";
-    return [mobileNum isMatchedByRegex:regex];
-}
-
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {

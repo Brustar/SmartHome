@@ -7,10 +7,9 @@
 //
 
 #import "LoginController.h"
-#import "CryptoManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "WebManager.h"
-#import "RegexKitLite.h"
+#import "NSString+RegMatch.h"
 #import "SocketManager.h"
 #import "SceneController.h"
 #import "QRCodeReaderDelegate.h"
@@ -138,7 +137,7 @@
     NSString *url = [NSString stringWithFormat:@"%@UserLogin.aspx",[IOManager httpAddr]];
     
     self.userType = 1;
-    if([self isMobileNumber:self.user.text])
+    if([self.user.text isMobileNumber])
     {
         self.userType = 2;
     }
@@ -630,12 +629,6 @@
     }else {
         NSLog(@"请求参数dict为 nil");
     }
-}
-
-- (BOOL)isMobileNumber:(NSString *)mobileNum
-{
-    NSString *regex=@"^1[3|4|5|7|8]\\d{9}$";
-    return [mobileNum isMatchedByRegex:regex];
 }
 
 - (IBAction)forgotPWD:(id)sender
