@@ -40,17 +40,13 @@
         self.viewTopLeadingConstraint.constant = 80;
         
     }
+    
+      [[UIApplication sharedApplication] setStatusBarHidden:YES];
     self.viewWidthConstraint.constant = [[UIScreen mainScreen] bounds].size.width * 0.8;
     
-    UIBarButtonItem *editItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(clickEditBtn:)];
-    self.navigationItem.leftBarButtonItem = editItem;
-    
-}
--(void)clickEditBtn:(UIBarButtonItem *)bbi
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
 
 }
+
 - (IBAction)DissmissBtn:(id)sender {
     
     
