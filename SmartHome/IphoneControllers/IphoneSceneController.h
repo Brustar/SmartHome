@@ -10,4 +10,6 @@
 
 @interface IphoneSceneController : UIViewController
 
+@property (nonatomic,strong) NSString * shortcutName;
+
 @end

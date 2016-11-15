@@ -186,6 +186,8 @@
         self.astronomicalBut.enabled = YES;
         self.schedule.startTime = @"";
         self.schedule.endTime = @"";
+        self.schedule.startDate = @"";
+        self.schedule.endDate = @"";
     }
     
 }
@@ -198,11 +200,7 @@
     {
          self.schedule.astronomicalStartID = (int)btn.tag + 1;
     }
-   
-   
-    
-    
-    
+
 }
 
 - (IBAction)selectedRepeatTime:(id)sender {
@@ -280,6 +278,8 @@
     }else{
         startTime = self.astronomyStartTime.text;
         endTime = @"无";
+        startDay = self.astronomyStartTime.text;
+        endDay = @"无";
     }
     NSDictionary *dic = @{@"startTime":startTime,@"endTime":endTime,@"repeat":self.repeatLabel.text,@"startDay":startDay,@"endDay":endDay};
     [center postNotificationName:@"time" object:nil userInfo:dic];

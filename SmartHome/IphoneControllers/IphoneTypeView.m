@@ -98,6 +98,10 @@
 - (void)setSelectButton:(int)index {
     
     
+    if (self.btns.count == 0) {
+        
+        return ;
+    }
     UIButton *button = self.btns[index];
     
     button.enabled = NO;
