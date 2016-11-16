@@ -618,7 +618,7 @@
             sceneID = [resultSet intForColumn:@"ID"]+1;
         }
         
-        sql=[NSString stringWithFormat:@"insert into Scenes values(%d,'%@','','%@',%d,%d,null,null,null)",sceneID,name,img,scene.roomID,2];
+        sql=[NSString stringWithFormat:@"insert into Scenes values(%d,'%@','','%@',%ld,%d,null,null,null)",sceneID,name,img,(long)scene.roomID,2];
         [db executeUpdate:sql];
     }
     [db closeOpenResultSets];

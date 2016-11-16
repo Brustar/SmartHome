@@ -63,13 +63,8 @@
 - (IBAction)sendAuothCode:(id)sender {
     if (![self.phoneNumber.text isEqualToString:@""]) {
         if(![self.phoneNumber.text isMobileNumber]){
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"系统提示"
-                                                            message:@"电话号码不合法"
-                                                           delegate:self
-                                                  cancelButtonTitle:@"确定"
-                                                  otherButtonTitles:nil];
-            //显示AlertView
-            [alert show];
+            UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"系统提示" message:@"电话号码不合法" preferredStyle:UIAlertControllerStyleAlert];
+            [self presentViewController: alertVC animated:YES completion:nil];
         }else{
             __block int timeout=59; //倒计时时间
             dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);

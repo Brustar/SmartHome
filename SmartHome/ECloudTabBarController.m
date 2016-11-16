@@ -48,7 +48,7 @@
     }
     if(self.selectedIndex == 0)
     {
-        NSString *str = [NSString stringWithFormat:@"%ld", subType];
+        NSString *str = [NSString stringWithFormat:@"%d", (int)subType];
         NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:str, @"subType",nil ];
        // NSDictionary *dict = @{@"type":[NSNumber numberWithInteger:type],@"subType":[NSNumber numberWithInteger:subType]};
         

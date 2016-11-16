@@ -103,13 +103,13 @@
             scene.sceneName = name;
             
             [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, scene.sceneID]  scene:scene];
-            NSString *roomName = [SQLManager getRoomNameByRoomID:scene.roomID];
+            NSString *roomName = [SQLManager getRoomNameByRoomID:(int)scene.roomID];
             
             //插入数据库
             FMDatabase *db = [SQLManager connetdb];
             if([db open])
             {
-                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,'%@',%d,null)",[responseObject[@"SID"] intValue],name,roomName,responseObject[@"ImgUrl"] ,scene.roomID,2,@"0",0];
+                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%ld,%d,'%@',%d,null)",[responseObject[@"SID"] intValue],name,roomName,responseObject[@"ImgUrl"] ,(long)scene.roomID,2,@"0",0];
                BOOL result = [db executeUpdate:sql];
                 if(result)
                 {
@@ -152,12 +152,12 @@
                 if(schedule.deviceID==0){
                     if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID>0)
                     {
-                        parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":imgFileName,@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:1],@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
+                        parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":imgFileName,@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:1],@"RoomID":[NSNumber numberWithLong:scene.roomID],@"PlistName":fileName};
                     }
                 }
             }
         }else{
-            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":imgFileName,@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:2],@"RoomID":[NSNumber numberWithInt:scene.roomID],@"PlistName":fileName};
+            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":imgFileName,@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:2],@"RoomID":[NSNumber numberWithLong:scene.roomID],@"PlistName":fileName};
         }
 
         NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
@@ -213,7 +213,7 @@
             if(schedule.deviceID==0){
                 if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID>0)
                 {
-                    parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":newScene.sceneName,@"ImgName":newScene.picName,@"ScenceFile":fileName,@"RoomID":[NSNumber numberWithInt:newScene.roomID],@"IsPlan":@"1",@"StartTime":schedule.startTime,@"AstronomicalTime":[NSNumber numberWithInt:schedule.astronomicalStartID],@"PlanType":[NSNumber numberWithInt:1],@"WeekValue":schedule.weekDays,@"ScenceID":[NSNumber numberWithInt:newScene.sceneID]};
+                    parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":newScene.sceneName,@"ImgName":newScene.picName,@"ScenceFile":fileName,@"RoomID":[NSNumber numberWithLong:newScene.roomID],@"IsPlan":@"1",@"StartTime":schedule.startTime,@"AstronomicalTime":[NSNumber numberWithInt:schedule.astronomicalStartID],@"PlanType":[NSNumber numberWithInt:1],@"WeekValue":schedule.weekDays,@"ScenceID":[NSNumber numberWithLong:newScene.sceneID]};
                 }
             }
         }
@@ -221,7 +221,7 @@
         
         if (newScene.sceneName && newScene.picName && fileName && newScene.roomID) {
             
-            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":newScene.sceneName,@"ImgName":newScene.picName,@"ScenceFile":fileName,@"RoomID":[NSNumber numberWithInt:newScene.roomID],@"IsPlan":@"2",@"ScenceID":[NSNumber numberWithInt:newScene.sceneID]};
+            parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":newScene.sceneName,@"ImgName":newScene.picName,@"ScenceFile":fileName,@"RoomID":[NSNumber numberWithLong:newScene.roomID],@"IsPlan":@"2",@"ScenceID":[NSNumber numberWithInt:newScene.sceneID]};
         }
         NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
         NSString *URL = [NSString stringWithFormat:@"%@SceneEdit.aspx",[IOManager httpAddr]];

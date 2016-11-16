@@ -276,7 +276,7 @@
     
     if ([[UIApplication sharedApplication] canOpenURL:url])
     {
-        [[UIApplication sharedApplication] openURL:url];
+        [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
     }
     else
     {
