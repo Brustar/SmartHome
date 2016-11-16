@@ -1407,6 +1407,47 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="elI-aD-mYs">
+                                <rect key="frame" x="62" y="193" width="250" height="280"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="另存为场景" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GNo-Dg-YJz">
+                                        <rect key="frame" x="71" y="15" width="107" height="26"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yuz-Ob-9oA">
+                                        <rect key="frame" x="20" y="250" width="46" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="取消"/>
+                                        <connections>
+                                            <action selector="cancelBtn:" destination="684-QI-OKg" eventType="touchUpInside" id="vFy-9B-xAM"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sfe-w2-rwX">
+                                        <rect key="frame" x="134" y="250" width="96" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="确定"/>
+                                        <connections>
+                                            <action selector="SureBtn:" destination="684-QI-OKg" eventType="touchUpInside" id="9Qg-nj-Qvf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0YX-Qw-mfG">
+                                        <rect key="frame" x="5" y="61" width="240" height="119"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" backgroundImage="PL"/>
+                                        <connections>
+                                            <action selector="selectSceneImg:" destination="684-QI-OKg" eventType="touchUpInside" id="57P-fV-d59"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.86852824080000002" green="0.86852824080000002" blue="0.86852824080000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="280" id="Ko7-zQ-FE9"/>
+                                    <constraint firstAttribute="width" constant="250" id="ebR-hF-7Jt"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R6z-nn-xB0">
                                 <rect key="frame" x="10" y="134" width="62" height="30"/>
                                 <state key="normal" title="添加定时"/>
@@ -1465,25 +1506,25 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="无" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgY-tj-yaE">
-                                        <rect key="frame" x="102" y="5" width="14.5" height="17"/>
+                                        <rect key="frame" x="102" y="5" width="15" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="无" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NrS-4R-SUv">
-                                        <rect key="frame" x="102" y="45" width="14.5" height="17"/>
+                                        <rect key="frame" x="102" y="45" width="15" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="无" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mPB-wm-0Dx" userLabel="StartDay">
-                                        <rect key="frame" x="102" y="92" width="14.5" height="17"/>
+                                        <rect key="frame" x="102" y="92" width="15" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="无" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pgx-TA-uwO" userLabel="EndDay">
-                                        <rect key="frame" x="102" y="135" width="14.5" height="17"/>
+                                        <rect key="frame" x="102" y="135" width="15" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -1499,7 +1540,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="无" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="le0-Z5-Gzc">
-                                        <rect key="frame" x="100" y="183" width="14.5" height="17"/>
+                                        <rect key="frame" x="100" y="183" width="15" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -1547,9 +1588,11 @@
                             <constraint firstItem="87J-VZ-ZoA" firstAttribute="top" secondItem="bXM-A7-4H3" secondAttribute="bottom" constant="20" id="8kc-Ko-Q0j"/>
                             <constraint firstItem="aKg-0W-a5G" firstAttribute="leading" secondItem="LA9-lc-LRf" secondAttribute="leading" id="9zU-Qm-jKS"/>
                             <constraint firstItem="rg5-x4-lcP" firstAttribute="top" secondItem="R6z-nn-xB0" secondAttribute="bottom" constant="10" id="AKz-qo-wNN"/>
+                            <constraint firstItem="elI-aD-mYs" firstAttribute="centerX" secondItem="rg5-x4-lcP" secondAttribute="centerX" id="HFw-2r-LDe"/>
                             <constraint firstAttribute="trailing" secondItem="rg5-x4-lcP" secondAttribute="trailing" constant="10" id="Ld5-3x-lgL"/>
                             <constraint firstItem="rg5-x4-lcP" firstAttribute="leading" secondItem="LA9-lc-LRf" secondAttribute="leading" constant="10" id="NnL-8e-bNF"/>
                             <constraint firstAttribute="trailing" secondItem="87J-VZ-ZoA" secondAttribute="trailing" id="S5P-Eg-dca"/>
+                            <constraint firstItem="elI-aD-mYs" firstAttribute="top" secondItem="R6z-nn-xB0" secondAttribute="bottom" constant="29" id="Y2Z-zy-XRu"/>
                             <constraint firstAttribute="trailing" secondItem="aKg-0W-a5G" secondAttribute="trailing" id="isL-61-4Xq"/>
                             <constraint firstItem="9PX-lB-fqg" firstAttribute="top" secondItem="87J-VZ-ZoA" secondAttribute="bottom" id="nja-75-TH4"/>
                             <constraint firstItem="87J-VZ-ZoA" firstAttribute="leading" secondItem="LA9-lc-LRf" secondAttribute="leading" id="pHm-wm-ouX"/>
@@ -1568,6 +1611,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="EndDayLabel" destination="Pgx-TA-uwO" id="mMh-xc-ahj"/>
+                        <outlet property="ImageBtn" destination="0YX-Qw-mfG" id="5AJ-1p-hSf"/>
+                        <outlet property="SceneView" destination="elI-aD-mYs" id="8ca-A8-IKz"/>
                         <outlet property="StartDayLael" destination="mPB-wm-0Dx" id="hgA-kz-wdi"/>
                         <outlet property="endTime" destination="NrS-4R-SUv" id="0pk-zw-WFK"/>
                         <outlet property="repeat" destination="le0-Z5-Gzc" id="ule-Zh-qRV"/>
@@ -1595,7 +1640,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U4T-Wr-vpj">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="yGe-XQ-WNx" id="BBU-2j-rf7"/>
@@ -3391,7 +3436,7 @@
         <!--语音控制-->
         <scene sceneID="tmP-hZ-Jwv">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="P8H-gP-qd1" userLabel="语音控制" customClass="VoiceOrderController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VoiceOrderController" hidesBottomBarWhenPushed="YES" id="P8H-gP-qd1" userLabel="语音控制" customClass="VoiceOrderController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ifr-iY-xyB"/>
                         <viewControllerLayoutGuide type="bottom" id="eQi-dD-4Sk"/>
@@ -3563,6 +3608,7 @@
     </scenes>
     <resources>
         <image name="DVD-1" width="130" height="130"/>
+        <image name="PL" width="724" height="470"/>
         <image name="add" width="64" height="64"/>
         <image name="aire-6" width="130" height="130"/>
         <image name="broadcast" width="32" height="32"/>
@@ -3603,7 +3649,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="vWH-k8-ixo"/>
-        <segue reference="WeN-Qz-0Az"/>
-        <segue reference="aTH-RA-7NZ"/>
+        <segue reference="J5F-aP-6iz"/>
+        <segue reference="YuF-MW-0b0"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -100,6 +100,9 @@
     
     if (self.btns.count == 0) {
         
+        self.selectedButton = nil;
+         CGPoint Nilpoint = CGPointMake(0, 0);
+        [self.scrollView setContentOffset:Nilpoint animated:YES];
         return ;
     }
     UIButton *button = self.btns[index];

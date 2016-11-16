@@ -190,28 +190,34 @@
 }
 
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void(^)(BOOL succeeded))completionHandler{
-//    //判断先前我们设置的唯一标识
-//    if([shortcutItem.type isEqualToString:@"-11.UITouchText.share"]){
-//        NSArray *arr = @[@"hello 3D Touch"];
-//        UIActivityViewController *vc = [[UIActivityViewController alloc]initWithActivityItems:arr applicationActivities:nil];
-//        //设置当前的VC 为rootVC
-//        [self.window.rootViewController presentViewController:vc animated:YES completion:^{
-//        }];
-//    }
-//
-    
-//    application.shortcutItems
-    UIViewController * ViewVC ;
-    if ([shortcutItem isEqual:application.shortcutItems[0]]) {
-        
-            ViewVC =[[VoiceOrderController alloc] init];
-    }else if ([shortcutItem isEqual:application.shortcutItems[1]]){
-        ViewVC = [[IphoneFavorController alloc] init];
+    //判断先前我们设置的唯一标识
+     UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+    if([shortcutItem.type isEqualToString:@"-11.UITouchText.share"]){
+        NSArray *arr = @[@"hello 3D Touch"];
+        UIActivityViewController *vc = [[UIActivityViewController alloc]initWithActivityItems:arr applicationActivities:nil];
+        //设置当前的VC 为rootVC
+        [self.window.rootViewController presentViewController:vc animated:YES completion:^{
+        }];
     }
-    IphoneSceneController * vc = [IphoneSceneController new];
-    [vc.navigationController popToRootViewControllerAnimated:NO];
-    vc.shortcutName =shortcutItem.localizedTitle;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ShortCut" object:nil];
+    else if ([shortcutItem isEqual:application.shortcutItems[0]]) {
+            VoiceOrderController *voicVC = [secondStoryBoard instantiateViewControllerWithIdentifier:@"VoiceOrderController"];
+        [self.window.rootViewController presentViewController:voicVC animated:YES completion:^{
+            
+        }];
+        
+    }else if ([shortcutItem isEqual:application.shortcutItems[1]]){
+         IphoneFavorController *childVC = [secondStoryBoard instantiateViewControllerWithIdentifier:@"IphoneFavorController"];
+        [self.window.rootViewController presentViewController:childVC animated:YES completion:^{
+            
+        }];
+    }
+    
+    
+   
+//    IphoneSceneController * vc = [IphoneSceneController new];
+//    [vc.navigationController popToRootViewControllerAnimated:NO];
+//    vc.shortcutName =shortcutItem.localizedTitle;
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"ShortCut" object:nil];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

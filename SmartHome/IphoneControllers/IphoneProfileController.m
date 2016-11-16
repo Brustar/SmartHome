@@ -74,6 +74,22 @@
 }
 
 - (IBAction)clickQuitButton:(id)sender {
+    
+    UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"退出后不会删除任何数据，下次依然可以使用本账号" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction * action = [UIAlertAction actionWithTitle:@"退出登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+        [self clickQuitButton];
+    }];
+    
+    [alertVC addAction:action];
+    [self presentViewController:alertVC animated:YES completion:nil];
+    
+  
+
+}
+-(void)clickQuitButton
+{
+    
     NSString *authorToken =[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     if (authorToken) {
         NSDictionary *dict = @{@"AuthorToken":authorToken};
@@ -90,7 +106,6 @@
     }
 
 }
-
 - (IBAction)PorTraitButton:(id)sender {
     
         UIImagePickerController *PickerImage = [[UIImagePickerController alloc]init];

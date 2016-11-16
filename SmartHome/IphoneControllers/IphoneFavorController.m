@@ -91,7 +91,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(cellWidth, 80 );
+    return CGSizeMake(cellWidth, 130);
 }
 
 - (void)didReceiveMemoryWarning {
