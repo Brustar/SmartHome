@@ -100,6 +100,9 @@
     
     if (self.btns.count == 0) {
         
+        self.selectedButton = nil;
+         CGPoint Nilpoint = CGPointMake(0, 0);
+        [self.scrollView setContentOffset:Nilpoint animated:YES];
         return ;
     }
     UIButton *button = self.btns[index];
@@ -129,7 +132,6 @@
 
 
 - (void)setViewFrame {
-    UIButton *button = self.btns[0];
     CGFloat buttonH  = 48;
 //    CGFloat buttonH = button.imageView.image.size.height - ButtonImageTitleMargin - ButtonTitleHeight;
     CGFloat buttonY = (self.frame.size.height - buttonH) / 7;

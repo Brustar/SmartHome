@@ -58,7 +58,6 @@
 }
 
 #pragma mark - Initializing the AV Components
-
 - (void)setupAVComponents
 {
   self.defaultDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];

@@ -345,7 +345,7 @@
 {
     self.engerOfDeviceVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EnergyOfDeviceController"];
     
-    NSString *eid = [NSString stringWithFormat:@"%ld",btn.tag];
+    NSString *eid = [NSString stringWithFormat:@"%d",(int)btn.tag];
     
     self.engerOfDeviceVC.eIds = @[eid];
     [self.navigationController pushViewController:self.engerOfDeviceVC animated:NO];
