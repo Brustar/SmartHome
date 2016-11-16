@@ -78,7 +78,8 @@
     UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"退出后不会删除任何数据，下次依然可以使用本账号" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction * action = [UIAlertAction actionWithTitle:@"退出登录" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
-        [self clickQuitButton];
+        //[self clickQuitButton];
+        [self performSegueWithIdentifier:@"iphoneQuitSegue" sender:self];
     }];
     
     UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
