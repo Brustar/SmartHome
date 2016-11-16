@@ -132,7 +132,6 @@
 
 
 - (void)setViewFrame {
-    UIButton *button = self.btns[0];
     CGFloat buttonH  = 48;
 //    CGFloat buttonH = button.imageView.image.size.height - ButtonImageTitleMargin - ButtonTitleHeight;
     CGFloat buttonY = (self.frame.size.height - buttonH) / 7;

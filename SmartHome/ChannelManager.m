@@ -49,7 +49,7 @@
     BOOL isSuccess = false;
     if([db open])
     {
-        isSuccess = [db executeUpdateWithFormat:@"delete from Channels where id = %ld",channel_id];
+        isSuccess = [db executeUpdateWithFormat:@"delete from Channels where id = %ld",(long)channel_id];
     }
     [db close];
     return isSuccess;

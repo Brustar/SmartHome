@@ -77,11 +77,9 @@
         
         
     } progress:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
-        
-        NSString *str = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         id result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         int resultValue =[result[@"Result"] intValue];
-        NSLog(@"完成 %@", str);
+
         if (resultValue == 0) {
             completion(result);
         }else{

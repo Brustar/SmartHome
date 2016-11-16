@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MBProgressHUD+NJ.h"
 
 @class RoomListController;
 @protocol  RoomListControllerDelegate <NSObject>
