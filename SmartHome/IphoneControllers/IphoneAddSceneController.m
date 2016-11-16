@@ -120,7 +120,11 @@
     {
         //dic[@"deviceID"];
         NSString *name = [SQLManager deviceNameByDeviceID:[dic[@"deviceID"] intValue]];
-        [deviceName addObject:name];
+        if (name) {
+              [deviceName addObject:name];
+        }
+        
+      
     }
     return [deviceName copy];
 

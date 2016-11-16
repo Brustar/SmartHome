@@ -122,14 +122,17 @@
     if (![PackManager checkProtocol:data cmd:0xef]) {
         NSData *ip=[data subdataWithRange:NSMakeRange(4, 4)];
         NSData *port=[data subdataWithRange:NSMakeRange(8, 2)];
+        //release 不能马上去连，要暂停0.1S,再连从服务器，不然会崩溃
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(100 * NSEC_PER_MSEC)), dispatch_get_main_queue(), ^{
+            [self initTcp:[PackManager NSDataToIP:ip] port:(int)[PackManager dataToUInt16:port] delegate:nil];
+            DeviceInfo *device=[DeviceInfo defaultManager];
+            device.masterPort=(int)[PackManager dataToUInt16:port];
+            device.masterIP = [PackManager NSDataToIP:ip];
+            
+            [self.socket writeData:[[DeviceInfo defaultManager] author] withTimeout:-1 tag:0];
+            [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:0];
+        });
         
-        [self initTcp:[PackManager NSDataToIP:ip] port:(int)[PackManager dataToUInt16:port] delegate:nil];
-        DeviceInfo *device=[DeviceInfo defaultManager];
-        device.masterPort=(int)[PackManager dataToUInt16:port];
-        device.masterIP = [PackManager NSDataToIP:ip];
-        
-        [self.socket writeData:[[DeviceInfo defaultManager] author] withTimeout:-1 tag:0];
-        [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:0];
     }
 }
 
@@ -157,6 +160,8 @@
     }
     
     //[self.socket readDataWithTimeout:30 tag:0];
+    
+    
     [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:0];
 }
 

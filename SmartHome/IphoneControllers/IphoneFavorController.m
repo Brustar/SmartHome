@@ -14,6 +14,7 @@
 #import "SQLManager.h"
 #import "SceneCell.h"
 #import "SceneManager.h"
+#import "UIImageView+WebCache.h"
 
 
 @interface IphoneFavorController ()<UICollectionViewDelegate,UICollectionViewDataSource,SceneCellDelegate>
@@ -55,6 +56,8 @@
     Scene *scene = self.scens[indexPath.row];
     cell.tag = scene.sceneID;
     cell.scenseName.text = scene.sceneName;
+    [cell.imgView sd_setImageWithURL:[NSURL URLWithString: scene.picName] placeholderImage:[UIImage imageNamed:@"PL"]];
+    
     cell.delegate = self;
     [cell useLongPressGesture];
     return cell;

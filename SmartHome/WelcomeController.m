@@ -10,14 +10,20 @@
 #import "DeviceInfo.h"
 #import "SQLManager.h"
 #import "AudioManager.h"
+#import "QRCodeReaderDelegate.h"
+#import "QRCodeReader.h"
+#import "QRCodeReaderViewController.h"
+#import "CryptoManager.h"
+#import "RegisterPhoneNumController.h"
+#import "SunCount.h"
+#import <CoreLocation/CoreLocation.h>
 
-
-@interface WelcomeController ()<UIScrollViewDelegate,UIGestureRecognizerDelegate,UIPageViewControllerDelegate>
+@interface WelcomeController ()<QRCodeReaderDelegate,UIScrollViewDelegate,UIGestureRecognizerDelegate,UIPageViewControllerDelegate,NSLayoutManagerDelegate,CLLocationManagerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *knowView;
-
+@property(nonatomic,strong) NSString *role;
 @property (weak, nonatomic) IBOutlet UIView *registerView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
-
+@property(nonatomic,strong) NSString *masterId;
 @property (weak, nonatomic) IBOutlet UIButton *registerBtn;
 @property (weak, nonatomic) IBOutlet UIButton *IpadRegisterBtn;
 @property (weak, nonatomic) IBOutlet UIScrollView *pageScrollView;
@@ -25,6 +31,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *LoginBtn;
 @property (weak, nonatomic) IBOutlet UIButton *iphoneBtn;//体验按钮
 @property (weak, nonatomic) IBOutlet UIButton *dismissBtn;
+@property (nonatomic,strong) NSArray *antronomicalTimes;
+@property (strong,nonatomic) CLLocationManager *lm;
 
 @end
 
@@ -200,5 +208,93 @@
     int index = self.pageScrollView.contentOffset.x / self.pageScrollView.frame.size.width;
     _pageControl.currentPage = index;
 }
+//二维码扫描注册
+- (IBAction)ScanBtn:(id)sender {
+    
+    if ([QRCodeReader supportsMetadataObjectTypes:@[AVMetadataObjectTypeQRCode]]) {
+        static QRCodeReaderViewController *vc = nil;
+        static dispatch_once_t onceToken;
+        
+        dispatch_once(&onceToken, ^{
+            QRCodeReader *reader = [QRCodeReader readerWithMetadataObjectTypes:@[AVMetadataObjectTypeQRCode]];
+            vc = [QRCodeReaderViewController readerWithCancelButtonTitle:@"取消" codeReader:reader startScanningAtLoad:YES showSwitchCameraButton:YES showTorchButton:YES];
+            vc.modalPresentationStyle = UIModalPresentationFormSheet;
+        });
+        vc.delegate = self;
+        
+        [vc setCompletionWithBlock:^(NSString *resultAsString) {
+            NSLog(@"Completion with result: %@", resultAsString);
+        }];
+        
+        [self presentViewController:vc animated:YES completion:NULL];
+    }
+    else {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"标题" message:@"不能打开摄像头，请确认授权使用摄像头" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:okAction];
+    }
+    
+}
 
+- (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result
+{
+    result=[result decryptWithDes:DES_KEY];
+    UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    RegisterPhoneNumController *registVC = [story instantiateViewControllerWithIdentifier:@"RegisterPhoneNumController"];
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+        NSArray* list = [result componentsSeparatedByString:@"@"];
+        if([list count] > 1)
+        {
+            self.masterId = list[0];
+            [registVC setValue:self.masterId forKey:@"masterStr"];
+            if ([@"1" isEqualToString:list[1]]) {
+                self.role=@"主人";
+            }else{
+                self.role=@"客人";
+            }
+            [registVC setValue:self.role forKey:@"suerTypeStr"];
+        }
+        else
+        {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"非法的二维码" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+            [alert addAction:okAction];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+        
+    }];
+    [self presentViewController:registVC animated:YES completion:nil];
+    
+    
+}
+
+- (void)readerDidCancel:(QRCodeReaderViewController *)reader
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+-(void)setAntronomicalTimes:(NSArray *)antronomicalTimes
+{
+    _antronomicalTimes = antronomicalTimes;
+    NSString *url = [NSString stringWithFormat:@"%@UpdateAstronomicalClock.aspx",[IOManager httpAddr]];
+    NSDictionary *dic = @{@"Dawn":self.antronomicalTimes[0],@"SunRise":self.antronomicalTimes[1],@"Sunset":self.antronomicalTimes[2],@"Dusk":self.antronomicalTimes[3]};
+    HttpManager *http = [HttpManager defaultManager];
+    http.tag = 10;
+    [http sendPost:url param:dic];
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+    didUpdateToLocation:(CLLocation *)newLocation
+           fromLocation:(CLLocation *)oldLocation{
+    [SunCount sunrisetWithLongitude:newLocation.coordinate.longitude andLatitude:newLocation.coordinate.latitude
+                        andResponse:^(SunString *str){
+                            NSLog(@"%@,%@,%@,%@",str.dayspring, str.sunrise,str.sunset,str.dusk);
+                            self.antronomicalTimes = @[str.dayspring,str.sunrise,str.sunset,str.dusk];
+                            
+                            
+                            
+                            
+                        }];
+}
 @end

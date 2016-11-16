@@ -37,24 +37,27 @@
                                                                                                                                              [KxMenuItem menuItem:@"预置台标"
                                                                                                                                                             image:nil
                                                                                                                                                            target:self
-                                                                                                                                                           action:@selector(preset:)],
+                                                                                                                                                           action:@selector(Iphonepreset:)],
                                                                                                                                              [KxMenuItem menuItem:@"本地图库"
                                                                                                                                                             image:nil
                                                                                                                                                            target:self
-                                                                                                                                                           action:@selector(selectPhoto:)],
+                                                                                                                                                           action:@selector(IphoneSelectPhoto:)],
                                                                                                                                              [KxMenuItem menuItem:@"现在拍摄"
                                                                                                                                                             image:nil
                                                                                                                                                            target:self
-                                                                                                                                                           action:@selector(takePhoto:)],
+                                                                                                                                                           action:@selector(IphoneTakePhoto:)],
                                                                                                                                              ]];
 
 }
 
-
--(void)preset:(KxMenuItem *)item{
+-(void)Iphonepreset:(KxMenuItem *)item{
+    
+    [DeviceInfo defaultManager].isPhotoLibrary = YES;
     [self performSegueWithIdentifier:@"iphoneTvLogoSegue" sender:self];
 }
-- (void)selectPhoto:(KxMenuItem *)item {
+
+- (void)IphoneSelectPhoto:(KxMenuItem *)item {
+    [DeviceInfo defaultManager].isPhotoLibrary = YES;
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
@@ -63,7 +66,8 @@
     [self presentViewController:picker animated:YES completion:NULL];
 }
 
-- (void)takePhoto:(KxMenuItem *)item {
+- (void)IphoneTakePhoto:(KxMenuItem *)item {
+    [DeviceInfo defaultManager].isPhotoLibrary = YES;
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
@@ -74,10 +78,13 @@
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
-    
-    self.chooseImage = info[UIImagePickerControllerEditedImage];
-    
+    [DeviceInfo defaultManager].isPhotoLibrary = NO;
+   
     [self.addBtn setBackgroundImage:info[UIImagePickerControllerEditedImage] forState:UIControlStateNormal];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [DeviceInfo defaultManager].isPhotoLibrary = NO;
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 

@@ -15,7 +15,7 @@
 #import "MBProgressHUD+NJ.h"
 
 @interface LightController ()<UITableViewDelegate,UITableViewDataSource>
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *favButt;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *favButt;//收藏
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,assign) CGFloat brightValue;
 
@@ -85,6 +85,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+//    self.navigationController.navigationBarHidden = YES;
     [self setUpConstraints];
     self.detailCell = [[[NSBundle mainBundle] loadNibNamed:@"DetailTableViewCell" owner:self options:nil] lastObject];
     self.detailCell.bright.continuous = NO;
@@ -107,12 +109,18 @@
     self.tableView.scrollEnabled = NO;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncLight:) name:@"light" object:nil];
     
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
 }
+- (IBAction)favButt:(id)sender {
+    
+    
+}
+
 -(void)setUpConstraints
 {
    

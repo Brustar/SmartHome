@@ -92,8 +92,7 @@
 }
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
-    NSString *str = [NSString stringWithFormat: @"Error: %@", err];
-    NSLog(@"token error:  %@",str);
+    NSLog(@"token error:  %@",err);
 }
 
 //app在后台运行时
@@ -179,16 +178,14 @@
 
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
 {
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        
-        if ([DeviceInfo defaultManager].isPhotoLibrary) {
-            return UIInterfaceOrientationMaskAll;
-        }else {
-            return UIInterfaceOrientationMaskLandscape;
+    if ([DeviceInfo defaultManager].isPhotoLibrary) {
+        return UIInterfaceOrientationMaskAll;
+    }else {
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+                return UIInterfaceOrientationMaskLandscape;
+        }else{
+            return UIInterfaceOrientationMaskPortrait;
         }
-        
-    }else{
-        return UIInterfaceOrientationMaskPortrait;
     }
 }
 

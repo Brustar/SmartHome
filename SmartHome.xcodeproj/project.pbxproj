@@ -52,6 +52,7 @@
 		0F96A1661D17F37C00E1594F /* RulerLeftTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F96A1611D17F37C00E1594F /* RulerLeftTagView.m */; };
 		0F96A1671D17F37C00E1594F /* RulerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F96A1631D17F37C00E1594F /* RulerView.m */; };
 		0F9ADF721CE2DC020052F3BC /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9ADF711CE2DC020052F3BC /* libz.tbd */; };
+		0F9EA72D1DDB026C00223ED8 /* NSString+RegMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9EA72C1DDB026C00223ED8 /* NSString+RegMatch.m */; };
 		0FA0FD661D057C430041CE96 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA0FD651D057C430041CE96 /* AddressBook.framework */; };
 		0FA1E09E1D533BFA001CA819 /* PluginCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA1E09D1D533BFA001CA819 /* PluginCell.m */; };
 		0FA658F81CD98EF5005AC4B4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA658F21CD98D79005AC4B4 /* AudioToolbox.framework */; };
@@ -119,7 +120,6 @@
 		0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7B0B51D1380BF003C2D52 /* AirController.m */; };
 		0FF92B661D9224640098DD54 /* TVChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF92B651D9224640098DD54 /* TVChannel.m */; };
 		CD056AB91DCCA10100EB224E /* check_alt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD056AB81DCCA10100EB224E /* check_alt@2x.png */; };
-		CD46E6B21DCED8B700A9A0BB /* UIImagePickerController+Nonrotating.m in Sources */ = {isa = PBXBuildFile; fileRef = CD46E6B11DCED8B600A9A0BB /* UIImagePickerController+Nonrotating.m */; };
 		F361579D9B9637C261531C8C /* libPods-SmartHome.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B2DBF5C92F57E3B7AD6AA3 /* libPods-SmartHome.a */; };
 		F60E71CA1D796BE6008863DB /* AmplifierController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60E71C91D796BE6008863DB /* AmplifierController.m */; };
 		F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB411D00029900AB04BE /* DetailViewController.m */; };
@@ -405,6 +405,8 @@
 		0F96A1621D17F37C00E1594F /* RulerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RulerView.h; path = PrettyRuler/RulerView.h; sourceTree = SOURCE_ROOT; };
 		0F96A1631D17F37C00E1594F /* RulerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RulerView.m; path = PrettyRuler/RulerView.m; sourceTree = SOURCE_ROOT; };
 		0F9ADF711CE2DC020052F3BC /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		0F9EA72B1DDB026C00223ED8 /* NSString+RegMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+RegMatch.h"; sourceTree = "<group>"; };
+		0F9EA72C1DDB026C00223ED8 /* NSString+RegMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+RegMatch.m"; sourceTree = "<group>"; };
 		0FA0FD651D057C430041CE96 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		0FA1E09C1D533BFA001CA819 /* PluginCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginCell.h; sourceTree = "<group>"; };
 		0FA1E09D1D533BFA001CA819 /* PluginCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginCell.m; sourceTree = "<group>"; };
@@ -535,8 +537,6 @@
 		9B45FF693457BA21BA43CE05 /* Pods-SmartHome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.debug.xcconfig"; sourceTree = "<group>"; };
 		A4B2DBF5C92F57E3B7AD6AA3 /* libPods-SmartHome.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SmartHome.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD056AB81DCCA10100EB224E /* check_alt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check_alt@2x.png"; sourceTree = "<group>"; };
-		CD46E6B01DCED8B600A9A0BB /* UIImagePickerController+Nonrotating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImagePickerController+Nonrotating.h"; sourceTree = "<group>"; };
-		CD46E6B11DCED8B600A9A0BB /* UIImagePickerController+Nonrotating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImagePickerController+Nonrotating.m"; sourceTree = "<group>"; };
 		CE54136C9EEF8F51E8FBEEDE /* Pods-SmartHome.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.release.xcconfig"; sourceTree = "<group>"; };
 		F60E71C81D796BE6008863DB /* AmplifierController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmplifierController.h; sourceTree = "<group>"; };
 		F60E71C91D796BE6008863DB /* AmplifierController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmplifierController.m; sourceTree = "<group>"; };
@@ -1345,10 +1345,10 @@
 				F6755A5D1D40D576002394F3 /* ECloudMoreView.m */,
 				F673EBD01D45E976001270FB /* VerifyCodeView.h */,
 				F673EBD11D45E976001270FB /* VerifyCodeView.m */,
-				CD46E6B01DCED8B600A9A0BB /* UIImagePickerController+Nonrotating.h */,
-				CD46E6B11DCED8B600A9A0BB /* UIImagePickerController+Nonrotating.m */,
 				F68A5DD61D782D8400601612 /* ECSearchView.h */,
 				F68A5DD71D782D8400601612 /* ECSearchView.m */,
+				0F9EA72B1DDB026C00223ED8 /* NSString+RegMatch.h */,
+				0F9EA72C1DDB026C00223ED8 /* NSString+RegMatch.m */,
 			);
 			name = public;
 			sourceTree = "<group>";
@@ -1952,9 +1952,9 @@
 				0FCFB3861CF2912700B37DD3 /* TV.m in Sources */,
 				F65B7D271D34E9E00059CFA4 /* MySettingViewController.m in Sources */,
 				F62CD87D1D950453001C66CE /* IphoneAirController.m in Sources */,
+				0F9EA72D1DDB026C00223ED8 /* NSString+RegMatch.m in Sources */,
 				F65DB3411D2B5AB2002A815C /* RegisterDetailController.m in Sources */,
 				0FAF98A61CE40F3C009BDBB5 /* QRCodeReaderViewController.m in Sources */,
-				CD46E6B21DCED8B700A9A0BB /* UIImagePickerController+Nonrotating.m in Sources */,
 				0F8D76D01D9A1B9700DDD063 /* Schedule.m in Sources */,
 				0F96A1661D17F37C00E1594F /* RulerLeftTagView.m in Sources */,
 				0FCF43311CE09039009BFDD9 /* IbeaconManager.m in Sources */,
@@ -2135,7 +2135,7 @@
 					"\"$(PROJECT_DIR)//FFmpeg-iOS/include\"",
 				);
 				INFOPLIST_FILE = SmartHome/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2176,7 +2176,7 @@
 					"\"$(PROJECT_DIR)//FFmpeg-iOS/include\"",
 				);
 				INFOPLIST_FILE = SmartHome/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
