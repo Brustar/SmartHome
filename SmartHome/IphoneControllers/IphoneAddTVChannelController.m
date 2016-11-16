@@ -58,12 +58,16 @@
 
 - (void)IphoneSelectPhoto:(KxMenuItem *)item {
     [DeviceInfo defaultManager].isPhotoLibrary = YES;
+    
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    
     picker.delegate = self;
     picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [picker shouldAutorotate];
+    [picker supportedInterfaceOrientations];
+    [self presentViewController:picker animated:YES completion:nil];
     
-    [self presentViewController:picker animated:YES completion:NULL];
 }
 
 - (void)IphoneTakePhoto:(KxMenuItem *)item {
@@ -72,8 +76,9 @@
     picker.delegate = self;
     picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    
-    [self presentViewController:picker animated:YES completion:NULL];
+    [picker shouldAutorotate];
+    [picker supportedInterfaceOrientations];
+    [self presentViewController:picker animated:YES completion:nil];
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
