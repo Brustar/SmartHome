@@ -81,6 +81,12 @@
         [self clickQuitButton];
     }];
     
+    UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+        
+        
+    }];
+    [alertVC addAction:action1];
     [alertVC addAction:action];
     [self presentViewController:alertVC animated:YES completion:nil];
     
