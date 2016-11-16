@@ -26,7 +26,9 @@
     return [IOManager newPath:@"scenes"];
 }
 
-
++ (NSString *)realScenePath {
+    return [IOManager newPath:@"realScene"];
+}
 
 
 + (NSString *) favoritePath
