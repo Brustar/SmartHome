@@ -158,7 +158,8 @@
     }else if([typeName isEqualToString:@"摄像头"]){
         segue = @"Camera";
     }else if([typeName isEqualToString:@"智能门锁"]) {
-        segue = @"pluginSegue";
+//        segue = @"pluginSegue";
+         segue = @"Guard";
     }
     else if([typeName isEqualToString:@"机顶盒"])
     {
@@ -180,6 +181,8 @@
         
     }else{
         segue = @"Guard";
+        
+        
     }
 
     

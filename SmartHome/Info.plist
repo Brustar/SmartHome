@@ -43,14 +43,7 @@
 	<string>亲，我们想要访问你的相册哟</string>
 	<key>UIApplicationShortcutItems</key>
 	<array>
-		<dict>
-			<key>UIApplicationShortcutItemIconType</key>
-			<string>UIApplicationShortcutIconTypeShare</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>Share</string>
-			<key>UIApplicationShortcutItemType</key>
-			<string>-11.UITouchText.share</string>
-		</dict>
+		<dict/>
 	</array>
 	<key>UIFileSharingEnabled</key>
 	<true/>

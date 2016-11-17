@@ -212,10 +212,15 @@
         [self addViewAndVC:bgMusicVC];
         
     }else {
-        PluginViewController *pluginVC = [storyBoard instantiateViewControllerWithIdentifier:@"PluginViewController"];
-        pluginVC.roomID = roomID;
+//        PluginViewController *pluginVC = [storyBoard instantiateViewControllerWithIdentifier:@"PluginViewController"];
+//        pluginVC.roomID = roomID;
+//        
+//        [self addViewAndVC:pluginVC];
         
-        [self addViewAndVC:pluginVC];
+        GuardController *guardVC = [storyBoard instantiateViewControllerWithIdentifier:@"GuardController"];
+        guardVC.roomID = roomID;
+        
+        [self addViewAndVC:guardVC];
     }
 
 }

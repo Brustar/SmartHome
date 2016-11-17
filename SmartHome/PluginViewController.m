@@ -37,7 +37,7 @@
            for(int i = 0; i < plugArr.count; i++)
            {
                NSString *typeName = [SQLManager deviceTypeNameByDeviceID:[plugArr[i] intValue]];
-               if([typeName isEqualToString:@"智能插座"])
+               if([typeName isEqualToString:@"智能浇花"])
                {
                    [_plugDeviceIds addObject:plugArr[i]];
                }
@@ -45,7 +45,7 @@
            }
        }else if(self.roomID > 0)
        {
-           [_plugDeviceIds addObjectsFromArray:[SQLManager getDeviceByTypeName:@"智能插座" andRoomID:self.roomID]];
+           [_plugDeviceIds addObjectsFromArray:[SQLManager getDeviceByTypeName:@"智能浇花" andRoomID:self.roomID]];
        }else{
            [_plugDeviceIds addObject:self.deviceid];
        }
