@@ -20,11 +20,6 @@
 #import "VoiceOrderController.h"
 #import "IphoneFavorController.h"
 
-@interface AppDelegate ()<UIViewControllerPreviewingDelegate >
-
-@property (nonatomic,strong) NSArray * AppArr;
-@end
-
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -75,11 +70,10 @@
    
     //动态加载自定义的ShortcutItem
     if (application.shortcutItems.count == 0) {
-        UIMutableApplicationShortcutItem *itemThor =[[UIMutableApplicationShortcutItem alloc]initWithType:[NSString stringWithFormat:@"%@.second",[[NSBundle mainBundle] bundleIdentifier]] localizedTitle:@"语音控制" localizedSubtitle:nil icon:[UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeCloud] userInfo:nil];
-        UIMutableApplicationShortcutItem *itemBlack =[[UIMutableApplicationShortcutItem alloc]initWithType:[NSString stringWithFormat:@"%@.third",[[NSBundle mainBundle] bundleIdentifier]] localizedTitle:@"收藏场景" localizedSubtitle:nil icon:[UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeAlarm] userInfo:nil];
+        UIMutableApplicationShortcutItem *itemVoice =[[UIMutableApplicationShortcutItem alloc]initWithType:[NSString stringWithFormat:@"%@.second",[[NSBundle mainBundle] bundleIdentifier]] localizedTitle:@"语音控制" localizedSubtitle:nil icon:[UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeCloud] userInfo:nil];
+        UIMutableApplicationShortcutItem *itemFavor =[[UIMutableApplicationShortcutItem alloc]initWithType:[NSString stringWithFormat:@"%@.third",[[NSBundle mainBundle] bundleIdentifier]] localizedTitle:@"收藏场景" localizedSubtitle:nil icon:[UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeAlarm] userInfo:nil];
         
-        application.shortcutItems = @[itemBlack,itemThor];
-        _AppArr= [NSArray arrayWithObjects:itemBlack,itemThor, nil];
+        application.shortcutItems = @[itemVoice,itemFavor];
     }
 
     return YES;
@@ -192,21 +186,20 @@
 
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void(^)(BOOL succeeded))completionHandler{
     //判断先前我们设置的唯一标识
-     UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+    UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
 
-        
-     if ([shortcutItem isEqual:_AppArr[0]]){
-         IphoneFavorController *childVC = [secondStoryBoard instantiateViewControllerWithIdentifier:@"IphoneFavorController"];
-        [self.window.rootViewController presentViewController:childVC animated:YES completion:^{
-            
-        }];
-    }else if ([shortcutItem isEqual:_AppArr[1]]){
-        VoiceOrderController *voicVC = [secondStoryBoard instantiateViewControllerWithIdentifier:@"VoiceOrderController"];
-        [self.window.rootViewController presentViewController:voicVC animated:YES completion:^{
-            
-        }];
+    NSString *ident=@"IphoneMainController";
+    UIViewController *vc = [secondStoryBoard instantiateViewControllerWithIdentifier:ident];
+    self.window.rootViewController = vc;
+    if ([shortcutItem isEqual:application.shortcutItems[0]]){
+        ident=@"IphoneFavorController";
+    }else if ([shortcutItem isEqual:application.shortcutItems[1]]){
+        ident=@"VoiceOrderController";
     }
-    
+    UIViewController *target = [secondStoryBoard instantiateViewControllerWithIdentifier:ident];
+    [vc presentViewController:target animated:YES completion:^{
+        
+    }];
 
 }
 
