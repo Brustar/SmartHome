@@ -487,7 +487,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where upper(enumber) = upper('%04lx') and masterID='%04lx'",(long)eID,mID];
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where upper(enumber) = upper('%04lx') and masterID='%04lx'",(long)eID,(long)mID];
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
