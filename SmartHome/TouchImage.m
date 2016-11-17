@@ -43,9 +43,8 @@
 
 -(void) realHandle:(CGPoint)point
 {
-    NSString *sceneFile = [NSString stringWithFormat:@"%@.plist",SCENE_FILE_NAME];
-    NSString *scenePath = [[IOManager realScenePath] stringByAppendingPathComponent:sceneFile];
-    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+    NSString *realScenePlistPath = [UD objectForKey:@"Real_Scene_PlistFile"];
+    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:realScenePlistPath];
     NSArray *rooms = plistDic[@"rects"];
     if ([rooms isKindOfClass:[NSArray class]] && rooms.count >0) {
         NSDictionary *room = rooms[0];

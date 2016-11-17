@@ -141,7 +141,7 @@
 {
     Proto proto=protocolFromData(data);
     
-    if (proto.masterID != [[DeviceInfo defaultManager] masterID]) {
+    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
         return;
     }
     

@@ -7,6 +7,7 @@
 //
 #import "TouchImage.h"
 #import "HttpManager.h"
+#import "SceneManager.h"
 #import "AFHTTPSessionManager.h"
 #import "UIImageView+WebCache.h"
 

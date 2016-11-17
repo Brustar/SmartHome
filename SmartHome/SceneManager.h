@@ -25,6 +25,7 @@
 
 - (void) addScene:(Scene *)scene withName:(NSString *)name withImage:(UIImage *)image;
 
+- (NSData *)getRealSceneData;
 
 - (void) delScene:(Scene *)scene;
 
