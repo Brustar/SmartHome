@@ -156,7 +156,9 @@
     if (tag==1000) {
         [self handleTCP:data];
     }else{
-        [self.delegate recv:data withTag:tag];
+        if (self.delegate) {
+            [self.delegate recv:data withTag:tag];
+        }
     }
     
     //[self.socket readDataWithTimeout:30 tag:0];
