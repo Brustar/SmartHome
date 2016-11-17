@@ -117,15 +117,17 @@
 #pragma mark Action
 - (void)cancel:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:^{
+//    [self dismissViewControllerAnimated:YES completion:^{
         UIViewController *ecloudVC;
-        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-            ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ECloudTabBarController"];
-        }else{
-            ecloudVC = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"main"];
-        }
+//        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+//            ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"RegisterPhoneNumController"];
+//        }else{
+//            ecloudVC = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"RegisterPhoneNumController"];
+//        }
+        
+               ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"RegisterPhoneNumController"];
         [self.navigationController pushViewController:ecloudVC animated:YES];
-    }];
+//    }];
 }
 
 @end

@@ -13,7 +13,8 @@
 @interface MSGController ()<HttpDelegate>
 @property(nonatomic,strong) NSMutableArray *msgArr;
 @property(nonatomic,strong) NSMutableArray *timesArr;
-@property(nonatomic,strong) NSMutableArray *recordIDs;
+@property(nonatomic,strong) NSMutableArray *ItemID;
+@property (nonatomic,strong)NSMutableArray *recordID;
 @property (weak, nonatomic) IBOutlet UIView *footView;
 
 @end
@@ -36,13 +37,13 @@
     }
     return _timesArr;
 }
--(NSMutableArray *)recordIDs
+-(NSMutableArray *)ItemID
 {
-    if(!_recordIDs)
+    if(!_ItemID)
     {
-        _recordIDs = [NSMutableArray array];
+        _ItemID = [NSMutableArray array];
     }
-    return _recordIDs;
+    return _ItemID;
 
 }
 - (void)viewDidLoad {
@@ -59,6 +60,7 @@
 -(void)sendRequest
 {
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+  
     NSString *url = [NSString stringWithFormat:@"%@GetNotifyMessage.aspx",[IOManager httpAddr]];
     if (authorToken) {
         NSDictionary *dic = @{@"AuthorToken":authorToken};
@@ -83,7 +85,7 @@
                     if ([dicDetail isKindOfClass:[NSDictionary class]]) {
                         [self.msgArr addObject:dicDetail[@"description"]];
                         [self.timesArr addObject:dicDetail[@"createDate"]];
-                        [self.recordIDs addObject:dicDetail[@"itemID"]];
+                        [self.recordID addObject:dicDetail[@"recordID"]];
                     }
                 }
             }
@@ -119,7 +121,10 @@
 
 #pragma mark - Table view data source
 
-
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.msgArr.count;
 }
@@ -175,7 +180,7 @@
        
         [deleteArray addObject:self.msgArr[indexPath.row]];
         [deletedTime addObject:self.timesArr[indexPath.row]];
-        [deletedID addObject:self.recordIDs[indexPath.row]];
+        [deletedID addObject:self.recordID[indexPath.row]];
     }
     // 先删除数据源
     [self.msgArr removeObjectsInArray:deleteArray];
