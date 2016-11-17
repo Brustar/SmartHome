@@ -838,6 +838,17 @@
 }
 
 #pragma mark - sqlite操作不允许有中文
++(NSString *) getDeviceType:(NSString *)deviceID subTypeName:(NSString *)subTypeName
+{
+    NSString *typeName = [self getDeviceTypeNameWithID:deviceID subTypeName:subTypeName];
+    if ([typeName isEqualToString:@"开关灯"] || [typeName isEqualToString:@"调色灯"] || [typeName isEqualToString:@"调光灯"]) {
+        return @"灯光";
+    } else if ([typeName isEqualToString:@"开合帘"] || [typeName isEqualToString:@"卷帘"]) {
+        return @"窗帘";
+    }
+    return typeName;
+}
+
 + (NSArray *)getDeviceTypeNameWithRoomID:(int)roomID sceneID:(int)sceneID subTypeName:(NSString *)subTypeName
 {
     NSMutableArray *typeNames = [NSMutableArray array];
@@ -845,13 +856,7 @@
     NSArray *deviceIDs = [self getDeviceIDWithRoomID:roomID sceneID:sceneID];
     
     for (NSString *deviceID in deviceIDs) {
-        NSString *typeName = [self getDeviceTypeNameWithID:deviceID subTypeName:subTypeName];
-        
-        if ([typeName isEqualToString:@"开关灯"] || [typeName isEqualToString:@"调色灯"] || [typeName isEqualToString:@"调光灯"]) {
-            typeName = @"灯光";
-        } else if ([typeName isEqualToString:@"开合帘"] || [typeName isEqualToString:@"卷帘"]) {
-            typeName = @"窗帘";
-        }
+        NSString *typeName = [self getDeviceType:deviceID subTypeName:subTypeName];
         
         BOOL isSame = false;
         for (NSString *tempTypeName in typeNames) {
@@ -878,7 +883,7 @@
     return [typeNames copy];
 }
 
-#pragma mark - sqlite操作不允许有中文
+
 +(NSArray *)getDeviceTypeName:(int)rID subTypeName:(NSString *)subTypeName
 {
     NSMutableArray *typeNames = [NSMutableArray array];
@@ -886,13 +891,7 @@
     NSArray *deviceIDs = [SQLManager deviceIdsByRoomId:rID];
     
     for (NSString *deviceID in deviceIDs) {
-        NSString *typeName = [self getDeviceTypeNameWithID:deviceID subTypeName:subTypeName];
-        
-        if ([typeName isEqualToString:@"开关灯"] || [typeName isEqualToString:@"调色灯"] || [typeName isEqualToString:@"调光灯"]) {
-            typeName = @"灯光";
-        } else if ([typeName isEqualToString:@"开合帘"] || [typeName isEqualToString:@"卷帘"]) {
-            typeName = @"窗帘";
-        }
+        NSString *typeName = [self getDeviceType:deviceID subTypeName:subTypeName];
         
         BOOL isSame = false;
         for (NSString *tempTypeName in typeNames) {
@@ -1064,7 +1063,6 @@
     return [subTypeNames copy];
 }
 
-#pragma mark - sqlite操作不允许有中文
 //根据场景ID，得到该场景下的设备子类
 +(NSArray *)getDeviceTypeNameWithScenID:(int)sceneId subTypeName:(NSString *)subTypeName
 {
@@ -1074,12 +1072,8 @@
     {
         if(devcieID)
         {
-            NSString *typeName = [self getDeviceTypeNameWithID:devcieID subTypeName:subTypeName];
-            if ([typeName isEqualToString:@"开关灯"] || [typeName isEqualToString:@"调色灯"] || [typeName isEqualToString:@"调光灯"]) {
-                typeName = @"灯光";
-            } else if ([typeName isEqualToString:@"开合帘"] || [typeName isEqualToString:@"卷帘"]) {
-                typeName = @"窗帘";
-            }
+            NSString *typeName = [self getDeviceType:devcieID subTypeName:subTypeName];
+
             BOOL isSame = false;
             for (NSString *tempTypeName in typeNames) {
                 if ([tempTypeName isEqualToString:typeName]) {
