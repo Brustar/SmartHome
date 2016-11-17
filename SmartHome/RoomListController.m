@@ -461,7 +461,7 @@
 - (BOOL)hasSelectedDevice {
     BOOL selected = NO;
     NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
-    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+    NSString *scenePath = [[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
     NSArray *array = plistDic[@"devices"];
     if (array.count >0) {
@@ -607,7 +607,7 @@
     self.timeView.hidden = NO;
     
     NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
-    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+    NSString *scenePath = [[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
     
     _scene = [[Scene alloc] initWhithoutSchedule];

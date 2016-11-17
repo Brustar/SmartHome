@@ -7,7 +7,7 @@
 //
 
 #import "TouchImage.h"
-
+#import "UIImageView+WebCache.h"
 #import "planeScene.h"
 #import "SQLManager.h"
 
@@ -43,14 +43,32 @@
 
 -(void) realHandle:(CGPoint)point
 {
-    NSString *path=[[NSBundle mainBundle] pathForResource:@"realScene" ofType:@"plist"];
-    NSDictionary *dic = [[NSDictionary alloc] initWithContentsOfFile:path];
-    NSString *rectstr=dic[@"rects"][0][@"rect"];
-    CGRect rect=CGRectFromString(rectstr);
-    NSArray *imgs=[NSArray arrayWithObjects:@"real",dic[@"rects"][0][@"image"], nil];
-    if (CGRectContainsPoint(rect,point)) {
-        _count++;
-        self.image=[UIImage imageNamed:imgs[_count%2]];
+    NSString *sceneFile = [NSString stringWithFormat:@"%@.plist",SCENE_FILE_NAME];
+    NSString *scenePath = [[IOManager realScenePath] stringByAppendingPathComponent:sceneFile];
+    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+    NSArray *rooms = plistDic[@"rects"];
+    if ([rooms isKindOfClass:[NSArray class]] && rooms.count >0) {
+        NSDictionary *room = rooms[0];
+        if ([room isKindOfClass:[NSDictionary class]]) {
+            NSArray *rects = room[@"rects"];
+            if ([rects isKindOfClass:[NSArray class]] && rects.count >0) {
+                NSDictionary *rectDict = rects[0];
+                if ([rectDict isKindOfClass:[NSDictionary class]] && rectDict.count >0) {
+                    NSString *rectStr = rectDict[@"rect"];
+                    if (rectStr.length >0) {
+                        CGRect rect = CGRectFromString(rectStr);
+                        if (CGRectContainsPoint(rect,point)) {
+                            NSString *nextImgURL = rectDict[@"nextImg"];
+                            if (nextImgURL.length >0) {
+                                [self sd_setImageWithURL:[NSURL URLWithString:nextImgURL] placeholderImage:[UIImage imageNamed:@"xxx.png"] options:SDWebImageRetryFailed];
+                            }
+                            
+                        }
+                    }
+                    
+                }
+            }
+        }
     }
 }
 
