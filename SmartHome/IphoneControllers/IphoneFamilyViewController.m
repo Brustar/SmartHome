@@ -16,6 +16,9 @@
 #import "MBProgressHUD+NJ.h"
 #import "FamilyCell.h"
 #import "Scene.h"
+#import "Room.h"
+#import "SQLManager.h"
+
 
 @interface IphoneFamilyViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -31,20 +34,16 @@
 @property (nonatomic,strong) NSMutableArray * dvdArrs;//
 @property (nonatomic,strong) NSMutableArray * tvArrs;//
 @property (nonatomic,strong) NSMutableArray * tempArrs;
+@property (nonatomic,strong) NSMutableArray * humidityArrs;//湿度
+@property (nonatomic,strong) NSMutableArray * airconditionArrs;
 @property (nonatomic,assign) int selectedSId;
+@property (nonatomic,assign) int selected;
+@property (nonatomic,strong) NSArray *rooms;
 
 @end
 
 @implementation IphoneFamilyViewController
--(NSArray *)dataSource
-{
 
-    if (!_dataSource) {
-        _dataSource = @[@"23",@"卧室",@"67%"];
-    }
-
-    return _dataSource;
-}
 -(NSMutableArray *)roomIdArrs
 {
     if (!_roomIdArrs) {
@@ -113,7 +112,8 @@
     
     self.scrollView = [[UIScrollView alloc] init];
     self.scrollView.bounces = NO;
-
+    self.selected = 0;
+ 
       [self sendRequest];
     
 }
@@ -146,6 +146,8 @@
             NSMutableArray * dvdArr = [NSMutableArray array];
             NSMutableArray * tvArr = [NSMutableArray array];
             NSMutableArray * tempArr = [NSMutableArray array];
+            NSMutableArray * humidityArr = [NSMutableArray array];
+            NSMutableArray * airconditionArr = [NSMutableArray array];
             if ([dic isKindOfClass:[NSArray class]]) {
                 for(NSDictionary *dicDetail in dic)
                 {
@@ -157,6 +159,8 @@
                         [tvArr addObject:dicDetail[@"tv"]];
                         [musicArr addObject:dicDetail[@"bgmusic"]];
                         [tempArr addObject:dicDetail[@"temperature"]];
+                        [humidityArr addObject:dicDetail[@"humidity"]];
+                        [airconditionArr addObject:dicDetail[@"aircondition"]];
                      
                     }
                     [self.lightArrs addObject:lightArr];
@@ -166,6 +170,8 @@
                     [self.tvArrs addObject:tvArr];
                     [self.musicArrs addObject:musicArr];
                     [self.tempArrs addObject:tempArr];
+                    [self.humidityArrs addObject:humidityArr];
+                    [self.airconditionArrs addObject:airconditionArr];
                 }
             }
             
@@ -204,7 +210,17 @@
 {
    FamilyCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     
-//       cell.layer.cornerRadius = cell.bounds.size.width/2.0;
+    self.rooms = [SQLManager getAllRoomsInfo];
+    for (int i =0; i < self.rooms.count; i ++) {
+         Room * room = self.rooms[i];
+        NSMutableArray * arr = [NSMutableArray array];
+        [arr addObject:[NSString stringWithFormat:@"%d",room.rId]];
+        if ([self.roomIdArrs containsObject:arr]) {
+             cell.nameLabel.text = room.rName;
+        }
+        
+       
+    }
        cell.layer.masksToBounds = YES;
 
     cell.supImageView.layer.cornerRadius = cell.supImageView.bounds.size.width / 2.0;
@@ -215,6 +231,30 @@
     cell.DVDImageView.layer.cornerRadius = cell.DVDImageView.bounds.size.width / 2.0;
     cell.TVImageView.layer.cornerRadius = cell.TVImageView.bounds.size.width / 2.0;
     cell.musicImageVIew.layer.cornerRadius = cell.musicImageVIew.bounds.size.width / 2.0;
+    
+    cell.nameLabel.text = [NSString stringWithFormat:@"%@",self.roomIdArrs[indexPath.row]];
+    cell.tempLabel.text = [NSString stringWithFormat:@"%@",self.tempArrs[indexPath.row]];
+    cell.humidityLabel.text = [NSString stringWithFormat:@"%@",self.humidityArrs[indexPath.row]];
+
+    
+    
+    if (self.selected == 0) {
+        
+        cell.lightImageVIew.hidden = YES;
+        cell.curtainImageView.hidden = YES;
+        cell.airImageVIew.hidden = YES;
+        cell.DVDImageView.hidden = YES;
+        cell.TVImageView.hidden = YES;
+        cell.musicImageVIew.hidden = YES;
+        
+    }else if (self.selected == 1){
+        cell.lightImageVIew.hidden = NO;
+        cell.curtainImageView.hidden = NO;
+        cell.airImageVIew.hidden = NO;
+        cell.DVDImageView.hidden = NO;
+        cell.TVImageView.hidden = NO;
+        cell.musicImageVIew.hidden = NO;
+    }
     
     
     return cell;

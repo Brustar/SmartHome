@@ -23,9 +23,10 @@
 #import "MBProgressHUD+NJ.h"
 #import <Reachability/Reachability.h>
 #import "SocketManager.h"
+#import "TouchSubViewController.h"
 
 
-@interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,SceneCellDelegate>
+@interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,SceneCellDelegate,UIViewControllerPreviewingDelegate>
 @property (strong, nonatomic) IBOutlet IphoneRoomView *roomView;
 
 @property (nonatomic,assign) int roomID;
@@ -37,7 +38,7 @@
 @property (nonatomic,assign) int selectedSId;
 @property (nonatomic ,strong) SceneCell *cell;
 @property (weak, nonatomic) IBOutlet UIButton *AddSceneBtn;
-
+@property (nonatomic,strong) NSArray * arrayData;
 @end
 
 @implementation IphoneSceneController
@@ -48,7 +49,7 @@
     self.roomList = [SQLManager getAllRoomsInfo];
 //    self.title = @"场景";
      [self setUpRoomView];
-    
+    self.arrayData = @[@"删除此场景",@"收藏",@"语音"];
     //开启网络状况的监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityUpdate:) name: kReachabilityChangedNotification object: nil];
     Reachability *hostReach = [Reachability reachabilityWithHostname:@"www.apple.com"];
@@ -59,7 +60,11 @@
     
     _AddSceneBtn.layer.cornerRadius = _AddSceneBtn.bounds.size.width / 2.0; //圆角半径
     _AddSceneBtn.layer.masksToBounds = YES; //圆角
+
+    
 }
+
+
 //监听到网络状态改变
 - (void) reachabilityUpdate: (NSNotification* )note
 {
@@ -174,6 +179,26 @@
 }
 
 
+#pragma mark - UIViewControllerPreviewingDelegate
+
+- (nullable UIViewController *)previewingContext:(id <UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location
+{
+    NSIndexPath * indexPath =[_collectionView indexPathForItemAtPoint:location];
+    
+     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+    TouchSubViewController * touchSubViewVC = [storyboard instantiateViewControllerWithIdentifier:@"TouchSubViewController"];
+      touchSubViewVC.preferredContentSize = CGSizeMake(0.0f,500.0f);
+    
+    touchSubViewVC.title = self.arrayData[indexPath.row];
+    
+    return touchSubViewVC;
+}
+
+- (void)previewingContext:(id <UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit
+{
+    [self.navigationController pushViewController:viewControllerToCommit animated:NO];
+}
+
 #pragma  mark - UICollectionViewDelegate
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -194,7 +219,7 @@
     [cell.imgView sd_setImageWithURL:[NSURL URLWithString: scene.picName] placeholderImage:[UIImage imageNamed:@"PL"]];
     
     [cell useLongPressGesture];
-
+   [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];  
     return cell;
 }
 

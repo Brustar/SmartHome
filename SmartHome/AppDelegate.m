@@ -199,6 +199,8 @@
     }
     UIViewController *target = [secondStoryBoard instantiateViewControllerWithIdentifier:ident];
     [vc pushViewController:target animated:YES];
+    
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"ShortCut" object:nil];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -225,22 +227,6 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
-#pragma mark - UIViewControllerPreviewingDelegate
-
-- (nullable UIViewController *)previewingContext:(id <UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location
-{
-    
-    VoiceOrderController *detailVC =[[VoiceOrderController alloc] init];
-   
-    
-    return detailVC;
-}
-
-- (void)previewingContext:(id <UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit
-{
-    [self.window.rootViewController presentViewController:viewControllerToCommit animated:YES completion:nil];
 }
 
 @end
