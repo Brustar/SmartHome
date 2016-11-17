@@ -618,7 +618,7 @@
     }
     
     
-    [IOManager writeUserdefault:hostID forKey:@"HostId"];
+    [IOManager writeUserdefault:hostID forKey:@"HostID"];
     [IOManager writeUserdefault:self.user.text forKey:@"Account"];
     
     if (dict) {

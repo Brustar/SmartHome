@@ -9,6 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "FMDatabase.h"
 
+typedef NS_ENUM(NSUInteger,DeviceType)
+{
+    LIGHT,
+    CURTAIN,
+    MEDIA,
+    
+};
+
 @interface SQLManager : NSObject
 
 +(FMDatabase *) connetdb;
