@@ -19,6 +19,7 @@
 #import "IphoneSceneController.h"
 #import "VoiceOrderController.h"
 #import "IphoneFavorController.h"
+#import "IphoneFamilyViewController.h"
 
 @implementation AppDelegate
 
@@ -188,8 +189,8 @@
     //判断先前我们设置的唯一标识
     UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
 
-    NSString *ident=@"IphoneMainController";
-    UIViewController *vc = [secondStoryBoard instantiateViewControllerWithIdentifier:ident];
+    NSString *ident=@"iphoneSceneNaviController";
+    UINavigationController *vc = [secondStoryBoard instantiateViewControllerWithIdentifier:ident];
     self.window.rootViewController = vc;
     if ([shortcutItem isEqual:application.shortcutItems[0]]){
         ident=@"IphoneFavorController";
@@ -197,10 +198,7 @@
         ident=@"VoiceOrderController";
     }
     UIViewController *target = [secondStoryBoard instantiateViewControllerWithIdentifier:ident];
-    [vc presentViewController:target animated:YES completion:^{
-        
-    }];
-
+    [vc pushViewController:target animated:YES];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
