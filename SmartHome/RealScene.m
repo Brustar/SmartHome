@@ -13,7 +13,8 @@
 #import "SocketManager.h"
 #import "SQLManager.h"
 
-@interface RealScene ()<UITableViewDelegate,UITableViewDataSource>
+@interface RealScene ()<UITableViewDelegate, UITableViewDataSource,TcpRecvDelegate>
+@property (strong, nonatomic) IBOutlet UIView *dataView;
 @property (weak, nonatomic) IBOutlet UITableView *roomTable;
 
 //温度
@@ -46,16 +47,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.roomTable.hidden = YES;
     self.automaticallyAdjustsScrollViewInsets = NO;
     // Do any additional setup after loading the view.
-    self.realimg = [[TouchImage alloc] initWithFrame:CGRectMake(100, 40, 625, 500)];
+    self.realimg = [[TouchImage alloc] initWithFrame:CGRectMake(0, 40, UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT-40)];
     //self.realimg.image =[UIImage imageNamed:@"real.png"];
     self.realimg.userInteractionEnabled = YES;
     self.realimg.viewFrom = REAL_IMAGE;
     [self.view addSubview:self.realimg];
     
-    SocketManager *sock=[SocketManager defaultManager];
-    sock.delegate=self;
+    //self.dataView.frame = CGRectMake((UI_SCREEN_WIDTH-400)/2, UI_SCREEN_HEIGHT-100-40, 400, 100);
+    self.dataView.layer.cornerRadius = 8.0;
+    self.dataView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
+    self.dataView.layer.masksToBounds = YES;
+    [self.view bringSubviewToFront:self.dataView];
+    
+    SocketManager *sock = [SocketManager defaultManager];
+    sock.delegate = self;
+    
+    NSData *data = [[SceneManager defaultManager] getRealSceneData];
+    [sock.socket writeData:data withTimeout:1 tag:1];
     
     [self sendRequestForGettingSceneConfig:@"cloud/GetSceneConfig.aspx" withTag:1];
 }
@@ -81,6 +92,7 @@
 - (void)httpHandler:(id)responseObject tag:(int)tag
 {
     if ([responseObject isKindOfClass:[NSDictionary class]]) {
+        NSLog(@"responseObject:%@", responseObject);
         if ([responseObject[@"Result"] integerValue] == 0) {
             NSDictionary *infoDict = responseObject[@"info"];
             if ([infoDict isKindOfClass:[NSDictionary class]]) {
@@ -114,21 +126,22 @@
         
     } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
         NSLog(@"下载完成了 %@",filePath);
-        //读取沙盒里的plist文件, 显示房间名，房间背景图片
-        NSString *sceneFile = [NSString stringWithFormat:@"%@.plist",SCENE_FILE_NAME];
-        NSString *scenePath = [[IOManager realScenePath] stringByAppendingPathComponent:sceneFile];
-        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+        
+        NSString *plistFilePath = [[filePath absoluteString] substringFromIndex:7];
+        //保存到UD
+        [UD setObject:plistFilePath forKey:@"Real_Scene_PlistFile"];
+        [UD synchronize];
+        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:plistFilePath];
+        NSLog(@"plistFilePath: %@", plistFilePath);
         NSLog(@"realScenePlistDict: %@", plistDic);
-        [self showRoomNameAndBackgroundImg];
+        [self showRoomNameAndBackgroundImgWithFilePath:plistFilePath];
     }];
     
     [task resume];
 }
 
-- (void)showRoomNameAndBackgroundImg {
-    NSString *sceneFile = [NSString stringWithFormat:@"%@.plist",SCENE_FILE_NAME];
-    NSString *scenePath = [[IOManager realScenePath] stringByAppendingPathComponent:sceneFile];
-    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+- (void)showRoomNameAndBackgroundImgWithFilePath:(NSString *)filePath {
+    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:filePath];
     NSArray *rooms = plistDic[@"rects"];
     if ([rooms isKindOfClass:[NSArray class]] && rooms.count >0) {
         NSDictionary *room = rooms[0];
@@ -153,7 +166,7 @@
 #pragma mark - TCP recv delegate
 - (void)recv:(NSData *)data withTag:(long)tag
 {
-    Proto proto=protocolFromData(data);
+    Proto proto = protocolFromData(data);
     
     if (proto.masterID != [[DeviceInfo defaultManager] masterID]) {
         return;
