@@ -82,7 +82,7 @@
             if ([dic isKindOfClass:[NSArray class]]) {
                 for(NSDictionary *dicDetail in dic)
                 {
-                    if ([dicDetail isKindOfClass:[NSDictionary class]]) {
+                    if ([dicDetail isKindOfClass:[NSDictionary class]] && dicDetail[@"description"]) {
                         [self.msgArr addObject:dicDetail[@"description"]];
                         [self.timesArr addObject:dicDetail[@"createDate"]];
                         [self.recordID addObject:dicDetail[@"recordID"]];

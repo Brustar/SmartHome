@@ -744,8 +744,6 @@
         while ([resultSet next])
         {
             deviceIDStr = [resultSet stringForColumn:@"eId"];
-            
-            
         }
         
        deviceIDs = [deviceIDStr componentsSeparatedByString:@","];
