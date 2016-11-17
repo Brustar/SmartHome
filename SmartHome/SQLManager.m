@@ -115,7 +115,6 @@
 
 }
 
-#pragma mark - sqlite操作不允许有中文硬编码
 +(NSString *)deviceTypeNameByDeviceID:(int)eId
 {
     FMDatabase *db = [self connetdb];
@@ -124,13 +123,12 @@
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT typeName FROM Devices where ID = %d",eId];
         FMResultSet *resultSet = [db executeQuery:sql];
-        while ([resultSet next])
+        if ([resultSet next])
         {
             typeName = [resultSet stringForColumn:@"typeName"];
-            if ([typeName isEqualToString:@"开关灯"]||[typeName isEqualToString:@"调色灯"]||[typeName isEqualToString:@"调光灯"]) {
-                typeName = @"灯光";
-            }else if ([typeName isEqualToString:@"开合帘"] || [typeName isEqualToString:@"卷帘"]) {
-                typeName = @"窗帘";
+            
+            if ([self transferSubType:typeName]) {
+                typeName = [self transferSubType:typeName];
             }
         }
     }
@@ -218,7 +216,6 @@
     return [arr copy];
 }
 
-#pragma mark - sqlite操作不允许有中文硬编码
 +(NSArray *)deviceSubTypeByRoomId:(NSInteger)roomID
 {
     NSMutableArray *subTypes = [NSMutableArray array];
@@ -234,11 +231,8 @@
         {
          
             NSString *typeName = [resultSet stringForColumn:@"typeName"];
-            if ([typeName isEqualToString:@"开关灯"]||[typeName isEqualToString:@"调色灯"]||[typeName isEqualToString:@"调光灯"]) {
-                typeName = @"灯光";
-            }
-            else if ([typeName isEqualToString:@"开合帘"] || [typeName isEqualToString:@"卷帘"]) {
-                typeName = @"窗帘";
+            if ([self transferSubType:typeName]) {
+                typeName = [self transferSubType:typeName];
             }
             
             BOOL isEqual = false;
@@ -837,16 +831,23 @@
     return [devices copy];
 }
 
-#pragma mark - sqlite操作不允许有中文
 +(NSString *) getDeviceType:(NSString *)deviceID subTypeName:(NSString *)subTypeName
 {
     NSString *typeName = [self getDeviceTypeNameWithID:deviceID subTypeName:subTypeName];
+    if ([self transferSubType:typeName]) {
+        return [self transferSubType:typeName];
+    }
+    return typeName;
+}
+
+#pragma mark - sqlite操作不允许有中文硬编码
++(NSString *) transferSubType:(NSString *)typeName{
     if ([typeName isEqualToString:@"开关灯"] || [typeName isEqualToString:@"调色灯"] || [typeName isEqualToString:@"调光灯"]) {
         return @"灯光";
     } else if ([typeName isEqualToString:@"开合帘"] || [typeName isEqualToString:@"卷帘"]) {
         return @"窗帘";
     }
-    return typeName;
+    return nil;
 }
 
 + (NSArray *)getDeviceTypeNameWithRoomID:(int)roomID sceneID:(int)sceneID subTypeName:(NSString *)subTypeName
