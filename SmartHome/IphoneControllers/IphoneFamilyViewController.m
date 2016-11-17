@@ -15,6 +15,7 @@
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "FamilyCell.h"
+#import "Scene.h"
 
 @interface IphoneFamilyViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -30,6 +31,7 @@
 @property (nonatomic,strong) NSMutableArray * dvdArrs;//
 @property (nonatomic,strong) NSMutableArray * tvArrs;//
 @property (nonatomic,strong) NSMutableArray * tempArrs;
+@property (nonatomic,assign) int selectedSId;
 
 @end
 
@@ -112,7 +114,7 @@
     self.scrollView = [[UIScrollView alloc] init];
     self.scrollView.bounces = NO;
 
-//      [self sendRequest];
+      [self sendRequest];
     
 }
 
@@ -193,9 +195,8 @@
 #pragma  mark - UICollectionViewDelegate
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-//    return self.roomIdArrs.count;
     
-    return 12;
+    return self.roomIdArrs.count;
 
 }
 
@@ -215,9 +216,22 @@
     cell.TVImageView.layer.cornerRadius = cell.TVImageView.bounds.size.width / 2.0;
     cell.musicImageVIew.layer.cornerRadius = cell.musicImageVIew.bounds.size.width / 2.0;
     
+    
     return cell;
 }
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
 
+    Scene *scene = self.roomIdArrs[indexPath.row];
+    self.selectedSId = scene.sceneID;
+  
+   
+        [self performSegueWithIdentifier:@"iphoneSceneController" sender:self];
+    
+        
+   
+
+}
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return CGSizeMake(cellWidth, cellWidth);
