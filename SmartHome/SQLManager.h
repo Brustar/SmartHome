@@ -44,8 +44,6 @@ typedef NS_ENUM(NSUInteger,DeviceType)
 + (NSArray *)getLightTypeNameWithRoomID:(NSInteger)roomID;
 + (NSArray *)getLightWithTypeName:(NSString *)typeName roomID:(NSInteger)roomID;
 
-
-+ (NSArray *)getCurtainTypeNameWithRoomID:(NSInteger)roomID;
 + (NSArray *)getCurtainWithTypeName:(NSString *)typeName roomID:(NSInteger)roomID;
 
 + (NSString *)deviceIDWithRoomID:(NSInteger)roomID withType:(NSString *)type;

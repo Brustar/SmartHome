@@ -349,32 +349,6 @@
     return [lights copy];
 }
 
-
-#pragma mark - sqlite操作不允许有中文硬编码
-+ (NSArray *)getCurtainTypeNameWithRoomID:(NSInteger)roomID
-{
-    NSMutableArray *curtainNames = [NSMutableArray array];
-    
-    FMDatabase *db = [self connetdb];
-    if([db open])
-    {
-        NSString *sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld and typeName in (\"开合帘\",\"卷帘\")",(long)roomID];
-        FMResultSet *resultSet = [db executeQuery:sql];
-        while ([resultSet next])
-        {
-            NSString *light = [resultSet stringForColumn:@"typeName"];
-            [curtainNames addObject:light];
-        }
-    }
-    
-    if (curtainNames.count < 1) {
-        return nil;
-    }
-    [db closeOpenResultSets];
-    [db close];
-    return [curtainNames copy];
-}
-
 + (NSArray *)getCurtainWithTypeName:(NSString *)typeName roomID:(NSInteger)roomID
 {
     NSMutableArray *curtains = [NSMutableArray array];
