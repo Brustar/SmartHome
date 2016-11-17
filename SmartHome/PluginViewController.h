@@ -7,6 +7,8 @@
 //
 #import <HomeKit/HomeKit.h>
 
+#define DEVICE_TYPE @"智能单品"
+
 @interface PluginViewController : UIViewController<HMHomeManagerDelegate, HMHomeDelegate>
 
 @property (strong, nonatomic) NSMutableArray *devices;

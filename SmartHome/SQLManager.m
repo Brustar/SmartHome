@@ -115,6 +115,7 @@
 
 }
 
+#pragma mark - sqlite操作不允许有中文硬编码
 +(NSString *)deviceTypeNameByDeviceID:(int)eId
 {
     FMDatabase *db = [self connetdb];
@@ -217,7 +218,7 @@
     return [arr copy];
 }
 
-
+#pragma mark - sqlite操作不允许有中文硬编码
 +(NSArray *)deviceSubTypeByRoomId:(NSInteger)roomID
 {
     NSMutableArray *subTypes = [NSMutableArray array];
@@ -355,7 +356,7 @@
 }
 
 
-
+#pragma mark - sqlite操作不允许有中文硬编码
 + (NSArray *)getCurtainTypeNameWithRoomID:(NSInteger)roomID
 {
     NSMutableArray *curtainNames = [NSMutableArray array];
@@ -836,7 +837,7 @@
     return [devices copy];
 }
 
-
+#pragma mark - sqlite操作不允许有中文
 + (NSArray *)getDeviceTypeNameWithRoomID:(int)roomID sceneID:(int)sceneID subTypeName:(NSString *)subTypeName
 {
     NSMutableArray *typeNames = [NSMutableArray array];
@@ -877,6 +878,7 @@
     return [typeNames copy];
 }
 
+#pragma mark - sqlite操作不允许有中文
 +(NSArray *)getDeviceTypeName:(int)rID subTypeName:(NSString *)subTypeName
 {
     NSMutableArray *typeNames = [NSMutableArray array];
@@ -1062,6 +1064,7 @@
     return [subTypeNames copy];
 }
 
+#pragma mark - sqlite操作不允许有中文
 //根据场景ID，得到该场景下的设备子类
 +(NSArray *)getDeviceTypeNameWithScenID:(int)sceneId subTypeName:(NSString *)subTypeName
 {
