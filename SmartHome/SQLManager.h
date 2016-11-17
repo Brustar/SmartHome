@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "FMDatabase.h"
-
+/*
 typedef NS_ENUM(NSUInteger,DeviceType)
 {
     LIGHT,
@@ -16,7 +16,7 @@ typedef NS_ENUM(NSUInteger,DeviceType)
     MEDIA,
     
 };
-
+*/
 @interface SQLManager : NSObject
 
 +(FMDatabase *) connetdb;
