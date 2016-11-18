@@ -330,7 +330,7 @@
     if (self.startTimeBtn.selected) {
         self.schedule.startTime = time;
     } else {
-        if ([self.schedule.endTime laterTime:self.schedule.startTime]) {
+        if ([self.startTimeBtn.titleLabel.text laterTime:self.endTimeBtn.titleLabel.text]) {
             self.schedule.endTime = time;
         }
         
