@@ -261,14 +261,17 @@
             NSLog(@"离线模式");
             [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
             if ([info.db isEqualToString:SMART_DB]) {
-            int sed = (arc4random() % 3) + 1;
-            if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad && sed == 1) {
-                //connect master
-                [sock connectUDP:[IOManager udpPort]];
-            }else{
-                //connect cloud
+                /*
+                int sed = (arc4random() % 3) + 1;
+                if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad && sed == 1) {
+                    //connect master
+                    [sock connectUDP:[IOManager udpPort]];
+                }else{
+                    //connect cloud
+                    [sock connectTcp];
+                }
+                 */
                 [sock connectTcp];
-            }
             }
         }
     }else{
