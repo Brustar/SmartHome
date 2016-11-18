@@ -20,6 +20,7 @@
 #import "SQLManager.h"
 
 
+
 @interface IphoneFamilyViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
@@ -38,6 +39,7 @@
 @property (nonatomic,strong) NSMutableArray * airconditionArrs;
 @property (nonatomic,assign) int selectedSId;
 @property (nonatomic,assign) int selected;
+@property (nonatomic,assign) int roomID;
 @property (nonatomic,strong) NSArray *rooms;
 
 @end
@@ -122,8 +124,9 @@
     self.scrollView = [[UIScrollView alloc] init];
     self.scrollView.bounces = NO;
     self.selected = 0;
- 
+   [self reachNotification];
       [self sendRequest];
+  
     
 }
 
@@ -263,18 +266,26 @@
     
     return cell;
 }
+-(void)reachNotification{
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(familyNotification:) name:@"subType" object:nil];
+}
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    Scene *scene = self.roomIdArrs[indexPath.row];
-    self.selectedSId = scene.sceneID;
-  
-   
-        [self performSegueWithIdentifier:@"iphoneSceneController" sender:self];
+    [self performSegueWithIdentifier:@"iphoneFamilyController" sender:self];
     
         
    
 
+}
+
+- (void)familyNotification:(NSNotification *)notification
+{
+    NSDictionary *dict = notification.userInfo;
+    
+    self.roomID = [dict[@"subType"] intValue];
+    
+    self.rooms = [SQLManager getScensByRoomId:self.roomID];
+    
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {

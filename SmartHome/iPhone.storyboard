@@ -98,29 +98,29 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="32" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yoo-dT-FMB">
-                                                    <rect key="frame" x="61" y="50" width="52" height="25"/>
+                                                    <rect key="frame" x="61" y="50" width="52.5" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Yoo-dT-FMB" secondAttribute="height" multiplier="21:10" id="tUZ-gJ-wex"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="主卧" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cR-vp-ouT">
-                                                    <rect key="frame" x="61" y="78" width="52" height="20"/>
+                                                    <rect key="frame" x="61" y="78" width="52.5" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="6cR-vp-ouT" secondAttribute="height" multiplier="21:8" id="WrJ-l4-pHx"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="78%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lCO-PC-8ci">
-                                                    <rect key="frame" x="61" y="101" width="52" height="25"/>
+                                                    <rect key="frame" x="61" y="101" width="62.5" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="lCO-PC-8ci" secondAttribute="height" multiplier="21:10" id="0XZ-CB-NRJ"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -160,7 +160,7 @@
                                             <constraint firstItem="Yoo-dT-FMB" firstAttribute="leading" secondItem="6cR-vp-ouT" secondAttribute="leading" id="ars-UX-wOs"/>
                                             <constraint firstAttribute="bottomMargin" secondItem="Vas-oK-wnf" secondAttribute="bottom" constant="20" id="bUw-cF-sCV"/>
                                             <constraint firstItem="cc7-zd-4DL" firstAttribute="leading" secondItem="tZ3-0c-uo9" secondAttribute="leading" id="dEN-f1-7HK"/>
-                                            <constraint firstItem="Yoo-dT-FMB" firstAttribute="trailing" secondItem="lCO-PC-8ci" secondAttribute="trailing" id="eSo-Pb-Te1"/>
+                                            <constraint firstItem="Yoo-dT-FMB" firstAttribute="trailing" secondItem="lCO-PC-8ci" secondAttribute="trailing" constant="-10" id="eSo-Pb-Te1"/>
                                             <constraint firstItem="lo1-pO-uhN" firstAttribute="centerY" secondItem="Vas-oK-wnf" secondAttribute="centerY" id="gfY-6U-Wxq"/>
                                             <constraint firstItem="Yoo-dT-FMB" firstAttribute="top" secondItem="tZ3-0c-uo9" secondAttribute="topMargin" constant="42" id="gxf-d8-FRb"/>
                                             <constraint firstItem="eY9-66-P31" firstAttribute="leading" secondItem="tZ3-0c-uo9" secondAttribute="leadingMargin" constant="28" id="hUT-5e-EYS"/>
@@ -288,6 +288,7 @@
                     <navigationItem key="navigationItem" title="家庭" id="Yc3-0T-jdX"/>
                     <connections>
                         <outlet property="collectionView" destination="6NP-fB-ANX" id="2Nk-mi-Hzh"/>
+                        <segue destination="2FT-fL-R4c" kind="push" identifier="iphoneFamilyController" id="I7P-zq-ceC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CJz-uR-fFs" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -958,7 +959,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U47-Xi-iD1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2194" y="-392"/>
+            <point key="canvasLocation" x="2068" y="-204"/>
         </scene>
         <!--添加场景定时-->
         <scene sceneID="kNF-ul-FTy">
@@ -3826,8 +3827,9 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="WeN-Qz-0Az"/>
+        <segue reference="I7P-zq-ceC"/>
         <segue reference="qN8-z6-Gb7"/>
         <segue reference="aTH-RA-7NZ"/>
+        <segue reference="WeN-Qz-0Az"/>
     </inferredMetricsTieBreakers>
 </document>
