@@ -105,6 +105,15 @@
     return _tempArrs;
 
 }
+-(NSMutableArray *)humidityArrs
+{
+
+    if (!_humidityArrs) {
+        _humidityArrs = [NSMutableArray array];
+    }
+    
+    return _humidityArrs;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -211,18 +220,13 @@
    FamilyCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     
     self.rooms = [SQLManager getAllRoomsInfo];
-    for (int i =0; i < self.rooms.count; i ++) {
-         Room * room = self.rooms[i];
-        NSMutableArray * arr = [NSMutableArray array];
-        [arr addObject:[NSString stringWithFormat:@"%d",room.rId]];
-        if ([self.roomIdArrs containsObject:arr]) {
-             cell.nameLabel.text = room.rName;
-        }
-        
-       
+    NSMutableArray *roomNames = [NSMutableArray array];
+    
+    for (Room *room in self.rooms) {
+        NSString *roomName = room.rName;
+        [roomNames addObject:roomName];
     }
-       cell.layer.masksToBounds = YES;
-
+    cell.layer.masksToBounds = YES;
     cell.supImageView.layer.cornerRadius = cell.supImageView.bounds.size.width / 2.0;
     cell.subImageView.layer.cornerRadius = cell.subImageView.bounds.size.width /2.0;
     cell.lightImageVIew.layer.cornerRadius = cell.lightImageVIew.bounds.size.width /2.0;
@@ -232,7 +236,7 @@
     cell.TVImageView.layer.cornerRadius = cell.TVImageView.bounds.size.width / 2.0;
     cell.musicImageVIew.layer.cornerRadius = cell.musicImageVIew.bounds.size.width / 2.0;
     
-    cell.nameLabel.text = [NSString stringWithFormat:@"%@",self.roomIdArrs[indexPath.row]];
+    cell.nameLabel.text = roomNames[indexPath.row];
     cell.tempLabel.text = [NSString stringWithFormat:@"%@",self.tempArrs[indexPath.row]];
     cell.humidityLabel.text = [NSString stringWithFormat:@"%@",self.humidityArrs[indexPath.row]];
 

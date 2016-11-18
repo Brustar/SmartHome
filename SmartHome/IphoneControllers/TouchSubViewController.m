@@ -11,6 +11,9 @@
 @interface TouchSubViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong)NSArray * arrayData;
+@property (weak, nonatomic) IBOutlet UIView *sceneView;
+@property (weak, nonatomic) IBOutlet UILabel *sceneName;
+@property (weak, nonatomic) IBOutlet UILabel *sceneDescribe;
 @property (nonatomic,strong) NSArray * IconImageArr;
 @end
 
@@ -30,13 +33,17 @@
         
         
     }];
-    return @[action];
+    UIPreviewAction *action1 = [UIPreviewAction actionWithTitle:@"关闭" style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+        
+        
+    }];
+    return @[action,action1];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.arrayData = @[@"删除此场景",@"收藏",@"语音"];
-    self.IconImageArr = @[@"delete",@"store",@"voice"];
+    self.arrayData = @[@"删除此场景",@"收藏"];
+    self.IconImageArr = @[@"delete",@"store"];
     // Do any additional setup after loading the view.
     
     
@@ -64,7 +71,14 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    if (indexPath.row == 0) {
+        
+    }else if (indexPath.row == 1){
+        //判断先前我们设置的唯一标识
+        UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+        UIViewController *target = [secondStoryBoard instantiateViewControllerWithIdentifier:@"IphoneFavorController"];
+        [self.navigationController pushViewController:target animated:YES];
+    }
 
 }
 - (void)didReceiveMemoryWarning {

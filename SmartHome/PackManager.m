@@ -31,9 +31,10 @@ Proto createProto()
     Proto proto;
     proto.head=PROTOCOL_HEAD;
     proto.tail=PROTOCOL_TAIL;
-    DeviceInfo *info=[DeviceInfo defaultManager];
     
-    proto.masterID=CFSwapInt16BigToHost(info.masterID);
+    NSString *result = [NSString stringWithFormat:@"0x%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"HostID"]];
+    proto.masterID = CFSwapInt16BigToHost(strtoul([result UTF8String],0,16));
+    
     return proto;
 }
 

@@ -322,13 +322,15 @@
     if (self.startTimeBtn.selected) {
         [self.startTimeBtn setTitle:time forState:UIControlStateNormal];
     } else {
-        [self.endTimeBtn setTitle:time forState:UIControlStateNormal];
+        if ([self.startTimeBtn.titleLabel.text laterTime:self.endTimeBtn.titleLabel.text]) {
+            [self.endTimeBtn setTitle:time forState:UIControlStateNormal];
+        }
     }
     
     if (self.startTimeBtn.selected) {
         self.schedule.startTime = time;
     } else {
-        if ([self.schedule.endTime laterTime:self.schedule.startTime]) {
+        if ([self.startTimeBtn.titleLabel.text laterTime:self.endTimeBtn.titleLabel.text]) {
             self.schedule.endTime = time;
         }
         
@@ -418,8 +420,10 @@
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"YYYY-MM-dd"];
         NSString *prettyDate = [dateFormat stringFromDate:myDate];
-        [self.EndDay setTitle:prettyDate forState:UIControlStateNormal];
-        self.schedule.endDate=prettyDate;
+        if ([self.EndDay.titleLabel.text laterTime:self.StartDay.titleLabel.text]) {
+            [self.EndDay setTitle:prettyDate forState:UIControlStateNormal];
+            self.schedule.endDate=prettyDate;
+        }
 //        self.clickFixTimeBtn.tintColor=[UIColor redColor];
     }
     NSMutableArray *sches=[self.scene.schedules mutableCopy];
