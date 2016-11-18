@@ -57,6 +57,7 @@
     [super viewDidLoad];
     
     self.title = [SQLManager getSceneName:self.sceneID];
+    
     self.typeArr = [SQLManager getSubTydpeBySceneID:self.sceneID];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.devicesTypes = [SQLManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.typeArr[0]];
@@ -329,9 +330,6 @@
         
         
         [[SceneManager defaultManager] favoriteScene:scene withName:scene.sceneName];
-        
-        
-        
         
     }];
     UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];

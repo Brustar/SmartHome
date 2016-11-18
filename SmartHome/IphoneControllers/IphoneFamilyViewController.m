@@ -18,6 +18,7 @@
 #import "Scene.h"
 #import "Room.h"
 #import "SQLManager.h"
+#import "PackManager.h"
 
 
 
@@ -208,7 +209,26 @@
     
     
 }
-
+#pragma mark - TCP recv delegate
+- (void)recv:(NSData *)data withTag:(long)tag
+{
+    FamilyCell * cell ;
+    Proto proto = protocolFromData(data);
+    
+    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
+        return;
+    }
+    
+    if (tag==0) {
+        if (proto.action.state==0x7A) {
+            cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
+        }
+        if (proto.action.state==0x8A) {
+            NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
+            cell.humidityLabel.text = valueString;
+        }
+    }
+}
 
 #pragma  mark - UICollectionViewDelegate
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -240,30 +260,8 @@
     cell.musicImageVIew.layer.cornerRadius = cell.musicImageVIew.bounds.size.width / 2.0;
     
     cell.nameLabel.text = roomNames[indexPath.row];
-    cell.tempLabel.text = [NSString stringWithFormat:@"%@",self.tempArrs[indexPath.row]];
-    cell.humidityLabel.text = [NSString stringWithFormat:@"%@",self.humidityArrs[indexPath.row]];
+    
 
-    
-    
-    if (self.selected == 0) {
-        
-        cell.lightImageVIew.hidden = YES;
-        cell.curtainImageView.hidden = YES;
-        cell.airImageVIew.hidden = YES;
-        cell.DVDImageView.hidden = YES;
-        cell.TVImageView.hidden = YES;
-        cell.musicImageVIew.hidden = YES;
-        
-    }else if (self.selected == 1){
-        cell.lightImageVIew.hidden = NO;
-        cell.curtainImageView.hidden = NO;
-        cell.airImageVIew.hidden = NO;
-        cell.DVDImageView.hidden = NO;
-        cell.TVImageView.hidden = NO;
-        cell.musicImageVIew.hidden = NO;
-    }
-    
-    
     return cell;
 }
 -(void)reachNotification{
@@ -274,8 +272,6 @@
     [self performSegueWithIdentifier:@"iphoneFamilyController" sender:self];
     
         
-   
-
 }
 
 - (void)familyNotification:(NSNotification *)notification
