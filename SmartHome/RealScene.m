@@ -16,6 +16,7 @@
 @interface RealScene ()<UITableViewDelegate, UITableViewDataSource,TcpRecvDelegate>
 @property (strong, nonatomic) IBOutlet UIView *dataView;
 @property (weak, nonatomic) IBOutlet UITableView *roomTable;
+@property (strong, nonatomic) IBOutlet UILabel *tempValue;
 
 //温度
 @property (weak, nonatomic) IBOutlet UILabel *tempLabel;
@@ -174,7 +175,7 @@
     
     if (tag==0) {
         if (proto.action.state==0x7A) {
-            self.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
+            self.tempValue.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
         }
         if (proto.action.state==0x8A) {
             NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];

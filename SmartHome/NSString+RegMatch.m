@@ -53,7 +53,7 @@
 
 -(BOOL) laterTime:(NSString*)time
 {
-    return [self compareLater:time pattern:@"HH:mm:ss"];
+    return [self compareLater:time pattern:@"HH:mm"];
 }
 
 @end
