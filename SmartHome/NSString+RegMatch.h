@@ -14,4 +14,8 @@
 
 - (BOOL)isPassword;
 
+-(BOOL) laterDate:(NSString*)date;
+
+-(BOOL) laterTime:(NSString*)time;
+
 @end

@@ -256,10 +256,9 @@
 {
     Proto proto=protocolFromData(data);
     
-    if (proto.masterID != [[DeviceInfo defaultManager] masterID]) {
+    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
         return;
     }
-    
     
     if (tag==0) {
         if (proto.action.state == PROTOCOL_VOLUME_UP || proto.action.state == PROTOCOL_VOLUME_DOWN || proto.action.state == PROTOCOL_MUTE) {

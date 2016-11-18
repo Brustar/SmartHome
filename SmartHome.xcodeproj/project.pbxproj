@@ -210,6 +210,7 @@
 		F6A1C02E1D586D7500856E00 /* Room.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A1C02D1D586D7500856E00 /* Room.m */; };
 		F6B91F6F1D100EF700592FB0 /* DVCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B91F6E1D100EF700592FB0 /* DVCollectionViewCell.m */; };
 		F6BF2AED1D86556500A3C9D5 /* HostIDSController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6BF2AEC1D86556500A3C9D5 /* HostIDSController.m */; };
+		F6FD00A21DDDD470009ABA64 /* TouchSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6FD00A11DDDD470009ABA64 /* TouchSubViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -711,6 +712,8 @@
 		F6B91F6E1D100EF700592FB0 /* DVCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVCollectionViewCell.m; sourceTree = "<group>"; };
 		F6BF2AEB1D86556500A3C9D5 /* HostIDSController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostIDSController.h; sourceTree = "<group>"; };
 		F6BF2AEC1D86556500A3C9D5 /* HostIDSController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostIDSController.m; sourceTree = "<group>"; };
+		F6FD00A01DDDD470009ABA64 /* TouchSubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchSubViewController.h; sourceTree = "<group>"; };
+		F6FD00A11DDDD470009ABA64 /* TouchSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchSubViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1439,6 +1442,8 @@
 				F64407D51DAE3BAD0032BEDF /* IphoneFavorController.m */,
 				F6457C431DD5523C00CA3A72 /* IphoneFamilyViewController.h */,
 				F6457C441DD5523C00CA3A72 /* IphoneFamilyViewController.m */,
+				F6FD00A01DDDD470009ABA64 /* TouchSubViewController.h */,
+				F6FD00A11DDDD470009ABA64 /* TouchSubViewController.m */,
 				F680AAB51DD94565001D1807 /* FamilyCell.h */,
 				F680AAB61DD94565001D1807 /* FamilyCell.m */,
 			);
@@ -1823,6 +1828,7 @@
 				F64EF7FB1D8FB738003C1C48 /* IphoneMainController.m in Sources */,
 				0FCFB38F1CF293B300B37DD3 /* Radio.m in Sources */,
 				F618963B1D87B08300DBE6CD /* ProjectController.m in Sources */,
+				F6FD00A21DDDD470009ABA64 /* TouchSubViewController.m in Sources */,
 				0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */,
 				0F6AB8701D782D9D0041E39C /* SunString.m in Sources */,
 				0FCAA40C1D1945BB00C1E58C /* BgMusicController.m in Sources */,

@@ -10,7 +10,7 @@
 #import "SceneManager.h"
 #import "Scene.h"
 #import "Schedule.h"
-
+#import "NSString+RegMatch.h"
 
 @interface IphoneFixTimerController ()<UIPickerViewDelegate,UIPickerViewDataSource>
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *astronomicalHight;
@@ -313,26 +313,26 @@
         return self.minutes[row];
     }
 }
+
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     NSString *hour = self.hours[[self.pickerTime selectedRowInComponent:0]];
     NSString *min = self.minutes[[self.pickerTime selectedRowInComponent:1]];
-   NSString *time = [NSString stringWithFormat:@"%@:%@", hour, min];
+    NSString *time = [NSString stringWithFormat:@"%@:%@", hour, min];
     if (self.startTimeBtn.selected) {
         [self.startTimeBtn setTitle:time forState:UIControlStateNormal];
     } else {
         [self.endTimeBtn setTitle:time forState:UIControlStateNormal];
     }
     
-    
-        if (self.startTimeBtn.selected) {
-            self.schedule.startTime=time;
-        } else {
+    if (self.startTimeBtn.selected) {
+        self.schedule.startTime = time;
+    } else {
+        if ([self.schedule.endTime laterTime:self.schedule.startTime]) {
             self.schedule.endTime = time;
         }
-
-
-
+        
+    }
 }
 
 //时间的设置
