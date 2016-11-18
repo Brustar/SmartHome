@@ -53,9 +53,7 @@
 
 -(BOOL) laterTime:(NSString*)time
 {
-    NSString *start = [NSString stringWithFormat:@"2016-01-01 %@",self];
-    NSString *end = [NSString stringWithFormat:@"2016-01-01 %@",time];
-    return [start compareLater:end pattern:@"yyyy-MM-dd HH:mm"];
+    return [self compareLater:time pattern:@"HH:mm"];
 }
 
 @end
