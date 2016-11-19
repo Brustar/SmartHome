@@ -464,6 +464,31 @@
     return dataFromProtocol(proto);
 }
 
+-(void) dimingRoom:(int)roomid brightness:(int)bright
+{
+    SocketManager *sock=[SocketManager defaultManager];
+    NSArray *lightIDS=[SQLManager getDeviceByRoom:roomid];
+    for (NSString *lightID in lightIDS) {
+        NSData *data=[[DeviceInfo defaultManager] changeBright:bright deviceID:lightID];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
+}
+
+-(void) sprightlyRoom:(int)roomid
+{
+    [self dimingRoom:roomid brightness:90];
+}
+
+-(void) gloomRoom:(int)roomid
+{
+    [self dimingRoom:roomid brightness:20];
+}
+
+-(void) romanticRoom:(int)roomid
+{
+    [self dimingRoom:roomid brightness:50];
+}
+
 -(void) dimingScene:(int)sceneid brightness:(int)bright
 {
     SocketManager *sock=[SocketManager defaultManager];
@@ -472,11 +497,9 @@
         if ([device isKindOfClass:[Light class]]) {
             Light *light=(Light *)device;
             NSString *deviceid=[NSString stringWithFormat:@"%d", light.deviceID];
-            
-            if (light.brightness>0) {
-                NSData *data=[[DeviceInfo defaultManager] changeBright:bright deviceID:deviceid];
-                [sock.socket writeData:data withTimeout:1 tag:1];
-            }
+            NSData *data=[[DeviceInfo defaultManager] changeBright:bright deviceID:deviceid];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+        
         }
     }
 }
