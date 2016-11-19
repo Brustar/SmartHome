@@ -464,6 +464,38 @@
     return dataFromProtocol(proto);
 }
 
+-(void) dimingScene:(int)sceneid brightness:(int)bright
+{
+    SocketManager *sock=[SocketManager defaultManager];
+    Scene *scene=[self readSceneByID:sceneid];
+    for (id device in scene.devices) {
+        if ([device isKindOfClass:[Light class]]) {
+            Light *light=(Light *)device;
+            NSString *deviceid=[NSString stringWithFormat:@"%d", light.deviceID];
+            
+            if (light.brightness>0) {
+                NSData *data=[[DeviceInfo defaultManager] changeBright:bright deviceID:deviceid];
+                [sock.socket writeData:data withTimeout:1 tag:1];
+            }
+        }
+    }
+}
+
+-(void) sprightly:(int)sceneid
+{
+    [self dimingScene:sceneid brightness:90];
+}
+
+-(void) gloom:(int)sceneid
+{
+    [self dimingScene:sceneid brightness:20];
+}
+
+-(void) romantic:(int)sceneid
+{
+    [self dimingScene:sceneid brightness:50];
+}
+
 -(void) startScene:(int)sceneid
 {
     __block NSData *data=nil;

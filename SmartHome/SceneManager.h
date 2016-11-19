@@ -41,5 +41,14 @@
 -(void) startScene:(int)sceneid;
 -(void) poweroffAllDevice:(int)sceneid;
 
+//调整场景氛围
+-(void) dimingScene:(int)sceneid brightness:(int)bright;
+//明快
+-(void) sprightly:(int)sceneid;
+//幽静
+-(void) gloom:(int)sceneid;
+//浪漫
+-(void) romantic:(int)sceneid;
+
 
 @end
