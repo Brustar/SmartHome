@@ -12,7 +12,7 @@
 #import "UIImageView+WebCache.h"
 
 //实景控制
-@interface RealScene : UIViewController
+@interface RealScene : UIViewController<TouchImageDelegate>
 
 @property (strong, nonatomic) IBOutlet TouchImage *realimg;
 

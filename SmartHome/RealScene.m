@@ -17,6 +17,9 @@
 @property (strong, nonatomic) IBOutlet UIView *dataView;
 @property (weak, nonatomic) IBOutlet UITableView *roomTable;
 @property (strong, nonatomic) IBOutlet UILabel *tempValue;
+@property (strong, nonatomic) IBOutlet UILabel *wetValue;
+@property (strong, nonatomic) IBOutlet UILabel *pmValue;
+@property (strong, nonatomic) IBOutlet UILabel *noiseValue;
 
 //温度
 @property (weak, nonatomic) IBOutlet UILabel *tempLabel;
@@ -52,7 +55,8 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     // Do any additional setup after loading the view.
     self.realimg = [[TouchImage alloc] initWithFrame:CGRectMake(0, 40, UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT-40)];
-    //self.realimg.image =[UIImage imageNamed:@"real.png"];
+    self.realimg.delegate = self;
+    self.realimg.powerOn = YES;
     self.realimg.userInteractionEnabled = YES;
     self.realimg.viewFrom = REAL_IMAGE;
     [self.view addSubview:self.realimg];
@@ -154,11 +158,14 @@
             }
             
             NSString *bgImgURL = room[@"image"];
-            if (bgImgURL.length >0) {
-                NSLog(@"roomBgImgURL: %@", bgImgURL);
-                //self.realimg.contentMode = UIViewContentModeScaleAspectFill;
-                [self.realimg sd_setImageWithURL:[NSURL URLWithString:bgImgURL] placeholderImage:[UIImage imageNamed:@"xxx.png"] options:SDWebImageRetryFailed];
+            
+            if (self.realimg.powerOn) {
+                if (bgImgURL.length >0) {
+                    NSLog(@"roomBgImgURL: %@", bgImgURL);
+                    [self.realimg sd_setImageWithURL:[NSURL URLWithString:bgImgURL] placeholderImage:[UIImage imageNamed:@"xxx.png"] options:SDWebImageRetryFailed];
+                }
             }
+            
         }
     }
 }
@@ -167,9 +174,11 @@
 #pragma mark - TCP recv delegate
 - (void)recv:(NSData *)data withTag:(long)tag
 {
+    NSString *result = [NSString stringWithFormat:@"0x%@",[UD objectForKey:@"HostID"]];
+    
     Proto proto = protocolFromData(data);
     
-    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
+    if (CFSwapInt16BigToHost(proto.masterID) != strtoul([result UTF8String],0,16)) {
         return;
     }
     
@@ -179,15 +188,15 @@
         }
         if (proto.action.state==0x8A) {
             NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
-            self.wetLabel.text = valueString;
+            self.wetValue.text = valueString;
         }
         if (proto.action.state==0x7F) {
             NSString *valueString = [NSString stringWithFormat:@"%d ug/m",proto.action.RValue];
-            self.pmLabel.text = valueString;
+            self.pmValue.text = valueString;
         }
         if (proto.action.state==0x7E) {
             NSString *valueString = [NSString stringWithFormat:@"%d db",proto.action.RValue];
-            self.noiseLabel.text = valueString;
+            self.noiseValue.text = valueString;
         }
     }
 }
@@ -214,6 +223,20 @@
 {
     
 }
+
+#pragma mark - TouchImageDelegate
+- (void)openDeviceWithDeviceID:(NSString *)deviceID {
+    SocketManager *sock = [SocketManager defaultManager];
+    NSData *data = [[DeviceInfo defaultManager] open:deviceID];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
+- (void)closeDeviceWithDeviceID:(NSString *)deviceID {
+    SocketManager *sock = [SocketManager defaultManager];
+    NSData *data = [[DeviceInfo defaultManager] close:deviceID];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
