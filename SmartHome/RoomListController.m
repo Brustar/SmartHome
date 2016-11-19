@@ -19,6 +19,7 @@
 #import "SQLManager.h"
 #import "DeviceOfFixTimerViewController.h"
 #import "Schedule.h"
+#import "NSString+RegMatch.h"
 
 @interface RoomListController ()<UITableViewDataSource,UITableViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,CLLocationManagerDelegate,deviceOfFixTimerViewControllerDelegate>
 @property (nonatomic,strong) NSArray *rooms;
@@ -317,7 +318,9 @@
     if (self.startTimeBtn.selected) {
         [self.startTimeBtn setTitle:time forState:UIControlStateNormal];
     } else {
-        [self.endTimeBtn setTitle:time forState:UIControlStateNormal];
+        if ([time laterTime:self.startTimeBtn.titleLabel.text]) {
+            [self.endTimeBtn setTitle:time forState:UIControlStateNormal];
+        }
     }
     
    
@@ -325,7 +328,9 @@
     if (self.startTimeBtn.selected) {
         self.schedule.startTime=time;
     } else {
-        self.schedule.endTime = time;
+        if ([time laterTime:self.startTimeBtn.titleLabel.text]) {
+            self.schedule.endTime = time;
+        }
     }
     NSMutableArray *sches=[self.scene.schedules mutableCopy];
     if ([sches count]==0) {
@@ -698,8 +703,10 @@
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"YYYY-MM-dd"];
         NSString *prettyDate = [dateFormat stringFromDate:myDate];
-        [self.endDataBtn setTitle:prettyDate forState:UIControlStateNormal];
-        self.schedule.endDate=prettyDate;
+        if ([prettyDate laterTime:self.starDataBtn.titleLabel.text]) {
+            [self.endDataBtn setTitle:prettyDate forState:UIControlStateNormal];
+            self.schedule.endDate=prettyDate;
+        }
         self.clickFixTimeBtn.tintColor=[UIColor redColor];
     }
     NSMutableArray *sches=[self.scene.schedules mutableCopy];

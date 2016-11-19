@@ -36,24 +36,30 @@
     switch (result)
     {
             //date02比date01大
-        case NSOrderedAscending: ci=YES; break;
+        case NSOrderedAscending: ci=YES;
+            break;
             //date02比date01小
-        case NSOrderedDescending: ci=NO; break;
+        case NSOrderedDescending: ci=NO;
+            break;
             //date02=date01
-        case NSOrderedSame: ci=NO; break;
+        case NSOrderedSame: ci=NO;
+            break;
         default: NSLog(@"erorr dates %@, %@", dt2, dt1); break;
+            
     }
+   
     return ci;
 }
 
 -(BOOL) laterDate:(NSString*)date
 {
     return [self compareLater:date pattern:@"yyyy-MM-dd"];
+    
 }
 
 -(BOOL) laterTime:(NSString*)time
 {
-    return [self compareLater:time pattern:@"HH:mm:ss"];
+    return [self compareLater:time pattern:@"HH:mm"];
 }
 
 @end

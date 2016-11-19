@@ -7,6 +7,9 @@
 //
 
 #import "TouchSubViewController.h"
+#import "SceneManager.h"
+#import "Scene.h"
+#import "SQLManager.h"
 
 @interface TouchSubViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -15,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *sceneName;
 @property (weak, nonatomic) IBOutlet UILabel *sceneDescribe;
 @property (nonatomic,strong) NSArray * IconImageArr;
+@property (nonatomic,strong)  IphoneAddSceneController * addSceneVC;
 @end
 
 @implementation TouchSubViewController
@@ -27,25 +31,14 @@
     return self;
 }
 
-- (NSArray <id <UIPreviewActionItem>> *)previewActionItems
-{
-    UIPreviewAction *action = [UIPreviewAction actionWithTitle:@"打开" style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-        
-        
-    }];
-    UIPreviewAction *action1 = [UIPreviewAction actionWithTitle:@"关闭" style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-        
-        
-    }];
-    return @[action,action1];
-}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.arrayData = @[@"删除此场景",@"收藏"];
     self.IconImageArr = @[@"delete",@"store"];
     // Do any additional setup after loading the view.
-    
+    NSLog(@"%i", self.tableView.delegate == self);
     
 }
 
@@ -72,15 +65,54 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) {
-        
+//        self.cell = cell;
+//        cell.deleteBtn.hidden = YES;
+//        
+//        [SQLManager deleteScene:(int)cell.tag];
+//        Scene *scene = [[SceneManager defaultManager] readSceneByID:(int)cell.tag];
+//        [[SceneManager defaultManager] delScene:scene];
+//        
+//        NSString *url = [NSString stringWithFormat:@"%@SceneDelete.aspx",[IOManager httpAddr]];
+//        NSDictionary *dict = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"SID":[NSNumber numberWithInt:scene.sceneID]};
+//        HttpManager *http=[HttpManager defaultManager];
+//        http.delegate=self;
+//        http.tag = 1;
+//        [http sendPost:url param:dict];
     }else if (indexPath.row == 1){
         //判断先前我们设置的唯一标识
-        UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-        UIViewController *target = [secondStoryBoard instantiateViewControllerWithIdentifier:@"IphoneFavorController"];
-        [self.navigationController pushViewController:target animated:YES];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"收藏场景" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:  UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+
+            IphoneAddSceneController * addSceneVC ;
+            Scene *scene = [[SceneManager defaultManager] readSceneByID:addSceneVC.sceneID];
+            
+            [[SceneManager defaultManager] favoriteScene:scene withName:scene.sceneName];
+            
+            
+        }];
+        UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        [alert addAction:action1];
+        [alert addAction:action2];
+        
+        [self presentViewController:alert animated:YES completion:nil];
     }
 
 }
+- (NSArray <id <UIPreviewActionItem>> *)previewActionItems
+{
+    UIPreviewAction *action = [UIPreviewAction actionWithTitle:@"打开" style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+        
+        
+    }];
+    UIPreviewAction *action1 = [UIPreviewAction actionWithTitle:@"关闭" style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+        IphoneAddSceneController * addSceneVC;
+        [[SceneManager defaultManager] poweroffAllDevice:addSceneVC.sceneID];
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }];
+    return @[action,action1];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

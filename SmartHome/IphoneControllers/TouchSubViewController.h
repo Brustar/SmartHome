@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IphoneAddSceneController.h"
 
 @interface TouchSubViewController : UIViewController
 - (instancetype)initWithTitle:(NSString *)title;
+
 @end

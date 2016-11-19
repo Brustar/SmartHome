@@ -322,7 +322,7 @@
     if (self.startTimeBtn.selected) {
         [self.startTimeBtn setTitle:time forState:UIControlStateNormal];
     } else {
-        if ([self.startTimeBtn.titleLabel.text laterTime:self.endTimeBtn.titleLabel.text]) {
+        if ([time laterTime:self.startTimeBtn.titleLabel.text]) {
             [self.endTimeBtn setTitle:time forState:UIControlStateNormal];
         }
     }
@@ -330,10 +330,16 @@
     if (self.startTimeBtn.selected) {
         self.schedule.startTime = time;
     } else {
-        if ([self.startTimeBtn.titleLabel.text laterTime:self.endTimeBtn.titleLabel.text]) {
+        if ([time laterTime:self.startTimeBtn.titleLabel.text]) {
             self.schedule.endTime = time;
+        }else{
+            UIAlertController * alertVC =[UIAlertController alertControllerWithTitle:@"温馨提示" message:@"结束时间小于开始时间请重现设置" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            [alertVC addAction:action];
+            [self presentViewController:alertVC animated:YES completion:nil];
         }
-        
     }
 }
 
@@ -420,10 +426,18 @@
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"YYYY-MM-dd"];
         NSString *prettyDate = [dateFormat stringFromDate:myDate];
-        if ([self.EndDay.titleLabel.text laterTime:self.StartDay.titleLabel.text]) {
+        if ([prettyDate laterDate:self.StartDay.titleLabel.text]) {
             [self.EndDay setTitle:prettyDate forState:UIControlStateNormal];
             self.schedule.endDate=prettyDate;
+        }else{
+            UIAlertController * alertVC =[UIAlertController alertControllerWithTitle:@"温馨提示" message:@"结束时间小于开始时间请重现设置" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction * action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            [alertVC addAction:action];
+            [self presentViewController:alertVC animated:YES completion:nil];
         }
+       
 //        self.clickFixTimeBtn.tintColor=[UIColor redColor];
     }
     NSMutableArray *sches=[self.scene.schedules mutableCopy];
@@ -436,6 +450,8 @@
     self.scene.schedules = sches;
     
     [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
+ 
+    
 }
 
 - (void)didReceiveMemoryWarning {
