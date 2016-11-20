@@ -11,6 +11,7 @@
 #import "Device.h"
 
 #define DIMMER @"调光灯"
+
 @interface SQLManager : NSObject
 
 +(FMDatabase *) connetdb;

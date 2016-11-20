@@ -77,7 +77,7 @@
     
     self.tableView.tableFooterView = [UIView new];
     self.user.text = [[NSUserDefaults  standardUserDefaults] objectForKey:@"Account"];
-    self.userType = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Type"] intValue];
+    self.userType = [[[NSUserDefaults standardUserDefaults] objectForKey:@"UserType"] intValue];
     self.pwd.text = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Password"] decryptWithDes:DES_KEY];
    
 //    if ([CLLocationManager locationServicesEnabled]) {
@@ -159,7 +159,7 @@
     
     NSDictionary *dict = @{@"Account":self.user.text,@"Type":[NSNumber numberWithInteger:self.userType],@"Password":[self.pwd.text md5],@"pushtoken":pushToken, @"DeviceType":@(clientType)};
     [IOManager writeUserdefault:self.user.text forKey:@"Account"];
-    [IOManager writeUserdefault:[NSNumber numberWithInteger:self.userType] forKey:@"Type"];
+    [IOManager writeUserdefault:[NSNumber numberWithInteger:self.userType] forKey:@"UserType"];
     [IOManager writeUserdefault:[self.pwd.text encryptWithDes:DES_KEY] forKey:@"Password"];
     HttpManager *http=[HttpManager defaultManager];
     http.delegate=self;
@@ -480,25 +480,41 @@
         if ([responseObject[@"Result"] intValue]==0) {
             [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
             [IOManager writeUserdefault:responseObject[@"UserName"] forKey:@"UserName"];
+            
             NSArray *hostList = responseObject[@"HostList"];
             
-            for(NSDictionary *hostID in hostList)
-            {
+            if ([hostList isKindOfClass:[NSArray class]] && hostList.count >0) {
                 
-                [self.hostIDS addObject:hostID[@"hostId"]];
+                for(NSDictionary *hostID in hostList)
+                {
+                    if ([hostID isKindOfClass:[NSDictionary class]] && hostID.count >0) {
+                        [self.hostIDS addObject:hostID[@"hostId"]];
+                    }
+                }
             }
             
-            [IOManager writeUserdefault:self.hostIDS forKey:@"HostIDS"];
-            if ([self.hostIDS count]>0) {
+            
+            if (self.hostIDS.count >0) {
+                [IOManager writeUserdefault:self.hostIDS forKey:@"HostIDS"];
+            }
+            
+            
+            if ([self.hostIDS count] >0) {
                 NSString *mid = self.hostIDS[0];
                 [IOManager writeUserdefault:mid forKey:@"HostID"];
                 info.masterID =[PackManager NSDataToUint16:mid];
             }
-            //NSInteger count = self.hostIDS.count;
+            
             //直接登录主机
-                
-            [self sendRequestToHostWithTag:2 andRow:0];
-            //[self goToViewController];
+            if ([self.hostIDS count] >0) {
+                [self sendRequestToHostWithTag:2 andRow:0];
+            }else {
+                NSLog(@"无主机ID，无法登录主机");
+                [MBProgressHUD showError:@"登录主机失败，未绑定主机"];
+            }
+            
+            
+            //[self goToViewController];//进入主页面
         }else{
                 [MBProgressHUD showError:responseObject[@"Msg"]];
             }
@@ -512,6 +528,7 @@
             self.tableView.hidden = YES;
             self.coverView.hidden = YES;
             [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
+            [IOManager writeUserdefault:responseObject[@"UserType"] forKey:@"UserType"];
             //检查版本号
             [self sendRequestForGettingConfigInfos:@"GetConfigVersion.aspx" withTag:4];
         }

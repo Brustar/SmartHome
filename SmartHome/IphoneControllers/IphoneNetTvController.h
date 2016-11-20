@@ -15,5 +15,4 @@
 @property (strong, nonatomic) Scene *scene;
 @property (nonatomic,assign) int roomID;
 
-
 @end

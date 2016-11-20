@@ -133,7 +133,22 @@
         self.MasterID = @"";
     }
     
-    NSDictionary *dict = @{@"HostID":self.MasterID,@"UserName":self.userName.text,@"Password":[self.passWord.text md5],@"UserTellNumber":self.phoneStr,@"UserType":[NSNumber numberWithInt:self.cType],@"AuthCode":self.authorNum.text,@"Pushtoken":info.pushToken};
+    //手机终端类型：1，手机 2，iPad
+    NSInteger clientType = 1;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        clientType = 2;
+    }
+    
+    NSDictionary *dict = @{
+                           @"HostID":self.MasterID,
+                           @"UserName":self.userName.text,
+                           @"Password":[self.passWord.text md5],
+                           @"UserTellNumber":self.phoneStr,
+                           @"UserType":[NSNumber numberWithInt:self.cType],
+                           @"AuthCode":self.authorNum.text,
+                           @"Pushtoken":info.pushToken,
+                           @"DeviceType":@(clientType)
+                           };
     NSString *url = [NSString stringWithFormat:@"%@UserRegist.aspx",[IOManager httpAddr]];
    
     
