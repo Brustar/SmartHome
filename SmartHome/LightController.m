@@ -13,6 +13,9 @@
 #import "Device.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
+#import "SceneManager.h"
+
+
 
 @interface LightController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *favButt;//收藏
@@ -38,6 +41,7 @@
 
 @property (weak, nonatomic) IBOutlet UISlider *lightSlider;
 
+@property (nonatomic,assign) int sceneID;
 @end
 
 @implementation LightController
@@ -122,6 +126,7 @@
     
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
+
 }
 - (IBAction)favButt:(id)sender {
     
@@ -457,13 +462,24 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"light" object:nil];
 }
 
+//明快
 - (IBAction)SprightlierBtn:(id)sender {
+    
+    [[SceneManager defaultManager] sprightly:[self.sceneid intValue]];
 }
+//幽静
 - (IBAction)PeacefulBtn:(id)sender {
+    
+    [[SceneManager defaultManager] gloom:[self.sceneid intValue]];
 }
+//浪漫
 - (IBAction)RomanceBtn:(id)sender {
+    
+    [[SceneManager defaultManager] romantic:[self.sceneid intValue]];
 }
 - (IBAction)LightSlider:(id)sender {
+    
+    
 }
 
 @end

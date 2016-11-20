@@ -3812,10 +3812,10 @@
         <image name="tv_up" width="10" height="9"/>
         <image name="u0" width="750" height="1020"/>
         <image name="u13" width="92" height="37"/>
-        <image name="u2" width="324" height="575"/>
+        <image name="u2" width="750" height="1020"/>
         <image name="u4" width="120" height="70"/>
         <image name="u6" width="120" height="70"/>
-        <image name="u8" width="329" height="568"/>
+        <image name="u8" width="750" height="1020"/>
         <image name="unselected" width="23" height="23"/>
         <image name="voice" width="26" height="26"/>
         <image name="voice_strong" width="39" height="32"/>
