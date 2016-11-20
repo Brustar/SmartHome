@@ -8,15 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "FMDatabase.h"
-/*
-typedef NS_ENUM(NSUInteger,DeviceType)
-{
-    LIGHT,
-    CURTAIN,
-    MEDIA,
-    
-};
-*/
+
+#define DIMMER @"调光灯"
 @interface SQLManager : NSObject
 
 +(FMDatabase *) connetdb;
@@ -90,8 +83,8 @@ typedef NS_ENUM(NSUInteger,DeviceType)
 
 +(void)initSQlite;
 +(void)initDemoSQlite;
-
-
+//根据房间ID找调光灯
++ (NSArray *)getDeviceByRoom:(int) roomID;
 
 //得到所有场景
 +(NSArray *)allSceneModels;

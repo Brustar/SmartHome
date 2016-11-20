@@ -44,8 +44,8 @@
 {
     if (name.length >0) {
         
-      // int sceneid=[SQLManager saveMaxSceneId:scene name:name pic:@""];
-       // scene.sceneID=sceneid;
+        // int sceneid=[SQLManager saveMaxSceneId:scene name:name pic:@""];
+        // scene.sceneID=sceneid;
         
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"yyyyMMddHHmmss";
@@ -462,6 +462,60 @@
     proto.deviceID = 0x00;
     proto.deviceType = 0x8A;
     return dataFromProtocol(proto);
+}
+
+-(void) dimingRoom:(int)roomid brightness:(int)bright
+{
+    SocketManager *sock=[SocketManager defaultManager];
+    NSArray *lightIDS=[SQLManager getDeviceByRoom:roomid];
+    for (NSString *lightID in lightIDS) {
+        NSData *data=[[DeviceInfo defaultManager] changeBright:bright deviceID:lightID];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
+}
+
+-(void) sprightlyRoom:(int)roomid
+{
+    [self dimingRoom:roomid brightness:90];
+}
+
+-(void) gloomRoom:(int)roomid
+{
+    [self dimingRoom:roomid brightness:20];
+}
+
+-(void) romanticRoom:(int)roomid
+{
+    [self dimingRoom:roomid brightness:50];
+}
+
+-(void) dimingScene:(int)sceneid brightness:(int)bright
+{
+    SocketManager *sock=[SocketManager defaultManager];
+    Scene *scene=[self readSceneByID:sceneid];
+    for (id device in scene.devices) {
+        if ([device isKindOfClass:[Light class]]) {
+            Light *light=(Light *)device;
+            NSString *deviceid=[NSString stringWithFormat:@"%d", light.deviceID];
+            NSData *data=[[DeviceInfo defaultManager] changeBright:bright deviceID:deviceid];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+        }
+    }
+}
+
+-(void) sprightly:(int)sceneid
+{
+    [self dimingScene:sceneid brightness:90];
+}
+
+-(void) gloom:(int)sceneid
+{
+    [self dimingScene:sceneid brightness:20];
+}
+
+-(void) romantic:(int)sceneid
+{
+    [self dimingScene:sceneid brightness:50];
 }
 
 -(void) startScene:(int)sceneid

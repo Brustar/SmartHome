@@ -758,6 +758,25 @@
     return [deviceIDs copy];
 }
 
++ (NSArray *)getDeviceByRoom:(int) roomID
+{
+    NSMutableArray *lights = [NSMutableArray new];
+    
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT id FROM devices where rid=%d and typename ='%@'",roomID,DIMMER];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            [lights addObject:[resultSet stringForColumn:@"id"]];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return lights;
+}
+
 + (Device *)getDeviceWithDeviceID:(int) deviceID
 {
     Device *device = nil;
