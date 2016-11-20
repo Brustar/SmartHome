@@ -7,7 +7,6 @@
 //
 
 #import "SQLManager.h"
-#import "Device.h"
 #import "DeviceType.h"
 #import "DeviceInfo.h"
 #import "Room.h"

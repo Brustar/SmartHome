@@ -11,19 +11,17 @@
 #import "Scene.h"
 #import "SQLManager.h"
 
+@interface TouchSubViewController ()
 
-@class IphoneEditSceneController;
-@interface TouchSubViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong)NSArray * arrayData;
 @property (weak, nonatomic) IBOutlet UIView *sceneView;
-@property (weak, nonatomic) IBOutlet UILabel *sceneName;
-@property (weak, nonatomic) IBOutlet UILabel *sceneDescribe;
+
 @property (nonatomic,strong) NSArray * IconImageArr;
-@property (nonatomic,strong)  IphoneAddSceneController * addSceneVC;
+
 @end
 
 @implementation TouchSubViewController
+
 - (instancetype)initWithTitle:(NSString *)title
 {
     self = [super init];
@@ -37,45 +35,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.arrayData = @[@"删除此场景",@"收藏"];
-    self.IconImageArr = @[@"delete",@"store"];
+   
     // Do any additional setup after loading the view.
-    NSLog(@"%i", self.tableView.delegate == self);
-    
-    IphoneEditSceneController * editScene;
-    self.delegate = editScene;
+
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+-(void)setSceneName:(UILabel *)sceneName
 {
-    return self.arrayData.count;
+    _sceneName = sceneName;
+
 }
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)setSceneDescribe:(UILabel *)sceneDescribe
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if(!cell)
-    {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-        
-    }
-    
-    cell.imageView.image = [UIImage imageNamed:self.IconImageArr[indexPath.row]];
-
-    cell.textLabel.text = self.arrayData[indexPath.row];
-    return cell;
-}
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row == 0) {
-       
-        [self.delegate removeSecene];
-        
-    }else if (indexPath.row == 1){
-     
-        [self.delegate collectSecene];
-    }
+    _sceneDescribe = sceneDescribe;
 
 }
 - (NSArray <id <UIPreviewActionItem>> *)previewActionItems
@@ -86,9 +58,25 @@
     }];
     UIPreviewAction *action1 = [UIPreviewAction actionWithTitle:@"关闭" style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
        
-        [self.delegate colseSecene];
+        if ([self.delegate respondsToSelector:@selector(colseSecene)]) {
+             [self.delegate colseSecene];
+        }
+       
     }];
-    return @[action,action1];
+    
+    UIPreviewAction *action2 = [UIPreviewAction actionWithTitle:@"收藏此场景" style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+        
+        if ([self.delegate respondsToSelector:@selector(collectSecene)]) {
+             [self.delegate collectSecene];
+        }
+       
+    }];
+    UIPreviewAction *action3 = [UIPreviewAction actionWithTitle:@"删除此场景" style:UIPreviewActionStyleDestructive handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+        
+        
+    }];
+    
+    return @[action,action1,action2,action3];
 }
 
 - (void)didReceiveMemoryWarning {

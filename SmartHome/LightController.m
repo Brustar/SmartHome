@@ -105,7 +105,8 @@
     
 
     [self.detailCell.power addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
-    
+    self.lightSlider.continuous = NO;
+   
     self.cell = [[[NSBundle mainBundle] loadNibNamed:@"ColourTableViewCell" owner:self options:nil] lastObject];
     
     [self setupSegmentLight];
@@ -479,6 +480,8 @@
 }
 - (IBAction)LightSlider:(id)sender {
     
+    [[SceneManager defaultManager] dimingScene:[self.sceneid intValue] brightness:[self.deviceid intValue]];
+    [self.lightSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
 }
 

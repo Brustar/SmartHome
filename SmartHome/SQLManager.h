@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "FMDatabase.h"
+#import "Device.h"
 
 #define DIMMER @"调光灯"
 @interface SQLManager : NSObject
@@ -104,7 +105,7 @@
 +(int)getRoomIDByBeacon:(int)beacon;
 +(NSString *)getRoomNameByRoomID:(int) rId;
 
-
++ (Device *)getDeviceWithDeviceID:(int) deviceID;
 
 +(BOOL)updateTotalVisited:(int)roomID;
 @end

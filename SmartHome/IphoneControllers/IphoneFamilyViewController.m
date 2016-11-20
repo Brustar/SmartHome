@@ -21,6 +21,7 @@
 #import "PackManager.h"
 #import "SocketManager.h"
 #import "SceneManager.h"
+#import "IphoneLightController.h"
 
 
 
@@ -30,11 +31,8 @@
 @property (weak, nonatomic)  IBOutlet UIView *supView;
 @property (nonatomic,strong) NSArray * dataSource;
 @property (nonatomic,strong) NSMutableArray * roomIdArrs;//房间数量
-@property (nonatomic,assign) NSInteger selectedSId;
-@property (nonatomic,assign) int selected;
-@property (nonatomic,assign) int roomID;
+
 @property (nonatomic,strong) NSArray *rooms;
-@property (nonatomic,strong) NSMutableArray *roomNames;
 
 @end
 
@@ -56,22 +54,14 @@
     // Do any additional setup after loading the view.
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.rooms = [SQLManager getAllRoomsInfo];
-    _roomNames = [NSMutableArray array];
-    
-    for (Room *room in self.rooms) {
-        NSString *roomName = room.rName;
-      
-        [_roomNames addObject:roomName];
-    }
     SocketManager *sock = [SocketManager defaultManager];
+    [sock connectTcp];
     sock.delegate = self;
-    
     NSData *data = [[SceneManager defaultManager] getRealSceneData];
     [sock.socket writeData:data withTimeout:1 tag:1];
     
    // [self sendRequestForGettingSceneConfig:@"cloud/RoomStatusList.aspx" withTag:1];
   
-    [self reachNotification];
 }
 
 //获取全屋配置
@@ -132,7 +122,7 @@
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     
-    return self.roomNames.count;
+    return self.rooms.count;
 
 }
 
@@ -149,40 +139,21 @@
     cell.DVDImageView.layer.cornerRadius = cell.DVDImageView.bounds.size.width / 2.0;
     cell.TVImageView.layer.cornerRadius = cell.TVImageView.bounds.size.width / 2.0;
     cell.musicImageVIew.layer.cornerRadius = cell.musicImageVIew.bounds.size.width / 2.0;
+    Room *room = self.rooms[indexPath.row];
+    cell.nameLabel.text = room.rName;
     
-    cell.nameLabel.text = _roomNames[indexPath.row];
-    
-
+    cell.tag = room.rId;
     return cell;
 }
--(void)reachNotification{
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(familyNotification:) name:@"subType" object:nil];
-}
-- (void)familyNotification:(NSNotification *)notification
-{
-    NSDictionary *dict = notification.userInfo;
-    
-    self.roomID = [dict[@"subType"] intValue];
-    
-    self.rooms = [SQLManager getScensByRoomId:self.roomID];
-    
-}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    Scene * scene = self.rooms[indexPath.row];
-//    self.selectedSId = scene.roomID;
     
-    
-    FamilyCell * cell = self.rooms[indexPath.row];
-    self.selectedSId = self.roomID;
-    
-    if (cell && indexPath.row < self.roomNames.count) {
-        
-       [self performSegueWithIdentifier:@"iphoneFamilyController" sender:self];
-        
-    
-    }
-        
+    UIStoryboard * oneStory = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+    IphoneLightController * VC = [oneStory instantiateViewControllerWithIdentifier:@"LightController"];
+    Room *room = self.rooms[indexPath.row];
+    VC.roomID = room.rId;
+    [self.navigationController pushViewController:VC animated:YES];
 }
 
 

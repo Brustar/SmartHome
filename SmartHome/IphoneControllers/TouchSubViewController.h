@@ -7,14 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "IphoneAddSceneController.h"
 
 @protocol TouchSubViewDelegate <NSObject>
 
-@optional
-
--(void)removeSecene;
+//收藏
 -(void)collectSecene;
+//关闭
 -(void)colseSecene;
 
 @end
@@ -22,7 +20,9 @@
 @interface TouchSubViewController : UIViewController
 
 @property (weak,nonatomic)id<TouchSubViewDelegate>delegate;
-
+@property (weak, nonatomic) IBOutlet UILabel *sceneName;
+@property (weak, nonatomic) IBOutlet UILabel *sceneDescribe;
 - (instancetype)initWithTitle:(NSString *)title;
-
+-(void)setSceneName:(UILabel *)sceneName;
+-(void)setSceneDescribe:(UILabel *)sceneDescribe;
 @end

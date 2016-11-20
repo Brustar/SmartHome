@@ -68,6 +68,9 @@
     }
     [self setupSubTypeView];
     
+    TouchSubViewController * touchVC = [[TouchSubViewController alloc] init];
+    touchVC.delegate = self;
+    
 }
 
 -(void)setupSubTypeView
