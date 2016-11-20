@@ -77,7 +77,7 @@
     
     self.tableView.tableFooterView = [UIView new];
     self.user.text = [[NSUserDefaults  standardUserDefaults] objectForKey:@"Account"];
-    self.userType = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Type"] intValue];
+    self.userType = [[[NSUserDefaults standardUserDefaults] objectForKey:@"UserType"] intValue];
     self.pwd.text = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Password"] decryptWithDes:DES_KEY];
    
 //    if ([CLLocationManager locationServicesEnabled]) {
@@ -159,7 +159,7 @@
     
     NSDictionary *dict = @{@"Account":self.user.text,@"Type":[NSNumber numberWithInteger:self.userType],@"Password":[self.pwd.text md5],@"pushtoken":pushToken, @"DeviceType":@(clientType)};
     [IOManager writeUserdefault:self.user.text forKey:@"Account"];
-    [IOManager writeUserdefault:[NSNumber numberWithInteger:self.userType] forKey:@"Type"];
+    [IOManager writeUserdefault:[NSNumber numberWithInteger:self.userType] forKey:@"UserType"];
     [IOManager writeUserdefault:[self.pwd.text encryptWithDes:DES_KEY] forKey:@"Password"];
     HttpManager *http=[HttpManager defaultManager];
     http.delegate=self;
@@ -480,6 +480,7 @@
         if ([responseObject[@"Result"] intValue]==0) {
             [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
             [IOManager writeUserdefault:responseObject[@"UserName"] forKey:@"UserName"];
+            
             NSArray *hostList = responseObject[@"HostList"];
             
             for(NSDictionary *hostID in hostList)
@@ -512,6 +513,7 @@
             self.tableView.hidden = YES;
             self.coverView.hidden = YES;
             [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
+            [IOManager writeUserdefault:responseObject[@"UserType"] forKey:@"UserType"];
             //检查版本号
             [self sendRequestForGettingConfigInfos:@"GetConfigVersion.aspx" withTag:4];
         }

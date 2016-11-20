@@ -30,6 +30,9 @@
     return [IOManager newPath:@"realScene"];
 }
 
++ (NSString *)planeScenePath {
+    return [IOManager newPath:@"planeScene"];
+}
 
 + (NSString *) favoritePath
 {

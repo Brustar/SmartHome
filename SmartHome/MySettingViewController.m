@@ -48,7 +48,7 @@
 {
     if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
-        if ([[IOManager getUserDefaultForKey:@"Type"] integerValue] == 2) { //如果是普通用户，不显示“权限控制”选项
+        if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) { //如果是普通用户，不显示“权限控制”选项
             return 4;
         }
         return 5;//如果是主人，显示“权限控制”选项
@@ -59,7 +59,7 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
    
-    if ([[IOManager getUserDefaultForKey:@"Type"] integerValue] == 2) { //如果是普通用户，不显示“权限控制”选项
+    if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) { //如果是普通用户，不显示“权限控制”选项
         if(section == 1)
         {
             return 2;
@@ -85,7 +85,7 @@
             break;
         case 1:
             
-            if ([[IOManager getUserDefaultForKey:@"Type"] integerValue] == 1) {
+            if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) {
                 title = @"权限控制";
             }else {
                 if(indexPath.row == 0)
@@ -99,7 +99,7 @@
             break;
         case 2:
         {
-           if ([[IOManager getUserDefaultForKey:@"Type"] integerValue] == 1) {
+           if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) {
                if(indexPath.row == 0)
                {
                    title = @"系统设置";
@@ -111,7 +111,7 @@
             break;
         }
         case 3:
-            if ([[IOManager getUserDefaultForKey:@"Type"] integerValue] == 1) {
+            if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) {
                 title = @"去评价";
             }else {
                 title = @"关于我们";
@@ -119,7 +119,7 @@
             
             break;
         case 4:
-            if ([[IOManager getUserDefaultForKey:@"Type"] integerValue] == 1) {
+            if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) {
                 title = @"关于我们";
             }
             
@@ -177,7 +177,7 @@
         
     }else if(indexPath.section == 1)
     {
-       if ([[IOManager getUserDefaultForKey:@"Type"] integerValue] == 1) {
+       if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) {
             [self performSegueWithIdentifier:@"accessSegue" sender:self];
        }else {
            if(indexPath.row == 0)
@@ -192,7 +192,7 @@
         
     }else if(indexPath.section == 2)
     {
-        if ([[IOManager getUserDefaultForKey:@"Type"] integerValue] == 1) {
+        if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) {
             if(indexPath.row == 0)
             {
                 [self performSegueWithIdentifier:@"systemSetSegue" sender:self];
@@ -206,7 +206,7 @@
         
     }else if(indexPath.section == 3)
     {
-        if ([[IOManager getUserDefaultForKey:@"Type"] integerValue] == 1) {
+        if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) {
             [self gotoAppStoreToComment];
         }else {
             [self performSegueWithIdentifier:@"aboutSegue" sender:self];
@@ -214,7 +214,7 @@
     
     }else if(indexPath.section == 4)
     {
-        if ([[IOManager getUserDefaultForKey:@"Type"] integerValue] == 1) {
+        if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) {
             [self performSegueWithIdentifier:@"aboutSegue" sender:self];
         }
         

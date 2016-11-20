@@ -357,7 +357,12 @@
     NSString *url = [NSString stringWithFormat:@"%@UserEdit.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     if (auothorToken) {
-        NSDictionary *dict = @{@"AuthorToken":auothorToken,@"OType":[NSNumber numberWithInteger:type]};
+        NSDictionary *dict = @{
+                               @"AuthorToken": auothorToken,
+                               @"OType": [NSNumber numberWithInteger:type],
+                               @"UserID": @(5)
+                              };
+        
         HttpManager *http=[HttpManager defaultManager];
         http.delegate = self;
         http.tag = tag;
