@@ -44,8 +44,8 @@
 {
     if (name.length >0) {
         
-      // int sceneid=[SQLManager saveMaxSceneId:scene name:name pic:@""];
-       // scene.sceneID=sceneid;
+        // int sceneid=[SQLManager saveMaxSceneId:scene name:name pic:@""];
+        // scene.sceneID=sceneid;
         
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"yyyyMMddHHmmss";
@@ -499,7 +499,6 @@
             NSString *deviceid=[NSString stringWithFormat:@"%d", light.deviceID];
             NSData *data=[[DeviceInfo defaultManager] changeBright:bright deviceID:deviceid];
             [sock.socket writeData:data withTimeout:1 tag:1];
-        
         }
     }
 }
