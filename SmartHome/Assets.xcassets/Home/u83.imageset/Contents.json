@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "风速-低-选择.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "u83.png",
       "scale" : "2x"
     },
     {

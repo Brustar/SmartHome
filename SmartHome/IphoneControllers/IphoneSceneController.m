@@ -28,6 +28,7 @@
 
 @interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,SceneCellDelegate,UIViewControllerPreviewingDelegate>
 @property (strong, nonatomic) IBOutlet IphoneRoomView *roomView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic,assign) int roomID;
 @property (nonatomic,strong) NSArray *roomList;
@@ -263,6 +264,14 @@
     [http sendPost:url param:dict];
 }
 
+//#pragma TouchSubViewController delegate
+////删除场景
+//-(void)removeSecene
+//{
+//    SceneCell * cell ;
+//    [self sceneDeleteAction:cell];
+//
+//}
 -(void)httpHandler:(id) responseObject tag:(int)tag
 {
     if((tag = 1))

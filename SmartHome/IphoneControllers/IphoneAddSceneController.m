@@ -12,6 +12,7 @@
 #import "MBProgressHUD+NJ.h"
 #import "KxMenu.h"
 
+
 @interface UIImagePickerController (LandScapeImagePicker)
 
 - (UIStatusBarStyle)preferredStatusBarStyle;

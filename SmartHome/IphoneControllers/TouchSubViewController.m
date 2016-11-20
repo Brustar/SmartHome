@@ -11,6 +11,8 @@
 #import "Scene.h"
 #import "SQLManager.h"
 
+
+@class IphoneEditSceneController;
 @interface TouchSubViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong)NSArray * arrayData;
@@ -40,6 +42,8 @@
     // Do any additional setup after loading the view.
     NSLog(@"%i", self.tableView.delegate == self);
     
+    IphoneEditSceneController * editScene;
+    self.delegate = editScene;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -65,36 +69,12 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) {
-//        self.cell = cell;
-//        cell.deleteBtn.hidden = YES;
-//        
-//        [SQLManager deleteScene:(int)cell.tag];
-//        Scene *scene = [[SceneManager defaultManager] readSceneByID:(int)cell.tag];
-//        [[SceneManager defaultManager] delScene:scene];
-//        
-//        NSString *url = [NSString stringWithFormat:@"%@SceneDelete.aspx",[IOManager httpAddr]];
-//        NSDictionary *dict = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"SID":[NSNumber numberWithInt:scene.sceneID]};
-//        HttpManager *http=[HttpManager defaultManager];
-//        http.delegate=self;
-//        http.tag = 1;
-//        [http sendPost:url param:dict];
-    }else if (indexPath.row == 1){
-        //判断先前我们设置的唯一标识
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"收藏场景" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:  UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-
-            IphoneAddSceneController * addSceneVC ;
-            Scene *scene = [[SceneManager defaultManager] readSceneByID:addSceneVC.sceneID];
-            
-            [[SceneManager defaultManager] favoriteScene:scene withName:scene.sceneName];
-            
-            
-        }];
-        UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-        [alert addAction:action1];
-        [alert addAction:action2];
+       
+        [self.delegate removeSecene];
         
-        [self presentViewController:alert animated:YES completion:nil];
+    }else if (indexPath.row == 1){
+     
+        [self.delegate collectSecene];
     }
 
 }
@@ -105,10 +85,8 @@
         
     }];
     UIPreviewAction *action1 = [UIPreviewAction actionWithTitle:@"关闭" style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-        IphoneAddSceneController * addSceneVC;
-        [[SceneManager defaultManager] poweroffAllDevice:addSceneVC.sceneID];
-        [self.navigationController popViewControllerAnimated:YES];
-        
+       
+        [self.delegate colseSecene];
     }];
     return @[action,action1];
 }
