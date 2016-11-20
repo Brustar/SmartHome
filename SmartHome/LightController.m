@@ -31,6 +31,13 @@
 
 - (IBAction)selectTypeOfLight:(UISegmentedControl *)sender;
 
+@property (weak, nonatomic) IBOutlet UIButton *sprightlierBtn;//明快
+
+@property (weak, nonatomic) IBOutlet UIButton *peacefulBtn;//幽静
+@property (weak, nonatomic) IBOutlet UIButton *romanceBtn;//浪漫
+
+@property (weak, nonatomic) IBOutlet UISlider *lightSlider;
+
 @end
 
 @implementation LightController
@@ -449,4 +456,14 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"light" object:nil];
 }
+
+- (IBAction)SprightlierBtn:(id)sender {
+}
+- (IBAction)PeacefulBtn:(id)sender {
+}
+- (IBAction)RomanceBtn:(id)sender {
+}
+- (IBAction)LightSlider:(id)sender {
+}
+
 @end
