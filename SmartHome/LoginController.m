@@ -483,23 +483,38 @@
             
             NSArray *hostList = responseObject[@"HostList"];
             
-            for(NSDictionary *hostID in hostList)
-            {
+            if ([hostList isKindOfClass:[NSArray class]] && hostList.count >0) {
                 
-                [self.hostIDS addObject:hostID[@"hostId"]];
+                for(NSDictionary *hostID in hostList)
+                {
+                    if ([hostID isKindOfClass:[NSDictionary class]] && hostID.count >0) {
+                        [self.hostIDS addObject:hostID[@"hostId"]];
+                    }
+                }
             }
             
-            [IOManager writeUserdefault:self.hostIDS forKey:@"HostIDS"];
-            if ([self.hostIDS count]>0) {
+            
+            if (self.hostIDS.count >0) {
+                [IOManager writeUserdefault:self.hostIDS forKey:@"HostIDS"];
+            }
+            
+            
+            if ([self.hostIDS count] >0) {
                 NSString *mid = self.hostIDS[0];
                 [IOManager writeUserdefault:mid forKey:@"HostID"];
                 info.masterID =[PackManager NSDataToUint16:mid];
             }
-            //NSInteger count = self.hostIDS.count;
+            
             //直接登录主机
-                
-            [self sendRequestToHostWithTag:2 andRow:0];
-            //[self goToViewController];
+            if ([self.hostIDS count] >0) {
+                [self sendRequestToHostWithTag:2 andRow:0];
+            }else {
+                NSLog(@"无主机ID，无法登录主机");
+                [MBProgressHUD showError:@"登录主机失败，未绑定主机"];
+            }
+            
+            
+            //[self goToViewController];//进入主页面
         }else{
                 [MBProgressHUD showError:responseObject[@"Msg"]];
             }

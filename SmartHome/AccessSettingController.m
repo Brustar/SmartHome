@@ -173,6 +173,11 @@
         {
             [MBProgressHUD showSuccess:@"成功转化为普通身份"];
             self.cell.detailTextLabel.text = @"普通用户";
+            if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]]) { //如果是自己
+                [UD setObject:@(2) forKey:@"UserType"];
+                [UD synchronize];
+            }
+            
           
         }else{
             [MBProgressHUD showError:responseObject[@"Msg"]];
@@ -185,7 +190,10 @@
         {
             [MBProgressHUD showSuccess:@"成功转化为主人身份"];
             self.cell.detailTextLabel.text = @"主人";
-            
+            if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]]) { //如果是自己
+                [UD setObject:@(1) forKey:@"UserType"];
+                [UD synchronize];
+            }
             
         }else{
             [MBProgressHUD showError:responseObject[@"Msg"]];
@@ -256,6 +264,11 @@
    
     if(tableView == self.userTableView)
     {
+        if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]] && [[UD objectForKey:@"UserType"] integerValue] == 2) {
+            [MBProgressHUD showError:@"你是普通用户，无权限操作"];
+            return;
+        }
+        
         self.usrID = self.userIDArr[indexPath.row];
          NSString *url = [NSString stringWithFormat:@"%@GetUserAccessInfo.aspx",[IOManager httpAddr]];
         self.recoredIDs = nil;
@@ -397,8 +410,9 @@
 //点击转换身份按钮
 - (IBAction)changeIdentityType:(UIButton *)sender {
     
-    if ([self.userName.text isEqualToString:]) {
-        <#statements#>
+    if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]] && [[UD objectForKey:@"UserType"] integerValue] == 2) {
+        [MBProgressHUD showError:@"你是普通用户，无权限操作"];
+        //return;
     }
     
     NSString *str = sender.titleLabel.text;

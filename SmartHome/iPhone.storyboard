@@ -3674,7 +3674,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tYW-Cs-d4q" id="fB7-tf-JMW">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -3718,31 +3718,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BPy-QM-O7L">
-                                <rect key="frame" x="0.0" y="64" width="375" height="151"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="151" id="lTT-9G-S5i"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="dataSource" destination="kSb-Bg-Wad" id="c64-Oo-70A"/>
-                                    <outlet property="delegate" destination="kSb-Bg-Wad" id="Whp-fs-JxX"/>
-                                </connections>
-                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YSV-vv-ujc">
-                                <rect key="frame" x="66" y="258" width="243" height="200"/>
+                                <rect key="frame" x="55" y="211" width="265" height="245"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="场景名称" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a3R-3c-xGA">
-                                        <rect key="frame" x="17" y="26" width="208" height="29"/>
+                                        <rect key="frame" x="17" y="10" width="231" height="29"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="29" id="wBV-n2-EKh"/>
+                                            <constraint firstAttribute="height" constant="29" id="KsO-s6-Yga"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="场景里面的设备简介" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Exg-c7-kG1">
-                                        <rect key="frame" x="32" y="80" width="187" height="96"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="场景里面的设备简介" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Exg-c7-kG1">
+                                        <rect key="frame" x="24" y="81" width="217" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -3750,25 +3739,21 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.90309139530000004" green="0.90309139530000004" blue="0.90309139530000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Exg-c7-kG1" secondAttribute="trailing" constant="24" id="1lL-ll-KZt"/>
-                                    <constraint firstItem="Exg-c7-kG1" firstAttribute="top" secondItem="a3R-3c-xGA" secondAttribute="bottom" constant="25" id="4hp-au-dEr"/>
-                                    <constraint firstItem="a3R-3c-xGA" firstAttribute="top" secondItem="YSV-vv-ujc" secondAttribute="top" constant="26" id="8Py-yG-acr"/>
-                                    <constraint firstItem="Exg-c7-kG1" firstAttribute="leading" secondItem="YSV-vv-ujc" secondAttribute="leading" constant="32" id="M4Q-Eo-pfz"/>
-                                    <constraint firstItem="a3R-3c-xGA" firstAttribute="leading" secondItem="YSV-vv-ujc" secondAttribute="leading" constant="17" id="NkC-Q6-KV7"/>
-                                    <constraint firstAttribute="bottom" secondItem="Exg-c7-kG1" secondAttribute="bottom" constant="24" id="hGt-pW-JYe"/>
-                                    <constraint firstItem="a3R-3c-xGA" firstAttribute="centerX" secondItem="YSV-vv-ujc" secondAttribute="centerX" id="pXf-hX-u0f"/>
+                                    <constraint firstAttribute="trailing" secondItem="a3R-3c-xGA" secondAttribute="trailing" constant="17" id="3fX-c3-mCG"/>
+                                    <constraint firstItem="Exg-c7-kG1" firstAttribute="leading" secondItem="YSV-vv-ujc" secondAttribute="leading" constant="24" id="EX8-5J-EKQ"/>
+                                    <constraint firstItem="Exg-c7-kG1" firstAttribute="top" secondItem="a3R-3c-xGA" secondAttribute="bottom" constant="42" id="IBV-Ed-QYr"/>
+                                    <constraint firstItem="a3R-3c-xGA" firstAttribute="leading" secondItem="YSV-vv-ujc" secondAttribute="leading" constant="17" id="Vv0-Aj-QdM"/>
+                                    <constraint firstAttribute="trailing" secondItem="Exg-c7-kG1" secondAttribute="trailing" constant="24" id="qFg-xS-CPR"/>
+                                    <constraint firstItem="a3R-3c-xGA" firstAttribute="top" secondItem="YSV-vv-ujc" secondAttribute="top" constant="10" id="w2A-Xm-JsC"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="YSV-vv-ujc" firstAttribute="top" secondItem="BPy-QM-O7L" secondAttribute="bottom" constant="43" id="GZx-9I-oeW"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="YSV-vv-ujc" secondAttribute="trailing" constant="50" id="RiY-0a-YoB"/>
-                            <constraint firstItem="BPy-QM-O7L" firstAttribute="leading" secondItem="co1-cr-sYf" secondAttribute="leading" id="a5K-Na-rxo"/>
-                            <constraint firstItem="YSV-vv-ujc" firstAttribute="leading" secondItem="co1-cr-sYf" secondAttribute="leadingMargin" constant="50" id="a9g-PW-KmQ"/>
-                            <constraint firstAttribute="trailing" secondItem="BPy-QM-O7L" secondAttribute="trailing" id="cM2-D3-ci5"/>
-                            <constraint firstItem="2C2-0F-yE4" firstAttribute="top" secondItem="YSV-vv-ujc" secondAttribute="bottom" constant="209" id="ct5-jL-R2o"/>
-                            <constraint firstItem="BPy-QM-O7L" firstAttribute="top" secondItem="Ji8-xK-6Og" secondAttribute="bottom" id="jmD-nB-pyG"/>
+                            <constraint firstItem="YSV-vv-ujc" firstAttribute="top" secondItem="Ji8-xK-6Og" secondAttribute="bottom" constant="147" id="C57-22-9Vb"/>
+                            <constraint firstItem="YSV-vv-ujc" firstAttribute="centerY" secondItem="co1-cr-sYf" secondAttribute="centerY" id="Kec-Cq-67i"/>
+                            <constraint firstItem="YSV-vv-ujc" firstAttribute="leading" secondItem="co1-cr-sYf" secondAttribute="leadingMargin" constant="39" id="Vb1-am-WqR"/>
+                            <constraint firstItem="YSV-vv-ujc" firstAttribute="centerX" secondItem="co1-cr-sYf" secondAttribute="centerX" id="mWF-h0-kNv"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="3D-touch" id="vwL-AS-HIU"/>
@@ -3776,7 +3761,6 @@
                         <outlet property="sceneDescribe" destination="Exg-c7-kG1" id="ODM-yx-fbg"/>
                         <outlet property="sceneName" destination="a3R-3c-xGA" id="I5H-Ec-TnT"/>
                         <outlet property="sceneView" destination="YSV-vv-ujc" id="cQ6-PJ-lpK"/>
-                        <outlet property="tableView" destination="BPy-QM-O7L" id="5Xi-gG-PdE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aXH-5W-fNL" userLabel="First Responder" sceneMemberID="firstResponder"/>
