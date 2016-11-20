@@ -264,20 +264,30 @@
    
     if(tableView == self.userTableView)
     {
-        if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]] && [[UD objectForKey:@"UserType"] integerValue] == 2) {
-            [MBProgressHUD showError:@"你是普通用户，无权限操作"];
-            return;
-        }
         
         self.usrID = self.userIDArr[indexPath.row];
          NSString *url = [NSString stringWithFormat:@"%@GetUserAccessInfo.aspx",[IOManager httpAddr]];
         self.recoredIDs = nil;
-        [self sendRequest:url withTag:2];
-        self.areaTableView.hidden = NO;
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         self.cell = cell;
         self.selectedIndexPath = indexPath;
         self.userName.text = cell.textLabel.text;
+        
+        
+        if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]] && [[UD objectForKey:@"UserType"] integerValue] == 2) {
+            [MBProgressHUD showError:@"你是普通用户，无权限操作"];
+            self.areaTableView.hidden = YES;
+            return;
+            
+        }else if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]] && [[UD objectForKey:@"UserType"] integerValue] == 1) {
+            self.areaTableView.hidden = YES;
+            return;
+        }
+        
+        //只有点击他人时，才显示权限列表，看自己的权限列表没意义
+        [self sendRequest:url withTag:2];
+        self.areaTableView.hidden = NO;
+        
         if([cell.detailTextLabel.text isEqualToString:@"主人"])
         {
             [self.identityType setTitle:@"转化为普通身份" forState:UIControlStateNormal];

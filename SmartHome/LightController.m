@@ -151,7 +151,8 @@
     for(id device in self.scene.devices)
     {
         if ([device isKindOfClass:[Light class]] && ((Light*)device).deviceID == [self.deviceid intValue]) {
-            self.detailCell.bright.value=((Light*)device).brightness;
+            float brightness_f = (float)((Light *)device).brightness;
+            self.detailCell.bright.value = brightness_f/100;
             self.detailCell.valueLabel.text = [NSString stringWithFormat:@"%d%%", (int)(self.detailCell.bright.value * 100)];
             self.detailCell.power.on=((Light*)device).isPoweron;
             if ([((Light*)device).color count]>2) {
