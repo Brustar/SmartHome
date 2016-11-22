@@ -19,6 +19,9 @@
 #import "Room.h"
 #import "SQLManager.h"
 #import "PackManager.h"
+#import "SocketManager.h"
+#import "SceneManager.h"
+#import "IphoneLightController.h"
 
 
 
@@ -26,21 +29,9 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @property (weak, nonatomic)  IBOutlet UIView *supView;
-@property (nonatomic,strong) UIScrollView * scrollView;
-@property (nonatomic,strong) UIImageView * supImageView;
 @property (nonatomic,strong) NSArray * dataSource;
 @property (nonatomic,strong) NSMutableArray * roomIdArrs;//房间数量
-@property (nonatomic,strong) NSMutableArray * lightArrs;//
-@property (nonatomic,strong) NSMutableArray * curtainArrs;//
-@property (nonatomic,strong) NSMutableArray * musicArrs;//
-@property (nonatomic,strong) NSMutableArray * dvdArrs;//
-@property (nonatomic,strong) NSMutableArray * tvArrs;//
-@property (nonatomic,strong) NSMutableArray * tempArrs;
-@property (nonatomic,strong) NSMutableArray * humidityArrs;//湿度
-@property (nonatomic,strong) NSMutableArray * airconditionArrs;
-@property (nonatomic,assign) int selectedSId;
-@property (nonatomic,assign) int selected;
-@property (nonatomic,assign) int roomID;
+
 @property (nonatomic,strong) NSArray *rooms;
 
 @end
@@ -56,159 +47,56 @@
     return _roomIdArrs;
 
 }
--(NSMutableArray *)lightArrs
-{
-    if (!_lightArrs) {
-        _lightArrs = [NSMutableArray array];
-    }
-    return _lightArrs;
-}
--(NSMutableArray *)curtainArrs
-{
-    if (!_curtainArrs) {
-        _curtainArrs = [NSMutableArray array];
-    }
-    
-    return _curtainArrs;
 
-}
--(NSMutableArray *)musicArrs
-{
-    if (!_musicArrs) {
-        _musicArrs =[NSMutableArray array];
-    }
-    
-    return _musicArrs;
-}
--(NSMutableArray *)dvdArrs
-{
-    if (!_dvdArrs) {
-        _dvdArrs = [NSMutableArray array];
-    }
-    
-    return _dvdArrs;
 
-}
-
--(NSMutableArray *)tvArrs
-{
-    if (!_tvArrs) {
-        _tvArrs = [NSMutableArray array];
-    }
-    
-    return _tvArrs;
-
-}
--(NSMutableArray *)tempArrs
-{
-    if (!_tempArrs) {
-        _tempArrs = [NSMutableArray array];
-    }
-    
-    return _tempArrs;
-
-}
--(NSMutableArray *)humidityArrs
-{
-
-    if (!_humidityArrs) {
-        _humidityArrs = [NSMutableArray array];
-    }
-    
-    return _humidityArrs;
-}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.automaticallyAdjustsScrollViewInsets = NO;
+    self.rooms = [SQLManager getAllRoomsInfo];
+    SocketManager *sock = [SocketManager defaultManager];
+    [sock connectTcp];
+    sock.delegate = self;
+    NSData *data = [[SceneManager defaultManager] getRealSceneData];
+    [sock.socket writeData:data withTimeout:1 tag:1];
     
-    self.scrollView = [[UIScrollView alloc] init];
-    self.scrollView.bounces = NO;
-    self.selected = 0;
-   [self reachNotification];
-      [self sendRequest];
+   // [self sendRequestForGettingSceneConfig:@"cloud/RoomStatusList.aspx" withTag:1];
   
-    
 }
 
--(void)sendRequest
+//获取全屋配置
+- (void)sendRequestForGettingSceneConfig:(NSString *)str withTag:(int)tag;
 {
-    NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSString *url = [NSString stringWithFormat:@"%@cloud/RoomStatusList.aspx",[IOManager httpAddr]];
-    if (authorToken) {
-        NSDictionary *dic = @{@"AuthorToken":authorToken};
-        HttpManager *http=[HttpManager defaultManager];
-        http.delegate = self;
-        http.tag = 1;
-        [http sendPost:url param:dic];
-    }
+    NSString *url = [NSString stringWithFormat:@"%@%@",[IOManager httpAddr],str];
+    
+    NSDictionary *dic = @{
+                          @"AuthorToken" : [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],
+                          
+                    
+                          };
+    HttpManager *http = [HttpManager defaultManager];
+    http.delegate = self;
+    http.tag = tag;
+    [http sendPost:url param:dic];
+    NSLog(@"Request URL:%@", url);
 }
--(void)httpHandler:(id)responseObject tag:(int)tag
+
+#pragma mark - Http callback
+- (void)httpHandler:(id)responseObject tag:(int)tag
 {
-    if(tag == 1)
-    {
-        if ([responseObject[@"Result"] intValue]==0)
-        {
-            
-            NSArray *dic = responseObject[@"list"];
-            
-            NSMutableArray * roomidArr = [NSMutableArray array];
-            NSMutableArray * lightArr =[NSMutableArray array];
-            NSMutableArray * curtainArr = [NSMutableArray array];
-            NSMutableArray * musicArr = [NSMutableArray array];
-            NSMutableArray * dvdArr = [NSMutableArray array];
-            NSMutableArray * tvArr = [NSMutableArray array];
-            NSMutableArray * tempArr = [NSMutableArray array];
-            NSMutableArray * humidityArr = [NSMutableArray array];
-            NSMutableArray * airconditionArr = [NSMutableArray array];
-            if ([dic isKindOfClass:[NSArray class]]) {
-                for(NSDictionary *dicDetail in dic)
-                {
-                    if ([dicDetail isKindOfClass:[NSDictionary class]]) {
-                        [lightArr addObject:dicDetail[@"light"]];
-                        [curtainArr addObject:dicDetail[@"curtain"]];
-                        [roomidArr addObject:dicDetail[@"roomid"]];
-                        [dvdArr addObject:dicDetail[@"dvd"]];
-                        [tvArr addObject:dicDetail[@"tv"]];
-                        [musicArr addObject:dicDetail[@"bgmusic"]];
-                        [tempArr addObject:dicDetail[@"temperature"]];
-                        [humidityArr addObject:dicDetail[@"humidity"]];
-                        [airconditionArr addObject:dicDetail[@"aircondition"]];
-                     
-                    }
-                    [self.lightArrs addObject:lightArr];
-                    [self.curtainArrs addObject:curtainArr];
-                    [self.roomIdArrs addObject:roomidArr];
-                    [self.dvdArrs addObject:dvdArr];
-                    [self.tvArrs addObject:tvArr];
-                    [self.musicArrs addObject:musicArr];
-                    [self.tempArrs addObject:tempArr];
-                    [self.humidityArrs addObject:humidityArr];
-                    [self.airconditionArrs addObject:airconditionArr];
-                }
+    if ([responseObject isKindOfClass:[NSDictionary class]]) {
+        NSLog(@"responseObject:%@", responseObject);
+        if ([responseObject[@"Result"] integerValue] == 0) {
+            NSDictionary *infoDict = responseObject[@"list"];
+            if ([infoDict isKindOfClass:[NSDictionary class]]) {
+               
+                
             }
-            
-            
-            
-            [self.collectionView reloadData];
-        }else{
-            [MBProgressHUD showError:responseObject[@"Msg"]];
-        }
-    }else if(tag == 2)
-    {
-        if([responseObject[@"Result"] intValue]==0)
-        {
-            [MBProgressHUD showSuccess:@"删除成功"];
-            
-        }else {
-            [MBProgressHUD showError:responseObject[@"Msg"]];
         }
     }
-    
-    
-    
-    
 }
+
+
 #pragma mark - TCP recv delegate
 - (void)recv:(NSData *)data withTag:(long)tag
 {
@@ -234,7 +122,7 @@
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     
-    return self.roomIdArrs.count;
+    return self.rooms.count;
 
 }
 
@@ -242,13 +130,6 @@
 {
    FamilyCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     
-    self.rooms = [SQLManager getAllRoomsInfo];
-    NSMutableArray *roomNames = [NSMutableArray array];
-    
-    for (Room *room in self.rooms) {
-        NSString *roomName = room.rName;
-        [roomNames addObject:roomName];
-    }
     cell.layer.masksToBounds = YES;
     cell.supImageView.layer.cornerRadius = cell.supImageView.bounds.size.width / 2.0;
     cell.subImageView.layer.cornerRadius = cell.subImageView.bounds.size.width /2.0;
@@ -258,31 +139,24 @@
     cell.DVDImageView.layer.cornerRadius = cell.DVDImageView.bounds.size.width / 2.0;
     cell.TVImageView.layer.cornerRadius = cell.TVImageView.bounds.size.width / 2.0;
     cell.musicImageVIew.layer.cornerRadius = cell.musicImageVIew.bounds.size.width / 2.0;
+    Room *room = self.rooms[indexPath.row];
+    cell.nameLabel.text = room.rName;
     
-    cell.nameLabel.text = roomNames[indexPath.row];
-    
-
+    cell.tag = room.rId;
     return cell;
 }
--(void)reachNotification{
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(familyNotification:) name:@"subType" object:nil];
-}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:@"iphoneFamilyController" sender:self];
     
-        
+    UIStoryboard * oneStory = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+    IphoneLightController * VC = [oneStory instantiateViewControllerWithIdentifier:@"LightController"];
+    Room *room = self.rooms[indexPath.row];
+    VC.roomID = room.rId;
+    [self.navigationController pushViewController:VC animated:YES];
 }
 
-- (void)familyNotification:(NSNotification *)notification
-{
-    NSDictionary *dict = notification.userInfo;
-    
-    self.roomID = [dict[@"subType"] intValue];
-    
-    self.rooms = [SQLManager getScensByRoomId:self.roomID];
-    
-}
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return CGSizeMake(cellWidth, cellWidth);

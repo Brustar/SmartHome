@@ -7,9 +7,7 @@
 
 @interface RTSPPlayer ()
 @property (nonatomic, retain) AudioStreamer *audioController;
-@end
 
-@interface RTSPPlayer (private)
 -(void)convertFrameToRGB;
 -(UIImage *)imageFromAVPicture:(AVPicture)pict width:(int)width height:(int)height;
 -(void)savePicture:(AVPicture)pFrame width:(int)width height:(int)height index:(int)iFrame;

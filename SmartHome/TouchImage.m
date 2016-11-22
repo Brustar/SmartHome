@@ -49,22 +49,50 @@
     if ([rooms isKindOfClass:[NSArray class]] && rooms.count >0) {
         NSDictionary *room = rooms[0];
         if ([room isKindOfClass:[NSDictionary class]]) {
+            NSString *bgImgURL = room[@"image"];//主背景
             NSArray *rects = room[@"rects"];
-            if ([rects isKindOfClass:[NSArray class]] && rects.count >0) {
-                NSDictionary *rectDict = rects[0];
-                if ([rectDict isKindOfClass:[NSDictionary class]] && rectDict.count >0) {
-                    NSString *rectStr = rectDict[@"rect"];
-                    if (rectStr.length >0) {
-                        CGRect rect = CGRectFromString(rectStr);
-                        if (CGRectContainsPoint(rect,point)) {
-                            NSString *nextImgURL = rectDict[@"nextImg"];
-                            if (nextImgURL.length >0) {
-                                [self sd_setImageWithURL:[NSURL URLWithString:nextImgURL] placeholderImage:[UIImage imageNamed:@"xxx.png"] options:SDWebImageRetryFailed];
+            if ([rects isKindOfClass:[NSArray class]]) {
+                
+                for (NSDictionary *rectDict in rects) {
+                    if ([rectDict isKindOfClass:[NSDictionary class]] && rectDict.count >0) {
+                        NSString *rectStr = rectDict[@"rect"];
+                        NSNumber *deviceID = rectDict[@"deviceID"];
+                        if (rectStr.length >0) {
+                            CGRect rect = CGRectFromString(rectStr);
+                            if (CGRectContainsPoint(rect,point)) {
+                                
+                                if (self.powerOn) {
+                                    
+                                    //关灯
+                                    if (deviceID && _delegate && [_delegate respondsToSelector:@selector(closeDeviceWithDeviceID:)]) {
+                                        [_delegate closeDeviceWithDeviceID:deviceID.stringValue];
+                                    }
+                                    
+                                    //背景
+                                    NSString *nextImgURL = rectDict[@"nextImg"];
+                                    if (nextImgURL.length >0) {
+                                        [self sd_setImageWithURL:[NSURL URLWithString:nextImgURL] placeholderImage:[UIImage imageNamed:@"xxx.png"] options:SDWebImageRetryFailed];
+                                    }
+                                    self.powerOn = NO;
+                                    
+                                }else {
+                                    
+                                    //开灯
+                                    if (deviceID && _delegate && [_delegate respondsToSelector:@selector(openDeviceWithDeviceID:)]) {
+                                        [_delegate openDeviceWithDeviceID:deviceID.stringValue];
+                                    }
+                                    
+                                    //背景
+                                    if (bgImgURL.length >0) {
+                                        [self sd_setImageWithURL:[NSURL URLWithString:bgImgURL] placeholderImage:[UIImage imageNamed:@"xxx.png"] options:SDWebImageRetryFailed];
+                                    }
+                                    self.powerOn = YES;
+                                }
+                                
+                                break;
                             }
-                            
                         }
                     }
-                    
                 }
             }
         }
@@ -117,7 +145,7 @@
 
             }
 
-            [self.delegate performSegueWithIdentifier:segue sender:self.delegate];
+            //[self.delegate performSegueWithIdentifier:segue sender:self.delegate];
 
         }
     }

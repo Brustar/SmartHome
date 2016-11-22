@@ -8,12 +8,24 @@
 #define REAL_IMAGE 1
 #define PLANE_IMAGE 2
 
+@protocol TouchImageDelegate;
+
 @interface TouchImage : UIImageView
 
 @property (nonatomic) int viewFrom;
 
 @property (nonatomic) int count;
 
-@property (strong,nonatomic) id delegate;
+@property (nonatomic, assign) BOOL powerOn;//灯的开关状态
+
+@property (nonatomic, assign) id<TouchImageDelegate>delegate;
+
+@end
+
+@protocol TouchImageDelegate <NSObject>
+
+@optional
+- (void)openDeviceWithDeviceID:(NSString *)deviceID;
+- (void)closeDeviceWithDeviceID:(NSString *)deviceID;
 
 @end

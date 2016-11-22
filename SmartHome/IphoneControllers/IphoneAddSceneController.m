@@ -12,6 +12,7 @@
 #import "MBProgressHUD+NJ.h"
 #import "KxMenu.h"
 
+
 @interface UIImagePickerController (LandScapeImagePicker)
 
 - (UIStatusBarStyle)preferredStatusBarStyle;
@@ -23,7 +24,13 @@
 
 - (NSUInteger) supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationMaskPortrait;
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        return UIInterfaceOrientationMaskLandscape;
+        
+    }else {
+        return UIInterfaceOrientationMaskPortrait;
+    }
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle

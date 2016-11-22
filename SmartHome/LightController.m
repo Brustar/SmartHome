@@ -13,6 +13,9 @@
 #import "Device.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
+#import "SceneManager.h"
+
+
 
 @interface LightController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *favButt;//收藏
@@ -31,6 +34,14 @@
 
 - (IBAction)selectTypeOfLight:(UISegmentedControl *)sender;
 
+@property (weak, nonatomic) IBOutlet UIButton *sprightlierBtn;//明快
+
+@property (weak, nonatomic) IBOutlet UIButton *peacefulBtn;//幽静
+@property (weak, nonatomic) IBOutlet UIButton *romanceBtn;//浪漫
+
+@property (weak, nonatomic) IBOutlet UISlider *lightSlider;//控制所有灯的亮度调节
+
+@property (nonatomic,assign) int sceneID;
 @end
 
 @implementation LightController
@@ -94,7 +105,8 @@
     
 
     [self.detailCell.power addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
-    
+    self.lightSlider.continuous = NO;
+   
     self.cell = [[[NSBundle mainBundle] loadNibNamed:@"ColourTableViewCell" owner:self options:nil] lastObject];
     
     [self setupSegmentLight];
@@ -115,7 +127,48 @@
     
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
+ 
+    [_lightSlider addTarget:self action:@selector(onLightSliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+    
+    _sprightlierBtn.layer.cornerRadius = 8.0;
+    _sprightlierBtn.layer.masksToBounds = YES;
+    
+    _romanceBtn.layer.cornerRadius = 8.0;
+    _romanceBtn.layer.masksToBounds = YES;
+    
+    _peacefulBtn.layer.cornerRadius = 8.0;
+    _peacefulBtn.layer.masksToBounds = YES;
+    
+   
+    
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        CGRect frame1 = _sprightlierBtn.frame;
+        frame1.origin.y += 20;
+        _sprightlierBtn.frame = frame1;
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
+- (void)onLightSliderValueChanged:(UISlider *)slider {
+    [[SceneManager defaultManager] dimingScene:[self.sceneid intValue] brightness:(int)(slider.value*100)];
+    
+    self.detailCell.bright.value = slider.value;
+    
+    
+    self.detailCell.valueLabel.text = [NSString stringWithFormat:@"%d%%", (int)(self.detailCell.bright.value * 100)];
+    //self.detailCell.power.on = self.detailCell.bright.value >0;
+    
+    [self save:self.detailCell.bright];
+}
+
 - (IBAction)favButt:(id)sender {
     
     
@@ -139,7 +192,9 @@
     for(id device in self.scene.devices)
     {
         if ([device isKindOfClass:[Light class]] && ((Light*)device).deviceID == [self.deviceid intValue]) {
-            self.detailCell.bright.value=((Light*)device).brightness;
+            float brightness_f = (float)((Light *)device).brightness;
+            self.detailCell.bright.value = brightness_f/100;
+            _lightSlider.value = brightness_f/100;
             self.detailCell.valueLabel.text = [NSString stringWithFormat:@"%d%%", (int)(self.detailCell.bright.value * 100)];
             self.detailCell.power.on=((Light*)device).isPoweron;
             if ([((Light*)device).color count]>2) {
@@ -224,7 +279,7 @@
     }
     
     if (![etype isEqualToString:@"01"] && [sender isEqual:self.detailCell.bright]) {
-        self.detailCell.power.on=self.detailCell.bright.value>0;
+        self.detailCell.power.on = self.detailCell.bright.value >0;
         
         NSData *data=[[DeviceInfo defaultManager] changeBright:self.detailCell.bright.value*100 deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
@@ -445,8 +500,33 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark -
+
+//明快
+- (IBAction)SprightlierBtn:(id)sender {
+    
+    [[SceneManager defaultManager] sprightly:[self.sceneid intValue]];
+}
+//幽静
+- (IBAction)PeacefulBtn:(id)sender {
+    
+    [[SceneManager defaultManager] gloom:[self.sceneid intValue]];
+}
+//浪漫
+- (IBAction)RomanceBtn:(id)sender {
+    
+    [[SceneManager defaultManager] romantic:[self.sceneid intValue]];
+}
+- (IBAction)LightSlider:(id)sender {
+    
+    [[SceneManager defaultManager] dimingScene:[self.sceneid intValue] brightness:[self.deviceid intValue]];
+    [self.lightSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
+    
+}
+
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"light" object:nil];
 }
+
 @end

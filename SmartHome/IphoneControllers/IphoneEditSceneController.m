@@ -29,8 +29,9 @@
 #import "WindowSlidingController.h"
 #import "BgMusicController.h"
 #import "CollectionViewCell.h"
+#import "TouchSubViewController.h"
 
-@interface IphoneEditSceneController ()<IphoneTypeViewDelegate>
+@interface IphoneEditSceneController ()<IphoneTypeViewDelegate,TouchSubViewDelegate>
 
 
 @property (weak, nonatomic) IBOutlet IphoneTypeView *subTypeView;
@@ -66,6 +67,9 @@
         self.saveBarBtn.enabled = NO;
     }
     [self setupSubTypeView];
+    
+    TouchSubViewController * touchVC = [[TouchSubViewController alloc] init];
+    touchVC.delegate = self;
     
 }
 
@@ -281,8 +285,18 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma TouchSubViewController delegate
 
-
+//关闭场景
+-(void)colseSecene
+{
+    [self closeScene:self.saveBarBtn];
+}
+//收藏场景
+-(void)collectSecene
+{
+    [self favorScene];
+}
 - (IBAction)storeScene:(id)sender {
     
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请选择" message:@"" preferredStyle:UIAlertControllerStyleAlert];
@@ -341,6 +355,7 @@
     
     
 }
+
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {

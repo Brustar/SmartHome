@@ -27,9 +27,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.titleArr = @[@"场景",@"家庭",@"实景",@"我的"];
+    self.titleArr = @[@"家庭",@"场景",@"实景",@"我的"];
     self.titleImageArr = @[@"icone-2",@"room",@"scene",@"icone-1"];
-    
     self.tableView.tableFooterView = [UIView new];
     self.tableView.tableHeaderView = self.headView;
     [self setupChilderController];
@@ -50,10 +49,11 @@
 
 - (void)setupChilderController {
     
-    IphoneSceneController *scene = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
-    [self setupVc:scene title:@"场景"];
     IphoneFamilyViewController * familyVC = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"iphoneFamilyViewController"];
     [self setupVc:familyVC title:@"家庭"];
+    IphoneSceneController *scene = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
+    [self setupVc:scene title:@"场景"];
+   
 //    IphoneDeviceListController *deviceList = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"IphoneDeviceListController"];
 //    [self setupVc:deviceList title:@"设备"];
     

@@ -28,6 +28,7 @@
 
 @interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,SceneCellDelegate,UIViewControllerPreviewingDelegate>
 @property (strong, nonatomic) IBOutlet IphoneRoomView *roomView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic,assign) int roomID;
 @property (nonatomic,strong) NSArray *roomList;
@@ -183,13 +184,15 @@
 
 - (nullable UIViewController *)previewingContext:(id <UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location
 {
-    NSIndexPath * indexPath =[_collectionView indexPathForItemAtPoint:location];
+//    NSIndexPath * indexPath =[_collectionView indexPathForItemAtPoint:location];
     
      UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     TouchSubViewController * touchSubViewVC = [storyboard instantiateViewControllerWithIdentifier:@"TouchSubViewController"];
       touchSubViewVC.preferredContentSize = CGSizeMake(0.0f,500.0f);
+    touchSubViewVC.sceneName.text = self.scene.sceneName;
+    touchSubViewVC.sceneDescribe.text = @"uuiiihubb";
     
-    touchSubViewVC.title = self.arrayData[indexPath.row];
+//    touchSubViewVC.title = self.arrayData[indexPath.row];
     
     return touchSubViewVC;
 }
@@ -211,12 +214,12 @@
     cell.layer.cornerRadius = 20;
     cell.layer.masksToBounds = YES;
 
-    Scene *scene = self.scenes[indexPath.row];
-    cell.tag = scene.sceneID;
-    cell.scenseName.text = scene.sceneName;
+    self.scene = self.scenes[indexPath.row];
+    cell.tag = self.scene.sceneID;
+    cell.scenseName.text = self.scene.sceneName;
     cell.delegate = self;
 //    cell.imgView.image = [UIImage imageNamed:@"u2.png"];
-    [cell.imgView sd_setImageWithURL:[NSURL URLWithString: scene.picName] placeholderImage:[UIImage imageNamed:@"PL"]];
+    [cell.imgView sd_setImageWithURL:[NSURL URLWithString: self.scene.picName] placeholderImage:[UIImage imageNamed:@"PL"]];
     
     [cell useLongPressGesture];
    [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];  
@@ -263,6 +266,14 @@
     [http sendPost:url param:dict];
 }
 
+//#pragma TouchSubViewController delegate
+////删除场景
+//-(void)removeSecene
+//{
+//    SceneCell * cell ;
+//    [self sceneDeleteAction:cell];
+//
+//}
 -(void)httpHandler:(id) responseObject tag:(int)tag
 {
     if((tag = 1))

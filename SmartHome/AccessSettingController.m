@@ -173,6 +173,11 @@
         {
             [MBProgressHUD showSuccess:@"成功转化为普通身份"];
             self.cell.detailTextLabel.text = @"普通用户";
+            if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]]) { //如果是自己
+                [UD setObject:@(2) forKey:@"UserType"];
+                [UD synchronize];
+            }
+            
           
         }else{
             [MBProgressHUD showError:responseObject[@"Msg"]];
@@ -185,7 +190,10 @@
         {
             [MBProgressHUD showSuccess:@"成功转化为主人身份"];
             self.cell.detailTextLabel.text = @"主人";
-            
+            if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]]) { //如果是自己
+                [UD setObject:@(1) forKey:@"UserType"];
+                [UD synchronize];
+            }
             
         }else{
             [MBProgressHUD showError:responseObject[@"Msg"]];
@@ -256,15 +264,30 @@
    
     if(tableView == self.userTableView)
     {
+        
         self.usrID = self.userIDArr[indexPath.row];
          NSString *url = [NSString stringWithFormat:@"%@GetUserAccessInfo.aspx",[IOManager httpAddr]];
         self.recoredIDs = nil;
-        [self sendRequest:url withTag:2];
-        self.areaTableView.hidden = NO;
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         self.cell = cell;
         self.selectedIndexPath = indexPath;
         self.userName.text = cell.textLabel.text;
+        
+        
+        if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]] && [[UD objectForKey:@"UserType"] integerValue] == 2) {
+            [MBProgressHUD showError:@"你是普通用户，无权限操作"];
+            self.areaTableView.hidden = YES;
+            return;
+            
+        }else if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]] && [[UD objectForKey:@"UserType"] integerValue] == 1) {
+            self.areaTableView.hidden = YES;
+            return;
+        }
+        
+        //只有点击他人时，才显示权限列表，看自己的权限列表没意义
+        [self sendRequest:url withTag:2];
+        self.areaTableView.hidden = NO;
+        
         if([cell.detailTextLabel.text isEqualToString:@"主人"])
         {
             [self.identityType setTitle:@"转化为普通身份" forState:UIControlStateNormal];
@@ -311,12 +334,24 @@
 {
     return @"删除";
 }
--(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     if(tableView == self.userTableView)
     {
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-        if([cell.detailTextLabel.text isEqualToString:@"主人"]){
-            return YES;
+        if([cell.detailTextLabel.text isEqualToString:@"主人"]) {
+            if ([cell.textLabel.text isEqualToString:[UD objectForKey:@"UserName"]]) {
+                return NO;
+            }else {
+                return YES;
+            }
+            
+        }else if ([cell.detailTextLabel.text isEqualToString:@"普通用户"]) {
+            if ([cell.textLabel.text isEqualToString:[UD objectForKey:@"UserName"]]) {
+                return NO;
+            }else {
+                return YES;
+            }
         }else {
             return NO;
         }
@@ -324,9 +359,20 @@
     }
     return NO;
 }
--(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
-   
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if(tableView == self.userTableView) {
+    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    //判断是不是自己
+    if ([cell.textLabel.text isEqualToString:[UD objectForKey:@"UserName"]]) {
+        return UITableViewCellEditingStyleNone;
+    }
+    self.usrID = self.userIDArr[indexPath.row];
     return UITableViewCellEditingStyleDelete;
+    }
+    
+    return UITableViewCellEditingStyleNone;
 }
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -336,8 +382,9 @@
         [alertVC dismissViewControllerAnimated:YES completion:nil];
     }];
     UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //
-        [self deleteOrChangeManagerType:1 withTag:3];
+        
+        //删除用户
+        [self deleteOrChangeManagerType:1 userID:_usrID withTag:3];
         
         
         [self.managerType removeObjectAtIndex:indexPath.row];
@@ -352,12 +399,17 @@
     
 }
 //删除或改变用户权限请求
--(void)deleteOrChangeManagerType:(NSInteger)type withTag:(int)tag
+-(void)deleteOrChangeManagerType:(NSInteger)type userID:(NSNumber *)userID withTag:(int)tag
 {
     NSString *url = [NSString stringWithFormat:@"%@UserEdit.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     if (auothorToken) {
-        NSDictionary *dict = @{@"AuthorToken":auothorToken,@"OType":[NSNumber numberWithInteger:type]};
+        NSDictionary *dict = @{
+                               @"AuthorToken": auothorToken,
+                               @"OType": @(type),
+                               @"UserID": userID
+                              };
+        
         HttpManager *http=[HttpManager defaultManager];
         http.delegate = self;
         http.tag = tag;
@@ -367,6 +419,12 @@
 
 //点击转换身份按钮
 - (IBAction)changeIdentityType:(UIButton *)sender {
+    
+    if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]] && [[UD objectForKey:@"UserType"] integerValue] == 2) {
+        [MBProgressHUD showError:@"你是普通用户，无权限操作"];
+        //return;
+    }
+    
     NSString *str = sender.titleLabel.text;
     NSString *type = [str substringFromIndex:3];
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"确定转化为%@",type]message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -378,10 +436,10 @@
         //执行转化身份操作
         if([str containsString:@"普通身份"])
         {
-            [self deleteOrChangeManagerType:3 withTag:4];
+            [self deleteOrChangeManagerType:3  userID:_usrID withTag:4];//转化为普通用户
             sender.titleLabel.text = @"转化为主人身份";
         }else{
-            [self deleteOrChangeManagerType:2 withTag:5];
+            [self deleteOrChangeManagerType:2  userID:_usrID withTag:5];//转化为主人
             sender.titleLabel.text= @"转化为普通身份";
         }
         [alertVC dismissViewControllerAnimated:YES completion:nil];

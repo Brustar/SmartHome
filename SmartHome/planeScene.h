@@ -6,6 +6,8 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 #import "TouchImage.h"
+#import "HttpManager.h"
+#import "AFHTTPSessionManager.h"
 
 //平面图，我的家
 @interface planeScene : UIViewController

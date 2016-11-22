@@ -11,5 +11,5 @@
 @interface IphoneSceneController : UIViewController
 
 @property (nonatomic,strong) NSString * shortcutName;
-
+@property (nonatomic,strong) Scene *scene;
 @end

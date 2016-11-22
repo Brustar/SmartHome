@@ -13,6 +13,7 @@
 @interface IOManager : NSObject
 
 + (NSString *)realScenePath;
++ (NSString *)planeScenePath;
 + (NSString *) scenesPath;
 + (NSString *) favoritePath;
 + (NSString *) sqlitePath;
