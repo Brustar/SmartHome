@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0F01D5441CDC6CA600DAC267 /* Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F01D5431CDC6CA600DAC267 /* Scene.m */; };
+		0F020A231DE3D9330034869F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F020A221DE3D9330034869F /* LaunchScreen.storyboard */; };
 		0F032D491CC9B12700D1920D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F032D481CC9B12700D1920D /* main.m */; };
 		0F032D4C1CC9B12700D1920D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F032D4B1CC9B12700D1920D /* AppDelegate.m */; };
 		0F032D5A1CC9B12700D1920D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F032D591CC9B12700D1920D /* Assets.xcassets */; };
@@ -235,6 +236,7 @@
 /* Begin PBXFileReference section */
 		0F01D5421CDC6CA600DAC267 /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
 		0F01D5431CDC6CA600DAC267 /* Scene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Scene.m; sourceTree = "<group>"; };
+		0F020A221DE3D9330034869F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0F032D441CC9B12700D1920D /* SmartHome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartHome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F032D481CC9B12700D1920D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0F032D4A1CC9B12700D1920D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1243,6 +1245,7 @@
 				F60FDB451D003FD500AB04BE /* CurtainTableViewCell.xib */,
 				F6359AFF1CFFC4DC0035EB31 /* ColourTableViewCell.xib */,
 				0F7E2E151D581AC400A47D5D /* iPhone.storyboard */,
+				0F020A221DE3D9330034869F /* LaunchScreen.storyboard */,
 			);
 			name = storeboard;
 			sourceTree = "<group>";
@@ -1615,6 +1618,7 @@
 				F668AF251D53413B0079587F /* Main.storyboard in Resources */,
 				0FE78BB61DCFB091009B4767 /* Images.xcassets in Resources */,
 				0FC0FFD21CF539BC000F71D5 /* realScene.plist in Resources */,
+				0F020A231DE3D9330034869F /* LaunchScreen.storyboard in Resources */,
 				F6359B011CFFC4DC0035EB31 /* ColourTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2117,13 +2121,13 @@
 			baseConfigurationReference = 9B45FF693457BA21BA43CE05 /* Pods-SmartHome.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = SmartHome/SmartHome.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: shi zi (75UU58685N)";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: shi zi (75UU58685N)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = C8JS65F469;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2142,7 +2146,7 @@
 					"\"$(PROJECT_DIR)//FFmpeg-iOS/include\"",
 				);
 				INFOPLIST_FILE = SmartHome/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2160,12 +2164,12 @@
 			baseConfigurationReference = CE54136C9EEF8F51E8FBEEDE /* Pods-SmartHome.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = SmartHome/SmartHome.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: shi zi (C8JS65F469)";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = C8JS65F469;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2184,7 +2188,7 @@
 					"\"$(PROJECT_DIR)//FFmpeg-iOS/include\"",
 				);
 				INFOPLIST_FILE = SmartHome/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
