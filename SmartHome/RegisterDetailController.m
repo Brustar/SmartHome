@@ -74,7 +74,7 @@
                 if(timeout<=0){ //倒计时结束，关闭
                     dispatch_source_cancel(self._timer);
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        
+
                         [self.auothCodeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
                         self.auothCodeBtn.userInteractionEnabled = YES;
                     });
@@ -128,9 +128,9 @@
     //发送注册请求
     DeviceInfo *info=[DeviceInfo defaultManager];
     
-    if(self.MasterID == nil)
+    if(self.MasterID == 0)
     {
-        self.MasterID = @"";
+        self.MasterID = 1;
     }
     
     //手机终端类型：1，手机 2，iPad
@@ -140,7 +140,7 @@
     }
     
     NSDictionary *dict = @{
-                           @"HostID":self.MasterID,
+                           @"HostID":[NSNumber numberWithInt:self.MasterID],
                            @"UserName":self.userName.text,
                            @"Password":[self.passWord.text md5],
                            @"UserTellNumber":self.phoneStr,

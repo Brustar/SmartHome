@@ -17,6 +17,6 @@
 
 
 @property (nonatomic,strong) NSString *suerTypeStr;
-@property (nonatomic,strong) NSString *masterStr;
+@property (nonatomic,assign) int masterStr;
 
 @end

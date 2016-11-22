@@ -17,5 +17,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *UserNameImageVIew;//用户名图标
 @property (weak, nonatomic) IBOutlet UIImageView *PhoneNumBerImageView;//手机号图标
 
-@property (nonatomic,strong) NSString *MasterID;
+@property (nonatomic,assign) int MasterID;
 @end

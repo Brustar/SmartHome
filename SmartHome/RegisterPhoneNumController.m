@@ -31,10 +31,10 @@
     [super viewDidLoad];
     self.title = @"注册";
     self.UserTypeLb.text = self.suerTypeStr;
-    self.MasterIDLb.text = self.masterStr;
+    self.MasterIDLb.text = [NSString stringWithFormat:@"%@",[NSNumber numberWithInt:self.masterStr]];
     self.imgeVerifyField.delegate = self;
     //直接注册时隐藏身份和主机ID
-    if(self.suerTypeStr == nil|| self.masterStr == nil)
+    if(self.suerTypeStr == nil|| self.masterStr == 0)
     {
         self.usderAndMasterView.hidden = YES;
         self.viewTopLeadingConstraint.constant = 80;
@@ -125,10 +125,6 @@
         }
         
 }
-
-
-
-
 
 
 @end
