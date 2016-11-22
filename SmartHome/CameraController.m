@@ -61,8 +61,8 @@
     _video.outputWidth =  CELL_WIDTH;
     _video.outputHeight = CELL_HEIGHT;
     */
-    NSLog(@"video duration: %f",_video.duration);
-    NSLog(@"video size: %d x %d", _video.sourceWidth, _video.sourceHeight);
+//    NSLog(@"video duration: %f",_video.duration);
+//    NSLog(@"video size: %d x %d", _video.sourceWidth, _video.sourceHeight);
     
     
 }
