@@ -9,7 +9,6 @@
 #import "SocketManager.h"
 #import "AsyncUdpSocket.h"
 #import "PackManager.h"
-#import <Reachability/Reachability.h>
 #import "MBProgressHUD+NJ.h"
 
 @implementation SocketManager

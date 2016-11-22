@@ -34,7 +34,6 @@
     }
     
     DeviceInfo *device=[DeviceInfo defaultManager];
-    [device netReachbility];
     [device deviceGenaration];
     device.db=SMART_DB;
    
