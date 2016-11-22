@@ -262,14 +262,6 @@
     [http sendPost:url param:dict];
 }
 
-//#pragma TouchSubViewController delegate
-////删除场景
-//-(void)removeSecene
-//{
-//    SceneCell * cell ;
-//    [self sceneDeleteAction:cell];
-//
-//}
 -(void)httpHandler:(id) responseObject tag:(int)tag
 {
     if((tag = 1))
