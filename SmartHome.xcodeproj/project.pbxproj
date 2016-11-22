@@ -1888,13 +1888,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = SmartHome/SmartHome.entitlements;
-<<<<<<< HEAD
-				CODE_SIGN_IDENTITY = "iPhone Distribution: shi zi (C8JS65F469)";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: shi zi (C8JS65F469)";
-=======
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution";
->>>>>>> 42edb995872db9e2637cd9a64b8587d7aa075748
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
