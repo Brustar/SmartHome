@@ -10,7 +10,6 @@
 
 -(void)convertFrameToRGB;
 -(UIImage *)imageFromAVPicture:(AVPicture)pict width:(int)width height:(int)height;
--(void)savePicture:(AVPicture)pFrame width:(int)width height:(int)height index:(int)iFrame;
 -(void)setupScaler;
 @end
 

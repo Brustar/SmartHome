@@ -56,7 +56,7 @@ enum{
 //ios设备的音量
 @property (nonatomic) float volume;
 //设备是否能连互联网
-@property (nonatomic) int reachbility;
+//@property (nonatomic) int reachbility;
 //设备的apple型号
 @property (nonatomic) int genaration;
 //apn推送token
@@ -79,7 +79,7 @@ enum{
 + (instancetype) defaultManager;
 - (void) deviceGenaration;
 - (void) initConfig;
-- (void) netReachbility;
+//- (void) netReachbility;
 
 #pragma mark - public
 -(NSData *) author;

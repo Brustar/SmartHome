@@ -8,7 +8,6 @@
 
 #import "DeviceInfo.h"
 #import "sys/utsname.h"
-#import <Reachability/Reachability.h>
 #import "PackManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "FMDatabase.h"
@@ -25,13 +24,6 @@
     });
     
     return sharedInstance;
-}
-
-- (void) netReachbility
-{
-    Reachability *curReach = [Reachability reachabilityWithHostname:@"www.apple.com"];
-    NetworkStatus status = [curReach currentReachabilityStatus];
-    self.reachbility=status;
 }
 
 -(void)initConfig

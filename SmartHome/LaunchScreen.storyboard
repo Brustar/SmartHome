@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,19 +17,34 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="8xv-Ma-zHD">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="q9u-Lr-fqT">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3Y6-aL-7Cn">
+                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dVl-KT-KDR">
+                                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="8xv-Ma-zHD">
+                                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                                    </imageView>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="8xv-Ma-zHD" secondAttribute="bottom" id="6kP-f3-Dpv"/>
-                            <constraint firstItem="8xv-Ma-zHD" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="LqB-Gm-zFB"/>
-                            <constraint firstAttribute="trailing" secondItem="8xv-Ma-zHD" secondAttribute="trailing" id="VDK-eJ-AXr"/>
-                            <constraint firstItem="8xv-Ma-zHD" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="qsz-iq-l0M"/>
+                            <constraint firstAttribute="trailing" secondItem="q9u-Lr-fqT" secondAttribute="trailing" id="E7d-gO-MU5"/>
+                            <constraint firstItem="q9u-Lr-fqT" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="RxX-kf-BBa"/>
+                            <constraint firstItem="q9u-Lr-fqT" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="gz7-Sk-TRv"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="q9u-Lr-fqT" secondAttribute="bottom" id="yE7-jM-wUh"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -40,6 +54,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LaunchScreen" width="375" height="667"/>
+        <image name="LaunchScreen" width="1024" height="768"/>
     </resources>
 </document>
