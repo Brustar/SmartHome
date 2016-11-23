@@ -15,6 +15,9 @@
 @property(nonatomic,strong) NSMutableArray *timesArr;
 @property(nonatomic,strong) NSMutableArray *ItemID;
 @property (nonatomic,strong)NSMutableArray *recordID;
+@property (nonatomic,strong) NSMutableArray * itemIdArrs;
+@property(nonatomic,strong) NSString * itemid;
+@property (nonatomic,strong) NSMutableArray * itemNameArrs;
 @property (weak, nonatomic) IBOutlet UIView *footView;
 
 @end
@@ -53,8 +56,21 @@
     self.tableView.tableFooterView = self.footView;
     UIBarButtonItem *editBtn = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(startEdit:)];
     self.navigationItem.rightBarButtonItem = editBtn;
-    [self sendRequest];
+    [self creatItemID];
+//    [self sendRequest];
    
+}
+-(void)creatItemID
+{
+    NSString *url = [NSString stringWithFormat:@"%@GetNotifyType.aspx",[IOManager httpAddr]];
+    NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    if (auothorToken) {
+        NSDictionary *dict = @{@"AuthorToken":auothorToken};
+        HttpManager *http=[HttpManager defaultManager];
+        http.tag = 1;
+        http.delegate = self;
+        [http sendPost:url param:dict];
+    }
 }
 
 -(void)sendRequest
@@ -82,14 +98,15 @@
             if ([dic isKindOfClass:[NSArray class]]) {
                 for(NSDictionary *dicDetail in dic)
                 {
-                    if ([dicDetail isKindOfClass:[NSDictionary class]] && dicDetail[@"description"]) {
-                        [self.msgArr addObject:dicDetail[@"description"]];
-                        [self.timesArr addObject:dicDetail[@"createDate"]];
-                        [self.recordID addObject:dicDetail[@"recordID"]];
-                    }
+//                    if ([dicDetail isKindOfClass:[NSDictionary class]] && dicDetail[@"description"]) {
+//                        [self.msgArr addObject:dicDetail[@"description"]];
+//                        [self.timesArr addObject:dicDetail[@"createDate"]];
+//                        [self.recordID addObject:dicDetail[@"recordID"]];
+//                    }
+                    [self.itemIdArrs addObject:dicDetail[@"itemId"]];
+                    [self.itemNameArrs addObject:dicDetail[@"itemName"]];
                 }
             }
-            
             
             
             [self.tableView reloadData];
@@ -107,9 +124,6 @@
         }
     }
 
-    
-    
-
 }
 
 
@@ -120,16 +134,26 @@
 
 
 #pragma mark - Table view data source
-
+//有多少组
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return self.itemIdArrs.count;
 }
+//组头
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    
+    NSString * str = self.itemNameArrs[section];
+    
+    return str;
+}
+//每组有多少cell
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.msgArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     static NSString *CellIdentifier = @"msgCell";
     MsgCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.title.text = self.msgArr[indexPath.row];

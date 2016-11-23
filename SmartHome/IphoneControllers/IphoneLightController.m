@@ -20,6 +20,7 @@
 @property (nonatomic,strong) NSArray * roomArrs;
 @property (nonatomic,strong) NSArray * lightArrs;
 @property (nonatomic,strong) NSString * deviceid;
+
 @end
 
 @implementation IphoneLightController
@@ -37,6 +38,7 @@
     // Do any additional setup after loading the view.
     
     _lightArrs = [SQLManager getDeviceByRoom:self.roomID];
+    
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
 }
@@ -82,10 +84,7 @@
     [sock.socket writeData:data withTimeout:1 tag:2];
 }
 
--(void)recv:(NSData *)data withTag:(long)tag
-{
-    
-}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 

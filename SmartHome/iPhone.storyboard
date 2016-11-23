@@ -96,7 +96,7 @@
                                                         <constraint firstAttribute="width" constant="30" id="Rdh-kT-KC0"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="32" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yoo-dT-FMB">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="32°C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yoo-dT-FMB">
                                                     <rect key="frame" x="61" y="50" width="52.5" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Yoo-dT-FMB" secondAttribute="height" multiplier="21:10" id="tUZ-gJ-wex"/>
@@ -284,9 +284,14 @@
                             <constraint firstItem="6NP-fB-ANX" firstAttribute="top" secondItem="fY6-LH-ft3" secondAttribute="bottom" id="guA-TW-Rwp"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="家庭" id="Yc3-0T-jdX"/>
+                    <navigationItem key="navigationItem" title=" 家庭" id="7PB-OO-tfy">
+                        <barButtonItem key="rightBarButtonItem" image="wifi" id="UU7-cc-prk">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="6NP-fB-ANX" id="2Nk-mi-Hzh"/>
+                        <outlet property="wifiBarButon" destination="UU7-cc-prk" id="aPs-N5-1Ed"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CJz-uR-fFs" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3859,6 +3864,7 @@
         <image name="voice" width="26" height="26"/>
         <image name="voice_strong" width="39" height="32"/>
         <image name="voice_weak" width="33" height="32"/>
+        <image name="wifi" width="32" height="32"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
