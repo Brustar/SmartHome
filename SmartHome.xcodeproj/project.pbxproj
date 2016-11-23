@@ -24,13 +24,6 @@
 		0F295A601D2E092900F23F21 /* HttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F295A5F1D2E092900F23F21 /* HttpManager.m */; };
 		0F2D365F1D11536E00C46DE5 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2D365E1D11536E00C46DE5 /* libbz2.tbd */; };
 		0F2D36611D1153F900C46DE5 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2D36541D11528300C46DE5 /* VideoToolbox.framework */; };
-		0F2D36731D11555100C46DE5 /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2D366C1D11555100C46DE5 /* libavdevice.a */; };
-		0F2D36741D11555100C46DE5 /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2D366D1D11555100C46DE5 /* libavfilter.a */; };
-		0F2D36751D11555100C46DE5 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2D366E1D11555100C46DE5 /* libavformat.a */; };
-		0F2D36761D11555100C46DE5 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2D366F1D11555100C46DE5 /* libavutil.a */; };
-		0F2D36771D11555100C46DE5 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2D36701D11555100C46DE5 /* libswresample.a */; };
-		0F2D36781D11555100C46DE5 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2D36711D11555100C46DE5 /* libswscale.a */; };
-		0F2D36791D11555100C46DE5 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2D36721D11555100C46DE5 /* libavcodec.a */; };
 		0F3CCF3B1D0F97B70058A320 /* CameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F3CCF3A1D0F97B70058A320 /* CameraController.m */; };
 		0F43B0F81CF3E7BF00F3D9F0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F43B0F71CF3E7BF00F3D9F0 /* SystemConfiguration.framework */; };
 		0F43B0F91CF3E7D200F3D9F0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FCFB39F1CF2D38800B37DD3 /* AVFoundation.framework */; };
@@ -49,7 +42,6 @@
 		0F96A1651D17F37C00E1594F /* RulerItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F96A15F1D17F37C00E1594F /* RulerItemModel.m */; };
 		0F96A1661D17F37C00E1594F /* RulerLeftTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F96A1611D17F37C00E1594F /* RulerLeftTagView.m */; };
 		0F96A1671D17F37C00E1594F /* RulerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F96A1631D17F37C00E1594F /* RulerView.m */; };
-		0F9ADF721CE2DC020052F3BC /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9ADF711CE2DC020052F3BC /* libz.tbd */; };
 		0F9EA72D1DDB026C00223ED8 /* NSString+RegMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9EA72C1DDB026C00223ED8 /* NSString+RegMatch.m */; };
 		0FA0FD661D057C430041CE96 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA0FD651D057C430041CE96 /* AddressBook.framework */; };
 		0FA1E09E1D533BFA001CA819 /* PluginCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA1E09D1D533BFA001CA819 /* PluginCell.m */; };
@@ -116,6 +108,7 @@
 		0FF410DC1CDAF76300C7F4A1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410DB1CDAF76300C7F4A1 /* CoreBluetooth.framework */; };
 		0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7B0B51D1380BF003C2D52 /* AirController.m */; };
 		0FF92B661D9224640098DD54 /* TVChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF92B651D9224640098DD54 /* TVChannel.m */; };
+		2E1495101DE474EF00141629 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9ADF711CE2DC020052F3BC /* libz.tbd */; };
 		2E5E5FE91DE1F1A9006F0C8F /* IphoneLightController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5E5FE81DE1F1A9006F0C8F /* IphoneLightController.m */; };
 		2E5E5FEC1DE22AC8006F0C8F /* LightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5E5FEB1DE22AC8006F0C8F /* LightCell.m */; };
 		F361579D9B9637C261531C8C /* libPods-SmartHome.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B2DBF5C92F57E3B7AD6AA3 /* libPods-SmartHome.a */; };
@@ -622,13 +615,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F2D36731D11555100C46DE5 /* libavdevice.a in Frameworks */,
-				0F2D36741D11555100C46DE5 /* libavfilter.a in Frameworks */,
-				0F2D36751D11555100C46DE5 /* libavformat.a in Frameworks */,
-				0F2D36761D11555100C46DE5 /* libavutil.a in Frameworks */,
-				0F2D36771D11555100C46DE5 /* libswresample.a in Frameworks */,
-				0F2D36781D11555100C46DE5 /* libswscale.a in Frameworks */,
-				0F2D36791D11555100C46DE5 /* libavcodec.a in Frameworks */,
+				2E1495101DE474EF00141629 /* libz.tbd in Frameworks */,
 				0F2D36611D1153F900C46DE5 /* VideoToolbox.framework in Frameworks */,
 				0F2D365F1D11536E00C46DE5 /* libbz2.tbd in Frameworks */,
 				0FA0FD661D057C430041CE96 /* AddressBook.framework in Frameworks */,
@@ -639,7 +626,6 @@
 				0FA658F81CD98EF5005AC4B4 /* AudioToolbox.framework in Frameworks */,
 				0FC7FDC11CED6CC700F91BDF /* libsqlite3.tbd in Frameworks */,
 				0FAF98B31CE42A3B009BDBB5 /* libicucore.tbd in Frameworks */,
-				0F9ADF721CE2DC020052F3BC /* libz.tbd in Frameworks */,
 				0FF410DC1CDAF76300C7F4A1 /* CoreBluetooth.framework in Frameworks */,
 				0FF410DA1CDAE67100C7F4A1 /* CoreLocation.framework in Frameworks */,
 				0FA658FC1CD9DB3F005AC4B4 /* MediaPlayer.framework in Frameworks */,
@@ -1888,12 +1874,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = SmartHome/SmartHome.entitlements;
-
-
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution";
-
-
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
