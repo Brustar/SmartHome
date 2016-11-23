@@ -25,9 +25,8 @@
 
 
 
-@interface IphoneFamilyViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,TcpRecvDelegate>
+@interface IphoneFamilyViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-
 @property (weak, nonatomic)  IBOutlet UIView *supView;
 @property (nonatomic,strong) NSArray * dataSource;
 @property (nonatomic,strong) NSMutableArray * roomIdArrs;//房间数量
@@ -60,7 +59,7 @@
     NSData *data = [[SceneManager defaultManager] getRealSceneData];
     [sock.socket writeData:data withTimeout:1 tag:1];
     
-    [self sendRequestForGettingSceneConfig:@"cloud/RoomStatusList.aspx" withTag:1];
+   // [self sendRequestForGettingSceneConfig:@"cloud/RoomStatusList.aspx" withTag:1];
   
 }
 
@@ -70,7 +69,8 @@
     NSString *url = [NSString stringWithFormat:@"%@%@",[IOManager httpAddr],str];
     
     NSDictionary *dic = @{
-                          @"AuthorToken" : [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]
+                          @"AuthorToken" : [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],
+                          
                     
                           };
     HttpManager *http = [HttpManager defaultManager];
@@ -100,10 +100,9 @@
 - (void)recv:(NSData *)data withTag:(long)tag
 {
     FamilyCell * cell ;
-    NSString *result = [NSString stringWithFormat:@"0x%@",[UD objectForKey:@"HostID"]];
-   
     Proto proto = protocolFromData(data);
-    if (CFSwapInt16BigToHost(proto.masterID) != strtoul([result UTF8String],0,16)) {
+    
+    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
         return;
     }
     
