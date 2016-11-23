@@ -74,23 +74,17 @@
     AFNetworkReachabilityManager *afNetworkReachabilityManager = [AFNetworkReachabilityManager sharedManager];
     [afNetworkReachabilityManager startMonitoring];  //开启网络监视器；
     [afNetworkReachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        SocketManager *sock=[SocketManager defaultManager];
         DeviceInfo *info = [DeviceInfo defaultManager];
         if(status == AFNetworkReachabilityStatusReachableViaWWAN)
         {
             if (info.connectState==outDoor) {
-                NSLog(@"外出模式");
+                //NSLog(@"外出模式");
     //            [self.netBarBtn setImage:[UIImage imageNamed:@"wifi"]];
                 return;
             }
             if (info.connectState==offLine) {
                 NSLog(@"离线模式");
     //            [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
-                
-                //connect cloud
-                if ([info.db isEqualToString:SMART_DB]) {
-                    [sock connectTcp];
-                }
             }
         }
         else if(status == AFNetworkReachabilityStatusReachableViaWiFi)
@@ -100,22 +94,13 @@
     //            [self.netBarBtn setImage:[UIImage imageNamed:@"atHome"]];
                 return;
             }else if (info.connectState==outDoor){
-                NSLog(@"外出模式");
+                //NSLog(@"外出模式");
     //            [self.netBarBtn setImage:[UIImage imageNamed:@"wifi"]];
             }
             if (info.connectState==offLine) {
                 NSLog(@"离线模式");
     //            [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
-                if ([info.db isEqualToString:SMART_DB]) {
-                    int sed = (arc4random() % 3) + 1;
-                    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad && sed == 1) {
-                        //connect master
-                        [sock connectUDP:[IOManager udpPort]];
-                    }else{
-                        //connect cloud
-                        [sock connectTcp];
-                    }
-                }
+
             }
         }else{
             NSLog(@"离线模式");

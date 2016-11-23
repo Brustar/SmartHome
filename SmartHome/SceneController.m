@@ -76,12 +76,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   
-    
     self.addSceseBtn.layer.cornerRadius = self.addSceseBtn.bounds.size.width / 2.0;
     self.addSceseBtn.layer.masksToBounds = YES;
     self.firstView.hidden = YES;
     self.secondView.hidden = YES;
 
+    SocketManager *sock=[SocketManager defaultManager];
+    DeviceInfo *info = [DeviceInfo defaultManager];
+    if ([info.db isEqualToString:SMART_DB]) {
+        [sock connectTcp];
+    }
     //开启网络状况的监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityUpdate:) name: AFNetworkingReachabilityDidChangeNotification object: nil];
 
@@ -90,7 +94,6 @@
     [self reachNotification];
 
     [self setNavi];
-    
 }
 
 
@@ -226,23 +229,17 @@
     AFNetworkReachabilityManager *afNetworkReachabilityManager = [AFNetworkReachabilityManager sharedManager];
     [afNetworkReachabilityManager startMonitoring];  //开启网络监视器；
     [afNetworkReachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        SocketManager *sock=[SocketManager defaultManager];
         DeviceInfo *info = [DeviceInfo defaultManager];
         if(status == AFNetworkReachabilityStatusReachableViaWWAN)
         {
             if (info.connectState==outDoor) {
-                NSLog(@"外出模式");
+                //NSLog(@"外出模式");
                 [self.netBarBtn setImage:[UIImage imageNamed:@"wifi"]];
                 return;
             }
             if (info.connectState==offLine) {
                 NSLog(@"离线模式");
                 [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
-            
-                //connect cloud
-                if ([info.db isEqualToString:SMART_DB]) {
-                    [sock connectTcp];
-                }
             }
         }
         else if(status == AFNetworkReachabilityStatusReachableViaWiFi)
@@ -252,7 +249,7 @@
                 [self.netBarBtn setImage:[UIImage imageNamed:@"atHome"]];
                 return;
             }else if (info.connectState==outDoor){
-                NSLog(@"外出模式");
+                //NSLog(@"外出模式");
                 [self.netBarBtn setImage:[UIImage imageNamed:@"wifi"]];
             }
             if (info.connectState==offLine) {
@@ -269,7 +266,6 @@
                         [sock connectTcp];
                     }
                      */
-                    [sock connectTcp];
                 }
             }
         }else{
