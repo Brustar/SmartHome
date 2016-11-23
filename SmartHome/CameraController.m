@@ -20,7 +20,7 @@
 #define BIG_HEIGTH self.collectionView.frame.size.height
 
 @interface CameraController ()<UICollectionViewDelegate,UICollectionViewDataSource>
-//@property (weak, nonatomic) IBOutlet UIImageView *imgView;
+
 @property (nonatomic, retain) NSTimer *nextFrameTimer;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic,strong) NSMutableArray *cameraIds;
@@ -56,11 +56,10 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    /*
     _video = [[RTSPPlayer alloc] initWithVideo:self.camerUrls[self.index] usesTcp:YES];
     _video.outputWidth =  CELL_WIDTH;
     _video.outputHeight = CELL_HEIGHT;
-    */
+    
 //    NSLog(@"video duration: %f",_video.duration);
 //    NSLog(@"video size: %d x %d", _video.sourceWidth, _video.sourceHeight);
     
@@ -101,7 +100,7 @@
     
     [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
 }
-/*
+
 -(IBAction)playButtonAction:(id)sender {
        _lastFrameTime = -1;
     
@@ -132,7 +131,7 @@
         _lastFrameTime = LERP(frameTime, _lastFrameTime, 0.8);
     }
 }
-*/
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -149,7 +148,7 @@
     self.cell = cell;
     self.index = (int)indexPath.row;
     cell.imgView.userInteractionEnabled = YES;
-    //[self playButtonAction:nil];
+    [self playButtonAction:nil];
     
     return cell;
 }
@@ -167,9 +166,7 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-
 {
-    
     UIImageView *bgView = [[UIImageView alloc]initWithFrame:self.collectionView.frame];
     self.imageView = bgView;
     [self.view addSubview:bgView];
