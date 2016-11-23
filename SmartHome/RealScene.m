@@ -191,7 +191,7 @@
             self.wetValue.text = valueString;
         }
         if (proto.action.state==0x7F) {
-            NSString *valueString = [NSString stringWithFormat:@"%d ug/m",proto.action.RValue];
+            NSString *valueString = [NSString stringWithFormat:@"%d ug/m³",proto.action.RValue];
             self.pmValue.text = valueString;
         }
         if (proto.action.state==0x7E) {
