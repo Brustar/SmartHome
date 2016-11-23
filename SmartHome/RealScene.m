@@ -183,7 +183,7 @@
     }
     
     if (tag==0) {
-        if (proto.action.state==0x7A) {
+        if (proto.action.state==0x6A) {
             self.tempValue.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
         }
         if (proto.action.state==0x8A) {
