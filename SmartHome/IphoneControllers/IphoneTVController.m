@@ -294,10 +294,13 @@
     cell.delegate = self;
     [cell hiddenEditBtnAndDeleteBtn];
     cell.label.text = channel.channel_name;
-    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:channel.channel_pic] placeholderImage:[UIImage imageNamed:@"placeholder"]];
-    [cell useLongPressGesture];
+    if (channel) {
+        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:channel.channel_pic] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        [cell useLongPressGesture];
+    }
     return cell;
 }
+
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (collectionView == self.tvLogoCollectionView) {
@@ -314,7 +317,6 @@
    
 
 }
-
 
 #pragma mark - TVLogoCellDelegate
 -(void)tvDeleteAction:(TVLogoCell *)cell

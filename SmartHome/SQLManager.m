@@ -998,7 +998,7 @@
         NSMutableArray *deviceIds=[[NSMutableArray alloc] init];
         for (NSDictionary *dic in [dictionary objectForKey:@"devices"])
         {
-            int deviceID;
+            int deviceID = 0;
         
             if([dic objectForKey:@"deviceID"])
             {

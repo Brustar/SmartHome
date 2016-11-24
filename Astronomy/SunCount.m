@@ -179,7 +179,7 @@ typedef void(^sunString)(SunString *sunStr);
 }
 
 -(void)sun_RA_dec:(double)d{
-    double lon;
+    double lon = 0;
     self.lon = lon;
     //  and:self.sRA and:self.sdec and:self.sr
     [self sunpos:d];

@@ -16,13 +16,13 @@
 +(NSMutableArray *)getAllChannelForFavoritedForType:(NSString *)type deviceID:(int)deviceID
 {
         FMDatabase *db = [SQLManager connetdb];
+        NSMutableArray *mutabelArr = [NSMutableArray array];
         if (![db open]) {
             NSLog(@"Could not open db");
-            return nil;
+            return mutabelArr;
         }
     
         FMResultSet *resultSet = [db executeQueryWithFormat:@"select * from Channels where isFavorite = 1 and eqId = %d and parent = %@",deviceID,type];
-        NSMutableArray *mutabelArr = [NSMutableArray array];
         while([resultSet next])
         {
             TVChannel *channel = [TVChannel new];
