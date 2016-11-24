@@ -30,11 +30,11 @@ void audioQueueIsRunningCallback(void *inClientData, AudioQueueRef inAQ,
 @synthesize streamer = _streamer;
 @synthesize audioCodecContext = _audioCodecContext;
 
-- (id)initWithStreamer:(RTSPPlayer*)streamer {
+- (id)initWithStreamer:(RTSPPlayer*)stream {
     if (self = [super init]) {
         AVAudioSession *audioSession = [AVAudioSession sharedInstance];
         [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
-        _streamer = streamer;
+        _streamer = stream;
         _audioCodecContext = _streamer._audioCodecContext;
     }
     
@@ -106,12 +106,12 @@ void audioQueueIsRunningCallback(void *inClientData, AudioQueueRef inAQ,
     audioStreamBasicDesc_.mFormatFlags = 0;
     
     switch (_audioCodecContext->codec_id) {
-        case CODEC_ID_MP3:
+        case AV_CODEC_ID_MP3:
         {
             audioStreamBasicDesc_.mFormatID = kAudioFormatMPEGLayer3;
             break;
         }
-        case CODEC_ID_AAC:
+        case AV_CODEC_ID_AAC:
         {
             audioStreamBasicDesc_.mFormatID = kAudioFormatMPEG4AAC;
             audioStreamBasicDesc_.mFormatFlags = kMPEG4Object_AAC_LC;
@@ -126,12 +126,12 @@ void audioQueueIsRunningCallback(void *inClientData, AudioQueueRef inAQ,
             
             break;
         }
-        case CODEC_ID_AC3:
+        case AV_CODEC_ID_AC3:
         {
             audioStreamBasicDesc_.mFormatID = kAudioFormatAC3;
             break;
         }
-        case CODEC_ID_PCM_MULAW:
+        case AV_CODEC_ID_PCM_MULAW:
         {
             audioStreamBasicDesc_.mFormatID = kAudioFormatULaw;
             audioStreamBasicDesc_.mSampleRate = 8000.0;

@@ -25,7 +25,7 @@ typedef enum _AUDIO_STATE {
     NSInteger state_;
     NSTimer *seekTimer_;
     NSLock *decodeLock_;
-    RTSPPlayer *_streamer;
+    RTSPPlayer *streamer;
     AVCodecContext *_audioCodecContext;
 }
 

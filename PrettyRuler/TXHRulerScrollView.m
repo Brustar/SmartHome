@@ -61,7 +61,8 @@
     
     [self.layer addSublayer:shapeLayer1];
     [self.layer addSublayer:shapeLayer2];
-    
+    CGPathRelease(pathRef1);
+    CGPathRelease(pathRef2);
     self.frame = CGRectMake(0, 0, self.rulerWidth, self.rulerHeight);
     
     // 开启最小模式

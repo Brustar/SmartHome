@@ -1,8 +1,8 @@
 #import <Foundation/Foundation.h>
-#import "avformat.h"
-#import "avcodec.h"
-#import "avio.h"
-#import "swscale.h"
+#import "libavformat/avformat.h"
+#import "libavcodec/avcodec.h"
+#import "libavformat/avio.h"
+#import "libswscale/swscale.h"
 #import <AudioToolbox/AudioQueue.h>
 #import <AudioToolbox/AudioToolbox.h>
 

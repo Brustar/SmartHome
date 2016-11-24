@@ -133,11 +133,10 @@
    
 }
 -(void)viewWillAppear:(BOOL)animated
-
 {
     
     [super viewWillAppear:YES];
-     NSIndexPath *indexPath = 0;
+     NSIndexPath *indexPath = [NSIndexPath indexPathWithIndex:0];
     
     for(int i = 0; i < self.devicesTypes.count; i++)
     {
@@ -155,8 +154,6 @@
                 if([typeName isEqualToString:@"背景音乐"])
                 {
                     indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-                    
-                    
                 }
             }
 
@@ -164,8 +161,6 @@
     }
     
     [self tableView:self.subDeviceTableView didSelectRowAtIndexPath:indexPath];
-
-   
 }
 
 

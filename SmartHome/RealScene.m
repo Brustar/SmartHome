@@ -7,7 +7,7 @@
 //
 
 #import "RealScene.h"
-#import "RoomManager.h"
+
 #import "Room.h"
 #import "PackManager.h"
 #import "SocketManager.h"
@@ -183,7 +183,7 @@
     }
     
     if (tag==0) {
-        if (proto.action.state==0x7A) {
+        if (proto.action.state==0x6A) {
             self.tempValue.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
         }
         if (proto.action.state==0x8A) {
@@ -191,7 +191,7 @@
             self.wetValue.text = valueString;
         }
         if (proto.action.state==0x7F) {
-            NSString *valueString = [NSString stringWithFormat:@"%d ug/m",proto.action.RValue];
+            NSString *valueString = [NSString stringWithFormat:@"%d ug/m³",proto.action.RValue];
             self.pmValue.text = valueString;
         }
         if (proto.action.state==0x7E) {

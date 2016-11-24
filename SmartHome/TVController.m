@@ -356,15 +356,12 @@
             cell.userInteractionEnabled = NO;
         }else{
             TVChannel *channel = self.allFavourTVChannels[indexPath.row];
-           
-           
-            [cell.imgView sd_setImageWithURL:[NSURL URLWithString:channel.channel_pic] placeholderImage:[UIImage imageNamed:@"placeholder"]];
-            
-            cell.label.text = channel.channel_name;
-            
-            [cell useLongPressGesture];
+            if (channel) {
+                [cell.imgView sd_setImageWithURL:[NSURL URLWithString:channel.channel_pic] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+                cell.label.text = channel.channel_name;
+                [cell useLongPressGesture];
+            }
         }
-        
         
         return cell;
     }

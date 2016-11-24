@@ -10,7 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "Globals.h"
 
-@interface SCWaveLayer : CALayer
+@interface SCWaveLayer : CALayer<CAAnimationDelegate>
 {
 	//id<SCWaveLayerDelegate> parentView;
 }

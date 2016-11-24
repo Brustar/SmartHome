@@ -109,9 +109,10 @@
         
         CGRect rt=CGRectFromString(rectstr);
         if (CGRectContainsPoint(rt,point)) {
+            /*
             ((planeScene *)self.delegate).deviceID=[rect[@"deviceID"] intValue];
             self.deviceID = [rect[@"deviceID"] intValue];
-             NSString *typeName = [SQLManager deviceTypeNameByDeviceID:self.deviceID];
+            NSString *typeName = [SQLManager deviceTypeNameByDeviceID:self.deviceID];
             NSString *segue;
             if([typeName isEqualToString:@"灯光"]){
                 segue = @"plane_Light";
@@ -145,8 +146,8 @@
 
             }
 
-            //[self.delegate performSegueWithIdentifier:segue sender:self.delegate];
-
+            [self.delegate performSegueWithIdentifier:segue sender:self.delegate];
+             */
         }
     }
     

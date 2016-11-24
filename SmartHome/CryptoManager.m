@@ -59,7 +59,7 @@
      DES加密 ：用CCCrypt函数加密一下，然后用base64编码下，传过去
      DES解密 ：把收到的数据根据base64，decode一下，然后再用CCCrypt函数解密，得到原本的数据
      */
-    CCCryptorStatus ccStatus;
+    //CCCryptorStatus ccStatus;
     uint8_t *dataOut = NULL; //可以理解位type/typedef 的缩写（有效的维护了代码，比如：一个人用int，一个人用long。最好用typedef来定义）
     size_t dataOutAvailable = 0; //size_t  是操作符sizeof返回的结果类型
     size_t dataOutMoved = 0;
@@ -73,7 +73,7 @@
     const void *iv = (const void *) [initIv UTF8String];
     
     //CCCrypt函数 加密/解密
-    ccStatus = CCCrypt(encryptOperation,//  加密/解密
+    CCCrypt(encryptOperation,//  加密/解密
                        kCCAlgorithmDES,//  加密根据哪个标准（des，3des，aes。。。。）
                        kCCOptionPKCS7Padding,//  选项分组密码算法(des:对每块分组加一次密  3DES：对每块分组加三个不同的密)
                        vkey,  //密钥    加密和解密的密钥必须一致

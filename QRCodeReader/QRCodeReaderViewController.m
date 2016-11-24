@@ -94,7 +94,6 @@
     self.showTorchButton        = showTorchButton;
 
     if (cancelTitle == nil) {
-        cancelTitle = NSLocalizedString(@"Cancel", @"Cancel");
         cancelTitle = @"取消";
     }
 
