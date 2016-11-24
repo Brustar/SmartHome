@@ -28,10 +28,8 @@
     BOOL ci;
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     [df setDateFormat:pattern];
-    NSDate *dt1 = [[NSDate alloc] init];
-    NSDate *dt2 = [[NSDate alloc] init];
-    dt1 = [df dateFromString:date];
-    dt2 = [df dateFromString:self];
+    NSDate *dt1 = [df dateFromString:date];
+    NSDate *dt2 = [df dateFromString:self];
     NSComparisonResult result = [dt1 compare:dt2];
     switch (result)
     {

@@ -11,7 +11,7 @@
 #define  minSpace 20
 
 #import "IphoneSceneController.h"
-#import "RoomManager.h"
+
 #import "Room.h"
 #import "SceneCell.h"
 #import "SQLManager.h"

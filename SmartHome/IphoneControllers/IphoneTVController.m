@@ -375,16 +375,16 @@
 
 }
 - (IBAction)lastBtn:(id)sender {
-    NSData *data=nil;
+    SocketManager *sock = [SocketManager defaultManager];
     DeviceInfo *device=[DeviceInfo defaultManager];
-    data=[device forward:self.deviceid];
-    
+    NSData *data=[device forward:self.deviceid];
+    [sock.socket writeData:data withTimeout:-1 tag:1];
 }
 - (IBAction)nextBtn:(id)sender {
-    NSData *data=nil;
+    SocketManager *sock = [SocketManager defaultManager];
     DeviceInfo *device=[DeviceInfo defaultManager];
-   data=[device next:self.deviceid];
-    
+    NSData *data=[device next:self.deviceid];
+    [sock.socket writeData:data withTimeout:-1 tag:1];
 }
 
 

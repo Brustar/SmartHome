@@ -10,7 +10,7 @@
 
 #import "IphoneDeviceListController.h"
 #import "SQLManager.h"
-#import "RoomManager.h"
+
 #import "Room.h"
 #import "LightController.h"
 #import "CurtainController.h"
