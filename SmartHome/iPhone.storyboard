@@ -41,7 +41,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6NP-fB-ANX">
-                                <rect key="frame" x="0.0" y="64" width="375" height="493"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NSh-Ok-mxk">
                                     <size key="itemSize" width="174" height="175"/>
@@ -195,7 +195,7 @@
                                     <outlet property="delegate" destination="MaU-V4-KOz" id="OcT-UM-zXD"/>
                                 </connections>
                             </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E4g-Z2-I6m">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E4g-Z2-I6m">
                                 <rect key="frame" x="0.0" y="555" width="375" height="112"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OGu-Yw-TzI" userLabel="线1">
@@ -275,13 +275,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="6NP-fB-ANX" firstAttribute="leading" secondItem="oYz-ol-6wj" secondAttribute="leading" id="Fhx-qq-DM7"/>
+                            <constraint firstAttribute="trailing" secondItem="6NP-fB-ANX" secondAttribute="trailing" id="5D6-ds-sSt"/>
+                            <constraint firstItem="eSX-HT-Msn" firstAttribute="top" secondItem="6NP-fB-ANX" secondAttribute="bottom" id="Cp0-1i-2Nr"/>
+                            <constraint firstItem="6NP-fB-ANX" firstAttribute="top" secondItem="fY6-LH-ft3" secondAttribute="bottom" id="G1I-1r-lAx"/>
                             <constraint firstAttribute="trailing" secondItem="E4g-Z2-I6m" secondAttribute="trailing" id="Mcz-z4-bBH"/>
                             <constraint firstItem="E4g-Z2-I6m" firstAttribute="leading" secondItem="oYz-ol-6wj" secondAttribute="leading" id="Ru2-5d-0xY"/>
-                            <constraint firstAttribute="trailing" secondItem="6NP-fB-ANX" secondAttribute="trailing" id="T3N-Sm-ZVm"/>
                             <constraint firstItem="eSX-HT-Msn" firstAttribute="top" secondItem="E4g-Z2-I6m" secondAttribute="bottom" id="WMk-Ne-0ZO"/>
-                            <constraint firstItem="eSX-HT-Msn" firstAttribute="top" secondItem="6NP-fB-ANX" secondAttribute="bottom" constant="110" id="XPF-lW-LjW"/>
-                            <constraint firstItem="6NP-fB-ANX" firstAttribute="top" secondItem="fY6-LH-ft3" secondAttribute="bottom" id="guA-TW-Rwp"/>
+                            <constraint firstItem="6NP-fB-ANX" firstAttribute="leading" secondItem="oYz-ol-6wj" secondAttribute="leading" id="nDy-s4-Pxe"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="家庭" id="Yc3-0T-jdX"/>
@@ -3757,7 +3757,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iea-pJ-dKq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1839.5" y="-2463.5"/>
+            <point key="canvasLocation" x="1593" y="-2427"/>
         </scene>
         <!--3D-touch-->
         <scene sceneID="rtx-Yc-ATX">

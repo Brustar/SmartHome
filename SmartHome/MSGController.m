@@ -10,19 +10,38 @@
 #import "MsgCell.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
+#import "DetailMSGViewController.h"
+
 @interface MSGController ()<HttpDelegate>
-@property(nonatomic,strong) NSMutableArray *msgArr;
-@property(nonatomic,strong) NSMutableArray *timesArr;
-@property(nonatomic,strong) NSMutableArray *ItemID;
-@property (nonatomic,strong)NSMutableArray *recordID;
+@property(nonatomic,strong)  NSMutableArray *msgArr;
+@property(nonatomic,strong)  NSMutableArray *timesArr;
+@property(nonatomic,strong)  NSMutableArray *ItemID;
+@property (nonatomic,strong) NSMutableArray *recordID;
 @property (nonatomic,strong) NSMutableArray * itemIdArrs;
-@property(nonatomic,strong) NSString * itemid;
+@property(nonatomic,strong)  NSString * itemid;
 @property (nonatomic,strong) NSMutableArray * itemNameArrs;
 @property (weak, nonatomic) IBOutlet UIView *footView;
 
 @end
 
 @implementation MSGController
+-(NSMutableArray *)itemIdArrs
+{
+    if (!_itemIdArrs) {
+        _itemIdArrs = [NSMutableArray array];
+    }
+
+    return _itemIdArrs;
+}
+-(NSMutableArray *)itemNameArrs
+{
+    if (!_itemNameArrs) {
+        _itemNameArrs = [NSMutableArray array];
+    }
+
+    return _itemNameArrs;
+}
+
 -(NSMutableArray *)msgArr
 {
     if(!_msgArr)
@@ -53,11 +72,11 @@
     [super viewDidLoad];
     [MBProgressHUD hideHUD];
     self.title = @"我的消息";
-    self.tableView.tableFooterView = self.footView;
-    UIBarButtonItem *editBtn = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(startEdit:)];
-    self.navigationItem.rightBarButtonItem = editBtn;
+//    self.tableView.tableFooterView = self.footView;
+//    UIBarButtonItem *editBtn = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(startEdit:)];
+//    self.navigationItem.rightBarButtonItem = editBtn;
     [self creatItemID];
-//    [self sendRequest];
+    //    [self sendRequest];
    
 }
 -(void)creatItemID
@@ -86,6 +105,8 @@
         [http sendPost:url param:dic];
     }
 }
+
+
 -(void)httpHandler:(id)responseObject tag:(int)tag
 {
     if(tag == 1)
@@ -134,41 +155,44 @@
 
 
 #pragma mark - Table view data source
-//有多少组
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return self.itemIdArrs.count;
-}
-//组头
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    
-    NSString * str = self.itemNameArrs[section];
-    
-    return str;
-}
+
+
 //每组有多少cell
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.msgArr.count;
+ return self.itemIdArrs.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"msgCell";
     MsgCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.title.text = self.msgArr[indexPath.row];
-    cell.timeLable.text = self.timesArr[indexPath.row];
+//    cell.title.text = self.msgArr[indexPath.row];
+//    cell.timeLable.text = self.timesArr[indexPath.row];
+    
+    cell.title.text = self.itemNameArrs[indexPath.row];
+    
+    
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+//    
+//    cell.textLabel.text = self.itemNameArrs[indexPath.row];
+    
     return cell;
 }
 
--(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return YES;
+    
+    UIStoryboard * oneStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    DetailMSGViewController * MSGVC = [oneStoryBoard instantiateViewControllerWithIdentifier:@"DetailMSGViewController"];
+    NSString *itemid = self.itemIdArrs[indexPath.row];
+    MSGVC.itemID = itemid;
+    [self.navigationController pushViewController:MSGVC animated:YES];
+
+
 }
--(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return UITableViewCellEditingStyleDelete;
-}
+
+
 
 //编辑操作
 -(void)startEdit:(UIBarButtonItem *)btn
@@ -201,7 +225,7 @@
     NSArray *selectedArray = [self.tableView indexPathsForSelectedRows];
     
     for (NSIndexPath *indexPath in selectedArray) {
-       
+        
         [deleteArray addObject:self.msgArr[indexPath.row]];
         [deletedTime addObject:self.timesArr[indexPath.row]];
         [deletedID addObject:self.recordID[indexPath.row]];
@@ -219,7 +243,7 @@
     
     
     [self clickCancelBtn:nil];
-
+    
 }
 
 -(void)sendDeleteRequestWithArray:(NSArray *)deleteArr;

@@ -69,6 +69,7 @@
 }
 -(void)dimming:(UISlider *)slider
 {
+    
     NSString *deviceid = _lightArrs[slider.tag];
     
     NSData *data=[[DeviceInfo defaultManager] changeBright:slider.value*100 deviceID:deviceid];
