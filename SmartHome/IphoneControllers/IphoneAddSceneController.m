@@ -117,7 +117,16 @@
 }
 //添加定时
 - (IBAction)addFixTime:(id)sender {
-    
+    if (self.devices.count == 0) {
+        UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"没有添加设备" message:@"请先选择设备" preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        UIAlertAction * alertaction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
+        
+        [alertVC addAction:alertaction];
+        
+        [self.navigationController presentViewController:alertVC animated:YES completion:nil];
+        
+    }
     
     [self performSegueWithIdentifier:@"addTimeSegue" sender:self];
     
@@ -246,4 +255,6 @@
     [DeviceInfo defaultManager].isPhotoLibrary = NO;
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
+
+
 @end
