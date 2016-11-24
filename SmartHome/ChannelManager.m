@@ -62,7 +62,7 @@
     
     if([db open])
     {
-        NSString *execute = [NSString stringWithFormat:@"update Channels set Channel_name = '%@' where Channel_id = %ld",newName,channel_id];
+        NSString *execute = [NSString stringWithFormat:@"update Channels set Channel_name = '%@' where Channel_id = %ld",newName,(long)channel_id];
         
         isSuccess = [db executeUpdate:execute];
     }

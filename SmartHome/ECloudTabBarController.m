@@ -40,7 +40,6 @@
 
 - (void)tabBarDidSelectButtonWithType:(NSInteger)type subType:(NSInteger)subType
 {
-    NSLog(@"%ld  %ld", type, subType);
     self.selectedIndex = type;
     if(type!= self.selectedIndex)
     {

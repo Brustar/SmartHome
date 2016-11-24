@@ -30,11 +30,11 @@ void audioQueueIsRunningCallback(void *inClientData, AudioQueueRef inAQ,
 @synthesize streamer = _streamer;
 @synthesize audioCodecContext = _audioCodecContext;
 
-- (id)initWithStreamer:(RTSPPlayer*)streamer {
+- (id)initWithStreamer:(RTSPPlayer*)stream {
     if (self = [super init]) {
         AVAudioSession *audioSession = [AVAudioSession sharedInstance];
         [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
-        _streamer = streamer;
+        _streamer = stream;
         _audioCodecContext = _streamer._audioCodecContext;
     }
     
