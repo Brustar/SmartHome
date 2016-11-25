@@ -10,7 +10,7 @@
 #import "RoomListController.h"
 #import "AddSenseCell.h"
 #import "FixTimeRepeatController.h"
-#import "RoomManager.h"
+
 #import "Room.h"
 #import <CoreLocation/CoreLocation.h>
 #import "SunCount.h"
@@ -490,12 +490,12 @@
         self.dataPicker.hidden = YES;
         self.ShowSettingDataView.hidden = YES;
     }else {
-        
+        /*
         self.timeView.hidden =  NO;
         //_timeView.backgroundColor = [UIColor redColor];
         self.ShowSettingDataView.hidden = NO;
         //_ShowSettingDataView.backgroundColor = [UIColor greenColor];
-//        self.dataPicker.hidden = NO;
+        //        self.dataPicker.hidden = NO;
         NSString  *astronomicealTime;
         NSDictionary *dic;
         int isPlane;
@@ -503,7 +503,6 @@
         if([self.startTimeBtn.titleLabel.text isEqualToString:@"设置"])
         {
             isPlane = 2;
-            
         }else{
             if([self.startTimeBtn.titleLabel.text isEqualToString:@"黎明"]){
                 astronomicealTime = @"1";
@@ -522,11 +521,10 @@
                 playType = 1;
             }
             isPlane = 1;
-            dic = @{@"astronomicealTime":astronomicealTime,@"playType":[NSNumber numberWithInt:playType],@"startTIme":self.startTimeBtn.titleLabel.text,@"endTime":self.endTimeBtn.titleLabel.text,@"isPane":[NSNumber numberWithInt:isPlane]};
-            
         }
       
-       
+        dic = @{@"astronomicealTime":astronomicealTime,@"playType":[NSNumber numberWithInt:playType],@"startTIme":self.startTimeBtn.titleLabel.text,@"endTime":self.endTimeBtn.titleLabel.text,@"isPane":[NSNumber numberWithInt:isPlane]};
+         */
         
     }
     btn.selected = !btn.selected;

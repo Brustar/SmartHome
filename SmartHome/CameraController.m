@@ -56,15 +56,15 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     _video = [[RTSPPlayer alloc] initWithVideo:self.camerUrls[self.index] usesTcp:YES];
     _video.outputWidth =  CELL_WIDTH;
     _video.outputHeight = CELL_HEIGHT;
     
 //    NSLog(@"video duration: %f",_video.duration);
 //    NSLog(@"video size: %d x %d", _video.sourceWidth, _video.sourceHeight);
-    
-    
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;

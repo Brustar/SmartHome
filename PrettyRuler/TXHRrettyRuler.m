@@ -127,6 +127,7 @@
 
     shapeLayerLine.path = pathLine;
     [self.layer addSublayer:shapeLayerLine];
+    CGPathRelease(pathLine);
 }
 
 #pragma mark - tool method

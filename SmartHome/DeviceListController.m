@@ -67,8 +67,8 @@
 }
 
 -(void) viewDidLoad
-
 {
+    [super viewDidLoad];
     if(self.sceneid)
     {
         self.saveBtn.enabled = NO;
@@ -80,9 +80,6 @@
     self.tableView.layer.cornerRadius = 10;
     self.tableView.layer.masksToBounds = YES;
     self.automaticallyAdjustsScrollViewInsets = NO;
-   
-    
-    
 }
 -(void)viewWillAppear:(BOOL)animated
 {

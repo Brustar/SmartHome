@@ -243,7 +243,6 @@
 //设置通知类型请求
 -(void)setUserNotifyWay:(NSInteger)way andRecord:(NSNumber *)recoredID
 {
-    
     NSString *url = [NSString stringWithFormat:@"%@NotificationSetting.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     if (auothorToken) {
@@ -252,6 +251,7 @@
     http.tag = 2;
     http.delegate = self;
     [http sendPost:url param:dict];
+        
     }
 }
 

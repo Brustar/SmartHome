@@ -80,7 +80,7 @@
 +(NSInteger)deviceIDByDeviceName:(NSString *)deviceName
 {
     FMDatabase *db = [self connetdb];
-    NSInteger eId;
+    NSInteger eId = 0;
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where NAME = '%@'",deviceName];
@@ -998,7 +998,7 @@
         NSMutableArray *deviceIds=[[NSMutableArray alloc] init];
         for (NSDictionary *dic in [dictionary objectForKey:@"devices"])
         {
-            int deviceID;
+            int deviceID = 0;
         
             if([dic objectForKey:@"deviceID"])
             {
@@ -1449,7 +1449,7 @@
 +(int)getRoomIDByBeacon:(int)beacon;
 {
     FMDatabase *db = [SQLManager connetdb];
-    int rID ;
+    int rID = 0;
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Rooms where ibeacon = %d",beacon];
@@ -1485,8 +1485,8 @@
 +(BOOL)updateTotalVisited:(int)roomID
 {
     FMDatabase *db = [SQLManager connetdb];
-    int oldTotalVisite;
-    BOOL ret;
+    int oldTotalVisite = 0;
+    BOOL ret = false;
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT totalVisited FROM Rooms where ID = %d",roomID];

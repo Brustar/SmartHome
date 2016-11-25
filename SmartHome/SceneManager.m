@@ -79,13 +79,6 @@
                 if(schedule.deviceID==0){
                     if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID>0)
                     {
-                        int planType;
-                        if([schedule.startTime isEqualToString:@""])
-                        {
-                            planType = 2;
-                        }else{
-                            planType = 1;
-                        }
                         parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":name,@"ImgName":imgFileName,@"ScenceFile":scenePath,@"isPlan":[NSNumber numberWithInt:1],@"RoomID":[NSNumber numberWithInteger:scene.roomID]};
                     }
                 }else{
@@ -224,14 +217,14 @@
             
             parameter = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ScenceName":newScene.sceneName,@"ImgName":newScene.picName,@"ScenceFile":fileName,@"RoomID":[NSNumber numberWithLong:newScene.roomID],@"IsPlan":@"2",@"ScenceID":[NSNumber numberWithInt:newScene.sceneID]};
         }
-        NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
-        NSString *URL = [NSString stringWithFormat:@"%@SceneEdit.aspx",[IOManager httpAddr]];
-        [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName imgData:nil imgFileName:@"" completion:^(id responseObject) {
-            
-        }];
-        }
+        
+    }
    
-    
+    NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
+    NSString *URL = [NSString stringWithFormat:@"%@SceneEdit.aspx",[IOManager httpAddr]];
+    [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName imgData:nil imgFileName:@"" completion:^(id responseObject) {
+        
+    }];
   
 }
 

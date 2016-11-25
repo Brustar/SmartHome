@@ -22,7 +22,7 @@
 #import "RegisterDetailController.h"
 #import "ECloudTabBarController.h"
 #import "SQLManager.h"
-#import "RoomManager.h"
+
 #import "FMDatabase.h"
 #import "DeviceInfo.h"
 #import "PackManager.h"

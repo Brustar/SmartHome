@@ -121,6 +121,7 @@
 		2E1495101DE474EF00141629 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9ADF711CE2DC020052F3BC /* libz.tbd */; };
 		2E5E5FE91DE1F1A9006F0C8F /* IphoneLightController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5E5FE81DE1F1A9006F0C8F /* IphoneLightController.m */; };
 		2E5E5FEC1DE22AC8006F0C8F /* LightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5E5FEB1DE22AC8006F0C8F /* LightCell.m */; };
+		2E6CEDBF1DE5DE8B000979BE /* DetailMSGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CEDBE1DE5DE8B000979BE /* DetailMSGViewController.m */; };
 		F361579D9B9637C261531C8C /* libPods-SmartHome.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B2DBF5C92F57E3B7AD6AA3 /* libPods-SmartHome.a */; };
 		F60E71CA1D796BE6008863DB /* AmplifierController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60E71C91D796BE6008863DB /* AmplifierController.m */; };
 		F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB411D00029900AB04BE /* DetailViewController.m */; };
@@ -158,7 +159,6 @@
 		F64111DC1D4F1E6100E8099D /* FixTimeRepeatController.m in Sources */ = {isa = PBXBuildFile; fileRef = F64111DB1D4F1E6100E8099D /* FixTimeRepeatController.m */; };
 		F6423C221D9A4B7400AAB3CE /* DeviceOfFixTimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6423C211D9A4B7400AAB3CE /* DeviceOfFixTimerViewController.m */; };
 		F64407D61DAE3BAD0032BEDF /* IphoneFavorController.m in Sources */ = {isa = PBXBuildFile; fileRef = F64407D51DAE3BAD0032BEDF /* IphoneFavorController.m */; };
-		F64487DD1D55BA3C00EF2CFC /* RoomManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F64487DC1D55BA3C00EF2CFC /* RoomManager.m */; };
 		F6457C451DD5523C00CA3A72 /* IphoneFamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6457C441DD5523C00CA3A72 /* IphoneFamilyViewController.m */; };
 		F645BD471D76E3D8005BFB7A /* FavorController.m in Sources */ = {isa = PBXBuildFile; fileRef = F645BD461D76E3D8005BFB7A /* FavorController.m */; };
 		F646C0B91D91173000DF1728 /* IphoneRoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = F646C0B81D91173000DF1728 /* IphoneRoomView.m */; };
@@ -638,6 +638,8 @@
 		2E5E5FE81DE1F1A9006F0C8F /* IphoneLightController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneLightController.m; sourceTree = "<group>"; };
 		2E5E5FEA1DE22AC8006F0C8F /* LightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightCell.h; sourceTree = "<group>"; };
 		2E5E5FEB1DE22AC8006F0C8F /* LightCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LightCell.m; sourceTree = "<group>"; };
+		2E6CEDBD1DE5DE8B000979BE /* DetailMSGViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailMSGViewController.h; sourceTree = "<group>"; };
+		2E6CEDBE1DE5DE8B000979BE /* DetailMSGViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailMSGViewController.m; sourceTree = "<group>"; };
 		9B45FF693457BA21BA43CE05 /* Pods-SmartHome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.debug.xcconfig"; sourceTree = "<group>"; };
 		A4B2DBF5C92F57E3B7AD6AA3 /* libPods-SmartHome.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SmartHome.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE54136C9EEF8F51E8FBEEDE /* Pods-SmartHome.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.release.xcconfig"; sourceTree = "<group>"; };
@@ -708,8 +710,6 @@
 		F6423C211D9A4B7400AAB3CE /* DeviceOfFixTimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceOfFixTimerViewController.m; sourceTree = "<group>"; };
 		F64407D41DAE3BAD0032BEDF /* IphoneFavorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneFavorController.h; sourceTree = "<group>"; };
 		F64407D51DAE3BAD0032BEDF /* IphoneFavorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneFavorController.m; sourceTree = "<group>"; };
-		F64487DB1D55BA3C00EF2CFC /* RoomManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomManager.h; sourceTree = "<group>"; };
-		F64487DC1D55BA3C00EF2CFC /* RoomManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomManager.m; sourceTree = "<group>"; };
 		F6457C431DD5523C00CA3A72 /* IphoneFamilyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneFamilyViewController.h; sourceTree = "<group>"; };
 		F6457C441DD5523C00CA3A72 /* IphoneFamilyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneFamilyViewController.m; sourceTree = "<group>"; };
 		F645BD451D76E3D8005BFB7A /* FavorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavorController.h; sourceTree = "<group>"; };
@@ -1009,6 +1009,8 @@
 				F65DB33C1D2B5AB2002A815C /* RegisterDetailController.m */,
 				0F4B3BFE1D2A13870002E75E /* MSGController.h */,
 				0F4B3BFF1D2A13870002E75E /* MSGController.m */,
+				2E6CEDBD1DE5DE8B000979BE /* DetailMSGViewController.h */,
+				2E6CEDBE1DE5DE8B000979BE /* DetailMSGViewController.m */,
 				F645BD451D76E3D8005BFB7A /* FavorController.h */,
 				F645BD461D76E3D8005BFB7A /* FavorController.m */,
 				F65838D81D3A2A43004210AC /* MsgCell.h */,
@@ -1590,8 +1592,6 @@
 				0F477FC51D2F94B3004FA361 /* NetStatusManager.m */,
 				0FF92B631D9222220098DD54 /* SQLManager.h */,
 				F6251F761D542508000A5A47 /* SQLManager.m */,
-				F64487DB1D55BA3C00EF2CFC /* RoomManager.h */,
-				F64487DC1D55BA3C00EF2CFC /* RoomManager.m */,
 				F6690BF41D62EC3F0098B0EE /* ChannelManager.h */,
 				F6690BF51D62EC3F0098B0EE /* ChannelManager.m */,
 				F6755A4A1D4063FA002394F3 /* ECloudTabBar.h */,
@@ -2220,8 +2220,8 @@
 				F65838DA1D3A2A43004210AC /* MsgCell.m in Sources */,
 				F663CA691D990138001F87F3 /* IphoneFixTimerController.m in Sources */,
 				F645BD471D76E3D8005BFB7A /* FavorController.m in Sources */,
+				2E6CEDBF1DE5DE8B000979BE /* DetailMSGViewController.m in Sources */,
 				0FB42E231CF6F9E8007DE64F /* SocketManager.m in Sources */,
-				F64487DD1D55BA3C00EF2CFC /* RoomManager.m in Sources */,
 				0F6AB86F1D782D9D0041E39C /* SunCount.m in Sources */,
 				0FCFB3861CF2912700B37DD3 /* TV.m in Sources */,
 				F65B7D271D34E9E00059CFA4 /* MySettingViewController.m in Sources */,

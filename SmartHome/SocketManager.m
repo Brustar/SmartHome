@@ -127,6 +127,8 @@
             DeviceInfo *device=[DeviceInfo defaultManager];
             device.masterPort=(int)[PackManager dataToUInt16:port];
             device.masterIP = [PackManager NSDataToIP:ip];
+            NSData *masterID=[data subdataWithRange:NSMakeRange(2, 2)];
+            device.masterID =(long)[PackManager dataToUInt16:masterID];
             
             [self.socket writeData:[[DeviceInfo defaultManager] author] withTimeout:-1 tag:0];
             [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:0];
@@ -160,10 +162,9 @@
         }
     }
     
-    //[self.socket readDataWithTimeout:30 tag:0];
-    
-    
-    [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:0];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1000 * NSEC_PER_MSEC)), dispatch_get_main_queue(), ^{
+        [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:0];
+    });
 }
 
 -(void)onSocket:(AsyncSocket *)sock didReadPartialDataOfLength:(long)partialLength tag:(long)tag

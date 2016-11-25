@@ -17,7 +17,7 @@
 #import "MBProgressHUD+NJ.h"
 #import "SearchViewController.h"
 #import "ECSearchView.h"
-#import "RoomManager.h"
+
 #import "IbeaconManager.h"
 #import "HostIDSController.h"
 #import "UIImageView+WebCache.h"
@@ -321,13 +321,8 @@
         
         [theSegue setValue:[NSNumber numberWithInt:self.selectedSID] forKey:@"sceneID"];
         [theSegue setValue:[NSNumber numberWithInt:self.roomID] forKey:@"roomID"];
-    
-        
     }
 }
-
-
-
 
 - (IBAction)addScence:(id)sender {
     
@@ -342,19 +337,13 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-
-
 - (IBAction)clickSceneBtn:(UIButton *)sender {
-   
-    
     self.selectedSID =(int)sender.tag;
     [[SceneManager defaultManager] startScene:self.selectedSID];
     [self performSegueWithIdentifier:@"sceneDetailSegue" sender:self];
 }
 
 - (IBAction)clickSartSceneBtn:(UIButton *)sender {
-    
-    
     [sender setTintColor:[UIColor redColor]];
     [[SceneManager defaultManager] startScene:(int)sender.tag];
 }

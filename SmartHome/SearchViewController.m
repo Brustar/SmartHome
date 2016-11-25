@@ -40,6 +40,7 @@
 @property (nonatomic,strong) NSArray *devices;
 @property (nonatomic,strong) NSArray *deviceInfos;
 @property (nonatomic,strong) NSArray *searchResult;
+@property (nonatomic,strong) NSArray * rooms;
 @end
 
 @implementation SearchViewController
@@ -57,8 +58,10 @@
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
     NSArray *tables=@[@"Devices",@"Scenes"];
+    NSString * room = @"Rooms";
     FMDatabase *db = [SQLManager connetdb];
     NSMutableArray *result = [NSMutableArray array];
+    NSMutableArray * roomArr = [NSMutableArray array];
     if([db open])
     {
         for(int i = 0; i < tables.count; i++)
@@ -66,15 +69,29 @@
             if(searchBar.text)
             {
                 NSString *sql = [NSString stringWithFormat:@"select * from %@ where NAME like '%%%@%%'",tables[i],searchBar.text];
+                NSString * roomSql = [NSString stringWithFormat:@"select * from %@ where NAME like '%%%@%%'",room,searchBar.text];
+                FMResultSet * roomResultSet = [db executeQuery:roomSql];
                 FMResultSet *resultSet = [db executeQuery:sql];
                 while([resultSet next])
                 {
                     NSString *name = [resultSet stringForColumn:@"NAME"];
+                    
                     [result addObject:name];
+                    NSLog(@"------%@-----",result);
                 }
+                while ([roomResultSet next]) {
+                    
+                    NSString * room = [roomResultSet stringForColumn:@"NAME"];
+                    
+                    [roomArr addObject:room];
+                }
+               
             }
         }
         self.searchResult = [result copy];
+        
+        self.rooms = [roomArr copy];
+        
     }
     [db closeOpenResultSets];
     [db close];
@@ -83,7 +100,13 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return self.rooms.count;
+}
+-(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+    NSString * str = self.rooms[section];
+    
+    return str;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

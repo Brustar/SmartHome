@@ -14,12 +14,14 @@
 #import "Device.h"
 #import "SceneManager.h"
 #import "SocketManager.h"
+#import "PackManager.h"
 
 @interface IphoneLightController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) NSArray * roomArrs;
 @property (nonatomic,strong) NSArray * lightArrs;
 @property (nonatomic,strong) NSString * deviceid;
+
 @end
 
 @implementation IphoneLightController
@@ -37,6 +39,7 @@
     // Do any additional setup after loading the view.
     
     _lightArrs = [SQLManager getDeviceByRoom:self.roomID];
+    
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
 }
@@ -54,38 +57,37 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  
     LightCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     Device *device = [SQLManager getDeviceWithDeviceID:[_lightArrs[indexPath.row] intValue]];
     cell.LightNameLabel.text = device.name;
-    cell.slider.tag = indexPath.row;
-    cell.Iphoneswitch.tag = indexPath.row;
-    [cell.slider addTarget:self action:@selector(dimming:) forControlEvents:UIControlEventValueChanged];
-    [cell.Iphoneswitch addTarget:self action:@selector(Iphoneswitch:) forControlEvents:UIControlEventValueChanged];
+//    cell.slider.tag = indexPath.row;
+//    cell.Iphoneswitch.tag = indexPath.row;
+    cell.slider.continuous = NO;
+    cell.deviceid = self.lightArrs[indexPath.row];
+    
     return cell;
-    
-}
--(void)dimming:(UISlider *)slider
-{
-    NSString *deviceid = _lightArrs[slider.tag];
-    
-    NSData *data=[[DeviceInfo defaultManager] changeBright:slider.value*100 deviceID:deviceid];
-    SocketManager *sock=[SocketManager defaultManager];
-    [sock.socket writeData:data withTimeout:1 tag:2];
-}
--(void)Iphoneswitch:(UISwitch *)switc
-{
-
-    NSString *deviceid = _lightArrs[switc.tag];
-    NSData * data = [[DeviceInfo defaultManager] toogleLight:switc.on deviceID:deviceid];
-    SocketManager *sock=[SocketManager defaultManager];
-    [sock.socket writeData:data withTimeout:1 tag:2];
 }
 
+
+#pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
+    Proto proto=protocolFromData(data);
+    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
+        return;
+    }
     
+    if (tag == 0 && (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON || proto.action.state == 0x0b || proto.action.state == 0x0a)) {
+        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID) masterID:[[DeviceInfo defaultManager] masterID]];
+        if ([devID intValue]==[self.deviceid intValue]) {
+            //创建一个消息对象
+            NSNotification * notice = [NSNotification notificationWithName:@"light" object:nil userInfo:@{@"state":@(proto.action.state),@"r":@(proto.action.RValue),@"g":@(proto.action.G),@"b":@(proto.action.B)}];
+            //发送消息
+            [[NSNotificationCenter defaultCenter] postNotification:notice];
+        }
+    }
 }
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 

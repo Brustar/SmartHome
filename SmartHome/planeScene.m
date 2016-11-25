@@ -8,10 +8,6 @@
 
 #import "planeScene.h"
 
-@interface planeScene ()
-
-@end
-
 @implementation planeScene
 
 - (void)viewDidLoad {

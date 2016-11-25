@@ -161,7 +161,7 @@
     [self.devices removeAllObjects];
     //fe01 0001 0016 0002 313710c8a5a505004b1200 98831069354304004b1200 de00ff
     NSData *length=[data subdataWithRange:NSMakeRange(6, 2)];
-    for (int i; i<[PackManager dataToUInt16:length]; i++) {
+    for (int i = 0; i<[PackManager dataToUInt16:length]; i++) {
         NSData *addr=[data subdataWithRange:NSMakeRange(8+11*i, 2)];
         //NSData *macAddr=[data subdataWithRange:NSMakeRange(11+11*i, 2)];
         [self.devices addObject:addr];//[NSString stringWithFormat:@"%ld",[PackManager NSDataToUInt:addr] ]];

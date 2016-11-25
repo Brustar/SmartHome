@@ -13,7 +13,7 @@
 #import "ECloudTabBar.h"
 #import "ECloudButton.h"
 #import "ECloudMoreView.h"
-#import "RoomManager.h"
+
 #import "Room.h"
 #import "SQLManager.h"
 
@@ -238,21 +238,21 @@
         DeviceInfo *device=[DeviceInfo defaultManager];
         NSArray *beacons=[device valueForKey:@"beacons"];
         for (CLBeacon *beacon in beacons) {
-            NSString *str;
+            //NSString *str;
             switch (beacon.proximity) {
                 case CLProximityNear:
-                    str = @"近";
+                    //str = @"近";
                     position=[beacon.major intValue];
                     break;
                 case CLProximityImmediate:
-                    str = @"超近";
+                    //str = @"超近";
                     position=[beacon.major intValue];
                     break;
                 case CLProximityFar:
-                    str = @"远";
+                    //str = @"远";
                     break;
                 case CLProximityUnknown:
-                    str = @"不见了";
+                    //str = @"不见了";
                     break;
                 default:
                     break;
