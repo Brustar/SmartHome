@@ -8,9 +8,11 @@
 #import "TouchImage.h"
 #import "HttpManager.h"
 #import "AFHTTPSessionManager.h"
+#import "SocketManager.h"
+#import "SceneManager.h"
 
 //平面图，我的家
-@interface planeScene : UIViewController
+@interface planeScene : UIViewController<TouchImageDelegate>
 
 @property (strong, nonatomic) IBOutlet TouchImage *planeimg;
 @property (nonatomic) int deviceID;

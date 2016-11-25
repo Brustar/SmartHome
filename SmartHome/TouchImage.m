@@ -25,6 +25,16 @@
 }
 */
 
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    
+    if (self) {
+        _rectArray = [[NSMutableArray alloc] initWithObjects:@"{{680, 180}, {320, 400}}", nil];
+    }
+    
+    return self;
+}
+
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     NSSet *allTouches = [event allTouches];    //返回与当前接收者有关的所有的触摸对象
@@ -102,55 +112,73 @@
 -(void) planeHandle:(CGPoint)point
 {
 
-    NSString *path=[[NSBundle mainBundle] pathForResource:@"planeScene" ofType:@"plist"];
-    NSDictionary *dic = [[NSDictionary alloc] initWithContentsOfFile:path];
-    for (NSDictionary *rect in dic[@"rects"]) {
-        NSString *rectstr=rect[@"rect"];
-        
-        CGRect rt=CGRectFromString(rectstr);
-        if (CGRectContainsPoint(rt,point)) {
-            ((planeScene *)self.delegate).deviceID=[rect[@"deviceID"] intValue];
-            self.deviceID = [rect[@"deviceID"] intValue];
-             NSString *typeName = [SQLManager deviceTypeNameByDeviceID:self.deviceID];
-            NSString *segue;
-            if([typeName isEqualToString:@"灯光"]){
-                segue = @"plane_Light";
-            }else if([typeName isEqualToString:@"窗帘"]){
-                segue = @"pane_Curtain";
-            }else if([typeName isEqualToString:@"网络电视"]){
-                segue = @"plane_TV";
-            }else if([typeName isEqualToString:@"空调"]){
-                segue = @"plane_Air";
-            }else if([typeName isEqualToString:@"DVD"]){
-                segue = @"DVD";
-            }else if([typeName isEqualToString:@"FM"]){
-                segue = @"plane_FM";
-            }else if([typeName isEqualToString:@"摄像头"]){
-                segue = @"plane_Camera";
-            }else if([typeName isEqualToString:@"智能插座"]) {
-                segue = @"plane_Plugin";
+    for (NSString *rectStr in _rectArray) {
+        CGRect rect = CGRectFromString(rectStr);
+        if (CGRectContainsPoint(rect,point)) {
+            NSLog(@"点击了卧室");
+            
+            if (_delegate && [_delegate respondsToSelector:@selector(openRoom)]) {
+                [self.delegate openRoom];
             }
-            else if([typeName isEqualToString:@"机顶盒"])
-            {
-                segue = @"plane_NetTv";
-                
-            }else if([typeName isEqualToString:@"DVD"]){
-                segue = @"plane_DVD";
-                
-            }else if([typeName isEqualToString:@"功放"]){
-                segue = @"pane_amplifer";
-               
-            }else{
-                segue = @"plane_Guard";
-
-            }
-
-            //[self.delegate performSegueWithIdentifier:segue sender:self.delegate];
-
+            
+            break;
+            
         }
     }
     
+    
+    
+    
+//    NSString *path=[[NSBundle mainBundle] pathForResource:@"planeScene" ofType:@"plist"];
+//    NSDictionary *dic = [[NSDictionary alloc] initWithContentsOfFile:path];
+//    for (NSDictionary *rect in dic[@"rects"]) {
+//        NSString *rectstr=rect[@"rect"];
+//        
+//        CGRect rt=CGRectFromString(rectstr);
+//        if (CGRectContainsPoint(rt,point)) {
+//            ((planeScene *)self.delegate).deviceID=[rect[@"deviceID"] intValue];
+//            self.deviceID = [rect[@"deviceID"] intValue];
+//             NSString *typeName = [SQLManager deviceTypeNameByDeviceID:self.deviceID];
+//            NSString *segue;
+//            if([typeName isEqualToString:@"灯光"]){
+//                segue = @"plane_Light";
+//            }else if([typeName isEqualToString:@"窗帘"]){
+//                segue = @"pane_Curtain";
+//            }else if([typeName isEqualToString:@"网络电视"]){
+//                segue = @"plane_TV";
+//            }else if([typeName isEqualToString:@"空调"]){
+//                segue = @"plane_Air";
+//            }else if([typeName isEqualToString:@"DVD"]){
+//                segue = @"DVD";
+//            }else if([typeName isEqualToString:@"FM"]){
+//                segue = @"plane_FM";
+//            }else if([typeName isEqualToString:@"摄像头"]){
+//                segue = @"plane_Camera";
+//            }else if([typeName isEqualToString:@"智能插座"]) {
+//                segue = @"plane_Plugin";
+//            }
+//            else if([typeName isEqualToString:@"机顶盒"])
+//            {
+//                segue = @"plane_NetTv";
+//                
+//            }else if([typeName isEqualToString:@"DVD"]){
+//                segue = @"plane_DVD";
+//                
+//            }else if([typeName isEqualToString:@"功放"]){
+//                segue = @"pane_amplifer";
+//               
+//            }else{
+//                segue = @"plane_Guard";
+//
+//            }
+//
+//            //[self.delegate performSegueWithIdentifier:segue sender:self.delegate];
+//
+//        }
+//    }
+    
 }
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     id theSegue = segue.destinationViewController;

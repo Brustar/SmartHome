@@ -20,6 +20,8 @@
 
 @property (nonatomic, assign) id<TouchImageDelegate>delegate;
 
+@property (nonatomic, strong) NSMutableArray *rectArray;
+
 @end
 
 @protocol TouchImageDelegate <NSObject>
@@ -27,5 +29,6 @@
 @optional
 - (void)openDeviceWithDeviceID:(NSString *)deviceID;
 - (void)closeDeviceWithDeviceID:(NSString *)deviceID;
+- (void)openRoom;
 
 @end
