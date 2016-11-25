@@ -47,6 +47,13 @@
 
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    SocketManager *sock = [SocketManager defaultManager];
+    NSData *data = [[SceneManager defaultManager] getRealSceneData];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -56,11 +63,7 @@
     SocketManager *sock = [SocketManager defaultManager];
     [sock connectTcp];
     sock.delegate = self;
-    NSData *data = [[SceneManager defaultManager] getRealSceneData];
-    [sock.socket writeData:data withTimeout:1 tag:1];
     
-//    [self sendRequestForGettingSceneConfig:@"cloud/RoomStatusList.aspx" withTag:1];
-  
 }
 
 //获取全屋配置
@@ -107,7 +110,7 @@
     }
     
     if (tag==0) {
-        if (proto.action.state==0x7A) {
+        if (proto.action.state==0x6A) {
             cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
         }
         if (proto.action.state==0x8A) {
