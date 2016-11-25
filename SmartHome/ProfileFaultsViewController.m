@@ -220,7 +220,10 @@
     for (NSIndexPath *indexPath in selectedArray) {
         //[deleteArray addObject:self.Mydefaults[indexPath.row]];
         [deleteArray addObject:self.faultArr[indexPath.row]];
-        [deletedTime addObject:self.timesArr[indexPath.row]];
+        if (![deletedTime containsObject:self.timesArr[indexPath.row]]) {
+             [deletedTime addObject:self.timesArr[indexPath.row]];
+        }
+       
         [deletedID addObject:self.recordIDs[indexPath.row]];
     }
     // 先删除数据源

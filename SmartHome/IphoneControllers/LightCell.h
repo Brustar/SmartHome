@@ -13,4 +13,11 @@
 @property (weak, nonatomic) IBOutlet UISlider *slider;
 @property (weak, nonatomic) IBOutlet UISwitch *Iphoneswitch;
 
+-(void)Iphoneswitch:(UISwitch *)switc;
+
+-(void)dimming:(UISlider *)slider;
+
+//硬件id
+@property (weak,nonatomic) NSString *deviceid;
+
 @end

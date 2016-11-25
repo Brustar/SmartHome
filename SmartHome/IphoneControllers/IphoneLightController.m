@@ -60,32 +60,14 @@
     LightCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     Device *device = [SQLManager getDeviceWithDeviceID:[_lightArrs[indexPath.row] intValue]];
     cell.LightNameLabel.text = device.name;
-    cell.slider.tag = indexPath.row;
-    cell.Iphoneswitch.tag = indexPath.row;
+//    cell.slider.tag = indexPath.row;
+//    cell.Iphoneswitch.tag = indexPath.row;
     cell.slider.continuous = NO;
-    [cell.slider addTarget:self action:@selector(dimming:) forControlEvents:UIControlEventValueChanged];
-    [cell.Iphoneswitch addTarget:self action:@selector(Iphoneswitch:) forControlEvents:UIControlEventValueChanged];
+    cell.deviceid = self.lightArrs[indexPath.row];
+    
     return cell;
 }
--(void)dimming:(UISlider *)slider
-{
-    NSString *deviceid = _lightArrs[slider.tag];
-    
-    NSData *data=[[DeviceInfo defaultManager] changeBright:slider.value*100 deviceID:deviceid];
-    SocketManager *sock=[SocketManager defaultManager];
-    [sock.socket writeData:data withTimeout:1 tag:1];
-    
-    
-}
--(void)Iphoneswitch:(UISwitch *)switc
-{
 
-    NSString *deviceid = _lightArrs[switc.tag];
-    NSData * data = [[DeviceInfo defaultManager] toogleLight:switc.on deviceID:deviceid];
-    SocketManager *sock=[SocketManager defaultManager];
-    [sock.socket writeData:data withTimeout:1 tag:1];
-
-}
 
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
