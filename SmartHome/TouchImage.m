@@ -29,10 +29,18 @@
     self = [super initWithFrame:frame];
     
     if (self) {
-        _rectArray = [[NSMutableArray alloc] initWithObjects:@"{{680, 180}, {320, 400}}", nil];
+        _roomArray = [[NSMutableArray alloc] init];
     }
     
     return self;
+}
+
+- (void)addRoom:(NSArray *)array {
+    [_roomArray removeAllObjects];
+    
+    if (array.count >0) {
+        [_roomArray addObjectsFromArray:array];
+    }
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -109,31 +117,38 @@
     }
 }
 
--(void) planeHandle:(CGPoint)point
+- (void)planeHandle:(CGPoint)point
 {
-
-
-    for (NSString *rectStr in _rectArray) {
-        CGRect rect = CGRectFromString(rectStr);
-        if (CGRectContainsPoint(rect,point)) {
-            NSLog(@"点击了卧室");
-            
-            if (_delegate && [_delegate respondsToSelector:@selector(openRoom)]) {
-                [self.delegate openRoom];
+    for (id roomDict in _roomArray) {
+        if ([roomDict isKindOfClass:[NSDictionary class]]) {
+            NSString *rectStr = [roomDict objectForKey:@"rect"];
+            CGRect rect = CGRectFromString(rectStr);
+            if (CGRectContainsPoint(rect,point)) { //选中了某个房间
+                NSNumber *roomID = [roomDict objectForKey:@"roomID"];
+                
+                if (roomID && _delegate && [_delegate respondsToSelector:@selector(openRoom:)]) {
+                    [self.delegate openRoom:roomID];
+                }
+                
+                break;
             }
-            
-            break;
-            
         }
     }
-    NSString *path=[[NSBundle mainBundle] pathForResource:@"planeScene" ofType:@"plist"];
+    
+    
+    
+    
+    
+    
+    
+   /* NSString *path=[[NSBundle mainBundle] pathForResource:@"planeScene" ofType:@"plist"];
     NSDictionary *dic = [[NSDictionary alloc] initWithContentsOfFile:path];
     for (NSDictionary *rect in dic[@"rects"]) {
         NSString *rectstr=rect[@"rect"];
         
         CGRect rt=CGRectFromString(rectstr);
         if (CGRectContainsPoint(rt,point)) {
-            /*
+            
             ((planeScene *)self.delegate).deviceID=[rect[@"deviceID"] intValue];
             self.deviceID = [rect[@"deviceID"] intValue];
             NSString *typeName = [SQLManager deviceTypeNameByDeviceID:self.deviceID];
@@ -171,10 +186,10 @@
             }
 
             [self.delegate performSegueWithIdentifier:segue sender:self.delegate];
-             */
+    
 
         }
-    }
+    }*/
     
     
     

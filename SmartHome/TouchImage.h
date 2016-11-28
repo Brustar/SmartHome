@@ -20,7 +20,9 @@
 
 @property (nonatomic, assign) id<TouchImageDelegate>delegate;
 
-@property (nonatomic, strong) NSMutableArray *rectArray;
+@property (nonatomic, strong) NSMutableArray *roomArray;//房间数组
+
+- (void)addRoom:(NSArray *)array;
 
 @end
 
@@ -29,6 +31,6 @@
 @optional
 - (void)openDeviceWithDeviceID:(NSString *)deviceID;
 - (void)closeDeviceWithDeviceID:(NSString *)deviceID;
-- (void)openRoom;
+- (void)openRoom:(NSNumber *)roomId;
 
 @end

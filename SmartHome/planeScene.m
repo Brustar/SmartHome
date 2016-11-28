@@ -102,7 +102,18 @@
         NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:plistFilePath];
         NSLog(@"planeScenePlistFilePath: %@", plistFilePath);
         NSLog(@"planeScenePlistDict: %@", plistDic);
-        [self addLights:[plistDic objectForKey:@"devices"]];
+        
+        //获取全屋设备
+        NSArray *deviceArray = [plistDic objectForKey:@"devices"];
+        if ([deviceArray isKindOfClass:[NSArray class]] && deviceArray.count >0) {
+            [self addLights:deviceArray];
+        }
+        
+        //获取所有房间
+        NSArray *roomArray = [plistDic objectForKey:@"rooms"];
+        if ([roomArray isKindOfClass:[NSArray class]] && roomArray.count >0) {
+            [self.planeimg addRoom:roomArray];
+        }
     }];
     
     [task resume];
@@ -124,7 +135,7 @@
 
 - (void)lightBtnClicked:(UIButton *)btn {
     NSInteger deviceID = btn.tag;
-    NSString *deviceIDStr = [NSString stringWithFormat:@"%ld", deviceID];
+    NSString *deviceIDStr = [NSString stringWithFormat:@"%@", @(deviceID)];
     if (btn.selected) { //关灯
         [self closeDeviceWithDeviceID:deviceIDStr];
         btn.selected = NO;
@@ -157,9 +168,16 @@
      [theSegue setValue:[NSString stringWithFormat:@"%d", self.deviceID] forKey:@"deviceid"];
 }
 
-- (void)openRoom {
-//    [[SceneManager defaultManager] startScene:217];
-//    [self performSegueWithIdentifier:@"sceneDetailSegue" sender:self];
+- (void)openRoom:(NSNumber *)roomId {
+    NSLog(@"打开房间 %@", roomId);
+    
+    UIStoryboard * mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    RoomDeviceController * VC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"RoomLightController"];
+    VC.roomID = [roomId intValue];
+    [self.navigationController pushViewController:VC animated:YES];
+    
+    
+
 }
 
 @end
