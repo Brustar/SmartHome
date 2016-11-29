@@ -8,7 +8,7 @@
 
 #import "IphoneTVController.h"
 #import "IphoneRoomView.h"
-#import "ChannelManager.h"
+
 #import "TVChannel.h"
 #import "TVLogoCell.h"
 #import "UIImageView+WebCache.h"
@@ -81,7 +81,7 @@
     if(!_allFavourTVChannels)
     {
         _allFavourTVChannels = [NSMutableArray array];
-        _allFavourTVChannels = [ChannelManager getAllChannelForFavoritedForType:@"TV" deviceID:[self.deviceid intValue]];
+        _allFavourTVChannels = [SQLManager getAllChannelForFavoritedForType:@"TV" deviceID:[self.deviceid intValue]];
         if(_allFavourTVChannels == nil || _allFavourTVChannels.count == 0)
         {
             self.tvLogoCollectionView.backgroundColor = [UIColor lightGrayColor];
@@ -360,7 +360,7 @@
             TVChannel *channel = self.allFavourTVChannels[indexPath.row];
             
             //从数据库中删除数据
-            BOOL isSuccess = [ChannelManager deleteChannelForChannelID:channel.channel_id];
+            BOOL isSuccess = [SQLManager deleteChannelForChannelID:channel.channel_id];
             if(!isSuccess)
             {
                 [MBProgressHUD showError:@"删除失败，请稍后再试"];
@@ -368,8 +368,6 @@
             }
             [self.allFavourTVChannels removeObject:channel];
             [self.tvLogoCollectionView reloadData];
-            
-
         }else{
             [MBProgressHUD showError:responseObject[@"Msg"]];
         }

@@ -191,7 +191,6 @@
 		F66596E61D3F5DBC0082716A /* AddNewScenseController.m in Sources */ = {isa = PBXBuildFile; fileRef = F66596E51D3F5DBC0082716A /* AddNewScenseController.m */; };
 		F66596E91D3F72CA0082716A /* AddSenseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F66596E81D3F72CA0082716A /* AddSenseCell.m */; };
 		F668AF251D53413B0079587F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F668AF241D53413B0079587F /* Main.storyboard */; };
-		F6690BF61D62EC3F0098B0EE /* ChannelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6690BF51D62EC3F0098B0EE /* ChannelManager.m */; };
 		F66CADE51D5D8654001E66EC /* DeviceType.m in Sources */ = {isa = PBXBuildFile; fileRef = F66CADE41D5D8654001E66EC /* DeviceType.m */; };
 		F66DFF281D5184730005E882 /* EditSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = F66DFF271D5184730005E882 /* EditSceneController.m */; };
 		F66DFF2B1D5188BF0005E882 /* EditSceneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F66DFF2A1D5188BF0005E882 /* EditSceneCell.m */; };
@@ -776,8 +775,6 @@
 		F66596E71D3F72CA0082716A /* AddSenseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddSenseCell.h; sourceTree = "<group>"; };
 		F66596E81D3F72CA0082716A /* AddSenseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddSenseCell.m; sourceTree = "<group>"; };
 		F668AF241D53413B0079587F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		F6690BF41D62EC3F0098B0EE /* ChannelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelManager.h; sourceTree = "<group>"; };
-		F6690BF51D62EC3F0098B0EE /* ChannelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelManager.m; sourceTree = "<group>"; };
 		F66CADE31D5D8654001E66EC /* DeviceType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceType.h; sourceTree = "<group>"; };
 		F66CADE41D5D8654001E66EC /* DeviceType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceType.m; sourceTree = "<group>"; };
 		F66DFF261D5184730005E882 /* EditSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditSceneController.h; sourceTree = "<group>"; };
@@ -1602,8 +1599,6 @@
 				0F477FC51D2F94B3004FA361 /* NetStatusManager.m */,
 				0FF92B631D9222220098DD54 /* SQLManager.h */,
 				F6251F761D542508000A5A47 /* SQLManager.m */,
-				F6690BF41D62EC3F0098B0EE /* ChannelManager.h */,
-				F6690BF51D62EC3F0098B0EE /* ChannelManager.m */,
 				F6755A4A1D4063FA002394F3 /* ECloudTabBar.h */,
 				F6755A4B1D4063FA002394F3 /* ECloudTabBar.m */,
 				F6755A4D1D406552002394F3 /* ECloudTabBarController.h */,
@@ -2178,7 +2173,6 @@
 				0FCFB3981CF2947500B37DD3 /* EntranceGuard.m in Sources */,
 				F64EF8011D8FDCE7003C1C48 /* IphoneDeviceListController.m in Sources */,
 				0F4B49801CFEB13500D93DD2 /* CurtainController.m in Sources */,
-				F6690BF61D62EC3F0098B0EE /* ChannelManager.m in Sources */,
 				0FCFB3921CF293D800B37DD3 /* Netv.m in Sources */,
 				0FC1197A1D6FE61C001DA19A /* Projector.m in Sources */,
 				F6B91F6F1D100EF700592FB0 /* DVCollectionViewCell.m in Sources */,

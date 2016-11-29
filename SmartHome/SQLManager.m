@@ -11,6 +11,7 @@
 #import "DeviceInfo.h"
 #import "Room.h"
 #import "Scene.h"
+#import "TVChannel.h"
 
 @implementation SQLManager
 
@@ -57,26 +58,6 @@
     return eName;
 }
 
-+(NSString *)getUrlByDeviceId:(int)eId
-{
-    FMDatabase *db = [self connetdb];
-    NSString *url;
-    if([db open])
-    {
-        NSString *sql = [NSString stringWithFormat:@"SELECT url FROM Devices where ID = %d and hTypeId = 45",eId];
-       
-        FMResultSet *resultSet = [db executeQuery:sql];
-        while ([resultSet next])
-        {
-            url = [resultSet stringForColumn:@"url"];
-        }
-    }
-    [db closeOpenResultSets];
-    [db close];
-    return url;
-
-}
-
 +(NSInteger)deviceIDByDeviceName:(NSString *)deviceName
 {
     FMDatabase *db = [self connetdb];
@@ -101,11 +82,11 @@
     NSString *url;
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT url FROM Devices where ID = %d",deviceID];
+        NSString *sql = [NSString stringWithFormat:@"SELECT camera_url FROM Devices where ID = %d",deviceID];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
-            url = [resultSet stringForColumn:@"url"];
+            url = [resultSet stringForColumn:@"camera_url"];
         }
     }
     [db closeOpenResultSets];
@@ -1097,7 +1078,7 @@
         
         NSString *sqlRoom=@"CREATE TABLE IF NOT EXISTS Rooms(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"PM25\" INTEGER, \"NOISE\" INTEGER, \"TEMPTURE\" INTEGER, \"CO2\" INTEGER, \"moisture\" INTEGER, \"imgUrl\" TEXT,\"ibeacon\" INTEGER,\"totalVisited\" INTEGER)";
         NSString *sqlChannel=@"CREATE TABLE IF NOT EXISTS Channels (\"id\" INTEGER PRIMARY KEY  NOT NULL  UNIQUE ,\"eqId\" INTEGER,\"channelValue\" INTEGER,\"cNumber\" INTEGER, \"Channel_name\" TEXT,\"Channel_pic\" TEXT, \"parent\" CHAR(2) NOT NULL  DEFAULT TV, \"isFavorite\" BOOL DEFAULT 0, \"eqNumber\" TEXT)";
-        NSString *sqlDevice=@"CREATE TABLE IF NOT EXISTS Devices(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"sn\" TEXT, \"birth\" DATETIME, \"guarantee\" DATETIME, \"model\" TEXT, \"price\" FLOAT, \"purchase\" DATETIME, \"producer\" TEXT, \"gua_tel\" TEXT, \"power\" INTEGER, \"current\" FLOAT, \"voltage\" INTEGER, \"protocol\" TEXT, \"rID\" INTEGER, \"eNumber\" TEXT, \"hTypeId\" TEXT, \"subTypeId\" INTEGER, \"typeName\" TEXT, \"subTypeName\" TEXT, \"masterID\" TEXT, \"url\" TEXT)";
+        NSString *sqlDevice=@"CREATE TABLE IF NOT EXISTS Devices(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"sn\" TEXT, \"birth\" DATETIME, \"guarantee\" DATETIME, \"model\" TEXT, \"price\" FLOAT, \"purchase\" DATETIME, \"producer\" TEXT, \"gua_tel\" TEXT, \"power\" INTEGER, \"current\" FLOAT, \"voltage\" INTEGER, \"protocol\" TEXT, \"rID\" INTEGER, \"eNumber\" TEXT, \"hTypeId\" TEXT, \"subTypeId\" INTEGER, \"typeName\" TEXT, \"subTypeName\" TEXT, \"masterID\" TEXT, \"icon_url\" TEXT, \"camera_url\" TEXT)";
         NSString *sqlScene=@"CREATE TABLE IF NOT EXISTS \"Scenes\" (\"ID\" INT PRIMARY KEY  NOT NULL ,\"NAME\" TEXT NOT NULL ,\"roomName\" TEXT,\"pic\" TEXT DEFAULT (null) ,\"rId\" INTEGER,\"sType\" INTEGER, \"snumber\" TEXT,\"isFavorite\" BOOL,\"totalVisited\" INTEGER)";
         
         NSArray *sqls=@[sqlRoom,sqlChannel,sqlDevice,sqlScene];
@@ -1424,8 +1405,6 @@
         NSString *sql = @"select * from Rooms";
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next]) {
-            
-            
             Room *room = [Room new];
             room.rId = [resultSet intForColumn:@"ID"];
             room.rName = [resultSet stringForColumn:@"NAME"];
@@ -1436,7 +1415,6 @@
             room.moisture = [resultSet intForColumn:@"moisture"];
             room.imgUrl = [resultSet stringForColumn:@"imgUrl"];
             room.ibeacon = [resultSet intForColumn:@"ibeacon"];
-            
             [roomList addObject:room];
         }
     }
@@ -1503,5 +1481,48 @@
     [db closeOpenResultSets];
     [db close];
     return ret;
+}
+
+#pragma mark - channel favor
++(NSMutableArray *)getAllChannelForFavoritedForType:(NSString *)type deviceID:(int)deviceID
+{
+    FMDatabase *db = [SQLManager connetdb];
+    NSMutableArray *mutabelArr = [NSMutableArray array];
+    if (![db open]) {
+        NSLog(@"Could not open db");
+        return mutabelArr;
+    }
+    
+    FMResultSet *resultSet = [db executeQueryWithFormat:@"select * from Channels where isFavorite = 1 and eqId = %d and parent = %@",deviceID,type];
+    while([resultSet next])
+    {
+        TVChannel *channel = [TVChannel new];
+        channel.channel_name = [resultSet stringForColumn:@"Channel_name"];
+        channel.channel_id = [resultSet intForColumn:@"id"];
+        channel.channel_pic = [resultSet stringForColumn:@"Channel_pic"];
+        channel.isFavorite = [resultSet boolForColumn:@"isFavorite"];
+        channel.channelValue=[resultSet intForColumn:@"channelValue"];
+        channel.parent =[resultSet stringForColumn:@"parent"];
+        channel.eqNumber = [resultSet intForColumn:@"eqNumber"];
+        channel.eID = [resultSet intForColumn:@"eqId"];
+        channel.channel_number = [resultSet intForColumn:@"cNumber"];
+        [mutabelArr addObject:channel];
+    }
+    [db closeOpenResultSets];
+    [db close];
+    
+    return mutabelArr;
+}
+
++(BOOL)deleteChannelForChannelID:(NSInteger)channel_id
+{
+    FMDatabase *db = [SQLManager connetdb];
+    BOOL isSuccess = false;
+    if([db open])
+    {
+        isSuccess = [db executeUpdateWithFormat:@"delete from Channels where id = %ld",(long)channel_id];
+    }
+    [db close];
+    return isSuccess;
 }
 @end

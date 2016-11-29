@@ -19,10 +19,8 @@
 #import "SocketManager.h"
 #import "SQLManager.h"
 #import "HttpManager.h"
-#import "ChannelManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "PackManager.h"
-#import "ChannelManager.h"
 #import "TVIconController.h"
 #import "UploadManager.h"
 #import "UIImageView+WebCache.h"
@@ -109,7 +107,7 @@
     if(!_allFavourTVChannels)
     {
         _allFavourTVChannels = [NSMutableArray array];
-        _allFavourTVChannels = [ChannelManager getAllChannelForFavoritedForType:@"TV" deviceID:[self.deviceid intValue]];
+        _allFavourTVChannels = [SQLManager getAllChannelForFavoritedForType:@"TV" deviceID:[self.deviceid intValue]];
         if(_allFavourTVChannels == nil || _allFavourTVChannels.count == 0)
         {
             self.unstoreLabel.hidden = NO;
@@ -525,7 +523,7 @@
 {
     //保存成功后存到数据库
     [self writeTVChannelsConfigDataToSQL:responseObject withParent:@"TV"];
-    self.allFavourTVChannels = [ChannelManager getAllChannelForFavoritedForType:@"TV" deviceID:[self.deviceid intValue]];
+    self.allFavourTVChannels = [SQLManager getAllChannelForFavoritedForType:@"TV" deviceID:[self.deviceid intValue]];
     self.unstoreLabel.hidden = YES;
     self.tvLogoCollectionView.backgroundColor = [UIColor lightGrayColor];
     [self.tvLogoCollectionView reloadData];
@@ -550,7 +548,7 @@
             TVChannel *channel = self.allFavourTVChannels[indexPath.row];
             
             //从数据库中删除数据
-            BOOL isSuccess = [ChannelManager deleteChannelForChannelID:channel.channel_id];
+            BOOL isSuccess = [SQLManager deleteChannelForChannelID:channel.channel_id];
             if(!isSuccess)
             {
                 [MBProgressHUD showError:@"删除失败，请稍后再试"];

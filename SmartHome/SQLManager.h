@@ -62,8 +62,6 @@
 +(NSArray *)getAllDeviceSubTypes;
 +(NSArray *)getAllDeviceNameBysubType:(NSString *)subTypeName;
 
-+(NSString *)getUrlByDeviceId:(int)eId;
-
 +(NSString *)getEType:(NSInteger)eID;
 +(NSString *)getENumber:(NSInteger)eID;
 +(NSString *)getDeviceIDByENumber:(NSInteger)eID masterID:(NSInteger)mID;
@@ -109,4 +107,8 @@
 + (Device *)getDeviceWithDeviceID:(int) deviceID;
 
 +(BOOL)updateTotalVisited:(int)roomID;
+
++(NSMutableArray *)getAllChannelForFavoritedForType:(NSString *)type deviceID:(int)deviceID;
++(BOOL)deleteChannelForChannelID:(NSInteger)channel_id;
+
 @end

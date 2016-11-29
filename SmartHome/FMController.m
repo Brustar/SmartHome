@@ -13,7 +13,7 @@
 #import "VolumeManager.h"
 #import "SocketManager.h"
 #import "SQLManager.h"
-#import "ChannelManager.h"
+
 #import "HttpManager.h"
 #import "PackManager.h"
 #import "TVChannel.h"
@@ -50,7 +50,7 @@
     if(!_allFavouriteChannels)
     {
         _allFavouriteChannels = [NSMutableArray array];
-        _allFavouriteChannels = [ChannelManager getAllChannelForFavoritedForType:@"FM" deviceID:[self.deviceid intValue]];
+        _allFavouriteChannels = [SQLManager getAllChannelForFavoritedForType:@"FM" deviceID:[self.deviceid intValue]];
         if(_allFavouriteChannels == nil || _allFavouriteChannels.count == 0)
         {
             self.unstoreLabel.hidden = NO;
@@ -283,7 +283,7 @@
             self.editView.hidden = YES;
             self.unstoreLabel.hidden = YES;
             self.collectionView.backgroundColor = [UIColor lightGrayColor];
-            self.allFavouriteChannels = [ChannelManager getAllChannelForFavoritedForType:@"FM" deviceID:[self.deviceid intValue]];
+            self.allFavouriteChannels = [SQLManager getAllChannelForFavoritedForType:@"FM" deviceID:[self.deviceid intValue]];
             [self.collectionView reloadData];
         }else{
             [MBProgressHUD showError:@"Msg"];
@@ -295,7 +295,7 @@
         {
             NSIndexPath *indexPath = [self.collectionView indexPathForCell:self.cell];
             TVChannel *channel = self.allFavouriteChannels[indexPath.row];
-            BOOL isSuccess = [ChannelManager deleteChannelForChannelID:channel.channel_id];
+            BOOL isSuccess = [SQLManager deleteChannelForChannelID:channel.channel_id];
             if(!isSuccess)
             {
                 [MBProgressHUD showError:@"删除失败，请稍后再试"];
