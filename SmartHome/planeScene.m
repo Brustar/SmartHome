@@ -15,7 +15,7 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     //self.planeimg=[[TouchImage alloc] initWithFrame:CGRectMake(100, 40, 625, 500)];
-    self.planeimg = [[TouchImage alloc]initWithFrame:self.view.frame];
+    self.planeimg = [[TouchImage alloc] initWithFrame:self.view.frame];
     self.planeimg.contentMode = UIViewContentModeScaleAspectFit;
     self.planeimg.image =[UIImage imageNamed:@"ecloud_2"];
     self.planeimg.userInteractionEnabled=YES;
@@ -102,10 +102,60 @@
         NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:plistFilePath];
         NSLog(@"planeScenePlistFilePath: %@", plistFilePath);
         NSLog(@"planeScenePlistDict: %@", plistDic);
-        //[self showRoomNameAndBackgroundImgWithFilePath:plistFilePath];
+        
+        //获取全屋设备
+        NSArray *deviceArray = [plistDic objectForKey:@"devices"];
+        if ([deviceArray isKindOfClass:[NSArray class]] && deviceArray.count >0) {
+            [self addLights:deviceArray];
+        }
+        
+        //获取所有房间
+        NSArray *roomArray = [plistDic objectForKey:@"rooms"];
+        if ([roomArray isKindOfClass:[NSArray class]] && roomArray.count >0) {
+            [self.planeimg addRoom:roomArray];
+        }
     }];
     
     [task resume];
+}
+
+- (void)addLights:(NSArray *)lightArr {
+    for (NSDictionary *dict in lightArr) {
+        //灯位置
+        NSString *lightRectStr = [dict objectForKey:@"rect"];
+        CGRect lightRect = CGRectFromString(lightRectStr);
+        UIButton *lightBtn = [[UIButton alloc] initWithFrame:CGRectMake(lightRect.origin.x, lightRect.origin.y, 50, 50)];
+        [lightBtn setImage:[UIImage imageNamed:@"light_off.png"] forState:UIControlStateNormal];
+        [lightBtn setImage:[UIImage imageNamed:@"light_on.png"] forState:UIControlStateSelected];
+        lightBtn.tag = [[dict objectForKey:@"deviceID"] integerValue];
+        [lightBtn addTarget:self action:@selector(lightBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [self.planeimg addSubview:lightBtn];
+    }
+}
+
+- (void)lightBtnClicked:(UIButton *)btn {
+    NSInteger deviceID = btn.tag;
+    NSString *deviceIDStr = [NSString stringWithFormat:@"%@", @(deviceID)];
+    if (btn.selected) { //关灯
+        [self closeDeviceWithDeviceID:deviceIDStr];
+        btn.selected = NO;
+    }else {  //开灯
+        [self openDeviceWithDeviceID:deviceIDStr];
+        btn.selected = YES;
+    }
+    
+}
+
+- (void)openDeviceWithDeviceID:(NSString *)deviceID {
+    SocketManager *sock = [SocketManager defaultManager];
+    NSData *data = [[DeviceInfo defaultManager] open:deviceID];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
+- (void)closeDeviceWithDeviceID:(NSString *)deviceID {
+    SocketManager *sock = [SocketManager defaultManager];
+    NSData *data = [[DeviceInfo defaultManager] close:deviceID];
+    [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
 #pragma mark - Navigation
@@ -118,5 +168,16 @@
      [theSegue setValue:[NSString stringWithFormat:@"%d", self.deviceID] forKey:@"deviceid"];
 }
 
+- (void)openRoom:(NSNumber *)roomId {
+    NSLog(@"打开房间 %@", roomId);
+    
+    UIStoryboard * mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    RoomDeviceController * VC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"RoomLightController"];
+    VC.roomID = [roomId intValue];
+    [self.navigationController pushViewController:VC animated:YES];
+    
+    
+
+}
 
 @end

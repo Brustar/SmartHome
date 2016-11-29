@@ -8,6 +8,9 @@
 #import "TouchImage.h"
 #import "HttpManager.h"
 #import "AFHTTPSessionManager.h"
+#import "SocketManager.h"
+#import "SceneManager.h"
+#import "RoomDeviceController.h"
 
 //平面图，我的家
 @interface planeScene : UIViewController<TouchImageDelegate>
