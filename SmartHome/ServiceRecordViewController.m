@@ -62,18 +62,16 @@
     self.coverView.hidden = YES;
     self.commentView.hidden = YES;
     [self setNavi];
-    
-   
-    }
+}
 
 -(void)setNavi{
     UIBarButtonItem *editBtn = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(startEdit:)];
     self.navigationItem.rightBarButtonItem = editBtn;
     
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSString *str = @"GetMaintainMessage.aspx";
+    NSString *str = FIX_URL;
     if (auothorToken) {
-        NSDictionary *dic = @{@"AuthorToken":auothorToken};
+        NSDictionary *dic = @{@"token":auothorToken,@"optype":@(1)};
         [self sendRequest:dic andUrlStr:str with:1];
     }
 }
@@ -93,41 +91,39 @@
 {
     if(tag == 1)
     {
-        if([responseObject[@"Result"] intValue]==0)
+        if([responseObject[@"result"] intValue]==0)
         {
-            NSDictionary *dic = responseObject[@"messageInfo"];
-            NSArray *msgList = dic[@"messageList"];
-            for(NSDictionary *dicDetail in msgList)
+            NSArray *arr = responseObject[@"maintain_info"][@"break_down_list"];
+            
+            for(NSDictionary *dicDetail in arr)
             {
-             
                 [self.recoreds addObject:dicDetail[@"description"]];
-                [self.times addObject:dicDetail[@"createDate"]];
-                [self.recordIDS addObject:dicDetail[@"id"]];
+                [self.times addObject:dicDetail[@"createdate"]];
+                [self.recordIDS addObject:dicDetail[@"breakdown_id"]];
             }
             [self.tableView reloadData];
-            
         }else{
-            [MBProgressHUD showError:responseObject[@"Msg"]];
+            [MBProgressHUD showError:responseObject[@"msg"]];
         }
 
     }else if(tag == 2)
     {
-        if([responseObject[@"Result"] intValue]==0)
+        if([responseObject[@"result"] intValue]==0)
         {
             [MBProgressHUD showSuccess:@"评价成功"];
         }else{
-            [MBProgressHUD showError:responseObject[@"Msg"]];
+            [MBProgressHUD showError:responseObject[@"msg"]];
         }
         self.coverView.hidden = YES;
         self.commentView.hidden = YES;
     }else if(tag == 3)
     {
-        if([responseObject[@"Result"] intValue]==0)
+        if([responseObject[@"result"] intValue]==0)
         {
             [MBProgressHUD showSuccess:@"删除成功"];
             
         }else {
-            [MBProgressHUD showError:responseObject[@"Msg"]];
+            [MBProgressHUD showError:responseObject[@"msg"]];
         }
     }
 }
@@ -228,7 +224,7 @@
 
 -(void)sendDeleteRequestWithArray:(NSArray *)deleteArr;
 {
-    NSString *url = [NSString stringWithFormat:@"%@EditPersonalInformation.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@%@",[IOManager httpAddr],FIX_URL];
    
     NSString *recoreds = @"";
     
@@ -246,7 +242,7 @@
     }
     
   
-    NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"RecordIDList":recoreds,@"Type":[NSNumber numberWithInt:2]};
+    NSDictionary *dic = @{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ids":recoreds,@"optype":[NSNumber numberWithInt:4]};
     HttpManager *http = [HttpManager defaultManager];
     http.delegate = self;
     http.tag = 3;
@@ -263,11 +259,11 @@
 - (IBAction)clickStillHaveFault:(id)sender {
     [self sendCommentType:2];
 }
+//评价
 -(void)sendCommentType:(int)type
 {
-    NSString *str = @"FeedbackMaintain.aspx";
-    NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"RecordID":[NSNumber numberWithInt:1],@"Type":[NSNumber numberWithInt:type]};
-    [self sendRequest:dic andUrlStr:str with:2];
+    NSDictionary *dic = @{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"RecordID":[NSNumber numberWithInt:1],@"optype":[NSNumber numberWithInt:type]};
+    [self sendRequest:dic andUrlStr:FIX_URL with:2];
 }
 
 @end

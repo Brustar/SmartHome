@@ -77,7 +77,7 @@
     
     self.tableView.tableFooterView = [UIView new];
     self.user.text = [[NSUserDefaults  standardUserDefaults] objectForKey:@"Account"];
-    self.userType = [[[NSUserDefaults standardUserDefaults] objectForKey:@"UserType"] intValue];
+    self.userType = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Type"] intValue];
     self.pwd.text = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Password"] decryptWithDes:DES_KEY];
    
 //    if ([CLLocationManager locationServicesEnabled]) {
@@ -111,17 +111,13 @@
     http.tag = 10;
     [http sendPost:url param:dic];
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    
 }
 
 - (IBAction)login:(id)sender
-
 {
-    
-    
-    
     if ([self.user.text isEqualToString:@""])
     {
         [MBProgressHUD showError:@"请输入用户名或手机号"];
@@ -134,7 +130,7 @@
         return;
     }
     
-    NSString *url = [NSString stringWithFormat:@"%@UserLogin.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@login/login.aspx",[IOManager httpAddr]];
     
     self.userType = 1;
     if([self.user.text isMobileNumber])
@@ -157,9 +153,9 @@
         clientType = 2;
     }
     
-    NSDictionary *dict = @{@"Account":self.user.text,@"Type":[NSNumber numberWithInteger:self.userType],@"Password":[self.pwd.text md5],@"pushtoken":pushToken, @"DeviceType":@(clientType)};
+    NSDictionary *dict = @{@"account":self.user.text,@"logintype":[NSNumber numberWithInteger:self.userType],@"password":[self.pwd.text md5],@"pushtoken":pushToken, @"devicetype":@(clientType)};
     [IOManager writeUserdefault:self.user.text forKey:@"Account"];
-    [IOManager writeUserdefault:[NSNumber numberWithInteger:self.userType] forKey:@"UserType"];
+    [IOManager writeUserdefault:[NSNumber numberWithInteger:self.userType] forKey:@"Type"];
     [IOManager writeUserdefault:[self.pwd.text encryptWithDes:DES_KEY] forKey:@"Password"];
     HttpManager *http=[HttpManager defaultManager];
     http.delegate=self;
@@ -171,138 +167,39 @@
 - (void)sendRequestForGettingConfigInfos:(NSString *)str withTag:(int)tag;
 {
     NSString *url = [NSString stringWithFormat:@"%@%@",[IOManager httpAddr],str];
-    
-    NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]};
+    NSDictionary *dic = @{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]};
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"room_version"]) {
+        dic = @{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"room_ver":[[NSUserDefaults standardUserDefaults] objectForKey:@"room_version"],@"equipment_ver":[[NSUserDefaults standardUserDefaults] objectForKey:@"equipment_version"],@"scence_ver":[[NSUserDefaults standardUserDefaults] objectForKey:@"scence_version"]};//,@"tv_ver":[[NSUserDefaults standardUserDefaults] objectForKey:@"tv_version"],@"fm_ver":[[NSUserDefaults standardUserDefaults] objectForKey:@"fm_version"],@"favor_ver":[[NSUserDefaults standardUserDefaults] objectForKey:@"favor_version"]};
+    }
     HttpManager *http = [HttpManager defaultManager];
     http.delegate = self;
     http.tag = tag;
     [http sendPost:url param:dic];
 }
 
-
-//判断版本号
--(void)judgeVersion:(NSDictionary *)responseObject tag:(int) tag
-{
-    if ( 4 == tag)
-    {
-        self.vEquipmentsLast = [responseObject[@"vEquipment"] intValue];
-        self.vRoomLast = [responseObject[@"vRoom"] intValue];
-        self.vSceneLast = [responseObject[@"vScene"] intValue];
-        
-        self.vTVChannelLast = [responseObject[@"vTVChannel"] intValue];
-        self.vFMChannellLast = [responseObject[@"vFMChannel"] intValue];
-        self.vClientlLast = [responseObject[@"vClient"] intValue];
-    }
-    
-    int vEquipment = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vEquipment"] intValue] ;
-    int vRoom = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vRoom"] intValue];
-    int vScene = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vScene"] intValue];
-    
-    
-    int vTVChannel = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vTVChannel"] intValue];
-    int vFMChannel = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vFMChannel"] intValue];
-    //int vClient = [[[NSUserDefaults standardUserDefaults] objectForKey:@"vClient"] intValue];
-    
-    
-    switch (tag) {
-        case 4:
-            if(self.vEquipmentsLast > vEquipment)
-            {
-                // 更新设备
-                [IOManager writeUserdefault:[NSNumber numberWithInt:self.vEquipmentsLast] forKey:@"vEquipment"];
-                [self sendRequestForGettingConfigInfos:@"GetEquipmentsInfo.aspx" withTag:5];
-                return;
-            }
-        case 5:
-            if(self.vRoomLast > vRoom)
-            {
-                //更新房间
-                [self updateRoomInfo];
-                return;
-            }
-        case 6:
-            if(self.vSceneLast > vScene)
-            {
-                //更新场景
-                [self updateSceneInfo];
-                return;
-            }
-        case 7:
-            if(self.vTVChannelLast > vTVChannel){
-                [self updateTVChannelsInfo];
-                return;
-            }
-        case 8:
-            if(self.vFMChannellLast > vFMChannel){
-                [self updateFMChannelsInfo];
-                return;
-            }
-        default:
-        {
-            if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-            {
-                [self performSegueWithIdentifier:@"goToIphoneScene" sender:self];
-                
-            }else{
-                [self goToViewController];
-                
-            }
-            
-            break;
-        }
-            
-    }
-    
-    
-}
-//更新房间配置信息
--(void)updateRoomInfo{
-    
-    [IOManager writeUserdefault:[NSNumber numberWithInt:self.vRoomLast] forKey:@"vRoom"];
-    [self sendRequestForGettingConfigInfos:@"GetRoomsConfig.aspx" withTag:6];
-}
-//更新场景配置信息
--(void)updateSceneInfo
-{
-    [IOManager writeUserdefault:[NSNumber numberWithInt:self.vSceneLast] forKey:@"vScene"];
-    [self sendRequestForGettingConfigInfos:@"GetScenes.aspx" withTag:7];
-}
-//更新电视频道配置信息
--(void)updateTVChannelsInfo
-{
-    [IOManager writeUserdefault:[NSNumber numberWithInt:self.vTVChannelLast] forKey:@"vTVChannel"];
-    [self sendRequestForGettingConfigInfos:@"GetTVChannels.aspx" withTag:8];
-}
-//更新FM频道配置信息
--(void)updateFMChannelsInfo
-{
-    [IOManager writeUserdefault:[NSNumber numberWithInt:self.vFMChannellLast] forKey:@"vFMChannel"];
-    [self sendRequestForGettingConfigInfos:@"GetFMChannels.aspx" withTag:9];
-}
 //写设备配置信息到sql
--(void)writDevicesConfigDatesToSQL:(NSDictionary *)responseObject
+-(void)writDevicesConfigDatesToSQL:(NSArray *)rooms
 {
-    
+    if(rooms.count ==0 || rooms == nil)
+    {
+        return;
+    }
     FMDatabase *db = [SQLManager connetdb];
     if([db open])
     {
-        
-        NSArray *messageInfo =  responseObject[@"messageInfo"];
-        if(messageInfo.count ==0 || messageInfo == nil)
+        NSString *delsql=@"delete from Devices";
+        [db executeUpdate:delsql];
+        for(NSDictionary *room in rooms)
         {
-            return;
-        }
-        for(NSDictionary *dic in messageInfo)
-        {
-            NSInteger rId = [dic[@"rId"] integerValue];
-            NSArray *equipmentList = dic[@"equipmentList"];
+            NSInteger rId = [room[@"room_id"] integerValue];
+            NSArray *equipmentList = room[@"equipment_list"];
             if(equipmentList.count ==0 || equipmentList == nil)
             {
                 continue;
             }
             for(NSDictionary *equip in equipmentList)
             {
-                NSString *sql = [NSString stringWithFormat:@"insert into Devices values(%d,'%@',%@,%@,%@,%@,%@,%@,%@,'%@',%@,%@,%@,%@,%ld,'%@','%@',%@,'%@','%@','%04lx','%@')",[equip[@"eId"] intValue],equip[@"eName"],NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,(long)rId,equip[@"eNumber"],equip[@"hTypeId"],equip[@"subTypeId"],equip[@"typeName"],equip[@"subTypeName"],[[DeviceInfo defaultManager] masterID],equip[@"url"]];
+                NSString *sql = [NSString stringWithFormat:@"insert into Devices values(%d,'%@',%@,%@,%@,%@,%@,%@,%@,'%@',%@,%@,%@,%@,%ld,'%@','%@',%@,'%@','%@','%04lx','%@')",[equip[@"equipment_id"] intValue],equip[@"name"],NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,(long)rId,equip[@"number"],equip[@"htype_id"],equip[@"subtype_id"],equip[@"type_name"],equip[@"subtype_name"],[[DeviceInfo defaultManager] masterID],equip[@"imgurl"]];
                 
                 BOOL result = [db executeUpdate:sql];
                 if(result)
@@ -323,21 +220,21 @@
 //写房间配置信息到SQL
 -(void)writeRoomsConfigDataToSQL:(NSDictionary *)responseObject
 {
+    NSArray *roomList = responseObject[@"roomlist"];
+    if(roomList.count == 0 || roomList == nil)
+    {
+        return;
+    }
     FMDatabase *db = [SQLManager connetdb];
     if([db open])
     {
-        NSDictionary *messageInfo = responseObject[@"messageInfo"];
-        NSArray *roomList = messageInfo[@"roomList"];
-        
-        if(roomList.count == 0 || roomList == nil)
-        {
-            return;
-        }
+        NSString *delsql=@"delete from Rooms";
+        [db executeUpdate:delsql];
         for(NSDictionary *roomDic in roomList)
         {
             if(roomDic)
             {
-                NSString *sql = [NSString stringWithFormat:@"insert into Rooms values(%d,'%@',null,null,null,null,null,'%@',%d,null)",[roomDic[@"rId"] intValue],roomDic[@"rName"],roomDic[@"imgUrl"],[roomDic[@"ibeacon"] intValue]];
+                NSString *sql = [NSString stringWithFormat:@"insert into Rooms values(%d,'%@',null,null,null,null,null,'%@',%d,null)",[roomDic[@"room_id"] intValue],roomDic[@"room_name"],roomDic[@"room_image_url"],[roomDic[@"ibeacon"] intValue]];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {
@@ -353,35 +250,35 @@
 }
 
 //写场景配置信息到SQL
--(void)writeScensConfigDataToSQL:(NSDictionary *)responseObject
+-(void)writeScensConfigDataToSQL:(NSArray *)rooms
 {
+    if(rooms.count == 0 || rooms == nil)
+    {
+        return;
+    }
     FMDatabase *db = [SQLManager connetdb];
     if([db open])
     {
-        NSArray *messageInfo = responseObject[@"messageInfo"];
+        NSString *delsql=@"delete from Scenes";
+        [db executeUpdate:delsql];
+        for (NSDictionary *room in rooms) {
+            NSString *rName = room[@"room_name"];
+            int room_id = [room[@"room_id"] intValue];
+            NSArray *sceneList = room[@"scene_list"];
 
-        for(NSDictionary *messageDic in messageInfo)
-        {
-           
-
-            int rId = [messageDic[@"rId"] intValue];
-            NSString *rName =  messageDic[@"rName"];
-            NSArray *c_sceneInfoList = messageDic[@"c_sceneInfoList"];
-            for(NSDictionary *sceneInfoDic in c_sceneInfoList)
+            for(NSDictionary *sceneInfoDic in sceneList)
             {
-                int sId = [sceneInfoDic[@"sId"] intValue];
-                NSString *sName = sceneInfoDic[@"sName"];
-                int sType = [sceneInfoDic[@"sType"] intValue];
-                NSString *sNumber = sceneInfoDic[@"sNumber"];
-                NSString *urlImage = sceneInfoDic[@"urlImage"];
-                if(sceneInfoDic[@"urlPlist"])
+                int sId = [sceneInfoDic[@"scence_id"] intValue];
+                NSString *sName = sceneInfoDic[@"name"];
+                int sType = [sceneInfoDic[@"type"] intValue];
+                NSString *sNumber = sceneInfoDic[@"snumber"];
+                NSString *urlImage = sceneInfoDic[@"image_url"];
+                if(sceneInfoDic[@"plist_url"])
                 {
-                    NSString *urlPlist = sceneInfoDic[@"urlPlist"];
+                    NSString *urlPlist = sceneInfoDic[@"plist_url"];
                     [self downloadPlsit:urlPlist];
-
                 }
-                
-                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,'%@',%d,null)",sId,sName,rName,urlImage,rId,sType,sNumber,0];
+                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,'%@',%d,null)",sId,sName,rName,urlImage,room_id,sType,sNumber,0];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {
@@ -389,7 +286,6 @@
                 }else{
                     NSLog(@"insert 失败");
                 }
-
             }
         }
     }
@@ -430,28 +326,25 @@
     
 }
 //写电视频道配置信息到SQL
--(void)writeTVChannelsConfigDataToSQL:(NSDictionary *)responseObject withParent:(NSString *)parent
+-(void)writeChannelsConfigDataToSQL:(NSArray *)responseObject withParent:(NSString *)parent
 {
     FMDatabase *db = [SQLManager connetdb];
     if([db open])
     {
-        NSArray *messageInfo = responseObject[@"messageInfo"];
-       
-        for(NSDictionary *dicInfo in messageInfo)
+        for(NSDictionary *dicInfo in responseObject)
         {
-            //NSString  *masterID = dicInfo[@"MasterID"];
-            int eqId = [dicInfo[@"eqId"] intValue];
-            NSString *eqNumber = dicInfo[@"eqNumber"];
-            NSArray *channelInfo = dicInfo[@"channelInfo"];
-            if(channelInfo == nil || channelInfo .count == 0 )
+            int eqId = [dicInfo[@"eqid"] intValue];
+            NSString *eqNumber = dicInfo[@"eqnumber"];
+            NSString *key = [NSString stringWithFormat:@"store_%@_list",parent];
+            NSArray *channelList = dicInfo[key];
+            if(channelList == nil || channelList .count == 0 )
             {
                 return;
             }
             
-            for(NSDictionary *channel in channelInfo)
+            for(NSDictionary *channel in channelList)
             {
-                
-                NSString *sql = [NSString stringWithFormat:@"insert into Channels values(%d,%d,%d,%d,'%@','%@','%@',%d,'%@')",[channel[@"cId"] intValue],eqId,0,[channel[@"cNumber"] intValue],channel[@"cName"],channel[@"imgUrl"],parent,1,eqNumber];
+                NSString *sql = [NSString stringWithFormat:@"insert into Channels values(%d,%d,%d,%d,'%@','%@','%@',%d,'%@')",[channel[@"channel_id"] intValue],eqId,0,[channel[@"channel_number"] intValue],channel[@"channel_name"],channel[@"image_url"],parent,1,eqNumber];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {
@@ -467,148 +360,70 @@
     [db close];
 }
 
+#pragma - mark http delegate
 -(void) httpHandler:(id) responseObject tag:(int)tag
 {
     DeviceInfo *info=[DeviceInfo defaultManager];
-    if ([responseObject[@"Result"] intValue]==0)
+    if ([responseObject[@"result"] intValue]==0)
     {
         info.db=SMART_DB;
     }
     
     if(tag == 1)
     {
-        if ([responseObject[@"Result"] intValue]==0) {
-            [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
-            [IOManager writeUserdefault:responseObject[@"UserName"] forKey:@"UserName"];
+        if ([responseObject[@"result"] intValue]==0) {
+            [IOManager writeUserdefault:responseObject[@"token"] forKey:@"AuthorToken"];
+            [IOManager writeUserdefault:responseObject[@"username"] forKey:@"UserName"];
+            NSArray *hostList = responseObject[@"hostlist"];
             
-            NSArray *hostList = responseObject[@"HostList"];
-            
-            if ([hostList isKindOfClass:[NSArray class]] && hostList.count >0) {
-                
-                for(NSDictionary *hostID in hostList)
-                {
-                    if ([hostID isKindOfClass:[NSDictionary class]] && hostID.count >0) {
-                        [self.hostIDS addObject:hostID[@"hostId"]];
-                    }
-                }
+            for(NSDictionary *hostID in hostList)
+            {
+                [self.hostIDS addObject:hostID[@"hostid"]];
             }
             
-            
-            if (self.hostIDS.count >0) {
-                [IOManager writeUserdefault:self.hostIDS forKey:@"HostIDS"];
-            }
-            
-            
-            if ([self.hostIDS count] >0) {
+            [IOManager writeUserdefault:self.hostIDS forKey:@"HostIDS"];
+            if ([self.hostIDS count]>0) {
                 NSString *mid = self.hostIDS[0];
                 [IOManager writeUserdefault:mid forKey:@"HostID"];
                 info.masterID =[PackManager NSDataToUint16:mid];
             }
+            [self sendRequestForGettingConfigInfos:@"Cloud/load_config_data.aspx" withTag:2];
             
             //直接登录主机
-            if ([self.hostIDS count] >0) {
-                [self sendRequestToHostWithTag:2 andRow:0];
-            }else {
-                NSLog(@"无主机ID，无法登录主机");
-                [MBProgressHUD showError:@"登录主机失败，未绑定主机"];
-            }
-            
-            
-            //[self goToViewController];//进入主页面
+            //[self sendRequestToHostWithTag:2 andRow:0];
         }else{
-                [MBProgressHUD showError:responseObject[@"Msg"]];
-            }
-        
-    }else if(tag == 2 )
-    {
-        if ([responseObject[@"Result"] intValue]==0)
-        {
-            
-            
-            self.tableView.hidden = YES;
-            self.coverView.hidden = YES;
-            [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
-            [IOManager writeUserdefault:responseObject[@"UserType"] forKey:@"UserType"];
-            //检查版本号
-            [self sendRequestForGettingConfigInfos:@"GetConfigVersion.aspx" withTag:4];
+            [MBProgressHUD showError:responseObject[@"msg"]];
         }
-        
-    }else if(tag == 4){
-        if([responseObject[@"Result"] intValue]==0)
+    }else if(tag == 2){
+        if ([responseObject[@"result"] intValue]==0)
         {
-            //判断版本号
-            [self judgeVersion:(responseObject) tag:tag];
-        }
-        
-    }else if (tag == 5){
-        if([responseObject[@"Result"] intValue] == 0)
-        {
-            //写设备配置信息到sql
-            [self writDevicesConfigDatesToSQL:responseObject];
-            //判断房间版本
-            [self judgeVersion:(responseObject) tag:tag];
-            
-        }else{
-            [MBProgressHUD showError:responseObject[@"Msg"]];
-        }
-        
-    }else if (tag == 6){
-        if([responseObject[@"Result"] intValue] == 0)
-        {
+            NSDictionary *versioninfo=responseObject[@"version_info"];
+            //执久化配置版本号
+            [versioninfo enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+                [IOManager writeUserdefault:obj forKey:key];
+            }];
             //写房间配置信息到sql
-            [self writeRoomsConfigDataToSQL:responseObject];
             
-            [self judgeVersion:(responseObject) tag:tag];
-        }else{
-            [MBProgressHUD showError:responseObject[@"Msg"]];
-        }
-        
-    }else if(tag == 7)
-    {
-        if([responseObject[@"Result"] intValue] == 0)
-        {
-            //写场景信息到sql
-            [self writeScensConfigDataToSQL:responseObject];
-            
-            [self judgeVersion:(responseObject) tag:tag];
-        }else{
-            [MBProgressHUD showError:responseObject[@"Msg"]];
-        }
-    }else if(tag == 8)
-    {
-        if([responseObject[@"Result"] intValue] == 0)
-        {
+            [self writeRoomsConfigDataToSQL:responseObject[@"home_room_info"]];
+            //写房间配置信息到sql
+            [self writeScensConfigDataToSQL:responseObject[@"room_scence_list"]];
+            //写设备配置信息到sql
+            [self writDevicesConfigDatesToSQL:responseObject[@"room_equipment_list"]];
             //写TV频道信息到sql
-            [self writeTVChannelsConfigDataToSQL:responseObject withParent:@"TV"];
+            [self writeChannelsConfigDataToSQL:responseObject[@"tv_store_list"] withParent:@"tv"];
             
-            [self judgeVersion:(responseObject) tag:tag];
-        }else{
-            [MBProgressHUD showError:responseObject[@"Msg"]];
-            
-        }
-    }else if(tag == 9)
-    {
-        if([responseObject[@"Result"] intValue] == 0)
-        {
             //写FM频道信息到sql
-           
+            [self writeChannelsConfigDataToSQL:responseObject[@"fm_store_list"] withParent:@"fm"];
             
-            [self writeTVChannelsConfigDataToSQL:responseObject withParent:@"FM"];
             if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
             {
                 [self performSegueWithIdentifier:@"goToIphoneScene" sender:self];
             }else{
                 [self goToViewController];
-               
             }
-
-            
         }else{
-            [MBProgressHUD showError:responseObject[@"Msg"]];
+            [MBProgressHUD showError:responseObject[@"msg"]];
         }
-    }else if(tag == 10)
-    {
-        return;
     }
 }
 
@@ -764,10 +579,6 @@
                         andResponse:^(SunString *str){
                             NSLog(@"%@,%@,%@,%@",str.dayspring, str.sunrise,str.sunset,str.dusk);
                             self.antronomicalTimes = @[str.dayspring,str.sunrise,str.sunset,str.dusk];
-                            
-    
-                            
-                            
                     }];
 }
 

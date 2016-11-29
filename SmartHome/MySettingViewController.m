@@ -222,9 +222,9 @@
         //退出发送请求
         NSString *authorToken =[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
         if (authorToken) {
-            NSDictionary *dict = @{@"AuthorToken":authorToken};
+            NSDictionary *dict = @{@"token":authorToken};
         
-            NSString *url = [NSString stringWithFormat:@"%@UserLogOut.aspx",[IOManager httpAddr]];
+            NSString *url = [NSString stringWithFormat:@"%@login/logout.aspx",[IOManager httpAddr]];
             HttpManager *http=[HttpManager defaultManager];
             http.delegate=self;
             http.tag = 1;

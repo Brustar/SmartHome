@@ -50,12 +50,9 @@
     }else self.cType = 1;
     self.passWord.delegate = self;
     self.pwdAgain.delegate = self;
-    
-    
-    
 }
+
 - (IBAction)DisMissBtn:(id)sender {
-    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -63,7 +60,7 @@
 - (IBAction)sendAuothCode:(id)sender {
     if (![self.phoneNumber.text isEqualToString:@""]) {
         if(![self.phoneNumber.text isMobileNumber]){
-            UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"系统提示" message:@"电话号码不合法" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"系统提示" message:@"电话号码不正确" preferredStyle:UIAlertControllerStyleAlert];
             [self presentViewController: alertVC animated:YES completion:nil];
         }else{
             __block int timeout=59; //倒计时时间
@@ -74,32 +71,30 @@
                 if(timeout<=0){ //倒计时结束，关闭
                     dispatch_source_cancel(self._timer);
                     dispatch_async(dispatch_get_main_queue(), ^{
-
                         [self.auothCodeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
                         self.auothCodeBtn.userInteractionEnabled = YES;
                     });
-
-        }else{
-            int seconds = timeout % 60;
-            NSString *strTime = [NSString stringWithFormat:@" %.2d", seconds];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                [UIView beginAnimations:nil context:nil];
-                [UIView setAnimationDuration:1];
-                [self.auothCodeBtn setTitle:[NSString stringWithFormat:@"重新获取(%@) ",strTime] forState:UIControlStateNormal];
-                [UIView commitAnimations];
-                self.auothCodeBtn.userInteractionEnabled = NO;
+                }else{
+                    int seconds = timeout % 60;
+                    NSString *strTime = [NSString stringWithFormat:@" %.2d", seconds];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        [UIView beginAnimations:nil context:nil];
+                        [UIView setAnimationDuration:1];
+                        [self.auothCodeBtn setTitle:[NSString stringWithFormat:@"重新获取(%@) ",strTime] forState:UIControlStateNormal];
+                        [UIView commitAnimations];
+                        self.auothCodeBtn.userInteractionEnabled = NO;
+                    });
+                    timeout--;
+                }
             });
-            timeout--;
-        }
-    });
-            dispatch_resume(self._timer);}
+        dispatch_resume(self._timer);}
         //点击验证码发送请求
-        NSDictionary *dict = @{@"TellNumber":self.phoneStr};
+        NSDictionary *dict = @{@"mobile":self.phoneStr};
         HttpManager *http = [HttpManager defaultManager];
         http.delegate = self;
         http.tag =1;
-        NSString *url = [NSString stringWithFormat:@"%@ObtainAuthCode.aspx",[IOManager httpAddr]];
+        NSString *url = [NSString stringWithFormat:@"%@login/send_code.aspx",[IOManager httpAddr]];
         [http sendPost:url param:dict];
     }
     
@@ -122,16 +117,9 @@
         [MBProgressHUD showError:@"密码应该是6-8位字符"];
         return;
     }
-    
-    
-        
+   
     //发送注册请求
     DeviceInfo *info=[DeviceInfo defaultManager];
-    
-    if(self.MasterID == 0)
-    {
-        self.MasterID = 1;
-    }
     
     //手机终端类型：1，手机 2，iPad
     NSInteger clientType = 1;
@@ -140,16 +128,16 @@
     }
     
     NSDictionary *dict = @{
-                           @"HostID":[NSNumber numberWithInt:self.MasterID],
-                           @"UserName":self.userName.text,
-                           @"Password":[self.passWord.text md5],
-                           @"UserTellNumber":self.phoneStr,
-                           @"UserType":[NSNumber numberWithInt:self.cType],
-                           @"AuthCode":self.authorNum.text,
-                           @"Pushtoken":info.pushToken,
-                           @"DeviceType":@(clientType)
+                           @"hostid":@(self.MasterID),
+                           @"username":self.userName.text,
+                           @"password":[self.passWord.text md5],
+                           @"mobile":self.phoneStr,
+                           @"usertype":[NSNumber numberWithInt:self.cType],
+                           @"authcode":self.authorNum.text,
+                           @"pushtoken":info.pushToken,
+                           @"devicetype":@(clientType)
                            };
-    NSString *url = [NSString stringWithFormat:@"%@UserRegist.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@login/regist.aspx",[IOManager httpAddr]];
    
     
     HttpManager *http=[HttpManager defaultManager];
@@ -164,24 +152,21 @@
 {
     if(tag == 1)
     {
-        if([responseObject[@"Result"] intValue] == 0)
+        if([responseObject[@"result"] intValue] == 0)
         {
             [MBProgressHUD showSuccess:@"验证码发送成功"];
         }else {
-            [MBProgressHUD showError:responseObject[@"Msg"]];
+            [MBProgressHUD showError:responseObject[@"msg"]];
         }
-    }else if(tag == 2)
-    {
-        if([responseObject[@"Result"] intValue] == 0)
+    }else if(tag == 2){
+        if([responseObject[@"result"] intValue] == 0)
         {
-            [IOManager writeUserdefault:responseObject[@"AuthorToken"] forKey:@"AuthorToken"];
+            [IOManager writeUserdefault:responseObject[@"token"] forKey:@"AuthorToken"];
             self.coverView.hidden = NO;
             self.regSuccessView.hidden = NO;
         }else{
-            [MBProgressHUD showError:responseObject[@"Msg"]];
-            
+            [MBProgressHUD showError:responseObject[@"msg"]];
         }
-        
     }
 }
 
@@ -219,15 +204,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

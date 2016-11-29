@@ -50,7 +50,7 @@
     {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    cell.textLabel.text = self.hostIDS[indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", self.hostIDS[indexPath.row]];
     return cell;
     
 }
@@ -60,27 +60,30 @@
     int row = (int)indexPath.row;
     [self sendRequestToHostWithTag:1 andRow:row];
 }
+
 -(void)sendRequestToHostWithTag:(int)tag andRow:(int)row
 {
-    NSString *url = [NSString stringWithFormat:@"%@UserLoginHost.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@login/login_host.aspx",[IOManager httpAddr]];
     
-    NSDictionary *dict = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"HostID":self.hostIDS[row]};
+    NSDictionary *dict = @{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"hostid":self.hostIDS[row]};
     [IOManager writeUserdefault:self.hostIDS[row] forKey:@"HostID"];
     
     HttpManager *http=[HttpManager defaultManager];
     http.delegate=self;
     http.tag = tag;
-    [http sendPost:url param:dict];
+    [http sendGet:url param:dict];
 }
 
+
+#pragma - mark http delegate
 -(void) httpHandler:(id) responseObject tag:(int)tag
 {
     if(tag == 1)
     {
-        if ([responseObject[@"Result"] intValue]==0)
+        if ([responseObject[@"result"] intValue]==0)
         {
-            //检测版本号，获取配置信息
-            
+            //更新token
+            [IOManager writeUserdefault:responseObject[@"token"] forKey:@"AuthorToken"];
         }
  
     }

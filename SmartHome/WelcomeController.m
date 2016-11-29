@@ -17,6 +17,7 @@
 #import "RegisterPhoneNumController.h"
 #import "SunCount.h"
 #import <CoreLocation/CoreLocation.h>
+#import "PackManager.h"
 
 @interface WelcomeController ()<QRCodeReaderDelegate,UIScrollViewDelegate,UIGestureRecognizerDelegate,UIPageViewControllerDelegate,NSLayoutManagerDelegate,CLLocationManagerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *knowView;
@@ -248,7 +249,7 @@
         if([list count] > 1)
         {
             self.masterId = list[0];
-            [registVC setValue:self.masterId forKey:@"masterStr"];
+            [registVC setValue:@([self.masterId intValue]) forKey:@"masterStr"];
             if ([@"1" isEqualToString:list[1]]) {
                 self.role=@"主人";
             }else{
@@ -292,10 +293,6 @@
                         andResponse:^(SunString *str){
                             NSLog(@"%@,%@,%@,%@",str.dayspring, str.sunrise,str.sunset,str.dusk);
                             self.antronomicalTimes = @[str.dayspring,str.sunrise,str.sunset,str.dusk];
-                            
-                            
-                            
-                            
                         }];
 }
 @end

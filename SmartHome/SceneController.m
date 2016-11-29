@@ -112,11 +112,9 @@
     
     self.navigationItem.titleView = titleButton;
 }
+
 -(void)clickTitleButton:(UIButton *)btn
 {
-   
-    
-    
     self.hostVC.modalPresentationStyle = UIModalPresentationPopover;
     self.hostVC.popoverPresentationController.sourceView = btn;
     self.hostVC.popoverPresentationController.sourceRect = btn.bounds;
@@ -227,7 +225,7 @@
 - (void) updateInterfaceWithReachability
 {
     AFNetworkReachabilityManager *afNetworkReachabilityManager = [AFNetworkReachabilityManager sharedManager];
-    [afNetworkReachabilityManager startMonitoring];  //开启网络监视器；
+    //[afNetworkReachabilityManager startMonitoring];  //开启网络监视器；
     [afNetworkReachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         DeviceInfo *info = [DeviceInfo defaultManager];
         if(status == AFNetworkReachabilityStatusReachableViaWWAN)
@@ -298,8 +296,8 @@
    
     return cell;
 }
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
     Scene *scene = self.collectionScenes[indexPath.row];

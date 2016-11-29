@@ -38,27 +38,20 @@
     {
         self.usderAndMasterView.hidden = YES;
         self.viewTopLeadingConstraint.constant = 80;
-        
     }
     
     self.viewWidthConstraint.constant = [[UIScreen mainScreen] bounds].size.width * 0.8;
   
 }
 
-
-
 - (IBAction)DissmissBtn:(id)sender {
-    
-    
-    [self dismissViewControllerAnimated:YES
-                             completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 //验证手机号是否已注册
 - (void)checkPhoneNumberIsExist {
-    NSDictionary *dict = @{@"TellNumber":self.phoneNumTextField.text};
-    NSString *url = [NSString stringWithFormat:@"%@AuthTellNumber.aspx",[IOManager httpAddr]];
-    NSLog(@"request URL:%@", url);
+    NSDictionary *dict = @{@"mobile":self.phoneNumTextField.text};
+    NSString *url = [NSString stringWithFormat:@"%@login/send_code.aspx",[IOManager httpAddr]];
     HttpManager *http = [HttpManager defaultManager];
     http.tag = 1;
     http.delegate = self;
@@ -67,10 +60,10 @@
 
 - (void)httpHandler:(id)responseObject tag:(int)tag
 {
-    if([responseObject[@"Result"] intValue] == 0) { //手机号未注册，进行“下一步”操作，进入下一页面
+    if([responseObject[@"result"] intValue] == 0) { //手机号未注册，进行“下一步”操作，进入下一页面
         [self performSegueWithIdentifier:@"registerDetaiSegue" sender:self];
-    }else if([responseObject[@"Result"] intValue] == 1){ //手机号已注册，提示用户“手机号已注册”
-        [MBProgressHUD showError:responseObject[@"Msg"]];
+    }else{
+        [MBProgressHUD showError:responseObject[@"msg"]];
     }
 }
 
@@ -97,13 +90,13 @@
     vc.MasterID = self.masterStr;
     vc.phoneStr = self.phoneNumTextField.text;
     vc.userType = self.suerTypeStr;
-    
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self.view endEditing:YES];
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
    
@@ -112,10 +105,10 @@
 - (IBAction)serviceAgreement:(id)sender {
     [WebManager show:@""];
 }
-#pragma mark UITextField代理
+
+#pragma - mark UITextField代理
 - (void)textFieldDidEndEditing:(UITextField *)textField;
 {
-    
         if (![self.imgeVerifyField.text isEqualToString:self.imgVerifyView.authCodeStr])
         {
             UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"验证码错误，请重新输入" message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -123,7 +116,6 @@
             [alertVC addAction:action];
             [self presentViewController:alertVC animated:YES completion:nil];
         }
-        
 }
 
 

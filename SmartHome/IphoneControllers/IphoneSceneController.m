@@ -72,7 +72,7 @@
 - (void) updateInterfaceWithReachability
 {
     AFNetworkReachabilityManager *afNetworkReachabilityManager = [AFNetworkReachabilityManager sharedManager];
-    [afNetworkReachabilityManager startMonitoring];  //开启网络监视器；
+    //[afNetworkReachabilityManager startMonitoring];  //开启网络监视器；
     [afNetworkReachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         DeviceInfo *info = [DeviceInfo defaultManager];
         if(status == AFNetworkReachabilityStatusReachableViaWWAN)

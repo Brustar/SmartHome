@@ -19,6 +19,7 @@
 @property (nonatomic,strong) NSMutableArray *faultArr;
 @property (nonatomic,strong) NSMutableArray *timesArr;
 @property (nonatomic,strong) NSMutableArray *recordIDs;
+@property (nonatomic,strong) NSMutableArray *statusArr;
 - (IBAction)clickCancleBtn:(id)sender;
 - (IBAction)clickSureBtn:(id)sender;
 
@@ -33,6 +34,7 @@
     }
     return _faultArr;
 }
+
 -(NSMutableArray *)timesArr{
     if(!_timesArr)
     {
@@ -41,6 +43,7 @@
     }
     return _timesArr;
 }
+
 -(NSMutableArray *)recordIDs{
     if(!_recordIDs)
     {
@@ -48,6 +51,16 @@
     }
     return _recordIDs;
 }
+
+-(NSMutableArray *)statusArr{
+    if(!_statusArr)
+    {
+        _statusArr = [NSMutableArray array];
+        
+    }
+    return _statusArr;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.footerView.hidden = YES;
@@ -56,10 +69,10 @@
     
     //获取所有故障信息
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSString *url = [NSString stringWithFormat:@"%@GetBreakdownMessage.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@%@",[IOManager httpAddr],FAULT_URL];
     
     if (auothorToken) {
-        NSDictionary *dict = @{@"AuthorToken":auothorToken};
+        NSDictionary *dict = @{@"token":auothorToken};
     
         [self sendRequest:url andDict:dict WithTag:1];
     }
@@ -71,43 +84,42 @@
     http.delegate = self;
     http.tag = tag;
     [http sendPost:url param:dict];
-    
-    
 }
 -(void)httpHandler:(id)responseObject tag:(int)tag
 {
     if(tag == 1)
     {
-        if([responseObject[@"Result"] intValue]==0)
+        if([responseObject[@"result"] intValue]==0)
         {
-            NSArray *arr = responseObject[@"messageInfo"];
+            NSArray *arr = responseObject[@"break_down_list"];
             
             for(NSDictionary *dicDetail in arr)
             {
                 [self.faultArr addObject:dicDetail[@"description"]];
-                [self.timesArr addObject:dicDetail[@"createDate"]];
-                [self.recordIDs addObject:dicDetail[@"status"]];
+                [self.timesArr addObject:dicDetail[@"createdate"]];
+                [self.recordIDs addObject:dicDetail[@"breakdown_id"]];
+                [self.statusArr addObject:dicDetail[@"status_id"]];
             }
             [self.tableView reloadData];
         }else{
-            [MBProgressHUD showError:responseObject[@"Msg"]];
+            [MBProgressHUD showError:responseObject[@"msg"]];
         }
 
     }else if(tag == 2){
-        if([responseObject[@"Result"] intValue]==0)
+        if([responseObject[@"result"] intValue]==0)
         {
             [MBProgressHUD showSuccess:@"上报成功"];
         }else {
-            [MBProgressHUD showError:responseObject[@"Msg"]];
+            [MBProgressHUD showError:responseObject[@"msg"]];
         }
     }else if(tag == 3)
     {
-        if([responseObject[@"Result"] intValue]==0)
+        if([responseObject[@"result"] intValue]==0)
         {
             [MBProgressHUD showSuccess:@"删除成功"];
             
         }else {
-            [MBProgressHUD showError:responseObject[@"Msg"]];
+            [MBProgressHUD showError:responseObject[@"msg"]];
         }
     }
 
@@ -127,11 +139,19 @@
     
     cell.title.text = self.faultArr[indexPath.row];
     cell.dateLabel.text = self.timesArr[indexPath.row];
-    
+    int status = [self.statusArr[indexPath.row] intValue];
     if (self.isEditing) {
-        cell.alertImageView.hidden = YES;
+            cell.alertImageView.hidden = YES;
     }else{
-        cell.alertImageView.hidden = NO;
+        if (status != UNUPLOAD) {
+            cell.alertImageView.hidden = YES;
+        }else{
+            cell.alertImageView.hidden = NO;
+        }
+    }
+    //显示两个按钮 ‘未修好’，‘已修好’
+    if (status == UPLOADED) {
+        
     }
     
     return cell;
@@ -140,7 +160,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-       if(!self.isEditing)
+    int status = [self.statusArr[indexPath.row] intValue];
+    if(!self.isEditing && status == UNUPLOAD)
        {
            [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
            UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"发送故障信息" message:@"确定要发送此故障信息吗？" preferredStyle:UIAlertControllerStyleAlert];
@@ -148,10 +169,10 @@
            UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                //确定后发送上传故障信息
                NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-               NSString *url = [NSString stringWithFormat:@"%@UploadBreakdown.aspx",[IOManager httpAddr]];
+               NSString *url = [NSString stringWithFormat:@"%@%@",[IOManager httpAddr],FAULT_URL];
                NSString *recordID = self.recordIDs[indexPath.row];
                if (auothorToken) {
-                   NSDictionary *dict = @{@"AuthorToken":auothorToken,@"RecordID":recordID};
+                   NSDictionary *dict = @{@"token":auothorToken,@"breakdown_id":recordID,@"optype":@(3)};
                    [self sendRequest:url andDict:dict WithTag:2];
                }
            }];
@@ -228,7 +249,7 @@
     }
     // 先删除数据源
     [self.faultArr removeObjectsInArray:deleteArray];
-    [self.timesArr removeObjectsInArray:deletedTime];
+    //[self.timesArr removeObjectsInArray:deletedTime];
     [self.recordIDs removeObject:deletedID];
     
     if(deletedID.count != 0)
@@ -241,9 +262,11 @@
     
     [self clickCancleBtn:nil];
 }
+
+//删除故障
 -(void)sendDeleteRequestWithArray:(NSArray *)deleteArr;
 {
-    NSString *url = [NSString stringWithFormat:@"%@EditPersonalInformation.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@%@",[IOManager httpAddr],FAULT_URL];
     
     NSString *recoreds = @"";
     
@@ -261,7 +284,7 @@
     }
     
     
-    NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"RecordIDList":recoreds,@"Type":[NSNumber numberWithInt:3]};
+    NSDictionary *dic = @{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ids":recoreds,@"optype":[NSNumber numberWithInt:4]};
     HttpManager *http = [HttpManager defaultManager];
     http.delegate = self;
     http.tag = 3;

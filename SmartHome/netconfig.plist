@@ -9,7 +9,7 @@
 	<key>tcpServer</key>
 	<string>115.28.151.85</string>
 	<key>httpPort</key>
-	<integer>8088</integer>
+	<real>8082</real>
 	<key>httpServer</key>
 	<string>115.28.151.85</string>
 </dict>

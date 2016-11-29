@@ -31,10 +31,8 @@ Proto createProto()
     Proto proto;
     proto.head=PROTOCOL_HEAD;
     proto.tail=PROTOCOL_TAIL;
-    
-    NSString *result = [NSString stringWithFormat:@"0x%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"HostID"]];
-    proto.masterID = CFSwapInt16BigToHost(strtoul([result UTF8String],0,16));
-    
+
+    proto.masterID = CFSwapInt16BigToHost( [[[NSUserDefaults standardUserDefaults] objectForKey:@"HostID"] intValue]);
     return proto;
 }
 

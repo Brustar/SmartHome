@@ -56,10 +56,7 @@
 
 -(void)clickTitleButton:(UIButton *)button
 {
-    
     [self performSegueWithIdentifier:@"roomListSegue" sender:self];
-    
-    
 }
 
 -(void)iphoneRoomListController:(IphoneRoomListController *)vc withRoomName:(NSString *)roomName
