@@ -10,6 +10,7 @@
 #import "AsyncUdpSocket.h"
 #import "PackManager.h"
 #import "MBProgressHUD+NJ.h"
+#import "SceneManager.h"
 
 @implementation SocketManager
 

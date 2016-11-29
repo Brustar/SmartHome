@@ -31,6 +31,10 @@
 #import "IphoneFMController.h"
 #import "IphoneDVDController.h"
 #import "IphoneNetTvController.h"
+#import "SQLManager.h"
+#import "Device.h"
+#import "BgMusicController.h"
+#import "WindowSlidingController.h"
 
 @interface SearchViewController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -40,7 +44,10 @@
 @property (nonatomic,strong) NSArray *devices;
 @property (nonatomic,strong) NSArray *deviceInfos;
 @property (nonatomic,strong) NSArray *searchResult;
-@property (nonatomic,strong) NSArray * rooms;
+@property (nonatomic,strong) NSArray * rooms;//房间
+@property (nonatomic,strong) NSArray * roomIDs;
+@property (nonatomic,strong) NSArray * AllDevices;
+
 @end
 
 @implementation SearchViewController
@@ -57,40 +64,61 @@
 #pragma mark - SearchBarDelegate
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
-    NSArray *tables=@[@"Devices",@"Scenes"];
+//    NSArray *tables=@[@"Devices",@"Scenes"];
     NSString * room = @"Rooms";
     FMDatabase *db = [SQLManager connetdb];
-    NSMutableArray *result = [NSMutableArray array];
+//    NSMutableArray *result = [NSMutableArray array];
     NSMutableArray * roomArr = [NSMutableArray array];
+    NSMutableArray * roomIDArr = [NSMutableArray array];
     if([db open])
     {
-        for(int i = 0; i < tables.count; i++)
-        {
-            if(searchBar.text)
-            {
-                NSString *sql = [NSString stringWithFormat:@"select * from %@ where NAME like '%%%@%%'",tables[i],searchBar.text];
-                NSString * roomSql = [NSString stringWithFormat:@"select * from %@ where NAME like '%%%@%%'",room,searchBar.text];
-                FMResultSet * roomResultSet = [db executeQuery:roomSql];
-                FMResultSet *resultSet = [db executeQuery:sql];
-                while([resultSet next])
-                {
-                    NSString *name = [resultSet stringForColumn:@"NAME"];
-                    
-                    [result addObject:name];
-                    NSLog(@"------%@-----",result);
-                }
-                while ([roomResultSet next]) {
-                    
-                    NSString * room = [roomResultSet stringForColumn:@"NAME"];
-                    
-                    [roomArr addObject:room];
-                }
-               
+        
+        //查找所有场景以及设备
+//        for(int i = 0; i < tables.count; i++)
+//        {
+//            if(searchBar.text)
+//            {
+//                NSString *sql = [NSString stringWithFormat:@"select * from %@ where NAME like '%%%@%%'",tables[i],searchBar.text];
+//                
+//                FMResultSet *resultSet = [db executeQuery:sql];
+//                while([resultSet next])
+//                {
+//                    NSString *name = [resultSet stringForColumn:@"NAME"];
+//                    
+//                    [result addObject:name];
+//                    NSLog(@"------%@-----",result);
+//                }
+//             
+//            }
+//            
+//        }
+        
+        if (searchBar.text) {
+            NSString * roomSql = [NSString stringWithFormat:@"select * from %@ where NAME like '%%%@%%'",room,searchBar.text];
+            NSString * roomID = [NSString stringWithFormat:@"select * from %@ where ID like '%%%@%%'",room,searchBar.text];
+            //房间ID
+            FMResultSet * roomIDresulSet = [db executeQuery:roomID];
+            while ([roomIDresulSet next]) {
+                
+                NSString * roomID = [roomIDresulSet stringForColumn:@"ID"];
+                
+                [roomIDArr addObject:roomID];
+            }
+            
+            //房间
+            FMResultSet * roomResultSet = [db executeQuery:roomSql];
+            while ([roomResultSet next]) {
+                
+                NSString * room = [roomResultSet stringForColumn:@"NAME"];
+                
+                [roomArr addObject:room];
             }
         }
-        self.searchResult = [result copy];
         
-        self.rooms = [roomArr copy];
+//        self.searchResult = [result copy];
+        self.rooms = [roomArr copy];//房间
+        self.roomIDs = [roomIDArr copy];//房间ID
+
         
     }
     [db closeOpenResultSets];
@@ -98,19 +126,30 @@
     [self.tableView reloadData];
 }
 
+//
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return self.rooms.count;
 }
--(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     NSString * str = self.rooms[section];
     
     return str;
 }
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+
+    self.AllDevices = [SQLManager devicesByRoomId:[self.roomIDs[section] integerValue]];
+    NSMutableArray * arr = [NSMutableArray array];
+    for (Device * device in self.AllDevices) {
+        NSString * deviceName = device.name;
+        [arr addObject:deviceName];
+    }
+    self.searchResult = [arr copy];
     return self.searchResult.count;
+
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -121,7 +160,16 @@
         
     }
     
-    cell.textLabel.text = self.searchResult[indexPath.row];
+
+    NSArray * item = [SQLManager devicesByRoomId:[self.roomIDs[indexPath.section] integerValue]];
+    NSMutableArray * arr = [NSMutableArray array];
+    for (Device * device in item) {
+        NSString * deviceName = device.name;
+        [arr addObject:deviceName];
+    }
+    item = [arr copy];
+    
+    cell.textLabel.text =item[indexPath.row];
     cell.textLabel.textAlignment = NSTextAlignmentLeft;
     
     return cell;
@@ -130,8 +178,14 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   
-    int eId =(int)[SQLManager deviceIDByDeviceName:self.searchResult[indexPath.row]];
+    NSArray * item = [SQLManager devicesByRoomId:[self.roomIDs[indexPath.section] integerValue]];
+    NSMutableArray * arr = [NSMutableArray array];
+    for (Device * device in item) {
+        NSString * deviceName = device.name;
+        [arr addObject:deviceName];
+    }
+    item = [arr copy];
+    int eId =(int)[SQLManager deviceIDByDeviceName:item[indexPath.row]];
     NSString *typeName = [SQLManager deviceTypeNameByDeviceID:eId];
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIStoryboard *iphoneBoard  = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
@@ -250,10 +304,22 @@
         amplifier.deviceid = [NSString stringWithFormat:@"%d",eId];
         [self.navigationController pushViewController:amplifier animated:YES];
         
-    }else if([typeName isEqualToString:@"智能单品"]){
-        PluginViewController *pluginVC = [storyBoard instantiateViewControllerWithIdentifier:@"PluginViewController"];
+    }
+    else if([typeName isEqualToString:@"智能单品"]){
+      GuardController *guardVC = [storyBoard instantiateViewControllerWithIdentifier:@"GuardController"];
+        
+        [self.navigationController pushViewController:guardVC animated:YES];
     
-        [self.navigationController pushViewController:pluginVC animated:YES];
+    }else if([typeName isEqualToString:@"背景音乐"]){
+         BgMusicController *bgMusicVC = [storyBoard instantiateViewControllerWithIdentifier:@"BgMusicController"];
+        
+        [self.navigationController pushViewController:bgMusicVC animated:YES];
+        
+    } else if([typeName isEqualToString:@"智能推窗器"]){
+         WindowSlidingController *windowSlidVC = [storyBoard instantiateViewControllerWithIdentifier:@"WindowSlidingController"];
+        
+        [self.navigationController pushViewController:windowSlidVC animated:YES];
+        
     }else if([typeName isEqualToString:@"幕布"]){
         ScreenCurtainController *screenCurtainVC = [storyBoard instantiateViewControllerWithIdentifier:@"ScreenCurtainController"];
         screenCurtainVC.deviceid = [NSString stringWithFormat:@"%d",eId];
@@ -265,7 +331,11 @@
         projectVC.deviceid = [NSString stringWithFormat:@"%d",eId];
         [self.navigationController pushViewController:projectVC animated:YES];
     }else{
-        [MBProgressHUD showError:@"没有结果匹配"];
+//        [MBProgressHUD showError:@"没有结果匹配"];
+        
+        PluginViewController *pluginVC = [storyBoard instantiateViewControllerWithIdentifier:@"PluginViewController"];
+        
+        [self.navigationController pushViewController:pluginVC animated:YES];
     }
 
 }

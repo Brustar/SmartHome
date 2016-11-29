@@ -1473,7 +1473,8 @@
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
-            rName = [resultSet stringForColumn:@"roomName"];
+//            rName = [resultSet stringForColumn:@"roomName"];
+            rName = [resultSet stringForColumn:@"name"];
         }
     }
     [db closeOpenResultSets];

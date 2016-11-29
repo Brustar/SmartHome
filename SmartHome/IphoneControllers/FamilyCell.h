@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IPhoneRoom.h"
 
 @interface FamilyCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *supImageView;
@@ -21,5 +22,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *tempLabel;//房间温度
 @property (weak, nonatomic) IBOutlet UILabel *humidityLabel;//房间湿度
 
-
+-(void)setModel:(IPhoneRoom *)iphoneRom;
 @end
