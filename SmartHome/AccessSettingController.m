@@ -91,7 +91,7 @@
     self.navigationItem.leftBarButtonItem = returnItem;
     self.areaTableView.tableHeaderView = self.headView;
     self.areaTableView.hidden = YES;
-    NSString *url = [NSString stringWithFormat:@"%@GetAllUserInfo.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/room_authority.aspx",[IOManager httpAddr]];
     [self sendRequest:url withTag:1];
 }
 -(void)sendRequest:(NSString *)url withTag:(int)i
@@ -99,7 +99,7 @@
     
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     if (auothorToken) {
-        NSDictionary *dict = @{@"AuthorToken":auothorToken};
+        NSDictionary *dict = @{@"token":auothorToken};
         HttpManager *http=[HttpManager defaultManager];
         http.delegate = self;
         http.tag = i;
@@ -111,15 +111,15 @@
 {
     if(tag == 1)
     {
-        if([responseObject[@"Result"] intValue]==0)
+        if([responseObject[@"result"] intValue]==0)
         {
-            NSDictionary *dic = responseObject[@"messageInfo"];
-            NSArray *arr = dic[@"userList"];
+            NSDictionary *dic = responseObject[@"host_user_lis"];
+            NSArray *arr = dic[@"room_user_list"];
             for(NSDictionary *userDetail in arr)
             {
-                NSString *userName = userDetail[@"userName"];
-                NSString *userType = userDetail[@"userType"];
-                NSString *userID = userDetail[@"userId"];
+                NSString *userName = userDetail[@"room_name"];
+                NSString *userType = userDetail[@"isopen"];
+                NSString *userID = userDetail[@"roomuser_id"];
                 [self.userArr addObject:userName];
                 [self.managerType addObject:userType];
                 [self.userIDArr addObject:userID];
@@ -131,7 +131,7 @@
 
     }else if(tag == 2)
     {
-        if([responseObject[@"Result"] intValue] == 0)
+        if([responseObject[@"result"] intValue] == 0)
         {
             [self.areasArr removeAllObjects];
             [self.opens removeAllObjects];

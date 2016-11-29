@@ -58,10 +58,10 @@
 }
 -(void)sendRequest
 {
-    NSString *url = [NSString stringWithFormat:@"%@GetUserHabit.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/user_habit.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     if (auothorToken) {
-    NSDictionary *dict = @{@"AuthorToken":auothorToken};
+    NSDictionary *dict = @{@"token":auothorToken};
     HttpManager *http=[HttpManager defaultManager];
     http.delegate = self;
     http.tag = 1;
@@ -72,16 +72,16 @@
 {
     if(tag == 1)
     {
-        if([responseObject[@"Result"] intValue]==0)
+        if([responseObject[@"result"] intValue]==0)
         {
-            NSDictionary *messageInfo = responseObject[@"messageInfo"];
-            NSArray *listMsg = messageInfo[@"listMessage"];
+//            NSDictionary *messageInfo = responseObject[@"user_habit_list"];
+            NSArray *listMsg = responseObject[@"user_habit_list"];
             for(NSDictionary *userDetail in listMsg)
             {
     
-                [self.habits addObject:userDetail[@"name"]];
-                [self.opens addObject:userDetail[@"isOpen"]];
-                [self.recordIDs addObject:userDetail[@"recordId"]];
+                [self.habits addObject:userDetail[@"hobit_name"]];
+                [self.opens addObject:userDetail[@"isopen"]];
+                [self.recordIDs addObject:userDetail[@"userhabit_id"]];
             }
             [self.tableView reloadData];
         }else{
@@ -90,7 +90,7 @@
 
     }else if(tag == 2 || tag == 3)
     {
-         if([responseObject[@"Result"] intValue]==0)
+         if([responseObject[@"result"] intValue]==0)
          {
              [MBProgressHUD showSuccess:@"设置权限成功"];
          }else{
@@ -137,11 +137,11 @@
 }
 -(void)sendRequsetForChangSwitch:(NSNumber *)num withTag:(int)tag andSwitch:(UISwitch *)sender
 {
-    NSString *url = [NSString stringWithFormat:@"%@UserHobitSetting.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/user_habit.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     NSNumber *recordID = [NSNumber numberWithInteger:sender.tag];
     if (auothorToken) {
-    NSDictionary *dict = @{@"AuthorToken":auothorToken,@"IsOpen":num,@"RecordID":recordID};
+    NSDictionary *dict = @{@"token":auothorToken,@"IsOpen":num,@"userhabit_id":recordID};
     HttpManager *http=[HttpManager defaultManager];
     http.delegate = self;
     http.tag = tag;

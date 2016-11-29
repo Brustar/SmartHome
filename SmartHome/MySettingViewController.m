@@ -63,12 +63,17 @@
         if(section == 1)
         {
             return 2;
+        }if (section == 2) {
+            
+            return 2;
         }
     
     }else {
-        if(section == 2)
+        if(section == 1)
         {
-            return 2;
+            return 1;
+        }if (section == 2) {
+            return 1;
         }
     }
     
@@ -86,14 +91,16 @@
         case 1:
             
             if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) {
-                title = @"权限控制";
-            }else {
                 if(indexPath.row == 0)
                 {
                     title = @"系统设置";
                 }else {
                     title = @"系统信息";
                 }
+            }else {
+               
+                
+                  title = @"权限控制";
             }
             
             break;
@@ -178,14 +185,16 @@
     }else if(indexPath.section == 1)
     {
        if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) {
-            [self performSegueWithIdentifier:@"accessSegue" sender:self];
-       }else {
            if(indexPath.row == 0)
            {
                [self performSegueWithIdentifier:@"systemSetSegue" sender:self];
            }else {
                [self performSegueWithIdentifier:@"systemInfoSegue" sender:self];
            }
+       }else {
+           
+           
+            [self performSegueWithIdentifier:@"accessSegue" sender:self];
        }
        
         

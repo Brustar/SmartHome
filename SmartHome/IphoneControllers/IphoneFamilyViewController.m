@@ -69,18 +69,18 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//    [NSTimer scheduledTimerWithTimeInterval:1.0 repeats:YES block:^(NSTimer *timer){
-//        NSLog(@"timer...");
-//        SocketManager *sock = [SocketManager defaultManager];
-//        sock.delegate = self;
-//        DeviceInfo *device =[DeviceInfo defaultManager];
-//        if (device.connectState == outDoor && device.masterID) {
-//            NSData *data = [[SceneManager defaultManager] getRealSceneData];
-//            [sock.socket writeData:data withTimeout:1 tag:1];
-//            [timer invalidate];
-//        }
-//        
-//    }];
+    [NSTimer scheduledTimerWithTimeInterval:1.0 repeats:YES block:^(NSTimer *timer){
+        NSLog(@"timer...");
+        SocketManager *sock = [SocketManager defaultManager];
+        sock.delegate = self;
+        DeviceInfo *device =[DeviceInfo defaultManager];
+        if (device.connectState == outDoor && device.masterID) {
+            NSData *data = [[SceneManager defaultManager] getRealSceneData];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+            [timer invalidate];
+        }
+        
+    }];
     
 }
 
