@@ -99,6 +99,7 @@
 +(NSArray *)getScensByRoomId:(int)roomId;
 +(NSArray *)getFavorScene;
 
++(NSArray *)getAllRoomsInfoByName:(NSString *)name;
 +(NSArray *)getAllRoomsInfo;
 
 +(int)getRoomIDByBeacon:(int)beacon;

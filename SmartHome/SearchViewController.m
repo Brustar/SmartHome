@@ -64,65 +64,17 @@
 #pragma mark - SearchBarDelegate
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
-//    NSArray *tables=@[@"Devices",@"Scenes"];
-    NSString * room = @"Rooms";
-    FMDatabase *db = [SQLManager connetdb];
-//    NSMutableArray *result = [NSMutableArray array];
     NSMutableArray * roomArr = [NSMutableArray array];
     NSMutableArray * roomIDArr = [NSMutableArray array];
-    if([db open])
-    {
-        
-        //查找所有场景以及设备
-//        for(int i = 0; i < tables.count; i++)
-//        {
-//            if(searchBar.text)
-//            {
-//                NSString *sql = [NSString stringWithFormat:@"select * from %@ where NAME like '%%%@%%'",tables[i],searchBar.text];
-//                
-//                FMResultSet *resultSet = [db executeQuery:sql];
-//                while([resultSet next])
-//                {
-//                    NSString *name = [resultSet stringForColumn:@"NAME"];
-//                    
-//                    [result addObject:name];
-//                    NSLog(@"------%@-----",result);
-//                }
-//             
-//            }
-//            
-//        }
-        
-        if (searchBar.text) {
-            NSString * roomSql = [NSString stringWithFormat:@"select * from %@ where NAME like '%%%@%%'",room,searchBar.text];
-            NSString * roomID = [NSString stringWithFormat:@"select * from %@ where ID like '%%%@%%'",room,searchBar.text];
-            //房间ID
-            FMResultSet * roomIDresulSet = [db executeQuery:roomID];
-            while ([roomIDresulSet next]) {
-                
-                NSString * roomID = [roomIDresulSet stringForColumn:@"ID"];
-                
-                [roomIDArr addObject:roomID];
-            }
-            
-            //房间
-            FMResultSet * roomResultSet = [db executeQuery:roomSql];
-            while ([roomResultSet next]) {
-                
-                NSString * room = [roomResultSet stringForColumn:@"NAME"];
-                
-                [roomArr addObject:room];
-            }
-        }
-        
-//        self.searchResult = [result copy];
-        self.rooms = [roomArr copy];//房间
-        self.roomIDs = [roomIDArr copy];//房间ID
-
-        
+    
+    NSArray *roomList = [SQLManager getAllRoomsInfoByName:searchBar.text];
+    for (NSDictionary *room in roomList) {
+        [roomIDArr addObject:room[@"roomid"]];
+        [roomArr addObject:room[@"roomName"]];
     }
-    [db closeOpenResultSets];
-    [db close];
+    
+    self.roomIDs = [roomIDArr copy];
+    self.rooms = [roomArr copy];
     [self.tableView reloadData];
 }
 
@@ -331,8 +283,6 @@
         projectVC.deviceid = [NSString stringWithFormat:@"%d",eId];
         [self.navigationController pushViewController:projectVC animated:YES];
     }else{
-//        [MBProgressHUD showError:@"没有结果匹配"];
-        
         PluginViewController *pluginVC = [storyBoard instantiateViewControllerWithIdentifier:@"PluginViewController"];
         
         [self.navigationController pushViewController:pluginVC animated:YES];
@@ -346,12 +296,9 @@
 
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 
 @end

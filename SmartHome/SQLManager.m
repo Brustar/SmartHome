@@ -1395,6 +1395,28 @@
     
 }
 
++(NSArray *)getAllRoomsInfoByName:(NSString *)name
+{
+    NSMutableArray *roomList = [NSMutableArray array];
+    FMDatabase *db = [SQLManager connetdb];
+    if([db open])
+    {
+        if (name) {
+            NSString * roomSql = [NSString stringWithFormat:@"select * from Rooms where NAME like '%%%@%%'",name];
+            //房间
+            FMResultSet * roomResultSet = [db executeQuery:roomSql];
+            while ([roomResultSet next]) {
+                NSString * roomName = [roomResultSet stringForColumn:@"NAME"];
+                NSString * roomID = [roomResultSet stringForColumn:@"ID"];
+                NSDictionary *room = @{@"roomid":roomID,@"roomName":roomName};
+                [roomList addObject:room];
+            }
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return roomList;
+}
 
 +(NSArray *)getAllRoomsInfo
 {
