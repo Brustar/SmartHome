@@ -72,6 +72,7 @@
     
     NSData *data = [[SceneManager defaultManager] getRealSceneData];
     [sock.socket writeData:data withTimeout:1 tag:1];
+    NSLog(@"TCP请求Data:%@", data);
     
     [self sendRequestForGettingSceneConfig:@"cloud/GetSceneConfig.aspx" withTag:1];
 }
@@ -174,6 +175,9 @@
 #pragma mark - TCP recv delegate
 - (void)recv:(NSData *)data withTag:(long)tag
 {
+    
+    NSLog(@"TCP收到的data:%@", data);
+    
     NSString *result = [NSString stringWithFormat:@"0x%@",[UD objectForKey:@"HostID"]];
     
     Proto proto = protocolFromData(data);
