@@ -22,20 +22,35 @@
 #import "SocketManager.h"
 #import "SceneManager.h"
 #import "IphoneLightController.h"
+#import "IPhoneRoom.h"
 
 
 
-@interface IphoneFamilyViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,TcpRecvDelegate>
+@interface IphoneFamilyViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic)  IBOutlet UIView *supView;
-@property (nonatomic,strong) NSArray * dataSource;
 @property (nonatomic,strong) NSMutableArray * roomIdArrs;//房间数量
-
 @property (nonatomic,strong) NSArray *rooms;
+@property (nonatomic,strong) IPhoneRoom * room;
+
+//======add by zxp
+@property (nonatomic,strong)NSMutableArray  *iPhoneRoomList;
+
 
 @end
 
 @implementation IphoneFamilyViewController
+
+
+//--add by zxp
+-(NSArray  *)iPhoneRoomList{
+    if(!_iPhoneRoomList){
+    
+        _iPhoneRoomList = [NSMutableArray array];
+    }
+    return _iPhoneRoomList;
+}
+
 
 -(NSMutableArray *)roomIdArrs
 {
@@ -47,12 +62,26 @@
 
 }
 
+- (void)handleTimer:(NSTimer *)theTimer {
+    
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    SocketManager *sock = [SocketManager defaultManager];
-    NSData *data = [[SceneManager defaultManager] getRealSceneData];
-    [sock.socket writeData:data withTimeout:1 tag:1];
+//    [NSTimer scheduledTimerWithTimeInterval:1.0 repeats:YES block:^(NSTimer *timer){
+//        NSLog(@"timer...");
+//        SocketManager *sock = [SocketManager defaultManager];
+//        sock.delegate = self;
+//        DeviceInfo *device =[DeviceInfo defaultManager];
+//        if (device.connectState == outDoor && device.masterID) {
+//            NSData *data = [[SceneManager defaultManager] getRealSceneData];
+//            [sock.socket writeData:data withTimeout:1 tag:1];
+//            [timer invalidate];
+//        }
+//        
+//    }];
+    
 }
 
 - (void)viewDidLoad {
@@ -63,6 +92,8 @@
     SocketManager *sock = [SocketManager defaultManager];
     [sock connectTcp];
     sock.delegate = self;
+    [self sendRequestForGettingSceneConfig:@"cloud/RoomStatusList.aspx" withTag:1];
+
     
 }
 
@@ -89,63 +120,55 @@
     if ([responseObject isKindOfClass:[NSDictionary class]]) {
         NSLog(@"responseObject:%@", responseObject);
         if ([responseObject[@"Result"] integerValue] == 0) {
-            NSDictionary *infoDict = responseObject[@"list"];
-            if ([infoDict isKindOfClass:[NSDictionary class]]) {
-               
+
+            NSArray    *arr = responseObject[@"list"];
+            for(NSDictionary *dict in arr){
+                IPhoneRoom  *room = [IPhoneRoom new];
+                room.roomId =  [dict[@"roomid"]  intValue];
+                room.light  = [dict[@"light"] intValue];
+                room.curtain = [dict[@"curtain"] intValue];
+                room.bgmusic = [dict[@"bgmusic"] intValue];
+                room.aircondition = [dict[@"aircondition"] intValue];
+                room.dvd  = [dict[@"dvd"] intValue];
+                room.tv = [dict[@"tv"] intValue];
+                room.temperature = [dict[@"temperature"] intValue];
+                room.humidity = [dict[@"humidity"] intValue];
                 
+                //====从sqlite中通过id的到name
+                room.roomName = [SQLManager getRoomNameByRoomID:room.roomId];
+                
+                [self.iPhoneRoomList addObject:room];
             }
+        
+            [self.collectionView reloadData];
+           
         }
     }
 }
 
 
-#pragma mark - TCP recv delegate
-- (void)recv:(NSData *)data withTag:(long)tag
-{
-    FamilyCell * cell ;
-    Proto proto = protocolFromData(data);
-    
-    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
-        return;
-    }
-    
-    if (tag==0) {
-        if (proto.action.state==0x6A) {
-            cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
-        }
-        if (proto.action.state==0x8A) {
-            NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
-            cell.humidityLabel.text = valueString;
-        }
-    }
-}
 
 #pragma  mark - UICollectionViewDelegate
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     
-    return self.rooms.count;
+
+    return self.iPhoneRoomList.count;
 
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-   FamilyCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+
+    FamilyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+ 
     
-    cell.layer.masksToBounds = YES;
-    cell.supImageView.layer.cornerRadius = cell.supImageView.bounds.size.width / 2.0;
-    cell.subImageView.layer.cornerRadius = cell.subImageView.bounds.size.width /2.0;
-    cell.lightImageVIew.layer.cornerRadius = cell.lightImageVIew.bounds.size.width /2.0;
-    cell.curtainImageView.layer.cornerRadius = cell.curtainImageView.bounds.size.width / 2.0;
-    cell.airImageVIew.layer.cornerRadius = cell.airImageVIew.bounds.size.width / 2.0;
-    cell.DVDImageView.layer.cornerRadius = cell.DVDImageView.bounds.size.width / 2.0;
-    cell.TVImageView.layer.cornerRadius = cell.TVImageView.bounds.size.width / 2.0;
-    cell.musicImageVIew.layer.cornerRadius = cell.musicImageVIew.bounds.size.width / 2.0;
-    Room *room = self.rooms[indexPath.row];
-    cell.nameLabel.text = room.rName;
+    IPhoneRoom *iphoneRoom = self.iPhoneRoomList[indexPath.row];
     
-    cell.tag = room.rId;
-    return cell;
+
+    [cell setModel:iphoneRoom];
+
+    return  cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -153,8 +176,9 @@
     
     UIStoryboard * oneStory = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     IphoneLightController * VC = [oneStory instantiateViewControllerWithIdentifier:@"LightController"];
-    Room *room = self.rooms[indexPath.row];
-    VC.roomID = room.rId;
+//    Room *room = self.rooms[indexPath.row];
+    IPhoneRoom * room = self.iPhoneRoomList[indexPath.row];
+    VC.roomID = room.roomId;
     [self.navigationController pushViewController:VC animated:YES];
 }
 
@@ -176,7 +200,11 @@
 {
     return maxSpace;
 }
+-(void)recv:(NSData *)data withTag:(long)tag
+{
 
+
+}
 
 /*
 #pragma mark - Navigation

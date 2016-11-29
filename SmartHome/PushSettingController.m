@@ -70,6 +70,8 @@
     self.coverView.hidden = YES;
     self.pushTypeView.hidden = YES;
     [self sendRequest];
+    
+    
 }
 
 
@@ -94,44 +96,44 @@
     {
         if ([responseObject[@"Result"] intValue]==0){
             NSArray *messageInfo = responseObject[@"messageInfo"];
-            for(NSDictionary *typeName in messageInfo)
+            for(NSDictionary *item in messageInfo)
             {
 
-                NSString *typeN = typeName[@"itemName"];
-                [self.typeNames addObject:typeN];
+//                NSString *typeN = typeName[@"itemName"];
+//                [self.typeNames addObject:typeN];
 
                 //NSString *typeN = typeName[@"typeName"];
                 //[self.typeNames addObject:typeN];
 
-                NSArray *infoList = typeName[@"infoList"];
-                NSMutableArray *itemNames = [NSMutableArray array];
-                NSMutableArray *itemIDs = [NSMutableArray array];
-                NSMutableArray *records = [NSMutableArray array];
-                for(NSDictionary *item in infoList)
-                {
-                    NSString *itemName = item[@"itemName"];
-                    NSNumber *itemID = item[@"notifyWay"];
-                    NSNumber  *recordID = item[@"recordId"];
+//                NSArray *infoList = typeName[@"infoList"];
+//                NSMutableArray *itemNames = [NSMutableArray array];
+//                NSMutableArray *itemIDs = [NSMutableArray array];
+//                NSMutableArray *records = [NSMutableArray array];
+//                for(NSDictionary *item in infoList)
+//                {
+//                    NSString *itemName = item[@"itemName"];
+//                    NSNumber *itemID = item[@"notifyWay"];
+//                    NSNumber  *recordID = item[@"recordId"];
+//
+//                    if (![itemNames containsObject:itemName]) {
+//                          [itemNames addObject:itemName];
+//                    }
+//                 
+//                         [itemIDs addObject:itemID];
+//                    
+//                    if (![records containsObject:recordID]) {
+//                        [records addObject:recordID];
+//                    }
+//                    
+//
+//                    [itemNames addObject:itemName];
+//                    [itemIDs addObject:itemID];
+//                    [records addObject:recordID];
 
-                    if (![itemNames containsObject:itemName]) {
-                          [itemNames addObject:itemName];
-                    }
-                 
-                         [itemIDs addObject:itemID];
-                    
-                    if (![records containsObject:recordID]) {
-                        [records addObject:recordID];
-                    }
-                    
-
-                    [itemNames addObject:itemName];
-                    [itemIDs addObject:itemID];
-                    [records addObject:recordID];
-
-                }
-                [self.names addObject:itemNames];
-                [self.notifyWay addObject:itemIDs];
-                [self.recordIDs addObject:records];
+//                }
+                [self.names addObject:item[@"itemName"]];
+                [self.notifyWay addObject:item[@"notifyWay"]];
+                [self.recordIDs addObject:item[@"recordId"]];
             }
             [self.tableView reloadData];
             
@@ -153,28 +155,34 @@
 }
 
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return self.typeNames.count;
-}
+//-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+//    return self.typeNames.count;
+//}
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSArray *item = self.names[section];
-    return item.count;
+//    NSArray *item = self.names[section];
+//    return item.count;
+    
+    return self.names.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pushSettingCell" forIndexPath:indexPath];
-    NSArray *item = self.names[indexPath.section];
-    NSArray *notiWay = self.notifyWay[indexPath.section];
     
-    cell.textLabel.text = item[indexPath.row];
-    NSNumber *num = notiWay[indexPath.row];
+//    NSArray *item = self.names[indexPath.section];
+//    NSArray *notiWay = self.notifyWay[indexPath.section];
+    
+//    cell.textLabel.text = item[indexPath.row];
+    cell.textLabel.text = self.names[indexPath.row];
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:13];
+    cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+    NSNumber *num = self.notifyWay[indexPath.row];
     if([num intValue] == 1)
     {
-        cell.detailTextLabel.text = @"信息";
+        cell.detailTextLabel.text = @"信息推送";
     }else if([num intValue] == 2)
     {
-        cell.detailTextLabel.text = @"短信";
+        cell.detailTextLabel.text = @"短信通知";
     }else {
         cell.detailTextLabel.text = @"不通知";
     }
@@ -182,22 +190,22 @@
     return cell;
 }
 
--(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    
-        UIView *view = [[UIView alloc]init];
-        view.backgroundColor = [UIColor colorWithRed:241/255.0 green:240/255.0 blue:246/255.0 alpha:1];
-        UILabel *titleLabe = [[UILabel alloc]initWithFrame:CGRectMake(15, 5, 200, 50)];
-        titleLabe.textColor = [UIColor grayColor];
-        titleLabe.font = [UIFont systemFontOfSize:18];
-        [view addSubview:titleLabe];
-        titleLabe.text = self.typeNames[section];
-        return view;
-
-}
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    
-    return 50;
-}
+//-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    
+//        UIView *view = [[UIView alloc]init];
+//        view.backgroundColor = [UIColor colorWithRed:241/255.0 green:240/255.0 blue:246/255.0 alpha:1];
+//        UILabel *titleLabe = [[UILabel alloc]initWithFrame:CGRectMake(15, 5, 200, 50)];
+//        titleLabe.textColor = [UIColor grayColor];
+//        titleLabe.font = [UIFont systemFontOfSize:18];
+//        [view addSubview:titleLabe];
+//        titleLabe.text = self.typeNames[section];
+//        return view;
+//
+//}
+//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+//    
+//    return 50;
+//}
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 //    self.selectedBtn.selected = NO;
@@ -207,8 +215,9 @@
     self.coverView.hidden = NO;
     self.pushTypeView.hidden = NO;
     
-    NSArray *notiWay = self.notifyWay[indexPath.section];
-    NSNumber *num = notiWay[indexPath.row];
+//    NSArray *notiWay = self.notifyWay[indexPath.section];
+//    NSNumber *num = notiWay[indexPath.row];
+    NSNumber * num = self.notifyWay[indexPath.row];
     
     if([num intValue] == 1)
     {
@@ -261,16 +270,16 @@
     self.coverView.hidden = YES;
     self.pushTypeView.hidden = YES;
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:self.indexPath];
-    NSArray *item = self.recordIDs[self.indexPath.section];
-    NSNumber *recordID = item[self.indexPath.row];
+//    NSArray *item = self.recordIDs[self.indexPath.section];
+    NSNumber *recordID = self.recordIDs[self.indexPath.row];
     if(self.tag == 0)
     {
-        cell.detailTextLabel.text = @"信息";
+        cell.detailTextLabel.text = @"信息推送";
         [self setUserNotifyWay:1 andRecord:recordID];
         
     }else if(self.tag == 1)
     {
-        cell.detailTextLabel.text = @"短信";
+        cell.detailTextLabel.text = @"短信通知";
         [self setUserNotifyWay:2 andRecord:recordID];
     }else{
         cell.detailTextLabel.text = @"不通知";

@@ -48,7 +48,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"使用习惯";
+    self.title = @"系统设置";
     self.automaticallyAdjustsScrollViewInsets = NO;
     UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
     self.navigationItem.leftBarButtonItem = returnItem;
