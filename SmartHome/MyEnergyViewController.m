@@ -8,7 +8,7 @@
 
 #import "MyEnergyViewController.h"
 #import "MyEnergyCell.h"
-#import "DetailList.h"
+
 #import "EnergyOfDeviceController.h"
 #import "HttpManager.h"
 #import "SQLManager.h"

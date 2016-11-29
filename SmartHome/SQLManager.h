@@ -111,4 +111,6 @@
 +(NSMutableArray *)getAllChannelForFavoritedForType:(NSString *)type deviceID:(int)deviceID;
 +(BOOL)deleteChannelForChannelID:(NSInteger)channel_id;
 
+
++(NSArray *)getDetailListWithID:(NSInteger)ID;
 @end

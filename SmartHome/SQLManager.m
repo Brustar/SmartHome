@@ -1525,4 +1525,28 @@
     [db close];
     return isSuccess;
 }
+
++(NSArray *)getDetailListWithID:(NSInteger)ID
+{
+    FMDatabase *db = [SQLManager connetdb];
+    if (![db open]) {
+        NSLog(@"Could not open db.");
+        return nil;
+    }
+    NSMutableArray *array = [NSMutableArray array];
+    NSString *sql = [NSString stringWithFormat:@"select * from Devices where ID=%ld",(long)ID];
+    FMResultSet *resultSet = [db executeQuery:sql];
+    
+    if([resultSet next])
+    {
+        [array addObject:[resultSet stringForColumn:@"NAME"]];
+    }
+    
+    [db closeOpenResultSets];
+    [db close];
+    
+    
+    return array;
+}
+
 @end

@@ -194,7 +194,6 @@
 		F66CADE51D5D8654001E66EC /* DeviceType.m in Sources */ = {isa = PBXBuildFile; fileRef = F66CADE41D5D8654001E66EC /* DeviceType.m */; };
 		F66DFF281D5184730005E882 /* EditSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = F66DFF271D5184730005E882 /* EditSceneController.m */; };
 		F66DFF2B1D5188BF0005E882 /* EditSceneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F66DFF2A1D5188BF0005E882 /* EditSceneCell.m */; };
-		F66EB2D51CFED0A900AC53CE /* DetailList.m in Sources */ = {isa = PBXBuildFile; fileRef = F66EB2D41CFED0A900AC53CE /* DetailList.m */; };
 		F67091BC1D93BF300002DDC5 /* WindowSlidingController.m in Sources */ = {isa = PBXBuildFile; fileRef = F67091BB1D93BF300002DDC5 /* WindowSlidingController.m */; };
 		F673EBD21D45E976001270FB /* VerifyCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F673EBD11D45E976001270FB /* VerifyCodeView.m */; };
 		F6755A4C1D4063FA002394F3 /* ECloudTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F6755A4B1D4063FA002394F3 /* ECloudTabBar.m */; };
@@ -781,8 +780,6 @@
 		F66DFF271D5184730005E882 /* EditSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditSceneController.m; sourceTree = "<group>"; };
 		F66DFF291D5188BF0005E882 /* EditSceneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditSceneCell.h; sourceTree = "<group>"; };
 		F66DFF2A1D5188BF0005E882 /* EditSceneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditSceneCell.m; sourceTree = "<group>"; };
-		F66EB2D31CFED0A900AC53CE /* DetailList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailList.h; sourceTree = "<group>"; };
-		F66EB2D41CFED0A900AC53CE /* DetailList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailList.m; sourceTree = "<group>"; };
 		F67091B91D9375620002DDC5 /* AreaSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaSettingCell.h; sourceTree = "<group>"; };
 		F67091BA1D93BF300002DDC5 /* WindowSlidingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindowSlidingController.h; sourceTree = "<group>"; };
 		F67091BB1D93BF300002DDC5 /* WindowSlidingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WindowSlidingController.m; sourceTree = "<group>"; };
@@ -902,8 +899,6 @@
 				0FCFB3971CF2947500B37DD3 /* EntranceGuard.m */,
 				0FCFB3991CF2950D00B37DD3 /* BgMusic.h */,
 				0FCFB39A1CF2950D00B37DD3 /* BgMusic.m */,
-				F66EB2D31CFED0A900AC53CE /* DetailList.h */,
-				F66EB2D41CFED0A900AC53CE /* DetailList.m */,
 				F6251F721D541D8A000A5A47 /* Device.h */,
 				F6251F731D541D8A000A5A47 /* Device.m */,
 				F6A1C02C1D586D7500856E00 /* Room.h */,
@@ -2224,7 +2219,6 @@
 				0FAF74C01CEEA17C00432713 /* HRBrightnessSlider.m in Sources */,
 				F635CCBB1D4356650078B148 /* MyCenterSplitController.m in Sources */,
 				F6251F741D541D8A000A5A47 /* Device.m in Sources */,
-				F66EB2D51CFED0A900AC53CE /* DetailList.m in Sources */,
 				F6251F771D542508000A5A47 /* SQLManager.m in Sources */,
 				F62CFA4A1DAC952F006410F7 /* IphoneRoomListController.m in Sources */,
 				F67F1F741D3C6AA200F2B7E5 /* SystemCell.m in Sources */,
