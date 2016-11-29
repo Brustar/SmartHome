@@ -9,7 +9,6 @@
 #import "IphoneFMController.h"
 #import "TXHRrettyRuler.h"
 #import "FMCollectionViewCell.h"
-#import "ChannelManager.h"
 #import "SQLManager.h"
 #import "TVChannel.h"
 #import "HttpManager.h"
@@ -36,7 +35,7 @@
     if(!_allFavouriteChannels)
     {
         _allFavouriteChannels = [NSMutableArray array];
-        _allFavouriteChannels = [ChannelManager getAllChannelForFavoritedForType:@"FM" deviceID:[self.deviceid intValue]];
+        _allFavouriteChannels = [SQLManager getAllChannelForFavoritedForType:@"FM" deviceID:[self.deviceid intValue]];
         if(_allFavouriteChannels == nil || _allFavouriteChannels.count == 0)
         {
             
@@ -206,7 +205,7 @@
         {
             NSIndexPath *indexPath = [self.collectionView indexPathForCell:self.cell];
             TVChannel *channel = self.allFavouriteChannels[indexPath.row];
-            BOOL isSuccess = [ChannelManager deleteChannelForChannelID:channel.channel_id];
+            BOOL isSuccess = [SQLManager deleteChannelForChannelID:channel.channel_id];
             if(!isSuccess)
             {
                 [MBProgressHUD showError:@"删除失败，请稍后再试"];

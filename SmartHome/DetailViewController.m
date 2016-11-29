@@ -7,7 +7,7 @@
 //
 
 #import "DetailViewController.h"
-#import "DetailList.h"
+#import "SQLManager.h"
 
 @interface DetailViewController ()
 
@@ -30,7 +30,7 @@
 -(void)setDeviceid:(NSString*)deviceID
 {
     _deviceid = deviceID;
-    self.detailArray = [DetailList getDetailListWithID:[deviceID intValue]];
+    self.detailArray = [SQLManager getDetailListWithID:[deviceID intValue]];
 }
 
 - (void)viewDidLoad {
