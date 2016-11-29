@@ -270,6 +270,7 @@
             {
                 int sId = [sceneInfoDic[@"scence_id"] intValue];
                 NSString *sName = sceneInfoDic[@"name"];
+                int isFavorite = [sceneInfoDic[@"isstore"] intValue];//是否收藏，1:已收藏 2: 未收藏
                 int sType = [sceneInfoDic[@"type"] intValue];
                 NSString *sNumber = sceneInfoDic[@"snumber"];
                 NSString *urlImage = sceneInfoDic[@"image_url"];
@@ -278,13 +279,13 @@
                     NSString *urlPlist = sceneInfoDic[@"plist_url"];
                     [self downloadPlsit:urlPlist];
                 }
-                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,'%@',%d,null)",sId,sName,rName,urlImage,room_id,sType,sNumber,0];
+                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,'%@',%d,null)",sId,sName,rName,urlImage,room_id,sType,sNumber,isFavorite];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {
-                    NSLog(@"insert 成功"); 
+                    NSLog(@"insert 场景信息 成功");
                 }else{
-                    NSLog(@"insert 失败");
+                    NSLog(@"insert 场景信息 失败");
                 }
             }
         }
