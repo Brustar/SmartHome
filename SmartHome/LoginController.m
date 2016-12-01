@@ -167,9 +167,10 @@
 - (void)sendRequestForGettingConfigInfos:(NSString *)str withTag:(int)tag;
 {
     NSString *url = [NSString stringWithFormat:@"%@%@",[IOManager httpAddr],str];
-    NSDictionary *dic = @{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]};
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"room_version"]) {
-        dic = @{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"room_ver":[[NSUserDefaults standardUserDefaults] objectForKey:@"room_version"],@"equipment_ver":[[NSUserDefaults standardUserDefaults] objectForKey:@"equipment_version"],@"scence_ver":[[NSUserDefaults standardUserDefaults] objectForKey:@"scence_version"]};//,@"tv_ver":[[NSUserDefaults standardUserDefaults] objectForKey:@"tv_version"],@"fm_ver":[[NSUserDefaults standardUserDefaults] objectForKey:@"fm_version"],@"favor_ver":[[NSUserDefaults standardUserDefaults] objectForKey:@"favor_version"]};
+    NSUserDefaults *userDefault =  [NSUserDefaults standardUserDefaults];
+    NSDictionary *dic = @{@"token":[userDefault objectForKey:@"AuthorToken"]};
+    if ([userDefault objectForKey:@"room_version"]) {
+        dic = @{@"token":[userDefault objectForKey:@"AuthorToken"],@"room_ver":[userDefault objectForKey:@"room_version"],@"equipment_ver":[userDefault objectForKey:@"equipment_version"],@"scence_ver":[userDefault objectForKey:@"scence_version"],@"tv_ver":[userDefault objectForKey:@"tv_version"],@"fm_ver":[userDefault objectForKey:@"fm_version"]};
     }
     HttpManager *http = [HttpManager defaultManager];
     http.delegate = self;

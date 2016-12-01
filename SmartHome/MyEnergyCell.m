@@ -13,6 +13,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
+    self.timeLabel.adjustsFontSizeToFitWidth = YES;
+    self.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.totalLabel.adjustsFontSizeToFitWidth = YES;
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

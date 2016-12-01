@@ -55,7 +55,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"我的维修";
+    self.title = @"我的保修记录";
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = self.footView;
     self.footView.hidden = YES;
@@ -262,7 +262,7 @@
 //评价
 -(void)sendCommentType:(int)type
 {
-    NSDictionary *dic = @{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"RecordID":[NSNumber numberWithInt:1],@"optype":[NSNumber numberWithInt:type]};
+    NSDictionary *dic = @{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"breakdown_id":[NSNumber numberWithInt:1],@"optype":[NSNumber numberWithInt:type]};
     [self sendRequest:dic andUrlStr:FIX_URL with:2];
 }
 

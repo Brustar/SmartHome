@@ -69,18 +69,18 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//    [NSTimer scheduledTimerWithTimeInterval:1.0 repeats:YES block:^(NSTimer *timer){
-//        NSLog(@"timer...");
-//        SocketManager *sock = [SocketManager defaultManager];
-//        sock.delegate = self;
-//        DeviceInfo *device =[DeviceInfo defaultManager];
-//        if (device.connectState == outDoor && device.masterID) {
-//            NSData *data = [[SceneManager defaultManager] getRealSceneData];
-//            [sock.socket writeData:data withTimeout:1 tag:1];
-//            [timer invalidate];
-//        }
-//        
-//    }];
+    [NSTimer scheduledTimerWithTimeInterval:1.0 repeats:YES block:^(NSTimer *timer){
+        NSLog(@"timer...");
+        SocketManager *sock = [SocketManager defaultManager];
+        sock.delegate = self;
+        DeviceInfo *device =[DeviceInfo defaultManager];
+        if (device.connectState == outDoor && device.masterID) {
+            NSData *data = [[SceneManager defaultManager] getRealSceneData];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+            [timer invalidate];
+        }
+        
+    }];
     
 }
 
@@ -92,7 +92,7 @@
     SocketManager *sock = [SocketManager defaultManager];
     [sock connectTcp];
     sock.delegate = self;
-    [self sendRequestForGettingSceneConfig:@"cloud/RoomStatusList.aspx" withTag:1];
+    [self sendRequestForGettingSceneConfig:@"Cloud/room_status_list.aspx" withTag:1];
 
     
 }
@@ -103,7 +103,7 @@
     NSString *url = [NSString stringWithFormat:@"%@%@",[IOManager httpAddr],str];
     
     NSDictionary *dic = @{
-                          @"AuthorToken" : [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],
+                          @"token" : [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"optype":[NSNumber numberWithInteger:0]
                           
                     
                           };
@@ -119,9 +119,9 @@
 {
     if ([responseObject isKindOfClass:[NSDictionary class]]) {
         NSLog(@"responseObject:%@", responseObject);
-        if ([responseObject[@"Result"] integerValue] == 0) {
+        if ([responseObject[@"result"] integerValue] == 0) {
 
-            NSArray    *arr = responseObject[@"list"];
+            NSArray    *arr = responseObject[@"room_status_list"];
             for(NSDictionary *dict in arr){
                 IPhoneRoom  *room = [IPhoneRoom new];
                 room.roomId =  [dict[@"roomid"]  intValue];

@@ -20,6 +20,7 @@
 @property (nonatomic,strong) NSMutableArray *timesArr;
 @property (nonatomic,strong) NSMutableArray *recordIDs;
 @property (nonatomic,strong) NSMutableArray *statusArr;
+@property (nonatomic,strong) NSMutableArray * status_nameArr;
 - (IBAction)clickCancleBtn:(id)sender;
 - (IBAction)clickSureBtn:(id)sender;
 
@@ -27,6 +28,14 @@
 @end
 
 @implementation ProfileFaultsViewController
+-(NSMutableArray *)status_nameArr
+{
+    if (!_status_nameArr) {
+        _status_nameArr = [NSMutableArray array];
+    }
+
+    return _status_nameArr;
+}
 -(NSMutableArray*)faultArr
 {
     if(!_faultArr){
@@ -66,6 +75,7 @@
     self.footerView.hidden = YES;
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = self.footerView;
+    self.title = @"我的故障";
     
     //获取所有故障信息
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
@@ -99,6 +109,7 @@
                 [self.timesArr addObject:dicDetail[@"createdate"]];
                 [self.recordIDs addObject:dicDetail[@"breakdown_id"]];
                 [self.statusArr addObject:dicDetail[@"status_id"]];
+                [self.status_nameArr addObject:dicDetail[@"status_name"]];
             }
             [self.tableView reloadData];
         }else{
@@ -149,10 +160,10 @@
             cell.alertImageView.hidden = NO;
         }
     }
-    //显示两个按钮 ‘未修好’，‘已修好’
-    if (status == UPLOADED) {
-        
-    }
+//    //显示两个按钮 ‘未修好’，‘已修好’
+//    if (status == UPLOADED) {
+//        
+//    }
     
     return cell;
 }
@@ -183,6 +194,13 @@
            [alertVC addAction:cancleAction];
 
        }
+    if(!self.isEditing) {
+         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+        UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:self.status_nameArr[indexPath.row] message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * action = [UIAlertAction actionWithTitle:@"已知" style:UIAlertActionStyleCancel handler:nil];
+        [alertVC addAction:action];
+        [self presentViewController:alertVC animated:YES completion:nil];
+     }
 }
 
 

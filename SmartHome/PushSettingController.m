@@ -70,20 +70,14 @@
     self.coverView.hidden = YES;
     self.pushTypeView.hidden = YES;
     [self sendRequest];
-    
-    
 }
-
-
-
-
 //获得所有设置请求
 -(void)sendRequest
 {
-    NSString *url = [NSString stringWithFormat:@"%@GetUserNotifySettings.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/notify.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     if (auothorToken) {
-        NSDictionary *dict = @{@"AuthorToken":auothorToken};
+        NSDictionary *dict = @{@"token":auothorToken};
         HttpManager *http=[HttpManager defaultManager];
         http.tag = 1;
         http.delegate = self;
@@ -94,46 +88,13 @@
 {
     if(tag == 1)
     {
-        if ([responseObject[@"Result"] intValue]==0){
-            NSArray *messageInfo = responseObject[@"messageInfo"];
+        if ([responseObject[@"result"] intValue]==0){
+            NSArray *messageInfo = responseObject[@"user_notify_list"];
             for(NSDictionary *item in messageInfo)
             {
-
-//                NSString *typeN = typeName[@"itemName"];
-//                [self.typeNames addObject:typeN];
-
-                //NSString *typeN = typeName[@"typeName"];
-                //[self.typeNames addObject:typeN];
-
-//                NSArray *infoList = typeName[@"infoList"];
-//                NSMutableArray *itemNames = [NSMutableArray array];
-//                NSMutableArray *itemIDs = [NSMutableArray array];
-//                NSMutableArray *records = [NSMutableArray array];
-//                for(NSDictionary *item in infoList)
-//                {
-//                    NSString *itemName = item[@"itemName"];
-//                    NSNumber *itemID = item[@"notifyWay"];
-//                    NSNumber  *recordID = item[@"recordId"];
-//
-//                    if (![itemNames containsObject:itemName]) {
-//                          [itemNames addObject:itemName];
-//                    }
-//                 
-//                         [itemIDs addObject:itemID];
-//                    
-//                    if (![records containsObject:recordID]) {
-//                        [records addObject:recordID];
-//                    }
-//                    
-//
-//                    [itemNames addObject:itemName];
-//                    [itemIDs addObject:itemID];
-//                    [records addObject:recordID];
-
-//                }
-                [self.names addObject:item[@"itemName"]];
-                [self.notifyWay addObject:item[@"notifyWay"]];
-                [self.recordIDs addObject:item[@"recordId"]];
+                [self.names addObject:item[@"item_name"]];
+                [self.notifyWay addObject:item[@"notifyway"]];
+                [self.recordIDs addObject:item[@"usernotify_id"]];
             }
             [self.tableView reloadData];
             
@@ -144,7 +105,7 @@
  
     }else if(tag == 2)
     {
-        if ([responseObject[@"Result"] intValue]==0)
+        if ([responseObject[@"result"] intValue]==0)
         {
             [MBProgressHUD showSuccess:@"修改成功"];
         }else {
@@ -154,25 +115,14 @@
     
 }
 
-
-//-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-//    return self.typeNames.count;
-//}
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    NSArray *item = self.names[section];
-//    return item.count;
     
     return self.names.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pushSettingCell" forIndexPath:indexPath];
-    
-//    NSArray *item = self.names[indexPath.section];
-//    NSArray *notiWay = self.notifyWay[indexPath.section];
-    
-//    cell.textLabel.text = item[indexPath.row];
     cell.textLabel.text = self.names[indexPath.row];
     cell.detailTextLabel.font = [UIFont systemFontOfSize:13];
     cell.detailTextLabel.textColor = [UIColor lightGrayColor];
@@ -252,10 +202,10 @@
 //设置通知类型请求
 -(void)setUserNotifyWay:(NSInteger)way andRecord:(NSNumber *)recoredID
 {
-    NSString *url = [NSString stringWithFormat:@"%@NotificationSetting.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/notify.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     if (auothorToken) {
-    NSDictionary *dict = @{@"AuthorToken":auothorToken,@"NotifyWay":[NSNumber numberWithInteger:way],@"RecordID":recoredID};
+    NSDictionary *dict = @{@"token":auothorToken,@"notifyway":[NSNumber numberWithInteger:way],@"usernotify_id":recoredID};
     HttpManager *http=[HttpManager defaultManager];
     http.tag = 2;
     http.delegate = self;

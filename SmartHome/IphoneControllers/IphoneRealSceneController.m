@@ -25,8 +25,6 @@
     self.realimg.userInteractionEnabled=YES;
     self.realimg.viewFrom=REAL_IMAGE;
    
-    
-    
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
 
@@ -53,7 +51,11 @@
     self.navigationItem.titleView = self.titleButton;
 }
 
+-(void)recv:(NSData *)data withTag:(long)tag
+{
 
+
+}
 -(void)clickTitleButton:(UIButton *)button
 {
     [self performSegueWithIdentifier:@"roomListSegue" sender:self];

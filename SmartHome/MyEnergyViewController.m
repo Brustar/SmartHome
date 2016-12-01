@@ -38,7 +38,7 @@
 @property (nonatomic,strong) NSMutableArray *deviceIDs;
 @property (nonatomic,strong) NSArray *subDevice;
 @property (nonatomic,strong) NSArray *devicesInfo;
-
+@property (nonatomic,strong) NSMutableArray * deviceTypes;
 @property (nonatomic,strong) NSMutableArray *enegers;
 @property (nonatomic,strong) NSString *overEneger;
 
@@ -75,10 +75,10 @@
 }
 -(void)sendRequestToGetEenrgy
 {
-    NSString *url = [NSString stringWithFormat:@"%@EnergyAnalysis.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/energy_list.aspx",[IOManager httpAddr]];
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     if (authorToken) {
-        NSDictionary *dic = @{@"AuthorToken":authorToken};
+        NSDictionary *dic = @{@"token":authorToken,@"optype":[NSNumber numberWithInteger:0]};
         HttpManager *http = [HttpManager defaultManager];
         http.delegate = self;
         http.tag =1;
@@ -89,10 +89,10 @@
 {
     if(tag == 1)
     {
-        if([responseObject[@"Result"] intValue] == 0)
+        if([responseObject[@"result"] intValue] == 0)
         {
-            NSArray *message = responseObject[@"messageInfo"];
-            NSDictionary *overDic = @{@"overEngry":responseObject[@"energyPoor"]};
+            NSArray *message = responseObject[@"energy_stat_list"];
+            NSDictionary *overDic = @{@"energy_poor":responseObject[@"energy_poor"]};
             for(NSDictionary *dic in message)
             {
                 NSDictionary *energy = @{@"ename":dic[@"ename"],@"hour":dic[@"minute_time"],@"times":dic[@"number"],@"energy":dic[@"energy"]};
@@ -121,11 +121,21 @@
     [self sendRequestToGetEenrgy];
     
     self.deviceType = [SQLManager getAllDeviceSubTypes];
-    
+    self.deviceTypes = [NSMutableArray arrayWithArray:self.deviceType];
+    NSArray * arr = @[@"感应器",@"影音",@"智能单品"];
+    if (![arr containsObject:self.deviceTypes]) {
+        [self.deviceTypes removeObjectsInArray:arr];
+    }
+//    for (NSString * str in self.deviceTypes) {
+//        if ([str isEqualToString:@"感应器"]) {
+//            [self.deviceTypes removeObject:str];
+//        }
+//    }
+   
     self.selectedDeviceTableView.hidden = YES;
     self.deviceIDs = [NSMutableArray array];
     
-    for (NSString *subName in self.deviceType) {
+    for (NSString *subName in self.deviceTypes) {
         NSArray *subNameID = [SQLManager getDeviceIDBySubName:subName];
         [self.deviceIDs addObject:subNameID];
     }
@@ -146,7 +156,7 @@
 {
     if(tableView == self.selectedDeviceTableView)
     {
-        return self.deviceType.count + 1;
+        return self.deviceTypes.count + 1;
     }
     return 1;
 }

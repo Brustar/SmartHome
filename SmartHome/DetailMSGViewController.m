@@ -59,19 +59,19 @@
     
     if (self.itemID) {
         
-         [self sendRequestForDetailMsgWithItemId:self.itemID];
+        [self sendRequestForDetailMsgWithItemId:[_itemID intValue]];
     }
     
 }
 
 
--(void)sendRequestForDetailMsgWithItemId:(NSString *)itemID
+-(void)sendRequestForDetailMsgWithItemId:(int)itemID
 {
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     
-    NSString *url = [NSString stringWithFormat:@"%@GetNotifyMessage.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/notify.aspx",[IOManager httpAddr]];
     if (authorToken) {
-        NSDictionary *dic = @{@"AuthorToken":authorToken,@"ItemID":itemID};
+        NSDictionary *dic = @{@"token":authorToken,@"optype":[NSNumber numberWithInteger:1],@"ItemID":[NSNumber numberWithInt:itemID]};
         HttpManager *http=[HttpManager defaultManager];
         http.delegate = self;
         http.tag = 1;
@@ -83,18 +83,18 @@
 {
     if(tag == 1)
     {
-        if ([responseObject[@"Result"] intValue]==0)
+        if ([responseObject[@"result"] intValue]==0)
         {
             
-            NSArray *dic = responseObject[@"messageInfo"];
+            NSArray *dic = responseObject[@"notify_list"];
             
             if ([dic isKindOfClass:[NSArray class]]) {
                 for(NSDictionary *dicDetail in dic)
                 {
                                         if ([dicDetail isKindOfClass:[NSDictionary class]] && dicDetail[@"description"]) {
                                             [self.msgArr addObject:dicDetail[@"description"]];
-                                            [self.timesArr addObject:dicDetail[@"createDate"]];
-                                            [self.recordID addObject:dicDetail[@"recordID"]];
+                                            [self.timesArr addObject:dicDetail[@"addtime"]];
+                                            [self.recordID addObject:dicDetail[@"notify_id"]];
                                         }
                   
                 }
@@ -107,7 +107,7 @@
         }
     }else if(tag == 2)
     {
-        if([responseObject[@"Result"] intValue]==0)
+        if([responseObject[@"result"] intValue]==0)
         {
             [MBProgressHUD showSuccess:@"删除成功"];
             
