@@ -107,8 +107,15 @@
 {
     EnegryOfDeviceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EnegryOfDeviceCell" forIndexPath:indexPath];
     
-    cell.deviceName.text = self.deviceNames[indexPath.row];
-    cell.energyOfDevice.text = [NSString stringWithFormat:@"%@KWH", self.deviceEnergys[indexPath.row]];
+    if (self.deviceNames.count == 0) {
+        cell.deviceName.text = @"";
+        cell.energyOfDevice.text = @"0KWH";
+    }else{
+       cell.deviceName.text = self.deviceNames[indexPath.row];
+       cell.energyOfDevice.text = [NSString stringWithFormat:@"%@KWH", self.deviceEnergys[indexPath.row]];
+    }
+   
+   
     
     
     return cell;

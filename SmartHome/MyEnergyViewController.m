@@ -38,7 +38,7 @@
 @property (nonatomic,strong) NSMutableArray *deviceIDs;
 @property (nonatomic,strong) NSArray *subDevice;
 @property (nonatomic,strong) NSArray *devicesInfo;
-
+@property (nonatomic,strong) NSMutableArray * deviceTypes;
 @property (nonatomic,strong) NSMutableArray *enegers;
 @property (nonatomic,strong) NSString *overEneger;
 
@@ -121,11 +121,21 @@
     [self sendRequestToGetEenrgy];
     
     self.deviceType = [SQLManager getAllDeviceSubTypes];
-    
+    self.deviceTypes = [NSMutableArray arrayWithArray:self.deviceType];
+    NSArray * arr = @[@"感应器",@"影音",@"智能单品"];
+    if (![arr containsObject:self.deviceTypes]) {
+        [self.deviceTypes removeObjectsInArray:arr];
+    }
+//    for (NSString * str in self.deviceTypes) {
+//        if ([str isEqualToString:@"感应器"]) {
+//            [self.deviceTypes removeObject:str];
+//        }
+//    }
+   
     self.selectedDeviceTableView.hidden = YES;
     self.deviceIDs = [NSMutableArray array];
     
-    for (NSString *subName in self.deviceType) {
+    for (NSString *subName in self.deviceTypes) {
         NSArray *subNameID = [SQLManager getDeviceIDBySubName:subName];
         [self.deviceIDs addObject:subNameID];
     }
@@ -146,7 +156,7 @@
 {
     if(tableView == self.selectedDeviceTableView)
     {
-        return self.deviceType.count + 1;
+        return self.deviceTypes.count + 1;
     }
     return 1;
 }
