@@ -23,7 +23,7 @@
     self.planeimg.delegate = self;
     [self.view addSubview:self.planeimg];
     
-    [self sendRequestForGettingSceneConfig:@"cloud/GetSceneConfig.aspx" withTag:1];
+    [self sendRequestForGettingSceneConfig:@"Cloud/scene_config_list.aspx" withTag:1];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -37,9 +37,9 @@
     NSString *url = [NSString stringWithFormat:@"%@%@",[IOManager httpAddr],str];
     
     NSDictionary *dic = @{
-                          @"AuthorToken" : [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],
+                          @"token" : [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],
                           
-                          @"Optype" : @(1)
+                          @"optype" : @(1)
                           };
     
     NSLog(@"request param: %@", dic);
