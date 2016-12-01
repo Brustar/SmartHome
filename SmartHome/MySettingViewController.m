@@ -65,7 +65,7 @@
             return 2;
         }if (section == 2) {
             
-            return 2;
+            return 1;
         }
     
     }else {
@@ -73,7 +73,7 @@
         {
             return 1;
         }if (section == 2) {
-            return 1;
+            return 2;
         }
     }
     
@@ -98,8 +98,6 @@
                     title = @"系统信息";
                 }
             }else {
-               
-                
                   title = @"权限控制";
             }
             
@@ -107,26 +105,32 @@
         case 2:
         {
            if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) {
+               
+               title = @"去评价";
+           }else {
                if(indexPath.row == 0)
                {
                    title = @"系统设置";
-               }else title = @"系统信息";
-           }else {
-               title = @"去评价";
+               }else {
+                 title = @"系统信息";
+               }
            }
             
             break;
         }
         case 3:
             if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) {
-                title = @"去评价";
-            }else {
                 title = @"关于我们";
+            }else {
+               
+                title = @"去评价";
             }
             
             break;
         case 4:
             if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) {
+                title = @"关于我们";
+            }else{
                 title = @"关于我们";
             }
             
@@ -202,29 +206,32 @@
     }else if(indexPath.section == 2)
     {
         if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) {
+                [self gotoAppStoreToComment];
+        }else {
             if(indexPath.row == 0)
             {
                 [self performSegueWithIdentifier:@"systemSetSegue" sender:self];
             }else {
                 [self performSegueWithIdentifier:@"systemInfoSegue" sender:self];
             }
-        }else {
-            [self gotoAppStoreToComment];
         }
         
         
     }else if(indexPath.section == 3)
     {
         if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) {
-            [self gotoAppStoreToComment];
-        }else {
+           
             [self performSegueWithIdentifier:@"aboutSegue" sender:self];
+        }else {
+            [self gotoAppStoreToComment];
         }
     
     }else if(indexPath.section == 4)
     {
         if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) {
             [self performSegueWithIdentifier:@"aboutSegue" sender:self];
+        }else{
+             [self performSegueWithIdentifier:@"aboutSegue" sender:self];
         }
         
     }else {

@@ -91,7 +91,7 @@
     self.navigationItem.leftBarButtonItem = returnItem;
     self.areaTableView.tableHeaderView = self.headView;
     self.areaTableView.hidden = YES;
-    NSString *url = [NSString stringWithFormat:@"%@Cloud/room_authority.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/user_listall.aspx",[IOManager httpAddr]];
     [self sendRequest:url withTag:1];
 }
 -(void)sendRequest:(NSString *)url withTag:(int)i
@@ -99,7 +99,7 @@
     
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     if (auothorToken) {
-        NSDictionary *dict = @{@"token":auothorToken};
+        NSDictionary *dict = @{@"token":auothorToken,@"optype":[NSNumber numberWithInteger:0]};
         HttpManager *http=[HttpManager defaultManager];
         http.delegate = self;
         http.tag = i;
@@ -113,13 +113,13 @@
     {
         if([responseObject[@"result"] intValue]==0)
         {
-            NSDictionary *dic = responseObject[@"host_user_lis"];
-            NSArray *arr = dic[@"room_user_list"];
+//            NSDictionary *dic = responseObject[@"messageInfo"];
+            NSArray *arr = responseObject[@"user_list"];
             for(NSDictionary *userDetail in arr)
             {
-                NSString *userName = userDetail[@"room_name"];
-                NSString *userType = userDetail[@"isopen"];
-                NSString *userID = userDetail[@"roomuser_id"];
+                NSString *userName = userDetail[@"username"];
+                NSString *userType = userDetail[@"usertype"];
+                NSString *userID = userDetail[@"user_id"];
                 [self.userArr addObject:userName];
                 [self.managerType addObject:userType];
                 [self.userIDArr addObject:userID];
@@ -135,19 +135,19 @@
         {
             [self.areasArr removeAllObjects];
             [self.opens removeAllObjects];
-            NSDictionary *dic = responseObject[@"messageInfo"];
-            NSArray *arr = dic[@"userMessageList"];
+//            NSDictionary *dic = responseObject[@"host_user_list"];
+            NSArray *arr =responseObject[@"host_user_list"];
             for(NSDictionary *messageList in arr)
             {
-                NSNumber *userID = messageList[@"userId"];
+                NSNumber *userID = messageList[@"userid"];
                 if(self.usrID == userID)
                 {
-                    NSArray *inforList = messageList[@"userMessageInfoList"];
+                    NSArray *inforList = messageList[@"room_user_list"];
                     for(NSDictionary *info  in inforList)
                     {
-                        [self.areasArr addObject:info[@"roomName"]];
-                        [self.opens addObject:info[@"isOpen"]];
-                        [self.recoredIDs addObject:info[@"recordId"]];
+                        [self.areasArr addObject:info[@"room_name"]];
+                        [self.opens addObject:info[@"isopen"]];
+                        [self.recoredIDs addObject:info[@"roomuser_id"]];
                     }
                    
                 }
@@ -160,7 +160,7 @@
 
     }else if(tag == 3)
     {
-        if([responseObject[@"Result"] intValue] == 0)
+        if([responseObject[@"result"] intValue] == 0)
         {
             [MBProgressHUD showSuccess:@"删除成功"];
         }else{
@@ -169,7 +169,7 @@
         }
     }else if(tag == 4)
     {
-        if([responseObject[@"Result"] intValue] == 0)
+        if([responseObject[@"result"] intValue] == 0)
         {
             [MBProgressHUD showSuccess:@"成功转化为普通身份"];
             self.cell.detailTextLabel.text = @"普通用户";
@@ -266,7 +266,7 @@
     {
         
         self.usrID = self.userIDArr[indexPath.row];
-         NSString *url = [NSString stringWithFormat:@"%@GetUserAccessInfo.aspx",[IOManager httpAddr]];
+         NSString *url = [NSString stringWithFormat:@"%@Cloud/room_authority.aspx",[IOManager httpAddr]];
         self.recoredIDs = nil;
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         self.cell = cell;
@@ -314,9 +314,9 @@
 //设置用户权限请求
 -(void)settingAccessIsOpen:(NSNumber *)openNum tag:(int)tag withRecoredID:(NSInteger)recordID
 {
-    NSString *url = [NSString stringWithFormat:@"%@UserAccessSetting.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/room_authority.aspx",[IOManager httpAddr]];
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSDictionary *dict = @{@"AuthorToken":authorToken,@"RecordID":[NSNumber numberWithInteger:recordID],@"isOpen":openNum};
+    NSDictionary *dict = @{@"token":authorToken,@"roomuser_id":[NSNumber numberWithInteger:recordID],@"isopen":openNum,@"optype":[NSNumber numberWithInteger:1]};
     HttpManager *http=[HttpManager defaultManager];
     http.delegate = self;
     http.tag = tag;
@@ -401,13 +401,13 @@
 //删除或改变用户权限请求
 -(void)deleteOrChangeManagerType:(NSInteger)type userID:(NSNumber *)userID withTag:(int)tag
 {
-    NSString *url = [NSString stringWithFormat:@"%@UserEdit.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@Login/user_edit.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     if (auothorToken) {
         NSDictionary *dict = @{
-                               @"AuthorToken": auothorToken,
-                               @"OType": @(type),
-                               @"UserID": userID
+                               @"token": auothorToken,
+                               @"optype": @(type),
+                               @"opuserid": userID
                               };
         
         HttpManager *http=[HttpManager defaultManager];

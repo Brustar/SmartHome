@@ -61,9 +61,9 @@
 }
 
 -(void)getEnger:(NSString *)timeStr{
-    NSString *url = [NSString stringWithFormat:@"%@GetEnergyMessage.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/energy_list.aspx",[IOManager httpAddr]];
     
-    NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"Date":timeStr,@"EquipmentIdList":self.eIDStr};
+    NSDictionary *dic = @{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"dateflag":timeStr,@"eqids":self.eIDStr,@"optype":[NSNumber numberWithInteger:1]};
     HttpManager *http = [HttpManager defaultManager];
     http.delegate = self;
     http.tag = 1;
@@ -74,15 +74,15 @@
 {
     if(tag == 1)
     {
-        if([responseObject[@"Result"] intValue] == 0)
+        if([responseObject[@"result"] intValue] == 0)
         {
-            NSArray *devices = responseObject[@"messageInfo"];
+            NSArray *devices = responseObject[@"eq_energy_list"];
             
             self.deviceNames = [NSMutableArray array];
             self.deviceEnergys = [NSMutableArray array];
             
             for (NSDictionary *dict in devices) {
-                NSString *name = dict[@"eName"];
+                NSString *name = dict[@"ename"];
                 NSString *energy = [NSString stringWithFormat:@"%d",[dict[@"energy"] intValue]];
                 
                 [self.deviceNames addObject:name];

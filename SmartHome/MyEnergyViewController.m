@@ -75,10 +75,10 @@
 }
 -(void)sendRequestToGetEenrgy
 {
-    NSString *url = [NSString stringWithFormat:@"%@EnergyAnalysis.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/energy_list.aspx",[IOManager httpAddr]];
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     if (authorToken) {
-        NSDictionary *dic = @{@"AuthorToken":authorToken};
+        NSDictionary *dic = @{@"token":authorToken,@"optype":[NSNumber numberWithInteger:0]};
         HttpManager *http = [HttpManager defaultManager];
         http.delegate = self;
         http.tag =1;
@@ -89,10 +89,10 @@
 {
     if(tag == 1)
     {
-        if([responseObject[@"Result"] intValue] == 0)
+        if([responseObject[@"result"] intValue] == 0)
         {
-            NSArray *message = responseObject[@"messageInfo"];
-            NSDictionary *overDic = @{@"overEngry":responseObject[@"energyPoor"]};
+            NSArray *message = responseObject[@"energy_stat_list"];
+            NSDictionary *overDic = @{@"energy_poor":responseObject[@"energy_poor"]};
             for(NSDictionary *dic in message)
             {
                 NSDictionary *energy = @{@"ename":dic[@"ename"],@"hour":dic[@"minute_time"],@"times":dic[@"number"],@"energy":dic[@"energy"]};

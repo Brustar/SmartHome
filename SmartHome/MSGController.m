@@ -13,12 +13,7 @@
 #import "DetailMSGViewController.h"
 
 @interface MSGController ()<HttpDelegate>
-@property(nonatomic,strong)  NSMutableArray *msgArr;
-@property(nonatomic,strong)  NSMutableArray *timesArr;
-@property(nonatomic,strong)  NSMutableArray *ItemID;
-@property (nonatomic,strong) NSMutableArray *recordID;
 @property (nonatomic,strong) NSMutableArray * itemIdArrs;
-@property(nonatomic,strong)  NSString * itemid;
 @property (nonatomic,strong) NSMutableArray * itemNameArrs;
 @property (weak, nonatomic) IBOutlet UIView *footView;
 
@@ -42,49 +37,21 @@
     return _itemNameArrs;
 }
 
--(NSMutableArray *)msgArr
-{
-    if(!_msgArr)
-    {
-        _msgArr = [NSMutableArray array];
-        
-    }
-    return _msgArr;
-}
--(NSMutableArray *)timesArr
-{
-    if(!_timesArr)
-    {
-        _timesArr = [NSMutableArray array];
-    }
-    return _timesArr;
-}
--(NSMutableArray *)ItemID
-{
-    if(!_ItemID)
-    {
-        _ItemID = [NSMutableArray array];
-    }
-    return _ItemID;
 
-}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [MBProgressHUD hideHUD];
     self.title = @"我的消息";
-//    self.tableView.tableFooterView = self.footView;
-//    UIBarButtonItem *editBtn = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(startEdit:)];
-//    self.navigationItem.rightBarButtonItem = editBtn;
     [self creatItemID];
-    //    [self sendRequest];
+ 
    
 }
 -(void)creatItemID
 {
-    NSString *url = [NSString stringWithFormat:@"%@GetNotifyType.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/notify.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     if (auothorToken) {
-        NSDictionary *dict = @{@"AuthorToken":auothorToken};
+        NSDictionary *dict = @{@"token":auothorToken,@"optype":[NSNumber numberWithInteger:2]};
         HttpManager *http=[HttpManager defaultManager];
         http.tag = 1;
         http.delegate = self;
@@ -92,40 +59,20 @@
     }
 }
 
--(void)sendRequest
-{
-    NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-  
-    NSString *url = [NSString stringWithFormat:@"%@GetNotifyMessage.aspx",[IOManager httpAddr]];
-    if (authorToken) {
-        NSDictionary *dic = @{@"AuthorToken":authorToken};
-        HttpManager *http=[HttpManager defaultManager];
-        http.delegate = self;
-        http.tag = 1;
-        [http sendPost:url param:dic];
-    }
-}
-
-
 -(void)httpHandler:(id)responseObject tag:(int)tag
 {
     if(tag == 1)
     {
-        if ([responseObject[@"Result"] intValue]==0)
+        if ([responseObject[@"result"] intValue]==0)
         {
             
-            NSArray *dic = responseObject[@"messageInfo"];
+            NSArray *dic = responseObject[@"notify_type_list"];
             
             if ([dic isKindOfClass:[NSArray class]]) {
                 for(NSDictionary *dicDetail in dic)
                 {
-//                    if ([dicDetail isKindOfClass:[NSDictionary class]] && dicDetail[@"description"]) {
-//                        [self.msgArr addObject:dicDetail[@"description"]];
-//                        [self.timesArr addObject:dicDetail[@"createDate"]];
-//                        [self.recordID addObject:dicDetail[@"recordID"]];
-//                    }
-                    [self.itemIdArrs addObject:dicDetail[@"itemId"]];
-                    [self.itemNameArrs addObject:dicDetail[@"itemName"]];
+                    [self.itemIdArrs addObject:dicDetail[@"item_id"]];
+                    [self.itemNameArrs addObject:dicDetail[@"item_name"]];
                 }
             }
             
@@ -136,7 +83,7 @@
         }
     }else if(tag == 2)
     {
-        if([responseObject[@"Result"] intValue]==0)
+        if([responseObject[@"result"] intValue]==0)
         {
             [MBProgressHUD showSuccess:@"删除成功"];
             
@@ -166,15 +113,8 @@
     
     static NSString *CellIdentifier = @"msgCell";
     MsgCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-//    cell.title.text = self.msgArr[indexPath.row];
-//    cell.timeLable.text = self.timesArr[indexPath.row];
     
     cell.title.text = self.itemNameArrs[indexPath.row];
-    
-    
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-//    
-//    cell.textLabel.text = self.itemNameArrs[indexPath.row];
     
     return cell;
 }
@@ -192,8 +132,6 @@
 
 }
 
-
-
 //编辑操作
 -(void)startEdit:(UIBarButtonItem *)btn
 {
@@ -202,76 +140,6 @@
     self.tableView.editing = YES;
     self.footView.hidden = NO;
     [self.tableView reloadData];
-}
-- (IBAction)clickCancelBtn:(id)sender {
-    // 允许多个编辑
-    self.tableView.allowsMultipleSelectionDuringEditing = NO;
-    // 允许编辑
-    self.tableView.editing = NO;
-    //  self.tableView.tableFooterView = nil;
-    self.footView.hidden = YES;
-   
-    [self.tableView reloadData];
-
-}
-
-- (IBAction)clickDeleteBtn:(id)sender {
-    //放置要删除的对象
-    NSMutableArray *deleteArray = [NSMutableArray array];
-    NSMutableArray *deletedTime = [NSMutableArray array];
-    NSMutableArray *deletedID =[NSMutableArray array];
-    
-    // 要删除的row
-    NSArray *selectedArray = [self.tableView indexPathsForSelectedRows];
-    
-    for (NSIndexPath *indexPath in selectedArray) {
-        
-        [deleteArray addObject:self.msgArr[indexPath.row]];
-        [deletedTime addObject:self.timesArr[indexPath.row]];
-        [deletedID addObject:self.recordID[indexPath.row]];
-    }
-    // 先删除数据源
-    [self.msgArr removeObjectsInArray:deleteArray];
-    [self.timesArr removeObjectsInArray:deletedTime];
-    
-    if(deletedID.count != 0)
-    {
-        [self sendDeleteRequestWithArray:[deletedID copy]];
-    }else {
-        [MBProgressHUD showError:@"请选择要删除的记录"];
-    }
-    
-    
-    [self clickCancelBtn:nil];
-    
-}
-
--(void)sendDeleteRequestWithArray:(NSArray *)deleteArr;
-{
-    NSString *url = [NSString stringWithFormat:@"%@EditPersonalInformation.aspx",[IOManager httpAddr]];
-    
-    NSString *recoreds = @"";
-    
-    for(int i = 0 ;i < deleteArr.count; i++)
-    {
-        if(i == deleteArr.count - 1)
-        {
-            NSString *record = [NSString stringWithFormat:@"%@",deleteArr[i]];
-            recoreds = [recoreds stringByAppendingString:record];
-            
-        }else {
-            NSString *record = [NSString stringWithFormat:@"%@,",deleteArr[i]];
-            recoreds = [recoreds stringByAppendingString:record];
-        }
-    }
-    
-    
-    NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"RecordIDList":recoreds,@"Type":[NSNumber numberWithInt:1]};
-    HttpManager *http = [HttpManager defaultManager];
-    http.delegate = self;
-    http.tag = 2;
-    [http sendPost:url param:dic];
-    
 }
 
 
