@@ -78,12 +78,12 @@
         
     } progress:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
         id result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        int resultValue =[result[@"Result"] intValue];
+        int resultValue =[result[@"result"] intValue];
 
         if (resultValue == 0) {
             completion(result);
         }else{
-            [MBProgressHUD showError:result[@"Msg"]];
+            [MBProgressHUD showError:result[@"msg"]];
         }
 
         
