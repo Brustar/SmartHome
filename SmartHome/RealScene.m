@@ -7,7 +7,6 @@
 //
 
 #import "RealScene.h"
-
 #import "Room.h"
 #import "PackManager.h"
 #import "SocketManager.h"
@@ -74,7 +73,7 @@
     [sock.socket writeData:data withTimeout:1 tag:1];
     NSLog(@"TCP请求Data:%@", data);
     
-    [self sendRequestForGettingSceneConfig:@"cloud/GetSceneConfig.aspx" withTag:1];
+    [self sendRequestForGettingSceneConfig:@"Cloud/scene_config_list.aspx" withTag:1];//实景配置请求
 }
 
 //获取实景配置
@@ -83,9 +82,9 @@
     NSString *url = [NSString stringWithFormat:@"%@%@",[IOManager httpAddr],str];
     
     NSDictionary *dic = @{
-                           @"AuthorToken" : [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],
+                           @"token" : [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],
                            
-                           @"Optype" : @(2)
+                           @"optype" : @(2)
                          };
     HttpManager *http = [HttpManager defaultManager];
     http.delegate = self;

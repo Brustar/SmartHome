@@ -258,9 +258,9 @@
         
     }
     else if([typeName isEqualToString:@"智能单品"]){
-      GuardController *guardVC = [storyBoard instantiateViewControllerWithIdentifier:@"GuardController"];
+        PluginViewController *pluginVC = [storyBoard instantiateViewControllerWithIdentifier:@"PluginViewController"];
         
-        [self.navigationController pushViewController:guardVC animated:YES];
+        [self.navigationController pushViewController:pluginVC animated:YES];
     
     }else if([typeName isEqualToString:@"背景音乐"]){
          BgMusicController *bgMusicVC = [storyBoard instantiateViewControllerWithIdentifier:@"BgMusicController"];
@@ -283,9 +283,9 @@
         projectVC.deviceid = [NSString stringWithFormat:@"%d",eId];
         [self.navigationController pushViewController:projectVC animated:YES];
     }else{
-        PluginViewController *pluginVC = [storyBoard instantiateViewControllerWithIdentifier:@"PluginViewController"];
-        
-        [self.navigationController pushViewController:pluginVC animated:YES];
+        GuardController *guardVC = [storyBoard instantiateViewControllerWithIdentifier:@"GuardController"];
+        guardVC.deviceid = [NSString stringWithFormat:@"%d",eId];
+        [self.navigationController pushViewController:guardVC animated:YES];
     }
 
 }

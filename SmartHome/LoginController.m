@@ -167,9 +167,10 @@
 - (void)sendRequestForGettingConfigInfos:(NSString *)str withTag:(int)tag;
 {
     NSString *url = [NSString stringWithFormat:@"%@%@",[IOManager httpAddr],str];
-    NSDictionary *dic = @{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]};
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"room_version"]) {
-        dic = @{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"room_ver":[[NSUserDefaults standardUserDefaults] objectForKey:@"room_version"],@"equipment_ver":[[NSUserDefaults standardUserDefaults] objectForKey:@"equipment_version"],@"scence_ver":[[NSUserDefaults standardUserDefaults] objectForKey:@"scence_version"]};//,@"tv_ver":[[NSUserDefaults standardUserDefaults] objectForKey:@"tv_version"],@"fm_ver":[[NSUserDefaults standardUserDefaults] objectForKey:@"fm_version"],@"favor_ver":[[NSUserDefaults standardUserDefaults] objectForKey:@"favor_version"]};
+    NSUserDefaults *userDefault =  [NSUserDefaults standardUserDefaults];
+    NSDictionary *dic = @{@"token":[userDefault objectForKey:@"AuthorToken"]};
+    if ([userDefault objectForKey:@"room_version"]) {
+        dic = @{@"token":[userDefault objectForKey:@"AuthorToken"],@"room_ver":[userDefault objectForKey:@"room_version"],@"equipment_ver":[userDefault objectForKey:@"equipment_version"],@"scence_ver":[userDefault objectForKey:@"scence_version"],@"tv_ver":[userDefault objectForKey:@"tv_version"],@"fm_ver":[userDefault objectForKey:@"fm_version"]};
     }
     HttpManager *http = [HttpManager defaultManager];
     http.delegate = self;
@@ -270,6 +271,7 @@
             {
                 int sId = [sceneInfoDic[@"scence_id"] intValue];
                 NSString *sName = sceneInfoDic[@"name"];
+                int isFavorite = [sceneInfoDic[@"isstore"] intValue];//是否收藏，1:已收藏 2: 未收藏
                 int sType = [sceneInfoDic[@"type"] intValue];
                 NSString *sNumber = sceneInfoDic[@"snumber"];
                 NSString *urlImage = sceneInfoDic[@"image_url"];
@@ -278,13 +280,13 @@
                     NSString *urlPlist = sceneInfoDic[@"plist_url"];
                     [self downloadPlsit:urlPlist];
                 }
-                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,'%@',%d,null)",sId,sName,rName,urlImage,room_id,sType,sNumber,0];
+                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,'%@',%d,null)",sId,sName,rName,urlImage,room_id,sType,sNumber,isFavorite];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {
-                    NSLog(@"insert 成功"); 
+                    NSLog(@"insert 场景信息 成功");
                 }else{
-                    NSLog(@"insert 失败");
+                    NSLog(@"insert 场景信息 失败");
                 }
             }
         }

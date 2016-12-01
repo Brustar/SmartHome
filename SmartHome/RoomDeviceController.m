@@ -46,6 +46,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RoomDeviceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     Device *device = [SQLManager getDeviceWithDeviceID:[_lightArrs[indexPath.row] intValue]];
     cell.deviceName.text = device.name;
     cell.deviceSlider.continuous = NO;
@@ -63,6 +64,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _devTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    _devTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     _lightArrs = [SQLManager getDeviceByRoom:self.roomID];
     
