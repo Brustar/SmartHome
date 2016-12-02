@@ -61,7 +61,7 @@
     NSString *url = [NSString stringWithFormat:@"%@Cloud/user_habit.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     if (auothorToken) {
-    NSDictionary *dict = @{@"token":auothorToken};
+        NSDictionary *dict = @{@"token":auothorToken,@"optype":[NSNumber numberWithInteger:0]};
     HttpManager *http=[HttpManager defaultManager];
     http.delegate = self;
     http.tag = 1;
@@ -81,7 +81,7 @@
     
                 [self.habits addObject:userDetail[@"hobit_name"]];
                 [self.opens addObject:userDetail[@"isopen"]];
-                [self.recordIDs addObject:userDetail[@"userhabit_id"]];
+                [self.recordIDs addObject:userDetail[@"hobit_id"]];
             }
             [self.tableView reloadData];
         }else{
@@ -141,7 +141,7 @@
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     NSNumber *recordID = [NSNumber numberWithInteger:sender.tag];
     if (auothorToken) {
-    NSDictionary *dict = @{@"token":auothorToken,@"IsOpen":num,@"userhabit_id":recordID};
+    NSDictionary *dict = @{@"token":auothorToken,@"isopen":num,@"userhabit_id":recordID,@"optype":[NSNumber numberWithInteger:1]};
     HttpManager *http=[HttpManager defaultManager];
     http.delegate = self;
     http.tag = tag;

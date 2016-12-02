@@ -117,9 +117,9 @@
         
         [self saveImage:self.chooseImage withName:fileName];
         
-        NSString *url = [NSString stringWithFormat:@"%@TVChannelUpload.aspx",[IOManager httpAddr]];
+        NSString *url = [NSString stringWithFormat:@"%@Cloud/store_tv.aspx",[IOManager httpAddr]];
         NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-        NSDictionary *dic = @{@"AuthorToken":authorToken,@"EID":self.deviceid,@"Cnumber":self.channelNumber.text,@"CName":self.channelName.text,@"ImgFileName":fileName,@"ImgFile":@""};
+        NSDictionary *dic = @{@"token":authorToken,@"eqid":self.deviceid,@"cnumber":self.channelNumber.text,@"cname":self.channelName.text,@"imgname":fileName,@"imgdata":@"",@"optype":[NSNumber numberWithInteger:0]};
         
         
         if (self.chooseImage && url && dic && fileName) {
@@ -161,9 +161,9 @@
 
 -(void)sendStoreChannelRequest
 {
-    NSString *url = [NSString stringWithFormat:@"%@TVChannelUpload.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/store_tv.aspx",[IOManager httpAddr]];
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSDictionary *dic = @{@"AuthorToken":authorToken,@"EID":self.deviceid,@"Cnumber":self.channelNumber.text,@"CName":self.channelName.text,@"ImgFileName":self.chooseImgeName ,@"ImgFile":@""};
+    NSDictionary *dic = @{@"token":authorToken,@"eqid":self.deviceid,@"cnumber":self.channelNumber.text,@"cname":self.channelName.text,@"imgname":self.chooseImgeName ,@"imgdata":@"",@"optype":[NSNumber numberWithInteger:0]};
     HttpManager *http = [HttpManager defaultManager];
     http.delegate = self;
     http.tag = 1;
@@ -175,7 +175,7 @@
 {
     if(tag == 1)
     {
-        if([responseObject[@"Result"] intValue] == 0)
+        if([responseObject[@"result"] intValue] == 0)
         {
             [self writeTVChannelsConfigDataToSQL:responseObject withParent:@"TV"];
             [MBProgressHUD showSuccess:@"收藏成功"];

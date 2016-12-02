@@ -31,9 +31,9 @@
 
 -(void)finishFavor:(UIBarButtonItem *)barbutton
 {
-    NSString *url = [NSString stringWithFormat:@"%@FMChannelUpload.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@FMCloud/store_fm.aspx",[IOManager httpAddr]];
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSDictionary *dic = @{@"AuthorToken":authorToken,@"EID":self.deviceid,@"CNumber":self.numberOfChannel,@"CName":self.channelName.text,@"ImgFileName":@"store",@"ImgFile":@""};
+    NSDictionary *dic = @{@"token":authorToken,@"eqid":self.deviceid,@"cnumber":self.numberOfChannel,@"cname":self.channelName.text,@"imgname":@"store",@"imgdata":@"",@"optype":[NSNumber numberWithInteger:0]};
     HttpManager *http = [HttpManager defaultManager];
     http.delegate = self;
     http.tag = 1;
@@ -44,7 +44,7 @@
 {
     if(tag == 1)
     {
-        if([responseObject[@"Result"] intValue] == 0)
+        if([responseObject[@"result"] intValue] == 0)
         {
             //保存成功后存到数据库
             [self writeFMChannelsConfigDataToSQL:responseObject withParent:@"FM"];
