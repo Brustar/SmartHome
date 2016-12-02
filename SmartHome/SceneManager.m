@@ -285,7 +285,7 @@
 
 }
 
-- (void) delScene:(Scene *)scene
+- (void)delScene:(Scene *)scene
 {
     if (!scene.readonly) {
         NSString *filePath=[NSString stringWithFormat:@"%@/%@_%d.plist",[IOManager scenesPath], SCENE_FILE_NAME, scene.sceneID];
@@ -382,29 +382,24 @@
     }];
 }
 
-- (void) favoriteScene:(Scene *)newScene withName:(NSString *)name
+//收藏场景
+- (BOOL)favoriteScene:(Scene *)newScene
 {
-    NSString *scenePath=[[IOManager favoritePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, newScene.sceneID ]];
-    NSDictionary *dic = [PrintObject getObjectData:newScene];
-    BOOL ret = [dic writeToFile:scenePath atomically:YES];
-    if(ret)
-    {
-       // 写sqlite更新场景文件名
+//    NSString *scenePath = [[IOManager favoritePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, newScene.sceneID]];
+//    NSDictionary *dic = [PrintObject getObjectData:newScene];
+//    BOOL ret = [dic writeToFile:scenePath atomically:YES];
+    
+    
+       // 写sqlite更新场景表的isFavorite字段
         FMDatabase *db = [SQLManager connetdb];
         if (![db open]) {
             NSLog(@"Could not open db.");
-            return ;
+            return NO;
         }
-        BOOL result =[db executeUpdate:@"UPDATE Scenes SET isFavorite = 1 WHERE id = ?",[NSNumber numberWithInt:newScene.sceneID]];
-        if(result)
-        {
-            NSLog(@"收藏成功");
-        }
+        BOOL result = [db executeUpdate:@"UPDATE Scenes SET isFavorite = 1 WHERE id = ?",@(newScene.sceneID)];
+    
         [db close];
-        //同步云端
-        
-        //上传文件
-    }
+    return result;
 }
 -(void)deleteFavoriteScene:(Scene *)scene withName:(NSString *)name
 {
