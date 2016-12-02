@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QoB-0E-qDZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QoB-0E-qDZ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -5792,7 +5792,9 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="61"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vJ2-ya-ukK" id="dR5-3l-kUx">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60.5"/>
+
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="灯" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNW-jA-Rrh">
@@ -7163,8 +7165,8 @@ layer.masksToBoundslayer.masksToBounds
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="my8-UG-gsP">
                                         <rect key="frame" x="-37" y="169" width="250" height="280"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="另存为场景" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6t-VY-ocm">
-                                                <rect key="frame" x="71" y="15" width="107" height="26"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="另存为新场景" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6t-VY-ocm">
+                                                <rect key="frame" x="60.5" y="15" width="128.5" height="26"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -7279,6 +7281,7 @@ layer.masksToBoundslayer.masksToBounds
                         <outlet property="graphicBtn" destination="1WI-6F-VHp" id="els-JD-QLe"/>
                         <outlet property="realObjBtn" destination="wvP-dM-R4D" id="4Bx-xw-Zmu"/>
                         <outlet property="saveBarButton" destination="d18-6E-MCK" id="jcA-Q5-lVM"/>
+                        <outlet property="sceneBg" destination="xlB-tS-dkG" id="cAN-Iq-i9E"/>
                         <outlet property="stopBtn" destination="EVf-MO-Vi3" id="onW-kI-YLe"/>
                         <outlet property="storeNewScene" destination="my8-UG-gsP" id="Rga-z2-m3g"/>
                         <outlet property="storeNewSceneName" destination="oBJ-Gf-PFK" id="wOD-7R-qEh"/>
@@ -7541,23 +7544,33 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CtP-7b-vUS"/>
-        <segue reference="tt4-nB-rfe"/>
-        <segue reference="fHn-Cm-7Q7"/>
-        <segue reference="vKk-7C-VKf"/>
+
+        <segue reference="zAF-Rq-I0I"/>
+        <segue reference="nIi-Kc-QDm"/>
+        <segue reference="5K5-wE-mZz"/>
+        <segue reference="wSR-hk-rTP"/>
+        <segue reference="ya3-gG-p8O"/>
+        <segue reference="l23-e3-J0C"/>
+
         <segue reference="JQm-bA-TWz"/>
+        <segue reference="tdV-sS-d5j"/>
+        <segue reference="X9P-hg-DXo"/>
+        <segue reference="tt4-nB-rfe"/>
         <segue reference="a9T-LN-ZVX"/>
+
         <segue reference="Vzc-yi-Jnw"/>
         <segue reference="vdf-Gi-dZf"/>
         <segue reference="l23-e3-J0C"/>
+
+        <segue reference="vKk-7C-VKf"/>
+        <segue reference="Vzc-yi-Jnw"/>
+        <segue reference="vdf-Gi-dZf"/>
+        <segue reference="fHn-Cm-7Q7"/>
+
         <segue reference="pWG-oz-Opr"/>
-        <segue reference="tdV-sS-d5j"/>
-        <segue reference="X9P-hg-DXo"/>
         <segue reference="YE7-iU-rxh"/>
-        <segue reference="wSR-hk-rTP"/>
-        <segue reference="nIi-Kc-QDm"/>
-        <segue reference="zAF-Rq-I0I"/>
+
         <segue reference="fXQ-oW-cHz"/>
-        <segue reference="5K5-wE-mZz"/>
+
     </inferredMetricsTieBreakers>
 </document>

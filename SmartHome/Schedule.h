@@ -10,7 +10,7 @@
 
 @interface Schedule : NSObject
 
-//设备id 0表示控制场景，大于0设备
+//设备id 0表示控制场景的定时，大于0表示控制设备的定时
 @property (nonatomic) int deviceID;
 //天文时钟 1 黎明 2 日出 3 日落 4 黄昏
 @property (nonatomic,assign) int astronomicalStartID;

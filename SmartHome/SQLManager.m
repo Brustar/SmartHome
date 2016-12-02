@@ -1289,7 +1289,9 @@
     int sType = [resultSet intForColumn:@"sType"];
     if(sType == 1)
     {
-        scene.readonly = YES;
+        scene.readonly = YES;//系统场景
+    }else {
+        scene.readonly = NO;//自定义场景
     }
     
     return scene;
