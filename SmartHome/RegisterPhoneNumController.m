@@ -41,6 +41,7 @@
     }
     
     self.viewWidthConstraint.constant = [[UIScreen mainScreen] bounds].size.width * 0.8;
+    self.navigationController.navigationBarHidden = YES;
   
 }
 

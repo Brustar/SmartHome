@@ -327,9 +327,9 @@
     
 
     //发送删除频道请求
-    NSString *url = [NSString stringWithFormat:@"%@TVChannelRemove.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/store_tv.aspx",[IOManager httpAddr]];
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSDictionary *dic = @{@"AuthorToken":authorToken,@"RecordID":[NSNumber numberWithInteger:channel.channel_id]};
+    NSDictionary *dic = @{@"token":authorToken,@"chid":[NSNumber numberWithInteger:channel.channel_id],@"optype":[NSNumber numberWithInteger:1]};
     HttpManager *http = [HttpManager defaultManager];
     http.delegate = self;
     http.tag = 1;
@@ -354,7 +354,7 @@
 {
     if(tag == 1)
     {
-        if([responseObject[@"Result"] intValue] == 0)
+        if([responseObject[@"result"] intValue] == 0)
         {
             NSIndexPath *indexPath = [self.tvLogoCollectionView indexPathForCell:self.cell];
             TVChannel *channel = self.allFavourTVChannels[indexPath.row];

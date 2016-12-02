@@ -157,7 +157,7 @@
 {
     if(tag == 1)
     {
-        if([responseObject[@"Result"] intValue] == 0)
+        if([responseObject[@"result"] intValue] == 0)
         {
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"AuthorToken"];
             [[SocketManager defaultManager] cutOffSocket];

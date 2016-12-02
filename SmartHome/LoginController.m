@@ -22,7 +22,6 @@
 #import "RegisterDetailController.h"
 #import "ECloudTabBarController.h"
 #import "SQLManager.h"
-
 #import "FMDatabase.h"
 #import "DeviceInfo.h"
 #import "PackManager.h"
@@ -37,7 +36,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *pwd;
 @property (weak, nonatomic) IBOutlet UIView *coverView;
 @property (weak, nonatomic) IBOutlet UIView *registerView;
-
 @property(nonatomic,assign) NSInteger userType;
 @property(nonatomic,strong) NSString *masterId;
 @property(nonatomic,strong) NSString *role;
@@ -153,7 +151,7 @@
         clientType = 2;
     }
     
-    NSDictionary *dict = @{@"account":self.user.text,@"logintype":[NSNumber numberWithInteger:self.userType],@"password":[self.pwd.text md5],@"pushtoken":pushToken, @"devicetype":@(clientType)};
+    NSDictionary *dict = @{@"account":self.user.text,@"logintype":[NSNumber numberWithInteger:self.userType],@"password":[self.pwd.text md5],@"pushtoken":pushToken,@"devicetype":@(clientType)};
     [IOManager writeUserdefault:self.user.text forKey:@"Account"];
     [IOManager writeUserdefault:[NSNumber numberWithInteger:self.userType] forKey:@"Type"];
     [IOManager writeUserdefault:[self.pwd.text encryptWithDes:DES_KEY] forKey:@"Password"];

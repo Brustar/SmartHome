@@ -239,8 +239,8 @@
     Scene *scene = [[SceneManager defaultManager] readSceneByID:(int)cell.tag];
     [[SceneManager defaultManager] delScene:scene];
     
-    NSString *url = [NSString stringWithFormat:@"%@SceneDelete.aspx",[IOManager httpAddr]];
-    NSDictionary *dict = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"SID":[NSNumber numberWithInt:scene.sceneID]};
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/scene.aspx",[IOManager httpAddr]];
+    NSDictionary *dict = @{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"scenceid":[NSNumber numberWithInt:scene.sceneID]};
     HttpManager *http=[HttpManager defaultManager];
     http.delegate=self;
     http.tag = 1;
@@ -251,7 +251,7 @@
 {
     if((tag = 1))
     {
-        if([responseObject[@"Result"] intValue] == 0)
+        if([responseObject[@"result"] intValue] == 0)
         {
            
             [MBProgressHUD showSuccess:@"场景删除成功"];

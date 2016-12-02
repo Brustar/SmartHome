@@ -126,11 +126,6 @@
     if (![arr containsObject:self.deviceTypes]) {
         [self.deviceTypes removeObjectsInArray:arr];
     }
-//    for (NSString * str in self.deviceTypes) {
-//        if ([str isEqualToString:@"感应器"]) {
-//            [self.deviceTypes removeObject:str];
-//        }
-//    }
    
     self.selectedDeviceTableView.hidden = YES;
     self.deviceIDs = [NSMutableArray array];
