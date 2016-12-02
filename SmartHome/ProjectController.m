@@ -9,6 +9,10 @@
 #import "ProjectController.h"
 #import "DetailTableViewCell.h"
 #import "SQLManager.h"
+#import "SocketManager.h"
+#import "Scene.h"
+#import "SceneManager.h"
+#import "Amplifier.h"
 
 @interface ProjectController ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
@@ -103,6 +107,17 @@
 //        cell.label.text = self.projectNames[self.segment.selectedSegmentIndex];
         cell.label.text = @"投影";
         self.cell = cell;
+        self.switchView = cell.power;//[[UISwitch alloc] initWithFrame:CGRectZero];
+        _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+        if ([self.sceneid intValue]>0) {
+            for(int i=0;i<[_scene.devices count];i++)
+            {
+                if ([[_scene.devices objectAtIndex:i] isKindOfClass:[Amplifier class]]) {
+                    cell.power.on=((Amplifier *)[_scene.devices objectAtIndex:i]).waiting;
+                }
+            }
+        }
+        [cell.power addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
         return cell;
         
     }else{
@@ -118,9 +133,30 @@
         [cell.contentView addSubview:label];
         label.text = @"详细信息";
         return cell;
-        
     }
+}
+-(IBAction)save:(id)sender
+{
+    if ([sender isEqual:self.switchView]) {
+        NSData *data=[[DeviceInfo defaultManager] toogle:self.switchView.isOn deviceID:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
+    Amplifier *device=[[Amplifier alloc] init];
+    [device setDeviceID:[self.deviceid intValue]];
+    [device setWaiting: self.switchView.isOn];
     
+    
+    [_scene setSceneID:[self.sceneid intValue]];
+    [_scene setRoomID:self.roomID];
+    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+    
+    [_scene setReadonly:NO];
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
     
 }
 

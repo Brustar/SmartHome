@@ -13,4 +13,7 @@
 @property (nonatomic,weak) NSString *deviceid;
 @property (nonatomic,assign) int roomID;
 @property (nonatomic,assign) BOOL isAddDevice;
+@property (nonatomic,strong) Scene * scene;
+@property (strong, nonatomic) IBOutlet UISwitch *switchView;
+
 @end

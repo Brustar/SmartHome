@@ -181,9 +181,6 @@
      [self.view bringSubviewToFront:self.SceneView];
     self.SceneView.hidden = NO;
     
-
-    
-    
 }
 - (IBAction)cancelBtn:(id)sender {
     
@@ -248,6 +245,7 @@
 {
     [DeviceInfo defaultManager].isPhotoLibrary = NO;
     self.selectSceneImg = info[UIImagePickerControllerEditedImage];
+    [self.ImageBtn setBackgroundImage:self.selectSceneImg forState:UIControlStateNormal];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -255,6 +253,7 @@
     [DeviceInfo defaultManager].isPhotoLibrary = NO;
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
+
 
 
 @end
