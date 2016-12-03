@@ -112,7 +112,9 @@
                           @"roomid":@(scene.roomID)
                           };
         }
-        NSData *imgData = UIImagePNGRepresentation(image);
+       //NSData *imgData = UIImagePNGRepresentation(image);
+        NSData *imgData = UIImageJPEGRepresentation(image, 0.5);
+        NSLog(@"imgDataSize: %.2f M", (float)imgData.length/1024/1024);
         
         NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
         
@@ -181,7 +183,9 @@
         formatter.dateFormat = @"yyyyMMddHHmmss";
         NSString *str = [formatter stringFromDate:[NSDate date]];
         NSString *imgFileName = [NSString stringWithFormat:@"%@.png", str];
-        NSData *imgData = UIImagePNGRepresentation(image);
+    
+        NSData *imgData = UIImageJPEGRepresentation(image, 0.5);
+        NSLog(@"imgDataSize: %.2f M", (float)imgData.length/1024/1024);
         
         NSDictionary *parameter;
         //int sceneid = [SQLManager saveMaxSceneId:scene name:name pic:@""];

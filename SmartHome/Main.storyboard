@@ -7544,15 +7544,7 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-<<<<<<< HEAD
-        <segue reference="X9P-hg-DXo"/>
-        <segue reference="ya3-gG-p8O"/>
-        <segue reference="wSR-hk-rTP"/>
-        <segue reference="nIi-Kc-QDm"/>
-        <segue reference="zAF-Rq-I0I"/>
-        <segue reference="fXQ-oW-cHz"/>
-        <segue reference="U1p-eR-Biy"/>
-=======
+
 
         <segue reference="zAF-Rq-I0I"/>
         <segue reference="nIi-Kc-QDm"/>
@@ -7571,28 +7563,25 @@ layer.masksToBoundslayer.masksToBounds
         <segue reference="vdf-Gi-dZf"/>
         <segue reference="l23-e3-J0C"/>
 
->>>>>>> 7b3e560bba90641adb2bbe68f1cb9b1c92d25566
+
         <segue reference="vKk-7C-VKf"/>
         <segue reference="fHn-Cm-7Q7"/>
         <segue reference="Vzc-yi-Jnw"/>
         <segue reference="a9T-LN-ZVX"/>
         <segue reference="vdf-Gi-dZf"/>
-<<<<<<< HEAD
-        <segue reference="JQm-bA-TWz"/>
-=======
+
         <segue reference="fHn-Cm-7Q7"/>
 
->>>>>>> 7b3e560bba90641adb2bbe68f1cb9b1c92d25566
+
         <segue reference="pWG-oz-Opr"/>
         <segue reference="tt4-nB-rfe"/>
         <segue reference="l23-e3-J0C"/>
         <segue reference="tdV-sS-d5j"/>
         <segue reference="YE7-iU-rxh"/>
-<<<<<<< HEAD
-=======
+
 
         <segue reference="fXQ-oW-cHz"/>
 
->>>>>>> 7b3e560bba90641adb2bbe68f1cb9b1c92d25566
+
     </inferredMetricsTieBreakers>
 </document>
