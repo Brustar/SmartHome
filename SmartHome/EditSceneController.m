@@ -428,14 +428,14 @@
 
 //收藏场景
 -(void)favorScene {
-     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"收藏场景" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"收藏场景?" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:  UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
-        NSString *url = [NSString stringWithFormat:@"%@Cloud/scene_operation.aspx",[IOManager httpAddr]];
+        NSString *url = [NSString stringWithFormat:@"%@Cloud/store_scene.aspx",[IOManager httpAddr]];
         NSDictionary *dict = @{
                                @"token":[UD objectForKey:@"AuthorToken"],
                                @"scenceid":@(self.sceneID),
-                               @"optype":@(2)
+                               @"optype":@(1)
                                };
         
         HttpManager *http = [HttpManager defaultManager];
@@ -577,7 +577,7 @@
                 if (scene) {
                    BOOL result = [[SceneManager defaultManager] favoriteScene:scene];
                     if (result) {
-                        [MBProgressHUD showSuccess:@"收藏成功"];
+                        [MBProgressHUD showSuccess:@"已收藏"];
                     }else {
                         [MBProgressHUD showError:@"收藏失败"];
                     }
@@ -608,7 +608,7 @@
         UIAlertAction *sureAction =  [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
 
                 
-                NSString *url = [NSString stringWithFormat:@"%@Cloud/scene_operation.aspx",[IOManager httpAddr]];
+                NSString *url = [NSString stringWithFormat:@"%@Cloud/scene_delete.aspx",[IOManager httpAddr]];
                 NSDictionary *dict = @{
                                        @"token":[UD objectForKey:@"AuthorToken"],
                                        @"scenceid":@(self.sceneID),
