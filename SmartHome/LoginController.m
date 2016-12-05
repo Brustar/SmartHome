@@ -165,10 +165,10 @@
 - (void)sendRequestForGettingConfigInfos:(NSString *)str withTag:(int)tag;
 {
     NSString *url = [NSString stringWithFormat:@"%@%@",[IOManager httpAddr],str];
-    NSUserDefaults *userDefault =  [NSUserDefaults standardUserDefaults];
-    NSDictionary *dic = @{@"token":[userDefault objectForKey:@"AuthorToken"]};
-    if ([userDefault objectForKey:@"room_version"]) {
-        dic = @{@"token":[userDefault objectForKey:@"AuthorToken"],@"room_ver":[userDefault objectForKey:@"room_version"],@"equipment_ver":[userDefault objectForKey:@"equipment_version"],@"scence_ver":[userDefault objectForKey:@"scence_version"],@"tv_ver":[userDefault objectForKey:@"tv_version"],@"fm_ver":[userDefault objectForKey:@"fm_version"]};
+    
+    NSDictionary *dic = @{@"token":[UD objectForKey:@"AuthorToken"]};
+    if ([UD objectForKey:@"room_version"]) {
+        dic = @{@"token":[UD objectForKey:@"AuthorToken"],@"room_ver":[UD objectForKey:@"room_version"],@"equipment_ver":[UD objectForKey:@"equipment_version"],@"scence_ver":[UD objectForKey:@"scence_version"],@"tv_ver":[UD objectForKey:@"tv_version"],@"fm_ver":[UD objectForKey:@"fm_version"]};
     }
     HttpManager *http = [HttpManager defaultManager];
     http.delegate = self;

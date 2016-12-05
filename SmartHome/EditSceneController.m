@@ -385,6 +385,7 @@
 
 - (IBAction)saveScene:(UIBarButtonItem *)sender {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请选择" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    
     UIAlertAction *saveAction = [UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //场景ID不变
         NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
@@ -396,7 +397,9 @@
         
         [[SceneManager defaultManager] editScene:scene];
     }];
+    
     [alertVC addAction:saveAction];
+    
     UIAlertAction *saveNewAction = [UIAlertAction actionWithTitle:@"另存为新场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //另存为场景，新的场景ID
         [self.view bringSubviewToFront:self.devicelView];
@@ -404,14 +407,17 @@
         self.storeNewScene.hidden = NO;
         [self.storeNewSceneName becomeFirstResponder];
     }];
+    
     [alertVC addAction:saveNewAction];
+    
     UIAlertAction *favScene = [UIAlertAction actionWithTitle:@"收藏场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
         
         [self favorScene];
         
     }];
+    
     [alertVC addAction:favScene];
+    
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         [alertVC dismissViewControllerAnimated:YES completion:nil];
     }];
@@ -419,30 +425,30 @@
     [[DeviceInfo defaultManager] setEditingScene:NO];
     [self presentViewController:alertVC animated:YES completion:nil];
 }
--(void)favorScene{
+
+//收藏场景
+-(void)favorScene {
      UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"收藏场景" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:  UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
-
-
-
-            Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
+        NSString *url = [NSString stringWithFormat:@"%@Cloud/scene_operation.aspx",[IOManager httpAddr]];
+        NSDictionary *dict = @{
+                               @"token":[UD objectForKey:@"AuthorToken"],
+                               @"scenceid":@(self.sceneID),
+                               @"optype":@(2)
+                               };
         
-        
-            [[SceneManager defaultManager] favoriteScene:scene withName:scene.sceneName];
-        
-
-
-       
+        HttpManager *http = [HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = 3;
+        [http sendPost:url param:dict];
     }];
+    
     UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     [alert addAction:action1];
     [alert addAction:action2];
     
     [self presentViewController:alert animated:YES completion:nil];
-
-
-
 }
 
 - (IBAction)cancelSaveScene:(id)sender {
@@ -535,7 +541,7 @@
 
 -(void)httpHandler:(id) responseObject tag:(int)tag
 {
-    if(tag == 2)
+    if(tag == 2) //删除场景的回调
     {
          if([responseObject[@"result"] intValue] == 0)
          {
@@ -563,6 +569,29 @@
          }
         
         [self.navigationController popViewControllerAnimated:YES];
+        
+    }else if(tag == 3) { //收藏场景的回调
+        if([responseObject[@"result"] intValue] == 0)
+        {
+                Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
+                if (scene) {
+                   BOOL result = [[SceneManager defaultManager] favoriteScene:scene];
+                    if (result) {
+                        [MBProgressHUD showSuccess:@"收藏成功"];
+                    }else {
+                        [MBProgressHUD showError:@"收藏失败"];
+                    }
+                    
+                }else {
+                    NSLog(@"scene 不存在！");
+                    [MBProgressHUD showError:@"收藏失败"];
+                }
+            
+        }else {
+            [MBProgressHUD showError:responseObject[@"msg"]];
+        }
+        
+        [self.navigationController popViewControllerAnimated:YES];
     }
     
 }
@@ -577,28 +606,21 @@
 - (IBAction)deleteScene:(UIBarButtonItem *)sender {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"确定删除吗?" message:@"" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *sureAction =  [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//            if(self.isFavor)
-//            {
-//                Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
-//                [[SceneManager defaultManager] deleteFavoriteScene:scene withName:scene.sceneName];
-//                [self.navigationController popViewControllerAnimated:YES];
-//            }else {
 
                 
-                NSString *url = [NSString stringWithFormat:@"%@Cloud/scene_delete.aspx",[IOManager httpAddr]];
+                NSString *url = [NSString stringWithFormat:@"%@Cloud/scene_operation.aspx",[IOManager httpAddr]];
                 NSDictionary *dict = @{
                                        @"token":[UD objectForKey:@"AuthorToken"],
                                        @"scenceid":@(self.sceneID),
                                        @"optype":@(1)
                                        };
+            
                 HttpManager *http = [HttpManager defaultManager];
                 http.delegate = self;
                 http.tag = 2;
                 [http sendPost:url param:dict];
-
-            //}
-        
     }];
+    
     [alertVC addAction:sureAction];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         [alertVC dismissViewControllerAnimated:YES completion:nil];

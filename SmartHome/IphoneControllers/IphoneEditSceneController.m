@@ -341,9 +341,7 @@
         
         
         Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
-        
-        
-        [[SceneManager defaultManager] favoriteScene:scene withName:scene.sceneName];
+        [[SceneManager defaultManager] favoriteScene:scene];
         
     }];
     UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
