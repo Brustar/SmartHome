@@ -60,8 +60,6 @@
     LightCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     Device *device = [SQLManager getDeviceWithDeviceID:[_lightArrs[indexPath.row] intValue]];
     cell.LightNameLabel.text = device.name;
-//    cell.slider.tag = indexPath.row;
-//    cell.Iphoneswitch.tag = indexPath.row;
     cell.slider.continuous = NO;
     cell.deviceid = self.lightArrs[indexPath.row];
     

@@ -15,4 +15,6 @@
 @property (nonatomic,assign) BOOL isAddDevice;
 
 @property (strong, nonatomic) Scene *scene;
+
+
 @end

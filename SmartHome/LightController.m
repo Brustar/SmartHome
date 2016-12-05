@@ -304,7 +304,7 @@
     NSArray *colors=[self changeUIColorToRGB:self.cell.colourView.backgroundColor];
     if (colors) {
         if ([etype isEqualToString:@"03"]) {
-            [device setColor:colors];
+            [device setColor:colors];  
         }
         [device setColor:@[]];
     }
