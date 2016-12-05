@@ -1829,6 +1829,9 @@
 						DevelopmentTeam = C8JS65F469;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
 							com.apple.HomeKit = {
 								enabled = 0;
 							};

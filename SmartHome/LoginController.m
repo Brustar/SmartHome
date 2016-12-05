@@ -25,7 +25,6 @@
 #import "FMDatabase.h"
 #import "DeviceInfo.h"
 #import "PackManager.h"
-#import "IbeaconManager.h"
 #import "CryptoManager.h"
 #import "SunCount.h"
 #import <CoreLocation/CoreLocation.h>
