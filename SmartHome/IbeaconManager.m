@@ -29,7 +29,7 @@
     self.locationmanager.delegate = self;
     NSUUID *uuid=[[NSUUID alloc] initWithUUIDString:BEACONUUID];
     self.beacon = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:[uuid UUIDString]];//初始化监测的iBeacon信息
-    [self.locationmanager requestAlwaysAuthorization];//设置location是一直允许
+    //[self.locationmanager requestAlwaysAuthorization];//设置location是一直允许
     
     self.ibeacon=beacon;
 }

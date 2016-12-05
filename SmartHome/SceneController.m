@@ -17,8 +17,6 @@
 #import "MBProgressHUD+NJ.h"
 #import "SearchViewController.h"
 #import "ECSearchView.h"
-
-#import "IbeaconManager.h"
 #import "HostIDSController.h"
 #import "UIImageView+WebCache.h"
 #import "SceneManager.h"

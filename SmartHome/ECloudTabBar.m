@@ -13,11 +13,10 @@
 #import "ECloudTabBar.h"
 #import "ECloudButton.h"
 #import "ECloudMoreView.h"
-
 #import "Room.h"
 #import "SQLManager.h"
-
 #import "IbeaconManager.h"
+
 @interface ECloudTabBar () <ECloudMoreViewDelegate>
 @property (nonatomic, weak) UIView *rightView;
 
@@ -96,9 +95,6 @@
 
 -(void)setUpLeftView
 {
-   
-  
-    
     self.rooms = [SQLManager getAllRoomsInfo];
 
     for (int i = 0; i < self.rooms.count; i++) {
