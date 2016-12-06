@@ -15,11 +15,11 @@
 
 @property (strong, nonatomic) CLBeaconRegion *beacon;//被扫描的iBeacon
 
-@property (strong, nonatomic) CLLocationManager * locationmanager;
+@property (strong, nonatomic) CLLocationManager *locationmanager;
 
 @property (strong, nonatomic) DeviceInfo *ibeacon;
 
 + (instancetype)defaultManager;
--(void) start:(DeviceInfo *)beacon;
+- (void) start:(DeviceInfo *)beacon;
 
 @end
