@@ -23,10 +23,6 @@
     [super awakeFromNib];
     
     [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timer:) userInfo:nil repeats:YES];
-//    SocketManager *sock = [SocketManager defaultManager];
-//    
-//    sock.delegate = self;
-    
     
     self.layer.masksToBounds = YES;
     self.supImageView.layer.cornerRadius = self.supImageView.bounds.size.width / 2.0;
@@ -37,8 +33,6 @@
     self.DVDImageView.layer.cornerRadius = self.DVDImageView.bounds.size.width / 2.0;
     self.TVImageView.layer.cornerRadius = self.TVImageView.bounds.size.width / 2.0;
     self.musicImageVIew.layer.cornerRadius = self.musicImageVIew.bounds.size.width / 2.0;
-    
-    
 
 }
 
@@ -55,8 +49,6 @@
     }
 }
 -(void)setModel:(IPhoneRoom *)iphoneRom{
-    //展示具体的家具，设置房间的id，房间的名字
-    
     self.nameLabel.text = iphoneRom.roomName;
     self.tag = iphoneRom.roomId;
     

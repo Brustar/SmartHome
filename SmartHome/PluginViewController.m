@@ -39,7 +39,10 @@
                NSString *typeName = [SQLManager deviceTypeNameByDeviceID:[plugArr[i] intValue]];
                if([typeName isEqualToString:DEVICE_TYPE])
                {
-                   [_plugDeviceIds addObject:plugArr[i]];
+                   if (plugArr[i]) {
+                           [_plugDeviceIds addObject:plugArr[i]];
+                   }
+               
                }
                
            }

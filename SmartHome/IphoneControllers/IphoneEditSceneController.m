@@ -30,6 +30,7 @@
 #import "BgMusicController.h"
 #import "CollectionViewCell.h"
 #import "TouchSubViewController.h"
+#import "HttpManager.h"
 
 @interface IphoneEditSceneController ()<IphoneTypeViewDelegate,TouchSubViewDelegate>
 
@@ -337,11 +338,17 @@
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"收藏场景" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:  UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
+        NSString *url = [NSString stringWithFormat:@"%@Cloud/store_scene.aspx",[IOManager httpAddr]];
+        NSDictionary *dict = @{
+                               @"token":[UD objectForKey:@"AuthorToken"],
+                               @"scenceid":@(self.sceneID),
+                               @"optype":@(1)
+                               };
         
-        
-        
-        Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
-        [[SceneManager defaultManager] favoriteScene:scene];
+        HttpManager *http = [HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = 3;
+        [http sendPost:url param:dict];
         
     }];
     UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
@@ -349,11 +356,34 @@
     [alert addAction:action2];
     
     [self presentViewController:alert animated:YES completion:nil];
-    
-    
-    
 }
 
+-(void)httpHandler:(id) responseObject tag:(int)tag
+{
+    if (tag == 3) {
+        if([responseObject[@"result"] intValue] == 0)
+        {
+            Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
+            if (scene) {
+                BOOL result = [[SceneManager defaultManager] favoriteScene:scene];
+                if (result) {
+                    [MBProgressHUD showSuccess:@"已收藏"];
+                }else {
+                    [MBProgressHUD showError:@"收藏失败"];
+                }
+                
+            }else {
+                NSLog(@"scene 不存在！");
+                [MBProgressHUD showError:@"收藏失败"];
+            }
+            
+        }else {
+            [MBProgressHUD showError:responseObject[@"msg"]];
+        }
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -370,12 +400,10 @@
     
 }
 
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
 }
-
+ 
 
 @end

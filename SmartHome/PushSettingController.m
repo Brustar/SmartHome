@@ -77,7 +77,7 @@
     NSString *url = [NSString stringWithFormat:@"%@Cloud/notify.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     if (auothorToken) {
-        NSDictionary *dict = @{@"token":auothorToken};
+        NSDictionary *dict = @{@"token":auothorToken,@"optype":[NSNumber numberWithInt:0]};
         HttpManager *http=[HttpManager defaultManager];
         http.tag = 1;
         http.delegate = self;
@@ -205,7 +205,7 @@
     NSString *url = [NSString stringWithFormat:@"%@Cloud/notify.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     if (auothorToken) {
-    NSDictionary *dict = @{@"token":auothorToken,@"notifyway":[NSNumber numberWithInteger:way],@"usernotify_id":recoredID};
+    NSDictionary *dict = @{@"token":auothorToken,@"notifyway":[NSNumber numberWithInteger:way],@"usernotify_id":recoredID,@"optype":[NSNumber numberWithInt:3]};
     HttpManager *http=[HttpManager defaultManager];
     http.tag = 2;
     http.delegate = self;

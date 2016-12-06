@@ -18,6 +18,7 @@
 @property (nonatomic,strong) NSMutableArray * msgArr;
 @property (nonatomic,strong) NSMutableArray * timesArr;
 @property (nonatomic,strong) NSMutableArray * recordID;
+@property (nonatomic ,strong) NSMutableArray * isreadArr;
 @property (nonatomic,assign) BOOL isEditing;
 
 
@@ -48,6 +49,14 @@
     
     return _recordID;
 }
+-(NSMutableArray *)isreadArr
+{
+    if (!_isreadArr) {
+        _isreadArr = [NSMutableArray array];
+    }
+
+    return _isreadArr;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -55,12 +64,12 @@
     self.tableView.tableFooterView = self.FootView;
     UIBarButtonItem *editBtn = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(startEdit:)];
     self.navigationItem.rightBarButtonItem = editBtn;
-
-    
     if (self.itemID) {
         
         [self sendRequestForDetailMsgWithItemId:[_itemID intValue]];
     }
+    
+    
     
 }
 
@@ -91,12 +100,12 @@
             if ([dic isKindOfClass:[NSArray class]]) {
                 for(NSDictionary *dicDetail in dic)
                 {
-                                        if ([dicDetail isKindOfClass:[NSDictionary class]] && dicDetail[@"description"]) {
-                                            [self.msgArr addObject:dicDetail[@"description"]];
-                                            [self.timesArr addObject:dicDetail[@"addtime"]];
-                                            [self.recordID addObject:dicDetail[@"notify_id"]];
-                                        }
-                  
+                    if ([dicDetail isKindOfClass:[NSDictionary class]] && dicDetail[@"description"]) {
+                            [self.msgArr addObject:dicDetail[@"description"]];
+                            [self.timesArr addObject:dicDetail[@"addtime"]];
+                            [self.recordID addObject:dicDetail[@"notify_id"]];
+                            [self.isreadArr addObject:dicDetail[@"isread"]];
+                    }
                 }
             }
             
