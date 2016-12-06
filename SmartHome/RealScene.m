@@ -74,6 +74,16 @@
     NSLog(@"TCP请求Data:%@", data);
     
     [self sendRequestForGettingSceneConfig:@"Cloud/scene_config_list.aspx" withTag:1];//实景配置请求
+    
+    //先读缓存
+    self.tempValue.text = [NSString stringWithFormat:@"%d°C",[[UD objectForKey:@"TempValue"] intValue]];
+
+    self.wetValue.text = [NSString stringWithFormat:@"%d %%", [[UD objectForKey:@"WetValue"] intValue]];
+
+    self.pmValue.text = [NSString stringWithFormat:@"%d ug/m³",[[UD objectForKey:@"PMValue"] intValue]];
+
+    self.noiseValue.text = [NSString stringWithFormat:@"%d db",[[UD objectForKey:@"NoiseValue"] intValue]];
+    
 }
 
 //获取实景配置
@@ -177,29 +187,36 @@
     
     NSLog(@"TCP收到的data:%@", data);
     
-    NSString *result = [NSString stringWithFormat:@"0x%@",[UD objectForKey:@"HostID"]];
     
     Proto proto = protocolFromData(data);
     
-    if (CFSwapInt16BigToHost(proto.masterID) != strtoul([result UTF8String],0,16)) {
+    if (CFSwapInt16BigToHost(proto.masterID) != [[UD objectForKey:@"HostID"] intValue]) {
         return;
     }
     
     if (tag==0) {
         if (proto.action.state==0x6A) {
             self.tempValue.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
+            [UD setObject:@(proto.action.RValue) forKey:@"TempValue"];
+            [UD synchronize];
         }
         if (proto.action.state==0x8A) {
             NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
             self.wetValue.text = valueString;
+            [UD setObject:@(proto.action.RValue) forKey:@"WetValue"];
+            [UD synchronize];
         }
         if (proto.action.state==0x7F) {
             NSString *valueString = [NSString stringWithFormat:@"%d ug/m³",proto.action.RValue];
             self.pmValue.text = valueString;
+            [UD setObject:@(proto.action.RValue) forKey:@"PMValue"];
+            [UD synchronize];
         }
         if (proto.action.state==0x7E) {
             NSString *valueString = [NSString stringWithFormat:@"%d db",proto.action.RValue];
             self.noiseValue.text = valueString;
+            [UD setObject:@(proto.action.RValue) forKey:@"NoiseValue"];
+            [UD synchronize];
         }
     }
 }

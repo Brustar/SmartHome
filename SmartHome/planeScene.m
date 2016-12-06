@@ -17,8 +17,8 @@
     //self.planeimg=[[TouchImage alloc] initWithFrame:CGRectMake(100, 40, 625, 500)];
     self.planeimg = [[TouchImage alloc] initWithFrame:self.view.frame];
     self.planeimg.contentMode = UIViewContentModeScaleAspectFit;
-    self.planeimg.image =[UIImage imageNamed:@"ecloud_2"];
-    self.planeimg.userInteractionEnabled=YES;
+    self.planeimg.image = [UIImage imageNamed:@"ecloud_2"];
+    self.planeimg.userInteractionEnabled = YES;
     self.planeimg.viewFrom=PLANE_IMAGE;
     self.planeimg.delegate = self;
     [self.view addSubview:self.planeimg];
@@ -64,6 +64,10 @@
         if ([responseObject[@"Result"] integerValue] == 0) {
             NSDictionary *infoDict = responseObject[@"info"];
             if ([infoDict isKindOfClass:[NSDictionary class]]) {
+                NSString *bgImgUrl = infoDict[@"imgpath"];//设置平面背景
+                if (bgImgUrl.length >0) {
+                    [self.planeimg sd_setImageWithURL:[NSURL URLWithString:bgImgUrl] placeholderImage:[UIImage imageNamed:@"ecloud_2"] options:SDWebImageRetryFailed];
+                }
                 NSString *plistURL = infoDict[@"plist_path"];
                 if (plistURL.length >0) {
                     //下载plist
