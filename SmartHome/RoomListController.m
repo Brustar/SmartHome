@@ -58,7 +58,7 @@
 @property (nonatomic, assign) BOOL isSceneSetTime;
 @property (weak, nonatomic) IBOutlet UIButton *starDataBtn;//设置日期的开始按钮
 @property (weak, nonatomic) IBOutlet UIButton *endDataBtn;//设置日期的结束按钮
-@property (weak, nonatomic) IBOutlet UIButton *clickFixTimeBtn;//
+@property (weak, nonatomic) IBOutlet UIButton *clickFixTimeBtn;//设置定时按钮
 
 - (IBAction)startDataBtn:(id)sender;//设置日期的开始按钮点击事件
 - (IBAction)endDataBtn:(id)sender;//设置日期的结束按钮点击事件
@@ -212,7 +212,10 @@
     }
     
     self.schedule = schedule;
-   }
+    
+    self.clickFixTimeBtn.hidden = YES;
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -490,7 +493,7 @@
         self.dataPicker.hidden = YES;
         self.ShowSettingDataView.hidden = YES;
     }else {
-        /*
+        
         self.timeView.hidden =  NO;
         //_timeView.backgroundColor = [UIColor redColor];
         self.ShowSettingDataView.hidden = NO;
@@ -523,10 +526,16 @@
             isPlane = 1;
         }
       
-        dic = @{@"astronomicealTime":astronomicealTime,@"playType":[NSNumber numberWithInt:playType],@"startTIme":self.startTimeBtn.titleLabel.text,@"endTime":self.endTimeBtn.titleLabel.text,@"isPane":[NSNumber numberWithInt:isPlane]};
-         */
+        dic = @{
+                @"astronomicealTime":astronomicealTime,
+                @"playType":[NSNumber numberWithInt:playType],
+                @"startTime":self.startTimeBtn.titleLabel.text,
+                @"endTime":self.endTimeBtn.titleLabel.text,
+                @"isPane":[NSNumber numberWithInt:isPlane]
+                };
         
     }
+    
     btn.selected = !btn.selected;
 }
 
