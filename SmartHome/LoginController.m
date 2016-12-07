@@ -465,7 +465,7 @@
 - (IBAction)forgotPWD:(id)sender
 {
     
-    [WebManager show:[[IOManager httpAddr] stringByAppendingString:@"user/update_pwd.aspx"]];
+    [WebManager show:[[IOManager httpAddr] stringByAppendingString:@"/user/update_pwd.aspx"]];
 }
 
 //注册

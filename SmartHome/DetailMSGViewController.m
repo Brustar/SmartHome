@@ -20,6 +20,7 @@
 @property (nonatomic,strong) NSMutableArray * recordID;
 @property (nonatomic ,strong) NSMutableArray * isreadArr;
 @property (nonatomic,assign) BOOL isEditing;
+@property (nonatomic,assign) NSInteger notify_id;
 
 
 @end
@@ -64,12 +65,14 @@
     self.tableView.tableFooterView = self.FootView;
     UIBarButtonItem *editBtn = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(startEdit:)];
     self.navigationItem.rightBarButtonItem = editBtn;
+    UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc]initWithTitle:@"我的消息" style:UIBarButtonItemStylePlain target:self action:@selector(leftEdit:)];
+    self.navigationItem.leftBarButtonItem = leftBtn;
+    
+    
     if (self.itemID) {
         
         [self sendRequestForDetailMsgWithItemId:[_itemID intValue]];
     }
-    
-    
     
 }
 
@@ -106,6 +109,7 @@
                             [self.recordID addObject:dicDetail[@"notify_id"]];
                             [self.isreadArr addObject:dicDetail[@"isread"]];
                     }
+                  
                 }
             }
             
@@ -123,6 +127,13 @@
         }else {
             [MBProgressHUD showError:responseObject[@"Msg"]];
         }
+    }else if (tag == 3){
+        if ([responseObject[@"result"] intValue] == 0) {
+             [MBProgressHUD showSuccess:@"消息已读"];
+        }else {
+            
+            [MBProgressHUD showError:responseObject[@"Msg"]];
+        }
     }
     
 }
@@ -137,8 +148,7 @@
     MsgCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
         cell.title.text = self.msgArr[indexPath.row];
         cell.timeLable.text = self.timesArr[indexPath.row];
-    
- 
+        self.itemID = self.recordID[indexPath.row];
     return cell;
 
 }
@@ -165,7 +175,7 @@
     //放置要删除的对象
     NSMutableArray *deleteArray = [NSMutableArray array];
     NSMutableArray *deletedTime = [NSMutableArray array];
-    NSMutableArray *deletedID =[NSMutableArray array];
+    NSMutableArray *deletedID   = [NSMutableArray array];
     
     // 要删除的row
     NSArray *selectedArray = [self.tableView indexPathsForSelectedRows];
@@ -202,9 +212,30 @@
     self.isEditing = NO;
     [self.tableView reloadData];
 }
+
+-(void)leftEdit:(UIBarButtonItem *)bbi
+{
+    [self.navigationController popViewControllerAnimated:YES];
+    [self sendRequestForMsgWithItemId:self.notify_id];
+
+}
+-(void)sendRequestForMsgWithItemId:(NSInteger)itemID
+{
+    NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/notify.aspx",[IOManager httpAddr]];
+    if (authorToken) {
+        NSDictionary *dic = @{@"token":authorToken,@"optype":[NSNumber numberWithInteger:5],@"notify_id":[NSNumber numberWithInteger:itemID]};
+        HttpManager *http=[HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = 3;
+        [http sendPost:url param:dic];
+        
+    }
+}
 -(void)sendDeleteRequestWithArray:(NSArray *)deleteArr;
 {
-    NSString *url = [NSString stringWithFormat:@"%@EditPersonalInformation.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/notify.aspx",[IOManager httpAddr]];
     
     NSString *recoreds = @"";
     
@@ -222,7 +253,7 @@
     }
     
     
-    NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"RecordIDList":recoreds,@"Type":[NSNumber numberWithInt:1]};
+    NSDictionary *dic = @{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ids":recoreds,@"optype":[NSNumber numberWithInt:4]};
     HttpManager *http = [HttpManager defaultManager];
     http.delegate = self;
     http.tag = 2;

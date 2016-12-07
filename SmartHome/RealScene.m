@@ -201,6 +201,7 @@
             NSString *valueString = [NSString stringWithFormat:@"%d db",proto.action.RValue];
             self.noiseValue.text = valueString;
         }
+       
     }
 }
 

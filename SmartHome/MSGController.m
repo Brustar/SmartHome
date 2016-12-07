@@ -92,16 +92,17 @@
         }else{
             [MBProgressHUD showError:responseObject[@"Msg"]];
         }
-    }else if(tag == 2)
-    {
-        if([responseObject[@"result"] intValue]==0)
-        {
-            [MBProgressHUD showSuccess:@"删除成功"];
-            
-        }else {
-            [MBProgressHUD showError:responseObject[@"Msg"]];
-        }
     }
+//    else if(tag == 3)
+//    {
+//        if([responseObject[@"result"] intValue]==0)
+//        {
+//            [MBProgressHUD showSuccess:@"已读"];
+//            
+//        }else {
+//            [MBProgressHUD showError:responseObject[@"Msg"]];
+//        }
+//    }
 
 }
 

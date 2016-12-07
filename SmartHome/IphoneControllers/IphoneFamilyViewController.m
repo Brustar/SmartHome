@@ -26,12 +26,13 @@
 
 
 
-@interface IphoneFamilyViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
+@interface IphoneFamilyViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,TcpRecvDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic)  IBOutlet UIView *supView;
 @property (nonatomic,strong) NSMutableArray * roomIdArrs;//房间数量
 @property (nonatomic,strong) NSArray *rooms;
 @property (nonatomic,strong) IPhoneRoom * room;
+@property (nonatomic,strong) FamilyCell *cell;
 
 //======add by zxp
 @property (nonatomic,strong)NSMutableArray  *iPhoneRoomList;
@@ -90,11 +91,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.rooms = [SQLManager getAllRoomsInfo];
-    SocketManager *sock = [SocketManager defaultManager];
-    [sock connectTcp];
-    sock.delegate = self;
     [self sendRequestForGettingSceneConfig];
 
     
@@ -150,7 +149,25 @@
     }
 }
 
-
+#pragma mark - TCP recv delegate
+- (void)recv:(NSData *)data withTag:(long)tag
+{
+    Proto proto = protocolFromData(data);
+    
+    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
+        return;
+    }
+    if (tag==0) {
+        if (proto.action.state==0x6A) {
+            
+            self.cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
+        }
+        if (proto.action.state==0x8A) {
+            NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
+            self.cell.humidityLabel.text = valueString;
+        }
+    }
+}
 #pragma  mark - UICollectionViewDelegate
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -163,15 +180,15 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    FamilyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    self.cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
  
     
     IPhoneRoom *iphoneRoom = self.iPhoneRoomList[indexPath.row];
     
 
-    [cell setModel:iphoneRoom];
+    [self.cell setModel:iphoneRoom];
 
-    return  cell;
+    return  self.cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -203,11 +220,7 @@
 {
     return maxSpace;
 }
--(void)recv:(NSData *)data withTag:(long)tag
-{
 
-
-}
 
 /*
 #pragma mark - Navigation
