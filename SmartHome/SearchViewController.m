@@ -243,7 +243,7 @@
         CameraController *camerVC = [storyBoard instantiateViewControllerWithIdentifier:@"CameraController"];
         camerVC.deviceid = [NSString stringWithFormat:@"%d",eId];
        
-
+        [self.navigationController pushViewController:camerVC animated:YES];
     }else if([typeName isEqualToString:@"智能门锁"]) {
         
         GuardController *guardVC = [storyBoard instantiateViewControllerWithIdentifier:@"GuardController"];

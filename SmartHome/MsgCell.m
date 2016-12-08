@@ -13,6 +13,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
+   self.unreadcountImage.layer.cornerRadius = self.unreadcountImage.bounds.size.width/2; //圆角半径
+    self.unreadcountImage.layer.masksToBounds = YES; //圆角
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

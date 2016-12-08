@@ -10,7 +10,7 @@
 @property (weak, nonatomic) IBOutlet UISlider *slider;
 @property (weak, nonatomic) IBOutlet UIButton *close;
 @property (weak, nonatomic) IBOutlet UILabel *valueLabel;
-
 @property (weak, nonatomic) IBOutlet UIButton *open;
+@property (nonatomic,strong) NSString * deviceId;
 
 @end

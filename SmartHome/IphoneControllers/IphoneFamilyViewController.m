@@ -31,28 +31,15 @@
 @property (weak, nonatomic)  IBOutlet UIView *supView;
 @property (nonatomic,strong) NSMutableArray * roomIdArrs;//房间数量
 @property (nonatomic,strong) NSArray *rooms;
-@property (nonatomic,strong) IPhoneRoom * room;
+//@property (nonatomic,strong) IPhoneRoom * room;
 @property (nonatomic,strong) FamilyCell *cell;
-
-//======add by zxp
-@property (nonatomic,strong)NSMutableArray  *iPhoneRoomList;
-
+//@property (nonatomic,strong)NSMutableArray  *iPhoneRoomList;
+@property (nonatomic,assign)  int roomID;
+@property (nonatomic,strong)  NSArray * deviceArr;
 
 @end
 
 @implementation IphoneFamilyViewController
-
-
-//--add by zxp
--(NSArray  *)iPhoneRoomList{
-    if(!_iPhoneRoomList){
-    
-        _iPhoneRoomList = [NSMutableArray array];
-    }
-    return _iPhoneRoomList;
-}
-
-
 -(NSMutableArray *)roomIdArrs
 {
     if (!_roomIdArrs) {
@@ -94,7 +81,13 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.rooms = [SQLManager getAllRoomsInfo];
-    [self sendRequestForGettingSceneConfig];
+    for (Room * room in self.rooms) {
+        self.roomID = room.rId;
+          self.deviceArr = [SQLManager devicesByRoomId:self.roomID];
+      
+        
+    }
+//    [self sendRequestForGettingSceneConfig];
 
     
 }
@@ -139,7 +132,7 @@
                     //====从sqlite中通过id的到name
                     room.roomName = [SQLManager getRoomNameByRoomID:room.roomId];
                     
-                    [self.iPhoneRoomList addObject:room];
+//                    [self.iPhoneRoomList addObject:room];
                 }
                 
                 [self.collectionView reloadData];
@@ -152,8 +145,9 @@
 #pragma mark - TCP recv delegate
 - (void)recv:(NSData *)data withTag:(long)tag
 {
+    NSArray * hTypeIdArr = @[@"01",@"02",@"03",@"12",@"13",@"14",@"21",@"22",@"31"];
     Proto proto = protocolFromData(data);
-    
+  
     if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
         return;
     }
@@ -165,40 +159,53 @@
         if (proto.action.state==0x8A) {
             NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
             self.cell.humidityLabel.text = valueString;
+        }if (proto.action.state==0x00) {
+            for (Device * device in self.deviceArr) {
+                if ([hTypeIdArr containsObject:[NSString stringWithFormat:@"%ld",device.hTypeId]]) {
+                      self.cell.lightImageVIew.hidden = YES;
+                      self.cell.airImageVIew.hidden = YES;
+                      self.cell.musicImageVIew.hidden = YES;
+                      self.cell.DVDImageView.hidden = YES;
+                      self.cell.TVImageView.hidden = YES;
+                      self.cell.curtainImageView.hidden = YES;
+                }
+            }
+          
+        }if (proto.action.state==0x01) {
+            for (Device * device in self.deviceArr) {
+                if ([hTypeIdArr containsObject:[NSString stringWithFormat:@"%ld",device.hTypeId]]) {
+                    self.cell.lightImageVIew.hidden = NO;
+                    self.cell.airImageVIew.hidden = NO;
+                    self.cell.musicImageVIew.hidden = NO;
+                    self.cell.DVDImageView.hidden = NO;
+                    self.cell.TVImageView.hidden = NO;
+                    self.cell.curtainImageView.hidden = NO;
+                }
+            }
         }
     }
 }
 #pragma  mark - UICollectionViewDelegate
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    
-
-    return self.iPhoneRoomList.count;
-
+    return self.rooms.count;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
     self.cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
- 
-    
-    IPhoneRoom *iphoneRoom = self.iPhoneRoomList[indexPath.row];
-    
-
-    [self.cell setModel:iphoneRoom];
+    Room * room = self.rooms[indexPath.row];
+    self.cell.nameLabel.text = room.rName;
 
     return  self.cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     UIStoryboard * oneStory = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     IphoneLightController * VC = [oneStory instantiateViewControllerWithIdentifier:@"LightController"];
-//    Room *room = self.rooms[indexPath.row];
-    IPhoneRoom * room = self.iPhoneRoomList[indexPath.row];
-    VC.roomID = room.roomId;
+    Room *room = self.rooms[indexPath.row];
+    VC.roomID = room.rId;
     [self.navigationController pushViewController:VC animated:YES];
 }
 

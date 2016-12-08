@@ -11,6 +11,7 @@
 #import "Device.h"
 
 #define DIMMER @"调光灯"
+#define CURTAINS @"开合帘"
 
 @interface SQLManager : NSObject
 
@@ -85,7 +86,8 @@
 +(void)initDemoSQlite;
 //根据房间ID找调光灯
 + (NSArray *)getDeviceByRoom:(int) roomID;
-
+//根据房间ID找开合帘
++ (NSArray *)getCurtainByRoom:(int) roomID;
 //得到所有场景
 +(NSArray *)allSceneModels;
 +(NSArray *)devicesBySceneID:(int)sId;

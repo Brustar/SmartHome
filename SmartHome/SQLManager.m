@@ -182,7 +182,6 @@
 
 +(NSArray *)devicesByRoomId:(NSInteger)roomId
 {
-    
     NSArray *devices = [self getAllDevicesInfo];
     NSMutableArray *arr = [NSMutableArray array];
     for(Device *device in devices )
@@ -747,7 +746,7 @@
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT id FROM devices where rid=%d and typename ='%@'",roomID,DIMMER];
         FMResultSet *resultSet = [db executeQuery:sql];
-        if ([resultSet next])
+        while ([resultSet next])
         {
             [lights addObject:[resultSet stringForColumn:@"id"]];
         }
@@ -756,7 +755,24 @@
     [db close];
     return lights;
 }
-
++ (NSArray *)getCurtainByRoom:(int) roomID
+{
+    NSMutableArray *curtains = [NSMutableArray new];
+    
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT id FROM devices where rid=%d and typename ='%@'",roomID,CURTAINS];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+            [curtains addObject:[resultSet stringForColumn:@"id"]];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return curtains;
+}
 + (Device *)getDeviceWithDeviceID:(int) deviceID
 {
     Device *device = nil;
@@ -1376,8 +1392,6 @@
 +(NSArray *)getFavorScene
 {
     NSMutableArray *scens = [NSMutableArray array];
-    
-    
     FMDatabase *db = [self connetdb];
     if([db open])
     {
@@ -1393,8 +1407,6 @@
     [db closeOpenResultSets];
     [db close];
     return [scens copy];
-    
-    
 }
 
 +(NSArray *)getAllRoomsInfoByName:(NSString *)name

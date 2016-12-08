@@ -109,11 +109,8 @@
                             [self.recordID addObject:dicDetail[@"notify_id"]];
                             [self.isreadArr addObject:dicDetail[@"isread"]];
                     }
-                  
                 }
             }
-            
-            
             [self.tableView reloadData];
         }else{
             [MBProgressHUD showError:responseObject[@"Msg"]];
@@ -130,6 +127,7 @@
     }else if (tag == 3){
         if ([responseObject[@"result"] intValue] == 0) {
              [MBProgressHUD showSuccess:@"消息已读"];
+            
         }else {
             
             [MBProgressHUD showError:responseObject[@"Msg"]];
@@ -149,6 +147,7 @@
         cell.title.text = self.msgArr[indexPath.row];
         cell.timeLable.text = self.timesArr[indexPath.row];
         self.itemID = self.recordID[indexPath.row];
+        self.notify_id = [self.recordID[indexPath.row] integerValue];
     return cell;
 
 }
@@ -181,13 +180,17 @@
     NSArray *selectedArray = [self.tableView indexPathsForSelectedRows];
     
     for (NSIndexPath *indexPath in selectedArray) {
-        
-        [deleteArray addObject:self.msgArr[indexPath.row]];
+        if (self.msgArr[indexPath.row]) {
+              [deleteArray addObject:self.msgArr[indexPath.row]];
+        }
+      
         if (![deletedTime containsObject:self.timesArr[indexPath.row]]) {
               [deletedTime addObject:self.timesArr[indexPath.row]];
         }
-      
-        [deletedID addObject:self.recordID[indexPath.row]];
+        if (self.recordID[indexPath.row]) {
+            [deletedID addObject:self.recordID[indexPath.row]];
+        }
+        
     }
     // 先删除数据源
     [self.msgArr removeObjectsInArray:deleteArray];
@@ -199,9 +202,7 @@
     }else {
         [MBProgressHUD showError:@"请选择要删除的记录"];
     }
-    
-    
-    [self clickCancelBtn:nil];
+       [self clickCancelBtn:nil];
     
 }
 -(void)startEdit:(UIBarButtonItem *)barBtnItem
@@ -251,8 +252,7 @@
             recoreds = [recoreds stringByAppendingString:record];
         }
     }
-    
-    
+
     NSDictionary *dic = @{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ids":recoreds,@"optype":[NSNumber numberWithInt:4]};
     HttpManager *http = [HttpManager defaultManager];
     http.delegate = self;

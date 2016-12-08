@@ -65,9 +65,7 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     Scene *scene = self.scens[indexPath.row];
-    
     self.selectID = scene.sceneID;
     SceneCell *cell = (SceneCell*)[collectionView cellForItemAtIndexPath:indexPath];
     [cell useLongPressGesture];
@@ -77,15 +75,13 @@
     }else{
         cell.deleteBtn.hidden = YES;
     }
-    
-    
 }
 
 -(void)sceneDeleteAction:(SceneCell *)cell
 {
     Scene *scene = [[SceneManager defaultManager] readSceneByID:(int)cell.tag];
     [[SceneManager defaultManager] deleteFavoriteScene:scene withName:scene.sceneName];
-    self.scens = [SQLManager getFavorScene];
+//    self.scens = [SQLManager getFavorScene];
     [self.collectionView reloadData];
 }
 
