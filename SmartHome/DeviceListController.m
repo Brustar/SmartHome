@@ -176,8 +176,8 @@
     }else if([typeName isEqualToString:@"智能推窗器"]){
         segue = @"windowSlider";
         
-    }else{
-        segue = @"Guard";
+    }else{ //智能单品
+        segue = @"pluginSegue";//智能插座
         
         
     }

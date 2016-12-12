@@ -40,9 +40,16 @@
         case NSOrderedDescending: ci=NO;
             break;
             //date02=date01
-        case NSOrderedSame: ci=NO;
+        case NSOrderedSame:
+            
+            if ([pattern isEqualToString:@"HH:mm"]) {
+                 ci = NO;
+            }else if([pattern isEqualToString:@"yyyy-MM-dd"]) {
+                 ci = YES;
+            }
+            
             break;
-        default: NSLog(@"erorr dates %@, %@", dt2, dt1); break;
+        default: NSLog(@"Error Dates %@, %@", dt2, dt1); break;
             
     }
    
