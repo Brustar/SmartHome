@@ -31,7 +31,7 @@
 
 -(void)finishFavor:(UIBarButtonItem *)barbutton
 {
-    NSString *url = [NSString stringWithFormat:@"%@FMCloud/store_fm.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/store_fm.aspx",[IOManager httpAddr]];
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     NSDictionary *dic = @{@"token":authorToken,@"eqid":self.deviceid,@"cnumber":self.numberOfChannel,@"cname":self.channelName.text,@"imgname":@"store",@"imgdata":@"",@"optype":[NSNumber numberWithInteger:0]};
     HttpManager *http = [HttpManager defaultManager];
@@ -50,7 +50,9 @@
             [self writeFMChannelsConfigDataToSQL:responseObject withParent:@"FM"];
             [MBProgressHUD showSuccess:@"收藏成功"];
             [self.navigationController popViewControllerAnimated:YES];
-                              }else{
+        }
+            
+        else{
             [MBProgressHUD showError:responseObject[@"Msg"]];
         }
     }

@@ -35,11 +35,11 @@
     if(!_allFavouriteChannels)
     {
         _allFavouriteChannels = [NSMutableArray array];
-        _allFavouriteChannels = [SQLManager getAllChannelForFavoritedForType:@"FM" deviceID:[self.deviceid intValue]];
+        _allFavouriteChannels = [SQLManager getAllChannelForFavoritedForType:@"fm" deviceID:[self.deviceid intValue]];
         if(_allFavouriteChannels == nil || _allFavouriteChannels.count == 0)
         {
             
-            
+            _collectionView.backgroundColor = [UIColor lightGrayColor];
         }
         
     }
@@ -52,6 +52,9 @@
     {
         self.deviceid = [SQLManager deviceIDWithRoomID:self.roomID withType:@"FM"];
     }
+    
+    
+    
 }
 
 - (void)viewDidLoad {
@@ -88,15 +91,19 @@
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
 }
+-(void)recv:(NSData *)data withTag:(long)tag
+{
 
+
+}
 -(IBAction)save:(id)sender
 {
-    NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volumn.value*100 deviceID:self.deviceid];
-    SocketManager *sock=[SocketManager defaultManager];
-    [sock.socket writeData:data withTimeout:1 tag:1];
-    
-//    self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
-    
+    if ([sender isEqual:self.volumn]) {
+        NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volumn.value*100 deviceID:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+        //    self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
+    }
     Radio *device=[[Radio alloc] init];
     [device setDeviceID:6];
     [device setRvolume:self.volumn.value*100];
@@ -192,7 +199,7 @@
 
 -(void)httpHandler:(id) responseObject tag:(int)tag
 {
-    if(tag == 2)
+    if(tag == 1)
     {
         if([responseObject[@"result"] intValue] == 0)
         {

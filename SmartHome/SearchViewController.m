@@ -158,7 +158,6 @@
             [self.navigationController pushViewController:tVC animated:YES];
         }
         
-        
     }else if([typeName isEqualToString:@"灯光"])
     {
         LightController *ligthVC = [storyBoard instantiateViewControllerWithIdentifier:@"LightController"];
@@ -173,8 +172,6 @@
         curtainVC.deviceid = [NSString stringWithFormat:@"%d",eId];
         [self.navigationController pushViewController:curtainVC animated:YES];
         
-        
-        
     }else if([typeName isEqualToString:@"DVD"])
     {
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
@@ -186,7 +183,6 @@
         }else{
             
             DVDController *dvdVC = [storyBoard instantiateViewControllerWithIdentifier:@"DVDController"];
-            
             dvdVC.deviceid = [NSString stringWithFormat:@"%d",eId];
             [self.navigationController pushViewController:dvdVC animated:YES];
         }
@@ -207,9 +203,7 @@
             fmVC.deviceid = [NSString stringWithFormat:@"%d",eId];
             [self.navigationController pushViewController:fmVC animated:YES];
         }
-      
-        
-        
+
     }else if([typeName isEqualToString:@"机顶盒"]){
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
             IphoneNetTvController * Iphonenet = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneNetTvController"];
@@ -222,8 +216,6 @@
             netVC.deviceid = [NSString stringWithFormat:@"%d",eId];
             [self.navigationController pushViewController:netVC animated:YES];
         }
-       
-        
     }else if([typeName isEqualToString:@"空调"]){
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
             

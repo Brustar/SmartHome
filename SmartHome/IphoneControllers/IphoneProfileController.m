@@ -84,15 +84,11 @@
     
     UIAlertAction * action1 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
-        
-        
     }];
     [alertVC addAction:action1];
     [alertVC addAction:action];
     [self presentViewController:alertVC animated:YES completion:nil];
     
-  
-
 }
 -(void)clickQuitButton
 {
@@ -109,7 +105,7 @@
         [self performSegueWithIdentifier:@"iphoneQuitSegue" sender:self];
     }else{
         //跳转到欢迎页
-        //        [self performSegueWithIdentifier:@"iphoneQuitSegue" sender:self];
+                [self performSegueWithIdentifier:@"iphoneQuitSegue" sender:self];
     }
 
 }

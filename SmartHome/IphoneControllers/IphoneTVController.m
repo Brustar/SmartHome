@@ -8,7 +8,6 @@
 
 #import "IphoneTVController.h"
 #import "IphoneRoomView.h"
-
 #import "TVChannel.h"
 #import "TVLogoCell.h"
 #import "UIImageView+WebCache.h"
@@ -81,7 +80,7 @@
     if(!_allFavourTVChannels)
     {
         _allFavourTVChannels = [NSMutableArray array];
-        _allFavourTVChannels = [SQLManager getAllChannelForFavoritedForType:@"TV" deviceID:[self.deviceid intValue]];
+        _allFavourTVChannels = [SQLManager getAllChannelForFavoritedForType:@"tv" deviceID:[self.deviceid intValue]];
         if(_allFavourTVChannels == nil || _allFavourTVChannels.count == 0)
         {
             self.tvLogoCollectionView.backgroundColor = [UIColor lightGrayColor];
@@ -307,8 +306,6 @@
         TVLogoCell *cell =(TVLogoCell*)[collectionView cellForItemAtIndexPath:indexPath];
         [cell hiddenEditBtnAndDeleteBtn];
         [cell useLongPressGesture];
-        
-        
         int channelValue=(int)[[self.allFavourTVChannels objectAtIndex:indexPath.row] channel_number];
         NSData *data=[[DeviceInfo defaultManager] switchProgram:channelValue deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];

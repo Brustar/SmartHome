@@ -810,7 +810,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Aho-98-0G3">
-                                <rect key="frame" x="10" y="64" width="355" height="458"/>
+                                <rect key="frame" x="10" y="64" width="355" height="508"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="4Pz-do-UQt">
                                     <size key="itemSize" width="133" height="133"/>
@@ -885,14 +885,13 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Edh-ON-Y35">
-                                <rect key="frame" x="0.0" y="521" width="375" height="96"/>
+                                <rect key="frame" x="0.0" y="577" width="375" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rm0-45-nBb">
-                                        <rect key="frame" x="279" y="4" width="88" height="88"/>
+                                        <rect key="frame" x="335" y="0.0" width="40" height="40"/>
                                         <color key="backgroundColor" red="0.86852824080000002" green="0.86852824080000002" blue="0.86852824080000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="88" id="7cx-jn-b6n"/>
-                                            <constraint firstAttribute="height" constant="88" id="SPd-UX-Xk1"/>
+                                            <constraint firstAttribute="width" constant="40" id="aUe-td-PiO"/>
                                         </constraints>
                                         <state key="normal" image="add"/>
                                         <connections>
@@ -903,16 +902,16 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="375" id="Beg-h2-nIc"/>
-                                    <constraint firstAttribute="bottom" secondItem="rm0-45-nBb" secondAttribute="bottom" constant="4" id="C8c-xU-D4H"/>
-                                    <constraint firstAttribute="height" constant="96" id="JMd-xc-g8R"/>
-                                    <constraint firstItem="rm0-45-nBb" firstAttribute="top" secondItem="Edh-ON-Y35" secondAttribute="top" constant="4" id="dPb-2u-MZy"/>
-                                    <constraint firstAttribute="trailing" secondItem="rm0-45-nBb" secondAttribute="trailing" constant="8" id="hgM-Ee-qIS"/>
+                                    <constraint firstAttribute="height" constant="40" id="JMd-xc-g8R"/>
+                                    <constraint firstItem="rm0-45-nBb" firstAttribute="top" secondItem="Edh-ON-Y35" secondAttribute="top" id="RWd-s9-L7e"/>
+                                    <constraint firstAttribute="bottom" secondItem="rm0-45-nBb" secondAttribute="bottom" id="pUr-RL-Bbp"/>
+                                    <constraint firstAttribute="trailing" secondItem="rm0-45-nBb" secondAttribute="trailing" id="vxx-pU-4uT"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="ueV-XT-5wh" firstAttribute="top" secondItem="Aho-98-0G3" secondAttribute="bottom" constant="95" id="6XE-iW-gxd"/>
+                            <constraint firstItem="ueV-XT-5wh" firstAttribute="top" secondItem="Aho-98-0G3" secondAttribute="bottom" constant="45" id="6XE-iW-gxd"/>
                             <constraint firstAttribute="trailing" secondItem="ueV-XT-5wh" secondAttribute="trailing" id="6t8-xe-Rp8"/>
                             <constraint firstItem="Hbp-wY-ZBG" firstAttribute="leading" secondItem="S0x-sS-gOT" secondAttribute="leading" id="BAB-Bn-Oyv"/>
                             <constraint firstAttribute="trailing" secondItem="Aho-98-0G3" secondAttribute="trailing" constant="10" id="ID7-6O-sjJ"/>
@@ -1723,7 +1722,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U4T-Wr-vpj">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="yGe-XQ-WNx" id="BBU-2j-rf7"/>
@@ -3862,8 +3861,8 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="WeN-Qz-0Az"/>
-        <segue reference="qN8-z6-Gb7"/>
+        <segue reference="J5F-aP-6iz"/>
+        <segue reference="vWH-k8-ixo"/>
         <segue reference="aTH-RA-7NZ"/>
     </inferredMetricsTieBreakers>
 </document>
