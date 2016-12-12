@@ -232,7 +232,7 @@
         {
             if(roomDic)
             {
-                NSString *sql = [NSString stringWithFormat:@"insert into Rooms values(%d,'%@',null,null,null,null,null,'%@',%d,null)",[roomDic[@"room_id"] intValue],roomDic[@"room_name"],roomDic[@"room_image_url"],[roomDic[@"ibeacon"] intValue]];
+                NSString *sql = [NSString stringWithFormat:@"insert into Rooms values(%d,'%@',null,null,null,null,null,'%@',%d,null,'%ld')",[roomDic[@"room_id"] intValue],roomDic[@"room_name"],roomDic[@"room_image_url"],[roomDic[@"ibeacon"] intValue],[DeviceInfo defaultManager].masterID];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {
@@ -277,7 +277,7 @@
                     NSString *urlPlist = sceneInfoDic[@"plist_url"];
                     [self downloadPlsit:urlPlist];
                 }
-                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,'%@',%d,null)",sId,sName,rName,urlImage,room_id,sType,sNumber,isFavorite];
+                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,'%@',%d,null,'%ld')",sId,sName,rName,urlImage,room_id,sType,sNumber,isFavorite,[DeviceInfo defaultManager].masterID];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {
@@ -343,7 +343,7 @@
             
             for(NSDictionary *channel in channelList)
             {
-                NSString *sql = [NSString stringWithFormat:@"insert into Channels values(%d,%d,%d,%d,'%@','%@','%@',%d,'%@')",[channel[@"channel_id"] intValue],eqId,0,[channel[@"channel_number"] intValue],channel[@"channel_name"],channel[@"image_url"],parent,1,eqNumber];
+                NSString *sql = [NSString stringWithFormat:@"insert into Channels values(%d,%d,%d,%d,'%@','%@','%@',%d,'%@','%ld')",[channel[@"channel_id"] intValue],eqId,0,[channel[@"channel_number"] intValue],channel[@"channel_name"],channel[@"image_url"],parent,1,eqNumber,[DeviceInfo defaultManager].masterID];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {
@@ -373,6 +373,7 @@
         if ([responseObject[@"result"] intValue]==0) {
             [IOManager writeUserdefault:responseObject[@"token"] forKey:@"AuthorToken"];
             [IOManager writeUserdefault:responseObject[@"username"] forKey:@"UserName"];
+            [IOManager writeUserdefault:responseObject[@"userid"] forKey:@"UserID"];
             NSArray *hostList = responseObject[@"hostlist"];
             
             for(NSDictionary *hostID in hostList)

@@ -75,8 +75,28 @@
         
         application.shortcutItems = @[itemVoice,itemFavor];
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(kickout) name:KICK_OUT object:nil];
 
     return YES;
+}
+
+-(void) kickout
+{
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"重复登录" message:@"你的帐号已在其他地方登录，请确认是否本人登录" preferredStyle:UIAlertControllerStyleAlert];
+    [self.window.rootViewController presentViewController: alertVC animated:YES completion:nil];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"是本人" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        //退出登录
+        
+        [alertVC dismissViewControllerAnimated:YES completion:nil];
+    }];
+    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"不是我" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //改密码
+        
+        [alertVC dismissViewControllerAnimated:YES completion:nil];
+    }];
+    [alertVC addAction:cancelAction];
+    [alertVC addAction:sureAction];
 }
 
 #pragma mark - 推送代理
@@ -226,6 +246,11 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:KICK_OUT object:nil];
 }
 
 @end

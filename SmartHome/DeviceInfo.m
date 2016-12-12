@@ -12,6 +12,7 @@
 #import "MBProgressHUD+NJ.h"
 #import "FMDatabase.h"
 #import "SQLManager.h"
+#import <AdSupport/ASIdentifierManager.h>
 
 @implementation DeviceInfo
 
@@ -30,6 +31,11 @@
 {
     //创建sqlite数据库及结构
     [SQLManager initSQlite];
+}
+
+- (NSString *) imei
+{
+    return [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
 }
 
 //取设备机型
