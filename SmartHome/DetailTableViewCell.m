@@ -19,9 +19,6 @@
      }else {
          self.brightWidthConstraint.constant = 200;
      }
-    
-    
-    
 }
 - (IBAction)brightValueChanged:(id)sender {
     self.valueLabel.text = [NSString stringWithFormat:@"%.0f%%",self.bright.value *100];

@@ -50,7 +50,10 @@
        {
            [_plugDeviceIds addObjectsFromArray:[SQLManager getDeviceByTypeName:DEVICE_TYPE andRoomID:self.roomID]];
        }else{
-           [_plugDeviceIds addObject:self.deviceid];
+           if (self.deviceid) {
+            [_plugDeviceIds addObject:self.deviceid];
+           }
+         
        }
    }
     return _plugDeviceIds;

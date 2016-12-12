@@ -34,14 +34,10 @@
 
 @interface IphoneEditSceneController ()<IphoneTypeViewDelegate,TouchSubViewDelegate>
 
-
-@property (weak, nonatomic) IBOutlet IphoneTypeView *subTypeView;
-
-@property (weak, nonatomic) IBOutlet IphoneTypeView *deviceTypeView;
+@property (weak, nonatomic) IBOutlet IphoneTypeView *subTypeView;//设备大View
+@property (weak, nonatomic) IBOutlet IphoneTypeView *deviceTypeView;//设备子View
 @property (weak, nonatomic) IBOutlet UIView *devicelView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveBarBtn;
-
-
 @property (weak, nonatomic) UIViewController *currentViewController;
 
 //设备大类
@@ -59,7 +55,6 @@
     [super viewDidLoad];
     
     self.title = [SQLManager getSceneName:self.sceneID];
-    
     self.typeArr = [SQLManager getSubTydpeBySceneID:self.sceneID];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.devicesTypes = [SQLManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.typeArr[0]];
@@ -96,12 +91,10 @@
         }else{
             [self.subTypeView addItemWithTitle:@"其他" imageName:@"others"];
         }
-        
-        
     }
     
     [self.subTypeView setSelectButton:0];
-    [self iphoneTypeView:self.subTypeView didSelectButton:0];
+    [self iphoneTypeView:self.subTypeView didSelectButton:self.typeIndex];
     
 }
 -(void)setupDeviceTypeView
@@ -136,7 +129,7 @@
     }
     
     [self.deviceTypeView setSelectButton:0];
-    [self iphoneTypeView:self.deviceTypeView didSelectButton:0];
+    [self iphoneTypeView:self.deviceTypeView didSelectButton:self.typeIndex];
     
 }
 -(void)iphoneTypeView:(IphoneTypeView *)typeView didSelectButton:(int)index
@@ -160,6 +153,7 @@
 
 -(void)goDeviceByRoomID:(int)roomID typeName:(NSString *)typeName
 {
+    
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIStoryboard *iphoneBoard  = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     if([typeName isEqualToString:@"网络电视"])

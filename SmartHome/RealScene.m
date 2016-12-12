@@ -184,17 +184,12 @@
 #pragma mark - TCP recv delegate
 - (void)recv:(NSData *)data withTag:(long)tag
 {
-    
     NSLog(@"TCP收到的data:%@", data);
-    
-    
     Proto proto = protocolFromData(data);
-    
     if (CFSwapInt16BigToHost(proto.masterID) != [[UD objectForKey:@"HostID"] intValue]) {
         return;
     }
-    
-    if (tag==0) {
+     if (tag==0) {
         if (proto.action.state==0x6A) {
             self.tempValue.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
             [UD setObject:@(proto.action.RValue) forKey:@"TempValue"];

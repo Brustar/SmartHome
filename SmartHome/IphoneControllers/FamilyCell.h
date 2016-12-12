@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;//房间Name
 @property (weak, nonatomic) IBOutlet UIImageView *subImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *lightImageVIew;
-@property (weak, nonatomic) IBOutlet UIImageView *curtainImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *curtainImageView;//窗帘
 @property (weak, nonatomic) IBOutlet UIImageView *DVDImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *musicImageVIew;
 @property (weak, nonatomic) IBOutlet UIImageView *airImageVIew;

@@ -52,9 +52,6 @@
     {
         self.deviceid = [SQLManager deviceIDWithRoomID:self.roomID withType:@"FM"];
     }
-    
-    
-    
 }
 
 - (void)viewDidLoad {
@@ -65,9 +62,6 @@
     self.hzLabel.transform = CGAffineTransformMakeRotation(M_PI/2 + M_PI);
     self.eNumber = [SQLManager getENumber:[self.deviceid intValue]];
     [self setRuleForFMChannel];
-    
-    
-    
     self.volumn.continuous = NO;
     [self.volumn addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
@@ -175,7 +169,6 @@
 {
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
     self.cell = cell;
-    
     TVChannel *channel = [self.allFavouriteChannels objectAtIndex: indexPath.row];
     //发送删除频道请求
     NSString *url = [NSString stringWithFormat:@"%@Cloud/store_fm.aspx",[IOManager httpAddr]];
@@ -197,7 +190,7 @@
     
 }
 
--(void) httpHandler:(id) responseObject tag:(int)tag
+-(void)httpHandler:(id) responseObject tag:(int)tag
 {
     if(tag == 2)
     {
@@ -221,8 +214,6 @@
     }
 
 }
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

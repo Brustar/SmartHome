@@ -84,8 +84,6 @@
     for (Room * room in self.rooms) {
         self.roomID = room.rId;
           self.deviceArr = [SQLManager devicesByRoomId:self.roomID];
-      
-        
     }
 //    [self sendRequestForGettingSceneConfig];
 
@@ -145,7 +143,7 @@
 #pragma mark - TCP recv delegate
 - (void)recv:(NSData *)data withTag:(long)tag
 {
-    NSArray * hTypeIdArr = @[@"01",@"02",@"03",@"12",@"13",@"14",@"21",@"22",@"31"];
+//    NSArray * hTypeIdArr = @[@"01",@"02",@"03",@"12",@"13",@"14",@"21",@"22",@"31"];
     Proto proto = protocolFromData(data);
   
     if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
@@ -161,25 +159,35 @@
             self.cell.humidityLabel.text = valueString;
         }if (proto.action.state==0x00) {
             for (Device * device in self.deviceArr) {
-                if ([hTypeIdArr containsObject:[NSString stringWithFormat:@"%ld",device.hTypeId]]) {
+                if (device.hTypeId == 01 || device.hTypeId == 02 || device.hTypeId == 03) {
                       self.cell.lightImageVIew.hidden = YES;
-                      self.cell.airImageVIew.hidden = YES;
-                      self.cell.musicImageVIew.hidden = YES;
-                      self.cell.DVDImageView.hidden = YES;
+                }else if (device.hTypeId == 21 || device.hTypeId == 22){
+                    self.cell.curtainImageView.hidden = YES;
+                }else if (device.hTypeId == 12){
                       self.cell.TVImageView.hidden = YES;
-                      self.cell.curtainImageView.hidden = YES;
+                }else if (device.hTypeId == 13){
+                    self.cell.DVDImageView.hidden = YES;
+                }else if (device.hTypeId == 14){
+                    self.cell.musicImageVIew.hidden = YES;
+                }else if (device.hTypeId == 31){
+                   self.cell.airImageVIew.hidden = YES;
                 }
             }
           
         }if (proto.action.state==0x01) {
             for (Device * device in self.deviceArr) {
-                if ([hTypeIdArr containsObject:[NSString stringWithFormat:@"%ld",device.hTypeId]]) {
+                if (device.hTypeId == 01 || device.hTypeId == 02 || device.hTypeId == 03) {
                     self.cell.lightImageVIew.hidden = NO;
-                    self.cell.airImageVIew.hidden = NO;
-                    self.cell.musicImageVIew.hidden = NO;
-                    self.cell.DVDImageView.hidden = NO;
-                    self.cell.TVImageView.hidden = NO;
+                }else if (device.hTypeId == 21 || device.hTypeId == 22){
                     self.cell.curtainImageView.hidden = NO;
+                }else if (device.hTypeId == 12){
+                    self.cell.TVImageView.hidden = NO;
+                }else if (device.hTypeId == 13){
+                    self.cell.DVDImageView.hidden = NO;
+                }else if (device.hTypeId == 14){
+                    self.cell.musicImageVIew.hidden = NO;
+                }else if (device.hTypeId == 31){
+                    self.cell.airImageVIew.hidden = NO;
                 }
             }
         }

@@ -144,8 +144,6 @@
         if([subTypeName isEqualToString:@"影音"])
         {
             [self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-            
-
             self.subTypeArr = [SQLManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.devicesTypes[i]];
             
             for(int i = 0; i < self.subTypeArr.count; i++)
@@ -160,7 +158,6 @@
         }
     }
 }
-
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -188,7 +185,6 @@
         {
             [cell.button setBackgroundImage:[UIImage imageNamed:@"environment"] forState:UIControlStateNormal];
         }else if([subType isEqualToString:@"影音"])
-            
         {
             [cell.button setBackgroundImage:[UIImage imageNamed:@"medio"] forState:UIControlStateNormal];
         }else if ([subType isEqualToString:@"安防"]){
@@ -597,7 +593,6 @@
                                        @"scenceid":@(self.sceneID),
                                        @"optype":@(1)
                                        };
-            
                 HttpManager *http = [HttpManager defaultManager];
                 http.delegate = self;
                 http.tag = 2;

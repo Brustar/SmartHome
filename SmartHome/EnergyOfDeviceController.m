@@ -114,9 +114,6 @@
        cell.deviceName.text = self.deviceNames[indexPath.row];
        cell.energyOfDevice.text = [NSString stringWithFormat:@"%@KWH", self.deviceEnergys[indexPath.row]];
     }
-   
-   
-    
     
     return cell;
 

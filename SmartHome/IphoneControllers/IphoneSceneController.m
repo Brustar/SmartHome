@@ -11,7 +11,6 @@
 #define  minSpace 20
 
 #import "IphoneSceneController.h"
-
 #import "Room.h"
 #import "SceneCell.h"
 #import "SQLManager.h"
@@ -288,12 +287,8 @@
             
             [self.navigationController popViewControllerAnimated:YES];
         }
-        
     }
-    
 }
-
-
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return CGSizeMake(cellWidth, 133);

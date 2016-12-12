@@ -49,9 +49,6 @@
     self.view.backgroundColor = self.tableView.backgroundColor;
     
 }
-
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -73,16 +70,11 @@
         {
             return 1;
         }else {
-            
-            
             return self.detailArray.count -1;
         }
     }
 
 }
-    
-    
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"Cell";
@@ -91,22 +83,15 @@
     if (cell == nil)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-        
     }
     if(indexPath.section == 0)
     {
         cell.textLabel.text= self.titleArr[0];
-        
         cell.detailTextLabel.text = self.detailArray[0];
         
-       
     }else{
         cell.textLabel.text= self.titleArr[indexPath.row +1];
-        
         cell.detailTextLabel.text = self.detailArray[indexPath.row +1];
-       
-        
-        
         if(indexPath.row == 7)
         {
             cell.detailTextLabel.textColor = [UIColor blueColor];
