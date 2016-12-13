@@ -28,7 +28,7 @@
     NSMutableArray *deviceModels = [NSMutableArray array];
     if([db open])
     {
-        FMResultSet *resultSet = [db executeQuery:@"select * from Devices and masterID = %ld",[[DeviceInfo defaultManager] masterID]];
+        FMResultSet *resultSet = [db executeQuery:@"select * from Devices"];
         
         while ([resultSet next]){
             [deviceModels addObject:[self deviceMdoelByFMResultSet:resultSet]];
@@ -872,7 +872,7 @@
 }
 
 
-+(NSArray *)getDeviceTypeName:(int)rID subTypeName:(NSString *)subTypeName masterID:(NSInteger)mID
++(NSArray *)getDeviceTypeName:(int)rID subTypeName:(NSString *)subTypeName
 {
     NSMutableArray *typeNames = [NSMutableArray array];
     
@@ -1092,10 +1092,10 @@
     FMDatabase *db = [self connetdb];
     if ([db open]) {
         
-        NSString *sqlRoom=[NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS Rooms(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"PM25\" INTEGER, \"NOISE\" INTEGER, \"TEMPTURE\" INTEGER, \"CO2\" INTEGER, \"moisture\" INTEGER, \"imgUrl\" TEXT,\"ibeacon\" INTEGER,\"totalVisited\" INTEGER,\"masterID\" TEXT) and masterID = %ld",[[DeviceInfo defaultManager] masterID]];
-        NSString *sqlChannel=[NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS Channels (\"id\" INTEGER PRIMARY KEY  NOT NULL  UNIQUE ,\"eqId\" INTEGER,\"channelValue\" INTEGER,\"cNumber\" INTEGER, \"Channel_name\" TEXT,\"Channel_pic\" TEXT, \"parent\" CHAR(2) NOT NULL  DEFAULT TV, \"isFavorite\" BOOL DEFAULT 0, \"eqNumber\" TEXT,\"masterID\" TEXT) and masterID = %ld",[[DeviceInfo defaultManager] masterID]];
-        NSString *sqlDevice=[NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS Devices(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"sn\" TEXT, \"birth\" DATETIME, \"guarantee\" DATETIME, \"model\" TEXT, \"price\" FLOAT, \"purchase\" DATETIME, \"producer\" TEXT, \"gua_tel\" TEXT, \"power\" INTEGER, \"current\" FLOAT, \"voltage\" INTEGER, \"protocol\" TEXT, \"rID\" INTEGER, \"eNumber\" TEXT, \"hTypeId\" TEXT, \"subTypeId\" INTEGER, \"typeName\" TEXT, \"subTypeName\" TEXT, \"masterID\" TEXT, \"icon_url\" TEXT, \"camera_url\" TEXT) and masterID = %ld",[[DeviceInfo defaultManager] masterID]];
-        NSString *sqlScene=[NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS \"Scenes\" (\"ID\" INT PRIMARY KEY  NOT NULL ,\"NAME\" TEXT NOT NULL ,\"roomName\" TEXT,\"pic\" TEXT DEFAULT (null) ,\"rId\" INTEGER,\"sType\" INTEGER, \"snumber\" TEXT,\"isFavorite\" BOOL,\"totalVisited\" INTEGER,\"masterID\" TEXT) and masterID = %ld",[[DeviceInfo defaultManager] masterID]];
+        NSString *sqlRoom=@"CREATE TABLE IF NOT EXISTS Rooms(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"PM25\" INTEGER, \"NOISE\" INTEGER, \"TEMPTURE\" INTEGER, \"CO2\" INTEGER, \"moisture\" INTEGER, \"imgUrl\" TEXT,\"ibeacon\" INTEGER,\"totalVisited\" INTEGER,\"masterID\" TEXT)";
+        NSString *sqlChannel=@"CREATE TABLE IF NOT EXISTS Channels (\"id\" INTEGER PRIMARY KEY  NOT NULL  UNIQUE ,\"eqId\" INTEGER,\"channelValue\" INTEGER,\"cNumber\" INTEGER, \"Channel_name\" TEXT,\"Channel_pic\" TEXT, \"parent\" CHAR(2) NOT NULL  DEFAULT TV, \"isFavorite\" BOOL DEFAULT 0, \"eqNumber\" TEXT,\"masterID\" TEXT)";
+        NSString *sqlDevice=@"CREATE TABLE IF NOT EXISTS Devices(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"sn\" TEXT, \"birth\" DATETIME, \"guarantee\" DATETIME, \"model\" TEXT, \"price\" FLOAT, \"purchase\" DATETIME, \"producer\" TEXT, \"gua_tel\" TEXT, \"power\" INTEGER, \"current\" FLOAT, \"voltage\" INTEGER, \"protocol\" TEXT, \"rID\" INTEGER, \"eNumber\" TEXT, \"hTypeId\" TEXT, \"subTypeId\" INTEGER, \"typeName\" TEXT, \"subTypeName\" TEXT, \"masterID\" TEXT, \"icon_url\" TEXT, \"camera_url\" TEXT)";
+        NSString *sqlScene=@"CREATE TABLE IF NOT EXISTS \"Scenes\" (\"ID\" INT PRIMARY KEY  NOT NULL ,\"NAME\" TEXT NOT NULL ,\"roomName\" TEXT,\"pic\" TEXT DEFAULT (null) ,\"rId\" INTEGER,\"sType\" INTEGER, \"snumber\" TEXT,\"isFavorite\" BOOL,\"totalVisited\" INTEGER,\"masterID\" TEXT)";
         
         NSArray *sqls=@[sqlRoom,sqlChannel,sqlDevice,sqlScene];
         //4.创表
@@ -1236,7 +1236,7 @@
     NSMutableArray *sceneModles = [NSMutableArray array];
     if([db open])
     {
-        FMResultSet *resultSet = [db executeQuery:[NSString stringWithFormat:@"select * from Scenes masterID = %ld",[[DeviceInfo defaultManager] masterID]]];
+        FMResultSet *resultSet = [db executeQuery:[NSString stringWithFormat:@"select * from Scenes"]];
         while([resultSet next])
         {
             Scene *scene = [Scene new];
@@ -1352,7 +1352,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        FMResultSet *resultSet = [db executeQueryWithFormat:@"select * from Scenes where rId = %d masterID = %ld",roomId,[[DeviceInfo defaultManager] masterID]];
+        FMResultSet *resultSet = [db executeQueryWithFormat:@"select * from Scenes where rId = %d",roomId];
         while ([resultSet next]) {
             Scene *scene = [Scene new];
             scene.sceneName = [resultSet stringForColumn:@"NAME"];
@@ -1396,7 +1396,7 @@
     
     if([db open])
     {
-        FMResultSet *resultSet = [db executeQuery:[NSString stringWithFormat:@"select * from Scenes where isFavorite = 1 and masterid = %ld",[[DeviceInfo defaultManager] masterID]]];
+        FMResultSet *resultSet = [db executeQuery:[NSString stringWithFormat:@"select * from Scenes where isFavorite = 1"]];
         while ([resultSet next]) {
             Scene *scene = [Scene new];
             scene.sceneName = [resultSet stringForColumn:@"NAME"];
@@ -1417,7 +1417,7 @@
     if([db open])
     {
         if (name) {
-            NSString * roomSql = [NSString stringWithFormat:@"select * from Rooms where NAME like '%%%@%%'masterID = %ld",name,[[DeviceInfo defaultManager] masterID]];
+            NSString * roomSql =@"select * from Rooms where NAME like '%%%@%%'";
             //房间
             FMResultSet * roomResultSet = [db executeQuery:roomSql];
             while ([roomResultSet next]) {
@@ -1439,7 +1439,7 @@
     NSMutableArray *roomList = [NSMutableArray array];
     if([db open])
     {
-        NSString *sql =[NSString stringWithFormat:@"select * from Rooms masterID = %ld",[[DeviceInfo defaultManager] masterID]];
+        NSString *sql =@"select * from Rooms";
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next]) {
             Room *room = [Room new];
@@ -1529,7 +1529,7 @@
         return mutabelArr;
     }
     
-    FMResultSet *resultSet = [db executeQueryWithFormat:@"select * from Channels where isFavorite = 1 and eqId = %d and parent = %@ masterID = %ld",deviceID,type,[[DeviceInfo defaultManager] masterID]];
+    FMResultSet *resultSet = [db executeQueryWithFormat:@"select * from Channels where isFavorite = 1 and eqId = %d and parent = %@",deviceID,type];
     while([resultSet next])
     {
         TVChannel *channel = [TVChannel new];
