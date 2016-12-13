@@ -155,6 +155,12 @@
 - (void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
 {
     NSLog(@"received %ld data:%@",tag,data);
+    Proto proto=protocolFromData(data);
+    if (proto.cmd == 0x8B) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:KICK_OUT object:nil];
+        return;
+    }
+    
     if (tag==1000) {
         [self handleTCP:data];
     }else{

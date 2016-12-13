@@ -50,13 +50,14 @@ enum{
 
 #define SMART_DB @"smartDB"
 
+#define KICK_OUT @"kicking"
+
 @interface DeviceInfo : NSObject
 //是否编辑场景时
 @property (nonatomic) bool editingScene;
 //ios设备的音量
 @property (nonatomic) float volume;
-//设备是否能连互联网
-//@property (nonatomic) int reachbility;
+
 //设备的apple型号
 @property (nonatomic) int genaration;
 //apn推送token
@@ -77,9 +78,9 @@ enum{
 @property (nonatomic, assign) BOOL isPhotoLibrary;
 
 + (instancetype) defaultManager;
+- (NSString *) imei;
 - (void) deviceGenaration;
 - (void) initConfig;
-//- (void) netReachbility;
 
 #pragma mark - public
 -(NSData *) author;
