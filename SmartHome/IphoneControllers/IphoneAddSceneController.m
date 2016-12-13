@@ -189,10 +189,8 @@
 - (IBAction)SureBtn:(id)sender {
     
         NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
-    
         NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
         NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
-    
         Scene *scene = [[Scene alloc]initWhithoutSchedule];
         [scene setValuesForKeysWithDictionary:plistDic];
         [[DeviceInfo defaultManager] setEditingScene:NO];

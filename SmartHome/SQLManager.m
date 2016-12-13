@@ -45,7 +45,7 @@
     NSString *eName;
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT NAME FROM Devices where ID = %d and masterID = %ld",eId,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT NAME FROM Devices where ID = %d and masterID = '%ld'",eId,[[DeviceInfo defaultManager] masterID]];
        
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
@@ -64,7 +64,7 @@
     NSInteger eId = 0;
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where NAME = '%@' and masterID %ld",deviceName,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where NAME = '%@' and masterID = '%ld'",deviceName,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
@@ -82,7 +82,7 @@
     NSString *url;
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT camera_url FROM Devices where ID = %d and masterID = %ld",deviceID,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT camera_url FROM Devices where ID = %d and masterID = '%ld'",deviceID,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
@@ -101,7 +101,7 @@
     NSString *typeName;
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT typeName FROM Devices where ID = %d and masterID = %ld",eId,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT typeName FROM Devices where ID = %d and masterID = '%ld'",eId,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
@@ -123,7 +123,7 @@
     NSString *typeName;
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT typeName FROM Devices where ID = %d and masterID = %ld",eId,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT typeName FROM Devices where ID = %d and masterID = '%ld'",eId,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
@@ -142,7 +142,7 @@
     NSString *typeName = nil;
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT NAME FROM Devices where ID = %d and masterID = %ld",eId,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT NAME FROM Devices where ID = %d and masterID = '%ld'",eId,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
@@ -201,7 +201,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld and masterID = %ld",roomID,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld and masterID = '%ld'",roomID,[[DeviceInfo defaultManager] masterID]];
        
         
         FMResultSet *resultSet = [db executeQuery:sql];
@@ -240,7 +240,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT distinct subTypeName FROM Devices where rID = %d and masterID = %ld",rID,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT distinct subTypeName FROM Devices where rID = %d and masterID = '%ld'",rID,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
@@ -261,7 +261,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %d and masterID = %ld",roomID,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %d and masterID = '%ld'",roomID,[[DeviceInfo defaultManager] masterID]];
       
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
@@ -287,7 +287,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld and typeName in (\"开关\",\"调色\",\"调光\") and masterID = %ld",roomID,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld and typeName in (\"开关\",\"调色\",\"调光\") and masterID = '%ld'",roomID,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
@@ -311,7 +311,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and typeName = \"%@\" and masterID = %ld",roomID, typeName,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and typeName = \"%@\" and masterID = '%ld'",roomID, typeName,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
@@ -335,7 +335,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and typeName = \"%@\" and masterID = %ld",roomID, typeName,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and typeName = \"%@\" and masterID = '%ld'",roomID, typeName,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
@@ -359,7 +359,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and typeName = \'%@\' and masterID = %ld",roomID,type,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and typeName = \'%@\' and masterID = '%ld'",roomID,type,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
@@ -379,7 +379,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and typeName = \'%@\' and masterID = %ld",roomID,typeName,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and typeName = \'%@\' and masterID = '%ld'",roomID,typeName,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
@@ -398,7 +398,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT htypeID FROM Devices where ID = %ld and masterID = %ld",eID,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT htypeID FROM Devices where ID = %ld and masterID = '%ld'",eID,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
@@ -416,7 +416,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT enumber FROM Devices where ID = %ld and masterID = %ld",eID,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT enumber FROM Devices where ID = %ld and masterID = '%ld'",eID,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
@@ -434,7 +434,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where upper(enumber) = upper('%04lx') and masterID=%ld",(long)eID,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where upper(enumber) = upper('%04lx') and masterID='%ld'",(long)eID,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
@@ -448,7 +448,7 @@
 
 +(int)getSceneID:(NSString *)name
 {
-    NSString *sql=[NSString stringWithFormat:@"select id from Scenes where name='%@' and masterID = %ld" ,name,[[DeviceInfo defaultManager] masterID]];
+    NSString *sql=[NSString stringWithFormat:@"select id from Scenes where name='%@' and masterID = '%ld'" ,name,[[DeviceInfo defaultManager] masterID]];
     int sceneid=0;
     FMDatabase *db = [self connetdb];
     if([db open])
@@ -467,7 +467,7 @@
 
 +(int) getReadOnly:(int)sceneid
 {
-    NSString *sql=[NSString stringWithFormat:@"select stype from Scenes where id=%d and masterID = %ld" ,sceneid,[[DeviceInfo defaultManager] masterID]];
+    NSString *sql=[NSString stringWithFormat:@"select stype from Scenes where id=%d and masterID = '%ld'" ,sceneid,[[DeviceInfo defaultManager] masterID]];
     
     int readonly=0;
     FMDatabase *db = [self connetdb];
@@ -487,7 +487,7 @@
 
 +(NSString *) getSnumber:(int)sceneid
 {
-    NSString *sql=[NSString stringWithFormat:@"select snumber from Scenes where id=%d and masterID = %ld" ,sceneid,[[DeviceInfo defaultManager] masterID]];
+    NSString *sql=[NSString stringWithFormat:@"select snumber from Scenes where id=%d and masterID = '%ld'" ,sceneid,[[DeviceInfo defaultManager] masterID]];
     
     NSString *snumber=nil;
     FMDatabase *db = [self connetdb];
@@ -507,7 +507,7 @@
 
 +(int) getRoomID:(int)sceneID
 {
-    NSString *sql=[NSString stringWithFormat:@"select rId from Scenes where ID=%d masterID = %ld",sceneID,[[DeviceInfo defaultManager] masterID]];
+    NSString *sql=[NSString stringWithFormat:@"select rId from Scenes where ID=%d and masterID = '%ld'",sceneID,[[DeviceInfo defaultManager] masterID]];
     
     int roomId=0;
     FMDatabase *db = [self connetdb];
@@ -527,7 +527,7 @@
 }
 +(NSString*)getSceneName:(int)sceneID
 {
-    NSString *sql=[NSString stringWithFormat:@"select NAME from Scenes where ID=%d masterID = %ld",sceneID,[[DeviceInfo defaultManager] masterID]];
+    NSString *sql=[NSString stringWithFormat:@"select NAME from Scenes where ID=%d and masterID = '%ld'",sceneID,[[DeviceInfo defaultManager] masterID]];
     
     NSString *sceneName;
     FMDatabase *db = [self connetdb];
@@ -559,7 +559,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"select max(id) as id from scenes masterID = %ld",[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"select max(id) as id from scenes where masterID = '%ld'",[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
@@ -618,7 +618,7 @@
     
     if([db open])
     {
-        NSString *sql =[NSString stringWithFormat: @"SELECT ID FROM Devices and masterID = %ld",[[DeviceInfo defaultManager] masterID]];
+        NSString *sql =[NSString stringWithFormat: @"SELECT ID FROM Devices where masterID = '%ld'",[[DeviceInfo defaultManager] masterID]];
         
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
@@ -668,7 +668,7 @@
     
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT eId FROM Scenes masterID = %ld",[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT eId FROM Scenes where masterID = '%ld'",[[DeviceInfo defaultManager] masterID]];
         
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
@@ -695,7 +695,7 @@
     
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT subTypeName FROM Devices where ID = %d masterID = %ld",ID,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT subTypeName FROM Devices where ID = %d and masterID = '%ld'",ID,[[DeviceInfo defaultManager] masterID]];
         
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
@@ -716,7 +716,7 @@
     
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT eId FROM Scenes where rId = %d and ID = %d masterID = %ld",roomID, sceneID,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT eId FROM Scenes where rId = %d and ID = %d masterID = '%ld'",roomID, sceneID,[[DeviceInfo defaultManager] masterID]];
         
         FMResultSet *resultSet = [db executeQuery:sql];
         NSString *deviceIDStr;
@@ -744,7 +744,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT id FROM devices where rid=%d and typename ='%@' masterID = %ld",roomID,DIMMER,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT id FROM devices where rid=%d and typename ='%@' and masterID = '%ld'",roomID,DIMMER,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
@@ -762,7 +762,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT id FROM devices where rid=%d and typename ='%@' masterID = %ld",roomID,CURTAINS,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT id FROM devices where rid=%d and typename ='%@' and masterID = '%ld'",roomID,CURTAINS,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
@@ -780,7 +780,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT * FROM Devices where ID = %d masterID = %ld",deviceID,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT * FROM Devices where ID = %d and masterID = '%ld'",deviceID,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
@@ -941,7 +941,7 @@
     
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT typeName FROM Devices where ID = %@ and subTypeName = '%@' masterID = %ld",ID, subTypeName,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT typeName FROM Devices where ID = %@ and subTypeName = '%@' and masterID = '%ld'",ID, subTypeName,[[DeviceInfo defaultManager] masterID]];
         
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
@@ -962,7 +962,7 @@
     
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where subTypeName = '%@' masterID = %ld", subName,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where subTypeName = '%@' and masterID = '%ld'", subName,[[DeviceInfo defaultManager] masterID]];
         
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
@@ -984,7 +984,7 @@
 +(NSArray *)getDeviceIDsBySeneId:(int)SceneId ;
 {
     
-    NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist%ld",SCENE_FILE_NAME,SceneId,[[DeviceInfo defaultManager] masterID]];
+    NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,SceneId];
    
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
     NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfFile:scenePath];
@@ -1120,20 +1120,20 @@
     FMDatabase *db = [self connetdb];
     if ([db open]) {
         int count=0;
-        NSString *sql = [NSString stringWithFormat:@"SELECT count(*) as count FROM Rooms and masterID = %ld",[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT count(*) as count FROM Rooms where masterID = '%ld'",[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
             count += [resultSet intForColumn:@"count"];
         }
-        sql =[NSString stringWithFormat: @"SELECT count(*) as count FROM devices and masterID = %ld",[[DeviceInfo defaultManager] masterID]];
+        sql =[NSString stringWithFormat: @"SELECT count(*) as count FROM devices where masterID = '%ld'",[[DeviceInfo defaultManager] masterID]];
         resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
             count += [resultSet intForColumn:@"count"];
         }
 
-        sql = [NSString stringWithFormat:@"SELECT count(*) as count FROM scenes and masterID = %ld",[[DeviceInfo defaultManager] masterID]];
+        sql = [NSString stringWithFormat:@"SELECT count(*) as count FROM scenes where masterID = '%ld'",[[DeviceInfo defaultManager] masterID]];
         resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
@@ -1279,7 +1279,7 @@
     
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"select * from Scenes where rId=%d masterID = %ld", roomID,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"select * from Scenes where rId=%d and masterID = '%ld'", roomID,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         while([resultSet next])
         {
@@ -1319,7 +1319,7 @@
     Scene *scene = [Scene new];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"select * from Scenes where ID = %d masterID = %ld",sId,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"select * from Scenes where ID = %d and masterID = '%ld'",sId,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         
         while([resultSet next])
@@ -1338,7 +1338,7 @@
     BOOL isSuccess = false;
     if([db open])
     {
-        isSuccess = [db executeUpdateWithFormat:@"delete from Scenes where ID = %d masterID = %ld",sceneId,[[DeviceInfo defaultManager] masterID]];
+        isSuccess = [db executeUpdateWithFormat:@"delete from Scenes where ID = %d",sceneId];
     }
     [db close];
     return isSuccess;
@@ -1376,7 +1376,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"select ID from Scenes masterID = %ld",[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"select ID from Scenes where masterID = '%ld'",[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next]) {
             int scendID = [resultSet intForColumn:@"ID"];
@@ -1467,7 +1467,7 @@
     int rID = 0;
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Rooms where ibeacon = %d masterID = %ld",beacon,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Rooms where ibeacon = %d and masterID = '%ld'",beacon,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
@@ -1483,7 +1483,7 @@
     NSString *rName ;
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT NAME FROM Rooms where ID = %d masterID = %ld",rId,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT NAME FROM Rooms where ID = %d and masterID = '%ld'",rId,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
@@ -1504,7 +1504,7 @@
     BOOL ret = false;
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT totalVisited FROM Rooms where ID = %d masterID = %ld",roomID,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT totalVisited FROM Rooms where ID = %d and masterID = '%ld'",roomID,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
@@ -1556,7 +1556,7 @@
     BOOL isSuccess = false;
     if([db open])
     {
-        isSuccess = [db executeUpdateWithFormat:@"delete from Channels where id = %ld masterID = %ld",(long)channel_id,[[DeviceInfo defaultManager] masterID]];
+        isSuccess = [db executeUpdateWithFormat:@"delete from Channels where id = %ld and masterID = '%ld'",(long)channel_id,[[DeviceInfo defaultManager] masterID]];
     }
     [db close];
     return isSuccess;
@@ -1570,7 +1570,7 @@
         return nil;
     }
     NSMutableArray *array = [NSMutableArray array];
-    NSString *sql = [NSString stringWithFormat:@"select * from Devices where ID=%ld masterID = %ld",(long)ID,[[DeviceInfo defaultManager] masterID]];
+    NSString *sql = [NSString stringWithFormat:@"select * from Devices where ID=%ld and masterID = '%ld'",(long)ID,[[DeviceInfo defaultManager] masterID]];
     FMResultSet *resultSet = [db executeQuery:sql];
     
     if([resultSet next])
