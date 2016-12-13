@@ -213,7 +213,7 @@
     
     self.schedule = schedule;
     
-    self.clickFixTimeBtn.hidden = YES;
+    self.clickFixTimeBtn.hidden = NO;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -317,26 +317,34 @@
     NSString *noon = self.noon[[self.pickerTime selectedRowInComponent:2]];
     NSString *time = [NSString stringWithFormat:@"%@:%@ %@", hour, min, noon];
     
+    BOOL compareResult = NO;//开始时间和结束时间的比较结果
     
-    if (self.startTimeBtn.selected) {
+    if (self.startTimeBtn.selected) { //设置开始时间
         [self.startTimeBtn setTitle:time forState:UIControlStateNormal];
-    } else {
-        if ([time laterTime:self.startTimeBtn.titleLabel.text]) {
+        self.isSceneSetTime = YES;
+    } else { //设置结束时间
+        compareResult = [[time substringToIndex:(time.length-3)] laterTime:[self.startTimeBtn.titleLabel.text substringToIndex:(self.startTimeBtn.titleLabel.text.length-3)]];
+        
+        if (compareResult) { //YES: 结束时间大于开始时间 NO：结束时间小于等于开始时间
             [self.endTimeBtn setTitle:time forState:UIControlStateNormal];
+            self.isSceneSetTime = YES;
+        }else {
+            [MBProgressHUD showError:@"结束时间要大于开始时间"];
+            return;
         }
     }
     
    
     
     if (self.startTimeBtn.selected) {
-        self.schedule.startTime=time;
-    } else {
-        if ([time laterTime:self.startTimeBtn.titleLabel.text]) {
+        self.schedule.startTime = time;
+    }else {
+        if (compareResult) {
             self.schedule.endTime = time;
         }
     }
-    NSMutableArray *sches=[self.scene.schedules mutableCopy];
-    if ([sches count]==0) {
+    NSMutableArray *sches = [self.scene.schedules mutableCopy];
+    if ([sches count] == 0) {
         [sches addObject:self.schedule];
     }else{
         sches[0]=self.schedule;
@@ -350,12 +358,11 @@
 
 - (IBAction)settingRepeatTime:(UIButton *)sender {
    
-    
-//    if ([self.delegate respondsToSelector:@selector(showDataPicker)]) {
-//        
-//        self.pickTimeView.hidden = YES;
-//        [self.delegate showDataPicker];
-//    }
+    if (!self.isSceneSetTime) {
+        [MBProgressHUD showError:@"请先设置时间"];
+        return;
+    }
+   
     self.fixTimeVC.modalPresentationStyle = UIModalPresentationPopover;
     self.fixTimeVC.popoverPresentationController.sourceView = sender;
     self.fixTimeVC.popoverPresentationController.sourceRect = sender.bounds;
@@ -439,22 +446,23 @@
     
     [self.repeatBtn setTitle:display forState:UIControlStateNormal];
  
-    if (self.isSceneSetTime) {
-        //BOOL isRepeat = false;
+    if (self.isSceneSetTime) { //设置了开始时间和结束时间才能设置重复选项
+        
         NSMutableArray *weekValue = [NSMutableArray array];
         for (int i = 0; i < 7; i++) {
             if (week[i]) {
                 NSNumber *temp = [NSNumber numberWithInt:i];
                 [weekValue addObject:temp];
-                //isRepeat = true;
+                
             }
         }
        
         self.schedule.weekDays = weekValue;
+        
+        [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
+    }else {
+        [MBProgressHUD showError:@"请先设置时间"];
     }
-     [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
-
-    
 }
 - (void)dealloc
 {
@@ -499,14 +507,15 @@
         self.ShowSettingDataView.hidden = NO;
         //_ShowSettingDataView.backgroundColor = [UIColor greenColor];
         //        self.dataPicker.hidden = NO;
-        NSString  *astronomicealTime;
+        
+        NSString  *astronomicealTime = @"1";
         NSDictionary *dic;
         int isPlane;
         int playType;
         if([self.startTimeBtn.titleLabel.text isEqualToString:@"设置"])
         {
             isPlane = 2;
-        }else{
+        }else {
             if([self.startTimeBtn.titleLabel.text isEqualToString:@"黎明"]){
                 astronomicealTime = @"1";
             }else if([self.startTimeBtn.titleLabel.text isEqualToString:@"日出"]){
@@ -678,53 +687,96 @@
     
     self.starDataBtn.selected =! self.starDataBtn.selected;
     self.dataPicker.hidden = !self.starDataBtn.selected;
-    if (!self.starDataBtn.selected) {
-        NSDate *myDate = self.dataPicker.date;
+    if (!self.starDataBtn.selected) { //设置开始日期并关闭日期选择器
+        NSDate *myDate = self.dataPicker.date;//选择的日期
+        NSDate *currentDate = [NSDate date];//当前日期
         
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-        [dateFormat setDateFormat:@"YYYY-MM-dd"];
+        [dateFormat setDateFormat:@"yyyy-MM-dd"];
+        
         NSString *prettyDate = [dateFormat stringFromDate:myDate];
-        [self.starDataBtn setTitle:prettyDate forState:UIControlStateNormal];
-        self.schedule.startDate=prettyDate;
-        self.clickFixTimeBtn.tintColor=[UIColor redColor];
+        NSString *currentDateStr = [dateFormat stringFromDate:currentDate];
+        
+        BOOL compareResult = [prettyDate laterDate:currentDateStr];
+        if(compareResult) { //YES:选择的时间大于等于当前时间
+            
+            //和结束日期比较
+            if (![self.endDataBtn.titleLabel.text isEqualToString:@"设置"]) {
+                BOOL result = [self.endDataBtn.titleLabel.text laterDate:prettyDate];
+                if (result) {
+                    [self.starDataBtn setTitle:prettyDate forState:UIControlStateNormal];
+                    self.schedule.startDate = prettyDate;
+                    self.clickFixTimeBtn.tintColor = [UIColor redColor];
+                }else {
+                    [MBProgressHUD showError:@"开始日期不能大于结束日期"];
+                    return;
+                }
+            }else {
+                [self.starDataBtn setTitle:prettyDate forState:UIControlStateNormal];
+                self.schedule.startDate = prettyDate;
+                self.clickFixTimeBtn.tintColor = [UIColor redColor];
+            }
+            
+        }else { //NO:选择的时间小于当前时间
+            [MBProgressHUD showError:@"开始日期不能小于今天"];
+            return;
+        }
+        
+        
+        //修改场景的plist文件，把定时信息写进去(开始日期)
+        NSMutableArray *sches = [self.scene.schedules mutableCopy];
+        if ([sches count] == 0) {
+            [sches addObject:self.schedule];
+        }else{
+            sches[0]=self.schedule;
+        }
+        self.scene.schedules = sches;
+        [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
     }
     
-    NSMutableArray *sches=[self.scene.schedules mutableCopy];
-    if ([sches count]==0) {
-        [sches addObject:self.schedule];
-    }else{
-        sches[0]=self.schedule;
-    }
-    self.scene.schedules = sches;
-    [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
 }
+
 //结束日期的时间设置
 - (IBAction)endDataBtn:(id)sender {
     self.pickTimeView.hidden = YES;
     
     self.endDataBtn.selected =! self.endDataBtn.selected;
     self.dataPicker.hidden = !self.endDataBtn.selected;
-    if (!self.endDataBtn.selected) {
+    
+    if (!self.endDataBtn.selected) { //设置结束日期并关闭日期选择器
         NSDate *myDate = self.dataPicker.date;
         
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-        [dateFormat setDateFormat:@"YYYY-MM-dd"];
+        [dateFormat setDateFormat:@"yyyy-MM-dd"];
         NSString *prettyDate = [dateFormat stringFromDate:myDate];
-        if ([prettyDate laterTime:self.starDataBtn.titleLabel.text]) {
+        
+        if ([self.starDataBtn.titleLabel.text isEqualToString:@"设置"]) {
+            [MBProgressHUD showError:@"先设置开始日期"];
+            return;
+        }else {
+            BOOL compareResult = [prettyDate laterDate:self.starDataBtn.titleLabel.text];
+        if (compareResult) {
             [self.endDataBtn setTitle:prettyDate forState:UIControlStateNormal];
-            self.schedule.endDate=prettyDate;
+            self.schedule.endDate = prettyDate;
+            self.clickFixTimeBtn.tintColor = [UIColor redColor];
+        }else {
+            [MBProgressHUD showError:@"结束日期不能小于开始日期"];
+            return;
         }
-        self.clickFixTimeBtn.tintColor=[UIColor redColor];
+        
+      }
+        
+      //修改场景的plist文件，把定时信息写进去（结束日期）
+        NSMutableArray *sches=[self.scene.schedules mutableCopy];
+        if ([sches count]==0) {
+            [sches addObject:self.schedule];
+        }else{
+            sches[0]=self.schedule;
+        }
+        
+        self.scene.schedules = sches;
+        
+        [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
     }
-    NSMutableArray *sches=[self.scene.schedules mutableCopy];
-    if ([sches count]==0) {
-        [sches addObject:self.schedule];
-    }else{
-        sches[0]=self.schedule;
-    }
-    
-    self.scene.schedules = sches;
-    
-    [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
 }
 @end

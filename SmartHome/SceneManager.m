@@ -162,12 +162,13 @@
             
         }];
         
+        return;
+        
     }else {
-       
-    }
+      //编辑设备时，修改本地plist文件
+      [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, scene.sceneID] scene:scene];
+  }
     
-  //编辑设备时，修改本地plist文件
-  [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, scene.sceneID] scene:scene];
 }
 
 //另存为(保存为一个新的场景）
