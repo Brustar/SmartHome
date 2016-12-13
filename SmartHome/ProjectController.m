@@ -62,7 +62,6 @@
             int projectID = [self.projectIds[i] intValue];
             [_projectNames addObject:[SQLManager deviceNameByDeviceID:projectID]];
         }
-        
     }
     return _projectNames;
 }

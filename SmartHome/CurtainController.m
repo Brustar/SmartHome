@@ -192,7 +192,7 @@
     }
     
     if (tag==0 && (proto.action.state == 0x2A || proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON)) {
-        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID) masterID:[[DeviceInfo defaultManager] masterID]];
+        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
         if ([devID intValue]==[self.deviceid intValue]) {
             self.cell.slider.value=proto.action.RValue/100.0;
             if (proto.action.state == PROTOCOL_ON) {

@@ -23,6 +23,7 @@
 #import "SceneManager.h"
 #import "IphoneLightController.h"
 #import "IPhoneRoom.h"
+#import "DeviceInfo.h"
 
 
 
@@ -83,7 +84,7 @@
     self.rooms = [SQLManager getAllRoomsInfo];
     for (Room * room in self.rooms) {
         self.roomID = room.rId;
-          self.deviceArr = [SQLManager devicesByRoomId:self.roomID];
+        self.deviceArr = [SQLManager deviceSubTypeByRoomId:self.roomID];
     }
 //    [self sendRequestForGettingSceneConfig];
 
