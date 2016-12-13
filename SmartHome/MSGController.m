@@ -15,11 +15,21 @@
 @interface MSGController ()<HttpDelegate>
 @property (nonatomic,strong) NSMutableArray * itemIdArrs;
 @property (nonatomic,strong) NSMutableArray * itemNameArrs;
+@property (nonatomic,strong) NSMutableArray * unreadcountArr;
 @property (weak, nonatomic) IBOutlet UIView *footView;
+@property (nonatomic,assign) NSInteger unreadcount;
 
 @end
 
 @implementation MSGController
+-(NSMutableArray *)unreadcountArr
+{
+    if (!_unreadcountArr) {
+        _unreadcountArr = [NSMutableArray array];
+    }
+
+    return _unreadcountArr;
+}
 -(NSMutableArray *)itemIdArrs
 {
     if (!_itemIdArrs) {
@@ -43,6 +53,7 @@
     [MBProgressHUD hideHUD];
     self.title = @"我的消息";
     [self creatItemID];
+  
  
    
 }
@@ -73,24 +84,25 @@
                 {
                     [self.itemIdArrs addObject:dicDetail[@"item_id"]];
                     [self.itemNameArrs addObject:dicDetail[@"item_name"]];
+                    [self.unreadcountArr addObject:dicDetail[@"unreadcount"]];
                 }
             }
-            
             
             [self.tableView reloadData];
         }else{
             [MBProgressHUD showError:responseObject[@"Msg"]];
         }
-    }else if(tag == 2)
-    {
-        if([responseObject[@"result"] intValue]==0)
-        {
-            [MBProgressHUD showSuccess:@"删除成功"];
-            
-        }else {
-            [MBProgressHUD showError:responseObject[@"Msg"]];
-        }
     }
+//    else if(tag == 3)
+//    {
+//        if([responseObject[@"result"] intValue]==0)
+//        {
+//            [MBProgressHUD showSuccess:@"已读"];
+//            
+//        }else {
+//            [MBProgressHUD showError:responseObject[@"Msg"]];
+//        }
+//    }
 
 }
 
@@ -115,12 +127,28 @@
     MsgCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     cell.title.text = self.itemNameArrs[indexPath.row];
-    
+    if (cell.countLabel.text) {
+        cell.countLabel.text = [NSString stringWithFormat:@"%ld",[self.unreadcountArr[indexPath.row] integerValue]];
+    }
+  
+    self.unreadcount = [self.unreadcountArr[indexPath.row] integerValue];
+    if (self.unreadcount == 0) {
+        cell.unreadcountImage.hidden = YES;
+        cell.countLabel.hidden       = YES;
+    }else{
+        cell.unreadcountImage.hidden = NO;
+        cell.countLabel.hidden       = NO;
+    }
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    MsgCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.unreadcountImage.hidden = YES;
+    cell.countLabel.hidden = YES;
+    [self.unreadcountArr removeAllObjects];
     
     UIStoryboard * oneStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
@@ -128,8 +156,6 @@
     NSString *itemid = self.itemIdArrs[indexPath.row];
     MSGVC.itemID = itemid;
     [self.navigationController pushViewController:MSGVC animated:YES];
-
-
 }
 
 //编辑操作

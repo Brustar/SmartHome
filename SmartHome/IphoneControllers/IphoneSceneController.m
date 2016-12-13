@@ -11,7 +11,6 @@
 #define  minSpace 20
 
 #import "IphoneSceneController.h"
-
 #import "Room.h"
 #import "SceneCell.h"
 #import "SQLManager.h"
@@ -39,6 +38,7 @@
 @property (nonatomic ,strong) SceneCell *cell;
 @property (weak, nonatomic) IBOutlet UIButton *AddSceneBtn;
 @property (nonatomic,strong) NSArray * arrayData;
+@property(nonatomic,assign) int sceneID;
 @end
 
 @implementation IphoneSceneController
@@ -234,17 +234,18 @@
 {
     self.cell = cell;
     cell.deleteBtn.hidden = YES;
+    self.sceneID = (int)cell.tag;
+//    [SQLManager deleteScene:self.sceneID];
+//    Scene *scene = [[SceneManager defaultManager] readSceneByID:(int)cell.tag];
+//    [[SceneManager defaultManager] delScene:scene];
     
-    [SQLManager deleteScene:(int)cell.tag];
-    Scene *scene = [[SceneManager defaultManager] readSceneByID:(int)cell.tag];
-    [[SceneManager defaultManager] delScene:scene];
-    
-    NSString *url = [NSString stringWithFormat:@"%@Cloud/scene.aspx",[IOManager httpAddr]];
-    NSDictionary *dict = @{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"scenceid":[NSNumber numberWithInt:scene.sceneID]};
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/scene_delete.aspx",[IOManager httpAddr]];
+    NSDictionary *dict = @{@"token":[UD objectForKey:@"AuthorToken"], @"scenceid":@(self.sceneID),@"optype":@(1)};
     HttpManager *http=[HttpManager defaultManager];
     http.delegate=self;
     http.tag = 1;
     [http sendPost:url param:dict];
+  
 }
 
 -(void)httpHandler:(id) responseObject tag:(int)tag
@@ -258,19 +259,36 @@
             Room *room = self.roomList[self.roomIndex];
             self.scenes = [SQLManager getScensByRoomId:room.rId];
             [self.collectionView reloadData];
-           
             
+            if([responseObject[@"result"] intValue] == 0)
+            {
+                //删除数据库记录
+                BOOL delSuccess = [SQLManager deleteScene:self.sceneID];
+                if (delSuccess) {
+                    //删除场景文件
+                    Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
+                    if (scene) {
+                        [[SceneManager defaultManager] delScene:scene];
+                        [MBProgressHUD showSuccess:@"删除成功"];
+                    }else {
+                        NSLog(@"scene 不存在！");
+                        [MBProgressHUD showSuccess:@"删除失败"];
+                    }
+                    
+                    
+                }else {
+                    NSLog(@"数据库删除失败（场景表）");
+                    [MBProgressHUD showSuccess:@"删除失败"];
+                }
+                
+            }else{
+                [MBProgressHUD showError:responseObject[@"msg"]];
+            }
             
-        }else{
-            [MBProgressHUD showError:responseObject[@"Msg"]];
+            [self.navigationController popViewControllerAnimated:YES];
         }
-        
-        
     }
-    
 }
-
-
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return CGSizeMake(cellWidth, 133);
@@ -311,8 +329,5 @@
     }
     
 }
-
-
-
 
 @end

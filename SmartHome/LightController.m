@@ -64,8 +64,6 @@
                        [_lIDs addObject:lightArr[i]];
                    }
                }
-               
-               
            }else if(self.roomID > 0){
                [_lIDs addObjectsFromArray:[SQLManager getDeviceByTypeName:@"开关灯" andRoomID:self.roomID]];
                [_lIDs addObjectsFromArray:[SQLManager getDeviceByTypeName:@"调光灯" andRoomID:self.roomID]];
@@ -222,8 +220,6 @@
 
 - (void)setupSegmentLight
 {
-    
-    
     if (self.lNames == nil) {
         return;
     }
@@ -232,9 +228,7 @@
     
     for ( int i = 0; i < self.lNames.count; i++) {
         [self.segmentLight insertSegmentWithTitle:self.lNames[i] atIndex:i animated:NO];
-    
     }
-    
     self.segmentLight.selectedSegmentIndex = 0;
     self.deviceid = [self.lIDs objectAtIndex:self.segmentLight.selectedSegmentIndex];
 }
@@ -304,7 +298,7 @@
     NSArray *colors=[self changeUIColorToRGB:self.cell.colourView.backgroundColor];
     if (colors) {
         if ([etype isEqualToString:@"03"]) {
-            [device setColor:colors];
+            [device setColor:colors];  
         }
         [device setColor:@[]];
     }
@@ -378,7 +372,6 @@
 
 - (void)setSelectedColor:(UIColor *)color
 {
-
     self.cell.colourView.backgroundColor = color;
     [self save:nil];
 }

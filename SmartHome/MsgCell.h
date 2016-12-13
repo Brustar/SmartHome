@@ -13,5 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *title;
 @property (weak, nonatomic) IBOutlet UILabel *timeLable;
 @property (weak, nonatomic) IBOutlet UIButton *button;
+@property (weak, nonatomic) IBOutlet UIImageView *unreadcountImage;
+@property (weak, nonatomic) IBOutlet UILabel *countLabel;//显示未读消息
 
 @end

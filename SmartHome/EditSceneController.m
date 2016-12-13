@@ -144,8 +144,6 @@
         if([subTypeName isEqualToString:@"影音"])
         {
             [self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-            
-
             self.subTypeArr = [SQLManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.devicesTypes[i]];
             
             for(int i = 0; i < self.subTypeArr.count; i++)
@@ -160,7 +158,6 @@
         }
     }
 }
-
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -188,7 +185,6 @@
         {
             [cell.button setBackgroundImage:[UIImage imageNamed:@"environment"] forState:UIControlStateNormal];
         }else if([subType isEqualToString:@"影音"])
-            
         {
             [cell.button setBackgroundImage:[UIImage imageNamed:@"medio"] forState:UIControlStateNormal];
         }else if ([subType isEqualToString:@"安防"]){
@@ -430,14 +426,12 @@
 -(void)favorScene {
      UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"收藏场景?" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:  UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        
         NSString *url = [NSString stringWithFormat:@"%@Cloud/store_scene.aspx",[IOManager httpAddr]];
         NSDictionary *dict = @{
                                @"token":[UD objectForKey:@"AuthorToken"],
                                @"scenceid":@(self.sceneID),
                                @"optype":@(1)
                                };
-        
         HttpManager *http = [HttpManager defaultManager];
         http.delegate = self;
         http.tag = 3;
@@ -458,7 +452,6 @@
     [self.view bringSubviewToFront:self.currentViewController.view];
 }
 - (IBAction)selectSceneImg:(id)sender {
-    
     UIButton *btn = sender;
     UIView *view = btn.superview;
     CGFloat w = view.frame.size.width;
@@ -483,7 +476,6 @@
     picker.delegate = self;
     picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    
     [self presentViewController:picker animated:YES completion:NULL];
 }
 
@@ -492,7 +484,6 @@
     picker.delegate = self;
     picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    
     [self presentViewController:picker animated:YES completion:NULL];
 }
 
@@ -510,21 +501,16 @@
 }
 
 - (IBAction)sureStoreNewScene:(id)sender {
-    
     if ([self.storeNewSceneName.text isEqualToString:@""]) {
        [MBProgressHUD showError:@"场景名不能为空!"];
         return;
     }
-    
     NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
-    
     Scene *scene = [[Scene alloc] initWhithoutSchedule];
     [scene setValuesForKeysWithDictionary:plistDic];
-   
     [[SceneManager defaultManager] saveAsNewScene:scene withName:self.storeNewSceneName.text withPic:self.selectSceneImg];
-    
     self.storeNewScene.hidden = YES;
     [self.view bringSubviewToFront:self.currentViewController.view];
     [self.navigationController popViewControllerAnimated:YES];
@@ -557,13 +543,10 @@
                      NSLog(@"scene 不存在！");
                      [MBProgressHUD showSuccess:@"删除失败"];
                  }
-                 
-                 
              }else {
                  NSLog(@"数据库删除失败（场景表）");
                  [MBProgressHUD showSuccess:@"删除失败"];
              }
-
          }else{
              [MBProgressHUD showError:responseObject[@"msg"]];
          }
@@ -595,8 +578,6 @@
     }
     
 }
-
-
 - (IBAction)clickStopBtn:(id)sender {
     [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];
     [self.navigationController popViewControllerAnimated:YES];
@@ -606,15 +587,12 @@
 - (IBAction)deleteScene:(UIBarButtonItem *)sender {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"确定删除吗?" message:@"" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *sureAction =  [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-
-                
                 NSString *url = [NSString stringWithFormat:@"%@Cloud/scene_delete.aspx",[IOManager httpAddr]];
                 NSDictionary *dict = @{
                                        @"token":[UD objectForKey:@"AuthorToken"],
                                        @"scenceid":@(self.sceneID),
                                        @"optype":@(1)
                                        };
-            
                 HttpManager *http = [HttpManager defaultManager];
                 http.delegate = self;
                 http.tag = 2;
@@ -634,7 +612,5 @@
     [super didReceiveMemoryWarning];
     
 }
-
-
 
 @end

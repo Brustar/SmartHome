@@ -29,8 +29,6 @@
     }
     return _btns;
 }
-
-
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if(self)
@@ -41,9 +39,6 @@
     }
     return self;
 }
-
-
-
 - (void)setDataArray:(NSArray *)dataArray {
     _dataArray = dataArray;
     

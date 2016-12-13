@@ -3550,7 +3550,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点击“下一步”按钮，即表示你同意" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qq3-nF-iUf">
-                                <rect key="frame" x="74" y="599" width="229" height="18"/>
+                                <rect key="frame" x="73" y="599" width="229" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -3775,20 +3775,40 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uc5-KB-qpv">
+                                            <rect key="frame" x="34" y="0.0" width="20" height="20"/>
+                                            <color key="backgroundColor" red="1" green="0.20893316133825335" blue="0.24076579889352157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tHf-0T-4Kh">
+                                            <rect key="frame" x="34" y="0.0" width="20" height="20"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="tHf-0T-4Kh" firstAttribute="leading" secondItem="uc5-KB-qpv" secondAttribute="leading" id="5p3-HZ-MBh"/>
+                                        <constraint firstItem="tHf-0T-4Kh" firstAttribute="trailing" secondItem="uc5-KB-qpv" secondAttribute="trailing" id="6V6-6N-WyL"/>
+                                        <constraint firstItem="uc5-KB-qpv" firstAttribute="leading" secondItem="uXc-Ng-yLi" secondAttribute="leading" constant="34" id="8E1-7w-FS6"/>
                                         <constraint firstItem="S9e-y2-V3e" firstAttribute="top" secondItem="uXc-Ng-yLi" secondAttribute="top" constant="5" id="EcX-Kc-MO6"/>
                                         <constraint firstItem="nLu-ut-W0R" firstAttribute="leading" secondItem="uXc-Ng-yLi" secondAttribute="leading" constant="20" id="JFV-I3-i9L"/>
                                         <constraint firstItem="S9e-y2-V3e" firstAttribute="leading" secondItem="nLu-ut-W0R" secondAttribute="trailing" constant="20" id="K3A-cl-ocz"/>
                                         <constraint firstItem="nLu-ut-W0R" firstAttribute="centerY" secondItem="uXc-Ng-yLi" secondAttribute="centerY" id="NgG-ES-T4z"/>
                                         <constraint firstItem="U0P-T0-FiY" firstAttribute="leading" secondItem="S9e-y2-V3e" secondAttribute="leading" id="Tfn-nf-gff"/>
+                                        <constraint firstItem="uc5-KB-qpv" firstAttribute="top" secondItem="uXc-Ng-yLi" secondAttribute="top" id="XKL-MW-VYt"/>
+                                        <constraint firstItem="tHf-0T-4Kh" firstAttribute="centerY" secondItem="uc5-KB-qpv" secondAttribute="centerY" id="oMS-qB-fAS"/>
+                                        <constraint firstItem="S9e-y2-V3e" firstAttribute="leading" secondItem="uc5-KB-qpv" secondAttribute="trailing" constant="16" id="rKv-7d-Kzn"/>
+                                        <constraint firstAttribute="bottom" secondItem="uc5-KB-qpv" secondAttribute="bottom" constant="24" id="sNt-LO-yKN"/>
                                         <constraint firstAttribute="bottom" secondItem="U0P-T0-FiY" secondAttribute="bottom" constant="2" id="wsb-9J-YrS"/>
+                                        <constraint firstItem="tHf-0T-4Kh" firstAttribute="top" secondItem="uc5-KB-qpv" secondAttribute="top" id="yiG-Y3-fdf"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="countLabel" destination="tHf-0T-4Kh" id="jAQ-lb-QXI"/>
                                     <outlet property="imgView" destination="nLu-ut-W0R" id="EBw-l6-TKZ"/>
                                     <outlet property="timeLable" destination="U0P-T0-FiY" id="DXg-jf-vNu"/>
                                     <outlet property="title" destination="S9e-y2-V3e" id="Frc-Dk-Ap7"/>
+                                    <outlet property="unreadcountImage" destination="uc5-KB-qpv" id="aHh-LE-CYN"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -3803,7 +3823,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CQU-GO-0Os" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1210" y="-5738"/>
+            <point key="canvasLocation" x="-1210.4000000000001" y="-5738.6806596701654"/>
         </scene>
         <!--投影-->
         <scene sceneID="wnh-mx-zMc">
@@ -7477,7 +7497,7 @@ layer.masksToBoundslayer.masksToBounds
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gLz-IK-nIK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="491" y="-7214"/>
+            <point key="canvasLocation" x="490" y="-7215"/>
         </scene>
         <!--实景导航控制器-->
         <scene sceneID="1dG-Xx-bPE">
@@ -7542,23 +7562,23 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zAF-Rq-I0I"/>
         <segue reference="nIi-Kc-QDm"/>
+        <segue reference="zAF-Rq-I0I"/>
+        <segue reference="PRs-sg-E1F"/>
+        <segue reference="5K5-wE-mZz"/>
         <segue reference="fXQ-oW-cHz"/>
-        <segue reference="wSR-hk-rTP"/>
-        <segue reference="dFu-fs-3Rf"/>
-        <segue reference="tt4-nB-rfe"/>
         <segue reference="CtP-7b-vUS"/>
-        <segue reference="fHn-Cm-7Q7"/>
+        <segue reference="vKk-7C-VKf"/>
+        <segue reference="l23-e3-J0C"/>
+        <segue reference="Vzc-yi-Jnw"/>
+        <segue reference="tt4-nB-rfe"/>
+        <segue reference="a9T-LN-ZVX"/>
         <segue reference="X9P-hg-DXo"/>
         <segue reference="pWG-oz-Opr"/>
-        <segue reference="l23-e3-J0C"/>
-        <segue reference="vdf-Gi-dZf"/>
+        <segue reference="fHn-Cm-7Q7"/>
         <segue reference="JQm-bA-TWz"/>
-        <segue reference="vKk-7C-VKf"/>
-        <segue reference="a9T-LN-ZVX"/>
-        <segue reference="zpE-f9-a1R"/>
+        <segue reference="vdf-Gi-dZf"/>
         <segue reference="tdV-sS-d5j"/>
-        <segue reference="Vzc-yi-Jnw"/>
+        <segue reference="dFu-fs-3Rf"/>
     </inferredMetricsTieBreakers>
 </document>

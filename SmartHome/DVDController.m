@@ -153,8 +153,6 @@
     DVD *device=[[DVD alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setDvolume:self.volume.value*100];
-    
-    
     [_scene setSceneID:[self.sceneid intValue]];
     [_scene setRoomID:self.roomID];
     [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];

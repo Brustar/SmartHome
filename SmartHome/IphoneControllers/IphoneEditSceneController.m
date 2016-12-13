@@ -30,17 +30,14 @@
 #import "BgMusicController.h"
 #import "CollectionViewCell.h"
 #import "TouchSubViewController.h"
+#import "HttpManager.h"
 
 @interface IphoneEditSceneController ()<IphoneTypeViewDelegate,TouchSubViewDelegate>
 
-
-@property (weak, nonatomic) IBOutlet IphoneTypeView *subTypeView;
-
-@property (weak, nonatomic) IBOutlet IphoneTypeView *deviceTypeView;
+@property (weak, nonatomic) IBOutlet IphoneTypeView *subTypeView;//设备大View
+@property (weak, nonatomic) IBOutlet IphoneTypeView *deviceTypeView;//设备子View
 @property (weak, nonatomic) IBOutlet UIView *devicelView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveBarBtn;
-
-
 @property (weak, nonatomic) UIViewController *currentViewController;
 
 //设备大类
@@ -58,7 +55,6 @@
     [super viewDidLoad];
     
     self.title = [SQLManager getSceneName:self.sceneID];
-    
     self.typeArr = [SQLManager getSubTydpeBySceneID:self.sceneID];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.devicesTypes = [SQLManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.typeArr[0]];
@@ -95,12 +91,10 @@
         }else{
             [self.subTypeView addItemWithTitle:@"其他" imageName:@"others"];
         }
-        
-        
     }
     
     [self.subTypeView setSelectButton:0];
-    [self iphoneTypeView:self.subTypeView didSelectButton:0];
+    [self iphoneTypeView:self.subTypeView didSelectButton:self.typeIndex];
     
 }
 -(void)setupDeviceTypeView
@@ -135,7 +129,7 @@
     }
     
     [self.deviceTypeView setSelectButton:0];
-    [self iphoneTypeView:self.deviceTypeView didSelectButton:0];
+    [self iphoneTypeView:self.deviceTypeView didSelectButton:self.typeIndex];
     
 }
 -(void)iphoneTypeView:(IphoneTypeView *)typeView didSelectButton:(int)index
@@ -159,6 +153,7 @@
 
 -(void)goDeviceByRoomID:(int)roomID typeName:(NSString *)typeName
 {
+    
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIStoryboard *iphoneBoard  = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     if([typeName isEqualToString:@"网络电视"])
@@ -337,11 +332,17 @@
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"收藏场景" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:  UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
+        NSString *url = [NSString stringWithFormat:@"%@Cloud/store_scene.aspx",[IOManager httpAddr]];
+        NSDictionary *dict = @{
+                               @"token":[UD objectForKey:@"AuthorToken"],
+                               @"scenceid":@(self.sceneID),
+                               @"optype":@(1)
+                               };
         
-        
-        
-        Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
-        [[SceneManager defaultManager] favoriteScene:scene];
+        HttpManager *http = [HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = 3;
+        [http sendPost:url param:dict];
         
     }];
     UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
@@ -349,11 +350,34 @@
     [alert addAction:action2];
     
     [self presentViewController:alert animated:YES completion:nil];
-    
-    
-    
 }
 
+-(void)httpHandler:(id) responseObject tag:(int)tag
+{
+    if (tag == 3) {
+        if([responseObject[@"result"] intValue] == 0)
+        {
+            Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
+            if (scene) {
+                BOOL result = [[SceneManager defaultManager] favoriteScene:scene];
+                if (result) {
+                    [MBProgressHUD showSuccess:@"已收藏"];
+                }else {
+                    [MBProgressHUD showError:@"收藏失败"];
+                }
+                
+            }else {
+                NSLog(@"scene 不存在！");
+                [MBProgressHUD showError:@"收藏失败"];
+            }
+            
+        }else {
+            [MBProgressHUD showError:responseObject[@"msg"]];
+        }
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -370,12 +394,10 @@
     
 }
 
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
 }
-
+ 
 
 @end

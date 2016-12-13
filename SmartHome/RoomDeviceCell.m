@@ -23,7 +23,6 @@
     NSData *data=[[DeviceInfo defaultManager] changeBright:slider.value*100 deviceID:deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
-    
     float value =  slider.value;
     if(0 == value){
         //关闭switch

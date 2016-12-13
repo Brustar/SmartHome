@@ -60,8 +60,6 @@
     return 60;
 }
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     

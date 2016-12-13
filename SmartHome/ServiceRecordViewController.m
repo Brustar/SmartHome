@@ -176,6 +176,7 @@
     self.isEditing = NO;
     [self.tableView reloadData];
 }
+
 - (IBAction)clickCancelDeleteBtn:(id)sender {
     
     // 允许多个编辑

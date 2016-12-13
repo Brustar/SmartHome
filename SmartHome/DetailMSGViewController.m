@@ -18,7 +18,9 @@
 @property (nonatomic,strong) NSMutableArray * msgArr;
 @property (nonatomic,strong) NSMutableArray * timesArr;
 @property (nonatomic,strong) NSMutableArray * recordID;
+@property (nonatomic ,strong) NSMutableArray * isreadArr;
 @property (nonatomic,assign) BOOL isEditing;
+@property (nonatomic,assign) NSInteger notify_id;
 
 
 @end
@@ -48,6 +50,14 @@
     
     return _recordID;
 }
+-(NSMutableArray *)isreadArr
+{
+    if (!_isreadArr) {
+        _isreadArr = [NSMutableArray array];
+    }
+
+    return _isreadArr;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -55,7 +65,9 @@
     self.tableView.tableFooterView = self.FootView;
     UIBarButtonItem *editBtn = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(startEdit:)];
     self.navigationItem.rightBarButtonItem = editBtn;
-
+    UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc]initWithTitle:@"我的消息" style:UIBarButtonItemStylePlain target:self action:@selector(leftEdit:)];
+    self.navigationItem.leftBarButtonItem = leftBtn;
+    
     
     if (self.itemID) {
         
@@ -91,16 +103,14 @@
             if ([dic isKindOfClass:[NSArray class]]) {
                 for(NSDictionary *dicDetail in dic)
                 {
-                                        if ([dicDetail isKindOfClass:[NSDictionary class]] && dicDetail[@"description"]) {
-                                            [self.msgArr addObject:dicDetail[@"description"]];
-                                            [self.timesArr addObject:dicDetail[@"addtime"]];
-                                            [self.recordID addObject:dicDetail[@"notify_id"]];
-                                        }
-                  
+                    if ([dicDetail isKindOfClass:[NSDictionary class]] && dicDetail[@"description"]) {
+                            [self.msgArr addObject:dicDetail[@"description"]];
+                            [self.timesArr addObject:dicDetail[@"addtime"]];
+                            [self.recordID addObject:dicDetail[@"notify_id"]];
+                            [self.isreadArr addObject:dicDetail[@"isread"]];
+                    }
                 }
             }
-            
-            
             [self.tableView reloadData];
         }else{
             [MBProgressHUD showError:responseObject[@"Msg"]];
@@ -112,6 +122,14 @@
             [MBProgressHUD showSuccess:@"删除成功"];
             
         }else {
+            [MBProgressHUD showError:responseObject[@"Msg"]];
+        }
+    }else if (tag == 3){
+        if ([responseObject[@"result"] intValue] == 0) {
+             [MBProgressHUD showSuccess:@"消息已读"];
+            
+        }else {
+            
             [MBProgressHUD showError:responseObject[@"Msg"]];
         }
     }
@@ -128,8 +146,8 @@
     MsgCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
         cell.title.text = self.msgArr[indexPath.row];
         cell.timeLable.text = self.timesArr[indexPath.row];
-    
- 
+        self.itemID = self.recordID[indexPath.row];
+        self.notify_id = [self.recordID[indexPath.row] integerValue];
     return cell;
 
 }
@@ -156,19 +174,23 @@
     //放置要删除的对象
     NSMutableArray *deleteArray = [NSMutableArray array];
     NSMutableArray *deletedTime = [NSMutableArray array];
-    NSMutableArray *deletedID =[NSMutableArray array];
+    NSMutableArray *deletedID   = [NSMutableArray array];
     
     // 要删除的row
     NSArray *selectedArray = [self.tableView indexPathsForSelectedRows];
     
     for (NSIndexPath *indexPath in selectedArray) {
-        
-        [deleteArray addObject:self.msgArr[indexPath.row]];
+        if (self.msgArr[indexPath.row]) {
+              [deleteArray addObject:self.msgArr[indexPath.row]];
+        }
+      
         if (![deletedTime containsObject:self.timesArr[indexPath.row]]) {
               [deletedTime addObject:self.timesArr[indexPath.row]];
         }
-      
-        [deletedID addObject:self.recordID[indexPath.row]];
+        if (self.recordID[indexPath.row]) {
+            [deletedID addObject:self.recordID[indexPath.row]];
+        }
+        
     }
     // 先删除数据源
     [self.msgArr removeObjectsInArray:deleteArray];
@@ -180,9 +202,7 @@
     }else {
         [MBProgressHUD showError:@"请选择要删除的记录"];
     }
-    
-    
-    [self clickCancelBtn:nil];
+       [self clickCancelBtn:nil];
     
 }
 -(void)startEdit:(UIBarButtonItem *)barBtnItem
@@ -193,9 +213,30 @@
     self.isEditing = NO;
     [self.tableView reloadData];
 }
+
+-(void)leftEdit:(UIBarButtonItem *)bbi
+{
+    [self.navigationController popViewControllerAnimated:YES];
+    [self sendRequestForMsgWithItemId:self.notify_id];
+
+}
+-(void)sendRequestForMsgWithItemId:(NSInteger)itemID
+{
+    NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/notify.aspx",[IOManager httpAddr]];
+    if (authorToken) {
+        NSDictionary *dic = @{@"token":authorToken,@"optype":[NSNumber numberWithInteger:5],@"notify_id":[NSNumber numberWithInteger:itemID]};
+        HttpManager *http=[HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = 3;
+        [http sendPost:url param:dic];
+        
+    }
+}
 -(void)sendDeleteRequestWithArray:(NSArray *)deleteArr;
 {
-    NSString *url = [NSString stringWithFormat:@"%@EditPersonalInformation.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/notify.aspx",[IOManager httpAddr]];
     
     NSString *recoreds = @"";
     
@@ -211,9 +252,8 @@
             recoreds = [recoreds stringByAppendingString:record];
         }
     }
-    
-    
-    NSDictionary *dic = @{@"AuthorToken":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"RecordIDList":recoreds,@"Type":[NSNumber numberWithInt:1]};
+
+    NSDictionary *dic = @{@"token":[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"],@"ids":recoreds,@"optype":[NSNumber numberWithInt:4]};
     HttpManager *http = [HttpManager defaultManager];
     http.delegate = self;
     http.tag = 2;

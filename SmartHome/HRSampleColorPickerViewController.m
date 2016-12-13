@@ -77,7 +77,7 @@
 }
 
 - (void)colorWasChanged:(HRColorPickerView *)colorPickerView {
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewWillLayoutSubviews {

@@ -123,10 +123,6 @@
     
     for ( int i = 0; i < self.curNames.count; i++) {
         [self.segmentCurtain insertSegmentWithTitle:self.curNames[i] atIndex:i animated:NO];
-        
-       
-        
-       
     }
     
     self.segmentCurtain.selectedSegmentIndex = 0;

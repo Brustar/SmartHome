@@ -15,7 +15,7 @@
 #import "SceneManager.h"
 #import "Plugin.h"
 
-@interface PluginViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface PluginViewController ()<UITableViewDelegate,UITableViewDataSource,HMHomeManagerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
 @property (nonatomic,strong) PluginCell *cell;
@@ -39,7 +39,10 @@
                NSString *typeName = [SQLManager deviceTypeNameByDeviceID:[plugArr[i] intValue]];
                if([typeName isEqualToString:DEVICE_TYPE])
                {
-                   [_plugDeviceIds addObject:plugArr[i]];
+                   if (plugArr[i]) {
+                           [_plugDeviceIds addObject:plugArr[i]];
+                   }
+               
                }
                
            }
@@ -47,7 +50,10 @@
        {
            [_plugDeviceIds addObjectsFromArray:[SQLManager getDeviceByTypeName:DEVICE_TYPE andRoomID:self.roomID]];
        }else{
-           [_plugDeviceIds addObject:self.deviceid];
+           if (self.deviceid) {
+            [_plugDeviceIds addObject:self.deviceid];
+           }
+         
        }
    }
     return _plugDeviceIds;
@@ -76,6 +82,8 @@
     
     self.scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
 }
+
+
 -(void)setupSegment
 {
     if(self.plugNames == nil || self.plugNames.count == 0)
@@ -88,7 +96,7 @@
         [self.segment insertSegmentWithTitle:self.plugNames[i] atIndex:i animated:NO];
     }
     self.segment.selectedSegmentIndex = 0;
-    self.deviceid = [ self.plugDeviceIds objectAtIndex:self.segment.selectedSegmentIndex];
+    self.deviceid = [self.plugDeviceIds objectAtIndex:self.segment.selectedSegmentIndex];
     
 }
 -(void)initHomekitPlugin
@@ -140,8 +148,6 @@
 -(void)handleUDP:(NSData *)data
 {
     NSData *ip=[data subdataWithRange:NSMakeRange(8, 4)];
-    
-    
     SocketManager *sock=[SocketManager defaultManager];
     [sock initTcp:[PackManager NSDataToIP:ip] port:1234 delegate:self];
     
@@ -251,7 +257,7 @@
         static NSString *CellIdentifier = @"PluginCell";
         PluginCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
         self.cell = cell;
-        cell.label.text = self.plugNames[indexPath.row];
+        cell.label.text = self.plugNames[self.segment.selectedSegmentIndex];
         
         cell.power.tag=indexPath.row;
         //cell.power.on=[self.characteristic.value boolValue];
