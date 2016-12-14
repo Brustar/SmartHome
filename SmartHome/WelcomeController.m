@@ -279,11 +279,11 @@
 -(void)setAntronomicalTimes:(NSArray *)antronomicalTimes
 {
     _antronomicalTimes = antronomicalTimes;
-    NSString *url = [NSString stringWithFormat:@"%@UpdateAstronomicalClock.aspx",[IOManager httpAddr]];
-    NSDictionary *dic = @{@"Dawn":self.antronomicalTimes[0],@"SunRise":self.antronomicalTimes[1],@"Sunset":self.antronomicalTimes[2],@"Dusk":self.antronomicalTimes[3]};
-    HttpManager *http = [HttpManager defaultManager];
-    http.tag = 10;
-    [http sendPost:url param:dic];
+//    NSString *url = [NSString stringWithFormat:@"%@UpdateAstronomicalClock.aspx",[IOManager httpAddr]];
+//    NSDictionary *dic = @{@"Dawn":self.antronomicalTimes[0],@"SunRise":self.antronomicalTimes[1],@"Sunset":self.antronomicalTimes[2],@"Dusk":self.antronomicalTimes[3]};
+//    HttpManager *http = [HttpManager defaultManager];
+//    http.tag = 10;
+//    [http sendPost:url param:dic];
 }
 
 - (void)locationManager:(CLLocationManager *)manager

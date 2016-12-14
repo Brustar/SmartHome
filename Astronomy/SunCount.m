@@ -44,6 +44,10 @@ typedef void(^sunString)(SunString *sunStr);
 
 +(void)sunrisetWithLongitude:(double)longitude andLatitude:(double)latitude andResponse:(void (^)(SunString *))responseBlock
 {
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    [formatter setDateFormat:@"yyyy-MM-dd"];
+//    NSString *currentDateStr = [formatter stringFromDate:[NSDate date]];
+    
     
     SunCount * sunCount = [[self alloc]init];
     
@@ -82,7 +86,7 @@ typedef void(^sunString)(SunString *sunStr);
     }else {
         minuteStr = [NSString stringWithFormat:@"%d",minute];
     }
-    sunString.sunrise = [NSString stringWithFormat:@"%@:%@",hourStr,minuteStr];
+    sunString.sunrise = [NSString stringWithFormat:@"%@:%@", hourStr, minuteStr];
     
     
     int springMin=minute-24;
@@ -102,7 +106,7 @@ typedef void(^sunString)(SunString *sunStr);
     }else {
         minuteStr = [NSString stringWithFormat:@"%d",springMin];
     }
-    sunString.dayspring = [NSString stringWithFormat:@"%@:%@",hourStr,minuteStr];
+    sunString.dayspring = [NSString stringWithFormat:@"%@:%@", hourStr, minuteStr];
     
     hour = sunCount.sunset+zone;
     minute = (sunCount.sunset - hour+zone)*60;
@@ -121,7 +125,7 @@ typedef void(^sunString)(SunString *sunStr);
     }else {
         minuteStr = [NSString stringWithFormat:@"%d",minute];
     }
-    sunString.sunset = [NSString stringWithFormat:@"%@:%@",hourStr,minuteStr];
+    sunString.sunset = [NSString stringWithFormat:@"%@:%@", hourStr, minuteStr];
     
     
     int duskMin=minute+24;
@@ -141,7 +145,7 @@ typedef void(^sunString)(SunString *sunStr);
     }else {
         minuteStr = [NSString stringWithFormat:@"%d",duskMin];
     }
-    sunString.dusk = [NSString stringWithFormat:@"%@:%@",hourStr,minuteStr];
+    sunString.dusk = [NSString stringWithFormat:@"%@:%@", hourStr, minuteStr];
     
     responseBlock(sunString);
     
