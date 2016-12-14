@@ -2218,20 +2218,44 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VW0-Bg-E5t">
+                                                    <rect key="frame" x="34" y="0.0" width="20" height="20"/>
+                                                    <color key="backgroundColor" red="1" green="0.2089331613" blue="0.24076579889999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="PdL-36-xeq"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ak8-8D-Y9j">
+                                                    <rect key="frame" x="34" y="0.0" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="SFt-Ip-7ic"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="gHd-79-pGK" firstAttribute="leading" secondItem="ak8-8D-Y9j" secondAttribute="trailing" constant="16" id="8pK-vg-qYY"/>
                                                 <constraint firstItem="STn-3H-97d" firstAttribute="centerY" secondItem="RLR-ve-YL7" secondAttribute="centerY" id="CM1-9A-zLm"/>
                                                 <constraint firstItem="gHd-79-pGK" firstAttribute="top" secondItem="RLR-ve-YL7" secondAttribute="top" constant="5" id="Es2-zV-VvB"/>
                                                 <constraint firstItem="gHd-79-pGK" firstAttribute="leading" secondItem="STn-3H-97d" secondAttribute="trailing" constant="20" id="J5e-hz-kDx"/>
                                                 <constraint firstAttribute="bottom" secondItem="lmn-1c-vBM" secondAttribute="bottom" constant="2" id="LZH-9x-s91"/>
+                                                <constraint firstItem="VW0-Bg-E5t" firstAttribute="top" secondItem="RLR-ve-YL7" secondAttribute="top" id="NWh-4I-yXY"/>
+                                                <constraint firstAttribute="bottom" secondItem="ak8-8D-Y9j" secondAttribute="bottom" constant="23" id="Obh-Ee-uQp"/>
+                                                <constraint firstAttribute="bottom" secondItem="VW0-Bg-E5t" secondAttribute="bottom" constant="23" id="QtY-Dc-foO"/>
                                                 <constraint firstItem="lmn-1c-vBM" firstAttribute="leading" secondItem="gHd-79-pGK" secondAttribute="leading" id="glI-rK-7Vu"/>
+                                                <constraint firstItem="ak8-8D-Y9j" firstAttribute="top" secondItem="RLR-ve-YL7" secondAttribute="top" id="kW7-ms-Dha"/>
                                                 <constraint firstItem="STn-3H-97d" firstAttribute="leading" secondItem="RLR-ve-YL7" secondAttribute="leading" constant="20" id="pS3-jR-FwR"/>
+                                                <constraint firstItem="gHd-79-pGK" firstAttribute="leading" secondItem="VW0-Bg-E5t" secondAttribute="trailing" constant="16" id="ute-pn-grT"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="countLabel" destination="ak8-8D-Y9j" id="KMM-d6-VJb"/>
                                             <outlet property="imgView" destination="STn-3H-97d" id="omL-PL-7aa"/>
                                             <outlet property="timeLable" destination="lmn-1c-vBM" id="GF0-wh-WDi"/>
                                             <outlet property="title" destination="gHd-79-pGK" id="WWd-gb-9Nk"/>
+                                            <outlet property="unreadcountImage" destination="VW0-Bg-E5t" id="oXp-Ye-owl"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -7563,9 +7587,9 @@ layer.masksToBoundslayer.masksToBounds
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="nIi-Kc-QDm"/>
-        <segue reference="zAF-Rq-I0I"/>
         <segue reference="PRs-sg-E1F"/>
         <segue reference="5K5-wE-mZz"/>
+        <segue reference="Imv-lK-YrT"/>
         <segue reference="fXQ-oW-cHz"/>
         <segue reference="CtP-7b-vUS"/>
         <segue reference="vKk-7C-VKf"/>

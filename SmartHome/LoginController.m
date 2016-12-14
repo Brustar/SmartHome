@@ -77,17 +77,17 @@
     self.userType = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Type"] intValue];
     self.pwd.text = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Password"] decryptWithDes:DES_KEY];
    
-//    if ([CLLocationManager locationServicesEnabled]) {
-//        self.lm = [[CLLocationManager alloc]init];
-//        self.lm.delegate = self;
-//        [self.lm requestWhenInUseAuthorization];
-//        
-//        // 最小距离
-//        self.lm.distanceFilter=kCLDistanceFilterNone;
-//        [self.lm startUpdatingLocation];
-//    }else{
-//        NSLog(@"定位服务不可利用");
-//    }
+    if ([CLLocationManager locationServicesEnabled]) {
+        self.lm = [[CLLocationManager alloc]init];
+        self.lm.delegate = self;
+        [self.lm requestWhenInUseAuthorization];
+        
+        // 最小距离
+        self.lm.distanceFilter=kCLDistanceFilterNone;
+        [self.lm startUpdatingLocation];
+    }else{
+        NSLog(@"定位服务不可用");
+    }
 
     
  UIBarButtonItem *editItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(clickEditBtn:)];
@@ -102,11 +102,11 @@
 -(void)setAntronomicalTimes:(NSArray *)antronomicalTimes
 {
     _antronomicalTimes = antronomicalTimes;
-    NSString *url = [NSString stringWithFormat:@"%@UpdateAstronomicalClock.aspx",[IOManager httpAddr]];
-    NSDictionary *dic = @{@"Dawn":self.antronomicalTimes[0],@"SunRise":self.antronomicalTimes[1],@"Sunset":self.antronomicalTimes[2],@"Dusk":self.antronomicalTimes[3]};
-    HttpManager *http = [HttpManager defaultManager];
-    http.tag = 10;
-    [http sendPost:url param:dic];
+    //NSString *url = [NSString stringWithFormat:@"%@UpdateAstronomicalClock.aspx",[IOManager httpAddr]];
+//    NSDictionary *dic = @{@"Dawn":self.antronomicalTimes[0],@"SunRise":self.antronomicalTimes[1],@"Sunset":self.antronomicalTimes[2],@"Dusk":self.antronomicalTimes[3]};
+//    HttpManager *http = [HttpManager defaultManager];
+//    http.tag = 10;
+//    [http sendPost:url param:dic];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -165,9 +165,34 @@
 {
     NSString *url = [NSString stringWithFormat:@"%@%@",[IOManager httpAddr],str];
     
-    NSDictionary *dic = @{@"token":[UD objectForKey:@"AuthorToken"]};
+    //天文时钟
+    NSString *dawnStr = self.antronomicalTimes[0];//黎明
+    NSString *sunriseStr = self.antronomicalTimes[1];//日出
+    NSString *sunsetStr = self.antronomicalTimes[2];//日落
+    NSString *duskStr = self.antronomicalTimes[3];//黄昏
+    
+    NSDictionary *dic = @{
+                          @"token":[UD objectForKey:@"AuthorToken"],
+                          @"dawn":dawnStr,
+                          @"sunrise":sunriseStr,
+                          @"sunset":sunsetStr,
+                          @"dusk":duskStr
+                          };
+    
     if ([UD objectForKey:@"room_version"]) {
-        dic = @{@"token":[UD objectForKey:@"AuthorToken"],@"room_ver":[UD objectForKey:@"room_version"],@"equipment_ver":[UD objectForKey:@"equipment_version"],@"scence_ver":[UD objectForKey:@"scence_version"],@"tv_ver":[UD objectForKey:@"tv_version"],@"fm_ver":[UD objectForKey:@"fm_version"]};
+        
+        dic = @{
+                @"token":[UD objectForKey:@"AuthorToken"],
+                @"room_ver":[UD objectForKey:@"room_version"],
+                @"equipment_ver":[UD objectForKey:@"equipment_version"],
+                @"scence_ver":[UD objectForKey:@"scence_version"],
+                @"tv_ver":[UD objectForKey:@"tv_version"],
+                @"fm_ver":[UD objectForKey:@"fm_version"],
+                @"dawn":dawnStr,
+                @"sunrise":sunriseStr,
+                @"sunset":sunsetStr,
+                @"dusk":duskStr
+                };
     }
     HttpManager *http = [HttpManager defaultManager];
     http.delegate = self;
@@ -576,8 +601,8 @@
     didUpdateToLocation:(CLLocation *)newLocation
            fromLocation:(CLLocation *)oldLocation{
     [SunCount sunrisetWithLongitude:newLocation.coordinate.longitude andLatitude:newLocation.coordinate.latitude
-                        andResponse:^(SunString *str){
-                            NSLog(@"%@,%@,%@,%@",str.dayspring, str.sunrise,str.sunset,str.dusk);
+                        andResponse:^(SunString *str) {
+                            NSLog(@"天文时钟: 黎明 %@,日出 %@,日落 %@,黄昏 %@",str.dayspring, str.sunrise,str.sunset,str.dusk);
                             self.antronomicalTimes = @[str.dayspring,str.sunrise,str.sunset,str.dusk];
                     }];
 }
