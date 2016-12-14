@@ -7,7 +7,7 @@
 //
 
 
-#define cellWidth self.collectionView.frame.size.width / 2.0 - 10
+#define cellWidth self.collectionView.frame.size.width / 2.0 - 20
 #define  minSpace 20
 
 #import "IphoneSceneController.h"
@@ -194,7 +194,6 @@
     
     cell.layer.cornerRadius = 20;
     cell.layer.masksToBounds = YES;
-
     self.scene = self.scenes[indexPath.row];
     cell.tag = self.scene.sceneID;
     cell.scenseName.text = self.scene.sceneName;
@@ -254,7 +253,6 @@
     {
         if([responseObject[@"result"] intValue] == 0)
         {
-           
             [MBProgressHUD showSuccess:@"场景删除成功"];
             Room *room = self.roomList[self.roomIndex];
             self.scenes = [SQLManager getScensByRoomId:room.rId];
@@ -291,7 +289,7 @@
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(cellWidth, 133);
+    return CGSizeMake(cellWidth, cellWidth);
 }
 
 - (void)didReceiveMemoryWarning {

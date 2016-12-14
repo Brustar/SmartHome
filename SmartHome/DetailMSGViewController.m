@@ -21,6 +21,7 @@
 @property (nonatomic ,strong) NSMutableArray * isreadArr;
 @property (nonatomic,assign) BOOL isEditing;
 @property (nonatomic,assign) NSInteger notify_id;
+@property (nonatomic,assign) NSInteger unreadcount;
 
 
 @end
@@ -147,13 +148,29 @@
         cell.title.text = self.msgArr[indexPath.row];
         cell.timeLable.text = self.timesArr[indexPath.row];
         self.itemID = self.recordID[indexPath.row];
-        self.notify_id = [self.recordID[indexPath.row] integerValue];
+        cell.tag = [self.msgArr[indexPath.row] integerValue];
+    self.unreadcount = [self.isreadArr[indexPath.row] integerValue];
+    if (self.unreadcount == 0) {//未读消息
+        cell.unreadcountImage.hidden = NO;
+        cell.countLabel.hidden       = NO;
+    }else if(self.unreadcount == 1){
+        cell.unreadcountImage.hidden = YES;
+        cell.countLabel.hidden       = YES;
+    }
     return cell;
 
 }
 -(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return YES;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.isEditing==YES) {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+        self.notify_id = [self.recordID[indexPath.row] integerValue];
+        [self sendRequestForMsgWithItemId:self.notify_id];
+    }
 }
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -217,7 +234,7 @@
 -(void)leftEdit:(UIBarButtonItem *)bbi
 {
     [self.navigationController popViewControllerAnimated:YES];
-    [self sendRequestForMsgWithItemId:self.notify_id];
+//    [self sendRequestForMsgWithItemId:self.notify_id];
 
 }
 -(void)sendRequestForMsgWithItemId:(NSInteger)itemID

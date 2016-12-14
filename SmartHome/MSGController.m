@@ -12,6 +12,7 @@
 #import "MBProgressHUD+NJ.h"
 #import "DetailMSGViewController.h"
 
+
 @interface MSGController ()<HttpDelegate>
 @property (nonatomic,strong) NSMutableArray * itemIdArrs;
 @property (nonatomic,strong) NSMutableArray * itemNameArrs;
@@ -53,9 +54,6 @@
     [MBProgressHUD hideHUD];
     self.title = @"我的消息";
     [self creatItemID];
-  
- 
-   
 }
 -(void)creatItemID
 {
@@ -145,10 +143,10 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    MsgCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    cell.unreadcountImage.hidden = YES;
-    cell.countLabel.hidden = YES;
-    [self.unreadcountArr removeAllObjects];
+//    MsgCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//    cell.unreadcountImage.hidden = YES;
+//    cell.countLabel.hidden = YES;
+//    [self.unreadcountArr removeAllObjects];
     
     UIStoryboard * oneStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     

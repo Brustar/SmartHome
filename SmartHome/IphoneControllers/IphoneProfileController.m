@@ -10,6 +10,7 @@
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "SocketManager.h"
+#import "MsgCell.h"
 
 #define hight 50
 @interface IphoneProfileController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
@@ -22,9 +23,11 @@
 //@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableHight;
 @property (nonatomic,strong) NSArray *images;
 @property (nonatomic,strong) NSArray *segues;
+@property (nonatomic,strong) UIImageView * imageView;
 @end
 
 @implementation IphoneProfileController
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,6 +44,18 @@
     self.tableView.tableHeaderView = self.headView;
     
     self.segues = @[@"iphoneDefault",@"iphoneRecordSegue",@"iphoneEngerSegue",@"iphoneFavorSegue",@"iphoneMsgSegue",@"iphoneSettingSegue"];
+    
+    MsgCell * cell = [[MsgCell alloc] init];
+    UIImageView * ima = [UIImageView new];
+//    for (ima in cell.unreadcountImage.class) {
+        if (cell.unreadcountImage.hidden == NO) {
+            self.imageView.hidden = NO;
+        }else{
+            self.imageView.hidden = YES;
+        }
+//    }
+    
+    
 }
 #pragma mark - Table view data source
 
@@ -63,6 +78,14 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.text = self.titlArr[indexPath.row];
     cell.imageView.image = [UIImage imageNamed:self.images[indexPath.row]];
+    if ([cell.textLabel.text isEqualToString:@"我的消息"]) {
+       self.imageView = [[UIImageView alloc] init];
+        self.imageView.frame = CGRectMake(25, 0, 10, 10);
+        self.imageView.backgroundColor = [UIColor redColor];
+        self.imageView.layer.cornerRadius = self.imageView.bounds.size.width/2; //圆角半径
+        self.imageView.layer.masksToBounds = YES; //圆角
+        [cell.imageView addSubview:self.imageView];
+    }
     
     return cell;
 }
