@@ -260,7 +260,8 @@
         cell.label.text = self.plugNames[self.segment.selectedSegmentIndex];
         
         cell.power.tag=indexPath.row;
-        //cell.power.on=[self.characteristic.value boolValue];
+//        cell.power.on=[self.characteristic.value boolValue];
+        cell.power.on = NO;
         [cell.power addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
         return  cell;
     }else{

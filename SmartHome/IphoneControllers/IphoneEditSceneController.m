@@ -54,10 +54,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = [SQLManager getSceneName:self.sceneID];
+    self.title = [SQLManager getSceneName:self.sceneID ];
     self.typeArr = [SQLManager getSubTydpeBySceneID:self.sceneID];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.devicesTypes = [SQLManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.typeArr[0]];
+    self.devicesTypes = [SQLManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.typeArr[0] ];
     if(self.isFavor)
     {
         self.saveBarBtn.enabled = NO;

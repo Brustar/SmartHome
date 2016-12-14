@@ -15,7 +15,7 @@
 
 @interface SQLManager : NSObject
 
-+(FMDatabase *) connetdb;
++(FMDatabase *)connetdb;
 //从数据中获取所有设备信息
 +(NSArray *)getAllDevicesInfo;
 
@@ -65,7 +65,7 @@
 
 +(NSString *)getEType:(NSInteger)eID;
 +(NSString *)getENumber:(NSInteger)eID;
-+(NSString *)getDeviceIDByENumber:(NSInteger)eID masterID:(NSInteger)mID;
++(NSString *)getDeviceIDByENumber:(NSInteger)eID;
 +(int)saveMaxSceneId:(Scene *)scene name:name pic:(NSString *)img;
 +(int) getSceneID:(NSString *)name;
 +(int) getRoomID:(int)sceneID;
@@ -94,8 +94,8 @@
 +(Scene *)sceneBySceneID:(int)sId;
 //根据房间ID的到所有的场景
 + (NSArray *)getAllSceneWithRoomID:(int)roomID;
-
-
+//得到数据库中所有的场景ID
++(NSArray *)getAllSceneIdsFromSql;
 //从数据库中删除场景
 +(BOOL)deleteScene:(int)sceneId;
 +(NSArray *)getScensByRoomId:(int)roomId;
@@ -107,13 +107,15 @@
 +(int)getRoomIDByBeacon:(int)beacon;
 +(NSString *)getRoomNameByRoomID:(int) rId;
 
-+ (Device *)getDeviceWithDeviceID:(int) deviceID;
++ (Device *)getDeviceWithDeviceID:(int) deviceID ;
 
 +(BOOL)updateTotalVisited:(int)roomID;
 
 +(NSMutableArray *)getAllChannelForFavoritedForType:(NSString *)type deviceID:(int)deviceID;
 +(BOOL)deleteChannelForChannelID:(NSInteger)channel_id;
-
-
++(NSString *)getDeviceType:(NSString *)deviceID subTypeName:(NSString *)subTypeName;
++ (NSString *)getDeviceTypeNameWithID:(NSString *)ID subTypeName:(NSString *)subTypeName;
++ (NSString *)getDeviceSubTypeNameWithID:(int)ID;
 +(NSArray *)getDetailListWithID:(NSInteger)ID;
++(NSArray *)getAllDevicesIds;
 @end

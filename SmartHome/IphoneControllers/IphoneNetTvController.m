@@ -31,10 +31,7 @@
 - (void)setRoomID:(int)roomID
 {
     _roomID = roomID;
-    
     self.deviceid = [SQLManager deviceIDWithRoomID:self.roomID withType:@"机顶盒"];
-    
-    
 }
 
 - (void)viewDidLoad {

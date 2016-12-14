@@ -34,9 +34,6 @@
     {
         self.deviceid = [SQLManager deviceIDWithRoomID:self.roomID withType:@"空调"];
     }
-    
-    
-    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

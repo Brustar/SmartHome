@@ -14,6 +14,7 @@
 #import "Scene.h"
 #import "SceneManager.h"
 
+
 @interface ScreenCurtainController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
