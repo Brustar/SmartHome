@@ -409,6 +409,15 @@
             [IOManager writeUserdefault:self.hostIDS forKey:@"HostIDS"];
             if ([self.hostIDS count]>0) {
                 NSString *mid = self.hostIDS[0];
+                //切换帐号后，版本号归零
+                if (![mid isEqualToString:[UD objectForKey:@"HostID"]]) {
+                    [UD removeObjectForKey:@"room_version"];
+                    [UD removeObjectForKey:@"equipment_version"];
+                    [UD removeObjectForKey:@"scence_version"];
+                    [UD removeObjectForKey:@"tv_version"];
+                    [UD removeObjectForKey:@"fm_version"];
+                }
+                
                 [IOManager writeUserdefault:mid forKey:@"HostID"];
                 info.masterID = [mid longLongValue];
             }
