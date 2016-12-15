@@ -46,16 +46,12 @@
     self.segues = @[@"iphoneDefault",@"iphoneRecordSegue",@"iphoneEngerSegue",@"iphoneFavorSegue",@"iphoneMsgSegue",@"iphoneSettingSegue"];
     
     MsgCell * cell = [[MsgCell alloc] init];
-    UIImageView * ima = [UIImageView new];
-//    for (ima in cell.unreadcountImage.class) {
+
         if (cell.unreadcountImage.hidden == NO) {
             self.imageView.hidden = NO;
         }else{
             self.imageView.hidden = YES;
         }
-//    }
-    
-    
 }
 #pragma mark - Table view data source
 
@@ -183,21 +179,17 @@
             
             [self performSegueWithIdentifier:@"iphoneGoLogin" sender:self];
             
-            
         }else {
             [MBProgressHUD showSuccess:responseObject[@"Msg"]];
         }
-        
     }
     
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     [self performSegueWithIdentifier:self.segues[indexPath.row] sender:self];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

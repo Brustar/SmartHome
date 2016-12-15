@@ -66,10 +66,10 @@
     self.tableView.tableFooterView = self.FootView;
     UIBarButtonItem *editBtn = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(startEdit:)];
     self.navigationItem.rightBarButtonItem = editBtn;
-    UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc]initWithTitle:@"我的消息" style:UIBarButtonItemStylePlain target:self action:@selector(leftEdit:)];
-    self.navigationItem.leftBarButtonItem = leftBtn;
+//    UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc]initWithTitle:@"我的消息" style:UIBarButtonItemStylePlain target:self action:@selector(leftEdit:)];
+//    self.navigationItem.leftBarButtonItem = leftBtn;
     
-    
+     self.isEditing = YES;
     if (self.itemID) {
         
         [self sendRequestForDetailMsgWithItemId:[_itemID intValue]];
@@ -162,11 +162,16 @@
 }
 -(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return YES;
+    if (self.isEditing == NO) {
+        return YES;
+    }
+    return NO;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.isEditing==YES) {
+    if (self.isEditing==NO) {
+        return;
+    }else if (self.isEditing == YES){
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         self.notify_id = [self.recordID[indexPath.row] integerValue];
         [self sendRequestForMsgWithItemId:self.notify_id];
@@ -240,7 +245,6 @@
 -(void)sendRequestForMsgWithItemId:(NSInteger)itemID
 {
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    
     NSString *url = [NSString stringWithFormat:@"%@Cloud/notify.aspx",[IOManager httpAddr]];
     if (authorToken) {
         NSDictionary *dic = @{@"token":authorToken,@"optype":[NSNumber numberWithInteger:5],@"notify_id":[NSNumber numberWithInteger:itemID]};
@@ -248,7 +252,6 @@
         http.delegate = self;
         http.tag = 3;
         [http sendPost:url param:dic];
-        
     }
 }
 -(void)sendDeleteRequestWithArray:(NSArray *)deleteArr;

@@ -116,7 +116,6 @@
     
     self.title = @"电视";
     iphoneVC.eNumber = [SQLManager getENumber:[self.deviceid intValue]];
-    
     self.volumeSlider.transform = CGAffineTransformMakeRotation(M_PI/2);
     self.voiceWeakImg.transform = CGAffineTransformMakeRotation(M_PI/2);
     self.voiceStrongImg.transform = CGAffineTransformMakeRotation(M_PI/2);
@@ -311,7 +310,6 @@
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
     }
-   
 
 }
 
@@ -321,8 +319,6 @@
     self.cell = cell;
     NSIndexPath *indexPath = [self.tvLogoCollectionView indexPathForCell:cell];
     TVChannel *channel = self.allFavourTVChannels[indexPath.row];
-    
-
     //发送删除频道请求
     NSString *url = [NSString stringWithFormat:@"%@Cloud/store_tv.aspx",[IOManager httpAddr]];
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
@@ -331,8 +327,6 @@
     http.delegate = self;
     http.tag = 1;
     [http sendPost:url param:dic];
-    
-    
 }
 
 

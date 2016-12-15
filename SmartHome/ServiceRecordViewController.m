@@ -61,6 +61,7 @@
     self.footView.hidden = YES;
     self.coverView.hidden = YES;
     self.commentView.hidden = YES;
+    self.isEditing = YES;
     [self setNavi];
 }
 

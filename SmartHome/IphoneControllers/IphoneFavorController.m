@@ -158,10 +158,11 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(cellWidth, 130);
+    return CGSizeMake(cellWidth, cellWidth);
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     
 }
@@ -177,7 +178,6 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     id theSegue = segue.destinationViewController;
-    
     [theSegue setValue:[NSNumber numberWithInt:self.selectID] forKey:@"sceneID"];
     [theSegue setValue:@"YES" forKey:@"isFavor"];
 }

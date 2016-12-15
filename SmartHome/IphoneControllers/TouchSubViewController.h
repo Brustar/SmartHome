@@ -22,6 +22,7 @@
 @property (weak,nonatomic)id<TouchSubViewDelegate>delegate;
 @property (weak, nonatomic) IBOutlet UILabel *sceneName;
 @property (weak, nonatomic) IBOutlet UILabel *sceneDescribe;
+@property (weak, nonatomic) IBOutlet UIView *sceneView;
 - (instancetype)initWithTitle:(NSString *)title;
 -(void)setSceneName:(UILabel *)sceneName;
 -(void)setSceneDescribe:(UILabel *)sceneDescribe;

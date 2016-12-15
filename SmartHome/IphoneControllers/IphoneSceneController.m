@@ -165,15 +165,11 @@
 
 - (nullable UIViewController *)previewingContext:(id <UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location
 {
-//    NSIndexPath * indexPath =[_collectionView indexPathForItemAtPoint:location];
-    
      UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     TouchSubViewController * touchSubViewVC = [storyboard instantiateViewControllerWithIdentifier:@"TouchSubViewController"];
       touchSubViewVC.preferredContentSize = CGSizeMake(0.0f,500.0f);
     touchSubViewVC.sceneName.text = self.scene.sceneName;
     touchSubViewVC.sceneDescribe.text = @"uuiiihubb";
-    
-//    touchSubViewVC.title = self.arrayData[indexPath.row];
     
     return touchSubViewVC;
 }
@@ -198,9 +194,7 @@
     cell.tag = self.scene.sceneID;
     cell.scenseName.text = self.scene.sceneName;
     cell.delegate = self;
-//    cell.imgView.image = [UIImage imageNamed:@"u2.png"];
     [cell.imgView sd_setImageWithURL:[NSURL URLWithString: self.scene.picName] placeholderImage:[UIImage imageNamed:@"PL"]];
-    
     [cell useLongPressGesture];
    [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];  
     return cell;

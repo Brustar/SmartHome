@@ -103,10 +103,10 @@
 {
 
     if (section == 0) {
-        return @"此房间的灯";
+        return @"灯";
     }
 
-    return @"此房间的窗帘";
+    return @"窗帘";
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -117,9 +117,11 @@
 {
     if (section==0) {
         return _lightArrs.count;
+    }else if (section == 1){
+       return _curtainArrs.count;
     }
   
-    return _curtainArrs.count;
+    return 0;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -132,12 +134,15 @@
         cell.slider.continuous = NO;
         cell.deviceid = self.lightArrs[indexPath.row];
         return cell;
+    }else if (indexPath.section == 1){
+        self.cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        Device * device = [SQLManager getDeviceWithDeviceID:[_curtainArrs[indexPath.row] intValue]];
+        self.cell.label.text = device.name;
+        self.cell.deviceId = _curtainArrs[indexPath.row];
+        return self.cell;
     }
-    self.cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    Device * device = [SQLManager getDeviceWithDeviceID:[_curtainArrs[indexPath.row] intValue]];
-    self.cell.label.text = device.name;
-    self.cell.deviceId = _curtainArrs[indexPath.row];
-    return self.cell;
+      [self.tableView reloadData];
+    return nil;
 }
 
 
