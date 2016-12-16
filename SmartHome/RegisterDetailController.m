@@ -13,6 +13,7 @@
 #import "IOManager.h"
 #import "WebManager.h"
 #import "NSString+RegMatch.h"
+#import "LoginController.h"
 
 @interface RegisterDetailController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *authorNum;
@@ -162,8 +163,14 @@
         if([responseObject[@"result"] intValue] == 0)
         {
             [IOManager writeUserdefault:responseObject[@"token"] forKey:@"AuthorToken"];
-            self.coverView.hidden = NO;
-            self.regSuccessView.hidden = NO;
+            self.coverView.hidden = YES;
+            self.regSuccessView.hidden = YES;
+            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            LoginController *tvc = [storyBoard instantiateViewControllerWithIdentifier:@"LoginController"];
+            [self.navigationController pushViewController:tvc animated:YES];
+            [MBProgressHUD showError:@"恭喜注册成功"];
+          
+            
         }else{
             [MBProgressHUD showError:responseObject[@"msg"]];
         }

@@ -26,6 +26,11 @@
 #import "AmplifierController.h"
 #import "WindowSlidingController.h"
 #import "BgMusicController.h"
+#import "IphoneSceneAirVC.h"
+#import "IPhoneSceneDVDVC.h"
+#import "IPhoneTVVC.h"
+#import "IPhoneNetVV.h"
+
 @interface IphoneDevicesController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) NSArray *deviceTypes;
@@ -74,7 +79,8 @@
     UIStoryboard *iphoneBoard  = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     if([typeName isEqualToString:@"网络电视"])
     {
-        IphoneTVController *tVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneTVController"];
+//        IphoneTVController *tVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneTVController"];
+        IPhoneTVVC * tVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IPhoneTVVC"];
         tVC.roomID = self.roomId;
         tVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneId];
         tVC.isAddDevice = YES;
@@ -102,7 +108,8 @@
     }else if([typeName isEqualToString:@"DVD"])
     {
         
-        IphoneDVDController *dvdVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneDVDController"];
+//        IphoneDVDController *dvdVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneDVDController"];
+        IPhoneSceneDVDVC * dvdVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IPhoneSceneDVDVC"];
         dvdVC.roomID = self.roomId;
         dvdVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneId];
         dvdVC.isAddDevice = YES;
@@ -118,14 +125,16 @@
          [self.navigationController pushViewController:fmVC animated:YES];
     }else if([typeName isEqualToString:@"空调"])
     {
-        IphoneAirController *airVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneAirController"];
+//        IphoneAirController *airVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneAirController"];
+        IphoneSceneAirVC * airVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneSceneAirVC"];
         airVC.roomID = self.roomId;
         airVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneId];
         airVC.isAddDevice = YES;
         [self.navigationController pushViewController:airVC animated:YES];
         
     }else if([typeName isEqualToString:@"机顶盒"]){
-        IphoneNetTvController *netVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneNetTvController"];
+//        IphoneNetTvController *netVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneNetTvController"];
+        IPhoneNetVV * netVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IPhoneNetVV"];
         netVC.roomID = self.roomId;
         netVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneId];
         

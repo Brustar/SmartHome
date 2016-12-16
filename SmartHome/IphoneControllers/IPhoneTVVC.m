@@ -1,12 +1,12 @@
 //
-//  ProjectController.m
+//  IPhoneTVVC.m
 //  SmartHome
 //
-//  Created by 逸云科技 on 16/9/13.
+//  Created by zhaona on 2016/12/16.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
-#import "ProjectController.h"
+#import "IPhoneTVVC.h"
 #import "DetailTableViewCell.h"
 #import "SQLManager.h"
 #import "SocketManager.h"
@@ -14,7 +14,7 @@
 #import "SceneManager.h"
 #import "Amplifier.h"
 
-@interface ProjectController ()<UITableViewDataSource,UITableViewDelegate>
+@interface IPhoneTVVC ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) NSMutableArray *projectNames;
@@ -22,8 +22,7 @@
 @property (nonatomic,strong) DetailTableViewCell *cell;
 @end
 
-@implementation ProjectController
-
+@implementation IPhoneTVVC
 
 -(NSMutableArray *)projectIds
 {
@@ -33,11 +32,11 @@
         if(self.sceneid > 0 && !self.isAddDevice)
         {
             NSArray *projects = [SQLManager getDeviceIDsBySeneId:[self.sceneid intValue]];
-
+            
             for(int i = 0; i < projects.count; i++)
             {
                 NSString *typeName = [SQLManager deviceTypeNameByDeviceID:[projects[i] intValue]];
-                if([typeName isEqualToString:@"投影"])
+                if([typeName isEqualToString:@"网络电视"])
                 {
                     [_projectIds addObject:projects[i]];
                 }
@@ -45,7 +44,7 @@
             }
         }else if(self.roomID)
         {
-            [_projectIds addObjectsFromArray:[SQLManager getDeviceByTypeName:@"投影" andRoomID:self.roomID]];
+            [_projectIds addObjectsFromArray:[SQLManager getDeviceByTypeName:@"网络电视" andRoomID:self.roomID]];
         }else{
             [_projectIds addObject:self.deviceid];
         }
@@ -65,16 +64,14 @@
     }
     return _projectNames;
 }
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [super viewDidLoad];
-    self.title = @"投影";
+    // Do any additional setup after loading the view.
+    
+    self.title = @"DVD";
     self.tableView.tableFooterView = [UIView new];
     [self setupSeguentProject];
-
 }
-
 -(void)setupSeguentProject
 {
     if(self.projectNames == nil || self.projectNames.count == 0)
@@ -89,9 +86,8 @@
     }
     self.segment.selectedSegmentIndex = 0;
     self.deviceid = [self.projectIds objectAtIndex:self.segment.selectedSegmentIndex];
-
+    
 }
-
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 2;
@@ -102,9 +98,9 @@
     if(indexPath.row == 0)
     {
         DetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-
-//        cell.label.text = self.projectNames[self.segment.selectedSegmentIndex];
-        cell.label.text = @"投影";
+        
+        //        cell.label.text = self.projectNames[self.segment.selectedSegmentIndex];
+        cell.label.text = @"网络电视";
         self.cell = cell;
         self.switchView = cell.power;//[[UISwitch alloc] initWithFrame:CGRectZero];
         _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
@@ -186,9 +182,6 @@
     id theSegue = segue.destinationViewController;
     [theSegue setValue:self.deviceid forKey:@"deviceid"];
 }
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

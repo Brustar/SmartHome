@@ -1439,7 +1439,7 @@
     NSMutableArray *roomList = [NSMutableArray array];
     if([db open])
     {
-        NSString *sql =[NSString stringWithFormat:@"select * from Rooms where masterID = '%ld'",[[DeviceInfo defaultManager] masterID]];
+        NSString *sql =@"select * from Rooms";
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next]) {
             Room *room = [Room new];
