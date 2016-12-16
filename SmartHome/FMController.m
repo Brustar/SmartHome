@@ -192,9 +192,13 @@
     
     TVChannel *channel = [self.allFavouriteChannels objectAtIndex: indexPath.row];
     //发送删除频道请求
-    NSString *url = [NSString stringWithFormat:@"%@FMChannelRemove.aspx",[IOManager httpAddr]];
-    NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSDictionary *dic = @{@"AuthorToken":authorToken,@"RecordID":[NSNumber numberWithInteger:channel.channel_id]};
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/store_fm.aspx",[IOManager httpAddr]];
+    NSString *authorToken = [UD objectForKey:@"AuthorToken"];
+    NSDictionary *dic = @{
+                          @"token":authorToken,
+                          @"optype":@(1),
+                          @"chid":@(channel.channel_id)
+                          };
     HttpManager *http = [HttpManager defaultManager];
     http.delegate = self;
     http.tag = 2;
@@ -261,9 +265,17 @@
 -(void)sendStoreChannelRequest
 {
     
-    NSString *url = [NSString stringWithFormat:@"%@FMChannelUpload.aspx",[IOManager httpAddr]];
-    NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSDictionary *dic = @{@"AuthorToken":authorToken,@"EID":self.deviceid,@"CNumber":self.numberOfChannel.text,@"CName":self.channelNameEdit.text,@"ImgFileName":@"store",@"ImgFile":@""};
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/store_fm.aspx",[IOManager httpAddr]];
+    NSString *authorToken = [UD objectForKey:@"AuthorToken"];
+    NSDictionary *dic = @{
+                          @"token":authorToken,
+                          @"eqid":self.deviceid,
+                          @"optype":@(0),
+                          @"cnumber":self.numberOfChannel.text,
+                          @"cname":self.channelNameEdit.text,
+                          @"imgname":@"store",
+                          @"imgdata":@""
+                          };
     HttpManager *http = [HttpManager defaultManager];
     http.delegate = self;
     http.tag = 1;
@@ -276,22 +288,29 @@
 {
     if(tag == 1)
     {
-        if([responseObject[@"Result"] intValue] == 0)
+        if([responseObject[@"result"] intValue] == 0)
         {
             //保存成功后存到数据库
-            [self writeFMChannelsConfigDataToSQL:responseObject withParent:@"FM"];
+            BOOL saveSucceed = [self writeFMChannelsConfigDataToSQL:responseObject withParent:@"FM"];
+            
+            if (saveSucceed) {
+                [MBProgressHUD showSuccess:@"收藏成功"];
+            }else {
+                [MBProgressHUD showError:@"收藏失败"];
+            }
+            
             self.editView.hidden = YES;
             self.unstoreLabel.hidden = YES;
             self.collectionView.backgroundColor = [UIColor lightGrayColor];
             self.allFavouriteChannels = [SQLManager getAllChannelForFavoritedForType:@"FM" deviceID:[self.deviceid intValue]];
             [self.collectionView reloadData];
         }else{
-            [MBProgressHUD showError:@"Msg"];
+            [MBProgressHUD showError:responseObject[@"msg"]];
         }
 
     }else if(tag == 2)
     {
-        if([responseObject[@"Result"] intValue] == 0)
+        if([responseObject[@"result"] intValue] == 0)
         {
             NSIndexPath *indexPath = [self.collectionView indexPathForCell:self.cell];
             TVChannel *channel = self.allFavouriteChannels[indexPath.row];
@@ -311,7 +330,7 @@
             [self.collectionView reloadData];
             
         }else{
-            [MBProgressHUD showError:responseObject[@"Msg"]];
+            [MBProgressHUD showError:responseObject[@"msg"]];
         }
 
     }
@@ -319,22 +338,31 @@
 
 
 
--(void)writeFMChannelsConfigDataToSQL:(NSDictionary *)responseObject withParent:(NSString *)parent
+-(BOOL)writeFMChannelsConfigDataToSQL:(NSDictionary *)responseObject withParent:(NSString *)parent
 {
+    BOOL result = NO;
+    
     FMDatabase *db = [SQLManager connetdb];
     if([db open])
     {
         int cNumber = [self.numberOfChannel.text intValue];
-        NSString *sql = [NSString stringWithFormat:@"insert into Channels values(%d,%d,%d,%d,'%@','%@','%@',%d,'%@','%ld')",[responseObject[@"fmId"] intValue],[self.deviceid intValue],0,cNumber,self.channelNameEdit.text,responseObject[@"imgUrl"],parent,1,self.eNumber,[[DeviceInfo defaultManager] masterID]];
-        BOOL result = [db executeUpdate:sql];
+
+        NSString *sql = [NSString stringWithFormat:@"insert into Channels values(%d,%d,%d,%d,'%@','%@','%@',%d,'%@','%@')",[responseObject[@"fmId"] intValue],[self.deviceid intValue],0,cNumber,self.channelNameEdit.text,responseObject[@"imgUrl"],parent,1,self.eNumber, [NSString stringWithFormat:@"%ld", [[DeviceInfo defaultManager] masterID]]];
+        
+        result = [db executeUpdate:sql];
+        
+
         if(result)
         {
-            NSLog(@"insert 成功");
+            NSLog(@"FM频道信息 入库成功");
         }else{
-            NSLog(@"insert 失败");
+            NSLog(@"FM频道信息 入库失败");
         }
     }
     [db close];
+    
+    
+    return result;
 }
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
