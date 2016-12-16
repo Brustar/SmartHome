@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface IphoneFamilyViewController : UIViewController
-
+@property(nonatomic, strong)NSString *nest_access_token;
+@property(nonatomic, strong)NSString *nest_user;
+@property(nonatomic, strong)NSString *nest_user_id;
+@property(nonatomic, strong)NSString *nest_transport_url;
+@property(nonatomic, strong)NSString *nest_status_req_url;
+@property(nonatomic, strong)NSDictionary *nest_status_req_header;
 @end

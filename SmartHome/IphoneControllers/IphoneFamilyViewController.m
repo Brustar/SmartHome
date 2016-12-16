@@ -86,9 +86,11 @@
         self.roomID = room.rId;
         self.deviceArr = [SQLManager deviceSubTypeByRoomId:self.roomID];
     }
-//    [self sendRequestForGettingSceneConfig];
 
     
+    
+    //nest login
+    [self nestLogin];
 }
 
 //获取全屋配置
@@ -106,6 +108,27 @@
         
     }
 }
+
+#pragma mark - Nest API
+- (void)nestLogin {
+    NSString *requestURL = @"https://home.nest.com/user/login";
+    NSDictionary *paramDict = @{
+                                @"username":@"156810316@qq.com",
+                                @"password":@"Stone4shi!"
+                                };
+    HttpManager *http = [HttpManager defaultManager];
+    http.delegate = self;
+    http.tag = 2;
+    [http sendPost:requestURL param:paramDict];
+}
+
+- (void)fetchNestStatus {
+    HttpManager *http = [HttpManager defaultManager];
+    http.delegate = self;
+    http.tag = 3;
+    [http sendGet:_nest_status_req_url param:nil header:_nest_status_req_header];
+}
+
 
 #pragma mark - Http callback
 - (void)httpHandler:(id)responseObject tag:(int)tag
@@ -138,6 +161,26 @@
                 
             }
         }
+    }else if (tag == 2) { //nest login callback
+        NSLog(@"Nest login responseObject: %@", responseObject);
+        _nest_access_token = responseObject[@"access_token"];
+        _nest_user = responseObject[@"user"];
+        _nest_user_id = responseObject[@"userid"];
+        _nest_transport_url = responseObject[@"urls"][@"transport_url"];
+        
+        if (_nest_access_token.length >0 && _nest_user.length >0 && _nest_transport_url.length >0 && _nest_user_id.length >0) {
+            _nest_status_req_url = [NSString stringWithFormat:@"%@/v3/mobile/%@", _nest_transport_url, _nest_user];
+            _nest_status_req_header = @{
+                                        @"X-nl-protocol-version":@"1",
+                                        @"X-nl-user-id":_nest_user_id,
+                                        @"Authorization":[NSString stringWithFormat:@"Basic %@", _nest_access_token]
+                                        };
+            [self fetchNestStatus];
+        }else {
+            NSLog(@"Nest login 返回参数错误！");
+        }
+    }else if (tag == 3) { //nest_status callback
+        NSLog(@"Nest status responseObject: %@", responseObject);
     }
 }
 

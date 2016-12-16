@@ -57,6 +57,37 @@
     }
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     [MBProgressHUD showMessage:@"请稍候..."];
+    
+    [mgr GET:url parameters:params progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        [MBProgressHUD hideHUD];
+        NSLog(@"success:%@",responseObject);
+        if (self.tag>0) {
+            [self.delegate httpHandler:responseObject tag:self.tag];
+        }else{
+            [self.delegate httpHandler:responseObject];
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"failure:%@",error);
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:@"网络请求错误"];
+    }];
+}
+
+//带请求头的GET请求
+- (void)sendGet:(NSString *)url param:(NSDictionary *)params header:(NSDictionary *)header
+{
+    if (![NetStatusManager reachable]) {
+        [MBProgressHUD showError:@"当前网络不可用，请检查你的网络设置"];
+        return;
+    }
+    [MBProgressHUD showMessage:@"请稍候..."];
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    
+    //设置请求头
+    [mgr.requestSerializer setValue:header[@"X-nl-protocol-version"] forHTTPHeaderField:@"X-nl-protocol-version"];
+    [mgr.requestSerializer setValue:header[@"X-nl-user-id"] forHTTPHeaderField:@"X-nl-user-id"];
+    [mgr.requestSerializer setValue:header[@"Authorization"] forHTTPHeaderField:@"Authorization"];
+    
     [mgr GET:url parameters:params progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         [MBProgressHUD hideHUD];
         NSLog(@"success:%@",responseObject);
