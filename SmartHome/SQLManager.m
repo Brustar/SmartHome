@@ -566,7 +566,7 @@
             sceneID = [resultSet intForColumn:@"ID"]+1;
         }
         
-        sql=[NSString stringWithFormat:@"insert into Scenes values(%d,'%@','','%@',%ld,%d,null,null,null)",sceneID,name,img,(long)scene.roomID,2];
+        sql=[NSString stringWithFormat:@"insert into Scenes values(%d,'%@','','%@',%ld,%d,null,null,null,'%ld')",sceneID,name,img,(long)scene.roomID,2,[[DeviceInfo defaultManager] masterID]];
         [db executeUpdate:sql];
     }
     [db closeOpenResultSets];
@@ -1120,7 +1120,7 @@
     FMDatabase *db = [self connetdb];
     if ([db open]) {
         int count=0;
-        NSString *sql = [NSString stringWithFormat:@"SELECT count(*) as count FROM Rooms where masterID = '%ld'",[[DeviceInfo defaultManager] masterID]];
+        NSString *sql =[NSString stringWithFormat: @"SELECT count(*) as count FROM Rooms where masterID = '%ld'",[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
@@ -1396,7 +1396,7 @@
     
     if([db open])
     {
-        FMResultSet *resultSet = [db executeQuery:[NSString stringWithFormat:@"select * from Scenes where isFavorite = 1"]];
+        FMResultSet *resultSet = [db executeQuery:[NSString stringWithFormat:@"select * from Scenes where isFavorite = 2"]];
         while ([resultSet next]) {
             Scene *scene = [Scene new];
             scene.sceneName = [resultSet stringForColumn:@"NAME"];
@@ -1417,7 +1417,7 @@
     if([db open])
     {
         if (name) {
-            NSString * roomSql =@"select * from Rooms where NAME like '%%%@%%'";
+            NSString * roomSql =[NSString stringWithFormat:@"select * from Rooms where NAME like '%%%@%%' and masterID = '%ld'",name,[[DeviceInfo defaultManager] masterID]];
             //房间
             FMResultSet * roomResultSet = [db executeQuery:roomSql];
             while ([roomResultSet next]) {
@@ -1439,7 +1439,7 @@
     NSMutableArray *roomList = [NSMutableArray array];
     if([db open])
     {
-        NSString *sql =@"select * from Rooms";
+        NSString *sql =[NSString stringWithFormat:@"select * from Rooms where masterID = '%ld'",[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next]) {
             Room *room = [Room new];
@@ -1556,7 +1556,7 @@
     BOOL isSuccess = false;
     if([db open])
     {
-        isSuccess = [db executeUpdateWithFormat:@"delete from Channels where id = %ld and masterID = '%ld'",(long)channel_id,[[DeviceInfo defaultManager] masterID]];
+        isSuccess = [db executeUpdateWithFormat:@"delete from Channels where id = %ld",(long)channel_id];
     }
     [db close];
     return isSuccess;

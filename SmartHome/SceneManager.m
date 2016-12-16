@@ -401,7 +401,7 @@
             NSLog(@"Could not open db.");
             return NO;
         }
-        BOOL result = [db executeUpdate:@"UPDATE Scenes SET isFavorite = 1 WHERE id = ?",@(newScene.sceneID)];
+        BOOL result = [db executeUpdate:@"UPDATE Scenes SET isFavorite = 2 WHERE id = ?",@(newScene.sceneID)];
     
         [db close];
     return result;
@@ -419,7 +419,7 @@
             NSLog(@"Could not open db.");
             return ;
         }
-        BOOL result =[db executeUpdate:@"UPDATE Scenes SET isFavorite = 0 WHERE id = ?",[NSNumber numberWithInt:scene.sceneID]];
+        BOOL result =[db executeUpdate:@"UPDATE Scenes SET isFavorite = 1 WHERE id = ?",[NSNumber numberWithInt:scene.sceneID]];
         if(result)
         {
             NSLog(@"删除成功");

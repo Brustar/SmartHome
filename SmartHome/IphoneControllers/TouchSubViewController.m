@@ -14,8 +14,6 @@
 @interface TouchSubViewController ()
 
 @property (nonatomic,strong)NSArray * arrayData;
-@property (weak, nonatomic) IBOutlet UIView *sceneView;
-
 @property (nonatomic,strong) NSArray * IconImageArr;
 
 @end
@@ -42,6 +40,7 @@
 
 -(void)setSceneName:(UILabel *)sceneName
 {
+    
     _sceneName = sceneName;
 
 }

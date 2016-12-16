@@ -57,18 +57,10 @@
     self.coverView.hidden = YES;
     [self.view addGestureRecognizer:tap];
     self.pageScrollView.delegate = self;
-    
-    
     _LoginBtn.layer.cornerRadius = 5.0f; //圆角半径
     _LoginBtn.layer.masksToBounds = YES; //圆角
-//    _LoginBtn.layer.borderWidth = 0.5f; //边框宽度
-//    _registerBtn.layer.borderColor = [kButtonBroder CGColor]; //边框颜色
-    
     _iphoneBtn.layer.cornerRadius = 5.0f; //圆角半径
     _iphoneBtn.layer.masksToBounds = YES; //圆角
-//    _iphoneBtn.layer.borderWidth = 0.5f; //边框宽度
-    //    _registerBtn.layer.borderColor = [kButtonBroder CGColor]; //边框颜色
-   
 }
 -(void)viewWillAppear:(BOOL)animated
 {

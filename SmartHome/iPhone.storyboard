@@ -3665,7 +3665,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uZI-NB-5iZ">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="Zmf-xY-XoC" customClass="LightCell">
@@ -3741,7 +3741,7 @@
                             <constraint firstItem="uZI-NB-5iZ" firstAttribute="leading" secondItem="s8l-Fw-Xdc" secondAttribute="leading" id="S5R-di-Ym5"/>
                             <constraint firstItem="dcH-jN-6iw" firstAttribute="top" secondItem="uZI-NB-5iZ" secondAttribute="bottom" id="Ttt-ox-0uI"/>
                             <constraint firstAttribute="trailing" secondItem="uZI-NB-5iZ" secondAttribute="trailing" id="Wh9-ra-z86"/>
-                            <constraint firstItem="uZI-NB-5iZ" firstAttribute="top" secondItem="s8l-Fw-Xdc" secondAttribute="top" constant="20" id="zaD-iQ-MoS"/>
+                            <constraint firstItem="uZI-NB-5iZ" firstAttribute="top" secondItem="s8l-Fw-Xdc" secondAttribute="top" id="zaD-iQ-MoS"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="场景-灯" id="1O3-fF-OLH">
@@ -3862,8 +3862,8 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="WeN-Qz-0Az"/>
         <segue reference="qN8-z6-Gb7"/>
         <segue reference="YuF-MW-0b0"/>
-        <segue reference="J5F-aP-6iz"/>
     </inferredMetricsTieBreakers>
 </document>

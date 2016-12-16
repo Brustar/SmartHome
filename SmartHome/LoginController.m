@@ -408,9 +408,18 @@
             
             [IOManager writeUserdefault:self.hostIDS forKey:@"HostIDS"];
             if ([self.hostIDS count]>0) {
-                NSString *mid = self.hostIDS[0];
-                [IOManager writeUserdefault:mid forKey:@"HostID"];
-                info.masterID = [mid longLongValue];
+                int mid = [self.hostIDS[0] intValue];
+                //切换帐号后，版本号归零
+                if (mid != [[UD objectForKey:@"HostID"] intValue]) {
+                    [UD removeObjectForKey:@"room_version"];
+                    [UD removeObjectForKey:@"equipment_version"];
+                    [UD removeObjectForKey:@"scence_version"];
+                    [UD removeObjectForKey:@"tv_version"];
+                    [UD removeObjectForKey:@"fm_version"];
+                }
+                
+                [IOManager writeUserdefault:@(mid) forKey:@"HostID"];
+                info.masterID = mid;
             }
             [self sendRequestForGettingConfigInfos:@"Cloud/load_config_data.aspx" withTag:2];
             

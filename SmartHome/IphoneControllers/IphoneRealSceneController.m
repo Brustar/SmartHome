@@ -41,8 +41,6 @@
     [self.titleButton setTitle:room.rName forState:UIControlStateNormal];
 
     [self.titleButton setImage:[UIImage imageNamed:@"down"] forState:UIControlStateNormal];
-    
-    
     [self.titleButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.titleButton.imageEdgeInsets = UIEdgeInsetsMake(0, 160, 0, 0);
     

@@ -583,7 +583,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 
 }
-
 - (IBAction)deleteScene:(UIBarButtonItem *)sender {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"确定删除吗?" message:@"" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *sureAction =  [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

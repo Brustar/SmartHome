@@ -53,7 +53,7 @@
 {
     NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
     
-    [dateformatter setDateFormat:@"yy-MM-dd HH:mm:ss"];
+    [dateformatter setDateFormat:@"yy-MM-dd"];
     NSDate *currentDate = [NSDate date];
     NSString *currentStr = [dateformatter stringFromDate:currentDate];
     [self getEnger:currentStr];
@@ -126,7 +126,7 @@
     self.selectedTimeBtn = sender;
     NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
     
-    [dateformatter setDateFormat:@"yy-MM-dd HH:mm:ss"];
+    [dateformatter setDateFormat:@"yy-MM-dd"];
     NSDate *currentDate = [NSDate date];
     NSString *timeStr;
     switch (sender.tag) {

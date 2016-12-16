@@ -7,7 +7,7 @@
 //
 
 
-#define cellWidth self.collectionView.frame.size.width / 2.0 - 10
+#define cellWidth self.collectionView.frame.size.width / 2.0 - 20
 #define  minSpace 20
 
 #import "IphoneSceneController.h"
@@ -165,15 +165,11 @@
 
 - (nullable UIViewController *)previewingContext:(id <UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location
 {
-//    NSIndexPath * indexPath =[_collectionView indexPathForItemAtPoint:location];
-    
      UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     TouchSubViewController * touchSubViewVC = [storyboard instantiateViewControllerWithIdentifier:@"TouchSubViewController"];
       touchSubViewVC.preferredContentSize = CGSizeMake(0.0f,500.0f);
     touchSubViewVC.sceneName.text = self.scene.sceneName;
     touchSubViewVC.sceneDescribe.text = @"uuiiihubb";
-    
-//    touchSubViewVC.title = self.arrayData[indexPath.row];
     
     return touchSubViewVC;
 }
@@ -194,14 +190,11 @@
     
     cell.layer.cornerRadius = 20;
     cell.layer.masksToBounds = YES;
-
     self.scene = self.scenes[indexPath.row];
     cell.tag = self.scene.sceneID;
     cell.scenseName.text = self.scene.sceneName;
     cell.delegate = self;
-//    cell.imgView.image = [UIImage imageNamed:@"u2.png"];
     [cell.imgView sd_setImageWithURL:[NSURL URLWithString: self.scene.picName] placeholderImage:[UIImage imageNamed:@"PL"]];
-    
     [cell useLongPressGesture];
    [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];  
     return cell;
@@ -254,7 +247,6 @@
     {
         if([responseObject[@"result"] intValue] == 0)
         {
-           
             [MBProgressHUD showSuccess:@"场景删除成功"];
             Room *room = self.roomList[self.roomIndex];
             self.scenes = [SQLManager getScensByRoomId:room.rId];
@@ -291,7 +283,7 @@
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(cellWidth, 133);
+    return CGSizeMake(cellWidth, cellWidth);
 }
 
 - (void)didReceiveMemoryWarning {
