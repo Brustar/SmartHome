@@ -25,7 +25,7 @@
 }
 
 -(BOOL)compareLater:(NSString*)date pattern:(NSString *)pattern{
-    BOOL ci;
+    BOOL ci=NO;
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     [df setDateFormat:pattern];
     NSDate *dt1 = [df dateFromString:date];

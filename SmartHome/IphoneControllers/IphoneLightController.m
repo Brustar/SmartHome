@@ -134,15 +134,14 @@
         cell.slider.continuous = NO;
         cell.deviceid = self.lightArrs[indexPath.row];
         return cell;
-    }else if (indexPath.section == 1){
+    }else{
         self.cell.selectionStyle = UITableViewCellSelectionStyleGray;
         Device * device = [SQLManager getDeviceWithDeviceID:[_curtainArrs[indexPath.row] intValue]];
         self.cell.label.text = device.name;
         self.cell.deviceId = _curtainArrs[indexPath.row];
         return self.cell;
     }
-      [self.tableView reloadData];
-    return nil;
+
 }
 
 
