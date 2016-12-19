@@ -52,14 +52,9 @@
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.rooms = [SQLManager getAllRoomsInfo];
-    
     [self setUpRoomScrollerView];
        [self setUpScrollerView];
-    
-    
 }
-
-
 -(void)setUpScrollerView
 {
     self.deviceTypeView.dataArray = self.deviceTypes;
@@ -87,8 +82,6 @@
     
     [self iphoneRoomView:self.iphoneRoomView didSelectButton:0];
 }
-
-
 - (void)iphoneRoomView:(UIView *)view didSelectButton:(int)index {
     if (view == self.iphoneRoomView) {
         self.roomIndex = index;
@@ -110,14 +103,11 @@
         
     }
 }
-
-
 -(void)selectedType:(NSString *)typeName
 {
     Room *room = self.rooms[self.roomIndex];
     int roomID = room.rId;
     [self goDeviceByRoomID:roomID typeName:typeName];
-    
 }
 -(void)goDeviceByRoomID:(int)roomID typeName:(NSString *)typeName
 {
@@ -213,15 +203,14 @@
         [self addViewAndVC:bgMusicVC];
         
     }else {
-//        PluginViewController *pluginVC = [storyBoard instantiateViewControllerWithIdentifier:@"PluginViewController"];
-//        pluginVC.roomID = roomID;
-//        
-//        [self addViewAndVC:pluginVC];
+
+        PluginViewController *pluginVC = [storyBoard instantiateViewControllerWithIdentifier:@"PluginViewController"];
+        pluginVC.roomID = roomID;
+
+//        GuardController *guardVC = [storyBoard instantiateViewControllerWithIdentifier:@"GuardController"];
+//        guardVC.roomID = roomID;
         
-        GuardController *guardVC = [storyBoard instantiateViewControllerWithIdentifier:@"GuardController"];
-        guardVC.roomID = roomID;
-        
-        [self addViewAndVC:guardVC];
+        [self addViewAndVC:pluginVC];
     }
 
 }

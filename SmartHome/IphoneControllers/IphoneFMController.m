@@ -18,6 +18,8 @@
 #import "SocketManager.h"
 
 @interface IphoneFMController ()<UICollectionViewDelegate,UICollectionViewDataSource,TXHRrettyRulerDelegate,UIGestureRecognizerDelegate,FMCollectionViewCellDelegate>
+@property (weak, nonatomic) IBOutlet UIView *editView;
+@property (weak, nonatomic) IBOutlet UITextField *NameEditTF;
 @property (weak, nonatomic) IBOutlet UILabel *hzLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UISlider *volumn;
@@ -26,6 +28,7 @@
 @property (nonatomic,strong) FMCollectionViewCell *cell;
 @property (nonatomic,strong) NSMutableArray *allFavouriteChannels;
 @property (nonatomic,strong) NSString *eNumber;
+@property (weak, nonatomic) IBOutlet UIView *coverView;
 @end
 
 @implementation IphoneFMController
@@ -190,11 +193,29 @@
 
 -(void)FmEditAction:(FMCollectionViewCell *)cell
 {
-//    self.coverView.hidden = NO;
-//    self.editView.hidden = NO;
-//    self.channelNameEdit.text = cell.channelName.text;
+    self.coverView.hidden = NO;
+    self.editView.hidden = NO;
+    self.NameEditTF.hidden = NO;
+    self.NameEditTF.text = cell.channelName.text;
 //    self.channelIDEdit.text = cell.chanelNum.text;
     
+    
+}
+- (IBAction)cancelBtn:(FMCollectionViewCell *)cell {
+    self.coverView.hidden = YES;
+    self.editView.hidden = YES;
+    self.NameEditTF.hidden = YES;
+//    self.NameEditTF.text = cell.channelName.text;
+    [self.collectionView reloadData];
+}
+- (IBAction)determineBtn:(FMCollectionViewCell *)cell {
+    self.coverView.hidden = YES;
+    self.editView.hidden = YES;
+    self.NameEditTF.hidden = YES;
+    TVChannel * channel;
+//    [SQLManager ];
+    self.NameEditTF.text = cell.channelName.text;
+    [self.collectionView reloadData];
 }
 
 -(void)httpHandler:(id) responseObject tag:(int)tag

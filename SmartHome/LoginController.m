@@ -29,6 +29,7 @@
 #import "SunCount.h"
 #import <CoreLocation/CoreLocation.h>
 
+@class SystemInfomationController;
 @interface LoginController ()<QRCodeReaderDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *user;
@@ -46,7 +47,6 @@
 @property (nonatomic,assign) int vTVChannelLast;
 @property (nonatomic,assign) int vFMChannellLast;
 @property (nonatomic,assign) int vClientlLast;
-
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint;
 
 @property (nonatomic,strong) NSArray *antronomicalTimes;
@@ -384,6 +384,39 @@
     [db close];
 }
 
+//获取房间配置信息
+-(void)gainHome_room_infoDataTo:(NSDictionary *)responseObject
+{
+     self.home_room_infoArr = [NSMutableArray array];
+            NSInteger home_id  = [responseObject[@"home_id"] integerValue];
+            NSString * hostbrand = responseObject[@"hostbrand"];
+            NSString * host_brand_number = responseObject[@"host_brand_number"];
+            NSString * homename = responseObject[@"homename"];
+    if (homename == nil) {
+        [self.home_room_infoArr addObject:@" "];
+    }
+            [self.home_room_infoArr addObject:homename];
+            [self.home_room_infoArr addObject:hostbrand];
+            [self.home_room_infoArr addObject:host_brand_number];
+            [self.home_room_infoArr addObject:[NSNumber numberWithInteger:home_id]];
+    
+    NSArray  *paths  =  NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+    
+    NSString *docDir = [paths objectAtIndex:0];
+    
+    if(!docDir) {
+        
+        NSLog(@"Documents 目录未找到");
+        
+    }
+    
+    NSArray *array = [[NSArray alloc] initWithObjects:homename,[NSNumber numberWithInteger:home_id],hostbrand,host_brand_number,nil];
+    
+    NSString *filePath = [docDir stringByAppendingPathComponent:@"testFile.txt"];
+    
+    [array writeToFile:filePath atomically:YES];
+}
+
 #pragma - mark http delegate
 -(void) httpHandler:(id) responseObject tag:(int)tag
 {
@@ -445,9 +478,10 @@
             [self writDevicesConfigDatesToSQL:responseObject[@"room_equipment_list"]];
             //写TV频道信息到sql
             [self writeChannelsConfigDataToSQL:responseObject[@"tv_store_list"] withParent:@"tv"];
-            
+    
             //写FM频道信息到sql
             [self writeChannelsConfigDataToSQL:responseObject[@"fm_store_list"] withParent:@"fm"];
+            [self gainHome_room_infoDataTo:responseObject[@"home_room_info"]];
             
             if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
             {
@@ -539,7 +573,6 @@
     
 }
 
-
 - (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result
 {
     result=[result decryptWithDes:DES_KEY];
@@ -566,10 +599,8 @@
                 [alert addAction:okAction];
                 [self presentViewController:alert animated:YES completion:nil];
             }
-
     }];
     [self presentViewController:registVC animated:YES completion:nil];
-    
     
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

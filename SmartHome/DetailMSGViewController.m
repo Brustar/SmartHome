@@ -149,7 +149,7 @@
         cell.timeLable.text = self.timesArr[indexPath.row];
         self.itemID = self.recordID[indexPath.row];
         cell.tag = [self.msgArr[indexPath.row] integerValue];
-    self.unreadcount = [self.isreadArr[indexPath.row] integerValue];
+        self.unreadcount = [self.isreadArr[indexPath.row] integerValue];
     if (self.unreadcount == 0) {//未读消息
         cell.unreadcountImage.hidden = NO;
         cell.countLabel.hidden       = NO;
@@ -174,7 +174,10 @@
     }else if (self.isEditing == YES){
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         self.notify_id = [self.recordID[indexPath.row] integerValue];
-        [self sendRequestForMsgWithItemId:self.notify_id];
+        if ([self.isreadArr[indexPath.row] integerValue]==0) {
+             [self sendRequestForMsgWithItemId:self.notify_id];
+        }
+       
     }
 }
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath

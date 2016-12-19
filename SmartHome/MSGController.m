@@ -137,6 +137,11 @@
         cell.unreadcountImage.hidden = NO;
         cell.countLabel.hidden       = NO;
     }
+     self.set = [[NSMutableSet alloc] init];
+    if (cell.unreadcountImage.hidden == YES) {
+         [self.set addObject:cell.unreadcountImage];
+    }
+    
     return cell;
 }
 

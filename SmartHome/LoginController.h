@@ -7,5 +7,5 @@
 //
 #import "HttpManager.h"
 @interface LoginController : UIViewController<HttpDelegate>
-
+@property (nonatomic,strong) NSMutableArray * home_room_infoArr;
 @end

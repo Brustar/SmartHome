@@ -10,5 +10,6 @@
 @interface MSGController : UITableViewController
 
 @property (nonatomic,strong) NSMutableArray *msgs;
+@property (nonatomic,strong) NSMutableSet * set;
 
 @end

@@ -121,9 +121,7 @@
         if(!cell)
         {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"recell"];
-            
         }
-        
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20, 5, 100, 30)];
         [cell.contentView addSubview:label];
@@ -141,17 +139,12 @@
     Amplifier *device=[[Amplifier alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setWaiting: self.switchView.isOn];
-    
-    
     [_scene setSceneID:[self.sceneid intValue]];
     [_scene setRoomID:self.roomID];
     [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-    
     [_scene setReadonly:NO];
-    
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
     [_scene setDevices:devices];
-    
     [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
     
 }

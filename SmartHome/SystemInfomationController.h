@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SystemInfomationController : UIViewController
-
+@property (nonatomic,strong) NSMutableArray * home_room_infoArr;
 @end

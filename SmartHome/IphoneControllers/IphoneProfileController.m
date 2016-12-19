@@ -11,19 +11,21 @@
 #import "MBProgressHUD+NJ.h"
 #import "SocketManager.h"
 #import "MsgCell.h"
+#import "MSGController.h"
 
 #define hight 50
+@class MsgCell;
 @interface IphoneProfileController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *headView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *PorTraintButton;
-
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (nonatomic,strong) NSArray *titlArr;
 //@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableHight;
 @property (nonatomic,strong) NSArray *images;
 @property (nonatomic,strong) NSArray *segues;
 @property (nonatomic,strong) UIImageView * imageView;
+@property (nonatomic,strong) MsgCell * MsgCell;
 @end
 
 @implementation IphoneProfileController
@@ -81,6 +83,15 @@
         self.imageView.layer.cornerRadius = self.imageView.bounds.size.width/2; //圆角半径
         self.imageView.layer.masksToBounds = YES; //圆角
         [cell.imageView addSubview:self.imageView];
+        MSGController * msgVC = [MSGController new];
+        NSMutableSet * mSet = [[NSMutableSet alloc] init];
+        mSet = msgVC.set;
+        NSEnumerator * en = [mSet objectEnumerator];
+        if (self.imageView == [en nextObject]) {
+            self.imageView.hidden = NO;
+        }else{
+            self.imageView.hidden = YES;
+        }
     }
     
     return cell;

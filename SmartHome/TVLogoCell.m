@@ -31,8 +31,8 @@
 
 -(void)handleLongPress:(UILongPressGestureRecognizer *)lgr
 {
-    self.editBtn.hidden = NO;
-    self.deleteBtn.hidden = NO;
+    self.editBtn.hidden = YES;
+    self.deleteBtn.hidden = YES;
 }
 -(void)hiddenEditBtnAndDeleteBtn
 {
