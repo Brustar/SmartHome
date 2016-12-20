@@ -90,7 +90,7 @@
     
     
     //nest login
-    [self nestLogin];
+    //[self nestLogin];
 }
 
 //获取全屋配置
