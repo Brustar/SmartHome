@@ -163,8 +163,8 @@
     DeviceInfo *device=[DeviceInfo defaultManager];
     NSArray *str,*imgs;
     if ([device.db isEqualToString:SMART_DB]) {
-        str = @[@"我的家",@"我的",@"实景"];
-        imgs = @[@"myHome",@"my",@"objectPic"];
+        str = @[@"我的家", @"平面图",@"我的",@"实景"];
+        imgs = @[@"myHome", @"myHome",@"my",@"objectPic"];
     }else{
         str = @[@"我的家"];
         imgs = @[@"myHome"];

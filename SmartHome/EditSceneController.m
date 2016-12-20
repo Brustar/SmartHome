@@ -116,7 +116,7 @@
         
     }
     [self setupData];
-    }
+}
 
 
 
