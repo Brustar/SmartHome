@@ -392,9 +392,9 @@
             NSString * hostbrand = responseObject[@"hostbrand"];
             NSString * host_brand_number = responseObject[@"host_brand_number"];
             NSString * homename = responseObject[@"homename"];
-    if (homename == nil) {
-        [self.home_room_infoArr addObject:@" "];
-    }
+        if (homename == nil) {
+              [self.home_room_infoArr addObject:@" "];
+       }
             [self.home_room_infoArr addObject:homename];
             [self.home_room_infoArr addObject:hostbrand];
             [self.home_room_infoArr addObject:host_brand_number];

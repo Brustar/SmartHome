@@ -21,6 +21,8 @@
 @property (nonatomic,strong) NSMutableArray *projectNames;
 @property (nonatomic,strong) NSMutableArray *projectIds;
 @property (nonatomic,strong) DetailTableViewCell *cell;
+@property (weak, nonatomic) IBOutlet UISlider *slider;
+
 @end
 
 @implementation IPhoneNetVV
@@ -72,6 +74,16 @@
     self.title = @"机顶盒";
     self.tableView.tableFooterView = [UIView new];
     [self setupSeguentProject];
+    
+    [self.slider addTarget:self action:@selector(slider:) forControlEvents:UIControlEventValueChanged];
+}
+-(void)slider:(UISlider *)slider
+{
+    NSString *deviceid = self.deviceid;
+    NSData *data=[[DeviceInfo defaultManager] changeBright:slider.value*100 deviceID:deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+
 }
 -(void)setupSeguentProject
 {

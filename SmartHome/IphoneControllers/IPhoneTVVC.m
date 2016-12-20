@@ -20,6 +20,9 @@
 @property (nonatomic,strong) NSMutableArray *projectNames;
 @property (nonatomic,strong) NSMutableArray *projectIds;
 @property (nonatomic,strong) DetailTableViewCell *cell;
+
+@property (weak, nonatomic) IBOutlet UISlider *slider;
+
 @end
 
 @implementation IPhoneTVVC
@@ -71,6 +74,15 @@
     self.title = @"DVD";
     self.tableView.tableFooterView = [UIView new];
     [self setupSeguentProject];
+    [self.slider addTarget:self action:@selector(slider:) forControlEvents:UIControlEventValueChanged];
+}
+-(void)slider:(UISlider *)slider
+{
+    NSString *deviceid = self.deviceid;
+    NSData *data=[[DeviceInfo defaultManager] changeBright:slider.value*100 deviceID:deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+
 }
 -(void)setupSeguentProject
 {
@@ -99,8 +111,8 @@
     {
         DetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         
-        //        cell.label.text = self.projectNames[self.segment.selectedSegmentIndex];
-        cell.label.text = @"网络电视";
+                cell.label.text = self.projectNames[self.segment.selectedSegmentIndex];
+//        cell.label.text = @"网络电视";
         self.cell = cell;
         self.switchView = cell.power;//[[UISwitch alloc] initWithFrame:CGRectZero];
         _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];

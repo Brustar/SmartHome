@@ -52,12 +52,13 @@
     _curtainArrs = [SQLManager getCurtainByRoom:self.roomID];
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
-    self.cell = [[[NSBundle mainBundle] loadNibNamed:@"CurtainTableViewCell" owner:self options:nil] lastObject];
-    self.cell.slider.continuous = NO;
-    [self.cell.slider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
-    [self.cell.open addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-    [self.cell.close addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-    self.cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        [self.tableView registerNib:[UINib nibWithNibName:@"CurtainTableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainTableViewCell"];
+//    self.cell = [[[NSBundle mainBundle] loadNibNamed:@"CurtainTableViewCell" owner:self options:nil] lastObject];
+//    self.cell.slider.continuous = NO;
+//    [self.cell.slider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
+//    [self.cell.open addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.cell.close addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+//    self.cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
 }
 -(IBAction)save:(id)sender
@@ -117,11 +118,11 @@
 {
     if (section==0) {
         return _lightArrs.count;
-    }else if (section == 1){
-       return _curtainArrs.count;
     }
-  
-    return 0;
+    
+    
+       return _curtainArrs.count;
+    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -134,15 +135,19 @@
         cell.slider.continuous = NO;
         cell.deviceid = self.lightArrs[indexPath.row];
         return cell;
-    }else if (indexPath.section == 1){
-        self.cell.selectionStyle = UITableViewCellSelectionStyleGray;
-        Device * device = [SQLManager getDeviceWithDeviceID:[_curtainArrs[indexPath.row] intValue]];
-        self.cell.label.text = device.name;
-        self.cell.deviceId = _curtainArrs[indexPath.row];
-        return self.cell;
     }
-      [self.tableView reloadData];
-    return nil;
+//        self.cell.selectionStyle = UITableViewCellSelectionStyleGray;
+//        Device * device = [SQLManager getDeviceWithDeviceID:[_curtainArrs[indexPath.row] intValue]];
+//        self.cell.label.text = device.name;
+//        self.cell.deviceId = _curtainArrs[indexPath.row];
+//        return self.cell;
+    
+    CurtainTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
+    Device * device = [SQLManager getDeviceWithDeviceID:[_curtainArrs[indexPath.row] intValue]];
+    cell.label.text = device.name;
+    cell.deviceId = _curtainArrs[indexPath.row];
+    
+    return cell;
 }
 
 
