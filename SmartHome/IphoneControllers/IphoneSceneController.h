@@ -12,4 +12,5 @@
 
 @property (nonatomic,strong) NSString * shortcutName;
 @property (nonatomic,strong) Scene *scene;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @end

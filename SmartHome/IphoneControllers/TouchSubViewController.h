@@ -23,7 +23,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *sceneName;
 @property (weak, nonatomic) IBOutlet UILabel *sceneDescribe;
 @property (weak, nonatomic) IBOutlet UIView *sceneView;
-- (instancetype)initWithTitle:(NSString *)title;
+@property (nonatomic,assign) int sceneID;
+@property (nonatomic,assign) int roomID;
+
+
+//- (instancetype)initWithTitle:(NSString *)title;
 -(void)setSceneName:(UILabel *)sceneName;
 -(void)setSceneDescribe:(UILabel *)sceneDescribe;
 @end

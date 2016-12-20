@@ -1746,7 +1746,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7mq-tK-5f2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2409" y="319"/>
+            <point key="canvasLocation" x="2236" y="487"/>
         </scene>
         <!--编辑场景-->
         <scene sceneID="jJL-4i-9vO">
@@ -1832,7 +1832,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xHe-WT-B8x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2757" y="244"/>
+            <point key="canvasLocation" x="2784" y="227"/>
         </scene>
         <!--另存为新场景-->
         <scene sceneID="33Y-I7-8Da">
@@ -3834,7 +3834,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YSV-vv-ujc">
                                 <rect key="frame" x="55" y="211" width="265" height="245"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="场景名称" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a3R-3c-xGA">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="场景名称" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a3R-3c-xGA">
                                         <rect key="frame" x="17" y="10" width="231" height="29"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="29" id="KsO-s6-Yga"/>
@@ -3843,21 +3843,30 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="场景里面的设备简介" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Exg-c7-kG1">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="场景里面的设备简介" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Exg-c7-kG1">
                                         <rect key="frame" x="24" y="81" width="217" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9VU-J4-0hB">
+                                        <rect key="frame" x="5" y="5" width="255" height="235"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.90309139530000004" green="0.90309139530000004" blue="0.90309139530000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="a3R-3c-xGA" secondAttribute="trailing" constant="17" id="3fX-c3-mCG"/>
+                                    <constraint firstItem="Exg-c7-kG1" firstAttribute="centerX" secondItem="YSV-vv-ujc" secondAttribute="centerX" id="8dg-OT-M1L"/>
+                                    <constraint firstItem="a3R-3c-xGA" firstAttribute="centerX" secondItem="YSV-vv-ujc" secondAttribute="centerX" id="9u7-C4-BrV"/>
                                     <constraint firstItem="Exg-c7-kG1" firstAttribute="leading" secondItem="YSV-vv-ujc" secondAttribute="leading" constant="24" id="EX8-5J-EKQ"/>
                                     <constraint firstItem="Exg-c7-kG1" firstAttribute="top" secondItem="a3R-3c-xGA" secondAttribute="bottom" constant="42" id="IBV-Ed-QYr"/>
                                     <constraint firstItem="a3R-3c-xGA" firstAttribute="leading" secondItem="YSV-vv-ujc" secondAttribute="leading" constant="17" id="Vv0-Aj-QdM"/>
+                                    <constraint firstItem="9VU-J4-0hB" firstAttribute="top" secondItem="YSV-vv-ujc" secondAttribute="top" constant="5" id="bTe-Bn-94Q"/>
+                                    <constraint firstAttribute="trailing" secondItem="9VU-J4-0hB" secondAttribute="trailing" constant="5" id="lEU-Qn-l76"/>
                                     <constraint firstAttribute="trailing" secondItem="Exg-c7-kG1" secondAttribute="trailing" constant="24" id="qFg-xS-CPR"/>
+                                    <constraint firstItem="9VU-J4-0hB" firstAttribute="leading" secondItem="YSV-vv-ujc" secondAttribute="leading" constant="5" id="vvr-pB-HIz"/>
                                     <constraint firstItem="a3R-3c-xGA" firstAttribute="top" secondItem="YSV-vv-ujc" secondAttribute="top" constant="10" id="w2A-Xm-JsC"/>
+                                    <constraint firstAttribute="bottom" secondItem="9VU-J4-0hB" secondAttribute="bottom" constant="5" id="yqE-N6-p3C"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -3867,10 +3876,12 @@
                             <constraint firstItem="YSV-vv-ujc" firstAttribute="centerY" secondItem="co1-cr-sYf" secondAttribute="centerY" id="Kec-Cq-67i"/>
                             <constraint firstItem="YSV-vv-ujc" firstAttribute="leading" secondItem="co1-cr-sYf" secondAttribute="leadingMargin" constant="39" id="Vb1-am-WqR"/>
                             <constraint firstItem="YSV-vv-ujc" firstAttribute="centerX" secondItem="co1-cr-sYf" secondAttribute="centerX" id="mWF-h0-kNv"/>
+                            <constraint firstItem="YSV-vv-ujc" firstAttribute="centerX" secondItem="co1-cr-sYf" secondAttribute="centerX" id="w6t-Np-ffB"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="3D-touch" id="vwL-AS-HIU"/>
                     <connections>
+                        <outlet property="PicImageView" destination="9VU-J4-0hB" id="lby-jn-1Tw"/>
                         <outlet property="sceneDescribe" destination="Exg-c7-kG1" id="ODM-yx-fbg"/>
                         <outlet property="sceneName" destination="a3R-3c-xGA" id="I5H-Ec-TnT"/>
                         <outlet property="sceneView" destination="YSV-vv-ujc" id="cQ6-PJ-lpK"/>
@@ -3913,7 +3924,7 @@
                                         <rect key="frame" x="0.0" y="28" width="295" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7Ha-DV-CiH" id="flR-9v-lQO">
-                                            <rect key="frame" x="0.0" y="0.0" width="295" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="295" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lel-bN-a7e">
@@ -4030,7 +4041,7 @@
                                         <rect key="frame" x="0.0" y="28" width="295" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uE2-Un-cut" id="eDO-nO-7zd">
-                                            <rect key="frame" x="0.0" y="0.0" width="295" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="295" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bAj-iT-Mv4">
@@ -4147,7 +4158,7 @@
                                         <rect key="frame" x="0.0" y="28" width="295" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OAW-N8-Xfu" id="r3g-Sq-aSq">
-                                            <rect key="frame" x="0.0" y="0.0" width="295" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="295" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Vq-OX-AEV">
@@ -4265,7 +4276,7 @@
                                         <rect key="frame" x="0.0" y="28" width="295" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0PQ-LO-mvY" id="L2u-y0-sWL">
-                                            <rect key="frame" x="0.0" y="0.0" width="295" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="295" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="00E-Jw-nDD">
@@ -4395,8 +4406,8 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="WeN-Qz-0Az"/>
         <segue reference="qN8-z6-Gb7"/>
         <segue reference="YuF-MW-0b0"/>
+        <segue reference="WeN-Qz-0Az"/>
     </inferredMetricsTieBreakers>
 </document>

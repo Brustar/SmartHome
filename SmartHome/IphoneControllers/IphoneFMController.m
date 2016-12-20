@@ -29,6 +29,7 @@
 @property (nonatomic,strong) NSMutableArray *allFavouriteChannels;
 @property (nonatomic,strong) NSString *eNumber;
 @property (weak, nonatomic) IBOutlet UIView *coverView;
+@property (nonatomic,assign) NSInteger  fmId;
 @end
 
 @implementation IphoneFMController
@@ -159,7 +160,11 @@
     cell.delegate = self;
     [cell hiddenBtns];
     TVChannel *channel = self.allFavouriteChannels[indexPath.row];
+    self.fmId = channel.channel_id;
     cell.chanelNum.text = [NSString stringWithFormat:@"%ld",(long)channel.channel_id];
+    if (cell.channelName.text) {
+        
+    }
     cell.channelName.text = [NSString stringWithFormat:@"%@",channel.channel_name];
     [cell useLongPressGesture];
     return cell;
@@ -206,6 +211,7 @@
     self.editView.hidden = YES;
     self.NameEditTF.hidden = YES;
 //    self.NameEditTF.text = cell.channelName.text;
+
     [self.collectionView reloadData];
 }
 - (IBAction)determineBtn:(FMCollectionViewCell *)cell {
@@ -213,8 +219,11 @@
     self.editView.hidden = YES;
     self.NameEditTF.hidden = YES;
     TVChannel * channel;
-//    [SQLManager ];
-    self.NameEditTF.text = cell.channelName.text;
+    channel.channel_name = self.NameEditTF.text;
+
+    [SQLManager getAllChangeChannelForFavoritedNewName:self.NameEditTF.text FmId:self.fmId];
+    
+//    self.NameEditTF.text = cell.channelName.text;
     [self.collectionView reloadData];
 }
 

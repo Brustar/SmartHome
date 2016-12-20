@@ -111,8 +111,8 @@
     {
         DetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         
-        //        cell.label.text = self.projectNames[self.segment.selectedSegmentIndex];
-        cell.label.text = @"DVD";
+                cell.label.text = self.projectNames[self.segment.selectedSegmentIndex];
+//        cell.label.text = @"DVD";
         self.cell = cell;
         self.switchView = cell.power;//[[UISwitch alloc] initWithFrame:CGRectZero];
         _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];

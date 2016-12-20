@@ -32,7 +32,7 @@
     if(!_projectIds)
     {
         _projectIds = [NSMutableArray array];
-        if(self.sceneid > 0 && !self.isAddDevice)
+        if(self.sceneid > 0 && self.isAddDevice)
         {
             NSArray *projects = [SQLManager getDeviceIDsBySeneId:[self.sceneid intValue]];
             
@@ -93,7 +93,7 @@
         
     }
     [self.segment removeAllSegments];
-    for(int i = 0; i < self.projectNames.count; i++)
+ for(int i = 0; i < self.projectNames.count; i++)
     {
         [self.segment insertSegmentWithTitle:self.projectNames[i] atIndex:i animated:NO];
     }

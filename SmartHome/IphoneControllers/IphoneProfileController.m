@@ -84,7 +84,8 @@
         self.imageView.layer.masksToBounds = YES; //圆角
         [cell.imageView addSubview:self.imageView];
         MSGController * msgVC = [MSGController new];
-        NSMutableSet * mSet = msgVC.set;
+        NSMutableSet * mSet = [[NSMutableSet alloc] init];
+          mSet = msgVC.set;
         NSEnumerator * en = [mSet objectEnumerator];
         if (self.imageView == [en nextObject]) {
             self.imageView.hidden = NO;
@@ -156,7 +157,6 @@
     }]];
     
     [alert addAction:[UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
-        
         PickerImage.sourceType = UIImagePickerControllerSourceTypeCamera;
         PickerImage.allowsEditing = YES;
         PickerImage.delegate = self;
@@ -165,8 +165,6 @@
 
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];
- 
-   
 }
 
 
