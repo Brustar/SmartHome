@@ -84,8 +84,7 @@
         self.imageView.layer.masksToBounds = YES; //圆角
         [cell.imageView addSubview:self.imageView];
         MSGController * msgVC = [MSGController new];
-        NSMutableSet * mSet = [[NSMutableSet alloc] init];
-          mSet = msgVC.set;
+        NSMutableSet * mSet = msgVC.set;
         NSEnumerator * en = [mSet objectEnumerator];
         if (self.imageView == [en nextObject]) {
             self.imageView.hidden = NO;
