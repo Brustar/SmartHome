@@ -135,6 +135,7 @@
         cell.slider.continuous = NO;
         cell.deviceid = self.lightArrs[indexPath.row];
         return cell;
+
     }
 //        self.cell.selectionStyle = UITableViewCellSelectionStyleGray;
 //        Device * device = [SQLManager getDeviceWithDeviceID:[_curtainArrs[indexPath.row] intValue]];
@@ -148,6 +149,7 @@
     cell.deviceId = _curtainArrs[indexPath.row];
     
     return cell;
+
 }
 
 
