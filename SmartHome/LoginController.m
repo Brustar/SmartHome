@@ -393,12 +393,13 @@
             NSString * host_brand_number = responseObject[@"host_brand_number"];
             NSString * homename = responseObject[@"homename"];
         if (homename == nil) {
-              [self.home_room_infoArr addObject:@" "];
-       }
-            [self.home_room_infoArr addObject:homename];
-            [self.home_room_infoArr addObject:hostbrand];
-            [self.home_room_infoArr addObject:host_brand_number];
-            [self.home_room_infoArr addObject:[NSNumber numberWithInteger:home_id]];
+                [self.home_room_infoArr addObject:@" "];
+        }else{
+                [self.home_room_infoArr addObject:homename];
+        }
+        [self.home_room_infoArr addObject:hostbrand];
+        [self.home_room_infoArr addObject:host_brand_number];
+        [self.home_room_infoArr addObject:[NSNumber numberWithInteger:home_id]];
 
     
     NSArray  *paths  =  NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
