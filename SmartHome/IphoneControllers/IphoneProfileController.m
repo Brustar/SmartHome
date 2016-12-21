@@ -172,6 +172,7 @@
     UIImage *newPhoto = [info objectForKey:@"UIImagePickerControllerEditedImage"];
 //    _myHeadPortrait.image = newPhoto;
     [self.PorTraintButton setBackgroundImage:newPhoto forState:UIControlStateNormal];
+//    [self saveImage:newPhoto withName:<#(NSString *)#>];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -192,7 +193,16 @@
     }
     
 }
-
+-(void)saveImage:(UIImage *)currentImage
+{
+    NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
+    // 获取沙盒目录
+    
+    NSString *fullPath =[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    // 将图片写入文件
+    
+    [imageData writeToFile:fullPath atomically:NO];
+}
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self performSegueWithIdentifier:self.segues[indexPath.row] sender:self];

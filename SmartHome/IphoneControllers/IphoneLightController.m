@@ -104,9 +104,14 @@
 {
 
     if (section == 0) {
+        if (_lightArrs.count == 0) {
+            return nil;
+        }
         return @"灯";
     }
-
+    if (_curtainArrs.count == 0) {
+        return nil;
+    }
     return @"窗帘";
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -119,10 +124,7 @@
     if (section==0) {
         return _lightArrs.count;
     }
-    
-    
        return _curtainArrs.count;
-    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -333,9 +333,6 @@
             return;
         }
     }
-    
-   
-    
     if (self.startTimeBtn.selected) {
         self.schedule.startTime = time;
     }else {
