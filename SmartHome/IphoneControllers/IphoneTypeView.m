@@ -50,8 +50,6 @@
         [button removeFromSuperview];
         button.hidden = YES;
     }
-
-    
     self.selectedButtonCount = 0;
 }
 
@@ -93,8 +91,6 @@
     [self setViewFrame];
 }
 
-
-
 - (void)setSelectButton:(int)index {
     
     
@@ -120,11 +116,9 @@
 -(void)clickButton:(UIButton *)btn
 {
     self.selectedButton.enabled = YES;
-    
     btn.enabled = NO;
-    
     self.selectedButton = btn;
-    
+
     if ([self.delegate respondsToSelector:@selector(iphoneTypeView:didSelectButton:)]) {
         [self.delegate iphoneTypeView:self didSelectButton:(int)btn.tag];
     }

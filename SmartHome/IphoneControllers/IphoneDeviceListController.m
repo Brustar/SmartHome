@@ -10,7 +10,6 @@
 
 #import "IphoneDeviceListController.h"
 #import "SQLManager.h"
-
 #import "Room.h"
 #import "LightController.h"
 #import "CurtainController.h"
@@ -58,8 +57,7 @@
 -(void)setUpScrollerView
 {
     self.deviceTypeView.dataArray = self.deviceTypes;
-    
-    
+
     self.deviceTypeView.delegate = self;
     
     [self.deviceTypeView setSelectButton:0];

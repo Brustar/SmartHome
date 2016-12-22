@@ -126,7 +126,7 @@
 
 -(NSArray *)deviceAdded
 {
-    NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
+    NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID]; 
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
     NSArray *devices = plistDic[@"devices"];
@@ -190,7 +190,6 @@
 }
 
 - (IBAction)selectSceneImg:(id)sender {
-    
     UIButton *btn = sender;
     UIView *view = btn.superview;
     CGFloat w = view.frame.size.width;

@@ -25,8 +25,6 @@
 #import "IPhoneRoom.h"
 #import "DeviceInfo.h"
 
-
-
 @interface IphoneFamilyViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,TcpRecvDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic)  IBOutlet UIView *supView;

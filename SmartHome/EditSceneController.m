@@ -124,9 +124,9 @@
 - (void)setupData
 {
    
-    self.devicesTypes = [SQLManager getSubTydpeBySceneID:self.sceneID];
+    self.devicesTypes = [SQLManager getSubTydpeBySceneID:self.sceneID];//设备大类
     
-    self.subTypeArr = [SQLManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.devicesTypes[0]];
+    self.subTypeArr = [SQLManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.devicesTypes[0]];//设备子类
     
     [self.tableView reloadData];
     [self.subDeviceTableView reloadData];
@@ -311,7 +311,6 @@
             screenCurtainVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
             [self addViewAndVC:screenCurtainVC];
            
-
         }else if([typeName isEqualToString:@"投影"])
         {
             ProjectController *projectVC = [storyBoard instantiateViewControllerWithIdentifier:@"ProjectController"];
