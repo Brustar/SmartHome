@@ -16,19 +16,19 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *astronomicalHight;
 @property (weak, nonatomic) IBOutlet UIButton *astronomicalBut;
 @property (weak, nonatomic) IBOutlet UIButton *customTimeBtn;
-@property (weak, nonatomic) IBOutlet UIView *astronomicalView;
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *astronmicalTypes;
+@property (weak, nonatomic) IBOutlet UIView *astronomicalView;//设置天文时钟的view
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *astronmicalTypes;//天文时钟的四个button
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerTime;
 @property (weak, nonatomic) IBOutlet UIButton *startTimeBtn;//开始时间
 @property (weak, nonatomic) IBOutlet UIButton *endTimeBtn;//结束时间
 @property (nonatomic,strong) NSArray *hours;
 @property (nonatomic,strong) NSArray *minutes;
-@property (weak, nonatomic) IBOutlet UIView *customView;
+@property (weak, nonatomic) IBOutlet UIView *customView;//自定义时段的View
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *customViewHight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *repeatViewHight;
 @property (strong, nonatomic) UIDatePicker *dataPicker;//日期
-@property (weak, nonatomic) IBOutlet UILabel *repeatLabel;
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *repeatBtns;
+@property (weak, nonatomic) IBOutlet UILabel *repeatLabel;//有无重复
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *repeatBtns;//周一到周日
 @property (nonatomic,strong) NSMutableDictionary *dic;
 @property (nonatomic,strong) NSMutableString *repeatTime;
 @property (nonatomic, assign) BOOL isSceneSetTime;
@@ -37,6 +37,7 @@
 @property (nonatomic,strong) Schedule *schedule;
 @property (weak, nonatomic) IBOutlet UIButton *StartDay;//开始日期
 @property (weak, nonatomic) IBOutlet UIButton *EndDay;//结束日期
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
 
 @end
 
@@ -125,10 +126,18 @@
     self.schedule = [[Schedule alloc]initWhithoutSchedule];
     
      [self createDatePicker];
-    for(UIButton *btn in self.astronmicalTypes)
-    {
-        btn.hidden = YES;
+//     [self setupSegmentLight];
+       self.segment.selectedSegmentIndex = 0;
+    if (self.segment.selectedSegmentIndex == 0) {
+        self.astronomicalView.hidden = NO;
+        self.astronomicalHight.constant = 80;
+        for(UIButton *btn in self.astronmicalTypes)
+        {
+            btn.hidden = NO;
+        }
     }
+    [self.segment addTarget:self action:@selector(change:) forControlEvents:UIControlEventValueChanged];
+   
     self.customView.hidden = YES;
     self.customViewHight.constant = 0;
 
@@ -140,12 +149,24 @@
     }
 }
 
+-(void)change:(UISegmentedControl *)sender{
 
+    if (sender.selectedSegmentIndex == 0) {
+        self.astronomicalView.hidden = NO;
+        self.customView.hidden = YES;
+        [self selectedAstronomicalBtn:sender];
+    }else if (sender.selectedSegmentIndex == 1){
+        self.customView.hidden = NO;
+        self.astronomicalView.hidden = YES;
+        [self selectedCustomTimeBtn:sender];
+    }
+}
 //天文时钟
 - (IBAction)selectedAstronomicalBtn:(id)sender {
     UIButton *btn = sender;
     btn.selected = !btn.selected;
-    if(btn.selected)
+   ;
+    if(self.segment.selectedSegmentIndex ==0)
     {
         [self.astronomicalBut setImage:[UIImage imageNamed:@"selected"] forState:UIControlStateSelected];
         self.customTimeBtn.enabled = NO;
@@ -166,14 +187,13 @@
         {
             btn.hidden = YES;
         }
-
     }
 }
 //自定义时段
 - (IBAction)selectedCustomTimeBtn:(id)sender {
     UIButton *btn = sender;
     btn.selected = !btn.selected;
-    if(btn.selected)
+    if(self.segment.selectedSegmentIndex ==1)
     {
         [self.customTimeBtn setImage:[UIImage imageNamed:@"selected"] forState:UIControlStateSelected];
         self.customView.hidden = NO;
@@ -206,10 +226,7 @@
 - (IBAction)selectedRepeatTime:(id)sender {
     UIButton *btn = sender;
     btn.selected = !btn.selected;
-    
-
     NSArray *name = [NSArray arrayWithObjects:@"日", @"一", @"二", @"三", @"四", @"五", @"六", nil];
-    
     BOOL isFirst = true;
     
     [self.repeatTime setString:@""];
@@ -303,7 +320,11 @@
         return self.minutes.count;
     }
 }
-
+- (void)setupSegmentLight
+{
+ 
+    self.segment.selectedSegmentIndex = 0;
+}
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     if(component == 0 )

@@ -22,7 +22,8 @@
 @property (nonatomic,assign) BOOL isEditing;
 @property (nonatomic,assign) NSInteger notify_id;
 @property (nonatomic,assign) NSInteger unreadcount;
-
+@property (nonatomic,strong) UIImageView * image;
+@property (nonatomic,strong) UILabel * label;
 
 @end
 
@@ -75,8 +76,73 @@
         [self sendRequestForDetailMsgWithItemId:[_itemID intValue]];
     }
     
+    [self createImage];
 }
 
+-(void)createImage
+{
+    self.image = [[UIImageView alloc] init];
+    self.image.image = [UIImage imageNamed:@"PL"];
+    [self.view addSubview:self.image];
+    [self addPicConstraint];
+    self.image.hidden = YES;
+    self.label = [[UILabel alloc]init];
+    self.label.hidden = YES;
+    self.label.numberOfLines = 0;
+    self.self.label.text = @"暂时没有任何消息提醒";
+    self.self.label.textColor = [UIColor lightGrayColor];
+    [self addLabelConstraint];
+    [self.view addSubview:self.self.label];
+   
+}
+
+-(void)addLabelConstraint
+{
+    //使用代码布局 需要将这个属性设置为NO
+    self.label.translatesAutoresizingMaskIntoConstraints = NO;
+    //创建x居中的约束
+    NSLayoutConstraint * constraintx = [NSLayoutConstraint constraintWithItem:self.label attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+    //创建y居中的约束
+    NSLayoutConstraint * constrainty = [NSLayoutConstraint constraintWithItem:self.label attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+    //创建宽度约束
+    NSLayoutConstraint * constraintw = [NSLayoutConstraint constraintWithItem:self.label attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:200];
+    //创建高度约束
+    NSLayoutConstraint * constrainth = [NSLayoutConstraint constraintWithItem:self.label attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:200];
+    //添加约束之前，必须将视图加在父视图上
+    [self.view addSubview:self.label];
+    [self.view addConstraints:@[constraintx,constrainty,constrainth,constraintw]];
+
+}
+- (void)addPicConstraint{
+    
+    //禁用antoresizing
+    
+    _image.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    //添加高约束
+    
+    NSLayoutConstraint *picHeight = [NSLayoutConstraint constraintWithItem:_image attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:70];
+    
+    [_image addConstraint:picHeight];
+    
+    //添加宽约束
+    
+    NSLayoutConstraint *picWeight = [NSLayoutConstraint constraintWithItem:_image attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:70];
+    
+    [_image addConstraint:picWeight];
+    
+    //添加y方向约束
+    
+    NSLayoutConstraint *picTop = [NSLayoutConstraint constraintWithItem:_image attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_image.superview attribute:NSLayoutAttributeTop multiplier:1.0 constant:160];
+    [self.view addConstraint:picTop];
+    
+    //添加x方向约束
+    
+    NSLayoutConstraint *picVer = [NSLayoutConstraint constraintWithItem:_image attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_image.superview attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
+    
+    [self.view addConstraint:picVer];
+    
+}
 
 -(void)sendRequestForDetailMsgWithItemId:(int)itemID
 {
@@ -138,6 +204,14 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    if (self.msgArr.count == 0) {
+        self.image.hidden = NO;
+        self.self.label.hidden = NO;
+    }else{
+        self.image.hidden = YES;
+        self.self.label.hidden = YES;
+    }
     return self.msgArr.count;
 }
 

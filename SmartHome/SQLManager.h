@@ -118,4 +118,7 @@
 + (NSString *)getDeviceSubTypeNameWithID:(int)ID;
 +(NSArray *)getDetailListWithID:(NSInteger)ID;
 +(NSArray *)getAllDevicesIds;
+//编辑fm
++(BOOL)getAllChangeChannelForFavoritedNewName:(NSString *)newName FmId:(NSInteger)fmId;
++(NSString *)getDevicePicByID:(int)sceneID;
 @end

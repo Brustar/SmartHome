@@ -707,7 +707,26 @@
     [db close];
     return subTypeName;
 }
-
++(NSString *)getDevicePicByID:(int)sceneID
+{
+    NSString *subTypeName = nil;
+    
+    FMDatabase *db = [self connetdb];
+    
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT pic FROM Scenes where ID = %d and masterID = '%ld'",sceneID,[[DeviceInfo defaultManager] masterID]];
+        
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            subTypeName = [resultSet stringForColumn:@"pic"];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return subTypeName;
+}
 + (NSArray *)getDeviceIDWithRoomID:(int)roomID sceneID:(int)sceneID
 {
     NSArray *deviceIDs;
@@ -1549,7 +1568,20 @@
     
     return mutabelArr;
 }
-
+//编辑fm
++(BOOL)getAllChangeChannelForFavoritedNewName:(NSString *)newName FmId:(NSInteger)fmId
+{
+    // 写sqlite更新场景表的isFavorite字段
+    FMDatabase *db = [SQLManager connetdb];
+    if (![db open]) {
+        NSLog(@"Could not open db.");
+        return NO;
+    }
+    BOOL result = [db executeUpdate:[NSString stringWithFormat:@"UPDATE Channels SET Channel_name ='%@' where isFavorite = 1 and id = %ld",newName,fmId]];
+    
+    [db close];
+    return result;
+}
 +(BOOL)deleteChannelForChannelID:(NSInteger)channel_id
 {
     FMDatabase *db = [SQLManager connetdb];

@@ -71,7 +71,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = @"DVD";
+    self.title = @"网络电视";
     self.tableView.tableFooterView = [UIView new];
     [self setupSeguentProject];
     [self.slider addTarget:self action:@selector(slider:) forControlEvents:UIControlEventValueChanged];

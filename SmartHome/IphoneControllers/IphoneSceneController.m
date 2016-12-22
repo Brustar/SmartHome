@@ -33,7 +33,6 @@
 @property (nonatomic,strong) UIButton *selectedRoomBtn;
 @property (nonatomic,strong) NSArray *scenes;
 @property (nonatomic, assign) int roomIndex;
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic,assign) int selectedSId;
 @property (nonatomic ,strong) SceneCell *cell;
 @property (weak, nonatomic) IBOutlet UIButton *AddSceneBtn;
@@ -168,8 +167,9 @@
      UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     TouchSubViewController * touchSubViewVC = [storyboard instantiateViewControllerWithIdentifier:@"TouchSubViewController"];
       touchSubViewVC.preferredContentSize = CGSizeMake(0.0f,500.0f);
-    touchSubViewVC.sceneName.text = self.scene.sceneName;
-    touchSubViewVC.sceneDescribe.text = @"uuiiihubb";
+//      touchSubViewVC.sceneID = self.scene.sceneID;
+      touchSubViewVC.sceneID = self.selectedSId;
+      touchSubViewVC.roomID = self.roomID;
     
     return touchSubViewVC;
 }
@@ -196,7 +196,8 @@
     cell.delegate = self;
     [cell.imgView sd_setImageWithURL:[NSURL URLWithString: self.scene.picName] placeholderImage:[UIImage imageNamed:@"PL"]];
     [cell useLongPressGesture];
-   [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];  
+   [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];
+//    [self.collectionView reloadData];
     return cell;
 }
 
@@ -262,6 +263,7 @@
                     if (scene) {
                         [[SceneManager defaultManager] delScene:scene];
                         [MBProgressHUD showSuccess:@"删除成功"];
+                        [self.collectionView reloadData];
                     }else {
                         NSLog(@"scene 不存在！");
                         [MBProgressHUD showSuccess:@"删除失败"];

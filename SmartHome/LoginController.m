@@ -397,8 +397,17 @@
         }else{
                 [self.home_room_infoArr addObject:homename];
         }
-        [self.home_room_infoArr addObject:hostbrand];
-        [self.home_room_infoArr addObject:host_brand_number];
+       if (hostbrand == nil) {
+                [self.home_room_infoArr addObject:@" "];
+       }else{
+           [self.home_room_infoArr addObject:hostbrand];
+       }
+       if (host_brand_number == nil) {
+           [self.home_room_infoArr addObject:@" "];
+       }else{
+            [self.home_room_infoArr addObject:host_brand_number];
+       }
+   
         [self.home_room_infoArr addObject:[NSNumber numberWithInteger:home_id]];
 
     
