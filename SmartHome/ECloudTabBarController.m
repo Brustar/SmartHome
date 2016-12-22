@@ -34,7 +34,12 @@
 {
     [super viewDidAppear:animated];
     
-    [self tabBarDidSelectButtonWithType:self.cloudTabBar.selectButton.type subType:self.cloudTabBar.selectButton.subType];
+    //[self tabBarDidSelectButtonWithType:self.cloudTabBar.selectButton.type subType:self.cloudTabBar.selectButton.subType];
+    NSDictionary *dict = @{
+                           @"type":@(1),
+                           @"subType":@(0)
+                           };
+    [NC postNotificationName:@"tabBar" object:nil userInfo:dict];
 }
 
 
@@ -45,7 +50,7 @@
     {
         self.selectedIndex = type;
     }
-    if(self.selectedIndex == 0)
+    if(self.selectedIndex == 0) //场景
     {
         NSString *str = [NSString stringWithFormat:@"%d", (int)subType];
         NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:str, @"subType",nil ];

@@ -127,6 +127,7 @@
 		2E6328111E03CE4B000D7BE9 /* IPhoneNetVV.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6328101E03CE4B000D7BE9 /* IPhoneNetVV.m */; };
 		2E6CEDBF1DE5DE8B000979BE /* DetailMSGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CEDBE1DE5DE8B000979BE /* DetailMSGViewController.m */; };
 		2EDC0E901DEC072700F95BE0 /* IPhoneRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDC0E8F1DEC072700F95BE0 /* IPhoneRoom.m */; };
+		CD43046F1E0B674000B594F4 /* FamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD43046E1E0B674000B594F4 /* FamilyViewController.m */; };
 		F361579D9B9637C261531C8C /* libPods-SmartHome.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B2DBF5C92F57E3B7AD6AA3 /* libPods-SmartHome.a */; };
 		F60E71CA1D796BE6008863DB /* AmplifierController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60E71C91D796BE6008863DB /* AmplifierController.m */; };
 		F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB411D00029900AB04BE /* DetailViewController.m */; };
@@ -657,6 +658,8 @@
 		2EDC0E8F1DEC072700F95BE0 /* IPhoneRoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPhoneRoom.m; sourceTree = "<group>"; };
 		9B45FF693457BA21BA43CE05 /* Pods-SmartHome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.debug.xcconfig"; sourceTree = "<group>"; };
 		A4B2DBF5C92F57E3B7AD6AA3 /* libPods-SmartHome.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SmartHome.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD43046D1E0B674000B594F4 /* FamilyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyViewController.h; sourceTree = "<group>"; };
+		CD43046E1E0B674000B594F4 /* FamilyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyViewController.m; sourceTree = "<group>"; };
 		CE54136C9EEF8F51E8FBEEDE /* Pods-SmartHome.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.release.xcconfig"; sourceTree = "<group>"; };
 		F60E71C81D796BE6008863DB /* AmplifierController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmplifierController.h; sourceTree = "<group>"; };
 		F60E71C91D796BE6008863DB /* AmplifierController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmplifierController.m; sourceTree = "<group>"; };
@@ -1762,6 +1765,8 @@
 				F6DC641A1DEBC2250056EC00 /* RoomDeviceCell.m */,
 				F6DC641C1DEC17710056EC00 /* RoomDeviceController.h */,
 				F6DC641D1DEC17710056EC00 /* RoomDeviceController.m */,
+				CD43046D1E0B674000B594F4 /* FamilyViewController.h */,
+				CD43046E1E0B674000B594F4 /* FamilyViewController.m */,
 			);
 			name = iPadControllers;
 			sourceTree = "<group>";
@@ -1773,7 +1778,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0F032D771CC9B12700D1920D /* Build configuration list for PBXNativeTarget "SmartHome" */;
 			buildPhases = (
-				CAA59AA0339CA487ED75EDCC /* 📦 Check Pods Manifest.lock */,
+				CAA59AA0339CA487ED75EDCC /* [CP] Check Pods Manifest.lock */,
 				3FB63364E5E8E971F832FF9B /* [CP] Check Pods Manifest.lock */,
 				0D4CB7A112BAB6A5B4475248 /* [CP] Check Pods Manifest.lock */,
 				526834747F80F77E4EA860E8 /* [CP] Check Pods Manifest.lock */,
@@ -2106,19 +2111,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		CAA59AA0339CA487ED75EDCC /* 📦 Check Pods Manifest.lock */ = {
+		CAA59AA0339CA487ED75EDCC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2297,6 +2302,7 @@
 				F66596E01D3F25610082716A /* SceneController.m in Sources */,
 				F6755A5E1D40D576002394F3 /* ECloudMoreView.m in Sources */,
 				0FAF74AD1CEE9A9600432713 /* LightController.m in Sources */,
+				CD43046F1E0B674000B594F4 /* FamilyViewController.m in Sources */,
 				F69C82361D363A4D002DE6D7 /* ServiceRecordCell.m in Sources */,
 				F65164101D37672700A6F5FA /* MyEnergyCell.m in Sources */,
 				0F96A1651D17F37C00E1594F /* RulerItemModel.m in Sources */,

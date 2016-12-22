@@ -1,17 +1,16 @@
-
 //
-//  IphoneFamilyViewController.m
+//  FamilyViewController.m
 //  SmartHome
 //
-//  Created by 逸云科技 on 2016/11/11.
+//  Created by KobeBryant on 2016/12/21.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
-#define cellWidth self.collectionView.frame.size.width / 2.0 -20
+#define cellWidth self.collectionView.frame.size.width / 3.0 -40
 #define  minSpace 20
 #define  maxSpace 40
 
-#import "IphoneFamilyViewController.h"
+#import "FamilyViewController.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "FamilyCell.h"
@@ -22,12 +21,12 @@
 #import "SocketManager.h"
 #import "SceneManager.h"
 #import "IphoneLightController.h"
+#import "LightController.h"
 #import "IPhoneRoom.h"
 #import "DeviceInfo.h"
 
+@interface FamilyViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,TcpRecvDelegate>
 
-
-@interface IphoneFamilyViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,TcpRecvDelegate>
 @property (weak, nonatomic)  IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic)  IBOutlet UIView *supView;
 @property (nonatomic,strong) NSMutableArray * roomIdArrs;//房间数量
@@ -40,7 +39,8 @@
 
 @end
 
-@implementation IphoneFamilyViewController
+@implementation FamilyViewController
+
 -(NSMutableArray *)roomIdArrs
 {
     if (!_roomIdArrs) {
@@ -48,7 +48,7 @@
     }
     
     return _roomIdArrs;
-
+    
 }
 
 - (void)handleTimer:(NSTimer *)theTimer {
@@ -86,9 +86,11 @@
         self.roomID = room.rId;
         self.deviceArr = [SQLManager deviceSubTypeByRoomId:self.roomID];
     }
-
+    
     //init nest dataSource
     [self initNestDataSource];
+    
+    self.title = @"我的家";
     
     if ([[UD objectForKey:@"HostID"] intValue] == 258) { //九号大院
         
@@ -166,7 +168,7 @@
                     //====从sqlite中通过id的到name
                     room.roomName = [SQLManager getRoomNameByRoomID:room.roomId];
                     
-//                    [self.iPhoneRoomList addObject:room];
+                    //                    [self.iPhoneRoomList addObject:room];
                 }
                 
                 [self.collectionView reloadData];
@@ -203,7 +205,7 @@
                         *stop = YES;
                     }
                 }
-            
+                
             }];
             
             //遍历 _nest_devices_arr， 获取 温度，湿度
@@ -222,7 +224,7 @@
                     }
                 }
                 
-            
+                
             }];
             
             NSLog(@"_nest_curr_temperature_arr: %@", _nest_curr_temperature_arr);
@@ -244,9 +246,9 @@
     
     
     
-//    NSArray * hTypeIdArr = @[@"01",@"02",@"03",@"12",@"13",@"14",@"21",@"22",@"31"];
+    //    NSArray * hTypeIdArr = @[@"01",@"02",@"03",@"12",@"13",@"14",@"21",@"22",@"31"];
     Proto proto = protocolFromData(data);
-  
+    
     if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
         return;
     }
@@ -261,20 +263,20 @@
         }if (proto.action.state==0x00) {
             for (Device * device in self.deviceArr) {
                 if (device.hTypeId == 01 || device.hTypeId == 02 || device.hTypeId == 03) {
-                      self.cell.lightImageVIew.hidden = YES;
+                    self.cell.lightImageVIew.hidden = YES;
                 }else if (device.hTypeId == 21 || device.hTypeId == 22){
                     self.cell.curtainImageView.hidden = YES;
                 }else if (device.hTypeId == 12){
-                      self.cell.TVImageView.hidden = YES;
+                    self.cell.TVImageView.hidden = YES;
                 }else if (device.hTypeId == 13){
                     self.cell.DVDImageView.hidden = YES;
                 }else if (device.hTypeId == 14){
                     self.cell.musicImageVIew.hidden = YES;
                 }else if (device.hTypeId == 31){
-                   self.cell.airImageVIew.hidden = YES;
+                    self.cell.airImageVIew.hidden = YES;
                 }
             }
-          
+            
         }if (proto.action.state==0x01) {
             for (Device * device in self.deviceArr) {
                 if (device.hTypeId == 01 || device.hTypeId == 02 || device.hTypeId == 03) {
@@ -306,8 +308,8 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    self.cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    
+    self.cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"familycell" forIndexPath:indexPath];
     Room * room = self.rooms[indexPath.row];
     self.cell.nameLabel.text = room.rName;
     
@@ -316,14 +318,14 @@
         self.cell.tempLabel.text =  [NSString stringWithFormat:@"%@%@", [_nest_curr_temperature_arr objectAtIndex:indexPath.row], @"℃"];
         self.cell.humidityLabel.text = [NSString stringWithFormat:@"%@%@", [_nest_curr_humidity_arr objectAtIndex:indexPath.row], @"%"];
     }
-
+    
     return  self.cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIStoryboard * oneStory = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-    IphoneLightController * VC = [oneStory instantiateViewControllerWithIdentifier:@"LightController"];
+    UIStoryboard * oneStory = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LightController * VC = [oneStory instantiateViewControllerWithIdentifier:@"LightController"];
     Room *room = self.rooms[indexPath.row];
     VC.roomID = room.rId;
     [self.navigationController pushViewController:VC animated:YES];
@@ -349,13 +351,5 @@
 }
 
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 @end
