@@ -27,9 +27,11 @@
     self.DVDImageView.layer.cornerRadius = self.DVDImageView.bounds.size.width / 2.0;
     self.TVImageView.layer.cornerRadius = self.TVImageView.bounds.size.width / 2.0;
     self.musicImageVIew.layer.cornerRadius = self.musicImageVIew.bounds.size.width / 2.0;
+
     self.nameLabel.adjustsFontSizeToFitWidth = YES;
     self.tempLabel.adjustsFontSizeToFitWidth = YES;
     self.humidityLabel.adjustsFontSizeToFitWidth = YES;
+
 
 }
 -(void)setModel:(IPhoneRoom *)iphoneRom{

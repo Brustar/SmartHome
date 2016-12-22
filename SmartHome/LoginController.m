@@ -525,8 +525,6 @@
                  
                 };
     }
-    
-    
     [IOManager writeUserdefault:hostID forKey:@"HostID"];
     [IOManager writeUserdefault:self.user.text forKey:@"Account"];
     
