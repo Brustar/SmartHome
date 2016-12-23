@@ -25,8 +25,6 @@
 #import "IPhoneRoom.h"
 #import "DeviceInfo.h"
 
-
-
 @interface IphoneFamilyViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,TcpRecvDelegate>
 @property (weak, nonatomic)  IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic)  IBOutlet UIView *supView;
@@ -97,7 +95,6 @@
         [self nestLogin];
     }
 }
-
 - (void)initNestDataSource {
     _nest_devices_arr = [[NSMutableArray alloc] init];
     _nest_curr_temperature_arr = [[NSMutableArray alloc] init];
@@ -140,13 +137,10 @@
     http.tag = 3;
     [http sendGet:_nest_status_req_url param:nil header:_nest_status_req_header];
 }
-
-
 #pragma mark - Http callback
 - (void)httpHandler:(id)responseObject tag:(int)tag
 {
     if (tag == 1) {
-        
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSLog(@"responseObject:%@", responseObject);
             if ([responseObject[@"result"] integerValue] == 0) {
@@ -215,14 +209,11 @@
                     if (temperatureObj) {
                         [_nest_curr_temperature_arr addObject:[temperatureObj description]];
                     }
-                    
                     NSString *humidityObj =[NSString stringWithFormat:@"%d", [responseObject[@"device"][deviceID][@"current_humidity"] intValue]];//湿度
                     if (humidityObj) {
                         [_nest_curr_humidity_arr addObject:humidityObj];
                     }
                 }
-                
-            
             }];
             
             NSLog(@"_nest_curr_temperature_arr: %@", _nest_curr_temperature_arr);
@@ -241,9 +232,6 @@
     if ([[UD objectForKey:@"HostID"] intValue] == 258) {  //九号大院
         return;
     }
-    
-    
-    
 //    NSArray * hTypeIdArr = @[@"01",@"02",@"03",@"12",@"13",@"14",@"21",@"22",@"31"];
     Proto proto = protocolFromData(data);
   
@@ -328,8 +316,6 @@
     VC.roomID = room.rId;
     [self.navigationController pushViewController:VC animated:YES];
 }
-
-
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return CGSizeMake(cellWidth, cellWidth);

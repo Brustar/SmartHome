@@ -10,7 +10,6 @@
 
 #import "IphoneDeviceListController.h"
 #import "SQLManager.h"
-
 #import "Room.h"
 #import "LightController.h"
 #import "CurtainController.h"
@@ -58,8 +57,7 @@
 -(void)setUpScrollerView
 {
     self.deviceTypeView.dataArray = self.deviceTypes;
-    
-    
+
     self.deviceTypeView.delegate = self;
     
     [self.deviceTypeView setSelectButton:0];
@@ -123,6 +121,7 @@
     }else if([typeName isEqualToString:@"灯光"])
     {
         LightController *ligthVC = [storyBoard instantiateViewControllerWithIdentifier:@"LightController"];
+        ligthVC.showLightView = NO;
         ligthVC.roomID = roomID;
         
         [self addViewAndVC:ligthVC];

@@ -244,8 +244,6 @@
         return;
     }
     
-    
-    
     //    NSArray * hTypeIdArr = @[@"01",@"02",@"03",@"12",@"13",@"14",@"21",@"22",@"31"];
     Proto proto = protocolFromData(data);
     
@@ -331,7 +329,6 @@
     VC.roomID = room.rId;
     [self.navigationController pushViewController:VC animated:YES];
 }
-
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {

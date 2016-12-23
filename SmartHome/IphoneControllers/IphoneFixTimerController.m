@@ -197,7 +197,7 @@
     {
         [self.customTimeBtn setImage:[UIImage imageNamed:@"selected"] forState:UIControlStateSelected];
         self.customView.hidden = NO;
-        self.customViewHight.constant = 260;
+        self.customViewHight.constant = 220;
         self.astronomicalBut.enabled = NO;
     }else{
         [self.customTimeBtn setImage:[UIImage imageNamed:@"unselected"] forState:UIControlStateSelected];

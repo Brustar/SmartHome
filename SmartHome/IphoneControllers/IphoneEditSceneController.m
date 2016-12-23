@@ -55,9 +55,9 @@
     [super viewDidLoad];
     
     self.title = [SQLManager getSceneName:self.sceneID ];
-    self.typeArr = [SQLManager getSubTydpeBySceneID:self.sceneID];
+    self.typeArr = [SQLManager getSubTydpeBySceneID:self.sceneID];//设备大类
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.devicesTypes = [SQLManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.typeArr[0] ];
+    self.devicesTypes = [SQLManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.typeArr[0] ];//设备子类
     if(self.isFavor)
     {
         self.saveBarBtn.enabled = NO;
@@ -168,6 +168,7 @@
     {
         LightController *ligthVC = [storyBoard instantiateViewControllerWithIdentifier:@"LightController"];
         ligthVC.roomID = roomID;
+        ligthVC.showLightView = YES;
         ligthVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         [self addViewAndVC:ligthVC];
         

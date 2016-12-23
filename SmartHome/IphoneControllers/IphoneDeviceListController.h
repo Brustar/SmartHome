@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface IphoneDeviceListController : UIViewController
+
 -(void)goDeviceByRoomID:(int)roomID typeName:(NSString *)typeName;
 
 
