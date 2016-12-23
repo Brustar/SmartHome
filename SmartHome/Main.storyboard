@@ -6902,6 +6902,7 @@ layer.masksToBoundslayer.masksToBounds
                     <connections>
                         <outlet property="favButt" destination="xD2-JX-03I" id="UHS-Tt-inE"/>
                         <outlet property="lightSlider" destination="PTJ-hr-ZhN" id="DlW-bE-1hR"/>
+                        <outlet property="lightView" destination="OP5-a4-adt" id="Jd1-XJ-ynU"/>
                         <outlet property="peacefulBtn" destination="2dU-5A-Zoe" id="y5x-y4-1tB"/>
                         <outlet property="romanceBtn" destination="cvk-UK-Mmh" id="qyJ-cM-fzW"/>
                         <outlet property="segementTopConstraints" destination="Ocn-nH-67c" id="XVK-7g-RUQ"/>
@@ -7792,7 +7793,6 @@ layer.masksToBoundslayer.masksToBounds
         <segue reference="PRs-sg-E1F"/>
         <segue reference="U1p-eR-Biy"/>
         <segue reference="ya3-gG-p8O"/>
-        <segue reference="Ef6-9u-aqQ"/>
         <segue reference="dSv-oV-mNG"/>
         <segue reference="ZSJ-0K-dfQ"/>
         <segue reference="lwe-sH-sqk"/>
@@ -7804,6 +7804,7 @@ layer.masksToBoundslayer.masksToBounds
         <segue reference="fzi-se-X8b"/>
         <segue reference="prf-0G-qDF"/>
         <segue reference="Daf-E8-hDH"/>
+        <segue reference="YE7-iU-rxh"/>
         <segue reference="fXQ-oW-cHz"/>
     </inferredMetricsTieBreakers>
 </document>

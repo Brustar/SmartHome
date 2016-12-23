@@ -254,6 +254,7 @@
         }else if([typeName isEqualToString:@"灯光"])
         {
             LightController *ligthVC = [storyBoard instantiateViewControllerWithIdentifier:@"LightController"];
+            ligthVC.showLightView = YES;
             ligthVC.roomID = self.roomID;
             ligthVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
             [self addViewAndVC:ligthVC];

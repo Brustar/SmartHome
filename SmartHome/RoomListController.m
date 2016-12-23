@@ -334,17 +334,15 @@
         }
     }
     if (self.startTimeBtn.selected) {
-        self.schedule.startTime = time;
+        self.schedule.startTime = [time substringToIndex:5];
     }else {
         if (compareResult) {
-            self.schedule.endTime = time;
+            self.schedule.endTime = [time substringToIndex:5];
         }
     }
     NSMutableArray *sches = [self.scene.schedules mutableCopy];
-    if ([sches count] == 0) {
+    if (sches) {
         [sches addObject:self.schedule];
-    }else{
-        sches[0]=self.schedule;
     }
     self.scene.schedules = sches;
     self.clickFixTimeBtn.tintColor=[UIColor redColor];

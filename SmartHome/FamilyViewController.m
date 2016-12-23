@@ -326,6 +326,7 @@
 {
     UIStoryboard * oneStory = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     LightController * VC = [oneStory instantiateViewControllerWithIdentifier:@"LightController"];
+    VC.showLightView = NO;
     Room *room = self.rooms[indexPath.row];
     VC.roomID = room.rId;
     [self.navigationController pushViewController:VC animated:YES];

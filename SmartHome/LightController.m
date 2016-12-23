@@ -34,6 +34,7 @@
 
 - (IBAction)selectTypeOfLight:(UISegmentedControl *)sender;
 
+@property (weak, nonatomic) IBOutlet UIView *lightView;
 @property (weak, nonatomic) IBOutlet UIButton *sprightlierBtn;//明快
 
 @property (weak, nonatomic) IBOutlet UIButton *peacefulBtn;//幽静
@@ -137,7 +138,11 @@
     _peacefulBtn.layer.cornerRadius = 8.0;
     _peacefulBtn.layer.masksToBounds = YES;
     
-   
+    if (_showLightView) {
+        _lightView.hidden = NO;
+    }else {
+        _lightView.hidden = YES;
+    }
     
 }
 
