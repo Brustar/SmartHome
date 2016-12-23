@@ -90,11 +90,11 @@
     //init nest dataSource
     [self initNestDataSource];
     
-    self.title = @"我的家";
+    self.navigationItem.title = @"我的家";
     
     if ([[UD objectForKey:@"HostID"] intValue] == 258) { //九号大院
         
-        self.title = @"九号大院";
+        self.navigationItem.title = @"九号大院";
         //nest login
         [self nestLogin];
     }
