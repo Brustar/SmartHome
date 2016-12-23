@@ -217,9 +217,6 @@
         CGFloat buttonX = i * buttonW;
         button.frame = CGRectMake(buttonX, y, buttonW, height);
     }
-    
-    
-    
     self.separatorLine.frame = CGRectMake(self.leftView.frame.size.width, y, 2, height);
 }
 

@@ -234,11 +234,8 @@
     }else{
         cell.detailTextLabel.text = @"不通知";
         [self setUserNotifyWay:3 andRecord:recordID];
-    }
-
-    
+    }    
 }
-
 
 - (IBAction)clickRetunBtn:(id)sender {
     
