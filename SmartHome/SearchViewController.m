@@ -161,7 +161,7 @@
     }else if([typeName isEqualToString:@"灯光"])
     {
         LightController *ligthVC = [storyBoard instantiateViewControllerWithIdentifier:@"LightController"];
-        
+        ligthVC.showLightView = NO;
         ligthVC.deviceid = [NSString stringWithFormat:@"%d",eId];
         [self.navigationController pushViewController:ligthVC animated:YES];
         

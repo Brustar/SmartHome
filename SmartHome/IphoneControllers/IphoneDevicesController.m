@@ -92,6 +92,7 @@
     {
         LightController *ligthVC = [storyBoard instantiateViewControllerWithIdentifier:@"LightController"];
         ligthVC.roomID = self.roomId;
+        ligthVC.showLightView = YES;
         ligthVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneId];
         ligthVC.isAddDevice = YES;
         [self.navigationController pushViewController:ligthVC animated:YES];

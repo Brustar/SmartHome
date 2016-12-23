@@ -26,5 +26,6 @@
 @property (nonatomic,assign) BOOL isAddDevice;
 
 @property (strong, nonatomic) Scene *scene;
+@property (nonatomic, assign) BOOL showLightView;
 
 @end

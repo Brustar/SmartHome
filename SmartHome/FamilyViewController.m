@@ -90,11 +90,11 @@
     //init nest dataSource
     [self initNestDataSource];
     
-    self.title = @"我的家";
+    self.navigationItem.title = @"我的家";
     
     if ([[UD objectForKey:@"HostID"] intValue] == 258) { //九号大院
         
-        self.title = @"九号大院";
+        self.navigationItem.title = @"九号大院";
         //nest login
         [self nestLogin];
     }
@@ -244,8 +244,6 @@
         return;
     }
     
-    
-    
     //    NSArray * hTypeIdArr = @[@"01",@"02",@"03",@"12",@"13",@"14",@"21",@"22",@"31"];
     Proto proto = protocolFromData(data);
     
@@ -326,11 +324,11 @@
 {
     UIStoryboard * oneStory = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     LightController * VC = [oneStory instantiateViewControllerWithIdentifier:@"LightController"];
+    VC.showLightView = NO;
     Room *room = self.rooms[indexPath.row];
     VC.roomID = room.rId;
     [self.navigationController pushViewController:VC animated:YES];
 }
-
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {

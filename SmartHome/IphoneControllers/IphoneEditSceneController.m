@@ -168,6 +168,7 @@
     {
         LightController *ligthVC = [storyBoard instantiateViewControllerWithIdentifier:@"LightController"];
         ligthVC.roomID = roomID;
+        ligthVC.showLightView = YES;
         ligthVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         [self addViewAndVC:ligthVC];
         
