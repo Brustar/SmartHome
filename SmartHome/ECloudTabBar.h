@@ -12,7 +12,6 @@
 
 - (void)tabBarDidSelectButtonWithType:(NSInteger)type subType:(NSInteger)subType;
 
-
 @end
 
 @interface ECloudTabBar : UIView

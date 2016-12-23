@@ -181,9 +181,6 @@
     }
     
 }
-
-
-
 - (void)buttonOnClick:(ECloudButton *)button
 {
     if ([self.delegate respondsToSelector:@selector(tabBarDidSelectButtonWithType:subType:)]) {
