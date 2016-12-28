@@ -341,9 +341,39 @@
         }
     }
     NSMutableArray *sches = [self.scene.schedules mutableCopy];
-    if (sches) {
+    
+    //遍历 schedules
+    if (sches && sches.count >0) {
+        
+       __block BOOL shouldAdd = YES;
+        [sches enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+            Schedule *schedule = obj;
+            //根据deviceID 来判断是修改旧的定时，还是新增定时
+            if (schedule.deviceID == self.schedule.deviceID) { //已存在的schedule，对它进行修改即可
+                schedule.astronomicalStartID = self.schedule.astronomicalStartID;
+                schedule.astronomicalEndID = self.schedule.astronomicalEndID;
+                schedule.interval = self.schedule.interval;
+                schedule.startDate = self.schedule.startDate;
+                schedule.endDate = self.schedule.endDate;
+                schedule.startTime = self.schedule.startTime;
+                schedule.endTime = self.schedule.endTime;
+                schedule.openToValue = self.schedule.openToValue;
+                schedule.weekDays = self.schedule.weekDays;
+                
+                shouldAdd = NO;
+                *stop = YES;
+            }
+            
+        }];
+        
+        if (shouldAdd) {
+            [sches addObject:self.schedule];
+        }
+    }else { //无定时，直接add
         [sches addObject:self.schedule];
     }
+    
+    
     self.scene.schedules = sches;
     self.clickFixTimeBtn.tintColor=[UIColor redColor];
     [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
@@ -720,11 +750,40 @@
         
         //修改场景的plist文件，把定时信息写进去(开始日期)
         NSMutableArray *sches = [self.scene.schedules mutableCopy];
-        if ([sches count] == 0) {
+        
+        
+        //遍历 schedules
+        if (sches && sches.count >0) {
+            
+            __block BOOL shouldAdd = YES;
+            [sches enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+                Schedule *schedule = obj;
+                //根据deviceID 来判断是修改旧的定时，还是新增定时
+                if (schedule.deviceID == self.schedule.deviceID) { //已存在的schedule，对它进行修改即可
+                    schedule.astronomicalStartID = self.schedule.astronomicalStartID;
+                    schedule.astronomicalEndID = self.schedule.astronomicalEndID;
+                    schedule.interval = self.schedule.interval;
+                    schedule.startDate = self.schedule.startDate;
+                    schedule.endDate = self.schedule.endDate;
+                    schedule.startTime = self.schedule.startTime;
+                    schedule.endTime = self.schedule.endTime;
+                    schedule.openToValue = self.schedule.openToValue;
+                    schedule.weekDays = self.schedule.weekDays;
+                    
+                    shouldAdd = NO;
+                    *stop = YES;
+                }
+                
+            }];
+            
+            if (shouldAdd) {
+                [sches addObject:self.schedule];
+            }
+        }else { //无定时，直接add
             [sches addObject:self.schedule];
-        }else{
-            sches[0]=self.schedule;
         }
+        
+        
         self.scene.schedules = sches;
         [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
     }
@@ -763,10 +822,37 @@
         
       //修改场景的plist文件，把定时信息写进去（结束日期）
         NSMutableArray *sches=[self.scene.schedules mutableCopy];
-        if ([sches count]==0) {
+        
+        
+        //遍历 schedules
+        if (sches && sches.count >0) {
+            
+            __block BOOL shouldAdd = YES;
+            [sches enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+                Schedule *schedule = obj;
+                //根据deviceID 来判断是修改旧的定时，还是新增定时
+                if (schedule.deviceID == self.schedule.deviceID) { //已存在的schedule，对它进行修改即可
+                    schedule.astronomicalStartID = self.schedule.astronomicalStartID;
+                    schedule.astronomicalEndID = self.schedule.astronomicalEndID;
+                    schedule.interval = self.schedule.interval;
+                    schedule.startDate = self.schedule.startDate;
+                    schedule.endDate = self.schedule.endDate;
+                    schedule.startTime = self.schedule.startTime;
+                    schedule.endTime = self.schedule.endTime;
+                    schedule.openToValue = self.schedule.openToValue;
+                    schedule.weekDays = self.schedule.weekDays;
+                    
+                    shouldAdd = NO;
+                    *stop = YES;
+                }
+                
+            }];
+            
+            if (shouldAdd) {
+                [sches addObject:self.schedule];
+            }
+        }else { //无定时，直接add
             [sches addObject:self.schedule];
-        }else{
-            sches[0]=self.schedule;
         }
         
         self.scene.schedules = sches;
