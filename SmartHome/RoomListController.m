@@ -55,7 +55,8 @@
 
 @property (nonatomic,strong) DeviceOfFixTimerViewController *deviceOfTimeVC;
 @property (nonatomic, weak) Schedule *schedule;
-@property (nonatomic, assign) BOOL isSceneSetTime;
+@property (nonatomic, assign) BOOL isSceneSetTime;//是否设置了时间
+@property (nonatomic, assign) BOOL isSceneSetDate;//是否设置了日期
 @property (weak, nonatomic) IBOutlet UIButton *starDataBtn;//设置日期的开始按钮
 @property (weak, nonatomic) IBOutlet UIButton *endDataBtn;//设置日期的结束按钮
 @property (weak, nonatomic) IBOutlet UIButton *clickFixTimeBtn;//设置定时按钮
@@ -297,7 +298,6 @@
 }
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    
 
     if(component == 0)
     {
@@ -385,6 +385,11 @@
    
     if (!self.isSceneSetTime) {
         [MBProgressHUD showError:@"请先设置时间"];
+        return;
+    }
+    
+    if (self.isSceneSetDate) {
+        [MBProgressHUD showError:@"无法设置此项，已经设置了日期"];
         return;
     }
    
@@ -512,6 +517,7 @@
     return selected;
 }
 
+//右下角的定时按钮
 - (IBAction)clickFixTimeBtn:(id)sender {
     UIButton *btn = (UIButton *)sender;
     
@@ -573,7 +579,15 @@
     btn.selected = !btn.selected;
 }
 
+//设置开始时间，结束时间
 - (IBAction)setTimeOnClick:(UIButton *)sender {
+    
+    //判断有没有选择定时类型
+    if ([self.fixTimeDevice.text isEqualToString:@"无"]) {
+        [MBProgressHUD showError:@"请先选择定时类型"];
+        return;
+    }
+    
     self.dataPicker.hidden = YES;
     if (sender == self.startTimeBtn)
     {
@@ -708,6 +722,13 @@
 
 //开始日期的设置
 - (IBAction)startDataBtn:(id)sender {
+    
+    //判断有没有选择定时类型
+    if ([self.fixTimeDevice.text isEqualToString:@"无"]) {
+        [MBProgressHUD showError:@"请先选择定时类型"];
+        return;
+    }
+    
     self.pickTimeView.hidden = YES;
     
     self.starDataBtn.selected =! self.starDataBtn.selected;
@@ -732,6 +753,7 @@
                     [self.starDataBtn setTitle:prettyDate forState:UIControlStateNormal];
                     self.schedule.startDate = prettyDate;
                     self.clickFixTimeBtn.tintColor = [UIColor redColor];
+                    self.isSceneSetDate = YES;
                 }else {
                     [MBProgressHUD showError:@"开始日期不能大于结束日期"];
                     return;
@@ -740,6 +762,7 @@
                 [self.starDataBtn setTitle:prettyDate forState:UIControlStateNormal];
                 self.schedule.startDate = prettyDate;
                 self.clickFixTimeBtn.tintColor = [UIColor redColor];
+                self.isSceneSetDate = YES;
             }
             
         }else { //NO:选择的时间小于当前时间
@@ -792,8 +815,14 @@
 
 //结束日期的时间设置
 - (IBAction)endDataBtn:(id)sender {
-    self.pickTimeView.hidden = YES;
     
+    //判断有没有选择定时类型
+    if ([self.fixTimeDevice.text isEqualToString:@"无"]) {
+        [MBProgressHUD showError:@"请先选择定时类型"];
+        return;
+    }
+    
+    self.pickTimeView.hidden = YES;
     self.endDataBtn.selected =! self.endDataBtn.selected;
     self.dataPicker.hidden = !self.endDataBtn.selected;
     
@@ -813,6 +842,7 @@
             [self.endDataBtn setTitle:prettyDate forState:UIControlStateNormal];
             self.schedule.endDate = prettyDate;
             self.clickFixTimeBtn.tintColor = [UIColor redColor];
+            self.isSceneSetDate = YES;
         }else {
             [MBProgressHUD showError:@"结束日期不能小于开始日期"];
             return;
