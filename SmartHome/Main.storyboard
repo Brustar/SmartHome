@@ -22,14 +22,15 @@
                     </tabBar>
                     <connections>
                         <segue destination="ez8-GB-AeD" kind="relationship" relationship="viewControllers" id="sa4-D6-iWJ"/>
-                        <segue destination="F6f-3x-kGl" kind="relationship" relationship="viewControllers" id="9R3-7q-oOv"/>
-                        <segue destination="Ffr-Sd-AHJ" kind="relationship" relationship="viewControllers" id="1ZE-49-Chp"/>
-                        <segue destination="Zfz-y6-NGu" kind="relationship" relationship="viewControllers" id="g1D-HS-lbY"/>
+                        <segue destination="LxE-Wb-AeR" kind="relationship" relationship="viewControllers" id="2KV-9V-Wua"/>
+                        <segue destination="Zfz-y6-NGu" kind="relationship" relationship="viewControllers" id="PtA-lK-4Wk"/>
+                        <segue destination="F6f-3x-kGl" kind="relationship" relationship="viewControllers" id="qf0-oG-EMs"/>
+                        <segue destination="Ffr-Sd-AHJ" kind="relationship" relationship="viewControllers" id="hZX-Vr-Hx5"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o8q-7b-JCt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1034" y="-7275"/>
+            <point key="canvasLocation" x="-1210" y="-7287"/>
         </scene>
         <!--房间列表-->
         <scene sceneID="8G5-lx-3XL">
@@ -7524,6 +7525,42 @@ layer.masksToBoundslayer.masksToBounds
             </objects>
             <point key="canvasLocation" x="490" y="-7215"/>
         </scene>
+        <!--我的家控制器-->
+        <scene sceneID="WBA-EE-UkZ">
+            <objects>
+                <viewController id="paN-SJ-1oV" userLabel="我的家控制器" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oel-FR-olJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="cnO-uE-V3Z"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="U7z-pj-h2M">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="lHf-G1-XH5"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U8H-tZ-CN9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3230" y="-7515"/>
+        </scene>
+        <!--我的家导航控制器-->
+        <scene sceneID="NLN-S3-lcu">
+            <objects>
+                <navigationController id="LxE-Wb-AeR" userLabel="我的家导航控制器" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="pO9-Wx-E1a"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LfO-yx-esN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="paN-SJ-1oV" kind="relationship" relationship="rootViewController" id="HUH-vA-0Jy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vre-K2-YHn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2455" y="-7515"/>
+        </scene>
         <!--实景导航控制器-->
         <scene sceneID="1dG-Xx-bPE">
             <objects>
@@ -7541,7 +7578,7 @@ layer.masksToBoundslayer.masksToBounds
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vL1-cS-JHd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1573" y="-7948"/>
+            <point key="canvasLocation" x="-1748" y="-7949"/>
         </scene>
     </scenes>
     <resources>
