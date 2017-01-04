@@ -127,6 +127,7 @@
 		2E6328111E03CE4B000D7BE9 /* IPhoneNetVV.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6328101E03CE4B000D7BE9 /* IPhoneNetVV.m */; };
 		2E6CEDBF1DE5DE8B000979BE /* DetailMSGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CEDBE1DE5DE8B000979BE /* DetailMSGViewController.m */; };
 		2E7CD6081E14B80C002D0541 /* FixTimeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E7CD6071E14B80C002D0541 /* FixTimeListCell.m */; };
+		2EA99E901E1C9A0100659065 /* MySubEnergyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA99E8F1E1C9A0100659065 /* MySubEnergyVC.m */; };
 		2EDC0E901DEC072700F95BE0 /* IPhoneRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDC0E8F1DEC072700F95BE0 /* IPhoneRoom.m */; };
 		2EFFECA11E12161100C13D3E /* FixTimeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFFECA01E12161100C13D3E /* FixTimeListViewController.m */; };
 		CD43046F1E0B674000B594F4 /* FamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD43046E1E0B674000B594F4 /* FamilyViewController.m */; };
@@ -658,6 +659,8 @@
 		2E6CEDBE1DE5DE8B000979BE /* DetailMSGViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailMSGViewController.m; sourceTree = "<group>"; };
 		2E7CD6061E14B80C002D0541 /* FixTimeListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixTimeListCell.h; sourceTree = "<group>"; };
 		2E7CD6071E14B80C002D0541 /* FixTimeListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixTimeListCell.m; sourceTree = "<group>"; };
+		2EA99E8E1E1C9A0100659065 /* MySubEnergyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySubEnergyVC.h; sourceTree = "<group>"; };
+		2EA99E8F1E1C9A0100659065 /* MySubEnergyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySubEnergyVC.m; sourceTree = "<group>"; };
 		2EDC0E8E1DEC072700F95BE0 /* IPhoneRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPhoneRoom.h; sourceTree = "<group>"; };
 		2EDC0E8F1DEC072700F95BE0 /* IPhoneRoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPhoneRoom.m; sourceTree = "<group>"; };
 		2EFFEC9F1E12161100C13D3E /* FixTimeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixTimeListViewController.h; sourceTree = "<group>"; };
@@ -1048,6 +1051,8 @@
 				F69C82351D363A4D002DE6D7 /* ServiceRecordCell.m */,
 				F651640B1D3766C900A6F5FA /* MyEnergyViewController.h */,
 				F651640C1D3766C900A6F5FA /* MyEnergyViewController.m */,
+				2EA99E8E1E1C9A0100659065 /* MySubEnergyVC.h */,
+				2EA99E8F1E1C9A0100659065 /* MySubEnergyVC.m */,
 				F66596D81D3F12FB0082716A /* EnergyOfDeviceController.h */,
 				F66596D91D3F12FB0082716A /* EnergyOfDeviceController.m */,
 				F66596DB1D3F1DAD0082716A /* EnegryOfDeviceCell.h */,
@@ -2208,6 +2213,7 @@
 				2E63280E1E03CB06000D7BE9 /* IPhoneTVVC.m in Sources */,
 				0FCFB3981CF2947500B37DD3 /* EntranceGuard.m in Sources */,
 				F64EF8011D8FDCE7003C1C48 /* IphoneDeviceListController.m in Sources */,
+				2EA99E901E1C9A0100659065 /* MySubEnergyVC.m in Sources */,
 				0F4B49801CFEB13500D93DD2 /* CurtainController.m in Sources */,
 				0FCFB3921CF293D800B37DD3 /* Netv.m in Sources */,
 				0FC1197A1D6FE61C001DA19A /* Projector.m in Sources */,

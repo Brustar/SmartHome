@@ -55,7 +55,8 @@
 
 @property (nonatomic,strong) DeviceOfFixTimerViewController *deviceOfTimeVC;
 @property (nonatomic, weak) Schedule *schedule;
-@property (nonatomic, assign) BOOL isSceneSetTime;
+@property (nonatomic, assign) BOOL isSceneSetTime;//是否设置了时间
+@property (nonatomic, assign) BOOL isSceneSetDate;//是否设置了日期
 @property (weak, nonatomic) IBOutlet UIButton *starDataBtn;//设置日期的开始按钮
 @property (weak, nonatomic) IBOutlet UIButton *endDataBtn;//设置日期的结束按钮
 @property (weak, nonatomic) IBOutlet UIButton *clickFixTimeBtn;//设置定时按钮
@@ -295,7 +296,6 @@
 }
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    
 
     if(component == 0)
     {
@@ -339,9 +339,39 @@
         }
     }
     NSMutableArray *sches = [self.scene.schedules mutableCopy];
-    if (sches) {
+    
+    //遍历 schedules
+    if (sches && sches.count >0) {
+        
+       __block BOOL shouldAdd = YES;
+        [sches enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+            Schedule *schedule = obj;
+            //根据deviceID 来判断是修改旧的定时，还是新增定时
+            if (schedule.deviceID == self.schedule.deviceID) { //已存在的schedule，对它进行修改即可
+                schedule.astronomicalStartID = self.schedule.astronomicalStartID;
+                schedule.astronomicalEndID = self.schedule.astronomicalEndID;
+                schedule.interval = self.schedule.interval;
+                schedule.startDate = self.schedule.startDate;
+                schedule.endDate = self.schedule.endDate;
+                schedule.startTime = self.schedule.startTime;
+                schedule.endTime = self.schedule.endTime;
+                schedule.openToValue = self.schedule.openToValue;
+                schedule.weekDays = self.schedule.weekDays;
+                
+                shouldAdd = NO;
+                *stop = YES;
+            }
+            
+        }];
+        
+        if (shouldAdd) {
+            [sches addObject:self.schedule];
+        }
+    }else { //无定时，直接add
         [sches addObject:self.schedule];
     }
+    
+    
     self.scene.schedules = sches;
     self.clickFixTimeBtn.tintColor=[UIColor redColor];
     [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
@@ -353,6 +383,11 @@
    
     if (!self.isSceneSetTime) {
         [MBProgressHUD showError:@"请先设置时间"];
+        return;
+    }
+    
+    if (self.isSceneSetDate) {
+        [MBProgressHUD showError:@"无法设置此项，已经设置了日期"];
         return;
     }
    
@@ -480,6 +515,7 @@
     return selected;
 }
 
+//右下角的定时按钮
 - (IBAction)clickFixTimeBtn:(id)sender {
     UIButton *btn = (UIButton *)sender;
     
@@ -541,7 +577,15 @@
     btn.selected = !btn.selected;
 }
 
+//设置开始时间，结束时间
 - (IBAction)setTimeOnClick:(UIButton *)sender {
+    
+    //判断有没有选择定时类型
+    if ([self.fixTimeDevice.text isEqualToString:@"无"]) {
+        [MBProgressHUD showError:@"请先选择定时类型"];
+        return;
+    }
+    
     self.dataPicker.hidden = YES;
     if (sender == self.startTimeBtn)
     {
@@ -676,6 +720,13 @@
 
 //开始日期的设置
 - (IBAction)startDataBtn:(id)sender {
+    
+    //判断有没有选择定时类型
+    if ([self.fixTimeDevice.text isEqualToString:@"无"]) {
+        [MBProgressHUD showError:@"请先选择定时类型"];
+        return;
+    }
+    
     self.pickTimeView.hidden = YES;
     
     self.starDataBtn.selected =! self.starDataBtn.selected;
@@ -700,6 +751,7 @@
                     [self.starDataBtn setTitle:prettyDate forState:UIControlStateNormal];
                     self.schedule.startDate = prettyDate;
                     self.clickFixTimeBtn.tintColor = [UIColor redColor];
+                    self.isSceneSetDate = YES;
                 }else {
                     [MBProgressHUD showError:@"开始日期不能大于结束日期"];
                     return;
@@ -708,6 +760,7 @@
                 [self.starDataBtn setTitle:prettyDate forState:UIControlStateNormal];
                 self.schedule.startDate = prettyDate;
                 self.clickFixTimeBtn.tintColor = [UIColor redColor];
+                self.isSceneSetDate = YES;
             }
             
         }else { //NO:选择的时间小于当前时间
@@ -718,11 +771,40 @@
         
         //修改场景的plist文件，把定时信息写进去(开始日期)
         NSMutableArray *sches = [self.scene.schedules mutableCopy];
-        if ([sches count] == 0) {
+        
+        
+        //遍历 schedules
+        if (sches && sches.count >0) {
+            
+            __block BOOL shouldAdd = YES;
+            [sches enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+                Schedule *schedule = obj;
+                //根据deviceID 来判断是修改旧的定时，还是新增定时
+                if (schedule.deviceID == self.schedule.deviceID) { //已存在的schedule，对它进行修改即可
+                    schedule.astronomicalStartID = self.schedule.astronomicalStartID;
+                    schedule.astronomicalEndID = self.schedule.astronomicalEndID;
+                    schedule.interval = self.schedule.interval;
+                    schedule.startDate = self.schedule.startDate;
+                    schedule.endDate = self.schedule.endDate;
+                    schedule.startTime = self.schedule.startTime;
+                    schedule.endTime = self.schedule.endTime;
+                    schedule.openToValue = self.schedule.openToValue;
+                    schedule.weekDays = self.schedule.weekDays;
+                    
+                    shouldAdd = NO;
+                    *stop = YES;
+                }
+                
+            }];
+            
+            if (shouldAdd) {
+                [sches addObject:self.schedule];
+            }
+        }else { //无定时，直接add
             [sches addObject:self.schedule];
-        }else{
-            sches[0]=self.schedule;
         }
+        
+        
         self.scene.schedules = sches;
         [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
     }
@@ -731,8 +813,14 @@
 
 //结束日期的时间设置
 - (IBAction)endDataBtn:(id)sender {
-    self.pickTimeView.hidden = YES;
     
+    //判断有没有选择定时类型
+    if ([self.fixTimeDevice.text isEqualToString:@"无"]) {
+        [MBProgressHUD showError:@"请先选择定时类型"];
+        return;
+    }
+    
+    self.pickTimeView.hidden = YES;
     self.endDataBtn.selected =! self.endDataBtn.selected;
     self.dataPicker.hidden = !self.endDataBtn.selected;
     
@@ -752,6 +840,7 @@
             [self.endDataBtn setTitle:prettyDate forState:UIControlStateNormal];
             self.schedule.endDate = prettyDate;
             self.clickFixTimeBtn.tintColor = [UIColor redColor];
+            self.isSceneSetDate = YES;
         }else {
             [MBProgressHUD showError:@"结束日期不能小于开始日期"];
             return;
@@ -761,10 +850,37 @@
         
       //修改场景的plist文件，把定时信息写进去（结束日期）
         NSMutableArray *sches=[self.scene.schedules mutableCopy];
-        if ([sches count]==0) {
+        
+        
+        //遍历 schedules
+        if (sches && sches.count >0) {
+            
+            __block BOOL shouldAdd = YES;
+            [sches enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+                Schedule *schedule = obj;
+                //根据deviceID 来判断是修改旧的定时，还是新增定时
+                if (schedule.deviceID == self.schedule.deviceID) { //已存在的schedule，对它进行修改即可
+                    schedule.astronomicalStartID = self.schedule.astronomicalStartID;
+                    schedule.astronomicalEndID = self.schedule.astronomicalEndID;
+                    schedule.interval = self.schedule.interval;
+                    schedule.startDate = self.schedule.startDate;
+                    schedule.endDate = self.schedule.endDate;
+                    schedule.startTime = self.schedule.startTime;
+                    schedule.endTime = self.schedule.endTime;
+                    schedule.openToValue = self.schedule.openToValue;
+                    schedule.weekDays = self.schedule.weekDays;
+                    
+                    shouldAdd = NO;
+                    *stop = YES;
+                }
+                
+            }];
+            
+            if (shouldAdd) {
+                [sches addObject:self.schedule];
+            }
+        }else { //无定时，直接add
             [sches addObject:self.schedule];
-        }else{
-            sches[0]=self.schedule;
         }
         
         self.scene.schedules = sches;
