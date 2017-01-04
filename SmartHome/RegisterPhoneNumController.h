@@ -12,10 +12,6 @@
 @interface RegisterPhoneNumController : UIViewController<HttpDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *UserTypeLb;
 @property (weak, nonatomic) IBOutlet UILabel *MasterIDLb;
-
-
-
-
 @property (nonatomic,strong) NSString *suerTypeStr;
 @property (nonatomic,assign) int masterStr;
 

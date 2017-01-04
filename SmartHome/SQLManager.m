@@ -38,7 +38,29 @@
     [db close];
     return [deviceModels copy];
 }
+//从数据库中获取所有场景信息
++ (NSArray *)getAllScene
+{
+    FMDatabase *db = [self connetdb];
+    NSMutableArray *deviceModels = [NSMutableArray array];
+    if([db open])
+    {
+        FMResultSet *resultSet = [db executeQuery:@"select * from Scenes"];
+        
+        while ([resultSet next]){
+            Scene *scene = [Scene new];
+            scene.sceneName = [resultSet stringForColumn:@"NAME"];
+            scene.sceneID = [resultSet intForColumn:@"ID"];
+            scene.picName = [resultSet stringForColumn:@"pic"];
+            scene.rID =     [resultSet intForColumn:@"rId"];
+            [deviceModels addObject:scene];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return [deviceModels copy];
 
+}
 +(NSString *)deviceNameByDeviceID:(int)eId
 {
     FMDatabase *db = [self connetdb];
@@ -201,7 +223,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld and masterID = '%ld' and typeName <> 'FM' and typeName <> '幕布'",roomID,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld and masterID = '%ld' and typeName <> 'FM' and typeName <> '幕布'",(long)roomID,[[DeviceInfo defaultManager] masterID]];
        
         
         FMResultSet *resultSet = [db executeQuery:sql];
@@ -287,7 +309,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld and typeName in (\"开关\",\"调色\",\"调光\") and masterID = '%ld'",roomID,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld and typeName in (\"开关\",\"调色\",\"调光\") and masterID = '%ld'",(long)roomID,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
@@ -311,7 +333,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and typeName = \"%@\" and masterID = '%ld'",roomID, typeName,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and typeName = \"%@\" and masterID = '%ld'",(long)roomID, typeName,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
@@ -335,7 +357,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and typeName = \"%@\" and masterID = '%ld'",roomID, typeName,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and typeName = \"%@\" and masterID = '%ld'",(long)roomID, typeName,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
@@ -359,7 +381,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and typeName = \'%@\' and masterID = '%ld'",roomID,type,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and typeName = \'%@\' and masterID = '%ld'",(long)roomID,type,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
@@ -379,7 +401,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and typeName = \'%@\' and masterID = '%ld'",roomID,typeName,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and typeName = \'%@\' and masterID = '%ld'",(long)roomID,typeName,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
@@ -398,7 +420,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT htypeID FROM Devices where ID = %ld and masterID = '%ld'",eID,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT htypeID FROM Devices where ID = %ld and masterID = '%ld'",(long)eID,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
@@ -1004,7 +1026,6 @@
 {
     
     NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,SceneId];
-   
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
     NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfFile:scenePath];
   
@@ -1139,20 +1160,20 @@
     FMDatabase *db = [self connetdb];
     if ([db open]) {
         int count=0;
-        NSString *sql =[NSString stringWithFormat: @"SELECT count(*) as count FROM Rooms where masterID = '%ld'",[[DeviceInfo defaultManager] masterID]];
+        NSString *sql =[NSString stringWithFormat: @"SELECT count(*) as count FROM Rooms where masterID = '255'"];
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
             count += [resultSet intForColumn:@"count"];
         }
-        sql =[NSString stringWithFormat: @"SELECT count(*) as count FROM devices where masterID = '%ld'",[[DeviceInfo defaultManager] masterID]];
+        sql =[NSString stringWithFormat: @"SELECT count(*) as count FROM Devices where masterID = '255'"];
         resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
             count += [resultSet intForColumn:@"count"];
         }
 
-        sql = [NSString stringWithFormat:@"SELECT count(*) as count FROM scenes where masterID = '%ld'",[[DeviceInfo defaultManager] masterID]];
+        sql = [NSString stringWithFormat:@"SELECT count(*) as count FROM Scenes where masterID = '255'"];
         resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
@@ -1162,12 +1183,12 @@
         if (count == 0) {
             
         //insert rooms
-        NSArray *sqls=@[@"INSERT INTO \"Rooms\" VALUES(1,'主卧',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0,0);",
-        @"INSERT INTO \"Rooms\" VALUES(2,'客厅',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0,0);",
-        @"INSERT INTO \"Rooms\" VALUES(3,'餐厅',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0,0);",
-        @"INSERT INTO \"Rooms\" VALUES(4,'客卧',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',10002,0);",
-        @"INSERT INTO \"Rooms\" VALUES(5,'儿童房',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0,0);",
-          @"INSERT INTO \"Rooms\" VALUES(6,'厨房',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',10001,0);"];
+        NSArray *sqls=@[@"INSERT INTO \"Rooms\" VALUES(1,'主卧',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0,0,255);",
+        @"INSERT INTO \"Rooms\" VALUES(2,'客厅',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0,0,255);",
+        @"INSERT INTO \"Rooms\" VALUES(3,'餐厅',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0,0,255);",
+        @"INSERT INTO \"Rooms\" VALUES(4,'客卧',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',10002,0,255);",
+        @"INSERT INTO \"Rooms\" VALUES(5,'儿童房',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0,0,255);",
+          @"INSERT INTO \"Rooms\" VALUES(6,'厨房',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',10001,0,255);"];
         for (NSString *sql in sqls) {
             BOOL result=[db executeUpdate:sql];
             if (result) {
@@ -1179,43 +1200,43 @@
             
         
         //insert devices
-        sqls=@[@"INSERT INTO \"Devices\" VALUES(51,'卧室开关灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0036','01',1,'开关灯','照明','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(52,'卧室调光灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0015','02',1,'调光灯','照明','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(53,'卧室调色灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0016','03',1,'调色灯','照明','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(54,'卧室电视',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0017','12',3,'网络电视','影音','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(55,'卧室空调',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0018','31',2,'空调','环境','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(56,'卧室纱帘',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0019','21',1,'开合帘','照明','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(57,'卧室遮光帘',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0020','21',1,'开合帘','照明','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(58,'卧室卷帘',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0021','22',1,'卷帘','照明','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(59,'影音室DVD',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0022','13',3,'DVD','影音','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(60,'影音室FM',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0023','15',3,'FM','影音','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(61,'影音室背景音乐',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0024','14',3,'背景音乐','影音','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(62,'影音室投影',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0025','16',3,'投影','影音','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(63,'影音室幕布',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0026','17',3,'幕布','影音','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(38,'墙边调光灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0001','02',1,'调光灯','照明','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(39,'投影上调光灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0002','02',1,'调光灯','照明','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(40,'沙发上调光灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0003','02',1,'调光灯','照明','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(41,'主卧电视',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0005','12',3,'网络电视','影音','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(42,'主卧DVD',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0006','13',3,'DVD','影音','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(43,'主卧背景音乐',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0007','14',3,'背景音乐','影音','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(44,'主卧FM',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0008','15',3,'FM','影音','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(45,'主卧机顶盒',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0009','11',3,'机顶盒','影音','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(46,'主卧空调',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0010','31',2,'空调','环境','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(47,'主卧投影',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0011','16',3,'投影','影音','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(48,'主卧幕布',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0012','17',3,'幕布','影音','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(49,'测试摄像头',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0013','45',4,'摄像头','安防','00ff','rtsp://admin:stone123@flysun158.6655.la:8184');",
-        @"INSERT INTO \"Devices\" VALUES(50,'主卧纱帘',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'02BA','21',1,'开合帘','照明','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(70,'主卧智能门锁',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0033','40',4,'智能门锁','安防','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(71,'主卧智能插座',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0034','41',5,'智能插座','智能单品','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(73,'主卧功放',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0014','18',3,'功放','影音','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(37,'主卧开关灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0101','01',1,'开关灯','照明','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(64,'车库温湿度感应器',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0027','50',6,'温湿度感应器','感应器','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(65,'车库动静感应器',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0028','51',6,'动静感应器','感应器','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(66,'车库照度感应器',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0029','52',6,'照度感应器','感应器','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(67,'车库燃气监测',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0030','56',6,'燃气监测','感应器','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(68,'车库噪音感应器',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0031','54',6,'噪音感应器','感应器','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(69,'车库烟雾感应器',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0032','57',6,'烟雾感应器','感应器','00ff','');",
-        @"INSERT INTO \"Devices\" VALUES(72,'健身房PM2.5监测',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,6,'0035','55',6,'PM2.5监测','感应器','00ff','');"];
+        sqls=@[@"INSERT INTO \"Devices\" VALUES(51,'卧室开关灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0036','01',1,'开关灯','照明',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(52,'卧室调光灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0015','02',1,'调光灯','照明',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(53,'卧室调色灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0016','03',1,'调色灯','照明',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(54,'卧室电视',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0017','12',3,'网络电视','影音',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(55,'卧室空调',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0018','31',2,'空调','环境',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(56,'卧室纱帘',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0019','21',1,'开合帘','照明',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(57,'卧室遮光帘',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0020','21',1,'开合帘','照明',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(58,'卧室卷帘',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0021','22',1,'卷帘','照明',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(59,'影音室DVD',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0022','13',3,'DVD','影音',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(60,'影音室FM',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0023','15',3,'FM','影音',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(61,'影音室背景音乐',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0024','14',3,'背景音乐','影音',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(62,'影音室投影',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0025','16',3,'投影','影音',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(63,'影音室幕布',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0026','17',3,'幕布','影音',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(38,'墙边调光灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0001','02',1,'调光灯','照明',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(39,'投影上调光灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0002','02',1,'调光灯','照明',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(40,'沙发上调光灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0003','02',1,'调光灯','照明',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(41,'主卧电视',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0005','12',3,'网络电视','影音',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(42,'主卧DVD',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0006','13',3,'DVD','影音',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(43,'主卧背景音乐',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0007','14',3,'背景音乐','影音',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(44,'主卧FM',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0008','15',3,'FM','影音',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(45,'主卧机顶盒',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0009','11',3,'机顶盒','影音',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(46,'主卧空调',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0010','31',2,'空调','环境',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(47,'主卧投影',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0011','16',3,'投影','影音',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(48,'主卧幕布',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0012','17',3,'幕布','影音',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(49,'测试摄像头',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0013','45',4,'摄像头','安防',255,'rtsp://admin:stone123@flysun158.6655.la:8184',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(50,'主卧纱帘',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'02BA','21',1,'开合帘','照明',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(70,'主卧智能门锁',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0033','40',4,'智能门锁','安防',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(71,'主卧智能插座',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0034','41',5,'智能插座','智能单品',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(73,'主卧功放',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0014','18',3,'功放','影音',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(37,'主卧开关灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0101','01',1,'开关灯','照明',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(64,'车库温湿度感应器',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0027','50',6,'温湿度感应器','感应器',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(65,'车库动静感应器',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0028','51',6,'动静感应器','感应器',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(66,'车库照度感应器',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0029','52',6,'照度感应器','感应器',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(67,'车库燃气监测',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0030','56',6,'燃气监测','感应器',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(68,'车库噪音感应器',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0031','54',6,'噪音感应器','感应器',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(69,'车库烟雾感应器',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0032','57',6,'烟雾感应器','感应器',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(72,'健身房PM2.5监测',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,6,'0035','55',6,'PM2.5监测','感应器',255,'',NULL);"];
         for (NSString *sql in sqls) {
             BOOL result=[db executeUpdate:sql];
             if (result) {
@@ -1226,12 +1247,12 @@
         }
         //insert scenes
         
-        sqls=@[@"INSERT INTO \"Scenes\" VALUES(10,'DVD','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/moving.jpg',4,1,'0003',0,0);",
-        @"INSERT INTO \"Scenes\" VALUES(11,'工作','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/relax.jpg',4,1,'0004',0,0);",
-        @"INSERT INTO \"Scenes\" VALUES(12,'午休','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/sleep.jpg',4,1,'0005',0,0);",
-        @"INSERT INTO \"Scenes\" VALUES(13,'离开','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/away.jpg',4,1,'0006',0,0);",
-        @"INSERT INTO \"Scenes\" VALUES(14,'欢迎','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',4,1,'0001',0,0);",
-        @"INSERT INTO \"Scenes\" VALUES(15,'投影','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',4,1,'0002',0,0);"];
+        sqls=@[@"INSERT INTO \"Scenes\" VALUES(10,'DVD','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/moving.jpg',4,1,'0003',0,0,255);",
+        @"INSERT INTO \"Scenes\" VALUES(11,'工作','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/relax.jpg',4,1,'0004',0,0,255);",
+        @"INSERT INTO \"Scenes\" VALUES(12,'午休','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/sleep.jpg',4,1,'0005',0,0,255);",
+        @"INSERT INTO \"Scenes\" VALUES(13,'离开','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/away.jpg',4,1,'0006',0,0,255);",
+        @"INSERT INTO \"Scenes\" VALUES(14,'欢迎','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',4,1,'0001',0,0,255);",
+        @"INSERT INTO \"Scenes\" VALUES(15,'投影','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',4,1,'0002',0,0,255);"];
         
         for (NSString *sql in sqls) {
             BOOL result=[db executeUpdate:sql];
@@ -1577,7 +1598,7 @@
         NSLog(@"Could not open db.");
         return NO;
     }
-    BOOL result = [db executeUpdate:[NSString stringWithFormat:@"UPDATE Channels SET Channel_name ='%@' where isFavorite = 1 and id = %ld",newName,fmId]];
+    BOOL result = [db executeUpdate:[NSString stringWithFormat:@"UPDATE Channels SET Channel_name ='%@' where isFavorite = 1 and id = %d",newName,fmId]];
     
     [db close];
     return result;

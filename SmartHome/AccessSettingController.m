@@ -123,8 +123,10 @@
                 [self.userArr addObject:userName];
                 [self.managerType addObject:userType];
                 [self.userIDArr addObject:userID];
+               
+//    [IOManager writeUserdefault:userDetail[@"usertype"] forKey:@"UserType"];
             }
-            [self.userTableView reloadData];
+                        [self.userTableView reloadData];
         }else{
             [MBProgressHUD showError:responseObject[@"Msg"]];
         }
@@ -253,10 +255,6 @@
         cell.exchangeSwitch.on = NO;
     }
     return cell;
-
-
-    
-    
     
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -395,7 +393,6 @@
     [alertVC addAction:cancelAction];
     [alertVC addAction:sureAction];
 
-    
     
 }
 //删除或改变用户权限请求

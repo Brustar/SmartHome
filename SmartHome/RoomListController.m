@@ -178,8 +178,6 @@
     [super viewDidLoad];
     self.timeView.layer.cornerRadius = 10;
     self.timeView.layer.masksToBounds = YES;
-    
-
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = [UIView new];
    

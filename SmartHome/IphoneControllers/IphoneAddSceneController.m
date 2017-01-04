@@ -11,7 +11,7 @@
 #import "SceneManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "KxMenu.h"
-
+#import "FixTimeListCell.h"
 
 @interface UIImagePickerController (LandScapeImagePicker)
 
@@ -48,6 +48,7 @@
 @interface IphoneAddSceneController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *sceneName;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITableView *subTableView;
 @property (nonatomic,strong) NSArray *devices;
 @property (weak, nonatomic) IBOutlet UILabel *startTime;//开始时间
 @property (weak, nonatomic) IBOutlet UILabel *endTime;//结束时间
@@ -63,10 +64,54 @@
 @property (weak, nonatomic) IBOutlet UIButton *ImageBtn;//场景图片按钮
 @property (nonatomic,strong) UIImage * selectSceneImg;
 
+@property (nonatomic,strong) NSMutableArray * deviceArr;
+@property (nonatomic,strong) NSMutableArray * sceneArr;
+@property (nonatomic,strong) NSArray * AllsceneArr;
+@property (nonatomic,assign) NSInteger SubSceneID;
+@property (nonatomic,strong) NSMutableArray * startTimeArr;
+@property (nonatomic,strong) NSMutableArray * endTimeArr;
+@property (nonatomic,strong) NSString * repetitionStr;
+
+
 @end
 
 @implementation IphoneAddSceneController
+-(NSMutableArray *)startTimeArr
+{
+    if (!_startTimeArr) {
+        _startTimeArr =[NSMutableArray array];
+    }
+    
+    return _startTimeArr;
+    
+}
 
+-(NSMutableArray *)endTimeArr
+{
+    if (!_endTimeArr) {
+        _endTimeArr = [NSMutableArray array];
+    }
+    
+    return _endTimeArr;
+}
+
+-(NSMutableArray *)deviceArr
+{
+    if (!_deviceArr) {
+        _deviceArr = [NSMutableArray array];
+    }
+    
+    return _deviceArr;
+}
+
+-(NSMutableArray *)sceneArr
+{
+    if (!_sceneArr) {
+        _sceneArr = [NSMutableArray array];
+    }
+    
+    return _sceneArr;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     if(self.isFavor)
@@ -77,6 +122,7 @@
      self.automaticallyAdjustsScrollViewInsets = NO;
   
     [self reachNotification];
+     self.AllsceneArr = [SQLManager getAllScene];
   
 }
 
@@ -118,7 +164,7 @@
 //添加定时
 - (IBAction)addFixTime:(id)sender {
     if (self.devices.count == 0) {
-          [MBProgressHUD showSuccess:@"先选择设备，再设置定时"];
+           [MBProgressHUD showError:@"先选择设备，再设置定时"];
     }else{
          [self performSegueWithIdentifier:@"addTimeSegue" sender:self];
     }
@@ -144,19 +190,44 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.devices.count;
-   
-    
+    if (tableView == self.tableView) {
+         return self.devices.count;
+    }else{
+        return self.AllsceneArr.count;
+    }
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+   
+    if (tableView == self.subTableView) {
+        FixTimeListCell * cell = [tableView dequeueReusableCellWithIdentifier:@"FixTimeListCell" forIndexPath:indexPath];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        Scene * scene = self.AllsceneArr[indexPath.row];
+        cell.sceneNameLabel.text = [NSString stringWithFormat:@"%@-%@",[SQLManager getRoomNameByRoomID:scene.rID],scene.sceneName];
+        for (NSDictionary * dict in scene.schedules) {
+            NSString * startTime = dict[@"startTime"];
+            NSString * endTime =   dict[@"endTime"];
+            NSArray * weekDayArr = dict[@"weekDays"];
+            self.repetitionStr = [NSString string];
+            self.repetitionStr = [weekDayArr componentsJoinedByString:@"、"];
+            [self.startTimeArr addObject:startTime];
+            [self.endTimeArr addObject:endTime];
+        }
+        if (scene.schedules.count ==0) {
+            cell.sceneTimeLabel.text =@"暂无定时信息";
+            cell.repetitionLabel.text = @"暂无重复日期";
+        }else{
+            cell.sceneTimeLabel.text = [NSString stringWithFormat:@"%@-%@",self.startTimeArr[indexPath.row],self.endTimeArr[indexPath.row]];
+            cell.repetitionLabel.text = self.repetitionStr;
+        }
+        return cell;
+    }
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if(!cell)
     {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
     cell.textLabel.text = self.devices[indexPath.row];
-
     
     return cell;
 }
@@ -240,7 +311,14 @@
     [DeviceInfo defaultManager].isPhotoLibrary = NO;
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView == self.subTableView) {
+        return 80;
+    }
 
+    return 44;
+}
 
 
 @end

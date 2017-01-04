@@ -18,7 +18,8 @@
 +(FMDatabase *)connetdb;
 //从数据中获取所有设备信息
 +(NSArray *)getAllDevicesInfo;
-
+//从数据库中获取所有场景信息
++(NSArray *)getAllScene;
 //根据房间ID得到该房间的所有设备
 +(NSArray *)devicesByRoomId:(NSInteger)roomId;
 
@@ -121,4 +122,5 @@
 //编辑fm
 +(BOOL)getAllChangeChannelForFavoritedNewName:(NSString *)newName FmId:(NSInteger)fmId;
 +(NSString *)getDevicePicByID:(int)sceneID;
+
 @end

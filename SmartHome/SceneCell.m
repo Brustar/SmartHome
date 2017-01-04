@@ -20,6 +20,12 @@
     self.lgPress.delegate = self;
     [self addGestureRecognizer:self.lgPress];
 }
+- (IBAction)seleteSendPowBtn:(id)sender {
+    
+    [self.seleteSendPowBtn setTintColor:[UIColor redColor]];
+    
+    
+}
 
 - (IBAction)doDeleteBtn:(id)sender {
     [self.delegate sceneDeleteAction:self];

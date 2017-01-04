@@ -34,7 +34,6 @@
     [super viewDidLoad];
     self.title = @"设置";
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
     self.tableView.tableFooterView = [UIView new];
     self.tableView.backgroundColor =  [UIColor colorWithRed:241/255.0 green:240/255.0 blue:246/255.0 alpha:1];
 }
@@ -59,21 +58,21 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
    
-    if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) { //如果是普通用户，不显示“权限控制”选项
+    if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) { //如果是普通用户，不显示“权限控制”选项
         if(section == 1)
         {
-            return 2;
+            return 1;
         }if (section == 2) {
             
-            return 1;
+            return 2;
         }
     
     }else {
         if(section == 1)
         {
-            return 1;
-        }if (section == 2) {
             return 2;
+        }if (section == 2) {
+            return 1;
         }
     }
     
@@ -90,7 +89,7 @@
             break;
         case 1:
             
-            if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) {
+            if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) {
                 if(indexPath.row == 0)
                 {
                     title = @"系统设置";
@@ -104,7 +103,7 @@
             break;
         case 2:
         {
-           if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) {
+           if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) {
                
                title = @"去评价";
            }else {
@@ -119,7 +118,7 @@
             break;
         }
         case 3:
-            if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) {
+            if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) {
                 title = @"关于我们";
             }else {
                
@@ -128,7 +127,7 @@
             
             break;
         case 4:
-            if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) {
+            if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) {
                 title = @"关于我们";
             }else{
                 title = @"关于我们";
@@ -174,8 +173,6 @@
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self goToViewController:indexPath];
-    
-    
 }
 -(void)goToViewController:(NSIndexPath *)indexPath
 {
@@ -188,7 +185,7 @@
         
     }else if(indexPath.section == 1)
     {
-       if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) {
+       if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) {
            if(indexPath.row == 0)
            {
                [self performSegueWithIdentifier:@"systemSetSegue" sender:self];
@@ -200,12 +197,10 @@
            
             [self performSegueWithIdentifier:@"accessSegue" sender:self];
        }
-       
-        
         
     }else if(indexPath.section == 2)
     {
-        if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) {
+        if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) {
                 [self gotoAppStoreToComment];
         }else {
             if(indexPath.row == 0)
@@ -219,7 +214,7 @@
         
     }else if(indexPath.section == 3)
     {
-        if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) {
+        if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) {
            
             [self performSegueWithIdentifier:@"aboutSegue" sender:self];
         }else {
@@ -228,7 +223,7 @@
     
     }else if(indexPath.section == 4)
     {
-        if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) {
+        if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) {
             [self performSegueWithIdentifier:@"aboutSegue" sender:self];
         }else{
              [self performSegueWithIdentifier:@"aboutSegue" sender:self];
@@ -283,8 +278,6 @@
     }
     
 }
-
-
 -(void)gotoAppStoreToComment
 {
     NSString *str = [NSString stringWithFormat:@"https://itunes.apple.com/cn/app/yi-yun-zhi-jia/id1034629669?mt=8"];
@@ -299,9 +292,5 @@
         NSLog(@"can not open");
     }
 }
-
-
-
-
 
 @end

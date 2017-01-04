@@ -38,6 +38,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *AddSceneBtn;
 @property (nonatomic,strong) NSArray * arrayData;
 @property(nonatomic,assign) int sceneID;
+
 @end
 
 @implementation IphoneSceneController

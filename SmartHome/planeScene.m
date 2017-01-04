@@ -23,7 +23,7 @@
     self.planeimg.delegate = self;
     [self.view addSubview:self.planeimg];
     
-    [self sendRequestForGettingSceneConfig:@"Cloud/scene_config_list.aspx" withTag:1];
+//    [self sendRequestForGettingSceneConfig:@"Cloud/scene_config_list.aspx" withTag:1];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
