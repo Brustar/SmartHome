@@ -266,7 +266,7 @@
 //        AreaSubVC.usrID = self.userIDArr[indexPath.row];
         
         self.usrID = self.userIDArr[indexPath.row];
-         NSString *url = [NSString stringWithFormat:@"%@Cloud/room_authority.aspx",[IOManager httpAddr]];
+//         NSString *url = [NSString stringWithFormat:@"%@Cloud/room_authority.aspx",[IOManager httpAddr]];
         self.recoredIDs = nil;
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         self.cell = cell;
@@ -284,12 +284,12 @@
         }
         
         //只有点击他人时，才显示权限列表，看自己的权限列表没意义
-        [self sendRequest:url withTag:2];
-        self.areaTableView.hidden = NO;
-//                UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//                AreaSubSettingViewController *AreaSubVC = [storyBoard instantiateViewControllerWithIdentifier:@"AccessSubSettingVC"];
-//                [self.navigationController pushViewController:AreaSubVC animated:YES];
-//                AreaSubVC.usrID = self.userIDArr[indexPath.row];
+//        [self sendRequest:url withTag:2];
+//        self.areaTableView.hidden = NO;
+                UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                AreaSubSettingViewController *AreaSubVC = [storyBoard instantiateViewControllerWithIdentifier:@"AccessSubSettingVC"];
+                [self.navigationController pushViewController:AreaSubVC animated:YES];
+                AreaSubVC.usrID = self.userIDArr[indexPath.row];
         if([cell.detailTextLabel.text isEqualToString:@"主人"])
         {
             [self.identityType setTitle:@"转化为普通身份" forState:UIControlStateNormal];

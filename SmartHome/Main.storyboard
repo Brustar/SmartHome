@@ -2643,7 +2643,7 @@
         <!--设备能耗-->
         <scene sceneID="VWe-gb-yNA">
             <objects>
-                <viewController id="szj-Vq-LnD" userLabel="设备能耗" customClass="SubEnergyVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ENenViewController" id="szj-Vq-LnD" userLabel="设备能耗" customClass="ENenViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OiA-td-Htj"/>
                         <viewControllerLayoutGuide type="bottom" id="y5E-G6-D7q"/>
@@ -2656,7 +2656,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="80" id="5ov-nw-xDb" customClass="MyEnergySubOfDeviceCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="80" id="5ov-nw-xDb" customClass="EnenCell">
                                         <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5ov-nw-xDb" id="Sfd-oX-uKt">

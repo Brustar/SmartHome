@@ -10,7 +10,7 @@
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "MySubEnergyCell.h"
-
+#import "ENenViewController.h"
 
 @interface MySubEnergyVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -110,6 +110,11 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+    UIStoryboard * board = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ENenViewController * VC = [board instantiateViewControllerWithIdentifier:@"ENenViewController"];
+      NSDictionary * dict = self.enameArr[indexPath.row];
+    VC.eqid = [dict[@"eid"] intValue];
+    [self.navigationController pushViewController:VC animated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

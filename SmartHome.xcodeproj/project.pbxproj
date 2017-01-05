@@ -129,6 +129,8 @@
 		2E7CD6081E14B80C002D0541 /* FixTimeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E7CD6071E14B80C002D0541 /* FixTimeListCell.m */; };
 		2EA2A83B1E1DCDA600092D41 /* AreaSubSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A83A1E1DCDA600092D41 /* AreaSubSettingViewController.m */; };
 		2EA2A84A1E1E275900092D41 /* MySubEnergyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A8491E1E275900092D41 /* MySubEnergyCell.m */; };
+		2EA2A8541E1E2BEA00092D41 /* ENenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A8531E1E2BEA00092D41 /* ENenViewController.m */; };
+		2EA2A8571E1E2C7800092D41 /* EnenCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A8561E1E2C7800092D41 /* EnenCell.m */; };
 		2EA99E901E1C9A0100659065 /* MySubEnergyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA99E8F1E1C9A0100659065 /* MySubEnergyVC.m */; };
 		2EDC0E901DEC072700F95BE0 /* IPhoneRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDC0E8F1DEC072700F95BE0 /* IPhoneRoom.m */; };
 		2EFFECA11E12161100C13D3E /* FixTimeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFFECA01E12161100C13D3E /* FixTimeListViewController.m */; };
@@ -665,6 +667,10 @@
 		2EA2A83A1E1DCDA600092D41 /* AreaSubSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaSubSettingViewController.m; sourceTree = "<group>"; };
 		2EA2A8481E1E275900092D41 /* MySubEnergyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySubEnergyCell.h; sourceTree = "<group>"; };
 		2EA2A8491E1E275900092D41 /* MySubEnergyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySubEnergyCell.m; sourceTree = "<group>"; };
+		2EA2A8521E1E2BEA00092D41 /* ENenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENenViewController.h; sourceTree = "<group>"; };
+		2EA2A8531E1E2BEA00092D41 /* ENenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENenViewController.m; sourceTree = "<group>"; };
+		2EA2A8551E1E2C7800092D41 /* EnenCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnenCell.h; sourceTree = "<group>"; };
+		2EA2A8561E1E2C7800092D41 /* EnenCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnenCell.m; sourceTree = "<group>"; };
 		2EA99E8E1E1C9A0100659065 /* MySubEnergyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySubEnergyVC.h; sourceTree = "<group>"; };
 		2EA99E8F1E1C9A0100659065 /* MySubEnergyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySubEnergyVC.m; sourceTree = "<group>"; };
 		2EDC0E8E1DEC072700F95BE0 /* IPhoneRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPhoneRoom.h; sourceTree = "<group>"; };
@@ -1057,24 +1063,16 @@
 				F69C82351D363A4D002DE6D7 /* ServiceRecordCell.m */,
 				F651640B1D3766C900A6F5FA /* MyEnergyViewController.h */,
 				F651640C1D3766C900A6F5FA /* MyEnergyViewController.m */,
-				2EA99E8E1E1C9A0100659065 /* MySubEnergyVC.h */,
-				2EA99E8F1E1C9A0100659065 /* MySubEnergyVC.m */,
+				2EA2A84B1E1E294D00092D41 /* Energy */,
 				F66596D81D3F12FB0082716A /* EnergyOfDeviceController.h */,
 				F66596D91D3F12FB0082716A /* EnergyOfDeviceController.m */,
 				F66596DB1D3F1DAD0082716A /* EnegryOfDeviceCell.h */,
 				F66596DC1D3F1DAD0082716A /* EnegryOfDeviceCell.m */,
 				F651640E1D37672700A6F5FA /* MyEnergyCell.h */,
 				F651640F1D37672700A6F5FA /* MyEnergyCell.m */,
-				2EA2A8481E1E275900092D41 /* MySubEnergyCell.h */,
-				2EA2A8491E1E275900092D41 /* MySubEnergyCell.m */,
 				F65B7D251D34E9E00059CFA4 /* MySettingViewController.h */,
 				F65B7D261D34E9E00059CFA4 /* MySettingViewController.m */,
-				F630C35D1D38B4FF008880BB /* AccessSettingController.h */,
-				F630C35E1D38B4FF008880BB /* AccessSettingController.m */,
-				2EA2A8391E1DCDA600092D41 /* AreaSubSettingViewController.h */,
-				2EA2A83A1E1DCDA600092D41 /* AreaSubSettingViewController.m */,
-				F67091B91D9375620002DDC5 /* AreaSettingCell.h */,
-				F630C3611D38C3E5008880BB /* AreaSettingCell.m */,
+				2EA2A8581E1E300900092D41 /* jurisdiction */,
 				F67F1F6F1D3C69DC00F2B7E5 /* SystemSettingViewController.h */,
 				F67F1F701D3C69DC00F2B7E5 /* SystemSettingViewController.m */,
 				F67F1F721D3C6AA200F2B7E5 /* SystemCell.h */,
@@ -1659,6 +1657,34 @@
 			name = SCWave;
 			sourceTree = "<group>";
 		};
+		2EA2A84B1E1E294D00092D41 /* Energy */ = {
+			isa = PBXGroup;
+			children = (
+				2EA99E8E1E1C9A0100659065 /* MySubEnergyVC.h */,
+				2EA99E8F1E1C9A0100659065 /* MySubEnergyVC.m */,
+				2EA2A8481E1E275900092D41 /* MySubEnergyCell.h */,
+				2EA2A8491E1E275900092D41 /* MySubEnergyCell.m */,
+				2EA2A8521E1E2BEA00092D41 /* ENenViewController.h */,
+				2EA2A8531E1E2BEA00092D41 /* ENenViewController.m */,
+				2EA2A8551E1E2C7800092D41 /* EnenCell.h */,
+				2EA2A8561E1E2C7800092D41 /* EnenCell.m */,
+			);
+			name = Energy;
+			sourceTree = "<group>";
+		};
+		2EA2A8581E1E300900092D41 /* jurisdiction */ = {
+			isa = PBXGroup;
+			children = (
+				F630C35D1D38B4FF008880BB /* AccessSettingController.h */,
+				F630C35E1D38B4FF008880BB /* AccessSettingController.m */,
+				2EA2A8391E1DCDA600092D41 /* AreaSubSettingViewController.h */,
+				2EA2A83A1E1DCDA600092D41 /* AreaSubSettingViewController.m */,
+				F67091B91D9375620002DDC5 /* AreaSettingCell.h */,
+				F630C3611D38C3E5008880BB /* AreaSettingCell.m */,
+			);
+			name = jurisdiction;
+			sourceTree = "<group>";
+		};
 		5CEAD34143E7289FAFA6E86D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -2240,6 +2266,8 @@
 				0FAF98A71CE40F3C009BDBB5 /* QRToggleTorchButton.m in Sources */,
 				0F25FE5E1CEB0C0A0063E834 /* SceneList.m in Sources */,
 				F625A6181D4C8EF700B696E5 /* ProfileListController.m in Sources */,
+				2EA2A8541E1E2BEA00092D41 /* ENenViewController.m in Sources */,
+				2EA2A8571E1E2C7800092D41 /* EnenCell.m in Sources */,
 				0FCFB3891CF2929900B37DD3 /* Aircon.m in Sources */,
 				F62CD87A1D94BE99001C66CE /* IphoneTVController.m in Sources */,
 				F62CFA411DAC699D006410F7 /* IphoneTypeView.m in Sources */,
