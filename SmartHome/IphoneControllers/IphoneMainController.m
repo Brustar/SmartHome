@@ -36,6 +36,7 @@
 //    self.tableView.backgroundColor = [UIColor lightGrayColor];
     [self.view sendSubviewToBack:self.tableView];
     self.tableView.separatorStyle = NO;
+  
 }
 
 
@@ -72,6 +73,7 @@
 
 - (void)setupVc:(UIViewController *)vc title:(NSString *)title
 {
+    
     vc.title = title;
     
     UIButton *button = [[UIButton alloc] init];
