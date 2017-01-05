@@ -128,6 +128,10 @@
     
     self.subTypeArr = [SQLManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.devicesTypes[0]];//设备子类
     
+    //self.devicesTypes = + (NSArray *)getDevicesSubTypeNamesWithRoomID:(int)roomID;
+    
+    //self.subTypeArr = +(NSArray *)getDeviceTypeName:(int)rID subTypeName:(NSString *)subTypeName
+    
     [self.tableView reloadData];
     [self.subDeviceTableView reloadData];
     

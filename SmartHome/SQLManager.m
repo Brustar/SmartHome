@@ -687,6 +687,32 @@
     return [deviceIDs copy];
 
 }
+
+//根据roomID 从Devices 表 查询出 subTypeName字段(可能有重复数据，要去重)
++ (NSArray *)getDevicesSubTypeNamesWithRoomID:(int)roomID {
+    NSMutableArray *subTypeNames = [NSMutableArray array];
+    FMDatabase *db = [self connetdb];
+    
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT DISTINCT subTypeName FROM Devices where rID = %d and masterID = '%ld'",roomID,[[DeviceInfo defaultManager] masterID]];
+        
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while([resultSet next])
+        {
+            NSString *subTypeName = [resultSet stringForColumn:@"subTypeName"];
+            if (subTypeName) {
+                [subTypeNames addObject:subTypeName];
+            }
+            
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return subTypeNames;
+    
+}
+
 + (NSString *)getDeviceSubTypeNameWithID:(int)ID
 {
     NSString *subTypeName = nil;
@@ -1000,7 +1026,7 @@
 }
 
 //根据场景ID得到改场景下的所有的设备ID
-+(NSArray *)getDeviceIDsBySeneId:(int)SceneId ;
++(NSArray *)getDeviceIDsBySeneId:(int)SceneId
 {
     
     NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,SceneId];
@@ -1070,8 +1096,36 @@
     return [subTypeNames copy];
 }
 
+//根据subTypeName 从Devices表 查询typeName(要去重)
++ (NSArray *)getDeviceTypeNameWithSubTypeName:(NSString *)subTypeName {
+    NSMutableArray *typeNames = [NSMutableArray array];
+    
+    FMDatabase *db = [self connetdb];
+    
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT DISTINCT typeName FROM Devices where subTypeName = '%@' and masterID = '%ld'", subTypeName, [[DeviceInfo defaultManager] masterID]];
+        
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+           NSString *typeName = [resultSet stringForColumn:@"typeName"];
+            
+            if ([self transferSubType:typeName]) {
+                [typeNames addObject:[self transferSubType:typeName]];
+            }else {
+                [typeNames addObject:typeName];
+            }
+            
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return typeNames;
+}
+
 //根据场景ID，得到该场景下的设备子类
-+(NSArray *)getDeviceTypeNameWithScenID:(int)sceneId subTypeName:(NSString *)subTypeName
++ (NSArray *)getDeviceTypeNameWithScenID:(int)sceneId subTypeName:(NSString *)subTypeName
 {
     NSMutableArray *typeNames = [NSMutableArray array];
     NSArray *deviceIDs = [self getDeviceIDsBySeneId:sceneId];
