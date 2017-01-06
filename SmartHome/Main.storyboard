@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A2323a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QoB-0E-qDZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QoB-0E-qDZ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -2351,7 +2351,11 @@
                                         <rect key="frame" x="0.0" y="117" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VUZ-bw-dvy" id="bC6-PL-JT8">
+<<<<<<< HEAD
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+=======
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+>>>>>>> 3e9809c1865a682dccd8edc8e23398d0eae98e1c
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JYe-w4-0uF">
@@ -2571,7 +2575,11 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HYm-4g-8te" id="Mv1-bP-wmS">
+<<<<<<< HEAD
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
+=======
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+>>>>>>> 3e9809c1865a682dccd8edc8e23398d0eae98e1c
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="主卧空调" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sHJ-5d-3UT">
@@ -2660,7 +2668,11 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5ov-nw-xDb" id="Sfd-oX-uKt">
+<<<<<<< HEAD
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
+=======
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+>>>>>>> 3e9809c1865a682dccd8edc8e23398d0eae98e1c
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="周二" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8b4-zZ-yRH">
@@ -6241,11 +6253,19 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="u50" translatesAutoresizingMaskIntoConstraints="NO" id="WXh-LN-Q0l">
+<<<<<<< HEAD
                                                     <rect key="frame" x="265.5" y="17" width="34" height="34"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                                 </imageView>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="iod-5A-gL6">
                                                     <rect key="frame" x="314" y="18" width="52" height="31"/>
+=======
+                                                    <rect key="frame" x="265.5" y="17" width="34.5" height="34"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
+                                                </imageView>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="iod-5A-gL6">
+                                                    <rect key="frame" x="314.5" y="18" width="51.5" height="31"/>
+>>>>>>> 3e9809c1865a682dccd8edc8e23398d0eae98e1c
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                                 </switch>
                                             </subviews>
@@ -8176,6 +8196,7 @@ layer.masksToBoundslayer.masksToBounds
         <segue reference="zAF-Rq-I0I"/>
         <segue reference="fXQ-oW-cHz"/>
         <segue reference="sa4-D6-iWJ"/>
+<<<<<<< HEAD
         <segue reference="prf-0G-qDF"/>
         <segue reference="fzi-se-X8b"/>
         <segue reference="Daf-E8-hDH"/>
@@ -8187,6 +8208,19 @@ layer.masksToBoundslayer.masksToBounds
         <segue reference="dq7-eO-a8B"/>
         <segue reference="rGG-nI-6is"/>
         <segue reference="f9b-hn-w5L"/>
+=======
+        <segue reference="G19-fh-mhQ"/>
+        <segue reference="fzi-se-X8b"/>
+        <segue reference="f9b-hn-w5L"/>
+        <segue reference="Daf-E8-hDH"/>
+        <segue reference="dSv-oV-mNG"/>
+        <segue reference="ZSJ-0K-dfQ"/>
+        <segue reference="prf-0G-qDF"/>
+        <segue reference="lwe-sH-sqk"/>
+        <segue reference="H3V-Ty-dBS"/>
+        <segue reference="rGG-nI-6is"/>
+        <segue reference="dq7-eO-a8B"/>
+>>>>>>> 3e9809c1865a682dccd8edc8e23398d0eae98e1c
         <segue reference="YE7-iU-rxh"/>
         <segue reference="PRs-sg-E1F"/>
         <segue reference="ya3-gG-p8O"/>

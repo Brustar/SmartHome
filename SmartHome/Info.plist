@@ -33,8 +33,6 @@
 	<string>亲，我们想要访问你的音乐库哟</string>
 	<key>NSCameraUsageDescription</key>
 	<string>亲，我们想要访问你的摄像头哟</string>
-	<key>NSHomeKitUsageDescription</key>
-	<string>亲，我们想要访问你的HOMEKIT哟</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
