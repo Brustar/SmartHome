@@ -19,7 +19,8 @@
 @property (nonatomic,strong) NSArray *titleArr;
 @property (nonatomic,strong) NSArray * titleImageArr;
 @property (nonatomic, weak) UIViewController *selectController;
-
+@property (nonatomic, strong) UISwipeGestureRecognizer *leftSwipeGestureRecognizer;
+@property (nonatomic, strong) UISwipeGestureRecognizer *rightSwipeGestureRecognizer;
 @property (nonatomic, strong) UIButton *cover;
 @end
 
@@ -28,12 +29,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.titleArr = @[@"家庭",@"场景",@"设备",@"实景",@"我的"];
-    self.titleImageArr = @[@"icone-2",@"room",@"room",@"scene",@"icone-1"];
+    self.titleImageArr = @[@"family-Mysetting",@"scene-MySetting",@"device_MySetting",@"live",@"me-Mysetting"];
     self.tableView.tableFooterView = [UIView new];
     self.tableView.tableHeaderView = self.headView;
     [self setupChilderController];
 //    self.tableView.backgroundColor = [UIColor lightGrayColor];
     [self.view sendSubviewToBack:self.tableView];
+    self.tableView.separatorStyle = NO;
+  
 }
 
 
@@ -70,14 +73,23 @@
 
 - (void)setupVc:(UIViewController *)vc title:(NSString *)title
 {
+    
     vc.title = title;
     
     UIButton *button = [[UIButton alloc] init];
     
-    [button setTitle:@"菜单" forState:UIControlStateNormal];
+//    [button setTitle:@"菜单" forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"More"] forState:UIControlStateNormal];
     [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     button.bounds = CGRectMake(0, 0, 50, 30);
+    self.leftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
+    self.rightSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
     
+    self.leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+    self.rightSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    
+    [self.view addGestureRecognizer:self.leftSwipeGestureRecognizer];
+    [self.view addGestureRecognizer:self.rightSwipeGestureRecognizer];
     
     [button addTarget:self action:@selector(leftButtonOnClick) forControlEvents:UIControlEventTouchUpInside];
     
@@ -86,21 +98,43 @@
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     
     [self addChildViewController:nav];
+    
+    
 }
-
+- (void)handleSwipes:(UISwipeGestureRecognizer *)sender
+{
+    if (sender ==self.rightSwipeGestureRecognizer) {
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            UIView *showingView = self.selectController.view;
+            
+            showingView.transform = CGAffineTransformMakeTranslation(self.view.bounds.size.width-60, 0);
+            
+            self.cover.frame = showingView.bounds;
+            [showingView addSubview:self.cover];
+        }];
+       
+    }
+    
+    if (sender == self.leftSwipeGestureRecognizer) {
+       
+        [UIView animateWithDuration:0.3 animations:^{
+            self.selectController.view.transform = CGAffineTransformIdentity;
+        } completion:^(BOOL finished) {
+            [self.cover removeFromSuperview];
+        }];
+    }
+    
+}
 
 - (void)leftButtonOnClick {
     [UIView animateWithDuration:0.3 animations:^{
         UIView *showingView = self.selectController.view;
-        
-        showingView.transform = CGAffineTransformMakeTranslation(150, 0);
-        
+        showingView.transform = CGAffineTransformMakeTranslation(self.view.bounds.size.width-60, 0);
         self.cover.frame = showingView.bounds;
         [showingView addSubview:self.cover];
     }];
 }
-
-
 - (void)coverOnClick:(UIButton *)cover {
     [UIView animateWithDuration:0.3 animations:^{
         self.selectController.view.transform = CGAffineTransformIdentity;
@@ -122,7 +156,8 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
     }
     cell.textLabel.text = self.titleArr[indexPath.row];
-    cell.backgroundColor = [UIColor lightGrayColor];
+    
+//    cell.backgroundColor = [UIColor lightGrayColor];
     cell.imageView.image = [UIImage imageNamed:self.titleImageArr[indexPath.row]];
     return cell;
     

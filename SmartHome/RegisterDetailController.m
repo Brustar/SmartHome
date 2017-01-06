@@ -20,8 +20,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *userName;
 @property (weak, nonatomic) IBOutlet UITextField *passWord;//密码
 @property (weak, nonatomic) IBOutlet UITextField *pwdAgain;//确认密码
-@property (nonatomic,assign) int cType;
-
 @property (weak, nonatomic) IBOutlet UIButton *auothCodeBtn;
 
 @property (nonatomic,strong) dispatch_source_t _timer;
@@ -47,7 +45,7 @@
     self.phoneNumber.text = self.phoneStr;
     if([self.userType isEqualToString:@"客人"])
     {
-        self.cType = 0;
+        self.cType = 2;
     }else self.cType = 1;
     self.passWord.delegate = self;
     self.pwdAgain.delegate = self;
@@ -76,6 +74,7 @@
                         self.auothCodeBtn.userInteractionEnabled = YES;
                     });
                 }else{
+                     [MBProgressHUD showError:@"获取验证码失败"];
                     int seconds = timeout % 60;
                     NSString *strTime = [NSString stringWithFormat:@" %.2d", seconds];
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -139,14 +138,10 @@
                            @"devicetype":@(clientType)
                            };
     NSString *url = [NSString stringWithFormat:@"%@login/regist.aspx",[IOManager httpAddr]];
-   
-    
     HttpManager *http=[HttpManager defaultManager];
     http.tag = 2;
     http.delegate=self;
     [http sendPost:url param:dict];
-    
-    
   
 }
 -(void)httpHandler:(id)responseObject tag:(int)tag
@@ -157,6 +152,7 @@
         {
             [MBProgressHUD showSuccess:@"验证码发送成功"];
         }else {
+            [MBProgressHUD showError:@"验证码发送失败"];
             [MBProgressHUD showError:responseObject[@"msg"]];
         }
     }else if(tag == 2){
@@ -169,7 +165,6 @@
             LoginController *tvc = [storyBoard instantiateViewControllerWithIdentifier:@"LoginController"];
             [self.navigationController pushViewController:tvc animated:YES];
             [MBProgressHUD showError:@"恭喜注册成功"];
-          
             
         }else{
             [MBProgressHUD showError:responseObject[@"msg"]];

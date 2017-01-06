@@ -87,7 +87,10 @@
 
 - (IBAction)demo:(id)sender {
     DeviceInfo *info=[DeviceInfo defaultManager];
-    info.db=@"demoDB";
+        info.db=@"demoDB";
+        info.masterID = 255l;
+    
+    [[NSUserDefaults standardUserDefaults] objectForKey:@"HostID"];
     [SQLManager initDemoSQlite];
     
     if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)

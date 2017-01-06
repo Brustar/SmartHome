@@ -37,6 +37,7 @@
 @property (weak, nonatomic) IBOutlet UIView *coverView;
 @property (weak, nonatomic) IBOutlet UIView *registerView;
 @property(nonatomic,assign) NSInteger userType;
+@property(nonatomic,assign) NSInteger UserType;//判断是否为主人 
 @property(nonatomic,strong) NSString *masterId;
 @property(nonatomic,strong) NSString *role;
 @property(nonatomic,strong) NSMutableArray *hostIDS;
@@ -76,7 +77,7 @@
     self.user.text = [[NSUserDefaults  standardUserDefaults] objectForKey:@"Account"];
     self.userType = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Type"] intValue];
     self.pwd.text = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Password"] decryptWithDes:DES_KEY];
-   
+    self.UserType =[[[NSUserDefaults standardUserDefaults] objectForKey:@"UserType"] intValue];
     if ([CLLocationManager locationServicesEnabled]) {
         self.lm = [[CLLocationManager alloc]init];
         self.lm.delegate = self;
@@ -134,7 +135,11 @@
     {
         self.userType = 2;
     }
-
+//    if([self.UserTypeStr isEqualToString:@"客人"])
+//    {
+//        self.UserType = 2;
+//    }else self.UserType = 1;
+    
     DeviceInfo *info=[DeviceInfo defaultManager];
     NSString *pushToken;
     if(info.pushToken)
@@ -150,10 +155,11 @@
         clientType = 2;
     }
     
-    NSDictionary *dict = @{@"account":self.user.text,@"logintype":[NSNumber numberWithInteger:self.userType],@"password":[self.pwd.text md5],@"pushtoken":pushToken,@"devicetype":@(clientType)};
+    NSDictionary *dict = @{@"account":self.user.text,@"logintype":[NSNumber numberWithInteger:self.userType],@"password":[self.pwd.text md5],@"pushtoken":pushToken,@"devicetype":@(clientType),@"usertype":[NSNumber numberWithInteger:self.UserType]};
     [IOManager writeUserdefault:self.user.text forKey:@"Account"];
     [IOManager writeUserdefault:[NSNumber numberWithInteger:self.userType] forKey:@"Type"];
     [IOManager writeUserdefault:[self.pwd.text encryptWithDes:DES_KEY] forKey:@"Password"];
+//    [IOManager writeUserdefault:[NSNumber numberWithInteger:self.UserType] forKey:@"UserType"];
     HttpManager *http=[HttpManager defaultManager];
     http.delegate=self;
     http.tag = 1;
@@ -441,7 +447,7 @@
             [IOManager writeUserdefault:responseObject[@"token"] forKey:@"AuthorToken"];
             [IOManager writeUserdefault:responseObject[@"username"] forKey:@"UserName"];
             [IOManager writeUserdefault:responseObject[@"userid"] forKey:@"UserID"];
-            NSArray *hostList = responseObject[@"hostlist"];
+                        NSArray *hostList = responseObject[@"hostlist"];
             
             for(NSDictionary *hostID in hostList)
             {

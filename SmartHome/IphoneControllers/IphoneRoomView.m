@@ -74,7 +74,6 @@
     [self setViewFrame];
 }
 
-
 - (void)setSelectButton:(int)index {
     UIButton *button = self.btns[index];
     button.enabled = NO;

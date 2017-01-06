@@ -11,11 +11,13 @@
 #import "IOManager.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
+#import "AreaSubSettingViewController.h"
+
 @interface AccessSettingController ()<UITableViewDelegate,UITableViewDataSource,HttpDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *userTableView;
 @property (nonatomic,strong) NSMutableArray *userArr;
 @property (nonatomic,strong) NSMutableArray *managerType;
-@property (weak, nonatomic) IBOutlet UITableView *areaTableView;
+@property (weak, nonatomic) IBOutlet UITableView *areaTableView;//权限设备的TableView
 @property (nonatomic,strong) NSMutableArray *userIDArr;
 @property (nonatomic,strong) NSNumber  *usrID;
 //eareTabelView属性
@@ -123,8 +125,10 @@
                 [self.userArr addObject:userName];
                 [self.managerType addObject:userType];
                 [self.userIDArr addObject:userID];
+               
+//    [IOManager writeUserdefault:userDetail[@"usertype"] forKey:@"UserType"];
             }
-            [self.userTableView reloadData];
+                        [self.userTableView reloadData];
         }else{
             [MBProgressHUD showError:responseObject[@"Msg"]];
         }
@@ -135,7 +139,6 @@
         {
             [self.areasArr removeAllObjects];
             [self.opens removeAllObjects];
-//            NSDictionary *dic = responseObject[@"host_user_list"];
             NSArray *arr =responseObject[@"host_user_list"];
             for(NSDictionary *messageList in arr)
             {
@@ -223,9 +226,6 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   
-    
-    
     if(tableView == self.userTableView){
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"accessSettingCell" forIndexPath:indexPath];
         cell.textLabel.text = self.userArr[indexPath.row];
@@ -253,26 +253,25 @@
         cell.exchangeSwitch.on = NO;
     }
     return cell;
-
-
-    
-    
     
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-   
+    
     if(tableView == self.userTableView)
     {
+//        UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//        AreaSubSettingViewController *AreaSubVC = [storyBoard instantiateViewControllerWithIdentifier:@"AccessSubSettingVC"];
+//        [self.navigationController pushViewController:AreaSubVC animated:YES];
+//        AreaSubVC.usrID = self.userIDArr[indexPath.row];
         
         self.usrID = self.userIDArr[indexPath.row];
-         NSString *url = [NSString stringWithFormat:@"%@Cloud/room_authority.aspx",[IOManager httpAddr]];
+//         NSString *url = [NSString stringWithFormat:@"%@Cloud/room_authority.aspx",[IOManager httpAddr]];
         self.recoredIDs = nil;
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         self.cell = cell;
         self.selectedIndexPath = indexPath;
         self.userName.text = cell.textLabel.text;
-        
         
         if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]] && [[UD objectForKey:@"UserType"] integerValue] == 2) {
             [MBProgressHUD showError:@"你是普通用户，无权限操作"];
@@ -285,9 +284,12 @@
         }
         
         //只有点击他人时，才显示权限列表，看自己的权限列表没意义
-        [self sendRequest:url withTag:2];
-        self.areaTableView.hidden = NO;
-        
+//        [self sendRequest:url withTag:2];
+//        self.areaTableView.hidden = NO;
+                UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                AreaSubSettingViewController *AreaSubVC = [storyBoard instantiateViewControllerWithIdentifier:@"AccessSubSettingVC"];
+                [self.navigationController pushViewController:AreaSubVC animated:YES];
+                AreaSubVC.usrID = self.userIDArr[indexPath.row];
         if([cell.detailTextLabel.text isEqualToString:@"主人"])
         {
             [self.identityType setTitle:@"转化为普通身份" forState:UIControlStateNormal];
@@ -395,7 +397,6 @@
     [alertVC addAction:cancelAction];
     [alertVC addAction:sureAction];
 
-    
     
 }
 //删除或改变用户权限请求

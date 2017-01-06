@@ -53,6 +53,7 @@
     self.rooms = [SQLManager getAllRoomsInfo];
     [self setUpRoomScrollerView];
        [self setUpScrollerView];
+    
 }
 -(void)setUpScrollerView
 {
