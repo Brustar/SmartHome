@@ -100,15 +100,15 @@
     
 }
 
+/*
 -(void)initHomekitPlugin
 {
-    //self.homeManager = [[HMHomeManager alloc] init];
-    //self.homeManager.delegate = self;
+    self.homeManager = [[HMHomeManager alloc] init];
+    self.homeManager.delegate = self;
     
     self.devices=[NSMutableArray new];
 }
 
-/*
 - (void)homeManagerDidUpdateHomes:(HMHomeManager *)manager
 {
     if (manager.primaryHome) {
