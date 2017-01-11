@@ -132,6 +132,7 @@
 		2EA2A8541E1E2BEA00092D41 /* ENenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A8531E1E2BEA00092D41 /* ENenViewController.m */; };
 		2EA2A8571E1E2C7800092D41 /* EnenCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A8561E1E2C7800092D41 /* EnenCell.m */; };
 		2EA99E901E1C9A0100659065 /* MySubEnergyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA99E8F1E1C9A0100659065 /* MySubEnergyVC.m */; };
+		2EB2A4721E237F05003F01DB /* DeviceListTimeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB2A4711E237F05003F01DB /* DeviceListTimeVC.m */; };
 		2EDC0E901DEC072700F95BE0 /* IPhoneRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDC0E8F1DEC072700F95BE0 /* IPhoneRoom.m */; };
 		2EFFECA11E12161100C13D3E /* FixTimeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFFECA01E12161100C13D3E /* FixTimeListViewController.m */; };
 		CD43046F1E0B674000B594F4 /* FamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD43046E1E0B674000B594F4 /* FamilyViewController.m */; };
@@ -673,6 +674,8 @@
 		2EA2A8561E1E2C7800092D41 /* EnenCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnenCell.m; sourceTree = "<group>"; };
 		2EA99E8E1E1C9A0100659065 /* MySubEnergyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySubEnergyVC.h; sourceTree = "<group>"; };
 		2EA99E8F1E1C9A0100659065 /* MySubEnergyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySubEnergyVC.m; sourceTree = "<group>"; };
+		2EB2A4701E237F05003F01DB /* DeviceListTimeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceListTimeVC.h; sourceTree = "<group>"; };
+		2EB2A4711E237F05003F01DB /* DeviceListTimeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceListTimeVC.m; sourceTree = "<group>"; };
 		2EDC0E8E1DEC072700F95BE0 /* IPhoneRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPhoneRoom.h; sourceTree = "<group>"; };
 		2EDC0E8F1DEC072700F95BE0 /* IPhoneRoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPhoneRoom.m; sourceTree = "<group>"; };
 		2EFFEC9F1E12161100C13D3E /* FixTimeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixTimeListViewController.h; sourceTree = "<group>"; };
@@ -1063,6 +1066,7 @@
 				F69C82351D363A4D002DE6D7 /* ServiceRecordCell.m */,
 				F651640B1D3766C900A6F5FA /* MyEnergyViewController.h */,
 				F651640C1D3766C900A6F5FA /* MyEnergyViewController.m */,
+				2EB2A46F1E237EB5003F01DB /* deviceTimeList */,
 				2EA2A84B1E1E294D00092D41 /* Energy */,
 				F66596D81D3F12FB0082716A /* EnergyOfDeviceController.h */,
 				F66596D91D3F12FB0082716A /* EnergyOfDeviceController.m */,
@@ -1685,6 +1689,15 @@
 			name = jurisdiction;
 			sourceTree = "<group>";
 		};
+		2EB2A46F1E237EB5003F01DB /* deviceTimeList */ = {
+			isa = PBXGroup;
+			children = (
+				2EB2A4701E237F05003F01DB /* DeviceListTimeVC.h */,
+				2EB2A4711E237F05003F01DB /* DeviceListTimeVC.m */,
+			);
+			name = deviceTimeList;
+			sourceTree = "<group>";
+		};
 		5CEAD34143E7289FAFA6E86D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -2226,6 +2239,7 @@
 				0F43B1031CF4055300F3D9F0 /* IATConfig.m in Sources */,
 				F66596DD1D3F1DAD0082716A /* EnegryOfDeviceCell.m in Sources */,
 				F618141D1DB5B0C7003B0741 /* PushSettingController.m in Sources */,
+				2EB2A4721E237F05003F01DB /* DeviceListTimeVC.m in Sources */,
 				F66CADE51D5D8654001E66EC /* DeviceType.m in Sources */,
 				F6DC641E1DEC17710056EC00 /* RoomDeviceController.m in Sources */,
 				0F25178A1CFD8C6500491A6C /* PackManager.m in Sources */,

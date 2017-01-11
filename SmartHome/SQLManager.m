@@ -256,6 +256,47 @@
     return [subTypes copy];
    
 }
+
++(NSArray *)getAllDevices
+{
+    NSMutableArray *subTypes = [NSMutableArray array];
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where masterID = '%ld' and typeName <> 'FM' and typeName <> '幕布'",[[DeviceInfo defaultManager] masterID]];
+        
+        
+        FMResultSet *resultSet = [db executeQuery:sql];
+        
+        while ([resultSet next])
+        {
+            
+            NSString *typeName = [resultSet stringForColumn:@"typeName"];
+            if ([self transferSubType:typeName]) {
+                typeName = [self transferSubType:typeName];
+            }
+            
+            BOOL isEqual = false;
+            for (NSString *tempTypeName in subTypes) {
+                if ([tempTypeName isEqualToString:typeName]) {
+                    isEqual = true;
+                    break;
+                }
+            }
+            if (!isEqual) {
+                [subTypes addObject:typeName];
+            }
+        }
+        
+    }
+    [db closeOpenResultSets];
+    [db close];
+    
+    
+    return [subTypes copy];
+    
+}
+
 +(NSArray*)getSubTypeNameByRoomID:(int)rID
 {
     NSMutableArray *subTypes = [NSMutableArray array];

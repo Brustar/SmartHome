@@ -21,28 +21,20 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *favButt;//收藏
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,assign) CGFloat brightValue;
-
 @property (nonatomic,strong) NSMutableArray *lIDs;
 @property (nonatomic,strong) NSMutableArray *lNames;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentLight;
-
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *segementTopConstraints;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewRightConstraints;
-
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewLeftContraints;
-
-
 - (IBAction)selectTypeOfLight:(UISegmentedControl *)sender;
-
 @property (weak, nonatomic) IBOutlet UIView *lightView;
 @property (weak, nonatomic) IBOutlet UIButton *sprightlierBtn;//明快
-
 @property (weak, nonatomic) IBOutlet UIButton *peacefulBtn;//幽静
 @property (weak, nonatomic) IBOutlet UIButton *romanceBtn;//浪漫
-
 @property (weak, nonatomic) IBOutlet UISlider *lightSlider;//控制所有灯的亮度调节
-
 @property (nonatomic,assign) int sceneID;
+
 @end
 
 @implementation LightController
@@ -97,47 +89,34 @@
     [super viewDidLoad];
     
 //    self.navigationController.navigationBarHidden = YES;
+    
     [self setUpConstraints];
     self.detailCell = [[[NSBundle mainBundle] loadNibNamed:@"DetailTableViewCell" owner:self options:nil] lastObject];
     self.detailCell.bright.continuous = NO;
     [self.detailCell.bright addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
-    
-
     [self.detailCell.power addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     self.lightSlider.continuous = NO;
-   
     self.cell = [[[NSBundle mainBundle] loadNibNamed:@"ColourTableViewCell" owner:self options:nil] lastObject];
-    
     [self setupSegmentLight];
-    
     self.scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     if ([self.sceneid intValue]>0) {
         _favButt.enabled=YES;
         
         [self syncUI];
     }
-    
     self.tableView.scrollEnabled = NO;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncLight:) name:@"light" object:nil];
-    
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
- 
     [_lightSlider addTarget:self action:@selector(onLightSliderValueChanged:) forControlEvents:UIControlEventValueChanged];
-    
     _sprightlierBtn.layer.cornerRadius = 8.0;
     _sprightlierBtn.layer.masksToBounds = YES;
-    
     _romanceBtn.layer.cornerRadius = 8.0;
     _romanceBtn.layer.masksToBounds = YES;
-    
     _peacefulBtn.layer.cornerRadius = 8.0;
     _peacefulBtn.layer.masksToBounds = YES;
-    
     if (_showLightView) {
         _lightView.hidden = NO;
     }else {
@@ -153,6 +132,7 @@
         CGRect frame1 = _sprightlierBtn.frame;
         frame1.origin.y += 20;
         _sprightlierBtn.frame = frame1;
+        
     }
 }
 
@@ -161,15 +141,13 @@
 }
 
 - (void)onLightSliderValueChanged:(UISlider *)slider {
+    
     [[SceneManager defaultManager] dimingScene:[self.sceneid intValue] brightness:(int)(slider.value*100)];
-    
     self.detailCell.bright.value = slider.value;
-    
-    
     self.detailCell.valueLabel.text = [NSString stringWithFormat:@"%d%%", (int)(self.detailCell.bright.value * 100)];
     //self.detailCell.power.on = self.detailCell.bright.value >0;
-    
     [self save:self.detailCell.bright];
+    
 }
 
 - (IBAction)favButt:(id)sender {

@@ -10,4 +10,5 @@
 
 @interface ENenViewController : UIViewController
 @property (nonatomic,assign) int eqid;
+@property (nonatomic,strong) NSString * titleName;
 @end

@@ -300,7 +300,6 @@
     }
     NSDictionary *dic = @{@"startTime":startTime,@"endTime":endTime,@"repeat":self.repeatLabel.text,@"startDay":startDay,@"endDay":endDay};
     [center postNotificationName:@"time" object:nil userInfo:dic];
-    
     [self.navigationController popViewControllerAnimated:YES];     
 
 }

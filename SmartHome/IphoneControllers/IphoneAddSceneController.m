@@ -47,9 +47,11 @@
 
 @interface IphoneAddSceneController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *sceneName;
+@property (weak, nonatomic) IBOutlet UITextField *sceneSubName;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UITableView *subTableView;
 @property (nonatomic,strong) NSArray *devices;
+@property (nonatomic,strong) NSMutableArray * deviceArrs;
+@property (nonatomic,strong) NSMutableArray *deviceName;
 @property (weak, nonatomic) IBOutlet UILabel *startTime;//开始时间
 @property (weak, nonatomic) IBOutlet UILabel *endTime;//结束时间
 @property (weak, nonatomic) IBOutlet UILabel *repeat;//设置重复日期
@@ -61,6 +63,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *SceneView;//弹出框的视图
 
+@property (weak, nonatomic) IBOutlet UIView *coverView;
 @property (weak, nonatomic) IBOutlet UIButton *ImageBtn;//场景图片按钮
 @property (nonatomic,strong) UIImage * selectSceneImg;
 
@@ -123,6 +126,9 @@
   
     [self reachNotification];
      self.AllsceneArr = [SQLManager getAllScene];
+    UIView *view = [[UIView alloc] init];
+    [view setBackgroundColor:[UIColor clearColor]];
+    self.subTableView.tableFooterView = view;
   
 }
 
@@ -134,7 +140,11 @@
 {
     [super viewWillAppear:YES];
     self.devices = [self deviceAdded];
+    self.deviceArrs = [NSMutableArray arrayWithArray:self.devices];
     [self.tableView reloadData];
+    self.cell.repetitionLabel.text = [NSString stringWithFormat:@"%@",self.repeat.text];
+    self.cell.sceneTimeLabel.text =  [NSString stringWithFormat:@"%@-%@",self.startTime.text,self.endTime.text];
+//    [self.subTableView reloadData];
 }
 
 -(void)reachNotification
@@ -163,7 +173,7 @@
 }
 //添加定时
 - (IBAction)addFixTime:(id)sender {
-    if (self.devices.count == 0) {
+    if (self.deviceName.count == 0) {
            [MBProgressHUD showError:@"先选择设备，再设置定时"];
     }else{
          [self performSegueWithIdentifier:@"addTimeSegue" sender:self];
@@ -176,87 +186,74 @@
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
     NSArray *devices = plistDic[@"devices"];
-    NSMutableArray *deviceName = [NSMutableArray array];
+    self.deviceName = [NSMutableArray array];
     for(NSDictionary *dic in devices)
     {
         //dic[@"deviceID"];
         NSString *name = [SQLManager deviceNameByDeviceID:[dic[@"deviceID"] intValue]];
         if (name) {
-              [deviceName addObject:name];
+              [self.deviceName addObject:name];
         }
     }
-    return [deviceName copy];
+    return [self.deviceName copy];
 
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == self.tableView) {
-         return self.devices.count;
+         return self.deviceName.count;
     }else{
-        return self.AllsceneArr.count;
+//        return self.AllsceneArr.count;
+        return 1;
     }
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
    
     if (tableView == self.subTableView) {
-        FixTimeListCell * cell = [tableView dequeueReusableCellWithIdentifier:@"FixTimeListCell" forIndexPath:indexPath];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        Scene * scene = self.AllsceneArr[indexPath.row];
-        cell.sceneNameLabel.text = [NSString stringWithFormat:@"%@-%@",[SQLManager getRoomNameByRoomID:scene.rID],scene.sceneName];
-        for (NSDictionary * dict in scene.schedules) {
-            NSString * startTime = dict[@"startTime"];
-            NSString * endTime =   dict[@"endTime"];
-            NSArray * weekDayArr = dict[@"weekDays"];
-            self.repetitionStr = [NSString string];
-            self.repetitionStr = [weekDayArr componentsJoinedByString:@"、"];
-            [self.startTimeArr addObject:startTime];
-            [self.endTimeArr addObject:endTime];
-        }
-        if (scene.schedules.count ==0) {
-            cell.sceneTimeLabel.text =@"暂无定时信息";
-            cell.repetitionLabel.text = @"暂无重复日期";
-        }else{
-            cell.sceneTimeLabel.text = [NSString stringWithFormat:@"%@-%@",self.startTimeArr[indexPath.row],self.endTimeArr[indexPath.row]];
-            cell.repetitionLabel.text = self.repetitionStr;
-        }
-        return cell;
+        self.cell = [tableView dequeueReusableCellWithIdentifier:@"FixTimeListCell" forIndexPath:indexPath];
+       
+        self.cell.sceneTimeLabel.text = [NSString stringWithFormat:@"%@-%@",self.startTime.text,self.endTime.text];
+        self.cell.repetitionLabel.text = [NSString stringWithFormat:@"%@",self.repeat.text];
+
+        return self.cell;
     }
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if(!cell)
     {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    cell.textLabel.text = self.devices[indexPath.row];
+    cell.textLabel.text = self.deviceName[indexPath.row];
     
     return cell;
 }
 
 //保存场景
 - (IBAction)saveNewScene:(id)sender {
-    
-    if ([self.sceneName.text isEqualToString:@""]) {
-        [MBProgressHUD showError:@"场景名不能为空!"];
-        return;
-    }
      [self.view bringSubviewToFront:self.SceneView];
     self.SceneView.hidden = NO;
+    self.coverView.hidden = NO;
+    [self.subTableView reloadData];
     
 }
 - (IBAction)cancelBtn:(id)sender {
     
     self.SceneView.hidden = YES;
+    self.coverView.hidden = YES;
 }
 - (IBAction)SureBtn:(id)sender {
     
+        if ([self.sceneSubName.text isEqualToString:@""]) {
+            [MBProgressHUD showError:@"场景名不能为空!"];
+            return;
+        }
         NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
         NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
         NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
         Scene *scene = [[Scene alloc]initWhithoutSchedule];
         [scene setValuesForKeysWithDictionary:plistDic];
         [[DeviceInfo defaultManager] setEditingScene:NO];
-    
-        [[SceneManager defaultManager] addScene:scene withName:self.sceneName.text withImage:self.selectSceneImg];
+        [[SceneManager defaultManager] addScene:scene withName:self.sceneSubName.text withImage:self.selectSceneImg];
         [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -314,11 +311,47 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == self.subTableView) {
-        return 80;
+        return 54;
     }
 
     return 44;
 }
 
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 
+{
+    
+    if (editingStyle ==UITableViewCellEditingStyleDelete)
+        
+    {
+        [self.deviceName removeObjectAtIndex:indexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+    }
+    NSLog(@"--------%ld------",(unsigned long)self.deviceName.count);
+    
+}
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+
+{
+    
+    return   UITableViewCellEditingStyleDelete;
+    
+}
+
+/*改变删除按钮的title*/
+
+-(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+
+{
+    
+    return @"删除";
+    
+}
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView == self.subTableView) {
+        return NO;
+    }
+    return YES;
+}
 @end

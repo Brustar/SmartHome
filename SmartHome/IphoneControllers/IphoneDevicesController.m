@@ -31,6 +31,7 @@
 #import "IPhoneTVVC.h"
 #import "IPhoneNetVV.h"
 
+
 @interface IphoneDevicesController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) NSArray *deviceTypes;
@@ -41,6 +42,11 @@
 -(void)setRoomId:(int)roomId
 {
     _roomId = roomId;
+//    if (_roomId) {
+//       self.deviceTypes = [SQLManager deviceSubTypeByRoomId:_roomId];
+//    }else{
+//        self.deviceTypes = [SQLManager getAllDevices];
+//    }
     self.deviceTypes = [SQLManager deviceSubTypeByRoomId:_roomId];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -55,6 +61,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    UIView *view = [[UIView alloc] init];
+    [view setBackgroundColor:[UIColor clearColor]];
+    self.tableView.tableFooterView = view;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

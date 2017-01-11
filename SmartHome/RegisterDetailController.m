@@ -20,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *userName;
 @property (weak, nonatomic) IBOutlet UITextField *passWord;//密码
 @property (weak, nonatomic) IBOutlet UITextField *pwdAgain;//确认密码
-@property (weak, nonatomic) IBOutlet UIButton *auothCodeBtn;
+@property (weak, nonatomic) IBOutlet UIButton *auothCodeBtn;//获取验证码
 
 @property (nonatomic,strong) dispatch_source_t _timer;
 
@@ -49,6 +49,7 @@
     }else self.cType = 1;
     self.passWord.delegate = self;
     self.pwdAgain.delegate = self;
+     self.auothCodeBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
 }
 
 - (IBAction)DisMissBtn:(id)sender {

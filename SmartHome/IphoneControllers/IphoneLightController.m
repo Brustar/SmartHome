@@ -48,17 +48,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    UIView *view = [[UIView alloc] init];
+    [view setBackgroundColor:[UIColor clearColor]];
+    self.tableView.tableFooterView = view;
     _lightArrs = [SQLManager getDeviceByRoom:self.roomID];
     _curtainArrs = [SQLManager getCurtainByRoom:self.roomID];
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
         [self.tableView registerNib:[UINib nibWithNibName:@"CurtainTableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainTableViewCell"];
-//    self.cell = [[[NSBundle mainBundle] loadNibNamed:@"CurtainTableViewCell" owner:self options:nil] lastObject];
-//    self.cell.slider.continuous = NO;
-//    [self.cell.slider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
-//    [self.cell.open addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-//    [self.cell.close addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-//    self.cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
 }
 -(IBAction)save:(id)sender
@@ -139,11 +136,6 @@
         return cell;
 
     }
-//        self.cell.selectionStyle = UITableViewCellSelectionStyleGray;
-//        Device * device = [SQLManager getDeviceWithDeviceID:[_curtainArrs[indexPath.row] intValue]];
-//        self.cell.label.text = device.name;
-//        self.cell.deviceId = _curtainArrs[indexPath.row];
-//        return self.cell;
     
     CurtainTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
     Device * device = [SQLManager getDeviceWithDeviceID:[_curtainArrs[indexPath.row] intValue]];
@@ -177,7 +169,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    return 60;
+    return 76;
 
 }
 
