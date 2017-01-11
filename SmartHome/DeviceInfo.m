@@ -12,7 +12,7 @@
 #import "MBProgressHUD+NJ.h"
 #import "FMDatabase.h"
 #import "SQLManager.h"
-#import <AdSupport/ASIdentifierManager.h>
+//#import <AdSupport/ASIdentifierManager.h>
 
 @implementation DeviceInfo
 
@@ -35,7 +35,8 @@
 
 - (NSString *) imei
 {
-    return [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+    return @"";
+    //return [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
 }
 
 //取设备机型

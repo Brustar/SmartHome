@@ -15,7 +15,7 @@
 #import "SceneManager.h"
 #import "Plugin.h"
 
-@interface PluginViewController ()<UITableViewDelegate,UITableViewDataSource,HMHomeManagerDelegate>
+@interface PluginViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
 @property (nonatomic,strong) PluginCell *cell;
@@ -99,6 +99,8 @@
     self.deviceid = [self.plugDeviceIds objectAtIndex:self.segment.selectedSegmentIndex];
     
 }
+
+/*
 -(void)initHomekitPlugin
 {
     self.homeManager = [[HMHomeManager alloc] init];
@@ -130,7 +132,7 @@
     }
     [self.tableView reloadData];
 }
-
+*/
 -(void)initPlugin
 {
     self.devices=[NSMutableArray new];
@@ -174,7 +176,7 @@
     }
     [self.tableView reloadData];
 }
-
+/*
 -(IBAction)switchHomekitDevice:(id)sender
 {
 
@@ -190,7 +192,7 @@
             }];
         }
 }
-
+*/
 -(IBAction)switchDevice:(id)sender{
     UISwitch *sw=(UISwitch *)sender;
     /*
