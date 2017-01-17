@@ -2686,9 +2686,20 @@
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N1b-yz-BTq">
                                                     <rect key="frame" x="65" y="25" width="230" height="10"/>
-                                                    <color key="backgroundColor" red="0.72336632010000002" green="0.72035431500000002" blue="0.26005520459999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" red="0.88665550159999995" green="0.88665550159999995" blue="0.88665550159999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="10" id="XMq-ie-Aku"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kg6-fv-7ex">
+                                                    <rect key="frame" x="65" y="25" width="230" height="10"/>
+                                                    <color key="backgroundColor" red="0.91133814099999999" green="0.52505368519999995" blue="0.12219731189999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="10" id="AeV-1n-Mm3"/>
+                                                        <constraint firstAttribute="width" constant="230" id="PSU-tq-pUO"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -2785,12 +2796,15 @@
                                                 <constraint firstItem="GyS-Lb-Wau" firstAttribute="top" secondItem="Sfd-oX-uKt" secondAttribute="topMargin" constant="1" id="3FX-Uq-VmR"/>
                                                 <constraint firstItem="N1b-yz-BTq" firstAttribute="leading" secondItem="8b4-zZ-yRH" secondAttribute="trailing" constant="8" id="3f6-Wg-2yz"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="CAY-MN-M57" secondAttribute="bottom" constant="7" id="65e-NE-yZi"/>
+                                                <constraint firstItem="Kg6-fv-7ex" firstAttribute="leading" secondItem="8b4-zZ-yRH" secondAttribute="trailing" constant="8" id="7DK-Hw-MEV"/>
                                                 <constraint firstItem="CAY-MN-M57" firstAttribute="trailing" secondItem="8b4-zZ-yRH" secondAttribute="trailing" id="8nu-Kc-ddY"/>
                                                 <constraint firstItem="GyS-Lb-Wau" firstAttribute="leading" secondItem="N1b-yz-BTq" secondAttribute="trailing" constant="11" id="9uV-2c-WsY"/>
                                                 <constraint firstItem="GyS-Lb-Wau" firstAttribute="leading" secondItem="eP8-Gr-TGs" secondAttribute="trailing" constant="11" id="FJG-18-ane"/>
+                                                <constraint firstItem="eP8-Gr-TGs" firstAttribute="top" secondItem="Kg6-fv-7ex" secondAttribute="bottom" constant="5" id="G1P-Py-uMR"/>
                                                 <constraint firstItem="GyS-Lb-Wau" firstAttribute="trailing" secondItem="Sfd-oX-uKt" secondAttribute="trailingMargin" id="MIi-V4-4HB"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="GyS-Lb-Wau" secondAttribute="bottom" constant="26" id="Q5l-3S-UKW"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="eP8-Gr-TGs" secondAttribute="bottom" constant="14" id="TTs-fD-xjf"/>
+                                                <constraint firstItem="GyS-Lb-Wau" firstAttribute="leading" secondItem="Kg6-fv-7ex" secondAttribute="trailing" constant="11" id="YQ9-uG-q7d"/>
                                                 <constraint firstItem="CAY-MN-M57" firstAttribute="leading" secondItem="8b4-zZ-yRH" secondAttribute="leading" id="bQS-5G-65p"/>
                                                 <constraint firstItem="CAY-MN-M57" firstAttribute="top" secondItem="8b4-zZ-yRH" secondAttribute="bottom" constant="8" symbolic="YES" id="ggb-kD-2P7"/>
                                                 <constraint firstItem="N1b-yz-BTq" firstAttribute="top" secondItem="Sfd-oX-uKt" secondAttribute="topMargin" constant="17" id="jcl-lj-F35"/>
@@ -2802,8 +2816,10 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="ViewLabel" destination="N1b-yz-BTq" id="WkX-B2-UAr"/>
+                                            <outlet property="ViewSubViewLabel" destination="Kg6-fv-7ex" id="P2O-HN-OK3"/>
                                             <outlet property="dateLabel" destination="CAY-MN-M57" id="r9r-r0-XV9"/>
                                             <outlet property="energyLabel" destination="GyS-Lb-Wau" id="h6T-ac-tE1"/>
+                                            <outlet property="subViewWidth" destination="PSU-tq-pUO" id="VCH-tY-8EJ"/>
                                             <outlet property="timeViewLabel" destination="eP8-Gr-TGs" id="LR8-da-g6Z"/>
                                             <outlet property="weekLabel" destination="8b4-zZ-yRH" id="oIu-fd-VWm"/>
                                         </connections>
