@@ -75,7 +75,7 @@
                         self.auothCodeBtn.userInteractionEnabled = YES;
                     });
                 }else{
-                     [MBProgressHUD showError:@"获取验证码失败"];
+                 
                     int seconds = timeout % 60;
                     NSString *strTime = [NSString stringWithFormat:@" %.2d", seconds];
                     dispatch_async(dispatch_get_main_queue(), ^{

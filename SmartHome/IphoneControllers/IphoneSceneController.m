@@ -23,6 +23,7 @@
 #import "SocketManager.h"
 #import "TouchSubViewController.h"
 #import <AFNetworking.h>
+#import "KxMenu.h"
 
 @interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,SceneCellDelegate,UIViewControllerPreviewingDelegate>
 @property (strong, nonatomic) IBOutlet IphoneRoomView *roomView;
@@ -59,7 +60,14 @@
     
     _AddSceneBtn.layer.cornerRadius = _AddSceneBtn.bounds.size.width / 2.0; //圆角半径
     _AddSceneBtn.layer.masksToBounds = YES; //圆角
-
+    self.navigationItem.rightBarButtonItems = nil;
+    
+    
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(rightBarButtonItemClicked:)];
+    self.navigationItem.rightBarButtonItem = rightItem;
+    
+    self.navigationController.view.backgroundColor = [UIColor blueColor];
+    
     
 }
 
@@ -224,6 +232,24 @@
     [self performSegueWithIdentifier:@"iphoneAddSceneSegue" sender:self];
 }
 
+- (void)rightBarButtonItemClicked:(UIBarButtonItem *)sender {
+    UIButton *btn = sender;
+    UIView *view = btn.superview;
+    CGFloat w = view.frame.size.width;
+    CGFloat h = view.frame.size.height;
+    CGFloat y = btn.frame.origin.y + btn.frame.size.height / 2 - 10;
+    CGFloat x = btn.center.x - w / 2 - 30;
+    [KxMenu showMenuInView:view fromRect:CGRectMake(x, y , w, h) menuItems:@[
+                                                                             [KxMenuItem menuItem:@"本地图库"
+                                                                                            image:nil
+                                                                                           target:self
+                                                                                           action:@selector(selectPhoto:)],
+                                                                             [KxMenuItem menuItem:@"现在拍摄"
+                                                                                            image:nil
+                                                                                           target:self
+                                                                                           action:@selector(takePhoto:)],
+                                                                             ]];
+}
 //删除场景
 -(void)sceneDeleteAction:(SceneCell *)cell
 {

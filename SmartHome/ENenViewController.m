@@ -14,6 +14,9 @@
 @interface ENenViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) NSMutableArray * dateArr;
+@property (nonatomic,strong) NSMutableArray * startTimeArr;
+@property (nonatomic,strong) NSMutableArray * endTimeArr;
+
 
 @end
 
@@ -25,6 +28,21 @@
     }
     
     return _dateArr;
+}
+-(NSMutableArray *)startTimeArr
+{
+    if (!_startTimeArr) {
+        _startTimeArr = [NSMutableArray array];
+    }
+
+    return _startTimeArr;
+}
+-(NSMutableArray *)endTimeArr
+{
+    if (!_endTimeArr) {
+        _endTimeArr = [NSMutableArray array];
+    }
+    return _endTimeArr;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -58,7 +76,12 @@
             for(NSDictionary *dic in message)
             {
                 NSDictionary *energy = @{@"minute_time":dic[@"minute_time"],@"energy":dic[@"energy"],@"dateflag":dic[@"dateflag"]};
-                
+                NSArray * array = dic[@"switch_list"];
+                for (NSDictionary * timeDict in array) {
+                    [self.startTimeArr addObject:timeDict[@"starttimne"]];
+                    [self.endTimeArr addObject:timeDict[@"endtimne"]];
+                }
+                NSLog(@"---%@----",array);
                 [self.dateArr addObject:energy];
                 
             }
@@ -88,6 +111,14 @@
         cell.dateLabel.text = [NSString stringWithFormat:@"%@",dict[@"dateflag"]];
         cell.energyLabel.text = [NSString stringWithFormat:@"%.1fhr",[dict[@"minute_time"] floatValue]/60];
     cell.weekLabel.text = [self getTheDayOfTheWeekByDateString:cell.dateLabel.text];
+//    cell.ViewSubViewLabel.hidden = NO;
+    CGFloat x = cell.ViewSubViewLabel.bounds.origin.x;
+//    CGFloat y = cell.ViewSubViewLabel.bounds.origin.y;
+    CGFloat width = cell.ViewSubViewLabel.bounds.size.width/24 * [dict[@"minute_time"] floatValue]/60;
+//    CGFloat width = cell.ViewSubViewLabel.bounds.size.width/24 * [cell.energyLabel.text intValue];
+
+//    cell.subViewWidth.constant = width;
+    cell.subViewX.constant = x;
     return cell;
 }
 ///根据用户输入的时间(dateString)确定当天是星期几,输入的时间格式 yyyy-MM-dd ,如 2015-12-18
