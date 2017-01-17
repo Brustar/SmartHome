@@ -24,6 +24,7 @@
 #import "LightController.h"
 #import "IPhoneRoom.h"
 #import "DeviceInfo.h"
+#import "RoomDeviceController.h"
 
 @interface FamilyViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,TcpRecvDelegate>
 
@@ -98,6 +99,17 @@
         //nest login
         [self nestLogin];
     }
+    
+    //自定义bar item
+    UIButton *customItem = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    [customItem setImage:[UIImage imageNamed:@"fixTime.png"] forState:UIControlStateNormal];
+    [customItem addTarget:self action:@selector(fetchTimerList) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:customItem];
+    self.navigationItem.rightBarButtonItem = rightItem;
+}
+
+- (void)fetchTimerList {
+    NSLog(@"获取定时器列表");
 }
 
 - (void)initNestDataSource {
@@ -323,8 +335,8 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UIStoryboard * oneStory = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    LightController * VC = [oneStory instantiateViewControllerWithIdentifier:@"LightController"];
-    VC.showLightView = NO;
+    
+    RoomDeviceController * VC = [oneStory instantiateViewControllerWithIdentifier:@"RoomLightController"];
     Room *room = self.rooms[indexPath.row];
     VC.roomID = room.rId;
     [self.navigationController pushViewController:VC animated:YES];

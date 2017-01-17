@@ -23,7 +23,7 @@
     self.planeimg.delegate = self;
     [self.view addSubview:self.planeimg];
     
-//    [self sendRequestForGettingSceneConfig:@"Cloud/scene_config_list.aspx" withTag:1];
+    [self sendRequestForGettingSceneConfig:@"Cloud/scene_config_list.aspx" withTag:1];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -174,14 +174,10 @@
 
 - (void)openRoom:(NSNumber *)roomId {
     NSLog(@"打开房间 %@", roomId);
-    
     UIStoryboard * mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    RoomDeviceController * VC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"RoomLightController"];
-    VC.roomID = [roomId intValue];
-    [self.navigationController pushViewController:VC animated:YES];
-    
-    
-
+    RoomDetailViewController *roomDetailVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"RoomDetailVC"];
+    roomDetailVC.roomID = [roomId intValue];
+    [self.navigationController pushViewController:roomDetailVC animated:YES];
 }
 
 @end

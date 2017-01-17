@@ -822,6 +822,27 @@
     [db close];
     return lights;
 }
+
+// 获取“照明”设备（灯，窗帘）
++ (NSArray *)getLightDevicesByRoom:(int)roomID
+{
+    NSMutableArray *lights = [NSMutableArray new];
+    
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT id FROM devices where rid=%d and subTypeName ='%@' and masterID = '%ld'",roomID,LightDevice,[[DeviceInfo defaultManager] masterID]];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+            [lights addObject:[resultSet stringForColumn:@"id"]];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return lights;
+}
+
 + (NSArray *)getCurtainByRoom:(int) roomID
 {
     NSMutableArray *curtains = [NSMutableArray new];

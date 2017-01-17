@@ -12,6 +12,7 @@
 
 #define DIMMER @"调光灯"
 #define CURTAINS @"开合帘"
+#define LightDevice @"照明"
 
 @interface SQLManager : NSObject
 
@@ -28,6 +29,9 @@
 
 //根据subTypeName 从Devices表 查询typeName(要去重)
 + (NSArray *)getDeviceTypeNameWithSubTypeName:(NSString *)subTypeName;
+
+//根据房间ID获取照明设备
++ (NSArray *)getLightDevicesByRoom:(int)roomID;
 
 //根据设备ID获取设备名称
 +(NSString *)deviceNameByDeviceID:(int)eId;

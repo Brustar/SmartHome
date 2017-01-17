@@ -13,6 +13,8 @@
 @property (weak, nonatomic) IBOutlet UISlider *deviceSlider;
 @property (weak, nonatomic) IBOutlet UISwitch *deviceSwitch;
 @property (weak,nonatomic) NSString *deviceid;
+@property (weak, nonatomic) IBOutlet UIImageView *lowIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *highIcon;
 
 
 @end

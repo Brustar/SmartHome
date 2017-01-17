@@ -97,10 +97,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     if(self.isFavor)
     {
         self.saveBarButton.enabled = NO;
     }
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = self.footerView;
     self.tableView.backgroundColor = backGroudColour;

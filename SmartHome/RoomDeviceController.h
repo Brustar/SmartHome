@@ -11,7 +11,7 @@
 @interface RoomDeviceController : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *devTableView;
 @property (nonatomic, assign) int roomID;
-@property (nonatomic,strong)  NSArray * lightArrs;
+@property (nonatomic,strong)  NSArray * lightArrs;//所有照明设备
 @property (nonatomic,strong)  NSString * deviceid;
 
 @end

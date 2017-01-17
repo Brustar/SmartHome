@@ -35,7 +35,8 @@
 @property (nonatomic,strong) FixTimeRepeatController *fixTimeVC;
 //@property (nonatomic,strong) NSMutableArray *weeks;
 @property (nonatomic,strong) NSMutableDictionary *weeks;
-
+@property (weak, nonatomic) IBOutlet UILabel *timeIntervalLabel;//持续时长
+@property (weak, nonatomic) IBOutlet UISlider *timeIntervalSlider;//持续时长选择器
 @property (strong, nonatomic) UIDatePicker *dataPicker;
 @property (weak, nonatomic) IBOutlet UIButton *startTimeBtn;
 
@@ -213,6 +214,18 @@
     self.schedule = schedule;
     
     self.clickFixTimeBtn.hidden = NO;
+    
+    self.timeIntervalSlider.minimumValue = 1;
+    self.timeIntervalSlider.maximumValue = 13;
+    self.timeIntervalSlider.value = 1;
+    self.timeIntervalSlider.continuous = YES;
+    [self.timeIntervalSlider addTarget:self action:@selector(timeIntervalSliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+}
+
+- (void)timeIntervalSliderValueChanged:(UISlider *)sender {
+    
+    NSLog(@"sender: %f", sender.value);
+    self.timeIntervalLabel.text = [NSString stringWithFormat:@"%ld小时", lroundf(sender.value)];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -710,9 +723,9 @@
 -(void) createDatePicker
 {
     self.dataPicker = [[UIDatePicker alloc] init];
-    self.dataPicker.frame = CGRectMake(22+8-40, 304+70, 186+4+100, 204);
+    self.dataPicker.frame = CGRectMake(22+8-40, 136, 280, 204);
     self.dataPicker.backgroundColor = [UIColor whiteColor];
-    self.dataPicker.datePickerMode = UIDatePickerModeDate;
+    self.dataPicker.datePickerMode = UIDatePickerModeDateAndTime;
     self.dataPicker.hidden = YES;
     [self.view addSubview:self.dataPicker];
 }
@@ -722,10 +735,10 @@
 - (IBAction)startDataBtn:(id)sender {
     
     //判断有没有选择定时类型
-    if ([self.fixTimeDevice.text isEqualToString:@"无"]) {
+    /*if ([self.fixTimeDevice.text isEqualToString:@"无"]) {
         [MBProgressHUD showError:@"请先选择定时类型"];
         return;
-    }
+    }*/
     
     self.pickTimeView.hidden = YES;
     
@@ -748,7 +761,12 @@
             if (![self.endDataBtn.titleLabel.text isEqualToString:@"设置"]) {
                 BOOL result = [self.endDataBtn.titleLabel.text laterDate:prettyDate];
                 if (result) {
-                    [self.starDataBtn setTitle:prettyDate forState:UIControlStateNormal];
+                    
+                    //格式化日期 yy/MM/dd EEEE HH:mm   13/10/08 星期二 21:01
+                    NSDateFormatter *dateF = [[NSDateFormatter alloc] init];
+                    [dateF setDateFormat:@"yy/MM/dd EEEE HH:mm"];
+                    NSString *prettyD = [dateF stringFromDate:myDate];
+                    [self.starDataBtn setTitle:prettyD forState:UIControlStateNormal];
                     self.schedule.startDate = prettyDate;
                     self.clickFixTimeBtn.tintColor = [UIColor redColor];
                     self.isSceneSetDate = YES;
@@ -757,7 +775,13 @@
                     return;
                 }
             }else {
-                [self.starDataBtn setTitle:prettyDate forState:UIControlStateNormal];
+                
+                //格式化日期 yy/MM/dd EEEE HH:mm   13/10/08 星期二 21:01
+                NSDateFormatter *dateF = [[NSDateFormatter alloc] init];
+                [dateF setDateFormat:@"yy/MM/dd EEEE HH:mm"];
+                NSString *prettyD = [dateF stringFromDate:myDate];
+                [self.starDataBtn setTitle:prettyD forState:UIControlStateNormal];
+                
                 self.schedule.startDate = prettyDate;
                 self.clickFixTimeBtn.tintColor = [UIColor redColor];
                 self.isSceneSetDate = YES;

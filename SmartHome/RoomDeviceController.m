@@ -48,6 +48,11 @@
     RoomDeviceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     Device *device = [SQLManager getDeviceWithDeviceID:[_lightArrs[indexPath.row] intValue]];
+    
+    if ([device.typeName isEqualToString:@"开合帘"]) {
+        cell.lowIcon.image = [UIImage imageNamed:@"curtain_weak.png"];
+        cell.highIcon.image = [UIImage imageNamed:@"curtain.png"];
+    }
     cell.deviceName.text = device.name;
     cell.deviceSlider.continuous = NO;
     cell.deviceid = self.lightArrs[indexPath.row];
@@ -66,10 +71,13 @@
     _devTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     _devTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    _lightArrs = [SQLManager getDeviceByRoom:self.roomID];
+    _lightArrs = [SQLManager getLightDevicesByRoom:self.roomID];
     
     SocketManager *sock = [SocketManager defaultManager];
     sock.delegate = self;
+    
+    //标题
+    self.navigationItem.title = [SQLManager getRoomNameByRoomID:self.roomID];
 }
 
 
