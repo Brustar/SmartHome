@@ -52,7 +52,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.rooms = [SQLManager getAllRoomsInfo];
     [self setUpRoomScrollerView];
-       [self setUpScrollerView];
+    [self setUpScrollerView];
     
 }
 -(void)setUpScrollerView

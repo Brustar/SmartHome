@@ -300,7 +300,6 @@
     }
     NSDictionary *dic = @{@"startTime":startTime,@"endTime":endTime,@"repeat":self.repeatLabel.text,@"startDay":startDay,@"endDay":endDay};
     [center postNotificationName:@"time" object:nil userInfo:dic];
-    
     [self.navigationController popViewControllerAnimated:YES];     
 
 }
@@ -417,7 +416,7 @@
         NSDate *myDate = self.dataPicker.date;
         
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-        [dateFormat setDateFormat:@"YYYY-MM-dd"];
+        [dateFormat setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
         NSString *prettyDate = [dateFormat stringFromDate:myDate];
         [self.StartDay setTitle:prettyDate forState:UIControlStateNormal];
         self.schedule.startDate=prettyDate;

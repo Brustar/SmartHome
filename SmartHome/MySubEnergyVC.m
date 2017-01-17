@@ -51,6 +51,9 @@
     
     self.title = @"我的能耗";
     [self sendRequestToGetEenrgy];
+    UIView *view = [[UIView alloc] init];
+    [view setBackgroundColor:[UIColor clearColor]];
+    self.tableView.tableFooterView = view;
 }
 -(void)sendRequestToGetEenrgy
 {
@@ -101,7 +104,7 @@
      MySubEnergyCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         NSDictionary * dict = self.enameArr[indexPath.row];
         cell.deviceName.text =[NSString stringWithFormat:@"%@", dict[@"ename"]];
-        cell.energyTime.text = [NSString stringWithFormat:@"%@hr",dict[@"minute_time"]];
+        cell.energyTime.text = [NSString stringWithFormat:@"%.1fhr",[dict[@"minute_time"] floatValue]/60];
     
     return cell;
 }
@@ -114,6 +117,7 @@
     ENenViewController * VC = [board instantiateViewControllerWithIdentifier:@"ENenViewController"];
       NSDictionary * dict = self.enameArr[indexPath.row];
     VC.eqid = [dict[@"eid"] intValue];
+    VC.titleName = dict[@"ename"];
     [self.navigationController pushViewController:VC animated:YES];
 }
 - (void)didReceiveMemoryWarning {

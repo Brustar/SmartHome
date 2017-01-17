@@ -98,8 +98,6 @@
         [self.delegate iphoneRoomView:self didSelectButton:(int)btn.tag];
     }
 }
-
-
 - (void)setViewFrame {
     CGFloat scrollW = 0;
     

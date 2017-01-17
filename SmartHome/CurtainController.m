@@ -224,7 +224,7 @@
         
     }
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 5, 100, 30)];
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 23, 100, 30)];
     [cell.contentView addSubview:label];
     label.text = @"详细信息";
     
@@ -234,7 +234,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 50;
+    return 76;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

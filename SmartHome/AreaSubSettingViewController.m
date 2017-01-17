@@ -20,6 +20,7 @@
 @property (nonatomic,strong) NSMutableArray * recoredIDs;
 @property (nonatomic,strong) NSMutableArray *opens;
 @property (nonatomic,assign) int usertype;
+
 @end
 
 @implementation AreaSubSettingViewController
@@ -52,10 +53,13 @@
     // Do any additional setup after loading the view.
     self.title = @"权限设置";
     self.tableView.tableHeaderView = self.headerView;
-    NSString *url = [NSString stringWithFormat:@"%@Cloud/user_listall.aspx",[IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/room_authority.aspx",[IOManager httpAddr]];
     [self sendRequest:url withTag:2];
-    self.userName.text = @"Wang";
+    self.userName.text = self.userNameTitle;
+    [self creatUI];
+    
 }
+
 -(void)sendRequest:(NSString *)url withTag:(int)i
 {
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
@@ -68,7 +72,6 @@
     }
     
 }
-
 -(void)httpHandler:(id)responseObject tag:(int)tag
 {
     if(tag == 2)
@@ -154,6 +157,19 @@
     }
     
 }
+-(void)creatUI
+{
+    if([self.detailTextName isEqualToString:@"主人"])
+    {
+        [self.identityType setTitle:@"转化为普通身份" forState:UIControlStateNormal];
+    }else
+    {
+        [self.identityType setTitle:@"转化为主人身份" forState:UIControlStateNormal];
+        
+    }
+    
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.areasArr.count;
@@ -201,7 +217,7 @@
 }
 
 //删除或改变用户权限请求
--(void)deleteOrChangeManagerType:(NSInteger)type userID:(NSNumber *)userID withTag:(int)tag
+-(void)deleteOrChangeManagerType:(NSInteger)type userID:(NSNumber *)userID withTag:(int)tag usertype:(NSNumber *)usertype
 {
     NSString *url = [NSString stringWithFormat:@"%@Login/user_edit.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
@@ -210,7 +226,7 @@
                                @"token": auothorToken,
                                @"optype": @(type),
                                @"opuserid": userID,
-                               @"usertype":[NSNumber numberWithInt:self.usertype]
+                               @"usertype":usertype
                                };
         
         HttpManager *http=[HttpManager defaultManager];
@@ -224,7 +240,6 @@
 - (IBAction)changeIdentityType:(UIButton *)sender {
     
     if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]] && [[UD objectForKey:@"UserType"] integerValue] == 2) {
-        self.usertype = 2;
         [MBProgressHUD showError:@"你是普通用户，无权限操作"];
         //return;
     }
@@ -240,11 +255,11 @@
         //执行转化身份操作
         if([str containsString:@"普通身份"])
         {
-            [self deleteOrChangeManagerType:3  userID:_usrID withTag:4];//转化为普通用户
-            sender.titleLabel.text = @"转化为主人";
+            [self deleteOrChangeManagerType:2  userID:_usrID withTag:4 usertype:[NSNumber numberWithInt:2]];//转化为普通用户
+            sender.titleLabel.text = @"转化为主人身份";
         }else{
-            [self deleteOrChangeManagerType:2  userID:_usrID withTag:5];//转化为主人
-            sender.titleLabel.text= @"转化为普通用户";
+            [self deleteOrChangeManagerType:2  userID:_usrID withTag:5 usertype:[NSNumber numberWithInt:1]];//转化为主人
+            sender.titleLabel.text= @"转化为普通身份";
         }
         [alertVC dismissViewControllerAnimated:YES completion:nil];
     }];

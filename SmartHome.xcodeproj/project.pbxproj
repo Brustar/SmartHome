@@ -127,11 +127,14 @@
 		2E6328111E03CE4B000D7BE9 /* IPhoneNetVV.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6328101E03CE4B000D7BE9 /* IPhoneNetVV.m */; };
 		2E6CEDBF1DE5DE8B000979BE /* DetailMSGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CEDBE1DE5DE8B000979BE /* DetailMSGViewController.m */; };
 		2E7CD6081E14B80C002D0541 /* FixTimeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E7CD6071E14B80C002D0541 /* FixTimeListCell.m */; };
+		2E801EFC1E2622180039A6D9 /* IphoneFixSubTimeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E801EFB1E2622180039A6D9 /* IphoneFixSubTimeVC.m */; };
+		2E801EFF1E262B0B0039A6D9 /* WeekdaysVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E801EFE1E262B0B0039A6D9 /* WeekdaysVC.m */; };
 		2EA2A83B1E1DCDA600092D41 /* AreaSubSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A83A1E1DCDA600092D41 /* AreaSubSettingViewController.m */; };
 		2EA2A84A1E1E275900092D41 /* MySubEnergyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A8491E1E275900092D41 /* MySubEnergyCell.m */; };
 		2EA2A8541E1E2BEA00092D41 /* ENenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A8531E1E2BEA00092D41 /* ENenViewController.m */; };
 		2EA2A8571E1E2C7800092D41 /* EnenCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A8561E1E2C7800092D41 /* EnenCell.m */; };
 		2EA99E901E1C9A0100659065 /* MySubEnergyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA99E8F1E1C9A0100659065 /* MySubEnergyVC.m */; };
+		2EB2A4721E237F05003F01DB /* DeviceListTimeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB2A4711E237F05003F01DB /* DeviceListTimeVC.m */; };
 		2EDC0E901DEC072700F95BE0 /* IPhoneRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDC0E8F1DEC072700F95BE0 /* IPhoneRoom.m */; };
 		2EFFECA11E12161100C13D3E /* FixTimeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFFECA01E12161100C13D3E /* FixTimeListViewController.m */; };
 		CD43046F1E0B674000B594F4 /* FamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD43046E1E0B674000B594F4 /* FamilyViewController.m */; };
@@ -664,6 +667,10 @@
 		2E6CEDBE1DE5DE8B000979BE /* DetailMSGViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailMSGViewController.m; sourceTree = "<group>"; };
 		2E7CD6061E14B80C002D0541 /* FixTimeListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixTimeListCell.h; sourceTree = "<group>"; };
 		2E7CD6071E14B80C002D0541 /* FixTimeListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixTimeListCell.m; sourceTree = "<group>"; };
+		2E801EFA1E2622180039A6D9 /* IphoneFixSubTimeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneFixSubTimeVC.h; sourceTree = "<group>"; };
+		2E801EFB1E2622180039A6D9 /* IphoneFixSubTimeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneFixSubTimeVC.m; sourceTree = "<group>"; };
+		2E801EFD1E262B0B0039A6D9 /* WeekdaysVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeekdaysVC.h; sourceTree = "<group>"; };
+		2E801EFE1E262B0B0039A6D9 /* WeekdaysVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeekdaysVC.m; sourceTree = "<group>"; };
 		2EA2A8391E1DCDA600092D41 /* AreaSubSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaSubSettingViewController.h; sourceTree = "<group>"; };
 		2EA2A83A1E1DCDA600092D41 /* AreaSubSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaSubSettingViewController.m; sourceTree = "<group>"; };
 		2EA2A8481E1E275900092D41 /* MySubEnergyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySubEnergyCell.h; sourceTree = "<group>"; };
@@ -674,6 +681,8 @@
 		2EA2A8561E1E2C7800092D41 /* EnenCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnenCell.m; sourceTree = "<group>"; };
 		2EA99E8E1E1C9A0100659065 /* MySubEnergyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySubEnergyVC.h; sourceTree = "<group>"; };
 		2EA99E8F1E1C9A0100659065 /* MySubEnergyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySubEnergyVC.m; sourceTree = "<group>"; };
+		2EB2A4701E237F05003F01DB /* DeviceListTimeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceListTimeVC.h; sourceTree = "<group>"; };
+		2EB2A4711E237F05003F01DB /* DeviceListTimeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceListTimeVC.m; sourceTree = "<group>"; };
 		2EDC0E8E1DEC072700F95BE0 /* IPhoneRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPhoneRoom.h; sourceTree = "<group>"; };
 		2EDC0E8F1DEC072700F95BE0 /* IPhoneRoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPhoneRoom.m; sourceTree = "<group>"; };
 		2EFFEC9F1E12161100C13D3E /* FixTimeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixTimeListViewController.h; sourceTree = "<group>"; };
@@ -1066,6 +1075,7 @@
 				F69C82351D363A4D002DE6D7 /* ServiceRecordCell.m */,
 				F651640B1D3766C900A6F5FA /* MyEnergyViewController.h */,
 				F651640C1D3766C900A6F5FA /* MyEnergyViewController.m */,
+				2EB2A46F1E237EB5003F01DB /* deviceTimeList */,
 				2EA2A84B1E1E294D00092D41 /* Energy */,
 				F66596D81D3F12FB0082716A /* EnergyOfDeviceController.h */,
 				F66596D91D3F12FB0082716A /* EnergyOfDeviceController.m */,
@@ -1660,6 +1670,17 @@
 			name = SCWave;
 			sourceTree = "<group>";
 		};
+		2E801EF91E2621C70039A6D9 /* fixTimer */ = {
+			isa = PBXGroup;
+			children = (
+				2E801EFA1E2622180039A6D9 /* IphoneFixSubTimeVC.h */,
+				2E801EFB1E2622180039A6D9 /* IphoneFixSubTimeVC.m */,
+				2E801EFD1E262B0B0039A6D9 /* WeekdaysVC.h */,
+				2E801EFE1E262B0B0039A6D9 /* WeekdaysVC.m */,
+			);
+			name = fixTimer;
+			sourceTree = "<group>";
+		};
 		2EA2A84B1E1E294D00092D41 /* Energy */ = {
 			isa = PBXGroup;
 			children = (
@@ -1686,6 +1707,15 @@
 				F630C3611D38C3E5008880BB /* AreaSettingCell.m */,
 			);
 			name = jurisdiction;
+			sourceTree = "<group>";
+		};
+		2EB2A46F1E237EB5003F01DB /* deviceTimeList */ = {
+			isa = PBXGroup;
+			children = (
+				2EB2A4701E237F05003F01DB /* DeviceListTimeVC.h */,
+				2EB2A4711E237F05003F01DB /* DeviceListTimeVC.m */,
+			);
+			name = deviceTimeList;
 			sourceTree = "<group>";
 		};
 		5CEAD34143E7289FAFA6E86D /* Pods */ = {
@@ -1748,6 +1778,7 @@
 				F663CA651D98D131001F87F3 /* IphoneDevicesController.m */,
 				F663CA671D990138001F87F3 /* IphoneFixTimerController.h */,
 				F663CA681D990138001F87F3 /* IphoneFixTimerController.m */,
+				2E801EF91E2621C70039A6D9 /* fixTimer */,
 				F62E05611DAB39F80096BF00 /* IphoneProfileController.h */,
 				F62E05621DAB39F80096BF00 /* IphoneProfileController.m */,
 				F62E05641DAB68620096BF00 /* IphoneEditSceneController.h */,
@@ -2231,6 +2262,7 @@
 				0F43B1031CF4055300F3D9F0 /* IATConfig.m in Sources */,
 				F66596DD1D3F1DAD0082716A /* EnegryOfDeviceCell.m in Sources */,
 				F618141D1DB5B0C7003B0741 /* PushSettingController.m in Sources */,
+				2EB2A4721E237F05003F01DB /* DeviceListTimeVC.m in Sources */,
 				F66CADE51D5D8654001E66EC /* DeviceType.m in Sources */,
 				F6DC641E1DEC17710056EC00 /* RoomDeviceController.m in Sources */,
 				0F25178A1CFD8C6500491A6C /* PackManager.m in Sources */,
@@ -2242,6 +2274,7 @@
 				2E5E5FE91DE1F1A9006F0C8F /* IphoneLightController.m in Sources */,
 				0FAF74C11CEEA17C00432713 /* HRColorCursor.m in Sources */,
 				F680AAB71DD94565001D1807 /* FamilyCell.m in Sources */,
+				2E801EFF1E262B0B0039A6D9 /* WeekdaysVC.m in Sources */,
 				0F91AA171CDC798700094C25 /* PrintObject.m in Sources */,
 				0F3CCF3B1D0F97B70058A320 /* CameraController.m in Sources */,
 				0FC0FFDA1CF577C0000F71D5 /* RealScene.m in Sources */,
@@ -2302,6 +2335,7 @@
 				2E63280B1E03C993000D7BE9 /* IPhoneSceneDVDVC.m in Sources */,
 				0FC0FFDD1CF57E58000F71D5 /* TouchImage.m in Sources */,
 				0FCFB3951CF2943100B37DD3 /* Camera.m in Sources */,
+				2E801EFC1E2622180039A6D9 /* IphoneFixSubTimeVC.m in Sources */,
 				F6755A4C1D4063FA002394F3 /* ECloudTabBar.m in Sources */,
 				0FAF8FEF1CE18C41000557BD /* DeviceInfo.m in Sources */,
 				0F4B3C001D2A13870002E75E /* MSGController.m in Sources */,

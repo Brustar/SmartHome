@@ -30,6 +30,7 @@
 @property (nonatomic,strong) NSNumber *recoredId;
 @property (nonatomic,strong) UITableViewCell *cell;
 @property (nonatomic,strong) NSIndexPath *selectedIndexPath;
+@property (nonatomic,assign) int usertype;
 @end
 
 @implementation AccessSettingController
@@ -260,14 +261,9 @@
     
     if(tableView == self.userTableView)
     {
-//        UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//        AreaSubSettingViewController *AreaSubVC = [storyBoard instantiateViewControllerWithIdentifier:@"AccessSubSettingVC"];
-//        [self.navigationController pushViewController:AreaSubVC animated:YES];
-//        AreaSubVC.usrID = self.userIDArr[indexPath.row];
-        
         self.usrID = self.userIDArr[indexPath.row];
 //         NSString *url = [NSString stringWithFormat:@"%@Cloud/room_authority.aspx",[IOManager httpAddr]];
-        self.recoredIDs = nil;
+//        self.recoredIDs = nil;
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         self.cell = cell;
         self.selectedIndexPath = indexPath;
@@ -290,14 +286,17 @@
                 AreaSubSettingViewController *AreaSubVC = [storyBoard instantiateViewControllerWithIdentifier:@"AccessSubSettingVC"];
                 [self.navigationController pushViewController:AreaSubVC animated:YES];
                 AreaSubVC.usrID = self.userIDArr[indexPath.row];
-        if([cell.detailTextLabel.text isEqualToString:@"主人"])
-        {
-            [self.identityType setTitle:@"转化为普通身份" forState:UIControlStateNormal];
-        }else
-        {
-            [self.identityType setTitle:@"转化为主人身份" forState:UIControlStateNormal];
-
-        }
+                AreaSubVC.userNameTitle = cell.textLabel.text;
+                 AreaSubVC.identityType = self.identityType;
+                AreaSubVC.detailTextName = cell.detailTextLabel.text;
+//        if([cell.detailTextLabel.text isEqualToString:@"主人"])
+//        {
+//            [self.identityType setTitle:@"转化为普通身份" forState:UIControlStateNormal];
+//        }else
+//        {
+//            [self.identityType setTitle:@"转化为主人身份" forState:UIControlStateNormal];
+//
+//        }
     }
     
 }
@@ -386,7 +385,7 @@
     UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         //删除用户
-        [self deleteOrChangeManagerType:1 userID:_usrID withTag:3];
+        [self deleteOrChangeManagerType:1 userID:_usrID withTag:3 usertype:[NSNumber numberWithInt:self.usertype]];
         
         
         [self.managerType removeObjectAtIndex:indexPath.row];
@@ -400,7 +399,7 @@
     
 }
 //删除或改变用户权限请求
--(void)deleteOrChangeManagerType:(NSInteger)type userID:(NSNumber *)userID withTag:(int)tag
+-(void)deleteOrChangeManagerType:(NSInteger)type userID:(NSNumber *)userID withTag:(int)tag usertype:(NSNumber *)usertype
 {
     NSString *url = [NSString stringWithFormat:@"%@Login/user_edit.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
@@ -408,7 +407,8 @@
         NSDictionary *dict = @{
                                @"token": auothorToken,
                                @"optype": @(type),
-                               @"opuserid": userID
+                               @"opuserid": userID,
+                               @"usertype":usertype
                               };
         
         HttpManager *http=[HttpManager defaultManager];
@@ -437,10 +437,10 @@
         //执行转化身份操作
         if([str containsString:@"普通身份"])
         {
-            [self deleteOrChangeManagerType:3  userID:_usrID withTag:4];//转化为普通用户
+            [self deleteOrChangeManagerType:2  userID:_usrID withTag:4 usertype:[NSNumber numberWithInt:2]];//转化为普通用户
             sender.titleLabel.text = @"转化为主人身份";
         }else{
-            [self deleteOrChangeManagerType:2  userID:_usrID withTag:5];//转化为主人
+            [self deleteOrChangeManagerType:2  userID:_usrID withTag:5 usertype:[NSNumber numberWithInt:1]];//转化为主人
             sender.titleLabel.text= @"转化为普通身份";
         }
         [alertVC dismissViewControllerAnimated:YES completion:nil];

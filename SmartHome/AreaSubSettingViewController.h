@@ -11,5 +11,7 @@
 @interface AreaSubSettingViewController : UIViewController
 @property (nonatomic,strong) NSNumber  *usrID;
 @property (weak, nonatomic) IBOutlet UILabel *userName;
-
+@property (weak, nonatomic) IBOutlet UIButton *identityType;
+@property (nonatomic,strong) NSString * userNameTitle;
+@property (nonatomic,strong) NSString * detailTextName;
 @end
