@@ -479,7 +479,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT enumber FROM Devices where ID = %ld and masterID = '%ld'",eID,[[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"SELECT enumber FROM Devices where ID = %ld and masterID = '%ld'",(long)eID,[[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
@@ -1226,10 +1226,7 @@
         //insert rooms
         NSArray *sqls=@[@"INSERT INTO \"Rooms\" VALUES(1,'主卧',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0,0,255);",
         @"INSERT INTO \"Rooms\" VALUES(2,'客厅',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0,0,255);",
-        @"INSERT INTO \"Rooms\" VALUES(3,'餐厅',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0,0,255);",
-        @"INSERT INTO \"Rooms\" VALUES(4,'客卧',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',10002,0,255);",
-        @"INSERT INTO \"Rooms\" VALUES(5,'儿童房',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0,0,255);",
-          @"INSERT INTO \"Rooms\" VALUES(6,'厨房',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',10001,0,255);"];
+        @"INSERT INTO \"Rooms\" VALUES(3,'餐厅',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0,0,255);"];
         for (NSString *sql in sqls) {
             BOOL result=[db executeUpdate:sql];
             if (result) {
@@ -1287,22 +1284,21 @@
             }
         }
         //insert scenes
+            sqls=@[@"INSERT INTO \"Scenes\" VALUES(10,'DVD','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/moving.jpg',1,1,'0003',0,0,255);",
+            @"INSERT INTO \"Scenes\" VALUES(11,'工作','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/relax.jpg',2,1,'0004',0,0,255);",
+            @"INSERT INTO \"Scenes\" VALUES(12,'午休','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/sleep.jpg',3,1,'0005',0,0,255);",
+            @"INSERT INTO \"Scenes\" VALUES(13,'离开','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/away.jpg',1,1,'0006',0,0,255);",
+            @"INSERT INTO \"Scenes\" VALUES(14,'欢迎','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',2,1,'0001',0,0,255);",
+            @"INSERT INTO \"Scenes\" VALUES(15,'投影','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',3,1,'0002',0,0,255);"];
         
-        sqls=@[@"INSERT INTO \"Scenes\" VALUES(10,'DVD','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/moving.jpg',4,1,'0003',0,0,255);",
-        @"INSERT INTO \"Scenes\" VALUES(11,'工作','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/relax.jpg',4,1,'0004',0,0,255);",
-        @"INSERT INTO \"Scenes\" VALUES(12,'午休','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/sleep.jpg',4,1,'0005',0,0,255);",
-        @"INSERT INTO \"Scenes\" VALUES(13,'离开','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/away.jpg',4,1,'0006',0,0,255);",
-        @"INSERT INTO \"Scenes\" VALUES(14,'欢迎','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',4,1,'0001',0,0,255);",
-        @"INSERT INTO \"Scenes\" VALUES(15,'投影','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',4,1,'0002',0,0,255);"];
-        
-        for (NSString *sql in sqls) {
-            BOOL result=[db executeUpdate:sql];
-            if (result) {
-                NSLog(@"写入表scenes成功");
-            }else{
-                NSLog(@"写入表scenes失败");
+            for (NSString *sql in sqls) {
+                BOOL result=[db executeUpdate:sql];
+                if (result) {
+                    NSLog(@"写入表scenes成功");
+                }else{
+                    NSLog(@"写入表scenes失败");
+                }
             }
-        }
             
         }
     }else{
@@ -1591,7 +1587,7 @@
         {
             oldTotalVisite = [resultSet intForColumn:@"totalVisited"];
         }
-    sql = [NSString stringWithFormat:@"update Rooms set totalVisited  = %d where ID = %d ",oldTotalVisite + 1,roomID];
+        sql = [NSString stringWithFormat:@"update Rooms set totalVisited  = %d where ID = %d ",oldTotalVisite + 1,roomID];
        ret = [db executeUpdate:sql];
         
     }
@@ -1639,7 +1635,7 @@
         NSLog(@"Could not open db.");
         return NO;
     }
-    BOOL result = [db executeUpdate:[NSString stringWithFormat:@"UPDATE Channels SET Channel_name ='%@' where isFavorite = 1 and id = %d",newName,fmId]];
+    BOOL result = [db executeUpdate:[NSString stringWithFormat:@"UPDATE Channels SET Channel_name ='%@' where isFavorite = 1 and id = %ld",newName,(long)fmId]];
     
     [db close];
     return result;
