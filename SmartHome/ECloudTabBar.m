@@ -166,8 +166,8 @@
         str = @[@"我的家", @"实景",@"平面图",@"我的"];
         imgs = @[@"myHome", @"objectPic",@"myHome",@"my"];
     }else{
-        str = @[@"我的家"];
-        imgs = @[@"myHome"];
+        str = @[@"我的家", @"实景",@"平面图",@"我的"];
+        imgs = @[@"myHome", @"objectPic",@"myHome",@"my"];
     }
     
     for (int i = 0; i < [str count]; i++) {

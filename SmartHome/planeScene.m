@@ -23,7 +23,15 @@
     self.planeimg.delegate = self;
     [self.view addSubview:self.planeimg];
     
-    [self sendRequestForGettingSceneConfig:@"Cloud/scene_config_list.aspx" withTag:1];
+    
+    DeviceInfo *device = [DeviceInfo defaultManager];
+    if ([device.db isEqualToString:SMART_DB]) {
+        [self sendRequestForGettingSceneConfig:@"Cloud/scene_config_list.aspx" withTag:1];//平面配置请求
+    }else{ //体验：读本地planeScene.plist
+        [self getAllDevicesAndRoomsWithPlistFilePath:[[NSBundle mainBundle] pathForResource:@"planeScene" ofType:@"plist"]];
+    }
+    
+    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -103,24 +111,32 @@
         //保存到UD
         [UD setObject:plistFilePath forKey:@"Plane_Scene_PlistFile"];
         [UD synchronize];
-        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:plistFilePath];
-        NSLog(@"planeScenePlistFilePath: %@", plistFilePath);
-        NSLog(@"planeScenePlistDict: %@", plistDic);
         
-        //获取全屋设备
-        NSArray *deviceArray = [plistDic objectForKey:@"devices"];
-        if ([deviceArray isKindOfClass:[NSArray class]] && deviceArray.count >0) {
-            [self addLights:deviceArray];
-        }
+        //获取所有设备和所有房间
+        [self getAllDevicesAndRoomsWithPlistFilePath:plistFilePath];
         
-        //获取所有房间
-        NSArray *roomArray = [plistDic objectForKey:@"rooms"];
-        if ([roomArray isKindOfClass:[NSArray class]] && roomArray.count >0) {
-            [self.planeimg addRoom:roomArray];
-        }
     }];
     
     [task resume];
+}
+
+//根据plist文件获取全屋设备和所有房间
+- (void)getAllDevicesAndRoomsWithPlistFilePath:(NSString *)plistFilePath {
+    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:plistFilePath];
+    NSLog(@"planeScenePlistFilePath: %@", plistFilePath);
+    NSLog(@"planeScenePlistDict: %@", plistDic);
+    
+    //获取全屋设备
+    NSArray *deviceArray = [plistDic objectForKey:@"devices"];
+    if ([deviceArray isKindOfClass:[NSArray class]] && deviceArray.count >0) {
+        [self addLights:deviceArray];
+    }
+    
+    //获取所有房间
+    NSArray *roomArray = [plistDic objectForKey:@"rooms"];
+    if ([roomArray isKindOfClass:[NSArray class]] && roomArray.count >0) {
+        [self.planeimg addRoom:roomArray];
+    }
 }
 
 - (void)addLights:(NSArray *)lightArr {
