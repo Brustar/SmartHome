@@ -54,7 +54,26 @@
     self.navigationItem.leftBarButtonItem = returnItem;
 
     self.tableView.tableFooterView = [UIView new];
-    [self sendRequest];
+    
+    DeviceInfo *device = [DeviceInfo defaultManager];
+    if ([device.db isEqualToString:SMART_DB]) {
+        [self sendRequest];
+    }else {
+        NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"userHabitList" ofType:@"plist"]];
+        NSArray *arr = plistDict[@"user_habit_list"];
+        if ([arr isKindOfClass:[NSArray class]]) {
+            for(NSDictionary *userDetail in arr)
+            {
+                
+                [self.habits addObject:userDetail[@"hobit_name"]];
+                [self.opens addObject:userDetail[@"isopen"]];
+                [self.recordIDs addObject:userDetail[@"hobit_id"]];
+            }
+        }
+        
+        [self.tableView reloadData];
+    }
+    
 }
 -(void)sendRequest
 {
@@ -125,6 +144,13 @@
 
 -(void)changSwithchValue:(UISwitch*)sender
 {
+    //体验
+    DeviceInfo *device = [DeviceInfo defaultManager];
+    if (![device.db isEqualToString:SMART_DB]) {
+        [MBProgressHUD showSuccess:@"设置权限成功"];
+        return;
+    }
+    
     if(sender.isOn)
     {
         [self sendRequsetForChangSwitch:[NSNumber numberWithInt:1] withTag:2 andSwitch:sender];

@@ -50,7 +50,23 @@
     // Do any additional setup after loading the view.
     
     self.title = @"我的能耗";
-    [self sendRequestToGetEenrgy];
+    
+    DeviceInfo *device = [DeviceInfo defaultManager];
+    if ([device.db isEqualToString:SMART_DB]) {
+        [self sendRequestToGetEenrgy];
+    }else {
+        NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"energylist" ofType:@"plist"]];
+        NSArray *arr = plistDict[@"energy_stat_list"];
+        for(NSDictionary *dic in arr)
+        {
+            NSDictionary *energy = @{@"eid":dic[@"eid"],@"ename":dic[@"ename"],@"minute_time":dic[@"minute_time"]};
+            [self.enameArr addObject:energy];
+            
+        }
+        [self.tableView reloadData];
+    }
+    
+    
     UIView *view = [[UIView alloc] init];
     [view setBackgroundColor:[UIColor clearColor]];
     self.tableView.tableFooterView = view;
@@ -105,7 +121,7 @@
         NSDictionary * dict = self.enameArr[indexPath.row];
         cell.deviceName.text =[NSString stringWithFormat:@"%@", dict[@"ename"]];
         cell.energyTime.text = [NSString stringWithFormat:@"%.1fhr",[dict[@"minute_time"] floatValue]/60];
-    
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 

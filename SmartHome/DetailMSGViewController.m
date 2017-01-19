@@ -65,15 +65,36 @@
     // Do any additional setup after loading the view.
     
     self.tableView.tableFooterView = self.FootView;
-    UIBarButtonItem *editBtn = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(startEdit:)];
-    self.navigationItem.rightBarButtonItem = editBtn;
+    
 //    UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc]initWithTitle:@"我的消息" style:UIBarButtonItemStylePlain target:self action:@selector(leftEdit:)];
 //    self.navigationItem.leftBarButtonItem = leftBtn;
     
      self.isEditing = YES;
     if (self.itemID) {
         
-        [self sendRequestForDetailMsgWithItemId:[_itemID intValue]];
+        DeviceInfo *device = [DeviceInfo defaultManager];
+        if ([device.db isEqualToString:SMART_DB]) {
+            UIBarButtonItem *editBtn = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(startEdit:)];
+            self.navigationItem.rightBarButtonItem = editBtn;
+            [self sendRequestForDetailMsgWithItemId:[_itemID intValue]];
+        }else {
+            NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"msgList" ofType:@"plist"]];
+            NSArray *arr = plistDict[@"notify_list"];
+            if ([arr isKindOfClass:[NSArray class]]) {
+                for(NSDictionary *dicDetail in arr)
+                {
+                    if ([dicDetail isKindOfClass:[NSDictionary class]] && dicDetail[@"description"]) {
+                        [self.msgArr addObject:dicDetail[@"description"]];
+                        [self.timesArr addObject:dicDetail[@"addtime"]];
+                        [self.recordID addObject:dicDetail[@"notify_id"]];
+                        [self.isreadArr addObject:dicDetail[@"isread"]];
+                    }
+                }
+            }
+            
+            [self.tableView reloadData];
+        }
+        
     }
     
     [self createImage];

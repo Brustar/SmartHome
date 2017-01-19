@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>user_notify_list</key>
+	<array>
+		<dict>
+			<key>item_name</key>
+			<string>侵入</string>
+			<key>notifyway</key>
+			<integer>1</integer>
+			<key>usernotify_id</key>
+			<integer>12</integer>
+		</dict>
+		<dict>
+			<key>item_name</key>
+			<string>煤气泄漏</string>
+			<key>notifyway</key>
+			<integer>1</integer>
+			<key>usernotify_id</key>
+			<integer>13</integer>
+		</dict>
+		<dict>
+			<key>item_name</key>
+			<string>烟雾警报</string>
+			<key>notifyway</key>
+			<integer>2</integer>
+			<key>usernotify_id</key>
+			<integer>14</integer>
+		</dict>
+		<dict>
+			<key>item_name</key>
+			<string>开门</string>
+			<key>notifyway</key>
+			<integer>2</integer>
+			<key>usernotify_id</key>
+			<integer>15</integer>
+		</dict>
+		<dict>
+			<key>item_name</key>
+			<string>推荐</string>
+			<key>notifyway</key>
+			<integer>3</integer>
+			<key>usernotify_id</key>
+			<integer>23</integer>
+		</dict>
+	</array>
+</dict>
+</plist>

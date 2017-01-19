@@ -53,7 +53,26 @@
     [super viewDidLoad];
     [MBProgressHUD hideHUD];
     self.title = @"我的消息";
-    [self creatItemID];
+    
+    
+    
+    DeviceInfo *device = [DeviceInfo defaultManager];
+    if ([device.db isEqualToString:SMART_DB]) {
+        [self creatItemID];
+    }else {
+        NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"msgTypeList" ofType:@"plist"]];
+        NSArray *arr = plistDict[@"notify_type_list"];
+        if ([arr isKindOfClass:[NSArray class]]) {
+            for(NSDictionary *dicDetail in arr)
+            {
+                [self.itemIdArrs addObject:dicDetail[@"item_id"]];
+                [self.itemNameArrs addObject:dicDetail[@"item_name"]];
+                [self.unreadcountArr addObject:dicDetail[@"unreadcount"]];
+            }
+        }
+        [self.tableView reloadData];
+    }
+    
 }
 -(void)creatItemID
 {
@@ -141,6 +160,8 @@
     if (cell.unreadcountImage.hidden == YES) {
          [self.set addObject:cell.unreadcountImage];
     }
+    
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
 }

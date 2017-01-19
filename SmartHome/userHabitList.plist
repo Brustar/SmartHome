@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>user_habit_list</key>
+	<array>
+		<dict>
+			<key>hobit_id</key>
+			<integer>1</integer>
+			<key>hobit_name</key>
+			<string>开启向导</string>
+			<key>isopen</key>
+			<integer>1</integer>
+			<key>userhabit_id</key>
+			<integer>1</integer>
+			<key>userhost_id</key>
+			<integer>11</integer>
+		</dict>
+		<dict>
+			<key>hobit_id</key>
+			<integer>2</integer>
+			<key>hobit_name</key>
+			<string>开启每日提示</string>
+			<key>isopen</key>
+			<integer>1</integer>
+			<key>userhabit_id</key>
+			<integer>2</integer>
+			<key>userhost_id</key>
+			<integer>11</integer>
+		</dict>
+		<dict>
+			<key>hobit_id</key>
+			<integer>3</integer>
+			<key>hobit_name</key>
+			<string>开启智能过滤</string>
+			<key>isopen</key>
+			<integer>1</integer>
+			<key>userhabit_id</key>
+			<integer>3</integer>
+			<key>userhost_id</key>
+			<integer>11</integer>
+		</dict>
+		<dict>
+			<key>hobit_id</key>
+			<integer>4</integer>
+			<key>hobit_name</key>
+			<string>全部场景静音</string>
+			<key>isopen</key>
+			<integer>1</integer>
+			<key>userhabit_id</key>
+			<integer>4</integer>
+			<key>userhost_id</key>
+			<integer>11</integer>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -54,9 +54,35 @@
     self.title = @"权限设置";
     self.tableView.tableHeaderView = self.headerView;
     NSString *url = [NSString stringWithFormat:@"%@Cloud/room_authority.aspx",[IOManager httpAddr]];
-    [self sendRequest:url withTag:2];
     self.userName.text = self.userNameTitle;
     [self creatUI];
+    
+    DeviceInfo *device = [DeviceInfo defaultManager];
+    if ([device.db isEqualToString:SMART_DB]) {
+        [self sendRequest:url withTag:2];
+    }else {
+        NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"hostUserList" ofType:@"plist"]];
+        NSArray *arr = plistDict[@"host_user_list"];
+        if ([arr isKindOfClass:[NSArray class]]) {
+            for(NSDictionary *messageList in arr)
+            {
+                NSNumber *userID = messageList[@"userid"];
+                if(self.usrID == userID)
+                {
+                    NSArray *inforList = messageList[@"room_user_list"];
+                    for(NSDictionary *info  in inforList)
+                    {
+                        [self.areasArr addObject:info[@"room_name"]];
+                        [self.opens addObject:info[@"isopen"]];
+                        [self.recoredIDs addObject:info[@"room_id"]];
+                    }
+                    
+                }
+            }
+        }
+        [self.tableView reloadData];
+    }
+    
     
 }
 
@@ -193,6 +219,14 @@
 }
 -(void)switchChange:(UISwitch *)sender
 {
+    //体验用户
+    DeviceInfo *device = [DeviceInfo defaultManager];
+    if (![device.db isEqualToString:SMART_DB]) {
+        [MBProgressHUD showSuccess:@"设置权限成功"];
+        return;
+    }
+    
+    //注册用户
     UISwitch *exchangeSwitch = sender;
     
     NSInteger recoredID = exchangeSwitch.tag;
@@ -239,6 +273,8 @@
 //点击转换身份按钮
 - (IBAction)changeIdentityType:(UIButton *)sender {
     
+     DeviceInfo *device = [DeviceInfo defaultManager];
+    
     if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]] && [[UD objectForKey:@"UserType"] integerValue] == 2) {
         [MBProgressHUD showError:@"你是普通用户，无权限操作"];
         //return;
@@ -257,11 +293,15 @@
         {
             [self deleteOrChangeManagerType:2  userID:_usrID withTag:4 usertype:[NSNumber numberWithInt:2]];//转化为普通用户
             sender.titleLabel.text = @"转化为主人身份";
+            
         }else{
             [self deleteOrChangeManagerType:2  userID:_usrID withTag:5 usertype:[NSNumber numberWithInt:1]];//转化为主人
             sender.titleLabel.text= @"转化为普通身份";
         }
         [alertVC dismissViewControllerAnimated:YES completion:nil];
+        if (![device.db isEqualToString:SMART_DB]) {
+            [MBProgressHUD showSuccess:@"转化成功"];
+        }
     }];
     [alertVC addAction:cancelAction];
     [alertVC addAction:sureAction];
