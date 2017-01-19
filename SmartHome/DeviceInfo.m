@@ -102,6 +102,29 @@
     return dataFromProtocol(proto);
 }
 
+-(NSData *) action:(uint8_t)action
+{
+    Proto proto=createProto();
+    if (self.connectState == atHome) {
+        proto.cmd=0x04;
+    }else if (self.connectState == outDoor){
+        proto.cmd=0x03;
+    }
+    proto.action.state=action;
+
+    proto.deviceType=BGMUSIC_DEVICE_TYPE;
+    return dataFromProtocol(proto);
+}
+
+-(NSData *) action:(uint8_t)action value:(uint8_t)value
+{
+    NSData *data = [self action:action];
+    Proto proto = protocolFromData(data);
+    
+    proto.action.RValue=value;
+    return dataFromProtocol(proto);
+}
+
 -(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID
 {
     Proto proto=createProto();
@@ -120,7 +143,6 @@
 
 -(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID value:(uint8_t)value
 {
-    
     NSData *data = [self action:action deviceID:deviceID];
     Proto proto = protocolFromData(data);
     
@@ -165,7 +187,11 @@
 //TV,DVD,NETV,BGMusic
 -(NSData *) previous:(NSString *)deviceID
 {
-    return [self action:PROTOCOL_PREVIOUS deviceID:deviceID];
+    if (deviceID) {
+        return [self action:PROTOCOL_PREVIOUS deviceID:deviceID];
+    }else{
+        return [self action:PROTOCOL_PREVIOUS];
+    }
 }
 
 -(NSData *) forward:(NSString *)deviceID
@@ -180,17 +206,29 @@
 
 -(NSData *) next:(NSString *)deviceID
 {
-    return [self action:PROTOCOL_FORWARD deviceID:deviceID];
+    if (deviceID) {
+        return [self action:PROTOCOL_NEXT deviceID:deviceID];
+    }else{
+        return [self action:PROTOCOL_NEXT];
+    }
 }
 
 -(NSData *) play:(NSString *)deviceID
 {
-    return [self action:PROTOCOL_PLAY deviceID:deviceID];
+    if (deviceID) {
+        return [self action:PROTOCOL_PLAY deviceID:deviceID];
+    }else{
+        return [self action:PROTOCOL_PLAY];
+    }
 }
 
 -(NSData *) pause:(NSString *)deviceID
 {
-    return [self action:PROTOCOL_PAUSE deviceID:deviceID];
+    if (deviceID) {
+        return [self action:PROTOCOL_PAUSE deviceID:deviceID];
+    }else{
+        return [self action:PROTOCOL_PAUSE];
+    }
 }
 
 -(NSData *) stop:(NSString *)deviceID
@@ -200,7 +238,11 @@
 
 -(NSData *) changeVolume:(uint8_t)percent deviceID:(NSString *)deviceID
 {
-    return [self action:PROTOCOL_VOLUME deviceID:deviceID value:percent];
+    if (deviceID) {
+        return [self action:PROTOCOL_VOLUME deviceID:deviceID value:percent];
+    }else{
+        return [self action:PROTOCOL_VOLUME value:percent];
+    }
 }
 
 -(NSData *) mute:(NSString *)deviceID
