@@ -87,8 +87,6 @@
 		0FB42E231CF6F9E8007DE64F /* SocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB42E221CF6F9E8007DE64F /* SocketManager.m */; };
 		0FBEFE271D24A5020084244F /* netconfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0FBEFE261D24A5020084244F /* netconfig.plist */; };
 		0FBEFE2A1D24F0C10084244F /* WebManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FBEFE291D24F0C10084244F /* WebManager.m */; };
-		0FC0FFD21CF539BC000F71D5 /* realScene.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0FC0FFD11CF539BC000F71D5 /* realScene.plist */; };
-		0FC0FFD71CF553AD000F71D5 /* planeScene.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0FC0FFD61CF553AD000F71D5 /* planeScene.plist */; };
 		0FC0FFDA1CF577C0000F71D5 /* RealScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC0FFD91CF577C0000F71D5 /* RealScene.m */; };
 		0FC0FFDD1CF57E58000F71D5 /* TouchImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC0FFDC1CF57E58000F71D5 /* TouchImage.m */; };
 		0FC119771D6FE5E0001DA19A /* Screen.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC119761D6FE5E0001DA19A /* Screen.m */; };
@@ -139,7 +137,11 @@
 		2EEE536B1E3061930026F97D /* IphoneDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EEE536A1E3061930026F97D /* IphoneDetailViewController.m */; };
 		2EFFECA11E12161100C13D3E /* FixTimeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFFECA01E12161100C13D3E /* FixTimeListViewController.m */; };
 		CD43046F1E0B674000B594F4 /* FamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD43046E1E0B674000B594F4 /* FamilyViewController.m */; };
+		CDF389221E305B4400657C8B /* breakdownlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF389211E305B4400657C8B /* breakdownlist.plist */; };
+		CDF389241E306D2400657C8B /* maintaininfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF389231E306D2400657C8B /* maintaininfo.plist */; };
 		CDF90B411E1E425D009043B9 /* RoomDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF90B401E1E425D009043B9 /* RoomDetailViewController.m */; };
+		CDF90B431E2F0676009043B9 /* realScene.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF90B421E2F0676009043B9 /* realScene.plist */; };
+		CDF90B451E2F4B14009043B9 /* planeScene.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF90B441E2F4B14009043B9 /* planeScene.plist */; };
 		F361579D9B9637C261531C8C /* libPods-SmartHome.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B2DBF5C92F57E3B7AD6AA3 /* libPods-SmartHome.a */; };
 		F60E71CA1D796BE6008863DB /* AmplifierController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60E71C91D796BE6008863DB /* AmplifierController.m */; };
 		F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB411D00029900AB04BE /* DetailViewController.m */; };
@@ -593,8 +595,6 @@
 		0FBEFE281D24F0C10084244F /* WebManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebManager.h; sourceTree = "<group>"; };
 		0FBEFE291D24F0C10084244F /* WebManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebManager.m; sourceTree = "<group>"; };
 		0FBEFE2B1D24F3100084244F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		0FC0FFD11CF539BC000F71D5 /* realScene.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = realScene.plist; sourceTree = "<group>"; };
-		0FC0FFD61CF553AD000F71D5 /* planeScene.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = planeScene.plist; sourceTree = "<group>"; };
 		0FC0FFD81CF577C0000F71D5 /* RealScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealScene.h; sourceTree = "<group>"; };
 		0FC0FFD91CF577C0000F71D5 /* RealScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealScene.m; sourceTree = "<group>"; };
 		0FC0FFDB1CF57E58000F71D5 /* TouchImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchImage.h; sourceTree = "<group>"; };
@@ -694,8 +694,12 @@
 		A4B2DBF5C92F57E3B7AD6AA3 /* libPods-SmartHome.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SmartHome.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD43046D1E0B674000B594F4 /* FamilyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyViewController.h; sourceTree = "<group>"; };
 		CD43046E1E0B674000B594F4 /* FamilyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyViewController.m; sourceTree = "<group>"; };
+		CDF389211E305B4400657C8B /* breakdownlist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = breakdownlist.plist; sourceTree = "<group>"; };
+		CDF389231E306D2400657C8B /* maintaininfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = maintaininfo.plist; sourceTree = "<group>"; };
 		CDF90B3F1E1E425D009043B9 /* RoomDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomDetailViewController.h; sourceTree = "<group>"; };
 		CDF90B401E1E425D009043B9 /* RoomDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomDetailViewController.m; sourceTree = "<group>"; };
+		CDF90B421E2F0676009043B9 /* realScene.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = realScene.plist; sourceTree = "<group>"; };
+		CDF90B441E2F4B14009043B9 /* planeScene.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = planeScene.plist; sourceTree = "<group>"; };
 		CE54136C9EEF8F51E8FBEEDE /* Pods-SmartHome.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.release.xcconfig"; sourceTree = "<group>"; };
 		F60E71C81D796BE6008863DB /* AmplifierController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmplifierController.h; sourceTree = "<group>"; };
 		F60E71C91D796BE6008863DB /* AmplifierController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmplifierController.m; sourceTree = "<group>"; };
@@ -1155,10 +1159,12 @@
 		0F032D471CC9B12700D1920D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CDF389231E306D2400657C8B /* maintaininfo.plist */,
+				CDF389211E305B4400657C8B /* breakdownlist.plist */,
+				CDF90B421E2F0676009043B9 /* realScene.plist */,
+				CDF90B441E2F4B14009043B9 /* planeScene.plist */,
 				0FBEFE2B1D24F3100084244F /* PrefixHeader.pch */,
 				0F032D591CC9B12700D1920D /* Assets.xcassets */,
-				0FC0FFD11CF539BC000F71D5 /* realScene.plist */,
-				0FC0FFD61CF553AD000F71D5 /* planeScene.plist */,
 				0FAF98BC1CE466B0009BDBB5 /* SmartHome.entitlements */,
 				0F032D5E1CC9B12700D1920D /* Info.plist */,
 				0F032D481CC9B12700D1920D /* main.m */,
@@ -1992,16 +1998,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDF90B431E2F0676009043B9 /* realScene.plist in Resources */,
 				0FBEFE271D24A5020084244F /* netconfig.plist in Resources */,
-				0FC0FFD71CF553AD000F71D5 /* planeScene.plist in Resources */,
 				F60FDB471D003FD500AB04BE /* CurtainTableViewCell.xib in Resources */,
+				CDF389241E306D2400657C8B /* maintaininfo.plist in Resources */,
 				0F7E2E161D581AC400A47D5D /* iPhone.storyboard in Resources */,
 				0F032D5A1CC9B12700D1920D /* Assets.xcassets in Resources */,
 				F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */,
+				CDF90B451E2F4B14009043B9 /* planeScene.plist in Resources */,
 				F668AF251D53413B0079587F /* Main.storyboard in Resources */,
 				0FE78BB61DCFB091009B4767 /* Images.xcassets in Resources */,
-				0FC0FFD21CF539BC000F71D5 /* realScene.plist in Resources */,
 				0F020A231DE3D9330034869F /* LaunchScreen.storyboard in Resources */,
+				CDF389221E305B4400657C8B /* breakdownlist.plist in Resources */,
 				F6359B011CFFC4DC0035EB31 /* ColourTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

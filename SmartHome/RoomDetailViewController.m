@@ -27,12 +27,20 @@
     
     //房间名
     self.navigationItem.title = [SQLManager getRoomNameByRoomID:self.roomID];
+    
+    DeviceInfo *device = [DeviceInfo defaultManager];
+    if (![device.db isEqualToString:SMART_DB]) {
+        
+        [DeviceInfo defaultManager].masterID = 255l;
+    }
+    
 }
 
 - (void)initDataSource {
     _deviceTypes = [NSMutableArray arrayWithArray:[SQLManager getDevicesSubTypeNamesWithRoomID:self.roomID]];//设备大类;
     
     if (_deviceTypes.count >0) {
+        
         _deviceSubTypes = [NSMutableArray arrayWithArray:[SQLManager getDeviceTypeName:self.roomID subTypeName:_deviceTypes[0]]];//设备小类
     }
     
@@ -139,7 +147,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    DeviceInfo *device = [DeviceInfo defaultManager];
     if(tableView == self.deviceTypeTableView)
     {
         self.deviceSubTypes = [NSMutableArray arrayWithArray:[SQLManager getDeviceTypeName:self.roomID subTypeName:_deviceTypes[indexPath.row]]];
@@ -166,6 +174,11 @@
             LightController *ligthVC = [storyBoard instantiateViewControllerWithIdentifier:@"LightController"];
             ligthVC.showLightView = NO;
             ligthVC.roomID = self.roomID;
+            
+            if (![device.db isEqualToString:SMART_DB]) {
+                ligthVC.roomID = 1;
+            }
+            
             //ligthVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
             [self addViewAndVC:ligthVC];
             
@@ -173,6 +186,11 @@
         {
             CurtainController *curtainVC = [storyBoard instantiateViewControllerWithIdentifier:@"CurtainController"];
             curtainVC.roomID = self.roomID;
+            
+            if (![device.db isEqualToString:SMART_DB]) {
+                curtainVC.roomID = 1;
+            }
+            
             //curtainVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
             [self addViewAndVC:curtainVC];
             

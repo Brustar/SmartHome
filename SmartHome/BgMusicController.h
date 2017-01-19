@@ -6,6 +6,8 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
+#define BLUETOOTH_MUSIC false
+
 @interface BgMusicController : UIViewController
 
 @property (nonatomic,weak) NSString *sceneid;

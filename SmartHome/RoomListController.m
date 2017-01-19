@@ -225,7 +225,11 @@
 - (void)timeIntervalSliderValueChanged:(UISlider *)sender {
     
     NSLog(@"sender: %f", sender.value);
-    self.timeIntervalLabel.text = [NSString stringWithFormat:@"%ld小时", lroundf(sender.value)];
+    if (lroundf(sender.value) == 13) {
+        self.timeIntervalLabel.text = @"永不";
+    }else {
+        self.timeIntervalLabel.text = [NSString stringWithFormat:@"%ld小时", lroundf(sender.value)];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated

@@ -54,7 +54,7 @@
     }
     //打印所有iBeacon的信息
     for (CLBeacon* beacon in beacons) {
-        NSLog(@"rssi is :%ld",(long)beacon.rssi);
+        NSLog(@"rssi is:%ld",(long)beacon.rssi);
         NSLog(@"beacon.proximity %ld",(long)beacon.proximity);
     }
 

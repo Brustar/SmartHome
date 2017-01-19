@@ -90,6 +90,8 @@
         info.db=@"demoDB";
         info.masterID = 255l;
     
+    [DeviceInfo defaultManager].masterID = 255l;
+    
     [[NSUserDefaults standardUserDefaults] objectForKey:@"HostID"];
     [SQLManager initDemoSQlite];
     

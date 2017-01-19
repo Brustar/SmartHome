@@ -325,6 +325,13 @@
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %d and masterID = '%ld'",roomID,[[DeviceInfo defaultManager] masterID]];
+        
+        DeviceInfo *device = [DeviceInfo defaultManager];
+        if (![device.db isEqualToString:SMART_DB]) {
+        
+        
+            sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %d and masterID = '%ld'",roomID, 255l];
+        }
       
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
@@ -758,7 +765,14 @@
     
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT DISTINCT subTypeName FROM Devices where rID = %d and masterID = '%ld'",roomID,[[DeviceInfo defaultManager] masterID]];
+        
+        NSString *sql = nil;
+        DeviceInfo *device = [DeviceInfo defaultManager];
+        if ([device.db isEqualToString:SMART_DB]) {
+            sql = [NSString stringWithFormat:@"SELECT DISTINCT subTypeName FROM Devices where rID = %d and masterID = '%ld'",roomID,[[DeviceInfo defaultManager] masterID]];
+        }else {
+            sql = [NSString stringWithFormat:@"SELECT DISTINCT subTypeName FROM Devices where rID = %d and masterID = '%ld'",1, 255l];
+        }
         
         FMResultSet *resultSet = [db executeQuery:sql];
         while([resultSet next])
@@ -1002,7 +1016,11 @@
 
 
 +(NSArray *)getDeviceTypeName:(int)rID subTypeName:(NSString *)subTypeName
-{
+{  DeviceInfo *device = [DeviceInfo defaultManager];
+    
+    if (![device.db isEqualToString:SMART_DB]) {
+        rID = 1;
+    }
     NSMutableArray *typeNames = [NSMutableArray array];
     
     NSArray *deviceIDs = [SQLManager deviceIdsByRoomId:rID];
@@ -1071,6 +1089,12 @@
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"SELECT typeName FROM Devices where ID = %@ and subTypeName = '%@' and masterID = '%ld'",ID, subTypeName,[[DeviceInfo defaultManager] masterID]];
+        
+        DeviceInfo *device = [DeviceInfo defaultManager];
+        if (![device.db isEqualToString:SMART_DB]) {
+            sql = [NSString stringWithFormat:@"SELECT typeName FROM Devices where ID = %@ and subTypeName = '%@' and masterID = '%ld'",ID, subTypeName, 255l];
+        }
+        
         
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
