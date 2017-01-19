@@ -171,6 +171,9 @@
     }
 
 }
+- (IBAction)addscene:(id)sender {
+       [[DeviceInfo defaultManager] setEditingScene:YES];
+}
 //添加定时
 - (IBAction)addFixTime:(id)sender {
     if (self.deviceName.count == 0) {

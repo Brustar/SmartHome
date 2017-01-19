@@ -76,10 +76,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //[self initPlugin];
-    //[self initHomekitPlugin];
+//    [self initPlugin];
+//    [self initHomekitPlugin];
     [self setupSegment];
-    
+    SocketManager *sock=[SocketManager defaultManager];
+    sock.delegate=self;
     self.scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
 }
 

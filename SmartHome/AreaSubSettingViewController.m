@@ -57,6 +57,9 @@
     [self sendRequest:url withTag:2];
     self.userName.text = self.userNameTitle;
     [self creatUI];
+    UIView *view = [[UIView alloc] init];
+    [view setBackgroundColor:[UIColor clearColor]];
+    self.tableView.tableFooterView = view;
     
 }
 
@@ -187,6 +190,7 @@
         cell.exchangeSwitch.on = YES;
     }else {
         cell.exchangeSwitch.on = NO;
+        cell.hidden = YES;
     }
     return cell;
     

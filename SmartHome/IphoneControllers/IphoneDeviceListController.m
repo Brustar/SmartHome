@@ -164,7 +164,6 @@
     }else if([typeName isEqualToString:@"摄像头"]){
         CameraController *camerVC = [storyBoard instantiateViewControllerWithIdentifier:@"CameraController"];
         camerVC.roomID = roomID;
-        
         [self addViewAndVC:camerVC];
         
     }else if([typeName isEqualToString:@"智能门锁"]){
