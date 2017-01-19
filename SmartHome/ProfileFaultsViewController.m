@@ -81,10 +81,22 @@
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     NSString *url = [NSString stringWithFormat:@"%@%@",[IOManager httpAddr],FAULT_URL];
     
-    if (auothorToken) {
+    if (auothorToken.length >0) {
         NSDictionary *dict = @{@"token":auothorToken};
     
         [self sendRequest:url andDict:dict WithTag:1];
+    }else { //体验
+        NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"breakdownlist" ofType:@"plist"]];
+        NSArray *arr = plistDict[@"break_down_list"];
+        for(NSDictionary *dicDetail in arr)
+        {
+            [self.faultArr addObject:dicDetail[@"description"]];
+            [self.timesArr addObject:dicDetail[@"createdate"]];
+            [self.recordIDs addObject:dicDetail[@"breakdown_id"]];
+            [self.statusArr addObject:dicDetail[@"status_id"]];
+            [self.status_nameArr addObject:dicDetail[@"status_name"]];
+        }
+        [self.tableView reloadData];
     }
 }
 
