@@ -13,11 +13,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    self.ViewLabel.layer.masksToBounds = YES;
-    self.ViewLabel.layer.cornerRadius = 5;
-    self.ViewSubViewLabel.layer.masksToBounds = YES;
-    self.ViewSubViewLabel.layer.cornerRadius = 5;
-    self.ViewLabel.alpha = 0.3;
+    self.subView.layer.masksToBounds = YES;
+    self.subView.layer.cornerRadius = 5;
+  
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

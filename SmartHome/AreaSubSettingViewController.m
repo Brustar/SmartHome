@@ -56,6 +56,9 @@
     NSString *url = [NSString stringWithFormat:@"%@Cloud/room_authority.aspx",[IOManager httpAddr]];
     self.userName.text = self.userNameTitle;
     [self creatUI];
+    UIView *view = [[UIView alloc] init];
+    [view setBackgroundColor:[UIColor clearColor]];
+    self.tableView.tableFooterView = view;
     
     DeviceInfo *device = [DeviceInfo defaultManager];
     if ([device.db isEqualToString:SMART_DB]) {
@@ -213,6 +216,7 @@
         cell.exchangeSwitch.on = YES;
     }else {
         cell.exchangeSwitch.on = NO;
+        cell.hidden = YES;
     }
     return cell;
     

@@ -53,6 +53,8 @@ typedef struct Protocol Proto;
 #define PROTOCOL_VOLUME_DOWN 0x03
 #define PROTOCOL_MUTE 0x04
 
+#define BGMUSIC_DEVICE_TYPE 0x14
+
 @interface PackManager : NSObject
 
 NSData *dataFromProtocol(Proto protcol);

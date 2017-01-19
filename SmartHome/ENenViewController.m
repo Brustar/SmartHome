@@ -10,12 +10,14 @@
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "EnenCell.h"
+#import "MyView.h"
 
 @interface ENenViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) NSMutableArray * dateArr;
 @property (nonatomic,strong) NSMutableArray * startTimeArr;
 @property (nonatomic,strong) NSMutableArray * endTimeArr;
+@property (nonatomic,strong) MyView * myview;
 
 
 @end
@@ -76,6 +78,33 @@
     UIView *view = [[UIView alloc] init];
     [view setBackgroundColor:[UIColor clearColor]];
     self.tableView.tableFooterView = view;
+
+    //设置线条宽度
+    _myview.lineWidth = 5;
+    //设置线条颜色
+    _myview.lineColor = [UIColor redColor];
+
+    //添加绘制多条直线代码
+    CGLine line1 = {
+        CGPointMake(0,0),
+        CGPointMake(30,0)
+    };
+    
+    CGLine line2 = {
+        CGPointMake(50,0),
+        CGPointMake(80,0)
+    };
+    
+    NSValue *value1 = [NSValue valueWithBytes:&line1 objCType:@encode(struct CGLine)];
+    NSValue *value2 = [NSValue valueWithBytes:&line2 objCType:@encode(struct CGLine)];
+    
+    NSMutableArray *lineArr = [[NSMutableArray alloc] init];
+    [lineArr addObject:value1];
+    [lineArr addObject:value2];
+    _myview.lineArr = lineArr;
+
+    
+    
 }
 -(void)sendRequestToGetEenrgyWithEqid:(int)eqid
 {
@@ -123,7 +152,7 @@
 {
     
     return self.dateArr.count;
-//    return 7;
+
     
 }
 
@@ -134,14 +163,7 @@
         cell.dateLabel.text = [NSString stringWithFormat:@"%@",dict[@"dateflag"]];
         cell.energyLabel.text = [NSString stringWithFormat:@"%.1fhr",[dict[@"minute_time"] floatValue]/60];
     cell.weekLabel.text = [self getTheDayOfTheWeekByDateString:cell.dateLabel.text];
-//    cell.ViewSubViewLabel.hidden = NO;
-    CGFloat x = cell.ViewSubViewLabel.bounds.origin.x;
-//    CGFloat y = cell.ViewSubViewLabel.bounds.origin.y;
-    CGFloat width = cell.ViewSubViewLabel.bounds.size.width/24 * [dict[@"minute_time"] floatValue]/60;
-//    CGFloat width = cell.ViewSubViewLabel.bounds.size.width/24 * [cell.energyLabel.text intValue];
 
-//    cell.subViewWidth.constant = width;
-    cell.subViewX.constant = x;
     return cell;
 }
 ///根据用户输入的时间(dateString)确定当天是星期几,输入的时间格式 yyyy-MM-dd ,如 2015-12-18

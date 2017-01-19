@@ -62,6 +62,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subImage" translatesAutoresizingMaskIntoConstraints="NO" id="Vas-oK-wnf">
                                                     <rect key="frame" x="28" y="28" width="118" height="119"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="tintColor" red="0.39215686274509803" green="0.29411764705882354" blue="0.3411764705882353" alpha="1" colorSpace="calibratedRGB"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_lignt" translatesAutoresizingMaskIntoConstraints="NO" id="Y1G-Ji-Xe8" userLabel="lightImageView">
                                                     <rect key="frame" x="31" y="14" width="30" height="30"/>
@@ -1547,6 +1548,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="addscene:" destination="684-QI-OKg" eventType="touchUpInside" id="JcC-M1-dVQ"/>
                                     <segue destination="yGe-XQ-WNx" kind="push" identifier="gotoDeviceSegue" id="YuF-MW-0b0"/>
                                 </connections>
                             </button>
@@ -1687,6 +1689,7 @@
                                 </constraints>
                                 <state key="normal" backgroundImage="i-add"/>
                                 <connections>
+                                    <action selector="addscene:" destination="684-QI-OKg" eventType="touchUpInside" id="0ww-gz-X0v"/>
                                     <segue destination="yGe-XQ-WNx" kind="push" identifier="gotoDeviceSegue" id="lPv-wZ-EAG"/>
                                 </connections>
                             </button>
@@ -1849,7 +1852,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Foe-4D-JYa" customClass="IphoneTypeView">
-                                <rect key="frame" x="0.0" y="20" width="325" height="50"/>
+                                <rect key="frame" x="0.0" y="64" width="325" height="50"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="SDZ-7P-Gds"/>
@@ -1863,11 +1866,11 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MDX-gG-lIf">
-                                <rect key="frame" x="0.0" y="70" width="375" height="547"/>
+                                <rect key="frame" x="0.0" y="114" width="375" height="503"/>
                                 <color key="backgroundColor" red="0.90309139530000004" green="0.90309139530000004" blue="0.90309139530000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FuG-Bj-2fB">
-                                <rect key="frame" x="325" y="20" width="50" height="50"/>
+                                <rect key="frame" x="325" y="64" width="50" height="50"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Lkl-Fe-Yz4"/>
@@ -1935,7 +1938,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入场景名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6p8-dz-db0">
-                                <rect key="frame" x="0.0" y="30" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="74" width="375" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="x1V-5y-GrX"/>
                                 </constraints>
@@ -2639,7 +2642,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d5M-aS-6wn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1390" y="1830"/>
+            <point key="canvasLocation" x="1470" y="265"/>
         </scene>
         <!--我的消息-->
         <scene sceneID="Mei-4F-cyT">
@@ -4564,21 +4567,21 @@
                                     <outlet property="delegate" destination="4tp-9h-cX5" id="I68-1c-hKu"/>
                                 </connections>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_weak" translatesAutoresizingMaskIntoConstraints="NO" id="T6s-qb-fdD">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_weak" translatesAutoresizingMaskIntoConstraints="NO" id="T6s-qb-fdD">
                                 <rect key="frame" x="16" y="338" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="C3z-PW-UsN"/>
                                     <constraint firstAttribute="width" constant="30" id="dw4-Ff-dfg"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_strong" translatesAutoresizingMaskIntoConstraints="NO" id="a2a-yb-irQ">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_strong" translatesAutoresizingMaskIntoConstraints="NO" id="a2a-yb-irQ">
                                 <rect key="frame" x="316" y="338" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="6gQ-V5-RrW"/>
                                     <constraint firstAttribute="height" constant="30" id="h7Y-9X-9hH"/>
                                 </constraints>
                             </imageView>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="3T4-fh-aO4">
+                            <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="3T4-fh-aO4">
                                 <rect key="frame" x="60" y="338" width="243" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="2jD-Ca-3RN"/>
@@ -4611,6 +4614,7 @@
                         <outlet property="segment" destination="w8E-bv-kGh" id="VDQ-x5-uSc"/>
                         <outlet property="slider" destination="3T4-fh-aO4" id="0ZX-ee-Gea"/>
                         <outlet property="tableView" destination="0fe-Ae-E68" id="Tz6-Mz-Ece"/>
+                        <segue destination="RmR-ux-DSX" kind="push" identifier="detail" id="YfK-Z8-Yeo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dvZ-5I-Nfp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4728,11 +4732,12 @@
                         <outlet property="segment" destination="NJt-3L-1kv" id="Eph-y3-GLz"/>
                         <outlet property="slider" destination="ov6-7i-AIK" id="Kzo-bN-dZi"/>
                         <outlet property="tableView" destination="yzW-zU-Qgj" id="Uq7-v0-8YR"/>
+                        <segue destination="RmR-ux-DSX" kind="push" identifier="detail" id="OCS-34-SI9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bNo-XB-t0T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2471.5" y="1956.5"/>
+            <point key="canvasLocation" x="2400" y="1907"/>
         </scene>
         <!--添加设备TV-->
         <scene sceneID="f5e-uk-c6D">
@@ -4845,6 +4850,7 @@
                         <outlet property="segment" destination="dDc-Xw-jYa" id="MfC-A8-W2N"/>
                         <outlet property="slider" destination="tLy-be-asm" id="ZjA-zF-KDe"/>
                         <outlet property="tableView" destination="jRO-rJ-kbp" id="kx9-LU-qaw"/>
+                        <segue destination="RmR-ux-DSX" kind="push" identifier="detail" id="AEq-SN-Vkv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zbo-eO-dHT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4962,11 +4968,41 @@
                         <outlet property="segment" destination="KWi-Dl-4dS" id="cTd-FN-Niz"/>
                         <outlet property="slider" destination="7RJ-mj-TSQ" id="xgL-2h-CI9"/>
                         <outlet property="tableView" destination="KyG-GJ-Mwx" id="LPI-4K-T3v"/>
+                        <segue destination="RmR-ux-DSX" kind="push" identifier="detail" id="b22-0A-WOg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="34W-aV-4hp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3396" y="1974"/>
+        </scene>
+        <!--设备详情-->
+        <scene sceneID="lPt-ob-5dv">
+            <objects>
+                <tableViewController id="RmR-ux-DSX" userLabel="设备详情" customClass="IphoneDetailViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="mMC-wW-Fst">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Rc9-X0-Ptg">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rc9-X0-Ptg" id="SKM-8v-9PR">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="RmR-ux-DSX" id="riG-iO-uDJ"/>
+                            <outlet property="delegate" destination="RmR-ux-DSX" id="gnu-1K-2Gr"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="F66-OP-EYj"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wIb-Gg-MHR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2810" y="2979"/>
         </scene>
     </scenes>
     <resources>
@@ -5017,10 +5053,11 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="WeN-Qz-0Az"/>
         <segue reference="qN8-z6-Gb7"/>
-        <segue reference="lPv-wZ-EAG"/>
+        <segue reference="YuF-MW-0b0"/>
         <segue reference="ner-KZ-F7B"/>
+        <segue reference="WeN-Qz-0Az"/>
         <segue reference="dKC-Kt-cWh"/>
+        <segue reference="AEq-SN-Vkv"/>
     </inferredMetricsTieBreakers>
 </document>

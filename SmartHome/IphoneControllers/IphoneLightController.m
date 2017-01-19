@@ -97,25 +97,25 @@
     return 2;
     
 }
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-
-    if (section == 0) {
-        if (_lightArrs.count == 0) {
-            return nil;
-        }
-        return @"灯";
-    }
-    if (_curtainArrs.count == 0) {
-        return nil;
-    }
-    return @"窗帘";
-}
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 50;
-
-}
+//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+//{
+//
+//    if (section == 0) {
+//        if (_lightArrs.count == 0) {
+//            return nil;
+//        }
+//        return @"灯";
+//    }
+//    if (_curtainArrs.count == 0) {
+//        return nil;
+//    }
+//    return @"窗帘";
+//}
+//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//{
+//    return 50;
+//
+//}
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section==0) {

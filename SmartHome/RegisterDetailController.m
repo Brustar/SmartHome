@@ -154,7 +154,7 @@
             [MBProgressHUD showSuccess:@"验证码发送成功"];
         }else {
             [MBProgressHUD showError:@"验证码发送失败"];
-            [MBProgressHUD showError:responseObject[@"msg"]];
+//            [MBProgressHUD showError:responseObject[@"msg"]];
         }
     }else if(tag == 2){
         if([responseObject[@"result"] intValue] == 0)

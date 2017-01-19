@@ -171,7 +171,7 @@
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(indexPath.row == 1)
     {
-        [self performSegueWithIdentifier:@"projectDetailSegue" sender:self];
+        [self performSegueWithIdentifier:@"detail" sender:self];
     }
 }
 
