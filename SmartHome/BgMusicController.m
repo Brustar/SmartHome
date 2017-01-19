@@ -57,10 +57,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if ([[DeviceInfo defaultManager] editingScene]) {
-        NSArray *bgmusicIDS = [SQLManager getDeviceByTypeName:@"背景音乐" andRoomID:self.roomID];
+    //if ([[DeviceInfo defaultManager] editingScene]) {
+    NSArray *bgmusicIDS = [SQLManager getDeviceByTypeName:@"背景音乐" andRoomID:self.roomID];
+    if ([bgmusicIDS count]>0) {
         self.deviceid = bgmusicIDS[0];
     }
+    //}
     
     float vol = BLUETOOTH_MUSIC ? 0 : [[AVAudioSession sharedInstance] outputVolume];
     self.volume.value=vol*100;
