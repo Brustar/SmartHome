@@ -10,16 +10,8 @@
 
 @interface EnenCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *weekLabel;
-
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *ViewLabel;
-@property (weak, nonatomic) IBOutlet UILabel *ViewSubViewLabel;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *subViewLayout;
-
-@property (weak, nonatomic) IBOutlet UIView *timeViewLabel;
 @property (weak, nonatomic) IBOutlet UILabel *energyLabel;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *SubViewConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *subViewWidth;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *subViewX;
+@property (weak, nonatomic) IBOutlet UIView *subView;
 
 @end
