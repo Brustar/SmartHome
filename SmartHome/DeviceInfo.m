@@ -116,6 +116,15 @@
     return dataFromProtocol(proto);
 }
 
+-(NSData *) action:(uint8_t)action value:(uint8_t)value
+{
+    NSData *data = [self action:action];
+    Proto proto = protocolFromData(data);
+    
+    proto.action.RValue=value;
+    return dataFromProtocol(proto);
+}
+
 -(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID
 {
     Proto proto=createProto();
@@ -134,7 +143,6 @@
 
 -(NSData *) action:(uint8_t)action deviceID:(NSString *)deviceID value:(uint8_t)value
 {
-    
     NSData *data = [self action:action deviceID:deviceID];
     Proto proto = protocolFromData(data);
     
@@ -230,7 +238,11 @@
 
 -(NSData *) changeVolume:(uint8_t)percent deviceID:(NSString *)deviceID
 {
-    return [self action:PROTOCOL_VOLUME deviceID:deviceID value:percent];
+    if (deviceID) {
+        return [self action:PROTOCOL_VOLUME deviceID:deviceID value:percent];
+    }else{
+        return [self action:PROTOCOL_VOLUME value:percent];
+    }
 }
 
 -(NSData *) mute:(NSString *)deviceID
