@@ -41,15 +41,16 @@
         self.viewLeftConstraint.constant = 20;
         self.viewRightConstraint.constant = self.viewLeftConstraint.constant;
     }
-    
-    AudioManager *audio=[AudioManager defaultManager];
-    
-    [audio.musicPlayer beginGeneratingPlaybackNotifications];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(musicPlayerStatedChanged:) name:MPMusicPlayerControllerPlaybackStateDidChangeNotification object:audio.musicPlayer];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nowPlayingItemIsChanged:) name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification object:audio.musicPlayer];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(volumeIsChanged:) name:MPMusicPlayerControllerVolumeDidChangeNotification object:audio.musicPlayer];
+    if (BLUETOOTH_MUSIC) {
+        AudioManager *audio=[AudioManager defaultManager];
+        
+        [audio.musicPlayer beginGeneratingPlaybackNotifications];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(musicPlayerStatedChanged:) name:MPMusicPlayerControllerPlaybackStateDidChangeNotification object:audio.musicPlayer];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nowPlayingItemIsChanged:) name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification object:audio.musicPlayer];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(volumeIsChanged:) name:MPMusicPlayerControllerVolumeDidChangeNotification object:audio.musicPlayer];
+    }
 }
 
 
@@ -61,7 +62,7 @@
         self.deviceid = bgmusicIDS[0];
     }
     
-    float vol = [[AVAudioSession sharedInstance] outputVolume];
+    float vol = BLUETOOTH_MUSIC ? 0 : [[AVAudioSession sharedInstance] outputVolume];
     self.volume.value=vol*100;
     self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
 
@@ -81,9 +82,10 @@
     
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
-
-    AudioManager *audio=[AudioManager defaultManager];
-    [audio initMusicAndPlay];
+    if (BLUETOOTH_MUSIC) {
+        AudioManager *audio=[AudioManager defaultManager];
+        [audio initMusicAndPlay];
+    }
 }
 
 -(IBAction)save:(id)sender
@@ -93,8 +95,10 @@
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
         self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
-        AudioManager *audio=[AudioManager defaultManager];
-        [audio.musicPlayer setVolume:self.volume.value/100.0];
+        if (BLUETOOTH_MUSIC) {
+            AudioManager *audio=[AudioManager defaultManager];
+            [audio.musicPlayer setVolume:self.volume.value/100.0];
+        }
     }
     BgMusic *device=[[BgMusic alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
@@ -189,11 +193,12 @@
     NSData *data=[[DeviceInfo defaultManager] next:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
-    
-    AudioManager *audio= [AudioManager defaultManager];
-    
-    if ([[audio musicPlayer] indexOfNowPlayingItem]<audio.songs.count-1) {
-        [[audio musicPlayer] skipToNextItem];
+    if (BLUETOOTH_MUSIC) {
+        AudioManager *audio= [AudioManager defaultManager];
+        
+        if ([[audio musicPlayer] indexOfNowPlayingItem]<audio.songs.count-1) {
+            [[audio musicPlayer] skipToNextItem];
+        }
     }
 }
 
@@ -201,10 +206,11 @@
     NSData *data=[[DeviceInfo defaultManager] previous:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
-    
-    AudioManager *audio= [AudioManager defaultManager];
-    if ([[audio musicPlayer] indexOfNowPlayingItem]>0) {
-        [[audio musicPlayer] skipToPreviousItem];
+    if (BLUETOOTH_MUSIC) {
+        AudioManager *audio= [AudioManager defaultManager];
+        if ([[audio musicPlayer] indexOfNowPlayingItem]>0) {
+            [[audio musicPlayer] skipToPreviousItem];
+        }
     }
 }
 
@@ -212,8 +218,10 @@
     NSData *data=[[DeviceInfo defaultManager] pause:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
-    AudioManager *audio= [AudioManager defaultManager];
-    [[audio musicPlayer] pause];
+    if (BLUETOOTH_MUSIC) {
+        AudioManager *audio= [AudioManager defaultManager];
+        [[audio musicPlayer] pause];
+    }
 }
 
 - (IBAction)playMusic:(id)sender {
@@ -221,8 +229,10 @@
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
     
-    AudioManager *audio= [AudioManager defaultManager];
-    [[audio musicPlayer] play];
+    if (BLUETOOTH_MUSIC) {
+        AudioManager *audio= [AudioManager defaultManager];
+        [[audio musicPlayer] play];
+    }
 }
 
 - (IBAction)addSongsToMusicPlayer:(id)sender
@@ -232,10 +242,12 @@
 
 -(void)dealloc
 {
-    AudioManager *audio= [AudioManager defaultManager];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMusicPlayerControllerPlaybackStateDidChangeNotification object:audio.musicPlayer];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification object:audio.musicPlayer];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMusicPlayerControllerVolumeDidChangeNotification object:audio.musicPlayer];
+    if (BLUETOOTH_MUSIC) {
+        AudioManager *audio= [AudioManager defaultManager];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMusicPlayerControllerPlaybackStateDidChangeNotification object:audio.musicPlayer];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification object:audio.musicPlayer];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMusicPlayerControllerVolumeDidChangeNotification object:audio.musicPlayer];
+    }
 }
 
 @end
