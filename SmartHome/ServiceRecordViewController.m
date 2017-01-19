@@ -74,6 +74,17 @@
     if (auothorToken) {
         NSDictionary *dic = @{@"token":auothorToken,@"optype":@(1)};
         [self sendRequest:dic andUrlStr:str with:1];
+    }else { //体验
+        NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"maintaininfo" ofType:@"plist"]];
+        NSArray *arr = plistDict[@"break_down_list"];
+        
+        for(NSDictionary *dicDetail in arr)
+        {
+            [self.recoreds addObject:dicDetail[@"description"]];
+            [self.times addObject:dicDetail[@"createdate"]];
+            [self.recordIDS addObject:dicDetail[@"breakdown_id"]];
+        }
+        [self.tableView reloadData];
     }
 }
 
@@ -88,7 +99,8 @@
     [http sendPost:url param:dic];
     
 }
--(void)httpHandler:(id)responseObject tag:(int)tag
+
+- (void)httpHandler:(id)responseObject tag:(int)tag
 {
     if(tag == 1)
     {
@@ -254,13 +266,30 @@
 //好评
 - (IBAction)clickGoodCommnet:(id)sender {
     
-    [self sendCommentType:1];
+    DeviceInfo *device = [DeviceInfo defaultManager];
+    if ([device.db isEqualToString:SMART_DB]) {
+    
+         [self sendCommentType:1];
+    }else { //体验
+        [MBProgressHUD showSuccess:@"评价成功"];
+        self.coverView.hidden = YES;
+        self.commentView.hidden = YES;
+    }
    
 }
+
 //还有故障
 - (IBAction)clickStillHaveFault:(id)sender {
-    [self sendCommentType:2];
+    DeviceInfo *device = [DeviceInfo defaultManager];
+    if ([device.db isEqualToString:SMART_DB]) {
+        [self sendCommentType:2];
+    }else {  //体验
+        [MBProgressHUD showSuccess:@"评价成功"];
+        self.coverView.hidden = YES;
+        self.commentView.hidden = YES;
+    }
 }
+
 //评价
 -(void)sendCommentType:(int)type
 {

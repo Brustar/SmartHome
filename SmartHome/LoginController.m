@@ -156,6 +156,7 @@
     }
     
     NSDictionary *dict = @{@"account":self.user.text,@"logintype":[NSNumber numberWithInteger:self.userType],@"password":[self.pwd.text md5],@"pushtoken":pushToken,@"devicetype":@(clientType),@"devicetype":[NSNumber numberWithInteger:self.userType]};
+    NSLog(@"%@ === login params ===: ", dict);
     [IOManager writeUserdefault:self.user.text forKey:@"Account"];
     [IOManager writeUserdefault:[NSNumber numberWithInteger:self.userType] forKey:@"Type"];
     [IOManager writeUserdefault:[self.pwd.text encryptWithDes:DES_KEY] forKey:@"Password"];
