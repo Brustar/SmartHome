@@ -86,6 +86,7 @@
     
         [self sendRequest:url andDict:dict WithTag:1];
     }else { //体验
+        self.navigationItem.rightBarButtonItem = nil;
         NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"breakdownlist" ofType:@"plist"]];
         NSArray *arr = plistDict[@"break_down_list"];
         for(NSDictionary *dicDetail in arr)

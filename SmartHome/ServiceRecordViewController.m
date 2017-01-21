@@ -75,6 +75,7 @@
         NSDictionary *dic = @{@"token":auothorToken,@"optype":@(1)};
         [self sendRequest:dic andUrlStr:str with:1];
     }else { //体验
+        self.navigationItem.rightBarButtonItem = nil;
         NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"maintaininfo" ofType:@"plist"]];
         NSArray *arr = plistDict[@"break_down_list"];
         

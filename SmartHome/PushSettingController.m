@@ -69,7 +69,25 @@
 //    self.navigationItem.leftBarButtonItem = returnItem;
     self.coverView.hidden = YES;
     self.pushTypeView.hidden = YES;
-    [self sendRequest];
+    
+    
+    DeviceInfo *device = [DeviceInfo defaultManager];
+    if ([device.db isEqualToString:SMART_DB]) {
+        [self sendRequest];
+    }else {
+        NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"userPushNotifyList" ofType:@"plist"]];
+        NSArray *arr = plistDict[@"user_notify_list"];
+        if ([arr isKindOfClass:[NSArray class]]) {
+            for(NSDictionary *item in arr)
+            {
+                [self.names addObject:item[@"item_name"]];
+                [self.notifyWay addObject:item[@"notifyway"]];
+                [self.recordIDs addObject:item[@"usernotify_id"]];
+            }
+        }
+        [self.tableView reloadData];
+    }
+    
 }
 //获得所有设置请求
 -(void)sendRequest
@@ -217,6 +235,8 @@
 
 
 - (IBAction)clickSureBtn:(id)sender {
+    DeviceInfo *device = [DeviceInfo defaultManager];
+    
     self.coverView.hidden = YES;
     self.pushTypeView.hidden = YES;
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:self.indexPath];
@@ -225,16 +245,28 @@
     if(self.tag == 0)
     {
         cell.detailTextLabel.text = @"信息推送";
-        [self setUserNotifyWay:1 andRecord:recordID];
+        if ([device.db isEqualToString:SMART_DB]) {
+            [self setUserNotifyWay:1 andRecord:recordID];
+        }else {
+            [MBProgressHUD showSuccess:@"修改成功"];
+        }
         
     }else if(self.tag == 1)
     {
         cell.detailTextLabel.text = @"短信通知";
-        [self setUserNotifyWay:2 andRecord:recordID];
+        if ([device.db isEqualToString:SMART_DB]) {
+            [self setUserNotifyWay:2 andRecord:recordID];
+        }else {
+            [MBProgressHUD showSuccess:@"修改成功"];
+        }
     }else{
         cell.detailTextLabel.text = @"不通知";
-        [self setUserNotifyWay:3 andRecord:recordID];
-    }    
+        if ([device.db isEqualToString:SMART_DB]) {
+            [self setUserNotifyWay:3 andRecord:recordID];
+        }else {
+            [MBProgressHUD showSuccess:@"修改成功"];
+        }
+    }
 }
 
 //- (IBAction)clickRetunBtn:(id)sender {

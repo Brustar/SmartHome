@@ -55,29 +55,27 @@
         if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) { //如果是普通用户，不显示“权限控制”选项
             return 4;
         }
-        return 5;//如果是主人，显示“权限控制”选项
+            return 5;//如果是主人，显示“权限控制”选项
     }else{
-        return 6;
+        if([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) { //2代表普通用户，如果是普通用户，不显示“权限控制”选项
+            return 5;
+        }else {
+            return 6;//如果是主人，显示“权限控制”选项
+        }
     }
     
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
    
-    if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) { //如果是普通用户，不显示“权限控制”选项
+    if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) { //如果是普通用户，不显示“权限控制”选项
         if(section == 1)
         {
-            return 1;
-        }if (section == 2) {
-            
             return 2;
         }
     
     }else {
-        if(section == 1)
-        {
+        if (section == 2) {
             return 2;
-        }if (section == 2) {
-            return 1;
         }
     }
     
@@ -102,21 +100,20 @@
                     title = @"系统信息";
                 }
             }else {
-                  title = @"权限控制";
+                    title = @"权限控制";
             }
             
             break;
         case 2:
         {
            if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) {
-               
-               title = @"去评价";
+                    title = @"去评价";
            }else {
                if(indexPath.row == 0)
                {
-                   title = @"系统设置";
+                    title = @"系统设置";
                }else {
-                 title = @"系统信息";
+                    title = @"系统信息";
                }
            }
             
@@ -133,7 +130,7 @@
             break;
         case 4:
             if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) {
-                title = @"关于我们";
+                title = @"退出";
             }else{
                 title = @"关于我们";
             }
@@ -206,8 +203,9 @@
        }else {
            AccessSettingController * accessVC = [MainBoard instantiateViewControllerWithIdentifier:@"AccessSettingController"];
            [self.navigationController pushViewController:accessVC animated:YES];
-           
+
 //            [self performSegueWithIdentifier:@"accessSegue" sender:self];
+
        }
         
     }else if(indexPath.section == 2)
@@ -241,9 +239,28 @@
     }else if(indexPath.section == 4)
     {
         if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) {
+
 //            [self performSegueWithIdentifier:@"aboutSegue" sender:self];
             AboutUsController * aboutVC = [MainBoard instantiateViewControllerWithIdentifier:@"AboutUsController"];
             [self.navigationController pushViewController:aboutVC animated:YES];
+
+            
+            //退出发送请求
+            NSString *authorToken =[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+            if (authorToken) {
+                NSDictionary *dict = @{@"token":authorToken};
+                
+                NSString *url = [NSString stringWithFormat:@"%@login/logout.aspx",[IOManager httpAddr]];
+                HttpManager *http=[HttpManager defaultManager];
+                http.delegate=self;
+                http.tag = 1;
+                [http sendPost:url param:dict];
+            }else{
+                //跳转到欢迎页
+                self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
+                [self performSegueWithIdentifier:@"goWelcomeSegue" sender:self];
+            }
+
         }else{
 //             [self performSegueWithIdentifier:@"aboutSegue" sender:self];
             AboutUsController * aboutVC = [MainBoard instantiateViewControllerWithIdentifier:@"AboutUsController"];
