@@ -90,8 +90,8 @@
     [super viewDidLoad];
     self.title = @"权限控制";
     self.automaticallyAdjustsScrollViewInsets = NO;
-    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
-    self.navigationItem.leftBarButtonItem = returnItem;
+//    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
+//    self.navigationItem.leftBarButtonItem = returnItem;
     self.areaTableView.tableHeaderView = self.headView;
     self.areaTableView.hidden = YES;
     NSString *url = [NSString stringWithFormat:@"%@Cloud/user_listall.aspx",[IOManager httpAddr]];
@@ -450,10 +450,10 @@
     
 }
 
-- (IBAction)clickRetunBtn:(id)sender {
-    //[self.view removeFromSuperview];
-    [self.navigationController popViewControllerAnimated:NO];
-}
+//- (IBAction)clickRetunBtn:(id)sender {
+//    //[self.view removeFromSuperview];
+//    [self.navigationController popViewControllerAnimated:NO];
+//}
 
 
 

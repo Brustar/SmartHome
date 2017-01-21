@@ -23,9 +23,12 @@
 #import "SocketManager.h"
 #import "TouchSubViewController.h"
 #import <AFNetworking.h>
-#import "KxMenu.h"
+#import "YZNavigationMenuView.h"
+#import "VoiceOrderController.h"
+#import "SearchViewController.h"
+#import "BgMusicController.h"
 
-@interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,SceneCellDelegate,UIViewControllerPreviewingDelegate>
+@interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,SceneCellDelegate,UIViewControllerPreviewingDelegate,YZNavigationMenuViewDelegate>
 @property (strong, nonatomic) IBOutlet IphoneRoomView *roomView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -38,7 +41,8 @@
 @property (nonatomic ,strong) SceneCell *cell;
 @property (weak, nonatomic) IBOutlet UIButton *AddSceneBtn;
 @property (nonatomic,strong) NSArray * arrayData;
-@property(nonatomic,assign) int sceneID;
+@property (nonatomic,assign) int sceneID;
+@property (nonatomic,strong) YZNavigationMenuView *menuView;
 
 @end
 
@@ -61,11 +65,11 @@
     _AddSceneBtn.layer.cornerRadius = _AddSceneBtn.bounds.size.width / 2.0; //圆角半径
     _AddSceneBtn.layer.masksToBounds = YES; //圆角
     self.navigationItem.rightBarButtonItems = nil;
-    
-    
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(rightBarButtonItemClicked:)];
+    UIImage *image=[UIImage imageNamed:@"UO256"];
+    //    不让tabbar底部有渲染的关键代码
+    image=[image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemClicked:)];
     self.navigationItem.rightBarButtonItem = rightItem;
-    
     self.navigationController.view.backgroundColor = [UIColor blueColor];
     
     
@@ -233,22 +237,40 @@
 }
 
 - (void)rightBarButtonItemClicked:(UIBarButtonItem *)sender {
-    UIButton *btn = sender;
-    UIView *view = btn.superview;
-    CGFloat w = view.frame.size.width;
-    CGFloat h = view.frame.size.height;
-    CGFloat y = btn.frame.origin.y + btn.frame.size.height / 2 - 10;
-    CGFloat x = btn.center.x - w / 2 - 30;
-    [KxMenu showMenuInView:view fromRect:CGRectMake(x, y , w, h) menuItems:@[
-                                                                             [KxMenuItem menuItem:@"本地图库"
-                                                                                            image:nil
-                                                                                           target:self
-                                                                                           action:@selector(selectPhoto:)],
-                                                                             [KxMenuItem menuItem:@"现在拍摄"
-                                                                                            image:nil
-                                                                                           target:self
-                                                                                           action:@selector(takePhoto:)],
-                                                                             ]];
+    NSMutableArray *imageArray = [NSMutableArray arrayWithCapacity:0];
+    for (int i = 0; i < 4; i++) {
+        NSString *name = [NSString stringWithFormat:@"%d",i + 1];
+        UIImage *image  = [UIImage imageNamed:name];
+        [imageArray addObject:image];
+        
+    }
+    
+   self.menuView = [[YZNavigationMenuView alloc] initWithPositionOfDirection:CGPointMake(self.view.frame.size.width - 24, 64) images:imageArray titleArray:@[@"语音",@"搜索",@"正在播放",@"添加场景"]];
+    self.menuView.delegate = self;
+    [self.view addSubview:self.menuView];
+}
+- (void)navigationMenuView:(YZNavigationMenuView *)menuView clickedAtIndex:(NSInteger)index;
+{
+    
+    UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+    UIStoryboard * MainBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+   
+    if (index == 0) {
+        VoiceOrderController * voiceVC = [storyBoard instantiateViewControllerWithIdentifier:@"VoiceOrderController"];
+        [self.navigationController pushViewController:voiceVC animated:YES];
+        self.menuView.hidden = YES;
+    }else if (index == 1){
+        SearchViewController * searchVC = [storyBoard instantiateViewControllerWithIdentifier:@"SearchViewController"];
+        [self.navigationController pushViewController:searchVC animated:YES];
+        self.menuView.hidden = YES;
+    }else if (index == 2){
+        BgMusicController * BgVC = [MainBoard instantiateViewControllerWithIdentifier:@"BgMusicController"];
+        [self.navigationController pushViewController:BgVC animated:YES];
+        self.menuView.hidden = YES;
+    }else if (index == 3){
+        [self performSegueWithIdentifier:@"iphoneAddSceneSegue" sender:self];
+        self.menuView.hidden = YES;
+    }
 }
 //删除场景
 -(void)sceneDeleteAction:(SceneCell *)cell

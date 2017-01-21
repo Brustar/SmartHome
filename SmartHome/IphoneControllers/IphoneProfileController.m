@@ -84,13 +84,12 @@
         self.imageView.layer.masksToBounds = YES; //圆角
         [cell.imageView addSubview:self.imageView];
         MSGController * msgVC = [MSGController new];
-        NSMutableSet * mSet = msgVC.set;
-        NSEnumerator * en = [mSet objectEnumerator];
-        if (self.imageView == [en nextObject]) {
+        if (msgVC.isShowCountLabel) {
             self.imageView.hidden = NO;
         }else{
             self.imageView.hidden = YES;
         }
+    
     }
     
     return cell;
@@ -205,6 +204,7 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self performSegueWithIdentifier:self.segues[indexPath.row] sender:self];
 }
 

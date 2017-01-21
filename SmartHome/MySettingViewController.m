@@ -16,6 +16,11 @@
 #import "AppDelegate.h"
 #import "SocketManager.h"
 #import "WelcomeController.h"
+#import "PushSettingController.h"
+#import "SystemSettingViewController.h"
+#import "SystemInfomationController.h"
+#import "AccessSettingController.h"
+#import "AboutUsController.h"
 
 @interface MySettingViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate>
 
@@ -176,11 +181,13 @@
 }
 -(void)goToViewController:(NSIndexPath *)indexPath
 {
-    
+   UIStoryboard * MainBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];   
     if(indexPath.section == 0)
     {
 
-        [self performSegueWithIdentifier:@"pushSegue" sender:self];
+//        [self performSegueWithIdentifier:@"pushSegue" sender:self];
+        PushSettingController * pushVC = [MainBoard instantiateViewControllerWithIdentifier:@"PushSettingController"];
+        [self.navigationController pushViewController:pushVC animated:YES];
         
         
     }else if(indexPath.section == 1)
@@ -188,14 +195,19 @@
        if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) {
            if(indexPath.row == 0)
            {
-               [self performSegueWithIdentifier:@"systemSetSegue" sender:self];
+//               [self performSegueWithIdentifier:@"systemSetSegue" sender:self];
+               SystemSettingViewController * systemVC = [MainBoard instantiateViewControllerWithIdentifier:@"SystemSettingViewController"];
+               [self.navigationController pushViewController:systemVC animated:YES];
            }else {
-               [self performSegueWithIdentifier:@"systemInfoSegue" sender:self];
+//               [self performSegueWithIdentifier:@"systemInfoSegue" sender:self];
+               SystemInfomationController * systemInfoVC = [MainBoard instantiateViewControllerWithIdentifier:@"systemInfomationController"];
+               [self.navigationController pushViewController:systemInfoVC animated:YES];
            }
        }else {
+           AccessSettingController * accessVC = [MainBoard instantiateViewControllerWithIdentifier:@"AccessSettingController"];
+           [self.navigationController pushViewController:accessVC animated:YES];
            
-           
-            [self performSegueWithIdentifier:@"accessSegue" sender:self];
+//            [self performSegueWithIdentifier:@"accessSegue" sender:self];
        }
         
     }else if(indexPath.section == 2)
@@ -205,9 +217,13 @@
         }else {
             if(indexPath.row == 0)
             {
-                [self performSegueWithIdentifier:@"systemSetSegue" sender:self];
+//                [self performSegueWithIdentifier:@"systemSetSegue" sender:self];
+            SystemSettingViewController * systemVC = [MainBoard instantiateViewControllerWithIdentifier:@"SystemSettingViewController"];
+                [self.navigationController pushViewController:systemVC animated:YES];
             }else {
-                [self performSegueWithIdentifier:@"systemInfoSegue" sender:self];
+//                [self performSegueWithIdentifier:@"systemInfoSegue" sender:self];
+         SystemInfomationController * systemInfoVC = [MainBoard instantiateViewControllerWithIdentifier:@"systemInfomationController"];
+                [self.navigationController pushViewController:systemInfoVC animated:YES];
             }
         }
         
@@ -215,8 +231,9 @@
     }else if(indexPath.section == 3)
     {
         if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) {
-           
-            [self performSegueWithIdentifier:@"aboutSegue" sender:self];
+           AboutUsController * aboutVC = [MainBoard instantiateViewControllerWithIdentifier:@"AboutUsController"];
+            [self.navigationController pushViewController:aboutVC animated:YES];
+//            [self performSegueWithIdentifier:@"aboutSegue" sender:self];
         }else {
             [self gotoAppStoreToComment];
         }
@@ -224,9 +241,13 @@
     }else if(indexPath.section == 4)
     {
         if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) {
-            [self performSegueWithIdentifier:@"aboutSegue" sender:self];
+//            [self performSegueWithIdentifier:@"aboutSegue" sender:self];
+            AboutUsController * aboutVC = [MainBoard instantiateViewControllerWithIdentifier:@"AboutUsController"];
+            [self.navigationController pushViewController:aboutVC animated:YES];
         }else{
-             [self performSegueWithIdentifier:@"aboutSegue" sender:self];
+//             [self performSegueWithIdentifier:@"aboutSegue" sender:self];
+            AboutUsController * aboutVC = [MainBoard instantiateViewControllerWithIdentifier:@"AboutUsController"];
+            [self.navigationController pushViewController:aboutVC animated:YES];
         }
         
     }else {

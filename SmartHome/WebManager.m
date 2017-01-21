@@ -9,9 +9,10 @@
 #import "WebManager.h"
 #import "ECloudTabBarController.h"
 
+
 @implementation WebManager
 
-+ (void) show:(NSString *)aUrl
++ (void)show:(NSString *)aUrl
 {
     WebManager *web = [[WebManager alloc] initWithUrl:aUrl title:@"逸云科技"];
     UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:web];

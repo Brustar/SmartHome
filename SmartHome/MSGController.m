@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIView *footView;
 @property (nonatomic,assign) NSInteger unreadcount;
 
+
 @end
 
 @implementation MSGController
@@ -137,9 +138,13 @@
         cell.unreadcountImage.hidden = NO;
         cell.countLabel.hidden       = NO;
     }
-     self.set = [[NSMutableSet alloc] init];
-    if (cell.unreadcountImage.hidden == YES) {
-         [self.set addObject:cell.unreadcountImage];
+    for (int i = 0; i < self.unreadcountArr.count; i ++) {
+        NSString * str = self.unreadcountArr[i];
+        if ([str intValue] == 0) {
+            self.isShowCountLabel = NO;
+        }else{
+            self.isShowCountLabel = YES;
+        }
     }
     
     return cell;
@@ -147,12 +152,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    MsgCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//    cell.unreadcountImage.hidden = YES;
-//    cell.countLabel.hidden = YES;
-//    [self.unreadcountArr removeAllObjects];
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];    
     UIStoryboard * oneStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     DetailMSGViewController * MSGVC = [oneStoryBoard instantiateViewControllerWithIdentifier:@"DetailMSGViewController"];

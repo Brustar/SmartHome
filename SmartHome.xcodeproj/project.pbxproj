@@ -131,6 +131,12 @@
 		2EA2A84A1E1E275900092D41 /* MySubEnergyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A8491E1E275900092D41 /* MySubEnergyCell.m */; };
 		2EA2A8541E1E2BEA00092D41 /* ENenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A8531E1E2BEA00092D41 /* ENenViewController.m */; };
 		2EA2A8571E1E2C7800092D41 /* EnenCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A8561E1E2C7800092D41 /* EnenCell.m */; };
+		2EA897AC1E31B25E002CA904 /* YZNavigationMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA897AB1E31B25E002CA904 /* YZNavigationMenuView.m */; };
+		2EA897BC1E31B53E002CA904 /* 1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EA897BB1E31B53E002CA904 /* 1@2x.png */; };
+		2EA897BE1E31B59B002CA904 /* 2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EA897BD1E31B59B002CA904 /* 2@2x.png */; };
+		2EA897C01E31B73F002CA904 /* 3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EA897BF1E31B73F002CA904 /* 3@2x.png */; };
+		2EA897C21E31B792002CA904 /* 4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EA897C11E31B792002CA904 /* 4@2x.png */; };
+		2EA897C71E31B9B6002CA904 /* UO256.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EA897C61E31B9B6002CA904 /* UO256.png */; };
 		2EA99E901E1C9A0100659065 /* MySubEnergyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA99E8F1E1C9A0100659065 /* MySubEnergyVC.m */; };
 		2EB2A4721E237F05003F01DB /* DeviceListTimeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB2A4711E237F05003F01DB /* DeviceListTimeVC.m */; };
 		2EDC0E901DEC072700F95BE0 /* IPhoneRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDC0E8F1DEC072700F95BE0 /* IPhoneRoom.m */; };
@@ -681,6 +687,13 @@
 		2EA2A8531E1E2BEA00092D41 /* ENenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENenViewController.m; sourceTree = "<group>"; };
 		2EA2A8551E1E2C7800092D41 /* EnenCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnenCell.h; sourceTree = "<group>"; };
 		2EA2A8561E1E2C7800092D41 /* EnenCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnenCell.m; sourceTree = "<group>"; };
+		2EA897AA1E31B25E002CA904 /* YZNavigationMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZNavigationMenuView.h; sourceTree = "<group>"; };
+		2EA897AB1E31B25E002CA904 /* YZNavigationMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZNavigationMenuView.m; sourceTree = "<group>"; };
+		2EA897BB1E31B53E002CA904 /* 1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1@2x.png"; sourceTree = "<group>"; };
+		2EA897BD1E31B59B002CA904 /* 2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2@2x.png"; sourceTree = "<group>"; };
+		2EA897BF1E31B73F002CA904 /* 3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3@2x.png"; sourceTree = "<group>"; };
+		2EA897C11E31B792002CA904 /* 4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4@2x.png"; sourceTree = "<group>"; };
+		2EA897C61E31B9B6002CA904 /* UO256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UO256.png; sourceTree = "<group>"; };
 		2EA99E8E1E1C9A0100659065 /* MySubEnergyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySubEnergyVC.h; sourceTree = "<group>"; };
 		2EA99E8F1E1C9A0100659065 /* MySubEnergyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySubEnergyVC.m; sourceTree = "<group>"; };
 		2EB2A4701E237F05003F01DB /* DeviceListTimeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceListTimeVC.h; sourceTree = "<group>"; };
@@ -1725,6 +1738,18 @@
 			name = jurisdiction;
 			sourceTree = "<group>";
 		};
+		2EA897C31E31B8FA002CA904 /* Iphoneimage */ = {
+			isa = PBXGroup;
+			children = (
+				2EA897BB1E31B53E002CA904 /* 1@2x.png */,
+				2EA897BD1E31B59B002CA904 /* 2@2x.png */,
+				2EA897BF1E31B73F002CA904 /* 3@2x.png */,
+				2EA897C11E31B792002CA904 /* 4@2x.png */,
+				2EA897C61E31B9B6002CA904 /* UO256.png */,
+			);
+			name = Iphoneimage;
+			sourceTree = "<group>";
+		};
 		2EB2A46F1E237EB5003F01DB /* deviceTimeList */ = {
 			isa = PBXGroup;
 			children = (
@@ -1766,6 +1791,9 @@
 		F64EF7F81D8FB710003C1C48 /* IphoneControllers */ = {
 			isa = PBXGroup;
 			children = (
+				2EA897C31E31B8FA002CA904 /* Iphoneimage */,
+				2EA897AA1E31B25E002CA904 /* YZNavigationMenuView.h */,
+				2EA897AB1E31B25E002CA904 /* YZNavigationMenuView.m */,
 				F64EF7F91D8FB738003C1C48 /* IphoneMainController.h */,
 				F64EF7FA1D8FB738003C1C48 /* IphoneMainController.m */,
 				F64EF7FC1D8FBCC1003C1C48 /* IphoneSceneController.h */,
@@ -2012,6 +2040,11 @@
 				0F7E2E161D581AC400A47D5D /* iPhone.storyboard in Resources */,
 				0F032D5A1CC9B12700D1920D /* Assets.xcassets in Resources */,
 				F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */,
+				2EA897BE1E31B59B002CA904 /* 2@2x.png in Resources */,
+				2EA897C21E31B792002CA904 /* 4@2x.png in Resources */,
+				2EA897C01E31B73F002CA904 /* 3@2x.png in Resources */,
+				2EA897BC1E31B53E002CA904 /* 1@2x.png in Resources */,
+				2EA897C71E31B9B6002CA904 /* UO256.png in Resources */,
 				CDF90B451E2F4B14009043B9 /* planeScene.plist in Resources */,
 				F668AF251D53413B0079587F /* Main.storyboard in Resources */,
 				0FE78BB61DCFB091009B4767 /* Images.xcassets in Resources */,
@@ -2333,6 +2366,7 @@
 				F62CFA411DAC699D006410F7 /* IphoneTypeView.m in Sources */,
 				0F1F3BCA1D2B85EA00B2641C /* MBProgressHUD+NJ.m in Sources */,
 				F625A61B1D4C99EC00B696E5 /* RoomListController.m in Sources */,
+				2EA897AC1E31B25E002CA904 /* YZNavigationMenuView.m in Sources */,
 				0FC119771D6FE5E0001DA19A /* Screen.m in Sources */,
 				F62E05631DAB39F80096BF00 /* IphoneProfileController.m in Sources */,
 				F63AE0031D11319C00BE17DC /* FMCollectionViewCell.m in Sources */,

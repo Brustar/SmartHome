@@ -65,8 +65,8 @@
     [super viewDidLoad];
     self.title = @"推送控制";
     self.automaticallyAdjustsScrollViewInsets = NO;
-    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
-    self.navigationItem.leftBarButtonItem = returnItem;
+//    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
+//    self.navigationItem.leftBarButtonItem = returnItem;
     self.coverView.hidden = YES;
     self.pushTypeView.hidden = YES;
     [self sendRequest];
@@ -237,10 +237,10 @@
     }    
 }
 
-- (IBAction)clickRetunBtn:(id)sender {
-    
-    [self.navigationController popViewControllerAnimated:NO];
-}
+//- (IBAction)clickRetunBtn:(id)sender {
+//    
+//    [self.navigationController popViewControllerAnimated:NO];
+//}
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {

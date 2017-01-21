@@ -50,8 +50,8 @@
     [super viewDidLoad];
     self.title = @"系统设置";
     self.automaticallyAdjustsScrollViewInsets = NO;
-    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
-    self.navigationItem.leftBarButtonItem = returnItem;
+//    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
+//    self.navigationItem.leftBarButtonItem = returnItem;
 
     self.tableView.tableFooterView = [UIView new];
     [self sendRequest];
@@ -145,9 +145,9 @@
     [http sendPost:url param:dict];
     }
 }
-- (IBAction)clickRetunBtn:(id)sender {
-    [self.navigationController popViewControllerAnimated:NO];
-}
+//- (IBAction)clickRetunBtn:(id)sender {
+//    [self.navigationController popViewControllerAnimated:NO];
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

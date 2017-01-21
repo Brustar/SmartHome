@@ -11,5 +11,5 @@
 
 @property (nonatomic,strong) NSMutableArray *msgs;
 @property (nonatomic,strong) NSMutableSet * set;
-
+@property (nonatomic,assign) BOOL isShowCountLabel;
 @end

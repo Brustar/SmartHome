@@ -143,7 +143,7 @@
     self.deviceArrs = [NSMutableArray arrayWithArray:self.devices];
     [self.tableView reloadData];
     self.cell.repetitionLabel.text = [NSString stringWithFormat:@"%@",self.repeat.text];
-    self.cell.sceneTimeLabel.text =  [NSString stringWithFormat:@"%@-%@",self.startTime.text,self.endTime.text];
+    self.cell.sceneTimeLabel.text =  [NSString stringWithFormat:@"%@-%@",self.StartDayLael.text,self.endTime.text];
 //    [self.subTableView reloadData];
 }
 
@@ -216,7 +216,7 @@
     if (tableView == self.subTableView) {
         self.cell = [tableView dequeueReusableCellWithIdentifier:@"FixTimeListCell" forIndexPath:indexPath];
        
-        self.cell.sceneTimeLabel.text = [NSString stringWithFormat:@"%@-%@",self.startTime.text,self.endTime.text];
+        self.cell.sceneTimeLabel.text = [NSString stringWithFormat:@"%@-%@",self.StartDayLael.text,self.endTime.text];
         self.cell.repetitionLabel.text = [NSString stringWithFormat:@"%@",self.repeat.text];
 
         return self.cell;

@@ -19,6 +19,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.dataArr = [NSMutableArray arrayWithObjects:@"每周日",@"每周一",@"每周二",@"每周三",@"每周四",@"每周五",@"每周六", nil];
+     self.tableview.scrollEnabled = NO;
     UIView *view = [[UIView alloc] init];
     [view setBackgroundColor:[UIColor clearColor]];
     self.tableview.tableFooterView = view;
@@ -36,8 +37,34 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
     }
     cell.textLabel.text = self.dataArr[indexPath.row];
+    [self sendNotification:indexPath.row select:0];
     return cell;
 
+}
+- (void)sendNotification:(NSInteger)week select:(NSInteger)select
+{
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"week"] = [NSString stringWithFormat:@"%ld", (long)week];
+    dict[@"select"] = [NSString stringWithFormat:@"%ld", (long)select];
+    
+    [center postNotificationName:@"SelectWeek" object:nil userInfo:dict];
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if(cell.accessoryType == UITableViewCellAccessoryNone)
+    {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        
+        [self sendNotification:indexPath.row select:1];
+    }else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        
+        [self sendNotification:indexPath.row select:0];
+    }
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

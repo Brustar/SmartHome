@@ -25,8 +25,8 @@
     [super viewDidLoad];
     self.title = @"关于我们";
     self.automaticallyAdjustsScrollViewInsets = NO;
-    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
-    self.navigationItem.leftBarButtonItem = returnItem;
+//    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
+//    self.navigationItem.leftBarButtonItem = returnItem;
 
     self.tableView.tableHeaderView = self.headView;
     
@@ -47,9 +47,9 @@
     return cell;
 }
 
-- (IBAction)clickRetunBtn:(id)sender {
-    [self.navigationController popViewControllerAnimated:NO];
-}
+//- (IBAction)clickRetunBtn:(id)sender {
+//    [self.navigationController popViewControllerAnimated:NO];
+//}
 
 
 - (void)didReceiveMemoryWarning {
