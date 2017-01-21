@@ -1348,10 +1348,17 @@
 //根据场景ID得到改场景下的所有的设备ID
 +(NSArray *)getDeviceIDsBySeneId:(int)SceneId
 {
-    
-    NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,SceneId];
-    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
-    NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfFile:scenePath];
+    NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"255_216" ofType:@"plist"]];
+    DeviceInfo *device = [DeviceInfo defaultManager];
+    NSString *hostID = @"255";
+    if ([device.db isEqualToString:SMART_DB]) {
+        hostID = SCENE_FILE_NAME;
+        
+        //读取场景文件
+        NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",hostID,SceneId];
+        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+        dictionary = [[NSDictionary alloc] initWithContentsOfFile:scenePath];
+    }
   
     if(dictionary)
     {
@@ -1579,10 +1586,11 @@
         @"INSERT INTO \"Devices\" VALUES(46,'主卧空调',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0010','31',2,'空调','环境',255,'',NULL);",
         @"INSERT INTO \"Devices\" VALUES(47,'主卧投影',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0011','16',3,'投影','影音',255,'',NULL);",
         @"INSERT INTO \"Devices\" VALUES(48,'主卧幕布',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0012','17',3,'幕布','影音',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(49,'测试摄像头',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0013','45',4,'摄像头','安防',255,'rtsp://admin:stone123@flysun158.6655.la:8184',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(49,'测试摄像头',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0013','45',4,'摄像头','安防',255,'rtsp://admin:stone123@flysun158.6655.la:8184','rtsp://admin:stone123@flysun158.6655.la:8184');",
         @"INSERT INTO \"Devices\" VALUES(50,'主卧纱帘',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'02BA','21',1,'开合帘','照明',255,'',NULL);",
         @"INSERT INTO \"Devices\" VALUES(70,'主卧智能门锁',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0033','40',4,'智能门锁','安防',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(71,'主卧智能插座',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0034','41',5,'智能插座','智能单品',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(71,'智能浇花',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0034','41',5,'智能单品','智能单品',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(100,'智能投食',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0036','41',5,'智能单品','智能单品',255,'',NULL);",
         @"INSERT INTO \"Devices\" VALUES(73,'主卧功放',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0014','18',3,'功放','影音',255,'',NULL);",
         @"INSERT INTO \"Devices\" VALUES(37,'主卧开关灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0101','01',1,'开关灯','照明',255,'',NULL);",
         @"INSERT INTO \"Devices\" VALUES(64,'车库温湿度感应器',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0027','50',6,'温湿度感应器','感应器',255,'',NULL);",
@@ -1602,11 +1610,11 @@
         }
         //insert scenes
             sqls=@[@"INSERT INTO \"Scenes\" VALUES(10,'DVD','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/moving.jpg',1,1,'0003',2,0,255);",
-            @"INSERT INTO \"Scenes\" VALUES(11,'工作','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/relax.jpg',2,1,'0004',0,0,255);",
-            @"INSERT INTO \"Scenes\" VALUES(12,'午休','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/sleep.jpg',3,1,'0005',2,0,255);",
-            @"INSERT INTO \"Scenes\" VALUES(13,'离开','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/away.jpg',1,1,'0006',2,0,255);",
-            @"INSERT INTO \"Scenes\" VALUES(14,'欢迎','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',2,1,'0001',2,0,255);",
-            @"INSERT INTO \"Scenes\" VALUES(15,'投影','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',3,1,'0002',2,0,255);"];
+            @"INSERT INTO \"Scenes\" VALUES(219,'工作','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/relax.jpg',2,1,'0004',0,0,255);",
+            @"INSERT INTO \"Scenes\" VALUES(220,'午休','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/sleep.jpg',3,1,'0005',2,0,255);",
+            @"INSERT INTO \"Scenes\" VALUES(221,'离开','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/away.jpg',1,1,'0006',2,0,255);",
+            @"INSERT INTO \"Scenes\" VALUES(216,'欢迎','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',2,1,'0001',2,0,255);",
+            @"INSERT INTO \"Scenes\" VALUES(217,'投影','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',3,1,'0002',2,0,255);"];
         
             for (NSString *sql in sqls) {
                 BOOL result=[db executeUpdate:sql];

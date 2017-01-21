@@ -101,11 +101,11 @@
     }
     
     //自定义bar item
-    UIButton *customItem = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    /*UIButton *customItem = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
     [customItem setImage:[UIImage imageNamed:@"fixTime.png"] forState:UIControlStateNormal];
     [customItem addTarget:self action:@selector(fetchTimerList) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:customItem];
-    self.navigationItem.rightBarButtonItem = rightItem;
+    self.navigationItem.rightBarButtonItem = rightItem;*/
 }
 
 - (void)fetchTimerList {

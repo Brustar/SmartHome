@@ -249,6 +249,12 @@
         if (!self.subTypeArr) {
             return;
         }
+        
+        DeviceInfo *device = [DeviceInfo defaultManager];
+        if (![device.db isEqualToString:SMART_DB]) {
+            return;
+        }
+        
         //灯光，窗帘，DVD，网络电视
         NSString *typeName = self.subTypeArr[indexPath.row];
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -388,6 +394,13 @@
 }
 
 - (IBAction)saveScene:(UIBarButtonItem *)sender {
+    
+    DeviceInfo *device = [DeviceInfo defaultManager];
+    if (![device.db isEqualToString:SMART_DB]) { //体验版：直接保存，不弹出菜单
+        [MBProgressHUD showSuccess:@"保存成功"];
+        return;
+    }
+    
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请选择" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *saveAction = [UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

@@ -272,6 +272,14 @@
         [MBProgressHUD showError:@"场景名不能为空"];
         return;
     }
+    
+    DeviceInfo *device = [DeviceInfo defaultManager];
+    if (![device.db isEqualToString:SMART_DB]) {
+        self.saveSceneView.hidden = YES;
+        [MBProgressHUD showSuccess:@"保存成功"];
+        return;
+    }
+    
     self.saveSceneView.hidden = YES;
     
     NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
