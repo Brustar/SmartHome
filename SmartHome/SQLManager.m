@@ -268,10 +268,10 @@
         
         DeviceInfo *device = [DeviceInfo defaultManager];
         if ([device.db isEqualToString:SMART_DB]) {
-            sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld and masterID = '%ld' and typeName <> 'FM' and typeName <> '幕布'",(long)roomID,[[DeviceInfo defaultManager] masterID]];
+            sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld and masterID = '%ld' and typeName <> 'FM' and typeName <> '幕布' and typeName <> 'PM2.5监测' and typeName <> '温湿度感应器' and typeName <> '动静感应器' and typeName <> '照度感应器' and typeName <> '燃气监测' and typeName <> '噪音感应器' and typeName <> '烟雾感应器'",(long)roomID,[[DeviceInfo defaultManager] masterID]];
         }else {
             
-            sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld and masterID = '%ld' and typeName <> 'FM' and typeName <> '幕布'",(long)roomID, 255l];
+            sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld and masterID = '%ld' and typeName <> 'FM' and typeName <> '幕布' and typeName <> 'PM2.5监测' and typeName <> '温湿度感应器' and typeName <> '动静感应器' and typeName <> '照度感应器' and typeName <> '燃气监测' and typeName <> '噪音感应器' and typeName <> '烟雾感应器'",(long)roomID, 255l];
         }
         
         

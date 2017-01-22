@@ -30,7 +30,7 @@
 #import <CoreLocation/CoreLocation.h>
 
 @class SystemInfomationController;
-@interface LoginController ()<QRCodeReaderDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate>
+@interface LoginController ()<QRCodeReaderDelegate,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *user;
 @property (weak, nonatomic) IBOutlet UITextField *pwd;
@@ -65,6 +65,10 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.user.delegate = self;
+    self.pwd.delegate = self;
+    
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
         self.widthConstraint.constant = [[UIScreen mainScreen] bounds].size.width *0.8;
@@ -633,6 +637,31 @@
     self.coverView.hidden = YES;
     self.registerView.hidden = YES;
     [self.view endEditing:YES];
+}
+
+#pragma mark - UITextFieldDelegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    [UIView animateWithDuration:0.2 animations:^(){
+    
+        self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-130, self.view.frame.size.width, self.view.frame.size.height);
+    
+    
+    } completion:^(BOOL finished){
+    
+    
+    }];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [UIView animateWithDuration:0.2 animations:^(){
+        
+        self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+130, self.view.frame.size.width, self.view.frame.size.height);
+        
+        
+    } completion:^(BOOL finished){
+        
+        
+    }];
 }
 
 #pragma  mark -UITableViewDelegate

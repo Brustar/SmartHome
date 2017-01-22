@@ -223,7 +223,7 @@
     
     DeviceInfo *device = [DeviceInfo defaultManager];
     if ([device.db isEqualToString:SMART_DB]) {
-        self.clickFixTimeBtn.hidden = NO;
+        self.clickFixTimeBtn.hidden = YES;
     }else {
         self.clickFixTimeBtn.hidden = YES;
     }

@@ -137,6 +137,20 @@
     [self.tableView reloadData];
     [self.subDeviceTableView reloadData];
     
+    
+    //默认选中第一行
+    NSIndexPath *ip=[NSIndexPath indexPathForRow:0 inSection:0];
+    
+    if ([self.subDeviceTableView.delegate respondsToSelector:@selector(tableView:willSelectRowAtIndexPath:)]) {
+        [self.subDeviceTableView.delegate tableView:self.subDeviceTableView willSelectRowAtIndexPath:ip];
+    }
+    
+    [self.subDeviceTableView selectRowAtIndexPath:ip animated:YES scrollPosition:UITableViewScrollPositionNone];
+    
+    if ([self.subDeviceTableView.delegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)]) {
+        [self.subDeviceTableView.delegate tableView:self.subDeviceTableView didSelectRowAtIndexPath:ip];
+    }
+    
    
 }
 -(void)viewWillAppear:(BOOL)animated
