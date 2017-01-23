@@ -14,5 +14,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *MasterIDLb;
 @property (nonatomic,strong) NSString *suerTypeStr;
 @property (nonatomic,assign) int masterStr;
+@property (weak, nonatomic) IBOutlet UIView *topView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topViewLayout;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightLayou;
 
 @end

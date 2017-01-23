@@ -81,7 +81,7 @@
     [self setupSegment];
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
-    self.scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+//    self.scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
 }
 
 
@@ -218,13 +218,16 @@
 
 -(IBAction)save:(id)sender
 {
-    [self switchDevice:sender];
-    
-    UISwitch *sw=(UISwitch *)sender;
+//    [self switchDevice:sender];
+    if ([sender isEqual:self.switchView]) {
+        NSData *data=[[DeviceInfo defaultManager] toogle:self.switchView.isOn deviceID:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
+//    UISwitch *sw=(UISwitch *)sender;
     Plugin *device=[[Plugin alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
-    [device setSwitchon: sw.isOn];
-    
+    [device setSwitchon: self.switchView.isOn];
     
     [_scene setSceneID:[self.sceneid intValue]];
     [_scene setRoomID:self.roomID];
@@ -241,9 +244,22 @@
 -(void)recv:(NSData *)data withTag:(long)tag
 {
     NSLog(@"data:%@,tag:%ld",data,tag);
-    if (tag==1) {
-        [self discoveryDevice:data];
+//    if (tag==1) {
+//        [self discoveryDevice:data];
+//    }
+    Proto proto=protocolFromData(data);
+    
+    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
+        return;
     }
+    
+    if (tag==0 && (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON)) {
+        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+        if ([devID intValue]==[self.deviceid intValue]) {
+            self.switchView.on=proto.action.state;
+        }
+    }
+    
 }
 
 
@@ -261,10 +277,17 @@
         PluginCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
         self.cell = cell;
         cell.label.text = self.plugNames[self.segment.selectedSegmentIndex];
-        
-        cell.power.tag=indexPath.row;
-//        cell.power.on=[self.characteristic.value boolValue];
-        cell.power.on = NO;
+        self.switchView = cell.power;
+//        cell.power.tag=indexPath.row;
+        _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+        if ([self.sceneid intValue]>0) {
+            for(int i=0;i<[_scene.devices count];i++)
+            {
+                if ([[_scene.devices objectAtIndex:i] isKindOfClass:[Plugin class]]) {
+                    cell.power.on=((Plugin *)[_scene.devices objectAtIndex:i]).switchon;
+                }
+            }
+        }
         [cell.power addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
         return  cell;
     }else{
@@ -287,12 +310,12 @@
 
 - (IBAction)selectedSingProduct:(UISegmentedControl *)sender {
     
-    self.cell.label.text = self.devices[sender.selectedSegmentIndex];
+     UISegmentedControl *segment = (UISegmentedControl*)sender;
+    self.cell.label.text = self.plugNames[segment.selectedSegmentIndex];
     self.deviceid = [self.plugDeviceIds objectAtIndex: self.segment.selectedSegmentIndex];
     [self.tableView reloadData];
+
 }
-
-
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -316,7 +339,7 @@
 
 -(void)dealloc
 {
-    [[SocketManager defaultManager] cutOffSocket];
+//    [[SocketManager defaultManager] cutOffSocket];
 }
 
 @end

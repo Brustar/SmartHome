@@ -59,7 +59,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cc7-zd-4DL">
                                                     <rect key="frame" x="0.0" y="0.0" width="174" height="175"/>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subImage" translatesAutoresizingMaskIntoConstraints="NO" id="Vas-oK-wnf">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UO90" translatesAutoresizingMaskIntoConstraints="NO" id="Vas-oK-wnf">
                                                     <rect key="frame" x="28" y="28" width="118" height="119"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="tintColor" red="0.39215686274509803" green="0.29411764705882354" blue="0.3411764705882353" alpha="1" colorSpace="calibratedRGB"/>
@@ -5019,6 +5019,7 @@
     <resources>
         <image name="DVD-1" width="130" height="130"/>
         <image name="PL" width="724" height="470"/>
+        <image name="UO90" width="128" height="128"/>
         <image name="add" width="64" height="64"/>
         <image name="aire-6" width="130" height="130"/>
         <image name="broadcast" width="32" height="32"/>
@@ -5040,7 +5041,6 @@
         <image name="rightPic" width="32" height="32"/>
         <image name="search" width="32" height="32"/>
         <image name="startScene" width="32" height="32"/>
-        <image name="subImage" width="128" height="128"/>
         <image name="switch" width="32" height="32"/>
         <image name="tv_down" width="10" height="7"/>
         <image name="tv_left" width="9" height="10"/>

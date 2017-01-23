@@ -148,8 +148,6 @@
         DetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         self.cell = cell;
         cell.label.text = self.amplifierNames[self.segment.selectedSegmentIndex];
-        
-        
         self.switchView = cell.power;//[[UISwitch alloc] initWithFrame:CGRectZero];
         _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
         if ([self.sceneid intValue]>0) {
@@ -200,6 +198,8 @@
     self.cell.label.text = self.amplifierNames[segment.selectedSegmentIndex];
     self.deviceid=[self.amplifierIDArr objectAtIndex:self.segment.selectedSegmentIndex];
     [self.tableView reloadData];
+    
+    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

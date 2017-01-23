@@ -8,6 +8,7 @@
 
 #import "WebManager.h"
 #import "ECloudTabBarController.h"
+#import "RegisterPhoneNumController.h"
 
 
 @implementation WebManager
@@ -128,6 +129,8 @@
         
                ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"RegisterPhoneNumController"];
         [self.navigationController pushViewController:ecloudVC animated:YES];
+//    RegisterPhoneNumController * regisVC = [RegisterPhoneNumController new];
+//    regisVC.heightLayou.constant = 90;
 //    }];
 }
 

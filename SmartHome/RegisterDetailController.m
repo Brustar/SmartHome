@@ -80,16 +80,17 @@
                     NSString *strTime = [NSString stringWithFormat:@" %.2d", seconds];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
-                        [UIView beginAnimations:nil context:nil];
-                        [UIView setAnimationDuration:1];
+//                        [UIView beginAnimations:nil context:nil];
+//                        [UIView setAnimationDuration:1];
                         [self.auothCodeBtn setTitle:[NSString stringWithFormat:@"重新获取(%@) ",strTime] forState:UIControlStateNormal];
-                        [UIView commitAnimations];
+//                        [UIView commitAnimations];
                         self.auothCodeBtn.userInteractionEnabled = NO;
                     });
                     timeout--;
                 }
             });
-        dispatch_resume(self._timer);}
+        dispatch_resume(self._timer);
+        }
         //点击验证码发送请求
         NSDictionary *dict = @{@"mobile":self.phoneStr};
         HttpManager *http = [HttpManager defaultManager];
@@ -154,6 +155,8 @@
             [MBProgressHUD showSuccess:@"验证码发送成功"];
         }else {
             [MBProgressHUD showError:@"验证码发送失败"];
+//            dispatch_suspend(self._timer);
+            
 //            [MBProgressHUD showError:responseObject[@"msg"]];
         }
     }else if(tag == 2){

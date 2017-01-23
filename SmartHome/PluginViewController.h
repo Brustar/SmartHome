@@ -15,6 +15,7 @@
 @property (nonatomic,assign) int roomID;
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic,weak) NSString *deviceid;
+@property (strong, nonatomic) IBOutlet UISwitch *switchView;
 /*
 @property (nonatomic, strong) HMHomeManager *homeManager;
 @property (nonatomic, strong) HMHome *primaryHome;
