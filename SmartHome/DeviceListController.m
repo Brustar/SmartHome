@@ -47,7 +47,7 @@
     _roomid = roomid;
     self.deviceTypes = [SQLManager deviceSubTypeByRoomId:_roomid];
    
-   // self.tableViewHight.constant = (self.deviceTypes.count +1) * self.tableView.rowHeight ;
+   // self.tableViewHight.constant = (self.deviceTypes.count +1) * self.tableView.rowHeight ;cctv
     if(self.isViewLoaded)
     {
         
@@ -272,6 +272,14 @@
         [MBProgressHUD showError:@"场景名不能为空"];
         return;
     }
+    
+    DeviceInfo *device = [DeviceInfo defaultManager];
+    if (![device.db isEqualToString:SMART_DB]) {
+        self.saveSceneView.hidden = YES;
+        [MBProgressHUD showSuccess:@"保存成功"];
+        return;
+    }
+    
     self.saveSceneView.hidden = YES;
     
     NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];

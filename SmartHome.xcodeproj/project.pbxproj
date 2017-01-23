@@ -144,6 +144,8 @@
 		2EEE536E1E309C5D0026F97D /* MyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EEE536D1E309C5D0026F97D /* MyView.m */; };
 		2EFFECA11E12161100C13D3E /* FixTimeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFFECA01E12161100C13D3E /* FixTimeListViewController.m */; };
 		CD43046F1E0B674000B594F4 /* FamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD43046E1E0B674000B594F4 /* FamilyViewController.m */; };
+		CD78A8301E3379C200060466 /* 255_221.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD78A82F1E3379C200060466 /* 255_221.plist */; };
+		CD78A8321E337C1600060466 /* 255_216.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD78A8311E337C1600060466 /* 255_216.plist */; };
 		CDF389221E305B4400657C8B /* breakdownlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF389211E305B4400657C8B /* breakdownlist.plist */; };
 		CDF389241E306D2400657C8B /* maintaininfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF389231E306D2400657C8B /* maintaininfo.plist */; };
 		CDF389261E30A31300657C8B /* energylist.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF389251E30A31300657C8B /* energylist.plist */; };
@@ -719,6 +721,8 @@
 		A4B2DBF5C92F57E3B7AD6AA3 /* libPods-SmartHome.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SmartHome.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD43046D1E0B674000B594F4 /* FamilyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyViewController.h; sourceTree = "<group>"; };
 		CD43046E1E0B674000B594F4 /* FamilyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyViewController.m; sourceTree = "<group>"; };
+		CD78A82F1E3379C200060466 /* 255_221.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 255_221.plist; sourceTree = "<group>"; };
+		CD78A8311E337C1600060466 /* 255_216.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 255_216.plist; sourceTree = "<group>"; };
 		CDF389211E305B4400657C8B /* breakdownlist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = breakdownlist.plist; sourceTree = "<group>"; };
 		CDF389231E306D2400657C8B /* maintaininfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = maintaininfo.plist; sourceTree = "<group>"; };
 		CDF389251E30A31300657C8B /* energylist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = energylist.plist; sourceTree = "<group>"; };
@@ -1192,6 +1196,8 @@
 		0F032D471CC9B12700D1920D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CD78A8311E337C1600060466 /* 255_216.plist */,
+				CD78A82F1E3379C200060466 /* 255_221.plist */,
 				CDF389331E30F27500657C8B /* userHabitList.plist */,
 				CDF389311E30EA8900657C8B /* hostUserList.plist */,
 				CDF3892F1E30E39500657C8B /* userList.plist */,
@@ -2060,6 +2066,7 @@
 				CDF3892A1E30AF9600657C8B /* msgTypeList.plist in Resources */,
 				CDF389341E30F27500657C8B /* userHabitList.plist in Resources */,
 				CDF90B431E2F0676009043B9 /* realScene.plist in Resources */,
+				CD78A8301E3379C200060466 /* 255_221.plist in Resources */,
 				CDF389281E30A91200657C8B /* energyDetail.plist in Resources */,
 				0FBEFE271D24A5020084244F /* netconfig.plist in Resources */,
 				F60FDB471D003FD500AB04BE /* CurtainTableViewCell.xib in Resources */,
@@ -2067,6 +2074,7 @@
 				0F7E2E161D581AC400A47D5D /* iPhone.storyboard in Resources */,
 				0F032D5A1CC9B12700D1920D /* Assets.xcassets in Resources */,
 				CDF3892C1E30B86500657C8B /* msgList.plist in Resources */,
+				CD78A8321E337C1600060466 /* 255_216.plist in Resources */,
 				CDF389321E30EA8900657C8B /* hostUserList.plist in Resources */,
 				CDF389301E30E39500657C8B /* userList.plist in Resources */,
 				F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */,

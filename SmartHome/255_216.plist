@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>devices</key>
+	<array>
+		<dict>
+			<key>deviceID</key>
+			<integer>65</integer>
+			<key>isPoweron</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>brightness</key>
+			<integer>50</integer>
+			<key>deviceID</key>
+			<integer>66</integer>
+			<key>isPoweron</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>deviceID</key>
+			<integer>67</integer>
+			<key>isPoweron</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>deviceID</key>
+			<integer>17</integer>
+			<key>volume</key>
+			<integer>50</integer>
+			<key>poweron</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>deviceID</key>
+			<integer>18</integer>
+			<key>dvolume</key>
+			<integer>50</integer>
+			<key>poweron</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>deviceID</key>
+			<integer>49</integer>
+			<key>waiting</key>
+			<true/>
+		</dict>
+	</array>
+	<key>masterID</key>
+	<integer>255</integer>
+	<key>isFavorite</key>
+	<false/>
+	<key>picName</key>
+	<string></string>
+	<key>readonly</key>
+	<true/>
+	<key>roomID</key>
+	<integer>4</integer>
+	<key>roomName</key>
+	<string></string>
+	<key>sceneID</key>
+	<integer>216</integer>
+	<key>sceneName</key>
+	<string>DVD</string>
+</dict>
+</plist>

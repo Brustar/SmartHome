@@ -25,6 +25,20 @@
     [self.deviceTypeTableView reloadData];
     [self.deviceSubTypeTableView reloadData];
     
+    //默认选中第一行
+    NSIndexPath *ip=[NSIndexPath indexPathForRow:0 inSection:0];
+    
+    if ([self.deviceSubTypeTableView.delegate respondsToSelector:@selector(tableView:willSelectRowAtIndexPath:)]) {
+        [self.deviceSubTypeTableView.delegate tableView:self.deviceSubTypeTableView willSelectRowAtIndexPath:ip];
+    }
+    
+    [self.deviceSubTypeTableView selectRowAtIndexPath:ip animated:YES scrollPosition:UITableViewScrollPositionNone];
+    
+    if ([self.deviceSubTypeTableView.delegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)]) {
+        [self.deviceSubTypeTableView.delegate tableView:self.deviceSubTypeTableView didSelectRowAtIndexPath:ip];
+    }
+    
+    
     //房间名
     self.navigationItem.title = [SQLManager getRoomNameByRoomID:self.roomID];
     
