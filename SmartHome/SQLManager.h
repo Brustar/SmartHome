@@ -13,6 +13,9 @@
 #define DIMMER @"调光灯"
 #define CURTAINS @"开合帘"
 #define LightDevice @"照明"
+#define AirDevice @"空调"
+#define ColourLight @"调色灯"
+#define OffOrOnLight @"开关灯" 
 
 @interface SQLManager : NSObject
 
@@ -101,6 +104,8 @@
 + (NSArray *)getDeviceByRoom:(int) roomID;
 //根据房间ID找开合帘
 + (NSArray *)getCurtainByRoom:(int) roomID;
+//根据房间ID找开合帘
++ (NSArray *)getAirDeviceByRoom:(int) roomID;
 //得到所有场景
 +(NSArray *)allSceneModels;
 +(NSArray *)devicesBySceneID:(int)sId;

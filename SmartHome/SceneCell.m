@@ -7,6 +7,7 @@
 //
 
 #import "SceneCell.h"
+#import "SceneManager.h"
 
 @interface SceneCell ()<UIGestureRecognizerDelegate>
 @property(nonatomic,strong)UILongPressGestureRecognizer *lgPress;
@@ -21,9 +22,14 @@
     [self addGestureRecognizer:self.lgPress];
 }
 - (IBAction)seleteSendPowBtn:(id)sender {
-    
-    [self.seleteSendPowBtn setTintColor:[UIColor redColor]];
-    
+    self.seleteSendPowBtn.selected = !self.seleteSendPowBtn.selected;
+    if (self.seleteSendPowBtn.selected) {
+          [self.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"closeScene"] forState:UIControlStateSelected];
+        [[SceneManager defaultManager] startScene:self.sceneID];
+    }else{
+         [self.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"startScene"] forState:UIControlStateNormal];
+        [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];
+    }
     
 }
 

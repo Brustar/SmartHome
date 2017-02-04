@@ -27,8 +27,10 @@
 #import "VoiceOrderController.h"
 #import "SearchViewController.h"
 #import "BgMusicController.h"
+#import "HostIDSController.h"
+#import "IphoneRoomListController.h"
 
-@interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,SceneCellDelegate,UIViewControllerPreviewingDelegate,YZNavigationMenuViewDelegate>
+@interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,SceneCellDelegate,UIViewControllerPreviewingDelegate,YZNavigationMenuViewDelegate,IphoneRoomListDelegate>
 @property (strong, nonatomic) IBOutlet IphoneRoomView *roomView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -43,6 +45,8 @@
 @property (nonatomic,strong) NSArray * arrayData;
 @property (nonatomic,assign) int sceneID;
 @property (nonatomic,strong) YZNavigationMenuView *menuView;
+@property (strong, nonatomic) IBOutlet UIButton *titleButton;
+@property(nonatomic,strong)HostIDSController *hostVC;
 
 @end
 
@@ -71,10 +75,31 @@
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemClicked:)];
     self.navigationItem.rightBarButtonItem = rightItem;
     self.navigationController.view.backgroundColor = [UIColor blueColor];
-    
+    [self setNavi];
     
 }
+-(void)setNavi
+{
+    
+    self.titleButton = [[UIButton alloc]init];
+    self.titleButton.frame = CGRectMake(0, 0, 180, 40);
+    NSArray *roomList = [SQLManager getAllRoomsInfo];
+    Room *room = roomList[0];
+    [self.titleButton setTitle:room.rName forState:UIControlStateNormal];
+    
+    [self.titleButton setImage:[UIImage imageNamed:@"down"] forState:UIControlStateNormal];
+    [self.titleButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    self.titleButton.imageEdgeInsets = UIEdgeInsetsMake(0, 160, 0, 0);
+    
+    [self.titleButton addTarget:self action:@selector(clickTitleButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.navigationItem.titleView = self.titleButton;
+}
 
+-(void)clickTitleButton:(UIButton *)button
+{
+    [self performSegueWithIdentifier:@"roomListSegue" sender:self];
+}
 //监听到网络状态改变
 - (void) reachabilityUpdate: (NSNotification* )note
 {
@@ -204,6 +229,7 @@
     cell.layer.cornerRadius = 20;
     cell.layer.masksToBounds = YES;
     self.scene = self.scenes[indexPath.row];
+    cell.sceneID = self.scene.sceneID;
     cell.tag = self.scene.sceneID;
     cell.scenseName.text = self.scene.sceneName;
     cell.delegate = self;
@@ -218,6 +244,7 @@
 {
     Scene *scene = self.scenes[indexPath.row];
     self.selectedSId = scene.sceneID;
+    
     SceneCell *cell = (SceneCell*)[collectionView cellForItemAtIndexPath:indexPath];
     
     [cell useLongPressGesture];

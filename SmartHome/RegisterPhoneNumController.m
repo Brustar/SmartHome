@@ -42,9 +42,15 @@
     
     self.viewWidthConstraint.constant = [[UIScreen mainScreen] bounds].size.width * 0.8;
     self.navigationController.navigationBarHidden = YES;
+        UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
+        self.navigationItem.leftBarButtonItem = returnItem;
   
 }
-
+-(void)clickRetunBtn:(UIBarButtonItem *)bbi
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self.navigationController popViewControllerAnimated:YES];
+}
 - (IBAction)DissmissBtn:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -87,10 +93,16 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    RegisterDetailController *vc = segue.destinationViewController;
-    vc.MasterID = self.masterStr;
-    vc.phoneStr = self.phoneNumTextField.text;
-    vc.userType = self.suerTypeStr;
+    if ([segue isEqual:@"registerDetaiSegue"]) {
+        RegisterDetailController *vc = segue.destinationViewController;
+        vc.MasterID = self.masterStr;
+        vc.phoneStr = self.phoneNumTextField.text;
+        vc.userType = self.suerTypeStr;
+    }else if ([segue isEqual:@"webViewManger"]){
+        
+        return;
+    }
+   
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -104,7 +116,9 @@
 }
 //加载到服务协议h5界面
 - (IBAction)serviceAgreement:(id)sender {
-    [WebManager show:@"http://115.28.151.85:8082/article.aspx?articleid=1"];
+//    [WebManager show:@"http://115.28.151.85:8082/article.aspx?articleid=1"];
+    
+    [self performSegueWithIdentifier:@"webViewManger" sender:self];
 }
 
 #pragma - mark UITextField代理

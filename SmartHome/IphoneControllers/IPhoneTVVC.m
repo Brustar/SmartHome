@@ -145,7 +145,8 @@
 -(IBAction)save:(id)sender
 {
     if ([sender isEqual:self.switchView]) {
-        NSData *data=[[DeviceInfo defaultManager] toogle:self.switchView.isOn deviceID:self.deviceid];
+//        NSData *data=[[DeviceInfo defaultManager] toogle:self.switchView.isOn deviceID:self.deviceid];
+        NSData * data = [[DeviceInfo defaultManager] switchProgram:self.switchView.isOn deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
     }

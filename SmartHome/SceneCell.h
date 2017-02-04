@@ -21,7 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *scenseName;
 @property (weak, nonatomic) IBOutlet UIButton *powerBtn;
 @property (weak, nonatomic) IBOutlet UIButton *deleteBtn;
-
+@property (nonatomic,assign) int sceneID;
 @property (nonatomic,weak) id<SceneCellDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UIButton *seleteSendPowBtn;
 

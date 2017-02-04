@@ -28,6 +28,8 @@
 #import "AmplifierController.h"
 #import "WindowSlidingController.h"
 #import "BgMusicController.h"
+
+
 @interface IphoneDeviceListController ()<IphoneRoomViewDelegate>
 
 

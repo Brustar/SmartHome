@@ -16,6 +16,7 @@
 #import "SocketManager.h"
 #import "PackManager.h"
 #import "CurtainTableViewCell.h"
+#import "IphoneAirCell.h"
 
 @interface IphoneLightController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet CurtainTableViewCell *cell;
@@ -23,11 +24,20 @@
 @property (nonatomic,strong) NSArray * lightArrs;
 @property (nonatomic,strong) NSArray * curtainArrs;
 @property (nonatomic,strong) NSString * deviceid;
+@property (nonatomic,strong) NSArray * airArrs;
 @property (strong, nonatomic) Scene *scene;
 
 @end
 
 @implementation IphoneLightController
+-(NSArray *)airArrs
+{
+    if (!_airArrs) {
+        _airArrs = [NSArray array];
+    }
+    
+    return _airArrs;
+}
 -(NSArray *)curtainArrs
 {
     if (!_curtainArrs) {
@@ -51,12 +61,14 @@
     UIView *view = [[UIView alloc] init];
     [view setBackgroundColor:[UIColor clearColor]];
     self.tableView.tableFooterView = view;
-    _lightArrs = [SQLManager getDeviceByRoom:self.roomID];
+    _lightArrs   = [SQLManager getDeviceByRoom:self.roomID];
     _curtainArrs = [SQLManager getCurtainByRoom:self.roomID];
+    _airArrs     = [SQLManager getAirDeviceByRoom:self.roomID];
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
-        [self.tableView registerNib:[UINib nibWithNibName:@"CurtainTableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainTableViewCell"];
-    
+    [self.tableView registerNib:[UINib nibWithNibName:@"CurtainTableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainTableViewCell"];
+
+    self.title = [SQLManager getRoomNameByRoomID:self.roomID];
 }
 -(IBAction)save:(id)sender
 {
@@ -94,7 +106,7 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
     
 }
 //-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -120,8 +132,11 @@
 {
     if (section==0) {
         return _lightArrs.count;
+    }else if (section == 1){
+        return _curtainArrs.count;
     }
-       return _curtainArrs.count;
+
+    return _airArrs.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -135,15 +150,20 @@
         cell.deviceid = self.lightArrs[indexPath.row];
         return cell;
 
+    }else if (indexPath.section == 1){
+        CurtainTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
+        Device * device = [SQLManager getDeviceWithDeviceID:[_curtainArrs[indexPath.row] intValue]];
+        cell.label.text = device.name;
+        cell.deviceId = _curtainArrs[indexPath.row];
+        
+        return cell;
     }
-    
-    CurtainTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
-    Device * device = [SQLManager getDeviceWithDeviceID:[_curtainArrs[indexPath.row] intValue]];
-    cell.label.text = device.name;
-    cell.deviceId = _curtainArrs[indexPath.row];
-    
-    return cell;
+    IphoneAirCell * cell = [tableView dequeueReusableCellWithIdentifier:@"IphoneAirCell" forIndexPath:indexPath];
+      Device *device = [SQLManager getDeviceWithDeviceID:[_airArrs[indexPath.row] intValue]];
+    cell.deviceNameLabel.text = device.name;
+    cell.deviceId = _airArrs[indexPath.row];
 
+    return cell;
 }
 
 

@@ -1116,6 +1116,31 @@
     [db close];
     return curtains;
 }
++ (NSArray *)getAirDeviceByRoom:(int) roomID
+{
+    NSMutableArray *curtains = [NSMutableArray new];
+    
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        DeviceInfo *device = [DeviceInfo defaultManager];
+        long masterID = 255l;
+        if ([device.db isEqualToString:SMART_DB]) {
+            masterID = [[DeviceInfo defaultManager] masterID];
+        }
+        
+        NSString *sql = [NSString stringWithFormat:@"SELECT id FROM devices where rid=%d and typename ='%@' and masterID = '%ld'",roomID,AirDevice, masterID];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+            [curtains addObject:[resultSet stringForColumn:@"id"]];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return curtains;
+
+}
 + (Device *)getDeviceWithDeviceID:(int) deviceID
 {
     Device *device = nil;

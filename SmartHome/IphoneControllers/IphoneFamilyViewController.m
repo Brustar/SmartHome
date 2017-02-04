@@ -251,14 +251,14 @@
         return;
     }
     if (tag==0) {
-//        if (proto.action.state==0x6A) {
-//            
-//            self.cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
-//        }
-//        if (proto.action.state==0x8A) {
-//            NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
-//            self.cell.humidityLabel.text = valueString;
-//        }
+        if (proto.action.state==0x6A) {
+            
+            self.cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
+        }
+        if (proto.action.state==0x8A) {
+            NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
+            self.cell.humidityLabel.text = valueString;
+        }
     if (proto.action.state ==0x7D) {
             if (proto.action.state == PROTOCOL_OFF) {
                 if (proto.deviceType == 01 || proto.deviceType == 02 || proto.deviceType == 03) {
