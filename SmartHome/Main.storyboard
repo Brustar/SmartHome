@@ -3599,19 +3599,18 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N4b-CN-sDX">
-                                        <rect key="frame" x="30" y="442" width="341" height="120"/>
+                                        <rect key="frame" x="88.5" y="273.5" width="223" height="120"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="恭喜陛下成功登基逸云智家" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Hi-SR-QAZ">
-                                                <rect key="frame" x="0.0" y="20" width="341" height="34"/>
-                                                <color key="backgroundColor" red="1" green="0.14126670590000001" blue="0.118762531" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="28"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="恭喜注册成功点击登录" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Hi-SR-QAZ">
+                                                <rect key="frame" x="0.0" y="20" width="223" height="26.5"/>
+                                                <color key="backgroundColor" red="0.88665550159999995" green="0.88665550159999995" blue="0.88665550159999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Xh-4w-CyT">
-                                                <rect key="frame" x="68" y="74" width="204" height="36"/>
-                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                                <state key="normal" title="开始雄霸天下吧！！！"/>
+                                                <rect key="frame" x="72.5" y="66.5" width="78" height="35"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                                <state key="normal" title="立即登录"/>
                                                 <connections>
                                                     <segue destination="Q07-ua-pDl" kind="show" id="fXQ-oW-cHz"/>
                                                 </connections>
@@ -3639,7 +3638,7 @@
                                 <color key="backgroundColor" red="0.86852824080000002" green="0.86852824080000002" blue="0.86852824080000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="N4b-CN-sDX" firstAttribute="centerX" secondItem="EfH-bz-9V6" secondAttribute="centerX" constant="12.5" id="B5k-4I-whF"/>
-                                    <constraint firstItem="N4b-CN-sDX" firstAttribute="centerY" secondItem="EfH-bz-9V6" secondAttribute="centerY" constant="168.5" id="Pay-GY-aMc"/>
+                                    <constraint firstItem="N4b-CN-sDX" firstAttribute="centerY" secondItem="EfH-bz-9V6" secondAttribute="centerY" id="Pay-GY-aMc"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -5548,7 +5547,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7jA-yB-cch" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="393" y="-3421"/>
+            <point key="canvasLocation" x="441" y="-3313"/>
         </scene>
         <!--主机ID列表-->
         <scene sceneID="B19-Yo-YEk">
@@ -8411,11 +8410,13 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="QfD-HS-G6N"/>
-        <segue reference="nIi-Kc-QDm"/>
-        <segue reference="PRs-sg-E1F"/>
-        <segue reference="5K5-wE-mZz"/>
+        <segue reference="tmA-nZ-aS8"/>
+        <segue reference="fXQ-oW-cHz"/>
+        <segue reference="vLw-tf-AJR"/>
         <segue reference="ya3-gG-p8O"/>
+        <segue reference="PRs-sg-E1F"/>
+        <segue reference="nIi-Kc-QDm"/>
+        <segue reference="5K5-wE-mZz"/>
         <segue reference="vdf-Gi-dZf"/>
         <segue reference="tt4-nB-rfe"/>
         <segue reference="Vzc-yi-Jnw"/>
@@ -8428,7 +8429,5 @@ layer.masksToBoundslayer.masksToBounds
         <segue reference="X9P-hg-DXo"/>
         <segue reference="a9T-LN-ZVX"/>
         <segue reference="YE7-iU-rxh"/>
-        <segue reference="fXQ-oW-cHz"/>
-        <segue reference="vLw-tf-AJR"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -791,7 +791,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Bc-RO-TA4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1042.5" y="-475.5"/>
+            <point key="canvasLocation" x="1106" y="-376"/>
         </scene>
         <!--场景列表-->
         <scene sceneID="XQD-mv-Dgi">
@@ -813,7 +813,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Aho-98-0G3">
-                                <rect key="frame" x="10" y="64" width="355" height="553"/>
+                                <rect key="frame" x="10" y="114" width="355" height="553"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="4Pz-do-UQt">
                                     <size key="itemSize" width="133" height="133"/>
@@ -895,25 +895,25 @@
                                 </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ueV-XT-5wh" customClass="IphoneRoomView">
-                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="50"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="vWh-YQ-O5f"/>
+                                    <constraint firstAttribute="height" constant="50" id="KZc-Kx-5nk"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="ueV-XT-5wh" firstAttribute="top" secondItem="Aho-98-0G3" secondAttribute="bottom" id="6XE-iW-gxd"/>
-                            <constraint firstAttribute="trailing" secondItem="ueV-XT-5wh" secondAttribute="trailing" id="6t8-xe-Rp8"/>
+                            <constraint firstItem="Aho-98-0G3" firstAttribute="top" secondItem="ueV-XT-5wh" secondAttribute="bottom" id="0f3-lV-PNa"/>
+                            <constraint firstAttribute="trailing" secondItem="ueV-XT-5wh" secondAttribute="trailing" id="AV5-cv-lgi"/>
                             <constraint firstItem="Hbp-wY-ZBG" firstAttribute="leading" secondItem="S0x-sS-gOT" secondAttribute="leading" id="BAB-Bn-Oyv"/>
-                            <constraint firstAttribute="trailing" secondItem="Aho-98-0G3" secondAttribute="trailing" constant="10" id="ID7-6O-sjJ"/>
+                            <constraint firstItem="Aho-98-0G3" firstAttribute="leading" secondItem="S0x-sS-gOT" secondAttribute="leading" constant="10" id="HIx-0i-mKc"/>
                             <constraint firstAttribute="trailing" secondItem="Hbp-wY-ZBG" secondAttribute="trailing" id="IEH-9D-fmp"/>
-                            <constraint firstItem="ueV-XT-5wh" firstAttribute="leading" secondItem="S0x-sS-gOT" secondAttribute="leading" id="JhQ-D4-CuM"/>
-                            <constraint firstItem="Aho-98-0G3" firstAttribute="leading" secondItem="S0x-sS-gOT" secondAttribute="leadingMargin" constant="-6" id="jsR-zW-o8g"/>
-                            <constraint firstItem="Aho-98-0G3" firstAttribute="top" secondItem="EeW-N4-5gV" secondAttribute="bottom" id="qYa-iU-LB7"/>
+                            <constraint firstItem="QbR-vL-uYg" firstAttribute="top" secondItem="Aho-98-0G3" secondAttribute="bottom" id="Xr9-JL-rdu"/>
+                            <constraint firstItem="ueV-XT-5wh" firstAttribute="leading" secondItem="S0x-sS-gOT" secondAttribute="leading" id="abt-ne-SlE"/>
+                            <constraint firstItem="ueV-XT-5wh" firstAttribute="top" secondItem="EeW-N4-5gV" secondAttribute="bottom" id="i6k-hX-8O9"/>
+                            <constraint firstAttribute="trailing" secondItem="Aho-98-0G3" secondAttribute="trailing" constant="10" id="pWw-dL-zhh"/>
                             <constraint firstItem="Hbp-wY-ZBG" firstAttribute="top" secondItem="EeW-N4-5gV" secondAttribute="bottom" id="sHW-Ai-SEY"/>
-                            <constraint firstItem="QbR-vL-uYg" firstAttribute="top" secondItem="ueV-XT-5wh" secondAttribute="bottom" id="tlX-j1-Gm4"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="XoG-g2-KYf">
@@ -947,7 +947,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U47-Xi-iD1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2082" y="-252"/>
+            <point key="canvasLocation" x="2081.5" y="-252.5"/>
         </scene>
         <!--添加场景定时-->
         <scene sceneID="kNF-ul-FTy">
@@ -2788,14 +2788,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gov-9L-qGq">
-                                <rect key="frame" x="0.0" y="144" width="375" height="473"/>
+                                <rect key="frame" x="0.0" y="114" width="375" height="503"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPQ-5e-iR2" customClass="IphoneRoomView">
-                                <rect key="frame" x="0.0" y="64" width="375" height="80"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="50"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="e2h-Zn-7EH"/>
+                                    <constraint firstAttribute="height" constant="50" id="e2h-Zn-7EH"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cph-wv-9vg" customClass="IphoneRoomView">
@@ -5266,9 +5266,9 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="qN8-z6-Gb7"/>
-        <segue reference="aTH-RA-7NZ"/>
-        <segue reference="TVe-8G-kwO"/>
+        <segue reference="lPv-wZ-EAG"/>
+        <segue reference="WeN-Qz-0Az"/>
         <segue reference="YfK-Z8-Yeo"/>
-        <segue reference="J5F-aP-6iz"/>
+        <segue reference="TVe-8G-kwO"/>
     </inferredMetricsTieBreakers>
 </document>

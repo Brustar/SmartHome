@@ -526,7 +526,7 @@
     }
 }
 
--(void)goToViewController;
+-(void)goToViewController
 {
     ECloudTabBarController *ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ECloudTabBarController"];
     [self presentViewController:ecloudVC animated:YES completion:nil];

@@ -28,9 +28,9 @@
 #import "SearchViewController.h"
 #import "BgMusicController.h"
 #import "HostIDSController.h"
-#import "IphoneRoomListController.h"
+//#import "IphoneRoomListController.h"
 
-@interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,SceneCellDelegate,UIViewControllerPreviewingDelegate,YZNavigationMenuViewDelegate,IphoneRoomListDelegate>
+@interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,SceneCellDelegate,UIViewControllerPreviewingDelegate,YZNavigationMenuViewDelegate>
 @property (strong, nonatomic) IBOutlet IphoneRoomView *roomView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -75,7 +75,7 @@
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemClicked:)];
     self.navigationItem.rightBarButtonItem = rightItem;
     self.navigationController.view.backgroundColor = [UIColor blueColor];
-    [self setNavi];
+//    [self setNavi];
     
 }
 -(void)setNavi

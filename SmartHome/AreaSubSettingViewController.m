@@ -216,7 +216,7 @@
         cell.exchangeSwitch.on = YES;
     }else {
         cell.exchangeSwitch.on = NO;
-        cell.hidden = YES;
+//        cell.hidden = YES;
     }
     return cell;
     

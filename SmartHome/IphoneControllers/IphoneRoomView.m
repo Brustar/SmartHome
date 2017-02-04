@@ -51,7 +51,9 @@
         } else {
             button = [[UIButton alloc] init];
             [button addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
-            [button setTitleColor:[UIColor redColor] forState:UIControlStateDisabled];
+            [button setTitleColor:[UIColor colorWithRed:80/255.0 green:183/255.0 blue:226/255.0 alpha:1] forState:UIControlStateDisabled];
+            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            button.titleLabel.font = [UIFont systemFontOfSize:15];
             [self.btns addObject:button];
             [self.sv addSubview:button];
         }
@@ -136,7 +138,7 @@
         CGFloat buttonX = scrollW;
         
         button.frame = CGRectMake(buttonX, buttonY, buttonW, buttonH);
-        [button setBackgroundColor:[UIColor lightGrayColor]];
+        [button setBackgroundColor:[UIColor colorWithRed:239/255.0 green:239/255.0 blue:244/255.0 alpha:1]];
         
         scrollW += buttonW;
     }
