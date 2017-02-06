@@ -251,6 +251,11 @@
         return;
     }
     if (tag==0) {
+        //缓存设备当前状态
+        if (proto.cmd==0x01) {
+            [SQLManager addStates:proto.deviceID onoff:proto.action.RValue];
+        }
+        
         if (proto.action.state==0x6A) {
             
             self.cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
@@ -259,7 +264,7 @@
             NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
             self.cell.humidityLabel.text = valueString;
         }
-    if (proto.action.state ==0x7D) {
+        if (proto.action.state ==0x7D) {
             if (proto.action.state == PROTOCOL_OFF) {
                 if (proto.deviceType == 01 || proto.deviceType == 02 || proto.deviceType == 03) {
                     self.cell.lightImageVIew.hidden = YES;

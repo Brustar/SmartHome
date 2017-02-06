@@ -253,6 +253,10 @@
         return;
     }
     
+    if(proto.cmd == 0x01){
+        
+    }
+    
     if (tag==0 && (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON)) {
         NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
         if ([devID intValue]==[self.deviceid intValue]) {

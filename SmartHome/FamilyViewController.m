@@ -270,7 +270,8 @@
         if (proto.action.state==0x8A) {
             NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
             self.cell.humidityLabel.text = valueString;
-        }if (proto.action.state==0x00) {
+        }
+        if (proto.action.state==0x00) {
             for (Device * device in self.deviceArr) {
                 if (device.hTypeId == 01 || device.hTypeId == 02 || device.hTypeId == 03) {
                     self.cell.lightImageVIew.hidden = YES;
@@ -287,22 +288,10 @@
                 }
             }
             
-        }if (proto.action.state==0x01) {
-            for (Device * device in self.deviceArr) {
-                if (device.hTypeId == 01 || device.hTypeId == 02 || device.hTypeId == 03) {
-                    self.cell.lightImageVIew.hidden = NO;
-                }else if (device.hTypeId == 21 || device.hTypeId == 22){
-                    self.cell.curtainImageView.hidden = NO;
-                }else if (device.hTypeId == 12){
-                    self.cell.TVImageView.hidden = NO;
-                }else if (device.hTypeId == 13){
-                    self.cell.DVDImageView.hidden = NO;
-                }else if (device.hTypeId == 14){
-                    self.cell.musicImageVIew.hidden = NO;
-                }else if (device.hTypeId == 31){
-                    self.cell.airImageVIew.hidden = NO;
-                }
-            }
+        }
+        //缓存设备当前状态
+        if (proto.cmd==0x01) {
+            [SQLManager addStates:proto.deviceID onoff:proto.action.RValue];
         }
     }
 }

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "FMDatabase.h"
 #import "Device.h"
+#import "Aircon.h"
 
 #define DIMMER @"调光灯"
 #define CURTAINS @"开合帘"
@@ -139,5 +140,10 @@
 //编辑fm
 +(BOOL)getAllChangeChannelForFavoritedNewName:(NSString *)newName FmId:(NSInteger)fmId;
 +(NSString *)getDevicePicByID:(int)sceneID;
+
++ (BOOL) addStates:(int)deviceID onoff:(BOOL)state;
++ (BOOL) queryState:(int)deviceID;
++ (BOOL) addExtraStates:(Aircon *)airCon;
++ (Aircon *) queryExtraState:(int)deviceID;
 
 @end
