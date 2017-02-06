@@ -291,7 +291,7 @@
         }
         //缓存设备当前状态
         if (proto.cmd==0x01) {
-            [SQLManager addStates:proto.deviceID onoff:proto.action.RValue];
+            //[SQLManager addStates:proto.deviceID onoff:proto.action.RValue];
         }
     }
 }

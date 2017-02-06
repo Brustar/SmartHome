@@ -183,6 +183,21 @@
     return dataFromProtocol(proto);
 }
 
+-(NSData *)query:(NSString *)deviceID
+{
+    Proto proto=createProto();
+
+    proto.cmd=0x01;
+    proto.deviceType=0x00;
+    NSString *enumber=[SQLManager getENumber:[deviceID integerValue]];
+    proto.deviceID=CFSwapInt16BigToHost([PackManager NSDataToUint16:enumber]);
+    proto.action.state=0x00;
+    proto.action.RValue=0x00;
+    proto.action.G=0x00;
+    proto.action.B=0x00;
+    return dataFromProtocol(proto);
+}
+
 #pragma mark - public
 //TV,DVD,NETV,BGMusic
 -(NSData *) previous:(NSString *)deviceID

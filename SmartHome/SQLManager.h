@@ -140,10 +140,10 @@
 //编辑fm
 +(BOOL)getAllChangeChannelForFavoritedNewName:(NSString *)newName FmId:(NSInteger)fmId;
 +(NSString *)getDevicePicByID:(int)sceneID;
-
+/*
 + (BOOL) addStates:(int)deviceID onoff:(BOOL)state;
 + (BOOL) queryState:(int)deviceID;
 + (BOOL) addExtraStates:(Aircon *)airCon;
 + (Aircon *) queryExtraState:(int)deviceID;
-
+*/
 @end

@@ -1526,10 +1526,10 @@
         NSString *sqlChannel=@"CREATE TABLE IF NOT EXISTS Channels (\"id\" INTEGER PRIMARY KEY  NOT NULL  UNIQUE ,\"eqId\" INTEGER,\"channelValue\" INTEGER,\"cNumber\" INTEGER, \"Channel_name\" TEXT,\"Channel_pic\" TEXT, \"parent\" CHAR(2) NOT NULL  DEFAULT TV, \"isFavorite\" BOOL DEFAULT 0, \"eqNumber\" TEXT,\"masterID\" TEXT)";
         NSString *sqlDevice=@"CREATE TABLE IF NOT EXISTS Devices(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"sn\" TEXT, \"birth\" DATETIME, \"guarantee\" DATETIME, \"model\" TEXT, \"price\" FLOAT, \"purchase\" DATETIME, \"producer\" TEXT, \"gua_tel\" TEXT, \"power\" INTEGER, \"current\" FLOAT, \"voltage\" INTEGER, \"protocol\" TEXT, \"rID\" INTEGER, \"eNumber\" TEXT, \"htypeID\" TEXT, \"subTypeId\" INTEGER, \"typeName\" TEXT, \"subTypeName\" TEXT, \"masterID\" TEXT, \"icon_url\" TEXT, \"camera_url\" TEXT)";
         NSString *sqlScene=@"CREATE TABLE IF NOT EXISTS \"Scenes\" (\"ID\" INT PRIMARY KEY  NOT NULL ,\"NAME\" TEXT NOT NULL ,\"roomName\" TEXT,\"pic\" TEXT DEFAULT (null) ,\"rId\" INTEGER,\"sType\" INTEGER, \"snumber\" TEXT,\"isFavorite\" BOOL,\"totalVisited\" INTEGER,\"masterID\" TEXT)";
-        NSString *sqlState = @"CREATE TABLE \"States\" (\"id\" INTEGER PRIMARY KEY  NOT NULL , \"deviceID\" INTEGER, \"on_off\" BOOL)";
-        NSString *sqlExtra = @"CREATE TABLE \"Extra_states\" (\"deviceID\" INTEGER, \"temperature\" INTEGER, \"wind_direction\" INTEGER,\"wind_level\" INTEGER, \"mode\" INTEGER, \"timing\" INTEGER)";
+        //NSString *sqlState = @"CREATE TABLE \"States\" (\"id\" INTEGER PRIMARY KEY  NOT NULL , \"deviceID\" INTEGER, \"on_off\" BOOL)";
+        //NSString *sqlExtra = @"CREATE TABLE \"Extra_states\" (\"deviceID\" INTEGER, \"temperature\" INTEGER, \"wind_direction\" INTEGER,\"wind_level\" INTEGER, \"mode\" INTEGER, \"timing\" INTEGER)";
         
-        NSArray *sqls=@[sqlRoom,sqlChannel,sqlDevice,sqlScene,sqlState,sqlExtra];
+        NSArray *sqls=@[sqlRoom,sqlChannel,sqlDevice,sqlScene];//,sqlState,sqlExtra];
         //4.创表
         for (NSString *sql in sqls) {
             BOOL result=[db executeUpdate:sql];
@@ -2077,7 +2077,7 @@
     
     return array;
 }
-
+/*
 + (BOOL) addStates:(int)deviceID onoff:(BOOL)state
 {
     FMDatabase *db = [SQLManager connetdb];
@@ -2166,5 +2166,5 @@
     [db close];
     return aircon;
 }
-
+*/
 @end
