@@ -85,6 +85,7 @@ enum{
 #pragma mark - public
 -(NSData *) author;
 -(NSData *)startScenenAtMaster:(int)sceneid;
+-(NSData *)query:(NSString *)deviceID;
 
 //TV,DVD,NETV,BGMusic
 -(NSData *) previous:(NSString *)deviceID;
