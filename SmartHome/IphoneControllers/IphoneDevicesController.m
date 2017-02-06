@@ -135,8 +135,8 @@
          [self.navigationController pushViewController:fmVC animated:YES];
     }else if([typeName isEqualToString:@"空调"])
     {
-//        IphoneAirController *airVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneAirController"];
-        IphoneSceneAirVC * airVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneSceneAirVC"];
+        IphoneAirController *airVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneAirController"];
+//        IphoneSceneAirVC * airVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneSceneAirVC"];
         airVC.roomID = self.roomId;
         airVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneId];
         airVC.isAddDevice = YES;

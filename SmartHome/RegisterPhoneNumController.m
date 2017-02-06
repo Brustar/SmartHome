@@ -93,16 +93,18 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue isEqual:@"registerDetaiSegue"]) {
+//    if ([segue ]) {
         RegisterDetailController *vc = segue.destinationViewController;
+    
         vc.MasterID = self.masterStr;
         vc.phoneStr = self.phoneNumTextField.text;
         vc.userType = self.suerTypeStr;
-    }else if ([segue isEqual:@"webViewManger"]){
-        
-        return;
-    }
-   
+//    }
+//    else if ([segue isEqual:@"webViewManger"]){
+//     
+//   
+//        return;
+//    }
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
