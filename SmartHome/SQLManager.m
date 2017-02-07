@@ -1526,8 +1526,10 @@
         NSString *sqlChannel=@"CREATE TABLE IF NOT EXISTS Channels (\"id\" INTEGER PRIMARY KEY  NOT NULL  UNIQUE ,\"eqId\" INTEGER,\"channelValue\" INTEGER,\"cNumber\" INTEGER, \"Channel_name\" TEXT,\"Channel_pic\" TEXT, \"parent\" CHAR(2) NOT NULL  DEFAULT TV, \"isFavorite\" BOOL DEFAULT 0, \"eqNumber\" TEXT,\"masterID\" TEXT)";
         NSString *sqlDevice=@"CREATE TABLE IF NOT EXISTS Devices(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"sn\" TEXT, \"birth\" DATETIME, \"guarantee\" DATETIME, \"model\" TEXT, \"price\" FLOAT, \"purchase\" DATETIME, \"producer\" TEXT, \"gua_tel\" TEXT, \"power\" INTEGER, \"current\" FLOAT, \"voltage\" INTEGER, \"protocol\" TEXT, \"rID\" INTEGER, \"eNumber\" TEXT, \"htypeID\" TEXT, \"subTypeId\" INTEGER, \"typeName\" TEXT, \"subTypeName\" TEXT, \"masterID\" TEXT, \"icon_url\" TEXT, \"camera_url\" TEXT)";
         NSString *sqlScene=@"CREATE TABLE IF NOT EXISTS \"Scenes\" (\"ID\" INT PRIMARY KEY  NOT NULL ,\"NAME\" TEXT NOT NULL ,\"roomName\" TEXT,\"pic\" TEXT DEFAULT (null) ,\"rId\" INTEGER,\"sType\" INTEGER, \"snumber\" TEXT,\"isFavorite\" BOOL,\"totalVisited\" INTEGER,\"masterID\" TEXT)";
+        //NSString *sqlState = @"CREATE TABLE \"States\" (\"id\" INTEGER PRIMARY KEY  NOT NULL , \"deviceID\" INTEGER, \"on_off\" BOOL)";
+        //NSString *sqlExtra = @"CREATE TABLE \"Extra_states\" (\"deviceID\" INTEGER, \"temperature\" INTEGER, \"wind_direction\" INTEGER,\"wind_level\" INTEGER, \"mode\" INTEGER, \"timing\" INTEGER)";
         
-        NSArray *sqls=@[sqlRoom,sqlChannel,sqlDevice,sqlScene];
+        NSArray *sqls=@[sqlRoom,sqlChannel,sqlDevice,sqlScene];//,sqlState,sqlExtra];
         //4.创表
         for (NSString *sql in sqls) {
             BOOL result=[db executeUpdate:sql];
@@ -2075,5 +2077,94 @@
     
     return array;
 }
+/*
++ (BOOL) addStates:(int)deviceID onoff:(BOOL)state
+{
+    FMDatabase *db = [SQLManager connetdb];
+    BOOL isSuccess = false;
+    int newID = 1;
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT * FROM states where deviceID = '%d'", deviceID];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            isSuccess = [db executeUpdateWithFormat:@"update states set on_off = %d where deviceID = %d",state,deviceID];
+        }else{
+            NSString *sql = [NSString stringWithFormat:@"SELECT max(id) as newid FROM states"];
+            FMResultSet *resultSet = [db executeQuery:sql];
+            if ([resultSet next])
+            {
+                newID = [resultSet intForColumn:@"newid"] + 1;
+            }
+            isSuccess = [db executeUpdateWithFormat:@"insert into states values(%d,%d,%i)",newID,deviceID,state];
+        }
+    }
+    [db close];
+    return isSuccess;
+}
 
++ (BOOL) queryState:(int)deviceID
+{
+    FMDatabase *db = [SQLManager connetdb];
+    BOOL state = false;
+    if([db open])
+    {
+        
+        NSString *sql = [NSString stringWithFormat:@"SELECT on_off FROM states where deviceID = '%d'", deviceID];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            state = [resultSet boolForColumn:@"on_off"];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return state;
+}
+
++ (BOOL) addExtraStates:(Aircon *)airCon
+{
+    FMDatabase *db = [SQLManager connetdb];
+    BOOL isSuccess = false;
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT * FROM extra_states where deviceID = '%d'", airCon.deviceID];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            isSuccess = [db executeUpdateWithFormat:@"update extra_states set temperature = %d,wind_direction= %d,wind_level= %d,mode=%d,timing = %d where deviceID = %d",airCon.temperature,airCon.Windirection,airCon.WindLevel,airCon.mode,airCon.timing,airCon.deviceID];
+        }else{
+            isSuccess = [db executeUpdateWithFormat:@"insert into states values(%d,%d,%d,%d,%d,%d)",airCon.deviceID,airCon.temperature,airCon.Windirection,airCon.WindLevel,airCon.mode,airCon.timing];
+        }
+    }
+    [db close];
+    return isSuccess;
+}
+
++ (Aircon *) queryExtraState:(int)deviceID
+{
+    FMDatabase *db = [SQLManager connetdb];
+    Aircon *aircon = nil;
+    if([db open])
+    {
+        
+        NSString *sql = [NSString stringWithFormat:@"SELECT * FROM extra_states where deviceID = '%d'", deviceID];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            aircon = [Aircon new];
+            aircon.deviceID = [resultSet intForColumn:@"deviceID"];
+            aircon.temperature = [resultSet intForColumn:@"temperature"];
+            aircon.WindLevel = [resultSet intForColumn:@"wind_level"];
+            aircon.mode = [resultSet intForColumn:@"mode"];
+            aircon.Windirection = [resultSet intForColumn:@"wind_direction"];
+            aircon.timing = [resultSet intForColumn:@"timing"];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return aircon;
+}
+*/
 @end
