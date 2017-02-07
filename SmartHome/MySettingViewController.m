@@ -318,7 +318,7 @@
 }
 -(void)gotoAppStoreToComment
 {
-    NSString *str = [NSString stringWithFormat:@"https://itunes.apple.com/cn/app/yi-yun-zhi-jia/id1034629669?mt=8"];
+    NSString *str = [NSString stringWithFormat:@"https://itunes.apple.com/cn/app/yi-yun-zhi-neng-jia-ju/id1173335171?l=zh&ls=1&mt=8"];
     NSURL * url = [NSURL URLWithString:str];
     
     if ([[UIApplication sharedApplication] canOpenURL:url])
