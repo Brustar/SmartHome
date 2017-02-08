@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *paramView;
 @property (weak, nonatomic) IBOutlet UIView *CoverView;
 
+@property (weak, nonatomic) IBOutlet UISwitch *Myswitch;
 
 @end
 
@@ -73,7 +74,40 @@
     
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
+    
+    //查询设备状态
+    NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+    
+      [self.Myswitch addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
 
+}
+
+-(IBAction)save:(id)sender
+{
+    if ([sender isEqual:self.Myswitch]) {
+        //        NSData *data=[[DeviceInfo defaultManager] toogle:self.switchView.isOn deviceID:self.deviceid];
+        NSData * data = [[DeviceInfo defaultManager] toogleAirCon:self.Myswitch.isOn deviceID:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
+    //    Amplifier *device=[[Amplifier alloc] init];
+    Aircon * device = [[Aircon alloc] init];
+    [device setDeviceID:[self.deviceid intValue]];
+    [device setWaiting: self.Myswitch.isOn];
+    
+    
+    [_scene setSceneID:[self.sceneid intValue]];
+    [_scene setRoomID:self.roomID];
+    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+    
+    [_scene setReadonly:NO];
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+    
 }
 
 -(IBAction)Iphonesave:(id)sender
@@ -108,7 +142,10 @@
     if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
         return;
     }
-    
+    //同步设备状态
+    if(proto.cmd == 0x01){
+        self.Myswitch.on = proto.action.state;
+    }
     if (tag==0) {
         if (proto.action.state==0x7A) {
             self.showTemLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];

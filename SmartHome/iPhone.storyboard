@@ -528,7 +528,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UCL-Uw-8If" userLabel="View1">
                                         <rect key="frame" x="375" y="0.0" width="375" height="686"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="u0" translatesAutoresizingMaskIntoConstraints="NO" id="yaN-2v-doi">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="u2" translatesAutoresizingMaskIntoConstraints="NO" id="yaN-2v-doi">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
                                             </imageView>
                                         </subviews>
@@ -543,7 +543,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5kx-VB-3dO" userLabel="View2">
                                         <rect key="frame" x="750" y="0.0" width="375" height="686"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="u2" translatesAutoresizingMaskIntoConstraints="NO" id="zOG-f7-R0C">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="u0" translatesAutoresizingMaskIntoConstraints="NO" id="zOG-f7-R0C">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
                                             </imageView>
                                         </subviews>
@@ -3744,9 +3744,12 @@
                                     <constraint firstAttribute="height" constant="31" id="S1W-BP-YDh"/>
                                 </constraints>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="是否打开" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Upz-eB-YW2">
-                                <rect key="frame" x="16" y="20" width="127" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="空调开关：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Upz-eB-YW2">
+                                <rect key="frame" x="193" y="25" width="88" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="88" id="EBx-HH-pvV"/>
+                                    <constraint firstAttribute="height" constant="21" id="JBI-YS-lY7"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -3774,11 +3777,14 @@
                             <constraint firstItem="qyX-cJ-9vt" firstAttribute="top" secondItem="iVr-6f-FMT" secondAttribute="bottom" constant="50" id="lrT-2e-lpe"/>
                             <constraint firstAttribute="trailingMargin" secondItem="rkI-I1-HF6" secondAttribute="trailing" constant="10" id="nJJ-Ir-I3r"/>
                             <constraint firstItem="hLK-OJ-ifc" firstAttribute="top" secondItem="7IK-y1-nkp" secondAttribute="bottom" constant="20" id="oWm-Ak-tlm"/>
+                            <constraint firstItem="rkI-I1-HF6" firstAttribute="leading" secondItem="Upz-eB-YW2" secondAttribute="trailing" constant="19" id="pXo-7i-wUe"/>
                             <constraint firstItem="qyX-cJ-9vt" firstAttribute="top" secondItem="hLK-OJ-ifc" secondAttribute="bottom" constant="20" id="y1v-tH-zZO"/>
+                            <constraint firstItem="iVr-6f-FMT" firstAttribute="top" secondItem="Upz-eB-YW2" secondAttribute="bottom" constant="14" id="yFJ-j4-Hdh"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="CoverView" destination="tXe-NT-X6S" id="uP1-N5-hPE"/>
+                        <outlet property="Myswitch" destination="rkI-I1-HF6" id="B6t-JY-Sfa"/>
                         <outlet property="noiseLabel" destination="QX9-dO-JA9" id="qQO-IT-8Hg"/>
                         <outlet property="paramView" destination="IZJ-np-HMv" id="ICU-BE-vX4"/>
                         <outlet property="pmLabel" destination="edh-cv-YtT" id="MpO-G4-cRf"/>

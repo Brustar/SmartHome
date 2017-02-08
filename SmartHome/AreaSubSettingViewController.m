@@ -121,7 +121,7 @@
                     {
                         [self.areasArr addObject:info[@"room_name"]];
                         [self.opens addObject:info[@"isopen"]];
-                        [self.recoredIDs addObject:info[@"room_id"]];
+                        [self.recoredIDs addObject:info[@"roomuser_id"]];
                     }
                     
                 }

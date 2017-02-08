@@ -103,7 +103,9 @@
         //nest login
         [self nestLogin];
     }
-    
+    //查询设备状态
+    NSData *subdata = [[DeviceInfo defaultManager] query:self.deviceid];
+    [sock.socket writeData:subdata withTimeout:1 tag:1];
 
 }
 
@@ -244,7 +246,6 @@
     if ([[UD objectForKey:@"HostID"] intValue] == 258) {  //九号大院
         return;
     }
-//    NSArray * hTypeIdArr = @[@"01",@"02",@"03",@"12",@"13",@"14",@"21",@"22",@"31"];
     Proto proto = protocolFromData(data);
   
     if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {

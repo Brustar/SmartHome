@@ -122,7 +122,9 @@
     }else {
         _lightView.hidden = YES;
     }
-    
+    //查询设备状态
+    NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
+    [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -309,7 +311,10 @@
     if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
         return;
     }
-    
+    //同步设备状态
+    if(proto.cmd == 0x01){
+        self.detailCell.power.on = proto.action.state;
+    }
     if (tag == 0 && (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON || proto.action.state == 0x0b || proto.action.state == 0x0a)) {
         NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
         if ([devID intValue]==[self.deviceid intValue]) {

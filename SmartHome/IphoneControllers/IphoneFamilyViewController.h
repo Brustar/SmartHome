@@ -19,5 +19,6 @@
 @property(nonatomic, strong)NSMutableArray *nest_curr_temperature_arr;
 @property(nonatomic, strong)NSMutableArray *nest_curr_humidity_arr;
 @property(nonatomic, strong)NSMutableArray *nest_en_room_name_arr;
+@property(nonatomic, strong)NSString * deviceid;
 
 @end

@@ -139,6 +139,7 @@
 		2EA897C71E31B9B6002CA904 /* UO256.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EA897C61E31B9B6002CA904 /* UO256.png */; };
 		2EA99E901E1C9A0100659065 /* MySubEnergyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA99E8F1E1C9A0100659065 /* MySubEnergyVC.m */; };
 		2EB2A4721E237F05003F01DB /* DeviceListTimeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB2A4711E237F05003F01DB /* DeviceListTimeVC.m */; };
+		2EBE210F1E497595003D53A4 /* ForgotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBE210E1E497595003D53A4 /* ForgotViewController.m */; };
 		2EC8A5901E372C51002A5042 /* IphoneDeviceLightVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC8A58F1E372C51002A5042 /* IphoneDeviceLightVC.m */; };
 		2EC8A5931E372D75002A5042 /* ColourCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC8A5921E372D75002A5042 /* ColourCell.m */; };
 		2ED42B931E35B41E00592A03 /* IphoneAirCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED42B921E35B41E00592A03 /* IphoneAirCell.m */; };
@@ -712,6 +713,8 @@
 		2EA99E8F1E1C9A0100659065 /* MySubEnergyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySubEnergyVC.m; sourceTree = "<group>"; };
 		2EB2A4701E237F05003F01DB /* DeviceListTimeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceListTimeVC.h; sourceTree = "<group>"; };
 		2EB2A4711E237F05003F01DB /* DeviceListTimeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceListTimeVC.m; sourceTree = "<group>"; };
+		2EBE210D1E497595003D53A4 /* ForgotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotViewController.h; sourceTree = "<group>"; };
+		2EBE210E1E497595003D53A4 /* ForgotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotViewController.m; sourceTree = "<group>"; };
 		2EC8A58E1E372C51002A5042 /* IphoneDeviceLightVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneDeviceLightVC.h; sourceTree = "<group>"; };
 		2EC8A58F1E372C51002A5042 /* IphoneDeviceLightVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneDeviceLightVC.m; sourceTree = "<group>"; };
 		2EC8A5911E372D75002A5042 /* ColourCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColourCell.h; sourceTree = "<group>"; };
@@ -1806,6 +1809,8 @@
 			children = (
 				2EDE045F1E45777B00BC8E0B /* WebViewMangerVC.h */,
 				2EDE04601E45777B00BC8E0B /* WebViewMangerVC.m */,
+				2EBE210D1E497595003D53A4 /* ForgotViewController.h */,
+				2EBE210E1E497595003D53A4 /* ForgotViewController.m */,
 			);
 			name = WebViewManger;
 			sourceTree = "<group>";
@@ -2342,6 +2347,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F64234B1DE57C83003379FC /* Utilities.m in Sources */,
+				2EBE210F1E497595003D53A4 /* ForgotViewController.m in Sources */,
 				F6280D4A1D961C62009108ED /* IphoneAddTVChannelController.m in Sources */,
 				F65164141D3780C500A6F5FA /* TVLogoCell.m in Sources */,
 				F61896381D87B06300DBE6CD /* ScreenCurtainController.m in Sources */,
