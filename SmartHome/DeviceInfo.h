@@ -64,6 +64,7 @@ enum{
 @property (nonatomic, strong) NSString *pushToken;
 //ibeacon信息
 @property (nonatomic, strong) NSArray *beacons;
+
 //主机ID
 @property (nonatomic) long masterID;
 //主机ip
