@@ -257,15 +257,15 @@
             //[SQLManager addStates:proto.deviceID onoff:proto.action.RValue];
         }
         
-        if (proto.action.state==0x6A) {
+        if (proto.cmd==0x6A) {
             
             self.cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
         }
-        if (proto.action.state==0x8A) {
+        if (proto.cmd==0x8A) {
             NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
             self.cell.humidityLabel.text = valueString;
         }
-        if (proto.action.state ==0x7D) {
+        if (proto.cmd ==0x7D) {
             if (proto.action.state == PROTOCOL_OFF) {
                 if (proto.deviceType == 01 || proto.deviceType == 02 || proto.deviceType == 03) {
                     self.cell.lightImageVIew.hidden = YES;
@@ -281,7 +281,7 @@
                     self.cell.airImageVIew.hidden = YES;
                 }
             }
-        }if (proto.action.state==0x7D) {
+        }if (proto.cmd==0x7D) {
            if (proto.action.state == PROTOCOL_ON) {
                 if (proto.deviceType == 01 || proto.deviceType == 02 || proto.deviceType == 03) {
                     self.cell.lightImageVIew.hidden = NO;
@@ -300,6 +300,7 @@
         }
     }
 }
+
 #pragma  mark - UICollectionViewDelegate
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {

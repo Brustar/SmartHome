@@ -263,31 +263,33 @@
         return;
     }
     if (tag==0) {
-        if (proto.action.state==0x6A) {
+        if (proto.cmd==0x6A) {
             
             self.cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
         }
-        if (proto.action.state==0x8A) {
+        if (proto.cmd==0x8A) {
             NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
             self.cell.humidityLabel.text = valueString;
         }
-        if (proto.action.state==0x00) {
-            for (Device * device in self.deviceArr) {
-                if (device.hTypeId == 01 || device.hTypeId == 02 || device.hTypeId == 03) {
-                    self.cell.lightImageVIew.hidden = YES;
-                }else if (device.hTypeId == 21 || device.hTypeId == 22){
-                    self.cell.curtainImageView.hidden = YES;
-                }else if (device.hTypeId == 12){
-                    self.cell.TVImageView.hidden = YES;
-                }else if (device.hTypeId == 13){
-                    self.cell.DVDImageView.hidden = YES;
-                }else if (device.hTypeId == 14){
-                    self.cell.musicImageVIew.hidden = YES;
-                }else if (device.hTypeId == 31){
-                    self.cell.airImageVIew.hidden = YES;
+        if (proto.cmd==0x7D) {
+            if (proto.action.state==0x00) {
+                for (Device * device in self.deviceArr) {
+                    if (device.hTypeId == 01 || device.hTypeId == 02 || device.hTypeId == 03) {
+                        self.cell.lightImageVIew.hidden = YES;
+                    }else if (device.hTypeId == 21 || device.hTypeId == 22){
+                        self.cell.curtainImageView.hidden = YES;
+                    }else if (device.hTypeId == 12){
+                        self.cell.TVImageView.hidden = YES;
+                    }else if (device.hTypeId == 13){
+                        self.cell.DVDImageView.hidden = YES;
+                    }else if (device.hTypeId == 14){
+                        self.cell.musicImageVIew.hidden = YES;
+                    }else if (device.hTypeId == 31){
+                        self.cell.airImageVIew.hidden = YES;
+                    }
                 }
+                
             }
-            
         }
         //缓存设备当前状态
         if (proto.cmd==0x01) {
