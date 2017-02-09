@@ -247,6 +247,12 @@
         return;
     }
     Proto proto = protocolFromData(data);
+    
+//    if (CFSwapInt16BigToHost(proto.masterID) != [[UD objectForKey:@"HostID"] intValue]) {
+//        if ([device.db isEqualToString:SMART_DB]) {
+//            return;
+//        }
+//    }
   
     if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
         return;
@@ -255,6 +261,7 @@
         //缓存设备当前状态
         if (proto.cmd==0x01) {
             //[SQLManager addStates:proto.deviceID onoff:proto.action.RValue];
+            self.cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
         }
         
         if (proto.cmd==0x6A) {

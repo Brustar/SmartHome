@@ -9,5 +9,6 @@
 @interface LoginController : UIViewController<HttpDelegate>
 @property (nonatomic,strong) NSMutableArray * home_room_infoArr;
 @property (nonatomic,strong) NSString *UserTypeStr;
+@property (nonatomic,strong) NSMutableArray * room_user_listArr;
 
 @end

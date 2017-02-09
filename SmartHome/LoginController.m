@@ -139,10 +139,6 @@
     {
         self.userType = 2;
     }
-//    if([self.UserTypeStr isEqualToString:@"客人"])
-//    {
-//        self.UserType = 2;
-//    }else self.UserType = 1;
     
     DeviceInfo *info=[DeviceInfo defaultManager];
     NSString *pushToken;
@@ -268,7 +264,7 @@
         {
             if(roomDic)
             {
-                NSString *sql = [NSString stringWithFormat:@"insert into Rooms values(%d,'%@',null,null,null,null,null,'%@',%d,null,'%ld')",[roomDic[@"room_id"] intValue],roomDic[@"room_name"],roomDic[@"room_image_url"],[roomDic[@"ibeacon"] intValue],[DeviceInfo defaultManager].masterID];
+                NSString *sql = [NSString stringWithFormat:@"insert into Rooms values(%d,'%@',null,null,null,null,null,'%@',%d,null,'%ld',%d)",[roomDic[@"room_id"] intValue],roomDic[@"room_name"],roomDic[@"room_image_url"],[roomDic[@"ibeacon"] intValue],[DeviceInfo defaultManager].masterID,[roomDic[@"isaccess"] intValue]];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {
@@ -503,7 +499,7 @@
             //写房间配置信息到sql
             
             [self writeRoomsConfigDataToSQL:responseObject[@"home_room_info"]];
-            //写房间配置信息到sql
+            //写场景配置信息到sql
             [self writeScensConfigDataToSQL:responseObject[@"room_scence_list"]];
             //写设备配置信息到sql
             [self writDevicesConfigDatesToSQL:responseObject[@"room_equipment_list"]];

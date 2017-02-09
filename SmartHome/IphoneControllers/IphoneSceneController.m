@@ -293,18 +293,18 @@
     if (index == 0) {
         VoiceOrderController * voiceVC = [storyBoard instantiateViewControllerWithIdentifier:@"VoiceOrderController"];
         [self.navigationController pushViewController:voiceVC animated:YES];
-        self.menuView.hidden = YES;
+        [self.menuView removeFromSuperview];
     }else if (index == 1){
         SearchViewController * searchVC = [storyBoard instantiateViewControllerWithIdentifier:@"SearchViewController"];
         [self.navigationController pushViewController:searchVC animated:YES];
-        self.menuView.hidden = YES;
+        [self.menuView removeFromSuperview];
     }else if (index == 2){
         BgMusicController * BgVC = [MainBoard instantiateViewControllerWithIdentifier:@"BgMusicController"];
         [self.navigationController pushViewController:BgVC animated:YES];
-        self.menuView.hidden = YES;
+        [self.menuView removeFromSuperview];
     }else if (index == 3){
         [self performSegueWithIdentifier:@"iphoneAddSceneSegue" sender:self];
-        self.menuView.hidden = YES;
+        [self.menuView removeFromSuperview];
     }
 }
 //删除场景

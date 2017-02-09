@@ -274,11 +274,6 @@
             sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld and masterID = '%ld' and typeName <> 'FM' and typeName <> '幕布' and typeName <> 'PM2.5监测' and typeName <> '温湿度感应器' and typeName <> '动静感应器' and typeName <> '照度感应器' and typeName <> '燃气监测' and typeName <> '噪音感应器' and typeName <> '烟雾感应器'",(long)roomID, 255l];
         }
         
-        
-        
-        
-       
-        
         FMResultSet *resultSet = [db executeQuery:sql];
       
         while ([resultSet next])
@@ -1894,7 +1889,7 @@
     NSMutableArray *roomList = [NSMutableArray array];
     if([db open])
     {
-        NSString *sql =@"select * from Rooms";
+        NSString *sql =@"select * from Rooms where openforcurrentuser = 1";
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next]) {
             Room *room = [Room new];

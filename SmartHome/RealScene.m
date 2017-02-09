@@ -80,8 +80,6 @@
         [self showRoomNameAndBackgroundImgWithFilePath:[[NSBundle mainBundle] pathForResource:@"realScene" ofType:@"plist"]];
     }
     
-    
-    
     //先读缓存
     self.tempValue.text = [NSString stringWithFormat:@"%d°C",[[UD objectForKey:@"TempValue"] intValue]];
 
