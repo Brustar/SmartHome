@@ -59,15 +59,12 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
     [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timer:) userInfo:nil repeats:YES];
-    
 }
 
 -(void)timer:(NSTimer *)timer
 {
     SocketManager *sock = [SocketManager defaultManager];
-    [sock connectTcp];
     sock.delegate = self;
     DeviceInfo *device =[DeviceInfo defaultManager];
     if (device.connectState == outDoor && device.masterID) {
@@ -75,6 +72,13 @@
         [sock.socket writeData:data withTimeout:1 tag:1];
         [timer invalidate];
     }
+}
+
+-(void)connect
+{
+    SocketManager *sock = [SocketManager defaultManager];
+    [sock connectTcp];
+    sock.delegate = self;
 }
 
 - (void)viewDidLoad {
@@ -98,6 +102,8 @@
         self.navigationItem.title = @"九号大院";
         //nest login
         [self nestLogin];
+    }else{
+        [self connect];
     }
     
     //自定义bar item
@@ -256,15 +262,18 @@
         return;
     }
     
-    //    NSArray * hTypeIdArr = @[@"01",@"02",@"03",@"12",@"13",@"14",@"21",@"22",@"31"];
     Proto proto = protocolFromData(data);
     
     if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
         return;
     }
     if (tag==0) {
+        if (proto.cmd==0x85) {
+            SocketManager *sock = [SocketManager defaultManager];
+            NSData *data = [[SceneManager defaultManager] getRealSceneData];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+        }
         if (proto.cmd==0x6A) {
-            
             self.cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
         }
         if (proto.cmd==0x8A) {
