@@ -146,7 +146,7 @@
     
     cell.title.text = self.itemNameArrs[indexPath.row];
     if (cell.countLabel.text) {
-        cell.countLabel.text = [NSString stringWithFormat:@"%ld",[self.unreadcountArr[indexPath.row] integerValue]];
+        cell.countLabel.text = [NSString stringWithFormat:@"%ld",(long)[self.unreadcountArr[indexPath.row] integerValue]];
     }
   
     self.unreadcount = [self.unreadcountArr[indexPath.row] integerValue];
@@ -185,7 +185,6 @@
 //编辑操作
 -(void)startEdit:(UIBarButtonItem *)btn
 {
-    
     self.tableView.allowsMultipleSelectionDuringEditing = YES;
     self.tableView.editing = YES;
     self.footView.hidden = NO;

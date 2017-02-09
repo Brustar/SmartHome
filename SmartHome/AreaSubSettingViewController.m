@@ -238,7 +238,7 @@
     {
         [self settingAccessIsOpen:[NSNumber numberWithInt:1] tag:6 withRecoredID:recoredID];
     }else{
-        [self settingAccessIsOpen:[NSNumber numberWithInt:2] tag:7 withRecoredID:recoredID];
+        [self settingAccessIsOpen:[NSNumber numberWithInt:0] tag:7 withRecoredID:recoredID];
     }
 }
 //设置用户权限请求

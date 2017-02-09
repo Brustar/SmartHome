@@ -4248,50 +4248,41 @@
                                                 <constraint firstAttribute="height" constant="30" id="owo-dh-S5M"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S9e-y2-V3e">
-                                            <rect key="frame" x="70" y="5" width="40" height="20"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U0P-T0-FiY">
-                                            <rect key="frame" x="70" y="25" width="33" height="16"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uc5-KB-qpv">
-                                            <rect key="frame" x="34" y="0.0" width="20" height="20"/>
+                                            <rect key="frame" x="34" y="0.0" width="6" height="20"/>
                                             <color key="backgroundColor" red="1" green="0.20893316133825335" blue="0.24076579889352157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tHf-0T-4Kh">
-                                            <rect key="frame" x="34" y="0.0" width="20" height="20"/>
+                                            <rect key="frame" x="34" y="0.0" width="6" height="20"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S9e-y2-V3e">
+                                            <rect key="frame" x="70" y="12" width="40" height="20"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="S9e-y2-V3e" firstAttribute="top" secondItem="uXc-Ng-yLi" secondAttribute="topMargin" constant="4" id="2d0-HV-3tL"/>
                                         <constraint firstItem="tHf-0T-4Kh" firstAttribute="leading" secondItem="uc5-KB-qpv" secondAttribute="leading" id="5p3-HZ-MBh"/>
                                         <constraint firstItem="tHf-0T-4Kh" firstAttribute="trailing" secondItem="uc5-KB-qpv" secondAttribute="trailing" id="6V6-6N-WyL"/>
                                         <constraint firstItem="uc5-KB-qpv" firstAttribute="leading" secondItem="uXc-Ng-yLi" secondAttribute="leading" constant="34" id="8E1-7w-FS6"/>
-                                        <constraint firstItem="S9e-y2-V3e" firstAttribute="top" secondItem="uXc-Ng-yLi" secondAttribute="top" constant="5" id="EcX-Kc-MO6"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="S9e-y2-V3e" secondAttribute="bottom" constant="3.5" id="E5m-BF-3Hj"/>
                                         <constraint firstItem="nLu-ut-W0R" firstAttribute="leading" secondItem="uXc-Ng-yLi" secondAttribute="leading" constant="20" id="JFV-I3-i9L"/>
-                                        <constraint firstItem="S9e-y2-V3e" firstAttribute="leading" secondItem="nLu-ut-W0R" secondAttribute="trailing" constant="20" id="K3A-cl-ocz"/>
                                         <constraint firstItem="nLu-ut-W0R" firstAttribute="centerY" secondItem="uXc-Ng-yLi" secondAttribute="centerY" id="NgG-ES-T4z"/>
-                                        <constraint firstItem="U0P-T0-FiY" firstAttribute="leading" secondItem="S9e-y2-V3e" secondAttribute="leading" id="Tfn-nf-gff"/>
                                         <constraint firstItem="uc5-KB-qpv" firstAttribute="top" secondItem="uXc-Ng-yLi" secondAttribute="top" id="XKL-MW-VYt"/>
+                                        <constraint firstItem="S9e-y2-V3e" firstAttribute="leading" secondItem="nLu-ut-W0R" secondAttribute="trailing" constant="20" id="cvX-65-4Ic"/>
                                         <constraint firstItem="tHf-0T-4Kh" firstAttribute="centerY" secondItem="uc5-KB-qpv" secondAttribute="centerY" id="oMS-qB-fAS"/>
-                                        <constraint firstItem="S9e-y2-V3e" firstAttribute="leading" secondItem="uc5-KB-qpv" secondAttribute="trailing" constant="16" id="rKv-7d-Kzn"/>
                                         <constraint firstAttribute="bottom" secondItem="uc5-KB-qpv" secondAttribute="bottom" constant="24" id="sNt-LO-yKN"/>
-                                        <constraint firstAttribute="bottom" secondItem="U0P-T0-FiY" secondAttribute="bottom" constant="2" id="wsb-9J-YrS"/>
                                         <constraint firstItem="tHf-0T-4Kh" firstAttribute="top" secondItem="uc5-KB-qpv" secondAttribute="top" id="yiG-Y3-fdf"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="countLabel" destination="tHf-0T-4Kh" id="jAQ-lb-QXI"/>
                                     <outlet property="imgView" destination="nLu-ut-W0R" id="EBw-l6-TKZ"/>
-                                    <outlet property="timeLable" destination="U0P-T0-FiY" id="DXg-jf-vNu"/>
                                     <outlet property="title" destination="S9e-y2-V3e" id="Frc-Dk-Ap7"/>
                                     <outlet property="unreadcountImage" destination="uc5-KB-qpv" id="aHh-LE-CYN"/>
                                 </connections>
