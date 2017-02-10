@@ -76,7 +76,10 @@
 -(void)connect
 {
     SocketManager *sock = [SocketManager defaultManager];
-    [sock connectTcp];
+    DeviceInfo *device =[DeviceInfo defaultManager];
+    if (device.connectState == offLine) {
+        [sock connectTcp];
+    }
     sock.delegate = self;
 }
 
@@ -264,48 +267,45 @@
         }
         //缓存设备当前状态
         if (proto.cmd==0x01) {
-            //[SQLManager addStates:proto.deviceID onoff:proto.action.RValue];
-            self.cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
-        }
-        
-        if (proto.cmd==0x6A) {
-            
-            self.cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
-        }
-        if (proto.cmd==0x8A) {
-            NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
-            self.cell.humidityLabel.text = valueString;
-        }
-        if (proto.cmd ==0x7D) {
-            if (proto.action.state == PROTOCOL_OFF) {
-                if (proto.deviceType == 01 || proto.deviceType == 02 || proto.deviceType == 03) {
-                    self.cell.lightImageVIew.hidden = YES;
-                }else if (proto.deviceType == 21 || proto.deviceType == 22){
-                    self.cell.curtainImageView.hidden = YES;
-                }else if (proto.deviceType == 12){
-                    self.cell.TVImageView.hidden = YES;
-                }else if (proto.deviceType == 13){
-                    self.cell.DVDImageView.hidden = YES;
-                }else if (proto.deviceType == 14){
-                    self.cell.musicImageVIew.hidden = YES;
-                }else if (proto.deviceType == 31){
-                    self.cell.airImageVIew.hidden = YES;
-                }
+            if (proto.action.state==0x6A) {
+                
+                self.cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
             }
-        }if (proto.cmd==0x7D) {
-           if (proto.action.state == PROTOCOL_ON) {
-                if (proto.deviceType == 01 || proto.deviceType == 02 || proto.deviceType == 03) {
-                    self.cell.lightImageVIew.hidden = NO;
-                }else if (proto.deviceType == 21 || proto.deviceType == 22){
-                    self.cell.curtainImageView.hidden = NO;
-                }else if (proto.deviceType == 12){
-                    self.cell.TVImageView.hidden = NO;
-                }else if (proto.deviceType == 13){
-                    self.cell.DVDImageView.hidden = NO;
-                }else if (proto.deviceType == 14){
-                    self.cell.musicImageVIew.hidden = NO;
-                }else if (proto.deviceType == 31){
-                    self.cell.airImageVIew.hidden = NO;
+            if (proto.action.state==0x8A) {
+                NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
+                self.cell.humidityLabel.text = valueString;
+            }
+            if (proto.action.state ==0x7D) {
+                if (proto.action.RValue == PROTOCOL_OFF) {
+                    if (proto.deviceType == 01 || proto.deviceType == 02 || proto.deviceType == 03) {
+                        self.cell.lightImageVIew.hidden = YES;
+                    }else if (proto.deviceType == 21 || proto.deviceType == 22){
+                        self.cell.curtainImageView.hidden = YES;
+                    }else if (proto.deviceType == 12){
+                        self.cell.TVImageView.hidden = YES;
+                    }else if (proto.deviceType == 13){
+                        self.cell.DVDImageView.hidden = YES;
+                    }else if (proto.deviceType == 14){
+                        self.cell.musicImageVIew.hidden = YES;
+                    }else if (proto.deviceType == 31){
+                        self.cell.airImageVIew.hidden = YES;
+                    }
+                }
+            }if (proto.cmd==0x7D) {
+               if (proto.action.state == PROTOCOL_ON) {
+                    if (proto.deviceType == 01 || proto.deviceType == 02 || proto.deviceType == 03) {
+                        self.cell.lightImageVIew.hidden = NO;
+                    }else if (proto.deviceType == 21 || proto.deviceType == 22){
+                        self.cell.curtainImageView.hidden = NO;
+                    }else if (proto.deviceType == 12){
+                        self.cell.TVImageView.hidden = NO;
+                    }else if (proto.deviceType == 13){
+                        self.cell.DVDImageView.hidden = NO;
+                    }else if (proto.deviceType == 14){
+                        self.cell.musicImageVIew.hidden = NO;
+                    }else if (proto.deviceType == 31){
+                        self.cell.airImageVIew.hidden = NO;
+                    }
                 }
             }
         }

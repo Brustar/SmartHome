@@ -77,7 +77,10 @@
 -(void)connect
 {
     SocketManager *sock = [SocketManager defaultManager];
-    [sock connectTcp];
+    DeviceInfo *device =[DeviceInfo defaultManager];
+    if (device.connectState == offLine) {
+        [sock connectTcp];
+    }
     sock.delegate = self;
 }
 
@@ -267,45 +270,43 @@
     if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
         return;
     }
-    if (tag==0) {
+    if (tag==0){
         if (proto.cmd==0x85) {
             SocketManager *sock = [SocketManager defaultManager];
             NSData *data = [[SceneManager defaultManager] getRealSceneData];
             [sock.socket writeData:data withTimeout:1 tag:1];
         }
-        if (proto.cmd==0x6A) {
-            self.cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
-        }
-        if (proto.cmd==0x8A) {
-            NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
-            self.cell.humidityLabel.text = valueString;
-        }
-        if (proto.cmd==0x7D) {
-            if (proto.action.state==0x00) {
-                for (Device * device in self.deviceArr) {
-                    if (device.hTypeId == 01 || device.hTypeId == 02 || device.hTypeId == 03) {
-                        self.cell.lightImageVIew.hidden = YES;
-                    }else if (device.hTypeId == 21 || device.hTypeId == 22){
-                        self.cell.curtainImageView.hidden = YES;
-                    }else if (device.hTypeId == 12){
-                        self.cell.TVImageView.hidden = YES;
-                    }else if (device.hTypeId == 13){
-                        self.cell.DVDImageView.hidden = YES;
-                    }else if (device.hTypeId == 14){
-                        self.cell.musicImageVIew.hidden = YES;
-                    }else if (device.hTypeId == 31){
-                        self.cell.airImageVIew.hidden = YES;
+        if(proto.cmd==0x01) {
+            if (proto.action.state==0x6A) {
+                self.cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
+            }
+            if (proto.action.state==0x8A) {
+                NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
+                self.cell.humidityLabel.text = valueString;
+            }
+            if (proto.action.state==0x7D) {
+                if (proto.action.RValue==PROTOCOL_OFF) {
+                    for (Device * device in self.deviceArr) {
+                        if (device.hTypeId == 01 || device.hTypeId == 02 || device.hTypeId == 03) {
+                            self.cell.lightImageVIew.hidden = YES;
+                        }else if (device.hTypeId == 21 || device.hTypeId == 22){
+                            self.cell.curtainImageView.hidden = YES;
+                        }else if (device.hTypeId == 12){
+                            self.cell.TVImageView.hidden = YES;
+                        }else if (device.hTypeId == 13){
+                            self.cell.DVDImageView.hidden = YES;
+                        }else if (device.hTypeId == 14){
+                            self.cell.musicImageVIew.hidden = YES;
+                        }else if (device.hTypeId == 31){
+                            self.cell.airImageVIew.hidden = YES;
+                        }
                     }
                 }
-                
             }
-        }
-        //缓存设备当前状态
-        if (proto.cmd==0x01) {
-            //[SQLManager addStates:proto.deviceID onoff:proto.action.RValue];
         }
     }
 }
+
 #pragma  mark - UICollectionViewDelegate
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
