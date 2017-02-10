@@ -69,7 +69,7 @@
     DeviceInfo *device =[DeviceInfo defaultManager];
     if (device.connectState == outDoor && device.masterID) {
         NSData *data = [[SceneManager defaultManager] getRealSceneData];
-        [sock.socket writeData:data withTimeout:1 tag:1];
+        [sock.socket writeData:data withTimeout:1 tag:0];
         [timer invalidate];
     }
 }
@@ -271,11 +271,6 @@
         return;
     }
     if (tag==0){
-        if (proto.cmd==0x85) {
-            SocketManager *sock = [SocketManager defaultManager];
-            NSData *data = [[SceneManager defaultManager] getRealSceneData];
-            [sock.socket writeData:data withTimeout:1 tag:1];
-        }
         if(proto.cmd==0x01) {
             if (proto.action.state==0x6A) {
                 self.cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];

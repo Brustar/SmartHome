@@ -68,7 +68,7 @@
     DeviceInfo *device =[DeviceInfo defaultManager];
     if (device.connectState == outDoor && device.masterID) {
         NSData *data = [[SceneManager defaultManager] getRealSceneData];
-        [sock.socket writeData:data withTimeout:1 tag:1];
+        [sock.socket writeData:data withTimeout:1 tag:0];
         [timer invalidate];
     }
 }
@@ -246,29 +246,14 @@
         return;
     }
     Proto proto = protocolFromData(data);
-    
-//    if (CFSwapInt16BigToHost(proto.masterID) != [[UD objectForKey:@"HostID"] intValue]) {
-//        if ([device.db isEqualToString:SMART_DB]) {
-//            return;
-//        }
-//    }
   
     if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
         return;
     }
     if (tag==0) {
-        if (proto.cmd==0x85) {
-            SocketManager *sock = [SocketManager defaultManager];
-            NSData *data = [[SceneManager defaultManager] getRealSceneData];
-            [sock.socket writeData:data withTimeout:1 tag:1];
-            //查询设备状态
-            NSData *subdata = [[DeviceInfo defaultManager] query:self.deviceid];
-            [sock.socket writeData:subdata withTimeout:1 tag:1];
-        }
         //缓存设备当前状态
         if (proto.cmd==0x01) {
             if (proto.action.state==0x6A) {
-                
                 self.cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
             }
             if (proto.action.state==0x8A) {
