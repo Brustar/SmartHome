@@ -58,12 +58,12 @@
 //验证手机号是否已注册
 - (void)checkPhoneNumberIsExist {
     
-//    NSDictionary *dict = @{@"mobile":self.phoneNumTextField.text};
-//    NSString *url = [NSString stringWithFormat:@"%@login/send_code.aspx",[IOManager httpAddr]];
-//    HttpManager *http = [HttpManager defaultManager];
-//    http.tag = 1;
-//    http.delegate = self;
-//    [http sendPost:url param:dict];
+    NSDictionary *dict = @{@"mobile":self.phoneNumTextField.text};
+    NSString *url = [NSString stringWithFormat:@"%@login/send_code.aspx",[IOManager httpAddr]];
+    HttpManager *http = [HttpManager defaultManager];
+    http.tag = 1;
+    http.delegate = self;
+    [http sendPost:url param:dict];
     
         [self performSegueWithIdentifier:@"registerDetaiSegue" sender:self];
 }

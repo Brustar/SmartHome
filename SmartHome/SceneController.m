@@ -304,7 +304,7 @@
     [[SceneManager defaultManager] startScene:scene.sceneID];
     [self performSegueWithIdentifier:@"sceneDetailSegue" sender:self];
 }
--(void)startSceneAction:(UIButton *)btn{
+-(void)startSceneAction:(UIButton *)btn {
     int sceneId = (int)btn.tag;
     [btn setTintColor:[UIColor redColor]];
     [[SceneManager defaultManager] startScene:sceneId];
