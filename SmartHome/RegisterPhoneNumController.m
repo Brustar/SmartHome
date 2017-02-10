@@ -65,7 +65,7 @@
     http.delegate = self;
     [http sendPost:url param:dict];
     
-        [self performSegueWithIdentifier:@"registerDetaiSegue" sender:self];
+//        [self performSegueWithIdentifier:@"registerDetaiSegue" sender:self];
 }
 
 - (void)httpHandler:(id)responseObject tag:(int)tag

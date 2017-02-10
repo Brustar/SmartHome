@@ -150,8 +150,8 @@
     UIView *view = [[UIView alloc]init];
     if(section == 1)
     {
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 15, 400, 20)];
-        label.font = [UIFont systemFontOfSize:15];
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 5, 400, 20)];
+        label.font = [UIFont systemFontOfSize:12];
         label.text = @"请在“设置->通知中心”中更改";
         label.textColor = [UIColor grayColor];
         [view addSubview:label];
@@ -166,10 +166,10 @@
     {
         return 25;
     }
-    return 50;
+    return 30;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 60;
+    return 44;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

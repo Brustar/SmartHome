@@ -59,22 +59,28 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
     [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timer:) userInfo:nil repeats:YES];
-    
 }
 
 -(void)timer:(NSTimer *)timer
 {
     SocketManager *sock = [SocketManager defaultManager];
-    [sock connectTcp];
-    sock.delegate = self;
     DeviceInfo *device =[DeviceInfo defaultManager];
     if (device.connectState == outDoor && device.masterID) {
         NSData *data = [[SceneManager defaultManager] getRealSceneData];
         [sock.socket writeData:data withTimeout:1 tag:1];
         [timer invalidate];
     }
+}
+
+-(void)connect
+{
+    SocketManager *sock = [SocketManager defaultManager];
+    DeviceInfo *device =[DeviceInfo defaultManager];
+    if (device.connectState == offLine) {
+        [sock connectTcp];
+    }
+    sock.delegate = self;
 }
 
 - (void)viewDidLoad {
@@ -88,12 +94,6 @@
         self.deviceArr = [SQLManager deviceSubTypeByRoomId:self.roomID];
     }
     
-    SocketManager *sock = [SocketManager defaultManager];
-    sock.delegate = self;
-    
-    NSData *data = [[SceneManager defaultManager] getRealSceneData];
-    [sock.socket writeData:data withTimeout:1 tag:1];
-    NSLog(@"TCP请求Data:%@", data);
     //init nest dataSource
     [self initNestDataSource];
     
@@ -102,10 +102,9 @@
         self.title = @"九号大院";
         //nest login
         [self nestLogin];
+    }else{
+        [self connect];
     }
-    //查询设备状态
-    NSData *subdata = [[DeviceInfo defaultManager] query:self.deviceid];
-    [sock.socket writeData:subdata withTimeout:1 tag:1];
 
 }
 
@@ -247,59 +246,72 @@
         return;
     }
     Proto proto = protocolFromData(data);
+    
+//    if (CFSwapInt16BigToHost(proto.masterID) != [[UD objectForKey:@"HostID"] intValue]) {
+//        if ([device.db isEqualToString:SMART_DB]) {
+//            return;
+//        }
+//    }
   
     if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
         return;
     }
     if (tag==0) {
+        if (proto.cmd==0x85) {
+            SocketManager *sock = [SocketManager defaultManager];
+            NSData *data = [[SceneManager defaultManager] getRealSceneData];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+            //查询设备状态
+            NSData *subdata = [[DeviceInfo defaultManager] query:self.deviceid];
+            [sock.socket writeData:subdata withTimeout:1 tag:1];
+        }
         //缓存设备当前状态
         if (proto.cmd==0x01) {
-            //[SQLManager addStates:proto.deviceID onoff:proto.action.RValue];
-        }
-        
-        if (proto.action.state==0x6A) {
-            
-            self.cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
-        }
-        if (proto.action.state==0x8A) {
-            NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
-            self.cell.humidityLabel.text = valueString;
-        }
-        if (proto.action.state ==0x7D) {
-            if (proto.action.state == PROTOCOL_OFF) {
-                if (proto.deviceType == 01 || proto.deviceType == 02 || proto.deviceType == 03) {
-                    self.cell.lightImageVIew.hidden = YES;
-                }else if (proto.deviceType == 21 || proto.deviceType == 22){
-                    self.cell.curtainImageView.hidden = YES;
-                }else if (proto.deviceType == 12){
-                    self.cell.TVImageView.hidden = YES;
-                }else if (proto.deviceType == 13){
-                    self.cell.DVDImageView.hidden = YES;
-                }else if (proto.deviceType == 14){
-                    self.cell.musicImageVIew.hidden = YES;
-                }else if (proto.deviceType == 31){
-                    self.cell.airImageVIew.hidden = YES;
-                }
+            if (proto.action.state==0x6A) {
+                
+                self.cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
             }
-        }if (proto.action.state==0x7D) {
-           if (proto.action.state == PROTOCOL_ON) {
-                if (proto.deviceType == 01 || proto.deviceType == 02 || proto.deviceType == 03) {
-                    self.cell.lightImageVIew.hidden = NO;
-                }else if (proto.deviceType == 21 || proto.deviceType == 22){
-                    self.cell.curtainImageView.hidden = NO;
-                }else if (proto.deviceType == 12){
-                    self.cell.TVImageView.hidden = NO;
-                }else if (proto.deviceType == 13){
-                    self.cell.DVDImageView.hidden = NO;
-                }else if (proto.deviceType == 14){
-                    self.cell.musicImageVIew.hidden = NO;
-                }else if (proto.deviceType == 31){
-                    self.cell.airImageVIew.hidden = NO;
+            if (proto.action.state==0x8A) {
+                NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
+                self.cell.humidityLabel.text = valueString;
+            }
+            if (proto.action.state ==0x7D) {
+                if (proto.action.RValue == PROTOCOL_OFF) {
+                    if (proto.deviceType == 01 || proto.deviceType == 02 || proto.deviceType == 03) {
+                        self.cell.lightImageVIew.hidden = YES;
+                    }else if (proto.deviceType == 21 || proto.deviceType == 22){
+                        self.cell.curtainImageView.hidden = YES;
+                    }else if (proto.deviceType == 12){
+                        self.cell.TVImageView.hidden = YES;
+                    }else if (proto.deviceType == 13){
+                        self.cell.DVDImageView.hidden = YES;
+                    }else if (proto.deviceType == 14){
+                        self.cell.musicImageVIew.hidden = YES;
+                    }else if (proto.deviceType == 31){
+                        self.cell.airImageVIew.hidden = YES;
+                    }
+                }
+            }if (proto.cmd==0x7D) {
+               if (proto.action.state == PROTOCOL_ON) {
+                    if (proto.deviceType == 01 || proto.deviceType == 02 || proto.deviceType == 03) {
+                        self.cell.lightImageVIew.hidden = NO;
+                    }else if (proto.deviceType == 21 || proto.deviceType == 22){
+                        self.cell.curtainImageView.hidden = NO;
+                    }else if (proto.deviceType == 12){
+                        self.cell.TVImageView.hidden = NO;
+                    }else if (proto.deviceType == 13){
+                        self.cell.DVDImageView.hidden = NO;
+                    }else if (proto.deviceType == 14){
+                        self.cell.musicImageVIew.hidden = NO;
+                    }else if (proto.deviceType == 31){
+                        self.cell.airImageVIew.hidden = NO;
+                    }
                 }
             }
         }
     }
 }
+
 #pragma  mark - UICollectionViewDelegate
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
