@@ -53,7 +53,6 @@
 
 @implementation SceneController
 
-
 -(HostIDSController *)hostVC
 {
     if(!_hostVC)

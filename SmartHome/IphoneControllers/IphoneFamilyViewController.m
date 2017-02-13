@@ -24,6 +24,7 @@
 #import "IphoneLightController.h"
 #import "IPhoneRoom.h"
 #import "DeviceInfo.h"
+#import <AFNetworking.h>
 
 @interface IphoneFamilyViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,TcpRecvDelegate>
 @property (weak, nonatomic)  IBOutlet UICollectionView *collectionView;
@@ -87,10 +88,13 @@
         self.roomID = room.rId;
         self.deviceArr = [SQLManager deviceSubTypeByRoomId:self.roomID];
     }
+    //开启网络状况的监听
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityUpdate:) name: AFNetworkingReachabilityDidChangeNotification object: nil];
+    [self updateInterfaceWithReachability];
     
     SocketManager *sock = [SocketManager defaultManager];
     sock.delegate = self;
-    
+    [sock connectTcp];
     NSData *data = [[SceneManager defaultManager] getRealSceneData];
     [sock.socket writeData:data withTimeout:1 tag:1];
     NSLog(@"TCP请求Data:%@", data);
@@ -108,7 +112,51 @@
     [sock.socket writeData:subdata withTimeout:1 tag:1];
 
 }
-
+//监听到网络状态改变
+- (void) reachabilityUpdate: (NSNotification* )note
+{
+    [self updateInterfaceWithReachability];
+}
+//处理连接改变后的情况
+- (void) updateInterfaceWithReachability
+{
+    AFNetworkReachabilityManager *afNetworkReachabilityManager = [AFNetworkReachabilityManager sharedManager];
+    //[afNetworkReachabilityManager startMonitoring];  //开启网络监视器；
+    [afNetworkReachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        DeviceInfo *info = [DeviceInfo defaultManager];
+        if(status == AFNetworkReachabilityStatusReachableViaWWAN)
+        {
+            if (info.connectState==outDoor) {
+                //NSLog(@"外出模式");
+                //            [self.netBarBtn setImage:[UIImage imageNamed:@"wifi"]];
+                return;
+            }
+            if (info.connectState==offLine) {
+                NSLog(@"离线模式");
+                //            [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
+            }
+        }
+        else if(status == AFNetworkReachabilityStatusReachableViaWiFi)
+        {
+            if (info.connectState==atHome) {
+                NSLog(@"在家模式");
+                //            [self.netBarBtn setImage:[UIImage imageNamed:@"atHome"]];
+                return;
+            }else if (info.connectState==outDoor){
+                //NSLog(@"外出模式");
+                //            [self.netBarBtn setImage:[UIImage imageNamed:@"wifi"]];
+            }
+            if (info.connectState==offLine) {
+                NSLog(@"离线模式");
+                //            [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
+                
+            }
+        }else{
+            NSLog(@"离线模式");
+            //        [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
+        }
+    }];
+}
 - (void)initNestDataSource {
     _nest_devices_arr = [[NSMutableArray alloc] init];
     _nest_curr_temperature_arr = [[NSMutableArray alloc] init];
@@ -247,32 +295,20 @@
         return;
     }
     Proto proto = protocolFromData(data);
-    
-//    if (CFSwapInt16BigToHost(proto.masterID) != [[UD objectForKey:@"HostID"] intValue]) {
-//        if ([device.db isEqualToString:SMART_DB]) {
-//            return;
-//        }
-//    }
-  
     if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
         return;
     }
+    
     if (tag==0) {
         //缓存设备当前状态
-        if (proto.cmd==0x01) {
-            //[SQLManager addStates:proto.deviceID onoff:proto.action.RValue];
-            self.cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
-        }
-        
-        if (proto.cmd==0x6A) {
-            
-            self.cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
-        }
-        if (proto.cmd==0x8A) {
-            NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
-            self.cell.humidityLabel.text = valueString;
-        }
-        if (proto.cmd ==0x7D) {
+        if (proto.cmd ==0x01) {
+            if (proto.action.state == 0x8A) {
+                NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
+                self.cell.humidityLabel.text = valueString;
+            }
+            if (proto.action.state == 0x6A) {
+                self.cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
+            }
             if (proto.action.state == PROTOCOL_OFF) {
                 if (proto.deviceType == 01 || proto.deviceType == 02 || proto.deviceType == 03) {
                     self.cell.lightImageVIew.hidden = YES;
@@ -288,8 +324,7 @@
                     self.cell.airImageVIew.hidden = YES;
                 }
             }
-        }if (proto.cmd==0x7D) {
-           if (proto.action.state == PROTOCOL_ON) {
+            if (proto.action.state == PROTOCOL_ON) {
                 if (proto.deviceType == 01 || proto.deviceType == 02 || proto.deviceType == 03) {
                     self.cell.lightImageVIew.hidden = NO;
                 }else if (proto.deviceType == 21 || proto.deviceType == 22){
@@ -370,4 +405,5 @@
     // Pass the selected object to the new view controller.
 }
 */
+
 @end

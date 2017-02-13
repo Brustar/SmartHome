@@ -2711,7 +2711,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6i8-ec-eLV" customClass="MyView">
                                                     <rect key="frame" x="62" y="17" width="249.5" height="50"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t20-oz-ws8">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t20-oz-ws8" customClass="MySubView">
                                                             <rect key="frame" x="0.0" y="10" width="249.5" height="10"/>
                                                             <color key="backgroundColor" red="0.88665550159999995" green="0.88665550159999995" blue="0.88665550159999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
@@ -8472,24 +8472,24 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nIi-Kc-QDm"/>
-        <segue reference="5K5-wE-mZz"/>
-        <segue reference="PRs-sg-E1F"/>
+        <segue reference="JQm-bA-TWz"/>
         <segue reference="ya3-gG-p8O"/>
+        <segue reference="PRs-sg-E1F"/>
+        <segue reference="nIi-Kc-QDm"/>
+        <segue reference="QfD-HS-G6N"/>
+        <segue reference="3pI-26-H7E"/>
+        <segue reference="fXQ-oW-cHz"/>
+        <segue reference="5K5-wE-mZz"/>
+        <segue reference="fHn-Cm-7Q7"/>
         <segue reference="vKk-7C-VKf"/>
-        <segue reference="tt4-nB-rfe"/>
-        <segue reference="pWG-oz-Opr"/>
         <segue reference="Vzc-yi-Jnw"/>
         <segue reference="a9T-LN-ZVX"/>
-        <segue reference="l23-e3-J0C"/>
+        <segue reference="pWG-oz-Opr"/>
+        <segue reference="tt4-nB-rfe"/>
         <segue reference="vdf-Gi-dZf"/>
-        <segue reference="JQm-bA-TWz"/>
+        <segue reference="l23-e3-J0C"/>
         <segue reference="tdV-sS-d5j"/>
-        <segue reference="fHn-Cm-7Q7"/>
         <segue reference="X9P-hg-DXo"/>
         <segue reference="YE7-iU-rxh"/>
-        <segue reference="fXQ-oW-cHz"/>
-        <segue reference="tmA-nZ-aS8"/>
-        <segue reference="3pI-26-H7E"/>
     </inferredMetricsTieBreakers>
 </document>
