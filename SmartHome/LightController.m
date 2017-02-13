@@ -312,8 +312,8 @@
         return;
     }
     //同步设备状态
-    if(proto.cmd == 0x01){
-        self.detailCell.power.on = proto.action.state;
+    if(proto.cmd == 0x01 && proto.action.state == 0x7D){
+        self.detailCell.power.on = proto.action.RValue;
     }
     if (tag == 0 && (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON || proto.action.state == 0x0b || proto.action.state == 0x0a)) {
         NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
