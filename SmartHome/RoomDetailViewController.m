@@ -53,11 +53,18 @@
 - (void)initDataSource {
     _deviceTypes = [NSMutableArray arrayWithArray:[SQLManager getDevicesSubTypeNamesWithRoomID:self.roomID]];//设备大类;
     
-    if (_deviceTypes.count >0) {
-        
-        _deviceSubTypes = [NSMutableArray arrayWithArray:[SQLManager getDeviceTypeName:self.roomID subTypeName:_deviceTypes[0]]];//设备小类
+    if (_deviceTypes.count <=0) {
+        [MBProgressHUD showError:@"此房间暂无设备"];
+        //[self.navigationController popViewControllerAnimated:YES];
+        return;
     }
     
+        for (NSString *subTypeName in _deviceTypes) {
+            if (subTypeName.length >0) {
+                _deviceSubTypes = [NSMutableArray arrayWithArray:[SQLManager getDeviceTypeName:self.roomID subTypeName:subTypeName]];//设备小类
+                break;
+            }
+        }
     
 }
 
