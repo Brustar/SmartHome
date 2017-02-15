@@ -58,7 +58,10 @@
 //验证手机号是否已注册
 - (void)checkPhoneNumberIsExist {
     
-    NSDictionary *dict = @{@"mobile":self.phoneNumTextField.text};
+    NSDictionary *dict = @{@"mobile":self.phoneNumTextField.text,
+                           @"optype":@(1)
+                           };
+    
     NSString *url = [NSString stringWithFormat:@"%@login/send_code.aspx",[IOManager httpAddr]];
     HttpManager *http = [HttpManager defaultManager];
     http.tag = 1;
