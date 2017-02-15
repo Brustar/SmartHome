@@ -24,6 +24,7 @@
 #import "WindowSlidingController.h"
 #import "BgMusicController.h"
 #import "PluginViewController.h"
+#import "MBProgressHUD+NJ.h"
 
 @interface RoomDetailViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *deviceTypeTableView;

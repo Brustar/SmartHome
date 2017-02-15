@@ -92,7 +92,11 @@
         dispatch_resume(self._timer);
         }
         //点击验证码发送请求
-        NSDictionary *dict = @{@"mobile":self.phoneStr,@"optype":[NSNumber numberWithInt:0]};
+        NSDictionary *dict = @{
+                               @"mobile":self.phoneStr,
+                               @"optype":@(0)
+                               };
+
         HttpManager *http = [HttpManager defaultManager];
         http.delegate = self;
         http.tag =1;
