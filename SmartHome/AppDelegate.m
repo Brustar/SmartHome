@@ -20,6 +20,7 @@
 #import "VoiceOrderController.h"
 #import "IphoneFavorController.h"
 #import "IphoneFamilyViewController.h"
+#import "IphoneTabBarViewController.h"
 
 @implementation AppDelegate
 
@@ -45,12 +46,14 @@
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
         NSString *UIname=@"main";
+//        IphoneTabBarViewController * iphoneTabBar = [[IphoneTabBarViewController alloc] init];
         //已登录时,自动登录
         if ([[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]) {
-            UIname=@"IphoneMainController";
+            UIname=@"IphoneTabBarViewController";
+//              self.window.rootViewController = iphoneTabBar;
         }
         UIViewController* viewcontroller = [secondStoryBoard instantiateViewControllerWithIdentifier:UIname];
-        self.window.rootViewController = viewcontroller;
+       self.window.rootViewController = viewcontroller;
         [self.window makeKeyAndVisible];
     }else{
         //已登录时

@@ -11,6 +11,7 @@
 #import "MBProgressHUD+NJ.h"
 #import "EnenCell.h"
 #import "MyView.h"
+#import "MySubView.h"
 
 @interface ENenViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -18,7 +19,7 @@
 @property (nonatomic,strong) NSMutableArray * startTimeArr;
 @property (nonatomic,strong) NSMutableArray * endTimeArr;
 @property (nonatomic,strong) MyView * myview;
-
+@property (nonatomic,strong) MySubView * mySubView;
 
 @end
 
@@ -46,6 +47,7 @@
     }
     return _endTimeArr;
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -68,21 +70,15 @@
         }
         [self.tableView reloadData];
     }
-    
-
-    
-    
-    
-    
        self.title = self.titleName;
     UIView *view = [[UIView alloc] init];
     [view setBackgroundColor:[UIColor clearColor]];
     self.tableView.tableFooterView = view;
 
     //设置线条宽度
-    _myview.lineWidth = 5;
+    _mySubView.lineWidth = 5;
     //设置线条颜色
-    _myview.lineColor = [UIColor redColor];
+    _mySubView.lineColor = [UIColor redColor];
 
     //添加绘制多条直线代码
     CGLine line1 = {
@@ -94,16 +90,14 @@
         CGPointMake(50,0),
         CGPointMake(80,0)
     };
-    
     NSValue *value1 = [NSValue valueWithBytes:&line1 objCType:@encode(struct CGLine)];
     NSValue *value2 = [NSValue valueWithBytes:&line2 objCType:@encode(struct CGLine)];
     
     NSMutableArray *lineArr = [[NSMutableArray alloc] init];
     [lineArr addObject:value1];
     [lineArr addObject:value2];
-    _myview.lineArr = lineArr;
+    _mySubView.lineArr = lineArr;
 
-    
     
 }
 -(void)sendRequestToGetEenrgyWithEqid:(int)eqid

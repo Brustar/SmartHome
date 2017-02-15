@@ -60,12 +60,9 @@
      [self setUpRoomView];
     self.arrayData = @[@"删除此场景",@"收藏",@"语音"];
     //开启网络状况的监听
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityUpdate:) name: AFNetworkingReachabilityDidChangeNotification object: nil];
-
-    [self updateInterfaceWithReachability];
-    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityUpdate:) name: AFNetworkingReachabilityDidChangeNotification object: nil];
+//    [self updateInterfaceWithReachability];
     [self reachNotification];
-    
     _AddSceneBtn.layer.cornerRadius = _AddSceneBtn.bounds.size.width / 2.0; //圆角半径
     _AddSceneBtn.layer.masksToBounds = YES; //圆角
     self.navigationItem.rightBarButtonItems = nil;
@@ -80,13 +77,11 @@
 }
 -(void)setNavi
 {
-    
     self.titleButton = [[UIButton alloc]init];
     self.titleButton.frame = CGRectMake(0, 0, 180, 40);
     NSArray *roomList = [SQLManager getAllRoomsInfo];
     Room *room = roomList[0];
     [self.titleButton setTitle:room.rName forState:UIControlStateNormal];
-    
     [self.titleButton setImage:[UIImage imageNamed:@"down"] forState:UIControlStateNormal];
     [self.titleButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.titleButton.imageEdgeInsets = UIEdgeInsetsMake(0, 160, 0, 0);
@@ -100,51 +95,47 @@
 {
     [self performSegueWithIdentifier:@"roomListSegue" sender:self];
 }
-//监听到网络状态改变
-- (void) reachabilityUpdate: (NSNotification* )note
-{
-    [self updateInterfaceWithReachability];
-}
-//处理连接改变后的情况
-- (void) updateInterfaceWithReachability
-{
-    AFNetworkReachabilityManager *afNetworkReachabilityManager = [AFNetworkReachabilityManager sharedManager];
-    //[afNetworkReachabilityManager startMonitoring];  //开启网络监视器；
-    [afNetworkReachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        DeviceInfo *info = [DeviceInfo defaultManager];
-        if(status == AFNetworkReachabilityStatusReachableViaWWAN)
-        {
-            if (info.connectState==outDoor) {
-                //NSLog(@"外出模式");
-    //            [self.netBarBtn setImage:[UIImage imageNamed:@"wifi"]];
-                return;
-            }
-            if (info.connectState==offLine) {
-                NSLog(@"离线模式");
-    //            [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
-            }
-        }
-        else if(status == AFNetworkReachabilityStatusReachableViaWiFi)
-        {
-            if (info.connectState==atHome) {
-                NSLog(@"在家模式");
-    //            [self.netBarBtn setImage:[UIImage imageNamed:@"atHome"]];
-                return;
-            }else if (info.connectState==outDoor){
-                //NSLog(@"外出模式");
-    //            [self.netBarBtn setImage:[UIImage imageNamed:@"wifi"]];
-            }
-            if (info.connectState==offLine) {
-                NSLog(@"离线模式");
-    //            [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
 
-            }
-        }else{
-            NSLog(@"离线模式");
-    //        [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
-        }
-    }];
-}
+////处理连接改变后的情况
+//- (void) updateInterfaceWithReachability
+//{
+//    AFNetworkReachabilityManager *afNetworkReachabilityManager = [AFNetworkReachabilityManager sharedManager];
+//    //[afNetworkReachabilityManager startMonitoring];  //开启网络监视器；
+//    [afNetworkReachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+//        DeviceInfo *info = [DeviceInfo defaultManager];
+//        if(status == AFNetworkReachabilityStatusReachableViaWWAN)
+//        {
+//            if (info.connectState==outDoor) {
+//                //NSLog(@"外出模式");
+//    //            [self.netBarBtn setImage:[UIImage imageNamed:@"wifi"]];
+//                return;
+//            }
+//            if (info.connectState==offLine) {
+//                NSLog(@"离线模式");
+//    //            [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
+//            }
+//        }
+//        else if(status == AFNetworkReachabilityStatusReachableViaWiFi)
+//        {
+//            if (info.connectState==atHome) {
+//                NSLog(@"在家模式");
+//    //            [self.netBarBtn setImage:[UIImage imageNamed:@"atHome"]];
+//                return;
+//            }else if (info.connectState==outDoor){
+//                //NSLog(@"外出模式");
+//    //            [self.netBarBtn setImage:[UIImage imageNamed:@"wifi"]];
+//            }
+//            if (info.connectState==offLine) {
+//                NSLog(@"离线模式");
+//    //            [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
+//
+//            }
+//        }else{
+//            NSLog(@"离线模式");
+//    //        [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
+//        }
+//    }];
+//}
 
 - (void)reachNotification
 {

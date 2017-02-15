@@ -18,6 +18,7 @@
 #import "SunCount.h"
 #import <CoreLocation/CoreLocation.h>
 #import "PackManager.h"
+#import "IphoneTabBarViewController.h"
 
 @interface WelcomeController ()<QRCodeReaderDelegate,UIScrollViewDelegate,UIGestureRecognizerDelegate,UIPageViewControllerDelegate,NSLayoutManagerDelegate,CLLocationManagerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *knowView;
@@ -97,7 +98,7 @@
     
     if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
-        [self performSegueWithIdentifier:@"iphoneMainSegue" sender:self];
+        [self performSegueWithIdentifier:@"iphoneTabBar" sender:self];
     }else{
         [self performSegueWithIdentifier:@"gotoMainController" sender:self];
     }
@@ -234,6 +235,7 @@
     }
     
 }
+
 
 - (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result
 {

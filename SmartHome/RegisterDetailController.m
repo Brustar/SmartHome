@@ -96,6 +96,7 @@
                                @"mobile":self.phoneStr,
                                @"optype":@(0)
                                };
+
         HttpManager *http = [HttpManager defaultManager];
         http.delegate = self;
         http.tag =1;

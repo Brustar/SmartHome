@@ -58,6 +58,7 @@
 //验证手机号是否已注册
 - (void)checkPhoneNumberIsExist {
     
+
     NSDictionary *dict = @{@"mobile":self.phoneNumTextField.text,
                            @"optype":@(1)
                            };
