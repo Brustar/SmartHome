@@ -50,15 +50,15 @@
     self.nameLabel.text = [[NSUserDefaults  standardUserDefaults] objectForKey:@"UserName"];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.nameLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserName"];
-    self.titlArr = @[@"我的故障",@"我的保修记录",@"我的能耗",@"我的收藏",@"我的消息",@"定时器"];
-    self.images = @[@"my",@"energy",@"record",@"store",@"message",@"device_MySetting"];
+    self.titlArr = @[@"我的故障",@"我的保修记录",@"我的能耗",@"我的收藏",@"我的消息"];
+    self.images = @[@"my",@"energy",@"record",@"store",@"message"];
 //    self.tableHight.constant = self.titlArr.count * hight + self.headView.frame.size.height;
     self.navigationController.navigationBar.backgroundColor = [UIColor lightGrayColor];
     self.tableView.tableFooterView = [UIView new];
 //    self.tableView.scrollEnabled = NO;
     self.tableView.tableHeaderView = self.headView;
     
-    self.segues = @[@"iphoneDefault",@"iphoneRecordSegue",@"iphoneEngerSegue",@"iphoneFavorSegue",@"iphoneMsgSegue",@"DeviceListTimeVC"];
+    self.segues = @[@"iphoneDefault",@"iphoneRecordSegue",@"iphoneEngerSegue",@"iphoneFavorSegue",@"iphoneMsgSegue"];
     
  
 }

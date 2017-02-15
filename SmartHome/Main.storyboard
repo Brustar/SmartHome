@@ -3596,7 +3596,7 @@
                                 <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view hidden="YES" alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EfH-bz-9V6">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EfH-bz-9V6">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N4b-CN-sDX">
@@ -3636,7 +3636,7 @@
                                         </variation>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.86852824080000002" green="0.86852824080000002" blue="0.86852824080000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.88665550159999995" green="0.88665550159999995" blue="0.88665550159999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="N4b-CN-sDX" firstAttribute="centerX" secondItem="EfH-bz-9V6" secondAttribute="centerX" constant="12.5" id="B5k-4I-whF"/>
                                     <constraint firstItem="N4b-CN-sDX" firstAttribute="centerY" secondItem="EfH-bz-9V6" secondAttribute="centerY" id="Pay-GY-aMc"/>
@@ -8476,11 +8476,8 @@ layer.masksToBoundslayer.masksToBounds
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ya3-gG-p8O"/>
-        <segue reference="PRs-sg-E1F"/>
+        <segue reference="mRk-xU-xJj"/>
         <segue reference="sa4-D6-iWJ"/>
-        <segue reference="uCb-ME-O7C"/>
-        <segue reference="tmA-nZ-aS8"/>
-        <segue reference="3pI-26-H7E"/>
         <segue reference="5K5-wE-mZz"/>
         <segue reference="X9P-hg-DXo"/>
         <segue reference="fHn-Cm-7Q7"/>
@@ -8494,5 +8491,8 @@ layer.masksToBoundslayer.masksToBounds
         <segue reference="l23-e3-J0C"/>
         <segue reference="tdV-sS-d5j"/>
         <segue reference="YE7-iU-rxh"/>
+        <segue reference="tmA-nZ-aS8"/>
+        <segue reference="fXQ-oW-cHz"/>
+        <segue reference="vLw-tf-AJR"/>
     </inferredMetricsTieBreakers>
 </document>

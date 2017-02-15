@@ -2591,7 +2591,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="466-3m-XBe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="522" y="975"/>
+            <point key="canvasLocation" x="503" y="1321"/>
         </scene>
         <!--保修记录-->
         <scene sceneID="v7W-pa-DaF">
@@ -2614,12 +2614,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vnr-a8-fHk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="905" y="998"/>
+            <point key="canvasLocation" x="938" y="1223"/>
         </scene>
         <!--我的定时设备-->
         <scene sceneID="8Qo-NS-6YZ">
             <objects>
-                <viewController id="wwN-BC-DXs" userLabel="我的定时设备" customClass="DeviceListTimeVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="iPhoneDeviceListTimeVC" id="wwN-BC-DXs" userLabel="我的定时设备" customClass="DeviceListTimeVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Pg6-mA-YOy"/>
                         <viewControllerLayoutGuide type="bottom" id="2tV-Lp-rRp"/>
@@ -2648,7 +2648,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sem-6T-93X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="83.5" y="882.5"/>
+            <point key="canvasLocation" x="11" y="1159"/>
         </scene>
         <!--能耗-->
         <scene sceneID="3MF-3M-cux">
@@ -5307,8 +5307,8 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="lPv-wZ-EAG"/>
+        <segue reference="qN8-z6-Gb7"/>
         <segue reference="J5F-aP-6iz"/>
-        <segue reference="vWH-k8-ixo"/>
         <segue reference="dKC-Kt-cWh"/>
         <segue reference="YfK-Z8-Yeo"/>
     </inferredMetricsTieBreakers>

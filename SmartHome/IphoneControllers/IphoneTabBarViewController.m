@@ -50,7 +50,7 @@
     UINavigationController * naVC5= [[UINavigationController alloc] initWithRootViewController:profireList];
     profireList.title = @"我的";
     profireList.tabBarItem.image = [UIImage imageNamed:@"me-Mysetting"];
-    self.viewControllers = @[naVC1,naVC2,naVC3,naVC4,naVC5];
+    self.viewControllers = @[naVC1,naVC3,naVC4,naVC5];
 
 }
 
