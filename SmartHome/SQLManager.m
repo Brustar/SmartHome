@@ -707,6 +707,33 @@
     return snumber;
 }
 
++(int) getRoomIDByNumber:(NSString *)enumber
+{
+    DeviceInfo *device = [DeviceInfo defaultManager];
+    long masterID = 255l;
+    if ([device.db isEqualToString:SMART_DB]) {
+        masterID = [[DeviceInfo defaultManager] masterID];
+    }
+    
+    NSString *sql=[NSString stringWithFormat:@"select rId from devices where enumber='%@' and masterID = '%ld'",enumber, masterID];
+    
+    int roomId=0;
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        FMResultSet *resultSet = [db executeQuery:sql];
+        
+        if([resultSet next])
+        {
+            roomId = [resultSet intForColumn:@"rId"];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return roomId;
+    
+}
+
 +(int) getRoomID:(int)sceneID
 {
     DeviceInfo *device = [DeviceInfo defaultManager];

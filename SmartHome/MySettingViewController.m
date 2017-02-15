@@ -53,14 +53,14 @@
     if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
         if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) { //如果是普通用户，不显示“权限控制”选项
-            return 4;
+            return 5;
         }
-            return 5;//如果是主人，显示“权限控制”选项
+            return 6;//如果是主人，显示“权限控制”选项
     }else{
         if([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) { //2代表普通用户，如果是普通用户，不显示“权限控制”选项
-            return 5;
+            return 6;
         }else {
-            return 6;//如果是主人，显示“权限控制”选项
+            return 7;//如果是主人，显示“权限控制”选项
         }
     }
     
@@ -74,11 +74,13 @@
         }
     
     }else {
-        if (section == 2) {
+        if (section == 3) {
             return 2;
         }
     }
-    
+    if (section ==2) {
+        return 2;
+    }
     return 1;
 }
 
@@ -105,6 +107,14 @@
             
             break;
         case 2:
+                if(indexPath.row == 0)
+                {
+                    title = @"场景设置";
+                }else {
+                    title = @"定时器";
+                }
+            break;
+        case 3:
         {
            if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) {
                     title = @"去评价";
@@ -119,7 +129,7 @@
             
             break;
         }
-        case 3:
+        case 4:
             if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) {
                 title = @"关于我们";
             }else {
@@ -128,7 +138,7 @@
             }
             
             break;
-        case 4:
+        case 5:
             if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) {
                 title = @"退出";
             }else{

@@ -32,12 +32,13 @@
 @property (nonatomic,strong) NSMutableArray * roomIdArrs;//房间数量
 @property (nonatomic,strong) NSArray *rooms;
 //@property (nonatomic,strong) IPhoneRoom * room;
-@property (nonatomic,strong) FamilyCell *cell;
+//@property (nonatomic,strong) FamilyCell *cell;
 //@property (nonatomic,strong)NSMutableArray  *iPhoneRoomList;
 @property (nonatomic,assign)  int roomID;
 @property (nonatomic,strong)  NSArray * deviceArr;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *fixTimeBarBtn;//是否存在定时设备或者场景
 @property (nonatomic, weak) UIViewController *selectController;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *netBarBtnItem;
 
 @property (nonatomic,strong) IphoneFamilyViewController * familyVC;
 @end
@@ -60,22 +61,28 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
     [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timer:) userInfo:nil repeats:YES];
-    
 }
 
 -(void)timer:(NSTimer *)timer
 {
     SocketManager *sock = [SocketManager defaultManager];
-    [sock connectTcp];
-    sock.delegate = self;
     DeviceInfo *device =[DeviceInfo defaultManager];
     if (device.connectState == outDoor && device.masterID) {
         NSData *data = [[SceneManager defaultManager] getRealSceneData];
-        [sock.socket writeData:data withTimeout:1 tag:1];
+        [sock.socket writeData:data withTimeout:1 tag:0];
         [timer invalidate];
     }
+}
+
+-(void)connect
+{
+    SocketManager *sock = [SocketManager defaultManager];
+    DeviceInfo *device =[DeviceInfo defaultManager];
+    if (device.connectState == offLine) {
+        [sock connectTcp];
+    }
+    sock.delegate = self;
 }
 
 - (void)viewDidLoad {
@@ -88,16 +95,15 @@
         self.roomID = room.rId;
         self.deviceArr = [SQLManager deviceSubTypeByRoomId:self.roomID];
     }
+    SocketManager *sock=[SocketManager defaultManager];
+    DeviceInfo *info = [DeviceInfo defaultManager];
+    if ([info.db isEqualToString:SMART_DB]) {
+        [sock connectTcp];
+    }
     //开启网络状况的监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityUpdate:) name: AFNetworkingReachabilityDidChangeNotification object: nil];
     [self updateInterfaceWithReachability];
-    
-    SocketManager *sock = [SocketManager defaultManager];
-    sock.delegate = self;
-    [sock connectTcp];
-    NSData *data = [[SceneManager defaultManager] getRealSceneData];
-    [sock.socket writeData:data withTimeout:1 tag:1];
-    NSLog(@"TCP请求Data:%@", data);
+
     //init nest dataSource
     [self initNestDataSource];
     
@@ -106,10 +112,9 @@
         self.title = @"九号大院";
         //nest login
         [self nestLogin];
+    }else{
+        [self connect];
     }
-    //查询设备状态
-    NSData *subdata = [[DeviceInfo defaultManager] query:self.deviceid];
-    [sock.socket writeData:subdata withTimeout:1 tag:1];
 
 }
 //监听到网络状态改变
@@ -127,33 +132,34 @@
         if(status == AFNetworkReachabilityStatusReachableViaWWAN)
         {
             if (info.connectState==outDoor) {
-                //NSLog(@"外出模式");
-                //            [self.netBarBtn setImage:[UIImage imageNamed:@"wifi"]];
+                NSLog(@"外出模式");
+                [self.netBarBtnItem setImage:[UIImage imageNamed:@"Iphonewifi"]];
+                
                 return;
             }
             if (info.connectState==offLine) {
                 NSLog(@"离线模式");
-                //            [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
+                [self.netBarBtnItem setImage:[UIImage imageNamed:@"IphoneBreakWIFI"]];
             }
         }
         else if(status == AFNetworkReachabilityStatusReachableViaWiFi)
         {
             if (info.connectState==atHome) {
                 NSLog(@"在家模式");
-                //            [self.netBarBtn setImage:[UIImage imageNamed:@"atHome"]];
+                [self.netBarBtnItem setImage:[UIImage imageNamed:@"atHome"]];
                 return;
             }else if (info.connectState==outDoor){
-                //NSLog(@"外出模式");
-                //            [self.netBarBtn setImage:[UIImage imageNamed:@"wifi"]];
+                NSLog(@"外出模式");
+                [self.netBarBtnItem setImage:[UIImage imageNamed:@"Iphonewifi"]];
             }
             if (info.connectState==offLine) {
                 NSLog(@"离线模式");
-                //            [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
+              [self.netBarBtnItem setImage:[UIImage imageNamed:@"IphoneBreakWIFI"]];
                 
             }
         }else{
             NSLog(@"离线模式");
-            //        [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
+            [self.netBarBtnItem setImage:[UIImage imageNamed:@"IphoneBreakWIFI"]];
         }
     }];
 }
@@ -301,42 +307,29 @@
     
     if (tag==0) {
         //缓存设备当前状态
-        if (proto.cmd ==0x01) {
-            if (proto.action.state == 0x8A) {
+        if (proto.cmd==0x01) {
+            int tag = [SQLManager getRoomIDByNumber:[NSString stringWithFormat:@"%04X", CFSwapInt16BigToHost(proto.deviceID)]];
+            FamilyCell *cell = [self.view viewWithTag:tag];
+            if (proto.action.state==0x6A) {
+                cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
+            }
+            if (proto.action.state==0x8A) {
                 NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
-                self.cell.humidityLabel.text = valueString;
+                cell.humidityLabel.text = valueString;
             }
-            if (proto.action.state == 0x6A) {
-                self.cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
-            }
-            if (proto.action.state == PROTOCOL_OFF) {
+            if (proto.action.state ==0x7D) {
                 if (proto.deviceType == 01 || proto.deviceType == 02 || proto.deviceType == 03) {
-                    self.cell.lightImageVIew.hidden = YES;
+                    cell.lightImageVIew.hidden = proto.action.RValue;
                 }else if (proto.deviceType == 21 || proto.deviceType == 22){
-                    self.cell.curtainImageView.hidden = YES;
+                    cell.curtainImageView.hidden = proto.action.RValue;
                 }else if (proto.deviceType == 12){
-                    self.cell.TVImageView.hidden = YES;
+                    cell.TVImageView.hidden = proto.action.RValue;
                 }else if (proto.deviceType == 13){
-                    self.cell.DVDImageView.hidden = YES;
+                    cell.DVDImageView.hidden = proto.action.RValue;
                 }else if (proto.deviceType == 14){
-                    self.cell.musicImageVIew.hidden = YES;
+                    cell.musicImageVIew.hidden = proto.action.RValue;
                 }else if (proto.deviceType == 31){
-                    self.cell.airImageVIew.hidden = YES;
-                }
-            }
-            if (proto.action.state == PROTOCOL_ON) {
-                if (proto.deviceType == 01 || proto.deviceType == 02 || proto.deviceType == 03) {
-                    self.cell.lightImageVIew.hidden = NO;
-                }else if (proto.deviceType == 21 || proto.deviceType == 22){
-                    self.cell.curtainImageView.hidden = NO;
-                }else if (proto.deviceType == 12){
-                    self.cell.TVImageView.hidden = NO;
-                }else if (proto.deviceType == 13){
-                    self.cell.DVDImageView.hidden = NO;
-                }else if (proto.deviceType == 14){
-                    self.cell.musicImageVIew.hidden = NO;
-                }else if (proto.deviceType == 31){
-                    self.cell.airImageVIew.hidden = NO;
+                    cell.airImageVIew.hidden = proto.action.RValue;
                 }
             }
         }
@@ -355,18 +348,19 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    self.cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    FamilyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     Room * room = self.rooms[indexPath.row];
-    self.cell.nameLabel.text = room.rName;
+    cell.nameLabel.text = room.rName;
     
     if ([[UD objectForKey:@"HostID"] intValue] == 258) {  //九号大院
-        self.cell.nameLabel.text = [NSString stringWithFormat:@"%@", [_nest_en_room_name_arr objectAtIndex:indexPath.row]];
-        self.cell.tempLabel.text =  [NSString stringWithFormat:@"%@%@", [_nest_curr_temperature_arr objectAtIndex:indexPath.row], @"℃"];
-        self.cell.humidityLabel.text = [NSString stringWithFormat:@"%@%@", [_nest_curr_humidity_arr objectAtIndex:indexPath.row], @"%"];
+        cell.nameLabel.text = [NSString stringWithFormat:@"%@", [_nest_en_room_name_arr objectAtIndex:indexPath.row]];
+        cell.tempLabel.text =  [NSString stringWithFormat:@"%@%@", [_nest_curr_temperature_arr objectAtIndex:indexPath.row], @"℃"];
+        cell.humidityLabel.text = [NSString stringWithFormat:@"%@%@", [_nest_curr_humidity_arr objectAtIndex:indexPath.row], @"%"];
+    }else{
+        cell.tag = room.rId;
     }
 
-    return  self.cell;
+    return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

@@ -33,7 +33,7 @@
 @end
 
 @implementation ECloudTabBar
-
+//ipad上面的tabbar与iphone无关
 - (instancetype)init
 {
     if (self = [super init]) {

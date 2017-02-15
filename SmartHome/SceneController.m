@@ -212,14 +212,14 @@
 
 
 //监听到网络状态改变
-- (void) reachabilityUpdate: (NSNotification* )note
+- (void)reachabilityUpdate: (NSNotification* )note
 {
     [self updateInterfaceWithReachability];
 }
 
 
 //处理连接改变后的情况
-- (void) updateInterfaceWithReachability
+- (void)updateInterfaceWithReachability
 {
     AFNetworkReachabilityManager *afNetworkReachabilityManager = [AFNetworkReachabilityManager sharedManager];
     //[afNetworkReachabilityManager startMonitoring];  //开启网络监视器；
@@ -303,7 +303,7 @@
     [[SceneManager defaultManager] startScene:scene.sceneID];
     [self performSegueWithIdentifier:@"sceneDetailSegue" sender:self];
 }
--(void)startSceneAction:(UIButton *)btn{
+-(void)startSceneAction:(UIButton *)btn {
     int sceneId = (int)btn.tag;
     [btn setTintColor:[UIColor redColor]];
     [[SceneManager defaultManager] startScene:sceneId];

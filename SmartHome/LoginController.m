@@ -442,7 +442,7 @@
 //    }
 }
 
-#pragma - mark http delegate
+#pragma mark -  http delegate
 -(void) httpHandler:(id) responseObject tag:(int)tag
 {
     DeviceInfo *info=[DeviceInfo defaultManager];

@@ -33,7 +33,7 @@
 @property (nonatomic,strong) NSMutableArray * roomIdArrs;//房间数量
 @property (nonatomic,strong) NSArray *rooms;
 //@property (nonatomic,strong) IPhoneRoom * room;
-@property (nonatomic,strong) FamilyCell *cell;
+//@property (nonatomic,strong) FamilyCell *cell;
 //@property (nonatomic,strong)NSMutableArray  *iPhoneRoomList;
 @property (nonatomic,assign)  int roomID;
 @property (nonatomic,strong)  NSArray * deviceArr;
@@ -59,22 +59,29 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
     [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timer:) userInfo:nil repeats:YES];
-    
 }
 
 -(void)timer:(NSTimer *)timer
 {
     SocketManager *sock = [SocketManager defaultManager];
-    [sock connectTcp];
     sock.delegate = self;
     DeviceInfo *device =[DeviceInfo defaultManager];
     if (device.connectState == outDoor && device.masterID) {
         NSData *data = [[SceneManager defaultManager] getRealSceneData];
-        [sock.socket writeData:data withTimeout:1 tag:1];
+        [sock.socket writeData:data withTimeout:1 tag:0];
         [timer invalidate];
     }
+}
+
+-(void)connect
+{
+    SocketManager *sock = [SocketManager defaultManager];
+    DeviceInfo *device =[DeviceInfo defaultManager];
+    if (device.connectState == offLine) {
+        [sock connectTcp];
+    }
+    sock.delegate = self;
 }
 
 - (void)viewDidLoad {
@@ -98,6 +105,8 @@
         self.navigationItem.title = @"九号大院";
         //nest login
         [self nestLogin];
+    }else{
+        [self connect];
     }
     
     //自定义bar item
@@ -256,47 +265,45 @@
         return;
     }
     
-    //    NSArray * hTypeIdArr = @[@"01",@"02",@"03",@"12",@"13",@"14",@"21",@"22",@"31"];
     Proto proto = protocolFromData(data);
     
     if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
         return;
     }
-    if (tag==0) {
-        if (proto.cmd==0x6A) {
-            
-            self.cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
-        }
-        if (proto.cmd==0x8A) {
-            NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
-            self.cell.humidityLabel.text = valueString;
-        }
-        if (proto.cmd==0x7D) {
-            if (proto.action.state==0x00) {
-                for (Device * device in self.deviceArr) {
-                    if (device.hTypeId == 01 || device.hTypeId == 02 || device.hTypeId == 03) {
-                        self.cell.lightImageVIew.hidden = YES;
-                    }else if (device.hTypeId == 21 || device.hTypeId == 22){
-                        self.cell.curtainImageView.hidden = YES;
-                    }else if (device.hTypeId == 12){
-                        self.cell.TVImageView.hidden = YES;
-                    }else if (device.hTypeId == 13){
-                        self.cell.DVDImageView.hidden = YES;
-                    }else if (device.hTypeId == 14){
-                        self.cell.musicImageVIew.hidden = YES;
-                    }else if (device.hTypeId == 31){
-                        self.cell.airImageVIew.hidden = YES;
+    if (tag==0){
+        if(proto.cmd==0x01) {
+            int tag = [SQLManager getRoomIDByNumber:[NSString stringWithFormat:@"%04X", CFSwapInt16BigToHost(proto.deviceID)]];
+            FamilyCell *cell = [self.view viewWithTag:tag];
+            if (proto.action.state==0x6A) {
+                cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
+            }
+            if (proto.action.state==0x8A) {
+                NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
+                cell.humidityLabel.text = valueString;
+            }
+            if (proto.action.state==0x7D) {
+                if (proto.action.RValue==PROTOCOL_OFF) {
+                    for (Device * device in self.deviceArr) {
+                        if (device.hTypeId == 01 || device.hTypeId == 02 || device.hTypeId == 03) {
+                            cell.lightImageVIew.hidden = YES;
+                        }else if (device.hTypeId == 21 || device.hTypeId == 22){
+                            cell.curtainImageView.hidden = YES;
+                        }else if (device.hTypeId == 12){
+                            cell.TVImageView.hidden = YES;
+                        }else if (device.hTypeId == 13){
+                            cell.DVDImageView.hidden = YES;
+                        }else if (device.hTypeId == 14){
+                            cell.musicImageVIew.hidden = YES;
+                        }else if (device.hTypeId == 31){
+                            cell.airImageVIew.hidden = YES;
+                        }
                     }
                 }
-                
             }
-        }
-        //缓存设备当前状态
-        if (proto.cmd==0x01) {
-            //[SQLManager addStates:proto.deviceID onoff:proto.action.RValue];
         }
     }
 }
+
 #pragma  mark - UICollectionViewDelegate
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -310,17 +317,18 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    self.cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"familycell" forIndexPath:indexPath];
+    FamilyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"familycell" forIndexPath:indexPath];
     Room * room = self.rooms[indexPath.row];
-    self.cell.nameLabel.text = room.rName;
+    cell.nameLabel.text = room.rName;
+    cell.tag = room.rId;
     
     if ([[UD objectForKey:@"HostID"] intValue] == 258) {  //九号大院
-        self.cell.nameLabel.text = [NSString stringWithFormat:@"%@", [_nest_en_room_name_arr objectAtIndex:indexPath.row]];
-        self.cell.tempLabel.text =  [NSString stringWithFormat:@"%@%@", [_nest_curr_temperature_arr objectAtIndex:indexPath.row], @"℃"];
-        self.cell.humidityLabel.text = [NSString stringWithFormat:@"%@%@", [_nest_curr_humidity_arr objectAtIndex:indexPath.row], @"%"];
+        cell.nameLabel.text = [NSString stringWithFormat:@"%@", [_nest_en_room_name_arr objectAtIndex:indexPath.row]];
+        cell.tempLabel.text =  [NSString stringWithFormat:@"%@%@", [_nest_curr_temperature_arr objectAtIndex:indexPath.row], @"℃"];
+        cell.humidityLabel.text = [NSString stringWithFormat:@"%@%@", [_nest_curr_humidity_arr objectAtIndex:indexPath.row], @"%"];
     }
     
-    return  self.cell;
+    return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

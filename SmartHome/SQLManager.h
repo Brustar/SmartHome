@@ -86,6 +86,7 @@
 +(int)saveMaxSceneId:(Scene *)scene name:name pic:(NSString *)img;
 +(int) getSceneID:(NSString *)name;
 +(int) getRoomID:(int)sceneID;
++(int) getRoomIDByNumber:(NSString *)enumber;
 +(NSString *)getSceneName:(int)sceneID;
 
 +(int) getReadOnly:(int)sceneid;
