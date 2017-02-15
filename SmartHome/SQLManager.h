@@ -87,6 +87,8 @@
 +(int) getSceneID:(NSString *)name;
 +(int) getRoomID:(int)sceneID;
 +(int) getRoomIDByNumber:(NSString *)enumber;
+//根据roomID从rooms表查出房间访问权限（openforcurrentuser）
++ (int)getRoomAuthority:(int)roomID;
 +(NSString *)getSceneName:(int)sceneID;
 
 +(int) getReadOnly:(int)sceneid;
