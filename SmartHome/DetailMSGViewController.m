@@ -247,6 +247,7 @@
     static NSString *CellIdentifier = @"msgCell";
     MsgCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
         cell.title.text = self.msgArr[indexPath.row];
+        cell.title.adjustsFontSizeToFitWidth = YES;
         cell.timeLable.text = self.timesArr[indexPath.row];
         self.itemID = self.recordID[indexPath.row];
 //        cell.tag = [self.msgArr[indexPath.row] integerValue];
