@@ -734,7 +734,32 @@
     
 }
 
-+(int) getRoomID:(int)sceneID
++ (int)getRoomAuthority:(int)roomID {
+    DeviceInfo *device = [DeviceInfo defaultManager];
+    long masterID = 255l;
+    if ([device.db isEqualToString:SMART_DB]) {
+        masterID = [[DeviceInfo defaultManager] masterID];
+    }
+    
+    NSString *sql = [NSString stringWithFormat:@"select openforcurrentuser from Rooms where masterID = '%ld' and ID = '%d'", masterID, roomID];
+    
+    int roomAuthority = 0;
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        FMResultSet *resultSet = [db executeQuery:sql];
+        
+        if([resultSet next])
+        {
+            roomAuthority = [resultSet intForColumn:@"openforcurrentuser"];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return roomAuthority;
+}
+
++ (int)getRoomID:(int)sceneID
 {
     DeviceInfo *device = [DeviceInfo defaultManager];
     long masterID = 255l;
@@ -760,6 +785,7 @@
     return roomId;
 
 }
+
 +(NSString*)getSceneName:(int)sceneID
 {
     DeviceInfo *device = [DeviceInfo defaultManager];

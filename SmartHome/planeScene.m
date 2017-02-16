@@ -189,11 +189,17 @@
 }
 
 - (void)openRoom:(NSNumber *)roomId {
-    NSLog(@"打开房间 %@", roomId);
-    UIStoryboard * mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    RoomDetailViewController *roomDetailVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"RoomDetailVC"];
-    roomDetailVC.roomID = [roomId intValue];
-    [self.navigationController pushViewController:roomDetailVC animated:YES];
+    //鉴权一下
+    int roomAuth = [SQLManager getRoomAuthority:roomId.intValue];
+    if (roomAuth == 1) {
+        NSLog(@"打开房间 %@", roomId);
+        UIStoryboard * mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        RoomDetailViewController *roomDetailVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"RoomDetailVC"];
+        roomDetailVC.roomID = [roomId intValue];
+        [self.navigationController pushViewController:roomDetailVC animated:YES];
+    }else {
+        [MBProgressHUD showError:@"你无权限打开此房间"];
+    }
 }
 
 @end
