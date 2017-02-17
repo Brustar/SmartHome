@@ -187,7 +187,7 @@
 {
     Proto proto=createProto();
 
-    proto.cmd=0x7D;
+    proto.cmd=0x9A;
     proto.deviceType=0x00;
     NSString *enumber=[SQLManager getENumber:[deviceID integerValue]];
     proto.deviceID=CFSwapInt16BigToHost([PackManager NSDataToUint16:enumber]);

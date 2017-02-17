@@ -21,6 +21,8 @@
 #import "SystemInfomationController.h"
 #import "AccessSettingController.h"
 #import "AboutUsController.h"
+#import "DeviceListTimeVC.h"
+#import "IphoneSceneController.h"
 
 @interface MySettingViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate>
 
@@ -188,73 +190,69 @@
 }
 -(void)goToViewController:(NSIndexPath *)indexPath
 {
-   UIStoryboard * MainBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];   
+   UIStoryboard * MainBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard * iphoneBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     if(indexPath.section == 0)
     {
-
-//        [self performSegueWithIdentifier:@"pushSegue" sender:self];
         PushSettingController * pushVC = [MainBoard instantiateViewControllerWithIdentifier:@"PushSettingController"];
         [self.navigationController pushViewController:pushVC animated:YES];
-        
-        
     }else if(indexPath.section == 1)
     {
        if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) {
            if(indexPath.row == 0)
            {
-//               [self performSegueWithIdentifier:@"systemSetSegue" sender:self];
                SystemSettingViewController * systemVC = [MainBoard instantiateViewControllerWithIdentifier:@"SystemSettingViewController"];
                [self.navigationController pushViewController:systemVC animated:YES];
            }else {
-//               [self performSegueWithIdentifier:@"systemInfoSegue" sender:self];
                SystemInfomationController * systemInfoVC = [MainBoard instantiateViewControllerWithIdentifier:@"systemInfomationController"];
                [self.navigationController pushViewController:systemInfoVC animated:YES];
            }
        }else {
            AccessSettingController * accessVC = [MainBoard instantiateViewControllerWithIdentifier:@"AccessSettingController"];
            [self.navigationController pushViewController:accessVC animated:YES];
-
-//            [self performSegueWithIdentifier:@"accessSegue" sender:self];
-
-       }
+        }
         
-    }else if(indexPath.section == 2)
-    {
+      }else if (indexPath.section == 2){
+          if (indexPath.row == 0) {
+              //场景设置
+              IphoneSceneController * iphoneScene = [iphoneBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
+              [self.navigationController pushViewController:iphoneScene animated:YES];
+          }else{
+              //定时器
+              DeviceListTimeVC * deviceList = [iphoneBoard instantiateViewControllerWithIdentifier:@"iPhoneDeviceListTimeVC"];
+              [self.navigationController pushViewController:deviceList animated:YES];
+          }
+        
+     }else if(indexPath.section == 3)
+     {
         if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) {
                 [self gotoAppStoreToComment];
         }else {
             if(indexPath.row == 0)
             {
-//                [self performSegueWithIdentifier:@"systemSetSegue" sender:self];
             SystemSettingViewController * systemVC = [MainBoard instantiateViewControllerWithIdentifier:@"SystemSettingViewController"];
                 [self.navigationController pushViewController:systemVC animated:YES];
             }else {
-//                [self performSegueWithIdentifier:@"systemInfoSegue" sender:self];
          SystemInfomationController * systemInfoVC = [MainBoard instantiateViewControllerWithIdentifier:@"systemInfomationController"];
                 [self.navigationController pushViewController:systemInfoVC animated:YES];
             }
         }
         
         
-    }else if(indexPath.section == 3)
+    }else if(indexPath.section == 4)
     {
         if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) {
            AboutUsController * aboutVC = [MainBoard instantiateViewControllerWithIdentifier:@"AboutUsController"];
             [self.navigationController pushViewController:aboutVC animated:YES];
-//            [self performSegueWithIdentifier:@"aboutSegue" sender:self];
         }else {
             [self gotoAppStoreToComment];
         }
     
-    }else if(indexPath.section == 4)
+    }else if(indexPath.section == 5)
     {
         if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) {
-
-//            [self performSegueWithIdentifier:@"aboutSegue" sender:self];
             AboutUsController * aboutVC = [MainBoard instantiateViewControllerWithIdentifier:@"AboutUsController"];
             [self.navigationController pushViewController:aboutVC animated:YES];
-
-            
             //退出发送请求
             NSString *authorToken =[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
             if (authorToken) {
@@ -272,7 +270,6 @@
             }
 
         }else{
-//             [self performSegueWithIdentifier:@"aboutSegue" sender:self];
             AboutUsController * aboutVC = [MainBoard instantiateViewControllerWithIdentifier:@"AboutUsController"];
             [self.navigationController pushViewController:aboutVC animated:YES];
         }
@@ -302,8 +299,6 @@
     {
         WelcomeController *welcomeVC = segue.destinationViewController;
         welcomeVC.coverView.hidden = YES;
-        
-        
     }
 }
 -(void) httpHandler:(id) responseObject tag:(int)tag
