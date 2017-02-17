@@ -615,6 +615,7 @@
 }
 - (IBAction)clickStopBtn:(id)sender {
     [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];
+    [SQLManager updateSceneStatus:0 sceneID:self.sceneID];//更新数据库
     [self.navigationController popViewControllerAnimated:YES];
 
 }

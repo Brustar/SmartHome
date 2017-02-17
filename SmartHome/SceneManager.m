@@ -572,7 +572,7 @@
     }
 }
 
--(void) poweroffAllDevice:(int)sceneid
+- (void)poweroffAllDevice:(int)sceneid
 {
     NSData *data=nil;
     SocketManager *sock=[SocketManager defaultManager];

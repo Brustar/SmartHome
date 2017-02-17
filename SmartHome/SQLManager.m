@@ -268,10 +268,10 @@
         
         DeviceInfo *device = [DeviceInfo defaultManager];
         if ([device.db isEqualToString:SMART_DB]) {
-            sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld and masterID = '%ld' and typeName <> '幕布' and typeName <> 'PM2.5监测' and typeName <> '温湿度感应器' and typeName <> '动静感应器' and typeName <> '照度感应器' and typeName <> '燃气监测' and typeName <> '噪音感应器' and typeName <> '烟雾感应器'",(long)roomID,[[DeviceInfo defaultManager] masterID]];
+            sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld and masterID = '%ld' and typeName <> 'PM2.5监测' and typeName <> '温湿度感应器' and typeName <> '动静感应器' and typeName <> '照度感应器' and typeName <> '燃气监测' and typeName <> '噪音感应器' and typeName <> '烟雾感应器'",(long)roomID,[[DeviceInfo defaultManager] masterID]];
         }else {
             
-            sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld and masterID = '%ld' and typeName <> 'FM' and typeName <> '幕布' and typeName <> 'PM2.5监测' and typeName <> '温湿度感应器' and typeName <> '动静感应器' and typeName <> '照度感应器' and typeName <> '燃气监测' and typeName <> '噪音感应器' and typeName <> '烟雾感应器'",(long)roomID, 255l];
+            sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld and masterID = '%ld' and typeName <> 'FM' and typeName <> 'PM2.5监测' and typeName <> '温湿度感应器' and typeName <> '动静感应器' and typeName <> '照度感应器' and typeName <> '燃气监测' and typeName <> '噪音感应器' and typeName <> '烟雾感应器'",(long)roomID, 255l];
         }
         
         FMResultSet *resultSet = [db executeQuery:sql];
@@ -320,7 +320,7 @@
             masterID = [[DeviceInfo defaultManager] masterID];
         }
         
-        NSString *sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where masterID = '%ld' and typeName <> 'FM' and typeName <> '幕布'",masterID];
+        NSString *sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where masterID = '%ld'",masterID];
         
         
         FMResultSet *resultSet = [db executeQuery:sql];
@@ -839,7 +839,7 @@
             sceneID = [resultSet intForColumn:@"ID"]+1;
         }
         
-        sql=[NSString stringWithFormat:@"insert into Scenes values(%d,'%@','','%@',%ld,%d,null,null,null,'%ld')",sceneID,name,img,(long)scene.roomID,2, masterID];
+        sql=[NSString stringWithFormat:@"insert into Scenes values(%d,'%@','','%@',%ld,%d,null,null,null,'%ld',%d)",sceneID,name,img,(long)scene.roomID,2, masterID,0];
         [db executeUpdate:sql];
     }
     [db closeOpenResultSets];
@@ -1576,7 +1576,7 @@
         NSString *sqlRoom=@"CREATE TABLE IF NOT EXISTS Rooms(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"PM25\" INTEGER, \"NOISE\" INTEGER, \"TEMPTURE\" INTEGER, \"CO2\" INTEGER, \"moisture\" INTEGER, \"imgUrl\" TEXT,\"ibeacon\" INTEGER,\"totalVisited\" INTEGER,\"masterID\" TEXT,\"openforcurrentuser\" INTEGER)";
         NSString *sqlChannel=@"CREATE TABLE IF NOT EXISTS Channels (\"id\" INTEGER PRIMARY KEY  NOT NULL  UNIQUE ,\"eqId\" INTEGER,\"channelValue\" INTEGER,\"cNumber\" INTEGER, \"Channel_name\" TEXT,\"Channel_pic\" TEXT, \"parent\" CHAR(2) NOT NULL  DEFAULT TV, \"isFavorite\" BOOL DEFAULT 0, \"eqNumber\" TEXT,\"masterID\" TEXT)";
         NSString *sqlDevice=@"CREATE TABLE IF NOT EXISTS Devices(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"sn\" TEXT, \"birth\" DATETIME, \"guarantee\" DATETIME, \"model\" TEXT, \"price\" FLOAT, \"purchase\" DATETIME, \"producer\" TEXT, \"gua_tel\" TEXT, \"power\" INTEGER, \"current\" FLOAT, \"voltage\" INTEGER, \"protocol\" TEXT, \"rID\" INTEGER, \"eNumber\" TEXT, \"htypeID\" TEXT, \"subTypeId\" INTEGER, \"typeName\" TEXT, \"subTypeName\" TEXT, \"masterID\" TEXT, \"icon_url\" TEXT, \"camera_url\" TEXT)";
-        NSString *sqlScene=@"CREATE TABLE IF NOT EXISTS \"Scenes\" (\"ID\" INT PRIMARY KEY  NOT NULL ,\"NAME\" TEXT NOT NULL ,\"roomName\" TEXT,\"pic\" TEXT DEFAULT (null) ,\"rId\" INTEGER,\"sType\" INTEGER, \"snumber\" TEXT,\"isFavorite\" BOOL,\"totalVisited\" INTEGER,\"masterID\" TEXT)";
+        NSString *sqlScene=@"CREATE TABLE IF NOT EXISTS \"Scenes\" (\"ID\" INT PRIMARY KEY  NOT NULL ,\"NAME\" TEXT NOT NULL ,\"roomName\" TEXT,\"pic\" TEXT DEFAULT (null) ,\"rId\" INTEGER,\"sType\" INTEGER, \"snumber\" TEXT,\"isFavorite\" BOOL,\"totalVisited\" INTEGER,\"masterID\" TEXT ,\"status\" INTEGER DEFAULT (0))";
         //NSString *sqlState = @"CREATE TABLE \"States\" (\"id\" INTEGER PRIMARY KEY  NOT NULL , \"deviceID\" INTEGER, \"on_off\" BOOL)";
         //NSString *sqlExtra = @"CREATE TABLE \"Extra_states\" (\"deviceID\" INTEGER, \"temperature\" INTEGER, \"wind_direction\" INTEGER,\"wind_level\" INTEGER, \"mode\" INTEGER, \"timing\" INTEGER)";
         
@@ -1687,12 +1687,12 @@
             }
         }
         //insert scenes
-            sqls=@[@"INSERT INTO \"Scenes\" VALUES(10,'DVD','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/moving.jpg',1,1,'0003',2,0,255);",
-            @"INSERT INTO \"Scenes\" VALUES(219,'工作','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/relax.jpg',2,1,'0004',0,0,255);",
-            @"INSERT INTO \"Scenes\" VALUES(220,'午休','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/sleep.jpg',3,1,'0005',2,0,255);",
-            @"INSERT INTO \"Scenes\" VALUES(221,'离开','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/away.jpg',1,1,'0006',2,0,255);",
-            @"INSERT INTO \"Scenes\" VALUES(216,'欢迎','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',2,1,'0001',2,0,255);",
-            @"INSERT INTO \"Scenes\" VALUES(217,'投影','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',3,1,'0002',2,0,255);"];
+            sqls=@[@"INSERT INTO \"Scenes\" VALUES(10,'DVD','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/moving.jpg',1,1,'0003',2,0,255,0);",
+            @"INSERT INTO \"Scenes\" VALUES(219,'工作','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/relax.jpg',2,1,'0004',0,0,255,0);",
+            @"INSERT INTO \"Scenes\" VALUES(220,'午休','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/sleep.jpg',3,1,'0005',2,0,255,0);",
+            @"INSERT INTO \"Scenes\" VALUES(221,'离开','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/away.jpg',1,1,'0006',2,0,255,0);",
+            @"INSERT INTO \"Scenes\" VALUES(216,'欢迎','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',2,1,'0001',2,0,255,0);",
+            @"INSERT INTO \"Scenes\" VALUES(217,'投影','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',3,1,'0002',2,0,255,0);"];
         
             for (NSString *sql in sqls) {
                 BOOL result=[db executeUpdate:sql];
@@ -1850,6 +1850,7 @@
             scene.sceneName = [resultSet stringForColumn:@"NAME"];
             scene.sceneID = [resultSet intForColumn:@"ID"];
             scene.picName = [resultSet stringForColumn:@"pic"];
+            scene.status = [resultSet intForColumn:@"status"];
             
             [scens addObject:scene];
         }
@@ -2013,6 +2014,28 @@
     [db close];
     return rName;
     
+}
+
++ (BOOL)updateSceneStatus:(int)status sceneID:(int)sceneID {
+    FMDatabase *db = [SQLManager connetdb];
+    
+    BOOL ret = NO;
+    if([db open])
+    {
+        DeviceInfo *device = [DeviceInfo defaultManager];
+        long masterID = 255l;
+        if ([device.db isEqualToString:SMART_DB]) {
+            masterID = [[DeviceInfo defaultManager] masterID];
+        }
+        
+        NSString *sql = [NSString stringWithFormat:@"update Scenes set status = %d where ID = %d and masterID = '%ld'",status,sceneID, masterID];
+        
+        ret = [db executeUpdate:sql];
+        
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return ret;
 }
 
 +(BOOL)updateTotalVisited:(int)roomID

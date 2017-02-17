@@ -14,6 +14,10 @@
 @interface Scene : NSObject
 //场景id
 @property (nonatomic,assign) int sceneID;
+
+//场景状态
+@property (nonatomic, assign) int status;
+
 //场景名称
 @property (nonatomic,strong) NSString *sceneName;
 //房间id

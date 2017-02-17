@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QoB-0E-qDZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A2323a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QoB-0E-qDZ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -1871,6 +1871,9 @@
                                                         <constraint firstAttribute="width" constant="40" id="pGp-eg-25O"/>
                                                     </constraints>
                                                     <state key="normal" backgroundImage="startScene"/>
+                                                    <connections>
+                                                        <action selector="powerBtnAction:" destination="Eod-yw-lD7" eventType="touchUpInside" id="RlN-mz-7eD"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </view>
@@ -1954,7 +1957,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d1m-d3-jT3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1244" y="-7882"/>
+            <point key="canvasLocation" x="1279" y="-7962"/>
         </scene>
         <!--关于我们-->
         <scene sceneID="8Xq-2f-B2e">
@@ -5176,7 +5179,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GmG-8D-WCx">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" red="0.90309139530000004" green="0.90309139530000004" blue="0.90309139530000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="20" id="fGq-Jt-E9Z">
                                     <size key="itemSize" width="150" height="150"/>
@@ -5422,7 +5425,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="6oM-ja-ycz">
-                                <rect key="frame" x="138" y="94" width="100" height="100"/>
+                                <rect key="frame" x="138" y="50" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="NFm-A4-Fz9"/>
                                     <constraint firstAttribute="width" constant="100" id="TgZ-P1-nK6"/>
@@ -5438,7 +5441,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9YJ-co-f1J">
-                                <rect key="frame" x="-12.5" y="244" width="400" height="200"/>
+                                <rect key="frame" x="-12.5" y="200" width="400" height="200"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="用户名/手机号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y1v-G2-n8Q">
                                         <rect key="frame" x="20" y="25" width="360" height="30"/>
@@ -7029,7 +7032,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4D4-zn-jOn">
-                                <rect key="frame" x="20" y="94" width="335" height="524"/>
+                                <rect key="frame" x="20" y="94" width="335" height="573"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="400" id="kKK-qC-Xyw"/>
@@ -7472,10 +7475,10 @@ layer.masksToBoundslayer.masksToBounds
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ffb-Ry-ChD">
-                                <rect key="frame" x="0.0" y="64" width="100" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="100" height="603"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="56" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="L2z-33-ecs">
-                                        <rect key="frame" x="0.0" y="0.0" width="100" height="434"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="483"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EditSceneCell" rowHeight="56" id="0NM-WM-5lK" customClass="EditSceneCell">
@@ -7518,7 +7521,7 @@ layer.masksToBoundslayer.masksToBounds
                                         </connections>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ddJ-q6-3mr">
-                                        <rect key="frame" x="0.0" y="434" width="100" height="120"/>
+                                        <rect key="frame" x="0.0" y="483" width="100" height="120"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wvP-dM-R4D">
                                                 <rect key="frame" x="10" y="22" width="31" height="30"/>
@@ -7575,10 +7578,10 @@ layer.masksToBoundslayer.masksToBounds
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TFn-fO-cqz">
-                                <rect key="frame" x="275" y="64" width="100" height="554"/>
+                                <rect key="frame" x="275" y="64" width="100" height="603"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="65" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B5E-kC-l50">
-                                        <rect key="frame" x="0.0" y="0.0" width="100" height="434"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="483"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EditSceneCell" rowHeight="65" id="AP5-FS-cGH" customClass="EditSceneCell">
@@ -7620,7 +7623,7 @@ layer.masksToBoundslayer.masksToBounds
                                         </connections>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NVC-Ha-Ql5">
-                                        <rect key="frame" x="0.0" y="434" width="100" height="120"/>
+                                        <rect key="frame" x="0.0" y="483" width="100" height="120"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ix-hZ-Oqk">
                                                 <rect key="frame" x="15" y="25" width="70" height="70"/>
@@ -7655,10 +7658,10 @@ layer.masksToBoundslayer.masksToBounds
                                 </constraints>
                             </view>
                             <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oHk-s8-HdJ">
-                                <rect key="frame" x="100" y="64" width="175" height="554"/>
+                                <rect key="frame" x="100" y="64" width="175" height="603"/>
                                 <subviews>
                                     <view hidden="YES" alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vMu-TP-NM8">
-                                        <rect key="frame" x="0.0" y="0.0" width="175" height="554"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="175" height="603"/>
                                         <color key="backgroundColor" red="0.7725490196" green="0.7725490196" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="my8-UG-gsP">
@@ -8004,7 +8007,7 @@ layer.masksToBoundslayer.masksToBounds
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DLR-Vw-ms7">
-                                <rect key="frame" x="20" y="84" width="335" height="534"/>
+                                <rect key="frame" x="20" y="84" width="335" height="583"/>
                                 <color key="backgroundColor" red="0.90309139530000004" green="0.90309139530000004" blue="0.90309139530000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="20" id="ajs-TL-hmt">
                                     <size key="itemSize" width="200" height="200"/>
@@ -8475,24 +8478,24 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="tt4-nB-rfe"/>
         <segue reference="ya3-gG-p8O"/>
         <segue reference="PRs-sg-E1F"/>
-        <segue reference="sa4-D6-iWJ"/>
+        <segue reference="nIi-Kc-QDm"/>
         <segue reference="uCb-ME-O7C"/>
-        <segue reference="tmA-nZ-aS8"/>
+        <segue reference="QfD-HS-G6N"/>
         <segue reference="3pI-26-H7E"/>
         <segue reference="5K5-wE-mZz"/>
+        <segue reference="tdV-sS-d5j"/>
+        <segue reference="l23-e3-J0C"/>
         <segue reference="X9P-hg-DXo"/>
         <segue reference="fHn-Cm-7Q7"/>
         <segue reference="vKk-7C-VKf"/>
-        <segue reference="a9T-LN-ZVX"/>
         <segue reference="Vzc-yi-Jnw"/>
+        <segue reference="a9T-LN-ZVX"/>
         <segue reference="pWG-oz-Opr"/>
-        <segue reference="JQm-bA-TWz"/>
-        <segue reference="tt4-nB-rfe"/>
         <segue reference="vdf-Gi-dZf"/>
-        <segue reference="l23-e3-J0C"/>
-        <segue reference="tdV-sS-d5j"/>
+        <segue reference="JQm-bA-TWz"/>
         <segue reference="YE7-iU-rxh"/>
     </inferredMetricsTieBreakers>
 </document>
