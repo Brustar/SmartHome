@@ -25,35 +25,55 @@
 @property (nonatomic,strong) NSArray *images;
 @property (nonatomic,strong) NSArray *segues;
 @property (nonatomic,strong) UIImageView * imageView;
-@property (nonatomic,strong) MsgCell * MsgCell;
+//@property (nonatomic,strong) MsgCell * MsgCell;
+@property (nonatomic,strong) NSMutableArray * unreadcountArr;
 @end
 
 @implementation IphoneProfileController
-
-
+-(NSMutableArray *)unreadcountArr
+{
+    if (!_unreadcountArr) {
+        _unreadcountArr = [NSMutableArray array];
+    }
+    
+    return _unreadcountArr;
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self creatItemID];
+   
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.nameLabel.text = [[NSUserDefaults  standardUserDefaults] objectForKey:@"UserName"];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.nameLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserName"];
-    self.titlArr = @[@"我的故障",@"我的保修记录",@"我的能耗",@"我的收藏",@"我的消息",@"设置",@"定时器"];
-    self.images = @[@"my",@"energy",@"record",@"store",@"message",@"setting",@"device_MySetting"];
+    self.titlArr = @[@"我的故障",@"我的保修记录",@"我的能耗",@"我的收藏",@"我的消息"];
+    self.images = @[@"my",@"energy",@"record",@"store",@"message"];
 //    self.tableHight.constant = self.titlArr.count * hight + self.headView.frame.size.height;
     self.navigationController.navigationBar.backgroundColor = [UIColor lightGrayColor];
     self.tableView.tableFooterView = [UIView new];
 //    self.tableView.scrollEnabled = NO;
     self.tableView.tableHeaderView = self.headView;
     
-    self.segues = @[@"iphoneDefault",@"iphoneRecordSegue",@"iphoneEngerSegue",@"iphoneFavorSegue",@"iphoneMsgSegue",@"iphoneSettingSegue",@"DeviceListTimeVC"];
+    self.segues = @[@"iphoneDefault",@"iphoneRecordSegue",@"iphoneEngerSegue",@"iphoneFavorSegue",@"iphoneMsgSegue"];
     
-    MsgCell * cell = [[MsgCell alloc] init];
+ 
+}
 
-        if (cell.unreadcountImage.hidden == NO) {
-            self.imageView.hidden = NO;
-        }else{
-            self.imageView.hidden = YES;
-        }
+-(void)creatItemID
+{
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/notify.aspx",[IOManager httpAddr]];
+    NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    if (auothorToken) {
+        NSDictionary *dict = @{@"token":auothorToken,@"optype":[NSNumber numberWithInteger:2]};
+        HttpManager *http=[HttpManager defaultManager];
+        http.tag = 2;
+        http.delegate = self;
+        [http sendPost:url param:dict];
+    }
 }
 #pragma mark - Table view data source
 
@@ -64,7 +84,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return  self.titlArr.count;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
@@ -77,21 +96,28 @@
     cell.textLabel.text = self.titlArr[indexPath.row];
     cell.imageView.image = [UIImage imageNamed:self.images[indexPath.row]];
     if ([cell.textLabel.text isEqualToString:@"我的消息"]) {
-       self.imageView = [[UIImageView alloc] init];
+        self.imageView = [[UIImageView alloc] init];
         self.imageView.frame = CGRectMake(25, 0, 10, 10);
         self.imageView.backgroundColor = [UIColor redColor];
         self.imageView.layer.cornerRadius = self.imageView.bounds.size.width/2; //圆角半径
         self.imageView.layer.masksToBounds = YES; //圆角
+//        self.imageView.hidden = YES;
         [cell.imageView addSubview:self.imageView];
-        MSGController * msgVC = [MSGController new];
-        if (msgVC.isShowCountLabel) {
-            self.imageView.hidden = NO;
-        }else{
+        
+    }
+     NSMutableArray * subArr = [NSMutableArray array];
+    for (int i = 0; i < self.unreadcountArr.count; i ++) {
+        if ([self.unreadcountArr[i] intValue] == 0) {
+            [subArr addObject:self.unreadcountArr[i]];
+        }
+        if (self.unreadcountArr.count == subArr.count) {
             self.imageView.hidden = YES;
         }
-    
+        else{
+            self.imageView.hidden = NO;
+        }
+        
     }
-    
     return cell;
 }
 
@@ -120,7 +146,6 @@
 }
 -(void)clickQuitButton
 {
-    
     NSString *authorToken =[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     if (authorToken) {
         NSDictionary *dict = @{@"token":authorToken};
@@ -189,6 +214,26 @@
         }else {
             [MBProgressHUD showSuccess:responseObject[@"Msg"]];
         }
+    }
+    if (tag == 2) {
+        if ([responseObject[@"result"] intValue]==0)
+        {
+            
+            NSArray *dic = responseObject[@"notify_type_list"];
+            
+            if ([dic isKindOfClass:[NSArray class]]) {
+                for(NSDictionary *dicDetail in dic)
+                {
+    
+                    [self.unreadcountArr addObject:dicDetail[@"unreadcount"]];
+                }
+            }
+         
+            [self.tableView reloadData];
+        }else{
+            [MBProgressHUD showError:responseObject[@"Msg"]];
+        }
+
     }
     
 }

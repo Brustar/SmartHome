@@ -53,7 +53,6 @@
 
 @implementation SceneController
 
-
 -(HostIDSController *)hostVC
 {
     if(!_hostVC)
@@ -213,14 +212,14 @@
 
 
 //监听到网络状态改变
-- (void) reachabilityUpdate: (NSNotification* )note
+- (void)reachabilityUpdate: (NSNotification* )note
 {
     [self updateInterfaceWithReachability];
 }
 
 
 //处理连接改变后的情况
-- (void) updateInterfaceWithReachability
+- (void)updateInterfaceWithReachability
 {
     AFNetworkReachabilityManager *afNetworkReachabilityManager = [AFNetworkReachabilityManager sharedManager];
     //[afNetworkReachabilityManager startMonitoring];  //开启网络监视器；

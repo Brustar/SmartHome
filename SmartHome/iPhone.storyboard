@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="chj-yx-pDz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A2323a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="chj-yx-pDz">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -72,7 +72,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="xMa-MI-fkp"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_shades" translatesAutoresizingMaskIntoConstraints="NO" id="e7t-is-YgW" userLabel="curtainView">
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_shades" translatesAutoresizingMaskIntoConstraints="NO" id="e7t-is-YgW" userLabel="curtainView">
                                                     <rect key="frame" x="109" y="17" width="30" height="30"/>
                                                     <color key="backgroundColor" red="0.25098039215686274" green="0.50196078431372548" blue="0.50588235294117645" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
@@ -88,7 +88,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="qPV-D0-W8b"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="aire-6" translatesAutoresizingMaskIntoConstraints="NO" id="eY9-66-P31" userLabel="airView">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="aire-6" translatesAutoresizingMaskIntoConstraints="NO" id="eY9-66-P31" userLabel="airView">
                                                     <rect key="frame" x="36" y="130" width="30" height="30"/>
                                                     <color key="backgroundColor" red="0.039215686274509803" green="0.51764705882352935" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
@@ -96,7 +96,7 @@
                                                         <constraint firstAttribute="width" constant="30" id="Rdh-kT-KC0"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18°C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yoo-dT-FMB">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0°C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yoo-dT-FMB">
                                                     <rect key="frame" x="61" y="50" width="53" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Yoo-dT-FMB" secondAttribute="height" multiplier="21:10" id="tUZ-gJ-wex"/>
@@ -114,7 +114,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="78%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lCO-PC-8ci">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lCO-PC-8ci">
                                                     <rect key="frame" x="61" y="101" width="53" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="lCO-PC-8ci" secondAttribute="height" multiplier="21:10" id="0XZ-CB-NRJ"/>
@@ -206,17 +206,24 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="家庭" id="Yc3-0T-jdX">
-                        <barButtonItem key="rightBarButtonItem" image="fix time11" id="PTt-oX-1de">
-                            <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <segue destination="hNB-C8-Kxu" kind="push" id="dKC-Kt-cWh"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="fix time11" id="PTt-oX-1de">
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="hNB-C8-Kxu" kind="push" id="dKC-Kt-cWh"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="Iphonewifi" id="e9O-se-Wnz">
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="FixTimeBarBtn" destination="PTt-oX-1de" id="Mwl-AV-Ps8"/>
                         <outlet property="collectionView" destination="6NP-fB-ANX" id="2Nk-mi-Hzh"/>
                         <outlet property="fixTimeBarBtn" destination="PTt-oX-1de" id="OWb-aV-Vn5"/>
+                        <outlet property="netBarBtnItem" destination="e9O-se-Wnz" id="ntn-FN-WTX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CJz-uR-fFs" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -495,6 +502,20 @@
             </objects>
             <point key="canvasLocation" x="213" y="-503"/>
         </scene>
+        <!--Iphone Tab Bar View Controller-->
+        <scene sceneID="igW-O0-kdX">
+            <objects>
+                <tabBarController storyboardIdentifier="IphoneTabBarViewController" id="4Js-pb-g7I" customClass="IphoneTabBarViewController" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="7UM-Sm-bPr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FpS-hR-pLA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-212" y="-1437"/>
+        </scene>
         <!--欢迎界面-->
         <scene sceneID="yzg-bL-XFg">
             <objects>
@@ -718,7 +739,7 @@
                         <outlet property="pageScrollView" destination="4G9-SJ-3pF" id="Tv3-lD-EbJ"/>
                         <outlet property="registerBtn" destination="rda-qb-SjH" id="bJe-8b-NET"/>
                         <outlet property="registerView" destination="BJL-hC-KKZ" id="esP-0R-9uf"/>
-                        <segue destination="2si-ky-nN2" kind="modal" identifier="iphoneMainSegue" id="HFl-Hk-i9X"/>
+                        <segue destination="4Js-pb-g7I" kind="modal" identifier="iphoneTabBar" id="Gha-7j-cZY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PuJ-ch-2K5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2075,9 +2096,6 @@
                                                 <constraint firstAttribute="height" constant="100" id="fQI-gh-mAN"/>
                                             </constraints>
                                             <state key="normal" backgroundImage="logo"/>
-                                            <connections>
-                                                <action selector="PorTraitButton:" destination="gcF-dp-BGl" eventType="touchUpInside" id="9qa-q7-nob"/>
-                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2097,7 +2115,7 @@
                                 <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tH0-rQ-BhE">
-                                        <rect key="frame" x="0.0" y="1" width="375" height="48"/>
+                                        <rect key="frame" x="0.0" y="1" width="375" height="49"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="退出">
                                             <color key="titleColor" red="1" green="0.074967022029999997" blue="0.050827619239999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2112,7 +2130,7 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="tH0-rQ-BhE" secondAttribute="trailing" id="CLQ-GL-RCp"/>
                                     <constraint firstItem="tH0-rQ-BhE" firstAttribute="leading" secondItem="31B-4C-HtW" secondAttribute="leading" id="DUf-h8-K6b"/>
-                                    <constraint firstAttribute="bottom" secondItem="tH0-rQ-BhE" secondAttribute="bottom" constant="1" id="jcb-iY-p7I"/>
+                                    <constraint firstAttribute="bottom" secondItem="tH0-rQ-BhE" secondAttribute="bottom" id="jcb-iY-p7I"/>
                                     <constraint firstAttribute="height" constant="50" id="oJd-BD-JUY"/>
                                     <constraint firstItem="tH0-rQ-BhE" firstAttribute="top" secondItem="31B-4C-HtW" secondAttribute="top" constant="1" id="yUN-UF-tWA"/>
                                 </constraints>
@@ -2573,7 +2591,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="466-3m-XBe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="522" y="975"/>
+            <point key="canvasLocation" x="503" y="1321"/>
         </scene>
         <!--保修记录-->
         <scene sceneID="v7W-pa-DaF">
@@ -2596,12 +2614,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vnr-a8-fHk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="905" y="998"/>
+            <point key="canvasLocation" x="938" y="1223"/>
         </scene>
         <!--我的定时设备-->
         <scene sceneID="8Qo-NS-6YZ">
             <objects>
-                <viewController id="wwN-BC-DXs" userLabel="我的定时设备" customClass="DeviceListTimeVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="iPhoneDeviceListTimeVC" id="wwN-BC-DXs" userLabel="我的定时设备" customClass="DeviceListTimeVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Pg6-mA-YOy"/>
                         <viewControllerLayoutGuide type="bottom" id="2tV-Lp-rRp"/>
@@ -2630,7 +2648,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sem-6T-93X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="83.5" y="882.5"/>
+            <point key="canvasLocation" x="11" y="1159"/>
         </scene>
         <!--能耗-->
         <scene sceneID="3MF-3M-cux">
@@ -4252,7 +4270,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="99" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TOp-i7-d5T">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FixTimeListCell" rowHeight="99" id="XBc-6m-0Pz" customClass="FixTimeListCell">
@@ -4381,10 +4399,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="km4-z8-hO5">
-                                                    <rect key="frame" x="8" y="8" width="80" height="15"/>
+                                                    <rect key="frame" x="8" y="8" width="160" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="14.5" id="0nH-IK-qWO"/>
-                                                        <constraint firstAttribute="width" constant="80" id="fLV-gK-iVG"/>
+                                                        <constraint firstAttribute="width" constant="160" id="fLV-gK-iVG"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
@@ -5241,6 +5259,7 @@
     </scenes>
     <resources>
         <image name="DVD-1" width="130" height="130"/>
+        <image name="Iphonewifi" width="32" height="32"/>
         <image name="PL" width="724" height="470"/>
         <image name="UO90" width="128" height="128"/>
         <image name="add" width="64" height="64"/>
@@ -5287,10 +5306,10 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="qN8-z6-Gb7"/>
         <segue reference="lPv-wZ-EAG"/>
-        <segue reference="WeN-Qz-0Az"/>
+        <segue reference="qN8-z6-Gb7"/>
+        <segue reference="J5F-aP-6iz"/>
+        <segue reference="dKC-Kt-cWh"/>
         <segue reference="YfK-Z8-Yeo"/>
-        <segue reference="TVe-8G-kwO"/>
     </inferredMetricsTieBreakers>
 </document>

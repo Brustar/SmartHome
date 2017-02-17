@@ -25,6 +25,7 @@
 @property (nonatomic,strong) UIImageView * image;
 @property (nonatomic,strong) UILabel * label;
 @property (nonatomic,assign) NSInteger seleCellID;
+@property (nonatomic,assign) int selectId;
 
 @end
 
@@ -215,9 +216,10 @@
         }
     }else if (tag == 3){
         if ([responseObject[@"result"] intValue] == 0) {
-            self.seleCellID = 1;
-//            self.unreadcount = 1;
-            
+            self.isreadArr[self.selectId] = @"1";
+//            [self.isreadArr removeAllObjects];
+            [self sendRequestForDetailMsgWithItemId:[_itemID intValue]];
+
             [self.tableView reloadData];
             
         }else {
@@ -245,9 +247,10 @@
     static NSString *CellIdentifier = @"msgCell";
     MsgCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
         cell.title.text = self.msgArr[indexPath.row];
+        cell.title.adjustsFontSizeToFitWidth = YES;
         cell.timeLable.text = self.timesArr[indexPath.row];
         self.itemID = self.recordID[indexPath.row];
-        cell.tag = [self.msgArr[indexPath.row] integerValue];
+//        cell.tag = [self.msgArr[indexPath.row] integerValue];
         self.unreadcount = [self.isreadArr[indexPath.row] integerValue];
     if (self.unreadcount == 0) {//未读消息
         cell.unreadcountImage.hidden = NO;
@@ -277,6 +280,8 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    self.selectId = (int)indexPath.row;
+    
     if (self.isEditing==NO) {
         return;
     }else if (self.isEditing == YES){

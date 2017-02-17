@@ -49,7 +49,7 @@
     }else self.cType = 1;
     self.passWord.delegate = self;
     self.pwdAgain.delegate = self;
-     self.auothCodeBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
+//     self.auothCodeBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
 }
 
 - (IBAction)DisMissBtn:(id)sender {
@@ -79,11 +79,10 @@
                     int seconds = timeout % 60;
                     NSString *strTime = [NSString stringWithFormat:@" %.2d", seconds];
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        
-//                        [UIView beginAnimations:nil context:nil];
-//                        [UIView setAnimationDuration:1];
-                        [self.auothCodeBtn setTitle:[NSString stringWithFormat:@"重新获取(%@) ",strTime] forState:UIControlStateNormal];
-//                        [UIView commitAnimations];
+                        [UIView beginAnimations:nil context:nil];
+                        [UIView setAnimationDuration:1];
+                        [self.auothCodeBtn setTitle:[NSString stringWithFormat:@"(%@)秒 ",strTime] forState:UIControlStateNormal];
+                        [UIView commitAnimations];
                         self.auothCodeBtn.userInteractionEnabled = NO;
                     });
                     timeout--;
@@ -92,7 +91,11 @@
         dispatch_resume(self._timer);
         }
         //点击验证码发送请求
-        NSDictionary *dict = @{@"mobile":self.phoneStr};
+        NSDictionary *dict = @{
+                               @"mobile":self.phoneStr,
+                               @"optype":@(0)
+                               };
+
         HttpManager *http = [HttpManager defaultManager];
         http.delegate = self;
         http.tag =1;
@@ -155,9 +158,7 @@
             [MBProgressHUD showSuccess:@"验证码发送成功"];
         }else {
             [MBProgressHUD showError:@"验证码发送失败"];
-//            dispatch_suspend(self._timer);
-            
-//            [MBProgressHUD showError:responseObject[@"msg"]];
+
         }
     }else if(tag == 2){
         if([responseObject[@"result"] intValue] == 0)

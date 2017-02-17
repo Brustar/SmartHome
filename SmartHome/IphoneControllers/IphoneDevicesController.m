@@ -48,6 +48,7 @@
 //        self.deviceTypes = [SQLManager getAllDevices];
 //    }
     self.deviceTypes = [SQLManager deviceSubTypeByRoomId:_roomId];
+  
     
     self.automaticallyAdjustsScrollViewInsets = NO;
    // self.tableViewHight.constant = self.deviceTypes.count * self.tableView.rowHeight;

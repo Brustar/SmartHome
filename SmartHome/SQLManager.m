@@ -268,7 +268,7 @@
         
         DeviceInfo *device = [DeviceInfo defaultManager];
         if ([device.db isEqualToString:SMART_DB]) {
-            sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld and masterID = '%ld' and typeName <> 'FM' and typeName <> '幕布' and typeName <> 'PM2.5监测' and typeName <> '温湿度感应器' and typeName <> '动静感应器' and typeName <> '照度感应器' and typeName <> '燃气监测' and typeName <> '噪音感应器' and typeName <> '烟雾感应器'",(long)roomID,[[DeviceInfo defaultManager] masterID]];
+            sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld and masterID = '%ld' and typeName <> '幕布' and typeName <> 'PM2.5监测' and typeName <> '温湿度感应器' and typeName <> '动静感应器' and typeName <> '照度感应器' and typeName <> '燃气监测' and typeName <> '噪音感应器' and typeName <> '烟雾感应器'",(long)roomID,[[DeviceInfo defaultManager] masterID]];
         }else {
             
             sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld and masterID = '%ld' and typeName <> 'FM' and typeName <> '幕布' and typeName <> 'PM2.5监测' and typeName <> '温湿度感应器' and typeName <> '动静感应器' and typeName <> '照度感应器' and typeName <> '燃气监测' and typeName <> '噪音感应器' and typeName <> '烟雾感应器'",(long)roomID, 255l];
@@ -280,6 +280,7 @@
         {
          
             NSString *typeName = [resultSet stringForColumn:@"typeName"];
+    
             if ([self transferSubType:typeName]) {
                 typeName = [self transferSubType:typeName];
             }
@@ -292,7 +293,9 @@
                 }
             }
             if (!isEqual) {
-                [subTypes addObject:typeName];
+                if (![typeName isEqualToString:@""]) {
+                    [subTypes addObject:typeName];
+                }
             }
         }
         
@@ -731,7 +734,32 @@
     
 }
 
-+(int) getRoomID:(int)sceneID
++ (int)getRoomAuthority:(int)roomID {
+    DeviceInfo *device = [DeviceInfo defaultManager];
+    long masterID = 255l;
+    if ([device.db isEqualToString:SMART_DB]) {
+        masterID = [[DeviceInfo defaultManager] masterID];
+    }
+    
+    NSString *sql = [NSString stringWithFormat:@"select openforcurrentuser from Rooms where masterID = '%ld' and ID = '%d'", masterID, roomID];
+    
+    int roomAuthority = 0;
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        FMResultSet *resultSet = [db executeQuery:sql];
+        
+        if([resultSet next])
+        {
+            roomAuthority = [resultSet intForColumn:@"openforcurrentuser"];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return roomAuthority;
+}
+
++ (int)getRoomID:(int)sceneID
 {
     DeviceInfo *device = [DeviceInfo defaultManager];
     long masterID = 255l;
@@ -757,6 +785,7 @@
     return roomId;
 
 }
+
 +(NSString*)getSceneName:(int)sceneID
 {
     DeviceInfo *device = [DeviceInfo defaultManager];

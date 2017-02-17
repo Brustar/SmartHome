@@ -24,6 +24,7 @@
 #import "IphoneLightController.h"
 #import "IPhoneRoom.h"
 #import "DeviceInfo.h"
+#import <AFNetworking.h>
 
 @interface IphoneFamilyViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,TcpRecvDelegate>
 @property (weak, nonatomic)  IBOutlet UICollectionView *collectionView;
@@ -37,6 +38,7 @@
 @property (nonatomic,strong)  NSArray * deviceArr;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *fixTimeBarBtn;//是否存在定时设备或者场景
 @property (nonatomic, weak) UIViewController *selectController;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *netBarBtnItem;
 
 @property (nonatomic,strong) IphoneFamilyViewController * familyVC;
 @end
@@ -93,7 +95,15 @@
         self.roomID = room.rId;
         self.deviceArr = [SQLManager deviceSubTypeByRoomId:self.roomID];
     }
-    
+    SocketManager *sock=[SocketManager defaultManager];
+    DeviceInfo *info = [DeviceInfo defaultManager];
+    if ([info.db isEqualToString:SMART_DB]) {
+        [sock connectTcp];
+    }
+    //开启网络状况的监听
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityUpdate:) name: AFNetworkingReachabilityDidChangeNotification object: nil];
+    [self updateInterfaceWithReachability];
+
     //init nest dataSource
     [self initNestDataSource];
     
@@ -107,7 +117,52 @@
     }
 
 }
-
+//监听到网络状态改变
+- (void) reachabilityUpdate: (NSNotification* )note
+{
+    [self updateInterfaceWithReachability];
+}
+//处理连接改变后的情况
+- (void) updateInterfaceWithReachability
+{
+    AFNetworkReachabilityManager *afNetworkReachabilityManager = [AFNetworkReachabilityManager sharedManager];
+    //[afNetworkReachabilityManager startMonitoring];  //开启网络监视器；
+    [afNetworkReachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        DeviceInfo *info = [DeviceInfo defaultManager];
+        if(status == AFNetworkReachabilityStatusReachableViaWWAN)
+        {
+            if (info.connectState==outDoor) {
+                NSLog(@"外出模式");
+                [self.netBarBtnItem setImage:[UIImage imageNamed:@"Iphonewifi"]];
+                
+                return;
+            }
+            if (info.connectState==offLine) {
+                NSLog(@"离线模式");
+                [self.netBarBtnItem setImage:[UIImage imageNamed:@"IphoneBreakWIFI"]];
+            }
+        }
+        else if(status == AFNetworkReachabilityStatusReachableViaWiFi)
+        {
+            if (info.connectState==atHome) {
+                NSLog(@"在家模式");
+                [self.netBarBtnItem setImage:[UIImage imageNamed:@"atHome"]];
+                return;
+            }else if (info.connectState==outDoor){
+                NSLog(@"外出模式");
+                [self.netBarBtnItem setImage:[UIImage imageNamed:@"Iphonewifi"]];
+            }
+            if (info.connectState==offLine) {
+                NSLog(@"离线模式");
+              [self.netBarBtnItem setImage:[UIImage imageNamed:@"IphoneBreakWIFI"]];
+                
+            }
+        }else{
+            NSLog(@"离线模式");
+            [self.netBarBtnItem setImage:[UIImage imageNamed:@"IphoneBreakWIFI"]];
+        }
+    }];
+}
 - (void)initNestDataSource {
     _nest_devices_arr = [[NSMutableArray alloc] init];
     _nest_curr_temperature_arr = [[NSMutableArray alloc] init];
@@ -246,15 +301,15 @@
         return;
     }
     Proto proto = protocolFromData(data);
-  
     if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
         return;
     }
+    
     if (tag==0) {
-        int tag = [SQLManager getRoomIDByNumber:[NSString stringWithFormat:@"%04X", CFSwapInt16BigToHost(proto.deviceID)]];
-        FamilyCell *cell = [self.view viewWithTag:tag];
         //缓存设备当前状态
         if (proto.cmd==0x01) {
+            int tag = [SQLManager getRoomIDByNumber:[NSString stringWithFormat:@"%04X", CFSwapInt16BigToHost(proto.deviceID)]];
+            FamilyCell *cell = [self.view viewWithTag:tag];
             if (proto.action.state==0x6A) {
                 cell.tempLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
             }
@@ -344,4 +399,5 @@
     // Pass the selected object to the new view controller.
 }
 */
+
 @end
