@@ -24,6 +24,8 @@
 #import "IphoneLightController.h"
 #import "IPhoneRoom.h"
 #import "DeviceInfo.h"
+#import "ObjectFunction.h"
+#import "UIImage+ImageEffects.h"
 #import <AFNetworking.h>
 
 @interface IphoneFamilyViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,TcpRecvDelegate>
@@ -39,6 +41,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *fixTimeBarBtn;//是否存在定时设备或者场景
 @property (nonatomic, weak) UIViewController *selectController;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *netBarBtnItem;
+@property (weak, nonatomic) IBOutlet UIImageView *XGImageView;
 
 @property (nonatomic,strong) IphoneFamilyViewController * familyVC;
 @end
@@ -116,6 +119,8 @@
         [self connect];
     }
 
+      [self.XGImageView setContentMode:UIViewContentModeScaleAspectFill];
+     [self.XGImageView setImage:[ObjectFunction blurryImage:[UIImage imageNamed:@"test.jpeg"] withBlurLevel:10.0f]];
 }
 //监听到网络状态改变
 - (void) reachabilityUpdate: (NSNotification* )note
@@ -304,7 +309,6 @@
     if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
         return;
     }
-    
     if (tag==0) {
         //缓存设备当前状态
         if (proto.cmd==0x01) {

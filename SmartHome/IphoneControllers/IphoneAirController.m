@@ -35,9 +35,6 @@
     {
         self.deviceid = [SQLManager deviceIDWithRoomID:self.roomID withType:@"空调"];
     }
-    
-    
-    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -74,6 +71,7 @@
     
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
+    
     
     //查询设备状态
     NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
@@ -167,19 +165,18 @@
 #pragma mark - RulerViewDelegate
 - (void)rulerView:(RulerView *)rulerView didChangedCurrentValue:(CGFloat)currentValue {
     NSInteger value = round(currentValue);
-    
     NSString *valueString = [NSString stringWithFormat:@"%d ℃", (int)value];
-    
     self.showTemLabel.text = valueString;
-    
-    
+
+    NSData * data = [[DeviceInfo defaultManager] changeTemperature:0x6A deviceID:self.deviceid value:[self.showTemLabel.text intValue]];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:2];
+//    [self save:nil];
 }
 - (IBAction)changeButton:(UIButton *)sender {
 
     self.paramView.hidden = NO;
     self.CoverView.hidden = NO;
-
-    
     if ([self.sceneid intValue]>0) {
         if (self.currentButton == ZXPMode) {
             self.currentIndex = self.currentMode - 1;
@@ -306,11 +303,11 @@
     
     itemModel.itemLineColor = [UIColor blackColor];
     itemModel.itemMaxLineWidth = 30;
-    itemModel.itemMinLineWidth = 20;
-    itemModel.itemMiddleLineWidth = 24;
+//    itemModel.itemMinLineWidth = 20;
+//    itemModel.itemMiddleLineWidth = 24;
     itemModel.itemLineHeight = 1;
     itemModel.itemNumberOfRows = 16;
-    itemModel.itemHeight = 60;
+    itemModel.itemHeight = 30;
     itemModel.itemWidth = itemModel.itemMaxLineWidth;
     
     return itemModel;

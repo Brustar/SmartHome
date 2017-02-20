@@ -1603,20 +1603,20 @@
     FMDatabase *db = [self connetdb];
     if ([db open]) {
         int count=0;
-        NSString *sql =[NSString stringWithFormat: @"SELECT count(*) as count FROM Rooms where masterID = '255'"];
+        NSString *sql =[NSString stringWithFormat: @"SELECT count(*) as count FROM Rooms where masterID = '255' and openforcurrentuser = 1"];
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
             count += [resultSet intForColumn:@"count"];
         }
-        sql =[NSString stringWithFormat: @"SELECT count(*) as count FROM Devices where masterID = '255'"];
+        sql =[NSString stringWithFormat: @"SELECT count(*) as count FROM Devices where masterID = '255' and openforcurrentuser = 1"];
         resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
             count += [resultSet intForColumn:@"count"];
         }
 
-        sql = [NSString stringWithFormat:@"SELECT count(*) as count FROM Scenes where masterID = '255'"];
+        sql = [NSString stringWithFormat:@"SELECT count(*) as count FROM Scenes where masterID = '255' and openforcurrentuser = 1"];
         resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
@@ -1626,9 +1626,9 @@
         if (count == 0) {
             
         //insert rooms
-        NSArray *sqls=@[@"INSERT INTO \"Rooms\" VALUES(1,'主卧',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0,0,255);",
-        @"INSERT INTO \"Rooms\" VALUES(2,'客厅',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0,0,255);",
-        @"INSERT INTO \"Rooms\" VALUES(4,'餐厅',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0,0,255);"];
+        NSArray *sqls=@[@"INSERT INTO \"Rooms\" VALUES(1,'主卧',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0,0,255,1);",
+        @"INSERT INTO \"Rooms\" VALUES(2,'客厅',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0,0,255,1);",
+        @"INSERT INTO \"Rooms\" VALUES(4,'餐厅',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0,0,255,1);"];
         for (NSString *sql in sqls) {
             BOOL result=[db executeUpdate:sql];
             if (result) {

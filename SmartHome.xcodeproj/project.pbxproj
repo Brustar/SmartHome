@@ -138,6 +138,9 @@
 		2EA897C01E31B73F002CA904 /* 3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EA897BF1E31B73F002CA904 /* 3@2x.png */; };
 		2EA897C21E31B792002CA904 /* 4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EA897C11E31B792002CA904 /* 4@2x.png */; };
 		2EA897C71E31B9B6002CA904 /* UO256.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EA897C61E31B9B6002CA904 /* UO256.png */; };
+		2EA97E611E56A347003E0039 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA97E601E56A347003E0039 /* UIImage+ImageEffects.m */; };
+		2EA97E641E56A355003E0039 /* ObjectFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA97E631E56A355003E0039 /* ObjectFunction.m */; };
+		2EA97E661E56A3E7003E0039 /* test.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2EA97E651E56A3E7003E0039 /* test.jpeg */; };
 		2EA99E901E1C9A0100659065 /* MySubEnergyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA99E8F1E1C9A0100659065 /* MySubEnergyVC.m */; };
 		2EB2A4721E237F05003F01DB /* DeviceListTimeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB2A4711E237F05003F01DB /* DeviceListTimeVC.m */; };
 		2EBE210F1E497595003D53A4 /* ForgotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBE210E1E497595003D53A4 /* ForgotViewController.m */; };
@@ -713,6 +716,11 @@
 		2EA897BF1E31B73F002CA904 /* 3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3@2x.png"; sourceTree = "<group>"; };
 		2EA897C11E31B792002CA904 /* 4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4@2x.png"; sourceTree = "<group>"; };
 		2EA897C61E31B9B6002CA904 /* UO256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UO256.png; sourceTree = "<group>"; };
+		2EA97E5F1E56A347003E0039 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		2EA97E601E56A347003E0039 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		2EA97E621E56A355003E0039 /* ObjectFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectFunction.h; sourceTree = "<group>"; };
+		2EA97E631E56A355003E0039 /* ObjectFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectFunction.m; sourceTree = "<group>"; };
+		2EA97E651E56A3E7003E0039 /* test.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpeg; sourceTree = "<group>"; };
 		2EA99E8E1E1C9A0100659065 /* MySubEnergyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySubEnergyVC.h; sourceTree = "<group>"; };
 		2EA99E8F1E1C9A0100659065 /* MySubEnergyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySubEnergyVC.m; sourceTree = "<group>"; };
 		2EB2A4701E237F05003F01DB /* DeviceListTimeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceListTimeVC.h; sourceTree = "<group>"; };
@@ -1794,6 +1802,11 @@
 		2EA897C31E31B8FA002CA904 /* Iphoneimage */ = {
 			isa = PBXGroup;
 			children = (
+				2EA97E5F1E56A347003E0039 /* UIImage+ImageEffects.h */,
+				2EA97E601E56A347003E0039 /* UIImage+ImageEffects.m */,
+				2EA97E621E56A355003E0039 /* ObjectFunction.h */,
+				2EA97E631E56A355003E0039 /* ObjectFunction.m */,
+				2EA97E651E56A3E7003E0039 /* test.jpeg */,
 				2EA897BB1E31B53E002CA904 /* 1@2x.png */,
 				2EA897BD1E31B59B002CA904 /* 2@2x.png */,
 				2EA897BF1E31B73F002CA904 /* 3@2x.png */,
@@ -2111,6 +2124,7 @@
 				CDF90B431E2F0676009043B9 /* realScene.plist in Resources */,
 				CD78A8301E3379C200060466 /* 255_221.plist in Resources */,
 				CDF389281E30A91200657C8B /* energyDetail.plist in Resources */,
+				2EA97E661E56A3E7003E0039 /* test.jpeg in Resources */,
 				0FBEFE271D24A5020084244F /* netconfig.plist in Resources */,
 				F60FDB471D003FD500AB04BE /* CurtainTableViewCell.xib in Resources */,
 				CDF389241E306D2400657C8B /* maintaininfo.plist in Resources */,
@@ -2380,6 +2394,7 @@
 				2E5E5FEC1DE22AC8006F0C8F /* LightCell.m in Sources */,
 				0FCAA40C1D1945BB00C1E58C /* BgMusicController.m in Sources */,
 				0FB35C681DB0CECA00B48EA7 /* Plugin.m in Sources */,
+				2EA97E641E56A355003E0039 /* ObjectFunction.m in Sources */,
 				0FAF74C51CEEA17C00432713 /* HRHSVColorUtil.m in Sources */,
 				0FBEFE2A1D24F0C10084244F /* WebManager.m in Sources */,
 				2EEE536B1E3061930026F97D /* IphoneDetailViewController.m in Sources */,
@@ -2424,6 +2439,7 @@
 				0F11654F1D7418EE00A01B8F /* Amplifier.m in Sources */,
 				F630C3621D38C3E5008880BB /* AreaSettingCell.m in Sources */,
 				2E7CD6081E14B80C002D0541 /* FixTimeListCell.m in Sources */,
+				2EA97E611E56A347003E0039 /* UIImage+ImageEffects.m in Sources */,
 				2E63280E1E03CB06000D7BE9 /* IPhoneTVVC.m in Sources */,
 				0FCFB3981CF2947500B37DD3 /* EntranceGuard.m in Sources */,
 				F64EF8011D8FDCE7003C1C48 /* IphoneDeviceListController.m in Sources */,

@@ -24,7 +24,7 @@
 @property (nonatomic,assign) NSInteger unreadcount;
 @property (nonatomic,strong) UIImageView * image;
 @property (nonatomic,strong) UILabel * label;
-@property (nonatomic,assign) NSInteger seleCellID;
+//@property (nonatomic,assign) NSInteger seleCellID;
 @property (nonatomic,assign) int selectId;
 
 @end
@@ -260,14 +260,14 @@
         cell.countLabel.hidden       = YES;
     }
     
-    self.seleCellID = [self.isreadArr[indexPath.row] integerValue];
-    if (self.seleCellID == 0) {
-        cell.unreadcountImage.hidden = NO;
-        cell.countLabel.hidden       = NO;
-    }else{
-        cell.unreadcountImage.hidden = YES;
-        cell.countLabel.hidden       = YES;
-    }
+//    self.seleCellID = [self.isreadArr[indexPath.row] integerValue];
+//    if (self.seleCellID == 0) {
+//        cell.unreadcountImage.hidden = NO;
+//        cell.countLabel.hidden       = NO;
+//    }else{
+//        cell.unreadcountImage.hidden = YES;
+//        cell.countLabel.hidden       = YES;
+//    }
     return cell;
 
 }
