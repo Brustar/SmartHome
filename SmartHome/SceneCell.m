@@ -15,12 +15,17 @@
 @end
 @implementation SceneCell
 
+- (IBAction)powerBtnAction:(id)sender {
+    NSLog(@"power btn");
+}
+
 -(void)useLongPressGesture
 {
     self.lgPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
     self.lgPress.delegate = self;
     [self addGestureRecognizer:self.lgPress];
 }
+
 - (IBAction)seleteSendPowBtn:(id)sender {
     self.seleteSendPowBtn.selected = !self.seleteSendPowBtn.selected;
     if (self.seleteSendPowBtn.selected) {
@@ -31,6 +36,17 @@
         [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];
     }
     
+}
+
+- (void)setSceneInfo:(Scene *)info {
+    self.scenseName.text = info.sceneName;
+    self.sceneStatus = info.status;
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString: info.picName] placeholderImage:[UIImage imageNamed:@"PL"]];
+    if (self.sceneStatus == 0) {
+        [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"startScene"] forState:UIControlStateNormal];
+    }else if (self.sceneStatus == 1) {
+        [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"closeScene"] forState:UIControlStateNormal];
+    }
 }
 
 - (IBAction)doDeleteBtn:(id)sender {

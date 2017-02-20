@@ -309,7 +309,7 @@
                     NSString *urlPlist = sceneInfoDic[@"plist_url"];
                     [self downloadPlsit:urlPlist];
                 }
-                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,'%@',%d,null,'%ld')",sId,sName,rName,urlImage,room_id,sType,sNumber,isFavorite,[DeviceInfo defaultManager].masterID];
+                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,'%@',%d,null,'%ld', %d)",sId,sName,rName,urlImage,room_id,sType,sNumber,isFavorite,[DeviceInfo defaultManager].masterID, 0];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {

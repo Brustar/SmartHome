@@ -23,7 +23,7 @@
 #import <SDWebImage/UIButton+WebCache.h>
 
 
-@interface SceneController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIGestureRecognizerDelegate,UISearchBarDelegate>
+@interface SceneController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIGestureRecognizerDelegate,UISearchBarDelegate,SceneCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *addSceseBtn;
@@ -78,11 +78,6 @@
     self.firstView.hidden = YES;
     self.secondView.hidden = YES;
 
-    SocketManager *sock=[SocketManager defaultManager];
-    DeviceInfo *info = [DeviceInfo defaultManager];
-    if ([info.db isEqualToString:SMART_DB]) {
-        [sock connectTcp];
-    }
     //开启网络状况的监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityUpdate:) name: AFNetworkingReachabilityDidChangeNotification object: nil];
 
@@ -126,49 +121,67 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    
+    [self refresh];
+}
+
+//刷新页面
+- (void)refresh {
     self.scenes = [SQLManager getScensByRoomId:self.roomID];
     [self setUpSceneButton];
     [self judgeScensCount:self.scenes];
-    [self.collectionView reloadData];
 }
 
 -(void)setUpSceneButton
 {
-    if(self.scenes.count == 0)
+    if(self.scenes.count <= 0)
     {
         self.firstView.hidden = YES;
         self.secondView.hidden = YES;
         
-    }else if(self.scenes .count == 1)
+    }else if(self.scenes.count == 1)
     {
         self.secondView.hidden = YES;
         self.firstView.hidden = NO;
         Scene *scene = self.scenes[0];
-        self.firstButton.tag = scene.sceneID;
-        self.firstPowerBtn.tag = scene.sceneID;
+        self.firstButton.tag = 1;
+        self.firstPowerBtn.tag = 1;
         
         [self.firstButton setTitle:scene.sceneName forState:UIControlStateNormal];
         [self.firstButton sd_setBackgroundImageWithURL:[NSURL URLWithString:scene.picName] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"PL"]];
+        
+        if (scene.status == 0) {
+            [self.firstPowerBtn setBackgroundImage:[UIImage imageNamed:@"startScene"] forState:UIControlStateNormal];
+        }else if (scene.status == 1) {
+            [self.firstPowerBtn setBackgroundImage:[UIImage imageNamed:@"closeScene"] forState:UIControlStateNormal];
+        }
         
         
     }else {
         Scene *scene = self.scenes[0];
-        self.firstButton.tag = scene.sceneID;
-        self.firstPowerBtn.tag = scene.sceneID;
+        self.firstButton.tag = 1;
+        self.firstPowerBtn.tag = 1;
         [self.firstButton setTitle:scene.sceneName forState:UIControlStateNormal];
         [self.firstButton sd_setBackgroundImageWithURL:[NSURL URLWithString:scene.picName] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"PL"]];
         
-        Scene *scondScene = self.scenes[1];
+        if (scene.status == 0) {
+            [self.firstPowerBtn setBackgroundImage:[UIImage imageNamed:@"startScene"] forState:UIControlStateNormal];
+        }else if (scene.status == 1) {
+            [self.firstPowerBtn setBackgroundImage:[UIImage imageNamed:@"closeScene"] forState:UIControlStateNormal];
+        }
         
+        Scene *scondScene = self.scenes[1];
         [self.secondButton sd_setBackgroundImageWithURL:[NSURL URLWithString:scondScene.picName] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"PL"]];
         [self.secondButton setTitle:scondScene.sceneName forState:UIControlStateNormal];
-        self.secondButton.tag = scondScene.sceneID;
-        self.secondPowerBtn.tag = scondScene.sceneID;
-       
+        self.secondButton.tag = 2;
+        self.secondPowerBtn.tag = 2;
         self.firstView.hidden = NO;
-       
         self.secondView.hidden = NO;
+        
+        if (scondScene.status == 0) {
+            [self.secondPowerBtn setBackgroundImage:[UIImage imageNamed:@"startScene"] forState:UIControlStateNormal];
+        }else if (scondScene.status == 1) {
+            [self.secondPowerBtn setBackgroundImage:[UIImage imageNamed:@"closeScene"] forState:UIControlStateNormal];
+        }
         
     }
 }
@@ -182,14 +195,8 @@
 - (void)subTypeNotification:(NSNotification *)notification
 {
     NSDictionary *dict = notification.userInfo;
-    
     self.roomID = [dict[@"subType"] intValue];
-    
-    self.scenes = [SQLManager getScensByRoomId:self.roomID];
-   
-    [self setUpSceneButton];
-    [self judgeScensCount:self.scenes];
-    
+    [self refresh];
 }
 
 
@@ -274,6 +281,12 @@
     [super didReceiveMemoryWarning];
     
 }
+
+#pragma mark - SceneCell Delegate
+- (void)powerBtnAction:(UIButton *)sender sceneStatus:(int)status {
+    
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
    
@@ -285,11 +298,9 @@
     [cell.powerBtn addTarget:self action:@selector(startSceneAction:) forControlEvents:UIControlEventTouchUpInside];
     
     Scene *scene = self.collectionScenes[indexPath.row];
-    cell.scenseName.text = scene.sceneName;
-
-    [cell.imgView sd_setImageWithURL:[NSURL URLWithString: scene.picName] placeholderImage:[UIImage imageNamed:@"PL"]];
-    cell.powerBtn.tag = scene.sceneID;
-   
+    [cell setSceneInfo:scene];
+    cell.delegate = self;
+    cell.powerBtn.tag = indexPath.row;
    
     return cell;
 }
@@ -299,14 +310,26 @@
     
     Scene *scene = self.collectionScenes[indexPath.row];
     self.selectedSID = scene.sceneID;
-
-    [[SceneManager defaultManager] startScene:scene.sceneID];
+    if (scene.status == 0) {
+        [[SceneManager defaultManager] startScene:scene.sceneID];
+        [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];
+    }
+    
     [self performSegueWithIdentifier:@"sceneDetailSegue" sender:self];
 }
 -(void)startSceneAction:(UIButton *)btn {
-    int sceneId = (int)btn.tag;
-    [btn setTintColor:[UIColor redColor]];
-    [[SceneManager defaultManager] startScene:sceneId];
+    Scene *scene = self.collectionScenes[btn.tag];
+    if (scene) {
+        if (scene.status == 0) { //点击前，场景是关闭状态，需打开场景
+            [[SceneManager defaultManager] startScene:scene.sceneID];//打开场景
+            [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];//更新数据库
+        }else if (scene.status == 1) { //点击前，场景是打开状态，需关闭场景
+            [[SceneManager defaultManager] poweroffAllDevice:scene.sceneID];//关闭场景
+            [SQLManager updateSceneStatus:0 sceneID:scene.sceneID];//更新数据库
+        }
+        [self refresh];//刷新页面
+    }
+    
 }
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -333,14 +356,76 @@
 }
 
 - (IBAction)clickSceneBtn:(UIButton *)sender {
-    self.selectedSID =(int)sender.tag;
-    [[SceneManager defaultManager] startScene:self.selectedSID];
+    
+    if (sender.tag == 1) {
+        if (self.scenes.count >0) {
+            Scene *scene = self.scenes[0];
+            if (scene) {
+                if (scene.status == 0) { //点击前，场景是关闭状态，需打开场景
+                    [[SceneManager defaultManager] startScene:scene.sceneID];//打开场景
+                    [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];//更新数据库
+                    self.scenes = [SQLManager getScensByRoomId:self.roomID];
+                    [self.firstPowerBtn setBackgroundImage:[UIImage imageNamed:@"closeScene"] forState:UIControlStateNormal];
+                }
+            }
+        }
+        
+    }else if (sender.tag == 2) {
+        if (self.scenes.count >1) {
+            Scene *scene = self.scenes[1];
+            if (scene) {
+                if (scene.status == 0) { //点击前，场景是关闭状态，需打开场景
+                    [[SceneManager defaultManager] startScene:scene.sceneID];//打开场景
+                    [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];//更新数据库
+                    self.scenes = [SQLManager getScensByRoomId:self.roomID];
+                    [self.secondPowerBtn setBackgroundImage:[UIImage imageNamed:@"closeScene"] forState:UIControlStateNormal];
+                }
+            }
+        }
+        
+    }
+    
     [self performSegueWithIdentifier:@"sceneDetailSegue" sender:self];
 }
 
 - (IBAction)clickSartSceneBtn:(UIButton *)sender {
-    [sender setTintColor:[UIColor redColor]];
-    [[SceneManager defaultManager] startScene:(int)sender.tag];
+    
+    if (sender.tag == 1) {
+        if (self.scenes.count >0) {
+            Scene *scene = self.scenes[0];
+            if (scene) {
+                if (scene.status == 0) { //点击前，场景是关闭状态，需打开场景
+                    [[SceneManager defaultManager] startScene:scene.sceneID];//打开场景
+                    [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];//更新数据库
+                    [self.firstPowerBtn setBackgroundImage:[UIImage imageNamed:@"closeScene"] forState:UIControlStateNormal];
+                }else if (scene.status == 1) { //点击前，场景是打开状态，需关闭场景
+                    [[SceneManager defaultManager] poweroffAllDevice:scene.sceneID];//关闭场景
+                    [SQLManager updateSceneStatus:0 sceneID:scene.sceneID];//更新数据库
+                    [self.firstPowerBtn setBackgroundImage:[UIImage imageNamed:@"startScene"] forState:UIControlStateNormal];
+                }
+                self.scenes = [SQLManager getScensByRoomId:self.roomID];
+            }
+        }
+        
+    }else if (sender.tag == 2) {
+        if (self.scenes.count >1) {
+            Scene *scene = self.scenes[1];
+            if (scene) {
+                if (scene.status == 0) { //点击前，场景是关闭状态，需打开场景
+                    [[SceneManager defaultManager] startScene:scene.sceneID];//打开场景
+                    [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];//更新数据库
+                    [self.secondPowerBtn setBackgroundImage:[UIImage imageNamed:@"closeScene"] forState:UIControlStateNormal];
+                }else if (scene.status == 1) { //点击前，场景是打开状态，需关闭场景
+                    [[SceneManager defaultManager] poweroffAllDevice:scene.sceneID];//关闭场景
+                    [SQLManager updateSceneStatus:0 sceneID:scene.sceneID];//更新数据库
+                    [self.secondPowerBtn setBackgroundImage:[UIImage imageNamed:@"startScene"] forState:UIControlStateNormal];
+                }
+                self.scenes = [SQLManager getScensByRoomId:self.roomID];
+            }
+        }
+        
+    }
+    
 }
 
 
