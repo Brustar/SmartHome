@@ -78,8 +78,9 @@
 -(void)connect
 {
     SocketManager *sock = [SocketManager defaultManager];
-    DeviceInfo *device =[DeviceInfo defaultManager];
-    if (device.connectState == offLine) {
+    if ([[UD objectForKey:@"HostID"] intValue] > 0x8000) {
+        [sock connectUDP:[IOManager udpPort]];
+    }else{
         [sock connectTcp];
     }
     sock.delegate = self;
@@ -95,11 +96,7 @@
         self.roomID = room.rId;
         self.deviceArr = [SQLManager deviceSubTypeByRoomId:self.roomID];
     }
-    SocketManager *sock=[SocketManager defaultManager];
-    DeviceInfo *info = [DeviceInfo defaultManager];
-    if ([info.db isEqualToString:SMART_DB]) {
-        [sock connectTcp];
-    }
+
     //开启网络状况的监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityUpdate:) name: AFNetworkingReachabilityDidChangeNotification object: nil];
     [self updateInterfaceWithReachability];

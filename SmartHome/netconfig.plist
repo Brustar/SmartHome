@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>udpPort</key>
-	<real>40000</real>
+	<real>9000</real>
 	<key>tcpPort</key>
 	<real>8000</real>
 	<key>tcpServer</key>

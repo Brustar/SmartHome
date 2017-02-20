@@ -78,11 +78,6 @@
     self.firstView.hidden = YES;
     self.secondView.hidden = YES;
 
-    SocketManager *sock=[SocketManager defaultManager];
-    DeviceInfo *info = [DeviceInfo defaultManager];
-    if ([info.db isEqualToString:SMART_DB]) {
-        [sock connectTcp];
-    }
     //开启网络状况的监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityUpdate:) name: AFNetworkingReachabilityDidChangeNotification object: nil];
 

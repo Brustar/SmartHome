@@ -77,8 +77,9 @@
 -(void)connect
 {
     SocketManager *sock = [SocketManager defaultManager];
-    DeviceInfo *device =[DeviceInfo defaultManager];
-    if (device.connectState == offLine) {
+    if ([[UD objectForKey:@"HostID"] intValue] > 0x8000) {
+        [sock connectUDP:[IOManager udpPort]];
+    }else{
         [sock connectTcp];
     }
     sock.delegate = self;
