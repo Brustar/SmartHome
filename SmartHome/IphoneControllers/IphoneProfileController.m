@@ -27,6 +27,7 @@
 @property (nonatomic,strong) UIImageView * imageView;
 //@property (nonatomic,strong) MsgCell * MsgCell;
 @property (nonatomic,strong) NSMutableArray * unreadcountArr;
+@property (nonatomic,assign) BOOL * isShowUnread;
 @end
 
 @implementation IphoneProfileController
@@ -60,6 +61,7 @@
     
     self.segues = @[@"iphoneDefault",@"iphoneRecordSegue",@"iphoneEngerSegue",@"iphoneFavorSegue",@"iphoneMsgSegue"];
     
+   
  
 }
 
@@ -112,9 +114,11 @@
         }
         if (self.unreadcountArr.count == subArr.count) {
             self.imageView.hidden = YES;
+           
         }
         else{
             self.imageView.hidden = NO;
+            
         }
         
     }
