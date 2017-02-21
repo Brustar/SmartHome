@@ -5438,6 +5438,7 @@
                                 <state key="normal" title="忘记密码?"/>
                                 <connections>
                                     <action selector="forgotPWD:" destination="Q07-ua-pDl" eventType="touchUpInside" id="2yy-9s-Ckz"/>
+                                    <segue destination="pG9-3A-dEB" kind="show" identifier="ForgotViewController" id="ebX-tq-ch8"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9YJ-co-f1J">
@@ -5615,7 +5616,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7jA-yB-cch" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="367" y="-3320"/>
+            <point key="canvasLocation" x="441" y="-3313"/>
         </scene>
         <!--主机ID列表-->
         <scene sceneID="B19-Yo-YEk">
