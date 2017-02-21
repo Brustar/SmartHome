@@ -23,17 +23,38 @@
 //    NSString *urlString = @"/user/update_pwd.aspx";
     NSString * urlString = [[IOManager httpAddr] stringByAppendingString:@"/user/update_pwd.aspx"];
     [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
+    _webView.delegate = self;
 }
+
 - (IBAction)goBack:(id)sender {
     
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UIWebView delegate
+- (BOOL)webView:(UIWebView *)aWebView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    if([request.URL.scheme isEqualToString:@"ecloud"])
+    {
+        [self cancel:nil];
+        return NO;
+    }
+    return YES;
+}
+
+#pragma mark Action
+- (void)cancel:(id)sender
+{
+    UIViewController *ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginController"];
+    [self.navigationController pushViewController:ecloudVC animated:YES];
+
+}
 /*
 #pragma mark - Navigation
 
