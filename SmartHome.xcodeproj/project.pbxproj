@@ -169,6 +169,8 @@
 		CDF90B411E1E425D009043B9 /* RoomDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF90B401E1E425D009043B9 /* RoomDetailViewController.m */; };
 		CDF90B431E2F0676009043B9 /* realScene.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF90B421E2F0676009043B9 /* realScene.plist */; };
 		CDF90B451E2F4B14009043B9 /* planeScene.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF90B441E2F4B14009043B9 /* planeScene.plist */; };
+		CDFB9DF01E5DC4B600BFECCE /* DeviceTimerList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDFB9DEF1E5DC4B600BFECCE /* DeviceTimerList.plist */; };
+		CDFB9DF21E5DCB4D00BFECCE /* SceneTimerList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDFB9DF11E5DCB4D00BFECCE /* SceneTimerList.plist */; };
 		F361579D9B9637C261531C8C /* libPods-SmartHome.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B2DBF5C92F57E3B7AD6AA3 /* libPods-SmartHome.a */; };
 		F60E71CA1D796BE6008863DB /* AmplifierController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60E71C91D796BE6008863DB /* AmplifierController.m */; };
 		F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB411D00029900AB04BE /* DetailViewController.m */; };
@@ -766,6 +768,8 @@
 		CDF90B401E1E425D009043B9 /* RoomDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomDetailViewController.m; sourceTree = "<group>"; };
 		CDF90B421E2F0676009043B9 /* realScene.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = realScene.plist; sourceTree = "<group>"; };
 		CDF90B441E2F4B14009043B9 /* planeScene.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = planeScene.plist; sourceTree = "<group>"; };
+		CDFB9DEF1E5DC4B600BFECCE /* DeviceTimerList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DeviceTimerList.plist; sourceTree = "<group>"; };
+		CDFB9DF11E5DCB4D00BFECCE /* SceneTimerList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SceneTimerList.plist; sourceTree = "<group>"; };
 		CE54136C9EEF8F51E8FBEEDE /* Pods-SmartHome.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.release.xcconfig"; sourceTree = "<group>"; };
 		F60E71C81D796BE6008863DB /* AmplifierController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmplifierController.h; sourceTree = "<group>"; };
 		F60E71C91D796BE6008863DB /* AmplifierController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmplifierController.m; sourceTree = "<group>"; };
@@ -1225,6 +1229,8 @@
 		0F032D471CC9B12700D1920D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CDFB9DF11E5DCB4D00BFECCE /* SceneTimerList.plist */,
+				CDFB9DEF1E5DC4B600BFECCE /* DeviceTimerList.plist */,
 				CD78A8311E337C1600060466 /* 255_216.plist */,
 				CD78A82F1E3379C200060466 /* 255_221.plist */,
 				CDF389331E30F27500657C8B /* userHabitList.plist */,
@@ -2129,6 +2135,7 @@
 				F60FDB471D003FD500AB04BE /* CurtainTableViewCell.xib in Resources */,
 				CDF389241E306D2400657C8B /* maintaininfo.plist in Resources */,
 				0F7E2E161D581AC400A47D5D /* iPhone.storyboard in Resources */,
+				CDFB9DF01E5DC4B600BFECCE /* DeviceTimerList.plist in Resources */,
 				0F032D5A1CC9B12700D1920D /* Assets.xcassets in Resources */,
 				CDF3892C1E30B86500657C8B /* msgList.plist in Resources */,
 				CD78A8321E337C1600060466 /* 255_216.plist in Resources */,
@@ -2136,6 +2143,7 @@
 				CDF389301E30E39500657C8B /* userList.plist in Resources */,
 				F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */,
 				2EA897BE1E31B59B002CA904 /* 2@2x.png in Resources */,
+				CDFB9DF21E5DCB4D00BFECCE /* SceneTimerList.plist in Resources */,
 				2EA897C21E31B792002CA904 /* 4@2x.png in Resources */,
 				2EA897C01E31B73F002CA904 /* 3@2x.png in Resources */,
 				2EA897BC1E31B53E002CA904 /* 1@2x.png in Resources */,

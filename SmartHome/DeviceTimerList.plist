@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>timer_list</key>
+	<array>
+		<dict>
+			<key>deviceValue</key>
+			<integer>25</integer>
+			<key>repetition</key>
+			<string>1,2,3,4,5,6,7</string>
+			<key>deviceName</key>
+			<string>老人房-空调</string>
+			<key>starttime</key>
+			<string>22:00</string>
+			<key>endtime</key>
+			<string>01:00</string>
+			<key>status</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>deviceValue</key>
+			<integer>0</integer>
+			<key>repetition</key>
+			<string>1</string>
+			<key>deviceName</key>
+			<string>客厅-智能浇花</string>
+			<key>starttime</key>
+			<string>10:00</string>
+			<key>endtime</key>
+			<string>10:01</string>
+			<key>status</key>
+			<integer>0</integer>
+		</dict>
+	</array>
+</dict>
+</plist>

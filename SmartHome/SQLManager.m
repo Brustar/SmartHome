@@ -1628,7 +1628,7 @@
         //insert rooms
         NSArray *sqls=@[@"INSERT INTO \"Rooms\" VALUES(1,'主卧',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0,0,255,1);",
         @"INSERT INTO \"Rooms\" VALUES(2,'客厅',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0,0,255,1);",
-        @"INSERT INTO \"Rooms\" VALUES(4,'餐厅',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0,0,255,1);"];
+        @"INSERT INTO \"Rooms\" VALUES(4,'老人房',NULL,NULL,NULL,NULL,NULL,'http://115.28.151.85:8088/DefaultFiles\\images\\room\\kitchen.jpg',0,0,255,1);"];
         for (NSString *sql in sqls) {
             BOOL result=[db executeUpdate:sql];
             if (result) {
@@ -1640,37 +1640,53 @@
             
         
         //insert devices
-        sqls=@[@"INSERT INTO \"Devices\" VALUES(51,'卧室开关灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0036','01',1,'开关灯','照明',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(52,'卧室调光灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0015','02',1,'调光灯','照明',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(53,'卧室调色灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0016','03',1,'调色灯','照明',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(54,'卧室电视',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0017','12',3,'网络电视','影音',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(55,'卧室空调',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0018','31',2,'空调','环境',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(56,'卧室纱帘',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0019','21',1,'开合帘','照明',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(57,'卧室遮光帘',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0020','21',1,'开合帘','照明',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(58,'卧室卷帘',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0021','22',1,'卷帘','照明',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(59,'影音室DVD',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0022','13',3,'DVD','影音',255,'',NULL);",
+        sqls=@[@"INSERT INTO \"Devices\" VALUES(51,'床头射灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0036','01',1,'调光灯','照明',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(52,'床尾射灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0015','02',1,'调光灯','照明',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(53,'窗边灯带',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0016','03',1,'调色灯','照明',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(54,'主卧电视',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0017','12',3,'网络电视','影音',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(55,'主卧空调',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0018','31',2,'空调','环境',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(56,'纱帘',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0019','21',1,'开合帘','照明',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(57,'遮光帘',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,1,'0020','21',1,'开合帘','照明',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(58,'卷帘',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0021','22',1,'卷帘','照明',255,'',NULL);",
+               
+        @"INSERT INTO \"Devices\" VALUES(256,'纱帘',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0019','21',1,'开合帘','照明',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(257,'遮光帘',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0020','21',1,'开合帘','照明',255,'',NULL);",
+               
+        @"INSERT INTO \"Devices\" VALUES(37,'电视射灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0101','01',1,'调光灯','照明',255,'',NULL);",
+              
+        @"INSERT INTO \"Devices\" VALUES(36,'中间射灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0102','02',1,'调光灯','照明',255,'',NULL);",
+           
+         @"INSERT INTO \"Devices\" VALUES(35,'天花灯带',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0103','03',1,'调光灯','照明',255,'',NULL);",
+               
+        @"INSERT INTO \"Devices\" VALUES(255,'客厅空调',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0018','31',2,'空调','环境',255,'',NULL);",
+               
+        @"INSERT INTO \"Devices\" VALUES(59,'电视',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0022','13',3,'网络电视','影音',255,'',NULL);",
         @"INSERT INTO \"Devices\" VALUES(60,'影音室FM',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0023','15',3,'FM','影音',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(61,'影音室背景音乐',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0024','14',3,'背景音乐','影音',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(62,'影音室投影',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0025','16',3,'投影','影音',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(63,'影音室幕布',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0026','17',3,'幕布','影音',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(38,'墙边调光灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0001','02',1,'调光灯','照明',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(39,'投影上调光灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0002','02',1,'调光灯','照明',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(40,'沙发上调光灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0003','02',1,'调光灯','照明',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(41,'主卧电视',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0005','12',3,'网络电视','影音',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(42,'主卧DVD',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0006','13',3,'DVD','影音',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(43,'主卧背景音乐',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0007','14',3,'背景音乐','影音',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(44,'主卧FM',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0008','15',3,'FM','影音',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(45,'主卧机顶盒',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0009','11',3,'机顶盒','影音',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(46,'主卧空调',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0010','31',2,'空调','环境',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(47,'主卧投影',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0011','16',3,'投影','影音',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(48,'主卧幕布',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0012','17',3,'幕布','影音',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(49,'测试摄像头',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0013','45',4,'摄像头','安防',255,'rtsp://admin:stone123@flysun158.6655.la:8184','rtsp://admin:stone123@flysun158.6655.la:8184');",
-        @"INSERT INTO \"Devices\" VALUES(50,'主卧纱帘',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'02BA','21',1,'开合帘','照明',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(70,'主卧智能门锁',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0033','40',4,'智能门锁','安防',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(71,'智能浇花',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0034','41',5,'智能单品','智能单品',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(100,'智能投食',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0036','41',5,'智能单品','智能单品',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(73,'主卧功放',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0014','18',3,'功放','影音',255,'',NULL);",
-        @"INSERT INTO \"Devices\" VALUES(37,'主卧开关灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0101','01',1,'开关灯','照明',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(61,'背景音乐',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0024','14',3,'背景音乐','影音',255,'',NULL);",
+//        @"INSERT INTO \"Devices\" VALUES(62,'影音室投影',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0025','16',3,'投影','影音',255,'',NULL);",
+//        @"INSERT INTO \"Devices\" VALUES(63,'影音室幕布',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0026','17',3,'幕布','影音',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(38,'窗边灯带',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0001','02',1,'调光灯','照明',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(39,'窗头灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0002','02',1,'调光灯','照明',255,'',NULL);",
+//        @"INSERT INTO \"Devices\" VALUES(40,'沙发上调光灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0003','02',1,'调光灯','照明',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(41,'电视',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0005','12',3,'网络电视','影音',255,'',NULL);",
+//        @"INSERT INTO \"Devices\" VALUES(42,'主卧DVD',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0006','13',3,'DVD','影音',255,'',NULL);",
+//        @"INSERT INTO \"Devices\" VALUES(43,'主卧背景音乐',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0007','14',3,'背景音乐','影音',255,'',NULL);",
+//        @"INSERT INTO \"Devices\" VALUES(44,'主卧FM',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0008','15',3,'FM','影音',255,'',NULL);",
+//        @"INSERT INTO \"Devices\" VALUES(45,'主卧机顶盒',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0009','11',3,'机顶盒','影音',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(46,'老人房空调',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0010','31',2,'空调','环境',255,'',NULL);",
+//        @"INSERT INTO \"Devices\" VALUES(47,'主卧投影',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0011','16',3,'投影','影音',255,'',NULL);",
+//        @"INSERT INTO \"Devices\" VALUES(48,'主卧幕布',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0012','17',3,'幕布','影音',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(49,'摄像头',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0013','45',4,'摄像头','安防',255,'rtsp://admin:stone123@flysun158.6655.la:8184','rtsp://admin:stone123@flysun158.6655.la:8184');",
+//        @"INSERT INTO \"Devices\" VALUES(50,'主卧纱帘',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'02BA','21',1,'开合帘','照明',255,'',NULL);",
+//        @"INSERT INTO \"Devices\" VALUES(70,'主卧智能门锁',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0033','40',4,'智能门锁','安防',255,'',NULL);",
+        @"INSERT INTO \"Devices\" VALUES(71,'智能浇花',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0034','41',5,'智能单品','智能单品',255,'',NULL);",
+//        @"INSERT INTO \"Devices\" VALUES(100,'智能投食',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0036','41',5,'智能单品','智能单品',255,'',NULL);",
+//        @"INSERT INTO \"Devices\" VALUES(73,'主卧功放',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0014','18',3,'功放','影音',255,'',NULL);",
+        
+               
+               
+               
+               
         @"INSERT INTO \"Devices\" VALUES(64,'车库温湿度感应器',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0027','50',6,'温湿度感应器','感应器',255,'',NULL);",
         @"INSERT INTO \"Devices\" VALUES(65,'车库动静感应器',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0028','51',6,'动静感应器','感应器',255,'',NULL);",
         @"INSERT INTO \"Devices\" VALUES(66,'车库照度感应器',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0029','52',6,'照度感应器','感应器',255,'',NULL);",
@@ -1687,12 +1703,12 @@
             }
         }
         //insert scenes
-            sqls=@[@"INSERT INTO \"Scenes\" VALUES(10,'DVD','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/moving.jpg',1,1,'0003',2,0,255,0);",
-            @"INSERT INTO \"Scenes\" VALUES(219,'工作','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/relax.jpg',2,1,'0004',0,0,255,0);",
-            @"INSERT INTO \"Scenes\" VALUES(220,'午休','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/sleep.jpg',3,1,'0005',2,0,255,0);",
-            @"INSERT INTO \"Scenes\" VALUES(221,'离开','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/away.jpg',1,1,'0006',2,0,255,0);",
+            sqls=@[@"INSERT INTO \"Scenes\" VALUES(10,'休闲','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/moving.jpg',1,1,'0003',2,0,255,0);",
+            @"INSERT INTO \"Scenes\" VALUES(219,'外出旅行','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/relax.jpg',2,1,'0004',0,0,255,0);",
+            @"INSERT INTO \"Scenes\" VALUES(220,'午睡','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/sleep.jpg',4,1,'0005',2,0,255,0);",
+            @"INSERT INTO \"Scenes\" VALUES(221,'睡眠','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/sleep.jpg',1,1,'0006',2,0,255,0);",
             @"INSERT INTO \"Scenes\" VALUES(216,'欢迎','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',2,1,'0001',2,0,255,0);",
-            @"INSERT INTO \"Scenes\" VALUES(217,'投影','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',3,1,'0002',2,0,255,0);"];
+            @"INSERT INTO \"Scenes\" VALUES(217,'会客','主卧','http://115.28.151.85:8088/DefaultFiles/images/scene/welcome.jpg',2,1,'0002',2,0,255,0);"];
         
             for (NSString *sql in sqls) {
                 BOOL result=[db executeUpdate:sql];

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>timer_list</key>
+	<array>
+		<dict>
+			<key>sceneID</key>
+			<string>219</string>
+			<key>starttime</key>
+			<string>10:00</string>
+			<key>endtime</key>
+			<string>12:00</string>
+			<key>status</key>
+			<string>0</string>
+			<key>repetition</key>
+			<string>1,2,3,4,5,6,7</string>
+		</dict>
+	</array>
+</dict>
+</plist>

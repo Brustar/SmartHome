@@ -28,45 +28,13 @@
 			<key>status_id</key>
 			<integer>3</integer>
 			<key>description</key>
-			<string>天花灯带频闪</string>
+			<string>老人房摄像头无图像</string>
 			<key>createdate</key>
 			<string>2016-10-18 17:39:55</string>
 			<key>count</key>
 			<integer>0</integer>
 			<key>breakdown_id</key>
 			<integer>8</integer>
-		</dict>
-		<dict>
-			<key>userid</key>
-			<integer>0</integer>
-			<key>status_name</key>
-			<string>维修完成</string>
-			<key>status_id</key>
-			<integer>2</integer>
-			<key>description</key>
-			<string>彩带不能调颜色</string>
-			<key>createdate</key>
-			<string>2016-10-18 11:21:12</string>
-			<key>count</key>
-			<integer>0</integer>
-			<key>breakdown_id</key>
-			<integer>7</integer>
-		</dict>
-		<dict>
-			<key>breakdown_id</key>
-			<integer>6</integer>
-			<key>count</key>
-			<real>0</real>
-			<key>createdate</key>
-			<string>2016-10-18 17:36:55</string>
-			<key>description</key>
-			<string>测试区空调不能开启</string>
-			<key>status_id</key>
-			<integer>2</integer>
-			<key>status_name</key>
-			<string>已上报</string>
-			<key>userid</key>
-			<integer>0</integer>
 		</dict>
 	</array>
 </dict>

@@ -12,7 +12,7 @@
 			<key>item_name</key>
 			<string>侵入</string>
 			<key>unreadcount</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>actcode</key>
@@ -22,7 +22,7 @@
 			<key>item_name</key>
 			<string>煤气泄漏</string>
 			<key>unreadcount</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>actcode</key>
@@ -32,7 +32,7 @@
 			<key>item_name</key>
 			<string>烟雾警报</string>
 			<key>unreadcount</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>actcode</key>
@@ -42,17 +42,7 @@
 			<key>item_name</key>
 			<string>开门</string>
 			<key>unreadcount</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>actcode</key>
-			<integer>65</integer>
-			<key>item_id</key>
-			<integer>5</integer>
-			<key>item_name</key>
-			<string>推荐</string>
-			<key>unreadcount</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 	</array>
 </dict>
