@@ -112,6 +112,9 @@
         self.title = @"九号大院";
         //nest login
         [self nestLogin];
+        SocketManager *sock = [SocketManager defaultManager];
+        [sock connectTcp];
+        sock.delegate = self;
     }else{
         [self connect];
     }
