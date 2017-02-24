@@ -53,7 +53,6 @@
         
         [self.tableView reloadData];
     }
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -73,8 +72,6 @@
     {
         self.saveBtn.enabled = NO;
     }
-
-    
     self.tableView.rowHeight=44;
     self.tableView.tableFooterView = [UIView new];
     self.tableView.layer.cornerRadius = 10;
@@ -179,11 +176,7 @@
     }else{ //智能单品
         segue = @"pluginSegue";//智能插座
         
-        
     }
-
-    
-        
     [self performSegueWithIdentifier:segue sender:self];
 }
 
@@ -236,8 +229,6 @@
     picker.delegate = self;
     picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    
-    
     [self presentViewController:picker animated:YES completion:nil];
 }
 
@@ -255,8 +246,6 @@
     [DeviceInfo defaultManager].isPhotoLibrary = NO;
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
-
-
 - (IBAction)storeScene:(id)sender {
 
     self.saveSceneView.hidden = NO;
@@ -264,8 +253,6 @@
     
     
 }
-
-
 
 - (IBAction)sureStoreScene:(id)sender {
     if (self.sceneName.text.length <=0) {
@@ -302,9 +289,6 @@
 - (IBAction)canleStore:(id)sender {
     self.saveSceneView.hidden = YES;
 }
-
-
-
 
 
 @end

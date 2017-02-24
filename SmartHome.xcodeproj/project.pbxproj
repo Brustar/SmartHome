@@ -128,6 +128,19 @@
 		2E7CD6081E14B80C002D0541 /* FixTimeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E7CD6071E14B80C002D0541 /* FixTimeListCell.m */; };
 		2E801EFC1E2622180039A6D9 /* IphoneFixSubTimeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E801EFB1E2622180039A6D9 /* IphoneFixSubTimeVC.m */; };
 		2E801EFF1E262B0B0039A6D9 /* WeekdaysVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E801EFE1E262B0B0039A6D9 /* WeekdaysVC.m */; };
+		2E925D8D1E5E73CD008E327B /* ECEngerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E925D8C1E5E73CD008E327B /* ECEngerController.m */; };
+		2E925D901E5E744C008E327B /* ECPickDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E925D8F1E5E744C008E327B /* ECPickDataViewController.m */; };
+		2E925D9E1E5E857D008E327B /* 4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2E925D941E5E857D008E327B /* 4.jpg */; };
+		2E925D9F1E5E857D008E327B /* 5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2E925D951E5E857D008E327B /* 5.jpg */; };
+		2E925DA01E5E857D008E327B /* 6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2E925D961E5E857D008E327B /* 6.jpg */; };
+		2E925DA11E5E857D008E327B /* 7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2E925D971E5E857D008E327B /* 7.jpg */; };
+		2E925DA21E5E857D008E327B /* 8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2E925D981E5E857D008E327B /* 8.jpg */; };
+		2E925DA31E5E857D008E327B /* all_4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2E925D991E5E857D008E327B /* all_4.jpg */; };
+		2E925DA41E5E857D008E327B /* all_5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2E925D9A1E5E857D008E327B /* all_5.jpg */; };
+		2E925DA51E5E857D008E327B /* all_6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2E925D9B1E5E857D008E327B /* all_6.jpg */; };
+		2E925DA61E5E857D008E327B /* all_7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2E925D9C1E5E857D008E327B /* all_7.jpg */; };
+		2E925DA71E5E857D008E327B /* all_8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2E925D9D1E5E857D008E327B /* all_8.jpg */; };
+		2E925DA91E5E89DD008E327B /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E925DA81E5E89DD008E327B /* calendar.png */; };
 		2EA2A83B1E1DCDA600092D41 /* AreaSubSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A83A1E1DCDA600092D41 /* AreaSubSettingViewController.m */; };
 		2EA2A84A1E1E275900092D41 /* MySubEnergyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A8491E1E275900092D41 /* MySubEnergyCell.m */; };
 		2EA2A8541E1E2BEA00092D41 /* ENenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A8531E1E2BEA00092D41 /* ENenViewController.m */; };
@@ -703,6 +716,21 @@
 		2E801EFB1E2622180039A6D9 /* IphoneFixSubTimeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneFixSubTimeVC.m; sourceTree = "<group>"; };
 		2E801EFD1E262B0B0039A6D9 /* WeekdaysVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeekdaysVC.h; sourceTree = "<group>"; };
 		2E801EFE1E262B0B0039A6D9 /* WeekdaysVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeekdaysVC.m; sourceTree = "<group>"; };
+		2E925D8B1E5E73CD008E327B /* ECEngerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECEngerController.h; sourceTree = "<group>"; };
+		2E925D8C1E5E73CD008E327B /* ECEngerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECEngerController.m; sourceTree = "<group>"; };
+		2E925D8E1E5E744C008E327B /* ECPickDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPickDataViewController.h; sourceTree = "<group>"; };
+		2E925D8F1E5E744C008E327B /* ECPickDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPickDataViewController.m; sourceTree = "<group>"; };
+		2E925D941E5E857D008E327B /* 4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4.jpg; sourceTree = "<group>"; };
+		2E925D951E5E857D008E327B /* 5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 5.jpg; sourceTree = "<group>"; };
+		2E925D961E5E857D008E327B /* 6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 6.jpg; sourceTree = "<group>"; };
+		2E925D971E5E857D008E327B /* 7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 7.jpg; sourceTree = "<group>"; };
+		2E925D981E5E857D008E327B /* 8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 8.jpg; sourceTree = "<group>"; };
+		2E925D991E5E857D008E327B /* all_4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = all_4.jpg; sourceTree = "<group>"; };
+		2E925D9A1E5E857D008E327B /* all_5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = all_5.jpg; sourceTree = "<group>"; };
+		2E925D9B1E5E857D008E327B /* all_6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = all_6.jpg; sourceTree = "<group>"; };
+		2E925D9C1E5E857D008E327B /* all_7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = all_7.jpg; sourceTree = "<group>"; };
+		2E925D9D1E5E857D008E327B /* all_8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = all_8.jpg; sourceTree = "<group>"; };
+		2E925DA81E5E89DD008E327B /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar.png; sourceTree = "<group>"; };
 		2EA2A8391E1DCDA600092D41 /* AreaSubSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaSubSettingViewController.h; sourceTree = "<group>"; };
 		2EA2A83A1E1DCDA600092D41 /* AreaSubSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaSubSettingViewController.m; sourceTree = "<group>"; };
 		2EA2A8481E1E275900092D41 /* MySubEnergyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySubEnergyCell.h; sourceTree = "<group>"; };
@@ -1199,6 +1227,10 @@
 				F635CCBA1D4356650078B148 /* MyCenterSplitController.m */,
 				F625A6161D4C8EF700B696E5 /* ProfileListController.h */,
 				F625A6171D4C8EF700B696E5 /* ProfileListController.m */,
+				2E925D8B1E5E73CD008E327B /* ECEngerController.h */,
+				2E925D8C1E5E73CD008E327B /* ECEngerController.m */,
+				2E925D8E1E5E744C008E327B /* ECPickDataViewController.h */,
+				2E925D8F1E5E744C008E327B /* ECPickDataViewController.m */,
 				F6251F6F1D541885000A5A47 /* PluginViewController.h */,
 				F6251F701D541885000A5A47 /* PluginViewController.m */,
 				0FA1E09C1D533BFA001CA819 /* PluginCell.h */,
@@ -1772,6 +1804,24 @@
 			name = fixTimer;
 			sourceTree = "<group>";
 		};
+		2E925D931E5E857D008E327B /* engery */ = {
+			isa = PBXGroup;
+			children = (
+				2E925D941E5E857D008E327B /* 4.jpg */,
+				2E925D951E5E857D008E327B /* 5.jpg */,
+				2E925D961E5E857D008E327B /* 6.jpg */,
+				2E925D971E5E857D008E327B /* 7.jpg */,
+				2E925D981E5E857D008E327B /* 8.jpg */,
+				2E925D991E5E857D008E327B /* all_4.jpg */,
+				2E925D9A1E5E857D008E327B /* all_5.jpg */,
+				2E925D9B1E5E857D008E327B /* all_6.jpg */,
+				2E925D9C1E5E857D008E327B /* all_7.jpg */,
+				2E925D9D1E5E857D008E327B /* all_8.jpg */,
+				2E925DA81E5E89DD008E327B /* calendar.png */,
+			);
+			path = engery;
+			sourceTree = "<group>";
+		};
 		2EA2A84B1E1E294D00092D41 /* Energy */ = {
 			isa = PBXGroup;
 			children = (
@@ -1808,6 +1858,7 @@
 		2EA897C31E31B8FA002CA904 /* Iphoneimage */ = {
 			isa = PBXGroup;
 			children = (
+				2E925D931E5E857D008E327B /* engery */,
 				2EA97E5F1E56A347003E0039 /* UIImage+ImageEffects.h */,
 				2EA97E601E56A347003E0039 /* UIImage+ImageEffects.m */,
 				2EA97E621E56A355003E0039 /* ObjectFunction.h */,
@@ -2125,21 +2176,28 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E925D9F1E5E857D008E327B /* 5.jpg in Resources */,
 				CDF3892A1E30AF9600657C8B /* msgTypeList.plist in Resources */,
 				CDF389341E30F27500657C8B /* userHabitList.plist in Resources */,
 				CDF90B431E2F0676009043B9 /* realScene.plist in Resources */,
 				CD78A8301E3379C200060466 /* 255_221.plist in Resources */,
 				CDF389281E30A91200657C8B /* energyDetail.plist in Resources */,
 				2EA97E661E56A3E7003E0039 /* test.jpeg in Resources */,
+				2E925DA91E5E89DD008E327B /* calendar.png in Resources */,
+				2E925DA61E5E857D008E327B /* all_7.jpg in Resources */,
 				0FBEFE271D24A5020084244F /* netconfig.plist in Resources */,
 				F60FDB471D003FD500AB04BE /* CurtainTableViewCell.xib in Resources */,
+				2E925D9E1E5E857D008E327B /* 4.jpg in Resources */,
 				CDF389241E306D2400657C8B /* maintaininfo.plist in Resources */,
 				0F7E2E161D581AC400A47D5D /* iPhone.storyboard in Resources */,
+				2E925DA21E5E857D008E327B /* 8.jpg in Resources */,
 				CDFB9DF01E5DC4B600BFECCE /* DeviceTimerList.plist in Resources */,
 				0F032D5A1CC9B12700D1920D /* Assets.xcassets in Resources */,
 				CDF3892C1E30B86500657C8B /* msgList.plist in Resources */,
+				2E925DA71E5E857D008E327B /* all_8.jpg in Resources */,
 				CD78A8321E337C1600060466 /* 255_216.plist in Resources */,
 				CDF389321E30EA8900657C8B /* hostUserList.plist in Resources */,
+				2E925DA11E5E857D008E327B /* 7.jpg in Resources */,
 				CDF389301E30E39500657C8B /* userList.plist in Resources */,
 				F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */,
 				2EA897BE1E31B59B002CA904 /* 2@2x.png in Resources */,
@@ -2149,13 +2207,17 @@
 				2EA897BC1E31B53E002CA904 /* 1@2x.png in Resources */,
 				2EA897C71E31B9B6002CA904 /* UO256.png in Resources */,
 				CDF90B451E2F4B14009043B9 /* planeScene.plist in Resources */,
+				2E925DA01E5E857D008E327B /* 6.jpg in Resources */,
+				2E925DA31E5E857D008E327B /* all_4.jpg in Resources */,
 				F668AF251D53413B0079587F /* Main.storyboard in Resources */,
 				CDF3892E1E30CFD000657C8B /* userPushNotifyList.plist in Resources */,
 				0FE78BB61DCFB091009B4767 /* Images.xcassets in Resources */,
+				2E925DA41E5E857D008E327B /* all_5.jpg in Resources */,
 				CDF389261E30A31300657C8B /* energylist.plist in Resources */,
 				0F020A231DE3D9330034869F /* LaunchScreen.storyboard in Resources */,
 				CDF389221E305B4400657C8B /* breakdownlist.plist in Resources */,
 				F6359B011CFFC4DC0035EB31 /* ColourTableViewCell.xib in Resources */,
+				2E925DA51E5E857D008E327B /* all_6.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2425,6 +2487,7 @@
 				F618141D1DB5B0C7003B0741 /* PushSettingController.m in Sources */,
 				2EB2A4721E237F05003F01DB /* DeviceListTimeVC.m in Sources */,
 				F66CADE51D5D8654001E66EC /* DeviceType.m in Sources */,
+				2E925D901E5E744C008E327B /* ECPickDataViewController.m in Sources */,
 				F6DC641E1DEC17710056EC00 /* RoomDeviceController.m in Sources */,
 				2EC45FBD1E53E2D60042CE20 /* IphoneTabBarViewController.m in Sources */,
 				0F25178A1CFD8C6500491A6C /* PackManager.m in Sources */,
@@ -2548,6 +2611,7 @@
 				0FCFB39B1CF2950D00B37DD3 /* BgMusic.m in Sources */,
 				0FAF74C91CEEB37200432713 /* HRSampleColorPickerViewController.m in Sources */,
 				0FCFB38C1CF293A500B37DD3 /* DVD.m in Sources */,
+				2E925D8D1E5E73CD008E327B /* ECEngerController.m in Sources */,
 				F617771D1DCC23AC00B382D4 /* CollectionViewCell.m in Sources */,
 				0FAF98B61CE45EC9009BDBB5 /* CryptoManager.m in Sources */,
 				2EEE536E1E309C5D0026F97D /* MyView.m in Sources */,

@@ -77,6 +77,10 @@
 }
 
 - (void)setSelectButton:(int)index {
+    
+    if (self.btns.count == 0) {
+        return;
+    }
     UIButton *button = self.btns[index];
     button.enabled = NO;
     
@@ -146,8 +150,6 @@
     self.sv.frame = self.bounds;
     self.sv.contentSize = CGSizeMake(scrollW, self.frame.size.height);
 }
-
-
 
 - (void)layoutSubviews {
     [super layoutSubviews];

@@ -58,10 +58,14 @@
     self.tableView.tableFooterView = [UIView new];
 //    self.tableView.scrollEnabled = NO;
     self.tableView.tableHeaderView = self.headView;
+    DeviceInfo *device = [DeviceInfo defaultManager];
+    if (![device.db isEqualToString:SMART_DB]){
+        
+        self.segues =@[@"iphoneDefault",@"iphoneRecordSegue",@"TYiphone",@"iphoneFavorSegue",@"iphoneMsgSegue"];
+    }else{
+        self.segues = @[@"iphoneDefault",@"iphoneRecordSegue",@"iphoneEngerSegue",@"iphoneFavorSegue",@"iphoneMsgSegue"];
+    }
     
-    self.segues = @[@"iphoneDefault",@"iphoneRecordSegue",@"iphoneEngerSegue",@"iphoneFavorSegue",@"iphoneMsgSegue"];
-    
-   
  
 }
 

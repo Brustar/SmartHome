@@ -101,67 +101,52 @@
     if ([sender isEqual:self.cell.close]) {
         [device setOpenvalue:0];
     }
+    
+
 }
 
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 1;
     
 }
-//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-//{
-//
-//    if (section == 0) {
-//        if (_lightArrs.count == 0) {
-//            return nil;
-//        }
-//        return @"灯";
-//    }
-//    if (_curtainArrs.count == 0) {
-//        return nil;
-//    }
-//    return @"窗帘";
-//}
-//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-//{
-//    return 50;
-//
-//}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section==0) {
+//    if (section==0) {
         return _lightArrs.count;
-    }else if (section == 1){
-        return _curtainArrs.count;
-    }
+//    }else if (section == 1){
+//        return _curtainArrs.count;
+//    }
 
-    return _airArrs.count;
+//    return _airArrs.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
+//    if (indexPath.section == 0) {
         LightCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
         Device *device = [SQLManager getDeviceWithDeviceID:[_lightArrs[indexPath.row] intValue]];
         cell.LightNameLabel.text = device.name;
         cell.slider.continuous = NO;
         cell.deviceid = self.lightArrs[indexPath.row];
-        return cell;
+    
+//        return cell;
 
-    }else if (indexPath.section == 1){
-        CurtainTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
-        Device * device = [SQLManager getDeviceWithDeviceID:[_curtainArrs[indexPath.row] intValue]];
-        cell.label.text = device.name;
-        cell.deviceId = _curtainArrs[indexPath.row];
-        
-        return cell;
-    }
-    IphoneAirCell * cell = [tableView dequeueReusableCellWithIdentifier:@"IphoneAirCell" forIndexPath:indexPath];
-      Device *device = [SQLManager getDeviceWithDeviceID:[_airArrs[indexPath.row] intValue]];
-    cell.deviceNameLabel.text = device.name;
-    cell.deviceId = _airArrs[indexPath.row];
+//    }else if (indexPath.section == 1){
+//        CurtainTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
+//        Device * device = [SQLManager getDeviceWithDeviceID:[_curtainArrs[indexPath.row] intValue]];
+//        cell.label.text = device.name;
+//        cell.deviceId = _curtainArrs[indexPath.row];
+//        
+//        return cell;
+//    }
+//    IphoneAirCell * cell = [tableView dequeueReusableCellWithIdentifier:@"IphoneAirCell" forIndexPath:indexPath];
+//      Device *device = [SQLManager getDeviceWithDeviceID:[_airArrs[indexPath.row] intValue]];
+//    cell.deviceNameLabel.text = device.name;
+//    cell.deviceId = _airArrs[indexPath.row];
 
     return cell;
 }
@@ -191,6 +176,7 @@
 
     return 76;
 
+    
 }
 
 

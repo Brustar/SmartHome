@@ -31,6 +31,7 @@
 #import "CollectionViewCell.h"
 #import "TouchSubViewController.h"
 #import "HttpManager.h"
+#import "IphoneLightController.h"
 
 @interface IphoneEditSceneController ()<IphoneTypeViewDelegate,TouchSubViewDelegate>
 
@@ -166,10 +167,11 @@
         
     }else if([typeName isEqualToString:@"灯光"])
     {
-        LightController *ligthVC = [storyBoard instantiateViewControllerWithIdentifier:@"LightController"];
+//        LightController *ligthVC = [storyBoard instantiateViewControllerWithIdentifier:@"LightController"];
+         IphoneLightController * ligthVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"LightController"];
         ligthVC.roomID = roomID;
-        ligthVC.showLightView = YES;
-        ligthVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+//        ligthVC.showLightView = YES;
+//        ligthVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         [self addViewAndVC:ligthVC];
         
     }else if([typeName isEqualToString:@"窗帘"])

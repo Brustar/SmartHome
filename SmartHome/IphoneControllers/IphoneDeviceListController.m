@@ -28,6 +28,8 @@
 #import "AmplifierController.h"
 #import "WindowSlidingController.h"
 #import "BgMusicController.h"
+#import "IphoneLightController.h"
+//#import "IphoneDeviceLightVC.h"
 
 
 @interface IphoneDeviceListController ()<IphoneRoomViewDelegate>
@@ -78,7 +80,9 @@
     }
     self.iphoneRoomView.dataArray = roomNames;
     self.iphoneRoomView.delegate = self;
-    
+    if (self.iphoneRoomView.dataArray.count == 0) {
+        return;
+    }
     [self.iphoneRoomView setSelectButton:0];
     
     [self iphoneRoomView:self.iphoneRoomView didSelectButton:0];
@@ -123,8 +127,9 @@
         
     }else if([typeName isEqualToString:@"灯光"])
     {
-        LightController *ligthVC = [storyBoard instantiateViewControllerWithIdentifier:@"LightController"];
-        ligthVC.showLightView = NO;
+//        LightController *ligthVC = [storyBoard instantiateViewControllerWithIdentifier:@"LightController"]; 
+        IphoneLightController * ligthVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"LightController"];
+//        ligthVC.showLightView = NO;
         ligthVC.roomID = roomID;
         
         [self addViewAndVC:ligthVC];

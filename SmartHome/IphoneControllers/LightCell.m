@@ -8,6 +8,7 @@
 
 #import "LightCell.h"
 #import "SocketManager.h"
+#import "SceneManager.h"
 
 @implementation LightCell
 
@@ -42,7 +43,7 @@
     NSData *data=[[DeviceInfo defaultManager] changeBright:slider.value*100 deviceID:deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
- 
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
  
 }
 -(void)Iphoneswitch:(UISwitch *)switc
@@ -66,7 +67,7 @@
     NSData * data = [[DeviceInfo defaultManager] toogleLight:switc.on deviceID:deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
-    
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
 }
 
 

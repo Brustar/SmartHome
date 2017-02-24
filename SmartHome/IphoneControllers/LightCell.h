@@ -12,7 +12,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *LightNameLabel;
 @property (weak, nonatomic) IBOutlet UISlider *slider;
 @property (weak, nonatomic) IBOutlet UISwitch *Iphoneswitch;
-
+@property (strong, nonatomic) Scene *scene;
 -(void)Iphoneswitch:(UISwitch *)switc;
 
 -(void)dimming:(UISlider *)slider;
