@@ -17,19 +17,31 @@
 #import "PackManager.h"
 #import "CurtainTableViewCell.h"
 #import "IphoneAirCell.h"
+#import "ColourTableViewCell.h"
+#import "HRSampleColorPickerViewController.h"
 
-@interface IphoneLightController ()<UITableViewDelegate,UITableViewDataSource>
-@property (strong, nonatomic) IBOutlet CurtainTableViewCell *cell;
+@interface IphoneLightController ()<UITableViewDelegate,UITableViewDataSource,HRColorPickerViewControllerDelegate>
+@property (strong, nonatomic) IBOutlet ColourTableViewCell *cell;
 @property (nonatomic,strong) NSArray * roomArrs;
 @property (nonatomic,strong) NSArray * lightArrs;
 @property (nonatomic,strong) NSArray * curtainArrs;
 @property (nonatomic,strong) NSString * deviceid;
 @property (nonatomic,strong) NSArray * airArrs;
 @property (strong, nonatomic) Scene *scene;
+@property (nonatomic,strong) NSArray * ColourLightArr;
 
 @end
 
 @implementation IphoneLightController
+-(NSArray *)ColourLightArr
+{
+    if (_ColourLightArr == nil) {
+        _ColourLightArr = [NSArray array];
+    }
+    
+    return _ColourLightArr;
+
+}
 -(NSArray *)airArrs
 {
     if (!_airArrs) {
@@ -64,78 +76,92 @@
     _lightArrs   = [SQLManager getDeviceByRoom:self.roomID];
     _curtainArrs = [SQLManager getCurtainByRoom:self.roomID];
     _airArrs     = [SQLManager getAirDeviceByRoom:self.roomID];
+    _ColourLightArr = [SQLManager getColourLightByRoom:self.roomID];
+     self.cell = [[[NSBundle mainBundle] loadNibNamed:@"ColourTableViewCell" owner:self options:nil] lastObject];
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
     [self.tableView registerNib:[UINib nibWithNibName:@"CurtainTableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainTableViewCell"];
-
+    self.scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     self.title = [SQLManager getRoomNameByRoomID:self.roomID];
 }
--(IBAction)save:(id)sender
-{
-    if ([sender isEqual:self.cell.slider]) {
-        NSData *data=[[DeviceInfo defaultManager] roll:self.cell.slider.value * 100 deviceID:self.cell.deviceId];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:2];
-    }if ([sender isEqual:self.cell.open]) {
-        self.cell.slider.value=1;
-        NSData *data=[[DeviceInfo defaultManager] open:self.cell.deviceId];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:2];
-        self.cell.valueLabel.text = @"100%";
-        
-    }if ([sender isEqual:self.cell.close]) {
-        self.cell.slider.value=0;
-        NSData *data=[[DeviceInfo defaultManager] close:self.cell.deviceId];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:2];
-        self.cell.valueLabel.text = @"0%";
-    }
-    Curtain *device=[[Curtain alloc] init];
-    [device setDeviceID:[self.deviceid intValue]];
-    [device setOpenvalue:self.cell.slider.value * 100];
-    
-    if ([sender isEqual:self.cell.open]) {
-        [device setOpenvalue:100];
-    }
-    
-    if ([sender isEqual:self.cell.close]) {
-        [device setOpenvalue:0];
-    }
-    
-
-}
+//-(IBAction)save:(id)sender
+//{
+//    if ([sender isEqual:self.cell.slider]) {
+//        NSData *data=[[DeviceInfo defaultManager] roll:self.cell.slider.value * 100 deviceID:self.cell.deviceId];
+//        SocketManager *sock=[SocketManager defaultManager];
+//        [sock.socket writeData:data withTimeout:1 tag:2];
+//    }if ([sender isEqual:self.cell.open]) {
+//        self.cell.slider.value=1;
+//        NSData *data=[[DeviceInfo defaultManager] open:self.cell.deviceId];
+//        SocketManager *sock=[SocketManager defaultManager];
+//        [sock.socket writeData:data withTimeout:1 tag:2];
+//        self.cell.valueLabel.text = @"100%";
+//        
+//    }if ([sender isEqual:self.cell.close]) {
+//        self.cell.slider.value=0;
+//        NSData *data=[[DeviceInfo defaultManager] close:self.cell.deviceId];
+//        SocketManager *sock=[SocketManager defaultManager];
+//        [sock.socket writeData:data withTimeout:1 tag:2];
+//        self.cell.valueLabel.text = @"0%";
+//    }
+//    Curtain *device=[[Curtain alloc] init];
+//    [device setDeviceID:[self.deviceid intValue]];
+//    [device setOpenvalue:self.cell.slider.value * 100];
+//    
+//    if ([sender isEqual:self.cell.open]) {
+//        [device setOpenvalue:100];
+//    }
+//    
+//    if ([sender isEqual:self.cell.close]) {
+//        [device setOpenvalue:0];
+//    }
+//    
+//
+//}
 
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
     
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    if (section==0) {
+    if (section==0) {
         return _lightArrs.count;
-//    }else if (section == 1){
-//        return _curtainArrs.count;
-//    }
-
-//    return _airArrs.count;
+    }
+    return _ColourLightArr.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if (indexPath.section == 0) {
+    if (indexPath.section == 0) {
         LightCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        cell.roomID = self.roomID;
+        cell.sceneID = self.sceneid;
         Device *device = [SQLManager getDeviceWithDeviceID:[_lightArrs[indexPath.row] intValue]];
         cell.LightNameLabel.text = device.name;
         cell.slider.continuous = NO;
         cell.deviceid = self.lightArrs[indexPath.row];
     
-//        return cell;
+        return cell;
 
-//    }else if (indexPath.section == 1){
+    }
+//        self.cell.lable.text = @"自定义颜色";
+       Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[indexPath.row] intValue]];
+        self.cell.lable.text = device.name;
+    
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeColor:)];
+        self.cell.colourView.userInteractionEnabled=YES;
+        [self.cell.colourView addGestureRecognizer:singleTap];
+        self.cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return self.cell;
+    
+//     ColourCell.lable.text = _ColourLightArr[indexPath.row];
+    
+//        else if (indexPath.section == 1){
 //        CurtainTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
 //        Device * device = [SQLManager getDeviceWithDeviceID:[_curtainArrs[indexPath.row] intValue]];
 //        cell.label.text = device.name;
@@ -148,10 +174,15 @@
 //    cell.deviceNameLabel.text = device.name;
 //    cell.deviceId = _airArrs[indexPath.row];
 
-    return cell;
+//    return ColourCell;
 }
 
-
+-(IBAction)changeColor:(id)sender
+{
+    HRSampleColorPickerViewController *controller= [[HRSampleColorPickerViewController alloc] initWithColor:self.cell.backgroundColor fullColor:NO];
+    controller.delegate = self;
+    [self.navigationController pushViewController:controller animated:YES];
+}
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
@@ -175,11 +206,7 @@
 {
 
     return 76;
-
-    
 }
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

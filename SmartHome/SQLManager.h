@@ -35,7 +35,8 @@
 
 //根据subTypeName 从Devices表 查询typeName(要去重)
 + (NSArray *)getDeviceTypeNameWithSubTypeName:(NSString *)subTypeName;
-
+//根据房间ID得到房间所有的调色灯
++ (NSArray *)getColourLightByRoom:(int) roomID;
 //根据房间ID获取照明设备
 + (NSArray *)getLightDevicesByRoom:(int)roomID;
 

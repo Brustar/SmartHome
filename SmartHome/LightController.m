@@ -15,8 +15,6 @@
 #import "MBProgressHUD+NJ.h"
 #import "SceneManager.h"
 
-
-
 @interface LightController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *favButt;//收藏
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -110,7 +108,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncLight:) name:@"light" object:nil];
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
-    [_lightSlider addTarget:self action:@selector(onLightSliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [_lightSlider addTarget:self action:@selector(onLightSliderValueChanged:) forControlEvents:UIControlEventValueChanged];//所有灯的总控制
     _sprightlierBtn.layer.cornerRadius = 8.0;
     _sprightlierBtn.layer.masksToBounds = YES;
     _romanceBtn.layer.cornerRadius = 8.0;
@@ -256,7 +254,6 @@
         
         self.detailCell.valueLabel.text = [NSString stringWithFormat:@"%d%%", (int)(self.detailCell.bright.value * 100)];
     }
-    
     if (![etype isEqualToString:@"01"] && [sender isEqual:self.detailCell.bright]) {
         self.detailCell.power.on = self.detailCell.bright.value >0;
         
@@ -292,8 +289,6 @@
     {
         [device setBrightness:self.detailCell.bright.value*100];
     }
-
-    
     [_scene setSceneID:[self.sceneid intValue]];
     [_scene setRoomID:self.roomID];
     [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];

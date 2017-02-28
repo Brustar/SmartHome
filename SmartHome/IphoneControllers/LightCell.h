@@ -13,6 +13,8 @@
 @property (weak, nonatomic) IBOutlet UISlider *slider;
 @property (weak, nonatomic) IBOutlet UISwitch *Iphoneswitch;
 @property (strong, nonatomic) Scene *scene;
+@property (nonatomic,assign) int roomID;
+@property(nonatomic,strong) NSString * sceneID;
 -(void)Iphoneswitch:(UISwitch *)switc;
 
 -(void)dimming:(UISlider *)slider;

@@ -1116,6 +1116,30 @@
     [db close];
     return lights;
 }
++ (NSArray *)getColourLightByRoom:(int) roomID
+{
+    NSMutableArray *lights = [NSMutableArray new];
+    
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        DeviceInfo *device = [DeviceInfo defaultManager];
+        long masterID = 255l;
+        if ([device.db isEqualToString:SMART_DB]) {
+            masterID = [[DeviceInfo defaultManager] masterID];
+        }
+        
+        NSString *sql = [NSString stringWithFormat:@"SELECT id FROM devices where rid=%d and typename ='%@' and masterID = '%ld'",roomID,ColourLight, masterID];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+            [lights addObject:[resultSet stringForColumn:@"id"]];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return lights;
+}
 
 // 获取“照明”设备（灯，窗帘）
 + (NSArray *)getLightDevicesByRoom:(int)roomID

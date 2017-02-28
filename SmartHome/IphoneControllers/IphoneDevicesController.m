@@ -105,7 +105,7 @@
           IphoneLightController * ligthVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"LightController"];
         ligthVC.roomID = self.roomId;
 //        ligthVC.showLightView = NO;
-//        ligthVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneId];
+        ligthVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneId];
 //        ligthVC.isAddDevice = YES;
         [self.navigationController pushViewController:ligthVC animated:YES];
         

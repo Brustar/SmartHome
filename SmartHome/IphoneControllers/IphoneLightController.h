@@ -11,5 +11,6 @@
 @interface IphoneLightController : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,assign) int roomID;
+@property (nonatomic,strong) NSString * sceneid;
 
 @end

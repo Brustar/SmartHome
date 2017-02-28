@@ -50,13 +50,19 @@
     return _itemNameArrs;
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+     DeviceInfo *device = [DeviceInfo defaultManager];
+    if ([device.db isEqualToString:SMART_DB]) {
+        [self creatItemID];
+    }
+
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [MBProgressHUD hideHUD];
     self.title = @"我的消息";
-    
-    
     
     DeviceInfo *device = [DeviceInfo defaultManager];
     if ([device.db isEqualToString:SMART_DB]) {
