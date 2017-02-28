@@ -2803,7 +2803,7 @@
 					"\"${PODS_ROOT}/Headers/Public/RegexKitLite\"",
 				);
 				INFOPLIST_FILE = SmartHome/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2846,7 +2846,7 @@
 					"\"${PODS_ROOT}/Headers/Public/RegexKitLite\"",
 				);
 				INFOPLIST_FILE = SmartHome/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

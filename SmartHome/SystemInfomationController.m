@@ -32,7 +32,13 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
 //    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
 //    self.navigationItem.leftBarButtonItem = returnItem;
-    self.titles = @[@"家庭名称",@"主机编号",@"主机品牌",@"主机型号"];
+    DeviceInfo *device = [DeviceInfo defaultManager];
+    if ([device.db isEqualToString:SMART_DB]){
+       self.titles = @[@"家庭名称",@"主机编号",@"主机品牌",@"主机型号"];
+    }else{
+      self.titles = @[@"逸云智能家居",@"主机编号",@"主机品牌",@"主机型号"];
+    }
+    
     self.tableView.tableFooterView = [UIView new];
 
 }

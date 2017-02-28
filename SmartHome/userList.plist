@@ -8,7 +8,7 @@
 			<key>user_id</key>
 			<integer>1</integer>
 			<key>username</key>
-			<string>杨颖</string>
+			<string>admin</string>
 			<key>usertype</key>
 			<integer>1</integer>
 		</dict>
@@ -16,9 +16,9 @@
 			<key>user_id</key>
 			<integer>5</integer>
 			<key>username</key>
-			<string>黄晓明</string>
+			<string>Guest</string>
 			<key>usertype</key>
-			<integer>1</integer>
+			<integer>0</integer>
 		</dict>
 	</array>
 </dict>

@@ -52,10 +52,11 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-     DeviceInfo *device = [DeviceInfo defaultManager];
-    if ([device.db isEqualToString:SMART_DB]) {
-        [self creatItemID];
-    }
+    [super viewWillAppear:animated];
+//     DeviceInfo *device = [DeviceInfo defaultManager];
+//    if ([device.db isEqualToString:SMART_DB]) {
+//        [self creatItemID];
+//    }
 
 }
 
@@ -118,16 +119,6 @@
             [MBProgressHUD showError:responseObject[@"Msg"]];
         }
     }
-//    else if(tag == 3)
-//    {
-//        if([responseObject[@"result"] intValue]==0)
-//        {
-//            [MBProgressHUD showSuccess:@"已读"];
-//            
-//        }else {
-//            [MBProgressHUD showError:responseObject[@"Msg"]];
-//        }
-//    }
 
 }
 
@@ -143,6 +134,7 @@
 
 //每组有多少cell
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
  return self.itemIdArrs.count;
 }
 

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,31 +21,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="q9u-Lr-fqT">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="d12-IV-Wk9">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3Y6-aL-7Cn">
-                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dVl-KT-KDR">
-                                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                                                <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="8xv-Ma-zHD">
-                                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                                                    </imageView>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="q9u-Lr-fqT" secondAttribute="trailing" id="E7d-gO-MU5"/>
-                            <constraint firstItem="q9u-Lr-fqT" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="RxX-kf-BBa"/>
-                            <constraint firstItem="q9u-Lr-fqT" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="gz7-Sk-TRv"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="q9u-Lr-fqT" secondAttribute="bottom" id="yE7-jM-wUh"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="d12-IV-Wk9" secondAttribute="bottom" id="SJb-Nx-CTf"/>
+                            <constraint firstAttribute="trailing" secondItem="d12-IV-Wk9" secondAttribute="trailing" id="WI1-mF-rgH"/>
+                            <constraint firstItem="d12-IV-Wk9" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="c78-hy-1JT"/>
+                            <constraint firstItem="d12-IV-Wk9" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="iNy-f0-UgQ"/>
                         </constraints>
                     </view>
                 </viewController>

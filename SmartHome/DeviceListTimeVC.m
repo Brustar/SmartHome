@@ -20,8 +20,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initDataSource];
-    
-    self.view.backgroundColor =[UIColor yellowColor];
     self.title = @"定时器";
     UIBarButtonItem *listItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"UO23"] style:UIBarButtonItemStylePlain target:self action:@selector(selectedDevice:)];
 //    UIBarButtonItem *editItem = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(clickEditBtn:)];

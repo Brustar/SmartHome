@@ -84,7 +84,7 @@
     return YES;
 }
 
--(void) kickout
+-(void)kickout
 {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"重复登录" message:@"你的帐号已在其他地方登录，请确认是否本人登录" preferredStyle:UIAlertControllerStyleAlert];
     [self.window.rootViewController presentViewController: alertVC animated:YES completion:nil];

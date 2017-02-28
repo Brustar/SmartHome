@@ -111,7 +111,7 @@
     {
          if([responseObject[@"result"] intValue]==0)
          {
-             [MBProgressHUD showSuccess:@"设置权限成功"];
+             [MBProgressHUD showSuccess:@"系统权限成功"];
          }else{
              [MBProgressHUD showError:responseObject[@"Msg"]];
          }
@@ -147,7 +147,7 @@
     //体验
     DeviceInfo *device = [DeviceInfo defaultManager];
     if (![device.db isEqualToString:SMART_DB]) {
-        [MBProgressHUD showSuccess:@"设置权限成功"];
+        [MBProgressHUD showSuccess:@"系统权限成功"];
         return;
     }
     

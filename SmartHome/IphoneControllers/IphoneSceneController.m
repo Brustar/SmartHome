@@ -66,7 +66,7 @@
     _AddSceneBtn.layer.cornerRadius = _AddSceneBtn.bounds.size.width / 2.0; //圆角半径
     _AddSceneBtn.layer.masksToBounds = YES; //圆角
     self.navigationItem.rightBarButtonItems = nil;
-    UIImage *image=[UIImage imageNamed:@"UO256"];
+    UIImage *image=[UIImage imageNamed:@"4@2x"];
     //    不让tabbar底部有渲染的关键代码
     image=[image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemClicked:)];
@@ -256,22 +256,24 @@
 
 - (void)rightBarButtonItemClicked:(UIBarButtonItem *)sender {
     
-    if (self.view.subviews.count == 6) {
-        NSMutableArray *imageArray = [NSMutableArray arrayWithCapacity:0];
-        for (int i = 0; i < 4; i++) {
-            NSString *name = [NSString stringWithFormat:@"%d",i + 1];
-            UIImage *image  = [UIImage imageNamed:name];
-            [imageArray addObject:image];
-            
-        }
-        
-        self.menuView = [[YZNavigationMenuView alloc] initWithPositionOfDirection:CGPointMake(self.view.frame.size.width - 24, 64) images:imageArray titleArray:@[@"语音",@"搜索",@"正在播放",@"添加场景"]];
-        self.menuView.delegate = self;
-        [self.view addSubview:self.menuView];
-    }else if (self.view.subviews.count > 6){
-//        [self.view removeFromSuperview];
-        [self.menuView removeFromSuperview];
-    }
+//    if (self.view.subviews.count == 6) {
+//        NSMutableArray *imageArray = [NSMutableArray arrayWithCapacity:0];
+//        for (int i = 0; i < 4; i++) {
+//            NSString *name = [NSString stringWithFormat:@"%d",i + 1];
+//            UIImage *image  = [UIImage imageNamed:name];
+//            [imageArray addObject:image];
+//            
+//        }
+//        
+//        self.menuView = [[YZNavigationMenuView alloc] initWithPositionOfDirection:CGPointMake(self.view.frame.size.width - 24, 64) images:imageArray titleArray:@[@"语音",@"搜索",@"正在播放",@"添加场景"]];
+//        self.menuView.delegate = self;
+//        [self.view addSubview:self.menuView];
+//    }else if (self.view.subviews.count > 6){
+////        [self.view removeFromSuperview];
+//        [self.menuView removeFromSuperview];
+//    }
+    
+      [self performSegueWithIdentifier:@"iphoneAddSceneSegue" sender:self];
     
    
 }

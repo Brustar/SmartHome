@@ -24,9 +24,7 @@
 @property (strong, nonatomic) IBOutlet ColourTableViewCell *cell;
 @property (nonatomic,strong) NSArray * roomArrs;
 @property (nonatomic,strong) NSArray * lightArrs;
-@property (nonatomic,strong) NSArray * curtainArrs;
 @property (nonatomic,strong) NSString * deviceid;
-@property (nonatomic,strong) NSArray * airArrs;
 @property (strong, nonatomic) Scene *scene;
 @property (nonatomic,strong) NSArray * ColourLightArr;
 
@@ -41,22 +39,6 @@
     
     return _ColourLightArr;
 
-}
--(NSArray *)airArrs
-{
-    if (!_airArrs) {
-        _airArrs = [NSArray array];
-    }
-    
-    return _airArrs;
-}
--(NSArray *)curtainArrs
-{
-    if (!_curtainArrs) {
-        _curtainArrs = [NSArray array];
-    }
-
-    return _curtainArrs;
 }
 -(NSArray *)lightArrs
 {
@@ -74,51 +56,15 @@
     [view setBackgroundColor:[UIColor clearColor]];
     self.tableView.tableFooterView = view;
     _lightArrs   = [SQLManager getDeviceByRoom:self.roomID];
-    _curtainArrs = [SQLManager getCurtainByRoom:self.roomID];
-    _airArrs     = [SQLManager getAirDeviceByRoom:self.roomID];
+//    _curtainArrs = [SQLManager getCurtainByRoom:self.roomID];
+//    _airArrs     = [SQLManager getAirDeviceByRoom:self.roomID];
     _ColourLightArr = [SQLManager getColourLightByRoom:self.roomID];
-     self.cell = [[[NSBundle mainBundle] loadNibNamed:@"ColourTableViewCell" owner:self options:nil] lastObject];
+    [self.tableView registerNib:[UINib nibWithNibName:@"ColourTableViewCell" bundle:nil] forCellReuseIdentifier:@"ColourTableViewCell"];
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
-    [self.tableView registerNib:[UINib nibWithNibName:@"CurtainTableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainTableViewCell"];
     self.scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     self.title = [SQLManager getRoomNameByRoomID:self.roomID];
 }
-//-(IBAction)save:(id)sender
-//{
-//    if ([sender isEqual:self.cell.slider]) {
-//        NSData *data=[[DeviceInfo defaultManager] roll:self.cell.slider.value * 100 deviceID:self.cell.deviceId];
-//        SocketManager *sock=[SocketManager defaultManager];
-//        [sock.socket writeData:data withTimeout:1 tag:2];
-//    }if ([sender isEqual:self.cell.open]) {
-//        self.cell.slider.value=1;
-//        NSData *data=[[DeviceInfo defaultManager] open:self.cell.deviceId];
-//        SocketManager *sock=[SocketManager defaultManager];
-//        [sock.socket writeData:data withTimeout:1 tag:2];
-//        self.cell.valueLabel.text = @"100%";
-//        
-//    }if ([sender isEqual:self.cell.close]) {
-//        self.cell.slider.value=0;
-//        NSData *data=[[DeviceInfo defaultManager] close:self.cell.deviceId];
-//        SocketManager *sock=[SocketManager defaultManager];
-//        [sock.socket writeData:data withTimeout:1 tag:2];
-//        self.cell.valueLabel.text = @"0%";
-//    }
-//    Curtain *device=[[Curtain alloc] init];
-//    [device setDeviceID:[self.deviceid intValue]];
-//    [device setOpenvalue:self.cell.slider.value * 100];
-//    
-//    if ([sender isEqual:self.cell.open]) {
-//        [device setOpenvalue:100];
-//    }
-//    
-//    if ([sender isEqual:self.cell.close]) {
-//        [device setOpenvalue:0];
-//    }
-//    
-//
-//}
-
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -150,6 +96,7 @@
 
     }
 //        self.cell.lable.text = @"自定义颜色";
+           self.cell = [tableView dequeueReusableCellWithIdentifier:@"ColourTableViewCell" forIndexPath:indexPath];
        Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[indexPath.row] intValue]];
         self.cell.lable.text = device.name;
     
@@ -159,22 +106,6 @@
         self.cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return self.cell;
     
-//     ColourCell.lable.text = _ColourLightArr[indexPath.row];
-    
-//        else if (indexPath.section == 1){
-//        CurtainTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
-//        Device * device = [SQLManager getDeviceWithDeviceID:[_curtainArrs[indexPath.row] intValue]];
-//        cell.label.text = device.name;
-//        cell.deviceId = _curtainArrs[indexPath.row];
-//        
-//        return cell;
-//    }
-//    IphoneAirCell * cell = [tableView dequeueReusableCellWithIdentifier:@"IphoneAirCell" forIndexPath:indexPath];
-//      Device *device = [SQLManager getDeviceWithDeviceID:[_airArrs[indexPath.row] intValue]];
-//    cell.deviceNameLabel.text = device.name;
-//    cell.deviceId = _airArrs[indexPath.row];
-
-//    return ColourCell;
 }
 
 -(IBAction)changeColor:(id)sender
@@ -182,6 +113,44 @@
     HRSampleColorPickerViewController *controller= [[HRSampleColorPickerViewController alloc] initWithColor:self.cell.backgroundColor fullColor:NO];
     controller.delegate = self;
     [self.navigationController pushViewController:controller animated:YES];
+}
+- (void)setSelectedColor:(UIColor *)color
+{
+    self.cell.colourView.backgroundColor = color;
+    [self save:nil];
+}
+
+-(void)save:(id)sender
+{
+    UIColor *color = self.cell.colourView.backgroundColor;
+    NSDictionary *colorDic = [self getRGBDictionaryByColor:color];
+    int r = [colorDic[@"R"] floatValue] * 255;
+    int g = [colorDic[@"G"] floatValue] * 255;
+    int b = [colorDic[@"B"] floatValue] * 255;
+    
+    NSData *data=[[DeviceInfo defaultManager] changeColor:self.deviceid R:r G:g B:b];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:3];
+
+}
+- (NSDictionary *)getRGBDictionaryByColor:(UIColor *)originColor
+{
+    CGFloat r=0,g=0,b=0,a=0;
+    if ([originColor respondsToSelector:@selector(getRed:green:blue:alpha:)]) {
+        [originColor getRed:&r green:&g blue:&b alpha:&a];
+    }
+    else {
+        const CGFloat *components = CGColorGetComponents(originColor.CGColor);
+        r = components[0];
+        g = components[1];
+        b = components[2];
+        a = components[3];
+    }
+    
+    return @{@"R":@(r),
+             @"G":@(g),
+             @"B":@(b),
+             @"A":@(a)};
 }
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
@@ -204,6 +173,9 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == 1) {
+        return 43;
+    }
 
     return 76;
 }
