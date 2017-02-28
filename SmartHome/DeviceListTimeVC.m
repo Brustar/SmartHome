@@ -19,7 +19,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self initDataSource];
+    
     self.view.backgroundColor =[UIColor yellowColor];
     self.title = @"定时器";
     UIBarButtonItem *listItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"UO23"] style:UIBarButtonItemStylePlain target:self action:@selector(selectedDevice:)];
@@ -31,6 +32,36 @@
     self.tableView.tableFooterView = view;
     
 }
+
+- (void)initDataSource {
+    self.timerList = [[NSMutableArray alloc] init];
+    DeviceInfo *device = [DeviceInfo defaultManager];
+    if ([device.db isEqualToString:SMART_DB]) {
+        
+    }else {
+        NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"DeviceTimerList" ofType:@"plist"]];
+        NSArray *arr = plistDict[@"timer_list"];
+        if ([arr isKindOfClass:[NSArray class]] && arr.count >0) {
+            for(NSDictionary *timerInfo in arr)
+            {
+                if ([timerInfo isKindOfClass:[NSDictionary class]]) {
+                    DeviceTimerInfo *deviceTimerInfo = [[DeviceTimerInfo alloc] init];
+                    deviceTimerInfo.deviceName = timerInfo[@"deviceName"];
+                    deviceTimerInfo.deviceValue = timerInfo[@"deviceValue"];
+                    deviceTimerInfo.repetition = timerInfo[@"repetition"];
+                    deviceTimerInfo.startTime = timerInfo[@"starttime"];
+                    deviceTimerInfo.endTime = timerInfo[@"endtime"];
+                    deviceTimerInfo.status = timerInfo[@"status"];
+                    [self.timerList addObject:deviceTimerInfo];
+                }
+                
+            }
+        }
+        
+        [self.tableView reloadData];
+    }
+}
+
 -(void)selectedDevice:(UIBarButtonItem *)bbi
 {
     UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
@@ -40,19 +71,43 @@
     
 
 }
-//-(void)clickEditBtn:(UIBarButtonItem *)b
-//{
-//
-//}
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 20.0f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 60, 20)];
+    title.text = @"设备";
+    return title;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    return self.timerList.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    DeviceTimerCell * cell = [tableView dequeueReusableCellWithIdentifier:@"deviceTimerCell" forIndexPath:indexPath];
+    if (cell == nil) {
+        cell = [[DeviceTimerCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"deviceTimerCell"];
+    }
+    
+    DeviceTimerInfo *info = [self.timerList objectAtIndex:indexPath.row];
+    [cell setInfo:info];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

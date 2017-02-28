@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DeviceTimerCell.h"
+#import "DeviceTimerInfo.h"
 
 @interface DeviceListTimeVC : UIViewController
+
+@property(nonatomic, strong) NSMutableArray *timerList;//设备定时列表
 
 @end
