@@ -184,6 +184,8 @@
 		CDF90B451E2F4B14009043B9 /* planeScene.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF90B441E2F4B14009043B9 /* planeScene.plist */; };
 		CDFB9DF01E5DC4B600BFECCE /* DeviceTimerList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDFB9DEF1E5DC4B600BFECCE /* DeviceTimerList.plist */; };
 		CDFB9DF21E5DCB4D00BFECCE /* SceneTimerList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDFB9DF11E5DCB4D00BFECCE /* SceneTimerList.plist */; };
+		CDFB9DF51E64125500BFECCE /* DeviceTimerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFB9DF41E64125500BFECCE /* DeviceTimerCell.m */; };
+		CDFB9DF81E641F8E00BFECCE /* DeviceTimerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFB9DF71E641F8E00BFECCE /* DeviceTimerInfo.m */; };
 		F361579D9B9637C261531C8C /* libPods-SmartHome.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B2DBF5C92F57E3B7AD6AA3 /* libPods-SmartHome.a */; };
 		F60E71CA1D796BE6008863DB /* AmplifierController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60E71C91D796BE6008863DB /* AmplifierController.m */; };
 		F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F60FDB411D00029900AB04BE /* DetailViewController.m */; };
@@ -798,6 +800,10 @@
 		CDF90B441E2F4B14009043B9 /* planeScene.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = planeScene.plist; sourceTree = "<group>"; };
 		CDFB9DEF1E5DC4B600BFECCE /* DeviceTimerList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DeviceTimerList.plist; sourceTree = "<group>"; };
 		CDFB9DF11E5DCB4D00BFECCE /* SceneTimerList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SceneTimerList.plist; sourceTree = "<group>"; };
+		CDFB9DF31E64125500BFECCE /* DeviceTimerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceTimerCell.h; sourceTree = "<group>"; };
+		CDFB9DF41E64125500BFECCE /* DeviceTimerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceTimerCell.m; sourceTree = "<group>"; };
+		CDFB9DF61E641F8E00BFECCE /* DeviceTimerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceTimerInfo.h; sourceTree = "<group>"; };
+		CDFB9DF71E641F8E00BFECCE /* DeviceTimerInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceTimerInfo.m; sourceTree = "<group>"; };
 		CE54136C9EEF8F51E8FBEEDE /* Pods-SmartHome.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.release.xcconfig"; sourceTree = "<group>"; };
 		F60E71C81D796BE6008863DB /* AmplifierController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmplifierController.h; sourceTree = "<group>"; };
 		F60E71C91D796BE6008863DB /* AmplifierController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmplifierController.m; sourceTree = "<group>"; };
@@ -1068,6 +1074,8 @@
 				0F8D76CF1D9A1B9700DDD063 /* Schedule.m */,
 				0FB35C661DB0CECA00B48EA7 /* Plugin.h */,
 				0FB35C671DB0CECA00B48EA7 /* Plugin.m */,
+				CDFB9DF61E641F8E00BFECCE /* DeviceTimerInfo.h */,
+				CDFB9DF71E641F8E00BFECCE /* DeviceTimerInfo.m */,
 			);
 			name = entity;
 			sourceTree = "<group>";
@@ -2008,6 +2016,8 @@
 				2E7CD6071E14B80C002D0541 /* FixTimeListCell.m */,
 				2EEE53691E3061930026F97D /* IphoneDetailViewController.h */,
 				2EEE536A1E3061930026F97D /* IphoneDetailViewController.m */,
+				CDFB9DF31E64125500BFECCE /* DeviceTimerCell.h */,
+				CDFB9DF41E64125500BFECCE /* DeviceTimerCell.m */,
 			);
 			path = IphoneControllers;
 			sourceTree = "<group>";
@@ -2450,12 +2460,14 @@
 				0FAF98A31CE40F3C009BDBB5 /* QRCameraSwitchButton.m in Sources */,
 				F6280D4D1D9651CE009108ED /* IphoneFMController.m in Sources */,
 				0FD3DEAA1D3F183D00AF7765 /* SCWaveAnimationView.m in Sources */,
+				CDFB9DF51E64125500BFECCE /* DeviceTimerCell.m in Sources */,
 				F651640D1D3766C900A6F5FA /* MyEnergyViewController.m in Sources */,
 				0F477FC61D2F94B3004FA361 /* NetStatusManager.m in Sources */,
 				2EDC0E901DEC072700F95BE0 /* IPhoneRoom.m in Sources */,
 				0FEE12761D20C53400811947 /* TXHRulerScrollView.m in Sources */,
 				F659110C1D967383002CFBB7 /* IphoneNetTvController.m in Sources */,
 				F64EF7FB1D8FB738003C1C48 /* IphoneMainController.m in Sources */,
+				CDFB9DF81E641F8E00BFECCE /* DeviceTimerInfo.m in Sources */,
 				0FCFB38F1CF293B300B37DD3 /* Radio.m in Sources */,
 				F618963B1D87B08300DBE6CD /* ProjectController.m in Sources */,
 				F6FD00A21DDDD470009ABA64 /* TouchSubViewController.m in Sources */,
