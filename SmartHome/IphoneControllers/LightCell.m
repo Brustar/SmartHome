@@ -68,9 +68,9 @@
     BOOL isOn  = [switc isOn];
     
     if(isOn){
-        //让slider的值大于0，小于1
+        //让slider的值等于1
         
-        self.slider.value = 0.2;
+        self.slider.value = 1;
         
     }else{
         //让slider的值为0

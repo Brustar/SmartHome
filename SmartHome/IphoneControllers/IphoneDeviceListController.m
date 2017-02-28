@@ -169,6 +169,13 @@
         [self addViewAndVC:netVC];
         
     }else if([typeName isEqualToString:@"摄像头"]){
+        
+        DeviceInfo *device = [DeviceInfo defaultManager];
+        if (![device.db isEqualToString:SMART_DB]) { //体验版：老人房摄像头页面只显示一张房间图片
+            [self addViewAndVC:[self addOldmanRoomCameraImage]];
+            return;
+        }
+        
         CameraController *camerVC = [storyBoard instantiateViewControllerWithIdentifier:@"CameraController"];
         camerVC.roomID = roomID;
         [self addViewAndVC:camerVC];
@@ -220,6 +227,17 @@
     }
 
 }
+
+- (UIViewController *)addOldmanRoomCameraImage {
+    UIViewController *vc = [[UIViewController alloc] init];
+    UIImage *img = [UIImage imageNamed:@"oldman"];
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, img.size.width, img.size.height)];
+    imgView.image = img;
+    [vc.view addSubview:imgView];
+    
+    return vc;
+}
+
 -(void )addViewAndVC:(UIViewController *)vc
 {
     if (self.currentViewController != nil) {

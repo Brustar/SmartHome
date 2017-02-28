@@ -13,6 +13,16 @@
 					<key>room_id</key>
 					<integer>3</integer>
 					<key>room_name</key>
+					<string>主卧</string>
+					<key>roomuser_id</key>
+					<integer>9</integer>
+				</dict>
+				<dict>
+					<key>isopen</key>
+					<integer>1</integer>
+					<key>room_id</key>
+					<integer>9</integer>
+					<key>room_name</key>
 					<string>客厅</string>
 					<key>roomuser_id</key>
 					<integer>9</integer>
@@ -23,7 +33,7 @@
 					<key>room_id</key>
 					<integer>14</integer>
 					<key>room_name</key>
-					<string>厨房</string>
+					<string>老人房</string>
 					<key>roomuser_id</key>
 					<integer>61</integer>
 				</dict>
@@ -42,6 +52,16 @@
 					<key>room_id</key>
 					<integer>3</integer>
 					<key>room_name</key>
+					<string>主卧</string>
+					<key>roomuser_id</key>
+					<integer>3</integer>
+				</dict>
+				<dict>
+					<key>isopen</key>
+					<integer>1</integer>
+					<key>room_id</key>
+					<integer>3</integer>
+					<key>room_name</key>
 					<string>客厅</string>
 					<key>roomuser_id</key>
 					<integer>3</integer>
@@ -52,7 +72,7 @@
 					<key>room_id</key>
 					<integer>14</integer>
 					<key>room_name</key>
-					<string>厨房</string>
+					<string>老人房</string>
 					<key>roomuser_id</key>
 					<integer>60</integer>
 				</dict>
