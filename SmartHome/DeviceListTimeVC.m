@@ -82,7 +82,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 60, 20)];
-    title.text = @"设备";
+    title.text = @"设备定时";
     return title;
 }
 

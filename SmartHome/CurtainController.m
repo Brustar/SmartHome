@@ -91,13 +91,14 @@
     self.title=@"窗帘";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.tableFooterView = [UIView new];
     self.cell = [[[NSBundle mainBundle] loadNibNamed:@"CurtainTableViewCell" owner:self options:nil] lastObject];
     self.cell.slider.continuous = NO;
     [self.cell.slider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     [self.cell.open addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.cell.close addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self setupSegmentCurtain];
+    //[self setupSegmentCurtain];
     _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     if ([self.sceneid intValue] >0) {
         for(int i=0;i<[_scene.devices count];i++)
@@ -114,6 +115,8 @@
     //查询设备状态
     NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
     [sock.socket writeData:data withTimeout:1 tag:1];
+    
+    [self.tableView reloadData];
 }
 
 - (void)setupSegmentCurtain
@@ -212,18 +215,24 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return self.curtainIDArr.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row == 0)
-    {
-        self.cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.cell.label.text = self.curNames[self.segmentCurtain.selectedSegmentIndex];
-        return self.cell;
-    }
+    CurtainTableViewCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"CurtainTableViewCell" owner:self options:nil] lastObject];
+     cell.slider.continuous = NO;
+    [cell.slider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
+    [cell.open addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.close addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     
-    static NSString *CellIdentifier = @"Cell";
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.label.text = [self.curNames objectAtIndex:indexPath.row];
+    cell.deviceId = [self.curtainIDArr objectAtIndex:indexPath.row];
+    
+  return cell;
+    
+    
+    /*static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
@@ -234,9 +243,9 @@
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 23, 100, 30)];
     [cell.contentView addSubview:label];
-    label.text = @"详细信息";
+    label.text = @"详细信息";*/
     
-    return cell;
+    //return cell;
   
     
 }
@@ -247,11 +256,11 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if(indexPath.row == 1)
-    {
-        [self performSegueWithIdentifier:@"detail" sender:self];
-    }
+//    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    if(indexPath.row == 1)
+//    {
+//        [self performSegueWithIdentifier:@"detail" sender:self];
+//    }
 }
 
 - (IBAction)selectedTypeOfCurtain:(UISegmentedControl *)sender {
