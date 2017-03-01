@@ -86,10 +86,13 @@
                 for(NSDictionary *dicDetail in arr)
                 {
                     if ([dicDetail isKindOfClass:[NSDictionary class]] && dicDetail[@"description"]) {
-                        [self.msgArr addObject:dicDetail[@"description"]];
-                        [self.timesArr addObject:dicDetail[@"addtime"]];
-                        [self.recordID addObject:dicDetail[@"notify_id"]];
-                        [self.isreadArr addObject:dicDetail[@"isread"]];
+                        
+                        if ([dicDetail[@"notify_id"] integerValue] == self.actcode.integerValue) {
+                            [self.msgArr addObject:dicDetail[@"description"]];
+                            [self.timesArr addObject:dicDetail[@"addtime"]];
+                            [self.recordID addObject:dicDetail[@"notify_id"]];
+                            [self.isreadArr addObject:dicDetail[@"isread"]];
+                        }
                     }
                 }
             }
