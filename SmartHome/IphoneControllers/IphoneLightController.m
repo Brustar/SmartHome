@@ -110,7 +110,7 @@
 
 -(IBAction)changeColor:(id)sender
 {
-    HRSampleColorPickerViewController *controller= [[HRSampleColorPickerViewController alloc] initWithColor:self.cell.backgroundColor fullColor:NO];
+    HRSampleColorPickerViewController *controller= [[HRSampleColorPickerViewController alloc] initWithColor:self.cell.colourView.backgroundColor fullColor:NO];
     controller.delegate = self;
     [self.navigationController pushViewController:controller animated:YES];
 }
