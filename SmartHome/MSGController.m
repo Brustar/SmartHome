@@ -190,7 +190,11 @@
     DetailMSGViewController * MSGVC = [oneStoryBoard instantiateViewControllerWithIdentifier:@"DetailMSGViewController"];
     NSString *itemid = self.itemIdArrs[indexPath.row];
     MSGVC.itemID = itemid;
-//    MSGVC.actcode = self.actcodeArrs[indexPath.row];
+      DeviceInfo *device = [DeviceInfo defaultManager];
+    if (![device.db isEqualToString:SMART_DB]){
+        MSGVC.actcode = self.actcodeArrs[indexPath.row]; 
+    }
+   
     [self.navigationController pushViewController:MSGVC animated:YES];
 }
 
