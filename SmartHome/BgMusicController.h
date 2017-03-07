@@ -15,5 +15,6 @@
 @property (nonatomic,assign) int roomID;
 @property (strong, nonatomic) Scene *scene;
 @property (nonatomic,assign) BOOL isAddDevice;
+@property (nonatomic, assign) NSInteger playState;//播放状态： 0:停止 1:播放
 
 @end

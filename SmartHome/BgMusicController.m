@@ -25,6 +25,9 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *voiceStrongRightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewLeftConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewRightConstraint;
+@property (weak, nonatomic) IBOutlet UIButton *lastBtn;
+@property (weak, nonatomic) IBOutlet UIButton *playBtn;
+@property (weak, nonatomic) IBOutlet UIButton *nextBtn;
 
 @end
 
@@ -227,14 +230,34 @@
 }
 
 - (IBAction)playMusic:(id)sender {
-    NSData *data=[[DeviceInfo defaultManager] play:self.deviceid];
-    SocketManager *sock=[SocketManager defaultManager];
-    [sock.socket writeData:data withTimeout:1 tag:1];
+    UIButton *btn = (UIButton *)sender;
     
-    if (BLUETOOTH_MUSIC) {
-        AudioManager *audio= [AudioManager defaultManager];
-        [[audio musicPlayer] play];
+    if (_playState == 0) {
+        _playState = 1;
+        [btn setImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
+        //发送播放指令
+        NSData *data=[[DeviceInfo defaultManager] play:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+        
+        if (BLUETOOTH_MUSIC) {
+            AudioManager *audio= [AudioManager defaultManager];
+            [[audio musicPlayer] play];
+        }
+    }else if (_playState == 1) {
+        _playState = 0;
+       [btn setImage:[UIImage imageNamed:@"broadcast"] forState:UIControlStateNormal];
+        //发送停止指令
+        NSData *data=[[DeviceInfo defaultManager] pause:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+        if (BLUETOOTH_MUSIC) {
+            AudioManager *audio= [AudioManager defaultManager];
+            [[audio musicPlayer] pause];
+        }
     }
+    
+    
 }
 
 - (IBAction)addSongsToMusicPlayer:(id)sender
