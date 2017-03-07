@@ -23,6 +23,7 @@
 //那6个控制按钮，button的tag值不一样，分别是0 到 5
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
+@property (weak, nonatomic) IBOutlet UISwitch *netTvSwitch;
 
 @end
 
@@ -49,7 +50,7 @@
     
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
-    
+    [self.netTvSwitch addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
@@ -122,6 +123,11 @@
     if ([sender isEqual:self.volume]) {
         NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volume.value*100 deviceID:self.deviceid];
 //        self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
+    if ([sender isEqual:self.netTvSwitch]) {
+        NSData * data = [[DeviceInfo defaultManager] toogleAirCon:self.netTvSwitch.isOn deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
     }

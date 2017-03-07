@@ -165,6 +165,7 @@
 		2EDE04611E45777B00BC8E0B /* WebViewMangerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE04601E45777B00BC8E0B /* WebViewMangerVC.m */; };
 		2EEE536B1E3061930026F97D /* IphoneDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EEE536A1E3061930026F97D /* IphoneDetailViewController.m */; };
 		2EEE536E1E309C5D0026F97D /* MyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EEE536D1E309C5D0026F97D /* MyView.m */; };
+		2EFB6B591E665C440058F305 /* UITabBar+BadgeValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB6B581E665C440058F305 /* UITabBar+BadgeValue.m */; };
 		2EFFECA11E12161100C13D3E /* FixTimeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFFECA01E12161100C13D3E /* FixTimeListViewController.m */; };
 		CD43046F1E0B674000B594F4 /* FamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD43046E1E0B674000B594F4 /* FamilyViewController.m */; };
 		CD78A8301E3379C200060466 /* 255_221.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD78A82F1E3379C200060466 /* 255_221.plist */; };
@@ -776,6 +777,8 @@
 		2EEE536C1E309C5D0026F97D /* MyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyView.h; sourceTree = "<group>"; };
 		2EEE536D1E309C5D0026F97D /* MyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyView.m; sourceTree = "<group>"; };
 		2EEE536F1E309E510026F97D /* CGLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGLine.h; sourceTree = "<group>"; };
+		2EFB6B571E665C440058F305 /* UITabBar+BadgeValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+BadgeValue.h"; sourceTree = "<group>"; };
+		2EFB6B581E665C440058F305 /* UITabBar+BadgeValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+BadgeValue.m"; sourceTree = "<group>"; };
 		2EFFEC9F1E12161100C13D3E /* FixTimeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixTimeListViewController.h; sourceTree = "<group>"; };
 		2EFFECA01E12161100C13D3E /* FixTimeListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixTimeListViewController.m; sourceTree = "<group>"; };
 		9B45FF693457BA21BA43CE05 /* Pods-SmartHome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1940,6 +1943,8 @@
 				F64EF7FA1D8FB738003C1C48 /* IphoneMainController.m */,
 				2EC45FBB1E53E2D60042CE20 /* IphoneTabBarViewController.h */,
 				2EC45FBC1E53E2D60042CE20 /* IphoneTabBarViewController.m */,
+				2EFB6B571E665C440058F305 /* UITabBar+BadgeValue.h */,
+				2EFB6B581E665C440058F305 /* UITabBar+BadgeValue.m */,
 				F64EF7FC1D8FBCC1003C1C48 /* IphoneSceneController.h */,
 				F64EF7FD1D8FBCC1003C1C48 /* IphoneSceneController.m */,
 				F64EF7FF1D8FDCE7003C1C48 /* IphoneDeviceListController.h */,
@@ -2577,6 +2582,7 @@
 				0FC0FFDD1CF57E58000F71D5 /* TouchImage.m in Sources */,
 				0FCFB3951CF2943100B37DD3 /* Camera.m in Sources */,
 				2E801EFC1E2622180039A6D9 /* IphoneFixSubTimeVC.m in Sources */,
+				2EFB6B591E665C440058F305 /* UITabBar+BadgeValue.m in Sources */,
 				F6755A4C1D4063FA002394F3 /* ECloudTabBar.m in Sources */,
 				0FAF8FEF1CE18C41000557BD /* DeviceInfo.m in Sources */,
 				2EDE04611E45777B00BC8E0B /* WebViewMangerVC.m in Sources */,
