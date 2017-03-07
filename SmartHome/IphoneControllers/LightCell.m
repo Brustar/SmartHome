@@ -80,6 +80,7 @@
     }
     
     NSData * data = [[DeviceInfo defaultManager] toogleLight:switc.on deviceID:deviceid];
+    NSLog(@"light switch data:%@", data);
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
     [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];

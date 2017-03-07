@@ -15,6 +15,7 @@
 
 @interface MSGController ()<HttpDelegate>
 @property (nonatomic,strong) NSMutableArray * itemIdArrs;
+@property (nonatomic,strong) NSMutableArray * actcodeArrs;
 @property (nonatomic,strong) NSMutableArray * itemNameArrs;
 @property (nonatomic,strong) NSMutableArray * unreadcountArr;
 @property (weak, nonatomic) IBOutlet UIView *footView;
@@ -33,6 +34,15 @@
 
     return _unreadcountArr;
 }
+
+- (NSMutableArray *)actcodeArrs
+{
+    if (!_actcodeArrs) {
+        _actcodeArrs = [NSMutableArray array];
+    }
+    return _actcodeArrs;
+}
+
 -(NSMutableArray *)itemIdArrs
 {
     if (!_itemIdArrs) {
@@ -84,6 +94,7 @@
             for(NSDictionary *dicDetail in arr)
             {
                 [self.itemIdArrs addObject:dicDetail[@"item_id"]];
+                [self.actcodeArrs addObject:dicDetail[@"actcode"]];
                 [self.itemNameArrs addObject:dicDetail[@"item_name"]];
                 [self.unreadcountArr addObject:dicDetail[@"unreadcount"]];
             }
@@ -179,6 +190,7 @@
     DetailMSGViewController * MSGVC = [oneStoryBoard instantiateViewControllerWithIdentifier:@"DetailMSGViewController"];
     NSString *itemid = self.itemIdArrs[indexPath.row];
     MSGVC.itemID = itemid;
+//    MSGVC.actcode = self.actcodeArrs[indexPath.row];
     [self.navigationController pushViewController:MSGVC animated:YES];
 }
 

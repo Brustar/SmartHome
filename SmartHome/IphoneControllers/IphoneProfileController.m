@@ -47,10 +47,8 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.nameLabel.text = [[NSUserDefaults  standardUserDefaults] objectForKey:@"UserName"];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.nameLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserName"];
+    
     self.titlArr = @[@"我的故障",@"我的保修记录",@"我的能耗",@"我的收藏",@"我的消息"];
     self.images = @[@"my",@"energy",@"record",@"store",@"message"];
 //    self.tableHight.constant = self.titlArr.count * hight + self.headView.frame.size.height;
@@ -59,10 +57,11 @@
 //    self.tableView.scrollEnabled = NO;
     self.tableView.tableHeaderView = self.headView;
     DeviceInfo *device = [DeviceInfo defaultManager];
-    if (![device.db isEqualToString:SMART_DB]){
-        
+    if (![device.db isEqualToString:SMART_DB]) {
+        self.nameLabel.text = @"admin";
         self.segues =@[@"iphoneDefault",@"iphoneRecordSegue",@"TYiphone",@"iphoneFavorSegue",@"iphoneMsgSegue"];
     }else{
+        self.nameLabel.text = [[NSUserDefaults  standardUserDefaults] objectForKey:@"UserName"];
         self.segues = @[@"iphoneDefault",@"iphoneRecordSegue",@"iphoneEngerSegue",@"iphoneFavorSegue",@"iphoneMsgSegue"];
     }
     

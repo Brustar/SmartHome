@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface DetailMSGViewController : UIViewController
+
 @property (nonatomic,strong) NSString * itemID;
 @property (nonatomic,strong) NSString * type;
+@property (nonatomic, strong) NSNumber *actcode;//消息类型
+
 @end
