@@ -19,7 +19,7 @@
 @property (nonatomic,strong) NSMutableArray * unreadcountArr;
 @property (weak, nonatomic) IBOutlet UIView *footView;
 @property (nonatomic,assign) NSInteger unreadcount;
-
+@property (nonatomic,strong) NSString * type;
 
 @end
 
@@ -53,10 +53,19 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//     DeviceInfo *device = [DeviceInfo defaultManager];
-//    if ([device.db isEqualToString:SMART_DB]) {
-//        [self creatItemID];
-//    }
+    
+     DeviceInfo *device = [DeviceInfo defaultManager];
+    if ([device.db isEqualToString:SMART_DB]) {
+        [self.itemIdArrs removeAllObjects];
+        [self.itemNameArrs removeAllObjects];
+        [self.unreadcountArr removeAllObjects];
+        [self creatItemID];
+    }
+
+}
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
 
 }
 
@@ -67,7 +76,7 @@
     
     DeviceInfo *device = [DeviceInfo defaultManager];
     if ([device.db isEqualToString:SMART_DB]) {
-        [self creatItemID];
+//        [self creatItemID];
     }else {
         NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"msgTypeList" ofType:@"plist"]];
         NSArray *arr = plistDict[@"notify_type_list"];
@@ -155,14 +164,6 @@
     }else{
         cell.unreadcountImage.hidden = NO;
         cell.countLabel.hidden       = NO;
-    }
-    for (int i = 0; i < self.unreadcountArr.count; i ++) {
-        NSString * str = self.unreadcountArr[i];
-        if ([str intValue] == 0) {
-            self.isShowCountLabel = NO;
-        }else{
-            self.isShowCountLabel = YES;
-        }
     }
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

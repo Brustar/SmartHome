@@ -65,7 +65,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.type = @"1";
     self.tableView.tableFooterView = self.FootView;
     
 //    UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc]initWithTitle:@"我的消息" style:UIBarButtonItemStylePlain target:self action:@selector(leftEdit:)];

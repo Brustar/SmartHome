@@ -10,4 +10,5 @@
 
 @interface DetailMSGViewController : UIViewController
 @property (nonatomic,strong) NSString * itemID;
+@property (nonatomic,strong) NSString * type;
 @end

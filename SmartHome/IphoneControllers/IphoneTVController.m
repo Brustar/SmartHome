@@ -51,7 +51,7 @@
 
 @end
 
-@interface IphoneTVController ()<UICollectionViewDelegate,UICollectionViewDataSource,TVLogoCellDelegate,UINavigationControllerDelegate>
+@interface IphoneTVController ()<UICollectionViewDelegate,UICollectionViewDataSource,TVLogoCellDelegate,UINavigationControllerDelegate,UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UISlider *volumeSlider;
 @property (weak, nonatomic) IBOutlet UIImageView *voiceStrongImg;
 
@@ -64,15 +64,22 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *tvLogoCollectionView;
 
 @property (weak, nonatomic) IBOutlet UIView *touchpad;
+@property (weak, nonatomic) IBOutlet UISwitch *tvSwitch;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
+@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 
 @property (nonatomic,strong) TVLogoCell *cell;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
 @end
 
 @implementation IphoneTVController
 {
     IphoneAddTVChannelController * iphoneVC;
+    NSTimer *_timer;
+    CGFloat _AutoScrollDelay;
+    BOOL _isAutoScroll;
 
 }
 -(NSMutableArray*)allFavourTVChannels
@@ -111,10 +118,25 @@
   
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self viewDidLayoutSubviews];
+}
+
+-(void)viewDidLayoutSubviews
+{
+    CGSize scrollSize = CGSizeMake(2 * _scrollView.bounds.size.width, _scrollView.bounds.size.height);
+    if (!CGSizeEqualToSize(_scrollView.contentSize, scrollSize)) {
+        _scrollView.contentSize = scrollSize;
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.title = @"电视";
+     self.scrollView.delegate = self;
     iphoneVC.eNumber = [SQLManager getENumber:[self.deviceid intValue]];
     self.volumeSlider.transform = CGAffineTransformMakeRotation(M_PI/2);
     self.voiceWeakImg.transform = CGAffineTransformMakeRotation(M_PI/2);
@@ -122,6 +144,7 @@
     self.tvLogoCollectionView.bounces = NO;
     self.volumeSlider.continuous = NO;
     [self.volumeSlider addTarget:self action:@selector(Iphonesave:) forControlEvents:UIControlEventValueChanged];
+    [self.tvSwitch addTarget:self action:@selector(Iphonesave:) forControlEvents:UIControlEventValueChanged];
     
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
@@ -197,6 +220,11 @@
     if ([sender isEqual:self.volumeSlider]) {
         NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volumeSlider.value*100 deviceID:self.deviceid];
 //        self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
+    if ([sender isEqual:self.tvSwitch]) {
+        NSData * data = [[DeviceInfo defaultManager] toogleAirCon:self.tvSwitch.isOn deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
     }
@@ -288,12 +316,13 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     TVLogoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TVLogoCell" forIndexPath:indexPath];
+    
     TVChannel *channel = self.allFavourTVChannels[indexPath.row];
     cell.delegate = self;
     [cell hiddenEditBtnAndDeleteBtn];
     cell.label.text = channel.channel_name;
     if (channel) {
-        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:channel.channel_pic] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:channel.channel_pic] placeholderImage:[UIImage imageNamed:@"logo"]];
         [cell useLongPressGesture];
     }
     return cell;
@@ -377,8 +406,6 @@
     NSData *data=[device next:self.deviceid];
     [sock.socket writeData:data withTimeout:-1 tag:1];
 }
-
-
 #pragma mark - touch detection
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -389,13 +416,109 @@
         [SCWaveAnimationView waveAnimationAtPosition:touchPoint];
     }
 }
-
-
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     iphoneVC = segue.destinationViewController;
     iphoneVC.deviceid = self.deviceid;
 }
+
+#pragma mark scrollViewDelegate
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [self setUpTimer];
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self removeTimer];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    int index = self.scrollView.contentOffset.x / self.scrollView.frame.size.width;
+    _pageControl.currentPage = index;
+}
+- (void)removeTimer {
+    if (_timer == nil) return;
+    [_timer invalidate];
+    _timer = nil;
+}
+- (void)setUpTimer {
+    if (!_isAutoScroll) {//用户滑动，非自动滚动
+        return;
+    }
+    if (_AutoScrollDelay < 0.5) return;
+    
+    _timer = [NSTimer timerWithTimeInterval:_AutoScrollDelay target:self selector:@selector(scorll) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+}
+- (void)scorll {
+    CGFloat contentOffsetX = _scrollView.contentOffset.x + _scrollView.frame.size.width >= _scrollView.contentSize.width ? 0 : _scrollView.contentOffset.x + _scrollView.frame.size.width;
+    [_scrollView setContentOffset:CGPointMake(contentOffsetX, 0) animated:YES];
+    
+}
+//电视调台
+
+#pragma mark - UIPickerViewDataSource<NSObject>
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 3;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return 10;
+}
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
+    return 44;
+}
+
+- (nullable NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    
+    UIColor *foregroundColor = [UIColor orangeColor];
+    UIColor *backgroundColor = [UIColor clearColor];
+    NSDictionary *attrsDic = @{NSForegroundColorAttributeName: foregroundColor,
+                               NSBackgroundColorAttributeName: backgroundColor,
+                               };
+    NSAttributedString *attStr = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld", (long)row] attributes:attrsDic];
+    
+    return attStr;
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    if(_timer != nil)
+    {
+        [_timer invalidate];
+        _timer = nil;
+    }
+    [self startTimer];
+}
+
+-(void)startTimer
+{
+    if (!_timer) {
+        _timer = [NSTimer timerWithTimeInterval:3 target:self selector:@selector(sureChannel) userInfo:nil repeats:NO];
+        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+    }
+}
+
+-(void) sureChannel
+{
+    _timer = nil;
+    NSData * data = [[DeviceInfo defaultManager] switchProgram:0x3A deviceID:_deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+    NSInteger row0 = [self.pickerView selectedRowInComponent:0];
+    NSInteger row1 =[self.pickerView selectedRowInComponent:1];
+    NSInteger row2 =[self.pickerView selectedRowInComponent:2];
+    unsigned int channel= 0;
+    if(row0 > 0)
+        channel += row0 * 100;
+    if(row1 > 0)
+        channel += row1 * 10;
+    channel += row2;
+  
+}
+
 /*
 #pragma mark - Navigation
 

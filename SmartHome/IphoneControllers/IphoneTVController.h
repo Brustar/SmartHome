@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IphoneTVController : UIViewController
+@interface IphoneTVController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate>
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic,assign) NSString *deviceid;
 
+@property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 @property (nonatomic,assign) NSString *deviceNumber;
 @property (strong, nonatomic) Scene *scene;
 @property (nonatomic, retain) NSTimer *timer;
