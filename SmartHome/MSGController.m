@@ -192,7 +192,7 @@
     MSGVC.itemID = itemid;
       DeviceInfo *device = [DeviceInfo defaultManager];
     if (![device.db isEqualToString:SMART_DB]){
-        MSGVC.actcode = self.actcodeArrs[indexPath.row]; 
+        MSGVC.actcode = self.actcodeArrs[indexPath.row];
     }
    
     [self.navigationController pushViewController:MSGVC animated:YES];
