@@ -69,7 +69,7 @@
     }
   
     
-    self.viewControllers = @[naVC1,naVC3,naVC4,naVC5];
+    self.viewControllers = @[naVC1,naVC2,naVC3,naVC5];
 
 }
 

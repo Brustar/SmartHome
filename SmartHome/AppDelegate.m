@@ -46,11 +46,11 @@
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
         NSString *UIname=@"main";
-//        IphoneTabBarViewController * iphoneTabBar = [[IphoneTabBarViewController alloc] init];
+
         //已登录时,自动登录
         if ([[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]) {
-            UIname=@"IphoneTabBarViewController";
-//              self.window.rootViewController = iphoneTabBar;
+            UIname=@"IphoneMainController";
+//
         }
         UIViewController* viewcontroller = [secondStoryBoard instantiateViewControllerWithIdentifier:UIname];
        self.window.rootViewController = viewcontroller;

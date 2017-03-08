@@ -49,8 +49,8 @@
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    self.titlArr = @[@"我的故障",@"我的保修记录",@"我的能耗",@"我的收藏",@"我的消息"];
-    self.images = @[@"my",@"energy",@"record",@"store",@"message"];
+    self.titlArr = @[@"我的故障",@"我的保修记录",@"我的能耗",@"我的收藏",@"我的消息",@"设置"];
+    self.images = @[@"my",@"energy",@"record",@"store",@"message",@"shezhi4"];
 //    self.tableHight.constant = self.titlArr.count * hight + self.headView.frame.size.height;
     self.navigationController.navigationBar.backgroundColor = [UIColor lightGrayColor];
     self.tableView.tableFooterView = [UIView new];
@@ -59,10 +59,10 @@
     DeviceInfo *device = [DeviceInfo defaultManager];
     if (![device.db isEqualToString:SMART_DB]) {
         self.nameLabel.text = @"admin";
-        self.segues =@[@"iphoneDefault",@"iphoneRecordSegue",@"TYiphone",@"iphoneFavorSegue",@"iphoneMsgSegue"];
+        self.segues =@[@"iphoneDefault",@"iphoneRecordSegue",@"TYiphone",@"iphoneFavorSegue",@"iphoneMsgSegue",@"iphoneSettingSegue"];
     }else{
         self.nameLabel.text = [[NSUserDefaults  standardUserDefaults] objectForKey:@"UserName"];
-        self.segues = @[@"iphoneDefault",@"iphoneRecordSegue",@"iphoneEngerSegue",@"iphoneFavorSegue",@"iphoneMsgSegue"];
+        self.segues = @[@"iphoneDefault",@"iphoneRecordSegue",@"iphoneEngerSegue",@"iphoneFavorSegue",@"iphoneMsgSegue",@"iphoneSettingSegue"];
     }
     
  
