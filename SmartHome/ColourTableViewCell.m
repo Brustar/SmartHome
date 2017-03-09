@@ -20,4 +20,9 @@
 }
 
 
+- (IBAction)lightSwitchChanged:(id)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(lightSwitchValueChanged: deviceID:)]) {
+        [_delegate lightSwitchValueChanged:sender deviceID:self.deviceID];
+    }
+}
 @end

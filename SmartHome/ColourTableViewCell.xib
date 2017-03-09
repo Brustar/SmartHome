@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A2323a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVU-Sw-ydI">
-                        <rect key="frame" x="10" y="3" width="42" height="38"/>
+                        <rect key="frame" x="10" y="3" width="42" height="37"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -28,26 +29,29 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfx-xC-0uV">
-                        <rect key="frame" x="260" y="5" width="45" height="34"/>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="prW-14-hFP">
+                        <rect key="frame" x="267" y="6" width="51" height="31"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                        <connections>
+                            <action selector="lightSwitchChanged:" destination="KGk-i7-Jjw" eventType="valueChanged" id="poM-0J-Vth"/>
+                        </connections>
+                    </switch>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cfx-xC-0uV">
+                        <rect key="frame" x="219" y="4" width="45" height="34"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.66666666669999997" green="0.23142895769999999" blue="0.4680278819" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="45" id="bhc-1W-766"/>
-                        </constraints>
                     </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="OVU-Sw-ydI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="5Tb-PR-Owl"/>
-                    <constraint firstItem="cfx-xC-0uV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="9Pi-IV-HRi"/>
-                    <constraint firstAttribute="bottom" secondItem="cfx-xC-0uV" secondAttribute="bottom" constant="5" id="GDb-9A-hm9"/>
                     <constraint firstItem="OVU-Sw-ydI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="RUF-Mo-D6X"/>
-                    <constraint firstAttribute="trailing" secondItem="cfx-xC-0uV" secondAttribute="trailing" constant="15" id="YIj-Li-hzK"/>
                     <constraint firstAttribute="bottom" secondItem="OVU-Sw-ydI" secondAttribute="bottom" constant="3" id="t7u-1N-LUf"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="colourView" destination="cfx-xC-0uV" id="SxJ-hf-ZM5"/>
                 <outlet property="lable" destination="OVU-Sw-ydI" id="fya-GK-Gs9"/>
+                <outlet property="lightSwitch" destination="prW-14-hFP" id="Lqh-TL-ifB"/>
             </connections>
             <point key="canvasLocation" x="773" y="533"/>
         </tableViewCell>
