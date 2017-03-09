@@ -42,6 +42,7 @@ typedef struct Protocol Proto;
 #define PROTOCOL_RIGHT 0x07
 #define PROTOCOL_UP 0x06
 #define PROTOCOL_DOWN 0x08
+#define PROTOCOL_SURE 0x09
 
 #define PROTOCOL_PREVIOUS 0x17
 #define PROTOCOL_NEXT 0x18

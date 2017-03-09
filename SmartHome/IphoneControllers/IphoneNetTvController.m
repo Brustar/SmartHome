@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIView *touchpad;
 //那6个控制按钮，button的tag值不一样，分别是0 到 5
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UISwitch *NetSwitch;
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
 @property (weak, nonatomic) IBOutlet UISwitch *netTvSwitch;
@@ -44,7 +45,7 @@
 }
 -(void)viewDidLayoutSubviews
 {
-    CGSize scrollSize = CGSizeMake(2 * _scrollView.bounds.size.width, _scrollView.bounds.size.height);
+    CGSize scrollSize = CGSizeMake(1 * _scrollView.bounds.size.width, _scrollView.bounds.size.height);
     if (!CGSizeEqualToSize(_scrollView.contentSize, scrollSize)) {
         _scrollView.contentSize = scrollSize;
     }
@@ -265,7 +266,8 @@
 }
 
 - (IBAction)confromBtn:(UIButton *)sender {
-    NSData *data=[[DeviceInfo defaultManager] confirm:self.deviceid];
+    
+    NSData *data=[[DeviceInfo defaultManager] sweepSURE:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
 }

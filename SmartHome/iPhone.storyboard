@@ -248,6 +248,9 @@
                                             <constraint firstAttribute="width" constant="40" id="FGr-Bx-nG6"/>
                                         </constraints>
                                         <state key="normal" title="确定"/>
+                                        <connections>
+                                            <action selector="confromBtn:" destination="bmw-TJ-Y4G" eventType="touchUpInside" id="dfZ-dE-YYu"/>
+                                        </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tv_up" translatesAutoresizingMaskIntoConstraints="NO" id="U8A-jC-CkH">
                                         <rect key="frame" x="95" y="0.0" width="10" height="80"/>
@@ -415,6 +418,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="dvdSwitch" destination="y6t-uD-exG" id="Fxm-MI-TEW"/>
                         <outlet property="touchPad" destination="lGD-sT-qSY" id="eaI-Zj-J7q"/>
                         <outlet property="voiceStrongImg" destination="H0H-Gh-nOk" id="OIu-St-YWN"/>
                         <outlet property="voiceWeakImg" destination="yIR-a2-Ir5" id="Ttw-wh-iyo"/>
@@ -3363,6 +3367,7 @@
                         <outlet property="scrollView" destination="oQ2-xE-V8b" id="f8s-gM-FCV"/>
                         <outlet property="touchpad" destination="fWw-0R-Myy" id="JqF-a4-Dgf"/>
                         <outlet property="tvLogoCollectionView" destination="UiQ-h6-Ahm" id="fDz-eb-2t7"/>
+                        <outlet property="tvSwitch" destination="VCe-Mt-fVb" id="10Q-qy-z0M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4DV-ro-34x" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4440,6 +4445,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="netTvSwitch" destination="pCg-Qx-Zyg" id="iDv-W1-Hqb"/>
                         <outlet property="pageControl" destination="o6z-qk-f0M" id="IO9-Gm-0us"/>
                         <outlet property="pickerView" destination="f0y-EB-CN6" id="zIj-er-UIb"/>
                         <outlet property="scrollView" destination="XYJ-9C-6Gw" id="pYj-ik-mQC"/>

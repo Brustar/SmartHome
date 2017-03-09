@@ -127,6 +127,12 @@
     
     [SCWaveAnimationView waveAnimationAtDirection:recognizer.direction view:self.touchPad];
 }
+- (IBAction)confromBtn:(UIButton *)sender {
+    
+    NSData *data=[[DeviceInfo defaultManager] sweepSURE:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
 
 -(IBAction)save:(id)sender
 {
