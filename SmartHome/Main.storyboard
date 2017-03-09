@@ -5274,7 +5274,14 @@
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XU6-KE-sbu">
                                 <rect key="frame" x="100" y="98" width="400" height="140"/>
                                 <subviews>
-                                    <slider opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="D33-xY-Acr">
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="shJ-SX-wg9">
+                                        <rect key="frame" x="350" y="10" width="51" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="musicSwitchChanged:" destination="ozV-GP-Vrh" eventType="valueChanged" id="7fB-J7-Lf5"/>
+                                        </connections>
+                                    </switch>
+                                    <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="D33-xY-Acr">
                                         <rect key="frame" x="141" y="101" width="112" height="31"/>
                                     </slider>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 歌曲名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOB-rg-gAp">
@@ -5286,17 +5293,18 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_weak" translatesAutoresizingMaskIntoConstraints="NO" id="Zsw-Vy-cRx">
                                         <rect key="frame" x="100" y="100" width="33" height="32"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I8z-Et-kfD">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I8z-Et-kfD">
                                         <rect key="frame" x="185" y="80" width="24" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iVz-O0-GMu">
-                                        <rect key="frame" x="50" y="10" width="75" height="50"/>
+                                        <rect key="frame" x="50" y="10" width="275" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j3w-lI-zyR">
                                                 <rect key="frame" x="0.0" y="0.0" width="86" height="32"/>
+
                                                 <state key="normal" image="last"/>
                                                 <connections>
                                                     <action selector="previousMusic:" destination="ozV-GP-Vrh" eventType="touchUpInside" id="CJW-a9-Egf"/>
@@ -5310,7 +5318,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Atg-G0-8iY">
-                                                <rect key="frame" x="-11" y="0.0" width="86" height="32"/>
+                                                <rect key="frame" x="189" y="0.0" width="86" height="32"/>
                                                 <state key="normal" title="Button" image="next"/>
                                                 <connections>
                                                     <action selector="nextMusic:" destination="ozV-GP-Vrh" eventType="touchUpInside" id="mdH-G7-rNv"/>
@@ -5341,7 +5349,7 @@
                                             <constraint firstItem="Atg-G0-8iY" firstAttribute="width" secondItem="j3w-lI-zyR" secondAttribute="width" id="yDW-hz-w8U"/>
                                         </constraints>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="voice_strong" translatesAutoresizingMaskIntoConstraints="NO" id="G8B-ww-PY9">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="voice_strong" translatesAutoresizingMaskIntoConstraints="NO" id="G8B-ww-PY9">
                                         <rect key="frame" x="261" y="100" width="39" height="32"/>
                                     </imageView>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EBc-9X-X8r">
@@ -5387,11 +5395,11 @@
                         <color key="backgroundColor" red="0.90309139530000004" green="0.90309139530000004" blue="0.90309139530000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="XU6-KE-sbu" firstAttribute="centerX" secondItem="R1c-YG-dl6" secondAttribute="centerX" id="GtM-kN-kp2"/>
-                            <constraint firstItem="XU6-KE-sbu" firstAttribute="leading" secondItem="R1c-YG-dl6" secondAttribute="leading" constant="100" id="OQg-q1-GB9"/>
+                            <constraint firstItem="XU6-KE-sbu" firstAttribute="leading" secondItem="R1c-YG-dl6" secondAttribute="leading" id="OQg-q1-GB9"/>
                             <constraint firstItem="XU6-KE-sbu" firstAttribute="top" secondItem="R1c-YG-dl6" secondAttribute="top" constant="80" id="UDG-Cp-dKD"/>
-                            <constraint firstAttribute="trailing" secondItem="XU6-KE-sbu" secondAttribute="trailing" constant="100" id="VNz-sc-3do"/>
+                            <constraint firstAttribute="trailing" secondItem="XU6-KE-sbu" secondAttribute="trailing" id="VNz-sc-3do"/>
                             <constraint firstItem="XU6-KE-sbu" firstAttribute="centerX" secondItem="R1c-YG-dl6" secondAttribute="centerX" id="hED-ot-A80"/>
-                            <constraint firstItem="XU6-KE-sbu" firstAttribute="top" secondItem="CME-NZ-veb" secondAttribute="bottom" constant="34" id="vsg-Dy-7Ty"/>
+                            <constraint firstItem="XU6-KE-sbu" firstAttribute="top" secondItem="CME-NZ-veb" secondAttribute="bottom" id="vsg-Dy-7Ty"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -5402,6 +5410,7 @@
                     </view>
                     <connections>
                         <outlet property="lastBtn" destination="j3w-lI-zyR" id="dah-fm-drN"/>
+                        <outlet property="musicSwitch" destination="shJ-SX-wg9" id="Bxs-pB-1Sv"/>
                         <outlet property="nextBtn" destination="Atg-G0-8iY" id="qu5-nc-b1h"/>
                         <outlet property="playBtn" destination="egm-GI-VGq" id="6h5-CA-Ml9"/>
                         <outlet property="songTitle" destination="nOB-rg-gAp" id="nwh-dV-Mdt"/>
@@ -6304,14 +6313,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="灯" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNW-jA-Rrh">
-                                                    <rect key="frame" x="73.5" y="0.0" width="216.5" height="18"/>
+                                                    <rect key="frame" x="73.5" y="0.0" width="216" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="s4b-gl-mse">
-                                                    <rect key="frame" x="41" y="19" width="208" height="31"/>
+                                                    <rect key="frame" x="41" y="19" width="207.5" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                 </slider>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="u48" translatesAutoresizingMaskIntoConstraints="NO" id="ppv-nv-g1V">
@@ -6319,11 +6328,11 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="u50" translatesAutoresizingMaskIntoConstraints="NO" id="WXh-LN-Q0l">
-                                                    <rect key="frame" x="256.5" y="17" width="41" height="34"/>
+                                                    <rect key="frame" x="256.5" y="17" width="40.5" height="34"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                                 </imageView>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="iod-5A-gL6">
-                                                    <rect key="frame" x="303" y="18" width="58.5" height="31"/>
+                                                    <rect key="frame" x="302.5" y="18" width="58.5" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                                 </switch>
                                             </subviews>

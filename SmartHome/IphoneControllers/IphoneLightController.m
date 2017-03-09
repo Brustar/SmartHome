@@ -20,7 +20,7 @@
 #import "ColourTableViewCell.h"
 #import "HRSampleColorPickerViewController.h"
 
-@interface IphoneLightController ()<UITableViewDelegate,UITableViewDataSource,HRColorPickerViewControllerDelegate>
+@interface IphoneLightController ()<UITableViewDelegate,UITableViewDataSource,HRColorPickerViewControllerDelegate, ColourTableViewCellDelegate>
 @property (strong, nonatomic) IBOutlet ColourTableViewCell *cell;
 @property (nonatomic,strong) NSArray * roomArrs;
 @property (nonatomic,strong) NSArray * lightArrs;
@@ -95,10 +95,14 @@
         return cell;
 
     }
-//        self.cell.lable.text = @"自定义颜色";
+    
+    //调色灯
+    
            self.cell = [tableView dequeueReusableCellWithIdentifier:@"ColourTableViewCell" forIndexPath:indexPath];
        Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[indexPath.row] intValue]];
         self.cell.lable.text = device.name;
+        self.cell.deviceID = device.eID;
+        self.cell.delegate = self;
     
         UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeColor:)];
         self.cell.colourView.userInteractionEnabled=YES;
@@ -107,6 +111,19 @@
         return self.cell;
     
 }
+
+#pragma mark - ColourTableViewCellDelegate
+- (void)lightSwitchValueChanged:(UISwitch *)lightSwitch deviceID:(int)deviceID {
+    NSString *devID = [NSString stringWithFormat:@"%d", deviceID];
+   
+        //发指令
+        NSData *data = [[DeviceInfo defaultManager] toogleLight:lightSwitch.on deviceID:devID];
+        NSLog(@"color light switch data:%@", data);
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    
+}
+
 
 -(IBAction)changeColor:(id)sender
 {

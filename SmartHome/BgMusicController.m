@@ -275,4 +275,20 @@
     }
 }
 
+- (IBAction)musicSwitchChanged:(id)sender {
+    UISwitch *musicSwitch = (UISwitch *)sender;
+    if (musicSwitch.on) {
+        //开指令
+        NSData *data=[[DeviceInfo defaultManager] open:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+        
+    }else {
+        //关指令
+        NSData *data=[[DeviceInfo defaultManager] close:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
+    
+}
 @end

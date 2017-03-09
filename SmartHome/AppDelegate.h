@@ -9,5 +9,8 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, strong) UIButton *deviceBtn;
+@property (nonatomic, strong) UIButton *homeBtn;
+@property (nonatomic, strong) UIButton *sceneBtn;
 
 @end
