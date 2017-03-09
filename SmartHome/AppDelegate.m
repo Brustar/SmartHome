@@ -102,7 +102,7 @@
         [window addSubview:aView];
         
         
-    }else{
+    }else {
         //已登录时
         if ([[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]) {
             ECloudTabBarController *ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ECloudTabBarController"];

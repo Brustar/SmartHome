@@ -38,7 +38,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.params=@[@[@"制热",@"制冷",@"除湿",@"送风"],@[@"向上",@"向下"],@[@"高速",@"中速",@"低速",@"自动"],@[@"0.5H",@"1H",@"2H",@"3H"]];
+    self.params=@[@[@"制热",@"制冷",@"送风",@"除湿"],@[@"向上",@"向下"],@[@"高速",@"中速",@"低速",@"自动"],@[@"0.5H",@"1H",@"2H",@"3H"]];
     self.paramView.scrollEnabled=NO;
     self.paramView.delegate = self;
     self.paramView.dataSource = self;

@@ -29,13 +29,13 @@
 
 @class HRColorPickerView;
 @protocol HRColorPickerViewControllerDelegate
-- (void)setSelectedColor:(UIColor *)color;
+- (void)setSelectedColor:(UIColor *)color indexPathRow:(NSInteger)row;
 @end
 
 @interface HRSampleColorPickerViewController : UIViewController
 
 @property (weak) id <HRColorPickerViewControllerDelegate> delegate;
 
-- (id)initWithColor:(UIColor *)defaultColor fullColor:(BOOL)fullColor;
+- (id)initWithColor:(UIColor *)defaultColor fullColor:(BOOL)fullColor indexPathRow:(NSInteger )row;
 
 @end
