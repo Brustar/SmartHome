@@ -98,7 +98,7 @@
     
     if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
-        [self performSegueWithIdentifier:@"iphoneTabBar" sender:self];
+        [self performSegueWithIdentifier:@"iphoneMainController" sender:self];
     }else{
         [self performSegueWithIdentifier:@"gotoMainController" sender:self];
     }
