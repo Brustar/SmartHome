@@ -855,7 +855,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Aho-98-0G3">
-                                <rect key="frame" x="10" y="114" width="355" height="553"/>
+                                <rect key="frame" x="10" y="114" width="355" height="353"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="4Pz-do-UQt">
                                     <size key="itemSize" width="133" height="133"/>
@@ -951,7 +951,7 @@
                             <constraint firstItem="Hbp-wY-ZBG" firstAttribute="leading" secondItem="S0x-sS-gOT" secondAttribute="leading" id="BAB-Bn-Oyv"/>
                             <constraint firstItem="Aho-98-0G3" firstAttribute="leading" secondItem="S0x-sS-gOT" secondAttribute="leading" constant="10" id="HIx-0i-mKc"/>
                             <constraint firstAttribute="trailing" secondItem="Hbp-wY-ZBG" secondAttribute="trailing" id="IEH-9D-fmp"/>
-                            <constraint firstItem="QbR-vL-uYg" firstAttribute="top" secondItem="Aho-98-0G3" secondAttribute="bottom" id="Xr9-JL-rdu"/>
+                            <constraint firstItem="QbR-vL-uYg" firstAttribute="top" secondItem="Aho-98-0G3" secondAttribute="bottom" constant="200" id="Xr9-JL-rdu"/>
                             <constraint firstItem="ueV-XT-5wh" firstAttribute="leading" secondItem="S0x-sS-gOT" secondAttribute="leading" id="abt-ne-SlE"/>
                             <constraint firstItem="ueV-XT-5wh" firstAttribute="top" secondItem="EeW-N4-5gV" secondAttribute="bottom" id="i6k-hX-8O9"/>
                             <constraint firstAttribute="trailing" secondItem="Aho-98-0G3" secondAttribute="trailing" constant="10" id="pWw-dL-zhh"/>
@@ -989,7 +989,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U47-Xi-iD1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2081.5" y="-252.5"/>
+            <point key="canvasLocation" x="2271" y="-299"/>
         </scene>
         <!--添加场景定时-->
         <scene sceneID="kNF-ul-FTy">
@@ -2985,6 +2985,9 @@
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <state key="normal" title="确定"/>
+                                                        <connections>
+                                                            <action selector="confromBtn:" destination="4f1-Ce-GRA" eventType="touchUpInside" id="sAz-RC-ZHM"/>
+                                                        </connections>
                                                     </button>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tv_up" translatesAutoresizingMaskIntoConstraints="NO" id="Ezk-e1-Q3c">
                                                         <rect key="frame" x="85" y="0.0" width="10" height="70"/>
@@ -4256,7 +4259,7 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="TVLogoCell" reuseIdentifier="TVLogoCell" id="9Ds-as-Xlg" customClass="TVLogoCell">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="TVLogoCell" reuseIdentifier="" id="9Ds-as-Xlg">
                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -5112,7 +5115,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iea-pJ-dKq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1789" y="-2499"/>
+            <point key="canvasLocation" x="1913" y="-2748"/>
         </scene>
         <!--3D-touch-->
         <scene sceneID="rtx-Yc-ATX">
@@ -6106,10 +6109,10 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="WeN-Qz-0Az"/>
         <segue reference="qN8-z6-Gb7"/>
-        <segue reference="aTH-RA-7NZ"/>
-        <segue reference="Uo6-og-hnM"/>
+        <segue reference="lPv-wZ-EAG"/>
+        <segue reference="WeN-Qz-0Az"/>
         <segue reference="YfK-Z8-Yeo"/>
+        <segue reference="Uo6-og-hnM"/>
     </inferredMetricsTieBreakers>
 </document>

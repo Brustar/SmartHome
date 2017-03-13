@@ -28,8 +28,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.titleArr = @[@"家庭",@"场景",@"设备",@"实景",@"我的"];
-    self.titleImageArr = @[@"family-Mysetting",@"scene-MySetting",@"device_MySetting",@"live",@"me-Mysetting"];
+    //,@"实景" ,@"live"
+    self.titleArr = @[@"家庭",@"场景",@"设备",@"我的"];
+    self.titleImageArr = @[@"family-Mysetting",@"scene-MySetting",@"device_MySetting",@"me-Mysetting"];
     self.tableView.tableFooterView = [UIView new];
     self.tableView.tableHeaderView = self.headView;
     [self setupChilderController];
@@ -61,7 +62,7 @@
     [self setupVc:deviceList title:@"设备"];
     
     IphoneRealSceneController *realVC = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"IphoneRealSceneController"];
-    [self setupVc:realVC title:@"实景"];
+//    [self setupVc:realVC title:@"实景"];
     
     IphoneProfileController *profireList = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"IphoneProfileController"];
     [self setupVc:profireList title:@"我的"];

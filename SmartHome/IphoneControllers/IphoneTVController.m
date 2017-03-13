@@ -126,7 +126,7 @@
 
 -(void)viewDidLayoutSubviews
 {
-    CGSize scrollSize = CGSizeMake(2 * _scrollView.bounds.size.width, _scrollView.bounds.size.height);
+    CGSize scrollSize = CGSizeMake(1 * _scrollView.bounds.size.width, _scrollView.bounds.size.height);
     if (!CGSizeEqualToSize(_scrollView.contentSize, scrollSize)) {
         _scrollView.contentSize = scrollSize;
     }
@@ -214,6 +214,12 @@
     [SCWaveAnimationView waveAnimationAtDirection:recognizer.direction view:self.touchpad];
 }
 
+- (IBAction)confromBtn:(UIButton *)sender {
+    
+    NSData *data=[[DeviceInfo defaultManager] sweepSURE:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
 
 -(IBAction)Iphonesave:(id)sender
 {
