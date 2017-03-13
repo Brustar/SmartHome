@@ -158,10 +158,13 @@
             _deviceBtn.selected = NO;
             _sceneBtn.selected = NO;
             NSLog(@"HOME页面");
+             [NC postNotificationName:@"FamilyVC" object:@(0)];
         }else if ([btn.titleLabel.text isEqualToString:@"场景"]) {
             _deviceBtn.selected = NO;
             _homeBtn.selected = NO;
             NSLog(@"场景页面");
+            [NC postNotificationName:@"SceneVC" object:@(1)];
+
         }
         
         //跳转页面

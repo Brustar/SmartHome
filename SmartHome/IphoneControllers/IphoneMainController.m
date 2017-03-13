@@ -42,6 +42,8 @@
 
 - (void)addNotifications {
     [NC addObserver:self selector:@selector(selectVC:) name:@"SelectVC" object:nil];
+     [NC addObserver:self selector:@selector(selectVC:) name:@"FamilyVC" object:nil];
+     [NC addObserver:self selector:@selector(selectVC:) name:@"SceneVC" object:nil];
 }
 
 - (void)removeNotifications {
