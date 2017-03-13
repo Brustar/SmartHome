@@ -105,6 +105,7 @@
         self.cell.delegate = self;
     
         UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeColor:)];
+        self.cell.colourView.tag = indexPath.row;
         self.cell.colourView.userInteractionEnabled=YES;
         [self.cell.colourView addGestureRecognizer:singleTap];
         self.cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -125,14 +126,20 @@
 }
 
 
--(IBAction)changeColor:(id)sender
+- (void)changeColor:(id)sender
 {
-    HRSampleColorPickerViewController *controller= [[HRSampleColorPickerViewController alloc] initWithColor:self.cell.colourView.backgroundColor fullColor:NO];
+    UIView *colourView = (UIView *)sender;
+    
+    HRSampleColorPickerViewController *controller= [[HRSampleColorPickerViewController alloc] initWithColor:self.cell.colourView.backgroundColor fullColor:NO indexPathRow:colourView.tag];
     controller.delegate = self;
     [self.navigationController pushViewController:controller animated:YES];
 }
-- (void)setSelectedColor:(UIColor *)color
+- (void)setSelectedColor:(UIColor *)color indexPathRow:(NSInteger)row
 {
+    //Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[row] intValue]];
+    //设置数据库里的色灯的色值
+    
+    
     self.cell.colourView.backgroundColor = color;
     [self save:nil];
 }

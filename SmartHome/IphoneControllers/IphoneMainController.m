@@ -37,9 +37,21 @@
 //    self.tableView.backgroundColor = [UIColor lightGrayColor];
     [self.view sendSubviewToBack:self.tableView];
     self.tableView.separatorStyle = NO;
-  
+    [self addNotifications];
 }
 
+- (void)addNotifications {
+    [NC addObserver:self selector:@selector(selectVC:) name:@"SelectVC" object:nil];
+}
+
+- (void)removeNotifications {
+    [NC removeObserver:self];
+}
+
+- (void)selectVC:(NSNotification *)noti {
+    NSNumber *index = (NSNumber *)noti.object;
+    [self selectViewController:index.integerValue];
+}
 
 - (UIButton *)cover {
     if (_cover == nil) {
@@ -165,9 +177,14 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self selectViewController:indexPath.row];
+}
+
+- (void)selectViewController:(NSInteger)index {
+    
     [self.selectController.view removeFromSuperview];
     
-    UIViewController *showViewController = self.childViewControllers[indexPath.row];
+    UIViewController *showViewController = self.childViewControllers[index];
     
     [self.view addSubview:showViewController.view];
     
@@ -179,6 +196,11 @@
     
     [self coverOnClick:self.cover];
 }
+
+- (void)dealloc {
+    [self removeNotifications];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

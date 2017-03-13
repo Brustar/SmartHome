@@ -35,15 +35,17 @@
     HRColorPickerView *colorPickerView;
     UIColor *_color;
     BOOL _fullColor;
+    NSInteger _indexPathRow;//第几行的色灯
 }
 
 @synthesize delegate;
 
-- (id)initWithColor:(UIColor *)defaultColor fullColor:(BOOL)fullColor {
+- (id)initWithColor:(UIColor *)defaultColor fullColor:(BOOL)fullColor indexPathRow:(NSInteger )row {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
         _color = defaultColor;
         _fullColor = fullColor;
+        _indexPathRow = row;
     }
     return self;
 }
@@ -103,7 +105,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     if (self.delegate) {
-        [self.delegate setSelectedColor:colorPickerView.color];
+        [self.delegate setSelectedColor:colorPickerView.color indexPathRow:_indexPathRow];
     }
 }
 

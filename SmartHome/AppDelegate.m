@@ -45,64 +45,22 @@
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-        NSString *UIname=@"main";
 
         //已登录时,自动登录
         if ([[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]) {
-            UIname=@"IphoneMainController";
-//
-        }
-        UIViewController* viewcontroller = [secondStoryBoard instantiateViewControllerWithIdentifier:UIname];
-       self.window.rootViewController = viewcontroller;
-        [self.window makeKeyAndVisible];
-        
-        
-        // 当前顶层窗口
-        UIWindow *window = [[UIApplication sharedApplication].windows lastObject];
-        
-        CGFloat cusTabbarHeight = 80.0;
-        UIView *aView = [[UIView alloc] initWithFrame:CGRectMake(0, window.bounds.size.height-cusTabbarHeight, window.bounds.size.width, cusTabbarHeight)];
-        aView.backgroundColor = [UIColor grayColor];
-        
-        //三个按钮（设备，HOME，场景）
-        CGFloat gap = 20.0f;
-        NSInteger n = 3;
-        CGFloat btnWidth = (aView.frame.size.width-gap*2)/n;
-        CGFloat btnHeight = 50.0f;
-        
-        for (int i = 0; i < n; i++) {
-            UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(gap +i*btnWidth, (cusTabbarHeight-btnHeight)/2, btnWidth, btnHeight)];
-            btn.layer.cornerRadius = 4.0;
-            btn.layer.masksToBounds = YES;
-            [btn setBackgroundImage:[self createImageWithColor:[UIColor grayColor]] forState:UIControlStateNormal];
-            [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [btn setBackgroundImage:[self createImageWithColor:[UIColor blueColor]] forState:UIControlStateSelected];
-            [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-            [btn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
-            if (i==0) {
-                [btn setTitle:@"设备" forState:UIControlStateNormal];
-                btn.selected = NO;
-                _deviceBtn = btn;
-            }else if (i == 1) {
-                [btn setTitle:@"HOME" forState:UIControlStateNormal];
-                btn.selected = YES;
-                _homeBtn = btn;
-            }else if (i == 2) {
-                [btn setTitle:@"场景" forState:UIControlStateNormal];
-                btn.selected = NO;
-                _sceneBtn = btn;
-            }
-            
-            [aView addSubview:btn];
+            IphoneMainController *vc = [secondStoryBoard instantiateViewControllerWithIdentifier:@"IphoneMainController"];
+            self.window.rootViewController = vc;
+
+        }else {
+            UIViewController *vc = [secondStoryBoard instantiateViewControllerWithIdentifier:@"main"];
+            self.window.rootViewController = vc;
         }
         
+         [self.window makeKeyAndVisible];
         
-        aView.hidden = YES;
-        // 添加到窗口
-        [window addSubview:aView];
+        [self setupTabbarView];
         
-        
-    }else{
+    }else {
         //已登录时
         if ([[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]) {
             ECloudTabBarController *ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ECloudTabBarController"];
@@ -131,7 +89,52 @@
     return YES;
 }
 
-- (UIImage*) createImageWithColor:(UIColor*) color
+- (void)setupTabbarView {
+    // 当前顶层窗口
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    
+    CGFloat cusTabbarHeight = 80.0;
+    UIView *aView = [[UIView alloc] initWithFrame:CGRectMake(0, window.bounds.size.height-cusTabbarHeight, window.bounds.size.width, cusTabbarHeight)];
+    aView.backgroundColor = [UIColor grayColor];
+    
+    //三个按钮（设备，HOME，场景）
+    CGFloat gap = 20.0f;
+    NSInteger n = 3;
+    CGFloat btnWidth = (aView.frame.size.width-gap*2)/n;
+    CGFloat btnHeight = 50.0f;
+    
+    for (int i = 0; i < n; i++) {
+        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(gap +i*btnWidth, (cusTabbarHeight-btnHeight)/2, btnWidth, btnHeight)];
+        btn.layer.cornerRadius = 4.0;
+        btn.layer.masksToBounds = YES;
+        [btn setBackgroundImage:[self createImageWithColor:[UIColor grayColor]] forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[self createImageWithColor:[UIColor blueColor]] forState:UIControlStateSelected];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+        [btn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        if (i==0) {
+            [btn setTitle:@"设备" forState:UIControlStateNormal];
+            btn.selected = NO;
+            _deviceBtn = btn;
+        }else if (i == 1) {
+            [btn setTitle:@"HOME" forState:UIControlStateNormal];
+            btn.selected = YES;
+            _homeBtn = btn;
+        }else if (i == 2) {
+            [btn setTitle:@"场景" forState:UIControlStateNormal];
+            btn.selected = NO;
+            _sceneBtn = btn;
+        }
+        
+        [aView addSubview:btn];
+    }
+    [window addSubview:aView];
+    
+    //aView.hidden = YES;
+    
+}
+
+- (UIImage*)createImageWithColor:(UIColor *)color
 {
     CGRect rect=CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
     UIGraphicsBeginImageContext(rect.size);
@@ -146,19 +149,20 @@
 - (void)btnClicked:(UIButton *)btn {
     if (!btn.selected) {
         btn.selected = YES;
-       if ([btn.titleLabel.text isEqualToString:@"设备"]) {
-        _homeBtn.selected = NO;
-        _sceneBtn.selected = NO;
-        NSLog(@"设备页面");
-       }else if ([btn.titleLabel.text isEqualToString:@"HOME"]) {
-           _deviceBtn.selected = NO;
-           _sceneBtn.selected = NO;
-        NSLog(@"HOME页面");
-       }else if ([btn.titleLabel.text isEqualToString:@"场景"]) {
-           _deviceBtn.selected = NO;
-           _homeBtn.selected = NO;
-        NSLog(@"场景页面");
-       }
+        if ([btn.titleLabel.text isEqualToString:@"设备"]) {
+            _homeBtn.selected = NO;
+            _sceneBtn.selected = NO;
+            NSLog(@"设备页面");
+            [NC postNotificationName:@"SelectVC" object:@(2)];
+        }else if ([btn.titleLabel.text isEqualToString:@"HOME"]) {
+            _deviceBtn.selected = NO;
+            _sceneBtn.selected = NO;
+            NSLog(@"HOME页面");
+        }else if ([btn.titleLabel.text isEqualToString:@"场景"]) {
+            _deviceBtn.selected = NO;
+            _homeBtn.selected = NO;
+            NSLog(@"场景页面");
+        }
         
         //跳转页面
         
