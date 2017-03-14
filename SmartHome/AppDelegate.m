@@ -130,7 +130,7 @@
     }
     [window addSubview:aView];
     
-    //aView.hidden = YES;
+    aView.hidden = YES;
     
 }
 
