@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A2323a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="chj-yx-pDz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="chj-yx-pDz">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -808,31 +808,31 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="7fi-Ur-C1D">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="102"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Bn-eZ-LCL">
-                                            <rect key="frame" x="0.0" y="101" width="375" height="1"/>
+                                            <rect key="frame" x="0.0" y="179" width="375" height="1"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="1" id="XaM-1Y-apz"/>
                                             </constraints>
                                         </view>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="urp-Zr-oHH">
-                                            <rect key="frame" x="20" y="2" width="100" height="100"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="urp-Zr-oHH">
+                                            <rect key="frame" x="80" y="40" width="100" height="99"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="100" id="pUV-I8-6Hg"/>
+                                                <constraint firstAttribute="width" constant="100" id="YUY-0h-EJJ"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
-                                        <constraint firstItem="urp-Zr-oHH" firstAttribute="top" secondItem="7fi-Ur-C1D" secondAttribute="top" constant="2" id="1t1-OJ-g2m"/>
+                                        <constraint firstItem="urp-Zr-oHH" firstAttribute="leading" secondItem="7fi-Ur-C1D" secondAttribute="leading" constant="80" id="4Yc-AY-fFk"/>
                                         <constraint firstItem="7Bn-eZ-LCL" firstAttribute="leading" secondItem="7fi-Ur-C1D" secondAttribute="leading" id="Cs0-GC-Izv"/>
                                         <constraint firstAttribute="trailing" secondItem="7Bn-eZ-LCL" secondAttribute="trailing" id="GfI-CY-peA"/>
                                         <constraint firstAttribute="bottom" secondItem="7Bn-eZ-LCL" secondAttribute="bottom" id="OxJ-LU-ryH"/>
-                                        <constraint firstAttribute="bottom" secondItem="urp-Zr-oHH" secondAttribute="bottom" id="SiU-Kg-3Lb"/>
-                                        <constraint firstItem="urp-Zr-oHH" firstAttribute="leading" secondItem="7fi-Ur-C1D" secondAttribute="leading" constant="20" id="UIu-PD-4ZX"/>
+                                        <constraint firstItem="7Bn-eZ-LCL" firstAttribute="top" secondItem="urp-Zr-oHH" secondAttribute="bottom" constant="40" id="RTX-0I-BMX"/>
+                                        <constraint firstItem="urp-Zr-oHH" firstAttribute="top" secondItem="7fi-Ur-C1D" secondAttribute="top" constant="40" id="zX7-mw-LKL"/>
                                     </constraints>
                                 </view>
                                 <connections>
@@ -851,13 +851,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="uqb-rH-JlL"/>
                     <connections>
+                        <outlet property="headImageView" destination="urp-Zr-oHH" id="XT6-qs-skS"/>
                         <outlet property="headView" destination="7fi-Ur-C1D" id="fKR-LT-Gnd"/>
                         <outlet property="tableView" destination="61Y-v8-Oyq" id="R9E-ZB-BHj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Bc-RO-TA4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1140" y="-378"/>
+            <point key="canvasLocation" x="1139.5" y="-378.5"/>
         </scene>
         <!--场景列表-->
         <scene sceneID="XQD-mv-Dgi">
@@ -879,7 +880,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Aho-98-0G3">
-                                <rect key="frame" x="10" y="114" width="355" height="553"/>
+                                <rect key="frame" x="10" y="114" width="355" height="353"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="4Pz-do-UQt">
                                     <size key="itemSize" width="133" height="133"/>
@@ -975,7 +976,7 @@
                             <constraint firstItem="Hbp-wY-ZBG" firstAttribute="leading" secondItem="S0x-sS-gOT" secondAttribute="leading" id="BAB-Bn-Oyv"/>
                             <constraint firstItem="Aho-98-0G3" firstAttribute="leading" secondItem="S0x-sS-gOT" secondAttribute="leading" constant="10" id="HIx-0i-mKc"/>
                             <constraint firstAttribute="trailing" secondItem="Hbp-wY-ZBG" secondAttribute="trailing" id="IEH-9D-fmp"/>
-                            <constraint firstItem="QbR-vL-uYg" firstAttribute="top" secondItem="Aho-98-0G3" secondAttribute="bottom" id="Xr9-JL-rdu"/>
+                            <constraint firstItem="QbR-vL-uYg" firstAttribute="top" secondItem="Aho-98-0G3" secondAttribute="bottom" constant="200" id="Xr9-JL-rdu"/>
                             <constraint firstItem="ueV-XT-5wh" firstAttribute="leading" secondItem="S0x-sS-gOT" secondAttribute="leading" id="abt-ne-SlE"/>
                             <constraint firstItem="ueV-XT-5wh" firstAttribute="top" secondItem="EeW-N4-5gV" secondAttribute="bottom" id="i6k-hX-8O9"/>
                             <constraint firstAttribute="trailing" secondItem="Aho-98-0G3" secondAttribute="trailing" constant="10" id="pWw-dL-zhh"/>
@@ -1013,7 +1014,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U47-Xi-iD1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2081.5" y="-252.5"/>
+            <point key="canvasLocation" x="2271" y="-299"/>
         </scene>
         <!--添加场景定时-->
         <scene sceneID="kNF-ul-FTy">
@@ -1851,7 +1852,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U4T-Wr-vpj">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="yGe-XQ-WNx" id="BBU-2j-rf7"/>
@@ -3009,6 +3010,9 @@
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <state key="normal" title="确定"/>
+                                                        <connections>
+                                                            <action selector="confromBtn:" destination="4f1-Ce-GRA" eventType="touchUpInside" id="sAz-RC-ZHM"/>
+                                                        </connections>
                                                     </button>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tv_up" translatesAutoresizingMaskIntoConstraints="NO" id="Ezk-e1-Q3c">
                                                         <rect key="frame" x="85" y="0.0" width="10" height="70"/>
@@ -4280,7 +4284,7 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="TVLogoCell" reuseIdentifier="TVLogoCell" id="9Ds-as-Xlg" customClass="TVLogoCell">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="TVLogoCell" reuseIdentifier="" id="9Ds-as-Xlg">
                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -5152,7 +5156,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iea-pJ-dKq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1789" y="-2499"/>
+            <point key="canvasLocation" x="1913" y="-2748"/>
         </scene>
         <!--3D-touch-->
         <scene sceneID="rtx-Yc-ATX">
@@ -6146,10 +6150,10 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="WeN-Qz-0Az"/>
-        <segue reference="qN8-z6-Gb7"/>
-        <segue reference="aTH-RA-7NZ"/>
         <segue reference="Uo6-og-hnM"/>
+        <segue reference="vWH-k8-ixo"/>
+        <segue reference="aTH-RA-7NZ"/>
+        <segue reference="WeN-Qz-0Az"/>
         <segue reference="b22-0A-WOg"/>
     </inferredMetricsTieBreakers>
 </document>

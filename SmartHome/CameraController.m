@@ -106,6 +106,12 @@
     
     
     [_video seekTime:0.0];
+    if (_video == nil) {
+        UIImage *img = [UIImage imageNamed:@"oldman"];
+        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, img.size.width, img.size.height)];
+        imgView.image = img;
+        [self.view addSubview:imgView];
+    }
     
     [_nextFrameTimer invalidate];
     _nextFrameTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/30

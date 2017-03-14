@@ -248,6 +248,10 @@
         cell.deleteBtn.hidden = YES;
     }
 }
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+    return UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
+}
+
 //添加场景
 - (IBAction)AddSceneBtn:(id)sender {
     
