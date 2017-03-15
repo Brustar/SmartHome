@@ -380,4 +380,15 @@
 }
 */
 
+- (IBAction)homeBtnClicked:(id)sender {
+    NSData * data = [[DeviceInfo defaultManager] NETVhome:_deviceid];
+    SocketManager *sock = [SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
+- (IBAction)returnBtnClicked:(id)sender {
+    NSData * data = [[DeviceInfo defaultManager] back:_deviceid];
+    SocketManager *sock = [SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
 @end
