@@ -123,6 +123,9 @@
 		2E1D4F0F1E727AE4007625BD /* Slider1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E1D4F0E1E727AE4007625BD /* Slider1.png */; };
 		2E5E5FE91DE1F1A9006F0C8F /* IphoneLightController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5E5FE81DE1F1A9006F0C8F /* IphoneLightController.m */; };
 		2E5E5FEC1DE22AC8006F0C8F /* LightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5E5FEB1DE22AC8006F0C8F /* LightCell.m */; };
+		2E5E91EA1E77E4EE008E6098 /* UIViewController+YQSlideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5E91E61E77E4EE008E6098 /* UIViewController+YQSlideMenu.m */; };
+		2E5E91EB1E77E4EE008E6098 /* YQSlideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5E91E81E77E4EE008E6098 /* YQSlideMenuController.m */; };
+		2E5E91EC1E77E4EE008E6098 /* YQSlideMenuImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E5E91E91E77E4EE008E6098 /* YQSlideMenuImages.xcassets */; };
 		2E6328081E03C3C6000D7BE9 /* IphoneSceneAirVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6328071E03C3C6000D7BE9 /* IphoneSceneAirVC.m */; };
 		2E63280B1E03C993000D7BE9 /* IPhoneSceneDVDVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E63280A1E03C993000D7BE9 /* IPhoneSceneDVDVC.m */; };
 		2E63280E1E03CB06000D7BE9 /* IPhoneTVVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E63280D1E03CB06000D7BE9 /* IPhoneTVVC.m */; };
@@ -709,6 +712,11 @@
 		2E5E5FE81DE1F1A9006F0C8F /* IphoneLightController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneLightController.m; sourceTree = "<group>"; };
 		2E5E5FEA1DE22AC8006F0C8F /* LightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightCell.h; sourceTree = "<group>"; };
 		2E5E5FEB1DE22AC8006F0C8F /* LightCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LightCell.m; sourceTree = "<group>"; };
+		2E5E91E51E77E4EE008E6098 /* UIViewController+YQSlideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+YQSlideMenu.h"; sourceTree = "<group>"; };
+		2E5E91E61E77E4EE008E6098 /* UIViewController+YQSlideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+YQSlideMenu.m"; sourceTree = "<group>"; };
+		2E5E91E71E77E4EE008E6098 /* YQSlideMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YQSlideMenuController.h; sourceTree = "<group>"; };
+		2E5E91E81E77E4EE008E6098 /* YQSlideMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YQSlideMenuController.m; sourceTree = "<group>"; };
+		2E5E91E91E77E4EE008E6098 /* YQSlideMenuImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = YQSlideMenuImages.xcassets; sourceTree = "<group>"; };
 		2E6328061E03C3C6000D7BE9 /* IphoneSceneAirVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneSceneAirVC.h; sourceTree = "<group>"; };
 		2E6328071E03C3C6000D7BE9 /* IphoneSceneAirVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneSceneAirVC.m; sourceTree = "<group>"; };
 		2E6328091E03C993000D7BE9 /* IPhoneSceneDVDVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPhoneSceneDVDVC.h; sourceTree = "<group>"; };
@@ -1810,6 +1818,18 @@
 			name = SCWave;
 			sourceTree = "<group>";
 		};
+		2E5E91E41E77E4EE008E6098 /* YQSlideMenuController */ = {
+			isa = PBXGroup;
+			children = (
+				2E5E91E51E77E4EE008E6098 /* UIViewController+YQSlideMenu.h */,
+				2E5E91E61E77E4EE008E6098 /* UIViewController+YQSlideMenu.m */,
+				2E5E91E71E77E4EE008E6098 /* YQSlideMenuController.h */,
+				2E5E91E81E77E4EE008E6098 /* YQSlideMenuController.m */,
+				2E5E91E91E77E4EE008E6098 /* YQSlideMenuImages.xcassets */,
+			);
+			path = YQSlideMenuController;
+			sourceTree = "<group>";
+		};
 		2E801EF91E2621C70039A6D9 /* fixTimer */ = {
 			isa = PBXGroup;
 			children = (
@@ -1875,6 +1895,7 @@
 		2EA897C31E31B8FA002CA904 /* Iphoneimage */ = {
 			isa = PBXGroup;
 			children = (
+				2E5E91E41E77E4EE008E6098 /* YQSlideMenuController */,
 				2E925D931E5E857D008E327B /* engery */,
 				2EA97E5F1E56A347003E0039 /* UIImage+ImageEffects.h */,
 				2EA97E601E56A347003E0039 /* UIImage+ImageEffects.m */,
@@ -2226,6 +2247,7 @@
 				F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */,
 				2E1D4F0B1E727A64007625BD /* Slider4.png in Resources */,
 				2EA897BE1E31B59B002CA904 /* 2@2x.png in Resources */,
+				2E5E91EC1E77E4EE008E6098 /* YQSlideMenuImages.xcassets in Resources */,
 				CDFB9DF21E5DCB4D00BFECCE /* SceneTimerList.plist in Resources */,
 				2EA897C21E31B792002CA904 /* 4@2x.png in Resources */,
 				2EA897C01E31B73F002CA904 /* 3@2x.png in Resources */,
@@ -2545,6 +2567,7 @@
 				F64EF8011D8FDCE7003C1C48 /* IphoneDeviceListController.m in Sources */,
 				2EA99E901E1C9A0100659065 /* MySubEnergyVC.m in Sources */,
 				0F4B49801CFEB13500D93DD2 /* CurtainController.m in Sources */,
+				2E5E91EB1E77E4EE008E6098 /* YQSlideMenuController.m in Sources */,
 				0FCFB3921CF293D800B37DD3 /* Netv.m in Sources */,
 				0FC1197A1D6FE61C001DA19A /* Projector.m in Sources */,
 				F6B91F6F1D100EF700592FB0 /* DVCollectionViewCell.m in Sources */,
@@ -2552,6 +2575,7 @@
 				F67091BC1D93BF300002DDC5 /* WindowSlidingController.m in Sources */,
 				F64407D61DAE3BAD0032BEDF /* IphoneFavorController.m in Sources */,
 				2EC8A5931E372D75002A5042 /* ColourCell.m in Sources */,
+				2E5E91EA1E77E4EE008E6098 /* UIViewController+YQSlideMenu.m in Sources */,
 				0FAF8FFB1CE1D9BC000557BD /* UploadManager.m in Sources */,
 				F6359B001CFFC4DC0035EB31 /* ColourTableViewCell.m in Sources */,
 				0FA1E09E1D533BFA001CA819 /* PluginCell.m in Sources */,

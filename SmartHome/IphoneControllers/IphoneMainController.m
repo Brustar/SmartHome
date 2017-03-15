@@ -47,7 +47,7 @@
     [self setupChilderController];
 //    self.tableView.backgroundColor = [UIColor lightGrayColor];
     [self.view sendSubviewToBack:self.tableView];
-    self.tableView.separatorStyle = NO;
+//    self.tableView.separatorStyle = NO;
     [self addNotifications];
 }
 
@@ -146,7 +146,7 @@
         [UIView animateWithDuration:0.3 animations:^{
             UIView *showingView = self.selectController.view;
             
-            showingView.transform = CGAffineTransformMakeTranslation(self.view.bounds.size.width-60, 0);
+            showingView.transform = CGAffineTransformMakeTranslation(2*self.view.bounds.size.width/3, 0);
             
             self.cover.frame = showingView.bounds;
             [showingView addSubview:self.cover];
@@ -168,7 +168,7 @@
 - (void)leftButtonOnClick {
     [UIView animateWithDuration:0.3 animations:^{
         UIView *showingView = self.selectController.view;
-        showingView.transform = CGAffineTransformMakeTranslation(self.view.bounds.size.width-60, 0);
+        showingView.transform = CGAffineTransformMakeTranslation(2*self.view.bounds.size.width/3, 0);
         self.cover.frame = showingView.bounds;
         [showingView addSubview:self.cover];
     }];
