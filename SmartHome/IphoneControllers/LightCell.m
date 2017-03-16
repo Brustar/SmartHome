@@ -14,11 +14,13 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    UIImage *leftTrack = [UIImage imageNamed:@"Slider2"];
-    [self.slider setMinimumTrackImage:leftTrack forState:UIControlStateNormal];
-    UIImage *rightTrack = [UIImage imageNamed:@"Slider2"];
-    [self.slider setThumbImage:[UIImage imageNamed:@"Slider4"] forState:UIControlStateNormal];
-    [self.slider setMaximumTrackImage:rightTrack forState:UIControlStateNormal];
+    
+//    UIImage *leftTrack = [UIImage imageNamed:@"Slider2"];
+//    [self.slider setMinimumTrackImage:leftTrack forState:UIControlStateNormal];
+//    UIImage *rightTrack = [UIImage imageNamed:@"Slider2"];
+//    [self.slider setThumbImage:[UIImage imageNamed:@"Slider4"] forState:UIControlStateNormal];
+//    [self.slider setMaximumTrackImage:rightTrack forState:UIControlStateNormal];
+    
     [self.slider addTarget:self action:@selector(dimming:) forControlEvents:UIControlEventValueChanged];
     [self.Iphoneswitch addTarget:self action:@selector(Iphoneswitch:) forControlEvents:UIControlEventValueChanged];
     
@@ -47,9 +49,6 @@
     NSData *data=[[DeviceInfo defaultManager] changeBright:slider.value*100 deviceID:deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
-    
-    
-    
     Light *device=[[Light alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setIsPoweron: self.Iphoneswitch.isOn];

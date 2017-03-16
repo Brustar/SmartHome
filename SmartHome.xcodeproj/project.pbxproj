@@ -121,6 +121,9 @@
 		2E1D4F0B1E727A64007625BD /* Slider4.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E1D4F0A1E727A64007625BD /* Slider4.png */; };
 		2E1D4F0D1E727AE2007625BD /* Slider2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E1D4F0C1E727AE2007625BD /* Slider2.png */; };
 		2E1D4F0F1E727AE4007625BD /* Slider1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E1D4F0E1E727AE4007625BD /* Slider1.png */; };
+		2E4370131E78D6D3005224EE /* LineLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E4370121E78D6D3005224EE /* LineLayout.m */; };
+		2E43701B1E78E6E9005224EE /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E4370191E78E6E9005224EE /* MyCell.m */; };
+		2E43701C1E78E6E9005224EE /* MyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E43701A1E78E6E9005224EE /* MyCell.xib */; };
 		2E5E5FE91DE1F1A9006F0C8F /* IphoneLightController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5E5FE81DE1F1A9006F0C8F /* IphoneLightController.m */; };
 		2E5E5FEC1DE22AC8006F0C8F /* LightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5E5FEB1DE22AC8006F0C8F /* LightCell.m */; };
 		2E5E91EA1E77E4EE008E6098 /* UIViewController+YQSlideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5E91E61E77E4EE008E6098 /* UIViewController+YQSlideMenu.m */; };
@@ -708,6 +711,11 @@
 		2E1D4F0A1E727A64007625BD /* Slider4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Slider4.png; sourceTree = "<group>"; };
 		2E1D4F0C1E727AE2007625BD /* Slider2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Slider2.png; sourceTree = "<group>"; };
 		2E1D4F0E1E727AE4007625BD /* Slider1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Slider1.png; sourceTree = "<group>"; };
+		2E4370111E78D6D3005224EE /* LineLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineLayout.h; sourceTree = "<group>"; };
+		2E4370121E78D6D3005224EE /* LineLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineLayout.m; sourceTree = "<group>"; };
+		2E4370181E78E6E9005224EE /* MyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCell.h; sourceTree = "<group>"; };
+		2E4370191E78E6E9005224EE /* MyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCell.m; sourceTree = "<group>"; };
+		2E43701A1E78E6E9005224EE /* MyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCell.xib; sourceTree = "<group>"; };
 		2E5E5FE71DE1F1A9006F0C8F /* IphoneLightController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneLightController.h; sourceTree = "<group>"; };
 		2E5E5FE81DE1F1A9006F0C8F /* IphoneLightController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneLightController.m; sourceTree = "<group>"; };
 		2E5E5FEA1DE22AC8006F0C8F /* LightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightCell.h; sourceTree = "<group>"; };
@@ -1977,6 +1985,11 @@
 				2EFB6B581E665C440058F305 /* UITabBar+BadgeValue.m */,
 				F64EF7FC1D8FBCC1003C1C48 /* IphoneSceneController.h */,
 				F64EF7FD1D8FBCC1003C1C48 /* IphoneSceneController.m */,
+				2E4370111E78D6D3005224EE /* LineLayout.h */,
+				2E4370121E78D6D3005224EE /* LineLayout.m */,
+				2E4370181E78E6E9005224EE /* MyCell.h */,
+				2E4370191E78E6E9005224EE /* MyCell.m */,
+				2E43701A1E78E6E9005224EE /* MyCell.xib */,
 				F64EF7FF1D8FDCE7003C1C48 /* IphoneDeviceListController.h */,
 				F64EF8001D8FDCE7003C1C48 /* IphoneDeviceListController.m */,
 				F646C0B71D91173000DF1728 /* IphoneRoomView.h */,
@@ -2225,6 +2238,7 @@
 				CDF3892A1E30AF9600657C8B /* msgTypeList.plist in Resources */,
 				CDF389341E30F27500657C8B /* userHabitList.plist in Resources */,
 				CDF90B431E2F0676009043B9 /* realScene.plist in Resources */,
+				2E43701C1E78E6E9005224EE /* MyCell.xib in Resources */,
 				CD78A8301E3379C200060466 /* 255_221.plist in Resources */,
 				CDF389281E30A91200657C8B /* energyDetail.plist in Resources */,
 				2EA97E661E56A3E7003E0039 /* test.jpeg in Resources */,
@@ -2550,6 +2564,7 @@
 				2E5E5FE91DE1F1A9006F0C8F /* IphoneLightController.m in Sources */,
 				0FAF74C11CEEA17C00432713 /* HRColorCursor.m in Sources */,
 				F680AAB71DD94565001D1807 /* FamilyCell.m in Sources */,
+				2E4370131E78D6D3005224EE /* LineLayout.m in Sources */,
 				2E801EFF1E262B0B0039A6D9 /* WeekdaysVC.m in Sources */,
 				0F91AA171CDC798700094C25 /* PrintObject.m in Sources */,
 				0F3CCF3B1D0F97B70058A320 /* CameraController.m in Sources */,
@@ -2638,6 +2653,7 @@
 				F67F1F741D3C6AA200F2B7E5 /* SystemCell.m in Sources */,
 				0FC3DE851D236CFF00A03482 /* LoginController.m in Sources */,
 				F66596E31D3F25810082716A /* SceneCell.m in Sources */,
+				2E43701B1E78E6E9005224EE /* MyCell.m in Sources */,
 				F6457C451DD5523C00CA3A72 /* IphoneFamilyViewController.m in Sources */,
 				0FB42E1E1CF681A7007DE64F /* planeScene.m in Sources */,
 				F6423C221D9A4B7400AAB3CE /* DeviceOfFixTimerViewController.m in Sources */,
