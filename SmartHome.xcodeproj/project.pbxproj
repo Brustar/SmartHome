@@ -194,6 +194,13 @@
 		CDF1573B1E7AAD4C00499AC5 /* BaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF157391E7AAD4C00499AC5 /* BaseTabBarController.m */; };
 		CDF157401E7AADC700499AC5 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF1573C1E7AADC700499AC5 /* LeftViewController.m */; };
 		CDF157411E7AADC700499AC5 /* LeftSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF1573F1E7AADC700499AC5 /* LeftSlideViewController.m */; };
+		CDF1574A1E7AB2AF00499AC5 /* icon_tabbar_mine_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF157441E7AB2AF00499AC5 /* icon_tabbar_mine_selected@2x.png */; };
+		CDF1574B1E7AB2AF00499AC5 /* icon_tabbar_homepage_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF157451E7AB2AF00499AC5 /* icon_tabbar_homepage_selected@2x.png */; };
+		CDF1574C1E7AB2AF00499AC5 /* icon_tabbar_homepage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF157461E7AB2AF00499AC5 /* icon_tabbar_homepage@2x.png */; };
+		CDF1574D1E7AB2AF00499AC5 /* icon_tabbar_merchant_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF157471E7AB2AF00499AC5 /* icon_tabbar_merchant_normal@2x.png */; };
+		CDF1574E1E7AB2AF00499AC5 /* icon_tabbar_merchant_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF157481E7AB2AF00499AC5 /* icon_tabbar_merchant_selected@2x.png */; };
+		CDF1574F1E7AB2AF00499AC5 /* icon_tabbar_mine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF157491E7AB2AF00499AC5 /* icon_tabbar_mine@2x.png */; };
+		CDF157511E7AB2C000499AC5 /* leftbackiamge.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF157501E7AB2C000499AC5 /* leftbackiamge.png */; };
 		CDF389221E305B4400657C8B /* breakdownlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF389211E305B4400657C8B /* breakdownlist.plist */; };
 		CDF389241E306D2400657C8B /* maintaininfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF389231E306D2400657C8B /* maintaininfo.plist */; };
 		CDF389261E30A31300657C8B /* energylist.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF389251E30A31300657C8B /* energylist.plist */; };
@@ -748,6 +755,13 @@
 		CDF1573D1E7AADC700499AC5 /* LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftViewController.h; sourceTree = "<group>"; };
 		CDF1573E1E7AADC700499AC5 /* LeftSlideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftSlideViewController.h; sourceTree = "<group>"; };
 		CDF1573F1E7AADC700499AC5 /* LeftSlideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftSlideViewController.m; sourceTree = "<group>"; };
+		CDF157441E7AB2AF00499AC5 /* icon_tabbar_mine_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_mine_selected@2x.png"; sourceTree = "<group>"; };
+		CDF157451E7AB2AF00499AC5 /* icon_tabbar_homepage_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_homepage_selected@2x.png"; sourceTree = "<group>"; };
+		CDF157461E7AB2AF00499AC5 /* icon_tabbar_homepage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_homepage@2x.png"; sourceTree = "<group>"; };
+		CDF157471E7AB2AF00499AC5 /* icon_tabbar_merchant_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_merchant_normal@2x.png"; sourceTree = "<group>"; };
+		CDF157481E7AB2AF00499AC5 /* icon_tabbar_merchant_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_merchant_selected@2x.png"; sourceTree = "<group>"; };
+		CDF157491E7AB2AF00499AC5 /* icon_tabbar_mine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_mine@2x.png"; sourceTree = "<group>"; };
+		CDF157501E7AB2C000499AC5 /* leftbackiamge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftbackiamge.png; sourceTree = "<group>"; };
 		CDF389211E305B4400657C8B /* breakdownlist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = breakdownlist.plist; sourceTree = "<group>"; };
 		CDF389231E306D2400657C8B /* maintaininfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = maintaininfo.plist; sourceTree = "<group>"; };
 		CDF389251E30A31300657C8B /* energylist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = energylist.plist; sourceTree = "<group>"; };
@@ -1843,6 +1857,7 @@
 		CDF157351E7AACE600499AC5 /* CustomTabbarController */ = {
 			isa = PBXGroup;
 			children = (
+				CDF157431E7AB29A00499AC5 /* png */,
 				CDF1573C1E7AADC700499AC5 /* LeftViewController.m */,
 				CDF1573D1E7AADC700499AC5 /* LeftViewController.h */,
 				CDF1573E1E7AADC700499AC5 /* LeftSlideViewController.h */,
@@ -1853,6 +1868,20 @@
 				CDF157391E7AAD4C00499AC5 /* BaseTabBarController.m */,
 			);
 			name = CustomTabbarController;
+			sourceTree = "<group>";
+		};
+		CDF157431E7AB29A00499AC5 /* png */ = {
+			isa = PBXGroup;
+			children = (
+				CDF157501E7AB2C000499AC5 /* leftbackiamge.png */,
+				CDF157441E7AB2AF00499AC5 /* icon_tabbar_mine_selected@2x.png */,
+				CDF157451E7AB2AF00499AC5 /* icon_tabbar_homepage_selected@2x.png */,
+				CDF157461E7AB2AF00499AC5 /* icon_tabbar_homepage@2x.png */,
+				CDF157471E7AB2AF00499AC5 /* icon_tabbar_merchant_normal@2x.png */,
+				CDF157481E7AB2AF00499AC5 /* icon_tabbar_merchant_selected@2x.png */,
+				CDF157491E7AB2AF00499AC5 /* icon_tabbar_mine@2x.png */,
+			);
+			name = png;
 			sourceTree = "<group>";
 		};
 		F63AE02E1D11540F00BE17DC /* PrettyRuler */ = {
@@ -2144,9 +2173,11 @@
 				2E925DA91E5E89DD008E327B /* calendar.png in Resources */,
 				0F49CB701E7A1EA100D46ECC /* Devices.storyboard in Resources */,
 				2E925DA61E5E857D008E327B /* all_7.jpg in Resources */,
+				CDF1574A1E7AB2AF00499AC5 /* icon_tabbar_mine_selected@2x.png in Resources */,
 				0FBEFE271D24A5020084244F /* netconfig.plist in Resources */,
 				0F49CB721E7A1EAE00D46ECC /* Scene.storyboard in Resources */,
 				0F49CB7A1E7A204300D46ECC /* Devices-iPad.storyboard in Resources */,
+				CDF1574E1E7AB2AF00499AC5 /* icon_tabbar_merchant_selected@2x.png in Resources */,
 				F60FDB471D003FD500AB04BE /* CurtainTableViewCell.xib in Resources */,
 				2E925D9E1E5E857D008E327B /* 4.jpg in Resources */,
 				CDF389241E306D2400657C8B /* maintaininfo.plist in Resources */,
@@ -2161,6 +2192,7 @@
 				CDF389321E30EA8900657C8B /* hostUserList.plist in Resources */,
 				2E925DA11E5E857D008E327B /* 7.jpg in Resources */,
 				CDF389301E30E39500657C8B /* userList.plist in Resources */,
+				CDF1574D1E7AB2AF00499AC5 /* icon_tabbar_merchant_normal@2x.png in Resources */,
 				F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */,
 				2E1D4F0B1E727A64007625BD /* Slider4.png in Resources */,
 				2EA897BE1E31B59B002CA904 /* 2@2x.png in Resources */,
@@ -2175,20 +2207,24 @@
 				CDF90B451E2F4B14009043B9 /* planeScene.plist in Resources */,
 				2E925DA01E5E857D008E327B /* 6.jpg in Resources */,
 				0F49CB741E7A1F0500D46ECC /* Home.storyboard in Resources */,
+				CDF1574B1E7AB2AF00499AC5 /* icon_tabbar_homepage_selected@2x.png in Resources */,
 				2E925DA31E5E857D008E327B /* all_4.jpg in Resources */,
 				F668AF251D53413B0079587F /* Main.storyboard in Resources */,
 				CDF3892E1E30CFD000657C8B /* userPushNotifyList.plist in Resources */,
 				0FE78BB61DCFB091009B4767 /* Images.xcassets in Resources */,
 				2E925DA41E5E857D008E327B /* all_5.jpg in Resources */,
 				CDF389261E30A31300657C8B /* energylist.plist in Resources */,
+				CDF1574C1E7AB2AF00499AC5 /* icon_tabbar_homepage@2x.png in Resources */,
 				0F49CB6E1E7A1E3700D46ECC /* MyInfo.storyboard in Resources */,
 				2E1D4F0D1E727AE2007625BD /* Slider2.png in Resources */,
+				CDF1574F1E7AB2AF00499AC5 /* icon_tabbar_mine@2x.png in Resources */,
 				0F020A231DE3D9330034869F /* LaunchScreen.storyboard in Resources */,
 				CDF389221E305B4400657C8B /* breakdownlist.plist in Resources */,
 				2E1D4F0F1E727AE4007625BD /* Slider1.png in Resources */,
 				F6359B011CFFC4DC0035EB31 /* ColourTableViewCell.xib in Resources */,
 				0F49CB6C1E7A1DBF00D46ECC /* Login.storyboard in Resources */,
 				2E925DA51E5E857D008E327B /* all_6.jpg in Resources */,
+				CDF157511E7AB2C000499AC5 /* leftbackiamge.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2236,7 +2272,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		22E4FF7C74861624FBD7E7CB /* [CP] Check Pods Manifest.lock */ = {
