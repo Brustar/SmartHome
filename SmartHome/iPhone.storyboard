@@ -4772,7 +4772,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRm-1c-Wvw">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRm-1c-Wvw">
                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -6154,10 +6154,14 @@
         <segue reference="qN8-z6-Gb7"/>
 =======
         <segue reference="J5F-aP-6iz"/>
+<<<<<<< HEAD
+        <segue reference="Uo6-og-hnM"/>
+        <segue reference="qN8-z6-Gb7"/>
+=======
         <segue reference="vWH-k8-ixo"/>
 >>>>>>> af2848e9a876c5d286a5660f262ef3e3f9bc01ca
+>>>>>>> 8fd02b01fb954d2be37bc76cc2ef8ebcde49ab56
         <segue reference="aTH-RA-7NZ"/>
         <segue reference="b22-0A-WOg"/>
-        <segue reference="Uo6-og-hnM"/>
     </inferredMetricsTieBreakers>
 </document>
