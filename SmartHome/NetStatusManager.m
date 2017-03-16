@@ -9,6 +9,7 @@
 #import "NetStatusManager.h"
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import <AFNetworking.h>
+#import <Reachability.h>
 #include <netdb.h>
 
 @implementation NetStatusManager
@@ -58,6 +59,18 @@
     }
     CFRelease(wifiInterfaces);
     return wifiName;
+}
+
+// 是否WIFI
++ (BOOL) isEnableWIFI {
+    return ([[Reachability reachabilityForLocalWiFi] currentReachabilityStatus] != NotReachable);
+    //return [AFNetworkReachabilityManager sharedManager].networkReachabilityStatus == AFNetworkReachabilityStatusReachableViaWiFi;
+}
+
+// 是否cellar
++ (BOOL) isEnableWWAN {
+    return ([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] != NotReachable);
+    //return [AFNetworkReachabilityManager sharedManager].networkReachabilityStatus == AFNetworkReachabilityStatusReachableViaWWAN;
 }
 
 @end
