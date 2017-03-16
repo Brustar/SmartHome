@@ -285,23 +285,6 @@
 
 - (void)rightBarButtonItemClicked:(UIBarButtonItem *)sender {
     
-//    if (self.view.subviews.count == 6) {
-//        NSMutableArray *imageArray = [NSMutableArray arrayWithCapacity:0];
-//        for (int i = 0; i < 4; i++) {
-//            NSString *name = [NSString stringWithFormat:@"%d",i + 1];
-//            UIImage *image  = [UIImage imageNamed:name];
-//            [imageArray addObject:image];
-//            
-//        }
-//        
-//        self.menuView = [[YZNavigationMenuView alloc] initWithPositionOfDirection:CGPointMake(self.view.frame.size.width - 24, 64) images:imageArray titleArray:@[@"语音",@"搜索",@"正在播放",@"添加场景"]];
-//        self.menuView.delegate = self;
-//        [self.view addSubview:self.menuView];
-//    }else if (self.view.subviews.count > 6){
-////        [self.view removeFromSuperview];
-//        [self.menuView removeFromSuperview];
-//    }
-    
       [self performSegueWithIdentifier:@"iphoneAddSceneSegue" sender:self];
     
    
