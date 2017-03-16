@@ -136,6 +136,9 @@
 		0FF92B661D9224640098DD54 /* TVChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF92B651D9224640098DD54 /* TVChannel.m */; };
 		2E0297271E4C4C7600BBC520 /* MySubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0297261E4C4C7600BBC520 /* MySubView.m */; };
 		2E1495101DE474EF00141629 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9ADF711CE2DC020052F3BC /* libz.tbd */; };
+		2E1D4F0B1E727A64007625BD /* Slider4.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E1D4F0A1E727A64007625BD /* Slider4.png */; };
+		2E1D4F0D1E727AE2007625BD /* Slider2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E1D4F0C1E727AE2007625BD /* Slider2.png */; };
+		2E1D4F0F1E727AE4007625BD /* Slider1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E1D4F0E1E727AE4007625BD /* Slider1.png */; };
 		2E5E5FE91DE1F1A9006F0C8F /* IphoneLightController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5E5FE81DE1F1A9006F0C8F /* IphoneLightController.m */; };
 		2E5E5FEC1DE22AC8006F0C8F /* LightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5E5FEB1DE22AC8006F0C8F /* LightCell.m */; };
 		2E6328081E03C3C6000D7BE9 /* IphoneSceneAirVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6328071E03C3C6000D7BE9 /* IphoneSceneAirVC.m */; };
@@ -183,6 +186,7 @@
 		2EDE04611E45777B00BC8E0B /* WebViewMangerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE04601E45777B00BC8E0B /* WebViewMangerVC.m */; };
 		2EEE536B1E3061930026F97D /* IphoneDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EEE536A1E3061930026F97D /* IphoneDetailViewController.m */; };
 		2EEE536E1E309C5D0026F97D /* MyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EEE536D1E309C5D0026F97D /* MyView.m */; };
+		2EFB6B591E665C440058F305 /* UITabBar+BadgeValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB6B581E665C440058F305 /* UITabBar+BadgeValue.m */; };
 		2EFFECA11E12161100C13D3E /* FixTimeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFFECA01E12161100C13D3E /* FixTimeListViewController.m */; };
 		CD43046F1E0B674000B594F4 /* FamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD43046E1E0B674000B594F4 /* FamilyViewController.m */; };
 		CD78A8301E3379C200060466 /* 255_221.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD78A82F1E3379C200060466 /* 255_221.plist */; };
@@ -644,6 +648,9 @@
 		0FF92B651D9224640098DD54 /* TVChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVChannel.m; sourceTree = "<group>"; };
 		2E0297251E4C4C7600BBC520 /* MySubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySubView.h; sourceTree = "<group>"; };
 		2E0297261E4C4C7600BBC520 /* MySubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySubView.m; sourceTree = "<group>"; };
+		2E1D4F0A1E727A64007625BD /* Slider4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Slider4.png; sourceTree = "<group>"; };
+		2E1D4F0C1E727AE2007625BD /* Slider2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Slider2.png; sourceTree = "<group>"; };
+		2E1D4F0E1E727AE4007625BD /* Slider1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Slider1.png; sourceTree = "<group>"; };
 		2E5E5FE71DE1F1A9006F0C8F /* IphoneLightController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneLightController.h; sourceTree = "<group>"; };
 		2E5E5FE81DE1F1A9006F0C8F /* IphoneLightController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneLightController.m; sourceTree = "<group>"; };
 		2E5E5FEA1DE22AC8006F0C8F /* LightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightCell.h; sourceTree = "<group>"; };
@@ -722,6 +729,8 @@
 		2EEE536C1E309C5D0026F97D /* MyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyView.h; sourceTree = "<group>"; };
 		2EEE536D1E309C5D0026F97D /* MyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyView.m; sourceTree = "<group>"; };
 		2EEE536F1E309E510026F97D /* CGLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGLine.h; sourceTree = "<group>"; };
+		2EFB6B571E665C440058F305 /* UITabBar+BadgeValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+BadgeValue.h"; sourceTree = "<group>"; };
+		2EFB6B581E665C440058F305 /* UITabBar+BadgeValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+BadgeValue.m"; sourceTree = "<group>"; };
 		2EFFEC9F1E12161100C13D3E /* FixTimeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixTimeListViewController.h; sourceTree = "<group>"; };
 		2EFFECA01E12161100C13D3E /* FixTimeListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixTimeListViewController.m; sourceTree = "<group>"; };
 		9B45FF693457BA21BA43CE05 /* Pods-SmartHome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1781,6 +1790,9 @@
 				2EA97E601E56A347003E0039 /* UIImage+ImageEffects.m */,
 				2EA97E621E56A355003E0039 /* ObjectFunction.h */,
 				2EA97E631E56A355003E0039 /* ObjectFunction.m */,
+				2E1D4F0C1E727AE2007625BD /* Slider2.png */,
+				2E1D4F0E1E727AE4007625BD /* Slider1.png */,
+				2E1D4F0A1E727A64007625BD /* Slider4.png */,
 				2EA97E651E56A3E7003E0039 /* test.jpeg */,
 				2EA897BB1E31B53E002CA904 /* 1@2x.png */,
 				2EA897BD1E31B59B002CA904 /* 2@2x.png */,
@@ -1850,6 +1862,8 @@
 				F64EF7FA1D8FB738003C1C48 /* IphoneMainController.m */,
 				2EC45FBB1E53E2D60042CE20 /* IphoneTabBarViewController.h */,
 				2EC45FBC1E53E2D60042CE20 /* IphoneTabBarViewController.m */,
+				2EFB6B571E665C440058F305 /* UITabBar+BadgeValue.h */,
+				2EFB6B581E665C440058F305 /* UITabBar+BadgeValue.m */,
 				F64EF7FC1D8FBCC1003C1C48 /* IphoneSceneController.h */,
 				F64EF7FD1D8FBCC1003C1C48 /* IphoneSceneController.m */,
 				F64EF7FF1D8FDCE7003C1C48 /* IphoneDeviceListController.h */,
@@ -2125,6 +2139,7 @@
 				2E925DA11E5E857D008E327B /* 7.jpg in Resources */,
 				CDF389301E30E39500657C8B /* userList.plist in Resources */,
 				F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */,
+				2E1D4F0B1E727A64007625BD /* Slider4.png in Resources */,
 				2EA897BE1E31B59B002CA904 /* 2@2x.png in Resources */,
 				0F49CB7E1E7A204300D46ECC /* Scene-iPad.storyboard in Resources */,
 				CDFB9DF21E5DCB4D00BFECCE /* SceneTimerList.plist in Resources */,
@@ -2144,8 +2159,10 @@
 				2E925DA41E5E857D008E327B /* all_5.jpg in Resources */,
 				CDF389261E30A31300657C8B /* energylist.plist in Resources */,
 				0F49CB6E1E7A1E3700D46ECC /* MyInfo.storyboard in Resources */,
+				2E1D4F0D1E727AE2007625BD /* Slider2.png in Resources */,
 				0F020A231DE3D9330034869F /* LaunchScreen.storyboard in Resources */,
 				CDF389221E305B4400657C8B /* breakdownlist.plist in Resources */,
+				2E1D4F0F1E727AE4007625BD /* Slider1.png in Resources */,
 				F6359B011CFFC4DC0035EB31 /* ColourTableViewCell.xib in Resources */,
 				0F49CB6C1E7A1DBF00D46ECC /* Login.storyboard in Resources */,
 				2E925DA51E5E857D008E327B /* all_6.jpg in Resources */,
@@ -2518,6 +2535,7 @@
 				0FCFB3951CF2943100B37DD3 /* Camera.m in Sources */,
 				0F6ADFE31E7136C500BFF67F /* ConversationViewController.m in Sources */,
 				2E801EFC1E2622180039A6D9 /* IphoneFixSubTimeVC.m in Sources */,
+				2EFB6B591E665C440058F305 /* UITabBar+BadgeValue.m in Sources */,
 				F6755A4C1D4063FA002394F3 /* ECloudTabBar.m in Sources */,
 				0FAF8FEF1CE18C41000557BD /* DeviceInfo.m in Sources */,
 				2EDE04611E45777B00BC8E0B /* WebViewMangerVC.m in Sources */,

@@ -15,4 +15,7 @@
 @property (strong, nonatomic) Scene *scene;
 @property (nonatomic,assign) int roomID;
 
+- (IBAction)homeBtnClicked:(id)sender;//主页
+
+- (IBAction)returnBtnClicked:(id)sender;//返回
 @end

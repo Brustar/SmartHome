@@ -16,27 +16,44 @@
 #import "SQLManager.h"
 #import "PackManager.h"
 
-@interface IphoneNetTvController ()
+@interface IphoneNetTvController ()<UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *voiceWeakImg;
 @property (weak, nonatomic) IBOutlet UIImageView *voiceStrongImg;
 @property (weak, nonatomic) IBOutlet UIView *touchpad;
 //那6个控制按钮，button的tag值不一样，分别是0 到 5
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UISwitch *NetSwitch;
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
-
+@property (weak, nonatomic) IBOutlet UISwitch *netTvSwitch;
+@property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
+@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
+@property (nonatomic,strong) NSTimer * timer;
 @end
 
 @implementation IphoneNetTvController
-
+{
+    NSTimer *_timer;
+    CGFloat _AutoScrollDelay;
+    BOOL _isAutoScroll;
+    
+}
 - (void)setRoomID:(int)roomID
 {
     _roomID = roomID;
     self.deviceid = [SQLManager deviceIDWithRoomID:self.roomID withType:@"机顶盒"];
 }
-
+-(void)viewDidLayoutSubviews
+{
+    CGSize scrollSize = CGSizeMake(1 * _scrollView.bounds.size.width, _scrollView.bounds.size.height);
+    if (!CGSizeEqualToSize(_scrollView.contentSize, scrollSize)) {
+        _scrollView.contentSize = scrollSize;
+    }
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.volume.transform = CGAffineTransformMakeRotation(M_PI/2);
+     self.scrollView.delegate = self;
+//    self.volume.transform = CGAffineTransformMakeRotation(M_PI/2);
     self.voiceWeakImg.transform = CGAffineTransformMakeRotation(M_PI/2);
     self.voiceStrongImg.transform = CGAffineTransformMakeRotation(M_PI/2);
 
@@ -49,7 +66,7 @@
     
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
-    
+    [self.netTvSwitch addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
@@ -125,6 +142,11 @@
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
     }
+    if ([sender isEqual:self.netTvSwitch]) {
+        NSData * data = [[DeviceInfo defaultManager] toogleAirCon:self.netTvSwitch.isOn deviceID:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
     Netv *device=[[Netv alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setNvolume:self.volume.value*100];
@@ -187,14 +209,14 @@
     NSData *data=nil;
     DeviceInfo *device=[DeviceInfo defaultManager];
     switch (((UIButton *)sender).tag) {
-        case 0:
-            data=[device backward:self.deviceid];
+        case 0://上一频道
+             data=[device previous:self.deviceid];
             break;
         case 1:
             data=[device confirm:self.deviceid];
             break;
-        case 2:
-            data=[device forward:self.deviceid];
+        case 2://下一频道
+            data=[device next:self.deviceid];
             break;
         case 3:
             data=[device previous:self.deviceid];
@@ -208,15 +230,6 @@
         case 6:
             data=[device stop:self.deviceid];
             break;
-//        case 7:
-//            data=[device back:self.deviceid];
-//            break;
-//        case 8:
-//            data=[device NETVhome:self.deviceid];
-//            break;
-//        case 9:
-//            data=[device mute:self.deviceid];
-//            break;
             
         default:
             break;
@@ -253,14 +266,113 @@
 }
 
 - (IBAction)confromBtn:(UIButton *)sender {
-    NSData *data=[[DeviceInfo defaultManager] confirm:self.deviceid];
+    
+    NSData *data=[[DeviceInfo defaultManager] sweepSURE:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
+#pragma mark scrollViewDelegate
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [self setUpTimer];
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self removeTimer];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    int index = self.scrollView.contentOffset.x / self.scrollView.frame.size.width;
+    _pageControl.currentPage = index;
+}
+- (void)removeTimer {
+    if (_timer == nil) return;
+    [_timer invalidate];
+    _timer = nil;
+}
+- (void)setUpTimer {
+    if (!_isAutoScroll) {//用户滑动，非自动滚动
+        return;
+    }
+    if (_AutoScrollDelay < 0.5) return;
+    
+    _timer = [NSTimer timerWithTimeInterval:_AutoScrollDelay target:self selector:@selector(scorll) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+}
+- (void)scorll {
+    CGFloat contentOffsetX = _scrollView.contentOffset.x + _scrollView.frame.size.width >= _scrollView.contentSize.width ? 0 : _scrollView.contentOffset.x + _scrollView.frame.size.width;
+    [_scrollView setContentOffset:CGPointMake(contentOffsetX, 0) animated:YES];
+    
+}
+//电视调台
+
+#pragma mark - UIPickerViewDataSource<NSObject>
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 3;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return 10;
+}
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
+    return 44;
+}
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
+    return 80;
+}
+- (nullable NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    
+    UIColor *foregroundColor = [UIColor orangeColor];
+    UIColor *backgroundColor = [UIColor clearColor];
+    NSDictionary *attrsDic = @{NSForegroundColorAttributeName: foregroundColor,
+                               NSBackgroundColorAttributeName: backgroundColor,
+                               };
+    NSAttributedString *attStr = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld", (long)row] attributes:attrsDic];
+    
+    return attStr;
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    if(_timer != nil)
+    {
+        [_timer invalidate];
+        _timer = nil;
+    }
+    [self startTimer];
+}
+
+-(void)startTimer
+{
+    if (!_timer) {
+        _timer = [NSTimer timerWithTimeInterval:3 target:self selector:@selector(sureChannel) userInfo:nil repeats:NO];
+        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+    }
+}
+
+-(void) sureChannel
+{
+    _timer = nil;
+    NSInteger row0 = [self.pickerView selectedRowInComponent:0];
+    NSInteger row1 =[self.pickerView selectedRowInComponent:1];
+    NSInteger row2 =[self.pickerView selectedRowInComponent:2];
+    unsigned int channel= 0;
+    if(row0 > 0)
+        channel += row0 * 100;
+    if(row1 > 0)
+        channel += row1 * 10;
+    channel += row2;
+    NSData * data = [[DeviceInfo defaultManager] switchProgram:channel deviceID:_deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
 /*
 #pragma mark - Navigation
-
+ 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
@@ -268,4 +380,15 @@
 }
 */
 
+- (IBAction)homeBtnClicked:(id)sender {
+    NSData * data = [[DeviceInfo defaultManager] NETVhome:_deviceid];
+    SocketManager *sock = [SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
+- (IBAction)returnBtnClicked:(id)sender {
+    NSData * data = [[DeviceInfo defaultManager] back:_deviceid];
+    SocketManager *sock = [SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
 @end

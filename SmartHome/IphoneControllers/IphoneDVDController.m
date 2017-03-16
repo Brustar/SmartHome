@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *voiceWeakImg;
 @property (weak, nonatomic) IBOutlet UIView *touchPad;
 @property (weak, nonatomic) IBOutlet UISlider *volume;
+@property (weak, nonatomic) IBOutlet UISwitch *dvdSwitch;
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
 
@@ -57,6 +58,7 @@
     self.title = @"DVD";
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
+    [self.dvdSwitch addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
@@ -125,6 +127,12 @@
     
     [SCWaveAnimationView waveAnimationAtDirection:recognizer.direction view:self.touchPad];
 }
+- (IBAction)confromBtn:(UIButton *)sender {
+    
+    NSData *data=[[DeviceInfo defaultManager] sweepSURE:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
 
 -(IBAction)save:(id)sender
 {
@@ -135,7 +143,11 @@
         
 //        self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
     }
-    
+    if ([sender isEqual:self.dvdSwitch]) {
+        NSData * data = [[DeviceInfo defaultManager] toogleAirCon:self.dvdSwitch.isOn deviceID:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
     DVD *device=[[DVD alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setDvolume:self.volume.value*100];
@@ -298,4 +310,22 @@
 }
 */
 
+
+- (IBAction)popBtnClicked:(id)sender {
+    NSData * data = [[DeviceInfo defaultManager] pop:_deviceid];
+    SocketManager *sock = [SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
+- (IBAction)homeBtnClicked:(id)sender {
+    NSData * data = [[DeviceInfo defaultManager] home:_deviceid];
+    SocketManager *sock = [SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
+- (IBAction)returnBtnClicked:(id)sender {
+    NSData * data = [[DeviceInfo defaultManager] back:_deviceid];
+    SocketManager *sock = [SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
 @end

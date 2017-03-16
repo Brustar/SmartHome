@@ -13,6 +13,7 @@
 #import "IphoneProfileController.h"
 #import "IphoneFamilyViewController.h"
 #import "MySettingViewController.h"
+#import "UITabBar+BadgeValue.h"
 
 @interface IphoneTabBarViewController ()
 
@@ -20,11 +21,22 @@
 
 @implementation IphoneTabBarViewController
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     [self creaTabBarController];
+    //显示
+//    [self.tabBarController.tabBar showBadgeOnItemIndex:3];
+    
+    //隐藏
+//    [self.tabBarController.tabBar hideBadgeOnItemIndex:2];
 }
 -(void)creaTabBarController
 {
@@ -33,7 +45,7 @@
     familyVC.title = @"家庭";
     familyVC.tabBarItem.image = [UIImage imageNamed:@"family-Mysetting"];
     IphoneSceneController *scene = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
-    UINavigationController * naVC2= [[UINavigationController alloc] initWithRootViewController:scene];
+    UINavigationController * naVC2 = [[UINavigationController alloc] initWithRootViewController:scene];
     scene.title = @"场景";
     scene.tabBarItem.image = [UIImage imageNamed:@"scene-MySetting"];
     IphoneDeviceListController *deviceList = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"IphoneDeviceListController"];
@@ -50,7 +62,14 @@
     UINavigationController * naVC5= [[UINavigationController alloc] initWithRootViewController:profireList];
     profireList.title = @"我的";
     profireList.tabBarItem.image = [UIImage imageNamed:@"me-Mysetting"];
-    self.viewControllers = @[naVC1,naVC3,naVC4,naVC5];
+    if (profireList.imageView.hidden == NO) {
+          profireList.tabBarItem.badgeValue =@"1";
+    }else{
+          profireList.tabBarItem.badgeValue =nil;
+    }
+  
+    
+    self.viewControllers = @[naVC1,naVC2,naVC3,naVC5];
 
 }
 

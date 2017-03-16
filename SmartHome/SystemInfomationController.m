@@ -32,12 +32,9 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
 //    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
 //    self.navigationItem.leftBarButtonItem = returnItem;
-    DeviceInfo *device = [DeviceInfo defaultManager];
-    if ([device.db isEqualToString:SMART_DB]){
+
        self.titles = @[@"家庭名称",@"主机编号",@"主机品牌",@"主机型号"];
-    }else{
-      self.titles = @[@"逸云智能家居",@"主机编号",@"主机品牌",@"主机型号"];
-    }
+    
     
     self.tableView.tableFooterView = [UIView new];
 
@@ -50,13 +47,20 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSArray *array;
+    DeviceInfo *device = [DeviceInfo defaultManager];
+    if ([device.db isEqualToString:SMART_DB]){
     NSArray  *paths  =  NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
     
     NSString *docDir = [paths objectAtIndex:0];
     
     NSString *filePath = [docDir stringByAppendingPathComponent:@"testFile.txt"];
     
-    NSArray *array = [[NSArray alloc] initWithContentsOfFile:filePath];
+      array = [[NSArray alloc] initWithContentsOfFile:filePath];
+    }else{
+        
+        array = @[@"逸云智家",@"2",@"快思聪",@"CP3"];
+    }
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.textLabel.text = self.titles[indexPath.row];

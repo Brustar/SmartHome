@@ -108,6 +108,7 @@ enum{
 -(NSData *) sweepRight:(NSString *)deviceID;
 -(NSData *) sweepUp:(NSString *)deviceID;
 -(NSData *) sweepDown:(NSString *)deviceID;
+-(NSData *) sweepSURE:(NSString *)deviceID;
 
 #pragma mark - lighter
 -(NSData *) toogleLight:(uint8_t)toogle deviceID:(NSString *)deviceID;

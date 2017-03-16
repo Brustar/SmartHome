@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface IphoneProfileController : UIViewController
+@property (nonatomic,strong) UIImageView * imageView;
 
 @end

@@ -294,6 +294,10 @@
 {
     return [self action:PROTOCOL_DOWN deviceID:deviceID];
 }
+-(NSData *) sweepSURE:(NSString *)deviceID
+{
+    return [self action:PROTOCOL_SURE deviceID:deviceID];
+}
 
 #pragma mark - lighter
 -(NSData *) toogleLight:(uint8_t)toogle deviceID:(NSString *)deviceID

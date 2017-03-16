@@ -20,7 +20,7 @@
 #import "ColourTableViewCell.h"
 #import "HRSampleColorPickerViewController.h"
 
-@interface IphoneLightController ()<UITableViewDelegate,UITableViewDataSource,HRColorPickerViewControllerDelegate>
+@interface IphoneLightController ()<UITableViewDelegate,UITableViewDataSource,HRColorPickerViewControllerDelegate, ColourTableViewCellDelegate>
 @property (strong, nonatomic) IBOutlet ColourTableViewCell *cell;
 @property (nonatomic,strong) NSArray * roomArrs;
 @property (nonatomic,strong) NSArray * lightArrs;
@@ -95,12 +95,17 @@
         return cell;
 
     }
-//        self.cell.lable.text = @"自定义颜色";
-           self.cell = [tableView dequeueReusableCellWithIdentifier:@"ColourTableViewCell" forIndexPath:indexPath];
+    
+    //调色灯
+    
+      self.cell = [tableView dequeueReusableCellWithIdentifier:@"ColourTableViewCell" forIndexPath:indexPath];
        Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[indexPath.row] intValue]];
         self.cell.lable.text = device.name;
+        self.cell.deviceID = device.eID;
+        self.cell.delegate = self;
     
         UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeColor:)];
+        self.cell.colourView.tag = indexPath.row;
         self.cell.colourView.userInteractionEnabled=YES;
         [self.cell.colourView addGestureRecognizer:singleTap];
         self.cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -108,14 +113,33 @@
     
 }
 
--(IBAction)changeColor:(id)sender
+#pragma mark - ColourTableViewCellDelegate
+- (void)lightSwitchValueChanged:(UISwitch *)lightSwitch deviceID:(int)deviceID {
+    NSString *devID = [NSString stringWithFormat:@"%d", deviceID];
+   
+        //发指令
+        NSData *data = [[DeviceInfo defaultManager] toogleLight:lightSwitch.on deviceID:devID];
+        NSLog(@"color light switch data:%@", data);
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    
+}
+
+
+- (void)changeColor:(id)sender
 {
-    HRSampleColorPickerViewController *controller= [[HRSampleColorPickerViewController alloc] initWithColor:self.cell.colourView.backgroundColor fullColor:NO];
+    UIView *colourView = (UIView *)sender;
+    
+    HRSampleColorPickerViewController *controller= [[HRSampleColorPickerViewController alloc] initWithColor:self.cell.colourView.backgroundColor fullColor:NO indexPathRow:colourView.tag];
     controller.delegate = self;
     [self.navigationController pushViewController:controller animated:YES];
 }
-- (void)setSelectedColor:(UIColor *)color
+- (void)setSelectedColor:(UIColor *)color indexPathRow:(NSInteger)row
 {
+    //Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[row] intValue]];
+    //设置数据库里的色灯的色值
+    
+    
     self.cell.colourView.backgroundColor = color;
     [self save:nil];
 }

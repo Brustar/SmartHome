@@ -74,15 +74,15 @@
     return 1;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 20.0f;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+//    return 20.0f;
+//}
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 60, 20)];
-    title.text = @"设备定时";
-    return title;
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 60, 20)];
+//    title.text = @"设备定时";
+//    return title;
+//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

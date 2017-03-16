@@ -24,7 +24,6 @@
 //@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableHight;
 @property (nonatomic,strong) NSArray *images;
 @property (nonatomic,strong) NSArray *segues;
-@property (nonatomic,strong) UIImageView * imageView;
 //@property (nonatomic,strong) MsgCell * MsgCell;
 @property (nonatomic,strong) NSMutableArray * unreadcountArr;
 @property (nonatomic,assign) BOOL * isShowUnread;
@@ -42,6 +41,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.unreadcountArr removeAllObjects];
     [self creatItemID];
    
 }
@@ -49,8 +49,8 @@
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    self.titlArr = @[@"我的故障",@"我的保修记录",@"我的能耗",@"我的收藏",@"我的消息"];
-    self.images = @[@"my",@"energy",@"record",@"store",@"message"];
+    self.titlArr = @[@"我的故障",@"我的保修记录",@"我的能耗",@"我的收藏",@"我的消息",@"设置"];
+    self.images = @[@"my",@"energy",@"record",@"store",@"message",@"shezhi4"];
 //    self.tableHight.constant = self.titlArr.count * hight + self.headView.frame.size.height;
     self.navigationController.navigationBar.backgroundColor = [UIColor lightGrayColor];
     self.tableView.tableFooterView = [UIView new];
@@ -59,10 +59,10 @@
     DeviceInfo *device = [DeviceInfo defaultManager];
     if (![device.db isEqualToString:SMART_DB]) {
         self.nameLabel.text = @"admin";
-        self.segues =@[@"iphoneDefault",@"iphoneRecordSegue",@"TYiphone",@"iphoneFavorSegue",@"iphoneMsgSegue"];
+        self.segues =@[@"iphoneDefault",@"iphoneRecordSegue",@"TYiphone",@"iphoneFavorSegue",@"iphoneMsgSegue",@"iphoneSettingSegue"];
     }else{
         self.nameLabel.text = [[NSUserDefaults  standardUserDefaults] objectForKey:@"UserName"];
-        self.segues = @[@"iphoneDefault",@"iphoneRecordSegue",@"iphoneEngerSegue",@"iphoneFavorSegue",@"iphoneMsgSegue"];
+        self.segues = @[@"iphoneDefault",@"iphoneRecordSegue",@"iphoneEngerSegue",@"iphoneFavorSegue",@"iphoneMsgSegue",@"iphoneSettingSegue"];
     }
     
  
@@ -117,11 +117,9 @@
         }
         if (self.unreadcountArr.count == subArr.count) {
             self.imageView.hidden = YES;
-           
         }
         else{
             self.imageView.hidden = NO;
-            
         }
         
     }
@@ -169,43 +167,6 @@
     }
 
 }
-- (IBAction)PorTraitButton:(id)sender {
-    
-        UIImagePickerController *PickerImage = [[UIImagePickerController alloc]init];
-    
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-   
-    [alert addAction:[UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    
-        PickerImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        //允许编辑，即放大裁剪
-        PickerImage.allowsEditing = YES;
-        //自代理
-        PickerImage.delegate = self;
-        //页面跳转
-        [self presentViewController:PickerImage animated:YES completion:nil];
-    }]];
-    
-    [alert addAction:[UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
-        PickerImage.sourceType = UIImagePickerControllerSourceTypeCamera;
-        PickerImage.allowsEditing = YES;
-        PickerImage.delegate = self;
-        [self presentViewController:PickerImage animated:YES completion:nil];
-    }]];
-
-    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
-    //定义一个newPhoto，用来存放我们选择的图片。
-    UIImage *newPhoto = [info objectForKey:@"UIImagePickerControllerEditedImage"];
-//    _myHeadPortrait.image = newPhoto;
-    [self.PorTraintButton setBackgroundImage:newPhoto forState:UIControlStateNormal];
-//    [self saveImage:newPhoto withName:<#(NSString *)#>];
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 
 -(void) httpHandler:(id) responseObject tag:(int)tag
 {
@@ -244,16 +205,7 @@
     }
     
 }
--(void)saveImage:(UIImage *)currentImage
-{
-    NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
-    // 获取沙盒目录
-    
-    NSString *fullPath =[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-    // 将图片写入文件
-    
-    [imageData writeToFile:fullPath atomically:NO];
-}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];

@@ -8,7 +8,7 @@
 			<key>deviceValue</key>
 			<integer>25</integer>
 			<key>repetition</key>
-			<string>1,2,3,4,5,6,7</string>
+			<string>周一、周二、周三、周四、周五</string>
 			<key>deviceName</key>
 			<string>老人房-空调</string>
 			<key>starttime</key>
@@ -22,7 +22,7 @@
 			<key>deviceValue</key>
 			<integer>0</integer>
 			<key>repetition</key>
-			<string>1</string>
+			<string>周一</string>
 			<key>deviceName</key>
 			<string>客厅-智能浇花</string>
 			<key>starttime</key>
