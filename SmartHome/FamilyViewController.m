@@ -25,6 +25,7 @@
 #import "IPhoneRoom.h"
 #import "DeviceInfo.h"
 #import "RoomDeviceController.h"
+#import "NetStatusManager.h"
 
 @interface FamilyViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,TcpRecvDelegate>
 
@@ -77,9 +78,9 @@
 -(void)connect
 {
     SocketManager *sock = [SocketManager defaultManager];
-    if ([[UD objectForKey:@"HostID"] intValue] > 0x8000) {
+    if ([NetStatusManager isEnableWIFI]) {
         [sock connectUDP:[IOManager udpPort]];
-    }else{
+    }else if ([NetStatusManager isEnableWWAN]){
         [sock connectTcp];
     }
     sock.delegate = self;

@@ -48,7 +48,7 @@
 +(NSString *)deviceUrlByDeviceID:(int)deviceID;
 //根据设备ID获取设备类别
 +(NSString *)deviceTypeNameByDeviceID:(int)eId;
-
++ (NSArray *)getSwitchLightByRoom:(int) roomID;//开关灯
 +(NSString*)lightTypeNameByDeviceID:(int)eId;
 +(NSString *)getNameWithID:(int)eId;
 

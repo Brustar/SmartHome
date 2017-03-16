@@ -27,10 +27,19 @@
 @property (nonatomic,strong) NSString * deviceid;
 @property (strong, nonatomic) Scene *scene;
 @property (nonatomic,strong) NSArray * ColourLightArr;
+@property (nonatomic,strong) NSArray * SwitchLightArr;
 
 @end
 
 @implementation IphoneLightController
+-(NSArray *)SwitchLightArr
+{
+    if (_SwitchLightArr == nil) {
+        _SwitchLightArr = [NSArray array];
+    }
+
+    return _SwitchLightArr;
+}
 -(NSArray *)ColourLightArr
 {
     if (_ColourLightArr == nil) {
@@ -80,6 +89,7 @@
 //    _curtainArrs = [SQLManager getCurtainByRoom:self.roomID];
 //    _airArrs     = [SQLManager getAirDeviceByRoom:self.roomID];
     _ColourLightArr = [SQLManager getColourLightByRoom:self.roomID];
+    _SwitchLightArr = [SQLManager getSwitchLightByRoom:self.roomID];
     [self.tableView registerNib:[UINib nibWithNibName:@"ColourTableViewCell" bundle:nil] forCellReuseIdentifier:@"ColourTableViewCell"];
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
@@ -124,7 +134,7 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
     
 }
 
@@ -132,8 +142,10 @@
 {
     if (section==0) {
         return _lightArrs.count;
+    }if (section == 1) {
+     return _ColourLightArr.count;
     }
-    return _ColourLightArr.count;
+    return _SwitchLightArr.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -151,6 +163,7 @@
         return cell;
 
     }
+<<<<<<< HEAD
     
     //调色灯
     
@@ -166,7 +179,36 @@
         //[self.cell.colourView addGestureRecognizer:singleTap];
         colorCell.selectionStyle = UITableViewCellSelectionStyleNone;
         return colorCell;
+=======
+    if (indexPath.section == 1) {
+        //调色灯
+        self.cell = [tableView dequeueReusableCellWithIdentifier:@"ColourTableViewCell" forIndexPath:indexPath];
+        Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[indexPath.row] intValue]];
+        self.cell.lable.text = device.name;
+        self.cell.deviceID = device.eID;
+        self.cell.delegate = self;
+        
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeColor:)];
+        self.cell.colourView.tag = indexPath.row;
+        self.cell.colourView.userInteractionEnabled=YES;
+        [self.cell.colourView addGestureRecognizer:singleTap];
+        self.cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return self.cell;
+    }
+    self.cell = [tableView dequeueReusableCellWithIdentifier:@"ColourTableViewCell" forIndexPath:indexPath];
+    Device *device = [SQLManager getDeviceWithDeviceID:[_SwitchLightArr[indexPath.row] intValue]];
+    self.cell.lable.text = device.name;
+    self.cell.deviceID = device.eID;
+    self.cell.delegate = self;
+>>>>>>> af2848e9a876c5d286a5660f262ef3e3f9bc01ca
     
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeColor:)];
+    self.cell.colourView.tag = indexPath.row;
+    self.cell.colourView.hidden = YES;
+    self.cell.colourView.userInteractionEnabled=YES;
+    [self.cell.colourView addGestureRecognizer:singleTap];
+    self.cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return self.cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -205,9 +247,16 @@
 
 - (void)setSelectedColor:(UIColor *)color deviceID:(NSString *)deviceID indexPathRow:(NSInteger)row
 {
+<<<<<<< HEAD
     ColourTableViewCell *colorCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:1]];
     colorCell.colourView.backgroundColor = color;
     [self save:color deviceID:deviceID];
+=======
+    //Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[row] intValue]];
+    //设置数据库里的色灯的色值
+    self.cell.colourView.backgroundColor = color;
+    [self save:nil];
+>>>>>>> af2848e9a876c5d286a5660f262ef3e3f9bc01ca
 }
 
 -(void)save:(UIColor *)color deviceID:(NSString *)deviceID
@@ -263,6 +312,9 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 1) {
+        return 43;
+    }
+    if (indexPath.section == 2) {
         return 43;
     }
 

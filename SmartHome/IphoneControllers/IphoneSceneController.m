@@ -7,7 +7,8 @@
 //
 
 
-#define cellWidth self.collectionView.frame.size.width / 2.0 - 20
+#define cellWidth self.collectionView.frame.size.width  - 20
+#define cellH self.collectionView.frame.size.height
 #define  minSpace 20
 
 #import "IphoneSceneController.h"
@@ -390,7 +391,7 @@
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(cellWidth, cellWidth);
+    return CGSizeMake(cellWidth, cellH);
 }
 
 - (void)didReceiveMemoryWarning {
