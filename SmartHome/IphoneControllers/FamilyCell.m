@@ -19,8 +19,8 @@
 -(void)awakeFromNib{
     [super awakeFromNib];
     self.layer.masksToBounds = YES;
-    self.supImageView.layer.cornerRadius = self.supImageView.bounds.size.width / 2.0;
-    self.subImageView.layer.cornerRadius = self.subImageView.bounds.size.width /2.0;
+    //self.supImageView.layer.cornerRadius = self.supImageView.bounds.size.width / 2.0;
+    //self.subImageView.layer.cornerRadius = self.subImageView.bounds.size.width /2.0;
     self.lightImageVIew.layer.cornerRadius = self.lightImageVIew.bounds.size.width /2.0;
     self.curtainImageView.layer.cornerRadius = self.curtainImageView.bounds.size.width / 2.0;
     self.airImageVIew.layer.cornerRadius = self.airImageVIew.bounds.size.width / 2.0;
@@ -34,6 +34,11 @@
 
 
 }
+
+- (void)addRing {
+     [LayerUtil createRing:50 pos:CGPointMake(self.frame.size.width/2, self.frame.size.width/2) colors:@[[UIColor orangeColor],[UIColor blueColor],[UIColor yellowColor], [UIColor redColor]] container:self];
+}
+
 -(void)setModel:(IPhoneRoom *)iphoneRom{
     self.nameLabel.text = iphoneRom.roomName;
     self.tag = iphoneRom.roomId;
