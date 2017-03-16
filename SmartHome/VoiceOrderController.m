@@ -224,18 +224,17 @@
         NSLog(@"听写结果(json)：%@测试", result);
     
     
-    NSLog(@"resultFromJson=%@",resultFromJson);
-    NSLog(@"isLast=%d,_textView.text=%@",isLast,self.resultLabel.text);
-    
-    self.sceneID =[SQLManager getSceneID:self.resultLabel.text];
-    if (self.sceneID>0) {
-        self.sampleLabel.text = @"找到匹配项";
-        [[SceneManager defaultManager] startScene:self.sceneID];
-        [self performSegueWithIdentifier:@"sceneSegue" sender:self];
+        NSLog(@"resultFromJson=%@",resultFromJson);
+        NSLog(@"isLast=%d,_textView.text=%@",isLast,self.resultLabel.text);
         
-    }else{
-        self.sampleLabel.text = @"找不到匹配项，请重新说";
-    }
+        self.sceneID =[SQLManager getSceneID:self.resultLabel.text];
+        if (self.sceneID>0) {
+            self.sampleLabel.text = @"找到匹配项";
+            [[SceneManager defaultManager] startScene:self.sceneID];
+            [self performSegueWithIdentifier:@"sceneSegue" sender:self];
+        }else{
+            self.sampleLabel.text = @"找不到匹配项，请重新说";
+        }
     }
 }
 

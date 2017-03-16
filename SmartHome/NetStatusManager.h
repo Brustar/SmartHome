@@ -12,5 +12,7 @@
 
 + (BOOL) reachable;
 + (NSString *)getWifiName;
++ (BOOL) isEnableWIFI;
++ (BOOL) isEnableWWAN;
 
 @end

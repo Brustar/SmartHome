@@ -11,14 +11,12 @@
 #import "MBProgressHUD+NJ.h"
 #import "NSString+RegMatch.h"
 #import "WebManager.h"
-#import "VerifyCodeView.h"
 
 @interface RegisterPhoneNumController ()<UITextFieldDelegate,UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewTopLeadingConstraint;
 @property (weak, nonatomic) IBOutlet UIView *usderAndMasterView;
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumTextField;
 @property (weak, nonatomic) IBOutlet UITextField *imgeVerifyField;
-@property (weak, nonatomic) IBOutlet VerifyCodeView *imgVerifyView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewWidthConstraint;
 
 @property (weak, nonatomic) IBOutlet UIButton *DissmissBtn;
@@ -32,7 +30,7 @@
     self.title = @"注册";
     self.UserTypeLb.text = self.suerTypeStr;
     self.MasterIDLb.text = [NSString stringWithFormat:@"%@",[NSNumber numberWithInt:self.masterStr]];
-    self.imgeVerifyField.delegate = self;
+    //self.imgeVerifyField.delegate = self;
     //直接注册时隐藏身份和主机ID
     if(self.suerTypeStr == nil|| self.masterStr == 0)
     {
@@ -129,18 +127,5 @@
     
     [self performSegueWithIdentifier:@"webViewManger" sender:self];
 }
-
-#pragma - mark UITextField代理
-- (void)textFieldDidEndEditing:(UITextField *)textField;
-{
-        if (![self.imgeVerifyField.text isEqualToString:self.imgVerifyView.authCodeStr])
-        {
-            UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"验证码错误，请重新输入" message:nil preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
-            [alertVC addAction:action];
-            [self presentViewController:alertVC animated:YES completion:nil];
-        }
-}
-
 
 @end

@@ -9,7 +9,7 @@
 #import "SceneController.h"
 #import "SceneCell.h"
 #import "ScenseSplitViewController.h"
-#import <AFNetworking.h>
+//#import <AFNetworking.h>
 #import "SocketManager.h"
 #import "SQLManager.h"
 #import "Scene.h"
@@ -21,6 +21,7 @@
 #import "UIImageView+WebCache.h"
 #import "SceneManager.h"
 #import <SDWebImage/UIButton+WebCache.h>
+#import <Reachability.h>
 
 
 @interface SceneController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIGestureRecognizerDelegate,UISearchBarDelegate,SceneCellDelegate>
@@ -78,13 +79,12 @@
     self.firstView.hidden = YES;
     self.secondView.hidden = YES;
 
-    //开启网络状况的监听
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityUpdate:) name: AFNetworkingReachabilityDidChangeNotification object: nil];
-
-    [self updateInterfaceWithReachability];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityUpdate:) name: kReachabilityChangedNotification object: nil];
+    Reachability *hostReach = [Reachability reachabilityWithHostname:@"www.apple.com"];//可以以多种形式初始化
+    [hostReach startNotifier];  //开始监听,会启动一个run loop
+    [self updateInterfaceWithReachability: hostReach];
     
     [self reachNotification];
-
     [self setNavi];
 }
 
@@ -221,60 +221,50 @@
 //监听到网络状态改变
 - (void)reachabilityUpdate: (NSNotification* )note
 {
-    [self updateInterfaceWithReachability];
+    Reachability* curReach = [note object];
+    NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
+    [self updateInterfaceWithReachability:curReach];
 }
 
 
 //处理连接改变后的情况
-- (void)updateInterfaceWithReachability
+- (void)updateInterfaceWithReachability: (Reachability*) curReach
 {
-    AFNetworkReachabilityManager *afNetworkReachabilityManager = [AFNetworkReachabilityManager sharedManager];
-    //[afNetworkReachabilityManager startMonitoring];  //开启网络监视器；
-    [afNetworkReachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        DeviceInfo *info = [DeviceInfo defaultManager];
-        if(status == AFNetworkReachabilityStatusReachableViaWWAN)
-        {
-            if (info.connectState==outDoor) {
-                //NSLog(@"外出模式");
-                [self.netBarBtn setImage:[UIImage imageNamed:@"wifi"]];
-                return;
-            }
-            if (info.connectState==offLine) {
-                NSLog(@"离线模式");
-                [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
-            }
+    NetworkStatus status = [curReach currentReachabilityStatus];
+    DeviceInfo *info = [DeviceInfo defaultManager];
+    //SocketManager *sock = [SocketManager defaultManager];
+    if(status == ReachableViaWWAN)
+    {
+        //[sock connectTcp];
+        if (info.connectState==outDoor) {
+            //NSLog(@"外出模式");
+            [self.netBarBtn setImage:[UIImage imageNamed:@"wifi"]];
+            return;
         }
-        else if(status == AFNetworkReachabilityStatusReachableViaWiFi)
-        {
-            if (info.connectState==atHome) {
-                NSLog(@"在家模式");
-                [self.netBarBtn setImage:[UIImage imageNamed:@"atHome"]];
-                return;
-            }else if (info.connectState==outDoor){
-                //NSLog(@"外出模式");
-                [self.netBarBtn setImage:[UIImage imageNamed:@"wifi"]];
-            }
-            if (info.connectState==offLine) {
-                NSLog(@"离线模式");
-                [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
-                if ([info.db isEqualToString:SMART_DB]) {
-                    /*
-                    int sed = (arc4random() % 3) + 1;
-                    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad && sed == 1) {
-                        //connect master
-                        [sock connectUDP:[IOManager udpPort]];
-                    }else{
-                        //connect cloud
-                        [sock connectTcp];
-                    }
-                     */
-                }
-            }
-        }else{
+        if (info.connectState==offLine) {
             NSLog(@"离线模式");
             [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
         }
-    }];
+    }
+    else if(status == ReachableViaWiFi)
+    {
+        //[sock connectUDP:[IOManager udpPort]];
+        if (info.connectState==atHome) {
+            NSLog(@"在家模式");
+            [self.netBarBtn setImage:[UIImage imageNamed:@"atHome"]];
+            return;
+        }else if (info.connectState==outDoor){
+            //NSLog(@"外出模式");
+            [self.netBarBtn setImage:[UIImage imageNamed:@"wifi"]];
+        }
+        if (info.connectState==offLine) {
+            NSLog(@"离线模式");
+            [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
+        }
+    }else{
+        NSLog(@"离线模式");
+        [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

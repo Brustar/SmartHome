@@ -12,7 +12,6 @@
 #import "MBProgressHUD+NJ.h"
 #import "FMDatabase.h"
 #import "SQLManager.h"
-//#import <AdSupport/ASIdentifierManager.h>
 
 @implementation DeviceInfo
 

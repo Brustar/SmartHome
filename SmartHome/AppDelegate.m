@@ -21,6 +21,8 @@
 #import "IphoneFavorController.h"
 #import "IphoneFamilyViewController.h"
 #import "IphoneTabBarViewController.h"
+//#import <RongIMKit/RongIMKit.h>
+//#import "RCDataManager.h"
 
 @implementation AppDelegate
 
@@ -85,7 +87,8 @@
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(kickout) name:KICK_OUT object:nil];
-
+    //[[RCIM sharedRCIM] initWithAppKey:@"8brlm7uf8tsb3"];
+    //[RCIM sharedRCIM].userInfoDataSource = [RCDataManager shareManager];
     return YES;
 }
 
