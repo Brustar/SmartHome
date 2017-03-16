@@ -190,6 +190,10 @@
 		CD43046F1E0B674000B594F4 /* FamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD43046E1E0B674000B594F4 /* FamilyViewController.m */; };
 		CD78A8301E3379C200060466 /* 255_221.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD78A82F1E3379C200060466 /* 255_221.plist */; };
 		CD78A8321E337C1600060466 /* 255_216.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD78A8311E337C1600060466 /* 255_216.plist */; };
+		CDF1573A1E7AAD4C00499AC5 /* BaseNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF157371E7AAD4C00499AC5 /* BaseNavController.m */; };
+		CDF1573B1E7AAD4C00499AC5 /* BaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF157391E7AAD4C00499AC5 /* BaseTabBarController.m */; };
+		CDF157401E7AADC700499AC5 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF1573C1E7AADC700499AC5 /* LeftViewController.m */; };
+		CDF157411E7AADC700499AC5 /* LeftSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF1573F1E7AADC700499AC5 /* LeftSlideViewController.m */; };
 		CDF389221E305B4400657C8B /* breakdownlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF389211E305B4400657C8B /* breakdownlist.plist */; };
 		CDF389241E306D2400657C8B /* maintaininfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF389231E306D2400657C8B /* maintaininfo.plist */; };
 		CDF389261E30A31300657C8B /* energylist.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF389251E30A31300657C8B /* energylist.plist */; };
@@ -736,6 +740,14 @@
 		CD43046E1E0B674000B594F4 /* FamilyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyViewController.m; sourceTree = "<group>"; };
 		CD78A82F1E3379C200060466 /* 255_221.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 255_221.plist; sourceTree = "<group>"; };
 		CD78A8311E337C1600060466 /* 255_216.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 255_216.plist; sourceTree = "<group>"; };
+		CDF157361E7AAD4C00499AC5 /* BaseNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavController.h; sourceTree = "<group>"; };
+		CDF157371E7AAD4C00499AC5 /* BaseNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavController.m; sourceTree = "<group>"; };
+		CDF157381E7AAD4C00499AC5 /* BaseTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarController.h; sourceTree = "<group>"; };
+		CDF157391E7AAD4C00499AC5 /* BaseTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabBarController.m; sourceTree = "<group>"; };
+		CDF1573C1E7AADC700499AC5 /* LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftViewController.m; sourceTree = "<group>"; };
+		CDF1573D1E7AADC700499AC5 /* LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftViewController.h; sourceTree = "<group>"; };
+		CDF1573E1E7AADC700499AC5 /* LeftSlideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftSlideViewController.h; sourceTree = "<group>"; };
+		CDF1573F1E7AADC700499AC5 /* LeftSlideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftSlideViewController.m; sourceTree = "<group>"; };
 		CDF389211E305B4400657C8B /* breakdownlist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = breakdownlist.plist; sourceTree = "<group>"; };
 		CDF389231E306D2400657C8B /* maintaininfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = maintaininfo.plist; sourceTree = "<group>"; };
 		CDF389251E30A31300657C8B /* energylist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = energylist.plist; sourceTree = "<group>"; };
@@ -1056,6 +1068,7 @@
 		0F032D461CC9B12700D1920D /* SmartHome */ = {
 			isa = PBXGroup;
 			children = (
+				CDF157351E7AACE600499AC5 /* CustomTabbarController */,
 				0F6ADFD81E7133BB00BFF67F /* UI3.0 */,
 				0F6ADFD71E71329400BFF67F /* Libs */,
 				F6DC64181DEBC1710056EC00 /* iPadControllers */,
@@ -1827,6 +1840,21 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		CDF157351E7AACE600499AC5 /* CustomTabbarController */ = {
+			isa = PBXGroup;
+			children = (
+				CDF1573C1E7AADC700499AC5 /* LeftViewController.m */,
+				CDF1573D1E7AADC700499AC5 /* LeftViewController.h */,
+				CDF1573E1E7AADC700499AC5 /* LeftSlideViewController.h */,
+				CDF1573F1E7AADC700499AC5 /* LeftSlideViewController.m */,
+				CDF157361E7AAD4C00499AC5 /* BaseNavController.h */,
+				CDF157371E7AAD4C00499AC5 /* BaseNavController.m */,
+				CDF157381E7AAD4C00499AC5 /* BaseTabBarController.h */,
+				CDF157391E7AAD4C00499AC5 /* BaseTabBarController.m */,
+			);
+			name = CustomTabbarController;
+			sourceTree = "<group>";
+		};
 		F63AE02E1D11540F00BE17DC /* PrettyRuler */ = {
 			isa = PBXGroup;
 			children = (
@@ -1919,8 +1947,8 @@
 				F680AAB51DD94565001D1807 /* FamilyCell.h */,
 				F680AAB61DD94565001D1807 /* FamilyCell.m */,
 				2ED42B911E35B41E00592A03 /* IphoneAirCell.h */,
-				2ED42B921E35B41E00592A03 /* IphoneAirCell.m */,
 				2EDE045E1E45772000BC8E0B /* WebViewManger */,
+				2ED42B921E35B41E00592A03 /* IphoneAirCell.m */,
 				2E6328061E03C3C6000D7BE9 /* IphoneSceneAirVC.h */,
 				2E6328071E03C3C6000D7BE9 /* IphoneSceneAirVC.m */,
 				2E6328091E03C993000D7BE9 /* IPhoneSceneDVDVC.h */,
@@ -2472,6 +2500,7 @@
 				0FF92B661D9224640098DD54 /* TVChannel.m in Sources */,
 				0F11654F1D7418EE00A01B8F /* Amplifier.m in Sources */,
 				F630C3621D38C3E5008880BB /* AreaSettingCell.m in Sources */,
+				CDF1573A1E7AAD4C00499AC5 /* BaseNavController.m in Sources */,
 				2E7CD6081E14B80C002D0541 /* FixTimeListCell.m in Sources */,
 				2EA97E611E56A347003E0039 /* UIImage+ImageEffects.m in Sources */,
 				2E63280E1E03CB06000D7BE9 /* IPhoneTVVC.m in Sources */,
@@ -2482,6 +2511,7 @@
 				0FCFB3921CF293D800B37DD3 /* Netv.m in Sources */,
 				0FC1197A1D6FE61C001DA19A /* Projector.m in Sources */,
 				F6B91F6F1D100EF700592FB0 /* DVCollectionViewCell.m in Sources */,
+				CDF1573B1E7AAD4C00499AC5 /* BaseTabBarController.m in Sources */,
 				0F96A1641D17F37C00E1594F /* RulerItem.m in Sources */,
 				F67091BC1D93BF300002DDC5 /* WindowSlidingController.m in Sources */,
 				F64407D61DAE3BAD0032BEDF /* IphoneFavorController.m in Sources */,
@@ -2502,6 +2532,7 @@
 				F62CFA411DAC699D006410F7 /* IphoneTypeView.m in Sources */,
 				0F1F3BCA1D2B85EA00B2641C /* MBProgressHUD+NJ.m in Sources */,
 				F625A61B1D4C99EC00B696E5 /* RoomListController.m in Sources */,
+				CDF157411E7AADC700499AC5 /* LeftSlideViewController.m in Sources */,
 				2EA897AC1E31B25E002CA904 /* YZNavigationMenuView.m in Sources */,
 				0FC119771D6FE5E0001DA19A /* Screen.m in Sources */,
 				F62E05631DAB39F80096BF00 /* IphoneProfileController.m in Sources */,
@@ -2523,6 +2554,7 @@
 				0FADA44A1CEBF8AE00777901 /* SceneManager.m in Sources */,
 				0F01D5441CDC6CA600DAC267 /* Scene.m in Sources */,
 				0FC41BAF1D6DA3DD000D4451 /* VoiceOrderController.m in Sources */,
+				CDF157401E7AADC700499AC5 /* LeftViewController.m in Sources */,
 				0FCFB3831CF28FCB00B37DD3 /* Curtain.m in Sources */,
 				2E63280B1E03C993000D7BE9 /* IPhoneSceneDVDVC.m in Sources */,
 				0FC0FFDD1CF57E58000F71D5 /* TouchImage.m in Sources */,
@@ -2758,7 +2790,7 @@
 					"\"${PODS_ROOT}/Headers/Public/RegexKitLite\"",
 				);
 				INFOPLIST_FILE = SmartHome/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2801,7 +2833,7 @@
 					"\"${PODS_ROOT}/Headers/Public/RegexKitLite\"",
 				);
 				INFOPLIST_FILE = SmartHome/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
