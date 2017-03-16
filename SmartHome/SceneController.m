@@ -21,7 +21,7 @@
 #import "UIImageView+WebCache.h"
 #import "SceneManager.h"
 #import <SDWebImage/UIButton+WebCache.h>
-#import <Reachability.h>
+//#import <Reachability.h>
 
 
 @interface SceneController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIGestureRecognizerDelegate,UISearchBarDelegate,SceneCellDelegate>
@@ -79,10 +79,10 @@
     self.firstView.hidden = YES;
     self.secondView.hidden = YES;
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityUpdate:) name: kReachabilityChangedNotification object: nil];
-    Reachability *hostReach = [Reachability reachabilityWithHostname:@"www.apple.com"];//可以以多种形式初始化
-    [hostReach startNotifier];  //开始监听,会启动一个run loop
-    [self updateInterfaceWithReachability: hostReach];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityUpdate:) name: kReachabilityChangedNotification object: nil];
+    //Reachability *hostReach = [Reachability reachabilityWithHostname:@"www.apple.com"];//可以以多种形式初始化
+    //[hostReach startNotifier];  //开始监听,会启动一个run loop
+    //[self updateInterfaceWithReachability: hostReach];
     
     [self reachNotification];
     [self setNavi];
