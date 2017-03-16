@@ -164,22 +164,6 @@
 
     }
 
-    
-    //调色灯
-    
-      ColourTableViewCell *colorCell = [tableView dequeueReusableCellWithIdentifier:@"ColourTableViewCell" forIndexPath:indexPath];
-       Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[indexPath.row] intValue]];
-        colorCell.lable.text = device.name;
-        colorCell.deviceID = device.eID;
-        colorCell.delegate = self;
-    
-        //UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeColor:)];
-        colorCell.colourView.tag = indexPath.row;
-        //self.cell.colourView.userInteractionEnabled=YES;
-        //[self.cell.colourView addGestureRecognizer:singleTap];
-        colorCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        return colorCell;
-
     if (indexPath.section == 1) {
         //调色灯
         self.cell = [tableView dequeueReusableCellWithIdentifier:@"ColourTableViewCell" forIndexPath:indexPath];
@@ -188,29 +172,30 @@
         self.cell.deviceID = device.eID;
         self.cell.delegate = self;
         
-//        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeColor:)];
-//        self.cell.colourView.tag = indexPath.row;
-//        self.cell.colourView.userInteractionEnabled=YES;
-//        [self.cell.colourView addGestureRecognizer:singleTap];
-//        self.cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        return self.cell;
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeColor:)];
+        self.cell.colourView.tag = indexPath.row;
+        self.cell.colourView.userInteractionEnabled=YES;
+        [self.cell.colourView addGestureRecognizer:singleTap];
+        self.cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return self.cell;
     }
-//    self.cell = [tableView dequeueReusableCellWithIdentifier:@"ColourTableViewCell" forIndexPath:indexPath];
-//    Device *device = [SQLManager getDeviceWithDeviceID:[_SwitchLightArr[indexPath.row] intValue]];
-//    self.cell.lable.text = device.name;
-//    self.cell.deviceID = device.eID;
-//    self.cell.delegate = self;
-
-    
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeColor:)];
+    self.cell = [tableView dequeueReusableCellWithIdentifier:@"ColourTableViewCell" forIndexPath:indexPath];
+    Device *device = [SQLManager getDeviceWithDeviceID:[_SwitchLightArr[indexPath.row] intValue]];
+    self.cell.lable.text = device.name;
+    self.cell.deviceID = device.eID;
+    self.cell.delegate = self;
     self.cell.colourView.tag = indexPath.row;
     self.cell.colourView.hidden = YES;
     self.cell.colourView.userInteractionEnabled=YES;
-    [self.cell.colourView addGestureRecognizer:singleTap];
     self.cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return self.cell;
 }
-
+-(IBAction)changeColor:(id)sender
+{
+    HRSampleColorPickerViewController *controller= [[HRSampleColorPickerViewController alloc] initWithColor:self.cell.backgroundColor fullColor:NO indexPathRow:0];
+    controller.delegate = self;
+    [self.navigationController pushViewController:controller animated:YES];
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
         Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[indexPath.row] intValue]];
