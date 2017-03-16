@@ -26,7 +26,8 @@
 #import "DeviceInfo.h"
 #import "ObjectFunction.h"
 #import "UIImage+ImageEffects.h"
-#import <AFNetworking.h>
+#import "AppDelegate.h"
+
 
 @interface IphoneFamilyViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,TcpRecvDelegate>
 @property (weak, nonatomic)  IBOutlet UICollectionView *collectionView;
@@ -89,9 +90,54 @@
     sock.delegate = self;
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (_afNetworkReachabilityManager.reachableViaWiFi) {
+        NSLog(@"WIFI: %d", _afNetworkReachabilityManager.reachableViaWiFi);
+    }
+    
+    if (_afNetworkReachabilityManager.reachableViaWWAN) {
+         NSLog(@"WWAN: %d", _afNetworkReachabilityManager.reachableViaWWAN);
+    }
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+      NSInteger status = _afNetworkReachabilityManager.networkReachabilityStatus;
+    
+  
+     NSLog(@"NetworkReachabilityStatus: %d", status);
+
+    
+}
+
+- (void)setupSlideButton {
+    UIButton *menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    menuBtn.frame = CGRectMake(0, 0, 44, 44);
+    [menuBtn setImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
+    [menuBtn addTarget:self action:@selector(menuBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
+}
+
+- (void)menuBtnAction:(UIButton *)sender {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    if (appDelegate.LeftSlideVC.closed)
+    {
+        [appDelegate.LeftSlideVC openLeftView];
+    }
+    else
+    {
+        [appDelegate.LeftSlideVC closeLeftView];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self setupSlideButton];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.rooms = [SQLManager getAllRoomsInfo];
@@ -100,8 +146,7 @@
         self.deviceArr = [SQLManager deviceSubTypeByRoomId:self.roomID];
     }
 
-    //开启网络状况的监听
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityUpdate:) name: AFNetworkingReachabilityDidChangeNotification object: nil];
+    //开启网络状况监听器
     [self updateInterfaceWithReachability];
 
     //init nest dataSource
@@ -128,45 +173,47 @@
     [self updateInterfaceWithReachability];
 }
 //处理连接改变后的情况
-- (void) updateInterfaceWithReachability
+- (void)updateInterfaceWithReachability
 {
-    AFNetworkReachabilityManager *afNetworkReachabilityManager = [AFNetworkReachabilityManager sharedManager];
-    //[afNetworkReachabilityManager startMonitoring];  //开启网络监视器；
-    [afNetworkReachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+    _afNetworkReachabilityManager = [AFNetworkReachabilityManager sharedManager];
+    
+    [_afNetworkReachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         DeviceInfo *info = [DeviceInfo defaultManager];
-        if(status == AFNetworkReachabilityStatusReachableViaWWAN)
+        if(status == AFNetworkReachabilityStatusReachableViaWWAN) //手机自带网络
         {
             if (info.connectState==outDoor) {
                 NSLog(@"外出模式");
-                [self.netBarBtnItem setImage:[UIImage imageNamed:@"Iphonewifi"]];
-                
-                return;
+                [self.netBarBtnItem setImage:[UIImage imageNamed:@"4g"]];
             }
             if (info.connectState==offLine) {
                 NSLog(@"离线模式");
-                [self.netBarBtnItem setImage:[UIImage imageNamed:@"IphoneBreakWIFI"]];
+                [self.netBarBtnItem setImage:[UIImage imageNamed:@"4g"]];
             }
         }
-        else if(status == AFNetworkReachabilityStatusReachableViaWiFi)
+        else if(status == AFNetworkReachabilityStatusReachableViaWiFi) //WIFI
         {
             if (info.connectState==atHome) {
                 NSLog(@"在家模式");
                 [self.netBarBtnItem setImage:[UIImage imageNamed:@"atHome"]];
-                return;
+
             }else if (info.connectState==outDoor){
                 NSLog(@"外出模式");
                 [self.netBarBtnItem setImage:[UIImage imageNamed:@"Iphonewifi"]];
-            }
-            if (info.connectState==offLine) {
+            }else if (info.connectState==offLine) {
                 NSLog(@"离线模式");
-              [self.netBarBtnItem setImage:[UIImage imageNamed:@"IphoneBreakWIFI"]];
+              [self.netBarBtnItem setImage:[UIImage imageNamed:@"Iphonewifi"]];
                 
             }
-        }else{
+        }else if(status == AFNetworkReachabilityStatusNotReachable){ //没有网络(断网)
             NSLog(@"离线模式");
-            [self.netBarBtnItem setImage:[UIImage imageNamed:@"IphoneBreakWIFI"]];
+            [self.netBarBtnItem setImage:[UIImage imageNamed:@"breakWifi"]];
+        }else if (status == AFNetworkReachabilityStatusUnknown) { //未知网络
+            [self.netBarBtnItem setImage:[UIImage imageNamed:@"breakWifi"]];
         }
     }];
+    
+    [_afNetworkReachabilityManager startMonitoring];//开启网络监视器；
+    
 }
 - (void)initNestDataSource {
     _nest_devices_arr = [[NSMutableArray alloc] init];

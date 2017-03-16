@@ -48,17 +48,20 @@
 
         //已登录时,自动登录
         if ([[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]) {
-            IphoneMainController *vc = [secondStoryBoard instantiateViewControllerWithIdentifier:@"IphoneMainController"];
-            self.window.rootViewController = vc;
+            
+            self.mainTabBarController = [[BaseTabBarController alloc] init];
+            LeftViewController *leftVC = [[LeftViewController alloc] init];
+            self.LeftSlideVC = [[LeftSlideViewController alloc] initWithLeftView:leftVC andMainView:self.mainTabBarController];
+            self.window.rootViewController = self.LeftSlideVC;
 
         }else {
-            UIViewController *vc = [secondStoryBoard instantiateViewControllerWithIdentifier:@"main"];
+            UIViewController *vc = [secondStoryBoard instantiateViewControllerWithIdentifier:@"main"];//未登录，进欢迎页面WelcomeController
             self.window.rootViewController = vc;
         }
         
          [self.window makeKeyAndVisible];
         
-        [self setupTabbarView];
+    
         
     }else {
         //已登录时
@@ -89,7 +92,7 @@
     return YES;
 }
 
-- (void)setupTabbarView {
+/*- (void)setupTabbarView {
     // 当前顶层窗口
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     
@@ -132,7 +135,7 @@
     
     aView.hidden = YES;
     
-}
+}*/
 
 - (UIImage*)createImageWithColor:(UIColor *)color
 {
@@ -146,7 +149,7 @@
     return theImage;
 }
 
-- (void)btnClicked:(UIButton *)btn {
+/*- (void)btnClicked:(UIButton *)btn {
     if (!btn.selected) {
         btn.selected = YES;
         if ([btn.titleLabel.text isEqualToString:@"设备"]) {
@@ -170,7 +173,7 @@
         //跳转页面
         
     }
-}
+}*/
 
 -(void)kickout
 {

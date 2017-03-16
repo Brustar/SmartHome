@@ -105,7 +105,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     if (self.delegate) {
-        [self.delegate setSelectedColor:colorPickerView.color indexPathRow:_indexPathRow];
+        [self.delegate setSelectedColor:colorPickerView.color deviceID:self.deviceID indexPathRow:_indexPathRow];
     }
 }
 
