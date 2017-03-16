@@ -29,6 +29,7 @@
 #import "SearchViewController.h"
 #import "BgMusicController.h"
 #import "HostIDSController.h"
+#import "AppDelegate.h"
 //#import "IphoneRoomListController.h"
 
 @interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,SceneCellDelegate,UIViewControllerPreviewingDelegate,YZNavigationMenuViewDelegate>
@@ -56,6 +57,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    [self setupSlideButton];
     self.roomList = [SQLManager getAllRoomsInfo];
 //    self.title = @"场景";
      [self setUpRoomView];
@@ -76,6 +78,28 @@
 //    [self setNavi];
     
 }
+
+- (void)setupSlideButton {
+    UIButton *menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    menuBtn.frame = CGRectMake(0, 0, 44, 44);
+    [menuBtn setImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
+    [menuBtn addTarget:self action:@selector(menuBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
+}
+
+- (void)menuBtnAction:(UIButton *)sender {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    if (appDelegate.LeftSlideVC.closed)
+    {
+        [appDelegate.LeftSlideVC openLeftView];
+    }
+    else
+    {
+        [appDelegate.LeftSlideVC closeLeftView];
+    }
+}
+
 -(void)setNavi
 {
     self.titleButton = [[UIButton alloc]init];

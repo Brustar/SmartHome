@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="chj-yx-pDz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A2323a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="chj-yx-pDz">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -983,7 +983,7 @@
                             <constraint firstItem="Hbp-wY-ZBG" firstAttribute="top" secondItem="EeW-N4-5gV" secondAttribute="bottom" id="sHW-Ai-SEY"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="XoG-g2-KYf">
+                    <navigationItem key="navigationItem" title="场景" id="XoG-g2-KYf">
                         <rightBarButtonItems>
                             <barButtonItem image="media" id="d9K-vq-p9G">
                                 <color key="tintColor" red="0.91133814099999999" green="0.52505368519999995" blue="0.12219731189999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2941,7 +2941,7 @@
                             <constraint firstItem="puK-Tu-xPi" firstAttribute="top" secondItem="cph-wv-9vg" secondAttribute="bottom" id="wTe-va-dWG"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="mpu-ns-BTA"/>
+                    <navigationItem key="navigationItem" title="设备" id="mpu-ns-BTA"/>
                     <connections>
                         <outlet property="detailView" destination="Gov-9L-qGq" id="5CR-qK-fVn"/>
                         <outlet property="deviceTypeView" destination="ZPQ-5e-iR2" id="TSk-iJ-x6l"/>
@@ -6150,9 +6150,17 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+<<<<<<< HEAD
+        <segue reference="qN8-z6-Gb7"/>
+=======
         <segue reference="J5F-aP-6iz"/>
+<<<<<<< HEAD
         <segue reference="Uo6-og-hnM"/>
         <segue reference="qN8-z6-Gb7"/>
+=======
+        <segue reference="vWH-k8-ixo"/>
+>>>>>>> af2848e9a876c5d286a5660f262ef3e3f9bc01ca
+>>>>>>> 8fd02b01fb954d2be37bc76cc2ef8ebcde49ab56
         <segue reference="aTH-RA-7NZ"/>
         <segue reference="b22-0A-WOg"/>
     </inferredMetricsTieBreakers>

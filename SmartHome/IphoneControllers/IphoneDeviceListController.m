@@ -29,6 +29,7 @@
 #import "WindowSlidingController.h"
 #import "BgMusicController.h"
 #import "IphoneLightController.h"
+#import "AppDelegate.h"
 //#import "IphoneDeviceLightVC.h"
 
 
@@ -57,8 +58,31 @@
     self.rooms = [SQLManager getAllRoomsInfo];
     [self setUpRoomScrollerView];
     [self setUpScrollerView];
-    
+    [self setupSlideButton];
 }
+
+- (void)setupSlideButton {
+    UIButton *menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    menuBtn.frame = CGRectMake(0, 0, 44, 44);
+    [menuBtn setImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
+    [menuBtn addTarget:self action:@selector(menuBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
+}
+
+- (void)menuBtnAction:(UIButton *)sender {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    if (appDelegate.LeftSlideVC.closed)
+    {
+        [appDelegate.LeftSlideVC openLeftView];
+    }
+    else
+    {
+        [appDelegate.LeftSlideVC closeLeftView];
+    }
+}
+
+
 -(void)setUpScrollerView
 {
     self.deviceTypeView.dataArray = self.deviceTypes;

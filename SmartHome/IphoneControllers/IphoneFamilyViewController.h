@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AFNetworking.h>
 
 @interface IphoneFamilyViewController : UIViewController
 @property(nonatomic, strong)NSString *nest_access_token;
@@ -20,5 +21,6 @@
 @property(nonatomic, strong)NSMutableArray *nest_curr_humidity_arr;
 @property(nonatomic, strong)NSMutableArray *nest_en_room_name_arr;
 @property(nonatomic, strong)NSString * deviceid;
+@property(nonatomic, strong)AFNetworkReachabilityManager *afNetworkReachabilityManager;
 
 @end

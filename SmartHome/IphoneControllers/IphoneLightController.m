@@ -57,13 +57,34 @@
 
     return _lightArrs;
 }
+
+#pragma mark - 明快,幽静,浪漫
+
+//明快
+- (void)SprightlierBtn:(id)sender {
+    
+    [[SceneManager defaultManager] sprightly:[self.sceneid intValue]];
+}
+//幽静
+- (void)PeacefulBtn:(id)sender {
+    
+    [[SceneManager defaultManager] gloom:[self.sceneid intValue]];
+}
+//浪漫
+- (void)RomanceBtn:(id)sender {
+    
+    [[SceneManager defaultManager] romantic:[self.sceneid intValue]];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
-    UIView *view = [[UIView alloc] init];
-    [view setBackgroundColor:[UIColor clearColor]];
-    self.tableView.tableFooterView = view;
+    if (!self.isEditScene) {
+        self.tableView.tableFooterView = [UIView new];
+    }else {
+        self.tableView.tableFooterView = [self createTableFooterView];
+    }
+    
     _lightArrs   = [SQLManager getDeviceByRoom:self.roomID];
 //    _curtainArrs = [SQLManager getCurtainByRoom:self.roomID];
 //    _airArrs     = [SQLManager getAirDeviceByRoom:self.roomID];
@@ -74,6 +95,41 @@
     sock.delegate=self;
     self.scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     self.title = [SQLManager getRoomNameByRoomID:self.roomID];
+}
+
+- (UIView *)createTableFooterView {
+    
+    CGFloat btnWidth = 40.0f;
+    CGFloat btnHeight = 40.0f;
+    CGFloat gap = (UI_SCREEN_WIDTH-btnWidth*3)/4;
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, btnHeight*2)];
+    
+    for (int i = 0; i < 3; i++) {
+        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake((i+1)*gap + i*btnWidth, btnHeight/2, btnWidth, btnHeight)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((i+1)*gap + i*btnWidth, btnHeight/2+btnHeight, btnWidth, btnHeight/2)];
+        label.font = [UIFont systemFontOfSize:14.0];
+        label.backgroundColor = [UIColor clearColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        btn.layer.cornerRadius = 4.0;
+        btn.layer.masksToBounds = YES;
+        if (i == 0) {
+            [btn setImage:[UIImage imageNamed:@"u83"] forState:UIControlStateNormal];
+            [btn addTarget:self action:@selector(SprightlierBtn:) forControlEvents:UIControlEventTouchUpInside];
+            label.text = @"明快";
+        }else if (i == 1) {
+            [btn setImage:[UIImage imageNamed:@"u85"] forState:UIControlStateNormal];
+            [btn addTarget:self action:@selector(PeacefulBtn:) forControlEvents:UIControlEventTouchUpInside];
+            label.text = @"幽静";
+        }else if (i == 2) {
+            [btn setImage:[UIImage imageNamed:@"u87"] forState:UIControlStateNormal];
+            [btn addTarget:self action:@selector(RomanceBtn:) forControlEvents:UIControlEventTouchUpInside];
+            label.text = @"浪漫";
+        }
+        [view addSubview:btn];
+        [view addSubview:label];
+    }
+    return view;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -107,6 +163,23 @@
         return cell;
 
     }
+
+    
+    //调色灯
+    
+      ColourTableViewCell *colorCell = [tableView dequeueReusableCellWithIdentifier:@"ColourTableViewCell" forIndexPath:indexPath];
+       Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[indexPath.row] intValue]];
+        colorCell.lable.text = device.name;
+        colorCell.deviceID = device.eID;
+        colorCell.delegate = self;
+    
+        //UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeColor:)];
+        colorCell.colourView.tag = indexPath.row;
+        //self.cell.colourView.userInteractionEnabled=YES;
+        //[self.cell.colourView addGestureRecognizer:singleTap];
+        colorCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return colorCell;
+
     if (indexPath.section == 1) {
         //调色灯
         self.cell = [tableView dequeueReusableCellWithIdentifier:@"ColourTableViewCell" forIndexPath:indexPath];
@@ -115,18 +188,19 @@
         self.cell.deviceID = device.eID;
         self.cell.delegate = self;
         
-        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeColor:)];
-        self.cell.colourView.tag = indexPath.row;
-        self.cell.colourView.userInteractionEnabled=YES;
-        [self.cell.colourView addGestureRecognizer:singleTap];
-        self.cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        return self.cell;
+//        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeColor:)];
+//        self.cell.colourView.tag = indexPath.row;
+//        self.cell.colourView.userInteractionEnabled=YES;
+//        [self.cell.colourView addGestureRecognizer:singleTap];
+//        self.cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        return self.cell;
     }
-    self.cell = [tableView dequeueReusableCellWithIdentifier:@"ColourTableViewCell" forIndexPath:indexPath];
-    Device *device = [SQLManager getDeviceWithDeviceID:[_SwitchLightArr[indexPath.row] intValue]];
-    self.cell.lable.text = device.name;
-    self.cell.deviceID = device.eID;
-    self.cell.delegate = self;
+//    self.cell = [tableView dequeueReusableCellWithIdentifier:@"ColourTableViewCell" forIndexPath:indexPath];
+//    Device *device = [SQLManager getDeviceWithDeviceID:[_SwitchLightArr[indexPath.row] intValue]];
+//    self.cell.lable.text = device.name;
+//    self.cell.deviceID = device.eID;
+//    self.cell.delegate = self;
+
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeColor:)];
     self.cell.colourView.tag = indexPath.row;
@@ -135,6 +209,19 @@
     [self.cell.colourView addGestureRecognizer:singleTap];
     self.cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return self.cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 1) {
+        Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[indexPath.row] intValue]];
+        NSString *deviceID = [NSString stringWithFormat:@"%d", device.eID];
+        
+        ColourTableViewCell *colorCell = [tableView cellForRowAtIndexPath:indexPath];
+        
+        [self changeColor:colorCell.colourView.backgroundColor deviceID:deviceID  indexPathRow:indexPath.row];
+        
+        
+    }
 }
 
 #pragma mark - ColourTableViewCellDelegate
@@ -150,31 +237,36 @@
 }
 
 
-- (void)changeColor:(id)sender
+- (void)changeColor:(UIColor *)color deviceID:(NSString *)deviceID indexPathRow:(NSInteger )index
 {
-    UIView *colourView = (UIView *)sender;
-    
-    HRSampleColorPickerViewController *controller= [[HRSampleColorPickerViewController alloc] initWithColor:self.cell.colourView.backgroundColor fullColor:NO indexPathRow:colourView.tag];
+    HRSampleColorPickerViewController *controller= [[HRSampleColorPickerViewController alloc] initWithColor:color fullColor:NO indexPathRow:index];
+    controller.deviceID = deviceID;
     controller.delegate = self;
     [self.navigationController pushViewController:controller animated:YES];
 }
-- (void)setSelectedColor:(UIColor *)color indexPathRow:(NSInteger)row
+
+- (void)setSelectedColor:(UIColor *)color deviceID:(NSString *)deviceID indexPathRow:(NSInteger)row
 {
+
+    ColourTableViewCell *colorCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:1]];
+    colorCell.colourView.backgroundColor = color;
+    [self save:color deviceID:deviceID];
+
     //Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[row] intValue]];
     //设置数据库里的色灯的色值
     self.cell.colourView.backgroundColor = color;
-    [self save:nil];
+//    [self save:nil];
+
 }
 
--(void)save:(id)sender
+-(void)save:(UIColor *)color deviceID:(NSString *)deviceID
 {
-    UIColor *color = self.cell.colourView.backgroundColor;
     NSDictionary *colorDic = [self getRGBDictionaryByColor:color];
     int r = [colorDic[@"R"] floatValue] * 255;
     int g = [colorDic[@"G"] floatValue] * 255;
     int b = [colorDic[@"B"] floatValue] * 255;
     
-    NSData *data=[[DeviceInfo defaultManager] changeColor:self.deviceid R:r G:g B:b];
+    NSData *data=[[DeviceInfo defaultManager] changeColor:deviceID R:r G:g B:b];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:3];
 

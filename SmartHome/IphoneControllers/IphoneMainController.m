@@ -39,6 +39,11 @@
     
     self.headImageView.layer.cornerRadius = 50.0f; //圆角半径
     self.headImageView.layer.masksToBounds = YES; //圆角
+
+    //self.titleArr = @[@"我的故障",@"我的保修记录",@"我的能耗",@"我的收藏",@"我的消息",@"设置"];
+    self.titleArr = @[@"家庭",@"场景",@"设备",@"我的"];
+    self.titleImageArr = @[@"my",@"energy",@"record",@"store",@"message",@"shezhi4"];;
+
       if ([[UD objectForKey:@"HostID"] intValue] == 258) {
               self.titleArr = @[@"家庭",@"场景",@"设备",@"我的"];
             self.titleImageArr = @[@"my",@"energy",@"record",@"store"];
@@ -47,6 +52,7 @@
           self.titleImageArr = @[@"my",@"energy",@"record",@"store",@"message",@"shezhi4"];
       }
   
+
     self.tableView.tableFooterView = [UIView new];
     self.tableView.tableHeaderView = self.headView;
     [self setupChilderController];
@@ -82,6 +88,37 @@
 
 
 - (void)setupChilderController {
+
+    
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard *iphoneBoard  = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+   // ProfileFaultsViewController * profileFaultsVC = [storyBoard instantiateViewControllerWithIdentifier:@"MyDefaultViewController"];
+    IphoneFamilyViewController * familyVC = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"iphoneFamilyViewController"];
+   // [self setupVc:profileFaultsVC title:@"我的故障"];
+    [self setupVc:familyVC title:@"家庭"];
+    
+    IphoneSceneController *scene = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
+    //ServiceRecordViewController * serviceRecordVC = [storyBoard instantiateViewControllerWithIdentifier:@"ServiceRecordViewController"];
+    //[self setupVc:scene title:@"我的保修记录"];
+    [self setupVc:scene title:@"场景"];
+   
+    IphoneDeviceListController *deviceList = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"IphoneDeviceListController"];
+    //MySubEnergyVC * mySubEnergyVC = [storyBoard instantiateViewControllerWithIdentifier:@"MyEnergyViewController"];
+    //[self setupVc:mySubEnergyVC title:@"我的能耗"];
+    [self setupVc:deviceList title:@"设备"];
+    
+//    IphoneRealSceneController *realVC = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"IphoneRealSceneController"];
+    IphoneFavorController * favorVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneFavorController"];
+    [self setupVc:favorVC title:@"我的收藏"];
+    
+//    IphoneProfileController *profireList = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"IphoneProfileController"];
+    
+    MSGController * msgVC = [storyBoard instantiateViewControllerWithIdentifier:@"MSGController"];
+    [self setupVc:msgVC title:@"我的消息"];
+    
+    MySettingViewController * mysettingVC = [storyBoard instantiateViewControllerWithIdentifier:@"MySettingViewController"];
+    [self setupVc:mysettingVC title:@"设置"];
+    
      if ([[UD objectForKey:@"HostID"] intValue] == 258) {
         IphoneFamilyViewController * familyVC = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"iphoneFamilyViewController"];
            [self setupVc:familyVC title:@"家庭"];
@@ -107,7 +144,7 @@
          MySettingViewController * mysettingVC = [storyBoard instantiateViewControllerWithIdentifier:@"MySettingViewController"];
          [self setupVc:mysettingVC title:@"设置"];
      }
- 
+
     self.selectController = self.childViewControllers[0];
     [self.view addSubview:self.selectController.view];
     [self.view bringSubviewToFront:self.selectController.view];

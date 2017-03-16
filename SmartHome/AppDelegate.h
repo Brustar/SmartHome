@@ -6,13 +6,14 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
+#import "LeftSlideViewController.h"
+#import "BaseTabBarController.h"
+#import "LeftViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
-@property (nonatomic, strong) UIButton *deviceBtn;
-@property (nonatomic, strong) UIButton *homeBtn;
-@property (nonatomic, strong) UIButton *sceneBtn;
+@property (strong, nonatomic) LeftSlideViewController *LeftSlideVC;//侧滑视图VC
+@property (strong, nonatomic) BaseTabBarController *mainTabBarController;//主视图TabBarVC
 
 @end

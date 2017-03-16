@@ -170,8 +170,8 @@
 //        LightController *ligthVC = [storyBoard instantiateViewControllerWithIdentifier:@"LightController"];
          IphoneLightController * ligthVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"LightController"];
         ligthVC.roomID = roomID;
-//        ligthVC.showLightView = YES;
-//        ligthVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+        ligthVC.isEditScene = YES;
+        ligthVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         [self addViewAndVC:ligthVC];
         
     }else if([typeName isEqualToString:@"窗帘"])

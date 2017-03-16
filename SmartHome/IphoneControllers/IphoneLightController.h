@@ -13,4 +13,9 @@
 @property (nonatomic,assign) int roomID;
 @property (nonatomic,strong) NSString * sceneid;
 
+@property(nonatomic, strong) UIButton *_sunShineBtn;
+@property(nonatomic, strong) UIButton *_romanticBtn;
+@property(nonatomic, strong) UIButton *_silentBtn;
+@property(nonatomic, assign) BOOL isEditScene;
+
 @end

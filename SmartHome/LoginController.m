@@ -511,9 +511,9 @@
             [self gainHome_room_infoDataTo:responseObject[@"home_room_info"]];
             
             if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-            {
-                [self performSegueWithIdentifier:@"goToIphoneScene" sender:self];
-            }else{
+            {     [self gotoIPhoneMainViewController];
+                //[self performSegueWithIdentifier:@"goToIphoneScene" sender:self];
+            }else {
                 [self goToViewController];
             }
         }else{
@@ -522,11 +522,18 @@
     }
 }
 
--(void)goToViewController
-{
-    ECloudTabBarController *ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ECloudTabBarController"];
-    [self presentViewController:ecloudVC animated:YES completion:nil];
+- (void)gotoIPhoneMainViewController {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.mainTabBarController = [[BaseTabBarController alloc] init];
+    LeftViewController *leftVC = [[LeftViewController alloc] init];
+    appDelegate.LeftSlideVC = [[LeftSlideViewController alloc] initWithLeftView:leftVC andMainView:appDelegate.mainTabBarController];
+    appDelegate.window.rootViewController = appDelegate.LeftSlideVC;
+}
 
+- (void)goToViewController
+{
+        ECloudTabBarController *ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ECloudTabBarController"];
+        [self presentViewController:ecloudVC animated:YES completion:nil];
 }
 -(void)sendRequestToHostWithTag:(int)tag andRow:(int)row
 {
