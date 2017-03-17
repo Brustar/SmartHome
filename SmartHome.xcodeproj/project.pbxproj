@@ -201,6 +201,7 @@
 		CDF1574E1E7AB2AF00499AC5 /* icon_tabbar_merchant_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF157481E7AB2AF00499AC5 /* icon_tabbar_merchant_selected@2x.png */; };
 		CDF1574F1E7AB2AF00499AC5 /* icon_tabbar_mine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF157491E7AB2AF00499AC5 /* icon_tabbar_mine@2x.png */; };
 		CDF157511E7AB2C000499AC5 /* leftbackiamge.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF157501E7AB2C000499AC5 /* leftbackiamge.png */; };
+		CDF157541E7BA3F600499AC5 /* UIView_extra.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF157531E7BA3F600499AC5 /* UIView_extra.m */; };
 		CDF389221E305B4400657C8B /* breakdownlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF389211E305B4400657C8B /* breakdownlist.plist */; };
 		CDF389241E306D2400657C8B /* maintaininfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF389231E306D2400657C8B /* maintaininfo.plist */; };
 		CDF389261E30A31300657C8B /* energylist.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF389251E30A31300657C8B /* energylist.plist */; };
@@ -762,6 +763,8 @@
 		CDF157481E7AB2AF00499AC5 /* icon_tabbar_merchant_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_merchant_selected@2x.png"; sourceTree = "<group>"; };
 		CDF157491E7AB2AF00499AC5 /* icon_tabbar_mine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_mine@2x.png"; sourceTree = "<group>"; };
 		CDF157501E7AB2C000499AC5 /* leftbackiamge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftbackiamge.png; sourceTree = "<group>"; };
+		CDF157521E7BA3F600499AC5 /* UIView_extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIView_extra.h; sourceTree = "<group>"; };
+		CDF157531E7BA3F600499AC5 /* UIView_extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIView_extra.m; sourceTree = "<group>"; };
 		CDF389211E305B4400657C8B /* breakdownlist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = breakdownlist.plist; sourceTree = "<group>"; };
 		CDF389231E306D2400657C8B /* maintaininfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = maintaininfo.plist; sourceTree = "<group>"; };
 		CDF389251E30A31300657C8B /* energylist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = energylist.plist; sourceTree = "<group>"; };
@@ -1866,6 +1869,8 @@
 				CDF157371E7AAD4C00499AC5 /* BaseNavController.m */,
 				CDF157381E7AAD4C00499AC5 /* BaseTabBarController.h */,
 				CDF157391E7AAD4C00499AC5 /* BaseTabBarController.m */,
+				CDF157521E7BA3F600499AC5 /* UIView_extra.h */,
+				CDF157531E7BA3F600499AC5 /* UIView_extra.m */,
 			);
 			name = CustomTabbarController;
 			sourceTree = "<group>";
@@ -2531,6 +2536,7 @@
 				0F3CCF3B1D0F97B70058A320 /* CameraController.m in Sources */,
 				0FC0FFDA1CF577C0000F71D5 /* RealScene.m in Sources */,
 				F6755A4F1D406552002394F3 /* ECloudTabBarController.m in Sources */,
+				CDF157541E7BA3F600499AC5 /* UIView_extra.m in Sources */,
 				0FAF74C41CEEA17C00432713 /* HRColorPickerView.m in Sources */,
 				F6280D531D966218009108ED /* IphoneAddFmController.m in Sources */,
 				0FF92B661D9224640098DD54 /* TVChannel.m in Sources */,
