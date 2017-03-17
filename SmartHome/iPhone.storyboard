@@ -6187,13 +6187,13 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-<<<<<<< HEAD
+
         <segue reference="Uo6-og-hnM"/>
         <segue reference="qN8-z6-Gb7"/>
-=======
+
         <segue reference="J5F-aP-6iz"/>
         <segue reference="vWH-k8-ixo"/>
->>>>>>> a8480a333cd1b47fd6bbc7d2c1931d3642c2d5d0
+
         <segue reference="aTH-RA-7NZ"/>
         <segue reference="J5F-aP-6iz"/>
         <segue reference="b22-0A-WOg"/>
