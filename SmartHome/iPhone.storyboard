@@ -6150,17 +6150,11 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-<<<<<<< HEAD
         <segue reference="qN8-z6-Gb7"/>
-=======
         <segue reference="J5F-aP-6iz"/>
-<<<<<<< HEAD
         <segue reference="Uo6-og-hnM"/>
         <segue reference="qN8-z6-Gb7"/>
-=======
         <segue reference="vWH-k8-ixo"/>
->>>>>>> af2848e9a876c5d286a5660f262ef3e3f9bc01ca
->>>>>>> 8fd02b01fb954d2be37bc76cc2ef8ebcde49ab56
         <segue reference="aTH-RA-7NZ"/>
         <segue reference="b22-0A-WOg"/>
     </inferredMetricsTieBreakers>

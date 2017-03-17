@@ -172,43 +172,9 @@
         colorCell.lable.text = device.name;
         colorCell.deviceID = device.eID;
         colorCell.delegate = self;
-    
-        //UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeColor:)];
         colorCell.colourView.tag = indexPath.row;
-        //self.cell.colourView.userInteractionEnabled=YES;
-        //[self.cell.colourView addGestureRecognizer:singleTap];
         colorCell.selectionStyle = UITableViewCellSelectionStyleNone;
         return colorCell;
-
-    if (indexPath.section == 1) {
-        //调色灯
-        self.cell = [tableView dequeueReusableCellWithIdentifier:@"ColourTableViewCell" forIndexPath:indexPath];
-        Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[indexPath.row] intValue]];
-        self.cell.lable.text = device.name;
-        self.cell.deviceID = device.eID;
-        self.cell.delegate = self;
-        
-//        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeColor:)];
-//        self.cell.colourView.tag = indexPath.row;
-//        self.cell.colourView.userInteractionEnabled=YES;
-//        [self.cell.colourView addGestureRecognizer:singleTap];
-//        self.cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        return self.cell;
-    }
-//    self.cell = [tableView dequeueReusableCellWithIdentifier:@"ColourTableViewCell" forIndexPath:indexPath];
-//    Device *device = [SQLManager getDeviceWithDeviceID:[_SwitchLightArr[indexPath.row] intValue]];
-//    self.cell.lable.text = device.name;
-//    self.cell.deviceID = device.eID;
-//    self.cell.delegate = self;
-
-    
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeColor:)];
-    self.cell.colourView.tag = indexPath.row;
-    self.cell.colourView.hidden = YES;
-    self.cell.colourView.userInteractionEnabled=YES;
-    [self.cell.colourView addGestureRecognizer:singleTap];
-    self.cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    return self.cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -251,11 +217,6 @@
     ColourTableViewCell *colorCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:1]];
     colorCell.colourView.backgroundColor = color;
     [self save:color deviceID:deviceID];
-
-    //Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[row] intValue]];
-    //设置数据库里的色灯的色值
-    self.cell.colourView.backgroundColor = color;
-//    [self save:nil];
 
 }
 

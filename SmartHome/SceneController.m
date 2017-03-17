@@ -9,7 +9,7 @@
 #import "SceneController.h"
 #import "SceneCell.h"
 #import "ScenseSplitViewController.h"
-//#import <AFNetworking.h>
+#import <AFNetworking.h>
 #import "SocketManager.h"
 #import "SQLManager.h"
 #import "Scene.h"
@@ -21,7 +21,7 @@
 #import "UIImageView+WebCache.h"
 #import "SceneManager.h"
 #import <SDWebImage/UIButton+WebCache.h>
-//#import <Reachability.h>
+#import <Reachability.h>
 
 
 @interface SceneController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIGestureRecognizerDelegate,UISearchBarDelegate,SceneCellDelegate>
