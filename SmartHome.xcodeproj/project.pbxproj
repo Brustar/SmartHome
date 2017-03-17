@@ -43,6 +43,10 @@
 		0F49CB7E1E7A204300D46ECC /* Scene-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F49CB791E7A204300D46ECC /* Scene-iPad.storyboard */; };
 		0F49CB821E7A21FF00D46ECC /* ORBSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F49CB811E7A21FF00D46ECC /* ORBSwitch.m */; };
 		0F4B3C001D2A13870002E75E /* MSGController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4B3BFF1D2A13870002E75E /* MSGController.m */; };
+		0F4B3C731E7BE57A00102DD3 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4B3C6E1E7BE57A00102DD3 /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0F4B3C741E7BE57A00102DD3 /* WeChatPayController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0F4B3C701E7BE57A00102DD3 /* WeChatPayController.mm */; };
+		0F4B3C751E7BE57A00102DD3 /* CommonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4B3C721E7BE57A00102DD3 /* CommonUtil.m */; };
+		0F4B3C7A1E7BEDE300102DD3 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F4B3C781E7BED4E00102DD3 /* libxml2.tbd */; };
 		0F4B49801CFEB13500D93DD2 /* CurtainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4B497F1CFEB13500D93DD2 /* CurtainController.m */; };
 		0F6423491DE57C83003379FC /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6423441DE57C83003379FC /* AudioStreamer.m */; };
 		0F64234A1DE57C83003379FC /* RTSPPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6423461DE57C83003379FC /* RTSPPlayer.m */; };
@@ -397,6 +401,17 @@
 		0F49CB811E7A21FF00D46ECC /* ORBSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORBSwitch.m; sourceTree = "<group>"; };
 		0F4B3BFE1D2A13870002E75E /* MSGController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSGController.h; sourceTree = "<group>"; };
 		0F4B3BFF1D2A13870002E75E /* MSGController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSGController.m; sourceTree = "<group>"; };
+		0F4B3C6D1E7BE57A00102DD3 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		0F4B3C6E1E7BE57A00102DD3 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
+		0F4B3C6F1E7BE57A00102DD3 /* WeChatPayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeChatPayController.h; sourceTree = "<group>"; };
+		0F4B3C701E7BE57A00102DD3 /* WeChatPayController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WeChatPayController.mm; sourceTree = "<group>"; };
+		0F4B3C711E7BE57A00102DD3 /* CommonUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUtil.h; sourceTree = "<group>"; };
+		0F4B3C721E7BE57A00102DD3 /* CommonUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtil.m; sourceTree = "<group>"; };
+		0F4B3C761E7BED3A00102DD3 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
+		0F4B3C781E7BED4E00102DD3 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		0F4B3C7B1E7BEDFB00102DD3 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		0F4B3C7D1E7BEE1D00102DD3 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		0F4B3C7E1E7BEE1D00102DD3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0F4B497E1CFEB13500D93DD2 /* CurtainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurtainController.h; sourceTree = "<group>"; };
 		0F4B497F1CFEB13500D93DD2 /* CurtainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurtainController.m; sourceTree = "<group>"; };
 		0F6423431DE57C83003379FC /* AudioStreamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioStreamer.h; sourceTree = "<group>"; };
@@ -973,6 +988,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F4B3C7A1E7BEDE300102DD3 /* libxml2.tbd in Frameworks */,
 				0F64234C1DE57CA1003379FC /* libavformat.a in Frameworks */,
 				0F64234D1DE57CA1003379FC /* libavutil.a in Frameworks */,
 				0F64234E1DE57CA1003379FC /* libswresample.a in Frameworks */,
@@ -1359,6 +1375,35 @@
 			name = ORBSwitch;
 			sourceTree = "<group>";
 		};
+		0F4B3C6A1E7BE48F00102DD3 /* Pay */ = {
+			isa = PBXGroup;
+			children = (
+				0F4B3C6C1E7BE4A100102DD3 /* AliPay */,
+				0F4B3C6B1E7BE49800102DD3 /* WeChat */,
+			);
+			name = Pay;
+			sourceTree = "<group>";
+		};
+		0F4B3C6B1E7BE49800102DD3 /* WeChat */ = {
+			isa = PBXGroup;
+			children = (
+				0F4B3C6D1E7BE57A00102DD3 /* GDataXMLNode.h */,
+				0F4B3C6E1E7BE57A00102DD3 /* GDataXMLNode.m */,
+				0F4B3C6F1E7BE57A00102DD3 /* WeChatPayController.h */,
+				0F4B3C701E7BE57A00102DD3 /* WeChatPayController.mm */,
+				0F4B3C711E7BE57A00102DD3 /* CommonUtil.h */,
+				0F4B3C721E7BE57A00102DD3 /* CommonUtil.m */,
+			);
+			name = WeChat;
+			sourceTree = "<group>";
+		};
+		0F4B3C6C1E7BE4A100102DD3 /* AliPay */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = AliPay;
+			sourceTree = "<group>";
+		};
 		0F6423421DE57C83003379FC /* FFMpegDecoder */ = {
 			isa = PBXGroup;
 			children = (
@@ -1548,6 +1593,7 @@
 		0F6ADFD71E71329400BFF67F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				0F4B3C6A1E7BE48F00102DD3 /* Pay */,
 				0F6ADFDD1E71354000BFF67F /* Widgets */,
 				0F6ADFDB1E71349500BFF67F /* IM */,
 				0FB205E41CDC302E00B5E87E /* public */,
@@ -2017,6 +2063,11 @@
 		F6DAFF50D58D29D0493A07C7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0F4B3C7D1E7BEE1D00102DD3 /* CoreFoundation.framework */,
+				0F4B3C7E1E7BEE1D00102DD3 /* Foundation.framework */,
+				0F4B3C7B1E7BEDFB00102DD3 /* CFNetwork.framework */,
+				0F4B3C781E7BED4E00102DD3 /* libxml2.tbd */,
+				0F4B3C761E7BED3A00102DD3 /* libxml2.2.tbd */,
 				0F2D366C1D11555100C46DE5 /* libavdevice.a */,
 				0F2D366D1D11555100C46DE5 /* libavfilter.a */,
 				0F2D366E1D11555100C46DE5 /* libavformat.a */,
@@ -2056,6 +2107,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0F032D771CC9B12700D1920D /* Build configuration list for PBXNativeTarget "SmartHome" */;
 			buildPhases = (
+				7111AFB52FC0151747BC17C8 /* 📦 Check Pods Manifest.lock */,
 				201F0249AEAB68444741EA3D /* [CP] Check Pods Manifest.lock */,
 				CAA59AA0339CA487ED75EDCC /* [CP] Check Pods Manifest.lock */,
 				3FB63364E5E8E971F832FF9B /* [CP] Check Pods Manifest.lock */,
@@ -2383,6 +2435,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		7111AFB52FC0151747BC17C8 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		7B4EC63A298C6E6A66AD1643 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2487,6 +2554,7 @@
 				F65164141D3780C500A6F5FA /* TVLogoCell.m in Sources */,
 				F61896381D87B06300DBE6CD /* ScreenCurtainController.m in Sources */,
 				0FAF74BF1CEEA17C00432713 /* HRBrightnessCursor.m in Sources */,
+				0F4B3C741E7BE57A00102DD3 /* WeChatPayController.mm in Sources */,
 				F62CFA471DAC92F3006410F7 /* IphoneRealSceneController.m in Sources */,
 				0FAF98A31CE40F3C009BDBB5 /* QRCameraSwitchButton.m in Sources */,
 				F6280D4D1D9651CE009108ED /* IphoneFMController.m in Sources */,
@@ -2594,11 +2662,13 @@
 				2E0297271E4C4C7600BBC520 /* MySubView.m in Sources */,
 				F63AE0031D11319C00BE17DC /* FMCollectionViewCell.m in Sources */,
 				0FAF8FF51CE1B514000557BD /* VolumeManager.m in Sources */,
+				0F4B3C731E7BE57A00102DD3 /* GDataXMLNode.m in Sources */,
 				2EA2A83B1E1DCDA600092D41 /* AreaSubSettingViewController.m in Sources */,
 				0F032D4C1CC9B12700D1920D /* AppDelegate.m in Sources */,
 				0FB205ED1CDC3D3700B5E87E /* AudioManager.m in Sources */,
 				F68A5DD81D782D8400601612 /* ECSearchView.m in Sources */,
 				0FD3DEAD1D3F186800AF7765 /* Globals.m in Sources */,
+				0F4B3C751E7BE57A00102DD3 /* CommonUtil.m in Sources */,
 				F67F1F711D3C69DC00F2B7E5 /* SystemSettingViewController.m in Sources */,
 				0F180FC61D0E4E5000392F4C /* FMController.m in Sources */,
 				F67F1F771D3C719D00F2B7E5 /* SystemInfomationController.m in Sources */,
@@ -2845,6 +2915,7 @@
 					"\"${PODS_ROOT}/Headers/Public/CocoaAsyncSocket\"",
 					"\"${PODS_ROOT}/Headers/Public/FMDB\"",
 					"\"${PODS_ROOT}/Headers/Public/RegexKitLite\"",
+					"${SDK_ROOT}/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = SmartHome/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
@@ -2888,6 +2959,7 @@
 					"\"${PODS_ROOT}/Headers/Public/CocoaAsyncSocket\"",
 					"\"${PODS_ROOT}/Headers/Public/FMDB\"",
 					"\"${PODS_ROOT}/Headers/Public/RegexKitLite\"",
+					"${SDK_ROOT}/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = SmartHome/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
