@@ -19,9 +19,10 @@
 //    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"navBg3"]
 //                            forBarPosition:UIBarPositionAny
 //                                barMetrics:UIBarMetricsDefault];
-    self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
-    self.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationBar.barTintColor = [UIColor colorWithRed:44/255.0 green:185/255.0 blue:176/255.0 alpha:1];
+    self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
+    self.navigationBar.tintColor = [UIColor blackColor];
+    //self.navigationBar.barTintColor = [UIColor colorWithRed:44/255.0 green:185/255.0 blue:176/255.0 alpha:1];
+    self.navigationBar.barTintColor = [UIColor whiteColor];
 
 }
 
