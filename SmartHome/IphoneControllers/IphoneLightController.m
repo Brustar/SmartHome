@@ -164,6 +164,7 @@
 
     }
 
+
     if (indexPath.section == 1) {
         //调色灯
         self.cell = [tableView dequeueReusableCellWithIdentifier:@"ColourTableViewCell" forIndexPath:indexPath];
@@ -189,6 +190,7 @@
     self.cell.colourView.userInteractionEnabled=YES;
     self.cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return self.cell;
+
 }
 -(IBAction)changeColor:(id)sender
 {
@@ -236,11 +238,6 @@
     ColourTableViewCell *colorCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:1]];
     colorCell.colourView.backgroundColor = color;
     [self save:color deviceID:deviceID];
-
-    //Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[row] intValue]];
-    //设置数据库里的色灯的色值
-    self.cell.colourView.backgroundColor = color;
-//    [self save:nil];
 
 }
 

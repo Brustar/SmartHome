@@ -9,7 +9,7 @@
 #import "SceneController.h"
 #import "SceneCell.h"
 #import "ScenseSplitViewController.h"
-//#import <AFNetworking.h>
+#import <AFNetworking.h>
 #import "SocketManager.h"
 #import "SQLManager.h"
 #import "Scene.h"
