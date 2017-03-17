@@ -12,6 +12,7 @@
 
 @interface FirstViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *SubImageView;
+@property (weak, nonatomic) IBOutlet UIView *BtnView;
 
 @end
 
@@ -28,6 +29,24 @@
     
     [_SubImageView addGestureRecognizer:tap];
     [self setupSlideButton];
+    [self setBtn];
+}
+-(void)setBtn
+{
+    NSArray * arr = @[@"中餐",@"会客",@"回家",@"离家"];
+    CGFloat BtnW = self.BtnView.bounds.size.width/4;
+    CGFloat BtnH = self.BtnView.bounds.size.height;
+    
+    for (int i = 0; i < 4; i ++) {
+        UIButton * button = [[UIButton alloc] init];
+        button.tag = i;
+        button.frame = CGRectMake(i*BtnW, self.BtnView.bounds.origin.y, BtnW, BtnH);
+        [button setTintColor:[UIColor whiteColor]];
+        [button setTitle:arr[i] forState:UIControlStateNormal];
+//        [button setBackgroundImage:[UIImage imageNamed:@"button6-14"] forState:UIControlStateNormal];
+        [_BtnView addSubview:button];
+    }
+
 }
 -(void)doTap:(UITapGestureRecognizer *)tap
 {
