@@ -4187,11 +4187,8 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="487"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dN4-XE-fG9">
-<<<<<<< HEAD
                                                 <rect key="frame" x="112" y="88.5" width="150" height="150"/>
-=======
-                                                <rect key="frame" x="87" y="53.5" width="200" height="200"/>
->>>>>>> a8480a333cd1b47fd6bbc7d2c1931d3642c2d5d0
+
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s06-m6-iM8">
                                                         <rect key="frame" x="55" y="55" width="40" height="40"/>
@@ -4228,7 +4225,6 @@
                                                             <constraint firstAttribute="height" constant="10" id="xrP-hU-KKQ"/>
                                                         </constraints>
                                                     </imageView>
-<<<<<<< HEAD
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhP-Bb-OBn">
                                                         <rect key="frame" x="20" y="94" width="46" height="30"/>
                                                         <constraints>
@@ -4249,26 +4245,7 @@
                                                         <state key="normal" title="主页"/>
                                                         <connections>
                                                             <action selector="homeBtnClicked:" destination="Eow-Lw-1jW" eventType="touchUpInside" id="a8I-WT-Ja1"/>
-=======
-                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ekt-FX-FEq">
-                                                        <rect key="frame" x="-10" y="178" width="46" height="30"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <state key="normal" title="主页">
-                                                            <color key="titleColor" red="0.14889228979999999" green="1" blue="0.19218370009999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="homeBtnClicked:" destination="Eow-Lw-1jW" eventType="touchUpInside" id="a8I-WT-Ja1"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhP-Bb-OBn">
-                                                        <rect key="frame" x="163" y="178" width="46" height="30"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <state key="normal" title="返回"/>
-                                                        <connections>
-                                                            <action selector="returnBtnClicked:" destination="Eow-Lw-1jW" eventType="touchUpInside" id="vjn-yv-bb5"/>
->>>>>>> a8480a333cd1b47fd6bbc7d2c1931d3642c2d5d0
+
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -6187,13 +6164,10 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-<<<<<<< HEAD
         <segue reference="Uo6-og-hnM"/>
         <segue reference="qN8-z6-Gb7"/>
-=======
         <segue reference="J5F-aP-6iz"/>
         <segue reference="vWH-k8-ixo"/>
->>>>>>> a8480a333cd1b47fd6bbc7d2c1931d3642c2d5d0
         <segue reference="aTH-RA-7NZ"/>
         <segue reference="J5F-aP-6iz"/>
         <segue reference="b22-0A-WOg"/>
