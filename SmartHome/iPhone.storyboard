@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A2323a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="chj-yx-pDz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="chj-yx-pDz">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -4188,6 +4188,7 @@
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dN4-XE-fG9">
                                                 <rect key="frame" x="112" y="89" width="150" height="150"/>
+
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s06-m6-iM8">
                                                         <rect key="frame" x="55" y="55" width="40" height="40"/>
@@ -4230,6 +4231,7 @@
                                                             <constraint firstAttribute="width" constant="46" id="E4c-7b-EBG"/>
                                                             <constraint firstAttribute="height" constant="30" id="OHI-fz-cSd"/>
                                                         </constraints>
+
                                                         <state key="normal" title="返回"/>
                                                         <connections>
                                                             <action selector="returnBtnClicked:" destination="Eow-Lw-1jW" eventType="touchUpInside" id="vjn-yv-bb5"/>
@@ -4244,6 +4246,7 @@
                                                         <state key="normal" title="主页">
                                                             <color key="titleColor" red="0.14889228979999999" green="1" blue="0.19218370009999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         </state>
+
                                                         <connections>
                                                             <action selector="homeBtnClicked:" destination="Eow-Lw-1jW" eventType="touchUpInside" id="a8I-WT-Ja1"/>
                                                         </connections>
@@ -4254,19 +4257,15 @@
                                                     <constraint firstItem="RNs-ZU-uoU" firstAttribute="centerY" secondItem="dN4-XE-fG9" secondAttribute="centerY" id="01d-Ua-NRd"/>
                                                     <constraint firstItem="hYk-OF-DKl" firstAttribute="centerX" secondItem="dN4-XE-fG9" secondAttribute="centerX" id="1Gm-9A-yOz"/>
                                                     <constraint firstItem="drg-no-rIu" firstAttribute="leading" secondItem="s06-m6-iM8" secondAttribute="trailing" id="3fq-UY-Xrt"/>
-                                                    <constraint firstAttribute="bottom" secondItem="dhP-Bb-OBn" secondAttribute="bottom" constant="26" id="4VH-HV-muP"/>
                                                     <constraint firstItem="s06-m6-iM8" firstAttribute="centerY" secondItem="dN4-XE-fG9" secondAttribute="centerY" id="8Hp-RJ-DSC"/>
                                                     <constraint firstItem="drg-no-rIu" firstAttribute="centerY" secondItem="dN4-XE-fG9" secondAttribute="centerY" id="F4K-zX-jFh"/>
-                                                    <constraint firstAttribute="trailing" secondItem="ekt-FX-FEq" secondAttribute="trailing" constant="20" id="Lok-Rc-oRL"/>
                                                     <constraint firstItem="s06-m6-iM8" firstAttribute="centerX" secondItem="dN4-XE-fG9" secondAttribute="centerX" id="MUS-NK-rPg"/>
                                                     <constraint firstAttribute="width" constant="150" id="PWv-Og-dip"/>
                                                     <constraint firstItem="GXP-1f-IMh" firstAttribute="centerX" secondItem="dN4-XE-fG9" secondAttribute="centerX" id="csJ-Xw-yOW"/>
-                                                    <constraint firstAttribute="bottom" secondItem="ekt-FX-FEq" secondAttribute="bottom" constant="26" id="eoK-ef-peq"/>
                                                     <constraint firstAttribute="bottom" secondItem="hYk-OF-DKl" secondAttribute="bottom" id="ezX-ZB-neF"/>
                                                     <constraint firstItem="s06-m6-iM8" firstAttribute="top" secondItem="GXP-1f-IMh" secondAttribute="bottom" id="fVd-pZ-H8a"/>
                                                     <constraint firstAttribute="trailing" secondItem="drg-no-rIu" secondAttribute="trailing" id="hnt-fY-iDI"/>
                                                     <constraint firstItem="RNs-ZU-uoU" firstAttribute="leading" secondItem="dN4-XE-fG9" secondAttribute="leading" id="p1n-ES-E19"/>
-                                                    <constraint firstItem="dhP-Bb-OBn" firstAttribute="leading" secondItem="dN4-XE-fG9" secondAttribute="leading" constant="20" id="sqy-qk-yKh"/>
                                                     <constraint firstItem="hYk-OF-DKl" firstAttribute="top" secondItem="s06-m6-iM8" secondAttribute="bottom" id="tEg-4H-bbI"/>
                                                     <constraint firstAttribute="height" constant="150" id="vbT-tM-4sL"/>
                                                     <constraint firstItem="GXP-1f-IMh" firstAttribute="top" secondItem="dN4-XE-fG9" secondAttribute="top" id="vj5-Ph-Mhm"/>
@@ -6168,6 +6167,10 @@
         <segue reference="J5F-aP-6iz"/>
         <segue reference="vWH-k8-ixo"/>
         <segue reference="aTH-RA-7NZ"/>
+        <segue reference="aTH-RA-7NZ"/>
+        <segue reference="vWH-k8-ixo"/>
+        <segue reference="J5F-aP-6iz"/>
+        <segue reference="b22-0A-WOg"/>
         <segue reference="Uo6-og-hnM"/>
     </inferredMetricsTieBreakers>
 </document>

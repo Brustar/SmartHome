@@ -162,9 +162,7 @@
     
         return cell;
 
-    }
-
-
+    }if (indexPath.section == 1) {
         //调色灯
         ColourTableViewCell *colorCell = [tableView dequeueReusableCellWithIdentifier:@"ColourTableViewCell" forIndexPath:indexPath];
         Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[indexPath.row] intValue]];
@@ -172,6 +170,18 @@
         colorCell.deviceID = device.eID;
         colorCell.delegate = self;
         colorCell.selectionStyle = UITableViewCellSelectionStyleNone;
+       
+        return colorCell;
+    }
+    
+     //开关灯
+        ColourTableViewCell *colorCell = [tableView dequeueReusableCellWithIdentifier:@"ColourTableViewCell" forIndexPath:indexPath];
+       Device *device = [SQLManager getDeviceWithDeviceID:[_SwitchLightArr[indexPath.row] intValue]];
+       colorCell.lable.text = device.name;
+       colorCell.deviceID = device.eID;
+       colorCell.delegate = self;
+       colorCell.selectionStyle = UITableViewCellSelectionStyleNone;
+       colorCell.colourView.hidden = YES;
         return colorCell;
 }
 -(IBAction)changeColor:(id)sender

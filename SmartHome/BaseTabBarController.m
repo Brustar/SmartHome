@@ -45,8 +45,13 @@
     deviceListVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"设备" image:image  selectedImage:selectImage];
 
     //HOME
-//    IphoneFamilyViewController *familyVC = [iPhoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneFamilyViewController"];
-    FirstViewController * familyVC = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"FirstViewController"];
+    IphoneFamilyViewController *familyVC;
+         if ([[UD objectForKey:@"HostID"] intValue] == 258) {
+            familyVC = [iPhoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneFamilyViewController"];
+         }else{
+            familyVC = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"FirstViewController"];
+         }
+
     UIImage *image1 = [[UIImage imageNamed:@"icon_tabbar_homepage"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIImage *selectImage1 = [[UIImage imageNamed:@"icon_tabbar_homepage_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 
