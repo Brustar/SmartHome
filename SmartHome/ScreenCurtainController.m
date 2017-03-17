@@ -67,10 +67,72 @@
     }
     return _screenCurtainNames;
 }
+
+- (UIImage*)createImageWithColor:(UIColor *)color
+{
+    CGRect rect=CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return theImage;
+}
+
+- (void)setupButtons {
+    
+    CGFloat btnWidth = 60.0f;
+    CGFloat btnHeight = 40.0f;
+    CGFloat gap = (UI_SCREEN_WIDTH-btnWidth*3)/4;
+    
+    for (int i = 0; i < 3; i++) {
+        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake((i+1)*gap + i*btnWidth, btnHeight/2, btnWidth, btnHeight)];
+        [btn setBackgroundImage:[self createImageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[self createImageWithColor:[UIColor grayColor]] forState:UIControlStateHighlighted];
+        [btn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        btn.layer.cornerRadius = 4.0;
+        btn.layer.masksToBounds = YES;
+        if (i == 0) {
+            [btn setTitle:@"升起" forState:UIControlStateNormal];
+            [btn addTarget:self action:@selector(upBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+           
+        }else if (i == 1) {
+            [btn setTitle:@"停止" forState:UIControlStateNormal];
+            [btn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+            [btn addTarget:self action:@selector(stopBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+            
+        }else if (i == 2) {
+            [btn setTitle:@"降落" forState:UIControlStateNormal];
+            [btn addTarget:self action:@selector(downBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+            
+        }
+        [self.view addSubview:btn];
+    }
+}
+
+- (void)upBtnAction:(UIButton *)sender {
+    NSData *data = [[DeviceInfo defaultManager] upScreenByDeviceID:self.deviceid];
+    SocketManager *sock = [SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
+- (void)stopBtnAction:(UIButton *)sender {
+    NSData *data = [[DeviceInfo defaultManager] stopScreenByDeviceID:self.deviceid];
+    SocketManager *sock = [SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
+- (void)downBtnAction:(UIButton *)sender {
+    NSData *data = [[DeviceInfo defaultManager] downScreenByDeviceID:self.deviceid];
+    SocketManager *sock = [SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"幕布";
-    
+    [self setupButtons];
     self.tableHightConstraint.constant = 100;
     
     

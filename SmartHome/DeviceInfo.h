@@ -141,6 +141,9 @@ enum{
 
 #pragma mark - Screen
 -(NSData *) drop:(uint8_t)droped deviceID:(NSString *)deviceID;
+-(NSData *) stopScreenByDeviceID:(NSString *)deviceID;
+-(NSData *) upScreenByDeviceID:(NSString *)deviceID;
+-(NSData *) downScreenByDeviceID:(NSString *)deviceID;
 
 #pragma mark - Air
 -(NSData *) toogleAirCon:(uint8_t)toogle deviceID:(NSString *)deviceID; //开:1,关:0

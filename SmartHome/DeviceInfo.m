@@ -387,6 +387,25 @@
     return [self action:0x34-droped deviceID:deviceID];
 }
 
+//降幕布
+-(NSData *) downScreenByDeviceID:(NSString *)deviceID
+{
+    return [self action:0x34 deviceID:deviceID];
+}
+
+//升幕布
+-(NSData *) upScreenByDeviceID:(NSString *)deviceID
+{
+    return [self action:0x33 deviceID:deviceID];
+}
+
+//停止幕布
+-(NSData *) stopScreenByDeviceID:(NSString *)deviceID
+{
+    return [self action:0x45 deviceID:deviceID];
+}
+
+
 #pragma mark - Air
 -(NSData *) toogleAirCon:(uint8_t)toogle deviceID:(NSString *)deviceID
 {
