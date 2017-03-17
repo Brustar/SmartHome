@@ -109,7 +109,7 @@
       NSInteger status = _afNetworkReachabilityManager.networkReachabilityStatus;
     
   
-     NSLog(@"NetworkReachabilityStatus: %d", status);
+     NSLog(@"NetworkReachabilityStatus: %ld", (long)status);
 
     
 }

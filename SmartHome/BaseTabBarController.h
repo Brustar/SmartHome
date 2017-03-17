@@ -9,6 +9,7 @@
 #import "IphoneSceneController.h"
 #import "IphoneDeviceListController.h"
 #import "IphoneFamilyViewController.h"
+#import "FirstViewController.h"
 
 @interface BaseTabBarController : UITabBarController
 
