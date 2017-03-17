@@ -7,7 +7,7 @@
 //
 
 
-#define cellWidth self.collectionView.frame.size.width  - 20
+#define cellWidth self.collectionView.frame.size.width/2  - 20
 #define cellH self.collectionView.frame.size.height
 #define  minSpace 20
 
@@ -391,7 +391,7 @@
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(cellWidth, cellH);
+    return CGSizeMake(cellWidth, cellWidth);
 }
 
 - (void)didReceiveMemoryWarning {

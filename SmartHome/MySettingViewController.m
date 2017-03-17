@@ -55,9 +55,9 @@
     if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
         if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) { //如果是普通用户，不显示“权限控制”选项
-            return 5;
+            return 6;
         }
-            return 6;//如果是主人，显示“权限控制”选项
+            return 7;//如果是主人，显示“权限控制”选项
     }else{
         if([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) { //2代表普通用户，如果是普通用户，不显示“权限控制”选项
             return 6;
@@ -157,6 +157,7 @@
     
     return cell;
 }
+
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *view = [[UIView alloc]init];
