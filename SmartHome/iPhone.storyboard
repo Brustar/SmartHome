@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A2323a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="chj-yx-pDz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="chj-yx-pDz">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -365,27 +365,27 @@
                                 <rect key="frame" x="25" y="530" width="325" height="100"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3sF-wx-6sh">
-                                        <rect key="frame" x="0.0" y="0.0" width="108" height="32"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="108.5" height="32"/>
                                         <state key="normal" image="rewind"/>
                                     </button>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aid-su-hs7">
-                                        <rect key="frame" x="108" y="0.0" width="109" height="32"/>
+                                        <rect key="frame" x="108.5" y="0.0" width="108" height="32"/>
                                         <state key="normal" image="broadcast"/>
                                     </button>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="35R-sK-3i2">
-                                        <rect key="frame" x="217" y="0.0" width="108" height="32"/>
+                                        <rect key="frame" x="216.5" y="0.0" width="108.5" height="32"/>
                                         <state key="normal" image="fastForward"/>
                                     </button>
                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="85R-r0-38D">
-                                        <rect key="frame" x="0.0" y="68" width="108" height="32"/>
+                                        <rect key="frame" x="0.0" y="68" width="108.5" height="32"/>
                                         <state key="normal" image="last"/>
                                     </button>
                                     <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B6d-mC-qW5">
-                                        <rect key="frame" x="108" y="68" width="109" height="32"/>
+                                        <rect key="frame" x="108.5" y="68" width="108" height="32"/>
                                         <state key="normal" image="pause"/>
                                     </button>
                                     <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uku-Z3-YLA">
-                                        <rect key="frame" x="217" y="68" width="108" height="32"/>
+                                        <rect key="frame" x="216.5" y="68" width="108.5" height="32"/>
                                         <state key="normal" image="next"/>
                                     </button>
                                 </subviews>
@@ -1856,7 +1856,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U4T-Wr-vpj">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="yGe-XQ-WNx" id="BBU-2j-rf7"/>
@@ -4187,11 +4187,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="487"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dN4-XE-fG9">
-<<<<<<< HEAD
                                                 <rect key="frame" x="112" y="88.5" width="150" height="150"/>
-=======
-                                                <rect key="frame" x="87" y="53.5" width="200" height="200"/>
->>>>>>> a8480a333cd1b47fd6bbc7d2c1931d3642c2d5d0
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s06-m6-iM8">
                                                         <rect key="frame" x="55" y="55" width="40" height="40"/>
@@ -4228,47 +4224,20 @@
                                                             <constraint firstAttribute="height" constant="10" id="xrP-hU-KKQ"/>
                                                         </constraints>
                                                     </imageView>
-<<<<<<< HEAD
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhP-Bb-OBn">
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhP-Bb-OBn">
                                                         <rect key="frame" x="20" y="94" width="46" height="30"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="46" id="E4c-7b-EBG"/>
-                                                            <constraint firstAttribute="height" constant="30" id="OHI-fz-cSd"/>
-                                                        </constraints>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <state key="normal" title="返回"/>
                                                         <connections>
                                                             <action selector="returnBtnClicked:" destination="Eow-Lw-1jW" eventType="touchUpInside" id="vjn-yv-bb5"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ekt-FX-FEq">
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ekt-FX-FEq">
                                                         <rect key="frame" x="84" y="94" width="46" height="30"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="46" id="aXY-ey-PiJ"/>
-                                                            <constraint firstAttribute="height" constant="30" id="bek-rc-88b"/>
-                                                        </constraints>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <state key="normal" title="主页"/>
                                                         <connections>
                                                             <action selector="homeBtnClicked:" destination="Eow-Lw-1jW" eventType="touchUpInside" id="a8I-WT-Ja1"/>
-=======
-                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ekt-FX-FEq">
-                                                        <rect key="frame" x="-10" y="178" width="46" height="30"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <state key="normal" title="主页">
-                                                            <color key="titleColor" red="0.14889228979999999" green="1" blue="0.19218370009999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="homeBtnClicked:" destination="Eow-Lw-1jW" eventType="touchUpInside" id="a8I-WT-Ja1"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhP-Bb-OBn">
-                                                        <rect key="frame" x="163" y="178" width="46" height="30"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <state key="normal" title="返回"/>
-                                                        <connections>
-                                                            <action selector="returnBtnClicked:" destination="Eow-Lw-1jW" eventType="touchUpInside" id="vjn-yv-bb5"/>
->>>>>>> a8480a333cd1b47fd6bbc7d2c1931d3642c2d5d0
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -4277,19 +4246,15 @@
                                                     <constraint firstItem="RNs-ZU-uoU" firstAttribute="centerY" secondItem="dN4-XE-fG9" secondAttribute="centerY" id="01d-Ua-NRd"/>
                                                     <constraint firstItem="hYk-OF-DKl" firstAttribute="centerX" secondItem="dN4-XE-fG9" secondAttribute="centerX" id="1Gm-9A-yOz"/>
                                                     <constraint firstItem="drg-no-rIu" firstAttribute="leading" secondItem="s06-m6-iM8" secondAttribute="trailing" id="3fq-UY-Xrt"/>
-                                                    <constraint firstAttribute="bottom" secondItem="dhP-Bb-OBn" secondAttribute="bottom" constant="26" id="4VH-HV-muP"/>
                                                     <constraint firstItem="s06-m6-iM8" firstAttribute="centerY" secondItem="dN4-XE-fG9" secondAttribute="centerY" id="8Hp-RJ-DSC"/>
                                                     <constraint firstItem="drg-no-rIu" firstAttribute="centerY" secondItem="dN4-XE-fG9" secondAttribute="centerY" id="F4K-zX-jFh"/>
-                                                    <constraint firstAttribute="trailing" secondItem="ekt-FX-FEq" secondAttribute="trailing" constant="20" id="Lok-Rc-oRL"/>
                                                     <constraint firstItem="s06-m6-iM8" firstAttribute="centerX" secondItem="dN4-XE-fG9" secondAttribute="centerX" id="MUS-NK-rPg"/>
                                                     <constraint firstAttribute="width" constant="150" id="PWv-Og-dip"/>
                                                     <constraint firstItem="GXP-1f-IMh" firstAttribute="centerX" secondItem="dN4-XE-fG9" secondAttribute="centerX" id="csJ-Xw-yOW"/>
-                                                    <constraint firstAttribute="bottom" secondItem="ekt-FX-FEq" secondAttribute="bottom" constant="26" id="eoK-ef-peq"/>
                                                     <constraint firstAttribute="bottom" secondItem="hYk-OF-DKl" secondAttribute="bottom" id="ezX-ZB-neF"/>
                                                     <constraint firstItem="s06-m6-iM8" firstAttribute="top" secondItem="GXP-1f-IMh" secondAttribute="bottom" id="fVd-pZ-H8a"/>
                                                     <constraint firstAttribute="trailing" secondItem="drg-no-rIu" secondAttribute="trailing" id="hnt-fY-iDI"/>
                                                     <constraint firstItem="RNs-ZU-uoU" firstAttribute="leading" secondItem="dN4-XE-fG9" secondAttribute="leading" id="p1n-ES-E19"/>
-                                                    <constraint firstItem="dhP-Bb-OBn" firstAttribute="leading" secondItem="dN4-XE-fG9" secondAttribute="leading" constant="20" id="sqy-qk-yKh"/>
                                                     <constraint firstItem="hYk-OF-DKl" firstAttribute="top" secondItem="s06-m6-iM8" secondAttribute="bottom" id="tEg-4H-bbI"/>
                                                     <constraint firstAttribute="height" constant="150" id="vbT-tM-4sL"/>
                                                     <constraint firstItem="GXP-1f-IMh" firstAttribute="top" secondItem="dN4-XE-fG9" secondAttribute="top" id="vj5-Ph-Mhm"/>
@@ -6187,15 +6152,10 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-
-        <segue reference="Uo6-og-hnM"/>
-        <segue reference="qN8-z6-Gb7"/>
-
-        <segue reference="J5F-aP-6iz"/>
-        <segue reference="vWH-k8-ixo"/>
-
         <segue reference="aTH-RA-7NZ"/>
+        <segue reference="vWH-k8-ixo"/>
         <segue reference="J5F-aP-6iz"/>
         <segue reference="b22-0A-WOg"/>
+        <segue reference="Uo6-og-hnM"/>
     </inferredMetricsTieBreakers>
 </document>
