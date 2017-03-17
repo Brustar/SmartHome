@@ -152,6 +152,9 @@
 		2E7CD6081E14B80C002D0541 /* FixTimeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E7CD6071E14B80C002D0541 /* FixTimeListCell.m */; };
 		2E801EFC1E2622180039A6D9 /* IphoneFixSubTimeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E801EFB1E2622180039A6D9 /* IphoneFixSubTimeVC.m */; };
 		2E801EFF1E262B0B0039A6D9 /* WeekdaysVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E801EFE1E262B0B0039A6D9 /* WeekdaysVC.m */; };
+		2E8AC52C1E7BA9890002E717 /* home_banner.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E8AC52B1E7BA9890002E717 /* home_banner.png */; };
+		2E8AC52F1E7BAE350002E717 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E8AC52E1E7BAE350002E717 /* FirstViewController.m */; };
+		2E8AC5311E7BC2290002E717 /* button6-14.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E8AC5301E7BC2290002E717 /* button6-14.png */; };
 		2E925D8D1E5E73CD008E327B /* ECEngerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E925D8C1E5E73CD008E327B /* ECEngerController.m */; };
 		2E925D901E5E744C008E327B /* ECPickDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E925D8F1E5E744C008E327B /* ECPickDataViewController.m */; };
 		2E925D9E1E5E857D008E327B /* 4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2E925D941E5E857D008E327B /* 4.jpg */; };
@@ -205,6 +208,7 @@
 		CDF1574E1E7AB2AF00499AC5 /* icon_tabbar_merchant_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF157481E7AB2AF00499AC5 /* icon_tabbar_merchant_selected@2x.png */; };
 		CDF1574F1E7AB2AF00499AC5 /* icon_tabbar_mine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF157491E7AB2AF00499AC5 /* icon_tabbar_mine@2x.png */; };
 		CDF157511E7AB2C000499AC5 /* leftbackiamge.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF157501E7AB2C000499AC5 /* leftbackiamge.png */; };
+		CDF157541E7BA3F600499AC5 /* UIView_extra.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF157531E7BA3F600499AC5 /* UIView_extra.m */; };
 		CDF389221E305B4400657C8B /* breakdownlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF389211E305B4400657C8B /* breakdownlist.plist */; };
 		CDF389241E306D2400657C8B /* maintaininfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF389231E306D2400657C8B /* maintaininfo.plist */; };
 		CDF389261E30A31300657C8B /* energylist.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF389251E30A31300657C8B /* energylist.plist */; };
@@ -694,6 +698,10 @@
 		2E801EFB1E2622180039A6D9 /* IphoneFixSubTimeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneFixSubTimeVC.m; sourceTree = "<group>"; };
 		2E801EFD1E262B0B0039A6D9 /* WeekdaysVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeekdaysVC.h; sourceTree = "<group>"; };
 		2E801EFE1E262B0B0039A6D9 /* WeekdaysVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeekdaysVC.m; sourceTree = "<group>"; };
+		2E8AC52B1E7BA9890002E717 /* home_banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_banner.png; sourceTree = "<group>"; };
+		2E8AC52D1E7BAE350002E717 /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		2E8AC52E1E7BAE350002E717 /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		2E8AC5301E7BC2290002E717 /* button6-14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button6-14.png"; sourceTree = "<group>"; };
 		2E925D8B1E5E73CD008E327B /* ECEngerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECEngerController.h; sourceTree = "<group>"; };
 		2E925D8C1E5E73CD008E327B /* ECEngerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECEngerController.m; sourceTree = "<group>"; };
 		2E925D8E1E5E744C008E327B /* ECPickDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPickDataViewController.h; sourceTree = "<group>"; };
@@ -777,6 +785,8 @@
 		CDF157481E7AB2AF00499AC5 /* icon_tabbar_merchant_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_merchant_selected@2x.png"; sourceTree = "<group>"; };
 		CDF157491E7AB2AF00499AC5 /* icon_tabbar_mine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_mine@2x.png"; sourceTree = "<group>"; };
 		CDF157501E7AB2C000499AC5 /* leftbackiamge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftbackiamge.png; sourceTree = "<group>"; };
+		CDF157521E7BA3F600499AC5 /* UIView_extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIView_extra.h; sourceTree = "<group>"; };
+		CDF157531E7BA3F600499AC5 /* UIView_extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIView_extra.m; sourceTree = "<group>"; };
 		CDF389211E305B4400657C8B /* breakdownlist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = breakdownlist.plist; sourceTree = "<group>"; };
 		CDF389231E306D2400657C8B /* maintaininfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = maintaininfo.plist; sourceTree = "<group>"; };
 		CDF389251E30A31300657C8B /* energylist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = energylist.plist; sourceTree = "<group>"; };
@@ -1620,6 +1630,8 @@
 		0F6ADFDA1E71343600BFF67F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2E8AC52D1E7BAE350002E717 /* FirstViewController.h */,
+				2E8AC52E1E7BAE350002E717 /* FirstViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1912,6 +1924,8 @@
 				CDF157371E7AAD4C00499AC5 /* BaseNavController.m */,
 				CDF157381E7AAD4C00499AC5 /* BaseTabBarController.h */,
 				CDF157391E7AAD4C00499AC5 /* BaseTabBarController.m */,
+				CDF157521E7BA3F600499AC5 /* UIView_extra.h */,
+				CDF157531E7BA3F600499AC5 /* UIView_extra.m */,
 			);
 			name = CustomTabbarController;
 			sourceTree = "<group>";
@@ -1919,6 +1933,8 @@
 		CDF157431E7AB29A00499AC5 /* png */ = {
 			isa = PBXGroup;
 			children = (
+				2E8AC5301E7BC2290002E717 /* button6-14.png */,
+				2E8AC52B1E7BA9890002E717 /* home_banner.png */,
 				CDF157501E7AB2C000499AC5 /* leftbackiamge.png */,
 				CDF157441E7AB2AF00499AC5 /* icon_tabbar_mine_selected@2x.png */,
 				CDF157451E7AB2AF00499AC5 /* icon_tabbar_homepage_selected@2x.png */,
@@ -2246,11 +2262,13 @@
 				CDF389301E30E39500657C8B /* userList.plist in Resources */,
 				CDF1574D1E7AB2AF00499AC5 /* icon_tabbar_merchant_normal@2x.png in Resources */,
 				F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */,
+				2E8AC52C1E7BA9890002E717 /* home_banner.png in Resources */,
 				2E1D4F0B1E727A64007625BD /* Slider4.png in Resources */,
 				2EA897BE1E31B59B002CA904 /* 2@2x.png in Resources */,
 				0F49CB7E1E7A204300D46ECC /* Scene-iPad.storyboard in Resources */,
 				CDFB9DF21E5DCB4D00BFECCE /* SceneTimerList.plist in Resources */,
 				2EA897C21E31B792002CA904 /* 4@2x.png in Resources */,
+				2E8AC5311E7BC2290002E717 /* button6-14.png in Resources */,
 				0F49CB7C1E7A204300D46ECC /* Login-iPad.storyboard in Resources */,
 				2EA897C01E31B73F002CA904 /* 3@2x.png in Resources */,
 				2EA897BC1E31B53E002CA904 /* 1@2x.png in Resources */,
@@ -2599,6 +2617,7 @@
 				0F3CCF3B1D0F97B70058A320 /* CameraController.m in Sources */,
 				0FC0FFDA1CF577C0000F71D5 /* RealScene.m in Sources */,
 				F6755A4F1D406552002394F3 /* ECloudTabBarController.m in Sources */,
+				CDF157541E7BA3F600499AC5 /* UIView_extra.m in Sources */,
 				0FAF74C41CEEA17C00432713 /* HRColorPickerView.m in Sources */,
 				F6280D531D966218009108ED /* IphoneAddFmController.m in Sources */,
 				0FF92B661D9224640098DD54 /* TVChannel.m in Sources */,
@@ -2731,6 +2750,7 @@
 				F663CA5F1D98A733001F87F3 /* IphoneDVDController.m in Sources */,
 				F6A1C02E1D586D7500856E00 /* Room.m in Sources */,
 				0F64234A1DE57C83003379FC /* RTSPPlayer.m in Sources */,
+				2E8AC52F1E7BAE350002E717 /* FirstViewController.m in Sources */,
 				F663CA661D98D131001F87F3 /* IphoneDevicesController.m in Sources */,
 				F6755A581D40D450002394F3 /* ECloudButton.m in Sources */,
 				0FAF98A51CE40F3C009BDBB5 /* QRCodeReaderView.m in Sources */,

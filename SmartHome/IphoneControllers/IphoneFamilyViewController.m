@@ -109,7 +109,7 @@
       NSInteger status = _afNetworkReachabilityManager.networkReachabilityStatus;
     
   
-     NSLog(@"NetworkReachabilityStatus: %d", status);
+     NSLog(@"NetworkReachabilityStatus: %ld", (long)status);
 
     
 }
@@ -219,7 +219,7 @@
     _nest_devices_arr = [[NSMutableArray alloc] init];
     _nest_curr_temperature_arr = [[NSMutableArray alloc] init];
     _nest_curr_humidity_arr = [[NSMutableArray alloc] init];
-    _nest_en_room_name_arr = [NSMutableArray arrayWithObjects:@"Bedroom", @"Dining Room", @"KTV", @"Living Room" ,@"Master Bedroom", nil];
+    _nest_en_room_name_arr = [NSMutableArray arrayWithObjects:@"Living Room", @"KTV", @"Dining Room", @"Bedroom" ,@"Master Bedroom", nil];
 }
 
 //获取全屋配置

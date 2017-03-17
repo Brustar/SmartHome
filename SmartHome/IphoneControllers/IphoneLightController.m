@@ -162,21 +162,34 @@
     
         return cell;
 
-    }
-
-    
-    //调色灯
-    
-      ColourTableViewCell *colorCell = [tableView dequeueReusableCellWithIdentifier:@"ColourTableViewCell" forIndexPath:indexPath];
-       Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[indexPath.row] intValue]];
+    }if (indexPath.section == 1) {
+        //调色灯
+        ColourTableViewCell *colorCell = [tableView dequeueReusableCellWithIdentifier:@"ColourTableViewCell" forIndexPath:indexPath];
+        Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[indexPath.row] intValue]];
         colorCell.lable.text = device.name;
         colorCell.deviceID = device.eID;
         colorCell.delegate = self;
-        colorCell.colourView.tag = indexPath.row;
         colorCell.selectionStyle = UITableViewCellSelectionStyleNone;
+       
+        return colorCell;
+    }
+    
+     //开关灯
+        ColourTableViewCell *colorCell = [tableView dequeueReusableCellWithIdentifier:@"ColourTableViewCell" forIndexPath:indexPath];
+       Device *device = [SQLManager getDeviceWithDeviceID:[_SwitchLightArr[indexPath.row] intValue]];
+       colorCell.lable.text = device.name;
+       colorCell.deviceID = device.eID;
+       colorCell.delegate = self;
+       colorCell.selectionStyle = UITableViewCellSelectionStyleNone;
+       colorCell.colourView.hidden = YES;
         return colorCell;
 }
-
+-(IBAction)changeColor:(id)sender
+{
+    HRSampleColorPickerViewController *controller= [[HRSampleColorPickerViewController alloc] initWithColor:self.cell.backgroundColor fullColor:NO indexPathRow:0];
+    controller.delegate = self;
+    [self.navigationController pushViewController:controller animated:YES];
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
         Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[indexPath.row] intValue]];

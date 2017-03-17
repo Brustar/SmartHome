@@ -4182,10 +4182,10 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Hdz-Md-E1l" firstAttribute="top" secondItem="t1T-g5-zcK" secondAttribute="bottom" id="Huw-r0-AHK"/>
-                            <constraint firstItem="Hdz-Md-E1l" firstAttribute="leading" secondItem="O18-tO-G44" secondAttribute="leading" id="JgI-HC-rVZ"/>
-                            <constraint firstAttribute="trailing" secondItem="Hdz-Md-E1l" secondAttribute="trailing" id="ime-7j-gkU"/>
-                            <constraint firstItem="fPP-hA-bYw" firstAttribute="top" secondItem="Hdz-Md-E1l" secondAttribute="bottom" id="st8-Ps-0E8"/>
+                            <constraint firstItem="Hdz-Md-E1l" firstAttribute="top" secondItem="t1T-g5-zcK" secondAttribute="bottom" id="3eC-CJ-uxh"/>
+                            <constraint firstItem="Hdz-Md-E1l" firstAttribute="leading" secondItem="O18-tO-G44" secondAttribute="leading" id="6xk-Ia-Uvb"/>
+                            <constraint firstAttribute="trailing" secondItem="Hdz-Md-E1l" secondAttribute="trailing" id="9cW-te-fDH"/>
+                            <constraint firstItem="fPP-hA-bYw" firstAttribute="top" secondItem="Hdz-Md-E1l" secondAttribute="bottom" id="xZo-2I-EL6"/>
                         </constraints>
                     </view>
                     <connections>
@@ -4411,7 +4411,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="PDX-ag-WXd">
+                            <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="PDX-ag-WXd">
                                 <rect key="frame" x="127" y="98" width="121" height="29"/>
                                 <segments>
                                     <segment title="First"/>
@@ -4421,14 +4421,14 @@
                                     <action selector="selectedScreenCurtain:" destination="FiI-Rh-bgC" eventType="valueChanged" id="quM-ZM-FiV"/>
                                 </connections>
                             </segmentedControl>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9Nb-tu-Z4F">
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9Nb-tu-Z4F">
                                 <rect key="frame" x="40" y="152" width="295" height="200"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="S8J-qe-4Ek"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="rCO-Kn-kgM" customClass="DetailTableViewCell">
+                                    <tableViewCell hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="rCO-Kn-kgM" customClass="DetailTableViewCell">
                                         <rect key="frame" x="0.0" y="28" width="295" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rCO-Kn-kgM" id="Oiv-1a-DNg">
@@ -8492,23 +8492,23 @@ layer.masksToBoundslayer.masksToBounds
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="uCb-ME-O7C"/>
-        <segue reference="QfD-HS-G6N"/>
         <segue reference="nIi-Kc-QDm"/>
-        <segue reference="vLw-tf-AJR"/>
-        <segue reference="wSR-hk-rTP"/>
+        <segue reference="QfD-HS-G6N"/>
+        <segue reference="mRk-xU-xJj"/>
         <segue reference="ya3-gG-p8O"/>
-        <segue reference="pWG-oz-Opr"/>
-        <segue reference="tt4-nB-rfe"/>
         <segue reference="vdf-Gi-dZf"/>
         <segue reference="JQm-bA-TWz"/>
-        <segue reference="l23-e3-J0C"/>
-        <segue reference="Vzc-yi-Jnw"/>
-        <segue reference="vKk-7C-VKf"/>
-        <segue reference="zpE-f9-a1R"/>
         <segue reference="fHn-Cm-7Q7"/>
+        <segue reference="l23-e3-J0C"/>
         <segue reference="tdV-sS-d5j"/>
-        <segue reference="a9T-LN-ZVX"/>
+        <segue reference="zpE-f9-a1R"/>
         <segue reference="X9P-hg-DXo"/>
-        <segue reference="YE7-iU-rxh"/>
+        <segue reference="vKk-7C-VKf"/>
+        <segue reference="a9T-LN-ZVX"/>
+        <segue reference="Vzc-yi-Jnw"/>
+        <segue reference="tt4-nB-rfe"/>
+        <segue reference="pWG-oz-Opr"/>
+        <segue reference="fbq-wi-BCv"/>
+        <segue reference="vLw-tf-AJR"/>
     </inferredMetricsTieBreakers>
 </document>
