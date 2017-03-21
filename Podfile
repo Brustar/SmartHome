@@ -17,4 +17,7 @@ target 'SmartHome' do
 	pod 'CocoaAsyncSocket', '~>7.4.3'
     	#pod 'CocoaAsyncSocket', :git => 'https://github.com/robbiehanson/CocoaAsyncSocket.git', :commit => 'c0bbcbcc5e039ca5d732f9844bf95c3d8ee31a5b'
     	pod 'RongCloudIMKit'
+	pod "FSLineChart"
+	pod 'libWeChatSDK', '~>1.5'
+    pod 'ShareSDK3/ShareSDKPlatforms/WeChat'
 end

@@ -9,8 +9,16 @@
 #import "FirstViewController.h"
 #import "AppDelegate.h"
 #import "IphoneFamilyViewController.h"
+#import "SocketManager.h"
+#import "SceneManager.h"
+#import "BgMusic.h"
+#import "PackManager.h"
+#import "DeviceInfo.h"
+#import "AudioManager.h"
+#import "SQLManager.h"
+#import <AVFoundation/AVFoundation.h>
 
-@interface FirstViewController ()
+@interface FirstViewController ()<UITableViewDataSource,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIImageView *SubImageView;//首页的日历大圆
 @property (weak, nonatomic) IBOutlet UIView *BtnView;//全屋场景的按钮试图
 @property (weak, nonatomic) IBOutlet UIImageView *IconeImageView;//提示消息的头像
@@ -18,14 +26,27 @@
 @property (weak, nonatomic) IBOutlet UIImageView *numberLabelView;//未读消息的视图
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *playerBarBtn;//正在播放的按钮
 @property (weak, nonatomic) IBOutlet UIView *playerSubView;//正在播放的视图
+@property (weak, nonatomic) IBOutlet UIView *FourBtnView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic,strong)NSArray * dataArr;
 
 @end
 
 @implementation FirstViewController
+-(NSArray *)dataArr
+{
 
+    if (_dataArr == nil) {
+        _dataArr =[NSArray array];
+    }
+    
+
+    return _dataArr;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.FourBtnView.userInteractionEnabled = YES;
     _SubImageView.layer.cornerRadius = _SubImageView.bounds.size.height/2; //圆角半径
     _SubImageView.layer.masksToBounds = YES; //圆角
     _IconeImageView.layer.masksToBounds = YES;
@@ -38,6 +59,11 @@
     [_SubImageView addGestureRecognizer:tap];
     [self setupSlideButton];
 //    [self setBtn];
+    
+    NSArray *bgmusicIDS = [SQLManager getDeviceByTypeName:@"背景音乐" andRoomID:self.roomID];
+    if ([bgmusicIDS count]>0) {
+        self.deviceid = bgmusicIDS[0];
+    }
 }
 -(void)setBtn
 {
@@ -99,8 +125,88 @@
         self.memberFamilyLabel.hidden = NO;
     }
     
-  
+}
+//减音量
+- (IBAction)smallVolume:(id)sender {
+}
+//加音量
+- (IBAction)additionVolume:(id)sender {
+}
+//上一步
+- (IBAction)lastStep:(id)sender {
+    NSLog(@"hhhhhh");
+    NSData *data=[[DeviceInfo defaultManager] previous:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+    if (BLUETOOTH_MUSIC) {
+        AudioManager *audio= [AudioManager defaultManager];
+        if ([[audio musicPlayer] indexOfNowPlayingItem]>0) {
+            [[audio musicPlayer] skipToPreviousItem];
+        }
+    }
+}
+//下一步
+- (IBAction)nextStep:(id)sender {
+      NSLog(@"hhhhhh");
+    NSData *data=[[DeviceInfo defaultManager] next:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+    if (BLUETOOTH_MUSIC) {
+        AudioManager *audio= [AudioManager defaultManager];
+        
+        if ([[audio musicPlayer] indexOfNowPlayingItem]<audio.songs.count-1) {
+            [[audio musicPlayer] skipToNextItem];
+        }
+    }
+}
+//开关
+- (IBAction)switchPower:(id)sender {
+//    NSData *data=[[DeviceInfo defaultManager] pause:self.deviceid];
+//    SocketManager *sock=[SocketManager defaultManager];
+//    [sock.socket writeData:data withTimeout:1 tag:1];
+//    if (BLUETOOTH_MUSIC) {
+//        AudioManager *audio= [AudioManager defaultManager];
+//        [[audio musicPlayer] pause];
+//    }
+    UIButton *btn = (UIButton *)sender;
     
+    if (_playState == 0) {
+        _playState = 1;
+        [btn setImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
+        //发送播放指令
+        NSData *data=[[DeviceInfo defaultManager] play:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+        
+        if (BLUETOOTH_MUSIC) {
+            AudioManager *audio= [AudioManager defaultManager];
+            [[audio musicPlayer] play];
+        }
+    }else if (_playState == 1) {
+        _playState = 0;
+        [btn setImage:[UIImage imageNamed:@"broadcast"] forState:UIControlStateNormal];
+        //发送停止指令
+        NSData *data=[[DeviceInfo defaultManager] pause:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+        if (BLUETOOTH_MUSIC) {
+            AudioManager *audio= [AudioManager defaultManager];
+            [[audio musicPlayer] pause];
+        }
+    }
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _dataArr.count;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    if (_dataArr.count == 0) {
+        self.tableView.hidden = YES;
+        
+    }
+    return cell;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

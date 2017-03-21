@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="chj-yx-pDz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A2323a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="chj-yx-pDz">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -4224,30 +4224,7 @@
                                                             <constraint firstAttribute="height" constant="10" id="xrP-hU-KKQ"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhP-Bb-OBn">
-                                                        <rect key="frame" x="104" y="112" width="46" height="30"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="46" id="E4c-7b-EBG"/>
-                                                            <constraint firstAttribute="height" constant="30" id="OHI-fz-cSd"/>
-                                                        </constraints>
-                                                        <state key="normal" title="返回"/>
-                                                        <connections>
-                                                            <action selector="returnBtnClicked:" destination="Eow-Lw-1jW" eventType="touchUpInside" id="vjn-yv-bb5"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ekt-FX-FEq">
-                                                        <rect key="frame" x="0.0" y="112" width="46" height="30"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="46" id="aXY-ey-PiJ"/>
-                                                            <constraint firstAttribute="height" constant="30" id="bek-rc-88b"/>
-                                                        </constraints>
-                                                        <state key="normal" title="主页">
-                                                            <color key="titleColor" red="0.14889228979999999" green="1" blue="0.19218370009999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="homeBtnClicked:" destination="Eow-Lw-1jW" eventType="touchUpInside" id="a8I-WT-Ja1"/>
-                                                        </connections>
-                                                    </button>
+
                                                 </subviews>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -4277,6 +4254,30 @@
                                                     <outlet property="delegate" destination="Eow-Lw-1jW" id="uBi-dL-Dck"/>
                                                 </connections>
                                             </pickerView>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ekt-FX-FEq">
+                                                <rect key="frame" x="8" y="89" width="46" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="46" id="aXY-ey-PiJ"/>
+                                                    <constraint firstAttribute="height" constant="30" id="bek-rc-88b"/>
+                                                </constraints>
+                                                <state key="normal" title="主页">
+                                                    <color key="titleColor" red="0.14889228979999999" green="1" blue="0.19218370009999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="homeBtnClicked:" destination="Eow-Lw-1jW" eventType="touchUpInside" id="a8I-WT-Ja1"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhP-Bb-OBn">
+                                                <rect key="frame" x="297" y="89" width="46" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="46" id="E4c-7b-EBG"/>
+                                                    <constraint firstAttribute="height" constant="30" id="OHI-fz-cSd"/>
+                                                </constraints>
+                                                <state key="normal" title="返回"/>
+                                                <connections>
+                                                    <action selector="returnBtnClicked:" destination="Eow-Lw-1jW" eventType="touchUpInside" id="vjn-yv-bb5"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -6160,6 +6161,7 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+
         <segue reference="J5F-aP-6iz"/>
         <segue reference="b22-0A-WOg"/>
         <segue reference="qN8-z6-Gb7"/>

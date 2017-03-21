@@ -230,22 +230,37 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Phq-4l-Y20">
                                                 <rect key="frame" x="0.0" y="0.0" width="60.5" height="60"/>
                                                 <state key="normal" image="shanchu.png"/>
+                                                <connections>
+                                                    <action selector="smallVolume:" destination="pvp-cq-nWV" eventType="touchUpInside" id="sYf-Af-4Kg"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Vd-hO-pG5">
                                                 <rect key="frame" x="60.5" y="0.0" width="60.5" height="60"/>
                                                 <state key="normal" image="shanchu.png"/>
+                                                <connections>
+                                                    <action selector="lastStep:" destination="pvp-cq-nWV" eventType="touchUpInside" id="q99-gD-G3G"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RAj-oN-KGd">
                                                 <rect key="frame" x="121" y="0.0" width="61" height="60"/>
                                                 <state key="normal" image="shanchu.png"/>
+                                                <connections>
+                                                    <action selector="switchPower:" destination="pvp-cq-nWV" eventType="touchUpInside" id="NUu-p1-g3N"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eul-Jw-6u1">
                                                 <rect key="frame" x="182" y="0.0" width="60.5" height="60"/>
                                                 <state key="normal" image="shanchu.png"/>
+                                                <connections>
+                                                    <action selector="nextStep:" destination="pvp-cq-nWV" eventType="touchUpInside" id="cpq-9P-G2g"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Td9-rc-X2P">
                                                 <rect key="frame" x="242.5" y="0.0" width="60.5" height="60"/>
                                                 <state key="normal" image="shanchu.png"/>
+                                                <connections>
+                                                    <action selector="additionVolume:" destination="pvp-cq-nWV" eventType="touchUpInside" id="e9u-a2-Dfv"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -280,6 +295,10 @@
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QOF-l9-868">
                                         <rect key="frame" x="0.0" y="60" width="303" height="307"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="pvp-cq-nWV" id="X3Z-Ml-cIh"/>
+                                            <outlet property="delegate" destination="pvp-cq-nWV" id="xxg-Ct-NY0"/>
+                                        </connections>
                                     </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -343,12 +362,14 @@
                     </navigationItem>
                     <connections>
                         <outlet property="BtnView" destination="tJs-PQ-Rrf" id="qaN-Bu-O9V"/>
+                        <outlet property="FourBtnView" destination="MbS-S2-idE" id="Lr4-O1-Uqo"/>
                         <outlet property="IconeImageView" destination="cef-iy-ptR" id="blc-Kh-jxm"/>
                         <outlet property="SubImageView" destination="eRG-g9-nK5" id="jdE-Nz-kDx"/>
                         <outlet property="memberFamilyLabel" destination="lTq-82-ehH" id="UN7-9f-M31"/>
                         <outlet property="numberLabelView" destination="No1-rZ-6Fp" id="21a-Mi-8gy"/>
                         <outlet property="playerBarBtn" destination="pPD-b2-xtb" id="QFy-b3-4KP"/>
                         <outlet property="playerSubView" destination="vJR-lC-tI0" id="piT-Q2-XwT"/>
+                        <outlet property="tableView" destination="QOF-l9-868" id="hEx-wE-gI8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hqu-Mb-ya2" userLabel="First Responder" sceneMemberID="firstResponder"/>

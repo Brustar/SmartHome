@@ -5271,18 +5271,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XU6-KE-sbu">
-                                <rect key="frame" x="100" y="98" width="400" height="140"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XU6-KE-sbu">
+                                <rect key="frame" x="0.0" y="64" width="375" height="140"/>
                                 <subviews>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="shJ-SX-wg9">
-                                        <rect key="frame" x="350" y="10" width="51" height="31"/>
+                                        <rect key="frame" x="325" y="10" width="51" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <connections>
                                             <action selector="musicSwitchChanged:" destination="ozV-GP-Vrh" eventType="valueChanged" id="7fB-J7-Lf5"/>
                                         </connections>
                                     </switch>
-                                    <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="D33-xY-Acr">
-                                        <rect key="frame" x="141" y="101" width="112" height="31"/>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="D33-xY-Acr">
+                                        <rect key="frame" x="141" y="101" width="87" height="31"/>
                                     </slider>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 歌曲名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOB-rg-gAp">
                                         <rect key="frame" x="90" y="60" width="57" height="21"/>
@@ -5293,8 +5293,8 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_weak" translatesAutoresizingMaskIntoConstraints="NO" id="Zsw-Vy-cRx">
                                         <rect key="frame" x="100" y="100" width="33" height="32"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I8z-Et-kfD">
-                                        <rect key="frame" x="185" y="80" width="24" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I8z-Et-kfD">
+                                        <rect key="frame" x="172.5" y="80" width="24" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -5323,8 +5323,8 @@
                                                     <action selector="nextMusic:" destination="ozV-GP-Vrh" eventType="touchUpInside" id="mdH-G7-rNv"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egm-GI-VGq">
-                                                <rect key="frame" x="18" y="0.0" width="19" height="32"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egm-GI-VGq">
+                                                <rect key="frame" x="103" y="0.0" width="86" height="32"/>
                                                 <state key="normal" image="broadcast"/>
                                                 <connections>
                                                     <action selector="playMusic:" destination="ozV-GP-Vrh" eventType="touchUpInside" id="YEn-az-zWH"/>
@@ -5348,8 +5348,8 @@
                                             <constraint firstItem="Atg-G0-8iY" firstAttribute="width" secondItem="j3w-lI-zyR" secondAttribute="width" id="yDW-hz-w8U"/>
                                         </constraints>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="voice_strong" translatesAutoresizingMaskIntoConstraints="NO" id="G8B-ww-PY9">
-                                        <rect key="frame" x="261" y="100" width="39" height="32"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_strong" translatesAutoresizingMaskIntoConstraints="NO" id="G8B-ww-PY9">
+                                        <rect key="frame" x="236" y="100" width="39" height="32"/>
                                     </imageView>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EBc-9X-X8r">
                                         <rect key="frame" x="20" y="40" width="60" height="60"/>
@@ -5423,7 +5423,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f4M-4j-Lpa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="476" y="-7939"/>
+            <point key="canvasLocation" x="489" y="-7243"/>
         </scene>
         <!--登录-->
         <scene sceneID="cKe-d7-Tzx">
@@ -8492,23 +8492,23 @@ layer.masksToBoundslayer.masksToBounds
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="uCb-ME-O7C"/>
-        <segue reference="nIi-Kc-QDm"/>
         <segue reference="QfD-HS-G6N"/>
+        <segue reference="nIi-Kc-QDm"/>
+        <segue reference="vLw-tf-AJR"/>
         <segue reference="mRk-xU-xJj"/>
         <segue reference="ya3-gG-p8O"/>
-        <segue reference="vdf-Gi-dZf"/>
+        <segue reference="U1p-eR-Biy"/>
+        <segue reference="pWG-oz-Opr"/>
         <segue reference="JQm-bA-TWz"/>
-        <segue reference="fHn-Cm-7Q7"/>
+        <segue reference="tt4-nB-rfe"/>
+        <segue reference="vdf-Gi-dZf"/>
         <segue reference="l23-e3-J0C"/>
         <segue reference="tdV-sS-d5j"/>
-        <segue reference="zpE-f9-a1R"/>
         <segue reference="X9P-hg-DXo"/>
+        <segue reference="fHn-Cm-7Q7"/>
         <segue reference="vKk-7C-VKf"/>
         <segue reference="a9T-LN-ZVX"/>
         <segue reference="Vzc-yi-Jnw"/>
-        <segue reference="tt4-nB-rfe"/>
-        <segue reference="pWG-oz-Opr"/>
         <segue reference="fbq-wi-BCv"/>
-        <segue reference="vLw-tf-AJR"/>
     </inferredMetricsTieBreakers>
 </document>
