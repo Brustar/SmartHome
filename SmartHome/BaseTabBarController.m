@@ -59,8 +59,8 @@
     familyVC.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"HOME" image:image1 selectedImage:selectImage1];
 
     //场景
-//    IphoneSceneController *sceneVC = [iPhoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
-    FirstSceneViewController * sceneVC = [SceneStoryBoard instantiateViewControllerWithIdentifier:@"FirstSceneViewController"];
+    IphoneSceneController *sceneVC = [iPhoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
+//    FirstSceneViewController * sceneVC = [SceneStoryBoard instantiateViewControllerWithIdentifier:@"FirstSceneViewController"];
     UIImage *image2 = [[UIImage imageNamed:@"icon_tabbar_merchant_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIImage *selectImage2 = [[UIImage imageNamed:@"icon_tabbar_merchant_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     sceneVC.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"场景" image:image2 selectedImage:selectImage2];

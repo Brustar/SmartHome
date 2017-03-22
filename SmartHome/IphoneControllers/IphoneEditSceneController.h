@@ -13,4 +13,6 @@
 @property(nonatomic,assign) int deviceID;
 @property(nonatomic,assign) int roomID;
 @property (nonatomic,assign) BOOL isFavor;
+@property (nonatomic,strong) NSString * sceneid;
+
 @end

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OtherTableViewCell" id="1Ts-qq-Tgs" customClass="OtherTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1Ts-qq-Tgs" id="GCn-kg-ktA">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="智能单品" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ue6-1z-N61">
+                        <rect key="frame" x="8" y="10" width="60" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="ALR-Ny-BOY"/>
+                            <constraint firstAttribute="height" constant="24" id="L0M-LM-Ct1"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T1t-bS-JOQ">
+                        <rect key="frame" x="316" y="6" width="51" height="31"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="31" id="EwE-Go-Ks3"/>
+                            <constraint firstAttribute="width" constant="49" id="gmR-5f-fRI"/>
+                        </constraints>
+                    </switch>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="T1t-bS-JOQ" firstAttribute="centerY" secondItem="GCn-kg-ktA" secondAttribute="centerY" id="UVr-GL-4g5"/>
+                    <constraint firstItem="ue6-1z-N61" firstAttribute="leading" secondItem="GCn-kg-ktA" secondAttribute="leadingMargin" id="c3Q-sq-VDr"/>
+                    <constraint firstItem="ue6-1z-N61" firstAttribute="centerY" secondItem="GCn-kg-ktA" secondAttribute="centerY" id="hJH-tz-InN"/>
+                    <constraint firstAttribute="trailing" secondItem="T1t-bS-JOQ" secondAttribute="trailing" constant="10" id="yQF-XT-I0O"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="OtherNameLabel" destination="ue6-1z-N61" id="VNt-zM-xl9"/>
+                <outlet property="OtherSwitch" destination="T1t-bS-JOQ" id="TfM-cu-dD2"/>
+            </connections>
+            <point key="canvasLocation" x="-186.5" y="41"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -25,7 +25,7 @@
 #import "IphoneEditSceneController.h"
 
 
-@interface FirstSceneViewController ()<UICollectionViewDataSource, UICollectionViewDelegate,UIScrollViewDelegate,IphoneRoomViewDelegate>
+@interface FirstSceneViewController ()<UICollectionViewDataSource, UICollectionViewDelegate,UIScrollViewDelegate,IphoneRoomViewDelegate,UIViewControllerPreviewingDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *XinImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *JiaHaoImageView;
@@ -56,14 +56,20 @@ static NSString * const CYPhotoId = @"photo";
 - (void)viewDidLoad {
     [super viewDidLoad];
      self.automaticallyAdjustsScrollViewInsets = NO;
-    // Do any additional setup after loading the view
-
      self.roomList = [SQLManager getAllRoomsInfo];
      self.arrayData = @[@"删除此场景",@"收藏",@"语音"];
       [self setUpRoomView];
       [self reachNotification];
       [self setupSlideButton];
       [self setUI];
+    UITapGestureRecognizer * PrivateLetterTap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAvatarView:)];
+    [self.JiaHaoImageView addGestureRecognizer:PrivateLetterTap];
+    self.JiaHaoImageView.userInteractionEnabled = YES;
+}
+- (void)tapAvatarView: (UITapGestureRecognizer *)gesture
+{
+    
+    [[SceneManager defaultManager] startScene:self.sceneID];
 }
 -(void)setUI
 {
@@ -190,7 +196,7 @@ static NSString * const CYPhotoId = @"photo";
     cell.tag = self.scene.sceneID;
     self.SceneNameLabel.text = self.scene.sceneName;
    [cell.imageView sd_setImageWithURL:[NSURL URLWithString: self.scene.picName] placeholderImage:[UIImage imageNamed:@"PL"]];
-
+ [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];
     return cell;
 }
 

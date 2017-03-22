@@ -85,7 +85,7 @@
                                             <constraint firstAttribute="height" constant="50" id="w3N-kI-rFh"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="czy-9g-dvR">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kaiqi.png" translatesAutoresizingMaskIntoConstraints="NO" id="czy-9g-dvR">
                                         <rect key="frame" x="163" y="66" width="50" height="50"/>
                                         <color key="backgroundColor" red="0.91133814099999999" green="0.52505368519999995" blue="0.12219731189999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -214,4 +214,7 @@
             <point key="canvasLocation" x="445.60000000000002" y="-327.88605697151428"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="kaiqi.png" width="32" height="32"/>
+    </resources>
 </document>

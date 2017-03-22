@@ -43,22 +43,22 @@
                                 <color key="backgroundColor" red="0.71167707443237305" green="0.42917749285697937" blue="0.089650504291057587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tJs-PQ-Rrf">
-                                <rect key="frame" x="36" y="549" width="303" height="30"/>
+                                <rect key="frame" x="36" y="519" width="303" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2fD-N6-nPL">
-                                        <rect key="frame" x="0.0" y="0.0" width="101" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="101" height="60"/>
                                         <state key="normal" title="回家" backgroundImage="button6-14.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="le6-KM-HW7">
-                                        <rect key="frame" x="101" y="0.0" width="101" height="30"/>
+                                        <rect key="frame" x="101" y="0.0" width="101" height="60"/>
                                         <state key="normal" title="离家" backgroundImage="button6-14.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xfM-fm-KYX">
-                                        <rect key="frame" x="202" y="0.0" width="101" height="30"/>
+                                        <rect key="frame" x="202" y="0.0" width="101" height="60"/>
                                         <state key="normal" title="度假" backgroundImage="button6-14.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -80,7 +80,7 @@
                                     <constraint firstItem="xfM-fm-KYX" firstAttribute="top" secondItem="tJs-PQ-Rrf" secondAttribute="top" id="fUO-q9-7Jx"/>
                                     <constraint firstItem="le6-KM-HW7" firstAttribute="top" secondItem="tJs-PQ-Rrf" secondAttribute="top" id="fzH-xM-cGK"/>
                                     <constraint firstAttribute="bottom" secondItem="xfM-fm-KYX" secondAttribute="bottom" id="p9s-P6-Wll"/>
-                                    <constraint firstAttribute="height" constant="30" id="yiX-Rw-5XO"/>
+                                    <constraint firstAttribute="height" constant="60" id="yiX-Rw-5XO"/>
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eRG-g9-nK5">
@@ -131,20 +131,20 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Ei-ax-VN7">
-                                <rect key="frame" x="36" y="414" width="303" height="135"/>
+                                <rect key="frame" x="36" y="414" width="303" height="105"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="家庭成员(5)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lTq-82-ehH">
-                                        <rect key="frame" x="0.0" y="0.0" width="303" height="20"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="303" height="40"/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="CPj-fD-GHL"/>
+                                            <constraint firstAttribute="height" constant="40" id="CPj-fD-GHL"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cef-iy-ptR">
-                                        <rect key="frame" x="8" y="58" width="40" height="40"/>
+                                        <rect key="frame" x="8" y="43" width="40" height="40"/>
                                         <color key="backgroundColor" red="0.66503363847732544" green="0.76714551448822021" blue="0.08497803658246994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="dQS-bG-BIJ"/>
@@ -152,13 +152,13 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="红烧排骨、清蒸鲫鱼、西红柿鸡蛋汤" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8J2-4M-cXC">
-                                        <rect key="frame" x="68" y="67" width="197" height="21"/>
+                                        <rect key="frame" x="68" y="52" width="197" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="No1-rZ-6Fp">
-                                        <rect key="frame" x="273" y="68" width="20" height="20"/>
+                                        <rect key="frame" x="273" y="53" width="20" height="20"/>
                                         <color key="backgroundColor" red="1" green="0.2089331613" blue="0.24076579889999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="PnB-mY-u0N"/>
@@ -191,7 +191,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vJR-lC-tI0">
-                                <rect key="frame" x="36" y="122" width="303" height="419"/>
+                                <rect key="frame" x="36" y="122" width="303" height="389"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cko-R4-xjM">
                                         <rect key="frame" x="0.0" y="0.0" width="303" height="60"/>
@@ -225,7 +225,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MbS-S2-idE">
-                                        <rect key="frame" x="0.0" y="367" width="303" height="60"/>
+                                        <rect key="frame" x="0.0" y="337" width="303" height="60"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Phq-4l-Y20">
                                                 <rect key="frame" x="0.0" y="0.0" width="60.5" height="60"/>
@@ -293,7 +293,7 @@
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QOF-l9-868">
-                                        <rect key="frame" x="0.0" y="60" width="303" height="307"/>
+                                        <rect key="frame" x="0.0" y="60" width="303" height="277"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="dataSource" destination="pvp-cq-nWV" id="X3Z-Ml-cIh"/>

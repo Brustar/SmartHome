@@ -32,44 +32,147 @@
 #import "TouchSubViewController.h"
 #import "HttpManager.h"
 #import "IphoneLightController.h"
+#import "LightCell.h"
+#import "AireTableViewCell.h"
+#import "CurtainTableViewCell.h"
+#import "TVTableViewCell.h"
+#import "OtherTableViewCell.h"
 
-@interface IphoneEditSceneController ()<IphoneTypeViewDelegate,TouchSubViewDelegate>
+@interface IphoneEditSceneController ()<IphoneTypeViewDelegate,TouchSubViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet IphoneTypeView *subTypeView;//设备大View
 @property (weak, nonatomic) IBOutlet IphoneTypeView *deviceTypeView;//设备子View
 @property (weak, nonatomic) IBOutlet UIView *devicelView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveBarBtn;
 @property (weak, nonatomic) UIViewController *currentViewController;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 //设备大类
 @property (nonatomic,strong) NSArray *typeArr;
 //设备子类
 @property(nonatomic,strong) NSArray *devicesTypes;
-
+@property(nonatomic,strong) NSArray * AllDeviceArr;//所有设备ID
+@property(nonatomic,strong)  NSMutableArray * lightArr;//灯光
+@property (nonatomic,strong) NSMutableArray * AirArray;//空调
+@property (nonatomic,strong) NSMutableArray * TVArray;//TV
+@property (nonatomic,strong) NSMutableArray * FMArray;//FM
+@property (nonatomic,strong) NSMutableArray * CurtainArray;//窗帘
+@property (nonatomic,strong) NSMutableArray * DVDArray;//DVD
+@property (nonatomic,strong) NSMutableArray * OtherArray;//其他
+@property (nonatomic,strong) NSMutableArray * LockArray;//智能门锁
+@property (nonatomic,strong) NSMutableArray * ColourLightArr;//调色
+@property (nonatomic,strong) NSMutableArray * SwitchLightArr;//开关
+@property (nonatomic,strong) NSMutableArray * lightArray;//调光
 @property (nonatomic, assign) int typeIndex;
+@property (nonatomic,strong) NSString *typeName;
 
 @end
 
 @implementation IphoneEditSceneController
 
+-(NSArray *)AllDeviceArr
+{
+    if (_AllDeviceArr == nil) {
+        _AllDeviceArr = [NSArray array];
+    }
+
+    return _AllDeviceArr;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.title = [SQLManager getSceneName:self.sceneID ];
-    self.typeArr = [SQLManager getSubTydpeBySceneID:self.sceneID];//设备大类
+//     _AllDeviceArr = [SQLManager getDeviceIDWithRoomID:self.roomID sceneID:self.sceneID];
+    self.title = [SQLManager getSceneName:self.sceneID];
+    self.typeArr = [SQLManager getSubTydpeBySceneID:self.sceneID];//设备大类作为分组
+   
+    [self getUI];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.devicesTypes = [SQLManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.typeArr[0] ];//设备子类
+    
+    self.devicesTypes = [SQLManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.typeArr[0] ];//设备子类作为每一组的展示
+ 
     if(self.isFavor)
     {
         self.saveBarBtn.enabled = NO;
     }
-    [self setupSubTypeView];
+//    [self setupSubTypeView];
     
     TouchSubViewController * touchVC = [[TouchSubViewController alloc] init];
     touchVC.delegate = self;
-    
-}
+    [self.tableView registerNib:[UINib nibWithNibName:@"AireTableViewCell" bundle:nil] forCellReuseIdentifier:@"AireTableViewCell"];//空调
+    [self.tableView registerNib:[UINib nibWithNibName:@"CurtainTableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainTableViewCell"];//窗帘
+     [self.tableView registerNib:[UINib nibWithNibName:@"TVTableViewCell" bundle:nil] forCellReuseIdentifier:@"TVTableViewCell"];//网络电视
+     [self.tableView registerNib:[UINib nibWithNibName:@"OtherTableViewCell" bundle:nil] forCellReuseIdentifier:@"OtherTableViewCell"];//网络电视
 
+}
+-(void)getUI
+{
+    NSArray *lightArr = [SQLManager getDeviceIDsBySeneId:self.sceneID];
+    _lightArr = [[NSMutableArray alloc] init];//场景下的所有设备
+    _lightArray = [[NSMutableArray alloc] init];
+    _ColourLightArr = [[NSMutableArray alloc] init];
+    _SwitchLightArr = [[NSMutableArray alloc] init];
+    _CurtainArray = [[NSMutableArray alloc] init];
+    _AirArray = [[NSMutableArray alloc] init];
+    _FMArray = [[NSMutableArray alloc] init];
+    _TVArray = [[NSMutableArray alloc] init];
+    _LockArray = [[NSMutableArray alloc] init];
+    _DVDArray = [[NSMutableArray alloc] init];
+    _OtherArray = [[NSMutableArray alloc] init];
+    for(int i = 0; i <lightArr.count; i++)
+    {
+        _typeName = [SQLManager deviceTypeNameByDeviceID:[lightArr[i] intValue]];
+        if ([_typeName isEqualToString:@"灯光"]) {
+            [_lightArray addObject:lightArr[i]];
+        }else if ([_typeName isEqualToString:@"空调"]){
+            [_AirArray addObject:lightArr[i]];
+        }else if ([_typeName isEqualToString:@"窗帘"]){
+            [_CurtainArray addObject:lightArr[i]];
+        }else if ([_typeName isEqualToString:@"FM"]){
+            [_FMArray addObject:lightArr[i]];
+        }else if ([_typeName isEqualToString:@"网络电视"]){
+            [_TVArray addObject:lightArr[i]];
+        }else if ([_typeName isEqualToString:@"智能门锁"]){
+            [_LockArray addObject:lightArr[i]];
+        }else if ([_typeName isEqualToString:@"DVD"]){
+            [_DVDArray addObject:lightArr[i]];
+        }else{
+            [_OtherArray addObject:lightArr[i]];
+        }
+        
+        //        NSString *typeName = [SQLManager deviceNameByDeviceID:[lightArr[i] intValue]];
+        //
+        //         [_lightArr insertObject:typeName atIndex:i];
+        
+    }
+}
+//根据设备子类的名字得到所有场景下的设备
+-(void)getAlldevices
+{
+    for(NSString *deviceType in self.devicesTypes)
+    {
+        if([deviceType isEqualToString:@"灯光"])
+        {
+            [self.deviceTypeView addItemWithTitle:@"灯光" imageName:@"lamp"];
+        }else if([deviceType isEqualToString:@"窗帘"]){
+            [self.deviceTypeView addItemWithTitle:@"窗帘" imageName:@"curtainType"];
+        }else if([deviceType isEqualToString:@"空调"])
+        {
+            [self.deviceTypeView addItemWithTitle:@"空调" imageName:@"air"];
+        }else if ([deviceType isEqualToString:@"FM"])
+        {
+            [self.deviceTypeView addItemWithTitle:@"FM" imageName:@"fm"];
+        }else if([deviceType isEqualToString:@"网络电视"]){
+            [self.deviceTypeView addItemWithTitle:@"网络电视" imageName:@"TV"];
+        }else if([deviceType isEqualToString:@"智能门锁"]){
+            [self.deviceTypeView addItemWithTitle:@"智能门锁" imageName:@"guard"];
+        }else if([deviceType isEqualToString:@"DVD"]){
+            [self.deviceTypeView addItemWithTitle:@"DVD电视" imageName:@"DVD"];
+        }else{
+            [self.deviceTypeView addItemWithTitle:@"其他" imageName:@"safe"];
+        }
+        
+    }
+
+}
 -(void)setupSubTypeView
 {
     self.subTypeView.delegate = self;
@@ -401,6 +504,80 @@
     [super didReceiveMemoryWarning];
     
 }
- 
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 6;
 
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+ 
+    if (section == 0) {
+        return _lightArray.count;
+    }else if (section == 1){
+        return _AirArray.count;
+    }else if (section == 2){
+        return _CurtainArray.count;
+    }else if (section == 3){
+        return _TVArray.count;
+    }else if (section == 4){
+        return _LockArray.count;
+    }else if (section == 5){
+        return _DVDArray.count;
+    }
+    return _OtherArray.count;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+   if (indexPath.section == 0) {
+        LightCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        cell.roomID = self.roomID;
+        cell.sceneID = self.sceneid;
+        Device *device = [SQLManager getDeviceWithDeviceID:[_lightArray[indexPath.row] intValue]];
+        cell.LightNameLabel.text = device.name;
+        cell.slider.continuous = NO;
+        cell.deviceid = _lightArray[indexPath.row];
+          return cell;
+    }if (indexPath.section == 1) {
+        AireTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"AireTableViewCell" forIndexPath:indexPath];
+        aireCell.roomID = self.roomID;
+        aireCell.sceneID = self.sceneid;
+         Device *device = [SQLManager getDeviceWithDeviceID:[_AirArray[indexPath.row] intValue]];
+        aireCell.deviceNameLabel.text = device.name;
+        aireCell.deviceid = _AirArray[indexPath.row];
+        
+        return aireCell;
+    }if (indexPath.section == 2) {
+        CurtainTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
+        aireCell.roomID = self.roomID;
+        aireCell.sceneID = self.sceneid;
+        Device *device = [SQLManager getDeviceWithDeviceID:[_CurtainArray[indexPath.row] intValue]];
+        aireCell.label.text = device.name;
+        aireCell.deviceid = _CurtainArray[indexPath.row];
+        return aireCell;
+    }if (indexPath.section == 3) {
+        TVTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"TVTableViewCell" forIndexPath:indexPath];
+          Device *device = [SQLManager getDeviceWithDeviceID:[_TVArray[indexPath.row] intValue]];
+        aireCell.TVNameLabel.text = device.name;
+        return aireCell;
+    }if (indexPath.section == 4) {
+        TVTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"TVTableViewCell" forIndexPath:indexPath];
+        Device *device = [SQLManager getDeviceWithDeviceID:[_DVDArray[indexPath.row] intValue]];
+        aireCell.TVNameLabel.text = device.name;
+        return aireCell;
+    }if (indexPath.section == 5) {
+        OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+        
+        return otherCell;
+    }
+    
+    OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+    
+    return otherCell;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 76;
+}
 @end
