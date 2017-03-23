@@ -544,7 +544,7 @@
         aireCell.roomID = self.roomID;
         aireCell.sceneID = self.sceneid;
          Device *device = [SQLManager getDeviceWithDeviceID:[_AirArray[indexPath.row] intValue]];
-        aireCell.deviceNameLabel.text = device.name;
+        aireCell.AireNameLabel.text = device.name;
         aireCell.deviceid = _AirArray[indexPath.row];
         
         return aireCell;
