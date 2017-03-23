@@ -165,7 +165,7 @@
     }
 
       [self.XGImageView setContentMode:UIViewContentModeScaleAspectFill];
-     [self.XGImageView setImage:[ObjectFunction blurryImage:[UIImage imageNamed:@"test.jpeg"] withBlurLevel:10.0f]];
+     [self.XGImageView setImage:[ObjectFunction blurryImage:[UIImage imageNamed:@"leftbackiamge"] withBlurLevel:10.0f]];
 }
 //监听到网络状态改变
 - (void) reachabilityUpdate: (NSNotification* )note
@@ -400,6 +400,7 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     FamilyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    
     Room * room = self.rooms[indexPath.row];
     cell.nameLabel.text = room.rName;
     
@@ -410,7 +411,8 @@
     }else{
         cell.tag = room.rId;
     }
-
+    
+    [cell addRing];
     return cell;
 }
 
