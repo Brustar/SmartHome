@@ -37,6 +37,8 @@
 #import "CurtainTableViewCell.h"
 #import "TVTableViewCell.h"
 #import "OtherTableViewCell.h"
+#import "ScreenTableViewCell.h"
+#import "DVDTableViewCell.h"
 
 @interface IphoneEditSceneController ()<IphoneTypeViewDelegate,TouchSubViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -63,6 +65,12 @@
 @property (nonatomic,strong) NSMutableArray * ColourLightArr;//调色
 @property (nonatomic,strong) NSMutableArray * SwitchLightArr;//开关
 @property (nonatomic,strong) NSMutableArray * lightArray;//调光
+@property (nonatomic,strong) NSMutableArray * PluginArray;//智能单品
+@property (nonatomic,strong) NSMutableArray * NetVArray;//机顶盒
+@property (nonatomic,strong) NSMutableArray * CameraArray;//摄像头
+@property (nonatomic,strong) NSMutableArray * ProjectArray;//投影机
+@property (nonatomic,strong) NSMutableArray * BJMusicArray;//背景音乐
+@property (nonatomic,strong) NSMutableArray * MBArray;//幕布
 @property (nonatomic, assign) int typeIndex;
 @property (nonatomic,strong) NSString *typeName;
 
@@ -97,14 +105,18 @@
     
     TouchSubViewController * touchVC = [[TouchSubViewController alloc] init];
     touchVC.delegate = self;
-    [self.tableView registerNib:[UINib nibWithNibName:@"AireTableViewCell" bundle:nil] forCellReuseIdentifier:@"AireTableViewCell"];//空调
-    [self.tableView registerNib:[UINib nibWithNibName:@"CurtainTableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainTableViewCell"];//窗帘
-     [self.tableView registerNib:[UINib nibWithNibName:@"TVTableViewCell" bundle:nil] forCellReuseIdentifier:@"TVTableViewCell"];//网络电视
-     [self.tableView registerNib:[UINib nibWithNibName:@"OtherTableViewCell" bundle:nil] forCellReuseIdentifier:@"OtherTableViewCell"];//网络电视
+   
 
 }
 -(void)getUI
 {
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"AireTableViewCell" bundle:nil] forCellReuseIdentifier:@"AireTableViewCell"];//空调
+    [self.tableView registerNib:[UINib nibWithNibName:@"CurtainTableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainTableViewCell"];//窗帘
+    [self.tableView registerNib:[UINib nibWithNibName:@"TVTableViewCell" bundle:nil] forCellReuseIdentifier:@"TVTableViewCell"];//网络电视
+    [self.tableView registerNib:[UINib nibWithNibName:@"OtherTableViewCell" bundle:nil] forCellReuseIdentifier:@"OtherTableViewCell"];//其他
+    [self.tableView registerNib:[UINib nibWithNibName:@"ScreenTableViewCell" bundle:nil] forCellReuseIdentifier:@"ScreenTableViewCell"];//幕布
+    [self.tableView registerNib:[UINib nibWithNibName:@"DVDTableViewCell" bundle:nil] forCellReuseIdentifier:@"DVDTableViewCell"];//DVD
     NSArray *lightArr = [SQLManager getDeviceIDsBySeneId:self.sceneID];
     _lightArr = [[NSMutableArray alloc] init];//场景下的所有设备
     _lightArray = [[NSMutableArray alloc] init];
@@ -117,6 +129,12 @@
     _LockArray = [[NSMutableArray alloc] init];
     _DVDArray = [[NSMutableArray alloc] init];
     _OtherArray = [[NSMutableArray alloc] init];
+    _NetVArray = [[NSMutableArray alloc] init];
+    _CameraArray = [[NSMutableArray alloc] init];
+    _ProjectArray = [[NSMutableArray alloc] init];
+    _PluginArray = [[NSMutableArray alloc] init];
+    _BJMusicArray = [[NSMutableArray alloc] init];
+    _MBArray = [[NSMutableArray alloc] init];
     for(int i = 0; i <lightArr.count; i++)
     {
         _typeName = [SQLManager deviceTypeNameByDeviceID:[lightArr[i] intValue]];
@@ -134,10 +152,21 @@
             [_LockArray addObject:lightArr[i]];
         }else if ([_typeName isEqualToString:@"DVD"]){
             [_DVDArray addObject:lightArr[i]];
-        }else{
+        }else if ([_typeName isEqualToString:@"智能单品"]){
+            [_PluginArray addObject:lightArr[i]];
+        }else if ([_typeName isEqualToString:@"投影"]){
+            [_ProjectArray addObject:lightArr[i]];
+        }else if ([_typeName isEqualToString:@"机顶盒"]){
+            [_NetVArray addObject:lightArr[i]];
+        }else if ([_typeName isEqualToString:@"背景音乐"]){
+            [_BJMusicArray addObject:lightArr[i]];
+        }else if ([_typeName isEqualToString:@"幕布"]){
+            [_MBArray addObject:lightArr[i]];
+        }
+        else{
             [_OtherArray addObject:lightArr[i]];
         }
-        
+
         //        NSString *typeName = [SQLManager deviceNameByDeviceID:[lightArr[i] intValue]];
         //
         //         [_lightArr insertObject:typeName atIndex:i];
@@ -506,26 +535,28 @@
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 6;
+    return 8;
 
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
  
     if (section == 0) {
-        return _lightArray.count;
+        return _lightArray.count;//灯光
     }else if (section == 1){
-        return _AirArray.count;
+        return _AirArray.count;//空调
     }else if (section == 2){
-        return _CurtainArray.count;
+        return _CurtainArray.count;//窗帘
     }else if (section == 3){
-        return _TVArray.count;
+        return _TVArray.count;//TV
     }else if (section == 4){
-        return _LockArray.count;
+        return _LockArray.count;//智能门锁
     }else if (section == 5){
-        return _DVDArray.count;
+        return _DVDArray.count;//DVD
+    }else if (section == 6){
+        return _ProjectArray.count;//投影
     }
-    return _OtherArray.count;
+    return _OtherArray.count;//其他
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -567,12 +598,20 @@
         aireCell.TVNameLabel.text = device.name;
         return aireCell;
     }if (indexPath.section == 5) {
-        OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
-        
+        DVDTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"DVDTableViewCell" forIndexPath:indexPath];
+        Device *device = [SQLManager getDeviceWithDeviceID:[_DVDArray[indexPath.row] intValue]];
+        otherCell.DVDNameLabel.text = device.name;
         return otherCell;
+    }if (indexPath.section == 6) {
+        ScreenTableViewCell * ScreenCell = [tableView dequeueReusableCellWithIdentifier:@"ScreenTableViewCell" forIndexPath:indexPath];
+         Device *device = [SQLManager getDeviceWithDeviceID:[_ProjectArray[indexPath.row] intValue]];
+        ScreenCell.screenNameLabel.text = device.name;
+        return ScreenCell;
     }
     
-    OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+      OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+       Device *device = [SQLManager getDeviceWithDeviceID:[_OtherArray[indexPath.row] intValue]];
+       otherCell.NameLabel.text = device.name;
     
     return otherCell;
 }

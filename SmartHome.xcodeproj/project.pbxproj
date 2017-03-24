@@ -195,6 +195,10 @@
 		2EBABC791E8360FB0093EF3A /* TVTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2EBABC771E8360FB0093EF3A /* TVTableViewCell.xib */; };
 		2EBABC7D1E8361C50093EF3A /* OtherTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBABC7B1E8361C50093EF3A /* OtherTableViewCell.m */; };
 		2EBABC7E1E8361C50093EF3A /* OtherTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2EBABC7C1E8361C50093EF3A /* OtherTableViewCell.xib */; };
+		2EBABC821E83787B0093EF3A /* ScreenTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBABC801E83787B0093EF3A /* ScreenTableViewCell.m */; };
+		2EBABC831E83787B0093EF3A /* ScreenTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2EBABC811E83787B0093EF3A /* ScreenTableViewCell.xib */; };
+		2EBABC871E839F2E0093EF3A /* DVDTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBABC851E839F2E0093EF3A /* DVDTableViewCell.m */; };
+		2EBABC881E839F2E0093EF3A /* DVDTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2EBABC861E839F2E0093EF3A /* DVDTableViewCell.xib */; };
 		2EBE210F1E497595003D53A4 /* ForgotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBE210E1E497595003D53A4 /* ForgotViewController.m */; };
 		2EC45FBD1E53E2D60042CE20 /* IphoneTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC45FBC1E53E2D60042CE20 /* IphoneTabBarViewController.m */; };
 		2EC8A5901E372C51002A5042 /* IphoneDeviceLightVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC8A58F1E372C51002A5042 /* IphoneDeviceLightVC.m */; };
@@ -775,6 +779,12 @@
 		2EBABC7A1E8361C50093EF3A /* OtherTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherTableViewCell.h; sourceTree = "<group>"; };
 		2EBABC7B1E8361C50093EF3A /* OtherTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherTableViewCell.m; sourceTree = "<group>"; };
 		2EBABC7C1E8361C50093EF3A /* OtherTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OtherTableViewCell.xib; sourceTree = "<group>"; };
+		2EBABC7F1E83787B0093EF3A /* ScreenTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenTableViewCell.h; sourceTree = "<group>"; };
+		2EBABC801E83787B0093EF3A /* ScreenTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenTableViewCell.m; sourceTree = "<group>"; };
+		2EBABC811E83787B0093EF3A /* ScreenTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScreenTableViewCell.xib; sourceTree = "<group>"; };
+		2EBABC841E839F2E0093EF3A /* DVDTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVDTableViewCell.h; sourceTree = "<group>"; };
+		2EBABC851E839F2E0093EF3A /* DVDTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVDTableViewCell.m; sourceTree = "<group>"; };
+		2EBABC861E839F2E0093EF3A /* DVDTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DVDTableViewCell.xib; sourceTree = "<group>"; };
 		2EBE210D1E497595003D53A4 /* ForgotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotViewController.h; sourceTree = "<group>"; };
 		2EBE210E1E497595003D53A4 /* ForgotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotViewController.m; sourceTree = "<group>"; };
 		2EC45FBB1E53E2D60042CE20 /* IphoneTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneTabBarViewController.h; sourceTree = "<group>"; };
@@ -1958,6 +1968,12 @@
 				2EBABC7A1E8361C50093EF3A /* OtherTableViewCell.h */,
 				2EBABC7B1E8361C50093EF3A /* OtherTableViewCell.m */,
 				2EBABC7C1E8361C50093EF3A /* OtherTableViewCell.xib */,
+				2EBABC7F1E83787B0093EF3A /* ScreenTableViewCell.h */,
+				2EBABC801E83787B0093EF3A /* ScreenTableViewCell.m */,
+				2EBABC811E83787B0093EF3A /* ScreenTableViewCell.xib */,
+				2EBABC841E839F2E0093EF3A /* DVDTableViewCell.h */,
+				2EBABC851E839F2E0093EF3A /* DVDTableViewCell.m */,
+				2EBABC861E839F2E0093EF3A /* DVDTableViewCell.xib */,
 			);
 			name = TableViewCell;
 			sourceTree = "<group>";
@@ -2308,6 +2324,7 @@
 			files = (
 				2E925D9F1E5E857D008E327B /* 5.jpg in Resources */,
 				CDF3892A1E30AF9600657C8B /* msgTypeList.plist in Resources */,
+				2EBABC881E839F2E0093EF3A /* DVDTableViewCell.xib in Resources */,
 				CDF389341E30F27500657C8B /* userHabitList.plist in Resources */,
 				CDF90B431E2F0676009043B9 /* realScene.plist in Resources */,
 				CD78A8301E3379C200060466 /* 255_221.plist in Resources */,
@@ -2316,6 +2333,7 @@
 				2E925DA91E5E89DD008E327B /* calendar.png in Resources */,
 				0F49CB701E7A1EA100D46ECC /* Devices.storyboard in Resources */,
 				2E925DA61E5E857D008E327B /* all_7.jpg in Resources */,
+				2EBABC831E83787B0093EF3A /* ScreenTableViewCell.xib in Resources */,
 				CDF1574A1E7AB2AF00499AC5 /* icon_tabbar_mine_selected@2x.png in Resources */,
 				0FBEFE271D24A5020084244F /* netconfig.plist in Resources */,
 				0F49CB721E7A1EAE00D46ECC /* Scene.storyboard in Resources */,
@@ -2790,6 +2808,7 @@
 				2E12CC161E7FC04800C7D006 /* IphoneNewEditSceneController.m in Sources */,
 				F6251F741D541D8A000A5A47 /* Device.m in Sources */,
 				F6251F771D542508000A5A47 /* SQLManager.m in Sources */,
+				2EBABC871E839F2E0093EF3A /* DVDTableViewCell.m in Sources */,
 				2EFFECA11E12161100C13D3E /* FixTimeListViewController.m in Sources */,
 				0FDB34441E79269500DA53BB /* LayerUtil.m in Sources */,
 				F62CFA4A1DAC952F006410F7 /* IphoneRoomListController.m in Sources */,
@@ -2825,6 +2844,7 @@
 				0FAF74C91CEEB37200432713 /* HRSampleColorPickerViewController.m in Sources */,
 				0FCFB38C1CF293A500B37DD3 /* DVD.m in Sources */,
 				2E925D8D1E5E73CD008E327B /* ECEngerController.m in Sources */,
+				2EBABC821E83787B0093EF3A /* ScreenTableViewCell.m in Sources */,
 				F617771D1DCC23AC00B382D4 /* CollectionViewCell.m in Sources */,
 				0FAF98B61CE45EC9009BDBB5 /* CryptoManager.m in Sources */,
 				2EEE536E1E309C5D0026F97D /* MyView.m in Sources */,

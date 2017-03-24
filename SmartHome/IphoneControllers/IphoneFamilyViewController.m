@@ -102,16 +102,11 @@
     }
     
 }
-
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
       NSInteger status = _afNetworkReachabilityManager.networkReachabilityStatus;
-    
-  
-     NSLog(@"NetworkReachabilityStatus: %ld", (long)status);
-
-    
+      NSLog(@"NetworkReachabilityStatus: %ld", (long)status);
 }
 
 - (void)setupSlideButton {
