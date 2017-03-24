@@ -29,6 +29,16 @@
 @property (weak, nonatomic) IBOutlet UIView *FourBtnView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong)NSArray * dataArr;
+@property (weak, nonatomic) IBOutlet UIImageView *HeadImageView;
+@property (weak, nonatomic) IBOutlet UIView *socialView;
+@property (weak, nonatomic) IBOutlet UILabel *calenderDayLabel;//日历-天
+@property (weak, nonatomic) IBOutlet UILabel *markedWordsLabel;//提示语
+@property (weak, nonatomic) IBOutlet UILabel *calenderMonthLabel;//日历月
+@property (weak, nonatomic) IBOutlet UILabel *calenderYearLabel;//日历年
+@property (weak, nonatomic) IBOutlet UILabel *UserNameLabel;//用户名的显示
+@property (weak, nonatomic) IBOutlet UILabel *WelcomeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *TakeTurnsWordsLabel;
+
 
 @end
 
@@ -54,6 +64,11 @@
     _numberLabelView.layer.masksToBounds = YES;
     _numberLabelView.layer.cornerRadius = _numberLabelView.bounds.size.height / 2;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doTap:)];
+     UITapGestureRecognizer *Headtap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(HeadDoTap:)];
+    _HeadImageView.userInteractionEnabled = YES;
+    
+    [_HeadImageView addGestureRecognizer:Headtap];
+    
     // 允许用户交互
     _SubImageView.userInteractionEnabled = YES;
     [_SubImageView addGestureRecognizer:tap];
@@ -80,6 +95,19 @@
         [_BtnView addSubview:button];
     }
 
+}
+
+-(void)HeadDoTap:(UITapGestureRecognizer *)tap
+{
+    if (self.socialView.hidden) {
+        self.socialView.hidden = NO;
+        _UserNameLabel.hidden = YES;
+        _WelcomeLabel.hidden = YES;
+    }else{
+         self.socialView.hidden = YES;
+        _UserNameLabel.hidden = NO;
+        _WelcomeLabel.hidden = NO;
+    }
 }
 -(void)doTap:(UITapGestureRecognizer *)tap
 {
@@ -116,6 +144,15 @@
         self.IconeImageView.hidden = YES;
         self.numberLabelView.hidden = YES;
         self.memberFamilyLabel.hidden = YES;
+        _calenderDayLabel.hidden = YES;
+        _calenderYearLabel.hidden = YES;
+        _calenderMonthLabel.hidden = YES;
+        _UserNameLabel.hidden = YES;
+        _WelcomeLabel.hidden = YES;
+        _HeadImageView.hidden = YES;
+        _TakeTurnsWordsLabel.hidden = YES;
+        _markedWordsLabel.hidden = YES;
+        
     }else{
           self.playerSubView.hidden = YES;
         self.SubImageView.hidden = NO;
@@ -123,6 +160,14 @@
         self.IconeImageView.hidden = NO;
         self.numberLabelView.hidden = NO;
         self.memberFamilyLabel.hidden = NO;
+        _calenderDayLabel.hidden = NO;
+        _calenderYearLabel.hidden = NO;
+        _calenderMonthLabel.hidden = NO;
+        _UserNameLabel.hidden = NO;
+        _WelcomeLabel.hidden = NO;
+        _HeadImageView.hidden = NO;
+        _TakeTurnsWordsLabel.hidden = NO;
+        _markedWordsLabel.hidden = NO;
     }
     
 }

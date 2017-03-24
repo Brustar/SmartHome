@@ -201,12 +201,12 @@
 		2EBABC881E839F2E0093EF3A /* DVDTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2EBABC861E839F2E0093EF3A /* DVDTableViewCell.xib */; };
 		2EBE210F1E497595003D53A4 /* ForgotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBE210E1E497595003D53A4 /* ForgotViewController.m */; };
 		2EC45FBD1E53E2D60042CE20 /* IphoneTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC45FBC1E53E2D60042CE20 /* IphoneTabBarViewController.m */; };
+		2EC7D1D51E84CEA900284C0F /* lightBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EC7D1D41E84CEA900284C0F /* lightBtn.png */; };
 		2EC8A5901E372C51002A5042 /* IphoneDeviceLightVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC8A58F1E372C51002A5042 /* IphoneDeviceLightVC.m */; };
 		2EC8A5931E372D75002A5042 /* ColourCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC8A5921E372D75002A5042 /* ColourCell.m */; };
 		2ED42B931E35B41E00592A03 /* IphoneAirCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED42B921E35B41E00592A03 /* IphoneAirCell.m */; };
 		2EDC0E901DEC072700F95BE0 /* IPhoneRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDC0E8F1DEC072700F95BE0 /* IPhoneRoom.m */; };
 		2EDE04611E45777B00BC8E0B /* WebViewMangerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE04601E45777B00BC8E0B /* WebViewMangerVC.m */; };
-		2EE1196A1E80D25D00F6FCB6 /* bofang.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EE119691E80D25D00F6FCB6 /* bofang.png */; };
 		2EE1196C1E80D6B900F6FCB6 /* shanchu.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EE1196B1E80D6B900F6FCB6 /* shanchu.png */; };
 		2EE1196F1E81374A00F6FCB6 /* kaiqi.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EE1196E1E81374A00F6FCB6 /* kaiqi.png */; };
 		2EEE536B1E3061930026F97D /* IphoneDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EEE536A1E3061930026F97D /* IphoneDetailViewController.m */; };
@@ -789,6 +789,7 @@
 		2EBE210E1E497595003D53A4 /* ForgotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotViewController.m; sourceTree = "<group>"; };
 		2EC45FBB1E53E2D60042CE20 /* IphoneTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneTabBarViewController.h; sourceTree = "<group>"; };
 		2EC45FBC1E53E2D60042CE20 /* IphoneTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneTabBarViewController.m; sourceTree = "<group>"; };
+		2EC7D1D41E84CEA900284C0F /* lightBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightBtn.png; sourceTree = "<group>"; };
 		2EC8A58E1E372C51002A5042 /* IphoneDeviceLightVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneDeviceLightVC.h; sourceTree = "<group>"; };
 		2EC8A58F1E372C51002A5042 /* IphoneDeviceLightVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneDeviceLightVC.m; sourceTree = "<group>"; };
 		2EC8A5911E372D75002A5042 /* ColourCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColourCell.h; sourceTree = "<group>"; };
@@ -799,7 +800,6 @@
 		2EDC0E8F1DEC072700F95BE0 /* IPhoneRoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPhoneRoom.m; sourceTree = "<group>"; };
 		2EDE045F1E45777B00BC8E0B /* WebViewMangerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewMangerVC.h; sourceTree = "<group>"; };
 		2EDE04601E45777B00BC8E0B /* WebViewMangerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewMangerVC.m; sourceTree = "<group>"; };
-		2EE119691E80D25D00F6FCB6 /* bofang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bofang.png; sourceTree = "<group>"; };
 		2EE1196B1E80D6B900F6FCB6 /* shanchu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shanchu.png; sourceTree = "<group>"; };
 		2EE1196E1E81374A00F6FCB6 /* kaiqi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kaiqi.png; sourceTree = "<group>"; };
 		2EEE53691E3061930026F97D /* IphoneDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneDetailViewController.h; sourceTree = "<group>"; };
@@ -2019,6 +2019,7 @@
 		CDF157431E7AB29A00499AC5 /* png */ = {
 			isa = PBXGroup;
 			children = (
+				2EC7D1D41E84CEA900284C0F /* lightBtn.png */,
 				2EE1196E1E81374A00F6FCB6 /* kaiqi.png */,
 				2EE1196B1E80D6B900F6FCB6 /* shanchu.png */,
 				2E12CC061E7F5D7F00C7D006 /* home_xiafangkuang.png */,
@@ -2031,7 +2032,6 @@
 				CDF157471E7AB2AF00499AC5 /* icon_tabbar_merchant_normal@2x.png */,
 				CDF157481E7AB2AF00499AC5 /* icon_tabbar_merchant_selected@2x.png */,
 				CDF157491E7AB2AF00499AC5 /* icon_tabbar_mine@2x.png */,
-				2EE119691E80D25D00F6FCB6 /* bofang.png */,
 			);
 			name = png;
 			sourceTree = "<group>";
@@ -2369,6 +2369,7 @@
 				2EA897C71E31B9B6002CA904 /* UO256.png in Resources */,
 				0F49CB7B1E7A204300D46ECC /* Home-iPad.storyboard in Resources */,
 				CDF90B451E2F4B14009043B9 /* planeScene.plist in Resources */,
+				2EC7D1D51E84CEA900284C0F /* lightBtn.png in Resources */,
 				2E925DA01E5E857D008E327B /* 6.jpg in Resources */,
 				0F49CB741E7A1F0500D46ECC /* Home.storyboard in Resources */,
 				CDF1574B1E7AB2AF00499AC5 /* icon_tabbar_homepage_selected@2x.png in Resources */,
@@ -2379,7 +2380,6 @@
 				0FE78BB61DCFB091009B4767 /* Images.xcassets in Resources */,
 				2E925DA41E5E857D008E327B /* all_5.jpg in Resources */,
 				CDF389261E30A31300657C8B /* energylist.plist in Resources */,
-				2EE1196A1E80D25D00F6FCB6 /* bofang.png in Resources */,
 				2EBABC741E835EC70093EF3A /* AireTableViewCell.xib in Resources */,
 				CDF1574C1E7AB2AF00499AC5 /* icon_tabbar_homepage@2x.png in Resources */,
 				0F49CB6E1E7A1E3700D46ECC /* MyInfo.storyboard in Resources */,

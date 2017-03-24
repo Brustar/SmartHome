@@ -37,8 +37,8 @@
     
 }
 - (void)awakeFromNib {
-    self.imageView.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.imageView.layer.borderWidth = 10;
+//    self.imageView.layer.borderColor = [UIColor whiteColor].CGColor;
+//    self.imageView.layer.borderWidth = 10;
 }
 - (void)setSceneInfo:(Scene *)info {
      self.sceneStatus = info.status;

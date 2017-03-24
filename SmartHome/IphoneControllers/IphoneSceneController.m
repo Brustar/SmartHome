@@ -101,6 +101,7 @@ static NSString * const CYPhotoId = @"photo";
     CYLineLayout *layout = [[CYLineLayout alloc] init];
     layout.itemSize = CGSizeMake(collectionW-110, collectionH-20);
     self.FirstCollectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
+    self.FirstCollectionView.backgroundColor = [UIColor clearColor];
     self.delegateImageView.layer.cornerRadius = 25.0f; //圆角半径
     self.delegateImageView.layer.masksToBounds = YES; //圆角
     self.blockImageView.layer.cornerRadius = 25.0f; //圆角半径
