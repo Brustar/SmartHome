@@ -80,9 +80,11 @@ static NSString * const CYPhotoId = @"photo";
     self.navigationItem.rightBarButtonItem = rightItem;
     self.navigationController.view.backgroundColor = [UIColor blueColor];
 //    [self setNavi];
+   
     
     
 }
+
 - (void)setupSlideButton {
     UIButton *menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     menuBtn.frame = CGRectMake(0, 0, 44, 44);

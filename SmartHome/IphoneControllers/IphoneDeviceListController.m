@@ -31,15 +31,17 @@
 #import "IphoneLightController.h"
 #import "AppDelegate.h"
 //#import "IphoneDeviceLightVC.h"
+#import "CYLineLayout.h"
+#import "CYPhotoCell.h"
 
+static NSString * const CYPhotoId = @"photo";
+@interface IphoneDeviceListController ()<IphoneRoomViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UIViewControllerPreviewingDelegate>
 
-@interface IphoneDeviceListController ()<IphoneRoomViewDelegate>
-
-
+@property (nonatomic,assign) int selectedSId;
 @property (nonatomic,strong) NSArray *deviceSubTypes;
 @property (nonatomic,strong) NSArray *deviceTypes;
 @property (weak, nonatomic) IBOutlet UIView *detailView;
-
+@property (nonatomic ,strong) CYPhotoCell *cell;
 @property (nonatomic,strong) UIButton *typeSelectedBtn;
 @property (nonatomic,strong) UIButton *selectedRoomBtn;
 @property (nonatomic,strong) NSArray *rooms;
@@ -47,6 +49,9 @@
 @property (weak, nonatomic) IBOutlet IphoneRoomView *iphoneRoomView;
 @property (nonatomic, assign) int roomIndex;
 @property (weak, nonatomic) IBOutlet IphoneRoomView *deviceTypeView;
+@property (nonatomic,strong)UICollectionView * FirstCollectionView;
+@property (weak, nonatomic) IBOutlet UILabel *DeviceNameLabel;
+
 
 @end
 
@@ -59,8 +64,28 @@
     [self setUpRoomScrollerView];
     [self setUpScrollerView];
     [self setupSlideButton];
+     [self getUI];
 }
-
+-(void)getUI
+{
+    // 创建CollectionView
+    CGFloat collectionW = self.view.frame.size.width;
+    CGFloat collectionH = self.view.frame.size.height-350;
+    CGRect frame = CGRectMake(0, 115, collectionW, collectionH);
+    // 创建布局
+    CYLineLayout *layout = [[CYLineLayout alloc] init];
+    layout.itemSize = CGSizeMake(collectionW-110, collectionH-20);
+    self.FirstCollectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
+    self.FirstCollectionView.backgroundColor = [UIColor clearColor];
+    self.FirstCollectionView.dataSource = self;
+    self.FirstCollectionView.delegate = self;
+    [self.view addSubview:self.FirstCollectionView];
+    //    self.navigationController.navigationBar.hidden = YES;
+    self.automaticallyAdjustsScrollViewInsets = NO;//
+    // 注册
+    [self.FirstCollectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CYPhotoCell class]) bundle:nil] forCellWithReuseIdentifier:CYPhotoId];
+    
+}
 - (void)setupSlideButton {
     UIButton *menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     menuBtn.frame = CGRectMake(0, 0, 44, 44);
@@ -117,6 +142,7 @@
         Room *room = self.rooms[index];
         self.deviceTypes = [SQLManager deviceSubTypeByRoomId:room.rId];
         [self setUpScrollerView];
+        [self.FirstCollectionView reloadData];
     } else {
         if (self.deviceTypes.count < 1) {
             [MBProgressHUD showError:@"该房间没有设备"];
@@ -291,6 +317,25 @@
     [super didReceiveMemoryWarning];
 }
 
+#pragma  mark - UICollectionViewDelegate
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.deviceTypes.count;
+}
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
+    cell.sceneLabel.text = self.deviceTypes[indexPath.row];
+    self.DeviceNameLabel.text = self.deviceTypes[indexPath.row];
+    [cell.imageView sd_setImageWithURL:nil placeholderImage:[UIImage imageNamed:@"device-bedchamber_03 (3)"]];
+    [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];
+    
+    return cell;
+}
 
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
 
 @end
