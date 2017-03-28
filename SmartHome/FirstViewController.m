@@ -135,6 +135,7 @@
         [appDelegate.LeftSlideVC closeLeftView];
     }
 }
+
 //正在播放的点击事件
 - (IBAction)playerBarBtn:(id)sender {
     if (self.playerSubView.hidden) {
