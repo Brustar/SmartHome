@@ -30,11 +30,13 @@
 #import "BgMusicController.h"
 #import "HostIDSController.h"
 #import "AppDelegate.h"
+#import "CYLineLayout.h"
+#import "CYPhotoCell.h"
 //#import "IphoneRoomListController.h"
 
-@interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,SceneCellDelegate,UIViewControllerPreviewingDelegate,YZNavigationMenuViewDelegate>
+@interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,CYPhotoCellDelegate,UIViewControllerPreviewingDelegate,YZNavigationMenuViewDelegate>
 @property (strong, nonatomic) IBOutlet IphoneRoomView *roomView;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+//@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic,assign) int roomID;
 @property (nonatomic,strong) NSArray *roomList;
@@ -42,30 +44,33 @@
 @property (nonatomic,strong) NSArray *scenes;
 @property (nonatomic, assign) int roomIndex;
 @property (nonatomic,assign) int selectedSId;
-@property (nonatomic ,strong) SceneCell *cell;
+@property (nonatomic ,strong) CYPhotoCell *cell;
 @property (weak, nonatomic) IBOutlet UIButton *AddSceneBtn;
 @property (nonatomic,strong) NSArray * arrayData;
 @property (nonatomic,assign) int sceneID;
 @property (nonatomic,strong) YZNavigationMenuView *menuView;
 @property (strong, nonatomic) IBOutlet UIButton *titleButton;
 @property(nonatomic,strong)HostIDSController *hostVC;
-
+@property (weak, nonatomic) IBOutlet UIImageView *delegateImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *startImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *blockImageView;
+@property (weak, nonatomic) IBOutlet UILabel *SceneNameLabel;
+@property (nonatomic,strong)UICollectionView * FirstCollectionView;
 @end
 
 @implementation IphoneSceneController
-
+static NSString * const CYPhotoId = @"photo";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self setupSlideButton];
     self.roomList = [SQLManager getAllRoomsInfo];
-//    self.title = @"场景";
-     [self setUpRoomView];
+      [self setUpRoomView];
+      [self reachNotification];
+     [self setupSlideButton];
+      [self setUI];
     self.arrayData = @[@"删除此场景",@"收藏",@"语音"];
-    //开启网络状况的监听
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityUpdate:) name: AFNetworkingReachabilityDidChangeNotification object: nil];
-//    [self updateInterfaceWithReachability];
-    [self reachNotification];
+  
     _AddSceneBtn.layer.cornerRadius = _AddSceneBtn.bounds.size.width / 2.0; //圆角半径
     _AddSceneBtn.layer.masksToBounds = YES; //圆角
     self.navigationItem.rightBarButtonItems = nil;
@@ -77,14 +82,41 @@
     self.navigationController.view.backgroundColor = [UIColor blueColor];
 //    [self setNavi];
     
+    
 }
-
 - (void)setupSlideButton {
     UIButton *menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     menuBtn.frame = CGRectMake(0, 0, 44, 44);
     [menuBtn setImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
     [menuBtn addTarget:self action:@selector(menuBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
+}
+-(void)setUI
+{
+    // 创建CollectionView
+    CGFloat collectionW = self.view.frame.size.width;
+    CGFloat collectionH = self.view.frame.size.height-350;
+    CGRect frame = CGRectMake(0, 115, collectionW, collectionH);
+    // 创建布局
+    CYLineLayout *layout = [[CYLineLayout alloc] init];
+    layout.itemSize = CGSizeMake(collectionW-110, collectionH-20);
+    self.FirstCollectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
+    self.FirstCollectionView.backgroundColor = [UIColor clearColor];
+    self.delegateImageView.layer.cornerRadius = 25.0f; //圆角半径
+    self.delegateImageView.layer.masksToBounds = YES; //圆角
+    self.blockImageView.layer.cornerRadius = 25.0f; //圆角半径
+    self.blockImageView.layer.masksToBounds = YES; //圆角
+    self.startImageView.layer.cornerRadius = 25.0f; //圆角半径
+    self.startImageView.layer.masksToBounds = YES; //圆角
+    
+    self.FirstCollectionView.dataSource = self;
+    self.FirstCollectionView.delegate = self;
+    [self.view addSubview:self.FirstCollectionView];
+    //    self.navigationController.navigationBar.hidden = YES;
+    self.automaticallyAdjustsScrollViewInsets = NO;//
+    // 注册
+    [self.FirstCollectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CYPhotoCell class]) bundle:nil] forCellWithReuseIdentifier:CYPhotoId];
+    
 }
 
 - (void)menuBtnAction:(UIButton *)sender {
@@ -120,47 +152,6 @@
 {
     [self performSegueWithIdentifier:@"roomListSegue" sender:self];
 }
-
-////处理连接改变后的情况
-//- (void) updateInterfaceWithReachability
-//{
-//    AFNetworkReachabilityManager *afNetworkReachabilityManager = [AFNetworkReachabilityManager sharedManager];
-//    //[afNetworkReachabilityManager startMonitoring];  //开启网络监视器；
-//    [afNetworkReachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-//        DeviceInfo *info = [DeviceInfo defaultManager];
-//        if(status == AFNetworkReachabilityStatusReachableViaWWAN)
-//        {
-//            if (info.connectState==outDoor) {
-//                //NSLog(@"外出模式");
-//    //            [self.netBarBtn setImage:[UIImage imageNamed:@"wifi"]];
-//                return;
-//            }
-//            if (info.connectState==offLine) {
-//                NSLog(@"离线模式");
-//    //            [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
-//            }
-//        }
-//        else if(status == AFNetworkReachabilityStatusReachableViaWiFi)
-//        {
-//            if (info.connectState==atHome) {
-//                NSLog(@"在家模式");
-//    //            [self.netBarBtn setImage:[UIImage imageNamed:@"atHome"]];
-//                return;
-//            }else if (info.connectState==outDoor){
-//                //NSLog(@"外出模式");
-//    //            [self.netBarBtn setImage:[UIImage imageNamed:@"wifi"]];
-//            }
-//            if (info.connectState==offLine) {
-//                NSLog(@"离线模式");
-//    //            [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
-//
-//            }
-//        }else{
-//            NSLog(@"离线模式");
-//    //        [self.netBarBtn setImage:[UIImage imageNamed:@"breakWifi"]];
-//        }
-//    }];
-//}
 
 - (void)reachNotification
 {
@@ -201,7 +192,7 @@
     self.roomIndex = index;
     Room *room = self.roomList[index];
     self.scenes = [SQLManager getScensByRoomId:room.rId];
-    [self.collectionView reloadData];
+    [self.FirstCollectionView reloadData];
     
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -209,7 +200,7 @@
     [super viewWillAppear:YES];
     Room *room = self.roomList[self.roomIndex];
     self.scenes = [SQLManager getScensByRoomId:room.rId];
-    [self.collectionView reloadData];
+    [self.FirstCollectionView reloadData];
 
 }
 
@@ -240,19 +231,16 @@
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    SceneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell" forIndexPath:indexPath];
-    
-    cell.layer.cornerRadius = 20;
-    cell.layer.masksToBounds = YES;
+    CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
     self.scene = self.scenes[indexPath.row];
     cell.sceneID = self.scene.sceneID;
     cell.tag = self.scene.sceneID;
-    cell.scenseName.text = self.scene.sceneName;
-    cell.delegate = self;
-    [cell.imgView sd_setImageWithURL:[NSURL URLWithString: self.scene.picName] placeholderImage:[UIImage imageNamed:@"PL"]];
-    [cell useLongPressGesture];
-   [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];
-//    [self.collectionView reloadData];
+    cell.sceneLabel.text = self.scene.sceneName;
+    self.SceneNameLabel.tag = self.scene.sceneID;
+    self.SceneNameLabel.text = cell.sceneLabel.text;
+    [cell.imageView sd_setImageWithURL:[NSURL URLWithString: self.scene.picName] placeholderImage:[UIImage imageNamed:@"PL"]];
+    [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];
+   
     return cell;
 }
 
@@ -261,16 +249,17 @@
     Scene *scene = self.scenes[indexPath.row];
     self.selectedSId = scene.sceneID;
     
-    SceneCell *cell = (SceneCell*)[collectionView cellForItemAtIndexPath:indexPath];
+    CYPhotoCell *cell = (CYPhotoCell*)[collectionView cellForItemAtIndexPath:indexPath];
     
     [cell useLongPressGesture];
     if(cell.deleteBtn.hidden)
     {
-        [self performSegueWithIdentifier:@"iphoneEditSegue" sender:self];
-        [[SceneManager defaultManager] startScene:scene.sceneID];
+         cell.deleteBtn.hidden = YES;
         
     }else{
-        cell.deleteBtn.hidden = YES;
+        
+        [self performSegueWithIdentifier:@"iphoneEditSegue" sender:self];
+        [[SceneManager defaultManager] startScene:scene.sceneID];
     }
 }
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
@@ -284,23 +273,6 @@
 }
 
 - (void)rightBarButtonItemClicked:(UIBarButtonItem *)sender {
-    
-//    if (self.view.subviews.count == 6) {
-//        NSMutableArray *imageArray = [NSMutableArray arrayWithCapacity:0];
-//        for (int i = 0; i < 4; i++) {
-//            NSString *name = [NSString stringWithFormat:@"%d",i + 1];
-//            UIImage *image  = [UIImage imageNamed:name];
-//            [imageArray addObject:image];
-//            
-//        }
-//        
-//        self.menuView = [[YZNavigationMenuView alloc] initWithPositionOfDirection:CGPointMake(self.view.frame.size.width - 24, 64) images:imageArray titleArray:@[@"语音",@"搜索",@"正在播放",@"添加场景"]];
-//        self.menuView.delegate = self;
-//        [self.view addSubview:self.menuView];
-//    }else if (self.view.subviews.count > 6){
-////        [self.view removeFromSuperview];
-//        [self.menuView removeFromSuperview];
-//    }
     
       [self performSegueWithIdentifier:@"iphoneAddSceneSegue" sender:self];
     
@@ -330,7 +302,7 @@
     }
 }
 //删除场景
--(void)sceneDeleteAction:(SceneCell *)cell
+-(void)sceneDeleteAction:(CYPhotoCell *)cell
 {
     self.cell = cell;
     cell.deleteBtn.hidden = YES;
@@ -389,23 +361,23 @@
         }
     }
 }
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return CGSizeMake(cellWidth, cellWidth);
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    
-}
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
-    return minSpace;
-}
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
-{
-    return minSpace;
-}
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return CGSizeMake(cellWidth, cellWidth);
+//}
+//
+//- (void)didReceiveMemoryWarning {
+//    [super didReceiveMemoryWarning];
+//    
+//}
+//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+//{
+//    return minSpace;
+//}
+//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+//{
+//    return minSpace;
+//}
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {

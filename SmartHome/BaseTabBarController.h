@@ -10,6 +10,7 @@
 #import "IphoneDeviceListController.h"
 #import "IphoneFamilyViewController.h"
 #import "FirstViewController.h"
+#import "FirstSceneViewController.h"
 
 @interface BaseTabBarController : UITabBarController
 

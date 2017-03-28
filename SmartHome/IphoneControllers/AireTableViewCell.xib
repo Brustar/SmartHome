@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AireTableViewCell" id="KGk-i7-Jjw" customClass="AireTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="客厅空调" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ci-ZD-g6F">
+                        <rect key="frame" x="8" y="11" width="60" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="L1W-vE-LqP"/>
+                            <constraint firstAttribute="height" constant="21" id="PHI-Jr-T21"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25°C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Gp-k8-Gvg">
+                        <rect key="frame" x="73" y="11.5" width="40" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="bHK-Oh-qBI"/>
+                            <constraint firstAttribute="width" constant="40" id="cvi-1Q-i8e"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="9yv-2g-L2p">
+                        <rect key="frame" x="121" y="7" width="161" height="31"/>
+                    </slider>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mch-26-2tR">
+                        <rect key="frame" x="290" y="7" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="D6C-eZ-C10"/>
+                            <constraint firstAttribute="width" constant="30" id="uCg-vZ-eXa"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="开关"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="9yv-2g-L2p" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Fcp-nC-FFe"/>
+                    <constraint firstItem="4Ci-ZD-g6F" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="HVP-T9-ZIE"/>
+                    <constraint firstItem="4Ci-ZD-g6F" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Lvz-Y3-0a9"/>
+                    <constraint firstItem="9yv-2g-L2p" firstAttribute="leading" secondItem="5Gp-k8-Gvg" secondAttribute="trailing" constant="10" id="VXg-hp-snF"/>
+                    <constraint firstItem="5Gp-k8-Gvg" firstAttribute="leading" secondItem="4Ci-ZD-g6F" secondAttribute="trailing" constant="5" id="VpE-No-A6M"/>
+                    <constraint firstItem="Mch-26-2tR" firstAttribute="leading" secondItem="9yv-2g-L2p" secondAttribute="trailing" constant="10" id="bPM-xC-dNn"/>
+                    <constraint firstItem="Mch-26-2tR" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="e42-Im-GG0"/>
+                    <constraint firstItem="5Gp-k8-Gvg" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="eDf-An-Ggl"/>
+                    <constraint firstAttribute="trailing" secondItem="Mch-26-2tR" secondAttribute="trailing" id="m2R-Yj-mvL"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="AireNameLabel" destination="4Ci-ZD-g6F" id="Bys-9D-LDu"/>
+                <outlet property="AireSlider" destination="9yv-2g-L2p" id="m74-0r-nHa"/>
+                <outlet property="AireSwitch" destination="Mch-26-2tR" id="BFL-z4-Gpu"/>
+                <outlet property="temperatureLabel" destination="5Gp-k8-Gvg" id="J1b-ls-SkR"/>
+            </connections>
+            <point key="canvasLocation" x="-35" y="11"/>
+        </tableViewCell>
+    </objects>
+</document>

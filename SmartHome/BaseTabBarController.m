@@ -34,6 +34,7 @@
     //iPhone故事板
     UIStoryboard *iPhoneStoryBoard  = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     UIStoryboard *HomeStoryBoard  = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
+    UIStoryboard *SceneStoryBoard  = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
     
     //第三级控制器
     //设备
@@ -59,6 +60,7 @@
 
     //场景
     IphoneSceneController *sceneVC = [iPhoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
+//    FirstSceneViewController * sceneVC = [SceneStoryBoard instantiateViewControllerWithIdentifier:@"FirstSceneViewController"];
     UIImage *image2 = [[UIImage imageNamed:@"icon_tabbar_merchant_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIImage *selectImage2 = [[UIImage imageNamed:@"icon_tabbar_merchant_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     sceneVC.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"场景" image:image2 selectedImage:selectImage2];
