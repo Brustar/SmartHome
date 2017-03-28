@@ -72,6 +72,7 @@
 		0F9EA72D1DDB026C00223ED8 /* NSString+RegMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9EA72C1DDB026C00223ED8 /* NSString+RegMatch.m */; };
 		0FA0FD661D057C430041CE96 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA0FD651D057C430041CE96 /* AddressBook.framework */; };
 		0FA1E09E1D533BFA001CA819 /* PluginCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA1E09D1D533BFA001CA819 /* PluginCell.m */; };
+		0FA392FB1E80D2C200C00AA3 /* MHRotaryKnob.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA392FA1E80D2C200C00AA3 /* MHRotaryKnob.m */; };
 		0FA658F81CD98EF5005AC4B4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA658F21CD98D79005AC4B4 /* AudioToolbox.framework */; };
 		0FA658FC1CD9DB3F005AC4B4 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA658FB1CD9DB3F005AC4B4 /* MediaPlayer.framework */; };
 		0FA86BAD1E72445000DC177E /* LLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA86BA81E72445000DC177E /* LLViewController.m */; };
@@ -563,6 +564,8 @@
 		0FA0FD651D057C430041CE96 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		0FA1E09C1D533BFA001CA819 /* PluginCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginCell.h; sourceTree = "<group>"; };
 		0FA1E09D1D533BFA001CA819 /* PluginCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginCell.m; sourceTree = "<group>"; };
+		0FA392F91E80D2C200C00AA3 /* MHRotaryKnob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHRotaryKnob.h; sourceTree = "<group>"; };
+		0FA392FA1E80D2C200C00AA3 /* MHRotaryKnob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHRotaryKnob.m; sourceTree = "<group>"; };
 		0FA658F21CD98D79005AC4B4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		0FA658FB1CD9DB3F005AC4B4 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		0FA86BA71E72445000DC177E /* LLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLViewController.h; sourceTree = "<group>"; };
@@ -1703,12 +1706,22 @@
 		0F6ADFDD1E71354000BFF67F /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				0FA392F81E80D29900C00AA3 /* RotaryKnob */,
 				0F49CB7F1E7A21E800D46ECC /* ORBSwitch */,
 				0FDB34411E79262D00DA53BB /* Geometry */,
 				0FA86BB01E724EA200DC177E /* LightSlider */,
 				0FA86BA61E72443100DC177E /* Linelayout */,
 			);
 			name = Widgets;
+			sourceTree = "<group>";
+		};
+		0FA392F81E80D29900C00AA3 /* RotaryKnob */ = {
+			isa = PBXGroup;
+			children = (
+				0FA392F91E80D2C200C00AA3 /* MHRotaryKnob.h */,
+				0FA392FA1E80D2C200C00AA3 /* MHRotaryKnob.m */,
+			);
+			name = RotaryKnob;
 			sourceTree = "<group>";
 		};
 		0FA86BA61E72443100DC177E /* Linelayout */ = {
@@ -2719,6 +2732,7 @@
 				0F91AA171CDC798700094C25 /* PrintObject.m in Sources */,
 				0F3CCF3B1D0F97B70058A320 /* CameraController.m in Sources */,
 				0FC0FFDA1CF577C0000F71D5 /* RealScene.m in Sources */,
+				0FA392FB1E80D2C200C00AA3 /* MHRotaryKnob.m in Sources */,
 				F6755A4F1D406552002394F3 /* ECloudTabBarController.m in Sources */,
 				CDF157541E7BA3F600499AC5 /* UIView_extra.m in Sources */,
 				0FAF74C41CEEA17C00432713 /* HRColorPickerView.m in Sources */,

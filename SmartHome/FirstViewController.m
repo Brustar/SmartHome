@@ -135,6 +135,9 @@
         [appDelegate.LeftSlideVC closeLeftView];
     }
 }
+<<<<<<< HEAD
+
+=======
 //正在播放的点击事件
 - (IBAction)playerBarBtn:(id)sender {
     if (self.playerSubView.hidden) {
@@ -253,6 +256,7 @@
     }
     return cell;
 }
+>>>>>>> 367ed3a2463df4e97612413b30a5b56d51461132
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
