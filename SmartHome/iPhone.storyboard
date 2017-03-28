@@ -956,44 +956,50 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Scene-bedroom_17" translatesAutoresizingMaskIntoConstraints="NO" id="Nfq-I8-bTM">
-                                        <rect key="frame" x="90" y="61" width="50" height="50"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tl5-YW-aDH">
+                                        <rect key="frame" x="82.5" y="62" width="50" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="SB4-0w-lgd"/>
-                                            <constraint firstAttribute="width" constant="50" id="tZe-43-MDl"/>
+                                            <constraint firstAttribute="height" constant="50" id="Imd-VQ-w81"/>
+                                            <constraint firstAttribute="width" constant="50" id="ZO8-VT-gRi"/>
                                         </constraints>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Scene-bedroom_19" translatesAutoresizingMaskIntoConstraints="NO" id="LyI-iM-Xb9">
-                                        <rect key="frame" x="241" y="61" width="50" height="50"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <state key="normal" image="Scene-bedroom_17"/>
+                                        <connections>
+                                            <action selector="deleteAction:" destination="2FT-fL-R4c" eventType="touchUpInside" id="SwO-vQ-3d9"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="84n-g7-foo">
+                                        <rect key="frame" x="162.5" y="62" width="50" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="Oqc-kh-ZAV"/>
-                                            <constraint firstAttribute="height" constant="50" id="xj4-LX-V96"/>
+                                            <constraint firstAttribute="width" constant="50" id="RAR-Lf-MFI"/>
+                                            <constraint firstAttribute="height" constant="50" id="lcn-DA-w0D"/>
                                         </constraints>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Scene-bedroom_06 (3)" translatesAutoresizingMaskIntoConstraints="NO" id="0az-Mz-0ag">
-                                        <rect key="frame" x="163" y="61" width="50" height="50"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <state key="normal" image="Scene-bedroom_06 (3)"/>
+                                        <connections>
+                                            <action selector="startBtn:" destination="2FT-fL-R4c" eventType="touchUpInside" id="cQV-G7-8Ti"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPF-K3-h3G">
+                                        <rect key="frame" x="242.5" y="62" width="50" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="1fN-dR-UBj"/>
-                                            <constraint firstAttribute="width" constant="50" id="rh0-cQ-EUS"/>
+                                            <constraint firstAttribute="width" constant="50" id="Pcn-9A-rdn"/>
+                                            <constraint firstAttribute="height" constant="50" id="Sk6-yn-Ygv"/>
                                         </constraints>
-                                    </imageView>
+                                        <state key="normal" image="Scene-bedroom_19"/>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="qb1-2u-0hy" firstAttribute="leading" secondItem="ueR-TO-iid" secondAttribute="leading" id="0uf-oY-qyf"/>
                                     <constraint firstItem="ueR-TO-iid" firstAttribute="top" secondItem="qb1-2u-0hy" secondAttribute="bottom" constant="8" id="ApT-PC-aAI"/>
-                                    <constraint firstItem="LyI-iM-Xb9" firstAttribute="bottom" secondItem="Nfq-I8-bTM" secondAttribute="bottom" id="KSY-w9-e9q"/>
-                                    <constraint firstItem="0az-Mz-0ag" firstAttribute="bottom" secondItem="Nfq-I8-bTM" secondAttribute="bottom" id="Lie-bb-G0R"/>
+                                    <constraint firstItem="84n-g7-foo" firstAttribute="centerX" secondItem="xAH-Qt-T5z" secondAttribute="centerX" id="C1c-7x-5ZQ"/>
                                     <constraint firstItem="qb1-2u-0hy" firstAttribute="trailing" secondItem="ueR-TO-iid" secondAttribute="trailing" id="NFX-i6-gdp"/>
-                                    <constraint firstItem="0az-Mz-0ag" firstAttribute="top" secondItem="ueR-TO-iid" secondAttribute="bottom" constant="8" symbolic="YES" id="Smf-pT-rh3"/>
+                                    <constraint firstItem="84n-g7-foo" firstAttribute="leading" secondItem="tl5-YW-aDH" secondAttribute="trailing" constant="30" id="R0J-u2-sxq"/>
+                                    <constraint firstItem="HPF-K3-h3G" firstAttribute="bottom" secondItem="tl5-YW-aDH" secondAttribute="bottom" id="RRJ-sT-iQd"/>
                                     <constraint firstAttribute="trailing" secondItem="qb1-2u-0hy" secondAttribute="trailing" id="Z8d-hf-G4X"/>
-                                    <constraint firstItem="0az-Mz-0ag" firstAttribute="leading" secondItem="Nfq-I8-bTM" secondAttribute="trailing" constant="23" id="ZHq-wo-r0T"/>
                                     <constraint firstAttribute="height" constant="150" id="dWu-Rx-oBe"/>
-                                    <constraint firstItem="LyI-iM-Xb9" firstAttribute="leading" secondItem="0az-Mz-0ag" secondAttribute="trailing" constant="28" id="iCH-RY-PB4"/>
-                                    <constraint firstItem="0az-Mz-0ag" firstAttribute="centerX" secondItem="ueR-TO-iid" secondAttribute="centerX" id="j17-A3-aig"/>
+                                    <constraint firstItem="tl5-YW-aDH" firstAttribute="top" secondItem="ueR-TO-iid" secondAttribute="bottom" constant="9" id="hM4-LO-j8n"/>
+                                    <constraint firstItem="84n-g7-foo" firstAttribute="bottom" secondItem="tl5-YW-aDH" secondAttribute="bottom" id="ibx-Ay-XAI"/>
+                                    <constraint firstItem="HPF-K3-h3G" firstAttribute="leading" secondItem="84n-g7-foo" secondAttribute="trailing" constant="30" id="t2P-4G-Dii"/>
                                     <constraint firstItem="qb1-2u-0hy" firstAttribute="leading" secondItem="xAH-Qt-T5z" secondAttribute="leading" id="uHK-hz-fN5"/>
                                     <constraint firstItem="qb1-2u-0hy" firstAttribute="top" secondItem="xAH-Qt-T5z" secondAttribute="top" constant="20" id="wXa-Nu-we4"/>
                                 </constraints>
@@ -1040,10 +1046,10 @@
                     </navigationItem>
                     <connections>
                         <outlet property="SceneNameLabel" destination="qb1-2u-0hy" id="o3r-ee-8yr"/>
-                        <outlet property="blockImageView" destination="LyI-iM-Xb9" id="SPi-8R-IkN"/>
-                        <outlet property="delegateImageView" destination="Nfq-I8-bTM" id="czt-oJ-8Vj"/>
+                        <outlet property="blockBtn" destination="HPF-K3-h3G" id="jVo-Cy-K3w"/>
+                        <outlet property="delegateBtn" destination="tl5-YW-aDH" id="r9X-LN-aWh"/>
                         <outlet property="roomView" destination="ueV-XT-5wh" id="kVL-ZE-UyR"/>
-                        <outlet property="startImageView" destination="0az-Mz-0ag" id="DfZ-fn-910"/>
+                        <outlet property="startBtn" destination="84n-g7-foo" id="Ubr-fb-122"/>
                         <segue destination="684-QI-OKg" kind="push" identifier="iphoneAddSceneSegue" id="R58-hJ-kc4"/>
                         <segue destination="emj-YL-Hpp" kind="push" identifier="iphoneEditSegue" id="qN8-z6-Gb7"/>
                     </connections>

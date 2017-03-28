@@ -51,9 +51,9 @@
 @property (nonatomic,strong) YZNavigationMenuView *menuView;
 @property (strong, nonatomic) IBOutlet UIButton *titleButton;
 @property(nonatomic,strong)HostIDSController *hostVC;
-@property (weak, nonatomic) IBOutlet UIImageView *delegateImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *startImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *blockImageView;
+@property (weak, nonatomic) IBOutlet UIButton *delegateBtn;
+@property (weak, nonatomic) IBOutlet UIButton *startBtn;
+@property (weak, nonatomic) IBOutlet UIButton *blockBtn;
 @property (weak, nonatomic) IBOutlet UILabel *SceneNameLabel;
 @property (nonatomic,strong)UICollectionView * FirstCollectionView;
 @end
@@ -70,7 +70,6 @@ static NSString * const CYPhotoId = @"photo";
      [self setupSlideButton];
       [self setUI];
     self.arrayData = @[@"删除此场景",@"收藏",@"语音"];
-  
     _AddSceneBtn.layer.cornerRadius = _AddSceneBtn.bounds.size.width / 2.0; //圆角半径
     _AddSceneBtn.layer.masksToBounds = YES; //圆角
     self.navigationItem.rightBarButtonItems = nil;
@@ -102,13 +101,6 @@ static NSString * const CYPhotoId = @"photo";
     layout.itemSize = CGSizeMake(collectionW-110, collectionH-20);
     self.FirstCollectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
     self.FirstCollectionView.backgroundColor = [UIColor clearColor];
-    self.delegateImageView.layer.cornerRadius = 25.0f; //圆角半径
-    self.delegateImageView.layer.masksToBounds = YES; //圆角
-    self.blockImageView.layer.cornerRadius = 25.0f; //圆角半径
-    self.blockImageView.layer.masksToBounds = YES; //圆角
-    self.startImageView.layer.cornerRadius = 25.0f; //圆角半径
-    self.startImageView.layer.masksToBounds = YES; //圆角
-    
     self.FirstCollectionView.dataSource = self;
     self.FirstCollectionView.delegate = self;
     [self.view addSubview:self.FirstCollectionView];
@@ -233,6 +225,7 @@ static NSString * const CYPhotoId = @"photo";
 {
     CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
     self.scene = self.scenes[indexPath.row];
+    self.selectedSId = self.scene.sceneID;
     cell.sceneID = self.scene.sceneID;
     cell.tag = self.scene.sceneID;
     cell.sceneLabel.text = self.scene.sceneName;
@@ -302,15 +295,44 @@ static NSString * const CYPhotoId = @"photo";
     }
 }
 //删除场景
+- (IBAction)deleteAction:(CYPhotoCell *)cell {
+    self.cell = cell;
+    //    cell.deleteBtn.hidden = YES;
+    self.sceneID = self.selectedSId;
+    //        self.sceneID = self.selectedSId;
+    self.SceneNameLabel.tag = self.scene.sceneID;
+    self.SceneNameLabel.text = self.scene.sceneName;
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"是否删除“%@”场景？",self.SceneNameLabel.text] preferredStyle:UIAlertControllerStyleAlert];
+   
+    // 添加按钮
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+    
+        NSString *url = [NSString stringWithFormat:@"%@Cloud/scene_delete.aspx",[IOManager httpAddr]];
+        NSDictionary *dict = @{@"token":[UD objectForKey:@"AuthorToken"], @"scenceid":@(self.sceneID),@"optype":@(1)};
+        HttpManager *http=[HttpManager defaultManager];
+        http.delegate=self;
+        http.tag = 1;
+        [http sendPost:url param:dict];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        NSLog(@"点击了取消按钮");
+    }]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+
+}
+// 启动场景
+- (IBAction)startBtn:(id)sender {
+    self.sceneID = self.scene.sceneID;
+    [[SceneManager defaultManager] startScene:self.sceneID];
+}
+//删除场景
 -(void)sceneDeleteAction:(CYPhotoCell *)cell
 {
+   
     self.cell = cell;
     cell.deleteBtn.hidden = YES;
     self.sceneID = (int)cell.tag;
-//    [SQLManager deleteScene:self.sceneID];
-//    Scene *scene = [[SceneManager defaultManager] readSceneByID:(int)cell.tag];
-//    [[SceneManager defaultManager] delScene:scene];
-    
     NSString *url = [NSString stringWithFormat:@"%@Cloud/scene_delete.aspx",[IOManager httpAddr]];
     NSDictionary *dict = @{@"token":[UD objectForKey:@"AuthorToken"], @"scenceid":@(self.sceneID),@"optype":@(1)};
     HttpManager *http=[HttpManager defaultManager];
@@ -361,23 +383,6 @@ static NSString * const CYPhotoId = @"photo";
         }
     }
 }
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return CGSizeMake(cellWidth, cellWidth);
-//}
-//
-//- (void)didReceiveMemoryWarning {
-//    [super didReceiveMemoryWarning];
-//    
-//}
-//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-//{
-//    return minSpace;
-//}
-//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
-//{
-//    return minSpace;
-//}
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {

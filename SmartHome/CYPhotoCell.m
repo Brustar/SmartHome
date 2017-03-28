@@ -9,7 +9,7 @@
 #import "CYPhotoCell.h"
 #import "SceneManager.h"
 
-@interface CYPhotoCell()<UIGestureRecognizerDelegate>
+@interface CYPhotoCell()<UIGestureRecognizerDelegate,UIActionSheetDelegate>
 
 @property(nonatomic,strong)UILongPressGestureRecognizer *lgPress;
 @end
@@ -37,6 +37,7 @@
     
 }
 - (void)awakeFromNib {
+    [super awakeFromNib];
 //    self.imageView.layer.borderColor = [UIColor whiteColor].CGColor;
 //    self.imageView.layer.borderWidth = 10;
 }
@@ -50,9 +51,31 @@
 }
 -(void)handleLongPress:(UILongPressGestureRecognizer *)lgr
 {
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"温馨提示 " delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除场景"
+                                              otherButtonTitles:@"更换图片", nil];
+//    sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+  
+    [sheet showInView:self];
     
-    self.deleteBtn.hidden = NO;
+    NSLog(@"8980-08-");
+    
 }
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        NSLog(@"---------1----------");
+        actionSheet.hidden = YES;
+    }else if (buttonIndex == 1){
+        NSLog(@"---------2----------");
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"温馨提示 " delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"预置台标"
+                                                  otherButtonTitles:@"本地图库",@"现在拍摄", nil];
+        //    sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+        
+        [sheet showInView:self];
+                
+    }
+}
+
 -(void)unUseLongPressGesture
 {
     if(self.lgPress != nil)
