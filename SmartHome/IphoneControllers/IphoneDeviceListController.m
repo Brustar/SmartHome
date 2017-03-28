@@ -327,7 +327,7 @@ static NSString * const CYPhotoId = @"photo";
     CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
     cell.sceneLabel.text = self.deviceTypes[indexPath.row];
     self.DeviceNameLabel.text = self.deviceTypes[indexPath.row];
-    [cell.imageView sd_setImageWithURL:nil placeholderImage:[UIImage imageNamed:@"device-bedchamber_03 (3)"]];
+    [cell.imageView sd_setImageWithURL:nil placeholderImage:[UIImage imageNamed:@"main"]];
     [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];
     
     return cell;
