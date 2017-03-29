@@ -4201,7 +4201,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fZn-X2-474" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1249" y="-5009"/>
+            <point key="canvasLocation" x="1302" y="-5051"/>
         </scene>
         <!--我的消息-->
         <scene sceneID="Zh9-B0-SUI">
@@ -4307,7 +4307,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CQU-GO-0Os" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1210.4000000000001" y="-5738.6806596701654"/>
+            <point key="canvasLocation" x="-1207" y="-5730"/>
         </scene>
         <!--投影-->
         <scene sceneID="wnh-mx-zMc">

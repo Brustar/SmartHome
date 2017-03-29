@@ -544,7 +544,7 @@
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 8;
+    return 9;
 
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -564,12 +564,14 @@
         return _DVDArray.count;//DVD
     }else if (section == 6){
         return _ProjectArray.count;//投影
+    }else if (section == 7){
+        return _PluginArray.count;//智能单品
     }
     return _OtherArray.count;//其他
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   if (indexPath.section == 0) {
+   if (indexPath.section == 0) {//灯光
         LightCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
         cell.roomID = self.roomID;
@@ -579,7 +581,7 @@
         cell.slider.continuous = NO;
         cell.deviceid = _lightArray[indexPath.row];
           return cell;
-    }if (indexPath.section == 1) {
+    }if (indexPath.section == 1) {//空调
         AireTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"AireTableViewCell" forIndexPath:indexPath];
         aireCell.roomID = self.roomID;
         aireCell.sceneID = self.sceneid;
@@ -588,7 +590,7 @@
         aireCell.deviceid = _AirArray[indexPath.row];
         
         return aireCell;
-    }if (indexPath.section == 2) {
+    }if (indexPath.section == 2) {//窗帘
         CurtainTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
         aireCell.roomID = self.roomID;
         aireCell.sceneID = self.sceneid;
@@ -596,31 +598,37 @@
         aireCell.label.text = device.name;
         aireCell.deviceid = _CurtainArray[indexPath.row];
         return aireCell;
-    }if (indexPath.section == 3) {
+    }if (indexPath.section == 3) {//TV
         TVTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"TVTableViewCell" forIndexPath:indexPath];
           Device *device = [SQLManager getDeviceWithDeviceID:[_TVArray[indexPath.row] intValue]];
         aireCell.TVNameLabel.text = device.name;
         return aireCell;
-    }if (indexPath.section == 4) {
-        TVTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"TVTableViewCell" forIndexPath:indexPath];
-        Device *device = [SQLManager getDeviceWithDeviceID:[_DVDArray[indexPath.row] intValue]];
-        aireCell.TVNameLabel.text = device.name;
-        return aireCell;
-    }if (indexPath.section == 5) {
+    }if (indexPath.section == 4) {//智能门锁
+        OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+        Device *device = [SQLManager getDeviceWithDeviceID:[_LockArray[indexPath.row] intValue]];
+        otherCell.NameLabel.text = device.name;
+        return otherCell;
+    }if (indexPath.section == 5) {//DVD
         DVDTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"DVDTableViewCell" forIndexPath:indexPath];
         Device *device = [SQLManager getDeviceWithDeviceID:[_DVDArray[indexPath.row] intValue]];
         otherCell.DVDNameLabel.text = device.name;
         return otherCell;
-    }if (indexPath.section == 6) {
+    }if (indexPath.section == 6) {//投影
         ScreenTableViewCell * ScreenCell = [tableView dequeueReusableCellWithIdentifier:@"ScreenTableViewCell" forIndexPath:indexPath];
          Device *device = [SQLManager getDeviceWithDeviceID:[_ProjectArray[indexPath.row] intValue]];
         ScreenCell.screenNameLabel.text = device.name;
         return ScreenCell;
+    }if (indexPath.section == 7) {//智能单品
+        OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+        Device *device = [SQLManager getDeviceWithDeviceID:[_PluginArray[indexPath.row] intValue]];
+        otherCell.NameLabel.text = device.name;
     }
     
-      OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
-       Device *device = [SQLManager getDeviceWithDeviceID:[_OtherArray[indexPath.row] intValue]];
-       otherCell.NameLabel.text = device.name;
+     OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+    if (_OtherArray.count) {
+        Device *device = [SQLManager getDeviceWithDeviceID:[_OtherArray[indexPath.row] intValue]];
+        otherCell.NameLabel.text = device.name;
+    }
     
     return otherCell;
 }

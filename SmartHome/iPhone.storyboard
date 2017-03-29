@@ -962,7 +962,7 @@
                                             <constraint firstAttribute="height" constant="50" id="Imd-VQ-w81"/>
                                             <constraint firstAttribute="width" constant="50" id="ZO8-VT-gRi"/>
                                         </constraints>
-                                        <state key="normal" image="Scene-bedroom_17"/>
+                                        <state key="normal" backgroundImage="Scene-bedroom_17"/>
                                         <connections>
                                             <action selector="deleteAction:" destination="2FT-fL-R4c" eventType="touchUpInside" id="SwO-vQ-3d9"/>
                                         </connections>
@@ -973,7 +973,7 @@
                                             <constraint firstAttribute="width" constant="50" id="RAR-Lf-MFI"/>
                                             <constraint firstAttribute="height" constant="50" id="lcn-DA-w0D"/>
                                         </constraints>
-                                        <state key="normal" image="Scene-bedroom_06 (3)"/>
+                                        <state key="normal" backgroundImage="Scene-bedroom_06 (3)"/>
                                         <connections>
                                             <action selector="startBtn:" destination="2FT-fL-R4c" eventType="touchUpInside" id="cQV-G7-8Ti"/>
                                         </connections>
@@ -984,7 +984,7 @@
                                             <constraint firstAttribute="width" constant="50" id="Pcn-9A-rdn"/>
                                             <constraint firstAttribute="height" constant="50" id="Sk6-yn-Ygv"/>
                                         </constraints>
-                                        <state key="normal" image="Scene-bedroom_19"/>
+                                        <state key="normal" backgroundImage="Scene-bedroom_19"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1936,22 +1936,22 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qnT-TO-NKs">
                                         <rect key="frame" x="10" y="0.0" width="118.5" height="80"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <state key="normal" title="柔和" image="lightBtn.png" backgroundImage="button6-14.png">
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <state key="normal" title="柔和" image="lightBtn.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEW-BX-OB2">
                                         <rect key="frame" x="128.5" y="0.0" width="118" height="80"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <state key="normal" title="正常" image="lightBtn.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="86f-yD-Mu1">
                                         <rect key="frame" x="246.5" y="0.0" width="118.5" height="80"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <state key="normal" title="明亮" image="lightBtn.png" backgroundImage="button6-14.png">
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <state key="normal" title="明亮" image="lightBtn.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
@@ -6316,15 +6316,14 @@
         <image name="DVD-1" width="130" height="130"/>
         <image name="Iphonewifi" width="32" height="32"/>
         <image name="PL" width="724" height="470"/>
-        <image name="Scene-bedroom2" width="750" height="1334"/>
+        <image name="Scene-bedroom2" width="375" height="667"/>
         <image name="Scene-bedroomSup" width="750" height="116"/>
-        <image name="Scene-bedroom_06 (3)" width="60" height="60"/>
-        <image name="Scene-bedroom_17" width="60" height="61"/>
-        <image name="Scene-bedroom_19" width="60" height="61"/>
+        <image name="Scene-bedroom_06 (3)" width="30" height="30"/>
+        <image name="Scene-bedroom_17" width="30" height="30"/>
+        <image name="Scene-bedroom_19" width="30" height="30"/>
         <image name="add" width="64" height="64"/>
         <image name="aire-6" width="130" height="130"/>
         <image name="broadcast" width="32" height="32"/>
-        <image name="button6-14.png" width="55" height="32"/>
         <image name="calendar.png" width="16" height="16"/>
         <image name="delete" width="32" height="32"/>
         <image name="edit" width="32" height="32"/>

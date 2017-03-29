@@ -452,11 +452,14 @@
                         <outlet property="IconeImageView" destination="NlH-0n-2oy" id="xDk-Lg-aII"/>
                         <outlet property="SubImageView" destination="eRG-g9-nK5" id="jdE-Nz-kDx"/>
                         <outlet property="TakeTurnsWordsLabel" destination="Rhs-Sg-oCs" id="c5n-Re-9vw"/>
+                        <outlet property="ThreeBtn" destination="2bi-rC-zKB" id="xQy-Mp-Y34"/>
+                        <outlet property="TwoBtn" destination="mAk-vV-Py8" id="KWa-6T-uCU"/>
                         <outlet property="UserNameLabel" destination="taI-P7-os3" id="YmH-Se-4TI"/>
                         <outlet property="WelcomeLabel" destination="bma-uE-dP0" id="4kg-e2-QzO"/>
                         <outlet property="calenderDayLabel" destination="qlg-ZQ-Auh" id="G7H-zR-kyT"/>
                         <outlet property="calenderMonthLabel" destination="w63-pZ-hz1" id="xRD-BL-QlA"/>
                         <outlet property="calenderYearLabel" destination="VrK-Og-Koi" id="RBB-a5-974"/>
+                        <outlet property="firstBtn" destination="BC6-LW-LX3" id="bZd-9F-zSC"/>
                         <outlet property="markedWordsLabel" destination="AHx-ty-lAs" id="gmX-aC-amN"/>
                         <outlet property="memberFamilyLabel" destination="0zj-Rm-KqR" id="Q5w-qM-eGV"/>
                         <outlet property="numberLabelView" destination="Tgo-t2-bQ3" id="i8Q-Xi-O84"/>
@@ -472,14 +475,14 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Scene-bedroom2" width="750" height="1334"/>
+        <image name="Scene-bedroom2" width="375" height="667"/>
         <image name="bofang" width="44" height="39"/>
         <image name="bofang-Scene-1_03" width="552" height="417"/>
         <image name="bofang-Scene_03 (2)" width="64" height="64"/>
-        <image name="first-click_13" width="254" height="254"/>
-        <image name="first-scene_1_05" width="552" height="1"/>
-        <image name="first_03 (4)" width="57" height="46"/>
-        <image name="first_06" width="51" height="36"/>
+        <image name="first-click_13" width="127" height="127"/>
+        <image name="first-scene_1_05" width="1" height="1"/>
+        <image name="first_03 (4)" width="28" height="23"/>
+        <image name="first_06" width="25" height="18"/>
         <image name="logo" width="180" height="180"/>
         <image name="shanchu.png" width="32" height="32"/>
     </resources>

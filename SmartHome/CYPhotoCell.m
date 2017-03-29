@@ -23,7 +23,7 @@
 {
     self.lgPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
     self.lgPress.delegate = self;
-    [self addGestureRecognizer:self.lgPress];
+//    [self addGestureRecognizer:self.lgPress];
 }
 - (IBAction)seleteSendPowBtn:(id)sender {
     self.seleteSendPowBtn.selected = !self.seleteSendPowBtn.selected;
@@ -51,10 +51,11 @@
 }
 -(void)handleLongPress:(UILongPressGestureRecognizer *)lgr
 {
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"温馨提示 " delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除场景"
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"温馨提示 " delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"收藏场景"
                                               otherButtonTitles:@"更换图片", nil];
 //    sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
   
+    
     [sheet showInView:self];
     
     NSLog(@"8980-08-");

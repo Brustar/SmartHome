@@ -17,6 +17,7 @@
 #import "AudioManager.h"
 #import "SQLManager.h"
 #import <AVFoundation/AVFoundation.h>
+#import "ShortcutKeyViewController.h"
 
 @interface FirstViewController ()<UITableViewDataSource,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIImageView *SubImageView;//首页的日历大圆
@@ -38,7 +39,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *UserNameLabel;//用户名的显示
 @property (weak, nonatomic) IBOutlet UILabel *WelcomeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *TakeTurnsWordsLabel;
-
+@property(nonatomic,strong)NSArray * Urldata;
+@property (weak, nonatomic) IBOutlet UIButton *firstBtn;
+@property (weak, nonatomic) IBOutlet UIButton *TwoBtn;
+@property (weak, nonatomic) IBOutlet UIButton *ThreeBtn;
 
 @end
 
@@ -79,22 +83,65 @@
     if ([bgmusicIDS count]>0) {
         self.deviceid = bgmusicIDS[0];
     }
+
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self setBtn];
+
 }
 -(void)setBtn
 {
-    NSArray * arr = @[@"回家",@"离家",@"度假"];
-    CGFloat BtnW = self.BtnView.frame.size.width/3;
-    CGFloat BtnH = self.BtnView.frame.size.height;
-    for (int i = 0; i < 3; i ++) {
-        UIButton * button = [[UIButton alloc] init];
-        button.tag = i;
-        button.frame = CGRectMake(i*BtnW, self.BtnView.bounds.origin.y, BtnW, BtnH);
-        [button setTintColor:[UIColor whiteColor]];
-        [button setTitle:arr[i] forState:UIControlStateNormal];
-        [button setBackgroundImage:[UIImage imageNamed:@"button6-14"] forState:UIControlStateNormal];
-        [_BtnView addSubview:button];
+       NSMutableArray * arr = [[NSMutableArray alloc] init];
+//    UIStoryboard *MyInfoStoryBoard  = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
+//    ShortcutKeyViewController *ShortcutKeyVC = [MyInfoStoryBoard instantiateViewControllerWithIdentifier:@"ShortcutKeyViewController"];
+//    ShortcutKeyVC.buttonTitle = ^(NSArray * UrlArray){
+//        NSMutableArray * arr = [[NSMutableArray alloc] init];
+//        _Urldata = [[NSMutableArray alloc] init];
+//        [arr insertObject:_firstBtn atIndex:0];
+//        [arr insertObject:_TwoBtn atIndex:1];
+//        [arr insertObject:_ThreeBtn atIndex:2];
+//        // 1.获得沙盒根路径
+//        NSString *Urlhome = NSHomeDirectory();
+//        
+//        // 2.document路径
+//        NSString *UrldocPath = [Urlhome stringByAppendingPathComponent:@"Documents"];
+//        // 3.文件路径
+//        NSString *Urlfilepath = [UrldocPath stringByAppendingPathComponent:@"zxp.plist"];
+//        //        NSLog(@"%@",filepath);
+//        _Urldata = [NSArray arrayWithContentsOfFile:Urlfilepath];
+//        if (_Urldata.count == 0) {
+//            return;
+//        }else{
+//            arr[0] = _Urldata[0];
+//            arr[1] = _Urldata[1];
+//            arr[2] = _Urldata[2];
+//        }
+//        
+//    };
+    // 1.获得沙盒根路径
+    NSString *home = NSHomeDirectory();
+    
+    // 2.document路径
+    NSString *docPath = [home stringByAppendingPathComponent:@"Documents"];
+    
+    // 3.文件路径
+    NSString *filepath = [docPath stringByAppendingPathComponent:@"data.plist"];
+    
+    // 4.读取数据
+    NSArray *data = [NSArray arrayWithContentsOfFile:filepath];
+    NSLog(@"%@", data);
+    if (data) {
+        arr[0] = data[0];
+        arr[1] = data[1];
+        arr[2] = data[2];
+        [_firstBtn setTitle:arr[0] forState:UIControlStateNormal];
+        [_ThreeBtn setTitle:arr[2] forState:UIControlStateNormal];
+        [_TwoBtn setTitle:arr[1] forState:UIControlStateNormal];
     }
-
+    
+  
 }
 
 -(void)HeadDoTap:(UITapGestureRecognizer *)tap

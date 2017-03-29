@@ -34,7 +34,7 @@
 #import "CYPhotoCell.h"
 //#import "IphoneRoomListController.h"
 
-@interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,CYPhotoCellDelegate,UIViewControllerPreviewingDelegate,YZNavigationMenuViewDelegate>
+@interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,CYPhotoCellDelegate,UIViewControllerPreviewingDelegate,YZNavigationMenuViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (strong, nonatomic) IBOutlet IphoneRoomView *roomView;
 //@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -56,6 +56,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *blockBtn;
 @property (weak, nonatomic) IBOutlet UILabel *SceneNameLabel;
 @property (nonatomic,strong)UICollectionView * FirstCollectionView;
+@property(nonatomic,strong)UILongPressGestureRecognizer *lgPress;
+
 @end
 
 @implementation IphoneSceneController
@@ -80,9 +82,7 @@ static NSString * const CYPhotoId = @"photo";
     self.navigationItem.rightBarButtonItem = rightItem;
     self.navigationController.view.backgroundColor = [UIColor blueColor];
 //    [self setNavi];
-   
-    
-    
+
 }
 
 - (void)setupSlideButton {
@@ -231,6 +231,9 @@ static NSString * const CYPhotoId = @"photo";
     cell.sceneID = self.scene.sceneID;
     cell.tag = self.scene.sceneID;
     cell.sceneLabel.text = self.scene.sceneName;
+    self.lgPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
+    self.lgPress.delegate = self;
+    [cell addGestureRecognizer:self.lgPress];
     self.SceneNameLabel.tag = self.scene.sceneID;
     self.SceneNameLabel.text = cell.sceneLabel.text;
     [cell.imageView sd_setImageWithURL:[NSURL URLWithString: self.scene.picName] placeholderImage:[UIImage imageNamed:@"PL"]];
@@ -238,7 +241,49 @@ static NSString * const CYPhotoId = @"photo";
    
     return cell;
 }
-
+-(void)handleLongPress:(UILongPressGestureRecognizer *)lgr
+{
+    UIAlertController * alerController = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alerController addAction:[UIAlertAction actionWithTitle:@"收藏场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+    [alerController addAction:[UIAlertAction actionWithTitle:@"更换场景图片" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [DeviceInfo defaultManager].isPhotoLibrary = YES;
+        if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+            return;
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        [picker shouldAutorotate];
+        [picker supportedInterfaceOrientations];
+        [self presentViewController:picker animated:YES completion:nil];
+    }]];
+    [alerController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+    [self presentViewController:alerController animated:YES completion:^{
+        
+    }];
+    
+    NSLog(@"8980-08-");
+    
+}
+//-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+//{
+//    [DeviceInfo defaultManager].isPhotoLibrary = NO;
+//    UIImage *image = info[UIImagePickerControllerOriginalImage];
+//    
+//    
+////    [ setBackgroundImage:image forState:UIControlStateNormal];
+//    [picker dismissViewControllerAnimated:YES completion:nil];
+//}
+//
+//- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+//    [DeviceInfo defaultManager].isPhotoLibrary = NO;
+//    [picker dismissViewControllerAnimated:YES completion:nil];
+//}
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     Scene *scene = self.scenes[indexPath.row];

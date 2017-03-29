@@ -149,6 +149,8 @@
 		2E1D4F0B1E727A64007625BD /* Slider4.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E1D4F0A1E727A64007625BD /* Slider4.png */; };
 		2E1D4F0D1E727AE2007625BD /* Slider2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E1D4F0C1E727AE2007625BD /* Slider2.png */; };
 		2E1D4F0F1E727AE4007625BD /* Slider1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E1D4F0E1E727AE4007625BD /* Slider1.png */; };
+		2E20EBB51E8A32BF00891828 /* ShortcutKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E20EBB41E8A32BF00891828 /* ShortcutKeyViewController.m */; };
+		2E20EBB81E8A439300891828 /* ShortcutKeyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E20EBB71E8A439300891828 /* ShortcutKeyCell.m */; };
 		2E5E5FE91DE1F1A9006F0C8F /* IphoneLightController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5E5FE81DE1F1A9006F0C8F /* IphoneLightController.m */; };
 		2E5E5FEC1DE22AC8006F0C8F /* LightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5E5FEB1DE22AC8006F0C8F /* LightCell.m */; };
 		2E6328081E03C3C6000D7BE9 /* IphoneSceneAirVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6328071E03C3C6000D7BE9 /* IphoneSceneAirVC.m */; };
@@ -710,6 +712,10 @@
 		2E1D4F0A1E727A64007625BD /* Slider4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Slider4.png; sourceTree = "<group>"; };
 		2E1D4F0C1E727AE2007625BD /* Slider2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Slider2.png; sourceTree = "<group>"; };
 		2E1D4F0E1E727AE4007625BD /* Slider1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Slider1.png; sourceTree = "<group>"; };
+		2E20EBB31E8A32BF00891828 /* ShortcutKeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortcutKeyViewController.h; sourceTree = "<group>"; };
+		2E20EBB41E8A32BF00891828 /* ShortcutKeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortcutKeyViewController.m; sourceTree = "<group>"; };
+		2E20EBB61E8A439300891828 /* ShortcutKeyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortcutKeyCell.h; sourceTree = "<group>"; };
+		2E20EBB71E8A439300891828 /* ShortcutKeyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortcutKeyCell.m; sourceTree = "<group>"; };
 		2E5E5FE71DE1F1A9006F0C8F /* IphoneLightController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneLightController.h; sourceTree = "<group>"; };
 		2E5E5FE81DE1F1A9006F0C8F /* IphoneLightController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneLightController.m; sourceTree = "<group>"; };
 		2E5E5FEA1DE22AC8006F0C8F /* LightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightCell.h; sourceTree = "<group>"; };
@@ -1680,6 +1686,7 @@
 		0F6ADFDA1E71343600BFF67F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2E20EBB21E8A325900891828 /* My */,
 				2E12CC131E7FC00A00C7D006 /* SceneViewController */,
 			);
 			name = Controllers;
@@ -1875,6 +1882,17 @@
 				2E12CC0F1E7F5E3000C7D006 /* CYPhotoCell.xib */,
 			);
 			name = SceneViewController;
+			sourceTree = "<group>";
+		};
+		2E20EBB21E8A325900891828 /* My */ = {
+			isa = PBXGroup;
+			children = (
+				2E20EBB31E8A32BF00891828 /* ShortcutKeyViewController.h */,
+				2E20EBB41E8A32BF00891828 /* ShortcutKeyViewController.m */,
+				2E20EBB61E8A439300891828 /* ShortcutKeyCell.h */,
+				2E20EBB71E8A439300891828 /* ShortcutKeyCell.m */,
+			);
+			name = My;
 			sourceTree = "<group>";
 		};
 		2E801EF91E2621C70039A6D9 /* fixTimer */ = {
@@ -2790,6 +2808,7 @@
 				F67F1F711D3C69DC00F2B7E5 /* SystemSettingViewController.m in Sources */,
 				0F180FC61D0E4E5000392F4C /* FMController.m in Sources */,
 				F67F1F771D3C719D00F2B7E5 /* SystemInfomationController.m in Sources */,
+				2E20EBB81E8A439300891828 /* ShortcutKeyCell.m in Sources */,
 				0FABF91C1D06AA35000892D8 /* TVController.m in Sources */,
 				F6BF2AED1D86556500A3C9D5 /* HostIDSController.m in Sources */,
 				F62337901D70675B00ADAD00 /* TVIconController.m in Sources */,
@@ -2831,6 +2850,7 @@
 				F66596E31D3F25810082716A /* SceneCell.m in Sources */,
 				F6457C451DD5523C00CA3A72 /* IphoneFamilyViewController.m in Sources */,
 				0FB42E1E1CF681A7007DE64F /* planeScene.m in Sources */,
+				2E20EBB51E8A32BF00891828 /* ShortcutKeyViewController.m in Sources */,
 				F6423C221D9A4B7400AAB3CE /* DeviceOfFixTimerViewController.m in Sources */,
 				F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */,
 				F66596E91D3F72CA0082716A /* AddSenseCell.m in Sources */,

@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Scene-bedroom.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "Scene-bedroom.png",
       "scale" : "2x"
     },
     {
