@@ -6,26 +6,68 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="2G3-oD-9JY">
+        <!--Navigation Controller-->
+        <scene sceneID="wNk-9n-Xps">
             <objects>
-                <viewController id="Ko3-Yz-LzF" sceneMemberID="viewController">
+                <navigationController id="mpT-6G-VZu" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4hJ-Ak-Rva">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="nUk-gN-3oy" kind="relationship" relationship="rootViewController" id="zzh-36-NXe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wlN-Hx-NRz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2068" y="-268"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="0aV-ZG-zlz">
+            <objects>
+                <viewController id="nUk-gN-3oy" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="iCN-1e-IGK"/>
-                        <viewControllerLayoutGuide type="bottom" id="JH3-m0-RJB"/>
+                        <viewControllerLayoutGuide type="top" id="gbA-W3-z1w"/>
+                        <viewControllerLayoutGuide type="bottom" id="Gf8-TD-Xz9"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="W6c-3R-skc">
+                    <view key="view" contentMode="scaleToFill" id="bso-BX-j0c">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ql7-N5-4cP">
+                                <rect key="frame" x="16" y="0.0" width="343" height="603"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Q6Y-b8-TT6">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="603"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main" translatesAutoresizingMaskIntoConstraints="NO" id="czn-zT-rFA">
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="603"/>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Ql7-N5-4cP" firstAttribute="leading" secondItem="bso-BX-j0c" secondAttribute="leadingMargin" id="Imj-sP-c6d"/>
+                            <constraint firstItem="Gf8-TD-Xz9" firstAttribute="top" secondItem="Ql7-N5-4cP" secondAttribute="bottom" id="Jvg-NJ-PwF"/>
+                            <constraint firstItem="Ql7-N5-4cP" firstAttribute="top" secondItem="gbA-W3-z1w" secondAttribute="bottom" id="X8c-tQ-H6x"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ql7-N5-4cP" secondAttribute="trailing" id="c11-bY-s9u"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="2J2-nb-wwJ"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yqO-KQ-uGB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fWq-Vo-1ts" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-446" y="-267"/>
+            <point key="canvasLocation" x="-1296" y="-266"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="main" width="318" height="370"/>
+    </resources>
 </document>
