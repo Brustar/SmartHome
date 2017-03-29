@@ -6338,7 +6338,7 @@
         <image name="logo" width="180" height="180"/>
         <image name="media" width="48" height="48"/>
         <image name="next" width="32" height="32"/>
-        <image name="on" width="34" height="34"/>
+        <image name="on" width="30" height="30"/>
         <image name="pause" width="32" height="32"/>
         <image name="rewind" width="32" height="32"/>
         <image name="rightPic" width="32" height="32"/>
