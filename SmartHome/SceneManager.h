@@ -35,6 +35,7 @@
 -(void)deleteFavoriteScene:(Scene *)scene withName:(NSString *)name;
 - (Scene *)readSceneByID:(int)sceneid;
 -(void)saveAsNewScene:(Scene *)scene withName:(NSString *)name withPic:(UIImage *)image;
+- (void)editScene:(Scene *)newScene newSceneImage:(UIImage *)newSceneImage;//给场景换图
 
 -(NSArray *)addDevice2Scene:(Scene *)scene withDeivce:(id)device withId:(int)deviceID;
 

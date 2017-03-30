@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "Home_04.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "bofang-Scene-1_03.png",
       "scale" : "2x"
     },
     {

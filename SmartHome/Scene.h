@@ -19,7 +19,7 @@
 @property (nonatomic, assign) int status;
 
 //场景名称
-@property (nonatomic,strong) NSString *sceneName;
+@property (nonatomic,strong) NSString * sceneName;
 //房间id
 @property (nonatomic) NSInteger roomID;
 

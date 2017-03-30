@@ -40,7 +40,7 @@
 #import "ScreenTableViewCell.h"
 #import "DVDTableViewCell.h"
 
-@interface IphoneEditSceneController ()<IphoneTypeViewDelegate,TouchSubViewDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface IphoneEditSceneController ()<TouchSubViewDelegate,UITableViewDelegate,UITableViewDataSource>//IphoneTypeViewDelegate
 
 @property (weak, nonatomic) IBOutlet IphoneTypeView *subTypeView;//设备大View
 @property (weak, nonatomic) IBOutlet IphoneTypeView *deviceTypeView;//设备子View
@@ -75,6 +75,8 @@
 @property (nonatomic,strong) NSMutableArray * ProjectArray;//投影机
 @property (nonatomic,strong) NSMutableArray * BJMusicArray;//背景音乐
 @property (nonatomic,strong) NSMutableArray * MBArray;//幕布
+@property (nonatomic,strong) NSMutableArray * IntelligentArray;//智能推窗器
+@property (nonatomic,strong) NSMutableArray * PowerArray;//功放
 @property (nonatomic, assign) int typeIndex;
 @property (nonatomic,strong) NSString *typeName;
 
@@ -144,6 +146,8 @@
     _PluginArray = [[NSMutableArray alloc] init];
     _BJMusicArray = [[NSMutableArray alloc] init];
     _MBArray = [[NSMutableArray alloc] init];
+    _PowerArray =[[NSMutableArray alloc] init];
+    _IntelligentArray = [[NSMutableArray alloc] init];
     for(int i = 0; i <lightArr.count; i++)
     {
         _typeName = [SQLManager deviceTypeNameByDeviceID:[lightArr[i] intValue]];
@@ -171,15 +175,14 @@
             [_BJMusicArray addObject:lightArr[i]];
         }else if ([_typeName isEqualToString:@"幕布"]){
             [_MBArray addObject:lightArr[i]];
+        }else if ([_typeName isEqualToString:@"功放"]){
+            [_PowerArray addObject:lightArr[i]];
+        }else if ([_typeName isEqualToString:@"智能推窗器"]){
+            [_IntelligentArray addObject:lightArr[i]];
         }
         else{
             [_OtherArray addObject:lightArr[i]];
         }
-
-        //        NSString *typeName = [SQLManager deviceNameByDeviceID:[lightArr[i] intValue]];
-        //
-        //         [_lightArr insertObject:typeName atIndex:i];
-        
     }
 }
 //根据设备子类的名字得到所有场景下的设备
@@ -213,7 +216,7 @@
 }
 -(void)setupSubTypeView
 {
-    self.subTypeView.delegate = self;
+//    self.subTypeView.delegate = self;
     
     [self.subTypeView clearItem];
     
@@ -236,174 +239,174 @@
     }
     
     [self.subTypeView setSelectButton:0];
-    [self iphoneTypeView:self.subTypeView didSelectButton:self.typeIndex];
+//    [self iphoneTypeView:self.subTypeView didSelectButton:self.typeIndex];
     
 }
--(void)setupDeviceTypeView
-{
-    self.deviceTypeView.delegate = self;
-    
-    [self.deviceTypeView clearItem];
-    
-    for(NSString *deviceType in self.devicesTypes)
-    {
-        if([deviceType isEqualToString:@"灯光"])
-        {
-            [self.deviceTypeView addItemWithTitle:@"灯光" imageName:@"lamp"];
-        }else if([deviceType isEqualToString:@"窗帘"]){
-            [self.deviceTypeView addItemWithTitle:@"窗帘" imageName:@"curtainType"];
-        }else if([deviceType isEqualToString:@"空调"])
-        {
-            [self.deviceTypeView addItemWithTitle:@"空调" imageName:@"air"];
-        }else if ([deviceType isEqualToString:@"FM"])
-        {
-            [self.deviceTypeView addItemWithTitle:@"FM" imageName:@"fm"];
-        }else if([deviceType isEqualToString:@"网络电视"]){
-            [self.deviceTypeView addItemWithTitle:@"网络电视" imageName:@"TV"];
-        }else if([deviceType isEqualToString:@"智能门锁"]){
-            [self.deviceTypeView addItemWithTitle:@"智能门锁" imageName:@"guard"];
-        }else if([deviceType isEqualToString:@"DVD"]){
-            [self.deviceTypeView addItemWithTitle:@"DVD电视" imageName:@"DVD"];
-        }else{
-            [self.deviceTypeView addItemWithTitle:@"其他" imageName:@"safe"];
-        }
-        
-    }
-    
-    [self.deviceTypeView setSelectButton:0];
-    [self iphoneTypeView:self.deviceTypeView didSelectButton:self.typeIndex];
-    
-}
--(void)iphoneTypeView:(IphoneTypeView *)typeView didSelectButton:(int)index
-{
-    if(typeView == self.subTypeView)
-    {
-        self.typeIndex = index;
-        self.devicesTypes = [SQLManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.typeArr[index]];
-        [self setupDeviceTypeView];
-    }else{
-        [self selectedType:self.devicesTypes[index]];
-    }
-    
-}
+//-(void)setupDeviceTypeView
+//{
+//    self.deviceTypeView.delegate = self;
+//    
+//    [self.deviceTypeView clearItem];
+//    
+//    for(NSString *deviceType in self.devicesTypes)
+//    {
+//        if([deviceType isEqualToString:@"灯光"])
+//        {
+//            [self.deviceTypeView addItemWithTitle:@"灯光" imageName:@"lamp"];
+//        }else if([deviceType isEqualToString:@"窗帘"]){
+//            [self.deviceTypeView addItemWithTitle:@"窗帘" imageName:@"curtainType"];
+//        }else if([deviceType isEqualToString:@"空调"])
+//        {
+//            [self.deviceTypeView addItemWithTitle:@"空调" imageName:@"air"];
+//        }else if ([deviceType isEqualToString:@"FM"])
+//        {
+//            [self.deviceTypeView addItemWithTitle:@"FM" imageName:@"fm"];
+//        }else if([deviceType isEqualToString:@"网络电视"]){
+//            [self.deviceTypeView addItemWithTitle:@"网络电视" imageName:@"TV"];
+//        }else if([deviceType isEqualToString:@"智能门锁"]){
+//            [self.deviceTypeView addItemWithTitle:@"智能门锁" imageName:@"guard"];
+//        }else if([deviceType isEqualToString:@"DVD"]){
+//            [self.deviceTypeView addItemWithTitle:@"DVD电视" imageName:@"DVD"];
+//        }else{
+//            [self.deviceTypeView addItemWithTitle:@"其他" imageName:@"safe"];
+//        }
+//        
+//    }
+//    
+//    [self.deviceTypeView setSelectButton:0];
+//    [self iphoneTypeView:self.deviceTypeView didSelectButton:self.typeIndex];
+//    
+//}
+//-(void)iphoneTypeView:(IphoneTypeView *)typeView didSelectButton:(int)index
+//{
+//    if(typeView == self.subTypeView)
+//    {
+//        self.typeIndex = index;
+//        self.devicesTypes = [SQLManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.typeArr[index]];
+//        [self setupDeviceTypeView];
+//    }else{
+//        [self selectedType:self.devicesTypes[index]];
+//    }
+//    
+//}
 
--(void)selectedType:(NSString *)typeName
-{
-    
-    [self goDeviceByRoomID:self.roomID typeName:typeName];
-}
+//-(void)selectedType:(NSString *)typeName
+//{
+//    
+//    [self goDeviceByRoomID:self.roomID typeName:typeName];
+//}
 
--(void)goDeviceByRoomID:(int)roomID typeName:(NSString *)typeName
-{
-    
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIStoryboard *iphoneBoard  = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-    if([typeName isEqualToString:@"网络电视"])
-    {
-        IphoneTVController *tVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneTVController"];
-        tVC.roomID = roomID;
-        tVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        
-        [self addViewAndVC:tVC];
-        
-    }else if([typeName isEqualToString:@"灯光"])
-    {
-//        LightController *ligthVC = [storyBoard instantiateViewControllerWithIdentifier:@"LightController"];
-         IphoneLightController * ligthVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"LightController"];
-        ligthVC.roomID = roomID;
-        ligthVC.isEditScene = YES;
-        ligthVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        [self addViewAndVC:ligthVC];
-        
-    }else if([typeName isEqualToString:@"窗帘"])
-    {
-        CurtainController *curtainVC = [storyBoard instantiateViewControllerWithIdentifier:@"CurtainController"];
-        curtainVC.roomID = roomID;
-        curtainVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        [self addViewAndVC:curtainVC];
-        
-        
-    }else if([typeName isEqualToString:@"DVD"])
-    {
-        
-        IphoneDVDController *dvdVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneDVDController"];
-        dvdVC.roomID = roomID;
-        dvdVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        [self addViewAndVC:dvdVC];
-        
-    }else if([typeName isEqualToString:@"FM"])
-    {
-        FMController *fmVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneFMController"];
-        fmVC.roomID = roomID;
-        fmVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        [self addViewAndVC:fmVC];
-        
-    }else if([typeName isEqualToString:@"空调"])
-    {
-        IphoneAirController *airVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneAirController"];
-        airVC.roomID = roomID;
-        airVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        [self addViewAndVC:airVC];
-        
-    }else if([typeName isEqualToString:@"机顶盒"]){
-        IphoneNetTvController *netVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneNetTvController"];
-        netVC.roomID = roomID;
-        netVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        [self addViewAndVC:netVC];
-        
-    }else if([typeName isEqualToString:@"摄像头"]){
-        CameraController *camerVC = [storyBoard instantiateViewControllerWithIdentifier:@"CameraController"];
-        camerVC.roomID = roomID;
-        camerVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        [self addViewAndVC:camerVC];
-        
-    }else if([typeName isEqualToString:@"智能门锁"]){
-        GuardController *guardVC = [storyBoard instantiateViewControllerWithIdentifier:@"GuardController"];
-        guardVC.roomID = roomID;
-        guardVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        [self addViewAndVC:guardVC];
-        
-    }else if([typeName isEqualToString:@"幕布"]){
-        ScreenCurtainController *screenCurtainVC = [storyBoard instantiateViewControllerWithIdentifier:@"ScreenCurtainController"];
-        screenCurtainVC.roomID = roomID;
-        screenCurtainVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        
-        [self addViewAndVC:screenCurtainVC];
-        
-        
-    }else if([typeName isEqualToString:@"投影"])
-    {
-        ProjectController *projectVC = [storyBoard instantiateViewControllerWithIdentifier:@"ProjectController"];
-        projectVC.roomID = roomID;
-        projectVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        
-        [self addViewAndVC:projectVC];
-    }else if([typeName isEqualToString:@"功放"]){
-        AmplifierController *amplifierVC = [storyBoard instantiateViewControllerWithIdentifier:@"AmplifierController"];
-        amplifierVC.roomID = roomID;
-        amplifierVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        [self addViewAndVC:amplifierVC];
-        
-    }else if([typeName isEqualToString:@"智能推窗器"])
-    {
-        WindowSlidingController *windowSlidVC = [storyBoard instantiateViewControllerWithIdentifier:@"WindowSlidingController"];
-        windowSlidVC.roomID = roomID;
-        windowSlidVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        [self addViewAndVC:windowSlidVC];
-    }else if([typeName isEqualToString:@"背景音乐"]){
-        BgMusicController *bgMusicVC = [storyBoard instantiateViewControllerWithIdentifier:@"BgMusicController"];
-        bgMusicVC.roomID = roomID;
-        bgMusicVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        [self addViewAndVC:bgMusicVC];
-        
-    }else {
-        PluginViewController *pluginVC = [storyBoard instantiateViewControllerWithIdentifier:@"PluginViewController"];
-        pluginVC.roomID = roomID;
-        pluginVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        [self addViewAndVC:pluginVC];
-    }
-   
-}
+//-(void)goDeviceByRoomID:(int)roomID typeName:(NSString *)typeName
+//{
+//    
+//    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    UIStoryboard *iphoneBoard  = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+//    if([typeName isEqualToString:@"网络电视"])
+//    {
+//        IphoneTVController *tVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneTVController"];
+//        tVC.roomID = roomID;
+//        tVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+//        
+//        [self addViewAndVC:tVC];
+//        
+//    }else if([typeName isEqualToString:@"灯光"])
+//    {
+////        LightController *ligthVC = [storyBoard instantiateViewControllerWithIdentifier:@"LightController"];
+//         IphoneLightController * ligthVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"LightController"];
+//        ligthVC.roomID = roomID;
+//        ligthVC.isEditScene = YES;
+//        ligthVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+//        [self addViewAndVC:ligthVC];
+//        
+//    }else if([typeName isEqualToString:@"窗帘"])
+//    {
+//        CurtainController *curtainVC = [storyBoard instantiateViewControllerWithIdentifier:@"CurtainController"];
+//        curtainVC.roomID = roomID;
+//        curtainVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+//        [self addViewAndVC:curtainVC];
+//        
+//        
+//    }else if([typeName isEqualToString:@"DVD"])
+//    {
+//        
+//        IphoneDVDController *dvdVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneDVDController"];
+//        dvdVC.roomID = roomID;
+//        dvdVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+//        [self addViewAndVC:dvdVC];
+//        
+//    }else if([typeName isEqualToString:@"FM"])
+//    {
+//        FMController *fmVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneFMController"];
+//        fmVC.roomID = roomID;
+//        fmVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+//        [self addViewAndVC:fmVC];
+//        
+//    }else if([typeName isEqualToString:@"空调"])
+//    {
+//        IphoneAirController *airVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneAirController"];
+//        airVC.roomID = roomID;
+//        airVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+//        [self addViewAndVC:airVC];
+//        
+//    }else if([typeName isEqualToString:@"机顶盒"]){
+//        IphoneNetTvController *netVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneNetTvController"];
+//        netVC.roomID = roomID;
+//        netVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+//        [self addViewAndVC:netVC];
+//        
+//    }else if([typeName isEqualToString:@"摄像头"]){
+//        CameraController *camerVC = [storyBoard instantiateViewControllerWithIdentifier:@"CameraController"];
+//        camerVC.roomID = roomID;
+//        camerVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+//        [self addViewAndVC:camerVC];
+//        
+//    }else if([typeName isEqualToString:@"智能门锁"]){
+//        GuardController *guardVC = [storyBoard instantiateViewControllerWithIdentifier:@"GuardController"];
+//        guardVC.roomID = roomID;
+//        guardVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+//        [self addViewAndVC:guardVC];
+//        
+//    }else if([typeName isEqualToString:@"幕布"]){
+//        ScreenCurtainController *screenCurtainVC = [storyBoard instantiateViewControllerWithIdentifier:@"ScreenCurtainController"];
+//        screenCurtainVC.roomID = roomID;
+//        screenCurtainVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+//        
+//        [self addViewAndVC:screenCurtainVC];
+//        
+//        
+//    }else if([typeName isEqualToString:@"投影"])
+//    {
+//        ProjectController *projectVC = [storyBoard instantiateViewControllerWithIdentifier:@"ProjectController"];
+//        projectVC.roomID = roomID;
+//        projectVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+//        
+//        [self addViewAndVC:projectVC];
+//    }else if([typeName isEqualToString:@"功放"]){
+//        AmplifierController *amplifierVC = [storyBoard instantiateViewControllerWithIdentifier:@"AmplifierController"];
+//        amplifierVC.roomID = roomID;
+//        amplifierVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+//        [self addViewAndVC:amplifierVC];
+//        
+//    }else if([typeName isEqualToString:@"智能推窗器"])
+//    {
+//        WindowSlidingController *windowSlidVC = [storyBoard instantiateViewControllerWithIdentifier:@"WindowSlidingController"];
+//        windowSlidVC.roomID = roomID;
+//        windowSlidVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+//        [self addViewAndVC:windowSlidVC];
+//    }else if([typeName isEqualToString:@"背景音乐"]){
+//        BgMusicController *bgMusicVC = [storyBoard instantiateViewControllerWithIdentifier:@"BgMusicController"];
+//        bgMusicVC.roomID = roomID;
+//        bgMusicVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+//        [self addViewAndVC:bgMusicVC];
+//        
+//    }else {
+//        PluginViewController *pluginVC = [storyBoard instantiateViewControllerWithIdentifier:@"PluginViewController"];
+//        pluginVC.roomID = roomID;
+//        pluginVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+//        [self addViewAndVC:pluginVC];
+//    }
+//   
+//}
 -(void )addViewAndVC:(UIViewController *)vc
 {
     if (self.currentViewController != nil) {
@@ -544,12 +547,11 @@
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 9;
+    return 15;
 
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
- 
     if (section == 0) {
         return _lightArray.count;//灯光
     }else if (section == 1){
@@ -565,6 +567,18 @@
     }else if (section == 6){
         return _ProjectArray.count;//投影
     }else if (section == 7){
+        return _FMArray.count;//FM
+    }else if (section == 8){
+        return _NetVArray.count;//机顶盒
+    }else if (section == 9){
+        return _MBArray.count;//幕布
+    }else if (section == 10){
+        return _PowerArray.count;//功放
+    }else if (section == 11){
+        return _IntelligentArray.count;//智能推窗器
+    }else if (section == 12){
+        return _BJMusicArray.count;//背景音乐
+    }else if (section == 13){
         return _PluginArray.count;//智能单品
     }
     return _OtherArray.count;//其他
@@ -618,16 +632,44 @@
          Device *device = [SQLManager getDeviceWithDeviceID:[_ProjectArray[indexPath.row] intValue]];
         ScreenCell.screenNameLabel.text = device.name;
         return ScreenCell;
-    }if (indexPath.section == 7) {//智能单品
+    }if (indexPath.section == 7) {//FM
+        OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+        Device *device = [SQLManager getDeviceWithDeviceID:[_FMArray[indexPath.row] intValue]];
+        otherCell.NameLabel.text = device.name;
+    }if (indexPath.section == 8) {//机顶盒
+        OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+        Device *device = [SQLManager getDeviceWithDeviceID:[_NetVArray[indexPath.row] intValue]];
+        otherCell.NameLabel.text = device.name;
+    }if (indexPath.section == 9) {//幕布
+        OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+        Device *device = [SQLManager getDeviceWithDeviceID:[_MBArray[indexPath.row] intValue]];
+        otherCell.NameLabel.text = device.name;
+    }if (indexPath.section == 10) {//功放
+        OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+        Device *device = [SQLManager getDeviceWithDeviceID:[_PowerArray[indexPath.row] intValue]];
+        otherCell.NameLabel.text = device.name;
+    }if (indexPath.section == 11) {//智能推窗器
+        OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+        Device *device = [SQLManager getDeviceWithDeviceID:[_IntelligentArray[indexPath.row] intValue]];
+        otherCell.NameLabel.text = device.name;
+    }if (indexPath.section == 12) {//背景音乐
+        OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+        Device *device = [SQLManager getDeviceWithDeviceID:[_BJMusicArray[indexPath.row] intValue]];
+        otherCell.NameLabel.text = device.name;
+    }if (indexPath.section == 13) {//智能单品
         OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
         Device *device = [SQLManager getDeviceWithDeviceID:[_PluginArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
     }
-    
      OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
     if (_OtherArray.count) {
         Device *device = [SQLManager getDeviceWithDeviceID:[_OtherArray[indexPath.row] intValue]];
-        otherCell.NameLabel.text = device.name;
+        if (device.name == nil) {
+            otherCell.NameLabel.text = @"Label";
+        }else{
+               otherCell.NameLabel.text = device.name;
+        }
+     
     }
     
     return otherCell;

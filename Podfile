@@ -19,5 +19,5 @@ target 'SmartHome' do
     	pod 'RongCloudIMKit'
 	pod "FSLineChart"
 	pod 'libWeChatSDK', '~>1.5'
-    pod 'ShareSDK3/ShareSDKPlatforms/WeChat'
+   
 end

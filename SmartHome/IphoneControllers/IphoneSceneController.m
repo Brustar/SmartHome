@@ -33,6 +33,7 @@
 #import "CYLineLayout.h"
 #import "CYPhotoCell.h"
 //#import "IphoneRoomListController.h"
+#import "TVIconController.h"
 
 @interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,CYPhotoCellDelegate,UIViewControllerPreviewingDelegate,YZNavigationMenuViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (strong, nonatomic) IBOutlet IphoneRoomView *roomView;
@@ -57,6 +58,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *SceneNameLabel;
 @property (nonatomic,strong)UICollectionView * FirstCollectionView;
 @property(nonatomic,strong)UILongPressGestureRecognizer *lgPress;
+@property (nonatomic,strong)UIImage *selectSceneImg;
 
 @end
 
@@ -226,6 +228,7 @@ static NSString * const CYPhotoId = @"photo";
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
+    self.cell = cell;
     self.scene = self.scenes[indexPath.row];
     self.selectedSId = self.scene.sceneID;
     cell.sceneID = self.scene.sceneID;
@@ -243,12 +246,25 @@ static NSString * const CYPhotoId = @"photo";
 }
 -(void)handleLongPress:(UILongPressGestureRecognizer *)lgr
 {
-    UIAlertController * alerController = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController * alerController = [UIAlertController alertControllerWithTitle:@"温馨提示更换场景图片" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
     
-    [alerController addAction:[UIAlertAction actionWithTitle:@"收藏场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [alerController addAction:[UIAlertAction actionWithTitle:@"现在就拍" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            picker.allowsEditing = YES;
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            [self presentViewController:picker animated:YES completion:NULL];
+
         
     }]];
-    [alerController addAction:[UIAlertAction actionWithTitle:@"更换场景图片" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [alerController addAction:[UIAlertAction actionWithTitle:@"预设图库" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+         UIStoryboard *MainStoryBoard  = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        TVIconController *tvIconVC = [MainStoryBoard instantiateViewControllerWithIdentifier:@"TVIconController"];
+        [self.navigationController pushViewController:tvIconVC animated:YES];
+    }]];
+    [alerController addAction:[UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
         [DeviceInfo defaultManager].isPhotoLibrary = YES;
         if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
             return;
@@ -259,31 +275,42 @@ static NSString * const CYPhotoId = @"photo";
         [picker shouldAutorotate];
         [picker supportedInterfaceOrientations];
         [self presentViewController:picker animated:YES completion:nil];
+        
     }]];
     [alerController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
     }]];
+    
     [self presentViewController:alerController animated:YES completion:^{
         
     }];
-    
+   
     NSLog(@"8980-08-");
     
 }
-//-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
-//{
-//    [DeviceInfo defaultManager].isPhotoLibrary = NO;
-//    UIImage *image = info[UIImagePickerControllerOriginalImage];
-//    
-//    
-////    [ setBackgroundImage:image forState:UIControlStateNormal];
-//    [picker dismissViewControllerAnimated:YES completion:nil];
-//}
-//
-//- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-//    [DeviceInfo defaultManager].isPhotoLibrary = NO;
-//    [picker dismissViewControllerAnimated:YES completion:nil];
-//}
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+    [DeviceInfo defaultManager].isPhotoLibrary = NO;
+    self.selectSceneImg = info[UIImagePickerControllerOriginalImage];
+    [self.cell.imageView setImage:self.selectSceneImg];
+//    [self.sceneBg setBackgroundImage:self.selectSceneImg forState:UIControlStateNormal];
+    //场景ID不变
+       self.sceneID = self.selectedSId;
+    NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
+    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+    
+    Scene *scene = [[Scene alloc] init];
+    [scene setValuesForKeysWithDictionary:plistDic];
+//    editScene:(Scene *)newScene newSceneImage:(UIImage *)newSceneImage
+    [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [DeviceInfo defaultManager].isPhotoLibrary = NO;
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     Scene *scene = self.scenes[indexPath.row];
@@ -343,35 +370,55 @@ static NSString * const CYPhotoId = @"photo";
 }
 //删除场景
 - (IBAction)deleteAction:(CYPhotoCell *)cell {
+    
     self.cell = cell;
     //    cell.deleteBtn.hidden = YES;
     self.sceneID = self.selectedSId;
     //        self.sceneID = self.selectedSId;
     self.SceneNameLabel.tag = self.scene.sceneID;
     self.SceneNameLabel.text = self.scene.sceneName;
-    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"是否删除“%@”场景？",self.SceneNameLabel.text] preferredStyle:UIAlertControllerStyleAlert];
-   
-    // 添加按钮
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-    
-        NSString *url = [NSString stringWithFormat:@"%@Cloud/scene_delete.aspx",[IOManager httpAddr]];
-        NSDictionary *dict = @{@"token":[UD objectForKey:@"AuthorToken"], @"scenceid":@(self.sceneID),@"optype":@(1)};
-        HttpManager *http=[HttpManager defaultManager];
-        http.delegate=self;
-        http.tag = 1;
-        [http sendPost:url param:dict];
-    }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-        NSLog(@"点击了取消按钮");
-    }]];
-    
-    [self presentViewController:alert animated:YES completion:nil];
-
+    self.delegateBtn.selected = !self.delegateBtn.selected;
+    if (self.delegateBtn.selected) {
+        [self.delegateBtn setBackgroundImage:[UIImage imageNamed:@"Scene-bedroom_03 (4)"] forState:UIControlStateSelected];
+        
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"是否删除“%@”场景？",self.SceneNameLabel.text] preferredStyle:UIAlertControllerStyleAlert];
+        
+        // 添加按钮
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+            
+            NSString *url = [NSString stringWithFormat:@"%@Cloud/scene_delete.aspx",[IOManager httpAddr]];
+            NSDictionary *dict = @{@"token":[UD objectForKey:@"AuthorToken"], @"scenceid":@(self.sceneID),@"optype":@(1)};
+            HttpManager *http=[HttpManager defaultManager];
+            http.delegate=self;
+            http.tag = 1;
+            [http sendPost:url param:dict];
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            NSLog(@"点击了取消按钮");
+            
+            
+        }]];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }else{
+        [self.delegateBtn setBackgroundImage:[UIImage imageNamed:@"Scene-bedroom_17"] forState:UIControlStateNormal];
+       
+    }
 }
 // 启动场景
 - (IBAction)startBtn:(id)sender {
+    
     self.sceneID = self.scene.sceneID;
-    [[SceneManager defaultManager] startScene:self.sceneID];
+    self.startBtn.selected = !self.startBtn.selected;
+    if (self.startBtn.selected) {
+        [self.startBtn setBackgroundImage:[UIImage imageNamed:@"Scene-bedroom_22"] forState:UIControlStateSelected];
+        [[SceneManager defaultManager] startScene:self.sceneID];
+         [SQLManager updateSceneStatus:1 sceneID:self.sceneID];//更新数据库
+    }else{
+        [self.startBtn setBackgroundImage:[UIImage imageNamed:@"Scene-bedroom_06 (3)"] forState:UIControlStateNormal];
+        [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];
+         [SQLManager updateSceneStatus:0 sceneID:self.sceneID];//更新数据库
+    }
 }
 //删除场景
 -(void)sceneDeleteAction:(CYPhotoCell *)cell

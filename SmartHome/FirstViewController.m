@@ -94,32 +94,7 @@
 -(void)setBtn
 {
        NSMutableArray * arr = [[NSMutableArray alloc] init];
-//    UIStoryboard *MyInfoStoryBoard  = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
-//    ShortcutKeyViewController *ShortcutKeyVC = [MyInfoStoryBoard instantiateViewControllerWithIdentifier:@"ShortcutKeyViewController"];
-//    ShortcutKeyVC.buttonTitle = ^(NSArray * UrlArray){
-//        NSMutableArray * arr = [[NSMutableArray alloc] init];
-//        _Urldata = [[NSMutableArray alloc] init];
-//        [arr insertObject:_firstBtn atIndex:0];
-//        [arr insertObject:_TwoBtn atIndex:1];
-//        [arr insertObject:_ThreeBtn atIndex:2];
-//        // 1.获得沙盒根路径
-//        NSString *Urlhome = NSHomeDirectory();
-//        
-//        // 2.document路径
-//        NSString *UrldocPath = [Urlhome stringByAppendingPathComponent:@"Documents"];
-//        // 3.文件路径
-//        NSString *Urlfilepath = [UrldocPath stringByAppendingPathComponent:@"zxp.plist"];
-//        //        NSLog(@"%@",filepath);
-//        _Urldata = [NSArray arrayWithContentsOfFile:Urlfilepath];
-//        if (_Urldata.count == 0) {
-//            return;
-//        }else{
-//            arr[0] = _Urldata[0];
-//            arr[1] = _Urldata[1];
-//            arr[2] = _Urldata[2];
-//        }
-//        
-//    };
+
     // 1.获得沙盒根路径
     NSString *home = NSHomeDirectory();
     

@@ -260,7 +260,7 @@
                       FMDatabase *db = [SQLManager connetdb];
                       if([db open])
                       {
-                          NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%ld,%d,'%@',%d,null,'%ld')",scene.sceneID,name,roomName,imgUrl,(long)scene.roomID,2,@"0",0,[[DeviceInfo defaultManager] masterID]];
+                          NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%ld,%d,'%@',%d,null,null,'%ld')",scene.sceneID,name,roomName,imgUrl,(long)scene.roomID,2,@"0",0,[[DeviceInfo defaultManager] masterID]];
                           BOOL result = [db executeUpdate:sql];
                           if(result)
                           {   [MBProgressHUD showSuccess:@"新增成功"];
@@ -374,6 +374,91 @@
     NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
     NSString *URL = [NSString stringWithFormat:@"%@Cloud/scene_edit.aspx",[IOManager httpAddr]];
     [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName imgData:nil imgFileName:@"" completion:^(id responseObject) {
+        
+        NSLog(@"scene_edit --- responseObject: %@", responseObject);
+        
+        NSNumber *result = [responseObject objectForKey:@"result"];
+        NSString *msg = [responseObject objectForKey:@"msg"];
+        
+        if(result.integerValue == 0) { //成功
+            [MBProgressHUD showSuccess:@"保存成功"];
+        }else { //失败
+            [MBProgressHUD showError:msg];
+        }
+    }];
+}
+
+//保证newScene的ID不变只改变场景图片
+- (void)editScene:(Scene *)newScene newSceneImage:(UIImage *)newSceneImage
+{
+    [IOManager writeScene:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, newScene.sceneID ] scene:newScene];
+    //同步云端
+    NSString *fileName = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,newScene.sceneID];
+    newScene.sceneName = [SQLManager getSceneName:newScene.sceneID];
+    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:fileName];
+    NSData *imgData = UIImageJPEGRepresentation(newSceneImage, 0.5);
+    NSDictionary *parameter;
+    if(newScene.schedules.count > 0) //有定时
+    {
+        for (Schedule *schedule in newScene.schedules) {
+            if(schedule.deviceID == 0) {  //控制场景的定时
+                if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID >0)
+                {
+                    parameter = @{
+                                  @"token":[UD objectForKey:@"AuthorToken"],
+                                  @"optype":@(0),
+                                  @"scenceid":@(newScene.sceneID),
+                                  @"scencename":newScene.sceneName,
+                                  @"roomid":@(newScene.roomID),
+                                  @"isplan":@(1),
+                                  @"plistname":fileName,
+                                  @"scencefile":scenePath,
+                                  @"starttime":schedule.startTime,
+                                  @"endtime":schedule.endTime,
+                                  @"astronomicaltime":@(schedule.astronomicalStartID),
+                                  @"starttype":@(1),
+                                  @"weekvalue":schedule.weekDays
+                                  };
+                }
+            }else { //控制设备的定时
+                parameter = @{
+                              @"token":[UD objectForKey:@"AuthorToken"],
+                              @"optype":@(0),
+                              @"scenceid":@(newScene.sceneID),
+                              @"scencename":newScene.sceneName,
+                              @"roomid":@(newScene.roomID),
+                              @"isplan":@(1),
+                              @"plistname":fileName,
+                              @"scencefile":scenePath,
+                              @"starttime":schedule.startTime,
+                              @"endtime":schedule.endTime,
+                              @"astronomicaltime":@(schedule.astronomicalStartID),
+                              @"starttype":@(1),
+                              @"weekvalue":schedule.weekDays
+                              };
+            }
+        }
+    }else{ //没有定时
+        
+        if (newScene.sceneName && newScene.picName && fileName && newScene.roomID) {
+            
+            parameter = @{
+                          @"token":[UD objectForKey:@"AuthorToken"],
+                          @"optype":@(0),
+                          @"scenceid":@(newScene.sceneID),
+                          @"scencename":newScene.sceneName,
+                          @"roomid":@(newScene.roomID),
+                          @"isplan":@(2),
+                          @"plistname":fileName,
+                          @"scencefile":scenePath
+                          };
+        }
+        
+    }
+    
+    NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
+    NSString *URL = [NSString stringWithFormat:@"%@Cloud/scene_edit.aspx",[IOManager httpAddr]];
+    [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName imgData:imgData imgFileName:@"" completion:^(id responseObject) {
         
         NSLog(@"scene_edit --- responseObject: %@", responseObject);
         

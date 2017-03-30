@@ -323,7 +323,7 @@
                                     <constraint firstItem="0zj-Rm-KqR" firstAttribute="top" secondItem="V1M-Ii-Bwz" secondAttribute="top" id="rFk-u9-dYx"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="first-click_13" translatesAutoresizingMaskIntoConstraints="NO" id="eRG-g9-nK5">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Home_04" translatesAutoresizingMaskIntoConstraints="NO" id="eRG-g9-nK5">
                                 <rect key="frame" x="72" y="114" width="230" height="230"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -337,13 +337,13 @@
                                     <constraint firstAttribute="width" constant="140" id="NCt-ws-y1Z"/>
                                     <constraint firstAttribute="height" constant="21" id="ZQ5-Kb-t28"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="会看到一个不一样的家哦" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AHx-ty-lAs">
                                 <rect key="frame" x="104" y="280" width="172" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -475,11 +475,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Home_04" width="487" height="506"/>
         <image name="Scene-bedroom2" width="375" height="667"/>
-        <image name="bofang" width="44" height="39"/>
-        <image name="bofang-Scene-1_03" width="552" height="417"/>
-        <image name="bofang-Scene_03 (2)" width="64" height="64"/>
-        <image name="first-click_13" width="127" height="127"/>
+        <image name="bofang" width="22" height="19"/>
+        <image name="bofang-Scene-1_03" width="276" height="208"/>
+        <image name="bofang-Scene_03 (2)" width="32" height="32"/>
         <image name="first-scene_1_05" width="1" height="1"/>
         <image name="first_03 (4)" width="28" height="23"/>
         <image name="first_06" width="25" height="18"/>
