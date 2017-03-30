@@ -38,7 +38,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Scene-bedroom2" translatesAutoresizingMaskIntoConstraints="NO" id="S4g-ft-uAu">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Scene-bg" translatesAutoresizingMaskIntoConstraints="NO" id="S4g-ft-uAu">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" red="0.71167707443237305" green="0.42917749285697937" blue="0.089650504291057587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
@@ -476,7 +476,7 @@
     </scenes>
     <resources>
         <image name="Home_04" width="487" height="506"/>
-        <image name="Scene-bedroom2" width="375" height="667"/>
+        <image name="Scene-bg" width="375" height="667"/>
         <image name="bofang" width="22" height="19"/>
         <image name="bofang-Scene-1_03" width="276" height="208"/>
         <image name="bofang-Scene_03 (2)" width="32" height="32"/>
