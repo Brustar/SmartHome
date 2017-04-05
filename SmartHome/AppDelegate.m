@@ -92,6 +92,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(kickout) name:KICK_OUT object:nil];
     //[[RCIM sharedRCIM] initWithAppKey:@"8brlm7uf8tsb3"];
     //[RCIM sharedRCIM].userInfoDataSource = [RCDataManager shareManager];
+    
     return YES;
 }
 
