@@ -94,7 +94,6 @@
         NSLog(@"定位服务不可用");
     }
 
-    
  UIBarButtonItem *editItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(clickEditBtn:)];
     self.navigationItem.leftBarButtonItem = editItem;
    
@@ -171,19 +170,21 @@
 - (void)sendRequestForGettingConfigInfos:(NSString *)str withTag:(int)tag;
 {
     NSString *url = [NSString stringWithFormat:@"%@%@",[IOManager httpAddr],str];
-    
+    DeviceInfo *info = [DeviceInfo defaultManager];
     //天文时钟
     NSString *dawnStr = self.antronomicalTimes[0];//黎明
     NSString *sunriseStr = self.antronomicalTimes[1];//日出
     NSString *sunsetStr = self.antronomicalTimes[2];//日落
     NSString *duskStr = self.antronomicalTimes[3];//黄昏
+    NSString *md5Json = [IOManager md5JsonByScenes:[NSString stringWithFormat:@"%ld",info.masterID]];
     
     NSDictionary *dic = @{
                           @"token":[UD objectForKey:@"AuthorToken"],
                           @"dawn":dawnStr,
                           @"sunrise":sunriseStr,
                           @"sunset":sunsetStr,
-                          @"dusk":duskStr
+                          @"dusk":duskStr,
+                          @"md5Json":md5Json
                           };
     
     if ([UD objectForKey:@"room_version"]) {
@@ -611,7 +612,7 @@
             {
                 self.masterId = list[0];
                 [registVC setValue:self.masterId forKey:@"masterStr"];
-                                if ([@"1" isEqualToString:list[1]]) {
+                if ([@"1" isEqualToString:list[1]]) {
                     self.role=@"主人";
                 }else{
                     self.role=@"客人";
