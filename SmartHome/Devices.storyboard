@@ -43,14 +43,14 @@
                                 <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sRX-KC-mIR" userLabel="BS">
-                                <rect key="frame" x="157" y="556" width="100" height="60"/>
+                                <rect key="frame" x="157" y="579" width="100" height="57"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1I4-b3-Qth" userLabel="LButton">
-                                        <rect key="frame" x="5" y="0.0" width="30" height="60"/>
+                                        <rect key="frame" x="5" y="0.0" width="30" height="57"/>
                                         <state key="normal" image="on"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V7I-o7-sA0" userLabel="RButton">
-                                        <rect key="frame" x="65" y="0.0" width="30" height="60"/>
+                                        <rect key="frame" x="65" y="0.0" width="30" height="57"/>
                                         <state key="normal" image="clock_white"/>
                                     </button>
                                 </subviews>
@@ -65,7 +65,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="空调" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HID-aO-r7h">
-                                <rect key="frame" x="193" y="516" width="29" height="17"/>
+                                <rect key="frame" x="193" y="559" width="29" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -99,8 +99,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="sRX-KC-mIR" firstAttribute="top" secondItem="HID-aO-r7h" secondAttribute="bottom" constant="23" id="0Mx-V6-prC"/>
-                            <constraint firstAttribute="bottom" secondItem="HID-aO-r7h" secondAttribute="bottom" constant="203" id="29P-8h-Oqy"/>
+                            <constraint firstItem="sRX-KC-mIR" firstAttribute="top" secondItem="HID-aO-r7h" secondAttribute="bottom" constant="3" id="0Mx-V6-prC"/>
+                            <constraint firstAttribute="bottom" secondItem="HID-aO-r7h" secondAttribute="bottom" constant="160" id="29P-8h-Oqy"/>
                             <constraint firstAttribute="trailing" secondItem="tv1-5u-apH" secondAttribute="trailing" id="6d0-sV-LKO"/>
                             <constraint firstItem="HID-aO-r7h" firstAttribute="centerX" secondItem="sRX-KC-mIR" secondAttribute="centerX" id="86K-WN-UlE"/>
                             <constraint firstItem="3fl-O8-HH2" firstAttribute="centerY" secondItem="tv1-5u-apH" secondAttribute="centerY" id="CcP-QM-CGq"/>
@@ -115,7 +115,7 @@
                             <constraint firstItem="HID-aO-r7h" firstAttribute="centerX" secondItem="dwk-ue-54v" secondAttribute="centerX" id="cFy-2v-2GR"/>
                             <constraint firstItem="3fl-O8-HH2" firstAttribute="leading" secondItem="bso-BX-j0c" secondAttribute="leadingMargin" constant="10" id="cpS-qu-2JV"/>
                             <constraint firstItem="Rcn-Qe-Nld" firstAttribute="top" secondItem="dwk-ue-54v" secondAttribute="bottom" constant="2" id="igq-Ex-2zk"/>
-                            <constraint firstItem="Gf8-TD-Xz9" firstAttribute="top" secondItem="sRX-KC-mIR" secondAttribute="bottom" constant="120" id="ikS-Ut-S4X"/>
+                            <constraint firstItem="Gf8-TD-Xz9" firstAttribute="top" secondItem="sRX-KC-mIR" secondAttribute="bottom" constant="100" id="ikS-Ut-S4X"/>
                             <constraint firstItem="3fl-O8-HH2" firstAttribute="top" secondItem="dwk-ue-54v" secondAttribute="top" id="k1i-qg-Wir"/>
                             <constraint firstItem="czn-zT-rFA" firstAttribute="leading" secondItem="bso-BX-j0c" secondAttribute="leading" id="nPQ-ea-zDm"/>
                             <constraint firstAttribute="trailingMargin" secondItem="SMK-5p-JGZ" secondAttribute="trailing" constant="10" id="ove-UC-ug2"/>
@@ -133,7 +133,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Scene-bg" width="375" height="667"/>
+        <image name="Scene-bg" width="414" height="736"/>
         <image name="Scene-menuTab" width="375" height="58"/>
         <image name="bgmusic" width="22" height="19"/>
         <image name="clock_white" width="30" height="30"/>
