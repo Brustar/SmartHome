@@ -36,6 +36,7 @@
 @interface IphoneDevicesController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) NSArray *deviceTypes;
+@property (nonatomic,assign) NSString * roomName;
 @end
 
 @implementation IphoneDevicesController
@@ -43,14 +44,12 @@
 -(void)setRoomId:(int)roomId
 {
     _roomId = roomId;
-//    if (_roomId) {
-//       self.deviceTypes = [SQLManager deviceSubTypeByRoomId:_roomId];
-//    }else{
-//        self.deviceTypes = [SQLManager getAllDevices];
-//    }
-    self.deviceTypes = [SQLManager deviceSubTypeByRoomId:_roomId];
-  
-    
+    _roomName =[SQLManager getRoomNameByRoomID:_roomId];
+    if ([_roomName isEqualToString:@"全屋"]) {
+        self.deviceTypes = [SQLManager getAllDevices];
+    }else{
+        self.deviceTypes = [SQLManager deviceSubTypeByRoomId:_roomId];
+    }
     self.automaticallyAdjustsScrollViewInsets = NO;
    // self.tableViewHight.constant = self.deviceTypes.count * self.tableView.rowHeight;
     if(self.isViewLoaded)

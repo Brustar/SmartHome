@@ -19,6 +19,7 @@
 #import "IphoneAirCell.h"
 #import "ColourTableViewCell.h"
 #import "HRSampleColorPickerViewController.h"
+#import "Device.h"
 
 @interface IphoneLightController ()<UITableViewDelegate,UITableViewDataSource,HRColorPickerViewControllerDelegate, ColourTableViewCellDelegate>
 @property (strong, nonatomic) IBOutlet ColourTableViewCell *cell;
@@ -28,6 +29,7 @@
 @property (strong, nonatomic) Scene *scene;
 @property (nonatomic,strong) NSArray * ColourLightArr;
 @property (nonatomic,strong) NSArray * SwitchLightArr;
+@property (nonatomic,strong) NSString * roomName;
 
 @end
 
@@ -84,12 +86,38 @@
     }else {
         self.tableView.tableFooterView = [self createTableFooterView];
     }
-    
-    _lightArrs   = [SQLManager getDeviceByRoom:self.roomID];
+    _roomName = [SQLManager getRoomNameByRoomID:self.roomID];
+    if ([_roomName isEqualToString:@"全屋"]) {
+        NSArray * lightArr = [SQLManager getAllDevicesInfo];
+        Device * device = [[Device alloc] init];
+        
+        NSMutableArray * ligh = [[NSMutableArray alloc] init];
+        NSMutableArray * ColourLightArray = [[NSMutableArray alloc] init];
+        NSMutableArray * SwitchLightArray = [[NSMutableArray alloc] init];
+        for (device in lightArr) {
+            if ([device.typeName isEqualToString:@"调光灯"]) {
+      
+                [ligh addObject:device.name];
+            }
+            if ([device.typeName isEqualToString:@"调色灯"]) {
+                 [ligh addObject:device.name];
+            }if ([device.typeName isEqualToString:@"开关灯"]) {
+                 [ligh addObject:device.name];
+            }
+                _lightArrs = ligh;
+                _ColourLightArr = ColourLightArray;
+                _SwitchLightArr = SwitchLightArray;
+        }
+
+    }else{
+         _lightArrs     = [SQLManager getDeviceByRoom:self.roomID];
+        _ColourLightArr = [SQLManager getColourLightByRoom:self.roomID];
+        _SwitchLightArr = [SQLManager getSwitchLightByRoom:self.roomID];
+    }
+   
 //    _curtainArrs = [SQLManager getCurtainByRoom:self.roomID];
 //    _airArrs     = [SQLManager getAirDeviceByRoom:self.roomID];
-    _ColourLightArr = [SQLManager getColourLightByRoom:self.roomID];
-    _SwitchLightArr = [SQLManager getSwitchLightByRoom:self.roomID];
+    
     [self.tableView registerNib:[UINib nibWithNibName:@"ColourTableViewCell" bundle:nil] forCellReuseIdentifier:@"ColourTableViewCell"];
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
@@ -156,7 +184,11 @@
         cell.roomID = self.roomID;
         cell.sceneID = self.sceneid;
         Device *device = [SQLManager getDeviceWithDeviceID:[_lightArrs[indexPath.row] intValue]];
-        cell.LightNameLabel.text = device.name;
+          if ([_roomName isEqualToString:@"全屋"]) {
+             cell.LightNameLabel.text = _lightArrs[indexPath.row];
+          }else{
+               cell.LightNameLabel.text = device.name;
+          }
         cell.slider.continuous = NO;
         cell.deviceid = self.lightArrs[indexPath.row];
     
@@ -166,7 +198,11 @@
         //调色灯
         ColourTableViewCell *colorCell = [tableView dequeueReusableCellWithIdentifier:@"ColourTableViewCell" forIndexPath:indexPath];
         Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[indexPath.row] intValue]];
-        colorCell.lable.text = device.name;
+        if ([_roomName isEqualToString:@"全屋"]) {
+            colorCell.lable.text = _ColourLightArr[indexPath.row];
+        }else{
+             colorCell.lable.text = device.name;
+        }
         colorCell.deviceID = device.eID;
         colorCell.delegate = self;
         colorCell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -177,7 +213,12 @@
      //开关灯
         ColourTableViewCell *colorCell = [tableView dequeueReusableCellWithIdentifier:@"ColourTableViewCell" forIndexPath:indexPath];
        Device *device = [SQLManager getDeviceWithDeviceID:[_SwitchLightArr[indexPath.row] intValue]];
-       colorCell.lable.text = device.name;
+    if ([_roomName isEqualToString:@"全屋"]) {
+        colorCell.lable.text = _SwitchLightArr[indexPath.row];
+    }else{
+         colorCell.lable.text = device.name;
+    }
+ 
        colorCell.deviceID = device.eID;
        colorCell.delegate = self;
        colorCell.selectionStyle = UITableViewCellSelectionStyleNone;
