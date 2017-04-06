@@ -20,7 +20,7 @@
 @property (nonatomic,strong) NSMutableArray *projectNames;
 @property (nonatomic,strong) NSMutableArray *projectIds;
 @property (nonatomic,strong) DetailTableViewCell *cell;
-
+@property (nonatomic,strong) NSString * roomName;
 @property (weak, nonatomic) IBOutlet UISlider *slider;
 
 @end

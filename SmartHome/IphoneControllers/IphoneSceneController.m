@@ -230,6 +230,9 @@ static NSString * const CYPhotoId = @"photo";
     CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
     self.cell = cell;
     self.scene = self.scenes[indexPath.row];
+    if (self.scenes.count == 0) {
+    [MBProgressHUD showSuccess:@"暂时没有全屋场景"];
+    }
     self.selectedSId = self.scene.sceneID;
     cell.sceneID = self.scene.sceneID;
     cell.tag = self.scene.sceneID;
@@ -302,7 +305,6 @@ static NSString * const CYPhotoId = @"photo";
     
     Scene *scene = [[Scene alloc] init];
     [scene setValuesForKeysWithDictionary:plistDic];
-//    editScene:(Scene *)newScene newSceneImage:(UIImage *)newSceneImage
     [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
@@ -379,7 +381,7 @@ static NSString * const CYPhotoId = @"photo";
     self.SceneNameLabel.text = self.scene.sceneName;
     self.delegateBtn.selected = !self.delegateBtn.selected;
     if (self.delegateBtn.selected) {
-        [self.delegateBtn setBackgroundImage:[UIImage imageNamed:@"Scene-bedroom_03 (4)"] forState:UIControlStateSelected];
+        [self.delegateBtn setImage:[UIImage imageNamed:@"Scene-bedroom_03 (4)"] forState:UIControlStateSelected];
         
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"是否删除“%@”场景？",self.SceneNameLabel.text] preferredStyle:UIAlertControllerStyleAlert];
         
@@ -401,7 +403,7 @@ static NSString * const CYPhotoId = @"photo";
         
         [self presentViewController:alert animated:YES completion:nil];
     }else{
-        [self.delegateBtn setBackgroundImage:[UIImage imageNamed:@"Scene-bedroom_17"] forState:UIControlStateNormal];
+        [self.delegateBtn setImage:[UIImage imageNamed:@"Scene-bedroom_17"] forState:UIControlStateNormal];
        
     }
 }
@@ -411,11 +413,11 @@ static NSString * const CYPhotoId = @"photo";
     self.sceneID = self.scene.sceneID;
     self.startBtn.selected = !self.startBtn.selected;
     if (self.startBtn.selected) {
-        [self.startBtn setBackgroundImage:[UIImage imageNamed:@"Scene-bedroom_22"] forState:UIControlStateSelected];
+        [self.startBtn setImage:[UIImage imageNamed:@"Scene-bedroom_22"] forState:UIControlStateSelected];
         [[SceneManager defaultManager] startScene:self.sceneID];
          [SQLManager updateSceneStatus:1 sceneID:self.sceneID];//更新数据库
     }else{
-        [self.startBtn setBackgroundImage:[UIImage imageNamed:@"Scene-bedroom_06 (3)"] forState:UIControlStateNormal];
+        [self.startBtn setImage:[UIImage imageNamed:@"Scene-bedroom_06 (3)"] forState:UIControlStateNormal];
         [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];
          [SQLManager updateSceneStatus:0 sceneID:self.sceneID];//更新数据库
     }

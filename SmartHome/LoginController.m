@@ -434,13 +434,7 @@
     if ([fileManager fileExistsAtPath:filePath]==NO) {
             [array writeToFile:filePath atomically:YES];
     }
-//    if (![[NSUserDefaults standardUserDefaults] valueForKey:@"isFirst"]) {
-//       
-//        [[NSUserDefaults standardUserDefaults] setValue:@"YES" forKey:@"isFirst"];
-//         [array writeToFile:filePath atomically:YES];
-//    }else{
-//       
-//    }
+
 }
 
 #pragma mark -  http delegate
