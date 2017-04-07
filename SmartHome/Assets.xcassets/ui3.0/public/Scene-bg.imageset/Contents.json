@@ -6,11 +6,12 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "main.png",
+      "filename" : "background1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "background13x.png",
       "scale" : "3x"
     }
   ],

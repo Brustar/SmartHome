@@ -121,6 +121,8 @@ enum{
 -(NSData *) close:(NSString *)deviceID;
 
 #pragma mark - TV
+-(NSData *) nextProgram:(NSString *)deviceID;
+-(NSData *) previousProgram:(NSString *)deviceID;
 -(NSData *) switchProgram:(uint8_t)program deviceID:(NSString *)deviceID; //切换台
 -(NSData *) changeTVolume:(uint8_t)percent deviceID:(NSString *)deviceID;
 

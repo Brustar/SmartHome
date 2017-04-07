@@ -22,5 +22,5 @@ target 'SmartHome' do
 	pod 'libWeChatSDK', '~>1.5'
 	pod 'AliPay', '~> 2.1.2'
     #pod 'ReactiveCocoa', '~> 5.0.0'
-    pod 'ReactiveCocoa', '2.1.8'
+    pod 'ReactiveCocoa', '~> 2.5'
 end
