@@ -381,7 +381,7 @@ static NSString * const CYPhotoId = @"photo";
     self.SceneNameLabel.text = self.scene.sceneName;
     self.delegateBtn.selected = !self.delegateBtn.selected;
     if (self.delegateBtn.selected) {
-        [self.delegateBtn setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateSelected];
+        [self.delegateBtn setImage:[UIImage imageNamed:@"delete2"] forState:UIControlStateSelected];
         
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"是否删除“%@”场景？",self.SceneNameLabel.text] preferredStyle:UIAlertControllerStyleAlert];
         
@@ -403,7 +403,7 @@ static NSString * const CYPhotoId = @"photo";
         
         [self presentViewController:alert animated:YES completion:nil];
     }else{
-        [self.delegateBtn setImage:[UIImage imageNamed:@"delete2"] forState:UIControlStateNormal];
+        [self.delegateBtn setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
        
     }
 }
@@ -413,7 +413,7 @@ static NSString * const CYPhotoId = @"photo";
     self.sceneID = self.scene.sceneID;
     self.startBtn.selected = !self.startBtn.selected;
     if (self.startBtn.selected) {
-        [self.startBtn setImage:[UIImage imageNamed:@"Scene-close1"] forState:UIControlStateSelected];
+        [self.startBtn setImage:[UIImage imageNamed:@"close1"] forState:UIControlStateSelected];
         [[SceneManager defaultManager] startScene:self.sceneID];
          [SQLManager updateSceneStatus:1 sceneID:self.sceneID];//更新数据库
     }else{

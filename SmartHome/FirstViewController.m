@@ -43,6 +43,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *firstBtn;
 @property (weak, nonatomic) IBOutlet UIButton *TwoBtn;
 @property (weak, nonatomic) IBOutlet UIButton *ThreeBtn;
+@property (weak, nonatomic) IBOutlet UIView *subView;
 
 @end
 
@@ -75,7 +76,9 @@
     
     // 允许用户交互
     _SubImageView.userInteractionEnabled = YES;
+    _subView.userInteractionEnabled = YES;
     [_SubImageView addGestureRecognizer:tap];
+    [_subView addGestureRecognizer:tap];
     [self setupSlideButton];
 //    [self setBtn];
     
