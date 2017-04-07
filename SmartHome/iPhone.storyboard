@@ -921,17 +921,37 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ueV-XT-5wh" customClass="IphoneRoomView">
                                 <rect key="frame" x="0.0" y="64" width="320" height="50"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Scene-menuTab" translatesAutoresizingMaskIntoConstraints="NO" id="Lfb-Ve-53W">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line3" translatesAutoresizingMaskIntoConstraints="NO" id="Lfb-Ve-53W">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </imageView>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line2" translatesAutoresizingMaskIntoConstraints="NO" id="Rlf-BW-106" customClass="line2">
+                                        <rect key="frame" x="0.0" y="49" width="320" height="1"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="HGk-a2-6Rk"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line2" translatesAutoresizingMaskIntoConstraints="NO" id="J6k-hD-bxb">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="TCH-it-8Jy"/>
+                                        </constraints>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="Lfb-Ve-53W" firstAttribute="leading" secondItem="ueV-XT-5wh" secondAttribute="leading" id="0XD-JQ-lF6"/>
+                                    <constraint firstAttribute="trailing" secondItem="Rlf-BW-106" secondAttribute="trailing" id="7Fc-Rb-EIc"/>
+                                    <constraint firstItem="Rlf-BW-106" firstAttribute="leading" secondItem="ueV-XT-5wh" secondAttribute="leading" id="7Mr-GP-skJ"/>
                                     <constraint firstAttribute="bottom" secondItem="Lfb-Ve-53W" secondAttribute="bottom" id="9Wf-6G-26o"/>
+                                    <constraint firstItem="J6k-hD-bxb" firstAttribute="top" secondItem="ueV-XT-5wh" secondAttribute="top" id="Gip-12-n9q"/>
                                     <constraint firstAttribute="height" constant="50" id="KZc-Kx-5nk"/>
+                                    <constraint firstAttribute="trailing" secondItem="J6k-hD-bxb" secondAttribute="trailing" id="RSu-lw-Z3f"/>
                                     <constraint firstItem="Lfb-Ve-53W" firstAttribute="top" secondItem="ueV-XT-5wh" secondAttribute="top" id="Rj3-QU-tLk"/>
+                                    <constraint firstItem="J6k-hD-bxb" firstAttribute="leading" secondItem="ueV-XT-5wh" secondAttribute="leading" id="TAt-wL-rce"/>
+                                    <constraint firstItem="Rlf-BW-106" firstAttribute="top" secondItem="Lfb-Ve-53W" secondAttribute="bottom" constant="-1" id="d9F-Bm-fvK"/>
                                     <constraint firstAttribute="trailing" secondItem="Lfb-Ve-53W" secondAttribute="trailing" id="ttk-Ux-kGT"/>
                                 </constraints>
                             </view>
@@ -957,18 +977,18 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tl5-YW-aDH">
-                                        <rect key="frame" x="55.5" y="62" width="50" height="50"/>
+                                        <rect key="frame" x="55" y="62" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Imd-VQ-w81"/>
                                             <constraint firstAttribute="width" constant="50" id="ZO8-VT-gRi"/>
                                         </constraints>
-                                        <state key="normal" image="Scene-bedroom_17"/>
+                                        <state key="normal" image="delete"/>
                                         <connections>
                                             <action selector="deleteAction:" destination="2FT-fL-R4c" eventType="touchUpInside" id="SwO-vQ-3d9"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="84n-g7-foo">
-                                        <rect key="frame" x="135.5" y="62" width="50" height="50"/>
+                                        <rect key="frame" x="135" y="62" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="RAR-Lf-MFI"/>
                                             <constraint firstAttribute="height" constant="50" id="lcn-DA-w0D"/>
@@ -979,7 +999,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPF-K3-h3G">
-                                        <rect key="frame" x="215.5" y="62" width="50" height="50"/>
+                                        <rect key="frame" x="215" y="62" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="Pcn-9A-rdn"/>
                                             <constraint firstAttribute="height" constant="50" id="Sk6-yn-Ygv"/>
@@ -1056,7 +1076,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U47-Xi-iD1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2243.5" y="-311.5"/>
+            <point key="canvasLocation" x="2243" y="-312"/>
         </scene>
         <!--添加场景定时-->
         <scene sceneID="kNF-ul-FTy">
@@ -1767,7 +1787,9 @@
                                     <constraint firstAttribute="height" constant="32" id="Qw7-Tt-nc4"/>
                                     <constraint firstAttribute="width" constant="30" id="ZMM-UE-FrW"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="i-add"/>
+                                <state key="normal" backgroundImage="i-add">
+                                    <color key="titleColor" red="1" green="0.94040256076388884" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="addscene:" destination="684-QI-OKg" eventType="touchUpInside" id="0ww-gz-X0v"/>
                                     <segue destination="yGe-XQ-WNx" kind="push" identifier="gotoDeviceSegue" id="lPv-wZ-EAG"/>
@@ -1879,7 +1901,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="960-gK-uPK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="483" y="-232"/>
+            <point key="canvasLocation" x="435" y="43"/>
         </scene>
         <!--添加设备——设备列表-->
         <scene sceneID="PfY-RB-xx1">
@@ -3974,16 +3996,16 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7nM-f9-cAM">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <subviews>
-                                    <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jCt-2a-Ih1">
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jCt-2a-Ih1">
                                         <rect key="frame" x="79" y="225" width="162" height="128"/>
                                         <subviews>
-                                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9QX-HI-1sG">
+                                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9QX-HI-1sG">
                                                 <rect key="frame" x="27" y="49" width="108" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sUL-jH-nXo">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sUL-jH-nXo">
                                                 <rect key="frame" x="27" y="98" width="46" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="46" id="9GL-pA-VxF"/>
@@ -3993,7 +4015,7 @@
                                                     <action selector="cancelBtn:" destination="TeU-EN-VDN" eventType="touchUpInside" id="58n-Fi-UjJ"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G8j-Sr-Gta">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G8j-Sr-Gta">
                                                 <rect key="frame" x="89" y="98" width="46" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="46" id="QqH-jt-lgB"/>
@@ -6380,7 +6402,6 @@
         <image name="Iphonewifi" width="32" height="32"/>
         <image name="PL" width="724" height="470"/>
         <image name="Scene-bedroom_06 (3)" width="30" height="30"/>
-        <image name="Scene-bedroom_17" width="30" height="30"/>
         <image name="Scene-bedroom_19" width="30" height="30"/>
         <image name="Scene-close1" width="25" height="25"/>
         <image name="Scene-menuTab" width="375" height="58"/>
@@ -6400,6 +6421,8 @@
         <image name="icon_shades" width="130" height="130"/>
         <image name="last" width="32" height="32"/>
         <image name="lightBtn.png" width="32" height="32"/>
+        <image name="line2" width="1" height="1"/>
+        <image name="line3" width="373" height="48"/>
         <image name="logo" width="180" height="180"/>
         <image name="media" width="48" height="48"/>
         <image name="next" width="32" height="32"/>
@@ -6431,10 +6454,10 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="J5F-aP-6iz"/>
         <segue reference="qN8-z6-Gb7"/>
-        <segue reference="jfc-yL-NEI"/>
-        <segue reference="Uo6-og-hnM"/>
+        <segue reference="lPv-wZ-EAG"/>
         <segue reference="b22-0A-WOg"/>
+        <segue reference="J5F-aP-6iz"/>
+        <segue reference="Uo6-og-hnM"/>
     </inferredMetricsTieBreakers>
 </document>

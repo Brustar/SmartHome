@@ -217,6 +217,7 @@
 		2EE1196F1E81374A00F6FCB6 /* kaiqi.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EE1196E1E81374A00F6FCB6 /* kaiqi.png */; };
 		2EEE536B1E3061930026F97D /* IphoneDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EEE536A1E3061930026F97D /* IphoneDetailViewController.m */; };
 		2EEE536E1E309C5D0026F97D /* MyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EEE536D1E309C5D0026F97D /* MyView.m */; };
+		2EEFF74A1E9649A0008F2C7F /* IphoneNewAddSceneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EEFF7491E9649A0008F2C7F /* IphoneNewAddSceneVC.m */; };
 		2EFB6B591E665C440058F305 /* UITabBar+BadgeValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB6B581E665C440058F305 /* UITabBar+BadgeValue.m */; };
 		2EFFECA11E12161100C13D3E /* FixTimeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFFECA01E12161100C13D3E /* FixTimeListViewController.m */; };
 		CD43046F1E0B674000B594F4 /* FamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD43046E1E0B674000B594F4 /* FamilyViewController.m */; };
@@ -822,6 +823,8 @@
 		2EEE536C1E309C5D0026F97D /* MyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyView.h; sourceTree = "<group>"; };
 		2EEE536D1E309C5D0026F97D /* MyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyView.m; sourceTree = "<group>"; };
 		2EEE536F1E309E510026F97D /* CGLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGLine.h; sourceTree = "<group>"; };
+		2EEFF7481E9649A0008F2C7F /* IphoneNewAddSceneVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneNewAddSceneVC.h; sourceTree = "<group>"; };
+		2EEFF7491E9649A0008F2C7F /* IphoneNewAddSceneVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneNewAddSceneVC.m; sourceTree = "<group>"; };
 		2EFB6B571E665C440058F305 /* UITabBar+BadgeValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+BadgeValue.h"; sourceTree = "<group>"; };
 		2EFB6B581E665C440058F305 /* UITabBar+BadgeValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+BadgeValue.m"; sourceTree = "<group>"; };
 		2EFFEC9F1E12161100C13D3E /* FixTimeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixTimeListViewController.h; sourceTree = "<group>"; };
@@ -1887,17 +1890,8 @@
 		2E12CC131E7FC00A00C7D006 /* SceneViewController */ = {
 			isa = PBXGroup;
 			children = (
-				2E8AC52D1E7BAE350002E717 /* FirstViewController.h */,
-				2E8AC52E1E7BAE350002E717 /* FirstViewController.m */,
-				2E12CC081E7F5DC400C7D006 /* FirstSceneViewController.h */,
-				2E12CC091E7F5DC400C7D006 /* FirstSceneViewController.m */,
-				2E12CC141E7FC04800C7D006 /* IphoneNewEditSceneController.h */,
-				2E12CC151E7FC04800C7D006 /* IphoneNewEditSceneController.m */,
-				2E12CC0B1E7F5E3000C7D006 /* CYLineLayout.h */,
-				2E12CC0C1E7F5E3000C7D006 /* CYLineLayout.m */,
-				2E12CC0D1E7F5E3000C7D006 /* CYPhotoCell.h */,
-				2E12CC0E1E7F5E3000C7D006 /* CYPhotoCell.m */,
-				2E12CC0F1E7F5E3000C7D006 /* CYPhotoCell.xib */,
+				2EEFF7471E96495D008F2C7F /* Controller */,
+				2EEFF7461E96494C008F2C7F /* View */,
 			);
 			name = SceneViewController;
 			sourceTree = "<group>";
@@ -2036,6 +2030,33 @@
 				2EBE210E1E497595003D53A4 /* ForgotViewController.m */,
 			);
 			name = WebViewManger;
+			sourceTree = "<group>";
+		};
+		2EEFF7461E96494C008F2C7F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2E12CC0B1E7F5E3000C7D006 /* CYLineLayout.h */,
+				2E12CC0C1E7F5E3000C7D006 /* CYLineLayout.m */,
+				2E12CC0D1E7F5E3000C7D006 /* CYPhotoCell.h */,
+				2E12CC0E1E7F5E3000C7D006 /* CYPhotoCell.m */,
+				2E12CC0F1E7F5E3000C7D006 /* CYPhotoCell.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		2EEFF7471E96495D008F2C7F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2E8AC52D1E7BAE350002E717 /* FirstViewController.h */,
+				2E8AC52E1E7BAE350002E717 /* FirstViewController.m */,
+				2E12CC081E7F5DC400C7D006 /* FirstSceneViewController.h */,
+				2E12CC091E7F5DC400C7D006 /* FirstSceneViewController.m */,
+				2E12CC141E7FC04800C7D006 /* IphoneNewEditSceneController.h */,
+				2E12CC151E7FC04800C7D006 /* IphoneNewEditSceneController.m */,
+				2EEFF7481E9649A0008F2C7F /* IphoneNewAddSceneVC.h */,
+				2EEFF7491E9649A0008F2C7F /* IphoneNewAddSceneVC.m */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		5CEAD34143E7289FAFA6E86D /* Pods */ = {
@@ -2757,6 +2778,7 @@
 				F62E05661DAB68620096BF00 /* IphoneEditSceneController.m in Sources */,
 				F60E71CA1D796BE6008863DB /* AmplifierController.m in Sources */,
 				F60FDB461D003FD500AB04BE /* CurtainTableViewCell.m in Sources */,
+				2EEFF74A1E9649A0008F2C7F /* IphoneNewAddSceneVC.m in Sources */,
 				F65AF6DA1D3375700048A4E5 /* ProfileFaultsCell.m in Sources */,
 				F646C0B91D91173000DF1728 /* IphoneRoomView.m in Sources */,
 				0FABF91F1D06AA4E000892D8 /* DVDController.m in Sources */,
