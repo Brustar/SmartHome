@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -213,8 +214,75 @@
             </objects>
             <point key="canvasLocation" x="445.60000000000002" y="-327.88605697151428"/>
         </scene>
+        <!--Iphone New Add SceneVC-->
+        <scene sceneID="6l3-TN-Glu">
+            <objects>
+                <viewController storyboardIdentifier="IphoneNewAddSceneVC" id="WkZ-Nj-tZr" customClass="IphoneNewAddSceneVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EQr-dY-ltZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="xk9-h2-t7S"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UuN-gu-S6d">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="11W-LL-2vy">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ek-vt-ryo" customClass="IphoneRoomView">
+                                <rect key="frame" x="36" y="0.0" width="303" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="hpI-6T-3ry"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="frame01" translatesAutoresizingMaskIntoConstraints="NO" id="HCK-RI-Hb4">
+                                <rect key="frame" x="36" y="0.0" width="303" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="QM6-gR-sXY"/>
+                                </constraints>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="A7h-2x-arC">
+                                <rect key="frame" x="36" y="60" width="303" height="607"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="WkZ-Nj-tZr" id="mQ1-I2-xgr"/>
+                                    <outlet property="delegate" destination="WkZ-Nj-tZr" id="JFG-a0-dlo"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="A7h-2x-arC" firstAttribute="leading" secondItem="UuN-gu-S6d" secondAttribute="leadingMargin" constant="20" id="9os-67-MHa"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="HCK-RI-Hb4" secondAttribute="trailing" constant="20" id="Bcr-iO-bN8"/>
+                            <constraint firstItem="xk9-h2-t7S" firstAttribute="top" secondItem="11W-LL-2vy" secondAttribute="bottom" id="EXG-Bx-cMH"/>
+                            <constraint firstItem="2ek-vt-ryo" firstAttribute="top" secondItem="UuN-gu-S6d" secondAttribute="topMargin" id="F6O-Ny-0w7"/>
+                            <constraint firstItem="2ek-vt-ryo" firstAttribute="leading" secondItem="UuN-gu-S6d" secondAttribute="leadingMargin" constant="20" id="FL0-yw-4fH"/>
+                            <constraint firstItem="11W-LL-2vy" firstAttribute="leading" secondItem="UuN-gu-S6d" secondAttribute="leading" id="HV2-RF-uIP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="A7h-2x-arC" secondAttribute="trailing" constant="20" id="SEs-5G-kDo"/>
+                            <constraint firstItem="11W-LL-2vy" firstAttribute="top" secondItem="UuN-gu-S6d" secondAttribute="top" id="UAG-4V-6HV"/>
+                            <constraint firstItem="xk9-h2-t7S" firstAttribute="top" secondItem="A7h-2x-arC" secondAttribute="bottom" id="XRJ-gQ-Hty"/>
+                            <constraint firstAttribute="trailing" secondItem="11W-LL-2vy" secondAttribute="trailing" id="fIf-jP-O6s"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2ek-vt-ryo" secondAttribute="trailing" constant="20" id="rKL-ym-4VW"/>
+                            <constraint firstItem="A7h-2x-arC" firstAttribute="top" secondItem="HCK-RI-Hb4" secondAttribute="bottom" id="rhA-aa-rsK"/>
+                            <constraint firstItem="HCK-RI-Hb4" firstAttribute="top" secondItem="UuN-gu-S6d" secondAttribute="topMargin" id="vys-sH-awq"/>
+                            <constraint firstItem="HCK-RI-Hb4" firstAttribute="leading" secondItem="UuN-gu-S6d" secondAttribute="leadingMargin" constant="20" id="zPf-bp-PKn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="RoomView" destination="2ek-vt-ryo" id="12c-iW-ytl"/>
+                        <outlet property="tableView" destination="A7h-2x-arC" id="xrK-eS-kFO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PT4-Xv-i57" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1133.5999999999999" y="-305.39730134932535"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="background" width="375" height="667"/>
+        <image name="frame01" width="375" height="48"/>
         <image name="kaiqi.png" width="32" height="32"/>
     </resources>
 </document>

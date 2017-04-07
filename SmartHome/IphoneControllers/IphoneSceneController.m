@@ -99,7 +99,7 @@ static NSString * const CYPhotoId = @"photo";
     // 创建CollectionView
     CGFloat collectionW = self.view.frame.size.width;
     CGFloat collectionH = self.view.frame.size.height-350;
-    CGRect frame = CGRectMake(0, 115, collectionW, collectionH);
+    CGRect frame = CGRectMake(0, 130, collectionW, collectionH);
     // 创建布局
     CYLineLayout *layout = [[CYLineLayout alloc] init];
     layout.itemSize = CGSizeMake(collectionW-110, collectionH-20);
