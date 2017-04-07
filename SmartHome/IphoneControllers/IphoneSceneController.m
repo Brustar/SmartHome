@@ -102,7 +102,7 @@ static NSString * const CYPhotoId = @"photo";
     CGRect frame = CGRectMake(0, 130, collectionW, collectionH);
     // 创建布局
     CYLineLayout *layout = [[CYLineLayout alloc] init];
-    layout.itemSize = CGSizeMake(collectionW-110, collectionH-20);
+    layout.itemSize = CGSizeMake(collectionW-90, collectionH-20);
     self.FirstCollectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
     self.FirstCollectionView.backgroundColor = [UIColor clearColor];
     self.FirstCollectionView.dataSource = self;
