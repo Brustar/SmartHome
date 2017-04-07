@@ -14,16 +14,15 @@
 - (void)iphoneRoomView:(UIView *)view didSelectButton:(int)index;
 
 @end
-@interface IphoneRoomView : UIView
-@property (nonatomic,strong) UIScrollView *sv;
 
+@interface IphoneRoomView : UIView
+
+@property (nonatomic,strong) UIScrollView *sv;
 
 @property (nonatomic, strong) NSArray *dataArray;
 
-
 - (void)setSelectButton:(int)index;
 
-
 @property (nonatomic, weak) id<IphoneRoomViewDelegate> delegate;
-;
+
 @end
