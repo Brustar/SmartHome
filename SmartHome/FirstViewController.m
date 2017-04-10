@@ -62,8 +62,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.FourBtnView.userInteractionEnabled = YES;
-    _SubImageView.layer.cornerRadius = _SubImageView.bounds.size.height/2; //圆角半径
-    _SubImageView.layer.masksToBounds = YES; //圆角
+//    _SubImageView.layer.cornerRadius = _SubImageView.bounds.size.height/2; //圆角半径
+//    _SubImageView.layer.masksToBounds = YES; //圆角
     _IconeImageView.layer.masksToBounds = YES;
     _IconeImageView.layer.cornerRadius = _IconeImageView.bounds.size.height/2;
     _numberLabelView.layer.masksToBounds = YES;

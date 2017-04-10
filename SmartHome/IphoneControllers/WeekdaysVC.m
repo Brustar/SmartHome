@@ -7,6 +7,7 @@
 //
 
 #import "WeekdaysVC.h"
+#import "WeekDaysCell.h"
 
 @interface WeekdaysVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -33,6 +34,7 @@
 {
     static NSString *ID = @"cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    cell.backgroundColor = [UIColor clearColor];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
     }
