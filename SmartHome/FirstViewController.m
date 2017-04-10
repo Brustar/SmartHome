@@ -71,9 +71,15 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doTap:)];
      UITapGestureRecognizer *Headtap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(HeadDoTap:)];
     _HeadImageView.userInteractionEnabled = YES;
+
     
     [_HeadImageView addGestureRecognizer:Headtap];
-    
+    _calenderDayLabel.adjustsFontSizeToFitWidth = YES;
+    _calenderYearLabel.adjustsFontSizeToFitWidth = YES;
+    _calenderMonthLabel.adjustsFontSizeToFitWidth = YES;
+    _markedWordsLabel.adjustsFontSizeToFitWidth = YES;
+    _TakeTurnsWordsLabel.adjustsFontSizeToFitWidth = YES;
+   
     // 允许用户交互
     _SubImageView.userInteractionEnabled = YES;
     _subView.userInteractionEnabled = YES;
