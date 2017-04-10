@@ -55,7 +55,7 @@
 //            [button setTitleColor:[UIColor colorWithRed:80/255.0 green:183/255.0 blue:226/255.0 alpha:1] forState:UIControlStateDisabled];
             [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [button setBackgroundImage:[UIImage imageNamed:@"Scene-bedroomJJ"] forState:UIControlStateNormal];
-            [button setBackgroundImage:[UIImage imageNamed:@"Scene-bedroom_05_2"] forState:UIControlStateDisabled];
+            [button setBackgroundImage:[UIImage imageNamed:@"choose"] forState:UIControlStateDisabled];
             button.titleLabel.font = [UIFont systemFontOfSize:15];
             [self.btns addObject:button];
             [self.sv addSubview:button];

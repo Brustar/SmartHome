@@ -42,7 +42,8 @@
 @property (nonatomic,assign) int roomID;
 @property (nonatomic,strong) NSArray *roomList;
 @property (nonatomic,strong) UIButton *selectedRoomBtn;
-@property (nonatomic,strong) NSArray *scenes;
+//@property (nonatomic,strong) NSArray *scenes;
+@property (nonatomic,strong)NSMutableArray *scenes;
 @property (nonatomic, assign) int roomIndex;
 @property (nonatomic,assign) int selectedSId;
 @property (nonatomic ,strong) CYPhotoCell *cell;
@@ -102,7 +103,7 @@ static NSString * const CYPhotoId = @"photo";
     CGRect frame = CGRectMake(0, 130, collectionW, collectionH);
     // 创建布局
     CYLineLayout *layout = [[CYLineLayout alloc] init];
-    layout.itemSize = CGSizeMake(collectionW-110, collectionH-20);
+    layout.itemSize = CGSizeMake(collectionW-90, collectionH-20);
     self.FirstCollectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
     self.FirstCollectionView.backgroundColor = [UIColor clearColor];
     self.FirstCollectionView.dataSource = self;
@@ -159,8 +160,12 @@ static NSString * const CYPhotoId = @"photo";
     
     self.roomID = [dict[@"subType"] intValue];
     
-    self.scenes = [SQLManager getScensByRoomId:self.roomID];
-    
+//    self.scenes = [SQLManager getScensByRoomId:self.roomID];
+    NSArray *tmpArr = [SQLManager getScensByRoomId:self.roomID];
+    [self.scenes removeAllObjects];
+    [self.scenes addObjectsFromArray:tmpArr];
+    NSString *imageName = @"i-add";
+    [self.scenes addObject:imageName];
 //    [self setUpSceneButton];
 //    [self judgeScensCount:self.scenes];
     
@@ -187,7 +192,13 @@ static NSString * const CYPhotoId = @"photo";
 {
     self.roomIndex = index;
     Room *room = self.roomList[index];
-    self.scenes = [SQLManager getScensByRoomId:room.rId];
+//    self.scenes = [SQLManager getScensByRoomId:room.rId];
+    NSArray *tmpArr = [SQLManager getScensByRoomId:room.rId];
+    [self.scenes removeAllObjects];
+    [self.scenes addObjectsFromArray:tmpArr];
+    NSString *imageName = @"i-add";
+    [self.scenes addObject:imageName];
+
     [self.FirstCollectionView reloadData];
     
 }
@@ -195,7 +206,14 @@ static NSString * const CYPhotoId = @"photo";
 {
     [super viewWillAppear:YES];
     Room *room = self.roomList[self.roomIndex];
-    self.scenes = [SQLManager getScensByRoomId:room.rId];
+//    self.scenes = [SQLManager getScensByRoomId:room.rId];
+    
+    NSArray *tmpArr = [SQLManager getScensByRoomId:room.rId];
+    [self.scenes removeAllObjects];
+    [self.scenes addObjectsFromArray:tmpArr];
+    NSString *imageName = @"i-add";
+    [self.scenes addObject:imageName];
+
     [self.FirstCollectionView reloadData];
 
 }
@@ -227,25 +245,38 @@ static NSString * const CYPhotoId = @"photo";
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
-    self.cell = cell;
-    self.scene = self.scenes[indexPath.row];
-    if (self.scenes.count == 0) {
-    [MBProgressHUD showSuccess:@"暂时没有全屋场景"];
+    if (indexPath.row+1 >= self.scenes.count) {
+        CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
+        self.cell = cell;
+        
+        cell.imageView.image = [UIImage imageNamed:@"AddScene-ImageView"];
+        cell.subImageView.image = [UIImage imageNamed:@"AddSceneBtn"];
+        
+        return cell;
+    }else{
+        CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
+        self.cell = cell;
+        self.scene = self.scenes[indexPath.row];
+        if (self.scenes.count == 0) {
+            [MBProgressHUD showSuccess:@"暂时没有全屋场景"];
+        }
+        self.selectedSId = self.scene.sceneID;
+        cell.sceneID = self.scene.sceneID;
+        cell.subImageView.image = [UIImage imageNamed:@"Scene-bedroomTSQ"];
+        cell.tag = self.scene.sceneID;
+        cell.sceneLabel.text = self.scene.sceneName;
+        self.lgPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
+        self.lgPress.delegate = self;
+        [cell addGestureRecognizer:self.lgPress];
+        self.SceneNameLabel.tag = self.scene.sceneID;
+        self.SceneNameLabel.text = cell.sceneLabel.text;
+        [cell.imageView sd_setImageWithURL:[NSURL URLWithString: self.scene.picName] placeholderImage:[UIImage imageNamed:@"PL"]];
+        [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];
+        
+        return cell;
+       
     }
-    self.selectedSId = self.scene.sceneID;
-    cell.sceneID = self.scene.sceneID;
-    cell.tag = self.scene.sceneID;
-    cell.sceneLabel.text = self.scene.sceneName;
-    self.lgPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
-    self.lgPress.delegate = self;
-    [cell addGestureRecognizer:self.lgPress];
-    self.SceneNameLabel.tag = self.scene.sceneID;
-    self.SceneNameLabel.text = cell.sceneLabel.text;
-    [cell.imageView sd_setImageWithURL:[NSURL URLWithString: self.scene.picName] placeholderImage:[UIImage imageNamed:@"PL"]];
-    [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];
-   
-    return cell;
+    
 }
 -(void)handleLongPress:(UILongPressGestureRecognizer *)lgr
 {
@@ -315,21 +346,24 @@ static NSString * const CYPhotoId = @"photo";
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    Scene *scene = self.scenes[indexPath.row];
-    self.selectedSId = scene.sceneID;
-    
-    CYPhotoCell *cell = (CYPhotoCell*)[collectionView cellForItemAtIndexPath:indexPath];
-    
-    [cell useLongPressGesture];
-    if(cell.deleteBtn.hidden)
-    {
-         cell.deleteBtn.hidden = YES;
-        
-    }else{
-        
-        [self performSegueWithIdentifier:@"iphoneEditSegue" sender:self];
-        [[SceneManager defaultManager] startScene:scene.sceneID];
-    }
+     if (indexPath.row+1 >= self.scenes.count) {
+         [self performSegueWithIdentifier:@"iphoneAddSceneSegue" sender:self];
+     }else{
+         Scene *scene = self.scenes[indexPath.row];
+         self.selectedSId = scene.sceneID;
+         CYPhotoCell *cell = (CYPhotoCell*)[collectionView cellForItemAtIndexPath:indexPath];
+         [cell useLongPressGesture];
+         if(cell.deleteBtn.hidden)
+         {
+             cell.deleteBtn.hidden = YES;
+             
+         }else{
+             
+             [self performSegueWithIdentifier:@"iphoneEditSegue" sender:self];
+             [[SceneManager defaultManager] startScene:scene.sceneID];
+         }
+     }
+  
 }
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
     return UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
@@ -381,7 +415,7 @@ static NSString * const CYPhotoId = @"photo";
     self.SceneNameLabel.text = self.scene.sceneName;
     self.delegateBtn.selected = !self.delegateBtn.selected;
     if (self.delegateBtn.selected) {
-        [self.delegateBtn setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateSelected];
+        [self.delegateBtn setImage:[UIImage imageNamed:@"delete2"] forState:UIControlStateSelected];
         
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"是否删除“%@”场景？",self.SceneNameLabel.text] preferredStyle:UIAlertControllerStyleAlert];
         
@@ -403,7 +437,7 @@ static NSString * const CYPhotoId = @"photo";
         
         [self presentViewController:alert animated:YES completion:nil];
     }else{
-        [self.delegateBtn setImage:[UIImage imageNamed:@"delete2"] forState:UIControlStateNormal];
+        [self.delegateBtn setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
        
     }
 }
@@ -413,7 +447,7 @@ static NSString * const CYPhotoId = @"photo";
     self.sceneID = self.scene.sceneID;
     self.startBtn.selected = !self.startBtn.selected;
     if (self.startBtn.selected) {
-        [self.startBtn setImage:[UIImage imageNamed:@"Scene-close1"] forState:UIControlStateSelected];
+        [self.startBtn setImage:[UIImage imageNamed:@"close1"] forState:UIControlStateSelected];
         [[SceneManager defaultManager] startScene:self.sceneID];
          [SQLManager updateSceneStatus:1 sceneID:self.sceneID];//更新数据库
     }else{
@@ -446,7 +480,12 @@ static NSString * const CYPhotoId = @"photo";
         {
             [MBProgressHUD showSuccess:@"场景删除成功"];
             Room *room = self.roomList[self.roomIndex];
-            self.scenes = [SQLManager getScensByRoomId:room.rId];
+//            self.scenes = [SQLManager getScensByRoomId:room.rId];
+            NSArray *tmpArr = [SQLManager getScensByRoomId:room.rId];
+            [self.scenes removeAllObjects];
+            [self.scenes addObjectsFromArray:tmpArr];
+            NSString *imageName = @"i-add";
+            [self.scenes addObject:imageName];
             [self.collectionView reloadData];
             
             if([responseObject[@"result"] intValue] == 0)
@@ -501,6 +540,16 @@ static NSString * const CYPhotoId = @"photo";
         [theSegue setValue:[NSNumber numberWithInt:room.rId] forKey:@"roomID"];
     }
     
+}
+
+#pragma mark -- lazy load
+-(NSMutableArray *)scenes{
+    if (!_scenes) {
+        _scenes = [NSMutableArray new];
+        NSString *imageName = @"AddSceneBtn";
+        [_scenes addObject:imageName];
+    }
+    return _scenes;
 }
 
 @end
