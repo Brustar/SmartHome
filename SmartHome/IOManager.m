@@ -9,6 +9,7 @@
 #import "IOManager.h"
 #import <CommonCrypto/CommonCryptor.h>
 #import <CommonCrypto/CommonDigest.h>
+#import <RegexKitLite/RegexKitLite.h>
 
 @implementation IOManager
 
@@ -104,15 +105,13 @@
     NSAssert(ret,@"写文件失败");
 }
 
-+ (void) writeScene:(NSString *)sceneFile scene:(Scene *)sceneData
++ (void) writeScene:(NSString *)sceneFile scene:(id)sceneData
 {
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
     NSDictionary *dic = [PrintObject getObjectData:sceneData];
     BOOL ret = [dic writeToFile:scenePath atomically:YES];
 //    NSAssert(ret,@"写文件失败");
 }
-
-
 
 + (void) writeJpg:(UIImage *)jpg path:(NSString *)jpgPath
 {
@@ -177,6 +176,36 @@
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     return [ud objectForKey:key];
+}
+
++ (NSString *) md5JsonByScenes:(NSString *)master
+{
+    NSString *temp = @"{";
+    NSString *path =  [self scenesPath];
+    NSFileManager *myFileManager=[NSFileManager defaultManager];
+    
+    NSDirectoryEnumerator *myDirectoryEnumerator;
+    
+    myDirectoryEnumerator=[myFileManager enumeratorAtPath:path];
+    
+    //列举目录内容，可以遍历子目录
+    while((path=[myDirectoryEnumerator nextObject])!=nil)
+    {
+  
+        if([path isMatchedByRegex:[NSString stringWithFormat:@"%@_\\d+\\.plist",master]])
+        {
+            NSLog(@"%@",path);
+            temp =[temp stringByAppendingString:[NSString stringWithFormat:@"\"%@\":",path]];
+            temp =[temp stringByAppendingString:[self fileMD5:[[self scenesPath] stringByAppendingPathComponent:path]]];
+            temp =[temp stringByAppendingString:@","];
+        }
+    }
+    
+    if ([temp length]>1) {
+        temp =[temp substringToIndex:temp.length-1];
+    }
+    
+    return [temp stringByAppendingString:@"}"];
 }
 
 + (NSString*) fileMD5:(NSString*)path

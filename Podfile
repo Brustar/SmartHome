@@ -1,4 +1,5 @@
 platform :ios, '9.0'
+#use_frameworks!
 
 target 'SmartHome' do
 	pod 'AFNetworking'
@@ -19,5 +20,7 @@ target 'SmartHome' do
     	pod 'RongCloudIMKit'
 	pod "FSLineChart"
 	pod 'libWeChatSDK', '~>1.5'
-    pod 'ShareSDK3/ShareSDKPlatforms/WeChat'
+	pod 'AliPay', '~> 2.1.2'
+    #pod 'ReactiveCocoa', '~> 5.0.0'
+    pod 'ReactiveCocoa', '~> 2.5'
 end

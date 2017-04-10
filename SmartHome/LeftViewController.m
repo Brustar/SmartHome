@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    _itemArray = @[@"我的故障",@"我的保修记录",@"我的能耗",@"我的收藏",@"我的消息",@"我的设置",@"我的家庭成员"];
+    _itemArray = @[@"我的故障",@"我的保修记录",@"我的能耗",@"我的收藏",@"我的消息",@"我的家庭成员",@"首页场景快捷键",@"我的设置"];
     
     UIImageView *imageview = [[UIImageView alloc] initWithFrame:self.view.bounds];
     imageview.image = [UIImage imageNamed:@"leftbackiamge"];
@@ -33,8 +33,6 @@
 
 
 }
-
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _itemArray.count;
 }
@@ -58,6 +56,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIStoryboard *iPhoneStoryBoard  = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+    UIStoryboard *MyInfoStoryBoard  = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate.LeftSlideVC closeLeftView];//关闭左侧抽屉
     
@@ -93,6 +92,10 @@
         
     }else if ([item isEqualToString:@"我的家庭成员"]) {
         [MBProgressHUD showError:@"开发中"];
+    }else if ([item isEqualToString:@"首页场景快捷键"]){
+        ShortcutKeyViewController *ShortcutKeyVC = [MyInfoStoryBoard instantiateViewControllerWithIdentifier:@"ShortcutKeyViewController"];
+        ShortcutKeyVC.hidesBottomBarWhenPushed = YES;
+        [appDelegate.mainTabBarController.selectedViewController pushViewController:ShortcutKeyVC animated:YES];
     }
     
 }
@@ -108,6 +111,7 @@
     view.backgroundColor = [UIColor clearColor];
     
     
+<<<<<<< HEAD
     UIButton *headButton = [UIButton buttonWithType:UIButtonTypeCustom];
     headButton.frame = CGRectMake(CGRectGetWidth(view.frame)/2-25, 40, 50, 50);
     headButton.layer.cornerRadius = 25;
@@ -117,6 +121,15 @@
     
     
     UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(headButton.frame)+5, tableView.bounds.size.width, 20)];
+=======
+    UIButton *imageButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    imageButton.frame = CGRectMake(CGRectGetWidth(view.frame)/2-25, 40, 50, 50);
+    imageButton.layer.cornerRadius = 25;
+    [imageButton setBackgroundImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
+    [view addSubview:imageButton];
+    [imageButton addTarget:self action:@selector(imgButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(imageButton.frame)+5, tableView.bounds.size.width, 20)];
+>>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
     nameLabel.text = [UD objectForKey:@"UserName"];
     nameLabel.textColor = [UIColor whiteColor];
     nameLabel.textAlignment = NSTextAlignmentCenter;

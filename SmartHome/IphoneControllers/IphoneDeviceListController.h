@@ -11,6 +11,6 @@
 @interface IphoneDeviceListController : UIViewController
 
 -(void)goDeviceByRoomID:(int)roomID typeName:(NSString *)typeName;
-
+@property (nonatomic,strong) Scene *scene;
 
 @end

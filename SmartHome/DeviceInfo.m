@@ -332,6 +332,16 @@
 }
 
 #pragma mark - TV
+-(NSData *) nextProgram:(NSString *)deviceID
+{
+    return [self action:0x18 deviceID:deviceID];
+}
+
+-(NSData *) previousProgram:(NSString *)deviceID
+{
+    return [self action:0x17 deviceID:deviceID];
+}
+
 -(NSData *) switchProgram:(uint8_t)program deviceID:(NSString *)deviceID
 {
     return [self action:0x3A deviceID:deviceID value:program];

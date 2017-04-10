@@ -95,7 +95,7 @@
     FixTimeListCell * cell = [tableView dequeueReusableCellWithIdentifier:@"FixTimeListCell" forIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     Scene * scene = self.AllsceneArr[indexPath.row];
-    cell.sceneNameLabel.text = [NSString stringWithFormat:@"%@-%@",[SQLManager getRoomNameByRoomID:scene.rID],scene.sceneName];
+    cell.sceneNameLabel.text = [NSString stringWithFormat:@"%@-%@",[SQLManager getRoomNameByRoomID:scene.roomID],scene.sceneName];
     for (NSDictionary * dict in scene.schedules) {
         NSString * startTime = dict[@"startTime"];
         NSString * endTime =   dict[@"endTime"];

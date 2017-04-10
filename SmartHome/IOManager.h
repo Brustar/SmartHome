@@ -27,7 +27,7 @@
 
 + (void) writeScene:(NSString *)sceneFile string:(NSString *)sceneData;
 + (void) writeScene:(NSString *)sceneFile dictionary:(NSDictionary *)sceneData;
-+ (void) writeScene:(NSString *)sceneFile scene:(Scene *)sceneData;
++ (void) writeScene:(NSString *)sceneFile scene:(id)sceneData;
 + (void) writeJpg:(UIImage *)jpg path:(NSString *)jpgPath;
 + (void) writePng:(UIImage *)png path:(NSString *)pngPath;
 + (BOOL) createTempFile;
@@ -35,6 +35,7 @@
 + (void) removeFile:(NSString *)file;
 + (void) removeTempFile;
 + (void) writeUserdefault:(id)object forKey:(NSString *)key;
-+ (NSString*) fileMD5:(NSString*)path;
++ (NSString *) fileMD5:(NSString*)path;
++ (NSString *) md5JsonByScenes:(NSString *)master;
 
 @end

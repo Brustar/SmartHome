@@ -9,10 +9,12 @@
 #import "IphoneSaveNewSceneController.h"
 #import "MBProgressHUD+NJ.h"
 #import "SceneManager.h"
+#import "KxMenu.h"
 
-
-@interface IphoneSaveNewSceneController ()
-@property (weak, nonatomic) IBOutlet UITextField *sceneName;
+@interface IphoneSaveNewSceneController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *sceneName;//输入场景名的输入框
+@property (weak, nonatomic) IBOutlet UIButton *sceneImageBtn;//选择场景图片的button
+@property (nonatomic,strong)UIImage *selectSceneImg;
 
 @end
 
@@ -21,6 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.sceneName setValue:[UIColor lightGrayColor] forKeyPath:@"_placeholderLabel.textColor"];
 }
 - (IBAction)storeNewScene:(id)sender {
     
@@ -36,11 +39,60 @@
     Scene *scene = [[Scene alloc]initWhithoutSchedule];
     [scene setValuesForKeysWithDictionary:plistDic];
     
-    [[SceneManager defaultManager] saveAsNewScene:scene withName:self.sceneName.text withPic:nil];
+    [[SceneManager defaultManager] saveAsNewScene:scene withName:self.sceneName.text withPic:self.selectSceneImg];
     [self.navigationController popViewControllerAnimated:YES];
 
 }
+- (IBAction)sceneImageBtn:(id)sender {
+    UIButton *btn = sender;
+    UIView *view = btn.superview;
+    CGFloat w = view.frame.size.width;
+    CGFloat h = view.frame.size.height;
+    CGFloat y = btn.frame.origin.y + btn.frame.size.height / 2 - 10;
+    CGFloat x = btn.center.x - w / 2 - 30;
+    [KxMenu showMenuInView:view fromRect:CGRectMake(x, y , w, h) menuItems:@[
+                                                                             [KxMenuItem menuItem:@"本地图库"
+                                                                                            image:nil
+                                                                                           target:self
+                                                                                           action:@selector(selectPhoto:)],
+                                                                             [KxMenuItem menuItem:@"现在拍摄"
+                                                                                            image:nil
+                                                                                           target:self
+                                                                                           action:@selector(takePhoto:)],
+                                                                             ]];
+}
+- (void)selectPhoto:(KxMenuItem *)item {
+    [DeviceInfo defaultManager].isPhotoLibrary = YES;
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [picker shouldAutorotate];
+    [picker supportedInterfaceOrientations];
+    [self presentViewController:picker animated:YES completion:NULL];
+}
 
+- (void)takePhoto:(KxMenuItem *)item {
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+    [DeviceInfo defaultManager].isPhotoLibrary = NO;
+    self.selectSceneImg = info[UIImagePickerControllerEditedImage];
+    [self.sceneImageBtn setBackgroundImage:self.selectSceneImg forState:UIControlStateNormal];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [DeviceInfo defaultManager].isPhotoLibrary = NO;
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
 - (IBAction)clickCancle:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
