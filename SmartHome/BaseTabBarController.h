@@ -11,8 +11,10 @@
 #import "IphoneFamilyViewController.h"
 #import "FirstViewController.h"
 #import "FirstSceneViewController.h"
+#import "TabbarPanel.h"
 
-@interface BaseTabBarController : UITabBarController
+@interface BaseTabBarController : UITabBarController<TabbarPanelDelegate>
 
+@property(nonatomic, strong) TabbarPanel *tabbarPanel;
 
 @end

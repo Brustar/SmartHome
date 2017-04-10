@@ -132,7 +132,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupSlideButton];
+    //[self setupSlideButton];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.rooms = [SQLManager getAllRoomsInfo];

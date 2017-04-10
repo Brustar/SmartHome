@@ -197,11 +197,27 @@ static NSString * const CYPhotoId = @"photo";
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:YES];
+    [super viewWillAppear:animated];
     Room *room = self.roomList[self.roomIndex];
     self.scenes = [SQLManager getScensByRoomId:room.rId];
     [self.FirstCollectionView reloadData];
+    
+    BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
+    baseTabbarController.tabbarPanel.hidden = NO;
+    baseTabbarController.tabBar.hidden = YES;
+}
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
+    baseTabbarController.tabbarPanel.hidden = YES;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
+    baseTabbarController.tabbarPanel.hidden = NO;
+    baseTabbarController.tabBar.hidden = YES;
 }
 
 

@@ -8,7 +8,7 @@
 
 #import "FirstViewController.h"
 #import "AppDelegate.h"
-#import "IphoneFamilyViewController.h"
+#import "FamilyHomeViewController.h"
 #import "SocketManager.h"
 #import "SceneManager.h"
 #import "BgMusic.h"
@@ -53,6 +53,27 @@
 
     return _dataArr;
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
+    baseTabbarController.tabbarPanel.hidden = NO;
+    baseTabbarController.tabBar.hidden = YES;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
+    baseTabbarController.tabbarPanel.hidden = NO;
+    baseTabbarController.tabBar.hidden = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
+    baseTabbarController.tabbarPanel.hidden = YES;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -111,8 +132,9 @@
 }
 -(void)doTap:(UITapGestureRecognizer *)tap
 {
-        UIStoryboard *iPhoneStoryBoard  = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-        IphoneFamilyViewController *familyVC = [iPhoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneFamilyViewController"];
+        UIStoryboard *iPhoneStoryBoard  = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
+        FamilyHomeViewController *familyVC = [iPhoneStoryBoard instantiateViewControllerWithIdentifier:@"familyHomeVC"];
+         familyVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:familyVC animated:YES];
 
 }

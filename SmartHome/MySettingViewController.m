@@ -266,8 +266,9 @@
                 [http sendPost:url param:dict];
             }else{
                 //跳转到欢迎页
-                self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
-                [self performSegueWithIdentifier:@"goWelcomeSegue" sender:self];
+                //self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
+                //[self performSegueWithIdentifier:@"goWelcomeSegue" sender:self];
+                [self gotoLoginViewController];
             }
 
         }else{
@@ -288,12 +289,22 @@
             [http sendPost:url param:dict];
         }else{
             //跳转到欢迎页
-            self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
-            [self performSegueWithIdentifier:@"goWelcomeSegue" sender:self];
+            //self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
+            //[self performSegueWithIdentifier:@"goWelcomeSegue" sender:self];
+            [self gotoLoginViewController];
         }
     }
 
 }
+
+- (void)gotoLoginViewController {
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+    UIViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"loginNavController"];//进入登录页面
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    appDelegate.window.rootViewController = vc;
+    [appDelegate.window makeKeyAndVisible];
+}
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if([segue.identifier isEqualToString:@"goWelcomeSegue"])
@@ -311,8 +322,12 @@
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"AuthorToken"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [[SocketManager defaultManager] cutOffSocket];
-            self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
-            [self performSegueWithIdentifier:@"goLogin" sender:self];
+            
+            
+            //self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
+            //[self performSegueWithIdentifier:@"goLogin" sender:self];
+            
+            [self gotoLoginViewController];
             
             
         }else {

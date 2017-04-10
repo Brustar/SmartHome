@@ -21,12 +21,18 @@
 #import "IphoneFavorController.h"
 #import "IphoneFamilyViewController.h"
 #import "IphoneTabBarViewController.h"
+#import "WXApi.h"
+#import "WeChatPayManager.h"
 //#import <RongIMKit/RongIMKit.h>
 //#import "RCDataManager.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    //注册微信
+    [WXApi registerApp:@"wxc5cab7f2a6ed90b3" withDescription:@"EcloudApp2.1"];
+    
     //app未开启时处理推送
     if (launchOptions) {
         //截取apns推送的消息
@@ -46,7 +52,7 @@
     // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+        UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
 
         //已登录时,自动登录
         if ([[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]) {
@@ -57,7 +63,7 @@
             self.window.rootViewController = self.LeftSlideVC;
 
         }else {
-            UIViewController *vc = [secondStoryBoard instantiateViewControllerWithIdentifier:@"main"];//未登录，进欢迎页面WelcomeController
+            UIViewController *vc = [secondStoryBoard instantiateViewControllerWithIdentifier:@"loginNavController"];//未登录，进入登录页面
             self.window.rootViewController = vc;
         }
         
@@ -260,6 +266,11 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    
+   return  [WXApi handleOpenURL:url delegate:[WeChatPayManager sharedInstance]];
 }
 
 -(void)dealloc

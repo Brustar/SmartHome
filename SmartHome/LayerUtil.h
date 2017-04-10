@@ -10,6 +10,8 @@
 
 @interface LayerUtil : NSObject
 
-+(void) createRing:(CGFloat)radius pos:(CGPoint)pos colors:(NSArray *)colors container:(UIView *)view;
++ (void)createRing:(CGFloat)radius pos:(CGPoint)pos colors:(NSArray *)colors container:(UIView *)view;
+
++ (void)createRingForPM25:(CGFloat)radius pos:(CGPoint)pos colors:(NSArray *)colors pm25Value:(CGFloat)pm25Value container:(UIView *)view;
 
 @end

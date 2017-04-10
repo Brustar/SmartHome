@@ -19,17 +19,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    
     //创建子控制器
     [self createSubCtrls];
+    //创建TabbarPanel
+    [self createTabbarPanel];
+}
+
+- (void)createTabbarPanel {
     
+    self.tabBar.hidden = YES;
+    
+    CGFloat panelHeight = 80;
+    _tabbarPanel = [[TabbarPanel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-panelHeight, UI_SCREEN_WIDTH, panelHeight)];
+    _tabbarPanel.delegate = self;
+    [self.view addSubview:_tabbarPanel];
 }
 
 - (void)createSubCtrls{
     //修改下面文字大小和颜色
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:11],NSFontAttributeName,[UIColor grayColor],NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+    /*[[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:11],NSFontAttributeName,[UIColor grayColor],NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
     
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:11],NSFontAttributeName,[UIColor colorWithRed:44/255.0 green:185/255.0 blue:176/255.0 alpha:1],NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:11],NSFontAttributeName,[UIColor colorWithRed:44/255.0 green:185/255.0 blue:176/255.0 alpha:1],NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];*/
     
     //iPhone故事板
     UIStoryboard *iPhoneStoryBoard  = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
@@ -43,7 +53,7 @@
     UIImage *image = [[UIImage imageNamed:@"icon_tabbar_mine"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIImage *selectImage = [[UIImage imageNamed:@"icon_tabbar_mine_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 
-    deviceListVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"设备" image:image  selectedImage:selectImage];
+   // deviceListVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"设备" image:image  selectedImage:selectImage];
 
     //HOME
     IphoneFamilyViewController *familyVC;
@@ -56,14 +66,14 @@
     UIImage *image1 = [[UIImage imageNamed:@"icon_tabbar_homepage"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIImage *selectImage1 = [[UIImage imageNamed:@"icon_tabbar_homepage_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 
-    familyVC.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"HOME" image:image1 selectedImage:selectImage1];
+    //familyVC.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"HOME" image:image1 selectedImage:selectImage1];
 
     //场景
     IphoneSceneController *sceneVC = [iPhoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
 //    FirstSceneViewController * sceneVC = [SceneStoryBoard instantiateViewControllerWithIdentifier:@"FirstSceneViewController"];
     UIImage *image2 = [[UIImage imageNamed:@"icon_tabbar_merchant_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIImage *selectImage2 = [[UIImage imageNamed:@"icon_tabbar_merchant_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    sceneVC.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"场景" image:image2 selectedImage:selectImage2];
+   // sceneVC.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"场景" image:image2 selectedImage:selectImage2];
     
     
     //创建数组
@@ -85,7 +95,13 @@
     self.selectedIndex = 1;
 }
 
+#pragma mark - TabbarPanel Delegate
+- (void)changeViewController:(UIButton *)sender {
+    self.selectedIndex = sender.tag;
+}
 
-
+- (void)onSliderBtnClicked:(UIButton *)sender {
+    
+}
 
 @end

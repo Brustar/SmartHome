@@ -138,7 +138,6 @@
 		0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7B0B51D1380BF003C2D52 /* AirController.m */; };
 		0FF92B661D9224640098DD54 /* TVChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF92B651D9224640098DD54 /* TVChannel.m */; };
 		2E0297271E4C4C7600BBC520 /* MySubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0297261E4C4C7600BBC520 /* MySubView.m */; };
-		2E12CC071E7F5D7F00C7D006 /* home_xiafangkuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E12CC061E7F5D7F00C7D006 /* home_xiafangkuang.png */; };
 		2E12CC0A1E7F5DC400C7D006 /* FirstSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CC091E7F5DC400C7D006 /* FirstSceneViewController.m */; };
 		2E12CC101E7F5E3000C7D006 /* CYLineLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CC0C1E7F5E3000C7D006 /* CYLineLayout.m */; };
 		2E12CC111E7F5E3000C7D006 /* CYPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CC0E1E7F5E3000C7D006 /* CYPhotoCell.m */; };
@@ -158,7 +157,6 @@
 		2E7CD6081E14B80C002D0541 /* FixTimeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E7CD6071E14B80C002D0541 /* FixTimeListCell.m */; };
 		2E801EFC1E2622180039A6D9 /* IphoneFixSubTimeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E801EFB1E2622180039A6D9 /* IphoneFixSubTimeVC.m */; };
 		2E801EFF1E262B0B0039A6D9 /* WeekdaysVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E801EFE1E262B0B0039A6D9 /* WeekdaysVC.m */; };
-		2E8AC52C1E7BA9890002E717 /* home_banner.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E8AC52B1E7BA9890002E717 /* home_banner.png */; };
 		2E8AC52F1E7BAE350002E717 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E8AC52E1E7BAE350002E717 /* FirstViewController.m */; };
 		2E8AC5311E7BC2290002E717 /* button6-14.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E8AC5301E7BC2290002E717 /* button6-14.png */; };
 		2E925D8D1E5E73CD008E327B /* ECEngerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E925D8C1E5E73CD008E327B /* ECEngerController.m */; };
@@ -214,8 +212,33 @@
 		2EFB6B591E665C440058F305 /* UITabBar+BadgeValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB6B581E665C440058F305 /* UITabBar+BadgeValue.m */; };
 		2EFFECA11E12161100C13D3E /* FixTimeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFFECA01E12161100C13D3E /* FixTimeListViewController.m */; };
 		CD43046F1E0B674000B594F4 /* FamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD43046E1E0B674000B594F4 /* FamilyViewController.m */; };
+		CD5134371E8D07FD00C2EDAF /* Goods.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5134361E8D07FD00C2EDAF /* Goods.m */; };
+		CD51343A1E8E369700C2EDAF /* WeChatPayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5134391E8E369700C2EDAF /* WeChatPayManager.m */; };
+		CD51343F1E92807600C2EDAF /* tipIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD51343E1E92807500C2EDAF /* tipIcon@2x.png */; };
+		CD7863B31E84D2A800F42AC0 /* RegistSecondStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7863B21E84D2A800F42AC0 /* RegistSecondStepViewController.m */; };
+		CD7863B71E8CF18200F42AC0 /* VipServiceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7863B61E8CF18200F42AC0 /* VipServiceListViewController.m */; };
 		CD78A8301E3379C200060466 /* 255_221.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD78A82F1E3379C200060466 /* 255_221.plist */; };
 		CD78A8321E337C1600060466 /* 255_216.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD78A8311E337C1600060466 /* 255_216.plist */; };
+		CD7DDA071E81168000638DB3 /* login_pwd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7DDA061E81168000638DB3 /* login_pwd@2x.png */; };
+		CD7DDA091E81168F00638DB3 /* login_name@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7DDA081E81168F00638DB3 /* login_name@2x.png */; };
+		CD7DDA0B1E81297D00638DB3 /* registButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7DDA0A1E81297D00638DB3 /* registButton@2x.png */; };
+		CD7DDA0D1E81298600638DB3 /* loginButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7DDA0C1E81298600638DB3 /* loginButton@2x.png */; };
+		CD7DDA0F1E82583700638DB3 /* pullBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7DDA0E1E82583700638DB3 /* pullBtn@2x.png */; };
+		CD7DDA131E825E9C00638DB3 /* RegistFirstStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7DDA121E825E9C00638DB3 /* RegistFirstStepViewController.m */; };
+		CD7DDA151E826C3B00638DB3 /* backBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7DDA141E826C3B00638DB3 /* backBtn@2x.png */; };
+		CD93E3AA1E8077F1003CCAA9 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD93E3A91E8077F1003CCAA9 /* LoginViewController.m */; };
+		CD93E3AD1E807AFD003CCAA9 /* login_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD93E3AC1E807AFD003CCAA9 /* login_icon@2x.png */; };
+		CD93E3AF1E807CC2003CCAA9 /* login_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD93E3AE1E807CC2003CCAA9 /* login_bg@2x.png */; };
+		CD93E3B11E8081B0003CCAA9 /* login_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD93E3B01E8081B0003CCAA9 /* login_line@2x.png */; };
+		CDEC86801E95EBAB009EC245 /* TabbarPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEC867F1E95EBAB009EC245 /* TabbarPanel.m */; };
+		CDEC86821E95F4EA009EC245 /* Slider-frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDEC86811E95F4EA009EC245 /* Slider-frame@2x.png */; };
+		CDEC86841E960E92009EC245 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = CDEC86831E960E92009EC245 /* background.png */; };
+		CDEC86861E96156B009EC245 /* slider.png in Resources */ = {isa = PBXBuildFile; fileRef = CDEC86851E96156B009EC245 /* slider.png */; };
+		CDEC86891E976EC9009EC245 /* RegistFirstStepForPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEC86881E976EC9009EC245 /* RegistFirstStepForPhoneViewController.m */; };
+		CDEC868B1E99CD7B009EC245 /* Family.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDEC868A1E99CD7B009EC245 /* Family.storyboard */; };
+		CDEC86921E9A1D22009EC245 /* FamilyHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEC86911E9A1D22009EC245 /* FamilyHomeCell.m */; };
+		CDEC86951E9A21F4009EC245 /* RoomStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEC86941E9A21F4009EC245 /* RoomStatus.m */; };
+		CDEC86981E9A44F9009EC245 /* FamilyHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEC86971E9A44F9009EC245 /* FamilyHomeViewController.m */; };
 		CDF1573A1E7AAD4C00499AC5 /* BaseNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF157371E7AAD4C00499AC5 /* BaseNavController.m */; };
 		CDF1573B1E7AAD4C00499AC5 /* BaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF157391E7AAD4C00499AC5 /* BaseTabBarController.m */; };
 		CDF157401E7AADC700499AC5 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF1573C1E7AADC700499AC5 /* LeftViewController.m */; };
@@ -238,6 +261,8 @@
 		CDF389301E30E39500657C8B /* userList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF3892F1E30E39500657C8B /* userList.plist */; };
 		CDF389321E30EA8900657C8B /* hostUserList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF389311E30EA8900657C8B /* hostUserList.plist */; };
 		CDF389341E30F27500657C8B /* userHabitList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF389331E30F27500657C8B /* userHabitList.plist */; };
+		CDF78C501E9B5DEF00F8B20C /* circular@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF78C4E1E9B5DEF00F8B20C /* circular@2x.png */; };
+		CDF78C511E9B5DEF00F8B20C /* circular@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF78C4F1E9B5DEF00F8B20C /* circular@3x.png */; };
 		CDF90B411E1E425D009043B9 /* RoomDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF90B401E1E425D009043B9 /* RoomDetailViewController.m */; };
 		CDF90B431E2F0676009043B9 /* realScene.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF90B421E2F0676009043B9 /* realScene.plist */; };
 		CDF90B451E2F4B14009043B9 /* planeScene.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF90B441E2F4B14009043B9 /* planeScene.plist */; };
@@ -694,7 +719,6 @@
 		0FF92B651D9224640098DD54 /* TVChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVChannel.m; sourceTree = "<group>"; };
 		2E0297251E4C4C7600BBC520 /* MySubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySubView.h; sourceTree = "<group>"; };
 		2E0297261E4C4C7600BBC520 /* MySubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySubView.m; sourceTree = "<group>"; };
-		2E12CC061E7F5D7F00C7D006 /* home_xiafangkuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_xiafangkuang.png; sourceTree = "<group>"; };
 		2E12CC081E7F5DC400C7D006 /* FirstSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstSceneViewController.h; sourceTree = "<group>"; };
 		2E12CC091E7F5DC400C7D006 /* FirstSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstSceneViewController.m; sourceTree = "<group>"; };
 		2E12CC0B1E7F5E3000C7D006 /* CYLineLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYLineLayout.h; sourceTree = "<group>"; };
@@ -727,7 +751,6 @@
 		2E801EFB1E2622180039A6D9 /* IphoneFixSubTimeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneFixSubTimeVC.m; sourceTree = "<group>"; };
 		2E801EFD1E262B0B0039A6D9 /* WeekdaysVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeekdaysVC.h; sourceTree = "<group>"; };
 		2E801EFE1E262B0B0039A6D9 /* WeekdaysVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeekdaysVC.m; sourceTree = "<group>"; };
-		2E8AC52B1E7BA9890002E717 /* home_banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_banner.png; sourceTree = "<group>"; };
 		2E8AC52D1E7BAE350002E717 /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		2E8AC52E1E7BAE350002E717 /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		2E8AC5301E7BC2290002E717 /* button6-14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button6-14.png"; sourceTree = "<group>"; };
@@ -815,8 +838,44 @@
 		A4B2DBF5C92F57E3B7AD6AA3 /* libPods-SmartHome.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SmartHome.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD43046D1E0B674000B594F4 /* FamilyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyViewController.h; sourceTree = "<group>"; };
 		CD43046E1E0B674000B594F4 /* FamilyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyViewController.m; sourceTree = "<group>"; };
+		CD5134351E8D07FD00C2EDAF /* Goods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Goods.h; sourceTree = "<group>"; };
+		CD5134361E8D07FD00C2EDAF /* Goods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Goods.m; sourceTree = "<group>"; };
+		CD5134381E8E369700C2EDAF /* WeChatPayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeChatPayManager.h; sourceTree = "<group>"; };
+		CD5134391E8E369700C2EDAF /* WeChatPayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeChatPayManager.m; sourceTree = "<group>"; };
+		CD51343E1E92807500C2EDAF /* tipIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tipIcon@2x.png"; sourceTree = "<group>"; };
+		CD7863B11E84D2A800F42AC0 /* RegistSecondStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistSecondStepViewController.h; sourceTree = "<group>"; };
+		CD7863B21E84D2A800F42AC0 /* RegistSecondStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistSecondStepViewController.m; sourceTree = "<group>"; };
+		CD7863B51E8CF18200F42AC0 /* VipServiceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VipServiceListViewController.h; sourceTree = "<group>"; };
+		CD7863B61E8CF18200F42AC0 /* VipServiceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VipServiceListViewController.m; sourceTree = "<group>"; };
 		CD78A82F1E3379C200060466 /* 255_221.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 255_221.plist; sourceTree = "<group>"; };
 		CD78A8311E337C1600060466 /* 255_216.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 255_216.plist; sourceTree = "<group>"; };
+		CD7DDA061E81168000638DB3 /* login_pwd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_pwd@2x.png"; sourceTree = "<group>"; };
+		CD7DDA081E81168F00638DB3 /* login_name@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_name@2x.png"; sourceTree = "<group>"; };
+		CD7DDA0A1E81297D00638DB3 /* registButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "registButton@2x.png"; sourceTree = "<group>"; };
+		CD7DDA0C1E81298600638DB3 /* loginButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginButton@2x.png"; sourceTree = "<group>"; };
+		CD7DDA0E1E82583700638DB3 /* pullBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pullBtn@2x.png"; sourceTree = "<group>"; };
+		CD7DDA111E825E9C00638DB3 /* RegistFirstStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistFirstStepViewController.h; sourceTree = "<group>"; };
+		CD7DDA121E825E9C00638DB3 /* RegistFirstStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistFirstStepViewController.m; sourceTree = "<group>"; };
+		CD7DDA141E826C3B00638DB3 /* backBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backBtn@2x.png"; sourceTree = "<group>"; };
+		CD93E3A81E8077F1003CCAA9 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		CD93E3A91E8077F1003CCAA9 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		CD93E3AC1E807AFD003CCAA9 /* login_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon@2x.png"; sourceTree = "<group>"; };
+		CD93E3AE1E807CC2003CCAA9 /* login_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_bg@2x.png"; sourceTree = "<group>"; };
+		CD93E3B01E8081B0003CCAA9 /* login_line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_line@2x.png"; sourceTree = "<group>"; };
+		CDEC867E1E95EBAB009EC245 /* TabbarPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabbarPanel.h; sourceTree = "<group>"; };
+		CDEC867F1E95EBAB009EC245 /* TabbarPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabbarPanel.m; sourceTree = "<group>"; };
+		CDEC86811E95F4EA009EC245 /* Slider-frame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Slider-frame@2x.png"; sourceTree = "<group>"; };
+		CDEC86831E960E92009EC245 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		CDEC86851E96156B009EC245 /* slider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slider.png; sourceTree = "<group>"; };
+		CDEC86871E976EC9009EC245 /* RegistFirstStepForPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistFirstStepForPhoneViewController.h; sourceTree = "<group>"; };
+		CDEC86881E976EC9009EC245 /* RegistFirstStepForPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistFirstStepForPhoneViewController.m; sourceTree = "<group>"; };
+		CDEC868A1E99CD7B009EC245 /* Family.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Family.storyboard; sourceTree = "<group>"; };
+		CDEC86901E9A1D22009EC245 /* FamilyHomeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyHomeCell.h; sourceTree = "<group>"; };
+		CDEC86911E9A1D22009EC245 /* FamilyHomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyHomeCell.m; sourceTree = "<group>"; };
+		CDEC86931E9A21F4009EC245 /* RoomStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomStatus.h; sourceTree = "<group>"; };
+		CDEC86941E9A21F4009EC245 /* RoomStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomStatus.m; sourceTree = "<group>"; };
+		CDEC86961E9A44F9009EC245 /* FamilyHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyHomeViewController.h; sourceTree = "<group>"; };
+		CDEC86971E9A44F9009EC245 /* FamilyHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyHomeViewController.m; sourceTree = "<group>"; };
 		CDF157361E7AAD4C00499AC5 /* BaseNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavController.h; sourceTree = "<group>"; };
 		CDF157371E7AAD4C00499AC5 /* BaseNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavController.m; sourceTree = "<group>"; };
 		CDF157381E7AAD4C00499AC5 /* BaseTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarController.h; sourceTree = "<group>"; };
@@ -844,6 +903,8 @@
 		CDF3892F1E30E39500657C8B /* userList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = userList.plist; sourceTree = "<group>"; };
 		CDF389311E30EA8900657C8B /* hostUserList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = hostUserList.plist; sourceTree = "<group>"; };
 		CDF389331E30F27500657C8B /* userHabitList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = userHabitList.plist; sourceTree = "<group>"; };
+		CDF78C4E1E9B5DEF00F8B20C /* circular@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circular@2x.png"; sourceTree = "<group>"; };
+		CDF78C4F1E9B5DEF00F8B20C /* circular@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circular@3x.png"; sourceTree = "<group>"; };
 		CDF90B3F1E1E425D009043B9 /* RoomDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomDetailViewController.h; sourceTree = "<group>"; };
 		CDF90B401E1E425D009043B9 /* RoomDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomDetailViewController.m; sourceTree = "<group>"; };
 		CDF90B421E2F0676009043B9 /* realScene.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = realScene.plist; sourceTree = "<group>"; };
@@ -1081,6 +1142,8 @@
 		0F01D53E1CDC6C4B00DAC267 /* entity */ = {
 			isa = PBXGroup;
 			children = (
+				CDEC86931E9A21F4009EC245 /* RoomStatus.h */,
+				CDEC86941E9A21F4009EC245 /* RoomStatus.m */,
 				0FC5CC6A1D93CB9600839D8F /* WinOpener.h */,
 				0FC5CC6B1D93CB9600839D8F /* WinOpener.m */,
 				0FF92B641D9224640098DD54 /* TVChannel.h */,
@@ -1125,6 +1188,8 @@
 				0FB35C671DB0CECA00B48EA7 /* Plugin.m */,
 				CDFB9DF61E641F8E00BFECCE /* DeviceTimerInfo.h */,
 				CDFB9DF71E641F8E00BFECCE /* DeviceTimerInfo.m */,
+				CD5134351E8D07FD00C2EDAF /* Goods.h */,
+				CD5134361E8D07FD00C2EDAF /* Goods.m */,
 			);
 			name = entity;
 			sourceTree = "<group>";
@@ -1409,6 +1474,7 @@
 				0F49CB6F1E7A1EA100D46ECC /* Devices.storyboard */,
 				0F49CB711E7A1EAE00D46ECC /* Scene.storyboard */,
 				0F49CB731E7A1F0500D46ECC /* Home.storyboard */,
+				CDEC868A1E99CD7B009EC245 /* Family.storyboard */,
 			);
 			name = iPhone;
 			sourceTree = "<group>";
@@ -1440,6 +1506,8 @@
 				0F4B3C701E7BE57A00102DD3 /* WeChatPayController.mm */,
 				0F4B3C711E7BE57A00102DD3 /* CommonUtil.h */,
 				0F4B3C721E7BE57A00102DD3 /* CommonUtil.m */,
+				CD5134381E8E369700C2EDAF /* WeChatPayManager.h */,
+				CD5134391E8E369700C2EDAF /* WeChatPayManager.m */,
 			);
 			name = WeChat;
 			sourceTree = "<group>";
@@ -1660,23 +1728,27 @@
 			children = (
 				0F6ADFDC1E7134ED00BFF67F /* Resource */,
 				0F6ADFDA1E71343600BFF67F /* Controllers */,
-				0F6ADFD91E71341F00BFF67F /* Storeboards */,
+				0F6ADFD91E71341F00BFF67F /* Storyboards */,
 			);
 			name = UI3.0;
 			sourceTree = "<group>";
 		};
-		0F6ADFD91E71341F00BFF67F /* Storeboards */ = {
+		0F6ADFD91E71341F00BFF67F /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
 				0F49CB6A1E7A1CCE00D46ECC /* iPhone */,
 				0F49CB691E7A1CC300D46ECC /* iPad */,
 			);
-			name = Storeboards;
+			name = Storyboards;
 			sourceTree = "<group>";
 		};
 		0F6ADFDA1E71343600BFF67F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				CDEC868F1E9A1CBB009EC245 /* FamilyViewController */,
+				CD7863B41E8CF13A00F42AC0 /* MyInfoViewController */,
+				CD7DDA101E825E3E00638DB3 /* RegistViewController */,
+				CD93E3A71E807740003CCAA9 /* LoginViewController */,
 				2E12CC131E7FC00A00C7D006 /* SceneViewController */,
 			);
 			name = Controllers;
@@ -1696,6 +1768,8 @@
 		0F6ADFDC1E7134ED00BFF67F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				CDEC868C1E99E32B009EC245 /* Family */,
+				CD93E3AB1E807AD3003CCAA9 /* Login */,
 			);
 			name = Resource;
 			sourceTree = "<group>";
@@ -1998,6 +2072,74 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		CD7863B41E8CF13A00F42AC0 /* MyInfoViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CD7863B51E8CF18200F42AC0 /* VipServiceListViewController.h */,
+				CD7863B61E8CF18200F42AC0 /* VipServiceListViewController.m */,
+			);
+			name = MyInfoViewController;
+			sourceTree = "<group>";
+		};
+		CD7DDA101E825E3E00638DB3 /* RegistViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CD7DDA111E825E9C00638DB3 /* RegistFirstStepViewController.h */,
+				CD7DDA121E825E9C00638DB3 /* RegistFirstStepViewController.m */,
+				CD7863B11E84D2A800F42AC0 /* RegistSecondStepViewController.h */,
+				CD7863B21E84D2A800F42AC0 /* RegistSecondStepViewController.m */,
+				CDEC86871E976EC9009EC245 /* RegistFirstStepForPhoneViewController.h */,
+				CDEC86881E976EC9009EC245 /* RegistFirstStepForPhoneViewController.m */,
+			);
+			name = RegistViewController;
+			sourceTree = "<group>";
+		};
+		CD93E3A71E807740003CCAA9 /* LoginViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CD93E3A81E8077F1003CCAA9 /* LoginViewController.h */,
+				CD93E3A91E8077F1003CCAA9 /* LoginViewController.m */,
+			);
+			name = LoginViewController;
+			sourceTree = "<group>";
+		};
+		CD93E3AB1E807AD3003CCAA9 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				CD51343E1E92807500C2EDAF /* tipIcon@2x.png */,
+				CD7DDA141E826C3B00638DB3 /* backBtn@2x.png */,
+				CD7DDA0E1E82583700638DB3 /* pullBtn@2x.png */,
+				CD7DDA0C1E81298600638DB3 /* loginButton@2x.png */,
+				CD7DDA0A1E81297D00638DB3 /* registButton@2x.png */,
+				CD7DDA081E81168F00638DB3 /* login_name@2x.png */,
+				CD7DDA061E81168000638DB3 /* login_pwd@2x.png */,
+				CD93E3AC1E807AFD003CCAA9 /* login_icon@2x.png */,
+				CD93E3AE1E807CC2003CCAA9 /* login_bg@2x.png */,
+				CD93E3B01E8081B0003CCAA9 /* login_line@2x.png */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		CDEC868C1E99E32B009EC245 /* Family */ = {
+			isa = PBXGroup;
+			children = (
+				CDF78C4E1E9B5DEF00F8B20C /* circular@2x.png */,
+				CDF78C4F1E9B5DEF00F8B20C /* circular@3x.png */,
+			);
+			name = Family;
+			sourceTree = "<group>";
+		};
+		CDEC868F1E9A1CBB009EC245 /* FamilyViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CDEC86901E9A1D22009EC245 /* FamilyHomeCell.h */,
+				CDEC86911E9A1D22009EC245 /* FamilyHomeCell.m */,
+				CDEC86961E9A44F9009EC245 /* FamilyHomeViewController.h */,
+				CDEC86971E9A44F9009EC245 /* FamilyHomeViewController.m */,
+			);
+			name = FamilyViewController;
+			sourceTree = "<group>";
+		};
 		CDF157351E7AACE600499AC5 /* CustomTabbarController */ = {
 			isa = PBXGroup;
 			children = (
@@ -2012,6 +2154,8 @@
 				CDF157391E7AAD4C00499AC5 /* BaseTabBarController.m */,
 				CDF157521E7BA3F600499AC5 /* UIView_extra.h */,
 				CDF157531E7BA3F600499AC5 /* UIView_extra.m */,
+				CDEC867E1E95EBAB009EC245 /* TabbarPanel.h */,
+				CDEC867F1E95EBAB009EC245 /* TabbarPanel.m */,
 			);
 			name = CustomTabbarController;
 			sourceTree = "<group>";
@@ -2019,12 +2163,13 @@
 		CDF157431E7AB29A00499AC5 /* png */ = {
 			isa = PBXGroup;
 			children = (
+				CDEC86811E95F4EA009EC245 /* Slider-frame@2x.png */,
+				CDEC86831E960E92009EC245 /* background.png */,
+				CDEC86851E96156B009EC245 /* slider.png */,
 				2EC7D1D41E84CEA900284C0F /* lightBtn.png */,
 				2EE1196E1E81374A00F6FCB6 /* kaiqi.png */,
 				2EE1196B1E80D6B900F6FCB6 /* shanchu.png */,
-				2E12CC061E7F5D7F00C7D006 /* home_xiafangkuang.png */,
 				2E8AC5301E7BC2290002E717 /* button6-14.png */,
-				2E8AC52B1E7BA9890002E717 /* home_banner.png */,
 				CDF157501E7AB2C000499AC5 /* leftbackiamge.png */,
 				CDF157441E7AB2AF00499AC5 /* icon_tabbar_mine_selected@2x.png */,
 				CDF157451E7AB2AF00499AC5 /* icon_tabbar_homepage_selected@2x.png */,
@@ -2328,7 +2473,11 @@
 				CDF389341E30F27500657C8B /* userHabitList.plist in Resources */,
 				CDF90B431E2F0676009043B9 /* realScene.plist in Resources */,
 				CD78A8301E3379C200060466 /* 255_221.plist in Resources */,
+				CDEC86821E95F4EA009EC245 /* Slider-frame@2x.png in Resources */,
+				CD7DDA0D1E81298600638DB3 /* loginButton@2x.png in Resources */,
+				CDF78C501E9B5DEF00F8B20C /* circular@2x.png in Resources */,
 				CDF389281E30A91200657C8B /* energyDetail.plist in Resources */,
+				CDF78C511E9B5DEF00F8B20C /* circular@3x.png in Resources */,
 				2EA97E661E56A3E7003E0039 /* test.jpeg in Resources */,
 				2E925DA91E5E89DD008E327B /* calendar.png in Resources */,
 				0F49CB701E7A1EA100D46ECC /* Devices.storyboard in Resources */,
@@ -2336,13 +2485,16 @@
 				2EBABC831E83787B0093EF3A /* ScreenTableViewCell.xib in Resources */,
 				CDF1574A1E7AB2AF00499AC5 /* icon_tabbar_mine_selected@2x.png in Resources */,
 				0FBEFE271D24A5020084244F /* netconfig.plist in Resources */,
+				CD7DDA091E81168F00638DB3 /* login_name@2x.png in Resources */,
 				0F49CB721E7A1EAE00D46ECC /* Scene.storyboard in Resources */,
 				0F49CB7A1E7A204300D46ECC /* Devices-iPad.storyboard in Resources */,
 				CDF1574E1E7AB2AF00499AC5 /* icon_tabbar_merchant_selected@2x.png in Resources */,
 				F60FDB471D003FD500AB04BE /* CurtainTableViewCell.xib in Resources */,
 				2E925D9E1E5E857D008E327B /* 4.jpg in Resources */,
+				CD7DDA151E826C3B00638DB3 /* backBtn@2x.png in Resources */,
 				CDF389241E306D2400657C8B /* maintaininfo.plist in Resources */,
 				0F7E2E161D581AC400A47D5D /* iPhone.storyboard in Resources */,
+				CD93E3B11E8081B0003CCAA9 /* login_line@2x.png in Resources */,
 				2E925DA21E5E857D008E327B /* 8.jpg in Resources */,
 				CDFB9DF01E5DC4B600BFECCE /* DeviceTimerList.plist in Resources */,
 				0F032D5A1CC9B12700D1920D /* Assets.xcassets in Resources */,
@@ -2354,9 +2506,8 @@
 				2E925DA11E5E857D008E327B /* 7.jpg in Resources */,
 				CDF389301E30E39500657C8B /* userList.plist in Resources */,
 				CDF1574D1E7AB2AF00499AC5 /* icon_tabbar_merchant_normal@2x.png in Resources */,
-				2E12CC071E7F5D7F00C7D006 /* home_xiafangkuang.png in Resources */,
+				CDEC86841E960E92009EC245 /* background.png in Resources */,
 				F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */,
-				2E8AC52C1E7BA9890002E717 /* home_banner.png in Resources */,
 				2E1D4F0B1E727A64007625BD /* Slider4.png in Resources */,
 				2EA897BE1E31B59B002CA904 /* 2@2x.png in Resources */,
 				0F49CB7E1E7A204300D46ECC /* Scene-iPad.storyboard in Resources */,
@@ -2376,23 +2527,31 @@
 				2E925DA31E5E857D008E327B /* all_4.jpg in Resources */,
 				F668AF251D53413B0079587F /* Main.storyboard in Resources */,
 				2E12CC121E7F5E3000C7D006 /* CYPhotoCell.xib in Resources */,
+				CDEC868B1E99CD7B009EC245 /* Family.storyboard in Resources */,
 				CDF3892E1E30CFD000657C8B /* userPushNotifyList.plist in Resources */,
+				CD7DDA071E81168000638DB3 /* login_pwd@2x.png in Resources */,
 				0FE78BB61DCFB091009B4767 /* Images.xcassets in Resources */,
 				2E925DA41E5E857D008E327B /* all_5.jpg in Resources */,
 				CDF389261E30A31300657C8B /* energylist.plist in Resources */,
 				2EBABC741E835EC70093EF3A /* AireTableViewCell.xib in Resources */,
 				CDF1574C1E7AB2AF00499AC5 /* icon_tabbar_homepage@2x.png in Resources */,
+				CD51343F1E92807600C2EDAF /* tipIcon@2x.png in Resources */,
 				0F49CB6E1E7A1E3700D46ECC /* MyInfo.storyboard in Resources */,
 				2E1D4F0D1E727AE2007625BD /* Slider2.png in Resources */,
+				CD7DDA0F1E82583700638DB3 /* pullBtn@2x.png in Resources */,
 				2EBABC7E1E8361C50093EF3A /* OtherTableViewCell.xib in Resources */,
 				CDF1574F1E7AB2AF00499AC5 /* icon_tabbar_mine@2x.png in Resources */,
 				2EE1196C1E80D6B900F6FCB6 /* shanchu.png in Resources */,
+				CD93E3AF1E807CC2003CCAA9 /* login_bg@2x.png in Resources */,
 				2EE1196F1E81374A00F6FCB6 /* kaiqi.png in Resources */,
 				2EBABC791E8360FB0093EF3A /* TVTableViewCell.xib in Resources */,
 				0F020A231DE3D9330034869F /* LaunchScreen.storyboard in Resources */,
 				CDF389221E305B4400657C8B /* breakdownlist.plist in Resources */,
 				2E1D4F0F1E727AE4007625BD /* Slider1.png in Resources */,
+				CD7DDA0B1E81297D00638DB3 /* registButton@2x.png in Resources */,
 				F6359B011CFFC4DC0035EB31 /* ColourTableViewCell.xib in Resources */,
+				CDEC86861E96156B009EC245 /* slider.png in Resources */,
+				CD93E3AD1E807AFD003CCAA9 /* login_icon@2x.png in Resources */,
 				0F49CB6C1E7A1DBF00D46ECC /* Login.storyboard in Resources */,
 				2E925DA51E5E857D008E327B /* all_6.jpg in Resources */,
 				CDF157511E7AB2C000499AC5 /* leftbackiamge.png in Resources */,
@@ -2672,11 +2831,14 @@
 				F64EF7FB1D8FB738003C1C48 /* IphoneMainController.m in Sources */,
 				CDFB9DF81E641F8E00BFECCE /* DeviceTimerInfo.m in Sources */,
 				0FCFB38F1CF293B300B37DD3 /* Radio.m in Sources */,
+				CD5134371E8D07FD00C2EDAF /* Goods.m in Sources */,
+				CD93E3AA1E8077F1003CCAA9 /* LoginViewController.m in Sources */,
 				F618963B1D87B08300DBE6CD /* ProjectController.m in Sources */,
 				F6FD00A21DDDD470009ABA64 /* TouchSubViewController.m in Sources */,
 				0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */,
 				0F6AB8701D782D9D0041E39C /* SunString.m in Sources */,
 				2E5E5FEC1DE22AC8006F0C8F /* LightCell.m in Sources */,
+				CDEC86981E9A44F9009EC245 /* FamilyHomeViewController.m in Sources */,
 				0FCAA40C1D1945BB00C1E58C /* BgMusicController.m in Sources */,
 				0FB35C681DB0CECA00B48EA7 /* Plugin.m in Sources */,
 				2EA97E641E56A355003E0039 /* ObjectFunction.m in Sources */,
@@ -2714,6 +2876,7 @@
 				F66DFF2B1D5188BF0005E882 /* EditSceneCell.m in Sources */,
 				2E5E5FE91DE1F1A9006F0C8F /* IphoneLightController.m in Sources */,
 				0FAF74C11CEEA17C00432713 /* HRColorCursor.m in Sources */,
+				CD7DDA131E825E9C00638DB3 /* RegistFirstStepViewController.m in Sources */,
 				F680AAB71DD94565001D1807 /* FamilyCell.m in Sources */,
 				2E801EFF1E262B0B0039A6D9 /* WeekdaysVC.m in Sources */,
 				0F91AA171CDC798700094C25 /* PrintObject.m in Sources */,
@@ -2765,9 +2928,11 @@
 				F62E05631DAB39F80096BF00 /* IphoneProfileController.m in Sources */,
 				2E0297271E4C4C7600BBC520 /* MySubView.m in Sources */,
 				F63AE0031D11319C00BE17DC /* FMCollectionViewCell.m in Sources */,
+				CD51343A1E8E369700C2EDAF /* WeChatPayManager.m in Sources */,
 				0FAF8FF51CE1B514000557BD /* VolumeManager.m in Sources */,
 				0F4B3C731E7BE57A00102DD3 /* GDataXMLNode.m in Sources */,
 				2EA2A83B1E1DCDA600092D41 /* AreaSubSettingViewController.m in Sources */,
+				CDEC86921E9A1D22009EC245 /* FamilyHomeCell.m in Sources */,
 				0F032D4C1CC9B12700D1920D /* AppDelegate.m in Sources */,
 				0FB205ED1CDC3D3700B5E87E /* AudioManager.m in Sources */,
 				F68A5DD81D782D8400601612 /* ECSearchView.m in Sources */,
@@ -2788,8 +2953,10 @@
 				2E63280B1E03C993000D7BE9 /* IPhoneSceneDVDVC.m in Sources */,
 				0FC0FFDD1CF57E58000F71D5 /* TouchImage.m in Sources */,
 				0FCFB3951CF2943100B37DD3 /* Camera.m in Sources */,
+				CDEC86801E95EBAB009EC245 /* TabbarPanel.m in Sources */,
 				0F6ADFE31E7136C500BFF67F /* ConversationViewController.m in Sources */,
 				2E801EFC1E2622180039A6D9 /* IphoneFixSubTimeVC.m in Sources */,
+				CD7863B31E84D2A800F42AC0 /* RegistSecondStepViewController.m in Sources */,
 				2EFB6B591E665C440058F305 /* UITabBar+BadgeValue.m in Sources */,
 				F6755A4C1D4063FA002394F3 /* ECloudTabBar.m in Sources */,
 				0FAF8FEF1CE18C41000557BD /* DeviceInfo.m in Sources */,
@@ -2833,6 +3000,7 @@
 				F65B7D271D34E9E00059CFA4 /* MySettingViewController.m in Sources */,
 				F62CD87D1D950453001C66CE /* IphoneAirController.m in Sources */,
 				0F9EA72D1DDB026C00223ED8 /* NSString+RegMatch.m in Sources */,
+				CD7863B71E8CF18200F42AC0 /* VipServiceListViewController.m in Sources */,
 				F65DB3411D2B5AB2002A815C /* RegisterDetailController.m in Sources */,
 				0FAF98A61CE40F3C009BDBB5 /* QRCodeReaderViewController.m in Sources */,
 				0F8D76D01D9A1B9700DDD063 /* Schedule.m in Sources */,
@@ -2853,8 +3021,10 @@
 				F6642A781D41F55E0003D56B /* ScenseSplitViewController.m in Sources */,
 				F663CA631D98C5FE001F87F3 /* IphoneAddSceneController.m in Sources */,
 				2ED42B931E35B41E00592A03 /* IphoneAirCell.m in Sources */,
+				CDEC86951E9A21F4009EC245 /* RoomStatus.m in Sources */,
 				0F6423491DE57C83003379FC /* AudioStreamer.m in Sources */,
 				F65838D41D39D3BB004210AC /* WelcomeController.m in Sources */,
+				CDEC86891E976EC9009EC245 /* RegistFirstStepForPhoneViewController.m in Sources */,
 				F65FF4AB1D61C57100C12271 /* SearchViewController.m in Sources */,
 				F663CA5F1D98A733001F87F3 /* IphoneDVDController.m in Sources */,
 				F6A1C02E1D586D7500856E00 /* Room.m in Sources */,

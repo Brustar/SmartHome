@@ -108,15 +108,15 @@
     view.backgroundColor = [UIColor clearColor];
     
     
-    UIButton *imageButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    imageButton.frame = CGRectMake(CGRectGetWidth(view.frame)/2-25, 40, 50, 50);
-    imageButton.layer.cornerRadius = 25;
-    [imageButton setBackgroundImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
-    [view addSubview:imageButton];
-    [imageButton addTarget:self action:@selector(imgButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *headButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    headButton.frame = CGRectMake(CGRectGetWidth(view.frame)/2-25, 40, 50, 50);
+    headButton.layer.cornerRadius = 25;
+    [headButton setBackgroundImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
+    [view addSubview:headButton];
+    [headButton addTarget:self action:@selector(headButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     
-    UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(imageButton.frame)+5, tableView.bounds.size.width, 20)];
+    UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(headButton.frame)+5, tableView.bounds.size.width, 20)];
     nameLabel.text = [UD objectForKey:@"UserName"];
     nameLabel.textColor = [UIColor whiteColor];
     nameLabel.textAlignment = NSTextAlignmentCenter;
@@ -126,13 +126,15 @@
 }
 
 
-- (void)imgButtonAction {
-    //AppDelegate *tempAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-   // HaHaViewController *vc = [[HaHaViewController alloc] init];
+- (void)headButtonClicked:(UIButton *)btn {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    /*[tempAppDelegate.mainTabBarController.selectedViewController presentViewController:vc animated:YES completion:^{
-        [tempAppDelegate.LeftSlideVC closeLeftView];//关闭左侧抽屉
-    }];*/
+    [appDelegate.LeftSlideVC closeLeftView];//关闭左侧抽屉
+    
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
+    UIViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"VipServiceListVC"];
+    vc.hidesBottomBarWhenPushed = YES;
+    [appDelegate.mainTabBarController.selectedViewController pushViewController:vc animated:YES];
     
 }
 

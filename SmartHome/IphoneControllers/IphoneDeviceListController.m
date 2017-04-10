@@ -52,6 +52,27 @@
 
 @implementation IphoneDeviceListController
 
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
+    baseTabbarController.tabbarPanel.hidden = NO;
+    baseTabbarController.tabBar.hidden = YES;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
+    baseTabbarController.tabbarPanel.hidden = NO;
+    baseTabbarController.tabBar.hidden = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
+    baseTabbarController.tabbarPanel.hidden = YES;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
