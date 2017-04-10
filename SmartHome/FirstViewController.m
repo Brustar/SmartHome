@@ -64,6 +64,8 @@
     BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     baseTabbarController.tabbarPanel.hidden = NO;
     baseTabbarController.tabBar.hidden = YES;
+    
+    [self setBtn];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -115,12 +117,7 @@
     }
 
 }
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self setBtn];
 
-}
 -(void)setBtn
 {
        NSMutableArray * arr = [[NSMutableArray alloc] init];
