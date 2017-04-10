@@ -921,7 +921,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ueV-XT-5wh" customClass="IphoneRoomView">
                                 <rect key="frame" x="0.0" y="64" width="320" height="50"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line3" translatesAutoresizingMaskIntoConstraints="NO" id="Lfb-Ve-53W">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line_horizontal_white" translatesAutoresizingMaskIntoConstraints="NO" id="Lfb-Ve-53W">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
@@ -982,7 +982,7 @@
                                             <constraint firstAttribute="height" constant="50" id="Imd-VQ-w81"/>
                                             <constraint firstAttribute="width" constant="50" id="ZO8-VT-gRi"/>
                                         </constraints>
-                                        <state key="normal" image="delete"/>
+                                        <state key="normal" image="delete_white"/>
                                         <connections>
                                             <action selector="deleteAction:" destination="2FT-fL-R4c" eventType="touchUpInside" id="SwO-vQ-3d9"/>
                                         </connections>
@@ -993,7 +993,7 @@
                                             <constraint firstAttribute="width" constant="50" id="RAR-Lf-MFI"/>
                                             <constraint firstAttribute="height" constant="50" id="lcn-DA-w0D"/>
                                         </constraints>
-                                        <state key="normal" image="close2"/>
+                                        <state key="normal" image="close_white"/>
                                         <connections>
                                             <action selector="startBtn:" destination="2FT-fL-R4c" eventType="touchUpInside" id="cQV-G7-8Ti"/>
                                         </connections>
@@ -3150,7 +3150,7 @@
                                             <constraint firstAttribute="width" constant="50" id="IAQ-Sv-WLq"/>
                                             <constraint firstAttribute="height" constant="50" id="cQI-dB-eTp"/>
                                         </constraints>
-                                        <state key="normal" image="Scene-bedroom_06 (3)"/>
+                                        <state key="normal" image="close2"/>
                                         <connections>
                                             <action selector="startBtn:" destination="2FT-fL-R4c" eventType="touchUpInside" id="s4a-Bb-Me7"/>
                                         </connections>
@@ -3161,7 +3161,7 @@
                                             <constraint firstAttribute="width" constant="50" id="G5t-eh-CeE"/>
                                             <constraint firstAttribute="height" constant="50" id="yE3-iK-9nD"/>
                                         </constraints>
-                                        <state key="normal" image="Scene-bedroom_19"/>
+                                        <state key="normal" image="alarm clock1"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -3182,8 +3182,9 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPQ-5e-iR2" customClass="IphoneRoomView">
                                 <rect key="frame" x="0.0" y="430" width="320" height="50"/>
                                 <subviews>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Scene-menuTab" translatesAutoresizingMaskIntoConstraints="NO" id="SsD-nJ-0Z1">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="SsD-nJ-0Z1">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3198,8 +3199,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cph-wv-9vg" customClass="IphoneRoomView">
                                 <rect key="frame" x="0.0" y="64" width="320" height="50"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Scene-menuTab" translatesAutoresizingMaskIntoConstraints="NO" id="wz5-XT-JIX">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="wz5-XT-JIX">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -6401,9 +6403,6 @@
         <image name="DVD-1" width="130" height="130"/>
         <image name="Iphonewifi" width="32" height="32"/>
         <image name="PL" width="724" height="470"/>
-        <image name="Scene-bedroom_06 (3)" width="30" height="30"/>
-        <image name="Scene-bedroom_19" width="30" height="30"/>
-        <image name="Scene-menuTab" width="375" height="58"/>
         <image name="add" width="64" height="64"/>
         <image name="aire-6" width="130" height="130"/>
         <image name="alarm clock1" width="25" height="25"/>
@@ -6411,7 +6410,9 @@
         <image name="broadcast" width="32" height="32"/>
         <image name="calendar.png" width="16" height="16"/>
         <image name="close2" width="25" height="25"/>
+        <image name="close_white" width="25" height="25"/>
         <image name="delete" width="25" height="25"/>
+        <image name="delete_white" width="25" height="25"/>
         <image name="edit" width="32" height="32"/>
         <image name="fastForward" width="32" height="32"/>
         <image name="i-add" width="32" height="32"/>
@@ -6422,7 +6423,7 @@
         <image name="last" width="32" height="32"/>
         <image name="lightBtn.png" width="32" height="32"/>
         <image name="line2" width="1" height="1"/>
-        <image name="line3" width="373" height="48"/>
+        <image name="line_horizontal_white" width="373" height="48"/>
         <image name="logo" width="180" height="180"/>
         <image name="media" width="48" height="48"/>
         <image name="next" width="32" height="32"/>
@@ -6454,10 +6455,10 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="J5F-aP-6iz"/>
         <segue reference="qN8-z6-Gb7"/>
         <segue reference="lPv-wZ-EAG"/>
-        <segue reference="b22-0A-WOg"/>
-        <segue reference="J5F-aP-6iz"/>
         <segue reference="Uo6-og-hnM"/>
+        <segue reference="OCS-34-SI9"/>
     </inferredMetricsTieBreakers>
 </document>

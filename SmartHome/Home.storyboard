@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -319,7 +319,7 @@
                                                     <constraint firstAttribute="height" constant="30" id="J0j-mj-qzV"/>
                                                     <constraint firstAttribute="width" constant="30" id="kha-MO-9ZR"/>
                                                 </constraints>
-                                                <state key="normal" backgroundImage="close2">
+                                                <state key="normal" backgroundImage="close_red">
                                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -414,7 +414,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="P9X-dc-1E2">
-                        <barButtonItem key="rightBarButtonItem" image="music1" id="pPD-b2-xtb">
+                        <barButtonItem key="rightBarButtonItem" image="music_white" id="pPD-b2-xtb">
                             <connections>
                                 <action selector="playerBarBtn:" destination="pvp-cq-nWV" id="Gha-yo-z49"/>
                             </connections>
@@ -459,11 +459,11 @@
         <image name="circular2" width="33" height="33"/>
         <image name="circular3" width="46" height="46"/>
         <image name="circular4" width="46" height="46"/>
-        <image name="close2" width="25" height="25"/>
+        <image name="close_red" width="26" height="26"/>
         <image name="clound2" width="25" height="18"/>
         <image name="line2" width="1" height="1"/>
         <image name="logo" width="180" height="180"/>
-        <image name="music1" width="22" height="19"/>
+        <image name="music_white" width="22" height="19"/>
         <image name="reduce" width="25" height="25"/>
     </resources>
 </document>

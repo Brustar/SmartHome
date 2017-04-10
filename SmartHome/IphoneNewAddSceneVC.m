@@ -10,6 +10,8 @@
 #import "IphoneRoomView.h"
 #import "Room.h"
 #import "SQLManager.h"
+#import "MBProgressHUD+NJ.h"
+#import "IphoneNewAddSceneCell.h"
 
 @interface IphoneNewAddSceneVC ()<UITableViewDelegate,UITableViewDataSource,IphoneRoomViewDelegate>
 
@@ -18,8 +20,8 @@
 @property (nonatomic,strong) NSArray * deviceArr;
 @property (nonatomic,strong) NSArray * roomList;
 @property (nonatomic, assign) int roomIndex;
-@property (nonatomic,strong) NSArray *scenes;
-@property (nonatomic,assign) int roomID;
+@property (nonatomic,strong) NSArray *devices;
+
 
 @end
 
@@ -34,18 +36,33 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+      self.roomList = [SQLManager getDevicesSubTypeNamesWithRoomID:self.roomID];
+      [self setUpRoomView];
+//          [self reachNotification];
+    UIView *view = [[UIView alloc] init];
+    [view setBackgroundColor:[UIColor clearColor]];
+    self.tableView.tableFooterView = view;
     
-          self.roomList = [SQLManager getDevicesSubTypeNamesWithRoomID:self.roomID];
-          [self setUpRoomView];
-          [self reachNotification];
+    
+    
 }
 -(void)setUpRoomView
 {
     NSMutableArray *roomNames = [NSMutableArray array];
     
-    for (Room *room in self.roomList) {
-        NSString *roomName = room.rName;
-        [roomNames addObject:roomName];
+    for (NSString *subTypeStr in self.roomList) {
+        if([subTypeStr isEqualToString:@"照明"]){
+            [roomNames addObject:subTypeStr];
+        }if ([subTypeStr isEqualToString:@"影音"]) {
+            [roomNames addObject:subTypeStr];
+        }if([subTypeStr isEqualToString:@"环境"]){
+            [roomNames addObject:subTypeStr];
+        }if([subTypeStr isEqualToString:@"安防"]){
+            [roomNames addObject:subTypeStr];
+        }if([subTypeStr isEqualToString:@"智能单品"]){
+            [roomNames addObject:subTypeStr];
+        }
     }
     self.roomView.dataArray = roomNames;
     
@@ -58,9 +75,15 @@
 - (void)iphoneRoomView:(UIView *)view didSelectButton:(int)index
 {
     self.roomIndex = index;
-    Room *room = self.roomList[index];
-    self.scenes = [SQLManager getScensByRoomId:room.rId];
-  
+    if (self.roomList.count == 0) {
+        [MBProgressHUD showError:@"该房间没有设备"];
+    }else{
+        NSString * selectSubTypeStr = self.roomList[index];
+        //    getDeviceTypeNameWithSubTypeName:(NSString *)subTypeName
+        self.devices = [SQLManager  getDeviceTypeNameWithSubTypeName:selectSubTypeStr];
+        
+        [self.tableView reloadData];
+    }
     
 }
 - (void)reachNotification
@@ -73,7 +96,7 @@
     
     self.roomID = [dict[@"subType"] intValue];
     
-    self.scenes = [SQLManager getScensByRoomId:self.roomID];
+    self.devices = [SQLManager getScensByRoomId:self.roomID];
     
     //    [self setUpSceneButton];
     //    [self judgeScensCount:self.scenes];
@@ -86,12 +109,14 @@
 #pragma UITableViewDelegate的代理
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _deviceArr.count;
+    return _devices.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    
+    IphoneNewAddSceneCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+   
+     cell.backgroundColor = [UIColor clearColor];
+     cell.DeviceNameLabel.text = self.devices[indexPath.row];
     return cell;
 }
 /*

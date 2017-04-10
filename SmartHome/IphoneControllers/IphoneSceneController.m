@@ -34,6 +34,7 @@
 #import "CYPhotoCell.h"
 //#import "IphoneRoomListController.h"
 #import "TVIconController.h"
+#import "IphoneNewAddSceneVC.h"
 
 @interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,CYPhotoCellDelegate,UIViewControllerPreviewingDelegate,YZNavigationMenuViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (strong, nonatomic) IBOutlet IphoneRoomView *roomView;
@@ -46,6 +47,7 @@
 @property (nonatomic,strong)NSMutableArray *scenes;
 @property (nonatomic, assign) int roomIndex;
 @property (nonatomic,assign) int selectedSId;
+@property (nonatomic,assign) int selectedRoomID;
 @property (nonatomic ,strong) CYPhotoCell *cell;
 @property (weak, nonatomic) IBOutlet UIButton *AddSceneBtn;
 @property (nonatomic,strong) NSArray * arrayData;
@@ -159,7 +161,6 @@ static NSString * const CYPhotoId = @"photo";
     NSDictionary *dict = notification.userInfo;
     
     self.roomID = [dict[@"subType"] intValue];
-    
 //    self.scenes = [SQLManager getScensByRoomId:self.roomID];
     NSArray *tmpArr = [SQLManager getScensByRoomId:self.roomID];
     [self.scenes removeAllObjects];
@@ -194,6 +195,7 @@ static NSString * const CYPhotoId = @"photo";
     Room *room = self.roomList[index];
 //    self.scenes = [SQLManager getScensByRoomId:room.rId];
     NSArray *tmpArr = [SQLManager getScensByRoomId:room.rId];
+    self.selectedRoomID = room.rId;
     [self.scenes removeAllObjects];
     [self.scenes addObjectsFromArray:tmpArr];
     NSString *imageName = @"i-add";
@@ -347,7 +349,12 @@ static NSString * const CYPhotoId = @"photo";
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
      if (indexPath.row+1 >= self.scenes.count) {
-         [self performSegueWithIdentifier:@"iphoneAddSceneSegue" sender:self];
+         UIStoryboard * SceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
+         IphoneNewAddSceneVC * iphoneNewAddSceneVC = [SceneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneNewAddSceneVC"];
+         iphoneNewAddSceneVC.roomID = self.selectedRoomID;
+         [self.navigationController pushViewController:iphoneNewAddSceneVC animated:YES];
+         
+//         [self performSegueWithIdentifier:@"iphoneAddSceneSegue" sender:self];IphoneNewAddSceneVC
      }else{
          Scene *scene = self.scenes[indexPath.row];
          self.selectedSId = scene.sceneID;
@@ -415,7 +422,7 @@ static NSString * const CYPhotoId = @"photo";
     self.SceneNameLabel.text = self.scene.sceneName;
     self.delegateBtn.selected = !self.delegateBtn.selected;
     if (self.delegateBtn.selected) {
-        [self.delegateBtn setImage:[UIImage imageNamed:@"delete2"] forState:UIControlStateSelected];
+        [self.delegateBtn setImage:[UIImage imageNamed:@"delete_red"] forState:UIControlStateSelected];
         
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"是否删除“%@”场景？",self.SceneNameLabel.text] preferredStyle:UIAlertControllerStyleAlert];
         
@@ -437,7 +444,7 @@ static NSString * const CYPhotoId = @"photo";
         
         [self presentViewController:alert animated:YES completion:nil];
     }else{
-        [self.delegateBtn setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
+        [self.delegateBtn setImage:[UIImage imageNamed:@"delete_white"] forState:UIControlStateNormal];
        
     }
 }
@@ -447,11 +454,11 @@ static NSString * const CYPhotoId = @"photo";
     self.sceneID = self.scene.sceneID;
     self.startBtn.selected = !self.startBtn.selected;
     if (self.startBtn.selected) {
-        [self.startBtn setImage:[UIImage imageNamed:@"close1"] forState:UIControlStateSelected];
+        [self.startBtn setImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
         [[SceneManager defaultManager] startScene:self.sceneID];
          [SQLManager updateSceneStatus:1 sceneID:self.sceneID];//更新数据库
     }else{
-        [self.startBtn setImage:[UIImage imageNamed:@"close2"] forState:UIControlStateNormal];
+        [self.startBtn setImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
         [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];
          [SQLManager updateSceneStatus:0 sceneID:self.sceneID];//更新数据库
     }

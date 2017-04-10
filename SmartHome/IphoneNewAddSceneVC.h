@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface IphoneNewAddSceneVC : UIViewController
-
+@property (nonatomic,assign) int roomID;
 @end
