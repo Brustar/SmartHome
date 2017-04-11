@@ -3,7 +3,7 @@
 //  SmartHome
 //
 //  Created by KobeBryant on 2017/3/21.
-//  Copyright © 2017年 Brustar. All rights reserved.
+//  Copyright © 2017年 ECloud. All rights reserved.
 //
 
 #import "LoginViewController.h"
@@ -55,7 +55,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.hidden = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning {

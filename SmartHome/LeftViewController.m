@@ -22,7 +22,7 @@
     _itemArray = @[@"我的故障",@"我的保修记录",@"我的能耗",@"我的收藏",@"我的消息",@"我的家庭成员",@"首页场景快捷键",@"我的设置"];
     
     UIImageView *imageview = [[UIImageView alloc] initWithFrame:self.view.bounds];
-    imageview.image = [UIImage imageNamed:@"leftbackiamge"];
+    imageview.image = [UIImage imageNamed:@"background"];
     [self.view addSubview:imageview];
     
     UITableView *tableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];

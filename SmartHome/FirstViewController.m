@@ -85,7 +85,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [self setupNaviBar];
     self.FourBtnView.userInteractionEnabled = YES;
 //    _SubImageView.layer.cornerRadius = _SubImageView.bounds.size.height/2; //圆角半径
 //    _SubImageView.layer.masksToBounds = YES; //圆角
@@ -110,14 +111,13 @@
     _subView.userInteractionEnabled = YES;
     [_SubImageView addGestureRecognizer:tap];
     [_subView addGestureRecognizer:tap];
-    [self setupSlideButton];
-//    [self setBtn];
+    
     
     NSArray *bgmusicIDS = [SQLManager getDeviceByTypeName:@"背景音乐" andRoomID:self.roomID];
     if ([bgmusicIDS count]>0) {
         self.deviceid = bgmusicIDS[0];
     }
-
+    
 }
 
 -(void)setBtn
@@ -170,6 +170,15 @@
         [self.navigationController pushViewController:familyVC animated:YES];
 
 }
+
+- (void)setupNaviBar {
+    [self setNaviBarTitle:@"家庭名称"]; //设置标题
+    _naviLeftBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"clound_white" imgHighlight:@"clound_white" target:self action:@selector(leftBtnClicked:)];
+    _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"music_white" imgHighlight:@"music_white" target:self action:@selector(rightBtnClicked:)];
+    [self setNaviBarLeftBtn:_naviLeftBtn];
+    [self setNaviBarRightBtn:_naviRightBtn];
+}
+
 - (void)setupSlideButton {
     UIButton *menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     menuBtn.frame = CGRectMake(0, 0, 44, 44);
@@ -177,6 +186,55 @@
     [menuBtn addTarget:self action:@selector(menuBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
 }
+
+- (void)leftBtnClicked:(UIButton *)btn {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    if (appDelegate.LeftSlideVC.closed)
+    {
+        [appDelegate.LeftSlideVC openLeftView];
+    }
+    else
+    {
+        [appDelegate.LeftSlideVC closeLeftView];
+    }
+}
+
+- (void)rightBtnClicked:(UIButton *)btn {
+    if (self.playerSubView.hidden) {
+        self.playerSubView.hidden = NO;
+        self.SubImageView.hidden = YES;
+        self.BtnView.hidden = YES;
+        self.IconeImageView.hidden = YES;
+        self.numberLabelView.hidden = YES;
+        self.memberFamilyLabel.hidden = YES;
+        _calenderDayLabel.hidden = YES;
+        _calenderYearLabel.hidden = YES;
+        _calenderMonthLabel.hidden = YES;
+        _UserNameLabel.hidden = YES;
+        _WelcomeLabel.hidden = YES;
+        _HeadImageView.hidden = YES;
+        _TakeTurnsWordsLabel.hidden = YES;
+        _markedWordsLabel.hidden = YES;
+        
+    }else{
+        self.playerSubView.hidden = YES;
+        self.SubImageView.hidden = NO;
+        self.BtnView.hidden = NO;
+        self.IconeImageView.hidden = NO;
+        self.numberLabelView.hidden = NO;
+        self.memberFamilyLabel.hidden = NO;
+        _calenderDayLabel.hidden = NO;
+        _calenderYearLabel.hidden = NO;
+        _calenderMonthLabel.hidden = NO;
+        _UserNameLabel.hidden = NO;
+        _WelcomeLabel.hidden = NO;
+        _HeadImageView.hidden = NO;
+        _TakeTurnsWordsLabel.hidden = NO;
+        _markedWordsLabel.hidden = NO;
+    }
+}
+
 - (void)menuBtnAction:(UIButton *)sender {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     

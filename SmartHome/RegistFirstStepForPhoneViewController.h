@@ -11,8 +11,9 @@
 #import "MBProgressHUD+NJ.h"
 #import "NSString+RegMatch.h"
 #import "WebManager.h"
+#import "CustomViewController.h"
 
-@interface RegistFirstStepForPhoneViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, HttpDelegate, UITextFieldDelegate,UIAlertViewDelegate>
+@interface RegistFirstStepForPhoneViewController : CustomViewController<UITableViewDelegate, UITableViewDataSource, HttpDelegate, UITextFieldDelegate,UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *countryCodeLabel;
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumTextField;
 @property (weak, nonatomic) IBOutlet UITableView *countryCodeTableView;

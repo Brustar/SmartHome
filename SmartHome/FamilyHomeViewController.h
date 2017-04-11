@@ -24,12 +24,13 @@
 #import "UIImage+ImageEffects.h"
 #import "AppDelegate.h"
 #import "FamilyHomeCell.h"
+#import "CustomViewController.h"
 
 #define  CollectionCellWidth self.roomCollectionView.frame.size.width / 2.0 -20
 #define  minSpace 20
 #define  maxSpace 40
 
-@interface FamilyHomeViewController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,HttpDelegate>
+@interface FamilyHomeViewController : CustomViewController<UICollectionViewDataSource,UICollectionViewDelegate,HttpDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *roomCollectionView;
 @property (nonatomic, strong) NSMutableArray *roomArray;
@@ -37,5 +38,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *lightIcon;
 @property (weak, nonatomic) IBOutlet UIImageView *avIcon;
 @property (weak, nonatomic) IBOutlet UIImageView *airIcon;
-
+@property (nonatomic, readonly) UIButton *naviRightBtn;
 @end

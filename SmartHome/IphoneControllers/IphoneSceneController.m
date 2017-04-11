@@ -72,14 +72,40 @@
 
 static NSString * const CYPhotoId = @"photo";
 
+
+- (void)setupNaviBar {
+    [self setNaviBarTitle:@"家庭名称"]; //设置标题
+    _naviLeftBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"clound_white" imgHighlight:@"clound_white" target:self action:@selector(leftBtnClicked:)];
+    _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"music_white" imgHighlight:@"music_white" target:self action:@selector(rightBtnClicked:)];
+    [self setNaviBarLeftBtn:_naviLeftBtn];
+    [self setNaviBarRightBtn:_naviRightBtn];
+}
+
+- (void)leftBtnClicked:(UIButton *)btn {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    if (appDelegate.LeftSlideVC.closed)
+    {
+        [appDelegate.LeftSlideVC openLeftView];
+    }
+    else
+    {
+        [appDelegate.LeftSlideVC closeLeftView];
+    }
+}
+
+- (void)rightBtnClicked:(UIButton *)btn {
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    [self setupSlideButton];
+    [self setupNaviBar];
     self.roomList = [SQLManager getAllRoomsInfo];
       [self setUpRoomView];
       [self reachNotification];
-     [self setupSlideButton];
+    
       [self setUI];
     self.arrayData = @[@"删除此场景",@"收藏",@"语音"];
     _AddSceneBtn.layer.cornerRadius = _AddSceneBtn.bounds.size.width / 2.0; //圆角半径
@@ -95,13 +121,6 @@ static NSString * const CYPhotoId = @"photo";
 
 }
 
-- (void)setupSlideButton {
-    UIButton *menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    menuBtn.frame = CGRectMake(0, 0, 44, 44);
-    [menuBtn setImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
-    [menuBtn addTarget:self action:@selector(menuBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
-}
 -(void)setUI
 {
     // 创建CollectionView
