@@ -35,6 +35,7 @@
 //#import "IphoneRoomListController.h"
 #import "TVIconController.h"
 #import "IphoneNewAddSceneVC.h"
+#import "DeviceInfo.h"
 
 @interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,CYPhotoCellDelegate,UIViewControllerPreviewingDelegate,YZNavigationMenuViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (strong, nonatomic) IBOutlet IphoneRoomView *roomView;
@@ -66,7 +67,9 @@
 @end
 
 @implementation IphoneSceneController
+
 static NSString * const CYPhotoId = @"photo";
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -105,6 +108,10 @@ static NSString * const CYPhotoId = @"photo";
     CGRect frame = CGRectMake(0, 130, collectionW, collectionH);
     // 创建布局
     CYLineLayout *layout = [[CYLineLayout alloc] init];
+    DeviceInfo * device = [[DeviceInfo alloc] init];
+    if (device.) {
+        <#statements#>
+    }
     layout.itemSize = CGSizeMake(collectionW-90, collectionH-20);
     self.FirstCollectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
     self.FirstCollectionView.backgroundColor = [UIColor clearColor];
