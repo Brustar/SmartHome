@@ -18,6 +18,8 @@
 #import "SQLManager.h"
 #import <AVFoundation/AVFoundation.h>
 #import "ShortcutKeyViewController.h"
+#import "TabbarPanel.h"
+
 
 @interface FirstViewController ()<UITableViewDataSource,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIImageView *SubImageView;//首页的日历大圆
@@ -148,10 +150,12 @@
 
 -(void)HeadDoTap:(UITapGestureRecognizer *)tap
 {
+    TabbarPanel * tabbar = [[TabbarPanel alloc] init];
     if (self.socialView.hidden) {
         self.socialView.hidden = NO;
         _UserNameLabel.hidden = YES;
         _WelcomeLabel.hidden = YES;
+       tabbar.pannelSubBgView.hidden = YES;
     }else{
          self.socialView.hidden = YES;
         _UserNameLabel.hidden = NO;
