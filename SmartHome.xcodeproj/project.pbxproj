@@ -271,6 +271,9 @@
 		CDF389341E30F27500657C8B /* userHabitList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF389331E30F27500657C8B /* userHabitList.plist */; };
 		CDF78C501E9B5DEF00F8B20C /* circular@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF78C4E1E9B5DEF00F8B20C /* circular@2x.png */; };
 		CDF78C511E9B5DEF00F8B20C /* circular@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF78C4F1E9B5DEF00F8B20C /* circular@3x.png */; };
+		CDF78C551E9CA99D00F8B20C /* CustomNaviBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF78C541E9CA99D00F8B20C /* CustomNaviBarView.m */; };
+		CDF78C581E9CB24600F8B20C /* CustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF78C571E9CB24600F8B20C /* CustomViewController.m */; };
+		CDF78C5A1E9CC3C500F8B20C /* NaviBarBg.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF78C591E9CC3C500F8B20C /* NaviBarBg.png */; };
 		CDF90B411E1E425D009043B9 /* RoomDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF90B401E1E425D009043B9 /* RoomDetailViewController.m */; };
 		CDF90B431E2F0676009043B9 /* realScene.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF90B421E2F0676009043B9 /* realScene.plist */; };
 		CDF90B451E2F4B14009043B9 /* planeScene.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF90B441E2F4B14009043B9 /* planeScene.plist */; };
@@ -927,6 +930,11 @@
 		CDF389331E30F27500657C8B /* userHabitList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = userHabitList.plist; sourceTree = "<group>"; };
 		CDF78C4E1E9B5DEF00F8B20C /* circular@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circular@2x.png"; sourceTree = "<group>"; };
 		CDF78C4F1E9B5DEF00F8B20C /* circular@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circular@3x.png"; sourceTree = "<group>"; };
+		CDF78C531E9CA99D00F8B20C /* CustomNaviBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNaviBarView.h; sourceTree = "<group>"; };
+		CDF78C541E9CA99D00F8B20C /* CustomNaviBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNaviBarView.m; sourceTree = "<group>"; };
+		CDF78C561E9CB24600F8B20C /* CustomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomViewController.h; sourceTree = "<group>"; };
+		CDF78C571E9CB24600F8B20C /* CustomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomViewController.m; sourceTree = "<group>"; };
+		CDF78C591E9CC3C500F8B20C /* NaviBarBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NaviBarBg.png; sourceTree = "<group>"; };
 		CDF90B3F1E1E425D009043B9 /* RoomDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomDetailViewController.h; sourceTree = "<group>"; };
 		CDF90B401E1E425D009043B9 /* RoomDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomDetailViewController.m; sourceTree = "<group>"; };
 		CDF90B421E2F0676009043B9 /* realScene.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = realScene.plist; sourceTree = "<group>"; };
@@ -1244,6 +1252,7 @@
 		0F032D461CC9B12700D1920D /* SmartHome */ = {
 			isa = PBXGroup;
 			children = (
+				CDF78C521E9CA80A00F8B20C /* CustomNavigationBar */,
 				CDF157351E7AACE600499AC5 /* CustomTabbarController */,
 				0F6ADFD81E7133BB00BFF67F /* UI3.0 */,
 				0F6ADFD71E71329400BFF67F /* Libs */,
@@ -1804,6 +1813,7 @@
 		0F6ADFDC1E7134ED00BFF67F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				CDF78C591E9CC3C500F8B20C /* NaviBarBg.png */,
 				CDEC868C1E99E32B009EC245 /* Family */,
 				CD93E3AB1E807AD3003CCAA9 /* Login */,
 			);
@@ -2292,6 +2302,17 @@
 			name = png;
 			sourceTree = "<group>";
 		};
+		CDF78C521E9CA80A00F8B20C /* CustomNavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				CDF78C561E9CB24600F8B20C /* CustomViewController.h */,
+				CDF78C571E9CB24600F8B20C /* CustomViewController.m */,
+				CDF78C531E9CA99D00F8B20C /* CustomNaviBarView.h */,
+				CDF78C541E9CA99D00F8B20C /* CustomNaviBarView.m */,
+			);
+			name = CustomNavigationBar;
+			sourceTree = "<group>";
+		};
 		F63AE02E1D11540F00BE17DC /* PrettyRuler */ = {
 			isa = PBXGroup;
 			children = (
@@ -2651,6 +2672,7 @@
 				2E1D4F0D1E727AE2007625BD /* Slider2.png in Resources */,
 				CD7DDA0F1E82583700638DB3 /* pullBtn@2x.png in Resources */,
 				2EBABC7E1E8361C50093EF3A /* OtherTableViewCell.xib in Resources */,
+				CDF78C5A1E9CC3C500F8B20C /* NaviBarBg.png in Resources */,
 				CDF1574F1E7AB2AF00499AC5 /* icon_tabbar_mine@2x.png in Resources */,
 				2EE1196C1E80D6B900F6FCB6 /* shanchu.png in Resources */,
 				CD93E3AF1E807CC2003CCAA9 /* login_bg@2x.png in Resources */,
@@ -3035,6 +3057,7 @@
 				0F96A1641D17F37C00E1594F /* RulerItem.m in Sources */,
 				F67091BC1D93BF300002DDC5 /* WindowSlidingController.m in Sources */,
 				F64407D61DAE3BAD0032BEDF /* IphoneFavorController.m in Sources */,
+				CDF78C581E9CB24600F8B20C /* CustomViewController.m in Sources */,
 				2EC8A5931E372D75002A5042 /* ColourCell.m in Sources */,
 				0FAF8FFB1CE1D9BC000557BD /* UploadManager.m in Sources */,
 				F6359B001CFFC4DC0035EB31 /* ColourTableViewCell.m in Sources */,
@@ -3079,6 +3102,7 @@
 				0FAF74C31CEEA17C00432713 /* HRColorMapView.m in Sources */,
 				0FADA44A1CEBF8AE00777901 /* SceneManager.m in Sources */,
 				0F01D5441CDC6CA600DAC267 /* Scene.m in Sources */,
+				CDF78C551E9CA99D00F8B20C /* CustomNaviBarView.m in Sources */,
 				0FC41BAF1D6DA3DD000D4451 /* VoiceOrderController.m in Sources */,
 				CDF157401E7AADC700499AC5 /* LeftViewController.m in Sources */,
 				0FCFB3831CF28FCB00B37DD3 /* Curtain.m in Sources */,

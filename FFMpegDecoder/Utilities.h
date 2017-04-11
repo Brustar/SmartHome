@@ -28,4 +28,13 @@
 +(NSString *)bundlePath:(NSString *)fileName;
 +(NSString *)documentsPath:(NSString *)fileName;
 
+// 是否4英寸屏幕
++ (BOOL)is4InchScreen;
+
+// label设置最小字体大小
++ (void)label:(UILabel *)label setMiniFontSize:(CGFloat)fMiniSize forNumberOfLines:(NSInteger)iLines;
+
+// 清除PerformRequests和notification
++ (void)cancelPerformRequestAndNotification:(UIViewController *)viewCtrl;
+
 @end

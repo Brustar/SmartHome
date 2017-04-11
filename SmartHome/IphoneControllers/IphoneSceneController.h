@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomViewController.h"
 
-@interface IphoneSceneController : UIViewController
+@interface IphoneSceneController : CustomViewController
 
 @property (nonatomic,strong) NSString * shortcutName;
 @property (nonatomic,strong) Scene *scene;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, readonly) UIButton *naviRightBtn;
+@property (nonatomic, readonly) UIButton *naviLeftBtn;
 @end

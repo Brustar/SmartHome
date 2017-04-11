@@ -20,5 +20,6 @@
 @property(nonatomic, assign) NSInteger airconditionerStatus;//空调状态
 @property(nonatomic, assign) NSInteger dvdStatus;//DVD状态
 @property(nonatomic, assign) NSInteger tvStatus;//TV状态
+@property(nonatomic, assign) NSInteger mediaStatus;//影音状态
 
 @end

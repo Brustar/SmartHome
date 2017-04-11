@@ -16,31 +16,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setNaviBarTitle:@"注册"];
     _countryCodeArray = @[@"中国(+86)",@"中国台湾(+886)",@"中国香港(+852)",@"中国澳门(+851)"];
     [self.countryCodeTableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     self.countryCodeTableView.hidden = YES;
-    self.navigationController.navigationBar.hidden = NO;
-    self.navigationItem.title = @"注册";
-    [self setNaviBack];
 
     [self.phoneNumTextField setValue:[UIColor grayColor] forKeyPath:@"_placeholderLabel.textColor"];
     
     self.countryCode = @"86";//默认国家码
-}
-
-- (void)setNaviBack{
-    
-    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    backBtn.frame = CGRectMake(0, 0, 44, 44);
-    [backBtn setImage:[UIImage imageNamed:@"backBtn"] forState:UIControlStateNormal];
-    [backBtn addTarget:self action:@selector(backBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
-    UIBarButtonItem *item1 = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
-    UIBarButtonItem *item2 = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(backBtnAction:)];
-    
-    self.navigationItem.leftBarButtonItems = @[item1, item2];
-    
-    
 }
 
 - (void)backBtnAction:(UIButton *)btn {

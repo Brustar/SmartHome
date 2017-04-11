@@ -11,8 +11,9 @@
 #import "MBProgressHUD+NJ.h"
 #import "NSString+RegMatch.h"
 #import "WebManager.h"
+#import "CustomViewController.h"
 
-@interface RegistFirstStepViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, HttpDelegate, UITextFieldDelegate,UIAlertViewDelegate>
+@interface RegistFirstStepViewController : CustomViewController<UITableViewDelegate, UITableViewDataSource, HttpDelegate, UITextFieldDelegate,UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *homeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *authLabel;
 @property (weak, nonatomic) IBOutlet UILabel *countryCodeLabel;

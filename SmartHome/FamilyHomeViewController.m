@@ -14,8 +14,19 @@
 
 @implementation FamilyHomeViewController
 
+- (void)setupNaviBar {
+    [self setNaviBarTitle:@"家庭名称"]; //设置标题
+    //_naviLeftBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"clound_white" imgHighlight:@"clound_white" target:self action:@selector(leftBtnClicked:)];
+    _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"music_white" imgHighlight:@"music_white" target:self action:@selector(rightBtnClicked:)];
+    [self setNaviBarRightBtn:_naviRightBtn];
+}
+
+- (void)rightBtnClicked:(UIButton *)btn {
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setupNaviBar];
     self.lightIcon.layer.cornerRadius =  self.lightIcon.frame.size.width/2;
     self.lightIcon.layer.masksToBounds = YES;
     self.lightIcon.backgroundColor = RGB(243, 152, 0, 1);
@@ -36,6 +47,7 @@
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+    
 }
 
 - (void)fetchRoomDeviceStatus {
@@ -117,7 +129,7 @@
 }
 
 #pragma  mark - UICollectionViewDelegate
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
    
     return self.roomArray.count;
@@ -173,10 +185,8 @@
                         roomStatusInfo.humidity = roomStatus[@"humidity"];
                         roomStatusInfo.lightStatus = [roomStatus[@"light"] integerValue];
                         roomStatusInfo.curtainStatus = [roomStatus[@"curtain"] integerValue];
-                        roomStatusInfo.bgmusicStatus = [roomStatus[@"bgmusic"] integerValue];
+                        roomStatusInfo.mediaStatus = [roomStatus[@"media"] integerValue];
                         roomStatusInfo.airconditionerStatus = [roomStatus[@"aircondition"] integerValue];
-                        roomStatusInfo.dvdStatus = [roomStatus[@"dvd"] integerValue];
-                        roomStatusInfo.tvStatus = [roomStatus[@"tv"] integerValue];
                         
                         [_roomArray addObject:roomStatusInfo];
                         

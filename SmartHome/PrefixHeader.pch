@@ -28,3 +28,53 @@
 #define RGB(R, G, B, A) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]
 
 #define TabbarHeight 80
+
+#define Rect(x, y, w, h)                    CGRectMake(x, y, w, h)
+#define Size(w, h)                          CGSizeMake(w, h)
+#define Point(x, y)                         CGPointMake(x, y)
+#define IOSVersion                          [[[UIDevice currentDevice] systemVersion] floatValue]
+#define IsiOS7Later                         !(IOSVersion < 7.0)
+#define Is4Inch                             [Utilities is4InchScreen]
+
+#ifdef DEBUG
+
+#define ENABLE_ASSERT_STOP          1
+#define ENABLE_DEBUGLOG             1
+
+#endif
+
+// 颜色日志
+#define XCODE_COLORS_ESCAPE_MAC @"\033["
+#define XCODE_COLORS_ESCAPE_IOS @"\xC2\xA0["
+#define XCODE_COLORS_ESCAPE  XCODE_COLORS_ESCAPE_MAC
+#define XCODE_COLORS_RESET_FG  XCODE_COLORS_ESCAPE @"fg;" // Clear any foreground color
+#define XCODE_COLORS_RESET_BG  XCODE_COLORS_ESCAPE @"bg;" // Clear any background color
+#define XCODE_COLORS_RESET     XCODE_COLORS_ESCAPE @";"   // Clear any foreground or background color
+#define LogBlue(frmt, ...) NSLog((XCODE_COLORS_ESCAPE @"fg0,150,255;" frmt XCODE_COLORS_RESET), ##__VA_ARGS__)
+#define LogRed(frmt, ...) NSLog((XCODE_COLORS_ESCAPE @"fg250,0,0;" frmt XCODE_COLORS_RESET), ##__VA_ARGS__)
+#define LogGreen(frmt, ...) NSLog((XCODE_COLORS_ESCAPE @"fg0,235,30;" frmt XCODE_COLORS_RESET), ##__VA_ARGS__)
+
+// debug log
+#ifdef ENABLE_DEBUGLOG
+#define APP_DebugLog(...) NSLog(__VA_ARGS__)
+#define APP_DebugLogBlue(...) LogBlue(__VA_ARGS__)
+#define APP_DebugLogRed(...) LogRed(__VA_ARGS__)
+#define APP_DebugLogGreen(...) LogGreen(__VA_ARGS__)
+#else
+#define APP_DebugLog(...) do { } while (0);
+#define APP_DebugLogBlue(...) do { } while (0);
+#define APP_DebugLogRed(...) do { } while (0);
+#define APP_DebugLogGreen(...) do { } while (0);
+#endif
+
+// log
+#define APP_Log(...) NSLog(__VA_ARGS__)
+
+// assert
+#ifdef ENABLE_ASSERT_STOP
+#define APP_ASSERT_STOP                     {LogRed(@"APP_ASSERT_STOP"); NSAssert1(NO, @" \n\n\n===== APP Assert. =====\n%s\n\n\n", __PRETTY_FUNCTION__);}
+#define APP_ASSERT(condition)               {NSAssert(condition, @" ! Assert");}
+#else
+#define APP_ASSERT_STOP                     do {} while (0);
+#define APP_ASSERT(condition)               do {} while (0);
+#endif

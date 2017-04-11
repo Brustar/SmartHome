@@ -13,7 +13,7 @@
         <!--登录页面导航控制器-->
         <scene sceneID="6Ff-Ze-gCx">
             <objects>
-                <navigationController storyboardIdentifier="loginNavController" id="iB4-bP-LQK" userLabel="登录页面导航控制器" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="loginNavController" id="iB4-bP-LQK" userLabel="登录页面导航控制器" customClass="BaseNavController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" hidden="YES" contentMode="scaleToFill" barStyle="black" id="VaT-XC-9zZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
