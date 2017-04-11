@@ -64,7 +64,7 @@
     
     _sliderBtn = [[UIButton alloc] initWithFrame:CGRectMake(buttonWidth, btnTopGap, buttonWidth, buttonHeight)];
     _sliderBtn.tag = 987654;
-    [_sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
+    [_sliderBtn setBackgroundImage:[UIImage imageNamed:@"Scene-selected"] forState:UIControlStateNormal];
     _sliderBtn.titleLabel.font = [UIFont systemFontOfSize:btnTitleFontSize];
     [_sliderBtn setTitle:@"Home" forState:UIControlStateNormal];
     [_sliderBtn addTarget:self action:@selector(sliderBtnClicked:) forControlEvents:UIControlEventTouchUpInside];

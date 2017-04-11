@@ -241,9 +241,7 @@
 		CD93E3AF1E807CC2003CCAA9 /* login_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD93E3AE1E807CC2003CCAA9 /* login_bg@2x.png */; };
 		CD93E3B11E8081B0003CCAA9 /* login_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD93E3B01E8081B0003CCAA9 /* login_line@2x.png */; };
 		CDEC86801E95EBAB009EC245 /* TabbarPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEC867F1E95EBAB009EC245 /* TabbarPanel.m */; };
-		CDEC86821E95F4EA009EC245 /* Slider-frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDEC86811E95F4EA009EC245 /* Slider-frame@2x.png */; };
 		CDEC86841E960E92009EC245 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = CDEC86831E960E92009EC245 /* background.png */; };
-		CDEC86861E96156B009EC245 /* slider.png in Resources */ = {isa = PBXBuildFile; fileRef = CDEC86851E96156B009EC245 /* slider.png */; };
 		CDEC86891E976EC9009EC245 /* RegistFirstStepForPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEC86881E976EC9009EC245 /* RegistFirstStepForPhoneViewController.m */; };
 		CDEC868B1E99CD7B009EC245 /* Family.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDEC868A1E99CD7B009EC245 /* Family.storyboard */; };
 		CDEC86921E9A1D22009EC245 /* FamilyHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEC86911E9A1D22009EC245 /* FamilyHomeCell.m */; };
@@ -890,9 +888,7 @@
 		CD93E3B01E8081B0003CCAA9 /* login_line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_line@2x.png"; sourceTree = "<group>"; };
 		CDEC867E1E95EBAB009EC245 /* TabbarPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabbarPanel.h; sourceTree = "<group>"; };
 		CDEC867F1E95EBAB009EC245 /* TabbarPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabbarPanel.m; sourceTree = "<group>"; };
-		CDEC86811E95F4EA009EC245 /* Slider-frame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Slider-frame@2x.png"; sourceTree = "<group>"; };
 		CDEC86831E960E92009EC245 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
-		CDEC86851E96156B009EC245 /* slider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slider.png; sourceTree = "<group>"; };
 		CDEC86871E976EC9009EC245 /* RegistFirstStepForPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistFirstStepForPhoneViewController.h; sourceTree = "<group>"; };
 		CDEC86881E976EC9009EC245 /* RegistFirstStepForPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistFirstStepForPhoneViewController.m; sourceTree = "<group>"; };
 		CDEC868A1E99CD7B009EC245 /* Family.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Family.storyboard; sourceTree = "<group>"; };
@@ -2280,9 +2276,7 @@
 		CDF157431E7AB29A00499AC5 /* png */ = {
 			isa = PBXGroup;
 			children = (
-				CDEC86811E95F4EA009EC245 /* Slider-frame@2x.png */,
 				CDEC86831E960E92009EC245 /* background.png */,
-				CDEC86851E96156B009EC245 /* slider.png */,
 				2EC7D1D41E84CEA900284C0F /* lightBtn.png */,
 				2EE1196E1E81374A00F6FCB6 /* kaiqi.png */,
 				2EE1196B1E80D6B900F6FCB6 /* shanchu.png */,
@@ -2592,7 +2586,6 @@
 				CDF389341E30F27500657C8B /* userHabitList.plist in Resources */,
 				CDF90B431E2F0676009043B9 /* realScene.plist in Resources */,
 				CD78A8301E3379C200060466 /* 255_221.plist in Resources */,
-				CDEC86821E95F4EA009EC245 /* Slider-frame@2x.png in Resources */,
 				CD7DDA0D1E81298600638DB3 /* loginButton@2x.png in Resources */,
 				CDF78C501E9B5DEF00F8B20C /* circular@2x.png in Resources */,
 				CDF389281E30A91200657C8B /* energyDetail.plist in Resources */,
@@ -2612,7 +2605,6 @@
 				2E925D9E1E5E857D008E327B /* 4.jpg in Resources */,
 				CD7DDA151E826C3B00638DB3 /* backBtn@2x.png in Resources */,
 				CDF389241E306D2400657C8B /* maintaininfo.plist in Resources */,
-				0F7E2E161D581AC400A47D5D /* iPhone.storyboard in Resources */,
 				CD93E3B11E8081B0003CCAA9 /* login_line@2x.png in Resources */,
 				2E925DA21E5E857D008E327B /* 8.jpg in Resources */,
 				CDFB9DF01E5DC4B600BFECCE /* DeviceTimerList.plist in Resources */,
@@ -2669,7 +2661,6 @@
 				2E1D4F0F1E727AE4007625BD /* Slider1.png in Resources */,
 				CD7DDA0B1E81297D00638DB3 /* registButton@2x.png in Resources */,
 				F6359B011CFFC4DC0035EB31 /* ColourTableViewCell.xib in Resources */,
-				CDEC86861E96156B009EC245 /* slider.png in Resources */,
 				CD93E3AD1E807AFD003CCAA9 /* login_icon@2x.png in Resources */,
 				0F49CB6C1E7A1DBF00D46ECC /* Login.storyboard in Resources */,
 				2E925DA51E5E857D008E327B /* all_6.jpg in Resources */,
