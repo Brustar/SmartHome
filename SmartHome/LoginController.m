@@ -280,6 +280,39 @@
     [db close];
 }
 
+-(void) writeChatListConfigDataToSQL:(NSArray *)users
+{
+    if(users.count == 0 || users == nil)
+    {
+        return;
+    }
+    FMDatabase *db = [SQLManager connetdb];
+    if([db open])
+    {
+        NSString *delsql=@"delete from Scenes";
+        [db executeUpdate:delsql];
+        for (NSDictionary *user in users) {
+            
+            NSString *nickname = user[@"nickname"];
+            NSString *portrait = user[@"portrait"];
+            NSString *username = user[@"username"];
+            int user_id = [user[@"user_id"] intValue];
+
+            NSString *sql = [NSString stringWithFormat:@"insert into chats values('%@','%@','%@',%d)",nickname,portrait,username,user_id];
+            BOOL result = [db executeUpdate:sql];
+            if(result)
+            {
+                NSLog(@"insert 聊天信息 成功");
+            }else{
+                NSLog(@"insert 聊天信息 失败");
+            }
+            
+        }
+    }
+    
+    [db close];
+}
+
 //写场景配置信息到SQL
 -(void)writeScensConfigDataToSQL:(NSArray *)rooms
 {
@@ -454,7 +487,7 @@
             [IOManager writeUserdefault:responseObject[@"userid"] forKey:@"UserID"];
             [IOManager writeUserdefault:responseObject[@"usertype"] forKey:@"UserType"];
             [IOManager writeUserdefault:responseObject[@"vip"] forKey:@"vip"];
-                        NSArray *hostList = responseObject[@"hostlist"];
+            NSArray *hostList = responseObject[@"hostlist"];
             
             for(NSDictionary *hostID in hostList)
             {
@@ -476,6 +509,8 @@
                 [IOManager writeUserdefault:@(mid) forKey:@"HostID"];
                 info.masterID = mid;
             }
+            [IOManager writeUserdefault:responseObject[@"rctoken"] forKey:@"rctoken"];
+            [self writeChatListConfigDataToSQL:responseObject[@"userList"]];
             [self sendRequestForGettingConfigInfos:@"Cloud/load_config_data.aspx" withTag:2];
             
             //直接登录主机

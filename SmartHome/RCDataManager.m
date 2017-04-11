@@ -12,6 +12,7 @@
 
 #import "RCDataManager.h"
 #import "AppDelegate.h"
+#import "SQLManager.h"
 
 @implementation RCDataManager{
         NSMutableArray *dataSoure;
@@ -37,46 +38,15 @@
 #pragma mark - RCIMUserInfoDataSource
 - (void)getUserInfoWithUserId:(NSString*)userId completion:(void (^)(RCUserInfo*))completion
 {
-    NSLog(@"getUserInfoWithUserId ----- %@", userId);
-    
-    if ([userId isEqualToString:@"Brustar"]) {
-        completion(self.Brustar);
-    }else if([userId isEqualToString:@"Ecloud"]){
-        completion(self.Ecloud);
-    }else{
-        completion(self.Kobe);
-    }
-   
+    completion([self queryUserInfo:userId]);
 }
 
--(RCUserInfo *) Brustar
+-(RCUserInfo *) queryUserInfo:(NSString *)userID
 {
-    if(!_Brustar)
-    {
-        _Brustar = [[RCUserInfo alloc] initWithUserId:@"Brustar" name:@"Bruce" portrait:@"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2383941727,1702940827&fm=23&gp=0.jpg"];
-    }
-    
-    return _Brustar;
-}
-
--(RCUserInfo *) Ecloud
-{
-    if(!_Ecloud)
-    {
-        _Ecloud = [[RCUserInfo alloc] initWithUserId:@"Ecloud" name:@"Company" portrait:@"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3327061392,1889812535&fm=23&gp=0.jpg"];
-    }
-    
-    return _Ecloud;
-}
-
--(RCUserInfo *) Kobe
-{
-    if(!_Kobe)
-    {
-        _Kobe = [[RCUserInfo alloc] initWithUserId:@"Kobe" name:@"LY" portrait:@"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3729890206,3980454064&fm=23&gp=0.jpg"];
-    }
-    
-    return _Kobe;
+    RCUserInfo *info = nil;
+    NSArray *s = [SQLManager queryChat:userID];
+    info = [[RCUserInfo alloc] initWithUserId:userID name:[s objectAtIndex:0] portrait:[s objectAtIndex:1]];
+    return info;
 }
 
 @end
