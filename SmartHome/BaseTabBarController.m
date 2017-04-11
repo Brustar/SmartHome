@@ -29,8 +29,7 @@
     
     self.tabBar.hidden = YES;
     
-    CGFloat panelHeight = 80;
-    _tabbarPanel = [[TabbarPanel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-panelHeight, UI_SCREEN_WIDTH, panelHeight)];
+    _tabbarPanel = [[TabbarPanel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-TabbarHeight, UI_SCREEN_WIDTH, TabbarHeight)];
     _tabbarPanel.delegate = self;
     [self.view addSubview:_tabbarPanel];
 }
