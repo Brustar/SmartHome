@@ -146,6 +146,8 @@
 //编辑fm
 +(BOOL)getAllChangeChannelForFavoritedNewName:(NSString *)newName FmId:(NSInteger)fmId;
 +(NSString *)getDevicePicByID:(int)sceneID;
+
++(NSArray *)queryChat:(NSString *)userid;
 /*
 + (BOOL) addStates:(int)deviceID onoff:(BOOL)state;
 + (BOOL) queryState:(int)deviceID;
