@@ -65,6 +65,7 @@
     baseTabbarController.tabbarPanel.hidden = NO;
     baseTabbarController.tabBar.hidden = YES;
        [self setBtn];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {

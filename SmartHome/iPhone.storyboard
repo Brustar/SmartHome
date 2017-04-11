@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
+
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A2323a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="chj-yx-pDz">
     <device id="retina4_7" orientation="portrait">
-=======
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="chj-yx-pDz">
-    <device id="retina3_5" orientation="portrait">
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -402,7 +398,6 @@
                                 <rect key="frame" x="25" y="300" width="270" height="100"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3sF-wx-6sh">
-<<<<<<< HEAD
                                         <rect key="frame" x="0.0" y="0.0" width="108" height="32"/>
                                         <state key="normal" image="rewind"/>
                                     </button>
@@ -424,30 +419,9 @@
                                     </button>
                                     <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uku-Z3-YLA">
                                         <rect key="frame" x="217" y="68" width="108" height="32"/>
-=======
+
                                         <rect key="frame" x="0.0" y="0.0" width="90" height="32"/>
                                         <state key="normal" image="rewind"/>
-                                    </button>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aid-su-hs7">
-                                        <rect key="frame" x="90" y="0.0" width="90" height="32"/>
-                                        <state key="normal" image="broadcast"/>
-                                    </button>
-                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="35R-sK-3i2">
-                                        <rect key="frame" x="180" y="0.0" width="90" height="32"/>
-                                        <state key="normal" image="fastForward"/>
-                                    </button>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="85R-r0-38D">
-                                        <rect key="frame" x="0.0" y="68" width="90" height="32"/>
-                                        <state key="normal" image="last"/>
-                                    </button>
-                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B6d-mC-qW5">
-                                        <rect key="frame" x="90" y="68" width="90" height="32"/>
-                                        <state key="normal" image="pause"/>
-                                    </button>
-                                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uku-Z3-YLA">
-                                        <rect key="frame" x="180" y="68" width="90" height="32"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
-                                        <state key="normal" image="next"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -544,11 +518,8 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1OL-Lx-FvK" id="OJc-js-4gC">
-<<<<<<< HEAD
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
-=======
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="每周日" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K6k-Tm-jwO">
@@ -1153,33 +1124,24 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q5h-LH-tLD">
-<<<<<<< HEAD
                                         <rect key="frame" x="188" y="0.0" width="93" height="50"/>
-=======
-                                        <rect key="frame" x="160" y="0.0" width="80" height="50"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                         <state key="normal" title="日落"/>
                                         <connections>
                                             <action selector="selectedTypeOfAstronomical:" destination="Riy-7h-YUH" eventType="touchUpInside" id="Pv6-IL-KHc"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9qL-kF-gJH">
-<<<<<<< HEAD
                                         <rect key="frame" x="281" y="0.0" width="94" height="50"/>
-=======
-                                        <rect key="frame" x="240" y="0.0" width="80" height="50"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                         <state key="normal" title="黄昏"/>
                                         <connections>
                                             <action selector="selectedTypeOfAstronomical:" destination="Riy-7h-YUH" eventType="touchUpInside" id="vT5-Y8-py8"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H76-86-PcX">
-<<<<<<< HEAD
                                         <rect key="frame" x="94" y="0.0" width="94" height="50"/>
-=======
-                                        <rect key="frame" x="80" y="0.0" width="80" height="50"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                         <state key="normal" title="日出"/>
                                         <connections>
                                             <action selector="selectedTypeOfAstronomical:" destination="Riy-7h-YUH" eventType="touchUpInside" id="lsY-EO-1BS"/>
@@ -1392,11 +1354,8 @@
                                 <rect key="frame" x="0.0" y="496" width="320" height="40"/>
                                 <subviews>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ARK-h1-9Lx">
-<<<<<<< HEAD
                                         <rect key="frame" x="54" y="0.0" width="53" height="40"/>
-=======
-                                        <rect key="frame" x="45.5" y="0.0" width="46" height="40"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                         <color key="backgroundColor" red="0.7725490196" green="0.7725490196" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="一"/>
                                         <connections>
@@ -1404,11 +1363,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ekf-Jb-Qq4">
-<<<<<<< HEAD
                                         <rect key="frame" x="107" y="0.0" width="54" height="40"/>
-=======
-                                        <rect key="frame" x="91.5" y="0.0" width="45.5" height="40"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                         <color key="backgroundColor" red="0.7725490196" green="0.7725490196" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="二"/>
                                         <connections>
@@ -1416,11 +1372,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3EI-1i-5Mu">
-<<<<<<< HEAD
                                         <rect key="frame" x="161" y="0.0" width="53" height="40"/>
-=======
-                                        <rect key="frame" x="137" y="0.0" width="46" height="40"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                         <color key="backgroundColor" red="0.7725490196" green="0.7725490196" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="三"/>
                                         <connections>
@@ -1428,11 +1381,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1E-Yr-xzm">
-<<<<<<< HEAD
                                         <rect key="frame" x="268" y="0.0" width="53" height="40"/>
-=======
-                                        <rect key="frame" x="228.5" y="0.0" width="46" height="40"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                         <color key="backgroundColor" red="0.7725490196" green="0.7725490196" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="五"/>
                                         <connections>
@@ -1440,11 +1390,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TTB-Gg-voM">
-<<<<<<< HEAD
                                         <rect key="frame" x="214" y="0.0" width="54" height="40"/>
-=======
-                                        <rect key="frame" x="183" y="0.0" width="45.5" height="40"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                         <color key="backgroundColor" red="0.7725490196" green="0.7725490196" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="四"/>
                                         <connections>
@@ -1452,11 +1399,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P73-7b-rp8">
-<<<<<<< HEAD
                                         <rect key="frame" x="0.0" y="0.0" width="54" height="40"/>
-=======
-                                        <rect key="frame" x="0.0" y="0.0" width="45.5" height="40"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                         <color key="backgroundColor" red="0.7725490196" green="0.7725490196" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="日"/>
                                         <userDefinedRuntimeAttributes>
@@ -1470,11 +1414,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cgw-4a-aOn">
-<<<<<<< HEAD
                                         <rect key="frame" x="321" y="0.0" width="54" height="40"/>
-=======
-                                        <rect key="frame" x="274.5" y="0.0" width="45.5" height="40"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                         <color key="backgroundColor" red="0.7725490196" green="0.7725490196" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="六"/>
                                         <connections>
@@ -1877,11 +1818,8 @@
                                         <rect key="frame" x="0.0" y="28" width="282" height="54"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yVM-NR-ZTa" id="G4Q-0L-Ovq">
-<<<<<<< HEAD
                                             <rect key="frame" x="0.0" y="0.0" width="337" height="53"/>
-=======
-                                            <rect key="frame" x="0.0" y="0.0" width="282" height="53.5"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="10:30-14:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YhX-ho-kKu">
@@ -2034,40 +1972,26 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="80"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qnT-TO-NKs">
-<<<<<<< HEAD
                                         <rect key="frame" x="10" y="0.0" width="118" height="80"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="柔和" image="lightBtn.png" backgroundImage="button6-14.png">
-=======
-                                        <rect key="frame" x="10" y="0.0" width="100" height="80"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                        <state key="normal" title="柔和" image="lightBtn.png">
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEW-BX-OB2">
-<<<<<<< HEAD
                                         <rect key="frame" x="128" y="0.0" width="119" height="80"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
-=======
-                                        <rect key="frame" x="110" y="0.0" width="100" height="80"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                         <state key="normal" title="正常" image="lightBtn.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="86f-yD-Mu1">
-<<<<<<< HEAD
                                         <rect key="frame" x="247" y="0.0" width="118" height="80"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="明亮" image="lightBtn.png" backgroundImage="button6-14.png">
-=======
-                                        <rect key="frame" x="210" y="0.0" width="100" height="80"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                        <state key="normal" title="明亮" image="lightBtn.png">
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
@@ -2106,11 +2030,8 @@
                                         <rect key="frame" x="0.0" y="28" width="300" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kj4-n0-HTh" id="sfy-Dl-vN4">
-<<<<<<< HEAD
                                             <rect key="frame" x="0.0" y="0.0" width="355" height="59"/>
-=======
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="59.5"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="u48" translatesAutoresizingMaskIntoConstraints="NO" id="DFl-2S-atL">
@@ -2995,11 +2916,8 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="59"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Qld-cR-r5g" id="fbW-d7-gRL">
-<<<<<<< HEAD
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="58"/>
-=======
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="58.5"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cI4-SQ-r9m">
@@ -3392,11 +3310,8 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fWw-0R-Myy">
-<<<<<<< HEAD
                                                 <rect key="frame" x="112" y="169" width="150" height="150"/>
-=======
-                                                <rect key="frame" x="112" y="75" width="150" height="150"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ku2-2C-1hY">
                                                         <rect key="frame" x="60" y="60" width="30" height="30"/>
@@ -3455,11 +3370,8 @@
                                                 </constraints>
                                             </view>
                                             <pickerView hidden="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="zfc-Ne-BfT">
-<<<<<<< HEAD
                                                 <rect key="frame" x="0.0" y="339" width="375" height="128"/>
-=======
-                                                <rect key="frame" x="0.0" y="245" width="375" height="35"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                                 <color key="backgroundColor" red="0.88665550159999995" green="0.88665550159999995" blue="0.88665550159999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
                                                     <outlet property="dataSource" destination="4f1-Ce-GRA" id="WUj-94-CSR"/>
@@ -4324,81 +4236,57 @@
                                         <rect key="frame" x="0.0" y="80" width="200" height="170"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="制冷" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8HP-Hz-RyG">
-<<<<<<< HEAD
                                                 <rect key="frame" x="128" y="0.0" width="127" height="89"/>
-=======
-                                                <rect key="frame" x="100" y="0.0" width="100" height="42.5"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="抽湿" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xGR-AV-7nI">
-<<<<<<< HEAD
                                                 <rect key="frame" x="0.0" y="89" width="128" height="90"/>
-=======
-                                                <rect key="frame" x="0.0" y="42.5" width="100" height="42.5"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="湿度" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LR5-WQ-Te9">
-<<<<<<< HEAD
                                                 <rect key="frame" x="128" y="89" width="127" height="90"/>
-=======
-                                                <rect key="frame" x="100" y="42.5" width="100" height="42.5"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="噪音" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QX9-dO-JA9">
-<<<<<<< HEAD
                                                 <rect key="frame" x="0.0" y="179" width="128" height="89"/>
-=======
-                                                <rect key="frame" x="0.0" y="85" width="100" height="42.5"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="强劲" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xTT-51-MJT">
-<<<<<<< HEAD
                                                 <rect key="frame" x="128" y="179" width="127" height="89"/>
-=======
-                                                <rect key="frame" x="100" y="85" width="100" height="42.5"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="定时关" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ht2-qN-nvD">
-<<<<<<< HEAD
                                                 <rect key="frame" x="0.0" y="268" width="128" height="89"/>
-=======
-                                                <rect key="frame" x="0.0" y="127.5" width="100" height="42.5"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PM2.5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="edh-cv-YtT">
-<<<<<<< HEAD
                                                 <rect key="frame" x="128" y="268" width="127" height="89"/>
-=======
-                                                <rect key="frame" x="100" y="127.5" width="100" height="42.5"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="燃气" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7nh-qm-Srd">
-<<<<<<< HEAD
                                                 <rect key="frame" x="0.0" y="0.0" width="128" height="89"/>
-=======
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="42.5"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -4836,29 +4724,20 @@
                                 <rect key="frame" x="25" y="350" width="270" height="100"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gCo-HW-2p0">
-<<<<<<< HEAD
                                         <rect key="frame" x="0.0" y="80" width="108" height="32"/>
-=======
-                                        <rect key="frame" x="0.0" y="80" width="90" height="32"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" image="last"/>
                                     </button>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RfH-Lp-dr9">
-<<<<<<< HEAD
                                         <rect key="frame" x="217" y="80" width="108" height="32"/>
                                         <state key="normal" image="next"/>
                                     </button>
                                     <button hidden="YES" opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VCk-NG-2pd">
                                         <rect key="frame" x="108" y="80" width="109" height="32"/>
-=======
+
                                         <rect key="frame" x="180" y="80" width="90" height="32"/>
                                         <state key="normal" image="next"/>
-                                    </button>
-                                    <button hidden="YES" opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VCk-NG-2pd">
-                                        <rect key="frame" x="90" y="80" width="90" height="32"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
-                                        <state key="normal" image="broadcast"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -5368,11 +5247,9 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="99"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XBc-6m-0Pz" id="b01-84-EcK">
-<<<<<<< HEAD
+
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="98"/>
-=======
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="98.5"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="房间名字-场景名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ljP-9D-4S2">
@@ -5490,11 +5367,8 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="76"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Zmf-xY-XoC" id="0Z4-5n-hhJ">
-<<<<<<< HEAD
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
-=======
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="75.5"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="km4-z8-hO5">
@@ -5522,11 +5396,8 @@
                                                     </constraints>
                                                 </imageView>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="i9g-yK-VIU">
-<<<<<<< HEAD
                                                     <rect key="frame" x="318" y="0.0" width="51" height="38"/>
-=======
-                                                    <rect key="frame" x="263" y="0.0" width="51" height="37.5"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="49" id="7T2-vw-ca5"/>
                                                         <constraint firstAttribute="height" constant="37.5" id="YS8-Ip-2lt"/>
@@ -5563,11 +5434,8 @@
                                         <rect key="frame" x="0.0" y="104" width="320" height="76"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6Np-IE-ptQ" id="GfG-TU-PSD">
-<<<<<<< HEAD
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
-=======
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="75.5"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="主卧空调" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zQL-B4-DWH">
@@ -5731,11 +5599,8 @@
                                         <rect key="frame" x="0.0" y="28" width="240" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7Ha-DV-CiH" id="flR-9v-lQO">
-<<<<<<< HEAD
                                             <rect key="frame" x="0.0" y="0.0" width="295" height="43"/>
-=======
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="43.5"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Lel-bN-a7e">
@@ -5853,11 +5718,8 @@
                                         <rect key="frame" x="0.0" y="28" width="240" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uE2-Un-cut" id="eDO-nO-7zd">
-<<<<<<< HEAD
                                             <rect key="frame" x="0.0" y="0.0" width="295" height="43"/>
-=======
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="43.5"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bAj-iT-Mv4">
@@ -5975,11 +5837,8 @@
                                         <rect key="frame" x="0.0" y="28" width="240" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OAW-N8-Xfu" id="r3g-Sq-aSq">
-<<<<<<< HEAD
                                             <rect key="frame" x="0.0" y="0.0" width="295" height="43"/>
-=======
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="43.5"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8Vq-OX-AEV">
@@ -6097,11 +5956,8 @@
                                         <rect key="frame" x="0.0" y="28" width="240" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0PQ-LO-mvY" id="L2u-y0-sWL">
-<<<<<<< HEAD
                                             <rect key="frame" x="0.0" y="0.0" width="295" height="43"/>
-=======
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="43.5"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="00E-Jw-nDD">
@@ -6199,11 +6055,7 @@
                                 <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rc9-X0-Ptg" id="SKM-8v-9PR">
-<<<<<<< HEAD
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
-=======
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -6239,11 +6091,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="76"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SAJ-PD-KTu" id="AcP-oB-s1X">
-<<<<<<< HEAD
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
-=======
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="75.5"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1KN-8p-XtK">
@@ -6271,11 +6119,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="NVu-V6-HcF">
-<<<<<<< HEAD
                                                     <rect key="frame" x="318" y="0.0" width="51" height="38"/>
-=======
-                                                    <rect key="frame" x="263" y="0.0" width="51" height="37.5"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="49" id="AoW-ga-2Sh"/>
                                                         <constraint firstAttribute="height" constant="37.5" id="yWO-HS-GZu"/>
@@ -6312,11 +6156,7 @@
                                         <rect key="frame" x="0.0" y="104" width="320" height="76"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cSu-T8-0bb" id="mmc-Wg-xEG">
-<<<<<<< HEAD
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
-=======
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="75.5"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="调色灯" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wm2-ss-kgy">
@@ -6658,12 +6498,9 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="qN8-z6-Gb7"/>
-<<<<<<< HEAD
         <segue reference="jfc-yL-NEI"/>
         <segue reference="WeN-Qz-0Az"/>
-=======
         <segue reference="YuF-MW-0b0"/>
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
         <segue reference="Uo6-og-hnM"/>
         <segue reference="OCS-34-SI9"/>
     </inferredMetricsTieBreakers>

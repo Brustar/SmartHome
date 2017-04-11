@@ -109,8 +109,6 @@
 {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 180)];
     view.backgroundColor = [UIColor clearColor];
-    
-    
 
     UIButton *headButton = [UIButton buttonWithType:UIButtonTypeCustom];
     headButton.frame = CGRectMake(CGRectGetWidth(view.frame)/2-25, 40, 50, 50);
@@ -121,7 +119,6 @@
     
     
     UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(headButton.frame)+5, tableView.bounds.size.width, 20)];
-
     nameLabel.text = [UD objectForKey:@"UserName"];
     nameLabel.textColor = [UIColor whiteColor];
     nameLabel.textAlignment = NSTextAlignmentCenter;
