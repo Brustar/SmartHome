@@ -111,7 +111,7 @@
     view.backgroundColor = [UIColor clearColor];
     
     
-<<<<<<< HEAD
+
     UIButton *headButton = [UIButton buttonWithType:UIButtonTypeCustom];
     headButton.frame = CGRectMake(CGRectGetWidth(view.frame)/2-25, 40, 50, 50);
     headButton.layer.cornerRadius = 25;
@@ -121,15 +121,7 @@
     
     
     UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(headButton.frame)+5, tableView.bounds.size.width, 20)];
-=======
-    UIButton *imageButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    imageButton.frame = CGRectMake(CGRectGetWidth(view.frame)/2-25, 40, 50, 50);
-    imageButton.layer.cornerRadius = 25;
-    [imageButton setBackgroundImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
-    [view addSubview:imageButton];
-    [imageButton addTarget:self action:@selector(imgButtonAction) forControlEvents:UIControlEventTouchUpInside];
-    UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(imageButton.frame)+5, tableView.bounds.size.width, 20)];
->>>>>>> 8375f1ad82448b35028040bd619b9a9366eb8e9c
+
     nameLabel.text = [UD objectForKey:@"UserName"];
     nameLabel.textColor = [UIColor whiteColor];
     nameLabel.textAlignment = NSTextAlignmentCenter;
