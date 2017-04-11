@@ -291,6 +291,7 @@
     {
         NSString *delsql=@"delete from Scenes";
         [db executeUpdate:delsql];
+        int i=1;
         for (NSDictionary *user in users) {
             
             NSString *nickname = user[@"nickname"];
@@ -298,7 +299,7 @@
             NSString *username = user[@"username"];
             int user_id = [user[@"user_id"] intValue];
 
-            NSString *sql = [NSString stringWithFormat:@"insert into chats values('%@','%@','%@',%d)",nickname,portrait,username,user_id];
+            NSString *sql = [NSString stringWithFormat:@"insert into chats values(%d,'%@','%@','%@',%d)",i++,nickname,portrait,username,user_id];
             BOOL result = [db executeUpdate:sql];
             if(result)
             {
