@@ -19,6 +19,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "ShortcutKeyViewController.h"
 #import "TabbarPanel.h"
+#import "IOManager.h"
 
 
 @interface FirstViewController ()<UITableViewDataSource,UITableViewDataSource>
@@ -99,7 +100,7 @@
      UITapGestureRecognizer *Headtap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(HeadDoTap:)];
     _HeadImageView.userInteractionEnabled = YES;
 
-    
+//    [IOManager writeUserdefault:@(i-1) forKey:@"familyNum"];
     [_HeadImageView addGestureRecognizer:Headtap];
     _calenderDayLabel.adjustsFontSizeToFitWidth = YES;
     _calenderYearLabel.adjustsFontSizeToFitWidth = YES;
