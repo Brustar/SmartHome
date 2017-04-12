@@ -35,6 +35,9 @@
 //#import "IphoneRoomListController.h"
 #import "TVIconController.h"
 #import "IphoneNewAddSceneVC.h"
+#import "DeviceInfo.h"
+
+#define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)  
 
 @interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,CYPhotoCellDelegate,UIViewControllerPreviewingDelegate,YZNavigationMenuViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (strong, nonatomic) IBOutlet IphoneRoomView *roomView;
@@ -66,7 +69,9 @@
 @end
 
 @implementation IphoneSceneController
+
 static NSString * const CYPhotoId = @"photo";
+
 
 - (void)setupNaviBar {
     [self setNaviBarTitle:@"家庭名称"]; //设置标题
@@ -124,7 +129,13 @@ static NSString * const CYPhotoId = @"photo";
     CGRect frame = CGRectMake(0, 130, collectionW, collectionH);
     // 创建布局
     CYLineLayout *layout = [[CYLineLayout alloc] init];
-    layout.itemSize = CGSizeMake(collectionW-90, collectionH-20);
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    [device deviceGenaration];
+    if (([UIScreen mainScreen].bounds.size.height == 568.0)) {
+        layout.itemSize = CGSizeMake(collectionW-50, collectionH-20);
+    }else{
+        layout.itemSize = CGSizeMake(collectionW-90, collectionH-20);
+    }
     self.FirstCollectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
     self.FirstCollectionView.backgroundColor = [UIColor clearColor];
     self.FirstCollectionView.dataSource = self;
@@ -457,7 +468,7 @@ static NSString * const CYPhotoId = @"photo";
     self.SceneNameLabel.text = self.scene.sceneName;
     self.delegateBtn.selected = !self.delegateBtn.selected;
     if (self.delegateBtn.selected) {
-        [self.delegateBtn setImage:[UIImage imageNamed:@"delete_red"] forState:UIControlStateSelected];
+        [self.delegateBtn setBackgroundImage:[UIImage imageNamed:@"delete_red"] forState:UIControlStateSelected];
         
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"是否删除“%@”场景？",self.SceneNameLabel.text] preferredStyle:UIAlertControllerStyleAlert];
         
@@ -479,7 +490,7 @@ static NSString * const CYPhotoId = @"photo";
         
         [self presentViewController:alert animated:YES completion:nil];
     }else{
-        [self.delegateBtn setImage:[UIImage imageNamed:@"delete_white"] forState:UIControlStateNormal];
+        [self.delegateBtn setBackgroundImage:[UIImage imageNamed:@"delete_white"] forState:UIControlStateNormal];
        
     }
 }
@@ -489,11 +500,11 @@ static NSString * const CYPhotoId = @"photo";
     self.sceneID = self.scene.sceneID;
     self.startBtn.selected = !self.startBtn.selected;
     if (self.startBtn.selected) {
-        [self.startBtn setImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
+        [self.startBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
         [[SceneManager defaultManager] startScene:self.sceneID];
          [SQLManager updateSceneStatus:1 sceneID:self.sceneID];//更新数据库
     }else{
-        [self.startBtn setImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
+        [self.startBtn setBackgroundImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
         [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];
          [SQLManager updateSceneStatus:0 sceneID:self.sceneID];//更新数据库
     }

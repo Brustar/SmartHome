@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ScreenCurtainCell" rowHeight="116" id="KGk-i7-Jjw" customClass="ScreenCurtainCell">
+            <rect key="frame" x="0.0" y="0.0" width="381" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="381" height="99.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dvd_frm_choice__normal" translatesAutoresizingMaskIntoConstraints="NO" id="dHx-cQ-8iB">
+                        <rect key="frame" x="0.0" y="50" width="381" height="50"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="Edv-qW-Psy"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rc5-hL-egz">
+                        <rect key="frame" x="8" y="60" width="121.5" height="30"/>
+                        <state key="normal" image="dvd_btn_adjust_normal"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OFd-Kj-Hsb">
+                        <rect key="frame" x="251.5" y="60" width="121.5" height="30"/>
+                        <state key="normal" image="dvd_btn_adjust_normal"/>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="幕布" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NBC-o1-qnC">
+                        <rect key="frame" x="10" y="0.0" width="100" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="emW-aY-mCj"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D4k-av-6ph">
+                        <rect key="frame" x="323" y="7" width="42" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="GWa-8T-tfU"/>
+                            <constraint firstAttribute="width" constant="40" id="yV6-Aq-gGs"/>
+                        </constraints>
+                    </switch>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xph-53-ijS">
+                        <rect key="frame" x="129.5" y="60" width="122" height="30"/>
+                        <state key="normal" image="dvd_btn_adjust_normal"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="rc5-hL-egz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="52" id="1m4-yj-lyF"/>
+                    <constraint firstItem="OFd-Kj-Hsb" firstAttribute="leading" secondItem="Xph-53-ijS" secondAttribute="trailing" id="2Hj-ln-llr"/>
+                    <constraint firstItem="rc5-hL-egz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="2td-5d-sDt"/>
+                    <constraint firstItem="Xph-53-ijS" firstAttribute="height" secondItem="rc5-hL-egz" secondAttribute="height" id="6sw-VA-NNy"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Xph-53-ijS" secondAttribute="bottom" constant="1.5" id="8kE-A3-ovv"/>
+                    <constraint firstAttribute="bottom" secondItem="dHx-cQ-8iB" secondAttribute="bottom" id="AYr-TD-74t"/>
+                    <constraint firstItem="NBC-o1-qnC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Ctk-8G-Sqx"/>
+                    <constraint firstItem="NBC-o1-qnC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="E3s-hX-0XQ"/>
+                    <constraint firstItem="Xph-53-ijS" firstAttribute="width" secondItem="rc5-hL-egz" secondAttribute="width" id="Ffz-at-zwr"/>
+                    <constraint firstItem="Xph-53-ijS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="52" id="Gbv-2C-1lh"/>
+                    <constraint firstItem="OFd-Kj-Hsb" firstAttribute="width" secondItem="rc5-hL-egz" secondAttribute="width" id="SOZ-n5-fng"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="OFd-Kj-Hsb" secondAttribute="bottom" constant="1.5" id="WIo-bQ-Ddv"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="D4k-av-6ph" secondAttribute="trailing" constant="10" id="aLV-vs-Sfg"/>
+                    <constraint firstItem="OFd-Kj-Hsb" firstAttribute="height" secondItem="rc5-hL-egz" secondAttribute="height" id="bvi-vc-2mo"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="OFd-Kj-Hsb" secondAttribute="trailing" id="c8v-aC-hdJ"/>
+                    <constraint firstAttribute="trailing" secondItem="dHx-cQ-8iB" secondAttribute="trailing" id="cSC-z1-Vw5"/>
+                    <constraint firstItem="dHx-cQ-8iB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="e80-iw-iAB"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="rc5-hL-egz" secondAttribute="bottom" constant="1.5" id="gL4-hT-wNX"/>
+                    <constraint firstItem="Xph-53-ijS" firstAttribute="leading" secondItem="rc5-hL-egz" secondAttribute="trailing" id="gWk-GK-12z"/>
+                    <constraint firstItem="dHx-cQ-8iB" firstAttribute="top" secondItem="D4k-av-6ph" secondAttribute="bottom" constant="3" id="v07-SX-yKq"/>
+                    <constraint firstItem="dHx-cQ-8iB" firstAttribute="top" secondItem="NBC-o1-qnC" secondAttribute="bottom" id="wbQ-Og-a4y"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="DownBtn" destination="OFd-Kj-Hsb" id="3X5-wE-E21"/>
+                <outlet property="PowerSwitch" destination="D4k-av-6ph" id="G2e-qJ-Xp0"/>
+                <outlet property="ScreenCurtainLabel" destination="NBC-o1-qnC" id="XUj-dy-fdz"/>
+                <outlet property="UPBtn" destination="rc5-hL-egz" id="bs2-rU-ICR"/>
+                <outlet property="stopBtn" destination="Xph-53-ijS" id="hsu-BH-T2m"/>
+            </connections>
+            <point key="canvasLocation" x="-141.5" y="57"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="dvd_btn_adjust_normal" width="91" height="38"/>
+        <image name="dvd_frm_choice__normal" width="336" height="47"/>
+    </resources>
+</document>

@@ -47,6 +47,7 @@
         if (i == 0) {
             _deviceBtn = btn;
             [_deviceBtn setTitle:@"设备" forState:UIControlStateNormal];
+        
             
         }else if (i == 1) {
             _homeBtn = btn;
@@ -84,6 +85,7 @@
     [_sliderBtn addGestureRecognizer:recognizer];
 
     [self addSubview:_pannelBgView];
+    
 }
 
 - (void)btnClicked:(UIButton *)sender {

@@ -109,7 +109,7 @@
 {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 180)];
     view.backgroundColor = [UIColor clearColor];
-    
+
     UIButton *headButton = [UIButton buttonWithType:UIButtonTypeCustom];
     headButton.frame = CGRectMake(CGRectGetWidth(view.frame)/2-25, 40, 50, 50);
     headButton.layer.cornerRadius = 25;

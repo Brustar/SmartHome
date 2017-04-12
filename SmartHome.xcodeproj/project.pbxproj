@@ -196,6 +196,10 @@
 		2EA97E661E56A3E7003E0039 /* test.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2EA97E651E56A3E7003E0039 /* test.jpeg */; };
 		2EA99E901E1C9A0100659065 /* MySubEnergyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA99E8F1E1C9A0100659065 /* MySubEnergyVC.m */; };
 		2EB2A4721E237F05003F01DB /* DeviceListTimeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB2A4711E237F05003F01DB /* DeviceListTimeVC.m */; };
+		2EB516F41E9CE3A40064B18E /* ScreenCurtainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB516F21E9CE3A40064B18E /* ScreenCurtainCell.m */; };
+		2EB516F51E9CE3A40064B18E /* ScreenCurtainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2EB516F31E9CE3A40064B18E /* ScreenCurtainCell.xib */; };
+		2EB516F91E9CEB3F0064B18E /* AddDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB516F71E9CEB3F0064B18E /* AddDeviceCell.m */; };
+		2EB516FA1E9CEB3F0064B18E /* AddDeviceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2EB516F81E9CEB3F0064B18E /* AddDeviceCell.xib */; };
 		2EBABC731E835EC70093EF3A /* AireTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBABC711E835EC70093EF3A /* AireTableViewCell.m */; };
 		2EBABC741E835EC70093EF3A /* AireTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2EBABC721E835EC70093EF3A /* AireTableViewCell.xib */; };
 		2EBABC781E8360FB0093EF3A /* TVTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBABC761E8360FB0093EF3A /* TVTableViewCell.m */; };
@@ -817,6 +821,12 @@
 		2EA99E8F1E1C9A0100659065 /* MySubEnergyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySubEnergyVC.m; sourceTree = "<group>"; };
 		2EB2A4701E237F05003F01DB /* DeviceListTimeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceListTimeVC.h; sourceTree = "<group>"; };
 		2EB2A4711E237F05003F01DB /* DeviceListTimeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceListTimeVC.m; sourceTree = "<group>"; };
+		2EB516F11E9CE3A40064B18E /* ScreenCurtainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenCurtainCell.h; sourceTree = "<group>"; };
+		2EB516F21E9CE3A40064B18E /* ScreenCurtainCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenCurtainCell.m; sourceTree = "<group>"; };
+		2EB516F31E9CE3A40064B18E /* ScreenCurtainCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScreenCurtainCell.xib; sourceTree = "<group>"; };
+		2EB516F61E9CEB3F0064B18E /* AddDeviceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddDeviceCell.h; sourceTree = "<group>"; };
+		2EB516F71E9CEB3F0064B18E /* AddDeviceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddDeviceCell.m; sourceTree = "<group>"; };
+		2EB516F81E9CEB3F0064B18E /* AddDeviceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddDeviceCell.xib; sourceTree = "<group>"; };
 		2EBABC701E835EC70093EF3A /* AireTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AireTableViewCell.h; sourceTree = "<group>"; };
 		2EBABC711E835EC70093EF3A /* AireTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AireTableViewCell.m; sourceTree = "<group>"; };
 		2EBABC721E835EC70093EF3A /* AireTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AireTableViewCell.xib; sourceTree = "<group>"; };
@@ -2144,6 +2154,12 @@
 				2EBABC841E839F2E0093EF3A /* DVDTableViewCell.h */,
 				2EBABC851E839F2E0093EF3A /* DVDTableViewCell.m */,
 				2EBABC861E839F2E0093EF3A /* DVDTableViewCell.xib */,
+				2EB516F11E9CE3A40064B18E /* ScreenCurtainCell.h */,
+				2EB516F21E9CE3A40064B18E /* ScreenCurtainCell.m */,
+				2EB516F31E9CE3A40064B18E /* ScreenCurtainCell.xib */,
+				2EB516F61E9CEB3F0064B18E /* AddDeviceCell.h */,
+				2EB516F71E9CEB3F0064B18E /* AddDeviceCell.m */,
+				2EB516F81E9CEB3F0064B18E /* AddDeviceCell.xib */,
 			);
 			name = TableViewCell;
 			sourceTree = "<group>";
@@ -2658,6 +2674,7 @@
 				2E925DA41E5E857D008E327B /* all_5.jpg in Resources */,
 				CDF389261E30A31300657C8B /* energylist.plist in Resources */,
 				2EBABC741E835EC70093EF3A /* AireTableViewCell.xib in Resources */,
+				2EB516F51E9CE3A40064B18E /* ScreenCurtainCell.xib in Resources */,
 				CDF1574C1E7AB2AF00499AC5 /* icon_tabbar_homepage@2x.png in Resources */,
 				CD51343F1E92807600C2EDAF /* tipIcon@2x.png in Resources */,
 				0F49CB6E1E7A1E3700D46ECC /* MyInfo.storyboard in Resources */,
@@ -2675,6 +2692,7 @@
 				2E1D4F0F1E727AE4007625BD /* Slider1.png in Resources */,
 				CD7DDA0B1E81297D00638DB3 /* registButton@2x.png in Resources */,
 				F6359B011CFFC4DC0035EB31 /* ColourTableViewCell.xib in Resources */,
+				2EB516FA1E9CEB3F0064B18E /* AddDeviceCell.xib in Resources */,
 				CD93E3AD1E807AFD003CCAA9 /* login_icon@2x.png in Resources */,
 				0F49CB6C1E7A1DBF00D46ECC /* Login.storyboard in Resources */,
 				2E925DA51E5E857D008E327B /* all_6.jpg in Resources */,
@@ -3022,6 +3040,7 @@
 				F680AAB71DD94565001D1807 /* FamilyCell.m in Sources */,
 				2E7B64BF1E9B6796001F7469 /* IphoneNewAddSceneTimerVC.m in Sources */,
 				2E801EFF1E262B0B0039A6D9 /* WeekdaysVC.m in Sources */,
+				2EB516F41E9CE3A40064B18E /* ScreenCurtainCell.m in Sources */,
 				0F91AA171CDC798700094C25 /* PrintObject.m in Sources */,
 				0F3CCF3B1D0F97B70058A320 /* CameraController.m in Sources */,
 				0FC0FFDA1CF577C0000F71D5 /* RealScene.m in Sources */,
@@ -3079,6 +3098,7 @@
 				0F4B3C731E7BE57A00102DD3 /* GDataXMLNode.m in Sources */,
 				2EA2A83B1E1DCDA600092D41 /* AreaSubSettingViewController.m in Sources */,
 				CDEC86921E9A1D22009EC245 /* FamilyHomeCell.m in Sources */,
+				2EB516F91E9CEB3F0064B18E /* AddDeviceCell.m in Sources */,
 				0F032D4C1CC9B12700D1920D /* AppDelegate.m in Sources */,
 				0FB205ED1CDC3D3700B5E87E /* AudioManager.m in Sources */,
 				F68A5DD81D782D8400601612 /* ECSearchView.m in Sources */,

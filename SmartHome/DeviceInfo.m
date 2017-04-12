@@ -53,6 +53,7 @@
     if ([deviceString isEqualToString:@"iPhone5,2"] || [deviceString isEqualToString:@"iPhone5,2"])    self.genaration = iPhone5;
     if ([deviceString isEqualToString:@"iPhone5,3"] || [deviceString isEqualToString:@"iPhone5,4"])   self.genaration = iPhone5C;
     if ([deviceString isEqualToString:@"iPhone6,1"] || [deviceString isEqualToString:@"iPhone6,2"])   self.genaration = iPhone5S;
+    if ([deviceString isEqualToString:@"iPhone8,4"])  self.genaration = iPhoneSE;
     if ([deviceString isEqualToString:@"iPhone7,1"])   self.genaration = iPhone6Plus;
     if ([deviceString isEqualToString:@"iPhone7,2"])    self.genaration = iPhone6;
     if ([deviceString isEqualToString:@"iPhone8,1"])    self.genaration = iPhone6S;

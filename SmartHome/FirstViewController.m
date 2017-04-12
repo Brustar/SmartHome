@@ -18,6 +18,8 @@
 #import "SQLManager.h"
 #import <AVFoundation/AVFoundation.h>
 #import "ShortcutKeyViewController.h"
+#import "TabbarPanel.h"
+
 
 @interface FirstViewController ()<UITableViewDataSource,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIImageView *SubImageView;//首页的日历大圆
@@ -44,6 +46,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *TwoBtn;
 @property (weak, nonatomic) IBOutlet UIButton *ThreeBtn;
 @property (weak, nonatomic) IBOutlet UIView *subView;
+@property (weak, nonatomic) IBOutlet UIButton *UnreadButton;//点击未读消息的按钮
 
 @end
 
@@ -64,8 +67,8 @@
     BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     baseTabbarController.tabbarPanel.hidden = NO;
     baseTabbarController.tabBar.hidden = YES;
-    
-    [self setBtn];
+       [self setBtn];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -146,18 +149,24 @@
   
 }
 
+//社交平台的弹出事件
 -(void)HeadDoTap:(UITapGestureRecognizer *)tap
 {
+    TabbarPanel * tabbar = [[TabbarPanel alloc] init];
     if (self.socialView.hidden) {
         self.socialView.hidden = NO;
         _UserNameLabel.hidden = YES;
         _WelcomeLabel.hidden = YES;
+       tabbar.pannelSubBgView.hidden = YES;
     }else{
          self.socialView.hidden = YES;
         _UserNameLabel.hidden = NO;
         _WelcomeLabel.hidden = NO;
     }
+    
+    
 }
+//中间大圆点击进入家庭主页
 -(void)doTap:(UITapGestureRecognizer *)tap
 {
         UIStoryboard *iPhoneStoryBoard  = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
@@ -280,6 +289,11 @@
     }
     
 }
+//点击未读消息的事件
+- (IBAction)UnreadButton:(id)sender {
+   
+}
+
 //减音量
 - (IBAction)smallVolume:(id)sender {
 }

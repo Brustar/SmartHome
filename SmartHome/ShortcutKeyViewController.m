@@ -61,8 +61,9 @@
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     ShortcutKeyCell * cell = [tableView dequeueReusableCellWithIdentifier:@"ShortcutKeyCell" forIndexPath:indexPath];
-
+    cell.backgroundColor = [UIColor clearColor];
     if (indexPath.section == 0) {
         cell.sceneNameImage.image = [UIImage imageNamed:@"logo"];
         cell.sceneNameLabel.text = _seleteSceneArray[indexPath.row];
@@ -71,6 +72,7 @@
         Scene * scene = _AllSceneArray[indexPath.row];
         cell.sceneNameLabel.text = scene.sceneName;
         cell.sceneNameImage.image = [UIImage imageNamed:@"logo"];
+//        cell.sceneNameImage.image = [UIImage imageNamed:scene.picName];
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }
     return cell;

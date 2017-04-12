@@ -1,78 +1,133 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DVDTableViewCell" id="KGk-i7-Jjw" customClass="DVDTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DVDTableViewCell" rowHeight="133" id="KGk-i7-Jjw" customClass="DVDTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="339" height="145"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="339" height="145"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="客厅DVD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="je0-2Y-f1l">
-                        <rect key="frame" x="8" y="11" width="60" height="21"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lv_fm_adjust_normal" translatesAutoresizingMaskIntoConstraints="NO" id="M28-8e-zHA">
+                        <rect key="frame" x="0.0" y="94" width="339" height="50"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="60" id="2FW-1O-nwy"/>
-                            <constraint firstAttribute="height" constant="21" id="fmA-WL-ufL"/>
+                            <constraint firstAttribute="height" constant="50" id="uxK-7J-6GO"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <nil key="textColor"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="客厅DVD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="je0-2Y-f1l">
+                        <rect key="frame" x="10" y="0.0" width="100" height="49"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="4V3-5i-Qzt"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="close" translatesAutoresizingMaskIntoConstraints="NO" id="ZRr-fE-u93">
-                        <rect key="frame" x="73" y="7" width="30" height="30"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_icon_voi_high" translatesAutoresizingMaskIntoConstraints="NO" id="ZRr-fE-u93">
+                        <rect key="frame" x="18" y="112" width="10" height="10"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="2R9-BL-U6l"/>
-                            <constraint firstAttribute="width" constant="30" id="U4w-br-ziY"/>
+                            <constraint firstAttribute="height" constant="10" id="n2W-cb-0Ii"/>
+                            <constraint firstAttribute="width" constant="10" id="yqh-A5-WRL"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_icon_voi_high" translatesAutoresizingMaskIntoConstraints="NO" id="RxL-mC-ARL">
+                        <rect key="frame" x="306" y="110" width="15" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="MUc-jh-RqR"/>
+                            <constraint firstAttribute="width" constant="15" id="ugu-xS-X5k"/>
                         </constraints>
                     </imageView>
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="NYR-NW-O6b">
-                        <rect key="frame" x="111" y="6" width="171" height="31"/>
+                        <rect key="frame" x="36" y="101" width="262" height="31"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="nvn-Zb-CFb"/>
+                            <constraint firstAttribute="height" constant="30" id="Q0h-1a-MNG"/>
                         </constraints>
                     </slider>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K7g-ZP-h5U">
-                        <rect key="frame" x="290" y="7" width="30" height="30"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dvd_frm_choice__normal" translatesAutoresizingMaskIntoConstraints="NO" id="F7B-y2-2nU">
+                        <rect key="frame" x="1" y="49" width="337" height="50"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="dNx-DG-KTb"/>
-                            <constraint firstAttribute="width" constant="30" id="zwa-nz-Hhg"/>
+                            <constraint firstAttribute="height" constant="50" id="ZE6-sO-ZC5"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <state key="normal" title="开关"/>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQ4-Nq-8mW">
+                        <rect key="frame" x="18" y="57" width="104.5" height="37"/>
+                        <state key="normal" image="dvd_btn_adjust_normal">
+                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UYH-Br-BuW">
+                        <rect key="frame" x="226.5" y="57" width="104.5" height="37"/>
+                        <state key="normal" image="dvd_btn_adjust_normal"/>
+                    </button>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OqP-ir-MRF">
+                        <rect key="frame" x="281" y="4" width="42" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="JDz-EP-gKW"/>
+                            <constraint firstAttribute="width" constant="40" id="vyT-dA-14D"/>
+                        </constraints>
+                    </switch>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="75B-Ud-NQ6">
+                        <rect key="frame" x="122.5" y="57" width="104" height="37"/>
+                        <state key="normal" image="dvd_btn_adjust_normal"/>
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="K7g-ZP-h5U" secondAttribute="trailing" id="6FU-Ss-LW7"/>
-                    <constraint firstItem="je0-2Y-f1l" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="9ft-yF-X3s"/>
-                    <constraint firstItem="je0-2Y-f1l" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="B2y-9o-ZGQ"/>
-                    <constraint firstItem="NYR-NW-O6b" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="GjF-FF-vW4"/>
-                    <constraint firstItem="K7g-ZP-h5U" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Qks-he-QSI"/>
-                    <constraint firstItem="NYR-NW-O6b" firstAttribute="leading" secondItem="ZRr-fE-u93" secondAttribute="trailing" constant="10" id="XH1-RD-CgM"/>
-                    <constraint firstItem="K7g-ZP-h5U" firstAttribute="leading" secondItem="NYR-NW-O6b" secondAttribute="trailing" constant="10" id="lTc-Ov-Kyb"/>
-                    <constraint firstItem="ZRr-fE-u93" firstAttribute="leading" secondItem="je0-2Y-f1l" secondAttribute="trailing" constant="5" id="skc-q3-fCG"/>
-                    <constraint firstItem="ZRr-fE-u93" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="w6q-QE-DP8"/>
+                    <constraint firstAttribute="trailing" secondItem="M28-8e-zHA" secondAttribute="trailing" id="9zL-Me-m6e"/>
+                    <constraint firstItem="F7B-y2-2nU" firstAttribute="centerX" secondItem="M28-8e-zHA" secondAttribute="centerX" id="Dkt-2h-gDx"/>
+                    <constraint firstItem="F7B-y2-2nU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-7" id="Gww-il-19j"/>
+                    <constraint firstItem="UYH-Br-BuW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="49" id="IVS-ad-rDR"/>
+                    <constraint firstItem="F7B-y2-2nU" firstAttribute="top" secondItem="je0-2Y-f1l" secondAttribute="bottom" id="JLh-fV-2p5"/>
+                    <constraint firstItem="NYR-NW-O6b" firstAttribute="top" secondItem="F7B-y2-2nU" secondAttribute="bottom" constant="2" id="K8h-9C-4eR"/>
+                    <constraint firstItem="F7B-y2-2nU" firstAttribute="top" secondItem="OqP-ir-MRF" secondAttribute="bottom" constant="5" id="KoR-wY-KOV"/>
+                    <constraint firstItem="aQ4-Nq-8mW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="LpR-Wf-r8M"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="UYH-Br-BuW" secondAttribute="trailing" id="MAC-pY-5LJ"/>
+                    <constraint firstItem="NYR-NW-O6b" firstAttribute="leading" secondItem="ZRr-fE-u93" secondAttribute="trailing" constant="10" id="PRI-qc-HzQ"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="RxL-mC-ARL" secondAttribute="trailing" constant="10" id="Pnh-Qf-adm"/>
+                    <constraint firstItem="75B-Ud-NQ6" firstAttribute="leading" secondItem="aQ4-Nq-8mW" secondAttribute="trailing" id="QUU-h6-CbJ"/>
+                    <constraint firstItem="M28-8e-zHA" firstAttribute="top" secondItem="75B-Ud-NQ6" secondAttribute="bottom" id="SgQ-Uf-RbA"/>
+                    <constraint firstItem="RxL-mC-ARL" firstAttribute="leading" secondItem="NYR-NW-O6b" secondAttribute="trailing" constant="10" id="WUF-1O-RVO"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="RxL-mC-ARL" secondAttribute="bottom" constant="11.5" id="XYO-TN-HKd"/>
+                    <constraint firstItem="M28-8e-zHA" firstAttribute="top" secondItem="UYH-Br-BuW" secondAttribute="bottom" id="YhI-bQ-9h8"/>
+                    <constraint firstItem="ZRr-fE-u93" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="aSk-M5-lnN"/>
+                    <constraint firstItem="UYH-Br-BuW" firstAttribute="height" secondItem="aQ4-Nq-8mW" secondAttribute="height" id="dGO-jh-48i"/>
+                    <constraint firstItem="M28-8e-zHA" firstAttribute="top" secondItem="aQ4-Nq-8mW" secondAttribute="bottom" id="dNa-0C-u4a"/>
+                    <constraint firstItem="UYH-Br-BuW" firstAttribute="width" secondItem="aQ4-Nq-8mW" secondAttribute="width" id="exZ-4e-RYz"/>
+                    <constraint firstItem="75B-Ud-NQ6" firstAttribute="width" secondItem="aQ4-Nq-8mW" secondAttribute="width" id="g4a-Uk-wz6"/>
+                    <constraint firstItem="UYH-Br-BuW" firstAttribute="leading" secondItem="75B-Ud-NQ6" secondAttribute="trailing" id="gVN-Te-gpF"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="OqP-ir-MRF" secondAttribute="trailing" constant="10" id="gdB-i0-LMj"/>
+                    <constraint firstAttribute="bottom" secondItem="M28-8e-zHA" secondAttribute="bottom" id="hWq-gg-CrD"/>
+                    <constraint firstItem="je0-2Y-f1l" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="ljb-Ur-pkN"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="NYR-NW-O6b" secondAttribute="bottom" constant="5.5" id="pp8-AK-xUG"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="ZRr-fE-u93" secondAttribute="bottom" constant="14.5" id="qPk-yh-oOu"/>
+                    <constraint firstItem="M28-8e-zHA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="rKz-s7-iPr"/>
+                    <constraint firstItem="je0-2Y-f1l" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="rZe-po-IXU"/>
+                    <constraint firstItem="75B-Ud-NQ6" firstAttribute="height" secondItem="aQ4-Nq-8mW" secondAttribute="height" id="uL5-kr-vs4"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="DVDNameLabel" destination="je0-2Y-f1l" id="X7K-XD-4TD"/>
                 <outlet property="DVDSlider" destination="NYR-NW-O6b" id="JzR-gz-1wV"/>
-                <outlet property="DVDSwitchBtn" destination="K7g-ZP-h5U" id="48E-0n-MH9"/>
                 <outlet property="YLImageView" destination="ZRr-fE-u93" id="BO5-6B-eDO"/>
             </connections>
+            <point key="canvasLocation" x="41.5" y="118.5"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="close" width="32" height="32"/>
+        <image name="bd_icon_voi_high" width="11" height="9"/>
+        <image name="dvd_btn_adjust_normal" width="91" height="38"/>
+        <image name="dvd_frm_choice__normal" width="336" height="47"/>
+        <image name="lv_fm_adjust_normal" width="336" height="47"/>
     </resources>
 </document>
