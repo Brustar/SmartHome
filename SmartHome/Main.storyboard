@@ -3826,18 +3826,11 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="点击图片获取验证码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KY2-hg-0sH">
-                                                <rect key="frame" x="15" y="46" width="211" height="17"/>
+                                                <rect key="frame" x="15" y="46" width="133" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f4Q-N9-6d1" customClass="VerifyCodeView">
-                                                <rect key="frame" x="236" y="41" width="139" height="34"/>
-                                                <color key="backgroundColor" red="1" green="0.66721236250000004" blue="0.15648954430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="139" id="I5S-dl-uUI"/>
-                                                </constraints>
-                                            </view>
-                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K6H-g6-It9" userLabel="line2">
+                                            <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K6H-g6-It9" userLabel="line2">
                                                 <rect key="frame" x="15" y="73" width="213" height="1"/>
                                                 <color key="backgroundColor" red="0.86852824080000002" green="0.86852824080000002" blue="0.86852824080000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -3849,23 +3842,18 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="300" id="1mc-8w-Xcb"/>
                                             <constraint firstItem="VAv-56-9bL" firstAttribute="top" secondItem="6uv-uH-nHt" secondAttribute="bottom" id="3r2-zE-o1L"/>
-                                            <constraint firstItem="f4Q-N9-6d1" firstAttribute="leading" secondItem="KY2-hg-0sH" secondAttribute="trailing" constant="10" id="7vP-lo-YdI"/>
                                             <constraint firstItem="8ay-yk-Pdr" firstAttribute="top" secondItem="hRF-3g-Hca" secondAttribute="top" id="F6x-cn-d9z"/>
                                             <constraint firstItem="K6H-g6-It9" firstAttribute="leading" secondItem="hRF-3g-Hca" secondAttribute="leading" constant="15" id="Fkc-Tb-h1o"/>
                                             <constraint firstItem="8ay-yk-Pdr" firstAttribute="leading" secondItem="hRF-3g-Hca" secondAttribute="leading" constant="15" id="IVd-YV-EaS"/>
-                                            <constraint firstItem="f4Q-N9-6d1" firstAttribute="leading" secondItem="K6H-g6-It9" secondAttribute="trailing" constant="8" id="Klc-Hc-TZN"/>
-                                            <constraint firstAttribute="bottom" secondItem="f4Q-N9-6d1" secondAttribute="bottom" constant="5" id="Rod-e0-eTV"/>
                                             <constraint firstItem="VAv-56-9bL" firstAttribute="leading" secondItem="hRF-3g-Hca" secondAttribute="leading" constant="15" id="SHG-JX-8iA"/>
                                             <constraint firstAttribute="trailing" secondItem="VAv-56-9bL" secondAttribute="trailing" constant="20" id="YEv-UR-auM"/>
                                             <constraint firstItem="KY2-hg-0sH" firstAttribute="leading" secondItem="hRF-3g-Hca" secondAttribute="leading" constant="15" id="cXE-QS-s0v"/>
-                                            <constraint firstItem="f4Q-N9-6d1" firstAttribute="top" secondItem="VAv-56-9bL" secondAttribute="bottom" constant="10" id="chg-oB-4Nf"/>
                                             <constraint firstItem="6uv-uH-nHt" firstAttribute="leading" secondItem="hRF-3g-Hca" secondAttribute="leading" constant="50" id="foM-gb-J77"/>
                                             <constraint firstAttribute="trailing" secondItem="6uv-uH-nHt" secondAttribute="trailing" id="gdk-zn-QND"/>
                                             <constraint firstItem="K6H-g6-It9" firstAttribute="top" secondItem="KY2-hg-0sH" secondAttribute="bottom" constant="10" id="grQ-MV-W3C"/>
                                             <constraint firstAttribute="height" constant="80" id="n7W-bG-fIf"/>
                                             <constraint firstItem="KY2-hg-0sH" firstAttribute="top" secondItem="VAv-56-9bL" secondAttribute="bottom" constant="15" id="pdm-ng-dMA"/>
                                             <constraint firstItem="6uv-uH-nHt" firstAttribute="top" secondItem="hRF-3g-Hca" secondAttribute="top" id="vAC-C0-el8"/>
-                                            <constraint firstAttribute="trailing" secondItem="f4Q-N9-6d1" secondAttribute="trailing" constant="20" id="wWp-Dg-zSd"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -3966,7 +3954,6 @@
                         <outlet property="DissmissBtn" destination="Zic-D6-5lH" id="LmM-pu-LbC"/>
                         <outlet property="MasterIDLb" destination="mJ3-x8-FdQ" id="wqP-pm-oVo"/>
                         <outlet property="UserTypeLb" destination="Cnc-aq-eMU" id="Rf3-tq-YhU"/>
-                        <outlet property="imgVerifyView" destination="f4Q-N9-6d1" id="E08-48-4CI"/>
                         <outlet property="imgeVerifyField" destination="KY2-hg-0sH" id="QxD-mT-bRq"/>
                         <outlet property="phoneNumTextField" destination="6uv-uH-nHt" id="nD8-Qa-oKd"/>
                         <outlet property="usderAndMasterView" destination="Kwf-X0-d5G" id="23c-OA-WCa"/>
@@ -8494,21 +8481,21 @@ layer.masksToBoundslayer.masksToBounds
         <segue reference="uCb-ME-O7C"/>
         <segue reference="nIi-Kc-QDm"/>
         <segue reference="mRk-xU-xJj"/>
-        <segue reference="ya3-gG-p8O"/>
         <segue reference="U1p-eR-Biy"/>
-        <segue reference="tdV-sS-d5j"/>
-        <segue reference="fHn-Cm-7Q7"/>
-        <segue reference="X9P-hg-DXo"/>
-        <segue reference="vKk-7C-VKf"/>
-        <segue reference="l23-e3-J0C"/>
+        <segue reference="ya3-gG-p8O"/>
         <segue reference="pWG-oz-Opr"/>
-        <segue reference="Vzc-yi-Jnw"/>
-        <segue reference="tt4-nB-rfe"/>
-        <segue reference="a9T-LN-ZVX"/>
-        <segue reference="vdf-Gi-dZf"/>
         <segue reference="JQm-bA-TWz"/>
+        <segue reference="tt4-nB-rfe"/>
+        <segue reference="vdf-Gi-dZf"/>
+        <segue reference="l23-e3-J0C"/>
+        <segue reference="tdV-sS-d5j"/>
+        <segue reference="X9P-hg-DXo"/>
+        <segue reference="fHn-Cm-7Q7"/>
+        <segue reference="vKk-7C-VKf"/>
+        <segue reference="a9T-LN-ZVX"/>
+        <segue reference="Vzc-yi-Jnw"/>
         <segue reference="fbq-wi-BCv"/>
         <segue reference="tmA-nZ-aS8"/>
-        <segue reference="vLw-tf-AJR"/>
+        <segue reference="3pI-26-H7E"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -39,17 +39,6 @@
     userType = [[UD objectForKey:@"Type"] intValue];
     self.pwdTextField.text = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Password"] decryptWithDes:DES_KEY];
     UserType =[[UD objectForKey:@"UserType"] intValue];
-    if ([CLLocationManager locationServicesEnabled]) {
-        self.lm = [[CLLocationManager alloc]init];
-        self.lm.delegate = self;
-        [self.lm requestWhenInUseAuthorization];
-        
-        // 最小距离
-        self.lm.distanceFilter=kCLDistanceFilterNone;
-        [self.lm startUpdatingLocation];
-    }else{
-        NSLog(@"定位服务不可用");
-    }
     
 }
 
@@ -253,39 +242,23 @@
 {
     NSString *url = [NSString stringWithFormat:@"%@%@",[IOManager httpAddr],str];
     
-    //天文时钟
-    NSString *dawnStr = self.antronomicalTimes[0];//黎明
-    NSString *sunriseStr = self.antronomicalTimes[1];//日出
-    NSString *sunsetStr = self.antronomicalTimes[2];//日落
-    NSString *duskStr = self.antronomicalTimes[3];//黄昏
-    
-    NSDictionary *dic = @{
-                          @"token":[UD objectForKey:@"AuthorToken"],
-                          @"dawn":dawnStr,
-                          @"sunrise":sunriseStr,
-                          @"sunset":sunsetStr,
-                          @"dusk":duskStr
-                          };
-    
     if ([UD objectForKey:@"room_version"]) {
         
-        dic = @{
+        NSDictionary *dic = @{
                 @"token":[UD objectForKey:@"AuthorToken"],
                 @"room_ver":[UD objectForKey:@"room_version"],
                 @"equipment_ver":[UD objectForKey:@"equipment_version"],
                 @"scence_ver":[UD objectForKey:@"scence_version"],
                 @"tv_ver":[UD objectForKey:@"tv_version"],
-                @"fm_ver":[UD objectForKey:@"fm_version"],
-                @"dawn":dawnStr,
-                @"sunrise":sunriseStr,
-                @"sunset":sunsetStr,
-                @"dusk":duskStr
+                @"fm_ver":[UD objectForKey:@"fm_version"]
                 };
+        
+        HttpManager *http = [HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = tag;
+        [http sendPost:url param:dic];
     }
-    HttpManager *http = [HttpManager defaultManager];
-    http.delegate = self;
-    http.tag = tag;
-    [http sendPost:url param:dic];
+    
 }
 
 //写设备配置信息到sql
@@ -631,15 +604,5 @@
     }
 }
 
-#pragma mark - locationManager Delegate
-- (void)locationManager:(CLLocationManager *)manager
-    didUpdateToLocation:(CLLocation *)newLocation
-           fromLocation:(CLLocation *)oldLocation{
-    [SunCount sunrisetWithLongitude:newLocation.coordinate.longitude andLatitude:newLocation.coordinate.latitude
-                        andResponse:^(SunString *str) {
-                            NSLog(@"天文时钟: 黎明 %@,日出 %@,日落 %@,黄昏 %@",str.dayspring, str.sunrise,str.sunset,str.dusk);
-                            self.antronomicalTimes = @[str.dayspring,str.sunrise,str.sunset,str.dusk];
-                        }];
-}
 
 @end
