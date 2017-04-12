@@ -234,14 +234,14 @@
                                 <rect key="frame" x="36" y="64" width="303" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="hpI-6T-3ry"/>
+                                    <constraint firstAttribute="height" constant="60" id="JEd-hu-nZV"/>
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line_horizontal_white" translatesAutoresizingMaskIntoConstraints="NO" id="HCK-RI-Hb4">
                                 <rect key="frame" x="36" y="64" width="303" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="pls-gP-JwL"/>
+                                    <constraint firstAttribute="height" constant="60" id="M2q-Wh-wNF"/>
                                 </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="53" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="A7h-2x-arC">
@@ -284,20 +284,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="HCK-RI-Hb4" secondAttribute="trailing" constant="20" id="8aC-7x-h1f"/>
+                            <constraint firstItem="xk9-h2-t7S" firstAttribute="top" secondItem="A7h-2x-arC" secondAttribute="bottom" id="91l-Y8-UQQ"/>
                             <constraint firstItem="xk9-h2-t7S" firstAttribute="top" secondItem="11W-LL-2vy" secondAttribute="bottom" id="EXG-Bx-cMH"/>
-                            <constraint firstItem="2ek-vt-ryo" firstAttribute="top" secondItem="UuN-gu-S6d" secondAttribute="topMargin" constant="64" id="F6O-Ny-0w7"/>
-                            <constraint firstItem="2ek-vt-ryo" firstAttribute="leading" secondItem="UuN-gu-S6d" secondAttribute="leadingMargin" constant="20" id="FL0-yw-4fH"/>
-                            <constraint firstItem="A7h-2x-arC" firstAttribute="leading" secondItem="UuN-gu-S6d" secondAttribute="leadingMargin" constant="10" id="GXE-wl-qAy"/>
+                            <constraint firstItem="A7h-2x-arC" firstAttribute="leading" secondItem="UuN-gu-S6d" secondAttribute="leadingMargin" constant="10" id="FH3-HU-AMe"/>
                             <constraint firstItem="11W-LL-2vy" firstAttribute="leading" secondItem="UuN-gu-S6d" secondAttribute="leading" id="HV2-RF-uIP"/>
-                            <constraint firstItem="HCK-RI-Hb4" firstAttribute="leading" secondItem="UuN-gu-S6d" secondAttribute="leadingMargin" constant="20" id="NtC-mV-5be"/>
-                            <constraint firstItem="xk9-h2-t7S" firstAttribute="top" secondItem="A7h-2x-arC" secondAttribute="bottom" id="TMe-Vm-9KV"/>
+                            <constraint firstItem="HCK-RI-Hb4" firstAttribute="leading" secondItem="UuN-gu-S6d" secondAttribute="leadingMargin" constant="20" id="IeV-Dh-oub"/>
+                            <constraint firstItem="2ek-vt-ryo" firstAttribute="top" secondItem="UuN-gu-S6d" secondAttribute="topMargin" constant="64" id="PbJ-9i-KNf"/>
+                            <constraint firstItem="A7h-2x-arC" firstAttribute="top" secondItem="HCK-RI-Hb4" secondAttribute="bottom" id="RVr-1Z-mlc"/>
                             <constraint firstItem="11W-LL-2vy" firstAttribute="top" secondItem="UuN-gu-S6d" secondAttribute="top" id="UAG-4V-6HV"/>
-                            <constraint firstItem="A7h-2x-arC" firstAttribute="top" secondItem="HCK-RI-Hb4" secondAttribute="bottom" id="WkX-3m-IBu"/>
+                            <constraint firstItem="HCK-RI-Hb4" firstAttribute="top" secondItem="UuN-gu-S6d" secondAttribute="topMargin" constant="64" id="bcZ-xP-j5b"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2ek-vt-ryo" secondAttribute="trailing" constant="20" id="eQP-Dr-fC8"/>
                             <constraint firstAttribute="trailing" secondItem="11W-LL-2vy" secondAttribute="trailing" id="fIf-jP-O6s"/>
-                            <constraint firstItem="HCK-RI-Hb4" firstAttribute="top" secondItem="EQr-dY-ltZ" secondAttribute="bottom" id="iBe-Av-UMJ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="2ek-vt-ryo" secondAttribute="trailing" constant="20" id="rKL-ym-4VW"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="A7h-2x-arC" secondAttribute="trailing" constant="20" id="zGu-0E-QYU"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="A7h-2x-arC" secondAttribute="trailing" constant="20" id="lCZ-LV-erp"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="HCK-RI-Hb4" secondAttribute="trailing" constant="20" id="msB-wY-mO6"/>
+                            <constraint firstItem="2ek-vt-ryo" firstAttribute="leading" secondItem="UuN-gu-S6d" secondAttribute="leadingMargin" constant="20" id="tZC-Xa-nRn"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="新增场景" id="71G-16-ACQ">
@@ -456,7 +456,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Awb-tz-WnC">
             <objects>
-                <navigationController id="wbK-Pi-Ogy" sceneMemberID="viewController">
+                <navigationController navigationBarHidden="YES" id="wbK-Pi-Ogy" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="mZe-s2-jHM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -556,6 +556,6 @@
         <image name="line_horizontal_white" width="373" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="I6M-Hx-all"/>
+        <segue reference="qzn-LU-VIh"/>
     </inferredMetricsTieBreakers>
 </document>

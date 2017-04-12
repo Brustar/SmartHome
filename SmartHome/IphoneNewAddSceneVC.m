@@ -21,6 +21,7 @@
 @property (nonatomic,strong) NSArray * roomList;
 @property (nonatomic, assign) int roomIndex;
 @property (nonatomic,strong) NSArray *devices;
+@property (nonatomic,strong) UIButton * naviRightBtn;
 
 
 @end
@@ -43,9 +44,12 @@
     UIView *view = [[UIView alloc] init];
     [view setBackgroundColor:[UIColor clearColor]];
     self.tableView.tableFooterView = view;
-    
-    
-    
+}
+- (void)setupNaviBar {
+    [self setNaviBarTitle:@"添加场景"]; //设置标题
+    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
+//    [self setNaviBarLeftBtn:_naviLeftBtn];
+    [self setNaviBarRightBtn:_naviRightBtn];
 }
 -(void)setUpRoomView
 {
