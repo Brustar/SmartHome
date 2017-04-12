@@ -241,23 +241,28 @@
 - (void)sendRequestForGettingConfigInfos:(NSString *)str withTag:(int)tag;
 {
     NSString *url = [NSString stringWithFormat:@"%@%@",[IOManager httpAddr],str];
-    
+    NSString *md5Json = [IOManager md5JsonByScenes:[NSString stringWithFormat:@"%ld",[DeviceInfo defaultManager].masterID]];
+    NSDictionary *dic = @{
+                          @"token":[UD objectForKey:@"AuthorToken"],
+                          @"md5Json":md5Json
+                          };
     if ([UD objectForKey:@"room_version"]) {
         
-        NSDictionary *dic = @{
+        dic = @{
                 @"token":[UD objectForKey:@"AuthorToken"],
                 @"room_ver":[UD objectForKey:@"room_version"],
                 @"equipment_ver":[UD objectForKey:@"equipment_version"],
                 @"scence_ver":[UD objectForKey:@"scence_version"],
                 @"tv_ver":[UD objectForKey:@"tv_version"],
+                @"md5Json":md5Json,
                 @"fm_ver":[UD objectForKey:@"fm_version"]
                 };
-        
+       }
         HttpManager *http = [HttpManager defaultManager];
         http.delegate = self;
         http.tag = tag;
         [http sendPost:url param:dic];
-    }
+    
     
 }
 
@@ -598,7 +603,8 @@
             [self gainHome_room_infoDataTo:responseObject[@"home_room_info"]];
             
             if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-            {     [self gotoIPhoneMainViewController];
+            {
+                [self gotoIPhoneMainViewController];
             }else {
                 [self goToViewController];
             }
