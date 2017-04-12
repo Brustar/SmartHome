@@ -255,7 +255,7 @@
                 @"scence_ver":[UD objectForKey:@"scence_version"],
                 @"tv_ver":[UD objectForKey:@"tv_version"],
                 @"fm_ver":[UD objectForKey:@"fm_version"],
-                @"chat_ver":[UD objectForKey:@"chat_version"],
+                //@"chat_ver":[UD objectForKey:@"chat_version"],
                 @"md5Json":md5Json
                 };
        }

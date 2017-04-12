@@ -195,9 +195,9 @@
         if([path isMatchedByRegex:[NSString stringWithFormat:@"%@_\\d+\\.plist",master]])
         {
             NSLog(@"%@",path);
-            temp =[temp stringByAppendingString:[NSString stringWithFormat:@"\"%@\":",path]];
+            temp =[temp stringByAppendingString:[NSString stringWithFormat:@"\"%@\":\"",path]];
             temp =[temp stringByAppendingString:[self fileMD5:[[self scenesPath] stringByAppendingPathComponent:path]]];
-            temp =[temp stringByAppendingString:@","];
+            temp =[temp stringByAppendingString:@"\","];
         }
     }
     

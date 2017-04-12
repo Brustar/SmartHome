@@ -26,7 +26,7 @@
 - (void)setupNaviBar {
     _viewNaviBar = [[CustomNaviBarView alloc] initWithFrame:Rect(0.0f, 0.0f, [CustomNaviBarView barSize].width, [CustomNaviBarView barSize].height)];
     _viewNaviBar.m_viewCtrlParent = self;
-    [self setNaviBarTitle:@"家庭成员"];
+    [self setNaviBarTitle:self.title];
     [self.view addSubview:_viewNaviBar];
 }
 

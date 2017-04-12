@@ -297,7 +297,7 @@
 //点击未读消息的事件
 - (IBAction)UnreadButton:(id)sender {
     NSString *token = [UD objectForKey:@"rctoken"];
-    NSString *groupID = [UD objectForKey:@"hostid"];
+    NSString *groupID = [[UD objectForKey:@"HostID"] description];
     NSString *homename = [UD objectForKey:@"homename"];
     [MBProgressHUD showMessage:@"login..."];
     [[RCIM sharedRCIM] connectWithToken:token success:^(NSString *userId) {
@@ -307,7 +307,7 @@
         ConversationViewController *_conversationVC = [[ConversationViewController alloc] init];
         _conversationVC.conversationType = ConversationType_GROUP;
         _conversationVC.targetId = aGroupInfo.groupId;
-        _conversationVC.title = [NSString stringWithFormat:@"%@",aGroupInfo.groupName];
+        [_conversationVC setTitle: [NSString stringWithFormat:@"%@",aGroupInfo.groupName]];
         dispatch_async(dispatch_get_main_queue(), ^{
             [MBProgressHUD hideHUD];
             [self.navigationController pushViewController:_conversationVC animated:YES];
