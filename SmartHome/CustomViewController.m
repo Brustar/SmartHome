@@ -47,7 +47,8 @@
     _viewNaviBar.m_viewCtrlParent = self;
     [self.view addSubview:_viewNaviBar];
     
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[[UIImage imageNamed:@"GlobalBg"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)]]];
+    //背景
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[[UIImage imageNamed:@"background"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)]]];
 }
 
 - (void)didReceiveMemoryWarning

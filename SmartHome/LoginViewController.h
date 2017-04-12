@@ -28,10 +28,8 @@
 #import "DeviceInfo.h"
 #import "PackManager.h"
 #import "CryptoManager.h"
-#import "SunCount.h"
-#import <CoreLocation/CoreLocation.h>
 
-@interface LoginViewController : UIViewController<QRCodeReaderDelegate, CLLocationManagerDelegate, UITextFieldDelegate, HttpDelegate,UIActionSheetDelegate>
+@interface LoginViewController : UIViewController<QRCodeReaderDelegate, UITextFieldDelegate, HttpDelegate,UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *pwdTextField;
 
@@ -52,8 +50,8 @@
 @property (nonatomic,assign) int vFMChannellLast;
 @property (nonatomic,assign) int vClientlLast;
 
-@property (nonatomic,strong) NSArray *antronomicalTimes;
-@property (strong,nonatomic) CLLocationManager *lm;
+
+
 
 - (IBAction)forgetPwdBtnClicked:(id)sender;
 - (IBAction)tryBtnClicked:(id)sender;

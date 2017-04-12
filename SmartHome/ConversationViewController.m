@@ -13,12 +13,29 @@
 @end
 
 @implementation ConversationViewController
+@synthesize m_viewNaviBar = _viewNaviBar;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setupNaviBar];
     // Do any additional setup after loading the view.
     //设置需要显示哪些类型的会话
     
+}
+
+- (void)setupNaviBar {
+    _viewNaviBar = [[CustomNaviBarView alloc] initWithFrame:Rect(0.0f, 0.0f, [CustomNaviBarView barSize].width, [CustomNaviBarView barSize].height)];
+    _viewNaviBar.m_viewCtrlParent = self;
+    [self setNaviBarTitle:self.title];
+    [self.view addSubview:_viewNaviBar];
+}
+
+- (void)setNaviBarTitle:(NSString *)strTitle
+{
+    if (_viewNaviBar)
+    {
+        [_viewNaviBar setTitle:strTitle];
+    }else{APP_ASSERT_STOP}
 }
 
 - (void)didReceiveMemoryWarning {

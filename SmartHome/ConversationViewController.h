@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <RongIMKit/RongIMKit.h>
+#import "CustomNaviBarView.h"
 
 @interface ConversationViewController : RCConversationViewController
+
+@property (nonatomic, readonly) CustomNaviBarView *m_viewNaviBar;
+
+- (void)setNaviBarTitle:(NSString *)strTitle;
 
 @end

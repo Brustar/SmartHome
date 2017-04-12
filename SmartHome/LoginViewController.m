@@ -39,17 +39,6 @@
     userType = [[UD objectForKey:@"Type"] intValue];
     self.pwdTextField.text = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Password"] decryptWithDes:DES_KEY];
     UserType =[[UD objectForKey:@"UserType"] intValue];
-    if ([CLLocationManager locationServicesEnabled]) {
-        self.lm = [[CLLocationManager alloc]init];
-        self.lm.delegate = self;
-        [self.lm requestWhenInUseAuthorization];
-        
-        // 最小距离
-        self.lm.distanceFilter=kCLDistanceFilterNone;
-        [self.lm startUpdatingLocation];
-    }else{
-        NSLog(@"定位服务不可用");
-    }
     
 }
 
@@ -252,21 +241,11 @@
 - (void)sendRequestForGettingConfigInfos:(NSString *)str withTag:(int)tag;
 {
     NSString *url = [NSString stringWithFormat:@"%@%@",[IOManager httpAddr],str];
-    
-    //天文时钟
-    NSString *dawnStr = self.antronomicalTimes[0];//黎明
-    NSString *sunriseStr = self.antronomicalTimes[1];//日出
-    NSString *sunsetStr = self.antronomicalTimes[2];//日落
-    NSString *duskStr = self.antronomicalTimes[3];//黄昏
-    
+    NSString *md5Json = [IOManager md5JsonByScenes:[NSString stringWithFormat:@"%ld",[DeviceInfo defaultManager].masterID]];
     NSDictionary *dic = @{
                           @"token":[UD objectForKey:@"AuthorToken"],
-                          @"dawn":dawnStr,
-                          @"sunrise":sunriseStr,
-                          @"sunset":sunsetStr,
-                          @"dusk":duskStr
+                          @"md5Json":md5Json
                           };
-    
     if ([UD objectForKey:@"room_version"]) {
         
         dic = @{
@@ -276,16 +255,16 @@
                 @"scence_ver":[UD objectForKey:@"scence_version"],
                 @"tv_ver":[UD objectForKey:@"tv_version"],
                 @"fm_ver":[UD objectForKey:@"fm_version"],
-                @"dawn":dawnStr,
-                @"sunrise":sunriseStr,
-                @"sunset":sunsetStr,
-                @"dusk":duskStr
+                //@"chat_ver":[UD objectForKey:@"chat_version"],
+                @"md5Json":md5Json
                 };
-    }
-    HttpManager *http = [HttpManager defaultManager];
-    http.delegate = self;
-    http.tag = tag;
-    [http sendPost:url param:dic];
+       }
+        HttpManager *http = [HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = tag;
+        [http sendPost:url param:dic];
+    
+    
 }
 
 //写设备配置信息到sql
@@ -518,6 +497,41 @@
 }
 
 
+-(void) writeChatListConfigDataToSQL:(NSArray *)users
+{
+    if(users.count == 0 || users == nil)
+    {
+        return;
+    }
+    FMDatabase *db = [SQLManager connetdb];
+    if([db open])
+    {
+        NSString *delsql=@"delete from chats";
+        [db executeUpdate:delsql];
+        int i=0;
+        for (NSDictionary *user in users) {
+            
+            NSString *nickname = user[@"nickname"];
+            NSString *portrait = user[@"portrait"];
+            NSString *username = user[@"username"];
+            int user_id = [user[@"user_id"] intValue];
+            
+            NSString *sql = [NSString stringWithFormat:@"insert into chats values(%d,'%@','%@','%@',%d)",i++,nickname,portrait,username,user_id];
+            BOOL result = [db executeUpdate:sql];
+            if(result)
+            {
+                NSLog(@"insert 聊天信息 成功");
+            }else{
+                NSLog(@"insert 聊天信息 失败");
+            }
+            
+        }
+        [IOManager writeUserdefault:@(i) forKey:@"familyNum"];
+    }
+    
+    [db close];
+}
+
 #pragma mark -  http delegate
 -(void) httpHandler:(id) responseObject tag:(int)tag
 {
@@ -557,6 +571,9 @@
                 [IOManager writeUserdefault:@(mid) forKey:@"HostID"];
                 info.masterID = mid;
             }
+            [IOManager writeUserdefault:responseObject[@"rctoken"] forKey:@"rctoken"];
+            [IOManager writeUserdefault:responseObject[@"homename"] forKey:@"homename"];
+            [self writeChatListConfigDataToSQL:responseObject[@"userList"]];
             [self sendRequestForGettingConfigInfos:@"Cloud/load_config_data.aspx" withTag:2];
             
             //直接登录主机
@@ -587,7 +604,8 @@
             [self gainHome_room_infoDataTo:responseObject[@"home_room_info"]];
             
             if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-            {     [self gotoIPhoneMainViewController];
+            {
+                [self gotoIPhoneMainViewController];
             }else {
                 [self goToViewController];
             }
@@ -631,15 +649,5 @@
     }
 }
 
-#pragma mark - locationManager Delegate
-- (void)locationManager:(CLLocationManager *)manager
-    didUpdateToLocation:(CLLocation *)newLocation
-           fromLocation:(CLLocation *)oldLocation{
-    [SunCount sunrisetWithLongitude:newLocation.coordinate.longitude andLatitude:newLocation.coordinate.latitude
-                        andResponse:^(SunString *str) {
-                            NSLog(@"天文时钟: 黎明 %@,日出 %@,日落 %@,黄昏 %@",str.dayspring, str.sunrise,str.sunset,str.dusk);
-                            self.antronomicalTimes = @[str.dayspring,str.sunrise,str.sunset,str.dusk];
-                        }];
-}
 
 @end
