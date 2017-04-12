@@ -81,12 +81,39 @@ static NSString * const CYPhotoId = @"photo";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    [self setupNaviBar];
     self.rooms = [SQLManager getAllRoomsInfo];
     [self setUpRoomScrollerView];
     [self setUpScrollerView];
     [self setupSlideButton];
      [self getUI];
 }
+
+- (void)setupNaviBar {
+    [self setNaviBarTitle:@"家庭名称"]; //设置标题
+    _naviLeftBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"clound_white" imgHighlight:@"clound_white" target:self action:@selector(leftBtnClicked:)];
+    _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"music_white" imgHighlight:@"music_white" target:self action:@selector(rightBtnClicked:)];
+    [self setNaviBarLeftBtn:_naviLeftBtn];
+    [self setNaviBarRightBtn:_naviRightBtn];
+}
+
+- (void)leftBtnClicked:(UIButton *)btn {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    if (appDelegate.LeftSlideVC.closed)
+    {
+        [appDelegate.LeftSlideVC openLeftView];
+    }
+    else
+    {
+        [appDelegate.LeftSlideVC closeLeftView];
+    }
+}
+
+- (void)rightBtnClicked:(UIButton *)btn {
+    
+}
+
 -(void)getUI
 {
     // 创建CollectionView

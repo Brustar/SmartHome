@@ -273,8 +273,6 @@
 		CDF389301E30E39500657C8B /* userList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF3892F1E30E39500657C8B /* userList.plist */; };
 		CDF389321E30EA8900657C8B /* hostUserList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF389311E30EA8900657C8B /* hostUserList.plist */; };
 		CDF389341E30F27500657C8B /* userHabitList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF389331E30F27500657C8B /* userHabitList.plist */; };
-		CDF78C501E9B5DEF00F8B20C /* circular@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF78C4E1E9B5DEF00F8B20C /* circular@2x.png */; };
-		CDF78C511E9B5DEF00F8B20C /* circular@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF78C4F1E9B5DEF00F8B20C /* circular@3x.png */; };
 		CDF78C551E9CA99D00F8B20C /* CustomNaviBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF78C541E9CA99D00F8B20C /* CustomNaviBarView.m */; };
 		CDF78C581E9CB24600F8B20C /* CustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF78C571E9CB24600F8B20C /* CustomViewController.m */; };
 		CDF78C5A1E9CC3C500F8B20C /* NaviBarBg.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF78C591E9CC3C500F8B20C /* NaviBarBg.png */; };
@@ -938,8 +936,6 @@
 		CDF3892F1E30E39500657C8B /* userList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = userList.plist; sourceTree = "<group>"; };
 		CDF389311E30EA8900657C8B /* hostUserList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = hostUserList.plist; sourceTree = "<group>"; };
 		CDF389331E30F27500657C8B /* userHabitList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = userHabitList.plist; sourceTree = "<group>"; };
-		CDF78C4E1E9B5DEF00F8B20C /* circular@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circular@2x.png"; sourceTree = "<group>"; };
-		CDF78C4F1E9B5DEF00F8B20C /* circular@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circular@3x.png"; sourceTree = "<group>"; };
 		CDF78C531E9CA99D00F8B20C /* CustomNaviBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNaviBarView.h; sourceTree = "<group>"; };
 		CDF78C541E9CA99D00F8B20C /* CustomNaviBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNaviBarView.m; sourceTree = "<group>"; };
 		CDF78C561E9CB24600F8B20C /* CustomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomViewController.h; sourceTree = "<group>"; };
@@ -2262,8 +2258,6 @@
 		CDEC868C1E99E32B009EC245 /* Family */ = {
 			isa = PBXGroup;
 			children = (
-				CDF78C4E1E9B5DEF00F8B20C /* circular@2x.png */,
-				CDF78C4F1E9B5DEF00F8B20C /* circular@3x.png */,
 			);
 			name = Family;
 			sourceTree = "<group>";
@@ -2624,9 +2618,7 @@
 				CDF90B431E2F0676009043B9 /* realScene.plist in Resources */,
 				CD78A8301E3379C200060466 /* 255_221.plist in Resources */,
 				CD7DDA0D1E81298600638DB3 /* loginButton@2x.png in Resources */,
-				CDF78C501E9B5DEF00F8B20C /* circular@2x.png in Resources */,
 				CDF389281E30A91200657C8B /* energyDetail.plist in Resources */,
-				CDF78C511E9B5DEF00F8B20C /* circular@3x.png in Resources */,
 				2EA97E661E56A3E7003E0039 /* test.jpeg in Resources */,
 				2E925DA91E5E89DD008E327B /* calendar.png in Resources */,
 				0F49CB701E7A1EA100D46ECC /* Devices.storyboard in Resources */,
