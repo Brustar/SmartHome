@@ -19,8 +19,12 @@
 #import <AVFoundation/AVFoundation.h>
 #import "ShortcutKeyViewController.h"
 #import "TabbarPanel.h"
+
 #import <RongIMKit/RongIMKit.h>
 #import "ConversationViewController.h"
+
+#import "IOManager.h"
+
 
 @interface FirstViewController ()<UITableViewDataSource,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIImageView *SubImageView;//首页的日历大圆
@@ -100,7 +104,7 @@
      UITapGestureRecognizer *Headtap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(HeadDoTap:)];
     _HeadImageView.userInteractionEnabled = YES;
 
-    
+//    [IOManager writeUserdefault:@(i-1) forKey:@"familyNum"];
     [_HeadImageView addGestureRecognizer:Headtap];
     _calenderDayLabel.adjustsFontSizeToFitWidth = YES;
     _calenderYearLabel.adjustsFontSizeToFitWidth = YES;
