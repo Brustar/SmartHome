@@ -23,32 +23,32 @@
 
 
 @interface FirstViewController ()<UITableViewDataSource,UITableViewDataSource>
-@property (weak, nonatomic) IBOutlet UIImageView *SubImageView;//首页的日历大圆
-@property (weak, nonatomic) IBOutlet UIView *BtnView;//全屋场景的按钮试图
-@property (weak, nonatomic) IBOutlet UIImageView *IconeImageView;//提示消息的头像
-@property (weak, nonatomic) IBOutlet UILabel *memberFamilyLabel;//家庭成员label
-@property (weak, nonatomic) IBOutlet UIImageView *numberLabelView;//未读消息的视图
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *playerBarBtn;//正在播放的按钮
-@property (weak, nonatomic) IBOutlet UIView *playerSubView;//正在播放的视图
-@property (weak, nonatomic) IBOutlet UIView *FourBtnView;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic,strong)NSArray * dataArr;
-@property (weak, nonatomic) IBOutlet UIImageView *HeadImageView;
-@property (weak, nonatomic) IBOutlet UIView *socialView;
-@property (weak, nonatomic) IBOutlet UILabel *calenderDayLabel;//日历-天
-@property (weak, nonatomic) IBOutlet UILabel *markedWordsLabel;//提示语
-@property (weak, nonatomic) IBOutlet UILabel *calenderMonthLabel;//日历月
-@property (weak, nonatomic) IBOutlet UILabel *calenderYearLabel;//日历年
-@property (weak, nonatomic) IBOutlet UILabel *UserNameLabel;//用户名的显示
-@property (weak, nonatomic) IBOutlet UILabel *WelcomeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *TakeTurnsWordsLabel;
-@property(nonatomic,strong)NSArray * Urldata;
-@property (weak, nonatomic) IBOutlet UIButton *firstBtn;
-@property (weak, nonatomic) IBOutlet UIButton *TwoBtn;
-@property (weak, nonatomic) IBOutlet UIButton *ThreeBtn;
-@property (weak, nonatomic) IBOutlet UIView *subView;
+@property (weak, nonatomic) IBOutlet UIImageView * SubImageView;//首页的日历大圆
+@property (weak, nonatomic) IBOutlet UIView * BtnView;//全屋场景的按钮试图
+@property (weak, nonatomic) IBOutlet UIImageView * IconeImageView;//提示消息的头像
+@property (weak, nonatomic) IBOutlet UILabel * memberFamilyLabel;//家庭成员label
+@property (weak, nonatomic) IBOutlet UIImageView * numberLabelView;//未读消息的视图
+@property (weak, nonatomic) IBOutlet UIBarButtonItem * playerBarBtn;//正在播放的按钮
+@property (weak, nonatomic) IBOutlet UIView * playerSubView;//正在播放的视图
+@property (weak, nonatomic) IBOutlet UIView * FourBtnView;
+@property (weak, nonatomic) IBOutlet UITableView * tableView;
+@property (nonatomic,strong) NSArray * dataArr;
+@property (weak, nonatomic) IBOutlet UIImageView * HeadImageView;
+@property (weak, nonatomic) IBOutlet UIView * socialView;
+@property (weak, nonatomic) IBOutlet UILabel * calenderDayLabel;//日历-天
+@property (weak, nonatomic) IBOutlet UILabel * markedWordsLabel;//提示语
+@property (weak, nonatomic) IBOutlet UILabel * calenderMonthLabel;//日历月
+@property (weak, nonatomic) IBOutlet UILabel * calenderYearLabel;//日历年
+@property (weak, nonatomic) IBOutlet UILabel * UserNameLabel;//用户名的显示
+@property (weak, nonatomic) IBOutlet UILabel * WelcomeLabel;
+@property (weak, nonatomic) IBOutlet UILabel * TakeTurnsWordsLabel;
+@property (nonatomic,strong) NSArray * Urldata;
+@property (weak, nonatomic) IBOutlet UIButton * firstBtn;
+@property (weak, nonatomic) IBOutlet UIButton * TwoBtn;
+@property (weak, nonatomic) IBOutlet UIButton * ThreeBtn;
+@property (weak, nonatomic) IBOutlet UIView * subView;
 @property (weak, nonatomic) IBOutlet UIButton *UnreadButton;//点击未读消息的按钮
-
+@property (nonatomic,strong) NSString * familyNum;
 @end
 
 @implementation FirstViewController
@@ -99,8 +99,9 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doTap:)];
      UITapGestureRecognizer *Headtap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(HeadDoTap:)];
     _HeadImageView.userInteractionEnabled = YES;
-
-//    [IOManager writeUserdefault:@(i-1) forKey:@"familyNum"];
+    _familyNum = [[NSUserDefaults standardUserDefaults] objectForKey:@"familyNum"];
+    self.memberFamilyLabel.text = [NSString stringWithFormat:@"家庭成员（%@）",_familyNum];
+    self.UserNameLabel.text = [NSString stringWithFormat:@"Hi! %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"Account"]];
     [_HeadImageView addGestureRecognizer:Headtap];
     _calenderDayLabel.adjustsFontSizeToFitWidth = YES;
     _calenderYearLabel.adjustsFontSizeToFitWidth = YES;
@@ -119,6 +120,51 @@
     if ([bgmusicIDS count]>0) {
         self.deviceid = bgmusicIDS[0];
     }
+    
+    NSDate * senddate=[NSDate date];
+    
+    NSDateFormatter *dateformatter=[[NSDateFormatter alloc] init];
+    
+    [dateformatter setDateFormat:@"HH:mm"];
+    
+    NSString * locationString=[dateformatter stringFromDate:senddate];
+    
+    NSLog(@"-------%@",locationString);
+    
+    //获取系统时间
+    NSCalendar * cal=[NSCalendar currentCalendar];
+    NSUInteger unitFlags=NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit;
+    NSDateComponents * conponent= [cal components:unitFlags fromDate:senddate];
+    NSInteger year=[conponent year];
+    NSInteger month=[conponent month];
+    if (month == 1) {
+        _calenderMonthLabel.text = @"January";
+    }if (month == 2) {
+        _calenderMonthLabel.text = @"February";
+    }if (month == 3) {
+        _calenderMonthLabel.text = @"March";
+    }if (month == 4) {
+        _calenderMonthLabel.text = @"April";
+    }if (month == 5) {
+        _calenderMonthLabel.text = @"May";
+    }if (month == 6) {
+        _calenderMonthLabel.text = @"June";
+    }if (month == 7) {
+        _calenderMonthLabel.text = @"July";
+    }if (month == 8) {
+        _calenderMonthLabel.text = @"August";
+    }if (month == 9) {
+        _calenderMonthLabel.text = @"September";
+    }if (month == 10) {
+        _calenderMonthLabel.text = @"October";
+    }if (month == 11) {
+        _calenderMonthLabel.text = @"November";
+    }if (month == 12) {
+        _calenderMonthLabel.text = @"December";
+    }
+    NSInteger day=[conponent day];
+    _calenderYearLabel.text = [NSString stringWithFormat:@"%ld",year];
+    _calenderDayLabel.text = [NSString stringWithFormat:@"%ld",day];
     
 }
 
@@ -258,35 +304,19 @@
 - (IBAction)playerBarBtn:(id)sender {
     if (self.playerSubView.hidden) {
           self.playerSubView.hidden = NO;
-        self.SubImageView.hidden = YES;
-        self.BtnView.hidden = YES;
-        self.IconeImageView.hidden = YES;
-        self.numberLabelView.hidden = YES;
-        self.memberFamilyLabel.hidden = YES;
-        _calenderDayLabel.hidden = YES;
-        _calenderYearLabel.hidden = YES;
-        _calenderMonthLabel.hidden = YES;
+        self.SupView.hidden = YES;
         _UserNameLabel.hidden = YES;
         _WelcomeLabel.hidden = YES;
         _HeadImageView.hidden = YES;
-        _TakeTurnsWordsLabel.hidden = YES;
-        _markedWordsLabel.hidden = YES;
+        _socialView.hidden = YES;
+
         
     }else{
-          self.playerSubView.hidden = YES;
-        self.SubImageView.hidden = NO;
-        self.BtnView.hidden = NO;
-        self.IconeImageView.hidden = NO;
-        self.numberLabelView.hidden = NO;
-        self.memberFamilyLabel.hidden = NO;
-        _calenderDayLabel.hidden = NO;
-        _calenderYearLabel.hidden = NO;
-        _calenderMonthLabel.hidden = NO;
+        self.playerSubView.hidden = YES;
+        _SupView.hidden = NO;
         _UserNameLabel.hidden = NO;
         _WelcomeLabel.hidden = NO;
         _HeadImageView.hidden = NO;
-        _TakeTurnsWordsLabel.hidden = NO;
-        _markedWordsLabel.hidden = NO;
     }
     
 }

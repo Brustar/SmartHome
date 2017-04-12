@@ -22,4 +22,6 @@
 @property (nonatomic, readonly) UIButton *naviRightBtn;
 @property (nonatomic, readonly) UIButton *naviLeftBtn;
 
+@property (weak, nonatomic) IBOutlet UIView *SupView;
+
 @end

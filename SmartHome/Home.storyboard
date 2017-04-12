@@ -44,7 +44,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u01-LH-SS0" userLabel="SupView">
-                                <rect key="frame" x="36" y="114" width="303" height="303"/>
+                                <rect key="frame" x="36" y="164" width="303" height="303"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circular" translatesAutoresizingMaskIntoConstraints="NO" id="eRG-g9-nK5">
                                         <rect key="frame" x="0.0" y="0.0" width="303" height="303"/>
@@ -128,24 +128,24 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Contacts" translatesAutoresizingMaskIntoConstraints="NO" id="TZv-R0-6cB">
-                                <rect key="frame" x="167" y="431" width="40" height="30"/>
+                                <rect key="frame" x="167" y="481" width="40" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="qch-NS-sXZ"/>
                                     <constraint firstAttribute="width" constant="40" id="u0H-Fi-PS1"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi！石总" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="taI-P7-os3">
-                                <rect key="frame" x="148" y="476" width="80" height="20"/>
+                                <rect key="frame" x="128" y="526" width="120" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Ga3-fT-MaD"/>
-                                    <constraint firstAttribute="width" constant="80" id="h7Y-Hh-YEJ"/>
+                                    <constraint firstAttribute="width" constant="120" id="h7Y-Hh-YEJ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bma-uE-dP0">
-                                <rect key="frame" x="99" y="516" width="178" height="21"/>
+                                <rect key="frame" x="99" y="566" width="178" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="YeY-oS-t0y"/>
                                     <constraint firstAttribute="width" constant="178" id="yvw-MX-hRl"/>
@@ -415,7 +415,7 @@
                             <constraint firstItem="u01-LH-SS0" firstAttribute="leading" secondItem="KO9-5h-oOe" secondAttribute="leadingMargin" constant="20" id="LfP-Y9-4gC"/>
                             <constraint firstItem="Qda-uM-qtN" firstAttribute="top" secondItem="LKi-1C-fQf" secondAttribute="bottom" constant="78" id="QMv-iD-8eI"/>
                             <constraint firstItem="dyk-7K-uDi" firstAttribute="top" secondItem="S4g-ft-uAu" secondAttribute="bottom" id="ZA5-cg-zNU"/>
-                            <constraint firstItem="u01-LH-SS0" firstAttribute="top" secondItem="LKi-1C-fQf" secondAttribute="bottom" constant="50" id="cNX-tg-ob1"/>
+                            <constraint firstItem="u01-LH-SS0" firstAttribute="top" secondItem="LKi-1C-fQf" secondAttribute="bottom" constant="100" id="cNX-tg-ob1"/>
                             <constraint firstItem="S4g-ft-uAu" firstAttribute="top" secondItem="LKi-1C-fQf" secondAttribute="bottom" id="eTc-8b-xe2"/>
                             <constraint firstItem="taI-P7-os3" firstAttribute="centerX" secondItem="KO9-5h-oOe" secondAttribute="centerX" id="gOU-U9-Xjz"/>
                             <constraint firstAttribute="trailing" secondItem="cWZ-EQ-wKU" secondAttribute="trailing" id="l8D-RY-Ie1"/>
@@ -438,6 +438,7 @@
                         <outlet property="HeadImageView" destination="TZv-R0-6cB" id="Mix-Jf-Z25"/>
                         <outlet property="IconeImageView" destination="QiZ-fM-4ar" id="ASu-RD-ea5"/>
                         <outlet property="SubImageView" destination="eRG-g9-nK5" id="jdE-Nz-kDx"/>
+                        <outlet property="SupView" destination="u01-LH-SS0" id="ovP-aP-xqz"/>
                         <outlet property="TakeTurnsWordsLabel" destination="Rhs-Sg-oCs" id="c5n-Re-9vw"/>
                         <outlet property="ThreeBtn" destination="Qux-yh-LWD" id="T9G-AK-tOX"/>
                         <outlet property="TwoBtn" destination="2Mb-gv-2zl" id="vc1-OO-9pL"/>
