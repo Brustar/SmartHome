@@ -291,7 +291,7 @@
     {
         NSString *delsql=@"delete from Scenes";
         [db executeUpdate:delsql];
-        int i=1;
+        int i=0;
         for (NSDictionary *user in users) {
             
             NSString *nickname = user[@"nickname"];
@@ -309,6 +309,7 @@
             }
             
         }
+        [IOManager writeUserdefault:@(i) forKey:@"familyNum"];
     }
     
     [db close];

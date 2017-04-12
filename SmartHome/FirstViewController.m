@@ -161,6 +161,8 @@
         _UserNameLabel.hidden = NO;
         _WelcomeLabel.hidden = NO;
     }
+    
+    
 }
 -(void)doTap:(UITapGestureRecognizer *)tap
 {
