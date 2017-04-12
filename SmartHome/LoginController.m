@@ -512,6 +512,7 @@
                 info.masterID = mid;
             }
             [IOManager writeUserdefault:responseObject[@"rctoken"] forKey:@"rctoken"];
+            [IOManager writeUserdefault:responseObject[@"homename"] forKey:@"homename"];
             [self writeChatListConfigDataToSQL:responseObject[@"userList"]];
             [self sendRequestForGettingConfigInfos:@"Cloud/load_config_data.aspx" withTag:2];
             
