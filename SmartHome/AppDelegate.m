@@ -23,8 +23,8 @@
 #import "IphoneTabBarViewController.h"
 #import "WXApi.h"
 #import "WeChatPayManager.h"
-//#import <RongIMKit/RongIMKit.h>
-//#import "RCDataManager.h"
+#import <RongIMKit/RongIMKit.h>
+#import "RCDataManager.h"
 
 @implementation AppDelegate
 
@@ -77,7 +77,6 @@
             ECloudTabBarController *ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ECloudTabBarController"];
             self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
             self.window.rootViewController = ecloudVC;
-            return YES;
         }
     }
     
@@ -96,8 +95,9 @@
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(kickout) name:KICK_OUT object:nil];
-    //[[RCIM sharedRCIM] initWithAppKey:@"8brlm7uf8tsb3"];
-    //[RCIM sharedRCIM].userInfoDataSource = [RCDataManager shareManager];
+    
+    [[RCIM sharedRCIM] initWithAppKey:@"8brlm7uf8tsb3"];
+    [RCIM sharedRCIM].userInfoDataSource = [RCDataManager shareManager];
     
     return YES;
 }

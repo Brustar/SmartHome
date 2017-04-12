@@ -518,6 +518,41 @@
 }
 
 
+-(void) writeChatListConfigDataToSQL:(NSArray *)users
+{
+    if(users.count == 0 || users == nil)
+    {
+        return;
+    }
+    FMDatabase *db = [SQLManager connetdb];
+    if([db open])
+    {
+        NSString *delsql=@"delete from Scenes";
+        [db executeUpdate:delsql];
+        int i=0;
+        for (NSDictionary *user in users) {
+            
+            NSString *nickname = user[@"nickname"];
+            NSString *portrait = user[@"portrait"];
+            NSString *username = user[@"username"];
+            int user_id = [user[@"user_id"] intValue];
+            
+            NSString *sql = [NSString stringWithFormat:@"insert into chats values(%d,'%@','%@','%@',%d)",i++,nickname,portrait,username,user_id];
+            BOOL result = [db executeUpdate:sql];
+            if(result)
+            {
+                NSLog(@"insert 聊天信息 成功");
+            }else{
+                NSLog(@"insert 聊天信息 失败");
+            }
+            
+        }
+        [IOManager writeUserdefault:@(i) forKey:@"familyNum"];
+    }
+    
+    [db close];
+}
+
 #pragma mark -  http delegate
 -(void) httpHandler:(id) responseObject tag:(int)tag
 {
@@ -557,6 +592,9 @@
                 [IOManager writeUserdefault:@(mid) forKey:@"HostID"];
                 info.masterID = mid;
             }
+            [IOManager writeUserdefault:responseObject[@"rctoken"] forKey:@"rctoken"];
+            [IOManager writeUserdefault:responseObject[@"homename"] forKey:@"homename"];
+            [self writeChatListConfigDataToSQL:responseObject[@"userList"]];
             [self sendRequestForGettingConfigInfos:@"Cloud/load_config_data.aspx" withTag:2];
             
             //直接登录主机
