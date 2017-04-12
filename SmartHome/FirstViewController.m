@@ -164,6 +164,8 @@
         _UserNameLabel.hidden = NO;
         _WelcomeLabel.hidden = NO;
     }
+    
+    
 }
 //中间大圆点击进入家庭主页
 -(void)doTap:(UITapGestureRecognizer *)tap
