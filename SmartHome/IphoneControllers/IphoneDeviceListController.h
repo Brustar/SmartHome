@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomViewController.h"
 
-@interface IphoneDeviceListController : UIViewController
+@interface IphoneDeviceListController : CustomViewController
 
 -(void)goDeviceByRoomID:(int)roomID typeName:(NSString *)typeName;
 @property (nonatomic,strong) Scene *scene;
+
+@property (nonatomic, readonly) UIButton *naviRightBtn;
+@property (nonatomic, readonly) UIButton *naviLeftBtn;
 
 @end

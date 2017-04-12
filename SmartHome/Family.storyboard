@@ -45,7 +45,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="175" height="175"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circular.png" translatesAutoresizingMaskIntoConstraints="NO" id="0wW-Jw-qHx" userLabel="cellBg">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="familyCircular" highlightedImage="familyCircular" translatesAutoresizingMaskIntoConstraints="NO" id="0wW-Jw-qHx" userLabel="cellBg">
                                                     <rect key="frame" x="0.0" y="0.0" width="175" height="175"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="g5F-VH-Xbu" userLabel="line1">
@@ -260,7 +260,7 @@
     </scenes>
     <resources>
         <image name="background.png" width="750" height="1334"/>
-        <image name="circular.png" width="138" height="139"/>
+        <image name="familyCircular" width="138" height="139"/>
         <image name="login_line.png" width="1" height="1"/>
     </resources>
 </document>
