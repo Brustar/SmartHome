@@ -500,7 +500,7 @@
     FMDatabase *db = [SQLManager connetdb];
     if([db open])
     {
-        NSString *delsql=@"delete from Scenes";
+        NSString *delsql=@"delete from chats";
         [db executeUpdate:delsql];
         int i=0;
         for (NSDictionary *user in users) {
