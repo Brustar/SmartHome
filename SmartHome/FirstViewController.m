@@ -46,6 +46,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *TwoBtn;
 @property (weak, nonatomic) IBOutlet UIButton *ThreeBtn;
 @property (weak, nonatomic) IBOutlet UIView *subView;
+@property (weak, nonatomic) IBOutlet UIButton *UnreadButton;//点击未读消息的按钮
 
 @end
 
@@ -148,6 +149,7 @@
   
 }
 
+//社交平台的弹出事件
 -(void)HeadDoTap:(UITapGestureRecognizer *)tap
 {
     TabbarPanel * tabbar = [[TabbarPanel alloc] init];
@@ -164,6 +166,7 @@
     
     
 }
+//中间大圆点击进入家庭主页
 -(void)doTap:(UITapGestureRecognizer *)tap
 {
         UIStoryboard *iPhoneStoryBoard  = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
@@ -286,6 +289,11 @@
     }
     
 }
+//点击未读消息的事件
+- (IBAction)UnreadButton:(id)sender {
+   
+}
+
 //减音量
 - (IBAction)smallVolume:(id)sender {
 }

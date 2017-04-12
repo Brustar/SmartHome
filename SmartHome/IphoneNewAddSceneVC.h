@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomViewController.h"
 
-@interface IphoneNewAddSceneVC : UIViewController
+@interface IphoneNewAddSceneVC : CustomViewController
+
 @property (nonatomic,assign) int roomID;
 @end
