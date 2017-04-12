@@ -12,6 +12,7 @@
 #import "SQLManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "IphoneNewAddSceneCell.h"
+#import "IphoneSaveNewSceneController.h"
 
 @interface IphoneNewAddSceneVC ()<UITableViewDelegate,UITableViewDataSource,IphoneRoomViewDelegate>
 
@@ -44,12 +45,22 @@
     UIView *view = [[UIView alloc] init];
     [view setBackgroundColor:[UIColor clearColor]];
     self.tableView.tableFooterView = view;
+    [self setupNaviBar];
 }
 - (void)setupNaviBar {
     [self setNaviBarTitle:@"添加场景"]; //设置标题
     _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
+    _naviRightBtn.tintColor = [UIColor whiteColor];
 //    [self setNaviBarLeftBtn:_naviLeftBtn];
     [self setNaviBarRightBtn:_naviRightBtn];
+}
+-(void)rightBtnClicked:(UIButton *)bbi
+{
+//    UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+//    IphoneSaveNewSceneController * iphoneSaveNewScene = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneSaveNewSceneController"];
+////     [self presentViewController:iphoneSaveNewScene animated:YES completion:nil];
+//    [self.navigationController pushViewController:iphoneSaveNewScene animated:YES];
+      [self performSegueWithIdentifier:@"iphoneAddNewScene" sender:self];
 }
 -(void)setUpRoomView
 {

@@ -32,15 +32,7 @@
 #import "TouchSubViewController.h"
 #import "HttpManager.h"
 #import "IphoneLightController.h"
-#import "LightCell.h"
-#import "AireTableViewCell.h"
-#import "CurtainTableViewCell.h"
-#import "TVTableViewCell.h"
-#import "OtherTableViewCell.h"
-#import "ScreenTableViewCell.h"
-#import "DVDTableViewCell.h"
-#import "ScreenCurtainCell.h"
-#import "AddDeviceCell.h"
+
 
 @interface IphoneEditSceneController ()<TouchSubViewDelegate,UITableViewDelegate,UITableViewDataSource>//IphoneTypeViewDelegate
 
@@ -81,6 +73,7 @@
 @property (nonatomic,strong) NSMutableArray * PowerArray;//功放
 @property (nonatomic, assign) int typeIndex;
 @property (nonatomic,strong) NSString *typeName;
+@property (nonatomic,strong) UIButton * naviRightBtn;
 
 @end
 
@@ -114,6 +107,52 @@
     TouchSubViewController * touchVC = [[TouchSubViewController alloc] init];
     touchVC.delegate = self;
     [self getButtonUI];
+    [self setupNaviBar];
+
+}
+- (void)setupNaviBar {
+    [self setNaviBarTitle:@"场景编辑"]; //设置标题
+    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
+    _naviRightBtn.tintColor = [UIColor whiteColor];
+    //    [self setNaviBarLeftBtn:_naviLeftBtn];
+    [self setNaviBarRightBtn:_naviRightBtn];
+}
+-(void)rightBtnClicked:(UIButton *)bbi
+{
+//     [self performSegueWithIdentifier:@"storeNewScene" sender:self];
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请选择" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *saveAction = [UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //场景ID不变
+        NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
+        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+        
+        Scene *scene = [[Scene alloc]init];
+        [scene setValuesForKeysWithDictionary:plistDic];
+        
+        [[SceneManager defaultManager] editScene:scene];
+    }];
+    [alertVC addAction:saveAction];
+    UIAlertAction *saveNewAction = [UIAlertAction actionWithTitle:@"另存为新场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //另存为场景，新的场景ID
+        
+        [self performSegueWithIdentifier:@"storeNewScene" sender:self];
+        
+    }];
+    [alertVC addAction:saveNewAction];
+    UIAlertAction *favScene = [UIAlertAction actionWithTitle:@"收藏场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        
+        [self favorScene];
+        
+    }];
+    [alertVC addAction:favScene];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [alertVC dismissViewControllerAnimated:YES completion:nil];
+    }];
+    [alertVC addAction:cancelAction];
+    [[DeviceInfo defaultManager] setEditingScene:NO];
+    [self presentViewController:alertVC animated:YES completion:nil];
 
 }
 -(void)getButtonUI
@@ -140,6 +179,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"ScreenTableViewCell" bundle:nil] forCellReuseIdentifier:@"ScreenTableViewCell"];//幕布ScreenCurtainCell
      [self.tableView registerNib:[UINib nibWithNibName:@"ScreenCurtainCell" bundle:nil] forCellReuseIdentifier:@"ScreenCurtainCell"];//幕布ScreenCurtainCell
     [self.tableView registerNib:[UINib nibWithNibName:@"DVDTableViewCell" bundle:nil] forCellReuseIdentifier:@"DVDTableViewCell"];//DVD
+     [self.tableView registerNib:[UINib nibWithNibName:@"BjMusicTableViewCell" bundle:nil] forCellReuseIdentifier:@"BjMusicTableViewCell"];//背景音乐
      [self.tableView registerNib:[UINib nibWithNibName:@"AddDeviceCell" bundle:nil] forCellReuseIdentifier:@"AddDeviceCell"];//添加设备的cell
     NSArray *lightArr = [SQLManager getDeviceIDsBySeneId:self.sceneID];
     _lightArr = [[NSMutableArray alloc] init];//场景下的所有设备
@@ -567,33 +607,33 @@
 {
     if (section == 0) {
         return _lightArray.count;//灯光
-    }else if (section == 1){
+    }if (section == 1){
         return _AirArray.count;//空调
-    }else if (section == 2){
+    }if (section == 2){
         return _CurtainArray.count;//窗帘
-    }else if (section == 3){
+    }if (section == 3){
         return _TVArray.count;//TV
-    }else if (section == 4){
+    }if (section == 4){
         return _LockArray.count;//智能门锁
-    }else if (section == 5){
+    }if (section == 5){
         return _DVDArray.count;//DVD
-    }else if (section == 6){
+    }if (section == 6){
         return _ProjectArray.count;//投影
-    }else if (section == 7){
+    }if (section == 7){
         return _FMArray.count;//FM
-    }else if (section == 8){
+    }if (section == 8){
         return _NetVArray.count;//机顶盒
-    }else if (section == 9){
+    }if (section == 9){
         return _MBArray.count;//幕布
-    }else if (section == 10){
+    }if (section == 10){
         return _PowerArray.count;//功放
-    }else if (section == 11){
+    }if (section == 11){
         return _IntelligentArray.count;//智能推窗器
-    }else if (section == 12){
+    }if (section == 12){
         return _BJMusicArray.count;//背景音乐
-    }else if (section == 13){
+    }if (section == 13){
         return _PluginArray.count;//智能单品
-    }else if (section == 14){
+    }if (section == 14){
          return _OtherArray.count;//其他
     }
     return 1;
@@ -680,10 +720,10 @@
         Device *device = [SQLManager getDeviceWithDeviceID:[_IntelligentArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
     }if (indexPath.section == 12) {//背景音乐
-        OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
-        otherCell.backgroundColor = [UIColor clearColor];
+        BjMusicTableViewCell * BjMusicCell = [tableView dequeueReusableCellWithIdentifier:@"BjMusicTableViewCell" forIndexPath:indexPath];
+        BjMusicCell.backgroundColor = [UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_BJMusicArray[indexPath.row] intValue]];
-        otherCell.NameLabel.text = device.name;
+        BjMusicCell.BjMusicNameLb.text = device.name;
     }if (indexPath.section == 13) {//智能单品
         OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
         otherCell.backgroundColor = [UIColor clearColor];

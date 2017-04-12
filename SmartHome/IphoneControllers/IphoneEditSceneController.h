@@ -7,8 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomViewController.h"
+#import "LightCell.h"
+#import "AireTableViewCell.h"
+#import "CurtainTableViewCell.h"
+#import "TVTableViewCell.h"
+#import "OtherTableViewCell.h"
+#import "ScreenTableViewCell.h"
+#import "DVDTableViewCell.h"
+#import "ScreenCurtainCell.h"
+#import "AddDeviceCell.h"
+#import "BjMusicTableViewCell.h"
 
-@interface IphoneEditSceneController : UIViewController
+@interface IphoneEditSceneController : CustomViewController
 @property(nonatomic,assign) int sceneID;
 @property(nonatomic,assign) int deviceID;
 @property(nonatomic,assign) int roomID;

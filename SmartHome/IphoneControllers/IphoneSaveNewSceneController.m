@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *sceneName;//输入场景名的输入框
 @property (weak, nonatomic) IBOutlet UIButton *sceneImageBtn;//选择场景图片的button
 @property (nonatomic,strong)UIImage *selectSceneImg;
+@property (nonatomic,strong) UIButton * naviRightBtn;
 
 @end
 
@@ -24,6 +25,31 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.sceneName setValue:[UIColor lightGrayColor] forKeyPath:@"_placeholderLabel.textColor"];
+    [self setupNaviBar];
+}
+- (void)setupNaviBar {
+    [self setNaviBarTitle:@"添加场景"]; //设置标题
+    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
+    _naviRightBtn.tintColor = [UIColor whiteColor];
+    //    [self setNaviBarLeftBtn:_naviLeftBtn];
+    [self setNaviBarRightBtn:_naviRightBtn];
+}
+-(void)rightBtnClicked:(UIButton *)bbi
+{
+    if ([self.sceneName.text isEqualToString:@""]) {
+        [MBProgressHUD showError:@"场景名不能为空!"];
+        return;
+    }
+    
+    NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
+    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+    
+    Scene *scene = [[Scene alloc]initWhithoutSchedule];
+    [scene setValuesForKeysWithDictionary:plistDic];
+    
+    [[SceneManager defaultManager] saveAsNewScene:scene withName:self.sceneName.text withPic:self.selectSceneImg];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)storeNewScene:(id)sender {
     

@@ -1939,7 +1939,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7mq-tK-5f2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2508" y="449"/>
+            <point key="canvasLocation" x="2506" y="435"/>
         </scene>
         <!--编辑场景-->
         <scene sceneID="jJL-4i-9vO">
@@ -1957,7 +1957,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bRe-wM-cOH">
-                                <rect key="frame" x="0.0" y="64" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="60"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ssv-x8-8Wp">
                                         <rect key="frame" x="10" y="0.0" width="355" height="60"/>
@@ -2016,7 +2016,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="24k-dg-E7E">
-                                <rect key="frame" x="10" y="124" width="355" height="543"/>
+                                <rect key="frame" x="10" y="168" width="355" height="499"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="100" id="Kj4-n0-HTh" customClass="LightCell">
@@ -2104,7 +2104,7 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FHI-lz-zen">
-                                <rect key="frame" x="10" y="123" width="355" height="1"/>
+                                <rect key="frame" x="10" y="167" width="355" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="rpe-yb-Go6"/>
@@ -2117,7 +2117,7 @@
                             <constraint firstAttribute="trailing" secondItem="bRe-wM-cOH" secondAttribute="trailing" id="Aln-lK-MVy"/>
                             <constraint firstItem="24k-dg-E7E" firstAttribute="top" secondItem="FHI-lz-zen" secondAttribute="bottom" id="EdK-b5-K3c"/>
                             <constraint firstItem="VZ6-Ye-tsJ" firstAttribute="top" secondItem="24k-dg-E7E" secondAttribute="bottom" id="IEj-OE-DIz"/>
-                            <constraint firstItem="bRe-wM-cOH" firstAttribute="top" secondItem="kCh-e3-PMp" secondAttribute="bottom" id="SPa-yp-Boo"/>
+                            <constraint firstItem="bRe-wM-cOH" firstAttribute="top" secondItem="kCh-e3-PMp" secondAttribute="bottom" constant="44" id="SPa-yp-Boo"/>
                             <constraint firstItem="YbJ-Qs-KNf" firstAttribute="leading" secondItem="f4l-Bn-A50" secondAttribute="leading" id="chc-vk-aWL"/>
                             <constraint firstItem="24k-dg-E7E" firstAttribute="top" secondItem="bRe-wM-cOH" secondAttribute="bottom" id="dAf-Sw-3vQ"/>
                             <constraint firstItem="24k-dg-E7E" firstAttribute="leading" secondItem="f4l-Bn-A50" secondAttribute="leading" constant="10" id="emg-CU-Trx"/>
@@ -2160,12 +2160,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xHe-WT-B8x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2021" y="564"/>
+            <point key="canvasLocation" x="1989" y="618"/>
         </scene>
         <!--另存为新场景-->
         <scene sceneID="33Y-I7-8Da">
             <objects>
-                <viewController id="nA9-ci-Ug8" customClass="IphoneSaveNewSceneController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IphoneSaveNewSceneController" id="nA9-ci-Ug8" customClass="IphoneSaveNewSceneController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="V2q-0O-QB0"/>
                         <viewControllerLayoutGuide type="bottom" id="K8n-yC-cSR"/>
@@ -2271,7 +2271,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6mW-Ui-0fN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2858" y="467"/>
+            <point key="canvasLocation" x="2979" y="421"/>
         </scene>
         <!--我的收藏-->
         <scene sceneID="vJx-Zc-c3B">
@@ -6459,7 +6459,7 @@
         <image name="calendar.png" width="16" height="16"/>
         <image name="close2" width="25" height="25"/>
         <image name="close_white" width="25" height="25"/>
-        <image name="delete" width="25" height="25"/>
+        <image name="delete" width="32" height="32"/>
         <image name="delete_white" width="25" height="25"/>
         <image name="edit" width="32" height="32"/>
         <image name="fastForward" width="32" height="32"/>
@@ -6507,7 +6507,7 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="lPv-wZ-EAG"/>
+        <segue reference="jfc-yL-NEI"/>
         <segue reference="qN8-z6-Gb7"/>
         <segue reference="WeN-Qz-0Az"/>
         <segue reference="OCS-34-SI9"/>
