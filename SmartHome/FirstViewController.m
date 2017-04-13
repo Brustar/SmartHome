@@ -54,6 +54,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *UnreadButton;//点击未读消息的按钮
 @property (nonatomic,strong) NSString * familyNum;
 @property (weak, nonatomic) IBOutlet UILabel *chatlabel;//聊天的label
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *DayLabelUpConstraint;//距离上边距的值
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *DayLabelLeftConstraint;//距离左边距的值
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *YLabelrightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *NLabelrightConstraint;
 
 @end
 
@@ -170,6 +174,15 @@
     }
     NSInteger day=[conponent day];
     _calenderYearLabel.text = [NSString stringWithFormat:@"%ld",year];
+     if (([UIScreen mainScreen].bounds.size.height == 568.0)) {
+         _DayLabelUpConstraint.constant = -10;
+         _DayLabelLeftConstraint.constant = -5;
+         _YLabelrightConstraint.constant = 0;
+         _NLabelrightConstraint.constant = 0;
+         _calenderDayLabel.font = [UIFont systemFontOfSize:70];
+     }if (([UIScreen mainScreen].bounds.size.height == 667.0)) {
+         _calenderDayLabel.font = [UIFont systemFontOfSize:113];
+     }
     _calenderDayLabel.text = [NSString stringWithFormat:@"%ld",day];
     [RCIM sharedRCIM].receiveMessageDelegate=self;
 }
@@ -180,9 +193,10 @@
     //self.chatLabel.text = message.content.description;
     if(left>0)
     {
-        self.UnreadButton.imageView.image=[UIImage imageNamed:@""];
+        self.UnreadButton.imageView.image=[UIImage imageNamed:@"circular1"];//未读消息
     }else{
-        self.UnreadButton.imageView.image=[UIImage imageNamed:@""];
+        self.UnreadButton.imageView.image=[UIImage imageNamed:@""];//已读
+        self.UnreadButton.hidden = YES;
     }
 }
 

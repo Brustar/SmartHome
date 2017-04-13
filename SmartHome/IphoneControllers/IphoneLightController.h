@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomViewController.h"
 
-@interface IphoneLightController : UIViewController
+@interface IphoneLightController : CustomViewController
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,assign) int roomID;
 @property (nonatomic,strong) NSString * sceneid;

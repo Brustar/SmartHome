@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomViewController.h"
 
-@interface IphoneAddFmController : UIViewController
+@interface IphoneAddFmController : CustomViewController
 @property (nonatomic,weak) NSString *deviceid;
 
 @property (nonatomic,strong) NSString *numberOfChannel;

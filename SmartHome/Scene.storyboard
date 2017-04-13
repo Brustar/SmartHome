@@ -417,16 +417,38 @@
                                     <constraint firstItem="SXE-wx-32V" firstAttribute="top" secondItem="ogE-sZ-ZFn" secondAttribute="bottom" constant="18" id="zUY-sO-wHY"/>
                                 </constraints>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tm_btn_nc_normal" translatesAutoresizingMaskIntoConstraints="NO" id="fn9-d7-eEB">
+                                <rect key="frame" x="0.0" y="194" width="375" height="375"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="375" id="AmG-O3-afj"/>
+                                    <constraint firstAttribute="width" secondItem="fn9-d7-eEB" secondAttribute="height" multiplier="1:1" id="hiV-u2-kFd"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tm_btn_dp_normal" translatesAutoresizingMaskIntoConstraints="NO" id="hjq-5j-5cR">
+                                <rect key="frame" x="114" y="309" width="147" height="147"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="hjq-5j-5cR" secondAttribute="height" multiplier="1:1" id="t89-2b-lMF"/>
+                                    <constraint firstAttribute="width" constant="147" id="u4r-dG-UTF"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="fn9-d7-eEB" secondAttribute="trailing" id="Id7-9M-Tc1"/>
                             <constraint firstAttribute="trailing" secondItem="Feg-z9-7jQ" secondAttribute="trailing" id="XL0-ZT-Lje"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hjq-5j-5cR" secondAttribute="trailing" constant="98" id="Xsl-uP-fsC"/>
                             <constraint firstItem="QGe-MX-LOa" firstAttribute="top" secondItem="sua-Mb-jOO" secondAttribute="bottom" constant="44" id="ZN5-hY-rLk"/>
+                            <constraint firstItem="hjq-5j-5cR" firstAttribute="leading" secondItem="aau-dc-TYk" secondAttribute="leadingMargin" constant="98" id="aap-N7-EXJ"/>
                             <constraint firstItem="Feg-z9-7jQ" firstAttribute="top" secondItem="sua-Mb-jOO" secondAttribute="bottom" constant="64" id="hWo-u5-6yL"/>
+                            <constraint firstItem="fn9-d7-eEB" firstAttribute="leading" secondItem="aau-dc-TYk" secondAttribute="leading" id="kG0-JU-BIy"/>
                             <constraint firstItem="uKO-Le-61h" firstAttribute="top" secondItem="QGe-MX-LOa" secondAttribute="bottom" id="m8K-jm-OXu"/>
+                            <constraint firstItem="hjq-5j-5cR" firstAttribute="top" secondItem="Feg-z9-7jQ" secondAttribute="bottom" constant="115" id="mg7-Dj-D2Y"/>
                             <constraint firstItem="QGe-MX-LOa" firstAttribute="leading" secondItem="aau-dc-TYk" secondAttribute="leading" id="mgh-S5-5dn"/>
                             <constraint firstItem="Feg-z9-7jQ" firstAttribute="leading" secondItem="aau-dc-TYk" secondAttribute="leading" id="nKa-df-5ao"/>
                             <constraint firstAttribute="trailing" secondItem="QGe-MX-LOa" secondAttribute="trailing" id="vcQ-R9-BjE"/>
+                            <constraint firstItem="fn9-d7-eEB" firstAttribute="top" secondItem="Feg-z9-7jQ" secondAttribute="bottom" id="ydF-Oq-C46"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cdJ-K8-cbD"/>
@@ -436,7 +458,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dms-Rk-k8l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2649" y="-279"/>
+            <point key="canvasLocation" x="2561" y="-299"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RtN-xr-1Mc">
@@ -483,11 +505,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="9OH-tV-saF">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sqU-TG-6PA">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="IXH-LT-Qki" customClass="WeekDaysCell">
@@ -555,6 +577,8 @@
         <image name="down" width="14" height="7"/>
         <image name="kaiqi.png" width="32" height="32"/>
         <image name="line_horizontal_white" width="373" height="48"/>
+        <image name="tm_btn_dp_normal" width="150" height="150"/>
+        <image name="tm_btn_nc_normal" width="375" height="385"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="FOv-Ol-B0e"/>

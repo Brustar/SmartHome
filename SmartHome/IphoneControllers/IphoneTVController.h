@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomViewController.h"
 
-@interface IphoneTVController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate>
+@interface IphoneTVController : CustomViewController<UIPickerViewDataSource, UIPickerViewDelegate>
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic,assign) NSString *deviceid;
 

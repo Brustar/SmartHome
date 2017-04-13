@@ -1906,7 +1906,7 @@
         <!--添加设备——设备列表-->
         <scene sceneID="PfY-RB-xx1">
             <objects>
-                <viewController id="yGe-XQ-WNx" userLabel="添加设备——设备列表" customClass="IphoneDevicesController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IphoneDevicesController" id="yGe-XQ-WNx" userLabel="添加设备——设备列表" customClass="IphoneDevicesController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uN0-0n-QnS"/>
                         <viewControllerLayoutGuide type="bottom" id="VeB-vS-gsa"/>
@@ -1916,7 +1916,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U4T-Wr-vpj">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="yGe-XQ-WNx" id="BBU-2j-rf7"/>
@@ -1926,7 +1926,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="U4T-Wr-vpj" firstAttribute="top" secondItem="uN0-0n-QnS" secondAttribute="bottom" id="Bds-Ir-9Cj"/>
+                            <constraint firstItem="U4T-Wr-vpj" firstAttribute="top" secondItem="uN0-0n-QnS" secondAttribute="bottom" constant="44" id="Bds-Ir-9Cj"/>
                             <constraint firstItem="VeB-vS-gsa" firstAttribute="top" secondItem="U4T-Wr-vpj" secondAttribute="bottom" id="MWt-DT-fdu"/>
                             <constraint firstItem="U4T-Wr-vpj" firstAttribute="leading" secondItem="n5a-50-Ua0" secondAttribute="leading" id="p3N-Wg-0zx"/>
                             <constraint firstAttribute="trailing" secondItem="U4T-Wr-vpj" secondAttribute="trailing" id="uBE-Xj-fyA"/>
@@ -1939,7 +1939,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7mq-tK-5f2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2506" y="435"/>
+            <point key="canvasLocation" x="2527" y="483"/>
         </scene>
         <!--编辑场景-->
         <scene sceneID="jJL-4i-9vO">
@@ -2019,15 +2019,15 @@
                                 <rect key="frame" x="10" y="168" width="355" height="499"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="100" id="Kj4-n0-HTh" customClass="LightCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" rowHeight="100" id="Kj4-n0-HTh" customClass="LightCell">
                                         <rect key="frame" x="0.0" y="28" width="355" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kj4-n0-HTh" id="sfy-Dl-vN4">
-                                            <rect key="frame" x="0.0" y="0.0" width="355" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="322" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lv_fm_adjust_normal" translatesAutoresizingMaskIntoConstraints="NO" id="Jvd-Kh-Tjy">
-                                                    <rect key="frame" x="0.0" y="50" width="355" height="50"/>
+                                                    <rect key="frame" x="0.0" y="50" width="322" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="iAO-Kp-5gS"/>
                                                     </constraints>
@@ -2041,7 +2041,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lv_icon_adjust_high" translatesAutoresizingMaskIntoConstraints="NO" id="oDK-RV-Vgb">
-                                                    <rect key="frame" x="316" y="63" width="20" height="20"/>
+                                                    <rect key="frame" x="283" y="63" width="20" height="20"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="A98-Lb-2mZ"/>
@@ -2059,13 +2059,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Rav-Hx-Qef">
-                                                    <rect key="frame" x="47" y="58" width="261" height="31"/>
+                                                    <rect key="frame" x="47" y="58" width="228" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="Rqp-Mn-McB"/>
                                                     </constraints>
                                                 </slider>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lCA-zQ-tZH">
-                                                    <rect key="frame" x="307" y="14" width="30" height="30"/>
+                                                    <rect key="frame" x="274" y="14" width="30" height="30"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="2Qi-ta-EmL"/>
@@ -2095,6 +2095,7 @@
                                         <connections>
                                             <outlet property="LightNameLabel" destination="qlU-4k-EOo" id="HXT-xK-7c8"/>
                                             <outlet property="slider" destination="Rav-Hx-Qef" id="yUF-0C-QjR"/>
+                                            <segue destination="yGe-XQ-WNx" kind="push" identifier="NewAddDeviceSegue" id="I2X-fz-i7P"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -5373,7 +5374,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="76" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uZI-NB-5iZ">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="76" id="Zmf-xY-XoC" customClass="LightCell">
@@ -5490,7 +5491,7 @@
                             <constraint firstItem="uZI-NB-5iZ" firstAttribute="leading" secondItem="s8l-Fw-Xdc" secondAttribute="leading" id="S5R-di-Ym5"/>
                             <constraint firstItem="dcH-jN-6iw" firstAttribute="top" secondItem="uZI-NB-5iZ" secondAttribute="bottom" id="Ttt-ox-0uI"/>
                             <constraint firstAttribute="trailing" secondItem="uZI-NB-5iZ" secondAttribute="trailing" id="Wh9-ra-z86"/>
-                            <constraint firstItem="uZI-NB-5iZ" firstAttribute="top" secondItem="s8l-Fw-Xdc" secondAttribute="top" id="zaD-iQ-MoS"/>
+                            <constraint firstItem="uZI-NB-5iZ" firstAttribute="top" secondItem="s8l-Fw-Xdc" secondAttribute="top" constant="44" id="zaD-iQ-MoS"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="场景-灯" id="1O3-fF-OLH">
@@ -6510,7 +6511,7 @@
         <segue reference="WeN-Qz-0Az"/>
         <segue reference="OCS-34-SI9"/>
         <segue reference="qN8-z6-Gb7"/>
-        <segue reference="jfc-yL-NEI"/>
+        <segue reference="I2X-fz-i7P"/>
         <segue reference="Uo6-og-hnM"/>
     </inferredMetricsTieBreakers>
 </document>
