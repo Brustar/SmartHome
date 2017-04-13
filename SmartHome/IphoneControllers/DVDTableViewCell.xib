@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="339" height="145"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="339" height="145"/>
+                <rect key="frame" x="0.0" y="0.0" width="339" height="144.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lv_fm_adjust_normal" translatesAutoresizingMaskIntoConstraints="NO" id="M28-8e-zHA">
@@ -72,7 +72,7 @@
                         <state key="normal" image="dvd_btn_adjust_normal"/>
                     </button>
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OqP-ir-MRF">
-                        <rect key="frame" x="281" y="4" width="42" height="40"/>
+                        <rect key="frame" x="271" y="4" width="42" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="JDz-EP-gKW"/>
                             <constraint firstAttribute="width" constant="40" id="vyT-dA-14D"/>
@@ -106,7 +106,7 @@
                     <constraint firstItem="UYH-Br-BuW" firstAttribute="width" secondItem="aQ4-Nq-8mW" secondAttribute="width" id="exZ-4e-RYz"/>
                     <constraint firstItem="75B-Ud-NQ6" firstAttribute="width" secondItem="aQ4-Nq-8mW" secondAttribute="width" id="g4a-Uk-wz6"/>
                     <constraint firstItem="UYH-Br-BuW" firstAttribute="leading" secondItem="75B-Ud-NQ6" secondAttribute="trailing" id="gVN-Te-gpF"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="OqP-ir-MRF" secondAttribute="trailing" constant="10" id="gdB-i0-LMj"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="OqP-ir-MRF" secondAttribute="trailing" constant="20" id="gdB-i0-LMj"/>
                     <constraint firstAttribute="bottom" secondItem="M28-8e-zHA" secondAttribute="bottom" id="hWq-gg-CrD"/>
                     <constraint firstItem="je0-2Y-f1l" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="ljb-Ur-pkN"/>
                     <constraint firstAttribute="bottomMargin" secondItem="NYR-NW-O6b" secondAttribute="bottom" constant="5.5" id="pp8-AK-xUG"/>

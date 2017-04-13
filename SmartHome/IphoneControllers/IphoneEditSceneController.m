@@ -729,7 +729,7 @@
         otherCell.backgroundColor = [UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_PluginArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
-    }if (indexPath.section == 14) {
+    }if (indexPath.section == 14) {//其他
         OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
         otherCell.backgroundColor = [UIColor clearColor];
         if (_OtherArray.count) {
@@ -754,8 +754,8 @@
     if (indexPath.section == 3 || indexPath.section == 5) {
         return 150;
     }
-    if (indexPath.section == 16) {
-        return 44;
+    if (indexPath.section == 15 || indexPath.section ==4 || indexPath.section == 7 || indexPath.section == 8 || indexPath.section == 10 || indexPath.section == 11 || indexPath.section == 13 || indexPath.section == 14) {
+        return 50;
     }
     return 100;
 }

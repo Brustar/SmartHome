@@ -2049,7 +2049,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="床边灯带" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qlU-4k-EOo">
-                                                    <rect key="frame" x="17" y="8" width="131" height="42"/>
+                                                    <rect key="frame" x="18" y="8" width="131" height="42"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="131" id="udj-Br-v12"/>
@@ -2086,7 +2086,7 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="oDK-RV-Vgb" secondAttribute="bottom" constant="9" id="gJ8-b6-3Yh"/>
                                                 <constraint firstItem="DFl-2S-atL" firstAttribute="leading" secondItem="sfy-Dl-vN4" secondAttribute="leadingMargin" constant="16" id="mtV-oW-LiE"/>
                                                 <constraint firstItem="qlU-4k-EOo" firstAttribute="top" secondItem="sfy-Dl-vN4" secondAttribute="topMargin" id="otk-eh-86w"/>
-                                                <constraint firstItem="qlU-4k-EOo" firstAttribute="leading" secondItem="sfy-Dl-vN4" secondAttribute="leadingMargin" constant="9" id="qVp-zX-jmY"/>
+                                                <constraint firstItem="qlU-4k-EOo" firstAttribute="leading" secondItem="sfy-Dl-vN4" secondAttribute="leadingMargin" constant="10" id="qVp-zX-jmY"/>
                                                 <constraint firstItem="Jvd-Kh-Tjy" firstAttribute="leading" secondItem="sfy-Dl-vN4" secondAttribute="leading" id="qbD-2P-4lS"/>
                                                 <constraint firstItem="Jvd-Kh-Tjy" firstAttribute="top" secondItem="lCA-zQ-tZH" secondAttribute="bottom" constant="6" id="qnc-i4-nSj"/>
                                                 <constraint firstItem="Rav-Hx-Qef" firstAttribute="leading" secondItem="DFl-2S-atL" secondAttribute="trailing" constant="10" id="zqp-cf-yE7"/>
@@ -6507,10 +6507,10 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="jfc-yL-NEI"/>
-        <segue reference="qN8-z6-Gb7"/>
         <segue reference="WeN-Qz-0Az"/>
         <segue reference="OCS-34-SI9"/>
+        <segue reference="qN8-z6-Gb7"/>
+        <segue reference="jfc-yL-NEI"/>
         <segue reference="Uo6-og-hnM"/>
     </inferredMetricsTieBreakers>
 </document>

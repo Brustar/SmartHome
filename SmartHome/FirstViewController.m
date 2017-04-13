@@ -53,6 +53,8 @@
 @property (weak, nonatomic) IBOutlet UIView * subView;
 @property (weak, nonatomic) IBOutlet UIButton *UnreadButton;//点击未读消息的按钮
 @property (nonatomic,strong) NSString * familyNum;
+@property (weak, nonatomic) IBOutlet UILabel *chatlabel;//聊天的label
+
 @end
 
 @implementation FirstViewController

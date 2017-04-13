@@ -44,7 +44,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D4k-av-6ph">
-                        <rect key="frame" x="323" y="7" width="42" height="40"/>
+                        <rect key="frame" x="313" y="7" width="42" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="GWa-8T-tfU"/>
                             <constraint firstAttribute="width" constant="40" id="yV6-Aq-gGs"/>
@@ -68,7 +68,7 @@
                     <constraint firstItem="Xph-53-ijS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="52" id="Gbv-2C-1lh"/>
                     <constraint firstItem="OFd-Kj-Hsb" firstAttribute="width" secondItem="rc5-hL-egz" secondAttribute="width" id="SOZ-n5-fng"/>
                     <constraint firstAttribute="bottomMargin" secondItem="OFd-Kj-Hsb" secondAttribute="bottom" constant="1.5" id="WIo-bQ-Ddv"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="D4k-av-6ph" secondAttribute="trailing" constant="10" id="aLV-vs-Sfg"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="D4k-av-6ph" secondAttribute="trailing" constant="20" id="aLV-vs-Sfg"/>
                     <constraint firstItem="OFd-Kj-Hsb" firstAttribute="height" secondItem="rc5-hL-egz" secondAttribute="height" id="bvi-vc-2mo"/>
                     <constraint firstAttribute="trailingMargin" secondItem="OFd-Kj-Hsb" secondAttribute="trailing" id="c8v-aC-hdJ"/>
                     <constraint firstAttribute="trailing" secondItem="dHx-cQ-8iB" secondAttribute="trailing" id="cSC-z1-Vw5"/>

@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="346" height="107"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="346" height="107"/>
+                <rect key="frame" x="0.0" y="0.0" width="346" height="106.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dvd_frm_choice__normal" translatesAutoresizingMaskIntoConstraints="NO" id="0cu-aa-C0a">
@@ -65,7 +65,7 @@
                         </constraints>
                     </slider>
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dmh-EL-E3l">
-                        <rect key="frame" x="288" y="17" width="42" height="40"/>
+                        <rect key="frame" x="278" y="17" width="42" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="CAK-Z1-6SA"/>
                             <constraint firstAttribute="width" constant="40" id="SwM-7A-xke"/>
@@ -85,7 +85,7 @@
                     <constraint firstItem="0cu-aa-C0a" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="XCx-tc-oqJ"/>
                     <constraint firstItem="9yv-2g-L2p" firstAttribute="leading" secondItem="5Gp-k8-Gvg" secondAttribute="trailing" constant="8" id="ZeY-A6-dKP"/>
                     <constraint firstItem="Yqf-zh-nqL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="eMN-Yx-kSV"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="Dmh-EL-E3l" secondAttribute="trailing" constant="10" id="fVp-vz-IzL"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Dmh-EL-E3l" secondAttribute="trailing" constant="20" id="fVp-vz-IzL"/>
                     <constraint firstItem="0cu-aa-C0a" firstAttribute="top" secondItem="4Ci-ZD-g6F" secondAttribute="bottom" id="izS-El-1ZB"/>
                     <constraint firstItem="4Ci-ZD-g6F" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="kRw-rB-JO5"/>
                     <constraint firstItem="0cu-aa-C0a" firstAttribute="top" secondItem="Dmh-EL-E3l" secondAttribute="bottom" id="m4w-nI-Shl"/>
