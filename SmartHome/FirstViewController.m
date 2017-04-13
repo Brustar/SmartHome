@@ -89,6 +89,7 @@
     [super viewWillDisappear:animated];
     BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     baseTabbarController.tabbarPanel.hidden = YES;
+    [[RCIM sharedRCIM] logout];
 }
 
 - (void)viewDidLoad {
