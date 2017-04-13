@@ -171,13 +171,21 @@
     NSInteger day=[conponent day];
     _calenderYearLabel.text = [NSString stringWithFormat:@"%ld",year];
     _calenderDayLabel.text = [NSString stringWithFormat:@"%ld",day];
-    [RCIM sharedRCIM].receiveMessageDelegate=self;
+    [self chatConnect];
 }
 
-- (void)onRCIMReceiveMessage:(RCMessage *)message
-                        left:(int)left
+-(void) chatConnect
 {
-    //self.chatLabel.text = message.content.description;
+    NSString *token = [UD objectForKey:@"rctoken"];
+    [[RCIM sharedRCIM] connectWithToken:token success:^(NSString *userId) {
+        NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
+        [RCIM sharedRCIM].receiveMessageDelegate=self;
+    } error:nil tokenIncorrect:nil];
+}
+
+- (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left
+{
+    self.chatlabel.text = message.content.conversationDigest;
     if(left>0)
     {
         self.UnreadButton.imageView.image=[UIImage imageNamed:@""];
@@ -340,6 +348,7 @@
 }
 //点击未读消息的事件
 - (IBAction)UnreadButton:(id)sender {
+    [[RCIM sharedRCIM] logout];
     NSString *token = [UD objectForKey:@"rctoken"];
     NSString *groupID = [[UD objectForKey:@"HostID"] description];
     NSString *homename = [UD objectForKey:@"homename"];
