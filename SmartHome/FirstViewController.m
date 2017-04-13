@@ -26,7 +26,7 @@
 #import "IOManager.h"
 
 
-@interface FirstViewController ()<UITableViewDataSource,UITableViewDataSource>
+@interface FirstViewController ()<UITableViewDataSource,UITableViewDataSource,RCIMReceiveMessageDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView * SubImageView;//首页的日历大圆
 @property (weak, nonatomic) IBOutlet UIView * BtnView;//全屋场景的按钮试图
 @property (weak, nonatomic) IBOutlet UIImageView * IconeImageView;//提示消息的头像
@@ -169,7 +169,19 @@
     NSInteger day=[conponent day];
     _calenderYearLabel.text = [NSString stringWithFormat:@"%ld",year];
     _calenderDayLabel.text = [NSString stringWithFormat:@"%ld",day];
-    
+    [RCIM sharedRCIM].receiveMessageDelegate=self;
+}
+
+- (void)onRCIMReceiveMessage:(RCMessage *)message
+                        left:(int)left
+{
+    //self.chatLabel.text = message.content.description;
+    if(left>0)
+    {
+        self.UnreadButton.imageView.image=[UIImage imageNamed:@""];
+    }else{
+        self.UnreadButton.imageView.image=[UIImage imageNamed:@""];
+    }
 }
 
 -(void)setBtn
