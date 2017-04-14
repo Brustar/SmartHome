@@ -19,10 +19,10 @@
 #import <AVFoundation/AVFoundation.h>
 #import "ShortcutKeyViewController.h"
 #import "TabbarPanel.h"
-
+#import "UIImageView+Badge.h"
 #import <RongIMKit/RongIMKit.h>
 #import "ConversationViewController.h"
-
+#import <RBStoryboardLink.h>
 #import "IOManager.h"
 
 
@@ -186,18 +186,14 @@
 
 - (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left
 {
-    self.chatlabel.text = message.content.conversationDigest;
-    if(left>0)
-    {
-        self.UnreadButton.imageView.image=[UIImage imageNamed:@""];
-    }else{
-        self.UnreadButton.imageView.image=[UIImage imageNamed:@""];
-    }
+    NSString *nickname = [SQLManager queryChat:message.senderUserId][0];
+    self.chatlabel.text =[NSString stringWithFormat:@"%@ : %@" , nickname, message.content.conversationDigest];
+    [self.IconeImageView badge];
 }
 
 -(void)setBtn
 {
-       NSMutableArray * arr = [[NSMutableArray alloc] init];
+    NSMutableArray * arr = [[NSMutableArray alloc] init];
 
     // 1.获得沙盒根路径
     NSString *home = NSHomeDirectory();
@@ -251,7 +247,7 @@
 }
 
 - (void)setupNaviBar {
-    [self setNaviBarTitle:@"家庭名称"]; //设置标题
+    [self setNaviBarTitle:[UD objectForKey:@"homename"]]; //设置标题
     _naviLeftBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"clound_white" imgHighlight:@"clound_white" target:self action:@selector(leftBtnClicked:)];
     _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"music_white" imgHighlight:@"music_white" target:self action:@selector(rightBtnClicked:)];
     [self setNaviBarLeftBtn:_naviLeftBtn];

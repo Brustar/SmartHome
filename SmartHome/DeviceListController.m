@@ -23,6 +23,7 @@
 #import "UploadManager.h"
 #import "ECloudTabBarController.h"
 #import "ECloudTabBar.h"
+
 @interface DeviceListController ()<UITableViewDelegate,UITableViewDataSource,UISplitViewControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -63,6 +64,7 @@
         self.detialFrame = self.navigationController.view.bounds;
         self.isSetDetialFrame = YES;
     }
+    
 }
 
 -(void) viewDidLoad

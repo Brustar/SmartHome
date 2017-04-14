@@ -90,7 +90,7 @@ static NSString * const CYPhotoId = @"photo";
 }
 
 - (void)setupNaviBar {
-    [self setNaviBarTitle:@"家庭名称"]; //设置标题
+    [self setNaviBarTitle:[UD objectForKey:@"homename"]]; //设置标题
     _naviLeftBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"clound_white" imgHighlight:@"clound_white" target:self action:@selector(leftBtnClicked:)];
     _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"music_white" imgHighlight:@"music_white" target:self action:@selector(rightBtnClicked:)];
     [self setNaviBarLeftBtn:_naviLeftBtn];
@@ -189,7 +189,7 @@ static NSString * const CYPhotoId = @"photo";
         self.roomIndex = index;
         Room *room = self.rooms[index];
         self.deviceTypes = [SQLManager deviceSubTypeByRoomId:room.rId];
-        [self setUpScrollerView];
+        //[self setUpScrollerView];
         [self.FirstCollectionView reloadData];
     } else {
         if (self.deviceTypes.count < 1) {

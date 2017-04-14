@@ -64,6 +64,7 @@
 		0F6AB8701D782D9D0041E39C /* SunString.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6AB86E1D782D9D0041E39C /* SunString.m */; };
 		0F6ADFE01E7136B500BFF67F /* RCDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6ADFDF1E7136B500BFF67F /* RCDataManager.m */; };
 		0F6ADFE31E7136C500BFF67F /* ConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6ADFE21E7136C500BFF67F /* ConversationViewController.m */; };
+		0F8A78511E9F7C8C0050F0D9 /* UIImageView+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8A78501E9F7C8C0050F0D9 /* UIImageView+Badge.m */; };
 		0F8D76D01D9A1B9700DDD063 /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8D76CF1D9A1B9700DDD063 /* Schedule.m */; };
 		0F91AA171CDC798700094C25 /* PrintObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F91AA161CDC798700094C25 /* PrintObject.m */; };
 		0F96A1641D17F37C00E1594F /* RulerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F96A15D1D17F37C00E1594F /* RulerItem.m */; };
@@ -587,6 +588,8 @@
 		0F6ADFDF1E7136B500BFF67F /* RCDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDataManager.m; sourceTree = "<group>"; };
 		0F6ADFE11E7136C500BFF67F /* ConversationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationViewController.h; sourceTree = "<group>"; };
 		0F6ADFE21E7136C500BFF67F /* ConversationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationViewController.m; sourceTree = "<group>"; };
+		0F8A784F1E9F7C8C0050F0D9 /* UIImageView+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Badge.h"; sourceTree = "<group>"; };
+		0F8A78501E9F7C8C0050F0D9 /* UIImageView+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Badge.m"; sourceTree = "<group>"; };
 		0F8D76CE1D9A1B9700DDD063 /* Schedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Schedule.h; sourceTree = "<group>"; };
 		0F8D76CF1D9A1B9700DDD063 /* Schedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Schedule.m; sourceTree = "<group>"; };
 		0F91AA151CDC798700094C25 /* PrintObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintObject.h; sourceTree = "<group>"; };
@@ -1834,6 +1837,7 @@
 		0F6ADFDD1E71354000BFF67F /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				0F8A784E1E9F7C1D0050F0D9 /* UI */,
 				0FA392F81E80D29900C00AA3 /* RotaryKnob */,
 				0F49CB7F1E7A21E800D46ECC /* ORBSwitch */,
 				0FDB34411E79262D00DA53BB /* Geometry */,
@@ -1841,6 +1845,15 @@
 				0FA86BA61E72443100DC177E /* Linelayout */,
 			);
 			name = Widgets;
+			sourceTree = "<group>";
+		};
+		0F8A784E1E9F7C1D0050F0D9 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				0F8A784F1E9F7C8C0050F0D9 /* UIImageView+Badge.h */,
+				0F8A78501E9F7C8C0050F0D9 /* UIImageView+Badge.m */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 		0FA392F81E80D29900C00AA3 /* RotaryKnob */ = {
@@ -3189,6 +3202,7 @@
 				0FCFB3801CF28F6F00B37DD3 /* Light.m in Sources */,
 				0FAF74C21CEEA17C00432713 /* HRColorInfoView.m in Sources */,
 				0FCFB39B1CF2950D00B37DD3 /* BgMusic.m in Sources */,
+				0F8A78511E9F7C8C0050F0D9 /* UIImageView+Badge.m in Sources */,
 				0FAF74C91CEEB37200432713 /* HRSampleColorPickerViewController.m in Sources */,
 				0FCFB38C1CF293A500B37DD3 /* DVD.m in Sources */,
 				2E925D8D1E5E73CD008E327B /* ECEngerController.m in Sources */,
