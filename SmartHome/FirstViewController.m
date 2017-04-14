@@ -19,14 +19,20 @@
 #import <AVFoundation/AVFoundation.h>
 #import "ShortcutKeyViewController.h"
 #import "TabbarPanel.h"
+<<<<<<< HEAD
 #import "UIImageView+Badge.h"
 #import <RongIMKit/RongIMKit.h>
 #import "ConversationViewController.h"
 #import <RBStoryboardLink.h>
+=======
+#import <RongIMKit/RongIMKit.h>
+#import "ConversationViewController.h"
+>>>>>>> cade69be99ae077e7ad69938d12a4d849cdd9a29
 #import "IOManager.h"
+#import "NowMusicController.h"
 
 
-@interface FirstViewController ()<UITableViewDataSource,UITableViewDataSource,RCIMReceiveMessageDelegate>
+@interface FirstViewController ()<RCIMReceiveMessageDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView * SubImageView;//首页的日历大圆
 @property (weak, nonatomic) IBOutlet UIView * BtnView;//全屋场景的按钮试图
 @property (weak, nonatomic) IBOutlet UIImageView * IconeImageView;//提示消息的头像
@@ -54,18 +60,19 @@
 @property (weak, nonatomic) IBOutlet UIButton *UnreadButton;//点击未读消息的按钮
 @property (nonatomic,strong) NSString * familyNum;
 @property (weak, nonatomic) IBOutlet UILabel *chatlabel;//聊天的label
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *DayLabelUpConstraint;//距离上边距的值
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *DayLabelLeftConstraint;//距离左边距的值
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *YLabelrightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *NLabelrightConstraint;
 
 @end
 
 @implementation FirstViewController
 -(NSArray *)dataArr
 {
-
     if (_dataArr == nil) {
         _dataArr =[NSArray array];
     }
-    
-
     return _dataArr;
 }
 
@@ -97,8 +104,6 @@
     
     [self setupNaviBar];
     self.FourBtnView.userInteractionEnabled = YES;
-//    _SubImageView.layer.cornerRadius = _SubImageView.bounds.size.height/2; //圆角半径
-//    _SubImageView.layer.masksToBounds = YES; //圆角
     _IconeImageView.layer.masksToBounds = YES;
     _IconeImageView.layer.cornerRadius = _IconeImageView.bounds.size.height/2;
     _numberLabelView.layer.masksToBounds = YES;
@@ -171,6 +176,15 @@
     }
     NSInteger day=[conponent day];
     _calenderYearLabel.text = [NSString stringWithFormat:@"%ld",year];
+     if (([UIScreen mainScreen].bounds.size.height == 568.0)) {
+         _DayLabelUpConstraint.constant = -10;
+         _DayLabelLeftConstraint.constant = -5;
+         _YLabelrightConstraint.constant = 0;
+         _NLabelrightConstraint.constant = 0;
+         _calenderDayLabel.font = [UIFont systemFontOfSize:70];
+     }if (([UIScreen mainScreen].bounds.size.height == 667.0)) {
+         _calenderDayLabel.font = [UIFont systemFontOfSize:113];
+     }
     _calenderDayLabel.text = [NSString stringWithFormat:@"%ld",day];
     [self chatConnect];
 }
@@ -186,9 +200,20 @@
 
 - (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left
 {
+<<<<<<< HEAD
     NSString *nickname = [SQLManager queryChat:message.senderUserId][0];
     self.chatlabel.text =[NSString stringWithFormat:@"%@ : %@" , nickname, message.content.conversationDigest];
     [self.IconeImageView badge];
+=======
+    self.chatlabel.text = message.content.conversationDigest;
+    if(left>0)
+    {
+        self.UnreadButton.imageView.image=[UIImage imageNamed:@"circular1"];//未读消息
+    }else{
+        self.UnreadButton.imageView.image=[UIImage imageNamed:@""];//已读
+        self.UnreadButton.hidden = YES;
+    }
+>>>>>>> cade69be99ae077e7ad69938d12a4d849cdd9a29
 }
 
 -(void)setBtn
@@ -276,38 +301,10 @@
 }
 
 - (void)rightBtnClicked:(UIButton *)btn {
-    if (self.playerSubView.hidden) {
-        self.playerSubView.hidden = NO;
-        self.SubImageView.hidden = YES;
-        self.BtnView.hidden = YES;
-        self.IconeImageView.hidden = YES;
-        self.numberLabelView.hidden = YES;
-        self.memberFamilyLabel.hidden = YES;
-        _calenderDayLabel.hidden = YES;
-        _calenderYearLabel.hidden = YES;
-        _calenderMonthLabel.hidden = YES;
-        _UserNameLabel.hidden = YES;
-        _WelcomeLabel.hidden = YES;
-        _HeadImageView.hidden = YES;
-        _TakeTurnsWordsLabel.hidden = YES;
-        _markedWordsLabel.hidden = YES;
-        
-    }else{
-        self.playerSubView.hidden = YES;
-        self.SubImageView.hidden = NO;
-        self.BtnView.hidden = NO;
-        self.IconeImageView.hidden = NO;
-        self.numberLabelView.hidden = NO;
-        self.memberFamilyLabel.hidden = NO;
-        _calenderDayLabel.hidden = NO;
-        _calenderYearLabel.hidden = NO;
-        _calenderMonthLabel.hidden = NO;
-        _UserNameLabel.hidden = NO;
-        _WelcomeLabel.hidden = NO;
-        _HeadImageView.hidden = NO;
-        _TakeTurnsWordsLabel.hidden = NO;
-        _markedWordsLabel.hidden = NO;
-    }
+    
+    UIStoryboard * HomeStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
+    NowMusicController * nowMusicController = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"NowMusicController"];
+    [self.navigationController pushViewController:nowMusicController animated:YES];
 }
 
 - (void)menuBtnAction:(UIButton *)sender {
@@ -325,22 +322,11 @@
 
 //正在播放的点击事件
 - (IBAction)playerBarBtn:(id)sender {
-    if (self.playerSubView.hidden) {
-          self.playerSubView.hidden = NO;
-        self.SupView.hidden = YES;
-        _UserNameLabel.hidden = YES;
-        _WelcomeLabel.hidden = YES;
-        _HeadImageView.hidden = YES;
-        _socialView.hidden = YES;
 
-        
-    }else{
-        self.playerSubView.hidden = YES;
-        _SupView.hidden = NO;
-        _UserNameLabel.hidden = NO;
-        _WelcomeLabel.hidden = NO;
-        _HeadImageView.hidden = NO;
-    }
+    
+    UIStoryboard * HomeStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
+    NowMusicController * nowMusicController = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"NowMusicController"];
+    [self.navigationController pushViewController:nowMusicController animated:YES];
     
 }
 //点击未读消息的事件
@@ -374,88 +360,7 @@
     }];
 }
 
-//减音量
-- (IBAction)smallVolume:(id)sender {
-}
-//加音量
-- (IBAction)additionVolume:(id)sender {
-}
-//上一步
-- (IBAction)lastStep:(id)sender {
-    NSLog(@"hhhhhh");
-    NSData *data=[[DeviceInfo defaultManager] previous:self.deviceid];
-    SocketManager *sock=[SocketManager defaultManager];
-    [sock.socket writeData:data withTimeout:1 tag:1];
-    if (BLUETOOTH_MUSIC) {
-        AudioManager *audio= [AudioManager defaultManager];
-        if ([[audio musicPlayer] indexOfNowPlayingItem]>0) {
-            [[audio musicPlayer] skipToPreviousItem];
-        }
-    }
-}
-//下一步
-- (IBAction)nextStep:(id)sender {
-      NSLog(@"hhhhhh");
-    NSData *data=[[DeviceInfo defaultManager] next:self.deviceid];
-    SocketManager *sock=[SocketManager defaultManager];
-    [sock.socket writeData:data withTimeout:1 tag:1];
-    if (BLUETOOTH_MUSIC) {
-        AudioManager *audio= [AudioManager defaultManager];
-        
-        if ([[audio musicPlayer] indexOfNowPlayingItem]<audio.songs.count-1) {
-            [[audio musicPlayer] skipToNextItem];
-        }
-    }
-}
-//开关
-- (IBAction)switchPower:(id)sender {
-//    NSData *data=[[DeviceInfo defaultManager] pause:self.deviceid];
-//    SocketManager *sock=[SocketManager defaultManager];
-//    [sock.socket writeData:data withTimeout:1 tag:1];
-//    if (BLUETOOTH_MUSIC) {
-//        AudioManager *audio= [AudioManager defaultManager];
-//        [[audio musicPlayer] pause];
-//    }
-    UIButton *btn = (UIButton *)sender;
-    
-    if (_playState == 0) {
-        _playState = 1;
-        [btn setImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
-        //发送播放指令
-        NSData *data=[[DeviceInfo defaultManager] play:self.deviceid];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:1];
-        
-        if (BLUETOOTH_MUSIC) {
-            AudioManager *audio= [AudioManager defaultManager];
-            [[audio musicPlayer] play];
-        }
-    }else if (_playState == 1) {
-        _playState = 0;
-        [btn setImage:[UIImage imageNamed:@"broadcast"] forState:UIControlStateNormal];
-        //发送停止指令
-        NSData *data=[[DeviceInfo defaultManager] pause:self.deviceid];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:1];
-        if (BLUETOOTH_MUSIC) {
-            AudioManager *audio= [AudioManager defaultManager];
-            [[audio musicPlayer] pause];
-        }
-    }
-}
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return _dataArr.count;
-}
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    if (_dataArr.count == 0) {
-        self.tableView.hidden = YES;
-        
-    }
-    return cell;
-}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

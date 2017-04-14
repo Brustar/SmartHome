@@ -7,6 +7,7 @@
 //
 
 #import "FamilyHomeViewController.h"
+#import "NowMusicController.h"
 
 @interface FamilyHomeViewController ()
 
@@ -22,6 +23,9 @@
 }
 
 - (void)rightBtnClicked:(UIButton *)btn {
+    UIStoryboard * HomeStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
+    NowMusicController * nowMusicController = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"NowMusicController"];
+    [self.navigationController pushViewController:nowMusicController animated:YES];
 }
 
 - (void)viewDidLoad {

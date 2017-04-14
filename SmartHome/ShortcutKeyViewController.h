@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomViewController.h"
 
-@interface ShortcutKeyViewController : UIViewController
+@interface ShortcutKeyViewController : CustomViewController
 
 
 @end

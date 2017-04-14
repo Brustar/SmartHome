@@ -31,6 +31,7 @@
 #import "CollectionViewCell.h"
 #import "TouchSubViewController.h"
 #import "HttpManager.h"
+#import "IphoneDevicesController.h"
 #import "IphoneLightController.h"
 
 
@@ -214,12 +215,8 @@
             [_FMArray addObject:lightArr[i]];
         }else if ([_typeName isEqualToString:@"网络电视"]){
             [_TVArray addObject:lightArr[i]];
-        }else if ([_typeName isEqualToString:@"智能门锁"]){
-            [_LockArray addObject:lightArr[i]];
         }else if ([_typeName isEqualToString:@"DVD"]){
             [_DVDArray addObject:lightArr[i]];
-        }else if ([_typeName isEqualToString:@"智能单品"]){
-            [_PluginArray addObject:lightArr[i]];
         }else if ([_typeName isEqualToString:@"投影"]){
             [_ProjectArray addObject:lightArr[i]];
         }else if ([_typeName isEqualToString:@"机顶盒"]){
@@ -228,12 +225,7 @@
             [_BJMusicArray addObject:lightArr[i]];
         }else if ([_typeName isEqualToString:@"幕布"]){
             [_MBArray addObject:lightArr[i]];
-        }else if ([_typeName isEqualToString:@"功放"]){
-            [_PowerArray addObject:lightArr[i]];
-        }else if ([_typeName isEqualToString:@"智能推窗器"]){
-            [_IntelligentArray addObject:lightArr[i]];
-        }
-        else{
+        }else{
             [_OtherArray addObject:lightArr[i]];
         }
     }
@@ -583,7 +575,7 @@
 {
     id theSegue = segue.destinationViewController;
     
-    if([segue.identifier isEqualToString:@"addDeviceSegue"])
+    if([segue.identifier isEqualToString:@"NewAddDeviceSegue"])
     {
         
         [theSegue setValue:[NSNumber numberWithInt:self.roomID] forKey:@"roomId"];
@@ -600,7 +592,7 @@
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 16;
+    return 12;
 
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -614,26 +606,18 @@
     }if (section == 3){
         return _TVArray.count;//TV
     }if (section == 4){
-        return _LockArray.count;//智能门锁
-    }if (section == 5){
         return _DVDArray.count;//DVD
-    }if (section == 6){
+    }if (section == 5){
         return _ProjectArray.count;//投影
-    }if (section == 7){
+    }if (section == 6){
         return _FMArray.count;//FM
-    }if (section == 8){
+    }if (section == 7){
         return _NetVArray.count;//机顶盒
-    }if (section == 9){
+    }if (section == 8){
         return _MBArray.count;//幕布
-    }if (section == 10){
-        return _PowerArray.count;//功放
-    }if (section == 11){
-        return _IntelligentArray.count;//智能推窗器
-    }if (section == 12){
+    }if (section == 9){
         return _BJMusicArray.count;//背景音乐
-    }if (section == 13){
-        return _PluginArray.count;//智能单品
-    }if (section == 14){
+    }if (section == 10){
          return _OtherArray.count;//其他
     }
     return 1;
@@ -676,60 +660,39 @@
           Device *device = [SQLManager getDeviceWithDeviceID:[_TVArray[indexPath.row] intValue]];
         aireCell.TVNameLabel.text = device.name;
         return aireCell;
-    }if (indexPath.section == 4) {//智能门锁
-        OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
-        otherCell.backgroundColor = [UIColor clearColor];
-        Device *device = [SQLManager getDeviceWithDeviceID:[_LockArray[indexPath.row] intValue]];
-        otherCell.NameLabel.text = device.name;
-        return otherCell;
-    }if (indexPath.section == 5) {//DVD
+    }if (indexPath.section == 4) {//DVD
         DVDTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"DVDTableViewCell" forIndexPath:indexPath];
         otherCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_DVDArray[indexPath.row] intValue]];
         otherCell.DVDNameLabel.text = device.name;
         return otherCell;
-    }if (indexPath.section == 6) {//投影幕
+    }if (indexPath.section == 5) {//投影幕
         ScreenCurtainCell * ScreenCell = [tableView dequeueReusableCellWithIdentifier:@"ScreenCurtainCell" forIndexPath:indexPath];
         ScreenCell.backgroundColor =[UIColor clearColor];
          Device *device = [SQLManager getDeviceWithDeviceID:[_ProjectArray[indexPath.row] intValue]];
         ScreenCell.ScreenCurtainLabel.text = device.name;
         return ScreenCell;
-    }if (indexPath.section == 7) {//FM
+    }if (indexPath.section == 6) {//FM
         OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
         otherCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_FMArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
-    }if (indexPath.section == 8) {//机顶盒
+    }if (indexPath.section == 7) {//机顶盒
         OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
         otherCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_NetVArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
-    }if (indexPath.section == 9) {//投影机
+    }if (indexPath.section == 8) {//投影机
         OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
         otherCell.backgroundColor = [UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_MBArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
-    }if (indexPath.section == 10) {//功放
-        OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
-        otherCell.backgroundColor = [UIColor clearColor];
-        Device *device = [SQLManager getDeviceWithDeviceID:[_PowerArray[indexPath.row] intValue]];
-        otherCell.NameLabel.text = device.name;
-    }if (indexPath.section == 11) {//智能推窗器
-        OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
-        otherCell.backgroundColor = [UIColor clearColor];
-        Device *device = [SQLManager getDeviceWithDeviceID:[_IntelligentArray[indexPath.row] intValue]];
-        otherCell.NameLabel.text = device.name;
-    }if (indexPath.section == 12) {//背景音乐
+    }if (indexPath.section == 9) {//背景音乐
         BjMusicTableViewCell * BjMusicCell = [tableView dequeueReusableCellWithIdentifier:@"BjMusicTableViewCell" forIndexPath:indexPath];
         BjMusicCell.backgroundColor = [UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_BJMusicArray[indexPath.row] intValue]];
         BjMusicCell.BjMusicNameLb.text = device.name;
-    }if (indexPath.section == 13) {//智能单品
-        OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
-        otherCell.backgroundColor = [UIColor clearColor];
-        Device *device = [SQLManager getDeviceWithDeviceID:[_PluginArray[indexPath.row] intValue]];
-        otherCell.NameLabel.text = device.name;
-    }if (indexPath.section == 14) {//其他
+    }if (indexPath.section == 10) {//其他
         OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
         otherCell.backgroundColor = [UIColor clearColor];
         if (_OtherArray.count) {
@@ -749,12 +712,22 @@
     
     return addDeviceCell;
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 11) {
+//        UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+//        IphoneDevicesController * devicesVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneDevicesController"];
+//        [self.navigationController pushViewController:devicesVC animated:YES];
+        [self performSegueWithIdentifier:@"NewAddDeviceSegue" sender:self];
+    }
+
+}
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 3 || indexPath.section == 5) {
+    if (indexPath.section == 3 || indexPath.section == 4) {
         return 150;
     }
-    if (indexPath.section == 15 || indexPath.section ==4 || indexPath.section == 7 || indexPath.section == 8 || indexPath.section == 10 || indexPath.section == 11 || indexPath.section == 13 || indexPath.section == 14) {
+    if (indexPath.section == 7 || indexPath.section == 8 || indexPath.section == 10 || indexPath.section == 11) {
         return 50;
     }
     return 100;

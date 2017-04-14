@@ -68,6 +68,8 @@
 
 //根据设备类别和房间ID获取设备的所有ID
 +(NSArray *)getDeviceByTypeName:(NSString  *)typeName andRoomID:(NSInteger)roomID;
+//根据设备类别获取设备的所有ID
++(NSArray *)getDeviceByTypeName:(NSString  *)typeName;
 + (NSArray *)getDeviceIDWithRoomID:(int)roomID sceneID:(int)sceneID;
 
 //根据房间ID和场景ID获得设备

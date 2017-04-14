@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomViewController.h"
 
-@interface IphoneDVDController : UIViewController
+@interface IphoneDVDController : CustomViewController
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic,weak) NSString *deviceid;
 @property (nonatomic,assign) int roomID;

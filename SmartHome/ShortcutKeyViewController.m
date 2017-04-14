@@ -16,6 +16,7 @@
 @property (nonatomic,strong) NSArray * AllSceneArray;
 @property (nonatomic,strong) NSMutableArray * sceneArr;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic,strong) UIButton * naviRightBtn;
 
 @end
 
@@ -38,8 +39,32 @@
   
      _AllSceneArray = [SQLManager getAllScene];
     _seleteSceneArray = [[NSMutableArray alloc] init];
+    [self setupNaviBar];
 
     
+}
+- (void)setupNaviBar {
+    [self setNaviBarTitle:@"首页场景快捷键"]; //设置标题
+    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
+    _naviRightBtn.tintColor = [UIColor whiteColor];
+    //    [self setNaviBarLeftBtn:_naviLeftBtn];
+    [self setNaviBarRightBtn:_naviRightBtn];
+}
+-(void)rightBtnClicked:(UIButton *)bbi
+{
+    NSString *filepath;
+    NSString *home = NSHomeDirectory();
+    NSString *docPath = [home stringByAppendingPathComponent:@"Documents"];
+    NSMutableArray * data = [[NSMutableArray alloc] init];
+    if (filepath) {
+        [data removeAllObjects];
+    }
+    data = self.seleteSceneArray;
+    filepath= [docPath stringByAppendingPathComponent:@"data.plist"];
+    
+    [data writeToFile:filepath atomically:YES];
+    [self.navigationController popViewControllerAnimated:YES];
+
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

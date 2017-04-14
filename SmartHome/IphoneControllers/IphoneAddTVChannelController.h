@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomViewController.h"
 
-@interface IphoneAddTVChannelController : UIViewController
+@interface IphoneAddTVChannelController : CustomViewController
 @property (nonatomic,assign) NSString *deviceid;
 
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;

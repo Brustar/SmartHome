@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomViewController.h"
 
-@interface IphoneProfileController : UIViewController
+@interface IphoneProfileController : CustomViewController
 @property (nonatomic,strong) UIImageView * imageView;
 
 @end
