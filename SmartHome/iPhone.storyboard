@@ -2019,15 +2019,15 @@
                                 <rect key="frame" x="10" y="168" width="355" height="499"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" rowHeight="100" id="Kj4-n0-HTh" customClass="LightCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="100" id="Kj4-n0-HTh" customClass="LightCell">
                                         <rect key="frame" x="0.0" y="28" width="355" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kj4-n0-HTh" id="sfy-Dl-vN4">
-                                            <rect key="frame" x="0.0" y="0.0" width="322" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="355" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lv_fm_adjust_normal" translatesAutoresizingMaskIntoConstraints="NO" id="Jvd-Kh-Tjy">
-                                                    <rect key="frame" x="0.0" y="50" width="322" height="50"/>
+                                                    <rect key="frame" x="0.0" y="50" width="355" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="iAO-Kp-5gS"/>
                                                     </constraints>
@@ -2041,7 +2041,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lv_icon_adjust_high" translatesAutoresizingMaskIntoConstraints="NO" id="oDK-RV-Vgb">
-                                                    <rect key="frame" x="283" y="63" width="20" height="20"/>
+                                                    <rect key="frame" x="316" y="63" width="20" height="20"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="A98-Lb-2mZ"/>
@@ -2059,13 +2059,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Rav-Hx-Qef">
-                                                    <rect key="frame" x="47" y="58" width="228" height="31"/>
+                                                    <rect key="frame" x="47" y="58" width="261" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="Rqp-Mn-McB"/>
                                                     </constraints>
                                                 </slider>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lCA-zQ-tZH">
-                                                    <rect key="frame" x="274" y="14" width="30" height="30"/>
+                                                    <rect key="frame" x="307" y="14" width="30" height="30"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="2Qi-ta-EmL"/>
@@ -2095,7 +2095,6 @@
                                         <connections>
                                             <outlet property="LightNameLabel" destination="qlU-4k-EOo" id="HXT-xK-7c8"/>
                                             <outlet property="slider" destination="Rav-Hx-Qef" id="yUF-0C-QjR"/>
-                                            <segue destination="yGe-XQ-WNx" kind="push" identifier="NewAddDeviceSegue" id="I2X-fz-i7P"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -2157,6 +2156,7 @@
                         <outlet property="saveBarBtn" destination="edP-E5-cIj" id="VaF-l2-GT5"/>
                         <outlet property="tableView" destination="24k-dg-E7E" id="uCd-do-aEA"/>
                         <segue destination="nA9-ci-Ug8" kind="push" identifier="storeNewScene" id="D1X-xj-n4g"/>
+                        <segue destination="yGe-XQ-WNx" kind="push" identifier="NewAddDeviceSegue" id="ilu-2P-B2o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xHe-WT-B8x" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -6509,9 +6509,9 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="WeN-Qz-0Az"/>
-        <segue reference="OCS-34-SI9"/>
+        <segue reference="ilu-2P-B2o"/>
         <segue reference="qN8-z6-Gb7"/>
-        <segue reference="I2X-fz-i7P"/>
         <segue reference="Uo6-og-hnM"/>
+        <segue reference="OCS-34-SI9"/>
     </inferredMetricsTieBreakers>
 </document>

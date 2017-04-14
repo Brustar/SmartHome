@@ -36,6 +36,7 @@
 #import "TVIconController.h"
 #import "IphoneNewAddSceneVC.h"
 #import "DeviceInfo.h"
+#import "NowMusicController.h"
 
 #define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)  
 
@@ -95,7 +96,9 @@ static NSString * const CYPhotoId = @"photo";
 }
 
 - (void)rightBtnClicked:(UIButton *)btn {
-    
+    UIStoryboard * HomeStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
+    NowMusicController * nowMusicController = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"NowMusicController"];
+    [self.navigationController pushViewController:nowMusicController animated:YES];
 }
 
 - (void)viewDidLoad {

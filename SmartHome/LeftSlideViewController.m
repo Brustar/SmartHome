@@ -43,9 +43,9 @@
         
         //滑动手势
         self.pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
-        [self.mainVC.view addGestureRecognizer:self.pan];
+//        [self.mainVC.view addGestureRecognizer:self.pan];
         
-        [self.pan setCancelsTouchesInView:YES];
+//        [self.pan setCancelsTouchesInView:YES];
         self.pan.delegate = self;
         
         self.leftVC.view.hidden = YES;
