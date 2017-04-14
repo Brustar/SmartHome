@@ -247,6 +247,7 @@
 		CD93E3AD1E807AFD003CCAA9 /* login_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD93E3AC1E807AFD003CCAA9 /* login_icon@2x.png */; };
 		CD93E3AF1E807CC2003CCAA9 /* login_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD93E3AE1E807CC2003CCAA9 /* login_bg@2x.png */; };
 		CD93E3B11E8081B0003CCAA9 /* login_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD93E3B01E8081B0003CCAA9 /* login_line@2x.png */; };
+		CDBEFF4B1E9FB54600258B1E /* demo.mov in Resources */ = {isa = PBXBuildFile; fileRef = CDBEFF4A1E9FB54600258B1E /* demo.mov */; };
 		CDEC86801E95EBAB009EC245 /* TabbarPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEC867F1E95EBAB009EC245 /* TabbarPanel.m */; };
 		CDEC86841E960E92009EC245 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = CDEC86831E960E92009EC245 /* background.png */; };
 		CDEC86891E976EC9009EC245 /* RegistFirstStepForPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEC86881E976EC9009EC245 /* RegistFirstStepForPhoneViewController.m */; };
@@ -905,6 +906,7 @@
 		CD93E3AC1E807AFD003CCAA9 /* login_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon@2x.png"; sourceTree = "<group>"; };
 		CD93E3AE1E807CC2003CCAA9 /* login_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_bg@2x.png"; sourceTree = "<group>"; };
 		CD93E3B01E8081B0003CCAA9 /* login_line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_line@2x.png"; sourceTree = "<group>"; };
+		CDBEFF4A1E9FB54600258B1E /* demo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = demo.mov; sourceTree = "<group>"; };
 		CDEC867E1E95EBAB009EC245 /* TabbarPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabbarPanel.h; sourceTree = "<group>"; };
 		CDEC867F1E95EBAB009EC245 /* TabbarPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabbarPanel.m; sourceTree = "<group>"; };
 		CDEC86831E960E92009EC245 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
@@ -1827,6 +1829,7 @@
 		0F6ADFDC1E7134ED00BFF67F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				CDBEFF4A1E9FB54600258B1E /* demo.mov */,
 				CDF78C591E9CC3C500F8B20C /* NaviBarBg.png */,
 				CDEC868C1E99E32B009EC245 /* Family */,
 				CD93E3AB1E807AD3003CCAA9 /* Login */,
@@ -2701,6 +2704,7 @@
 				CD51343F1E92807600C2EDAF /* tipIcon@2x.png in Resources */,
 				0F49CB6E1E7A1E3700D46ECC /* MyInfo.storyboard in Resources */,
 				2E1D4F0D1E727AE2007625BD /* Slider2.png in Resources */,
+				CDBEFF4B1E9FB54600258B1E /* demo.mov in Resources */,
 				CD7DDA0F1E82583700638DB3 /* pullBtn@2x.png in Resources */,
 				2EBABC7E1E8361C50093EF3A /* OtherTableViewCell.xib in Resources */,
 				CDF78C5A1E9CC3C500F8B20C /* NaviBarBg.png in Resources */,
