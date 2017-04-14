@@ -497,24 +497,6 @@
             </objects>
             <point key="canvasLocation" x="-1039.2" y="-189.3553223388306"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="snI-nn-1cz">
-            <objects>
-                <viewController id="1wS-6P-Sjh" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ul9-6u-Zvo"/>
-                        <viewControllerLayoutGuide type="bottom" id="l1h-yX-49J"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="AnT-1Y-M6W">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vQ1-00-s5O" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-276" y="-189"/>
-        </scene>
     </scenes>
     <resources>
         <image name="Contacts" width="29" height="23"/>

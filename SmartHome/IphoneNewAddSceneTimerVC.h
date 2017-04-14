@@ -11,5 +11,8 @@
 
 @interface IphoneNewAddSceneTimerVC : CustomViewController
 @property (weak, nonatomic) IBOutlet UILabel *RepetitionLable;//显示重复日期的label
+@property (weak, nonatomic) IBOutlet UIView *DrawView;//画自定义滑杆的视图
+@property (weak, nonatomic) IBOutlet UILabel *starTimeLabel;//开始时间
+@property (weak, nonatomic) IBOutlet UILabel *endTimeLabel;//结束时间
 
 @end

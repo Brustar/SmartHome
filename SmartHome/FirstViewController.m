@@ -64,12 +64,9 @@
 @implementation FirstViewController
 -(NSArray *)dataArr
 {
-
     if (_dataArr == nil) {
         _dataArr =[NSArray array];
     }
-    
-
     return _dataArr;
 }
 
