@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomViewController.h"
 
 
-@interface IphoneFixTimerController : UIViewController
+@interface IphoneFixTimerController : CustomViewController
 
 @end

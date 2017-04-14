@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "TouchImage.h"
-@interface IphoneRealSceneController : UIViewController
+#import "CustomViewController.h"
+
+@interface IphoneRealSceneController : CustomViewController
 @property (weak, nonatomic) IBOutlet TouchImage *realimg;
 
 @end

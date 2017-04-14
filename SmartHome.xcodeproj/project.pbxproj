@@ -215,6 +215,8 @@
 		2EC7D1D51E84CEA900284C0F /* lightBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EC7D1D41E84CEA900284C0F /* lightBtn.png */; };
 		2EC8A5901E372C51002A5042 /* IphoneDeviceLightVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC8A58F1E372C51002A5042 /* IphoneDeviceLightVC.m */; };
 		2EC8A5931E372D75002A5042 /* ColourCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC8A5921E372D75002A5042 /* ColourCell.m */; };
+		2ECDCC901E9E3623004C68BE /* BjMusicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECDCC8E1E9E3623004C68BE /* BjMusicTableViewCell.m */; };
+		2ECDCC911E9E3623004C68BE /* BjMusicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2ECDCC8F1E9E3623004C68BE /* BjMusicTableViewCell.xib */; };
 		2ED42B931E35B41E00592A03 /* IphoneAirCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED42B921E35B41E00592A03 /* IphoneAirCell.m */; };
 		2EDC0E901DEC072700F95BE0 /* IPhoneRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDC0E8F1DEC072700F95BE0 /* IPhoneRoom.m */; };
 		2EDE04611E45777B00BC8E0B /* WebViewMangerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE04601E45777B00BC8E0B /* WebViewMangerVC.m */; };
@@ -852,6 +854,9 @@
 		2EC8A58F1E372C51002A5042 /* IphoneDeviceLightVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneDeviceLightVC.m; sourceTree = "<group>"; };
 		2EC8A5911E372D75002A5042 /* ColourCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColourCell.h; sourceTree = "<group>"; };
 		2EC8A5921E372D75002A5042 /* ColourCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColourCell.m; sourceTree = "<group>"; };
+		2ECDCC8D1E9E3623004C68BE /* BjMusicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BjMusicTableViewCell.h; sourceTree = "<group>"; };
+		2ECDCC8E1E9E3623004C68BE /* BjMusicTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BjMusicTableViewCell.m; sourceTree = "<group>"; };
+		2ECDCC8F1E9E3623004C68BE /* BjMusicTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BjMusicTableViewCell.xib; sourceTree = "<group>"; };
 		2ED42B911E35B41E00592A03 /* IphoneAirCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneAirCell.h; sourceTree = "<group>"; };
 		2ED42B921E35B41E00592A03 /* IphoneAirCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneAirCell.m; sourceTree = "<group>"; };
 		2EDC0E8E1DEC072700F95BE0 /* IPhoneRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPhoneRoom.h; sourceTree = "<group>"; };
@@ -2163,6 +2168,9 @@
 				2EB516F61E9CEB3F0064B18E /* AddDeviceCell.h */,
 				2EB516F71E9CEB3F0064B18E /* AddDeviceCell.m */,
 				2EB516F81E9CEB3F0064B18E /* AddDeviceCell.xib */,
+				2ECDCC8D1E9E3623004C68BE /* BjMusicTableViewCell.h */,
+				2ECDCC8E1E9E3623004C68BE /* BjMusicTableViewCell.m */,
+				2ECDCC8F1E9E3623004C68BE /* BjMusicTableViewCell.xib */,
 			);
 			name = TableViewCell;
 			sourceTree = "<group>";
@@ -2630,6 +2638,7 @@
 				CDF1574A1E7AB2AF00499AC5 /* icon_tabbar_mine_selected@2x.png in Resources */,
 				0FBEFE271D24A5020084244F /* netconfig.plist in Resources */,
 				CD7DDA091E81168F00638DB3 /* login_name@2x.png in Resources */,
+				2ECDCC911E9E3623004C68BE /* BjMusicTableViewCell.xib in Resources */,
 				0F49CB721E7A1EAE00D46ECC /* Scene.storyboard in Resources */,
 				0F49CB7A1E7A204300D46ECC /* Devices-iPad.storyboard in Resources */,
 				CDF1574E1E7AB2AF00499AC5 /* icon_tabbar_merchant_selected@2x.png in Resources */,
@@ -3117,6 +3126,7 @@
 				F62337901D70675B00ADAD00 /* TVIconController.m in Sources */,
 				0FAF74C31CEEA17C00432713 /* HRColorMapView.m in Sources */,
 				0FADA44A1CEBF8AE00777901 /* SceneManager.m in Sources */,
+				2ECDCC901E9E3623004C68BE /* BjMusicTableViewCell.m in Sources */,
 				0F01D5441CDC6CA600DAC267 /* Scene.m in Sources */,
 				CDF78C551E9CA99D00F8B20C /* CustomNaviBarView.m in Sources */,
 				0FC41BAF1D6DA3DD000D4451 /* VoiceOrderController.m in Sources */,

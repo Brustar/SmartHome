@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="添加设备" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S4X-z9-889">
-                        <rect key="frame" x="23" y="11" width="78" height="21"/>
+                        <rect key="frame" x="18" y="11" width="78" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="9or-5e-Z5B"/>
                             <constraint firstAttribute="width" constant="78" id="g25-3b-Ze7"/>
@@ -30,7 +30,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pnH-lR-Pl0">
-                        <rect key="frame" x="281" y="11" width="17" height="22"/>
+                        <rect key="frame" x="275" y="11" width="17" height="22"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="17" id="9FB-B8-rlg"/>
                             <constraint firstAttribute="height" constant="22" id="f5v-OI-5ci"/>
@@ -40,8 +40,8 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="S4X-z9-889" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Jkd-Cr-8dX"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="pnH-lR-Pl0" secondAttribute="trailing" constant="14" id="Qos-Zb-zBF"/>
-                    <constraint firstItem="S4X-z9-889" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="15" id="gLI-4W-fWG"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="pnH-lR-Pl0" secondAttribute="trailing" constant="20" id="Qos-Zb-zBF"/>
+                    <constraint firstItem="S4X-z9-889" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="gLI-4W-fWG"/>
                     <constraint firstItem="pnH-lR-Pl0" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="kF7-Qk-WSy"/>
                 </constraints>
             </tableViewCellContentView>

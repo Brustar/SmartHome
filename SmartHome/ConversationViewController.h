@@ -14,4 +14,6 @@
 
 @property (nonatomic, readonly) CustomNaviBarView *m_viewNaviBar;
 
+- (void)setNaviBarTitle:(NSString *)strTitle;
+
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomViewController.h"
 enum AIR_TARGETu
 {
 
@@ -19,7 +20,7 @@ enum AIR_TARGETu
     
 };
 
-@interface IphoneAirController : UIViewController
+@interface IphoneAirController : CustomViewController
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic,weak) NSString *deviceid;
 @property (nonatomic,weak) NSString *actKey;

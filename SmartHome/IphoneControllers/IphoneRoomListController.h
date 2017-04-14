@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomViewController.h"
 
 @class IphoneRoomListController;
 @protocol IphoneRoomListDelegate<NSObject>
@@ -14,7 +15,7 @@
 -(void)iphoneRoomListController:(IphoneRoomListController *)vc withRoomName:(NSString *)roomName;
 
 @end
-@interface IphoneRoomListController : UIViewController
+@interface IphoneRoomListController : CustomViewController
 
 @property (nonatomic,weak) id<IphoneRoomListDelegate> delegate;
 @end

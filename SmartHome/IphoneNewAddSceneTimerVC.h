@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomViewController.h"
 
-@interface IphoneNewAddSceneTimerVC : UIViewController
+@interface IphoneNewAddSceneTimerVC : CustomViewController
 @property (weak, nonatomic) IBOutlet UILabel *RepetitionLable;//显示重复日期的label
 
 @end

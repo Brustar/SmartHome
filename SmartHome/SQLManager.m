@@ -1271,14 +1271,8 @@
     
     FMDatabase *db = [self connetdb];
     if([db open])
-    {
-        DeviceInfo *dev = [DeviceInfo defaultManager];
-        long masterID = 255l;
-        if ([dev.db isEqualToString:SMART_DB]) {
-            masterID = [[DeviceInfo defaultManager] masterID];
-        }
-        
-        NSString *sql = [NSString stringWithFormat:@"SELECT nickname,portrait FROM chat where username = '%@'",userid];
+    {     
+        NSString *sql = [NSString stringWithFormat:@"SELECT nickname,portrait FROM chats where user_id = '%@'",userid];
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {

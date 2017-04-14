@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomViewController.h"
 
-@interface IphoneSaveNewSceneController : UIViewController
+@interface IphoneSaveNewSceneController : CustomViewController
 @property(nonatomic,assign) int sceneID;
 @end

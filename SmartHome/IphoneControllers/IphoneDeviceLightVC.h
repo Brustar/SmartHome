@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomViewController.h"
 
-@interface IphoneDeviceLightVC : UIViewController
+@interface IphoneDeviceLightVC : CustomViewController
 @property (nonatomic,assign) int roomID;
 @end

@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="377" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="377" height="100"/>
+                <rect key="frame" x="0.0" y="0.0" width="377" height="99.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lv_fm_adjust_normal" translatesAutoresizingMaskIntoConstraints="NO" id="iSc-I9-hAk">
@@ -46,7 +46,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="前窗" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wSV-oJ-oCF">
-                        <rect key="frame" x="24" y="8" width="100" height="41"/>
+                        <rect key="frame" x="18" y="8" width="100" height="41"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="hCH-XQ-Pt7"/>
@@ -95,7 +95,7 @@
                     <constraint firstItem="iSc-I9-hAk" firstAttribute="top" secondItem="oan-hq-829" secondAttribute="bottom" constant="15" id="ply-r1-ndy"/>
                     <constraint firstItem="tNT-YH-Tpj" firstAttribute="leading" secondItem="f41-dM-kxv" secondAttribute="trailing" constant="10" id="ruO-YG-rHa"/>
                     <constraint firstAttribute="trailingMargin" secondItem="LqQ-g3-yDX" secondAttribute="trailing" constant="16" id="uNo-xp-IRM"/>
-                    <constraint firstItem="wSV-oJ-oCF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="xHj-Wm-K2D"/>
+                    <constraint firstItem="wSV-oJ-oCF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="xHj-Wm-K2D"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

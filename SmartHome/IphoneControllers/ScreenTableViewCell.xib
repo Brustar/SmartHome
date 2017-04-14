@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="投影机" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GGq-be-l2u">
-                        <rect key="frame" x="8" y="11.5" width="60" height="20"/>
+                        <rect key="frame" x="18" y="11.5" width="60" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="YJr-Mv-hwT"/>
                             <constraint firstAttribute="height" constant="20" id="pDo-wI-hDl"/>
@@ -30,7 +30,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HxD-09-P6o">
-                        <rect key="frame" x="78" y="7" width="30" height="30"/>
+                        <rect key="frame" x="88" y="7" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="290-S8-KaN"/>
                             <constraint firstAttribute="width" constant="30" id="qgR-yN-f8h"/>
@@ -47,7 +47,7 @@
                         <state key="normal" title="停"/>
                     </button>
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Dlk-uO-gbP">
-                        <rect key="frame" x="116" y="7" width="166" height="31"/>
+                        <rect key="frame" x="126" y="7" width="156" height="31"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="aoI-ea-xSV"/>
                         </constraints>
@@ -58,7 +58,7 @@
                     <constraint firstItem="HxD-09-P6o" firstAttribute="leading" secondItem="GGq-be-l2u" secondAttribute="trailing" constant="10" id="ThM-H2-EoQ"/>
                     <constraint firstItem="Dlk-uO-gbP" firstAttribute="leading" secondItem="HxD-09-P6o" secondAttribute="trailing" constant="10" id="VST-OM-HHP"/>
                     <constraint firstItem="GGq-be-l2u" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ZQ7-Sh-MMu"/>
-                    <constraint firstItem="GGq-be-l2u" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="cbo-sp-OhD"/>
+                    <constraint firstItem="GGq-be-l2u" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="cbo-sp-OhD"/>
                     <constraint firstItem="HxD-09-P6o" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="eQe-t3-cq1"/>
                     <constraint firstItem="3pf-4c-Wgo" firstAttribute="leading" secondItem="Dlk-uO-gbP" secondAttribute="trailing" constant="10" id="iXY-Kk-py4"/>
                     <constraint firstAttribute="trailing" secondItem="3pf-4c-Wgo" secondAttribute="trailing" id="nTJ-gT-Y7t"/>

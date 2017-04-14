@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "FixTimeListCell.h"
+#import "CustomViewController.h"
 
-@interface IphoneAddSceneController : UIViewController
+@interface IphoneAddSceneController : CustomViewController
 @property (nonatomic,assign) int roomId;
 @property(nonatomic,assign) int sceneID;
 @property(nonatomic,assign) int deviceID;

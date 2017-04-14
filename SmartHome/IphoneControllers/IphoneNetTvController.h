@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomViewController.h"
 
-@interface IphoneNetTvController : UIViewController
+@interface IphoneNetTvController : CustomViewController
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic,weak) NSString *deviceid;
 @property (weak, nonatomic) IBOutlet UISlider *volume;

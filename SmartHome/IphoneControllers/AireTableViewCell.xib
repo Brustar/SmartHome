@@ -12,65 +12,99 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AireTableViewCell" id="KGk-i7-Jjw" customClass="AireTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AireTableViewCell" rowHeight="107" id="KGk-i7-Jjw" customClass="AireTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="346" height="107"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="346" height="106.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="客厅空调" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ci-ZD-g6F">
-                        <rect key="frame" x="8" y="11" width="60" height="21"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dvd_frm_choice__normal" translatesAutoresizingMaskIntoConstraints="NO" id="0cu-aa-C0a">
+                        <rect key="frame" x="0.0" y="57" width="346" height="50"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="60" id="L1W-vE-LqP"/>
-                            <constraint firstAttribute="height" constant="21" id="PHI-Jr-T21"/>
+                            <constraint firstAttribute="height" constant="50" id="D6C-pp-bYs"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ktv_btn_ajt" translatesAutoresizingMaskIntoConstraints="NO" id="8Ux-fc-F6y">
+                        <rect key="frame" x="58" y="71" width="270" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="CkQ-Dr-szQ"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ktv_btn_show" translatesAutoresizingMaskIntoConstraints="NO" id="Yqf-zh-nqL">
+                        <rect key="frame" x="18" y="71" width="40" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="ALW-TA-Zln"/>
+                            <constraint firstAttribute="height" constant="25" id="g8w-wV-TMA"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="客厅空调" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ci-ZD-g6F">
+                        <rect key="frame" x="18" y="8" width="100" height="49"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="yOM-v8-WxP"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25°C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Gp-k8-Gvg">
-                        <rect key="frame" x="73" y="11.5" width="40" height="21"/>
+                        <rect key="frame" x="20" y="72" width="40" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="bHK-Oh-qBI"/>
-                            <constraint firstAttribute="width" constant="40" id="cvi-1Q-i8e"/>
+                            <constraint firstAttribute="width" constant="40" id="12u-t8-Mef"/>
+                            <constraint firstAttribute="height" constant="21" id="ggf-Rm-I6j"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="9yv-2g-L2p">
-                        <rect key="frame" x="121" y="7" width="161" height="31"/>
-                    </slider>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mch-26-2tR">
-                        <rect key="frame" x="290" y="7" width="30" height="30"/>
+                        <rect key="frame" x="66" y="66" width="254" height="31"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="D6C-eZ-C10"/>
-                            <constraint firstAttribute="width" constant="30" id="uCg-vZ-eXa"/>
+                            <constraint firstAttribute="height" constant="30" id="bLH-nh-a6Q"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <state key="normal" title="开关"/>
-                    </button>
+                    </slider>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dmh-EL-E3l">
+                        <rect key="frame" x="278" y="17" width="42" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="CAK-Z1-6SA"/>
+                            <constraint firstAttribute="width" constant="40" id="SwM-7A-xke"/>
+                        </constraints>
+                    </switch>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="9yv-2g-L2p" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Fcp-nC-FFe"/>
-                    <constraint firstItem="4Ci-ZD-g6F" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="HVP-T9-ZIE"/>
-                    <constraint firstItem="4Ci-ZD-g6F" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Lvz-Y3-0a9"/>
-                    <constraint firstItem="9yv-2g-L2p" firstAttribute="leading" secondItem="5Gp-k8-Gvg" secondAttribute="trailing" constant="10" id="VXg-hp-snF"/>
-                    <constraint firstItem="5Gp-k8-Gvg" firstAttribute="leading" secondItem="4Ci-ZD-g6F" secondAttribute="trailing" constant="5" id="VpE-No-A6M"/>
-                    <constraint firstItem="Mch-26-2tR" firstAttribute="leading" secondItem="9yv-2g-L2p" secondAttribute="trailing" constant="10" id="bPM-xC-dNn"/>
-                    <constraint firstItem="Mch-26-2tR" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="e42-Im-GG0"/>
-                    <constraint firstItem="5Gp-k8-Gvg" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="eDf-An-Ggl"/>
-                    <constraint firstAttribute="trailing" secondItem="Mch-26-2tR" secondAttribute="trailing" id="m2R-Yj-mvL"/>
+                    <constraint firstItem="Yqf-zh-nqL" firstAttribute="leading" secondItem="4Ci-ZD-g6F" secondAttribute="leading" id="6pM-LG-WPl"/>
+                    <constraint firstItem="5Gp-k8-Gvg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="12" id="77c-g8-ZWs"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="8Ux-fc-F6y" secondAttribute="bottom" constant="4" id="8lK-dx-4Aq"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="8Ux-fc-F6y" secondAttribute="trailing" constant="10" id="AiG-Zj-4av"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="9yv-2g-L2p" secondAttribute="trailing" constant="20" id="Ede-RQ-T3O"/>
+                    <constraint firstItem="8Ux-fc-F6y" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="50" id="Ffm-Oi-SZZ"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="9yv-2g-L2p" secondAttribute="bottom" constant="3" id="RXd-6o-TyL"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Yqf-zh-nqL" secondAttribute="bottom" constant="3" id="WeX-nR-ANx"/>
+                    <constraint firstItem="4Ci-ZD-g6F" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Wga-Rc-fB3"/>
+                    <constraint firstItem="0cu-aa-C0a" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="XCx-tc-oqJ"/>
+                    <constraint firstItem="9yv-2g-L2p" firstAttribute="leading" secondItem="5Gp-k8-Gvg" secondAttribute="trailing" constant="8" id="ZeY-A6-dKP"/>
+                    <constraint firstItem="Yqf-zh-nqL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="eMN-Yx-kSV"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Dmh-EL-E3l" secondAttribute="trailing" constant="20" id="fVp-vz-IzL"/>
+                    <constraint firstItem="0cu-aa-C0a" firstAttribute="top" secondItem="4Ci-ZD-g6F" secondAttribute="bottom" id="izS-El-1ZB"/>
+                    <constraint firstItem="4Ci-ZD-g6F" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="kRw-rB-JO5"/>
+                    <constraint firstItem="0cu-aa-C0a" firstAttribute="top" secondItem="Dmh-EL-E3l" secondAttribute="bottom" id="m4w-nI-Shl"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="5Gp-k8-Gvg" secondAttribute="bottom" constant="5.5" id="nBJ-D7-waT"/>
+                    <constraint firstAttribute="trailing" secondItem="0cu-aa-C0a" secondAttribute="trailing" id="tYY-sy-hO9"/>
+                    <constraint firstAttribute="bottom" secondItem="0cu-aa-C0a" secondAttribute="bottom" id="wXB-TM-jbc"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="AireNameLabel" destination="4Ci-ZD-g6F" id="Bys-9D-LDu"/>
                 <outlet property="AireSlider" destination="9yv-2g-L2p" id="m74-0r-nHa"/>
-                <outlet property="AireSwitch" destination="Mch-26-2tR" id="BFL-z4-Gpu"/>
                 <outlet property="temperatureLabel" destination="5Gp-k8-Gvg" id="J1b-ls-SkR"/>
             </connections>
-            <point key="canvasLocation" x="-35" y="11"/>
+            <point key="canvasLocation" x="-322" y="46.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="dvd_frm_choice__normal" width="336" height="47"/>
+        <image name="ktv_btn_ajt" width="269" height="20"/>
+        <image name="ktv_btn_show" width="36" height="20"/>
+    </resources>
 </document>
