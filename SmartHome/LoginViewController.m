@@ -71,6 +71,16 @@
 }
 
 - (IBAction)tryBtnClicked:(id)sender {
+    
+    AVPlayer *player = [[AVPlayer alloc] initWithURL:[[NSBundle mainBundle] URLForResource:@"demo.mov" withExtension:nil]];
+    
+    _avPlayerVC = [[AVPlayerViewController alloc] init];
+    _avPlayerVC.player = player;
+    _avPlayerVC.view.frame = self.view.bounds;
+    [self.navigationController pushViewController:_avPlayerVC animated:YES];
+    
+    player.externalPlaybackVideoGravity = AVLayerVideoGravityResizeAspectFill;//这个属性和图片填充试图的属性类似，也可以设置为自适应试图大小。
+     [player play];
 }
 
 - (void)gotoIPhoneMainViewController {

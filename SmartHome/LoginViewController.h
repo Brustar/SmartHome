@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVKit/AVKit.h>
 #import "AppDelegate.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
@@ -29,7 +30,7 @@
 #import "PackManager.h"
 #import "CryptoManager.h"
 
-@interface LoginViewController : UIViewController<QRCodeReaderDelegate, UITextFieldDelegate, HttpDelegate,UIActionSheetDelegate>
+@interface LoginViewController : UIViewController<QRCodeReaderDelegate, UITextFieldDelegate, HttpDelegate,UIActionSheetDelegate, AVPlayerViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *pwdTextField;
 
@@ -50,7 +51,7 @@
 @property (nonatomic,assign) int vFMChannellLast;
 @property (nonatomic,assign) int vClientlLast;
 
-
+@property (nonatomic, strong) AVPlayerViewController *avPlayerVC;
 
 
 - (IBAction)forgetPwdBtnClicked:(id)sender;
