@@ -19,15 +19,12 @@
 #import <AVFoundation/AVFoundation.h>
 #import "ShortcutKeyViewController.h"
 #import "TabbarPanel.h"
-<<<<<<< HEAD
+
 #import "UIImageView+Badge.h"
 #import <RongIMKit/RongIMKit.h>
 #import "ConversationViewController.h"
 #import <RBStoryboardLink.h>
-=======
-#import <RongIMKit/RongIMKit.h>
-#import "ConversationViewController.h"
->>>>>>> cade69be99ae077e7ad69938d12a4d849cdd9a29
+
 #import "IOManager.h"
 #import "NowMusicController.h"
 
@@ -200,20 +197,9 @@
 
 - (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left
 {
-<<<<<<< HEAD
     NSString *nickname = [SQLManager queryChat:message.senderUserId][0];
     self.chatlabel.text =[NSString stringWithFormat:@"%@ : %@" , nickname, message.content.conversationDigest];
     [self.IconeImageView badge];
-=======
-    self.chatlabel.text = message.content.conversationDigest;
-    if(left>0)
-    {
-        self.UnreadButton.imageView.image=[UIImage imageNamed:@"circular1"];//未读消息
-    }else{
-        self.UnreadButton.imageView.image=[UIImage imageNamed:@""];//已读
-        self.UnreadButton.hidden = YES;
-    }
->>>>>>> cade69be99ae077e7ad69938d12a4d849cdd9a29
 }
 
 -(void)setBtn
