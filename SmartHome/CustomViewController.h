@@ -22,5 +22,6 @@
 - (void)naviBarAddCoverViewOnTitleView:(UIView *)view;
 - (void)naviBarRemoveCoverView:(UIView *)view;
 
-
+- (void)showNetStateView;
+- (void)setNetState:(int)state;
 @end

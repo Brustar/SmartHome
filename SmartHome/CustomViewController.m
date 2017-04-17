@@ -87,6 +87,14 @@
     _viewNaviBar.hidden = bIsHide;
 }
 
+- (void)showNetStateView {
+    [_viewNaviBar showNetStateView];
+}
+
+- (void)setNetState:(int)state {
+    [_viewNaviBar setNetState:state];
+}
+
 - (void)setNaviBarTitle:(NSString *)strTitle
 {
     if (_viewNaviBar)

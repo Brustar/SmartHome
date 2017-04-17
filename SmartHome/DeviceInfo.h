@@ -14,6 +14,15 @@ enum{
     outDoor,  // 户外模式
 };
 
+typedef enum {
+     netState_outDoor_4G,
+     netState_outDoor_WIFI,
+     netState_atHome_WIFI,
+     netState_atHome_4G,
+     netState_notConnect
+    
+}netState;
+
 enum{
     UNKNOWN,
     iPhone,
