@@ -150,10 +150,10 @@
 +(NSString *)getDevicePicByID:(int)sceneID;
 
 +(NSArray *)queryChat:(NSString *)userid;
-/*
-+ (BOOL) addStates:(int)deviceID onoff:(BOOL)state;
-+ (BOOL) queryState:(int)deviceID;
-+ (BOOL) addExtraStates:(Aircon *)airCon;
-+ (Aircon *) queryExtraState:(int)deviceID;
-*/
++ (void) writeDevices:(NSArray *)rooms;
++(void) writeRooms:(NSArray *)roomList;
++(NSArray *) writeScenes:(NSArray *)rooms;
++(void) writeChannels:(NSArray *)channels parent:(NSString *)parent;
++(void) writeChats:(NSArray *)users;
+
 @end
