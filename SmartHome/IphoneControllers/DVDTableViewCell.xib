@@ -48,7 +48,7 @@
                             <constraint firstAttribute="width" constant="15" id="ugu-xS-X5k"/>
                         </constraints>
                     </imageView>
-                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="NYR-NW-O6b">
+                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="NYR-NW-O6b">
                         <rect key="frame" x="36" y="101" width="262" height="31"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="Q0h-1a-MNG"/>

@@ -10,6 +10,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomViewController.h"
+#import <AFNetworking.h>
 
 @interface FirstViewController : CustomViewController
 @property (nonatomic, assign) NSInteger playState;//播放状态： 0:停止 1:播放
@@ -21,7 +22,7 @@
 
 @property (nonatomic, readonly) UIButton *naviRightBtn;
 @property (nonatomic, readonly) UIButton *naviLeftBtn;
-
+@property(nonatomic, strong) AFNetworkReachabilityManager *afNetworkReachabilityManager;
 @property (weak, nonatomic) IBOutlet UIView *SupView;
 
 @end
