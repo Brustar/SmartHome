@@ -13,7 +13,17 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-  
+    [self.ScreenCurtainBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+    [self.ScreenCurtainBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
+}
+- (IBAction)ScreenCurtainBtn:(id)sender {
+    self.ScreenCurtainBtn.selected = !self.ScreenCurtainBtn.selected;
+    if (self.ScreenCurtainBtn.selected) {
+        [self.ScreenCurtainBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+    }else{
+        
+        [self.ScreenCurtainBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

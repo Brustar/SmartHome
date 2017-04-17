@@ -12,7 +12,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *AireNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *temperatureLabel;
 @property (weak, nonatomic) IBOutlet UISlider *AireSlider;
-@property (weak, nonatomic) IBOutlet UIButton *AireSwitch;
+@property (weak, nonatomic) IBOutlet UIButton *AireSwitchBtn;
 //硬件id
 @property (weak,nonatomic) NSString *deviceid;
 @property (strong, nonatomic) Scene *scene;

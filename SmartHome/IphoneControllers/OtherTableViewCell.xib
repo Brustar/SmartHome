@@ -29,13 +29,24 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mDG-ah-kzJ">
+                    <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mDG-ah-kzJ">
                         <rect key="frame" x="260" y="3.5" width="42" height="40"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="0JV-mv-lKG"/>
                             <constraint firstAttribute="height" constant="40" id="LPy-U9-s22"/>
                         </constraints>
                     </switch>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YJM-5P-DIA">
+                        <rect key="frame" x="255" y="7" width="55" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="55" id="RnU-hi-HB7"/>
+                            <constraint firstAttribute="height" constant="35" id="eMQ-c3-hGC"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="dvd_btn_switch_on"/>
+                        <connections>
+                            <action selector="OtherSwitchBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="2tD-kj-mzW"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="QTR-CU-OME" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="3dV-2V-Erk"/>
@@ -43,11 +54,17 @@
                     <constraint firstAttribute="trailing" secondItem="mDG-ah-kzJ" secondAttribute="trailing" constant="20" id="EEg-e8-WhM"/>
                     <constraint firstAttribute="bottom" secondItem="mDG-ah-kzJ" secondAttribute="bottom" id="O51-Xb-rkN"/>
                     <constraint firstItem="QTR-CU-OME" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="XJ1-0V-zIc"/>
+                    <constraint firstAttribute="trailing" secondItem="YJM-5P-DIA" secondAttribute="trailing" constant="10" id="afr-cT-sBz"/>
+                    <constraint firstItem="YJM-5P-DIA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="fjh-oT-1xm"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="NameLabel" destination="QTR-CU-OME" id="vod-I0-Cys"/>
+                <outlet property="OtherSwitchBtn" destination="YJM-5P-DIA" id="YFT-H5-5oM"/>
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="dvd_btn_switch_on" width="36" height="23"/>
+    </resources>
 </document>

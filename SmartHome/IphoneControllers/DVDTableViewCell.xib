@@ -71,7 +71,7 @@
                         <rect key="frame" x="226.5" y="57" width="104.5" height="37"/>
                         <state key="normal" image="dvd_btn_adjust_normal"/>
                     </button>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OqP-ir-MRF">
+                    <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OqP-ir-MRF">
                         <rect key="frame" x="271" y="4" width="42" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="JDz-EP-gKW"/>
@@ -82,6 +82,17 @@
                         <rect key="frame" x="122.5" y="57" width="104" height="37"/>
                         <state key="normal" image="dvd_btn_adjust_normal"/>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYW-1Y-DcS">
+                        <rect key="frame" x="274" y="7" width="55" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="35" id="5x2-aQ-nLD"/>
+                            <constraint firstAttribute="width" constant="55" id="Kgt-4n-8iH"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="dvd_btn_switch_on"/>
+                        <connections>
+                            <action selector="DVDSwitchBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="a5M-1R-5Ha"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="M28-8e-zHA" secondAttribute="trailing" id="9zL-Me-m6e"/>
@@ -91,8 +102,10 @@
                     <constraint firstItem="F7B-y2-2nU" firstAttribute="top" secondItem="je0-2Y-f1l" secondAttribute="bottom" id="JLh-fV-2p5"/>
                     <constraint firstItem="NYR-NW-O6b" firstAttribute="top" secondItem="F7B-y2-2nU" secondAttribute="bottom" constant="2" id="K8h-9C-4eR"/>
                     <constraint firstItem="F7B-y2-2nU" firstAttribute="top" secondItem="OqP-ir-MRF" secondAttribute="bottom" constant="5" id="KoR-wY-KOV"/>
+                    <constraint firstItem="wYW-1Y-DcS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="Lj8-Z5-Put"/>
                     <constraint firstItem="aQ4-Nq-8mW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="LpR-Wf-r8M"/>
                     <constraint firstAttribute="trailingMargin" secondItem="UYH-Br-BuW" secondAttribute="trailing" id="MAC-pY-5LJ"/>
+                    <constraint firstAttribute="trailing" secondItem="wYW-1Y-DcS" secondAttribute="trailing" constant="10" id="OHB-wH-UXl"/>
                     <constraint firstItem="NYR-NW-O6b" firstAttribute="leading" secondItem="ZRr-fE-u93" secondAttribute="trailing" constant="10" id="PRI-qc-HzQ"/>
                     <constraint firstAttribute="trailingMargin" secondItem="RxL-mC-ARL" secondAttribute="trailing" constant="10" id="Pnh-Qf-adm"/>
                     <constraint firstItem="75B-Ud-NQ6" firstAttribute="leading" secondItem="aQ4-Nq-8mW" secondAttribute="trailing" id="QUU-h6-CbJ"/>
@@ -119,6 +132,7 @@
             <connections>
                 <outlet property="DVDNameLabel" destination="je0-2Y-f1l" id="X7K-XD-4TD"/>
                 <outlet property="DVDSlider" destination="NYR-NW-O6b" id="JzR-gz-1wV"/>
+                <outlet property="DVDSwitchBtn" destination="wYW-1Y-DcS" id="1nS-vW-gWz"/>
                 <outlet property="YLImageView" destination="ZRr-fE-u93" id="BO5-6B-eDO"/>
             </connections>
             <point key="canvasLocation" x="41.5" y="118.5"/>
@@ -127,6 +141,7 @@
     <resources>
         <image name="bd_icon_voi_high" width="11" height="9"/>
         <image name="dvd_btn_adjust_normal" width="91" height="38"/>
+        <image name="dvd_btn_switch_on" width="36" height="23"/>
         <image name="dvd_frm_choice__normal" width="336" height="47"/>
         <image name="lv_fm_adjust_normal" width="336" height="47"/>
     </resources>

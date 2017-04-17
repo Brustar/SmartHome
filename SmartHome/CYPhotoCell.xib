@@ -18,7 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="313" height="305"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Scene-bedroom_03 (2)" translatesAutoresizingMaskIntoConstraints="NO" id="OH8-Z4-v9Z">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="catalog_1" translatesAutoresizingMaskIntoConstraints="NO" id="OH8-Z4-v9Z">
                         <rect key="frame" x="0.0" y="0.0" width="313" height="305"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WoT-vg-Bap">
@@ -63,6 +63,6 @@
     </objects>
     <resources>
         <image name="Scene-bedroomTSQ" width="76" height="76"/>
-        <image name="Scene-bedroom_03 (2)" width="497" height="1"/>
+        <image name="catalog_1" width="283" height="352"/>
     </resources>
 </document>
