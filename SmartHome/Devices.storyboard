@@ -105,6 +105,7 @@
                         <barButtonItem key="rightBarButtonItem" image="bgmusic" id="EEo-rq-7sh"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="DeviceNameLabel" destination="HID-aO-r7h" id="FPh-g9-wzM"/>
                         <outlet property="iphoneRoomView" destination="kRY-Ap-2vQ" id="lX2-nN-XBc"/>
                     </connections>
                 </viewController>
