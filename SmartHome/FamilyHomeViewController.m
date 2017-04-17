@@ -16,7 +16,7 @@
 @implementation FamilyHomeViewController
 
 - (void)setupNaviBar {
-    [self setNaviBarTitle:@"家庭名称"]; //设置标题
+    [self setNaviBarTitle:[UD objectForKey:@"homename"]]; //设置标题
     //_naviLeftBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"clound_white" imgHighlight:@"clound_white" target:self action:@selector(leftBtnClicked:)];
     _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"music_white" imgHighlight:@"music_white" target:self action:@selector(rightBtnClicked:)];
     [self setNaviBarRightBtn:_naviRightBtn];

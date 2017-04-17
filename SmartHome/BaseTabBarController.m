@@ -44,10 +44,10 @@
     UIStoryboard *iPhoneStoryBoard  = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     UIStoryboard *HomeStoryBoard  = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
     UIStoryboard *SceneStoryBoard  = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
-    
+    UIStoryboard *devicesStoryBoard  = [UIStoryboard storyboardWithName:@"Devices" bundle:nil];
     //第三级控制器
     //设备
-    IphoneDeviceListController *deviceListVC = [iPhoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneDeviceListController"];
+    IphoneDeviceListController *deviceListVC = [devicesStoryBoard instantiateViewControllerWithIdentifier:@"devicesController"];
     
     UIImage *image = [[UIImage imageNamed:@"icon_tabbar_mine"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIImage *selectImage = [[UIImage imageNamed:@"icon_tabbar_mine_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
