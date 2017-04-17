@@ -17,6 +17,7 @@
 
 @property (nonatomic, readonly) UIButton *m_btnBack;
 @property (nonatomic, readonly) UILabel *m_labelTitle;
+@property (nonatomic, readonly) UIButton *m_netStateView;
 @property (nonatomic, readonly) UIImageView *m_imgViewBg;
 @property (nonatomic, readonly) UIButton *m_btnLeft;
 @property (nonatomic, readonly) UIButton *m_btnRight;
@@ -33,6 +34,7 @@
 @synthesize m_btnLeft = _btnLeft;
 @synthesize m_btnRight = _btnRight;
 @synthesize m_bIsBlur = _bIsBlur;
+@synthesize m_netStateView = _netStateView;
 
 
 + (CGRect)rightBtnFrame
@@ -53,6 +55,11 @@
 + (CGRect)titleViewFrame
 {
     return Rect((UI_SCREEN_WIDTH-190.0f)/2, 22.0f, 190.0f, 40.0f);
+}
+
++ (CGRect)titleViewFrameForNet
+{
+    return Rect((UI_SCREEN_WIDTH-190.0f)/2, 15.0f, 190.0f, 40.0f);
 }
 
 // 创建一个导航条按钮：使用默认的按钮图片。
@@ -231,6 +238,30 @@
     {
         [self.m_viewCtrlParent.navigationController popViewControllerAnimated:YES];
     }else{APP_ASSERT_STOP}
+}
+
+- (void)showNetStateView {
+    _labelTitle.frame = [[self class] titleViewFrameForNet];
+    _netStateView = [[UIButton alloc] initWithFrame:CGRectMake((UI_SCREEN_WIDTH-190)/2, 45, 190, 14)];
+    _netStateView.titleLabel.font = [UIFont systemFontOfSize:12];
+    _netStateView.titleLabel.textAlignment = NSTextAlignmentCenter;
+    _netStateView.titleLabel.textColor = [UIColor whiteColor];
+    _netStateView.userInteractionEnabled = NO;
+    [self addSubview:_netStateView];
+}
+
+- (void)setNetState:(int)state {
+    if (state == netState_outDoor_4G) {
+        [_netStateView setTitle:@"4G" forState:UIControlStateNormal];
+    }else if (state == netState_outDoor_WIFI) {
+        [_netStateView setImage:[UIImage imageNamed:@"Iphonewifi"] forState:UIControlStateNormal];
+    }else if (state == netState_atHome_4G) {
+        [_netStateView setTitle:@"4G" forState:UIControlStateNormal];
+    }else if (state == netState_atHome_WIFI) {
+        [_netStateView setImage:[UIImage imageNamed:@"Iphonewifi"] forState:UIControlStateNormal];
+    }else if (state == netState_notConnect) {
+        [_netStateView setTitle:@"未连接" forState:UIControlStateNormal];
+    }
 }
 
 - (void)showCoverView:(UIView *)view

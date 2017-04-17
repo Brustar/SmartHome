@@ -16,7 +16,7 @@
 @implementation FamilyHomeViewController
 
 - (void)setupNaviBar {
-    [self setNaviBarTitle:@"家庭名称"]; //设置标题
+    [self setNaviBarTitle:[UD objectForKey:@"homename"]]; //设置标题
     //_naviLeftBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"clound_white" imgHighlight:@"clound_white" target:self action:@selector(leftBtnClicked:)];
     _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"music_white" imgHighlight:@"music_white" target:self action:@selector(rightBtnClicked:)];
     [self setNaviBarRightBtn:_naviRightBtn];
@@ -31,6 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNaviBar];
+    [self showNetStateView];
     self.lightIcon.layer.cornerRadius =  self.lightIcon.frame.size.width/2;
     self.lightIcon.layer.masksToBounds = YES;
     self.lightIcon.backgroundColor = RGB(243, 152, 0, 1);
@@ -72,42 +73,51 @@
 //处理连接改变后的情况
 - (void)updateInterfaceWithReachability
 {
-    /*_afNetworkReachabilityManager = [AFNetworkReachabilityManager sharedManager];
+    __block FamilyHomeViewController  *blockSelf = self;
+    
+    _afNetworkReachabilityManager = [AFNetworkReachabilityManager sharedManager];
     
     [_afNetworkReachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         DeviceInfo *info = [DeviceInfo defaultManager];
         if(status == AFNetworkReachabilityStatusReachableViaWWAN) //手机自带网络
         {
             if (info.connectState==outDoor) {
-                NSLog(@"外出模式");
-                [self.netBarBtnItem setImage:[UIImage imageNamed:@"4g"]];
+                [blockSelf setNetState:netState_outDoor_4G];
+                NSLog(@"外出模式-4g");
+               // [self.netBarBtnItem setImage:[UIImage imageNamed:@"4g"]];
             }
             if (info.connectState==offLine) {
+                [blockSelf setNetState:netState_notConnect];
                 NSLog(@"离线模式");
-                [self.netBarBtnItem setImage:[UIImage imageNamed:@"4g"]];
+                //[self.netBarBtnItem setImage:[UIImage imageNamed:@"4g"]];
             }
         }
         else if(status == AFNetworkReachabilityStatusReachableViaWiFi) //WIFI
         {
             if (info.connectState==atHome) {
+                [blockSelf setNetState:netState_atHome_WIFI];
                 NSLog(@"在家模式");
-                [self.netBarBtnItem setImage:[UIImage imageNamed:@"atHome"]];
+                //[self.netBarBtnItem setImage:[UIImage imageNamed:@"atHome"]];
                 
             }else if (info.connectState==outDoor){
+                [blockSelf setNetState:netState_atHome_4G];
                 NSLog(@"外出模式");
-                [self.netBarBtnItem setImage:[UIImage imageNamed:@"Iphonewifi"]];
+                //[self.netBarBtnItem setImage:[UIImage imageNamed:@"Iphonewifi"]];
             }else if (info.connectState==offLine) {
+                [blockSelf setNetState:netState_notConnect];
                 NSLog(@"离线模式");
-                [self.netBarBtnItem setImage:[UIImage imageNamed:@"Iphonewifi"]];
+                //[self.netBarBtnItem setImage:[UIImage imageNamed:@"Iphonewifi"]];
                 
             }
         }else if(status == AFNetworkReachabilityStatusNotReachable){ //没有网络(断网)
+            [blockSelf setNetState:netState_notConnect];
             NSLog(@"离线模式");
-            [self.netBarBtnItem setImage:[UIImage imageNamed:@"breakWifi"]];
+           // [self.netBarBtnItem setImage:[UIImage imageNamed:@"breakWifi"]];
         }else if (status == AFNetworkReachabilityStatusUnknown) { //未知网络
-            [self.netBarBtnItem setImage:[UIImage imageNamed:@"breakWifi"]];
+            [blockSelf setNetState:netState_notConnect];
+           // [self.netBarBtnItem setImage:[UIImage imageNamed:@"breakWifi"]];
         }
-    }];*/
+    }];
     
     [_afNetworkReachabilityManager startMonitoring];//开启网络监视器；
     

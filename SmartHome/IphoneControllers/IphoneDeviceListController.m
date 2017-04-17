@@ -6,8 +6,6 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
-
-
 #import "IphoneDeviceListController.h"
 #import "SQLManager.h"
 #import "Room.h"
@@ -30,7 +28,6 @@
 #import "BgMusicController.h"
 #import "IphoneLightController.h"
 #import "AppDelegate.h"
-//#import "IphoneDeviceLightVC.h"
 #import "CYLineLayout.h"
 #import "CYPhotoCell.h"
 
@@ -85,12 +82,11 @@ static NSString * const CYPhotoId = @"photo";
     self.rooms = [SQLManager getAllRoomsInfo];
     [self setUpRoomScrollerView];
     [self setUpScrollerView];
-    [self setupSlideButton];
      [self getUI];
 }
 
 - (void)setupNaviBar {
-    [self setNaviBarTitle:@"家庭名称"]; //设置标题
+    [self setNaviBarTitle:[UD objectForKey:@"homename"]]; //设置标题
     _naviLeftBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"clound_white" imgHighlight:@"clound_white" target:self action:@selector(leftBtnClicked:)];
     _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"music_white" imgHighlight:@"music_white" target:self action:@selector(rightBtnClicked:)];
     [self setNaviBarLeftBtn:_naviLeftBtn];
@@ -134,26 +130,6 @@ static NSString * const CYPhotoId = @"photo";
     [self.FirstCollectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CYPhotoCell class]) bundle:nil] forCellWithReuseIdentifier:CYPhotoId];
     
 }
-- (void)setupSlideButton {
-    UIButton *menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    menuBtn.frame = CGRectMake(0, 0, 44, 44);
-    [menuBtn setImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
-    [menuBtn addTarget:self action:@selector(menuBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
-}
-
-- (void)menuBtnAction:(UIButton *)sender {
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    if (appDelegate.LeftSlideVC.closed)
-    {
-        [appDelegate.LeftSlideVC openLeftView];
-    }
-    else
-    {
-        [appDelegate.LeftSlideVC closeLeftView];
-    }
-}
 
 
 -(void)setUpScrollerView
@@ -189,7 +165,7 @@ static NSString * const CYPhotoId = @"photo";
         self.roomIndex = index;
         Room *room = self.rooms[index];
         self.deviceTypes = [SQLManager deviceSubTypeByRoomId:room.rId];
-        [self setUpScrollerView];
+        //[self setUpScrollerView];
         [self.FirstCollectionView reloadData];
     } else {
         if (self.deviceTypes.count < 1) {
