@@ -14,13 +14,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
-//    UIImage *leftTrack = [UIImage imageNamed:@"Slider2"];
-//    [self.slider setMinimumTrackImage:leftTrack forState:UIControlStateNormal];
-//    UIImage *rightTrack = [UIImage imageNamed:@"Slider2"];
-//    [self.slider setThumbImage:[UIImage imageNamed:@"Slider4"] forState:UIControlStateNormal];
-//    [self.slider setMaximumTrackImage:rightTrack forState:UIControlStateNormal];
-    
+
+     [self.slider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
     [self.slider addTarget:self action:@selector(dimming:) forControlEvents:UIControlEventValueChanged];
     [self.Iphoneswitch addTarget:self action:@selector(Iphoneswitch:) forControlEvents:UIControlEventValueChanged];
     

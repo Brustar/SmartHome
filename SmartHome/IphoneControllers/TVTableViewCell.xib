@@ -134,6 +134,7 @@
             <connections>
                 <outlet property="TVNameLabel" destination="tWF-t6-Y9g" id="TRf-sJ-vTB"/>
                 <outlet property="TVSlider" destination="dKl-4X-Ia9" id="rB4-Qv-6yn"/>
+                <outlet property="TVSwitch" destination="XDC-WQ-BWg" id="pmx-VE-HSp"/>
             </connections>
             <point key="canvasLocation" x="41" y="126"/>
         </tableViewCell>
