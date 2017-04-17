@@ -45,7 +45,7 @@ static NSString * const CYPhotoId = @"photo";
 @property (weak, nonatomic) UIViewController *currentViewController;
 @property (weak, nonatomic) IBOutlet IphoneRoomView *iphoneRoomView;
 @property (nonatomic, assign) int roomIndex;
-@property (weak, nonatomic) IBOutlet IphoneRoomView *deviceTypeView;
+
 @property (nonatomic,strong)UICollectionView * FirstCollectionView;
 @property (weak, nonatomic) IBOutlet UILabel *DeviceNameLabel;
 
@@ -81,8 +81,7 @@ static NSString * const CYPhotoId = @"photo";
     [self setupNaviBar];
     self.rooms = [SQLManager getAllRoomsInfo];
     [self setUpRoomScrollerView];
-    [self setUpScrollerView];
-     [self getUI];
+    [self getUI];
 }
 
 - (void)setupNaviBar {
@@ -124,23 +123,9 @@ static NSString * const CYPhotoId = @"photo";
     self.FirstCollectionView.dataSource = self;
     self.FirstCollectionView.delegate = self;
     [self.view addSubview:self.FirstCollectionView];
-    //    self.navigationController.navigationBar.hidden = YES;
-    self.automaticallyAdjustsScrollViewInsets = NO;//
+    self.automaticallyAdjustsScrollViewInsets = NO;
     // 注册
     [self.FirstCollectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CYPhotoCell class]) bundle:nil] forCellWithReuseIdentifier:CYPhotoId];
-    
-}
-
-
--(void)setUpScrollerView
-{
-    self.deviceTypeView.dataArray = self.deviceTypes;
-
-    self.deviceTypeView.delegate = self;
-    
-    [self.deviceTypeView setSelectButton:0];
-    
-    [self iphoneRoomView:self.deviceTypeView didSelectButton:0];
 }
 
 -(void)setUpRoomScrollerView
@@ -160,6 +145,7 @@ static NSString * const CYPhotoId = @"photo";
     
     [self iphoneRoomView:self.iphoneRoomView didSelectButton:0];
 }
+
 - (void)iphoneRoomView:(UIView *)view didSelectButton:(int)index {
     if (view == self.iphoneRoomView) {
         self.roomIndex = index;
@@ -178,16 +164,16 @@ static NSString * const CYPhotoId = @"photo";
         }
         
         [self selectedType:self.deviceTypes[index]];
-        
-        
     }
 }
+
 -(void)selectedType:(NSString *)typeName
 {
     Room *room = self.rooms[self.roomIndex];
     int roomID = room.rId;
     [self goDeviceByRoomID:roomID typeName:typeName];
 }
+
 -(void)goDeviceByRoomID:(int)roomID typeName:(NSString *)typeName
 {
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -196,14 +182,10 @@ static NSString * const CYPhotoId = @"photo";
     {
         IphoneTVController *tVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneTVController"];
         tVC.roomID = roomID;
-        
         [self addViewAndVC:tVC];
-        
     }else if([typeName isEqualToString:@"灯光"])
     {
-//        LightController *ligthVC = [storyBoard instantiateViewControllerWithIdentifier:@"LightController"]; 
         IphoneLightController * ligthVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"LightController"];
-//        ligthVC.showLightView = NO;
         ligthVC.roomID = roomID;
         
         [self addViewAndVC:ligthVC];
@@ -288,15 +270,9 @@ static NSString * const CYPhotoId = @"photo";
         BgMusicController *bgMusicVC = [storyBoard instantiateViewControllerWithIdentifier:@"BgMusicController"];
         bgMusicVC.roomID = roomID;
         [self addViewAndVC:bgMusicVC];
-        
     }else {
-
         PluginViewController *pluginVC = [storyBoard instantiateViewControllerWithIdentifier:@"PluginViewController"];
         pluginVC.roomID = roomID;
-
-//        GuardController *guardVC = [storyBoard instantiateViewControllerWithIdentifier:@"GuardController"];
-//        guardVC.roomID = roomID;
-        
         [self addViewAndVC:pluginVC];
     }
 
@@ -331,10 +307,7 @@ static NSString * const CYPhotoId = @"photo";
     btn.selected = YES;
     self.selectedRoomBtn = btn;
     [self.selectedRoomBtn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
-    self.deviceTypes = [SQLManager deviceSubTypeByRoomId:btn.tag]
-    ;
-    
-    [self setUpScrollerView];
+    self.deviceTypes = [SQLManager deviceSubTypeByRoomId:btn.tag];
 }
 
 - (void)didReceiveMemoryWarning {

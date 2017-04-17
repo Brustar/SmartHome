@@ -334,7 +334,7 @@
         {
             if(roomDic)
             {
-                NSString *sql = [NSString stringWithFormat:@"insert into Rooms values(%d,'%@',null,null,null,null,null,'%@',%d,null,'%ld',%d)",[roomDic[@"room_id"] intValue],roomDic[@"room_name"],roomDic[@"room_image_url"],[roomDic[@"ibeacon"] intValue],[DeviceInfo defaultManager].masterID,[roomDic[@"isaccess"] intValue]];
+                NSString *sql = [NSString stringWithFormat:@"insert into Rooms values(%d,'%@',null,null,null,null,null,'%@',%d,null,'%ld',%d,%d)",[roomDic[@"room_id"] intValue],roomDic[@"room_name"],roomDic[@"room_image_url"],[roomDic[@"ibeacon"] intValue],[DeviceInfo defaultManager].masterID,[roomDic[@"isaccess"] intValue],[roomDic[@"ishouse"] intValue]];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {
