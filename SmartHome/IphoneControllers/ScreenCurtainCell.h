@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *stopBtn;
 @property (weak, nonatomic) IBOutlet UIButton *DownBtn;
 @property (weak, nonatomic) IBOutlet UISwitch *PowerSwitch;
+@property (weak, nonatomic) IBOutlet UIButton *ScreenCurtainBtn;
 
 @end
