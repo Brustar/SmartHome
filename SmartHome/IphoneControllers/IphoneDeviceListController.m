@@ -6,8 +6,6 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
-
-
 #import "IphoneDeviceListController.h"
 #import "SQLManager.h"
 #import "Room.h"
@@ -30,7 +28,6 @@
 #import "BgMusicController.h"
 #import "IphoneLightController.h"
 #import "AppDelegate.h"
-//#import "IphoneDeviceLightVC.h"
 #import "CYLineLayout.h"
 #import "CYPhotoCell.h"
 
@@ -85,7 +82,6 @@ static NSString * const CYPhotoId = @"photo";
     self.rooms = [SQLManager getAllRoomsInfo];
     [self setUpRoomScrollerView];
     [self setUpScrollerView];
-    [self setupSlideButton];
      [self getUI];
 }
 
@@ -133,26 +129,6 @@ static NSString * const CYPhotoId = @"photo";
     // 注册
     [self.FirstCollectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CYPhotoCell class]) bundle:nil] forCellWithReuseIdentifier:CYPhotoId];
     
-}
-- (void)setupSlideButton {
-    UIButton *menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    menuBtn.frame = CGRectMake(0, 0, 44, 44);
-    [menuBtn setImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
-    [menuBtn addTarget:self action:@selector(menuBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
-}
-
-- (void)menuBtnAction:(UIButton *)sender {
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    if (appDelegate.LeftSlideVC.closed)
-    {
-        [appDelegate.LeftSlideVC openLeftView];
-    }
-    else
-    {
-        [appDelegate.LeftSlideVC closeLeftView];
-    }
 }
 
 
