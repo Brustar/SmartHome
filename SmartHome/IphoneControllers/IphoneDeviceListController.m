@@ -42,6 +42,7 @@ static NSString * const CYPhotoId = @"photo";
 @property (nonatomic,strong) UIButton *typeSelectedBtn;
 @property (nonatomic,strong) UIButton *selectedRoomBtn;
 @property (nonatomic,strong) NSArray *rooms;
+@property (nonatomic,strong) NSArray *pics;
 @property (weak, nonatomic) UIViewController *currentViewController;
 @property (weak, nonatomic) IBOutlet IphoneRoomView *iphoneRoomView;
 @property (nonatomic, assign) int roomIndex;
@@ -80,6 +81,7 @@ static NSString * const CYPhotoId = @"photo";
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self setupNaviBar];
     self.rooms = [SQLManager getAllRoomsInfo];
+    
     [self setUpRoomScrollerView];
     [self getUI];
 }
@@ -112,12 +114,18 @@ static NSString * const CYPhotoId = @"photo";
 -(void)getUI
 {
     // 创建CollectionView
+    self.pics = @[@"catalog_1",@"catalog_2",@"catalog_3",@"catalog_4",@"catalog_5",@"catalog_6",@"catalog_7",@"catalog_8",@"catalog_9",@"catalog_10"];
     CGFloat collectionW = self.view.frame.size.width;
     CGFloat collectionH = self.view.frame.size.height-350;
-    CGRect frame = CGRectMake(0, 115, collectionW, collectionH);
+    CGRect frame = CGRectMake(0, 130, collectionW, collectionH);
     // 创建布局
     CYLineLayout *layout = [[CYLineLayout alloc] init];
-    layout.itemSize = CGSizeMake(collectionW-110, collectionH-20);
+    if (([UIScreen mainScreen].bounds.size.height == 568.0)) {
+        layout.itemSize = CGSizeMake(collectionW-50, collectionH-20);
+    }else{
+        layout.itemSize = CGSizeMake(collectionW-90, collectionH-20);
+    }
+    //layout.itemSize = CGSizeMake(collectionW-110, collectionH-20);
     self.FirstCollectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
     self.FirstCollectionView.backgroundColor = [UIColor clearColor];
     self.FirstCollectionView.dataSource = self;
@@ -324,7 +332,7 @@ static NSString * const CYPhotoId = @"photo";
     CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
     cell.sceneLabel.text = self.deviceTypes[indexPath.row];
     self.DeviceNameLabel.text = self.deviceTypes[indexPath.row];
-    [cell.imageView sd_setImageWithURL:nil placeholderImage:[UIImage imageNamed:@"main"]];
+    [cell.imageView sd_setImageWithURL:nil placeholderImage:[UIImage imageNamed:[self.pics objectAtIndex:indexPath.row%10]]];
     [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];
     
     return cell;
