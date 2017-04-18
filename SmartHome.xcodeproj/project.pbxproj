@@ -251,6 +251,8 @@
 		CD93E3AD1E807AFD003CCAA9 /* login_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD93E3AC1E807AFD003CCAA9 /* login_icon@2x.png */; };
 		CD93E3AF1E807CC2003CCAA9 /* login_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD93E3AE1E807CC2003CCAA9 /* login_bg@2x.png */; };
 		CD93E3B11E8081B0003CCAA9 /* login_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD93E3B01E8081B0003CCAA9 /* login_line@2x.png */; };
+		CDBEFF501EA5FEBF00258B1E /* FamilyHomeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDBEFF4F1EA5FEBF00258B1E /* FamilyHomeDetailViewController.m */; };
+		CDBEFF531EA616CD00258B1E /* FamilyHomeDetailSceneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDBEFF521EA616CD00258B1E /* FamilyHomeDetailSceneCell.m */; };
 		CDEC86801E95EBAB009EC245 /* TabbarPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEC867F1E95EBAB009EC245 /* TabbarPanel.m */; };
 		CDEC86841E960E92009EC245 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = CDEC86831E960E92009EC245 /* background.png */; };
 		CDEC86891E976EC9009EC245 /* RegistFirstStepForPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEC86881E976EC9009EC245 /* RegistFirstStepForPhoneViewController.m */; };
@@ -916,6 +918,10 @@
 		CD93E3AC1E807AFD003CCAA9 /* login_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon@2x.png"; sourceTree = "<group>"; };
 		CD93E3AE1E807CC2003CCAA9 /* login_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_bg@2x.png"; sourceTree = "<group>"; };
 		CD93E3B01E8081B0003CCAA9 /* login_line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_line@2x.png"; sourceTree = "<group>"; };
+		CDBEFF4E1EA5FEBF00258B1E /* FamilyHomeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyHomeDetailViewController.h; sourceTree = "<group>"; };
+		CDBEFF4F1EA5FEBF00258B1E /* FamilyHomeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyHomeDetailViewController.m; sourceTree = "<group>"; };
+		CDBEFF511EA616CD00258B1E /* FamilyHomeDetailSceneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyHomeDetailSceneCell.h; sourceTree = "<group>"; };
+		CDBEFF521EA616CD00258B1E /* FamilyHomeDetailSceneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyHomeDetailSceneCell.m; sourceTree = "<group>"; };
 		CDEC867E1E95EBAB009EC245 /* TabbarPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabbarPanel.h; sourceTree = "<group>"; };
 		CDEC867F1E95EBAB009EC245 /* TabbarPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabbarPanel.m; sourceTree = "<group>"; };
 		CDEC86831E960E92009EC245 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
@@ -2324,6 +2330,10 @@
 				CDEC86911E9A1D22009EC245 /* FamilyHomeCell.m */,
 				CDEC86961E9A44F9009EC245 /* FamilyHomeViewController.h */,
 				CDEC86971E9A44F9009EC245 /* FamilyHomeViewController.m */,
+				CDBEFF4E1EA5FEBF00258B1E /* FamilyHomeDetailViewController.h */,
+				CDBEFF4F1EA5FEBF00258B1E /* FamilyHomeDetailViewController.m */,
+				CDBEFF511EA616CD00258B1E /* FamilyHomeDetailSceneCell.h */,
+				CDBEFF521EA616CD00258B1E /* FamilyHomeDetailSceneCell.m */,
 			);
 			name = FamilyViewController;
 			sourceTree = "<group>";
@@ -3069,6 +3079,7 @@
 				F62E05661DAB68620096BF00 /* IphoneEditSceneController.m in Sources */,
 				F60E71CA1D796BE6008863DB /* AmplifierController.m in Sources */,
 				F60FDB461D003FD500AB04BE /* CurtainTableViewCell.m in Sources */,
+				CDBEFF501EA5FEBF00258B1E /* FamilyHomeDetailViewController.m in Sources */,
 				2EEFF74A1E9649A0008F2C7F /* IphoneNewAddSceneVC.m in Sources */,
 				F65AF6DA1D3375700048A4E5 /* ProfileFaultsCell.m in Sources */,
 				F646C0B91D91173000DF1728 /* IphoneRoomView.m in Sources */,
@@ -3110,6 +3121,7 @@
 				F6280D531D966218009108ED /* IphoneAddFmController.m in Sources */,
 				0FF92B661D9224640098DD54 /* TVChannel.m in Sources */,
 				0F11654F1D7418EE00A01B8F /* Amplifier.m in Sources */,
+				CDBEFF531EA616CD00258B1E /* FamilyHomeDetailSceneCell.m in Sources */,
 				F630C3621D38C3E5008880BB /* AreaSettingCell.m in Sources */,
 				CDF1573A1E7AAD4C00499AC5 /* BaseNavController.m in Sources */,
 				2E7CD6081E14B80C002D0541 /* FixTimeListCell.m in Sources */,

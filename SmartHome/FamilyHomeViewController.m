@@ -163,11 +163,12 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIStoryboard * oneStory = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-    IphoneLightController * VC = [oneStory instantiateViewControllerWithIdentifier:@"LightController"];
+    UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
+    FamilyHomeDetailViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"familyHomeDetailVC"];
     RoomStatus *roomInfo = self.roomArray[indexPath.row];
-    VC.roomID = (int)roomInfo.roomId;
-    [self.navigationController pushViewController:VC animated:YES];
+    vc.roomID = roomInfo.roomId;
+    vc.roomName = roomInfo.roomName;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {

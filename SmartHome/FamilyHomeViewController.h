@@ -25,6 +25,7 @@
 #import "AppDelegate.h"
 #import "FamilyHomeCell.h"
 #import "CustomViewController.h"
+#import "FamilyHomeDetailViewController.h"
 
 #define  CollectionCellWidth self.roomCollectionView.frame.size.width / 2.0 -20
 #define  minSpace 20
