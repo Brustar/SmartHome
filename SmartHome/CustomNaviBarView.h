@@ -34,6 +34,7 @@
 - (void)setBackBtn:(UIButton *)btn;
 - (void)setLeftBtn:(UIButton *)btn;
 - (void)setRightBtn:(UIButton *)btn;
+- (void)setMiddleBtn:(UIButton *)btn;
 - (void)setTitle:(NSString *)strTitle;
 
 // 在导航条上覆盖一层自定义视图。比如：输入搜索关键字时，覆盖一个输入框在上面。

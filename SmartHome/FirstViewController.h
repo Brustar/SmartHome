@@ -22,7 +22,10 @@
 
 @property (nonatomic, readonly) UIButton *naviRightBtn;
 @property (nonatomic, readonly) UIButton *naviLeftBtn;
+@property (nonatomic, readonly) UIButton *naviMiddletBtn;
 @property(nonatomic, strong) AFNetworkReachabilityManager *afNetworkReachabilityManager;
 @property (weak, nonatomic) IBOutlet UIView *SupView;
+@property (weak, nonatomic) IBOutlet UIView *CoverView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end

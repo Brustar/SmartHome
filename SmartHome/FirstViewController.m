@@ -27,7 +27,7 @@
 #import "NowMusicController.h"
 
 
-@interface FirstViewController ()<RCIMReceiveMessageDelegate,HttpDelegate>
+@interface FirstViewController ()<RCIMReceiveMessageDelegate,HttpDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIImageView * SubImageView;//首页的日历大圆
 @property (weak, nonatomic) IBOutlet UIView * BtnView;//全屋场景的按钮试图
 @property (weak, nonatomic) IBOutlet UIImageView * IconeImageView;//提示消息的头像
@@ -36,7 +36,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem * playerBarBtn;//正在播放的按钮
 @property (weak, nonatomic) IBOutlet UIView * playerSubView;//正在播放的视图
 @property (weak, nonatomic) IBOutlet UIView * FourBtnView;
-@property (weak, nonatomic) IBOutlet UITableView * tableView;
+//@property (weak, nonatomic) IBOutlet UITableView * tableView;
 @property (nonatomic,strong) NSArray * dataArr;
 @property (weak, nonatomic) IBOutlet UIImageView * HeadImageView;
 @property (weak, nonatomic) IBOutlet UIView * socialView;
@@ -329,13 +329,26 @@
 }
 
 - (void)setupNaviBar {
-    [self setNaviBarTitle:[UD objectForKey:@"homename"]]; //设置标题
+//    [self setNaviBarTitle:[UD objectForKey:@"homename"]]; //设置标题
+    _naviMiddletBtn = [[UIButton alloc] init];
+    [_naviMiddletBtn setTitle:[UD objectForKey:@"homename"] forState:UIControlStateNormal];
+    [_naviMiddletBtn addTarget:self action:@selector(MiddleBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     _naviLeftBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"clound_white" imgHighlight:@"clound_white" target:self action:@selector(leftBtnClicked:)];
     _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"music_white" imgHighlight:@"music_white" target:self action:@selector(rightBtnClicked:)];
     [self setNaviBarLeftBtn:_naviLeftBtn];
     [self setNaviBarRightBtn:_naviRightBtn];
+    [self setNaviMiddletBtn:_naviMiddletBtn];
 }
+-(void)MiddleBtnClicked:(UIButton *)btn
+{
+    _naviMiddletBtn.selected = !_naviMiddletBtn.selected;
+    if (_naviMiddletBtn.selected) {
+        self.CoverView.hidden = NO;
+    }else{
+        self.CoverView.hidden = YES;
+    }
 
+}
 - (void)setupSlideButton {
     UIButton *menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     menuBtn.frame = CGRectMake(0, 0, 44, 44);
@@ -418,8 +431,24 @@
     }];
 }
 
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+     self.CoverView.hidden = YES;
+      self.socialView.hidden = YES;
+    _baseTabbarController.tabbarPanel.hidden = NO;
+}
 
+#pragma UITableViewDelegate
 
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 0;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    return cell;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

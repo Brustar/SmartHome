@@ -17,7 +17,7 @@
 - (void)setNaviBarTitle:(NSString *)strTitle;
 - (void)setNaviBarLeftBtn:(UIButton *)btn;
 - (void)setNaviBarRightBtn:(UIButton *)btn;
-
+- (void)setNaviMiddletBtn:(UIButton *)btn;
 - (void)naviBarAddCoverView:(UIView *)view;
 - (void)naviBarAddCoverViewOnTitleView:(UIView *)view;
 - (void)naviBarRemoveCoverView:(UIView *)view;

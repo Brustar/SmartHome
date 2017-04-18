@@ -118,7 +118,12 @@
         [_viewNaviBar setRightBtn:btn];
     }else{APP_ASSERT_STOP}
 }
-
+-(void)setNaviMiddletBtn:(UIButton *)btn
+{
+    if (_viewNaviBar) {
+        [_viewNaviBar setMiddleBtn:btn];
+    }else{APP_ASSERT_STOP}
+}
 - (void)naviBarAddCoverView:(UIView *)view
 {
     if (_viewNaviBar && view)
