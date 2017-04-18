@@ -35,14 +35,14 @@ static NSString * const CYPhotoId = @"photo";
 @interface IphoneDeviceListController ()<IphoneRoomViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UIViewControllerPreviewingDelegate>
 
 @property (nonatomic,assign) int selectedSId;
-@property (nonatomic,strong) NSArray *deviceSubTypes;
+
 @property (nonatomic,strong) NSArray *deviceTypes;
-@property (weak, nonatomic) IBOutlet UIView *detailView;
+
 @property (nonatomic ,strong) CYPhotoCell *cell;
 @property (nonatomic,strong) UIButton *typeSelectedBtn;
 @property (nonatomic,strong) UIButton *selectedRoomBtn;
 @property (nonatomic,strong) NSArray *rooms;
-@property (nonatomic,strong) NSArray *pics;
+
 @property (weak, nonatomic) UIViewController *currentViewController;
 @property (weak, nonatomic) IBOutlet IphoneRoomView *iphoneRoomView;
 @property (nonatomic, assign) int roomIndex;
@@ -108,13 +108,16 @@ static NSString * const CYPhotoId = @"photo";
 }
 
 - (void)rightBtnClicked:(UIButton *)btn {
-    
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    BgMusicController *bgMusicVC = [storyBoard instantiateViewControllerWithIdentifier:@"BgMusicController"];
+    Room *room = self.rooms[self.roomIndex];
+    bgMusicVC.roomID = room.rId;
+    [self.navigationController pushViewController:bgMusicVC animated:YES];
 }
 
 -(void)getUI
 {
     // 创建CollectionView
-    self.pics = @[@"catalog_1",@"catalog_2",@"catalog_3",@"catalog_4",@"catalog_5",@"catalog_6",@"catalog_7",@"catalog_8",@"catalog_9",@"catalog_10"];
     CGFloat collectionW = self.view.frame.size.width;
     CGFloat collectionH = self.view.frame.size.height-350;
     CGRect frame = CGRectMake(0, 130, collectionW, collectionH);
@@ -190,20 +193,20 @@ static NSString * const CYPhotoId = @"photo";
     {
         IphoneTVController *tVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneTVController"];
         tVC.roomID = roomID;
-        [self addViewAndVC:tVC];
+        //[self addViewAndVC:tVC];
     }else if([typeName isEqualToString:@"灯光"])
     {
         IphoneLightController * ligthVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"LightController"];
         ligthVC.roomID = roomID;
         
-        [self addViewAndVC:ligthVC];
+        //[self addViewAndVC:ligthVC];
         
     }else if([typeName isEqualToString:@"窗帘"])
     {
         CurtainController *curtainVC = [storyBoard instantiateViewControllerWithIdentifier:@"CurtainController"];
         curtainVC.roomID = roomID;
         
-        [self addViewAndVC:curtainVC];
+        //[self addViewAndVC:curtainVC];
         
         
     }else if([typeName isEqualToString:@"DVD"])
@@ -212,49 +215,49 @@ static NSString * const CYPhotoId = @"photo";
         IphoneDVDController *dvdVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneDVDController"];
         dvdVC.roomID = roomID;
         
-        [self addViewAndVC:dvdVC];
+        //[self addViewAndVC:dvdVC];
         
     }else if([typeName isEqualToString:@"FM"])
     {
         FMController *fmVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneFMController"];
         fmVC.roomID = roomID;
-        [self addViewAndVC:fmVC];
+        //[self addViewAndVC:fmVC];
         
     }else if([typeName isEqualToString:@"空调"])
     {
         IphoneAirController *airVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneAirController"];
         airVC.roomID = roomID;
-        [self addViewAndVC:airVC];
+        //[self addViewAndVC:airVC];
         
     }else if([typeName isEqualToString:@"机顶盒"]){
         IphoneNetTvController *netVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneNetTvController"];
         netVC.roomID = roomID;
         
-        [self addViewAndVC:netVC];
+        //[self addViewAndVC:netVC];
         
     }else if([typeName isEqualToString:@"摄像头"]){
         
         DeviceInfo *device = [DeviceInfo defaultManager];
         if (![device.db isEqualToString:SMART_DB]) { //体验版：老人房摄像头页面只显示一张房间图片
-            [self addViewAndVC:[self addOldmanRoomCameraImage]];
+            //[self addViewAndVC:[self addOldmanRoomCameraImage]];
             return;
         }
         
         CameraController *camerVC = [storyBoard instantiateViewControllerWithIdentifier:@"CameraController"];
         camerVC.roomID = roomID;
-        [self addViewAndVC:camerVC];
+        //[self addViewAndVC:camerVC];
         
     }else if([typeName isEqualToString:@"智能门锁"]){
         GuardController *guardVC = [storyBoard instantiateViewControllerWithIdentifier:@"GuardController"];
         guardVC.roomID = roomID;
         
-        [self addViewAndVC:guardVC];
+        //[self addViewAndVC:guardVC];
         
     }else if([typeName isEqualToString:@"幕布"]){
         ScreenCurtainController *screenCurtainVC = [storyBoard instantiateViewControllerWithIdentifier:@"ScreenCurtainController"];
         screenCurtainVC.roomID = roomID;
         
-        [self addViewAndVC:screenCurtainVC];
+       // [self addViewAndVC:screenCurtainVC];
         
         
     }else if([typeName isEqualToString:@"投影"])
@@ -262,26 +265,26 @@ static NSString * const CYPhotoId = @"photo";
         ProjectController *projectVC = [storyBoard instantiateViewControllerWithIdentifier:@"ProjectController"];
         projectVC.roomID = roomID;
         
-        [self addViewAndVC:projectVC];
+        //[self addViewAndVC:projectVC];
     }else if([typeName isEqualToString:@"功放"]){
         AmplifierController *amplifierVC = [storyBoard instantiateViewControllerWithIdentifier:@"AmplifierController"];
         amplifierVC.roomID = roomID;
-        [self addViewAndVC:amplifierVC];
+        //[self addViewAndVC:amplifierVC];
         
     }
     else if([typeName isEqualToString:@"智能推窗器"]){
         WindowSlidingController *windowSlidVC = [storyBoard instantiateViewControllerWithIdentifier:@"WindowSlidingController"];
         windowSlidVC.roomID = roomID;
-        [self addViewAndVC:windowSlidVC];
+        //[self addViewAndVC:windowSlidVC];
     }
     else if([typeName isEqualToString:@"背景音乐"]){
         BgMusicController *bgMusicVC = [storyBoard instantiateViewControllerWithIdentifier:@"BgMusicController"];
         bgMusicVC.roomID = roomID;
-        [self addViewAndVC:bgMusicVC];
+        //[self addViewAndVC:bgMusicVC];
     }else {
         PluginViewController *pluginVC = [storyBoard instantiateViewControllerWithIdentifier:@"PluginViewController"];
         pluginVC.roomID = roomID;
-        [self addViewAndVC:pluginVC];
+        //[self addViewAndVC:pluginVC];
     }
 
 }
@@ -294,19 +297,6 @@ static NSString * const CYPhotoId = @"photo";
     [vc.view addSubview:imgView];
     
     return vc;
-}
-
--(void )addViewAndVC:(UIViewController *)vc
-{
-    if (self.currentViewController != nil) {
-        [self.currentViewController.view removeFromSuperview];
-        [self.currentViewController removeFromParentViewController];
-    }
-    
-    vc.view.frame = CGRectMake(0, 0, self.detailView.bounds.size.width, self.detailView.bounds.size.height);
-    [self.detailView addSubview:vc.view];
-    [self addChildViewController:vc];
-    self.currentViewController = vc;
 }
 
 -(void)selectedRoom:(UIButton *)btn
@@ -332,7 +322,9 @@ static NSString * const CYPhotoId = @"photo";
     CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
     cell.sceneLabel.text = self.deviceTypes[indexPath.row];
     self.DeviceNameLabel.text = self.deviceTypes[indexPath.row];
-    [cell.imageView sd_setImageWithURL:nil placeholderImage:[UIImage imageNamed:[self.pics objectAtIndex:indexPath.row%10]]];
+    NSString *imgName = [NSString stringWithFormat:@"catalog_%ld",(long)indexPath.row];
+    UIImage *img = [UIImage imageNamed:imgName];
+    [cell.imageView sd_setImageWithURL:nil placeholderImage:img];
     [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];
     
     return cell;
@@ -340,7 +332,8 @@ static NSString * const CYPhotoId = @"photo";
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    Room *room = self.rooms[self.roomIndex];
+    [self goDeviceByRoomID:room.rId typeName:[self.deviceTypes objectAtIndex:indexPath.row]];
 }
 
 @end

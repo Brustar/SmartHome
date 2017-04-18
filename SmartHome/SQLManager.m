@@ -154,14 +154,14 @@
         if ([device.db isEqualToString:SMART_DB]) {
             masterID = [[DeviceInfo defaultManager] masterID];
         }
-        NSString *sql = [NSString stringWithFormat:@"SELECT typeName FROM Devices where ID = %d and masterID = '%ld'",eId,masterID];
+        NSString *sql = [NSString stringWithFormat:@"SELECT typeName,subtypeid FROM Devices where ID = %d and masterID = '%ld'",eId,masterID];
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
             typeName = [resultSet stringForColumn:@"typeName"];
-            
-            if ([self transferSubType:typeName]) {
-                typeName = [self transferSubType:typeName];
+            int typeID = [[resultSet stringForColumn:@"subtypeid"] intValue];
+            if ([self transferSubType:typeID]) {
+                typeName = [self transferSubType:typeID];
             }
         }
     }
@@ -292,13 +292,13 @@
         DeviceInfo *device = [DeviceInfo defaultManager];
         if ([device.db isEqualToString:SMART_DB]) {
             if ([self isWholeHouse:roomID]) {
-                sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where masterID = '%ld' and typeName <> 'PM2.5监测' and typeName <> '温湿度感应器' and typeName <> '动静感应器' and typeName <> '照度感应器' and typeName <> '燃气监测' and typeName <> '噪音感应器' and typeName <> '烟雾感应器' order by subTypeId,htypeID ASC",[[DeviceInfo defaultManager] masterID]];
+                sql = [NSString stringWithFormat:@"SELECT distinct typeName,subtypeid FROM Devices where masterID = '%ld' and subTypeId<>6 order by subTypeId,htypeID ASC",[[DeviceInfo defaultManager] masterID]];
             }else{
-                sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld and masterID = '%ld' and typeName <> 'PM2.5监测' and typeName <> '温湿度感应器' and typeName <> '动静感应器' and typeName <> '照度感应器' and typeName <> '燃气监测' and typeName <> '噪音感应器' and typeName <> '烟雾感应器' order by subTypeId,htypeID ASC",(long)roomID,[[DeviceInfo defaultManager] masterID]];
+                sql = [NSString stringWithFormat:@"SELECT distinct typeName,subtypeid FROM Devices where rID = %ld and masterID = '%ld' and subTypeId<>6 order by subTypeId,htypeID ASC",(long)roomID,[[DeviceInfo defaultManager] masterID]];
             }
         }else {
             
-            sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where rID = %ld and masterID = '%ld' and typeName <> 'FM' and typeName <> 'PM2.5监测' and typeName <> '温湿度感应器' and typeName <> '动静感应器' and typeName <> '照度感应器' and typeName <> '燃气监测' and typeName <> '噪音感应器' and typeName <> '烟雾感应器' order by subTypeId,htypeID ASC",(long)roomID, 255l];
+            sql = [NSString stringWithFormat:@"SELECT distinct typeName,subtypeid FROM Devices where rID = %ld and masterID = '%ld' and tsubTypeId<>6 order by subTypeId,htypeID ASC",(long)roomID, 255l];
         }
         
         FMResultSet *resultSet = [db executeQuery:sql];
@@ -307,9 +307,10 @@
         {
          
             NSString *typeName = [resultSet stringForColumn:@"typeName"];
-    
-            if ([self transferSubType:typeName]) {
-                typeName = [self transferSubType:typeName];
+            int typeID = [[resultSet stringForColumn:@"subtypeid"] intValue];
+            
+            if (typeID == 1 || typeID == 7) {
+                typeName = [self transferSubType:typeID];
             }
             
             BOOL isEqual = false;
@@ -347,8 +348,7 @@
             masterID = [[DeviceInfo defaultManager] masterID];
         }
         
-        NSString *sql = [NSString stringWithFormat:@"SELECT distinct typeName FROM Devices where masterID = '%ld'",masterID];
-        
+        NSString *sql = [NSString stringWithFormat:@"SELECT distinct typeName,subtypeID FROM Devices where masterID = '%ld'",masterID];
         
         FMResultSet *resultSet = [db executeQuery:sql];
         
@@ -356,8 +356,9 @@
         {
             
             NSString *typeName = [resultSet stringForColumn:@"typeName"];
-            if ([self transferSubType:typeName]) {
-                typeName = [self transferSubType:typeName];
+            int typeID = [[resultSet stringForColumn:@"subtypeid"] intValue];
+            if ([self transferSubType:typeID]) {
+                typeName = [self transferSubType:typeID];
             }
             
             BOOL isEqual = false;
@@ -1368,20 +1369,41 @@
 +(NSString *) getDeviceType:(NSString *)deviceID subTypeName:(NSString *)subTypeName
 {
     NSString *typeName = [self getDeviceTypeNameWithID:deviceID subTypeName:subTypeName];
-    if ([self transferSubType:typeName]) {
-        return [self transferSubType:typeName];
+    int typeID = 0;
+    FMDatabase *db = [SQLManager connetdb];
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"select subtypeid from devices where id = %@",deviceID];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if([resultSet next]){
+            typeID =  [[resultSet stringForColumn:@"subtypeid"] intValue];
+        }
     }
+    
+    [db closeOpenResultSets];
+    [db close];
+    
+    if (typeID == 1 || typeID == 7) {
+        return [self transferSubType:typeID];
+    }
+    
     return typeName;
 }
 
-#pragma mark - sqlite操作不允许有中文硬编码
-+(NSString *) transferSubType:(NSString *)typeName{
-    if ([typeName isEqualToString:@"开关灯"] || [typeName isEqualToString:@"调色灯"] || [typeName isEqualToString:@"调光灯"]) {
-        return @"灯光";
-    } else if ([typeName isEqualToString:@"开合帘"] || [typeName isEqualToString:@"卷帘"]) {
-        return @"窗帘";
++(NSString *) transferSubType:(int)typeID{
+    FMDatabase *db = [SQLManager connetdb];
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"select catalogName from catalog where id = %d",typeID];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if([resultSet next]){
+            return [resultSet stringForColumn:@"catalogName"];
+        }
     }
-    return nil;
+    
+    [db closeOpenResultSets];
+    [db close];
+    return @"";
 }
 
 + (NSArray *)getDeviceTypeNameWithRoomID:(int)roomID sceneID:(int)sceneID subTypeName:(NSString *)subTypeName
@@ -1634,15 +1656,15 @@
             masterID = [[DeviceInfo defaultManager] masterID];
         }
         
-        NSString *sql = [NSString stringWithFormat:@"SELECT DISTINCT typeName FROM Devices where subTypeName = '%@' and masterID = '%ld'", subTypeName,  masterID];
+        NSString *sql = [NSString stringWithFormat:@"SELECT DISTINCT typeName,subtypeid FROM Devices where subTypeName = '%@' and masterID = '%ld'", subTypeName,  masterID];
         
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
            NSString *typeName = [resultSet stringForColumn:@"typeName"];
-            
-            if ([self transferSubType:typeName]) {
-                [typeNames addObject:[self transferSubType:typeName]];
+            int typeID = [[resultSet stringForColumn:@"subtypeid"] intValue];
+            if ([self transferSubType:typeID]) {
+                [typeNames addObject:[self transferSubType:typeID]];
             }else {
                 [typeNames addObject:typeName];
             }
@@ -1700,9 +1722,9 @@
         NSString *sqlDevice=@"CREATE TABLE IF NOT EXISTS Devices(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"sn\" TEXT, \"birth\" DATETIME, \"guarantee\" DATETIME, \"model\" TEXT, \"price\" FLOAT, \"purchase\" DATETIME, \"producer\" TEXT, \"gua_tel\" TEXT, \"power\" INTEGER, \"current\" FLOAT, \"voltage\" INTEGER, \"protocol\" TEXT, \"rID\" INTEGER, \"eNumber\" TEXT, \"htypeID\" TEXT, \"subTypeId\" INTEGER, \"typeName\" TEXT, \"subTypeName\" TEXT, \"masterID\" TEXT, \"icon_url\" TEXT, \"camera_url\" TEXT)";
         NSString *sqlScene=@"CREATE TABLE IF NOT EXISTS \"Scenes\" (\"ID\" INT PRIMARY KEY  NOT NULL ,\"NAME\" TEXT NOT NULL ,\"roomName\" TEXT,\"pic\" TEXT DEFAULT (null) ,\"rId\" INTEGER,\"sType\" INTEGER, \"snumber\" TEXT,\"isFavorite\" BOOL,\"totalVisited\" INTEGER,\"masterID\" TEXT ,\"status\" INTEGER DEFAULT (0))";
         NSString *sqlChat = @"CREATE TABLE IF NOT EXISTS chats(\"ID\" INTEGER PRIMARY KEY  NOT NULL ,nickname varchar(20),portrait varchar(100),username varchar(20),user_id integer)";
-        //NSString *sqlExtra = @"CREATE TABLE \"Extra_states\" (\"deviceID\" INTEGER, \"temperature\" INTEGER, \"wind_direction\" INTEGER,\"wind_level\" INTEGER, \"mode\" INTEGER, \"timing\" INTEGER)";
+        NSString *sqlCatalog = @"CREATE TABLE IF NOT EXISTS catalog(\"ID\" INTEGER PRIMARY KEY  NOT NULL ,catalogName varchar(20))";
         
-        NSArray *sqls=@[sqlRoom,sqlChannel,sqlDevice,sqlScene,sqlChat];//,sqlState,sqlExtra];
+        NSArray *sqls=@[sqlRoom,sqlChannel,sqlDevice,sqlScene,sqlChat,sqlCatalog];
         //4.创表
         for (NSString *sql in sqls) {
             BOOL result=[db executeUpdate:sql];
@@ -1785,29 +1807,17 @@
         @"INSERT INTO \"Devices\" VALUES(59,'电视',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0022','13',3,'网络电视','影音',255,'',NULL);",
         @"INSERT INTO \"Devices\" VALUES(60,'影音室FM',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0023','15',3,'FM','影音',255,'',NULL);",
         @"INSERT INTO \"Devices\" VALUES(61,'背景音乐',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0024','14',3,'背景音乐','影音',255,'',NULL);",
-//        @"INSERT INTO \"Devices\" VALUES(62,'影音室投影',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0025','16',3,'投影','影音',255,'',NULL);",
-//        @"INSERT INTO \"Devices\" VALUES(63,'影音室幕布',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0026','17',3,'幕布','影音',255,'',NULL);",
+
         @"INSERT INTO \"Devices\" VALUES(38,'窗边灯带',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0001','02',1,'调光灯','照明',255,'',NULL);",
         @"INSERT INTO \"Devices\" VALUES(39,'床头灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0002','02',1,'调光灯','照明',255,'',NULL);",
-//        @"INSERT INTO \"Devices\" VALUES(40,'沙发上调光灯',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0003','02',1,'调光灯','照明',255,'',NULL);",
+
         @"INSERT INTO \"Devices\" VALUES(41,'电视',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0005','12',3,'网络电视','影音',255,'',NULL);",
-//        @"INSERT INTO \"Devices\" VALUES(42,'主卧DVD',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0006','13',3,'DVD','影音',255,'',NULL);",
-//        @"INSERT INTO \"Devices\" VALUES(43,'主卧背景音乐',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0007','14',3,'背景音乐','影音',255,'',NULL);",
-//        @"INSERT INTO \"Devices\" VALUES(44,'主卧FM',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0008','15',3,'FM','影音',255,'',NULL);",
-//        @"INSERT INTO \"Devices\" VALUES(45,'主卧机顶盒',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0009','11',3,'机顶盒','影音',255,'',NULL);",
+
         @"INSERT INTO \"Devices\" VALUES(46,'老人房空调',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0010','31',2,'空调','环境',255,'',NULL);",
-//        @"INSERT INTO \"Devices\" VALUES(47,'主卧投影',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0011','16',3,'投影','影音',255,'',NULL);",
-//        @"INSERT INTO \"Devices\" VALUES(48,'主卧幕布',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0012','17',3,'幕布','影音',255,'',NULL);",
+
         @"INSERT INTO \"Devices\" VALUES(49,'摄像头',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0013','45',4,'摄像头','安防',255,'rtsp://admin:stone123@flysun158.6655.la:8184','rtsp://admin:stone123@flysun158.6655.la:8184');",
-//        @"INSERT INTO \"Devices\" VALUES(50,'主卧纱帘',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'02BA','21',1,'开合帘','照明',255,'',NULL);",
-//        @"INSERT INTO \"Devices\" VALUES(70,'主卧智能门锁',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0033','40',4,'智能门锁','安防',255,'',NULL);",
+
         @"INSERT INTO \"Devices\" VALUES(71,'智能浇花',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,2,'0034','41',5,'智能单品','智能单品',255,'',NULL);",
-//        @"INSERT INTO \"Devices\" VALUES(100,'智能投食',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0036','41',5,'智能单品','智能单品',255,'',NULL);",
-//        @"INSERT INTO \"Devices\" VALUES(73,'主卧功放',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,4,'0014','18',3,'功放','影音',255,'',NULL);",
-        
-               
-               
-               
                
         @"INSERT INTO \"Devices\" VALUES(64,'车库温湿度感应器',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0027','50',6,'温湿度感应器','感应器',255,'',NULL);",
         @"INSERT INTO \"Devices\" VALUES(65,'车库动静感应器',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'(null)',NULL,NULL,NULL,NULL,5,'0028','51',6,'动静感应器','感应器',255,'',NULL);",
@@ -2331,6 +2341,29 @@
     [db close];
     return plists;
 }
+
++(void) writeCatalog:(int)cid name:(NSString*) cname
+{
+    FMDatabase *db = [SQLManager connetdb];
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"select * from catalog where id = %d",cid];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if([resultSet next]){
+            return;
+        }
+        NSString *catasql = [NSString stringWithFormat:@"insert into catalog values(%d,'%@')",cid,cname];
+        BOOL result = [db executeUpdate:catasql];
+        
+        if(result)
+        {
+            NSLog(@"insert 成功");
+        }else{
+            NSLog(@"insert 失败");
+        }
+    }
+}
+
 + (void) writeDevices:(NSArray *)rooms
 {
     FMDatabase *db = [SQLManager connetdb];
@@ -2351,8 +2384,10 @@
                 NSString *sql = [NSString stringWithFormat:@"insert into Devices values(%d,'%@',%@,%@,%@,%@,%@,%@,%@,'%@',%@,%@,%@,%@,%ld,'%@','%@',%@,'%@','%@','%ld','%@','%@')",[equip[@"equipment_id"] intValue],equip[@"name"],NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,(long)rId,equip[@"number"],equip[@"htype_id"],equip[@"subtype_id"],equip[@"type_name"],equip[@"subtype_name"],[[DeviceInfo defaultManager] masterID],equip[@"imgurl"],equip[@"cameraurl"]]; //cameraurl
                 
                 BOOL result = [db executeUpdate:sql];
+                
                 if(result)
                 {
+                    [self writeCatalog:[equip[@"subtype_id"] intValue] name:equip[@"subtype_name"]];
                     NSLog(@"insert 成功");
                 }else{
                     NSLog(@"insert 失败");
