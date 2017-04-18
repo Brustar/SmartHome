@@ -28,11 +28,11 @@
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rc5-hL-egz">
                         <rect key="frame" x="8" y="60" width="121.5" height="30"/>
-                        <state key="normal" image="dvd_btn_adjust_normal"/>
+                        <state key="normal" image="UP"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OFd-Kj-Hsb">
                         <rect key="frame" x="251.5" y="60" width="121.5" height="30"/>
-                        <state key="normal" image="dvd_btn_adjust_normal"/>
+                        <state key="normal" image="DOWN"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="幕布" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NBC-o1-qnC">
                         <rect key="frame" x="10" y="0.0" width="100" height="50"/>
@@ -52,7 +52,7 @@
                     </switch>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xph-53-ijS">
                         <rect key="frame" x="129.5" y="60" width="122" height="30"/>
-                        <state key="normal" image="dvd_btn_adjust_normal"/>
+                        <state key="normal" image="icon3"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4sS-Gf-IUS">
                         <rect key="frame" x="316" y="7" width="55" height="35"/>
@@ -104,8 +104,10 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="dvd_btn_adjust_normal" width="91" height="38"/>
+        <image name="DOWN" width="91" height="38"/>
+        <image name="UP" width="91" height="38"/>
         <image name="dvd_btn_switch_on" width="36" height="23"/>
         <image name="dvd_frm_choice__normal" width="336" height="47"/>
+        <image name="icon3" width="91" height="38"/>
     </resources>
 </document>

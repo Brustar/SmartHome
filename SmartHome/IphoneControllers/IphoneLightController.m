@@ -87,7 +87,7 @@
         self.tableView.tableFooterView = [self createTableFooterView];
     }
     _roomName = [SQLManager getRoomNameByRoomID:self.roomID];
-    if ([_roomName isEqualToString:@"全屋"]) {
+    if ([SQLManager isWholeHouse:_roomID]) {
         NSArray * lightArr = [SQLManager getAllDevicesInfo];
         Device * device = [[Device alloc] init];
         
@@ -184,7 +184,7 @@
         cell.roomID = self.roomID;
         cell.sceneID = self.sceneid;
         Device *device = [SQLManager getDeviceWithDeviceID:[_lightArrs[indexPath.row] intValue]];
-          if ([_roomName isEqualToString:@"全屋"]) {
+          if ([SQLManager isWholeHouse:_roomID]) {
              cell.LightNameLabel.text = _lightArrs[indexPath.row];
           }else{
                cell.LightNameLabel.text = device.name;
@@ -198,7 +198,7 @@
         //调色灯
         ColourTableViewCell *colorCell = [tableView dequeueReusableCellWithIdentifier:@"ColourTableViewCell" forIndexPath:indexPath];
         Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[indexPath.row] intValue]];
-        if ([_roomName isEqualToString:@"全屋"]) {
+        if ([SQLManager isWholeHouse:_roomID]) {
             colorCell.lable.text = _ColourLightArr[indexPath.row];
         }else{
              colorCell.lable.text = device.name;
@@ -213,7 +213,7 @@
      //开关灯
         ColourTableViewCell *colorCell = [tableView dequeueReusableCellWithIdentifier:@"ColourTableViewCell" forIndexPath:indexPath];
        Device *device = [SQLManager getDeviceWithDeviceID:[_SwitchLightArr[indexPath.row] intValue]];
-    if ([_roomName isEqualToString:@"全屋"]) {
+    if ([SQLManager isWholeHouse:_roomID]) {
         colorCell.lable.text = _SwitchLightArr[indexPath.row];
     }else{
          colorCell.lable.text = device.name;

@@ -387,7 +387,7 @@
     
     NSArray *array = [[NSArray alloc] initWithObjects:homename,[NSNumber numberWithInteger:home_id],hostbrand,host_brand_number,nil];
     
-    NSString *filePath = [docDir stringByAppendingPathComponent:@"testFile.txt"];
+    NSString *filePath = [docDir stringByAppendingPathComponent:@"gainHome.plist"];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if ([fileManager fileExistsAtPath:filePath]==NO) {
         [array writeToFile:filePath atomically:YES];

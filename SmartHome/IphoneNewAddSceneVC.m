@@ -67,7 +67,7 @@
     NSMutableArray *roomNames = [NSMutableArray array];
     
     for (NSString *subTypeStr in self.roomList) {
-        if([subTypeStr isEqualToString:@"照明"]){
+        if([subTypeStr isEqualToString:@"灯光"]){
             [roomNames addObject:subTypeStr];
         }if ([subTypeStr isEqualToString:@"影音"]) {
             [roomNames addObject:subTypeStr];
@@ -77,6 +77,8 @@
             [roomNames addObject:subTypeStr];
         }if([subTypeStr isEqualToString:@"智能单品"]){
             [roomNames addObject:subTypeStr];
+        }if ([subTypeStr isEqualToString:@"窗帘"]) {
+             [roomNames addObject:subTypeStr];
         }
     }
     self.roomView.dataArray = roomNames;

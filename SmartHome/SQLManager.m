@@ -1576,9 +1576,7 @@
         }
         return [deviceIds copy];
     }else{
-       
-
-        
+    
         return nil;
     }
     

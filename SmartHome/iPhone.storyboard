@@ -1966,21 +1966,21 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qnT-TO-NKs">
                                         <rect key="frame" x="10" y="0.0" width="118.5" height="60"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <state key="normal" title="柔和">
+                                        <state key="normal" title="柔和" image="lv_icon_light_soft">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEW-BX-OB2">
                                         <rect key="frame" x="128.5" y="0.0" width="118" height="60"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <state key="normal" title="正常" image="lightBtn.png">
+                                        <state key="normal" title="正常" image="lv_icon_light_normal">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="86f-yD-Mu1">
                                         <rect key="frame" x="246.5" y="0.0" width="118.5" height="60"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <state key="normal" title="明亮">
+                                        <state key="normal" title="明亮" image="lv_icon_light_bright">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
@@ -6470,17 +6470,19 @@
         <image name="icon_music" width="130" height="130"/>
         <image name="icon_shades" width="130" height="130"/>
         <image name="last" width="32" height="32"/>
-        <image name="lightBtn.png" width="32" height="32"/>
         <image name="line2" width="1" height="1"/>
         <image name="line_horizontal_white" width="373" height="48"/>
         <image name="logo" width="180" height="180"/>
         <image name="lv_fm_adjust_normal" width="336" height="47"/>
         <image name="lv_icon_adjust_high" width="14" height="14"/>
         <image name="lv_icon_adjust_low" width="10" height="10"/>
+        <image name="lv_icon_light_bright" width="15" height="15"/>
+        <image name="lv_icon_light_normal" width="13" height="14"/>
         <image name="lv_icon_light_on" width="32" height="32"/>
+        <image name="lv_icon_light_soft" width="10" height="13"/>
         <image name="media" width="48" height="48"/>
         <image name="next" width="32" height="32"/>
-        <image name="on" width="30" height="30"/>
+        <image name="on" width="34" height="34"/>
         <image name="pause" width="32" height="32"/>
         <image name="rewind" width="32" height="32"/>
         <image name="rightPic" width="32" height="32"/>
