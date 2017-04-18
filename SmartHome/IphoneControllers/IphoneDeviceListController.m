@@ -108,11 +108,7 @@ static NSString * const CYPhotoId = @"photo";
 }
 
 - (void)rightBtnClicked:(UIButton *)btn {
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    BgMusicController *bgMusicVC = [storyBoard instantiateViewControllerWithIdentifier:@"BgMusicController"];
-    Room *room = self.rooms[self.roomIndex];
-    bgMusicVC.roomID = room.rId;
-    [self.navigationController pushViewController:bgMusicVC animated:YES];
+    [self performSegueWithIdentifier:@"bgmusic" sender:self];
 }
 
 -(void)getUI
@@ -215,7 +211,7 @@ static NSString * const CYPhotoId = @"photo";
         netVC.roomID = roomID;
         
         [self.navigationController pushViewController:netVC animated:YES];
-    }else if([typeName isEqualToString:@"摄像头"]){  
+    }else if([typeName isEqualToString:@"摄像头"]){
         DeviceInfo *device = [DeviceInfo defaultManager];
         if (![device.db isEqualToString:SMART_DB]) { //体验版：老人房摄像头页面只显示一张房间图片
             [self.navigationController pushViewController:[self addOldmanRoomCameraImage] animated:YES];
