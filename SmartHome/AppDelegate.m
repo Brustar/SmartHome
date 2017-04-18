@@ -61,7 +61,9 @@
             LeftViewController *leftVC = [[LeftViewController alloc] init];
             self.LeftSlideVC = [[LeftSlideViewController alloc] initWithLeftView:leftVC andMainView:self.mainTabBarController];
             self.window.rootViewController = self.LeftSlideVC;
-
+            if (device.masterID == 0) {
+                device.masterID = [[[NSUserDefaults standardUserDefaults] objectForKey:@"HostID"] intValue];
+            }
         }else {
             UIViewController *vc = [secondStoryBoard instantiateViewControllerWithIdentifier:@"loginNavController"];//未登录，进入登录页面
             self.window.rootViewController = vc;

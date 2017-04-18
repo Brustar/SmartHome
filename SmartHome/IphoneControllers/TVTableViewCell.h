@@ -11,6 +11,7 @@
 @interface TVTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *TVNameLabel;
 @property (weak, nonatomic) IBOutlet UISlider *TVSlider;
+@property (weak, nonatomic) IBOutlet UISwitch *TVSwitch;
 @property (weak, nonatomic) IBOutlet UIButton *TVSwitchBtn;
 
 @end

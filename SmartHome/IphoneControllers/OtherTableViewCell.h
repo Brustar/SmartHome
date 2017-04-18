@@ -10,6 +10,6 @@
 
 @interface OtherTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *NameLabel;
-@property (weak, nonatomic) IBOutlet UIButton *SwitchBtn;
+@property (weak, nonatomic) IBOutlet UIButton *OtherSwitchBtn;
 
 @end

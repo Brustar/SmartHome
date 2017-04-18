@@ -43,7 +43,7 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D4k-av-6ph">
+                    <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D4k-av-6ph">
                         <rect key="frame" x="313" y="7" width="42" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="GWa-8T-tfU"/>
@@ -53,6 +53,17 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xph-53-ijS">
                         <rect key="frame" x="129.5" y="60" width="122" height="30"/>
                         <state key="normal" image="dvd_btn_adjust_normal"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4sS-Gf-IUS">
+                        <rect key="frame" x="316" y="7" width="55" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="55" id="Oh8-T7-gZU"/>
+                            <constraint firstAttribute="height" constant="35" id="onE-GR-Blo"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="dvd_btn_switch_on"/>
+                        <connections>
+                            <action selector="ScreenCurtainBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="WxD-y3-Sw0"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -72,6 +83,8 @@
                     <constraint firstItem="OFd-Kj-Hsb" firstAttribute="height" secondItem="rc5-hL-egz" secondAttribute="height" id="bvi-vc-2mo"/>
                     <constraint firstAttribute="trailingMargin" secondItem="OFd-Kj-Hsb" secondAttribute="trailing" id="c8v-aC-hdJ"/>
                     <constraint firstAttribute="trailing" secondItem="dHx-cQ-8iB" secondAttribute="trailing" id="cSC-z1-Vw5"/>
+                    <constraint firstAttribute="trailing" secondItem="4sS-Gf-IUS" secondAttribute="trailing" constant="10" id="clr-3g-Eds"/>
+                    <constraint firstItem="4sS-Gf-IUS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="dGW-P3-Xd9"/>
                     <constraint firstItem="dHx-cQ-8iB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="e80-iw-iAB"/>
                     <constraint firstAttribute="bottomMargin" secondItem="rc5-hL-egz" secondAttribute="bottom" constant="1.5" id="gL4-hT-wNX"/>
                     <constraint firstItem="Xph-53-ijS" firstAttribute="leading" secondItem="rc5-hL-egz" secondAttribute="trailing" id="gWk-GK-12z"/>
@@ -82,6 +95,7 @@
             <connections>
                 <outlet property="DownBtn" destination="OFd-Kj-Hsb" id="3X5-wE-E21"/>
                 <outlet property="PowerSwitch" destination="D4k-av-6ph" id="G2e-qJ-Xp0"/>
+                <outlet property="ScreenCurtainBtn" destination="4sS-Gf-IUS" id="qT1-oy-N8P"/>
                 <outlet property="ScreenCurtainLabel" destination="NBC-o1-qnC" id="XUj-dy-fdz"/>
                 <outlet property="UPBtn" destination="rc5-hL-egz" id="bs2-rU-ICR"/>
                 <outlet property="stopBtn" destination="Xph-53-ijS" id="hsu-BH-T2m"/>
@@ -91,6 +105,7 @@
     </objects>
     <resources>
         <image name="dvd_btn_adjust_normal" width="91" height="38"/>
+        <image name="dvd_btn_switch_on" width="36" height="23"/>
         <image name="dvd_frm_choice__normal" width="336" height="47"/>
     </resources>
 </document>

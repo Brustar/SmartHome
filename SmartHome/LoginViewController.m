@@ -284,37 +284,7 @@
     {
         return;
     }
-    FMDatabase *db = [SQLManager connetdb];
-    if([db open])
-    {
-        NSString *delsql=@"delete from Devices";
-        [db executeUpdate:delsql];
-        for(NSDictionary *room in rooms)
-        {
-            NSInteger rId = [room[@"room_id"] integerValue];
-            NSArray *equipmentList = room[@"equipment_list"];
-            if(equipmentList.count ==0 || equipmentList == nil)
-            {
-                continue;
-            }
-            for(NSDictionary *equip in equipmentList)
-            {
-                NSString *sql = [NSString stringWithFormat:@"insert into Devices values(%d,'%@',%@,%@,%@,%@,%@,%@,%@,'%@',%@,%@,%@,%@,%ld,'%@','%@',%@,'%@','%@','%ld','%@','%@')",[equip[@"equipment_id"] intValue],equip[@"name"],NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,(long)rId,equip[@"number"],equip[@"htype_id"],equip[@"subtype_id"],equip[@"type_name"],equip[@"subtype_name"],[[DeviceInfo defaultManager] masterID],equip[@"imgurl"],equip[@"cameraurl"]]; //cameraurl
-                
-                BOOL result = [db executeUpdate:sql];
-                if(result)
-                {
-                    NSLog(@"insert 成功");
-                }else{
-                    NSLog(@"insert 失败");
-                }
-                
-            }
-            
-        }
-        
-    }
-    [db close];
+    [SQLManager writeDevices:rooms];
 }
 
 //写房间配置信息到SQL
@@ -325,28 +295,8 @@
     {
         return;
     }
-    FMDatabase *db = [SQLManager connetdb];
-    if([db open])
-    {
-        NSString *delsql=@"delete from Rooms";
-        [db executeUpdate:delsql];
-        for(NSDictionary *roomDic in roomList)
-        {
-            if(roomDic)
-            {
-                NSString *sql = [NSString stringWithFormat:@"insert into Rooms values(%d,'%@',null,null,null,null,null,'%@',%d,null,'%ld',%d)",[roomDic[@"room_id"] intValue],roomDic[@"room_name"],roomDic[@"room_image_url"],[roomDic[@"ibeacon"] intValue],[DeviceInfo defaultManager].masterID,[roomDic[@"isaccess"] intValue]];
-                BOOL result = [db executeUpdate:sql];
-                if(result)
-                {
-                    NSLog(@"insert 成功");
-                }else{
-                    NSLog(@"insert 失败");
-                }
-                
-            }
-        }
-    }
-    [db close];
+    
+    [SQLManager writeRooms:roomList];
 }
 
 //写场景配置信息到SQL
@@ -356,42 +306,10 @@
     {
         return;
     }
-    FMDatabase *db = [SQLManager connetdb];
-    if([db open])
-    {
-        NSString *delsql=@"delete from Scenes";
-        [db executeUpdate:delsql];
-        for (NSDictionary *room in rooms) {
-            NSString *rName = room[@"room_name"];
-            int room_id = [room[@"room_id"] intValue];
-            NSArray *sceneList = room[@"scene_list"];
-            
-            for(NSDictionary *sceneInfoDic in sceneList)
-            {
-                int sId = [sceneInfoDic[@"scence_id"] intValue];
-                NSString *sName = sceneInfoDic[@"name"];
-                int isFavorite = [sceneInfoDic[@"isstore"] intValue];//是否收藏，1:已收藏 2: 未收藏
-                int sType = [sceneInfoDic[@"type"] intValue];
-                NSString *sNumber = sceneInfoDic[@"snumber"];
-                NSString *urlImage = sceneInfoDic[@"image_url"];
-                if(sceneInfoDic[@"plist_url"])
-                {
-                    NSString *urlPlist = sceneInfoDic[@"plist_url"];
-                    [self downloadPlsit:urlPlist];
-                }
-                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,'%@',%d,null,'%ld', %d)",sId,sName,rName,urlImage,room_id,sType,sNumber,isFavorite,[DeviceInfo defaultManager].masterID, 0];
-                BOOL result = [db executeUpdate:sql];
-                if(result)
-                {
-                    NSLog(@"insert 场景信息 成功");
-                }else{
-                    NSLog(@"insert 场景信息 失败");
-                }
-            }
-        }
+    NSArray *plists = [SQLManager writeScenes:rooms];
+    for (NSString *s in plists) {
+        [self downloadPlsit:s];
     }
-    
-    [db close];
 }
 
 //下载场景plist文件到本地
@@ -429,36 +347,7 @@
 //写电视频道配置信息到SQL
 -(void)writeChannelsConfigDataToSQL:(NSArray *)responseObject withParent:(NSString *)parent
 {
-    FMDatabase *db = [SQLManager connetdb];
-    if([db open])
-    {
-        for(NSDictionary *dicInfo in responseObject)
-        {
-            int eqId = [dicInfo[@"eqid"] intValue];
-            NSString *eqNumber = dicInfo[@"eqnumber"];
-            NSString *key = [NSString stringWithFormat:@"store_%@_list",parent];
-            NSArray *channelList = dicInfo[key];
-            if(channelList == nil || channelList .count == 0 )
-            {
-                return;
-            }
-            
-            for(NSDictionary *channel in channelList)
-            {
-                NSString *sql = [NSString stringWithFormat:@"insert into Channels values(%d,%d,%d,%d,'%@','%@','%@',%d,'%@','%ld')",[channel[@"channel_id"] intValue],eqId,0,[channel[@"channel_number"] intValue],channel[@"channel_name"],channel[@"image_url"],parent,1,eqNumber,[DeviceInfo defaultManager].masterID];
-                BOOL result = [db executeUpdate:sql];
-                if(result)
-                {
-                    NSLog(@"insert 成功");
-                }else{
-                    NSLog(@"insert 失败");
-                }
-                
-            }
-            
-        }
-    }
-    [db close];
+    [SQLManager writeChannels:responseObject parent:parent];
 }
 
 //获取房间配置信息
@@ -513,33 +402,7 @@
     {
         return;
     }
-    FMDatabase *db = [SQLManager connetdb];
-    if([db open])
-    {
-        NSString *delsql=@"delete from chats";
-        [db executeUpdate:delsql];
-        int i=0;
-        for (NSDictionary *user in users) {
-            
-            NSString *nickname = user[@"nickname"];
-            NSString *portrait = user[@"portrait"];
-            NSString *username = user[@"username"];
-            int user_id = [user[@"user_id"] intValue];
-            
-            NSString *sql = [NSString stringWithFormat:@"insert into chats values(%d,'%@','%@','%@',%d)",i++,nickname,portrait,username,user_id];
-            BOOL result = [db executeUpdate:sql];
-            if(result)
-            {
-                NSLog(@"insert 聊天信息 成功");
-            }else{
-                NSLog(@"insert 聊天信息 失败");
-            }
-            
-        }
-        [IOManager writeUserdefault:@(i) forKey:@"familyNum"];
-    }
-    
-    [db close];
+    [SQLManager writeChats:users];
 }
 
 #pragma mark -  http delegate

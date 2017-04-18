@@ -214,6 +214,8 @@
 		2EBABC871E839F2E0093EF3A /* DVDTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBABC851E839F2E0093EF3A /* DVDTableViewCell.m */; };
 		2EBABC881E839F2E0093EF3A /* DVDTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2EBABC861E839F2E0093EF3A /* DVDTableViewCell.xib */; };
 		2EBE210F1E497595003D53A4 /* ForgotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBE210E1E497595003D53A4 /* ForgotViewController.m */; };
+		2EC266281EA4BEAF003DC979 /* FMTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC266261EA4BEAF003DC979 /* FMTableViewCell.m */; };
+		2EC266291EA4BEAF003DC979 /* FMTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2EC266271EA4BEAF003DC979 /* FMTableViewCell.xib */; };
 		2EC45FBD1E53E2D60042CE20 /* IphoneTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC45FBC1E53E2D60042CE20 /* IphoneTabBarViewController.m */; };
 		2EC7D1D51E84CEA900284C0F /* lightBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EC7D1D41E84CEA900284C0F /* lightBtn.png */; };
 		2EC8A5901E372C51002A5042 /* IphoneDeviceLightVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC8A58F1E372C51002A5042 /* IphoneDeviceLightVC.m */; };
@@ -855,6 +857,9 @@
 		2EBABC861E839F2E0093EF3A /* DVDTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DVDTableViewCell.xib; sourceTree = "<group>"; };
 		2EBE210D1E497595003D53A4 /* ForgotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotViewController.h; sourceTree = "<group>"; };
 		2EBE210E1E497595003D53A4 /* ForgotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotViewController.m; sourceTree = "<group>"; };
+		2EC266251EA4BEAF003DC979 /* FMTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMTableViewCell.h; sourceTree = "<group>"; };
+		2EC266261EA4BEAF003DC979 /* FMTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMTableViewCell.m; sourceTree = "<group>"; };
+		2EC266271EA4BEAF003DC979 /* FMTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FMTableViewCell.xib; sourceTree = "<group>"; };
 		2EC45FBB1E53E2D60042CE20 /* IphoneTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneTabBarViewController.h; sourceTree = "<group>"; };
 		2EC45FBC1E53E2D60042CE20 /* IphoneTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneTabBarViewController.m; sourceTree = "<group>"; };
 		2EC7D1D41E84CEA900284C0F /* lightBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightBtn.png; sourceTree = "<group>"; };
@@ -2206,6 +2211,9 @@
 				2ECDCC8D1E9E3623004C68BE /* BjMusicTableViewCell.h */,
 				2ECDCC8E1E9E3623004C68BE /* BjMusicTableViewCell.m */,
 				2ECDCC8F1E9E3623004C68BE /* BjMusicTableViewCell.xib */,
+				2EC266251EA4BEAF003DC979 /* FMTableViewCell.h */,
+				2EC266261EA4BEAF003DC979 /* FMTableViewCell.m */,
+				2EC266271EA4BEAF003DC979 /* FMTableViewCell.xib */,
 			);
 			name = TableViewCell;
 			sourceTree = "<group>";
@@ -2683,6 +2691,7 @@
 				CD7DDA151E826C3B00638DB3 /* backBtn@2x.png in Resources */,
 				CDF389241E306D2400657C8B /* maintaininfo.plist in Resources */,
 				CD93E3B11E8081B0003CCAA9 /* login_line@2x.png in Resources */,
+				2EC266291EA4BEAF003DC979 /* FMTableViewCell.xib in Resources */,
 				2E925DA21E5E857D008E327B /* 8.jpg in Resources */,
 				CDFB9DF01E5DC4B600BFECCE /* DeviceTimerList.plist in Resources */,
 				0F032D5A1CC9B12700D1920D /* Assets.xcassets in Resources */,
@@ -3092,6 +3101,7 @@
 				2EB516F41E9CE3A40064B18E /* ScreenCurtainCell.m in Sources */,
 				0F91AA171CDC798700094C25 /* PrintObject.m in Sources */,
 				0F3CCF3B1D0F97B70058A320 /* CameraController.m in Sources */,
+				2EC266281EA4BEAF003DC979 /* FMTableViewCell.m in Sources */,
 				0FC0FFDA1CF577C0000F71D5 /* RealScene.m in Sources */,
 				0FA392FB1E80D2C200C00AA3 /* MHRotaryKnob.m in Sources */,
 				F6755A4F1D406552002394F3 /* ECloudTabBarController.m in Sources */,

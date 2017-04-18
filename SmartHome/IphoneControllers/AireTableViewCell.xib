@@ -64,13 +64,25 @@
                             <constraint firstAttribute="height" constant="30" id="bLH-nh-a6Q"/>
                         </constraints>
                     </slider>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dmh-EL-E3l">
+                    <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dmh-EL-E3l">
                         <rect key="frame" x="278" y="17" width="42" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="CAK-Z1-6SA"/>
                             <constraint firstAttribute="width" constant="40" id="SwM-7A-xke"/>
                         </constraints>
                     </switch>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m1O-G7-5Ud">
+                        <rect key="frame" x="273" y="15" width="55" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="55" id="Rmy-Oh-dJu"/>
+                            <constraint firstAttribute="height" constant="35" id="urB-bg-hpr"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <state key="normal" backgroundImage="dvd_btn_switch_on"/>
+                        <connections>
+                            <action selector="AireSwitchBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="BYs-sw-6TW"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Yqf-zh-nqL" firstAttribute="leading" secondItem="4Ci-ZD-g6F" secondAttribute="leading" id="6pM-LG-WPl"/>
@@ -80,12 +92,14 @@
                     <constraint firstAttribute="trailingMargin" secondItem="9yv-2g-L2p" secondAttribute="trailing" constant="20" id="Ede-RQ-T3O"/>
                     <constraint firstItem="8Ux-fc-F6y" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="50" id="Ffm-Oi-SZZ"/>
                     <constraint firstAttribute="bottomMargin" secondItem="9yv-2g-L2p" secondAttribute="bottom" constant="3" id="RXd-6o-TyL"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="m1O-G7-5Ud" secondAttribute="trailing" constant="10" id="T4f-8k-k9L"/>
                     <constraint firstAttribute="bottomMargin" secondItem="Yqf-zh-nqL" secondAttribute="bottom" constant="3" id="WeX-nR-ANx"/>
                     <constraint firstItem="4Ci-ZD-g6F" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Wga-Rc-fB3"/>
                     <constraint firstItem="0cu-aa-C0a" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="XCx-tc-oqJ"/>
                     <constraint firstItem="9yv-2g-L2p" firstAttribute="leading" secondItem="5Gp-k8-Gvg" secondAttribute="trailing" constant="8" id="ZeY-A6-dKP"/>
                     <constraint firstItem="Yqf-zh-nqL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="eMN-Yx-kSV"/>
                     <constraint firstAttribute="trailingMargin" secondItem="Dmh-EL-E3l" secondAttribute="trailing" constant="20" id="fVp-vz-IzL"/>
+                    <constraint firstItem="m1O-G7-5Ud" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="fvr-mX-kFD"/>
                     <constraint firstItem="0cu-aa-C0a" firstAttribute="top" secondItem="4Ci-ZD-g6F" secondAttribute="bottom" id="izS-El-1ZB"/>
                     <constraint firstItem="4Ci-ZD-g6F" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="kRw-rB-JO5"/>
                     <constraint firstItem="0cu-aa-C0a" firstAttribute="top" secondItem="Dmh-EL-E3l" secondAttribute="bottom" id="m4w-nI-Shl"/>
@@ -97,12 +111,14 @@
             <connections>
                 <outlet property="AireNameLabel" destination="4Ci-ZD-g6F" id="Bys-9D-LDu"/>
                 <outlet property="AireSlider" destination="9yv-2g-L2p" id="m74-0r-nHa"/>
+                <outlet property="AireSwitchBtn" destination="m1O-G7-5Ud" id="j83-HB-Tzg"/>
                 <outlet property="temperatureLabel" destination="5Gp-k8-Gvg" id="J1b-ls-SkR"/>
             </connections>
             <point key="canvasLocation" x="-322" y="46.5"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="dvd_btn_switch_on" width="36" height="23"/>
         <image name="dvd_frm_choice__normal" width="336" height="47"/>
         <image name="ktv_btn_ajt" width="269" height="20"/>
         <image name="ktv_btn_show" width="36" height="20"/>

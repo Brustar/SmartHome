@@ -14,13 +14,10 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
-//    UIImage *leftTrack = [UIImage imageNamed:@"Slider2"];
-//    [self.slider setMinimumTrackImage:leftTrack forState:UIControlStateNormal];
-//    UIImage *rightTrack = [UIImage imageNamed:@"Slider2"];
-//    [self.slider setThumbImage:[UIImage imageNamed:@"Slider4"] forState:UIControlStateNormal];
-//    [self.slider setMaximumTrackImage:rightTrack forState:UIControlStateNormal];
-    
+
+     [self.slider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
+    self.slider.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
+    self.slider.minimumTrackTintColor = [UIColor colorWithRed:253/255.0 green:254/255.0 blue:254/255.0 alpha:1];
     [self.slider addTarget:self action:@selector(dimming:) forControlEvents:UIControlEventValueChanged];
     [self.Iphoneswitch addTarget:self action:@selector(Iphoneswitch:) forControlEvents:UIControlEventValueChanged];
     

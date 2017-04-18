@@ -81,12 +81,18 @@
        [self setBtn];
 
 }
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     baseTabbarController.tabbarPanel.hidden = NO;
     baseTabbarController.tabBar.hidden = YES;
+    if (_afNetworkReachabilityManager.reachableViaWiFi) {
+        NSLog(@"WIFI: %d", _afNetworkReachabilityManager.reachableViaWiFi);
+    }
+    
+    if (_afNetworkReachabilityManager.reachableViaWWAN) {
+        NSLog(@"WWAN: %d", _afNetworkReachabilityManager.reachableViaWWAN);
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -94,12 +100,18 @@
     BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     baseTabbarController.tabbarPanel.hidden = YES;
     [[RCIM sharedRCIM] logout];
+    
+    NSInteger status = _afNetworkReachabilityManager.networkReachabilityStatus;
+    NSLog(@"NetworkReachabilityStatus: %ld", (long)status);
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setupNaviBar];
+    [self showNetStateView];
+    //开启网络状况监听器
+    [self updateInterfaceWithReachability];
     self.FourBtnView.userInteractionEnabled = YES;
     _IconeImageView.layer.masksToBounds = YES;
     _IconeImageView.layer.cornerRadius = _IconeImageView.bounds.size.height/2;
@@ -185,7 +197,58 @@
     _calenderDayLabel.text = [NSString stringWithFormat:@"%ld",day];
     [self chatConnect];
 }
-
+//处理连接改变后的情况
+- (void)updateInterfaceWithReachability
+{
+    __block FamilyHomeViewController  *blockSelf = self;
+    
+    _afNetworkReachabilityManager = [AFNetworkReachabilityManager sharedManager];
+    
+    [_afNetworkReachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        DeviceInfo *info = [DeviceInfo defaultManager];
+        if(status == AFNetworkReachabilityStatusReachableViaWWAN) //手机自带网络
+        {
+            if (info.connectState==outDoor) {
+                [blockSelf setNetState:netState_outDoor_4G];
+                NSLog(@"外出模式-4g");
+                // [self.netBarBtnItem setImage:[UIImage imageNamed:@"4g"]];
+            }
+            if (info.connectState==offLine) {
+                [blockSelf setNetState:netState_notConnect];
+                NSLog(@"离线模式");
+                //[self.netBarBtnItem setImage:[UIImage imageNamed:@"4g"]];
+            }
+        }
+        else if(status == AFNetworkReachabilityStatusReachableViaWiFi) //WIFI
+        {
+            if (info.connectState==atHome) {
+                [blockSelf setNetState:netState_atHome_WIFI];
+                NSLog(@"在家模式");
+                //[self.netBarBtnItem setImage:[UIImage imageNamed:@"atHome"]];
+                
+            }else if (info.connectState==outDoor){
+                [blockSelf setNetState:netState_atHome_4G];
+                NSLog(@"外出模式");
+                //[self.netBarBtnItem setImage:[UIImage imageNamed:@"Iphonewifi"]];
+            }else if (info.connectState==offLine) {
+                [blockSelf setNetState:netState_notConnect];
+                NSLog(@"离线模式");
+                //[self.netBarBtnItem setImage:[UIImage imageNamed:@"Iphonewifi"]];
+                
+            }
+        }else if(status == AFNetworkReachabilityStatusNotReachable){ //没有网络(断网)
+            [blockSelf setNetState:netState_notConnect];
+            NSLog(@"离线模式");
+            // [self.netBarBtnItem setImage:[UIImage imageNamed:@"breakWifi"]];
+        }else if (status == AFNetworkReachabilityStatusUnknown) { //未知网络
+            [blockSelf setNetState:netState_notConnect];
+            // [self.netBarBtnItem setImage:[UIImage imageNamed:@"breakWifi"]];
+        }
+    }];
+    
+    [_afNetworkReachabilityManager startMonitoring];//开启网络监视器；
+    
+}
 -(void) chatConnect
 {
     NSString *token = [UD objectForKey:@"rctoken"];

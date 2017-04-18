@@ -14,6 +14,17 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+
+}
+
+- (IBAction)OtherSwitchBtn:(id)sender {
+    self.OtherSwitchBtn.selected = !self.OtherSwitchBtn.selected;
+    if (self.OtherSwitchBtn.selected) {
+        [self.OtherSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+    }else{
+        
+        [self.OtherSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

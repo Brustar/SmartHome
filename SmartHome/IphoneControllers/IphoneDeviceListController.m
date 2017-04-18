@@ -6,8 +6,6 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
-
-
 #import "IphoneDeviceListController.h"
 #import "SQLManager.h"
 #import "Room.h"
@@ -30,7 +28,6 @@
 #import "BgMusicController.h"
 #import "IphoneLightController.h"
 #import "AppDelegate.h"
-//#import "IphoneDeviceLightVC.h"
 #import "CYLineLayout.h"
 #import "CYPhotoCell.h"
 
@@ -38,17 +35,18 @@ static NSString * const CYPhotoId = @"photo";
 @interface IphoneDeviceListController ()<IphoneRoomViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UIViewControllerPreviewingDelegate>
 
 @property (nonatomic,assign) int selectedSId;
-@property (nonatomic,strong) NSArray *deviceSubTypes;
+
 @property (nonatomic,strong) NSArray *deviceTypes;
-@property (weak, nonatomic) IBOutlet UIView *detailView;
+
 @property (nonatomic ,strong) CYPhotoCell *cell;
 @property (nonatomic,strong) UIButton *typeSelectedBtn;
 @property (nonatomic,strong) UIButton *selectedRoomBtn;
 @property (nonatomic,strong) NSArray *rooms;
+
 @property (weak, nonatomic) UIViewController *currentViewController;
 @property (weak, nonatomic) IBOutlet IphoneRoomView *iphoneRoomView;
 @property (nonatomic, assign) int roomIndex;
-@property (weak, nonatomic) IBOutlet IphoneRoomView *deviceTypeView;
+
 @property (nonatomic,strong)UICollectionView * FirstCollectionView;
 @property (weak, nonatomic) IBOutlet UILabel *DeviceNameLabel;
 
@@ -83,10 +81,9 @@ static NSString * const CYPhotoId = @"photo";
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self setupNaviBar];
     self.rooms = [SQLManager getAllRoomsInfo];
+    
     [self setUpRoomScrollerView];
-    [self setUpScrollerView];
-    [self setupSlideButton];
-     [self getUI];
+    [self getUI];
 }
 
 - (void)setupNaviBar {
@@ -111,7 +108,11 @@ static NSString * const CYPhotoId = @"photo";
 }
 
 - (void)rightBtnClicked:(UIButton *)btn {
-    
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    BgMusicController *bgMusicVC = [storyBoard instantiateViewControllerWithIdentifier:@"BgMusicController"];
+    Room *room = self.rooms[self.roomIndex];
+    bgMusicVC.roomID = room.rId;
+    [self.navigationController pushViewController:bgMusicVC animated:YES];
 }
 
 -(void)getUI
@@ -119,52 +120,23 @@ static NSString * const CYPhotoId = @"photo";
     // 创建CollectionView
     CGFloat collectionW = self.view.frame.size.width;
     CGFloat collectionH = self.view.frame.size.height-350;
-    CGRect frame = CGRectMake(0, 115, collectionW, collectionH);
+    CGRect frame = CGRectMake(0, 130, collectionW, collectionH);
     // 创建布局
     CYLineLayout *layout = [[CYLineLayout alloc] init];
-    layout.itemSize = CGSizeMake(collectionW-110, collectionH-20);
+    if (([UIScreen mainScreen].bounds.size.height == 568.0)) {
+        layout.itemSize = CGSizeMake(collectionW-50, collectionH-20);
+    }else{
+        layout.itemSize = CGSizeMake(collectionW-90, collectionH-20);
+    }
+    //layout.itemSize = CGSizeMake(collectionW-110, collectionH-20);
     self.FirstCollectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
     self.FirstCollectionView.backgroundColor = [UIColor clearColor];
     self.FirstCollectionView.dataSource = self;
     self.FirstCollectionView.delegate = self;
     [self.view addSubview:self.FirstCollectionView];
-    //    self.navigationController.navigationBar.hidden = YES;
-    self.automaticallyAdjustsScrollViewInsets = NO;//
+    self.automaticallyAdjustsScrollViewInsets = NO;
     // 注册
     [self.FirstCollectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CYPhotoCell class]) bundle:nil] forCellWithReuseIdentifier:CYPhotoId];
-    
-}
-- (void)setupSlideButton {
-    UIButton *menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    menuBtn.frame = CGRectMake(0, 0, 44, 44);
-    [menuBtn setImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
-    [menuBtn addTarget:self action:@selector(menuBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
-}
-
-- (void)menuBtnAction:(UIButton *)sender {
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    if (appDelegate.LeftSlideVC.closed)
-    {
-        [appDelegate.LeftSlideVC openLeftView];
-    }
-    else
-    {
-        [appDelegate.LeftSlideVC closeLeftView];
-    }
-}
-
-
--(void)setUpScrollerView
-{
-    self.deviceTypeView.dataArray = self.deviceTypes;
-
-    self.deviceTypeView.delegate = self;
-    
-    [self.deviceTypeView setSelectButton:0];
-    
-    [self iphoneRoomView:self.deviceTypeView didSelectButton:0];
 }
 
 -(void)setUpRoomScrollerView
@@ -184,34 +156,20 @@ static NSString * const CYPhotoId = @"photo";
     
     [self iphoneRoomView:self.iphoneRoomView didSelectButton:0];
 }
+
 - (void)iphoneRoomView:(UIView *)view didSelectButton:(int)index {
     if (view == self.iphoneRoomView) {
         self.roomIndex = index;
         Room *room = self.rooms[index];
         self.deviceTypes = [SQLManager deviceSubTypeByRoomId:room.rId];
-        //[self setUpScrollerView];
-        [self.FirstCollectionView reloadData];
-    } else {
         if (self.deviceTypes.count < 1) {
             [MBProgressHUD showError:@"该房间没有设备"];
-            if (self.currentViewController != nil) {
-                [self.currentViewController.view removeFromSuperview];
-                [self.currentViewController removeFromParentViewController];
-            }
             return;
         }
-        
-        [self selectedType:self.deviceTypes[index]];
-        
-        
+        [self.FirstCollectionView reloadData];
     }
 }
--(void)selectedType:(NSString *)typeName
-{
-    Room *room = self.rooms[self.roomIndex];
-    int roomID = room.rId;
-    [self goDeviceByRoomID:roomID typeName:typeName];
-}
+
 -(void)goDeviceByRoomID:(int)roomID typeName:(NSString *)typeName
 {
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -220,25 +178,18 @@ static NSString * const CYPhotoId = @"photo";
     {
         IphoneTVController *tVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneTVController"];
         tVC.roomID = roomID;
-        
-        [self addViewAndVC:tVC];
-        
+        [self.navigationController pushViewController:tVC animated:YES];
     }else if([typeName isEqualToString:@"灯光"])
     {
-//        LightController *ligthVC = [storyBoard instantiateViewControllerWithIdentifier:@"LightController"]; 
         IphoneLightController * ligthVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"LightController"];
-//        ligthVC.showLightView = NO;
         ligthVC.roomID = roomID;
-        
-        [self addViewAndVC:ligthVC];
-        
+        [self.navigationController pushViewController:ligthVC animated:YES];
     }else if([typeName isEqualToString:@"窗帘"])
     {
         CurtainController *curtainVC = [storyBoard instantiateViewControllerWithIdentifier:@"CurtainController"];
         curtainVC.roomID = roomID;
         
-        [self addViewAndVC:curtainVC];
-        
+        [self.navigationController pushViewController:curtainVC animated:YES];
         
     }else if([typeName isEqualToString:@"DVD"])
     {
@@ -246,82 +197,72 @@ static NSString * const CYPhotoId = @"photo";
         IphoneDVDController *dvdVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneDVDController"];
         dvdVC.roomID = roomID;
         
-        [self addViewAndVC:dvdVC];
-        
+        [self.navigationController pushViewController:dvdVC animated:YES];
     }else if([typeName isEqualToString:@"FM"])
     {
         FMController *fmVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneFMController"];
         fmVC.roomID = roomID;
-        [self addViewAndVC:fmVC];
         
+        [self.navigationController pushViewController:fmVC animated:YES];
     }else if([typeName isEqualToString:@"空调"])
     {
         IphoneAirController *airVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneAirController"];
         airVC.roomID = roomID;
-        [self addViewAndVC:airVC];
         
+        [self.navigationController pushViewController:airVC animated:YES];
     }else if([typeName isEqualToString:@"机顶盒"]){
         IphoneNetTvController *netVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneNetTvController"];
         netVC.roomID = roomID;
         
-        [self addViewAndVC:netVC];
-        
-    }else if([typeName isEqualToString:@"摄像头"]){
-        
+        [self.navigationController pushViewController:netVC animated:YES];
+    }else if([typeName isEqualToString:@"摄像头"]){  
         DeviceInfo *device = [DeviceInfo defaultManager];
         if (![device.db isEqualToString:SMART_DB]) { //体验版：老人房摄像头页面只显示一张房间图片
-            [self addViewAndVC:[self addOldmanRoomCameraImage]];
+            [self.navigationController pushViewController:[self addOldmanRoomCameraImage] animated:YES];
             return;
         }
         
         CameraController *camerVC = [storyBoard instantiateViewControllerWithIdentifier:@"CameraController"];
         camerVC.roomID = roomID;
-        [self addViewAndVC:camerVC];
-        
+
+        [self.navigationController pushViewController:camerVC animated:YES];
     }else if([typeName isEqualToString:@"智能门锁"]){
         GuardController *guardVC = [storyBoard instantiateViewControllerWithIdentifier:@"GuardController"];
         guardVC.roomID = roomID;
         
-        [self addViewAndVC:guardVC];
-        
+        [self.navigationController pushViewController:guardVC animated:YES];
     }else if([typeName isEqualToString:@"幕布"]){
         ScreenCurtainController *screenCurtainVC = [storyBoard instantiateViewControllerWithIdentifier:@"ScreenCurtainController"];
         screenCurtainVC.roomID = roomID;
-        
-        [self addViewAndVC:screenCurtainVC];
-        
+        [self.navigationController pushViewController:screenCurtainVC animated:YES];
         
     }else if([typeName isEqualToString:@"投影"])
     {
         ProjectController *projectVC = [storyBoard instantiateViewControllerWithIdentifier:@"ProjectController"];
         projectVC.roomID = roomID;
-        
-        [self addViewAndVC:projectVC];
+        [self.navigationController pushViewController:projectVC animated:YES];
     }else if([typeName isEqualToString:@"功放"]){
         AmplifierController *amplifierVC = [storyBoard instantiateViewControllerWithIdentifier:@"AmplifierController"];
         amplifierVC.roomID = roomID;
-        [self addViewAndVC:amplifierVC];
         
+        [self.navigationController pushViewController:amplifierVC animated:YES];
     }
     else if([typeName isEqualToString:@"智能推窗器"]){
         WindowSlidingController *windowSlidVC = [storyBoard instantiateViewControllerWithIdentifier:@"WindowSlidingController"];
         windowSlidVC.roomID = roomID;
-        [self addViewAndVC:windowSlidVC];
+        
+        [self.navigationController pushViewController:windowSlidVC animated:YES];
     }
     else if([typeName isEqualToString:@"背景音乐"]){
         BgMusicController *bgMusicVC = [storyBoard instantiateViewControllerWithIdentifier:@"BgMusicController"];
         bgMusicVC.roomID = roomID;
-        [self addViewAndVC:bgMusicVC];
         
+        [self.navigationController pushViewController:bgMusicVC animated:YES];
     }else {
-
         PluginViewController *pluginVC = [storyBoard instantiateViewControllerWithIdentifier:@"PluginViewController"];
         pluginVC.roomID = roomID;
-
-//        GuardController *guardVC = [storyBoard instantiateViewControllerWithIdentifier:@"GuardController"];
-//        guardVC.roomID = roomID;
         
-        [self addViewAndVC:pluginVC];
+        [self.navigationController pushViewController:pluginVC animated:YES];
     }
 
 }
@@ -336,29 +277,13 @@ static NSString * const CYPhotoId = @"photo";
     return vc;
 }
 
--(void )addViewAndVC:(UIViewController *)vc
-{
-    if (self.currentViewController != nil) {
-        [self.currentViewController.view removeFromSuperview];
-        [self.currentViewController removeFromParentViewController];
-    }
-    
-    vc.view.frame = CGRectMake(0, 0, self.detailView.bounds.size.width, self.detailView.bounds.size.height);
-    [self.detailView addSubview:vc.view];
-    [self addChildViewController:vc];
-    self.currentViewController = vc;
-}
-
 -(void)selectedRoom:(UIButton *)btn
 {
     self.selectedRoomBtn.selected = NO;
     btn.selected = YES;
     self.selectedRoomBtn = btn;
     [self.selectedRoomBtn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
-    self.deviceTypes = [SQLManager deviceSubTypeByRoomId:btn.tag]
-    ;
-    
-    [self setUpScrollerView];
+    self.deviceTypes = [SQLManager deviceSubTypeByRoomId:btn.tag];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -375,7 +300,9 @@ static NSString * const CYPhotoId = @"photo";
     CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
     cell.sceneLabel.text = self.deviceTypes[indexPath.row];
     self.DeviceNameLabel.text = self.deviceTypes[indexPath.row];
-    [cell.imageView sd_setImageWithURL:nil placeholderImage:[UIImage imageNamed:@"main"]];
+    NSString *imgName = [NSString stringWithFormat:@"catalog_%ld",(long)indexPath.row];
+    UIImage *img = [UIImage imageNamed:imgName];
+    [cell.imageView sd_setImageWithURL:nil placeholderImage:img];
     [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];
     
     return cell;
@@ -383,7 +310,8 @@ static NSString * const CYPhotoId = @"photo";
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    Room *room = self.rooms[self.roomIndex];
+    [self goDeviceByRoomID:room.rId typeName:[self.deviceTypes objectAtIndex:indexPath.row]];
 }
 
 @end
