@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -26,10 +27,10 @@
             </objects>
             <point key="canvasLocation" x="-2068" y="-268"/>
         </scene>
-        <!--九号大院-->
+        <!--Index-->
         <scene sceneID="0aV-ZG-zlz">
             <objects>
-                <viewController storyboardIdentifier="devicesController" id="nUk-gN-3oy" customClass="IphoneDeviceListController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="devicesController" id="nUk-gN-3oy" userLabel="Index" customClass="IphoneDeviceListController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gbA-W3-z1w"/>
                         <viewControllerLayoutGuide type="bottom" id="Gf8-TD-Xz9"/>
@@ -45,11 +46,11 @@
                                 <rect key="frame" x="157" y="579" width="100" height="57"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1I4-b3-Qth" userLabel="LButton">
-                                        <rect key="frame" x="6.6666666666666572" y="0.0" width="27" height="57"/>
+                                        <rect key="frame" x="7" y="0.0" width="27" height="57"/>
                                         <state key="normal" image="device_on"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V7I-o7-sA0" userLabel="RButton">
-                                        <rect key="frame" x="66" y="0.0" width="28" height="57"/>
+                                        <rect key="frame" x="67" y="0.0" width="28" height="57"/>
                                         <state key="normal" image="clock_white"/>
                                     </button>
                                 </subviews>
@@ -107,19 +108,151 @@
                     <connections>
                         <outlet property="DeviceNameLabel" destination="HID-aO-r7h" id="FPh-g9-wzM"/>
                         <outlet property="iphoneRoomView" destination="kRY-Ap-2vQ" id="lX2-nN-XBc"/>
+                        <segue destination="3WJ-Xx-j8F" kind="show" identifier="bgmusic" id="H04-Wv-Pdj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fWq-Vo-1ts" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1298.4000000000001" y="-266.71664167916043"/>
         </scene>
+        <!--BGMusic-->
+        <scene sceneID="iVx-En-hgr">
+            <objects>
+                <viewController id="3WJ-Xx-j8F" userLabel="BGMusic" customClass="BgMusicController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bWa-hy-6kj"/>
+                        <viewControllerLayoutGuide type="bottom" id="SK9-QX-auL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Wt4-9B-3Md">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="V5i-h9-pg4">
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nas-3f-VDd" userLabel="Button_repeat">
+                                <rect key="frame" x="20" y="70" width="61" height="60"/>
+                                <state key="normal" image="mode_button"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wir-ch-GS4" userLabel="Button_shuffle">
+                                <rect key="frame" x="333" y="70" width="61" height="60"/>
+                                <state key="normal" image="mode_button"/>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shuffle_white" translatesAutoresizingMaskIntoConstraints="NO" id="l1p-qN-tl9">
+                                <rect key="frame" x="357" y="92" width="13" height="10"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="repeat_white" translatesAutoresizingMaskIntoConstraints="NO" id="BUQ-ei-5sE">
+                                <rect key="frame" x="45" y="91" width="12" height="12"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disk" translatesAutoresizingMaskIntoConstraints="NO" id="ppE-xr-BIY">
+                                <rect key="frame" x="44" y="165" width="326" height="326"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stylus" translatesAutoresizingMaskIntoConstraints="NO" id="eNc-XU-aF9">
+                                <rect key="frame" x="246" y="215" width="43" height="166"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_banner" translatesAutoresizingMaskIntoConstraints="NO" id="vAe-Qd-8DW">
+                                <rect key="frame" x="20" y="599" width="374" height="47"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="control_banner" translatesAutoresizingMaskIntoConstraints="NO" id="sVV-IE-K2n">
+                                <rect key="frame" x="20" y="666" width="374" height="60"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_low" translatesAutoresizingMaskIntoConstraints="NO" id="Z1H-En-stj">
+                                <rect key="frame" x="35" y="616" width="10" height="8"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_hight" translatesAutoresizingMaskIntoConstraints="NO" id="OGY-zp-fiZ">
+                                <rect key="frame" x="362" y="615" width="12" height="10"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fKF-pW-e6s">
+                                <rect key="frame" x="30" y="673" width="103" height="47"/>
+                                <state key="normal" image="control_button"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1xc-iO-7Dh">
+                                <rect key="frame" x="281" y="673" width="103" height="47"/>
+                                <state key="normal" image="control_button"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rvx-d6-XTw">
+                                <rect key="frame" x="184" y="673" width="46" height="46"/>
+                                <state key="normal" image="music_button_off"/>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music_previous_white" translatesAutoresizingMaskIntoConstraints="NO" id="rhs-2J-bIM">
+                                <rect key="frame" x="72" y="692" width="19" height="10"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music_next_white" translatesAutoresizingMaskIntoConstraints="NO" id="D8n-J0-bXB">
+                                <rect key="frame" x="323" y="692" width="19" height="10"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button_thumb" translatesAutoresizingMaskIntoConstraints="NO" id="PRK-uR-f49">
+                                <rect key="frame" x="192" y="607" width="31" height="32"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="SK9-QX-auL" firstAttribute="top" secondItem="V5i-h9-pg4" secondAttribute="bottom" id="1x7-y6-Xxf"/>
+                            <constraint firstItem="vAe-Qd-8DW" firstAttribute="leading" secondItem="Wt4-9B-3Md" secondAttribute="leadingMargin" id="5OV-sA-eEJ"/>
+                            <constraint firstItem="1xc-iO-7Dh" firstAttribute="centerY" secondItem="sVV-IE-K2n" secondAttribute="centerY" id="CFZ-dQ-osj"/>
+                            <constraint firstItem="wir-ch-GS4" firstAttribute="top" secondItem="bWa-hy-6kj" secondAttribute="bottom" constant="50" id="Dbo-5G-acl"/>
+                            <constraint firstItem="eNc-XU-aF9" firstAttribute="centerX" secondItem="ppE-xr-BIY" secondAttribute="centerX" constant="60" id="EdD-rq-vVu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="vAe-Qd-8DW" secondAttribute="trailing" id="Eh9-v6-i9L"/>
+                            <constraint firstItem="OGY-zp-fiZ" firstAttribute="trailing" secondItem="vAe-Qd-8DW" secondAttribute="trailing" constant="-20" id="I5p-kx-p5l"/>
+                            <constraint firstItem="vAe-Qd-8DW" firstAttribute="centerX" secondItem="ppE-xr-BIY" secondAttribute="centerX" id="KUD-d4-9Gf"/>
+                            <constraint firstItem="V5i-h9-pg4" firstAttribute="top" secondItem="bWa-hy-6kj" secondAttribute="bottom" id="M4G-YN-X0c"/>
+                            <constraint firstItem="sVV-IE-K2n" firstAttribute="leading" secondItem="Wt4-9B-3Md" secondAttribute="leadingMargin" id="MI6-Th-k4a"/>
+                            <constraint firstItem="rhs-2J-bIM" firstAttribute="centerX" secondItem="fKF-pW-e6s" secondAttribute="centerX" id="Oib-ep-niH"/>
+                            <constraint firstItem="fKF-pW-e6s" firstAttribute="centerY" secondItem="sVV-IE-K2n" secondAttribute="centerY" id="OzV-Bi-CX6"/>
+                            <constraint firstItem="eNc-XU-aF9" firstAttribute="centerY" secondItem="ppE-xr-BIY" secondAttribute="centerY" constant="-30" id="P1n-38-MFS"/>
+                            <constraint firstItem="sVV-IE-K2n" firstAttribute="top" secondItem="vAe-Qd-8DW" secondAttribute="bottom" constant="20" id="QRL-en-aNO"/>
+                            <constraint firstItem="V5i-h9-pg4" firstAttribute="leading" secondItem="Wt4-9B-3Md" secondAttribute="leading" id="SsT-lG-ynY"/>
+                            <constraint firstAttribute="trailing" secondItem="V5i-h9-pg4" secondAttribute="trailing" id="T7b-z8-mPs"/>
+                            <constraint firstItem="Nas-3f-VDd" firstAttribute="top" secondItem="bWa-hy-6kj" secondAttribute="bottom" constant="50" id="TfJ-a1-gzf"/>
+                            <constraint firstItem="Z1H-En-stj" firstAttribute="centerY" secondItem="vAe-Qd-8DW" secondAttribute="centerY" constant="-3" id="VlC-6i-cnb"/>
+                            <constraint firstItem="BUQ-ei-5sE" firstAttribute="centerX" secondItem="Nas-3f-VDd" secondAttribute="centerX" id="WO3-gI-kqi"/>
+                            <constraint firstItem="Z1H-En-stj" firstAttribute="leading" secondItem="vAe-Qd-8DW" secondAttribute="leading" constant="15" id="Xvz-ye-gQK"/>
+                            <constraint firstItem="D8n-J0-bXB" firstAttribute="centerX" secondItem="1xc-iO-7Dh" secondAttribute="centerX" id="Xz7-xE-vcx"/>
+                            <constraint firstItem="sVV-IE-K2n" firstAttribute="centerX" secondItem="V5i-h9-pg4" secondAttribute="centerX" id="Z55-Ea-KL6"/>
+                            <constraint firstItem="rhs-2J-bIM" firstAttribute="centerY" secondItem="fKF-pW-e6s" secondAttribute="centerY" id="azL-B7-mQW"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sVV-IE-K2n" secondAttribute="trailing" id="cUu-Xe-TDg"/>
+                            <constraint firstItem="BUQ-ei-5sE" firstAttribute="centerY" secondItem="Nas-3f-VDd" secondAttribute="centerY" constant="-3" id="eRZ-Tb-bBf"/>
+                            <constraint firstItem="Rvx-d6-XTw" firstAttribute="centerY" secondItem="sVV-IE-K2n" secondAttribute="centerY" id="epM-CL-RQv"/>
+                            <constraint firstItem="fKF-pW-e6s" firstAttribute="leading" secondItem="sVV-IE-K2n" secondAttribute="leading" constant="10" id="ey1-Wg-feq"/>
+                            <constraint firstItem="l1p-qN-tl9" firstAttribute="centerX" secondItem="wir-ch-GS4" secondAttribute="centerX" id="fBK-Ob-lfI"/>
+                            <constraint firstItem="l1p-qN-tl9" firstAttribute="centerY" secondItem="wir-ch-GS4" secondAttribute="centerY" constant="-3" id="gPA-hF-1mK"/>
+                            <constraint firstItem="D8n-J0-bXB" firstAttribute="centerY" secondItem="1xc-iO-7Dh" secondAttribute="centerY" id="hLG-Nd-gac"/>
+                            <constraint firstItem="OGY-zp-fiZ" firstAttribute="centerY" secondItem="vAe-Qd-8DW" secondAttribute="centerY" constant="-3" id="ic3-q2-onJ"/>
+                            <constraint firstItem="ppE-xr-BIY" firstAttribute="centerY" secondItem="V5i-h9-pg4" secondAttribute="centerY" constant="-50" id="jKu-cK-MyT"/>
+                            <constraint firstItem="Nas-3f-VDd" firstAttribute="leading" secondItem="Wt4-9B-3Md" secondAttribute="leadingMargin" id="kv2-9g-bJg"/>
+                            <constraint firstItem="PRK-uR-f49" firstAttribute="centerX" secondItem="vAe-Qd-8DW" secondAttribute="centerX" id="m5G-5a-LFr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="wir-ch-GS4" secondAttribute="trailing" id="owA-pa-2pN"/>
+                            <constraint firstItem="PRK-uR-f49" firstAttribute="centerY" secondItem="vAe-Qd-8DW" secondAttribute="centerY" id="pZA-Oh-oKm"/>
+                            <constraint firstItem="Rvx-d6-XTw" firstAttribute="centerX" secondItem="sVV-IE-K2n" secondAttribute="centerX" id="qzb-u1-YR9"/>
+                            <constraint firstItem="SK9-QX-auL" firstAttribute="top" secondItem="sVV-IE-K2n" secondAttribute="bottom" constant="10" id="u1K-LI-xWx"/>
+                            <constraint firstItem="1xc-iO-7Dh" firstAttribute="trailing" secondItem="sVV-IE-K2n" secondAttribute="trailing" constant="-10" id="xVc-Tc-czQ"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DvJ-3z-Rl3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-523.1884057971015" y="-267.39130434782612"/>
+        </scene>
     </scenes>
     <resources>
         <image name="background" width="414" height="736"/>
         <image name="bgmusic" width="22" height="19"/>
+        <image name="button_thumb" width="31" height="32"/>
         <image name="clock_white" width="28" height="28"/>
+        <image name="control_banner" width="338" height="60"/>
+        <image name="control_button" width="103" height="47"/>
         <image name="device_on" width="27" height="28"/>
+        <image name="disk" width="326" height="326"/>
         <image name="leftMenu" width="25" height="18"/>
         <image name="line_horizontal_white" width="414" height="53"/>
+        <image name="mode_button" width="61" height="60"/>
+        <image name="music_button_off" width="46" height="46"/>
+        <image name="music_next_white" width="19" height="10"/>
+        <image name="music_previous_white" width="19" height="10"/>
+        <image name="repeat_white" width="12" height="12"/>
+        <image name="shuffle_white" width="13" height="10"/>
+        <image name="stylus" width="43" height="166"/>
+        <image name="voice_banner" width="335" height="47"/>
+        <image name="voice_hight" width="12" height="10"/>
+        <image name="voice_low" width="10" height="8"/>
     </resources>
 </document>

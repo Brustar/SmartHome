@@ -61,6 +61,7 @@
     return [deviceModels copy];
 
 }
+
 +(NSString *)deviceNameByDeviceID:(int)eId
 {
     FMDatabase *db = [self connetdb];
@@ -69,14 +70,12 @@
     {
         NSString *sql = nil;
       
-    DeviceInfo *device = [DeviceInfo defaultManager];
-    if ([device.db isEqualToString:SMART_DB]) {
-        sql = [NSString stringWithFormat:@"SELECT NAME FROM Devices where ID = %d and masterID = '%ld'",eId,[[DeviceInfo defaultManager] masterID]];
-    }else {
-        sql = [NSString stringWithFormat:@"SELECT NAME FROM Devices where ID = %d and masterID = '%ld'",eId, 255l];
-    }
-        
-        
+        DeviceInfo *device = [DeviceInfo defaultManager];
+        if ([device.db isEqualToString:SMART_DB]) {
+            sql = [NSString stringWithFormat:@"SELECT NAME FROM Devices where ID = %d and masterID = '%ld'",eId,[[DeviceInfo defaultManager] masterID]];
+        }else {
+            sql = [NSString stringWithFormat:@"SELECT NAME FROM Devices where ID = %d and masterID = '%ld'",eId, 255l];
+        }
        
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])

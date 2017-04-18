@@ -5,6 +5,7 @@
 //  Created by Brustar on 16/6/21.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
+#include "CustomNaviBarView.h"
 
 #define BLUETOOTH_MUSIC false
 
@@ -18,6 +19,8 @@
 @property (nonatomic, assign) NSInteger playState;//播放状态： 0:停止 1:播放
 
 @property (weak, nonatomic) IBOutlet UISwitch *musicSwitch;
+@property (nonatomic, readonly) CustomNaviBarView *viewNaviBar;
+
 - (IBAction)musicSwitchChanged:(id)sender;
 
 @end

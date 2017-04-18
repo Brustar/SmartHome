@@ -108,11 +108,7 @@ static NSString * const CYPhotoId = @"photo";
 }
 
 - (void)rightBtnClicked:(UIButton *)btn {
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    BgMusicController *bgMusicVC = [storyBoard instantiateViewControllerWithIdentifier:@"BgMusicController"];
-    Room *room = self.rooms[self.roomIndex];
-    bgMusicVC.roomID = room.rId;
-    [self.navigationController pushViewController:bgMusicVC animated:YES];
+    [self performSegueWithIdentifier:@"bgmusic" sender:self];
 }
 
 -(void)getUI
