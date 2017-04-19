@@ -138,6 +138,8 @@
 		0FEE12771D20C53400811947 /* TXHRrettyRuler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEE12741D20C53400811947 /* TXHRrettyRuler.m */; };
 		0FF410DA1CDAE67100C7F4A1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410D91CDAE67100C7F4A1 /* CoreLocation.framework */; };
 		0FF410DC1CDAF76300C7F4A1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410DB1CDAF76300C7F4A1 /* CoreBluetooth.framework */; };
+		0FF5CD591EA769D70027E2DC /* ContextMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF5CD571EA769D70027E2DC /* ContextMenuCell.m */; };
+		0FF5CD5A1EA769D70027E2DC /* ContextMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FF5CD581EA769D70027E2DC /* ContextMenuCell.xib */; };
 		0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7B0B51D1380BF003C2D52 /* AirController.m */; };
 		0FF92B661D9224640098DD54 /* TVChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF92B651D9224640098DD54 /* TVChannel.m */; };
 		2E0297271E4C4C7600BBC520 /* MySubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0297261E4C4C7600BBC520 /* MySubView.m */; };
@@ -159,6 +161,8 @@
 		2E63280B1E03C993000D7BE9 /* IPhoneSceneDVDVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E63280A1E03C993000D7BE9 /* IPhoneSceneDVDVC.m */; };
 		2E63280E1E03CB06000D7BE9 /* IPhoneTVVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E63280D1E03CB06000D7BE9 /* IPhoneTVVC.m */; };
 		2E6328111E03CE4B000D7BE9 /* IPhoneNetVV.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6328101E03CE4B000D7BE9 /* IPhoneNetVV.m */; };
+		2E6A065B1EA743B50022B681 /* NewColourCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6A06591EA743B50022B681 /* NewColourCell.m */; };
+		2E6A065C1EA743B50022B681 /* NewColourCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E6A065A1EA743B50022B681 /* NewColourCell.xib */; };
 		2E6CEDBF1DE5DE8B000979BE /* DetailMSGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CEDBE1DE5DE8B000979BE /* DetailMSGViewController.m */; };
 		2E7B64B81E9B3188001F7469 /* IphoneNewAddSceneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B64B71E9B3188001F7469 /* IphoneNewAddSceneCell.m */; };
 		2E7B64BF1E9B6796001F7469 /* IphoneNewAddSceneTimerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B64BE1E9B6796001F7469 /* IphoneNewAddSceneTimerVC.m */; };
@@ -740,6 +744,9 @@
 		0FEE12751D20C53400811947 /* TXHRrettyRuler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TXHRrettyRuler.h; path = PrettyRuler/TXHRrettyRuler.h; sourceTree = SOURCE_ROOT; };
 		0FF410D91CDAE67100C7F4A1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0FF410DB1CDAF76300C7F4A1 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		0FF5CD561EA769D70027E2DC /* ContextMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextMenuCell.h; sourceTree = "<group>"; };
+		0FF5CD571EA769D70027E2DC /* ContextMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextMenuCell.m; sourceTree = "<group>"; };
+		0FF5CD581EA769D70027E2DC /* ContextMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContextMenuCell.xib; sourceTree = "<group>"; };
 		0FF7B0B41D1380BF003C2D52 /* AirController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirController.h; sourceTree = "<group>"; };
 		0FF7B0B51D1380BF003C2D52 /* AirController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirController.m; sourceTree = "<group>"; };
 		0FF92B631D9222220098DD54 /* SQLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLManager.h; sourceTree = "<group>"; };
@@ -775,6 +782,9 @@
 		2E63280D1E03CB06000D7BE9 /* IPhoneTVVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPhoneTVVC.m; sourceTree = "<group>"; };
 		2E63280F1E03CE4B000D7BE9 /* IPhoneNetVV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPhoneNetVV.h; sourceTree = "<group>"; };
 		2E6328101E03CE4B000D7BE9 /* IPhoneNetVV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPhoneNetVV.m; sourceTree = "<group>"; };
+		2E6A06581EA743B50022B681 /* NewColourCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewColourCell.h; sourceTree = "<group>"; };
+		2E6A06591EA743B50022B681 /* NewColourCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewColourCell.m; sourceTree = "<group>"; };
+		2E6A065A1EA743B50022B681 /* NewColourCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewColourCell.xib; sourceTree = "<group>"; };
 		2E6CEDBD1DE5DE8B000979BE /* DetailMSGViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailMSGViewController.h; sourceTree = "<group>"; };
 		2E6CEDBE1DE5DE8B000979BE /* DetailMSGViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailMSGViewController.m; sourceTree = "<group>"; };
 		2E7B64B61E9B3188001F7469 /* IphoneNewAddSceneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneNewAddSceneCell.h; sourceTree = "<group>"; };
@@ -1820,6 +1830,7 @@
 		0F6ADFDA1E71343600BFF67F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0FF5CD4E1EA7695E0027E2DC /* Devices */,
 				CDEC868F1E9A1CBB009EC245 /* FamilyViewController */,
 				CD7863B41E8CF13A00F42AC0 /* MyInfoViewController */,
 				CD7DDA101E825E3E00638DB3 /* RegistViewController */,
@@ -2015,6 +2026,16 @@
 				0FDB34431E79269500DA53BB /* LayerUtil.m */,
 			);
 			name = Geometry;
+			sourceTree = "<group>";
+		};
+		0FF5CD4E1EA7695E0027E2DC /* Devices */ = {
+			isa = PBXGroup;
+			children = (
+				0FF5CD561EA769D70027E2DC /* ContextMenuCell.h */,
+				0FF5CD571EA769D70027E2DC /* ContextMenuCell.m */,
+				0FF5CD581EA769D70027E2DC /* ContextMenuCell.xib */,
+			);
+			name = Devices;
 			sourceTree = "<group>";
 		};
 		2E12CC131E7FC00A00C7D006 /* SceneViewController */ = {
@@ -2220,6 +2241,9 @@
 				2EC266251EA4BEAF003DC979 /* FMTableViewCell.h */,
 				2EC266261EA4BEAF003DC979 /* FMTableViewCell.m */,
 				2EC266271EA4BEAF003DC979 /* FMTableViewCell.xib */,
+				2E6A06581EA743B50022B681 /* NewColourCell.h */,
+				2E6A06591EA743B50022B681 /* NewColourCell.m */,
+				2E6A065A1EA743B50022B681 /* NewColourCell.xib */,
 			);
 			name = TableViewCell;
 			sourceTree = "<group>";
@@ -2550,7 +2574,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0F032D771CC9B12700D1920D /* Build configuration list for PBXNativeTarget "SmartHome" */;
 			buildPhases = (
-				A6AA72E81750E5551DB3BF43 /* 📦 Check Pods Manifest.lock */,
+				A6AA72E81750E5551DB3BF43 /* [CP] Check Pods Manifest.lock */,
 				7111AFB52FC0151747BC17C8 /* [CP] Check Pods Manifest.lock */,
 				201F0249AEAB68444741EA3D /* [CP] Check Pods Manifest.lock */,
 				CAA59AA0339CA487ED75EDCC /* [CP] Check Pods Manifest.lock */,
@@ -2707,6 +2731,7 @@
 				0F032D5A1CC9B12700D1920D /* Assets.xcassets in Resources */,
 				CDF3892C1E30B86500657C8B /* msgList.plist in Resources */,
 				2E925DA71E5E857D008E327B /* all_8.jpg in Resources */,
+				2E6A065C1EA743B50022B681 /* NewColourCell.xib in Resources */,
 				0F49CB7D1E7A204300D46ECC /* MyInfo-iPad.storyboard in Resources */,
 				CD78A8321E337C1600060466 /* 255_216.plist in Resources */,
 				CDF389321E30EA8900657C8B /* hostUserList.plist in Resources */,
@@ -2751,6 +2776,7 @@
 				CDF78C5A1E9CC3C500F8B20C /* NaviBarBg.png in Resources */,
 				CDF1574F1E7AB2AF00499AC5 /* icon_tabbar_mine@2x.png in Resources */,
 				2EE1196C1E80D6B900F6FCB6 /* shanchu.png in Resources */,
+				0FF5CD5A1EA769D70027E2DC /* ContextMenuCell.xib in Resources */,
 				CD93E3AF1E807CC2003CCAA9 /* login_bg@2x.png in Resources */,
 				2EE1196F1E81374A00F6FCB6 /* kaiqi.png in Resources */,
 				2EBABC791E8360FB0093EF3A /* TVTableViewCell.xib in Resources */,
@@ -2994,14 +3020,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		A6AA72E81750E5551DB3BF43 /* 📦 Check Pods Manifest.lock */ = {
+		A6AA72E81750E5551DB3BF43 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3056,6 +3082,7 @@
 				F64EF7FB1D8FB738003C1C48 /* IphoneMainController.m in Sources */,
 				CDFB9DF81E641F8E00BFECCE /* DeviceTimerInfo.m in Sources */,
 				0FCFB38F1CF293B300B37DD3 /* Radio.m in Sources */,
+				2E6A065B1EA743B50022B681 /* NewColourCell.m in Sources */,
 				CD5134371E8D07FD00C2EDAF /* Goods.m in Sources */,
 				CD93E3AA1E8077F1003CCAA9 /* LoginViewController.m in Sources */,
 				F618963B1D87B08300DBE6CD /* ProjectController.m in Sources */,
@@ -3157,6 +3184,7 @@
 				F62CD87A1D94BE99001C66CE /* IphoneTVController.m in Sources */,
 				F62CFA411DAC699D006410F7 /* IphoneTypeView.m in Sources */,
 				0F1F3BCA1D2B85EA00B2641C /* MBProgressHUD+NJ.m in Sources */,
+				0FF5CD591EA769D70027E2DC /* ContextMenuCell.m in Sources */,
 				F625A61B1D4C99EC00B696E5 /* RoomListController.m in Sources */,
 				CDF157411E7AADC700499AC5 /* LeftSlideViewController.m in Sources */,
 				2EA897AC1E31B25E002CA904 /* YZNavigationMenuView.m in Sources */,

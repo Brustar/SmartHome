@@ -11,12 +11,15 @@
 #import "Device.h"
 #import "Aircon.h"
 
-#define DIMMER @"调光灯"
-#define CURTAINS @"开合帘"
-#define LightDevice @"照明"
-#define AirDevice @"空调"
-#define ColourLight @"调色灯"
-#define OffOrOnLight @"开关灯" 
+#define SWITCHLIGHT_SUB_TYPE @"01"
+#define DIMMER_SUB_TYPE @"02"
+#define COLORLIGHT_SUB_TYPE @"03"
+
+#define CURTAINS_SUB_TYPE @"21"
+#define AIR_SUB_TYPE @"31"
+
+#define LIGHT_DEVICE_TYPE @"1"
+#define CURTAIN_DEVICE_TYPE @"7"
 
 @interface SQLManager : NSObject
 
@@ -33,6 +36,9 @@
 //根据roomID 从Devices 表 查询出 subTypeName字段(可能有重复数据，要去重)
 + (NSArray *)getDevicesSubTypeNamesWithRoomID:(int)roomID;
 
+//根据roomID和subTypeName字段 从Devices 表 查询出 htypeID字段(可能有重复数据，要去重)
++ (NSArray *)getDevicesIDWithRoomID:(int)roomID SubTypeName:(NSString *)subTypeName;
+
 //根据subTypeName 从Devices表 查询typeName(要去重)
 + (NSArray *)getDeviceTypeNameWithSubTypeName:(NSString *)subTypeName;
 //根据房间ID得到房间所有的调色灯
@@ -42,6 +48,8 @@
 
 //根据设备ID获取设备名称
 +(NSString *)deviceNameByDeviceID:(int)eId;
+//根据设备ID获取设备htypeID
++(NSInteger)deviceHtypeIDByDeviceID:(int)eId;
 //根据设备名字查找设备ID
 +(NSInteger)deviceIDByDeviceName:(NSString *)deviceName;
 //根据设备ID查到摄像头的URl
@@ -111,7 +119,7 @@
 +(void)initSQlite;
 +(void)initDemoSQlite;
 //根据房间ID找调光灯
-+ (NSArray *)getDeviceByRoom:(int) roomID;
++ (NSArray *)getDimmerByRoom:(int) roomID;
 //根据房间ID找开合帘
 + (NSArray *)getCurtainByRoom:(int) roomID;
 //根据房间ID找开合帘
@@ -136,6 +144,7 @@
 +(NSString *)getRoomNameByRoomID:(int) rId;
 
 + (Device *)getDeviceWithDeviceID:(int) deviceID ;
++ (Device *)getDeviceWithDeviceHtypeID:(int) htypeID ;
 
 +(BOOL)updateTotalVisited:(int)roomID;
 

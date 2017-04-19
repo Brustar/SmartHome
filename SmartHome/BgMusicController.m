@@ -15,35 +15,68 @@
 #import "AudioManager.h"
 #import "SQLManager.h"
 #import <AVFoundation/AVFoundation.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
+
 
 @interface BgMusicController ()
 
 @property (weak, nonatomic) IBOutlet UISlider *volume;
 @property (weak, nonatomic) IBOutlet UILabel *voiceValue;
 @property (weak, nonatomic) IBOutlet UILabel *songTitle;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *voiceWeakLeftConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *voiceStrongRightConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewLeftConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewRightConstraint;
+
 @property (weak, nonatomic) IBOutlet UIButton *lastBtn;
 @property (weak, nonatomic) IBOutlet UIButton *playBtn;
 @property (weak, nonatomic) IBOutlet UIButton *nextBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *diskView;
+@property (weak, nonatomic) IBOutlet UIImageView *pre;
+@property (weak, nonatomic) IBOutlet UIImageView *next;
 
 @end
 
 @implementation BgMusicController
 
+
+// an ivar for your class:
+BOOL animating;
+
+- (void) spinWithOptions: (UIViewAnimationOptions) options {
+    // this spin completes 360 degrees every 2 seconds
+    [UIView animateWithDuration: 1.0f
+                          delay: 0.0f
+                        options: options
+                     animations: ^{
+                         _diskView.transform = CGAffineTransformRotate(_diskView.transform, M_PI / 2);
+                     }
+                     completion: ^(BOOL finished) {
+                         if (finished) {
+                             if (animating) {
+                                 // if flag still set, keep spinning with constant speed
+                                 [self spinWithOptions: UIViewAnimationOptionCurveLinear];
+                             } else if (options != UIViewAnimationOptionCurveEaseOut) {
+                                 // one last spin, with deceleration
+                                 [self spinWithOptions: UIViewAnimationOptionCurveEaseOut];
+                             }
+                         }
+                     }];
+}
+
+- (void) startSpin {
+    if (!animating) {
+        animating = YES;
+        [self spinWithOptions: UIViewAnimationOptionCurveEaseIn];
+    }
+}
+
+- (void) stopSpin {
+    // set the flag to stop spinning after one last 90 degree increment
+    animating = NO;
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     
     [super viewWillAppear:YES];
-    if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-    {
-        self.voiceStrongRightConstraint.constant = [[UIScreen mainScreen] bounds].size.width * 0.05;
-        self.voiceWeakLeftConstraint.constant = self.voiceStrongRightConstraint.constant;
-        self.viewLeftConstraint.constant = 20;
-        self.viewRightConstraint.constant = self.viewLeftConstraint.constant;
-    }
+
     if (BLUETOOTH_MUSIC) {
         AudioManager *audio=[AudioManager defaultManager];
         
@@ -71,10 +104,45 @@
     }else{APP_ASSERT_STOP}
 }
 
+-(void) initButtons
+{
+    [[self.nextBtn
+      rac_signalForControlEvents:UIControlEventTouchDown]
+     subscribeNext:^(id x) {
+         self.next.image =[UIImage imageNamed:@"music_next_red"];
+     }];
+    
+    [[self.nextBtn
+      rac_signalForControlEvents:UIControlEventTouchUpInside]
+     subscribeNext:^(id x) {
+         self.next.image =[UIImage imageNamed:@"music_next_white"];
+     }];
+    
+    [[self.lastBtn
+      rac_signalForControlEvents:UIControlEventTouchDown]
+     subscribeNext:^(id x) {
+         self.pre.image =[UIImage imageNamed:@"music_previous_red"];
+     }];
+    
+    [[self.lastBtn
+      rac_signalForControlEvents:UIControlEventTouchUpInside]
+     subscribeNext:^(id x) {
+         self.pre.image =[UIImage imageNamed:@"music_previous_white"];
+     }];
+    
+    [[self.playBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        //self.play.image =[UIImage imageNamed:@"music_on_white"];
+        [self startSpin];
+    }];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"背景音乐";
     [self setupNaviBar];
+    [self initButtons];
+    
+    
     //if ([[DeviceInfo defaultManager] editingScene]) {
     NSArray *bgmusicIDS = [SQLManager getDeviceByTypeName:@"背景音乐" andRoomID:self.roomID];
     if ([bgmusicIDS count]>0) {

@@ -108,7 +108,7 @@ static NSString * const CYPhotoId = @"photo";
 }
 
 - (void)rightBtnClicked:(UIButton *)btn {
-    [self performSegueWithIdentifier:@"bgmusic" sender:self];
+    [self performSegueWithIdentifier:@"lighting" sender:self];
 }
 
 -(void)getUI

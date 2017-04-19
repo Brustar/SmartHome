@@ -57,7 +57,7 @@
     UIView *view = [[UIView alloc] init];
     [view setBackgroundColor:[UIColor clearColor]];
     self.tableView.tableFooterView = view;
-    _lightArrs   = [SQLManager getDeviceByRoom:self.roomID];
+    _lightArrs   = [SQLManager getDimmerByRoom:self.roomID];
     _curtainArrs = [SQLManager getCurtainByRoom:self.roomID];
     _airArrs     = [SQLManager getAirDeviceByRoom:self.roomID];
     SocketManager *sock=[SocketManager defaultManager];

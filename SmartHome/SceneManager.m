@@ -701,7 +701,7 @@
 -(void) dimingRoom:(int)roomid brightness:(int)bright
 {
     SocketManager *sock=[SocketManager defaultManager];
-    NSArray *lightIDS=[SQLManager getDeviceByRoom:roomid];
+    NSArray *lightIDS=[SQLManager getDimmerByRoom:roomid];
     for (NSString *lightID in lightIDS) {
         NSData *data=[[DeviceInfo defaultManager] changeBright:bright deviceID:lightID];
         [sock.socket writeData:data withTimeout:1 tag:1];

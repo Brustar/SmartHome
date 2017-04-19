@@ -503,7 +503,7 @@
                                                                                                                                                            target:self
                                                                                                                                                            action:@selector(takePhoto:)],
                                                                                                                                              ]];
-    
+
 }
 - (void)selectPhoto:(KxMenuItem *)item {
     [DeviceInfo defaultManager].isPhotoLibrary = YES;
