@@ -3,7 +3,7 @@
 //  SmartHome
 //
 //  Created by KobeBryant on 2017/4/18.
-//  Copyright © 2017年 Brustar. All rights reserved.
+//  Copyright © 2017年 Ecloud. All rights reserved.
 //
 
 #import "FamilyHomeDetailViewController.h"
@@ -21,7 +21,67 @@
     [self.brightButton setBackgroundImage:[UIImage imageNamed:@"btn_pressed"] forState:UIControlStateSelected];
     [self setNaviBarTitle:self.roomName];
     
-    [self getAllScenes];
+    [self getAllScenes];//获取所有场景
+    [self getAllDevices];//获取所有设备
+}
+
+- (void)countOfDeviceType {
+    _deviceType_count = [SQLManager numbersOfDeviceType];
+}
+
+- (void)getAllDevices {
+    
+    //获取设备类型数量
+    [self countOfDeviceType];
+    
+    if (_deviceType_count >0) {
+        //所有设备ID
+        NSArray *devIDArray = [SQLManager deviceIdsByRoomId:(int)self.roomID];
+        _deviceIDArray = [NSMutableArray array];
+        if (devIDArray) {
+            [_deviceIDArray addObjectsFromArray:devIDArray];
+        }
+        
+        //所有设备
+        _lightArray = [[NSMutableArray alloc] init];
+        _curtainArray = [[NSMutableArray alloc] init];
+        _environmentArray = [[NSMutableArray alloc] init];
+        _multiMediaArray = [[NSMutableArray alloc] init];
+        _intelligentArray = [[NSMutableArray alloc] init];
+        _securityArray = [[NSMutableArray alloc] init];
+        _sensorArray = [[NSMutableArray alloc] init];
+        _otherTypeArray = [[NSMutableArray alloc] init];
+        _colourLightArr = [[NSMutableArray alloc] init];
+        _switchLightArr = [[NSMutableArray alloc] init];
+        _lightArr = [[NSMutableArray alloc] init];
+        
+        
+        for(int i = 0; i <_deviceIDArray.count; i++)
+        {
+            //比较设备大类，进行分组
+            NSString *deviceTypeName = [SQLManager deviceTypeNameByDeviceID:[_deviceIDArray[i] intValue]];
+            if ([deviceTypeName isEqualToString:LightType]) {
+                [_lightArray addObject:_deviceIDArray[i]];
+            }else if ([deviceTypeName isEqualToString:EnvironmentType]){
+                [_environmentArray addObject:_deviceIDArray[i]];
+            }else if ([deviceTypeName isEqualToString:CurtainType]){
+                [_curtainArray addObject:_deviceIDArray[i]];
+            }else if ([deviceTypeName isEqualToString:MultiMediaType]){
+                [_multiMediaArray addObject:_deviceIDArray[i]];
+            }else if ([deviceTypeName isEqualToString:IntelligentType]){
+                [_intelligentArray addObject:_deviceIDArray[i]];
+            }else if ([deviceTypeName isEqualToString:SecurityType]){
+                [_securityArray addObject:_deviceIDArray[i]];
+            }else if ([deviceTypeName isEqualToString:SensorType]){
+                [_sensorArray addObject:_deviceIDArray[i]];
+            }else{
+                [_otherTypeArray addObject:_deviceIDArray[i]];
+            }
+        }
+        
+        [self.deviceTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        [self.deviceTableView reloadData];
+    }
 }
 
 - (void)getAllScenes {
@@ -129,5 +189,194 @@
 {
     return minimumLineSpacing;
 }
+
+#pragma mark - UITableView Delegate
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return _deviceType_count;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section == 0) {
+        //return _lightArray.count;//灯光
+        return 0;
+    }else if (section == 1){
+        return _curtainArray.count;//窗帘
+    }else if (section == 2){
+        return _environmentArray.count;//环境（空调）
+    }else if (section == 3){
+        return _multiMediaArray.count;//影音
+    }else if (section == 4){
+        return _intelligentArray.count;//智能单品
+    }else if (section == 5){
+        return _securityArray.count;//安防
+    }else if (section == 6){
+        return _sensorArray.count;//感应器
+    }
+    return 0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {//灯光
+        /*LightCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+        cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.roomID = (int)self.roomID;
+        Device *device = [SQLManager getDeviceWithDeviceID:[_lightArray[indexPath.row] intValue]];
+        cell.LightNameLabel.text = device.name;
+        cell.slider.continuous = NO;
+        cell.deviceid = _lightArray[indexPath.row];
+        return cell;*/
+        return nil;
+    }else if (indexPath.section == 1) {//窗帘
+        CurtainTableViewCell *curtainCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
+        curtainCell.backgroundColor =[UIColor clearColor];
+        curtainCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        curtainCell.roomID = (int)self.roomID;
+        Device *device = [SQLManager getDeviceWithDeviceID:[_curtainArray[indexPath.row] intValue]];
+        curtainCell.label.text = device.name;
+        curtainCell.deviceid = _curtainArray[indexPath.row];
+        
+        return curtainCell;
+    }else if (indexPath.section == 2) { //环境
+        
+        Device *device = [SQLManager getDeviceWithDeviceID:[_environmentArray[indexPath.row] intValue]];
+        if (device.hTypeId == 31) { //空调
+            AireTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"AireTableViewCell" forIndexPath:indexPath];
+            aireCell.backgroundColor = [UIColor clearColor];
+            aireCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            aireCell.roomID = (int)self.roomID;
+            aireCell.deviceNameLabel.text = device.name;
+            aireCell.deviceid = _environmentArray[indexPath.row];
+            return aireCell;
+        }else { //环境的其他类型
+            OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+            otherCell.backgroundColor =[UIColor clearColor];
+            otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            otherCell.OtherNameLabel.text = device.name;
+            return otherCell;
+        }
+        
+        
+    }else if (indexPath.section == 3) {//影音
+        Device *device = [SQLManager getDeviceWithDeviceID:[_multiMediaArray[indexPath.row] intValue]];
+        
+        if (device.hTypeId == 14) { //背景音乐
+            BjMusicTableViewCell * BjMusicCell = [tableView dequeueReusableCellWithIdentifier:@"BjMusicTableViewCell" forIndexPath:indexPath];
+            BjMusicCell.backgroundColor = [UIColor clearColor];
+            BjMusicCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            BjMusicCell.BjMusicNameLb.text = device.name;
+            return BjMusicCell;
+        }else if (device.hTypeId == 13) { //DVD
+            DVDTableViewCell * dvdCell = [tableView dequeueReusableCellWithIdentifier:@"DVDTableViewCell" forIndexPath:indexPath];
+            dvdCell.backgroundColor =[UIColor clearColor];
+            dvdCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            dvdCell.DVDNameLabel.text = device.name;
+            return dvdCell;
+        }else if (device.hTypeId == 17) { //幕布
+            ScreenCurtainCell * ScreenCell = [tableView dequeueReusableCellWithIdentifier:@"ScreenCurtainCell" forIndexPath:indexPath];
+            ScreenCell.backgroundColor =[UIColor clearColor];
+            ScreenCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            ScreenCell.ScreenCurtainLabel.text = device.name;
+            return ScreenCell;
+        }else if (device.hTypeId == 16) { //投影仪(只有开关)
+            OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+            otherCell.backgroundColor = [UIColor clearColor];
+            otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            otherCell.OtherNameLabel.text = device.name;
+            return otherCell;
+        }else if (device.hTypeId == 11) { //机顶盒
+            OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+            otherCell.backgroundColor =[UIColor clearColor];
+            otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            otherCell.OtherNameLabel.text = device.name;
+            return otherCell;
+        }else if (device.hTypeId == 12) { //网络电视
+            TVTableViewCell * tvCell = [tableView dequeueReusableCellWithIdentifier:@"TVTableViewCell" forIndexPath:indexPath];
+            tvCell.backgroundColor =[UIColor clearColor];
+            tvCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            tvCell.TVNameLabel.text = device.name;
+            return tvCell;
+        }else if (device.hTypeId == 18) { //功放
+            OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+            otherCell.backgroundColor =[UIColor clearColor];
+            otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            otherCell.OtherNameLabel.text = device.name;
+            return otherCell;
+        }else { //影音其他类型（如：FM）
+            OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+            otherCell.backgroundColor =[UIColor clearColor];
+            otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            otherCell.OtherNameLabel.text = device.name;
+            return otherCell;
+        }
+        
+        
+        
+    }else if (indexPath.section == 4) {//智能单品
+        Device *device = [SQLManager getDeviceWithDeviceID:[_intelligentArray[indexPath.row] intValue]];
+        OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+        otherCell.backgroundColor =[UIColor clearColor];
+        otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        otherCell.OtherNameLabel.text = device.name;
+        return otherCell;
+        
+    }else if (indexPath.section == 5) {//安防
+        Device *device = [SQLManager getDeviceWithDeviceID:[_securityArray[indexPath.row] intValue]];
+        
+        if (device.hTypeId == 40) { //智能门锁
+            OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+            otherCell.backgroundColor =[UIColor clearColor];
+            otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            otherCell.OtherNameLabel.text = device.name;
+            return otherCell;
+        }else if (device.hTypeId == 45) { //摄像头
+            return nil;
+        }else {
+            OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+            otherCell.backgroundColor =[UIColor clearColor];
+            otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            otherCell.OtherNameLabel.text = device.name;
+            return otherCell;
+        }
+        
+        
+    }else if (indexPath.section == 6) {//感应器
+        Device *device = [SQLManager getDeviceWithDeviceID:[_sensorArray[indexPath.row] intValue]];
+        
+        OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+        otherCell.backgroundColor =[UIColor clearColor];
+        otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        otherCell.OtherNameLabel.text = device.name;
+        return otherCell;
+    }
+    
+    return nil;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 3) {
+        Device *device = [SQLManager getDeviceWithDeviceID:[_multiMediaArray[indexPath.row] intValue]];
+        
+        if (device.hTypeId == 12 || device.hTypeId == 13) {
+            return 150;
+        }else if (device.hTypeId == 11 || device.hTypeId == 16) {
+            return 50;
+        }else {
+            return 100;
+        }
+    }
+    
+    else if (indexPath.section == 4 || indexPath.section == 5 || indexPath.section == 6 ) {
+        return 50;
+    }
+    
+    
+    return 100;
+}
+
 
 @end

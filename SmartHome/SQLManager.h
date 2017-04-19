@@ -157,4 +157,6 @@
 +(void) writeChannels:(NSArray *)channels parent:(NSString *)parent;
 +(void) writeChats:(NSArray *)users;
 + (BOOL)isWholeHouse:(NSInteger)eId;
+
++ (NSInteger)numbersOfDeviceType;
 @end

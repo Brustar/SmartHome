@@ -20,6 +20,15 @@
 #endif /* PrefixHeader_pch */
 
 
+//设备大类
+#define LightType         @"灯光"
+#define EnvironmentType   @"环境"
+#define CurtainType       @"窗帘"
+#define MultiMediaType    @"影音"
+#define IntelligentType   @"智能单品"
+#define SecurityType      @"安防"
+#define SensorType        @"感应器"
+
 #define UI_SCREEN_WIDTH       ([[UIScreen mainScreen] bounds].size.width)
 #define UI_SCREEN_HEIGHT      ([[UIScreen mainScreen] bounds].size.height)
 #define UD                    [NSUserDefaults standardUserDefaults]

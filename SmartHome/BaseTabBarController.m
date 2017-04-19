@@ -47,12 +47,8 @@
     
 
     //HOME
-    IphoneFamilyViewController *familyVC;
-         if ([[UD objectForKey:@"HostID"] intValue] == 258) {
-            familyVC = [iPhoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneFamilyViewController"];
-         }else{
-            familyVC = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"FirstViewController"];
-         }
+    IphoneFamilyViewController *familyVC = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"FirstViewController"];
+         
 
     //场景
     IphoneSceneController *sceneVC = [iPhoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];

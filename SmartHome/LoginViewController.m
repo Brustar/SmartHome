@@ -68,6 +68,9 @@
 - (IBAction)forgetPwdBtnClicked:(id)sender {
     
     [WebManager show:[[IOManager httpAddr] stringByAppendingString:@"/user/update_pwd.aspx"]];
+    
+    
+    //[WebManager show:[[IOManager httpAddr] stringByAppendingString:@"/ui/GoodsList.aspx"]];
 }
 
 - (IBAction)tryBtnClicked:(id)sender {

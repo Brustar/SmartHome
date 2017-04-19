@@ -399,7 +399,9 @@
     return [subTypes copy];
 
 }
-+(NSArray *)deviceIdsByRoomId:(int)roomID
+
+//根据房间ID获取该房间的所有设备ID
++ (NSArray *)deviceIdsByRoomId:(int)roomID
 {
     
     NSMutableArray *deviceDIs = [NSMutableArray array];
@@ -1757,6 +1759,24 @@
     }
     
     [db close];
+}
+
++ (NSInteger)numbersOfDeviceType {
+    NSInteger count = 0;
+    FMDatabase *db = [self connetdb];
+    if ([db open]) {
+        
+        NSString *sql =[NSString stringWithFormat: @"SELECT count(*) as count FROM catalog"];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            count += [resultSet intForColumn:@"count"];
+        }
+        
+        return count;
+    }
+    
+    return count;
 }
 
 +(void)initDemoSQlite
