@@ -49,7 +49,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25°C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Gp-k8-Gvg">
-                        <rect key="frame" x="20" y="72" width="40" height="21"/>
+                        <rect key="frame" x="23" y="72" width="40" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="12u-t8-Mef"/>
                             <constraint firstAttribute="height" constant="21" id="ggf-Rm-I6j"/>
@@ -59,7 +59,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="9yv-2g-L2p">
-                        <rect key="frame" x="66" y="66" width="254" height="31"/>
+                        <rect key="frame" x="69" y="66" width="251" height="31"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="bLH-nh-a6Q"/>
                         </constraints>
@@ -86,7 +86,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="Yqf-zh-nqL" firstAttribute="leading" secondItem="4Ci-ZD-g6F" secondAttribute="leading" id="6pM-LG-WPl"/>
-                    <constraint firstItem="5Gp-k8-Gvg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="12" id="77c-g8-ZWs"/>
+                    <constraint firstItem="5Gp-k8-Gvg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="15" id="77c-g8-ZWs"/>
                     <constraint firstAttribute="bottomMargin" secondItem="8Ux-fc-F6y" secondAttribute="bottom" constant="4" id="8lK-dx-4Aq"/>
                     <constraint firstAttribute="trailingMargin" secondItem="8Ux-fc-F6y" secondAttribute="trailing" constant="10" id="AiG-Zj-4av"/>
                     <constraint firstAttribute="trailingMargin" secondItem="9yv-2g-L2p" secondAttribute="trailing" constant="20" id="Ede-RQ-T3O"/>

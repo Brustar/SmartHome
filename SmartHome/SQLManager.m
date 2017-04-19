@@ -61,6 +61,7 @@
     return [deviceModels copy];
 
 }
+
 +(NSString *)deviceNameByDeviceID:(int)eId
 {
     FMDatabase *db = [self connetdb];
@@ -69,14 +70,12 @@
     {
         NSString *sql = nil;
       
-    DeviceInfo *device = [DeviceInfo defaultManager];
-    if ([device.db isEqualToString:SMART_DB]) {
-        sql = [NSString stringWithFormat:@"SELECT NAME FROM Devices where ID = %d and masterID = '%ld'",eId,[[DeviceInfo defaultManager] masterID]];
-    }else {
-        sql = [NSString stringWithFormat:@"SELECT NAME FROM Devices where ID = %d and masterID = '%ld'",eId, 255l];
-    }
-        
-        
+        DeviceInfo *device = [DeviceInfo defaultManager];
+        if ([device.db isEqualToString:SMART_DB]) {
+            sql = [NSString stringWithFormat:@"SELECT NAME FROM Devices where ID = %d and masterID = '%ld'",eId,[[DeviceInfo defaultManager] masterID]];
+        }else {
+            sql = [NSString stringWithFormat:@"SELECT NAME FROM Devices where ID = %d and masterID = '%ld'",eId, 255l];
+        }
        
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
@@ -298,7 +297,7 @@
             }
         }else {
             
-            sql = [NSString stringWithFormat:@"SELECT distinct typeName,subtypeid FROM Devices where rID = %ld and masterID = '%ld' and tsubTypeId<>6 order by subTypeId,htypeID ASC",(long)roomID, 255l];
+            sql = [NSString stringWithFormat:@"SELECT distinct typeName,subtypeid FROM Devices where rID = %ld and masterID = '%ld' and subTypeId<>6 order by subTypeId,htypeID ASC",(long)roomID, 255l];
         }
         
         FMResultSet *resultSet = [db executeQuery:sql];
@@ -312,19 +311,11 @@
             if (typeID == 1 || typeID == 7) {
                 typeName = [self transferSubType:typeID];
             }
-            
-            BOOL isEqual = false;
-            for (NSString *tempTypeName in subTypes) {
-                if ([tempTypeName isEqualToString:typeName]) {
-                    isEqual = true;
-                    break;
-                }
+
+            if (![typeName isEqualToString:@""]) {
+                [subTypes addObject:typeName];
             }
-            if (!isEqual) {
-                if (![typeName isEqualToString:@""]) {
-                    [subTypes addObject:typeName];
-                }
-            }
+
         }
         
     }
@@ -570,6 +561,35 @@
            sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and typeName = \'%@\' and masterID = '%ld'",(long)roomID,typeName,[[DeviceInfo defaultManager] masterID]];
         }else {
             sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and typeName = \'%@\' and masterID = '%ld'",(long)roomID,typeName, 255l];
+        }
+        
+        
+        
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+            int eId = [resultSet intForColumn:@"ID"];
+            [array addObject:[NSNumber numberWithInt:eId]];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return [array copy];
+}
++(NSArray *)getDeviceBysubTypeName:(NSString  *)subtypeName andRoomID:(NSInteger)roomID
+{
+    NSMutableArray *array = [NSMutableArray array];
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        NSString *sql = nil;
+        
+        DeviceInfo *device = [DeviceInfo defaultManager];
+        if ([device.db isEqualToString:SMART_DB]) {
+            
+            sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and subtypeName = \'%@\' and masterID = '%ld'",(long)roomID,subtypeName,[[DeviceInfo defaultManager] masterID]];
+        }else {
+            sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and subtypeName = \'%@\' and masterID = '%ld'",(long)roomID,subtypeName, 255l];
         }
         
         
@@ -1598,9 +1618,7 @@
         }
         return [deviceIds copy];
     }else{
-       
-
-        
+    
         return nil;
     }
     
@@ -2342,9 +2360,8 @@
     return plists;
 }
 
-+(void) writeCatalog:(int)cid name:(NSString*) cname
++(void) writeCatalog:(int)cid name:(NSString*) cname db:(FMDatabase *)db
 {
-    FMDatabase *db = [SQLManager connetdb];
     if([db open])
     {
         NSString *sql = [NSString stringWithFormat:@"select * from catalog where id = %d",cid];
@@ -2387,7 +2404,7 @@
                 
                 if(result)
                 {
-                    [self writeCatalog:[equip[@"subtype_id"] intValue] name:equip[@"subtype_name"]];
+                    [self writeCatalog:[equip[@"subtype_id"] intValue] name:equip[@"subtype_name"] db:db];
                     NSLog(@"insert 成功");
                 }else{
                     NSLog(@"insert 失败");

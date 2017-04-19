@@ -54,7 +54,7 @@
     
     NSString *docDir = [paths objectAtIndex:0];
     
-    NSString *filePath = [docDir stringByAppendingPathComponent:@"testFile.txt"];
+    NSString *filePath = [docDir stringByAppendingPathComponent:@"gainHome.plist"];
     
       array = [[NSArray alloc] initWithContentsOfFile:filePath];
     }else{

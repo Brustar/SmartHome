@@ -19,17 +19,15 @@
 #import <AVFoundation/AVFoundation.h>
 #import "ShortcutKeyViewController.h"
 #import "TabbarPanel.h"
-
 #import "UIImageView+Badge.h"
 #import <RongIMKit/RongIMKit.h>
 #import "ConversationViewController.h"
 #import <RBStoryboardLink.h>
-
 #import "IOManager.h"
 #import "NowMusicController.h"
 
 
-@interface FirstViewController ()<RCIMReceiveMessageDelegate>
+@interface FirstViewController ()<RCIMReceiveMessageDelegate,HttpDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIImageView * SubImageView;//首页的日历大圆
 @property (weak, nonatomic) IBOutlet UIView * BtnView;//全屋场景的按钮试图
 @property (weak, nonatomic) IBOutlet UIImageView * IconeImageView;//提示消息的头像
@@ -38,7 +36,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem * playerBarBtn;//正在播放的按钮
 @property (weak, nonatomic) IBOutlet UIView * playerSubView;//正在播放的视图
 @property (weak, nonatomic) IBOutlet UIView * FourBtnView;
-@property (weak, nonatomic) IBOutlet UITableView * tableView;
+//@property (weak, nonatomic) IBOutlet UITableView * tableView;
 @property (nonatomic,strong) NSArray * dataArr;
 @property (weak, nonatomic) IBOutlet UIImageView * HeadImageView;
 @property (weak, nonatomic) IBOutlet UIView * socialView;
@@ -61,6 +59,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *DayLabelLeftConstraint;//距离左边距的值
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *YLabelrightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *NLabelrightConstraint;
+@property (nonatomic,strong) BaseTabBarController *baseTabbarController;
 
 @end
 
@@ -75,17 +74,17 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
-    baseTabbarController.tabbarPanel.hidden = NO;
-    baseTabbarController.tabBar.hidden = YES;
+    _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
+    _baseTabbarController.tabbarPanel.hidden = NO;
+    _baseTabbarController.tabBar.hidden = YES;
        [self setBtn];
 
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
-    baseTabbarController.tabbarPanel.hidden = NO;
-    baseTabbarController.tabBar.hidden = YES;
+    _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
+    _baseTabbarController.tabbarPanel.hidden = NO;
+    _baseTabbarController.tabBar.hidden = YES;
     if (_afNetworkReachabilityManager.reachableViaWiFi) {
         NSLog(@"WIFI: %d", _afNetworkReachabilityManager.reachableViaWiFi);
     }
@@ -97,8 +96,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
-    baseTabbarController.tabbarPanel.hidden = YES;
+    _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
+    _baseTabbarController.tabbarPanel.hidden = YES;
     [[RCIM sharedRCIM] logout];
     
     NSInteger status = _afNetworkReachabilityManager.networkReachabilityStatus;
@@ -200,7 +199,7 @@
 //处理连接改变后的情况
 - (void)updateInterfaceWithReachability
 {
-    __block FamilyHomeViewController  *blockSelf = self;
+    __block FirstViewController  * FirstBlockSelf = self;
     
     _afNetworkReachabilityManager = [AFNetworkReachabilityManager sharedManager];
     
@@ -209,39 +208,47 @@
         if(status == AFNetworkReachabilityStatusReachableViaWWAN) //手机自带网络
         {
             if (info.connectState==outDoor) {
-                [blockSelf setNetState:netState_outDoor_4G];
+                [FirstBlockSelf setNetState:netState_outDoor_4G];
                 NSLog(@"外出模式-4g");
                 // [self.netBarBtnItem setImage:[UIImage imageNamed:@"4g"]];
             }
             if (info.connectState==offLine) {
-                [blockSelf setNetState:netState_notConnect];
+                [FirstBlockSelf setNetState:netState_notConnect];
                 NSLog(@"离线模式");
+               self.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
+              [_baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
                 //[self.netBarBtnItem setImage:[UIImage imageNamed:@"4g"]];
             }
         }
         else if(status == AFNetworkReachabilityStatusReachableViaWiFi) //WIFI
         {
             if (info.connectState==atHome) {
-                [blockSelf setNetState:netState_atHome_WIFI];
+                [FirstBlockSelf setNetState:netState_atHome_WIFI];
                 NSLog(@"在家模式");
                 //[self.netBarBtnItem setImage:[UIImage imageNamed:@"atHome"]];
                 
             }else if (info.connectState==outDoor){
-                [blockSelf setNetState:netState_atHome_4G];
+                [FirstBlockSelf setNetState:netState_atHome_4G];
                 NSLog(@"外出模式");
                 //[self.netBarBtnItem setImage:[UIImage imageNamed:@"Iphonewifi"]];
             }else if (info.connectState==offLine) {
-                [blockSelf setNetState:netState_notConnect];
+                [FirstBlockSelf setNetState:netState_notConnect];
+                 self.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
+                 [_baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
                 NSLog(@"离线模式");
                 //[self.netBarBtnItem setImage:[UIImage imageNamed:@"Iphonewifi"]];
                 
             }
         }else if(status == AFNetworkReachabilityStatusNotReachable){ //没有网络(断网)
-            [blockSelf setNetState:netState_notConnect];
+            [FirstBlockSelf setNetState:netState_notConnect];
+             self.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
+             [_baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
             NSLog(@"离线模式");
             // [self.netBarBtnItem setImage:[UIImage imageNamed:@"breakWifi"]];
         }else if (status == AFNetworkReachabilityStatusUnknown) { //未知网络
-            [blockSelf setNetState:netState_notConnect];
+            [FirstBlockSelf setNetState:netState_notConnect];
+            self.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
+             [_baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
             // [self.netBarBtnItem setImage:[UIImage imageNamed:@"breakWifi"]];
         }
     }];
@@ -296,16 +303,17 @@
 //社交平台的弹出事件
 -(void)HeadDoTap:(UITapGestureRecognizer *)tap
 {
-    TabbarPanel * tabbar = [[TabbarPanel alloc] init];
-    if (self.socialView.hidden) {
+     _baseTabbarController.tabbarPanel.hidden = YES;
+     if (self.socialView.hidden) {
         self.socialView.hidden = NO;
-        _UserNameLabel.hidden = YES;
-        _WelcomeLabel.hidden = YES;
-       tabbar.pannelSubBgView.hidden = YES;
-    }else{
+//        _UserNameLabel.hidden = YES;
+//        _WelcomeLabel.hidden = YES;
+     
+     }else{
          self.socialView.hidden = YES;
-        _UserNameLabel.hidden = NO;
-        _WelcomeLabel.hidden = NO;
+//        _UserNameLabel.hidden = NO;
+//        _WelcomeLabel.hidden = NO;
+        _baseTabbarController.tabbarPanel.hidden = NO;
     }
     
     
@@ -321,13 +329,26 @@
 }
 
 - (void)setupNaviBar {
-    [self setNaviBarTitle:[UD objectForKey:@"homename"]]; //设置标题
+//    [self setNaviBarTitle:[UD objectForKey:@"homename"]]; //设置标题
+    _naviMiddletBtn = [[UIButton alloc] init];
+    [_naviMiddletBtn setTitle:[UD objectForKey:@"homename"] forState:UIControlStateNormal];
+    [_naviMiddletBtn addTarget:self action:@selector(MiddleBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     _naviLeftBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"clound_white" imgHighlight:@"clound_white" target:self action:@selector(leftBtnClicked:)];
     _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"music_white" imgHighlight:@"music_white" target:self action:@selector(rightBtnClicked:)];
     [self setNaviBarLeftBtn:_naviLeftBtn];
     [self setNaviBarRightBtn:_naviRightBtn];
+    [self setNaviMiddletBtn:_naviMiddletBtn];
 }
+-(void)MiddleBtnClicked:(UIButton *)btn
+{
+    _naviMiddletBtn.selected = !_naviMiddletBtn.selected;
+    if (_naviMiddletBtn.selected) {
+        self.CoverView.hidden = NO;
+    }else{
+        self.CoverView.hidden = YES;
+    }
 
+}
 - (void)setupSlideButton {
     UIButton *menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     menuBtn.frame = CGRectMake(0, 0, 44, 44);
@@ -380,6 +401,7 @@
 }
 //点击未读消息的事件
 - (IBAction)UnreadButton:(id)sender {
+    
     [[RCIM sharedRCIM] logout];
     NSString *token = [UD objectForKey:@"rctoken"];
     NSString *groupID = [[UD objectForKey:@"HostID"] description];
@@ -409,8 +431,24 @@
     }];
 }
 
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+     self.CoverView.hidden = YES;
+      self.socialView.hidden = YES;
+    _baseTabbarController.tabbarPanel.hidden = NO;
+}
 
+#pragma UITableViewDelegate
 
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 0;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    return cell;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

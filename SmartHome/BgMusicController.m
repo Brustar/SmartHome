@@ -56,10 +56,25 @@
     }
 }
 
+- (void)setupNaviBar {
+    _viewNaviBar = [[CustomNaviBarView alloc] initWithFrame:Rect(0.0f, 0.0f, [CustomNaviBarView barSize].width, [CustomNaviBarView barSize].height)];
+    _viewNaviBar.m_viewCtrlParent = self;
+    [self setNaviBarTitle:self.title];
+    [self.view addSubview:_viewNaviBar];
+}
+
+- (void)setNaviBarTitle:(NSString *)strTitle
+{
+    if (_viewNaviBar)
+    {
+        [_viewNaviBar setTitle:strTitle];
+    }else{APP_ASSERT_STOP}
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.title = @"背景音乐";
+    [self setupNaviBar];
     //if ([[DeviceInfo defaultManager] editingScene]) {
     NSArray *bgmusicIDS = [SQLManager getDeviceByTypeName:@"背景音乐" andRoomID:self.roomID];
     if ([bgmusicIDS count]>0) {

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomViewController.h"
 
-@interface SystemInfomationController : UIViewController
+@interface SystemInfomationController :CustomViewController
 @property (nonatomic,strong) NSMutableArray * home_room_infoArr;
 @end

@@ -45,7 +45,7 @@
 {
     _roomId = roomId;
     _roomName =[SQLManager getRoomNameByRoomID:_roomId];
-    if ([_roomName isEqualToString:@"全屋"]) {
+    if ([SQLManager isWholeHouse:_roomId]) {
         self.deviceTypes = [SQLManager getAllDevices];
     }else{
         self.deviceTypes = [SQLManager deviceSubTypeByRoomId:_roomId];

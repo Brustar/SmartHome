@@ -21,6 +21,7 @@
 @property (nonatomic, readonly) UIImageView *m_imgViewBg;
 @property (nonatomic, readonly) UIButton *m_btnLeft;
 @property (nonatomic, readonly) UIButton *m_btnRight;
+@property (nonatomic, readonly) UIButton *m_btnMiddle;
 @property (nonatomic, readonly) BOOL m_bIsBlur;
 
 
@@ -35,6 +36,7 @@
 @synthesize m_btnRight = _btnRight;
 @synthesize m_bIsBlur = _bIsBlur;
 @synthesize m_netStateView = _netStateView;
+@synthesize m_btnMiddle = _btnMiddle;
 
 
 + (CGRect)rightBtnFrame
@@ -215,7 +217,20 @@
         [self addSubview:_btnLeft];
     }else{}
 }
+- (void)setMiddleBtn:(UIButton *)btn
+{
+    if (_btnMiddle) {
+        [_btnMiddle removeFromSuperview];
+        _btnMiddle = nil;
+    }else{}
+    _btnMiddle = btn;
+    if (_btnMiddle) {
+        _btnMiddle.frame = Rect((UI_SCREEN_WIDTH-190.0f)/2, 15.0f, 190.0f, 40.0f);
+        [self addSubview:_btnMiddle];
+        
+    }else{}
 
+}
 - (void)setRightBtn:(UIButton *)btn
 {
     if (_btnRight)
