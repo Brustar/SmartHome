@@ -16,13 +16,33 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self initUI];
+    [self getAllScenes];//获取所有场景
+    [self getAllDevices];//获取所有设备
+}
+
+- (void)initUI {
+    
     [self.softButton setBackgroundImage:[UIImage imageNamed:@"btn_pressed"] forState:UIControlStateSelected];
     [self.normalButton setBackgroundImage:[UIImage imageNamed:@"btn_pressed"] forState:UIControlStateSelected];
     [self.brightButton setBackgroundImage:[UIImage imageNamed:@"btn_pressed"] forState:UIControlStateSelected];
     [self setNaviBarTitle:self.roomName];
     
-    [self getAllScenes];//获取所有场景
-    [self getAllDevices];//获取所有设备
+    [self.deviceTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    UIImageView *bg = [[UIImageView alloc] initWithFrame:self.deviceTableView.bounds];
+    bg.image = [UIImage imageNamed:@"background"];
+    [self.deviceTableView setBackgroundView:bg];
+    
+    [self.deviceTableView registerNib:[UINib nibWithNibName:@"AireTableViewCell" bundle:nil] forCellReuseIdentifier:@"AireTableViewCell"];//空调
+    [self.deviceTableView registerNib:[UINib nibWithNibName:@"CurtainTableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainTableViewCell"];//窗帘
+    [self.deviceTableView registerNib:[UINib nibWithNibName:@"TVTableViewCell" bundle:nil] forCellReuseIdentifier:@"TVTableViewCell"];//网络电视
+    [self.deviceTableView registerNib:[UINib nibWithNibName:@"NewColourCell" bundle:nil] forCellReuseIdentifier:@"NewColourCell"];//调色灯
+    [self.deviceTableView registerNib:[UINib nibWithNibName:@"OtherTableViewCell" bundle:nil] forCellReuseIdentifier:@"OtherTableViewCell"];//其他
+    [self.deviceTableView registerNib:[UINib nibWithNibName:@"ScreenTableViewCell" bundle:nil] forCellReuseIdentifier:@"ScreenTableViewCell"];//幕布ScreenCurtainCell
+    [self.deviceTableView registerNib:[UINib nibWithNibName:@"ScreenCurtainCell" bundle:nil] forCellReuseIdentifier:@"ScreenCurtainCell"];//幕布ScreenCurtainCell
+    [self.deviceTableView registerNib:[UINib nibWithNibName:@"DVDTableViewCell" bundle:nil] forCellReuseIdentifier:@"DVDTableViewCell"];//DVD
+    [self.deviceTableView registerNib:[UINib nibWithNibName:@"BjMusicTableViewCell" bundle:nil] forCellReuseIdentifier:@"BjMusicTableViewCell"];//背景音乐
 }
 
 - (void)countOfDeviceType {
@@ -79,7 +99,7 @@
             }
         }
         
-        [self.deviceTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        
         [self.deviceTableView reloadData];
     }
 }
@@ -244,14 +264,14 @@
             aireCell.backgroundColor = [UIColor clearColor];
             aireCell.selectionStyle = UITableViewCellSelectionStyleNone;
             aireCell.roomID = (int)self.roomID;
-            aireCell.deviceNameLabel.text = device.name;
+            aireCell.AireNameLabel.text = device.name;
             aireCell.deviceid = _environmentArray[indexPath.row];
             return aireCell;
         }else { //环境的其他类型
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
             otherCell.backgroundColor =[UIColor clearColor];
             otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
-            otherCell.OtherNameLabel.text = device.name;
+            otherCell.NameLabel.text = device.name;
             return otherCell;
         }
         
@@ -281,13 +301,13 @@
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
             otherCell.backgroundColor = [UIColor clearColor];
             otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
-            otherCell.OtherNameLabel.text = device.name;
+            otherCell.NameLabel.text = device.name;
             return otherCell;
         }else if (device.hTypeId == 11) { //机顶盒
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
             otherCell.backgroundColor =[UIColor clearColor];
             otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
-            otherCell.OtherNameLabel.text = device.name;
+            otherCell.NameLabel.text = device.name;
             return otherCell;
         }else if (device.hTypeId == 12) { //网络电视
             TVTableViewCell * tvCell = [tableView dequeueReusableCellWithIdentifier:@"TVTableViewCell" forIndexPath:indexPath];
@@ -299,13 +319,13 @@
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
             otherCell.backgroundColor =[UIColor clearColor];
             otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
-            otherCell.OtherNameLabel.text = device.name;
+            otherCell.NameLabel.text = device.name;
             return otherCell;
         }else { //影音其他类型（如：FM）
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
             otherCell.backgroundColor =[UIColor clearColor];
             otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
-            otherCell.OtherNameLabel.text = device.name;
+            otherCell.NameLabel.text = device.name;
             return otherCell;
         }
         
@@ -316,7 +336,7 @@
         OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
         otherCell.backgroundColor =[UIColor clearColor];
         otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        otherCell.OtherNameLabel.text = device.name;
+        otherCell.NameLabel.text = device.name;
         return otherCell;
         
     }else if (indexPath.section == 5) {//安防
@@ -326,7 +346,7 @@
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
             otherCell.backgroundColor =[UIColor clearColor];
             otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
-            otherCell.OtherNameLabel.text = device.name;
+            otherCell.NameLabel.text = device.name;
             return otherCell;
         }else if (device.hTypeId == 45) { //摄像头
             return nil;
@@ -334,7 +354,7 @@
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
             otherCell.backgroundColor =[UIColor clearColor];
             otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
-            otherCell.OtherNameLabel.text = device.name;
+            otherCell.NameLabel.text = device.name;
             return otherCell;
         }
         
@@ -345,7 +365,7 @@
         OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
         otherCell.backgroundColor =[UIColor clearColor];
         otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        otherCell.OtherNameLabel.text = device.name;
+        otherCell.NameLabel.text = device.name;
         return otherCell;
     }
     

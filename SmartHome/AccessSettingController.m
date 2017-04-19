@@ -7,7 +7,7 @@
 //
 
 #import "AccessSettingController.h"
-#import "areaSettingCell.h"
+#import "AreaSettingCell.h"
 #import "IOManager.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
