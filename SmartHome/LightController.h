@@ -12,8 +12,11 @@
 #import "ColourTableViewCell.h"
 #import "DetailTableViewCell.h"
 #import "SocketManager.h"
+#import "CustomNaviBarView.h"
 
 @interface LightController : UIViewController<HRColorPickerViewControllerDelegate,TcpRecvDelegate>
+
+@property (nonatomic, readonly) CustomNaviBarView *viewNaviBar;
 
 @property (strong, nonatomic) IBOutlet ColourTableViewCell *cell;
 @property (strong, nonatomic) IBOutlet DetailTableViewCell *detailCell;

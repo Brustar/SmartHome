@@ -65,7 +65,7 @@
 +(NSString *)deviceNameByDeviceID:(int)eId
 {
     FMDatabase *db = [self connetdb];
-    NSString *eName;
+    NSString *eName = @"";
     if([db open])
     {
         NSString *sql = nil;
@@ -547,7 +547,7 @@
 }
 
 
-+(NSArray *)getDeviceByTypeName:(NSString  *)typeName andRoomID:(NSInteger)roomID
++(NSArray *)getDeviceByTypeName:(NSString  *)typeid andRoomID:(NSInteger)roomID
 {
     NSMutableArray *array = [NSMutableArray array];
     FMDatabase *db = [self connetdb];
@@ -558,9 +558,9 @@
         DeviceInfo *device = [DeviceInfo defaultManager];
         if ([device.db isEqualToString:SMART_DB]) {
         
-           sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and typeName = \'%@\' and masterID = '%ld'",(long)roomID,typeName,[[DeviceInfo defaultManager] masterID]];
+           sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and htypeid = \'%@\' and masterID = '%ld'",(long)roomID,typeid,[[DeviceInfo defaultManager] masterID]];
         }else {
-            sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and typeName = \'%@\' and masterID = '%ld'",(long)roomID,typeName, 255l];
+            sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and htypeid = \'%@\' and masterID = '%d'",(long)roomID,typeid, 255];
         }
         
         

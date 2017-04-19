@@ -14,8 +14,13 @@
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "SceneManager.h"
+#import "YALContextMenuTableView.h"
+#import "ContextMenuCell.h"
 
-@interface LightController ()<UITableViewDelegate,UITableViewDataSource>
+static NSString *const menuCellIdentifier = @"rotationCell";
+
+@interface LightController ()<UITableViewDelegate,UITableViewDataSource,YALContextMenuTableViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *favButt;//收藏
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,assign) CGFloat brightValue;
@@ -25,17 +30,39 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *segementTopConstraints;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewRightConstraints;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewLeftContraints;
-- (IBAction)selectTypeOfLight:(UISegmentedControl *)sender;
+
+
 @property (weak, nonatomic) IBOutlet UIView *lightView;
 @property (weak, nonatomic) IBOutlet UIButton *sprightlierBtn;//明快
 @property (weak, nonatomic) IBOutlet UIButton *peacefulBtn;//幽静
 @property (weak, nonatomic) IBOutlet UIButton *romanceBtn;//浪漫
 @property (weak, nonatomic) IBOutlet UISlider *lightSlider;//控制所有灯的亮度调节
 @property (nonatomic,assign) int sceneID;
+@property (nonatomic,strong) YALContextMenuTableView* contextMenuTableView;
+
+@property (nonatomic, strong) NSArray *menuTitles;
+
+- (IBAction)selectTypeOfLight:(UISegmentedControl *)sender;
 
 @end
 
 @implementation LightController
+
+- (void)setupNaviBar {
+    self.title = @"灯光";
+    _viewNaviBar = [[CustomNaviBarView alloc] initWithFrame:Rect(0.0f, 0.0f, [CustomNaviBarView barSize].width, [CustomNaviBarView barSize].height)];
+    _viewNaviBar.m_viewCtrlParent = self;
+    [self setNaviBarTitle:self.title];
+    [self.view addSubview:_viewNaviBar];
+}
+
+- (void)setNaviBarTitle:(NSString *)strTitle
+{
+    if (_viewNaviBar)
+    {
+        [_viewNaviBar setTitle:strTitle];
+    }else{APP_ASSERT_STOP}
+}
 
 -(NSMutableArray *)lIDs
 {
@@ -56,12 +83,12 @@
                    }
                }
            }else if(self.roomID > 0){
-               [_lIDs addObjectsFromArray:[SQLManager getDeviceByTypeName:@"开关灯" andRoomID:self.roomID]];
-               [_lIDs addObjectsFromArray:[SQLManager getDeviceByTypeName:@"调光灯" andRoomID:self.roomID]];
-               [_lIDs addObjectsFromArray:[SQLManager getDeviceByTypeName:@"调色灯" andRoomID:self.roomID]];
+               [_lIDs addObjectsFromArray:[SQLManager getDeviceByTypeName:SWITCHLIGHT_SUB_TYPE andRoomID:self.roomID]];
+               [_lIDs addObjectsFromArray:[SQLManager getDeviceByTypeName:DIMMER_SUB_TYPE andRoomID:self.roomID]];
+               [_lIDs addObjectsFromArray:[SQLManager getDeviceByTypeName:COLORLIGHT_SUB_TYPE andRoomID:self.roomID]];
 
            }else{
-               [_lIDs addObject:self.deviceid];
+               [_lIDs addObject:self.deviceid?self.deviceid:@"0"];
            }
         
         }
@@ -86,9 +113,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    self.navigationController.navigationBarHidden = YES;
+    [self setupNaviBar];
     
-    [self setUpConstraints];
     self.detailCell = [[[NSBundle mainBundle] loadNibNamed:@"DetailTableViewCell" owner:self options:nil] lastObject];
     self.detailCell.bright.continuous = NO;
     [self.detailCell.bright addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
@@ -149,24 +175,6 @@
     [self save:self.detailCell.bright];
     
 }
-
-- (IBAction)favButt:(id)sender {
-    
-    
-}
-
--(void)setUpConstraints
-{
-   
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-    {
-        self.segementTopConstraints.constant = 0;
-        self.tableViewLeftContraints.constant = 0;
-        self.tableViewRightConstraints.constant = 0;
-       
-    }
-}
-
 
 -(void) syncUI
 {
@@ -360,7 +368,7 @@
 }
 
 
-
+/*
 #pragma mark - UITableViewDelegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -434,6 +442,7 @@
 }
 
 //设置cell行高
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 44;
@@ -455,7 +464,7 @@
         [self performSegueWithIdentifier:@"detail" sender:self];
     }
 }
-
+*/
 - (IBAction)selectTypeOfLight:(UISegmentedControl *)sender {
     
     self.detailCell.label.text = self.lNames[sender.selectedSegmentIndex];
@@ -503,6 +512,66 @@
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"light" object:nil];
+}
+
+- (IBAction)loadCatalog:(id)sender {
+    [self initiateMenuOptions];
+    // init YALContextMenuTableView tableView
+    if (!self.contextMenuTableView) {
+        self.contextMenuTableView = [[YALContextMenuTableView alloc]initWithTableViewDelegateDataSource:self];
+        self.contextMenuTableView.animationDuration = 0.15;
+        //optional - implement custom YALContextMenuTableView custom protocol
+        self.contextMenuTableView.yalDelegate = self;
+        //optional - implement menu items layout
+        self.contextMenuTableView.menuItemsSide = Left;
+        self.contextMenuTableView.menuItemsAppearanceDirection = FromTopToBottom;
+        
+        //register nib
+        UINib *cellNib = [UINib nibWithNibName:@"ContextMenuCell" bundle:nil];
+        [self.contextMenuTableView registerNib:cellNib forCellReuseIdentifier:menuCellIdentifier];
+    }
+    
+    // it is better to use this method only for proper animation
+    [self.contextMenuTableView showInView:self.view withEdgeInsets:UIEdgeInsetsMake(80+22,0,0,0) animated:YES];
+}
+
+#pragma mark - Local methods
+- (void)initiateMenuOptions {
+    self.menuTitles = @[@"床头射灯",
+                        @"床尾射灯",
+                        @"柜子射灯",
+                        @"窗边射灯"];
+}
+
+#pragma mark - YALContextMenuTableViewDelegate
+- (void)contextMenuTableView:(YALContextMenuTableView *)contextMenuTableView didDismissWithIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"Menu dismissed with indexpath = %@", indexPath);
+}
+
+#pragma mark - UITableViewDataSource, UITableViewDelegate
+
+- (void)tableView:(YALContextMenuTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView dismisWithIndexPath:indexPath];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 39;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.menuTitles.count;
+}
+
+- (UITableViewCell *)tableView:(YALContextMenuTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    ContextMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:menuCellIdentifier forIndexPath:indexPath];
+    
+    if (cell) {
+        cell.backgroundColor = [UIColor clearColor];
+        cell.menuTitleLabel.text = [self.menuTitles objectAtIndex:indexPath.row];
+    }
+    
+    return cell;
 }
 
 @end

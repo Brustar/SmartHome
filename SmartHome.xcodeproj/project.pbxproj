@@ -138,6 +138,8 @@
 		0FEE12771D20C53400811947 /* TXHRrettyRuler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEE12741D20C53400811947 /* TXHRrettyRuler.m */; };
 		0FF410DA1CDAE67100C7F4A1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410D91CDAE67100C7F4A1 /* CoreLocation.framework */; };
 		0FF410DC1CDAF76300C7F4A1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410DB1CDAF76300C7F4A1 /* CoreBluetooth.framework */; };
+		0FF5CD591EA769D70027E2DC /* ContextMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF5CD571EA769D70027E2DC /* ContextMenuCell.m */; };
+		0FF5CD5A1EA769D70027E2DC /* ContextMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FF5CD581EA769D70027E2DC /* ContextMenuCell.xib */; };
 		0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7B0B51D1380BF003C2D52 /* AirController.m */; };
 		0FF92B661D9224640098DD54 /* TVChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF92B651D9224640098DD54 /* TVChannel.m */; };
 		2E0297271E4C4C7600BBC520 /* MySubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0297261E4C4C7600BBC520 /* MySubView.m */; };
@@ -738,6 +740,9 @@
 		0FEE12751D20C53400811947 /* TXHRrettyRuler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TXHRrettyRuler.h; path = PrettyRuler/TXHRrettyRuler.h; sourceTree = SOURCE_ROOT; };
 		0FF410D91CDAE67100C7F4A1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0FF410DB1CDAF76300C7F4A1 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		0FF5CD561EA769D70027E2DC /* ContextMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextMenuCell.h; sourceTree = "<group>"; };
+		0FF5CD571EA769D70027E2DC /* ContextMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextMenuCell.m; sourceTree = "<group>"; };
+		0FF5CD581EA769D70027E2DC /* ContextMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContextMenuCell.xib; sourceTree = "<group>"; };
 		0FF7B0B41D1380BF003C2D52 /* AirController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirController.h; sourceTree = "<group>"; };
 		0FF7B0B51D1380BF003C2D52 /* AirController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirController.m; sourceTree = "<group>"; };
 		0FF92B631D9222220098DD54 /* SQLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLManager.h; sourceTree = "<group>"; };
@@ -1814,6 +1819,7 @@
 		0F6ADFDA1E71343600BFF67F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0FF5CD4E1EA7695E0027E2DC /* Devices */,
 				CDEC868F1E9A1CBB009EC245 /* FamilyViewController */,
 				CD7863B41E8CF13A00F42AC0 /* MyInfoViewController */,
 				CD7DDA101E825E3E00638DB3 /* RegistViewController */,
@@ -2009,6 +2015,16 @@
 				0FDB34431E79269500DA53BB /* LayerUtil.m */,
 			);
 			name = Geometry;
+			sourceTree = "<group>";
+		};
+		0FF5CD4E1EA7695E0027E2DC /* Devices */ = {
+			isa = PBXGroup;
+			children = (
+				0FF5CD561EA769D70027E2DC /* ContextMenuCell.h */,
+				0FF5CD571EA769D70027E2DC /* ContextMenuCell.m */,
+				0FF5CD581EA769D70027E2DC /* ContextMenuCell.xib */,
+			);
+			name = Devices;
 			sourceTree = "<group>";
 		};
 		2E12CC131E7FC00A00C7D006 /* SceneViewController */ = {
@@ -2741,6 +2757,7 @@
 				CDF78C5A1E9CC3C500F8B20C /* NaviBarBg.png in Resources */,
 				CDF1574F1E7AB2AF00499AC5 /* icon_tabbar_mine@2x.png in Resources */,
 				2EE1196C1E80D6B900F6FCB6 /* shanchu.png in Resources */,
+				0FF5CD5A1EA769D70027E2DC /* ContextMenuCell.xib in Resources */,
 				CD93E3AF1E807CC2003CCAA9 /* login_bg@2x.png in Resources */,
 				2EE1196F1E81374A00F6FCB6 /* kaiqi.png in Resources */,
 				2EBABC791E8360FB0093EF3A /* TVTableViewCell.xib in Resources */,
@@ -3145,6 +3162,7 @@
 				F62CD87A1D94BE99001C66CE /* IphoneTVController.m in Sources */,
 				F62CFA411DAC699D006410F7 /* IphoneTypeView.m in Sources */,
 				0F1F3BCA1D2B85EA00B2641C /* MBProgressHUD+NJ.m in Sources */,
+				0FF5CD591EA769D70027E2DC /* ContextMenuCell.m in Sources */,
 				F625A61B1D4C99EC00B696E5 /* RoomListController.m in Sources */,
 				CDF157411E7AADC700499AC5 /* LeftSlideViewController.m in Sources */,
 				2EA897AC1E31B25E002CA904 /* YZNavigationMenuView.m in Sources */,

@@ -23,4 +23,5 @@ target 'SmartHome' do
 	pod 'AliPay', '~> 2.1.2'
     #pod 'ReactiveCocoa', '~> 5.0.0'
     pod 'ReactiveCocoa', '~> 2.5'
+    pod 'ContextMenu.iOS', '~> 1.1.0'
 end

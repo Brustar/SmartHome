@@ -11,11 +11,12 @@
 #import "Device.h"
 #import "Aircon.h"
 
+#define SWITCHLIGHT_SUB_TYPE @"01"
 #define DIMMER_SUB_TYPE @"02"
+#define COLORLIGHT_SUB_TYPE @"03"
+
 #define CURTAINS_SUB_TYPE @"21"
 #define AIR_SUB_TYPE @"31"
-#define COLORLIGHT_SUB_TYPE @"03"
-#define SWITCHLIGHT_SUB_TYPE @"01"
 
 #define LIGHT_DEVICE_TYPE @"1"
 #define CURTAIN_DEVICE_TYPE @"7"
