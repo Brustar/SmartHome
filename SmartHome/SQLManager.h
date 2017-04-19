@@ -36,6 +36,9 @@
 //根据roomID 从Devices 表 查询出 subTypeName字段(可能有重复数据，要去重)
 + (NSArray *)getDevicesSubTypeNamesWithRoomID:(int)roomID;
 
+//根据roomID和subTypeName字段 从Devices 表 查询出 htypeID字段(可能有重复数据，要去重)
++ (NSArray *)getDevicesIDWithRoomID:(int)roomID SubTypeName:(NSString *)subTypeName;
+
 //根据subTypeName 从Devices表 查询typeName(要去重)
 + (NSArray *)getDeviceTypeNameWithSubTypeName:(NSString *)subTypeName;
 //根据房间ID得到房间所有的调色灯
@@ -45,6 +48,8 @@
 
 //根据设备ID获取设备名称
 +(NSString *)deviceNameByDeviceID:(int)eId;
+//根据设备ID获取设备htypeID
++(NSInteger)deviceHtypeIDByDeviceID:(int)eId;
 //根据设备名字查找设备ID
 +(NSInteger)deviceIDByDeviceName:(NSString *)deviceName;
 //根据设备ID查到摄像头的URl
@@ -139,6 +144,7 @@
 +(NSString *)getRoomNameByRoomID:(int) rId;
 
 + (Device *)getDeviceWithDeviceID:(int) deviceID ;
++ (Device *)getDeviceWithDeviceHtypeID:(int) htypeID ;
 
 +(BOOL)updateTotalVisited:(int)roomID;
 
