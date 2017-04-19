@@ -1168,7 +1168,7 @@
     return [deviceIDs copy];
 }
 
-+ (NSArray *)getDeviceByRoom:(int) roomID
++ (NSArray *)getDimmerByRoom:(int) roomID
 {
     NSMutableArray *lights = [NSMutableArray new];
     
@@ -1181,7 +1181,7 @@
             masterID = [[DeviceInfo defaultManager] masterID];
         }
         
-        NSString *sql = [NSString stringWithFormat:@"SELECT id FROM devices where rid=%d and typename ='%@' and masterID = '%ld'",roomID,DIMMER, masterID];
+        NSString *sql = [NSString stringWithFormat:@"SELECT id FROM devices where rid=%d and htypeid ='%@' and masterID = '%ld'",roomID,DIMMER_SUB_TYPE, masterID];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
@@ -1192,6 +1192,7 @@
     [db close];
     return lights;
 }
+
 + (NSArray *)getColourLightByRoom:(int) roomID
 {
     NSMutableArray *lights = [NSMutableArray new];
@@ -1205,7 +1206,7 @@
             masterID = [[DeviceInfo defaultManager] masterID];
         }
         
-        NSString *sql = [NSString stringWithFormat:@"SELECT id FROM devices where rid=%d and typename ='%@' and masterID = '%ld'",roomID,ColourLight, masterID];
+        NSString *sql = [NSString stringWithFormat:@"SELECT id FROM devices where rid=%d and htypeid ='%@' and masterID = '%ld'",roomID,COLORLIGHT_SUB_TYPE, masterID];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
@@ -1229,7 +1230,7 @@
             masterID = [[DeviceInfo defaultManager] masterID];
         }
         
-        NSString *sql = [NSString stringWithFormat:@"SELECT id FROM devices where rid=%d and typename ='%@' and masterID = '%ld'",roomID,OffOrOnLight, masterID];
+        NSString *sql = [NSString stringWithFormat:@"SELECT id FROM devices where rid=%d and htypeid ='%@' and masterID = '%ld'",roomID,SWITCHLIGHT_SUB_TYPE, masterID];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
@@ -1254,7 +1255,7 @@
             masterID = [[DeviceInfo defaultManager] masterID];
         }
         
-        NSString *sql = [NSString stringWithFormat:@"SELECT id FROM devices where rid=%d and subTypeName ='%@' and masterID = '%ld'",roomID,LightDevice, masterID];
+        NSString *sql = [NSString stringWithFormat:@"SELECT id FROM devices where rid=%d and (subTypeid ='%@' or subTypeid ='%@') and masterID = '%ld'",roomID,LIGHT_DEVICE_TYPE,CURTAIN_DEVICE_TYPE, masterID];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
@@ -1279,7 +1280,7 @@
             masterID = [[DeviceInfo defaultManager] masterID];
         }
         
-        NSString *sql = [NSString stringWithFormat:@"SELECT id FROM devices where rid=%d and typename ='%@' and masterID = '%ld'",roomID,CURTAINS, masterID];
+        NSString *sql = [NSString stringWithFormat:@"SELECT id FROM devices where rid=%d and htypeid ='%@' and masterID = '%ld'",roomID,CURTAINS_SUB_TYPE, masterID];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
@@ -1290,6 +1291,7 @@
     [db close];
     return curtains;
 }
+
 + (NSArray *)getAirDeviceByRoom:(int) roomID
 {
     NSMutableArray *curtains = [NSMutableArray new];
@@ -1303,7 +1305,7 @@
             masterID = [[DeviceInfo defaultManager] masterID];
         }
         
-        NSString *sql = [NSString stringWithFormat:@"SELECT id FROM devices where rid=%d and typename ='%@' and masterID = '%ld'",roomID,AirDevice, masterID];
+        NSString *sql = [NSString stringWithFormat:@"SELECT id FROM devices where rid=%d and htypeid ='%@' and masterID = '%ld'",roomID,AIR_SUB_TYPE, masterID];
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {

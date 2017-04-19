@@ -227,6 +227,14 @@
                             <constraint firstItem="1xc-iO-7Dh" firstAttribute="trailing" secondItem="sVV-IE-K2n" secondAttribute="trailing" constant="-10" id="xVc-Tc-czQ"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="diskView" destination="ppE-xr-BIY" id="DsZ-TM-Ery"/>
+                        <outlet property="lastBtn" destination="fKF-pW-e6s" id="Cdy-jO-ucv"/>
+                        <outlet property="next" destination="D8n-J0-bXB" id="fPA-3t-aeY"/>
+                        <outlet property="nextBtn" destination="1xc-iO-7Dh" id="lDt-ay-SKG"/>
+                        <outlet property="playBtn" destination="Rvx-d6-XTw" id="dVX-m8-XZC"/>
+                        <outlet property="pre" destination="rhs-2J-bIM" id="43o-8m-jI5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DvJ-3z-Rl3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

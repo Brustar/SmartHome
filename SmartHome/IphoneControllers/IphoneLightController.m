@@ -110,7 +110,7 @@
         }
 
     }else{
-         _lightArrs     = [SQLManager getDeviceByRoom:self.roomID];
+         _lightArrs     = [SQLManager getDimmerByRoom:self.roomID];
         _ColourLightArr = [SQLManager getColourLightByRoom:self.roomID];
         _SwitchLightArr = [SQLManager getSwitchLightByRoom:self.roomID];
     }

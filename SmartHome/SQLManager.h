@@ -11,12 +11,14 @@
 #import "Device.h"
 #import "Aircon.h"
 
-#define DIMMER @"调光灯"
-#define CURTAINS @"开合帘"
-#define LightDevice @"照明"
-#define AirDevice @"空调"
-#define ColourLight @"调色灯"
-#define OffOrOnLight @"开关灯" 
+#define DIMMER_SUB_TYPE @"02"
+#define CURTAINS_SUB_TYPE @"21"
+#define AIR_SUB_TYPE @"31"
+#define COLORLIGHT_SUB_TYPE @"03"
+#define SWITCHLIGHT_SUB_TYPE @"01"
+
+#define LIGHT_DEVICE_TYPE @"1"
+#define CURTAIN_DEVICE_TYPE @"7"
 
 @interface SQLManager : NSObject
 
@@ -111,7 +113,7 @@
 +(void)initSQlite;
 +(void)initDemoSQlite;
 //根据房间ID找调光灯
-+ (NSArray *)getDeviceByRoom:(int) roomID;
++ (NSArray *)getDimmerByRoom:(int) roomID;
 //根据房间ID找开合帘
 + (NSArray *)getCurtainByRoom:(int) roomID;
 //根据房间ID找开合帘
