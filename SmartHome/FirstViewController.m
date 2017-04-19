@@ -60,6 +60,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *YLabelrightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *NLabelrightConstraint;
 @property (nonatomic,strong) BaseTabBarController *baseTabbarController;
+@property (weak, nonatomic) IBOutlet UIView *iconeView;
 
 @end
 
@@ -150,7 +151,9 @@
     NSString * locationString=[dateformatter stringFromDate:senddate];
     
     NSLog(@"-------%@",locationString);
-    
+    self.iconeView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *iconeTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionTap:)];//点击进入聊天页面
+    [self.iconeView addGestureRecognizer:iconeTap];
     //获取系统时间
     NSCalendar * cal=[NSCalendar currentCalendar];
     NSUInteger unitFlags=NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit;
@@ -195,6 +198,10 @@
      }
     _calenderDayLabel.text = [NSString stringWithFormat:@"%ld",day];
     [self chatConnect];
+}
+-(void)actionTap:(UIGestureRecognizer *)tap
+{
+    [self setRCIM];
 }
 //处理连接改变后的情况
 - (void)updateInterfaceWithReachability
@@ -401,6 +408,11 @@
 }
 //点击未读消息的事件
 - (IBAction)UnreadButton:(id)sender {
+    [self setRCIM];
+}
+//进入聊天页面
+-(void)setRCIM
+{
     
     [[RCIM sharedRCIM] logout];
     NSString *token = [UD objectForKey:@"rctoken"];
@@ -429,8 +441,8 @@
         NSLog(@"token错误");
         [MBProgressHUD hideHUD];
     }];
-}
 
+}
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
      self.CoverView.hidden = YES;

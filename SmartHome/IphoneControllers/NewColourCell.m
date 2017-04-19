@@ -1,14 +1,14 @@
 //
-//  OtherTableViewCell.m
+//  NewColourCell.m
 //  SmartHome
 //
-//  Created by zhaona on 2017/3/22.
+//  Created by zhaona on 2017/4/19.
 //  Copyright © 2017年 Brustar. All rights reserved.
 //
 
-#import "OtherTableViewCell.h"
+#import "NewColourCell.h"
 
-@implementation OtherTableViewCell
+@implementation NewColourCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

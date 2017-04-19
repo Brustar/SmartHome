@@ -418,6 +418,7 @@
                         <outlet property="calenderYearLabel" destination="VrK-Og-Koi" id="RBB-a5-974"/>
                         <outlet property="chatlabel" destination="j7W-j3-a92" id="Nyj-gb-U4W"/>
                         <outlet property="firstBtn" destination="gPz-2f-aZc" id="71T-LF-7Jd"/>
+                        <outlet property="iconeView" destination="DfP-eX-2Qi" id="kY8-1j-uNu"/>
                         <outlet property="markedWordsLabel" destination="AHx-ty-lAs" id="gmX-aC-amN"/>
                         <outlet property="memberFamilyLabel" destination="HHC-Uy-oQO" id="8z4-sx-dPx"/>
                         <outlet property="numberLabelView" destination="HyZ-U2-Pfr" id="tmH-of-tA3"/>

@@ -17,6 +17,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
+
 @interface BgMusicController ()
 
 @property (weak, nonatomic) IBOutlet UISlider *volume;

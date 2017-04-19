@@ -87,6 +87,33 @@
     [db close];
     return eName;
 }
+//根据设备ID获取设备htypeID
++(NSInteger)deviceHtypeIDByDeviceID:(int)eId
+{
+    FMDatabase *db = [self connetdb];
+    NSInteger htypeID = 0;
+    if([db open])
+    {
+        NSString *sql = nil;
+        
+        DeviceInfo *device = [DeviceInfo defaultManager];
+        if ([device.db isEqualToString:SMART_DB]) {
+            sql = [NSString stringWithFormat:@"SELECT HTYPEID FROM Devices where ID = %d and masterID = '%ld'",eId,[[DeviceInfo defaultManager] masterID]];
+        }else {
+            sql = [NSString stringWithFormat:@"SELECT HTYPEID FROM Devices where ID = %d and masterID = '%ld'",eId, 255l];
+        }
+        
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+            htypeID = [resultSet intForColumn:@"HTYPEID"];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return htypeID;
+    
+}
 
 +(NSInteger)deviceIDByDeviceName:(NSString *)deviceName
 {
@@ -1080,7 +1107,39 @@
     return subTypeNames;
     
 }
+//根据roomID和subTypeName字段 从Devices 表 查询出 ID字段(可能有重复数据，要去重)
++ (NSArray *)getDevicesIDWithRoomID:(int)roomID SubTypeName:(NSString *)subTypeName
+{
+    NSMutableArray *htypeIDs = [NSMutableArray array];
+    FMDatabase *db = [self connetdb];
+    
+    if([db open])
+    {
+        
+        NSString *sql = nil;
+        DeviceInfo *device = [DeviceInfo defaultManager];
+        if ([device.db isEqualToString:SMART_DB]) {
+            sql = [NSString stringWithFormat:@"SELECT DISTINCT ID FROM Devices where rID = %d and subTypeName = '%@' and masterID = '%ld'",roomID,subTypeName,[[DeviceInfo defaultManager] masterID]];
+        }else {
+            sql = [NSString stringWithFormat:@"SELECT DISTINCT ID FROM Devices where rID = %d and subTypeName = '%@' and masterID = '%ld'",1,subTypeName, 255l];
+        }
+        
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while([resultSet next])
+        {
+//            NSString *subTypeName = [resultSet stringForColumn:@"htypeID"];
+              int eId = [resultSet intForColumn:@"ID"];
+            if (eId) {
+                 [htypeIDs addObject:[NSNumber numberWithInt:eId]];
+            }
+            
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return [htypeIDs copy];
 
+}
 + (NSString *)getDeviceSubTypeNameWithID:(int)ID
 {
     NSString *subTypeName = nil;
@@ -1342,7 +1401,31 @@
     [db close];
     return device;
 }
++ (Device *)getDeviceWithDeviceHtypeID:(int) htypeID
+{
+    Device *device = nil;
+    
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        DeviceInfo *dev = [DeviceInfo defaultManager];
+        long masterID = 255l;
+        if ([dev.db isEqualToString:SMART_DB]) {
+            masterID = [[DeviceInfo defaultManager] masterID];
+        }
+        
+        NSString *sql = [NSString stringWithFormat:@"SELECT * FROM Devices where ID = %d and masterID = '%ld'",htypeID, masterID];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            device = [self deviceMdoelByFMResultSet:resultSet];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return device;
 
+}
 + (NSArray *)queryChat:(NSString *) userid
 {
     NSMutableArray *temp = [NSMutableArray new];
