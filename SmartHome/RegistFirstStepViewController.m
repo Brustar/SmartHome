@@ -74,6 +74,10 @@
     
 }
 
+- (IBAction)protocolBtnClicked:(id)sender {
+    [WebManager show:@"http://115.28.151.85:8082/article.aspx?articleid=1"];
+}
+
 #pragma mark - TableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;

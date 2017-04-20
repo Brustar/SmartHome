@@ -34,6 +34,7 @@
     }
     self.pwdTextField.delegate = self;
     self.pwd2TextField.delegate = self;
+    [self setNaviBarTitle:@"注册"];
 }
 
 #pragma  mark - 手机验证码
@@ -55,6 +56,7 @@
             [IOManager writeUserdefault:responseObject[@"token"] forKey:@"AuthorToken"];
             //进入注册成功页面
             [MBProgressHUD showSuccess:@"恭喜注册成功"];
+            [NC postNotificationName:@"registSuccess" object:self.phoneNum];
             [self.navigationController popToRootViewControllerAnimated:YES];
             
             //self.coverView.hidden = NO;

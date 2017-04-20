@@ -268,14 +268,19 @@
 - (void)setNetState:(int)state {
     if (state == netState_outDoor_4G) {
         [_netStateView setTitle:@"4G" forState:UIControlStateNormal];
+        [_netStateView setImage:nil forState:UIControlStateNormal];
     }else if (state == netState_outDoor_WIFI) {
         [_netStateView setImage:[UIImage imageNamed:@"Iphonewifi"] forState:UIControlStateNormal];
+        [_netStateView setTitle:@"" forState:UIControlStateNormal];
     }else if (state == netState_atHome_4G) {
         [_netStateView setTitle:@"4G" forState:UIControlStateNormal];
+        [_netStateView setImage:nil forState:UIControlStateNormal];
     }else if (state == netState_atHome_WIFI) {
         [_netStateView setImage:[UIImage imageNamed:@"Iphonewifi"] forState:UIControlStateNormal];
+        [_netStateView setTitle:@"" forState:UIControlStateNormal];
     }else if (state == netState_notConnect) {
         [_netStateView setTitle:@"未连接" forState:UIControlStateNormal];
+        [_netStateView setImage:nil forState:UIControlStateNormal];
     }
 }
 

@@ -74,6 +74,11 @@ static NSString * const CYPhotoId = @"photo";
     [super viewWillDisappear:animated];
     BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     baseTabbarController.tabbarPanel.hidden = YES;
+    
+    if (_nowMusicController) {
+        [_nowMusicController.view removeFromSuperview];
+        _nowMusicController = nil;
+    }
 }
 
 - (void)viewDidLoad {
@@ -108,7 +113,23 @@ static NSString * const CYPhotoId = @"photo";
 }
 
 - (void)rightBtnClicked:(UIButton *)btn {
-    [self performSegueWithIdentifier:@"lighting" sender:self];
+    UIStoryboard * HomeStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
+    if (_nowMusicController == nil) {
+        _nowMusicController = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"NowMusicController"];
+        _nowMusicController.delegate = self;
+        [self.view addSubview:_nowMusicController.view];
+        [self.view bringSubviewToFront:_nowMusicController.view];
+    }else {
+        [_nowMusicController.view removeFromSuperview];
+        _nowMusicController = nil;
+    }
+}
+
+- (void)onBgButtonClicked:(UIButton *)sender {
+    if (_nowMusicController) {
+        [_nowMusicController.view removeFromSuperview];
+        _nowMusicController = nil;
+    }
 }
 
 -(void)getUI

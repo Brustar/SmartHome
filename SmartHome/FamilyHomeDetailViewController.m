@@ -34,6 +34,7 @@
     bg.image = [UIImage imageNamed:@"background"];
     [self.deviceTableView setBackgroundView:bg];
     
+    [self.deviceTableView registerNib:[UINib nibWithNibName:@"NewLightCell" bundle:nil] forCellReuseIdentifier:@"NewLightCell"];//灯光
     [self.deviceTableView registerNib:[UINib nibWithNibName:@"AireTableViewCell" bundle:nil] forCellReuseIdentifier:@"AireTableViewCell"];//空调
     [self.deviceTableView registerNib:[UINib nibWithNibName:@"CurtainTableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainTableViewCell"];//窗帘
     [self.deviceTableView registerNib:[UINib nibWithNibName:@"TVTableViewCell" bundle:nil] forCellReuseIdentifier:@"TVTableViewCell"];//网络电视
@@ -216,8 +217,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        //return _lightArray.count;//灯光
-        return 0;
+        return _lightArray.count;//灯光
     }else if (section == 1){
         return _curtainArray.count;//窗帘
     }else if (section == 2){
@@ -236,16 +236,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {//灯光
-        /*LightCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+        NewLightCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewLightCell" forIndexPath:indexPath];
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.roomID = (int)self.roomID;
         Device *device = [SQLManager getDeviceWithDeviceID:[_lightArray[indexPath.row] intValue]];
-        cell.LightNameLabel.text = device.name;
-        cell.slider.continuous = NO;
+        cell.NewLightNameLabel.text = device.name;
+        cell.NewLightSlider.continuous = NO;
         cell.deviceid = _lightArray[indexPath.row];
-        return cell;*/
-        return nil;
+        return cell;
     }else if (indexPath.section == 1) {//窗帘
         CurtainTableViewCell *curtainCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
         curtainCell.backgroundColor =[UIColor clearColor];

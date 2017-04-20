@@ -14,9 +14,10 @@
 #import "DeviceInfo.h"
 #import "AudioManager.h"
 #import "SQLManager.h"
+#import "HttpManager.h"
 #import <AVFoundation/AVFoundation.h>
 
-@interface NowMusicController ()<UITableViewDataSource,UITableViewDataSource>
+@interface NowMusicController ()<UITableViewDataSource,UITableViewDataSource, HttpDelegate>
 @property (nonatomic,strong) NSArray * bgmusicIDS;
 @property (nonatomic,strong) NSMutableArray * bgmusicNameS;
 @property (nonatomic,assign) int Volume;
@@ -40,17 +41,9 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    _deviceArray = [NSMutableArray array];
     _bgmusicNameS = [[NSMutableArray alloc] init];
-    _bgmusicIDS = [SQLManager getDeviceByTypeName:@"影音"];
-    for (int i = 0; i < _bgmusicIDS.count; i ++) {
-         NSString * deviceName = [SQLManager deviceNameByDeviceID:[_bgmusicIDS[i] intValue]];
-         [_bgmusicNameS addObject:deviceName];
-    }
-   
-    if ([_bgmusicIDS count]>0) {
-        self.deviceid = _bgmusicIDS[0];
-    }
+    
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
     if (BLUETOOTH_MUSIC) {
@@ -59,8 +52,62 @@
     }
     _Volume = 0;
  
-    
+    [self fetchPlayingEquipmentList];
 }
+
+- (void)fetchPlayingEquipmentList {
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/current_player_list.aspx",[IOManager httpAddr]];
+    NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
+    
+    if (auothorToken.length >0) {
+        NSDictionary *dict = @{@"token":auothorToken,
+                               @"optype":@(0)
+                               };
+        HttpManager *http=[HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = 1;
+        [http sendPost:url param:dict];
+    }
+}
+
+#pragma mark - Http callback
+- (void)httpHandler:(id)responseObject tag:(int)tag
+{
+    if(tag == 1) {
+        [_deviceArray removeAllObjects];
+        if ([responseObject[@"result"] intValue] == 0) {
+            NSArray *roomList = responseObject[@"current_player_list"];
+            if ([roomList isKindOfClass:[NSArray class]]) {
+                for (NSDictionary *room in roomList) {
+                    
+                    if ([room isKindOfClass:[NSDictionary class]]) {
+                        NSString *rName = room[@"roomname"];
+                        NSArray *equipmentList = room[@"eqinfoList"];
+                        
+                        if ([equipmentList isKindOfClass:[NSArray class]]) {
+                            for (NSDictionary *device in equipmentList) {
+                                if ([device isKindOfClass:[NSDictionary class]]) {
+                                    Device *devInfo = [[Device alloc] init];
+                                    devInfo.rName = rName;
+                                    devInfo.eID = [device[@"eqid"] intValue];
+                                    devInfo.name = device[@"eqname"];
+                                    
+                                    [_deviceArray addObject:devInfo];
+                                    
+                                }
+                            }
+                        }
+                        
+                    }
+                    
+                }
+            }
+            
+            [self.MusicTableView reloadData];
+        }
+    }
+}
+
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
@@ -193,7 +240,7 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _bgmusicNameS.count;
+    return _deviceArray.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -205,7 +252,8 @@
     }
     cell.backgroundColor = [UIColor clearColor];
     [cell.textLabel setTextColor:[UIColor whiteColor]];
-    cell.textLabel.text = _bgmusicNameS[indexPath.row];
+    Device *devInfo = _deviceArray[indexPath.row];
+    cell.textLabel.text = devInfo.name;
     return cell;
 }
 - (IBAction)musicSwitchChanged:(id)sender {
@@ -239,4 +287,9 @@
 }
 */
 
+- (IBAction)bgBtnClicked:(id)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(onBgButtonClicked:)]) {
+        [_delegate onBgButtonClicked:sender];
+    }
+}
 @end

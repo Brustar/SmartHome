@@ -26,12 +26,13 @@
 #import "FamilyHomeCell.h"
 #import "CustomViewController.h"
 #import "FamilyHomeDetailViewController.h"
+#import "NowMusicController.h"
 
 #define  CollectionCellWidth self.roomCollectionView.frame.size.width / 2.0 -20
 #define  minSpace 20
 #define  maxSpace 40
 
-@interface FamilyHomeViewController : CustomViewController<UICollectionViewDataSource,UICollectionViewDelegate,HttpDelegate>
+@interface FamilyHomeViewController : CustomViewController<UICollectionViewDataSource,UICollectionViewDelegate,HttpDelegate, NowMusicControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *roomCollectionView;
 @property (nonatomic, strong) NSMutableArray *roomArray;
@@ -40,4 +41,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *avIcon;
 @property (weak, nonatomic) IBOutlet UIImageView *airIcon;
 @property (nonatomic, readonly) UIButton *naviRightBtn;
+@property (nonatomic, strong) NowMusicController * nowMusicController;
 @end
