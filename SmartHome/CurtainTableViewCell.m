@@ -24,8 +24,6 @@
         self.sliderWidthConstraint.constant = [[UIScreen mainScreen] bounds].size.width *0.3;
         
     }
-    
-    
 //    self = [[[NSBundle mainBundle] loadNibNamed:@"CurtainTableViewCell" owner:self options:nil] lastObject];
     self.slider.continuous = NO;
     [self.slider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
@@ -33,7 +31,9 @@
     [self.close addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     self.selectionStyle = UITableViewCellSelectionStyleGray;
     
-
+    [self.slider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
+    self.slider.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
+    self.slider.minimumTrackTintColor = [UIColor colorWithRed:253/255.0 green:254/255.0 blue:254/255.0 alpha:1];
 }
 
 
