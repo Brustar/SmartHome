@@ -231,7 +231,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ek-vt-ryo" customClass="IphoneRoomView">
-                                <rect key="frame" x="26" y="64" width="323" height="60"/>
+                                <rect key="frame" x="16" y="64" width="343" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="JEd-hu-nZV"/>
@@ -245,7 +245,7 @@
                                 </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="53" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="A7h-2x-arC">
-                                <rect key="frame" x="16" y="124" width="333" height="543"/>
+                                <rect key="frame" x="16" y="124" width="343" height="543"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="WkZ-Nj-tZr" id="mQ1-I2-xgr"/>
@@ -264,11 +264,11 @@
                             <constraint firstItem="A7h-2x-arC" firstAttribute="top" secondItem="HCK-RI-Hb4" secondAttribute="bottom" id="RVr-1Z-mlc"/>
                             <constraint firstItem="11W-LL-2vy" firstAttribute="top" secondItem="UuN-gu-S6d" secondAttribute="top" id="UAG-4V-6HV"/>
                             <constraint firstItem="HCK-RI-Hb4" firstAttribute="top" secondItem="UuN-gu-S6d" secondAttribute="topMargin" constant="64" id="bcZ-xP-j5b"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="2ek-vt-ryo" secondAttribute="trailing" constant="10" id="eQP-Dr-fC8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2ek-vt-ryo" secondAttribute="trailing" id="eQP-Dr-fC8"/>
                             <constraint firstAttribute="trailing" secondItem="11W-LL-2vy" secondAttribute="trailing" id="fIf-jP-O6s"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="A7h-2x-arC" secondAttribute="trailing" constant="10" id="lCZ-LV-erp"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="A7h-2x-arC" secondAttribute="trailing" id="lCZ-LV-erp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="HCK-RI-Hb4" secondAttribute="trailing" constant="20" id="msB-wY-mO6"/>
-                            <constraint firstItem="2ek-vt-ryo" firstAttribute="leading" secondItem="UuN-gu-S6d" secondAttribute="leadingMargin" constant="10" id="tZC-Xa-nRn"/>
+                            <constraint firstItem="2ek-vt-ryo" firstAttribute="leading" secondItem="UuN-gu-S6d" secondAttribute="leadingMargin" id="tZC-Xa-nRn"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="新增场景" id="71G-16-ACQ">

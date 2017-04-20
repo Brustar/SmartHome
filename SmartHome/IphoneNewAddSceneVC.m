@@ -226,8 +226,7 @@
         return _ColourLightArr.count;
     }if (section == 2){//开关灯
         return _SwitchLightArr.count;
-    }
-    if (section == 3){
+    }if (section == 3){
         return _AirArray.count;//空调
     }if (section == 4){
         return _CurtainArray.count;//窗帘
@@ -277,8 +276,7 @@
         newColourCell.lowImageView.hidden = YES;
         newColourCell.highImageView.hidden = YES;
         return newColourCell;
-    }
-    if (indexPath.section == 3) {//空调
+    }if (indexPath.section == 3) {//空调
         AireTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"AireTableViewCell" forIndexPath:indexPath];
         aireCell.backgroundColor =[UIColor clearColor];
         aireCell.roomID = self.roomID;

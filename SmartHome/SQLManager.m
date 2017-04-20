@@ -1089,7 +1089,12 @@
         NSString *sql = nil;
         DeviceInfo *device = [DeviceInfo defaultManager];
         if ([device.db isEqualToString:SMART_DB]) {
+            if ([self isWholeHouse:roomID]) {
+            sql = [NSString stringWithFormat:@"SELECT DISTINCT subTypeName FROM Devices where masterID = '%ld'",[[DeviceInfo defaultManager] masterID]];
+            }else{
             sql = [NSString stringWithFormat:@"SELECT DISTINCT subTypeName FROM Devices where rID = %d and masterID = '%ld'",roomID,[[DeviceInfo defaultManager] masterID]];
+            }
+           
         }else {
             sql = [NSString stringWithFormat:@"SELECT DISTINCT subTypeName FROM Devices where rID = %d and masterID = '%ld'",1, 255l];
         }
@@ -1121,7 +1126,12 @@
         NSString *sql = nil;
         DeviceInfo *device = [DeviceInfo defaultManager];
         if ([device.db isEqualToString:SMART_DB]) {
+            if ([self isWholeHouse:roomID]) {
+            sql = [NSString stringWithFormat:@"SELECT DISTINCT ID FROM Devices where subTypeName = '%@' and masterID = '%ld'",subTypeName,[[DeviceInfo defaultManager] masterID]];
+            }else{
             sql = [NSString stringWithFormat:@"SELECT DISTINCT ID FROM Devices where rID = %d and subTypeName = '%@' and masterID = '%ld'",roomID,subTypeName,[[DeviceInfo defaultManager] masterID]];
+            }
+          
         }else {
             sql = [NSString stringWithFormat:@"SELECT DISTINCT ID FROM Devices where rID = %d and subTypeName = '%@' and masterID = '%ld'",1,subTypeName, 255l];
         }
