@@ -7,7 +7,6 @@
 //
 
 #import "FamilyHomeViewController.h"
-#import "NowMusicController.h"
 
 @interface FamilyHomeViewController ()
 
@@ -24,8 +23,22 @@
 
 - (void)rightBtnClicked:(UIButton *)btn {
     UIStoryboard * HomeStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
-    NowMusicController * nowMusicController = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"NowMusicController"];
-    [self.navigationController pushViewController:nowMusicController animated:YES];
+    if (_nowMusicController == nil) {
+        _nowMusicController = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"NowMusicController"];
+        _nowMusicController.delegate = self;
+        [self.view addSubview:_nowMusicController.view];
+        [self.view bringSubviewToFront:_nowMusicController.view];
+    }else {
+        [_nowMusicController.view removeFromSuperview];
+        _nowMusicController = nil;
+    }
+}
+
+- (void)onBgButtonClicked:(UIButton *)sender {
+    if (_nowMusicController) {
+        [_nowMusicController.view removeFromSuperview];
+        _nowMusicController = nil;
+    }
 }
 
 - (void)viewDidLoad {
@@ -138,8 +151,10 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    NSInteger status = _afNetworkReachabilityManager.networkReachabilityStatus;
-    NSLog(@"NetworkReachabilityStatus: %ld", (long)status);
+    if (_nowMusicController) {
+        [_nowMusicController.view removeFromSuperview];
+        _nowMusicController = nil;
+    }
 }
 
 #pragma  mark - UICollectionViewDelegate

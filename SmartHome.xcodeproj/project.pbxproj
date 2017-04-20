@@ -149,9 +149,6 @@
 		2E12CC121E7F5E3000C7D006 /* CYPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E12CC0F1E7F5E3000C7D006 /* CYPhotoCell.xib */; };
 		2E12CC161E7FC04800C7D006 /* IphoneNewEditSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CC151E7FC04800C7D006 /* IphoneNewEditSceneController.m */; };
 		2E1495101DE474EF00141629 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9ADF711CE2DC020052F3BC /* libz.tbd */; };
-		2E1D4F0B1E727A64007625BD /* Slider4.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E1D4F0A1E727A64007625BD /* Slider4.png */; };
-		2E1D4F0D1E727AE2007625BD /* Slider2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E1D4F0C1E727AE2007625BD /* Slider2.png */; };
-		2E1D4F0F1E727AE4007625BD /* Slider1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E1D4F0E1E727AE4007625BD /* Slider1.png */; };
 		2E20EBB51E8A32BF00891828 /* ShortcutKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E20EBB41E8A32BF00891828 /* ShortcutKeyViewController.m */; };
 		2E20EBB81E8A439300891828 /* ShortcutKeyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E20EBB71E8A439300891828 /* ShortcutKeyCell.m */; };
 		2E2B57195D5A936F7BD15641 /* libPods-SmartHome.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9FD66F09F2092DE805E0F5B /* libPods-SmartHome.a */; };
@@ -765,9 +762,6 @@
 		2E12CC0F1E7F5E3000C7D006 /* CYPhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CYPhotoCell.xib; sourceTree = "<group>"; };
 		2E12CC141E7FC04800C7D006 /* IphoneNewEditSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneNewEditSceneController.h; sourceTree = "<group>"; };
 		2E12CC151E7FC04800C7D006 /* IphoneNewEditSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneNewEditSceneController.m; sourceTree = "<group>"; };
-		2E1D4F0A1E727A64007625BD /* Slider4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Slider4.png; sourceTree = "<group>"; };
-		2E1D4F0C1E727AE2007625BD /* Slider2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Slider2.png; sourceTree = "<group>"; };
-		2E1D4F0E1E727AE4007625BD /* Slider1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Slider1.png; sourceTree = "<group>"; };
 		2E20EBB31E8A32BF00891828 /* ShortcutKeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortcutKeyViewController.h; sourceTree = "<group>"; };
 		2E20EBB41E8A32BF00891828 /* ShortcutKeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortcutKeyViewController.m; sourceTree = "<group>"; };
 		2E20EBB61E8A439300891828 /* ShortcutKeyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortcutKeyCell.h; sourceTree = "<group>"; };
@@ -2194,9 +2188,6 @@
 				2EA97E601E56A347003E0039 /* UIImage+ImageEffects.m */,
 				2EA97E621E56A355003E0039 /* ObjectFunction.h */,
 				2EA97E631E56A355003E0039 /* ObjectFunction.m */,
-				2E1D4F0C1E727AE2007625BD /* Slider2.png */,
-				2E1D4F0E1E727AE4007625BD /* Slider1.png */,
-				2E1D4F0A1E727A64007625BD /* Slider4.png */,
 				2EA97E651E56A3E7003E0039 /* test.jpeg */,
 				2EA897BB1E31B53E002CA904 /* 1@2x.png */,
 				2EA897BD1E31B59B002CA904 /* 2@2x.png */,
@@ -2749,7 +2740,6 @@
 				CDF1574D1E7AB2AF00499AC5 /* icon_tabbar_merchant_normal@2x.png in Resources */,
 				CDEC86841E960E92009EC245 /* background.png in Resources */,
 				F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */,
-				2E1D4F0B1E727A64007625BD /* Slider4.png in Resources */,
 				2EA897BE1E31B59B002CA904 /* 2@2x.png in Resources */,
 				0F49CB7E1E7A204300D46ECC /* Scene-iPad.storyboard in Resources */,
 				CDFB9DF21E5DCB4D00BFECCE /* SceneTimerList.plist in Resources */,
@@ -2779,7 +2769,6 @@
 				CDF1574C1E7AB2AF00499AC5 /* icon_tabbar_homepage@2x.png in Resources */,
 				CD51343F1E92807600C2EDAF /* tipIcon@2x.png in Resources */,
 				0F49CB6E1E7A1E3700D46ECC /* MyInfo.storyboard in Resources */,
-				2E1D4F0D1E727AE2007625BD /* Slider2.png in Resources */,
 				CD7DDA0F1E82583700638DB3 /* pullBtn@2x.png in Resources */,
 				2EBABC7E1E8361C50093EF3A /* OtherTableViewCell.xib in Resources */,
 				CDF78C5A1E9CC3C500F8B20C /* NaviBarBg.png in Resources */,
@@ -2791,7 +2780,6 @@
 				2EBABC791E8360FB0093EF3A /* TVTableViewCell.xib in Resources */,
 				0F020A231DE3D9330034869F /* LaunchScreen.storyboard in Resources */,
 				CDF389221E305B4400657C8B /* breakdownlist.plist in Resources */,
-				2E1D4F0F1E727AE4007625BD /* Slider1.png in Resources */,
 				CD7DDA0B1E81297D00638DB3 /* registButton@2x.png in Resources */,
 				F6359B011CFFC4DC0035EB31 /* ColourTableViewCell.xib in Resources */,
 				2EB516FA1E9CEB3F0064B18E /* AddDeviceCell.xib in Resources */,
