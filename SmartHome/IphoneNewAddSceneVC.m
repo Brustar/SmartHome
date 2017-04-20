@@ -13,7 +13,7 @@
 #import "MBProgressHUD+NJ.h"
 #import "IphoneNewAddSceneCell.h"
 #import "IphoneSaveNewSceneController.h"
-#import "LightCell.h"
+//#import "LightCell.h"
 #import "CurtainTableViewCell.h"
 #import "DVDTableViewCell.h"
 #import "AireTableViewCell.h"
@@ -23,6 +23,7 @@
 #import "OtherTableViewCell.h"
 #import "TVTableViewCell.h"
 #import "NewColourCell.h"
+#import "NewLightCell.h"
 
 @interface IphoneNewAddSceneVC ()<UITableViewDelegate,UITableViewDataSource,IphoneRoomViewDelegate>
 
@@ -84,6 +85,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"ScreenCurtainCell" bundle:nil] forCellReuseIdentifier:@"ScreenCurtainCell"];//幕布ScreenCurtainCell
     [self.tableView registerNib:[UINib nibWithNibName:@"DVDTableViewCell" bundle:nil] forCellReuseIdentifier:@"DVDTableViewCell"];//DVD
     [self.tableView registerNib:[UINib nibWithNibName:@"BjMusicTableViewCell" bundle:nil] forCellReuseIdentifier:@"BjMusicTableViewCell"];//背景音乐
+     [self.tableView registerNib:[UINib nibWithNibName:@"NewLightCell" bundle:nil] forCellReuseIdentifier:@"NewLightCell"];//背景音乐
 }
 - (void)setupNaviBar {
     [self setNaviBarTitle:@"添加场景"]; //设置标题
@@ -250,14 +252,14 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {//调灯光
-        LightCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+        NewLightCell * cell = [tableView dequeueReusableCellWithIdentifier:@"NewLightCell" forIndexPath:indexPath];
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
-        cell.roomID = self.roomID;
+       // cell.roomID = self.roomID;
 //        cell.sceneID = self.sceneid;
         Device * device = [SQLManager getDeviceWithDeviceHtypeID:[_lightArray[indexPath.row] intValue]];
-        cell.LightNameLabel.text = device.name;
-        cell.slider.continuous = NO;
+        cell.NewLightNameLabel.text = device.name;
+        cell.NewLightSlider.continuous = NO;
         cell.deviceid = _lightArray[indexPath.row];
         return cell;
     }if (indexPath.section == 1) {//调色灯

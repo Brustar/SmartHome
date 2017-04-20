@@ -226,6 +226,8 @@
 		2EC8A5931E372D75002A5042 /* ColourCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC8A5921E372D75002A5042 /* ColourCell.m */; };
 		2ECDCC901E9E3623004C68BE /* BjMusicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECDCC8E1E9E3623004C68BE /* BjMusicTableViewCell.m */; };
 		2ECDCC911E9E3623004C68BE /* BjMusicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2ECDCC8F1E9E3623004C68BE /* BjMusicTableViewCell.xib */; };
+		2ED3BFDC1EA8412500772437 /* NewLightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED3BFDA1EA8412500772437 /* NewLightCell.m */; };
+		2ED3BFDD1EA8412500772437 /* NewLightCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2ED3BFDB1EA8412500772437 /* NewLightCell.xib */; };
 		2ED42B931E35B41E00592A03 /* IphoneAirCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED42B921E35B41E00592A03 /* IphoneAirCell.m */; };
 		2EDC0E901DEC072700F95BE0 /* IPhoneRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDC0E8F1DEC072700F95BE0 /* IPhoneRoom.m */; };
 		2EDE04611E45777B00BC8E0B /* WebViewMangerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE04601E45777B00BC8E0B /* WebViewMangerVC.m */; };
@@ -882,6 +884,9 @@
 		2ECDCC8D1E9E3623004C68BE /* BjMusicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BjMusicTableViewCell.h; sourceTree = "<group>"; };
 		2ECDCC8E1E9E3623004C68BE /* BjMusicTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BjMusicTableViewCell.m; sourceTree = "<group>"; };
 		2ECDCC8F1E9E3623004C68BE /* BjMusicTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BjMusicTableViewCell.xib; sourceTree = "<group>"; };
+		2ED3BFD91EA8412500772437 /* NewLightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewLightCell.h; sourceTree = "<group>"; };
+		2ED3BFDA1EA8412500772437 /* NewLightCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewLightCell.m; sourceTree = "<group>"; };
+		2ED3BFDB1EA8412500772437 /* NewLightCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewLightCell.xib; sourceTree = "<group>"; };
 		2ED42B911E35B41E00592A03 /* IphoneAirCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneAirCell.h; sourceTree = "<group>"; };
 		2ED42B921E35B41E00592A03 /* IphoneAirCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneAirCell.m; sourceTree = "<group>"; };
 		2EDC0E8E1DEC072700F95BE0 /* IPhoneRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPhoneRoom.h; sourceTree = "<group>"; };
@@ -2244,6 +2249,9 @@
 				2E6A06581EA743B50022B681 /* NewColourCell.h */,
 				2E6A06591EA743B50022B681 /* NewColourCell.m */,
 				2E6A065A1EA743B50022B681 /* NewColourCell.xib */,
+				2ED3BFD91EA8412500772437 /* NewLightCell.h */,
+				2ED3BFDA1EA8412500772437 /* NewLightCell.m */,
+				2ED3BFDB1EA8412500772437 /* NewLightCell.xib */,
 			);
 			name = TableViewCell;
 			sourceTree = "<group>";
@@ -2718,6 +2726,7 @@
 				CD7DDA091E81168F00638DB3 /* login_name@2x.png in Resources */,
 				2ECDCC911E9E3623004C68BE /* BjMusicTableViewCell.xib in Resources */,
 				0F49CB721E7A1EAE00D46ECC /* Scene.storyboard in Resources */,
+				2ED3BFDD1EA8412500772437 /* NewLightCell.xib in Resources */,
 				0F49CB7A1E7A204300D46ECC /* Devices-iPad.storyboard in Resources */,
 				CDF1574E1E7AB2AF00499AC5 /* icon_tabbar_merchant_selected@2x.png in Resources */,
 				F60FDB471D003FD500AB04BE /* CurtainTableViewCell.xib in Resources */,
@@ -3032,7 +3041,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		CAA59AA0339CA487ED75EDCC /* [CP] Check Pods Manifest.lock */ = {
@@ -3142,6 +3151,7 @@
 				2EC266281EA4BEAF003DC979 /* FMTableViewCell.m in Sources */,
 				0FC0FFDA1CF577C0000F71D5 /* RealScene.m in Sources */,
 				0FA392FB1E80D2C200C00AA3 /* MHRotaryKnob.m in Sources */,
+				2ED3BFDC1EA8412500772437 /* NewLightCell.m in Sources */,
 				F6755A4F1D406552002394F3 /* ECloudTabBarController.m in Sources */,
 				CDF157541E7BA3F600499AC5 /* UIView_extra.m in Sources */,
 				0FAF74C41CEEA17C00432713 /* HRColorPickerView.m in Sources */,
