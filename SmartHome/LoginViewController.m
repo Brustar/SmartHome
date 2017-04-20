@@ -28,6 +28,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self addNotifications];
    [self.nameTextField setValue:[UIColor grayColor] forKeyPath:@"_placeholderLabel.textColor"];
     
     [self.pwdTextField setValue:[UIColor grayColor] forKeyPath:@"_placeholderLabel.textColor"];
@@ -40,6 +41,19 @@
     self.pwdTextField.text = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Password"] decryptWithDes:DES_KEY];
     UserType =[[UD objectForKey:@"UserType"] intValue];
     
+}
+
+- (void)addNotifications {
+    [NC addObserver:self selector:@selector(registSuccessNotification:) name:@"registSuccess" object:nil];
+}
+
+- (void)removeNotifications {
+    [NC removeObserver:self];
+}
+
+- (void)registSuccessNotification:(NSNotification *)noti {
+    NSString *phoneNum = (NSString *)noti.object;
+    _nameTextField.text = phoneNum;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -55,15 +69,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)dealloc {
+    [self removeNotifications];
 }
-*/
 
 - (IBAction)forgetPwdBtnClicked:(id)sender {
     

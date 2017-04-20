@@ -70,6 +70,10 @@
     [self checkPhoneNumberIsExist];
 }
 
+- (IBAction)protocolBtnClicked:(id)sender {
+    [WebManager show:@"http://115.28.151.85:8082/article.aspx?articleid=1"];
+}
+
 //验证手机号是否已注册
 - (void)checkPhoneNumberIsExist {
     
