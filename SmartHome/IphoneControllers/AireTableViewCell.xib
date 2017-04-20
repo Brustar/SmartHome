@@ -64,7 +64,7 @@
                             <constraint firstAttribute="height" constant="30" id="bLH-nh-a6Q"/>
                         </constraints>
                     </slider>
-                    <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dmh-EL-E3l">
+                    <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Dmh-EL-E3l">
                         <rect key="frame" x="278" y="17" width="42" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="CAK-Z1-6SA"/>
@@ -72,7 +72,7 @@
                         </constraints>
                     </switch>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m1O-G7-5Ud">
-                        <rect key="frame" x="273" y="15" width="55" height="35"/>
+                        <rect key="frame" x="223" y="15" width="55" height="35"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="55" id="Rmy-Oh-dJu"/>
                             <constraint firstAttribute="height" constant="35" id="urB-bg-hpr"/>
@@ -83,6 +83,14 @@
                             <action selector="AireSwitchBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="BYs-sw-6TW"/>
                         </connections>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5b9-uL-jLe">
+                        <rect key="frame" x="298" y="14" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="b7j-gy-qav"/>
+                            <constraint firstAttribute="width" constant="30" id="bH6-PM-spU"/>
+                        </constraints>
+                        <state key="normal" image="icon_add_normal"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Yqf-zh-nqL" firstAttribute="leading" secondItem="4Ci-ZD-g6F" secondAttribute="leading" id="6pM-LG-WPl"/>
@@ -91,12 +99,14 @@
                     <constraint firstAttribute="trailingMargin" secondItem="8Ux-fc-F6y" secondAttribute="trailing" constant="10" id="AiG-Zj-4av"/>
                     <constraint firstAttribute="trailingMargin" secondItem="9yv-2g-L2p" secondAttribute="trailing" constant="20" id="Ede-RQ-T3O"/>
                     <constraint firstItem="8Ux-fc-F6y" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="50" id="Ffm-Oi-SZZ"/>
+                    <constraint firstItem="5b9-uL-jLe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="6" id="H2v-Vm-vjH"/>
                     <constraint firstAttribute="bottomMargin" secondItem="9yv-2g-L2p" secondAttribute="bottom" constant="3" id="RXd-6o-TyL"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="m1O-G7-5Ud" secondAttribute="trailing" constant="10" id="T4f-8k-k9L"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="m1O-G7-5Ud" secondAttribute="trailing" constant="60" id="T4f-8k-k9L"/>
                     <constraint firstAttribute="bottomMargin" secondItem="Yqf-zh-nqL" secondAttribute="bottom" constant="3" id="WeX-nR-ANx"/>
                     <constraint firstItem="4Ci-ZD-g6F" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Wga-Rc-fB3"/>
                     <constraint firstItem="0cu-aa-C0a" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="XCx-tc-oqJ"/>
                     <constraint firstItem="9yv-2g-L2p" firstAttribute="leading" secondItem="5Gp-k8-Gvg" secondAttribute="trailing" constant="8" id="ZeY-A6-dKP"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="5b9-uL-jLe" secondAttribute="trailing" constant="10" id="dkh-kX-wVD"/>
                     <constraint firstItem="Yqf-zh-nqL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="eMN-Yx-kSV"/>
                     <constraint firstAttribute="trailingMargin" secondItem="Dmh-EL-E3l" secondAttribute="trailing" constant="20" id="fVp-vz-IzL"/>
                     <constraint firstItem="m1O-G7-5Ud" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="fvr-mX-kFD"/>
@@ -109,6 +119,8 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="AddAireBtn" destination="5b9-uL-jLe" id="4lx-tK-aCc"/>
+                <outlet property="AireConstraint" destination="T4f-8k-k9L" id="TUa-nu-PYS"/>
                 <outlet property="AireNameLabel" destination="4Ci-ZD-g6F" id="Bys-9D-LDu"/>
                 <outlet property="AireSlider" destination="9yv-2g-L2p" id="m74-0r-nHa"/>
                 <outlet property="AireSwitchBtn" destination="m1O-G7-5Ud" id="j83-HB-Tzg"/>
@@ -120,6 +132,7 @@
     <resources>
         <image name="dvd_btn_switch_on" width="36" height="23"/>
         <image name="dvd_frm_choice__normal" width="336" height="47"/>
+        <image name="icon_add_normal" width="15" height="15"/>
         <image name="ktv_btn_ajt" width="269" height="20"/>
         <image name="ktv_btn_show" width="36" height="20"/>
     </resources>

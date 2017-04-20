@@ -15,4 +15,6 @@
 @property (nonatomic,assign) int roomID;
 @property(nonatomic,strong) NSString * sceneID;
 @property (weak,nonatomic) NSString *deviceid;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *curtainContraint;
+@property (weak, nonatomic) IBOutlet UIButton *AddcurtainBtn;
 @end

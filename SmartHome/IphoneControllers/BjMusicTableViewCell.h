@@ -12,5 +12,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *BjMusicNameLb;
 @property (weak, nonatomic) IBOutlet UISlider *BjSlider;
 @property (weak, nonatomic) IBOutlet UIButton *BjPowerButton;
+@property (weak, nonatomic) IBOutlet UIButton *AddBjmusicBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *BJmusicConstraint;
 
 @end

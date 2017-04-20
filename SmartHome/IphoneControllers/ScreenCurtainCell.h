@@ -15,5 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *DownBtn;
 @property (weak, nonatomic) IBOutlet UISwitch *PowerSwitch;
 @property (weak, nonatomic) IBOutlet UIButton *ScreenCurtainBtn;
+@property (weak, nonatomic) IBOutlet UIButton *AddScreenCurtainBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ScreenCurtainConstraint;
 
 @end

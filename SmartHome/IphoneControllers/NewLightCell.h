@@ -13,5 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *NewLightPowerBtn;
 @property (weak, nonatomic) IBOutlet UISlider *NewLightSlider;
 @property(nonatomic, strong)NSString * deviceid;
+@property (weak, nonatomic) IBOutlet UIButton *AddLightBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *LightConstraint;
 
 @end

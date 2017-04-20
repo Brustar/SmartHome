@@ -94,7 +94,7 @@
                         </constraints>
                         <state key="normal" image="icon_add_normal"/>
                     </button>
-                    <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XDC-WQ-BWg">
+                    <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="XDC-WQ-BWg">
                         <rect key="frame" x="269" y="6.5" width="42" height="40"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="Jqg-GP-MCx"/>
@@ -102,7 +102,7 @@
                         </constraints>
                     </switch>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xOF-yf-IDB">
-                        <rect key="frame" x="272" y="7" width="55" height="35"/>
+                        <rect key="frame" x="222" y="15" width="55" height="35"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="55" id="Dr0-6T-QW2"/>
                             <constraint firstAttribute="height" constant="35" id="NHa-u5-Gxq"/>
@@ -112,23 +112,34 @@
                             <action selector="TVSwitchBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="CXn-ja-eTq"/>
                         </connections>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OYh-IL-rXK">
+                        <rect key="frame" x="289" y="16" width="30" height="30"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="Tu4-va-eH5"/>
+                            <constraint firstAttribute="width" constant="30" id="h71-Kz-VqZ"/>
+                        </constraints>
+                        <state key="normal" image="icon_add_normal"/>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="OYh-IL-rXK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="0c3-Kc-0yI"/>
                     <constraint firstItem="r1c-Qd-2y6" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="0iS-Ml-dhy"/>
                     <constraint firstItem="tWF-t6-Y9g" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="3Zr-2m-9fM"/>
                     <constraint firstItem="pnd-J7-sYa" firstAttribute="top" secondItem="r1c-Qd-2y6" secondAttribute="bottom" constant="12" id="44f-9H-rsN"/>
-                    <constraint firstAttribute="trailing" secondItem="xOF-yf-IDB" secondAttribute="trailing" constant="10" id="4p4-j9-COc"/>
+                    <constraint firstAttribute="trailing" secondItem="xOF-yf-IDB" secondAttribute="trailing" constant="60" id="4p4-j9-COc"/>
                     <constraint firstAttribute="trailingMargin" secondItem="SAb-M2-Mdf" secondAttribute="trailing" constant="15" id="5Re-G4-k0b"/>
                     <constraint firstItem="e3e-Vd-xcZ" firstAttribute="top" secondItem="XDC-WQ-BWg" secondAttribute="bottom" constant="3" id="70J-td-yeK"/>
                     <constraint firstAttribute="bottomMargin" secondItem="SAb-M2-Mdf" secondAttribute="bottom" constant="11.5" id="83O-zi-g3E"/>
                     <constraint firstAttribute="trailing" secondItem="pnd-J7-sYa" secondAttribute="trailing" id="BIR-Hn-7t4"/>
                     <constraint firstItem="pnd-J7-sYa" firstAttribute="top" secondItem="7DU-dS-c5S" secondAttribute="bottom" constant="3" id="E9D-ro-I0P"/>
                     <constraint firstAttribute="trailing" secondItem="e3e-Vd-xcZ" secondAttribute="trailing" id="FQs-X1-xCK"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="OYh-IL-rXK" secondAttribute="trailing" constant="10" id="J2D-Og-j6A"/>
                     <constraint firstAttribute="trailingMargin" secondItem="7DU-dS-c5S" secondAttribute="trailing" constant="5" id="JVo-2Q-qNm"/>
                     <constraint firstItem="lJq-tW-lxt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="50" id="LVb-ib-Ifs"/>
                     <constraint firstAttribute="bottomMargin" secondItem="68P-ou-Xax" secondAttribute="bottom" constant="13.5" id="MKp-sz-vId"/>
                     <constraint firstItem="68P-ou-Xax" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="15" id="O2z-q1-dyJ"/>
-                    <constraint firstItem="xOF-yf-IDB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="P3Y-Dg-ayj"/>
+                    <constraint firstItem="xOF-yf-IDB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="P3Y-Dg-ayj"/>
                     <constraint firstAttribute="bottom" secondItem="pnd-J7-sYa" secondAttribute="bottom" id="Ppe-fC-gqf"/>
                     <constraint firstAttribute="trailingMargin" secondItem="XDC-WQ-BWg" secondAttribute="trailing" constant="20" id="Q7N-6x-hQ9"/>
                     <constraint firstItem="pnd-J7-sYa" firstAttribute="top" secondItem="iTa-SA-Jqr" secondAttribute="bottom" constant="12" id="Tbv-kd-kmy"/>
@@ -145,12 +156,14 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="AddTvDeviceBtn" destination="OYh-IL-rXK" id="m4F-kI-eKg"/>
+                <outlet property="TVConstraint" destination="4p4-j9-COc" id="91m-pY-B0J"/>
                 <outlet property="TVNameLabel" destination="tWF-t6-Y9g" id="TRf-sJ-vTB"/>
                 <outlet property="TVSlider" destination="dKl-4X-Ia9" id="rB4-Qv-6yn"/>
                 <outlet property="TVSwitch" destination="XDC-WQ-BWg" id="pmx-VE-HSp"/>
                 <outlet property="TVSwitchBtn" destination="xOF-yf-IDB" id="aXY-Vz-M9m"/>
             </connections>
-            <point key="canvasLocation" x="40.5" y="125.5"/>
+            <point key="canvasLocation" x="-119.5" y="75.5"/>
         </tableViewCell>
     </objects>
     <resources>
