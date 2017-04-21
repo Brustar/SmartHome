@@ -14,7 +14,7 @@
 #import "CryptoManager.h"
 #import "WebManager.h"
 #import "IOManager.h"
-#import "CustomViewController.m"
+#import "CustomViewController.h"
 
 @interface RegistSecondStepViewController : CustomViewController<HttpDelegate, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *phoneNumLabel;
