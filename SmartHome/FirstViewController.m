@@ -24,10 +24,10 @@
 #import "ConversationViewController.h"
 #import <RBStoryboardLink.h>
 #import "IOManager.h"
-#import "NowMusicController.h"
 
 
-@interface FirstViewController ()<RCIMReceiveMessageDelegate,HttpDelegate,UITableViewDelegate,UITableViewDataSource>
+
+@interface FirstViewController ()<RCIMReceiveMessageDelegate,HttpDelegate, TcpRecvDelegate,  UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIImageView * SubImageView;//首页的日历大圆
 @property (weak, nonatomic) IBOutlet UIView * BtnView;//全屋场景的按钮试图
 @property (weak, nonatomic) IBOutlet UIImageView * IconeImageView;//提示消息的头像
@@ -97,6 +97,12 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    
+    if (_nowMusicController) {
+        [_nowMusicController.view removeFromSuperview];
+        _nowMusicController = nil;
+    }
+    
     _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     _baseTabbarController.tabbarPanel.hidden = YES;
     [[RCIM sharedRCIM] logout];
@@ -107,6 +113,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if ([[UD objectForKey:@"HostID"] intValue] == 258) { //九号大院
+        SocketManager *sock = [SocketManager defaultManager];
+        [sock connectTcp];
+        sock.delegate = self;
+    }else{
+        [self connect];
+    }
     
     [self setupNaviBar];
     [self showNetStateView];
@@ -186,7 +200,7 @@
         _calenderMonthLabel.text = @"December";
     }
     NSInteger day=[conponent day];
-    _calenderYearLabel.text = [NSString stringWithFormat:@"%ld",year];
+    _calenderYearLabel.text = [NSString stringWithFormat:@"%ld",(long)year];
      if (([UIScreen mainScreen].bounds.size.height == 568.0)) {
          _DayLabelUpConstraint.constant = -10;
          _DayLabelLeftConstraint.constant = -5;
@@ -196,9 +210,21 @@
      }if (([UIScreen mainScreen].bounds.size.height == 667.0)) {
          _calenderDayLabel.font = [UIFont systemFontOfSize:113];
      }
-    _calenderDayLabel.text = [NSString stringWithFormat:@"%ld",day];
+    _calenderDayLabel.text = [NSString stringWithFormat:@"%ld",(long)day];
     [self chatConnect];
 }
+
+- (void)connect
+{
+    SocketManager *sock = [SocketManager defaultManager];
+    if ([[UD objectForKey:@"HostID"] intValue] > 0x8000) {
+        [sock connectUDP:[IOManager udpPort]];
+    }else{
+        [sock connectTcp];
+    }
+    sock.delegate = self;
+}
+
 -(void)actionTap:(UIGestureRecognizer *)tap
 {
     [self setRCIM];
@@ -216,47 +242,50 @@
         {
             if (info.connectState==outDoor) {
                 [FirstBlockSelf setNetState:netState_outDoor_4G];
+                [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"Scene-selected"] forState:UIControlStateNormal];
                 NSLog(@"外出模式-4g");
-                // [self.netBarBtnItem setImage:[UIImage imageNamed:@"4g"]];
+                
             }
             if (info.connectState==offLine) {
                 [FirstBlockSelf setNetState:netState_notConnect];
                 NSLog(@"离线模式");
-               self.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
-              [_baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
-                //[self.netBarBtnItem setImage:[UIImage imageNamed:@"4g"]];
+               FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
+              [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
+                
             }
         }
         else if(status == AFNetworkReachabilityStatusReachableViaWiFi) //WIFI
         {
             if (info.connectState==atHome) {
                 [FirstBlockSelf setNetState:netState_atHome_WIFI];
+                [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"Scene-selected"] forState:UIControlStateNormal];
                 NSLog(@"在家模式");
-                //[self.netBarBtnItem setImage:[UIImage imageNamed:@"atHome"]];
+                
                 
             }else if (info.connectState==outDoor){
                 [FirstBlockSelf setNetState:netState_atHome_4G];
+                [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"Scene-selected"] forState:UIControlStateNormal];
                 NSLog(@"外出模式");
-                //[self.netBarBtnItem setImage:[UIImage imageNamed:@"Iphonewifi"]];
+                
             }else if (info.connectState==offLine) {
                 [FirstBlockSelf setNetState:netState_notConnect];
-                 self.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
-                 [_baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
+                 FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
+                 [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
                 NSLog(@"离线模式");
-                //[self.netBarBtnItem setImage:[UIImage imageNamed:@"Iphonewifi"]];
+                
                 
             }
         }else if(status == AFNetworkReachabilityStatusNotReachable){ //没有网络(断网)
             [FirstBlockSelf setNetState:netState_notConnect];
-             self.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
-             [_baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
+             FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
+             [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
             NSLog(@"离线模式");
-            // [self.netBarBtnItem setImage:[UIImage imageNamed:@"breakWifi"]];
+            
         }else if (status == AFNetworkReachabilityStatusUnknown) { //未知网络
             [FirstBlockSelf setNetState:netState_notConnect];
-            self.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
-             [_baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
-            // [self.netBarBtnItem setImage:[UIImage imageNamed:@"breakWifi"]];
+            FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
+             [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
+            
         }
     }];
     
@@ -380,8 +409,21 @@
 - (void)rightBtnClicked:(UIButton *)btn {
     
     UIStoryboard * HomeStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
-    NowMusicController * nowMusicController = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"NowMusicController"];
-    [self.navigationController pushViewController:nowMusicController animated:YES];
+    if (_nowMusicController == nil) {
+        _nowMusicController = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"NowMusicController"];
+        _nowMusicController.delegate = self;
+        [self.view addSubview:_nowMusicController.view];
+    }else {
+        [_nowMusicController.view removeFromSuperview];
+         _nowMusicController = nil;
+    }
+}
+
+- (void)onBgButtonClicked:(UIButton *)sender {
+    if (_nowMusicController) {
+        [_nowMusicController.view removeFromSuperview];
+        _nowMusicController = nil;
+    }
 }
 
 - (void)menuBtnAction:(UIButton *)sender {
@@ -466,14 +508,10 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - TCP recv delegate
+- (void)recv:(NSData *)data withTag:(long)tag
+{
+    
 }
-*/
 
 @end

@@ -25,5 +25,6 @@
 
 - (IBAction)pullButtonClicked:(id)sender;
 - (IBAction)nextStepBtnClicked:(id)sender;
+- (IBAction)protocolBtnClicked:(id)sender;
 
 @end

@@ -36,7 +36,7 @@
 #import "TVIconController.h"
 #import "IphoneNewAddSceneVC.h"
 #import "DeviceInfo.h"
-#import "NowMusicController.h"
+
 
 #define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)  
 
@@ -97,8 +97,22 @@ static NSString * const CYPhotoId = @"photo";
 
 - (void)rightBtnClicked:(UIButton *)btn {
     UIStoryboard * HomeStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
-    NowMusicController * nowMusicController = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"NowMusicController"];
-    [self.navigationController pushViewController:nowMusicController animated:YES];
+    if (_nowMusicController == nil) {
+        _nowMusicController = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"NowMusicController"];
+        _nowMusicController.delegate = self;
+        [self.view addSubview:_nowMusicController.view];
+        [self.view bringSubviewToFront:_nowMusicController.view];
+    }else {
+        [_nowMusicController.view removeFromSuperview];
+        _nowMusicController = nil;
+    }
+}
+
+- (void)onBgButtonClicked:(UIButton *)sender {
+    if (_nowMusicController) {
+        [_nowMusicController.view removeFromSuperview];
+        _nowMusicController = nil;
+    }
 }
 
 - (void)viewDidLoad {
@@ -260,6 +274,11 @@ static NSString * const CYPhotoId = @"photo";
     [super viewWillDisappear:animated];
     BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     baseTabbarController.tabbarPanel.hidden = YES;
+    
+    if (_nowMusicController) {
+        [_nowMusicController.view removeFromSuperview];
+        _nowMusicController = nil;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {

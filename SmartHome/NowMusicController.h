@@ -11,7 +11,9 @@
 
 #define BLUETOOTH_MUSIC false
 
-@interface NowMusicController : CustomViewController
+@protocol NowMusicControllerDelegate;
+
+@interface NowMusicController : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *MusicTableView;
 @property (weak, nonatomic) IBOutlet UIButton *loseBtn;//音量减小的按钮
 @property (weak, nonatomic) IBOutlet UIButton *AddBtn;//音量增加的按钮
@@ -22,4 +24,15 @@
 @property (strong, nonatomic) Scene *scene;
 @property (nonatomic,assign) BOOL isAddDevice;
 @property (nonatomic, assign) NSInteger playState;//播放状态： 0:停止 1:播放
+@property (nonatomic, assign) id<NowMusicControllerDelegate>delegate;
+@property (nonatomic, strong) NSMutableArray *deviceArray;
+- (IBAction)bgBtnClicked:(id)sender;
+@end
+
+
+@protocol NowMusicControllerDelegate <NSObject>
+
+@optional
+- (void)onBgButtonClicked:(UIButton *)sender;
+
 @end

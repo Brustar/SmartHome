@@ -10,9 +10,10 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomViewController.h"
+#import "NowMusicController.h"
 #import <AFNetworking.h>
 
-@interface FirstViewController : CustomViewController
+@interface FirstViewController : CustomViewController<NowMusicControllerDelegate>
 @property (nonatomic, assign) NSInteger playState;//播放状态： 0:停止 1:播放
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic,weak) NSString *deviceid;
@@ -27,5 +28,6 @@
 @property (weak, nonatomic) IBOutlet UIView *SupView;
 @property (weak, nonatomic) IBOutlet UIView *CoverView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NowMusicController * nowMusicController;
 
 @end

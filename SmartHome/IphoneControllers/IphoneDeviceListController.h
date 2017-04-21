@@ -8,13 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomViewController.h"
+#import "NowMusicController.h"
 
-@interface IphoneDeviceListController : CustomViewController
+@interface IphoneDeviceListController : CustomViewController<NowMusicControllerDelegate>
 
 -(void)goDeviceByRoomID:(int)roomID typeName:(NSString *)typeName;
 @property (nonatomic,strong) Scene *scene;
 
 @property (nonatomic, readonly) UIButton *naviRightBtn;
 @property (nonatomic, readonly) UIButton *naviLeftBtn;
+@property (nonatomic, strong) NowMusicController * nowMusicController;
 
 @end

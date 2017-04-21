@@ -10,7 +10,7 @@
 #import "FamilyHomeDetailSceneCell.h"
 #import "SQLManager.h"
 #import "UIButton+WebCache.h"
-#import "LightCell.h"
+#import "NewLightCell.h"
 #import "AireTableViewCell.h"
 #import "CurtainTableViewCell.h"
 #import "TVTableViewCell.h"
