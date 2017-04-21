@@ -14,7 +14,7 @@
 #import "SocketManager.h"
 #import "CustomNaviBarView.h"
 
-@interface LightController : UIViewController<HRColorPickerViewControllerDelegate,TcpRecvDelegate>
+@interface LightController : UIViewController<TcpRecvDelegate>
 
 @property (nonatomic, readonly) CustomNaviBarView *viewNaviBar;
 
