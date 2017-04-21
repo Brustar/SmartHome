@@ -79,7 +79,6 @@
 		0FA658FC1CD9DB3F005AC4B4 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA658FB1CD9DB3F005AC4B4 /* MediaPlayer.framework */; };
 		0FA86BAD1E72445000DC177E /* LLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA86BA81E72445000DC177E /* LLViewController.m */; };
 		0FA86BAF1E72445000DC177E /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA86BAC1E72445000DC177E /* Cell.m */; };
-		0FA86BB71E72876500DC177E /* FGThrowSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA86BB61E72876500DC177E /* FGThrowSlider.m */; };
 		0FABF91C1D06AA35000892D8 /* TVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FABF91B1D06AA35000892D8 /* TVController.m */; };
 		0FABF91F1D06AA4E000892D8 /* DVDController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FABF91E1D06AA4E000892D8 /* DVDController.m */; };
 		0FADA44A1CEBF8AE00777901 /* SceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FADA4491CEBF8AE00777901 /* SceneManager.m */; };
@@ -625,8 +624,6 @@
 		0FA86BA81E72445000DC177E /* LLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLViewController.m; sourceTree = "<group>"; };
 		0FA86BAB1E72445000DC177E /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
 		0FA86BAC1E72445000DC177E /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
-		0FA86BB51E72876500DC177E /* FGThrowSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGThrowSlider.h; sourceTree = "<group>"; };
-		0FA86BB61E72876500DC177E /* FGThrowSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGThrowSlider.m; sourceTree = "<group>"; };
 		0FABF91A1D06AA35000892D8 /* TVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVController.h; sourceTree = "<group>"; };
 		0FABF91B1D06AA35000892D8 /* TVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVController.m; sourceTree = "<group>"; };
 		0FABF91D1D06AA4E000892D8 /* DVDController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVDController.h; sourceTree = "<group>"; };
@@ -1868,7 +1865,6 @@
 				0FA392F81E80D29900C00AA3 /* RotaryKnob */,
 				0F49CB7F1E7A21E800D46ECC /* ORBSwitch */,
 				0FDB34411E79262D00DA53BB /* Geometry */,
-				0FA86BB01E724EA200DC177E /* LightSlider */,
 				0FA86BA61E72443100DC177E /* Linelayout */,
 			);
 			name = Widgets;
@@ -1901,15 +1897,6 @@
 				0FA86BAC1E72445000DC177E /* Cell.m */,
 			);
 			name = Linelayout;
-			sourceTree = "<group>";
-		};
-		0FA86BB01E724EA200DC177E /* LightSlider */ = {
-			isa = PBXGroup;
-			children = (
-				0FA86BB51E72876500DC177E /* FGThrowSlider.h */,
-				0FA86BB61E72876500DC177E /* FGThrowSlider.m */,
-			);
-			name = LightSlider;
 			sourceTree = "<group>";
 		};
 		0FAF74AE1CEEA16700432713 /* HRColorPicker */ = {
@@ -3054,7 +3041,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0FA86BB71E72876500DC177E /* FGThrowSlider.m in Sources */,
 				0F64234B1DE57C83003379FC /* Utilities.m in Sources */,
 				2EBE210F1E497595003D53A4 /* ForgotViewController.m in Sources */,
 				F6280D4A1D961C62009108ED /* IphoneAddTVChannelController.m in Sources */,
@@ -3474,6 +3460,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FFmpeg-iOS/lib",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -3518,6 +3505,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FFmpeg-iOS/lib",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

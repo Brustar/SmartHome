@@ -9,7 +9,7 @@
 #import "MySettingViewController.h"
 #import "AccessSettingController.h"
 #import "SystemSettingViewController.h"
-#import "systemInfomationController.h"
+#import "SystemInfomationController.h"
 #import "AboutUsController.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"

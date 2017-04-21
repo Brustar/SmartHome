@@ -13,7 +13,7 @@
 #import "MBProgressHUD+NJ.h"
 #import "IphoneNewAddSceneCell.h"
 #import "IphoneSaveNewSceneController.h"
-//#import "LightCell.h"
+#import "LightCell.h"
 #import "CurtainTableViewCell.h"
 #import "DVDTableViewCell.h"
 #import "AireTableViewCell.h"
