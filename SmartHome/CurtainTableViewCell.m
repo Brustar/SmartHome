@@ -29,6 +29,7 @@
     [self.slider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     [self.open addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.close addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+     [self.AddcurtainBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     self.selectionStyle = UITableViewCellSelectionStyleGray;
     
     [self.slider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
@@ -68,6 +69,26 @@
     if ([sender isEqual:self.close]) {
         [device setOpenvalue:0];
     }
+    if ([sender isEqual:self.AddcurtainBtn]) {
+        self.AddcurtainBtn.selected = !self.AddcurtainBtn.selected;
+        if (!self.AddcurtainBtn.selected) {
+            [self.AddcurtainBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
+           
+        }else{
+            [self.AddcurtainBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+            [_scene setSceneID:[self.sceneid intValue]];
+            [_scene setRoomID:self.roomID];
+            [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+            
+            [_scene setReadonly:NO];
+            
+            NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+            [_scene setDevices:devices];
+            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+        }
+      
+    }
+  
 }
 
 
@@ -84,6 +105,12 @@
     }
 }
 
+- (IBAction)AddcurtainBtn:(id)sender {
+    
+ 
+    
+   
+}
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -17,4 +17,7 @@
 @property (weak,nonatomic) NSString *deviceid;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *curtainContraint;
 @property (weak, nonatomic) IBOutlet UIButton *AddcurtainBtn;
+@property (strong, nonatomic) Scene *scene;
+@property (nonatomic,weak) NSString *sceneid;
+
 @end
