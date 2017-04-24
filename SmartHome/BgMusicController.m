@@ -89,21 +89,6 @@ BOOL animating;
     }
 }
 
-- (void)setupNaviBar {
-    _viewNaviBar = [[CustomNaviBarView alloc] initWithFrame:Rect(0.0f, 0.0f, [CustomNaviBarView barSize].width, [CustomNaviBarView barSize].height)];
-    _viewNaviBar.m_viewCtrlParent = self;
-    [self setNaviBarTitle:self.title];
-    [self.view addSubview:_viewNaviBar];
-}
-
-- (void)setNaviBarTitle:(NSString *)strTitle
-{
-    if (_viewNaviBar)
-    {
-        [_viewNaviBar setTitle:strTitle];
-    }else{APP_ASSERT_STOP}
-}
-
 -(void) initButtons
 {
     [self.voiceSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
@@ -142,7 +127,6 @@ BOOL animating;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"背景音乐";
-    [self setupNaviBar];
     [self initButtons];
     
     //if ([[DeviceInfo defaultManager] editingScene]) {

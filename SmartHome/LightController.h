@@ -13,8 +13,9 @@
 #import "DetailTableViewCell.h"
 #import "SocketManager.h"
 #import "CustomNaviBarView.h"
+#import "CustomViewController.h"
 
-@interface LightController : UIViewController<TcpRecvDelegate>
+@interface LightController : CustomViewController<TcpRecvDelegate>
 
 @property (nonatomic, readonly) CustomNaviBarView *viewNaviBar;
 

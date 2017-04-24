@@ -343,7 +343,7 @@
         [_ThreeBtn setTitle:arr[2] forState:UIControlStateNormal];
         [_TwoBtn setTitle:arr[1] forState:UIControlStateNormal];
     }
-    if (arr[2] != nil) {
+    if ([arr count]>0 && arr[2] != nil) {
          _ThreeBtn.userInteractionEnabled = NO;
         [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular3"] forState:UIControlStateNormal];
     }
