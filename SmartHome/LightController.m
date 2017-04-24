@@ -51,22 +51,6 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 
 @implementation LightController
 
-- (void)setupNaviBar {
-    self.title = @"灯光";
-    _viewNaviBar = [[CustomNaviBarView alloc] initWithFrame:Rect(0.0f, 0.0f, [CustomNaviBarView barSize].width, [CustomNaviBarView barSize].height)];
-    _viewNaviBar.m_viewCtrlParent = self;
-    [self setNaviBarTitle:self.title];
-    [self.view addSubview:_viewNaviBar];
-}
-
-- (void)setNaviBarTitle:(NSString *)strTitle
-{
-    if (_viewNaviBar)
-    {
-        [_viewNaviBar setTitle:strTitle];
-    }else{APP_ASSERT_STOP}
-}
-
 -(NSMutableArray *)lIDs
 {
     if(!_lIDs)
@@ -116,7 +100,6 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setupNaviBar];
     [self initSwitch];
     self.detailCell = [[[NSBundle mainBundle] loadNibNamed:@"DetailTableViewCell" owner:self options:nil] lastObject];
     self.detailCell.bright.continuous = NO;

@@ -6,10 +6,11 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 #include "CustomNaviBarView.h"
+#include "CustomViewController.h"
 
 #define BLUETOOTH_MUSIC false
 
-@interface BgMusicController : UIViewController
+@interface BgMusicController : CustomViewController
 
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic,weak) NSString *deviceid;
