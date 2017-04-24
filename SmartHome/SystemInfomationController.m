@@ -30,16 +30,34 @@
     [super viewDidLoad];
     self.title = @"系统信息";
     self.automaticallyAdjustsScrollViewInsets = NO;
-//    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
+    
+//  UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
 //    self.navigationItem.leftBarButtonItem = returnItem;
 
        self.titles = @[@"家庭名称",@"主机编号",@"主机品牌",@"主机型号"];
-    
-    
-    self.tableView.tableFooterView = [UIView new];
+       self.tableView.tableFooterView = [UIView new];
 
 }
+-(void)viewDidLayoutSubviews {
+    
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+        
+    }
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)])  {
+        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
+    
+}
 
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPat{
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]){
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+}
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.titles.count;
@@ -64,6 +82,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.textLabel.text = self.titles[indexPath.row];
+    cell.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
     if ([cell.textLabel.text isEqualToString:@"家庭名称"]) {
          cell.detailTextLabel.text = array[0];
     }else if ([cell.textLabel.text isEqualToString:@"主机编号"]){

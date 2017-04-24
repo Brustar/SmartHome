@@ -6,8 +6,9 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 #import <AFNetworking.h>
+#import "CustomViewController.h"
 
-@interface MSGController : UITableViewController
+@interface MSGController : CustomViewController
 
 @property (nonatomic,strong) NSMutableArray *msgs;
 @property (nonatomic,strong) NSMutableSet * set;

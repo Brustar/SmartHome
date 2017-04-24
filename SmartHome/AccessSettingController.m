@@ -237,6 +237,26 @@
     }
     
 }
+-(void)viewDidLayoutSubviews {
+    
+    if ([self.userTableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.userTableView setSeparatorInset:UIEdgeInsetsZero];
+        
+    }
+    if ([self.userTableView respondsToSelector:@selector(setLayoutMargins:)])  {
+        [self.userTableView setLayoutMargins:UIEdgeInsetsZero];
+    }
+    
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPat{
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]){
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+}
 #pragma mark - UITableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -252,6 +272,7 @@
 {
     if(tableView == self.userTableView){
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"accessSettingCell" forIndexPath:indexPath];
+        cell.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
         cell.textLabel.text = self.userArr[indexPath.row];
         NSNumber *type = self.managerType[indexPath.row];
         if([type intValue] ==1)
@@ -265,7 +286,7 @@
 
     }
     AreaSettingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"areaSettingCell" forIndexPath:indexPath];
-    
+    cell.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
     cell.exchangeSwitch.tag = [self.recoredIDs[indexPath.row] integerValue];
     [cell.exchangeSwitch addTarget:self action:@selector(switchChange:) forControlEvents:UIControlEventValueChanged];
     cell.areaLabel.text = self.areasArr[indexPath.row];

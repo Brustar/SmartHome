@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    _itemArray = @[@"我的故障",@"我的保修记录",@"我的能耗",@"我的收藏",@"我的消息",@"我的家庭成员",@"首页场景快捷键",@"我的设置"];
+    _itemArray = @[@"故障及保修记录",@"我的能耗",@"我的收藏",@"我的消息",@"我的家庭成员",@"首页场景快捷键",@"我的设置"];
     
     UIImageView *imageview = [[UIImageView alloc] initWithFrame:self.view.bounds];
     imageview.image = [UIImage imageNamed:@"background"];
@@ -61,16 +61,18 @@
     [appDelegate.LeftSlideVC closeLeftView];//关闭左侧抽屉
     
     NSString *item = [_itemArray objectAtIndex:indexPath.row];
-    if ([item isEqualToString:@"我的故障"]) {
+    if ([item isEqualToString:@"故障及保修记录"]) {
         ProfileFaultsViewController *profileFaultsVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"MyDefaultViewController"];
         profileFaultsVC.hidesBottomBarWhenPushed = YES;
         [appDelegate.mainTabBarController.selectedViewController pushViewController:profileFaultsVC animated:YES];
-    }else if ([item isEqualToString:@"我的保修记录"]) {
-        ServiceRecordViewController *serviceRecordVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"ServiceRecordViewController"];
-        serviceRecordVC.hidesBottomBarWhenPushed = YES;
-        [appDelegate.mainTabBarController.selectedViewController pushViewController:serviceRecordVC animated:YES];
-        
-    }else if ([item isEqualToString:@"我的能耗"]) {
+    }
+//    else if ([item isEqualToString:@"我的保修记录"]) {
+//        ServiceRecordViewController *serviceRecordVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"ServiceRecordViewController"];
+//        serviceRecordVC.hidesBottomBarWhenPushed = YES;
+//        [appDelegate.mainTabBarController.selectedViewController pushViewController:serviceRecordVC animated:YES];
+//        
+//    }
+    else if ([item isEqualToString:@"我的能耗"]) {
         MySubEnergyVC *mySubEnergyVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"MyEnergyViewController"];
         mySubEnergyVC.hidesBottomBarWhenPushed = YES;
         [appDelegate.mainTabBarController.selectedViewController pushViewController:mySubEnergyVC animated:YES];

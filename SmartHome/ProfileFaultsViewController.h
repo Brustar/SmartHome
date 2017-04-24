@@ -6,6 +6,7 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 #import <AFNetworking.h>
+#import "CustomViewController.h"
 
 typedef NS_ENUM(NSUInteger, FAULT_STATUS) {
     UNUPLOAD = 1, //未上传
@@ -16,6 +17,6 @@ typedef NS_ENUM(NSUInteger, FAULT_STATUS) {
 
 #define FAULT_URL @"cloud/breakdown.aspx"
 
-@interface ProfileFaultsViewController : UIViewController
+@interface ProfileFaultsViewController : CustomViewController
 @property(nonatomic,strong) NSMutableArray *Mydefaults;
 @end
