@@ -107,7 +107,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     [self.detailCell.power addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     self.lightSlider.continuous = NO;
     self.cell = [[[NSBundle mainBundle] loadNibNamed:@"ColourTableViewCell" owner:self options:nil] lastObject];
-    [self setupSegmentLight];
+    //[self setupSegmentLight];
     self.scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     if ([self.sceneid intValue]>0) {
         _favButt.enabled=YES;
@@ -510,10 +510,8 @@ static NSString *const menuCellIdentifier = @"rotationCell";
         return;//多个手指不执行旋转
     }
     
-    //self.tranformView，你想旋转的视图
-    if (![touch.view isEqual:self.tranformView]) {
-        //return;
-    }
+    CGFloat radius = atan2f(self.tranformView.transform.b, self.tranformView.transform.a);
+    CGFloat degree = radius * (180 / M_PI);
     
     /**
      CGRectGetHeight 返回控件本身的高度
@@ -535,18 +533,25 @@ static NSString *const menuCellIdentifier = @"rotationCell";
      */
     CGFloat angle = atan2f(currentPoint.y - center.y, currentPoint.x - center.x) - atan2f(previousPoint.y - center.y, previousPoint.x - center.x);
     
+    if (degree<0) {
+        if (angle<0) {
+            return;
+        }
+    }else if (degree>135) {
+        if (angle>0) {
+            return;
+        }
+    }
     self.tranformView.transform = CGAffineTransformRotate(self.tranformView.transform, angle);
     
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch *touch = [touches anyObject];
-    CGPoint center = CGPointMake(CGRectGetMidX([touch.view bounds]), CGRectGetMidY([touch.view bounds]));
-    CGPoint currentPoint = [touch locationInView:touch.view];//当前手指的坐标
-    CGPoint previousPoint = [touch previousLocationInView:touch.view];//上一个坐标
-    CGFloat angle = atan2f(currentPoint.y - center.y, currentPoint.x - center.x) - atan2f(previousPoint.y - center.y, previousPoint.x - center.x);
-    NSLog(@"%f",angle*360/3.14);
+    CGFloat radius = atan2f(self.tranformView.transform.b, self.tranformView.transform.a);
+    CGFloat degree = radius * (180 / M_PI);
+    NSLog(@"degree:%f",degree);
+    int percent = degree*100/135;
 }
 
 -(void) initSwitch

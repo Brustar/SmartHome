@@ -475,6 +475,11 @@
                         <segue destination="H8M-dY-i5L" kind="show" identifier="curtain" id="cpm-h9-Ghc"/>
                         <segue destination="rZG-4r-cjU" kind="show" identifier="air" id="r5x-wd-bkR"/>
                         <segue destination="ZhE-q2-gFO" kind="show" identifier="TV" id="eA8-6F-da6"/>
+                        <segue destination="NLK-XW-5Jq" kind="show" identifier="DVD" id="Phh-6Z-6RO"/>
+                        <segue destination="C1t-VG-vPd" kind="show" identifier="FM" id="ocV-tE-pbO"/>
+                        <segue destination="huj-Q2-f0v" kind="show" identifier="plugin" id="LH8-F9-BB2"/>
+                        <segue destination="I2g-xI-xns" kind="show" identifier="projector" id="BPD-VH-126"/>
+                        <segue destination="5Gm-3R-5T0" kind="show" identifier="screen" id="fjH-3K-wmA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fWq-Vo-1ts" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -500,8 +505,8 @@
                                 <rect key="frame" x="120" y="672" width="174" height="39"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lighting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ejp-Uz-H6K">
-                                <rect key="frame" x="179" y="681" width="57" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="185" y="684" width="45" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -524,25 +529,25 @@
                                 <state key="normal" image="light_bar"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="射灯" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eT8-bZ-cDj">
-                                <rect key="frame" x="51" y="73" width="35" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="55" y="76" width="27" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="调色灯带" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YJV-uq-S4Q">
-                                <rect key="frame" x="296" y="73" width="98" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="296" y="76" width="98" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="灯带" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nMV-fG-iq9">
-                                <rect key="frame" x="190" y="73" width="35" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="194" y="76" width="27" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qbi-rs-2ri">
-                                <rect key="frame" x="342" y="133" width="22" height="22"/>
+                                <rect key="frame" x="339" y="133" width="25" height="25"/>
                                 <state key="normal" image="button_pen"/>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="light_base" translatesAutoresizingMaskIntoConstraints="NO" id="QDy-Gl-oNw">
@@ -1107,7 +1112,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K6o-fE-8Vg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2068" y="408"/>
+            <point key="canvasLocation" x="-2068" y="409"/>
         </scene>
         <!--plugin-->
         <scene sceneID="Hev-87-8sa">
@@ -1651,7 +1656,7 @@
         <image name="background" width="414" height="736"/>
         <image name="bgmusic" width="22" height="19"/>
         <image name="btn_control" width="326" height="326"/>
-        <image name="button_pen" width="22" height="22"/>
+        <image name="button_pen" width="25" height="25"/>
         <image name="clock_white" width="28" height="28"/>
         <image name="control_banner" width="338" height="60"/>
         <image name="control_button" width="103" height="47"/>

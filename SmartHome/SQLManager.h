@@ -61,6 +61,7 @@
 +(NSString *)getNameWithID:(int)eId;
 
 +(NSArray *)deviceSubTypeByRoomId:(NSInteger)roomID;
++(NSArray *)deviceTypeIDByRoom:(NSInteger)roomID;
 +(NSArray *)deviceIdsByRoomId:(int)roomID;
 
 + (NSArray *)getLightTypeNameWithRoomID:(NSInteger)roomID;
