@@ -34,6 +34,8 @@
 #import "IphoneDevicesController.h"
 #import "IphoneLightController.h"
 #import "NewColourCell.h"
+#import "NewLightCell.h"
+#import "FMTableViewCell.h"
 
 
 @interface IphoneEditSceneController ()<TouchSubViewDelegate,UITableViewDelegate,UITableViewDataSource>//IphoneTypeViewDelegate
@@ -207,6 +209,8 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"DVDTableViewCell" bundle:nil] forCellReuseIdentifier:@"DVDTableViewCell"];//DVD
      [self.tableView registerNib:[UINib nibWithNibName:@"BjMusicTableViewCell" bundle:nil] forCellReuseIdentifier:@"BjMusicTableViewCell"];//背景音乐
      [self.tableView registerNib:[UINib nibWithNibName:@"AddDeviceCell" bundle:nil] forCellReuseIdentifier:@"AddDeviceCell"];//添加设备的cell
+     [self.tableView registerNib:[UINib nibWithNibName:@"NewLightCell" bundle:nil] forCellReuseIdentifier:@"NewLightCell"];//调光灯
+     [self.tableView registerNib:[UINib nibWithNibName:@"FMTableViewCell" bundle:nil] forCellReuseIdentifier:@"FMTableViewCell"];//FM
     NSArray *lightArr = [SQLManager getDeviceIDsBySeneId:self.sceneID];
  
     for(int i = 0; i <lightArr.count; i++)
@@ -298,171 +302,7 @@
 //    [self iphoneTypeView:self.subTypeView didSelectButton:self.typeIndex];
     
 }
-//-(void)setupDeviceTypeView
-//{
-//    self.deviceTypeView.delegate = self;
-//    
-//    [self.deviceTypeView clearItem];
-//    
-//    for(NSString *deviceType in self.devicesTypes)
-//    {
-//        if([deviceType isEqualToString:@"灯光"])
-//        {
-//            [self.deviceTypeView addItemWithTitle:@"灯光" imageName:@"lamp"];
-//        }else if([deviceType isEqualToString:@"窗帘"]){
-//            [self.deviceTypeView addItemWithTitle:@"窗帘" imageName:@"curtainType"];
-//        }else if([deviceType isEqualToString:@"空调"])
-//        {
-//            [self.deviceTypeView addItemWithTitle:@"空调" imageName:@"air"];
-//        }else if ([deviceType isEqualToString:@"FM"])
-//        {
-//            [self.deviceTypeView addItemWithTitle:@"FM" imageName:@"fm"];
-//        }else if([deviceType isEqualToString:@"网络电视"]){
-//            [self.deviceTypeView addItemWithTitle:@"网络电视" imageName:@"TV"];
-//        }else if([deviceType isEqualToString:@"智能门锁"]){
-//            [self.deviceTypeView addItemWithTitle:@"智能门锁" imageName:@"guard"];
-//        }else if([deviceType isEqualToString:@"DVD"]){
-//            [self.deviceTypeView addItemWithTitle:@"DVD电视" imageName:@"DVD"];
-//        }else{
-//            [self.deviceTypeView addItemWithTitle:@"其他" imageName:@"safe"];
-//        }
-//        
-//    }
-//    
-//    [self.deviceTypeView setSelectButton:0];
-//    [self iphoneTypeView:self.deviceTypeView didSelectButton:self.typeIndex];
-//    
-//}
-//-(void)iphoneTypeView:(IphoneTypeView *)typeView didSelectButton:(int)index
-//{
-//    if(typeView == self.subTypeView)
-//    {
-//        self.typeIndex = index;
-//        self.devicesTypes = [SQLManager getDeviceTypeNameWithScenID:self.sceneID subTypeName:self.typeArr[index]];
-//        [self setupDeviceTypeView];
-//    }else{
-//        [self selectedType:self.devicesTypes[index]];
-//    }
-//    
-//}
 
-//-(void)selectedType:(NSString *)typeName
-//{
-//    
-//    [self goDeviceByRoomID:self.roomID typeName:typeName];
-//}
-
-//-(void)goDeviceByRoomID:(int)roomID typeName:(NSString *)typeName
-//{
-//    
-//    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    UIStoryboard *iphoneBoard  = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-//    if([typeName isEqualToString:@"网络电视"])
-//    {
-//        IphoneTVController *tVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneTVController"];
-//        tVC.roomID = roomID;
-//        tVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-//        
-//        [self addViewAndVC:tVC];
-//        
-//    }else if([typeName isEqualToString:@"灯光"])
-//    {
-////        LightController *ligthVC = [storyBoard instantiateViewControllerWithIdentifier:@"LightController"];
-//         IphoneLightController * ligthVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"LightController"];
-//        ligthVC.roomID = roomID;
-//        ligthVC.isEditScene = YES;
-//        ligthVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-//        [self addViewAndVC:ligthVC];
-//        
-//    }else if([typeName isEqualToString:@"窗帘"])
-//    {
-//        CurtainController *curtainVC = [storyBoard instantiateViewControllerWithIdentifier:@"CurtainController"];
-//        curtainVC.roomID = roomID;
-//        curtainVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-//        [self addViewAndVC:curtainVC];
-//        
-//        
-//    }else if([typeName isEqualToString:@"DVD"])
-//    {
-//        
-//        IphoneDVDController *dvdVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneDVDController"];
-//        dvdVC.roomID = roomID;
-//        dvdVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-//        [self addViewAndVC:dvdVC];
-//        
-//    }else if([typeName isEqualToString:@"FM"])
-//    {
-//        FMController *fmVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneFMController"];
-//        fmVC.roomID = roomID;
-//        fmVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-//        [self addViewAndVC:fmVC];
-//        
-//    }else if([typeName isEqualToString:@"空调"])
-//    {
-//        IphoneAirController *airVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneAirController"];
-//        airVC.roomID = roomID;
-//        airVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-//        [self addViewAndVC:airVC];
-//        
-//    }else if([typeName isEqualToString:@"机顶盒"]){
-//        IphoneNetTvController *netVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneNetTvController"];
-//        netVC.roomID = roomID;
-//        netVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-//        [self addViewAndVC:netVC];
-//        
-//    }else if([typeName isEqualToString:@"摄像头"]){
-//        CameraController *camerVC = [storyBoard instantiateViewControllerWithIdentifier:@"CameraController"];
-//        camerVC.roomID = roomID;
-//        camerVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-//        [self addViewAndVC:camerVC];
-//        
-//    }else if([typeName isEqualToString:@"智能门锁"]){
-//        GuardController *guardVC = [storyBoard instantiateViewControllerWithIdentifier:@"GuardController"];
-//        guardVC.roomID = roomID;
-//        guardVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-//        [self addViewAndVC:guardVC];
-//        
-//    }else if([typeName isEqualToString:@"幕布"]){
-//        ScreenCurtainController *screenCurtainVC = [storyBoard instantiateViewControllerWithIdentifier:@"ScreenCurtainController"];
-//        screenCurtainVC.roomID = roomID;
-//        screenCurtainVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-//        
-//        [self addViewAndVC:screenCurtainVC];
-//        
-//        
-//    }else if([typeName isEqualToString:@"投影"])
-//    {
-//        ProjectController *projectVC = [storyBoard instantiateViewControllerWithIdentifier:@"ProjectController"];
-//        projectVC.roomID = roomID;
-//        projectVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-//        
-//        [self addViewAndVC:projectVC];
-//    }else if([typeName isEqualToString:@"功放"]){
-//        AmplifierController *amplifierVC = [storyBoard instantiateViewControllerWithIdentifier:@"AmplifierController"];
-//        amplifierVC.roomID = roomID;
-//        amplifierVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-//        [self addViewAndVC:amplifierVC];
-//        
-//    }else if([typeName isEqualToString:@"智能推窗器"])
-//    {
-//        WindowSlidingController *windowSlidVC = [storyBoard instantiateViewControllerWithIdentifier:@"WindowSlidingController"];
-//        windowSlidVC.roomID = roomID;
-//        windowSlidVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-//        [self addViewAndVC:windowSlidVC];
-//    }else if([typeName isEqualToString:@"背景音乐"]){
-//        BgMusicController *bgMusicVC = [storyBoard instantiateViewControllerWithIdentifier:@"BgMusicController"];
-//        bgMusicVC.roomID = roomID;
-//        bgMusicVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-//        [self addViewAndVC:bgMusicVC];
-//        
-//    }else {
-//        PluginViewController *pluginVC = [storyBoard instantiateViewControllerWithIdentifier:@"PluginViewController"];
-//        pluginVC.roomID = roomID;
-//        pluginVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-//        [self addViewAndVC:pluginVC];
-//    }
-//   
-//}
 -(void )addViewAndVC:(UIViewController *)vc
 {
     if (self.currentViewController != nil) {
@@ -641,34 +481,45 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
    if (indexPath.section == 0) {//调灯光
-        LightCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+        NewLightCell * cell = [tableView dequeueReusableCellWithIdentifier:@"NewLightCell" forIndexPath:indexPath];
+        cell.AddLightBtn.hidden = YES;
+        cell.LightConstraint.constant = 10;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
-        cell.roomID = self.roomID;
-        cell.sceneID = self.sceneid;
+        //cell.roomID = self.roomID;
+       // cell.sceneID = self.sceneid;
         Device *device = [SQLManager getDeviceWithDeviceID:[_lightArray[indexPath.row] intValue]];
-        cell.LightNameLabel.text = device.name;
-        cell.slider.continuous = NO;
+        cell.NewLightNameLabel.text = device.name;
+        cell.NewLightSlider.continuous = NO;
         cell.deviceid = _lightArray[indexPath.row];
-          return cell;
+       
+        return cell;
    }if (indexPath.section == 1) {//调色灯
        NewColourCell * newColourCell = [tableView dequeueReusableCellWithIdentifier:@"NewColourCell" forIndexPath:indexPath];
+       newColourCell.AddColourLightBtn.hidden = YES;
+       newColourCell.ColourLightConstraint.constant = 10;
        newColourCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[indexPath.row] intValue]];
        newColourCell.colourNameLabel.text = device.name;
+       
        return newColourCell;
    }if (indexPath.section == 2) {//开关灯
        NewColourCell * newColourCell = [tableView dequeueReusableCellWithIdentifier:@"NewColourCell" forIndexPath:indexPath];
+       newColourCell.AddColourLightBtn.hidden = YES;
+       newColourCell.ColourLightConstraint.constant = 10;
        newColourCell.backgroundColor =[UIColor clearColor];
        Device *device = [SQLManager getDeviceWithDeviceID:[_SwitchLightArr[indexPath.row] intValue]];
        newColourCell.colourNameLabel.text = device.name;
        newColourCell.supimageView.hidden = YES;
        newColourCell.lowImageView.hidden = YES;
        newColourCell.highImageView.hidden = YES;
+       
        return newColourCell;
    }
     if (indexPath.section == 3) {//空调
         AireTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"AireTableViewCell" forIndexPath:indexPath];
+        aireCell.AddAireBtn.hidden = YES;
+        aireCell.AireConstraint.constant = 10;
         aireCell.backgroundColor =[UIColor clearColor];
         aireCell.roomID = self.roomID;
         aireCell.sceneID = self.sceneid;
@@ -680,52 +531,80 @@
     }if (indexPath.section == 4) {//窗帘
         CurtainTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
         aireCell.backgroundColor = [UIColor clearColor];
+        aireCell.AddcurtainBtn.hidden = YES;
+        aireCell.curtainContraint.constant = 10;
         aireCell.roomID = self.roomID;
         aireCell.sceneID = self.sceneid;
         Device *device = [SQLManager getDeviceWithDeviceID:[_CurtainArray[indexPath.row] intValue]];
         aireCell.label.text = device.name;
         aireCell.deviceid = _CurtainArray[indexPath.row];
+        
         return aireCell;
     }if (indexPath.section == 5) {//TV
-        TVTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"TVTableViewCell" forIndexPath:indexPath];
-        aireCell.backgroundColor =[UIColor clearColor];
+        TVTableViewCell * TVCell = [tableView dequeueReusableCellWithIdentifier:@"TVTableViewCell" forIndexPath:indexPath];
+        TVCell.TVConstraint.constant = 10;
+        TVCell.AddTvDeviceBtn.hidden = YES;
+        TVCell.backgroundColor =[UIColor clearColor];
           Device *device = [SQLManager getDeviceWithDeviceID:[_TVArray[indexPath.row] intValue]];
-        aireCell.TVNameLabel.text = device.name;
-        return aireCell;
+        TVCell.TVNameLabel.text = device.name;
+        
+        return TVCell;
     }if (indexPath.section == 6) {//DVD
-        DVDTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"DVDTableViewCell" forIndexPath:indexPath];
-        otherCell.backgroundColor =[UIColor clearColor];
+        DVDTableViewCell * DVDCell = [tableView dequeueReusableCellWithIdentifier:@"DVDTableViewCell" forIndexPath:indexPath];
+        DVDCell.AddDvdBtn.hidden = YES;
+        DVDCell.DVDConstraint.constant = 10;
+        DVDCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_DVDArray[indexPath.row] intValue]];
-        otherCell.DVDNameLabel.text = device.name;
-        return otherCell;
+        DVDCell.DVDNameLabel.text = device.name;
+        
+        return DVDCell;
     }if (indexPath.section == 7) {//投影幕
         ScreenCurtainCell * ScreenCell = [tableView dequeueReusableCellWithIdentifier:@"ScreenCurtainCell" forIndexPath:indexPath];
+        ScreenCell.AddScreenCurtainBtn.hidden = YES;
+        ScreenCell.ScreenCurtainConstraint.constant = 10;
         ScreenCell.backgroundColor =[UIColor clearColor];
          Device *device = [SQLManager getDeviceWithDeviceID:[_ProjectArray[indexPath.row] intValue]];
         ScreenCell.ScreenCurtainLabel.text = device.name;
+        
         return ScreenCell;
     }if (indexPath.section == 8) {//FM
-        OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
-        otherCell.backgroundColor =[UIColor clearColor];
+        FMTableViewCell * FMCell = [tableView dequeueReusableCellWithIdentifier:@"FMTableViewCell" forIndexPath:indexPath];
+        FMCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_FMArray[indexPath.row] intValue]];
-        otherCell.NameLabel.text = device.name;
+        FMCell.FMNameLabel.text = device.name;
+        
+        return FMCell;
     }if (indexPath.section == 9) {//机顶盒
         OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+        otherCell.AddOtherBtn.hidden = YES;
+        otherCell.OtherConstraint.constant = 10;
         otherCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_NetVArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
+        
+        return otherCell;
     }if (indexPath.section == 10) {//投影机
         OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+        otherCell.AddOtherBtn.hidden = YES;
+        otherCell.OtherConstraint.constant = 10;
         otherCell.backgroundColor = [UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_MBArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
+        
+        return otherCell;
     }if (indexPath.section == 11) {//背景音乐
         BjMusicTableViewCell * BjMusicCell = [tableView dequeueReusableCellWithIdentifier:@"BjMusicTableViewCell" forIndexPath:indexPath];
         BjMusicCell.backgroundColor = [UIColor clearColor];
+        BjMusicCell.AddBjmusicBtn.hidden = YES;
+        BjMusicCell.BJmusicConstraint.constant = 10;
         Device *device = [SQLManager getDeviceWithDeviceID:[_BJMusicArray[indexPath.row] intValue]];
         BjMusicCell.BjMusicNameLb.text = device.name;
+        
+        return BjMusicCell;
     }if (indexPath.section == 12) {//其他
         OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+        otherCell.AddOtherBtn.hidden = YES;
+        otherCell.OtherConstraint.constant = 10;
         otherCell.backgroundColor = [UIColor clearColor];
         if (_OtherArray.count) {
             Device *device = [SQLManager getDeviceWithDeviceID:[_OtherArray[indexPath.row] intValue]];

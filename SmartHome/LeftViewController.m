@@ -65,11 +65,13 @@
         ProfileFaultsViewController *profileFaultsVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"MyDefaultViewController"];
         profileFaultsVC.hidesBottomBarWhenPushed = YES;
         [appDelegate.mainTabBarController.selectedViewController pushViewController:profileFaultsVC animated:YES];
+
     }else if ([item isEqualToString:@"家庭成员"]) {
         //家庭成员
         [MBProgressHUD showError:@"开发中"];
         
     }else if ([item isEqualToString:@"智能账单"]) {
+
         MySubEnergyVC *mySubEnergyVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"MyEnergyViewController"];
         mySubEnergyVC.hidesBottomBarWhenPushed = YES;
         [appDelegate.mainTabBarController.selectedViewController pushViewController:mySubEnergyVC animated:YES];

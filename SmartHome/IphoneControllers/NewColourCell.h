@@ -15,5 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *supimageView;
 @property (weak, nonatomic) IBOutlet UIImageView *lowImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *highImageView;
+@property (weak, nonatomic) IBOutlet UIButton *AddColourLightBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ColourLightConstraint;
 
 @end

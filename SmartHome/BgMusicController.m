@@ -17,7 +17,6 @@
 #import <AVFoundation/AVFoundation.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
-
 @interface BgMusicController ()
 
 @property (weak, nonatomic) IBOutlet UISlider *volume;
@@ -30,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *diskView;
 @property (weak, nonatomic) IBOutlet UIImageView *pre;
 @property (weak, nonatomic) IBOutlet UIImageView *next;
+@property (weak, nonatomic) IBOutlet UISlider *voiceSlider;
 
 @end
 
@@ -89,23 +89,11 @@ BOOL animating;
     }
 }
 
-- (void)setupNaviBar {
-    _viewNaviBar = [[CustomNaviBarView alloc] initWithFrame:Rect(0.0f, 0.0f, [CustomNaviBarView barSize].width, [CustomNaviBarView barSize].height)];
-    _viewNaviBar.m_viewCtrlParent = self;
-    [self setNaviBarTitle:self.title];
-    [self.view addSubview:_viewNaviBar];
-}
-
-- (void)setNaviBarTitle:(NSString *)strTitle
-{
-    if (_viewNaviBar)
-    {
-        [_viewNaviBar setTitle:strTitle];
-    }else{APP_ASSERT_STOP}
-}
-
 -(void) initButtons
 {
+    [self.voiceSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
+    self.voiceSlider.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
+    self.voiceSlider.minimumTrackTintColor = [UIColor colorWithRed:253/255.0 green:254/255.0 blue:254/255.0 alpha:1];
     [[self.nextBtn
       rac_signalForControlEvents:UIControlEventTouchDown]
      subscribeNext:^(id x) {
@@ -139,9 +127,7 @@ BOOL animating;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"背景音乐";
-    [self setupNaviBar];
     [self initButtons];
-    
     
     //if ([[DeviceInfo defaultManager] editingScene]) {
     NSArray *bgmusicIDS = [SQLManager getDeviceByTypeName:@"背景音乐" andRoomID:self.roomID];

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -56,7 +55,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oan-hq-829">
-                        <rect key="frame" x="335" y="16" width="18" height="18"/>
+                        <rect key="frame" x="291" y="16" width="18" height="18"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="oan-hq-829" secondAttribute="height" multiplier="1:1" id="TA0-pP-evh"/>
@@ -77,11 +76,20 @@
                             <constraint firstAttribute="width" constant="15" id="kK9-yu-6TM"/>
                         </constraints>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Nj-MA-dDP">
+                        <rect key="frame" x="329" y="8" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="aO1-EG-6C1"/>
+                            <constraint firstAttribute="width" constant="30" id="jbP-j0-tPx"/>
+                        </constraints>
+                        <state key="normal" image="icon_add_normal"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="oan-hq-829" firstAttribute="top" secondItem="v0o-gc-D44" secondAttribute="bottom" constant="15" id="7jy-LR-VVi"/>
                     <constraint firstItem="iSc-I9-hAk" firstAttribute="top" secondItem="wSV-oJ-oCF" secondAttribute="bottom" id="DzV-SD-Dg2"/>
                     <constraint firstAttribute="trailing" secondItem="iSc-I9-hAk" secondAttribute="trailing" id="FUz-pL-dcM"/>
+                    <constraint firstItem="7Nj-MA-dDP" firstAttribute="top" secondItem="v0o-gc-D44" secondAttribute="bottom" constant="7" id="KAQ-qX-j6v"/>
                     <constraint firstItem="f41-dM-kxv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="Kn4-mr-WM0"/>
                     <constraint firstAttribute="bottomMargin" secondItem="LqQ-g3-yDX" secondAttribute="bottom" constant="11.5" id="NNc-Yz-53a"/>
                     <constraint firstItem="wSV-oJ-oCF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="NRM-qL-Sxo"/>
@@ -89,16 +97,19 @@
                     <constraint firstAttribute="bottomMargin" secondItem="tNT-YH-Tpj" secondAttribute="bottom" constant="4.5" id="Ysb-j1-fAT"/>
                     <constraint firstItem="LqQ-g3-yDX" firstAttribute="leading" secondItem="tNT-YH-Tpj" secondAttribute="trailing" constant="10" id="Yu0-Bd-ST1"/>
                     <constraint firstItem="iSc-I9-hAk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="fC5-dA-12y"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="oan-hq-829" secondAttribute="trailing" constant="16" id="fwK-aR-qxM"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="oan-hq-829" secondAttribute="trailing" constant="60" id="fwK-aR-qxM"/>
                     <constraint firstAttribute="bottomMargin" secondItem="f41-dM-kxv" secondAttribute="bottom" constant="11.5" id="kJf-Wu-Mr2"/>
                     <constraint firstAttribute="trailingMargin" secondItem="v0o-gc-D44" secondAttribute="trailing" constant="10" id="m37-ZX-aXh"/>
                     <constraint firstItem="iSc-I9-hAk" firstAttribute="top" secondItem="oan-hq-829" secondAttribute="bottom" constant="15" id="ply-r1-ndy"/>
                     <constraint firstItem="tNT-YH-Tpj" firstAttribute="leading" secondItem="f41-dM-kxv" secondAttribute="trailing" constant="10" id="ruO-YG-rHa"/>
                     <constraint firstAttribute="trailingMargin" secondItem="LqQ-g3-yDX" secondAttribute="trailing" constant="16" id="uNo-xp-IRM"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="7Nj-MA-dDP" secondAttribute="trailing" constant="10" id="vet-nB-BJL"/>
                     <constraint firstItem="wSV-oJ-oCF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="xHj-Wm-K2D"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="AddcurtainBtn" destination="7Nj-MA-dDP" id="Ufa-CO-TCD"/>
+                <outlet property="curtainContraint" destination="fwK-aR-qxM" id="7yE-TK-EhV"/>
                 <outlet property="label" destination="wSV-oJ-oCF" id="bUa-kH-Jsg"/>
                 <outlet property="slider" destination="tNT-YH-Tpj" id="efJ-Ru-ZA9"/>
                 <outlet property="valueLabel" destination="v0o-gc-D44" id="3nQ-hN-evr"/>
@@ -109,6 +120,7 @@
     <resources>
         <image name="bd_icon_wd_off" width="10" height="9"/>
         <image name="bd_icon_wd_on" width="12" height="10"/>
+        <image name="icon_add_normal" width="15" height="15"/>
         <image name="lv_fm_adjust_normal" width="336" height="47"/>
     </resources>
 </document>

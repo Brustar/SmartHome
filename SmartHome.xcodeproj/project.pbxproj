@@ -50,6 +50,8 @@
 		0F4B3C751E7BE57A00102DD3 /* CommonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4B3C721E7BE57A00102DD3 /* CommonUtil.m */; };
 		0F4B3C7A1E7BEDE300102DD3 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F4B3C781E7BED4E00102DD3 /* libxml2.tbd */; };
 		0F4B49801CFEB13500D93DD2 /* CurtainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4B497F1CFEB13500D93DD2 /* CurtainController.m */; };
+		0F6183FA1EA9A24600000EAD /* NewLightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6183F81EA9A24600000EAD /* NewLightCell.m */; };
+		0F6183FB1EA9A24600000EAD /* NewLightCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F6183F91EA9A24600000EAD /* NewLightCell.xib */; };
 		0F6423491DE57C83003379FC /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6423441DE57C83003379FC /* AudioStreamer.m */; };
 		0F64234A1DE57C83003379FC /* RTSPPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6423461DE57C83003379FC /* RTSPPlayer.m */; };
 		0F64234B1DE57C83003379FC /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6423481DE57C83003379FC /* Utilities.m */; };
@@ -79,7 +81,6 @@
 		0FA658FC1CD9DB3F005AC4B4 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA658FB1CD9DB3F005AC4B4 /* MediaPlayer.framework */; };
 		0FA86BAD1E72445000DC177E /* LLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA86BA81E72445000DC177E /* LLViewController.m */; };
 		0FA86BAF1E72445000DC177E /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA86BAC1E72445000DC177E /* Cell.m */; };
-		0FA86BB71E72876500DC177E /* FGThrowSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA86BB61E72876500DC177E /* FGThrowSlider.m */; };
 		0FABF91C1D06AA35000892D8 /* TVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FABF91B1D06AA35000892D8 /* TVController.m */; };
 		0FABF91F1D06AA4E000892D8 /* DVDController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FABF91E1D06AA4E000892D8 /* DVDController.m */; };
 		0FADA44A1CEBF8AE00777901 /* SceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FADA4491CEBF8AE00777901 /* SceneManager.m */; };
@@ -223,8 +224,6 @@
 		2EC8A5931E372D75002A5042 /* ColourCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC8A5921E372D75002A5042 /* ColourCell.m */; };
 		2ECDCC901E9E3623004C68BE /* BjMusicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECDCC8E1E9E3623004C68BE /* BjMusicTableViewCell.m */; };
 		2ECDCC911E9E3623004C68BE /* BjMusicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2ECDCC8F1E9E3623004C68BE /* BjMusicTableViewCell.xib */; };
-		2ED3BFDC1EA8412500772437 /* NewLightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED3BFDA1EA8412500772437 /* NewLightCell.m */; };
-		2ED3BFDD1EA8412500772437 /* NewLightCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2ED3BFDB1EA8412500772437 /* NewLightCell.xib */; };
 		2ED42B931E35B41E00592A03 /* IphoneAirCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED42B921E35B41E00592A03 /* IphoneAirCell.m */; };
 		2EDC0E901DEC072700F95BE0 /* IPhoneRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDC0E8F1DEC072700F95BE0 /* IPhoneRoom.m */; };
 		2EDE04611E45777B00BC8E0B /* WebViewMangerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE04601E45777B00BC8E0B /* WebViewMangerVC.m */; };
@@ -486,6 +485,9 @@
 		0F4B3C7E1E7BEE1D00102DD3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0F4B497E1CFEB13500D93DD2 /* CurtainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurtainController.h; sourceTree = "<group>"; };
 		0F4B497F1CFEB13500D93DD2 /* CurtainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurtainController.m; sourceTree = "<group>"; };
+		0F6183F71EA9A24600000EAD /* NewLightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewLightCell.h; sourceTree = "<group>"; };
+		0F6183F81EA9A24600000EAD /* NewLightCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewLightCell.m; sourceTree = "<group>"; };
+		0F6183F91EA9A24600000EAD /* NewLightCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewLightCell.xib; sourceTree = "<group>"; };
 		0F6423431DE57C83003379FC /* AudioStreamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioStreamer.h; sourceTree = "<group>"; };
 		0F6423441DE57C83003379FC /* AudioStreamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioStreamer.m; sourceTree = "<group>"; };
 		0F6423451DE57C83003379FC /* RTSPPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTSPPlayer.h; sourceTree = "<group>"; };
@@ -597,6 +599,7 @@
 		0F6ADFDF1E7136B500BFF67F /* RCDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDataManager.m; sourceTree = "<group>"; };
 		0F6ADFE11E7136C500BFF67F /* ConversationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationViewController.h; sourceTree = "<group>"; };
 		0F6ADFE21E7136C500BFF67F /* ConversationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationViewController.m; sourceTree = "<group>"; };
+		0F6C46491EA9AE9600F857E9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0F8A784F1E9F7C8C0050F0D9 /* UIImageView+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Badge.h"; sourceTree = "<group>"; };
 		0F8A78501E9F7C8C0050F0D9 /* UIImageView+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Badge.m"; sourceTree = "<group>"; };
 		0F8D76CE1D9A1B9700DDD063 /* Schedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Schedule.h; sourceTree = "<group>"; };
@@ -625,8 +628,6 @@
 		0FA86BA81E72445000DC177E /* LLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLViewController.m; sourceTree = "<group>"; };
 		0FA86BAB1E72445000DC177E /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
 		0FA86BAC1E72445000DC177E /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
-		0FA86BB51E72876500DC177E /* FGThrowSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGThrowSlider.h; sourceTree = "<group>"; };
-		0FA86BB61E72876500DC177E /* FGThrowSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGThrowSlider.m; sourceTree = "<group>"; };
 		0FABF91A1D06AA35000892D8 /* TVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVController.h; sourceTree = "<group>"; };
 		0FABF91B1D06AA35000892D8 /* TVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVController.m; sourceTree = "<group>"; };
 		0FABF91D1D06AA4E000892D8 /* DVDController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVDController.h; sourceTree = "<group>"; };
@@ -878,9 +879,6 @@
 		2ECDCC8D1E9E3623004C68BE /* BjMusicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BjMusicTableViewCell.h; sourceTree = "<group>"; };
 		2ECDCC8E1E9E3623004C68BE /* BjMusicTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BjMusicTableViewCell.m; sourceTree = "<group>"; };
 		2ECDCC8F1E9E3623004C68BE /* BjMusicTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BjMusicTableViewCell.xib; sourceTree = "<group>"; };
-		2ED3BFD91EA8412500772437 /* NewLightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewLightCell.h; sourceTree = "<group>"; };
-		2ED3BFDA1EA8412500772437 /* NewLightCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewLightCell.m; sourceTree = "<group>"; };
-		2ED3BFDB1EA8412500772437 /* NewLightCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewLightCell.xib; sourceTree = "<group>"; };
 		2ED42B911E35B41E00592A03 /* IphoneAirCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneAirCell.h; sourceTree = "<group>"; };
 		2ED42B921E35B41E00592A03 /* IphoneAirCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneAirCell.m; sourceTree = "<group>"; };
 		2EDC0E8E1DEC072700F95BE0 /* IPhoneRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPhoneRoom.h; sourceTree = "<group>"; };
@@ -1868,7 +1866,6 @@
 				0FA392F81E80D29900C00AA3 /* RotaryKnob */,
 				0F49CB7F1E7A21E800D46ECC /* ORBSwitch */,
 				0FDB34411E79262D00DA53BB /* Geometry */,
-				0FA86BB01E724EA200DC177E /* LightSlider */,
 				0FA86BA61E72443100DC177E /* Linelayout */,
 			);
 			name = Widgets;
@@ -1901,15 +1898,6 @@
 				0FA86BAC1E72445000DC177E /* Cell.m */,
 			);
 			name = Linelayout;
-			sourceTree = "<group>";
-		};
-		0FA86BB01E724EA200DC177E /* LightSlider */ = {
-			isa = PBXGroup;
-			children = (
-				0FA86BB51E72876500DC177E /* FGThrowSlider.h */,
-				0FA86BB61E72876500DC177E /* FGThrowSlider.m */,
-			);
-			name = LightSlider;
 			sourceTree = "<group>";
 		};
 		0FAF74AE1CEEA16700432713 /* HRColorPicker */ = {
@@ -2210,6 +2198,9 @@
 		2EBABC6F1E835E950093EF3A /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				0F6183F71EA9A24600000EAD /* NewLightCell.h */,
+				0F6183F81EA9A24600000EAD /* NewLightCell.m */,
+				0F6183F91EA9A24600000EAD /* NewLightCell.xib */,
 				2EBABC751E8360FB0093EF3A /* TVTableViewCell.h */,
 				2EBABC761E8360FB0093EF3A /* TVTableViewCell.m */,
 				2EBABC771E8360FB0093EF3A /* TVTableViewCell.xib */,
@@ -2240,9 +2231,6 @@
 				2E6A06581EA743B50022B681 /* NewColourCell.h */,
 				2E6A06591EA743B50022B681 /* NewColourCell.m */,
 				2E6A065A1EA743B50022B681 /* NewColourCell.xib */,
-				2ED3BFD91EA8412500772437 /* NewLightCell.h */,
-				2ED3BFDA1EA8412500772437 /* NewLightCell.m */,
-				2ED3BFDB1EA8412500772437 /* NewLightCell.xib */,
 			);
 			name = TableViewCell;
 			sourceTree = "<group>";
@@ -2529,6 +2517,7 @@
 		F6DAFF50D58D29D0493A07C7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0F6C46491EA9AE9600F857E9 /* QuartzCore.framework */,
 				0F4B3C7D1E7BEE1D00102DD3 /* CoreFoundation.framework */,
 				0F4B3C7E1E7BEE1D00102DD3 /* Foundation.framework */,
 				0F4B3C7B1E7BEDFB00102DD3 /* CFNetwork.framework */,
@@ -2573,6 +2562,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0F032D771CC9B12700D1920D /* Build configuration list for PBXNativeTarget "SmartHome" */;
 			buildPhases = (
+				70B41E7DAFB2516668C204F1 /* 📦 Check Pods Manifest.lock */,
 				A6AA72E81750E5551DB3BF43 /* [CP] Check Pods Manifest.lock */,
 				7111AFB52FC0151747BC17C8 /* [CP] Check Pods Manifest.lock */,
 				201F0249AEAB68444741EA3D /* [CP] Check Pods Manifest.lock */,
@@ -2717,7 +2707,7 @@
 				CD7DDA091E81168F00638DB3 /* login_name@2x.png in Resources */,
 				2ECDCC911E9E3623004C68BE /* BjMusicTableViewCell.xib in Resources */,
 				0F49CB721E7A1EAE00D46ECC /* Scene.storyboard in Resources */,
-				2ED3BFDD1EA8412500772437 /* NewLightCell.xib in Resources */,
+				0F6183FB1EA9A24600000EAD /* NewLightCell.xib in Resources */,
 				0F49CB7A1E7A204300D46ECC /* Devices-iPad.storyboard in Resources */,
 				CDF1574E1E7AB2AF00499AC5 /* icon_tabbar_merchant_selected@2x.png in Resources */,
 				F60FDB471D003FD500AB04BE /* CurtainTableViewCell.xib in Resources */,
@@ -2927,6 +2917,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		70B41E7DAFB2516668C204F1 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		7111AFB52FC0151747BC17C8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3054,7 +3059,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0FA86BB71E72876500DC177E /* FGThrowSlider.m in Sources */,
 				0F64234B1DE57C83003379FC /* Utilities.m in Sources */,
 				2EBE210F1E497595003D53A4 /* ForgotViewController.m in Sources */,
 				F6280D4A1D961C62009108ED /* IphoneAddTVChannelController.m in Sources */,
@@ -3139,7 +3143,6 @@
 				2EC266281EA4BEAF003DC979 /* FMTableViewCell.m in Sources */,
 				0FC0FFDA1CF577C0000F71D5 /* RealScene.m in Sources */,
 				0FA392FB1E80D2C200C00AA3 /* MHRotaryKnob.m in Sources */,
-				2ED3BFDC1EA8412500772437 /* NewLightCell.m in Sources */,
 				F6755A4F1D406552002394F3 /* ECloudTabBarController.m in Sources */,
 				CDF157541E7BA3F600499AC5 /* UIView_extra.m in Sources */,
 				0FAF74C41CEEA17C00432713 /* HRColorPickerView.m in Sources */,
@@ -3229,6 +3232,7 @@
 				2E7B64B81E9B3188001F7469 /* IphoneNewAddSceneCell.m in Sources */,
 				2EDE04611E45777B00BC8E0B /* WebViewMangerVC.m in Sources */,
 				0F4B3C001D2A13870002E75E /* MSGController.m in Sources */,
+				0F6183FA1EA9A24600000EAD /* NewLightCell.m in Sources */,
 				2E6328111E03CE4B000D7BE9 /* IPhoneNetVV.m in Sources */,
 				2EA2A84A1E1E275900092D41 /* MySubEnergyCell.m in Sources */,
 				0FA86BAD1E72445000DC177E /* LLViewController.m in Sources */,
@@ -3468,12 +3472,13 @@
 					"${SDK_ROOT}/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = SmartHome/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FFmpeg-iOS/lib",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -3512,12 +3517,13 @@
 					"${SDK_ROOT}/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = SmartHome/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FFmpeg-iOS/lib",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

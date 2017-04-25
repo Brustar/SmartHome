@@ -13,7 +13,7 @@
 #import "DetailMSGViewController.h"
 
 
-@interface MSGController ()<HttpDelegate>
+@interface MSGController ()<HttpDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) NSMutableArray * itemIdArrs;
 @property (nonatomic,strong) NSMutableArray * actcodeArrs;
 @property (nonatomic,strong) NSMutableArray * itemNameArrs;
@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIView *footView;
 @property (nonatomic,assign) NSInteger unreadcount;
 @property (nonatomic,strong) NSString * type;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -151,7 +152,26 @@
 
 #pragma mark - Table view data source
 
+-(void)viewDidLayoutSubviews {
+    
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+        
+    }
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)])  {
+        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
+    
+}
 
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPat{
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]){
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+}
 //每组有多少cell
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
@@ -162,7 +182,7 @@
     
     static NSString *CellIdentifier = @"msgCell";
     MsgCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
+    cell.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
     cell.title.text = self.itemNameArrs[indexPath.row];
     if (cell.countLabel.text) {
         cell.countLabel.text = [NSString stringWithFormat:@"%ld",(long)[self.unreadcountArr[indexPath.row] integerValue]];

@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "PushSettingController.h"
-@interface MySettingViewController : UIViewController
+#import "CustomViewController.h"
+@interface MySettingViewController : CustomViewController
 
 
 

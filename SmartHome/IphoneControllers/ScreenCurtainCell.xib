@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -43,7 +42,7 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D4k-av-6ph">
+                    <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="D4k-av-6ph">
                         <rect key="frame" x="313" y="7" width="42" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="GWa-8T-tfU"/>
@@ -55,7 +54,7 @@
                         <state key="normal" image="icon3"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4sS-Gf-IUS">
-                        <rect key="frame" x="316" y="7" width="55" height="35"/>
+                        <rect key="frame" x="266" y="7" width="55" height="35"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="55" id="Oh8-T7-gZU"/>
                             <constraint firstAttribute="height" constant="35" id="onE-GR-Blo"/>
@@ -65,8 +64,20 @@
                             <action selector="ScreenCurtainBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="WxD-y3-Sw0"/>
                         </connections>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Xt-cI-2iu">
+                        <rect key="frame" x="333" y="8" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="BPw-hN-TeW"/>
+                            <constraint firstAttribute="height" constant="30" id="hN1-Pk-7an"/>
+                        </constraints>
+                        <state key="normal" image="icon_add_normal"/>
+                        <connections>
+                            <action selector="AddScreenCurtainBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="BHG-jl-Mgq"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="7Xt-cI-2iu" secondAttribute="trailing" constant="10" id="11O-yH-c3H"/>
                     <constraint firstItem="rc5-hL-egz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="52" id="1m4-yj-lyF"/>
                     <constraint firstItem="OFd-Kj-Hsb" firstAttribute="leading" secondItem="Xph-53-ijS" secondAttribute="trailing" id="2Hj-ln-llr"/>
                     <constraint firstItem="rc5-hL-egz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="2td-5d-sDt"/>
@@ -76,6 +87,7 @@
                     <constraint firstItem="NBC-o1-qnC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Ctk-8G-Sqx"/>
                     <constraint firstItem="NBC-o1-qnC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="E3s-hX-0XQ"/>
                     <constraint firstItem="Xph-53-ijS" firstAttribute="width" secondItem="rc5-hL-egz" secondAttribute="width" id="Ffz-at-zwr"/>
+                    <constraint firstItem="7Xt-cI-2iu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="GFF-dL-GYU"/>
                     <constraint firstItem="Xph-53-ijS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="52" id="Gbv-2C-1lh"/>
                     <constraint firstItem="OFd-Kj-Hsb" firstAttribute="width" secondItem="rc5-hL-egz" secondAttribute="width" id="SOZ-n5-fng"/>
                     <constraint firstAttribute="bottomMargin" secondItem="OFd-Kj-Hsb" secondAttribute="bottom" constant="1.5" id="WIo-bQ-Ddv"/>
@@ -83,7 +95,7 @@
                     <constraint firstItem="OFd-Kj-Hsb" firstAttribute="height" secondItem="rc5-hL-egz" secondAttribute="height" id="bvi-vc-2mo"/>
                     <constraint firstAttribute="trailingMargin" secondItem="OFd-Kj-Hsb" secondAttribute="trailing" id="c8v-aC-hdJ"/>
                     <constraint firstAttribute="trailing" secondItem="dHx-cQ-8iB" secondAttribute="trailing" id="cSC-z1-Vw5"/>
-                    <constraint firstAttribute="trailing" secondItem="4sS-Gf-IUS" secondAttribute="trailing" constant="10" id="clr-3g-Eds"/>
+                    <constraint firstAttribute="trailing" secondItem="4sS-Gf-IUS" secondAttribute="trailing" constant="60" id="clr-3g-Eds"/>
                     <constraint firstItem="4sS-Gf-IUS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="dGW-P3-Xd9"/>
                     <constraint firstItem="dHx-cQ-8iB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="e80-iw-iAB"/>
                     <constraint firstAttribute="bottomMargin" secondItem="rc5-hL-egz" secondAttribute="bottom" constant="1.5" id="gL4-hT-wNX"/>
@@ -93,9 +105,11 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="AddScreenCurtainBtn" destination="7Xt-cI-2iu" id="1ua-Jw-1sg"/>
                 <outlet property="DownBtn" destination="OFd-Kj-Hsb" id="3X5-wE-E21"/>
                 <outlet property="PowerSwitch" destination="D4k-av-6ph" id="G2e-qJ-Xp0"/>
                 <outlet property="ScreenCurtainBtn" destination="4sS-Gf-IUS" id="qT1-oy-N8P"/>
+                <outlet property="ScreenCurtainConstraint" destination="clr-3g-Eds" id="k6S-Me-MMI"/>
                 <outlet property="ScreenCurtainLabel" destination="NBC-o1-qnC" id="XUj-dy-fdz"/>
                 <outlet property="UPBtn" destination="rc5-hL-egz" id="bs2-rU-ICR"/>
                 <outlet property="stopBtn" destination="Xph-53-ijS" id="hsu-BH-T2m"/>
@@ -109,5 +123,6 @@
         <image name="dvd_btn_switch_on" width="36" height="23"/>
         <image name="dvd_frm_choice__normal" width="336" height="47"/>
         <image name="icon3" width="91" height="38"/>
+        <image name="icon_add_normal" width="15" height="15"/>
     </resources>
 </document>

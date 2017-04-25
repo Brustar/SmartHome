@@ -16,16 +16,18 @@
 #import "SceneManager.h"
 #import "YALContextMenuTableView.h"
 #import "ContextMenuCell.h"
+#import "ORBSwitch.h"
 
 static NSString *const menuCellIdentifier = @"rotationCell";
 
-@interface LightController ()<UITableViewDelegate,UITableViewDataSource,YALContextMenuTableViewDelegate>
+@interface LightController ()<UITableViewDelegate,UITableViewDataSource,YALContextMenuTableViewDelegate,ORBSwitchDelegate>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *favButt;//收藏
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,assign) CGFloat brightValue;
 @property (nonatomic,strong) NSMutableArray *lIDs;
 @property (nonatomic,strong) NSMutableArray *lNames;
+@property (nonatomic,strong) UIImageView *tranformView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentLight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *segementTopConstraints;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewRightConstraints;
@@ -37,6 +39,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 @property (weak, nonatomic) IBOutlet UIButton *peacefulBtn;//幽静
 @property (weak, nonatomic) IBOutlet UIButton *romanceBtn;//浪漫
 @property (weak, nonatomic) IBOutlet UISlider *lightSlider;//控制所有灯的亮度调节
+
 @property (nonatomic,assign) int sceneID;
 @property (nonatomic,strong) YALContextMenuTableView* contextMenuTableView;
 
@@ -47,22 +50,6 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 @end
 
 @implementation LightController
-
-- (void)setupNaviBar {
-    self.title = @"灯光";
-    _viewNaviBar = [[CustomNaviBarView alloc] initWithFrame:Rect(0.0f, 0.0f, [CustomNaviBarView barSize].width, [CustomNaviBarView barSize].height)];
-    _viewNaviBar.m_viewCtrlParent = self;
-    [self setNaviBarTitle:self.title];
-    [self.view addSubview:_viewNaviBar];
-}
-
-- (void)setNaviBarTitle:(NSString *)strTitle
-{
-    if (_viewNaviBar)
-    {
-        [_viewNaviBar setTitle:strTitle];
-    }else{APP_ASSERT_STOP}
-}
 
 -(NSMutableArray *)lIDs
 {
@@ -113,8 +100,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setupNaviBar];
-    
+    [self initSwitch];
     self.detailCell = [[[NSBundle mainBundle] loadNibNamed:@"DetailTableViewCell" owner:self options:nil] lastObject];
     self.detailCell.bright.continuous = NO;
     [self.detailCell.bright addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
@@ -512,6 +498,92 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"light" object:nil];
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    
+    UITouch *touch = [touches anyObject];
+    
+    NSUInteger toucheNum = [[event allTouches] count];//有几个手指触摸屏幕
+    if ( toucheNum > 1 ) {
+        return;//多个手指不执行旋转
+    }
+    
+    //self.tranformView，你想旋转的视图
+    if (![touch.view isEqual:self.tranformView]) {
+        //return;
+    }
+    
+    /**
+     CGRectGetHeight 返回控件本身的高度
+     CGRectGetMinY 返回控件顶部的坐标
+     CGRectGetMaxY 返回控件底部的坐标
+     CGRectGetMinX 返回控件左边的坐标
+     CGRectGetMaxX 返回控件右边的坐标
+     CGRectGetMidX 表示得到一个frame中心点的X坐标
+     CGRectGetMidY 表示得到一个frame中心点的Y坐标
+     */
+    
+    CGPoint center = CGPointMake(CGRectGetMidX([touch.view bounds]), CGRectGetMidY([touch.view bounds]));
+    CGPoint currentPoint = [touch locationInView:touch.view];//当前手指的坐标
+    CGPoint previousPoint = [touch previousLocationInView:touch.view];//上一个坐标
+    
+    /**
+     求得每次手指移动变化的角度
+     atan2f 是求反正切函数 参考:http://blog.csdn.net/chinabinlang/article/details/6802686
+     */
+    CGFloat angle = atan2f(currentPoint.y - center.y, currentPoint.x - center.x) - atan2f(previousPoint.y - center.y, previousPoint.x - center.x);
+    
+    self.tranformView.transform = CGAffineTransformRotate(self.tranformView.transform, angle);
+    
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    CGPoint center = CGPointMake(CGRectGetMidX([touch.view bounds]), CGRectGetMidY([touch.view bounds]));
+    CGPoint currentPoint = [touch locationInView:touch.view];//当前手指的坐标
+    CGPoint previousPoint = [touch previousLocationInView:touch.view];//上一个坐标
+    CGFloat angle = atan2f(currentPoint.y - center.y, currentPoint.x - center.x) - atan2f(previousPoint.y - center.y, previousPoint.x - center.x);
+    NSLog(@"%f",angle*360/3.14);
+}
+
+-(void) initSwitch
+{
+    UIView *colorpad = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 250, 250)];
+    colorpad.center = CGPointMake(self.view.bounds.size.width / 2,
+                                  self.view.bounds.size.height / 2);
+    colorpad.backgroundColor = [UIColor blueColor];
+    colorpad.layer.cornerRadius = colorpad.frame.size.width/2;
+    [self.view addSubview:colorpad];
+    
+    self.tranformView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 182, 150)];
+    self.tranformView.center = CGPointMake(self.view.bounds.size.width / 2,
+                                  self.view.bounds.size.height / 2);
+    self.tranformView.image = [UIImage imageNamed:@"glory"];
+    
+    
+    ORBSwitch *switcher = [[ORBSwitch alloc] initWithCustomKnobImage:[UIImage imageNamed:@"lighting_off"] inactiveBackgroundImage:nil activeBackgroundImage:nil frame:CGRectMake(0, 0, 194, 194)];
+    switcher.center = CGPointMake(self.view.bounds.size.width / 2,
+                                  self.view.bounds.size.height / 2);
+    switcher.knobRelativeHeight = 1.0f;
+    switcher.delegate = self;
+    [self.view addSubview:switcher];
+    
+    [self.view addSubview:self.tranformView];
+}
+
+#pragma mark - ORBSwitchDelegate
+- (void)orbSwitchToggled:(ORBSwitch *)switchObj withNewValue:(BOOL)newValue {
+    NSLog(@"Switch toggled: new state is %@", (newValue) ? @"ON" : @"OFF");
+}
+
+- (void)orbSwitchToggleAnimationFinished:(ORBSwitch *)switchObj {
+    [switchObj setCustomKnobImage:[UIImage imageNamed:(switchObj.isOn) ? @"lighting_on" : @"lighting_off"]
+          inactiveBackgroundImage:nil
+            activeBackgroundImage:nil];
+
 }
 
 - (IBAction)loadCatalog:(id)sender {

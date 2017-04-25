@@ -10,12 +10,14 @@
 #import "MBProgressHUD+NJ.h"
 #import "SceneManager.h"
 #import "KxMenu.h"
+#import "IphoneNewAddSceneTimerVC.h"
 
 @interface IphoneSaveNewSceneController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *sceneName;//输入场景名的输入框
 @property (weak, nonatomic) IBOutlet UIButton *sceneImageBtn;//选择场景图片的button
 @property (nonatomic,strong)UIImage *selectSceneImg;
 @property (nonatomic,strong) UIButton * naviRightBtn;
+@property (weak, nonatomic) IBOutlet UIButton *PushBtn;//定时跳转按钮
 
 @end
 
@@ -47,8 +49,9 @@
     
     Scene *scene = [[Scene alloc]initWhithoutSchedule];
     [scene setValuesForKeysWithDictionary:plistDic];
+    [[DeviceInfo defaultManager] setEditingScene:NO];
     
-    [[SceneManager defaultManager] saveAsNewScene:scene withName:self.sceneName.text withPic:self.selectSceneImg];
+    [[SceneManager defaultManager] addScene:scene withName:self.sceneName.text withImage:self.selectSceneImg];
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)storeNewScene:(id)sender {
@@ -122,7 +125,14 @@
 - (IBAction)clickCancle:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
+//跳转到定时界面
+- (IBAction)PushBtn:(id)sender {
+    UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
+    IphoneNewAddSceneTimerVC * iphoneSaveNewScene = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneNewAddSceneTimerVC"];
+    // [self presentViewController:iphoneSaveNewScene animated:YES completion:nil];
+    [self.navigationController pushViewController:iphoneSaveNewScene animated:YES];
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

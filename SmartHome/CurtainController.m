@@ -27,7 +27,6 @@
 
 @implementation CurtainController
 
-
 -(NSMutableArray *)curtainIDArr
 {
     if(!_curtainIDArr)
@@ -45,11 +44,10 @@
                 }
             }
 
-        }else if(self.roomID ){
-            [_curtainIDArr addObjectsFromArray:[SQLManager getDeviceByTypeName:@"开合帘" andRoomID:self.roomID]];
-            [_curtainIDArr addObjectsFromArray:[SQLManager getDeviceByTypeName:@"卷帘" andRoomID:self.roomID]];
+        }else if(self.roomID){
+            [_curtainIDArr addObjectsFromArray:[SQLManager getDeviceBysubTypeid:CURTAIN_DEVICE_TYPE andRoomID:self.roomID]];
         }else{
-            [_curtainIDArr addObject:self.deviceid];
+            [_curtainIDArr addObject:self.deviceid?self.deviceid:@"0"];
         }
         
         
@@ -71,24 +69,13 @@
     }
     return _curNames;
 }
--(void)setUpConstraint
-{
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-    {
-        self.segmentTopConstraint.constant = 0;
-        self.tableViewLeftConstraint.constant = 0;
-        self.tableViewRightConstraint.constant = 0;
-        
-    }
 
-}
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title=@"窗帘";
     
-    [self setUpConstraint];
     // Do any additional setup after loading the view.
     
-    self.title=@"窗帘";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [UIView new];
@@ -224,12 +211,12 @@
     [cell.slider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     [cell.open addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [cell.close addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-    
+    cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.label.text = [self.curNames objectAtIndex:indexPath.row];
     cell.deviceId = [self.curtainIDArr objectAtIndex:indexPath.row];
     
-  return cell;
+    return cell;
     
     
     /*static NSString *CellIdentifier = @"Cell";
@@ -251,7 +238,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 76;
+    return 60;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

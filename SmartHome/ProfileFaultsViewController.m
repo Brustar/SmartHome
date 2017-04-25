@@ -153,7 +153,8 @@
 
 #pragma mark -UITableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.faultArr.count;
+//    return self.faultArr.count;
+    return 0;
 }
 
 

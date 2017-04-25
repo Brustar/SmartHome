@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -55,12 +54,23 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RA2-wl-P6n">
-                        <rect key="frame" x="288" y="15" width="22" height="22"/>
+                        <rect key="frame" x="248" y="15" width="22" height="22"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="I8O-Ar-RzM"/>
                             <constraint firstAttribute="width" constant="22" id="WND-b7-Qei"/>
                         </constraints>
                         <state key="normal" image="music-red"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNv-h0-wW4">
+                        <rect key="frame" x="290" y="8" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="VW2-U1-igE"/>
+                            <constraint firstAttribute="height" constant="30" id="VYA-uL-hUG"/>
+                        </constraints>
+                        <state key="normal" image="icon_add_normal"/>
+                        <connections>
+                            <action selector="AddBjmusicBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dW3-Vj-3tL"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -68,20 +78,24 @@
                     <constraint firstAttribute="bottomMargin" secondItem="qeP-Gt-Xg0" secondAttribute="bottom" constant="4.5" id="8jh-TB-8ca"/>
                     <constraint firstAttribute="bottom" secondItem="46X-Zw-9GZ" secondAttribute="bottom" id="G8b-Fr-Ygz"/>
                     <constraint firstAttribute="trailingMargin" secondItem="jJa-FA-3MA" secondAttribute="trailing" constant="14" id="GzR-Dg-wtb"/>
+                    <constraint firstItem="NNv-h0-wW4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="HDY-4J-cr8"/>
                     <constraint firstItem="46X-Zw-9GZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="IvU-Vx-a5i"/>
                     <constraint firstItem="qeP-Gt-Xg0" firstAttribute="leading" secondItem="GSf-bm-sEA" secondAttribute="trailing" constant="15" id="Uq4-Sp-vFJ"/>
                     <constraint firstItem="46X-Zw-9GZ" firstAttribute="top" secondItem="gcs-pi-ibs" secondAttribute="bottom" id="WJM-8O-Ggg"/>
                     <constraint firstItem="46X-Zw-9GZ" firstAttribute="top" secondItem="RA2-wl-P6n" secondAttribute="bottom" constant="12.5" id="b1w-Xb-AAN"/>
                     <constraint firstItem="GSf-bm-sEA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="14" id="bOO-4C-bQQ"/>
                     <constraint firstItem="gcs-pi-ibs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="dC8-mb-vCM"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="NNv-h0-wW4" secondAttribute="trailing" constant="10" id="gSX-nr-6dT"/>
                     <constraint firstAttribute="bottomMargin" secondItem="jJa-FA-3MA" secondAttribute="bottom" constant="10.5" id="lgy-Nv-pkr"/>
                     <constraint firstItem="gcs-pi-ibs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="mn4-dK-MOw"/>
                     <constraint firstAttribute="bottomMargin" secondItem="GSf-bm-sEA" secondAttribute="bottom" constant="13" id="osj-f3-6z6"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="RA2-wl-P6n" secondAttribute="trailing" constant="20" id="rAC-jS-kgv"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="RA2-wl-P6n" secondAttribute="trailing" constant="60" id="rAC-jS-kgv"/>
                     <constraint firstAttribute="trailing" secondItem="46X-Zw-9GZ" secondAttribute="trailing" id="yLL-QI-Ze1"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="AddBjmusicBtn" destination="NNv-h0-wW4" id="yE7-UR-Zw8"/>
+                <outlet property="BJmusicConstraint" destination="rAC-jS-kgv" id="Wni-eO-33K"/>
                 <outlet property="BjMusicNameLb" destination="gcs-pi-ibs" id="QHs-H8-GPc"/>
                 <outlet property="BjPowerButton" destination="RA2-wl-P6n" id="nmC-pe-Twq"/>
                 <outlet property="BjSlider" destination="qeP-Gt-Xg0" id="tvb-0d-DfN"/>
@@ -91,6 +105,7 @@
     </objects>
     <resources>
         <image name="bd_icon_voi_high" width="11" height="9"/>
+        <image name="icon_add_normal" width="15" height="15"/>
         <image name="lv_fm_adjust_normal" width="336" height="47"/>
         <image name="music-red" width="22" height="19"/>
     </resources>

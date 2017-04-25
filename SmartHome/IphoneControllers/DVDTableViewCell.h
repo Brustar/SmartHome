@@ -13,5 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *YLImageView;
 @property (weak, nonatomic) IBOutlet UISlider *DVDSlider;
 @property (weak, nonatomic) IBOutlet UIButton *DVDSwitchBtn;
+@property (weak, nonatomic) IBOutlet UIButton *AddDvdBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *DVDConstraint;
 
 @end

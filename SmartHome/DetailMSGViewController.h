@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomViewController.h"
 
-@interface DetailMSGViewController : UIViewController
+@interface DetailMSGViewController : CustomViewController
 
 @property (nonatomic,strong) NSString * itemID;
 @property (nonatomic,strong) NSString * type;

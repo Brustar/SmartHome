@@ -19,6 +19,9 @@
     self.BjSlider.minimumTrackTintColor = [UIColor colorWithRed:253/255.0 green:254/255.0 blue:254/255.0 alpha:1];
 }
 
+- (IBAction)AddBjmusicBtn:(id)sender {
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

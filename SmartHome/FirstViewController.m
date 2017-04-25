@@ -24,6 +24,8 @@
 #import "ConversationViewController.h"
 #import <RBStoryboardLink.h>
 #import "IOManager.h"
+#import "NowMusicController.h"
+#import "ShortcutKeyViewController.h"
 
 
 
@@ -127,13 +129,19 @@
     [self showNetStateView];
     //开启网络状况监听器
     [self updateInterfaceWithReachability];
+    [self setUIMessage];
+    [self chatConnect];
+}
+
+-(void)setUIMessage
+{
     self.FourBtnView.userInteractionEnabled = YES;
     _IconeImageView.layer.masksToBounds = YES;
     _IconeImageView.layer.cornerRadius = _IconeImageView.bounds.size.height/2;
     _numberLabelView.layer.masksToBounds = YES;
     _numberLabelView.layer.cornerRadius = _numberLabelView.bounds.size.height / 2;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doTap:)];
-     UITapGestureRecognizer *Headtap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(HeadDoTap:)];
+    UITapGestureRecognizer *Headtap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(HeadDoTap:)];
     _HeadImageView.userInteractionEnabled = YES;
     _familyNum = [[NSUserDefaults standardUserDefaults] objectForKey:@"familyNum"];
     self.memberFamilyLabel.text = [NSString stringWithFormat:@"家庭成员（%@）",_familyNum];
@@ -144,7 +152,7 @@
     _calenderMonthLabel.adjustsFontSizeToFitWidth = YES;
     _markedWordsLabel.adjustsFontSizeToFitWidth = YES;
     _TakeTurnsWordsLabel.adjustsFontSizeToFitWidth = YES;
-   
+    
     // 允许用户交互
     _SubImageView.userInteractionEnabled = YES;
     _subView.userInteractionEnabled = YES;
@@ -201,18 +209,18 @@
         _calenderMonthLabel.text = @"December";
     }
     NSInteger day=[conponent day];
-    _calenderYearLabel.text = [NSString stringWithFormat:@"%ld",(long)year];
-     if (([UIScreen mainScreen].bounds.size.height == 568.0)) {
-         _DayLabelUpConstraint.constant = -10;
-         _DayLabelLeftConstraint.constant = -5;
-         _YLabelrightConstraint.constant = 0;
-         _NLabelrightConstraint.constant = 0;
-         _calenderDayLabel.font = [UIFont systemFontOfSize:70];
-     }if (([UIScreen mainScreen].bounds.size.height == 667.0)) {
-         _calenderDayLabel.font = [UIFont systemFontOfSize:113];
-     }
-    _calenderDayLabel.text = [NSString stringWithFormat:@"%ld",(long)day];
-    [self chatConnect];
+    _calenderYearLabel.text = [NSString stringWithFormat:@"%ld",year];
+    if (([UIScreen mainScreen].bounds.size.height == 568.0)) {
+        _DayLabelUpConstraint.constant = -10;
+        _DayLabelLeftConstraint.constant = -5;
+        _YLabelrightConstraint.constant = 0;
+        _NLabelrightConstraint.constant = 0;
+        _calenderDayLabel.font = [UIFont systemFontOfSize:70];
+    }if (([UIScreen mainScreen].bounds.size.height == 667.0)) {
+        _calenderDayLabel.font = [UIFont systemFontOfSize:113];
+    }
+    _calenderDayLabel.text = [NSString stringWithFormat:@"%ld",day];
+
 }
 
 - (void)connect
@@ -311,6 +319,9 @@
 
 -(void)setBtn
 {
+    _firstBtn.selected = !_firstBtn.selected;
+    _TwoBtn.selected = !_TwoBtn.selected;
+    _ThreeBtn.selected = !_ThreeBtn.selected;
     NSMutableArray * arr = [[NSMutableArray alloc] init];
 
     // 1.获得沙盒根路径
@@ -333,7 +344,10 @@
         [_ThreeBtn setTitle:arr[2] forState:UIControlStateNormal];
         [_TwoBtn setTitle:arr[1] forState:UIControlStateNormal];
     }
-    
+    if ([arr count]>0 && arr[2] != nil) {
+         _ThreeBtn.userInteractionEnabled = NO;
+        [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular3"] forState:UIControlStateNormal];
+    }
   
 }
 
@@ -447,7 +461,14 @@
         _nowMusicController = nil;
     }
 }
-
+//跳转到场景快捷键界面
+- (IBAction)SceneShortcutBtn:(id)sender {
+    
+    UIStoryboard * myInfoStoryBoard = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
+    ShortcutKeyViewController * shortcutKeyVC = [myInfoStoryBoard instantiateViewControllerWithIdentifier:@"ShortcutKeyViewController"];
+    
+    [self.navigationController pushViewController:shortcutKeyVC animated:YES];
+}
 - (void)menuBtnAction:(UIButton *)sender {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     

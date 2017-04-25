@@ -113,16 +113,7 @@ static NSString * const CYPhotoId = @"photo";
 }
 
 - (void)rightBtnClicked:(UIButton *)btn {
-    UIStoryboard * HomeStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
-    if (_nowMusicController == nil) {
-        _nowMusicController = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"NowMusicController"];
-        _nowMusicController.delegate = self;
-        [self.view addSubview:_nowMusicController.view];
-        [self.view bringSubviewToFront:_nowMusicController.view];
-    }else {
-        [_nowMusicController.view removeFromSuperview];
-        _nowMusicController = nil;
-    }
+    [self performSegueWithIdentifier:@"air" sender:self];
 }
 
 - (void)onBgButtonClicked:(UIButton *)sender {

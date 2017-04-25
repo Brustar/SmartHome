@@ -10,5 +10,9 @@
 
 @interface FMTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *FMNameLabel;
+@property (weak, nonatomic) IBOutlet UISlider *FMSlider;//音量
+@property (weak, nonatomic) IBOutlet UISlider *FMChannelSlider;//调节频道
+@property (weak, nonatomic) IBOutlet UILabel *FMChannelLabel;
+@property (weak, nonatomic) IBOutlet UIButton *AddFmBtn;
 
 @end

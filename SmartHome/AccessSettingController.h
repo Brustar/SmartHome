@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomViewController.h"
 
-@interface AccessSettingController : UIViewController
+@interface AccessSettingController : CustomViewController
 
 @end

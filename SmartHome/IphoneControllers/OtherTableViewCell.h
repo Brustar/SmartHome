@@ -11,5 +11,7 @@
 @interface OtherTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *NameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *OtherSwitchBtn;
+@property (weak, nonatomic) IBOutlet UIButton *AddOtherBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *OtherConstraint;
 
 @end

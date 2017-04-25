@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,12 +29,15 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KsG-3J-jAv">
-                        <rect key="frame" x="297" y="23" width="22" height="22"/>
+                        <rect key="frame" x="293" y="15" width="30" height="30"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="22" id="7o3-q9-7rU"/>
-                            <constraint firstAttribute="height" constant="22" id="OcX-zo-EI2"/>
+                            <constraint firstAttribute="width" constant="30" id="7o3-q9-7rU"/>
+                            <constraint firstAttribute="height" constant="30" id="OcX-zo-EI2"/>
                         </constraints>
-                        <state key="normal" image="music-red"/>
+                        <state key="normal" image="icon_add_normal"/>
+                        <connections>
+                            <action selector="AddFmBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Lbq-Qd-2Ww"/>
+                        </connections>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lv_fm_adjust_normal" translatesAutoresizingMaskIntoConstraints="NO" id="xIo-qQ-yTT">
                         <rect key="frame" x="0.0" y="60" width="341" height="50"/>
@@ -127,11 +129,15 @@
                     <constraint firstItem="I3W-gc-d2v" firstAttribute="leading" secondItem="gny-GJ-qtv" secondAttribute="trailing" constant="6" id="wqE-bt-EMl"/>
                     <constraint firstItem="ykO-AQ-yva" firstAttribute="leading" secondItem="3Pw-CA-AFl" secondAttribute="trailing" constant="8" id="z1q-1g-auA"/>
                     <constraint firstAttribute="trailingMargin" secondItem="ykO-AQ-yva" secondAttribute="trailing" constant="15" id="zfN-f1-2cA"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="KsG-3J-jAv" secondAttribute="trailing" constant="14" id="zlu-AO-z3q"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="KsG-3J-jAv" secondAttribute="trailing" constant="10" id="zlu-AO-z3q"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="AddFmBtn" destination="KsG-3J-jAv" id="Ktw-ME-tze"/>
+                <outlet property="FMChannelLabel" destination="3bJ-tb-OIA" id="xHS-uI-9o3"/>
+                <outlet property="FMChannelSlider" destination="6Ma-tU-XJy" id="NRy-2J-ts5"/>
                 <outlet property="FMNameLabel" destination="oHP-La-v8f" id="Pkl-zs-x5Y"/>
+                <outlet property="FMSlider" destination="3Pw-CA-AFl" id="6PH-ne-6IE"/>
             </connections>
             <point key="canvasLocation" x="-44.5" y="11"/>
         </tableViewCell>
@@ -139,9 +145,9 @@
     <resources>
         <image name="bd_icon_voi_high" width="11" height="9"/>
         <image name="dvd_frm_choice__normal" width="336" height="47"/>
+        <image name="icon_add_normal" width="15" height="15"/>
         <image name="ktv_btn_ajt" width="269" height="20"/>
         <image name="ktv_btn_show" width="36" height="20"/>
         <image name="lv_fm_adjust_normal" width="336" height="47"/>
-        <image name="music-red" width="22" height="19"/>
     </resources>
 </document>
