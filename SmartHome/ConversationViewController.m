@@ -23,8 +23,24 @@
     
 }
 
+- (void)leftBarButtonItemPressed:(id)sender
+{
+    [super leftBarButtonItemPressed:sender];
+    [[RCIM sharedRCIM] logout];
+}
+
 - (void)setupNaviBar {
     _viewNaviBar = [[CustomNaviBarView alloc] initWithFrame:Rect(0.0f, 0.0f, [CustomNaviBarView barSize].width, [CustomNaviBarView barSize].height)];
+    
+    UIImage* imgRight=[UIImage imageNamed:@"Contacts"];
+    
+    UIBarButtonItem *barRight = [[UIBarButtonItem alloc]
+                                initWithImage:imgRight
+                                style:UIBarButtonItemStylePlain
+                                target:self
+                                action:@selector(rightBtnClicked:)];
+
+    self.navigationItem.rightBarButtonItem=barRight;
     _viewNaviBar.m_viewCtrlParent = self;
     [self setNaviBarTitle:self.title];
     [self.view addSubview:_viewNaviBar];
@@ -38,15 +54,14 @@
     }else{APP_ASSERT_STOP}
 }
 
+-(IBAction)rightBtnClicked:(id)sender
+{
+    NSLog(@"right click.");
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    [[RCIM sharedRCIM] logout];
 }
 
 /*

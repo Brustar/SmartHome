@@ -45,24 +45,24 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="39"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Njc-qT-NJW">
-                                        <rect key="frame" x="0.0" y="0.0" width="80.5" height="39"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="39"/>
                                         <fontDescription key="fontDescription" name=".PingFangSC-Regular" family=".PingFang SC" pointSize="13"/>
                                         <state key="normal" title=" 制冷" image="cool" backgroundImage="light_bar">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gy3-2E-69f">
-                                        <rect key="frame" x="240.5" y="0.0" width="79.5" height="39"/>
+                                        <rect key="frame" x="240" y="0.0" width="80" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <state key="normal" title=" 抽风" image="wind" backgroundImage="light_bar"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q0c-mR-Cg6">
-                                        <rect key="frame" x="80.5" y="0.0" width="79.5" height="39"/>
+                                        <rect key="frame" x="80" y="0.0" width="80" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <state key="normal" title=" 制热" image="heat" backgroundImage="light_bar"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="40y-Fw-9Iu">
-                                        <rect key="frame" x="160" y="0.0" width="80.5" height="39"/>
+                                        <rect key="frame" x="160" y="0.0" width="80" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <state key="normal" title=" 除湿" image="wet" backgroundImage="light_bar"/>
                                     </button>
@@ -1125,28 +1125,28 @@
                                 <rect key="frame" x="16" y="64" width="288" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="748" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PrM-99-eOC">
-                                        <rect key="frame" x="0.0" y="0.0" width="72.5" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="72" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <state key="normal" title="智能浇花" backgroundImage="light_bar">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qYC-2a-TkB">
-                                        <rect key="frame" x="72.5" y="0.0" width="71.5" height="40"/>
+                                        <rect key="frame" x="72" y="0.0" width="72" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <state key="normal" title="智能投食" backgroundImage="light_bar">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="miL-mT-zQg">
-                                        <rect key="frame" x="144" y="0.0" width="72.5" height="40"/>
+                                        <rect key="frame" x="144" y="0.0" width="72" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <state key="normal" title="智能插座" backgroundImage="light_bar">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KL8-23-d3p">
-                                        <rect key="frame" x="216.5" y="0.0" width="71.5" height="40"/>
+                                        <rect key="frame" x="216" y="0.0" width="72" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <state key="normal" title="除湿器" backgroundImage="light_bar">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1371,6 +1371,265 @@
             </objects>
             <point key="canvasLocation" x="-525" y="1068"/>
         </scene>
+        <!--feeding-->
+        <scene sceneID="5Ro-eU-GN6">
+            <objects>
+                <viewController id="ll4-cl-INo" userLabel="feeding" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9JU-AA-GLp"/>
+                        <viewControllerLayoutGuide type="bottom" id="YAG-LH-GeZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fTF-XE-Tyd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="318-MJ-tEf">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="food_schedule" translatesAutoresizingMaskIntoConstraints="NO" id="oCM-Yp-4q3">
+                                <rect key="frame" x="-27.5" y="91.5" width="375" height="385"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dh8-fN-riS">
+                                <rect key="frame" x="16" y="64" width="288" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="748" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xZR-AN-clP">
+                                        <rect key="frame" x="0.0" y="0.0" width="72" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="智能浇花" backgroundImage="light_bar">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CDI-o5-QxH">
+                                        <rect key="frame" x="72" y="0.0" width="72" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="智能投食" backgroundImage="light_bar">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36l-rC-TPP">
+                                        <rect key="frame" x="144" y="0.0" width="72" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="智能插座" backgroundImage="light_bar">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3wG-7L-BuD">
+                                        <rect key="frame" x="216" y="0.0" width="72" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="除湿器" backgroundImage="light_bar">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="3wG-7L-BuD" firstAttribute="width" secondItem="xZR-AN-clP" secondAttribute="width" id="HAh-oF-HGs"/>
+                                    <constraint firstItem="CDI-o5-QxH" firstAttribute="width" secondItem="xZR-AN-clP" secondAttribute="width" id="J3e-Fx-INE"/>
+                                    <constraint firstItem="36l-rC-TPP" firstAttribute="width" secondItem="xZR-AN-clP" secondAttribute="width" id="vqe-Xe-bjb"/>
+                                    <constraint firstAttribute="height" constant="40" id="wz8-oS-bOH"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="318-MJ-tEf" firstAttribute="leading" secondItem="fTF-XE-Tyd" secondAttribute="leading" id="2Ln-O8-egJ"/>
+                            <constraint firstItem="oCM-Yp-4q3" firstAttribute="centerY" secondItem="fTF-XE-Tyd" secondAttribute="centerY" id="AZ3-XC-5x9"/>
+                            <constraint firstItem="318-MJ-tEf" firstAttribute="top" secondItem="9JU-AA-GLp" secondAttribute="bottom" id="FhG-9i-PAY"/>
+                            <constraint firstItem="dh8-fN-riS" firstAttribute="top" secondItem="9JU-AA-GLp" secondAttribute="bottom" constant="44" id="Lay-5z-fbf"/>
+                            <constraint firstItem="dh8-fN-riS" firstAttribute="leading" secondItem="fTF-XE-Tyd" secondAttribute="leadingMargin" id="M9A-58-wib"/>
+                            <constraint firstItem="oCM-Yp-4q3" firstAttribute="centerX" secondItem="fTF-XE-Tyd" secondAttribute="centerX" id="Noo-yI-JWk"/>
+                            <constraint firstItem="YAG-LH-GeZ" firstAttribute="top" secondItem="318-MJ-tEf" secondAttribute="bottom" id="UWK-UO-k4M"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dh8-fN-riS" secondAttribute="trailing" id="lqw-R8-ZHh"/>
+                            <constraint firstAttribute="trailing" secondItem="318-MJ-tEf" secondAttribute="trailing" id="ocJ-ut-3Aq"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v1l-2g-mMj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2068" y="1744"/>
+        </scene>
+        <!--flowering-->
+        <scene sceneID="CAf-qb-eht">
+            <objects>
+                <viewController id="PiN-hn-P2b" userLabel="flowering" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zhX-sf-PuF"/>
+                        <viewControllerLayoutGuide type="bottom" id="vc9-t9-8xs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nQ6-vd-hTN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="PFG-XT-xWS">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flower_schedule" translatesAutoresizingMaskIntoConstraints="NO" id="Li9-Nq-RVQ">
+                                <rect key="frame" x="-27.5" y="91.5" width="375" height="385"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bc9-34-sRl">
+                                <rect key="frame" x="16" y="64" width="288" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="748" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CY0-Oi-Okt">
+                                        <rect key="frame" x="0.0" y="0.0" width="72" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="智能浇花" backgroundImage="light_bar">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lj5-d6-mBg">
+                                        <rect key="frame" x="72" y="0.0" width="72" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="智能投食" backgroundImage="light_bar">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CMj-Qo-QKB">
+                                        <rect key="frame" x="144" y="0.0" width="72" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="智能插座" backgroundImage="light_bar">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qcB-1k-0ys">
+                                        <rect key="frame" x="216" y="0.0" width="72" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="除湿器" backgroundImage="light_bar">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="2KJ-MZ-1bt"/>
+                                    <constraint firstItem="lj5-d6-mBg" firstAttribute="width" secondItem="CY0-Oi-Okt" secondAttribute="width" id="BMS-AU-e06"/>
+                                    <constraint firstItem="CMj-Qo-QKB" firstAttribute="width" secondItem="CY0-Oi-Okt" secondAttribute="width" id="IVm-ZF-7Zz"/>
+                                    <constraint firstItem="qcB-1k-0ys" firstAttribute="width" secondItem="CY0-Oi-Okt" secondAttribute="width" id="eQc-H8-e42"/>
+                                </constraints>
+                            </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_start" translatesAutoresizingMaskIntoConstraints="NO" id="LUh-1v-i9p">
+                                <rect key="frame" x="132" y="261.5" width="16" height="15"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_timer" translatesAutoresizingMaskIntoConstraints="NO" id="F9x-H8-Rwh">
+                                <rect key="frame" x="142" y="291.5" width="16" height="15"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZT-Zw-eHl">
+                                <rect key="frame" x="155.5" y="262.5" width="29.5" height="13.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5S" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mKR-Lw-ITf">
+                                <rect key="frame" x="163" y="292.5" width="14" height="13.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="schedule_line" translatesAutoresizingMaskIntoConstraints="NO" id="fxh-Y6-ncW">
+                                <rect key="frame" x="128" y="283.5" width="64" height="1"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Li9-Nq-RVQ" firstAttribute="centerY" secondItem="nQ6-vd-hTN" secondAttribute="centerY" id="2rj-he-WHF"/>
+                            <constraint firstItem="PFG-XT-xWS" firstAttribute="top" secondItem="zhX-sf-PuF" secondAttribute="bottom" id="Flq-oZ-IHA"/>
+                            <constraint firstItem="bc9-34-sRl" firstAttribute="leading" secondItem="nQ6-vd-hTN" secondAttribute="leadingMargin" id="IEL-Wy-dca"/>
+                            <constraint firstItem="lZT-Zw-eHl" firstAttribute="centerX" secondItem="nQ6-vd-hTN" secondAttribute="centerX" constant="10" id="LYC-ze-bd6"/>
+                            <constraint firstItem="LUh-1v-i9p" firstAttribute="centerY" secondItem="nQ6-vd-hTN" secondAttribute="centerY" constant="-15" id="QYO-l8-nf0"/>
+                            <constraint firstItem="mKR-Lw-ITf" firstAttribute="centerY" secondItem="nQ6-vd-hTN" secondAttribute="centerY" constant="15" id="QzM-Cv-dsx"/>
+                            <constraint firstItem="lZT-Zw-eHl" firstAttribute="centerY" secondItem="nQ6-vd-hTN" secondAttribute="centerY" constant="-15" id="YxE-dF-gCx"/>
+                            <constraint firstItem="PFG-XT-xWS" firstAttribute="leading" secondItem="nQ6-vd-hTN" secondAttribute="leading" id="aKJ-BH-AAR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bc9-34-sRl" secondAttribute="trailing" id="efJ-Du-hER"/>
+                            <constraint firstItem="F9x-H8-Rwh" firstAttribute="centerY" secondItem="nQ6-vd-hTN" secondAttribute="centerY" constant="15" id="hCw-XF-cOV"/>
+                            <constraint firstItem="fxh-Y6-ncW" firstAttribute="centerY" secondItem="nQ6-vd-hTN" secondAttribute="centerY" id="lUX-z1-GP0"/>
+                            <constraint firstItem="mKR-Lw-ITf" firstAttribute="centerX" secondItem="nQ6-vd-hTN" secondAttribute="centerX" constant="10" id="oNn-PN-BJW"/>
+                            <constraint firstAttribute="trailing" secondItem="PFG-XT-xWS" secondAttribute="trailing" id="rQZ-ai-z92"/>
+                            <constraint firstItem="F9x-H8-Rwh" firstAttribute="centerX" secondItem="nQ6-vd-hTN" secondAttribute="centerX" constant="-10" id="sF8-wm-iaD"/>
+                            <constraint firstItem="Li9-Nq-RVQ" firstAttribute="centerX" secondItem="nQ6-vd-hTN" secondAttribute="centerX" id="sPf-7a-Xb5"/>
+                            <constraint firstItem="vc9-t9-8xs" firstAttribute="top" secondItem="PFG-XT-xWS" secondAttribute="bottom" id="sag-Ca-FoM"/>
+                            <constraint firstItem="bc9-34-sRl" firstAttribute="top" secondItem="zhX-sf-PuF" secondAttribute="bottom" constant="44" id="tP0-Xd-vNK"/>
+                            <constraint firstItem="LUh-1v-i9p" firstAttribute="centerX" secondItem="nQ6-vd-hTN" secondAttribute="centerX" constant="-20" id="tdy-ux-j0o"/>
+                            <constraint firstItem="fxh-Y6-ncW" firstAttribute="centerX" secondItem="nQ6-vd-hTN" secondAttribute="centerX" id="wME-SX-UAJ"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zd7-Cr-h9c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1301" y="1743"/>
+        </scene>
+        <!--wetting-->
+        <scene sceneID="Q1e-I5-4Uc">
+            <objects>
+                <viewController id="J2i-01-zen" userLabel="wetting" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gsG-aU-KFc"/>
+                        <viewControllerLayoutGuide type="bottom" id="UMu-QR-Ovc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ric-aa-AYk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="3CR-v7-vJh">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wet_schedule" translatesAutoresizingMaskIntoConstraints="NO" id="DOW-BT-izF">
+                                <rect key="frame" x="-27.5" y="91.5" width="375" height="385"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w6F-RH-Ijy">
+                                <rect key="frame" x="16" y="64" width="288" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="748" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZY6-VN-xEL">
+                                        <rect key="frame" x="0.0" y="0.0" width="72" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="智能浇花" backgroundImage="light_bar">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4si-Es-ha3">
+                                        <rect key="frame" x="72" y="0.0" width="72" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="智能投食" backgroundImage="light_bar">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hwf-vQ-CDv">
+                                        <rect key="frame" x="144" y="0.0" width="72" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="智能插座" backgroundImage="light_bar">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OV0-OM-P1J">
+                                        <rect key="frame" x="216" y="0.0" width="72" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="除湿器" backgroundImage="light_bar">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Hwf-vQ-CDv" firstAttribute="width" secondItem="ZY6-VN-xEL" secondAttribute="width" id="h7r-Si-Oaf"/>
+                                    <constraint firstItem="4si-Es-ha3" firstAttribute="width" secondItem="ZY6-VN-xEL" secondAttribute="width" id="ioX-K2-owC"/>
+                                    <constraint firstAttribute="height" constant="40" id="mMC-Xb-7jA"/>
+                                    <constraint firstItem="OV0-OM-P1J" firstAttribute="width" secondItem="ZY6-VN-xEL" secondAttribute="width" id="pMj-Fe-jv6"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="w6F-RH-Ijy" firstAttribute="top" secondItem="gsG-aU-KFc" secondAttribute="bottom" constant="44" id="EKZ-dL-QVd"/>
+                            <constraint firstItem="3CR-v7-vJh" firstAttribute="top" secondItem="gsG-aU-KFc" secondAttribute="bottom" id="PJ1-U7-HoB"/>
+                            <constraint firstItem="w6F-RH-Ijy" firstAttribute="leading" secondItem="Ric-aa-AYk" secondAttribute="leadingMargin" id="SWy-fq-e5O"/>
+                            <constraint firstItem="UMu-QR-Ovc" firstAttribute="top" secondItem="3CR-v7-vJh" secondAttribute="bottom" id="Tqk-jf-zF5"/>
+                            <constraint firstAttribute="trailing" secondItem="3CR-v7-vJh" secondAttribute="trailing" id="UOy-hP-K2Z"/>
+                            <constraint firstItem="DOW-BT-izF" firstAttribute="centerY" secondItem="Ric-aa-AYk" secondAttribute="centerY" id="WFH-ZH-bq1"/>
+                            <constraint firstItem="3CR-v7-vJh" firstAttribute="leading" secondItem="Ric-aa-AYk" secondAttribute="leading" id="hAI-oU-nz9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="w6F-RH-Ijy" secondAttribute="trailing" id="liV-7b-DpT"/>
+                            <constraint firstItem="DOW-BT-izF" firstAttribute="centerX" secondItem="Ric-aa-AYk" secondAttribute="centerX" id="v0Z-l3-bwp"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TZE-JW-5uo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-525" y="1743"/>
+        </scene>
     </scenes>
     <resources>
         <image name="CCTV1" width="23" height="10"/>
@@ -1397,10 +1656,14 @@
         <image name="dir_up" width="37" height="19"/>
         <image name="disk" width="198" height="198"/>
         <image name="disk_base" width="326" height="326"/>
+        <image name="flower_schedule" width="375" height="385"/>
         <image name="fm_favorite" width="12" height="11"/>
         <image name="fm_pad" width="326" height="326"/>
+        <image name="food_schedule" width="375" height="385"/>
         <image name="heat" width="11" height="11"/>
         <image name="humidity" width="141" height="141"/>
+        <image name="icon_start" width="16" height="15"/>
+        <image name="icon_timer" width="16" height="15"/>
         <image name="leftMenu" width="25" height="18"/>
         <image name="light_bar" width="122" height="39"/>
         <image name="light_title" width="174" height="39"/>
@@ -1412,6 +1675,7 @@
         <image name="plugin_on" width="375" height="385"/>
         <image name="pm2.5" width="141" height="141"/>
         <image name="repeat_white" width="12" height="12"/>
+        <image name="schedule_line" width="64" height="1"/>
         <image name="screen_control_btn" width="240" height="101"/>
         <image name="shuffle_white" width="13" height="10"/>
         <image name="stylus" width="43" height="166"/>
@@ -1419,6 +1683,7 @@
         <image name="voice_hight" width="12" height="10"/>
         <image name="voice_low" width="10" height="8"/>
         <image name="wet" width="9" height="11"/>
+        <image name="wet_schedule" width="375" height="385"/>
         <image name="wind" width="10" height="10"/>
     </resources>
 </document>

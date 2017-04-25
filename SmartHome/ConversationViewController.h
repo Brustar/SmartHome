@@ -16,4 +16,5 @@
 
 - (void)setNaviBarTitle:(NSString *)strTitle;
 
+
 @end
