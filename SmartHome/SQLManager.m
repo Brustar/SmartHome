@@ -1438,6 +1438,7 @@
     return device;
 
 }
+
 + (NSArray *)queryChat:(NSString *) userid
 {
     NSMutableArray *temp = [NSMutableArray new];
@@ -1451,6 +1452,25 @@
         {
             [temp addObject: [resultSet stringForColumn:@"nickname"]];
             [temp addObject: [resultSet stringForColumn:@"portrait"]];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return temp;
+}
+
++ (NSArray *)queryAllChat
+{
+    NSMutableArray *temp = [NSMutableArray new];
+    
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT nickname,portrait FROM chats"];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+            [temp addObject: @{@"nickname":[resultSet stringForColumn:@"nickname"],@"portrait":[resultSet stringForColumn:@"portrait"]}];
         }
     }
     [db closeOpenResultSets];

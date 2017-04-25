@@ -556,9 +556,9 @@ static NSString *const menuCellIdentifier = @"rotationCell";
                                   self.view.bounds.size.height / 2);
     colorpad.backgroundColor = [UIColor blueColor];
     colorpad.layer.cornerRadius = colorpad.frame.size.width/2;
-    [self.view addSubview:colorpad];
+    //[self.view addSubview:colorpad];
     
-    self.tranformView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 182, 150)];
+    self.tranformView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 240, 240)];
     self.tranformView.center = CGPointMake(self.view.bounds.size.width / 2,
                                   self.view.bounds.size.height / 2);
     self.tranformView.image = [UIImage imageNamed:@"glory"];

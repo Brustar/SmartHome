@@ -81,6 +81,9 @@
 		0FA658FC1CD9DB3F005AC4B4 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA658FB1CD9DB3F005AC4B4 /* MediaPlayer.framework */; };
 		0FA86BAD1E72445000DC177E /* LLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA86BA81E72445000DC177E /* LLViewController.m */; };
 		0FA86BAF1E72445000DC177E /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA86BAC1E72445000DC177E /* Cell.m */; };
+		0FABB33C1EAF22FC0089A5A4 /* ContextMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FABB33B1EAF22FC0089A5A4 /* ContextMenuCell.m */; };
+		0FABB33E1EAF232A0089A5A4 /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FABB33D1EAF232A0089A5A4 /* MenuCell.xib */; };
+		0FABB3401EAF23470089A5A4 /* ContextMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FABB33F1EAF23470089A5A4 /* ContextMenuCell.xib */; };
 		0FABF91C1D06AA35000892D8 /* TVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FABF91B1D06AA35000892D8 /* TVController.m */; };
 		0FABF91F1D06AA4E000892D8 /* DVDController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FABF91E1D06AA4E000892D8 /* DVDController.m */; };
 		0FADA44A1CEBF8AE00777901 /* SceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FADA4491CEBF8AE00777901 /* SceneManager.m */; };
@@ -139,8 +142,6 @@
 		0FEE12771D20C53400811947 /* TXHRrettyRuler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEE12741D20C53400811947 /* TXHRrettyRuler.m */; };
 		0FF410DA1CDAE67100C7F4A1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410D91CDAE67100C7F4A1 /* CoreLocation.framework */; };
 		0FF410DC1CDAF76300C7F4A1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410DB1CDAF76300C7F4A1 /* CoreBluetooth.framework */; };
-		0FF5CD591EA769D70027E2DC /* ContextMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF5CD571EA769D70027E2DC /* ContextMenuCell.m */; };
-		0FF5CD5A1EA769D70027E2DC /* ContextMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FF5CD581EA769D70027E2DC /* ContextMenuCell.xib */; };
 		0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7B0B51D1380BF003C2D52 /* AirController.m */; };
 		0FF92B661D9224640098DD54 /* TVChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF92B651D9224640098DD54 /* TVChannel.m */; };
 		2E0297271E4C4C7600BBC520 /* MySubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0297261E4C4C7600BBC520 /* MySubView.m */; };
@@ -628,6 +629,10 @@
 		0FA86BA81E72445000DC177E /* LLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLViewController.m; sourceTree = "<group>"; };
 		0FA86BAB1E72445000DC177E /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
 		0FA86BAC1E72445000DC177E /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
+		0FABB33A1EAF22FC0089A5A4 /* ContextMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextMenuCell.h; sourceTree = "<group>"; };
+		0FABB33B1EAF22FC0089A5A4 /* ContextMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextMenuCell.m; sourceTree = "<group>"; };
+		0FABB33D1EAF232A0089A5A4 /* MenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuCell.xib; sourceTree = "<group>"; };
+		0FABB33F1EAF23470089A5A4 /* ContextMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContextMenuCell.xib; sourceTree = "<group>"; };
 		0FABF91A1D06AA35000892D8 /* TVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVController.h; sourceTree = "<group>"; };
 		0FABF91B1D06AA35000892D8 /* TVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVController.m; sourceTree = "<group>"; };
 		0FABF91D1D06AA4E000892D8 /* DVDController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVDController.h; sourceTree = "<group>"; };
@@ -744,9 +749,6 @@
 		0FEE12751D20C53400811947 /* TXHRrettyRuler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TXHRrettyRuler.h; path = PrettyRuler/TXHRrettyRuler.h; sourceTree = SOURCE_ROOT; };
 		0FF410D91CDAE67100C7F4A1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0FF410DB1CDAF76300C7F4A1 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
-		0FF5CD561EA769D70027E2DC /* ContextMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextMenuCell.h; sourceTree = "<group>"; };
-		0FF5CD571EA769D70027E2DC /* ContextMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextMenuCell.m; sourceTree = "<group>"; };
-		0FF5CD581EA769D70027E2DC /* ContextMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContextMenuCell.xib; sourceTree = "<group>"; };
 		0FF7B0B41D1380BF003C2D52 /* AirController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirController.h; sourceTree = "<group>"; };
 		0FF7B0B51D1380BF003C2D52 /* AirController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirController.m; sourceTree = "<group>"; };
 		0FF92B631D9222220098DD54 /* SQLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLManager.h; sourceTree = "<group>"; };
@@ -1841,6 +1843,7 @@
 		0F6ADFDB1E71349500BFF67F /* IM */ = {
 			isa = PBXGroup;
 			children = (
+				0FABB32F1EAF1C660089A5A4 /* ContextMenuCell */,
 				0F6ADFDE1E7136B500BFF67F /* RCDataManager.h */,
 				0F6ADFDF1E7136B500BFF67F /* RCDataManager.m */,
 				0F6ADFE11E7136C500BFF67F /* ConversationViewController.h */,
@@ -1898,6 +1901,16 @@
 				0FA86BAC1E72445000DC177E /* Cell.m */,
 			);
 			name = Linelayout;
+			sourceTree = "<group>";
+		};
+		0FABB32F1EAF1C660089A5A4 /* ContextMenuCell */ = {
+			isa = PBXGroup;
+			children = (
+				0FABB33F1EAF23470089A5A4 /* ContextMenuCell.xib */,
+				0FABB33A1EAF22FC0089A5A4 /* ContextMenuCell.h */,
+				0FABB33B1EAF22FC0089A5A4 /* ContextMenuCell.m */,
+			);
+			name = ContextMenuCell;
 			sourceTree = "<group>";
 		};
 		0FAF74AE1CEEA16700432713 /* HRColorPicker */ = {
@@ -2018,9 +2031,7 @@
 		0FF5CD4E1EA7695E0027E2DC /* Devices */ = {
 			isa = PBXGroup;
 			children = (
-				0FF5CD561EA769D70027E2DC /* ContextMenuCell.h */,
-				0FF5CD571EA769D70027E2DC /* ContextMenuCell.m */,
-				0FF5CD581EA769D70027E2DC /* ContextMenuCell.xib */,
+				0FABB33D1EAF232A0089A5A4 /* MenuCell.xib */,
 			);
 			name = Devices;
 			sourceTree = "<group>";
@@ -2764,7 +2775,8 @@
 				CDF78C5A1E9CC3C500F8B20C /* NaviBarBg.png in Resources */,
 				CDF1574F1E7AB2AF00499AC5 /* icon_tabbar_mine@2x.png in Resources */,
 				2EE1196C1E80D6B900F6FCB6 /* shanchu.png in Resources */,
-				0FF5CD5A1EA769D70027E2DC /* ContextMenuCell.xib in Resources */,
+				0FABB3401EAF23470089A5A4 /* ContextMenuCell.xib in Resources */,
+				0FABB33E1EAF232A0089A5A4 /* MenuCell.xib in Resources */,
 				CD93E3AF1E807CC2003CCAA9 /* login_bg@2x.png in Resources */,
 				2EE1196F1E81374A00F6FCB6 /* kaiqi.png in Resources */,
 				2EBABC791E8360FB0093EF3A /* TVTableViewCell.xib in Resources */,
@@ -3101,6 +3113,7 @@
 				0F6ADFE01E7136B500BFF67F /* RCDataManager.m in Sources */,
 				2E6328081E03C3C6000D7BE9 /* IphoneSceneAirVC.m in Sources */,
 				F630C35F1D38B4FF008880BB /* AccessSettingController.m in Sources */,
+				0FABB33C1EAF22FC0089A5A4 /* ContextMenuCell.m in Sources */,
 				F6642A811D4220100003D56B /* DeviceListController.m in Sources */,
 				0F094AC61E94CDC100977123 /* Key.m in Sources */,
 				0FAF98A41CE40F3C009BDBB5 /* QRCodeReader.m in Sources */,
@@ -3185,7 +3198,6 @@
 				F62CD87A1D94BE99001C66CE /* IphoneTVController.m in Sources */,
 				F62CFA411DAC699D006410F7 /* IphoneTypeView.m in Sources */,
 				0F1F3BCA1D2B85EA00B2641C /* MBProgressHUD+NJ.m in Sources */,
-				0FF5CD591EA769D70027E2DC /* ContextMenuCell.m in Sources */,
 				F625A61B1D4C99EC00B696E5 /* RoomListController.m in Sources */,
 				CDF157411E7AADC700499AC5 /* LeftSlideViewController.m in Sources */,
 				2EA897AC1E31B25E002CA904 /* YZNavigationMenuView.m in Sources */,

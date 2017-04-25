@@ -113,7 +113,7 @@ static NSString * const CYPhotoId = @"photo";
 }
 
 - (void)rightBtnClicked:(UIButton *)btn {
-    [self performSegueWithIdentifier:@"air" sender:self];
+    [self performSegueWithIdentifier:@"lighting" sender:self];
 }
 
 - (void)onBgButtonClicked:(UIButton *)sender {

@@ -9,9 +9,9 @@
 
 @import UIKit;
 
-//#import "YALContextMenuCell.h"
+#import "YALContextMenuCell.h"
 
-@interface ContextMenuCell : UITableViewCell //<YALContextMenuCell>
+@interface ContextMenuCell : UITableViewCell <YALContextMenuCell>
 
 @property (strong, nonatomic) IBOutlet UIImageView *menuImageView;
 @property (strong, nonatomic) IBOutlet UILabel *menuTitleLabel;

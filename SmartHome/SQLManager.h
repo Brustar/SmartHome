@@ -160,6 +160,7 @@
 +(NSString *)getDevicePicByID:(int)sceneID;
 
 +(NSArray *)queryChat:(NSString *)userid;
++ (NSArray *)queryAllChat;
 + (void) writeDevices:(NSArray *)rooms;
 +(void) writeRooms:(NSArray *)roomList;
 +(NSArray *) writeScenes:(NSArray *)rooms;
