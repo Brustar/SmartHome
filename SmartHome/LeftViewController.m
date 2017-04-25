@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    _itemArray = @[@"我的故障",@"我的保修记录",@"我的能耗",@"我的收藏",@"我的消息",@"我的家庭成员",@"首页场景快捷键",@"我的设置"];
+    _itemArray = @[@"家庭成员",@"家庭动态",@"智能账单",@"通知",@"故障及保修记录",@"切换家庭账号"];
     
     UIImageView *imageview = [[UIImageView alloc] initWithFrame:self.view.bounds];
     imageview.image = [UIImage imageNamed:@"background"];
@@ -29,8 +29,8 @@
     tableview.dataSource = self;
     tableview.delegate  = self;
     tableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    tableview.tableFooterView = [self setupTableFooter];
     [self.view addSubview:tableview];
-
 
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -61,41 +61,31 @@
     [appDelegate.LeftSlideVC closeLeftView];//关闭左侧抽屉
     
     NSString *item = [_itemArray objectAtIndex:indexPath.row];
-    if ([item isEqualToString:@"我的故障"]) {
+    if ([item isEqualToString:@"故障及保修记录"]) {
         ProfileFaultsViewController *profileFaultsVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"MyDefaultViewController"];
         profileFaultsVC.hidesBottomBarWhenPushed = YES;
         [appDelegate.mainTabBarController.selectedViewController pushViewController:profileFaultsVC animated:YES];
-    }else if ([item isEqualToString:@"我的保修记录"]) {
-        ServiceRecordViewController *serviceRecordVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"ServiceRecordViewController"];
-        serviceRecordVC.hidesBottomBarWhenPushed = YES;
-        [appDelegate.mainTabBarController.selectedViewController pushViewController:serviceRecordVC animated:YES];
+    }else if ([item isEqualToString:@"家庭成员"]) {
+        //家庭成员
+        [MBProgressHUD showError:@"开发中"];
         
-    }else if ([item isEqualToString:@"我的能耗"]) {
+    }else if ([item isEqualToString:@"智能账单"]) {
         MySubEnergyVC *mySubEnergyVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"MyEnergyViewController"];
         mySubEnergyVC.hidesBottomBarWhenPushed = YES;
         [appDelegate.mainTabBarController.selectedViewController pushViewController:mySubEnergyVC animated:YES];
         
-    }else if ([item isEqualToString:@"我的收藏"]) {
-        IphoneFavorController *favorVC = [iPhoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneFavorController"];
-        favorVC.hidesBottomBarWhenPushed = YES;
-        [appDelegate.mainTabBarController.selectedViewController pushViewController:favorVC animated:YES];
+    }else if ([item isEqualToString:@"家庭动态"]) {
+        //家庭动态
+        [MBProgressHUD showError:@"开发中"];
         
-    }else if ([item isEqualToString:@"我的消息"]) {
+    }else if ([item isEqualToString:@"通知"]) {
         MSGController *msgVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"MSGController"];
         msgVC.hidesBottomBarWhenPushed = YES;
         [appDelegate.mainTabBarController.selectedViewController pushViewController:msgVC animated:YES];
         
-    }else if ([item isEqualToString:@"我的设置"]) {
-        MySettingViewController *mysettingVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"MySettingViewController"];
-        mysettingVC.hidesBottomBarWhenPushed = YES;
-        [appDelegate.mainTabBarController.selectedViewController pushViewController:mysettingVC animated:YES];
+    }else if ([item isEqualToString:@"切换家庭账号"]) {
+       [MBProgressHUD showError:@"开发中"];
         
-    }else if ([item isEqualToString:@"我的家庭成员"]) {
-        [MBProgressHUD showError:@"开发中"];
-    }else if ([item isEqualToString:@"首页场景快捷键"]){
-        ShortcutKeyViewController *ShortcutKeyVC = [MyInfoStoryBoard instantiateViewControllerWithIdentifier:@"ShortcutKeyViewController"];
-        ShortcutKeyVC.hidesBottomBarWhenPushed = YES;
-        [appDelegate.mainTabBarController.selectedViewController pushViewController:ShortcutKeyVC animated:YES];
     }
     
 }
@@ -125,6 +115,26 @@
     [view addSubview:nameLabel];
     
     return view;
+}
+
+- (UIView *)setupTableFooter {
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 100)];
+    footer.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
+    UIButton *settingBtn = [[UIButton alloc] initWithFrame:CGRectMake(30, 20, 50, 20)];
+    [settingBtn setTitle:@"设置" forState:UIControlStateNormal];
+    [settingBtn addTarget:self action:@selector(settingBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [footer addSubview:settingBtn];
+    return footer;
+}
+
+- (void)settingBtnClicked:(UIButton *)btn {
+     UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate.LeftSlideVC closeLeftView];//关闭左侧抽屉
+    
+    MySettingViewController *mysettingVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"MySettingViewController"];
+    mysettingVC.hidesBottomBarWhenPushed = YES;
+    [appDelegate.mainTabBarController.selectedViewController pushViewController:mysettingVC animated:YES];
 }
 
 

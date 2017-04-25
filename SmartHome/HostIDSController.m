@@ -87,6 +87,10 @@
         }
  
     }
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(didSelectHostID)]) {
+        [_delegate didSelectHostID];
+    }
 }
 
 @end

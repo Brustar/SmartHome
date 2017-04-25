@@ -398,7 +398,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="BtnView" destination="xVy-Qd-eEL" id="MH2-6g-xqO"/>
-                        <outlet property="CoverView" destination="z8L-2W-XsO" id="KdY-sf-gmb"/>
                         <outlet property="DayLabelLeftConstraint" destination="89K-D1-KOH" id="OQf-C2-Lep"/>
                         <outlet property="DayLabelUpConstraint" destination="bjQ-Hb-rmC" id="WiR-ce-aYT"/>
                         <outlet property="HeadImageView" destination="TZv-R0-6cB" id="Mix-Jf-Z25"/>

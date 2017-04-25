@@ -28,6 +28,13 @@
     _viewNaviBar.m_viewCtrlParent = self;
     [self setNaviBarTitle:self.title];
     [self.view addSubview:_viewNaviBar];
+    
+    _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"contacts" imgHighlight:@"contacts" target:self action:@selector(rightBtnClicked:)];
+    [self setNaviBarRightBtn:_naviRightBtn];
+}
+
+- (void)rightBtnClicked:(UIButton *)sender {
+    
 }
 
 - (void)setNaviBarTitle:(NSString *)strTitle
@@ -35,6 +42,14 @@
     if (_viewNaviBar)
     {
         [_viewNaviBar setTitle:strTitle];
+    }else{APP_ASSERT_STOP}
+}
+
+- (void)setNaviBarRightBtn:(UIButton *)btn
+{
+    if (_viewNaviBar)
+    {
+        [_viewNaviBar setRightBtn:btn];
     }else{APP_ASSERT_STOP}
 }
 

@@ -62,6 +62,7 @@
 @property (nonatomic,strong) BaseTabBarController *baseTabbarController;
 @property (weak, nonatomic) IBOutlet UIView *iconeView;
 
+
 @end
 
 @implementation FirstViewController
@@ -379,12 +380,33 @@
 {
     _naviMiddletBtn.selected = !_naviMiddletBtn.selected;
     if (_naviMiddletBtn.selected) {
-        self.CoverView.hidden = NO;
+        if (_hostListViewController == nil) {
+            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            
+            _hostListViewController = [storyBoard instantiateViewControllerWithIdentifier:@"HostIDSController"];
+            _hostListViewController.delegate = self;
+            _hostListViewController.view.center = CGPointMake(self.view.center.x, self.view.center.y + 80);
+            [self.view addSubview:_hostListViewController.view];
+        }
+        
     }else{
-        self.CoverView.hidden = YES;
+        if (_hostListViewController) {
+            [_hostListViewController.view removeFromSuperview];
+            _hostListViewController.delegate = nil;
+            _hostListViewController = nil;
+        }
     }
 
 }
+
+- (void)didSelectHostID {
+    if (_hostListViewController) {
+        [_hostListViewController.view removeFromSuperview];
+        _hostListViewController.delegate = nil;
+        _hostListViewController = nil;
+    }
+}
+
 - (void)setupSlideButton {
     UIButton *menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     menuBtn.frame = CGRectMake(0, 0, 44, 44);
@@ -487,7 +509,7 @@
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-     self.CoverView.hidden = YES;
+
       self.socialView.hidden = YES;
     _baseTabbarController.tabbarPanel.hidden = NO;
 }
