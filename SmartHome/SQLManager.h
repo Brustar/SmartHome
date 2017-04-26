@@ -61,6 +61,7 @@
 +(NSString *)getNameWithID:(int)eId;
 
 +(NSArray *)deviceSubTypeByRoomId:(NSInteger)roomID;
++(NSArray *)deviceTypeIDByRoom:(NSInteger)roomID;
 +(NSArray *)deviceIdsByRoomId:(int)roomID;
 
 + (NSArray *)getLightTypeNameWithRoomID:(NSInteger)roomID;
@@ -160,6 +161,7 @@
 +(NSString *)getDevicePicByID:(int)sceneID;
 
 +(NSArray *)queryChat:(NSString *)userid;
++ (NSArray *)queryAllChat;
 + (void) writeDevices:(NSArray *)rooms;
 +(void) writeRooms:(NSArray *)roomList;
 +(NSArray *) writeScenes:(NSArray *)rooms;

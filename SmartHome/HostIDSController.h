@@ -8,6 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol HostIDSControllerDelegate;
+
 @interface HostIDSController : UIViewController
+@property (nonatomic, assign) id<HostIDSControllerDelegate>delegate;
+
+@end
+
+
+@protocol HostIDSControllerDelegate <NSObject>
+
+@optional
+
+- (void)didSelectHostID;
 
 @end
