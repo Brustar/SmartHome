@@ -15,7 +15,7 @@
 @interface IphoneSaveNewSceneController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *sceneName;//输入场景名的输入框
 @property (weak, nonatomic) IBOutlet UIButton *sceneImageBtn;//选择场景图片的button
-@property (nonatomic,strong)UIImage *selectSceneImg;
+@property (nonatomic,strong) UIImage *selectSceneImg;
 @property (nonatomic,strong) UIButton * naviRightBtn;
 @property (weak, nonatomic) IBOutlet UIButton *PushBtn;//定时跳转按钮
 
@@ -48,6 +48,7 @@
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
     
     Scene *scene = [[Scene alloc]initWhithoutSchedule];
+    scene.roomID = self.roomId;
     [scene setValuesForKeysWithDictionary:plistDic];
     [[DeviceInfo defaultManager] setEditingScene:NO];
     

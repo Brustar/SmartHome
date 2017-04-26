@@ -17,10 +17,11 @@
 @property (weak,nonatomic) NSString *deviceid;
 @property (strong, nonatomic) Scene *scene;
 @property (nonatomic,assign) int roomID;
-@property(nonatomic,strong) NSString * sceneID;
+@property (nonatomic,weak) NSString *sceneid;
 @property (weak, nonatomic) IBOutlet UIButton *AddAireBtn;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *AireConstraint;
+
 
 
 @end

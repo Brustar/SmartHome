@@ -7,6 +7,11 @@
 //
 
 #import "TVTableViewCell.h"
+#import "SQLManager.h"
+#import "TV.h"
+#import "SocketManager.h"
+#import "SceneManager.h"
+
 
 @implementation TVTableViewCell
 
@@ -17,20 +22,43 @@
     [self.TVSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
     self.TVSlider.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
     self.TVSlider.minimumTrackTintColor = [UIColor colorWithRed:253/255.0 green:254/255.0 blue:254/255.0 alpha:1];
+    [self.TVSwitchBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    [self.AddTvDeviceBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    [self.TVSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
 }
-- (IBAction)TVSwitchBtn:(id)sender {
-    
-    self.TVSwitchBtn.selected = !self.TVSwitchBtn.selected;
-    if (self.TVSwitchBtn.selected) {
-         [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
-    }else{
+- (IBAction)save:(id)sender {
+    if (sender == self.TVSwitchBtn) {
+        self.TVSwitchBtn.selected = !self.TVSwitchBtn.selected;
+        if (self.TVSwitchBtn.selected) {
+            [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+        }else{
+            
+            [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
+        }
+    }else if (sender == self.AddTvDeviceBtn){
+        self.AddTvDeviceBtn.selected = !self.AddTvDeviceBtn.selected;
+        if (self.AddTvDeviceBtn.selected) {
+            [self.AddTvDeviceBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+        }else{
+            [self.AddTvDeviceBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
+        }
+    }else if (sender == self.TVSlider){
         
-         [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
     }
-   
-}
-- (IBAction)AddTvDeviceBtn:(id)sender {
+    TV *device=[[TV alloc] init];
+    [device setDeviceID:[self.deviceid intValue]];
+//    [device setIsPoweron:device.poweron];
+    [device setPoweron:device.poweron];
     
+    [_scene setSceneID:[self.sceneid intValue]];
+    [_scene setRoomID:self.roomID];
+    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+    
+    [_scene setReadonly:NO];
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

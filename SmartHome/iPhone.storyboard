@@ -1075,7 +1075,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U47-Xi-iD1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2267" y="-275"/>
+            <point key="canvasLocation" x="2286" y="-258"/>
         </scene>
         <!--添加场景定时-->
         <scene sceneID="kNF-ul-FTy">
@@ -1938,7 +1938,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7mq-tK-5f2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2527" y="483"/>
+            <point key="canvasLocation" x="2587" y="513"/>
         </scene>
         <!--编辑场景-->
         <scene sceneID="jJL-4i-9vO">
@@ -6472,9 +6472,9 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="qN8-z6-Gb7"/>
-        <segue reference="jfc-yL-NEI"/>
-        <segue reference="b22-0A-WOg"/>
+        <segue reference="ilu-2P-B2o"/>
         <segue reference="WeN-Qz-0Az"/>
         <segue reference="Uo6-og-hnM"/>
+        <segue reference="b22-0A-WOg"/>
     </inferredMetricsTieBreakers>
 </document>

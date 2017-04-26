@@ -27,7 +27,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
 //    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
 //    self.navigationItem.leftBarButtonItem = returnItem;
-
+    self.tableView.tableFooterView = [UIView new];
     self.tableView.tableHeaderView = self.headView;
     
     self.titles = @[@"版本说明",@"隐私安全政策"];

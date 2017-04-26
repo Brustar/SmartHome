@@ -17,5 +17,11 @@
 @property (weak, nonatomic) IBOutlet UIImageView *highImageView;
 @property (weak, nonatomic) IBOutlet UIButton *AddColourLightBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ColourLightConstraint;
+@property(nonatomic, strong) NSString * deviceid;
+@property (nonatomic,strong) NSString *sceneid;
+//房间id
+@property (nonatomic,assign) NSInteger roomID;
+@property (strong, nonatomic) Scene *scene;
+
 
 @end

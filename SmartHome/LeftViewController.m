@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    _itemArray = @[@"故障及保修记录",@"我的能耗",@"我的收藏",@"我的消息",@"我的家庭成员",@"首页场景快捷键",@"我的设置"];
+    _itemArray = @[@"故障及保修记录",@"我的能耗",@"我的收藏",@"通知",@"我的家庭成员",@"首页场景快捷键",@"我的设置"];
     
     UIImageView *imageview = [[UIImageView alloc] initWithFrame:self.view.bounds];
     imageview.image = [UIImage imageNamed:@"background"];
@@ -82,7 +82,7 @@
         favorVC.hidesBottomBarWhenPushed = YES;
         [appDelegate.mainTabBarController.selectedViewController pushViewController:favorVC animated:YES];
         
-    }else if ([item isEqualToString:@"我的消息"]) {
+    }else if ([item isEqualToString:@"通知"]) {
         MSGController *msgVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"MSGController"];
         msgVC.hidesBottomBarWhenPushed = YES;
         [appDelegate.mainTabBarController.selectedViewController pushViewController:msgVC animated:YES];

@@ -214,7 +214,7 @@
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.label.text = [self.curNames objectAtIndex:indexPath.row];
-    cell.deviceId = [self.curtainIDArr objectAtIndex:indexPath.row];
+    cell.deviceid = [self.curtainIDArr objectAtIndex:indexPath.row];
     
     return cell;
     

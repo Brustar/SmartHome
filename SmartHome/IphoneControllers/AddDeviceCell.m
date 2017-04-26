@@ -7,6 +7,10 @@
 //
 
 #import "AddDeviceCell.h"
+#import "SQLManager.h"
+#import "Light.h"
+#import "SocketManager.h"
+#import "SceneManager.h"
 
 @implementation AddDeviceCell
 

@@ -13,5 +13,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *OtherSwitchBtn;
 @property (weak, nonatomic) IBOutlet UIButton *AddOtherBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *OtherConstraint;
-
+@property(nonatomic, strong)NSString * deviceid;
+@property (nonatomic,weak) NSString *sceneid;
+//房间id
+@property (nonatomic,assign) NSInteger roomID;
+@property (strong, nonatomic) Scene *scene;
 @end

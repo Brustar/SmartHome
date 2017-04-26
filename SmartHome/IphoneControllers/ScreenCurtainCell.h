@@ -17,5 +17,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *ScreenCurtainBtn;
 @property (weak, nonatomic) IBOutlet UIButton *AddScreenCurtainBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ScreenCurtainConstraint;
-
+@property(nonatomic, strong)NSString * deviceid;
+@property (nonatomic,weak) NSString *sceneid;
+//房间id
+@property (nonatomic,assign) NSInteger roomID;
+@property (strong, nonatomic) Scene *scene;
 @end

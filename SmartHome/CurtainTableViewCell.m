@@ -41,25 +41,25 @@
 -(IBAction)save:(id)sender
 {
     if ([sender isEqual:self.slider]) {
-        NSData *data=[[DeviceInfo defaultManager] roll:self.slider.value * 100 deviceID:self.deviceId];
+        NSData *data=[[DeviceInfo defaultManager] roll:self.slider.value * 100 deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
     }if ([sender isEqual:self.open]) {
         self.slider.value=1;
-        NSData *data=[[DeviceInfo defaultManager] open:self.deviceId];
+        NSData *data=[[DeviceInfo defaultManager] open:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
         self.valueLabel.text = @"100%";
         
     }if ([sender isEqual:self.close]) {
         self.slider.value=0;
-        NSData *data=[[DeviceInfo defaultManager] close:self.deviceId];
+        NSData *data=[[DeviceInfo defaultManager] close:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
         self.valueLabel.text = @"0%";
     }
     Curtain *device=[[Curtain alloc] init];
-    [device setDeviceID:[self.deviceId intValue]];
+    [device setDeviceID:[self.deviceid intValue]];
     [device setOpenvalue:self.slider.value * 100];
     
     if ([sender isEqual:self.open]) {

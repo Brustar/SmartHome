@@ -88,9 +88,6 @@
                             <constraint firstAttribute="width" constant="55" id="Kgt-4n-8iH"/>
                         </constraints>
                         <state key="normal" backgroundImage="dvd_btn_switch_on"/>
-                        <connections>
-                            <action selector="DVDSwitchBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="a5M-1R-5Ha"/>
-                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ui6-GU-GbM">
                         <rect key="frame" x="299" y="7" width="30" height="30"/>
@@ -99,9 +96,6 @@
                             <constraint firstAttribute="width" constant="30" id="wYb-h9-aRh"/>
                         </constraints>
                         <state key="normal" image="icon_add_normal"/>
-                        <connections>
-                            <action selector="AddDvdBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="rn2-lJ-ojm"/>
-                        </connections>
                     </button>
                 </subviews>
                 <constraints>

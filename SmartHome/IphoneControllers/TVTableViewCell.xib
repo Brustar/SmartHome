@@ -107,9 +107,6 @@
                             <constraint firstAttribute="height" constant="35" id="NHa-u5-Gxq"/>
                         </constraints>
                         <state key="normal" backgroundImage="dvd_btn_switch_on"/>
-                        <connections>
-                            <action selector="TVSwitchBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="CXn-ja-eTq"/>
-                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OYh-IL-rXK">
                         <rect key="frame" x="289" y="16" width="30" height="30"/>
@@ -119,9 +116,6 @@
                             <constraint firstAttribute="width" constant="30" id="h71-Kz-VqZ"/>
                         </constraints>
                         <state key="normal" image="icon_add_normal"/>
-                        <connections>
-                            <action selector="AddTvDeviceBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="aw5-sC-YDm"/>
-                        </connections>
                     </button>
                 </subviews>
                 <constraints>
