@@ -81,6 +81,7 @@
 		0FA658FC1CD9DB3F005AC4B4 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA658FB1CD9DB3F005AC4B4 /* MediaPlayer.framework */; };
 		0FA86BAD1E72445000DC177E /* LLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA86BA81E72445000DC177E /* LLViewController.m */; };
 		0FA86BAF1E72445000DC177E /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA86BAC1E72445000DC177E /* Cell.m */; };
+		0FA96D521EB033FE001DDF39 /* UIView+Popup.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA96D511EB033FE001DDF39 /* UIView+Popup.m */; };
 		0FABB33C1EAF22FC0089A5A4 /* ContextMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FABB33B1EAF22FC0089A5A4 /* ContextMenuCell.m */; };
 		0FABB33E1EAF232A0089A5A4 /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FABB33D1EAF232A0089A5A4 /* MenuCell.xib */; };
 		0FABB3401EAF23470089A5A4 /* ContextMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FABB33F1EAF23470089A5A4 /* ContextMenuCell.xib */; };
@@ -629,6 +630,8 @@
 		0FA86BA81E72445000DC177E /* LLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLViewController.m; sourceTree = "<group>"; };
 		0FA86BAB1E72445000DC177E /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
 		0FA86BAC1E72445000DC177E /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
+		0FA96D501EB033FE001DDF39 /* UIView+Popup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Popup.h"; sourceTree = "<group>"; };
+		0FA96D511EB033FE001DDF39 /* UIView+Popup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Popup.m"; sourceTree = "<group>"; };
 		0FABB33A1EAF22FC0089A5A4 /* ContextMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextMenuCell.h; sourceTree = "<group>"; };
 		0FABB33B1EAF22FC0089A5A4 /* ContextMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextMenuCell.m; sourceTree = "<group>"; };
 		0FABB33D1EAF232A0089A5A4 /* MenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuCell.xib; sourceTree = "<group>"; };
@@ -1879,6 +1882,8 @@
 			children = (
 				0F8A784F1E9F7C8C0050F0D9 /* UIImageView+Badge.h */,
 				0F8A78501E9F7C8C0050F0D9 /* UIImageView+Badge.m */,
+				0FA96D501EB033FE001DDF39 /* UIView+Popup.h */,
+				0FA96D511EB033FE001DDF39 /* UIView+Popup.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -3225,6 +3230,7 @@
 				F62337901D70675B00ADAD00 /* TVIconController.m in Sources */,
 				0FAF74C31CEEA17C00432713 /* HRColorMapView.m in Sources */,
 				0FADA44A1CEBF8AE00777901 /* SceneManager.m in Sources */,
+				0FA96D521EB033FE001DDF39 /* UIView+Popup.m in Sources */,
 				2ECDCC901E9E3623004C68BE /* BjMusicTableViewCell.m in Sources */,
 				0F01D5441CDC6CA600DAC267 /* Scene.m in Sources */,
 				CDF78C551E9CA99D00F8B20C /* CustomNaviBarView.m in Sources */,

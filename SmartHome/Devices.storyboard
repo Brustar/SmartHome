@@ -549,7 +549,18 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qbi-rs-2ri">
                                 <rect key="frame" x="339" y="133" width="25" height="25"/>
                                 <state key="normal" image="button_pen"/>
+                                <connections>
+                                    <action selector="pickcolor:" destination="N6p-qn-auk" eventType="touchUpInside" id="Bf9-mE-Qnv"/>
+                                </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cNa-Uw-OPg">
+                                <rect key="frame" x="87" y="248" width="240" height="240"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="240" id="0b4-hQ-v52"/>
+                                    <constraint firstAttribute="width" constant="240" id="Kjw-SZ-Cqy"/>
+                                </constraints>
+                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="light_base" translatesAutoresizingMaskIntoConstraints="NO" id="QDy-Gl-oNw">
                                 <rect key="frame" x="44" y="205" width="326" height="326"/>
                             </imageView>
@@ -566,6 +577,7 @@
                             <constraint firstItem="QDy-Gl-oNw" firstAttribute="centerY" secondItem="Q6h-VV-4Jh" secondAttribute="centerY" id="Dwr-h2-yB7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="YJV-uq-S4Q" secondAttribute="trailing" id="Euj-Oi-SNa"/>
                             <constraint firstItem="nMV-fG-iq9" firstAttribute="centerY" secondItem="DoF-Wk-GOP" secondAttribute="centerY" id="KDY-48-Rtl"/>
+                            <constraint firstItem="cNa-Uw-OPg" firstAttribute="centerX" secondItem="Q6h-VV-4Jh" secondAttribute="centerX" id="KKQ-b4-RuX"/>
                             <constraint firstItem="QGa-1P-CGE" firstAttribute="width" secondItem="DoF-Wk-GOP" secondAttribute="width" id="OTK-n7-U2Q"/>
                             <constraint firstItem="DoF-Wk-GOP" firstAttribute="top" secondItem="GfI-0o-EXN" secondAttribute="bottom" constant="44" id="Pbb-Ct-zjz"/>
                             <constraint firstItem="qbi-rs-2ri" firstAttribute="top" secondItem="QGa-1P-CGE" secondAttribute="bottom" constant="30" id="PfZ-Gj-hft"/>
@@ -579,6 +591,7 @@
                             <constraint firstItem="YJV-uq-S4Q" firstAttribute="centerX" secondItem="QGa-1P-CGE" secondAttribute="centerX" id="bqc-oF-EY2"/>
                             <constraint firstAttribute="trailing" secondItem="QGa-1P-CGE" secondAttribute="trailing" id="hMH-gR-972"/>
                             <constraint firstItem="QGa-1P-CGE" firstAttribute="centerY" secondItem="DoF-Wk-GOP" secondAttribute="centerY" id="lxX-1j-L1E"/>
+                            <constraint firstItem="cNa-Uw-OPg" firstAttribute="centerY" secondItem="Q6h-VV-4Jh" secondAttribute="centerY" id="pI5-y0-t0w"/>
                             <constraint firstItem="Uh2-ix-B4O" firstAttribute="top" secondItem="qrA-IG-Hl6" secondAttribute="bottom" id="sMp-DX-cJa"/>
                             <constraint firstItem="Uh2-ix-B4O" firstAttribute="top" secondItem="UJW-1t-4Xd" secondAttribute="bottom" constant="25" id="szb-d8-h4d"/>
                             <constraint firstAttribute="trailing" secondItem="qrA-IG-Hl6" secondAttribute="trailing" id="teG-v7-5Uk"/>
@@ -586,6 +599,9 @@
                             <constraint firstAttribute="trailingMargin" secondItem="qbi-rs-2ri" secondAttribute="trailing" constant="30" id="yI5-mt-ETx"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="base" destination="cNa-Uw-OPg" id="NcH-sI-P65"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZg-pE-92P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

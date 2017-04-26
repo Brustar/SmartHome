@@ -274,6 +274,7 @@ static NSString * const CYPhotoId = @"photo";
 {
     return self.deviceTypes.count;
 }
+
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
@@ -282,7 +283,6 @@ static NSString * const CYPhotoId = @"photo";
     NSString *imgName = [NSString stringWithFormat:@"catalog_%ld",(long)indexPath.row];
     UIImage *img = [UIImage imageNamed:imgName];
     [cell.imageView sd_setImageWithURL:nil placeholderImage:img];
-    //[self registerForPreviewingWithDelegate:self sourceView:cell.contentView];
     
     return cell;
 }
