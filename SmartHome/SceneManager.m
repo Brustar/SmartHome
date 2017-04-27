@@ -668,9 +668,9 @@
     {
         if ([device respondsToSelector:@selector(deviceID)])
         {
-            NSString *deviceid=[NSString stringWithFormat:@"%d", [device deviceID]];
-            data=[[DeviceInfo defaultManager] close:deviceid];
-            [sock.socket writeData:data withTimeout:1 tag:1];
+           // NSString *deviceid=[NSString stringWithFormat:@"%d", [device deviceID]];
+            //data=[[DeviceInfo defaultManager] close:deviceid];
+            //[sock.socket writeData:data withTimeout:1 tag:1];
         }
     }
     

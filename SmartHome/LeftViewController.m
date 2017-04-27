@@ -57,6 +57,7 @@
     UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIStoryboard *iPhoneStoryBoard  = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     UIStoryboard *MyInfoStoryBoard  = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
+    UIStoryboard *familyStoryBoard = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate.LeftSlideVC closeLeftView];//关闭左侧抽屉
     
@@ -78,7 +79,9 @@
         
     }else if ([item isEqualToString:@"家庭动态"]) {
         //家庭动态
-        [MBProgressHUD showError:@"开发中"];
+        FamilyDynamicViewController *vc = [familyStoryBoard instantiateViewControllerWithIdentifier:@"FamilyDynamicVC"];
+        vc.hidesBottomBarWhenPushed = YES;
+        [appDelegate.mainTabBarController.selectedViewController pushViewController:vc animated:YES];
         
     }else if ([item isEqualToString:@"通知"]) {
         MSGController *msgVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"MSGController"];
@@ -146,7 +149,7 @@
     [appDelegate.LeftSlideVC closeLeftView];//关闭左侧抽屉
     
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
-    UIViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"VipServiceListVC"];
+    UIViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"userinfoVC"];
     vc.hidesBottomBarWhenPushed = YES;
     [appDelegate.mainTabBarController.selectedViewController pushViewController:vc animated:YES];
     
