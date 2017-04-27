@@ -170,4 +170,7 @@
 + (BOOL)isWholeHouse:(NSInteger)eId;
 
 + (NSInteger)numbersOfDeviceType;
++ (NSArray *)getDeviceIDsByHtypeID:(NSString *)htypeid;
++ (NSString *)getCameraUrlByDeviceID:(int)deviceID;
++ (NSInteger)getRoomIDByDeviceID:(int)deviceID;
 @end

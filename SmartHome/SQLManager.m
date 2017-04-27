@@ -618,6 +618,63 @@
     return deviceID;
 }
 
++ (NSInteger)getRoomIDByDeviceID:(int)deviceID {
+    NSInteger roomID = 0;
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT rID FROM Devices where ID = '%d' and masterID = '%ld'",deviceID,[[DeviceInfo defaultManager] masterID]];
+        
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            roomID = [resultSet intForColumn:@"rID"];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    
+    return roomID;
+}
+
++ (NSString *)getCameraUrlByDeviceID:(int)deviceID {
+    NSString *cameraURL = nil;
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT camera_url FROM Devices where ID = '%d' and masterID = '%ld'",deviceID,[[DeviceInfo defaultManager] masterID]];
+        
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            cameraURL = [resultSet stringForColumn:@"camera_url"];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    
+    return cameraURL;
+}
+
++ (NSArray *)getDeviceIDsByHtypeID:(NSString *)htypeid
+{
+    NSMutableArray *array = [NSMutableArray array];
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where htypeid = \'%@\' and masterID = '%ld'",htypeid,[[DeviceInfo defaultManager] masterID]];
+        
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+            int eId = [resultSet intForColumn:@"ID"];
+            [array addObject:[NSNumber numberWithInt:eId]];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return [array copy];
+}
 
 +(NSArray *)getDeviceByTypeName:(NSString  *)typeid andRoomID:(NSInteger)roomID
 {
@@ -2340,17 +2397,10 @@
     NSString *rName ;
     if([db open])
     {
-        DeviceInfo *device = [DeviceInfo defaultManager];
-        long masterID = 255l;
-        if ([device.db isEqualToString:SMART_DB]) {
-            masterID = [[DeviceInfo defaultManager] masterID];
-        }
-        
-        NSString *sql = [NSString stringWithFormat:@"SELECT NAME FROM Rooms where ID = %d and masterID = '%ld'",rId, masterID];
+        NSString *sql = [NSString stringWithFormat:@"SELECT NAME FROM Rooms where ID = %d and masterID = '%ld'",rId, [[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
-//            rName = [resultSet stringForColumn:@"roomName"];
             rName = [resultSet stringForColumn:@"name"];
         }
     }
