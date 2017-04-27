@@ -74,7 +74,6 @@
 
     }else if ([item isEqualToString:@"家庭成员"]) {
         //家庭成员
-        [MBProgressHUD showError:@"开发中"];
         SceneShortcutsViewController *vc = [myInfoStoryBoard instantiateViewControllerWithIdentifier:@"SceneShortcutsVC"];
         vc.hidesBottomBarWhenPushed = YES;
         [appDelegate.mainTabBarController.selectedViewController pushViewController:vc animated:YES];

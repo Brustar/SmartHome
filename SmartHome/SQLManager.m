@@ -53,6 +53,7 @@
             scene.sceneID = [resultSet intForColumn:@"ID"];
             scene.picName = [resultSet stringForColumn:@"pic"];
             scene.roomID =     [resultSet intForColumn:@"rId"];
+            scene.roomName = [resultSet stringForColumn:@"roomName"];
             [deviceModels addObject:scene];
         }
     }

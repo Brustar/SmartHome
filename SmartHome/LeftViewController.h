@@ -14,6 +14,7 @@
 #import "MySettingViewController.h"
 #import "MBProgressHUD+NJ.h"
 #import "FamilyDynamicViewController.h"
+#import "ShortcutKeyViewController.h"
 #import "SceneShortcutsViewController.h"
 
 @interface LeftViewController : UIViewController

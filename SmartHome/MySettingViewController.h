@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PushSettingController.h"
 #import "CustomViewController.h"
+#import "SceneShortcutsViewController.h"
 @interface MySettingViewController : CustomViewController
 
 

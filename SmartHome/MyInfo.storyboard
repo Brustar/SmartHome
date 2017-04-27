@@ -210,10 +210,10 @@
             </objects>
             <point key="canvasLocation" x="929" y="-159"/>
         </scene>
-        <!--View Controller-->
+        <!--场景快捷键配置页面-->
         <scene sceneID="S5V-u1-Dya">
             <objects>
-                <viewController id="0Lk-Jv-GhU" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SceneShortcutsVC" id="0Lk-Jv-GhU" userLabel="场景快捷键配置页面" customClass="SceneShortcutsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PAL-76-9Oq"/>
                         <viewControllerLayoutGuide type="bottom" id="bTT-Ip-Yho"/>
@@ -221,8 +221,27 @@
                     <view key="view" contentMode="scaleToFill" id="4KI-pu-WEK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="e5B-3p-Dgw">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="0Lk-Jv-GhU" id="fZd-t2-qqJ"/>
+                                    <outlet property="delegate" destination="0Lk-Jv-GhU" id="kbY-vD-tO8"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="e5B-3p-Dgw" secondAttribute="trailing" id="H0P-35-zik"/>
+                            <constraint firstItem="e5B-3p-Dgw" firstAttribute="top" secondItem="4KI-pu-WEK" secondAttribute="top" constant="64" id="ICg-b0-w2F"/>
+                            <constraint firstItem="e5B-3p-Dgw" firstAttribute="leading" secondItem="4KI-pu-WEK" secondAttribute="leading" id="Vfh-C3-uz8"/>
+                            <constraint firstAttribute="bottom" secondItem="e5B-3p-Dgw" secondAttribute="bottom" id="m7m-pB-dGn"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="shortcutsTableView" destination="e5B-3p-Dgw" id="hj2-pA-Rie"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U8X-oD-kML" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
