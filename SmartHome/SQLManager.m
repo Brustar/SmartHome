@@ -78,7 +78,7 @@
         }
        
         FMResultSet *resultSet = [db executeQuery:sql];
-        while ([resultSet next])
+        if ([resultSet next])
         {
             eName = [resultSet stringForColumn:@"NAME"];
         }
@@ -87,6 +87,7 @@
     [db close];
     return eName;
 }
+
 //根据设备ID获取设备htypeID
 +(NSInteger)deviceHtypeIDByDeviceID:(int)eId
 {
@@ -220,27 +221,25 @@
     return typeName;
 }
 
-+ (NSString *)getNameWithID:(int)eId
++ (NSArray *)devicesWithCatalogID:(NSString *)catalogID
 {
     FMDatabase *db = [self connetdb];
-    NSString *typeName = nil;
+    NSMutableArray *names = [NSMutableArray new];
     if([db open])
     {
-        DeviceInfo *device = [DeviceInfo defaultManager];
-        long masterID = 255l;
-        if ([device.db isEqualToString:SMART_DB]) {
-            masterID = [[DeviceInfo defaultManager] masterID];
-        }
-        NSString *sql = [NSString stringWithFormat:@"SELECT NAME FROM Devices where ID = %d and masterID = '%ld'",eId,masterID];
+        NSString *sql = [NSString stringWithFormat:@"SELECT id,NAME FROM Devices where htypeid = '%@'",catalogID];
         FMResultSet *resultSet = [db executeQuery:sql];
-        if ([resultSet next])
+        while ([resultSet next])
         {
-            typeName = [resultSet stringForColumn:@"NAME"];
+            
+            NSDictionary *dic = @{@"id":[resultSet stringForColumn:@"id"],@"name":[resultSet stringForColumn:@"NAME"]};
+            
+            [names addObject:dic];
         }
     }
     [db closeOpenResultSets];
     [db close];
-    return typeName;
+    return names;
 }
 
 +(Device*)deviceMdoelByFMResultSet:(FMResultSet *)resultSet 
@@ -318,13 +317,12 @@
         DeviceInfo *device = [DeviceInfo defaultManager];
         if ([device.db isEqualToString:SMART_DB]) {
             if ([self isWholeHouse:roomID]) {
-                sql = [NSString stringWithFormat:@"SELECT distinct htypeid,subtypeid FROM Devices where masterID = '%ld' and subTypeId<>6 order by subTypeId,htypeID ASC",[[DeviceInfo defaultManager] masterID]];
+                sql = [NSString stringWithFormat:@"SELECT distinct htypeid,subtypeid FROM Devices where masterID = '%ld' and subTypeId<>6 and htypeid<>45 order by subTypeId,htypeID ASC",[[DeviceInfo defaultManager] masterID]];
             }else{
-                sql = [NSString stringWithFormat:@"SELECT distinct htypeid,subtypeid FROM Devices where rID = %ld and masterID = '%ld' and subTypeId<>6 order by subTypeId,htypeID ASC",(long)roomID,[[DeviceInfo defaultManager] masterID]];
+                sql = [NSString stringWithFormat:@"SELECT distinct htypeid,subtypeid FROM Devices where rID = %ld and masterID = '%ld' and subTypeId<>6 and htypeid<>45 order by subTypeId,htypeID ASC",(long)roomID,[[DeviceInfo defaultManager] masterID]];
             }
         }else {
-            
-            sql = [NSString stringWithFormat:@"SELECT distinct htypeid,subtypeid FROM Devices where rID = %ld and masterID = '%ld' and subTypeId<>6 order by subTypeId,htypeID ASC",(long)roomID, 255l];
+            sql = [NSString stringWithFormat:@"SELECT distinct htypeid,subtypeid FROM Devices where rID = %ld and masterID = '%ld' and subTypeId<>6 and htypeid<>45 order by subTypeId,htypeID ASC",(long)roomID, 255l];
         }
         
         FMResultSet *resultSet = [db executeQuery:sql];

@@ -9,6 +9,7 @@
 #import "ContextMenuCell.h"
 
 @interface ContextMenuCell ()
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imagealign;
 
 @end
 
@@ -36,6 +37,11 @@
 
 - (UIView *)animatedContent {
     return self.menuTitleLabel;
+}
+
+-(void) setContraint:(long)tag
+{
+    self.imagealign.constant = (tag - 2)*([[UIScreen mainScreen] bounds].size.width-122)/2;
 }
 
 @end
