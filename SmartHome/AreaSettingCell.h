@@ -11,7 +11,10 @@
 @interface AreaSettingCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *areaLabel;
+@property (weak, nonatomic) IBOutlet UILabel *detialLabel;
+@property (weak, nonatomic) IBOutlet UIButton *changeBtn;
 
 @property (weak, nonatomic) IBOutlet UISwitch *exchangeSwitch;
+@property (weak, nonatomic) IBOutlet UIButton *exchanggeBtn;
 
 @end

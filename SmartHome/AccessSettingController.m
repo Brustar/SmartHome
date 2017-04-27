@@ -271,15 +271,15 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(tableView == self.userTableView){
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"accessSettingCell" forIndexPath:indexPath];
+        AreaSettingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"accessSettingCell" forIndexPath:indexPath];
         cell.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
-        cell.textLabel.text = self.userArr[indexPath.row];
+        cell.areaLabel.text = self.userArr[indexPath.row];
         NSNumber *type = self.managerType[indexPath.row];
         if([type intValue] ==1)
         {
-            cell.detailTextLabel.text = @"主人";
+            cell.detialLabel.text = @"主人";
         }else {
-            cell.detailTextLabel.text = @"普通用户";
+            cell.detialLabel.text = @"普通用户";
         }
         return cell;
 
@@ -308,10 +308,10 @@
         self.usrID = self.userIDArr[indexPath.row];
 //         NSString *url = [NSString stringWithFormat:@"%@Cloud/room_authority.aspx",[IOManager httpAddr]];
 //        self.recoredIDs = nil;
-        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+       AreaSettingCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         self.cell = cell;
         self.selectedIndexPath = indexPath;
-        self.userName.text = cell.textLabel.text;
+        self.userName.text = cell.areaLabel.text;
         
         if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]] && [[UD objectForKey:@"UserType"] integerValue] == 2) {
             [MBProgressHUD showError:@"你是普通用户，无权限操作"];
@@ -330,7 +330,7 @@
                 AreaSubSettingViewController *AreaSubVC = [storyBoard instantiateViewControllerWithIdentifier:@"AccessSubSettingVC"];
                 [self.navigationController pushViewController:AreaSubVC animated:YES];
                 AreaSubVC.usrID = self.userIDArr[indexPath.row];
-                AreaSubVC.userNameTitle = cell.textLabel.text;
+                AreaSubVC.userNameTitle = cell.areaLabel.text;
                  AreaSubVC.identityType = self.identityType;
                 AreaSubVC.detailTextName = cell.detailTextLabel.text;
 //        if([cell.detailTextLabel.text isEqualToString:@"主人"])

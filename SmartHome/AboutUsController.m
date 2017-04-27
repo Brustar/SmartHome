@@ -43,6 +43,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
     cell.textLabel.text = self.titles[indexPath.row];
     return cell;
 }
@@ -50,7 +51,6 @@
 //- (IBAction)clickRetunBtn:(id)sender {
 //    [self.navigationController popViewControllerAnimated:NO];
 //}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -10,7 +10,7 @@
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "IOManager.h"
-#import "areaSettingCell.h"
+#import "AreaSettingCell.h"
 
 @interface AreaSubSettingViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -206,23 +206,29 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AreaSettingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"areaSettingCell" forIndexPath:indexPath];
-    
+    cell.backgroundColor = [UIColor clearColor];
     cell.exchangeSwitch.tag = [self.recoredIDs[indexPath.row] integerValue];
+    cell.exchanggeBtn.tag = [self.recoredIDs[indexPath.row] integerValue];
+    [cell.exchanggeBtn addTarget:self action:@selector(switchChange:) forControlEvents:UIControlEventTouchUpInside];
     [cell.exchangeSwitch addTarget:self action:@selector(switchChange:) forControlEvents:UIControlEventValueChanged];
     cell.areaLabel.text = self.areasArr[indexPath.row];
     NSNumber *num = self.opens[indexPath.row];
     if([num intValue] == 1)
     {
         cell.exchangeSwitch.on = YES;
+        [cell.exchanggeBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateNormal];
+        
     }else {
         cell.exchangeSwitch.on = NO;
+         [cell.exchanggeBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
 //        cell.hidden = YES;
     }
     return cell;
     
 }
--(void)switchChange:(UISwitch *)sender
+-(void)switchChange:(UIButton *)sender
 {
+    
     //体验用户
     DeviceInfo *device = [DeviceInfo defaultManager];
     if (![device.db isEqualToString:SMART_DB]) {
@@ -231,13 +237,16 @@
     }
     
     //注册用户
-    UISwitch *exchangeSwitch = sender;
-    
-    NSInteger recoredID = exchangeSwitch.tag;
-    if(sender.isOn)
+    UIButton *exchangeBtn = sender;
+    exchangeBtn.selected = !exchangeBtn.selected;
+    NSInteger recoredID = exchangeBtn.tag;
+    if(exchangeBtn.selected)
     {
+        [exchangeBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
         [self settingAccessIsOpen:[NSNumber numberWithInt:1] tag:6 withRecoredID:recoredID];
     }else{
+        
+        [exchangeBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateNormal];
         [self settingAccessIsOpen:[NSNumber numberWithInt:0] tag:7 withRecoredID:recoredID];
     }
 }

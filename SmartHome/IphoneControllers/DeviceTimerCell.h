@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *deviceName;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *repeatLabel;
+@property (weak, nonatomic) IBOutlet UIButton *deviceTimeBtn;
 
 - (void)setInfo:(DeviceTimerInfo *)info;
 
