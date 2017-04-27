@@ -11,7 +11,9 @@
 		0F020A231DE3D9330034869F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F020A221DE3D9330034869F /* LaunchScreen.storyboard */; };
 		0F032D491CC9B12700D1920D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F032D481CC9B12700D1920D /* main.m */; };
 		0F032D4C1CC9B12700D1920D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F032D4B1CC9B12700D1920D /* AppDelegate.m */; };
+
 		0F032D5A1CC9B12700D1920D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F032D591CC9B12700D1920D /* Assets.xcassets */; };
+
 		0F032D681CC9B12700D1920D /* SmartHomeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F032D671CC9B12700D1920D /* SmartHomeTests.m */; };
 		0F032D731CC9B12700D1920D /* SmartHomeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F032D721CC9B12700D1920D /* SmartHomeUITests.m */; };
 		0F094AC31E94CD3A00977123 /* Keypad.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F094AC21E94CD3A00977123 /* Keypad.m */; };
@@ -34,7 +36,9 @@
 		0F43B1031CF4055300F3D9F0 /* IATConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F43B1021CF4055300F3D9F0 /* IATConfig.m */; };
 		0F477FC61D2F94B3004FA361 /* NetStatusManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F477FC51D2F94B3004FA361 /* NetStatusManager.m */; };
 		0F49CB6C1E7A1DBF00D46ECC /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F49CB6B1E7A1DBF00D46ECC /* Login.storyboard */; };
+
 		0F49CB6E1E7A1E3700D46ECC /* MyInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F49CB6D1E7A1E3700D46ECC /* MyInfo.storyboard */; };
+
 		0F49CB701E7A1EA100D46ECC /* Devices.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F49CB6F1E7A1EA100D46ECC /* Devices.storyboard */; };
 		0F49CB721E7A1EAE00D46ECC /* Scene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F49CB711E7A1EAE00D46ECC /* Scene.storyboard */; };
 		0F49CB741E7A1F0500D46ECC /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F49CB731E7A1F0500D46ECC /* Home.storyboard */; };
@@ -66,6 +70,9 @@
 		0F6AB8701D782D9D0041E39C /* SunString.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6AB86E1D782D9D0041E39C /* SunString.m */; };
 		0F6ADFE01E7136B500BFF67F /* RCDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6ADFDF1E7136B500BFF67F /* RCDataManager.m */; };
 		0F6ADFE31E7136C500BFF67F /* ConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6ADFE21E7136C500BFF67F /* ConversationViewController.m */; };
+
+		0F78C57A1EB1F92C00FC3BE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F78C5791EB1F92C00FC3BE4 /* Assets.xcassets */; };
+
 		0F8A78511E9F7C8C0050F0D9 /* UIImageView+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8A78501E9F7C8C0050F0D9 /* UIImageView+Badge.m */; };
 		0F8D76D01D9A1B9700DDD063 /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8D76CF1D9A1B9700DDD063 /* Schedule.m */; };
 		0F91AA171CDC798700094C25 /* PrintObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F91AA161CDC798700094C25 /* PrintObject.m */; };
@@ -152,8 +159,10 @@
 		2E12CC121E7F5E3000C7D006 /* CYPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E12CC0F1E7F5E3000C7D006 /* CYPhotoCell.xib */; };
 		2E12CC161E7FC04800C7D006 /* IphoneNewEditSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CC151E7FC04800C7D006 /* IphoneNewEditSceneController.m */; };
 		2E1495101DE474EF00141629 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9ADF711CE2DC020052F3BC /* libz.tbd */; };
+
 		2E20EBB51E8A32BF00891828 /* ShortcutKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E20EBB41E8A32BF00891828 /* ShortcutKeyViewController.m */; };
 		2E20EBB81E8A439300891828 /* ShortcutKeyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E20EBB71E8A439300891828 /* ShortcutKeyCell.m */; };
+
 		2E2B57195D5A936F7BD15641 /* libPods-SmartHome.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9FD66F09F2092DE805E0F5B /* libPods-SmartHome.a */; };
 		2E5E5FE91DE1F1A9006F0C8F /* IphoneLightController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5E5FE81DE1F1A9006F0C8F /* IphoneLightController.m */; };
 		2E5E5FEC1DE22AC8006F0C8F /* LightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5E5FEB1DE22AC8006F0C8F /* LightCell.m */; };
@@ -224,7 +233,9 @@
 		2EC7D1D51E84CEA900284C0F /* lightBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EC7D1D41E84CEA900284C0F /* lightBtn.png */; };
 		2EC8A5901E372C51002A5042 /* IphoneDeviceLightVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC8A58F1E372C51002A5042 /* IphoneDeviceLightVC.m */; };
 		2EC8A5931E372D75002A5042 /* ColourCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC8A5921E372D75002A5042 /* ColourCell.m */; };
+
 		2EC9B8281EB1BFE500F382AD /* PushSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC9B8271EB1BFE500F382AD /* PushSettingCell.m */; };
+
 		2ECDCC901E9E3623004C68BE /* BjMusicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECDCC8E1E9E3623004C68BE /* BjMusicTableViewCell.m */; };
 		2ECDCC911E9E3623004C68BE /* BjMusicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2ECDCC8F1E9E3623004C68BE /* BjMusicTableViewCell.xib */; };
 		2ED42B931E35B41E00592A03 /* IphoneAirCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED42B921E35B41E00592A03 /* IphoneAirCell.m */; };
@@ -256,6 +267,16 @@
 		CD93E3AD1E807AFD003CCAA9 /* login_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD93E3AC1E807AFD003CCAA9 /* login_icon@2x.png */; };
 		CD93E3AF1E807CC2003CCAA9 /* login_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD93E3AE1E807CC2003CCAA9 /* login_bg@2x.png */; };
 		CD93E3B11E8081B0003CCAA9 /* login_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD93E3B01E8081B0003CCAA9 /* login_line@2x.png */; };
+
+		CDB8B84A1EB1D3AE003AA894 /* FamilyDynamicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B8491EB1D3AE003AA894 /* FamilyDynamicViewController.m */; };
+		CDB8B84D1EB1D421003AA894 /* MonitorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B84C1EB1D421003AA894 /* MonitorViewController.m */; };
+		CDB8B8501EB1D4B4003AA894 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B84F1EB1D4B4003AA894 /* UserInfoViewController.m */; };
+		CDB8B8531EB1D550003AA894 /* SceneShortcutsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B8521EB1D550003AA894 /* SceneShortcutsViewController.m */; };
+		CDB8B8561EB1E0AC003AA894 /* ShortcutKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B8551EB1E0AC003AA894 /* ShortcutKeyViewController.m */; };
+		CDB8B8591EB1E1BF003AA894 /* ShortcutKeyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B8581EB1E1BF003AA894 /* ShortcutKeyCell.m */; };
+		CDB8B85B1EB1E8AF003AA894 /* MyInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDB8B85A1EB1E8AF003AA894 /* MyInfo.storyboard */; };
+		CDB8B85E1EB1EBD2003AA894 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B85D1EB1EBD2003AA894 /* UserInfo.m */; };
+
 		CDBEFF501EA5FEBF00258B1E /* FamilyHomeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDBEFF4F1EA5FEBF00258B1E /* FamilyHomeDetailViewController.m */; };
 		CDBEFF531EA616CD00258B1E /* FamilyHomeDetailSceneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDBEFF521EA616CD00258B1E /* FamilyHomeDetailSceneCell.m */; };
 		CDEC86801E95EBAB009EC245 /* TabbarPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEC867F1E95EBAB009EC245 /* TabbarPanel.m */; };
@@ -413,7 +434,9 @@
 		0F032D481CC9B12700D1920D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0F032D4A1CC9B12700D1920D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0F032D4B1CC9B12700D1920D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+
 		0F032D591CC9B12700D1920D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+
 		0F032D5E1CC9B12700D1920D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0F032D631CC9B12700D1920D /* SmartHomeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmartHomeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F032D671CC9B12700D1920D /* SmartHomeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmartHomeTests.m; sourceTree = "<group>"; };
@@ -463,6 +486,7 @@
 		0F477FC51D2F94B3004FA361 /* NetStatusManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetStatusManager.m; sourceTree = "<group>"; };
 		0F49CB6B1E7A1DBF00D46ECC /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		0F49CB6D1E7A1E3700D46ECC /* MyInfo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyInfo.storyboard; sourceTree = "<group>"; };
+
 		0F49CB6F1E7A1EA100D46ECC /* Devices.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Devices.storyboard; sourceTree = "<group>"; };
 		0F49CB711E7A1EAE00D46ECC /* Scene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Scene.storyboard; sourceTree = "<group>"; };
 		0F49CB731E7A1F0500D46ECC /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
@@ -603,6 +627,9 @@
 		0F6ADFE11E7136C500BFF67F /* ConversationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationViewController.h; sourceTree = "<group>"; };
 		0F6ADFE21E7136C500BFF67F /* ConversationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationViewController.m; sourceTree = "<group>"; };
 		0F6C46491EA9AE9600F857E9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+
+		0F78C5791EB1F92C00FC3BE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+
 		0F8A784F1E9F7C8C0050F0D9 /* UIImageView+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Badge.h"; sourceTree = "<group>"; };
 		0F8A78501E9F7C8C0050F0D9 /* UIImageView+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Badge.m"; sourceTree = "<group>"; };
 		0F8D76CE1D9A1B9700DDD063 /* Schedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Schedule.h; sourceTree = "<group>"; };
@@ -769,10 +796,12 @@
 		2E12CC0F1E7F5E3000C7D006 /* CYPhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CYPhotoCell.xib; sourceTree = "<group>"; };
 		2E12CC141E7FC04800C7D006 /* IphoneNewEditSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneNewEditSceneController.h; sourceTree = "<group>"; };
 		2E12CC151E7FC04800C7D006 /* IphoneNewEditSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneNewEditSceneController.m; sourceTree = "<group>"; };
+
 		2E20EBB31E8A32BF00891828 /* ShortcutKeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortcutKeyViewController.h; sourceTree = "<group>"; };
 		2E20EBB41E8A32BF00891828 /* ShortcutKeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortcutKeyViewController.m; sourceTree = "<group>"; };
 		2E20EBB61E8A439300891828 /* ShortcutKeyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortcutKeyCell.h; sourceTree = "<group>"; };
 		2E20EBB71E8A439300891828 /* ShortcutKeyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortcutKeyCell.m; sourceTree = "<group>"; };
+
 		2E5E5FE71DE1F1A9006F0C8F /* IphoneLightController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneLightController.h; sourceTree = "<group>"; };
 		2E5E5FE81DE1F1A9006F0C8F /* IphoneLightController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneLightController.m; sourceTree = "<group>"; };
 		2E5E5FEA1DE22AC8006F0C8F /* LightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightCell.h; sourceTree = "<group>"; };
@@ -882,8 +911,10 @@
 		2EC8A58F1E372C51002A5042 /* IphoneDeviceLightVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneDeviceLightVC.m; sourceTree = "<group>"; };
 		2EC8A5911E372D75002A5042 /* ColourCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColourCell.h; sourceTree = "<group>"; };
 		2EC8A5921E372D75002A5042 /* ColourCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColourCell.m; sourceTree = "<group>"; };
+
 		2EC9B8261EB1BFE500F382AD /* PushSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushSettingCell.h; sourceTree = "<group>"; };
 		2EC9B8271EB1BFE500F382AD /* PushSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushSettingCell.m; sourceTree = "<group>"; };
+
 		2ECDCC8D1E9E3623004C68BE /* BjMusicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BjMusicTableViewCell.h; sourceTree = "<group>"; };
 		2ECDCC8E1E9E3623004C68BE /* BjMusicTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BjMusicTableViewCell.m; sourceTree = "<group>"; };
 		2ECDCC8F1E9E3623004C68BE /* BjMusicTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BjMusicTableViewCell.xib; sourceTree = "<group>"; };
@@ -933,6 +964,23 @@
 		CD93E3AC1E807AFD003CCAA9 /* login_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon@2x.png"; sourceTree = "<group>"; };
 		CD93E3AE1E807CC2003CCAA9 /* login_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_bg@2x.png"; sourceTree = "<group>"; };
 		CD93E3B01E8081B0003CCAA9 /* login_line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_line@2x.png"; sourceTree = "<group>"; };
+
+		CDB8B8481EB1D3AE003AA894 /* FamilyDynamicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyDynamicViewController.h; sourceTree = "<group>"; };
+		CDB8B8491EB1D3AE003AA894 /* FamilyDynamicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyDynamicViewController.m; sourceTree = "<group>"; };
+		CDB8B84B1EB1D421003AA894 /* MonitorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonitorViewController.h; sourceTree = "<group>"; };
+		CDB8B84C1EB1D421003AA894 /* MonitorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonitorViewController.m; sourceTree = "<group>"; };
+		CDB8B84E1EB1D4B4003AA894 /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
+		CDB8B84F1EB1D4B4003AA894 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
+		CDB8B8511EB1D550003AA894 /* SceneShortcutsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneShortcutsViewController.h; sourceTree = "<group>"; };
+		CDB8B8521EB1D550003AA894 /* SceneShortcutsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneShortcutsViewController.m; sourceTree = "<group>"; };
+		CDB8B8541EB1E0AC003AA894 /* ShortcutKeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortcutKeyViewController.h; sourceTree = "<group>"; };
+		CDB8B8551EB1E0AC003AA894 /* ShortcutKeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortcutKeyViewController.m; sourceTree = "<group>"; };
+		CDB8B8571EB1E1BF003AA894 /* ShortcutKeyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortcutKeyCell.h; sourceTree = "<group>"; };
+		CDB8B8581EB1E1BF003AA894 /* ShortcutKeyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortcutKeyCell.m; sourceTree = "<group>"; };
+		CDB8B85A1EB1E8AF003AA894 /* MyInfo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyInfo.storyboard; sourceTree = "<group>"; };
+		CDB8B85C1EB1EBD2003AA894 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
+		CDB8B85D1EB1EBD2003AA894 /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
+
 		CDBEFF4E1EA5FEBF00258B1E /* FamilyHomeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyHomeDetailViewController.h; sourceTree = "<group>"; };
 		CDBEFF4F1EA5FEBF00258B1E /* FamilyHomeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyHomeDetailViewController.m; sourceTree = "<group>"; };
 		CDBEFF511EA616CD00258B1E /* FamilyHomeDetailSceneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyHomeDetailSceneCell.h; sourceTree = "<group>"; };
@@ -1219,6 +1267,10 @@
 		0F01D53E1CDC6C4B00DAC267 /* entity */ = {
 			isa = PBXGroup;
 			children = (
+
+				CDB8B85C1EB1EBD2003AA894 /* UserInfo.h */,
+				CDB8B85D1EB1EBD2003AA894 /* UserInfo.m */,
+
 				CDEC86931E9A21F4009EC245 /* RoomStatus.h */,
 				CDEC86941E9A21F4009EC245 /* RoomStatus.m */,
 				0F094ABE1E94CCD900977123 /* keypad */,
@@ -1312,8 +1364,10 @@
 				0F43B1021CF4055300F3D9F0 /* IATConfig.m */,
 				0F25FE5C1CEB0C0A0063E834 /* SceneList.h */,
 				0F25FE5D1CEB0C0A0063E834 /* SceneList.m */,
+
 				2EC9B8261EB1BFE500F382AD /* PushSettingCell.h */,
 				2EC9B8271EB1BFE500F382AD /* PushSettingCell.m */,
+
 				0FAF74AB1CEE9A9600432713 /* LightController.h */,
 				0FAF74AC1CEE9A9600432713 /* LightController.m */,
 				F60FDB401D00029900AB04BE /* DetailViewController.h */,
@@ -1459,6 +1513,9 @@
 		0F032D471CC9B12700D1920D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+
+				0F78C5791EB1F92C00FC3BE4 /* Assets.xcassets */,
+
 				CDFB9DF11E5DCB4D00BFECCE /* SceneTimerList.plist */,
 				CDFB9DEF1E5DC4B600BFECCE /* DeviceTimerList.plist */,
 				CD78A8311E337C1600060466 /* 255_216.plist */,
@@ -1476,7 +1533,9 @@
 				CDF90B421E2F0676009043B9 /* realScene.plist */,
 				CDF90B441E2F4B14009043B9 /* planeScene.plist */,
 				0FBEFE2B1D24F3100084244F /* PrefixHeader.pch */,
+
 				0F032D591CC9B12700D1920D /* Assets.xcassets */,
+
 				0FAF98BC1CE466B0009BDBB5 /* SmartHome.entitlements */,
 				0F032D5E1CC9B12700D1920D /* Info.plist */,
 				0F032D481CC9B12700D1920D /* main.m */,
@@ -1561,8 +1620,13 @@
 		0F49CB6A1E7A1CCE00D46ECC /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+
 				0F49CB6B1E7A1DBF00D46ECC /* Login.storyboard */,
 				0F49CB6D1E7A1E3700D46ECC /* MyInfo.storyboard */,
+
+				CDB8B85A1EB1E8AF003AA894 /* MyInfo.storyboard */,
+				0F49CB6B1E7A1DBF00D46ECC /* Login.storyboard */,
+
 				0F49CB6F1E7A1EA100D46ECC /* Devices.storyboard */,
 				0F49CB711E7A1EAE00D46ECC /* Scene.storyboard */,
 				0F49CB731E7A1F0500D46ECC /* Home.storyboard */,
@@ -2058,10 +2122,25 @@
 		2E20EBB21E8A325900891828 /* My */ = {
 			isa = PBXGroup;
 			children = (
+
 				2E20EBB31E8A32BF00891828 /* ShortcutKeyViewController.h */,
 				2E20EBB41E8A32BF00891828 /* ShortcutKeyViewController.m */,
 				2E20EBB61E8A439300891828 /* ShortcutKeyCell.h */,
 				2E20EBB71E8A439300891828 /* ShortcutKeyCell.m */,
+
+				CDB8B8571EB1E1BF003AA894 /* ShortcutKeyCell.h */,
+				CDB8B8581EB1E1BF003AA894 /* ShortcutKeyCell.m */,
+				CDB8B8541EB1E0AC003AA894 /* ShortcutKeyViewController.h */,
+				CDB8B8551EB1E0AC003AA894 /* ShortcutKeyViewController.m */,
+				CDB8B8511EB1D550003AA894 /* SceneShortcutsViewController.h */,
+				CDB8B8521EB1D550003AA894 /* SceneShortcutsViewController.m */,
+				CDB8B84E1EB1D4B4003AA894 /* UserInfoViewController.h */,
+				CDB8B84F1EB1D4B4003AA894 /* UserInfoViewController.m */,
+				CDB8B84B1EB1D421003AA894 /* MonitorViewController.h */,
+				CDB8B84C1EB1D421003AA894 /* MonitorViewController.m */,
+				CDB8B8481EB1D3AE003AA894 /* FamilyDynamicViewController.h */,
+				CDB8B8491EB1D3AE003AA894 /* FamilyDynamicViewController.m */,
+
 			);
 			name = My;
 			sourceTree = "<group>";
@@ -2739,11 +2818,16 @@
 				2EC266291EA4BEAF003DC979 /* FMTableViewCell.xib in Resources */,
 				2E925DA21E5E857D008E327B /* 8.jpg in Resources */,
 				CDFB9DF01E5DC4B600BFECCE /* DeviceTimerList.plist in Resources */,
+
 				0F032D5A1CC9B12700D1920D /* Assets.xcassets in Resources */,
+
 				CDF3892C1E30B86500657C8B /* msgList.plist in Resources */,
 				2E925DA71E5E857D008E327B /* all_8.jpg in Resources */,
 				2E6A065C1EA743B50022B681 /* NewColourCell.xib in Resources */,
 				0F49CB7D1E7A204300D46ECC /* MyInfo-iPad.storyboard in Resources */,
+
+				0F78C57A1EB1F92C00FC3BE4 /* Assets.xcassets in Resources */,
+
 				CD78A8321E337C1600060466 /* 255_216.plist in Resources */,
 				CDF389321E30EA8900657C8B /* hostUserList.plist in Resources */,
 				2E925DA11E5E857D008E327B /* 7.jpg in Resources */,
@@ -2779,7 +2863,9 @@
 				2EB516F51E9CE3A40064B18E /* ScreenCurtainCell.xib in Resources */,
 				CDF1574C1E7AB2AF00499AC5 /* icon_tabbar_homepage@2x.png in Resources */,
 				CD51343F1E92807600C2EDAF /* tipIcon@2x.png in Resources */,
+
 				0F49CB6E1E7A1E3700D46ECC /* MyInfo.storyboard in Resources */,
+
 				CD7DDA0F1E82583700638DB3 /* pullBtn@2x.png in Resources */,
 				2EBABC7E1E8361C50093EF3A /* OtherTableViewCell.xib in Resources */,
 				CDF78C5A1E9CC3C500F8B20C /* NaviBarBg.png in Resources */,
@@ -2798,6 +2884,9 @@
 				CD93E3AD1E807AFD003CCAA9 /* login_icon@2x.png in Resources */,
 				0F49CB6C1E7A1DBF00D46ECC /* Login.storyboard in Resources */,
 				2E925DA51E5E857D008E327B /* all_6.jpg in Resources */,
+
+				CDB8B85B1EB1E8AF003AA894 /* MyInfo.storyboard in Resources */,
+
 				CDF157511E7AB2C000499AC5 /* leftbackiamge.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2951,7 +3040,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
+
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+
 			showEnvVarsInLog = 0;
 		};
 		7111AFB52FC0151747BC17C8 /* [CP] Check Pods Manifest.lock */ = {
@@ -3098,6 +3191,9 @@
 				F651640D1D3766C900A6F5FA /* MyEnergyViewController.m in Sources */,
 				0F477FC61D2F94B3004FA361 /* NetStatusManager.m in Sources */,
 				2E12CC111E7F5E3000C7D006 /* CYPhotoCell.m in Sources */,
+
+				CDB8B84D1EB1D421003AA894 /* MonitorViewController.m in Sources */,
+
 				2EDC0E901DEC072700F95BE0 /* IPhoneRoom.m in Sources */,
 				0F49CB821E7A21FF00D46ECC /* ORBSwitch.m in Sources */,
 				0FEE12761D20C53400811947 /* TXHRulerScrollView.m in Sources */,
@@ -3106,6 +3202,9 @@
 				CDFB9DF81E641F8E00BFECCE /* DeviceTimerInfo.m in Sources */,
 				0FCFB38F1CF293B300B37DD3 /* Radio.m in Sources */,
 				2E6A065B1EA743B50022B681 /* NewColourCell.m in Sources */,
+
+				CDB8B8531EB1D550003AA894 /* SceneShortcutsViewController.m in Sources */,
+
 				CD5134371E8D07FD00C2EDAF /* Goods.m in Sources */,
 				CD93E3AA1E8077F1003CCAA9 /* LoginViewController.m in Sources */,
 				F618963B1D87B08300DBE6CD /* ProjectController.m in Sources */,
@@ -3147,7 +3246,9 @@
 				F66CADE51D5D8654001E66EC /* DeviceType.m in Sources */,
 				2E925D901E5E744C008E327B /* ECPickDataViewController.m in Sources */,
 				F6DC641E1DEC17710056EC00 /* RoomDeviceController.m in Sources */,
+
 				2EC9B8281EB1BFE500F382AD /* PushSettingCell.m in Sources */,
+
 				2EC45FBD1E53E2D60042CE20 /* IphoneTabBarViewController.m in Sources */,
 				0F25178A1CFD8C6500491A6C /* PackManager.m in Sources */,
 				F67F1F811D3CC46C00F2B7E5 /* AboutUsController.m in Sources */,
@@ -3230,7 +3331,11 @@
 				F67F1F711D3C69DC00F2B7E5 /* SystemSettingViewController.m in Sources */,
 				0F180FC61D0E4E5000392F4C /* FMController.m in Sources */,
 				F67F1F771D3C719D00F2B7E5 /* SystemInfomationController.m in Sources */,
+
 				2E20EBB81E8A439300891828 /* ShortcutKeyCell.m in Sources */,
+
+				CDB8B8501EB1D4B4003AA894 /* UserInfoViewController.m in Sources */,
+
 				0FABF91C1D06AA35000892D8 /* TVController.m in Sources */,
 				F6BF2AED1D86556500A3C9D5 /* HostIDSController.m in Sources */,
 				F62337901D70675B00ADAD00 /* TVIconController.m in Sources */,
@@ -3272,6 +3377,9 @@
 				F6251F741D541D8A000A5A47 /* Device.m in Sources */,
 				F6251F771D542508000A5A47 /* SQLManager.m in Sources */,
 				2EBABC871E839F2E0093EF3A /* DVDTableViewCell.m in Sources */,
+
+				CDB8B84A1EB1D3AE003AA894 /* FamilyDynamicViewController.m in Sources */,
+
 				2EFFECA11E12161100C13D3E /* FixTimeListViewController.m in Sources */,
 				0FDB34441E79269500DA53BB /* LayerUtil.m in Sources */,
 				F62CFA4A1DAC952F006410F7 /* IphoneRoomListController.m in Sources */,
@@ -3279,8 +3387,13 @@
 				0FC3DE851D236CFF00A03482 /* LoginController.m in Sources */,
 				F66596E31D3F25810082716A /* SceneCell.m in Sources */,
 				F6457C451DD5523C00CA3A72 /* IphoneFamilyViewController.m in Sources */,
+
 				0FB42E1E1CF681A7007DE64F /* planeScene.m in Sources */,
 				2E20EBB51E8A32BF00891828 /* ShortcutKeyViewController.m in Sources */,
+
+				CDB8B8591EB1E1BF003AA894 /* ShortcutKeyCell.m in Sources */,
+				0FB42E1E1CF681A7007DE64F /* planeScene.m in Sources */,
+
 				F6423C221D9A4B7400AAB3CE /* DeviceOfFixTimerViewController.m in Sources */,
 				F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */,
 				F66596E91D3F72CA0082716A /* AddSenseCell.m in Sources */,
@@ -3292,12 +3405,18 @@
 				2E6CEDBF1DE5DE8B000979BE /* DetailMSGViewController.m in Sources */,
 				0FB42E231CF6F9E8007DE64F /* SocketManager.m in Sources */,
 				0F6AB86F1D782D9D0041E39C /* SunCount.m in Sources */,
+
+				CDB8B8561EB1E0AC003AA894 /* ShortcutKeyViewController.m in Sources */,
+
 				0FCFB3861CF2912700B37DD3 /* TV.m in Sources */,
 				2E12CC101E7F5E3000C7D006 /* CYLineLayout.m in Sources */,
 				F65B7D271D34E9E00059CFA4 /* MySettingViewController.m in Sources */,
 				F62CD87D1D950453001C66CE /* IphoneAirController.m in Sources */,
 				0F9EA72D1DDB026C00223ED8 /* NSString+RegMatch.m in Sources */,
 				CD7863B71E8CF18200F42AC0 /* VipServiceListViewController.m in Sources */,
+
+				CDB8B85E1EB1EBD2003AA894 /* UserInfo.m in Sources */,
+
 				F65DB3411D2B5AB2002A815C /* RegisterDetailController.m in Sources */,
 				0FAF98A61CE40F3C009BDBB5 /* QRCodeReaderViewController.m in Sources */,
 				0F8D76D01D9A1B9700DDD063 /* Schedule.m in Sources */,

@@ -193,7 +193,7 @@
         }else if([typeName isEqualToString:@"灯光"])
         {
             LightController *ligthVC = [storyBoard instantiateViewControllerWithIdentifier:@"LightController"];
-            ligthVC.showLightView = NO;
+            //ligthVC.showLightView = NO;
             ligthVC.roomID = self.roomID;
             
             if (![device.db isEqualToString:SMART_DB]) {

@@ -290,7 +290,7 @@
         btn.titleLabel.font = [UIFont systemFontOfSize:15];
         btn.titleLabel.textAlignment =NSTextAlignmentLeft;
         btn.frame = CGRectMake(30, 10, 120, 30);
-        NSString *title = [SQLManager getNameWithID:[deviceIDs[i] intValue]];
+        NSString *title = [SQLManager deviceNameByDeviceID:[deviceIDs[i] intValue]];
         [btn setTitle:title forState:UIControlStateNormal];
         btn.tag = [deviceIDs[i] intValue];
         

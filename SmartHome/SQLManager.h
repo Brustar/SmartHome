@@ -57,9 +57,9 @@
 //根据设备ID获取设备类别
 +(NSString *)deviceTypeNameByDeviceID:(int)eId;
 + (NSArray *)getSwitchLightByRoom:(int) roomID;//开关灯
-+(NSString*)lightTypeNameByDeviceID:(int)eId;
-+(NSString *)getNameWithID:(int)eId;
-
++(NSString *)lightTypeNameByDeviceID:(int)eId;
++(NSArray *)devicesWithCatalogID:(NSString *)catalogID room:(int)roomID;
++(NSString *) bgmusicIDByRoom:(int) roomID;
 +(NSArray *)deviceSubTypeByRoomId:(NSInteger)roomID;
 +(NSArray *)deviceTypeIDByRoom:(NSInteger)roomID;
 +(NSArray *)deviceIdsByRoomId:(int)roomID;
@@ -170,4 +170,7 @@
 + (BOOL)isWholeHouse:(NSInteger)eId;
 
 + (NSInteger)numbersOfDeviceType;
++ (NSArray *)getDeviceIDsByHtypeID:(NSString *)htypeid;
++ (NSString *)getCameraUrlByDeviceID:(int)deviceID;
++ (NSInteger)getRoomIDByDeviceID:(int)deviceID;
 @end

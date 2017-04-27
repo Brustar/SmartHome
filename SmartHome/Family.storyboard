@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -397,15 +396,121 @@
             </objects>
             <point key="canvasLocation" x="330" y="105"/>
         </scene>
+        <!--家庭动态-->
+        <scene sceneID="eZt-Mt-Hbv">
+            <objects>
+                <viewController storyboardIdentifier="FamilyDynamicVC" id="4Hd-K9-JED" userLabel="家庭动态" customClass="FamilyDynamicViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8U0-gz-zQo"/>
+                        <viewControllerLayoutGuide type="bottom" id="MRU-VW-Oqg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PE0-uz-Gp0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" indicatorStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="Mbe-K5-vOa" userLabel="摄像头列表">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Mbe-K5-vOa" firstAttribute="leading" secondItem="PE0-uz-Gp0" secondAttribute="leading" id="0hE-vB-uHD"/>
+                            <constraint firstItem="Mbe-K5-vOa" firstAttribute="top" secondItem="PE0-uz-Gp0" secondAttribute="top" constant="64" id="Tt9-fR-e3V"/>
+                            <constraint firstAttribute="trailing" secondItem="Mbe-K5-vOa" secondAttribute="trailing" id="fFf-Cg-b4d"/>
+                            <constraint firstAttribute="bottom" secondItem="Mbe-K5-vOa" secondAttribute="bottom" id="ibu-rP-TaQ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cameraList" destination="Mbe-K5-vOa" id="Yjs-HQ-Uav"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qxu-K3-mcg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+        <!-- 摄像头页面-->
+        <scene sceneID="7CH-Gf-nwN">
+            <objects>
+                <viewController storyboardIdentifier="MonitorVC" id="dVN-mP-IMN" userLabel=" 摄像头页面" customClass="MonitorViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uH4-3h-KzS"/>
+                        <viewControllerLayoutGuide type="bottom" id="OVC-II-6lu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="krk-wD-4OI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="monitoring" translatesAutoresizingMaskIntoConstraints="NO" id="BV6-D1-8If" userLabel="bg">
+                                <rect key="frame" x="20" y="0.0" width="335" height="260"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="260" id="LBD-nT-4FC"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="l5W-2z-RSA" userLabel="cameraView">
+                                <rect key="frame" x="60" y="40" width="255" height="160"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="iec-Mn-MbF"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5C-GP-Hcp" userLabel="调节">
+                                <rect key="frame" x="55" y="212" width="53" height="23"/>
+                                <state key="normal" image="adjust"/>
+                                <connections>
+                                    <action selector="adjustBtnClicked:" destination="dVN-mP-IMN" eventType="touchUpInside" id="XSj-im-LIr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6jJ-Vp-CpM" userLabel="放大">
+                                <rect key="frame" x="271" y="213" width="49" height="22"/>
+                                <state key="normal" image="dynamics_off"/>
+                                <connections>
+                                    <action selector="fullScreenBtnClicked:" destination="dVN-mP-IMN" eventType="touchUpInside" id="Qdy-DN-o7E"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="房间" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PFI-dA-eiC" userLabel="房间名">
+                                <rect key="frame" x="137" y="212" width="100" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="Rfi-SU-FNA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="PFI-dA-eiC" firstAttribute="centerX" secondItem="krk-wD-4OI" secondAttribute="centerX" id="MLC-jV-N0Z"/>
+                            <constraint firstItem="6jJ-Vp-CpM" firstAttribute="bottom" secondItem="l5W-2z-RSA" secondAttribute="bottom" constant="35" id="QCW-av-q64"/>
+                            <constraint firstAttribute="trailing" secondItem="BV6-D1-8If" secondAttribute="trailing" constant="20" id="TkB-Ac-W3Y"/>
+                            <constraint firstItem="l5W-2z-RSA" firstAttribute="leading" secondItem="krk-wD-4OI" secondAttribute="leading" constant="60" id="ZCP-dg-nxW"/>
+                            <constraint firstItem="BV6-D1-8If" firstAttribute="top" secondItem="krk-wD-4OI" secondAttribute="top" id="dFg-el-SJN"/>
+                            <constraint firstAttribute="trailing" secondItem="6jJ-Vp-CpM" secondAttribute="trailing" constant="55" id="dJK-O6-Wak"/>
+                            <constraint firstItem="BV6-D1-8If" firstAttribute="leading" secondItem="krk-wD-4OI" secondAttribute="leading" constant="20" id="gJc-2P-jzw"/>
+                            <constraint firstItem="T5C-GP-Hcp" firstAttribute="leading" secondItem="krk-wD-4OI" secondAttribute="leading" constant="55" id="hvf-LF-x8h"/>
+                            <constraint firstItem="T5C-GP-Hcp" firstAttribute="bottom" secondItem="l5W-2z-RSA" secondAttribute="bottom" constant="35" id="i0U-1T-CxL"/>
+                            <constraint firstItem="l5W-2z-RSA" firstAttribute="top" secondItem="krk-wD-4OI" secondAttribute="top" constant="40" id="iaN-nC-b20"/>
+                            <constraint firstAttribute="trailing" secondItem="l5W-2z-RSA" secondAttribute="trailing" constant="60" id="rcC-z6-Zlx"/>
+                            <constraint firstItem="PFI-dA-eiC" firstAttribute="bottom" secondItem="l5W-2z-RSA" secondAttribute="bottom" constant="30" id="tN6-ZX-oTe"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cameraImgView" destination="l5W-2z-RSA" id="bUs-Ke-joa"/>
+                        <outlet property="roomNameLabel" destination="PFI-dA-eiC" id="MUN-Cp-L78"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hyo-R3-pou" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
     </scenes>
     <resources>
+        <image name="adjust" width="53" height="23"/>
         <image name="background" width="375" height="667"/>
         <image name="background.png" width="750" height="1334"/>
         <image name="btn_normal" width="110" height="39"/>
+        <image name="dynamics_off" width="49" height="19"/>
         <image name="familyCircular" width="138" height="139"/>
         <image name="login_line.png" width="1" height="1"/>
         <image name="lv_icon_light_bright" width="15" height="15"/>
         <image name="lv_icon_light_normal" width="13" height="14"/>
         <image name="lv_icon_light_soft" width="10" height="13"/>
+        <image name="monitoring" width="340" height="240"/>
     </resources>
 </document>
