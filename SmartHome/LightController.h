@@ -19,8 +19,8 @@
 
 @property (nonatomic, readonly) CustomNaviBarView *viewNaviBar;
 
-@property (strong, nonatomic) IBOutlet ColourTableViewCell *cell;
-@property (strong, nonatomic) IBOutlet DetailTableViewCell *detailCell;
+//@property (strong, nonatomic) IBOutlet ColourTableViewCell *cell;
+//@property (strong, nonatomic) IBOutlet DetailTableViewCell *detailCell;
 @property (strong, nonatomic) IBOutlet HRColorPickerView *colorPickerView;
 
 @property (nonatomic,weak) NSString *sceneid;
@@ -30,6 +30,5 @@
 @property (nonatomic,assign) BOOL isAddDevice;
 
 @property (strong, nonatomic) Scene *scene;
-@property (nonatomic, assign) BOOL showLightView;
 
 @end
