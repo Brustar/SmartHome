@@ -42,9 +42,6 @@
                             <constraint firstAttribute="height" constant="35" id="eMQ-c3-hGC"/>
                         </constraints>
                         <state key="normal" backgroundImage="dvd_btn_switch_on"/>
-                        <connections>
-                            <action selector="OtherSwitchBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="2tD-kj-mzW"/>
-                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7yR-HS-KRG">
                         <rect key="frame" x="280" y="5" width="30" height="30"/>
@@ -53,9 +50,6 @@
                             <constraint firstAttribute="width" constant="30" id="WBU-lR-M9n"/>
                         </constraints>
                         <state key="normal" image="icon_add_normal"/>
-                        <connections>
-                            <action selector="AddOtherBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="RqE-dI-Osz"/>
-                        </connections>
                     </button>
                 </subviews>
                 <constraints>

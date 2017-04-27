@@ -422,21 +422,6 @@
     }
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    id theSegue = segue.destinationViewController;
-    
-    if([segue.identifier isEqualToString:@"NewAddDeviceSegue"])
-    {
-        
-        [theSegue setValue:[NSNumber numberWithInt:self.roomID] forKey:@"roomId"];
-        [theSegue setValue:[NSNumber numberWithInt:self.sceneID] forKey:@"sceneId"];
-    }else if([segue.identifier isEqualToString:@"storeNewScene"]){
-        [theSegue setValue:[NSNumber numberWithInt:self.sceneID] forKey:@"sceneID"];
-    }
-    
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
@@ -522,7 +507,7 @@
         aireCell.AireConstraint.constant = 10;
         aireCell.backgroundColor =[UIColor clearColor];
         aireCell.roomID = self.roomID;
-        aireCell.sceneID = self.sceneid;
+        aireCell.sceneid = self.sceneid;
          Device *device = [SQLManager getDeviceWithDeviceID:[_AirArray[indexPath.row] intValue]];
         aireCell.AireNameLabel.text = device.name;
         aireCell.deviceid = _AirArray[indexPath.row];
@@ -534,7 +519,7 @@
         aireCell.AddcurtainBtn.hidden = YES;
         aireCell.curtainContraint.constant = 10;
         aireCell.roomID = self.roomID;
-        aireCell.sceneID = self.sceneid;
+        aireCell.sceneid = self.sceneid;
         Device *device = [SQLManager getDeviceWithDeviceID:[_CurtainArray[indexPath.row] intValue]];
         aireCell.label.text = device.name;
         aireCell.deviceid = _CurtainArray[indexPath.row];
@@ -630,9 +615,11 @@
 //        IphoneDevicesController * devicesVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneDevicesController"];
 //        [self.navigationController pushViewController:devicesVC animated:YES];
         [self performSegueWithIdentifier:@"NewAddDeviceSegue" sender:self];
+        
     }
 
 }
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 5 || indexPath.section == 6 || indexPath.section == 8) {
@@ -643,4 +630,5 @@
     }
     return 100;
 }
+
 @end

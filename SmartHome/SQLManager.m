@@ -307,6 +307,51 @@
     return ret;
 }
 
++(NSArray *)deviceTypeIDByRoom:(NSInteger)roomID
+{
+    NSMutableArray *subTypes = [NSMutableArray array];
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        NSString *sql = nil;
+        
+        DeviceInfo *device = [DeviceInfo defaultManager];
+        if ([device.db isEqualToString:SMART_DB]) {
+            if ([self isWholeHouse:roomID]) {
+                sql = [NSString stringWithFormat:@"SELECT distinct htypeid,subtypeid FROM Devices where masterID = '%ld' and subTypeId<>6 order by subTypeId,htypeID ASC",[[DeviceInfo defaultManager] masterID]];
+            }else{
+                sql = [NSString stringWithFormat:@"SELECT distinct htypeid,subtypeid FROM Devices where rID = %ld and masterID = '%ld' and subTypeId<>6 order by subTypeId,htypeID ASC",(long)roomID,[[DeviceInfo defaultManager] masterID]];
+            }
+        }else {
+            
+            sql = [NSString stringWithFormat:@"SELECT distinct htypeid,subtypeid FROM Devices where rID = %ld and masterID = '%ld' and subTypeId<>6 order by subTypeId,htypeID ASC",(long)roomID, 255l];
+        }
+        
+        FMResultSet *resultSet = [db executeQuery:sql];
+        
+        while ([resultSet next])
+        {
+            NSString *deviceUItype = [resultSet stringForColumn:@"htypeid"];
+            int typeID = [[resultSet stringForColumn:@"subtypeid"] intValue];
+            
+            if (typeID == 1 || typeID == 7) {
+                deviceUItype = [NSString stringWithFormat:@"%d",typeID];
+            }
+            
+            if (![deviceUItype isEqualToString:@""]) {
+                [subTypes addObject:deviceUItype];
+            }
+            
+        }
+        
+    }
+    [db closeOpenResultSets];
+    [db close];
+    
+    return [subTypes copy];
+    
+}
+
 +(NSArray *)deviceSubTypeByRoomId:(NSInteger)roomID
 {
     NSMutableArray *subTypes = [NSMutableArray array];
@@ -1495,6 +1540,7 @@
     return device;
 
 }
+
 + (NSArray *)queryChat:(NSString *) userid
 {
     NSMutableArray *temp = [NSMutableArray new];
@@ -1508,6 +1554,25 @@
         {
             [temp addObject: [resultSet stringForColumn:@"nickname"]];
             [temp addObject: [resultSet stringForColumn:@"portrait"]];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return temp;
+}
+
++ (NSArray *)queryAllChat
+{
+    NSMutableArray *temp = [NSMutableArray new];
+    
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT nickname,portrait FROM chats"];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+            [temp addObject: @{@"nickname":[resultSet stringForColumn:@"nickname"],@"portrait":[resultSet stringForColumn:@"portrait"]}];
         }
     }
     [db closeOpenResultSets];

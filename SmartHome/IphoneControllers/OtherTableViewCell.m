@@ -8,23 +8,52 @@
 //
 
 #import "OtherTableViewCell.h"
+#import "SQLManager.h"
+#import "Light.h"
+#import "SocketManager.h"
+#import "SceneManager.h"
 
 @implementation OtherTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-
+    [self.OtherSwitchBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    [self.AddOtherBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
-- (IBAction)OtherSwitchBtn:(id)sender {
-    self.OtherSwitchBtn.selected = !self.OtherSwitchBtn.selected;
-    if (self.OtherSwitchBtn.selected) {
-        [self.OtherSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
-    }else{
-        
-        [self.OtherSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
+- (IBAction)save:(id)sender {
+    if (sender == self.OtherSwitchBtn) {
+        self.OtherSwitchBtn.selected = !self.OtherSwitchBtn.selected;
+        if (self.OtherSwitchBtn.selected) {
+            [self.OtherSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+        }else{
+            
+            [self.OtherSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
+        }
+    }else if (sender == self.AddOtherBtn){
+        self.AddOtherBtn.selected = !self.AddOtherBtn.selected;
+        if (self.AddOtherBtn.selected) {
+            [self.AddOtherBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+        }else{
+            [self.AddOtherBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
+        }
     }
+    
+    Light *device=[[Light alloc] init];
+    [device setDeviceID:[self.deviceid intValue]];
+    [device setIsPoweron:device.isPoweron];
+    
+    [_scene setSceneID:[self.sceneid intValue]];
+    [_scene setRoomID:self.roomID];
+    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+    
+    [_scene setReadonly:NO];
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
 }
 
 - (IBAction)AddOtherBtn:(id)sender {

@@ -15,5 +15,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *TVSwitchBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *TVConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *AddTvDeviceBtn;
-
+@property(nonatomic, strong)NSString * deviceid;
+@property (nonatomic,weak) NSString *sceneid;
+//房间id
+@property (nonatomic,assign) NSInteger roomID;
+@property (strong, nonatomic) Scene *scene;
 @end

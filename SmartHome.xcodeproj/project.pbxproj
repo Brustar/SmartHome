@@ -34,7 +34,6 @@
 		0F43B1031CF4055300F3D9F0 /* IATConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F43B1021CF4055300F3D9F0 /* IATConfig.m */; };
 		0F477FC61D2F94B3004FA361 /* NetStatusManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F477FC51D2F94B3004FA361 /* NetStatusManager.m */; };
 		0F49CB6C1E7A1DBF00D46ECC /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F49CB6B1E7A1DBF00D46ECC /* Login.storyboard */; };
-		0F49CB6E1E7A1E3700D46ECC /* MyInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F49CB6D1E7A1E3700D46ECC /* MyInfo.storyboard */; };
 		0F49CB701E7A1EA100D46ECC /* Devices.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F49CB6F1E7A1EA100D46ECC /* Devices.storyboard */; };
 		0F49CB721E7A1EAE00D46ECC /* Scene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F49CB711E7A1EAE00D46ECC /* Scene.storyboard */; };
 		0F49CB741E7A1F0500D46ECC /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F49CB731E7A1F0500D46ECC /* Home.storyboard */; };
@@ -81,6 +80,10 @@
 		0FA658FC1CD9DB3F005AC4B4 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA658FB1CD9DB3F005AC4B4 /* MediaPlayer.framework */; };
 		0FA86BAD1E72445000DC177E /* LLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA86BA81E72445000DC177E /* LLViewController.m */; };
 		0FA86BAF1E72445000DC177E /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA86BAC1E72445000DC177E /* Cell.m */; };
+		0FA96D521EB033FE001DDF39 /* UIView+Popup.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA96D511EB033FE001DDF39 /* UIView+Popup.m */; };
+		0FABB33C1EAF22FC0089A5A4 /* ContextMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FABB33B1EAF22FC0089A5A4 /* ContextMenuCell.m */; };
+		0FABB33E1EAF232A0089A5A4 /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FABB33D1EAF232A0089A5A4 /* MenuCell.xib */; };
+		0FABB3401EAF23470089A5A4 /* ContextMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FABB33F1EAF23470089A5A4 /* ContextMenuCell.xib */; };
 		0FABF91C1D06AA35000892D8 /* TVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FABF91B1D06AA35000892D8 /* TVController.m */; };
 		0FABF91F1D06AA4E000892D8 /* DVDController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FABF91E1D06AA4E000892D8 /* DVDController.m */; };
 		0FADA44A1CEBF8AE00777901 /* SceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FADA4491CEBF8AE00777901 /* SceneManager.m */; };
@@ -139,8 +142,6 @@
 		0FEE12771D20C53400811947 /* TXHRrettyRuler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEE12741D20C53400811947 /* TXHRrettyRuler.m */; };
 		0FF410DA1CDAE67100C7F4A1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410D91CDAE67100C7F4A1 /* CoreLocation.framework */; };
 		0FF410DC1CDAF76300C7F4A1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410DB1CDAF76300C7F4A1 /* CoreBluetooth.framework */; };
-		0FF5CD591EA769D70027E2DC /* ContextMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF5CD571EA769D70027E2DC /* ContextMenuCell.m */; };
-		0FF5CD5A1EA769D70027E2DC /* ContextMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FF5CD581EA769D70027E2DC /* ContextMenuCell.xib */; };
 		0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7B0B51D1380BF003C2D52 /* AirController.m */; };
 		0FF92B661D9224640098DD54 /* TVChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF92B651D9224640098DD54 /* TVChannel.m */; };
 		2E0297271E4C4C7600BBC520 /* MySubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0297261E4C4C7600BBC520 /* MySubView.m */; };
@@ -251,11 +252,13 @@
 		CD93E3AD1E807AFD003CCAA9 /* login_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD93E3AC1E807AFD003CCAA9 /* login_icon@2x.png */; };
 		CD93E3AF1E807CC2003CCAA9 /* login_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD93E3AE1E807CC2003CCAA9 /* login_bg@2x.png */; };
 		CD93E3B11E8081B0003CCAA9 /* login_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD93E3B01E8081B0003CCAA9 /* login_line@2x.png */; };
-		CDB8B83B1EAF2C2E003AA894 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B83A1EAF2C2E003AA894 /* UserInfoViewController.m */; };
-		CDB8B83E1EAF4281003AA894 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B83D1EAF4281003AA894 /* UserInfo.m */; };
-		CDB8B8411EB0524F003AA894 /* FamilyDynamicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B8401EB0524F003AA894 /* FamilyDynamicViewController.m */; };
-		CDB8B8441EB09C72003AA894 /* MonitorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B8431EB09C72003AA894 /* MonitorViewController.m */; };
-		CDB8B8471EB19547003AA894 /* SceneShortcutsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B8461EB19547003AA894 /* SceneShortcutsViewController.m */; };
+		CDB8B84A1EB1D3AE003AA894 /* FamilyDynamicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B8491EB1D3AE003AA894 /* FamilyDynamicViewController.m */; };
+		CDB8B84D1EB1D421003AA894 /* MonitorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B84C1EB1D421003AA894 /* MonitorViewController.m */; };
+		CDB8B8501EB1D4B4003AA894 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B84F1EB1D4B4003AA894 /* UserInfoViewController.m */; };
+		CDB8B8531EB1D550003AA894 /* SceneShortcutsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B8521EB1D550003AA894 /* SceneShortcutsViewController.m */; };
+		CDB8B8561EB1E0AC003AA894 /* ShortcutKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B8551EB1E0AC003AA894 /* ShortcutKeyViewController.m */; };
+		CDB8B8591EB1E1BF003AA894 /* ShortcutKeyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B8581EB1E1BF003AA894 /* ShortcutKeyCell.m */; };
+		CDB8B85B1EB1E8AF003AA894 /* MyInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDB8B85A1EB1E8AF003AA894 /* MyInfo.storyboard */; };
 		CDBEFF501EA5FEBF00258B1E /* FamilyHomeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDBEFF4F1EA5FEBF00258B1E /* FamilyHomeDetailViewController.m */; };
 		CDBEFF531EA616CD00258B1E /* FamilyHomeDetailSceneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDBEFF521EA616CD00258B1E /* FamilyHomeDetailSceneCell.m */; };
 		CDEC86801E95EBAB009EC245 /* TabbarPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEC867F1E95EBAB009EC245 /* TabbarPanel.m */; };
@@ -462,7 +465,6 @@
 		0F477FC41D2F94B3004FA361 /* NetStatusManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetStatusManager.h; sourceTree = "<group>"; };
 		0F477FC51D2F94B3004FA361 /* NetStatusManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetStatusManager.m; sourceTree = "<group>"; };
 		0F49CB6B1E7A1DBF00D46ECC /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
-		0F49CB6D1E7A1E3700D46ECC /* MyInfo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyInfo.storyboard; sourceTree = "<group>"; };
 		0F49CB6F1E7A1EA100D46ECC /* Devices.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Devices.storyboard; sourceTree = "<group>"; };
 		0F49CB711E7A1EAE00D46ECC /* Scene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Scene.storyboard; sourceTree = "<group>"; };
 		0F49CB731E7A1F0500D46ECC /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
@@ -631,6 +633,12 @@
 		0FA86BA81E72445000DC177E /* LLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLViewController.m; sourceTree = "<group>"; };
 		0FA86BAB1E72445000DC177E /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
 		0FA86BAC1E72445000DC177E /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
+		0FA96D501EB033FE001DDF39 /* UIView+Popup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Popup.h"; sourceTree = "<group>"; };
+		0FA96D511EB033FE001DDF39 /* UIView+Popup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Popup.m"; sourceTree = "<group>"; };
+		0FABB33A1EAF22FC0089A5A4 /* ContextMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextMenuCell.h; sourceTree = "<group>"; };
+		0FABB33B1EAF22FC0089A5A4 /* ContextMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextMenuCell.m; sourceTree = "<group>"; };
+		0FABB33D1EAF232A0089A5A4 /* MenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuCell.xib; sourceTree = "<group>"; };
+		0FABB33F1EAF23470089A5A4 /* ContextMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContextMenuCell.xib; sourceTree = "<group>"; };
 		0FABF91A1D06AA35000892D8 /* TVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVController.h; sourceTree = "<group>"; };
 		0FABF91B1D06AA35000892D8 /* TVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVController.m; sourceTree = "<group>"; };
 		0FABF91D1D06AA4E000892D8 /* DVDController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVDController.h; sourceTree = "<group>"; };
@@ -747,9 +755,6 @@
 		0FEE12751D20C53400811947 /* TXHRrettyRuler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TXHRrettyRuler.h; path = PrettyRuler/TXHRrettyRuler.h; sourceTree = SOURCE_ROOT; };
 		0FF410D91CDAE67100C7F4A1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0FF410DB1CDAF76300C7F4A1 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
-		0FF5CD561EA769D70027E2DC /* ContextMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextMenuCell.h; sourceTree = "<group>"; };
-		0FF5CD571EA769D70027E2DC /* ContextMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextMenuCell.m; sourceTree = "<group>"; };
-		0FF5CD581EA769D70027E2DC /* ContextMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContextMenuCell.xib; sourceTree = "<group>"; };
 		0FF7B0B41D1380BF003C2D52 /* AirController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirController.h; sourceTree = "<group>"; };
 		0FF7B0B51D1380BF003C2D52 /* AirController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirController.m; sourceTree = "<group>"; };
 		0FF92B631D9222220098DD54 /* SQLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLManager.h; sourceTree = "<group>"; };
@@ -924,16 +929,19 @@
 		CD93E3AC1E807AFD003CCAA9 /* login_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon@2x.png"; sourceTree = "<group>"; };
 		CD93E3AE1E807CC2003CCAA9 /* login_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_bg@2x.png"; sourceTree = "<group>"; };
 		CD93E3B01E8081B0003CCAA9 /* login_line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_line@2x.png"; sourceTree = "<group>"; };
-		CDB8B8391EAF2C2E003AA894 /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
-		CDB8B83A1EAF2C2E003AA894 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
-		CDB8B83C1EAF4281003AA894 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
-		CDB8B83D1EAF4281003AA894 /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
-		CDB8B83F1EB0524F003AA894 /* FamilyDynamicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyDynamicViewController.h; sourceTree = "<group>"; };
-		CDB8B8401EB0524F003AA894 /* FamilyDynamicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyDynamicViewController.m; sourceTree = "<group>"; };
-		CDB8B8421EB09C72003AA894 /* MonitorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonitorViewController.h; sourceTree = "<group>"; };
-		CDB8B8431EB09C72003AA894 /* MonitorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonitorViewController.m; sourceTree = "<group>"; };
-		CDB8B8451EB19547003AA894 /* SceneShortcutsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneShortcutsViewController.h; sourceTree = "<group>"; };
-		CDB8B8461EB19547003AA894 /* SceneShortcutsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneShortcutsViewController.m; sourceTree = "<group>"; };
+		CDB8B8481EB1D3AE003AA894 /* FamilyDynamicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyDynamicViewController.h; sourceTree = "<group>"; };
+		CDB8B8491EB1D3AE003AA894 /* FamilyDynamicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyDynamicViewController.m; sourceTree = "<group>"; };
+		CDB8B84B1EB1D421003AA894 /* MonitorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonitorViewController.h; sourceTree = "<group>"; };
+		CDB8B84C1EB1D421003AA894 /* MonitorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonitorViewController.m; sourceTree = "<group>"; };
+		CDB8B84E1EB1D4B4003AA894 /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
+		CDB8B84F1EB1D4B4003AA894 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
+		CDB8B8511EB1D550003AA894 /* SceneShortcutsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneShortcutsViewController.h; sourceTree = "<group>"; };
+		CDB8B8521EB1D550003AA894 /* SceneShortcutsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneShortcutsViewController.m; sourceTree = "<group>"; };
+		CDB8B8541EB1E0AC003AA894 /* ShortcutKeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortcutKeyViewController.h; sourceTree = "<group>"; };
+		CDB8B8551EB1E0AC003AA894 /* ShortcutKeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortcutKeyViewController.m; sourceTree = "<group>"; };
+		CDB8B8571EB1E1BF003AA894 /* ShortcutKeyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortcutKeyCell.h; sourceTree = "<group>"; };
+		CDB8B8581EB1E1BF003AA894 /* ShortcutKeyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortcutKeyCell.m; sourceTree = "<group>"; };
+		CDB8B85A1EB1E8AF003AA894 /* MyInfo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyInfo.storyboard; sourceTree = "<group>"; };
 		CDBEFF4E1EA5FEBF00258B1E /* FamilyHomeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyHomeDetailViewController.h; sourceTree = "<group>"; };
 		CDBEFF4F1EA5FEBF00258B1E /* FamilyHomeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyHomeDetailViewController.m; sourceTree = "<group>"; };
 		CDBEFF511EA616CD00258B1E /* FamilyHomeDetailSceneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyHomeDetailSceneCell.h; sourceTree = "<group>"; };
@@ -1269,8 +1277,6 @@
 				CDFB9DF71E641F8E00BFECCE /* DeviceTimerInfo.m */,
 				CD5134351E8D07FD00C2EDAF /* Goods.h */,
 				CD5134361E8D07FD00C2EDAF /* Goods.m */,
-				CDB8B83C1EAF4281003AA894 /* UserInfo.h */,
-				CDB8B83D1EAF4281003AA894 /* UserInfo.m */,
 			);
 			name = entity;
 			sourceTree = "<group>";
@@ -1562,8 +1568,8 @@
 		0F49CB6A1E7A1CCE00D46ECC /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				CDB8B85A1EB1E8AF003AA894 /* MyInfo.storyboard */,
 				0F49CB6B1E7A1DBF00D46ECC /* Login.storyboard */,
-				0F49CB6D1E7A1E3700D46ECC /* MyInfo.storyboard */,
 				0F49CB6F1E7A1EA100D46ECC /* Devices.storyboard */,
 				0F49CB711E7A1EAE00D46ECC /* Scene.storyboard */,
 				0F49CB731E7A1F0500D46ECC /* Home.storyboard */,
@@ -1852,6 +1858,7 @@
 		0F6ADFDB1E71349500BFF67F /* IM */ = {
 			isa = PBXGroup;
 			children = (
+				0FABB32F1EAF1C660089A5A4 /* ContextMenuCell */,
 				0F6ADFDE1E7136B500BFF67F /* RCDataManager.h */,
 				0F6ADFDF1E7136B500BFF67F /* RCDataManager.m */,
 				0F6ADFE11E7136C500BFF67F /* ConversationViewController.h */,
@@ -1887,6 +1894,8 @@
 			children = (
 				0F8A784F1E9F7C8C0050F0D9 /* UIImageView+Badge.h */,
 				0F8A78501E9F7C8C0050F0D9 /* UIImageView+Badge.m */,
+				0FA96D501EB033FE001DDF39 /* UIView+Popup.h */,
+				0FA96D511EB033FE001DDF39 /* UIView+Popup.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -1909,6 +1918,16 @@
 				0FA86BAC1E72445000DC177E /* Cell.m */,
 			);
 			name = Linelayout;
+			sourceTree = "<group>";
+		};
+		0FABB32F1EAF1C660089A5A4 /* ContextMenuCell */ = {
+			isa = PBXGroup;
+			children = (
+				0FABB33F1EAF23470089A5A4 /* ContextMenuCell.xib */,
+				0FABB33A1EAF22FC0089A5A4 /* ContextMenuCell.h */,
+				0FABB33B1EAF22FC0089A5A4 /* ContextMenuCell.m */,
+			);
+			name = ContextMenuCell;
 			sourceTree = "<group>";
 		};
 		0FAF74AE1CEEA16700432713 /* HRColorPicker */ = {
@@ -2029,11 +2048,7 @@
 		0FF5CD4E1EA7695E0027E2DC /* Devices */ = {
 			isa = PBXGroup;
 			children = (
-				0FF5CD561EA769D70027E2DC /* ContextMenuCell.h */,
-				0FF5CD571EA769D70027E2DC /* ContextMenuCell.m */,
-				0FF5CD581EA769D70027E2DC /* ContextMenuCell.xib */,
-				CDB8B8421EB09C72003AA894 /* MonitorViewController.h */,
-				CDB8B8431EB09C72003AA894 /* MonitorViewController.m */,
+				0FABB33D1EAF232A0089A5A4 /* MenuCell.xib */,
 			);
 			name = Devices;
 			sourceTree = "<group>";
@@ -2050,12 +2065,18 @@
 		2E20EBB21E8A325900891828 /* My */ = {
 			isa = PBXGroup;
 			children = (
-				CDB8B8391EAF2C2E003AA894 /* UserInfoViewController.h */,
-				CDB8B83A1EAF2C2E003AA894 /* UserInfoViewController.m */,
-				CDB8B83F1EB0524F003AA894 /* FamilyDynamicViewController.h */,
-				CDB8B8401EB0524F003AA894 /* FamilyDynamicViewController.m */,
-				CDB8B8451EB19547003AA894 /* SceneShortcutsViewController.h */,
-				CDB8B8461EB19547003AA894 /* SceneShortcutsViewController.m */,
+				CDB8B8571EB1E1BF003AA894 /* ShortcutKeyCell.h */,
+				CDB8B8581EB1E1BF003AA894 /* ShortcutKeyCell.m */,
+				CDB8B8541EB1E0AC003AA894 /* ShortcutKeyViewController.h */,
+				CDB8B8551EB1E0AC003AA894 /* ShortcutKeyViewController.m */,
+				CDB8B8511EB1D550003AA894 /* SceneShortcutsViewController.h */,
+				CDB8B8521EB1D550003AA894 /* SceneShortcutsViewController.m */,
+				CDB8B84E1EB1D4B4003AA894 /* UserInfoViewController.h */,
+				CDB8B84F1EB1D4B4003AA894 /* UserInfoViewController.m */,
+				CDB8B84B1EB1D421003AA894 /* MonitorViewController.h */,
+				CDB8B84C1EB1D421003AA894 /* MonitorViewController.m */,
+				CDB8B8481EB1D3AE003AA894 /* FamilyDynamicViewController.h */,
+				CDB8B8491EB1D3AE003AA894 /* FamilyDynamicViewController.m */,
 			);
 			name = My;
 			sourceTree = "<group>";
@@ -2577,7 +2598,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0F032D771CC9B12700D1920D /* Build configuration list for PBXNativeTarget "SmartHome" */;
 			buildPhases = (
-				70B41E7DAFB2516668C204F1 /* 📦 Check Pods Manifest.lock */,
+				70B41E7DAFB2516668C204F1 /* [CP] Check Pods Manifest.lock */,
 				A6AA72E81750E5551DB3BF43 /* [CP] Check Pods Manifest.lock */,
 				7111AFB52FC0151747BC17C8 /* [CP] Check Pods Manifest.lock */,
 				201F0249AEAB68444741EA3D /* [CP] Check Pods Manifest.lock */,
@@ -2773,13 +2794,13 @@
 				2EB516F51E9CE3A40064B18E /* ScreenCurtainCell.xib in Resources */,
 				CDF1574C1E7AB2AF00499AC5 /* icon_tabbar_homepage@2x.png in Resources */,
 				CD51343F1E92807600C2EDAF /* tipIcon@2x.png in Resources */,
-				0F49CB6E1E7A1E3700D46ECC /* MyInfo.storyboard in Resources */,
 				CD7DDA0F1E82583700638DB3 /* pullBtn@2x.png in Resources */,
 				2EBABC7E1E8361C50093EF3A /* OtherTableViewCell.xib in Resources */,
 				CDF78C5A1E9CC3C500F8B20C /* NaviBarBg.png in Resources */,
 				CDF1574F1E7AB2AF00499AC5 /* icon_tabbar_mine@2x.png in Resources */,
 				2EE1196C1E80D6B900F6FCB6 /* shanchu.png in Resources */,
-				0FF5CD5A1EA769D70027E2DC /* ContextMenuCell.xib in Resources */,
+				0FABB3401EAF23470089A5A4 /* ContextMenuCell.xib in Resources */,
+				0FABB33E1EAF232A0089A5A4 /* MenuCell.xib in Resources */,
 				CD93E3AF1E807CC2003CCAA9 /* login_bg@2x.png in Resources */,
 				2EE1196F1E81374A00F6FCB6 /* kaiqi.png in Resources */,
 				2EBABC791E8360FB0093EF3A /* TVTableViewCell.xib in Resources */,
@@ -2791,6 +2812,7 @@
 				CD93E3AD1E807AFD003CCAA9 /* login_icon@2x.png in Resources */,
 				0F49CB6C1E7A1DBF00D46ECC /* Login.storyboard in Resources */,
 				2E925DA51E5E857D008E327B /* all_6.jpg in Resources */,
+				CDB8B85B1EB1E8AF003AA894 /* MyInfo.storyboard in Resources */,
 				CDF157511E7AB2C000499AC5 /* leftbackiamge.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2932,19 +2954,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		70B41E7DAFB2516668C204F1 /* 📦 Check Pods Manifest.lock */ = {
+		70B41E7DAFB2516668C204F1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		7111AFB52FC0151747BC17C8 /* [CP] Check Pods Manifest.lock */ = {
@@ -3091,6 +3113,7 @@
 				F651640D1D3766C900A6F5FA /* MyEnergyViewController.m in Sources */,
 				0F477FC61D2F94B3004FA361 /* NetStatusManager.m in Sources */,
 				2E12CC111E7F5E3000C7D006 /* CYPhotoCell.m in Sources */,
+				CDB8B84D1EB1D421003AA894 /* MonitorViewController.m in Sources */,
 				2EDC0E901DEC072700F95BE0 /* IPhoneRoom.m in Sources */,
 				0F49CB821E7A21FF00D46ECC /* ORBSwitch.m in Sources */,
 				0FEE12761D20C53400811947 /* TXHRulerScrollView.m in Sources */,
@@ -3099,8 +3122,8 @@
 				CDFB9DF81E641F8E00BFECCE /* DeviceTimerInfo.m in Sources */,
 				0FCFB38F1CF293B300B37DD3 /* Radio.m in Sources */,
 				2E6A065B1EA743B50022B681 /* NewColourCell.m in Sources */,
+				CDB8B8531EB1D550003AA894 /* SceneShortcutsViewController.m in Sources */,
 				CD5134371E8D07FD00C2EDAF /* Goods.m in Sources */,
-				CDB8B8471EB19547003AA894 /* SceneShortcutsViewController.m in Sources */,
 				CD93E3AA1E8077F1003CCAA9 /* LoginViewController.m in Sources */,
 				F618963B1D87B08300DBE6CD /* ProjectController.m in Sources */,
 				F6FD00A21DDDD470009ABA64 /* TouchSubViewController.m in Sources */,
@@ -3117,6 +3140,7 @@
 				0F6ADFE01E7136B500BFF67F /* RCDataManager.m in Sources */,
 				2E6328081E03C3C6000D7BE9 /* IphoneSceneAirVC.m in Sources */,
 				F630C35F1D38B4FF008880BB /* AccessSettingController.m in Sources */,
+				0FABB33C1EAF22FC0089A5A4 /* ContextMenuCell.m in Sources */,
 				F6642A811D4220100003D56B /* DeviceListController.m in Sources */,
 				0F094AC61E94CDC100977123 /* Key.m in Sources */,
 				0FAF98A41CE40F3C009BDBB5 /* QRCodeReader.m in Sources */,
@@ -3186,7 +3210,6 @@
 				CDF78C581E9CB24600F8B20C /* CustomViewController.m in Sources */,
 				2EC8A5931E372D75002A5042 /* ColourCell.m in Sources */,
 				0FAF8FFB1CE1D9BC000557BD /* UploadManager.m in Sources */,
-				CDB8B8441EB09C72003AA894 /* MonitorViewController.m in Sources */,
 				F6359B001CFFC4DC0035EB31 /* ColourTableViewCell.m in Sources */,
 				0FA1E09E1D533BFA001CA819 /* PluginCell.m in Sources */,
 				0FAF74C61CEEA17C00432713 /* UIImage+CoreGraphics.m in Sources */,
@@ -3202,7 +3225,6 @@
 				F62CD87A1D94BE99001C66CE /* IphoneTVController.m in Sources */,
 				F62CFA411DAC699D006410F7 /* IphoneTypeView.m in Sources */,
 				0F1F3BCA1D2B85EA00B2641C /* MBProgressHUD+NJ.m in Sources */,
-				0FF5CD591EA769D70027E2DC /* ContextMenuCell.m in Sources */,
 				F625A61B1D4C99EC00B696E5 /* RoomListController.m in Sources */,
 				CDF157411E7AADC700499AC5 /* LeftSlideViewController.m in Sources */,
 				2EA897AC1E31B25E002CA904 /* YZNavigationMenuView.m in Sources */,
@@ -3224,11 +3246,13 @@
 				F67F1F711D3C69DC00F2B7E5 /* SystemSettingViewController.m in Sources */,
 				0F180FC61D0E4E5000392F4C /* FMController.m in Sources */,
 				F67F1F771D3C719D00F2B7E5 /* SystemInfomationController.m in Sources */,
+				CDB8B8501EB1D4B4003AA894 /* UserInfoViewController.m in Sources */,
 				0FABF91C1D06AA35000892D8 /* TVController.m in Sources */,
 				F6BF2AED1D86556500A3C9D5 /* HostIDSController.m in Sources */,
 				F62337901D70675B00ADAD00 /* TVIconController.m in Sources */,
 				0FAF74C31CEEA17C00432713 /* HRColorMapView.m in Sources */,
 				0FADA44A1CEBF8AE00777901 /* SceneManager.m in Sources */,
+				0FA96D521EB033FE001DDF39 /* UIView+Popup.m in Sources */,
 				2ECDCC901E9E3623004C68BE /* BjMusicTableViewCell.m in Sources */,
 				0F01D5441CDC6CA600DAC267 /* Scene.m in Sources */,
 				CDF78C551E9CA99D00F8B20C /* CustomNaviBarView.m in Sources */,
@@ -3259,12 +3283,12 @@
 				0FB205E91CDC312A00B5E87E /* IOManager.m in Sources */,
 				F66596DA1D3F12FB0082716A /* EnergyOfDeviceController.m in Sources */,
 				0FAF74C01CEEA17C00432713 /* HRBrightnessSlider.m in Sources */,
-				CDB8B83E1EAF4281003AA894 /* UserInfo.m in Sources */,
 				F635CCBB1D4356650078B148 /* MyCenterSplitController.m in Sources */,
 				2E12CC161E7FC04800C7D006 /* IphoneNewEditSceneController.m in Sources */,
 				F6251F741D541D8A000A5A47 /* Device.m in Sources */,
 				F6251F771D542508000A5A47 /* SQLManager.m in Sources */,
 				2EBABC871E839F2E0093EF3A /* DVDTableViewCell.m in Sources */,
+				CDB8B84A1EB1D3AE003AA894 /* FamilyDynamicViewController.m in Sources */,
 				2EFFECA11E12161100C13D3E /* FixTimeListViewController.m in Sources */,
 				0FDB34441E79269500DA53BB /* LayerUtil.m in Sources */,
 				F62CFA4A1DAC952F006410F7 /* IphoneRoomListController.m in Sources */,
@@ -3272,6 +3296,7 @@
 				0FC3DE851D236CFF00A03482 /* LoginController.m in Sources */,
 				F66596E31D3F25810082716A /* SceneCell.m in Sources */,
 				F6457C451DD5523C00CA3A72 /* IphoneFamilyViewController.m in Sources */,
+				CDB8B8591EB1E1BF003AA894 /* ShortcutKeyCell.m in Sources */,
 				0FB42E1E1CF681A7007DE64F /* planeScene.m in Sources */,
 				F6423C221D9A4B7400AAB3CE /* DeviceOfFixTimerViewController.m in Sources */,
 				F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */,
@@ -3284,10 +3309,10 @@
 				2E6CEDBF1DE5DE8B000979BE /* DetailMSGViewController.m in Sources */,
 				0FB42E231CF6F9E8007DE64F /* SocketManager.m in Sources */,
 				0F6AB86F1D782D9D0041E39C /* SunCount.m in Sources */,
+				CDB8B8561EB1E0AC003AA894 /* ShortcutKeyViewController.m in Sources */,
 				0FCFB3861CF2912700B37DD3 /* TV.m in Sources */,
 				2E12CC101E7F5E3000C7D006 /* CYLineLayout.m in Sources */,
 				F65B7D271D34E9E00059CFA4 /* MySettingViewController.m in Sources */,
-				CDB8B8411EB0524F003AA894 /* FamilyDynamicViewController.m in Sources */,
 				F62CD87D1D950453001C66CE /* IphoneAirController.m in Sources */,
 				0F9EA72D1DDB026C00223ED8 /* NSString+RegMatch.m in Sources */,
 				CD7863B71E8CF18200F42AC0 /* VipServiceListViewController.m in Sources */,
@@ -3325,7 +3350,6 @@
 				F6755A581D40D450002394F3 /* ECloudButton.m in Sources */,
 				0FAF98A51CE40F3C009BDBB5 /* QRCodeReaderView.m in Sources */,
 				F69C82331D363376002DE6D7 /* ServiceRecordViewController.m in Sources */,
-				CDB8B83B1EAF2C2E003AA894 /* UserInfoViewController.m in Sources */,
 				F66596E01D3F25610082716A /* SceneController.m in Sources */,
 				2E12CC0A1E7F5DC400C7D006 /* FirstSceneViewController.m in Sources */,
 				0FA86BAF1E72445000DC177E /* Cell.m in Sources */,

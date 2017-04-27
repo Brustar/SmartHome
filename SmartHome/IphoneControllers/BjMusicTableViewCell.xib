@@ -68,9 +68,6 @@
                             <constraint firstAttribute="height" constant="30" id="VYA-uL-hUG"/>
                         </constraints>
                         <state key="normal" image="icon_add_normal"/>
-                        <connections>
-                            <action selector="AddBjmusicBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dW3-Vj-3tL"/>
-                        </connections>
                     </button>
                 </subviews>
                 <constraints>

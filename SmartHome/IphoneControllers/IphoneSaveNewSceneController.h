@@ -10,5 +10,6 @@
 #import "CustomViewController.h"
 
 @interface IphoneSaveNewSceneController : CustomViewController
-@property(nonatomic,assign) int sceneID;
+@property (nonatomic,assign) int sceneID;
+@property (nonatomic,assign) int roomId;
 @end

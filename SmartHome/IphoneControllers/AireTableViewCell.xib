@@ -78,9 +78,6 @@
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <state key="normal" backgroundImage="dvd_btn_switch_on"/>
-                        <connections>
-                            <action selector="AireSwitchBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="BYs-sw-6TW"/>
-                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5b9-uL-jLe">
                         <rect key="frame" x="298" y="14" width="30" height="30"/>
@@ -89,9 +86,6 @@
                             <constraint firstAttribute="width" constant="30" id="bH6-PM-spU"/>
                         </constraints>
                         <state key="normal" image="icon_add_normal"/>
-                        <connections>
-                            <action selector="AddAireBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="naN-1k-a6n"/>
-                        </connections>
                     </button>
                 </subviews>
                 <constraints>

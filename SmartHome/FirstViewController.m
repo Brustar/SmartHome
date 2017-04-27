@@ -25,7 +25,6 @@
 #import <RBStoryboardLink.h>
 #import "IOManager.h"
 #import "NowMusicController.h"
-#import "ShortcutKeyViewController.h"
 
 
 

@@ -106,9 +106,11 @@
    UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     IphoneSaveNewSceneController * iphoneSaveNewScene = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneSaveNewSceneController"];
     // [self presentViewController:iphoneSaveNewScene animated:YES completion:nil];
+    iphoneSaveNewScene.roomId = self.roomID;
     [self.navigationController pushViewController:iphoneSaveNewScene animated:YES];
       //[self performSegueWithIdentifier:@"iphoneAddNewScene" sender:self];
 }
+
 -(void)setUpRoomView
 {
     NSMutableArray *roomNames = [NSMutableArray array];
@@ -261,105 +263,168 @@
         NewLightCell * cell = [tableView dequeueReusableCellWithIdentifier:@"NewLightCell" forIndexPath:indexPath];
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
-       // cell.roomID = self.roomID;
-//        cell.sceneID = self.sceneid;
+        cell.roomID = self.roomID;
+        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneid];
         Device * device = [SQLManager getDeviceWithDeviceHtypeID:[_lightArray[indexPath.row] intValue]];
         cell.NewLightNameLabel.text = device.name;
         cell.NewLightSlider.continuous = NO;
         cell.deviceid = _lightArray[indexPath.row];
+         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneid];
+        cell.scene = _scene;
         
         return cell;
     }if (indexPath.section == 1) {//调色灯
         NewColourCell * newColourCell = [tableView dequeueReusableCellWithIdentifier:@"NewColourCell" forIndexPath:indexPath];
+        newColourCell.roomID = self.roomID;
+        newColourCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneid];
         newColourCell.backgroundColor =[UIColor clearColor];
          Device * device = [SQLManager getDeviceWithDeviceHtypeID:[_ColourLightArr[indexPath.row] intValue]];
         newColourCell.colourNameLabel.text = device.name;
+        newColourCell.colourSlider.continuous = NO;
+        newColourCell.deviceid = _ColourLightArr[indexPath.row];
+         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneid];
+        newColourCell.scene = _scene;
         
         return newColourCell;
     }if (indexPath.section == 2) {//开关灯
         NewColourCell * newColourCell = [tableView dequeueReusableCellWithIdentifier:@"NewColourCell" forIndexPath:indexPath];
+        newColourCell.roomID = self.roomID;
+        newColourCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneid];
         newColourCell.backgroundColor =[UIColor clearColor];
          Device * device = [SQLManager getDeviceWithDeviceHtypeID:[_SwitchLightArr[indexPath.row] intValue]];
         newColourCell.colourNameLabel.text = device.name;
         newColourCell.supimageView.hidden = YES;
         newColourCell.lowImageView.hidden = YES;
         newColourCell.highImageView.hidden = YES;
+        newColourCell.colourSlider.continuous = NO;
+        newColourCell.deviceid = _SwitchLightArr[indexPath.row];
+         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneid];
+        newColourCell.scene = _scene;
         
         return newColourCell;
     }if (indexPath.section == 3) {//空调
         AireTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"AireTableViewCell" forIndexPath:indexPath];
         aireCell.backgroundColor =[UIColor clearColor];
         aireCell.roomID = self.roomID;
-//        aireCell.sceneID = self.sceneid;
+        aireCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneid];
          Device * device = [SQLManager getDeviceWithDeviceHtypeID:[_AirArray[indexPath.row] intValue]];
         aireCell.AireNameLabel.text = device.name;
         aireCell.deviceid = _AirArray[indexPath.row];
+        aireCell.AireSlider.continuous = NO;
+        aireCell.deviceid = _AirArray[indexPath.row];
+         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneid];
+        aireCell.scene = _scene;
         
         return aireCell;
     }if (indexPath.section == 4) {//窗帘
         CurtainTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
         aireCell.backgroundColor = [UIColor clearColor];
         aireCell.roomID = self.roomID;
-//        aireCell.sceneID = self.sceneid;
+        aireCell.sceneid= [NSString stringWithFormat:@"%d",self.sceneid];
           Device * device = [SQLManager getDeviceWithDeviceHtypeID:[_CurtainArray[indexPath.row] intValue]];
         aireCell.label.text = device.name;
         aireCell.deviceid = _CurtainArray[indexPath.row];
+        aireCell.slider.continuous = NO;
+         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneid];
+        aireCell.scene = _scene;
         
         return aireCell;
     }if (indexPath.section == 5) {//TV
         TVTableViewCell * TVCell = [tableView dequeueReusableCellWithIdentifier:@"TVTableViewCell" forIndexPath:indexPath];
-      //  TVCell.TVConstraint.constant= 10;
+        TVCell.TVConstraint.constant= NO;
+        TVCell.roomID = self.roomID;
+        TVCell.TVConstraint.constant = 60;
+        TVCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneid];
         TVCell.backgroundColor =[UIColor clearColor];
         Device * device = [SQLManager getDeviceWithDeviceHtypeID:[_TVArray[indexPath.row] intValue]];
         TVCell.TVNameLabel.text = device.name;
+        TVCell.deviceid = _TVArray[indexPath.row];
+         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneid];
+        TVCell.scene = _scene;
         
         return TVCell;
     }if (indexPath.section == 6) {//DVD
         DVDTableViewCell * DVDCell = [tableView dequeueReusableCellWithIdentifier:@"DVDTableViewCell" forIndexPath:indexPath];
+        DVDCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneid];
+        DVDCell.roomID = self.roomID;
+        DVDCell.DVDSlider.continuous = NO;
+        DVDCell.deviceid = _DVDArray[indexPath.row];
         DVDCell.backgroundColor =[UIColor clearColor];
           Device * device = [SQLManager getDeviceWithDeviceHtypeID:[_DVDArray[indexPath.row] intValue]];
         DVDCell.DVDNameLabel.text = device.name;
+         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneid];
+        DVDCell.scene = _scene;
         
         return DVDCell;
     }if (indexPath.section == 7) {//投影机
         ScreenCurtainCell * ScreenCell = [tableView dequeueReusableCellWithIdentifier:@"ScreenCurtainCell" forIndexPath:indexPath];
+        ScreenCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneid];
+        ScreenCell.roomID = self.roomID;
+        ScreenCell.deviceid = _ProjectArray[indexPath.row];
         ScreenCell.backgroundColor =[UIColor clearColor];
           Device * device = [SQLManager getDeviceWithDeviceHtypeID:[_ProjectArray[indexPath.row] intValue]];
         ScreenCell.ScreenCurtainLabel.text = device.name;
+         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneid];
+        ScreenCell.scene = _scene;
         
         return ScreenCell;
     }if (indexPath.section == 8) {//FM
         FMTableViewCell * FMCell = [tableView dequeueReusableCellWithIdentifier:@"FMTableViewCell" forIndexPath:indexPath];
+        FMCell.roomID = self.roomID;
+        FMCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneid];
+        FMCell.deviceid = _FMArray[indexPath.row];
         FMCell.backgroundColor =[UIColor clearColor];
          Device * device = [SQLManager getDeviceWithDeviceHtypeID:[_FMArray[indexPath.row] intValue]];
         FMCell.FMNameLabel.text = device.name;
+         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneid];
+        FMCell.scene = _scene;
         
         return FMCell;
     }if (indexPath.section == 9) {//机顶盒
         OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+        otherCell.roomID = self.roomID;
+        otherCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneid];
+        otherCell.deviceid = _NetVArray[indexPath.row];
         otherCell.backgroundColor =[UIColor clearColor];
         Device * device = [SQLManager getDeviceWithDeviceHtypeID:[_NetVArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
+         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneid];
+        otherCell.scene = _scene;
         
         return otherCell;
     }if (indexPath.section == 10) {//幕布
         OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+        otherCell.roomID = self.roomID;
+        otherCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneid];
+        otherCell.deviceid = _OtherArray[indexPath.row];
         otherCell.backgroundColor = [UIColor clearColor];
         Device * device = [SQLManager getDeviceWithDeviceHtypeID:[_MBArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
+         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneid];
+        otherCell.scene = _scene;
         
         return otherCell;
     }if (indexPath.section == 11) {//背景音乐
         BjMusicTableViewCell * BjMusicCell = [tableView dequeueReusableCellWithIdentifier:@"BjMusicTableViewCell" forIndexPath:indexPath];
         BjMusicCell.backgroundColor = [UIColor clearColor];
+        BjMusicCell.roomID = self.roomID;
+        BjMusicCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneid];
+        BjMusicCell.deviceid = _BJMusicArray[indexPath.row];
         Device * device = [SQLManager getDeviceWithDeviceHtypeID:[_BJMusicArray[indexPath.row] intValue]];
         BjMusicCell.BjMusicNameLb.text = device.name;
+         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneid];
+        BjMusicCell.scene = _scene;
         
         return BjMusicCell;
     }
         OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+        otherCell.roomID = self.roomID;
+        otherCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneid];
+        otherCell.deviceid = _OtherArray[indexPath.row];
         otherCell.backgroundColor = [UIColor clearColor];
-        if (_OtherArray.count) {
+        _scene=[[SceneManager defaultManager] readSceneByID:self.sceneid];
+        otherCell.scene = _scene;
+         if (_OtherArray.count) {
             Device * device = [SQLManager getDeviceWithDeviceHtypeID:[_OtherArray[indexPath.row] intValue]];
             if (device.name == nil) {
                 otherCell.NameLabel.text = @"";

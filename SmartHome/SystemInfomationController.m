@@ -6,7 +6,7 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
-#import "systemInfomationController.h"
+#import "SystemInfomationController.h"
 #import "HttpManager.h"
 
 

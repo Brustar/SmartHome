@@ -32,11 +32,12 @@
 #import "CYPhotoCell.h"
 
 static NSString * const CYPhotoId = @"photo";
-@interface IphoneDeviceListController ()<IphoneRoomViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UIViewControllerPreviewingDelegate>
+@interface IphoneDeviceListController ()<IphoneRoomViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 
 @property (nonatomic,assign) int selectedSId;
 
 @property (nonatomic,strong) NSArray *deviceTypes;
+@property (nonatomic,strong) NSArray *typeIDs;
 
 @property (nonatomic ,strong) CYPhotoCell *cell;
 @property (nonatomic,strong) UIButton *typeSelectedBtn;
@@ -113,7 +114,7 @@ static NSString * const CYPhotoId = @"photo";
 }
 
 - (void)rightBtnClicked:(UIButton *)btn {
-    [self performSegueWithIdentifier:@"air" sender:self];
+    
 }
 
 - (void)onBgButtonClicked:(UIButton *)sender {
@@ -136,11 +137,13 @@ static NSString * const CYPhotoId = @"photo";
     }else{
         layout.itemSize = CGSizeMake(collectionW-90, collectionH-20);
     }
+
     //layout.itemSize = CGSizeMake(collectionW-110, collectionH-20);
     self.FirstCollectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
     self.FirstCollectionView.backgroundColor = [UIColor clearColor];
     self.FirstCollectionView.dataSource = self;
     self.FirstCollectionView.delegate = self;
+
     [self.view addSubview:self.FirstCollectionView];
     self.automaticallyAdjustsScrollViewInsets = NO;
     // 注册
@@ -170,6 +173,7 @@ static NSString * const CYPhotoId = @"photo";
         self.roomIndex = index;
         Room *room = self.rooms[index];
         self.deviceTypes = [SQLManager deviceSubTypeByRoomId:room.rId];
+        self.typeIDs = [SQLManager deviceTypeIDByRoom:room.rId];
         if (self.deviceTypes.count < 1) {
             [MBProgressHUD showError:@"该房间没有设备"];
             return;
@@ -178,101 +182,64 @@ static NSString * const CYPhotoId = @"photo";
     }
 }
 
--(void)goDeviceByRoomID:(int)roomID typeName:(NSString *)typeName
+-(NSString *) seguaName:(int) typeID
 {
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIStoryboard *iphoneBoard  = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-    if([typeName isEqualToString:@"网络电视"])
-    {
-        IphoneTVController *tVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneTVController"];
-        tVC.roomID = roomID;
-        [self.navigationController pushViewController:tVC animated:YES];
-    }else if([typeName isEqualToString:@"灯光"])
-    {
-        IphoneLightController * ligthVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"LightController"];
-        ligthVC.roomID = roomID;
-        [self.navigationController pushViewController:ligthVC animated:YES];
-    }else if([typeName isEqualToString:@"窗帘"])
-    {
-        CurtainController *curtainVC = [storyBoard instantiateViewControllerWithIdentifier:@"CurtainController"];
-        curtainVC.roomID = roomID;
-        
-        [self.navigationController pushViewController:curtainVC animated:YES];
-        
-    }else if([typeName isEqualToString:@"DVD"])
-    {
-        
-        IphoneDVDController *dvdVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneDVDController"];
-        dvdVC.roomID = roomID;
-        
-        [self.navigationController pushViewController:dvdVC animated:YES];
-    }else if([typeName isEqualToString:@"FM"])
-    {
-        FMController *fmVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneFMController"];
-        fmVC.roomID = roomID;
-        
-        [self.navigationController pushViewController:fmVC animated:YES];
-    }else if([typeName isEqualToString:@"空调"])
-    {
-        IphoneAirController *airVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneAirController"];
-        airVC.roomID = roomID;
-        
-        [self.navigationController pushViewController:airVC animated:YES];
-    }else if([typeName isEqualToString:@"机顶盒"]){
-        IphoneNetTvController *netVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneNetTvController"];
-        netVC.roomID = roomID;
-        
-        [self.navigationController pushViewController:netVC animated:YES];
-    }else if([typeName isEqualToString:@"摄像头"]){
-        DeviceInfo *device = [DeviceInfo defaultManager];
-        if (![device.db isEqualToString:SMART_DB]) { //体验版：老人房摄像头页面只显示一张房间图片
-            [self.navigationController pushViewController:[self addOldmanRoomCameraImage] animated:YES];
-            return;
-        }
-        
-        CameraController *camerVC = [storyBoard instantiateViewControllerWithIdentifier:@"CameraController"];
-        camerVC.roomID = roomID;
+    switch (typeID) {
+        case light:
+            
+            return @"lighting";
+        case curtain:
+            
+            return @"curtain";
+        case DVDtype:
+            
+            return @"DVD";
+        case bgmusic:
+            
+            return @"bgmusic";
+        case FM:
+            
+            return @"FM";
+        case air:
+            
+            return @"air";
+        case doorclock:
+            
+            return @"doorclock";
+        case projector:
+            
+            return @"projector";
+        case screen:
+            
+            return @"screen";
+        case amplifier:
+            
+            return @"amplifier";
+        case TVtype:
+            
+            return @"TV";
+        case netTV:
+            
+            return @"TV";
+        case camera:
+            
+            return @"camera";
+        case plugin:
+            
+            return @"plugin";
+        default:
+            break;
+    }
+    return NULL;
+}
 
-        [self.navigationController pushViewController:camerVC animated:YES];
-    }else if([typeName isEqualToString:@"智能门锁"]){
-        GuardController *guardVC = [storyBoard instantiateViewControllerWithIdentifier:@"GuardController"];
-        guardVC.roomID = roomID;
-        
-        [self.navigationController pushViewController:guardVC animated:YES];
-    }else if([typeName isEqualToString:@"幕布"]){
-        ScreenCurtainController *screenCurtainVC = [storyBoard instantiateViewControllerWithIdentifier:@"ScreenCurtainController"];
-        screenCurtainVC.roomID = roomID;
-        [self.navigationController pushViewController:screenCurtainVC animated:YES];
-        
-    }else if([typeName isEqualToString:@"投影"])
-    {
-        ProjectController *projectVC = [storyBoard instantiateViewControllerWithIdentifier:@"ProjectController"];
-        projectVC.roomID = roomID;
-        [self.navigationController pushViewController:projectVC animated:YES];
-    }else if([typeName isEqualToString:@"功放"]){
-        AmplifierController *amplifierVC = [storyBoard instantiateViewControllerWithIdentifier:@"AmplifierController"];
-        amplifierVC.roomID = roomID;
-        
-        [self.navigationController pushViewController:amplifierVC animated:YES];
+-(void)goDeviceByRoomID:(NSString *)typeID
+{
+    int type = [typeID intValue];
+    NSString *segua = [self seguaName:type];
+    if (segua) {
+        [self performSegueWithIdentifier:segua sender:self];
     }
-    else if([typeName isEqualToString:@"智能推窗器"]){
-        WindowSlidingController *windowSlidVC = [storyBoard instantiateViewControllerWithIdentifier:@"WindowSlidingController"];
-        windowSlidVC.roomID = roomID;
-        
-        [self.navigationController pushViewController:windowSlidVC animated:YES];
-    }
-    else if([typeName isEqualToString:@"背景音乐"]){
-        BgMusicController *bgMusicVC = [storyBoard instantiateViewControllerWithIdentifier:@"BgMusicController"];
-        bgMusicVC.roomID = roomID;
-        
-        [self.navigationController pushViewController:bgMusicVC animated:YES];
-    }else {
-        PluginViewController *pluginVC = [storyBoard instantiateViewControllerWithIdentifier:@"PluginViewController"];
-        pluginVC.roomID = roomID;
-        
-        [self.navigationController pushViewController:pluginVC animated:YES];
-    }
-
 }
 
 - (UIViewController *)addOldmanRoomCameraImage {
@@ -292,10 +259,19 @@ static NSString * const CYPhotoId = @"photo";
     self.selectedRoomBtn = btn;
     [self.selectedRoomBtn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
     self.deviceTypes = [SQLManager deviceSubTypeByRoomId:btn.tag];
+    self.typeIDs = [SQLManager deviceTypeIDByRoom:btn.tag];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    id theSegue = segue.destinationViewController;
+    Room *room = self.rooms[self.roomIndex];
+    [theSegue setValue:[NSString stringWithFormat:@"%d", room.rId] forKey:@"roomID"];
 }
 
 #pragma  mark - UICollectionViewDelegate
@@ -303,23 +279,24 @@ static NSString * const CYPhotoId = @"photo";
 {
     return self.deviceTypes.count;
 }
+
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
-    cell.sceneLabel.text = self.deviceTypes[indexPath.row];
-    self.DeviceNameLabel.text = self.deviceTypes[indexPath.row];
+    
+    int offset = ((CYLineLayout *)self.FirstCollectionView.collectionViewLayout).scrollOffset;
+    self.DeviceNameLabel.text = self.deviceTypes[offset];
+    
     NSString *imgName = [NSString stringWithFormat:@"catalog_%ld",(long)indexPath.row];
     UIImage *img = [UIImage imageNamed:imgName];
     [cell.imageView sd_setImageWithURL:nil placeholderImage:img];
-    [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];
     
     return cell;
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    Room *room = self.rooms[self.roomIndex];
-    [self goDeviceByRoomID:room.rId typeName:[self.deviceTypes objectAtIndex:indexPath.row]];
+    [self goDeviceByRoomID:[self.typeIDs objectAtIndex:indexPath.row]];
 }
 
 @end

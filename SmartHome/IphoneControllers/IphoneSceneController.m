@@ -602,7 +602,7 @@ static NSString * const CYPhotoId = @"photo";
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     Room *room = self.roomList[self.roomIndex];
-    if([segue.identifier isEqualToString:@"iphoneAddSceneSegue"])
+    if([segue.identifier isEqualToString:@"IphoneNewAddSceneVC"])
     {
         [IOManager removeTempFile];
 

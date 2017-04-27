@@ -63,7 +63,7 @@
                             <constraint firstAttribute="height" constant="30" id="cdk-1f-Ndf"/>
                             <constraint firstAttribute="width" constant="30" id="ehe-Tx-Jk6"/>
                         </constraints>
-                        <state key="normal" backgroundImage="lv_icon_light_on"/>
+                        <state key="normal" image="lv_icon_light_on"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9po-Xv-wqd">
                         <rect key="frame" x="327" y="15" width="30" height="30"/>
@@ -72,9 +72,6 @@
                             <constraint firstAttribute="width" constant="30" id="ylo-FL-L2g"/>
                         </constraints>
                         <state key="normal" image="icon_add_normal"/>
-                        <connections>
-                            <action selector="AddLightBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="IGH-Gj-NK7"/>
-                        </connections>
                     </button>
                 </subviews>
                 <constraints>

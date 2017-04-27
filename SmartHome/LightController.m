@@ -17,6 +17,8 @@
 #import "YALContextMenuTableView.h"
 #import "ContextMenuCell.h"
 #import "ORBSwitch.h"
+#import "UIView+Popup.h"
+#import "STColorPicker.h"
 
 static NSString *const menuCellIdentifier = @"rotationCell";
 
@@ -33,6 +35,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewRightConstraints;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewLeftContraints;
 
+@property (weak, nonatomic) IBOutlet UIView *base;
 
 @property (weak, nonatomic) IBOutlet UIView *lightView;
 @property (weak, nonatomic) IBOutlet UIButton *sprightlierBtn;//明快
@@ -50,6 +53,41 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 @end
 
 @implementation LightController
+- (IBAction)pickcolor:(id)sender {
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 300.0, 400.0)];
+    view.backgroundColor = [UIColor colorWithRed:0.75 green:0.75 blue:0.75 alpha:1.0];
+    
+    STColorPicker *colorPicker = [[STColorPicker alloc] initWithFrame:CGRectMake(0.0, 40.0, 300.0, 350.0)];
+    
+    [colorPicker setColorHasChanged:^(UIColor *color, CGPoint location) {
+        NSLog(@"%@",color);
+        [self.base setBackgroundColor:color];
+        [view dismiss];
+    }];
+    
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [btn setTitle:@"颜色面板" forState:UIControlStateNormal];
+    
+    btn.frame = CGRectMake(5.0, 5.0, 80.0, 35.0);
+    [btn setTitleColor:[UIColor blackColor]forState:UIControlStateNormal];
+    btn.titleLabel.font = [UIFont systemFontOfSize:13.0];
+
+    //[btn addTarget:self action:@selector(upInside) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:btn];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [button setTitle:@"图片面板" forState:UIControlStateNormal];
+    
+    button.frame = CGRectMake(220.0, 5.0, 80.0, 35.0);
+    [button setTitleColor:[UIColor blackColor]forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:13.0];
+    [view addSubview:button];
+    [view addSubview:colorPicker];
+    [view show];
+}
 
 -(NSMutableArray *)lIDs
 {
@@ -107,7 +145,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     [self.detailCell.power addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     self.lightSlider.continuous = NO;
     self.cell = [[[NSBundle mainBundle] loadNibNamed:@"ColourTableViewCell" owner:self options:nil] lastObject];
-    [self setupSegmentLight];
+    //[self setupSegmentLight];
     self.scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     if ([self.sceneid intValue]>0) {
         _favButt.enabled=YES;
@@ -510,10 +548,8 @@ static NSString *const menuCellIdentifier = @"rotationCell";
         return;//多个手指不执行旋转
     }
     
-    //self.tranformView，你想旋转的视图
-    if (![touch.view isEqual:self.tranformView]) {
-        //return;
-    }
+    CGFloat radius = atan2f(self.tranformView.transform.b, self.tranformView.transform.a);
+    CGFloat degree = radius * (180 / M_PI);
     
     /**
      CGRectGetHeight 返回控件本身的高度
@@ -535,30 +571,34 @@ static NSString *const menuCellIdentifier = @"rotationCell";
      */
     CGFloat angle = atan2f(currentPoint.y - center.y, currentPoint.x - center.x) - atan2f(previousPoint.y - center.y, previousPoint.x - center.x);
     
+    if (degree<0) {
+        if (angle<0) {
+            return;
+        }
+    }else if (degree>135) {
+        if (angle>0) {
+            return;
+        }
+    }
     self.tranformView.transform = CGAffineTransformRotate(self.tranformView.transform, angle);
     
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch *touch = [touches anyObject];
-    CGPoint center = CGPointMake(CGRectGetMidX([touch.view bounds]), CGRectGetMidY([touch.view bounds]));
-    CGPoint currentPoint = [touch locationInView:touch.view];//当前手指的坐标
-    CGPoint previousPoint = [touch previousLocationInView:touch.view];//上一个坐标
-    CGFloat angle = atan2f(currentPoint.y - center.y, currentPoint.x - center.x) - atan2f(previousPoint.y - center.y, previousPoint.x - center.x);
-    NSLog(@"%f",angle*360/3.14);
+    CGFloat radius = atan2f(self.tranformView.transform.b, self.tranformView.transform.a);
+    CGFloat degree = radius * (180 / M_PI);
+    NSLog(@"degree:%f",degree);
+    int percent = degree*100/135;
+    NSLog(@"percent:%d",percent);
 }
 
 -(void) initSwitch
 {
-    UIView *colorpad = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 250, 250)];
-    colorpad.center = CGPointMake(self.view.bounds.size.width / 2,
-                                  self.view.bounds.size.height / 2);
-    colorpad.backgroundColor = [UIColor blueColor];
-    colorpad.layer.cornerRadius = colorpad.frame.size.width/2;
-    [self.view addSubview:colorpad];
+    self.base.layer.cornerRadius = 120;
     
-    self.tranformView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 182, 150)];
+    
+    self.tranformView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 240, 240)];
     self.tranformView.center = CGPointMake(self.view.bounds.size.width / 2,
                                   self.view.bounds.size.height / 2);
     self.tranformView.image = [UIImage imageNamed:@"glory"];
@@ -599,7 +639,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
         self.contextMenuTableView.menuItemsAppearanceDirection = FromTopToBottom;
         
         //register nib
-        UINib *cellNib = [UINib nibWithNibName:@"ContextMenuCell" bundle:nil];
+        UINib *cellNib = [UINib nibWithNibName:@"MenuCell" bundle:nil];
         [self.contextMenuTableView registerNib:cellNib forCellReuseIdentifier:menuCellIdentifier];
     }
     

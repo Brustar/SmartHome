@@ -13,7 +13,13 @@
 @property (weak, nonatomic) IBOutlet UIButton *NewLightPowerBtn;
 @property (weak, nonatomic) IBOutlet UISlider *NewLightSlider;
 @property(nonatomic, strong)NSString * deviceid;
+@property (nonatomic,weak) NSString *sceneid;
+//房间id
+@property (nonatomic,assign) NSInteger roomID;
+@property (strong, nonatomic) Scene *scene;
+//@property (nonatomic,assign) NSInteger sceneID;
 @property (weak, nonatomic) IBOutlet UIButton *AddLightBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *LightConstraint;
+
 
 @end

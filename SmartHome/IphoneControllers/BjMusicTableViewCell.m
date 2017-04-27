@@ -7,6 +7,10 @@
 //
 
 #import "BjMusicTableViewCell.h"
+#import "SQLManager.h"
+#import "SocketManager.h"
+#import "SceneManager.h"
+#import "BgMusic.h"
 
 @implementation BjMusicTableViewCell
 
@@ -17,9 +21,44 @@
     [self.BjSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
     self.BjSlider.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
     self.BjSlider.minimumTrackTintColor = [UIColor colorWithRed:253/255.0 green:254/255.0 blue:254/255.0 alpha:1];
+    [self.AddBjmusicBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    [self.BjPowerButton addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    [self.BjSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
 }
 
-- (IBAction)AddBjmusicBtn:(id)sender {
+- (IBAction)save:(id)sender {
+    
+    if (sender == self.BjPowerButton) {
+        self.BjPowerButton.selected = !self.BjPowerButton.selected;
+        if (self.BjPowerButton.selected) {
+            [self.BjPowerButton setImage:[UIImage imageNamed:@"music_white"] forState:UIControlStateNormal];
+        }else{
+            
+            [self.BjPowerButton setImage:[UIImage imageNamed:@"music-red"] forState:UIControlStateSelected];
+        }
+    }else if (sender == self.AddBjmusicBtn){
+        self.AddBjmusicBtn.selected = !self.AddBjmusicBtn.selected;
+        if (self.AddBjmusicBtn.selected) {
+            [self.AddBjmusicBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+        }else{
+            [self.AddBjmusicBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
+        }
+    }else if (sender == self.BjSlider){
+        
+    }
+    BgMusic *device=[[BgMusic alloc] init];
+    [device setDeviceID:[self.deviceid intValue]];
+    [device setBgvolume:device.bgvolume];
+    
+    [_scene setSceneID:[self.sceneid intValue]];
+    [_scene setRoomID:self.roomID];
+    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+    [_scene setReadonly:NO];
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

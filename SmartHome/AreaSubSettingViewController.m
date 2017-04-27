@@ -10,7 +10,7 @@
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "IOManager.h"
-#import "areaSettingCell.h"
+#import "AreaSettingCell.h"
 
 @interface AreaSubSettingViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
