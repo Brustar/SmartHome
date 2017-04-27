@@ -13,8 +13,8 @@
 #import "MSGController.h"
 #import "MySettingViewController.h"
 #import "MBProgressHUD+NJ.h"
-#import "ShortcutKeyViewController.h"
 #import "FamilyDynamicViewController.h"
+#import "SceneShortcutsViewController.h"
 
 @interface LeftViewController : UIViewController
 @property(nonatomic, strong) NSArray *itemArray;

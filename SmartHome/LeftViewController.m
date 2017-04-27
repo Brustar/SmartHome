@@ -56,7 +56,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIStoryboard *iPhoneStoryBoard  = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-    UIStoryboard *MyInfoStoryBoard  = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
+    UIStoryboard *myInfoStoryBoard  = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
     UIStoryboard *familyStoryBoard = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate.LeftSlideVC closeLeftView];//关闭左侧抽屉
@@ -70,6 +70,9 @@
     }else if ([item isEqualToString:@"家庭成员"]) {
         //家庭成员
         [MBProgressHUD showError:@"开发中"];
+        SceneShortcutsViewController *vc = [myInfoStoryBoard instantiateViewControllerWithIdentifier:@"SceneShortcutsVC"];
+        vc.hidesBottomBarWhenPushed = YES;
+        [appDelegate.mainTabBarController.selectedViewController pushViewController:vc animated:YES];
         
     }else if ([item isEqualToString:@"智能账单"]) {
 
