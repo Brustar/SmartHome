@@ -259,6 +259,7 @@
 		CDB8B8561EB1E0AC003AA894 /* ShortcutKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B8551EB1E0AC003AA894 /* ShortcutKeyViewController.m */; };
 		CDB8B8591EB1E1BF003AA894 /* ShortcutKeyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B8581EB1E1BF003AA894 /* ShortcutKeyCell.m */; };
 		CDB8B85B1EB1E8AF003AA894 /* MyInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDB8B85A1EB1E8AF003AA894 /* MyInfo.storyboard */; };
+		CDB8B85E1EB1EBD2003AA894 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B85D1EB1EBD2003AA894 /* UserInfo.m */; };
 		CDBEFF501EA5FEBF00258B1E /* FamilyHomeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDBEFF4F1EA5FEBF00258B1E /* FamilyHomeDetailViewController.m */; };
 		CDBEFF531EA616CD00258B1E /* FamilyHomeDetailSceneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDBEFF521EA616CD00258B1E /* FamilyHomeDetailSceneCell.m */; };
 		CDEC86801E95EBAB009EC245 /* TabbarPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEC867F1E95EBAB009EC245 /* TabbarPanel.m */; };
@@ -942,6 +943,8 @@
 		CDB8B8571EB1E1BF003AA894 /* ShortcutKeyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortcutKeyCell.h; sourceTree = "<group>"; };
 		CDB8B8581EB1E1BF003AA894 /* ShortcutKeyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortcutKeyCell.m; sourceTree = "<group>"; };
 		CDB8B85A1EB1E8AF003AA894 /* MyInfo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyInfo.storyboard; sourceTree = "<group>"; };
+		CDB8B85C1EB1EBD2003AA894 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
+		CDB8B85D1EB1EBD2003AA894 /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
 		CDBEFF4E1EA5FEBF00258B1E /* FamilyHomeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyHomeDetailViewController.h; sourceTree = "<group>"; };
 		CDBEFF4F1EA5FEBF00258B1E /* FamilyHomeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyHomeDetailViewController.m; sourceTree = "<group>"; };
 		CDBEFF511EA616CD00258B1E /* FamilyHomeDetailSceneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyHomeDetailSceneCell.h; sourceTree = "<group>"; };
@@ -1228,6 +1231,8 @@
 		0F01D53E1CDC6C4B00DAC267 /* entity */ = {
 			isa = PBXGroup;
 			children = (
+				CDB8B85C1EB1EBD2003AA894 /* UserInfo.h */,
+				CDB8B85D1EB1EBD2003AA894 /* UserInfo.m */,
 				CDEC86931E9A21F4009EC245 /* RoomStatus.h */,
 				CDEC86941E9A21F4009EC245 /* RoomStatus.m */,
 				0F094ABE1E94CCD900977123 /* keypad */,
@@ -3316,6 +3321,7 @@
 				F62CD87D1D950453001C66CE /* IphoneAirController.m in Sources */,
 				0F9EA72D1DDB026C00223ED8 /* NSString+RegMatch.m in Sources */,
 				CD7863B71E8CF18200F42AC0 /* VipServiceListViewController.m in Sources */,
+				CDB8B85E1EB1EBD2003AA894 /* UserInfo.m in Sources */,
 				F65DB3411D2B5AB2002A815C /* RegisterDetailController.m in Sources */,
 				0FAF98A61CE40F3C009BDBB5 /* QRCodeReaderViewController.m in Sources */,
 				0F8D76D01D9A1B9700DDD063 /* Schedule.m in Sources */,
