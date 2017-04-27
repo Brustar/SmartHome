@@ -676,23 +676,26 @@
                                 <rect key="frame" x="362" y="615" width="12" height="10"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fKF-pW-e6s">
-                                <rect key="frame" x="30" y="673" width="103" height="47"/>
-                                <state key="normal" image="control_button"/>
+                                <rect key="frame" x="30" y="673.33333333333337" width="103" height="47"/>
+                                <state key="normal" image="DVD_previous" backgroundImage="control_button"/>
+                                <connections>
+                                    <action selector="previousMusic:" destination="3WJ-Xx-j8F" eventType="touchUpInside" id="NPV-iS-t0T"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1xc-iO-7Dh">
-                                <rect key="frame" x="281" y="673" width="103" height="47"/>
-                                <state key="normal" image="control_button"/>
+                                <rect key="frame" x="281" y="673.33333333333337" width="103" height="47"/>
+                                <state key="normal" image="DVD_next" backgroundImage="control_button"/>
+                                <connections>
+                                    <action selector="nextMusic:" destination="3WJ-Xx-j8F" eventType="touchUpInside" id="ubm-Bw-lGg"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rvx-d6-XTw">
-                                <rect key="frame" x="184" y="673" width="46" height="46"/>
-                                <state key="normal" image="music_button_off"/>
+                                <rect key="frame" x="176.66666666666666" y="666" width="61" height="60"/>
+                                <state key="normal" image="DVD_play" backgroundImage="mode_button"/>
+                                <connections>
+                                    <action selector="playMusic:" destination="3WJ-Xx-j8F" eventType="touchUpInside" id="3Dg-wY-OR0"/>
+                                </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music_previous_white" translatesAutoresizingMaskIntoConstraints="NO" id="rhs-2J-bIM">
-                                <rect key="frame" x="72" y="692" width="19" height="10"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music_next_white" translatesAutoresizingMaskIntoConstraints="NO" id="D8n-J0-bXB">
-                                <rect key="frame" x="323" y="692" width="19" height="10"/>
-                            </imageView>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="het-ld-Z3p">
                                 <rect key="frame" x="51" y="605" width="312" height="31"/>
                             </slider>
@@ -711,7 +714,6 @@
                             <constraint firstItem="vAe-Qd-8DW" firstAttribute="centerX" secondItem="ppE-xr-BIY" secondAttribute="centerX" id="KUD-d4-9Gf"/>
                             <constraint firstItem="V5i-h9-pg4" firstAttribute="top" secondItem="bWa-hy-6kj" secondAttribute="bottom" id="M4G-YN-X0c"/>
                             <constraint firstItem="sVV-IE-K2n" firstAttribute="leading" secondItem="Wt4-9B-3Md" secondAttribute="leadingMargin" id="MI6-Th-k4a"/>
-                            <constraint firstItem="rhs-2J-bIM" firstAttribute="centerX" secondItem="fKF-pW-e6s" secondAttribute="centerX" id="Oib-ep-niH"/>
                             <constraint firstItem="fKF-pW-e6s" firstAttribute="centerY" secondItem="sVV-IE-K2n" secondAttribute="centerY" id="OzV-Bi-CX6"/>
                             <constraint firstItem="eNc-XU-aF9" firstAttribute="centerY" secondItem="ppE-xr-BIY" secondAttribute="centerY" constant="-30" id="P1n-38-MFS"/>
                             <constraint firstItem="sVV-IE-K2n" firstAttribute="top" secondItem="vAe-Qd-8DW" secondAttribute="bottom" constant="20" id="QRL-en-aNO"/>
@@ -720,13 +722,10 @@
                             <constraint firstItem="Nas-3f-VDd" firstAttribute="top" secondItem="bWa-hy-6kj" secondAttribute="bottom" constant="50" id="TfJ-a1-gzf"/>
                             <constraint firstItem="Z1H-En-stj" firstAttribute="centerY" secondItem="vAe-Qd-8DW" secondAttribute="centerY" constant="-3" id="VlC-6i-cnb"/>
                             <constraint firstItem="Z1H-En-stj" firstAttribute="leading" secondItem="vAe-Qd-8DW" secondAttribute="leading" constant="20" id="Xvz-ye-gQK"/>
-                            <constraint firstItem="D8n-J0-bXB" firstAttribute="centerX" secondItem="1xc-iO-7Dh" secondAttribute="centerX" id="Xz7-xE-vcx"/>
                             <constraint firstItem="sVV-IE-K2n" firstAttribute="centerX" secondItem="V5i-h9-pg4" secondAttribute="centerX" id="Z55-Ea-KL6"/>
-                            <constraint firstItem="rhs-2J-bIM" firstAttribute="centerY" secondItem="fKF-pW-e6s" secondAttribute="centerY" id="azL-B7-mQW"/>
                             <constraint firstAttribute="trailingMargin" secondItem="sVV-IE-K2n" secondAttribute="trailing" id="cUu-Xe-TDg"/>
                             <constraint firstItem="Rvx-d6-XTw" firstAttribute="centerY" secondItem="sVV-IE-K2n" secondAttribute="centerY" id="epM-CL-RQv"/>
                             <constraint firstItem="fKF-pW-e6s" firstAttribute="leading" secondItem="sVV-IE-K2n" secondAttribute="leading" constant="10" id="ey1-Wg-feq"/>
-                            <constraint firstItem="D8n-J0-bXB" firstAttribute="centerY" secondItem="1xc-iO-7Dh" secondAttribute="centerY" id="hLG-Nd-gac"/>
                             <constraint firstItem="OGY-zp-fiZ" firstAttribute="centerY" secondItem="vAe-Qd-8DW" secondAttribute="centerY" constant="-3" id="ic3-q2-onJ"/>
                             <constraint firstItem="ppE-xr-BIY" firstAttribute="centerY" secondItem="V5i-h9-pg4" secondAttribute="centerY" constant="-50" id="jKu-cK-MyT"/>
                             <constraint firstItem="OGY-zp-fiZ" firstAttribute="leading" secondItem="het-ld-Z3p" secondAttribute="trailing" constant="1" id="jqK-Ye-YIT"/>
@@ -743,11 +742,10 @@
                     <connections>
                         <outlet property="diskView" destination="8Jv-DU-IJx" id="4a0-So-vFF"/>
                         <outlet property="lastBtn" destination="fKF-pW-e6s" id="Cdy-jO-ucv"/>
-                        <outlet property="next" destination="D8n-J0-bXB" id="fPA-3t-aeY"/>
                         <outlet property="nextBtn" destination="1xc-iO-7Dh" id="lDt-ay-SKG"/>
                         <outlet property="playBtn" destination="Rvx-d6-XTw" id="dVX-m8-XZC"/>
-                        <outlet property="pre" destination="rhs-2J-bIM" id="43o-8m-jI5"/>
                         <outlet property="voiceSlider" destination="het-ld-Z3p" id="asT-kJ-fe3"/>
+                        <outlet property="volume" destination="het-ld-Z3p" id="aYN-0Z-Wf5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DvJ-3z-Rl3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1768,8 +1766,6 @@
         <image name="line_horizontal_white" width="414" height="53"/>
         <image name="mode_button" width="61" height="60"/>
         <image name="music_button_off" width="46" height="46"/>
-        <image name="music_next_white" width="19" height="10"/>
-        <image name="music_previous_white" width="19" height="10"/>
         <image name="plugin_on" width="375" height="385"/>
         <image name="pm2.5" width="141" height="141"/>
         <image name="repeat_white" width="12" height="12"/>

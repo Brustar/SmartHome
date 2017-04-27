@@ -94,47 +94,15 @@ BOOL animating;
     [self.voiceSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
     self.voiceSlider.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
     self.voiceSlider.minimumTrackTintColor = [UIColor colorWithRed:253/255.0 green:254/255.0 blue:254/255.0 alpha:1];
-    [[self.nextBtn
-      rac_signalForControlEvents:UIControlEventTouchDown]
-     subscribeNext:^(id x) {
-         self.next.image =[UIImage imageNamed:@"music_next_red"];
-     }];
-    
-    [[self.nextBtn
-      rac_signalForControlEvents:UIControlEventTouchUpInside]
-     subscribeNext:^(id x) {
-         self.next.image =[UIImage imageNamed:@"music_next_white"];
-     }];
-    
-    [[self.lastBtn
-      rac_signalForControlEvents:UIControlEventTouchDown]
-     subscribeNext:^(id x) {
-         self.pre.image =[UIImage imageNamed:@"music_previous_red"];
-     }];
-    
-    [[self.lastBtn
-      rac_signalForControlEvents:UIControlEventTouchUpInside]
-     subscribeNext:^(id x) {
-         self.pre.image =[UIImage imageNamed:@"music_previous_white"];
-     }];
-    
-    [[self.playBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        //self.play.image =[UIImage imageNamed:@"music_on_white"];
-        [self startSpin];
-    }];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"背景音乐";
+    
+    [self setNaviBarTitle:@"背景音乐"];
     [self initButtons];
     
-    //if ([[DeviceInfo defaultManager] editingScene]) {
-    NSArray *bgmusicIDS = [SQLManager getDeviceByTypeName:@"背景音乐" andRoomID:self.roomID];
-    if ([bgmusicIDS count]>0) {
-        self.deviceid = bgmusicIDS[0];
-    }
-    //}
+    self.deviceid = [SQLManager bgmusicIDByRoom:self.roomID];
     
     float vol = BLUETOOTH_MUSIC ? 0 : [[AVAudioSession sharedInstance] outputVolume];
     self.volume.value=vol*100;
@@ -303,7 +271,7 @@ BOOL animating;
     
     if (_playState == 0) {
         _playState = 1;
-        [btn setImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"DVD_pause"] forState:UIControlStateNormal];
         //发送播放指令
         NSData *data=[[DeviceInfo defaultManager] play:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
@@ -313,9 +281,10 @@ BOOL animating;
             AudioManager *audio= [AudioManager defaultManager];
             [[audio musicPlayer] play];
         }
+        [self startSpin];
     }else if (_playState == 1) {
         _playState = 0;
-       [btn setImage:[UIImage imageNamed:@"broadcast"] forState:UIControlStateNormal];
+       [btn setImage:[UIImage imageNamed:@"DVD_play"] forState:UIControlStateNormal];
         //发送停止指令
         NSData *data=[[DeviceInfo defaultManager] pause:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
@@ -324,6 +293,7 @@ BOOL animating;
             AudioManager *audio= [AudioManager defaultManager];
             [[audio musicPlayer] pause];
         }
+        [self stopSpin];
     }
     
     

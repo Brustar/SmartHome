@@ -221,13 +221,42 @@
     return typeName;
 }
 
-+ (NSArray *)devicesWithCatalogID:(NSString *)catalogID
+//htypeid=14
++(NSString *) bgmusicIDByRoom:(int) roomID
+{
+    FMDatabase *db = [self connetdb];
+    NSString *bgmusicID = @"";
+    if([db open])
+    {
+        NSString *sql;
+        if ([self isWholeHouse:roomID]) {
+            sql = @"SELECT id FROM Devices where htypeid = 14";
+        }else{
+            sql = [NSString stringWithFormat:@"SELECT id FROM Devices where htypeid = 14 and rid = %d",roomID];
+        }
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            bgmusicID = [resultSet stringForColumn:@"id"];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return bgmusicID;
+}
+
++ (NSArray *)devicesWithCatalogID:(NSString *)catalogID room:(int)roomID
 {
     FMDatabase *db = [self connetdb];
     NSMutableArray *names = [NSMutableArray new];
     if([db open])
     {
-        NSString *sql = [NSString stringWithFormat:@"SELECT id,NAME FROM Devices where htypeid = '%@'",catalogID];
+        NSString *sql;
+        if ([self isWholeHouse:roomID]) {
+            sql = [NSString stringWithFormat:@"SELECT id,NAME FROM Devices where htypeid = '%@'",catalogID];
+        }else{
+            sql = [NSString stringWithFormat:@"SELECT id,NAME FROM Devices where htypeid = '%@' and rid = %d",catalogID,roomID];
+        }
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {

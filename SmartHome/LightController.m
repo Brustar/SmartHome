@@ -132,7 +132,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self setNaviBarTitle:@"灯光"];
     [self initSwitch];
 
     self.scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
@@ -497,7 +497,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 
 #pragma mark - Local methods
 - (void)initiateMenuOptions:(NSString *)catalogID {
-    self.lights = [[SQLManager devicesWithCatalogID:catalogID] copy];
+    self.lights = [SQLManager devicesWithCatalogID:catalogID room:self.roomID];
     [self.contextMenuTableView reloadData];
 }
 
