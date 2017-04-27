@@ -10,4 +10,5 @@
 
 @interface CYLineLayout : UICollectionViewFlowLayout
 
+@property(nonatomic) int scrollOffset;
 @end

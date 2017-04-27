@@ -137,11 +137,13 @@ static NSString * const CYPhotoId = @"photo";
     }else{
         layout.itemSize = CGSizeMake(collectionW-90, collectionH-20);
     }
+
     //layout.itemSize = CGSizeMake(collectionW-110, collectionH-20);
     self.FirstCollectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
     self.FirstCollectionView.backgroundColor = [UIColor clearColor];
     self.FirstCollectionView.dataSource = self;
     self.FirstCollectionView.delegate = self;
+
     [self.view addSubview:self.FirstCollectionView];
     self.automaticallyAdjustsScrollViewInsets = NO;
     // 注册
@@ -216,6 +218,9 @@ static NSString * const CYPhotoId = @"photo";
         case TVtype:
             
             return @"TV";
+        case netTV:
+            
+            return @"TV";
         case camera:
             
             return @"camera";
@@ -278,8 +283,10 @@ static NSString * const CYPhotoId = @"photo";
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
-    cell.sceneLabel.text = self.deviceTypes[indexPath.row];
-    self.DeviceNameLabel.text = self.deviceTypes[indexPath.row];
+    
+    int offset = ((CYLineLayout *)self.FirstCollectionView.collectionViewLayout).scrollOffset;
+    self.DeviceNameLabel.text = self.deviceTypes[offset];
+    
     NSString *imgName = [NSString stringWithFormat:@"catalog_%ld",(long)indexPath.row];
     UIImage *img = [UIImage imageNamed:imgName];
     [cell.imageView sd_setImageWithURL:nil placeholderImage:img];
