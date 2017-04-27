@@ -107,6 +107,13 @@
     
     // 修改原有的偏移量
     proposedContentOffset.x += minDelta;
+    
+    if (([UIScreen mainScreen].bounds.size.height == 568.0)) {
+        self.scrollOffset = (proposedContentOffset.x-15)/(self.itemSize.width-75);
+    }else{
+        self.scrollOffset = (proposedContentOffset.x+5)/(self.itemSize.width-75);
+    }
+    
     return proposedContentOffset;
 }
 
