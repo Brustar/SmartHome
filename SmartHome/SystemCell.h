@@ -14,5 +14,6 @@
 
 @property (weak, nonatomic) IBOutlet UISwitch *turnSwitch;
 
+@property (weak, nonatomic) IBOutlet UIButton *sysyTemSwitchBtn;
 
 @end

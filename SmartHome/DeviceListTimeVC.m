@@ -8,10 +8,15 @@
 
 #import "DeviceListTimeVC.h"
 #import "IphoneAddSceneController.h"
-
+#import "IphoneNewAddSceneVC.h"
+#import "SQLManager.h"
+#import "Room.h"
 
 @interface DeviceListTimeVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (nonatomic,strong) UIButton * naviRightBtn;
+@property (nonatomic,strong) NSArray * roomList;
 
 @end
 
@@ -21,16 +26,31 @@
     [super viewDidLoad];
     [self initDataSource];
     self.title = @"定时器";
-    UIBarButtonItem *listItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"UO23"] style:UIBarButtonItemStylePlain target:self action:@selector(selectedDevice:)];
-//    UIBarButtonItem *editItem = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(clickEditBtn:)];
-    self.navigationItem.rightBarButtonItem = listItem;
-//    self.navigationItem.leftBarButtonItem = editItem;
+
+    self.roomList = [SQLManager getAllRoomsInfo];
+    
     UIView *view = [[UIView alloc] init];
     [view setBackgroundColor:[UIColor clearColor]];
     self.tableView.tableFooterView = view;
+    [self setupNaviBar];
     
 }
+- (void)setupNaviBar {
+    [self setNaviBarTitle:@"设备定时列表"]; //设置标题
+    
+    _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"deviceTimeadd" imgHighlight:@"deviceTimeadd" target:self action:@selector(rightBtnClicked:)];
 
+    [self setNaviBarRightBtn:_naviRightBtn];
+}
+-(void)rightBtnClicked:(UIButton *)btn
+{
+    UIStoryboard * SceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
+    IphoneNewAddSceneVC * iphoneNewAddScene = [SceneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneNewAddSceneVC"];
+    [self.navigationController pushViewController:iphoneNewAddScene animated:YES];
+    
+    
+
+}
 - (void)initDataSource {
     self.timerList = [[NSMutableArray alloc] init];
     DeviceInfo *device = [DeviceInfo defaultManager];
@@ -59,34 +79,58 @@
         [self.tableView reloadData];
     }
 }
-
--(void)selectedDevice:(UIBarButtonItem *)bbi
-{
-    UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-    IphoneAddSceneController * addSceneVC = [storyBoard instantiateViewControllerWithIdentifier:@"DeviceListTimeVC"];
-    
-    [self.navigationController pushViewController:addSceneVC animated:YES];
-    
-
-}
-
+//组
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    
+    return self.roomList.count;
 }
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    return 20.0f;
-//}
-
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 60, 20)];
-//    title.text = @"设备定时";
-//    return title;
-//}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//行
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.timerList.count;
+}
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    Room * room = self.roomList[section];
+    NSString * str = room.rName;
+
+    return str;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+    return 40.0f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if (self.tableView != tableView) {
+        return nil;
+    }
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 40)];
+    view.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
+    UILabel *label = [[UILabel alloc] init];
+    label.frame = CGRectMake(20, 0, 100, 30);
+    Room * room = self.roomList[section];
+    label.textAlignment = NSTextAlignmentLeft;
+    label.textColor = [UIColor whiteColor];
+    [label setText:room.rName];
+    [view addSubview:label];
+    
+    //上显示线
+    
+    UILabel *label1=[[ UILabel alloc ] initWithFrame : CGRectMake ( 0 , - 1 , view. frame . size . width , 1 )];
+    
+    label1. backgroundColor =[ UIColor whiteColor];
+    
+    [view addSubview :label1];
+    
+    //下显示线
+    
+    UILabel *Xlabel=[[ UILabel alloc ] initWithFrame : CGRectMake ( 0 , view. frame . size . height - 1 , view. frame . size . width , 1 )];
+    
+    Xlabel. backgroundColor =[ UIColor whiteColor];
+    
+    [view addSubview :Xlabel];
+    return view;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

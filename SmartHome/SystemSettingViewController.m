@@ -151,19 +151,24 @@
     if([openNum intValue] == 1)
     {
         cell.turnSwitch.on = YES;
+        [cell.sysyTemSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateNormal];
     }else{
         cell.turnSwitch.on = NO;
+        [cell.sysyTemSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
     }
+    cell.sysyTemSwitchBtn.tag = [self.recordIDs[indexPath.row] integerValue];
     cell.turnSwitch.tag = [self.recordIDs[indexPath.row] integerValue];
     [cell.turnSwitch addTarget:self action:@selector(changSwithchValue:) forControlEvents:UIControlEventValueChanged];
+    [cell.sysyTemSwitchBtn addTarget:self action:@selector(changSwithchValue:) forControlEvents:UIControlEventTouchUpInside];
     
     
     return cell;
     
 }
 
--(void)changSwithchValue:(UISwitch*)sender
+-(void)changSwithchValue:(UIButton *)sender
 {
+    sender.selected = !sender.selected;
     //体验
     DeviceInfo *device = [DeviceInfo defaultManager];
     if (![device.db isEqualToString:SMART_DB]) {
@@ -171,14 +176,16 @@
         return;
     }
     
-    if(sender.isOn)
+    if(sender.selected)
     {
+        [sender setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateNormal];
         [self sendRequsetForChangSwitch:[NSNumber numberWithInt:1] withTag:2 andSwitch:sender];
     }else{
+        [sender setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
         [self sendRequsetForChangSwitch:[NSNumber numberWithInt:2] withTag:3 andSwitch:sender];
     }
 }
--(void)sendRequsetForChangSwitch:(NSNumber *)num withTag:(int)tag andSwitch:(UISwitch *)sender
+-(void)sendRequsetForChangSwitch:(NSNumber *)num withTag:(int)tag andSwitch:(UIButton *)sender
 {
     NSString *url = [NSString stringWithFormat:@"%@Cloud/user_habit.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];

@@ -184,7 +184,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PushSettingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PushSettingCell" forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
+    cell.backgroundColor = [UIColor clearColor];
     cell.SettingNameLabel.text = _array[indexPath.row];
     cell.TypeLabel.hidden = YES;
     
@@ -318,7 +318,7 @@
         return nil;
     }
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, 40)];
-    view.backgroundColor = [UIColor clearColor];
+    view.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];;
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(kScreenSize.width-40, 0, 30, 30);
     button.tag = 101+section;

@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomViewController.h"
 
-@interface AreaSubSettingViewController : UIViewController
+@interface AreaSubSettingViewController : CustomViewController
 @property (nonatomic,strong) NSNumber  *usrID;
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UIButton *identityType;
