@@ -234,6 +234,8 @@
 		2EEE536B1E3061930026F97D /* IphoneDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EEE536A1E3061930026F97D /* IphoneDetailViewController.m */; };
 		2EEE536E1E309C5D0026F97D /* MyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EEE536D1E309C5D0026F97D /* MyView.m */; };
 		2EEFF74A1E9649A0008F2C7F /* IphoneNewAddSceneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EEFF7491E9649A0008F2C7F /* IphoneNewAddSceneVC.m */; };
+		2EF75C7C1EB2CAE00055147D /* ShortcutKeyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF75C791EB2CAE00055147D /* ShortcutKeyCell.m */; };
+		2EF75C7D1EB2CAE00055147D /* ShortcutKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF75C7B1EB2CAE00055147D /* ShortcutKeyViewController.m */; };
 		2EFB6B591E665C440058F305 /* UITabBar+BadgeValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB6B581E665C440058F305 /* UITabBar+BadgeValue.m */; };
 		2EFFECA11E12161100C13D3E /* FixTimeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFFECA01E12161100C13D3E /* FixTimeListViewController.m */; };
 		CD43046F1E0B674000B594F4 /* FamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD43046E1E0B674000B594F4 /* FamilyViewController.m */; };
@@ -905,6 +907,10 @@
 		2EEE536F1E309E510026F97D /* CGLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGLine.h; sourceTree = "<group>"; };
 		2EEFF7481E9649A0008F2C7F /* IphoneNewAddSceneVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneNewAddSceneVC.h; sourceTree = "<group>"; };
 		2EEFF7491E9649A0008F2C7F /* IphoneNewAddSceneVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneNewAddSceneVC.m; sourceTree = "<group>"; };
+		2EF75C781EB2CAE00055147D /* ShortcutKeyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortcutKeyCell.h; sourceTree = "<group>"; };
+		2EF75C791EB2CAE00055147D /* ShortcutKeyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortcutKeyCell.m; sourceTree = "<group>"; };
+		2EF75C7A1EB2CAE00055147D /* ShortcutKeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortcutKeyViewController.h; sourceTree = "<group>"; };
+		2EF75C7B1EB2CAE00055147D /* ShortcutKeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortcutKeyViewController.m; sourceTree = "<group>"; };
 		2EFB6B571E665C440058F305 /* UITabBar+BadgeValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+BadgeValue.h"; sourceTree = "<group>"; };
 		2EFB6B581E665C440058F305 /* UITabBar+BadgeValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+BadgeValue.m"; sourceTree = "<group>"; };
 		2EFFEC9F1E12161100C13D3E /* FixTimeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixTimeListViewController.h; sourceTree = "<group>"; };
@@ -2077,6 +2083,10 @@
 		2E20EBB21E8A325900891828 /* My */ = {
 			isa = PBXGroup;
 			children = (
+				2EF75C781EB2CAE00055147D /* ShortcutKeyCell.h */,
+				2EF75C791EB2CAE00055147D /* ShortcutKeyCell.m */,
+				2EF75C7A1EB2CAE00055147D /* ShortcutKeyViewController.h */,
+				2EF75C7B1EB2CAE00055147D /* ShortcutKeyViewController.m */,
 				CDB8B8511EB1D550003AA894 /* SceneShortcutsViewController.h */,
 				CDB8B8521EB1D550003AA894 /* SceneShortcutsViewController.m */,
 				CDB8B84E1EB1D4B4003AA894 /* UserInfoViewController.h */,
@@ -3186,6 +3196,7 @@
 				0FAF74C11CEEA17C00432713 /* HRColorCursor.m in Sources */,
 				CD7DDA131E825E9C00638DB3 /* RegistFirstStepViewController.m in Sources */,
 				F680AAB71DD94565001D1807 /* FamilyCell.m in Sources */,
+				2EF75C7D1EB2CAE00055147D /* ShortcutKeyViewController.m in Sources */,
 				2E7B64BF1E9B6796001F7469 /* IphoneNewAddSceneTimerVC.m in Sources */,
 				2E801EFF1E262B0B0039A6D9 /* WeekdaysVC.m in Sources */,
 				2EB516F41E9CE3A40064B18E /* ScreenCurtainCell.m in Sources */,
@@ -3318,6 +3329,7 @@
 				F663CA691D990138001F87F3 /* IphoneFixTimerController.m in Sources */,
 				F645BD471D76E3D8005BFB7A /* FavorController.m in Sources */,
 				2E6CEDBF1DE5DE8B000979BE /* DetailMSGViewController.m in Sources */,
+				2EF75C7C1EB2CAE00055147D /* ShortcutKeyCell.m in Sources */,
 				0FB42E231CF6F9E8007DE64F /* SocketManager.m in Sources */,
 				0F6AB86F1D782D9D0041E39C /* SunCount.m in Sources */,
 				0FCFB3861CF2912700B37DD3 /* TV.m in Sources */,
