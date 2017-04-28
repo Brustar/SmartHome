@@ -107,7 +107,6 @@
     
     _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     _baseTabbarController.tabbarPanel.hidden = YES;
-    [[RCIM sharedRCIM] logout];
     
     NSInteger status = _afNetworkReachabilityManager.networkReachabilityStatus;
     NSLog(@"NetworkReachabilityStatus: %ld", (long)status);
