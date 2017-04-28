@@ -32,11 +32,12 @@
     _roomID = roomID;
     if(roomID)
     {
-        self.deviceid = [SQLManager deviceIDWithRoomID:self.roomID withType:@"空调"];
+        self.deviceid = [SQLManager singleDeviceWithCatalogID:air byRoom:self.roomID];;
     }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setNaviBarTitle:@"空调"];
     self.params=@[@[@"制热",@"制冷",@"抽湿",@"自动"],@[@"向上",@"向下"],@[@"高风",@"中风",@"低风"],@[@"0.5H",@"1H",@"2H",@"3H"]];
     self.paramView.scrollEnabled=NO;
     
