@@ -16,7 +16,8 @@
 #import "UIImageView+Badge.h"
 #import "ORBSwitch.h"
 
-#define MAX_TEMP_ROTATE_DEGREE 240
+#define MAX_TEMP_ROTATE_DEGREE 285
+#define MIX_TEMP_ROTATE_DEGREE 75
 
 @interface AirController ()<RulerViewDatasource, RulerViewDelegate,UITableViewDataSource,UITableViewDelegate,ORBSwitchDelegate>
 @property (weak, nonatomic) IBOutlet RulerView *thermometerView;
@@ -28,8 +29,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *pm_clock_hand;
 @property (weak, nonatomic) IBOutlet UIImageView *humidity_hand;
 @property (weak, nonatomic) IBOutlet UIButton *disk;
+@property (weak, nonatomic) IBOutlet UILabel *tempretureLbl;
 
-//@property (nonatomic,strong) UIImageView *tempreturePan;
+@property (weak, nonatomic) IBOutlet UIView *container;
+
 @property (weak, nonatomic) IBOutlet UIImageView *tempreturePan;
 @property (nonatomic,strong) ORBSwitch *switcher;
 
@@ -84,12 +87,12 @@
 -(void) initSwitch
 {
     self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:[UIImage imageNamed:@"air_control_off"] inactiveBackgroundImage:nil activeBackgroundImage:nil frame:CGRectMake(0, 0, 122, 122)];
-    //self.switcher.center = CGPointMake(self.view.bounds.size.width / 2,self.view.bounds.size.height / 2);
     
     self.switcher.knobRelativeHeight = 1.0f;
     self.switcher.delegate = self;
-    [self.view addSubview:self.switcher];
-    
+
+    [self.container addSubview:self.switcher];
+    /*
     [self.switcher setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.switcher
                                                 attribute:NSLayoutAttributeCenterX
@@ -116,7 +119,7 @@
                                                 toItem:nil attribute:NSLayoutAttributeNotAnAttribute
                                                 multiplier:1.0f constant:122.0f]];
 
-    
+    */
 }
 
 -(IBAction)save:(id)sender
@@ -392,7 +395,7 @@
     }
     
     CGFloat radius = atan2f(self.tempreturePan.transform.b, self.tempreturePan.transform.a);
-    CGFloat degree = radius * (180 / M_PI);
+    CGFloat degree = radius * (180 / M_PI)+180;
     
     /**
      CGRectGetHeight 返回控件本身的高度
@@ -413,8 +416,8 @@
      atan2f 是求反正切函数 参考:http://blog.csdn.net/chinabinlang/article/details/6802686
      */
     CGFloat angle = atan2f(currentPoint.y - center.y, currentPoint.x - center.x) - atan2f(previousPoint.y - center.y, previousPoint.x - center.x);
-    
-    if (degree<0) {
+    NSLog(@"degree:%f",degree)
+    if (degree<75) {
         if (angle<0) {
             return;
         }
