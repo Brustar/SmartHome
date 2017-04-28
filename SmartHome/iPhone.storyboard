@@ -2160,11 +2160,8 @@
                                 </constraints>
                                 <state key="normal" image="save_icon_nc_normal"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="添加场景定时应用时段" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o3b-2k-elz">
-                                <rect key="frame" x="91" y="230" width="180" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="180" id="XL9-1h-C6g"/>
-                                </constraints>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="添加场景定时应用时段" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o3b-2k-elz">
+                                <rect key="frame" x="96" y="230" width="213" height="50"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2187,20 +2184,19 @@
                             <constraint firstItem="Sh5-e5-B6h" firstAttribute="leading" secondItem="FXD-oW-Orn" secondAttribute="leading" id="15y-Bs-cYu"/>
                             <constraint firstAttribute="trailing" secondItem="d8c-bw-KPD" secondAttribute="trailing" id="1N6-3b-R9g"/>
                             <constraint firstAttribute="trailing" secondItem="loQ-9b-Z5H" secondAttribute="trailing" id="1US-cv-xCO"/>
-                            <constraint firstItem="d8c-bw-KPD" firstAttribute="top" secondItem="o3b-2k-elz" secondAttribute="bottom" constant="10" id="4Qi-VI-NOH"/>
                             <constraint firstItem="TZx-YR-4jl" firstAttribute="leading" secondItem="FXD-oW-Orn" secondAttribute="leading" id="7An-aA-2t4"/>
                             <constraint firstItem="d8c-bw-KPD" firstAttribute="top" secondItem="y8h-8z-Wp6" secondAttribute="bottom" constant="20" id="9WS-cX-Qir"/>
                             <constraint firstItem="6p8-dz-db0" firstAttribute="top" secondItem="V2q-0O-QB0" secondAttribute="bottom" constant="100" id="Fax-j4-B8K"/>
                             <constraint firstItem="TZx-YR-4jl" firstAttribute="top" secondItem="hIr-OZ-mgh" secondAttribute="bottom" constant="15" id="Fte-KH-0VX"/>
                             <constraint firstItem="Rc0-DR-dG7" firstAttribute="leading" secondItem="FXD-oW-Orn" secondAttribute="leadingMargin" constant="20" id="GaM-XK-1IV"/>
                             <constraint firstItem="hIr-OZ-mgh" firstAttribute="top" secondItem="loQ-9b-Z5H" secondAttribute="bottom" constant="15" id="I5D-vD-Opg"/>
+                            <constraint firstItem="o3b-2k-elz" firstAttribute="top" secondItem="TZx-YR-4jl" secondAttribute="bottom" constant="10" id="JTe-WE-6jn"/>
                             <constraint firstItem="hIr-OZ-mgh" firstAttribute="leading" secondItem="FXD-oW-Orn" secondAttribute="leadingMargin" constant="20" id="MWA-Mz-VYr"/>
-                            <constraint firstItem="o3b-2k-elz" firstAttribute="top" secondItem="TZx-YR-4jl" secondAttribute="bottom" constant="10" id="NGO-wp-vL2"/>
                             <constraint firstItem="TZx-YR-4jl" firstAttribute="top" secondItem="Dyu-7c-Krm" secondAttribute="bottom" constant="20" id="P8e-VL-kG0"/>
                             <constraint firstItem="d8c-bw-KPD" firstAttribute="top" secondItem="Rc0-DR-dG7" secondAttribute="bottom" constant="15" id="Qxz-pN-1dq"/>
-                            <constraint firstItem="o3b-2k-elz" firstAttribute="leading" secondItem="Rc0-DR-dG7" secondAttribute="trailing" constant="15" id="X3T-SV-IDX"/>
                             <constraint firstItem="hIr-OZ-mgh" firstAttribute="top" secondItem="V2q-0O-QB0" secondAttribute="bottom" constant="100" id="ZGS-HT-Zbw"/>
                             <constraint firstItem="Rc0-DR-dG7" firstAttribute="top" secondItem="TZx-YR-4jl" secondAttribute="bottom" constant="15" id="cnk-TS-yTw"/>
+                            <constraint firstItem="o3b-2k-elz" firstAttribute="leading" secondItem="Rc0-DR-dG7" secondAttribute="trailing" constant="20" id="d5V-cf-vdg"/>
                             <constraint firstItem="6p8-dz-db0" firstAttribute="leading" secondItem="hIr-OZ-mgh" secondAttribute="trailing" constant="15" id="deX-SO-EzY"/>
                             <constraint firstItem="loQ-9b-Z5H" firstAttribute="leading" secondItem="FXD-oW-Orn" secondAttribute="leading" id="emN-pK-i7K"/>
                             <constraint firstItem="K8n-yC-cSR" firstAttribute="top" secondItem="Sh5-e5-B6h" secondAttribute="bottom" id="exm-8N-RYh"/>
@@ -2210,7 +2206,9 @@
                             <constraint firstItem="Sh5-e5-B6h" firstAttribute="top" secondItem="V2q-0O-QB0" secondAttribute="bottom" id="jMY-gS-xID"/>
                             <constraint firstItem="Dyu-7c-Krm" firstAttribute="top" secondItem="loQ-9b-Z5H" secondAttribute="bottom" constant="20" id="jkc-sr-txp"/>
                             <constraint firstItem="Dyu-7c-Krm" firstAttribute="leading" secondItem="hIr-OZ-mgh" secondAttribute="trailing" constant="13" id="lwi-0u-2wp"/>
+                            <constraint firstItem="d8c-bw-KPD" firstAttribute="top" secondItem="o3b-2k-elz" secondAttribute="bottom" constant="10" id="pe3-rU-BcY"/>
                             <constraint firstAttribute="trailing" secondItem="TZx-YR-4jl" secondAttribute="trailing" id="sAP-RY-8oP"/>
+                            <constraint firstItem="y8h-8z-Wp6" firstAttribute="leading" secondItem="o3b-2k-elz" secondAttribute="trailing" constant="20" id="vIA-Tp-R3L"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="另存为新场景" id="RrG-ev-znn">
@@ -2227,6 +2225,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="PushBtn" destination="y8h-8z-Wp6" id="r42-cF-Yhx"/>
+                        <outlet property="SceneTimingLabel" destination="o3b-2k-elz" id="cgJ-Uk-tan"/>
                         <outlet property="sceneImageBtn" destination="hIr-OZ-mgh" id="avI-5s-0m9"/>
                         <outlet property="sceneName" destination="6p8-dz-db0" id="wFc-n3-VzT"/>
                     </connections>

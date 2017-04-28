@@ -55,6 +55,9 @@
         }
     }else if (sender == self.NewLightSlider){
         
+    NSData *data=[[DeviceInfo defaultManager] changeBright:self.NewLightSlider.value*100 deviceID:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:2];
     }
     [device setDeviceID:[self.deviceid intValue]];
     [device setIsPoweron:device.isPoweron];
