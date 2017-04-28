@@ -37,5 +37,7 @@
 + (void) writeUserdefault:(id)object forKey:(NSString *)key;
 + (NSString *) fileMD5:(NSString*)path;
 + (NSString *) md5JsonByScenes:(NSString *)master;
++ (NSString *)sceneShortcutsPath;
++ (NSString *)sceneNonShortcutsPath;
 
 @end

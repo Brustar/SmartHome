@@ -35,6 +35,14 @@
     return [IOManager newPath:@"planeScene"];
 }
 
++ (NSString *)sceneShortcutsPath {
+    return [IOManager newPath:@"sceneShortcuts"];
+}
+
++ (NSString *)sceneNonShortcutsPath {
+    return [IOManager newPath:@"sceneNonShortcuts"];
+}
+
 + (NSString *) favoritePath
 {
     return [IOManager newPath:@"favorite"];

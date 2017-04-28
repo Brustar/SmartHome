@@ -131,7 +131,7 @@
         case 2:
                 if(indexPath.row == 0)
                 {
-                    title = @"场景设置";
+                    title = @"场景快捷键";
                 }else {
                     title = @"定时器";
                 }
@@ -223,6 +223,7 @@
 {
    UIStoryboard * MainBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIStoryboard * iphoneBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+    UIStoryboard *myInfoStoryBoard  = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
     if(indexPath.section == 0)
     {
         PushSettingController * pushVC = [MainBoard instantiateViewControllerWithIdentifier:@"PushSettingController"];
@@ -245,9 +246,9 @@
         
       }else if (indexPath.section == 2){
           if (indexPath.row == 0) {
-              //场景设置
-              IphoneSceneController * iphoneScene = [iphoneBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
-              [self.navigationController pushViewController:iphoneScene animated:YES];
+              //场景快捷键
+              SceneShortcutsViewController *vc = [myInfoStoryBoard instantiateViewControllerWithIdentifier:@"SceneShortcutsVC"];
+              [self.navigationController pushViewController:vc animated:YES];
           }else{
               //定时器
               DeviceListTimeVC * deviceList = [iphoneBoard instantiateViewControllerWithIdentifier:@"iPhoneDeviceListTimeVC"];
