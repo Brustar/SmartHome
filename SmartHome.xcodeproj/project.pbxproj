@@ -1,4 +1,3 @@
-
 // !$*UTF8*$!
 {
 	archiveVersion = 1;
@@ -113,7 +112,6 @@
 		0FB205E91CDC312A00B5E87E /* IOManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB205E81CDC312A00B5E87E /* IOManager.m */; };
 		0FB205ED1CDC3D3700B5E87E /* AudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB205EC1CDC3D3700B5E87E /* AudioManager.m */; };
 		0FB35C681DB0CECA00B48EA7 /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB35C671DB0CECA00B48EA7 /* Plugin.m */; };
-		0FB42E1E1CF681A7007DE64F /* planeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB42E1D1CF681A7007DE64F /* planeScene.m */; };
 		0FB42E231CF6F9E8007DE64F /* SocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB42E221CF6F9E8007DE64F /* SocketManager.m */; };
 		0FBEFE271D24A5020084244F /* netconfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0FBEFE261D24A5020084244F /* netconfig.plist */; };
 		0FBEFE2A1D24F0C10084244F /* WebManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FBEFE291D24F0C10084244F /* WebManager.m */; };
@@ -2635,8 +2633,8 @@
 				0F032D421CC9B12700D1920D /* Resources */,
 				9C97EFC5A754784A9B85D9D0 /* [CP] Embed Pods Frameworks */,
 				901B98770BA9652E39727DC8 /* [CP] Copy Pods Resources */,
-				96D783ECF2FC5954ED57287C /* 📦 Embed Pods Frameworks */,
-				4ABB1A0B0312B56BE2774A85 /* 📦 Copy Pods Resources */,
+				96D783ECF2FC5954ED57287C /* üì¶ Embed Pods Frameworks */,
+				4ABB1A0B0312B56BE2774A85 /* üì¶ Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2915,14 +2913,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		4ABB1A0B0312B56BE2774A85 /* 📦 Copy Pods Resources */ = {
+		4ABB1A0B0312B56BE2774A85 /* üì¶ Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "üì¶ Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3035,14 +3033,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		96D783ECF2FC5954ED57287C /* 📦 Embed Pods Frameworks */ = {
+		96D783ECF2FC5954ED57287C /* üì¶ Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "üì¶ Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3319,8 +3317,6 @@
 				0FC3DE851D236CFF00A03482 /* LoginController.m in Sources */,
 				F66596E31D3F25810082716A /* SceneCell.m in Sources */,
 				F6457C451DD5523C00CA3A72 /* IphoneFamilyViewController.m in Sources */,
-				0FB42E1E1CF681A7007DE64F /* planeScene.m in Sources */,
-				0FB42E1E1CF681A7007DE64F /* planeScene.m in Sources */,
 				F6423C221D9A4B7400AAB3CE /* DeviceOfFixTimerViewController.m in Sources */,
 				F60FDB421D00029900AB04BE /* DetailViewController.m in Sources */,
 				F66596E91D3F72CA0082716A /* AddSenseCell.m in Sources */,

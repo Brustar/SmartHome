@@ -11,5 +11,5 @@
 @interface UIImageView (Badge)
 
 -(void)badge;
-
+-(void) rotate:(int)degree;
 @end

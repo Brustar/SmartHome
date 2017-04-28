@@ -13,15 +13,26 @@
 #import "SocketManager.h"
 #import "PackManager.h"
 #import "SQLManager.h"
+#import "UIImageView+Badge.h"
+#import "ORBSwitch.h"
 
+#define MAX_TEMP_ROTATE_DEGREE 240
 
-@interface AirController ()<RulerViewDatasource, RulerViewDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface AirController ()<RulerViewDatasource, RulerViewDelegate,UITableViewDataSource,UITableViewDelegate,ORBSwitchDelegate>
 @property (weak, nonatomic) IBOutlet RulerView *thermometerView;
 @property (weak, nonatomic) IBOutlet UILabel *showTemLabel;
 @property (weak, nonatomic) IBOutlet UILabel *wetLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pmLabel;
 @property (weak, nonatomic) IBOutlet UILabel *noiseLabel;
 @property (weak, nonatomic) IBOutlet UITableView *paramView;
+@property (weak, nonatomic) IBOutlet UIImageView *pm_clock_hand;
+@property (weak, nonatomic) IBOutlet UIImageView *humidity_hand;
+@property (weak, nonatomic) IBOutlet UIButton *disk;
+
+//@property (nonatomic,strong) UIImageView *tempreturePan;
+@property (weak, nonatomic) IBOutlet UIImageView *tempreturePan;
+@property (nonatomic,strong) ORBSwitch *switcher;
+
 
 @end
 
@@ -38,6 +49,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setNaviBarTitle:@"空调"];
+    [self.pm_clock_hand rotate:90];
+    [self.humidity_hand rotate:45];
+    self.disk.enabled = NO;
+    [self initSwitch];
+    
+    
     self.params=@[@[@"制热",@"制冷",@"抽湿",@"自动"],@[@"向上",@"向下"],@[@"高风",@"中风",@"低风"],@[@"0.5H",@"1H",@"2H",@"3H"]];
     self.paramView.scrollEnabled=NO;
     
@@ -62,6 +79,44 @@
     
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
+}
+
+-(void) initSwitch
+{
+    self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:[UIImage imageNamed:@"air_control_off"] inactiveBackgroundImage:nil activeBackgroundImage:nil frame:CGRectMake(0, 0, 122, 122)];
+    //self.switcher.center = CGPointMake(self.view.bounds.size.width / 2,self.view.bounds.size.height / 2);
+    
+    self.switcher.knobRelativeHeight = 1.0f;
+    self.switcher.delegate = self;
+    [self.view addSubview:self.switcher];
+    
+    [self.switcher setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.switcher
+                                                attribute:NSLayoutAttributeCenterX
+                                                relatedBy:NSLayoutRelationEqual
+                                                toItem:self.tempreturePan
+                                                attribute:NSLayoutAttributeCenterX
+                                                multiplier:1.0
+                                                constant:0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.switcher
+                                                attribute:NSLayoutAttributeCenterY
+                                                relatedBy:NSLayoutRelationEqual
+                                                toItem:self.tempreturePan
+                                                attribute:NSLayoutAttributeCenterY
+                                                multiplier:1.0
+                                                constant:0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.switcher
+                                                attribute:NSLayoutAttributeWidth
+                                                relatedBy:NSLayoutRelationEqual
+                                                toItem:nil attribute:NSLayoutAttributeNotAnAttribute
+                                                multiplier:1.0f constant:122.0f]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.switcher
+                                                attribute:NSLayoutAttributeHeight
+                                                relatedBy:NSLayoutRelationEqual
+                                                toItem:nil attribute:NSLayoutAttributeNotAnAttribute
+                                                multiplier:1.0f constant:122.0f]];
+
+    
 }
 
 -(IBAction)save:(id)sender
@@ -311,4 +366,76 @@
 - (CGFloat)rulerViewLeftTagTopMargin:(RulerView *)rulerView {
     return 300;
 }
+
+#pragma mark - ORBSwitchDelegate
+- (void)orbSwitchToggled:(ORBSwitch *)switchObj withNewValue:(BOOL)newValue {
+    NSLog(@"Switch toggled: new state is %@", (newValue) ? @"ON" : @"OFF");
+    [self save:self.switcher];
+}
+
+- (void)orbSwitchToggleAnimationFinished:(ORBSwitch *)switchObj {
+    [switchObj setCustomKnobImage:[UIImage imageNamed:(switchObj.isOn) ? @"air_control_cool" : @"air_control_off"]
+          inactiveBackgroundImage:nil
+            activeBackgroundImage:nil];
+    
+}
+
+#pragma mark - UITouchDelegate
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    
+    UITouch *touch = [touches anyObject];
+    
+    NSUInteger toucheNum = [[event allTouches] count];//有几个手指触摸屏幕
+    if ( toucheNum > 1 ) {
+        return;//多个手指不执行旋转
+    }
+    
+    CGFloat radius = atan2f(self.tempreturePan.transform.b, self.tempreturePan.transform.a);
+    CGFloat degree = radius * (180 / M_PI);
+    
+    /**
+     CGRectGetHeight 返回控件本身的高度
+     CGRectGetMinY 返回控件顶部的坐标
+     CGRectGetMaxY 返回控件底部的坐标
+     CGRectGetMinX 返回控件左边的坐标
+     CGRectGetMaxX 返回控件右边的坐标
+     CGRectGetMidX 表示得到一个frame中心点的X坐标
+     CGRectGetMidY 表示得到一个frame中心点的Y坐标
+     */
+    
+    CGPoint center = CGPointMake(CGRectGetMidX([touch.view bounds]), CGRectGetMidY([touch.view bounds]));
+    CGPoint currentPoint = [touch locationInView:touch.view];//当前手指的坐标
+    CGPoint previousPoint = [touch previousLocationInView:touch.view];//上一个坐标
+    
+    /**
+     求得每次手指移动变化的角度
+     atan2f 是求反正切函数 参考:http://blog.csdn.net/chinabinlang/article/details/6802686
+     */
+    CGFloat angle = atan2f(currentPoint.y - center.y, currentPoint.x - center.x) - atan2f(previousPoint.y - center.y, previousPoint.x - center.x);
+    
+    if (degree<0) {
+        if (angle<0) {
+            return;
+        }
+    }else if (degree>MAX_TEMP_ROTATE_DEGREE) {
+        if (angle>0) {
+            return;
+        }
+    }
+    self.tempreturePan.transform = CGAffineTransformRotate(self.tempreturePan.transform, angle);
+    
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    CGFloat radius = atan2f(self.tempreturePan.transform.b, self.tempreturePan.transform.a);
+    CGFloat degree = radius * (180 / M_PI);
+    NSLog(@"degree:%f",degree);
+    int percent = degree*100/MAX_TEMP_ROTATE_DEGREE;
+    NSLog(@"percent:%d",percent);
+    self.tempreturePan.tag = percent;
+    [self save:self.tempreturePan];
+}
+
 @end
