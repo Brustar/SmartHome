@@ -18,6 +18,7 @@
 @property (nonatomic,strong) UIImage *selectSceneImg;
 @property (nonatomic,strong) UIButton * naviRightBtn;
 @property (weak, nonatomic) IBOutlet UIButton *PushBtn;//定时跳转按钮
+@property (weak, nonatomic) IBOutlet UILabel *SceneTimingLabel;//显示场景的定时的具体时间段
 
 @end
 

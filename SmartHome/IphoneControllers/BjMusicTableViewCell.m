@@ -11,6 +11,10 @@
 #import "SocketManager.h"
 #import "SceneManager.h"
 #import "BgMusic.h"
+#import "AudioManager.h"
+
+
+#define BLUETOOTH_MUSIC false
 
 @implementation BjMusicTableViewCell
 
@@ -44,7 +48,14 @@
             [self.AddBjmusicBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
         }
     }else if (sender == self.BjSlider){
-        
+        NSData *data=[[DeviceInfo defaultManager] changeVolume:self.BjSlider.value deviceID:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+//        self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.BjSlider.value];
+        if (BLUETOOTH_MUSIC) {
+            AudioManager *audio=[AudioManager defaultManager];
+            [audio.musicPlayer setVolume:self.BjSlider.value/100.0];
+        }
     }
     BgMusic *device=[[BgMusic alloc] init];
     [device setDeviceID:[self.deviceid intValue]];

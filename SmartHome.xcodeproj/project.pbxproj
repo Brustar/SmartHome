@@ -235,6 +235,7 @@
 		2EEFF74A1E9649A0008F2C7F /* IphoneNewAddSceneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EEFF7491E9649A0008F2C7F /* IphoneNewAddSceneVC.m */; };
 		2EF75C7C1EB2CAE00055147D /* ShortcutKeyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF75C791EB2CAE00055147D /* ShortcutKeyCell.m */; };
 		2EF75C7D1EB2CAE00055147D /* ShortcutKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF75C7B1EB2CAE00055147D /* ShortcutKeyViewController.m */; };
+		2EF75C811EB32D390055147D /* DeviceTimingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF75C801EB32D390055147D /* DeviceTimingViewController.m */; };
 		2EFB6B591E665C440058F305 /* UITabBar+BadgeValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB6B581E665C440058F305 /* UITabBar+BadgeValue.m */; };
 		2EFFECA11E12161100C13D3E /* FixTimeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFFECA01E12161100C13D3E /* FixTimeListViewController.m */; };
 		CD43046F1E0B674000B594F4 /* FamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD43046E1E0B674000B594F4 /* FamilyViewController.m */; };
@@ -910,6 +911,8 @@
 		2EF75C791EB2CAE00055147D /* ShortcutKeyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortcutKeyCell.m; sourceTree = "<group>"; };
 		2EF75C7A1EB2CAE00055147D /* ShortcutKeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortcutKeyViewController.h; sourceTree = "<group>"; };
 		2EF75C7B1EB2CAE00055147D /* ShortcutKeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortcutKeyViewController.m; sourceTree = "<group>"; };
+		2EF75C7F1EB32D390055147D /* DeviceTimingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceTimingViewController.h; sourceTree = "<group>"; };
+		2EF75C801EB32D390055147D /* DeviceTimingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceTimingViewController.m; sourceTree = "<group>"; };
 		2EFB6B571E665C440058F305 /* UITabBar+BadgeValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+BadgeValue.h"; sourceTree = "<group>"; };
 		2EFB6B581E665C440058F305 /* UITabBar+BadgeValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+BadgeValue.m"; sourceTree = "<group>"; };
 		2EFFEC9F1E12161100C13D3E /* FixTimeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixTimeListViewController.h; sourceTree = "<group>"; };
@@ -2314,6 +2317,7 @@
 		2EEFF7471E96495D008F2C7F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2EF75C7E1EB329140055147D /* Timing */,
 				2E8715D01EA06EB3006D3FB0 /* MusicController */,
 				2E7B64BC1E9B66FA001F7469 /* SceneEditVC */,
 				2E7B64BB1E9B66A9001F7469 /* SceneAddVC */,
@@ -2321,6 +2325,15 @@
 				2E7B64B91E9B666A001F7469 /* FirstVC */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		2EF75C7E1EB329140055147D /* Timing */ = {
+			isa = PBXGroup;
+			children = (
+				2EF75C7F1EB32D390055147D /* DeviceTimingViewController.h */,
+				2EF75C801EB32D390055147D /* DeviceTimingViewController.m */,
+			);
+			name = Timing;
 			sourceTree = "<group>";
 		};
 		5CEAD34143E7289FAFA6E86D /* Pods */ = {
@@ -3299,6 +3312,7 @@
 				0FA86BAD1E72445000DC177E /* LLViewController.m in Sources */,
 				2EBABC731E835EC70093EF3A /* AireTableViewCell.m in Sources */,
 				F65AF6D41D3370770048A4E5 /* ProfileFaultsViewController.m in Sources */,
+				2EF75C811EB32D390055147D /* DeviceTimingViewController.m in Sources */,
 				2E8715CF1EA05D97006D3FB0 /* EFCircularSlider.m in Sources */,
 				0F96A1671D17F37C00E1594F /* RulerView.m in Sources */,
 				0FB205E91CDC312A00B5E87E /* IOManager.m in Sources */,

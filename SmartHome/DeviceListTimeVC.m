@@ -17,6 +17,7 @@
 
 @property (nonatomic,strong) UIButton * naviRightBtn;
 @property (nonatomic,strong) NSArray * roomList;
+@property (nonatomic,strong) Room * room;
 
 @end
 
@@ -28,7 +29,7 @@
     self.title = @"定时器";
 
     self.roomList = [SQLManager getAllRoomsInfo];
-    
+   
     UIView *view = [[UIView alloc] init];
     [view setBackgroundColor:[UIColor clearColor]];
     self.tableView.tableFooterView = view;
@@ -46,9 +47,13 @@
 {
     UIStoryboard * SceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
     IphoneNewAddSceneVC * iphoneNewAddScene = [SceneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneNewAddSceneVC"];
+     for (_room in self.roomList) {
+        if ([SQLManager isWholeHouse:_room.rId]) {
+            iphoneNewAddScene.roomID = _room.rId;
+        }
+    }
+    
     [self.navigationController pushViewController:iphoneNewAddScene animated:YES];
-    
-    
 
 }
 - (void)initDataSource {
@@ -91,8 +96,8 @@
 }
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    Room * room = self.roomList[section];
-    NSString * str = room.rName;
+    _room = self.roomList[section];
+    NSString * str = _room.rName;
 
     return str;
 }
@@ -106,7 +111,8 @@
         return nil;
     }
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 40)];
-    view.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
+//    view.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
+    view.backgroundColor = [UIColor clearColor];
     UILabel *label = [[UILabel alloc] init];
     label.frame = CGRectMake(20, 0, 100, 30);
     Room * room = self.roomList[section];

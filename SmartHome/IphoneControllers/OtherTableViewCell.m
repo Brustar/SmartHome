@@ -12,6 +12,7 @@
 #import "Light.h"
 #import "SocketManager.h"
 #import "SceneManager.h"
+#import "Amplifier.h"
 
 @implementation OtherTableViewCell
 
@@ -41,9 +42,9 @@
         }
     }
     
-    Light *device=[[Light alloc] init];
+    Amplifier *device=[[Amplifier alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
-    [device setIsPoweron:device.isPoweron];
+    [device setWaiting: device.waiting];
     
     [_scene setSceneID:[self.sceneid intValue]];
     [_scene setRoomID:self.roomID];
