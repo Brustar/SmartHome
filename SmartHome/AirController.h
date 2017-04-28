@@ -1,3 +1,4 @@
+#include "CustomViewController.h"
 //
 //  AirController.h
 //  SmartHome
@@ -13,7 +14,7 @@ enum AIR_TARGET
     timing
 };
 
-@interface AirController : UIViewController
+@interface AirController : CustomViewController
 
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic,weak) NSString *deviceid;

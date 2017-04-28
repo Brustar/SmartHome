@@ -102,7 +102,7 @@ BOOL animating;
     [self setNaviBarTitle:@"背景音乐"];
     [self initButtons];
     
-    self.deviceid = [SQLManager bgmusicIDByRoom:self.roomID];
+    self.deviceid = [SQLManager singleDeviceWithCatalogID:bgmusic byRoom:self.roomID];
     
     float vol = BLUETOOTH_MUSIC ? 0 : [[AVAudioSession sharedInstance] outputVolume];
     self.volume.value=vol*100;

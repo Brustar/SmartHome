@@ -72,8 +72,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title=@"窗帘";
-    
+
+    [self setNaviBarTitle:@"窗帘"];
     // Do any additional setup after loading the view.
     
     self.tableView.delegate = self;
@@ -215,7 +215,8 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.label.text = [self.curNames objectAtIndex:indexPath.row];
     cell.deviceid = [self.curtainIDArr objectAtIndex:indexPath.row];
-    
+    cell.AddcurtainBtn.hidden = YES;
+    cell.curtainContraint.constant = 10;
     return cell;
     
     
@@ -238,7 +239,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60;
+    return 100;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

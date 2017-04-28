@@ -223,27 +223,27 @@
 }
 
 //htypeid=14
-+(NSString *) bgmusicIDByRoom:(int) roomID
++(NSString *) singleDeviceWithCatalogID:(int)catalogID byRoom:(int)roomID
 {
     FMDatabase *db = [self connetdb];
-    NSString *bgmusicID = @"";
+    NSString *deviceID = @"";
     if([db open])
     {
         NSString *sql;
         if ([self isWholeHouse:roomID]) {
-            sql = @"SELECT id FROM Devices where htypeid = 14";
+            sql = [NSString stringWithFormat:@"SELECT id FROM Devices where htypeid = %d",catalogID];
         }else{
-            sql = [NSString stringWithFormat:@"SELECT id FROM Devices where htypeid = 14 and rid = %d",roomID];
+            sql = [NSString stringWithFormat:@"SELECT id FROM Devices where htypeid = %d and rid = %d",catalogID,roomID];
         }
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
-            bgmusicID = [resultSet stringForColumn:@"id"];
+            deviceID = [resultSet stringForColumn:@"id"];
         }
     }
     [db closeOpenResultSets];
     [db close];
-    return bgmusicID;
+    return deviceID;
 }
 
 + (NSArray *)devicesWithCatalogID:(NSString *)catalogID room:(int)roomID
@@ -261,9 +261,7 @@
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
-            
             NSDictionary *dic = @{@"id":[resultSet stringForColumn:@"id"],@"name":[resultSet stringForColumn:@"NAME"]};
-            
             [names addObject:dic];
         }
     }
@@ -391,13 +389,13 @@
         DeviceInfo *device = [DeviceInfo defaultManager];
         if ([device.db isEqualToString:SMART_DB]) {
             if ([self isWholeHouse:roomID]) {
-                sql = [NSString stringWithFormat:@"SELECT distinct typeName,subtypeid FROM Devices where masterID = '%ld' and subTypeId<>6 order by subTypeId,htypeID ASC",[[DeviceInfo defaultManager] masterID]];
+                sql = [NSString stringWithFormat:@"SELECT distinct typeName,subtypeid FROM Devices where masterID = '%ld' and subTypeId<>6 and htypeid<>45 order by subTypeId,htypeID ASC",[[DeviceInfo defaultManager] masterID]];
             }else{
-                sql = [NSString stringWithFormat:@"SELECT distinct typeName,subtypeid FROM Devices where rID = %ld and masterID = '%ld' and subTypeId<>6 order by subTypeId,htypeID ASC",(long)roomID,[[DeviceInfo defaultManager] masterID]];
+                sql = [NSString stringWithFormat:@"SELECT distinct typeName,subtypeid FROM Devices where rID = %ld and masterID = '%ld' and subTypeId<>6 and htypeid<>45 order by subTypeId,htypeID ASC",(long)roomID,[[DeviceInfo defaultManager] masterID]];
             }
         }else {
             
-            sql = [NSString stringWithFormat:@"SELECT distinct typeName,subtypeid FROM Devices where rID = %ld and masterID = '%ld' and subTypeId<>6 order by subTypeId,htypeID ASC",(long)roomID, 255l];
+            sql = [NSString stringWithFormat:@"SELECT distinct typeName,subtypeid FROM Devices where rID = %ld and masterID = '%ld' and subTypeId<>6 and htypeid<>45 order by subTypeId,htypeID ASC",(long)roomID, 255l];
         }
         
         FMResultSet *resultSet = [db executeQuery:sql];
@@ -735,6 +733,7 @@
     [db close];
     return [array copy];
 }
+
 +(NSArray *)getDeviceBysubTypeid:(NSString  *)subtypeid andRoomID:(NSInteger)roomID
 {
     NSMutableArray *array = [NSMutableArray array];
@@ -745,13 +744,14 @@
         
         DeviceInfo *device = [DeviceInfo defaultManager];
         if ([device.db isEqualToString:SMART_DB]) {
-            
-            sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and subtypeid = \'%@\' and masterID = '%ld'",(long)roomID,subtypeid,[[DeviceInfo defaultManager] masterID]];
+            if ([self isWholeHouse:roomID]) {
+                sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where subtypeid = \'%@\' and masterID = '%ld'",subtypeid,[[DeviceInfo defaultManager] masterID]];
+            }else{
+            sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and subtypeid = \'%@\' and masterID = '%ld'",roomID,subtypeid,[[DeviceInfo defaultManager] masterID]];
+            }
         }else {
             sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and subtypeid = \'%@\' and masterID = '%ld'",(long)roomID,subtypeid, 255l];
         }
-        
-        
         
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
