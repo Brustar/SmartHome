@@ -1,4 +1,3 @@
-
 // !$*UTF8*$!
 {
 	archiveVersion = 1;
@@ -148,6 +147,8 @@
 		0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7B0B51D1380BF003C2D52 /* AirController.m */; };
 		0FF92B661D9224640098DD54 /* TVChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF92B651D9224640098DD54 /* TVChannel.m */; };
 		2E0297271E4C4C7600BBC520 /* MySubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0297261E4C4C7600BBC520 /* MySubView.m */; };
+		2E04198B1EB89F42004D70B9 /* FSLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0419881EB89F42004D70B9 /* FSLineChart.m */; };
+		2E04198C1EB89F42004D70B9 /* UIColor+FSPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E04198A1EB89F42004D70B9 /* UIColor+FSPalette.m */; };
 		2E12CC0A1E7F5DC400C7D006 /* FirstSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CC091E7F5DC400C7D006 /* FirstSceneViewController.m */; };
 		2E12CC101E7F5E3000C7D006 /* CYLineLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CC0C1E7F5E3000C7D006 /* CYLineLayout.m */; };
 		2E12CC111E7F5E3000C7D006 /* CYPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CC0E1E7F5E3000C7D006 /* CYPhotoCell.m */; };
@@ -771,6 +772,10 @@
 		0FF92B651D9224640098DD54 /* TVChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVChannel.m; sourceTree = "<group>"; };
 		2E0297251E4C4C7600BBC520 /* MySubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySubView.h; sourceTree = "<group>"; };
 		2E0297261E4C4C7600BBC520 /* MySubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySubView.m; sourceTree = "<group>"; };
+		2E0419871EB89F42004D70B9 /* FSLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSLineChart.h; sourceTree = "<group>"; };
+		2E0419881EB89F42004D70B9 /* FSLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSLineChart.m; sourceTree = "<group>"; };
+		2E0419891EB89F42004D70B9 /* UIColor+FSPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FSPalette.h"; sourceTree = "<group>"; };
+		2E04198A1EB89F42004D70B9 /* UIColor+FSPalette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FSPalette.m"; sourceTree = "<group>"; };
 		2E0927BA1EB2105B007AEBD1 /* UIView+Uitls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Uitls.h"; sourceTree = "<group>"; };
 		2E12CC081E7F5DC400C7D006 /* FirstSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstSceneViewController.h; sourceTree = "<group>"; };
 		2E12CC091E7F5DC400C7D006 /* FirstSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstSceneViewController.m; sourceTree = "<group>"; };
@@ -2077,6 +2082,17 @@
 			name = Devices;
 			sourceTree = "<group>";
 		};
+		2E0419861EB89F42004D70B9 /* FSLineChart */ = {
+			isa = PBXGroup;
+			children = (
+				2E0419871EB89F42004D70B9 /* FSLineChart.h */,
+				2E0419881EB89F42004D70B9 /* FSLineChart.m */,
+				2E0419891EB89F42004D70B9 /* UIColor+FSPalette.h */,
+				2E04198A1EB89F42004D70B9 /* UIColor+FSPalette.m */,
+			);
+			path = FSLineChart;
+			sourceTree = "<group>";
+		};
 		2E12CC131E7FC00A00C7D006 /* SceneViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -2198,6 +2214,7 @@
 		2EA2A84B1E1E294D00092D41 /* Energy */ = {
 			isa = PBXGroup;
 			children = (
+				2E0419861EB89F42004D70B9 /* FSLineChart */,
 				2EA99E8E1E1C9A0100659065 /* MySubEnergyVC.h */,
 				2EA99E8F1E1C9A0100659065 /* MySubEnergyVC.m */,
 				2EA2A8481E1E275900092D41 /* MySubEnergyCell.h */,
@@ -2650,8 +2667,8 @@
 				0F032D421CC9B12700D1920D /* Resources */,
 				9C97EFC5A754784A9B85D9D0 /* [CP] Embed Pods Frameworks */,
 				901B98770BA9652E39727DC8 /* [CP] Copy Pods Resources */,
-				96D783ECF2FC5954ED57287C /* üì¶ Embed Pods Frameworks */,
-				4ABB1A0B0312B56BE2774A85 /* üì¶ Copy Pods Resources */,
+				96D783ECF2FC5954ED57287C /* Ô£ø√º√¨¬∂ Embed Pods Frameworks */,
+				4ABB1A0B0312B56BE2774A85 /* Ô£ø√º√¨¬∂ Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2931,14 +2948,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		4ABB1A0B0312B56BE2774A85 /* üì¶ Copy Pods Resources */ = {
+		4ABB1A0B0312B56BE2774A85 /* Ô£ø√º√¨¬∂ Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "üì¶ Copy Pods Resources";
+			name = "Ô£ø√º√¨¬∂ Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3051,14 +3068,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		96D783ECF2FC5954ED57287C /* üì¶ Embed Pods Frameworks */ = {
+		96D783ECF2FC5954ED57287C /* Ô£ø√º√¨¬∂ Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "üì¶ Embed Pods Frameworks";
+			name = "Ô£ø√º√¨¬∂ Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3360,6 +3377,7 @@
 				0F8D76D01D9A1B9700DDD063 /* Schedule.m in Sources */,
 				0F96A1661D17F37C00E1594F /* RulerLeftTagView.m in Sources */,
 				0FCF43311CE09039009BFDD9 /* IbeaconManager.m in Sources */,
+				2E04198B1EB89F42004D70B9 /* FSLineChart.m in Sources */,
 				0FCFB3801CF28F6F00B37DD3 /* Light.m in Sources */,
 				0FAF74C21CEEA17C00432713 /* HRColorInfoView.m in Sources */,
 				0FCFB39B1CF2950D00B37DD3 /* BgMusic.m in Sources */,
@@ -3374,6 +3392,7 @@
 				F62CFA441DAC90DD006410F7 /* IphoneSaveNewSceneController.m in Sources */,
 				2EC8A5901E372C51002A5042 /* IphoneDeviceLightVC.m in Sources */,
 				F6642A781D41F55E0003D56B /* ScenseSplitViewController.m in Sources */,
+				2E04198C1EB89F42004D70B9 /* UIColor+FSPalette.m in Sources */,
 				F663CA631D98C5FE001F87F3 /* IphoneAddSceneController.m in Sources */,
 				2ED42B931E35B41E00592A03 /* IphoneAirCell.m in Sources */,
 				CDEC86951E9A21F4009EC245 /* RoomStatus.m in Sources */,
