@@ -10,7 +10,9 @@
 
 @interface MySubEnergyCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *deviceName;
-@property (weak, nonatomic) IBOutlet UILabel *energyTime;
+@property (weak, nonatomic) IBOutlet UILabel *DayKWLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *ImageView;
+@property (weak, nonatomic) IBOutlet UILabel *MonthKWLabel;
+@property (weak, nonatomic) IBOutlet UILabel *TotalKWLabel;
 
 @end

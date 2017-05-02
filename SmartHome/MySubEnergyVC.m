@@ -11,9 +11,15 @@
 #import "MBProgressHUD+NJ.h"
 #import "MySubEnergyCell.h"
 #import "ENenViewController.h"
+#import "FSLineChart.h"
+#import "UIColor+FSPalette.h"
+
 
 @interface MySubEnergyVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *TimerView;
+@property (weak, nonatomic) IBOutlet UIView *deviceTitleLabel;
+@property (weak, nonatomic) IBOutlet FSLineChart *chartWithDates;
 
 @property (nonatomic,strong) NSMutableArray * enameArr;
 @property (nonatomic,strong) NSMutableArray * minute_timeArr;
@@ -50,7 +56,8 @@
     // Do any additional setup after loading the view.
     
     self.title = @"我的能耗";
-    
+     self.TimerView.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
+    self.deviceTitleLabel.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
     DeviceInfo *device = [DeviceInfo defaultManager];
     if ([device.db isEqualToString:SMART_DB]) {
         [self sendRequestToGetEenrgy];
@@ -70,6 +77,40 @@
     UIView *view = [[UIView alloc] init];
     [view setBackgroundColor:[UIColor clearColor]];
     self.tableView.tableFooterView = view;
+     [self loadChartWithDates];//下面的曲线图
+}
+#pragma mark - Setting up the chart
+
+- (void)loadChartWithDates {
+    
+    NSMutableArray* chartData = [NSMutableArray arrayWithCapacity:7];
+    for(int i=0;i<7;i++) {
+        chartData[i] = [NSNumber numberWithFloat: (float)i / 30.0f + (float)(rand() % 100) / 100.0f];
+    }
+//    NSArray * chartData = @[@"0",@"50",@"100",@"150",@"200",@"250",@"300"];
+    
+    NSArray* months = @[@"01", @"05", @"10", @"15", @"20", @"25", @"30"];
+    
+    // Setting up the line chart
+    _chartWithDates.verticalGridStep = 7;
+    _chartWithDates.horizontalGridStep = 6;
+    _chartWithDates.fillColor = nil;
+    _chartWithDates.displayDataPoint = YES;
+    _chartWithDates.dataPointColor = [UIColor whiteColor];
+    _chartWithDates.dataPointBackgroundColor = [UIColor whiteColor];
+    _chartWithDates.dataPointRadius = 3;
+    _chartWithDates.color = [_chartWithDates.dataPointColor colorWithAlphaComponent:0.3];
+    _chartWithDates.valueLabelPosition = ValueLabelLeft;
+    
+    _chartWithDates.labelForIndex = ^(NSUInteger item) {
+        return months[item];
+    };
+    
+    _chartWithDates.labelForValue = ^(CGFloat value) {
+        return [NSString stringWithFormat:@"%.02f", value];
+    };
+    
+    [_chartWithDates setChartData:chartData];//下面的曲线图
 }
 -(void)sendRequestToGetEenrgy
 {
@@ -103,6 +144,29 @@
         }
     }
 }
+
+#pragma mark - Table view data source
+
+-(void)viewDidLayoutSubviews {
+    
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+        
+    }
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)])  {
+        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
+    
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPat{
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]){
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+}
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -119,8 +183,10 @@
 {
      MySubEnergyCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         NSDictionary * dict = self.enameArr[indexPath.row];
+        cell.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
+//    cell.backgroundColor = [UIColor clearColor];
         cell.deviceName.text =[NSString stringWithFormat:@"%@", dict[@"ename"]];
-        cell.energyTime.text = [NSString stringWithFormat:@"%.1fhr",[dict[@"minute_time"] floatValue]/60];
+        cell.DayKWLabel.text = [NSString stringWithFormat:@"%.1fhr",[dict[@"minute_time"] floatValue]/60];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }

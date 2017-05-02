@@ -2774,7 +2774,7 @@
         <!--我的能耗复写-->
         <scene sceneID="nCp-MM-76D">
             <objects>
-                <viewController storyboardIdentifier="MyEnergyViewController" id="es0-Jd-i0V" userLabel="我的能耗复写" customClass="MySubEnergyVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyEnergyViewController" id="es0-Jd-i0V" userLabel="我的能耗复写" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Xrd-uH-KgA"/>
                         <viewControllerLayoutGuide type="bottom" id="OiC-Dr-EB3"/>
@@ -8833,24 +8833,24 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fbq-wi-BCv"/>
+        <segue reference="a9T-LN-ZVX"/>
         <segue reference="ya3-gG-p8O"/>
-        <segue reference="PRs-sg-E1F"/>
+        <segue reference="mRk-xU-xJj"/>
         <segue reference="nIi-Kc-QDm"/>
         <segue reference="uCb-ME-O7C"/>
         <segue reference="tmA-nZ-aS8"/>
         <segue reference="3pI-26-H7E"/>
         <segue reference="U1p-eR-Biy"/>
+        <segue reference="fHn-Cm-7Q7"/>
+        <segue reference="vKk-7C-VKf"/>
         <segue reference="Vzc-yi-Jnw"/>
-        <segue reference="a9T-LN-ZVX"/>
-        <segue reference="vdf-Gi-dZf"/>
-        <segue reference="JQm-bA-TWz"/>
         <segue reference="pWG-oz-Opr"/>
+        <segue reference="JQm-bA-TWz"/>
         <segue reference="tt4-nB-rfe"/>
+        <segue reference="vdf-Gi-dZf"/>
         <segue reference="l23-e3-J0C"/>
         <segue reference="tdV-sS-d5j"/>
         <segue reference="X9P-hg-DXo"/>
-        <segue reference="fHn-Cm-7Q7"/>
-        <segue reference="vKk-7C-VKf"/>
+        <segue reference="fbq-wi-BCv"/>
     </inferredMetricsTieBreakers>
 </document>

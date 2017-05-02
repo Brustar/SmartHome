@@ -19,7 +19,7 @@ target 'SmartHome' do
 
     pod 'RongCloudIMKit'
     
-	pod 'FSLineChart'
+#	pod 'FSLineChart'
 	pod 'libWeChatSDK', '~>1.5'
 	pod 'AliPay', '~> 2.1.2'
     #pod 'ReactiveCocoa', '~> 5.0.0'
