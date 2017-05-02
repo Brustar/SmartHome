@@ -157,40 +157,43 @@ static NSString *const airCellIdentifier = @"airCell";
 }
 - (IBAction)changeMode:(id)sender {
     uint8_t cmd=0;
-    NSArray *imgBlue = @[@"cool",@"heat",@"wet",@"wind"];
-    NSArray *imgRed = @[@"cool_red",@"heat_red",@"wet_red",@"wind_red"];
+    NSArray *imgBlue = @[@"cool",@"heat",@"wet",@"wind",@""];
+    NSArray *imgRed = @[@"cool_red",@"heat_red",@"wet_red",@"wind_red",@""];
     UIButton *btn = (UIButton *)sender;
-    self.currentIndex=(int)btn.tag;
+    self.currentMode=(int)btn.tag;
     [btn setTitleColor:[UIColor colorWithRed:215/255.0 green:57/255.0 blue:78/255.0 alpha:1.0] forState:UIControlStateNormal];
     
-    [btn setImage:[UIImage imageNamed:[imgRed objectAtIndex:self.currentIndex]] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:[imgRed objectAtIndex:self.currentMode]] forState:UIControlStateNormal];
     for (UIButton *b in self.visitedBtns) {
-        if(b.tag!=self.currentIndex){
+        if(b.tag!=self.currentMode){
             [b setImage:[UIImage imageNamed:[imgBlue objectAtIndex:b.tag]] forState:UIControlStateNormal];
             [b setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         }
     }
     
-    if (self.currentIndex == 1) {
+    if (self.currentMode == 1) {
         self.showTemLabel.textColor = [UIColor colorWithRed:215/255.0 green:57/255.0 blue:78/255.0 alpha:1.0];
+        self.airMode = self.currentMode;
     }
     
-    if (self.currentIndex == 0){
+    if (self.currentMode == 0){
         self.showTemLabel.textColor = [UIColor colorWithRed:33/255.0 green:119/255.0 blue:175/255.0 alpha:1.0];
+        self.airMode = self.currentMode;
     }
     
-    for (int i=1; i<16; i++) {
-        UIView *viewblue = [self.view viewWithTag:i+100];
-        viewblue.hidden = self.currentIndex == 1;
-        UIView *viewred = [self.view viewWithTag:i+200];
-        viewred.hidden = self.currentIndex == 0;
+    if (self.currentMode < 2){
+        for (int i=1; i<16; i++) {
+            UIView *viewblue = [self.view viewWithTag:i+100];
+            viewblue.hidden = self.currentMode == 1;
+            UIView *viewred = [self.view viewWithTag:i+200];
+            viewred.hidden = self.currentMode == 0;
+        }
     }
     
-    
-    if (self.currentIndex<1) {
-        cmd = 0x39+self.currentIndex;
+    if (self.currentMode<1) {
+        cmd = 0x39+self.currentMode;
     }else{
-        cmd = 0x3F+self.currentIndex;
+        cmd = 0x3F+self.currentMode;
     }
     if (![self.visitedBtns containsObject:sender]) {
         [self.visitedBtns addObject:sender];
@@ -205,20 +208,6 @@ static NSString *const airCellIdentifier = @"airCell";
 
 -(IBAction)changeButton:(id)sender
 {
-    if ([self.sceneid intValue]>0) {
-    if (self.currentButton == mode) {
-        self.currentIndex = self.currentMode - 1;
-    }
-    if (self.currentButton == level) {
-        self.currentIndex = self.currentLevel - 1;
-    }
-    if (self.currentButton == direction) {
-        self.currentIndex = self.currentDirection - 1;
-    }
-    if (self.currentButton == timing) {
-        self.currentIndex = self.currentTiming - 1;
-    }
-    }
     self.currentButton=(int)((UIButton *)sender).tag;
     [self.paramView reloadData];
     
@@ -283,7 +272,14 @@ static NSString *const airCellIdentifier = @"airCell";
 }
 
 - (void)orbSwitchToggleAnimationFinished:(ORBSwitch *)switchObj {
-    [switchObj setCustomKnobImage:[UIImage imageNamed:(switchObj.isOn) ? (self.currentIndex == 0)?@"air_control_cool":@"air_control_heat" : @"air_control_off"]
+    NSString *img = @"air_control_cool";
+    if (self.airMode == 0) {
+        img = @"air_control_cool";
+    }
+    if (self.airMode == 1) {
+        img = @"air_control_heat";
+    }
+    [switchObj setCustomKnobImage:[UIImage imageNamed:(switchObj.isOn) ? img : @"air_control_off"]
           inactiveBackgroundImage:nil
             activeBackgroundImage:nil];
     
@@ -336,9 +332,9 @@ static NSString *const airCellIdentifier = @"airCell";
     
     for (int i=1; i<16; i++) {
             UIView *viewblue = [self.view viewWithTag:i+100];
-            viewblue.hidden = (degree <= MIX_TEMP_ROTATE_DEGREE+(i)*14) || self.currentIndex == 1;
+            viewblue.hidden = (degree <= MIX_TEMP_ROTATE_DEGREE+(i)*14) || self.currentMode == 1;
             UIView *viewred = [self.view viewWithTag:i+200];
-            viewred.hidden = (degree <= MIX_TEMP_ROTATE_DEGREE+(i)*14) || self.currentIndex == 0;
+            viewred.hidden = (degree <= MIX_TEMP_ROTATE_DEGREE+(i)*14) || self.currentMode == 0;
     }
     
     
@@ -361,7 +357,7 @@ static NSString *const airCellIdentifier = @"airCell";
 #pragma mark - UITableViewDataSource, UITableViewDelegate
 - (void)tableView:(YALContextMenuTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     uint8_t cmd=0;
-    if (self.currentButton == level) {
+    if (self.currentButton == speed) {
         cmd = 0x35+(int)indexPath.row;
     }
     if (self.currentButton == direction) {
