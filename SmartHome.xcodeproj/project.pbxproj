@@ -70,6 +70,7 @@
 		0F8A78511E9F7C8C0050F0D9 /* UIImageView+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8A78501E9F7C8C0050F0D9 /* UIImageView+Badge.m */; };
 		0F8D76D01D9A1B9700DDD063 /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8D76CF1D9A1B9700DDD063 /* Schedule.m */; };
 		0F91AA171CDC798700094C25 /* PrintObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F91AA161CDC798700094C25 /* PrintObject.m */; };
+		0F9232E11EB85CE3008B1F37 /* AirMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F9232E01EB85CE3008B1F37 /* AirMenuCell.xib */; };
 		0F96A1641D17F37C00E1594F /* RulerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F96A15D1D17F37C00E1594F /* RulerItem.m */; };
 		0F96A1651D17F37C00E1594F /* RulerItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F96A15F1D17F37C00E1594F /* RulerItemModel.m */; };
 		0F96A1661D17F37C00E1594F /* RulerLeftTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F96A1611D17F37C00E1594F /* RulerLeftTagView.m */; };
@@ -617,6 +618,7 @@
 		0F8D76CF1D9A1B9700DDD063 /* Schedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Schedule.m; sourceTree = "<group>"; };
 		0F91AA151CDC798700094C25 /* PrintObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintObject.h; sourceTree = "<group>"; };
 		0F91AA161CDC798700094C25 /* PrintObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintObject.m; sourceTree = "<group>"; };
+		0F9232E01EB85CE3008B1F37 /* AirMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AirMenuCell.xib; sourceTree = "<group>"; };
 		0F96A15C1D17F37C00E1594F /* RulerItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RulerItem.h; path = PrettyRuler/RulerItem.h; sourceTree = SOURCE_ROOT; };
 		0F96A15D1D17F37C00E1594F /* RulerItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RulerItem.m; path = PrettyRuler/RulerItem.m; sourceTree = SOURCE_ROOT; };
 		0F96A15E1D17F37C00E1594F /* RulerItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RulerItemModel.h; path = PrettyRuler/RulerItemModel.h; sourceTree = SOURCE_ROOT; };
@@ -1878,7 +1880,6 @@
 		0F6ADFDB1E71349500BFF67F /* IM */ = {
 			isa = PBXGroup;
 			children = (
-				0FABB32F1EAF1C660089A5A4 /* ContextMenuCell */,
 				0F6ADFDE1E7136B500BFF67F /* RCDataManager.h */,
 				0F6ADFDF1E7136B500BFF67F /* RCDataManager.m */,
 				0F6ADFE11E7136C500BFF67F /* ConversationViewController.h */,
@@ -1912,6 +1913,7 @@
 		0F8A784E1E9F7C1D0050F0D9 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				0FABB32F1EAF1C660089A5A4 /* ContextMenuCell */,
 				0F8A784F1E9F7C8C0050F0D9 /* UIImageView+Badge.h */,
 				0F8A78501E9F7C8C0050F0D9 /* UIImageView+Badge.m */,
 				0FA96D501EB033FE001DDF39 /* UIView+Popup.h */,
@@ -2068,6 +2070,7 @@
 		0FF5CD4E1EA7695E0027E2DC /* Devices */ = {
 			isa = PBXGroup;
 			children = (
+				0F9232E01EB85CE3008B1F37 /* AirMenuCell.xib */,
 				0FABB33D1EAF232A0089A5A4 /* MenuCell.xib */,
 			);
 			name = Devices;
@@ -2771,6 +2774,7 @@
 				CDF1574A1E7AB2AF00499AC5 /* icon_tabbar_mine_selected@2x.png in Resources */,
 				0FBEFE271D24A5020084244F /* netconfig.plist in Resources */,
 				CD7DDA091E81168F00638DB3 /* login_name@2x.png in Resources */,
+				0F9232E11EB85CE3008B1F37 /* AirMenuCell.xib in Resources */,
 				2ECDCC911E9E3623004C68BE /* BjMusicTableViewCell.xib in Resources */,
 				0F49CB721E7A1EAE00D46ECC /* Scene.storyboard in Resources */,
 				0F6183FB1EA9A24600000EAD /* NewLightCell.xib in Resources */,

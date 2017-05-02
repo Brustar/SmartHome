@@ -497,7 +497,6 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 }
 
 #pragma mark - UITableViewDataSource, UITableViewDelegate
-
 - (void)tableView:(YALContextMenuTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.lightName.text = [[self.lights objectAtIndex:indexPath.row] objectForKey:@"name"];
     self.deviceid = [[self.lights objectAtIndex:indexPath.row] objectForKey:@"id"];

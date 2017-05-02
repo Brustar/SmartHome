@@ -9,23 +9,26 @@
 #import "AirController.h"
 #import "SceneManager.h"
 #import "Aircon.h"
-#import "RulerView.h"
+#import "YALContextMenuTableView.h"
+#import "ContextMenuCell.h"
 #import "SocketManager.h"
 #import "PackManager.h"
 #import "SQLManager.h"
 #import "UIImageView+Badge.h"
 #import "ORBSwitch.h"
 
-#define MAX_TEMP_ROTATE_DEGREE 285
-#define MIX_TEMP_ROTATE_DEGREE 75
+#define MAX_TEMP_ROTATE_DEGREE 330
+#define MIX_TEMP_ROTATE_DEGREE 120
 
-@interface AirController ()<RulerViewDatasource, RulerViewDelegate,UITableViewDataSource,UITableViewDelegate,ORBSwitchDelegate>
-@property (weak, nonatomic) IBOutlet RulerView *thermometerView;
+
+static NSString *const airCellIdentifier = @"airCell";
+@interface AirController ()<UITableViewDataSource,UITableViewDelegate,ORBSwitchDelegate,YALContextMenuTableViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UILabel *showTemLabel;
 @property (weak, nonatomic) IBOutlet UILabel *wetLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pmLabel;
 @property (weak, nonatomic) IBOutlet UILabel *noiseLabel;
-@property (weak, nonatomic) IBOutlet UITableView *paramView;
+@property (strong, nonatomic) IBOutlet YALContextMenuTableView *paramView;
 @property (weak, nonatomic) IBOutlet UIImageView *pm_clock_hand;
 @property (weak, nonatomic) IBOutlet UIImageView *humidity_hand;
 @property (weak, nonatomic) IBOutlet UIButton *disk;
@@ -35,7 +38,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *tempreturePan;
 @property (nonatomic,strong) ORBSwitch *switcher;
-
+@property (nonatomic,strong) NSMutableArray *visitedBtns;
 
 @end
 
@@ -52,13 +55,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setNaviBarTitle:@"空调"];
-    [self.pm_clock_hand rotate:90];
-    [self.humidity_hand rotate:45];
     self.disk.enabled = NO;
     [self initSwitch];
-    
-    
-    self.params=@[@[@"制热",@"制冷",@"抽湿",@"自动"],@[@"向上",@"向下"],@[@"高风",@"中风",@"低风"],@[@"0.5H",@"1H",@"2H",@"3H"]];
+    self.tempreturePan.transform = CGAffineTransformMakeRotation(MIX_TEMP_ROTATE_DEGREE);
+    self.visitedBtns = [NSMutableArray new];
+    self.params=@[@[@"speed_fast",@"speed_middle",@"speed_slow"],@[@"speed_dir_up",@"speed_dir_down"]];
     self.paramView.scrollEnabled=NO;
     
     _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
@@ -75,13 +76,19 @@
             }
         }
     }
-    self.thermometerView.datasource = self;
-    self.thermometerView.delegate = self;
-    
-    [self.thermometerView updateCurrentValue:24];
     
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
+    
+    NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+    
+    NSString *pmID = [SQLManager singleDeviceWithCatalogID:55 byRoom:self.roomID];
+    data = [[DeviceInfo defaultManager] query:pmID];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+    NSString *humidityID = [SQLManager singleDeviceWithCatalogID:50 byRoom:self.roomID];
+    data = [[DeviceInfo defaultManager] query:humidityID];
+    [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
 -(void) initSwitch
@@ -92,34 +99,6 @@
     self.switcher.delegate = self;
 
     [self.container addSubview:self.switcher];
-    /*
-    [self.switcher setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.switcher
-                                                attribute:NSLayoutAttributeCenterX
-                                                relatedBy:NSLayoutRelationEqual
-                                                toItem:self.tempreturePan
-                                                attribute:NSLayoutAttributeCenterX
-                                                multiplier:1.0
-                                                constant:0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.switcher
-                                                attribute:NSLayoutAttributeCenterY
-                                                relatedBy:NSLayoutRelationEqual
-                                                toItem:self.tempreturePan
-                                                attribute:NSLayoutAttributeCenterY
-                                                multiplier:1.0
-                                                constant:0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.switcher
-                                                attribute:NSLayoutAttributeWidth
-                                                relatedBy:NSLayoutRelationEqual
-                                                toItem:nil attribute:NSLayoutAttributeNotAnAttribute
-                                                multiplier:1.0f constant:122.0f]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.switcher
-                                                attribute:NSLayoutAttributeHeight
-                                                relatedBy:NSLayoutRelationEqual
-                                                toItem:nil attribute:NSLayoutAttributeNotAnAttribute
-                                                multiplier:1.0f constant:122.0f]];
-
-    */
 }
 
 -(IBAction)save:(id)sender
@@ -163,16 +142,65 @@
         if (proto.action.state==0x8A) {
             NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
             self.wetLabel.text = valueString;
+            [self.humidity_hand rotate:proto.action.RValue];
         }
         if (proto.action.state==0x7F) {
             NSString *valueString = [NSString stringWithFormat:@"%d ug/m",proto.action.RValue];
             self.pmLabel.text = valueString;
+            [self.pm_clock_hand rotate:proto.action.RValue];
         }
         if (proto.action.state==0x7E) {
             NSString *valueString = [NSString stringWithFormat:@"%d db",proto.action.RValue];
             self.noiseLabel.text = valueString;
         }
     }
+}
+- (IBAction)changeMode:(id)sender {
+    uint8_t cmd=0;
+    NSArray *imgBlue = @[@"cool",@"heat",@"wet",@"wind"];
+    NSArray *imgRed = @[@"cool_red",@"heat_red",@"wet_red",@"wind_red"];
+    UIButton *btn = (UIButton *)sender;
+    self.currentIndex=(int)btn.tag;
+    [btn setTitleColor:[UIColor colorWithRed:215/255.0 green:57/255.0 blue:78/255.0 alpha:1.0] forState:UIControlStateNormal];
+    
+    [btn setImage:[UIImage imageNamed:[imgRed objectAtIndex:self.currentIndex]] forState:UIControlStateNormal];
+    for (UIButton *b in self.visitedBtns) {
+        if(b.tag!=self.currentIndex){
+            [b setImage:[UIImage imageNamed:[imgBlue objectAtIndex:b.tag]] forState:UIControlStateNormal];
+            [b setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        }
+    }
+    
+    if (self.currentIndex == 1) {
+        self.showTemLabel.textColor = [UIColor colorWithRed:215/255.0 green:57/255.0 blue:78/255.0 alpha:1.0];
+    }
+    
+    if (self.currentIndex == 0){
+        self.showTemLabel.textColor = [UIColor colorWithRed:33/255.0 green:119/255.0 blue:175/255.0 alpha:1.0];
+    }
+    
+    for (int i=1; i<16; i++) {
+        UIView *viewblue = [self.view viewWithTag:i+100];
+        viewblue.hidden = self.currentIndex == 1;
+        UIView *viewred = [self.view viewWithTag:i+200];
+        viewred.hidden = self.currentIndex == 0;
+    }
+    
+    
+    if (self.currentIndex<1) {
+        cmd = 0x39+self.currentIndex;
+    }else{
+        cmd = 0x3F+self.currentIndex;
+    }
+    if (![self.visitedBtns containsObject:sender]) {
+        [self.visitedBtns addObject:sender];
+    }
+    
+    NSData *data=[self createCmd:cmd];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+    
+    [self save:nil];
 }
 
 -(IBAction)changeButton:(id)sender
@@ -193,6 +221,24 @@
     }
     self.currentButton=(int)((UIButton *)sender).tag;
     [self.paramView reloadData];
+    
+    if (!self.paramView) {
+        self.paramView = [[YALContextMenuTableView alloc]initWithTableViewDelegateDataSource:self];
+        self.paramView.animationDuration = 0.15;
+        //optional - implement custom YALContextMenuTableView custom protocol
+        self.paramView.yalDelegate = self;
+        //optional - implement menu items layout
+        self.paramView.menuItemsSide = Left;
+        self.paramView.menuItemsAppearanceDirection = FromBottomToTop;
+        
+        //register nib
+        UINib *cellNib = [UINib nibWithNibName:@"AirMenuCell" bundle:nil];
+        [self.paramView registerNib:cellNib forCellReuseIdentifier:airCellIdentifier];
+    }
+    
+    // it is better to use this method only for proper animation
+    [self.paramView showInView:self.view withEdgeInsets:UIEdgeInsetsMake(0,0,-70,0) animated:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -200,88 +246,10 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - tableView
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [self.params[self.currentButton] count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-    }
-    cell.textLabel.text= [self.params[self.currentButton] objectAtIndex:indexPath.row];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    return cell;
-}
-
-- (UITableViewCellAccessoryType)tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath
-{
-    if(indexPath.row==self.currentIndex){
-        return UITableViewCellAccessoryCheckmark;
-    }
-    else{
-        return UITableViewCellAccessoryNone;
-    }
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if(indexPath.row==self.currentIndex){
-        return;
-    }
-    NSIndexPath *oldIndexPath = [NSIndexPath indexPathForRow:self.currentIndex
-                                                   inSection:0];
-    UITableViewCell *newCell = [tableView cellForRowAtIndexPath:indexPath];
-    if (newCell.accessoryType == UITableViewCellAccessoryNone) {
-        newCell.accessoryType = UITableViewCellAccessoryCheckmark;
-
-    }
-    UITableViewCell *oldCell = [tableView cellForRowAtIndexPath:oldIndexPath];
-    if (oldCell.accessoryType == UITableViewCellAccessoryCheckmark) {
-        oldCell.accessoryType = UITableViewCellAccessoryNone;
-    }
-    self.currentIndex=(int)indexPath.row;
-    uint8_t cmd=0;
-    if (self.currentButton == mode) {
-        self.currentMode = self.currentIndex+1;
-        if (self.currentIndex==0) {
-            cmd = 0x39+self.currentIndex;
-        }else{
-            cmd = 0x3F+self.currentIndex;
-        }
-    }
-    if (self.currentButton == level) {
-        self.currentLevel = self.currentIndex+1;
-        cmd = 0x35+self.currentIndex;
-    }
-    if (self.currentButton == direction) {
-        self.currentDirection = self.currentIndex+1;
-        cmd = 0x43+self.currentIndex;
-    }
-    if (self.currentButton == timing) {
-        self.currentTiming = self.currentIndex+1;
-    }
-    NSData *data=[self createCmd:cmd];
-    SocketManager *sock=[SocketManager defaultManager];
-    [sock.socket writeData:data withTimeout:1 tag:1];
-    
-    [self save:nil];
-}
-
 -(NSData *)createCmd:(uint8_t) cmd
 {
     return [[DeviceInfo defaultManager] changeMode:cmd
                                                   deviceID:self.deviceid];
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 50;
 }
 
 #pragma mark - Navigation
@@ -293,12 +261,8 @@
     [theSegue setValue:self.deviceid forKey:@"deviceid"];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self.thermometerView reloadView];
-}
 
-#pragma mark - RulerViewDelegate
-- (void)rulerView:(RulerView *)rulerView didChangedCurrentValue:(CGFloat)currentValue {
+- (void)changedCurrentTemperature:(CGFloat)currentValue {
     NSInteger value = round(currentValue);
     
     NSString *valueString = [NSString stringWithFormat:@"%d ℃", (int)value];
@@ -312,64 +276,6 @@
     [self save:nil];
 }
 
-#pragma mark - Item setting
-- (RulerItemModel *)rulerViewRulerItemModel:(RulerView *)rulerView {
-    RulerItemModel *itemModel = [[RulerItemModel alloc] init];
-    
-    itemModel.itemLineColor = [UIColor blackColor];
-    itemModel.itemMaxLineWidth = 30;
-    itemModel.itemMinLineWidth = 20;
-    itemModel.itemMiddleLineWidth = 24;
-    itemModel.itemLineHeight = 1;
-    itemModel.itemNumberOfRows = 16;
-    itemModel.itemHeight = 60;
-    itemModel.itemWidth = itemModel.itemMaxLineWidth;
-    
-    return itemModel;
-}
-
-#pragma mark - Ruler setting
-- (CGFloat)rulerViewMaxValue:(RulerView *)rulerView {
-    return 32;
-}
-
-- (CGFloat)rulerViewMinValue:(RulerView *)rulerView {
-    return 16;
-}
-
-- (UIFont *)rulerViewTextLabelFont:(RulerView *)rulerView {
-    return [UIFont systemFontOfSize:11.f];
-}
-
-- (UIColor *)rulerViewTextLabelColor:(RulerView *)rulerView {
-    return [UIColor magentaColor];
-}
-
-- (CGFloat)rulerViewTextlabelLeftMargin:(RulerView *)rulerView {
-    return 4.f;
-}
-
-- (CGFloat)rulerViewItemScrollViewDecelerationRate:(RulerView *)rulerView {
-    return 0;
-}
-
-#pragma mark - Left tag setting
-- (CGFloat)rulerViewLeftTagLineWidth:(RulerView *)rulerView {
-    return 50;
-}
-
-- (CGFloat)rulerViewLeftTagLineHeight:(RulerView *)rulerView {
-    return 2;
-}
-
-- (UIColor *)rulerViewLeftTagLineColor:(RulerView *)rulerView {
-    return [UIColor redColor];
-}
-
-- (CGFloat)rulerViewLeftTagTopMargin:(RulerView *)rulerView {
-    return 300;
-}
-
 #pragma mark - ORBSwitchDelegate
 - (void)orbSwitchToggled:(ORBSwitch *)switchObj withNewValue:(BOOL)newValue {
     NSLog(@"Switch toggled: new state is %@", (newValue) ? @"ON" : @"OFF");
@@ -377,7 +283,7 @@
 }
 
 - (void)orbSwitchToggleAnimationFinished:(ORBSwitch *)switchObj {
-    [switchObj setCustomKnobImage:[UIImage imageNamed:(switchObj.isOn) ? @"air_control_cool" : @"air_control_off"]
+    [switchObj setCustomKnobImage:[UIImage imageNamed:(switchObj.isOn) ? (self.currentIndex == 0)?@"air_control_cool":@"air_control_heat" : @"air_control_off"]
           inactiveBackgroundImage:nil
             activeBackgroundImage:nil];
     
@@ -417,7 +323,7 @@
      */
     CGFloat angle = atan2f(currentPoint.y - center.y, currentPoint.x - center.x) - atan2f(previousPoint.y - center.y, previousPoint.x - center.x);
     NSLog(@"degree:%f",degree)
-    if (degree<75) {
+    if (degree<MIX_TEMP_ROTATE_DEGREE) {
         if (angle<0) {
             return;
         }
@@ -428,17 +334,66 @@
     }
     self.tempreturePan.transform = CGAffineTransformRotate(self.tempreturePan.transform, angle);
     
+    for (int i=1; i<16; i++) {
+            UIView *viewblue = [self.view viewWithTag:i+100];
+            viewblue.hidden = (degree <= MIX_TEMP_ROTATE_DEGREE+(i)*14) || self.currentIndex == 1;
+            UIView *viewred = [self.view viewWithTag:i+200];
+            viewred.hidden = (degree <= MIX_TEMP_ROTATE_DEGREE+(i)*14) || self.currentIndex == 0;
+    }
+    
+    
+    int tempreture = ((int)degree-MIX_TEMP_ROTATE_DEGREE)/14 + 15;
+    tempreture = tempreture < 16 ? 16 : tempreture;
+    tempreture = tempreture > 30 ? 30 : tempreture;
+    self.showTemLabel.text = [NSString stringWithFormat:@"%d°C",tempreture];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    CGFloat radius = atan2f(self.tempreturePan.transform.b, self.tempreturePan.transform.a);
-    CGFloat degree = radius * (180 / M_PI);
-    NSLog(@"degree:%f",degree);
-    int percent = degree*100/MAX_TEMP_ROTATE_DEGREE;
-    NSLog(@"percent:%d",percent);
-    self.tempreturePan.tag = percent;
-    [self save:self.tempreturePan];
+    [self save:nil];
+}
+
+#pragma mark - YALContextMenuTableViewDelegate
+- (void)contextMenuTableView:(YALContextMenuTableView *)contextMenuTableView didDismissWithIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"Menu dismissed with indexpath = %@", indexPath);
+}
+
+#pragma mark - UITableViewDataSource, UITableViewDelegate
+- (void)tableView:(YALContextMenuTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    uint8_t cmd=0;
+    if (self.currentButton == level) {
+        cmd = 0x35+(int)indexPath.row;
+    }
+    if (self.currentButton == direction) {
+        cmd = 0x43+(int)indexPath.row;
+    }
+    NSData *data=[self createCmd:cmd];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+    
+    [self save:nil];
+    [tableView dismisWithIndexPath:indexPath];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 39;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.params[self.currentButton-1] count];
+}
+
+- (UITableViewCell *)tableView:(YALContextMenuTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    ContextMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:airCellIdentifier forIndexPath:indexPath];
+    
+    if (cell) {
+        cell.backgroundColor = [UIColor clearColor];
+        cell.icon.image = [UIImage imageNamed:[self.params[self.currentButton-1] objectAtIndex:indexPath.row]];
+        [cell setContraint:self.currentButton];
+    }
+    
+    return cell;
 }
 
 @end

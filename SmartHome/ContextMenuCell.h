@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *menuImageView;
 @property (strong, nonatomic) IBOutlet UILabel *menuTitleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *icon;
 
 -(void) setContraint:(long)tag;
 
