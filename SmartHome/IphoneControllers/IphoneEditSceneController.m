@@ -36,6 +36,7 @@
 #import "NewColourCell.h"
 #import "NewLightCell.h"
 #import "FMTableViewCell.h"
+#import "IphoneNewAddSceneVC.h"
 
 
 @interface IphoneEditSceneController ()<TouchSubViewDelegate,UITableViewDelegate,UITableViewDataSource>//IphoneTypeViewDelegate
@@ -610,11 +611,13 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 11) {
-//        UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-//        IphoneDevicesController * devicesVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneDevicesController"];
-//        [self.navigationController pushViewController:devicesVC animated:YES];
-        [self performSegueWithIdentifier:@"NewAddDeviceSegue" sender:self];
+    if (indexPath.section == 13) {
+        
+        UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
+        IphoneNewAddSceneVC * devicesVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneNewAddSceneVC"];
+        devicesVC.roomID = self.roomID;
+        [self.navigationController pushViewController:devicesVC animated:YES];
+//        [self performSegueWithIdentifier:@"NewAddDeviceSegue" sender:self];
         
     }
 
