@@ -83,11 +83,11 @@
 
 - (void)loadChartWithDates {
     
-    NSMutableArray* chartData = [NSMutableArray arrayWithCapacity:7];
-    for(int i=0;i<7;i++) {
-        chartData[i] = [NSNumber numberWithFloat: (float)i / 30.0f + (float)(rand() % 100) / 100.0f];
-    }
-//    NSArray * chartData = @[@"0",@"50",@"100",@"150",@"200",@"250",@"300"];
+//    NSMutableArray* chartData = [NSMutableArray arrayWithCapacity:7];
+//    for(int i=0;i<7;i++) {
+//        chartData[i] = [NSNumber numberWithFloat: (float)i / 30.0f + (float)(rand() % 100) / 100.0f];
+//    }
+    NSArray * chartData = @[@"0",@"50",@"100",@"150",@"200",@"250",@"300"];
     
     NSArray* months = @[@"01", @"05", @"10", @"15", @"20", @"25", @"30"];
     

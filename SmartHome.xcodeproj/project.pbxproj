@@ -34,7 +34,6 @@
 		0F43B1031CF4055300F3D9F0 /* IATConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F43B1021CF4055300F3D9F0 /* IATConfig.m */; };
 		0F477FC61D2F94B3004FA361 /* NetStatusManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F477FC51D2F94B3004FA361 /* NetStatusManager.m */; };
 		0F49CB6C1E7A1DBF00D46ECC /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F49CB6B1E7A1DBF00D46ECC /* Login.storyboard */; };
-		0F49CB6E1E7A1E3700D46ECC /* MyInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F49CB6D1E7A1E3700D46ECC /* MyInfo.storyboard */; };
 		0F49CB701E7A1EA100D46ECC /* Devices.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F49CB6F1E7A1EA100D46ECC /* Devices.storyboard */; };
 		0F49CB721E7A1EAE00D46ECC /* Scene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F49CB711E7A1EAE00D46ECC /* Scene.storyboard */; };
 		0F49CB741E7A1F0500D46ECC /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F49CB731E7A1F0500D46ECC /* Home.storyboard */; };
@@ -149,6 +148,7 @@
 		2E0297271E4C4C7600BBC520 /* MySubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0297261E4C4C7600BBC520 /* MySubView.m */; };
 		2E04198B1EB89F42004D70B9 /* FSLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0419881EB89F42004D70B9 /* FSLineChart.m */; };
 		2E04198C1EB89F42004D70B9 /* UIColor+FSPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E04198A1EB89F42004D70B9 /* UIColor+FSPalette.m */; };
+		2E04198E1EB8A370004D70B9 /* MyInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E04198D1EB8A370004D70B9 /* MyInfo.storyboard */; };
 		2E12CC0A1E7F5DC400C7D006 /* FirstSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CC091E7F5DC400C7D006 /* FirstSceneViewController.m */; };
 		2E12CC101E7F5E3000C7D006 /* CYLineLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CC0C1E7F5E3000C7D006 /* CYLineLayout.m */; };
 		2E12CC111E7F5E3000C7D006 /* CYPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CC0E1E7F5E3000C7D006 /* CYPhotoCell.m */; };
@@ -264,7 +264,6 @@
 		CDB8B84D1EB1D421003AA894 /* MonitorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B84C1EB1D421003AA894 /* MonitorViewController.m */; };
 		CDB8B8501EB1D4B4003AA894 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B84F1EB1D4B4003AA894 /* UserInfoViewController.m */; };
 		CDB8B8531EB1D550003AA894 /* SceneShortcutsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B8521EB1D550003AA894 /* SceneShortcutsViewController.m */; };
-		CDB8B85B1EB1E8AF003AA894 /* MyInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDB8B85A1EB1E8AF003AA894 /* MyInfo.storyboard */; };
 		CDB8B85E1EB1EBD2003AA894 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B85D1EB1EBD2003AA894 /* UserInfo.m */; };
 		CDBEFF501EA5FEBF00258B1E /* FamilyHomeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDBEFF4F1EA5FEBF00258B1E /* FamilyHomeDetailViewController.m */; };
 		CDBEFF531EA616CD00258B1E /* FamilyHomeDetailSceneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDBEFF521EA616CD00258B1E /* FamilyHomeDetailSceneCell.m */; };
@@ -472,7 +471,6 @@
 		0F477FC41D2F94B3004FA361 /* NetStatusManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetStatusManager.h; sourceTree = "<group>"; };
 		0F477FC51D2F94B3004FA361 /* NetStatusManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetStatusManager.m; sourceTree = "<group>"; };
 		0F49CB6B1E7A1DBF00D46ECC /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
-		0F49CB6D1E7A1E3700D46ECC /* MyInfo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyInfo.storyboard; sourceTree = "<group>"; };
 		0F49CB6F1E7A1EA100D46ECC /* Devices.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Devices.storyboard; sourceTree = "<group>"; };
 		0F49CB711E7A1EAE00D46ECC /* Scene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Scene.storyboard; sourceTree = "<group>"; };
 		0F49CB731E7A1F0500D46ECC /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
@@ -776,6 +774,7 @@
 		2E0419881EB89F42004D70B9 /* FSLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSLineChart.m; sourceTree = "<group>"; };
 		2E0419891EB89F42004D70B9 /* UIColor+FSPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FSPalette.h"; sourceTree = "<group>"; };
 		2E04198A1EB89F42004D70B9 /* UIColor+FSPalette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FSPalette.m"; sourceTree = "<group>"; };
+		2E04198D1EB8A370004D70B9 /* MyInfo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyInfo.storyboard; sourceTree = "<group>"; };
 		2E0927BA1EB2105B007AEBD1 /* UIView+Uitls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Uitls.h"; sourceTree = "<group>"; };
 		2E12CC081E7F5DC400C7D006 /* FirstSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstSceneViewController.h; sourceTree = "<group>"; };
 		2E12CC091E7F5DC400C7D006 /* FirstSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstSceneViewController.m; sourceTree = "<group>"; };
@@ -960,7 +959,6 @@
 		CDB8B84F1EB1D4B4003AA894 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
 		CDB8B8511EB1D550003AA894 /* SceneShortcutsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneShortcutsViewController.h; sourceTree = "<group>"; };
 		CDB8B8521EB1D550003AA894 /* SceneShortcutsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneShortcutsViewController.m; sourceTree = "<group>"; };
-		CDB8B85A1EB1E8AF003AA894 /* MyInfo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyInfo.storyboard; sourceTree = "<group>"; };
 		CDB8B85C1EB1EBD2003AA894 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
 		CDB8B85D1EB1EBD2003AA894 /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
 		CDBEFF4E1EA5FEBF00258B1E /* FamilyHomeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyHomeDetailViewController.h; sourceTree = "<group>"; };
@@ -1595,8 +1593,7 @@
 		0F49CB6A1E7A1CCE00D46ECC /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
-				0F49CB6D1E7A1E3700D46ECC /* MyInfo.storyboard */,
-				CDB8B85A1EB1E8AF003AA894 /* MyInfo.storyboard */,
+				2E04198D1EB8A370004D70B9 /* MyInfo.storyboard */,
 				0F49CB6B1E7A1DBF00D46ECC /* Login.storyboard */,
 				0F49CB6F1E7A1EA100D46ECC /* Devices.storyboard */,
 				0F49CB711E7A1EAE00D46ECC /* Scene.storyboard */,
@@ -2847,7 +2844,6 @@
 				2EB516F51E9CE3A40064B18E /* ScreenCurtainCell.xib in Resources */,
 				CDF1574C1E7AB2AF00499AC5 /* icon_tabbar_homepage@2x.png in Resources */,
 				CD51343F1E92807600C2EDAF /* tipIcon@2x.png in Resources */,
-				0F49CB6E1E7A1E3700D46ECC /* MyInfo.storyboard in Resources */,
 				CD7DDA0F1E82583700638DB3 /* pullBtn@2x.png in Resources */,
 				2EBABC7E1E8361C50093EF3A /* OtherTableViewCell.xib in Resources */,
 				CDF78C5A1E9CC3C500F8B20C /* NaviBarBg.png in Resources */,
@@ -2862,11 +2858,11 @@
 				CDF389221E305B4400657C8B /* breakdownlist.plist in Resources */,
 				CD7DDA0B1E81297D00638DB3 /* registButton@2x.png in Resources */,
 				F6359B011CFFC4DC0035EB31 /* ColourTableViewCell.xib in Resources */,
+				2E04198E1EB8A370004D70B9 /* MyInfo.storyboard in Resources */,
 				2EB516FA1E9CEB3F0064B18E /* AddDeviceCell.xib in Resources */,
 				CD93E3AD1E807AFD003CCAA9 /* login_icon@2x.png in Resources */,
 				0F49CB6C1E7A1DBF00D46ECC /* Login.storyboard in Resources */,
 				2E925DA51E5E857D008E327B /* all_6.jpg in Resources */,
-				CDB8B85B1EB1E8AF003AA894 /* MyInfo.storyboard in Resources */,
 				CDF157511E7AB2C000499AC5 /* leftbackiamge.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
