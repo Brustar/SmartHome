@@ -1517,7 +1517,7 @@
         <!--screen-->
         <scene sceneID="gmp-ns-T25">
             <objects>
-                <viewController id="5Gm-3R-5T0" userLabel="screen" customClass="SceneController" sceneMemberID="viewController">
+                <viewController id="5Gm-3R-5T0" userLabel="screen" customClass="ScreenCurtainController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eAs-1F-Pzi"/>
                         <viewControllerLayoutGuide type="bottom" id="sVu-qo-fh2"/>

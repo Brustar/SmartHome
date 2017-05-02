@@ -131,7 +131,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"幕布";
+    
+    [self setNaviBarTitle:@"幕布"];
     [self setupButtons];
     self.tableHightConstraint.constant = 100;
     
