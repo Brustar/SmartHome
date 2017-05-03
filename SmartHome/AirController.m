@@ -323,7 +323,7 @@ static NSString *const airCellIdentifier = @"airCell";
      atan2f 是求反正切函数 参考:http://blog.csdn.net/chinabinlang/article/details/6802686
      */
     CGFloat angle = atan2f(currentPoint.y - center.y, currentPoint.x - center.x) - atan2f(previousPoint.y - center.y, previousPoint.x - center.x);
-    NSLog(@"degree:%f",degree)
+    NSLog(@"degree:%f",degree);
     if (degree<MIX_TEMP_ROTATE_DEGREE) {
         if (angle<0) {
             return;
