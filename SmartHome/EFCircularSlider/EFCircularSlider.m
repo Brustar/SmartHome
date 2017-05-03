@@ -83,7 +83,8 @@
     [self drawHandle:ctx];
 }
 
--(void) drawHandle:(CGContextRef)ctx{
+-(void)drawHandle:(CGContextRef)ctx{
+    
     CGContextSaveGState(ctx);
     CGPoint handleCenter =  [self pointFromAngle: angle];
     if(_handleType == semiTransparentWhiteCircle) {

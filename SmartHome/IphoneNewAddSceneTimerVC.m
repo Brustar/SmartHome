@@ -73,8 +73,10 @@
     //    minuteSlider.unfilledColor = [UIColor colorWithRed:23/255.0f green:47/255.0f blue:70/255.0f alpha:1.0f];
     minuteSlider.unfilledColor = [UIColor clearColor];
     minuteSlider.filledColor = [UIColor colorWithRed:87/255.0f green:88/255.0f blue:89/255.0f alpha:0.6f];
-    [minuteSlider setInnerMarkingLabels:@[@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10",@"11",@"12"]];
+//    [minuteSlider setInnerMarkingLabels:@[@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10",@"11",@"12"]];
+    [minuteSlider setInnerMarkingLabels:nil];
     minuteSlider.labelFont = [UIFont systemFontOfSize:8.0f];
+
     minuteSlider.lineWidth = 20;
     minuteSlider.minimumValue = 0;
     minuteSlider.maximumValue = 24;
