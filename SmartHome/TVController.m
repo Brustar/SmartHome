@@ -83,10 +83,6 @@
 @property (nonatomic,strong) NSString *chooseImg;
 @property (nonatomic,strong) UIImage *chooseImage;
 
-
-- (IBAction)editChannelImgBtn:(UIButton *)sender;
-
-
 @end
 
 @implementation TVController
@@ -98,10 +94,8 @@
         _btnTitles = @[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"0"];
     }
     return _btnTitles;
-    
-    
-    
 }
+
 -(NSMutableArray*)allFavourTVChannels
 {
     if(!_allFavourTVChannels)
@@ -116,6 +110,7 @@
     }
     return _allFavourTVChannels;
 }
+
 - (void)setRoomID:(int)roomID
 {
     _roomID = roomID;
@@ -132,21 +127,54 @@
                     self.deviceid = tvArr[i];
                 }
             }
-
         }
-        
     }
-    
 }
+
+- (IBAction)controlCmd:(id)sender {
+    long tag = ((UIButton *)sender).tag;
+    NSData *data=nil;
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    switch (tag) {
+        case 1:
+            data=[device menu:self.deviceid];
+            break;
+        case 2:
+            data=[device sweepUp:self.deviceid];
+            break;
+        case 3:
+            data=[device sweepLeft:self.deviceid];
+            break;
+        case 4:
+            data=[device sweepSURE:self.deviceid];
+            break;
+        case 5:
+            data=[device sweepRight:self.deviceid];
+            break;
+        case 6:
+            data=[device sweepDown:self.deviceid];
+            break;
+        case 7:
+            data=[device previous:self.deviceid];
+            break;
+        case 8:
+            data=[device toogle:0x01 deviceID:self.deviceid];
+            break;
+        case 9:
+            data=[device next:self.deviceid];
+            break;
+
+        default:
+            break;
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
     [self setNaviBarTitle:@"电视"];
     self.eNumber = [SQLManager getENumber:[self.deviceid intValue]];
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
-    
     
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
@@ -274,7 +302,6 @@
     
 }
 
-
 - (IBAction)domute:(id)sender
 {
     self.volume.value=0.0;
@@ -290,18 +317,7 @@
     {
         DeviceInfo *device=[DeviceInfo defaultManager];
         self.volume.value=[[device valueForKey:@"volume"] floatValue]*100;
-        /*
-        KEVolumeUtil *volumeManager=[KEVolumeUtil shareInstance];
-        NSData *data=nil;
-        if (volumeManager.willup) {
-            data = [device volumeUp:self.deviceid];
-        }else{
-            data = [device volumeDown:self.deviceid];
-        }
-        
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:1];
-        */
+ 
         [self save:nil];
     }
 }
@@ -367,7 +383,7 @@
         
     }else{
         [cell.btn setTitle:[NSString stringWithFormat:@"%@",self.btnTitles[indexPath.row]] forState:UIControlStateNormal];
-        [cell.btn addTarget:self action:@selector(btntouched:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn addTarget:self action:@selector(switchProgram:) forControlEvents:UIControlEventTouchUpInside];
     }
     return cell;
 }
@@ -389,12 +405,12 @@
 
 }
 
--(IBAction)btntouched:(id)sender
+-(IBAction)switchProgram:(id)sender
 {
     UIButton *button=(UIButton *)sender;
     if ([self.timer isValid]) {
         self.retChannel = self.retChannel*10+[button.titleLabel.text intValue];
-        NSLog(@"%d",self.retChannel);
+        
         NSData *data=[[DeviceInfo defaultManager] switchProgram:self.retChannel deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
@@ -458,13 +474,9 @@
     self.editView.hidden = YES;
 }
 
-#pragma mark - 编辑电视频道
-//编辑完成后保存频道
+#pragma mark - 编辑完成后保存电视频道
 - (IBAction)clickSureBtnAfterEdited:(id)sender
-
 {
-   
-   
     if(self.chooseImg)
     {
         [self sendStoreChannelRequest];
@@ -495,8 +507,6 @@
             [alertController addAction:okAction];
             [self presentViewController:alertController animated:YES completion:nil];
         }
-        
-       
     }
    
     [self hiddenCoverView];
@@ -515,6 +525,7 @@
     
     [self hiddenCoverView];
 }
+
 -(void)storChannelToSql:(NSDictionary *)responseObject
 {
     //保存成功后存到数据库
@@ -525,6 +536,7 @@
     [self.tvLogoCollectionView reloadData];
 
 }
+
 -(void) httpHandler:(id) responseObject tag:(int)tag
 {
     if(tag == 1)
@@ -610,12 +622,14 @@
 -(void)preset:(KxMenuItem *)item{
     [self performSegueWithIdentifier:@"TVSegue" sender:self];
 }
+
 -(void)tvIconController:(TVIconController *)iconVC withImgName:(NSString *)imgName
 {
     
     self.chooseImg = imgName;
     [self.editChannelImgBtn setBackgroundImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
 }
+
 - (void)selectPhoto:(KxMenuItem *)item {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
@@ -646,6 +660,7 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
+
 -(void)saveImage:(UIImage *)currentImage withName:(NSString *)imageName
 {
     NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
@@ -653,7 +668,6 @@
     
     NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:imageName];
     // 将图片写入文件
-    
     [imageData writeToFile:fullPath atomically:NO];
 }
 
@@ -669,12 +683,8 @@
 }
 
 - (IBAction)storeTVChannel:(UIBarButtonItem *)sender {
-    
-    
     [self showCoverView];
-    
 }
-
 
 -(void)dealloc
 {
