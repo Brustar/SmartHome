@@ -1094,18 +1094,15 @@
     <resources>
         <image name="Video-add" width="25" height="25"/>
         <image name="background" width="375" height="667"/>
-<<<<<<< HEAD
         <image name="button_pen" width="25" height="25"/>
         <image name="delete_white" width="25" height="25"/>
         <image name="icon_choose _nol" width="18" height="18"/>
         <image name="login_line.png" width="1" height="1"/>
         <image name="rightArrow" width="9" height="16"/>
-=======
         <image name="frm_curve_nol" width="366" height="178"/>
         <image name="frm_red_nol" width="90" height="32"/>
         <image name="frm_redd_nol" width="183" height="32"/>
         <image name="frm_white_nol" width="90" height="32"/>
         <image name="frm_whitee_nol" width="366" height="32"/>
->>>>>>> c7fdef7f1ed496ae5baaea4566bc6ed6f1af37db
     </resources>
 </document>
