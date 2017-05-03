@@ -7,7 +7,7 @@
 //
 #import "FMController.h"
 #import "FMCollectionViewCell.h"
-#import "TXHRrettyRuler.h"
+
 #import "SceneManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "VolumeManager.h"
@@ -18,7 +18,7 @@
 #import "PackManager.h"
 #import "TVChannel.h"
 
-@interface FMController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate,TXHRrettyRulerDelegate,UIGestureRecognizerDelegate,FMCollectionViewCellDelegate>
+@interface FMController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate,UIGestureRecognizerDelegate,FMCollectionViewCellDelegate>
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollerContentViewWidth;
 @property (nonatomic,strong) NSMutableArray *allFavouriteChannels;
@@ -71,10 +71,12 @@
     } 
     
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setNaviBarTitle:@"收音机"];
+    [self initSlider];
     self.hzLabel.transform = CGAffineTransformMakeRotation(M_PI/2 + M_PI);
     self.collectionView.pagingEnabled = YES;
     
@@ -99,27 +101,24 @@
     }
     [self setUpPageController];
     
-    [self setRuleForFMChannel];
-    
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
 }
 
--(void)setRuleForFMChannel
+-(void) initSlider
 {
-    CGFloat rule = [self.numberOfChannel.text floatValue];
+    [self.frequence setThumbImage:[UIImage imageNamed:@"fm_thumb"] forState:UIControlStateNormal];
+    self.frequence.maximumTrackTintColor = self.frequence.minimumTrackTintColor = [UIColor clearColor];
+    [self.frequence addTarget:self action:@selector(adjustFrequence:) forControlEvents:UIControlEventValueChanged];
     
-    TXHRrettyRuler *ruler = [[TXHRrettyRuler alloc] initWithFrame:CGRectMake(30, 150, self.fmView.bounds.size.width - 30 * 2, 150)];
-    ruler.rulerDelegate = self;
-    [ruler showRulerScrollViewWithCount:205 average:[NSNumber numberWithFloat:0.1] currentValue:rule smallMode:NO];
-    [self.fmView addSubview:ruler];
-
+    [self.volume setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
+    self.volume.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
+    self.volume.minimumTrackTintColor = [UIColor colorWithRed:253/255.0 green:254/255.0 blue:254/255.0 alpha:1];
 }
 
-- (void)txhRrettyRuler:(TXHRulerScrollView *)rulerScrollView {
-    self.numberOfChannel.text = [NSString stringWithFormat:@"%.1f",rulerScrollView.rulerValue];
-    
-  //  [self save:nil];
+- (IBAction)adjustFrequence:(id)sender {
+    UISlider *slider = (UISlider *)sender;
+    self.numberOfChannel.text = [NSString stringWithFormat:@"%.1fFM",80+slider.value*40];
 }
 
 - (void)didReceiveMemoryWarning {

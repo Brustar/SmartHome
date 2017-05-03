@@ -15,5 +15,6 @@
 @property (nonatomic,assign) int roomID;
 @property (strong, nonatomic) Scene *scene;
 @property (nonatomic,assign) BOOL isAddDevice;
+@property (weak, nonatomic) IBOutlet UISlider *frequence;
 
 @end

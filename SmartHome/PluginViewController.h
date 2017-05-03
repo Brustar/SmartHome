@@ -1,3 +1,4 @@
+#import "CustomViewController.h"
 //
 //  PluginViewController.h
 //  SmartHome
@@ -9,7 +10,7 @@
 
 #define DEVICE_TYPE @"智能单品"
 
-@interface PluginViewController : UIViewController//<HMHomeManagerDelegate, HMHomeDelegate>
+@interface PluginViewController : CustomViewController//<HMHomeManagerDelegate, HMHomeDelegate>
 
 @property (strong, nonatomic) NSMutableArray *devices;
 @property (nonatomic,assign) int roomID;
