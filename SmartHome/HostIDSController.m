@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.hostIDS = [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIDS"];
+    self.hostIDS = [UD objectForKey:@"HostIDS"];
     self.heigthConstraint.constant = self.hostIDS.count *44;
     CGFloat maxH = MAX(100, self.heigthConstraint.constant);
     self.preferredContentSize=CGSizeMake(200, maxH);

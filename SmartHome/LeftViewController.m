@@ -19,9 +19,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-//<<<<<<< HEAD
-//    _itemArray = @[@"故障及保修记录",@"我的能耗",@"我的收藏",@"通知",@"我的家庭成员",@"首页场景快捷键",@"我的设置"];
-//=======
     _itemArray = @[@"家庭成员",@"家庭动态",@"智能账单",@"通知",@"故障及保修记录",@"切换家庭账号"];
 
     
@@ -47,11 +44,26 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Identifier];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.font = [UIFont systemFontOfSize:16.0f];
     cell.backgroundColor = [UIColor clearColor];
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.textLabel.text = [_itemArray objectAtIndex:indexPath.row];
+    if (indexPath.row == 0) {
+        cell.imageView.image = [UIImage imageNamed:@"my_family"];
+    }else if (indexPath.row == 1) {
+        cell.imageView.image = [UIImage imageNamed:@"my_scene"];
+    }else if (indexPath.row == 2) {
+        cell.imageView.image = [UIImage imageNamed:@"my_cloud"];
+    }else if (indexPath.row == 3) {
+        cell.imageView.image = [UIImage imageNamed:@"my_msg"];
+    }else if (indexPath.row == 4) {
+        cell.imageView.image = [UIImage imageNamed:@"my_alert"];
+    }else if (indexPath.row == 5) {
+        cell.imageView.image = [UIImage imageNamed:@"my_exchange"];
+    }
+    
    
     return cell;
 }
@@ -60,9 +72,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIStoryboard *iPhoneStoryBoard  = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     UIStoryboard *myInfoStoryBoard  = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
     UIStoryboard *familyStoryBoard = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
+    UIStoryboard *loginStoryBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate.LeftSlideVC closeLeftView];//关闭左侧抽屉
     
@@ -74,7 +86,7 @@
 
     }else if ([item isEqualToString:@"家庭成员"]) {
         //家庭成员
-        SceneShortcutsViewController *vc = [myInfoStoryBoard instantiateViewControllerWithIdentifier:@"SceneShortcutsVC"];
+        DeliveryAddressViewController *vc = [myInfoStoryBoard instantiateViewControllerWithIdentifier:@"DeliveryAddressVC"];
         vc.hidesBottomBarWhenPushed = YES;
         [appDelegate.mainTabBarController.selectedViewController pushViewController:vc animated:YES];
         
@@ -96,8 +108,10 @@
         [appDelegate.mainTabBarController.selectedViewController pushViewController:msgVC animated:YES];
         
     }else if ([item isEqualToString:@"切换家庭账号"]) {
-       [MBProgressHUD showError:@"开发中"];
-        
+       
+        HostListViewController *vc = [loginStoryBoard instantiateViewControllerWithIdentifier:@"HostListVC"];
+        vc.hidesBottomBarWhenPushed = YES;
+        [appDelegate.mainTabBarController.selectedViewController pushViewController:vc animated:YES];
     }
     
 }
@@ -134,6 +148,8 @@
     footer.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
     UIButton *settingBtn = [[UIButton alloc] initWithFrame:CGRectMake(30, 20, 50, 20)];
     [settingBtn setTitle:@"设置" forState:UIControlStateNormal];
+    [settingBtn setImage:[UIImage imageNamed:@"my_setting"] forState:UIControlStateNormal];
+    settingBtn.titleLabel.font = [UIFont systemFontOfSize:16.0f];
     [settingBtn addTarget:self action:@selector(settingBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [footer addSubview:settingBtn];
     return footer;

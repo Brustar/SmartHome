@@ -16,6 +16,8 @@
 #import "FamilyDynamicViewController.h"
 #import "ShortcutKeyViewController.h"
 #import "SceneShortcutsViewController.h"
+#import "DeliveryAddressViewController.h"
+#import "HostListViewController.h"
 
 @interface LeftViewController : UIViewController
 @property(nonatomic, strong) NSArray *itemArray;

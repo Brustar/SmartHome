@@ -41,6 +41,93 @@
     self.pwdTextField.text = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Password"] decryptWithDes:DES_KEY];
     UserType =[[UD objectForKey:@"UserType"] intValue];
     
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    //判断滑动图是否出现过，第一次调用时“isScrollViewAppear” 这个key 对应的值是nil，会进入if中
+    if (![@"YES" isEqualToString:[userDefaults objectForKey:@"isScrollViewAppear"]]) {
+        
+        [self showScrollView];//显示滑动图
+    }
+
+}
+
+#pragma mark - 滑动图
+
+-(void) showScrollView{
+    
+    UIScrollView *_scrollView = [[UIScrollView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    
+    //设置UIScrollView 的显示内容的尺寸，有n张图要显示，就设置 屏幕宽度*n ，这里假设要显示4张图
+    _scrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width * 4, [UIScreen mainScreen].bounds.size.height);
+    
+    _scrollView.tag = 101;
+    
+    //设置翻页效果，不允许反弹，不显示水平滑动条，设置代理为自己
+    _scrollView.pagingEnabled = YES;
+    _scrollView.bounces = NO;
+    _scrollView.showsHorizontalScrollIndicator = NO;
+    _scrollView.delegate = self;
+    
+    //在UIScrollView 上加入 UIImageView
+    for (int i = 0 ; i < 4; i ++) {
+        
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * i , 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+        
+        //将要加载的图片放入imageView 中
+        //UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%d",i+1]];
+        UIImage *image = [UIImage imageNamed:@"IMG_3892.jpg"];
+        imageView.image = image;
+        [_scrollView addSubview:imageView];
+    }
+    
+    //初始化 UIPageControl 和 _scrollView 显示在 同一个页面中
+    UIPageControl *pageConteol = [[UIPageControl alloc] initWithFrame:CGRectMake((UI_SCREEN_WIDTH-50)/2, self.view.frame.size.height - 60, 50, 40)];
+    pageConteol.numberOfPages = 4;//设置pageConteol 的page 和 _scrollView 上的图片一样多
+    pageConteol.tag = 201;
+    
+    [self.view addSubview:_scrollView];
+    [self.view addSubview: pageConteol];
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    
+    // 记录scrollView 的当前位置，因为已经设置了分页效果，所以：位置/屏幕大小 = 第几页
+    int current = scrollView.contentOffset.x/[UIScreen mainScreen].bounds.size.width;
+    
+    //根据scrollView 的位置对page 的当前页赋值
+    UIPageControl *page = (UIPageControl *)[self.view viewWithTag:201];
+    page.currentPage = current;
+    
+    //当显示到最后一页时，让滑动图消失
+    if (page.currentPage == 3) {
+        
+        //调用方法，使滑动图消失
+        [self scrollViewDisappear];
+    }
+}
+
+-(void)scrollViewDisappear{
+    
+    //拿到 view 中的 UIScrollView 和 UIPageControl
+    UIScrollView *scrollView = (UIScrollView *)[self.view viewWithTag:101];
+    UIPageControl *page = (UIPageControl *)[self.view viewWithTag:201];
+    
+    //设置滑动图消失的动画效果图
+    [UIView animateWithDuration:3.0f animations:^{
+        
+        scrollView.center = CGPointMake(self.view.frame.size.width/2, 1.5 * self.view.frame.size.height);
+        
+    } completion:^(BOOL finished) {
+        
+        [scrollView removeFromSuperview];
+        [page removeFromSuperview];
+    }];
+    
+    //将滑动图启动过的信息保存到 NSUserDefaults 中，使得第二次不运行滑动图
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:@"YES" forKey:@"isScrollViewAppear"];
 }
 
 - (void)addNotifications {
@@ -209,12 +296,17 @@
     
     [self dismissViewControllerAnimated:YES completion:^{
         
+        //result 格式： hostid @ hostname @ userType
         NSArray* list = [result componentsSeparatedByString:@"@"];
-        if([list count] > 1)
+        if([list count] > 2)
         {
             self.masterId = list[0];
+            self.hostName = list[1];
             [vc setValue:self.masterId forKey:@"masterStr"];
-            if ([@"1" isEqualToString:list[1]]) {
+            [vc setValue:self.hostName forKey:@"hostName"];
+            
+            
+            if ([@"1" isEqualToString:list[2]]) {
                 self.role=@"主人";
             }else{
                 self.role=@"客人";
