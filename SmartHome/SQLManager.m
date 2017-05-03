@@ -1442,6 +1442,7 @@
     [db close];
     return lights;
 }
+
 // 获取“照明”设备（灯，窗帘）
 + (NSArray *)getLightDevicesByRoom:(int)roomID
 {
@@ -1466,6 +1467,30 @@
     [db closeOpenResultSets];
     [db close];
     return lights;
+}
+
++(NSArray *)mediaDeviceNamesByRoom:(int)roomID
+{
+    NSMutableArray *devices = [NSMutableArray new];
+    
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        NSString *sql;
+        if ([self isWholeHouse:roomID]) {
+            sql = [NSString stringWithFormat:@"select typename from devices where subtypeid = 3 and htypeID<>14"];
+        }else{
+            sql = [NSString stringWithFormat:@"select typename from devices where subtypeid = 3 and htypeID<>14 and rid=%d",roomID];
+        }
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+            [devices addObject:[resultSet stringForColumn:@"typename"]];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return devices;
 }
 
 + (NSArray *)getCurtainByRoom:(int) roomID

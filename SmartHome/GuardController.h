@@ -1,3 +1,4 @@
+#import "CustomViewController.h"
 //
 //  GuardController.h
 //  SmartHome
@@ -5,7 +6,7 @@
 //  Created by Brustar on 16/6/13.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
-@interface GuardController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@interface GuardController : CustomViewController<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic,weak) NSString *deviceid;
