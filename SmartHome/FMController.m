@@ -110,6 +110,7 @@
 
 -(void)initChannelContainer
 {
+    self.deviceid = [SQLManager singleDeviceWithCatalogID:FM byRoom:self.roomID];
     self.allFavouriteChannels = [SQLManager getAllChannelForFavoritedForType:@"fm" deviceID:[self.deviceid intValue]];
     for(TVChannel *ch in self.allFavouriteChannels)
     {

@@ -724,6 +724,7 @@
                         <segue destination="I2g-xI-xns" kind="show" identifier="projector" id="BPD-VH-126"/>
                         <segue destination="5Gm-3R-5T0" kind="show" identifier="screen" id="fjH-3K-wmA"/>
                         <segue destination="APC-Z7-X0o" kind="show" identifier="amplifier" id="g6r-06-f8D"/>
+                        <segue destination="syP-8K-5fM" kind="show" identifier="doorclock" id="t6u-H0-996"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fWq-Vo-1ts" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2009,6 +2010,82 @@
             </objects>
             <point key="canvasLocation" x="138" y="1068"/>
         </scene>
+        <!--doorclock-->
+        <scene sceneID="zsA-i0-MLJ">
+            <objects>
+                <viewController id="syP-8K-5fM" userLabel="doorclock" customClass="GuardController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JKV-PK-1ex"/>
+                        <viewControllerLayoutGuide type="bottom" id="VT7-mV-pg9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="e2c-mm-AVA">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="9Ay-vN-we6">
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plugin_on" translatesAutoresizingMaskIntoConstraints="NO" id="uFF-h5-tT1">
+                                <rect key="frame" x="20" y="176" width="375" height="385"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xba-cr-GiT">
+                                <rect key="frame" x="20" y="64" width="374" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="748" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IRo-Mn-lTp">
+                                        <rect key="frame" x="0.0" y="0.0" width="94" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="智能浇花" backgroundImage="light_bar">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m5t-2I-62l">
+                                        <rect key="frame" x="94" y="0.0" width="93" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="智能投食" backgroundImage="light_bar">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4gu-hc-yyu">
+                                        <rect key="frame" x="187" y="0.0" width="94" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="智能插座" backgroundImage="light_bar_pressed">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zEP-DQ-Pg1">
+                                        <rect key="frame" x="281" y="0.0" width="93" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="除湿器" backgroundImage="light_bar">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="4gu-hc-yyu" firstAttribute="width" secondItem="IRo-Mn-lTp" secondAttribute="width" id="14S-MZ-X0e"/>
+                                    <constraint firstItem="m5t-2I-62l" firstAttribute="width" secondItem="IRo-Mn-lTp" secondAttribute="width" id="Al0-xw-KPe"/>
+                                    <constraint firstItem="zEP-DQ-Pg1" firstAttribute="width" secondItem="IRo-Mn-lTp" secondAttribute="width" id="G5M-sq-d7I"/>
+                                    <constraint firstAttribute="height" constant="40" id="OMS-7R-EVh"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9Ay-vN-we6" firstAttribute="top" secondItem="JKV-PK-1ex" secondAttribute="bottom" id="3dI-Y9-siQ"/>
+                            <constraint firstItem="Xba-cr-GiT" firstAttribute="top" secondItem="JKV-PK-1ex" secondAttribute="bottom" constant="44" id="6Rn-qn-BBI"/>
+                            <constraint firstItem="uFF-h5-tT1" firstAttribute="centerX" secondItem="e2c-mm-AVA" secondAttribute="centerX" id="AUO-7q-H0z"/>
+                            <constraint firstAttribute="trailing" secondItem="9Ay-vN-we6" secondAttribute="trailing" id="Bs2-KD-MUO"/>
+                            <constraint firstItem="VT7-mV-pg9" firstAttribute="top" secondItem="9Ay-vN-we6" secondAttribute="bottom" id="WJL-7q-PHC"/>
+                            <constraint firstItem="Xba-cr-GiT" firstAttribute="leading" secondItem="e2c-mm-AVA" secondAttribute="leadingMargin" id="YXT-lT-M3t"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Xba-cr-GiT" secondAttribute="trailing" id="YXX-dK-O4e"/>
+                            <constraint firstItem="uFF-h5-tT1" firstAttribute="centerY" secondItem="e2c-mm-AVA" secondAttribute="centerY" id="uFX-S2-bhY"/>
+                            <constraint firstItem="9Ay-vN-we6" firstAttribute="leading" secondItem="e2c-mm-AVA" secondAttribute="leading" id="voL-DV-sEc"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Oas-2h-jpk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2755" y="1068"/>
+        </scene>
     </scenes>
     <resources>
         <image name="DVD_next" width="10" height="10"/>
@@ -2070,8 +2147,8 @@
         <image name="wind" width="10" height="10"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Cwb-DF-fAx"/>
-        <segue reference="jue-EE-v6Z"/>
-        <segue reference="YBs-Cx-01Z"/>
+        <segue reference="ocV-tE-pbO"/>
+        <segue reference="g6r-06-f8D"/>
+        <segue reference="BPD-VH-126"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -145,7 +145,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
    
     id theSegue = segue.destinationViewController;
-    [theSegue setValue:self.deviceid forKey:@"deviceid"];
+    [theSegue setValue:@(self.roomID) forKey:@"roomID"];
 }
 
 - (void)didReceiveMemoryWarning {

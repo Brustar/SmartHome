@@ -5,9 +5,6 @@
 //  Created by Brustar on 16/6/13.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
-
-#define guardType @"智能门锁"
-
 #import "GuardController.h"
 #import "EntranceGuard.h"
 #import "Scene.h"
@@ -15,20 +12,20 @@
 #import "PackManager.h"
 #import "SocketManager.h"
 #import "SQLManager.h"
+#import "ORBSwitch.h"
 
-
-
-@interface GuardController ()
+#define guardType @"智能门锁"
+@interface GuardController ()<ORBSwitchDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UISwitch *switchView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedGuard;
 @property (nonatomic,strong) UILabel *label;
 @property (nonatomic,strong) NSMutableArray *guardNames;
 @property (nonatomic,strong) NSMutableArray *guardIDs;
-
-- (IBAction)selectedTypeOfGuard:(UISegmentedControl *)sender;
+@property (nonatomic,strong) ORBSwitch *switcher;
 
 @end
+
 @implementation GuardController
 
 -(NSMutableArray *)guardIDs
@@ -50,7 +47,7 @@
             }
         }else if(self.roomID)
         {
-            [_guardIDs addObjectsFromArray:[SQLManager getDeviceByTypeName:guardType andRoomID:self.roomID]];
+            [_guardIDs addObject:[SQLManager singleDeviceWithCatalogID:doorclock byRoom:self.roomID]];
         }else{
             [_guardIDs addObject:self.deviceid];
         }
@@ -79,10 +76,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self setNaviBarTitle:guardType];
+    [self initSwitcher];
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.scrollEnabled = NO;
-    self.title = guardType;
     
     [self setupSegmentGuard];
 
@@ -92,6 +91,18 @@
     //查询设备状态
     NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
     [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
+-(void) initSwitcher
+{
+    self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:[UIImage imageNamed:@"lighting_off"] inactiveBackgroundImage:nil activeBackgroundImage:nil frame:CGRectMake(0, 0, 194, 194)];
+    self.switcher.center = CGPointMake(self.view.bounds.size.width / 2,
+                                       self.view.bounds.size.height / 2);
+    
+    self.switcher.knobRelativeHeight = 1.0f;
+    self.switcher.delegate = self;
+    
+    [self.view addSubview:self.switcher];
 }
 
 -(void)setupSegmentGuard
@@ -117,15 +128,14 @@
 
 -(IBAction)save:(id)sender
 {
-    if ([sender isEqual:self.switchView]) {
-        NSData *data=[[DeviceInfo defaultManager] toogle:self.switchView.isOn deviceID:self.deviceid];
-        NSLog(@"智能门锁的发送指令：%@", data);
+    if ([sender isEqual:self.switcher]) {
+        NSData *data=[[DeviceInfo defaultManager] toogle:self.switcher.isOn deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
     }
     EntranceGuard *device=[[EntranceGuard alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
-    [device setUnlock: self.switchView.isOn];
+    [device setUnlock: self.switcher.isOn];
     
     
     [_scene setSceneID:[self.sceneid intValue]];
@@ -243,6 +253,19 @@
 -(void) dealloc
 {
     [self.timer invalidate];
+}
+
+#pragma mark - ORBSwitchDelegate
+- (void)orbSwitchToggled:(ORBSwitch *)switchObj withNewValue:(BOOL)newValue {
+    NSLog(@"Switch toggled: new state is %@", (newValue) ? @"ON" : @"OFF");
+    [self save:self.switcher];
+}
+
+- (void)orbSwitchToggleAnimationFinished:(ORBSwitch *)switchObj {
+    [switchObj setCustomKnobImage:[UIImage imageNamed:(switchObj.isOn) ? @"lighting_on" : @"lighting_off"]
+          inactiveBackgroundImage:nil
+            activeBackgroundImage:nil];
+    
 }
 
 @end

@@ -186,46 +186,30 @@ static NSString * const CYPhotoId = @"photo";
 {
     switch (typeID) {
         case light:
-            
             return @"lighting";
         case curtain:
-            
             return @"curtain";
         case DVDtype:
-            
             return @"DVD";
         case bgmusic:
-            
             return @"bgmusic";
         case FM:
-            
             return @"FM";
         case air:
-            
             return @"air";
         case doorclock:
-            
             return @"doorclock";
         case projector:
-            
             return @"projector";
         case screen:
-            
             return @"screen";
         case amplifier:
-            
             return @"amplifier";
         case TVtype:
-            
-            return @"TV";
-        case netTV:
-            
             return @"TV";
         case camera:
-            
             return @"camera";
         case plugin:
-            
             return @"plugin";
         default:
             break;

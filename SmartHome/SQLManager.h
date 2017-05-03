@@ -63,7 +63,8 @@
 +(NSArray *)deviceSubTypeByRoomId:(NSInteger)roomID;
 +(NSArray *)deviceTypeIDByRoom:(NSInteger)roomID;
 +(NSArray *)deviceIdsByRoomId:(int)roomID;
-
+//多媒体UI菜单
++(NSArray *)mediaDeviceNamesByRoom:(int)roomID;
 + (NSArray *)getLightTypeNameWithRoomID:(NSInteger)roomID;
 + (NSArray *)getLightWithTypeName:(NSString *)typeName roomID:(NSInteger)roomID;
 
