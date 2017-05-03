@@ -342,35 +342,37 @@
     _firstBtn.selected = !_firstBtn.selected;
     _TwoBtn.selected = !_TwoBtn.selected;
     _ThreeBtn.selected = !_ThreeBtn.selected;
-   
-    if (_shortcutsArray) {
-//        arr[0] = data[0];
-//        arr[1] = data[1];
-//        arr[2] = data[2];
-        if (_shortcutsArray.count >= 3) {
+    _TwoBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+    _ThreeBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+    _firstBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+    if (_shortcutsArray.count != 0) {
+        if (_shortcutsArray.count == 1) {
+            Scene * info = _shortcutsArray[0];
+            [_firstBtn setTitle:info.sceneName forState:UIControlStateNormal];
+            _firstBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+            _TwoBtn.hidden = YES;
+//          _ThreeBtn.hidden  = YES;
             
-            for (int i =0; i < _shortcutsArray.count; i ++) {
-                Scene * info1 = _shortcutsArray[0];
-                Scene * info2 = _shortcutsArray[1];
-                Scene * info3 = _shortcutsArray[2];
-                _firstBtn.titleLabel.font = [UIFont systemFontOfSize:10];
-                _TwoBtn.titleLabel.font = [UIFont systemFontOfSize:10];
-                _ThreeBtn.titleLabel.font = [UIFont systemFontOfSize:10];
-                [_firstBtn setTitle:info1.sceneName forState:UIControlStateNormal];
-                [_ThreeBtn setTitle:info2.sceneName forState:UIControlStateNormal];
-                [_TwoBtn setTitle:info3.sceneName forState:UIControlStateNormal];
-            }
+        }if (_shortcutsArray.count == 2) {
+            Scene * info1 = _shortcutsArray[0];
+            Scene * info2 = _shortcutsArray[1];
+            [_firstBtn setTitle:info1.sceneName forState:UIControlStateNormal];
+            [_TwoBtn setTitle:info2.sceneName forState:UIControlStateNormal];
+//           _ThreeBtn.hidden = YES;
         }
-        
-        
-
-    }
-    
-    if (_shortcutsArray.count >= 3) {
-        if ([_shortcutsArray count]>0 && _shortcutsArray[2] != nil) {
-            _ThreeBtn.userInteractionEnabled = NO;
+        if (_shortcutsArray.count == 3) {
+            Scene * info1 = _shortcutsArray[0];
+            Scene * info2 = _shortcutsArray[1];
+            Scene * info3 = _shortcutsArray[2];
+            [_firstBtn setTitle:info1.sceneName forState:UIControlStateNormal];
+            [_TwoBtn setTitle:info2.sceneName forState:UIControlStateNormal];
+            [_ThreeBtn setTitle:info3.sceneName forState:UIControlStateNormal];
             [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular3"] forState:UIControlStateNormal];
         }
+    }else{
+        _firstBtn.hidden = YES;
+        _TwoBtn.hidden = YES;
+        
     }
 }
 
