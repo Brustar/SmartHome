@@ -347,24 +347,31 @@
 //        arr[0] = data[0];
 //        arr[1] = data[1];
 //        arr[2] = data[2];
-        for (int i =0; i < _shortcutsArray.count; i ++) {
-             Scene * info1 = _shortcutsArray[0];
-             Scene * info2 = _shortcutsArray[1];
-             Scene * info3 = _shortcutsArray[2];
-             _firstBtn.titleLabel.font = [UIFont systemFontOfSize:10];
-             _TwoBtn.titleLabel.font = [UIFont systemFontOfSize:10];
-             _ThreeBtn.titleLabel.font = [UIFont systemFontOfSize:10];
-            [_firstBtn setTitle:info1.sceneName forState:UIControlStateNormal];
-            [_ThreeBtn setTitle:info2.sceneName forState:UIControlStateNormal];
-            [_TwoBtn setTitle:info3.sceneName forState:UIControlStateNormal];
+        if (_shortcutsArray.count >= 3) {
+            
+            for (int i =0; i < _shortcutsArray.count; i ++) {
+                Scene * info1 = _shortcutsArray[0];
+                Scene * info2 = _shortcutsArray[1];
+                Scene * info3 = _shortcutsArray[2];
+                _firstBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+                _TwoBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+                _ThreeBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+                [_firstBtn setTitle:info1.sceneName forState:UIControlStateNormal];
+                [_ThreeBtn setTitle:info2.sceneName forState:UIControlStateNormal];
+                [_TwoBtn setTitle:info3.sceneName forState:UIControlStateNormal];
+            }
         }
+        
+        
 
     }
-    if ([_shortcutsArray count]>0 && _shortcutsArray[2] != nil) {
-         _ThreeBtn.userInteractionEnabled = NO;
-        [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular3"] forState:UIControlStateNormal];
+    
+    if (_shortcutsArray.count >= 3) {
+        if ([_shortcutsArray count]>0 && _shortcutsArray[2] != nil) {
+            _ThreeBtn.userInteractionEnabled = NO;
+            [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular3"] forState:UIControlStateNormal];
+        }
     }
-  
 }
 
 //社交平台的弹出事件
