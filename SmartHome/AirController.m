@@ -59,7 +59,7 @@ static NSString *const airCellIdentifier = @"airCell";
     [self initSwitch];
     self.tempreturePan.transform = CGAffineTransformMakeRotation(MIX_TEMP_ROTATE_DEGREE);
     self.visitedBtns = [NSMutableArray new];
-    self.params=@[@[@"speed_fast",@"speed_middle",@"speed_slow"],@[@"speed_dir_up",@"speed_dir_down"]];
+    self.params=@[@[@"speed_fast",@"speed_middle",@"speed_slow"],@[@"speed_dir_down",@"speed_dir_up"]];
     self.paramView.scrollEnabled=NO;
     
     _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];

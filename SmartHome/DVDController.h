@@ -1,3 +1,4 @@
+#import "CustomViewController.h"
 //
 //  DVDController.h
 //  SmartHome
@@ -6,7 +7,7 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
-@interface DVDController : UIViewController
+@interface DVDController : CustomViewController
 
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic,weak) NSString *deviceid;

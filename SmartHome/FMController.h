@@ -1,3 +1,4 @@
+#import "CustomViewController.h"
 //
 //  FMController.h
 //  SmartHome
@@ -6,7 +7,7 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 
-@interface FMController : UIViewController
+@interface FMController : CustomViewController
 
 @property (nonatomic,weak) NSString *sceneid;
 @property (weak, nonatomic) IBOutlet UISlider *volume;

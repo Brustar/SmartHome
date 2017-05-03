@@ -67,14 +67,14 @@
     _roomID = roomID;
     if(roomID)
     {
-        self.deviceid = [SQLManager deviceIDWithRoomID:self.roomID withType:@"FM"];
-    }
-    
-    
+        self.deviceid = [SQLManager singleDeviceWithCatalogID:FM byRoom:self.roomID];
+    } 
     
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setNaviBarTitle:@"收音机"];
     self.hzLabel.transform = CGAffineTransformMakeRotation(M_PI/2 + M_PI);
     self.collectionView.pagingEnabled = YES;
     
@@ -108,7 +108,7 @@
 -(void)setRuleForFMChannel
 {
     CGFloat rule = [self.numberOfChannel.text floatValue];
-    NSLog(@"\n\n\n\n\n rule = %f",rule);
+    
     TXHRrettyRuler *ruler = [[TXHRrettyRuler alloc] initWithFrame:CGRectMake(30, 150, self.fmView.bounds.size.width - 30 * 2, 150)];
     ruler.rulerDelegate = self;
     [ruler showRulerScrollViewWithCount:205 average:[NSNumber numberWithFloat:0.1] currentValue:rule smallMode:NO];

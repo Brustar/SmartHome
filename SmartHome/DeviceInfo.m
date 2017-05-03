@@ -300,6 +300,11 @@
     return [self action:PROTOCOL_SURE deviceID:deviceID];
 }
 
+-(NSData *) menu:(NSString *)deviceID
+{
+    return [self action:PROTOCOL_MENU deviceID:deviceID];
+}
+
 #pragma mark - lighter
 -(NSData *) toogleLight:(uint8_t)toogle deviceID:(NSString *)deviceID
 {

@@ -120,7 +120,7 @@
 {
     _roomID = roomID;
     if(roomID){
-        self.deviceid = [SQLManager deviceIDWithRoomID:self.roomID withType:@"网络电视"];
+        self.deviceid = [SQLManager singleDeviceWithCatalogID:TVtype byRoom:self.roomID];
         if(self.sceneid > 0)
         {
             NSArray *tvArr = [SQLManager getDeviceIDsBySeneId:[self.sceneid intValue]];
@@ -137,16 +137,12 @@
         
     }
     
-    
-    //self.deviceid = [DeviceManager getDeviceByTypeName:@"TV" andRoomID:self.roomID];
-    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-
-    self.title = @"电视";
+    [self setNaviBarTitle:@"电视"];
     self.eNumber = [SQLManager getENumber:[self.deviceid intValue]];
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];

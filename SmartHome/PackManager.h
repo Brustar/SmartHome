@@ -53,6 +53,7 @@ typedef struct Protocol Proto;
 #define PROTOCOL_VOLUME_UP 0x02
 #define PROTOCOL_VOLUME_DOWN 0x03
 #define PROTOCOL_MUTE 0x04
+#define PROTOCOL_MENU 0x22
 
 #define BGMUSIC_DEVICE_TYPE 0x14
 

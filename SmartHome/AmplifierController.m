@@ -16,10 +16,8 @@
 #import "PackManager.h"
 #import "ORBSwitch.h"
 
-@interface AmplifierController ()<UITableViewDelegate,UITableViewDataSource,ORBSwitchDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-//@property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
-@property (nonatomic,strong) DetailTableViewCell *cell;
+@interface AmplifierController ()<ORBSwitchDelegate>
+
 @property (nonatomic,strong) NSMutableArray *amplifierNames;
 @property (nonatomic,strong) NSMutableArray *amplifierIDArr;
 @property (nonatomic,strong) ORBSwitch *switcher;
@@ -78,6 +76,16 @@
     [self setNaviBarTitle:@"功放"];
     self.deviceid=[self.amplifierIDArr objectAtIndex:0];
     [self initSwitcher];
+    
+    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+    if ([self.sceneid intValue]>0) {
+        for(int i=0;i<[_scene.devices count];i++)
+        {
+            if ([[_scene.devices objectAtIndex:i] isKindOfClass:[Amplifier class]]) {
+                self.switcher.isOn=((Amplifier *)[_scene.devices objectAtIndex:i]).waiting;
+            }
+        }
+    }
 }
 
 -(void) initSwitcher
@@ -131,63 +139,6 @@
         if ([devID intValue]==[self.deviceid intValue]) {
             self.switchView.on=proto.action.state;
         }
-    }
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 2;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if(indexPath.row == 0)
-    {
-        DetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-        self.cell = cell;
-        //cell.label.text = self.amplifierNames[self.segment.selectedSegmentIndex];
-        self.switchView = cell.power;//[[UISwitch alloc] initWithFrame:CGRectZero];
-        _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
-        if ([self.sceneid intValue]>0) {
-            for(int i=0;i<[_scene.devices count];i++)
-            {
-                if ([[_scene.devices objectAtIndex:i] isKindOfClass:[Amplifier class]]) {
-                    cell.power.on=((Amplifier *)[_scene.devices objectAtIndex:i]).waiting;
-                }
-            }
-        }
-        [cell.power addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
-        
-        return cell;
-    }else{
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"recell"];
-        if(!cell)
-        {
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"recell"];
-            
-        }
-        
-        cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 5, 100, 30)];
-        [cell.contentView addSubview:label];
-        label.text = @"详细信息";
-        return cell;
-    }
-    
-    
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 50;
-}
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if(indexPath.row == 1)
-    {
-        [self performSegueWithIdentifier:@"detail" sender:self];
     }
 }
 
