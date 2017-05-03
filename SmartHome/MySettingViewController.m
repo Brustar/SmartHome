@@ -76,12 +76,12 @@
         }
     
     }else {
-        if (section == 3) {
-            return 2;
+        if (section == 3) { // 场景快捷键，定时器，地址管理
+            return 3;
         }
     }
-    if (section ==2) {
-        return 2;
+    if (section ==2) {  //场景快捷键，定时器，地址管理
+        return 3;
     }
     return 1;
 }
@@ -132,8 +132,10 @@
                 if(indexPath.row == 0)
                 {
                     title = @"场景快捷键";
-                }else {
+                }else if(indexPath.row == 1){
                     title = @"定时器";
+                }else {
+                    title = @"地址管理";
                 }
             break;
         case 3:
@@ -249,10 +251,14 @@
               //场景快捷键
               SceneShortcutsViewController *vc = [myInfoStoryBoard instantiateViewControllerWithIdentifier:@"SceneShortcutsVC"];
               [self.navigationController pushViewController:vc animated:YES];
-          }else{
+          }else if(indexPath.row == 1){
               //定时器
               DeviceListTimeVC * deviceList = [iphoneBoard instantiateViewControllerWithIdentifier:@"iPhoneDeviceListTimeVC"];
               [self.navigationController pushViewController:deviceList animated:YES];
+          }else { // 地址管理
+              DeliveryAddressViewController *vc = [myInfoStoryBoard instantiateViewControllerWithIdentifier:@"DeliveryAddressVC"];
+              vc.hidesBottomBarWhenPushed = YES;
+              [self.navigationController pushViewController:vc animated:YES];
           }
         
      }else if(indexPath.section == 3)

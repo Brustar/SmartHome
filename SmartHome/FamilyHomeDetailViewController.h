@@ -19,6 +19,8 @@
 #import "DVDTableViewCell.h"
 #import "ScreenCurtainCell.h"
 #import "BjMusicTableViewCell.h"
+#import "SceneManager.h"
+#import "IphoneEditSceneController.h"
 
 #define SceneCellWidth  (self.sceneListCollectionView.frame.size.width-6.0)/3
 #define SceneCellHeight  self.sceneListCollectionView.frame.size.height

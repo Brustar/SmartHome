@@ -10,6 +10,7 @@
 #import "HttpManager.h"
 #import "UserInfo.h"
 #import "UIButton+WebCache.h"
+#import "WebManager.h"
 
 @interface UserInfoViewController : CustomViewController<UITableViewDelegate, UITableViewDataSource, HttpDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
