@@ -17,7 +17,7 @@
 #import "AudioManager.h"
 #import "SQLManager.h"
 #import <AVFoundation/AVFoundation.h>
-#import "ShortcutKeyViewController.h"
+#import "SceneShortcutsViewController.h"
 #import "TabbarPanel.h"
 #import "UIImageView+Badge.h"
 #import <RongIMKit/RongIMKit.h>
@@ -347,7 +347,7 @@
 //        arr[0] = data[0];
 //        arr[1] = data[1];
 //        arr[2] = data[2];
-        for (int i =0; i < 3; i ++) {
+        for (int i =0; i < _shortcutsArray.count; i ++) {
              Scene * info1 = _shortcutsArray[0];
              Scene * info2 = _shortcutsArray[1];
              Scene * info3 = _shortcutsArray[2];
@@ -481,7 +481,7 @@
 - (IBAction)SceneShortcutBtn:(id)sender {
     
     UIStoryboard * myInfoStoryBoard = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
-    ShortcutKeyViewController * shortcutKeyVC = [myInfoStoryBoard instantiateViewControllerWithIdentifier:@"ShortcutKeyViewController"];
+    SceneShortcutsViewController * shortcutKeyVC = [myInfoStoryBoard instantiateViewControllerWithIdentifier:@"SceneShortcutsVC"];
     
     [self.navigationController pushViewController:shortcutKeyVC animated:YES];
 }
