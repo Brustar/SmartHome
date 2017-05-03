@@ -59,7 +59,7 @@ static NSString *const airCellIdentifier = @"airCell";
     [self initSwitch];
     self.tempreturePan.transform = CGAffineTransformMakeRotation(MIX_TEMP_ROTATE_DEGREE);
     self.visitedBtns = [NSMutableArray new];
-    self.params=@[@[@"speed_fast",@"speed_middle",@"speed_slow"],@[@"speed_dir_up",@"speed_dir_down"]];
+    self.params=@[@[@"speed_fast",@"speed_middle",@"speed_slow"],@[@"speed_dir_down",@"speed_dir_up"]];
     self.paramView.scrollEnabled=NO;
     
     _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
@@ -142,12 +142,12 @@ static NSString *const airCellIdentifier = @"airCell";
         if (proto.action.state==0x8A) {
             NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
             self.wetLabel.text = valueString;
-            [self.humidity_hand rotate:proto.action.RValue];
+            [self.humidity_hand rotate:30+proto.action.RValue*100/300];
         }
         if (proto.action.state==0x7F) {
-            NSString *valueString = [NSString stringWithFormat:@"%d ug/m",proto.action.RValue];
+            NSString *valueString = [NSString stringWithFormat:@"%d ug/m³",proto.action.RValue];
             self.pmLabel.text = valueString;
-            [self.pm_clock_hand rotate:proto.action.RValue];
+            [self.pm_clock_hand rotate:30+proto.action.RValue*500/300];
         }
         if (proto.action.state==0x7E) {
             NSString *valueString = [NSString stringWithFormat:@"%d db",proto.action.RValue];
@@ -184,9 +184,9 @@ static NSString *const airCellIdentifier = @"airCell";
     if (self.currentMode < 2){
         for (int i=1; i<16; i++) {
             UIView *viewblue = [self.view viewWithTag:i+100];
-            viewblue.hidden = self.currentMode == 1;
+            viewblue.hidden = self.airMode == 1;
             UIView *viewred = [self.view viewWithTag:i+200];
-            viewred.hidden = self.currentMode == 0;
+            viewred.hidden = self.airMode == 0;
         }
     }
     
@@ -332,9 +332,9 @@ static NSString *const airCellIdentifier = @"airCell";
     
     for (int i=1; i<16; i++) {
             UIView *viewblue = [self.view viewWithTag:i+100];
-            viewblue.hidden = (degree <= MIX_TEMP_ROTATE_DEGREE+(i)*14) || self.currentMode == 1;
+            viewblue.hidden = (degree <= MIX_TEMP_ROTATE_DEGREE+(i)*14) || self.airMode == 1;
             UIView *viewred = [self.view viewWithTag:i+200];
-            viewred.hidden = (degree <= MIX_TEMP_ROTATE_DEGREE+(i)*14) || self.currentMode == 0;
+            viewred.hidden = (degree <= MIX_TEMP_ROTATE_DEGREE+(i)*14) || self.airMode == 0;
     }
     
     

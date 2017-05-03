@@ -164,7 +164,7 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" tag="-1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WWd-JJ-45g">
+                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WWd-JJ-45g">
                                 <rect key="frame" x="306" y="673" width="103" height="47"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="103" id="IXT-py-99b"/>
@@ -431,19 +431,28 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="control_banner" translatesAutoresizingMaskIntoConstraints="NO" id="eUS-Cm-DyV">
                                 <rect key="frame" x="20" y="666" width="374" height="60"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RAs-zP-GYG">
+                            <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RAs-zP-GYG">
                                 <rect key="frame" x="71" y="673" width="103" height="47"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="CH  +" backgroundImage="control_button"/>
+                                <connections>
+                                    <action selector="controlCmd:" destination="ZhE-q2-gFO" eventType="touchUpInside" id="Gcr-Wd-1sQ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gxk-X8-miD">
                                 <rect key="frame" x="184" y="673" width="46" height="46"/>
                                 <state key="normal" image="TV_off" backgroundImage="music_button_control"/>
+                                <connections>
+                                    <action selector="controlCmd:" destination="ZhE-q2-gFO" eventType="touchUpInside" id="CyS-LQ-Gri"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HDM-8B-0Y4">
                                 <rect key="frame" x="240" y="673" width="103" height="47"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="CH  -" backgroundImage="control_button"/>
+                                <connections>
+                                    <action selector="controlCmd:" destination="ZhE-q2-gFO" eventType="touchUpInside" id="aOh-eq-68E"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_banner" translatesAutoresizingMaskIntoConstraints="NO" id="GO2-PH-05J">
                                 <rect key="frame" x="0.0" y="599" width="414" height="47"/>
@@ -460,35 +469,50 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dir_pad" translatesAutoresizingMaskIntoConstraints="NO" id="bOe-ok-teX">
                                 <rect key="frame" x="44" y="205" width="326" height="326"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJG-79-6SI">
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJG-79-6SI">
                                 <rect key="frame" x="195" y="282" width="24" height="12"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="G5y-Dv-r3r"/>
                                     <constraint firstAttribute="height" constant="12" id="IvM-br-Xqw"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="dir_up"/>
+                                <connections>
+                                    <action selector="controlCmd:" destination="ZhE-q2-gFO" eventType="touchUpInside" id="gW7-7r-vnK"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aDS-72-SQd">
+                            <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aDS-72-SQd">
                                 <rect key="frame" x="195" y="442" width="24" height="12"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="12" id="C84-1F-quV"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="dir_down"/>
+                                <connections>
+                                    <action selector="controlCmd:" destination="ZhE-q2-gFO" eventType="touchUpInside" id="ktg-UB-xZU"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oEq-cA-XA4">
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oEq-cA-XA4">
                                 <rect key="frame" x="121" y="356" width="12" height="24"/>
                                 <state key="normal" backgroundImage="dir_left"/>
+                                <connections>
+                                    <action selector="controlCmd:" destination="ZhE-q2-gFO" eventType="touchUpInside" id="GHk-Nn-Whs"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8G0-0j-Rx1">
+                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8G0-0j-Rx1">
                                 <rect key="frame" x="281" y="356" width="12" height="24"/>
                                 <state key="normal" backgroundImage="dir_right"/>
+                                <connections>
+                                    <action selector="controlCmd:" destination="ZhE-q2-gFO" eventType="touchUpInside" id="EaU-as-Axq"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1hc-VA-Cre">
+                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1hc-VA-Cre">
                                 <rect key="frame" x="192" y="354" width="30" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="OK">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="controlCmd:" destination="ZhE-q2-gFO" eventType="touchUpInside" id="N2s-S4-mxP"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8pd-53-yXy">
                                 <rect key="frame" x="20" y="64" width="374" height="40"/>
@@ -496,7 +520,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="748" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XtS-3M-HG7">
                                         <rect key="frame" x="0.0" y="0.0" width="75" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="机顶盒" backgroundImage="light_bar">
+                                        <state key="normal" title="机顶盒" backgroundImage="light_bar_pressed">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
@@ -510,7 +534,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kcf-uy-ZNF">
                                         <rect key="frame" x="150" y="0.0" width="74" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="投影幕" backgroundImage="light_bar">
+                                        <state key="normal" title="功放" backgroundImage="light_bar">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
@@ -537,44 +561,17 @@
                                     <constraint firstItem="5BW-4N-gyE" firstAttribute="width" secondItem="XtS-3M-HG7" secondAttribute="width" id="wE7-e2-reW"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LO1-O9-3dJ">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LO1-O9-3dJ">
                                 <rect key="frame" x="20" y="114" width="61" height="60"/>
                                 <state key="normal" image="TV_menu" backgroundImage="mode_button"/>
+                                <connections>
+                                    <action selector="controlCmd:" destination="ZhE-q2-gFO" eventType="touchUpInside" id="5zi-eL-qND"/>
+                                </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ACd-Ac-nHX">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ACd-Ac-nHX">
                                 <rect key="frame" x="101" y="114" width="293" height="40"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="81R-nv-Hep">
-                                        <rect key="frame" x="0.0" y="0.0" width="59" height="40"/>
-                                        <state key="normal" image="CCTV1"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJK-jc-vnz">
-                                        <rect key="frame" x="59" y="0.0" width="58" height="40"/>
-                                        <state key="normal" image="CCTV2"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Rf-l7-R8v">
-                                        <rect key="frame" x="117" y="0.0" width="59" height="40"/>
-                                        <state key="normal" image="HNTV"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3uZ-98-etD">
-                                        <rect key="frame" x="176" y="0.0" width="58" height="40"/>
-                                        <state key="normal" image="SZTV"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3AH-Gm-SGG">
-                                        <rect key="frame" x="234" y="0.0" width="59" height="40"/>
-                                        <state key="normal" image="ZJTV"/>
-                                    </button>
-                                </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="3hP-UN-DZP"/>
-                                    <constraint firstItem="3AH-Gm-SGG" firstAttribute="width" secondItem="81R-nv-Hep" secondAttribute="width" id="7PG-FF-5CA"/>
-                                    <constraint firstItem="3uZ-98-etD" firstAttribute="height" secondItem="81R-nv-Hep" secondAttribute="height" id="A8s-Te-AUO"/>
-                                    <constraint firstItem="8Rf-l7-R8v" firstAttribute="height" secondItem="81R-nv-Hep" secondAttribute="height" id="Riz-o2-s6O"/>
-                                    <constraint firstItem="hJK-jc-vnz" firstAttribute="height" secondItem="81R-nv-Hep" secondAttribute="height" id="agX-ec-dOR"/>
-                                    <constraint firstItem="3uZ-98-etD" firstAttribute="width" secondItem="81R-nv-Hep" secondAttribute="width" id="h89-rj-2Fn"/>
-                                    <constraint firstItem="hJK-jc-vnz" firstAttribute="width" secondItem="81R-nv-Hep" secondAttribute="width" id="koD-bF-9QI"/>
-                                    <constraint firstItem="3AH-Gm-SGG" firstAttribute="height" secondItem="81R-nv-Hep" secondAttribute="height" id="o1L-sp-8Pl"/>
-                                    <constraint firstItem="8Rf-l7-R8v" firstAttribute="width" secondItem="81R-nv-Hep" secondAttribute="width" id="qFj-kK-IoL"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -626,6 +623,10 @@
                             <constraint firstItem="8pd-53-yXy" firstAttribute="leading" secondItem="akZ-gI-wjH" secondAttribute="leadingMargin" id="zdo-ev-S3g"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="channelContainer" destination="ACd-Ac-nHX" id="2FQ-EN-i6y"/>
+                        <outlet property="volume" destination="SjK-QL-h0K" id="2co-OC-vxa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qsi-cC-1Qj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -754,7 +755,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UIl-39-dXr" userLabel="Button-left">
-                                <rect key="frame" x="0.0" y="65" width="138" height="39"/>
+                                <rect key="frame" x="0.0" y="64" width="138" height="39"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="射灯" backgroundImage="light_bar"/>
                                 <connections>
@@ -770,7 +771,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QGa-1P-CGE" userLabel="Button-right">
-                                <rect key="frame" x="276" y="65" width="138" height="39"/>
+                                <rect key="frame" x="276" y="64" width="138" height="39"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="调色灯带" backgroundImage="light_bar"/>
                                 <connections>
@@ -778,7 +779,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qbi-rs-2ri" userLabel="colorpicker">
-                                <rect key="frame" x="339" y="134" width="25" height="25"/>
+                                <rect key="frame" x="339" y="133" width="25" height="25"/>
                                 <state key="normal" image="button_pen"/>
                                 <connections>
                                     <action selector="pickcolor:" destination="N6p-qn-auk" eventType="touchUpInside" id="Bf9-mE-Qnv"/>
@@ -1012,15 +1013,21 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="control_banner" translatesAutoresizingMaskIntoConstraints="NO" id="uw0-3M-Ang">
                                 <rect key="frame" x="0.0" y="666" width="414" height="60"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fbi-90-npd">
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fbi-90-npd">
                                 <rect key="frame" x="20" y="673" width="136" height="47"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" image="DVD_previous" backgroundImage="control_button"/>
+                                <connections>
+                                    <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="KVA-Tz-C8y"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="srS-ye-4XO">
+                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="srS-ye-4XO">
                                 <rect key="frame" x="259" y="673" width="103" height="47"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" image="DVD_next" backgroundImage="control_button"/>
+                                <connections>
+                                    <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="Xyd-nS-jye"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_banner" translatesAutoresizingMaskIntoConstraints="NO" id="xwz-I6-8aj">
                                 <rect key="frame" x="0.0" y="599" width="414" height="47"/>
@@ -1037,35 +1044,50 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dir_pad" translatesAutoresizingMaskIntoConstraints="NO" id="ngC-Cm-pYg">
                                 <rect key="frame" x="44" y="205" width="326" height="326"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYP-xB-YNL">
+                            <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYP-xB-YNL">
                                 <rect key="frame" x="195" y="282" width="24" height="12"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="12" id="XLb-bf-Z8P"/>
                                     <constraint firstAttribute="width" constant="24" id="zVb-aQ-u6V"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="dir_up"/>
+                                <connections>
+                                    <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="bmG-Ld-l6B"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QME-gX-nXa">
+                            <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QME-gX-nXa">
                                 <rect key="frame" x="195" y="442" width="24" height="12"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="12" id="I1i-pq-Y6B"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="dir_down"/>
+                                <connections>
+                                    <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="W69-5y-iIe"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dfe-ES-qjk">
+                            <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dfe-ES-qjk">
                                 <rect key="frame" x="121" y="356" width="12" height="24"/>
                                 <state key="normal" backgroundImage="dir_left"/>
+                                <connections>
+                                    <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="My3-i5-0cC"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pfv-UU-Wsq">
+                            <button opaque="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pfv-UU-Wsq">
                                 <rect key="frame" x="281" y="356" width="12" height="24"/>
                                 <state key="normal" backgroundImage="dir_right"/>
+                                <connections>
+                                    <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="mz1-JG-kYF"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Se0-pD-Pfe">
+                            <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Se0-pD-Pfe">
                                 <rect key="frame" x="192" y="354" width="30" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="OK">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="seQ-xd-XJe"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JP8-bG-F58">
                                 <rect key="frame" x="20" y="64" width="374" height="40"/>
@@ -1087,14 +1109,14 @@
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rwJ-il-H4r">
                                         <rect key="frame" x="150" y="0.0" width="74" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="投影幕" backgroundImage="light_bar">
+                                        <state key="normal" title="功放" backgroundImage="light_bar">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iv4-9i-xon">
                                         <rect key="frame" x="224" y="0.0" width="75" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="DVD" backgroundImage="light_bar">
+                                        <state key="normal" title="DVD" backgroundImage="light_bar_pressed">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
@@ -1114,18 +1136,27 @@
                                     <constraint firstItem="mH9-vT-Jle" firstAttribute="width" secondItem="DbV-v2-Z1d" secondAttribute="width" id="yPH-Bc-Yeq"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zC7-jj-JeS" userLabel="Button_menu">
+                            <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zC7-jj-JeS" userLabel="Button_menu">
                                 <rect key="frame" x="20" y="114" width="61" height="60"/>
                                 <state key="normal" image="TV_menu" backgroundImage="mode_button"/>
+                                <connections>
+                                    <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="81Q-ci-rVm"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Duh-R2-so8" userLabel="Button_pop">
+                            <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Duh-R2-so8" userLabel="Button_pop">
                                 <rect key="frame" x="333" y="114" width="61" height="60"/>
                                 <state key="normal" image="DVD_pop" backgroundImage="mode_button"/>
+                                <connections>
+                                    <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="Mep-i5-Jtd"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wkp-hZ-I2O">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wkp-hZ-I2O">
                                 <rect key="frame" x="156" y="673" width="103" height="47"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" image="DVD_play" backgroundImage="control_button"/>
+                                <connections>
+                                    <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="hEB-Iu-b73"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1177,6 +1208,9 @@
                             <constraint firstItem="Duh-R2-so8" firstAttribute="trailing" secondItem="IZ1-uJ-g38" secondAttribute="trailingMargin" id="zpr-SR-Wt0"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="volume" destination="Of9-QP-3Cz" id="RlY-xD-13d"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cnq-jr-fcd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1203,16 +1237,16 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nB6-L7-uqu">
                                 <rect key="frame" x="71" y="673" width="103" height="47"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title="CH  +" backgroundImage="control_button"/>
+                                <state key="normal" image="DVD_previous" backgroundImage="control_button"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sWJ-x8-d54">
                                 <rect key="frame" x="184" y="673" width="46" height="46"/>
-                                <state key="normal" image="music_button_off"/>
+                                <state key="normal" image="TV_off" backgroundImage="music_button_control"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kE1-I1-k1c">
                                 <rect key="frame" x="240" y="673" width="103" height="47"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title="CH  -" backgroundImage="control_button"/>
+                                <state key="normal" image="DVD_next" backgroundImage="control_button"/>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_banner" translatesAutoresizingMaskIntoConstraints="NO" id="VCs-hY-lfX">
                                 <rect key="frame" x="0.0" y="599" width="414" height="47"/>
@@ -1249,7 +1283,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FI6-z3-zLu">
                                         <rect key="frame" x="150" y="0.0" width="74" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="投影幕" backgroundImage="light_bar">
+                                        <state key="normal" title="功放" backgroundImage="light_bar">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
@@ -1263,7 +1297,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="826-u0-GrE">
                                         <rect key="frame" x="299" y="0.0" width="75" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="FM" backgroundImage="light_bar">
+                                        <state key="normal" title="FM" backgroundImage="light_bar_pressed">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
@@ -1276,52 +1310,38 @@
                                     <constraint firstAttribute="height" constant="40" id="zOm-TO-nv6"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eJ9-16-nnm">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="eJ9-16-nnm">
                                 <rect key="frame" x="20" y="114" width="374" height="60"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l32-Jl-3sE">
-                                        <rect key="frame" x="0.0" y="0.0" width="75" height="60"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                        <state key="normal" title="86.9" backgroundImage="mode_button"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jib-2E-hut">
-                                        <rect key="frame" x="75" y="0.0" width="75" height="60"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                        <state key="normal" title="86.9" backgroundImage="mode_button"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="coz-Oa-UcX">
-                                        <rect key="frame" x="150" y="0.0" width="74" height="60"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                        <state key="normal" title="86.9" backgroundImage="mode_button"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YjK-Ep-yB0">
-                                        <rect key="frame" x="224" y="0.0" width="75" height="60"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                        <state key="normal" title="86.9" backgroundImage="mode_button"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pSV-nn-Qqy">
-                                        <rect key="frame" x="299" y="0.0" width="75" height="60"/>
-                                        <state key="normal" image="fm_favorite" backgroundImage="mode_button"/>
-                                    </button>
-                                </subviews>
                                 <constraints>
-                                    <constraint firstItem="Jib-2E-hut" firstAttribute="width" secondItem="l32-Jl-3sE" secondAttribute="width" id="AQa-bV-Sn8"/>
-                                    <constraint firstItem="YjK-Ep-yB0" firstAttribute="width" secondItem="l32-Jl-3sE" secondAttribute="width" id="JlY-Hc-wB2"/>
-                                    <constraint firstItem="pSV-nn-Qqy" firstAttribute="width" secondItem="l32-Jl-3sE" secondAttribute="width" id="K0j-Ea-enj"/>
-                                    <constraint firstItem="coz-Oa-UcX" firstAttribute="width" secondItem="l32-Jl-3sE" secondAttribute="width" id="OmR-Z8-dcV"/>
                                     <constraint firstAttribute="height" constant="60" id="wop-jE-cMs"/>
                                 </constraints>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="107.1FM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BJT-6L-I0r">
+                                <rect key="frame" x="182" y="416" width="51" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.64984303710000002" green="0.2134824991" blue="0.30936917660000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="highlightedColor" red="0.64984303712844849" green="0.21348249912261963" blue="0.30936917662620544" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="a6t-6x-bQ2">
+                                <rect key="frame" x="130" y="382" width="149" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="145" id="svz-VA-RTn"/>
+                                </constraints>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="a6t-6x-bQ2" firstAttribute="centerY" secondItem="OYD-cH-kiE" secondAttribute="centerY" constant="29" id="0EL-wy-KWe"/>
                             <constraint firstItem="eJ9-16-nnm" firstAttribute="centerX" secondItem="9ra-cz-88k" secondAttribute="centerX" id="1N3-mS-DDe"/>
                             <constraint firstAttribute="trailing" secondItem="VCs-hY-lfX" secondAttribute="trailing" id="1ax-qh-5EL"/>
                             <constraint firstItem="sWJ-x8-d54" firstAttribute="centerX" secondItem="hpL-mC-xY9" secondAttribute="centerX" id="4Cb-B0-5eD"/>
                             <constraint firstItem="VCs-hY-lfX" firstAttribute="leading" secondItem="B5b-5d-YbS" secondAttribute="trailing" constant="-26" id="8Dp-61-ilF"/>
+                            <constraint firstItem="BJT-6L-I0r" firstAttribute="centerX" secondItem="OYD-cH-kiE" secondAttribute="centerX" id="AMS-68-mHH"/>
+                            <constraint firstItem="BJT-6L-I0r" firstAttribute="top" secondItem="OYD-cH-kiE" secondAttribute="bottom" constant="-115" id="J94-D2-0oU"/>
                             <constraint firstItem="VCs-hY-lfX" firstAttribute="centerX" secondItem="hpL-mC-xY9" secondAttribute="centerX" id="KIb-qP-iGe"/>
                             <constraint firstItem="HbV-nV-oPQ" firstAttribute="leading" secondItem="9ra-cz-88k" secondAttribute="leadingMargin" id="LfB-08-7qi"/>
                             <constraint firstItem="nEu-kP-7hW" firstAttribute="top" secondItem="u1g-Po-WfV" secondAttribute="bottom" id="OcD-Pg-22A"/>
+                            <constraint firstItem="a6t-6x-bQ2" firstAttribute="centerX" secondItem="OYD-cH-kiE" secondAttribute="centerX" constant="-3" id="QPu-Jm-Vaz"/>
                             <constraint firstItem="HbV-nV-oPQ" firstAttribute="top" secondItem="nbV-9z-oL6" secondAttribute="bottom" constant="44" id="RyW-gQ-gSd"/>
                             <constraint firstItem="hpL-mC-xY9" firstAttribute="leading" secondItem="9ra-cz-88k" secondAttribute="leadingMargin" id="VuU-QS-wOY"/>
                             <constraint firstItem="gd6-mH-pDE" firstAttribute="centerY" secondItem="VCs-hY-lfX" secondAttribute="centerY" constant="-3" id="W0x-NR-mgC"/>
@@ -1349,10 +1369,16 @@
                             <constraint firstAttribute="trailing" secondItem="u1g-Po-WfV" secondAttribute="trailing" id="zkM-am-rf2"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="channelContainer" destination="eJ9-16-nnm" id="kUu-XL-nrl"/>
+                        <outlet property="frequence" destination="a6t-6x-bQ2" id="GTb-hV-0X0"/>
+                        <outlet property="numberOfChannel" destination="BJT-6L-I0r" id="7uz-eP-6f1"/>
+                        <outlet property="volume" destination="lMG-Or-H5J" id="G5n-GA-rG9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K6o-fE-8Vg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2068" y="409"/>
+            <point key="canvasLocation" x="-2068.1159420289855" y="408.42391304347831"/>
         </scene>
         <!--plugin-->
         <scene sceneID="Hev-87-8sa">
@@ -1392,7 +1418,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="miL-mT-zQg">
                                         <rect key="frame" x="187" y="0.0" width="94" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="智能插座" backgroundImage="light_bar">
+                                        <state key="normal" title="智能插座" backgroundImage="light_bar_pressed">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
@@ -1461,16 +1487,19 @@
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="748" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SL6-ZE-wMI">
                                         <rect key="frame" x="83" y="0.0" width="83" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="投影机" backgroundImage="light_bar">
+                                        <state key="normal" title="投影机" backgroundImage="light_bar_pressed">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="alC-SH-EPX">
                                         <rect key="frame" x="166" y="0.0" width="82" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="投影幕" backgroundImage="light_bar">
+                                        <state key="normal" title="功放" backgroundImage="light_bar">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="APC-Z7-X0o" kind="show" id="jue-EE-v6Z"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cuv-Xk-mFi">
                                         <rect key="frame" x="248" y="0.0" width="83" height="40"/>
@@ -1517,7 +1546,7 @@
         <!--screen-->
         <scene sceneID="gmp-ns-T25">
             <objects>
-                <viewController id="5Gm-3R-5T0" userLabel="screen" customClass="SceneController" sceneMemberID="viewController">
+                <viewController id="5Gm-3R-5T0" userLabel="screen" customClass="ScreenCurtainController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eAs-1F-Pzi"/>
                         <viewControllerLayoutGuide type="bottom" id="sVu-qo-fh2"/>
@@ -1549,7 +1578,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lE5-ww-kII">
                                         <rect key="frame" x="166" y="0.0" width="82" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="投影幕" backgroundImage="light_bar">
+                                        <state key="normal" title="投影幕" backgroundImage="light_bar_pressed">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
@@ -1585,14 +1614,23 @@
                                             <constraint firstAttribute="height" constant="102" id="pv5-i4-KTD"/>
                                         </constraints>
                                         <state key="normal" image="screen_up" backgroundImage="screen_control_btn"/>
+                                        <connections>
+                                            <action selector="upBtnAction:" destination="5Gm-3R-5T0" eventType="touchUpInside" id="fiQ-Ft-9s7"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FaR-CJ-GFP">
                                         <rect key="frame" x="0.0" y="102" width="314" height="102"/>
                                         <state key="normal" image="screen_pause" backgroundImage="screen_control_btn"/>
+                                        <connections>
+                                            <action selector="stopBtnAction:" destination="5Gm-3R-5T0" eventType="touchUpInside" id="SBd-BN-ej2"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a8C-S8-IXo">
                                         <rect key="frame" x="0.0" y="204" width="314" height="102"/>
                                         <state key="normal" image="screen_down" backgroundImage="screen_control_btn"/>
+                                        <connections>
+                                            <action selector="downBtnAction:" destination="5Gm-3R-5T0" eventType="touchUpInside" id="N9f-KT-3ZB"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -1653,7 +1691,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CDI-o5-QxH">
                                         <rect key="frame" x="94" y="0.0" width="93" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="智能投食" backgroundImage="light_bar">
+                                        <state key="normal" title="智能投食" backgroundImage="light_bar_pressed">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
@@ -1722,7 +1760,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="748" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CY0-Oi-Okt">
                                         <rect key="frame" x="0.0" y="0.0" width="94" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="智能浇花" backgroundImage="light_bar">
+                                        <state key="normal" title="智能浇花" backgroundImage="light_bar_pressed">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
@@ -1850,7 +1888,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OV0-OM-P1J">
                                         <rect key="frame" x="281" y="0.0" width="93" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="除湿器" backgroundImage="light_bar">
+                                        <state key="normal" title="除湿器" backgroundImage="light_bar_pressed">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
@@ -1915,11 +1953,14 @@
                                         <state key="normal" title="投影机" backgroundImage="light_bar">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="I2g-xI-xns" kind="show" id="Cwb-DF-fAx"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBD-SM-y7d">
                                         <rect key="frame" x="166" y="0.0" width="82" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="投影幕" backgroundImage="light_bar">
+                                        <state key="normal" title="功放" backgroundImage="light_bar">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
@@ -1936,6 +1977,9 @@
                                         <state key="normal" title="FM" backgroundImage="light_bar">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="C1t-VG-vPd" kind="show" id="YBs-Cx-01Z"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -1967,17 +2011,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CCTV1" width="61" height="54"/>
-        <image name="CCTV2" width="61" height="54"/>
         <image name="DVD_next" width="10" height="10"/>
         <image name="DVD_play" width="9" height="10"/>
         <image name="DVD_pop" width="12" height="12"/>
         <image name="DVD_previous" width="10" height="10"/>
-        <image name="HNTV" width="61" height="54"/>
-        <image name="SZTV" width="61" height="54"/>
         <image name="TV_menu" width="11" height="10"/>
         <image name="TV_off" width="12" height="12"/>
-        <image name="ZJTV" width="61" height="54"/>
         <image name="air_base" width="326" height="326"/>
         <image name="air_dot_blue" width="6" height="6"/>
         <image name="air_dot_red" width="6" height="6"/>
@@ -1998,7 +2037,6 @@
         <image name="disk" width="198" height="198"/>
         <image name="disk_base" width="326" height="326"/>
         <image name="flower_schedule" width="375" height="385"/>
-        <image name="fm_favorite" width="12" height="11"/>
         <image name="fm_pad" width="326" height="326"/>
         <image name="food_schedule" width="375" height="385"/>
         <image name="glory" width="239" height="239"/>
@@ -2008,12 +2046,12 @@
         <image name="icon_timer" width="16" height="15"/>
         <image name="leftMenu" width="25" height="18"/>
         <image name="light_bar" width="122" height="39"/>
+        <image name="light_bar_pressed" width="122" height="39"/>
         <image name="light_base" width="326" height="326"/>
         <image name="light_title" width="174" height="39"/>
         <image name="line_horizontal_white" width="414" height="53"/>
         <image name="mode_button" width="61" height="60"/>
         <image name="music_button_control" width="46" height="46"/>
-        <image name="music_button_off" width="46" height="46"/>
         <image name="plugin_on" width="375" height="385"/>
         <image name="pm2.5" width="141" height="141"/>
         <image name="repeat_white" width="12" height="12"/>
@@ -2031,4 +2069,9 @@
         <image name="wet_schedule" width="375" height="385"/>
         <image name="wind" width="10" height="10"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Cwb-DF-fAx"/>
+        <segue reference="jue-EE-v6Z"/>
+        <segue reference="YBs-Cx-01Z"/>
+    </inferredMetricsTieBreakers>
 </document>

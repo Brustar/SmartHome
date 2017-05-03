@@ -8,19 +8,23 @@
 
 #import "PluginViewController.h"
 #import "SocketManager.h"
-#import "AsyncUdpSocket.h"
+//#import "AsyncUdpSocket.h"
 #import "PackManager.h"
 #import "PluginCell.h"
 #import "SQLManager.h"
 #import "SceneManager.h"
 #import "Plugin.h"
+#import "ORBSwitch.h"
 
-@interface PluginViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface PluginViewController ()<UITableViewDelegate,UITableViewDataSource,ORBSwitchDelegate>
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
 @property (nonatomic,strong) PluginCell *cell;
 @property (nonatomic,strong) NSMutableArray *plugNames;
 @property (nonatomic,strong) NSMutableArray *plugDeviceIds;
+@property (nonatomic,strong) ORBSwitch *switcher;
+
 @end
 
 @implementation PluginViewController
@@ -48,7 +52,7 @@
            }
        }else if(self.roomID > 0)
        {
-           [_plugDeviceIds addObjectsFromArray:[SQLManager getDeviceByTypeName:DEVICE_TYPE andRoomID:self.roomID]];
+           [_plugDeviceIds addObject:[SQLManager singleDeviceWithCatalogID:plugin byRoom:self.roomID]];
        }else{
            if (self.deviceid) {
             [_plugDeviceIds addObject:self.deviceid];
@@ -75,7 +79,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self setNaviBarTitle:@"智能插座"];
 //    [self initPlugin];
 //    [self initHomekitPlugin];
     [self setupSegment];
@@ -88,6 +92,17 @@
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
+-(void) initSwitcher
+{
+    self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:[UIImage imageNamed:@"lighting_off"] inactiveBackgroundImage:nil activeBackgroundImage:nil frame:CGRectMake(0, 0, 194, 194)];
+    self.switcher.center = CGPointMake(self.view.bounds.size.width / 2,
+                                       self.view.bounds.size.height / 2);
+    
+    self.switcher.knobRelativeHeight = 1.0f;
+    self.switcher.delegate = self;
+    
+    [self.view addSubview:self.switcher];
+}
 
 -(void)setupSegment
 {
@@ -137,7 +152,7 @@
     }
     [self.tableView reloadData];
 }
-*/
+
 -(void)initPlugin
 {
     self.devices=[NSMutableArray new];
@@ -160,7 +175,7 @@
     
     [self sendCmd:nil];
 }
-
+*/
 -(IBAction)sendCmd:(id)sender
 {
     SocketManager *sock=[SocketManager defaultManager];
@@ -222,16 +237,16 @@
 
 -(IBAction)save:(id)sender
 {
-//    [self switchDevice:sender];
-    if ([sender isEqual:self.switchView]) {
-        NSData *data=[[DeviceInfo defaultManager] toogle:self.switchView.isOn deviceID:self.deviceid];
+
+    if ([sender isEqual:self.switcher]) {
+        NSData *data=[[DeviceInfo defaultManager] toogle:self.switcher.isOn deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
     }
-//    UISwitch *sw=(UISwitch *)sender;
+
     Plugin *device=[[Plugin alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
-    [device setSwitchon: self.switchView.isOn];
+    [device setSwitchon: self.switcher.isOn];
     
     [_scene setSceneID:[self.sceneid intValue]];
     [_scene setRoomID:self.roomID];
@@ -258,13 +273,13 @@
     }
     //同步设备状态
     if(proto.cmd == 0x01){
-        self.switchView.on = proto.action.state;
+        self.switcher.isOn = proto.action.state;
     }
     
     if (tag==0 && (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON)) {
         NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
         if ([devID intValue]==[self.deviceid intValue]) {
-            self.switchView.on=proto.action.state;
+            self.switcher.isOn=proto.action.state;
         }
     }
     
@@ -286,7 +301,6 @@
         self.cell = cell;
         cell.label.text = self.plugNames[self.segment.selectedSegmentIndex];
         self.switchView = cell.power;
-//        cell.power.tag=indexPath.row;
         _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
         if ([self.sceneid intValue]>0) {
             for(int i=0;i<[_scene.devices count];i++)
@@ -348,6 +362,19 @@
 -(void)dealloc
 {
 //    [[SocketManager defaultManager] cutOffSocket];
+}
+
+#pragma mark - ORBSwitchDelegate
+- (void)orbSwitchToggled:(ORBSwitch *)switchObj withNewValue:(BOOL)newValue {
+    NSLog(@"Switch toggled: new state is %@", (newValue) ? @"ON" : @"OFF");
+    [self save:self.switcher];
+}
+
+- (void)orbSwitchToggleAnimationFinished:(ORBSwitch *)switchObj {
+    [switchObj setCustomKnobImage:[UIImage imageNamed:(switchObj.isOn) ? @"lighting_on" : @"lighting_off"]
+          inactiveBackgroundImage:nil
+            activeBackgroundImage:nil];
+    
 }
 
 @end

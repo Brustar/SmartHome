@@ -12,14 +12,14 @@
 #import "SocketManager.h"
 #import "Scene.h"
 #import "SceneManager.h"
-#import "Amplifier.h"
+#import "ORBSwitch.h"
 
-@interface ProjectController ()<UITableViewDataSource,UITableViewDelegate>
-@property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@interface ProjectController ()<ORBSwitchDelegate>
+
 @property (nonatomic,strong) NSMutableArray *projectNames;
 @property (nonatomic,strong) NSMutableArray *projectIds;
-@property (nonatomic,strong) DetailTableViewCell *cell;
+@property (nonatomic,strong) ORBSwitch *switcher;
+
 @end
 
 @implementation ProjectController
@@ -45,7 +45,7 @@
             }
         }else if(self.roomID)
         {
-            [_projectIds addObjectsFromArray:[SQLManager getDeviceByTypeName:@"投影" andRoomID:self.roomID]];
+            [_projectIds addObject:[SQLManager singleDeviceWithCatalogID:projector byRoom: self.roomID]];
         }else{
             [_projectIds addObject:self.deviceid];
         }
@@ -68,82 +68,43 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [super viewDidLoad];
-    self.title = @"投影";
-    self.tableView.tableFooterView = [UIView new];
-    [self setupSeguentProject];
 
-}
-
--(void)setupSeguentProject
-{
-    if(self.projectNames == nil || self.projectNames.count == 0)
-    {
-        return;
-        
-    }
-    [self.segment removeAllSegments];
-    for(int i = 0; i < self.projectNames.count; i++)
-    {
-        [self.segment insertSegmentWithTitle:self.projectNames[i] atIndex:i animated:NO];
-    }
-    self.segment.selectedSegmentIndex = 0;
-    self.deviceid = [self.projectIds objectAtIndex:self.segment.selectedSegmentIndex];
-
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 2;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if(indexPath.row == 0)
-    {
-        DetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-
-//        cell.label.text = self.projectNames[self.segment.selectedSegmentIndex];
-        cell.label.text = @"投影";
-        self.cell = cell;
-        self.switchView = cell.power;//[[UISwitch alloc] initWithFrame:CGRectZero];
-        _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
-        if ([self.sceneid intValue]>0) {
-            for(int i=0;i<[_scene.devices count];i++)
-            {
-                if ([[_scene.devices objectAtIndex:i] isKindOfClass:[Amplifier class]]) {
-                    cell.power.on=((Amplifier *)[_scene.devices objectAtIndex:i]).waiting;
-                }
+    [self setNaviBarTitle:@"投影"];
+    [self initSwitcher];
+    
+    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+    if ([self.sceneid intValue]>0) {
+        for(int i=0;i<[_scene.devices count];i++)
+        {
+            if ([[_scene.devices objectAtIndex:i] isKindOfClass:[Amplifier class]]) {
+                self.switcher.isOn=((Amplifier *)[_scene.devices objectAtIndex:i]).waiting;
             }
         }
-        [cell.power addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
-        return cell;
-        
-    }else{
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"recell"];
-        if(!cell)
-        {
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"recell"];
-            
-        }
-        
-        cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20, 5, 100, 30)];
-        [cell.contentView addSubview:label];
-        label.text = @"详细信息";
-        return cell;
     }
 }
+
+-(void) initSwitcher
+{
+    self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:[UIImage imageNamed:@"lighting_off"] inactiveBackgroundImage:nil activeBackgroundImage:nil frame:CGRectMake(0, 0, 194, 194)];
+    self.switcher.center = CGPointMake(self.view.bounds.size.width / 2,
+                                       self.view.bounds.size.height / 2);
+    
+    self.switcher.knobRelativeHeight = 1.0f;
+    self.switcher.delegate = self;
+    
+    [self.view addSubview:self.switcher];
+}
+
 -(IBAction)save:(id)sender
 {
-    if ([sender isEqual:self.switchView]) {
-        NSData *data=[[DeviceInfo defaultManager] toogle:self.switchView.isOn deviceID:self.deviceid];
+    if ([sender isEqual:self.switcher]) {
+        NSData *data=[[DeviceInfo defaultManager] toogle:self.switcher.isOn deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
     }
     Amplifier *device=[[Amplifier alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
-    [device setWaiting: self.switchView.isOn];
+    [device setWaiting: self.switcher.isOn];
     
     
     [_scene setSceneID:[self.sceneid intValue]];
@@ -159,50 +120,29 @@
     
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 50;
-}
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if(indexPath.row == 1)
-    {
-        [self performSegueWithIdentifier:@"projectDetailSegue" sender:self];
-    }
-}
-
-
-- (IBAction)selectedProject:(id)sender {
-    
-    UISegmentedControl *segment = (UISegmentedControl*)sender;
-    self.cell.label.text = self.projectNames[segment.selectedSegmentIndex];
-    self.deviceid=[self.projectIds objectAtIndex:self.segment.selectedSegmentIndex];
-    [self.tableView reloadData];
-}
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     id theSegue = segue.destinationViewController;
     [theSegue setValue:self.deviceid forKey:@"deviceid"];
 }
 
-
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - ORBSwitchDelegate
+- (void)orbSwitchToggled:(ORBSwitch *)switchObj withNewValue:(BOOL)newValue {
+    NSLog(@"Switch toggled: new state is %@", (newValue) ? @"ON" : @"OFF");
+    [self save:self.switcher];
 }
-*/
+
+- (void)orbSwitchToggleAnimationFinished:(ORBSwitch *)switchObj {
+    [switchObj setCustomKnobImage:[UIImage imageNamed:(switchObj.isOn) ? @"lighting_on" : @"lighting_off"]
+          inactiveBackgroundImage:nil
+            activeBackgroundImage:nil];
+    
+}
 
 @end
