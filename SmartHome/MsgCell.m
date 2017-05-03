@@ -17,11 +17,17 @@
    self.unreadcountImage.layer.cornerRadius = self.unreadcountImage.bounds.size.width/2; //圆角半径
     self.unreadcountImage.layer.masksToBounds = YES; //圆角
 }
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+-(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
+    [super setHighlighted:highlighted animated:animated];
+    
+     self.backgroundColor = [UIColor clearColor];
 }
+
+-(void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+    
+    self.backgroundColor = [UIColor clearColor];
+}
+
 
 @end

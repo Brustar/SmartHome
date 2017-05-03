@@ -89,7 +89,7 @@ BOOL animating;
     }
 }
 
--(void) initButtons
+-(void) initSlider
 {
     [self.voiceSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
     self.voiceSlider.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
@@ -100,9 +100,9 @@ BOOL animating;
     [super viewDidLoad];
     
     [self setNaviBarTitle:@"背景音乐"];
-    [self initButtons];
+    [self initSlider];
     
-    self.deviceid = [SQLManager bgmusicIDByRoom:self.roomID];
+    self.deviceid = [SQLManager singleDeviceWithCatalogID:bgmusic byRoom:self.roomID];
     
     float vol = BLUETOOTH_MUSIC ? 0 : [[AVAudioSession sharedInstance] outputVolume];
     self.volume.value=vol*100;

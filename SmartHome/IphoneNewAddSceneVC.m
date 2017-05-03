@@ -25,6 +25,8 @@
 #import "NewColourCell.h"
 #import "NewLightCell.h"
 #import "FMTableViewCell.h"
+#import "DeviceListTimeVC.h"
+#import "DeviceTimingViewController.h"
 
 @interface IphoneNewAddSceneVC ()<UITableViewDelegate,UITableViewDataSource,IphoneRoomViewDelegate>
 
@@ -55,6 +57,8 @@
 @property (nonatomic,strong) NSMutableArray * IntelligentArray;//智能推窗器
 @property (nonatomic,strong) NSMutableArray * PowerArray;//功放
 @property (nonatomic,assign) NSInteger htypeID;
+@property (nonatomic,strong) NSArray * viewControllerArrs;
+
 
 @end
 
@@ -74,7 +78,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
+   
       self.roomList = [SQLManager getDevicesSubTypeNamesWithRoomID:self.roomID];
       [self setUpRoomView];
 //          [self reachNotification];
@@ -82,6 +86,14 @@
     [view setBackgroundColor:[UIColor clearColor]];
     self.tableView.tableFooterView = view;
     [self setupNaviBar];
+    [self setControllerCell];
+  
+    NSLog(@"%@",_viewControllerArrs);
+    
+  
+}
+-(void)setControllerCell
+{
     [self.tableView registerNib:[UINib nibWithNibName:@"AireTableViewCell" bundle:nil] forCellReuseIdentifier:@"AireTableViewCell"];//空调
     [self.tableView registerNib:[UINib nibWithNibName:@"CurtainTableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainTableViewCell"];//窗帘
     [self.tableView registerNib:[UINib nibWithNibName:@"TVTableViewCell" bundle:nil] forCellReuseIdentifier:@"TVTableViewCell"];//网络电视
@@ -91,24 +103,36 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"ScreenCurtainCell" bundle:nil] forCellReuseIdentifier:@"ScreenCurtainCell"];//幕布ScreenCurtainCell
     [self.tableView registerNib:[UINib nibWithNibName:@"DVDTableViewCell" bundle:nil] forCellReuseIdentifier:@"DVDTableViewCell"];//DVD
     [self.tableView registerNib:[UINib nibWithNibName:@"BjMusicTableViewCell" bundle:nil] forCellReuseIdentifier:@"BjMusicTableViewCell"];//背景音乐
-     [self.tableView registerNib:[UINib nibWithNibName:@"NewLightCell" bundle:nil] forCellReuseIdentifier:@"NewLightCell"];//背景音乐
+    [self.tableView registerNib:[UINib nibWithNibName:@"NewLightCell" bundle:nil] forCellReuseIdentifier:@"NewLightCell"];//背景音乐
     [self.tableView registerNib:[UINib nibWithNibName:@"FMTableViewCell" bundle:nil] forCellReuseIdentifier:@"FMTableViewCell"];//FM
 }
 - (void)setupNaviBar {
     [self setNaviBarTitle:@"添加场景"]; //设置标题
     _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
     _naviRightBtn.tintColor = [UIColor whiteColor];
-//    [self setNaviBarLeftBtn:_naviLeftBtn];
+//    [self setNaviBarLeftBtn:_naviLeftBtn]; DeviceListTimeVC
     [self setNaviBarRightBtn:_naviRightBtn];
 }
 -(void)rightBtnClicked:(UIButton *)bbi
 {
-   UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-    IphoneSaveNewSceneController * iphoneSaveNewScene = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneSaveNewSceneController"];
-    // [self presentViewController:iphoneSaveNewScene animated:YES completion:nil];
-    iphoneSaveNewScene.roomId = self.roomID;
-    [self.navigationController pushViewController:iphoneSaveNewScene animated:YES];
-      //[self performSegueWithIdentifier:@"iphoneAddNewScene" sender:self];
+      _viewControllerArrs =self.navigationController.viewControllers;
+    NSInteger vcCount = _viewControllerArrs.count;
+    UIViewController * lastVC = _viewControllerArrs[vcCount -2];
+    UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+    UIStoryboard * SceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
+    DeviceListTimeVC * deviceListVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"iPhoneDeviceListTimeVC"];
+    if ([lastVC isKindOfClass:[deviceListVC class]]) {
+        DeviceTimingViewController * deviceTimingVC = [SceneStoryBoard instantiateViewControllerWithIdentifier:@"DeviceTimingViewController"];
+        [self.navigationController pushViewController:deviceTimingVC animated:YES];
+        
+    }else{
+        IphoneSaveNewSceneController * iphoneSaveNewScene = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneSaveNewSceneController"];
+        // [self presentViewController:iphoneSaveNewScene animated:YES completion:nil];
+        iphoneSaveNewScene.roomId = self.roomID;
+        [self.navigationController pushViewController:iphoneSaveNewScene animated:YES];
+        //[self performSegueWithIdentifier:@"iphoneAddNewScene" sender:self];
+    }
+ 
 }
 
 -(void)setUpRoomView

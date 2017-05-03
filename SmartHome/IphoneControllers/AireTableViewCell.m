@@ -50,6 +50,7 @@
     Aircon *device=[[Aircon alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setWaiting:device.waiting];
+//    [device setTemperature:[self.showTemLabel.text intValue]];
     
     [_scene setSceneID:[self.sceneid intValue]];
     [_scene setRoomID:self.roomID];

@@ -33,6 +33,11 @@
         }
     }else if (sender == self.FMSlider){
         //音量
+        NSData *data=[[DeviceInfo defaultManager] changeVolume:self.FMSlider.value*100 deviceID:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+        
+//        self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.FMSlider.value];
         
     }else if (sender == self.FMChannelSlider){
         //频道

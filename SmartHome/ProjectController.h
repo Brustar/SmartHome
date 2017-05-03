@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomViewController.h"
 
-@interface ProjectController : UIViewController
+@interface ProjectController : CustomViewController
 
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic,weak) NSString *deviceid;
 @property (nonatomic,assign) int roomID;
 @property (nonatomic,assign) BOOL isAddDevice;
-@property (strong, nonatomic) IBOutlet UISwitch *switchView;
+
 @property (nonatomic,strong) Scene * scene;
 @end

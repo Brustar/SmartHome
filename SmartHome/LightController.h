@@ -15,12 +15,12 @@
 #import "CustomNaviBarView.h"
 #import "CustomViewController.h"
 
+#define MAX_ROTATE_DEGREE 135
+
 @interface LightController : CustomViewController<TcpRecvDelegate>
 
 @property (nonatomic, readonly) CustomNaviBarView *viewNaviBar;
 
-//@property (strong, nonatomic) IBOutlet ColourTableViewCell *cell;
-//@property (strong, nonatomic) IBOutlet DetailTableViewCell *detailCell;
 @property (strong, nonatomic) IBOutlet HRColorPickerView *colorPickerView;
 
 @property (nonatomic,weak) NSString *sceneid;

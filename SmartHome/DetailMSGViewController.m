@@ -24,6 +24,7 @@
 @property (nonatomic,assign) NSInteger unreadcount;
 @property (nonatomic,strong) UIImageView * image;
 @property (nonatomic,strong) UILabel * label;
+@property (nonatomic,strong) UIButton * naviRightBtn;
 //@property (nonatomic,assign) NSInteger seleCellID;
 @property (nonatomic,assign) int selectId;
 
@@ -70,14 +71,13 @@
     
 //    UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc]initWithTitle:@"我的消息" style:UIBarButtonItemStylePlain target:self action:@selector(leftEdit:)];
 //    self.navigationItem.leftBarButtonItem = leftBtn;
-    
+   
      self.isEditing = YES;
     if (self.itemID) {
         
         DeviceInfo *device = [DeviceInfo defaultManager];
         if ([device.db isEqualToString:SMART_DB]) {
-            UIBarButtonItem *editBtn = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(startEdit:)];
-            self.navigationItem.rightBarButtonItem = editBtn;
+             [self setupNaviBar];
             [self sendRequestForDetailMsgWithItemId:[_itemID intValue]];
         }else {
             NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"msgList" ofType:@"plist"]];
@@ -104,7 +104,21 @@
     
     [self createImage];
 }
-
+- (void)setupNaviBar {
+   
+    [self setNaviBarTitle:@"消息通知"];
+    
+    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"编辑" target:self action:@selector(rightBtnClicked:)];
+    [self setNaviBarRightBtn:_naviRightBtn];
+}
+-(void)rightBtnClicked:(UIButton *)btn
+{
+    self.tableView.allowsMultipleSelectionDuringEditing = YES;
+    self.tableView.editing = YES;
+    self.FootView.hidden = NO;
+    self.isEditing = NO;
+    [self.tableView reloadData];
+}
 -(void)createImage
 {
     self.image = [[UIImageView alloc] init];
@@ -256,11 +270,15 @@
 //        cell.tag = [self.msgArr[indexPath.row] integerValue];
         self.unreadcount = [self.isreadArr[indexPath.row] integerValue];
     if (self.unreadcount == 0) {//未读消息
-        cell.unreadcountImage.hidden = NO;
-        cell.countLabel.hidden       = NO;
+        cell.unreadcountImage.hidden = YES;
+        cell.countLabel.hidden       = YES;
+        cell.title.textColor = [UIColor redColor];
+        cell.timeLable.textColor = [UIColor redColor];
     }else if(self.unreadcount == 1){
         cell.unreadcountImage.hidden = YES;
         cell.countLabel.hidden       = YES;
+        cell.title.textColor = [UIColor whiteColor];
+        cell.timeLable.textColor = [UIColor whiteColor];
     }
     
     return cell;
@@ -275,6 +293,10 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  
+//    MsgCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+//    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     self.selectId = (int)indexPath.row;
     
     if (self.isEditing==NO) {
@@ -337,14 +359,6 @@
     }
        [self clickCancelBtn:nil];
     
-}
--(void)startEdit:(UIBarButtonItem *)barBtnItem
-{
-    self.tableView.allowsMultipleSelectionDuringEditing = YES;
-    self.tableView.editing = YES;
-    self.FootView.hidden = NO;
-    self.isEditing = NO;
-    [self.tableView reloadData];
 }
 
 -(void)leftEdit:(UIBarButtonItem *)bbi

@@ -45,18 +45,16 @@
     _roomID = roomID;
     if(roomID)
     {
-        self.deviceid = [SQLManager deviceIDWithRoomID:self.roomID withType:@"DVD"];
+        self.deviceid = [SQLManager singleDeviceWithCatalogID:DVDtype byRoom:self.roomID];
     }
-    
-    
-    
+ 
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"DVD";
     
+    [self setNaviBarTitle:@"DVD"];
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
@@ -256,6 +254,24 @@
             break;
         case 8:
             data=[device home:self.deviceid];
+            break;
+        case 9:
+            data=[device menu:self.deviceid];
+            break;
+        case 10:
+            data=[device sweepSURE:self.deviceid];
+            break;
+        case 11:
+            data=[device sweepUp:self.deviceid];
+            break;
+        case 12:
+            data=[device sweepLeft:self.deviceid];
+            break;
+        case 13:
+            data=[device sweepDown:self.deviceid];
+            break;
+        case 14:
+            data=[device sweepRight:self.deviceid];
             break;
             
         default:

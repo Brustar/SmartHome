@@ -82,7 +82,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.textLabel.text = self.titles[indexPath.row];
-    cell.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
+    cell.backgroundColor = [UIColor clearColor];
     if ([cell.textLabel.text isEqualToString:@"家庭名称"]) {
          cell.detailTextLabel.text = array[0];
     }else if ([cell.textLabel.text isEqualToString:@"主机编号"]){

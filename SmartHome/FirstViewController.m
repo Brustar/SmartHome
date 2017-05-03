@@ -62,7 +62,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *NLabelrightConstraint;
 @property (nonatomic,strong) BaseTabBarController *baseTabbarController;
 @property (weak, nonatomic) IBOutlet UIView *iconeView;
-
+@property (nonatomic, strong) NSMutableArray *shortcutsArray;
 
 @end
 
@@ -107,7 +107,6 @@
     
     _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     _baseTabbarController.tabbarPanel.hidden = YES;
-    [[RCIM sharedRCIM] logout];
     
     NSInteger status = _afNetworkReachabilityManager.networkReachabilityStatus;
     NSLog(@"NetworkReachabilityStatus: %ld", (long)status);
@@ -130,6 +129,7 @@
     [self updateInterfaceWithReachability];
     [self setUIMessage];
     [self chatConnect];
+    [self getScenesFromPlist];
 }
 
 -(void)setUIMessage
@@ -315,35 +315,52 @@
     self.chatlabel.text =[NSString stringWithFormat:@"%@ : %@" , nickname, message.content.conversationDigest];
     [self.IconeImageView badge];
 }
-
+- (void)getScenesFromPlist
+{
+    _shortcutsArray = [[NSMutableArray alloc] init];
+    NSString *shortcutsPath = [[IOManager sceneShortcutsPath] stringByAppendingPathComponent:@"sceneShortcuts.plist"];
+    NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfFile:shortcutsPath];
+    if (dictionary) {
+        NSArray *scenesArray = dictionary[@"Scenes"];
+        if (scenesArray && [scenesArray isKindOfClass:[NSArray class]]) {
+            for (NSDictionary *scene in scenesArray) {
+                if ([scene isKindOfClass:[NSDictionary class]]) {
+                    Scene *info = [[Scene alloc] init];
+                    info.sceneID = [scene[@"sceneID"] intValue];
+                    info.sceneName = scene[@"sceneName"];
+                    info.roomID = [scene[@"roomID"] integerValue];
+                    info.roomName = scene[@"roomName"];
+                    
+                    [_shortcutsArray addObject:info];
+                }
+            }
+        }
+    }
+}
 -(void)setBtn
 {
     _firstBtn.selected = !_firstBtn.selected;
     _TwoBtn.selected = !_TwoBtn.selected;
     _ThreeBtn.selected = !_ThreeBtn.selected;
-    NSMutableArray * arr = [[NSMutableArray alloc] init];
+   
+    if (_shortcutsArray) {
+//        arr[0] = data[0];
+//        arr[1] = data[1];
+//        arr[2] = data[2];
+        for (int i =0; i < 3; i ++) {
+             Scene * info1 = _shortcutsArray[0];
+             Scene * info2 = _shortcutsArray[1];
+             Scene * info3 = _shortcutsArray[2];
+             _firstBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+             _TwoBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+             _ThreeBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+            [_firstBtn setTitle:info1.sceneName forState:UIControlStateNormal];
+            [_ThreeBtn setTitle:info2.sceneName forState:UIControlStateNormal];
+            [_TwoBtn setTitle:info3.sceneName forState:UIControlStateNormal];
+        }
 
-    // 1.获得沙盒根路径
-    NSString *home = NSHomeDirectory();
-    
-    // 2.document路径
-    NSString *docPath = [home stringByAppendingPathComponent:@"Documents"];
-    
-    // 3.文件路径
-    NSString *filepath = [docPath stringByAppendingPathComponent:@"data.plist"];
-    
-    // 4.读取数据
-    NSArray *data = [NSArray arrayWithContentsOfFile:filepath];
-    NSLog(@"%@", data);
-    if (data) {
-        arr[0] = data[0];
-        arr[1] = data[1];
-        arr[2] = data[2];
-        [_firstBtn setTitle:arr[0] forState:UIControlStateNormal];
-        [_ThreeBtn setTitle:arr[2] forState:UIControlStateNormal];
-        [_TwoBtn setTitle:arr[1] forState:UIControlStateNormal];
     }
-    if ([arr count]>0 && arr[2] != nil) {
+    if ([_shortcutsArray count]>0 && _shortcutsArray[2] != nil) {
          _ThreeBtn.userInteractionEnabled = NO;
         [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular3"] forState:UIControlStateNormal];
     }

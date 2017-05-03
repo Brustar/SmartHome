@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "DeviceTimerCell.h"
 #import "DeviceTimerInfo.h"
+#import "CustomViewController.h"
 
-@interface DeviceListTimeVC : UIViewController
+@interface DeviceListTimeVC : CustomViewController
 
 @property(nonatomic, strong) NSMutableArray *timerList;//设备定时列表
 

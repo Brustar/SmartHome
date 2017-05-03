@@ -34,8 +34,6 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 @property (nonatomic,strong) NSArray *lights;
 @property (weak, nonatomic) IBOutlet UILabel *lightName;
 
-//@property (weak, nonatomic) IBOutlet UISlider *lightSlider;//控制所有灯的亮度调节
-
 @property (nonatomic,assign) int sceneID;
 @property (nonatomic,assign) long lightCatalog;
 @property (nonatomic,strong) YALContextMenuTableView* contextMenuTableView;
@@ -143,7 +141,6 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncLight:) name:@"light" object:nil];
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
-    //[_lightSlider addTarget:self action:@selector(onLightSliderValueChanged:) forControlEvents:UIControlEventValueChanged];//所有灯的总控制
 
     //查询设备状态
     NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
@@ -158,24 +155,14 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     [super viewDidAppear:animated];
 }
 
-- (void)onLightSliderValueChanged:(UISlider *)slider {
-    
-    [[SceneManager defaultManager] dimingScene:[self.sceneid intValue] brightness:(int)(slider.value*100)];
-    //self.detailCell.bright.value = slider.value;
-    //self.detailCell.valueLabel.text = [NSString stringWithFormat:@"%d%%", (int)(self.detailCell.bright.value * 100)];
-    //self.detailCell.power.on = self.detailCell.bright.value >0;
-    //[self save:self.detailCell.bright];
-    
-}
-
 -(void) syncUI
 {
     for(id device in self.scene.devices)
     {
         if ([device isKindOfClass:[Light class]] && ((Light*)device).deviceID == [self.deviceid intValue]) {
-            //float brightness_f = (float)((Light *)device).brightness;
-            //self.detailCell.bright.value = brightness_f/100;
-            
+            float brightness_f = (float)((Light *)device).brightness;
+            int degree = brightness_f*MAX_ROTATE_DEGREE/100;
+            self.tranformView.transform = CGAffineTransformMakeRotation(degree);
             //self.detailCell.valueLabel.text = [NSString stringWithFormat:@"%d%%", (int)(self.detailCell.bright.value * 100)];
             self.switcher.isOn=((Light*)device).isPoweron;
             if ([((Light*)device).color count]>2) {
@@ -195,6 +182,9 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     }
     if (state == 0x0a) {
         //self.detailCell.bright.value=[dic[@"r"] intValue];
+        float brightness_f = [dic[@"r"] intValue];
+        int degree = brightness_f*MAX_ROTATE_DEGREE/100;
+        self.tranformView.transform = CGAffineTransformMakeRotation(degree);
     }
     if (state == 0x0b) {
         self.base.backgroundColor=[UIColor colorWithRed:[dic[@"r"] intValue]/255.0 green:[dic[@"g"] intValue]/255.0  blue:[dic[@"b"] intValue]/255.0  alpha:1];
@@ -417,7 +407,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
         if (angle<0) {
             return;
         }
-    }else if (degree>135) {
+    }else if (degree>MAX_ROTATE_DEGREE) {
         if (angle>0) {
             return;
         }
@@ -431,7 +421,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     CGFloat radius = atan2f(self.tranformView.transform.b, self.tranformView.transform.a);
     CGFloat degree = radius * (180 / M_PI);
     NSLog(@"degree:%f",degree);
-    int percent = degree*100/135;
+    int percent = degree*100/MAX_ROTATE_DEGREE;
     NSLog(@"percent:%d",percent);
     self.tranformView.tag = percent;
     [self save:self.tranformView];
@@ -440,7 +430,6 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 -(void) initSwitch
 {
     self.base.layer.cornerRadius = 120;
-    self.btnPen.hidden = YES;
     self.tranformView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 240, 240)];
     self.tranformView.center = CGPointMake(self.view.bounds.size.width / 2,
                                   self.view.bounds.size.height / 2);
@@ -450,10 +439,11 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:[UIImage imageNamed:@"lighting_off"] inactiveBackgroundImage:nil activeBackgroundImage:nil frame:CGRectMake(0, 0, 194, 194)];
     self.switcher.center = CGPointMake(self.view.bounds.size.width / 2,
                                   self.view.bounds.size.height / 2);
+    //self.switcher.layer.cornerRadius = 194/2;
     self.switcher.knobRelativeHeight = 1.0f;
     self.switcher.delegate = self;
     [self.view addSubview:self.switcher];
-    
+
     [self.view addSubview:self.tranformView];
 }
 
@@ -507,7 +497,6 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 }
 
 #pragma mark - UITableViewDataSource, UITableViewDelegate
-
 - (void)tableView:(YALContextMenuTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.lightName.text = [[self.lights objectAtIndex:indexPath.row] objectForKey:@"name"];
     self.deviceid = [[self.lights objectAtIndex:indexPath.row] objectForKey:@"id"];

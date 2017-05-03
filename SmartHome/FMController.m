@@ -7,18 +7,18 @@
 //
 #import "FMController.h"
 #import "FMCollectionViewCell.h"
-#import "TXHRrettyRuler.h"
+
 #import "SceneManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "VolumeManager.h"
 #import "SocketManager.h"
 #import "SQLManager.h"
-
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "HttpManager.h"
 #import "PackManager.h"
 #import "TVChannel.h"
 
-@interface FMController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate,TXHRrettyRulerDelegate,UIGestureRecognizerDelegate,FMCollectionViewCellDelegate>
+@interface FMController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate,UIGestureRecognizerDelegate,FMCollectionViewCellDelegate>
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollerContentViewWidth;
 @property (nonatomic,strong) NSMutableArray *allFavouriteChannels;
@@ -40,6 +40,7 @@
 
 @property (nonatomic,strong) FMCollectionViewCell *cell;
 @property (weak, nonatomic) IBOutlet UILabel *voiceValue;
+@property (weak, nonatomic) IBOutlet UIStackView *channelContainer;
 
 @end
 
@@ -67,14 +68,18 @@
     _roomID = roomID;
     if(roomID)
     {
-        self.deviceid = [SQLManager deviceIDWithRoomID:self.roomID withType:@"FM"];
-    }
-    
-    
+        self.deviceid = [SQLManager singleDeviceWithCatalogID:FM byRoom:self.roomID];
+    } 
     
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setNaviBarTitle:@"收音机"];
+    [self initSlider];
+    [self initChannelContainer];
+    
     self.hzLabel.transform = CGAffineTransformMakeRotation(M_PI/2 + M_PI);
     self.collectionView.pagingEnabled = YES;
     
@@ -99,27 +104,44 @@
     }
     [self setUpPageController];
     
-    [self setRuleForFMChannel];
-    
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
 }
 
--(void)setRuleForFMChannel
+-(void)initChannelContainer
 {
-    CGFloat rule = [self.numberOfChannel.text floatValue];
-    NSLog(@"\n\n\n\n\n rule = %f",rule);
-    TXHRrettyRuler *ruler = [[TXHRrettyRuler alloc] initWithFrame:CGRectMake(30, 150, self.fmView.bounds.size.width - 30 * 2, 150)];
-    ruler.rulerDelegate = self;
-    [ruler showRulerScrollViewWithCount:205 average:[NSNumber numberWithFloat:0.1] currentValue:rule smallMode:NO];
-    [self.fmView addSubview:ruler];
-
+    self.allFavouriteChannels = [SQLManager getAllChannelForFavoritedForType:@"fm" deviceID:[self.deviceid intValue]];
+    for(TVChannel *ch in self.allFavouriteChannels)
+    {
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.contentMode = UIViewContentModeScaleAspectFit;
+        
+        [btn setTitle:ch.channel_name  forState:UIControlStateNormal];
+        [[btn rac_signalForControlEvents:UIControlEventTouchUpInside]
+         subscribeNext:^(id x) {
+             NSData *data = [[DeviceInfo defaultManager] switchProgram:ch.channel_number deviceID:self.deviceid];
+             SocketManager *sock=[SocketManager defaultManager];
+             [sock.socket writeData:data withTimeout:1 tag:1];
+         }];
+        [self.channelContainer addArrangedSubview:btn];
+        [self.channelContainer layoutIfNeeded];
+    }
 }
 
-- (void)txhRrettyRuler:(TXHRulerScrollView *)rulerScrollView {
-    self.numberOfChannel.text = [NSString stringWithFormat:@"%.1f",rulerScrollView.rulerValue];
+-(void) initSlider
+{
+    [self.frequence setThumbImage:[UIImage imageNamed:@"fm_thumb"] forState:UIControlStateNormal];
+    self.frequence.maximumTrackTintColor = self.frequence.minimumTrackTintColor = [UIColor clearColor];
+    [self.frequence addTarget:self action:@selector(adjustFrequence:) forControlEvents:UIControlEventValueChanged];
     
-  //  [self save:nil];
+    [self.volume setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
+    self.volume.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
+    self.volume.minimumTrackTintColor = [UIColor colorWithRed:253/255.0 green:254/255.0 blue:254/255.0 alpha:1];
+}
+
+- (IBAction)adjustFrequence:(id)sender {
+    UISlider *slider = (UISlider *)sender;
+    self.numberOfChannel.text = [NSString stringWithFormat:@"%.1fFM",80+slider.value*40];
 }
 
 - (void)didReceiveMemoryWarning {

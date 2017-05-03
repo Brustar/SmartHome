@@ -10,10 +10,9 @@
 #import "RoomListController.h"
 #import "AddSenseCell.h"
 #import "FixTimeRepeatController.h"
-
 #import "Room.h"
 #import <CoreLocation/CoreLocation.h>
-#import "SunCount.h"
+
 #import "Scene.h"
 #import "SceneManager.h"
 #import "SQLManager.h"
