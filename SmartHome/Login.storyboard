@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -940,10 +940,92 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rkb-29-mLQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
+        <!--主机列表页面-->
+        <scene sceneID="Rqc-i3-l01">
+            <objects>
+                <viewController storyboardIdentifier="HostListVC" id="A9o-c1-fTh" userLabel="主机列表页面" customClass="HostListViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dHo-6D-gD4"/>
+                        <viewControllerLayoutGuide type="bottom" id="lVi-k6-Zhs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sYX-c9-Afd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YRl-pe-vR9">
+                                <rect key="frame" x="0.0" y="44" width="375" height="423"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="hostsCell" id="u0g-Vf-6yE" customClass="HostListCell">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="u0g-Vf-6yE" id="W1D-l6-hFR">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="zFg-Si-cS8" userLabel="line1">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="0.5" id="GPd-ce-mbz"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="ERL-sI-r4b" userLabel="line2">
+                                                    <rect key="frame" x="0.0" y="42.5" width="375" height="0.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="0.5" id="wae-bQ-VSi"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="zFg-Si-cS8" secondAttribute="trailing" id="1Ma-3V-FjS"/>
+                                                <constraint firstItem="ERL-sI-r4b" firstAttribute="leading" secondItem="W1D-l6-hFR" secondAttribute="leading" id="JPZ-Cn-Io7"/>
+                                                <constraint firstItem="zFg-Si-cS8" firstAttribute="top" secondItem="W1D-l6-hFR" secondAttribute="top" id="YsL-cU-SId"/>
+                                                <constraint firstAttribute="bottom" secondItem="ERL-sI-r4b" secondAttribute="bottom" constant="0.5" id="kEv-F5-fjz"/>
+                                                <constraint firstItem="zFg-Si-cS8" firstAttribute="leading" secondItem="W1D-l6-hFR" secondAttribute="leading" id="ouL-a2-PDO"/>
+                                                <constraint firstAttribute="trailing" secondItem="ERL-sI-r4b" secondAttribute="trailing" id="wi0-SA-YTq"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="A9o-c1-fTh" id="fBa-mo-o25"/>
+                                    <outlet property="delegate" destination="A9o-c1-fTh" id="KL9-Ux-JAp"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8oz-Rz-pk9">
+                                <rect key="frame" x="30" y="543" width="315" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Opw-Y6-OSC"/>
+                                </constraints>
+                                <state key="normal" title="确定" backgroundImage="family_done"/>
+                                <connections>
+                                    <action selector="OkBtnClicked:" destination="A9o-c1-fTh" eventType="touchUpInside" id="XSo-7O-SXI"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="8oz-Rz-pk9" secondAttribute="bottom" constant="80" id="BJe-hH-7C7"/>
+                            <constraint firstItem="YRl-pe-vR9" firstAttribute="top" secondItem="sYX-c9-Afd" secondAttribute="top" constant="44" id="Joh-6b-ccJ"/>
+                            <constraint firstAttribute="trailing" secondItem="YRl-pe-vR9" secondAttribute="trailing" id="KO5-SR-IUZ"/>
+                            <constraint firstAttribute="trailing" secondItem="8oz-Rz-pk9" secondAttribute="trailing" constant="30" id="T3M-pG-cwr"/>
+                            <constraint firstItem="YRl-pe-vR9" firstAttribute="leading" secondItem="sYX-c9-Afd" secondAttribute="leading" id="lcd-UO-4ZL"/>
+                            <constraint firstAttribute="bottom" secondItem="YRl-pe-vR9" secondAttribute="bottom" constant="200" id="oXQ-wE-zLC"/>
+                            <constraint firstItem="8oz-Rz-pk9" firstAttribute="leading" secondItem="sYX-c9-Afd" secondAttribute="leading" constant="30" id="yhS-Wm-yoK"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="hostTableView" destination="YRl-pe-vR9" id="tsQ-RM-8DZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bws-YG-InV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
     </scenes>
     <resources>
         <image name="background" width="375" height="667"/>
         <image name="background.png" width="750" height="1334"/>
+        <image name="family_done" width="297" height="38"/>
         <image name="head_bg" width="185" height="185"/>
         <image name="loginButton.png" width="311" height="38"/>
         <image name="login_icon.png" width="80" height="86"/>

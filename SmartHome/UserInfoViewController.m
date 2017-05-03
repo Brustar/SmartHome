@@ -154,10 +154,7 @@
     cell.backgroundView = nil;
     cell.accessoryType = UITableViewCellAccessoryNone;
     if (indexPath.section == 0 || indexPath.section == 1 || indexPath.section == 2) {
-        cell.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1];
-        //UIView *view = [[UIView alloc] initWithFrame:cell.frame];
-        //view.backgroundColor = [UIColor colorWithRed:30.0 green:29.0 blue:34.0 alpha:0.5];
-        //cell.backgroundView = view;
+        cell.backgroundColor = [UIColor colorWithRed:30.0/255.0 green:29.0/255.0 blue:34.0/255.0 alpha:1];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     cell.textLabel.textColor = [UIColor whiteColor];
