@@ -13,7 +13,7 @@
 #import "VolumeManager.h"
 #import "SocketManager.h"
 #import "SQLManager.h"
-
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "HttpManager.h"
 #import "PackManager.h"
 #import "TVChannel.h"
@@ -40,6 +40,7 @@
 
 @property (nonatomic,strong) FMCollectionViewCell *cell;
 @property (weak, nonatomic) IBOutlet UILabel *voiceValue;
+@property (weak, nonatomic) IBOutlet UIStackView *channelContainer;
 
 @end
 
@@ -77,6 +78,8 @@
     
     [self setNaviBarTitle:@"收音机"];
     [self initSlider];
+    [self initChannelContainer];
+    
     self.hzLabel.transform = CGAffineTransformMakeRotation(M_PI/2 + M_PI);
     self.collectionView.pagingEnabled = YES;
     
@@ -103,6 +106,26 @@
     
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
+}
+
+-(void)initChannelContainer
+{
+    self.allFavouriteChannels = [SQLManager getAllChannelForFavoritedForType:@"fm" deviceID:[self.deviceid intValue]];
+    for(TVChannel *ch in self.allFavouriteChannels)
+    {
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.contentMode = UIViewContentModeScaleAspectFit;
+        
+        [btn setTitle:ch.channel_name  forState:UIControlStateNormal];
+        [[btn rac_signalForControlEvents:UIControlEventTouchUpInside]
+         subscribeNext:^(id x) {
+             NSData *data = [[DeviceInfo defaultManager] switchProgram:ch.channel_number deviceID:self.deviceid];
+             SocketManager *sock=[SocketManager defaultManager];
+             [sock.socket writeData:data withTimeout:1 tag:1];
+         }];
+        [self.channelContainer addArrangedSubview:btn];
+        [self.channelContainer layoutIfNeeded];
+    }
 }
 
 -(void) initSlider

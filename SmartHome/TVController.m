@@ -25,6 +25,7 @@
 #import "UploadManager.h"
 #import "UIImageView+WebCache.h"
 #import "IQKeyBoardManager.h"
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @interface UIImagePickerController (LandScapeImagePicker)
 
@@ -101,7 +102,7 @@
     if(!_allFavourTVChannels)
     {
         _allFavourTVChannels = [NSMutableArray array];
-        _allFavourTVChannels = [SQLManager getAllChannelForFavoritedForType:@"TV" deviceID:[self.deviceid intValue]];
+        _allFavourTVChannels = [SQLManager getAllChannelForFavoritedForType:@"tv" deviceID:[self.deviceid intValue]];
         if(_allFavourTVChannels == nil || _allFavourTVChannels.count == 0)
         {
             self.unstoreLabel.hidden = NO;
@@ -172,6 +173,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setNaviBarTitle:@"电视"];
+    [self initChannelContainer];
     self.eNumber = [SQLManager getENumber:[self.deviceid intValue]];
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
@@ -212,7 +214,27 @@
     
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
-    
+}
+
+-(void)initChannelContainer
+{
+    self.allFavourTVChannels = [SQLManager getAllChannelForFavoritedForType:@"tv" deviceID:[self.deviceid intValue]];
+    for(TVChannel *ch in self.allFavourTVChannels)
+    {
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.contentMode = UIViewContentModeScaleAspectFit;
+        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:ch.channel_pic]];
+        
+        [btn setImage:[[UIImage alloc] initWithData:data] forState:UIControlStateNormal];
+        [[btn rac_signalForControlEvents:UIControlEventTouchUpInside]
+         subscribeNext:^(id x) {
+             NSData *data = [[DeviceInfo defaultManager] switchProgram:ch.channel_number deviceID:self.deviceid];
+             SocketManager *sock=[SocketManager defaultManager];
+             [sock.socket writeData:data withTimeout:1 tag:1];
+         }];
+        [self.channelContainer addArrangedSubview:btn];
+        [self.channelContainer layoutIfNeeded];
+    }
 }
 
 - (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
@@ -530,7 +552,7 @@
 {
     //保存成功后存到数据库
     [self writeTVChannelsConfigDataToSQL:responseObject withParent:@"TV"];
-    self.allFavourTVChannels = [SQLManager getAllChannelForFavoritedForType:@"TV" deviceID:[self.deviceid intValue]];
+    self.allFavourTVChannels = [SQLManager getAllChannelForFavoritedForType:@"tv" deviceID:[self.deviceid intValue]];
     self.unstoreLabel.hidden = YES;
     self.tvLogoCollectionView.backgroundColor = [UIColor lightGrayColor];
     [self.tvLogoCollectionView reloadData];
