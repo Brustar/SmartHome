@@ -396,17 +396,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1sT-5Y-hU3" userLabel="DrawView">
                                 <rect key="frame" x="0.0" y="194" width="375" height="375"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tm_btn_nc_normal" translatesAutoresizingMaskIntoConstraints="NO" id="fn9-d7-eEB">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timing_btn_nol" translatesAutoresizingMaskIntoConstraints="NO" id="fn9-d7-eEB">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Ml-IB-SIs" userLabel="TimerView">
                                         <rect key="frame" x="114" y="114" width="147" height="147"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tm_btn_dp_normal" translatesAutoresizingMaskIntoConstraints="NO" id="hjq-5j-5cR">
-                                                <rect key="frame" x="0.0" y="0.0" width="147" height="147"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0OQ-Ou-0lL">
                                                 <rect key="frame" x="52" y="32" width="43" height="21"/>
                                                 <constraints>
@@ -441,14 +437,10 @@
                                             <constraint firstAttribute="bottom" secondItem="2D7-bH-08P" secondAttribute="bottom" constant="65" id="9f2-8t-fMT"/>
                                             <constraint firstItem="2D7-bH-08P" firstAttribute="top" secondItem="0Ml-IB-SIs" secondAttribute="top" constant="65" id="GI0-cj-pLq"/>
                                             <constraint firstItem="KQo-X9-dnP" firstAttribute="centerX" secondItem="0Ml-IB-SIs" secondAttribute="centerX" id="Hh6-ei-vET"/>
-                                            <constraint firstItem="hjq-5j-5cR" firstAttribute="top" secondItem="0Ml-IB-SIs" secondAttribute="top" id="Xc8-rK-oFF"/>
                                             <constraint firstItem="0OQ-Ou-0lL" firstAttribute="top" secondItem="0Ml-IB-SIs" secondAttribute="top" constant="32" id="aPF-A6-rP1"/>
-                                            <constraint firstAttribute="trailing" secondItem="hjq-5j-5cR" secondAttribute="trailing" id="iU0-kW-Exa"/>
                                             <constraint firstItem="2D7-bH-08P" firstAttribute="centerX" secondItem="0Ml-IB-SIs" secondAttribute="centerX" id="ohP-Db-9Lx"/>
                                             <constraint firstItem="0OQ-Ou-0lL" firstAttribute="centerX" secondItem="0Ml-IB-SIs" secondAttribute="centerX" id="uqa-Ff-6e2"/>
-                                            <constraint firstItem="hjq-5j-5cR" firstAttribute="leading" secondItem="0Ml-IB-SIs" secondAttribute="leading" id="ux2-vv-l5n"/>
                                             <constraint firstAttribute="bottom" secondItem="KQo-X9-dnP" secondAttribute="bottom" constant="32" id="xI4-e0-Rva"/>
-                                            <constraint firstAttribute="bottom" secondItem="hjq-5j-5cR" secondAttribute="bottom" id="zfg-6e-rjh"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -712,7 +704,6 @@
         <image name="line_horizontal_white" width="373" height="48"/>
         <image name="save_icon_nc_normal" width="21" height="23"/>
         <image name="save_icon_open_normal" width="9" height="16"/>
-        <image name="tm_btn_dp_normal" width="150" height="150"/>
-        <image name="tm_btn_nc_normal" width="375" height="385"/>
+        <image name="timing_btn_nol" width="375" height="385"/>
     </resources>
 </document>

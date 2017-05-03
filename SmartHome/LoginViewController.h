@@ -30,7 +30,7 @@
 #import "PackManager.h"
 #import "CryptoManager.h"
 
-@interface LoginViewController : UIViewController<QRCodeReaderDelegate, UITextFieldDelegate, HttpDelegate,UIActionSheetDelegate, AVPlayerViewControllerDelegate>
+@interface LoginViewController : UIViewController<QRCodeReaderDelegate, UITextFieldDelegate, HttpDelegate,UIActionSheetDelegate, AVPlayerViewControllerDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *pwdTextField;
 
@@ -41,6 +41,7 @@
 @property(nonatomic,assign) NSInteger userType;
 @property(nonatomic,assign) NSInteger UserType;//判断是否为主人
 @property(nonatomic,strong) NSString *masterId;
+@property (nonatomic, strong) NSString *hostName;//主机名称（家庭名称）
 @property(nonatomic,strong) NSString *role;
 @property(nonatomic,strong) NSMutableArray *hostIDS;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
