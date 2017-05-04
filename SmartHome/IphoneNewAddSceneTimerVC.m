@@ -84,6 +84,7 @@
     minuteSlider.labelColor = [UIColor lightGrayColor];
     minuteSlider.handleType = semiTransparentWhiteCircle;
     minuteSlider.handleColor = [UIColor clearColor];
+    
     [self.DrawView addSubview:minuteSlider];
     //    self.DrawView.backgroundColor = [UIColor redColor];
     //    [imageView addSubview:minuteSlider];

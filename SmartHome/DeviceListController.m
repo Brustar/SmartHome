@@ -12,7 +12,7 @@
 #import "SQLManager.h"
 #import "Device.h"
 #import "MBProgressHUD+NJ.h"
-#import "DeviceType.h"
+
 #import "KxMenu.h"
 #import "SceneManager.h"
 #import "IOManager.h"

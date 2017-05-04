@@ -1,0 +1,15 @@
+//
+//  FloweringController.h
+//  SmartHome
+//
+//  Created by Brustar on 2017/5/4.
+//  Copyright © 2017年 Brustar. All rights reserved.
+//
+
+#import "CustomViewController.h"
+
+@interface FeedingController : CustomViewController
+
+@property (nonatomic,weak) NSString *deviceid;
+
+@end
