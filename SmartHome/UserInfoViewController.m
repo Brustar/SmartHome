@@ -163,9 +163,9 @@
     if (indexPath.section == 0) {
         cell.textLabel.text = @"VIP会员";
     }else if (indexPath.section == 1) {
-        cell.textLabel.text = @"购物车";
+        cell.textLabel.text = @"服务商城";
     }else if (indexPath.section == 2) {
-        cell.textLabel.text = @"服务";
+        cell.textLabel.text = @"我的服务";
     }else if (indexPath.section == 3) {
         cell.textLabel.text = @"昵称";
         cell.detailTextLabel.text = _userInfomation.nickName;
@@ -182,6 +182,7 @@
         //VIP
     }else if (indexPath.section == 1) {
         //购物车
+        [WebManager show:[[IOManager httpAddr] stringByAppendingString:@"/ui/GoodsList.aspx"]];
     }else if (indexPath.section == 2) {
         //服务
     }

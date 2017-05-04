@@ -183,10 +183,14 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    UIStoryboard *iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+    //[self.navigationController popToRootViewControllerAnimated:YES];
     
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    
-    
+    Scene *scene = self.sceneArray[indexPath.row];
+    [[SceneManager defaultManager] startScene:scene.sceneID];
+    IphoneEditSceneController *vc = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneEditSceneController"];
+    vc.sceneID = scene.sceneID;
+    [self.navigationController pushViewController:vc animated:YES];
     
     /*UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
     FamilyHomeDetailViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"familyHomeDetailVC"];
@@ -239,6 +243,8 @@
         NewLightCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewLightCell" forIndexPath:indexPath];
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.AddLightBtn.hidden = YES;
+        cell.LightConstraint.constant = 10;
         Device *device = [SQLManager getDeviceWithDeviceID:[_lightArray[indexPath.row] intValue]];
         cell.NewLightNameLabel.text = device.name;
         cell.NewLightSlider.continuous = NO;
@@ -248,6 +254,8 @@
         CurtainTableViewCell *curtainCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
         curtainCell.backgroundColor =[UIColor clearColor];
         curtainCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        curtainCell.AddcurtainBtn.hidden = YES;
+        curtainCell.curtainContraint.constant = 10;
         curtainCell.roomID = (int)self.roomID;
         Device *device = [SQLManager getDeviceWithDeviceID:[_curtainArray[indexPath.row] intValue]];
         curtainCell.label.text = device.name;
@@ -261,6 +269,8 @@
             AireTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"AireTableViewCell" forIndexPath:indexPath];
             aireCell.backgroundColor = [UIColor clearColor];
             aireCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            aireCell.AddAireBtn.hidden = YES;
+            aireCell.AireConstraint.constant = 10;
             aireCell.roomID = (int)self.roomID;
             aireCell.AireNameLabel.text = device.name;
             aireCell.deviceid = _environmentArray[indexPath.row];
@@ -269,6 +279,8 @@
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
             otherCell.backgroundColor =[UIColor clearColor];
             otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            otherCell.AddOtherBtn.hidden = YES;
+            otherCell.OtherConstraint.constant = 10;
             otherCell.NameLabel.text = device.name;
             return otherCell;
         }
@@ -281,48 +293,64 @@
             BjMusicTableViewCell * BjMusicCell = [tableView dequeueReusableCellWithIdentifier:@"BjMusicTableViewCell" forIndexPath:indexPath];
             BjMusicCell.backgroundColor = [UIColor clearColor];
             BjMusicCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            BjMusicCell.AddBjmusicBtn.hidden = YES;
+            BjMusicCell.BJmusicConstraint.constant = 10;
             BjMusicCell.BjMusicNameLb.text = device.name;
             return BjMusicCell;
         }else if (device.hTypeId == 13) { //DVD
             DVDTableViewCell * dvdCell = [tableView dequeueReusableCellWithIdentifier:@"DVDTableViewCell" forIndexPath:indexPath];
             dvdCell.backgroundColor =[UIColor clearColor];
             dvdCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            dvdCell.AddDvdBtn.hidden = YES;
+            dvdCell.DVDConstraint.constant = 10;
             dvdCell.DVDNameLabel.text = device.name;
             return dvdCell;
         }else if (device.hTypeId == 17) { //幕布
             ScreenCurtainCell * ScreenCell = [tableView dequeueReusableCellWithIdentifier:@"ScreenCurtainCell" forIndexPath:indexPath];
             ScreenCell.backgroundColor =[UIColor clearColor];
             ScreenCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            ScreenCell.AddScreenCurtainBtn.hidden = YES;
+            ScreenCell.ScreenCurtainConstraint.constant = 10;
             ScreenCell.ScreenCurtainLabel.text = device.name;
             return ScreenCell;
         }else if (device.hTypeId == 16) { //投影仪(只有开关)
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
             otherCell.backgroundColor = [UIColor clearColor];
             otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            otherCell.AddOtherBtn.hidden = YES;
+            otherCell.OtherConstraint.constant = 10;
             otherCell.NameLabel.text = device.name;
             return otherCell;
         }else if (device.hTypeId == 11) { //机顶盒
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
             otherCell.backgroundColor =[UIColor clearColor];
             otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            otherCell.AddOtherBtn.hidden = YES;
+            otherCell.OtherConstraint.constant = 10;
             otherCell.NameLabel.text = device.name;
             return otherCell;
         }else if (device.hTypeId == 12) { //网络电视
             TVTableViewCell * tvCell = [tableView dequeueReusableCellWithIdentifier:@"TVTableViewCell" forIndexPath:indexPath];
             tvCell.backgroundColor =[UIColor clearColor];
             tvCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            tvCell.AddTvDeviceBtn.hidden = YES;
+            tvCell.TVConstraint.constant = 10;
             tvCell.TVNameLabel.text = device.name;
             return tvCell;
         }else if (device.hTypeId == 18) { //功放
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
             otherCell.backgroundColor =[UIColor clearColor];
             otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            otherCell.AddOtherBtn.hidden = YES;
+            otherCell.OtherConstraint.constant = 10;
             otherCell.NameLabel.text = device.name;
             return otherCell;
         }else { //影音其他类型（如：FM）
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
             otherCell.backgroundColor =[UIColor clearColor];
             otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            otherCell.AddOtherBtn.hidden = YES;
+            otherCell.OtherConstraint.constant = 10;
             otherCell.NameLabel.text = device.name;
             return otherCell;
         }
@@ -334,6 +362,8 @@
         OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
         otherCell.backgroundColor =[UIColor clearColor];
         otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        otherCell.AddOtherBtn.hidden = YES;
+        otherCell.OtherConstraint.constant = 10;
         otherCell.NameLabel.text = device.name;
         return otherCell;
         
@@ -344,6 +374,8 @@
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
             otherCell.backgroundColor =[UIColor clearColor];
             otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            otherCell.AddOtherBtn.hidden = YES;
+            otherCell.OtherConstraint.constant = 10;
             otherCell.NameLabel.text = device.name;
             return otherCell;
         }else if (device.hTypeId == 45) { //摄像头
@@ -352,6 +384,8 @@
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
             otherCell.backgroundColor =[UIColor clearColor];
             otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            otherCell.AddOtherBtn.hidden = YES;
+            otherCell.OtherConstraint.constant = 10;
             otherCell.NameLabel.text = device.name;
             return otherCell;
         }
@@ -363,6 +397,8 @@
         OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
         otherCell.backgroundColor =[UIColor clearColor];
         otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        otherCell.AddOtherBtn.hidden = YES;
+        otherCell.OtherConstraint.constant = 10;
         otherCell.NameLabel.text = device.name;
         return otherCell;
     }

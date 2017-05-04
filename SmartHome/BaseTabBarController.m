@@ -39,7 +39,6 @@
     //iPhone故事板
     UIStoryboard *iPhoneStoryBoard  = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     UIStoryboard *HomeStoryBoard  = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
-    UIStoryboard *SceneStoryBoard  = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
     UIStoryboard *devicesStoryBoard  = [UIStoryboard storyboardWithName:@"Devices" bundle:nil];
     //第三级控制器
     //设备

@@ -65,6 +65,10 @@
 		0F6AB8701D782D9D0041E39C /* SunString.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6AB86E1D782D9D0041E39C /* SunString.m */; };
 		0F6ADFE01E7136B500BFF67F /* RCDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6ADFDF1E7136B500BFF67F /* RCDataManager.m */; };
 		0F6ADFE31E7136C500BFF67F /* ConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6ADFE21E7136C500BFF67F /* ConversationViewController.m */; };
+		0F7426B71EBAC7A000D686B8 /* HTCircularSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7426B61EBAC7A000D686B8 /* HTCircularSlider.m */; };
+		0F7426BA1EBAC8D800D686B8 /* FloweringController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7426B91EBAC8D800D686B8 /* FloweringController.m */; };
+		0F7426C11EBB362F00D686B8 /* FeedingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7426BE1EBB362F00D686B8 /* FeedingController.m */; };
+		0F7426C21EBB362F00D686B8 /* WettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7426C01EBB362F00D686B8 /* WettingController.m */; };
 		0F78C57A1EB1F92C00FC3BE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F78C5791EB1F92C00FC3BE4 /* Assets.xcassets */; };
 		0F8A78511E9F7C8C0050F0D9 /* UIImageView+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8A78501E9F7C8C0050F0D9 /* UIImageView+Badge.m */; };
 		0F8D76D01D9A1B9700DDD063 /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8D76CF1D9A1B9700DDD063 /* Schedule.m */; };
@@ -381,7 +385,6 @@
 		F66596E61D3F5DBC0082716A /* AddNewScenseController.m in Sources */ = {isa = PBXBuildFile; fileRef = F66596E51D3F5DBC0082716A /* AddNewScenseController.m */; };
 		F66596E91D3F72CA0082716A /* AddSenseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F66596E81D3F72CA0082716A /* AddSenseCell.m */; };
 		F668AF251D53413B0079587F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F668AF241D53413B0079587F /* Main.storyboard */; };
-		F66CADE51D5D8654001E66EC /* DeviceType.m in Sources */ = {isa = PBXBuildFile; fileRef = F66CADE41D5D8654001E66EC /* DeviceType.m */; };
 		F66DFF281D5184730005E882 /* EditSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = F66DFF271D5184730005E882 /* EditSceneController.m */; };
 		F66DFF2B1D5188BF0005E882 /* EditSceneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F66DFF2A1D5188BF0005E882 /* EditSceneCell.m */; };
 		F67091BC1D93BF300002DDC5 /* WindowSlidingController.m in Sources */ = {isa = PBXBuildFile; fileRef = F67091BB1D93BF300002DDC5 /* WindowSlidingController.m */; };
@@ -619,6 +622,14 @@
 		0F6ADFE11E7136C500BFF67F /* ConversationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationViewController.h; sourceTree = "<group>"; };
 		0F6ADFE21E7136C500BFF67F /* ConversationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationViewController.m; sourceTree = "<group>"; };
 		0F6C46491EA9AE9600F857E9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		0F7426B51EBAC7A000D686B8 /* HTCircularSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTCircularSlider.h; sourceTree = "<group>"; };
+		0F7426B61EBAC7A000D686B8 /* HTCircularSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTCircularSlider.m; sourceTree = "<group>"; };
+		0F7426B81EBAC8D800D686B8 /* FloweringController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FloweringController.h; sourceTree = "<group>"; };
+		0F7426B91EBAC8D800D686B8 /* FloweringController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FloweringController.m; sourceTree = "<group>"; };
+		0F7426BD1EBB362F00D686B8 /* FeedingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedingController.h; sourceTree = "<group>"; };
+		0F7426BE1EBB362F00D686B8 /* FeedingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedingController.m; sourceTree = "<group>"; };
+		0F7426BF1EBB362F00D686B8 /* WettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WettingController.h; sourceTree = "<group>"; };
+		0F7426C01EBB362F00D686B8 /* WettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WettingController.m; sourceTree = "<group>"; };
 		0F78C5791EB1F92C00FC3BE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0F8A784F1E9F7C8C0050F0D9 /* UIImageView+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Badge.h"; sourceTree = "<group>"; };
 		0F8A78501E9F7C8C0050F0D9 /* UIImageView+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Badge.m"; sourceTree = "<group>"; };
@@ -1170,8 +1181,6 @@
 		F66596E71D3F72CA0082716A /* AddSenseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddSenseCell.h; sourceTree = "<group>"; };
 		F66596E81D3F72CA0082716A /* AddSenseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddSenseCell.m; sourceTree = "<group>"; };
 		F668AF241D53413B0079587F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		F66CADE31D5D8654001E66EC /* DeviceType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceType.h; sourceTree = "<group>"; };
-		F66CADE41D5D8654001E66EC /* DeviceType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceType.m; sourceTree = "<group>"; };
 		F66DFF261D5184730005E882 /* EditSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditSceneController.h; sourceTree = "<group>"; };
 		F66DFF271D5184730005E882 /* EditSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditSceneController.m; sourceTree = "<group>"; };
 		F66DFF291D5188BF0005E882 /* EditSceneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditSceneCell.h; sourceTree = "<group>"; };
@@ -1304,8 +1313,6 @@
 				F6251F731D541D8A000A5A47 /* Device.m */,
 				F6A1C02C1D586D7500856E00 /* Room.h */,
 				F6A1C02D1D586D7500856E00 /* Room.m */,
-				F66CADE31D5D8654001E66EC /* DeviceType.h */,
-				F66CADE41D5D8654001E66EC /* DeviceType.m */,
 				0FC119751D6FE5E0001DA19A /* Screen.h */,
 				0FC119761D6FE5E0001DA19A /* Screen.m */,
 				0FC119781D6FE61C001DA19A /* Projector.h */,
@@ -1929,11 +1936,21 @@
 		0F6ADFDD1E71354000BFF67F /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				0F7426B41EBAC78B00D686B8 /* CircularSlider */,
 				0F8A784E1E9F7C1D0050F0D9 /* UI */,
 				0F49CB7F1E7A21E800D46ECC /* ORBSwitch */,
 				0FDB34411E79262D00DA53BB /* Geometry */,
 			);
 			name = Widgets;
+			sourceTree = "<group>";
+		};
+		0F7426B41EBAC78B00D686B8 /* CircularSlider */ = {
+			isa = PBXGroup;
+			children = (
+				0F7426B51EBAC7A000D686B8 /* HTCircularSlider.h */,
+				0F7426B61EBAC7A000D686B8 /* HTCircularSlider.m */,
+			);
+			name = CircularSlider;
 			sourceTree = "<group>";
 		};
 		0F8A784E1E9F7C1D0050F0D9 /* UI */ = {
@@ -2076,8 +2093,14 @@
 		0FF5CD4E1EA7695E0027E2DC /* Devices */ = {
 			isa = PBXGroup;
 			children = (
+				0F7426BD1EBB362F00D686B8 /* FeedingController.h */,
+				0F7426BE1EBB362F00D686B8 /* FeedingController.m */,
+				0F7426BF1EBB362F00D686B8 /* WettingController.h */,
+				0F7426C01EBB362F00D686B8 /* WettingController.m */,
 				0F9232E01EB85CE3008B1F37 /* AirMenuCell.xib */,
 				0FABB33D1EAF232A0089A5A4 /* MenuCell.xib */,
+				0F7426B81EBAC8D800D686B8 /* FloweringController.h */,
+				0F7426B91EBAC8D800D686B8 /* FloweringController.m */,
 			);
 			name = Devices;
 			sourceTree = "<group>";
@@ -3171,6 +3194,7 @@
 				0F64234B1DE57C83003379FC /* Utilities.m in Sources */,
 				CD9F0AD01EB9BC9C007B0CF7 /* HostListCell.m in Sources */,
 				2EBE210F1E497595003D53A4 /* ForgotViewController.m in Sources */,
+				0F7426BA1EBAC8D800D686B8 /* FloweringController.m in Sources */,
 				F6280D4A1D961C62009108ED /* IphoneAddTVChannelController.m in Sources */,
 				F65164141D3780C500A6F5FA /* TVLogoCell.m in Sources */,
 				2EBABC781E8360FB0093EF3A /* TVTableViewCell.m in Sources */,
@@ -3179,6 +3203,7 @@
 				0FAF74BF1CEEA17C00432713 /* HRBrightnessCursor.m in Sources */,
 				2E8715D31EA06EFF006D3FB0 /* NowMusicController.m in Sources */,
 				0F4B3C741E7BE57A00102DD3 /* WeChatPayController.mm in Sources */,
+				0F7426C21EBB362F00D686B8 /* WettingController.m in Sources */,
 				F62CFA471DAC92F3006410F7 /* IphoneRealSceneController.m in Sources */,
 				0FAF98A31CE40F3C009BDBB5 /* QRCameraSwitchButton.m in Sources */,
 				F6280D4D1D9651CE009108ED /* IphoneFMController.m in Sources */,
@@ -3220,6 +3245,7 @@
 				0F094AC61E94CDC100977123 /* Key.m in Sources */,
 				0FAF98A41CE40F3C009BDBB5 /* QRCodeReader.m in Sources */,
 				CD9F0AC41EB861F5007B0CF7 /* Province.m in Sources */,
+				0F7426B71EBAC7A000D686B8 /* HTCircularSlider.m in Sources */,
 				F62E05661DAB68620096BF00 /* IphoneEditSceneController.m in Sources */,
 				F60E71CA1D796BE6008863DB /* AmplifierController.m in Sources */,
 				F60FDB461D003FD500AB04BE /* CurtainTableViewCell.m in Sources */,
@@ -3237,7 +3263,6 @@
 				F66596DD1D3F1DAD0082716A /* EnegryOfDeviceCell.m in Sources */,
 				F618141D1DB5B0C7003B0741 /* PushSettingController.m in Sources */,
 				2EB2A4721E237F05003F01DB /* DeviceListTimeVC.m in Sources */,
-				F66CADE51D5D8654001E66EC /* DeviceType.m in Sources */,
 				2E925D901E5E744C008E327B /* ECPickDataViewController.m in Sources */,
 				F6DC641E1DEC17710056EC00 /* RoomDeviceController.m in Sources */,
 				2EC9B8281EB1BFE500F382AD /* PushSettingCell.m in Sources */,
@@ -3395,6 +3420,7 @@
 				0F9EA72D1DDB026C00223ED8 /* NSString+RegMatch.m in Sources */,
 				CD7863B71E8CF18200F42AC0 /* VipServiceListViewController.m in Sources */,
 				CDB8B85E1EB1EBD2003AA894 /* UserInfo.m in Sources */,
+				0F7426C11EBB362F00D686B8 /* FeedingController.m in Sources */,
 				F65DB3411D2B5AB2002A815C /* RegisterDetailController.m in Sources */,
 				0FAF98A61CE40F3C009BDBB5 /* QRCodeReaderViewController.m in Sources */,
 				0F8D76D01D9A1B9700DDD063 /* Schedule.m in Sources */,
