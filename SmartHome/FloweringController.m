@@ -31,7 +31,7 @@
 -(void) initSlider
 {
     int sliderSize = 90;
-    CGRect frame = CGRectInset(self.view.bounds, 0, 0);
+    CGRect frame = CGRectMake(self.view.center.x-sliderSize, self.view.center.y-sliderSize, sliderSize*2, sliderSize*2);//CGRectInset(self.view.bounds, 0, 0);
     
     HTCircularSlider *slider = [[HTCircularSlider alloc] initWithFrame:frame];
     [self.view addSubview:slider];
@@ -41,7 +41,7 @@
     
     slider.handleSize = CGPointMake(15/2, 51/2);
     slider.maximumValue = 24;
-    slider.value = 0;
+    slider.value = -180;
     slider.tag = 0;
     slider.radius = sliderSize;
     
@@ -69,14 +69,17 @@
         float dec = slider.value-(int)slider.value;
         int second = (int)(dec*60);
         NSString *pattern = second>9?@"%d:%d":@"%d:0%d";
-        self.HLabel.text = [NSString stringWithFormat:pattern,(int)slider.value,second];
+        
+        int hint = (int)slider.value;
+        int hour = hint >= 12 ? hint - 12 : hint + 12;
+        self.HLabel.text = [NSString stringWithFormat:pattern,hour,second];
     }else{
         self.SLabel.text = [NSString stringWithFormat:@"%dS",(int)slider.value];
     }
 }
 
 - (IBAction)save:(id)sender {
-    Schedule *sch = [[Schedule alloc] init];
+    Schedule *sch = [[Schedule alloc] initWhithoutSchedule];
     sch.deviceID = [self.deviceid intValue];
     sch.startTime = self.HLabel.text;
     sch.interval = [self.SLabel.text intValue];

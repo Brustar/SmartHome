@@ -76,7 +76,7 @@
 }
 
 - (IBAction)save:(id)sender {
-    Schedule *sch = [[Schedule alloc] init];
+    Schedule *sch = [[Schedule alloc] initWhithoutSchedule];
     sch.deviceID = [self.deviceid intValue];
     sch.startTime = self.HLabel.text;
     sch.interval = [self.SLabel.text intValue];
