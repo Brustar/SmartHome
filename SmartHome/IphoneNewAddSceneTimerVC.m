@@ -7,24 +7,25 @@
 //
 
 #import "IphoneNewAddSceneTimerVC.h"
-#import "EFCircularSlider.h"
 #import "SceneManager.h"
 #import "Scene.h"
 #import "Schedule.h"
 #import "NSString+RegMatch.h"
 #import "MBProgressHUD+NJ.h"
+#import <math.h>
+#import "CKCircleView.h"
 
-@interface IphoneNewAddSceneTimerVC ()
+@interface IphoneNewAddSceneTimerVC ()<CKCircleViewDelegate>
 @property (nonatomic,strong) Scene *scene;
 @property (nonatomic,strong) Schedule *schedule;
 @property (nonatomic,strong) NSMutableDictionary *weeks;
+@property (nonatomic,strong) UIButton * naviRightBtn;
+@property CKCircleView * dialView;
+
 @end
 
 @implementation IphoneNewAddSceneTimerVC
-{
-    EFCircularSlider* minuteSlider;
-    EFCircularSlider* hourSlider;
-}
+
 -(NSMutableDictionary *)weeks
 {
     if(!_weeks)
@@ -62,42 +63,75 @@
 }
 - (void)viewDidLoad{
     [super viewDidLoad];
-    [self setSlider];
+//    [self setSlider];
+    [self setupNaviBar];
+    self.schedule = [[Schedule alloc]initWhithoutSchedule];
+    self.schedule.startTime = self.starTimeLabel.text;
+    self.schedule.endTime = self.endTimeLabel.text;
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(iphoneSelectWeek:) name:@"SelectWeek" object:nil];
+    [self setCustomerSlider];
 }
--(void)setSlider
+-(void)setCustomerSlider
 {
-    CGRect minuteSliderFrame = CGRectMake(90, 100, 220, 220);
-    minuteSlider.center = self.DrawView.center;
-    minuteSlider = [[EFCircularSlider alloc] initWithFrame:minuteSliderFrame];
-    //    minuteSlider.unfilledColor = [UIColor colorWithRed:23/255.0f green:47/255.0f blue:70/255.0f alpha:1.0f];
-    minuteSlider.unfilledColor = [UIColor clearColor];
-    minuteSlider.filledColor = [UIColor colorWithRed:87/255.0f green:88/255.0f blue:89/255.0f alpha:0.6f];
-//    [minuteSlider setInnerMarkingLabels:@[@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10",@"11",@"12"]];
-    [minuteSlider setInnerMarkingLabels:nil];
-    minuteSlider.labelFont = [UIFont systemFontOfSize:8.0f];
+//    CGFloat width = self.view.frame.size.width;
+    
+    self.dialView = [[CKCircleView alloc] initWithFrame:CGRectMake(0, 0, 265, 265)];
+    self.dialView.delegate = self;
 
-    minuteSlider.lineWidth = 20;
-    minuteSlider.minimumValue = 0;
-    minuteSlider.maximumValue = 24;
-    //    minuteSlider.labelColor = [UIColor colorWithRed:76/255.0f green:111/255.0f blue:137/255.0f alpha:1.0f];
-    minuteSlider.labelColor = [UIColor lightGrayColor];
-    minuteSlider.handleType = semiTransparentWhiteCircle;
-    minuteSlider.handleColor = [UIColor clearColor];
-    [self.DrawView addSubview:minuteSlider];
-    //    self.DrawView.backgroundColor = [UIColor redColor];
-    //    [imageView addSubview:minuteSlider];
-    [minuteSlider addTarget:self action:@selector(minuteDidChange:) forControlEvents:UIControlEventValueChanged];
+    self.dialView.center = CGPointMake(self.DrawView.center.x, self.DrawView.center.y);
+    //轨道路径颜色
+    self.dialView.arcColor = [UIColor colorWithRed:82/255.0 green:83/255.0 blue:85/255.0 alpha:0.8];
+    //圆盘背景色
+    self.dialView.backColor = [UIColor clearColor];
+    //开始拨号键颜色
+    self.dialView.dialColor = [UIColor clearColor];
+    self.dialView.dialColor2 = [UIColor clearColor];
+    self.dialView.arcRadius = 80;
+//    self.dialView.units = @"小时";
+    //最小值
+    self.dialView.minNum = 0;
+    //最大值
+    self.dialView.maxNum = 23;
+    //中间文字颜色
+    self.dialView.labelColor = [UIColor redColor];
+    self.dialView.labelFont = [UIFont systemFontOfSize:20.0];
+    [self.view addSubview: self.dialView];
 
 }
--(void)minuteDidChange:(EFCircularSlider*)slider {
-    //    int newVal = (int)slider.currentValue < 60 ? (int)slider.currentValue : 0;
-    int newVal = (int)slider.currentValue;
-    NSString* oldTime = _starTimeLabel.text;
-    NSRange colonRange = [oldTime rangeOfString:@":"];
-    //    _timeLabel.text = [NSString stringWithFormat:@"%@:%02d", [oldTime substringToIndex:colonRange.location], newVal];
-    _starTimeLabel.text = [NSString stringWithFormat:@"%d:%@", newVal, [oldTime substringFromIndex:colonRange.location + 1]];
+
+#pragma mark -- CKCircleViewDelegate
+-(void)startTextChange:(NSString *)startText{
+    NSLog(@"startText:%@",startText);
+    self.starTimeLabel.text = [NSString stringWithFormat:@"%@",startText];
 }
+
+-(void)endTextChange:(NSString *)endText{
+    NSLog(@"endText:%@",endText);
+    self.endTimeLabel.text = [NSString stringWithFormat:@"%@",endText];
+}
+
+- (void)setupNaviBar {
+    [self setNaviBarTitle:@"场景编辑"]; //设置标题
+    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
+    _naviRightBtn.tintColor = [UIColor whiteColor];
+    //    [self setNaviBarLeftBtn:_naviLeftBtn];
+    [self setNaviBarRightBtn:_naviRightBtn];
+}
+-(void)rightBtnClicked:(UIButton *)btn
+{
+    self.scene.schedules = @[self.schedule];
+    [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
+    
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+//    NSString * starTime;
+//    NSString * endTime;
+    
+    NSDictionary *dic = @{@"startDay":self.starTimeLabel.text,@"endDay":self.endTimeLabel.text,@"repeat":self.RepetitionLable.text};
+    [center postNotificationName:@"time" object:nil userInfo:dic];
+    [self.navigationController popViewControllerAnimated:YES];
+
+}
+
 - (void)iphoneSelectWeek:(NSNotification *)noti
 {
     NSDictionary *dict = noti.userInfo;

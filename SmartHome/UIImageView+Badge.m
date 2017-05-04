@@ -48,4 +48,17 @@ CGAffineTransform GetCGAffineTransformRotateAroundPoint(float centerX, float cen
     self.transform = trans;
 }
 
+-(void) sliderRotate:(int)degree
+{
+    float centerX = self.bounds.size.width/2;
+    float centerY = self.bounds.size.height/2;
+    float x = self.bounds.size.width/2;
+    float y = 20;
+    
+    CGAffineTransform trans = GetCGAffineTransformRotateAroundPoint(centerX,centerY ,x ,y ,degrees2Radians(degree));
+    self.transform = CGAffineTransformIdentity;
+    self.transform = trans;
+}
+
+
 @end

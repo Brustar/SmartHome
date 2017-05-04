@@ -10,7 +10,10 @@
 
 @interface UIImageView (Badge)
 
+
+CGAffineTransform GetCGAffineTransformRotateAroundPoint(float centerX, float centerY ,float x ,float y ,float angle);
 float degrees2Radians(float degrees);
 -(void)badge;
 -(void) rotate:(int)degree;
+-(void) sliderRotate:(int)degree;
 @end

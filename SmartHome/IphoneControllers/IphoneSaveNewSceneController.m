@@ -28,6 +28,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.sceneName setValue:[UIColor lightGrayColor] forKeyPath:@"_placeholderLabel.textColor"];
+       [self reachNotification];
     [self setupNaviBar];
 }
 - (void)setupNaviBar {
@@ -36,6 +37,16 @@
     _naviRightBtn.tintColor = [UIColor whiteColor];
     //    [self setNaviBarLeftBtn:_naviLeftBtn];
     [self setNaviBarRightBtn:_naviRightBtn];
+}
+-(void)reachNotification
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFixTimeInfo:) name:@"time" object:nil];
+}
+-(void)getFixTimeInfo:(NSNotification *)notification
+{
+    NSDictionary *dic = notification.userInfo;
+ 
+    self.SceneTimingLabel.text = [NSString stringWithFormat:@"%@-%@,%@",dic[@"startDay"],dic[@"endDay"],dic[@"repeat"]];
 }
 -(void)rightBtnClicked:(UIButton *)bbi
 {
