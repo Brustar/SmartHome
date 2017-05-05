@@ -10,7 +10,7 @@
 #import "PackManager.h" 
 #import "SocketManager.h"
 #import "SQLManager.h"
-#import "Device.h"
+
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "SceneManager.h"
@@ -130,7 +130,8 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setNaviBarTitle:@"灯光"];
+    NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
+    [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 灯光",roomName]];
     [self initSwitch];
 
     self.scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];

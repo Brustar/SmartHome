@@ -99,7 +99,8 @@ BOOL animating;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNaviBarTitle:@"背景音乐"];
+    NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
+    [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 背景音乐",roomName]];
     [self initSlider];
     
     self.deviceid = [SQLManager singleDeviceWithCatalogID:bgmusic byRoom:self.roomID];

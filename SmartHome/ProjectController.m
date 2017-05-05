@@ -69,7 +69,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self setNaviBarTitle:@"投影"];
+    NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
+    [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 投影机",roomName]];
     [self initSwitcher];
     
     _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];

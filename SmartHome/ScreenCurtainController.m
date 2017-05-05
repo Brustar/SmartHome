@@ -87,7 +87,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNaviBarTitle:@"幕布"];
+    NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
+    [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 幕布",roomName]];
 }
 
 -(IBAction)save:(id)sender

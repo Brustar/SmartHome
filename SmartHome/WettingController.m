@@ -12,6 +12,7 @@
 #import "SocketManager.h"
 #import "Schedule.h"
 #import "IOManager.h"
+#import "SQLManager.h"
 
 @interface WettingController ()
 @property (weak, nonatomic) IBOutlet UILabel *HLabel;
@@ -23,8 +24,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    [self setNaviBarTitle:@"智能浇花"];
+    
+    NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
+    [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 智能浇花",roomName]];
     [self initSlider];
 }
 
