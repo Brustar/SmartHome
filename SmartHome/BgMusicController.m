@@ -232,6 +232,18 @@ BOOL animating;
     return title;
 }
 
+- (IBAction)repeat:(id)sender {
+    NSData *data=[[DeviceInfo defaultManager] repeat:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
+- (IBAction)shuffle:(id)sender {
+    NSData *data=[[DeviceInfo defaultManager] shuffle:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
 - (IBAction)nextMusic:(id)sender {
     NSData *data=[[DeviceInfo defaultManager] next:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];

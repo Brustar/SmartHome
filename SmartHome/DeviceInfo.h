@@ -166,5 +166,7 @@ enum{
 -(NSData *) changeInterval:(uint8_t)interval deviceID:(NSString *)deviceID;
 
 #pragma mark - BGMusic CALL PUBLIC
+-(NSData *) repeat:(NSString *)deviceID;
+-(NSData *) shuffle:(NSString *)deviceID;
 
 @end
