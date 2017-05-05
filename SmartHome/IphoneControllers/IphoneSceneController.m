@@ -36,6 +36,7 @@
 #import "TVIconController.h"
 #import "IphoneNewAddSceneVC.h"
 #import "DeviceInfo.h"
+#import "PhotoGraphViewConteoller.h"
 
 
 #define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)  
@@ -363,8 +364,8 @@ static NSString * const CYPhotoId = @"photo";
         
     }]];
     [alerController addAction:[UIAlertAction actionWithTitle:@"预设图库" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-         UIStoryboard *MainStoryBoard  = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        TVIconController *tvIconVC = [MainStoryBoard instantiateViewControllerWithIdentifier:@"TVIconController"];
+         UIStoryboard *MainStoryBoard  = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
+        PhotoGraphViewConteoller *tvIconVC = [MainStoryBoard instantiateViewControllerWithIdentifier:@"PhotoGraphViewConteoller"];
         [self.navigationController pushViewController:tvIconVC animated:YES];
     }]];
     [alerController addAction:[UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -490,7 +491,7 @@ static NSString * const CYPhotoId = @"photo";
     self.SceneNameLabel.text = self.scene.sceneName;
     self.delegateBtn.selected = !self.delegateBtn.selected;
     if (self.delegateBtn.selected) {
-        [self.delegateBtn setBackgroundImage:[UIImage imageNamed:@"delete_red"] forState:UIControlStateSelected];
+        [self.delegateBtn setBackgroundImage:[UIImage imageNamed:@"delete_white"] forState:UIControlStateSelected];
         
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"是否删除“%@”场景？",self.SceneNameLabel.text] preferredStyle:UIAlertControllerStyleAlert];
         

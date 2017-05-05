@@ -48,8 +48,10 @@
 @property (weak, nonatomic) UIViewController *currentViewController;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *gentleBtn;//柔和
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *TableViewConstraint;
 
 @property (weak, nonatomic) IBOutlet UIButton *normalBtn;//正常
+@property (weak, nonatomic) IBOutlet UIView *patternView;//三种模式的父视图
 
 @property (weak, nonatomic) IBOutlet UIButton *brightBtn;//明亮
 //设备大类
@@ -114,10 +116,19 @@
     touchVC.delegate = self;
     [self getButtonUI];
     [self setupNaviBar];
+    if (_lightArray.count == 0 && _SwitchLightArr.count == 0 && _ColourLightArr.count == 0) {
+        
+        self.patternView.hidden = YES;
+        self.TableViewConstraint.constant = -60;
+        
+    }
 
 }
 - (void)setupNaviBar {
-    [self setNaviBarTitle:@"场景编辑"]; //设置标题
+    
+     NSString * roomName =[SQLManager getRoomNameByRoomID:self.roomID];
+     self.title = [SQLManager getSceneName:self.sceneID];
+     [self setNaviBarTitle:[NSString stringWithFormat:@"%@-%@",roomName,self.title]]; //设置标题
     _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
     _naviRightBtn.tintColor = [UIColor whiteColor];
     //    [self setNaviBarLeftBtn:_naviLeftBtn];
@@ -233,7 +244,7 @@
             [_TVArray addObject:lightArr[i]];
         }else if (_htypeID == 13){//DVD
             [_DVDArray addObject:lightArr[i]];
-        }else if (_htypeID == 16){//投影幕
+        }else if (_htypeID == 16){//投影
             [_ProjectArray addObject:lightArr[i]];
         }else if (_htypeID == 11){//机顶盒
             [_NetVArray addObject:lightArr[i]];
@@ -464,6 +475,90 @@
     }
     return 1;
 }
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIView * view = [UIView new];
+    view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 0.5);
+    view.backgroundColor = [UIColor whiteColor];
+    
+    switch (section) {
+        case 0:
+            if (_lightArray.count == 0) {
+                view.hidden = YES;
+            }
+            break;
+        case 1:
+            if (_ColourLightArr.count == 0) {
+                view.hidden = YES;
+            }
+            break;
+       case 2:
+            if (_SwitchLightArr.count == 0) {
+                view.hidden = YES;
+            }
+            break;
+        case 3:
+            if (_AirArray.count == 0) {
+                view.hidden = YES;
+            }
+            break;
+        case 4:
+            if (_CurtainArray.count == 0) {
+                view.hidden = YES;
+            }
+            break;
+        case 5:
+            if (_TVArray.count == 0) {
+                view.hidden = YES;
+            }
+            break;
+        case 6:
+            if (_DVDArray.count == 0) {
+                view.hidden = YES;
+            }
+            break;
+        case 7:
+            if (_ProjectArray.count == 0) {
+                view.hidden = YES;
+            }
+            break;
+        case 8:
+            if (_FMArray.count == 0) {
+                view.hidden = YES;
+            }
+            break;
+        case 9:
+            if (_NetVArray.count == 0) {
+                view.hidden = YES;
+            }
+            break;
+        case 10:
+            if (_MBArray.count == 0) {
+                view.hidden = YES;
+            }
+            break;
+        case 11:
+            if (_BJMusicArray.count == 0) {
+                view.hidden = YES;
+            }
+            break;
+        case 12:
+            if (_OtherArray.count == 0) {
+                view.hidden = YES;
+            }
+            break;
+        default:
+            break;
+    }
+   
+    return view;
+
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.5;
+
+}
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
    if (indexPath.section == 0) {//调灯光
@@ -544,15 +639,15 @@
         DVDCell.DVDNameLabel.text = device.name;
         
         return DVDCell;
-    }if (indexPath.section == 7) {//投影幕
-        ScreenCurtainCell * ScreenCell = [tableView dequeueReusableCellWithIdentifier:@"ScreenCurtainCell" forIndexPath:indexPath];
-        ScreenCell.AddScreenCurtainBtn.hidden = YES;
-        ScreenCell.ScreenCurtainConstraint.constant = 10;
-        ScreenCell.backgroundColor =[UIColor clearColor];
-         Device *device = [SQLManager getDeviceWithDeviceID:[_ProjectArray[indexPath.row] intValue]];
-        ScreenCell.ScreenCurtainLabel.text = device.name;
+    }if (indexPath.section == 7) {//投影
+        OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+        otherCell.AddOtherBtn.hidden = YES;
+        otherCell.OtherConstraint.constant = 10;
+        otherCell.backgroundColor = [UIColor clearColor];
+        Device *device = [SQLManager getDeviceWithDeviceID:[_ProjectArray[indexPath.row] intValue]];
+        otherCell.NameLabel.text = device.name;
         
-        return ScreenCell;
+        return otherCell;
     }if (indexPath.section == 8) {//FM
         FMTableViewCell * FMCell = [tableView dequeueReusableCellWithIdentifier:@"FMTableViewCell" forIndexPath:indexPath];
         FMCell.backgroundColor =[UIColor clearColor];
@@ -569,15 +664,15 @@
         otherCell.NameLabel.text = device.name;
         
         return otherCell;
-    }if (indexPath.section == 10) {//投影机
-        OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
-        otherCell.AddOtherBtn.hidden = YES;
-        otherCell.OtherConstraint.constant = 10;
-        otherCell.backgroundColor = [UIColor clearColor];
+    }if (indexPath.section == 10) {//幕布
+        ScreenCurtainCell * ScreenCell = [tableView dequeueReusableCellWithIdentifier:@"ScreenCurtainCell" forIndexPath:indexPath];
+        ScreenCell.AddScreenCurtainBtn.hidden = YES;
+        ScreenCell.ScreenCurtainConstraint.constant = 10;
+        ScreenCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_MBArray[indexPath.row] intValue]];
-        otherCell.NameLabel.text = device.name;
+        ScreenCell.ScreenCurtainLabel.text = device.name;
         
-        return otherCell;
+        return ScreenCell;
     }if (indexPath.section == 11) {//背景音乐
         BjMusicTableViewCell * BjMusicCell = [tableView dequeueReusableCellWithIdentifier:@"BjMusicTableViewCell" forIndexPath:indexPath];
         BjMusicCell.backgroundColor = [UIColor clearColor];
@@ -617,6 +712,7 @@
         UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
         IphoneNewAddSceneVC * devicesVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneNewAddSceneVC"];
         devicesVC.roomID = self.roomID;
+        devicesVC.sceneID = self.sceneID;
         [self.navigationController pushViewController:devicesVC animated:YES];
 //        [self performSegueWithIdentifier:@"NewAddDeviceSegue" sender:self];
         
@@ -629,7 +725,7 @@
     if (indexPath.section == 5 || indexPath.section == 6 || indexPath.section == 8) {
         return 150;
     }
-    if (indexPath.section == 9 || indexPath.section == 10 || indexPath.section == 12 || indexPath.section == 13) {
+    if (indexPath.section == 9 || indexPath.section == 7 || indexPath.section == 12 || indexPath.section == 13) {
         return 50;
     }
     return 100;
