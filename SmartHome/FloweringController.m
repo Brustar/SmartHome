@@ -89,7 +89,18 @@
 }
 
 - (IBAction)start:(id)sender {
-    NSData *data = [[DeviceInfo defaultManager] toogle:0x01 deviceID:self.deviceid];
+    UIButton *button = (UIButton *)sender;
+
+    [button setSelected:!button.isSelected];
+    if (button.isSelected) {
+        //selected
+        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"device_on"]] forState:UIControlStateSelected];
+    }else{
+        //normal
+        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"device_off"]] forState:UIControlStateNormal];
+    }
+    
+    NSData *data = [[DeviceInfo defaultManager] toogle:button.isSelected deviceID:self.deviceid];
     [[[SocketManager defaultManager] socket] writeData:data withTimeout:1 tag:1];
 }
 
