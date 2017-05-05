@@ -73,9 +73,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self setNaviBarTitle:@"窗帘"];
-    // Do any additional setup after loading the view.
-    
+    NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
+    [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 窗帘",roomName]];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [UIView new];

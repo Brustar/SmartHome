@@ -54,7 +54,9 @@ static NSString *const airCellIdentifier = @"airCell";
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setNaviBarTitle:@"空调"];
+    
+    NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
+    [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 空调",roomName]];
     self.disk.enabled = NO;
     [self initSwitch];
     self.tempreturePan.transform = CGAffineTransformMakeRotation(MIX_TEMP_ROTATE_DEGREE);

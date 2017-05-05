@@ -75,8 +75,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    [self setNaviBarTitle:guardType];
+    
+    NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
+    [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - %@",roomName,guardType]];
+    
     [self initSwitcher];
     
     self.tableView.delegate = self;

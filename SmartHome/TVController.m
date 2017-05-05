@@ -172,7 +172,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setNaviBarTitle:@"电视"];
+    
+    NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
+    [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 电视",roomName]];
     [self initChannelContainer];
     self.eNumber = [SQLManager getENumber:[self.deviceid intValue]];
     self.volume.continuous = NO;

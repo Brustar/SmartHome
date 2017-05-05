@@ -11,5 +11,6 @@
 @interface FeedingController : CustomViewController
 
 @property (nonatomic,weak) NSString *deviceid;
+@property (nonatomic) int roomID;
 
 @end
