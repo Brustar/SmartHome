@@ -886,7 +886,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQQ-A6-Ymm" userLabel="header">
-                                <rect key="frame" x="132" y="154" width="110" height="110"/>
+                                <rect key="frame" x="132" y="147" width="110" height="110"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="110" id="QeU-jh-hhE"/>
                                     <constraint firstAttribute="width" constant="110" id="e0k-h4-2aa"/>
@@ -916,7 +916,7 @@
                             <constraint firstAttribute="trailing" secondItem="DDV-lb-u0B" secondAttribute="trailing" id="3d8-k4-F6u"/>
                             <constraint firstAttribute="trailing" secondItem="5er-f1-G3a" secondAttribute="trailing" id="4dh-Ma-Jki"/>
                             <constraint firstItem="7Yx-dY-7UQ" firstAttribute="leading" secondItem="FbX-2U-meV" secondAttribute="leading" id="7L0-Z9-wxs"/>
-                            <constraint firstItem="zQQ-A6-Ymm" firstAttribute="centerY" secondItem="FbX-2U-meV" secondAttribute="centerY" constant="-20" id="8Yk-vD-B64"/>
+                            <constraint firstItem="zQQ-A6-Ymm" firstAttribute="centerY" secondItem="FbX-2U-meV" secondAttribute="centerY" constant="-27" id="8Yk-vD-B64"/>
                             <constraint firstAttribute="bottom" secondItem="DDV-lb-u0B" secondAttribute="bottom" id="Fta-4F-hN9"/>
                             <constraint firstItem="5er-f1-G3a" firstAttribute="top" secondItem="Xis-oM-JwL" secondAttribute="top" constant="64" id="Pyu-DV-W9y"/>
                             <constraint firstItem="Arr-zK-PPd" firstAttribute="centerY" secondItem="FbX-2U-meV" secondAttribute="centerY" constant="-20" id="SSH-Xd-k9z"/>

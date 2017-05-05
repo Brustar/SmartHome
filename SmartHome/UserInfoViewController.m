@@ -18,6 +18,7 @@
     [super viewDidLoad];
     [self setNaviBarTitle:@"个人信息"];
     [self initUI];
+    [self getUserInfoFromDB];
     [self fetchUserInfo];
 }
 
@@ -43,6 +44,12 @@
     self.nameLabel.text = [NSString stringWithFormat:@"-- %@, %@身份 --", _userInfomation.nickName, _userTypeStr];
     
     [self.userinfoTableView reloadData];
+}
+
+- (void)getUserInfoFromDB {
+    int userID = [[UD objectForKey:@"UserID"] intValue];
+    _userInfomation = [SQLManager getUserInfo:userID];
+    [self refreshUI];
 }
 
 - (void)fetchUserInfo {
@@ -189,5 +196,120 @@
 }
 
 - (IBAction)headerBtnClicked:(id)sender {
+    
+    UIAlertController * alerController = [UIAlertController alertControllerWithTitle:@"更换头像" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [alerController addAction:[UIAlertAction actionWithTitle:@"拍一张" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            [MBProgressHUD showError:@"无法使用系统相机"];
+            return;
+        }
+        
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [self presentViewController:picker animated:YES completion:NULL];
+        
+        
+    }]];
+    
+    [alerController addAction:[UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [DeviceInfo defaultManager].isPhotoLibrary = YES;
+        if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+            [MBProgressHUD showError:@"无法使用系统相册"];
+            return;
+        }
+        
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        [picker shouldAutorotate];
+        [picker supportedInterfaceOrientations];
+        [self presentViewController:picker animated:YES completion:nil];
+        
+    }]];
+    [alerController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+    
+    [self presentViewController:alerController animated:YES completion:^{
+        
+    }];
 }
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+    [DeviceInfo defaultManager].isPhotoLibrary = NO;
+    self.selectedImg = info[UIImagePickerControllerEditedImage];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"yyyyMMddHHmmss";
+    NSString *str = [formatter stringFromDate:[NSDate date]];
+    NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
+    
+    [self saveImage:self.selectedImg withName:fileName];
+    
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/user_info.aspx",[IOManager httpAddr]];
+    NSString *authorToken = [UD objectForKey:@"AuthorToken"];
+    NSDictionary *dic = @{
+                          @"token":authorToken,
+                          @"optype":@(2),
+                          @"imgfile":fileName
+                          };
+    
+    if (self.selectedImg && url && dic && fileName) {
+    
+        //上传头像
+        [[UploadManager defaultManager] uploadImage:self.selectedImg url:url dic:dic fileName:fileName completion:^(id responseObject) {
+            
+            if ([responseObject[@"result"] intValue] == 0) {
+                NSString *portrait = responseObject[@"portrait"];
+                if (portrait.length >0) {
+                    
+                   BOOL succeed = [SQLManager updateUserPortraitUrlByID:(int)_userInfomation.userID url:portrait];//更新User表
+                    if (succeed) {
+                         [MBProgressHUD showSuccess:@"更新头像成功"];
+                        [self.headerBtn sd_setImageWithURL:[NSURL URLWithString:portrait] forState:UIControlStateNormal placeholderImage:nil];
+                        _userInfomation.headImgURL = portrait;
+                        [NC postNotificationName:@"refreshPortrait" object:portrait];
+                    }else {
+                        [MBProgressHUD showError:@"更新头像失败"];
+                    }
+                }else {
+                    [MBProgressHUD showError:@"更新头像失败"];
+                }
+                
+                
+            }else {
+                [MBProgressHUD showError:@"更新头像失败"];
+            }
+            
+        }];
+    
+   
+    [picker dismissViewControllerAnimated:YES completion:nil];
+ }
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [DeviceInfo defaultManager].isPhotoLibrary = NO;
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)saveImage:(UIImage *)currentImage withName:(NSString *)imageName
+{
+    NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
+    // 获取沙盒目录
+    
+    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:imageName];
+    // 将图片写入文件
+    [imageData writeToFile:fullPath atomically:NO];
+}
+
 @end

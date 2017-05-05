@@ -19,6 +19,10 @@
 
 #endif /* PrefixHeader_pch */
 
+#define FX(view)    view.frame.origin.x
+#define FY(view)    view.frame.origin.y
+#define FW(view)    view.frame.size.width
+#define FH(view)    view.frame.size.height
 
 //设备大类
 #define LightType         @"灯光"
