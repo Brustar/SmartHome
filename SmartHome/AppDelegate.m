@@ -233,6 +233,7 @@
 
     NSString *ident=@"iphoneSceneNaviController";
     UINavigationController *vc = [secondStoryBoard instantiateViewControllerWithIdentifier:ident];
+//    vc.navigationBar.backgroundColor = [UIColor blackColor];
     self.window.rootViewController = vc;
     if ([shortcutItem isEqual:application.shortcutItems[0]]){
         ident=@"IphoneFavorController";

@@ -8,12 +8,13 @@
 
 #import "iflyMSC/IFlySpeechSynthesizerDelegate.h"
 #import "iflyMSC/IFlySpeechRecognizerDelegate.h"
+#import "CustomViewController.h"
 //引入语音合成类
 @class IFlySpeechSynthesizer;
 @class IFlyDataUploader;
 @class IFlySpeechRecognizer;
 
-@interface VoiceOrderController : UIViewController<IFlySpeechRecognizerDelegate>
+@interface VoiceOrderController : CustomViewController<IFlySpeechRecognizerDelegate>
 
 
 //声明语音合成的对象

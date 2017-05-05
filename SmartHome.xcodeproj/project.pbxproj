@@ -150,6 +150,7 @@
 		2E04198B1EB89F42004D70B9 /* FSLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0419881EB89F42004D70B9 /* FSLineChart.m */; };
 		2E04198C1EB89F42004D70B9 /* UIColor+FSPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E04198A1EB89F42004D70B9 /* UIColor+FSPalette.m */; };
 		2E04198E1EB8A370004D70B9 /* MyInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E04198D1EB8A370004D70B9 /* MyInfo.storyboard */; };
+		2E08EFC41EBC668A007F9FE1 /* PhotoGraphViewConteoller.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E08EFC21EBC668A007F9FE1 /* PhotoGraphViewConteoller.m */; };
 		2E12CC0A1E7F5DC400C7D006 /* FirstSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CC091E7F5DC400C7D006 /* FirstSceneViewController.m */; };
 		2E12CC101E7F5E3000C7D006 /* CYLineLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CC0C1E7F5E3000C7D006 /* CYLineLayout.m */; };
 		2E12CC111E7F5E3000C7D006 /* CYPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CC0E1E7F5E3000C7D006 /* CYPhotoCell.m */; };
@@ -788,6 +789,8 @@
 		2E0419891EB89F42004D70B9 /* UIColor+FSPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FSPalette.h"; sourceTree = "<group>"; };
 		2E04198A1EB89F42004D70B9 /* UIColor+FSPalette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FSPalette.m"; sourceTree = "<group>"; };
 		2E04198D1EB8A370004D70B9 /* MyInfo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyInfo.storyboard; sourceTree = "<group>"; };
+		2E08EFC11EBC668A007F9FE1 /* PhotoGraphViewConteoller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoGraphViewConteoller.h; sourceTree = "<group>"; };
+		2E08EFC21EBC668A007F9FE1 /* PhotoGraphViewConteoller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoGraphViewConteoller.m; sourceTree = "<group>"; };
 		2E0927BA1EB2105B007AEBD1 /* UIView+Uitls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Uitls.h"; sourceTree = "<group>"; };
 		2E12CC081E7F5DC400C7D006 /* FirstSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstSceneViewController.h; sourceTree = "<group>"; };
 		2E12CC091E7F5DC400C7D006 /* FirstSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstSceneViewController.m; sourceTree = "<group>"; };
@@ -2180,6 +2183,8 @@
 				2E7B64B71E9B3188001F7469 /* IphoneNewAddSceneCell.m */,
 				2E7B64BD1E9B6796001F7469 /* IphoneNewAddSceneTimerVC.h */,
 				2E7B64BE1E9B6796001F7469 /* IphoneNewAddSceneTimerVC.m */,
+				2E08EFC11EBC668A007F9FE1 /* PhotoGraphViewConteoller.h */,
+				2E08EFC21EBC668A007F9FE1 /* PhotoGraphViewConteoller.m */,
 			);
 			name = SceneAddVC;
 			sourceTree = "<group>";
@@ -3415,6 +3420,7 @@
 				2E192CA71EBB2D3F00458541 /* CKCircleView.m in Sources */,
 				0FCFB3861CF2912700B37DD3 /* TV.m in Sources */,
 				2E12CC101E7F5E3000C7D006 /* CYLineLayout.m in Sources */,
+				2E08EFC41EBC668A007F9FE1 /* PhotoGraphViewConteoller.m in Sources */,
 				F65B7D271D34E9E00059CFA4 /* MySettingViewController.m in Sources */,
 				F62CD87D1D950453001C66CE /* IphoneAirController.m in Sources */,
 				0F9EA72D1DDB026C00223ED8 /* NSString+RegMatch.m in Sources */,
