@@ -73,7 +73,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNaviBarTitle:@"功放"];
+    NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
+    [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 功放",roomName]];
     self.deviceid=[self.amplifierIDArr objectAtIndex:0];
     [self initSwitcher];
     

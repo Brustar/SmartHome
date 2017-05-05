@@ -12,14 +12,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BjMusicTableViewCell" rowHeight="103" id="KGk-i7-Jjw" customClass="BjMusicTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="338" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="338" height="99.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lv_fm_adjust_normal" translatesAutoresizingMaskIntoConstraints="NO" id="46X-Zw-9GZ">
-                        <rect key="frame" x="0.0" y="49.5" width="338" height="50"/>
+                        <rect key="frame" x="0.0" y="49.5" width="375" height="50"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="Xc3-l3-Yaf"/>
                         </constraints>
@@ -32,14 +32,14 @@
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_icon_voi_high" translatesAutoresizingMaskIntoConstraints="NO" id="jJa-FA-3MA">
-                        <rect key="frame" x="301" y="66" width="15" height="15"/>
+                        <rect key="frame" x="338" y="66" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="SIg-CR-4Fp"/>
                             <constraint firstAttribute="width" constant="15" id="wfX-IT-3Qn"/>
                         </constraints>
                     </imageView>
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="qeP-Gt-Xg0">
-                        <rect key="frame" x="48" y="57" width="240" height="31"/>
+                        <rect key="frame" x="48" y="57" width="277" height="31"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="mUU-Qa-qeZ"/>
                         </constraints>
@@ -54,7 +54,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RA2-wl-P6n">
-                        <rect key="frame" x="248" y="15" width="22" height="22"/>
+                        <rect key="frame" x="285" y="15" width="22" height="22"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="I8O-Ar-RzM"/>
                             <constraint firstAttribute="width" constant="22" id="WND-b7-Qei"/>
@@ -62,7 +62,7 @@
                         <state key="normal" image="music-red"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNv-h0-wW4">
-                        <rect key="frame" x="290" y="8" width="30" height="30"/>
+                        <rect key="frame" x="329" y="8" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="VW2-U1-igE"/>
                             <constraint firstAttribute="height" constant="30" id="VYA-uL-hUG"/>
@@ -82,7 +82,7 @@
                     <constraint firstItem="46X-Zw-9GZ" firstAttribute="top" secondItem="RA2-wl-P6n" secondAttribute="bottom" constant="12.5" id="b1w-Xb-AAN"/>
                     <constraint firstItem="GSf-bm-sEA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="14" id="bOO-4C-bQQ"/>
                     <constraint firstItem="gcs-pi-ibs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="dC8-mb-vCM"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="NNv-h0-wW4" secondAttribute="trailing" constant="10" id="gSX-nr-6dT"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="NNv-h0-wW4" secondAttribute="trailing" constant="8" id="gSX-nr-6dT"/>
                     <constraint firstAttribute="bottomMargin" secondItem="jJa-FA-3MA" secondAttribute="bottom" constant="10.5" id="lgy-Nv-pkr"/>
                     <constraint firstItem="gcs-pi-ibs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="mn4-dK-MOw"/>
                     <constraint firstAttribute="bottomMargin" secondItem="GSf-bm-sEA" secondAttribute="bottom" constant="13" id="osj-f3-6z6"/>

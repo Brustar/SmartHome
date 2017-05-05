@@ -12,20 +12,20 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DVDTableViewCell" rowHeight="133" id="KGk-i7-Jjw" customClass="DVDTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="339" height="145"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="339" height="144.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lv_fm_adjust_normal" translatesAutoresizingMaskIntoConstraints="NO" id="M28-8e-zHA">
-                        <rect key="frame" x="0.0" y="94" width="339" height="50"/>
+                        <rect key="frame" x="0.0" y="99.5" width="375" height="50"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="uxK-7J-6GO"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="客厅DVD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="je0-2Y-f1l">
-                        <rect key="frame" x="10" y="0.0" width="100" height="49"/>
+                        <rect key="frame" x="10" y="0.0" width="100" height="54"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="4V3-5i-Qzt"/>
                         </constraints>
@@ -34,55 +34,55 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_icon_voi_high" translatesAutoresizingMaskIntoConstraints="NO" id="ZRr-fE-u93">
-                        <rect key="frame" x="18" y="112" width="10" height="10"/>
+                        <rect key="frame" x="18" y="117" width="10" height="10"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="10" id="n2W-cb-0Ii"/>
                             <constraint firstAttribute="width" constant="10" id="yqh-A5-WRL"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_icon_voi_high" translatesAutoresizingMaskIntoConstraints="NO" id="RxL-mC-ARL">
-                        <rect key="frame" x="306" y="110" width="15" height="15"/>
+                        <rect key="frame" x="342" y="115" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="MUc-jh-RqR"/>
                             <constraint firstAttribute="width" constant="15" id="ugu-xS-X5k"/>
                         </constraints>
                     </imageView>
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="NYR-NW-O6b">
-                        <rect key="frame" x="36" y="101" width="262" height="31"/>
+                        <rect key="frame" x="36" y="106" width="298" height="31"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="Q0h-1a-MNG"/>
                         </constraints>
                     </slider>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dvd_frm_choice__normal" translatesAutoresizingMaskIntoConstraints="NO" id="F7B-y2-2nU">
-                        <rect key="frame" x="1" y="49" width="337" height="50"/>
+                        <rect key="frame" x="1" y="54" width="373" height="50"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="ZE6-sO-ZC5"/>
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQ4-Nq-8mW">
-                        <rect key="frame" x="18" y="57" width="104.5" height="37"/>
+                        <rect key="frame" x="18" y="57" width="116.5" height="42.5"/>
                         <state key="normal" image="icon2">
                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UYH-Br-BuW">
-                        <rect key="frame" x="226.5" y="57" width="104.5" height="37"/>
+                        <rect key="frame" x="250.5" y="57" width="116.5" height="42.5"/>
                         <state key="normal" image="icon1"/>
                     </button>
                     <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="OqP-ir-MRF">
-                        <rect key="frame" x="271" y="4" width="42" height="40"/>
+                        <rect key="frame" x="307" y="9" width="42" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="JDz-EP-gKW"/>
                             <constraint firstAttribute="width" constant="40" id="vyT-dA-14D"/>
                         </constraints>
                     </switch>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="75B-Ud-NQ6">
-                        <rect key="frame" x="122.5" y="57" width="104" height="37"/>
+                        <rect key="frame" x="134.5" y="57" width="116" height="42.5"/>
                         <state key="normal" image="icon3"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYW-1Y-DcS">
-                        <rect key="frame" x="224" y="7" width="55" height="35"/>
+                        <rect key="frame" x="260" y="7" width="55" height="35"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="5x2-aQ-nLD"/>
                             <constraint firstAttribute="width" constant="55" id="Kgt-4n-8iH"/>
@@ -90,7 +90,7 @@
                         <state key="normal" backgroundImage="dvd_btn_switch_on"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ui6-GU-GbM">
-                        <rect key="frame" x="299" y="7" width="30" height="30"/>
+                        <rect key="frame" x="335" y="7" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="hm6-Xq-Qeo"/>
                             <constraint firstAttribute="width" constant="30" id="wYb-h9-aRh"/>

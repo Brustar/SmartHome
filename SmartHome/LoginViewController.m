@@ -387,7 +387,6 @@ NSArray *array = [NSArray arrayWithObjects:
                           @"md5Json":md5Json
                           };
     if ([UD objectForKey:@"room_version"]) {
-        
         dic = @{
                 @"token":[UD objectForKey:@"AuthorToken"],
                 @"room_ver":[UD objectForKey:@"room_version"],
@@ -398,13 +397,11 @@ NSArray *array = [NSArray arrayWithObjects:
                 //@"chat_ver":[UD objectForKey:@"chat_version"],
                 @"md5Json":md5Json
                 };
-       }
+        }
         HttpManager *http = [HttpManager defaultManager];
         http.delegate = self;
         http.tag = tag;
         [http sendPost:url param:dic];
-    
-    
 }
 
 //写设备配置信息到sql

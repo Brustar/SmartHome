@@ -76,7 +76,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNaviBarTitle:@"收音机"];
+    NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
+    [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 收音机",roomName]];
     [self initSlider];
     [self initChannelContainer];
     

@@ -353,7 +353,7 @@
             _TwoBtn.hidden = YES;
 //          _ThreeBtn.hidden  = YES;
             
-        }if (_shortcutsArray.count == 2) {
+        }if(_shortcutsArray.count == 2) {
             Scene * info1 = _shortcutsArray[0];
             Scene * info2 = _shortcutsArray[1];
             [_firstBtn setTitle:info1.sceneName forState:UIControlStateNormal];
@@ -391,7 +391,6 @@
 //        _WelcomeLabel.hidden = NO;
         _baseTabbarController.tabbarPanel.hidden = NO;
     }
-    
     
 }
 //中间大圆点击进入家庭主页

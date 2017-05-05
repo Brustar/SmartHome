@@ -7,7 +7,7 @@
 //
 
 #import "SQLManager.h"
-#import "DeviceType.h"
+
 #import "DeviceInfo.h"
 #import "Room.h"
 #import "Scene.h"
@@ -23,7 +23,8 @@
 }
 
 //从数据中获取所有设备信息
-+(NSArray *)getAllDevicesInfo{
++(NSArray *)getAllDevicesInfo
+{
     FMDatabase *db = [self connetdb];
     NSMutableArray *deviceModels = [NSMutableArray array];
     if([db open])
@@ -2448,7 +2449,9 @@
     [db close];
     return rID;
 }
-+ (NSString *)getRoomNameByRoomID:(int) rId {
+
++ (NSString *)getRoomNameByRoomID:(int) rId
+{
     FMDatabase *db = [SQLManager connetdb];
     NSString *rName ;
     if([db open])
@@ -2463,7 +2466,24 @@
     [db closeOpenResultSets];
     [db close];
     return rName;
-    
+}
+
++ (NSString *)getRoomNameByDeviceID:(int) deviceId
+{
+    FMDatabase *db = [SQLManager connetdb];
+    NSString *rName ;
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT NAME FROM Rooms where ID = (select rid from devices where id = %d) and masterID = '%ld'",deviceId, [[DeviceInfo defaultManager] masterID]];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            rName = [resultSet stringForColumn:@"name"];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return rName;
 }
 
 + (BOOL)updateSceneStatus:(int)status sceneID:(int)sceneID {

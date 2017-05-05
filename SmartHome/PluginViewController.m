@@ -79,7 +79,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setNaviBarTitle:@"智能插座"];
+    
+    NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
+    [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 智能插座",roomName]];
 //    [self initPlugin];
 //    [self initHomekitPlugin];
     [self setupSegment];
