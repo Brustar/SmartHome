@@ -276,6 +276,22 @@
     }
 }
 
+- (void)writeQRCodeStringToFile:(NSString *)string{
+    NSArray *paths;
+    NSString  *arrayPath;
+paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                            NSUserDomainMask, YES);//搜索沙盒路径下的document文件夹。
+arrayPath = [[paths objectAtIndex:0]
+             stringByAppendingPathComponent:@"QRCodeString.plist"];//在此文件夹下创建文件，相当于你的xxx.txt
+
+NSArray *array = [NSArray arrayWithObjects:
+                  string, nil];//将你的数据放入数组中
+
+[array writeToFile:arrayPath atomically:YES];//将数组中的数据写入document下xxx.txt。
+
+    
+}
+
 #pragma mark - QRCode Delegate
 - (void)readerDidCancel:(QRCodeReaderViewController *)reader
 {
@@ -309,6 +325,21 @@
             }
             [vc setValue:self.role forKey:@"suerTypeStr"];
         }
+        
+        
+        /*if([list count] > 1)
+        {
+            self.masterId = list[0];
+            [vc setValue:@([self.masterId intValue]) forKey:@"masterStr"];
+            if ([@"1" isEqualToString:list[1]]) {
+                self.role=@"主人";
+            }else{
+                self.role=@"客人";
+            }
+            [vc setValue:self.role forKey:@"suerTypeStr"];
+        }*/
+        
+        
         else
         {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"非法的二维码" preferredStyle:UIAlertControllerStyleAlert];
@@ -518,6 +549,28 @@
             [IOManager writeUserdefault:responseObject[@"userid"] forKey:@"UserID"];
             [IOManager writeUserdefault:responseObject[@"usertype"] forKey:@"UserType"];
             [IOManager writeUserdefault:responseObject[@"vip"] forKey:@"vip"];
+            
+            //保存登录用户信息
+            
+            UserInfo *userInfo = [[UserInfo alloc] init];
+            userInfo.userID = [responseObject[@"userid"] integerValue];
+            userInfo.userName = responseObject[@"username"];
+            userInfo.nickName = responseObject[@"nickname"];
+            userInfo.userType = [responseObject[@"usertype"] integerValue]; //1:主人  2:客人
+            userInfo.vip = responseObject[@"vip"];
+            userInfo.headImgURL = responseObject[@"portrait"];
+            userInfo.age = 30;
+            userInfo.sex = 1;
+            userInfo.signature = @"";
+            userInfo.phoneNum = @"";
+            
+           BOOL succeed = [SQLManager insertOrReplaceUser:userInfo];// 登录用户基本信息入库
+            if (succeed) {
+                NSLog(@"登录用户基本信息入库成功");
+            }else {
+                NSLog(@"登录用户基本信息入库失败");
+            }
+            
             NSArray *hostList = responseObject[@"hostlist"];
             
             for(NSDictionary *hostID in hostList)

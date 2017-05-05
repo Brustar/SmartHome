@@ -20,7 +20,11 @@
 #import "HostListViewController.h"
 #import <RongIMKit/RongIMKit.h>
 #import "ConversationViewController.h"
+#import "UIButton+WebCache.h"
 
 @interface LeftViewController : UIViewController
 @property(nonatomic, strong) NSArray *itemArray;
+@property(nonatomic, strong) UserInfo *userInfo;
+@property(nonatomic, strong) UIButton *headerBtn;
+@property(nonatomic, strong) UITableView *myTableView;
 @end

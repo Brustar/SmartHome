@@ -10,6 +10,7 @@
 #import "FMDatabase.h"
 #import "Device.h"
 #import "Aircon.h"
+#import "UserInfo.h"
 
 #define SWITCHLIGHT_SUB_TYPE @"01"
 #define DIMMER_SUB_TYPE @"02"
@@ -175,4 +176,8 @@
 + (NSArray *)getDeviceIDsByHtypeID:(NSString *)htypeid;
 + (NSString *)getCameraUrlByDeviceID:(int)deviceID;
 + (NSInteger)getRoomIDByDeviceID:(int)deviceID;
+
++ (BOOL)updateUserPortraitUrlByID:(int)userID url:(NSString *)url;
++ (BOOL)insertOrReplaceUser:(UserInfo *)info;
++ (UserInfo *)getUserInfo:(int)userID;
 @end
