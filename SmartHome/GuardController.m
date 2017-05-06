@@ -80,7 +80,6 @@
     
     self.deviceid = [SQLManager singleDeviceWithCatalogID:doorclock byRoom:self.roomID];
     
-    self.switcher.selected = YES;
     [self.switcher setImage:[UIImage imageNamed:@"clock_open_pressed"] forState:(UIControlStateSelected | UIControlStateHighlighted)];
     [[self.switcher rac_signalForControlEvents:UIControlEventTouchUpInside]
      subscribeNext:^(id x) {

@@ -26,9 +26,11 @@
 @property (nonatomic,assign) int sceneID;
 @property (weak, nonatomic) IBOutlet UIButton *powerBtn;
 @property (weak, nonatomic) IBOutlet UIButton *deleteBtn;
+@property (weak, nonatomic) IBOutlet UIButton *seleteSendPowBtn;
+
 @property (nonatomic,weak) id<CYPhotoCellDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UILabel *sceneLabel;
-@property (weak, nonatomic) IBOutlet UIButton *seleteSendPowBtn;
+
 @property (nonatomic, assign) int sceneStatus;//场景状态
 @property (weak, nonatomic) IBOutlet UIImageView *subImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *icon;

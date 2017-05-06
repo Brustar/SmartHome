@@ -115,6 +115,8 @@ static NSString * const CYPhotoId = @"photo";
 }
 
 - (void)rightBtnClicked:(UIButton *)btn {
+    //[self performSegueWithIdentifier:@"doorclock" sender:self];
+    
     UIStoryboard * HomeStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
     if (_nowMusicController == nil) {
         _nowMusicController = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"NowMusicController"];
