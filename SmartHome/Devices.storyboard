@@ -1600,10 +1600,10 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="uTs-8t-uT3">
-                                <rect key="frame" x="50" y="134" width="314" height="306"/>
+                                <rect key="frame" x="87" y="215" width="240" height="306"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kls-PV-UND">
-                                        <rect key="frame" x="0.0" y="0.0" width="314" height="102"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="102"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="102" id="pv5-i4-KTD"/>
                                         </constraints>
@@ -1613,14 +1613,14 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FaR-CJ-GFP">
-                                        <rect key="frame" x="0.0" y="102" width="314" height="102"/>
+                                        <rect key="frame" x="0.0" y="102" width="240" height="102"/>
                                         <state key="normal" image="screen_pause" backgroundImage="screen_control_btn"/>
                                         <connections>
                                             <action selector="stopBtnAction:" destination="5Gm-3R-5T0" eventType="touchUpInside" id="SBd-BN-ej2"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a8C-S8-IXo">
-                                        <rect key="frame" x="0.0" y="204" width="314" height="102"/>
+                                        <rect key="frame" x="0.0" y="204" width="240" height="102"/>
                                         <state key="normal" image="screen_down" backgroundImage="screen_control_btn"/>
                                         <connections>
                                             <action selector="downBtnAction:" destination="5Gm-3R-5T0" eventType="touchUpInside" id="N9f-KT-3ZB"/>
@@ -1643,8 +1643,7 @@
                             <constraint firstItem="K0J-8O-X1N" firstAttribute="leading" secondItem="Siv-lc-Dtw" secondAttribute="leading" id="FOh-QF-roC"/>
                             <constraint firstItem="9jX-aR-yte" firstAttribute="leading" secondItem="Siv-lc-Dtw" secondAttribute="leading" id="bOz-Cw-6S5"/>
                             <constraint firstItem="9jX-aR-yte" firstAttribute="top" secondItem="eAs-1F-Pzi" secondAttribute="bottom" constant="44" id="g59-Xx-Wvb"/>
-                            <constraint firstItem="uTs-8t-uT3" firstAttribute="leading" secondItem="Siv-lc-Dtw" secondAttribute="leadingMargin" constant="30" id="iQt-TO-xN2"/>
-                            <constraint firstItem="uTs-8t-uT3" firstAttribute="top" secondItem="9jX-aR-yte" secondAttribute="bottom" constant="30" id="tcG-Mv-PSU"/>
+                            <constraint firstItem="uTs-8t-uT3" firstAttribute="centerY" secondItem="Siv-lc-Dtw" secondAttribute="centerY" id="sYv-xV-jwj"/>
                             <constraint firstItem="K0J-8O-X1N" firstAttribute="top" secondItem="eAs-1F-Pzi" secondAttribute="bottom" id="uq7-DX-NG5"/>
                             <constraint firstItem="uTs-8t-uT3" firstAttribute="centerX" secondItem="Siv-lc-Dtw" secondAttribute="centerX" id="zkl-pP-jbD"/>
                         </constraints>
