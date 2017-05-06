@@ -146,7 +146,7 @@ enum{
 -(NSData *) back:(NSString *)deviceID;
 
 #pragma mark - FM
--(NSData *) switchFMProgram:(uint8_t)program deviceID:(NSString *)deviceID; //切换台
+-(NSData *) switchFMProgram:(uint8_t)program dec:(uint8_t)dec deviceID:(NSString *)deviceID; //切换台
 
 #pragma mark - Guard / Projector
 -(NSData *) toogle:(uint8_t)toogle deviceID:(NSString *)deviceID;

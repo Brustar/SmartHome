@@ -386,9 +386,9 @@
 }
 
 #pragma mark - FM
--(NSData *) switchFMProgram:(uint8_t)program deviceID:(NSString *)deviceID
+-(NSData *) switchFMProgram:(uint8_t)program dec:(uint8_t)dec deviceID:(NSString *)deviceID
 {
-    return [self action:program deviceID:deviceID];
+    return [self action:0x3A deviceID:deviceID R:program G:dec B:0x00];
 }
 
 #pragma mark - Guard / Projector
