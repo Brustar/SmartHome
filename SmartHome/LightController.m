@@ -142,10 +142,6 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncLight:) name:@"light" object:nil];
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
-
-    //查询设备状态
-    NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
-    [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -503,6 +499,9 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 - (void)tableView:(YALContextMenuTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.lightName.text = [[self.lights objectAtIndex:indexPath.row] objectForKey:@"name"];
     self.deviceid = [[self.lights objectAtIndex:indexPath.row] objectForKey:@"id"];
+    //查询设备状态
+    NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
+    [[SocketManager defaultManager].socket writeData:data withTimeout:1 tag:1];
     [tableView dismisWithIndexPath:indexPath];
 }
 

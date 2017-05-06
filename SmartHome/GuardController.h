@@ -6,7 +6,7 @@
 //  Created by Brustar on 16/6/13.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
-@interface GuardController : CustomViewController<UITableViewDelegate,UITableViewDataSource>
+@interface GuardController : CustomViewController
 
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic,weak) NSString *deviceid;

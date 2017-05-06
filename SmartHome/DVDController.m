@@ -27,6 +27,19 @@
 @property (nonatomic,strong) NSArray *dvImages;
 @property (weak, nonatomic) IBOutlet UILabel *voiceValue;
 
+
+@property (weak, nonatomic) IBOutlet UIButton *btnMenu;
+@property (weak, nonatomic) IBOutlet UIButton *btnPop;
+@property (weak, nonatomic) IBOutlet UIButton *btnUP;
+@property (weak, nonatomic) IBOutlet UIButton *btnLeft;
+@property (weak, nonatomic) IBOutlet UIButton *btnRight;
+@property (weak, nonatomic) IBOutlet UIButton *btnDown;
+@property (weak, nonatomic) IBOutlet UIButton *btnOK;
+
+@property (weak, nonatomic) IBOutlet UIButton *btnPrevoius;
+@property (weak, nonatomic) IBOutlet UIButton *btnNext;
+@property (weak, nonatomic) IBOutlet UIButton *btnPlay;
+
 @end
 
 @implementation DVDController
@@ -55,6 +68,23 @@
     
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - DVD",roomName]];
+    [self initSlider];
+    
+    
+    [self.btnMenu setImage:[UIImage imageNamed:@"TV_menu_red"] forState:UIControlStateHighlighted];
+    [self.btnUP setImage:[UIImage imageNamed:@"dir_up_red"]  forState:UIControlStateHighlighted];
+    [self.btnDown setImage:[UIImage imageNamed:@"dir_down_red"]  forState:UIControlStateHighlighted];
+    [self.btnLeft setImage:[UIImage imageNamed:@"dir_left_red"]  forState:UIControlStateHighlighted];
+    [self.btnRight setImage:[UIImage imageNamed:@"dir_right_red"]  forState:UIControlStateHighlighted];
+    [self.btnOK setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
+    [self.btnPop setImage:[UIImage imageNamed:@"DVD_pop_red"] forState:UIControlStateHighlighted];
+    
+    [self.btnPrevoius setImage:[UIImage imageNamed:@"DVD_previous_red"] forState:UIControlStateHighlighted];
+    [self.btnPlay setImage:[UIImage imageNamed:@"DVD_pause"] forState:UIControlStateSelected];
+    [self.btnNext setImage:[UIImage imageNamed:@"DVD_next_red"] forState:UIControlStateHighlighted];
+    
+    
+    
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
@@ -90,10 +120,15 @@
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionDown)];
     [[self touchpad] addGestureRecognizer:recognizer];
     
-    //NSData *data=[[DeviceInfo defaultManager] open:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
-    //[sock.socket writeData:data withTimeout:1 tag:1];
+}
+
+-(void) initSlider
+{
+    [self.volume setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
+    self.volume.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
+    self.volume.minimumTrackTintColor = [UIColor colorWithRed:253/255.0 green:254/255.0 blue:254/255.0 alpha:1];
 }
 
 - (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
@@ -224,12 +259,19 @@
 {
     NSData *data=nil;
     DeviceInfo *device=[DeviceInfo defaultManager];
-    switch (((UIButton *)sender).tag) {
+    UIButton *btn =(UIButton *)sender;
+    
+    switch (btn.tag) {
         case 0:
             data=[device backward:self.deviceid];
             break;
         case 1:
-            data=[device play:self.deviceid];
+            btn.selected = !btn.selected;
+            if (btn.selected) {
+                data=[device play:self.deviceid];
+            }else{
+                data=[device pause:self.deviceid];
+            }
             [self poweroffAllLighter];
             break;
         case 2:

@@ -1084,38 +1084,33 @@
     return sceneID;
 }
 
-+ (NSArray *)getDeviceSubTypeNameWithRoomID:(int)roomID sceneID:(int)sceneID
++ (NSArray *)getCatalogWithRoomID:(int)roomID
 {
-    NSMutableArray *subTypeNames = [NSMutableArray array];
+    NSMutableArray *catalogs = [NSMutableArray new];
+    NSString *sql;
+    if ([self isWholeHouse:roomID]) {
+        sql = @"select subtypename,subtypeid from devices where subtypeid<>6 and subtypeid<>4  group by subtypeid";
+    }else{
+        sql = [NSString stringWithFormat:@"select subtypename,subtypeid from devices where subtypeid<>6 and subtypeid<>4 and rid = %d group by subtypeid" ,roomID];
+    }
     
-    NSArray *deviceIDs = [self getDeviceIDWithRoomID:roomID sceneID:sceneID ];
-    
-    for (NSString *deviceID in deviceIDs) {
-        if([deviceID isEqualToString:@""])
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        FMResultSet *resultSet = [db executeQuery:sql];
+        
+        while ([resultSet next])
         {
-            break;
+            Device *cata = [Device new];
+            cata.subTypeName = [resultSet stringForColumn:@"subtypename"];
+            cata.subTypeId = [[resultSet stringForColumn:@"subtypeid"] intValue];
+            [catalogs addObject:cata];
         }
-        NSString *subTypeName = [self getDeviceSubTypeNameWithID:[deviceID intValue]];
-        
-        BOOL isSame = false;
-        for (NSString *tempSubTypeName in subTypeNames) {
-            if ([tempSubTypeName isEqualToString:subTypeName]) {
-                isSame = true;
-                break;
-            }
-        }
-        if (isSame) {
-            continue;
-        }
-        
-        [subTypeNames addObject:subTypeName];
     }
+    [db closeOpenResultSets];
+    [db close];
     
-    if (subTypeNames.count < 1) {
-        return nil;
-    }
-    
-    return [subTypeNames copy];
+    return catalogs;
 }
 
 +(NSArray *)getAllDeviceSubTypes

@@ -88,7 +88,7 @@
 //根据房间ID和场景ID获得设备
 + (NSArray *)getDeviceWithRoomID:(int)roomID sceneID:(int)sceneID;
 //根据房间ID和场景ID获得设备父类和子类
-+ (NSArray *)getDeviceSubTypeNameWithRoomID:(int)roomID sceneID:(int)sceneID;
++ (NSArray *)getCatalogWithRoomID:(int)roomID;
 + (NSArray *)getDeviceTypeNameWithRoomID:(int)roomID sceneID:(int)sceneID subTypeName:(NSString *)subTypeName;
 
 //修改场景的打开状态（status： 0表示关闭 1表示打开）
