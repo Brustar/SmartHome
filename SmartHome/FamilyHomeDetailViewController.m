@@ -132,34 +132,40 @@
 
 - (IBAction)softBtnClicked:(id)sender {
     UIButton *btn = (UIButton *)sender;
-    if (btn.selected) {
-        btn.selected = NO;
-    }else {
+    if (!btn.selected) {
         btn.selected = YES;
         self.normalButton.selected = NO;
         self.brightButton.selected = NO;
+        
+        if (_lightArray.count >0) {
+            [[SceneManager defaultManager] gloomForRoomLights:_lightArray];
+        }
     }
 }
 
 - (IBAction)normalBtnClicked:(id)sender {
     UIButton *btn = (UIButton *)sender;
-    if (btn.selected) {
-        btn.selected = NO;
-    }else {
+    if (!btn.selected) {
         btn.selected = YES;
         self.softButton.selected = NO;
         self.brightButton.selected = NO;
+        
+        if (_lightArray.count >0) {
+            [[SceneManager defaultManager] romanticForRoomLights:_lightArray];
+        }
     }
 }
 
 - (IBAction)brightBtnClicked:(id)sender {
     UIButton *btn = (UIButton *)sender;
-    if (btn.selected) {
-        btn.selected = NO;
-    }else {
+    if (!btn.selected) {
         btn.selected = YES;
         self.softButton.selected = NO;
         self.normalButton.selected = NO;
+        
+        if (_lightArray.count >0) {
+            [[SceneManager defaultManager] sprightlyForRoomLights:_lightArray];
+        }
     }
 }
 
@@ -217,7 +223,7 @@
 
 #pragma mark - UITableView Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return _deviceType_count;
+    return _deviceType_count-2;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
@@ -230,11 +236,11 @@
         return _multiMediaArray.count;//影音
     }else if (section == 4){
         return _intelligentArray.count;//智能单品
-    }else if (section == 5){
+    }/*else if (section == 5){
         return _securityArray.count;//安防
     }else if (section == 6){
         return _sensorArray.count;//感应器
-    }
+    }*/
     return 0;
 }
 
@@ -367,7 +373,7 @@
         otherCell.NameLabel.text = device.name;
         return otherCell;
         
-    }else if (indexPath.section == 5) {//安防
+    }/*else if (indexPath.section == 5) {//安防
         Device *device = [SQLManager getDeviceWithDeviceID:[_securityArray[indexPath.row] intValue]];
         
         if (device.hTypeId == 40) { //智能门锁
@@ -401,7 +407,7 @@
         otherCell.OtherConstraint.constant = 10;
         otherCell.NameLabel.text = device.name;
         return otherCell;
-    }
+    }*/
     
     return nil;
 }
@@ -424,7 +430,7 @@
         }
     }
     
-    else if (indexPath.section == 4 || indexPath.section == 5 || indexPath.section == 6 ) {
+    else if (indexPath.section == 4 /* || indexPath.section == 5 || indexPath.section == 6 */) {
         return 50;
     }
     

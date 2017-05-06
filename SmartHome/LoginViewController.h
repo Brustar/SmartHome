@@ -37,13 +37,14 @@
 @property (nonatomic,strong) NSMutableArray * home_room_infoArr;
 @property (nonatomic,strong) NSString *UserTypeStr;
 @property (nonatomic,strong) NSMutableArray * room_user_listArr;
-
+@property (nonatomic, assign) BOOL isTheSameUser;//判断是不是同一个用户登录
 @property(nonatomic,assign) NSInteger userType;
 @property(nonatomic,assign) NSInteger UserType;//判断是否为主人
 @property(nonatomic,strong) NSString *masterId;
 @property (nonatomic, strong) NSString *hostName;//主机名称（家庭名称）
 @property(nonatomic,strong) NSString *role;
-@property(nonatomic,strong) NSMutableArray *hostIDS;
+@property(nonatomic,strong) NSMutableArray *hostIDS;//主机Id列表
+@property(nonatomic, strong) NSMutableArray *homeNameArray;//家庭名称列表
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,assign) int vEquipmentsLast;
 @property (nonatomic,assign) int vRoomLast;
