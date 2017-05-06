@@ -129,6 +129,8 @@ BOOL animating;
         AudioManager *audio=[AudioManager defaultManager];
         [audio initMusicAndPlay];
     }
+    
+    [self.lastBtn setBackgroundImage:[UIImage imageNamed:@"control_button_pressed"] forState:UIControlStateSelected];
 }
 
 -(IBAction)save:(id)sender
@@ -281,9 +283,8 @@ BOOL animating;
 
 - (IBAction)playMusic:(id)sender {
     UIButton *btn = (UIButton *)sender;
-    
-    if (_playState == 0) {
-        _playState = 1;
+    [btn setSelected:!btn.isSelected];
+    if (btn.isSelected) {
         [btn setImage:[UIImage imageNamed:@"DVD_pause"] forState:UIControlStateNormal];
         //发送播放指令
         NSData *data=[[DeviceInfo defaultManager] play:self.deviceid];
@@ -295,8 +296,7 @@ BOOL animating;
             [[audio musicPlayer] play];
         }
         [self startSpin];
-    }else if (_playState == 1) {
-        _playState = 0;
+    }else{
        [btn setImage:[UIImage imageNamed:@"DVD_play"] forState:UIControlStateNormal];
         //发送停止指令
         NSData *data=[[DeviceInfo defaultManager] pause:self.deviceid];
@@ -327,20 +327,4 @@ BOOL animating;
     }
 }
 
-- (IBAction)musicSwitchChanged:(id)sender {
-    UISwitch *musicSwitch = (UISwitch *)sender;
-    if (musicSwitch.on) {
-        //开指令
-        NSData *data=[[DeviceInfo defaultManager] open:self.deviceid];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:1];
-        
-    }else {
-        //关指令
-        NSData *data=[[DeviceInfo defaultManager] close:self.deviceid];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:1];
-    }
-    
-}
 @end
