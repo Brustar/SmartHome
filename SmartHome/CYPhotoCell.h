@@ -31,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *seleteSendPowBtn;
 @property (nonatomic, assign) int sceneStatus;//场景状态
 @property (weak, nonatomic) IBOutlet UIImageView *subImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *icon;
 
 - (IBAction)powerBtnAction:(UIButton *)sender;
 
