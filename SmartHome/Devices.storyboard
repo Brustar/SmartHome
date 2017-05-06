@@ -1035,37 +1035,37 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dir_pad" translatesAutoresizingMaskIntoConstraints="NO" id="ngC-Cm-pYg">
                                 <rect key="frame" x="44" y="205" width="326" height="326"/>
                             </imageView>
-                            <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYP-xB-YNL">
+                            <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYP-xB-YNL">
                                 <rect key="frame" x="195" y="282" width="24" height="12"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="12" id="XLb-bf-Z8P"/>
                                     <constraint firstAttribute="width" constant="24" id="zVb-aQ-u6V"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="dir_up"/>
+                                <state key="normal" image="dir_up"/>
                                 <connections>
                                     <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="bmG-Ld-l6B"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QME-gX-nXa">
+                            <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QME-gX-nXa">
                                 <rect key="frame" x="195" y="442" width="24" height="12"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="12" id="I1i-pq-Y6B"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="dir_down"/>
+                                <state key="normal" image="dir_down"/>
                                 <connections>
                                     <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="W69-5y-iIe"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dfe-ES-qjk">
+                            <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dfe-ES-qjk">
                                 <rect key="frame" x="121" y="356" width="12" height="24"/>
-                                <state key="normal" backgroundImage="dir_left"/>
+                                <state key="normal" image="dir_left"/>
                                 <connections>
                                     <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="My3-i5-0cC"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pfv-UU-Wsq">
+                            <button opaque="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pfv-UU-Wsq">
                                 <rect key="frame" x="281" y="356" width="12" height="24"/>
-                                <state key="normal" backgroundImage="dir_right"/>
+                                <state key="normal" image="dir_right"/>
                                 <connections>
                                     <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="mz1-JG-kYF"/>
                                 </connections>
@@ -1200,6 +1200,16 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnDown" destination="QME-gX-nXa" id="zi7-xB-nnS"/>
+                        <outlet property="btnLeft" destination="Dfe-ES-qjk" id="H9F-ic-b8y"/>
+                        <outlet property="btnMenu" destination="zC7-jj-JeS" id="R2f-ZL-7e9"/>
+                        <outlet property="btnNext" destination="srS-ye-4XO" id="XIs-Cd-36R"/>
+                        <outlet property="btnOK" destination="Se0-pD-Pfe" id="V77-HZ-JIV"/>
+                        <outlet property="btnPlay" destination="wkp-hZ-I2O" id="rBm-Nv-pbV"/>
+                        <outlet property="btnPop" destination="Duh-R2-so8" id="JiA-Oa-bP5"/>
+                        <outlet property="btnPrevoius" destination="Fbi-90-npd" id="4vc-Zp-dCB"/>
+                        <outlet property="btnRight" destination="Pfv-UU-Wsq" id="9WT-AG-A3T"/>
+                        <outlet property="btnUP" destination="YYP-xB-YNL" id="dyB-Ju-ezX"/>
                         <outlet property="volume" destination="Of9-QP-3Cz" id="RlY-xD-13d"/>
                     </connections>
                 </viewController>
@@ -2276,8 +2286,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ocV-tE-pbO"/>
-        <segue reference="g6r-06-f8D"/>
         <segue reference="1OP-Pr-L1I"/>
         <segue reference="BPD-VH-126"/>
+        <segue reference="jue-EE-v6Z"/>
     </inferredMetricsTieBreakers>
 </document>
