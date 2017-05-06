@@ -10,6 +10,7 @@
 #import "FMDatabase.h"
 #import "Device.h"
 #import "Aircon.h"
+#import "UserInfo.h"
 
 #define SWITCHLIGHT_SUB_TYPE @"01"
 #define DIMMER_SUB_TYPE @"02"
@@ -87,7 +88,7 @@
 //根据房间ID和场景ID获得设备
 + (NSArray *)getDeviceWithRoomID:(int)roomID sceneID:(int)sceneID;
 //根据房间ID和场景ID获得设备父类和子类
-+ (NSArray *)getDeviceSubTypeNameWithRoomID:(int)roomID sceneID:(int)sceneID;
++ (NSArray *)getCatalogWithRoomID:(int)roomID;
 + (NSArray *)getDeviceTypeNameWithRoomID:(int)roomID sceneID:(int)sceneID subTypeName:(NSString *)subTypeName;
 
 //修改场景的打开状态（status： 0表示关闭 1表示打开）
@@ -175,4 +176,8 @@
 + (NSArray *)getDeviceIDsByHtypeID:(NSString *)htypeid;
 + (NSString *)getCameraUrlByDeviceID:(int)deviceID;
 + (NSInteger)getRoomIDByDeviceID:(int)deviceID;
+
++ (BOOL)updateUserPortraitUrlByID:(int)userID url:(NSString *)url;
++ (BOOL)insertOrReplaceUser:(UserInfo *)info;
++ (UserInfo *)getUserInfo:(int)userID;
 @end

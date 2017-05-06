@@ -26,6 +26,14 @@
     return _hostIDS;
 }
 
+- (NSMutableArray *)homeNameArray {
+    if(!_homeNameArray)
+    {
+        _homeNameArray = [NSMutableArray array];
+    }
+    return _homeNameArray;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addNotifications];
@@ -201,10 +209,10 @@
     
     NSString *url = [NSString stringWithFormat:@"%@login/login.aspx",[IOManager httpAddr]];
     
-    userType = 1;
+    userType = 1;//用户名登录
     if([self.nameTextField.text isMobileNumber])
     {
-        userType = 2;
+        userType = 2;//手机号登录
     }
     
     DeviceInfo *info=[DeviceInfo defaultManager];
@@ -222,11 +230,28 @@
         clientType = 2;
     }
     
-    NSDictionary *dict = @{@"account":self.nameTextField.text,@"logintype":[NSNumber numberWithInteger:userType],@"password":[self.pwdTextField.text md5],@"pushtoken":pushToken,@"devicetype":@(clientType),@"devicetype":[NSNumber numberWithInteger:userType]};
+    //判断是不是同一个用户，是同一个用户，传缓存的hostid, 不是同一个用户，传hostid为0
+    NSInteger currentHostId = 0;//当前的hostId
+    _isTheSameUser = NO;//是否是同一个用户标识
+    NSString *account = [UD objectForKey:@"Account"];
+    if ([account isEqualToString:self.nameTextField.text]) {//同一个用户
+        _isTheSameUser = YES;
+    }
+    
+    if (_isTheSameUser) {
+        currentHostId = [[UD objectForKey:@"HostID"] integerValue];
+    }
+    
+    NSDictionary *dict = @{
+                           @"account":self.nameTextField.text,
+                           @"logintype":@(userType),
+                           @"password":[self.pwdTextField.text md5],
+                           @"pushtoken":pushToken,
+                           @"devicetype":@(clientType),
+                           @"hostid":@(currentHostId)
+                           };
     NSLog(@"%@ === login params ===: ", dict);
-    [IOManager writeUserdefault:self.nameTextField.text forKey:@"Account"];
-    [IOManager writeUserdefault:[NSNumber numberWithInteger:self.userType] forKey:@"Type"];
-    [IOManager writeUserdefault:[self.pwdTextField.text encryptWithDes:DES_KEY] forKey:@"Password"];
+    
     
     HttpManager *http=[HttpManager defaultManager];
     http.delegate=self;
@@ -276,6 +301,22 @@
     }
 }
 
+- (void)writeQRCodeStringToFile:(NSString *)string{
+    NSArray *paths;
+    NSString  *arrayPath;
+paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                            NSUserDomainMask, YES);//搜索沙盒路径下的document文件夹。
+arrayPath = [[paths objectAtIndex:0]
+             stringByAppendingPathComponent:@"QRCodeString.plist"];//在此文件夹下创建文件，相当于你的xxx.txt
+
+NSArray *array = [NSArray arrayWithObjects:
+                  string, nil];//将你的数据放入数组中
+
+[array writeToFile:arrayPath atomically:YES];//将数组中的数据写入document下xxx.txt。
+
+    
+}
+
 #pragma mark - QRCode Delegate
 - (void)readerDidCancel:(QRCodeReaderViewController *)reader
 {
@@ -309,6 +350,21 @@
             }
             [vc setValue:self.role forKey:@"suerTypeStr"];
         }
+        
+        
+        /*if([list count] > 1)
+        {
+            self.masterId = list[0];
+            [vc setValue:@([self.masterId intValue]) forKey:@"masterStr"];
+            if ([@"1" isEqualToString:list[1]]) {
+                self.role=@"主人";
+            }else{
+                self.role=@"客人";
+            }
+            [vc setValue:self.role forKey:@"suerTypeStr"];
+        }*/
+        
+        
         else
         {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"非法的二维码" preferredStyle:UIAlertControllerStyleAlert];
@@ -513,33 +569,82 @@
     if(tag == 1)
     {
         if ([responseObject[@"result"] intValue]==0) {
+            
+            //登录成功，才缓存用户账号，密码，登录类型
+            [IOManager writeUserdefault:self.nameTextField.text forKey:@"Account"];
+            [IOManager writeUserdefault:[NSNumber numberWithInteger:self.userType] forKey:@"Type"];
+            [IOManager writeUserdefault:[self.pwdTextField.text encryptWithDes:DES_KEY] forKey:@"Password"];
+            
             [IOManager writeUserdefault:responseObject[@"token"] forKey:@"AuthorToken"];
             [IOManager writeUserdefault:responseObject[@"username"] forKey:@"UserName"];
             [IOManager writeUserdefault:responseObject[@"userid"] forKey:@"UserID"];
             [IOManager writeUserdefault:responseObject[@"usertype"] forKey:@"UserType"];
             [IOManager writeUserdefault:responseObject[@"vip"] forKey:@"vip"];
+            
+            //保存登录用户信息
+            
+            UserInfo *userInfo = [[UserInfo alloc] init];
+            userInfo.userID = [responseObject[@"userid"] integerValue];
+            userInfo.userName = responseObject[@"username"];
+            userInfo.nickName = responseObject[@"nickname"];
+            userInfo.userType = [responseObject[@"usertype"] integerValue]; //1:主人  2:客人
+            userInfo.vip = responseObject[@"vip"];
+            userInfo.headImgURL = responseObject[@"portrait"];
+            userInfo.age = 30;
+            userInfo.sex = 1;
+            userInfo.signature = @"";
+            userInfo.phoneNum = @"";
+            
+           BOOL succeed = [SQLManager insertOrReplaceUser:userInfo];// 登录用户基本信息入库
+            if (succeed) {
+                NSLog(@"登录用户基本信息入库成功");
+            }else {
+                NSLog(@"登录用户基本信息入库失败");
+            }
+            
             NSArray *hostList = responseObject[@"hostlist"];
             
-            for(NSDictionary *hostID in hostList)
+            for(NSDictionary *host in hostList)
             {
-                [self.hostIDS addObject:hostID[@"hostid"]];
-            }
-            
-            [IOManager writeUserdefault:self.hostIDS forKey:@"HostIDS"];
-            if ([self.hostIDS count]>0) {
-                int mid = [self.hostIDS[0] intValue];
-                //切换帐号后，版本号归零
-                if (mid != [[UD objectForKey:@"HostID"] intValue]) {
-                    [UD removeObjectForKey:@"room_version"];
-                    [UD removeObjectForKey:@"equipment_version"];
-                    [UD removeObjectForKey:@"scence_version"];
-                    [UD removeObjectForKey:@"tv_version"];
-                    [UD removeObjectForKey:@"fm_version"];
+                if (host[@"hostid"]) {
+                    [self.hostIDS addObject:host[@"hostid"]];
                 }
                 
-                [IOManager writeUserdefault:@(mid) forKey:@"HostID"];
-                info.masterID = mid;
+                if (host[@"homename"]) {
+                    [self.homeNameArray addObject:host[@"homename"]];
+                }
             }
+            
+            
+            //缓存HostIDS， HomeNameList
+            if (self.hostIDS) {
+                [IOManager writeUserdefault:self.hostIDS forKey:@"HostIDS"];
+            }
+            
+            if (self.homeNameArray) {
+                [IOManager writeUserdefault:self.homeNameArray forKey:@"HomeNameList"];
+            }
+            
+            
+            if (!_isTheSameUser) { //如果不是同一个用户, 或者是同一个用户，但卸载重装了App
+                if ([self.hostIDS count] >0) {
+                    int mid = [self.hostIDS[0] intValue];
+                    //切换帐号后，版本号归零
+                    if (mid != [[UD objectForKey:@"HostID"] intValue]) {
+                        [UD removeObjectForKey:@"room_version"];
+                        [UD removeObjectForKey:@"equipment_version"];
+                        [UD removeObjectForKey:@"scence_version"];
+                        [UD removeObjectForKey:@"tv_version"];
+                        [UD removeObjectForKey:@"fm_version"];
+                    }
+                    
+                    //更新UD的@"HostID"， 更新DeviceInfo的 masterID
+                    [IOManager writeUserdefault:@(mid) forKey:@"HostID"];
+                    info.masterID = mid;
+                }
+            }
+            
+            
             [IOManager writeUserdefault:responseObject[@"rctoken"] forKey:@"rctoken"];
             [IOManager writeUserdefault:responseObject[@"homename"] forKey:@"homename"];
             [self writeChatListConfigDataToSQL:responseObject[@"userList"]];
@@ -550,8 +655,8 @@
         }else{
             [MBProgressHUD showError:responseObject[@"msg"]];
         }
-    }else if(tag == 2){
-        if ([responseObject[@"result"] intValue]==0)
+    }else if(tag == 2) {
+        if ([responseObject[@"result"] intValue] == 0)
         {
             NSDictionary *versioninfo=responseObject[@"version_info"];
             //执久化配置版本号

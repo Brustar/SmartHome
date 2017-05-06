@@ -12,17 +12,16 @@
 #import "PackManager.h"
 #import "SocketManager.h"
 #import "SQLManager.h"
-#import "ORBSwitch.h"
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 #define guardType @"智能门锁"
-@interface GuardController ()<ORBSwitchDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UISwitch *switchView;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedGuard;
+
+@interface GuardController ()
+
 @property (nonatomic,strong) UILabel *label;
 @property (nonatomic,strong) NSMutableArray *guardNames;
 @property (nonatomic,strong) NSMutableArray *guardIDs;
-@property (nonatomic,strong) ORBSwitch *switcher;
+@property (weak, nonatomic) IBOutlet UIButton *switcher;
 
 @end
 
@@ -79,13 +78,15 @@
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - %@",roomName,guardType]];
     
-    [self initSwitcher];
+    self.deviceid = [SQLManager singleDeviceWithCatalogID:doorclock byRoom:self.roomID];
     
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.scrollEnabled = NO;
-    
-    [self setupSegmentGuard];
+    [self.switcher setImage:[UIImage imageNamed:@"clock_open_pressed"] forState:(UIControlStateSelected | UIControlStateHighlighted)];
+    [[self.switcher rac_signalForControlEvents:UIControlEventTouchUpInside]
+     subscribeNext:^(id x) {
+         NSData *data = [[DeviceInfo defaultManager] toogle:0x01 deviceID:self.deviceid];
+         SocketManager *sock=[SocketManager defaultManager];
+         [sock.socket writeData:data withTimeout:1 tag:1];
+     }];
 
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
@@ -93,33 +94,6 @@
     //查询设备状态
     NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
     [sock.socket writeData:data withTimeout:1 tag:1];
-}
-
--(void) initSwitcher
-{
-    self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:[UIImage imageNamed:@"lighting_off"] inactiveBackgroundImage:nil activeBackgroundImage:nil frame:CGRectMake(0, 0, 194, 194)];
-    self.switcher.center = CGPointMake(self.view.bounds.size.width / 2,
-                                       self.view.bounds.size.height / 2);
-    
-    self.switcher.knobRelativeHeight = 1.0f;
-    self.switcher.delegate = self;
-    
-    [self.view addSubview:self.switcher];
-}
-
--(void)setupSegmentGuard
-{
-    if(self.guardNames == nil || self.guardNames.count == 0)
-    {
-        return;
-    }
-    [self.segmentedGuard removeAllSegments];
-    for(int i = 0; i < self.guardNames.count;i++)
-    {
-        [self.segmentedGuard insertSegmentWithTitle:self.guardNames[i] atIndex:i animated:NO];
-    }
-    self.segmentedGuard.selectedSegmentIndex = 0;
-    self.deviceid = [self.guardIDs objectAtIndex:self.segmentedGuard.selectedSegmentIndex];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -131,14 +105,12 @@
 -(IBAction)save:(id)sender
 {
     if ([sender isEqual:self.switcher]) {
-        NSData *data=[[DeviceInfo defaultManager] toogle:self.switcher.isOn deviceID:self.deviceid];
+        NSData *data=[[DeviceInfo defaultManager] toogle:0x01 deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
     }
     EntranceGuard *device=[[EntranceGuard alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
-    [device setUnlock: self.switcher.isOn];
-    
     
     [_scene setSceneID:[self.sceneid intValue]];
     [_scene setRoomID:self.roomID];
@@ -163,87 +135,17 @@
     }
     //同步设备状态
     if(proto.cmd == 0x01){
-        self.switchView.on = proto.action.state;
+        //self.switchView.on = proto.action.state;
     }
     if (tag==0 && (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON)) {
         NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
         if ([devID intValue]==[self.deviceid intValue]) {
-            self.switchView.on=proto.action.state;
+            //self.switchView.on=proto.action.state;
         }
     }
 }
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 2;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
     
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
-        
-    }
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 5, 150, 30)];
-    
-   [cell.contentView addSubview:label];
-    if(indexPath.row == 0)
-    {
-        self.label = label;
-        label.text = self.guardNames[self.segmentedGuard.selectedSegmentIndex];
-//        label.text = @"智能门锁";
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
-        cell.accessoryView = self.switchView;
-        _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
-        if ([self.sceneid intValue]>0) {
-            for(int i=0;i<[_scene.devices count];i++)
-            {
-                if ([[_scene.devices objectAtIndex:i] isKindOfClass:[EntranceGuard class]]) {
-                    self.switchView.on=((EntranceGuard*)[_scene.devices objectAtIndex:i]).unlock;
-                }
-            }
-        }
-        [self.switchView addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
-        
-    }else if(indexPath.row == 1){
-        cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-        label.text =  @"详细信息";
-    }
-    return cell;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 50;
-}
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if(indexPath.row == 1)
-    {
-        [self performSegueWithIdentifier:@"detail" sender:self];
-    }
-}
-
-
-- (IBAction)selectedTypeOfGuard:(UISegmentedControl *)sender {
-    
-    UISegmentedControl *segment = (UISegmentedControl*)sender;
-    self.label.text = self.guardNames[segment.selectedSegmentIndex];
-    self.deviceid=[self.guardIDs objectAtIndex:self.segmentedGuard.selectedSegmentIndex];
-    [self.tableView reloadData];
-}
-
-
-    
- #pragma mark - Navigation
+#pragma mark - Navigation
  // In a storyboard-based application, you will often want to do a little preparation before navigation
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
  // Get the new view controller using [segue destinationViewController].
@@ -255,19 +157,6 @@
 -(void) dealloc
 {
     [self.timer invalidate];
-}
-
-#pragma mark - ORBSwitchDelegate
-- (void)orbSwitchToggled:(ORBSwitch *)switchObj withNewValue:(BOOL)newValue {
-    NSLog(@"Switch toggled: new state is %@", (newValue) ? @"ON" : @"OFF");
-    [self save:self.switcher];
-}
-
-- (void)orbSwitchToggleAnimationFinished:(ORBSwitch *)switchObj {
-    [switchObj setCustomKnobImage:[UIImage imageNamed:(switchObj.isOn) ? @"lighting_on" : @"lighting_off"]
-          inactiveBackgroundImage:nil
-            activeBackgroundImage:nil];
-    
 }
 
 @end

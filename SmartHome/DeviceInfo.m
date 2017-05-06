@@ -418,7 +418,7 @@
 //停止幕布
 -(NSData *) stopScreenByDeviceID:(NSString *)deviceID
 {
-    return [self action:0x45 deviceID:deviceID];
+    return [self action:0x32 deviceID:deviceID];
 }
 
 
@@ -446,6 +446,17 @@
 -(NSData *) changeInterval:(uint8_t)interval deviceID:(NSString *)deviceID
 {
     return [self action:interval deviceID:deviceID];
+}
+
+#pragma mark - bgmusic
+-(NSData *) repeat:(NSString *)deviceID
+{
+    return [self action:0x45 deviceID:deviceID];
+}
+
+-(NSData *) shuffle:(NSString *)deviceID
+{
+    return [self action:0x46 deviceID:deviceID];
 }
 
 @end

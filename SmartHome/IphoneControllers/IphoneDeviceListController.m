@@ -36,13 +36,13 @@ static NSString * const CYPhotoId = @"photo";
 
 @property (nonatomic,assign) int selectedSId;
 
-@property (nonatomic,strong) NSArray *deviceTypes;
-@property (nonatomic,strong) NSArray *typeIDs;
+@property (nonatomic,strong) NSArray *devices;
 
 @property (nonatomic ,strong) CYPhotoCell *cell;
 @property (nonatomic,strong) UIButton *typeSelectedBtn;
 @property (nonatomic,strong) UIButton *selectedRoomBtn;
 @property (nonatomic,strong) NSArray *rooms;
+@property (nonatomic,strong) NSArray *icons;
 
 @property (weak, nonatomic) UIViewController *currentViewController;
 @property (weak, nonatomic) IBOutlet IphoneRoomView *iphoneRoomView;
@@ -90,6 +90,7 @@ static NSString * const CYPhotoId = @"photo";
     
     [self setUpRoomScrollerView];
     [self getUI];
+    self.icons = @[@"cata_light",@"cata_env",@"cata_media",@"cata_single_product",@"cata_curtain"];
 }
 
 - (void)setupNaviBar {
@@ -114,7 +115,17 @@ static NSString * const CYPhotoId = @"photo";
 }
 
 - (void)rightBtnClicked:(UIButton *)btn {
+    //[self performSegueWithIdentifier:@"DVD" sender:self];
     
+    UIStoryboard * HomeStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
+    if (_nowMusicController == nil) {
+        _nowMusicController = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"NowMusicController"];
+        _nowMusicController.delegate = self;
+        [self.view addSubview:_nowMusicController.view];
+    }else {
+        [_nowMusicController.view removeFromSuperview];
+        _nowMusicController = nil;
+    }
 }
 
 - (void)onBgButtonClicked:(UIButton *)sender {
@@ -172,9 +183,9 @@ static NSString * const CYPhotoId = @"photo";
     if (view == self.iphoneRoomView) {
         self.roomIndex = index;
         Room *room = self.rooms[index];
-        self.deviceTypes = [SQLManager deviceSubTypeByRoomId:room.rId];
-        self.typeIDs = [SQLManager deviceTypeIDByRoom:room.rId];
-        if (self.deviceTypes.count < 1) {
+        self.devices = [SQLManager getCatalogWithRoomID:room.rId];
+        
+        if (self.devices.count < 1) {
             [MBProgressHUD showError:@"该房间没有设备"];
             return;
         }
@@ -185,32 +196,16 @@ static NSString * const CYPhotoId = @"photo";
 -(NSString *) seguaName:(int) typeID
 {
     switch (typeID) {
-        case light:
+        case cata_light:
             return @"lighting";
-        case curtain:
+        case cata_curtain:
             return @"curtain";
-        case DVDtype:
-            return @"DVD";
-        case bgmusic:
-            return @"bgmusic";
-        case FM:
-            return @"FM";
-        case air:
+        case cata_env:
             return @"air";
-        case doorclock:
-            return @"doorclock";
-        case projector:
-            return @"projector";
-        case screen:
-            return @"screen";
-        case amplifier:
-            return @"amplifier";
-        case TVtype:
+        case cata_single_product:
+            return @"flowering";
+        case cata_media:
             return @"TV";
-        case camera:
-            return @"camera";
-        case plugin:
-            return @"plugin";
         default:
             break;
     }
@@ -242,8 +237,7 @@ static NSString * const CYPhotoId = @"photo";
     btn.selected = YES;
     self.selectedRoomBtn = btn;
     [self.selectedRoomBtn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
-    self.deviceTypes = [SQLManager deviceSubTypeByRoomId:btn.tag];
-    self.typeIDs = [SQLManager deviceTypeIDByRoom:btn.tag];
+    self.devices = [SQLManager getCatalogWithRoomID:(int)btn.tag];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -261,7 +255,7 @@ static NSString * const CYPhotoId = @"photo";
 #pragma  mark - UICollectionViewDelegate
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.deviceTypes.count;
+    return self.devices.count;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -269,18 +263,25 @@ static NSString * const CYPhotoId = @"photo";
     CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
     
     int offset = ((CYLineLayout *)self.FirstCollectionView.collectionViewLayout).scrollOffset;
-    self.DeviceNameLabel.text = self.deviceTypes[offset];
+    if ([self.devices count]>offset) {
+        Device *device = self.devices[offset];
+        self.DeviceNameLabel.text = device.subTypeName;
+    }
     
     NSString *imgName = [NSString stringWithFormat:@"catalog_%ld",(long)indexPath.row];
     UIImage *img = [UIImage imageNamed:imgName];
     [cell.imageView sd_setImageWithURL:nil placeholderImage:img];
-    
+    if ([self.icons count]>indexPath.row) {
+        cell.icon.hidden = NO;
+        cell.icon.image = [UIImage imageNamed:[self.icons objectAtIndex:indexPath.row]];
+    }
     return cell;
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self goDeviceByRoomID:[self.typeIDs objectAtIndex:indexPath.row]];
+    Device *device = self.devices[indexPath.row];
+    [self goDeviceByRoomID:[NSString stringWithFormat:@"%ld",device.subTypeId]];
 }
 
 @end

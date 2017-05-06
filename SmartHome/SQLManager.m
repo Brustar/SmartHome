@@ -1084,38 +1084,33 @@
     return sceneID;
 }
 
-+ (NSArray *)getDeviceSubTypeNameWithRoomID:(int)roomID sceneID:(int)sceneID
++ (NSArray *)getCatalogWithRoomID:(int)roomID
 {
-    NSMutableArray *subTypeNames = [NSMutableArray array];
+    NSMutableArray *catalogs = [NSMutableArray new];
+    NSString *sql;
+    if ([self isWholeHouse:roomID]) {
+        sql = @"select subtypename,subtypeid from devices where subtypeid<>6 and subtypeid<>4  group by subtypeid";
+    }else{
+        sql = [NSString stringWithFormat:@"select subtypename,subtypeid from devices where subtypeid<>6 and subtypeid<>4 and rid = %d group by subtypeid" ,roomID];
+    }
     
-    NSArray *deviceIDs = [self getDeviceIDWithRoomID:roomID sceneID:sceneID ];
-    
-    for (NSString *deviceID in deviceIDs) {
-        if([deviceID isEqualToString:@""])
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        FMResultSet *resultSet = [db executeQuery:sql];
+        
+        while ([resultSet next])
         {
-            break;
+            Device *cata = [Device new];
+            cata.subTypeName = [resultSet stringForColumn:@"subtypename"];
+            cata.subTypeId = [[resultSet stringForColumn:@"subtypeid"] intValue];
+            [catalogs addObject:cata];
         }
-        NSString *subTypeName = [self getDeviceSubTypeNameWithID:[deviceID intValue]];
-        
-        BOOL isSame = false;
-        for (NSString *tempSubTypeName in subTypeNames) {
-            if ([tempSubTypeName isEqualToString:subTypeName]) {
-                isSame = true;
-                break;
-            }
-        }
-        if (isSame) {
-            continue;
-        }
-        
-        [subTypeNames addObject:subTypeName];
     }
+    [db closeOpenResultSets];
+    [db close];
     
-    if (subTypeNames.count < 1) {
-        return nil;
-    }
-    
-    return [subTypeNames copy];
+    return catalogs;
 }
 
 +(NSArray *)getAllDeviceSubTypes
@@ -2013,15 +2008,16 @@
         NSString *sqlScene=@"CREATE TABLE IF NOT EXISTS \"Scenes\" (\"ID\" INT PRIMARY KEY  NOT NULL ,\"NAME\" TEXT NOT NULL ,\"roomName\" TEXT,\"pic\" TEXT DEFAULT (null) ,\"rId\" INTEGER,\"sType\" INTEGER, \"snumber\" TEXT,\"isFavorite\" BOOL,\"totalVisited\" INTEGER,\"masterID\" TEXT ,\"status\" INTEGER DEFAULT (0))";
         NSString *sqlChat = @"CREATE TABLE IF NOT EXISTS chats(\"ID\" INTEGER PRIMARY KEY  NOT NULL ,nickname varchar(20),portrait varchar(100),username varchar(20),user_id integer)";
         NSString *sqlCatalog = @"CREATE TABLE IF NOT EXISTS catalog(\"ID\" INTEGER PRIMARY KEY  NOT NULL ,catalogName varchar(20))";
+        NSString *sqlUser = @"CREATE TABLE IF NOT EXISTS Users(ID INT PRIMARY KEY NOT NULL, userType INTEGER, userName TEXT, nickName TEXT, vip TEXT, age INTEGER, sex INTEGER, portraitUrl TEXT, phoneNum TEXT, signature TEXT, extra1 TEXT, extra2 TEXT, extra3 TEXT, extra4 TEXT)";
         
-        NSArray *sqls=@[sqlRoom,sqlChannel,sqlDevice,sqlScene,sqlChat,sqlCatalog];
+        NSArray *sqls=@[sqlRoom,sqlChannel,sqlDevice,sqlScene,sqlChat,sqlCatalog,sqlUser];
         //4.创表
         for (NSString *sql in sqls) {
             BOOL result=[db executeUpdate:sql];
             if (result) {
-                NSLog(@"创表成功");
+                NSLog(@"创表成功---%@", sql);
             }else{
-                NSLog(@"创表失败");
+                NSLog(@"创表失败---%@", sql);
             }
         }
     }else{
@@ -2532,6 +2528,62 @@
     [db closeOpenResultSets];
     [db close];
     return ret;
+}
+
+#pragma mark - User
++ (BOOL)updateUserPortraitUrlByID:(int)userID url:(NSString *)url {
+    FMDatabase *db = [SQLManager connetdb];
+    if (![db open]) {
+        NSLog(@"Could not open db");
+        return NO;
+    }
+    BOOL result = [db executeUpdate:[NSString stringWithFormat:@"UPDATE Users SET portraitUrl = '%@' where ID = %d", url, userID]];
+    
+    [db close];
+    return result;
+}
+
++ (BOOL)insertOrReplaceUser:(UserInfo *)info {
+    FMDatabase *db = [SQLManager connetdb];
+    if (![db open]) {
+        NSLog(@"Could not open db");
+        return NO;
+    }
+    BOOL result = [db executeUpdate:[NSString stringWithFormat:@"insert or replace into Users values(%ld, %ld, '%@', '%@', '%@',  %ld, %ld, '%@', '%@', '%@', null, null, null, null);", info.userID, info.userType, info.userName, info.nickName, info.vip, info.age, info.sex, info.headImgURL, info.phoneNum, info.signature]];
+    
+    [db close];
+    return result;
+}
+
++ (UserInfo *)getUserInfo:(int)userID {
+    FMDatabase *db = [SQLManager connetdb];
+    UserInfo *info = [[UserInfo alloc] init];
+    if (![db open]) {
+        NSLog(@"Could not open db");
+        return nil;
+    }
+    
+    FMResultSet *resultSet = [db executeQueryWithFormat:@"select * from Users where ID = %d",userID];
+    if([resultSet next])
+    {
+        info.userID = [resultSet intForColumn:@"ID"];
+        info.userType = [resultSet intForColumn:@"userType"];
+        info.userName = [resultSet stringForColumn:@"userName"];
+        info.nickName = [resultSet stringForColumn:@"nickName"];
+        info.vip = [resultSet stringForColumn:@"vip"];
+        info.age = [resultSet intForColumn:@"age"];
+        info.sex = [resultSet intForColumn:@"sex"];
+        info.headImgURL = [resultSet stringForColumn:@"portraitUrl"];
+        info.phoneNum = [resultSet stringForColumn:@"phoneNum"];
+        info.signature = [resultSet stringForColumn:@"signature"];
+        
+    }else {
+        return nil;
+    }
+    [db closeOpenResultSets];
+    [db close];
+    
+    return info;
 }
 
 #pragma mark - channel favor

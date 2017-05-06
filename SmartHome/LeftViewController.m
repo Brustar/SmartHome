@@ -18,7 +18,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    [self addNotifications];
+    [self getUserInfoFromDB];
     _itemArray = @[@"家庭成员",@"家庭动态",@"智能账单",@"通知",@"故障及保修记录",@"切换家庭账号"];
 
     
@@ -26,14 +27,20 @@
     imageview.image = [UIImage imageNamed:@"background"];
     [self.view addSubview:imageview];
     
-    UITableView *tableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-    tableview.dataSource = self;
-    tableview.delegate  = self;
-    tableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    tableview.tableFooterView = [self setupTableFooter];
-    [self.view addSubview:tableview];
-
+    _myTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    _myTableView.dataSource = self;
+    _myTableView.delegate  = self;
+    _myTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    _myTableView.tableHeaderView = [self setupTableHeader];
+    _myTableView.tableFooterView = [self setupTableFooter];
+    [self.view addSubview:_myTableView];
 }
+
+- (void)getUserInfoFromDB {
+    int userID = [[UD objectForKey:@"UserID"] intValue];
+    _userInfo = [SQLManager getUserInfo:userID];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _itemArray.count;
 }
@@ -114,37 +121,63 @@
     
 }
 
+- (UIView *)setupTableHeader {
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH-100, 250)];
+    view.backgroundColor = [UIColor clearColor];
+    
+    UIButton *headButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    headButton.frame = CGRectMake((CGRectGetWidth(view.frame)-100)/2, 60, 100, 100);
+    headButton.layer.cornerRadius = 50;
+    headButton.layer.masksToBounds = YES;
+    [headButton sd_setImageWithURL:[NSURL URLWithString:_userInfo.headImgURL] forState:UIControlStateNormal placeholderImage:nil];
+    [view addSubview:headButton];
+    [headButton addTarget:self action:@selector(headButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    _headerBtn = headButton;
+    
+    UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(headButton.frame)+10, UI_SCREEN_WIDTH-100, 20)];
+    nameLabel.text = _userInfo.userName;
+    nameLabel.textColor = [UIColor whiteColor];
+    nameLabel.font = [UIFont systemFontOfSize:15.0];
+    nameLabel.textAlignment = NSTextAlignmentCenter;
+    [view addSubview:nameLabel];
+    
+    //VIP
+    if ([_userInfo.vip isEqualToString:@"0"]) {  //VIP: 1(会员)   0(非会员)
+        UIButton *vipBtn = [[UIButton alloc] initWithFrame:CGRectMake(FX(headButton)+10, CGRectGetMaxY(nameLabel.frame)+10, 30, 15)];
+        vipBtn.userInteractionEnabled = NO;
+        [vipBtn setBackgroundImage:[UIImage imageNamed:@"VIP_icon"] forState:UIControlStateNormal];
+        vipBtn.titleLabel.font = [UIFont boldSystemFontOfSize:11];
+        vipBtn.titleLabel.textColor = [UIColor whiteColor];
+        [vipBtn setTitle:@"VIP" forState:UIControlStateNormal];
+        [view addSubview:vipBtn];
+        
+        UILabel *vipLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(vipBtn.frame)+10, FY(vipBtn), 50, FH(vipBtn))];
+        vipLabel.font = [UIFont boldSystemFontOfSize:11];
+        vipLabel.textAlignment = NSTextAlignmentLeft;
+        vipLabel.backgroundColor = [UIColor clearColor];
+        vipLabel.textColor = [UIColor whiteColor];
+        vipLabel.text = @"VIP会员";
+        [view addSubview:vipLabel];
+    }
+    
+    
+    return view;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 180;
+    return 0;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 180)];
-    view.backgroundColor = [UIColor clearColor];
-
-    UIButton *headButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    headButton.frame = CGRectMake(CGRectGetWidth(view.frame)/2-25, 40, 50, 50);
-    headButton.layer.cornerRadius = 25;
-    [headButton setBackgroundImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
-    [view addSubview:headButton];
-    [headButton addTarget:self action:@selector(headButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(headButton.frame)+5, tableView.bounds.size.width, 20)];
-    nameLabel.text = [UD objectForKey:@"UserName"];
-    nameLabel.textColor = [UIColor whiteColor];
-    nameLabel.textAlignment = NSTextAlignmentCenter;
-    [view addSubview:nameLabel];
-    
-    return view;
+    return nil;
 }
 
 - (UIView *)setupTableFooter {
     UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 100)];
     footer.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
-    UIButton *settingBtn = [[UIButton alloc] initWithFrame:CGRectMake(30, 20, 50, 20)];
+    UIButton *settingBtn = [[UIButton alloc] initWithFrame:CGRectMake(40, 80, 50, 20)];
     [settingBtn setTitle:@"设置" forState:UIControlStateNormal];
     [settingBtn setImage:[UIImage imageNamed:@"my_setting"] forState:UIControlStateNormal];
     settingBtn.titleLabel.font = [UIFont systemFontOfSize:16.0f];
@@ -211,6 +244,23 @@
         [MBProgressHUD hideHUD];
     }];
     
+}
+
+- (void)addNotifications {
+    [NC addObserver:self selector:@selector(refreshPortrait:) name:@"refreshPortrait" object:nil];
+}
+
+- (void)refreshPortrait:(NSNotification *)noti {
+    NSString *portraitUrl = noti.object;
+    [_headerBtn sd_setImageWithURL:[NSURL URLWithString:portraitUrl] forState:UIControlStateNormal placeholderImage:nil];
+}
+
+- (void)removeNotifications {
+    [NC removeObserver:self];
+}
+
+- (void)dealloc {
+    [self removeNotifications];
 }
 
 @end

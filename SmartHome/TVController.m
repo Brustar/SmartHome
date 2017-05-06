@@ -84,6 +84,17 @@
 @property (nonatomic,strong) NSString *chooseImg;
 @property (nonatomic,strong) UIImage *chooseImage;
 
+@property (weak, nonatomic) IBOutlet UIButton *btnMenu;
+@property (weak, nonatomic) IBOutlet UIButton *btnUP;
+@property (weak, nonatomic) IBOutlet UIButton *btnLeft;
+@property (weak, nonatomic) IBOutlet UIButton *btnRight;
+@property (weak, nonatomic) IBOutlet UIButton *btnDown;
+@property (weak, nonatomic) IBOutlet UIButton *btnOK;
+
+@property (weak, nonatomic) IBOutlet UIButton *btnCHUP;
+@property (weak, nonatomic) IBOutlet UIButton *btnCHDown;
+@property (weak, nonatomic) IBOutlet UIButton *btnPower;
+
 @end
 
 @implementation TVController
@@ -133,7 +144,9 @@
 }
 
 - (IBAction)controlCmd:(id)sender {
-    long tag = ((UIButton *)sender).tag;
+    UIButton *btn =(UIButton *)sender;
+    long tag = btn.tag;
+    
     NSData *data=nil;
     DeviceInfo *device=[DeviceInfo defaultManager];
     switch (tag) {
@@ -159,7 +172,8 @@
             data=[device previous:self.deviceid];
             break;
         case 8:
-            data=[device toogle:0x01 deviceID:self.deviceid];
+            btn.selected = !btn.selected;
+            data=[device toogle:btn.selected deviceID:self.deviceid];
             break;
         case 9:
             data=[device next:self.deviceid];
@@ -168,6 +182,7 @@
         default:
             break;
     }
+    
 }
 
 - (void)viewDidLoad {
@@ -175,6 +190,20 @@
     
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 电视",roomName]];
+    
+    [self.btnMenu setImage:[UIImage imageNamed:@"TV_menu_red"] forState:UIControlStateHighlighted];
+    [self.btnUP setImage:[UIImage imageNamed:@"dir_up_red"]  forState:UIControlStateHighlighted];
+    [self.btnDown setImage:[UIImage imageNamed:@"dir_down_red"]  forState:UIControlStateHighlighted];
+    [self.btnLeft setImage:[UIImage imageNamed:@"dir_left_red"]  forState:UIControlStateHighlighted];
+    [self.btnRight setImage:[UIImage imageNamed:@"dir_right_red"]  forState:UIControlStateHighlighted];
+    [self.btnPower setImage:[UIImage imageNamed:@"TV_on"] forState:UIControlStateSelected];
+    
+    [self.btnOK setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
+    [self.btnCHUP setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
+    [self.btnCHDown setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
+    
+    
+    [self initSlider];
     [self initChannelContainer];
     self.eNumber = [SQLManager getENumber:[self.deviceid intValue]];
     self.volume.continuous = NO;
@@ -216,6 +245,13 @@
     
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
+}
+
+-(void) initSlider
+{
+    [self.volume setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
+    self.volume.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
+    self.volume.minimumTrackTintColor = [UIColor colorWithRed:253/255.0 green:254/255.0 blue:254/255.0 alpha:1];
 }
 
 -(void)initChannelContainer

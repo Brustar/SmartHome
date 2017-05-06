@@ -24,6 +24,14 @@ typedef NS_ENUM(NSUInteger, deviceType) {
     plugin = 41
 };
 
+typedef NS_ENUM(NSUInteger, catalog) {
+    cata_light = 1,
+    cata_env ,
+    cata_media ,
+    cata_single_product = 5,
+    cata_curtain = 7
+};
+
 @interface Device : NSObject
 
 @property (nonatomic,assign) int eID;
