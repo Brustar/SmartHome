@@ -110,6 +110,7 @@ static NSString *const airCellIdentifier = @"airCell";
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
     }
+    
     Aircon *device = [[Aircon alloc]init];
     [device setDeviceID:[self.deviceid intValue]];
     
@@ -143,7 +144,7 @@ static NSString *const airCellIdentifier = @"airCell";
     }
     
     if (tag==0) {
-        if (proto.action.state==0x7A) {
+        if (proto.action.state==0x6A) {
             self.showTemLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
         }
         if (proto.action.state==0x8A) {
@@ -156,10 +157,11 @@ static NSString *const airCellIdentifier = @"airCell";
             self.pmLabel.text = valueString;
             [self.pm_clock_hand rotate:30+proto.action.RValue*500/300];
         }
+        /*
         if (proto.action.state==0x7E) {
             NSString *valueString = [NSString stringWithFormat:@"%d db",proto.action.RValue];
             self.noiseLabel.text = valueString;
-        }
+        }*/
     }
 }
 - (IBAction)changeMode:(id)sender {
@@ -180,12 +182,12 @@ static NSString *const airCellIdentifier = @"airCell";
     
     if (self.currentMode == 1) {
         self.showTemLabel.textColor = [UIColor colorWithRed:215/255.0 green:57/255.0 blue:78/255.0 alpha:1.0];
-        self.airMode = self.currentMode;
+        self.airMode = !self.currentMode;
     }
     
     if (self.currentMode == 0){
         self.showTemLabel.textColor = [UIColor colorWithRed:33/255.0 green:119/255.0 blue:175/255.0 alpha:1.0];
-        self.airMode = self.currentMode;
+        self.airMode = !self.currentMode;
     }
     
     if (self.currentMode < 2){
@@ -199,9 +201,13 @@ static NSString *const airCellIdentifier = @"airCell";
     
     if (self.currentMode<1) {
         cmd = 0x39+self.currentMode;
+    }else if (self.currentMode>3){
+        cmd = 0x38;
     }else{
         cmd = 0x3F+self.currentMode;
     }
+    
+    
     if (![self.visitedBtns containsObject:sender]) {
         [self.visitedBtns addObject:sender];
     }
@@ -260,10 +266,6 @@ static NSString *const airCellIdentifier = @"airCell";
 
 - (void)changedCurrentTemperature:(CGFloat)currentValue {
     NSInteger value = round(currentValue);
-    
-    NSString *valueString = [NSString stringWithFormat:@"%d ℃", (int)value];
-    
-    self.showTemLabel.text = valueString;
     
     NSData *data=[[DeviceInfo defaultManager] changeTemperature:0x6A deviceID:self.deviceid value:value];
     SocketManager *sock=[SocketManager defaultManager];
@@ -353,7 +355,7 @@ static NSString *const airCellIdentifier = @"airCell";
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [self save:nil];
+    [self changedCurrentTemperature:[self.showTemLabel.text intValue]];
 }
 
 #pragma mark - YALContextMenuTableViewDelegate
