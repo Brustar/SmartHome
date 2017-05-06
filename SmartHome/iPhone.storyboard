@@ -1004,6 +1004,9 @@
                                             <constraint firstAttribute="height" constant="40" id="Sk6-yn-Ygv"/>
                                         </constraints>
                                         <state key="normal" backgroundImage="alarm clock1"/>
+                                        <connections>
+                                            <action selector="blockBtn:" destination="2FT-fL-R4c" eventType="touchUpInside" id="wly-5Q-leA"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1968,6 +1971,9 @@
                                         <state key="normal" title="柔和" image="lv_icon_light_soft">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="gentleBtn:" destination="emj-YL-Hpp" eventType="touchUpInside" id="jJN-60-Zc2"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEW-BX-OB2">
                                         <rect key="frame" x="128.5" y="0.0" width="118" height="60"/>
@@ -1975,6 +1981,9 @@
                                         <state key="normal" title="正常" image="lv_icon_light_normal">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="normalBtn:" destination="emj-YL-Hpp" eventType="touchUpInside" id="ayW-jK-HQs"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="86f-yD-Mu1">
                                         <rect key="frame" x="246.5" y="0.0" width="118.5" height="60"/>
@@ -1982,6 +1991,9 @@
                                         <state key="normal" title="明亮" image="lv_icon_light_bright">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="brightBtn:" destination="emj-YL-Hpp" eventType="touchUpInside" id="kcr-RC-pcG"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -5101,7 +5113,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="SoQ-mk-xSJ">
-                                <rect key="frame" x="0.0" y="9" width="375" height="650"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRm-1c-Wvw">
@@ -5172,7 +5184,7 @@
                                 <rect key="frame" x="0.0" y="548" width="375" height="80"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgU-YC-3GJ">
-                                        <rect key="frame" x="174" y="59" width="26" height="26"/>
+                                        <rect key="frame" x="176" y="52" width="22" height="38"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="22" id="ab9-cX-O3i"/>
@@ -6508,9 +6520,9 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="WeN-Qz-0Az"/>
-        <segue reference="Uo6-og-hnM"/>
         <segue reference="jfc-yL-NEI"/>
         <segue reference="qN8-z6-Gb7"/>
         <segue reference="b22-0A-WOg"/>
+        <segue reference="Uo6-og-hnM"/>
     </inferredMetricsTieBreakers>
 </document>

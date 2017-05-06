@@ -28,10 +28,16 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rc5-hL-egz">
                         <rect key="frame" x="8" y="60" width="119.5" height="30"/>
                         <state key="normal" image="UP"/>
+                        <connections>
+                            <action selector="upBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="YAa-9s-Q9w"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OFd-Kj-Hsb">
                         <rect key="frame" x="247.5" y="60" width="119.5" height="30"/>
                         <state key="normal" image="DOWN"/>
+                        <connections>
+                            <action selector="downBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="aE2-0B-6BR"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="幕布" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NBC-o1-qnC">
                         <rect key="frame" x="10" y="0.0" width="100" height="50"/>
@@ -52,8 +58,11 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xph-53-ijS">
                         <rect key="frame" x="127.5" y="60" width="120" height="30"/>
                         <state key="normal" image="icon3"/>
+                        <connections>
+                            <action selector="stopBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Wyq-FB-hGF"/>
+                        </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4sS-Gf-IUS">
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4sS-Gf-IUS">
                         <rect key="frame" x="260" y="7" width="55" height="35"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="55" id="Oh8-T7-gZU"/>

@@ -30,20 +30,17 @@
              Light *device=[[Light alloc] init];
      if (sender == self.NewLightPowerBtn) {
         self.NewLightPowerBtn.selected = !self.NewLightPowerBtn.selected;
+         
         if (self.NewLightPowerBtn.selected) {
             [self.NewLightPowerBtn setImage:[UIImage imageNamed:@"lv_icon_light_off"] forState:UIControlStateNormal];
+            self.NewLightSlider.value = 0;
         }else{
             [self.NewLightPowerBtn setImage:[UIImage imageNamed:@"lv_icon_light_on"] forState:UIControlStateSelected];
+            self.NewLightSlider.value = 1;
             NSData *data=[[DeviceInfo defaultManager] toogleLight:device.isPoweron deviceID:self.deviceid];
             SocketManager *sock=[SocketManager defaultManager];
             [sock.socket writeData:data withTimeout:1 tag:1];
-            BOOL isOn = device.isPoweron;
-            
-            if (isOn) {
-                self.NewLightSlider.value = 1;
-            } else {
-                self.NewLightSlider.value = 0;
-            }
+           
     
         }
     }else if (sender == self.AddLightBtn){
@@ -56,6 +53,11 @@
     }else if (sender == self.NewLightSlider){
         
     NSData *data=[[DeviceInfo defaultManager] changeBright:self.NewLightSlider.value*100 deviceID:self.deviceid];
+        if (self.NewLightSlider.value == 0) {
+            [self.NewLightPowerBtn setImage:[UIImage imageNamed:@"lv_icon_light_off"] forState:UIControlStateNormal];
+        }else{
+            [self.NewLightPowerBtn setImage:[UIImage imageNamed:@"lv_icon_light_on"] forState:UIControlStateNormal];
+        }
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
     }
@@ -71,12 +73,6 @@
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
     [_scene setDevices:devices];
     [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end

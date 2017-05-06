@@ -88,7 +88,7 @@
     self.tableView.tableFooterView = view;
     [self setupNaviBar];
     [self setControllerCell];
-  
+    self.tableView.allowsSelection = NO;
     NSLog(@"%@",_viewControllerArrs);
     
   
@@ -217,7 +217,7 @@
                 [_AirArray addObject:self.devices[i]];
             }else if (_htypeID == 21){//窗帘
                 [_CurtainArray addObject:self.devices[i]];
-            }else if (_htypeID == 0){//FM
+            }else if (_htypeID == 15){//FM
                 [_FMArray addObject:self.devices[i]];
             }else if (_htypeID == 12){//网路电视
                 [_TVArray addObject:self.devices[i]];

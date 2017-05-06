@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -335,36 +334,7 @@
                             </view>
                             <view hidden="YES" alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z8L-2W-XsO">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="frame1" translatesAutoresizingMaskIntoConstraints="NO" id="EhW-kh-lPq">
-                                        <rect key="frame" x="0.0" y="261.5" width="375" height="80"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="80" id="ZeE-VB-Ozh"/>
-                                        </constraints>
-                                    </imageView>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hHj-5N-aoj">
-                                        <rect key="frame" x="0.0" y="261" width="375" height="80"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="80" id="IfW-0W-zYf"/>
-                                        </constraints>
-                                        <connections>
-                                            <outlet property="dataSource" destination="pvp-cq-nWV" id="Nqd-yD-Qm6"/>
-                                            <outlet property="delegate" destination="pvp-cq-nWV" id="Ga4-gt-rr2"/>
-                                        </connections>
-                                    </tableView>
-                                </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="EhW-kh-lPq" secondAttribute="trailing" id="4zZ-jc-7QC"/>
-                                    <constraint firstItem="hHj-5N-aoj" firstAttribute="centerY" secondItem="z8L-2W-XsO" secondAttribute="centerY" id="5pY-vx-3W7"/>
-                                    <constraint firstItem="EhW-kh-lPq" firstAttribute="leading" secondItem="z8L-2W-XsO" secondAttribute="leading" id="6Ng-Mb-AdN"/>
-                                    <constraint firstItem="hHj-5N-aoj" firstAttribute="leading" secondItem="z8L-2W-XsO" secondAttribute="leading" id="HMF-OT-xAM"/>
-                                    <constraint firstAttribute="trailing" secondItem="hHj-5N-aoj" secondAttribute="trailing" id="Qzx-1w-2Do"/>
-                                    <constraint firstItem="EhW-kh-lPq" firstAttribute="centerX" secondItem="z8L-2W-XsO" secondAttribute="centerX" id="chk-jV-xoz"/>
-                                    <constraint firstItem="hHj-5N-aoj" firstAttribute="centerX" secondItem="z8L-2W-XsO" secondAttribute="centerX" id="guL-rK-p3Y"/>
-                                    <constraint firstItem="EhW-kh-lPq" firstAttribute="centerY" secondItem="z8L-2W-XsO" secondAttribute="centerY" id="qvU-rr-ctm"/>
-                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -401,6 +371,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="BtnView" destination="xVy-Qd-eEL" id="MH2-6g-xqO"/>
+                        <outlet property="CoverView" destination="z8L-2W-XsO" id="m51-vX-wWg"/>
                         <outlet property="DayLabelLeftConstraint" destination="89K-D1-KOH" id="OQf-C2-Lep"/>
                         <outlet property="DayLabelUpConstraint" destination="bjQ-Hb-rmC" id="WiR-ce-aYT"/>
                         <outlet property="HeadImageView" destination="TZv-R0-6cB" id="Mix-Jf-Z25"/>
@@ -427,7 +398,6 @@
                         <outlet property="playerBarBtn" destination="pPD-b2-xtb" id="QFy-b3-4KP"/>
                         <outlet property="socialView" destination="cWZ-EQ-wKU" id="b3i-Qy-vfC"/>
                         <outlet property="subView" destination="wLc-g5-vRN" id="PJ6-Yl-aUX"/>
-                        <outlet property="tableView" destination="hHj-5N-aoj" id="DeK-DF-82H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hqu-Mb-ya2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -585,7 +555,6 @@
         <image name="circular3" width="46" height="46"/>
         <image name="circular4" width="46" height="46"/>
         <image name="close_white" width="25" height="25"/>
-        <image name="frame1" width="375" height="67"/>
         <image name="line2" width="1" height="1"/>
         <image name="logo" width="180" height="180"/>
         <image name="music_white" width="22" height="19"/>

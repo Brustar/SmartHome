@@ -18,6 +18,9 @@
     [super awakeFromNib];
     // Initialization code
    
+    self.AireSlider.minimumValue = 16;
+    self.AireSlider.maximumValue = 30;
+    self.AireSlider.value = 1;
     [self.AireSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
     self.AireSlider.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
     self.AireSlider.minimumTrackTintColor = [UIColor colorWithRed:253/255.0 green:254/255.0 blue:254/255.0 alpha:1];
@@ -45,6 +48,10 @@
         }
     }else if (sender == self.AireSlider){
         
+        self.temperatureLabel.text = [NSString stringWithFormat:@"%ld°C", lroundf(self.AireSlider.value)];
+        NSData *data=[[DeviceInfo defaultManager] toogle:self.AireSlider.value  deviceID:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
     }
     
     Aircon *device=[[Aircon alloc] init];
