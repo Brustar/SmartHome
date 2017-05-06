@@ -59,7 +59,18 @@
     [_scene setDevices:devices];
     [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
 }
-
+//上一曲
+- (IBAction)Previous:(id)sender {
+    
+}
+//下一曲
+- (IBAction)nextBtn:(id)sender {
+    
+}
+//暂停
+- (IBAction)stopBtn:(id)sender {
+    
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

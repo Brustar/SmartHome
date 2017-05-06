@@ -1248,7 +1248,6 @@
     
     if([db open])
     {
-        
         NSString *sql = nil;
         DeviceInfo *device = [DeviceInfo defaultManager];
         if ([device.db isEqualToString:SMART_DB]) {

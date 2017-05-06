@@ -19,6 +19,17 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
+    [self.FMSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
+    self.FMSlider.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
+    self.FMSlider.minimumTrackTintColor = [UIColor colorWithRed:253/255.0 green:254/255.0 blue:254/255.0 alpha:1];
+    [self.FMChannelSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
+    //设置结点左边背景
+    UIImage *trackLeftImage = [[UIImage imageNamed:@"ss"]stretchableImageWithLeftCapWidth:14 topCapHeight:0];
+    [self.FMChannelSlider setMinimumTrackImage:trackLeftImage forState:UIControlStateNormal];
+    //设置结点右边背景
+    UIImage *trackRightImage = [[UIImage imageNamed:@"ss"]stretchableImageWithLeftCapWidth:14 topCapHeight:0];
+    [self.FMChannelSlider setMaximumTrackImage:trackRightImage forState:UIControlStateNormal];
     [self.AddFmBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.FMSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];//音量
     [self.FMChannelSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];//频道
@@ -37,11 +48,9 @@
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
         
-//        self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.FMSlider.value];
-        
     }else if (sender == self.FMChannelSlider){
         //频道
-        
+          self.FMChannelLabel.text = [NSString stringWithFormat:@"%.1fFM",80+self.FMChannelSlider.value*40];
     }
     
     Radio *device=[[Radio alloc] init];

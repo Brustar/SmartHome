@@ -62,8 +62,17 @@
     
     [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
 }
-
-- (IBAction)AddScreenCurtainBtn:(id)sender {
+//升
+- (IBAction)upBtn:(id)sender {
+    
+}
+//降
+- (IBAction)downBtn:(id)sender {
+    
+}
+//停
+- (IBAction)stopBtn:(id)sender {
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

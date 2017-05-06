@@ -46,6 +46,8 @@
     NSData *data=[[DeviceInfo defaultManager] changeBright:slider.value*100 deviceID:deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
+    
+    
     Light *device=[[Light alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setIsPoweron: self.Iphoneswitch.isOn];

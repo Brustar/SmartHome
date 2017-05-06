@@ -737,6 +737,28 @@
     }
 }
 
+//调节房间所有灯的氛围
+- (void)dimingRoomLights:(NSArray *)lightIDs brightness:(int)bright
+{
+    SocketManager *sock = [SocketManager defaultManager];
+    for (NSNumber *lightID in lightIDs) {
+        NSData *data=[[DeviceInfo defaultManager] changeBright:bright deviceID:[NSString stringWithFormat:@"%@", lightID]];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
+}
+
+- (void)sprightlyForRoomLights:(NSArray *)lightIDs {
+    [self dimingRoomLights:lightIDs brightness:90];
+}
+
+- (void)gloomForRoomLights:(NSArray *)lightIDs {
+    [self dimingRoomLights:lightIDs brightness:20];
+}
+
+- (void)romanticForRoomLights:(NSArray *)lightIDs {
+    [self dimingRoomLights:lightIDs brightness:50];
+}
+
 -(void) sprightly:(int)sceneid
 {
     [self dimingScene:sceneid brightness:90];

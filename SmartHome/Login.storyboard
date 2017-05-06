@@ -977,14 +977,16 @@
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="zFg-Si-cS8" secondAttribute="trailing" id="1Ma-3V-FjS"/>
-                                                <constraint firstItem="ERL-sI-r4b" firstAttribute="leading" secondItem="W1D-l6-hFR" secondAttribute="leading" id="JPZ-Cn-Io7"/>
                                                 <constraint firstItem="zFg-Si-cS8" firstAttribute="top" secondItem="W1D-l6-hFR" secondAttribute="top" id="YsL-cU-SId"/>
                                                 <constraint firstAttribute="bottom" secondItem="ERL-sI-r4b" secondAttribute="bottom" constant="0.5" id="kEv-F5-fjz"/>
-                                                <constraint firstItem="zFg-Si-cS8" firstAttribute="leading" secondItem="W1D-l6-hFR" secondAttribute="leading" id="ouL-a2-PDO"/>
-                                                <constraint firstAttribute="trailing" secondItem="ERL-sI-r4b" secondAttribute="trailing" id="wi0-SA-YTq"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <constraints>
+                                            <constraint firstItem="ERL-sI-r4b" firstAttribute="leading" secondItem="u0g-Vf-6yE" secondAttribute="leading" id="0K9-7W-68c"/>
+                                            <constraint firstAttribute="trailing" secondItem="ERL-sI-r4b" secondAttribute="trailing" id="B8L-hD-3pJ"/>
+                                            <constraint firstItem="zFg-Si-cS8" firstAttribute="leading" secondItem="u0g-Vf-6yE" secondAttribute="leading" id="Bpg-cG-A1w"/>
+                                            <constraint firstAttribute="trailing" secondItem="zFg-Si-cS8" secondAttribute="trailing" id="Gi6-ij-54L"/>
+                                        </constraints>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

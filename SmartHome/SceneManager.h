@@ -59,5 +59,13 @@
 //浪漫
 -(void) romanticRoom:(int)roomid;
 
+//调节房间所有灯的氛围
+- (void)dimingRoomLights:(NSArray *)lightIDs brightness:(int)bright;
+
+- (void)sprightlyForRoomLights:(NSArray *)lightIDs;
+
+- (void)gloomForRoomLights:(NSArray *)lightIDs;
+
+- (void)romanticForRoomLights:(NSArray *)lightIDs;
 
 @end

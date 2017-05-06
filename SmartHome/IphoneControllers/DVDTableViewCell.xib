@@ -65,10 +65,16 @@
                         <state key="normal" image="icon2">
                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="Previous:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="7y1-xY-C2e"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UYH-Br-BuW">
                         <rect key="frame" x="250.5" y="57" width="116.5" height="42.5"/>
                         <state key="normal" image="icon1"/>
+                        <connections>
+                            <action selector="nextBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ebs-xB-i98"/>
+                        </connections>
                     </button>
                     <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="OqP-ir-MRF">
                         <rect key="frame" x="307" y="9" width="42" height="40"/>
@@ -80,6 +86,9 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="75B-Ud-NQ6">
                         <rect key="frame" x="134.5" y="57" width="116" height="42.5"/>
                         <state key="normal" image="icon3"/>
+                        <connections>
+                            <action selector="stopBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="8SS-Fi-bUT"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYW-1Y-DcS">
                         <rect key="frame" x="260" y="7" width="55" height="35"/>

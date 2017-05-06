@@ -9,6 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "CustomViewController.h"
 
-@interface WeekdaysVC : CustomViewController
+@protocol WeekdaysVCDelegate;
+
+@interface WeekdaysVC : UIViewController
+
+@property (nonatomic, assign) id<WeekdaysVCDelegate>delegate;
+
+@end
+
+@protocol WeekdaysVCDelegate <NSObject>
+
+@optional
+
+-(void)onWeekButtonClicked:(UIButton *)button;
 
 @end
