@@ -313,9 +313,7 @@
             }
             break;
         case 2:
-            if (_SwitchLightArr.count == 0) {
                 view.hidden = YES;
-            }
             break;
         case 3:
             if (_AirArray.count == 0) {

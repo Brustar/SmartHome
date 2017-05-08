@@ -119,7 +119,7 @@
     NSDictionary *dic = [PrintObject getObjectData:sceneData];
     BOOL ret = [dic writeToFile:scenePath atomically:YES];
 
-//    NSAssert(ret,@"写文件失败");
+    NSAssert(ret,@"写文件失败");
 
 }
 

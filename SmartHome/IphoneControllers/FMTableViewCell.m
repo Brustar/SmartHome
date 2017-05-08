@@ -35,12 +35,14 @@
     [self.FMChannelSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];//频道
 }
 - (IBAction)save:(id)sender {
+    
     if (sender == self.AddFmBtn) {
         self.AddFmBtn.selected = !self.AddFmBtn.selected;
         if (self.AddFmBtn.selected) {
             [self.AddFmBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
         }else{
             [self.AddFmBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
+            
         }
     }else if (sender == self.FMSlider){
         //音量

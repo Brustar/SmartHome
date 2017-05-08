@@ -44,6 +44,7 @@
     
         }
     }else if (sender == self.AddLightBtn){
+        
         self.AddLightBtn.selected = !self.AddLightBtn.selected;
         if (self.AddLightBtn.selected) {
             [self.AddLightBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
