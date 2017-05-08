@@ -12,7 +12,7 @@
 @interface CustomViewController : UIViewController
 
 - (void)bringNaviBarToTopmost;
-
+- (void)naviToDevice;
 - (void)hideNaviBar:(BOOL)bIsHide;
 - (void)setNaviBarTitle:(NSString *)strTitle;
 - (void)setNaviBarLeftBtn:(UIButton *)btn;

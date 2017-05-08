@@ -1464,6 +1464,7 @@
     return lights;
 }
 
+//多媒体UI菜单
 +(NSArray *)mediaDeviceNamesByRoom:(int)roomID
 {
     NSMutableArray *devices = [NSMutableArray new];
@@ -1473,14 +1474,47 @@
     {
         NSString *sql;
         if ([self isWholeHouse:roomID]) {
-            sql = [NSString stringWithFormat:@"select typename from devices where subtypeid = 3 and htypeID<>14"];
+            sql = [NSString stringWithFormat:@"select id,typename,htypeid from devices where subtypeid = 3 and htypeID<>14"];
         }else{
-            sql = [NSString stringWithFormat:@"select typename from devices where subtypeid = 3 and htypeID<>14 and rid=%d",roomID];
+            sql = [NSString stringWithFormat:@"select id,typename,htypeid from devices where subtypeid = 3 and htypeID<>14 and rid=%d",roomID];
         }
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
-            [devices addObject:[resultSet stringForColumn:@"typename"]];
+            Device *device = [Device new];
+            device.typeName =[resultSet stringForColumn:@"typename"];
+            device.hTypeId = [[resultSet stringForColumn:@"hTypeId"] intValue];
+            device.eID = [[resultSet stringForColumn:@"Id"] intValue];
+            [devices addObject:device];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return devices;
+}
+
+//智能单品菜单
++(NSArray *)singleProductByRoom:(int)roomID
+{
+    NSMutableArray *devices = [NSMutableArray new];
+    
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        NSString *sql;
+        if ([self isWholeHouse:roomID]) {
+            sql = [NSString stringWithFormat:@"select id,name,htypeid from devices where subtypeid = 5"];
+        }else{
+            sql = [NSString stringWithFormat:@"select id,name,htypeid from devices where subtypeid = 5 and rid=%d",roomID];
+        }
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+            Device *device = [Device new];
+            device.typeName =[resultSet stringForColumn:@"name"];
+            device.hTypeId = [[resultSet stringForColumn:@"hTypeId"] intValue];
+            device.eID = [[resultSet stringForColumn:@"Id"] intValue];
+            [devices addObject:device];
         }
     }
     [db closeOpenResultSets];

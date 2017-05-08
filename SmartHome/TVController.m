@@ -26,6 +26,7 @@
 #import "UIImageView+WebCache.h"
 #import "IQKeyBoardManager.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
+#import "UIViewController+Navigator.h"
 
 @interface UIImagePickerController (LandScapeImagePicker)
 
@@ -187,7 +188,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 电视",roomName]];
     
@@ -204,6 +205,9 @@
     
     
     [self initSlider];
+    NSArray *menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
+    [self initMenuContainer:self.menuContainer andArray:menus andID:self.deviceid];
+    [self naviToDevice];
     [self initChannelContainer];
     self.eNumber = [SQLManager getENumber:[self.deviceid intValue]];
     self.volume.continuous = NO;
@@ -351,15 +355,7 @@
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([segue.identifier isEqualToString:@"detailSegue"])
-    {
-        id theSegue = segue.destinationViewController;
-        [theSegue setValue:@"1" forKey:@"deviceid"];
-    }else{
-        TVIconController *iconVC = segue.destinationViewController;
-        iconVC.delegate = self;
-    }
-    
+    [segue.destinationViewController setValue:@(self.roomID) forKey:@"roomID"];
 }
 
 - (IBAction)domute:(id)sender

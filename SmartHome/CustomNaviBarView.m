@@ -88,7 +88,6 @@
     return btn;
 }
 
-
 // 创建一个导航条按钮：自定义按钮图片。
 + (UIButton *)createImgNaviBarBtnByImgNormal:(NSString *)strImg imgHighlight:(NSString *)strImgHighlight target:(id)target action:(SEL)action
 {

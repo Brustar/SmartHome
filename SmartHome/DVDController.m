@@ -16,6 +16,7 @@
 #import "SQLManager.h"
 #import "PackManager.h"
 #import "Light.h"
+#import "UIViewController+Navigator.h"
 
 #define size 350
 @interface DVDController ()<UICollectionViewDelegate,UICollectionViewDataSource>
@@ -35,6 +36,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnRight;
 @property (weak, nonatomic) IBOutlet UIButton *btnDown;
 @property (weak, nonatomic) IBOutlet UIButton *btnOK;
+@property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnPrevoius;
 @property (weak, nonatomic) IBOutlet UIButton *btnNext;
@@ -65,11 +67,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - DVD",roomName]];
     [self initSlider];
-    
+    NSArray *menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
+    [self initMenuContainer:self.menuContainer andArray:menus andID:self.deviceid];
+    [self naviToDevice];
     
     [self.btnMenu setImage:[UIImage imageNamed:@"TV_menu_red"] forState:UIControlStateHighlighted];
     [self.btnUP setImage:[UIImage imageNamed:@"dir_up_red"]  forState:UIControlStateHighlighted];

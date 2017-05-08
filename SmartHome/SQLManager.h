@@ -67,6 +67,9 @@
 + (NSString *)getRoomNameByDeviceID:(int) deviceId;
 //多媒体UI菜单
 +(NSArray *)mediaDeviceNamesByRoom:(int)roomID;
+//智能单品菜单
++(NSArray *)singleProductByRoom:(int)roomID;
+
 + (NSArray *)getLightTypeNameWithRoomID:(NSInteger)roomID;
 + (NSArray *)getLightWithTypeName:(NSString *)typeName roomID:(NSInteger)roomID;
 

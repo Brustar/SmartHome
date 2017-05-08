@@ -13,13 +13,14 @@
 #import "Amplifier.h"
 #import "Scene.h"
 #import "SceneManager.h"
-
+#import "UIViewController+Navigator.h"
 
 @interface ScreenCurtainController ()
 
 @property (nonatomic,strong) NSMutableArray *screenCurtainNames;
 @property (nonatomic,strong) NSMutableArray *screenCurtainIds;
 @property (nonatomic,strong) DetailTableViewCell *cell;
+@property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
 
 @end
 
@@ -86,9 +87,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 幕布",roomName]];
+    
+    NSArray *menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
+    [self initMenuContainer:self.menuContainer andArray:menus andID:self.deviceid];
+    [self naviToDevice];
 }
 
 -(IBAction)save:(id)sender

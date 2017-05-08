@@ -17,6 +17,7 @@
 #import "HttpManager.h"
 #import "PackManager.h"
 #import "TVChannel.h"
+#import "UIViewController+Navigator.h"
 
 @interface FMController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate,UIGestureRecognizerDelegate,FMCollectionViewCellDelegate>
 
@@ -42,6 +43,7 @@
 @property (nonatomic,strong) FMCollectionViewCell *cell;
 @property (weak, nonatomic) IBOutlet UILabel *voiceValue;
 @property (weak, nonatomic) IBOutlet UIStackView *channelContainer;
+@property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
 
 @end
 
@@ -76,10 +78,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 收音机",roomName]];
     [self initSlider];
+    NSArray *menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
+    [self initMenuContainer:self.menuContainer andArray:menus andID:self.deviceid];
+    [self naviToDevice];
     [self initChannelContainer];
     
     self.hzLabel.transform = CGAffineTransformMakeRotation(M_PI/2 + M_PI);

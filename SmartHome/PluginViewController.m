@@ -8,7 +8,7 @@
 
 #import "PluginViewController.h"
 #import "SocketManager.h"
-//#import "AsyncUdpSocket.h"
+#import "UIViewController+Navigator.h"
 #import "PackManager.h"
 #import "PluginCell.h"
 #import "SQLManager.h"
@@ -24,6 +24,7 @@
 @property (nonatomic,strong) NSMutableArray *plugNames;
 @property (nonatomic,strong) NSMutableArray *plugDeviceIds;
 @property (nonatomic,strong) ORBSwitch *switcher;
+@property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
 
 @end
 
@@ -79,7 +80,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
+    NSArray *menus = [SQLManager singleProductByRoom:self.roomID];
+    [self initMenuContainer:self.menuContainer andArray:menus andID:self.deviceid];
+    [self naviToDevice];
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 智能插座",roomName]];
 //    [self initPlugin];

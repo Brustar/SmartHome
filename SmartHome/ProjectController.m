@@ -13,12 +13,14 @@
 #import "Scene.h"
 #import "SceneManager.h"
 #import "ORBSwitch.h"
+#import "UIViewController+Navigator.h"
 
 @interface ProjectController ()<ORBSwitchDelegate>
 
 @property (nonatomic,strong) NSMutableArray *projectNames;
 @property (nonatomic,strong) NSMutableArray *projectIds;
 @property (nonatomic,strong) ORBSwitch *switcher;
+@property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
 
 @end
 
@@ -68,11 +70,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 投影机",roomName]];
     [self initSwitcher];
     
+    NSArray *menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
+    [self initMenuContainer:self.menuContainer andArray:menus andID:self.deviceid];
+    [self naviToDevice];
     _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     if ([self.sceneid intValue]>0) {
         for(int i=0;i<[_scene.devices count];i++)
@@ -106,7 +111,9 @@
     Amplifier *device=[[Amplifier alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setWaiting: self.switcher.isOn];
-    
+    NSArray *menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
+    [self initMenuContainer:self.menuContainer andArray:menus andID:self.deviceid];
+    [self naviToDevice];
     
     [_scene setSceneID:[self.sceneid intValue]];
     [_scene setRoomID:self.roomID];
