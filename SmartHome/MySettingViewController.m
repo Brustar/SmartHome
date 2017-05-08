@@ -39,12 +39,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"设置";
+
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = [UIView new];
 //    self.tableView.backgroundColor =  [UIColor colorWithRed:241/255.0 green:240/255.0 blue:246/255.0 alpha:1];
+    [self setupNaviBar];
 }
-
+- (void)setupNaviBar {
+    
+    [self setNaviBarTitle:@"设置"]; //设置标题
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -77,7 +81,7 @@
     
     }else {
         if (section == 3) { // 场景快捷键，定时器，地址管理
-            return 3;
+            return 2;
         }
     }
     if (section ==2) {  //场景快捷键，定时器，地址管理
