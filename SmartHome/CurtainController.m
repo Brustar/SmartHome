@@ -13,9 +13,9 @@
 #import "SQLManager.h"
 
 @interface CurtainController ()<UITableViewDelegate,UITableViewDataSource>
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentCurtain;
-- (IBAction)selectedTypeOfCurtain:(UISegmentedControl *)sender;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *segmentTopConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewLeftConstraint;
