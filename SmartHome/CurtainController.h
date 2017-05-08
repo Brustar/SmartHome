@@ -13,7 +13,6 @@
 
 @interface CurtainController : CustomViewController
 
-@property (strong, nonatomic) IBOutlet CurtainTableViewCell *cell;
 @property (nonatomic, readonly) CustomNaviBarView *viewNaviBar;
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic,weak) NSString *deviceid;

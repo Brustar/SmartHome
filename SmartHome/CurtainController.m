@@ -13,9 +13,9 @@
 #import "SQLManager.h"
 
 @interface CurtainController ()<UITableViewDelegate,UITableViewDataSource>
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentCurtain;
-- (IBAction)selectedTypeOfCurtain:(UISegmentedControl *)sender;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *segmentTopConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewLeftConstraint;
@@ -78,19 +78,15 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [UIView new];
-    self.cell = [[[NSBundle mainBundle] loadNibNamed:@"CurtainTableViewCell" owner:self options:nil] lastObject];
-    self.cell.slider.continuous = NO;
-    [self.cell.slider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
-    [self.cell.open addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-    [self.cell.close addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     
-    //[self setupSegmentCurtain];
     _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+    
     if ([self.sceneid intValue] >0) {
         for(int i=0;i<[_scene.devices count];i++)
         {
             if ([[_scene.devices objectAtIndex:i] isKindOfClass:[Curtain class]]) {
-                self.cell.slider.value=((Curtain*)[_scene.devices objectAtIndex:i]).openvalue/100.0;
+                CurtainTableViewCell *cell = [self.tableView viewWithTag:((Curtain*)[_scene.devices objectAtIndex:i]).deviceID];
+                cell.slider.value=((Curtain*)[_scene.devices objectAtIndex:i]).openvalue/100.0;
             }
         }
     }
@@ -124,41 +120,40 @@
 
 -(IBAction)save:(id)sender
 {
-    if ([sender isEqual:self.cell.slider]) {
-        NSData *data=[[DeviceInfo defaultManager] roll:self.cell.slider.value * 100 deviceID:self.deviceid];
+    CurtainTableViewCell *cell = [self.tableView viewWithTag:[self.deviceid integerValue]];
+    if ([sender isEqual:cell.slider]) {
+        NSData *data=[[DeviceInfo defaultManager] roll:cell.slider.value * 100 deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
-        
-        
     }
     
-    if ([sender isEqual:self.cell.open]) {
-        self.cell.slider.value=1;
+    if ([sender isEqual:cell.open]) {
+        cell.slider.value=1;
         NSData *data=[[DeviceInfo defaultManager] open:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
-        self.cell.valueLabel.text = @"100%";
+        cell.valueLabel.text = @"100%";
 
     }
     
-    if ([sender isEqual:self.cell.close]) {
-        self.cell.slider.value=0;
+    if ([sender isEqual:cell.close]) {
+        cell.slider.value=0;
         NSData *data=[[DeviceInfo defaultManager] close:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
-        self.cell.valueLabel.text = @"0%";
+        cell.valueLabel.text = @"0%";
     }
     
     
     Curtain *device=[[Curtain alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
-    [device setOpenvalue:self.cell.slider.value * 100];
+    [device setOpenvalue:cell.slider.value * 100];
     
-    if ([sender isEqual:self.cell.open]) {
+    if ([sender isEqual:cell.open]) {
         [device setOpenvalue:100];
     }
     
-    if ([sender isEqual:self.cell.close]) {
+    if ([sender isEqual:cell.close]) {
         [device setOpenvalue:0];
     }
     
@@ -180,20 +175,22 @@
 {
     Proto proto=protocolFromData(data);
     
+    CurtainTableViewCell *cell = [self.tableView viewWithTag:proto.deviceID];
+    
     if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
         return;
     }
     //同步设备状态
     if(proto.cmd == 0x01){
-        self.cell.slider.value = proto.action.state;
+        cell.slider.value = proto.action.state;
     }
     
     if (tag==0 && (proto.action.state == 0x2A || proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON)) {
         NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
         if ([devID intValue]==[self.deviceid intValue]) {
-            self.cell.slider.value=proto.action.RValue/100.0;
+            cell.slider.value=proto.action.RValue/100.0;
             if (proto.action.state == PROTOCOL_ON) {
-                self.cell.slider.value=1;
+                cell.slider.value=1;
             }
         }
     }
@@ -214,28 +211,12 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.label.text = [self.curNames objectAtIndex:indexPath.row];
     cell.deviceid = [self.curtainIDArr objectAtIndex:indexPath.row];
+    cell.tag = [cell.deviceid integerValue];
     cell.AddcurtainBtn.hidden = YES;
     cell.curtainContraint.constant = 10;
     return cell;
-    
-    
-    /*static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
-        
-    }
-    cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 23, 100, 30)];
-    [cell.contentView addSubview:label];
-    label.text = @"详细信息";*/
-    
-    //return cell;
-  
-    
 }
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 100;
@@ -248,11 +229,6 @@
 //    {
 //        [self performSegueWithIdentifier:@"detail" sender:self];
 //    }
-}
-
-- (IBAction)selectedTypeOfCurtain:(UISegmentedControl *)sender {
-    self.cell.label.text = self.curNames[sender.selectedSegmentIndex];
-    self.deviceid=[self.curtainIDArr objectAtIndex:self.segmentCurtain.selectedSegmentIndex];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
