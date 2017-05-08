@@ -403,7 +403,6 @@
                         <outlet property="pm_clock_hand" destination="FVV-L9-XEE" id="BiQ-Lf-EUq"/>
                         <outlet property="showTemLabel" destination="P7g-WJ-v7Q" id="bF9-2x-PD9"/>
                         <outlet property="switcher" destination="GeX-Ow-7B7" id="Ohi-FQ-UhV"/>
-                        <outlet property="tempretureLbl" destination="P7g-WJ-v7Q" id="ztZ-im-YZV"/>
                         <outlet property="tempreturePan" destination="lRp-H9-4uS" id="2RK-4R-2Va"/>
                         <outlet property="wetLabel" destination="nvL-WE-vqh" id="zcG-ok-1pA"/>
                     </connections>
@@ -508,7 +507,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="OK">
-                                    <color key="titleColor" red="0.15180939331390847" green="0.19146472299959341" blue="0.71257276976774186" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="controlCmd:" destination="ZhE-q2-gFO" eventType="touchUpInside" id="N2s-S4-mxP"/>
@@ -700,7 +699,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UIl-39-dXr" userLabel="Button-left">
-                                <rect key="frame" x="0.0" y="64" width="107" height="39"/>
+                                <rect key="frame" x="0.0" y="64" width="106.5" height="39"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="射灯" backgroundImage="light_bar"/>
                                 <connections>
@@ -708,7 +707,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DoF-Wk-GOP">
-                                <rect key="frame" x="107" y="64" width="106" height="39"/>
+                                <rect key="frame" x="106.5" y="64" width="107" height="39"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="灯带" backgroundImage="light_bar"/>
                                 <connections>
@@ -716,7 +715,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QGa-1P-CGE" userLabel="Button-right">
-                                <rect key="frame" x="213" y="64" width="107" height="39"/>
+                                <rect key="frame" x="213.5" y="64" width="106.5" height="39"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="调色灯带" backgroundImage="light_bar"/>
                                 <connections>
