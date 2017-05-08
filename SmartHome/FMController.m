@@ -37,6 +37,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *hzLabel;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageController;
 @property (nonatomic,strong) NSString *eNumber;
+@property (weak, nonatomic) IBOutlet UIButton *power;
 
 @property (nonatomic,strong) FMCollectionViewCell *cell;
 @property (weak, nonatomic) IBOutlet UILabel *voiceValue;
@@ -83,6 +84,7 @@
     
     self.hzLabel.transform = CGAffineTransformMakeRotation(M_PI/2 + M_PI);
     self.collectionView.pagingEnabled = YES;
+    [self.power setImage:[UIImage imageNamed:@"TV_on"] forState:UIControlStateSelected];
     
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
@@ -143,7 +145,37 @@
 
 - (IBAction)adjustFrequence:(id)sender {
     UISlider *slider = (UISlider *)sender;
-    self.numberOfChannel.text = [NSString stringWithFormat:@"%.1fFM",80+slider.value*40];
+    float frequence = 80+slider.value*40;
+    self.numberOfChannel.text = [NSString stringWithFormat:@"%.1fFM",frequence];
+    int dec = (int)((frequence - (int)frequence)*10);
+    NSData *data=[[DeviceInfo defaultManager] switchFMProgram:(int)frequence dec:dec deviceID:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
+- (IBAction)control:(id)sender {
+    UIButton *btn = (UIButton *)sender;
+    NSData *data;
+    SocketManager *sock=[SocketManager defaultManager];
+    switch (btn.tag) {
+        case 0:
+            data = [[DeviceInfo defaultManager] previous:self.deviceid];
+            break;
+        case 1:
+            btn.selected = !btn.selected;
+            if (btn.selected) {
+                data = [[DeviceInfo defaultManager] open:self.deviceid];
+            }else{
+                data = [[DeviceInfo defaultManager] close:self.deviceid];
+            }
+            break;
+        case 2:
+            data = [[DeviceInfo defaultManager] next:self.deviceid];
+            break;
+        default:
+            break;
+    }
+    [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
 - (void)didReceiveMemoryWarning {

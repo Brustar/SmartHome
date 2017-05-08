@@ -115,7 +115,7 @@ static NSString * const CYPhotoId = @"photo";
 }
 
 - (void)rightBtnClicked:(UIButton *)btn {
-    //[self performSegueWithIdentifier:@"DVD" sender:self];
+    //[self performSegueWithIdentifier:@"FM" sender:self];
     
     UIStoryboard * HomeStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
     if (_nowMusicController == nil) {
