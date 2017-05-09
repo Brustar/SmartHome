@@ -319,7 +319,7 @@
     }
     
     self.chatlabel.text =[NSString stringWithFormat:@"%@ : %@" , nickname, tip];
-    [self.IconeImageView badge];
+//    [self.IconeImageView badge];
 }
 
 - (void)getScenesFromPlist

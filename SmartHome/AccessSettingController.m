@@ -89,6 +89,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"权限控制";
+    [self setNaviBarTitle:@"权限控制"];
     self.automaticallyAdjustsScrollViewInsets = NO;
 //    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
 //    self.navigationItem.leftBarButtonItem = returnItem;
@@ -498,7 +499,6 @@
 //    //[self.view removeFromSuperview];
 //    [self.navigationController popViewControllerAnimated:NO];
 //}
-
 
 
 
