@@ -16,9 +16,9 @@
 #import "Plugin.h"
 #import "ORBSwitch.h"
 
-@interface PluginViewController ()<UITableViewDelegate,UITableViewDataSource,ORBSwitchDelegate>
+@interface PluginViewController ()<ORBSwitchDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+//@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
 @property (nonatomic,strong) PluginCell *cell;
 @property (nonatomic,strong) NSMutableArray *plugNames;
@@ -201,7 +201,7 @@
         //NSData *macAddr=[data subdataWithRange:NSMakeRange(11+11*i, 2)];
         [self.devices addObject:addr];//[NSString stringWithFormat:@"%ld",[PackManager NSDataToUInt:addr] ]];
     }
-    [self.tableView reloadData];
+    //[self.tableView reloadData];
 }
 /*
 -(IBAction)switchHomekitDevice:(id)sender
@@ -244,13 +244,6 @@
 
 -(IBAction)save:(id)sender
 {
-
-    if ([sender isEqual:self.switcher]) {
-        NSData *data=[[DeviceInfo defaultManager] toogle:self.switcher.isOn deviceID:self.deviceid];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:1];
-    }
-
     Plugin *device=[[Plugin alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setSwitchon: self.switcher.isOn];
@@ -292,68 +285,15 @@
     
 }
 
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 2;
-    
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if(indexPath.row == 0 && [self.plugNames count]>0)
-    {
-        static NSString *CellIdentifier = @"PluginCell";
-        PluginCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-        self.cell = cell;
-        cell.label.text = self.plugNames[self.segment.selectedSegmentIndex];
-        self.switchView = cell.power;
-        _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
-        if ([self.sceneid intValue]>0) {
-            for(int i=0;i<[_scene.devices count];i++)
-            {
-                if ([[_scene.devices objectAtIndex:i] isKindOfClass:[Plugin class]]) {
-                    cell.power.on=((Plugin *)[_scene.devices objectAtIndex:i]).switchon;
-                }
-            }
-        }
-        [cell.power addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
-        return  cell;
-    }else{
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"recell"];
-        if(!cell)
-        {
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"recell"];
-            
-        }
-        
-        cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20, 5, 100, 30)];
-        [cell.contentView addSubview:label];
-        label.text = @"详细信息";
-        return cell;
-
-    }
-   
-}
-
 - (IBAction)selectedSingProduct:(UISegmentedControl *)sender {
     
      UISegmentedControl *segment = (UISegmentedControl*)sender;
     self.cell.label.text = self.plugNames[segment.selectedSegmentIndex];
     self.deviceid = [self.plugDeviceIds objectAtIndex: self.segment.selectedSegmentIndex];
-    [self.tableView reloadData];
+    //[self.tableView reloadData];
 
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if(indexPath.row == 1)
-    {
-        [self performSegueWithIdentifier:@"detail" sender:self];
-    }
-}
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
@@ -374,7 +314,9 @@
 #pragma mark - ORBSwitchDelegate
 - (void)orbSwitchToggled:(ORBSwitch *)switchObj withNewValue:(BOOL)newValue {
     NSLog(@"Switch toggled: new state is %@", (newValue) ? @"ON" : @"OFF");
-    [self save:self.switcher];
+    NSData *data=[[DeviceInfo defaultManager] toogle:self.switcher.isOn deviceID:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
 - (void)orbSwitchToggleAnimationFinished:(ORBSwitch *)switchObj {

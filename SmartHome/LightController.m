@@ -54,7 +54,16 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     [colorPicker setColorHasChanged:^(UIColor *color, CGPoint location) {
         NSLog(@"%@",color);
         [self.base setBackgroundColor:color];
-        [self save:self.base];
+        
+        NSDictionary *colorDic = [self getRGBDictionaryByColor:color];
+        int r = [colorDic[@"R"] floatValue] * 255;
+        int g = [colorDic[@"G"] floatValue] * 255;
+        int b = [colorDic[@"B"] floatValue] * 255;
+        
+        NSData *data=[[DeviceInfo defaultManager] changeColor:self.deviceid R:r G:g B:b];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:3];
+        
         [view dismiss];
     }];
     
@@ -212,31 +221,6 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 {
     NSString *etype = [SQLManager getEType:[self.deviceid intValue]];
     
-    if ([sender isEqual:self.switcher]) {
-        NSData *data=[[DeviceInfo defaultManager] toogleLight:self.switcher.isOn deviceID:self.deviceid];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:1];
-    }
-    if (![etype isEqualToString:@"01"] && [sender isEqual:self.tranformView]) {
-        //self.detailCell.power.on = self.detailCell.bright.value >0;
-        
-        NSData *data=[[DeviceInfo defaultManager] changeBright:self.tranformView.tag deviceID:self.deviceid];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:2];
-    }
-    
-    if ([etype isEqualToString:@"03"] && [sender isEqual:self.base]) {
-        UIColor *color = self.base.backgroundColor;
-        NSDictionary *colorDic = [self getRGBDictionaryByColor:color];
-        int r = [colorDic[@"R"] floatValue] * 255;
-        int g = [colorDic[@"G"] floatValue] * 255;
-        int b = [colorDic[@"B"] floatValue] * 255;
-
-        NSData *data=[[DeviceInfo defaultManager] changeColor:self.deviceid R:r G:g B:b];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:3];
-    }
-    
     Light *device=[[Light alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setIsPoweron: self.switcher.isOn];
@@ -310,13 +294,6 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     //返回保存RGB值的数组
     return RGBStrValueArr;
 }
-
-- (void)setSelectedColor:(UIColor *)color
-{
-    self.base.backgroundColor = color;
-    [self save:nil];
-}
-
 
 - (IBAction)selectTypeOfLight:(UISegmentedControl *)sender {
     
@@ -421,7 +398,10 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     int percent = degree*100/MAX_ROTATE_DEGREE;
     NSLog(@"percent:%d",percent);
     self.tranformView.tag = percent;
-    [self save:self.tranformView];
+    
+    NSData *data=[[DeviceInfo defaultManager] changeBright:self.tranformView.tag deviceID:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:2];
 }
 
 -(void) initSwitch
@@ -447,7 +427,9 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 #pragma mark - ORBSwitchDelegate
 - (void)orbSwitchToggled:(ORBSwitch *)switchObj withNewValue:(BOOL)newValue {
     NSLog(@"Switch toggled: new state is %@", (newValue) ? @"ON" : @"OFF");
-    [self save:self.switcher];
+    NSData *data=[[DeviceInfo defaultManager] toogleLight:self.switcher.isOn deviceID:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
 - (void)orbSwitchToggleAnimationFinished:(ORBSwitch *)switchObj {

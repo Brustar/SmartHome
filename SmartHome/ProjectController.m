@@ -104,11 +104,6 @@
 
 -(IBAction)save:(id)sender
 {
-    if ([sender isEqual:self.switcher]) {
-        NSData *data=[[DeviceInfo defaultManager] toogle:self.switcher.isOn deviceID:self.deviceid];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:1];
-    }
     Amplifier *device=[[Amplifier alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setWaiting: self.switcher.isOn];
@@ -141,7 +136,9 @@
 #pragma mark - ORBSwitchDelegate
 - (void)orbSwitchToggled:(ORBSwitch *)switchObj withNewValue:(BOOL)newValue {
     NSLog(@"Switch toggled: new state is %@", (newValue) ? @"ON" : @"OFF");
-    [self save:self.switcher];
+    NSData *data=[[DeviceInfo defaultManager] toogle:self.switcher.isOn deviceID:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
 - (void)orbSwitchToggleAnimationFinished:(ORBSwitch *)switchObj {

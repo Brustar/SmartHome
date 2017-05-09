@@ -26,8 +26,6 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIView *touchpad;
 @property (nonatomic,strong) NSArray *dvImages;
-@property (weak, nonatomic) IBOutlet UILabel *voiceValue;
-
 
 @property (weak, nonatomic) IBOutlet UIButton *btnMenu;
 @property (weak, nonatomic) IBOutlet UIButton *btnPop;
@@ -90,7 +88,7 @@
     
     
     self.volume.continuous = NO;
-    [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
+    [self.volume addTarget:self action:@selector(changeVolume) forControlEvents:UIControlEventValueChanged];
     
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
@@ -177,16 +175,15 @@
     self.rightViewWidth.constant = size;
 }
 
+-(void) changeVolume
+{
+    NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volume.value*100 deviceID:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
 -(IBAction)save:(id)sender
 {
-    if ([sender isEqual:self.volume]) {
-        NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volume.value*100 deviceID:self.deviceid];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:1];
-        
-        self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
-    }
-    
     DVD *device=[[DVD alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setDvolume:self.volume.value*100];
@@ -199,7 +196,6 @@
     [_scene setDevices:devices];
     
     [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
-    
 }
 
 

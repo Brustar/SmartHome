@@ -44,7 +44,7 @@
             }
         }else if(self.roomID)
         {
-            [_windowSlidIds addObjectsFromArray:[SQLManager getDeviceByTypeName:windowType andRoomID:self.roomID]];
+            [_windowSlidIds addObject:[SQLManager singleDeviceWithCatalogID:windowOpener byRoom:self.roomID]];
         }else{
             if (self.deviceid) {
             [_windowSlidIds addObject:self.deviceid];
@@ -68,6 +68,7 @@
     }
     return _windowSlidNames;
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = windowType;
@@ -75,6 +76,7 @@
     [self setupSegmentWindowSlid];
     _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
 }
+
 -(void)setupSegmentWindowSlid
 {
     if(self.windowSlidNames == nil || self.windowSlidNames.count == 0)
@@ -106,7 +108,7 @@
     [_scene setReadonly:NO];
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
     [_scene setDevices:devices];
-    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+    //[[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
     
 }
 
