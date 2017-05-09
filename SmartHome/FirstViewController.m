@@ -19,12 +19,13 @@
 #import <AVFoundation/AVFoundation.h>
 #import "SceneShortcutsViewController.h"
 #import "TabbarPanel.h"
-#import "UIImageView+Badge.h"
+
 #import <RongIMKit/RongIMKit.h>
 #import "ConversationViewController.h"
 #import <RBStoryboardLink.h>
 #import "IOManager.h"
 #import "NowMusicController.h"
+#import "UIImageView+WebCache.h"
 
 @interface FirstViewController ()<RCIMReceiveMessageDelegate,HttpDelegate,TcpRecvDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView * SubImageView;//首页的日历大圆
@@ -313,6 +314,7 @@
 - (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left
 {
     NSString *nickname = [SQLManager queryChat:message.senderUserId][0];
+    NSString *protrait = [SQLManager queryChat:message.senderUserId][1];
     int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
     NSString *tip=@"您有新消息";
     if ([message.objectName isEqualToString:RCTextMessageTypeIdentifier]) {
@@ -322,7 +324,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         self.chatlabel.text =[NSString stringWithFormat:@"%@ : %@" , nickname, tip];
         self.numberLabel.text = [NSString stringWithFormat:@"%d" ,unread];
-        //[self.IconeImageView badge];
+        [self.IconeImageView sd_setImageWithURL:[NSURL URLWithString:protrait] placeholderImage:[UIImage imageNamed:@"logo"] options:SDWebImageRetryFailed];
     });
 }
 
