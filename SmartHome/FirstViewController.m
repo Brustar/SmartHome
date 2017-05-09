@@ -316,6 +316,7 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         self.chatlabel.text =[NSString stringWithFormat:@"%@ : %@" , nickname, tip];
+        self.numberLabel.text = [NSString stringWithFormat:@"%d" ,unread];
         [self.IconeImageView badge];
     });
 }
