@@ -78,7 +78,10 @@
     _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     _baseTabbarController.tabbarPanel.hidden = NO;
     _baseTabbarController.tabBar.hidden = YES;
-       [self setBtn];
+    [self setBtn];
+    
+    int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
+    self.numberLabel.text = [NSString stringWithFormat:@"%d" ,unread];
 
 }
 - (void)viewDidAppear:(BOOL)animated {
@@ -319,7 +322,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         self.chatlabel.text =[NSString stringWithFormat:@"%@ : %@" , nickname, tip];
         self.numberLabel.text = [NSString stringWithFormat:@"%d" ,unread];
-        [self.IconeImageView badge];
+        //[self.IconeImageView badge];
     });
 }
 
