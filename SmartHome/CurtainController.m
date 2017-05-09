@@ -140,16 +140,13 @@
     if (btn.selected) {
         slider.value=1;
         [btn setImage:[UIImage imageNamed:@"bd_icon_wd_off"] forState:UIControlStateNormal];
-        NSData *data=[[DeviceInfo defaultManager] open:deviceid];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:2];
     }else{
         slider.value=0;
         [btn setImage:[UIImage imageNamed:@"bd_icon_wd_on"] forState:UIControlStateNormal];
-        NSData *data=[[DeviceInfo defaultManager] close:deviceid];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:2];
     }
+    SocketManager *sock=[SocketManager defaultManager];
+    NSData *data=[[DeviceInfo defaultManager] toogle:btn.selected deviceID:deviceid];
+    [sock.socket writeData:data withTimeout:1 tag:2];
 }
 
 -(IBAction)save:(id)sender
@@ -215,8 +212,8 @@
 {
     CurtainTableViewCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"CurtainTableViewCell" owner:self options:nil] lastObject];
      cell.slider.continuous = NO;
-    [cell.slider addTarget:self action:@selector(changeCurtain:) forControlEvents:UIControlEventValueChanged];
-    [cell.open addTarget:self action:@selector(toggleCurtain:) forControlEvents:UIControlEventTouchUpInside];
+    //[cell.slider addTarget:self action:@selector(changeCurtain:) forControlEvents:UIControlEventValueChanged];
+    //[cell.open addTarget:self action:@selector(toggleCurtain:) forControlEvents:UIControlEventTouchUpInside];
 
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
