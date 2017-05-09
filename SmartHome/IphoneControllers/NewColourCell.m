@@ -21,7 +21,13 @@
     [self.colourSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
     self.colourSlider.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
     self.colourSlider.minimumTrackTintColor = [UIColor colorWithRed:253/255.0 green:254/255.0 blue:254/255.0 alpha:1];
-
+//    self.colourSlider.layer.borderWidth = 3;
+    //设置结点左边背景
+    UIImage *trackLeftImage = [[UIImage imageNamed:@"corSlider"]stretchableImageWithLeftCapWidth:14 topCapHeight:0];
+    [self.colourSlider setMinimumTrackImage:trackLeftImage forState:UIControlStateNormal];
+    //设置结点右边背景
+    UIImage *trackRightImage = [[UIImage imageNamed:@"corSlider"]stretchableImageWithLeftCapWidth:14 topCapHeight:0];
+    [self.colourSlider setMaximumTrackImage:trackRightImage forState:UIControlStateNormal];
     [self.AddColourLightBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.colourBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.colourSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
@@ -50,7 +56,7 @@
     Light *device=[[Light alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setIsPoweron:device.isPoweron];
-    
+    [device setColor:@[]];
     [_scene setSceneID:[self.sceneid intValue]];
     [_scene setRoomID:self.roomID];
     [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];

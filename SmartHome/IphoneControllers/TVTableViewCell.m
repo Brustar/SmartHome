@@ -66,11 +66,16 @@
 }
 //频道减
 - (IBAction)channelReduce:(id)sender {
+    NSData *data=nil;
+    DeviceInfo *device=[DeviceInfo defaultManager];
     
+    data=[device previous:self.deviceid];
 }
 //频道加
 - (IBAction)channelAdd:(id)sender {
-    
+    NSData *data=nil;
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    data = [device next:self.deviceid];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -26,15 +26,17 @@
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rc5-hL-egz">
-                        <rect key="frame" x="8" y="60" width="119.5" height="30"/>
-                        <state key="normal" image="UP"/>
+                        <rect key="frame" x="10" y="56" width="105" height="41.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <state key="normal" title="up" backgroundImage="dvd_btn_adjust_normal"/>
                         <connections>
                             <action selector="upBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="YAa-9s-Q9w"/>
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OFd-Kj-Hsb">
-                        <rect key="frame" x="247.5" y="60" width="119.5" height="30"/>
-                        <state key="normal" image="DOWN"/>
+                        <rect key="frame" x="260" y="56" width="105" height="41.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <state key="normal" title="down" backgroundImage="dvd_btn_adjust_normal"/>
                         <connections>
                             <action selector="downBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="aE2-0B-6BR"/>
                         </connections>
@@ -56,8 +58,8 @@
                         </constraints>
                     </switch>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xph-53-ijS">
-                        <rect key="frame" x="127.5" y="60" width="120" height="30"/>
-                        <state key="normal" image="icon3"/>
+                        <rect key="frame" x="135" y="56" width="105" height="41.5"/>
+                        <state key="normal" image="DVD_pause" backgroundImage="dvd_btn_adjust_normal"/>
                         <connections>
                             <action selector="stopBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Wyq-FB-hGF"/>
                         </connections>
@@ -81,30 +83,31 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="7Xt-cI-2iu" secondAttribute="trailing" constant="10" id="11O-yH-c3H"/>
-                    <constraint firstItem="rc5-hL-egz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="52" id="1m4-yj-lyF"/>
-                    <constraint firstItem="OFd-Kj-Hsb" firstAttribute="leading" secondItem="Xph-53-ijS" secondAttribute="trailing" id="2Hj-ln-llr"/>
-                    <constraint firstItem="rc5-hL-egz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="2td-5d-sDt"/>
-                    <constraint firstItem="Xph-53-ijS" firstAttribute="height" secondItem="rc5-hL-egz" secondAttribute="height" id="6sw-VA-NNy"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="Xph-53-ijS" secondAttribute="bottom" constant="1.5" id="8kE-A3-ovv"/>
+                    <constraint firstItem="OFd-Kj-Hsb" firstAttribute="width" secondItem="rc5-hL-egz" secondAttribute="width" id="4gA-ns-MBj"/>
                     <constraint firstAttribute="bottom" secondItem="dHx-cQ-8iB" secondAttribute="bottom" id="AYr-TD-74t"/>
                     <constraint firstItem="NBC-o1-qnC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Ctk-8G-Sqx"/>
                     <constraint firstItem="NBC-o1-qnC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="E3s-hX-0XQ"/>
-                    <constraint firstItem="Xph-53-ijS" firstAttribute="width" secondItem="rc5-hL-egz" secondAttribute="width" id="Ffz-at-zwr"/>
+                    <constraint firstItem="OFd-Kj-Hsb" firstAttribute="leading" secondItem="Xph-53-ijS" secondAttribute="trailing" constant="20" id="EcQ-3h-jbn"/>
                     <constraint firstItem="7Xt-cI-2iu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="GFF-dL-GYU"/>
-                    <constraint firstItem="Xph-53-ijS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="52" id="Gbv-2C-1lh"/>
-                    <constraint firstItem="OFd-Kj-Hsb" firstAttribute="width" secondItem="rc5-hL-egz" secondAttribute="width" id="SOZ-n5-fng"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="OFd-Kj-Hsb" secondAttribute="bottom" constant="1.5" id="WIo-bQ-Ddv"/>
+                    <constraint firstItem="OFd-Kj-Hsb" firstAttribute="height" secondItem="rc5-hL-egz" secondAttribute="height" id="LJA-P2-geR"/>
+                    <constraint firstItem="Xph-53-ijS" firstAttribute="leading" secondItem="rc5-hL-egz" secondAttribute="trailing" constant="20" id="NHv-DN-4Bv"/>
+                    <constraint firstItem="OFd-Kj-Hsb" firstAttribute="bottom" secondItem="rc5-hL-egz" secondAttribute="bottom" id="RRL-zV-oU3"/>
+                    <constraint firstAttribute="bottom" secondItem="rc5-hL-egz" secondAttribute="bottom" constant="2" id="YZo-lg-jjC"/>
+                    <constraint firstItem="Xph-53-ijS" firstAttribute="bottom" secondItem="rc5-hL-egz" secondAttribute="bottom" id="ZS7-t8-dbB"/>
                     <constraint firstAttribute="trailingMargin" secondItem="D4k-av-6ph" secondAttribute="trailing" constant="20" id="aLV-vs-Sfg"/>
-                    <constraint firstItem="OFd-Kj-Hsb" firstAttribute="height" secondItem="rc5-hL-egz" secondAttribute="height" id="bvi-vc-2mo"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="OFd-Kj-Hsb" secondAttribute="trailing" id="c8v-aC-hdJ"/>
                     <constraint firstAttribute="trailing" secondItem="dHx-cQ-8iB" secondAttribute="trailing" id="cSC-z1-Vw5"/>
                     <constraint firstAttribute="trailing" secondItem="4sS-Gf-IUS" secondAttribute="trailing" constant="60" id="clr-3g-Eds"/>
                     <constraint firstItem="4sS-Gf-IUS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="dGW-P3-Xd9"/>
                     <constraint firstItem="dHx-cQ-8iB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="e80-iw-iAB"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="rc5-hL-egz" secondAttribute="bottom" constant="1.5" id="gL4-hT-wNX"/>
-                    <constraint firstItem="Xph-53-ijS" firstAttribute="leading" secondItem="rc5-hL-egz" secondAttribute="trailing" id="gWk-GK-12z"/>
+                    <constraint firstItem="rc5-hL-egz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="hVI-FE-bRH"/>
+                    <constraint firstItem="Xph-53-ijS" firstAttribute="height" secondItem="rc5-hL-egz" secondAttribute="height" id="lCf-sY-gzV"/>
+                    <constraint firstItem="rc5-hL-egz" firstAttribute="top" secondItem="NBC-o1-qnC" secondAttribute="bottom" constant="6" id="mAY-oG-fnX"/>
+                    <constraint firstItem="OFd-Kj-Hsb" firstAttribute="top" secondItem="rc5-hL-egz" secondAttribute="top" id="oaT-r9-zok"/>
+                    <constraint firstAttribute="trailing" secondItem="OFd-Kj-Hsb" secondAttribute="trailing" constant="10" id="qJG-9R-yff"/>
+                    <constraint firstItem="Xph-53-ijS" firstAttribute="width" secondItem="rc5-hL-egz" secondAttribute="width" id="sG4-GO-sQu"/>
                     <constraint firstItem="dHx-cQ-8iB" firstAttribute="top" secondItem="D4k-av-6ph" secondAttribute="bottom" constant="3" id="v07-SX-yKq"/>
                     <constraint firstItem="dHx-cQ-8iB" firstAttribute="top" secondItem="NBC-o1-qnC" secondAttribute="bottom" id="wbQ-Og-a4y"/>
+                    <constraint firstItem="Xph-53-ijS" firstAttribute="top" secondItem="rc5-hL-egz" secondAttribute="top" id="xt2-Ns-K57"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -121,11 +124,10 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="DOWN" width="91" height="38"/>
-        <image name="UP" width="91" height="38"/>
+        <image name="DVD_pause" width="4" height="10"/>
+        <image name="dvd_btn_adjust_normal" width="91" height="38"/>
         <image name="dvd_btn_switch_on" width="36" height="23"/>
         <image name="dvd_frm_choice__normal" width="336" height="47"/>
-        <image name="icon3" width="91" height="38"/>
         <image name="icon_add_normal" width="15" height="15"/>
     </resources>
 </document>
