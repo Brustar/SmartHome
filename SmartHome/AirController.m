@@ -51,6 +51,7 @@ static NSString *const airCellIdentifier = @"airCell";
         self.deviceid = [SQLManager singleDeviceWithCatalogID:air byRoom:self.roomID];;
     }
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -104,12 +105,6 @@ static NSString *const airCellIdentifier = @"airCell";
 
 -(IBAction)save:(id)sender
 {
-    if ([sender isEqual:self.switcher]) {
-        NSData *data=[[DeviceInfo defaultManager] toogle:self.switcher.isOn deviceID:self.deviceid];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:1];
-    }
-    
     Aircon *device = [[Aircon alloc]init];
     [device setDeviceID:[self.deviceid intValue]];
     
@@ -129,8 +124,7 @@ static NSString *const airCellIdentifier = @"airCell";
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
     [_scene setDevices:devices];
     
-    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
-    
+    [[SceneManager defaultManager] addScene:_scene withName:@"" withImage:[UIImage imageNamed:@""]];
 }
 
 #pragma mark - TCP recv delegate
@@ -214,8 +208,6 @@ static NSString *const airCellIdentifier = @"airCell";
     NSData *data=[self createCmd:cmd];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
-    
-    [self save:nil];
 }
 
 -(IBAction)changeButton:(id)sender
@@ -239,7 +231,6 @@ static NSString *const airCellIdentifier = @"airCell";
     
     // it is better to use this method only for proper animation
     [self.paramView showInView:self.view withEdgeInsets:UIEdgeInsetsMake(0,0,-70,0) animated:YES];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -269,14 +260,14 @@ static NSString *const airCellIdentifier = @"airCell";
     NSData *data=[[DeviceInfo defaultManager] changeTemperature:0x6A deviceID:self.deviceid value:value];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
-    
-    [self save:nil];
 }
 
 #pragma mark - ORBSwitchDelegate
 - (void)orbSwitchToggled:(ORBSwitch *)switchObj withNewValue:(BOOL)newValue {
     NSLog(@"Switch toggled: new state is %@", (newValue) ? @"ON" : @"OFF");
-    [self save:self.switcher];
+    NSData *data=[[DeviceInfo defaultManager] toogle:self.switcher.isOn deviceID:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
 - (void)orbSwitchToggleAnimationFinished:(ORBSwitch *)switchObj {
@@ -375,7 +366,6 @@ static NSString *const airCellIdentifier = @"airCell";
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
     
-    [self save:nil];
     [tableView dismisWithIndexPath:indexPath];
 }
 

@@ -110,7 +110,7 @@ BOOL animating;
     self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
 
     self.volume.continuous = NO;
-    [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
+    [self.volume addTarget:self action:@selector(changeVolume) forControlEvents:UIControlEventValueChanged];
     _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     
     if ([self.sceneid intValue]>0) {
@@ -133,18 +133,15 @@ BOOL animating;
     [self.lastBtn setBackgroundImage:[UIImage imageNamed:@"control_button_pressed"] forState:UIControlStateSelected];
 }
 
+-(void)changeVolume
+{
+    NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volume.value deviceID:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
 -(IBAction)save:(id)sender
 {
-    if ([sender isEqual:self.volume]) {
-        NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volume.value deviceID:self.deviceid];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:1];
-        self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
-        if (BLUETOOTH_MUSIC) {
-            AudioManager *audio=[AudioManager defaultManager];
-            [audio.musicPlayer setVolume:self.volume.value/100.0];
-        }
-    }
     BgMusic *device=[[BgMusic alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setBgvolume:self.volume.value];
@@ -216,7 +213,7 @@ BOOL animating;
     AudioManager *audio=[AudioManager defaultManager];
     self.volume.value=audio.musicPlayer.volume*100;
     self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
-    [self save:nil];
+    //[self save:nil];
 }
 
 -(NSString*)titleOfNowPlaying

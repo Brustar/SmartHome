@@ -23,8 +23,8 @@ typedef NS_ENUM(NSUInteger, deviceType) {
     camera = 45,
     plugin = 41,
     windowOpener = 42,
-    flowering,
-    feeding,
+    flowering = 33,
+    feeding = 34,
     Wetting
 };
 
