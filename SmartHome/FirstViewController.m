@@ -34,6 +34,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView * IconeImageView;//提示消息的头像
 @property (weak, nonatomic) IBOutlet UILabel * memberFamilyLabel;//家庭成员label
 @property (weak, nonatomic) IBOutlet UIImageView * numberLabelView;//未读消息的视图
+@property (weak, nonatomic) IBOutlet UILabel *numberLabel;//未读消息的个数
+
 @property (weak, nonatomic) IBOutlet UIBarButtonItem * playerBarBtn;//正在播放的按钮
 @property (weak, nonatomic) IBOutlet UIView * FourBtnView;
 @property (nonatomic,strong) NSArray * dataArr;
@@ -135,8 +137,8 @@
     self.FourBtnView.userInteractionEnabled = YES;
     _IconeImageView.layer.masksToBounds = YES;
     _IconeImageView.layer.cornerRadius = _IconeImageView.bounds.size.height/2;
-    _numberLabelView.layer.masksToBounds = YES;
-    _numberLabelView.layer.cornerRadius = _numberLabelView.bounds.size.height / 2;
+    _numberLabel.layer.masksToBounds = YES;
+    _numberLabel.layer.cornerRadius = _numberLabelView.bounds.size.height / 2;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doTap:)];
     UITapGestureRecognizer *Headtap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(HeadDoTap:)];
     _HeadImageView.userInteractionEnabled = YES;
@@ -386,17 +388,20 @@
 //社交平台的弹出事件
 -(void)HeadDoTap:(UITapGestureRecognizer *)tap
 {
-     _baseTabbarController.tabbarPanel.hidden = YES;
+
+    _baseTabbarController.tabbarPanel.hidden = YES;
      if (self.socialView.hidden) {
         self.socialView.hidden = NO;
 //        _UserNameLabel.hidden = YES;
 //        _WelcomeLabel.hidden = YES;
+//         self.chatlabel.text = [NSString stringWithFormat:@"123:%d",_roomID++];
      
      }else{
          self.socialView.hidden = YES;
 //        _UserNameLabel.hidden = NO;
 //        _WelcomeLabel.hidden = NO;
         _baseTabbarController.tabbarPanel.hidden = NO;
+         self.chatlabel.text = @"456";
     }
     
 }
