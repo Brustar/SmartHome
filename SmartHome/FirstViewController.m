@@ -26,8 +26,6 @@
 #import "IOManager.h"
 #import "NowMusicController.h"
 
-
-
 @interface FirstViewController ()<RCIMReceiveMessageDelegate,HttpDelegate,TcpRecvDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView * SubImageView;//首页的日历大圆
 @property (weak, nonatomic) IBOutlet UIView * BtnView;//全屋场景的按钮试图
@@ -310,14 +308,16 @@
 - (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left
 {
     NSString *nickname = [SQLManager queryChat:message.senderUserId][0];
-    
+    int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
     NSString *tip=@"您有新消息";
     if ([message.objectName isEqualToString:RCTextMessageTypeIdentifier]) {
         tip = message.content.conversationDigest;
     }
     
-    self.chatlabel.text =[NSString stringWithFormat:@"%@ : %@" , nickname, tip];
-    [self.IconeImageView badge];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.chatlabel.text =[NSString stringWithFormat:@"%@ : %@" , nickname, tip];
+        [self.IconeImageView badge];
+    });
 }
 
 - (void)getScenesFromPlist
@@ -532,7 +532,6 @@
 //进入聊天页面
 -(void)setRCIM
 {
-    
     [[RCIM sharedRCIM] logout];
     NSString *token = [UD objectForKey:@"rctoken"];
     NSString *groupID = [[UD objectForKey:@"HostID"] description];
