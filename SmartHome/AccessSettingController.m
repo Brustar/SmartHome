@@ -279,6 +279,10 @@
         cell.areaLabel.text = self.userArr[indexPath.row];
         NSNumber *type = self.managerType[indexPath.row];
         cell.changeBtn.userInteractionEnabled = NO;
+        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];
+        view.backgroundColor = [UIColor clearColor];
+        
+        cell.selectedBackgroundView = view;
         if([type intValue] ==1)
         {
             cell.detialLabel.text = @"主人";
@@ -313,9 +317,10 @@
         self.usrID = self.userIDArr[indexPath.row];
 //         NSString *url = [NSString stringWithFormat:@"%@Cloud/room_authority.aspx",[IOManager httpAddr]];
 //        self.recoredIDs = nil;
-       AreaSettingCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        AreaSettingCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         self.cell = cell;
         self.selectedIndexPath = indexPath;
+        
         self.userName.text = cell.areaLabel.text;
         
         if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]] && [[UD objectForKey:@"UserType"] integerValue] == 2) {
@@ -338,14 +343,7 @@
                 AreaSubVC.userNameTitle = cell.areaLabel.text;
                  AreaSubVC.identityType = self.identityType;
                 AreaSubVC.detailTextName = cell.detailTextLabel.text;
-//        if([cell.detailTextLabel.text isEqualToString:@"主人"])
-//        {
-//            [self.identityType setTitle:@"转化为普通身份" forState:UIControlStateNormal];
-//        }else
-//        {
-//            [self.identityType setTitle:@"转化为主人身份" forState:UIControlStateNormal];
-//
-//        }
+
     }
     
 }

@@ -71,7 +71,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"推送控制";
+
+    [self setNaviBarTitle:@"推送控制"];
     self.automaticallyAdjustsScrollViewInsets = NO;
 //    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
 //    self.navigationItem.leftBarButtonItem = returnItem;

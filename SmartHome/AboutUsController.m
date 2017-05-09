@@ -33,7 +33,7 @@
     
     self.titles = @[@"版本说明",@"隐私安全政策"];
     self.version.text =[NSString stringWithFormat:@"版本号%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
-    
+    self.tableView.allowsSelection = NO;
     // Do any additional setup after loading the view.
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

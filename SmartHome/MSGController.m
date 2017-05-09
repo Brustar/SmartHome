@@ -125,7 +125,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [MBProgressHUD hideHUD];
-    self.title = @"我的消息";
+    [self setNaviBarTitle:@"通知"];
     _array = @[@"1",@"2",@"3"];
     DeviceInfo *device = [DeviceInfo defaultManager];
     if ([device.db isEqualToString:SMART_DB]) {

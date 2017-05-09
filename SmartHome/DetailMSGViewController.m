@@ -281,6 +281,11 @@
         cell.timeLable.textColor = [UIColor whiteColor];
     }
     
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];
+    view.backgroundColor = [UIColor clearColor];
+    
+    cell.selectedBackgroundView = view;
+    
     return cell;
 
 }
