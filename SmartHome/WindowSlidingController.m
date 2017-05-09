@@ -14,13 +14,17 @@
 #import "SocketManager.h"
 #import "WinOpener.h"
 #import "SceneManager.h"
+#import "UIViewController+Navigator.h"
+#import "ORBSwitch.h"
 
-@interface WindowSlidingController ()<UITableViewDelegate,UITableViewDataSource>
-@property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@interface WindowSlidingController ()<ORBSwitchDelegate>
+
+
 @property (nonatomic,strong) NSMutableArray *windowSlidNames;
 @property (nonatomic,strong) NSMutableArray *windowSlidIds;
 @property (nonatomic,strong) DetailTableViewCell *cell;
+@property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
+@property (nonatomic,strong) ORBSwitch *switcher;
 @end
 
 @implementation WindowSlidingController
@@ -71,25 +75,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = windowType;
-    self.tableView.tableFooterView = [UIView new];
-    [self setupSegmentWindowSlid];
-    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+    if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
+    NSArray *menus = [SQLManager singleProductByRoom:self.roomID];
+    [self initMenuContainer:self.menuContainer andArray:menus andID:self.deviceid];
+    [self naviToDevice];
+    
+    NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
+    [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - %@",roomName,windowType]];
+    self.deviceid = [SQLManager singleDeviceWithCatalogID:windowOpener byRoom:self.roomID];
+    [self initSwitcher];
 }
 
--(void)setupSegmentWindowSlid
+-(void) initSwitcher
 {
-    if(self.windowSlidNames == nil || self.windowSlidNames.count == 0)
-    {
-        return;
-    }
-    [self.segment removeAllSegments];
-    for(int i = 0; i < self.windowSlidNames.count;i++)
-    {
-        [self.segment insertSegmentWithTitle:self.windowSlidNames[i] atIndex:i animated:NO];
-    }
-    self.segment.selectedSegmentIndex = 0;
-    self.deviceid = [self.windowSlidIds objectAtIndex:self.segment.selectedSegmentIndex];
+    self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:[UIImage imageNamed:@"plugin_off"] inactiveBackgroundImage:nil activeBackgroundImage:nil frame:CGRectMake(0, 0, 750/2, 750/2)];
+    self.switcher.center = CGPointMake(self.view.bounds.size.width / 2,
+                                       self.view.bounds.size.height / 2);
+    
+    self.switcher.knobRelativeHeight = 1.0f;
+    self.switcher.delegate = self;
+    
+    [self.view addSubview:self.switcher];
 }
 
 -(IBAction)save:(id)sender
@@ -108,78 +114,8 @@
     [_scene setReadonly:NO];
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
     [_scene setDevices:devices];
-    //[[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
     
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 2;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if(indexPath.row == 0)
-    {
-        DetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-        if (self.segment.selectedSegmentIndex) {
-          
-        }
-        
-//           cell.label.text = self.windowSlidNames[self.segment.selectedSegmentIndex];
-        if (self.windowSlidNames.count == 0) {
-            cell.label.text = @"推窗器";
-        }
-        _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
-        if ([self.sceneid intValue]>0) {
-            for(int i=0;i<[_scene.devices count];i++)
-            {
-                if ([[_scene.devices objectAtIndex:i] isKindOfClass:[WinOpener class]]) {
-                    cell.power.on=((WinOpener *)[_scene.devices objectAtIndex:i]).pushing;
-                }
-            }
-        }
-        [cell.power addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
-        self.cell = cell;
-        return cell;
-        
-    }else{
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"recell"];
-        if(!cell)
-        {
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"recell"];
-            
-        }
-        
-        cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20, 5, 100, 30)];
-        [cell.contentView addSubview:label];
-        label.text = @"详细信息";
-        return cell;
-        
-    }
-    
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 50;
-}
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if(indexPath.row == 1)
-    {
-        [self performSegueWithIdentifier:@"windowSliderDetailSegue" sender:self];
-    }
-}
-- (IBAction)selectedWindowSlider:(id)sender {
-    UISegmentedControl *segment = (UISegmentedControl*)sender;
-    self.cell.label.text = self.windowSlidNames[segment.selectedSegmentIndex];
-    self.deviceid=[self.windowSlidIds objectAtIndex:self.segment.selectedSegmentIndex];
-    [self.tableView reloadData];
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -187,6 +123,19 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - ORBSwitchDelegate
+- (void)orbSwitchToggled:(ORBSwitch *)switchObj withNewValue:(BOOL)newValue {
+    NSLog(@"Switch toggled: new state is %@", (newValue) ? @"ON" : @"OFF");
+    NSData *data=[[DeviceInfo defaultManager] toogle:self.switcher.isOn deviceID:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
 
+- (void)orbSwitchToggleAnimationFinished:(ORBSwitch *)switchObj {
+    [switchObj setCustomKnobImage:[UIImage imageNamed:(switchObj.isOn) ? @"plugin_on" : @"plugin_off"]
+          inactiveBackgroundImage:nil
+            activeBackgroundImage:nil];
+    
+}
 
 @end

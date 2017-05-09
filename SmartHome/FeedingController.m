@@ -38,8 +38,8 @@
 -(void) initSlider
 {
     int sliderSize = 90;
-    CGRect frame = CGRectInset(self.view.bounds, 0, 0);
     
+    CGRect frame = CGRectMake(self.view.center.x-sliderSize, self.view.center.y-sliderSize, sliderSize*2, sliderSize*2);
     HTCircularSlider *slider = [[HTCircularSlider alloc] initWithFrame:frame];
     [self.view addSubview:slider];
     [slider addTarget:self action:@selector(onValueChange:) forControlEvents:UIControlEventValueChanged];
@@ -76,7 +76,10 @@
         float dec = slider.value-(int)slider.value;
         int second = (int)(dec*60);
         NSString *pattern = second>9?@"%d:%d":@"%d:0%d";
-        self.HLabel.text = [NSString stringWithFormat:pattern,(int)slider.value,second];
+        
+        int hint = (int)slider.value;
+        int hour = hint >= 12 ? hint - 12 : hint + 12;
+        self.HLabel.text = [NSString stringWithFormat:pattern,hour,second];
     }else{
         self.SLabel.text = [NSString stringWithFormat:@"%dS",(int)slider.value];
     }
@@ -91,7 +94,18 @@
 }
 
 - (IBAction)start:(id)sender {
-    NSData *data = [[DeviceInfo defaultManager] toogle:0x01 deviceID:self.deviceid];
+    UIButton *button = (UIButton *)sender;
+    
+    [button setSelected:!button.isSelected];
+    if (button.isSelected) {
+        //selected
+        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"device_on"]] forState:UIControlStateSelected];
+    }else{
+        //normal
+        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"device_off"]] forState:UIControlStateNormal];
+    }
+    
+    NSData *data = [[DeviceInfo defaultManager] toogle:button.isSelected deviceID:self.deviceid];
     [[[SocketManager defaultManager] socket] writeData:data withTimeout:1 tag:1];
 }
 

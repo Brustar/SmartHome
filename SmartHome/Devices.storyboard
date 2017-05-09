@@ -1443,7 +1443,7 @@
         <!--flowering-->
         <scene sceneID="CAf-qb-eht">
             <objects>
-                <viewController id="PiN-hn-P2b" userLabel="flowering" customClass="FloweringController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FloweringController" id="PiN-hn-P2b" userLabel="flowering" customClass="FloweringController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zhX-sf-PuF"/>
                         <viewControllerLayoutGuide type="bottom" id="vc9-t9-8xs"/>
@@ -1553,9 +1553,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="UAb-Oa-aQE">
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                             </imageView>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plugin_on" translatesAutoresizingMaskIntoConstraints="NO" id="L1m-iy-A2j">
-                                <rect key="frame" x="-27.5" y="91.5" width="375" height="385"/>
-                            </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jnl-ro-ZnG">
                                 <rect key="frame" x="0.0" y="64" width="320" height="40"/>
                                 <constraints>
@@ -1569,11 +1566,9 @@
                             <constraint firstItem="jnl-ro-ZnG" firstAttribute="top" secondItem="4sE-11-bb1" secondAttribute="bottom" constant="44" id="DBi-Xf-Du5"/>
                             <constraint firstItem="UAb-Oa-aQE" firstAttribute="top" secondItem="4sE-11-bb1" secondAttribute="bottom" id="ITk-Z0-9lg"/>
                             <constraint firstAttribute="trailing" secondItem="UAb-Oa-aQE" secondAttribute="trailing" id="MS5-QU-LyZ"/>
-                            <constraint firstItem="L1m-iy-A2j" firstAttribute="centerX" secondItem="hw2-Uu-Wzn" secondAttribute="centerX" id="azz-mW-nGg"/>
                             <constraint firstItem="OdP-VW-6qj" firstAttribute="top" secondItem="UAb-Oa-aQE" secondAttribute="bottom" id="cLB-My-WkQ"/>
                             <constraint firstItem="jnl-ro-ZnG" firstAttribute="leading" secondItem="hw2-Uu-Wzn" secondAttribute="leading" id="vTb-Kn-gpe"/>
                             <constraint firstAttribute="trailing" secondItem="jnl-ro-ZnG" secondAttribute="trailing" id="xF2-Hn-Io1"/>
-                            <constraint firstItem="L1m-iy-A2j" firstAttribute="centerY" secondItem="hw2-Uu-Wzn" secondAttribute="centerY" id="zXC-1d-UzT"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1667,7 +1662,7 @@
         <!--feeding-->
         <scene sceneID="8hw-re-eZt">
             <objects>
-                <viewController id="EnX-rM-1f5" userLabel="feeding" customClass="FeedingController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FeedingController" id="EnX-rM-1f5" userLabel="feeding" customClass="FeedingController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6RA-c2-B8j"/>
                         <viewControllerLayoutGuide type="bottom" id="FUK-af-Csz"/>
@@ -1765,7 +1760,7 @@
         <!--wetting-->
         <scene sceneID="1pU-xt-2lm">
             <objects>
-                <viewController id="Fr9-DY-QUJ" userLabel="wetting" customClass="WettingController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WettingController" id="Fr9-DY-QUJ" userLabel="wetting" customClass="WettingController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dFq-E2-SW1"/>
                         <viewControllerLayoutGuide type="bottom" id="bhg-q9-t0H"/>
@@ -1859,6 +1854,47 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L0s-AQ-NFt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-523" y="1743"/>
+        </scene>
+        <!--window sliding-->
+        <scene sceneID="Jxe-8w-u5r">
+            <objects>
+                <viewController storyboardIdentifier="WindowSlidingController" id="KgY-CF-KBf" userLabel="window sliding" customClass="WindowSlidingController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BYc-Qn-nsk"/>
+                        <viewControllerLayoutGuide type="bottom" id="DkG-Fk-4kr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="36L-rZ-sdx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="DqZ-Zx-lDF">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Jzo-rD-Fim">
+                                <rect key="frame" x="16" y="64" width="288" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="URB-B8-LYm"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="DqZ-Zx-lDF" firstAttribute="leading" secondItem="36L-rZ-sdx" secondAttribute="leading" id="Bgz-3s-VPh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Jzo-rD-Fim" secondAttribute="trailing" id="P3L-HJ-IKg"/>
+                            <constraint firstItem="Jzo-rD-Fim" firstAttribute="leading" secondItem="36L-rZ-sdx" secondAttribute="leadingMargin" id="TYf-iI-uir"/>
+                            <constraint firstItem="Jzo-rD-Fim" firstAttribute="top" secondItem="BYc-Qn-nsk" secondAttribute="bottom" constant="44" id="XQH-Zt-FdV"/>
+                            <constraint firstItem="DqZ-Zx-lDF" firstAttribute="top" secondItem="BYc-Qn-nsk" secondAttribute="bottom" id="tSL-Uo-41f"/>
+                            <constraint firstItem="DkG-Fk-4kr" firstAttribute="top" secondItem="DqZ-Zx-lDF" secondAttribute="bottom" id="uod-Ls-uQX"/>
+                            <constraint firstAttribute="trailing" secondItem="DqZ-Zx-lDF" secondAttribute="trailing" id="yLq-r2-Ke6"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="menuContainer" destination="Jzo-rD-Fim" id="KjY-Yu-vgl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mve-C0-zTD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137" y="1743"/>
         </scene>
     </scenes>
     <resources>
