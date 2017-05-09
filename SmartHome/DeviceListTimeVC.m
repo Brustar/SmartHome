@@ -26,21 +26,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initDataSource];
-    self.title = @"定时器";
-
-    self.roomList = [SQLManager getAllRoomsInfo];
-   
-    UIView *view = [[UIView alloc] init];
-    [view setBackgroundColor:[UIColor clearColor]];
-    self.tableView.tableFooterView = view;
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self setupNaviBar];
-    
+    [self fetchDeviceTimerList];
 }
 - (void)setupNaviBar {
-    [self setNaviBarTitle:@"设备定时列表"]; //设置标题
-    
+    [self setNaviBarTitle:@"定时器"]; //设置标题
     _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"deviceTimeadd" imgHighlight:@"deviceTimeadd" target:self action:@selector(rightBtnClicked:)];
-
     [self setNaviBarRightBtn:_naviRightBtn];
 }
 -(void)rightBtnClicked:(UIButton *)btn
@@ -57,85 +49,56 @@
 
 }
 - (void)initDataSource {
-    self.timerList = [[NSMutableArray alloc] init];
-    DeviceInfo *device = [DeviceInfo defaultManager];
-    if ([device.db isEqualToString:SMART_DB]) {
-        
-    }else {
-        NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"DeviceTimerList" ofType:@"plist"]];
-        NSArray *arr = plistDict[@"timer_list"];
-        if ([arr isKindOfClass:[NSArray class]] && arr.count >0) {
-            for(NSDictionary *timerInfo in arr)
-            {
-                if ([timerInfo isKindOfClass:[NSDictionary class]]) {
-                    DeviceTimerInfo *deviceTimerInfo = [[DeviceTimerInfo alloc] init];
-                    deviceTimerInfo.deviceName = timerInfo[@"deviceName"];
-                    deviceTimerInfo.deviceValue = timerInfo[@"deviceValue"];
-                    deviceTimerInfo.repetition = timerInfo[@"repetition"];
-                    deviceTimerInfo.startTime = timerInfo[@"starttime"];
-                    deviceTimerInfo.endTime = timerInfo[@"endtime"];
-                    deviceTimerInfo.status = timerInfo[@"status"];
-                    [self.timerList addObject:deviceTimerInfo];
-                }
-                
-            }
-        }
-        
-        [self.tableView reloadData];
-    }
+    _timerList = [NSMutableArray array];
 }
-//组
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return self.roomList.count;
+    return _timerList.count;
 }
-//行
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.timerList.count;
-}
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    _room = self.roomList[section];
-    NSString * str = _room.rName;
 
-    return str;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSDictionary *roomDict = _timerList[section];
+    if (roomDict && [roomDict isKindOfClass:[NSDictionary class]]) {
+        NSArray *scheduleList = roomDict[@"schedule_list"];
+        if (scheduleList && [scheduleList isKindOfClass:[NSArray class]]) {
+            return scheduleList.count;
+        }
+    }
+   
+    return 0 ;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
     return 40.0f;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 59.0f;
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (self.tableView != tableView) {
-        return nil;
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 40)];
+    view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 0.5)];
+    line.backgroundColor = [UIColor whiteColor];
+    [view addSubview:line];
+    
+    UILabel *roomNameLabel = [[UILabel alloc] init];
+    roomNameLabel.frame = CGRectMake(20, 10, 100, 20);
+    roomNameLabel.textAlignment = NSTextAlignmentLeft;
+    roomNameLabel.textColor = [UIColor whiteColor];
+    [view addSubview:roomNameLabel];
+    
+    NSDictionary *roomDict = _timerList[section];
+    if (roomDict && [roomDict isKindOfClass:[NSDictionary class]]) {
+       [roomNameLabel setText:roomDict[@"room_name"]];
+        
     }
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 40)];
-//    view.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
-    view.backgroundColor = [UIColor clearColor];
-    UILabel *label = [[UILabel alloc] init];
-    label.frame = CGRectMake(20, 0, 100, 30);
-    Room * room = self.roomList[section];
-    label.textAlignment = NSTextAlignmentLeft;
-    label.textColor = [UIColor whiteColor];
-    [label setText:room.rName];
-    [view addSubview:label];
-    
-    //上显示线
-    
-    UILabel *label1=[[ UILabel alloc ] initWithFrame : CGRectMake ( 0 , - 1 , view. frame . size . width , 1 )];
-    
-    label1. backgroundColor =[ UIColor whiteColor];
-    
-    [view addSubview :label1];
-    
-    //下显示线
-    
-    UILabel *Xlabel=[[ UILabel alloc ] initWithFrame : CGRectMake ( 0 , view. frame . size . height - 1 , view. frame . size . width , 1 )];
-    
-    Xlabel. backgroundColor =[ UIColor whiteColor];
-    
-    [view addSubview :Xlabel];
+
     return view;
 }
 
@@ -146,9 +109,28 @@
         cell = [[DeviceTimerCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"deviceTimerCell"];
     }
     
-    DeviceTimerInfo *info = [self.timerList objectAtIndex:indexPath.row];
-    [cell setInfo:info];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.delegate = self;
+    
+    NSDictionary *roomDict = _timerList[indexPath.section];
+    if (roomDict && [roomDict isKindOfClass:[NSDictionary class]]) {
+        NSArray *scheduleList = roomDict[@"schedule_list"];
+        if (scheduleList && [scheduleList isKindOfClass:[NSArray class]]) {
+            NSDictionary *timerDict = scheduleList[indexPath.row];
+            if (timerDict && [timerDict isKindOfClass:[NSDictionary class]]) {
+                DeviceTimerInfo *info = [[DeviceTimerInfo alloc] init];
+                info.timerID = [timerDict[@"schedule_id"] integerValue];
+                info.deviceName = timerDict[@"equipment_name"];
+                info.startTime = timerDict[@"start_time"];
+                info.endTime = timerDict[@"end_time"];
+                info.repetition = timerDict[@"week_value"];
+                info.isActive = [timerDict[@"isactive"] integerValue];
+                
+                [cell setInfo:info];
+                
+            }
+        }
+    }
+    
     return cell;
 }
 
@@ -156,19 +138,73 @@
     return YES;
 }
 
+- (void)onDeviceTimerBtnClicked:(UIButton *)sender {
+    _currentBtn = sender;
+    _currentActive = sender.selected;
+    [self deviceTimerOperationWithTimerId:sender.tag isActive:sender.selected];
+}
+
+- (void)deviceTimerOperationWithTimerId:(NSInteger)timerId isActive:(NSInteger)active {
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
+    NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
+    
+    if (auothorToken.length >0) {
+        NSDictionary *dict = @{@"token":auothorToken,
+                               @"optype":@(4),
+                               @"scheduleid":@(timerId),
+                               @"isactive":@(active)
+                               };
+        HttpManager *http = [HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = 2;
+        [http sendPost:url param:dict];
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)fetchDeviceTimerList {
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
+    NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
+    
+    if (auothorToken.length >0) {
+        NSDictionary *dict = @{@"token":auothorToken,
+                               @"optype":@(5)
+                               };
+        HttpManager *http = [HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = 1;
+        [http sendPost:url param:dict];
+    }
 }
-*/
+
+#pragma mark - Http callback
+- (void)httpHandler:(id)responseObject tag:(int)tag
+{
+    if(tag == 1) {
+        
+        if ([responseObject[@"result"] intValue] == 0) {
+            NSArray *roomList = responseObject[@"room_list"];
+            if (roomList && [roomList isKindOfClass:[NSArray class]]) {
+                [_timerList addObjectsFromArray:roomList];
+                [self.tableView reloadData];
+            }
+        }
+    }else if (tag == 2) { //启动，停止定时器
+        if ([responseObject[@"result"] intValue] == 0) {
+            [MBProgressHUD showSuccess:responseObject[@"msg"]];
+        }else {
+            [MBProgressHUD showError:responseObject[@"msg"]];
+            if (_currentActive == 1) {
+               [_currentBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+            }else {
+               [_currentBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateNormal];
+            }
+        }
+    }
+}
 
 @end

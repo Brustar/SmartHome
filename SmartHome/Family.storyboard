@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -492,11 +492,60 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="adjustBtn" destination="T5C-GP-Hcp" id="INc-bS-dae"/>
                         <outlet property="cameraImgView" destination="l5W-2z-RSA" id="bUs-Ke-joa"/>
+                        <outlet property="fullScreenBtn" destination="6jJ-Vp-CpM" id="5j4-a5-zEr"/>
                         <outlet property="roomNameLabel" destination="PFI-dA-eiC" id="MUN-Cp-L78"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hyo-R3-pou" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+        <!--家庭动态灯光调节页面-->
+        <scene sceneID="78x-9l-u9a">
+            <objects>
+                <viewController storyboardIdentifier="FamilyDynamicDeviceAdjustVC" id="q24-WF-48p" userLabel="家庭动态灯光调节页面" customClass="FamilyDynamicDeviceAdjustViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LDe-6t-7Uu"/>
+                        <viewControllerLayoutGuide type="bottom" id="XgT-YG-jyH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wc9-s7-Ta9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F5k-9Z-kIJ" userLabel="MonitorView">
+                                <rect key="frame" x="0.0" y="90" width="375" height="260"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="260" id="K21-mi-A2w"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dlA-Xi-AOS">
+                                <rect key="frame" x="0.0" y="350" width="375" height="317"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="q24-WF-48p" id="MrC-jq-wKY"/>
+                                    <outlet property="delegate" destination="q24-WF-48p" id="s1z-KM-bkU"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="F5k-9Z-kIJ" firstAttribute="leading" secondItem="wc9-s7-Ta9" secondAttribute="leading" id="2tI-v9-rh7"/>
+                            <constraint firstAttribute="trailing" secondItem="F5k-9Z-kIJ" secondAttribute="trailing" id="3ER-ze-Mmw"/>
+                            <constraint firstAttribute="trailing" secondItem="dlA-Xi-AOS" secondAttribute="trailing" id="Ydg-pg-Rok"/>
+                            <constraint firstItem="dlA-Xi-AOS" firstAttribute="leading" secondItem="wc9-s7-Ta9" secondAttribute="leading" id="Zno-uc-YoP"/>
+                            <constraint firstItem="dlA-Xi-AOS" firstAttribute="top" secondItem="wc9-s7-Ta9" secondAttribute="top" constant="350" id="uR0-Ci-Nty"/>
+                            <constraint firstItem="F5k-9Z-kIJ" firstAttribute="top" secondItem="wc9-s7-Ta9" secondAttribute="top" constant="90" id="urk-Hv-03R"/>
+                            <constraint firstAttribute="bottom" secondItem="dlA-Xi-AOS" secondAttribute="bottom" id="zRh-vz-LSK"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="deviceTableView" destination="dlA-Xi-AOS" id="W1G-Ky-p2g"/>
+                        <outlet property="monitorView" destination="F5k-9Z-kIJ" id="r59-Nd-Cfq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xeL-48-DM0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
     </scenes>

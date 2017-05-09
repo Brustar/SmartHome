@@ -2987,6 +2987,9 @@
                                                         <constraint firstAttribute="height" constant="30" id="dqB-4Y-rLd"/>
                                                     </constraints>
                                                     <state key="normal" backgroundImage="dvd_btn_switch_on"/>
+                                                    <connections>
+                                                        <action selector="deviceTimerBtnClicked:" destination="Qld-cR-r5g" eventType="touchUpInside" id="rEW-sf-NHu"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00-14:00，周一，周二，周三，周四，周五，" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cI4-SQ-r9m">
                                                     <rect key="frame" x="10" y="38.5" width="281" height="14.5"/>

@@ -288,6 +288,7 @@
 		CDEC86921E9A1D22009EC245 /* FamilyHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEC86911E9A1D22009EC245 /* FamilyHomeCell.m */; };
 		CDEC86951E9A21F4009EC245 /* RoomStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEC86941E9A21F4009EC245 /* RoomStatus.m */; };
 		CDEC86981E9A44F9009EC245 /* FamilyHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEC86971E9A44F9009EC245 /* FamilyHomeViewController.m */; };
+		CDEE5E921EBEEBC900A5779D /* FamilyDynamicDeviceAdjustViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEE5E911EBEEBC900A5779D /* FamilyDynamicDeviceAdjustViewController.m */; };
 		CDF1573A1E7AAD4C00499AC5 /* BaseNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF157371E7AAD4C00499AC5 /* BaseNavController.m */; };
 		CDF1573B1E7AAD4C00499AC5 /* BaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF157391E7AAD4C00499AC5 /* BaseTabBarController.m */; };
 		CDF157401E7AADC700499AC5 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF1573C1E7AADC700499AC5 /* LeftViewController.m */; };
@@ -316,7 +317,6 @@
 		CDF90B411E1E425D009043B9 /* RoomDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF90B401E1E425D009043B9 /* RoomDetailViewController.m */; };
 		CDF90B431E2F0676009043B9 /* realScene.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF90B421E2F0676009043B9 /* realScene.plist */; };
 		CDF90B451E2F4B14009043B9 /* planeScene.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF90B441E2F4B14009043B9 /* planeScene.plist */; };
-		CDFB9DF01E5DC4B600BFECCE /* DeviceTimerList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDFB9DEF1E5DC4B600BFECCE /* DeviceTimerList.plist */; };
 		CDFB9DF21E5DCB4D00BFECCE /* SceneTimerList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDFB9DF11E5DCB4D00BFECCE /* SceneTimerList.plist */; };
 		CDFB9DF51E64125500BFECCE /* DeviceTimerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFB9DF41E64125500BFECCE /* DeviceTimerCell.m */; };
 		CDFB9DF81E641F8E00BFECCE /* DeviceTimerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFB9DF71E641F8E00BFECCE /* DeviceTimerInfo.m */; };
@@ -1016,6 +1016,8 @@
 		CDEC86941E9A21F4009EC245 /* RoomStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomStatus.m; sourceTree = "<group>"; };
 		CDEC86961E9A44F9009EC245 /* FamilyHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyHomeViewController.h; sourceTree = "<group>"; };
 		CDEC86971E9A44F9009EC245 /* FamilyHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyHomeViewController.m; sourceTree = "<group>"; };
+		CDEE5E901EBEEBC900A5779D /* FamilyDynamicDeviceAdjustViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyDynamicDeviceAdjustViewController.h; sourceTree = "<group>"; };
+		CDEE5E911EBEEBC900A5779D /* FamilyDynamicDeviceAdjustViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyDynamicDeviceAdjustViewController.m; sourceTree = "<group>"; };
 		CDF157361E7AAD4C00499AC5 /* BaseNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavController.h; sourceTree = "<group>"; };
 		CDF157371E7AAD4C00499AC5 /* BaseNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavController.m; sourceTree = "<group>"; };
 		CDF157381E7AAD4C00499AC5 /* BaseTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarController.h; sourceTree = "<group>"; };
@@ -1052,7 +1054,6 @@
 		CDF90B401E1E425D009043B9 /* RoomDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomDetailViewController.m; sourceTree = "<group>"; };
 		CDF90B421E2F0676009043B9 /* realScene.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = realScene.plist; sourceTree = "<group>"; };
 		CDF90B441E2F4B14009043B9 /* planeScene.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = planeScene.plist; sourceTree = "<group>"; };
-		CDFB9DEF1E5DC4B600BFECCE /* DeviceTimerList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DeviceTimerList.plist; sourceTree = "<group>"; };
 		CDFB9DF11E5DCB4D00BFECCE /* SceneTimerList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SceneTimerList.plist; sourceTree = "<group>"; };
 		CDFB9DF31E64125500BFECCE /* DeviceTimerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceTimerCell.h; sourceTree = "<group>"; };
 		CDFB9DF41E64125500BFECCE /* DeviceTimerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceTimerCell.m; sourceTree = "<group>"; };
@@ -1529,7 +1530,6 @@
 			children = (
 				0F78C5791EB1F92C00FC3BE4 /* Assets.xcassets */,
 				CDFB9DF11E5DCB4D00BFECCE /* SceneTimerList.plist */,
-				CDFB9DEF1E5DC4B600BFECCE /* DeviceTimerList.plist */,
 				CD78A8311E337C1600060466 /* 255_216.plist */,
 				CD78A82F1E3379C200060466 /* 255_221.plist */,
 				CDF389331E30F27500657C8B /* userHabitList.plist */,
@@ -2155,6 +2155,8 @@
 				CD4F12461EB4400A00E0B301 /* DeliveryAddressCell.m */,
 				CD9F0AB61EB78DD0007B0CF7 /* DeliveryAddressSettingViewController.h */,
 				CD9F0AB71EB78DD0007B0CF7 /* DeliveryAddressSettingViewController.m */,
+				CDEE5E901EBEEBC900A5779D /* FamilyDynamicDeviceAdjustViewController.h */,
+				CDEE5E911EBEEBC900A5779D /* FamilyDynamicDeviceAdjustViewController.m */,
 			);
 			name = My;
 			sourceTree = "<group>";
@@ -2856,7 +2858,6 @@
 				CD93E3B11E8081B0003CCAA9 /* login_line@2x.png in Resources */,
 				2EC266291EA4BEAF003DC979 /* FMTableViewCell.xib in Resources */,
 				2E925DA21E5E857D008E327B /* 8.jpg in Resources */,
-				CDFB9DF01E5DC4B600BFECCE /* DeviceTimerList.plist in Resources */,
 				0F032D5A1CC9B12700D1920D /* Assets.xcassets in Resources */,
 				CDF3892C1E30B86500657C8B /* msgList.plist in Resources */,
 				2E925DA71E5E857D008E327B /* all_8.jpg in Resources */,
@@ -3461,6 +3462,7 @@
 				0F6423491DE57C83003379FC /* AudioStreamer.m in Sources */,
 				F65838D41D39D3BB004210AC /* WelcomeController.m in Sources */,
 				CDEC86891E976EC9009EC245 /* RegistFirstStepForPhoneViewController.m in Sources */,
+				CDEE5E921EBEEBC900A5779D /* FamilyDynamicDeviceAdjustViewController.m in Sources */,
 				F65FF4AB1D61C57100C12271 /* SearchViewController.m in Sources */,
 				F663CA5F1D98A733001F87F3 /* IphoneDVDController.m in Sources */,
 				F6A1C02E1D586D7500856E00 /* Room.m in Sources */,
