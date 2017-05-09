@@ -12,7 +12,7 @@
 #import "Amplifier.h"
 #import "SocketManager.h"
 #import "SceneManager.h"
-#import ""
+//#import ""
 
 @implementation ScreenCurtainCell
 
@@ -85,7 +85,7 @@
     if (self.stopBtn.selected) {
         
         [self.stopBtn setImage:[UIImage imageNamed:@"DVD_play"] forState:UIControlStateNormal];
-        NSData *data = [[DeviceInfo defaultManager] drop:<#(uint8_t)#> deviceID:<#(NSString *)#>];
+        NSData *data = [[DeviceInfo defaultManager] drop:self.stopBtn.selected deviceID:self.deviceid];
         SocketManager *sock = [SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
         

@@ -257,15 +257,16 @@
             [_CurtainArray addObject:lightArr[i]];
         }else if ([_typeName isEqualToString:@"FM"]){
             [_FMArray addObject:lightArr[i]];
-        }else if (_htypeID == 12){//网路电视
+        }else if (_htypeID == 11){//网路电视
             [_TVArray addObject:lightArr[i]];
         }else if (_htypeID == 13){//DVD
             [_DVDArray addObject:lightArr[i]];
         }else if (_htypeID == 16){//投影
             [_ProjectArray addObject:lightArr[i]];
-        }else if (_htypeID == 11){//机顶盒
+        }else if (_htypeID == 12){//机顶盒
             [_NetVArray addObject:lightArr[i]];
-        }else if (_htypeID == 14){//背景音乐
+        }
+        else if (_htypeID == 14){//背景音乐
             [_BJMusicArray addObject:lightArr[i]];
         }else if (_htypeID == 17){//幕布
             [_MBArray addObject:lightArr[i]];

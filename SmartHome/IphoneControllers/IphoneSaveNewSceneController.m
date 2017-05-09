@@ -10,6 +10,7 @@
 #import "MBProgressHUD+NJ.h"
 #import "SceneManager.h"
 #import "IphoneNewAddSceneTimerVC.h"
+#import "SQLManager.h"
 
 @interface IphoneSaveNewSceneController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *sceneName;//输入场景名的输入框
@@ -18,6 +19,7 @@
 @property (nonatomic,strong) UIButton * naviRightBtn;
 @property (weak, nonatomic) IBOutlet UIButton *PushBtn;//定时跳转按钮
 @property (weak, nonatomic) IBOutlet UILabel *SceneTimingLabel;//显示场景的定时的具体时间段
+@property (weak, nonatomic) IBOutlet UIButton *startSceneBtn;//是否立即启用场景
 
 @end
 
@@ -128,6 +130,19 @@
     // [self presentViewController:iphoneSaveNewScene animated:YES completion:nil];
     [self.navigationController pushViewController:iphoneSaveNewScene animated:YES];
     
+}
+- (IBAction)startSceneBtn:(id)sender {
+    
+    self.startSceneBtn.selected = !self.startSceneBtn.selected;
+    if (self.startSceneBtn.selected) {
+        [self.startSceneBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+        [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];
+        [SQLManager updateSceneStatus:0 sceneID:self.sceneID];//更新数据库
+    }else{
+        [self.startSceneBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateNormal];
+        [[SceneManager defaultManager] startScene:self.sceneID];
+        [SQLManager updateSceneStatus:1 sceneID:self.sceneID];//更新数据库
+    }
 }
 
 - (void)didReceiveMemoryWarning {
