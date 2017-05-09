@@ -79,6 +79,9 @@
 */
 
 - (IBAction)adjustBtnClicked:(id)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(onAdjustBtnClicked:)]) {
+        [_delegate onAdjustBtnClicked:sender];
+    }
 }
 
 - (IBAction)fullScreenBtnClicked:(id)sender {

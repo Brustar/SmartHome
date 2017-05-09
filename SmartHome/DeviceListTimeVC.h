@@ -10,9 +10,13 @@
 #import "DeviceTimerCell.h"
 #import "DeviceTimerInfo.h"
 #import "CustomViewController.h"
+#import "HttpManager.h"
+#import "MBProgressHUD+NJ.h"
 
-@interface DeviceListTimeVC : CustomViewController
+@interface DeviceListTimeVC : CustomViewController<DeviceTimerCellDelegate>
 
 @property(nonatomic, strong) NSMutableArray *timerList;//设备定时列表
+@property(nonatomic, strong) UIButton *currentBtn;
+@property(nonatomic, assign) NSInteger currentActive;
 
 @end
