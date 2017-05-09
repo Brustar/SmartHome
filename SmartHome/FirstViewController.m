@@ -320,12 +320,12 @@
     if ([message.objectName isEqualToString:RCTextMessageTypeIdentifier]) {
         tip = message.content.conversationDigest;
     }
-    
     dispatch_async(dispatch_get_main_queue(), ^{
         self.chatlabel.text =[NSString stringWithFormat:@"%@ : %@" , nickname, tip];
         self.numberLabel.text = [NSString stringWithFormat:@"%d" ,unread];
         [self.IconeImageView sd_setImageWithURL:[NSURL URLWithString:protrait] placeholderImage:[UIImage imageNamed:@"logo"] options:SDWebImageRetryFailed];
     });
+
 }
 
 - (void)getScenesFromPlist

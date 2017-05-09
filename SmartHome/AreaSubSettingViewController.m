@@ -52,6 +52,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"权限设置";
+    [self setNaviBarTitle:@"权限设置"];
     self.tableView.tableHeaderView = self.headerView;
     NSString *url = [NSString stringWithFormat:@"%@Cloud/room_authority.aspx",[IOManager httpAddr]];
     self.userName.text = self.userNameTitle;

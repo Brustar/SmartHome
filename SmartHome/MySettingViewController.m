@@ -59,14 +59,14 @@
     if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
         if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) { //如果是普通用户，不显示“权限控制”选项
-            return 6;
+            return 5;
         }
-            return 7;//如果是主人，显示“权限控制”选项
+            return 6;//如果是主人，显示“权限控制”选项
     }else{
         if([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) { //2代表普通用户，如果是普通用户，不显示“权限控制”选项
-            return 6;
+            return 5;
         }else {
-            return 7;//如果是主人，显示“权限控制”选项
+            return 6;//如果是主人，显示“权限控制”选项
         }
     }
     
@@ -193,7 +193,7 @@
         label.font = [UIFont systemFontOfSize:12];
         label.text = @"请在“设置->通知中心”中更改";
         label.textColor = [UIColor grayColor];
-        [view addSubview:label];
+//        [view addSubview:label];
     }
     
     
@@ -202,11 +202,13 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    if(section == 4 || section == 5)
-    {
-        return 25;
-    }
-    return 30;
+//    if(section == 4 || section == 5)
+//    {
+//        return 15;
+//    }
+//    return 20;
+    
+    return 15;
 }
 
 
@@ -336,6 +338,25 @@
         }
     }
 
+}
+//退出登录
+- (IBAction)QuitBtn:(id)sender {
+    //退出发送请求
+    NSString *authorToken =[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    if (authorToken) {
+        NSDictionary *dict = @{@"token":authorToken};
+        
+        NSString *url = [NSString stringWithFormat:@"%@login/logout.aspx",[IOManager httpAddr]];
+        HttpManager *http=[HttpManager defaultManager];
+        http.delegate=self;
+        http.tag = 1;
+        [http sendPost:url param:dict];
+    }else{
+        //跳转到欢迎页
+        //self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
+        //[self performSegueWithIdentifier:@"goWelcomeSegue" sender:self];
+        [self gotoLoginViewController];
+    }
 }
 
 - (void)gotoLoginViewController {

@@ -111,6 +111,7 @@
                 <outlet property="AddcurtainBtn" destination="7Nj-MA-dDP" id="Ufa-CO-TCD"/>
                 <outlet property="curtainContraint" destination="fwK-aR-qxM" id="7yE-TK-EhV"/>
                 <outlet property="label" destination="wSV-oJ-oCF" id="bUa-kH-Jsg"/>
+                <outlet property="open" destination="oan-hq-829" id="gBg-es-Lai"/>
                 <outlet property="slider" destination="tNT-YH-Tpj" id="efJ-Ru-ZA9"/>
                 <outlet property="valueLabel" destination="v0o-gc-D44" id="3nQ-hN-evr"/>
             </connections>
@@ -118,8 +119,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="bd_icon_wd_off" width="10" height="9"/>
-        <image name="bd_icon_wd_on" width="12" height="10"/>
+        <image name="bd_icon_wd_off" width="16" height="11"/>
+        <image name="bd_icon_wd_on" width="16" height="11"/>
         <image name="icon_add_normal" width="15" height="15"/>
         <image name="lv_fm_adjust_normal" width="336" height="47"/>
     </resources>
