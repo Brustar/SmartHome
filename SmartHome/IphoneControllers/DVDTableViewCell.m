@@ -17,8 +17,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-  
-    [self.DVDSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
+     [self.PreviousBtn setImage:[UIImage imageNamed:@"DVD_previous_red"] forState:UIControlStateHighlighted];
+     [self.nextBtn setImage:[UIImage imageNamed:@"DVD_next_red"] forState:UIControlStateHighlighted];
+     [self.DVDSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
     self.DVDSlider.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
     self.DVDSlider.minimumTrackTintColor = [UIColor colorWithRed:253/255.0 green:254/255.0 blue:254/255.0 alpha:1];
     [self.AddDvdBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
@@ -61,15 +62,28 @@
 }
 //上一曲
 - (IBAction)Previous:(id)sender {
-    
+         NSData *data=nil;
+         data=[[DeviceInfo defaultManager] previous:self.deviceid];
+   
 }
 //下一曲
 - (IBAction)nextBtn:(id)sender {
-    
+         NSData *data=nil;
+         data=[[DeviceInfo defaultManager] next:self.deviceid];
+   
 }
 //暂停
 - (IBAction)stopBtn:(id)sender {
-    
+       NSData *data=nil;
+    self.stopBtn.selected = !self.stopBtn.selected;
+    if (self.stopBtn.selected) {
+        [self.stopBtn setImage:[UIImage imageNamed:@"DVD_pause"] forState:UIControlStateNormal];
+        data=[[DeviceInfo defaultManager] pause:self.deviceid];
+    }else{
+        [self.stopBtn setImage:[UIImage imageNamed:@"DVD_play"] forState:UIControlStateNormal];
+        data=[[DeviceInfo defaultManager] play:self.deviceid];
+    }
+  
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

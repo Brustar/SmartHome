@@ -12,6 +12,7 @@
 #import "Amplifier.h"
 #import "SocketManager.h"
 #import "SceneManager.h"
+#import ""
 
 @implementation ScreenCurtainCell
 
@@ -65,14 +66,35 @@
 //升
 - (IBAction)upBtn:(id)sender {
     
+    NSData *data = [[DeviceInfo defaultManager] upScreenByDeviceID:self.deviceid];
+    SocketManager *sock = [SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];//up
 }
 //降
 - (IBAction)downBtn:(id)sender {
     
+    NSData *data = [[DeviceInfo defaultManager] downScreenByDeviceID:self.deviceid];
+    SocketManager *sock = [SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+
 }
 //停
 - (IBAction)stopBtn:(id)sender {
     
+    self.stopBtn.selected = !self.stopBtn.selected;
+    if (self.stopBtn.selected) {
+        
+        [self.stopBtn setImage:[UIImage imageNamed:@"DVD_play"] forState:UIControlStateNormal];
+        NSData *data = [[DeviceInfo defaultManager] drop:<#(uint8_t)#> deviceID:<#(NSString *)#>];
+        SocketManager *sock = [SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+        
+    }else{
+        [self.stopBtn setImage:[UIImage imageNamed:@"DVD_pause"] forState:UIControlStateNormal];
+        NSData *data = [[DeviceInfo defaultManager] stopScreenByDeviceID:self.deviceid];
+        SocketManager *sock = [SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
