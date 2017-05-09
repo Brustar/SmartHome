@@ -76,13 +76,16 @@
         case windowOpener:
             targetName = @"WindowSlidingController";
             break;
-        /*case screen:
-            targetName = @"ScreenController";
+        case flowering:
+            targetName = @"FloweringController";
             break;
-        case screen:
-            targetName = @"ScreenController";
+        case feeding:
+            targetName = @"FeedingController";
             break;
-        */
+        
+        case Wetting:
+            targetName = @"WettingController";
+            break;
         default:
             break;
     }
