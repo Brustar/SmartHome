@@ -13,17 +13,30 @@
 #define Video_Output_Height 160
 #define LERP(A,B,C) ((A)*(1.0-C)+(B)*C)
 
+@protocol MonitorViewControllerDelegate;
+
 @interface MonitorViewController : UIViewController
 @property (nonatomic, strong) NSString *deviceID;
 @property (nonatomic, strong) NSString *cameraURL;
 @property (nonatomic, strong) NSString *roomName;
 @property (weak, nonatomic) IBOutlet UIImageView *cameraImgView;
 @property (weak, nonatomic) IBOutlet UILabel *roomNameLabel;
+@property (weak, nonatomic) IBOutlet UIButton *adjustBtn;
+@property (weak, nonatomic) IBOutlet UIButton *fullScreenBtn;
 @property (nonatomic,strong) RTSPPlayer *video;
 @property (nonatomic) float lastFrameTime;
 @property (nonatomic, retain) NSTimer *nextFrameTimer;
+@property (nonatomic, assign) id<MonitorViewControllerDelegate> delegate;
 
 - (IBAction)adjustBtnClicked:(id)sender;
 - (IBAction)fullScreenBtnClicked:(id)sender;
+
+@end
+
+
+@protocol MonitorViewControllerDelegate <NSObject>
+
+@optional
+- (void)onAdjustBtnClicked:(UIButton *)sender;
 
 @end

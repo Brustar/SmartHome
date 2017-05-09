@@ -87,6 +87,9 @@
             info.nickName = responseObject[@"nickname"];
             info.headImgURL = responseObject[@"portrait"];
             info.phoneNum = responseObject[@"phone"];
+            info.vip = responseObject[@"vip"];
+            info.endDate = responseObject[@"end_date"];
+            
             _userInfomation = info;
             
             [self refreshUI];
@@ -165,20 +168,67 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     cell.textLabel.textColor = [UIColor whiteColor];
-    cell.detailTextLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.font = [UIFont systemFontOfSize:15];
     
     if (indexPath.section == 0) {
+        if ([_userInfomation.vip isEqualToString:@"1"]) {
+            cell.imageView.image = [UIImage imageNamed:@"VIP_icon"];
+            UILabel *vipLabel = [[UILabel alloc] initWithFrame:CGRectMake(4, -2, 20, 15)];
+            vipLabel.textAlignment = NSTextAlignmentCenter;
+            vipLabel.textColor = [UIColor whiteColor];
+            vipLabel.font = [UIFont boldSystemFontOfSize:11];
+            vipLabel.backgroundColor = [UIColor clearColor];
+            vipLabel.text = @"VIP";
+            [cell.imageView addSubview:vipLabel];
+            
+            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+            UILabel *dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 12, 140, 20)];
+            dateLabel.textAlignment = NSTextAlignmentRight;
+            dateLabel.textColor = [UIColor lightGrayColor];
+            dateLabel.font = [UIFont systemFontOfSize:15];
+            dateLabel.backgroundColor = [UIColor clearColor];
+            dateLabel.text = @"2017-5-31 到期";
+            [view addSubview:dateLabel];
+            
+            UIButton *chargeBtn = [[UIButton alloc] initWithFrame:CGRectMake(160, 11, 40, 22)];
+            [chargeBtn addTarget:self action:@selector(chargeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+            chargeBtn.backgroundColor = [UIColor redColor];
+            chargeBtn.layer.cornerRadius = 4.0;
+            chargeBtn.layer.masksToBounds = YES;
+            [chargeBtn setTitle:@"续费" forState:UIControlStateNormal];
+            [chargeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            chargeBtn.titleLabel.font = [UIFont systemFontOfSize:14.0];
+            [view addSubview:chargeBtn];
+            
+            cell.accessoryView = view;
+            
+        }else {
+            cell.imageView.image = nil;
+            cell.accessoryView = nil;
+        }
         cell.textLabel.text = @"VIP会员";
     }else if (indexPath.section == 1) {
         cell.textLabel.text = @"服务商城";
     }else if (indexPath.section == 2) {
-        cell.textLabel.text = @"我的服务";
+        cell.textLabel.text = @"我的订单";
     }else if (indexPath.section == 3) {
         cell.textLabel.text = @"昵称";
-        cell.detailTextLabel.text = _userInfomation.nickName;
+        UILabel *nickLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
+        nickLabel.textAlignment = NSTextAlignmentRight;
+        nickLabel.textColor = [UIColor lightGrayColor];
+        nickLabel.font = [UIFont systemFontOfSize:15];
+        nickLabel.backgroundColor = [UIColor clearColor];
+        nickLabel.text = _userInfomation.nickName;
+        cell.accessoryView = nickLabel;
     }else if (indexPath.section == 4) {
         cell.textLabel.text = @"电话";
-        cell.detailTextLabel.text = _userInfomation.phoneNum;
+        UILabel *phoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
+        phoneLabel.textAlignment = NSTextAlignmentRight;
+        phoneLabel.textColor = [UIColor lightGrayColor];
+        phoneLabel.font = [UIFont systemFontOfSize:15];
+        phoneLabel.backgroundColor = [UIColor clearColor];
+        phoneLabel.text = _userInfomation.phoneNum;
+        cell.accessoryView = phoneLabel;
     }
     
     return cell;
@@ -187,11 +237,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         //VIP
+        [WebManager show:[[IOManager httpAddr] stringByAppendingString:@"/ui/Vip.aspx"]];
     }else if (indexPath.section == 1) {
         //购物车
         [WebManager show:[[IOManager httpAddr] stringByAppendingString:@"/ui/GoodsList.aspx"]];
     }else if (indexPath.section == 2) {
-        //服务
+        //我的订单
+        [WebManager show:[[IOManager httpAddr] stringByAppendingString:@"/ui/OrderQuery.aspx"]];
     }
 }
 
@@ -310,6 +362,11 @@
     NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:imageName];
     // 将图片写入文件
     [imageData writeToFile:fullPath atomically:NO];
+}
+
+- (void)chargeBtnClicked:(UIButton *)btn {
+    //VIP支付页面
+    
 }
 
 @end

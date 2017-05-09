@@ -76,8 +76,8 @@
         UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self action:@selector(cancel:)];
         self.navigationItem.leftBarButtonItem = left;
     }
-
-    [MBProgressHUD showMessage:@"loading..."];
+    
+    [MBProgressHUD showMessage:@"加载中..."];
     
     if([self.html isEqualToString:@""]){
         NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:self.oauthUrl]

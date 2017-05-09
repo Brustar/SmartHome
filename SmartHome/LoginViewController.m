@@ -65,8 +65,8 @@
     
     UIScrollView *_scrollView = [[UIScrollView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    //设置UIScrollView 的显示内容的尺寸，有n张图要显示，就设置 屏幕宽度*n ，这里假设要显示4张图
-    _scrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width * 4, [UIScreen mainScreen].bounds.size.height);
+    //设置UIScrollView 的显示内容的尺寸，有n张图要显示，就设置 屏幕宽度*n ，这里假设要显示3张图
+    _scrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width * 3, [UIScreen mainScreen].bounds.size.height);
     
     _scrollView.tag = 101;
     
@@ -77,20 +77,20 @@
     _scrollView.delegate = self;
     
     //在UIScrollView 上加入 UIImageView
-    for (int i = 0 ; i < 4; i ++) {
+    for (int i = 0 ; i < 3; i ++) {
         
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * i , 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
         
         //将要加载的图片放入imageView 中
         //UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%d",i+1]];
-        UIImage *image = [UIImage imageNamed:@"IMG_3892.jpg"];
+        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"welcome%d", i+1]];
         imageView.image = image;
         [_scrollView addSubview:imageView];
     }
     
     //初始化 UIPageControl 和 _scrollView 显示在 同一个页面中
     UIPageControl *pageConteol = [[UIPageControl alloc] initWithFrame:CGRectMake((UI_SCREEN_WIDTH-50)/2, self.view.frame.size.height - 60, 50, 40)];
-    pageConteol.numberOfPages = 4;//设置pageConteol 的page 和 _scrollView 上的图片一样多
+    pageConteol.numberOfPages = 3;//设置pageConteol 的page 和 _scrollView 上的图片一样多
     pageConteol.tag = 201;
     
     [self.view addSubview:_scrollView];
@@ -109,7 +109,7 @@
     page.currentPage = current;
     
     //当显示到最后一页时，让滑动图消失
-    if (page.currentPage == 3) {
+    if (page.currentPage == 2) {
         
         //调用方法，使滑动图消失
         [self scrollViewDisappear];

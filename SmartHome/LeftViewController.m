@@ -142,7 +142,7 @@
     [view addSubview:nameLabel];
     
     //VIP
-    if ([_userInfo.vip isEqualToString:@"0"]) {  //VIP: 1(会员)   0(非会员)
+    if ([_userInfo.vip isEqualToString:@"1"]) {  //VIP: 1(会员)   0(非会员)
         UIButton *vipBtn = [[UIButton alloc] initWithFrame:CGRectMake(FX(headButton)+10, CGRectGetMaxY(nameLabel.frame)+10, 30, 15)];
         vipBtn.userInteractionEnabled = NO;
         [vipBtn setBackgroundImage:[UIImage imageNamed:@"VIP_icon"] forState:UIControlStateNormal];

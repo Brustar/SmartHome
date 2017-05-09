@@ -9,8 +9,9 @@
 #import "CustomViewController.h"
 #import "SQLManager.h"
 #import "MonitorViewController.h"
+#import "FamilyDynamicDeviceAdjustViewController.h"
 
-@interface FamilyDynamicViewController : CustomViewController<UIScrollViewDelegate>
+@interface FamilyDynamicViewController : CustomViewController<UIScrollViewDelegate, MonitorViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *cameraList;
 @property (nonatomic, strong) NSMutableArray *cameraIDArray;

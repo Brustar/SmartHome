@@ -2938,6 +2938,9 @@
                                                         <constraint firstAttribute="height" constant="30" id="dqB-4Y-rLd"/>
                                                     </constraints>
                                                     <state key="normal" backgroundImage="dvd_btn_switch_on"/>
+                                                    <connections>
+                                                        <action selector="deviceTimerBtnClicked:" destination="Qld-cR-r5g" eventType="touchUpInside" id="rEW-sf-NHu"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00-14:00，周一，周二，周三，周四，周五，" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cI4-SQ-r9m">
                                                     <rect key="frame" x="10" y="38.5" width="281" height="14.5"/>
@@ -5101,7 +5104,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="SoQ-mk-xSJ">
-                                <rect key="frame" x="0.0" y="9" width="375" height="650"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRm-1c-Wvw">
@@ -5172,7 +5175,7 @@
                                 <rect key="frame" x="0.0" y="548" width="375" height="80"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgU-YC-3GJ">
-                                        <rect key="frame" x="174" y="59" width="26" height="26"/>
+                                        <rect key="frame" x="176" y="52" width="22" height="38"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="22" id="ab9-cX-O3i"/>
@@ -6509,7 +6512,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="WeN-Qz-0Az"/>
         <segue reference="Uo6-og-hnM"/>
-        <segue reference="jfc-yL-NEI"/>
+        <segue reference="lPv-wZ-EAG"/>
         <segue reference="qN8-z6-Gb7"/>
         <segue reference="b22-0A-WOg"/>
     </inferredMetricsTieBreakers>

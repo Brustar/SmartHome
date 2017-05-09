@@ -20,6 +20,7 @@
 @property(nonatomic, assign) NSInteger sex;
 @property(nonatomic, assign) NSInteger userType;
 @property(nonatomic, strong) NSString *signature;
+@property(nonatomic, strong) NSString *endDate;//VIP会员到期时间
 
 
 @end
