@@ -88,11 +88,13 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"权限控制";
+  
     [self setNaviBarTitle:@"权限控制"];
     self.automaticallyAdjustsScrollViewInsets = NO;
 //    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
 //    self.navigationItem.leftBarButtonItem = returnItem;
+    self.userTableView.tableFooterView = [UIView new];
+    
     self.areaTableView.tableHeaderView = self.headView;
     self.areaTableView.hidden = YES;
     NSString *url = [NSString stringWithFormat:@"%@Cloud/user_listall.aspx",[IOManager httpAddr]];
@@ -276,6 +278,7 @@
         cell.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
         cell.areaLabel.text = self.userArr[indexPath.row];
         NSNumber *type = self.managerType[indexPath.row];
+        cell.changeBtn.userInteractionEnabled = NO;
         if([type intValue] ==1)
         {
             cell.detialLabel.text = @"主人";
@@ -291,6 +294,7 @@
     cell.exchangeSwitch.tag = [self.recoredIDs[indexPath.row] integerValue];
     [cell.exchangeSwitch addTarget:self action:@selector(switchChange:) forControlEvents:UIControlEventValueChanged];
     cell.areaLabel.text = self.areasArr[indexPath.row];
+    cell.changeBtn.userInteractionEnabled = NO;
     NSNumber *num = self.opens[indexPath.row];
     if([num intValue] == 1)
     {

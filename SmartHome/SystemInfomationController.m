@@ -28,7 +28,8 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"系统信息";
+   
+    [self setNaviBarTitle:@"系统信息"];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
 //  UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];

@@ -48,7 +48,8 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"系统设置";
+    
+    [self setNaviBarTitle:@"系统设置"];
     self.automaticallyAdjustsScrollViewInsets = NO;
 //    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
 //    self.navigationItem.leftBarButtonItem = returnItem;
@@ -73,6 +74,9 @@
         
         [self.tableView reloadData];
     }
+    
+       self.tableView.allowsSelection = NO;
+
     
 }
 -(void)sendRequest
