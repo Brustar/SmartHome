@@ -2685,11 +2685,12 @@
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wjG-k7-3Dk">
                                                     <rect key="frame" x="335" y="6.5" width="30" height="30"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="BXo-bJ-SQz"/>
                                                         <constraint firstAttribute="width" constant="30" id="PYb-07-8Ys"/>
                                                     </constraints>
-                                                    <state key="normal" image="messageUp"/>
+                                                    <state key="normal" image="dir_right"/>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -8789,6 +8790,7 @@ layer.masksToBoundslayer.masksToBounds
         <image name="clound_white" width="25" height="18"/>
         <image name="correct" width="32" height="32"/>
         <image name="delete" width="25" height="25"/>
+        <image name="dir_right" width="12" height="24"/>
         <image name="dvd_btn_switch_on" width="36" height="23"/>
         <image name="edit" width="32" height="32"/>
         <image name="fixTime" width="32" height="32"/>
@@ -8800,7 +8802,6 @@ layer.masksToBoundslayer.masksToBounds
         <image name="login_icon.png" width="80" height="86"/>
         <image name="logo" width="180" height="180"/>
         <image name="media" width="48" height="48"/>
-        <image name="messageUp" width="16" height="9"/>
         <image name="next" width="32" height="32"/>
         <image name="pause" width="32" height="32"/>
         <image name="place" width="235" height="205"/>
