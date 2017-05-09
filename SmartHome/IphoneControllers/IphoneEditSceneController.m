@@ -122,7 +122,7 @@
         self.TableViewConstraint.constant = -60;
         
     }
-
+//       self.tableView.allowsSelection = NO;
 }
 - (void)setupNaviBar {
     
@@ -157,13 +157,13 @@
         
     }];
     [alertVC addAction:saveNewAction];
-    UIAlertAction *favScene = [UIAlertAction actionWithTitle:@"收藏场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        
-        [self favorScene];
-        
-    }];
-    [alertVC addAction:favScene];
+//    UIAlertAction *favScene = [UIAlertAction actionWithTitle:@"收藏场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        
+//        
+//        [self favorScene];
+//        
+//    }];
+//    [alertVC addAction:favScene];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         [alertVC dismissViewControllerAnimated:YES completion:nil];
     }];
@@ -188,6 +188,23 @@
     [_brightBtn setBackgroundImage:[UIImage imageNamed:@"Scene-bedroom_05_2"] forState:UIControlStateDisabled];
   
 }
+//柔和
+- (IBAction)gentleBtn:(id)sender {
+    
+    [[SceneManager defaultManager] gloom:[self.sceneid intValue]];
+}
+
+//正常
+- (IBAction)normalBtn:(id)sender {
+    [[SceneManager defaultManager] romantic:[self.sceneid intValue]];
+}
+
+//明亮
+- (IBAction)brightBtn:(id)sender {
+    
+   [[SceneManager defaultManager] sprightly:[self.sceneid intValue]];
+}
+
 -(void)getUI
 {
     _lightArr = [[NSMutableArray alloc] init];//场景下的所有设备
@@ -240,15 +257,16 @@
             [_CurtainArray addObject:lightArr[i]];
         }else if ([_typeName isEqualToString:@"FM"]){
             [_FMArray addObject:lightArr[i]];
-        }else if (_htypeID == 12){//网路电视
+        }else if (_htypeID == 11){//网路电视
             [_TVArray addObject:lightArr[i]];
         }else if (_htypeID == 13){//DVD
             [_DVDArray addObject:lightArr[i]];
         }else if (_htypeID == 16){//投影
             [_ProjectArray addObject:lightArr[i]];
-        }else if (_htypeID == 11){//机顶盒
+        }else if (_htypeID == 12){//机顶盒
             [_NetVArray addObject:lightArr[i]];
-        }else if (_htypeID == 14){//背景音乐
+        }
+        else if (_htypeID == 14){//背景音乐
             [_BJMusicArray addObject:lightArr[i]];
         }else if (_htypeID == 17){//幕布
             [_MBArray addObject:lightArr[i]];
@@ -347,42 +365,7 @@
 {
     [self favorScene];
 }
-- (IBAction)storeScene:(id)sender {
-    
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请选择" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *saveAction = [UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //场景ID不变
-        NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
-        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
-        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
-        
-        Scene *scene = [[Scene alloc]init];
-        [scene setValuesForKeysWithDictionary:plistDic];
-        
-        [[SceneManager defaultManager] editScene:scene];
-    }];
-    [alertVC addAction:saveAction];
-    UIAlertAction *saveNewAction = [UIAlertAction actionWithTitle:@"另存为新场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //另存为场景，新的场景ID
-        
-        [self performSegueWithIdentifier:@"storeNewScene" sender:self];
-        
-    }];
-    [alertVC addAction:saveNewAction];
-    UIAlertAction *favScene = [UIAlertAction actionWithTitle:@"收藏场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        
-        [self favorScene];
-        
-    }];
-    [alertVC addAction:favScene];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        [alertVC dismissViewControllerAnimated:YES completion:nil];
-    }];
-    [alertVC addAction:cancelAction];
-    [[DeviceInfo defaultManager] setEditingScene:NO];
-    [self presentViewController:alertVC animated:YES completion:nil];
-}
+
 -(void)favorScene{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"收藏场景" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:  UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -706,9 +689,8 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+      [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 13) {
-        
         UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
         IphoneNewAddSceneVC * devicesVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneNewAddSceneVC"];
         devicesVC.roomID = self.roomID;
@@ -717,7 +699,6 @@
 //        [self performSegueWithIdentifier:@"NewAddDeviceSegue" sender:self];
         
     }
-
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

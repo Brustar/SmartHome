@@ -24,6 +24,7 @@
     UIView *view = [[UIView alloc] init];
     [view setBackgroundColor:[UIColor clearColor]];
     self.tableview.tableFooterView = view;
+    
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -53,6 +54,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+      cell.tintColor = [UIColor redColor];
+     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(cell.accessoryType == UITableViewCellAccessoryNone)
     {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -65,19 +68,61 @@
     }
     
 }
+-(void)viewDidLayoutSubviews {
+    
+    if ([self.tableview respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableview setSeparatorInset:UIEdgeInsetsZero];
+        
+    }
+    if ([self.tableview respondsToSelector:@selector(setLayoutMargins:)])  {
+        [self.tableview setLayoutMargins:UIEdgeInsetsZero];
+    }
+    
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPat{
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]){
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+}
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIView * view = [[UIView alloc] init];
+    view.frame  = CGRectMake(0, 0, self.view.bounds.size.width, 50);
+    UIView * line1 = [[UIView alloc] init];
+    line1.frame = CGRectMake(0, 0, self.view.bounds.size.width, 1);
+    line1.backgroundColor = [UIColor colorWithRed:115/255.0 green:116/255.0 blue:119/255.0 alpha:1];
+    [view addSubview:line1];
+    UIButton * button = [[UIButton alloc] init];
+    button.frame = CGRectMake(0, 1, self.view.bounds.size.width, 49);
+    [button setBackgroundImage:[UIImage imageNamed:@"tm_fm_high_normal"] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"icon_pull_normal"] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(weekButton:) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:button];
+    
+    return view;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+
+{
+    
+    return 50;
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)weekButton:(id)sender {
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(onWeekButtonClicked:)]) {
+        [_delegate onWeekButtonClicked:sender];
+    }
 }
-*/
 
 @end

@@ -32,7 +32,6 @@ static NSString *const airCellIdentifier = @"airCell";
 @property (weak, nonatomic) IBOutlet UIImageView *pm_clock_hand;
 @property (weak, nonatomic) IBOutlet UIImageView *humidity_hand;
 @property (weak, nonatomic) IBOutlet UIButton *disk;
-@property (weak, nonatomic) IBOutlet UILabel *tempretureLbl;
 
 @property (weak, nonatomic) IBOutlet UIView *container;
 

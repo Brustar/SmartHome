@@ -15,12 +15,14 @@
 #import "SceneManager.h"
 #import "PackManager.h"
 #import "ORBSwitch.h"
+#import "UIViewController+Navigator.h"
 
 @interface AmplifierController ()<ORBSwitchDelegate>
 
 @property (nonatomic,strong) NSMutableArray *amplifierNames;
 @property (nonatomic,strong) NSMutableArray *amplifierIDArr;
 @property (nonatomic,strong) ORBSwitch *switcher;
+@property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
 @end
 
 @implementation AmplifierController
@@ -72,11 +74,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 功放",roomName]];
-    self.deviceid=[self.amplifierIDArr objectAtIndex:0];
+    self.deviceid = [self.amplifierIDArr objectAtIndex:0];
     [self initSwitcher];
+    NSArray *menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
+    [self initMenuContainer:self.menuContainer andArray:menus andID:self.deviceid];
+    [self naviToDevice];
     
     _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     if ([self.sceneid intValue]>0) {
@@ -91,7 +96,7 @@
 
 -(void) initSwitcher
 {
-    self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:[UIImage imageNamed:@"lighting_off"] inactiveBackgroundImage:nil activeBackgroundImage:nil frame:CGRectMake(0, 0, 194, 194)];
+    self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:[UIImage imageNamed:@"plugin_off"] inactiveBackgroundImage:nil activeBackgroundImage:nil frame:CGRectMake(0, 0, 750/2, 770/2)];
     self.switcher.center = CGPointMake(self.view.bounds.size.width / 2,
                                        self.view.bounds.size.height / 2);
     

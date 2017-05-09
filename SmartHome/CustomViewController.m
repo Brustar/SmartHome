@@ -8,6 +8,8 @@
 
 #import "CustomViewController.h"
 #import "Utilities.h"
+#import <ReactiveCocoa/ReactiveCocoa.h>
+#import "UIViewController+Navigator.h"
 
 @interface CustomViewController ()
 
@@ -73,6 +75,17 @@
 }
 
 #pragma mark -
+
+-(void)naviToDevice
+{
+    UIButton *naviBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [naviBtn setImage:[UIImage imageNamed:@"dir_left"] forState:UIControlStateNormal];
+    [[naviBtn rac_signalForControlEvents:UIControlEventTouchUpInside]
+     subscribeNext:^(id x) {
+         [self popToDevice];
+     }];
+    [self setNaviBarLeftBtn:naviBtn];
+}
 
 - (void)bringNaviBarToTopmost
 {

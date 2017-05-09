@@ -11,21 +11,21 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DVDTableViewCell" rowHeight="133" id="KGk-i7-Jjw" customClass="DVDTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DVDTableViewCell" rowHeight="131" id="KGk-i7-Jjw" customClass="DVDTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="148"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="147.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lv_fm_adjust_normal" translatesAutoresizingMaskIntoConstraints="NO" id="M28-8e-zHA">
-                        <rect key="frame" x="0.0" y="99.5" width="375" height="50"/>
+                        <rect key="frame" x="0.0" y="97.5" width="375" height="50"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="uxK-7J-6GO"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="客厅DVD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="je0-2Y-f1l">
-                        <rect key="frame" x="10" y="0.0" width="100" height="54"/>
+                        <rect key="frame" x="10" y="0.0" width="100" height="52"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="4V3-5i-Qzt"/>
                         </constraints>
@@ -34,52 +34,61 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_icon_voi_high" translatesAutoresizingMaskIntoConstraints="NO" id="ZRr-fE-u93">
-                        <rect key="frame" x="18" y="117" width="10" height="10"/>
+                        <rect key="frame" x="18" y="115" width="10" height="10"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="10" id="n2W-cb-0Ii"/>
                             <constraint firstAttribute="width" constant="10" id="yqh-A5-WRL"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_icon_voi_high" translatesAutoresizingMaskIntoConstraints="NO" id="RxL-mC-ARL">
-                        <rect key="frame" x="342" y="115" width="15" height="15"/>
+                        <rect key="frame" x="342" y="113" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="MUc-jh-RqR"/>
                             <constraint firstAttribute="width" constant="15" id="ugu-xS-X5k"/>
                         </constraints>
                     </imageView>
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="NYR-NW-O6b">
-                        <rect key="frame" x="36" y="106" width="298" height="31"/>
+                        <rect key="frame" x="36" y="104" width="298" height="31"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="Q0h-1a-MNG"/>
                         </constraints>
                     </slider>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dvd_frm_choice__normal" translatesAutoresizingMaskIntoConstraints="NO" id="F7B-y2-2nU">
-                        <rect key="frame" x="1" y="54" width="373" height="50"/>
+                        <rect key="frame" x="1" y="52" width="373" height="50"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="ZE6-sO-ZC5"/>
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQ4-Nq-8mW">
-                        <rect key="frame" x="18" y="57" width="116.5" height="42.5"/>
-                        <state key="normal" image="icon2">
+                        <rect key="frame" x="14" y="57" width="102.5" height="43.5"/>
+                        <state key="normal" image="DVD_previous" backgroundImage="dvd_btn_adjust_normal">
                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="Previous:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="7y1-xY-C2e"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UYH-Br-BuW">
-                        <rect key="frame" x="250.5" y="57" width="116.5" height="42.5"/>
-                        <state key="normal" image="icon1"/>
+                        <rect key="frame" x="258.5" y="57" width="102.5" height="43.5"/>
+                        <state key="normal" image="DVD_next" backgroundImage="dvd_btn_adjust_normal"/>
+                        <connections>
+                            <action selector="nextBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ebs-xB-i98"/>
+                        </connections>
                     </button>
                     <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="OqP-ir-MRF">
-                        <rect key="frame" x="307" y="9" width="42" height="40"/>
+                        <rect key="frame" x="307" y="7" width="42" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="JDz-EP-gKW"/>
                             <constraint firstAttribute="width" constant="40" id="vyT-dA-14D"/>
                         </constraints>
                     </switch>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="75B-Ud-NQ6">
-                        <rect key="frame" x="134.5" y="57" width="116" height="42.5"/>
-                        <state key="normal" image="icon3"/>
+                        <rect key="frame" x="136.5" y="57" width="102" height="43.5"/>
+                        <state key="normal" image="DVD_play" backgroundImage="dvd_btn_adjust_normal"/>
+                        <connections>
+                            <action selector="stopBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="8SS-Fi-bUT"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYW-1Y-DcS">
                         <rect key="frame" x="260" y="7" width="55" height="35"/>
@@ -107,23 +116,23 @@
                     <constraint firstItem="NYR-NW-O6b" firstAttribute="top" secondItem="F7B-y2-2nU" secondAttribute="bottom" constant="2" id="K8h-9C-4eR"/>
                     <constraint firstItem="F7B-y2-2nU" firstAttribute="top" secondItem="OqP-ir-MRF" secondAttribute="bottom" constant="5" id="KoR-wY-KOV"/>
                     <constraint firstItem="wYW-1Y-DcS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="Lj8-Z5-Put"/>
-                    <constraint firstItem="aQ4-Nq-8mW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="LpR-Wf-r8M"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="UYH-Br-BuW" secondAttribute="trailing" id="MAC-pY-5LJ"/>
+                    <constraint firstItem="aQ4-Nq-8mW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="6" id="LpR-Wf-r8M"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="UYH-Br-BuW" secondAttribute="trailing" constant="6" id="MAC-pY-5LJ"/>
                     <constraint firstItem="ui6-GU-GbM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="MFG-Rd-lef"/>
                     <constraint firstAttribute="trailing" secondItem="wYW-1Y-DcS" secondAttribute="trailing" constant="60" id="OHB-wH-UXl"/>
                     <constraint firstItem="NYR-NW-O6b" firstAttribute="leading" secondItem="ZRr-fE-u93" secondAttribute="trailing" constant="10" id="PRI-qc-HzQ"/>
                     <constraint firstAttribute="trailingMargin" secondItem="RxL-mC-ARL" secondAttribute="trailing" constant="10" id="Pnh-Qf-adm"/>
-                    <constraint firstItem="75B-Ud-NQ6" firstAttribute="leading" secondItem="aQ4-Nq-8mW" secondAttribute="trailing" id="QUU-h6-CbJ"/>
-                    <constraint firstItem="M28-8e-zHA" firstAttribute="top" secondItem="75B-Ud-NQ6" secondAttribute="bottom" id="SgQ-Uf-RbA"/>
+                    <constraint firstItem="75B-Ud-NQ6" firstAttribute="leading" secondItem="aQ4-Nq-8mW" secondAttribute="trailing" constant="20" id="QUU-h6-CbJ"/>
+                    <constraint firstItem="M28-8e-zHA" firstAttribute="top" secondItem="75B-Ud-NQ6" secondAttribute="bottom" constant="-3" id="SgQ-Uf-RbA"/>
                     <constraint firstItem="RxL-mC-ARL" firstAttribute="leading" secondItem="NYR-NW-O6b" secondAttribute="trailing" constant="10" id="WUF-1O-RVO"/>
                     <constraint firstAttribute="bottomMargin" secondItem="RxL-mC-ARL" secondAttribute="bottom" constant="11.5" id="XYO-TN-HKd"/>
-                    <constraint firstItem="M28-8e-zHA" firstAttribute="top" secondItem="UYH-Br-BuW" secondAttribute="bottom" id="YhI-bQ-9h8"/>
+                    <constraint firstItem="M28-8e-zHA" firstAttribute="top" secondItem="UYH-Br-BuW" secondAttribute="bottom" constant="-3" id="YhI-bQ-9h8"/>
                     <constraint firstItem="ZRr-fE-u93" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="aSk-M5-lnN"/>
                     <constraint firstItem="UYH-Br-BuW" firstAttribute="height" secondItem="aQ4-Nq-8mW" secondAttribute="height" id="dGO-jh-48i"/>
-                    <constraint firstItem="M28-8e-zHA" firstAttribute="top" secondItem="aQ4-Nq-8mW" secondAttribute="bottom" id="dNa-0C-u4a"/>
+                    <constraint firstItem="M28-8e-zHA" firstAttribute="top" secondItem="aQ4-Nq-8mW" secondAttribute="bottom" constant="-3" id="dNa-0C-u4a"/>
                     <constraint firstItem="UYH-Br-BuW" firstAttribute="width" secondItem="aQ4-Nq-8mW" secondAttribute="width" id="exZ-4e-RYz"/>
                     <constraint firstItem="75B-Ud-NQ6" firstAttribute="width" secondItem="aQ4-Nq-8mW" secondAttribute="width" id="g4a-Uk-wz6"/>
-                    <constraint firstItem="UYH-Br-BuW" firstAttribute="leading" secondItem="75B-Ud-NQ6" secondAttribute="trailing" id="gVN-Te-gpF"/>
+                    <constraint firstItem="UYH-Br-BuW" firstAttribute="leading" secondItem="75B-Ud-NQ6" secondAttribute="trailing" constant="20" id="gVN-Te-gpF"/>
                     <constraint firstAttribute="trailingMargin" secondItem="OqP-ir-MRF" secondAttribute="trailing" constant="20" id="gdB-i0-LMj"/>
                     <constraint firstAttribute="bottom" secondItem="M28-8e-zHA" secondAttribute="bottom" id="hWq-gg-CrD"/>
                     <constraint firstItem="je0-2Y-f1l" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="ljb-Ur-pkN"/>
@@ -141,18 +150,22 @@
                 <outlet property="DVDNameLabel" destination="je0-2Y-f1l" id="X7K-XD-4TD"/>
                 <outlet property="DVDSlider" destination="NYR-NW-O6b" id="JzR-gz-1wV"/>
                 <outlet property="DVDSwitchBtn" destination="wYW-1Y-DcS" id="1nS-vW-gWz"/>
+                <outlet property="PreviousBtn" destination="aQ4-Nq-8mW" id="uOg-s9-ONv"/>
                 <outlet property="YLImageView" destination="ZRr-fE-u93" id="BO5-6B-eDO"/>
+                <outlet property="nextBtn" destination="UYH-Br-BuW" id="fKy-j0-MSh"/>
+                <outlet property="stopBtn" destination="75B-Ud-NQ6" id="CqB-rE-c33"/>
             </connections>
-            <point key="canvasLocation" x="41.5" y="118.5"/>
+            <point key="canvasLocation" x="41.5" y="119"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="DVD_next" width="10" height="10"/>
+        <image name="DVD_play" width="9" height="10"/>
+        <image name="DVD_previous" width="10" height="10"/>
         <image name="bd_icon_voi_high" width="11" height="9"/>
+        <image name="dvd_btn_adjust_normal" width="91" height="38"/>
         <image name="dvd_btn_switch_on" width="36" height="23"/>
         <image name="dvd_frm_choice__normal" width="336" height="47"/>
-        <image name="icon1" width="91" height="38"/>
-        <image name="icon2" width="91" height="38"/>
-        <image name="icon3" width="91" height="38"/>
         <image name="icon_add_normal" width="15" height="15"/>
         <image name="lv_fm_adjust_normal" width="336" height="47"/>
     </resources>

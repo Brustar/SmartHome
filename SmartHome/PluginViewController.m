@@ -8,7 +8,7 @@
 
 #import "PluginViewController.h"
 #import "SocketManager.h"
-//#import "AsyncUdpSocket.h"
+#import "UIViewController+Navigator.h"
 #import "PackManager.h"
 #import "PluginCell.h"
 #import "SQLManager.h"
@@ -24,6 +24,7 @@
 @property (nonatomic,strong) NSMutableArray *plugNames;
 @property (nonatomic,strong) NSMutableArray *plugDeviceIds;
 @property (nonatomic,strong) ORBSwitch *switcher;
+@property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
 
 @end
 
@@ -79,9 +80,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
+    NSArray *menus = [SQLManager singleProductByRoom:self.roomID];
+    [self initMenuContainer:self.menuContainer andArray:menus andID:self.deviceid];
+    [self naviToDevice];
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 智能插座",roomName]];
+    [self initSwitcher];
 //    [self initPlugin];
 //    [self initHomekitPlugin];
     [self setupSegment];
@@ -96,7 +101,7 @@
 
 -(void) initSwitcher
 {
-    self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:[UIImage imageNamed:@"lighting_off"] inactiveBackgroundImage:nil activeBackgroundImage:nil frame:CGRectMake(0, 0, 194, 194)];
+    self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:[UIImage imageNamed:@"plugin_off"] inactiveBackgroundImage:nil activeBackgroundImage:nil frame:CGRectMake(0, 0, 750/2, 770/2)];
     self.switcher.center = CGPointMake(self.view.bounds.size.width / 2,
                                        self.view.bounds.size.height / 2);
     

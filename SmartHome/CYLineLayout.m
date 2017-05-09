@@ -75,6 +75,7 @@
         
         // 设置缩放比例
         attrs.transform = CGAffineTransformMakeScale(scale, scale);
+
     }
     return array;
 }

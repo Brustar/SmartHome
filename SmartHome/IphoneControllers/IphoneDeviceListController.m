@@ -115,7 +115,7 @@ static NSString * const CYPhotoId = @"photo";
 }
 
 - (void)rightBtnClicked:(UIButton *)btn {
-    //[self performSegueWithIdentifier:@"DVD" sender:self];
+    //[self performSegueWithIdentifier:@"FM" sender:self];
     
     UIStoryboard * HomeStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
     if (_nowMusicController == nil) {
@@ -249,6 +249,7 @@ static NSString * const CYPhotoId = @"photo";
     // Pass the selected object to the new view controller.
     id theSegue = segue.destinationViewController;
     Room *room = self.rooms[self.roomIndex];
+    [[DeviceInfo defaultManager] setRoomID:room.rId];
     [theSegue setValue:[NSString stringWithFormat:@"%d", room.rId] forKey:@"roomID"];
 }
 

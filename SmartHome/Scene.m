@@ -17,6 +17,7 @@
         
         [self setSceneName:@""];
         [self setPicName:@""];
+        [self setRoomName:@""];
         [self setSchedules:@[]];
         [self setDevices:@[]];
         

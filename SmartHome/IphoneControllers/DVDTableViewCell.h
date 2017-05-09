@@ -14,6 +14,10 @@
 @property (weak, nonatomic) IBOutlet UISlider *DVDSlider;
 @property (weak, nonatomic) IBOutlet UIButton *DVDSwitchBtn;
 @property (weak, nonatomic) IBOutlet UIButton *AddDvdBtn;
+@property (weak, nonatomic) IBOutlet UIButton *stopBtn;
+@property (weak, nonatomic) IBOutlet UIButton *nextBtn;
+
+@property (weak, nonatomic) IBOutlet UIButton *PreviousBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *DVDConstraint;
 @property(nonatomic, strong)NSString * deviceid;
 @property (nonatomic,weak) NSString *sceneid;

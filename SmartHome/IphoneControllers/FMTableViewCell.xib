@@ -35,9 +35,6 @@
                             <constraint firstAttribute="height" constant="30" id="OcX-zo-EI2"/>
                         </constraints>
                         <state key="normal" image="icon_add_normal"/>
-                        <connections>
-                            <action selector="AddFmBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Lbq-Qd-2Ww"/>
-                        </connections>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lv_fm_adjust_normal" translatesAutoresizingMaskIntoConstraints="NO" id="xIo-qQ-yTT">
                         <rect key="frame" x="0.0" y="60" width="375" height="50"/>
@@ -83,12 +80,12 @@
                             <constraint firstAttribute="height" constant="25" id="JJR-mu-ZoS"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25°C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3bJ-tb-OIA">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="105.7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3bJ-tb-OIA">
                         <rect key="frame" x="21" y="117" width="29" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="uut-UM-zlm"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -98,6 +95,14 @@
                             <constraint firstAttribute="height" constant="30" id="eQN-PH-Gwi"/>
                         </constraints>
                     </slider>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V1H-l4-DmA">
+                        <rect key="frame" x="252" y="23" width="55" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="35" id="I4h-fm-wbj"/>
+                            <constraint firstAttribute="width" constant="55" id="eJv-7S-SNe"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="dvd_btn_switch_on"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="9Fs-hH-RBx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="2ec-y0-KjN"/>
@@ -105,6 +110,7 @@
                     <constraint firstItem="I3W-gc-d2v" firstAttribute="leading" secondItem="gny-GJ-qtv" secondAttribute="trailing" constant="6" id="4ub-Pe-Irw"/>
                     <constraint firstItem="gny-GJ-qtv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="5Cc-ng-41Z"/>
                     <constraint firstItem="I3W-gc-d2v" firstAttribute="leading" secondItem="3bJ-tb-OIA" secondAttribute="trailing" constant="8" id="5p7-k4-jtk"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="V1H-l4-DmA" secondAttribute="trailing" constant="60" id="7Ka-yk-X0d"/>
                     <constraint firstItem="6Ma-tU-XJy" firstAttribute="leading" secondItem="gny-GJ-qtv" secondAttribute="trailing" constant="17" id="7fB-DR-1mj"/>
                     <constraint firstItem="hQP-MG-UEJ" firstAttribute="top" secondItem="ykO-AQ-yva" secondAttribute="bottom" constant="11" id="Ey3-MB-CnM"/>
                     <constraint firstItem="xIo-qQ-yTT" firstAttribute="top" secondItem="oHP-La-v8f" secondAttribute="bottom" id="JB1-IU-C4w"/>
@@ -116,6 +122,7 @@
                     <constraint firstAttribute="bottom" secondItem="hQP-MG-UEJ" secondAttribute="bottom" constant="-3" id="dgH-mp-QEO"/>
                     <constraint firstItem="oHP-La-v8f" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="do2-bn-ZzB"/>
                     <constraint firstItem="hQP-MG-UEJ" firstAttribute="top" secondItem="3Pw-CA-AFl" secondAttribute="bottom" constant="4" id="f3x-Lq-wfJ"/>
+                    <constraint firstItem="V1H-l4-DmA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="15" id="jly-cl-jil"/>
                     <constraint firstAttribute="trailing" secondItem="6Ma-tU-XJy" secondAttribute="trailing" constant="22" id="mFE-1C-KQt"/>
                     <constraint firstAttribute="trailing" secondItem="hQP-MG-UEJ" secondAttribute="trailing" id="nWJ-Ix-hCp"/>
                     <constraint firstAttribute="bottomMargin" secondItem="I3W-gc-d2v" secondAttribute="bottom" constant="1.5" id="naG-JU-1eQ"/>
@@ -144,6 +151,7 @@
     </objects>
     <resources>
         <image name="bd_icon_voi_high" width="11" height="9"/>
+        <image name="dvd_btn_switch_on" width="36" height="23"/>
         <image name="dvd_frm_choice__normal" width="336" height="47"/>
         <image name="icon_add_normal" width="15" height="15"/>
         <image name="ktv_btn_ajt" width="269" height="20"/>

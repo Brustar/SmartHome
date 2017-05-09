@@ -14,13 +14,15 @@
 #import "MBProgressHUD+NJ.h"
 #import <math.h>
 #import "CKCircleView.h"
+#import "WeekdaysVC.h"
 
-@interface IphoneNewAddSceneTimerVC ()<CKCircleViewDelegate>
+@interface IphoneNewAddSceneTimerVC ()<CKCircleViewDelegate,WeekdaysVCDelegate>
 @property (nonatomic,strong) Scene *scene;
 @property (nonatomic,strong) Schedule *schedule;
 @property (nonatomic,strong) NSMutableDictionary *weeks;
 @property (nonatomic,strong) UIButton * naviRightBtn;
 @property CKCircleView * dialView;
+@property (nonatomic,strong)WeekdaysVC * weekDaysVC;
 
 @end
 
@@ -131,7 +133,33 @@
     [self.navigationController popViewControllerAnimated:YES];
 
 }
-
+- (IBAction)SelectWeek:(id)sender {
+    
+    UIStoryboard * HomeStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
+    if (_weekDaysVC == nil) {
+        self.DrawView.hidden = YES;
+        self.dialView.hidden = YES;
+        _weekDaysVC = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"WeekdaysVC"];
+        _weekDaysVC.delegate = self;
+        [self.view addSubview:_weekDaysVC.view];
+        [self.view bringSubviewToFront:_weekDaysVC.view];
+        
+    }else {
+        self.DrawView.hidden = NO;
+        self.dialView.hidden = NO;
+        [_weekDaysVC.view removeFromSuperview];
+        _weekDaysVC = nil;
+    }
+}
+-(void)onWeekButtonClicked:(UIButton *)button
+{
+    self.DrawView.hidden = NO;
+    self.dialView.hidden = NO;
+    if (_weekDaysVC) {
+        [_weekDaysVC.view removeFromSuperview];
+        _weekDaysVC = nil;
+    }
+}
 - (void)iphoneSelectWeek:(NSNotification *)noti
 {
     NSDictionary *dict = noti.userInfo;

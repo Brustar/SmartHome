@@ -88,7 +88,7 @@
     self.tableView.tableFooterView = view;
     [self setupNaviBar];
     [self setControllerCell];
-  
+    self.tableView.allowsSelection = NO;
     NSLog(@"%@",_viewControllerArrs);
     
   
@@ -217,16 +217,16 @@
                 [_AirArray addObject:self.devices[i]];
             }else if (_htypeID == 21){//窗帘
                 [_CurtainArray addObject:self.devices[i]];
-            }else if (_htypeID == 0){//FM
+            }else if (_htypeID == 15){//FM
                 [_FMArray addObject:self.devices[i]];
             }else if (_htypeID == 12){//网路电视
-                [_TVArray addObject:self.devices[i]];
+                [_NetVArray addObject:self.devices[i]];
             }else if (_htypeID == 13){//DVD
                 [_DVDArray addObject:self.devices[i]];
             }else if (_htypeID == 16){//投影幕
                 [_ProjectArray addObject:self.devices[i]];
             }else if (_htypeID == 11){//机顶盒
-                [_NetVArray addObject:self.devices[i]];
+                [_TVArray addObject:self.devices[i]];
             }else if (_htypeID == 14){//背景音乐
                 [_BJMusicArray addObject:self.devices[i]];
             }else if (_htypeID == 17){//幕布
@@ -313,9 +313,7 @@
             }
             break;
         case 2:
-            if (_SwitchLightArr.count == 0) {
                 view.hidden = YES;
-            }
             break;
         case 3:
             if (_AirArray.count == 0) {

@@ -59,13 +59,13 @@
 @property (nonatomic,assign) int sceneID;
 @property (nonatomic,strong) YZNavigationMenuView *menuView;
 @property (strong, nonatomic) IBOutlet UIButton *titleButton;
-@property(nonatomic,strong)HostIDSController *hostVC;
-@property (weak, nonatomic) IBOutlet UIButton *delegateBtn;
-@property (weak, nonatomic) IBOutlet UIButton *startBtn;
-@property (weak, nonatomic) IBOutlet UIButton *blockBtn;
+@property (nonatomic,strong)HostIDSController *hostVC;
+@property (weak, nonatomic) IBOutlet UIButton *delegateBtn;//场景删除按钮
+@property (weak, nonatomic) IBOutlet UIButton *startBtn;//场景开启按钮
+@property (weak, nonatomic) IBOutlet UIButton *blockBtn;//定时按钮
 @property (weak, nonatomic) IBOutlet UILabel *SceneNameLabel;
-@property (nonatomic,strong)UICollectionView * FirstCollectionView;
-@property(nonatomic,strong)UILongPressGestureRecognizer *lgPress;
+@property (nonatomic,strong) UICollectionView * FirstCollectionView;
+@property (nonatomic,strong) UILongPressGestureRecognizer *lgPress;
 @property (nonatomic,strong)UIImage *selectSceneImg;
 
 @end
@@ -76,6 +76,7 @@ static NSString * const CYPhotoId = @"photo";
 
 
 - (void)setupNaviBar {
+    
     [self setNaviBarTitle:[UD objectForKey:@"homename"]]; //设置标题
     _naviLeftBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"clound_white" imgHighlight:@"clound_white" target:self action:@selector(leftBtnClicked:)];
     _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"music_white" imgHighlight:@"music_white" target:self action:@selector(rightBtnClicked:)];
@@ -110,12 +111,12 @@ static NSString * const CYPhotoId = @"photo";
 }
 
 - (void)onBgButtonClicked:(UIButton *)sender {
+    
     if (_nowMusicController) {
         [_nowMusicController.view removeFromSuperview];
         _nowMusicController = nil;
     }
 }
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -532,6 +533,19 @@ static NSString * const CYPhotoId = @"photo";
          [SQLManager updateSceneStatus:0 sceneID:self.sceneID];//更新数据库
     }
 }
+
+- (IBAction)blockBtn:(id)sender {
+    
+    self.blockBtn.selected = !self.blockBtn.selected;
+    
+    if (self.blockBtn.selected) {
+        
+        [self.blockBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock2"] forState:UIControlStateSelected];
+    }else{
+            [self.blockBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock1"] forState:UIControlStateNormal];
+    }
+}
+
 //删除场景
 -(void)sceneDeleteAction:(CYPhotoCell *)cell
 {
@@ -562,7 +576,7 @@ static NSString * const CYPhotoId = @"photo";
             [self.scenes addObjectsFromArray:tmpArr];
             NSString *imageName = @"i-add";
             [self.scenes addObject:imageName];
-            [self.collectionView reloadData];
+            [self.FirstCollectionView reloadData];
             
             if([responseObject[@"result"] intValue] == 0)
             {
@@ -574,7 +588,7 @@ static NSString * const CYPhotoId = @"photo";
                     if (scene) {
                         [[SceneManager defaultManager] delScene:scene];
                         [MBProgressHUD showSuccess:@"删除成功"];
-                        [self.collectionView reloadData];
+                        [self.FirstCollectionView reloadData];
                     }else {
                         NSLog(@"scene 不存在！");
                         [MBProgressHUD showSuccess:@"删除失败"];

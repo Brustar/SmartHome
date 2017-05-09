@@ -28,16 +28,14 @@
 
 
 
-@interface FirstViewController ()<RCIMReceiveMessageDelegate,HttpDelegate, TcpRecvDelegate,  UITableViewDelegate,UITableViewDataSource>
+@interface FirstViewController ()<RCIMReceiveMessageDelegate,HttpDelegate,TcpRecvDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView * SubImageView;//首页的日历大圆
 @property (weak, nonatomic) IBOutlet UIView * BtnView;//全屋场景的按钮试图
 @property (weak, nonatomic) IBOutlet UIImageView * IconeImageView;//提示消息的头像
 @property (weak, nonatomic) IBOutlet UILabel * memberFamilyLabel;//家庭成员label
 @property (weak, nonatomic) IBOutlet UIImageView * numberLabelView;//未读消息的视图
 @property (weak, nonatomic) IBOutlet UIBarButtonItem * playerBarBtn;//正在播放的按钮
-@property (weak, nonatomic) IBOutlet UIView * playerSubView;//正在播放的视图
 @property (weak, nonatomic) IBOutlet UIView * FourBtnView;
-//@property (weak, nonatomic) IBOutlet UITableView * tableView;
 @property (nonatomic,strong) NSArray * dataArr;
 @property (weak, nonatomic) IBOutlet UIImageView * HeadImageView;
 @property (weak, nonatomic) IBOutlet UIView * socialView;
@@ -312,9 +310,16 @@
 - (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left
 {
     NSString *nickname = [SQLManager queryChat:message.senderUserId][0];
-    self.chatlabel.text =[NSString stringWithFormat:@"%@ : %@" , nickname, message.content.conversationDigest];
+    
+    NSString *tip=@"您有新消息";
+    if ([message.objectName isEqualToString:RCTextMessageTypeIdentifier]) {
+        tip = message.content.conversationDigest;
+    }
+    
+    self.chatlabel.text =[NSString stringWithFormat:@"%@ : %@" , nickname, tip];
     [self.IconeImageView badge];
 }
+
 - (void)getScenesFromPlist
 {
     _shortcutsArray = [[NSMutableArray alloc] init];
@@ -337,6 +342,7 @@
         }
     }
 }
+
 -(void)setBtn
 {
     _firstBtn.selected = !_firstBtn.selected;
@@ -370,6 +376,7 @@
             [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular3"] forState:UIControlStateNormal];
         }
     }else{
+        _ThreeBtn.centerX = self.view.centerX;
         _firstBtn.hidden = YES;
         _TwoBtn.hidden = YES;
         
@@ -419,6 +426,7 @@
     _naviMiddletBtn.selected = !_naviMiddletBtn.selected;
     if (_naviMiddletBtn.selected) {
         if (_hostListViewController == nil) {
+            self.CoverView.hidden = NO;
             UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             
             _hostListViewController = [storyBoard instantiateViewControllerWithIdentifier:@"HostIDSController"];
@@ -429,6 +437,7 @@
         
     }else{
         if (_hostListViewController) {
+            self.CoverView.hidden = YES;
             [_hostListViewController.view removeFromSuperview];
             _hostListViewController.delegate = nil;
             _hostListViewController = nil;
@@ -469,6 +478,7 @@
 - (void)rightBtnClicked:(UIButton *)btn {
     
     UIStoryboard * HomeStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
+    
     if (_nowMusicController == nil) {
         _nowMusicController = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"NowMusicController"];
         _nowMusicController.delegate = self;
@@ -488,9 +498,9 @@
 //跳转到场景快捷键界面
 - (IBAction)SceneShortcutBtn:(id)sender {
     
+    self.socialView.hidden = YES;
     UIStoryboard * myInfoStoryBoard = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
     SceneShortcutsViewController * shortcutKeyVC = [myInfoStoryBoard instantiateViewControllerWithIdentifier:@"SceneShortcutsVC"];
-    
     [self.navigationController pushViewController:shortcutKeyVC animated:YES];
 }
 - (void)menuBtnAction:(UIButton *)sender {
@@ -559,17 +569,6 @@
     _baseTabbarController.tabbarPanel.hidden = NO;
 }
 
-#pragma UITableViewDelegate
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 0;
-}
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    return cell;
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -13,10 +13,12 @@
 #import "Schedule.h"
 #import "IOManager.h"
 #import "SQLManager.h"
+#import "UIViewController+Navigator.h"
 
 @interface FloweringController ()
 @property (weak, nonatomic) IBOutlet UILabel *HLabel;
 @property (weak, nonatomic) IBOutlet UILabel *SLabel;
+@property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
 
 @end
 
@@ -24,7 +26,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
+    NSArray *menus = [SQLManager singleProductByRoom:self.roomID];
+    [self initMenuContainer:self.menuContainer andArray:menus andID:self.deviceid];
+    [self naviToDevice];
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 智能浇花",roomName]];
     [self initSlider];
