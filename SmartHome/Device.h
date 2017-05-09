@@ -11,7 +11,7 @@
 typedef NS_ENUM(NSUInteger, deviceType) {
     light = 1,
     curtain = 7,
-    TVtype = 12,
+    TVtype = 11,
     DVDtype = 13,
     bgmusic = 14,
     FM = 15,
@@ -21,7 +21,8 @@ typedef NS_ENUM(NSUInteger, deviceType) {
     screen = 17,
     amplifier = 18,
     camera = 45,
-    plugin = 41
+    plugin = 41,
+    windowOpener = 42
 };
 
 typedef NS_ENUM(NSUInteger, catalog) {

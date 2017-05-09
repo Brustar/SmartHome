@@ -81,6 +81,7 @@
 		0F9EA72D1DDB026C00223ED8 /* NSString+RegMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9EA72C1DDB026C00223ED8 /* NSString+RegMatch.m */; };
 		0FA0FD661D057C430041CE96 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA0FD651D057C430041CE96 /* AddressBook.framework */; };
 		0FA1E09E1D533BFA001CA819 /* PluginCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA1E09D1D533BFA001CA819 /* PluginCell.m */; };
+		0FA4CBFA1EC045710072CE15 /* UIViewController+Navigator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA4CBF91EC045710072CE15 /* UIViewController+Navigator.m */; };
 		0FA658F81CD98EF5005AC4B4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA658F21CD98D79005AC4B4 /* AudioToolbox.framework */; };
 		0FA658FC1CD9DB3F005AC4B4 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA658FB1CD9DB3F005AC4B4 /* MediaPlayer.framework */; };
 		0FA96D521EB033FE001DDF39 /* UIView+Popup.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA96D511EB033FE001DDF39 /* UIView+Popup.m */; };
@@ -653,6 +654,8 @@
 		0FA0FD651D057C430041CE96 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		0FA1E09C1D533BFA001CA819 /* PluginCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginCell.h; sourceTree = "<group>"; };
 		0FA1E09D1D533BFA001CA819 /* PluginCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginCell.m; sourceTree = "<group>"; };
+		0FA4CBF81EC045710072CE15 /* UIViewController+Navigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Navigator.h"; sourceTree = "<group>"; };
+		0FA4CBF91EC045710072CE15 /* UIViewController+Navigator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Navigator.m"; sourceTree = "<group>"; };
 		0FA658F21CD98D79005AC4B4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		0FA658FB1CD9DB3F005AC4B4 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		0FA96D501EB033FE001DDF39 /* UIView+Popup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Popup.h"; sourceTree = "<group>"; };
@@ -1964,6 +1967,8 @@
 				0F8A78501E9F7C8C0050F0D9 /* UIImageView+Badge.m */,
 				0FA96D501EB033FE001DDF39 /* UIView+Popup.h */,
 				0FA96D511EB033FE001DDF39 /* UIView+Popup.m */,
+				0FA4CBF81EC045710072CE15 /* UIViewController+Navigator.h */,
+				0FA4CBF91EC045710072CE15 /* UIViewController+Navigator.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -3336,6 +3341,7 @@
 				F625A61B1D4C99EC00B696E5 /* RoomListController.m in Sources */,
 				CDF157411E7AADC700499AC5 /* LeftSlideViewController.m in Sources */,
 				2EA897AC1E31B25E002CA904 /* YZNavigationMenuView.m in Sources */,
+				0FA4CBFA1EC045710072CE15 /* UIViewController+Navigator.m in Sources */,
 				0FC119771D6FE5E0001DA19A /* Screen.m in Sources */,
 				F62E05631DAB39F80096BF00 /* IphoneProfileController.m in Sources */,
 				2E0297271E4C4C7600BBC520 /* MySubView.m in Sources */,

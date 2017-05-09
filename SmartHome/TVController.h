@@ -19,5 +19,6 @@
 @property (nonatomic,assign) int roomID;
 @property (nonatomic,assign) BOOL isAddDevice;
 @property (weak, nonatomic) IBOutlet UIStackView *channelContainer;
+@property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
 
 @end
