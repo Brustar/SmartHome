@@ -86,6 +86,7 @@
     [self naviToDevice];
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 智能插座",roomName]];
+    [self initSwitcher];
 //    [self initPlugin];
 //    [self initHomekitPlugin];
     [self setupSegment];

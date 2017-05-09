@@ -310,9 +310,16 @@
 - (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left
 {
     NSString *nickname = [SQLManager queryChat:message.senderUserId][0];
-    self.chatlabel.text =[NSString stringWithFormat:@"%@ : %@" , nickname, message.content.conversationDigest];
+    
+    NSString *tip=@"您有新消息";
+    if ([message.objectName isEqualToString:RCTextMessageTypeIdentifier]) {
+        tip = message.content.conversationDigest;
+    }
+    
+    self.chatlabel.text =[NSString stringWithFormat:@"%@ : %@" , nickname, tip];
     [self.IconeImageView badge];
 }
+
 - (void)getScenesFromPlist
 {
     _shortcutsArray = [[NSMutableArray alloc] init];
@@ -335,6 +342,7 @@
         }
     }
 }
+
 -(void)setBtn
 {
     _firstBtn.selected = !_firstBtn.selected;
