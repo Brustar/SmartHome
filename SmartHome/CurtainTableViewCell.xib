@@ -60,7 +60,9 @@
                         <constraints>
                             <constraint firstAttribute="width" secondItem="oan-hq-829" secondAttribute="height" multiplier="1:1" id="TA0-pP-evh"/>
                         </constraints>
-                        <state key="normal" backgroundImage="bd_icon_wd_on"/>
+                        <state key="normal" backgroundImage="bd_icon_wd_on">
+                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </state>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_icon_wd_off" translatesAutoresizingMaskIntoConstraints="NO" id="f41-dM-kxv">
                         <rect key="frame" x="24" y="65" width="15" height="15"/>
