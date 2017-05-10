@@ -250,11 +250,10 @@
     if (auothorToken.length >0) {
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
         UIViewController *voiceOrderVC = [storyBoard instantiateViewControllerWithIdentifier:@"VoiceOrderController"];
-        if (self.mainTabBarController) {
-            [self.mainTabBarController.selectedViewController pushViewController:voiceOrderVC animated:YES];
-        }else {
-            [self loadingLoginViewController];
-        }
+        
+        [self loadingLoginViewController];
+        [self.mainTabBarController.selectedViewController pushViewController:voiceOrderVC animated:YES];
+
         
     }else {
         [MBProgressHUD showError:@"请先登录"];
