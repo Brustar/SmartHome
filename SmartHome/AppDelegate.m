@@ -253,7 +253,7 @@
         if (self.mainTabBarController) {
             [self.mainTabBarController.selectedViewController pushViewController:voiceOrderVC animated:YES];
         }else {
-            [MBProgressHUD showError:@"请先启动App"];
+            [self loadingLoginViewController];
         }
         
     }else {
