@@ -72,11 +72,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self setNaviBarTitle:@"推送控制"];
+    [self setNaviBarTitle:@"推送设置"];
     self.automaticallyAdjustsScrollViewInsets = NO;
-//    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
-//    self.navigationItem.leftBarButtonItem = returnItem;
-    _array = @[@"信息推送",@"短信通知",@"不通知"];
     self.coverView.hidden = YES;
     self.pushTypeView.hidden = YES;
     self.tableView.tableFooterView = [UIView new];
@@ -136,9 +133,12 @@
         if ([responseObject[@"result"] intValue]==0)
         {
             [MBProgressHUD showSuccess:@"修改成功"];
+           
         }else {
             [MBProgressHUD showError:responseObject[@"Msg"]];
         }
+        
+         [self.tableView reloadData];
     }
     
 }
@@ -162,71 +162,45 @@
         [cell setSeparatorInset:UIEdgeInsetsZero];
     }
 }
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
 
-    return self.names.count;
-}
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    NSString * str = self.names[section];
-    
-    return str;
-}
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (_sectionStatus[section]) { //1表示展开 0表示收起
-        //表示展开
-        return [_array count];
-    }else{
-        return 0;//0行
-    }
+  return self.names.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PushSettingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PushSettingCell" forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor clearColor];
-    cell.SettingNameLabel.text = _array[indexPath.row];
-    cell.TypeLabel.hidden = YES;
+//    cell.backgroundColor = [UIColor lightGrayColor];
+    cell.SettingNameLabel.text = self.names[indexPath.row];
+//    cell.TypeLabel.hidden = YES;
     
-//    cell.TypeLabel.font = [UIFont systemFontOfSize:13];
-//    cell.TypeLabel.textColor = [UIColor lightGrayColor];
-//    NSNumber *num = self.notifyWay[indexPath.row];
-//    if([num intValue] == 1)
-//    {
-//        cell.TypeLabel.text = @"信息推送";
-//    }else if([num intValue] == 2)
-//    {
-//        cell.TypeLabel.text = @"短信通知";
-//    }else {
-//        cell.TypeLabel.text = @"不通知";
-//    }
+    cell.TypeLabel.font = [UIFont systemFontOfSize:13];
+    cell.TypeLabel.textColor = [UIColor lightGrayColor];
+    NSNumber *num = self.notifyWay[indexPath.row];
+    if([num intValue] == 1)
+    {
+        cell.TypeLabel.text = @"信息推送";
+    }else if([num intValue] == 2)
+    {
+        cell.TypeLabel.text = @"短信通知";
+    }else {
+        cell.TypeLabel.text = @"不通知";
+    }
     
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    self.selectedBtn.selected = NO;
-//    [self.selectedBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-    PushSettingCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    if(cell.accessoryType == UITableViewCellAccessoryNone)
-    {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        
-        //        [self sendNotification:indexPath.row select:1];
-    }else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        
-        //        [self sendNotification:indexPath.row select:0];
-    }
+    //    self.selectedBtn.selected = NO;
+    //    [self.selectedBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     self.indexPath = indexPath;
     self.coverView.hidden = NO;
     self.pushTypeView.hidden = NO;
     
-//    NSArray *notiWay = self.notifyWay[indexPath.section];
-//    NSNumber *num = notiWay[indexPath.row];
+    //    NSArray *notiWay = self.notifyWay[indexPath.section];
+    //    NSNumber *num = notiWay[indexPath.row];
     NSNumber * num = self.notifyWay[indexPath.row];
     
     if([num intValue] == 1)
@@ -277,12 +251,13 @@
     
     self.coverView.hidden = YES;
     self.pushTypeView.hidden = YES;
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:self.indexPath];
+    PushSettingCell *cell = [self.tableView cellForRowAtIndexPath:self.indexPath];
 //    NSArray *item = self.recordIDs[self.indexPath.section];
     NSNumber *recordID = self.recordIDs[self.indexPath.row];
     if(self.tag == 0)
     {
-        cell.detailTextLabel.text = @"信息推送";
+        cell.TypeLabel.text = @"信息推送";
+        
         if ([device.db isEqualToString:SMART_DB]) {
             [self setUserNotifyWay:1 andRecord:recordID];
         }else {
@@ -291,14 +266,14 @@
         
     }else if(self.tag == 1)
     {
-        cell.detailTextLabel.text = @"短信通知";
+        cell.TypeLabel.text = @"短信通知";
         if ([device.db isEqualToString:SMART_DB]) {
             [self setUserNotifyWay:2 andRecord:recordID];
         }else {
             [MBProgressHUD showSuccess:@"修改成功"];
         }
     }else{
-        cell.detailTextLabel.text = @"不通知";
+        cell.TypeLabel.text = @"不通知";
         if ([device.db isEqualToString:SMART_DB]) {
             [self setUserNotifyWay:3 andRecord:recordID];
         }else {
@@ -312,79 +287,6 @@
     self.coverView.hidden = YES;
     self.pushTypeView.hidden = YES;
 
-}
-#pragma mark 分区的头视图
-- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (self.tableView != tableView) {
-        return nil;
-    }
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, 40)];
-    view.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];;
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(kScreenSize.width-40, 0, 30, 30);
-    button.tag = 101+section;
-    //    button.backgroundColor = [UIColor yellowColor];
-    if (_sectionStatus[section] != 0) {
-        [button setImage:[UIImage imageNamed:@"icon_dd_normal"] forState:UIControlStateNormal];
-    }else{
-        [button setImage:[UIImage imageNamed:@"icon_dd_normal"] forState:UIControlStateNormal];
-    }
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [view addSubview:button];
-    
-    //推送的名字
-    UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, 40)];
-    nameLabel.textAlignment = NSTextAlignmentLeft;
-    nameLabel.textColor = [UIColor whiteColor];
-    nameLabel.backgroundColor = [UIColor clearColor];
-    [nameLabel setText:self.names[section]];
-     [view addSubview:nameLabel];
-    
-    //通知的方式
-    UILabel * tyLabel = [[UILabel alloc] initWithFrame:CGRectMake(kScreenSize.width-160, 0, 100, 40)];
-    tyLabel.textAlignment = NSTextAlignmentRight;
-    tyLabel.textColor = [UIColor lightGrayColor];
-    tyLabel.backgroundColor = [UIColor clearColor];
-    tyLabel.font = [UIFont systemFontOfSize:13];
-    NSNumber *num = self.notifyWay[section];
-    if([num intValue] == 1)
-    {
-        tyLabel.text = @"信息推送";
-    }else if([num intValue] == 2)
-    {
-        tyLabel.text = @"短信通知";
-    }else {
-        tyLabel.text = @"不通知";
-    }
-    [view addSubview:tyLabel];
-    //上显示线
-    
-    UILabel *label1=[[ UILabel alloc ] initWithFrame : CGRectMake ( 0 , - 1 , view. frame . size . width , 1 )];
-    
-    label1. backgroundColor =[ UIColor whiteColor];
-    
-    [view addSubview :label1];
-    
-    //下显示线
-    
-    UILabel *label=[[ UILabel alloc ] initWithFrame : CGRectMake ( 0 , view. frame . size . height - 1 , view. frame . size . width , 1 )];
-    
-    label. backgroundColor =[ UIColor whiteColor];
-    
-    [view addSubview :label];
-    return view;
-}
-- (void)btnClick:(UIButton *)button {
-    NSInteger section = button.tag - 101;
-    //跟原来状态 取反
-    _sectionStatus[section] = !_sectionStatus[section];
-    //只刷新指定分区
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationFade];
-}
-//设置分区的高
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 40;
 }
 
 @end
