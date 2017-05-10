@@ -3910,6 +3910,10 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="emB-1T-YiE">
                                 <rect key="frame" x="174.5" y="611" width="26" height="26"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="26" id="gLg-Rp-kqx"/>
+                                    <constraint firstAttribute="height" constant="30" id="yBO-of-0In"/>
+                                </constraints>
                                 <state key="normal" backgroundImage="Voice"/>
                                 <connections>
                                     <action selector="startVoice:" destination="QB7-ZC-qUO" eventType="touchUpInside" id="Zkm-6z-T2P"/>
@@ -3943,7 +3947,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="keJ-iS-jrb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-54" y="-1491"/>
+            <point key="canvasLocation" x="-171" y="-1578"/>
         </scene>
     </scenes>
     <resources>
