@@ -803,9 +803,6 @@
                             </barButtonItem>
                             <barButtonItem image="voice" id="GTd-g7-v0E">
                                 <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <segue destination="P8H-gP-qd1" kind="push" id="tcd-ed-lqf"/>
-                                </connections>
                             </barButtonItem>
                             <barButtonItem image="search" id="DRb-Wz-X3L">
                                 <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -827,7 +824,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U47-Xi-iD1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2286" y="-258"/>
+            <point key="canvasLocation" x="2136" y="-379"/>
         </scene>
         <!--添加场景定时-->
         <scene sceneID="kNF-ul-FTy">
@@ -2997,7 +2994,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xxd-Ux-BxW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3148" y="-328"/>
+            <point key="canvasLocation" x="2604" y="-393"/>
         </scene>
         <!--登录-->
         <scene sceneID="uxY-FJ-nvf">
@@ -3141,140 +3138,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lIt-pV-t2Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2682" y="-1882"/>
-        </scene>
-        <!--语音控制-->
-        <scene sceneID="tmP-hZ-Jwv">
-            <objects>
-                <viewController storyboardIdentifier="VoiceOrderController" hidesBottomBarWhenPushed="YES" id="P8H-gP-qd1" userLabel="语音控制" customClass="VoiceOrderController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ifr-iY-xyB"/>
-                        <viewControllerLayoutGuide type="bottom" id="eQi-dD-4Sk"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="xFW-QZ-b7Y">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="SoQ-mk-xSJ">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRm-1c-Wvw">
-                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="1"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="G14-xz-gpI"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="你可以这样说" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ut-nH-ZUu">
-                                <rect key="frame" x="129" y="114" width="117" height="23"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N26-Ut-aOu">
-                                <rect key="frame" x="62.5" y="233.5" width="250" height="200"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="清晨模式" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMD-ZW-bNO">
-                                        <rect key="frame" x="0.0" y="0.0" width="250" height="26"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="睡眠模式" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XVV-J0-kiD">
-                                        <rect key="frame" x="0.0" y="130" width="250" height="24"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用餐模式" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UVi-Nw-Mds">
-                                        <rect key="frame" x="0.0" y="66" width="250" height="24"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="0eF-W4-mSU"/>
-                                    <constraint firstItem="XVV-J0-kiD" firstAttribute="top" secondItem="UVi-Nw-Mds" secondAttribute="bottom" constant="40" id="3Hz-VZ-uaW"/>
-                                    <constraint firstItem="XVV-J0-kiD" firstAttribute="leading" secondItem="N26-Ut-aOu" secondAttribute="leading" id="7qj-8K-9WS"/>
-                                    <constraint firstAttribute="trailing" secondItem="XVV-J0-kiD" secondAttribute="trailing" id="ImS-lE-JLI"/>
-                                    <constraint firstItem="EMD-ZW-bNO" firstAttribute="leading" secondItem="N26-Ut-aOu" secondAttribute="leading" id="Lvg-Ep-ies"/>
-                                    <constraint firstAttribute="trailing" secondItem="EMD-ZW-bNO" secondAttribute="trailing" id="N0n-ab-OQ4"/>
-                                    <constraint firstItem="UVi-Nw-Mds" firstAttribute="leading" secondItem="N26-Ut-aOu" secondAttribute="leading" id="eeS-O4-Glu"/>
-                                    <constraint firstAttribute="trailing" secondItem="UVi-Nw-Mds" secondAttribute="trailing" id="eol-1n-ZRw"/>
-                                    <constraint firstItem="UVi-Nw-Mds" firstAttribute="top" secondItem="EMD-ZW-bNO" secondAttribute="bottom" constant="40" id="hjg-Nc-vjt"/>
-                                    <constraint firstAttribute="width" constant="250" id="hsR-nu-AEY"/>
-                                    <constraint firstItem="EMD-ZW-bNO" firstAttribute="top" secondItem="N26-Ut-aOu" secondAttribute="top" id="hzn-k7-hNE"/>
-                                </constraints>
-                            </view>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VRY-JI-mma">
-                                <rect key="frame" x="166.5" y="323" width="42" height="21"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bj5-cC-wSP" customClass="SCSiriWaveformView">
-                                <rect key="frame" x="0.0" y="548" width="375" height="80"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgU-YC-3GJ">
-                                        <rect key="frame" x="176" y="52" width="22" height="38"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="22" id="ab9-cX-O3i"/>
-                                            <constraint firstAttribute="height" constant="38" id="bEY-20-aQl"/>
-                                        </constraints>
-                                        <state key="normal" backgroundImage="Voice"/>
-                                        <connections>
-                                            <action selector="startVoice:" destination="P8H-gP-qd1" eventType="touchUpInside" id="Yur-sk-ozt"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="bgU-YC-3GJ" firstAttribute="centerX" secondItem="bj5-cC-wSP" secondAttribute="centerX" id="7wg-Mb-dWJ"/>
-                                    <constraint firstAttribute="width" constant="375" id="Nzz-Pe-p3S"/>
-                                    <constraint firstAttribute="bottom" secondItem="bgU-YC-3GJ" secondAttribute="bottom" constant="-10" id="iSS-jy-kWU"/>
-                                    <constraint firstAttribute="height" constant="80" id="nO8-f6-827"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" red="0.90309139530000004" green="0.90309139530000004" blue="0.90309139530000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="5Ut-nH-ZUu" firstAttribute="top" secondItem="ifr-iY-xyB" secondAttribute="bottom" constant="50" id="1Tt-4G-fsh"/>
-                            <constraint firstItem="VRY-JI-mma" firstAttribute="centerX" secondItem="xFW-QZ-b7Y" secondAttribute="centerX" id="9SZ-qJ-pKU"/>
-                            <constraint firstItem="SoQ-mk-xSJ" firstAttribute="top" secondItem="xFW-QZ-b7Y" secondAttribute="top" id="Nks-Sa-RYY"/>
-                            <constraint firstItem="bj5-cC-wSP" firstAttribute="leading" secondItem="xFW-QZ-b7Y" secondAttribute="leading" id="Obt-hr-oSm"/>
-                            <constraint firstAttribute="trailing" secondItem="SoQ-mk-xSJ" secondAttribute="trailing" id="bd9-vI-mIt"/>
-                            <constraint firstItem="eQi-dD-4Sk" firstAttribute="top" secondItem="SoQ-mk-xSJ" secondAttribute="bottom" id="e80-aN-SMi"/>
-                            <constraint firstItem="SoQ-mk-xSJ" firstAttribute="leading" secondItem="xFW-QZ-b7Y" secondAttribute="leading" id="f9u-Sf-OeK"/>
-                            <constraint firstItem="VRY-JI-mma" firstAttribute="centerY" secondItem="xFW-QZ-b7Y" secondAttribute="centerY" id="j82-4m-hre"/>
-                            <constraint firstAttribute="trailing" secondItem="bj5-cC-wSP" secondAttribute="trailing" id="kwV-XH-c11"/>
-                            <constraint firstItem="5Ut-nH-ZUu" firstAttribute="centerX" secondItem="xFW-QZ-b7Y" secondAttribute="centerX" id="mx5-xQ-cSB"/>
-                            <constraint firstItem="N26-Ut-aOu" firstAttribute="centerX" secondItem="xFW-QZ-b7Y" secondAttribute="centerX" id="nJR-B6-SEP"/>
-                            <constraint firstItem="N26-Ut-aOu" firstAttribute="centerY" secondItem="xFW-QZ-b7Y" secondAttribute="centerY" id="vfn-AZ-t8v"/>
-                            <constraint firstItem="eQi-dD-4Sk" firstAttribute="top" secondItem="bj5-cC-wSP" secondAttribute="bottom" constant="39" id="zxI-Ad-VUq"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="1Wf-XM-93W"/>
-                    <connections>
-                        <outlet property="exmapleView" destination="N26-Ut-aOu" id="zdi-9d-aVf"/>
-                        <outlet property="resultLabel" destination="VRY-JI-mma" id="G0A-yI-6F2"/>
-                        <outlet property="sampleLabel" destination="5Ut-nH-ZUu" id="4gE-s6-8T5"/>
-                        <outlet property="waveformView" destination="bj5-cC-wSP" id="nED-8b-ij5"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="azs-Ua-39b" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3731" y="-1438"/>
         </scene>
         <!--场景定时列表的导航栏-->
         <scene sceneID="Hva-Zl-7M9">
@@ -3983,7 +3846,6 @@
         <image name="DVD-1" width="130" height="130"/>
         <image name="Iphonewifi" width="32" height="32"/>
         <image name="PL" width="724" height="470"/>
-        <image name="Voice" width="11" height="19"/>
         <image name="aire-6" width="130" height="130"/>
         <image name="alarm clock1" width="25" height="25"/>
         <image name="background" width="375" height="667"/>
