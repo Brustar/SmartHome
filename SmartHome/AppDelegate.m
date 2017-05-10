@@ -91,9 +91,8 @@
     //动态加载自定义的ShortcutItem
     if (application.shortcutItems.count == 0) {
         UIMutableApplicationShortcutItem *itemVoice =[[UIMutableApplicationShortcutItem alloc]initWithType:[NSString stringWithFormat:@"%@.second",[[NSBundle mainBundle] bundleIdentifier]] localizedTitle:@"语音控制" localizedSubtitle:nil icon:[UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeCloud] userInfo:nil];
-        UIMutableApplicationShortcutItem *itemFavor =[[UIMutableApplicationShortcutItem alloc]initWithType:[NSString stringWithFormat:@"%@.third",[[NSBundle mainBundle] bundleIdentifier]] localizedTitle:@"收藏场景" localizedSubtitle:nil icon:[UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeAlarm] userInfo:nil];
         
-        application.shortcutItems = @[itemFavor,itemVoice];
+        application.shortcutItems = @[itemVoice];
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(kickout) name:KICK_OUT object:nil];
@@ -228,22 +227,11 @@
 }
 
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void(^)(BOOL succeeded))completionHandler{
-    //判断先前我们设置的唯一标识
-    UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-
-    NSString *ident=@"iphoneSceneNaviController";
-    UINavigationController *vc = [secondStoryBoard instantiateViewControllerWithIdentifier:ident];
-//    vc.navigationBar.backgroundColor = [UIColor blackColor];
-    self.window.rootViewController = vc;
-    if ([shortcutItem isEqual:application.shortcutItems[0]]){
-        ident=@"IphoneFavorController";
-    }else if ([shortcutItem isEqual:application.shortcutItems[1]]){
-        ident=@"VoiceOrderController";
-    }
-    UIViewController *target = [secondStoryBoard instantiateViewControllerWithIdentifier:ident];
-    [vc pushViewController:target animated:YES];
     
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"ShortCut" object:nil];
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+    NSString *ident=@"VoiceOrderController";
+    UIViewController *target = [storyBoard instantiateViewControllerWithIdentifier:ident];
+    self.window.rootViewController = target;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
