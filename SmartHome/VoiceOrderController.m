@@ -18,7 +18,7 @@
 #import "RegexKitLite.h"
 #import "SCSiriWaveformView.h"
 #import <AVFoundation/AVFoundation.h>
-
+#import "UIViewController+Navigator.h"
 
 @interface VoiceOrderController ()
 @property (weak, nonatomic) IBOutlet UIView *exmapleView;
@@ -35,6 +35,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setNaviBarTitle:@"语音控制"];
+    
+    [self naviToDevice];
+    
     // Do any additional setup after loading the view.
     //通过appid连接讯飞语音服务器，把@"53b5560a"换成你申请的appid
     NSString *initString = [[NSString alloc] initWithFormat:@"appid=%@,timeout=%@",@"5743ac2d",@"20000"];

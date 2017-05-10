@@ -271,7 +271,6 @@
 		CD9F0AC21EB861F5007B0CF7 /* AddressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9F0ABC1EB861F5007B0CF7 /* AddressPickerView.m */; };
 		CD9F0AC31EB861F5007B0CF7 /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9F0ABE1EB861F5007B0CF7 /* City.m */; };
 		CD9F0AC41EB861F5007B0CF7 /* Province.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9F0AC01EB861F5007B0CF7 /* Province.m */; };
-		CD9F0ACA1EB8AFBB007B0CF7 /* IMG_3892.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CD9F0AC91EB8AFBB007B0CF7 /* IMG_3892.jpg */; };
 		CD9F0ACD1EB9A94E007B0CF7 /* HostListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9F0ACC1EB9A94E007B0CF7 /* HostListViewController.m */; };
 		CD9F0AD01EB9BC9C007B0CF7 /* HostListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9F0ACF1EB9BC9C007B0CF7 /* HostListCell.m */; };
 		CDB8B84A1EB1D3AE003AA894 /* FamilyDynamicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B8491EB1D3AE003AA894 /* FamilyDynamicViewController.m */; };
@@ -289,6 +288,11 @@
 		CDEC86951E9A21F4009EC245 /* RoomStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEC86941E9A21F4009EC245 /* RoomStatus.m */; };
 		CDEC86981E9A44F9009EC245 /* FamilyHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEC86971E9A44F9009EC245 /* FamilyHomeViewController.m */; };
 		CDEE5E921EBEEBC900A5779D /* FamilyDynamicDeviceAdjustViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEE5E911EBEEBC900A5779D /* FamilyDynamicDeviceAdjustViewController.m */; };
+		CDEE5E951EC1AC6000A5779D /* SelectRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEE5E941EC1AC6000A5779D /* SelectRoomViewController.m */; };
+		CDEE5E981EC1B35800A5779D /* SelectDevicesOfRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEE5E971EC1B35800A5779D /* SelectDevicesOfRoomViewController.m */; };
+		CDEE5E9B1EC1DF8300A5779D /* DeviceTimerSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEE5E9A1EC1DF8300A5779D /* DeviceTimerSettingViewController.m */; };
+		CDEE5EA11EC2A84800A5779D /* LaunchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEE5EA01EC2A84800A5779D /* LaunchingViewController.m */; };
+		CDEE5EA31EC2B0D000A5779D /* LaunchingAnimation.gif in Resources */ = {isa = PBXBuildFile; fileRef = CDEE5EA21EC2B0D000A5779D /* LaunchingAnimation.gif */; };
 		CDF1573A1E7AAD4C00499AC5 /* BaseNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF157371E7AAD4C00499AC5 /* BaseNavController.m */; };
 		CDF1573B1E7AAD4C00499AC5 /* BaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF157391E7AAD4C00499AC5 /* BaseTabBarController.m */; };
 		CDF157401E7AADC700499AC5 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF1573C1E7AADC700499AC5 /* LeftViewController.m */; };
@@ -985,7 +989,6 @@
 		CD9F0ABE1EB861F5007B0CF7 /* City.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = City.m; sourceTree = "<group>"; };
 		CD9F0ABF1EB861F5007B0CF7 /* Province.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Province.h; sourceTree = "<group>"; };
 		CD9F0AC01EB861F5007B0CF7 /* Province.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Province.m; sourceTree = "<group>"; };
-		CD9F0AC91EB8AFBB007B0CF7 /* IMG_3892.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_3892.jpg; sourceTree = "<group>"; };
 		CD9F0ACB1EB9A94E007B0CF7 /* HostListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostListViewController.h; sourceTree = "<group>"; };
 		CD9F0ACC1EB9A94E007B0CF7 /* HostListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostListViewController.m; sourceTree = "<group>"; };
 		CD9F0ACE1EB9BC9C007B0CF7 /* HostListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostListCell.h; sourceTree = "<group>"; };
@@ -1018,6 +1021,15 @@
 		CDEC86971E9A44F9009EC245 /* FamilyHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyHomeViewController.m; sourceTree = "<group>"; };
 		CDEE5E901EBEEBC900A5779D /* FamilyDynamicDeviceAdjustViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyDynamicDeviceAdjustViewController.h; sourceTree = "<group>"; };
 		CDEE5E911EBEEBC900A5779D /* FamilyDynamicDeviceAdjustViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyDynamicDeviceAdjustViewController.m; sourceTree = "<group>"; };
+		CDEE5E931EC1AC6000A5779D /* SelectRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectRoomViewController.h; sourceTree = "<group>"; };
+		CDEE5E941EC1AC6000A5779D /* SelectRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectRoomViewController.m; sourceTree = "<group>"; };
+		CDEE5E961EC1B35800A5779D /* SelectDevicesOfRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectDevicesOfRoomViewController.h; sourceTree = "<group>"; };
+		CDEE5E971EC1B35800A5779D /* SelectDevicesOfRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectDevicesOfRoomViewController.m; sourceTree = "<group>"; };
+		CDEE5E991EC1DF8300A5779D /* DeviceTimerSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceTimerSettingViewController.h; sourceTree = "<group>"; };
+		CDEE5E9A1EC1DF8300A5779D /* DeviceTimerSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceTimerSettingViewController.m; sourceTree = "<group>"; };
+		CDEE5E9F1EC2A84800A5779D /* LaunchingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchingViewController.h; sourceTree = "<group>"; };
+		CDEE5EA01EC2A84800A5779D /* LaunchingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchingViewController.m; sourceTree = "<group>"; };
+		CDEE5EA21EC2B0D000A5779D /* LaunchingAnimation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = LaunchingAnimation.gif; sourceTree = "<group>"; };
 		CDF157361E7AAD4C00499AC5 /* BaseNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavController.h; sourceTree = "<group>"; };
 		CDF157371E7AAD4C00499AC5 /* BaseNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavController.m; sourceTree = "<group>"; };
 		CDF157381E7AAD4C00499AC5 /* BaseTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarController.h; sourceTree = "<group>"; };
@@ -1906,6 +1918,7 @@
 		0F6ADFDA1E71343600BFF67F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				CDEE5E9E1EC2A7DD00A5779D /* LaunchingViewController */,
 				0FF5CD4E1EA7695E0027E2DC /* Devices */,
 				CDEC868F1E9A1CBB009EC245 /* FamilyViewController */,
 				CD7863B41E8CF13A00F42AC0 /* MyInfoViewController */,
@@ -1931,8 +1944,8 @@
 		0F6ADFDC1E7134ED00BFF67F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				CDEE5EA21EC2B0D000A5779D /* LaunchingAnimation.gif */,
 				CDF78C591E9CC3C500F8B20C /* NaviBarBg.png */,
-				CD9F0AC91EB8AFBB007B0CF7 /* IMG_3892.jpg */,
 				CDEC868C1E99E32B009EC245 /* Family */,
 				CD93E3AB1E807AD3003CCAA9 /* Login */,
 			);
@@ -2302,6 +2315,12 @@
 			children = (
 				2EB2A4701E237F05003F01DB /* DeviceListTimeVC.h */,
 				2EB2A4711E237F05003F01DB /* DeviceListTimeVC.m */,
+				CDEE5E931EC1AC6000A5779D /* SelectRoomViewController.h */,
+				CDEE5E941EC1AC6000A5779D /* SelectRoomViewController.m */,
+				CDEE5E961EC1B35800A5779D /* SelectDevicesOfRoomViewController.h */,
+				CDEE5E971EC1B35800A5779D /* SelectDevicesOfRoomViewController.m */,
+				CDEE5E991EC1DF8300A5779D /* DeviceTimerSettingViewController.h */,
+				CDEE5E9A1EC1DF8300A5779D /* DeviceTimerSettingViewController.m */,
 			);
 			name = deviceTimeList;
 			sourceTree = "<group>";
@@ -2486,6 +2505,15 @@
 				CDBEFF521EA616CD00258B1E /* FamilyHomeDetailSceneCell.m */,
 			);
 			name = FamilyViewController;
+			sourceTree = "<group>";
+		};
+		CDEE5E9E1EC2A7DD00A5779D /* LaunchingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CDEE5E9F1EC2A84800A5779D /* LaunchingViewController.h */,
+				CDEE5EA01EC2A84800A5779D /* LaunchingViewController.m */,
+			);
+			name = LaunchingViewController;
 			sourceTree = "<group>";
 		};
 		CDF157351E7AACE600499AC5 /* CustomTabbarController */ = {
@@ -2863,6 +2891,7 @@
 				2E925DA71E5E857D008E327B /* all_8.jpg in Resources */,
 				2E6A065C1EA743B50022B681 /* NewColourCell.xib in Resources */,
 				0F49CB7D1E7A204300D46ECC /* MyInfo-iPad.storyboard in Resources */,
+				CDEE5EA31EC2B0D000A5779D /* LaunchingAnimation.gif in Resources */,
 				0F78C57A1EB1F92C00FC3BE4 /* Assets.xcassets in Resources */,
 				CD78A8321E337C1600060466 /* 255_216.plist in Resources */,
 				CDF389321E30EA8900657C8B /* hostUserList.plist in Resources */,
@@ -2873,7 +2902,6 @@
 				F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */,
 				2EA897BE1E31B59B002CA904 /* 2@2x.png in Resources */,
 				0F49CB7E1E7A204300D46ECC /* Scene-iPad.storyboard in Resources */,
-				CD9F0ACA1EB8AFBB007B0CF7 /* IMG_3892.jpg in Resources */,
 				CDFB9DF21E5DCB4D00BFECCE /* SceneTimerList.plist in Resources */,
 				2EA897C21E31B792002CA904 /* 4@2x.png in Resources */,
 				2E8AC5311E7BC2290002E717 /* button6-14.png in Resources */,
@@ -3231,6 +3259,7 @@
 				F659110C1D967383002CFBB7 /* IphoneNetTvController.m in Sources */,
 				F64EF7FB1D8FB738003C1C48 /* IphoneMainController.m in Sources */,
 				CDFB9DF81E641F8E00BFECCE /* DeviceTimerInfo.m in Sources */,
+				CDEE5E951EC1AC6000A5779D /* SelectRoomViewController.m in Sources */,
 				0FCFB38F1CF293B300B37DD3 /* Radio.m in Sources */,
 				2E6A065B1EA743B50022B681 /* NewColourCell.m in Sources */,
 				CDB8B8531EB1D550003AA894 /* SceneShortcutsViewController.m in Sources */,
@@ -3240,6 +3269,7 @@
 				F6FD00A21DDDD470009ABA64 /* TouchSubViewController.m in Sources */,
 				0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */,
 				0F6AB8701D782D9D0041E39C /* SunString.m in Sources */,
+				CDEE5EA11EC2A84800A5779D /* LaunchingViewController.m in Sources */,
 				2E5E5FEC1DE22AC8006F0C8F /* LightCell.m in Sources */,
 				CDEC86981E9A44F9009EC245 /* FamilyHomeViewController.m in Sources */,
 				0FCAA40C1D1945BB00C1E58C /* BgMusicController.m in Sources */,
@@ -3359,6 +3389,7 @@
 				0FD3DEAD1D3F186800AF7765 /* Globals.m in Sources */,
 				0F4B3C751E7BE57A00102DD3 /* CommonUtil.m in Sources */,
 				F67F1F711D3C69DC00F2B7E5 /* SystemSettingViewController.m in Sources */,
+				CDEE5E981EC1B35800A5779D /* SelectDevicesOfRoomViewController.m in Sources */,
 				0F180FC61D0E4E5000392F4C /* FMController.m in Sources */,
 				F67F1F771D3C719D00F2B7E5 /* SystemInfomationController.m in Sources */,
 				CDB8B8501EB1D4B4003AA894 /* UserInfoViewController.m in Sources */,
@@ -3375,6 +3406,7 @@
 				CDF157401E7AADC700499AC5 /* LeftViewController.m in Sources */,
 				0FCFB3831CF28FCB00B37DD3 /* Curtain.m in Sources */,
 				2E63280B1E03C993000D7BE9 /* IPhoneSceneDVDVC.m in Sources */,
+				CDEE5E9B1EC1DF8300A5779D /* DeviceTimerSettingViewController.m in Sources */,
 				CD9F0AC21EB861F5007B0CF7 /* AddressPickerView.m in Sources */,
 				0FC0FFDD1CF57E58000F71D5 /* TouchImage.m in Sources */,
 				0FCFB3951CF2943100B37DD3 /* Camera.m in Sources */,

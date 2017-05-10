@@ -37,15 +37,8 @@
 }
 -(void)rightBtnClicked:(UIButton *)btn
 {
-    UIStoryboard * SceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
-    IphoneNewAddSceneVC * iphoneNewAddScene = [SceneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneNewAddSceneVC"];
-     for (_room in self.roomList) {
-        if ([SQLManager isWholeHouse:_room.rId]) {
-            iphoneNewAddScene.roomID = _room.rId;
-        }
-    }
-    
-    [self.navigationController pushViewController:iphoneNewAddScene animated:YES];
+    SelectRoomViewController *vc = [[SelectRoomViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 
 }
 - (void)initDataSource {
@@ -138,10 +131,56 @@
     return YES;
 }
 
+// 设置 哪一行的编辑按钮 状态 指定编辑样式
+- (UITableViewCellEditingStyle) tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+
+// 判断点击按钮的样式 来去做添加 或删除
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // 删除的操作
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        NSDictionary *roomDict = _timerList[indexPath.section];
+        if (roomDict && [roomDict isKindOfClass:[NSDictionary class]]) {
+            NSArray *scheduleList = roomDict[@"schedule_list"];
+            if (scheduleList && [scheduleList isKindOfClass:[NSArray class]]) {
+                NSDictionary *timerDict = scheduleList[indexPath.row];
+                if (timerDict && [timerDict isKindOfClass:[NSDictionary class]]) {
+                    
+                    [self deleteDeviceTimerWithTimerId:[timerDict[@"schedule_id"] integerValue]];
+                    NSArray *indexPaths = @[indexPath]; // 构建 索引处的行数 的数组
+                    // 删除 索引的方法 后面是动画样式
+                    [_tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:(UITableViewRowAnimationAutomatic)];
+                    
+                }
+            }
+        }
+    }
+}
+
 - (void)onDeviceTimerBtnClicked:(UIButton *)sender {
     _currentBtn = sender;
     _currentActive = sender.selected;
     [self deviceTimerOperationWithTimerId:sender.tag isActive:sender.selected];
+}
+
+- (void)deleteDeviceTimerWithTimerId:(NSInteger)timerId {
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
+    NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
+    
+    if (auothorToken.length >0) {
+        NSDictionary *dict = @{@"token":auothorToken,
+                               @"optype":@(3),
+                               @"scheduleid":@(timerId)
+                               };
+        HttpManager *http = [HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = 3;
+        [http sendPost:url param:dict];
+    }
 }
 
 - (void)deviceTimerOperationWithTimerId:(NSInteger)timerId isActive:(NSInteger)active {
@@ -203,6 +242,12 @@
             }else {
                [_currentBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateNormal];
             }
+        }
+    }else if (tag == 3) { //删除
+        if ([responseObject[@"result"] intValue] == 0) {
+            [MBProgressHUD showSuccess:responseObject[@"msg"]];
+        }else {
+            [MBProgressHUD showError:responseObject[@"msg"]];
         }
     }
 }

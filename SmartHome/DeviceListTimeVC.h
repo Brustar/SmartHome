@@ -12,6 +12,7 @@
 #import "CustomViewController.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
+#import "SelectRoomViewController.h"
 
 @interface DeviceListTimeVC : CustomViewController<DeviceTimerCellDelegate>
 
