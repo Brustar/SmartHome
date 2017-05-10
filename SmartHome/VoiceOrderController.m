@@ -38,7 +38,7 @@
     
     [self setNaviBarTitle:@"语音控制"];
     
-    [self naviToDevice];
+    //[self naviToHome];
     
     // Do any additional setup after loading the view.
     //通过appid连接讯飞语音服务器，把@"53b5560a"换成你申请的appid

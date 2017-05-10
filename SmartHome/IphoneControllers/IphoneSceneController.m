@@ -234,8 +234,9 @@ static NSString * const CYPhotoId = @"photo";
     self.roomView.delegate = self;
     
     [self.roomView setSelectButton:0];
-    
-    [self iphoneRoomView:self.roomView didSelectButton:0];
+    if ([self.roomList count]>0) {
+        [self iphoneRoomView:self.roomView didSelectButton:0];
+    }
 }
 
 - (void)iphoneRoomView:(UIView *)view didSelectButton:(int)index
@@ -256,15 +257,15 @@ static NSString * const CYPhotoId = @"photo";
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    Room *room = self.roomList[self.roomIndex];
-//    self.scenes = [SQLManager getScensByRoomId:room.rId];
-    
-    NSArray *tmpArr = [SQLManager getScensByRoomId:room.rId];
-    [self.scenes removeAllObjects];
-    [self.scenes addObjectsFromArray:tmpArr];
-    NSString *imageName = @"i-add";
-    [self.scenes addObject:imageName];
-
+    if ([self.roomList count]>0) {
+        Room *room = self.roomList[self.roomIndex];
+        
+        NSArray *tmpArr = [SQLManager getScensByRoomId:room.rId];
+        [self.scenes removeAllObjects];
+        [self.scenes addObjectsFromArray:tmpArr];
+        NSString *imageName = @"i-add";
+        [self.scenes addObject:imageName];
+    }
     [self.FirstCollectionView reloadData];
     
     BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
