@@ -183,4 +183,7 @@
 + (BOOL)updateUserPortraitUrlByID:(int)userID url:(NSString *)url;
 + (BOOL)insertOrReplaceUser:(UserInfo *)info;
 + (UserInfo *)getUserInfo:(int)userID;
+
++(NSArray *)getAllRoomsInfoWithoutIsAll;
++(NSArray *)getAllDevicesInfo:(int)roomID;
 @end

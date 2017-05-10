@@ -459,8 +459,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6jJ-Vp-CpM" userLabel="放大">
-                                <rect key="frame" x="271" y="213" width="49" height="22"/>
-                                <state key="normal" image="dynamics_off"/>
+                                <rect key="frame" x="310" y="213" width="10" height="22"/>
+                                <state key="normal" image="fullScreen_icon"/>
                                 <connections>
                                     <action selector="fullScreenBtnClicked:" destination="dVN-mP-IMN" eventType="touchUpInside" id="Qdy-DN-o7E"/>
                                 </connections>
@@ -554,8 +554,8 @@
         <image name="background" width="375" height="667"/>
         <image name="background.png" width="750" height="1334"/>
         <image name="btn_normal" width="110" height="39"/>
-        <image name="dynamics_off" width="49" height="19"/>
         <image name="familyCircular" width="138" height="139"/>
+        <image name="fullScreen_icon" width="10" height="10"/>
         <image name="login_line.png" width="1" height="1"/>
         <image name="lv_icon_light_bright" width="15" height="15"/>
         <image name="lv_icon_light_normal" width="13" height="14"/>

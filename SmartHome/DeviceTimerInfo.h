@@ -18,5 +18,6 @@
 @property(nonatomic, strong) NSString *endTime;
 @property(nonatomic, strong) NSNumber *status;
 @property(nonatomic, assign) NSInteger isActive;//1:启动 0:暂停
+@property(nonatomic, strong) NSString *htype;
 
 @end

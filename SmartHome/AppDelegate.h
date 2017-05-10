@@ -9,6 +9,7 @@
 #import "LeftSlideViewController.h"
 #import "BaseTabBarController.h"
 #import "LeftViewController.h"
+#import "LaunchingViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

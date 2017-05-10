@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initUI];
+    [self setupTimer];
 }
 
 - (void)viewWillAppear:(BOOL)animated
