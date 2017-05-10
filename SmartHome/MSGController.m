@@ -254,26 +254,6 @@
     
  return self.itemIdArrs.count;
 }
-//-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//    
-//     return self.itemIdArrs.count;
-//}
-//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-//{
-//    NSString * str = self.itemIdArrs[section];
-//    
-//    return str;
-//}
-//-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//    if (_sectionStatus[section]) { //1表示展开 0表示收起
-//        //表示展开
-//        return [_msgArr count];
-//    }else{
-//        return 0;//0行
-//    }
-//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -318,85 +298,7 @@
     self.footView.hidden = NO;
     [self.tableView reloadData];
 }
-//#pragma mark 分区的头视图
-//- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    if (self.tableView != tableView) {
-//        return nil;
-//    }
-//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, 40)];
-//    view.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
-//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-//    button.frame = CGRectMake(kScreenSize.width-40, 0, 30, 30);
-//    button.tag = 101+section;
-//    if (_sectionStatus[section] == 0) {
-//        [button setImage:[UIImage imageNamed:@"icon_dd_normal"] forState:UIControlStateNormal];
-//    }else{
-//        [button setImage:[UIImage imageNamed:@"messageUp"] forState:UIControlStateNormal];
-////         _itemid = self.itemIdArrs[section];
-////         [self sendRequestForDetailMsgWithItemId:[_itemid intValue]];
-//    }
-//    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    [button addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
-//    [view addSubview:button];
-//   
-//    //推送的名字
-//    UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, 40)];
-//    nameLabel.textAlignment = NSTextAlignmentLeft;
-//    nameLabel.textColor = [UIColor whiteColor];
-//    nameLabel.backgroundColor = [UIColor clearColor];
-//    [nameLabel setText:self.itemNameArrs[section]];
-//    [view addSubview:nameLabel];
-//    //未读消息的label
-//    UILabel * countLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 10, 20, 20)];
-//    countLabel.textAlignment = NSTextAlignmentCenter;
-//    countLabel.layer.cornerRadius = 10;
-//    countLabel.layer.masksToBounds = YES;
-//    countLabel.textColor = [UIColor whiteColor];
-//    countLabel.font = [UIFont systemFontOfSize:13];
-//    countLabel.backgroundColor = [UIColor redColor];
-////    [countLabel setText:self.itemNameArrs[section]];
-//    countLabel.text = [NSString stringWithFormat:@"%ld",(long)[self.unreadcountArr[section] integerValue]];
-//    self.unreadcount = [self.unreadcountArr[section] integerValue];
-//    if (self.unreadcount == 0) {
-//        countLabel.hidden = YES;
-//    }else{
-//        countLabel.hidden = NO;
-//    }
-//    [view addSubview:countLabel];
-//    
-//    //上显示线
-//    
-//    UILabel *label1=[[ UILabel alloc ] initWithFrame : CGRectMake ( 0 , - 1 , view. frame . size . width , 1 )];
-//    
-//    label1. backgroundColor =[ UIColor whiteColor];
-//    
-//    [view addSubview :label1];
-//    
-//    //下显示线
-//    
-//    UILabel *label=[[ UILabel alloc ] initWithFrame : CGRectMake ( 0 , view. frame . size . height - 1 , view. frame . size . width , 1 )];
-//    
-//    label. backgroundColor =[ UIColor whiteColor];
-//    
-//    [view addSubview :label];
-//    return view;
-//}
-//- (void)btnClick:(UIButton *)button {
-//    NSInteger section = button.tag - 101;
-//      _itemid = self.itemIdArrs[section];
-//    //跟原来状态 取反
-//    _sectionStatus[section] = !_sectionStatus[section];
-//    if (_sectionStatus[section]) {
-//      
-//        [self sendRequestForDetailMsgWithItemId:[_itemid intValue]];
-//    }
-//    //只刷新指定分区
-//    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationFade];
-//}
-//设置分区的高
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    return 40;
-//}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 40;
