@@ -28,7 +28,7 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rc5-hL-egz">
                         <rect key="frame" x="10" y="56" width="105" height="41.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <state key="normal" title="up" backgroundImage="dvd_btn_adjust_normal"/>
+                        <state key="normal" image="icon_up_nol" backgroundImage="dvd_btn_adjust_normal"/>
                         <connections>
                             <action selector="upBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="YAa-9s-Q9w"/>
                         </connections>
@@ -36,7 +36,7 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OFd-Kj-Hsb">
                         <rect key="frame" x="260" y="56" width="105" height="41.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <state key="normal" title="down" backgroundImage="dvd_btn_adjust_normal"/>
+                        <state key="normal" image="icon_dw_nol" backgroundImage="dvd_btn_adjust_normal"/>
                         <connections>
                             <action selector="downBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="aE2-0B-6BR"/>
                         </connections>
@@ -59,7 +59,7 @@
                     </switch>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xph-53-ijS">
                         <rect key="frame" x="135" y="56" width="105" height="41.5"/>
-                        <state key="normal" image="DVD_pause" backgroundImage="dvd_btn_adjust_normal"/>
+                        <state key="normal" image="icon_st_nol" backgroundImage="dvd_btn_adjust_normal"/>
                         <connections>
                             <action selector="stopBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Wyq-FB-hGF"/>
                         </connections>
@@ -124,10 +124,12 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="DVD_pause" width="4" height="10"/>
         <image name="dvd_btn_adjust_normal" width="91" height="38"/>
         <image name="dvd_btn_switch_on" width="36" height="23"/>
         <image name="dvd_frm_choice__normal" width="336" height="47"/>
         <image name="icon_add_normal" width="15" height="15"/>
+        <image name="icon_dw_nol" width="14" height="13"/>
+        <image name="icon_st_nol" width="6" height="13"/>
+        <image name="icon_up_nol" width="14" height="13"/>
     </resources>
 </document>

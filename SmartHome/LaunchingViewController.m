@@ -31,7 +31,7 @@
     //    frame.size.width = [UIImage imageNamed:@"启动页640.gif"].size.width / 2;
     //    frame.size.height = [UIImage imageNamed:@"启动页640.gif"].size.height / 2;
     // 读取gif图片数据
-    NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"welcome" ofType:@"gif"]];
+    NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"LaunchingAnimation" ofType:@"gif"]];
     // view生成
     UIWebView *webView = [[UIWebView alloc] initWithFrame:frame];
     webView.userInteractionEnabled = NO;//用户不可交互

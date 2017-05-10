@@ -120,7 +120,6 @@
     BOOL ret = [dic writeToFile:scenePath atomically:YES];
 
     NSAssert(ret,@"写文件失败");
-
 }
 
 + (void) writeJpg:(UIImage *)jpg path:(NSString *)jpgPath

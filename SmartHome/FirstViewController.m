@@ -19,14 +19,13 @@
 #import <AVFoundation/AVFoundation.h>
 #import "SceneShortcutsViewController.h"
 #import "TabbarPanel.h"
-#import "UIImageView+Badge.h"
+
 #import <RongIMKit/RongIMKit.h>
 #import "ConversationViewController.h"
 #import <RBStoryboardLink.h>
 #import "IOManager.h"
 #import "NowMusicController.h"
-
-
+#import "UIImageView+WebCache.h"
 
 @interface FirstViewController ()<RCIMReceiveMessageDelegate,HttpDelegate,TcpRecvDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView * SubImageView;//首页的日历大圆
@@ -34,6 +33,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView * IconeImageView;//提示消息的头像
 @property (weak, nonatomic) IBOutlet UILabel * memberFamilyLabel;//家庭成员label
 @property (weak, nonatomic) IBOutlet UIImageView * numberLabelView;//未读消息的视图
+@property (weak, nonatomic) IBOutlet UILabel *numberLabel;//未读消息的个数
+
 @property (weak, nonatomic) IBOutlet UIBarButtonItem * playerBarBtn;//正在播放的按钮
 @property (weak, nonatomic) IBOutlet UIView * FourBtnView;
 @property (nonatomic,strong) NSArray * dataArr;
@@ -78,7 +79,10 @@
     _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     _baseTabbarController.tabbarPanel.hidden = NO;
     _baseTabbarController.tabBar.hidden = YES;
-       [self setBtn];
+    [self setBtn];
+    
+    int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
+    self.numberLabel.text = [NSString stringWithFormat:@"%d" ,unread];
 
 }
 - (void)viewDidAppear:(BOOL)animated {
@@ -135,8 +139,8 @@
     self.FourBtnView.userInteractionEnabled = YES;
     _IconeImageView.layer.masksToBounds = YES;
     _IconeImageView.layer.cornerRadius = _IconeImageView.bounds.size.height/2;
-    _numberLabelView.layer.masksToBounds = YES;
-    _numberLabelView.layer.cornerRadius = _numberLabelView.bounds.size.height / 2;
+    _numberLabel.layer.masksToBounds = YES;
+    _numberLabel.layer.cornerRadius = _numberLabelView.bounds.size.height / 2;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doTap:)];
     UITapGestureRecognizer *Headtap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(HeadDoTap:)];
     _HeadImageView.userInteractionEnabled = YES;
@@ -310,14 +314,18 @@
 - (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left
 {
     NSString *nickname = [SQLManager queryChat:message.senderUserId][0];
-    
+    NSString *protrait = [SQLManager queryChat:message.senderUserId][1];
+    int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
     NSString *tip=@"您有新消息";
     if ([message.objectName isEqualToString:RCTextMessageTypeIdentifier]) {
         tip = message.content.conversationDigest;
     }
-    
-    self.chatlabel.text =[NSString stringWithFormat:@"%@ : %@" , nickname, tip];
-    [self.IconeImageView badge];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.chatlabel.text =[NSString stringWithFormat:@"%@ : %@" , nickname, tip];
+        self.numberLabel.text = [NSString stringWithFormat:@"%d" ,unread];
+        [self.IconeImageView sd_setImageWithURL:[NSURL URLWithString:protrait] placeholderImage:[UIImage imageNamed:@"logo"] options:SDWebImageRetryFailed];
+    });
+
 }
 
 - (void)getScenesFromPlist
@@ -386,17 +394,20 @@
 //社交平台的弹出事件
 -(void)HeadDoTap:(UITapGestureRecognizer *)tap
 {
-     _baseTabbarController.tabbarPanel.hidden = YES;
+
+    _baseTabbarController.tabbarPanel.hidden = YES;
      if (self.socialView.hidden) {
         self.socialView.hidden = NO;
 //        _UserNameLabel.hidden = YES;
 //        _WelcomeLabel.hidden = YES;
+//         self.chatlabel.text = [NSString stringWithFormat:@"123:%d",_roomID++];
      
      }else{
          self.socialView.hidden = YES;
 //        _UserNameLabel.hidden = NO;
 //        _WelcomeLabel.hidden = NO;
         _baseTabbarController.tabbarPanel.hidden = NO;
+         self.chatlabel.text = @"456";
     }
     
 }
@@ -532,7 +543,6 @@
 //进入聊天页面
 -(void)setRCIM
 {
-    
     [[RCIM sharedRCIM] logout];
     NSString *token = [UD objectForKey:@"rctoken"];
     NSString *groupID = [[UD objectForKey:@"HostID"] description];

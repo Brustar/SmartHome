@@ -92,7 +92,7 @@
     [self.power setImage:[UIImage imageNamed:@"TV_on"] forState:UIControlStateSelected];
     
     self.volume.continuous = NO;
-    [self.volume addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
+    [self.volume addTarget:self action:@selector(changeVolume) forControlEvents:UIControlEventValueChanged];
     
     self.eNumber = [SQLManager getENumber:[self.deviceid intValue]];
     DeviceInfo *device=[DeviceInfo defaultManager];
@@ -292,12 +292,15 @@
     [theSegue setValue:self.deviceid forKey:@"deviceid"];
 }
 
--(IBAction)save:(id)sender
+-(void) changeVolume
 {
     NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volume.value*100 deviceID:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
-    
+}
+
+-(IBAction)save:(id)sender
+{
     self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
     
     Radio *device=[[Radio alloc] init];
@@ -447,7 +450,7 @@
     {
         DeviceInfo *device=[DeviceInfo defaultManager];
         self.volume.value=[[device valueForKey:@"volume"] floatValue]*100;
-        [self save:nil];
+
     }
 }
 

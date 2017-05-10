@@ -28,14 +28,12 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"系统信息";
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    
-//  UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
-//    self.navigationItem.leftBarButtonItem = returnItem;
-
+   
+       [self setNaviBarTitle:@"系统信息"];
+       self.automaticallyAdjustsScrollViewInsets = NO;
        self.titles = @[@"家庭名称",@"主机编号",@"主机品牌",@"主机型号"];
        self.tableView.tableFooterView = [UIView new];
+       self.tableView.allowsSelection = NO;
 
 }
 -(void)viewDidLayoutSubviews {
@@ -82,7 +80,10 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.textLabel.text = self.titles[indexPath.row];
-    cell.backgroundColor = [UIColor clearColor];
+    
+//    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 30)];
+//    view.backgroundColor = [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1];
+//    cell.selectedBackgroundView = view;
     if ([cell.textLabel.text isEqualToString:@"家庭名称"]) {
          cell.detailTextLabel.text = array[0];
     }else if ([cell.textLabel.text isEqualToString:@"主机编号"]){

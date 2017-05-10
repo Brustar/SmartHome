@@ -23,7 +23,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"关于我们";
+  
+    [self setNaviBarTitle:@"关于我们"];
     self.automaticallyAdjustsScrollViewInsets = NO;
 //    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
 //    self.navigationItem.leftBarButtonItem = returnItem;
@@ -32,7 +33,7 @@
     
     self.titles = @[@"版本说明",@"隐私安全政策"];
     self.version.text =[NSString stringWithFormat:@"版本号%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
-    
+    self.tableView.allowsSelection = NO;
     // Do any additional setup after loading the view.
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

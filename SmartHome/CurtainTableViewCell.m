@@ -45,18 +45,19 @@
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
     }if ([sender isEqual:self.open]) {
-        self.slider.value=1;
-        NSData *data=[[DeviceInfo defaultManager] open:self.deviceid];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:2];
-        self.valueLabel.text = @"100%";
         
-    }if ([sender isEqual:self.close]) {
-        self.slider.value=0;
-        NSData *data=[[DeviceInfo defaultManager] close:self.deviceid];
+        self.open.selected = !self.open.selected;
+        if (self.open.selected) {
+            self.slider.value=1;
+            [self.open setImage:[UIImage imageNamed:@"bd_icon_wd_off"] forState:UIControlStateNormal];
+        }else{
+            self.slider.value=0;
+            [self.open setImage:[UIImage imageNamed:@"bd_icon_wd_on"] forState:UIControlStateNormal];
+        }
+        
+        NSData *data=[[DeviceInfo defaultManager] toogle:self.open.selected deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
-        self.valueLabel.text = @"0%";
     }
     Curtain *device=[[Curtain alloc] init];
     [device setDeviceID:[self.deviceid intValue]];

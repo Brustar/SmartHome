@@ -118,6 +118,7 @@
             self.window.rootViewController = ecloudVC;
         }
     }
+
 }
 
 -(void)kickout
@@ -244,22 +245,11 @@
 }
 
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void(^)(BOOL succeeded))completionHandler{
-    //判断先前我们设置的唯一标识
-    UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-
-    NSString *ident=@"iphoneSceneNaviController";
-    UINavigationController *vc = [secondStoryBoard instantiateViewControllerWithIdentifier:ident];
-//    vc.navigationBar.backgroundColor = [UIColor blackColor];
-    self.window.rootViewController = vc;
-    if ([shortcutItem isEqual:application.shortcutItems[0]]){
-        ident=@"IphoneFavorController";
-    }else if ([shortcutItem isEqual:application.shortcutItems[1]]){
-        ident=@"VoiceOrderController";
-    }
-    UIViewController *target = [secondStoryBoard instantiateViewControllerWithIdentifier:ident];
-    [vc pushViewController:target animated:YES];
     
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"ShortCut" object:nil];
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+    NSString *ident=@"VoiceOrderController";
+    UIViewController *target = [storyBoard instantiateViewControllerWithIdentifier:ident];
+    self.window.rootViewController = target;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

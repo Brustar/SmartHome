@@ -59,14 +59,14 @@
     if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
         if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) { //如果是普通用户，不显示“权限控制”选项
-            return 6;
+            return 5;
         }
-            return 7;//如果是主人，显示“权限控制”选项
+            return 6;//如果是主人，显示“权限控制”选项
     }else{
         if([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 2) { //2代表普通用户，如果是普通用户，不显示“权限控制”选项
-            return 6;
+            return 5;
         }else {
-            return 7;//如果是主人，显示“权限控制”选项
+            return 6;//如果是主人，显示“权限控制”选项
         }
     }
     
@@ -113,6 +113,9 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"settingCell" forIndexPath:indexPath];
     cell.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
+    view.backgroundColor = [UIColor clearColor];
+    cell.selectedBackgroundView = view;
     NSString *title;
     switch (indexPath.section) {
         case 0:
@@ -183,37 +186,38 @@
     
     return cell;
 }
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIView * view = [UIView new];
+    view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 0.3);
+    view.backgroundColor = [UIColor whiteColor];
+    return view;
+    
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.3;
+    
+}
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *view = [[UIView alloc]init];
-    if(section == 1)
-    {
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 5, 400, 20)];
-        label.font = [UIFont systemFontOfSize:12];
-        label.text = @"请在“设置->通知中心”中更改";
-        label.textColor = [UIColor grayColor];
-        [view addSubview:label];
-    }
+    UIView * view = [UIView new];
+    view.frame = CGRectMake(0, 0, self.view.bounds.size.width, 20);
+    UILabel * la = [[UILabel alloc] initWithFrame:CGRectMake(0, 19.5, self.view.bounds.size.width,0.5)];
+    la.backgroundColor = [UIColor whiteColor];
     
+    [view addSubview:la];
     
-    view.backgroundColor = [UIColor colorWithRed:241/255.0 green:240/255.0 blue:246/255.0 alpha:1];
     return view;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    
-    if(section == 4 || section == 5)
-    {
-        return 25;
-    }
-    return 30;
+
+    return 20;
 }
-
-
 -(void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
 
 {
-    
     view.backgroundColor = [UIColor blackColor];
     
 }
@@ -336,6 +340,25 @@
         }
     }
 
+}
+//退出登录
+- (IBAction)QuitBtn:(id)sender {
+    //退出发送请求
+    NSString *authorToken =[[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    if (authorToken) {
+        NSDictionary *dict = @{@"token":authorToken};
+        
+        NSString *url = [NSString stringWithFormat:@"%@login/logout.aspx",[IOManager httpAddr]];
+        HttpManager *http=[HttpManager defaultManager];
+        http.delegate=self;
+        http.tag = 1;
+        [http sendPost:url param:dict];
+    }else{
+        //跳转到欢迎页
+        //self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
+        //[self performSegueWithIdentifier:@"goWelcomeSegue" sender:self];
+        [self gotoLoginViewController];
+    }
 }
 
 - (void)gotoLoginViewController {

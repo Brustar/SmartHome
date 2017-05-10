@@ -70,7 +70,6 @@
 - (IBAction)nextBtn:(id)sender {
          NSData *data=nil;
          data=[[DeviceInfo defaultManager] next:self.deviceid];
-   
 }
 //暂停
 - (IBAction)stopBtn:(id)sender {

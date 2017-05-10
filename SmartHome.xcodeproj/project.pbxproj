@@ -291,8 +291,8 @@
 		CDEE5E951EC1AC6000A5779D /* SelectRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEE5E941EC1AC6000A5779D /* SelectRoomViewController.m */; };
 		CDEE5E981EC1B35800A5779D /* SelectDevicesOfRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEE5E971EC1B35800A5779D /* SelectDevicesOfRoomViewController.m */; };
 		CDEE5E9B1EC1DF8300A5779D /* DeviceTimerSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEE5E9A1EC1DF8300A5779D /* DeviceTimerSettingViewController.m */; };
-		CDEE5E9D1EC2A27200A5779D /* welcome.gif in Resources */ = {isa = PBXBuildFile; fileRef = CDEE5E9C1EC2A27200A5779D /* welcome.gif */; };
 		CDEE5EA11EC2A84800A5779D /* LaunchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEE5EA01EC2A84800A5779D /* LaunchingViewController.m */; };
+		CDEE5EA31EC2B0D000A5779D /* LaunchingAnimation.gif in Resources */ = {isa = PBXBuildFile; fileRef = CDEE5EA21EC2B0D000A5779D /* LaunchingAnimation.gif */; };
 		CDF1573A1E7AAD4C00499AC5 /* BaseNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF157371E7AAD4C00499AC5 /* BaseNavController.m */; };
 		CDF1573B1E7AAD4C00499AC5 /* BaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF157391E7AAD4C00499AC5 /* BaseTabBarController.m */; };
 		CDF157401E7AADC700499AC5 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF1573C1E7AADC700499AC5 /* LeftViewController.m */; };
@@ -1027,9 +1027,9 @@
 		CDEE5E971EC1B35800A5779D /* SelectDevicesOfRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectDevicesOfRoomViewController.m; sourceTree = "<group>"; };
 		CDEE5E991EC1DF8300A5779D /* DeviceTimerSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceTimerSettingViewController.h; sourceTree = "<group>"; };
 		CDEE5E9A1EC1DF8300A5779D /* DeviceTimerSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceTimerSettingViewController.m; sourceTree = "<group>"; };
-		CDEE5E9C1EC2A27200A5779D /* welcome.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = welcome.gif; sourceTree = "<group>"; };
 		CDEE5E9F1EC2A84800A5779D /* LaunchingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchingViewController.h; sourceTree = "<group>"; };
 		CDEE5EA01EC2A84800A5779D /* LaunchingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchingViewController.m; sourceTree = "<group>"; };
+		CDEE5EA21EC2B0D000A5779D /* LaunchingAnimation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = LaunchingAnimation.gif; sourceTree = "<group>"; };
 		CDF157361E7AAD4C00499AC5 /* BaseNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavController.h; sourceTree = "<group>"; };
 		CDF157371E7AAD4C00499AC5 /* BaseNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavController.m; sourceTree = "<group>"; };
 		CDF157381E7AAD4C00499AC5 /* BaseTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarController.h; sourceTree = "<group>"; };
@@ -1944,7 +1944,7 @@
 		0F6ADFDC1E7134ED00BFF67F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				CDEE5E9C1EC2A27200A5779D /* welcome.gif */,
+				CDEE5EA21EC2B0D000A5779D /* LaunchingAnimation.gif */,
 				CDF78C591E9CC3C500F8B20C /* NaviBarBg.png */,
 				CDEC868C1E99E32B009EC245 /* Family */,
 				CD93E3AB1E807AD3003CCAA9 /* Login */,
@@ -2882,7 +2882,6 @@
 				2E925D9E1E5E857D008E327B /* 4.jpg in Resources */,
 				CD7DDA151E826C3B00638DB3 /* backBtn@2x.png in Resources */,
 				CDF389241E306D2400657C8B /* maintaininfo.plist in Resources */,
-				CDEE5E9D1EC2A27200A5779D /* welcome.gif in Resources */,
 				CD9F0AC11EB861F5007B0CF7 /* address.txt in Resources */,
 				CD93E3B11E8081B0003CCAA9 /* login_line@2x.png in Resources */,
 				2EC266291EA4BEAF003DC979 /* FMTableViewCell.xib in Resources */,
@@ -2892,6 +2891,7 @@
 				2E925DA71E5E857D008E327B /* all_8.jpg in Resources */,
 				2E6A065C1EA743B50022B681 /* NewColourCell.xib in Resources */,
 				0F49CB7D1E7A204300D46ECC /* MyInfo-iPad.storyboard in Resources */,
+				CDEE5EA31EC2B0D000A5779D /* LaunchingAnimation.gif in Resources */,
 				0F78C57A1EB1F92C00FC3BE4 /* Assets.xcassets in Resources */,
 				CD78A8321E337C1600060466 /* 255_216.plist in Resources */,
 				CDF389321E30EA8900657C8B /* hostUserList.plist in Resources */,

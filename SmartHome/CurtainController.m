@@ -118,32 +118,40 @@
     self.deviceid=[self.curtainIDArr objectAtIndex:self.segmentCurtain.selectedSegmentIndex];
 }
 
+-(IBAction) changeCurtain:(id)sender
+{
+    UISlider *slider = (UISlider *)sender;
+    long tag = slider.tag;
+    NSString *deviceid = [self.curtainIDArr objectAtIndex:tag-100];
+    NSData *data=[[DeviceInfo defaultManager] roll:slider.value * 100 deviceID:deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:2];
+}
+
+-(IBAction) toggleCurtain:(id)sender
+{
+    UIButton *btn = (UIButton *)sender;
+    long tag = btn.tag;
+    
+    UISlider *slider = [self.tableView viewWithTag:100+tag];
+    
+    NSString *deviceid = [self.curtainIDArr objectAtIndex:tag];
+    btn.selected = !btn.selected;
+    if (btn.selected) {
+        slider.value=1;
+        [btn setImage:[UIImage imageNamed:@"bd_icon_wd_off"] forState:UIControlStateNormal];
+    }else{
+        slider.value=0;
+        [btn setImage:[UIImage imageNamed:@"bd_icon_wd_on"] forState:UIControlStateNormal];
+    }
+    SocketManager *sock=[SocketManager defaultManager];
+    NSData *data=[[DeviceInfo defaultManager] toogle:btn.selected deviceID:deviceid];
+    [sock.socket writeData:data withTimeout:1 tag:2];
+}
+
 -(IBAction)save:(id)sender
 {
     CurtainTableViewCell *cell = [self.tableView viewWithTag:[self.deviceid integerValue]];
-    if ([sender isEqual:cell.slider]) {
-        NSData *data=[[DeviceInfo defaultManager] roll:cell.slider.value * 100 deviceID:self.deviceid];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:2];
-    }
-    
-    if ([sender isEqual:cell.open]) {
-        cell.slider.value=1;
-        NSData *data=[[DeviceInfo defaultManager] open:self.deviceid];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:2];
-        cell.valueLabel.text = @"100%";
-
-    }
-    
-    if ([sender isEqual:cell.close]) {
-        cell.slider.value=0;
-        NSData *data=[[DeviceInfo defaultManager] close:self.deviceid];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:2];
-        cell.valueLabel.text = @"0%";
-    }
-    
     
     Curtain *device=[[Curtain alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
@@ -204,14 +212,15 @@
 {
     CurtainTableViewCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"CurtainTableViewCell" owner:self options:nil] lastObject];
      cell.slider.continuous = NO;
-    [cell.slider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
-    [cell.open addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.close addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    //[cell.slider addTarget:self action:@selector(changeCurtain:) forControlEvents:UIControlEventValueChanged];
+    //[cell.open addTarget:self action:@selector(toggleCurtain:) forControlEvents:UIControlEventTouchUpInside];
+
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.label.text = [self.curNames objectAtIndex:indexPath.row];
     cell.deviceid = [self.curtainIDArr objectAtIndex:indexPath.row];
-    cell.tag = [cell.deviceid integerValue];
+    cell.slider.tag = 100+indexPath.row;
+    cell.open.tag = indexPath.row;
     cell.AddcurtainBtn.hidden = YES;
     cell.curtainContraint.constant = 10;
     return cell;

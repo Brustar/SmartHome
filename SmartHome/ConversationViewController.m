@@ -10,6 +10,7 @@
 #import "YALContextMenuTableView.h"
 #import "ContextMenuCell.h"
 #import "SQLManager.h"
+#import "UIImageView+WebCache.h"
 
 static NSString *const menuCellIdentifier = @"groupCell";
 @interface ConversationViewController ()<UITableViewDelegate,UITableViewDataSource,YALContextMenuTableViewDelegate>
@@ -96,11 +97,10 @@ static NSString *const menuCellIdentifier = @"groupCell";
     self.menuIcons = [[NSMutableArray alloc] init];
     NSArray *s = [SQLManager queryAllChat];
     [self.menuTitles addObject: @""];
-    [self.menuIcons addObject: [UIImage imageNamed:@"Contacts"]];
+    [self.menuIcons addObject: @""];
     for (id user in s) {
         [self.menuTitles addObject: [user objectForKey:@"nickname"] ];
-        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[user objectForKey:@"portrait"]]];
-        [self.menuIcons addObject: [[UIImage alloc] initWithData:data]];
+        [self.menuIcons addObject: [[user objectForKey:@"portrait"] description]];
     }
 }
 
@@ -130,7 +130,8 @@ static NSString *const menuCellIdentifier = @"groupCell";
     if (cell) {
         cell.backgroundColor = [UIColor clearColor];
         cell.menuTitleLabel.text = [self.menuTitles objectAtIndex:indexPath.row];
-        cell.menuImageView.image = [self.menuIcons objectAtIndex:indexPath.row];
+        NSURL *url = [NSURL URLWithString:[self.menuIcons objectAtIndex:indexPath.row]];
+        [cell.menuImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"Contacts"] options:SDWebImageRetryFailed];
     }
     
     return cell;

@@ -88,10 +88,13 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"权限控制";
+  
+    [self setNaviBarTitle:@"权限控制"];
     self.automaticallyAdjustsScrollViewInsets = NO;
 //    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
 //    self.navigationItem.leftBarButtonItem = returnItem;
+    self.userTableView.tableFooterView = [UIView new];
+    
     self.areaTableView.tableHeaderView = self.headView;
     self.areaTableView.hidden = YES;
     NSString *url = [NSString stringWithFormat:@"%@Cloud/user_listall.aspx",[IOManager httpAddr]];
@@ -275,6 +278,11 @@
         cell.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
         cell.areaLabel.text = self.userArr[indexPath.row];
         NSNumber *type = self.managerType[indexPath.row];
+        cell.changeBtn.userInteractionEnabled = NO;
+        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];
+        view.backgroundColor = [UIColor clearColor];
+        
+        cell.selectedBackgroundView = view;
         if([type intValue] ==1)
         {
             cell.detialLabel.text = @"主人";
@@ -290,6 +298,7 @@
     cell.exchangeSwitch.tag = [self.recoredIDs[indexPath.row] integerValue];
     [cell.exchangeSwitch addTarget:self action:@selector(switchChange:) forControlEvents:UIControlEventValueChanged];
     cell.areaLabel.text = self.areasArr[indexPath.row];
+    cell.changeBtn.userInteractionEnabled = NO;
     NSNumber *num = self.opens[indexPath.row];
     if([num intValue] == 1)
     {
@@ -308,9 +317,10 @@
         self.usrID = self.userIDArr[indexPath.row];
 //         NSString *url = [NSString stringWithFormat:@"%@Cloud/room_authority.aspx",[IOManager httpAddr]];
 //        self.recoredIDs = nil;
-       AreaSettingCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        AreaSettingCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         self.cell = cell;
         self.selectedIndexPath = indexPath;
+        
         self.userName.text = cell.areaLabel.text;
         
         if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]] && [[UD objectForKey:@"UserType"] integerValue] == 2) {
@@ -333,14 +343,7 @@
                 AreaSubVC.userNameTitle = cell.areaLabel.text;
                  AreaSubVC.identityType = self.identityType;
                 AreaSubVC.detailTextName = cell.detailTextLabel.text;
-//        if([cell.detailTextLabel.text isEqualToString:@"主人"])
-//        {
-//            [self.identityType setTitle:@"转化为普通身份" forState:UIControlStateNormal];
-//        }else
-//        {
-//            [self.identityType setTitle:@"转化为主人身份" forState:UIControlStateNormal];
-//
-//        }
+
     }
     
 }
@@ -498,7 +501,6 @@
 //    //[self.view removeFromSuperview];
 //    [self.navigationController popViewControllerAnimated:NO];
 //}
-
 
 
 
