@@ -89,10 +89,10 @@
     // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+        UIStoryboard *loginStoryBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
         
         //已登录时,自动登录
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]) {
+        if ([UD objectForKey:@"AuthorToken"]) {
             
             self.mainTabBarController = [[BaseTabBarController alloc] init];
             LeftViewController *leftVC = [[LeftViewController alloc] init];
@@ -102,7 +102,7 @@
                 device.masterID = [[[NSUserDefaults standardUserDefaults] objectForKey:@"HostID"] intValue];
             }
         }else {
-            UIViewController *vc = [secondStoryBoard instantiateViewControllerWithIdentifier:@"loginNavController"];//未登录，进入登录页面
+            UIViewController *vc = [loginStoryBoard instantiateViewControllerWithIdentifier:@"loginNavController"];//未登录，进入登录页面
             self.window.rootViewController = vc;
         }
         
@@ -246,10 +246,19 @@
 
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void(^)(BOOL succeeded))completionHandler{
     
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-    NSString *ident=@"VoiceOrderController";
-    UIViewController *target = [storyBoard instantiateViewControllerWithIdentifier:ident];
-    self.window.rootViewController = target;
+    NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
+    if (auothorToken.length >0) {
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+        UIViewController *voiceOrderVC = [storyBoard instantiateViewControllerWithIdentifier:@"VoiceOrderController"];
+        if (self.mainTabBarController) {
+            [self.mainTabBarController.selectedViewController pushViewController:voiceOrderVC animated:YES];
+        }else {
+            [MBProgressHUD showError:@"请先启动App"];
+        }
+        
+    }else {
+        [MBProgressHUD showError:@"请先登录"];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

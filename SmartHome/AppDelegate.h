@@ -10,6 +10,7 @@
 #import "BaseTabBarController.h"
 #import "LeftViewController.h"
 #import "LaunchingViewController.h"
+#import "MBProgressHUD+NJ.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
