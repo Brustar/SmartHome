@@ -97,7 +97,7 @@
             break;
     }
     UIViewController *target = [storyboard instantiateViewControllerWithIdentifier:targetName];
-    [self.navigationController pushViewController:target animated:YES];
+    [self.navigationController pushViewController:target animated:NO];
 }
 
 @end

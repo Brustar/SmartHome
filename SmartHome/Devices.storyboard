@@ -1500,7 +1500,6 @@
                                 <state key="normal" image="clock_white"/>
                                 <connections>
                                     <action selector="save:" destination="PiN-hn-P2b" eventType="touchUpInside" id="kfS-QF-jgK"/>
-                                    <action selector="start:" destination="PiN-hn-P2b" eventType="touchUpInside" id="egV-KG-paC"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x32-p1-sgW" userLabel="LButton">
@@ -1719,7 +1718,6 @@
                                 <state key="normal" image="clock_white"/>
                                 <connections>
                                     <action selector="save:" destination="EnX-rM-1f5" eventType="touchUpInside" id="58W-g5-SZz"/>
-                                    <action selector="start:" destination="EnX-rM-1f5" eventType="touchUpInside" id="ygB-Rv-V3q"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PTK-Ur-jcD" userLabel="LButton">
@@ -1817,7 +1815,6 @@
                                 <state key="normal" image="clock_white"/>
                                 <connections>
                                     <action selector="save:" destination="Fr9-DY-QUJ" eventType="touchUpInside" id="WSb-0W-eWW"/>
-                                    <action selector="start:" destination="Fr9-DY-QUJ" eventType="touchUpInside" id="Z1f-s5-Zu9"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5v1-Q9-wes" userLabel="LButton">
