@@ -7,7 +7,8 @@
 //
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonCryptor.h>
-#import "MF_Base64Additions.h"
+
+#import"GTMBase64.h"
 
 #define DES_KEY @"ecloud88"
 
