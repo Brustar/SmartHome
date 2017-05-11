@@ -439,56 +439,73 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="monitoring" translatesAutoresizingMaskIntoConstraints="NO" id="BV6-D1-8If" userLabel="bg">
-                                <rect key="frame" x="20" y="0.0" width="335" height="260"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lSi-TU-pTN" userLabel="MonitorView">
+                                <rect key="frame" x="30" y="0.0" width="315" height="260"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="monitoring" translatesAutoresizingMaskIntoConstraints="NO" id="BV6-D1-8If" userLabel="bg">
+                                        <rect key="frame" x="0.0" y="0.0" width="315" height="260"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="l5W-2z-RSA" userLabel="cameraView">
+                                        <rect key="frame" x="30" y="30" width="255" height="170"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5C-GP-Hcp" userLabel="调节">
+                                        <rect key="frame" x="30" y="217" width="53" height="23"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="53" id="PUb-g6-Cs1"/>
+                                            <constraint firstAttribute="height" constant="23" id="U6E-6l-cyy"/>
+                                        </constraints>
+                                        <state key="normal" image="adjust"/>
+                                        <connections>
+                                            <action selector="adjustBtnClicked:" destination="dVN-mP-IMN" eventType="touchUpInside" id="XSj-im-LIr"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6jJ-Vp-CpM" userLabel="放大">
+                                        <rect key="frame" x="232" y="217" width="53" height="23"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="23" id="9se-01-5bf"/>
+                                            <constraint firstAttribute="width" constant="53" id="xMg-sf-u4x"/>
+                                        </constraints>
+                                        <state key="normal" image="fullScreen_icon"/>
+                                        <connections>
+                                            <action selector="fullScreenBtnClicked:" destination="dVN-mP-IMN" eventType="touchUpInside" id="Qdy-DN-o7E"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="房间" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PFI-dA-eiC" userLabel="房间名">
+                                        <rect key="frame" x="107.5" y="218" width="100" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="MaB-Ct-gMS"/>
+                                            <constraint firstAttribute="width" constant="100" id="Rfi-SU-FNA"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="260" id="LBD-nT-4FC"/>
+                                    <constraint firstAttribute="trailing" secondItem="6jJ-Vp-CpM" secondAttribute="trailing" constant="30" id="3ty-HZ-I2n"/>
+                                    <constraint firstAttribute="bottom" secondItem="T5C-GP-Hcp" secondAttribute="bottom" constant="20" id="BFy-mx-oAs"/>
+                                    <constraint firstAttribute="height" constant="260" id="BbO-9e-4sB"/>
+                                    <constraint firstAttribute="bottom" secondItem="PFI-dA-eiC" secondAttribute="bottom" constant="22" id="C7H-YC-kxB"/>
+                                    <constraint firstItem="BV6-D1-8If" firstAttribute="leading" secondItem="lSi-TU-pTN" secondAttribute="leading" id="Egb-Xa-EwE"/>
+                                    <constraint firstItem="BV6-D1-8If" firstAttribute="top" secondItem="lSi-TU-pTN" secondAttribute="top" id="F1F-Wf-OA2"/>
+                                    <constraint firstAttribute="bottom" secondItem="BV6-D1-8If" secondAttribute="bottom" id="JpR-ED-xF6"/>
+                                    <constraint firstAttribute="bottom" secondItem="l5W-2z-RSA" secondAttribute="bottom" constant="60" id="cZ8-6b-hkx"/>
+                                    <constraint firstAttribute="trailing" secondItem="BV6-D1-8If" secondAttribute="trailing" id="egq-AI-jbZ"/>
+                                    <constraint firstItem="PFI-dA-eiC" firstAttribute="centerX" secondItem="lSi-TU-pTN" secondAttribute="centerX" id="f1L-7x-WLN"/>
+                                    <constraint firstItem="T5C-GP-Hcp" firstAttribute="leading" secondItem="lSi-TU-pTN" secondAttribute="leading" constant="30" id="h6q-dZ-2we"/>
+                                    <constraint firstAttribute="bottom" secondItem="6jJ-Vp-CpM" secondAttribute="bottom" constant="20" id="iZn-Pg-2uv"/>
+                                    <constraint firstItem="l5W-2z-RSA" firstAttribute="top" secondItem="lSi-TU-pTN" secondAttribute="top" constant="30" id="piF-y2-S9q"/>
+                                    <constraint firstItem="l5W-2z-RSA" firstAttribute="leading" secondItem="lSi-TU-pTN" secondAttribute="leading" constant="30" id="rKw-MB-kpp"/>
+                                    <constraint firstAttribute="trailing" secondItem="l5W-2z-RSA" secondAttribute="trailing" constant="30" id="y3P-kp-gIf"/>
                                 </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="l5W-2z-RSA" userLabel="cameraView">
-                                <rect key="frame" x="60" y="40" width="255" height="160"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="160" id="iec-Mn-MbF"/>
-                                </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5C-GP-Hcp" userLabel="调节">
-                                <rect key="frame" x="55" y="212" width="53" height="23"/>
-                                <state key="normal" image="adjust"/>
-                                <connections>
-                                    <action selector="adjustBtnClicked:" destination="dVN-mP-IMN" eventType="touchUpInside" id="XSj-im-LIr"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6jJ-Vp-CpM" userLabel="放大">
-                                <rect key="frame" x="267" y="212" width="53" height="23"/>
-                                <state key="normal" image="fullScreen_icon"/>
-                                <connections>
-                                    <action selector="fullScreenBtnClicked:" destination="dVN-mP-IMN" eventType="touchUpInside" id="Qdy-DN-o7E"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="房间" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PFI-dA-eiC" userLabel="房间名">
-                                <rect key="frame" x="137" y="212" width="100" height="18"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="Rfi-SU-FNA"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="PFI-dA-eiC" firstAttribute="centerX" secondItem="krk-wD-4OI" secondAttribute="centerX" id="MLC-jV-N0Z"/>
-                            <constraint firstItem="6jJ-Vp-CpM" firstAttribute="bottom" secondItem="l5W-2z-RSA" secondAttribute="bottom" constant="35" id="QCW-av-q64"/>
-                            <constraint firstAttribute="trailing" secondItem="BV6-D1-8If" secondAttribute="trailing" constant="20" id="TkB-Ac-W3Y"/>
-                            <constraint firstItem="l5W-2z-RSA" firstAttribute="leading" secondItem="krk-wD-4OI" secondAttribute="leading" constant="60" id="ZCP-dg-nxW"/>
-                            <constraint firstItem="BV6-D1-8If" firstAttribute="top" secondItem="krk-wD-4OI" secondAttribute="top" id="dFg-el-SJN"/>
-                            <constraint firstAttribute="trailing" secondItem="6jJ-Vp-CpM" secondAttribute="trailing" constant="55" id="dJK-O6-Wak"/>
-                            <constraint firstItem="BV6-D1-8If" firstAttribute="leading" secondItem="krk-wD-4OI" secondAttribute="leading" constant="20" id="gJc-2P-jzw"/>
-                            <constraint firstItem="T5C-GP-Hcp" firstAttribute="leading" secondItem="krk-wD-4OI" secondAttribute="leading" constant="55" id="hvf-LF-x8h"/>
-                            <constraint firstItem="T5C-GP-Hcp" firstAttribute="bottom" secondItem="l5W-2z-RSA" secondAttribute="bottom" constant="35" id="i0U-1T-CxL"/>
-                            <constraint firstItem="l5W-2z-RSA" firstAttribute="top" secondItem="krk-wD-4OI" secondAttribute="top" constant="40" id="iaN-nC-b20"/>
-                            <constraint firstAttribute="trailing" secondItem="l5W-2z-RSA" secondAttribute="trailing" constant="60" id="rcC-z6-Zlx"/>
-                            <constraint firstItem="PFI-dA-eiC" firstAttribute="bottom" secondItem="l5W-2z-RSA" secondAttribute="bottom" constant="30" id="tN6-ZX-oTe"/>
+                            <constraint firstItem="lSi-TU-pTN" firstAttribute="leading" secondItem="krk-wD-4OI" secondAttribute="leading" constant="30" id="77u-PO-U5W"/>
+                            <constraint firstAttribute="trailing" secondItem="lSi-TU-pTN" secondAttribute="trailing" constant="30" id="Vib-Xu-Lju"/>
+                            <constraint firstItem="lSi-TU-pTN" firstAttribute="top" secondItem="krk-wD-4OI" secondAttribute="top" id="wuA-wO-dda"/>
                         </constraints>
                     </view>
                     <connections>

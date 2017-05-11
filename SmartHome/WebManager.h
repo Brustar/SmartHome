@@ -6,7 +6,7 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 #import "MBProgressHUD+NJ.h"
-@interface WebManager : UIViewController <UIWebViewDelegate>
+@interface WebManager : UIViewController <UIWebViewDelegate, UIAlertViewDelegate>
 
 @property (retain, nonatomic) IBOutlet UIWebView *webView;
 @property (nonatomic, retain) NSString *oauthUrl;

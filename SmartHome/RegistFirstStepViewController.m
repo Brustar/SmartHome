@@ -22,7 +22,7 @@
     self.countryCodeTableView.hidden = YES;
     
     self.authLabel.text = self.suerTypeStr;
-    self.homeLabel.text = [NSString stringWithFormat:@"%@",[NSNumber numberWithInt:self.masterStr]];
+    self.homeLabel.text = self.hostName;
     [self.phoneNumTextField setValue:[UIColor grayColor] forKeyPath:@"_placeholderLabel.textColor"];
     
     self.countryCode = @"86";//默认国家码

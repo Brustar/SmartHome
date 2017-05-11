@@ -86,5 +86,9 @@
 }
 
 - (IBAction)fullScreenBtnClicked:(id)sender {
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(onFullScreenBtnClicked:cameraImageView:)]) {
+        [_delegate onFullScreenBtnClicked:sender cameraImageView:self.cameraImgView];
+    }
 }
 @end
