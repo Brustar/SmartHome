@@ -28,53 +28,79 @@
 }
 - (IBAction)save:(id)sender {
     
-             Light *device=[[Light alloc] init];
+    Light *device=[[Light alloc] init];
+    [device setDeviceID:[self.deviceid intValue]];
+    [device setIsPoweron:self.NewLightPowerBtn.selected];
+    [device setBrightness:self.NewLightSlider.value * 100];
+    [device setColor:@[]];
+    
+    if (sender == self.NewLightSlider){
+        
+        float value = self.NewLightSlider.value;
+        if(0==value){
+            //关闭switch
+            self.NewLightPowerBtn.selected = NO;
+        }else if(value > 0 ){
+            //打开switch
+            self.NewLightPowerBtn.selected = YES;
+        }
+
+        NSData *data=[[DeviceInfo defaultManager] changeBright:self.NewLightSlider.value*100 deviceID:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
+    
      if (sender == self.NewLightPowerBtn) {
-        self.NewLightPowerBtn.selected = !self.NewLightPowerBtn.selected;
          
+         BOOL isOn  = [self.NewLightPowerBtn isSelected];
+         
+         if(isOn){
+             //让slider的值等于1
+             
+             self.NewLightSlider.value = 0;
+             
+         }else{
+             //让slider的值为0
+             
+             self.NewLightSlider.value = 1;
+             
+         }
+        self.NewLightPowerBtn.selected = !self.NewLightPowerBtn.selected;
         if (self.NewLightPowerBtn.selected) {
             [self.NewLightPowerBtn setImage:[UIImage imageNamed:@"lv_icon_light_off"] forState:UIControlStateNormal];
-            self.NewLightSlider.value = 0;
+          
         }else{
             [self.NewLightPowerBtn setImage:[UIImage imageNamed:@"lv_icon_light_on"] forState:UIControlStateSelected];
-            self.NewLightSlider.value = 1;
-            NSData *data=[[DeviceInfo defaultManager] toogleLight:device.isPoweron deviceID:self.deviceid];
-            SocketManager *sock=[SocketManager defaultManager];
-            [sock.socket writeData:data withTimeout:1 tag:1];
            
-    
-        }
-    }else if (sender == self.AddLightBtn){
+       }
+         
+         NSData *data=[[DeviceInfo defaultManager] toogleLight:self.NewLightPowerBtn.selected deviceID:self.deviceid];
+         SocketManager *sock=[SocketManager defaultManager];
+         [sock.socket writeData:data withTimeout:1 tag:1];
+         
+    }
+
+    if (sender == self.AddLightBtn){
         
-        self.AddLightBtn.selected = !self.AddLightBtn.selected;
+           self.AddLightBtn.selected = !self.AddLightBtn.selected;
         if (self.AddLightBtn.selected) {
             [self.AddLightBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
-        }else{
+         }else{
             [self.AddLightBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
-        }
-    }else if (sender == self.NewLightSlider){
+             
+             [_scene setSceneID:[self.sceneid intValue]];
+             [_scene setRoomID:self.roomID];
+             [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+             
+             [_scene setReadonly:NO];
+             
+             NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+             [_scene setDevices:devices];
+             [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+         }
         
-    NSData *data=[[DeviceInfo defaultManager] changeBright:self.NewLightSlider.value*100 deviceID:self.deviceid];
-        if (self.NewLightSlider.value == 0) {
-            [self.NewLightPowerBtn setImage:[UIImage imageNamed:@"lv_icon_light_off"] forState:UIControlStateNormal];
-        }else{
-            [self.NewLightPowerBtn setImage:[UIImage imageNamed:@"lv_icon_light_on"] forState:UIControlStateNormal];
-        }
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:2];
-    }
-    [device setDeviceID:[self.deviceid intValue]];
-    [device setIsPoweron:device.isPoweron];
-    [device setColor:@[]];
-    [_scene setSceneID:[self.sceneid intValue]];
-    [_scene setRoomID:self.roomID];
-    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-    
-    [_scene setReadonly:NO];
-    
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
-    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+     }
+
 }
 
 @end

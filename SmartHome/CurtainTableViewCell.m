@@ -66,10 +66,7 @@
     if ([sender isEqual:self.open]) {
         [device setOpenvalue:100];
     }
-    
-    if ([sender isEqual:self.close]) {
-        [device setOpenvalue:0];
-    }
+   
     if ([sender isEqual:self.AddcurtainBtn]) {
         self.AddcurtainBtn.selected = !self.AddcurtainBtn.selected;
         if (!self.AddcurtainBtn.selected) {
@@ -108,9 +105,7 @@
 
 - (IBAction)AddcurtainBtn:(id)sender {
     
- 
-    
-   
+
 }
 
 

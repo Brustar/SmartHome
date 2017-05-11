@@ -69,9 +69,6 @@
     self.type = @"1";
     self.tableView.tableFooterView = self.FootView;
     
-//    UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc]initWithTitle:@"我的消息" style:UIBarButtonItemStylePlain target:self action:@selector(leftEdit:)];
-//    self.navigationItem.leftBarButtonItem = leftBtn;
-   
      self.isEditing = YES;
     if (self.itemID) {
         
@@ -123,14 +120,12 @@
 {
     self.image = [[UIImageView alloc] init];
     self.image.image = [UIImage imageNamed:@"PL"];
-    [self.view addSubview:self.image];
-    [self addPicConstraint];
     self.image.hidden = YES;
     self.label = [[UILabel alloc]init];
     self.label.hidden = YES;
     self.label.numberOfLines = 0;
-    self.self.label.text = @"暂时没有任何消息提醒";
-    self.self.label.textColor = [UIColor lightGrayColor];
+    self.label.text = @"暂时没有任何消息提醒";
+    self.label.textColor = [UIColor colorWithRed:132/255.0 green:132/255.0 blue:133/255.0 alpha:1];
     [self addLabelConstraint];
     [self.view addSubview:self.self.label];
    
@@ -152,36 +147,6 @@
     [self.view addSubview:self.label];
     [self.view addConstraints:@[constraintx,constrainty,constrainth,constraintw]];
 
-}
-- (void)addPicConstraint{
-    
-    //禁用antoresizing
-    
-    _image.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    //添加高约束
-    
-    NSLayoutConstraint *picHeight = [NSLayoutConstraint constraintWithItem:_image attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:70];
-    
-    [_image addConstraint:picHeight];
-    
-    //添加宽约束
-    
-    NSLayoutConstraint *picWeight = [NSLayoutConstraint constraintWithItem:_image attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:70];
-    
-    [_image addConstraint:picWeight];
-    
-    //添加y方向约束
-    
-    NSLayoutConstraint *picTop = [NSLayoutConstraint constraintWithItem:_image attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_image.superview attribute:NSLayoutAttributeTop multiplier:1.0 constant:160];
-    [self.view addConstraint:picTop];
-    
-    //添加x方向约束
-    
-    NSLayoutConstraint *picVer = [NSLayoutConstraint constraintWithItem:_image attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_image.superview attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
-    
-    [self.view addConstraint:picVer];
-    
 }
 
 -(void)sendRequestForDetailMsgWithItemId:(int)itemID
@@ -227,14 +192,15 @@
         if([responseObject[@"result"] intValue]==0)
         {
             [MBProgressHUD showSuccess:@"删除成功"];
-            
+            [self sendRequestForDetailMsgWithItemId:[_itemID intValue]];
+            [self.tableView reloadData];
+
         }else {
             [MBProgressHUD showError:responseObject[@"Msg"]];
         }
     }else if (tag == 3){
         if ([responseObject[@"result"] intValue] == 0) {
             self.isreadArr[self.selectId] = @"1";
-//            [self.isreadArr removeAllObjects];
             [self sendRequestForDetailMsgWithItemId:[_itemID intValue]];
 
             [self.tableView reloadData];
@@ -251,10 +217,10 @@
     
     if (self.msgArr.count == 0) {
         self.image.hidden = NO;
-        self.self.label.hidden = NO;
+        self.label.hidden = NO;
     }else{
         self.image.hidden = YES;
-        self.self.label.hidden = YES;
+        self.label.hidden = YES;
     }
     return self.msgArr.count;
 }
@@ -263,12 +229,14 @@
 {
     static NSString *CellIdentifier = @"msgCell";
     MsgCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    if (self.timesArr.count >= indexPath.row) {
+         cell.timeLable.text = self.timesArr[indexPath.row];
+        self.itemID = self.recordID[indexPath.row];
+        //        cell.tag = [self.msgArr[indexPath.row] integerValue];
+        self.unreadcount = [self.isreadArr[indexPath.row] integerValue];
         cell.title.text = self.msgArr[indexPath.row];
         cell.title.adjustsFontSizeToFitWidth = YES;
-        cell.timeLable.text = self.timesArr[indexPath.row];
-        self.itemID = self.recordID[indexPath.row];
-//        cell.tag = [self.msgArr[indexPath.row] integerValue];
-        self.unreadcount = [self.isreadArr[indexPath.row] integerValue];
+    }
     if (self.unreadcount == 0) {//未读消息
         cell.unreadcountImage.hidden = YES;
         cell.countLabel.hidden       = YES;
@@ -298,10 +266,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  
-//    MsgCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//    cell.selectionStyle = UITableViewCellSelectionStyleGray;
-//    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+
     self.selectId = (int)indexPath.row;
     
     if (self.isEditing==NO) {
@@ -344,7 +309,7 @@
               [deleteArray addObject:self.msgArr[indexPath.row]];
         }
       
-        if (![deletedTime containsObject:self.timesArr[indexPath.row]]) {
+        if ([deletedTime containsObject:self.timesArr[indexPath.row]]) {
               [deletedTime addObject:self.timesArr[indexPath.row]];
         }
         if (self.recordID[indexPath.row]) {
@@ -362,7 +327,9 @@
     }else {
         [MBProgressHUD showError:@"请选择要删除的记录"];
     }
-       [self clickCancelBtn:nil];
+      [self.tableView reloadData];
+    
+//       [self clickCancelBtn:sender];
     
 }
 

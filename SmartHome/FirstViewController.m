@@ -41,12 +41,12 @@
 @property (weak, nonatomic) IBOutlet UIImageView * HeadImageView;
 @property (weak, nonatomic) IBOutlet UIView * socialView;
 @property (weak, nonatomic) IBOutlet UILabel * calenderDayLabel;//日历-天
-@property (weak, nonatomic) IBOutlet UILabel * markedWordsLabel;//提示语
+@property (weak, nonatomic) IBOutlet UILabel * markedWordsLabel;//提示语下
 @property (weak, nonatomic) IBOutlet UILabel * calenderMonthLabel;//日历月
 @property (weak, nonatomic) IBOutlet UILabel * calenderYearLabel;//日历年
 @property (weak, nonatomic) IBOutlet UILabel * UserNameLabel;//用户名的显示
 @property (weak, nonatomic) IBOutlet UILabel * WelcomeLabel;
-@property (weak, nonatomic) IBOutlet UILabel * TakeTurnsWordsLabel;
+@property (weak, nonatomic) IBOutlet UILabel * TakeTurnsWordsLabel;//提示语上
 @property (nonatomic,strong) NSArray * Urldata;
 @property (weak, nonatomic) IBOutlet UIButton * firstBtn;
 @property (weak, nonatomic) IBOutlet UIButton * TwoBtn;
@@ -79,11 +79,22 @@
     _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     _baseTabbarController.tabbarPanel.hidden = NO;
     _baseTabbarController.tabBar.hidden = YES;
-    [self setBtn];
-    
+    [self getScenesFromPlist];
     int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
     self.numberLabel.text = [NSString stringWithFormat:@"%d" ,unread];
-
+    [self setBtn];
+    
+    NSArray  *paths  =  NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+    NSString *docDir = [paths objectAtIndex:0];
+    NSString *filePath = [docDir stringByAppendingPathComponent:@"Title.plist"];
+    NSString *filePath1 = [docDir stringByAppendingPathComponent:@"Detail.plist"];
+    NSArray * TitleArray = [[NSArray alloc] initWithContentsOfFile:filePath];
+    NSArray * DetailArray = [[NSArray alloc] initWithContentsOfFile:filePath1];
+    for (int i =0 ; i < TitleArray.count; i ++) {
+        self.TakeTurnsWordsLabel.text = TitleArray[0];
+        self.markedWordsLabel.text = DetailArray[0];
+    }
+   
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -131,7 +142,7 @@
     [self updateInterfaceWithReachability];
     [self setUIMessage];
     [self chatConnect];
-    [self getScenesFromPlist];
+   
 }
 
 -(void)setUIMessage
@@ -166,6 +177,10 @@
         self.deviceid = bgmusicIDS[0];
     }
     
+    self.iconeView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *iconeTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionTap:)];//点击进入聊天页面
+    [self.iconeView addGestureRecognizer:iconeTap];
+    //获取系统时间
     NSDate * senddate=[NSDate date];
     
     NSDateFormatter *dateformatter=[[NSDateFormatter alloc] init];
@@ -175,10 +190,6 @@
     NSString * locationString=[dateformatter stringFromDate:senddate];
     
     NSLog(@"-------%@",locationString);
-    self.iconeView.userInteractionEnabled = YES;
-    UITapGestureRecognizer *iconeTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionTap:)];//点击进入聊天页面
-    [self.iconeView addGestureRecognizer:iconeTap];
-    //获取系统时间
     NSCalendar * cal=[NSCalendar currentCalendar];
     NSUInteger unitFlags=NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit;
     NSDateComponents * conponent= [cal components:unitFlags fromDate:senddate];
@@ -353,6 +364,7 @@
 
 -(void)setBtn
 {
+    
     _firstBtn.selected = !_firstBtn.selected;
     _TwoBtn.selected = !_TwoBtn.selected;
     _ThreeBtn.selected = !_ThreeBtn.selected;
@@ -384,7 +396,7 @@
             [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular3"] forState:UIControlStateNormal];
         }
     }else{
-        _ThreeBtn.centerX = self.view.centerX;
+        _ThreeBtn.center = CGPointMake(self.view.center.x, self.view.center.y);
         _firstBtn.hidden = YES;
         _TwoBtn.hidden = YES;
         

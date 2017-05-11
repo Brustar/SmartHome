@@ -26,10 +26,10 @@
             </objects>
             <point key="canvasLocation" x="-1742" y="-189"/>
         </scene>
-        <!--First View Controller-->
+        <!--首页-->
         <scene sceneID="nsI-sG-NkH">
             <objects>
-                <viewController storyboardIdentifier="FirstViewController" id="pvp-cq-nWV" customClass="FirstViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FirstViewController" id="pvp-cq-nWV" userLabel="首页" customClass="FirstViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LKi-1C-fQf"/>
                         <viewControllerLayoutGuide type="bottom" id="dyk-7K-uDi"/>
