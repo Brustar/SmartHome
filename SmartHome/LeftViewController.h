@@ -22,9 +22,21 @@
 #import "ConversationViewController.h"
 #import "UIButton+WebCache.h"
 
+@protocol LeftViewControllerDelegate;
+
 @interface LeftViewController : UIViewController
 @property(nonatomic, strong) NSArray *itemArray;
 @property(nonatomic, strong) UserInfo *userInfo;
 @property(nonatomic, strong) UIButton *headerBtn;
 @property(nonatomic, strong) UITableView *myTableView;
+@property(nonatomic, assign) id<LeftViewControllerDelegate>delegate;
+@end
+
+
+
+@protocol LeftViewControllerDelegate <NSObject>
+
+@optional
+- (void)onBackgroundBtnClicked:(UIButton *)btn;
+
 @end
