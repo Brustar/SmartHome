@@ -50,6 +50,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self addNotifications];
    [self.nameTextField setValue:[UIColor grayColor] forKeyPath:@"_placeholderLabel.textColor"];
     

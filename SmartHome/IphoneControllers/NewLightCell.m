@@ -66,7 +66,7 @@
              
          }
         self.NewLightPowerBtn.selected = !self.NewLightPowerBtn.selected;
-        if (self.NewLightPowerBtn.selected) {
+        if (!self.NewLightPowerBtn.selected) {
             [self.NewLightPowerBtn setImage:[UIImage imageNamed:@"lv_icon_light_off"] forState:UIControlStateNormal];
           
         }else{
@@ -78,9 +78,14 @@
          SocketManager *sock=[SocketManager defaultManager];
          [sock.socket writeData:data withTimeout:1 tag:1];
          
+         if (_delegate && [_delegate respondsToSelector:@selector(onLightPowerBtnClicked:)]) {
+             [_delegate onLightPowerBtnClicked:self.NewLightPowerBtn];
+         }
+         
     }
 
     if (sender == self.AddLightBtn){
+
         
            self.AddLightBtn.selected = !self.AddLightBtn.selected;
         if (self.AddLightBtn.selected) {

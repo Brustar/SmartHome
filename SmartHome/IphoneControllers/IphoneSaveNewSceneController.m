@@ -41,7 +41,7 @@
 }
 -(void)reachNotification
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFixTimeInfo:) name:@"time" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFixTimeInfo:) name:@"AddSceneOrDeviceTimerNotification" object:nil];
 }
 -(void)getFixTimeInfo:(NSNotification *)notification
 {
@@ -127,6 +127,7 @@
 - (IBAction)PushBtn:(id)sender {
     UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
     IphoneNewAddSceneTimerVC * iphoneSaveNewScene = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneNewAddSceneTimerVC"];
+    iphoneSaveNewScene.naviTitle = @"场景定时";
     // [self presentViewController:iphoneSaveNewScene animated:YES completion:nil];
     [self.navigationController pushViewController:iphoneSaveNewScene animated:YES];
     

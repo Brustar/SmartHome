@@ -5,7 +5,8 @@ target 'SmartHome' do
 	pod 'AFNetworking'
 	pod 'FMDB', '~> 2.3'
 	pod 'RegexKitLite', '~> 4.0'
-	pod 'Base64'
+	
+    pod 'GTMBase64', '~> 1.0.0'
 	pod 'MBProgressHUD'
 	pod 'Reachability', '~> 3.0.0'
 	#pod 'QRCodeReader'

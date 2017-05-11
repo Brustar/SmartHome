@@ -292,7 +292,8 @@
 		CDEE5E981EC1B35800A5779D /* SelectDevicesOfRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEE5E971EC1B35800A5779D /* SelectDevicesOfRoomViewController.m */; };
 		CDEE5E9B1EC1DF8300A5779D /* DeviceTimerSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEE5E9A1EC1DF8300A5779D /* DeviceTimerSettingViewController.m */; };
 		CDEE5EA11EC2A84800A5779D /* LaunchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEE5EA01EC2A84800A5779D /* LaunchingViewController.m */; };
-		CDEE5EA31EC2B0D000A5779D /* LaunchingAnimation.gif in Resources */ = {isa = PBXBuildFile; fileRef = CDEE5EA21EC2B0D000A5779D /* LaunchingAnimation.gif */; };
+		CDEE5EA61EC33DC100A5779D /* CoreTextArcView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEE5EA51EC33DC100A5779D /* CoreTextArcView.m */; };
+		CDEE5EA81EC3EC5900A5779D /* launchingAnimation.gif in Resources */ = {isa = PBXBuildFile; fileRef = CDEE5EA71EC3EC5900A5779D /* launchingAnimation.gif */; };
 		CDF1573A1E7AAD4C00499AC5 /* BaseNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF157371E7AAD4C00499AC5 /* BaseNavController.m */; };
 		CDF1573B1E7AAD4C00499AC5 /* BaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF157391E7AAD4C00499AC5 /* BaseTabBarController.m */; };
 		CDF157401E7AADC700499AC5 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF1573C1E7AADC700499AC5 /* LeftViewController.m */; };
@@ -1029,7 +1030,9 @@
 		CDEE5E9A1EC1DF8300A5779D /* DeviceTimerSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceTimerSettingViewController.m; sourceTree = "<group>"; };
 		CDEE5E9F1EC2A84800A5779D /* LaunchingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchingViewController.h; sourceTree = "<group>"; };
 		CDEE5EA01EC2A84800A5779D /* LaunchingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchingViewController.m; sourceTree = "<group>"; };
-		CDEE5EA21EC2B0D000A5779D /* LaunchingAnimation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = LaunchingAnimation.gif; sourceTree = "<group>"; };
+		CDEE5EA41EC33DC100A5779D /* CoreTextArcView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreTextArcView.h; sourceTree = "<group>"; };
+		CDEE5EA51EC33DC100A5779D /* CoreTextArcView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreTextArcView.m; sourceTree = "<group>"; };
+		CDEE5EA71EC3EC5900A5779D /* launchingAnimation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = launchingAnimation.gif; sourceTree = "<group>"; };
 		CDF157361E7AAD4C00499AC5 /* BaseNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavController.h; sourceTree = "<group>"; };
 		CDF157371E7AAD4C00499AC5 /* BaseNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavController.m; sourceTree = "<group>"; };
 		CDF157381E7AAD4C00499AC5 /* BaseTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarController.h; sourceTree = "<group>"; };
@@ -1944,7 +1947,7 @@
 		0F6ADFDC1E7134ED00BFF67F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				CDEE5EA21EC2B0D000A5779D /* LaunchingAnimation.gif */,
+				CDEE5EA71EC3EC5900A5779D /* launchingAnimation.gif */,
 				CDF78C591E9CC3C500F8B20C /* NaviBarBg.png */,
 				CDEC868C1E99E32B009EC245 /* Family */,
 				CD93E3AB1E807AD3003CCAA9 /* Login */,
@@ -2495,6 +2498,8 @@
 		CDEC868F1E9A1CBB009EC245 /* FamilyViewController */ = {
 			isa = PBXGroup;
 			children = (
+				CDEE5EA41EC33DC100A5779D /* CoreTextArcView.h */,
+				CDEE5EA51EC33DC100A5779D /* CoreTextArcView.m */,
 				CDEC86901E9A1D22009EC245 /* FamilyHomeCell.h */,
 				CDEC86911E9A1D22009EC245 /* FamilyHomeCell.m */,
 				CDEC86961E9A44F9009EC245 /* FamilyHomeViewController.h */,
@@ -2891,7 +2896,6 @@
 				2E925DA71E5E857D008E327B /* all_8.jpg in Resources */,
 				2E6A065C1EA743B50022B681 /* NewColourCell.xib in Resources */,
 				0F49CB7D1E7A204300D46ECC /* MyInfo-iPad.storyboard in Resources */,
-				CDEE5EA31EC2B0D000A5779D /* LaunchingAnimation.gif in Resources */,
 				0F78C57A1EB1F92C00FC3BE4 /* Assets.xcassets in Resources */,
 				CD78A8321E337C1600060466 /* 255_216.plist in Resources */,
 				CDF389321E30EA8900657C8B /* hostUserList.plist in Resources */,
@@ -2922,6 +2926,7 @@
 				CDF3892E1E30CFD000657C8B /* userPushNotifyList.plist in Resources */,
 				CD7DDA071E81168000638DB3 /* login_pwd@2x.png in Resources */,
 				0FE78BB61DCFB091009B4767 /* Images.xcassets in Resources */,
+				CDEE5EA81EC3EC5900A5779D /* launchingAnimation.gif in Resources */,
 				2E925DA41E5E857D008E327B /* all_5.jpg in Resources */,
 				CDF389261E30A31300657C8B /* energylist.plist in Resources */,
 				2EBABC741E835EC70093EF3A /* AireTableViewCell.xib in Resources */,
@@ -3401,6 +3406,7 @@
 				0FA96D521EB033FE001DDF39 /* UIView+Popup.m in Sources */,
 				2ECDCC901E9E3623004C68BE /* BjMusicTableViewCell.m in Sources */,
 				0F01D5441CDC6CA600DAC267 /* Scene.m in Sources */,
+				CDEE5EA61EC33DC100A5779D /* CoreTextArcView.m in Sources */,
 				CDF78C551E9CA99D00F8B20C /* CustomNaviBarView.m in Sources */,
 				0FC41BAF1D6DA3DD000D4451 /* VoiceOrderController.m in Sources */,
 				CDF157401E7AADC700499AC5 /* LeftViewController.m in Sources */,

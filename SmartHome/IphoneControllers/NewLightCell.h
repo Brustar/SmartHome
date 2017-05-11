@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol NewLightCellDelegate;
+
 @interface NewLightCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *NewLightNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *NewLightPowerBtn;
@@ -20,6 +22,14 @@
 //@property (nonatomic,assign) NSInteger sceneID;
 @property (weak, nonatomic) IBOutlet UIButton *AddLightBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *LightConstraint;
+@property (nonatomic, assign) id<NewLightCellDelegate> delegate;
 
+@end
+
+
+@protocol NewLightCellDelegate <NSObject>
+
+@optional
+- (void)onLightPowerBtnClicked:(UIButton *)btn;
 
 @end
