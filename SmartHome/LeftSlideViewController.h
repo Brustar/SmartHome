@@ -24,14 +24,15 @@
 
 #import <UIKit/UIKit.h>
 #import "UIView_extra.h"
+#import "LeftViewController.h"
 
-@interface LeftSlideViewController : UIViewController
+@interface LeftSlideViewController : UIViewController<LeftViewControllerDelegate>
 
 //滑动速度系数-建议在0.5-1之间。默认为0.5
 @property (nonatomic, assign) CGFloat speedf;
 
 //左侧窗控制器
-@property (nonatomic, strong) UIViewController *leftVC;
+@property (nonatomic, strong) LeftViewController *leftVC;
 
 @property (nonatomic,strong) UIViewController *mainVC;
 //点击手势控制器，是否允许点击视图恢复视图位置。默认为yes
