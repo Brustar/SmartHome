@@ -229,54 +229,42 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="66a-YD-yfU">
                                 <rect key="frame" x="0.0" y="72" width="375" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sD0-lI-4fc">
-                                        <rect key="frame" x="3" y="3" width="90" height="44"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                        <state key="normal" title="全部设备" backgroundImage="frm_white_nol">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sD0-lI-4fc">
+                                        <rect key="frame" x="3" y="3" width="121" height="44"/>
+                                        <state key="normal" title="全部设备" backgroundImage="frm_red_nol">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="joD-k8-dl0">
-                                        <rect key="frame" x="189" y="3" width="90" height="44"/>
-                                        <state key="normal" title="照明" backgroundImage="frm_white_nol">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="joD-k8-dl0">
+                                        <rect key="frame" x="251" y="3" width="121" height="44"/>
+                                        <state key="normal" title="电视" backgroundImage="frm_white_nol">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fls-Z3-0Kg">
-                                        <rect key="frame" x="282" y="3" width="90" height="44"/>
-                                        <state key="normal" title="影音" backgroundImage="frm_white_nol">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fel-af-Jex">
-                                        <rect key="frame" x="96" y="3" width="90" height="44"/>
-                                        <state key="normal" title="空调" backgroundImage="frm_red_nol">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fel-af-Jex">
+                                        <rect key="frame" x="127" y="3" width="121" height="44"/>
+                                        <state key="normal" title="空调" backgroundImage="frm_white_nol">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="joD-k8-dl0" firstAttribute="width" secondItem="sD0-lI-4fc" secondAttribute="width" id="54S-vp-mqc"/>
-                                    <constraint firstItem="fls-Z3-0Kg" firstAttribute="top" secondItem="66a-YD-yfU" secondAttribute="top" constant="3" id="9Hr-ck-WQN"/>
-                                    <constraint firstItem="joD-k8-dl0" firstAttribute="leading" secondItem="Fel-af-Jex" secondAttribute="trailing" constant="3" id="EmF-Ho-ZLl"/>
-                                    <constraint firstAttribute="bottom" secondItem="joD-k8-dl0" secondAttribute="bottom" constant="3" id="G7g-NR-oVp"/>
-                                    <constraint firstItem="sD0-lI-4fc" firstAttribute="top" secondItem="66a-YD-yfU" secondAttribute="top" constant="3" id="N0Q-qa-t5M"/>
-                                    <constraint firstItem="Fel-af-Jex" firstAttribute="width" secondItem="sD0-lI-4fc" secondAttribute="width" id="OIN-s4-Jif"/>
-                                    <constraint firstItem="sD0-lI-4fc" firstAttribute="leading" secondItem="66a-YD-yfU" secondAttribute="leading" constant="3" id="QOr-7J-IOG"/>
-                                    <constraint firstItem="joD-k8-dl0" firstAttribute="height" secondItem="sD0-lI-4fc" secondAttribute="height" id="Yhh-TU-f4i"/>
-                                    <constraint firstAttribute="bottom" secondItem="sD0-lI-4fc" secondAttribute="bottom" constant="3" id="ZOq-dU-1IA"/>
-                                    <constraint firstItem="joD-k8-dl0" firstAttribute="top" secondItem="66a-YD-yfU" secondAttribute="top" constant="3" id="avi-Cu-6U3"/>
-                                    <constraint firstAttribute="bottom" secondItem="Fel-af-Jex" secondAttribute="bottom" constant="3" id="c7P-Gh-cLi"/>
-                                    <constraint firstItem="fls-Z3-0Kg" firstAttribute="width" secondItem="sD0-lI-4fc" secondAttribute="width" id="fl9-SD-UO3"/>
-                                    <constraint firstItem="fls-Z3-0Kg" firstAttribute="leading" secondItem="joD-k8-dl0" secondAttribute="trailing" constant="3" id="fz4-1W-IH1"/>
-                                    <constraint firstItem="Fel-af-Jex" firstAttribute="height" secondItem="sD0-lI-4fc" secondAttribute="height" id="kmw-Zh-tyQ"/>
-                                    <constraint firstItem="fls-Z3-0Kg" firstAttribute="height" secondItem="sD0-lI-4fc" secondAttribute="height" id="sS8-j4-eGv"/>
-                                    <constraint firstItem="Fel-af-Jex" firstAttribute="top" secondItem="66a-YD-yfU" secondAttribute="top" constant="3" id="t6u-GM-sip"/>
-                                    <constraint firstItem="Fel-af-Jex" firstAttribute="leading" secondItem="sD0-lI-4fc" secondAttribute="trailing" constant="3" id="u3L-1o-97v"/>
-                                    <constraint firstAttribute="trailing" secondItem="fls-Z3-0Kg" secondAttribute="trailing" constant="3" id="vDx-cB-0cG"/>
-                                    <constraint firstAttribute="bottom" secondItem="fls-Z3-0Kg" secondAttribute="bottom" constant="3" id="vNt-eY-Xc1"/>
+                                    <constraint firstItem="Fel-af-Jex" firstAttribute="width" secondItem="sD0-lI-4fc" secondAttribute="width" id="ADP-Og-F9O"/>
+                                    <constraint firstAttribute="bottom" secondItem="joD-k8-dl0" secondAttribute="bottom" constant="3" id="DyE-Rq-MMP"/>
+                                    <constraint firstAttribute="bottom" secondItem="sD0-lI-4fc" secondAttribute="bottom" constant="3" id="G3X-mo-xeE"/>
+                                    <constraint firstItem="joD-k8-dl0" firstAttribute="height" secondItem="sD0-lI-4fc" secondAttribute="height" id="GAI-7S-udr"/>
+                                    <constraint firstAttribute="bottom" secondItem="Fel-af-Jex" secondAttribute="bottom" constant="3" id="HFY-uu-D5O"/>
+                                    <constraint firstItem="Fel-af-Jex" firstAttribute="height" secondItem="sD0-lI-4fc" secondAttribute="height" id="LYw-bM-Xtw"/>
+                                    <constraint firstItem="joD-k8-dl0" firstAttribute="leading" secondItem="Fel-af-Jex" secondAttribute="trailing" constant="3" id="TKg-Cb-JOa"/>
+                                    <constraint firstItem="Fel-af-Jex" firstAttribute="leading" secondItem="sD0-lI-4fc" secondAttribute="trailing" constant="3" id="Z4F-jR-O2c"/>
+                                    <constraint firstItem="Fel-af-Jex" firstAttribute="top" secondItem="66a-YD-yfU" secondAttribute="top" constant="3" id="fH8-qv-0mc"/>
+                                    <constraint firstItem="sD0-lI-4fc" firstAttribute="leading" secondItem="66a-YD-yfU" secondAttribute="leading" constant="3" id="qn3-PX-weV"/>
+                                    <constraint firstAttribute="trailing" secondItem="joD-k8-dl0" secondAttribute="trailing" constant="3" id="sSY-5l-10O"/>
+                                    <constraint firstItem="joD-k8-dl0" firstAttribute="top" secondItem="66a-YD-yfU" secondAttribute="top" constant="3" id="tpN-OY-UEf"/>
+                                    <constraint firstItem="joD-k8-dl0" firstAttribute="width" secondItem="sD0-lI-4fc" secondAttribute="width" id="xLU-aM-06Z"/>
                                     <constraint firstAttribute="height" constant="50" id="yzB-IQ-I3i"/>
+                                    <constraint firstItem="sD0-lI-4fc" firstAttribute="top" secondItem="66a-YD-yfU" secondAttribute="top" constant="3" id="zRE-Yx-ZGw"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YOu-lp-fQa">
@@ -286,13 +274,13 @@
                                         <rect key="frame" x="3" y="3" width="369" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w7i-1m-bJl">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w7i-1m-bJl">
                                         <rect key="frame" x="3" y="3" width="183" height="44"/>
                                         <state key="normal" title="4月" backgroundImage="frm_redd_nol">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MTJ-kW-W2O">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MTJ-kW-W2O">
                                         <rect key="frame" x="189" y="3" width="183" height="44"/>
                                         <state key="normal" title="历史">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -569,9 +557,17 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="AireEnergy" destination="Fel-af-Jex" id="UK4-Fc-xRB"/>
+                        <outlet property="AllDeviceEnergy" destination="sD0-lI-4fc" id="u9q-kg-aw2"/>
+                        <outlet property="IntradayLable" destination="5gZ-4y-Ibb" id="rZr-e2-PMS"/>
+                        <outlet property="TVEnergy" destination="joD-k8-dl0" id="GgZ-SY-AOg"/>
                         <outlet property="TimerView" destination="lT4-sj-icq" id="0O4-wq-L5U"/>
+                        <outlet property="YearLabel" destination="WT1-XF-4ME" id="PHg-n3-pz8"/>
                         <outlet property="chartWithDates" destination="Boc-gQ-LFo" id="P5X-Sf-jIq"/>
                         <outlet property="deviceTitleLabel" destination="1sB-qT-jo7" id="bSM-gq-WqN"/>
+                        <outlet property="historyBtn" destination="MTJ-kW-W2O" id="MGt-Cc-shB"/>
+                        <outlet property="monthBtn" destination="w7i-1m-bJl" id="UwJ-ld-89Z"/>
+                        <outlet property="monthLabel" destination="Zqo-5A-gOW" id="73D-de-yY4"/>
                         <outlet property="tableView" destination="eaa-Nv-Ovh" id="a8Z-yp-vfX"/>
                     </connections>
                 </viewController>
@@ -1097,13 +1093,13 @@
         <image name="background" width="375" height="667"/>
         <image name="button_pen" width="25" height="25"/>
         <image name="delete_white" width="25" height="25"/>
-        <image name="icon_choose _nol" width="18" height="18"/>
-        <image name="login_line.png" width="1" height="1"/>
-        <image name="rightArrow" width="9" height="16"/>
         <image name="frm_curve_nol" width="366" height="178"/>
         <image name="frm_red_nol" width="90" height="32"/>
         <image name="frm_redd_nol" width="183" height="32"/>
         <image name="frm_white_nol" width="90" height="32"/>
         <image name="frm_whitee_nol" width="366" height="32"/>
+        <image name="icon_choose _nol" width="18" height="18"/>
+        <image name="login_line.png" width="1" height="1"/>
+        <image name="rightArrow" width="9" height="16"/>
     </resources>
 </document>

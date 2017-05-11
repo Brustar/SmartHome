@@ -33,7 +33,21 @@
     }
     return _homeNameArray;
 }
+-(NSMutableArray *)detailArray
+{
 
+    if (!_detailArray) {
+        _detailArray = [NSMutableArray array];
+    }
+    return _detailArray;
+}
+-(NSMutableArray *)titleArray
+{
+    if (!_titleArray) {
+        _titleArray = [NSMutableArray array];
+    }
+    return _titleArray;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addNotifications];
@@ -506,7 +520,7 @@ NSArray *array = [NSArray arrayWithObjects:
 -(void)gainHome_room_infoDataTo:(NSDictionary *)responseObject
 {
     self.home_room_infoArr = [NSMutableArray array];
-    NSInteger home_id  = [responseObject[@"home_id"] integerValue];
+    NSInteger home_id  = [responseObject[@"hostid"] integerValue];
     NSString * hostbrand = responseObject[@"hostbrand"];
     NSString * host_brand_number = responseObject[@"host_brand_number"];
     NSString * homename = responseObject[@"homename"];
@@ -546,8 +560,36 @@ NSArray *array = [NSArray arrayWithObjects:
     }
     
 }
+//保存每日提醒
+-(void)remindListTo:(NSArray *)dic
+{
+    if ([dic isKindOfClass:[NSArray class]]) {
+        for(NSDictionary *dicDetail in dic)
+        {
+            [self.titleArray addObject:dicDetail[@"title"]];
+            [self.detailArray addObject:dicDetail[@"detail"]];
+           
+        }
+    }
+    NSArray  *paths  =  NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+    NSString *docDir = [paths objectAtIndex:0];
+    if(!docDir) {
+        
+        NSLog(@"Documents 目录未找到");
+        
+    }
+    NSArray *TitleArray = [NSArray arrayWithArray:self.titleArray];
+    NSArray *DetailArray = [NSArray arrayWithArray:self.detailArray];
+    
+    NSString *filePath = [docDir stringByAppendingPathComponent:@"Title.plist"];
+    NSString * filePath1 = [docDir stringByAppendingPathComponent:@"Detail.plist"];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:filePath]==NO) {
+        [TitleArray writeToFile:filePath atomically:YES];
+        [DetailArray writeToFile:filePath1 atomically:YES];
+    }
 
-
+}
 -(void) writeChatListConfigDataToSQL:(NSArray *)users
 {
     if(users.count == 0 || users == nil)
@@ -676,6 +718,8 @@ NSArray *array = [NSArray arrayWithObjects:
             //写FM频道信息到sql
             [self writeChannelsConfigDataToSQL:responseObject[@"fm_store_list"] withParent:@"fm"];
             [self gainHome_room_infoDataTo:responseObject[@"home_room_info"]];
+            //写每日提醒
+            [self remindListTo:responseObject[@"remind_list"]];
             
             if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
             {

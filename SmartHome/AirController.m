@@ -148,7 +148,16 @@ static NSString *const airCellIdentifier = @"airCell";
         if (proto.action.state==0x7F) {
             NSString *valueString = [NSString stringWithFormat:@"%d",proto.action.RValue];
             self.pmLabel.text = valueString;
-            [self.pm_clock_hand rotate:30+proto.action.RValue*500/300];
+            
+            float value = 30+proto.action.RValue*200/100;
+            if (proto.action.RValue>100 && proto.action.RValue<200) {
+                value = 230+proto.action.RValue*40/100;
+            }
+            if (proto.action.RValue>200)
+            {
+                value = 240+proto.action.RValue*60/300;
+            }
+            [self.pm_clock_hand rotate:value];
         }
         /*
         if (proto.action.state==0x7E) {

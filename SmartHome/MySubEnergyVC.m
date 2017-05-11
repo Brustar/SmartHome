@@ -20,6 +20,15 @@
 @property (weak, nonatomic) IBOutlet UIView *TimerView;
 @property (weak, nonatomic) IBOutlet UIView *deviceTitleLabel;
 @property (weak, nonatomic) IBOutlet FSLineChart *chartWithDates;
+@property (weak, nonatomic) IBOutlet UILabel *IntradayLable;//当天的日期
+@property (weak, nonatomic) IBOutlet UILabel *YearLabel;//年
+
+@property (weak, nonatomic) IBOutlet UILabel *monthLabel;//月
+@property (weak, nonatomic) IBOutlet UIButton *AllDeviceEnergy;//所有设备的能耗
+@property (weak, nonatomic) IBOutlet UIButton *TVEnergy;//电视能耗
+@property (weak, nonatomic) IBOutlet UIButton *AireEnergy;//空调能耗
+@property (weak, nonatomic) IBOutlet UIButton *monthBtn;
+@property (weak, nonatomic) IBOutlet UIButton *historyBtn;
 
 @property (nonatomic,strong) NSMutableArray * enameArr;
 @property (nonatomic,strong) NSMutableArray * minute_timeArr;
@@ -56,6 +65,11 @@
     // Do any additional setup after loading the view.
 
     [self setNaviBarTitle:@"智能账单"];
+    [self.monthBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    [self.historyBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    [self.TVEnergy addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    [self.AireEnergy addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    [self.AllDeviceEnergy addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
      self.TimerView.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
     self.deviceTitleLabel.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
     DeviceInfo *device = [DeviceInfo defaultManager];
@@ -72,12 +86,37 @@
         }
         [self.tableView reloadData];
     }
-    
-    
     UIView *view = [[UIView alloc] init];
     [view setBackgroundColor:[UIColor clearColor]];
     self.tableView.tableFooterView = view;
      [self loadChartWithDates];//下面的曲线图
+    [self setTime];
+}
+-(void)setTime
+{
+
+    //获取系统时间
+    NSDate * senddate=[NSDate date];
+    
+    NSDateFormatter *dateformatter=[[NSDateFormatter alloc] init];
+    
+    [dateformatter setDateFormat:@"HH:mm"];
+    
+    NSString * locationString=[dateformatter stringFromDate:senddate];
+    
+    NSLog(@"-------%@",locationString);
+    NSCalendar * cal=[NSCalendar currentCalendar];
+    NSUInteger unitFlags=NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit;
+    NSDateComponents * conponent= [cal components:unitFlags fromDate:senddate];
+    NSInteger year=[conponent year];
+    NSInteger month=[conponent month];
+    NSInteger day=[conponent day];
+    _YearLabel.text = [NSString stringWithFormat:@"%ld年",year];
+    _monthLabel.text = [NSString stringWithFormat:@"%ld月",month];
+    _IntradayLable.text = [NSString stringWithFormat:@"%ld日",day];
+    [_monthBtn setTitle:[NSString stringWithFormat:@"%ld月",month] forState:UIControlStateNormal];
+    
+
 }
 #pragma mark - Setting up the chart
 
@@ -201,6 +240,54 @@
     VC.eqid = [dict[@"eid"] intValue];
     VC.titleName = dict[@"ename"];
     [self.navigationController pushViewController:VC animated:YES];
+}
+-(void)save:(UIButton *)sender
+{
+    //TV能耗
+    if (sender == self.TVEnergy) {
+        self.TVEnergy.selected = !self.TVEnergy.selected;
+        if (self.TVEnergy.selected) {
+            [self.TVEnergy setBackgroundImage:[UIImage imageNamed:@"frm_red_nol"] forState:UIControlStateNormal];
+        }else{
+            [self.TVEnergy setBackgroundImage:[UIImage imageNamed:@"frm_white_nol"] forState:UIControlStateNormal];
+        }
+    }
+    //空调能耗
+    if (sender == self.AireEnergy) {
+        self.AireEnergy.selected = !self.AireEnergy.selected;
+        if (self.AireEnergy.selected) {
+            [self.AireEnergy setBackgroundImage:[UIImage imageNamed:@"frm_red_nol"] forState:UIControlStateNormal];
+        }else{
+            [self.AireEnergy setBackgroundImage:[UIImage imageNamed:@"frm_white_nol"] forState:UIControlStateNormal];
+        }
+    }
+    //所有设备的能耗
+    if (sender == self.AllDeviceEnergy) {
+        self.AllDeviceEnergy.selected = !self.AllDeviceEnergy.selected;
+        if (self.AllDeviceEnergy.selected) {
+            [self.AllDeviceEnergy setBackgroundImage:[UIImage imageNamed:@"frm_red_nol"] forState:UIControlStateNormal];
+        }else{
+            [self.AllDeviceEnergy setBackgroundImage:[UIImage imageNamed:@"frm_white_nol"] forState:UIControlStateNormal];
+        }
+    }
+    //当月能耗
+    if (sender == self.monthBtn) {
+        self.monthBtn.selected = !self.monthBtn.selected;
+        if (self.monthBtn.selected) {
+            [self.monthBtn setBackgroundImage:[UIImage imageNamed:@"frm_red_nol"] forState:UIControlStateNormal];
+        }else{
+            [self.monthBtn setBackgroundImage:[UIImage imageNamed:@"frm_white_nol"] forState:UIControlStateNormal];
+        }
+    }
+    //历史查询
+    if (sender == self.historyBtn) {
+        self.historyBtn.selected = !self.historyBtn.selected;
+        if (self.historyBtn.selected) {
+            [self.historyBtn setBackgroundImage:[UIImage imageNamed:@"frm_redd_rightl"] forState:UIControlStateNormal];
+        }else{
+            [self.historyBtn setBackgroundImage:[UIImage imageNamed:@"frm_wd_nol"] forState:UIControlStateNormal];
+        }
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

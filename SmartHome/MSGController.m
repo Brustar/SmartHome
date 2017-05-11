@@ -23,7 +23,7 @@
 @property (nonatomic,assign) NSInteger unreadcount;
 @property (nonatomic,strong) NSString * type;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic,strong) NSArray * array;
+//@property (nonatomic,strong) NSArray * array;
 @property (nonatomic,strong) NSString *itemid;
 
 @property (nonatomic,strong) NSMutableArray * msgArr;
@@ -126,7 +126,6 @@
     [super viewDidLoad];
     [MBProgressHUD hideHUD];
     [self setNaviBarTitle:@"通知"];
-    _array = @[@"1",@"2",@"3"];
     DeviceInfo *device = [DeviceInfo defaultManager];
     if ([device.db isEqualToString:SMART_DB]) {
 //        [self creatItemID];
