@@ -14,7 +14,34 @@
     self.roomNameLabel.text = info.roomName;
     self.temperatureLabel.text = [NSString stringWithFormat:@"%@℃", info.temperature];
     self.humidityLabel.text = [NSString stringWithFormat:@"%@%@", info.humidity, @"%"];
-    self.pm25Label.text = info.pm25;
+    self.pm25Label.hidden = YES;
+    NSString *pm25 = [NSString stringWithFormat:@"%@%@%@", @"PM2.5:", @"100", @"μg/m³"];
+    
+    CGFloat pm25X = -66.0f;
+    CGFloat pm25Y = 80.0f;
+    if (UI_SCREEN_WIDTH == 375) {
+        pm25X = -75.0f;
+        pm25Y = 60.0f;
+    }else if (UI_SCREEN_WIDTH == 320) {
+        pm25Y = 50.0f;
+    }
+    
+    
+    UIFont *font = [UIFont systemFontOfSize:10.0];
+    CGRect rect = CGRectMake(pm25X, pm25Y, 320, 120);
+    UIColor * color = [UIColor whiteColor];
+    CoreTextArcView * pm25Label = [[CoreTextArcView alloc] initWithFrame:rect
+                                                                      font:font
+                                                                      text:pm25
+                                                                    radius:-70
+                                                                   arcSize:-70
+                                                                     color:color];
+    
+    [pm25Label showsLineMetrics];
+    pm25Label.backgroundColor = [UIColor clearColor];
+    [self addSubview:pm25Label];
+    [self bringSubviewToFront:pm25Label];
+    
     
     [self addRingForDevice:info];
     [self addRingForPM25:info];

@@ -213,12 +213,19 @@
                         roomStatusInfo.roomName = roomStatus[@"roomname"];
                         roomStatusInfo.temperature = roomStatus[@"temperature"];
                         roomStatusInfo.humidity = roomStatus[@"humidity"];
+                        roomStatusInfo.pm25 = roomStatus[@"pm"];
                         roomStatusInfo.lightStatus = [roomStatus[@"light"] integerValue];
                         roomStatusInfo.curtainStatus = [roomStatus[@"curtain"] integerValue];
                         roomStatusInfo.mediaStatus = [roomStatus[@"media"] integerValue];
                         roomStatusInfo.airconditionerStatus = [roomStatus[@"aircondition"] integerValue];
                         
-                        [_roomArray addObject:roomStatusInfo];
+                        if ([[UD objectForKey:@"HostID"] intValue] == 258) { //九号大院(要过滤掉没有温湿度的房间)
+                            if (roomStatusInfo.roomId == 188  || roomStatusInfo.roomId == 190  ||roomStatusInfo.roomId == 191  ||roomStatusInfo.roomId == 193  ||roomStatusInfo.roomId == 196) {
+                                [_roomArray addObject:roomStatusInfo];
+                            }
+                        }else {
+                            [_roomArray addObject:roomStatusInfo];
+                        }
                         
                     }
                 }

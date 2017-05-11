@@ -41,9 +41,14 @@
             NSData *data=[[DeviceInfo defaultManager] toogleLight:device.isPoweron deviceID:self.deviceid];
             SocketManager *sock=[SocketManager defaultManager];
             [sock.socket writeData:data withTimeout:1 tag:1];
-           
-    
         }
+         
+         
+         if (_delegate && [_delegate respondsToSelector:@selector(onLightPowerBtnClicked:)]) {
+             [_delegate onLightPowerBtnClicked:self.NewLightPowerBtn];
+         }
+         
+         
     }else if (sender == self.AddLightBtn){
         
         self.AddLightBtn.selected = !self.AddLightBtn.selected;

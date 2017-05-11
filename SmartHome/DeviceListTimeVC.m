@@ -103,6 +103,7 @@
     }
     
     cell.delegate = self;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     NSDictionary *roomDict = _timerList[indexPath.section];
     if (roomDict && [roomDict isKindOfClass:[NSDictionary class]]) {
@@ -112,11 +113,12 @@
             if (timerDict && [timerDict isKindOfClass:[NSDictionary class]]) {
                 DeviceTimerInfo *info = [[DeviceTimerInfo alloc] init];
                 info.timerID = [timerDict[@"schedule_id"] integerValue];
-                info.deviceName = timerDict[@"equipment_name"];
-                info.startTime = timerDict[@"start_time"];
-                info.endTime = timerDict[@"end_time"];
+                info.startTime = timerDict[@"starttime"];
+                info.endTime = timerDict[@"endtime"];
                 info.repetition = timerDict[@"week_value"];
                 info.isActive = [timerDict[@"isactive"] integerValue];
+                info.deviceName = timerDict[@"ename"];
+                info.htype = timerDict[@"htype"];
                 
                 [cell setInfo:info];
                 
@@ -137,6 +139,10 @@
     return UITableViewCellEditingStyleDelete;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"删除";
+}
+
 // 判断点击按钮的样式 来去做添加 或删除
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -151,9 +157,6 @@
                 if (timerDict && [timerDict isKindOfClass:[NSDictionary class]]) {
                     
                     [self deleteDeviceTimerWithTimerId:[timerDict[@"schedule_id"] integerValue]];
-                    NSArray *indexPaths = @[indexPath]; // 构建 索引处的行数 的数组
-                    // 删除 索引的方法 后面是动画样式
-                    [_tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:(UITableViewRowAnimationAutomatic)];
                     
                 }
             }
@@ -223,11 +226,12 @@
 #pragma mark - Http callback
 - (void)httpHandler:(id)responseObject tag:(int)tag
 {
-    if(tag == 1) {
+    if(tag == 1) { //定时器列表
         
         if ([responseObject[@"result"] intValue] == 0) {
-            NSArray *roomList = responseObject[@"room_list"];
+            NSArray *roomList = responseObject[@"eq_timing_list"];
             if (roomList && [roomList isKindOfClass:[NSArray class]]) {
+                [_timerList removeAllObjects];
                 [_timerList addObjectsFromArray:roomList];
                 [self.tableView reloadData];
             }
@@ -246,6 +250,7 @@
     }else if (tag == 3) { //删除
         if ([responseObject[@"result"] intValue] == 0) {
             [MBProgressHUD showSuccess:responseObject[@"msg"]];
+            [self fetchDeviceTimerList];
         }else {
             [MBProgressHUD showError:responseObject[@"msg"]];
         }

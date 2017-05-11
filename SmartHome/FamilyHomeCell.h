@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RoomStatus.h"
 #import "LayerUtil.h"
+#import "CoreTextArcView.h"
 
 #define Light_ON_COLOR  RGB(243, 152, 0, 1)
 #define Air_ON_COLOR    RGB(0, 172, 151, 1)

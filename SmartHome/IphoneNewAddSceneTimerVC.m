@@ -65,11 +65,12 @@
 }
 - (void)viewDidLoad{
     [super viewDidLoad];
-//    [self setSlider];
+    _weekArray = [NSMutableArray array];
     [self setupNaviBar];
     self.schedule = [[Schedule alloc]initWhithoutSchedule];
     self.schedule.startTime = self.starTimeLabel.text;
     self.schedule.endTime = self.endTimeLabel.text;
+    self.RepetitionLable.text = @"永不";
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(iphoneSelectWeek:) name:@"SelectWeek" object:nil];
     [self setCustomerSlider];
 }
@@ -113,7 +114,7 @@
 }
 
 - (void)setupNaviBar {
-    [self setNaviBarTitle:@"场景编辑"]; //设置标题
+    [self setNaviBarTitle:_naviTitle]; //设置标题
     _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
     _naviRightBtn.tintColor = [UIColor whiteColor];
     //    [self setNaviBarLeftBtn:_naviLeftBtn];
@@ -124,12 +125,13 @@
     self.scene.schedules = @[self.schedule];
     [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
     
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-//    NSString * starTime;
-//    NSString * endTime;
-    
-    NSDictionary *dic = @{@"startDay":self.starTimeLabel.text,@"endDay":self.endTimeLabel.text,@"repeat":self.RepetitionLable.text};
-    [center postNotificationName:@"time" object:nil userInfo:dic];
+    NSDictionary *dic = @{
+                          @"startDay":self.starTimeLabel.text,
+                          @"endDay":self.endTimeLabel.text,
+                          @"repeat":self.RepetitionLable.text,
+                          @"weekArray":_weekArray
+                          };
+    [NC postNotificationName:@"AddSceneOrDeviceTimerNotification" object:nil userInfo:dic];
     [self.navigationController popViewControllerAnimated:YES];
 
 }
@@ -230,12 +232,14 @@
         }
     }
     self.RepetitionLable.text = [NSString stringWithFormat:@"%@",display];
-   // self.RepetitionLable.text = [display componentsSeparatedByString:@"、"];
-    
-    //    if (self.isSceneSetTime) { //设置了开始时间和结束时间才能设置重复选项
     
     NSMutableArray *weekValue = [NSMutableArray array];
+    [_weekArray removeAllObjects];
+    
     for (int i = 0; i < 7; i++) {
+        
+        [_weekArray addObject:@(week[i])];
+        
         if (week[i]) {
             NSNumber *temp = [NSNumber numberWithInt:i];
             [weekValue addObject:temp];
@@ -246,10 +250,7 @@
     self.schedule.weekDays = weekValue;
     
     [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
-    //    }
-    //        else {
-    //        [MBProgressHUD showError:@"请先设置时间"];
-    //    }
+
 }
 
 - (void)didReceiveMemoryWarning {
