@@ -39,6 +39,10 @@
             
             [self.AireSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
         }
+        NSData * data = [[DeviceInfo defaultManager] toogleAirCon:self.AireSwitchBtn.selected deviceID:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+        
     }else if (sender == self.AddAireBtn){
         self.AddAireBtn.selected = !self.AddAireBtn.selected;
         if (self.AddAireBtn.selected) {

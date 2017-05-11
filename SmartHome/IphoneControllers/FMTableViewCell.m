@@ -34,7 +34,18 @@
     [self.FMChannelSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];//频道
 }
 - (IBAction)save:(id)sender {
-    
+    if (sender == self.FMSwitchBtn) {
+         NSData *data=nil;
+        self.FMSwitchBtn.selected = !self.FMSwitchBtn.selected;
+        if (self.FMSwitchBtn.selected) {
+            [self.FMSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+            data = [[DeviceInfo defaultManager] open:self.deviceid];
+        }else{
+            
+            [self.FMSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
+             data = [[DeviceInfo defaultManager] close:self.deviceid];
+        }
+    }
     if (sender == self.AddFmBtn) {
         self.AddFmBtn.selected = !self.AddFmBtn.selected;
         if (self.AddFmBtn.selected) {
@@ -51,7 +62,12 @@
         
     }else if (sender == self.FMChannelSlider){
         //频道
-          self.FMChannelLabel.text = [NSString stringWithFormat:@"%.1fFM",80+self.FMChannelSlider.value*40];
+        self.FMChannelLabel.text = [NSString stringWithFormat:@"%.1fFM",80+self.FMChannelSlider.value*40];
+        float frequence = 80+self.FMChannelSlider.value*40;
+        int dec = (int)((frequence - (int)frequence)*10);
+        NSData *data=[[DeviceInfo defaultManager] switchFMProgram:(int)frequence dec:dec deviceID:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
     }
     
     Radio *device=[[Radio alloc] init];

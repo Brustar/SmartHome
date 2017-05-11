@@ -21,6 +21,7 @@
 @property (nonatomic,strong) NSMutableArray *opens;
 @property (nonatomic,assign) int usertype;
 
+
 @end
 
 @implementation AreaSubSettingViewController
@@ -51,7 +52,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"权限设置";
+
     [self setNaviBarTitle:@"权限设置"];
     self.tableView.tableHeaderView = self.headerView;
     NSString *url = [NSString stringWithFormat:@"%@Cloud/room_authority.aspx",[IOManager httpAddr]];
@@ -154,7 +155,6 @@
                 [UD synchronize];
             }
             
-            
         }else{
             [MBProgressHUD showError:responseObject[@"Msg"]];
             
@@ -213,14 +213,21 @@
     [cell.exchanggeBtn addTarget:self action:@selector(switchChange:) forControlEvents:UIControlEventTouchUpInside];
     [cell.exchangeSwitch addTarget:self action:@selector(switchChange:) forControlEvents:UIControlEventValueChanged];
     cell.areaLabel.text = self.areasArr[indexPath.row];
+    //cell的点击颜色
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 2, self.view.bounds.size.width, 40)];
+    view.backgroundColor = [UIColor clearColor];
+    cell.selectedBackgroundView = view;
     NSNumber *num = self.opens[indexPath.row];
+    cell.exchanggeBtn.selected = !cell.exchanggeBtn.selected;
     if([num intValue] == 1)
     {
         cell.exchangeSwitch.on = YES;
+        cell.exchanggeBtn.selected = YES;
         [cell.exchanggeBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateNormal];
         
     }else {
         cell.exchangeSwitch.on = NO;
+        cell.exchanggeBtn.selected = NO;
          [cell.exchanggeBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
 //        cell.hidden = YES;
     }
@@ -243,11 +250,11 @@
     NSInteger recoredID = exchangeBtn.tag;
     if(exchangeBtn.selected)
     {
-        [exchangeBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+        [exchangeBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateNormal];
         [self settingAccessIsOpen:[NSNumber numberWithInt:1] tag:6 withRecoredID:recoredID];
     }else{
         
-        [exchangeBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateNormal];
+        [exchangeBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
         [self settingAccessIsOpen:[NSNumber numberWithInt:0] tag:7 withRecoredID:recoredID];
     }
 }
@@ -286,6 +293,7 @@
 
 //点击转换身份按钮
 - (IBAction)changeIdentityType:(UIButton *)sender {
+    
     
      DeviceInfo *device = [DeviceInfo defaultManager];
     

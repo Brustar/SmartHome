@@ -291,16 +291,16 @@
                                 <constraints>
                                     <constraint firstItem="MTJ-kW-W2O" firstAttribute="top" secondItem="YOu-lp-fQa" secondAttribute="top" constant="3" id="64x-hz-Aq0"/>
                                     <constraint firstItem="w7i-1m-bJl" firstAttribute="top" secondItem="YOu-lp-fQa" secondAttribute="top" constant="3" id="72g-AF-2nH"/>
-                                    <constraint firstAttribute="trailing" secondItem="fZM-YW-HQB" secondAttribute="trailing" constant="3" id="EKa-NH-x7m"/>
                                     <constraint firstItem="MTJ-kW-W2O" firstAttribute="height" secondItem="w7i-1m-bJl" secondAttribute="height" id="EoA-Bd-f5a"/>
                                     <constraint firstItem="MTJ-kW-W2O" firstAttribute="leading" secondItem="w7i-1m-bJl" secondAttribute="trailing" constant="3" id="Ksn-kE-q3s"/>
-                                    <constraint firstAttribute="bottom" secondItem="fZM-YW-HQB" secondAttribute="bottom" constant="3" id="NnT-2p-cTl"/>
+                                    <constraint firstItem="fZM-YW-HQB" firstAttribute="leading" secondItem="YOu-lp-fQa" secondAttribute="leading" constant="3" id="ORX-qH-6c1"/>
+                                    <constraint firstAttribute="bottom" secondItem="fZM-YW-HQB" secondAttribute="bottom" constant="3" id="Ogb-qz-lAm"/>
                                     <constraint firstItem="w7i-1m-bJl" firstAttribute="leading" secondItem="YOu-lp-fQa" secondAttribute="leading" constant="3" id="Rew-pT-cko"/>
-                                    <constraint firstItem="fZM-YW-HQB" firstAttribute="top" secondItem="YOu-lp-fQa" secondAttribute="top" constant="3" id="SrT-XA-EMD"/>
                                     <constraint firstAttribute="bottom" secondItem="w7i-1m-bJl" secondAttribute="bottom" constant="3" id="U6E-a8-jmc"/>
-                                    <constraint firstItem="fZM-YW-HQB" firstAttribute="leading" secondItem="YOu-lp-fQa" secondAttribute="leading" constant="3" id="dhm-il-E8F"/>
+                                    <constraint firstItem="fZM-YW-HQB" firstAttribute="top" secondItem="YOu-lp-fQa" secondAttribute="top" constant="3" id="c0z-NF-3yL"/>
                                     <constraint firstAttribute="height" constant="50" id="hg1-9A-rzf"/>
                                     <constraint firstAttribute="bottom" secondItem="MTJ-kW-W2O" secondAttribute="bottom" constant="3" id="jRx-f1-2d0"/>
+                                    <constraint firstAttribute="trailing" secondItem="fZM-YW-HQB" secondAttribute="trailing" constant="3" id="o6g-vD-4od"/>
                                     <constraint firstItem="MTJ-kW-W2O" firstAttribute="width" secondItem="w7i-1m-bJl" secondAttribute="width" id="olA-ii-SFT"/>
                                     <constraint firstAttribute="trailing" secondItem="MTJ-kW-W2O" secondAttribute="trailing" constant="3" id="zDg-Ut-rCg"/>
                                 </constraints>
@@ -461,7 +461,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DayKW" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E3A-Um-eOh">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0kw.h" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E3A-Um-eOh">
                                                     <rect key="frame" x="151" y="15" width="40" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="YSW-L8-kwQ"/>
@@ -471,7 +471,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MonthKW" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBc-iw-HXw">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0kw.h" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBc-iw-HXw">
                                                     <rect key="frame" x="211" y="15" width="60" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="6ob-2e-QFi"/>
@@ -481,7 +481,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TotalKW" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFy-D4-cgx">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0kw.h" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFy-D4-cgx">
                                                     <rect key="frame" x="291" y="15" width="60" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="HNa-nf-KsO"/>
@@ -573,7 +573,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jmS-5b-hbx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2522" y="-185"/>
+            <point key="canvasLocation" x="2520.8000000000002" y="-185.75712143928038"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="X4F-6F-aZe">

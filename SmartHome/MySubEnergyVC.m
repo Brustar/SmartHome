@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *AireEnergy;//空调能耗
 @property (weak, nonatomic) IBOutlet UIButton *monthBtn;
 @property (weak, nonatomic) IBOutlet UIButton *historyBtn;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
 
 @property (nonatomic,strong) NSMutableArray * enameArr;
 @property (nonatomic,strong) NSMutableArray * minute_timeArr;
@@ -86,12 +87,17 @@
         }
         [self.tableView reloadData];
     }
-    UIView *view = [[UIView alloc] init];
-    [view setBackgroundColor:[UIColor clearColor]];
-    self.tableView.tableFooterView = view;
-     [self loadChartWithDates];//下面的曲线图
-    [self setTime];
+               UIView *view = [[UIView alloc] init];
+               [view setBackgroundColor:[UIColor clearColor]];
+                self.tableView.tableFooterView = view;
+                [self loadChartWithDates];//下面的曲线图
+                 [self setTime];
+                self.tableView.allowsSelection = NO;
+        
+    
 }
+
+
 -(void)setTime
 {
 
@@ -272,6 +278,11 @@
     }
     //当月能耗
     if (sender == self.monthBtn) {
+        if (self.monthBtn.selected) {
+            self.historyBtn.selected = NO;
+        }else{
+            self.historyBtn.selected = YES;
+        }
         self.monthBtn.selected = !self.monthBtn.selected;
         if (self.monthBtn.selected) {
             [self.monthBtn setBackgroundImage:[UIImage imageNamed:@"frm_red_nol"] forState:UIControlStateNormal];
@@ -281,6 +292,7 @@
     }
     //历史查询
     if (sender == self.historyBtn) {
+
         self.historyBtn.selected = !self.historyBtn.selected;
         if (self.historyBtn.selected) {
             [self.historyBtn setBackgroundImage:[UIImage imageNamed:@"frm_redd_rightl"] forState:UIControlStateNormal];
@@ -294,14 +306,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

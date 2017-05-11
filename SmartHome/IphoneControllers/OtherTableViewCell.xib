@@ -41,7 +41,7 @@
                             <constraint firstAttribute="width" constant="55" id="RnU-hi-HB7"/>
                             <constraint firstAttribute="height" constant="35" id="eMQ-c3-hGC"/>
                         </constraints>
-                        <state key="normal" backgroundImage="dvd_btn_switch_on"/>
+                        <state key="normal" backgroundImage="dvd_btn_switch_off"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7yR-HS-KRG">
                         <rect key="frame" x="337" y="5" width="30" height="30"/>
@@ -73,7 +73,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="dvd_btn_switch_on" width="36" height="23"/>
+        <image name="dvd_btn_switch_off" width="34" height="23"/>
         <image name="icon_add_normal" width="15" height="15"/>
     </resources>
 </document>

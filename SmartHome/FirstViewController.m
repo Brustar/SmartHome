@@ -79,22 +79,35 @@
     _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     _baseTabbarController.tabbarPanel.hidden = NO;
     _baseTabbarController.tabBar.hidden = YES;
-    [self getScenesFromPlist];
     int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
     self.numberLabel.text = [NSString stringWithFormat:@"%d" ,unread];
-    [self setBtn];
-    
+    [self getScenesFromPlist];
+ 
     NSArray  *paths  =  NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
     NSString *docDir = [paths objectAtIndex:0];
     NSString *filePath = [docDir stringByAppendingPathComponent:@"Title.plist"];
     NSString *filePath1 = [docDir stringByAppendingPathComponent:@"Detail.plist"];
     NSArray * TitleArray = [[NSArray alloc] initWithContentsOfFile:filePath];
     NSArray * DetailArray = [[NSArray alloc] initWithContentsOfFile:filePath1];
-    for (int i =0 ; i < TitleArray.count; i ++) {
-        self.TakeTurnsWordsLabel.text = TitleArray[0];
-        self.markedWordsLabel.text = DetailArray[0];
+    NSMutableSet *titleSet = [[NSMutableSet alloc] init];
+    NSMutableSet *DetailSet = [[NSMutableSet alloc] init];
+    if (TitleArray.count!=0) {
+        while ([titleSet count] < 1) {
+            int r = arc4random() % [TitleArray count];
+            [titleSet addObject:[TitleArray objectAtIndex:r]];
+        }
+        NSArray * title = [titleSet allObjects];
+        self.TakeTurnsWordsLabel.text = title[0];
+        
+        while ([DetailSet count] < 1) {
+            int r = arc4random() % [DetailArray count];
+            [DetailSet addObject:[DetailArray objectAtIndex:r]];
+        }
+        NSArray * detail = [DetailSet allObjects];
+        self.TakeTurnsWordsLabel.text = detail[0];
     }
-   
+
+       [self setBtn];
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -142,6 +155,7 @@
     [self updateInterfaceWithReachability];
     [self setUIMessage];
     [self chatConnect];
+    [self getScenesFromPlist];
    
 }
 

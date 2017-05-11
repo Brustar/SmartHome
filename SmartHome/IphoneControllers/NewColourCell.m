@@ -42,6 +42,10 @@
             
             [self.colourBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
         }
+        NSData *data=[[DeviceInfo defaultManager] toogleLight:self.colourBtn.selected deviceID:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+        
     }else if (sender == self.AddColourLightBtn){
         self.AddColourLightBtn.selected = !self.AddColourLightBtn.selected;
         if (self.AddColourLightBtn.selected) {
@@ -51,6 +55,10 @@
         }
     }else if (sender == self.colourSlider){
         //调光灯
+//        NSData *data=[[DeviceInfo defaultManager] changeBright:self.NewL.value*100 deviceID:self.deviceid];
+//        NSData * data =[[DeviceInfo defaultManager] changeColor:<#(NSString *)#> R:<#(uint8_t)#> G:<#(uint8_t)#> B:<#(uint8_t)#>];
+//        SocketManager *sock=[SocketManager defaultManager];
+//        [sock.socket writeData:data withTimeout:1 tag:1];
     }
     
     Light *device=[[Light alloc] init];

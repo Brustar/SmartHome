@@ -28,12 +28,15 @@
 }
 - (IBAction)save:(id)sender {
     if (sender == self.DVDSwitchBtn) {
+        NSData *data=nil;
         self.DVDSwitchBtn.selected = !self.DVDSwitchBtn.selected;
         if (self.DVDSwitchBtn.selected) {
             [self.DVDSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+             data=[[DeviceInfo defaultManager] pause:self.deviceid];
         }else{
             
             [self.DVDSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
+               data=[[DeviceInfo defaultManager] play:self.deviceid];
         }
     }else if (sender == self.AddDvdBtn){
         self.AddDvdBtn.selected = !self.AddDvdBtn.selected;
@@ -44,6 +47,9 @@
         }
     }else if (sender == self.DVDSlider){
         
+        NSData *data=[[DeviceInfo defaultManager] changeVolume:self.DVDSlider.value*100 deviceID:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
     }
     
     DVD *device=[[DVD alloc] init];

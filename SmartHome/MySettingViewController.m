@@ -359,6 +359,8 @@
         //[self performSegueWithIdentifier:@"goWelcomeSegue" sender:self];
         [self gotoLoginViewController];
     }
+    
+    [[RCIM sharedRCIM] logout];
 }
 
 - (void)gotoLoginViewController {

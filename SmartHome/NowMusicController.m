@@ -23,6 +23,8 @@
 @property (nonatomic,strong) NSMutableArray * bgmusicNameS;
 @property (nonatomic,assign) int Volume;
 @property (nonatomic,strong) NSMutableArray * AllRooms;
+@property (nonatomic,assign) int seleteDeviceId;
+
 @end
 
 @implementation NowMusicController
@@ -55,6 +57,7 @@
     _Volume = 0;
  
     [self fetchPlayingEquipmentList];
+     self.MusicTableView.tableFooterView = [UIView new];
 }
 
 - (void)fetchPlayingEquipmentList {
@@ -230,6 +233,7 @@
             AudioManager *audio= [AudioManager defaultManager];
             [[audio musicPlayer] pause];
         }
+        
     }
 }
 -(void)dealloc
@@ -256,20 +260,31 @@
 {
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(20, 0, self.view.bounds.size.width, 50)];
     view.backgroundColor = [UIColor clearColor];
+    view.userInteractionEnabled = YES;
     UILabel * NameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, 50)];
     NameLabel.textColor = [UIColor whiteColor];
    
     NameLabel.text =_AllRooms[section];
     [view addSubview:NameLabel];
-    UIView * view1 = [[UIView alloc] initWithFrame:CGRectMake(20, 49, self.view.bounds.size.width, 1)];
+    UIView * view1 = [[UIView alloc] initWithFrame:CGRectMake(10, 49, self.view.bounds.size.width, 1)];
     view1.backgroundColor = [UIColor redColor];
     [view addSubview:view1];
-    UIButton * OpenBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width-200, 10, 30, 30)];
-     OpenBtn.backgroundColor = [UIColor redColor];
-    [OpenBtn setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+    UIButton * OpenBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width-150, 15, 30, 30)];
+     OpenBtn.backgroundColor = [UIColor clearColor];
+     OpenBtn.tag = 100+1;
+    [OpenBtn addTarget:self action:@selector(StopBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [OpenBtn setImage:[UIImage imageNamed:@"Video-close"] forState:UIControlStateNormal];
     
     [view addSubview:OpenBtn];
     return view;
+}
+-(void)StopBtn:(UIButton *)bbt
+{
+    //关指令
+    NSData *data=[[DeviceInfo defaultManager] close:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -286,31 +301,26 @@
         
     }
     cell.backgroundColor = [UIColor clearColor];
-    cell.tag = indexPath.row;
     [cell.textLabel setTextColor:[UIColor whiteColor]];
     Device *devInfo = _deviceArray[indexPath.row];
     cell.textLabel.text = devInfo.name;
+    cell.tag = devInfo.eID;
+    //cell的点击颜色
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];
+    view.backgroundColor = [UIColor colorWithRed:67/255.0 green:68/255.0 blue:69/255.0 alpha:1];
+    
+    cell.selectedBackgroundView = view;
+    
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
     
-}
-- (IBAction)musicSwitchChanged:(id)sender {
-    UISwitch *musicSwitch = (UISwitch *)sender;
-    if (musicSwitch.on) {
-        //开指令
-        NSData *data=[[DeviceInfo defaultManager] open:self.deviceid];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:1];
-        
-    }else {
-        //关指令
-        NSData *data=[[DeviceInfo defaultManager] close:self.deviceid];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:1];
-    }
+     UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+     Device *devInfo = _deviceArray[indexPath.row];
+     self.deviceid = [NSString stringWithFormat:@"%d",devInfo.eID];
+      NSLog(@"%ld",cell.tag);
+
     
 }
 

@@ -77,7 +77,7 @@
                             <constraint firstAttribute="height" constant="35" id="urB-bg-hpr"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                        <state key="normal" backgroundImage="dvd_btn_switch_on"/>
+                        <state key="normal" backgroundImage="dvd_btn_switch_off"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5b9-uL-jLe">
                         <rect key="frame" x="327" y="14" width="30" height="30"/>
@@ -126,7 +126,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="dvd_btn_switch_on" width="36" height="23"/>
+        <image name="dvd_btn_switch_off" width="34" height="23"/>
         <image name="dvd_frm_choice__normal" width="336" height="47"/>
         <image name="icon_add_normal" width="15" height="15"/>
         <image name="ktv_btn_ajt" width="269" height="20"/>

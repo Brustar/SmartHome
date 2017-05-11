@@ -96,7 +96,7 @@
                             <constraint firstAttribute="height" constant="35" id="5x2-aQ-nLD"/>
                             <constraint firstAttribute="width" constant="55" id="Kgt-4n-8iH"/>
                         </constraints>
-                        <state key="normal" backgroundImage="dvd_btn_switch_on"/>
+                        <state key="normal" backgroundImage="dvd_btn_switch_off"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ui6-GU-GbM">
                         <rect key="frame" x="335" y="7" width="30" height="30"/>
@@ -164,7 +164,7 @@
         <image name="DVD_previous" width="10" height="10"/>
         <image name="bd_icon_voi_high" width="11" height="9"/>
         <image name="dvd_btn_adjust_normal" width="91" height="38"/>
-        <image name="dvd_btn_switch_on" width="36" height="23"/>
+        <image name="dvd_btn_switch_off" width="34" height="23"/>
         <image name="dvd_frm_choice__normal" width="336" height="47"/>
         <image name="icon_add_normal" width="15" height="15"/>
         <image name="lv_fm_adjust_normal" width="336" height="47"/>

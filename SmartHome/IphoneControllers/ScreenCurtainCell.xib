@@ -70,7 +70,7 @@
                             <constraint firstAttribute="width" constant="55" id="Oh8-T7-gZU"/>
                             <constraint firstAttribute="height" constant="35" id="onE-GR-Blo"/>
                         </constraints>
-                        <state key="normal" backgroundImage="dvd_btn_switch_on"/>
+                        <state key="normal" backgroundImage="dvd_btn_switch_off"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Xt-cI-2iu">
                         <rect key="frame" x="327" y="8" width="30" height="30"/>
@@ -125,7 +125,7 @@
     </objects>
     <resources>
         <image name="dvd_btn_adjust_normal" width="91" height="38"/>
-        <image name="dvd_btn_switch_on" width="36" height="23"/>
+        <image name="dvd_btn_switch_off" width="34" height="23"/>
         <image name="dvd_frm_choice__normal" width="336" height="47"/>
         <image name="icon_add_normal" width="15" height="15"/>
         <image name="icon_dw_nol" width="14" height="13"/>
