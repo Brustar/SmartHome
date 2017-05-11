@@ -60,7 +60,7 @@
         label.minimumScaleFactor = fMiniSize/label.font.pointSize;
         if ((iLines != 1) && (IOSVersion < 7.0f))
         {
-            label.adjustsLetterSpacingToFitWidth = YES;
+            label.allowsDefaultTighteningForTruncation = YES;
 
         }else{}
     }else{}
