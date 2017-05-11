@@ -35,7 +35,11 @@
             [btn setBackgroundImage:[UIImage imageNamed:@"light_bar_pressed"] forState:UIControlStateNormal];
         }
         [btn setTitle:device.typeName forState:UIControlStateNormal];
-        btn.titleLabel.font = [UIFont systemFontOfSize: 13.0];
+        if (([UIScreen mainScreen].bounds.size.height == 568.0)) {
+            btn.titleLabel.font = [UIFont systemFontOfSize: 11.0];
+        }else{
+            btn.titleLabel.font = [UIFont systemFontOfSize: 13.0];
+        }
         [[btn rac_signalForControlEvents:UIControlEventTouchUpInside]
          subscribeNext:^(id x) {
              [self jumpUI:device.hTypeId];
@@ -68,6 +72,9 @@
             break;
         case screen:
             targetName = @"ScreenController";
+            break;
+        case bgmusic:
+            targetName = @"BgMusicController";
             break;
             
         case plugin:

@@ -16,6 +16,7 @@
 #import "SQLManager.h"
 #import <AVFoundation/AVFoundation.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
+#import "UIViewController+Navigator.h"
 
 @interface BgMusicController ()
 
@@ -30,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *pre;
 @property (weak, nonatomic) IBOutlet UIImageView *next;
 @property (weak, nonatomic) IBOutlet UISlider *voiceSlider;
+@property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
 
 @end
 
@@ -98,11 +100,13 @@ BOOL animating;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 背景音乐",roomName]];
     [self initSlider];
-    
+    NSArray *menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
+    [self initMenuContainer:self.menuContainer andArray:menus andID:self.deviceid];
+    [self naviToDevice];
     self.deviceid = [SQLManager singleDeviceWithCatalogID:bgmusic byRoom:self.roomID];
     
     float vol = BLUETOOTH_MUSIC ? 0 : [[AVAudioSession sharedInstance] outputVolume];
