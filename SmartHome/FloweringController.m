@@ -86,6 +86,17 @@
 }
 
 - (IBAction)save:(id)sender {
+    UIButton *button = (UIButton *)sender;
+    
+    [button setSelected:!button.isSelected];
+    if (button.isSelected) {
+        //selected
+        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"clock_red"]] forState:UIControlStateSelected];
+    }else{
+        //normal
+        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"clock_white"]] forState:UIControlStateNormal];
+    }
+    
     Schedule *sch = [[Schedule alloc] initWhithoutSchedule];
     sch.deviceID = [self.deviceid intValue];
     sch.startTime = self.HLabel.text;

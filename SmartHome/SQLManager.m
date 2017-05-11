@@ -1497,9 +1497,9 @@
     {
         NSString *sql;
         if ([self isWholeHouse:roomID]) {
-            sql = [NSString stringWithFormat:@"select id,typename,htypeid from devices where subtypeid = 3 and htypeID<>14"];
+            sql = [NSString stringWithFormat:@"select id,typename,htypeid from devices where subtypeid = 3"];
         }else{
-            sql = [NSString stringWithFormat:@"select id,typename,htypeid from devices where subtypeid = 3 and htypeID<>14 and rid=%d",roomID];
+            sql = [NSString stringWithFormat:@"select id,typename,htypeid from devices where subtypeid = 3 and rid=%d",roomID];
         }
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
