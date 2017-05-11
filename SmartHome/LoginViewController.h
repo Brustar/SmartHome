@@ -52,8 +52,10 @@
 @property (nonatomic,assign) int vTVChannelLast;
 @property (nonatomic,assign) int vFMChannellLast;
 @property (nonatomic,assign) int vClientlLast;
-
+@property (nonatomic,strong)NSMutableArray * remind_listArr;
 @property (nonatomic, strong) AVPlayerViewController *avPlayerVC;
+@property (nonatomic,strong)  NSMutableArray * titleArray;
+@property (nonatomic,strong)  NSMutableArray * detailArray;
 
 
 - (IBAction)forgetPwdBtnClicked:(id)sender;

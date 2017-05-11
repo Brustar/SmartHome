@@ -14,5 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIView *DrawView;//画自定义滑杆的视图
 @property (weak, nonatomic) IBOutlet UILabel *starTimeLabel;//开始时间
 @property (weak, nonatomic) IBOutlet UILabel *endTimeLabel;//结束时间
+@property (nonatomic, strong) NSString *naviTitle;
+@property (nonatomic, strong) NSMutableArray *weekArray;
 
 @end

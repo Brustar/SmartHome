@@ -15,12 +15,14 @@
 #import "AudioManager.h"
 #import "SQLManager.h"
 #import "HttpManager.h"
+#import "Room.h"
 #import <AVFoundation/AVFoundation.h>
 
-@interface NowMusicController ()<UITableViewDataSource,UITableViewDataSource, HttpDelegate>
+@interface NowMusicController ()<UITableViewDataSource,UITableViewDelegate, HttpDelegate>
 @property (nonatomic,strong) NSArray * bgmusicIDS;
 @property (nonatomic,strong) NSMutableArray * bgmusicNameS;
 @property (nonatomic,assign) int Volume;
+@property (nonatomic,strong) NSMutableArray * AllRooms;
 @end
 
 @implementation NowMusicController
@@ -43,7 +45,7 @@
     [super viewDidLoad];
     _deviceArray = [NSMutableArray array];
     _bgmusicNameS = [[NSMutableArray alloc] init];
-    
+//    _AllRooms = [SQLManager getAllRoomsInfo];
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
     if (BLUETOOTH_MUSIC) {
@@ -73,6 +75,7 @@
 #pragma mark - Http callback
 - (void)httpHandler:(id)responseObject tag:(int)tag
 {
+            _AllRooms = [[NSMutableArray alloc] init];
     if(tag == 1) {
         [_deviceArray removeAllObjects];
         if ([responseObject[@"result"] intValue] == 0) {
@@ -83,7 +86,7 @@
                     if ([room isKindOfClass:[NSDictionary class]]) {
                         NSString *rName = room[@"roomname"];
                         NSArray *equipmentList = room[@"eqinfoList"];
-                        
+                         [_AllRooms addObject:rName];
                         if ([equipmentList isKindOfClass:[NSArray class]]) {
                             for (NSDictionary *device in equipmentList) {
                                 if ([device isKindOfClass:[NSDictionary class]]) {
@@ -238,10 +241,42 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMusicPlayerControllerVolumeDidChangeNotification object:audio.musicPlayer];
     }
 }
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return _AllRooms.count;
+
+}
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+ 
+    
     return _deviceArray.count;
 }
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(20, 0, self.view.bounds.size.width, 50)];
+    view.backgroundColor = [UIColor clearColor];
+    UILabel * NameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, 50)];
+    NameLabel.textColor = [UIColor whiteColor];
+   
+    NameLabel.text =_AllRooms[section];
+    [view addSubview:NameLabel];
+    UIView * view1 = [[UIView alloc] initWithFrame:CGRectMake(20, 49, self.view.bounds.size.width, 1)];
+    view1.backgroundColor = [UIColor redColor];
+    [view addSubview:view1];
+    UIButton * OpenBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width-200, 10, 30, 30)];
+     OpenBtn.backgroundColor = [UIColor redColor];
+    [OpenBtn setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+    
+    [view addSubview:OpenBtn];
+    return view;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 5;
+
+}
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
@@ -251,10 +286,16 @@
         
     }
     cell.backgroundColor = [UIColor clearColor];
+    cell.tag = indexPath.row;
     [cell.textLabel setTextColor:[UIColor whiteColor]];
     Device *devInfo = _deviceArray[indexPath.row];
     cell.textLabel.text = devInfo.name;
     return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    
 }
 - (IBAction)musicSwitchChanged:(id)sender {
     UISwitch *musicSwitch = (UISwitch *)sender;
@@ -272,6 +313,7 @@
     }
     
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

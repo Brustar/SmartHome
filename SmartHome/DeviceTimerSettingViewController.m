@@ -16,11 +16,74 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self addNotifications];
     [self initUI];
 }
 
+- (void)setupNaviBar {
+    [self setNaviBarTitle:@"定时设置"]; //设置标题
+    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
+    [self setNaviBarRightBtn:_naviRightBtn];
+}
+
+- (void)rightBtnClicked:(UIButton *)btn {
+    [self addDeviceTimer];
+}
+
+- (void)addDeviceTimer {
+    
+    if (_startTime.length <=0 || _endTime.length <=0) {
+        [MBProgressHUD showError:@"请选择时段"];
+        return;
+    }
+    
+    if (_repeatition.length <= 0) {
+        [MBProgressHUD showError:@"请选择重复选项"];
+        return;
+    }
+    
+    
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
+    NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
+    
+    if (auothorToken.length >0) {
+        NSDictionary *dict = @{@"token":auothorToken,
+                               @"optype":@(1),
+                               @"isactive":@(_isActive),
+                               @"starttime":_startTime,
+                               @"endtime":_endTime,
+                               @"weekvalue":_repeatString,
+                               @"equipmentid":@(_device.eID),
+                               @"startvalue":_startValue
+                               };
+        HttpManager *http = [HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = 1;
+        [http sendPost:url param:dict];
+    }
+}
+
+#pragma mark - Http callback
+- (void)httpHandler:(id)responseObject tag:(int)tag
+{
+    if(tag == 1) {
+        
+        if ([responseObject[@"result"] intValue] == 0) {
+            [MBProgressHUD showSuccess:@"添加成功"];
+            [self.navigationController popViewControllerAnimated:YES];
+            //[self.navigationController popToViewController:vc animated:YES];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }else {
+            [MBProgressHUD showSuccess:@"添加失败"];
+        }
+    }
+}
+
 - (void)initUI {
-    [self setNaviBarTitle:@"定时设置"];
+    [self setupNaviBar];
+    _isActive = 1;
+    _startValue = [NSMutableString string];
+    [_startValue appendString:@"01000000"];//默认开
     
     _timerTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT-64) style:UITableViewStylePlain];
     _timerTableView.dataSource = self;
@@ -106,6 +169,7 @@
     if (indexPath.section == 0) {
         if (self.device.subTypeId == 1) { //灯光
             NewLightCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewLightCell" forIndexPath:indexPath];
+            cell.delegate = self;
             cell.backgroundColor = [UIColor clearColor];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.AddLightBtn.hidden = YES;
@@ -209,6 +273,19 @@
         cell.textLabel.textColor = [UIColor whiteColor];
         cell.textLabel.font = [UIFont systemFontOfSize:15];
         cell.backgroundColor = [UIColor clearColor];
+        
+        //时间段 label
+        UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 12, UI_SCREEN_WIDTH-160, 20)];
+        timeLabel.textColor = [UIColor whiteColor];
+        timeLabel.backgroundColor = [UIColor clearColor];
+        timeLabel.textAlignment = NSTextAlignmentLeft;
+        timeLabel.font = [UIFont systemFontOfSize:15];
+        timeLabel.adjustsFontSizeToFitWidth = YES;
+        if (_startTime.length >0 && _endTime.length >0 && _repeatition.length >0) {
+            timeLabel.text = [NSString stringWithFormat:@"%@-%@, %@", _startTime, _endTime, _repeatition];
+        }
+        [cell.contentView addSubview:timeLabel];
+        
         return cell;
     }else if (indexPath.section == 2) {
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
@@ -218,7 +295,9 @@
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         UIButton *activeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 23)];
-        [activeBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateNormal];
+        activeBtn.selected = _isActive;
+        [activeBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
+        [activeBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
         [activeBtn addTarget:self action:@selector(activeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         cell.accessoryView = activeBtn;
         
@@ -229,12 +308,64 @@
 }
 
 - (void)activeBtnClicked:(UIButton *)btn {
-    
+    btn.selected = !btn.selected;
+    _isActive = btn.selected;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
    
+    if (indexPath.section == 1) {
+        UIStoryboard * sceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
+        IphoneNewAddSceneTimerVC * timerVC = [sceneStoryBoard  instantiateViewControllerWithIdentifier:@"IphoneNewAddSceneTimerVC"];
+        timerVC.naviTitle = @"设备定时";
+        [self.navigationController pushViewController:timerVC animated:YES];
+    }
+}
+
+- (void)addNotifications {
+    [NC addObserver:self selector:@selector(deviceTimerNotification:) name:@"AddSceneOrDeviceTimerNotification" object:nil];
+}
+
+- (void)removeNotifications {
+    [NC removeObserver:self];
+}
+
+- (void)deviceTimerNotification:(NSNotification *)noti {
+    NSDictionary *dic = noti.userInfo;
     
+    _startTime = dic[@"startDay"];
+    _endTime = dic[@"endDay"];
+    _repeatition = dic[@"repeat"];
+    
+    [_timerTableView reloadData];
+    
+    NSArray *weekArray = dic[@"weekArray"];
+    _repeatString =  [NSMutableString string];
+    if (weekArray && [weekArray isKindOfClass:[NSArray class]] && weekArray.count >0) {
+        
+        for (int i=0; i < 7; i++) {
+            if ([weekArray[i] intValue] == 1) {
+                [_repeatString appendString:[NSString stringWithFormat:@"%d", i]];
+            }
+        }
+    }
+    
+}
+
+- (void)dealloc {
+    [self removeNotifications];
+}
+
+
+#pragma mark - NewLightCellDelegate
+- (void)onLightPowerBtnClicked:(UIButton *)btn {
+     _startValue = [NSMutableString string];
+    
+    if (btn.selected) {
+        [_startValue appendString:@"01000000"];//开
+    }else {
+        [_startValue appendString:@"00000000"];//关
+    }
 }
 
 @end
