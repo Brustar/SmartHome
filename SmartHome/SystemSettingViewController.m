@@ -68,7 +68,7 @@
                 
                 [self.habits addObject:userDetail[@"hobit_name"]];
                 [self.opens addObject:userDetail[@"isopen"]];
-                [self.recordIDs addObject:userDetail[@"hobit_id"]];
+                [self.recordIDs addObject:userDetail[@"userhabit_id"]];
             }
         }
         
@@ -104,7 +104,7 @@
     
                 [self.habits addObject:userDetail[@"hobit_name"]];
                 [self.opens addObject:userDetail[@"isopen"]];
-                [self.recordIDs addObject:userDetail[@"hobit_id"]];
+                [self.recordIDs addObject:userDetail[@"userhabit_id"]];
             }
             [self.tableView reloadData];
         }else{

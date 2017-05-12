@@ -411,6 +411,7 @@
         }
     }else{
         _ThreeBtn.center = CGPointMake(self.view.center.x, self.view.center.y);
+        [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular4"] forState:UIControlStateNormal];
         _firstBtn.hidden = YES;
         _TwoBtn.hidden = YES;
         

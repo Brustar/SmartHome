@@ -1243,13 +1243,13 @@
         DeviceInfo *device = [DeviceInfo defaultManager];
         if ([device.db isEqualToString:SMART_DB]) {
             if ([self isWholeHouse:roomID]) {
-            sql = [NSString stringWithFormat:@"SELECT DISTINCT subTypeName FROM Devices where masterID = '%ld'",[[DeviceInfo defaultManager] masterID]];
+            sql = [NSString stringWithFormat:@"SELECT DISTINCT subTypeName FROM Devices where masterID = '%ld' and subTypeName<>'感应器'",[[DeviceInfo defaultManager] masterID]];
             }else{
-            sql = [NSString stringWithFormat:@"SELECT DISTINCT subTypeName FROM Devices where rID = %d and masterID = '%ld'",roomID,[[DeviceInfo defaultManager] masterID]];
+            sql = [NSString stringWithFormat:@"SELECT DISTINCT subTypeName FROM Devices where rID = %d and masterID = '%ld' and subTypeName<>'感应器'",roomID,[[DeviceInfo defaultManager] masterID]];
             }
            
         }else {
-            sql = [NSString stringWithFormat:@"SELECT DISTINCT subTypeName FROM Devices where rID = %d and masterID = '%ld'",1, 255l];
+            sql = [NSString stringWithFormat:@"SELECT DISTINCT subTypeName FROM Devices where rID = %d and masterID = '%ld' and subTypeName<>'感应器'",1, 255l];
         }
         
         FMResultSet *resultSet = [db executeQuery:sql];
