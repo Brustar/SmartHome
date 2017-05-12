@@ -183,6 +183,10 @@
 {
     Proto proto=protocolFromData(data);
     
+    if (![self.curtainIDArr containsObject:@(proto.deviceID)]) {
+        return;
+    }
+    
     CurtainTableViewCell *cell = [self.tableView viewWithTag:proto.deviceID];
     
     if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
@@ -219,6 +223,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.label.text = [self.curNames objectAtIndex:indexPath.row];
     cell.deviceid = [self.curtainIDArr objectAtIndex:indexPath.row];
+    cell.tag = [cell.deviceid integerValue];
     cell.slider.tag = 100+indexPath.row;
     cell.open.tag = indexPath.row;
     cell.AddcurtainBtn.hidden = YES;

@@ -769,9 +769,9 @@
         DeviceInfo *device = [DeviceInfo defaultManager];
         if ([device.db isEqualToString:SMART_DB]) {
             if ([self isWholeHouse:roomID]) {
-                sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where subtypeid = \'%@\' and masterID = '%ld'",subtypeid,[[DeviceInfo defaultManager] masterID]];
+                sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where subtypeid = \'%@\' and masterID = '%ld'",subtypeid,[device masterID]];
             }else{
-            sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and subtypeid = \'%@\' and masterID = '%ld'",roomID,subtypeid,[[DeviceInfo defaultManager] masterID]];
+            sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and subtypeid = \'%@\' and masterID = '%ld'",roomID,subtypeid,[device masterID]];
             }
         }else {
             sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and subtypeid = \'%@\' and masterID = '%ld'",(long)roomID,subtypeid, 255l];
@@ -788,6 +788,7 @@
     [db close];
     return [array copy];
 }
+
 +(NSArray *)getDeviceByTypeName:(NSString  *)typeName
 {
     NSMutableArray *array = [NSMutableArray array];
@@ -1116,9 +1117,9 @@
     NSMutableArray *catalogs = [NSMutableArray new];
     NSString *sql;
     if ([self isWholeHouse:roomID]) {
-        sql = @"select subtypename,subtypeid from devices where subtypeid<>6 and subtypeid<>4  group by subtypeid";
+        sql = @"select subtypename,subtypeid from devices where subtypeid<>6 and subtypeid<>4 and subtypeid<>0  group by subtypeid";
     }else{
-        sql = [NSString stringWithFormat:@"select subtypename,subtypeid from devices where subtypeid<>6 and subtypeid<>4 and rid = %d group by subtypeid" ,roomID];
+        sql = [NSString stringWithFormat:@"select subtypename,subtypeid from devices where subtypeid<>6 and subtypeid<>4 and subtypeid<>0 and rid = %d group by subtypeid" ,roomID];
     }
     
     FMDatabase *db = [self connetdb];
