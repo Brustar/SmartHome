@@ -397,7 +397,10 @@ static NSString * const CYPhotoId = @"photo";
         
         cell.imageView.image = [UIImage imageNamed:@"AddScene-ImageView"];
         cell.subImageView.image = [UIImage imageNamed:@"AddSceneBtn"];
-        
+        cell.sceneID = 0;
+//        self.SceneNameLabel.tag = 0;
+//        cell.tag = 0;
+        self.SceneNameLabel.text = @"点击添加场景";
         return cell;
     }else{
         CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];

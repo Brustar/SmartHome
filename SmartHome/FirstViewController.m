@@ -164,7 +164,7 @@
     [self setupNaviBar];
     [self showNetStateView];
     //开启网络状况监听器
-    [self updateInterfaceWithReachability];
+    
     [self setUIMessage];
     [self chatConnect];
     [self getScenesFromPlist];
@@ -367,7 +367,7 @@
     }
     dispatch_async(dispatch_get_main_queue(), ^{
         self.chatlabel.text =[NSString stringWithFormat:@"%@ : %@" , nickname, tip];
-        self.numberLabel.text = [NSString stringWithFormat:@"%d" ,unread];
+        self.numberLabel.text = [NSString stringWithFormat:@"%d" ,unread<0?0:unread];
         [self.IconeImageView sd_setImageWithURL:[NSURL URLWithString:protrait] placeholderImage:[UIImage imageNamed:@"logo"] options:SDWebImageRetryFailed];
     });
 
@@ -431,6 +431,7 @@
         }
     }else{
         _ThreeBtn.center = CGPointMake(self.view.center.x, self.view.center.y);
+        [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular4"] forState:UIControlStateNormal];
         _firstBtn.hidden = YES;
         _TwoBtn.hidden = YES;
         
@@ -623,7 +624,7 @@
 #pragma mark - TCP recv delegate
 - (void)recv:(NSData *)data withTag:(long)tag
 {
-    
+    [self updateInterfaceWithReachability];
 }
 
 @end

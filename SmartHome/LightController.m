@@ -396,6 +396,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     CGFloat degree = radius * (180 / M_PI);
     NSLog(@"degree:%f",degree);
     int percent = degree*100/MAX_ROTATE_DEGREE;
+    percent = percent < 0?0:percent;
     NSLog(@"percent:%d",percent);
     self.tranformView.tag = percent;
     
