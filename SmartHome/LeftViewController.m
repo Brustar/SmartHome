@@ -23,17 +23,28 @@
     _itemArray = @[@"家庭成员",@"家庭动态",@"智能账单",@"通知",@"故障及保修记录",@"切换家庭账号"];
 
     
-    UIImageView *imageview = [[UIImageView alloc] initWithFrame:self.view.bounds];
-    imageview.image = [UIImage imageNamed:@"background"];
-    [self.view addSubview:imageview];
+    UIButton *bgButton = [[UIButton alloc] initWithFrame:self.view.frame];
+    [bgButton setBackgroundImage:[UIImage imageNamed:@"my_bg_side_nol"] forState:UIControlStateNormal];
+    [bgButton addTarget:self action:@selector(bgButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:bgButton];
     
     _myTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:_myTableView.frame];
+    imageView.image = [UIImage imageNamed:@"background"];
+    _myTableView.backgroundView = imageView;
+   // _myTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
     _myTableView.dataSource = self;
     _myTableView.delegate  = self;
     _myTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     _myTableView.tableHeaderView = [self setupTableHeader];
     _myTableView.tableFooterView = [self setupTableFooter];
     [self.view addSubview:_myTableView];
+}
+
+- (void)bgButtonClicked:(UIButton *)btn {
+    if (_delegate && [_delegate respondsToSelector:@selector(onBackgroundBtnClicked:)]) {
+        [_delegate onBackgroundBtnClicked:btn];
+    }
 }
 
 - (void)getUserInfoFromDB {
@@ -52,7 +63,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Identifier];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
     cell.textLabel.font = [UIFont systemFontOfSize:16.0f];
     cell.backgroundColor = [UIColor clearColor];
     cell.textLabel.textColor = [UIColor whiteColor];

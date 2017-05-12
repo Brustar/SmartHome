@@ -38,7 +38,8 @@
     if(self = [super init]){
         self.speedf = vSpeedFloat;
         
-        self.leftVC = leftVC;
+        self.leftVC = (LeftViewController *)leftVC;
+        self.leftVC.delegate = self;
         self.mainVC = mainVC;
         
         //滑动手势
@@ -184,19 +185,41 @@
     if ((!self.closed) && (tap.state == UIGestureRecognizerStateEnded))
     {
         [UIView beginAnimations:nil context:nil];
-        tap.view.transform = CGAffineTransformScale(CGAffineTransformIdentity,1.0,1.0);
-        tap.view.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2,[UIScreen mainScreen].bounds.size.height/2);
+        //tap.view.transform = CGAffineTransformScale(CGAffineTransformIdentity,1.0,1.0);
+        //tap.view.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2,[UIScreen mainScreen].bounds.size.height/2);
+        self.mainVC.view.transform = CGAffineTransformScale(CGAffineTransformIdentity,1.0,1.0);
+        self.mainVC.view.center = CGPointMake(kScreenWidth / 2, kScreenHeight / 2);
         self.closed = YES;
         
         self.leftTableview.center = CGPointMake(kLeftCenterX, kScreenHeight * 0.5);
         self.leftTableview.transform = CGAffineTransformScale(CGAffineTransformIdentity,kLeftScale,kLeftScale);
         self.contentView.alpha = kLeftAlpha;
+        [self.view bringSubviewToFront:self.mainVC.view];
         
         [UIView commitAnimations];
         _scalef = 0;
         [self removeSingleTap];
     }
     
+}
+
+#pragma mark - LeftViewControllerDelegate
+- (void)onBackgroundBtnClicked:(UIButton *)btn {
+    if (!self.closed)
+    {
+        [UIView beginAnimations:nil context:nil];
+        self.mainVC.view.transform = CGAffineTransformScale(CGAffineTransformIdentity,1.0,1.0);
+        self.mainVC.view.center = CGPointMake(kScreenWidth / 2, kScreenHeight / 2);
+        self.closed = YES;
+        
+        self.leftTableview.center = CGPointMake(kLeftCenterX, kScreenHeight * 0.5);
+        self.leftTableview.transform = CGAffineTransformScale(CGAffineTransformIdentity,kLeftScale,kLeftScale);
+        self.contentView.alpha = kLeftAlpha;
+        [self.view bringSubviewToFront:self.mainVC.view];
+        
+        [UIView commitAnimations];
+        _scalef = 0;
+    }
 }
 
 #pragma mark - 修改视图位置
@@ -213,6 +236,7 @@
     self.leftTableview.center = CGPointMake(kLeftCenterX, kScreenHeight * 0.5);
     self.leftTableview.transform = CGAffineTransformScale(CGAffineTransformIdentity,kLeftScale,kLeftScale);
     self.contentView.alpha = kLeftAlpha;
+    [self.view bringSubviewToFront:self.mainVC.view];
     
     [UIView commitAnimations];
     [self removeSingleTap];
@@ -221,27 +245,29 @@
 /**
  @brief 打开左视图
  */
-- (void)openLeftView;
+- (void)openLeftView
 {
     [UIView beginAnimations:nil context:nil];
     self.mainVC.view.transform = CGAffineTransformScale(CGAffineTransformIdentity,kMainPageScale,kMainPageScale);
-    self.mainVC.view.center = kMainPageCenter;
+    //self.mainVC.view.center = kMainPageCenter;
+    self.mainVC.view.center = CGPointMake(kScreenWidth / 2, kScreenHeight / 2);
     self.closed = NO;
     
     self.leftTableview.center = CGPointMake((kScreenWidth - kMainPageDistance) * 0.5, kScreenHeight * 0.5);
     self.leftTableview.transform = CGAffineTransformScale(CGAffineTransformIdentity,1.0,1.0);
+    [self.view bringSubviewToFront:self.leftVC.view];
     self.contentView.alpha = 0;
     
     [UIView commitAnimations];
-    [self disableTapButton];
+    //[self disableTapButton];
 }
 
 #pragma mark - 行为收敛控制
 - (void)disableTapButton
 {
-    for (UIButton *tempButton in [_mainVC.view subviews])
+    for (UIButton *tempButton in [_leftVC.view subviews])
     {
-        [tempButton setUserInteractionEnabled:NO];
+        [tempButton setUserInteractionEnabled:YES];
     }
     //单击
     if (!self.sideslipTapGes)
@@ -250,19 +276,19 @@
         self.sideslipTapGes= [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handeTap:)];
         [self.sideslipTapGes setNumberOfTapsRequired:1];
         
-        [self.mainVC.view addGestureRecognizer:self.sideslipTapGes];
+        [self.leftVC.view addGestureRecognizer:self.sideslipTapGes];
         self.sideslipTapGes.cancelsTouchesInView = YES;  //点击事件盖住其它响应事件,但盖不住Button;
     }
 }
 
 //关闭行为收敛
-- (void) removeSingleTap
+- (void)removeSingleTap
 {
-    for (UIButton *tempButton in [self.mainVC.view  subviews])
+    for (UIButton *tempButton in [self.leftVC.view  subviews])
     {
         [tempButton setUserInteractionEnabled:YES];
     }
-    [self.mainVC.view removeGestureRecognizer:self.sideslipTapGes];
+    [self.leftVC.view removeGestureRecognizer:self.sideslipTapGes];
     self.sideslipTapGes = nil;
 }
 

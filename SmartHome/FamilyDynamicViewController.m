@@ -37,7 +37,7 @@
         vc.cameraURL = cameraURL;
         vc.roomName = roomName;
         vc.deviceID = [_cameraIDArray[i] stringValue];
-        vc.view.frame = CGRectMake(0, gap*(i+1) + i*itemHeight, UI_SCREEN_WIDTH, itemHeight);
+        vc.view.frame = CGRectMake(0, gap*(i+1) + i*itemHeight, FW(self.cameraList), itemHeight);
         [self.cameraList addSubview:vc.view];
         [self addChildViewController:vc];
         
@@ -59,6 +59,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+#pragma mark - MonitorViewControllerDelegate
+
 - (void)onAdjustBtnClicked:(UIButton *)sender {
     NSInteger index = sender.tag;
     NSString *cameraURL = [SQLManager getCameraUrlByDeviceID:[_cameraIDArray[index] intValue]];
@@ -72,6 +75,30 @@
     vc.cameraURL = cameraURL;
     vc.deviceID = [_cameraIDArray[index] stringValue];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)onFullScreenBtnClicked:(UIButton *)sender  cameraImageView:(UIImageView *)imageView {
+    UIImageView *fullScreenView = [[UIImageView alloc] initWithFrame:self.view.frame];
+    self.fullScreenImageView = fullScreenView;
+    [self.view addSubview:fullScreenView];
+    fullScreenView.image = imageView.image;
+    fullScreenView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeView)];
+    [fullScreenView addGestureRecognizer:tapGesture];
+    [self shakeToShow:fullScreenView];
+}
+
+-(void)closeView{
+    [self.fullScreenImageView removeFromSuperview];
+}
+- (void)shakeToShow:(UIView *)aView{
+    CAKeyframeAnimation* animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    animation.duration = 0.3;
+    NSMutableArray *values = [NSMutableArray array];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.1, 0.1, 1.0)]];
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]];
+    animation.values = values;
+    [aView.layer addAnimation:animation forKey:nil];
 }
 
 @end

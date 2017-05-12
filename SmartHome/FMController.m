@@ -139,6 +139,7 @@
 
 -(void) initSlider
 {
+    self.frequence.continuous = NO;
     [self.frequence setThumbImage:[UIImage imageNamed:@"fm_thumb"] forState:UIControlStateNormal];
     self.frequence.maximumTrackTintColor = self.frequence.minimumTrackTintColor = [UIColor clearColor];
     [self.frequence addTarget:self action:@selector(adjustFrequence:) forControlEvents:UIControlEventValueChanged];
@@ -343,11 +344,9 @@
     HttpManager *http = [HttpManager defaultManager];
     http.delegate = self;
     http.tag = 1;
-    [http sendPost:url param:dic];
-
-    
-    
+    [http sendPost:url param:dic];    
 }
+
 -(void) httpHandler:(id) responseObject tag:(int)tag
 {
     if(tag == 1)
