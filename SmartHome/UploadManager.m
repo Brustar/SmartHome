@@ -25,6 +25,8 @@
 
 - (void)uploadImage:(UIImage *) img url:(NSString *) url dic:(NSDictionary *)dic fileName:(NSString *)fileName completion:(void (^)(id responseObject))completion
 {
+    [MBProgressHUD showMessage:@"请稍候..."];
+    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     // 实际上就是AFN没有对响应数据做任何处理的情况
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -35,10 +37,13 @@
         [formData appendPartWithFileData:UIImagePNGRepresentation(img) name:@"ImgFile" fileName:fileName mimeType:@"multipart/form-data"];
     } progress:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
         
+        [MBProgressHUD hideHUD];
+        
+        
         //NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
        
         id result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        int resultValue =[result[@"Result"] intValue];
+        int resultValue =[result[@"result"] intValue];
         NSLog(@"完成 %d", resultValue);
         if (resultValue == 0) {
             completion(result);
@@ -46,6 +51,7 @@
             [MBProgressHUD showError:result[@"Msg"]];
         }
     } failure:^(NSURLSessionDataTask *operation, NSError *error) {
+        [MBProgressHUD hideHUD];
         NSLog(@"错误 %@", error.localizedDescription);
     }];
 }

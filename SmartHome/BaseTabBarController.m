@@ -71,7 +71,7 @@
     
 
     //HOME
-    IphoneFamilyViewController *familyVC = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"FirstViewController"];
+    FirstViewController *familyVC = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"FirstViewController"];
          
 
     //场景

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CustomViewController.h"
 #import "NowMusicController.h"
+#import "AFNetworkReachabilityManager.h"
 
 @interface IphoneSceneController : CustomViewController<NowMusicControllerDelegate>
 
@@ -18,4 +19,5 @@
 @property (nonatomic, readonly) UIButton *naviRightBtn;
 @property (nonatomic, readonly) UIButton *naviLeftBtn;
 @property (nonatomic, strong) NowMusicController * nowMusicController;
+@property(nonatomic, strong) AFNetworkReachabilityManager *afNetworkReachabilityManager;
 @end
