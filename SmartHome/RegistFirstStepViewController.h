@@ -22,7 +22,7 @@
 @property(nonatomic, strong) NSArray *countryCodeArray;
 
 @property (nonatomic,strong) NSString *suerTypeStr;
-@property (nonatomic,assign) int masterStr;//hostid 主机ID
+@property (nonatomic, strong) NSString *masterStr;//主机ID
 @property (nonatomic, strong) NSString *hostName;//主机名
 
 @property (nonatomic, strong) NSString *countryCode;//国家码

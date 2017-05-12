@@ -19,6 +19,7 @@
 @property (nonatomic, strong) NSString *selectedHost;
 @property (weak, nonatomic) IBOutlet UITableView *hostTableView;
 @property (nonatomic,strong) NSMutableArray *home_room_infoArr;
+@property (weak, nonatomic) IBOutlet UIButton *okBtn;
 
 - (IBAction)OkBtnClicked:(id)sender;
 

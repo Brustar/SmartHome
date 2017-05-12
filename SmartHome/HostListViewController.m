@@ -26,6 +26,16 @@
         [_hostArray addObjectsFromArray:array];
     }
     
+    if (_hostArray.count < 2) {
+        [self.okBtn setEnabled:NO];
+        [self.okBtn setBackgroundImage:[UIImage imageNamed:@"disable_btn"] forState:UIControlStateDisabled];
+        [self.okBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+    }else {
+        [self.okBtn setEnabled:YES];
+        [self.okBtn setBackgroundImage:[UIImage imageNamed:@"family_done"] forState:UIControlStateNormal];
+        [self.okBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    }
+    
     NSArray *homeArray = [UD objectForKey:@"HomeNameList"];
     if ([homeArray isKindOfClass:[NSArray class]] && homeArray.count >0) {
         [_homeNameArray addObjectsFromArray:homeArray];
@@ -93,6 +103,17 @@
 {
     _selectedHost = [_hostArray[indexPath.row] stringValue];
     [_hostTableView reloadData];
+    
+    NSString *currentHost = [[UD objectForKey:@"HostID"] stringValue];
+    if (_selectedHost.length >0 && ![currentHost isEqualToString:_selectedHost]) {
+        [self.okBtn setEnabled:YES];
+        [self.okBtn setBackgroundImage:[UIImage imageNamed:@"family_done"] forState:UIControlStateNormal];
+        [self.okBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    }else {
+        [self.okBtn setEnabled:NO];
+        [self.okBtn setBackgroundImage:[UIImage imageNamed:@"disable_btn"] forState:UIControlStateDisabled];
+        [self.okBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+    }
 }
 
 -(void)loginHost

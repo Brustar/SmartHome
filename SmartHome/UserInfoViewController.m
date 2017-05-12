@@ -99,7 +99,7 @@
 
 #pragma mark - UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
+    return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -121,7 +121,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
    
-    if (section == 0 || section == 1 || section == 2) {
+    if (section == 0 || section == 1 || section == 2 || section == 3) {
         UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 8.0)];
         footer.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 0.5)];
@@ -131,7 +131,7 @@
         return footer;
     }
     
-    if (section == 4) {
+    if (section == 5) {
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 0.5)];
         line.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"login_line"]];
         
@@ -143,11 +143,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-    if (section == 0 || section == 1 || section == 2) {
+    if (section == 0 || section == 1 || section == 2 || section == 3) {
         return 8.0f;
     }
     
-    if (section == 4) {
+    if (section == 5) {
         return 0.5f;
     }
     return 0;
@@ -163,7 +163,7 @@
     cell.backgroundColor = [UIColor clearColor];
     cell.backgroundView = nil;
     cell.accessoryType = UITableViewCellAccessoryNone;
-    if (indexPath.section == 0 || indexPath.section == 1 || indexPath.section == 2) {
+    if (indexPath.section == 0 || indexPath.section == 1 || indexPath.section == 2 || indexPath.section == 3) {
         cell.backgroundColor = [UIColor colorWithRed:30.0/255.0 green:29.0/255.0 blue:34.0/255.0 alpha:1];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
@@ -212,6 +212,8 @@
     }else if (indexPath.section == 2) {
         cell.textLabel.text = @"我的订单";
     }else if (indexPath.section == 3) {
+        cell.textLabel.text = @"购物车";
+    }else if (indexPath.section == 4) {
         cell.textLabel.text = @"昵称";
         UILabel *nickLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
         nickLabel.textAlignment = NSTextAlignmentRight;
@@ -220,7 +222,7 @@
         nickLabel.backgroundColor = [UIColor clearColor];
         nickLabel.text = _userInfomation.nickName;
         cell.accessoryView = nickLabel;
-    }else if (indexPath.section == 4) {
+    }else if (indexPath.section == 5) {
         cell.textLabel.text = @"电话";
         UILabel *phoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
         phoneLabel.textAlignment = NSTextAlignmentRight;
@@ -244,6 +246,9 @@
     }else if (indexPath.section == 2) {
         //我的订单
         [WebManager show:[[IOManager httpAddr] stringByAppendingString:@"/ui/OrderQuery.aspx"]];
+    }else if (indexPath.section == 3) {
+        //购物车
+        [WebManager show:[[IOManager httpAddr] stringByAppendingString:@"/ui/Cart.aspx"]];
     }
 }
 
