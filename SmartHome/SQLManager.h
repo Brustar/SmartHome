@@ -105,7 +105,9 @@
 +(NSString *)getENumber:(NSInteger)eID;
 +(NSString *)getDeviceIDByENumber:(NSInteger)eID;
 +(int)saveMaxSceneId:(Scene *)scene name:name pic:(NSString *)img;
-+(int) getSceneID:(NSString *)name;
+
++(NSArray *) fetchScenes:(NSString *)name;
+
 +(int) getRoomID:(int)sceneID;
 +(int) getRoomIDByNumber:(NSString *)enumber;
 //根据roomID从rooms表查出房间访问权限（openforcurrentuser）

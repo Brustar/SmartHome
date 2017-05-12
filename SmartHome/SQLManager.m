@@ -889,7 +889,7 @@
     return deviceID;
 }
 
-+(int)getSceneID:(NSString *)name
++ (NSArray *) fetchScenes:(NSString *)name
 {
     DeviceInfo *device = [DeviceInfo defaultManager];
     long masterID = 255l;
@@ -897,21 +897,25 @@
         masterID = [[DeviceInfo defaultManager] masterID];
     }
     
-    NSString *sql=[NSString stringWithFormat:@"select id from Scenes where name='%@' and masterID = '%ld'" ,name, masterID];
-    int sceneid=0;
+    NSString *sql=[NSString stringWithFormat:@"select id,roomName,name from Scenes where name like '%%%@%%' and masterID = '%ld'" , name , masterID];
+    NSMutableArray *scenes= [NSMutableArray new];
     FMDatabase *db = [self connetdb];
     if([db open])
     {
         FMResultSet *resultSet = [db executeQuery:sql];
         
-        if([resultSet next])
+        while([resultSet next])
         {
-            sceneid = [resultSet intForColumn:@"id"];
+            Scene *scene = [Scene new];
+            scene.sceneID = [resultSet intForColumn:@"id"];
+            scene.roomName = [resultSet stringForColumn:@"roomName"];
+            scene.sceneName = [resultSet stringForColumn:@"name"];
+            [scenes addObject:scene];
         }
     }
     [db closeOpenResultSets];
     [db close];
-    return sceneid;
+    return scenes;
 }
 
 +(int) getReadOnly:(int)sceneid
@@ -2702,6 +2706,7 @@
     
     return mutabelArr;
 }
+
 //编辑fm
 +(BOOL)getAllChangeChannelForFavoritedNewName:(NSString *)newName FmId:(NSInteger)fmId
 {
@@ -2716,6 +2721,7 @@
     [db close];
     return result;
 }
+
 +(BOOL)deleteChannelForChannelID:(NSInteger)channel_id
 {
     FMDatabase *db = [SQLManager connetdb];

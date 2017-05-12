@@ -18,7 +18,8 @@
 #import "RegexKitLite.h"
 #import "SCSiriWaveformView.h"
 #import <AVFoundation/AVFoundation.h>
-#import "UIViewController+Navigator.h"
+#import <ReactiveCocoa/ReactiveCocoa.h>
+#import "UIView+Popup.h"
 
 @interface VoiceOrderController ()
 @property (weak, nonatomic) IBOutlet UIView *exmapleView;
@@ -220,27 +221,56 @@
         [resultString appendFormat:@"%@",key];
     }
     NSString *result =[NSString stringWithFormat:@"%@%@", self.resultLabel.text,resultString];
-    NSLog(@"_result=%@",result);
+    
     NSString * resultFromJson =  [self stringFromJson:resultString];
     result= [NSString stringWithFormat:@"%@%@", self.resultLabel.text,resultFromJson];
     self.resultLabel.text = [result stringByMatching:@"^([\\u4e00-\\u9fa5\\w]+).*" capture:1L];
     
     if (isLast){
         NSLog(@"听写结果(json)：%@测试", result);
-    
-    
         NSLog(@"resultFromJson=%@",resultFromJson);
         NSLog(@"isLast=%d,_textView.text=%@",isLast,self.resultLabel.text);
         
-        self.sceneID =[SQLManager getSceneID:self.resultLabel.text];
-        if (self.sceneID>0) {
+        NSArray *scenes = [SQLManager fetchScenes:self.resultLabel.text];
+        if ([scenes count]>0) {
             self.sampleLabel.text = @"找到匹配项";
+            if ([scenes count]>1) {
+                [self pickScenes:scenes];
+                return;
+            }
+            self.sceneID = ((Scene *)[scenes firstObject]).sceneID;
             [[SceneManager defaultManager] startScene:self.sceneID];
             [self performSegueWithIdentifier:@"sceneSegue" sender:self];
         }else{
             self.sampleLabel.text = @"找不到匹配项，请重新说";
         }
     }
+}
+
+- (void)pickScenes:(NSArray*)scenes {
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 300.0, 400.0)];
+    view.backgroundColor = [UIColor colorWithRed:0.75 green:0.75 blue:0.75 alpha:1.0];
+    int i = 0;
+    for (Scene *scene in scenes) {
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        NSString *title = [NSString stringWithFormat:@"%@:%@",scene.roomName,scene.sceneName];
+        [btn setTitle:title forState:UIControlStateNormal];
+        
+        btn.frame = CGRectMake(50.0, 25.0+i*50, 200.0, 35.0);
+        [btn setTitleColor:[UIColor blackColor]forState:UIControlStateNormal];
+        btn.titleLabel.font = [UIFont systemFontOfSize:13.0];
+        
+        [[btn rac_signalForControlEvents:UIControlEventTouchUpInside]
+         subscribeNext:^(id x) {
+             self.sceneID = scene.sceneID;
+             [view dismiss];
+             [[SceneManager defaultManager] startScene:self.sceneID];
+             [self performSegueWithIdentifier:@"sceneSegue" sender:self];
+         }];
+        [view addSubview:btn];
+        i++;
+    }
+    [view show];
 }
 
 
