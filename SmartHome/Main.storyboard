@@ -2370,7 +2370,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="FootView" destination="VdZ-pi-Bt2" id="IMr-G5-lrn"/>
                         <outlet property="tableView" destination="Nqw-sM-UCs" id="Arx-xR-Q68"/>
                     </connections>
                 </viewController>
