@@ -92,9 +92,9 @@
     self.dialView.arcRadius = 80;
 //    self.dialView.units = @"小时";
     //最小值
-    self.dialView.minNum = 0;
+    self.dialView.minNum = 100;
     //最大值
-    self.dialView.maxNum = 23;
+    self.dialView.maxNum = 230;
     //中间文字颜色
     self.dialView.labelColor = [UIColor redColor];
     self.dialView.labelFont = [UIFont systemFontOfSize:20.0];

@@ -8172,7 +8172,6 @@ layer.masksToBoundslayer.masksToBounds
                     </view>
                     <navigationItem key="navigationItem" id="Oox-UF-VeT"/>
                     <connections>
-                        <outlet property="footView" destination="ToU-Yh-Jti" id="k6c-0a-ZXK"/>
                         <outlet property="tableView" destination="pNZ-Ie-gxK" id="aJa-lD-O2X"/>
                     </connections>
                 </viewController>
