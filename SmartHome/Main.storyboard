@@ -1382,7 +1382,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ren-6j-1QP" id="ZaE-3z-ba0">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NameLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SPB-ou-7Wd">
@@ -2471,11 +2471,24 @@
                                                     </constraints>
                                                     <state key="normal" backgroundImage="dvd_btn_switch_on"/>
                                                 </button>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="主人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XqX-8J-ihR">
+                                                    <rect key="frame" x="86" y="0.0" width="42" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="42" id="6uU-zN-aHG"/>
+                                                        <constraint firstAttribute="height" constant="21" id="rP4-r3-KV7"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="JYe-w4-0uF" firstAttribute="centerY" secondItem="bC6-PL-JT8" secondAttribute="centerY" id="1qG-uc-Ima"/>
+                                                <constraint firstItem="XqX-8J-ihR" firstAttribute="top" secondItem="bC6-PL-JT8" secondAttribute="top" id="4Qj-kf-qf1"/>
+                                                <constraint firstItem="XqX-8J-ihR" firstAttribute="leading" secondItem="JYe-w4-0uF" secondAttribute="trailing" constant="24" id="6fA-c8-nOo"/>
                                                 <constraint firstItem="AcS-7s-gEH" firstAttribute="centerY" secondItem="bC6-PL-JT8" secondAttribute="centerY" id="EZA-zX-BEB"/>
                                                 <constraint firstAttribute="trailing" secondItem="AcS-7s-gEH" secondAttribute="trailing" constant="20" id="Kum-jb-Ram"/>
+                                                <constraint firstAttribute="bottom" secondItem="XqX-8J-ihR" secondAttribute="bottom" constant="22.5" id="May-H0-DG0"/>
                                                 <constraint firstItem="JYe-w4-0uF" firstAttribute="leading" secondItem="bC6-PL-JT8" secondAttribute="leading" constant="20" id="ZZO-9l-ve7"/>
                                                 <constraint firstAttribute="trailing" secondItem="bOR-BN-35C" secondAttribute="trailing" constant="20" id="ipk-iA-nq7"/>
                                                 <constraint firstItem="bOR-BN-35C" firstAttribute="centerY" secondItem="bC6-PL-JT8" secondAttribute="centerY" id="kdp-7J-bdB"/>
@@ -2484,6 +2497,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="areaLabel" destination="JYe-w4-0uF" id="cta-ju-Ebk"/>
+                                            <outlet property="detialLabel" destination="XqX-8J-ihR" id="gvq-Sm-4NR"/>
                                             <outlet property="exchangeSwitch" destination="bOR-BN-35C" id="TTG-iH-J3w"/>
                                             <outlet property="exchanggeBtn" destination="AcS-7s-gEH" id="hb3-A7-aYo"/>
                                         </connections>

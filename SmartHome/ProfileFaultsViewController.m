@@ -84,7 +84,7 @@
     if (auothorToken.length >0) {
         NSDictionary *dict = @{@"token":auothorToken};
     
-        [self sendRequest:url andDict:dict WithTag:1];
+//        [self sendRequest:url andDict:dict WithTag:1];
     }else { //体验
         self.navigationItem.rightBarButtonItem = nil;
         NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"breakdownlist" ofType:@"plist"]];

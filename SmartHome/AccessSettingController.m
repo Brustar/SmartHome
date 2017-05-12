@@ -28,7 +28,7 @@
 @property (nonatomic,strong) NSMutableArray *opens;
 @property (nonatomic,strong) NSMutableArray *recoredIDs;
 @property (nonatomic,strong) NSNumber *recoredId;
-@property (nonatomic,strong) UITableViewCell *cell;
+@property (nonatomic,strong) AreaSettingCell *cell;
 @property (nonatomic,strong) NSIndexPath *selectedIndexPath;
 @property (nonatomic,assign) int usertype;
 @end
@@ -86,19 +86,20 @@
     }
     return _recoredIDs;
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
   
     [self setNaviBarTitle:@"权限控制"];
     self.automaticallyAdjustsScrollViewInsets = NO;
-//    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
-//    self.navigationItem.leftBarButtonItem = returnItem;
     self.userTableView.tableFooterView = [UIView new];
-    
     self.areaTableView.tableHeaderView = self.headView;
     self.areaTableView.hidden = YES;
     NSString *url = [NSString stringWithFormat:@"%@Cloud/user_listall.aspx",[IOManager httpAddr]];
-    
     DeviceInfo *device = [DeviceInfo defaultManager];
     if ([device.db isEqualToString:SMART_DB]) {
         [self sendRequest:url withTag:1];
@@ -202,7 +203,7 @@
         if([responseObject[@"result"] intValue] == 0)
         {
             [MBProgressHUD showSuccess:@"成功转化为普通身份"];
-            self.cell.detailTextLabel.text = @"普通用户";
+            self.cell.detialLabel.text = @"普通用户";
             if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]]) { //如果是自己
                 [UD setObject:@(2) forKey:@"UserType"];
                 [UD synchronize];
@@ -219,7 +220,7 @@
         if([responseObject[@"Result"] intValue] == 0)
         {
             [MBProgressHUD showSuccess:@"成功转化为主人身份"];
-            self.cell.detailTextLabel.text = @"主人";
+            self.cell.detialLabel.text = @"主人";
             if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]]) { //如果是自己
                 [UD setObject:@(1) forKey:@"UserType"];
                 [UD synchronize];
@@ -342,7 +343,7 @@
                 AreaSubVC.usrID = self.userIDArr[indexPath.row];
                 AreaSubVC.userNameTitle = cell.areaLabel.text;
                  AreaSubVC.identityType = self.identityType;
-                AreaSubVC.detailTextName = cell.detailTextLabel.text;
+                AreaSubVC.detailTextName = cell.detialLabel.text;
 
     }
     

@@ -14,12 +14,13 @@
 
 @interface AreaSubSettingViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic,strong) UITableViewCell *cell;
+@property (nonatomic,strong) AreaSettingCell *cell;
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (nonatomic,strong) NSMutableArray * areasArr;
 @property (nonatomic,strong) NSMutableArray * recoredIDs;
 @property (nonatomic,strong) NSMutableArray *opens;
 @property (nonatomic,assign) int usertype;
+
 
 
 @end
@@ -148,7 +149,7 @@
         if([responseObject[@"result"] intValue] == 0)
         {
             [MBProgressHUD showSuccess:@"成功转化为普通身份"];
-            self.cell.detailTextLabel.text = @"普通用户";
+            self.cell.detialLabel.text = @"普通用户";
             if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]]) { //如果是自己
                 [UD setObject:@(2) forKey:@"UserType"];
                 self.usertype = 2;
@@ -165,7 +166,7 @@
         if([responseObject[@"Result"] intValue] == 0)
         {
             [MBProgressHUD showSuccess:@"成功转化为主人"];
-            self.cell.detailTextLabel.text = @"主人";
+            self.cell.detialLabel.text = @"主人";
             if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]]) { //如果是自己
                 [UD setObject:@(1) forKey:@"UserType"];
                 self.usertype = 1;
@@ -206,32 +207,33 @@
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AreaSettingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"areaSettingCell" forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor clearColor];
-    cell.exchangeSwitch.tag = [self.recoredIDs[indexPath.row] integerValue];
-    cell.exchanggeBtn.tag = [self.recoredIDs[indexPath.row] integerValue];
-    [cell.exchanggeBtn addTarget:self action:@selector(switchChange:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.exchangeSwitch addTarget:self action:@selector(switchChange:) forControlEvents:UIControlEventValueChanged];
-    cell.areaLabel.text = self.areasArr[indexPath.row];
+    self.cell = [tableView dequeueReusableCellWithIdentifier:@"areaSettingCell" forIndexPath:indexPath];
+    self.cell.backgroundColor = [UIColor clearColor];
+    self.cell.exchangeSwitch.tag = [self.recoredIDs[indexPath.row] integerValue];
+    self.cell.exchanggeBtn.tag = [self.recoredIDs[indexPath.row] integerValue];
+    [self.cell.exchanggeBtn addTarget:self action:@selector(switchChange:) forControlEvents:UIControlEventTouchUpInside];
+    [self.cell.exchangeSwitch addTarget:self action:@selector(switchChange:) forControlEvents:UIControlEventValueChanged];
+    self.cell.areaLabel.text = self.areasArr[indexPath.row];
+//    self.cell.detialLabel.text = @" ";
     //cell的点击颜色
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 2, self.view.bounds.size.width, 40)];
     view.backgroundColor = [UIColor clearColor];
-    cell.selectedBackgroundView = view;
+    self.cell.selectedBackgroundView = view;
     NSNumber *num = self.opens[indexPath.row];
-    cell.exchanggeBtn.selected = !cell.exchanggeBtn.selected;
+    self.cell.exchanggeBtn.selected = !self.cell.exchanggeBtn.selected;
     if([num intValue] == 1)
     {
-        cell.exchangeSwitch.on = YES;
-        cell.exchanggeBtn.selected = YES;
-        [cell.exchanggeBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateNormal];
+       self.cell.exchangeSwitch.on = YES;
+        self.cell.exchanggeBtn.selected = YES;
+        [self.cell.exchanggeBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateNormal];
         
     }else {
-        cell.exchangeSwitch.on = NO;
-        cell.exchanggeBtn.selected = NO;
-         [cell.exchanggeBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+        self.cell.exchangeSwitch.on = NO;
+        self.cell.exchanggeBtn.selected = NO;
+         [self.cell.exchanggeBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
 //        cell.hidden = YES;
     }
-    return cell;
+    return self.cell;
     
 }
 -(void)switchChange:(UIButton *)sender
