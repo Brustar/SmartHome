@@ -17,7 +17,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *userTableView;
 @property (nonatomic,strong) NSMutableArray *userArr;
 @property (nonatomic,strong) NSMutableArray *managerType;
-@property (weak, nonatomic) IBOutlet UITableView *areaTableView;//权限设备的TableView
 @property (nonatomic,strong) NSMutableArray *userIDArr;
 @property (nonatomic,strong) NSNumber  *usrID;
 //eareTabelView属性
@@ -97,8 +96,6 @@
     [self setNaviBarTitle:@"权限控制"];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.userTableView.tableFooterView = [UIView new];
-    self.areaTableView.tableHeaderView = self.headView;
-    self.areaTableView.hidden = YES;
     NSString *url = [NSString stringWithFormat:@"%@Cloud/user_listall.aspx",[IOManager httpAddr]];
     DeviceInfo *device = [DeviceInfo defaultManager];
     if ([device.db isEqualToString:SMART_DB]) {
@@ -161,34 +158,6 @@
             [MBProgressHUD showError:responseObject[@"Msg"]];
         }
 
-    }else if(tag == 2)
-    {
-        if([responseObject[@"result"] intValue] == 0)
-        {
-            [self.areasArr removeAllObjects];
-            [self.opens removeAllObjects];
-            NSArray *arr =responseObject[@"host_user_list"];
-            for(NSDictionary *messageList in arr)
-            {
-                NSNumber *userID = messageList[@"userid"];
-                if(self.usrID == userID)
-                {
-                    NSArray *inforList = messageList[@"room_user_list"];
-                    for(NSDictionary *info  in inforList)
-                    {
-                        [self.areasArr addObject:info[@"room_name"]];
-                        [self.opens addObject:info[@"isopen"]];
-                        [self.recoredIDs addObject:info[@"room_id"]];
-                    }
-                   
-                }
-            }
-           [self.areaTableView reloadData];
-
-        }else{
-            [MBProgressHUD showError:responseObject[@"Msg"]];
-        }
-
     }else if(tag == 3)
     {
         if([responseObject[@"result"] intValue] == 0)
@@ -198,46 +167,6 @@
             [MBProgressHUD showError:responseObject[@"Msg"]];
 
         }
-    }else if(tag == 4)
-    {
-        if([responseObject[@"result"] intValue] == 0)
-        {
-            [MBProgressHUD showSuccess:@"成功转化为普通身份"];
-            self.cell.detialLabel.text = @"普通用户";
-            if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]]) { //如果是自己
-                [UD setObject:@(2) forKey:@"UserType"];
-                [UD synchronize];
-            }
-            
-          
-        }else{
-            [MBProgressHUD showError:responseObject[@"Msg"]];
-            
-        }
-
-    }else if(tag == 5)
-    {
-        if([responseObject[@"Result"] intValue] == 0)
-        {
-            [MBProgressHUD showSuccess:@"成功转化为主人身份"];
-            self.cell.detialLabel.text = @"主人";
-            if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]]) { //如果是自己
-                [UD setObject:@(1) forKey:@"UserType"];
-                [UD synchronize];
-            }
-            
-        }else{
-            [MBProgressHUD showError:responseObject[@"Msg"]];
-        }
-    }else if(tag == 6 || tag == 7)
-    {
-        if([responseObject[@"Result"] intValue] == 0)
-        {
-            [MBProgressHUD showSuccess:@"设置权限成功"];
-        }else{
-            [MBProgressHUD showError:responseObject[@"Msg"]];
-        }
-
     }
     
 }
@@ -265,16 +194,11 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    if(tableView == self.areaTableView)
-    {
-        return self.areasArr.count;
-    }
     return self.userArr.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(tableView == self.userTableView){
         AreaSettingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"accessSettingCell" forIndexPath:indexPath];
         cell.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
         cell.areaLabel.text = self.userArr[indexPath.row];
@@ -290,31 +214,13 @@
         }else {
             cell.detialLabel.text = @"普通用户";
         }
-        return cell;
-
-
-    }
-    AreaSettingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"areaSettingCell" forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
-    cell.exchangeSwitch.tag = [self.recoredIDs[indexPath.row] integerValue];
-    [cell.exchangeSwitch addTarget:self action:@selector(switchChange:) forControlEvents:UIControlEventValueChanged];
-    cell.areaLabel.text = self.areasArr[indexPath.row];
-    cell.changeBtn.userInteractionEnabled = NO;
-    NSNumber *num = self.opens[indexPath.row];
-    if([num intValue] == 1)
-    {
-        cell.exchangeSwitch.on = YES;
-    }else {
-        cell.exchangeSwitch.on = NO;
-    }
-    return cell;
+    
+     return cell;
     
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if(tableView == self.userTableView)
-    {
         self.usrID = self.userIDArr[indexPath.row];
 //         NSString *url = [NSString stringWithFormat:@"%@Cloud/room_authority.aspx",[IOManager httpAddr]];
 //        self.recoredIDs = nil;
@@ -326,11 +232,11 @@
         
         if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]] && [[UD objectForKey:@"UserType"] integerValue] == 2) {
             [MBProgressHUD showError:@"你是普通用户，无权限操作"];
-            self.areaTableView.hidden = YES;
+           
             return;
             
         }else if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]] && [[UD objectForKey:@"UserType"] integerValue] == 1) {
-            self.areaTableView.hidden = YES;
+            
             return;
         }
         
@@ -345,21 +251,9 @@
                  AreaSubVC.identityType = self.identityType;
                 AreaSubVC.detailTextName = cell.detialLabel.text;
 
-    }
     
 }
--(void)switchChange:(UISwitch *)sender
-{
-    UISwitch *exchangeSwitch = sender;
 
-    NSInteger recoredID = exchangeSwitch.tag;
-    if(sender.isOn)
-    {
-        [self settingAccessIsOpen:[NSNumber numberWithInt:1] tag:6 withRecoredID:recoredID];
-    }else{
-        [self settingAccessIsOpen:[NSNumber numberWithInt:2] tag:7 withRecoredID:recoredID];
-    }
-}
 //设置用户权限请求
 -(void)settingAccessIsOpen:(NSNumber *)openNum tag:(int)tag withRecoredID:(NSInteger)recordID
 {
@@ -373,11 +267,7 @@
     
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(tableView == self.userTableView)
-    {
-        return 50;
-    }
-    return 44;
+    return 50;
 }
 -(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -387,16 +277,17 @@
     
     if(tableView == self.userTableView)
     {
-        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-        if([cell.detailTextLabel.text isEqualToString:@"主人"]) {
-            if ([cell.textLabel.text isEqualToString:[UD objectForKey:@"UserName"]]) {
+//        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        AreaSettingCell * cell = (AreaSettingCell *)[tableView cellForRowAtIndexPath:indexPath];
+        if([cell.detialLabel.text isEqualToString:@"主人"]) {
+            if ([cell.areaLabel.text isEqualToString:[UD objectForKey:@"UserName"]]) {
                 return NO;
             }else {
                 return YES;
             }
             
-        }else if ([cell.detailTextLabel.text isEqualToString:@"普通用户"]) {
-            if ([cell.textLabel.text isEqualToString:[UD objectForKey:@"UserName"]]) {
+        }else if ([cell.detialLabel.text isEqualToString:@"普通用户"]) {
+            if ([cell.areaLabel.text isEqualToString:[UD objectForKey:@"UserName"]]) {
                 return NO;
             }else {
                 return YES;
@@ -466,45 +357,16 @@
     }
 }
 
-//点击转换身份按钮
-- (IBAction)changeIdentityType:(UIButton *)sender {
-    
-    if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]] && [[UD objectForKey:@"UserType"] integerValue] == 2) {
-        [MBProgressHUD showError:@"你是普通用户，无权限操作"];
-        //return;
-    }
-    
-    NSString *str = sender.titleLabel.text;
-    NSString *type = [str substringFromIndex:3];
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"确定转化为%@",type]message:nil preferredStyle:UIAlertControllerStyleAlert];
-    [self presentViewController: alertVC animated:YES completion:nil];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        [alertVC dismissViewControllerAnimated:YES completion:nil];
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        NSLog(@"点击了删除");
     }];
-    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //执行转化身份操作
-        if([str containsString:@"普通身份"])
-        {
-            [self deleteOrChangeManagerType:2  userID:_usrID withTag:4 usertype:[NSNumber numberWithInt:2]];//转化为普通用户
-            sender.titleLabel.text = @"转化为主人身份";
-        }else{
-            [self deleteOrChangeManagerType:2  userID:_usrID withTag:5 usertype:[NSNumber numberWithInt:1]];//转化为主人
-            sender.titleLabel.text= @"转化为普通身份";
-        }
-        [alertVC dismissViewControllerAnimated:YES completion:nil];
+    UITableViewRowAction *editAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"编辑" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+       NSLog(@"点击了删除000000");
     }];
-    [alertVC addAction:cancelAction];
-    [alertVC addAction:sureAction];
-    
+    editAction.backgroundColor = [UIColor grayColor];
+    return @[deleteAction, editAction];
 }
-
-//- (IBAction)clickRetunBtn:(id)sender {
-//    //[self.view removeFromSuperview];
-//    [self.navigationController popViewControllerAnimated:NO];
-//}
-
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

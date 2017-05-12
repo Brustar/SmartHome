@@ -12,6 +12,8 @@
 #import "IphoneNewAddSceneTimerVC.h"
 #import "SQLManager.h"
 #import "PhotoGraphViewConteoller.h"
+#import "HttpManager.h"
+#import "MBProgressHUD+NJ.h"
 
 @interface IphoneSaveNewSceneController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,PhotoGraphViewConteollerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *sceneName;//输入场景名的输入框
@@ -21,6 +23,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *PushBtn;//定时跳转按钮
 @property (weak, nonatomic) IBOutlet UILabel *SceneTimingLabel;//显示场景的定时的具体时间段
 @property (weak, nonatomic) IBOutlet UIButton *startSceneBtn;//是否立即启用场景
+@property(nonatomic, assign) NSInteger isActive;
+@property(nonatomic, strong) NSString *startTime;
+@property(nonatomic, strong) NSString *endTime;
+@property(nonatomic, strong) NSString *repeatition;
+@property(nonatomic, strong) NSMutableString *startValue;
+@property(nonatomic, strong) NSMutableString *repeatString;
 
 @end
 
@@ -29,9 +37,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.sceneName setValue:[UIColor lightGrayColor] forKeyPath:@"_placeholderLabel.textColor"];
+       [self.sceneName setValue:[UIColor lightGrayColor] forKeyPath:@"_placeholderLabel.textColor"];
        [self reachNotification];
-    [self setupNaviBar];
+       [self setupNaviBar];
+       [self creatUI];
+}
+-(void)creatUI
+{
+    _isActive = 1;
+    _startValue = [NSMutableString string];
+    [_startValue appendString:@"01000000"];//默认开
+
 }
 - (void)setupNaviBar {
     [self setNaviBarTitle:@"保存场景"]; //设置标题
@@ -49,6 +65,9 @@
     NSDictionary *dic = notification.userInfo;
  
     self.SceneTimingLabel.text = [NSString stringWithFormat:@"%@-%@,%@",dic[@"startDay"],dic[@"endDay"],dic[@"repeat"]];
+    _startTime = dic[@"startDay"];
+    _endTime = dic[@"endDay"];
+    _repeatString = dic[@"repeat"];
 }
 -(void)rightBtnClicked:(UIButton *)bbi
 {
@@ -57,6 +76,25 @@
         return;
     }
     
+    
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
+    NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
+    
+    if (auothorToken){
+        NSDictionary *dict = @{@"token":auothorToken,
+                               @"optype":@(2),
+                               @"isactive":@(_isActive),
+                               @"starttime":_startTime,
+                               @"endtime":_endTime,
+                               @"weekvalue":_repeatString,
+                               @"scheduleid":@(_sceneID),
+                               @"startvalue":_startValue
+                               };
+        HttpManager *http = [HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = 1;
+        [http sendPost:url param:dict];
+    }
     NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
@@ -69,7 +107,20 @@
     [[SceneManager defaultManager] addScene:scene withName:self.sceneName.text withImage:self.selectSceneImg];
     [self.navigationController popViewControllerAnimated:YES];
 }
-
+- (void)httpHandler:(id)responseObject tag:(int)tag
+{
+    if(tag == 1) {
+        
+        if ([responseObject[@"result"] intValue] == 0) {
+            [MBProgressHUD showSuccess:@"添加成功"];
+            [self.navigationController popViewControllerAnimated:YES];
+            //[self.navigationController popToViewController:vc animated:YES];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }else {
+            [MBProgressHUD showSuccess:@"添加失败"];
+        }
+    }
+}
 - (IBAction)sceneImageBtn:(id)sender {
     UIAlertController * alerController = [UIAlertController alertControllerWithTitle:@"温馨提示选择场景图片" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
     
@@ -101,8 +152,9 @@
     [alerController addAction:[UIAlertAction actionWithTitle:@"从预设图片选" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         UIStoryboard *MainStoryBoard  = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
-        PhotoGraphViewConteoller *tvIconVC = [MainStoryBoard instantiateViewControllerWithIdentifier:@"PhotoGraphViewConteoller"];
-        [self.navigationController pushViewController:tvIconVC animated:YES];
+        PhotoGraphViewConteoller *iconVC = [MainStoryBoard instantiateViewControllerWithIdentifier:@"PhotoGraphViewConteoller"];
+            iconVC.delegate = self;
+        [self.navigationController pushViewController:iconVC animated:YES];
         
     }]];
     [alerController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
@@ -129,10 +181,13 @@
 }
 -(void)PhotoIconController:(PhotoGraphViewConteoller *)iconVC withImgName:(NSString *)imgName
 {
-    self.chooseImgeName = imgName;
-    [self.sceneImageBtn setBackgroundImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
+//    self.chooseImgeName = imgName;
+    self.selectSceneImg = [UIImage imageNamed:imgName];
+    [self.sceneImageBtn setBackgroundImage:self.selectSceneImg forState:UIControlStateNormal];
 }
+
 - (IBAction)clickCancle:(id)sender {
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 //跳转到定时界面
@@ -144,18 +199,16 @@
     [self.navigationController pushViewController:iphoneSaveNewScene animated:YES];
     
 }
+//启用定时
 - (IBAction)startSceneBtn:(id)sender {
     
     self.startSceneBtn.selected = !self.startSceneBtn.selected;
-    if (self.startSceneBtn.selected) {
-        [self.startSceneBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
-        [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];
-        [SQLManager updateSceneStatus:0 sceneID:self.sceneID];//更新数据库
+    if (self.startSceneBtn) {
+         [self.startSceneBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
     }else{
-        [self.startSceneBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateNormal];
-        [[SceneManager defaultManager] startScene:self.sceneID];
-        [SQLManager updateSceneStatus:1 sceneID:self.sceneID];//更新数据库
+        [self.startSceneBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
     }
+    _isActive = self.startSceneBtn.selected;
 }
 
 - (void)didReceiveMemoryWarning {
