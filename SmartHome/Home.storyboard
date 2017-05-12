@@ -458,7 +458,7 @@
                                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="switchPower:" destination="l4i-zy-7Du" eventType="touchUpInside" id="wEb-a1-NkI"/>
+                                                    <action selector="switchPower:" destination="l4i-zy-7Du" eventType="touchUpInside" id="Vci-cw-AtN"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gn6-OL-JNN">

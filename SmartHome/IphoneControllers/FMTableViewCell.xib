@@ -101,7 +101,7 @@
                             <constraint firstAttribute="height" constant="35" id="I4h-fm-wbj"/>
                             <constraint firstAttribute="width" constant="55" id="eJv-7S-SNe"/>
                         </constraints>
-                        <state key="normal" backgroundImage="dvd_btn_switch_on"/>
+                        <state key="normal" backgroundImage="dvd_btn_switch_off"/>
                     </button>
                 </subviews>
                 <constraints>
@@ -145,13 +145,14 @@
                 <outlet property="FMChannelSlider" destination="6Ma-tU-XJy" id="NRy-2J-ts5"/>
                 <outlet property="FMNameLabel" destination="oHP-La-v8f" id="Pkl-zs-x5Y"/>
                 <outlet property="FMSlider" destination="3Pw-CA-AFl" id="6PH-ne-6IE"/>
+                <outlet property="FMSwitchBtn" destination="V1H-l4-DmA" id="YAd-3F-Abt"/>
             </connections>
             <point key="canvasLocation" x="-44.5" y="11"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="bd_icon_voi_high" width="11" height="9"/>
-        <image name="dvd_btn_switch_on" width="36" height="23"/>
+        <image name="dvd_btn_switch_off" width="34" height="23"/>
         <image name="dvd_frm_choice__normal" width="336" height="47"/>
         <image name="icon_add_normal" width="15" height="15"/>
         <image name="ktv_btn_ajt" width="269" height="20"/>

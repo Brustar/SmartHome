@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UISlider *FMChannelSlider;//调节频道
 @property (weak, nonatomic) IBOutlet UILabel *FMChannelLabel;
 @property (weak, nonatomic) IBOutlet UIButton *AddFmBtn;
+@property (weak, nonatomic) IBOutlet UIButton *FMSwitchBtn;
 @property(nonatomic, strong)NSString * deviceid;
 @property (nonatomic,weak) NSString *sceneid;
 //房间id

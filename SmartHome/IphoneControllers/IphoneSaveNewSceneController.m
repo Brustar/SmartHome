@@ -11,8 +11,9 @@
 #import "SceneManager.h"
 #import "IphoneNewAddSceneTimerVC.h"
 #import "SQLManager.h"
+#import "PhotoGraphViewConteoller.h"
 
-@interface IphoneSaveNewSceneController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface IphoneSaveNewSceneController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,PhotoGraphViewConteollerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *sceneName;//输入场景名的输入框
 @property (weak, nonatomic) IBOutlet UIButton *sceneImageBtn;//选择场景图片的button
 @property (nonatomic,strong) UIImage *selectSceneImg;
@@ -97,6 +98,13 @@
         [self presentViewController:picker animated:YES completion:nil];
         
     }]];
+    [alerController addAction:[UIAlertAction actionWithTitle:@"从预设图片选" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        UIStoryboard *MainStoryBoard  = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
+        PhotoGraphViewConteoller *tvIconVC = [MainStoryBoard instantiateViewControllerWithIdentifier:@"PhotoGraphViewConteoller"];
+        [self.navigationController pushViewController:tvIconVC animated:YES];
+        
+    }]];
     [alerController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
     }]];
@@ -119,7 +127,11 @@
     [DeviceInfo defaultManager].isPhotoLibrary = NO;
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
-
+-(void)PhotoIconController:(PhotoGraphViewConteoller *)iconVC withImgName:(NSString *)imgName
+{
+    self.chooseImgeName = imgName;
+    [self.sceneImageBtn setBackgroundImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
+}
 - (IBAction)clickCancle:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }

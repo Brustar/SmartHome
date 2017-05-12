@@ -418,7 +418,7 @@
 //停止幕布
 -(NSData *) stopScreenByDeviceID:(NSString *)deviceID
 {
-    return [self action:0x32 deviceID:deviceID];
+    return [self action:0x45 deviceID:deviceID];
 }
 
 

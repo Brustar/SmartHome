@@ -444,7 +444,7 @@
                                     <action selector="controlCmd:" destination="ZhE-q2-gFO" eventType="touchUpInside" id="CyS-LQ-Gri"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HDM-8B-0Y4">
+                            <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HDM-8B-0Y4">
                                 <rect key="frame" x="191" y="505" width="103" height="47"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="CH  -" backgroundImage="control_button"/>

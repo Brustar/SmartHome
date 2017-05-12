@@ -138,7 +138,7 @@
             [MBProgressHUD showError:responseObject[@"Msg"]];
         }
         
-         [self.tableView reloadData];
+//         [self.tableView reloadData];
     }
     
 }

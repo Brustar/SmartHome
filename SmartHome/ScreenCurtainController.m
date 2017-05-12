@@ -90,7 +90,7 @@
     if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 幕布",roomName]];
-    self.deviceid =[SQLManager singleDeviceWithCatalogID:amplifier byRoom:self.roomID];
+    self.deviceid =[SQLManager singleDeviceWithCatalogID:screen byRoom:self.roomID];
     NSArray *menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
     [self initMenuContainer:self.menuContainer andArray:menus andID:self.deviceid];
     [self naviToDevice];

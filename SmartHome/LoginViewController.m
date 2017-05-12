@@ -589,6 +589,8 @@ NSArray *array = [NSArray arrayWithObjects:
         [TitleArray writeToFile:filePath atomically:YES];
         [DetailArray writeToFile:filePath1 atomically:YES];
     }
+    
+    
 
 }
 -(void) writeChatListConfigDataToSQL:(NSArray *)users

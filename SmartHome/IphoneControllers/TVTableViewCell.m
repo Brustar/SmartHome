@@ -28,6 +28,7 @@
 }
 - (IBAction)save:(id)sender {
     if (sender == self.TVSwitchBtn) {
+        
         self.TVSwitchBtn.selected = !self.TVSwitchBtn.selected;
         if (self.TVSwitchBtn.selected) {
             [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
@@ -35,6 +36,10 @@
             
             [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
         }
+        NSData *data=nil;
+        DeviceInfo *device=[DeviceInfo defaultManager];
+        data=[device toogle:self.TVSwitchBtn.selected deviceID:self.deviceid];
+        
     }else if (sender == self.AddTvDeviceBtn){
         self.AddTvDeviceBtn.selected = !self.AddTvDeviceBtn.selected;
         if (self.AddTvDeviceBtn.selected) {
