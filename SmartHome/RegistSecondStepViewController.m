@@ -213,7 +213,7 @@
     }
     
     NSDictionary *dict = @{
-                           @"hostid":self.masterID,
+                           @"hostid":@([self.masterID integerValue]),
                            @"username":self.nameTextField.text,
                            @"password":[self.pwdTextField.text md5],
                            @"mobile":self.phoneNum,

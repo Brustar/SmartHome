@@ -97,8 +97,14 @@
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
         UIViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"registSecondStepVC"];
         NSString *phoneNumber = [NSString stringWithFormat:@"%@", self.phoneNumTextField.text];
-        [vc setValue:phoneNumber forKey:@"phoneNum"];
-        [vc setValue:@(0) forKey:@"masterID"];
+        
+        if (phoneNumber) {
+            [vc setValue:phoneNumber forKey:@"phoneNum"];
+        }
+        
+        [vc setValue:@"0" forKey:@"masterID"];
+
+        
         
         [self.navigationController pushViewController:vc animated:YES];
     }else{

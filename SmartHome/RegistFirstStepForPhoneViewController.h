@@ -21,6 +21,7 @@
 @property(nonatomic, strong) NSArray *countryCodeArray;
 @property (nonatomic,strong) NSString *suerTypeStr;
 @property (nonatomic, strong) NSString *countryCode;//国家码
+@property (nonatomic, strong) NSString *masterStr;//主机码
 
 
 - (IBAction)pullButtonClicked:(id)sender;

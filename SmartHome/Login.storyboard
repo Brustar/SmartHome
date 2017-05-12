@@ -1018,6 +1018,7 @@
                     </view>
                     <connections>
                         <outlet property="hostTableView" destination="YRl-pe-vR9" id="tsQ-RM-8DZ"/>
+                        <outlet property="okBtn" destination="8oz-Rz-pk9" id="YS9-Bz-MN0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bws-YG-InV" userLabel="First Responder" sceneMemberID="firstResponder"/>

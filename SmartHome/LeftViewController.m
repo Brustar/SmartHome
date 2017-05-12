@@ -188,13 +188,28 @@
 - (UIView *)setupTableFooter {
     UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 100)];
     footer.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
+    
+    //设置
     UIButton *settingBtn = [[UIButton alloc] initWithFrame:CGRectMake(40, 80, 50, 20)];
     [settingBtn setTitle:@"设置" forState:UIControlStateNormal];
     [settingBtn setImage:[UIImage imageNamed:@"my_setting"] forState:UIControlStateNormal];
     settingBtn.titleLabel.font = [UIFont systemFontOfSize:16.0f];
     [settingBtn addTarget:self action:@selector(settingBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [footer addSubview:settingBtn];
+    
+    //皮肤
+    UIButton *skinBtn = [[UIButton alloc] initWithFrame:CGRectMake(180, 80, 50, 20)];
+    [skinBtn setTitle:@"皮肤" forState:UIControlStateNormal];
+    [skinBtn setImage:[UIImage imageNamed:@"skin"] forState:UIControlStateNormal];
+    skinBtn.titleLabel.font = [UIFont systemFontOfSize:16.0f];
+    [skinBtn addTarget:self action:@selector(skinBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [footer addSubview:skinBtn];
+    
     return footer;
+}
+
+- (void)skinBtnClicked:(UIButton *)btn {
+    [MBProgressHUD showError:@"待开发"];
 }
 
 - (void)settingBtnClicked:(UIButton *)btn {

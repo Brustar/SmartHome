@@ -27,7 +27,7 @@
 @property (nonatomic, strong) NSString *phoneNum;//手机号码
 
 @property (nonatomic,assign) int cType;
-@property (nonatomic,strong) NSNumber  *masterID;
+@property (nonatomic,strong) NSString  *masterID;
 @property (nonatomic,strong) NSString *userType;
 
 @property (nonatomic,strong) dispatch_source_t _timer;
