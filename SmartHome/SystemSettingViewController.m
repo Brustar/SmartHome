@@ -152,20 +152,21 @@
     cell.title.text = self.habits[indexPath.row];
     cell.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
     NSNumber *openNum = self.opens[indexPath.row];
+    cell.sysyTemSwitchBtn.selected = !cell.sysyTemSwitchBtn.selected;
     if([openNum intValue] == 1)
     {
         cell.turnSwitch.on = YES;
+        cell.sysyTemSwitchBtn.selected = YES;
         [cell.sysyTemSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateNormal];
     }else{
         cell.turnSwitch.on = NO;
+        cell.sysyTemSwitchBtn.selected = NO;
         [cell.sysyTemSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
     }
     cell.sysyTemSwitchBtn.tag = [self.recordIDs[indexPath.row] integerValue];
     cell.turnSwitch.tag = [self.recordIDs[indexPath.row] integerValue];
     [cell.turnSwitch addTarget:self action:@selector(changSwithchValue:) forControlEvents:UIControlEventValueChanged];
     [cell.sysyTemSwitchBtn addTarget:self action:@selector(changSwithchValue:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
     return cell;
     
 }
