@@ -280,7 +280,7 @@
     
     DetailMSGViewController * MSGVC = [oneStoryBoard instantiateViewControllerWithIdentifier:@"DetailMSGViewController"];
     _itemid = self.itemIdArrs[indexPath.row];
-    MSGVC.itemID = _itemid;
+    MSGVC.itemID = [_itemid intValue];
       DeviceInfo *device = [DeviceInfo defaultManager];
     if (![device.db isEqualToString:SMART_DB]){
         MSGVC.actcode = self.actcodeArrs[indexPath.row];

@@ -10,72 +10,39 @@
 #import "MsgCell.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
+#import "ECMessage.h"
 
 @interface DetailMSGViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIView *FootView;
+
 @property (nonatomic,strong) NSMutableArray * msgArr;
-@property (nonatomic,strong) NSMutableArray * timesArr;
-@property (nonatomic,strong) NSMutableArray * recordID;
-@property (nonatomic ,strong) NSMutableArray * isreadArr;
+
 @property (nonatomic,assign) BOOL isEditing;
 @property (nonatomic,assign) NSInteger notify_id;
 @property (nonatomic,assign) NSInteger unreadcount;
 @property (nonatomic,strong) UIImageView * image;
 @property (nonatomic,strong) UILabel * label;
 @property (nonatomic,strong) UIButton * naviRightBtn;
-//@property (nonatomic,assign) NSInteger seleCellID;
+
 @property (nonatomic,assign) int selectId;
 
 @end
 
 @implementation DetailMSGViewController
--(NSMutableArray *)msgArr
-{
-    if (!_msgArr) {
-        _msgArr = [NSMutableArray array];
-    }
-    
-    return _msgArr;
-}
--(NSMutableArray *)timesArr
-{
-    if (!_timesArr) {
-        _timesArr = [NSMutableArray array];
-    }
 
-    return _timesArr;
-}
--(NSMutableArray *)recordID
-{
-    if (!_recordID) {
-        _recordID = [NSMutableArray array];
-    }
-    
-    return _recordID;
-}
--(NSMutableArray *)isreadArr
-{
-    if (!_isreadArr) {
-        _isreadArr = [NSMutableArray array];
-    }
-
-    return _isreadArr;
-}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.type = @"1";
-    self.tableView.tableFooterView = self.FootView;
-    
-     self.isEditing = YES;
+    _msgArr = [NSMutableArray array];
+    self.isEditing = YES;
     if (self.itemID) {
         
         DeviceInfo *device = [DeviceInfo defaultManager];
         if ([device.db isEqualToString:SMART_DB]) {
              [self setupNaviBar];
-            [self sendRequestForDetailMsgWithItemId:[_itemID intValue]];
+             [self sendRequestForDetailMsgWithItemId:_itemID];
         }else {
             NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"msgList" ofType:@"plist"]];
             NSArray *arr = plistDict[@"notify_list"];
@@ -85,10 +52,12 @@
                     if ([dicDetail isKindOfClass:[NSDictionary class]] && dicDetail[@"description"]) {
                         
                         if ([dicDetail[@"notify_id"] integerValue] == self.actcode.integerValue) {
-                            [self.msgArr addObject:dicDetail[@"description"]];
-                            [self.timesArr addObject:dicDetail[@"addtime"]];
-                            [self.recordID addObject:dicDetail[@"notify_id"]];
-                            [self.isreadArr addObject:dicDetail[@"isread"]];
+                            ECMessage *msg = [ECMessage new];
+                            msg.descr = dicDetail[@"description"];
+                            msg.atime = dicDetail[@"addtime"];
+                            msg.MID = [dicDetail[@"notify_id"] intValue];
+                            msg.readed = [dicDetail[@"isread"] intValue];
+                            [self.msgArr addObject:msg];
                         }
                     }
                 }
@@ -108,14 +77,21 @@
     _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"编辑" target:self action:@selector(rightBtnClicked:)];
     [self setNaviBarRightBtn:_naviRightBtn];
 }
+
 -(void)rightBtnClicked:(UIButton *)btn
 {
-    self.tableView.allowsMultipleSelectionDuringEditing = YES;
-    self.tableView.editing = YES;
-    self.FootView.hidden = NO;
-    self.isEditing = NO;
-    [self.tableView reloadData];
+    if (btn.selected) {
+        btn.selected = NO;
+        [_naviRightBtn setTitle:@"编辑" forState:UIControlStateNormal];
+        [self clickDeleteBtn:nil];
+    }else{
+        self.tableView.allowsMultipleSelectionDuringEditing = YES;
+        self.tableView.editing = YES;
+        self.isEditing = NO;
+        [self.tableView reloadData];
+    }
 }
+
 -(void)createImage
 {
     self.image = [[UIImageView alloc] init];
@@ -163,6 +139,7 @@
         
     }
 }
+
 -(void)httpHandler:(id)responseObject tag:(int)tag
 {
     if(tag == 1)
@@ -176,14 +153,16 @@
                 for(NSDictionary *dicDetail in dic)
                 {
                     if ([dicDetail isKindOfClass:[NSDictionary class]] && dicDetail[@"description"]) {
-                            [self.msgArr addObject:dicDetail[@"description"]];
-                            [self.timesArr addObject:dicDetail[@"addtime"]];
-                            [self.recordID addObject:dicDetail[@"notify_id"]];
-                            [self.isreadArr addObject:dicDetail[@"isread"]];
+                        ECMessage *msg = [ECMessage new];
+                        msg.descr = [dicDetail[@"description"] description];
+                        msg.atime = dicDetail[@"addtime"];
+                        msg.MID = [dicDetail[@"notify_id"] intValue];
+                        msg.readed = [dicDetail[@"isread"] intValue];
+                        [self.msgArr addObject:msg];
                     }
                 }
             }
-            [self.tableView reloadData];
+            
         }else{
             [MBProgressHUD showError:responseObject[@"Msg"]];
         }
@@ -192,25 +171,22 @@
         if([responseObject[@"result"] intValue]==0)
         {
             [MBProgressHUD showSuccess:@"删除成功"];
-            [self sendRequestForDetailMsgWithItemId:[_itemID intValue]];
-            [self.tableView reloadData];
+            //[self sendRequestForDetailMsgWithItemId:[_itemID intValue]];
+            //[self.tableView reloadData];
 
         }else {
             [MBProgressHUD showError:responseObject[@"Msg"]];
         }
     }else if (tag == 3){
         if ([responseObject[@"result"] intValue] == 0) {
-            self.isreadArr[self.selectId] = @"1";
-            [self sendRequestForDetailMsgWithItemId:[_itemID intValue]];
-
-            [self.tableView reloadData];
-            
+            //self.isreadArr[self.selectId] = @"1";
+            [self sendRequestForDetailMsgWithItemId:_itemID];
         }else {
             
             [MBProgressHUD showError:responseObject[@"Msg"]];
         }
     }
-    
+    [self.tableView reloadData];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -229,12 +205,13 @@
 {
     static NSString *CellIdentifier = @"msgCell";
     MsgCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    if (self.timesArr.count >= indexPath.row) {
-         cell.timeLable.text = self.timesArr[indexPath.row];
-        self.itemID = self.recordID[indexPath.row];
-        //        cell.tag = [self.msgArr[indexPath.row] integerValue];
-        self.unreadcount = [self.isreadArr[indexPath.row] integerValue];
-        cell.title.text = self.msgArr[indexPath.row];
+    if (self.msgArr.count >= indexPath.row) {
+        ECMessage *msg = self.msgArr[indexPath.row];
+        cell.timeLable.text = msg.atime;
+        self.itemID = msg.MID;
+        
+        self.unreadcount = msg.readed;
+        cell.title.text = msg.descr;
         cell.title.adjustsFontSizeToFitWidth = YES;
     }
     if (self.unreadcount == 0) {//未读消息
@@ -255,51 +232,50 @@
     cell.selectedBackgroundView = view;
     
     return cell;
-
 }
+
 -(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.isEditing == NO) {
-        return YES;
-    }
-    return NO;
+    return !self.isEditing;
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
     self.selectId = (int)indexPath.row;
-    
-    if (self.isEditing==NO) {
-        return;
-    }else if (self.isEditing == YES){
+    if (self.isEditing){
+        
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-        self.notify_id = [self.recordID[indexPath.row] integerValue];
-        if ([self.isreadArr[indexPath.row] integerValue]==0) {
-             [self sendRequestForMsgWithItemId:self.notify_id];
+        ECMessage *msg = self.msgArr[indexPath.row];
+        self.notify_id = msg.MID;
+        if (msg.readed==0) {
+            [self sendRequestForMsgWithItemId:self.notify_id];
         }
-       
+    }
+    
+    NSArray *selectedArray = [tableView indexPathsForSelectedRows];
+    if ([selectedArray count]>0) {
+        _naviRightBtn.selected = YES;
+        [_naviRightBtn setTitle:@"删除" forState:UIControlStateNormal];
     }
 }
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSArray *selectedArray = [tableView indexPathsForSelectedRows];
+    if ([selectedArray count] == 0) {
+        _naviRightBtn.selected = NO;
+        [_naviRightBtn setTitle:@"编辑" forState:UIControlStateNormal];
+    }
+}
+
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return UITableViewCellEditingStyleDelete;
 }
-- (IBAction)clickCancelBtn:(id)sender {
-    // 允许多个编辑
-    self.tableView.allowsMultipleSelectionDuringEditing = NO;
-    // 允许编辑
-    self.tableView.editing = NO;
-    //  self.tableView.tableFooterView = nil;
-    self.FootView.hidden = YES;
-    
-    [self.tableView reloadData];
-    
-}
+
 - (IBAction)clickDeleteBtn:(id)sender {
     //放置要删除的对象
     NSMutableArray *deleteArray = [NSMutableArray array];
-    NSMutableArray *deletedTime = [NSMutableArray array];
-    NSMutableArray *deletedID   = [NSMutableArray array];
     
     // 要删除的row
     NSArray *selectedArray = [self.tableView indexPathsForSelectedRows];
@@ -308,37 +284,27 @@
         if (self.msgArr[indexPath.row]) {
               [deleteArray addObject:self.msgArr[indexPath.row]];
         }
-      
-        if ([deletedTime containsObject:self.timesArr[indexPath.row]]) {
-              [deletedTime addObject:self.timesArr[indexPath.row]];
-        }
-        if (self.recordID[indexPath.row]) {
-            [deletedID addObject:self.recordID[indexPath.row]];
-        }
-        
     }
     // 先删除数据源
-    [self.msgArr removeObjectsInArray:deleteArray];
-    [self.timesArr removeObjectsInArray:deletedTime];
+    for (id obj in deleteArray) {
+        [self.msgArr removeObject:obj];
+    }
     
-    if(deletedID.count != 0)
+    if(deleteArray.count != 0)
     {
-        [self sendDeleteRequestWithArray:[deletedID copy]];
+        [self sendDeleteRequestWithArray:[deleteArray copy]];
     }else {
         [MBProgressHUD showError:@"请选择要删除的记录"];
     }
-      [self.tableView reloadData];
-    
-       [self clickCancelBtn:sender];
+    [self.tableView reloadData];
     
 }
 
 -(void)leftEdit:(UIBarButtonItem *)bbi
 {
     [self.navigationController popViewControllerAnimated:YES];
-//    [self sendRequestForMsgWithItemId:self.notify_id];
-
 }
+
 -(void)sendRequestForMsgWithItemId:(NSInteger)itemID
 {
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
@@ -351,6 +317,7 @@
         [http sendPost:url param:dic];
     }
 }
+
 -(void)sendDeleteRequestWithArray:(NSArray *)deleteArr;
 {
     NSString *url = [NSString stringWithFormat:@"%@Cloud/notify.aspx",[IOManager httpAddr]];
@@ -359,13 +326,13 @@
     
     for(int i = 0 ;i < deleteArr.count; i++)
     {
+        ECMessage *msg = deleteArr[i];
         if(i == deleteArr.count - 1)
         {
-            NSString *record = [NSString stringWithFormat:@"%@",deleteArr[i]];
+            NSString *record = [NSString stringWithFormat:@"%d",msg.MID];
             recoreds = [recoreds stringByAppendingString:record];
-            
         }else {
-            NSString *record = [NSString stringWithFormat:@"%@,",deleteArr[i]];
+            NSString *record = [NSString stringWithFormat:@"%d,",msg.MID];
             recoreds = [recoreds stringByAppendingString:record];
         }
     }
