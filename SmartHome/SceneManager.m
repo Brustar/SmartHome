@@ -401,7 +401,7 @@
     if(newScene.schedules.count > 0) //有定时
     {
         for (Schedule *schedule in newScene.schedules) {
-            if(schedule.deviceID == 0) {  //控制场景的定时
+            if(schedule.deviceID != 0) {  //控制场景的定时
                 if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID >0)
                 {
                     parameter = @{

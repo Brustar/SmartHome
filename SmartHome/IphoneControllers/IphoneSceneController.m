@@ -41,7 +41,7 @@
 
 #define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)  
 
-@interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,CYPhotoCellDelegate,UIViewControllerPreviewingDelegate,YZNavigationMenuViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,CYPhotoCellDelegate,UIViewControllerPreviewingDelegate,YZNavigationMenuViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,PhotoGraphViewConteollerDelegate>
 @property (strong, nonatomic) IBOutlet IphoneRoomView *roomView;
 //@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -368,10 +368,11 @@ static NSString * const CYPhotoId = @"photo";
 
         
     }]];
-    [alerController addAction:[UIAlertAction actionWithTitle:@"预设图库" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [alerController addAction:[UIAlertAction actionWithTitle:@"从预设图库选" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
          UIStoryboard *MainStoryBoard  = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
-        PhotoGraphViewConteoller *tvIconVC = [MainStoryBoard instantiateViewControllerWithIdentifier:@"PhotoGraphViewConteoller"];
-        [self.navigationController pushViewController:tvIconVC animated:YES];
+        PhotoGraphViewConteoller *PhotoIconVC = [MainStoryBoard instantiateViewControllerWithIdentifier:@"PhotoGraphViewConteoller"];
+           PhotoIconVC.delegate = self;
+        [self.navigationController pushViewController:PhotoIconVC animated:YES];
     }]];
     [alerController addAction:[UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
@@ -415,6 +416,24 @@ static NSString * const CYPhotoId = @"photo";
     [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
+-(void)PhotoIconController:(PhotoGraphViewConteoller *)iconVC withImgName:(NSString *)imgName
+{
+    self.selectSceneImg = [UIImage imageNamed:imgName];
+    [DeviceInfo defaultManager].isPhotoLibrary = NO;
+    [self.cell.imageView setImage:self.selectSceneImg];
+    //    [self.sceneBg setBackgroundImage:self.selectSceneImg forState:UIControlStateNormal];
+    //场景ID不变
+    self.sceneID = self.selectedSId;
+    NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
+    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+    
+    Scene *scene = [[Scene alloc] init];
+    [scene setValuesForKeysWithDictionary:plistDic];
+    [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
+//    [self.selectSceneImg setBackgroundImage:self.selectSceneImg forState:UIControlStateNormal];
+    
+}
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [DeviceInfo defaultManager].isPhotoLibrary = NO;
@@ -446,6 +465,7 @@ static NSString * const CYPhotoId = @"photo";
      }
   
 }
+
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
     return UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
 }
