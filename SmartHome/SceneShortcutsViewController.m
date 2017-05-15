@@ -92,7 +92,7 @@
         }
         
     }else {
-        NSArray *allSceneArray = [SQLManager getAllScene]; //无plist，直接读场景表
+        NSArray *allSceneArray = [SQLManager getAllSceneOrderByRoomID]; //无plist，直接读场景表
         if (allSceneArray.count >0) {
             [_nonShortcutsArray addObjectsFromArray:allSceneArray];
         }

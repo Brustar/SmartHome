@@ -15,13 +15,13 @@
 
 + (void)show:(NSString *)aUrl
 {
-    WebManager *web = [[WebManager alloc] initWithUrl:aUrl title:@"逸云科技"];
+    /*WebManager *web = [[WebManager alloc] initWithUrl:aUrl title:@"逸云科技"];
     UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:web];
     web.navigationController.navigationBarHidden = NO;
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     UIViewController *rootViewController = window.rootViewController;
     [rootViewController dismissViewControllerAnimated:NO completion:nil];
-    [rootViewController presentViewController:controller animated:YES completion:nil];
+    [rootViewController presentViewController:controller animated:YES completion:nil];*/
 }
 
 - (id)initWithHtml:(NSString *)html
@@ -29,7 +29,6 @@
     self = [super init];
     if(self) {
         self.html = html;
-        self.title=@"";
     }
     
     return self;
@@ -41,7 +40,7 @@
     if(self) {
         self.html=@"";
         self.oauthUrl = aUrl;
-        self.title = title;
+        self.naviTitle = title;
     }
     
     return self;
@@ -59,24 +58,17 @@
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
     [super loadView];
-    CGRect rect = self.view.bounds;
+    CGRect rect = CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height-44);
     self.webView = [[UIWebView alloc] initWithFrame:rect];
     self.webView.delegate = self;
+    self.webView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
     [self.view addSubview:self.webView];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    if ([self.title isEqualToString:@""] || nil == self.title)
-    {
-        [self.navigationController setNavigationBarHidden:YES];
-    }else{
-        UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self action:@selector(cancel:)];
-        self.navigationItem.leftBarButtonItem = left;
-    }
-    
+    [self setNaviBarTitle:self.naviTitle];
     [MBProgressHUD showMessage:@"加载中..."];
     
     if([self.html isEqualToString:@""]){

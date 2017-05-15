@@ -6,7 +6,8 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 #import "MBProgressHUD+NJ.h"
-@interface WebManager : UIViewController <UIWebViewDelegate, UIAlertViewDelegate>
+#import "CustomViewController.h"
+@interface WebManager : CustomViewController <UIWebViewDelegate, UIAlertViewDelegate>
 
 @property (retain, nonatomic) IBOutlet UIWebView *webView;
 @property (nonatomic, retain) NSString *oauthUrl;
@@ -14,6 +15,7 @@
 
 @property (nonatomic, retain) NSArray *platformNameArray;
 @property (nonatomic, retain) NSArray *platformGameObjectArray;
+@property (nonatomic, strong) NSString *naviTitle;
 
 - (id)initWithHtml:(NSString *)html;
 - (id)initWithUrl:(NSString *)aUrl title:(NSString *)title;

@@ -75,7 +75,8 @@
 }
 
 - (IBAction)protocolBtnClicked:(id)sender {
-    [WebManager show:@"http://115.28.151.85:8082/article.aspx?articleid=1"];
+    WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:@"/article.aspx?articleid=1"] title:@"软件许可协议"];
+    [self.navigationController pushViewController:web animated:YES];
 }
 
 #pragma mark - TableViewDelegate
