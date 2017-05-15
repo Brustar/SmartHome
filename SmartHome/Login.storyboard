@@ -999,7 +999,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Opw-Y6-OSC"/>
                                 </constraints>
-                                <state key="normal" title="确定" backgroundImage="family_done"/>
+                                <state key="normal" title="进入家庭" backgroundImage="family_done"/>
                                 <connections>
                                     <action selector="OkBtnClicked:" destination="A9o-c1-fTh" eventType="touchUpInside" id="XSo-7O-SXI"/>
                                 </connections>

@@ -74,6 +74,18 @@
     return _dataArr;
 }
 
+- (void)addNotifications {
+    [NC addObserver:self selector:@selector(netWorkDidChangedNotification:) name:@"NetWorkDidChangedNotification" object:nil];
+}
+
+- (void)netWorkDidChangedNotification:(NSNotification *)noti {
+    [_afNetworkReachabilityManager startMonitoring];//开启网络监视器；
+}
+
+- (void)removeNotifications {
+    [NC removeObserver:self];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
@@ -140,7 +152,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self addNotifications];
     if ([[UD objectForKey:@"HostID"] intValue] == 258) { //九号大院
         SocketManager *sock = [SocketManager defaultManager];
         [sock connectTcp];
@@ -275,13 +287,19 @@
         DeviceInfo *info = [DeviceInfo defaultManager];
         if(status == AFNetworkReachabilityStatusReachableViaWWAN) //手机自带网络
         {
-            if (info.connectState==outDoor) {
+            if (info.connectState == outDoor) {
                 [FirstBlockSelf setNetState:netState_outDoor_4G];
+                FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"circular"];
                 [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"Scene-selected"] forState:UIControlStateNormal];
-                NSLog(@"外出模式-4g");
+                NSLog(@"外出模式-4G");
                 
-            }
-            if (info.connectState==offLine) {
+            }else if (info.connectState == atHome){
+                [FirstBlockSelf setNetState:netState_atHome_4G];
+                FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"circular"];
+                [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"Scene-selected"] forState:UIControlStateNormal];
+                NSLog(@"在家模式-4G");
+                
+            }else if (info.connectState == offLine) {
                 [FirstBlockSelf setNetState:netState_notConnect];
                 NSLog(@"离线模式");
                FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
@@ -291,18 +309,20 @@
         }
         else if(status == AFNetworkReachabilityStatusReachableViaWiFi) //WIFI
         {
-            if (info.connectState==atHome) {
+            if (info.connectState == atHome) {
                 [FirstBlockSelf setNetState:netState_atHome_WIFI];
+                FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"circular"];
                 [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"Scene-selected"] forState:UIControlStateNormal];
-                NSLog(@"在家模式");
+                NSLog(@"在家模式-WIFI");
                 
                 
-            }else if (info.connectState==outDoor){
-                [FirstBlockSelf setNetState:netState_atHome_4G];
+            }else if (info.connectState == outDoor){
+                [FirstBlockSelf setNetState:netState_outDoor_WIFI];
+                FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"circular"];
                 [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"Scene-selected"] forState:UIControlStateNormal];
-                NSLog(@"外出模式");
+                NSLog(@"外出模式-WIFI");
                 
-            }else if (info.connectState==offLine) {
+            }else if (info.connectState == offLine) {
                 [FirstBlockSelf setNetState:netState_notConnect];
                  FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
                  [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
@@ -595,6 +615,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc {
+    [self removeNotifications];
 }
 
 #pragma mark - TCP recv delegate
