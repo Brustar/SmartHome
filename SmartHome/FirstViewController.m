@@ -358,8 +358,8 @@
 
 - (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left
 {
-    NSString *nickname = [SQLManager queryChat:message.senderUserId][0];
-    NSString *protrait = [SQLManager queryChat:message.senderUserId][1];
+    NSString *nickname = [[SQLManager queryChat:message.senderUserId] firstObject];
+    NSString *protrait = [[SQLManager queryChat:message.senderUserId] lastObject];
     int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
     NSString *tip=@"您有新消息";
     if ([message.objectName isEqualToString:RCTextMessageTypeIdentifier]) {

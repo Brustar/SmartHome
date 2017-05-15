@@ -27,6 +27,10 @@
 {
     for(Device *device in menus)
     {
+        if ([deviceid isEqualToString:@""]) {
+            [self jumpUI:device.hTypeId];
+            return;
+        }
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.contentMode = UIViewContentModeScaleAspectFit;
         
