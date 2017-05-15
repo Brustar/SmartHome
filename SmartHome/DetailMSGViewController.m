@@ -171,8 +171,7 @@
         if([responseObject[@"result"] intValue]==0)
         {
             [MBProgressHUD showSuccess:@"删除成功"];
-            //[self sendRequestForDetailMsgWithItemId:[_itemID intValue]];
-            //[self.tableView reloadData];
+            self.tableView.editing = NO;
 
         }else {
             [MBProgressHUD showError:responseObject[@"Msg"]];

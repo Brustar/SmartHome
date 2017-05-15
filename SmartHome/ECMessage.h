@@ -12,7 +12,7 @@
 
 @property(nonatomic,copy) NSString *descr;
 @property(nonatomic) int readed;
-@property(nonatomic,assign) NSString *atime;
+@property(nonatomic,copy) NSString *atime;
 @property(nonatomic) int MID;
 
 @end
