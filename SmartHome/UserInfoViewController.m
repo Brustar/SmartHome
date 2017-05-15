@@ -238,17 +238,21 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        //VIP
-        [WebManager show:[[IOManager httpAddr] stringByAppendingString:@"/ui/Vip.aspx"]];
+        //VIP会员
+        WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:@"/ui/Vip.aspx"] title:@"VIP会员"];
+        [self.navigationController pushViewController:web animated:YES];
     }else if (indexPath.section == 1) {
-        //购物车
-        [WebManager show:[[IOManager httpAddr] stringByAppendingString:@"/ui/GoodsList.aspx"]];
+        //服务商城
+        WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:@"/ui/GoodsList.aspx"] title:@"服务商城"];
+        [self.navigationController pushViewController:web animated:YES];
     }else if (indexPath.section == 2) {
         //我的订单
-        [WebManager show:[[IOManager httpAddr] stringByAppendingString:@"/ui/OrderQuery.aspx"]];
+        WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:@"/ui/OrderQuery.aspx"] title:@"我的订单"];
+        [self.navigationController pushViewController:web animated:YES];
     }else if (indexPath.section == 3) {
         //购物车
-        [WebManager show:[[IOManager httpAddr] stringByAppendingString:@"/ui/Cart.aspx"]];
+        WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:@"/ui/Cart.aspx"] title:@"购物车"];
+        [self.navigationController pushViewController:web animated:YES];
     }
 }
 

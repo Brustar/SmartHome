@@ -69,7 +69,8 @@
     NSMutableArray *deviceModels = [NSMutableArray array];
     if([db open])
     {
-        FMResultSet *resultSet = [db executeQuery:@"select * from Scenes"];
+        NSString *sceneSql = [NSString stringWithFormat:@"select * from Scenes where masterID = '%ld'", [[DeviceInfo defaultManager] masterID]];
+        FMResultSet *resultSet = [db executeQuery:sceneSql];
         
         while ([resultSet next]){
             Scene *scene = [Scene new];
@@ -85,6 +86,32 @@
     [db close];
     return [deviceModels copy];
 
+}
+
+//从数据库中获取所有场景信息(按房间排序)
++ (NSArray *)getAllSceneOrderByRoomID
+{
+    FMDatabase *db = [self connetdb];
+    NSMutableArray *deviceModels = [NSMutableArray array];
+    if([db open])
+    {
+        NSString *sceneSql = [NSString stringWithFormat:@"select * from Scenes where masterID = '%ld' order by rId", [[DeviceInfo defaultManager] masterID]];
+        FMResultSet *resultSet = [db executeQuery:sceneSql];
+        
+        while ([resultSet next]){
+            Scene *scene = [Scene new];
+            scene.sceneName = [resultSet stringForColumn:@"NAME"];
+            scene.sceneID = [resultSet intForColumn:@"ID"];
+            scene.picName = [resultSet stringForColumn:@"pic"];
+            scene.roomID =     [resultSet intForColumn:@"rId"];
+            scene.roomName = [resultSet stringForColumn:@"roomName"];
+            [deviceModels addObject:scene];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return [deviceModels copy];
+    
 }
 
 +(NSString *)deviceNameByDeviceID:(int)eId

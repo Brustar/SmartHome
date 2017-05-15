@@ -20,6 +20,7 @@
         [self setRoomName:@""];
         [self setSchedules:@[]];
         [self setDevices:@[]];
+//        [self setRoomID:0];
         
         
     }

@@ -77,24 +77,24 @@
     }
     
     
-    NSString *url = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
-    NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
-    
-    if (auothorToken){
-        NSDictionary *dict = @{@"token":auothorToken,
-                               @"optype":@(2),
-                               @"isactive":@(_isActive),
-                               @"starttime":_startTime,
-                               @"endtime":_endTime,
-                               @"weekvalue":_repeatString,
-                               @"scheduleid":@(_sceneID),
-                               @"startvalue":_startValue
-                               };
-        HttpManager *http = [HttpManager defaultManager];
-        http.delegate = self;
-        http.tag = 1;
-        [http sendPost:url param:dict];
-    }
+//    NSString *url = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
+//    NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
+//    
+//    if (auothorToken){
+//        NSDictionary *dict = @{@"token":auothorToken,
+//                               @"optype":@(2),
+//                               @"isactive":@(_isActive),
+//                               @"starttime":_startTime,
+//                               @"endtime":_endTime,
+//                               @"weekvalue":_repeatString,
+//                               @"scheduleid":@(_sceneID),
+//                               @"startvalue":_startValue
+//                               };
+//        HttpManager *http = [HttpManager defaultManager];
+//        http.delegate = self;
+//        http.tag = 1;
+//        [http sendPost:url param:dict];
+//    }
     NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
@@ -149,7 +149,7 @@
         [self presentViewController:picker animated:YES completion:nil];
         
     }]];
-    [alerController addAction:[UIAlertAction actionWithTitle:@"从预设图片选" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [alerController addAction:[UIAlertAction actionWithTitle:@"从预设图库选" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         UIStoryboard *MainStoryBoard  = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
         PhotoGraphViewConteoller *iconVC = [MainStoryBoard instantiateViewControllerWithIdentifier:@"PhotoGraphViewConteoller"];
@@ -203,7 +203,7 @@
 - (IBAction)startSceneBtn:(id)sender {
     
     self.startSceneBtn.selected = !self.startSceneBtn.selected;
-    if (self.startSceneBtn) {
+    if (self.startSceneBtn.selected) {
          [self.startSceneBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
     }else{
         [self.startSceneBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];

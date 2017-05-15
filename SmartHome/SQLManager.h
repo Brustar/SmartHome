@@ -188,4 +188,5 @@
 
 +(NSArray *)getAllRoomsInfoWithoutIsAll;
 +(NSArray *)getAllDevicesInfo:(int)roomID;
++ (NSArray *)getAllSceneOrderByRoomID;
 @end

@@ -55,7 +55,7 @@ typedef NS_ENUM(NSInteger, DeliveryType) {
         self.trueCenter = CGPointMake(width/2, height/2);
         
         // radii settings
-        self.dialRadius = 20;//改变图标的大小
+        self.dialRadius = 13;//改变图标的大小
         self.arcRadius = 50;
         self.outerRadius = MIN(width, height)/2;
         self.arcThickness = 20.0;
@@ -242,6 +242,7 @@ typedef NS_ENUM(NSInteger, DeliveryType) {
     }
 //    angle = self.circle_angle - angle;
     self.circle_angle2 = angle;
+    
     [self moveCircleToAngle:angle];
 }
 

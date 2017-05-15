@@ -184,7 +184,8 @@
 }
 
 - (IBAction)forgetPwdBtnClicked:(id)sender {
-    [WebManager show:[[IOManager httpAddr] stringByAppendingString:@"/user/update_pwd.aspx"]];
+    WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:@"/user/update_pwd.aspx"] title:@"找回钥匙"];
+    [self.navigationController pushViewController:web animated:YES];
 }
 
 - (IBAction)tryBtnClicked:(id)sender {
