@@ -349,7 +349,7 @@
             FMCell.backgroundColor =[UIColor clearColor];
             FMCell.selectionStyle = UITableViewCellSelectionStyleNone;
             FMCell.AddFmBtn.hidden = YES;
-            //FMCell.ScreenCurtainConstraint.constant = 10;
+            FMCell.FMLayouConstraint.constant = 10;
             FMCell.FMNameLabel.text = device.name;
             return FMCell;
         }else if (device.hTypeId == 17) { //幕布
