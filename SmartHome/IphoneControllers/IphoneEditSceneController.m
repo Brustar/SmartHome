@@ -689,6 +689,7 @@
         otherCell.backgroundColor = [UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_ProjectArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
+        otherCell.deviceid = _ProjectArray[indexPath.row];
         
         return otherCell;
     }if (indexPath.section == 8) {//FM
@@ -696,6 +697,7 @@
         FMCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_FMArray[indexPath.row] intValue]];
         FMCell.FMNameLabel.text = device.name;
+        FMCell.deviceid = _FMArray[indexPath.row];
         
         return FMCell;
     }if (indexPath.section == 9) {//机顶盒
@@ -705,6 +707,7 @@
         otherCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_NetVArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
+        otherCell.deviceid = _NetVArray[indexPath.row];
         
         return otherCell;
     }if (indexPath.section == 10) {//幕布
@@ -714,6 +717,7 @@
         ScreenCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_MBArray[indexPath.row] intValue]];
         ScreenCell.ScreenCurtainLabel.text = device.name;
+        ScreenCell.deviceid = _MBArray[indexPath.row];
         
         return ScreenCell;
     }if (indexPath.section == 11) {//背景音乐
@@ -723,6 +727,7 @@
         BjMusicCell.BJmusicConstraint.constant = 10;
         Device *device = [SQLManager getDeviceWithDeviceID:[_BJMusicArray[indexPath.row] intValue]];
         BjMusicCell.BjMusicNameLb.text = device.name;
+        BjMusicCell.deviceid = _BJMusicArray[indexPath.row];
         
         return BjMusicCell;
     }if (indexPath.section == 12) {//其他
@@ -730,6 +735,7 @@
         otherCell.AddOtherBtn.hidden = YES;
         otherCell.OtherConstraint.constant = 10;
         otherCell.backgroundColor = [UIColor clearColor];
+        otherCell.deviceid = _OtherArray[indexPath.row];
         if (_OtherArray.count) {
             Device *device = [SQLManager getDeviceWithDeviceID:[_OtherArray[indexPath.row] intValue]];
             if (device.name == nil) {
