@@ -26,6 +26,8 @@
     //设置结点左边背景
     UIImage *trackLeftImage = [[UIImage imageNamed:@"ss"]stretchableImageWithLeftCapWidth:14 topCapHeight:0];
     [self.FMChannelSlider setMinimumTrackImage:trackLeftImage forState:UIControlStateNormal];
+    self.FMChannelSlider.continuous = NO;
+    self.FMSlider.continuous = NO;
     //设置结点右边背景
     UIImage *trackRightImage = [[UIImage imageNamed:@"ss"]stretchableImageWithLeftCapWidth:14 topCapHeight:0];
     [self.FMChannelSlider setMaximumTrackImage:trackRightImage forState:UIControlStateNormal];
@@ -37,7 +39,7 @@
 - (IBAction)save:(id)sender {
     
         Radio *device=[[Radio alloc] init];
-        [device setDeviceID:6];
+        [device setDeviceID:[self.deviceid intValue]];
         [device setRvolume:device.rvolume];
         [device setChannel:device.channel];
     
@@ -52,8 +54,7 @@
             [self.FMSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
              data = [[DeviceInfo defaultManager] close:self.deviceid];
         }
-    }
-    if (sender == self.AddFmBtn) {
+    }else if (sender == self.AddFmBtn) {
         self.AddFmBtn.selected = !self.AddFmBtn.selected;
         if (self.AddFmBtn.selected) {
             [self.AddFmBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
@@ -86,6 +87,8 @@
         NSData *data=[[DeviceInfo defaultManager] switchFMProgram:(int)frequence dec:dec deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
+        
+        
     }
   
 }

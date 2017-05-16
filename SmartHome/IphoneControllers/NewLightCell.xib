@@ -38,8 +38,8 @@
                             <constraint firstAttribute="width" constant="15" id="ihe-2K-61k"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="床边灯带" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTF-1g-872">
-                        <rect key="frame" x="18" y="8" width="131" height="42"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="床边灯带" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTF-1g-872">
+                        <rect key="frame" x="8" y="8" width="131" height="42"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="131" id="QDa-hS-jSk"/>
@@ -87,7 +87,7 @@
                     <constraint firstAttribute="bottomMargin" secondItem="of2-8z-iVL" secondAttribute="bottom" constant="9" id="Za6-6F-uzA"/>
                     <constraint firstAttribute="bottomMargin" secondItem="APZ-gF-ecb" secondAttribute="bottom" constant="11" id="cGr-gb-OuB"/>
                     <constraint firstItem="ieh-Kl-c79" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="esK-Ou-1F7"/>
-                    <constraint firstItem="eTF-1g-872" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="lYQ-gO-W3d"/>
+                    <constraint firstItem="eTF-1g-872" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="lYQ-gO-W3d"/>
                     <constraint firstItem="APZ-gF-ecb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="13" id="mFc-yl-VWI"/>
                     <constraint firstItem="eTF-1g-872" firstAttribute="centerY" secondItem="Twl-lQ-Y4P" secondAttribute="centerY" id="nNg-cD-ci1"/>
                     <constraint firstAttribute="bottom" secondItem="ieh-Kl-c79" secondAttribute="bottom" id="pJY-Ws-kxe"/>

@@ -16,5 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *endTimeLabel;//结束时间
 @property (nonatomic, strong) NSString *naviTitle;
 @property (nonatomic, strong) NSMutableArray *weekArray;
+@property (weak, nonatomic) IBOutlet UIImageView *DrawerImageView;
+@property (weak, nonatomic) IBOutlet UIView *TimerView;
 
 @end

@@ -23,5 +23,6 @@
 @property (nonatomic,assign) NSInteger roomID;
 @property (strong, nonatomic) Scene *scene;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ColourNameTopConstraint;
 
 @end

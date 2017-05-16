@@ -28,6 +28,8 @@
     [self.AddBjmusicBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.BjPowerButton addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.BjSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
+    self.BjSlider.continuous = NO;
+    
 }
 
 - (IBAction)save:(id)sender {

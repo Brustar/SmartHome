@@ -44,10 +44,10 @@
                             <constraint firstAttribute="height" constant="30" id="mUU-Qa-qeZ"/>
                         </constraints>
                     </slider>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="背景音乐" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcs-pi-ibs">
-                        <rect key="frame" x="10" y="0.0" width="101" height="49"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="背景音乐" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcs-pi-ibs">
+                        <rect key="frame" x="5" y="0.0" width="101" height="49"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="101" id="KCQ-q5-p9X"/>
+                            <constraint firstAttribute="width" constant="101" id="AXP-hY-Uos"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -73,18 +73,18 @@
                 <constraints>
                     <constraint firstItem="jJa-FA-3MA" firstAttribute="leading" secondItem="qeP-Gt-Xg0" secondAttribute="trailing" constant="15" id="22s-n1-piu"/>
                     <constraint firstAttribute="bottomMargin" secondItem="qeP-Gt-Xg0" secondAttribute="bottom" constant="4.5" id="8jh-TB-8ca"/>
+                    <constraint firstItem="46X-Zw-9GZ" firstAttribute="top" secondItem="gcs-pi-ibs" secondAttribute="bottom" id="8pS-hK-eOU"/>
                     <constraint firstAttribute="bottom" secondItem="46X-Zw-9GZ" secondAttribute="bottom" id="G8b-Fr-Ygz"/>
                     <constraint firstAttribute="trailingMargin" secondItem="jJa-FA-3MA" secondAttribute="trailing" constant="14" id="GzR-Dg-wtb"/>
                     <constraint firstItem="NNv-h0-wW4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="HDY-4J-cr8"/>
                     <constraint firstItem="46X-Zw-9GZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="IvU-Vx-a5i"/>
+                    <constraint firstItem="gcs-pi-ibs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Ss0-62-EcI"/>
                     <constraint firstItem="qeP-Gt-Xg0" firstAttribute="leading" secondItem="GSf-bm-sEA" secondAttribute="trailing" constant="15" id="Uq4-Sp-vFJ"/>
-                    <constraint firstItem="46X-Zw-9GZ" firstAttribute="top" secondItem="gcs-pi-ibs" secondAttribute="bottom" id="WJM-8O-Ggg"/>
                     <constraint firstItem="46X-Zw-9GZ" firstAttribute="top" secondItem="RA2-wl-P6n" secondAttribute="bottom" constant="12.5" id="b1w-Xb-AAN"/>
                     <constraint firstItem="GSf-bm-sEA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="14" id="bOO-4C-bQQ"/>
-                    <constraint firstItem="gcs-pi-ibs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="dC8-mb-vCM"/>
                     <constraint firstAttribute="trailingMargin" secondItem="NNv-h0-wW4" secondAttribute="trailing" constant="8" id="gSX-nr-6dT"/>
                     <constraint firstAttribute="bottomMargin" secondItem="jJa-FA-3MA" secondAttribute="bottom" constant="10.5" id="lgy-Nv-pkr"/>
-                    <constraint firstItem="gcs-pi-ibs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="mn4-dK-MOw"/>
+                    <constraint firstItem="gcs-pi-ibs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="nMb-Qi-tg5"/>
                     <constraint firstAttribute="bottomMargin" secondItem="GSf-bm-sEA" secondAttribute="bottom" constant="13" id="osj-f3-6z6"/>
                     <constraint firstAttribute="trailingMargin" secondItem="RA2-wl-P6n" secondAttribute="trailing" constant="60" id="rAC-jS-kgv"/>
                     <constraint firstAttribute="trailing" secondItem="46X-Zw-9GZ" secondAttribute="trailing" id="yLL-QI-Ze1"/>
@@ -97,7 +97,7 @@
                 <outlet property="BjPowerButton" destination="RA2-wl-P6n" id="nmC-pe-Twq"/>
                 <outlet property="BjSlider" destination="qeP-Gt-Xg0" id="tvb-0d-DfN"/>
             </connections>
-            <point key="canvasLocation" x="-96" y="44"/>
+            <point key="canvasLocation" x="-96.5" y="44"/>
         </tableViewCell>
     </objects>
     <resources>

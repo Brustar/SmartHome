@@ -27,6 +27,7 @@
     [self.AireSwitchBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.AddAireBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.AireSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
+    self.AireSlider.continuous = NO;
     
 }
 
