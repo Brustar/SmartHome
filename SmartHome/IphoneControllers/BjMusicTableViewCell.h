@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol BjMusicTableViewCellDelegate;
+
 @interface BjMusicTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *BjMusicNameLb;
 @property (weak, nonatomic) IBOutlet UISlider *BjSlider;
@@ -19,4 +21,15 @@
 //房间id
 @property (nonatomic,assign) NSInteger roomID;
 @property (strong, nonatomic) Scene *scene;
+@property (nonatomic, assign) id<BjMusicTableViewCellDelegate>delegate;
+
+@end
+
+
+@protocol BjMusicTableViewCellDelegate <NSObject>
+
+@optional
+- (void)onBjPowerButtonClicked:(UIButton *)btn;
+- (void)onBjSliderValueChanged:(UISlider *)slider;
+
 @end

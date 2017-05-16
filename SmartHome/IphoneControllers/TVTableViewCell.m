@@ -47,6 +47,10 @@
         DeviceInfo *device=[DeviceInfo defaultManager];
         data=[device toogle:self.TVSwitchBtn.selected deviceID:self.deviceid];
         
+        if (_delegate && [_delegate respondsToSelector:@selector(onTVSwitchBtnClicked:)]) {
+            [_delegate onTVSwitchBtnClicked:sender];
+        }
+        
     }else if (sender == self.AddTvDeviceBtn){
         self.AddTvDeviceBtn.selected = !self.AddTvDeviceBtn.selected;
         if (self.AddTvDeviceBtn.selected) {
@@ -68,6 +72,10 @@
 //        self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
+        
+        if (_delegate && [_delegate respondsToSelector:@selector(onTVSliderValueChanged:)]) {
+            [_delegate onTVSliderValueChanged:sender];
+        }
     }
 
 }

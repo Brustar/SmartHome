@@ -186,6 +186,7 @@
         if (self.device.subTypeId == 1) { //灯光
             if (self.device.hTypeId == 1) { //调光灯
                 NewColourCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewColourCell" forIndexPath:indexPath];
+                cell.delegate = self;
                 cell.backgroundColor = [UIColor clearColor];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.AddColourLightBtn.hidden = YES;
@@ -212,6 +213,7 @@
                 
             }else if (self.device.hTypeId == 3) {  //调色灯
                 NewColourCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewColourCell" forIndexPath:indexPath];
+                cell.delegate = self;
                 cell.backgroundColor = [UIColor clearColor];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.AddColourLightBtn.hidden = YES;
@@ -251,6 +253,7 @@
             return aireCell;
         }else if (self.device.hTypeId == 14) { //背景音乐
             BjMusicTableViewCell * BjMusicCell = [tableView dequeueReusableCellWithIdentifier:@"BjMusicTableViewCell" forIndexPath:indexPath];
+            BjMusicCell.delegate = self;
             BjMusicCell.backgroundColor = [UIColor clearColor];
             BjMusicCell.selectionStyle = UITableViewCellSelectionStyleNone;
             BjMusicCell.AddBjmusicBtn.hidden = YES;
@@ -259,6 +262,7 @@
             return BjMusicCell;
         }else if (self.device.hTypeId == 13) { //DVD
             DVDTableViewCell * dvdCell = [tableView dequeueReusableCellWithIdentifier:@"DVDTableViewCell" forIndexPath:indexPath];
+            dvdCell.delegate = self;
             dvdCell.backgroundColor =[UIColor clearColor];
             dvdCell.selectionStyle = UITableViewCellSelectionStyleNone;
             dvdCell.AddDvdBtn.hidden = YES;
@@ -267,6 +271,7 @@
             return dvdCell;
         }else if (self.device.hTypeId == 15) { //FM收音机
             FMTableViewCell * FMCell = [tableView dequeueReusableCellWithIdentifier:@"FMTableViewCell" forIndexPath:indexPath];
+            FMCell.delegate = self;
             FMCell.backgroundColor =[UIColor clearColor];
             FMCell.selectionStyle = UITableViewCellSelectionStyleNone;
             FMCell.AddFmBtn.hidden = YES;
@@ -275,6 +280,7 @@
             return FMCell;
         }else if (self.device.hTypeId == 17) { //幕布
             ScreenCurtainCell * ScreenCell = [tableView dequeueReusableCellWithIdentifier:@"ScreenCurtainCell" forIndexPath:indexPath];
+            ScreenCell.delegate = self;
             ScreenCell.backgroundColor =[UIColor clearColor];
             ScreenCell.selectionStyle = UITableViewCellSelectionStyleNone;
             ScreenCell.AddScreenCurtainBtn.hidden = YES;
@@ -291,6 +297,7 @@
             return otherCell;
         }else if (self.device.hTypeId == 11) { //电视（以前叫机顶盒）
             TVTableViewCell * tvCell = [tableView dequeueReusableCellWithIdentifier:@"TVTableViewCell" forIndexPath:indexPath];
+            tvCell.delegate = self;
             tvCell.backgroundColor =[UIColor clearColor];
             tvCell.selectionStyle = UITableViewCellSelectionStyleNone;
             tvCell.AddTvDeviceBtn.hidden = YES;
@@ -425,6 +432,15 @@
     }
 }
 
+#pragma mark - ColorLightCellDelegate
+- (void)onColourSwitchBtnClicked:(UIButton *)btn {
+    if (btn.selected) {
+        _switchBtnString = @"01000000";//开
+    }else {
+        _switchBtnString = @"00000000";//关
+    }
+}
+
 #pragma mark - CurtainCellDelegate
 - (void)onCurtainOpenBtnClicked:(UIButton *)btn {
     
@@ -437,7 +453,7 @@
 
 - (void)onCurtainSliderBtnValueChanged:(UISlider *)slider {
     
-    NSString *hexString = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%1x", (int)slider.value*100]];
+    NSString *hexString = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%2x", (int)slider.value*100]];
     if (hexString.length == 2) {
         _sliderBtnString = [NSString stringWithFormat:@"2A%@0000", hexString];
     }else {
@@ -455,12 +471,110 @@
 }
 
 - (void)onAirSliderValueChanged:(UISlider *)slider {
-    NSString *hexString = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%1x", (int)lroundf(slider.value)]];
+    NSString *hexString = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%2x", (int)lroundf(slider.value)]];
     if (hexString.length == 2) {
         _sliderBtnString = [NSString stringWithFormat:@"6A%@0000", hexString];
     }else {
         _sliderBtnString = @"6AFF0000";//默认值
     }
+}
+
+#pragma mark - TVTableViewCellDelegate
+- (void)onTVSwitchBtnClicked:(UIButton *)btn {
+    if (btn.selected) {
+        _switchBtnString = @"01000000";//开
+    }else {
+        _switchBtnString = @"00000000";//关
+    }
+}
+
+- (void)onTVSliderValueChanged:(UISlider *)slider {
+    NSString *hexString = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%2x", (int)slider.value*100]];
+    if (hexString.length == 2) {
+        _sliderBtnString = [NSString stringWithFormat:@"AA%@0000", hexString];
+    }else {
+        _sliderBtnString = @"AAFF0000";//默认值 (电视音量)
+    }
+}
+
+#pragma mark - DVDTableViewCellDelegate
+- (void)onDVDSwitchBtnClicked:(UIButton *)btn {
+    if (btn.selected) {
+        _switchBtnString = @"01000000";//开
+    }else {
+        _switchBtnString = @"00000000";//关
+    }
+}
+
+- (void)onDVDSliderValueChanged:(UISlider *)slider {
+    NSString *hexString = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%2x", (int)slider.value*100]];
+    if (hexString.length == 2) {
+        _sliderBtnString = [NSString stringWithFormat:@"AA%@0000", hexString];
+    }else {
+        _sliderBtnString = @"AAFF0000";//默认值 (DVD音量)
+    }
+}
+
+#pragma mark - BjMusicTableViewCellDelegate
+- (void)onBjPowerButtonClicked:(UIButton *)btn {
+    if (btn.selected) {
+        _switchBtnString = @"01000000";//开
+    }else {
+        _switchBtnString = @"00000000";//关
+    }
+}
+
+- (void)onBjSliderValueChanged:(UISlider *)slider {
+    NSString *hexString = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%2x", (int)slider.value*100]];
+    if (hexString.length == 2) {
+        _sliderBtnString = [NSString stringWithFormat:@"AA%@0000", hexString];
+    }else {
+        _sliderBtnString = @"AAFF0000";//默认值 (背景音乐音量)
+    }
+}
+
+#pragma mark - FMTableViewCellDelegate
+- (void)onFMSwitchBtnClicked:(UIButton *)btn {
+    if (btn.selected) {
+        _switchBtnString = @"01000000";//开
+    }else {
+        _switchBtnString = @"00000000";//关
+    }
+}
+
+- (void)onFMSliderValueChanged:(UISlider *)slider {
+    NSString *hexString = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%2x", (int)slider.value*100]];
+    if (hexString.length == 2) {
+        _sliderBtnString = [NSString stringWithFormat:@"AA%@0000", hexString];
+    }else {
+        _sliderBtnString = @"AAFF0000";//默认值 (FM音量)
+    }
+}
+
+- (void)onFMChannelSliderValueChanged:(UISlider *)slider {
+    float frequence = 80+slider.value*40;// frequence取整后，作为高字节
+    int dec = (int)((frequence - (int)frequence)*10);// 小数部分 作为低字节
+    
+    NSString *hexString_frequence = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%2x", (int)frequence]];
+    NSString *hexString_dec = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%2x", dec]];
+    if (hexString_frequence.length == 2 && hexString_dec.length == 2) {
+        _FMChannelSliderString = [NSString stringWithFormat:@"3A%@%@00", hexString_frequence, hexString_dec];
+    }else {
+        _FMChannelSliderString = @"3AFFFF00";
+    }
+}
+
+#pragma mark - ScreenCurtainCellDelegate
+- (void)onUPBtnClicked:(UIButton *)btn {
+    _switchBtnString = @"33000000"; //幕布--升
+}
+
+- (void)onDownBtnClicked:(UIButton *)btn {
+    _switchBtnString = @"34000000"; //幕布--降
+}
+
+- (void)onStopBtnClicked:(UIButton *)btn {
+    _switchBtnString = @"32000000"; //幕布--停
 }
 
 @end

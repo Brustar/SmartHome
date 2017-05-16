@@ -43,6 +43,11 @@
             [self.DVDSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
                data=[[DeviceInfo defaultManager] play:self.deviceid];
         }
+        
+        if (_delegate && [_delegate respondsToSelector:@selector(onDVDSwitchBtnClicked:)]) {
+            [_delegate onDVDSwitchBtnClicked:sender];
+        }
+        
     }else if (sender == self.AddDvdBtn){
         self.AddDvdBtn.selected = !self.AddDvdBtn.selected;
         if (self.AddDvdBtn.selected) {
@@ -66,6 +71,10 @@
         NSData *data=[[DeviceInfo defaultManager] changeVolume:self.DVDSlider.value*100 deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
+        
+        if (_delegate && [_delegate respondsToSelector:@selector(onDVDSliderValueChanged:)]) {
+            [_delegate onDVDSliderValueChanged:sender];
+        }
     }
 }
 //上一曲

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ScreenCurtainCellDelegate;
+
 @interface ScreenCurtainCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *ScreenCurtainLabel;
 @property (weak, nonatomic) IBOutlet UIButton *UPBtn;
@@ -22,4 +24,16 @@
 //房间id
 @property (nonatomic,assign) NSInteger roomID;
 @property (strong, nonatomic) Scene *scene;
+@property (nonatomic, assign) id<ScreenCurtainCellDelegate>delegate;
+
+@end
+
+
+@protocol ScreenCurtainCellDelegate <NSObject>
+
+@optional
+- (void)onUPBtnClicked:(UIButton *)btn;
+- (void)onDownBtnClicked:(UIButton *)btn;
+- (void)onStopBtnClicked:(UIButton *)btn;
+
 @end

@@ -63,6 +63,11 @@
             }
         
         }
+        
+        if (_delegate && [_delegate respondsToSelector:@selector(onBjPowerButtonClicked:)]) {
+            [_delegate onBjPowerButtonClicked:sender];
+        }
+        
     }else if (sender == self.AddBjmusicBtn){
         self.AddBjmusicBtn.selected = !self.AddBjmusicBtn.selected;
         if (self.AddBjmusicBtn.selected) {
@@ -87,6 +92,11 @@
         if (BLUETOOTH_MUSIC) {
             AudioManager *audio=[AudioManager defaultManager];
             [audio.musicPlayer setVolume:self.BjSlider.value/100.0];
+        }
+        
+        
+        if (_delegate && [_delegate respondsToSelector:@selector(onBjSliderValueChanged:)]) {
+            [_delegate onBjSliderValueChanged:sender];
         }
     }
 }

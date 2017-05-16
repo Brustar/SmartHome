@@ -52,6 +52,10 @@
             [self.FMSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
              data = [[DeviceInfo defaultManager] close:self.deviceid];
         }
+        
+        if (_delegate && [_delegate respondsToSelector:@selector(onFMSwitchBtnClicked:)]) {
+            [_delegate onFMSwitchBtnClicked:sender];
+        }
     }
     if (sender == self.AddFmBtn) {
         self.AddFmBtn.selected = !self.AddFmBtn.selected;
@@ -78,14 +82,22 @@
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
         
+        if (_delegate && [_delegate respondsToSelector:@selector(onFMSliderValueChanged:)]) {
+            [_delegate onFMSliderValueChanged:sender];
+        }
+        
     }else if (sender == self.FMChannelSlider){
         //频道
         self.FMChannelLabel.text = [NSString stringWithFormat:@"%.1fFM",80+self.FMChannelSlider.value*40];
-        float frequence = 80+self.FMChannelSlider.value*40;
-        int dec = (int)((frequence - (int)frequence)*10);
+        float frequence = 80+self.FMChannelSlider.value*40;// frequence取整后，作为高字节
+        int dec = (int)((frequence - (int)frequence)*10);// 小数部分 作为低字节
         NSData *data=[[DeviceInfo defaultManager] switchFMProgram:(int)frequence dec:dec deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
+        
+        if (_delegate && [_delegate respondsToSelector:@selector(onFMChannelSliderValueChanged:)]) {
+            [_delegate onFMChannelSliderValueChanged:sender];
+        }
     }
   
 }

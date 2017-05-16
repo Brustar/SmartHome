@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol TVTableViewCellDelegate;
+
 @interface TVTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *TVNameLabel;
 @property (weak, nonatomic) IBOutlet UISlider *TVSlider;
@@ -20,4 +22,15 @@
 //房间id
 @property (nonatomic,assign) NSInteger roomID;
 @property (strong, nonatomic) Scene *scene;
+@property (nonatomic, assign) id<TVTableViewCellDelegate>delegate;
+
+@end
+
+
+@protocol TVTableViewCellDelegate <NSObject>
+
+@optional
+- (void)onTVSwitchBtnClicked:(UIButton *)btn;
+- (void)onTVSliderValueChanged:(UISlider *)slider;
+
 @end

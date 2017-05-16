@@ -118,6 +118,18 @@
         }
         return NO;
     }
+    
+    
+    if([request.URL.scheme isEqualToString:@"ecloud"])
+    {
+        [self cancel:nil];
+        return NO;
+    }
+    
+    if ([request.URL.scheme isEqualToString:@"wxpay"]) {
+        [[WeChatPayManager sharedInstance] weixinPay];
+    }
+    
     return YES;
 }
 
@@ -142,19 +154,7 @@
 #pragma mark Action
 - (void)cancel:(id)sender
 {
-//    [self dismissViewControllerAnimated:YES completion:^{
-        UIViewController *ecloudVC;
-//        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-//            ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"RegisterPhoneNumController"];
-//        }else{
-//            ecloudVC = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"RegisterPhoneNumController"];
-//        }
-        
-               ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"RegisterPhoneNumController"];
-        [self.navigationController pushViewController:ecloudVC animated:YES];
-//    RegisterPhoneNumController * regisVC = [RegisterPhoneNumController new];
-//    regisVC.heightLayou.constant = 90;
-//    }];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end
