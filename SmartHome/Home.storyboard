@@ -163,6 +163,17 @@
                                     <constraint firstAttribute="width" constant="40" id="u0H-Fi-PS1"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PN8-PS-0kA">
+                                <rect key="frame" x="192.5" y="481" width="10" height="10"/>
+                                <color key="backgroundColor" red="0.87450980389999999" green="0.098039215690000001" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="10" id="AsI-hx-S5f"/>
+                                    <constraint firstAttribute="height" constant="10" id="T7F-7S-wSD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi！石总" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="taI-P7-os3">
                                 <rect key="frame" x="128" y="526" width="120" height="20"/>
                                 <constraints>
@@ -204,9 +215,12 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gPz-2f-aZc">
                                                 <rect key="frame" x="90" y="13" width="45" height="45"/>
-                                                <state key="normal" title="回家" backgroundImage="circular2">
+                                                <state key="normal" title="回家" backgroundImage="circular3">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="FirstBtn:" destination="pvp-cq-nWV" eventType="touchUpInside" id="w3S-Bn-IRL"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Mb-gv-2zl">
                                                 <rect key="frame" x="165" y="13" width="45" height="45"/>
@@ -218,6 +232,9 @@
                                                 <state key="normal" title="离家" backgroundImage="circular3">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="TwoBtn:" destination="pvp-cq-nWV" eventType="touchUpInside" id="4KQ-y5-OuP"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qux-yh-LWD">
                                                 <rect key="frame" x="240" y="13" width="45" height="45"/>
@@ -225,7 +242,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="SceneShortcutBtn:" destination="pvp-cq-nWV" eventType="touchUpInside" id="6hq-Dl-0C8"/>
+                                                    <action selector="ThreeBtn:" destination="pvp-cq-nWV" eventType="touchUpInside" id="XSM-eT-1kA"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -356,8 +373,10 @@
                             <constraint firstItem="dyk-7K-uDi" firstAttribute="top" secondItem="S4g-ft-uAu" secondAttribute="bottom" id="ZA5-cg-zNU"/>
                             <constraint firstItem="u01-LH-SS0" firstAttribute="top" secondItem="LKi-1C-fQf" secondAttribute="bottom" constant="100" id="cNX-tg-ob1"/>
                             <constraint firstItem="S4g-ft-uAu" firstAttribute="top" secondItem="LKi-1C-fQf" secondAttribute="bottom" id="eTc-8b-xe2"/>
+                            <constraint firstItem="PN8-PS-0kA" firstAttribute="centerX" secondItem="KO9-5h-oOe" secondAttribute="centerX" constant="10" id="fQR-Hn-qpc"/>
                             <constraint firstItem="taI-P7-os3" firstAttribute="centerX" secondItem="KO9-5h-oOe" secondAttribute="centerX" id="gOU-U9-Xjz"/>
                             <constraint firstAttribute="trailing" secondItem="cWZ-EQ-wKU" secondAttribute="trailing" id="l8D-RY-Ie1"/>
+                            <constraint firstItem="PN8-PS-0kA" firstAttribute="top" secondItem="u01-LH-SS0" secondAttribute="bottom" constant="14" id="pC4-2w-m9s"/>
                             <constraint firstItem="dyk-7K-uDi" firstAttribute="top" secondItem="z8L-2W-XsO" secondAttribute="bottom" id="sUw-fm-Faq"/>
                             <constraint firstItem="bma-uE-dP0" firstAttribute="centerX" secondItem="KO9-5h-oOe" secondAttribute="centerX" id="tY2-a2-lcQ"/>
                             <constraint firstItem="bma-uE-dP0" firstAttribute="top" secondItem="taI-P7-os3" secondAttribute="bottom" constant="10" id="u1h-N2-jSW"/>
@@ -379,6 +398,7 @@
                         <outlet property="HeadImageView" destination="TZv-R0-6cB" id="Mix-Jf-Z25"/>
                         <outlet property="IconeImageView" destination="QiZ-fM-4ar" id="ASu-RD-ea5"/>
                         <outlet property="NLabelrightConstraint" destination="HMJ-TT-VMW" id="u0d-ga-hM9"/>
+                        <outlet property="ShowHeadImage" destination="PN8-PS-0kA" id="92f-Jt-nC0"/>
                         <outlet property="SubImageView" destination="eRG-g9-nK5" id="jdE-Nz-kDx"/>
                         <outlet property="SupView" destination="u01-LH-SS0" id="ovP-aP-xqz"/>
                         <outlet property="TakeTurnsWordsLabel" destination="Rhs-Sg-oCs" id="c5n-Re-9vw"/>
@@ -553,7 +573,6 @@
         <image name="background" width="375" height="667"/>
         <image name="circular" width="278" height="278"/>
         <image name="circular1" width="20" height="20"/>
-        <image name="circular2" width="33" height="33"/>
         <image name="circular3" width="46" height="46"/>
         <image name="circular4" width="46" height="46"/>
         <image name="close_white" width="25" height="25"/>

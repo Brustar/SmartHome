@@ -30,5 +30,9 @@
 @property (nonatomic, strong) NowMusicController * nowMusicController;
 @property (nonatomic, strong) HostIDSController *hostListViewController;//主机列表
 @property (weak, nonatomic) IBOutlet UIView *CoverView;
+@property (nonatomic,strong) Scene * info1;
+@property (nonatomic,strong) Scene * info2;
+@property (nonatomic,strong) Scene * info3;
+
 
 @end
