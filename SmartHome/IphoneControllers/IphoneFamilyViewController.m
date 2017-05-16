@@ -83,7 +83,7 @@
 {
     SocketManager *sock = [SocketManager defaultManager];
     if ([[UD objectForKey:@"HostID"] intValue] > 0x8000) {
-        [sock connectUDP:[IOManager udpPort]];
+        [sock connectUDP:[IOManager C4Port]];
     }else{
         [sock connectTcp];
     }
@@ -159,8 +159,8 @@
         [self connect];
     }
 
-      [self.XGImageView setContentMode:UIViewContentModeScaleAspectFill];
-     [self.XGImageView setImage:[ObjectFunction blurryImage:[UIImage imageNamed:@"leftbackiamge"] withBlurLevel:10.0f]];
+    [self.XGImageView setContentMode:UIViewContentModeScaleAspectFill];
+    [self.XGImageView setImage:[ObjectFunction blurryImage:[UIImage imageNamed:@"leftbackiamge"] withBlurLevel:10.0f]];
 }
 //监听到网络状态改变
 - (void) reachabilityUpdate: (NSNotification* )note

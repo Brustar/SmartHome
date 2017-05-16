@@ -49,6 +49,10 @@
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
         
+        if (_delegate && [_delegate respondsToSelector:@selector(onAirSwitchBtnClicked:)]) {
+            [_delegate onAirSwitchBtnClicked:sender];
+        }
+        
     }else if (sender == self.AddAireBtn){
         self.AddAireBtn.selected = !self.AddAireBtn.selected;
         if (self.AddAireBtn.selected) {
@@ -71,6 +75,10 @@
         NSData *data=[[DeviceInfo defaultManager] toogle:self.AireSlider.value  deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
+        
+        if (_delegate && [_delegate respondsToSelector:@selector(onAirSliderValueChanged:)]) {
+            [_delegate onAirSliderValueChanged:sender];
+        }
     }
 
     

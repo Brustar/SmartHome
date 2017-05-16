@@ -42,6 +42,18 @@
         return;
     }
     
+    if (_switchBtnString.length <= 0 ) {
+        _switchBtnString = @"01000000";
+    }
+    
+    if (_sliderBtnString.length <= 0) {
+        _sliderBtnString =  @"2AFF0000";
+    }
+    
+    _startValue = [NSMutableString string];
+    [_startValue appendString:_switchBtnString];
+    [_startValue appendString:@","];
+    [_startValue appendString:_sliderBtnString];
     
     NSString *url = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
@@ -180,6 +192,7 @@
             return cell;
         }else if (self.device.subTypeId == 7) { //窗帘
             CurtainTableViewCell *curtainCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
+            curtainCell.delegate = self;
             curtainCell.backgroundColor =[UIColor clearColor];
             curtainCell.selectionStyle = UITableViewCellSelectionStyleNone;
             curtainCell.AddcurtainBtn.hidden = YES;
@@ -191,6 +204,7 @@
             return curtainCell;
         }else if (self.device.hTypeId == 31) {  //空调
             AireTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"AireTableViewCell" forIndexPath:indexPath];
+            aireCell.delegate = self;
             aireCell.backgroundColor = [UIColor clearColor];
             aireCell.selectionStyle = UITableViewCellSelectionStyleNone;
             aireCell.AddAireBtn.hidden = YES;
@@ -359,12 +373,49 @@
 
 #pragma mark - NewLightCellDelegate
 - (void)onLightPowerBtnClicked:(UIButton *)btn {
-     _startValue = [NSMutableString string];
     
     if (btn.selected) {
-        [_startValue appendString:@"01000000"];//开
+        _switchBtnString = @"01000000";//开
     }else {
-        [_startValue appendString:@"00000000"];//关
+        _switchBtnString = @"00000000";//关
+    }
+}
+
+#pragma mark - CurtainCellDelegate
+- (void)onCurtainOpenBtnClicked:(UIButton *)btn {
+    
+    if (btn.selected) {
+        _switchBtnString = @"01000000";//开
+    }else {
+        _switchBtnString = @"00000000";//关
+    }
+}
+
+- (void)onCurtainSliderBtnValueChanged:(UISlider *)slider {
+    
+    NSString *hexString = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%1x", (int)slider.value*100]];
+    if (hexString.length == 2) {
+        _sliderBtnString = [NSString stringWithFormat:@"2A%@0000", hexString];
+    }else {
+        _sliderBtnString = @"2AFF0000";//默认值
+    }
+}
+
+#pragma mark - AirCellDelegate
+- (void)onAirSwitchBtnClicked:(UIButton *)btn {
+    if (btn.selected) {
+        _switchBtnString = @"01000000";//开
+    }else {
+        _switchBtnString = @"00000000";//关
+    }
+}
+
+- (void)onAirSliderValueChanged:(UISlider *)slider {
+    NSString *hexString = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%1x", (int)lroundf(slider.value)]];
+    if (hexString.length == 2) {
+        _sliderBtnString = [NSString stringWithFormat:@"6A%@0000", hexString];
+    }else {
+        _sliderBtnString = @"6AFF0000";//默认值
     }
 }
 

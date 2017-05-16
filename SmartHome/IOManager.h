@@ -21,7 +21,8 @@
 + (NSString *) tcpAddr;
 
 + (int) tcpPort;
-+ (int) udpPort;
++ (int) C4Port;
++ (int) crestronPort;
 
 + (id)getUserDefaultForKey:(NSString *)key;
 
