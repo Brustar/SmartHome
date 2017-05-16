@@ -21,7 +21,7 @@
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 
-@interface DeviceTimerSettingViewController : CustomViewController<UITableViewDataSource, UITableViewDelegate,  HttpDelegate, NewLightCellDelegate>
+@interface DeviceTimerSettingViewController : CustomViewController<UITableViewDataSource, UITableViewDelegate,  HttpDelegate, NewLightCellDelegate, CurtainTableViewCellDelegate, AireTableViewCellDelegate>
 
 @property(nonatomic, strong) UITableView *timerTableView;
 @property(nonatomic, strong) Device *device;
@@ -33,5 +33,7 @@
 @property(nonatomic, strong) NSMutableString *startValue;
 @property(nonatomic, strong) NSMutableString *repeatString;
 @property (nonatomic,strong) UIButton * naviRightBtn;
+@property(nonatomic, strong) NSString *switchBtnString;//开关按钮指令字符串
+@property(nonatomic, strong) NSString *sliderBtnString;//滑动按钮指令字符串
 
 @end

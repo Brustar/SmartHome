@@ -619,6 +619,7 @@ NSArray *array = [NSArray arrayWithObjects:
             //登录成功，才缓存用户账号，密码，登录类型
             [IOManager writeUserdefault:self.nameTextField.text forKey:@"Account"];
             [IOManager writeUserdefault:[NSNumber numberWithInteger:self.userType] forKey:@"Type"];
+            [IOManager writeUserdefault:responseObject[@"isplaying"] forKey:@"IsPlaying"];//正在播放标识
             [IOManager writeUserdefault:[self.pwdTextField.text encryptWithDes:DES_KEY] forKey:@"Password"];
             
             [IOManager writeUserdefault:responseObject[@"token"] forKey:@"AuthorToken"];

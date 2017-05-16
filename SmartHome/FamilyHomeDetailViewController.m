@@ -227,7 +227,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return _lightArray.count;//灯光
+        return _lightArray.count;//灯光(01:开关灯 02:调光灯 03:调色灯)
     }else if (section == 1){
         return _curtainArray.count;//窗帘
     }else if (section == 2){
@@ -246,16 +246,48 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {//灯光
-        NewLightCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewLightCell" forIndexPath:indexPath];
-        cell.backgroundColor = [UIColor clearColor];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.AddLightBtn.hidden = YES;
-        cell.LightConstraint.constant = 10;
         Device *device = [SQLManager getDeviceWithDeviceID:[_lightArray[indexPath.row] intValue]];
-        cell.NewLightNameLabel.text = device.name;
-        cell.NewLightSlider.continuous = NO;
-        cell.deviceid = _lightArray[indexPath.row];
-        return cell;
+        if (device.hTypeId == 1) { //开关灯(不需要Slider)
+            NewColourCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewColourCell" forIndexPath:indexPath];
+            cell.backgroundColor = [UIColor clearColor];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.AddColourLightBtn.hidden = YES;
+            cell.ColourLightConstraint.constant = 10;
+            cell.colourNameLabel.text = device.name;
+            cell.colourSlider.continuous = NO;
+            cell.colourSlider.hidden = YES;
+            cell.supimageView.hidden = YES;
+            cell.lowImageView.hidden = YES;
+            cell.highImageView.hidden = YES;
+            cell.deviceid = _lightArray[indexPath.row];
+            return cell;
+        }else if (device.hTypeId == 2) { //调光灯
+            NewLightCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewLightCell" forIndexPath:indexPath];
+            cell.backgroundColor = [UIColor clearColor];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.AddLightBtn.hidden = YES;
+            cell.LightConstraint.constant = 10;
+            cell.NewLightNameLabel.text = device.name;
+            cell.NewLightSlider.continuous = NO;
+            cell.NewLightSlider.hidden = NO;
+            cell.deviceid = _lightArray[indexPath.row];
+            return cell;
+        }else if (device.hTypeId == 3) { //调色灯
+            NewColourCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewColourCell" forIndexPath:indexPath];
+            cell.backgroundColor = [UIColor clearColor];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.AddColourLightBtn.hidden = YES;
+            cell.ColourLightConstraint.constant = 10;
+            cell.colourNameLabel.text = device.name;
+            cell.colourSlider.continuous = NO;
+            cell.colourSlider.hidden = NO;
+            cell.supimageView.hidden = NO;
+            cell.lowImageView.hidden = NO;
+            cell.highImageView.hidden = NO;
+            cell.deviceid = _lightArray[indexPath.row];
+            return cell;
+        }
+        
     }else if (indexPath.section == 1) {//窗帘
         CurtainTableViewCell *curtainCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
         curtainCell.backgroundColor =[UIColor clearColor];

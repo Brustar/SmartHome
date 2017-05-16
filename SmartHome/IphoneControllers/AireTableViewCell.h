@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol AireTableViewCellDelegate;
+
 @interface AireTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *AireNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *temperatureLabel;
@@ -19,9 +21,18 @@
 @property (nonatomic,assign) int roomID;
 @property (nonatomic,weak) NSString *sceneid;
 @property (weak, nonatomic) IBOutlet UIButton *AddAireBtn;
-
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *AireConstraint;
+@property (nonatomic, assign) id<AireTableViewCellDelegate>delegate;
 
 
+
+@end
+
+
+@protocol AireTableViewCellDelegate <NSObject>
+
+@optional
+- (void)onAirSwitchBtnClicked:(UIButton *)btn;
+- (void)onAirSliderValueChanged:(UISlider *)slider;
 
 @end
