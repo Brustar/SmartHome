@@ -26,6 +26,8 @@
     //设置结点左边背景
     UIImage *trackLeftImage = [[UIImage imageNamed:@"ss"]stretchableImageWithLeftCapWidth:14 topCapHeight:0];
     [self.FMChannelSlider setMinimumTrackImage:trackLeftImage forState:UIControlStateNormal];
+    self.FMChannelSlider.continuous = NO;
+    self.FMSlider.continuous = NO;
     //设置结点右边背景
     UIImage *trackRightImage = [[UIImage imageNamed:@"ss"]stretchableImageWithLeftCapWidth:14 topCapHeight:0];
     [self.FMChannelSlider setMaximumTrackImage:trackRightImage forState:UIControlStateNormal];
@@ -37,7 +39,7 @@
 - (IBAction)save:(id)sender {
     
         Radio *device=[[Radio alloc] init];
-        [device setDeviceID:6];
+        [device setDeviceID:[self.deviceid intValue]];
         [device setRvolume:device.rvolume];
         [device setChannel:device.channel];
     
@@ -56,8 +58,8 @@
         if (_delegate && [_delegate respondsToSelector:@selector(onFMSwitchBtnClicked:)]) {
             [_delegate onFMSwitchBtnClicked:sender];
         }
-    }
-    if (sender == self.AddFmBtn) {
+    
+    }else if (sender == self.AddFmBtn) {
         self.AddFmBtn.selected = !self.AddFmBtn.selected;
         if (self.AddFmBtn.selected) {
             [self.AddFmBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];

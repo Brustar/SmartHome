@@ -637,7 +637,8 @@
        newColourCell.supimageView.hidden = YES;
        newColourCell.lowImageView.hidden = YES;
        newColourCell.highImageView.hidden = YES;
-       
+       newColourCell.colourSlider.hidden = YES;
+    
        return newColourCell;
    }
     if (indexPath.section == 3) {//空调
@@ -698,6 +699,8 @@
         Device *device = [SQLManager getDeviceWithDeviceID:[_FMArray[indexPath.row] intValue]];
         FMCell.FMNameLabel.text = device.name;
         FMCell.deviceid = _FMArray[indexPath.row];
+        FMCell.AddFmBtn.hidden = YES;
+        FMCell.FMLayouConstraint.constant = 5;
         
         return FMCell;
     }if (indexPath.section == 9) {//机顶盒

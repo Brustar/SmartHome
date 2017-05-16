@@ -95,8 +95,20 @@
     _baseTabbarController.tabBar.hidden = YES;
     int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
     self.numberLabel.text = [NSString stringWithFormat:@"%d" ,unread];
+    
+    if ([self.numberLabel.text isEqualToString:@"0"]) {
+        self.ShowHeadImage.hidden = YES;
+    }else{
+        self.ShowHeadImage.hidden = NO;
+    }
     [self getScenesFromPlist];
- 
+    [self getPlist];
+    [self setBtn];
+   
+}
+
+-(void)getPlist
+{
     NSArray  *paths  =  NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
     NSString *docDir = [paths objectAtIndex:0];
     NSString *filePath = [docDir stringByAppendingPathComponent:@"Title.plist"];
@@ -118,7 +130,7 @@
             [DetailSet addObject:[DetailArray objectAtIndex:r]];
         }
         NSArray * detail = [DetailSet allObjects];
-        self.TakeTurnsWordsLabel.text = detail[0];
+        self.markedWordsLabel.text = detail[0];
     }
 }
 - (void)viewDidAppear:(BOOL)animated {
@@ -133,7 +145,7 @@
     if (_afNetworkReachabilityManager.reachableViaWWAN) {
         NSLog(@"WWAN: %d", _afNetworkReachabilityManager.reachableViaWWAN);
     }
-    [self setBtn];
+   
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -404,45 +416,34 @@
       _firstBtn.titleLabel.font = [UIFont systemFontOfSize:10];
       _TwoBtn.titleLabel.font = [UIFont systemFontOfSize:10];
       _ThreeBtn.titleLabel.font = [UIFont systemFontOfSize:10];
-  
     if (_shortcutsArray.count != 0) {
         if (_shortcutsArray.count == 1) {
             _info1 = _shortcutsArray[0];
             [_firstBtn setTitle:_info1.sceneName forState:UIControlStateNormal];
-            
             _firstBtn.titleLabel.font = [UIFont systemFontOfSize:10];
-           
             _firstBtn.hidden = NO;
             _TwoBtn.hidden = YES;
             _ThreeBtn.hidden = NO;
             [_ThreeBtn setTitle:@"" forState:UIControlStateNormal];
             [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular4"] forState:UIControlStateNormal];
-    
-            
         }if(_shortcutsArray.count == 2) {
             _info1 = _shortcutsArray[0];
             _info2 = _shortcutsArray[1];
             [_firstBtn setTitle:_info1.sceneName forState:UIControlStateNormal];
-
             [_TwoBtn setTitle:_info2.sceneName forState:UIControlStateNormal];
-           
             _firstBtn.hidden = NO;
             _TwoBtn.hidden = NO;
             _ThreeBtn.hidden = NO;
             [_ThreeBtn setTitle:@"" forState:UIControlStateNormal];
             [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular4"] forState:UIControlStateNormal];
         
-        }
-        if (_shortcutsArray.count == 3) {
+        }if (_shortcutsArray.count == 3) {
             _info1 = _shortcutsArray[0];
             _info2 = _shortcutsArray[1];
              _info3 = _shortcutsArray[2];
             [_firstBtn setTitle:_info1.sceneName forState:UIControlStateNormal];
-
             [_TwoBtn setTitle:_info2.sceneName forState:UIControlStateNormal];
-          
             [_ThreeBtn setTitle:_info3.sceneName forState:UIControlStateNormal];
-          
             [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular3"] forState:UIControlStateNormal];
             _firstBtn.hidden = NO;
             _TwoBtn.hidden = NO;

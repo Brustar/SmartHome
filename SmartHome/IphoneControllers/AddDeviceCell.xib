@@ -18,11 +18,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="添加设备" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S4X-z9-889">
-                        <rect key="frame" x="18" y="14.5" width="78" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="添加设备" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S4X-z9-889">
+                        <rect key="frame" x="5" y="0.0" width="78" height="49.5"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="9or-5e-Z5B"/>
-                            <constraint firstAttribute="width" constant="78" id="g25-3b-Ze7"/>
+                            <constraint firstAttribute="width" constant="78" id="VvZ-uQ-H0v"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -38,15 +37,17 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="S4X-z9-889" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Jkd-Cr-8dX"/>
+                    <constraint firstAttribute="bottom" secondItem="S4X-z9-889" secondAttribute="bottom" id="Lq3-Ar-0Be"/>
                     <constraint firstAttribute="trailingMargin" secondItem="pnH-lR-Pl0" secondAttribute="trailing" constant="10" id="Qos-Zb-zBF"/>
-                    <constraint firstItem="S4X-z9-889" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="gLI-4W-fWG"/>
+                    <constraint firstItem="S4X-z9-889" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="hAZ-ph-HRa"/>
                     <constraint firstItem="pnH-lR-Pl0" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="kF7-Qk-WSy"/>
+                    <constraint firstItem="S4X-z9-889" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="r5G-fF-3hc"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="AddDeviceBtn" destination="pnH-lR-Pl0" id="CXj-5s-Uod"/>
             </connections>
+            <point key="canvasLocation" x="32.5" y="113"/>
         </tableViewCell>
     </objects>
     <resources>

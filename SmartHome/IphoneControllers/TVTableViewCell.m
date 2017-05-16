@@ -25,6 +25,7 @@
     [self.TVSwitchBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.AddTvDeviceBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.TVSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
+    self.TVSlider.continuous = NO;
 }
 - (IBAction)save:(id)sender {
     

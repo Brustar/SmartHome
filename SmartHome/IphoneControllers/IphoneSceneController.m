@@ -409,6 +409,9 @@ static NSString * const CYPhotoId = @"photo";
 //        self.SceneNameLabel.tag = 0;
 //        cell.tag = 0;
         self.SceneNameLabel.text = @"点击添加场景";
+        self.delegateBtn.hidden = YES;
+        self.blockBtn.hidden = YES;
+        self.startBtn.hidden = YES;
         return cell;
     }else{
         CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
@@ -428,7 +431,9 @@ static NSString * const CYPhotoId = @"photo";
         self.SceneNameLabel.text = cell.sceneLabel.text;
         [cell.imageView sd_setImageWithURL:[NSURL URLWithString: self.scene.picName] placeholderImage:[UIImage imageNamed:@"PL"]];
         [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];
-        
+        self.delegateBtn.hidden = NO;
+        self.blockBtn.hidden = NO;
+        self.startBtn.hidden = NO;
         return cell;
        
     }

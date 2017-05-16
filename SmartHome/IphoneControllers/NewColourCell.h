@@ -25,6 +25,7 @@
 @property (nonatomic,assign) NSInteger roomID;
 @property (strong, nonatomic) Scene *scene;
 @property (nonatomic, assign) id<NewColourCellDelegate>delegate;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ColourNameTopConstraint;
 
 @end
 
@@ -33,5 +34,6 @@
 
 @optional
 - (void)onColourSwitchBtnClicked:(UIButton *)btn;
+
 
 @end
