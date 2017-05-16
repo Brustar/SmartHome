@@ -79,7 +79,7 @@
 {
     SocketManager *sock = [SocketManager defaultManager];
     if ([NetStatusManager isEnableWIFI]) {
-        [sock connectUDP:[IOManager udpPort]];
+        [sock connectUDP:[IOManager crestronPort]];
     }else if ([NetStatusManager isEnableWWAN]){
         [sock connectTcp];
     }
