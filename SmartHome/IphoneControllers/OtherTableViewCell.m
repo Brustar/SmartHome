@@ -40,6 +40,11 @@
         NSData *data=[[DeviceInfo defaultManager] toogle:self.OtherSwitchBtn.selected deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
+        
+        if (_delegate && [_delegate respondsToSelector:@selector(onOtherSwitchBtnClicked:)]) {
+            [_delegate onOtherSwitchBtnClicked:sender];
+        }
+        
     }else if (sender == self.AddOtherBtn){
         self.AddOtherBtn.selected = !self.AddOtherBtn.selected;
         if (self.AddOtherBtn.selected) {

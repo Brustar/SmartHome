@@ -289,6 +289,7 @@
             return ScreenCell;
         }else if (self.device.hTypeId == 16) { //投影仪(只有开关)
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+            otherCell.delegate = self;
             otherCell.backgroundColor = [UIColor clearColor];
             otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
             otherCell.AddOtherBtn.hidden = YES;
@@ -314,6 +315,7 @@
             return tvCell;
         }*/else if (self.device.hTypeId == 18) { //功放
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+            otherCell.delegate = self;
             otherCell.backgroundColor =[UIColor clearColor];
             otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
             otherCell.AddOtherBtn.hidden = YES;
@@ -322,6 +324,7 @@
             return otherCell;
         }else { //其他类型: 智能浇花，智能投食，推窗器
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
+            otherCell.delegate = self;
             otherCell.backgroundColor =[UIColor clearColor];
             otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
             otherCell.AddOtherBtn.hidden = YES;
@@ -575,6 +578,15 @@
 
 - (void)onStopBtnClicked:(UIButton *)btn {
     _switchBtnString = @"32000000"; //幕布--停
+}
+
+#pragma mark - OtherTableViewCellDelegate
+- (void)onOtherSwitchBtnClicked:(UIButton *)btn {
+    if (btn.selected) {
+        _switchBtnString = @"01000000";//开
+    }else {
+        _switchBtnString = @"00000000";//关
+    }
 }
 
 @end
