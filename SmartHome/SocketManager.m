@@ -61,6 +61,7 @@
     [udpSocket bindToPort:port error:&bindError];
     
     if (bindError) {
+        [self connectTcp];
         NSLog(@"bindError = %@",bindError);
         return;
     }

@@ -12,7 +12,7 @@
 #import "DVCollectionViewCell.h"
 #import "VolumeManager.h"
 #import "SocketManager.h"
-#import "SCWaveAnimationView.h"
+
 #import "SQLManager.h"
 #import "PackManager.h"
 #import "Light.h"
@@ -24,7 +24,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightViewWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightViewHight;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (weak, nonatomic) IBOutlet UIView *touchpad;
 @property (nonatomic,strong) NSArray *dvImages;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnMenu;
@@ -52,9 +51,9 @@
     }
     return _dvImages;
 }
+
 - (void)setRoomID:(int)roomID
 {
-    
     _roomID = roomID;
     if(roomID)
     {
@@ -85,8 +84,6 @@
     [self.btnPlay setImage:[UIImage imageNamed:@"DVD_pause"] forState:UIControlStateSelected];
     [self.btnNext setImage:[UIImage imageNamed:@"DVD_next_red"] forState:UIControlStateHighlighted];
     
-    
-    
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(changeVolume) forControlEvents:UIControlEventValueChanged];
     
@@ -105,23 +102,6 @@
         }
     }
     
-    UISwipeGestureRecognizer *recognizer;
-    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
-    [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
-    [[self touchpad] addGestureRecognizer:recognizer];
-    
-    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
-    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
-    [[self touchpad] addGestureRecognizer:recognizer];
-    
-    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
-    [recognizer setDirection:(UISwipeGestureRecognizerDirectionUp)];
-    [[self touchpad] addGestureRecognizer:recognizer];
-    
-    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
-    [recognizer setDirection:(UISwipeGestureRecognizerDirectionDown)];
-    [[self touchpad] addGestureRecognizer:recognizer];
-    
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
 }
@@ -131,36 +111,6 @@
     [self.volume setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
     self.volume.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
     self.volume.minimumTrackTintColor = [UIColor colorWithRed:253/255.0 green:254/255.0 blue:254/255.0 alpha:1];
-}
-
-- (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
-    NSData *data=nil;
-    switch (recognizer.direction) {
-        case UISwipeGestureRecognizerDirectionLeft:
-            data=[[DeviceInfo defaultManager] sweepLeft:self.deviceid];
-            NSLog(@"Left");
-            break;
-        case UISwipeGestureRecognizerDirectionRight:
-            data=[[DeviceInfo defaultManager] sweepRight:self.deviceid];
-            NSLog(@"right");
-            break;
-        case UISwipeGestureRecognizerDirectionUp:
-            data=[[DeviceInfo defaultManager] sweepUp:self.deviceid];
-            NSLog(@"up");
-            break;
-        case UISwipeGestureRecognizerDirectionDown:
-            data=[[DeviceInfo defaultManager] sweepDown:self.deviceid];
-            NSLog(@"down");
-            break;
-            
-        default:
-            break;
-    }
-    
-    SocketManager *sock=[SocketManager defaultManager];
-    [sock.socket writeData:data withTimeout:1 tag:1];
-    
-    [SCWaveAnimationView waveAnimationAtDirection:recognizer.direction view:self.touchpad];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -361,17 +311,6 @@
     // Pass the selected object to the new view controller.
     id theSegue = segue.destinationViewController;
     [theSegue setValue:self.deviceid forKey:@"deviceid"];
-}
-
-#pragma mark - touch detection
-- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    CGPoint touchPoint = [[touches anyObject] locationInView:[[UIApplication sharedApplication] keyWindow]];
-    CGRect rect=[self.touchpad convertRect:self.touchpad.bounds toView:self.view];
-    if (CGRectContainsPoint(rect,touchPoint)) {
-        NSLog(@"%.0fx%.0fpx", touchPoint.x, touchPoint.y);
-        [SCWaveAnimationView waveAnimationAtPosition:touchPoint];
-    }
 }
 
 @end

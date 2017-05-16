@@ -15,7 +15,7 @@
 #import "MBProgressHUD+NJ.h"
 #import "KxMenu.h"
 #import "VolumeManager.h"
-#import "SCWaveAnimationView.h"
+
 #import "SocketManager.h"
 #import "SQLManager.h"
 #import "HttpManager.h"
@@ -59,13 +59,10 @@
 
 
 @interface TVController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,TVLogoCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,TVIconControllerDelegate>
-@property (weak, nonatomic) IBOutlet UIView *touchpad;
-@property (weak, nonatomic) IBOutlet UILabel *unstoreLabel;
-//@property (weak, nonatomic) IBOutlet UILabel *voiceValue;
 
+@property (weak, nonatomic) IBOutlet UILabel *unstoreLabel;
 
 @property (weak, nonatomic) IBOutlet UISlider *volume;
-@property (weak, nonatomic) IBOutlet UIPageControl *pageController;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *tvLogoCollectionView;
 @property (weak, nonatomic) IBOutlet UICollectionView *numbersCollectionView;
@@ -228,24 +225,6 @@
             }
         }
     }
-    [self setUpPageController];
-    
-    UISwipeGestureRecognizer *recognizer;
-    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
-    [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
-    [[self touchpad] addGestureRecognizer:recognizer];
-    
-    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
-    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
-    [[self touchpad] addGestureRecognizer:recognizer];
-    
-    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
-    [recognizer setDirection:(UISwipeGestureRecognizerDirectionUp)];
-    [[self touchpad] addGestureRecognizer:recognizer];
-    
-    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
-    [recognizer setDirection:(UISwipeGestureRecognizerDirectionDown)];
-    [[self touchpad] addGestureRecognizer:recognizer];
     
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
@@ -277,36 +256,6 @@
         [self.channelContainer addArrangedSubview:btn];
         [self.channelContainer layoutIfNeeded];
     }
-}
-
-- (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
-    NSData *data=nil;
-    switch (recognizer.direction) {
-        case UISwipeGestureRecognizerDirectionLeft:
-            data=[[DeviceInfo defaultManager] sweepLeft:self.deviceid];
-            NSLog(@"Left");
-            break;
-        case UISwipeGestureRecognizerDirectionRight:
-            data=[[DeviceInfo defaultManager] sweepRight:self.deviceid];
-            NSLog(@"right");
-            break;
-        case UISwipeGestureRecognizerDirectionUp:
-            data=[[DeviceInfo defaultManager] sweepUp:self.deviceid];
-            NSLog(@"up");
-            break;
-        case UISwipeGestureRecognizerDirectionDown:
-            data=[[DeviceInfo defaultManager] sweepDown:self.deviceid];
-            NSLog(@"down");
-            break;
-            
-        default:
-            break;
-    }
-    
-    SocketManager *sock=[SocketManager defaultManager];
-    [sock.socket writeData:data withTimeout:1 tag:1];
-    
-    [SCWaveAnimationView waveAnimationAtDirection:recognizer.direction view:self.touchpad];
 }
 
 -(void) changeVolume
@@ -373,19 +322,6 @@
         DeviceInfo *device=[DeviceInfo defaultManager];
         self.volume.value=[[device valueForKey:@"volume"] floatValue]*100;
     }
-}
-
-//设置pageController
--(void)setUpPageController
-{
-    self.pageController.numberOfPages = [self.tvLogoCollectionView numberOfItemsInSection:0] / 4;
-    self.pageController.pageIndicatorTintColor = [UIColor whiteColor];
-    self.pageController.currentPageIndicatorTintColor = [UIColor blackColor];
-}
-
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    CGPoint point = scrollView.contentOffset;
-    self.pageController.currentPage = round(point.x/scrollView.bounds.size.width);
 }
 
 #pragma mark - UICollectionViewDelgate
@@ -722,17 +658,6 @@
     NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:imageName];
     // 将图片写入文件
     [imageData writeToFile:fullPath atomically:NO];
-}
-
-#pragma mark - touch detection
-- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    CGPoint touchPoint = [[touches anyObject] locationInView:[[UIApplication sharedApplication] keyWindow]];
-    CGRect rect=[self.touchpad convertRect:self.touchpad.bounds toView:self.view];
-    if (CGRectContainsPoint(rect,touchPoint)) {
-        NSLog(@"%.0fx%.0fpx", touchPoint.x, touchPoint.y);
-        [SCWaveAnimationView waveAnimationAtPosition:touchPoint];
-    }
 }
 
 - (IBAction)storeTVChannel:(UIBarButtonItem *)sender {

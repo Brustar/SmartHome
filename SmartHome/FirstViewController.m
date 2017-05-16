@@ -153,13 +153,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addNotifications];
-    if ([[UD objectForKey:@"HostID"] intValue] == 258) { //九号大院
-        SocketManager *sock = [SocketManager defaultManager];
-        [sock connectTcp];
-        sock.delegate = self;
-    }else{
-        [self connect];
-    }
+    [self connect];
     
     [self setupNaviBar];
     [self showNetStateView];
@@ -247,7 +241,7 @@
         _calenderMonthLabel.text = @"December";
     }
     NSInteger day=[conponent day];
-    _calenderYearLabel.text = [NSString stringWithFormat:@"%ld",year];
+    _calenderYearLabel.text = [NSString stringWithFormat:@"%ld",(long)year];
     if (([UIScreen mainScreen].bounds.size.height == 568.0)) {
         _DayLabelUpConstraint.constant = -10;
         _DayLabelLeftConstraint.constant = -5;
@@ -257,7 +251,7 @@
     }if (([UIScreen mainScreen].bounds.size.height == 667.0)) {
         _calenderDayLabel.font = [UIFont systemFontOfSize:113];
     }
-    _calenderDayLabel.text = [NSString stringWithFormat:@"%ld",day];
+    _calenderDayLabel.text = [NSString stringWithFormat:@"%ld",(long)day];
 
 }
 
@@ -265,9 +259,9 @@
 {
     SocketManager *sock = [SocketManager defaultManager];
     if ([[UD objectForKey:@"HostID"] intValue] > 0x8000) {
-        [sock connectUDP:[IOManager udpPort]];
+        [sock connectUDP:[IOManager C4Port]];
     }else{
-        [sock connectTcp];
+        [sock connectUDP:[IOManager crestronPort]];
     }
     sock.delegate = self;
 }
@@ -358,8 +352,8 @@
 
 - (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left
 {
-    NSString *nickname = [SQLManager queryChat:message.senderUserId][0];
-    NSString *protrait = [SQLManager queryChat:message.senderUserId][1];
+    NSString *nickname = [[SQLManager queryChat:message.senderUserId] firstObject];
+    NSString *protrait = [[SQLManager queryChat:message.senderUserId] lastObject];
     int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
     NSString *tip=@"您有新消息";
     if ([message.objectName isEqualToString:RCTextMessageTypeIdentifier]) {

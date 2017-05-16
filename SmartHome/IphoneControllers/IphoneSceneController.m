@@ -32,7 +32,7 @@
 #import "AppDelegate.h"
 #import "CYLineLayout.h"
 #import "CYPhotoCell.h"
-//#import "IphoneRoomListController.h"
+
 #import "TVIconController.h"
 #import "IphoneNewAddSceneVC.h"
 #import "DeviceInfo.h"
@@ -48,12 +48,12 @@
 @property (nonatomic,assign) int roomID;
 @property (nonatomic,strong) NSArray *roomList;
 @property (nonatomic,strong) UIButton *selectedRoomBtn;
-//@property (nonatomic,strong) NSArray *scenes;
+
 @property (nonatomic,strong)NSMutableArray *scenes;
 @property (nonatomic, assign) int roomIndex;
 @property (nonatomic,assign) int selectedSId;
 @property (nonatomic,assign) int selectedRoomID;
-@property (nonatomic ,strong) CYPhotoCell *cell;
+
 @property (weak, nonatomic) IBOutlet UIButton *AddSceneBtn;
 @property (nonatomic,strong) NSArray * arrayData;
 @property (nonatomic,assign) int sceneID;
@@ -66,7 +66,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *SceneNameLabel;
 @property (nonatomic,strong) UICollectionView * FirstCollectionView;
 @property (nonatomic,strong) UILongPressGestureRecognizer *lgPress;
-@property (nonatomic,strong)UIImage *selectSceneImg;
+@property (nonatomic,strong) UIImage *selectSceneImg;
+@property (nonatomic,strong) CYPhotoCell *currentCell;
 
 @end
 
@@ -402,8 +403,6 @@ static NSString * const CYPhotoId = @"photo";
 {
     if (indexPath.row+1 >= self.scenes.count) {
         CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
-        self.cell = cell;
-        
         cell.imageView.image = [UIImage imageNamed:@"AddScene-ImageView"];
         cell.subImageView.image = [UIImage imageNamed:@"AddSceneBtn"];
         cell.sceneID = 0;
@@ -413,7 +412,6 @@ static NSString * const CYPhotoId = @"photo";
         return cell;
     }else{
         CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
-        self.cell = cell;
         self.scene = self.scenes[indexPath.row];
         if (self.scenes.count == 0) {
             [MBProgressHUD showSuccess:@"暂时没有全屋场景"];
@@ -425,7 +423,7 @@ static NSString * const CYPhotoId = @"photo";
         cell.sceneLabel.text = self.scene.sceneName;
         self.lgPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
         self.lgPress.delegate = self;
-        [cell addGestureRecognizer:self.lgPress];
+        [collectionView addGestureRecognizer:self.lgPress];
         self.SceneNameLabel.tag = self.scene.sceneID;
         self.SceneNameLabel.text = cell.sceneLabel.text;
         [cell.imageView sd_setImageWithURL:[NSURL URLWithString: self.scene.picName] placeholderImage:[UIImage imageNamed:@"PL"]];
@@ -438,6 +436,9 @@ static NSString * const CYPhotoId = @"photo";
 }
 -(void)handleLongPress:(UILongPressGestureRecognizer *)lgr
 {
+    NSIndexPath *indexPath = [self.FirstCollectionView indexPathForItemAtPoint:[lgr locationInView:self.FirstCollectionView]];
+    self.currentCell = (CYPhotoCell *)[self.FirstCollectionView cellForItemAtIndexPath:indexPath];
+    
     UIAlertController * alerController = [UIAlertController alertControllerWithTitle:@"温馨提示更换场景图片" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
     
     [alerController addAction:[UIAlertAction actionWithTitle:@"现在就拍" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -453,7 +454,7 @@ static NSString * const CYPhotoId = @"photo";
     [alerController addAction:[UIAlertAction actionWithTitle:@"从预设图库选" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
          UIStoryboard *MainStoryBoard  = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
         PhotoGraphViewConteoller *PhotoIconVC = [MainStoryBoard instantiateViewControllerWithIdentifier:@"PhotoGraphViewConteoller"];
-           PhotoIconVC.delegate = self;
+        PhotoIconVC.delegate = self;
         [self.navigationController pushViewController:PhotoIconVC animated:YES];
     }]];
     [alerController addAction:[UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -477,33 +478,12 @@ static NSString * const CYPhotoId = @"photo";
     [self presentViewController:alerController animated:YES completion:^{
         
     }];
-   
-    NSLog(@"8980-08-");
-    
 }
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     [DeviceInfo defaultManager].isPhotoLibrary = NO;
     self.selectSceneImg = info[UIImagePickerControllerOriginalImage];
-    [self.cell.imageView setImage:self.selectSceneImg];
-//    [self.sceneBg setBackgroundImage:self.selectSceneImg forState:UIControlStateNormal];
-    //场景ID不变
-       self.sceneID = self.selectedSId;
-    NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
-    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
-    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
-    
-    Scene *scene = [[Scene alloc] init];
-    [scene setValuesForKeysWithDictionary:plistDic];
-    [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
-    [picker dismissViewControllerAnimated:YES completion:nil];
-}
--(void)PhotoIconController:(PhotoGraphViewConteoller *)iconVC withImgName:(NSString *)imgName
-{
-    self.selectSceneImg = [UIImage imageNamed:imgName];
-    [DeviceInfo defaultManager].isPhotoLibrary = NO;
-    [self.cell.imageView setImage:self.selectSceneImg];
-    //    [self.sceneBg setBackgroundImage:self.selectSceneImg forState:UIControlStateNormal];
+
     //场景ID不变
     self.sceneID = self.selectedSId;
     NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
@@ -511,9 +491,36 @@ static NSString * const CYPhotoId = @"photo";
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
     
     Scene *scene = [[Scene alloc] init];
-    [scene setValuesForKeysWithDictionary:plistDic];
-    [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
-//    [self.selectSceneImg setBackgroundImage:self.selectSceneImg forState:UIControlStateNormal];
+    
+    if (plistDic) {
+        [scene setValuesForKeysWithDictionary:plistDic];
+    
+        [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
+    }
+    //[self.currentCell.imageView setImage:self.selectSceneImg];
+    //NSIndexPath *path = [[self FirstCollectionView] indexPathForCell:self.currentCell];
+    //NSLog(@"-------%ld",path.row);
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+-(void)PhotoIconController:(PhotoGraphViewConteoller *)iconVC withImgName:(NSString *)imgName
+{
+    self.selectSceneImg = [UIImage imageNamed:imgName];
+    [DeviceInfo defaultManager].isPhotoLibrary = NO;
+    
+    [self.currentCell.imageView setImage:self.selectSceneImg];
+    //场景ID不变
+    self.sceneID = self.selectedSId;
+    NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
+    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+    
+    Scene *scene = [[Scene alloc] init];
+    if (plistDic) {
+        [scene setValuesForKeysWithDictionary:plistDic];
+    
+        [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
+    }
     
 }
 
@@ -589,9 +596,6 @@ static NSString * const CYPhotoId = @"photo";
 }
 //删除场景
 - (IBAction)deleteAction:(CYPhotoCell *)cell {
-    
-    self.cell = cell;
-    //    cell.deleteBtn.hidden = YES;
     self.sceneID = self.selectedSId;
     //        self.sceneID = self.selectedSId;
     self.SceneNameLabel.tag = self.scene.sceneID;
@@ -655,8 +659,6 @@ static NSString * const CYPhotoId = @"photo";
 //删除场景
 -(void)sceneDeleteAction:(CYPhotoCell *)cell
 {
-   
-    self.cell = cell;
     cell.deleteBtn.hidden = YES;
     self.sceneID = (int)cell.tag;
     NSString *url = [NSString stringWithFormat:@"%@Cloud/scene_delete.aspx",[IOManager httpAddr]];

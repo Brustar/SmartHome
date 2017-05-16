@@ -79,11 +79,18 @@
     return [dic[@"tcpPort"] intValue];
 }
 
-+ (int) udpPort
++ (int) C4Port
 {
     NSString *path=[[NSBundle mainBundle] pathForResource:@"netconfig" ofType:@"plist"];
     NSDictionary *dic = [[NSDictionary alloc] initWithContentsOfFile:path];
-    return [dic[@"udpPort"] intValue];
+    return [dic[@"C4Port"] intValue];
+}
+
++ (int) crestronPort
+{
+    NSString *path=[[NSBundle mainBundle] pathForResource:@"netconfig" ofType:@"plist"];
+    NSDictionary *dic = [[NSDictionary alloc] initWithContentsOfFile:path];
+    return [dic[@"crestronPort"] intValue];
 }
 
 + (void) copyFile:(NSString *)file to:(NSString *)newFile
