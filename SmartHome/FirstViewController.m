@@ -410,15 +410,24 @@
             Scene * info = _shortcutsArray[0];
             [_firstBtn setTitle:info.sceneName forState:UIControlStateNormal];
             _firstBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+            _firstBtn.hidden = NO;
             _TwoBtn.hidden = YES;
+            [_ThreeBtn setTitle:@"" forState:UIControlStateNormal];
+            [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular4"] forState:UIControlStateNormal];
 //          _ThreeBtn.hidden  = YES;
+            _ThreeBtn.userInteractionEnabled = YES;
             
         }if(_shortcutsArray.count == 2) {
             Scene * info1 = _shortcutsArray[0];
             Scene * info2 = _shortcutsArray[1];
             [_firstBtn setTitle:info1.sceneName forState:UIControlStateNormal];
             [_TwoBtn setTitle:info2.sceneName forState:UIControlStateNormal];
+            _firstBtn.hidden = NO;
+            _TwoBtn.hidden = NO;
+            [_ThreeBtn setTitle:@"" forState:UIControlStateNormal];
+            [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular4"] forState:UIControlStateNormal];
 //           _ThreeBtn.hidden = YES;
+            _ThreeBtn.userInteractionEnabled = YES;
         }
         if (_shortcutsArray.count == 3) {
             Scene * info1 = _shortcutsArray[0];
@@ -428,12 +437,17 @@
             [_TwoBtn setTitle:info2.sceneName forState:UIControlStateNormal];
             [_ThreeBtn setTitle:info3.sceneName forState:UIControlStateNormal];
             [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular3"] forState:UIControlStateNormal];
+            _firstBtn.hidden = NO;
+            _TwoBtn.hidden = NO;
+            _ThreeBtn.hidden = NO;
         }
     }else{
         _ThreeBtn.center = CGPointMake(self.view.center.x, self.view.center.y);
         [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular4"] forState:UIControlStateNormal];
+        [_ThreeBtn setTitle:@"" forState:UIControlStateNormal];
         _firstBtn.hidden = YES;
         _TwoBtn.hidden = YES;
+        _ThreeBtn.hidden = YES;
         
     }
 }

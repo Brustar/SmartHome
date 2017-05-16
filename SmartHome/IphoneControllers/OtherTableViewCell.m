@@ -28,10 +28,10 @@
     if (sender == self.OtherSwitchBtn) {
         self.OtherSwitchBtn.selected = !self.OtherSwitchBtn.selected;
         if (self.OtherSwitchBtn.selected) {
-            [self.OtherSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+            [self.OtherSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
         }else{
             
-            [self.OtherSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
+            [self.OtherSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
         }
         NSData *data=[[DeviceInfo defaultManager] toogle:self.OtherSwitchBtn.selected deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];

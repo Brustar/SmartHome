@@ -34,10 +34,10 @@
     if (sender == self.AireSwitchBtn) {
         self.AireSwitchBtn.selected = !self.AireSwitchBtn.selected;
         if (self.AireSwitchBtn.selected) {
-            [self.AireSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+            [self.AireSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
         }else{
             
-            [self.AireSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
+            [self.AireSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
         }
         NSData * data = [[DeviceInfo defaultManager] toogleAirCon:self.AireSwitchBtn.selected deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];

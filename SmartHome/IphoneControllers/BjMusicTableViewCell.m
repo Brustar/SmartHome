@@ -35,7 +35,7 @@
     if (sender == self.BjPowerButton) {
         self.BjPowerButton.selected = !self.BjPowerButton.selected;
         if (self.BjPowerButton.selected) {
-            [self.BjPowerButton setImage:[UIImage imageNamed:@"music_white"] forState:UIControlStateNormal];
+            [self.BjPowerButton setImage:[UIImage imageNamed:@"music-red"] forState:UIControlStateSelected];
             //发送停止指令
             NSData *data=[[DeviceInfo defaultManager] pause:self.deviceid];
             SocketManager *sock=[SocketManager defaultManager];
@@ -47,7 +47,7 @@
             
         }else{
             
-            [self.BjPowerButton setImage:[UIImage imageNamed:@"music-red"] forState:UIControlStateSelected];
+            [self.BjPowerButton setImage:[UIImage imageNamed:@"music_white"] forState:UIControlStateNormal];
             //发送播放指令
             NSData *data=[[DeviceInfo defaultManager] play:self.deviceid];
             SocketManager *sock=[SocketManager defaultManager];
@@ -62,9 +62,9 @@
     }else if (sender == self.AddBjmusicBtn){
         self.AddBjmusicBtn.selected = !self.AddBjmusicBtn.selected;
         if (self.AddBjmusicBtn.selected) {
-            [self.AddBjmusicBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
-        }else{
             [self.AddBjmusicBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
+        }else{
+            [self.AddBjmusicBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
         }
     }else if (sender == self.BjSlider){
         NSData *data=[[DeviceInfo defaultManager] changeVolume:self.BjSlider.value deviceID:self.deviceid];

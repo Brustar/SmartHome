@@ -37,10 +37,10 @@
     if (sender == self.colourBtn) {
         self.colourBtn.selected = !self.colourBtn.selected;
         if (self.colourBtn.selected) {
-            [self.colourBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+            [self.colourBtn setImage:[UIImage imageNamed:@"lv_icon_light_on"] forState:UIControlStateSelected];
         }else{
             
-            [self.colourBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
+            [self.colourBtn setImage:[UIImage imageNamed:@"lv_icon_light_off"] forState:UIControlStateNormal];
         }
         NSData *data=[[DeviceInfo defaultManager] toogleLight:self.colourBtn.selected deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];

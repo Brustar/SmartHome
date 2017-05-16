@@ -32,17 +32,18 @@
     [self.AddFmBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.FMSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];//音量
     [self.FMChannelSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];//频道
+    [self.FMSwitchBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
 }
 - (IBAction)save:(id)sender {
     if (sender == self.FMSwitchBtn) {
          NSData *data=nil;
         self.FMSwitchBtn.selected = !self.FMSwitchBtn.selected;
         if (self.FMSwitchBtn.selected) {
-            [self.FMSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+            [self.FMSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
             data = [[DeviceInfo defaultManager] open:self.deviceid];
         }else{
             
-            [self.FMSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
+            [self.FMSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
              data = [[DeviceInfo defaultManager] close:self.deviceid];
         }
     }

@@ -31,10 +31,10 @@
     if (sender == self.ScreenCurtainBtn) {
         self.ScreenCurtainBtn.selected = !self.ScreenCurtainBtn.selected;
         if (self.ScreenCurtainBtn.selected) {
-            [self.ScreenCurtainBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+            [self.ScreenCurtainBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
         }else{
             
-            [self.ScreenCurtainBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
+            [self.ScreenCurtainBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
             NSData *data=[[DeviceInfo defaultManager] toogle:device.waiting deviceID:self.deviceid];
             SocketManager *sock=[SocketManager defaultManager];
             [sock.socket writeData:data withTimeout:1 tag:1];

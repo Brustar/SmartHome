@@ -31,10 +31,10 @@
         
         self.TVSwitchBtn.selected = !self.TVSwitchBtn.selected;
         if (self.TVSwitchBtn.selected) {
-            [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+            [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
         }else{
             
-            [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
+            [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
         }
         NSData *data=nil;
         DeviceInfo *device=[DeviceInfo defaultManager];

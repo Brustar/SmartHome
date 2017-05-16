@@ -11,6 +11,7 @@
 #import "Light.h"
 #import "SocketManager.h"
 #import "SceneManager.h"
+#import "SeneLightModel.h"
 
 @implementation NewLightCell
 

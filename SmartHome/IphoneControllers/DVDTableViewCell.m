@@ -31,11 +31,11 @@
         NSData *data=nil;
         self.DVDSwitchBtn.selected = !self.DVDSwitchBtn.selected;
         if (self.DVDSwitchBtn.selected) {
-            [self.DVDSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+            [self.DVDSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
              data=[[DeviceInfo defaultManager] pause:self.deviceid];
         }else{
             
-            [self.DVDSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
+            [self.DVDSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
                data=[[DeviceInfo defaultManager] play:self.deviceid];
         }
     }else if (sender == self.AddDvdBtn){
