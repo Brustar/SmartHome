@@ -34,6 +34,12 @@
 }
 
 - (IBAction)save:(id)sender {
+    
+        Light *device=[[Light alloc] init];
+        [device setDeviceID:[self.deviceid intValue]];
+        [device setIsPoweron:device.isPoweron];
+        [device setColor:@[]];
+    
     if (sender == self.colourBtn) {
         self.colourBtn.selected = !self.colourBtn.selected;
         if (self.colourBtn.selected) {
@@ -53,6 +59,17 @@
         }else{
             [self.AddColourLightBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
         }
+        
+        [_scene setSceneID:[self.sceneid intValue]];
+        [_scene setRoomID:self.roomID];
+        [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+        
+        [_scene setReadonly:NO];
+        
+        NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+        [_scene setDevices:devices];
+        [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+        
     }else if (sender == self.colourSlider){
         //调光灯
 //        NSData *data=[[DeviceInfo defaultManager] changeBright:self.NewL.value*100 deviceID:self.deviceid];
@@ -60,20 +77,7 @@
 //        SocketManager *sock=[SocketManager defaultManager];
 //        [sock.socket writeData:data withTimeout:1 tag:1];
     }
-    
-    Light *device=[[Light alloc] init];
-    [device setDeviceID:[self.deviceid intValue]];
-    [device setIsPoweron:device.isPoweron];
-    [device setColor:@[]];
-    [_scene setSceneID:[self.sceneid intValue]];
-    [_scene setRoomID:self.roomID];
-    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-    
-    [_scene setReadonly:NO];
-    
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
-    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+   
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -2598,6 +2598,29 @@
     return rName;
 }
 
++ (BOOL)updateScenePic:(NSString *)img sceneID:(int)sceneID
+{
+    FMDatabase *db = [SQLManager connetdb];
+    
+    BOOL ret = NO;
+    if([db open])
+    {
+        DeviceInfo *device = [DeviceInfo defaultManager];
+        long masterID = 255l;
+        if ([device.db isEqualToString:SMART_DB]) {
+            masterID = [[DeviceInfo defaultManager] masterID];
+        }
+        
+        NSString *sql = [NSString stringWithFormat:@"update Scenes set pic = '%@' where ID = %d and masterID = '%ld'",img,sceneID, masterID];
+        
+        ret = [db executeUpdate:sql];
+        
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return ret;
+}
+
 + (BOOL)updateSceneStatus:(int)status sceneID:(int)sceneID {
     FMDatabase *db = [SQLManager connetdb];
     

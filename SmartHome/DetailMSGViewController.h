@@ -11,7 +11,7 @@
 
 @interface DetailMSGViewController : CustomViewController
 
-@property (nonatomic,strong) NSString * itemID;
+@property (nonatomic) int itemID;
 @property (nonatomic,strong) NSString * type;
 @property (nonatomic, strong) NSNumber *actcode;//消息类型
 

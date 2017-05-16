@@ -32,6 +32,10 @@
 
 - (IBAction)save:(id)sender {
     
+        BgMusic *device=[[BgMusic alloc] init];
+        [device setDeviceID:[self.deviceid intValue]];
+        [device setBgvolume:device.bgvolume];
+    
     if (sender == self.BjPowerButton) {
         self.BjPowerButton.selected = !self.BjPowerButton.selected;
         if (self.BjPowerButton.selected) {
@@ -66,6 +70,15 @@
         }else{
             [self.AddBjmusicBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
         }
+        [_scene setSceneID:[self.sceneid intValue]];
+        [_scene setRoomID:self.roomID];
+        [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+        [_scene setReadonly:NO];
+        
+        NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+        [_scene setDevices:devices];
+        
+        [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
     }else if (sender == self.BjSlider){
         NSData *data=[[DeviceInfo defaultManager] changeVolume:self.BjSlider.value deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
@@ -76,19 +89,6 @@
             [audio.musicPlayer setVolume:self.BjSlider.value/100.0];
         }
     }
-    BgMusic *device=[[BgMusic alloc] init];
-    [device setDeviceID:[self.deviceid intValue]];
-    [device setBgvolume:device.bgvolume];
-    
-    [_scene setSceneID:[self.sceneid intValue]];
-    [_scene setRoomID:self.roomID];
-    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-    [_scene setReadonly:NO];
-    
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
-    
-    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -143,6 +143,7 @@
                 <outlet property="AddFmBtn" destination="KsG-3J-jAv" id="Ktw-ME-tze"/>
                 <outlet property="FMChannelLabel" destination="3bJ-tb-OIA" id="xHS-uI-9o3"/>
                 <outlet property="FMChannelSlider" destination="6Ma-tU-XJy" id="NRy-2J-ts5"/>
+                <outlet property="FMLayouConstraint" destination="7Ka-yk-X0d" id="7kF-Om-lQ2"/>
                 <outlet property="FMNameLabel" destination="oHP-La-v8f" id="Pkl-zs-x5Y"/>
                 <outlet property="FMSlider" destination="3Pw-CA-AFl" id="6PH-ne-6IE"/>
                 <outlet property="FMSwitchBtn" destination="V1H-l4-DmA" id="YAd-3F-Abt"/>

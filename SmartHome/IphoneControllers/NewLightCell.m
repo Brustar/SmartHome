@@ -86,24 +86,24 @@
     }
 
     if (sender == self.AddLightBtn){
-
         
            self.AddLightBtn.selected = !self.AddLightBtn.selected;
         if (self.AddLightBtn.selected) {
             [self.AddLightBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+            
          }else{
             [self.AddLightBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
-             
-             [_scene setSceneID:[self.sceneid intValue]];
-             [_scene setRoomID:self.roomID];
-             [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-             
-             [_scene setReadonly:NO];
-             
-             NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-             [_scene setDevices:devices];
-             [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+          
          }
+        [_scene setSceneID:[self.sceneid intValue]];
+        [_scene setRoomID:self.roomID];
+        [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+        
+        [_scene setReadonly:NO];
+        
+        NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+        [_scene setDevices:devices];
+        [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
         
      }
 

@@ -25,6 +25,10 @@
 }
 
 - (IBAction)save:(id)sender {
+    
+        Amplifier *device=[[Amplifier alloc] init];
+        [device setDeviceID:[self.deviceid intValue]];
+        [device setWaiting: device.waiting];
     if (sender == self.OtherSwitchBtn) {
         self.OtherSwitchBtn.selected = !self.OtherSwitchBtn.selected;
         if (self.OtherSwitchBtn.selected) {
@@ -43,21 +47,17 @@
         }else{
             [self.AddOtherBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
         }
+        [_scene setSceneID:[self.sceneid intValue]];
+        [_scene setRoomID:self.roomID];
+        [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+        
+        [_scene setReadonly:NO];
+        
+        NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+        [_scene setDevices:devices];
+        [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
     }
-    
-    Amplifier *device=[[Amplifier alloc] init];
-    [device setDeviceID:[self.deviceid intValue]];
-    [device setWaiting: device.waiting];
-    
-    [_scene setSceneID:[self.sceneid intValue]];
-    [_scene setRoomID:self.roomID];
-    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-    
-    [_scene setReadonly:NO];
-    
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
-    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+  
 }
 
 - (IBAction)AddOtherBtn:(id)sender {

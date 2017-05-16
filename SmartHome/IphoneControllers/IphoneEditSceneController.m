@@ -304,8 +304,9 @@
             [_ProjectArray addObject:lightArr[i]];
         }else if (_htypeID == 12){//机顶盒
             [_NetVArray addObject:lightArr[i]];
-        }
-        else if (_htypeID == 14){//背景音乐
+        }else if (_htypeID == 15){//FM
+            [_FMArray addObject:lightArr[i]];
+        }else if (_htypeID == 14){//背景音乐
             [_BJMusicArray addObject:lightArr[i]];
         }else if (_htypeID == 17){//幕布
             [_MBArray addObject:lightArr[i]];

@@ -35,6 +35,12 @@
     [self.FMSwitchBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
 }
 - (IBAction)save:(id)sender {
+    
+        Radio *device=[[Radio alloc] init];
+        [device setDeviceID:6];
+        [device setRvolume:device.rvolume];
+        [device setChannel:device.channel];
+    
     if (sender == self.FMSwitchBtn) {
          NSData *data=nil;
         self.FMSwitchBtn.selected = !self.FMSwitchBtn.selected;
@@ -53,8 +59,19 @@
             [self.AddFmBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
         }else{
             [self.AddFmBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
-            
         }
+        
+        [_scene setSceneID:[self.sceneid intValue]];
+        [_scene setRoomID:self.roomID];
+        [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+        
+        [_scene setReadonly:NO];
+        
+        NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+        [_scene setDevices:devices];
+        
+        [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+        
     }else if (sender == self.FMSlider){
         //音量
         NSData *data=[[DeviceInfo defaultManager] changeVolume:self.FMSlider.value*100 deviceID:self.deviceid];
@@ -70,22 +87,7 @@
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
     }
-    
-    Radio *device=[[Radio alloc] init];
-    [device setDeviceID:6];
-    [device setRvolume:device.rvolume];
-    [device setChannel:device.channel];
-    
-    [_scene setSceneID:[self.sceneid intValue]];
-    [_scene setRoomID:self.roomID];
-    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-    
-    [_scene setReadonly:NO];
-    
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
-    
-    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+  
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

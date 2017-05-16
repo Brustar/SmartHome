@@ -148,6 +148,7 @@
 		0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7B0B51D1380BF003C2D52 /* AirController.m */; };
 		0FF92B661D9224640098DD54 /* TVChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF92B651D9224640098DD54 /* TVChannel.m */; };
 		2E0297271E4C4C7600BBC520 /* MySubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0297261E4C4C7600BBC520 /* MySubView.m */; };
+		2E03E2FA1ECA904F00487319 /* SeneLightModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E03E2F91ECA904F00487319 /* SeneLightModel.m */; };
 		2E04198B1EB89F42004D70B9 /* FSLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0419881EB89F42004D70B9 /* FSLineChart.m */; };
 		2E04198C1EB89F42004D70B9 /* UIColor+FSPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E04198A1EB89F42004D70B9 /* UIColor+FSPalette.m */; };
 		2E04198E1EB8A370004D70B9 /* MyInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E04198D1EB8A370004D70B9 /* MyInfo.storyboard */; };
@@ -232,7 +233,6 @@
 		2ECDCC901E9E3623004C68BE /* BjMusicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECDCC8E1E9E3623004C68BE /* BjMusicTableViewCell.m */; };
 		2ECDCC911E9E3623004C68BE /* BjMusicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2ECDCC8F1E9E3623004C68BE /* BjMusicTableViewCell.xib */; };
 		2ED42B931E35B41E00592A03 /* IphoneAirCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED42B921E35B41E00592A03 /* IphoneAirCell.m */; };
-		2ED8840D1EC9FE050062C826 /* SeneLightModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED8840C1EC9FE050062C826 /* SeneLightModel.m */; };
 		2EDC0E901DEC072700F95BE0 /* IPhoneRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDC0E8F1DEC072700F95BE0 /* IPhoneRoom.m */; };
 		2EDE04611E45777B00BC8E0B /* WebViewMangerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE04601E45777B00BC8E0B /* WebViewMangerVC.m */; };
 		2EE1196C1E80D6B900F6FCB6 /* shanchu.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EE1196B1E80D6B900F6FCB6 /* shanchu.png */; };
@@ -793,6 +793,8 @@
 		0FF92B651D9224640098DD54 /* TVChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVChannel.m; sourceTree = "<group>"; };
 		2E0297251E4C4C7600BBC520 /* MySubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySubView.h; sourceTree = "<group>"; };
 		2E0297261E4C4C7600BBC520 /* MySubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySubView.m; sourceTree = "<group>"; };
+		2E03E2F81ECA904F00487319 /* SeneLightModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeneLightModel.h; sourceTree = "<group>"; };
+		2E03E2F91ECA904F00487319 /* SeneLightModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeneLightModel.m; sourceTree = "<group>"; };
 		2E0419871EB89F42004D70B9 /* FSLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSLineChart.h; sourceTree = "<group>"; };
 		2E0419881EB89F42004D70B9 /* FSLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSLineChart.m; sourceTree = "<group>"; };
 		2E0419891EB89F42004D70B9 /* UIColor+FSPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FSPalette.h"; sourceTree = "<group>"; };
@@ -926,8 +928,6 @@
 		2ECDCC8F1E9E3623004C68BE /* BjMusicTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BjMusicTableViewCell.xib; sourceTree = "<group>"; };
 		2ED42B911E35B41E00592A03 /* IphoneAirCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneAirCell.h; sourceTree = "<group>"; };
 		2ED42B921E35B41E00592A03 /* IphoneAirCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneAirCell.m; sourceTree = "<group>"; };
-		2ED8840B1EC9FE050062C826 /* SeneLightModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeneLightModel.h; sourceTree = "<group>"; };
-		2ED8840C1EC9FE050062C826 /* SeneLightModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeneLightModel.m; sourceTree = "<group>"; };
 		2EDC0E8E1DEC072700F95BE0 /* IPhoneRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPhoneRoom.h; sourceTree = "<group>"; };
 		2EDC0E8F1DEC072700F95BE0 /* IPhoneRoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPhoneRoom.m; sourceTree = "<group>"; };
 		2EDE045F1E45777B00BC8E0B /* WebViewMangerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewMangerVC.h; sourceTree = "<group>"; };
@@ -2371,15 +2371,6 @@
 			name = TableViewCell;
 			sourceTree = "<group>";
 		};
-		2ED8840A1EC9FDB50062C826 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				2ED8840B1EC9FE050062C826 /* SeneLightModel.h */,
-				2ED8840C1EC9FE050062C826 /* SeneLightModel.m */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
 		2EDE045E1E45772000BC8E0B /* WebViewManger */ = {
 			isa = PBXGroup;
 			children = (
@@ -2606,7 +2597,8 @@
 		F64EF7F81D8FB710003C1C48 /* IphoneControllers */ = {
 			isa = PBXGroup;
 			children = (
-				2ED8840A1EC9FDB50062C826 /* Model */,
+				2E03E2F81ECA904F00487319 /* SeneLightModel.h */,
+				2E03E2F91ECA904F00487319 /* SeneLightModel.m */,
 				2EBABC6F1E835E950093EF3A /* TableViewCell */,
 				2EA897C31E31B8FA002CA904 /* Iphoneimage */,
 				2EA897AA1E31B25E002CA904 /* YZNavigationMenuView.h */,
@@ -3481,7 +3473,7 @@
 				2E08EFC41EBC668A007F9FE1 /* PhotoGraphViewConteoller.m in Sources */,
 				F65B7D271D34E9E00059CFA4 /* MySettingViewController.m in Sources */,
 				F62CD87D1D950453001C66CE /* IphoneAirController.m in Sources */,
-				2ED8840D1EC9FE050062C826 /* SeneLightModel.m in Sources */,
+				2E03E2FA1ECA904F00487319 /* SeneLightModel.m in Sources */,
 				0F9EA72D1DDB026C00223ED8 /* NSString+RegMatch.m in Sources */,
 				CD7863B71E8CF18200F42AC0 /* VipServiceListViewController.m in Sources */,
 				CDB8B85E1EB1EBD2003AA894 /* UserInfo.m in Sources */,
