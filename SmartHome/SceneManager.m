@@ -466,6 +466,7 @@
         NSString *msg = [responseObject objectForKey:@"msg"];
         
         if(result.integerValue == 0) { //成功
+            [SQLManager updateScenePic:[NSString stringWithFormat:@"http://115.28.151.85:8082/UploadFiles/images/scene/%f.png",[[NSDate date] timeIntervalSince1970]] sceneID:newScene.sceneID];
             [MBProgressHUD showSuccess:@"保存成功"];
         }else { //失败
             [MBProgressHUD showError:msg];

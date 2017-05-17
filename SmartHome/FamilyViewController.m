@@ -78,10 +78,10 @@
 -(void)connect
 {
     SocketManager *sock = [SocketManager defaultManager];
-    if ([NetStatusManager isEnableWIFI]) {
+    if ([[UD objectForKey:@"HostType"] intValue]) {
+        [sock connectUDP:[IOManager C4Port]];
+    }else{
         [sock connectUDP:[IOManager crestronPort]];
-    }else if ([NetStatusManager isEnableWWAN]){
-        [sock connectTcp];
     }
     sock.delegate = self;
 }

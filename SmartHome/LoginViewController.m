@@ -626,6 +626,7 @@ NSArray *array = [NSArray arrayWithObjects:
             [IOManager writeUserdefault:responseObject[@"username"] forKey:@"UserName"];
             [IOManager writeUserdefault:responseObject[@"userid"] forKey:@"UserID"];
             [IOManager writeUserdefault:responseObject[@"usertype"] forKey:@"UserType"];
+            [IOManager writeUserdefault:responseObject[@"hosttype"] forKey:@"HostType"];
             [IOManager writeUserdefault:responseObject[@"vip"] forKey:@"vip"];
             
             //保存登录用户信息

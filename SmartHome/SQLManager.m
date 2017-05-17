@@ -276,15 +276,17 @@
 //htypeid=14
 +(NSString *) singleDeviceWithCatalogID:(int)catalogID byRoom:(int)roomID
 {
+    NSString *cata = catalogID<10?[NSString stringWithFormat:@"0%d",catalogID]:[NSString stringWithFormat:@"%d",catalogID];
+    
     FMDatabase *db = [self connetdb];
     NSString *deviceID = @"";
     if([db open])
     {
         NSString *sql;
         if ([self isWholeHouse:roomID]) {
-            sql = [NSString stringWithFormat:@"SELECT id FROM Devices where htypeid = %d",catalogID];
+            sql = [NSString stringWithFormat:@"SELECT id FROM Devices where htypeid = '%@'",cata];
         }else{
-            sql = [NSString stringWithFormat:@"SELECT id FROM Devices where htypeid = %d and rid = %d",catalogID,roomID];
+            sql = [NSString stringWithFormat:@"SELECT id FROM Devices where htypeid = '%@' and rid = %d",cata,roomID];
         }
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
@@ -1524,6 +1526,31 @@
     [db closeOpenResultSets];
     [db close];
     return lights;
+}
+
++(Device *)singleLightByRoom:(int) roomID
+{
+    Device *light = [Device new];
+    
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        NSString *sql;
+        if ([self isWholeHouse:roomID]) {
+            sql = [NSString stringWithFormat:@"SELECT id,name FROM devices where subTypeid ='%@'",LIGHT_DEVICE_TYPE];
+        }else{
+            sql = [NSString stringWithFormat:@"SELECT id,name FROM devices where rid=%d and subTypeid ='%@'",roomID,LIGHT_DEVICE_TYPE];
+        }
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            light.eID = [[resultSet stringForColumn:@"id"] intValue];
+            light.name = [resultSet stringForColumn:@"name"];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return light;
 }
 
 //多媒体UI菜单
