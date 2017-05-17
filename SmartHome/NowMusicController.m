@@ -18,6 +18,23 @@
 #import "Room.h"
 #import <AVFoundation/AVFoundation.h>
 
+@interface RoomModel : NSObject
+@property (nonatomic,copy) NSString *roomname;
+@property (nonatomic,strong) NSMutableArray *eqinfoList;
+
+@end
+
+@implementation RoomModel
+
+-(NSMutableArray *)eqinfoList{
+    if (!_eqinfoList) {
+        _eqinfoList = [NSMutableArray new];
+    }
+    return _eqinfoList;
+}
+
+@end
+
 @interface NowMusicController ()<UITableViewDataSource,UITableViewDelegate, HttpDelegate>
 @property (nonatomic,strong) NSArray * bgmusicIDS;
 @property (nonatomic,strong) NSMutableArray * bgmusicNameS;
@@ -45,9 +62,10 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _deviceArray = [NSMutableArray array];
+//    _deviceArray = [NSMutableArray array];
     _bgmusicNameS = [[NSMutableArray alloc] init];
 //    _AllRooms = [SQLManager getAllRoomsInfo];
+     _AllRooms = [[NSMutableArray alloc] init];
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
     if (BLUETOOTH_MUSIC) {
@@ -78,9 +96,10 @@
 #pragma mark - Http callback
 - (void)httpHandler:(id)responseObject tag:(int)tag
 {
-            _AllRooms = [[NSMutableArray alloc] init];
+//            _AllRooms = [[NSMutableArray alloc] init];
     if(tag == 1) {
-        [_deviceArray removeAllObjects];
+//        [_deviceArray removeAllObjects];
+        [self.AllRooms removeAllObjects];
         if ([responseObject[@"result"] intValue] == 0) {
             NSArray *roomList = responseObject[@"current_player_list"];
             if ([roomList isKindOfClass:[NSArray class]]) {
@@ -89,8 +108,11 @@
                     if ([room isKindOfClass:[NSDictionary class]]) {
                         NSString *rName = room[@"roomname"];
                         NSArray *equipmentList = room[@"eqinfoList"];
-                         [_AllRooms addObject:rName];
+                        RoomModel *roomMODEL = [RoomModel new];
+                        roomMODEL.roomname = rName;
+//                         [_AllRooms addObject:rName];
                         if ([equipmentList isKindOfClass:[NSArray class]]) {
+//
                             for (NSDictionary *device in equipmentList) {
                                 if ([device isKindOfClass:[NSDictionary class]]) {
                                     Device *devInfo = [[Device alloc] init];
@@ -98,10 +120,13 @@
                                     devInfo.eID = [device[@"eqid"] intValue];
                                     devInfo.name = device[@"eqname"];
                                     
-                                    [_deviceArray addObject:devInfo];
+                                    [roomMODEL.eqinfoList addObject:devInfo];
+//                                    [_deviceArray addObject:devInfo];
                                     
                                 }
                             }
+                            
+                            [self.AllRooms addObject:roomMODEL];
                         }
                         
                     }
@@ -247,49 +272,26 @@
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return _AllRooms.count;
+    return self.AllRooms.count;
 
 }
+//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+//{
+//    RoomModel *model = self.AllRooms[section];
+//    
+//    //    Device *devInfo = model.eqinfoList[indexPath.row];
+//    
+//  return  model.roomname;
+//
+//}
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
  
     
-    return _deviceArray.count;
-}
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(20, 0, self.view.bounds.size.width, 50)];
-    view.backgroundColor = [UIColor clearColor];
-    view.userInteractionEnabled = YES;
-    UILabel * NameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, 50)];
-    NameLabel.textColor = [UIColor whiteColor];
-   
-    NameLabel.text =_AllRooms[section];
-    [view addSubview:NameLabel];
-    UIView * view1 = [[UIView alloc] initWithFrame:CGRectMake(10, 49, self.view.bounds.size.width, 1)];
-    view1.backgroundColor = [UIColor redColor];
-    [view addSubview:view1];
-    UIButton * OpenBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width-150, 15, 30, 30)];
-     OpenBtn.backgroundColor = [UIColor clearColor];
-     OpenBtn.tag = 100+1;
-    [OpenBtn addTarget:self action:@selector(StopBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [OpenBtn setImage:[UIImage imageNamed:@"Video-close"] forState:UIControlStateNormal];
+//    return self.deviceArray.count;
+    RoomModel *model = self.AllRooms[section];
     
-    [view addSubview:OpenBtn];
-    return view;
-}
--(void)StopBtn:(UIButton *)bbt
-{
-    //关指令
-    NSData *data=[[DeviceInfo defaultManager] close:self.deviceid];
-    SocketManager *sock=[SocketManager defaultManager];
-    [sock.socket writeData:data withTimeout:1 tag:1];
-
-}
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 5;
-
+    return  model.eqinfoList.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -302,7 +304,9 @@
     }
     cell.backgroundColor = [UIColor clearColor];
     [cell.textLabel setTextColor:[UIColor whiteColor]];
-    Device *devInfo = _deviceArray[indexPath.row];
+    RoomModel *model = self.AllRooms[indexPath.section];
+    
+    Device *devInfo = model.eqinfoList[indexPath.row];
     cell.textLabel.text = devInfo.name;
     cell.tag = devInfo.eID;
     //cell的点击颜色
@@ -313,14 +317,74 @@
     
     return cell;
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
      UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
-     Device *devInfo = _deviceArray[indexPath.row];
+//     Device *devInfo = _deviceArray[indexPath.row];
+    RoomModel *model = self.AllRooms[indexPath.section];
+    
+    Device *devInfo = model.eqinfoList[indexPath.row];
      self.deviceid = [NSString stringWithFormat:@"%d",devInfo.eID];
       NSLog(@"%ld",cell.tag);
 
+    
+}
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(20, 0, self.view.bounds.size.width, 50)];
+    view.backgroundColor = [UIColor clearColor];
+    view.userInteractionEnabled = YES;
+    UILabel * NameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, 50)];
+    NameLabel.textColor = [UIColor whiteColor];
+    
+    RoomModel *model = self.AllRooms[section];
+    
+    //    Device *devInfo = model.eqinfoList[indexPath.row];
+    
+    NameLabel.text =  model.roomname;
+    [view addSubview:NameLabel];
+    UIView * view1 = [[UIView alloc] initWithFrame:CGRectMake(20, 49, self.view.bounds.size.width, 1)];
+    view1.backgroundColor = [UIColor redColor];
+    [view addSubview:view1];
+    UIButton * OpenBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width-150, 15, 30, 30)];
+    OpenBtn.backgroundColor = [UIColor clearColor];
+    OpenBtn.tag = 100+1;
+    [OpenBtn addTarget:self action:@selector(StopBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [OpenBtn setImage:[UIImage imageNamed:@"Video-close"] forState:UIControlStateNormal];
+    
+    [view addSubview:OpenBtn];
+    return view;
+}
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIView * footerView = [[UIView alloc] init];
+    footerView.frame = CGRectMake(20, 0, self.view.bounds.size.width, 10);
+    footerView.backgroundColor = [UIColor clearColor];
+    UILabel * line = [[UILabel alloc] init];
+    line.frame = CGRectMake(20, 0, self.view.bounds.size.width, 0.5);
+    line.backgroundColor = [UIColor whiteColor];
+    [footerView addSubview:line];
+    
+    return footerView;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 10;
+}
+
+-(void)StopBtn:(UIButton *)bbt
+{
+    //关指令
+    NSData *data=[[DeviceInfo defaultManager] close:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+    
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 50;
     
 }
 

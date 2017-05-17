@@ -25,7 +25,7 @@
 @property (nonatomic,assign) BOOL isAddDevice;
 @property (nonatomic, assign) NSInteger playState;//播放状态： 0:停止 1:播放
 @property (nonatomic, assign) id<NowMusicControllerDelegate>delegate;
-@property (nonatomic, strong) NSMutableArray *deviceArray;
+//@property (nonatomic, strong) NSMutableArray *deviceArray;
 - (IBAction)bgBtnClicked:(id)sender;
 @end
 
