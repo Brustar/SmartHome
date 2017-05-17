@@ -142,7 +142,9 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 灯光",roomName]];
     [self initSwitch];
-
+    Device *device = [SQLManager singleLightByRoom:self.roomID];
+    self.deviceid = self.deviceid?self.deviceid:[NSString stringWithFormat:@"%d",device.eID];
+    self.lightName.text = device.name;
     self.scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     if ([self.sceneid intValue]>0) {
         [self syncUI];
