@@ -82,10 +82,10 @@
 -(void)connect
 {
     SocketManager *sock = [SocketManager defaultManager];
-    if ([[UD objectForKey:@"HostID"] intValue] > 0x8000) {
+    if ([[UD objectForKey:@"HostType"] intValue]) {
         [sock connectUDP:[IOManager C4Port]];
     }else{
-        [sock connectTcp];
+        [sock connectUDP:[IOManager crestronPort]];
     }
     sock.delegate = self;
 }

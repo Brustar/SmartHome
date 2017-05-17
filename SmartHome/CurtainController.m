@@ -182,8 +182,8 @@
 -(void)recv:(NSData *)data withTag:(long)tag
 {
     Proto proto=protocolFromData(data);
-    
-    if (![self.curtainIDArr containsObject:@(proto.deviceID)]) {
+    NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+    if (![self.curtainIDArr containsObject:devID]) {
         return;
     }
     
@@ -198,7 +198,7 @@
     }
     
     if (tag==0 && (proto.action.state == 0x2A || proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON)) {
-        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+        
         if ([devID intValue]==[self.deviceid intValue]) {
             cell.slider.value=proto.action.RValue/100.0;
             if (proto.action.state == PROTOCOL_ON) {
