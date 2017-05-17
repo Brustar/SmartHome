@@ -32,7 +32,6 @@
 #import "AppDelegate.h"
 #import "CYLineLayout.h"
 #import "CYPhotoCell.h"
-
 #import "TVIconController.h"
 #import "IphoneNewAddSceneVC.h"
 #import "DeviceInfo.h"
@@ -41,7 +40,7 @@
 
 #define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)  
 
-@interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,CYPhotoCellDelegate,UIViewControllerPreviewingDelegate,YZNavigationMenuViewDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,PhotoGraphViewConteollerDelegate>
+@interface IphoneSceneController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate,CYPhotoCellDelegate,UIViewControllerPreviewingDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,PhotoGraphViewConteollerDelegate>
 @property (strong, nonatomic) IBOutlet IphoneRoomView *roomView;
 //@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -53,17 +52,12 @@
 @property (nonatomic, assign) int roomIndex;
 @property (nonatomic,assign) int selectedSId;
 @property (nonatomic,assign) int selectedRoomID;
-
 @property (weak, nonatomic) IBOutlet UIButton *AddSceneBtn;
 @property (nonatomic,strong) NSArray * arrayData;
 @property (nonatomic,assign) int sceneID;
-@property (nonatomic,strong) YZNavigationMenuView *menuView;
+//@property (nonatomic,strong) YZNavigationMenuView *menuView;
 @property (strong, nonatomic) IBOutlet UIButton *titleButton;
 @property (nonatomic,strong)HostIDSController *hostVC;
-@property (weak, nonatomic) IBOutlet UIButton *delegateBtn;//场景删除按钮
-@property (weak, nonatomic) IBOutlet UIButton *startBtn;//场景开启按钮
-@property (weak, nonatomic) IBOutlet UIButton *blockBtn;//定时按钮
-@property (weak, nonatomic) IBOutlet UILabel *SceneNameLabel;
 @property (nonatomic,strong) UICollectionView * FirstCollectionView;
 @property (nonatomic,strong) UILongPressGestureRecognizer *lgPress;
 @property (nonatomic,strong) UIImage *selectSceneImg;
@@ -128,16 +122,14 @@ static NSString * const CYPhotoId = @"photo";
     }
 }
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    [self addNotifications];
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    [self setupNaviBar];
-    [self showNetStateView];
-    self.roomList = [SQLManager getAllRoomsInfo];
+      [super viewDidLoad];
+      [self addNotifications];
+      self.automaticallyAdjustsScrollViewInsets = NO;
+      [self setupNaviBar];
+      [self showNetStateView];
+      self.roomList = [SQLManager getAllRoomsInfo];
       [self setUpRoomView];
       [self reachNotification];
-    
-    
       [self setUI];
     self.arrayData = @[@"删除此场景",@"收藏",@"语音"];
     _AddSceneBtn.layer.cornerRadius = _AddSceneBtn.bounds.size.width / 2.0; //圆角半径
@@ -227,7 +219,7 @@ static NSString * const CYPhotoId = @"photo";
 {
     // 创建CollectionView
     CGFloat collectionW = self.view.frame.size.width;
-    CGFloat collectionH = self.view.frame.size.height-350;
+    CGFloat collectionH = self.view.frame.size.height-200;
     CGRect frame = CGRectMake(0, 130, collectionW, collectionH);
     // 创建布局
     CYLineLayout *layout = [[CYLineLayout alloc] init];
@@ -403,37 +395,38 @@ static NSString * const CYPhotoId = @"photo";
 {
     if (indexPath.row+1 >= self.scenes.count) {
         CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
+        cell.delegate = self;
         cell.imageView.image = [UIImage imageNamed:@"AddScene-ImageView"];
         cell.subImageView.image = [UIImage imageNamed:@"AddSceneBtn"];
         cell.sceneID = 0;
-//        self.SceneNameLabel.tag = 0;
-//        cell.tag = 0;
-        self.SceneNameLabel.text = @"点击添加场景";
-        self.delegateBtn.hidden = YES;
-        self.blockBtn.hidden = YES;
-        self.startBtn.hidden = YES;
+        cell.SceneName.text = @"点击添加场景";
+        cell.deleteBtn.hidden = YES;
+        cell.powerBtn.hidden = YES;
+        cell.seleteSendPowBtn.hidden = YES;
+       
         return cell;
     }else{
         CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
+         cell.delegate = self;
         self.scene = self.scenes[indexPath.row];
+        cell.sceneID = self.scene.sceneID;
         if (self.scenes.count == 0) {
             [MBProgressHUD showSuccess:@"暂时没有全屋场景"];
         }
-        self.selectedSId = self.scene.sceneID;
-        cell.sceneID = self.scene.sceneID;
+        self.selectedSId = cell.sceneID;
+      
         cell.subImageView.image = [UIImage imageNamed:@"Scene-bedroomTSQ"];
         cell.tag = self.scene.sceneID;
-        cell.sceneLabel.text = self.scene.sceneName;
+        cell.SceneName.text = self.scene.sceneName;
         self.lgPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
         self.lgPress.delegate = self;
         [collectionView addGestureRecognizer:self.lgPress];
-        self.SceneNameLabel.tag = self.scene.sceneID;
-        self.SceneNameLabel.text = cell.sceneLabel.text;
         [cell.imageView sd_setImageWithURL:[NSURL URLWithString: self.scene.picName] placeholderImage:[UIImage imageNamed:@"PL"]];
         [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];
-        self.delegateBtn.hidden = NO;
-        self.blockBtn.hidden = NO;
-        self.startBtn.hidden = NO;
+        cell.deleteBtn.hidden = NO;
+        cell.powerBtn.hidden = NO;
+        cell.seleteSendPowBtn.hidden = NO;
+        
         return cell;
        
     }
@@ -456,12 +449,6 @@ static NSString * const CYPhotoId = @"photo";
 
         
     }]];
-    [alerController addAction:[UIAlertAction actionWithTitle:@"从预设图库选" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-         UIStoryboard *MainStoryBoard  = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
-        PhotoGraphViewConteoller *PhotoIconVC = [MainStoryBoard instantiateViewControllerWithIdentifier:@"PhotoGraphViewConteoller"];
-        PhotoIconVC.delegate = self;
-        [self.navigationController pushViewController:PhotoIconVC animated:YES];
-    }]];
     [alerController addAction:[UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         [DeviceInfo defaultManager].isPhotoLibrary = YES;
@@ -475,6 +462,12 @@ static NSString * const CYPhotoId = @"photo";
         [picker supportedInterfaceOrientations];
         [self presentViewController:picker animated:YES completion:nil];
         
+    }]];
+    [alerController addAction:[UIAlertAction actionWithTitle:@"从预设图库选" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIStoryboard *MainStoryBoard  = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
+        PhotoGraphViewConteoller *PhotoIconVC = [MainStoryBoard instantiateViewControllerWithIdentifier:@"PhotoGraphViewConteoller"];
+        PhotoIconVC.delegate = self;
+        [self.navigationController pushViewController:PhotoIconVC animated:YES];
     }]];
     [alerController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
@@ -545,17 +538,11 @@ static NSString * const CYPhotoId = @"photo";
      }else{
          Scene *scene = self.scenes[indexPath.row];
          self.selectedSId = scene.sceneID;
-         CYPhotoCell *cell = (CYPhotoCell*)[collectionView cellForItemAtIndexPath:indexPath];
-         [cell useLongPressGesture];
-         if(cell.deleteBtn.hidden)
-         {
-             cell.deleteBtn.hidden = YES;
-             
-         }else{
+//         CYPhotoCell *cell = (CYPhotoCell*)[collectionView cellForItemAtIndexPath:indexPath];
              
              [self performSegueWithIdentifier:@"iphoneEditSegue" sender:self];
              [[SceneManager defaultManager] startScene:scene.sceneID];
-         }
+         
      }
   
 }
@@ -573,105 +560,33 @@ static NSString * const CYPhotoId = @"photo";
 - (void)rightBarButtonItemClicked:(UIBarButtonItem *)sender {
     
       [self performSegueWithIdentifier:@"iphoneAddSceneSegue" sender:self];
-    
-   
 }
-- (void)navigationMenuView:(YZNavigationMenuView *)menuView clickedAtIndex:(NSInteger)index;
+
+-(void)powerBtnAction:(UIButton *)sender sceneStatus:(int)status
 {
-    
-    UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-    UIStoryboard * MainBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-   
-    if (index == 0) {
-        VoiceOrderController * voiceVC = [storyBoard instantiateViewControllerWithIdentifier:@"VoiceOrderController"];
-        [self.navigationController pushViewController:voiceVC animated:YES];
-        [self.menuView removeFromSuperview];
-    }else if (index == 1){
-        SearchViewController * searchVC = [storyBoard instantiateViewControllerWithIdentifier:@"SearchViewController"];
-        [self.navigationController pushViewController:searchVC animated:YES];
-        [self.menuView removeFromSuperview];
-    }else if (index == 2){
-        BgMusicController * BgVC = [MainBoard instantiateViewControllerWithIdentifier:@"BgMusicController"];
-        [self.navigationController pushViewController:BgVC animated:YES];
-        [self.menuView removeFromSuperview];
-    }else if (index == 3){
-        [self performSegueWithIdentifier:@"iphoneAddSceneSegue" sender:self];
-        [self.menuView removeFromSuperview];
-    }
-}
-//删除场景
-- (IBAction)deleteAction:(CYPhotoCell *)cell {
-    self.sceneID = self.selectedSId;
-    //        self.sceneID = self.selectedSId;
-    self.SceneNameLabel.tag = self.scene.sceneID;
-    self.SceneNameLabel.text = self.scene.sceneName;
-    self.delegateBtn.selected = !self.delegateBtn.selected;
-    if (self.delegateBtn.selected) {
-        [self.delegateBtn setBackgroundImage:[UIImage imageNamed:@"delete_white"] forState:UIControlStateSelected];
-        
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"是否删除“%@”场景？",self.SceneNameLabel.text] preferredStyle:UIAlertControllerStyleAlert];
-        
-        // 添加按钮
-        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-            
-            NSString *url = [NSString stringWithFormat:@"%@Cloud/scene_delete.aspx",[IOManager httpAddr]];
-            NSDictionary *dict = @{@"token":[UD objectForKey:@"AuthorToken"], @"scenceid":@(self.sceneID),@"optype":@(1)};
-            HttpManager *http=[HttpManager defaultManager];
-            http.delegate=self;
-            http.tag = 1;
-            [http sendPost:url param:dict];
-        }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-            NSLog(@"点击了取消按钮");
-            
-            
-        }]];
-        
-        [self presentViewController:alert animated:YES completion:nil];
-    }else{
-        [self.delegateBtn setBackgroundImage:[UIImage imageNamed:@"delete_white"] forState:UIControlStateNormal];
-       
-    }
-}
-// 启动场景
-- (IBAction)startBtn:(id)sender {
-    
-    self.sceneID = self.scene.sceneID;
-    self.startBtn.selected = !self.startBtn.selected;
-    if (self.startBtn.selected) {
-        [self.startBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
-        [[SceneManager defaultManager] startScene:self.sceneID];
-         [SQLManager updateSceneStatus:1 sceneID:self.sceneID];//更新数据库
-    }else{
-        [self.startBtn setBackgroundImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
-        [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];
-         [SQLManager updateSceneStatus:0 sceneID:self.sceneID];//更新数据库
-    }
-}
 
-- (IBAction)blockBtn:(id)sender {
-    
-    self.blockBtn.selected = !self.blockBtn.selected;
-    
-    if (self.blockBtn.selected) {
-        
-        [self.blockBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock2"] forState:UIControlStateSelected];
-    }else{
-            [self.blockBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock1"] forState:UIControlStateNormal];
-    }
-}
 
+}
 //删除场景
 -(void)sceneDeleteAction:(CYPhotoCell *)cell
 {
-    cell.deleteBtn.hidden = YES;
+    self.currentCell = cell;
     self.sceneID = (int)cell.tag;
-    NSString *url = [NSString stringWithFormat:@"%@Cloud/scene_delete.aspx",[IOManager httpAddr]];
-    NSDictionary *dict = @{@"token":[UD objectForKey:@"AuthorToken"], @"scenceid":@(self.sceneID),@"optype":@(1)};
-    HttpManager *http=[HttpManager defaultManager];
-    http.delegate=self;
-    http.tag = 1;
-    [http sendPost:url param:dict];
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"是否删除“%@”场景？",self.currentCell.SceneName.text] preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        NSString *url = [NSString stringWithFormat:@"%@Cloud/scene_delete.aspx",[IOManager httpAddr]];
+        NSDictionary *dict = @{@"token":[UD objectForKey:@"AuthorToken"], @"scenceid":@(self.sceneID),@"optype":@(1)};
+        HttpManager *http=[HttpManager defaultManager];
+        http.delegate=self;
+        http.tag = 1;
+        [http sendPost:url param:dict];
+        
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        NSLog(@"点击了取消按钮");
+    }]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
   
 }
 
@@ -706,7 +621,6 @@ static NSString * const CYPhotoId = @"photo";
                         NSLog(@"scene 不存在！");
                         [MBProgressHUD showSuccess:@"删除失败"];
                     }
-                    
                     
                 }else {
                     NSLog(@"数据库删除失败（场景表）");

@@ -23,6 +23,7 @@
 @property (nonatomic,strong) UIButton * naviRightBtn;
 @property CKCircleView * dialView;
 @property (nonatomic,strong)WeekdaysVC * weekDaysVC;
+@property (weak, nonatomic) IBOutlet UIImageView *timingImage;
 
 @end
 
@@ -76,12 +77,14 @@
 }
 -(void)setCustomerSlider
 {
-//    CGFloat width = self.view.frame.size.width;
-    
-    self.dialView = [[CKCircleView alloc] initWithFrame:CGRectMake(0, 0, 265, 265)];
+    int sliderSize = 90;
+    CGRect width = CGRectMake(self.view.center.x-sliderSize, self.view.center.y-sliderSize, sliderSize*2, sliderSize*2);
+    self.dialView = [[CKCircleView alloc] initWithFrame:width];
+
     self.dialView.delegate = self;
 
-    self.dialView.center = CGPointMake(self.DrawView.center.x, self.DrawView.center.y);
+    self.dialView.center = CGPointMake(self.timingImage.center.x, self.timingImage.center.y);
+   
     //轨道路径颜色
     self.dialView.arcColor = [UIColor colorWithRed:82/255.0 green:83/255.0 blue:85/255.0 alpha:0.8];
     //圆盘背景色

@@ -221,7 +221,7 @@ static NSString * const CYPhotoId = @"photo";
 {
     // 创建CollectionView
     CGFloat collectionW = self.view.frame.size.width;
-    CGFloat collectionH = self.view.frame.size.height-350;
+    CGFloat collectionH = self.view.frame.size.height-200;
     CGRect frame = CGRectMake(0, 130, collectionW, collectionH);
     // 创建布局
     CYLineLayout *layout = [[CYLineLayout alloc] init];
@@ -345,12 +345,12 @@ static NSString * const CYPhotoId = @"photo";
 {
     CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
     
-    int offset = ((CYLineLayout *)self.FirstCollectionView.collectionViewLayout).scrollOffset;
-    if ([self.devices count]>offset) {
-        Device *device = self.devices[offset];
-        self.DeviceNameLabel.text = device.subTypeName;
-    }
-    
+        cell.deleteBtn.hidden = YES;
+        cell.powerBtn.hidden = YES;
+        cell.seleteSendPowBtn.hidden = YES;
+        Device * device = self.devices[indexPath.row];
+        cell.SceneName.text = device.subTypeName;
+        cell.SceneNameTopConstraint.constant = 40;
     NSString *imgName = [NSString stringWithFormat:@"catalog_%ld",(long)indexPath.row];
     UIImage *img = [UIImage imageNamed:imgName];
     [cell.imageView sd_setImageWithURL:nil placeholderImage:img];
@@ -358,6 +358,7 @@ static NSString * const CYPhotoId = @"photo";
         cell.icon.hidden = NO;
         cell.icon.image = [UIImage imageNamed:[self.icons objectAtIndex:indexPath.row]];
     }
+    
     return cell;
 }
 

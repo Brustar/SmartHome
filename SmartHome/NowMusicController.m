@@ -62,9 +62,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    _deviceArray = [NSMutableArray array];
     _bgmusicNameS = [[NSMutableArray alloc] init];
-//    _AllRooms = [SQLManager getAllRoomsInfo];
      _AllRooms = [[NSMutableArray alloc] init];
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
@@ -96,9 +94,7 @@
 #pragma mark - Http callback
 - (void)httpHandler:(id)responseObject tag:(int)tag
 {
-//            _AllRooms = [[NSMutableArray alloc] init];
     if(tag == 1) {
-//        [_deviceArray removeAllObjects];
         [self.AllRooms removeAllObjects];
         if ([responseObject[@"result"] intValue] == 0) {
             NSArray *roomList = responseObject[@"current_player_list"];
@@ -110,9 +106,7 @@
                         NSArray *equipmentList = room[@"eqinfoList"];
                         RoomModel *roomMODEL = [RoomModel new];
                         roomMODEL.roomname = rName;
-//                         [_AllRooms addObject:rName];
                         if ([equipmentList isKindOfClass:[NSArray class]]) {
-//
                             for (NSDictionary *device in equipmentList) {
                                 if ([device isKindOfClass:[NSDictionary class]]) {
                                     Device *devInfo = [[Device alloc] init];
@@ -121,7 +115,6 @@
                                     devInfo.name = device[@"eqname"];
                                     
                                     [roomMODEL.eqinfoList addObject:devInfo];
-//                                    [_deviceArray addObject:devInfo];
                                     
                                 }
                             }
@@ -275,22 +268,10 @@
     return self.AllRooms.count;
 
 }
-//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-//{
-//    RoomModel *model = self.AllRooms[section];
-//    
-//    //    Device *devInfo = model.eqinfoList[indexPath.row];
-//    
-//  return  model.roomname;
-//
-//}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
- 
-    
-//    return self.deviceArray.count;
     RoomModel *model = self.AllRooms[section];
-    
     return  model.eqinfoList.count;
 }
 
@@ -322,10 +303,9 @@
 {
     
      UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
-//     Device *devInfo = _deviceArray[indexPath.row];
-    RoomModel *model = self.AllRooms[indexPath.section];
+     RoomModel *model = self.AllRooms[indexPath.section];
     
-    Device *devInfo = model.eqinfoList[indexPath.row];
+     Device *devInfo = model.eqinfoList[indexPath.row];
      self.deviceid = [NSString stringWithFormat:@"%d",devInfo.eID];
       NSLog(@"%ld",cell.tag);
 
@@ -333,19 +313,15 @@
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(20, 0, self.view.bounds.size.width, 50)];
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(15, 0, self.view.bounds.size.width, 50)];
     view.backgroundColor = [UIColor clearColor];
     view.userInteractionEnabled = YES;
-    UILabel * NameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, 50)];
+    UILabel * NameLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 100, 50)];
     NameLabel.textColor = [UIColor whiteColor];
-    
     RoomModel *model = self.AllRooms[section];
-    
-    //    Device *devInfo = model.eqinfoList[indexPath.row];
-    
     NameLabel.text =  model.roomname;
     [view addSubview:NameLabel];
-    UIView * view1 = [[UIView alloc] initWithFrame:CGRectMake(20, 49, self.view.bounds.size.width, 1)];
+    UIView * view1 = [[UIView alloc] initWithFrame:CGRectMake(15, 49, self.view.bounds.size.width, 1)];
     view1.backgroundColor = [UIColor redColor];
     [view addSubview:view1];
     UIButton * OpenBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width-150, 15, 30, 30)];
@@ -360,10 +336,10 @@
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView * footerView = [[UIView alloc] init];
-    footerView.frame = CGRectMake(20, 0, self.view.bounds.size.width, 10);
+    footerView.frame = CGRectMake(15, 0, self.view.bounds.size.width, 10);
     footerView.backgroundColor = [UIColor clearColor];
     UILabel * line = [[UILabel alloc] init];
-    line.frame = CGRectMake(20, 0, self.view.bounds.size.width, 0.5);
+    line.frame = CGRectMake(15, 0, self.view.bounds.size.width, 0.5);
     line.backgroundColor = [UIColor whiteColor];
     [footerView addSubview:line];
     
