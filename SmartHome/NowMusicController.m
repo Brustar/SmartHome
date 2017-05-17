@@ -22,6 +22,7 @@
 @property (nonatomic,copy) NSString *roomname;
 @property (nonatomic,strong) NSMutableArray *eqinfoList;
 
+
 @end
 
 @implementation RoomModel
@@ -286,12 +287,13 @@
     cell.backgroundColor = [UIColor clearColor];
     [cell.textLabel setTextColor:[UIColor whiteColor]];
     RoomModel *model = self.AllRooms[indexPath.section];
-    
     Device *devInfo = model.eqinfoList[indexPath.row];
+    self.seleteSection = indexPath.section;
+    self.seleteRow = indexPath.row;
     cell.textLabel.text = devInfo.name;
     cell.tag = devInfo.eID;
     //cell的点击颜色
-    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(100, 0, self.view.bounds.size.width, 0)];
     view.backgroundColor = [UIColor colorWithRed:67/255.0 green:68/255.0 blue:69/255.0 alpha:1];
     
     cell.selectedBackgroundView = view;
@@ -304,16 +306,17 @@
     
      UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
      RoomModel *model = self.AllRooms[indexPath.section];
-    
      Device *devInfo = model.eqinfoList[indexPath.row];
      self.deviceid = [NSString stringWithFormat:@"%d",devInfo.eID];
+     self.seleteSection = indexPath.section;
+     self.seleteRow = indexPath.row;
       NSLog(@"%ld",cell.tag);
 
     
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(15, 0, self.view.bounds.size.width, 50)];
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];
     view.backgroundColor = [UIColor clearColor];
     view.userInteractionEnabled = YES;
     UILabel * NameLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 100, 50)];
@@ -321,12 +324,15 @@
     RoomModel *model = self.AllRooms[section];
     NameLabel.text =  model.roomname;
     [view addSubview:NameLabel];
-    UIView * view1 = [[UIView alloc] initWithFrame:CGRectMake(15, 49, self.view.bounds.size.width, 1)];
+    //线
+    UIView * view1 = [[UIView alloc] initWithFrame:CGRectMake(0, 49, self.view.bounds.size.width, 1)];
     view1.backgroundColor = [UIColor redColor];
     [view addSubview:view1];
-    UIButton * OpenBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width-150, 15, 30, 30)];
+    
+    UIButton *OpenBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    OpenBtn.frame = CGRectMake(self.view.bounds.size.width-150, 15, 30, 30);
     OpenBtn.backgroundColor = [UIColor clearColor];
-    OpenBtn.tag = 100+1;
+    OpenBtn.tag = section;
     [OpenBtn addTarget:self action:@selector(StopBtn:) forControlEvents:UIControlEventTouchUpInside];
     [OpenBtn setImage:[UIImage imageNamed:@"Video-close"] forState:UIControlStateNormal];
     
@@ -336,10 +342,10 @@
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView * footerView = [[UIView alloc] init];
-    footerView.frame = CGRectMake(15, 0, self.view.bounds.size.width, 10);
+    footerView.frame = CGRectMake(0, 0, self.view.bounds.size.width, 10);
     footerView.backgroundColor = [UIColor clearColor];
     UILabel * line = [[UILabel alloc] init];
-    line.frame = CGRectMake(15, 0, self.view.bounds.size.width, 0.5);
+    line.frame = CGRectMake(0, 0, self.view.bounds.size.width, 0.5);
     line.backgroundColor = [UIColor whiteColor];
     [footerView addSubview:line];
     
@@ -352,11 +358,16 @@
 
 -(void)StopBtn:(UIButton *)bbt
 {
-    //关指令
-    NSData *data=[[DeviceInfo defaultManager] close:self.deviceid];
-    SocketManager *sock=[SocketManager defaultManager];
-    [sock.socket writeData:data withTimeout:1 tag:1];
     
+    RoomModel *model = self.AllRooms[bbt.tag];
+    Device *devInfo = model.eqinfoList[self.seleteRow];
+    self.deviceid = [NSString stringWithFormat:@"%d",devInfo.eID];
+    for (int i = 0; i < model.eqinfoList.count; i ++) {
+        //关指令
+        NSData *data=[[DeviceInfo defaultManager] close:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {

@@ -8,6 +8,7 @@
 
 #import "CYPhotoCell.h"
 #import "SceneManager.h"
+#import "Scene.h"
 
 
 @interface CYPhotoCell()<UIGestureRecognizerDelegate,UIActionSheetDelegate>
@@ -49,6 +50,7 @@
 }
 //定时
 - (IBAction)timingBtn:(id)sender {
+    
     self.seleteSendPowBtn.selected = !self.seleteSendPowBtn.selected;
     
     if (self.seleteSendPowBtn.selected) {

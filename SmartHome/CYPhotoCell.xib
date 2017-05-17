@@ -118,6 +118,7 @@
             </constraints>
             <size key="customSize" width="314" height="348"/>
             <connections>
+                <outlet property="PowerBtnCenterContraint" destination="goc-Wu-BTu" id="HvN-uh-zr2"/>
                 <outlet property="SceneName" destination="aru-ch-nVj" id="luw-je-tuM"/>
                 <outlet property="SceneNameTopConstraint" destination="KJt-mZ-FYe" id="SVy-Cy-osa"/>
                 <outlet property="deleteBtn" destination="8TB-Bq-THf" id="Uec-ch-mhU"/>

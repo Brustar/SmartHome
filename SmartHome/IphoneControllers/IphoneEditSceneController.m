@@ -175,12 +175,12 @@
 }
 -(void)getButtonUI
 {
-    [self.gentleBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 60)];
-    [self.gentleBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 60, 0, 0)];
-    [self.normalBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 60)];
-    [self.normalBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 60, 0, 0)];
-    [self.brightBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 60)];
-    [self.brightBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 60, 0, 0)];
+//    [self.gentleBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 60)];
+//    [self.gentleBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 60, 0, 0)];
+//    [self.normalBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 60)];
+//    [self.normalBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 60, 0, 0)];
+//    [self.brightBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 60)];
+//    [self.brightBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 60, 0, 0)];
     [_gentleBtn setBackgroundImage:[UIImage imageNamed:@"Scene-bedroomJJ"] forState:UIControlStateNormal];
     [_gentleBtn setBackgroundImage:[UIImage imageNamed:@"Scene-bedroom_05_2"] forState:UIControlStateDisabled];
     [_normalBtn setBackgroundImage:[UIImage imageNamed:@"Scene-bedroomJJ"] forState:UIControlStateNormal];

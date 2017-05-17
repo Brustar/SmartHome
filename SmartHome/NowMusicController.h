@@ -21,6 +21,8 @@
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic,weak) NSString *deviceid;
 @property (nonatomic,assign) int roomID;
+@property (nonatomic,assign) NSInteger seleteSection;
+@property (nonatomic,assign) NSInteger seleteRow;
 @property (strong, nonatomic) Scene *scene;
 @property (nonatomic,assign) BOOL isAddDevice;
 @property (nonatomic, assign) NSInteger playState;//播放状态： 0:停止 1:播放

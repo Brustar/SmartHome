@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *deleteBtn;
 @property (weak, nonatomic) IBOutlet UIButton *seleteSendPowBtn;
 @property (weak, nonatomic) IBOutlet UILabel *SceneName;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *PowerBtnCenterContraint;//定时按钮隐藏改变的约束
 
 @property (nonatomic,weak) id<CYPhotoCellDelegate> delegate;
 

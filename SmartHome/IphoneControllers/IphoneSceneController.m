@@ -400,6 +400,7 @@ static NSString * const CYPhotoId = @"photo";
         cell.subImageView.image = [UIImage imageNamed:@"AddSceneBtn"];
         cell.sceneID = 0;
         cell.SceneName.text = @"点击添加场景";
+        cell.SceneNameTopConstraint.constant = 40;
         cell.deleteBtn.hidden = YES;
         cell.powerBtn.hidden = YES;
         cell.seleteSendPowBtn.hidden = YES;
@@ -409,9 +410,22 @@ static NSString * const CYPhotoId = @"photo";
         CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
          cell.delegate = self;
         self.scene = self.scenes[indexPath.row];
+       
         cell.sceneID = self.scene.sceneID;
         if (self.scenes.count == 0) {
             [MBProgressHUD showSuccess:@"暂时没有全屋场景"];
+        }
+        NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.scene.sceneID];
+        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+        NSArray * schedules = plistDic[@"schedules"];
+        self.scene.schedules = schedules;
+        if (self.scene.schedules.count == 0) {
+            cell.seleteSendPowBtn.hidden = YES;
+            cell.PowerBtnCenterContraint.constant = 35;
+        }else{
+            cell.seleteSendPowBtn.hidden = NO;
+            cell.PowerBtnCenterContraint.constant = 0;
         }
         self.selectedSId = cell.sceneID;
       
@@ -425,7 +439,7 @@ static NSString * const CYPhotoId = @"photo";
         [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];
         cell.deleteBtn.hidden = NO;
         cell.powerBtn.hidden = NO;
-        cell.seleteSendPowBtn.hidden = NO;
+//        cell.seleteSendPowBtn.hidden = NO;
         
         return cell;
        

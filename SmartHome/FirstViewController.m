@@ -463,18 +463,11 @@
 //社交平台的弹出事件
 -(void)HeadDoTap:(UITapGestureRecognizer *)tap
 {
-
-    _baseTabbarController.tabbarPanel.hidden = YES;
+         _baseTabbarController.tabbarPanel.hidden = YES;
      if (self.socialView.hidden) {
         self.socialView.hidden = NO;
-//        _UserNameLabel.hidden = YES;
-//        _WelcomeLabel.hidden = YES;
-//         self.chatlabel.text = [NSString stringWithFormat:@"123:%d",_roomID++];
-     
      }else{
          self.socialView.hidden = YES;
-//        _UserNameLabel.hidden = NO;
-//        _WelcomeLabel.hidden = NO;
         _baseTabbarController.tabbarPanel.hidden = NO;
          self.chatlabel.text = @"456";
     }
@@ -552,6 +545,9 @@
 }
 
 - (void)leftBtnClicked:(UIButton *)btn {
+    
+    self.socialView.hidden = YES;
+    _baseTabbarController.tabbarPanel.hidden = NO;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     if (appDelegate.LeftSlideVC.closed)
@@ -607,8 +603,6 @@
 
 //正在播放的点击事件
 - (IBAction)playerBarBtn:(id)sender {
-
-    
     UIStoryboard * HomeStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
     NowMusicController * nowMusicController = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"NowMusicController"];
     [self.navigationController pushViewController:nowMusicController animated:YES];
@@ -617,6 +611,10 @@
 
 //点击未读消息的事件
 - (IBAction)UnreadButton:(id)sender {
+    
+    self.socialView.hidden = YES;
+    _baseTabbarController.tabbarPanel.hidden = NO;
+    
     [self setRCIM];
 }
 
@@ -686,7 +684,6 @@
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-
       self.socialView.hidden = YES;
     _baseTabbarController.tabbarPanel.hidden = NO;
 }
