@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol OtherTableViewCellDelegate;
+
 @interface OtherTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *NameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *OtherSwitchBtn;
@@ -18,4 +20,14 @@
 //房间id
 @property (nonatomic,assign) NSInteger roomID;
 @property (strong, nonatomic) Scene *scene;
+@property (nonatomic, assign) id<OtherTableViewCellDelegate>delegate;
+
+@end
+
+
+@protocol OtherTableViewCellDelegate <NSObject>
+
+@optional
+- (void)onOtherSwitchBtnClicked:(UIButton *)btn;
+
 @end

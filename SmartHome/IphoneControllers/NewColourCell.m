@@ -52,6 +52,10 @@
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
         
+        if (_delegate && [_delegate respondsToSelector:@selector(onColourSwitchBtnClicked:)]) {
+            [_delegate onColourSwitchBtnClicked:sender];
+        }
+        
     }else if (sender == self.AddColourLightBtn){
         self.AddColourLightBtn.selected = !self.AddColourLightBtn.selected;
         if (self.AddColourLightBtn.selected) {

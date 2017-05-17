@@ -126,4 +126,42 @@ NSString * const WXAPIKey = @"e2a0b1c7dCloudSmartHome1z2y3x4qq";
     }
 }
 
+#pragma mark - WeXinPay Request
+- (void)weixinPay {
+    NSString *authorToken = [UD objectForKey:@"AuthorToken"];
+    NSString *url = [NSString stringWithFormat:@"%@/WxPay/UnitOrderPage.aspx", [IOManager httpAddr]];
+    
+    if (authorToken.length >0) {
+        NSDictionary *dict = @{@"token":authorToken,
+                               @"trade_type":@"APP",
+                               @"goods_id":@(1)
+                               };
+        
+        HttpManager *http = [HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = 1;
+        [http sendPost:url param:dict];
+    }
+}
+
+#pragma  mark -  Http Delegate
+-(void)httpHandler:(id)responseObject tag:(int)tag {
+    if (tag == 1) {
+        if ([responseObject[@"result"] intValue] == 0)
+        {
+            NSString *prepayId = responseObject[@"prepay_id"];
+            
+            if (prepayId.length >0) {
+                //调用微信支付
+                [[WeChatPayManager sharedInstance] doPayWithPrepayId:prepayId];
+            }else {
+                [MBProgressHUD showError:@"支付失败"];
+            }
+            
+        }else {
+            NSLog(@"HTTP ERROR: %@", responseObject[@"msg"]);
+        }
+    }
+}
+
 @end

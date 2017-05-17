@@ -68,6 +68,10 @@
     NSData *data = [[DeviceInfo defaultManager] upScreenByDeviceID:self.deviceid];
     SocketManager *sock = [SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];//up
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(onUPBtnClicked:)]) {
+        [_delegate onUPBtnClicked:sender];
+    }
 }
 //降
 - (IBAction)downBtn:(id)sender {
@@ -75,7 +79,10 @@
     NSData *data = [[DeviceInfo defaultManager] downScreenByDeviceID:self.deviceid];
     SocketManager *sock = [SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
-
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(onDownBtnClicked:)]) {
+        [_delegate onDownBtnClicked:sender];
+    }
 }
 //停
 - (IBAction)stopBtn:(id)sender {
@@ -93,6 +100,10 @@
         NSData *data = [[DeviceInfo defaultManager] stopScreenByDeviceID:self.deviceid];
         SocketManager *sock = [SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
+    }
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(onStopBtnClicked:)]) {
+        [_delegate onStopBtnClicked:sender];
     }
 }
 

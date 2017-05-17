@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "WXApi.h"
+#import "HttpManager.h"
 
-@interface WeChatPayManager : NSObject<WXApiDelegate>
+@interface WeChatPayManager : NSObject<WXApiDelegate, HttpDelegate>
 
 + (instancetype)sharedInstance;
 - (void)doPayWithPrepayId:(NSString *)prepayId;
-
+- (void)weixinPay;
 @end
