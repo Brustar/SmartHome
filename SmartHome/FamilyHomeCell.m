@@ -89,7 +89,7 @@
         ringR = 65;
     }
     
-    [LayerUtil createRingForPM25:ringR pos:CGPointMake(self.frame.size.width/2, self.frame.size.width/2) colors:@[PM25_COLOR] pm25Value:200 container:self];
+    [LayerUtil createRingForPM25:ringR pos:CGPointMake(self.frame.size.width/2, self.frame.size.width/2) colors:@[PM25_COLOR] pm25Value:[info.pm25 floatValue] container:self];
 }
 
 @end

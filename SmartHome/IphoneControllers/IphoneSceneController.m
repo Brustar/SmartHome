@@ -341,7 +341,7 @@ static NSString * const CYPhotoId = @"photo";
         NSString *imageName = @"i-add";
         [self.scenes addObject:imageName];
     }
-    [self.FirstCollectionView reloadData];
+    //[self.FirstCollectionView reloadData];
     
     BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     baseTabbarController.tabbarPanel.hidden = NO;
@@ -404,7 +404,7 @@ static NSString * const CYPhotoId = @"photo";
         cell.deleteBtn.hidden = YES;
         cell.powerBtn.hidden = YES;
         cell.seleteSendPowBtn.hidden = YES;
-       
+    
         return cell;
     }else{
         CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
@@ -446,6 +446,7 @@ static NSString * const CYPhotoId = @"photo";
     }
     
 }
+
 -(void)handleLongPress:(UILongPressGestureRecognizer *)lgr
 {
     NSIndexPath *indexPath = [self.FirstCollectionView indexPathForItemAtPoint:[lgr locationInView:self.FirstCollectionView]];
@@ -509,9 +510,8 @@ static NSString * const CYPhotoId = @"photo";
     
         [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
     }
-    //[self.currentCell.imageView setImage:self.selectSceneImg];
-    //NSIndexPath *path = [[self FirstCollectionView] indexPathForCell:self.currentCell];
-    //NSLog(@"-------%ld",path.row);
+    
+    [self.currentCell.imageView setImage:self.selectSceneImg];
     
     [picker dismissViewControllerAnimated:YES completion:nil];
 }

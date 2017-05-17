@@ -48,7 +48,13 @@ typedef NS_ENUM(NSUInteger, catalog) {
 @property (nonatomic,strong) NSString *purchase;
 @property (nonatomic,strong) NSString *producer;
 @property (nonatomic,strong) NSString *gua_tel;
-@property (nonatomic,assign) NSInteger power;
+@property (nonatomic,assign) NSInteger power;//status: 开／关
+@property (nonatomic, assign) NSInteger bright;//灯光亮度
+@property (nonatomic, strong) NSString *color;//灯颜色
+@property (nonatomic, assign) NSInteger position;//窗帘位置
+@property (nonatomic, assign) NSInteger temperature;//空调的设定温度
+@property (nonatomic, assign) NSInteger fanspeed;//空调风速
+@property (nonatomic, assign) NSInteger air_model;//空调模式:制冷，制热，送风，除湿
 @property (nonatomic,assign) double current;
 @property (nonatomic,assign) NSInteger voltage;
 @property (nonatomic,strong) NSString *protocol;

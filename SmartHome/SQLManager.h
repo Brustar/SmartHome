@@ -46,7 +46,7 @@
 + (NSArray *)getColourLightByRoom:(int) roomID;
 //根据房间ID获取照明设备
 + (NSArray *)getLightDevicesByRoom:(int)roomID;
-
++ (Device *)singleLightByRoom:(int) roomID;
 //根据设备ID获取设备名称
 +(NSString *)deviceNameByDeviceID:(int)eId;
 //根据设备ID获取设备htypeID
@@ -190,4 +190,5 @@
 +(NSArray *)getAllRoomsInfoWithoutIsAll;
 +(NSArray *)getAllDevicesInfo:(int)roomID;
 + (NSArray *)getAllSceneOrderByRoomID;
++ (BOOL)updateDeviceStatus:(Device *)deviceInfo;
 @end

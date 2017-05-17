@@ -187,7 +187,7 @@
             dateLabel.textColor = [UIColor lightGrayColor];
             dateLabel.font = [UIFont systemFontOfSize:15];
             dateLabel.backgroundColor = [UIColor clearColor];
-            dateLabel.text = @"2017-5-31 到期";
+            dateLabel.text = [NSString stringWithFormat:@"%@ 到期", _userInfomation.endDate];
             [view addSubview:dateLabel];
             
             UIButton *chargeBtn = [[UIButton alloc] initWithFrame:CGRectMake(160, 11, 40, 22)];

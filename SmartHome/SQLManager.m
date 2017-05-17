@@ -276,15 +276,17 @@
 //htypeid=14
 +(NSString *) singleDeviceWithCatalogID:(int)catalogID byRoom:(int)roomID
 {
+    NSString *cata = catalogID<10?[NSString stringWithFormat:@"0%d",catalogID]:[NSString stringWithFormat:@"%d",catalogID];
+    
     FMDatabase *db = [self connetdb];
     NSString *deviceID = @"";
     if([db open])
     {
         NSString *sql;
         if ([self isWholeHouse:roomID]) {
-            sql = [NSString stringWithFormat:@"SELECT id FROM Devices where htypeid = %d",catalogID];
+            sql = [NSString stringWithFormat:@"SELECT id FROM Devices where htypeid = '%@'",cata];
         }else{
-            sql = [NSString stringWithFormat:@"SELECT id FROM Devices where htypeid = %d and rid = %d",catalogID,roomID];
+            sql = [NSString stringWithFormat:@"SELECT id FROM Devices where htypeid = '%@' and rid = %d",cata,roomID];
         }
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
@@ -329,12 +331,10 @@
     device.sn = [resultSet stringForColumn:@"sn"];
     device.birth = [resultSet stringForColumn:@"birth"];
     device.guarantee = [resultSet stringForColumn:@"guarantee"];
-    device.model = [resultSet stringForColumn:@""];
     device.price = [resultSet doubleForColumn:@"price"];
     device.purchase = [resultSet stringForColumn:@"purchase"];
     device.producer = [resultSet stringForColumn:@"producer"];
     device.gua_tel = [resultSet stringForColumn:@"gua_tel"];
-    device.power = [resultSet intForColumn:@"power"];
     device.current = [resultSet doubleForColumn:@"current"];
     device.voltage = [resultSet intForColumn:@"voltage"];
     device.protocol = [resultSet stringForColumn:@"protocol"];
@@ -344,6 +344,15 @@
     device.subTypeId = [resultSet intForColumn:@"subTypeId"];
     device.typeName = [resultSet stringForColumn:@"typeName"];
     device.subTypeName = [resultSet stringForColumn:@"subTypeName"];
+    
+    device.power = [resultSet intForColumn:@"power"];
+    device.bright = [resultSet intForColumn:@"bright"];
+    device.color = [resultSet stringForColumn:@"color"];
+    device.position = [resultSet intForColumn:@"position"];
+    device.air_model = [resultSet intForColumn:@"model"];
+    device.fanspeed = [resultSet intForColumn:@"fanspeed"];
+    device.temperature = [resultSet intForColumn:@"temperature"];
+    
     return device;
 }
 
@@ -1519,6 +1528,31 @@
     return lights;
 }
 
++(Device *)singleLightByRoom:(int) roomID
+{
+    Device *light = [Device new];
+    
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        NSString *sql;
+        if ([self isWholeHouse:roomID]) {
+            sql = [NSString stringWithFormat:@"SELECT id,name FROM devices where subTypeid ='%@'",LIGHT_DEVICE_TYPE];
+        }else{
+            sql = [NSString stringWithFormat:@"SELECT id,name FROM devices where rid=%d and subTypeid ='%@'",roomID,LIGHT_DEVICE_TYPE];
+        }
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            light.eID = [[resultSet stringForColumn:@"id"] intValue];
+            light.name = [resultSet stringForColumn:@"name"];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return light;
+}
+
 //多媒体UI菜单
 +(NSArray *)mediaDeviceNamesByRoom:(int)roomID
 {
@@ -1635,13 +1669,7 @@
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        DeviceInfo *dev = [DeviceInfo defaultManager];
-        long masterID = 255l;
-        if ([dev.db isEqualToString:SMART_DB]) {
-            masterID = [[DeviceInfo defaultManager] masterID];
-        }
-        
-        NSString *sql = [NSString stringWithFormat:@"SELECT * FROM Devices where ID = %d and masterID = '%ld'",deviceID, masterID];
+        NSString *sql = [NSString stringWithFormat:@"SELECT * FROM Devices where ID = %d and masterID = '%ld'",deviceID, [[DeviceInfo defaultManager] masterID]];
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
@@ -2093,7 +2121,7 @@
         
         NSString *sqlRoom=@"CREATE TABLE IF NOT EXISTS Rooms(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"PM25\" INTEGER, \"NOISE\" INTEGER, \"TEMPTURE\" INTEGER, \"CO2\" INTEGER, \"moisture\" INTEGER, \"imgUrl\" TEXT,\"ibeacon\" INTEGER,\"totalVisited\" INTEGER,\"masterID\" TEXT,\"openforcurrentuser\" INTEGER,\"isAll\" INTEGER)";
         NSString *sqlChannel=@"CREATE TABLE IF NOT EXISTS Channels (\"id\" INTEGER PRIMARY KEY  NOT NULL  UNIQUE ,\"eqId\" INTEGER,\"channelValue\" INTEGER,\"cNumber\" INTEGER, \"Channel_name\" TEXT,\"Channel_pic\" TEXT, \"parent\" CHAR(2) NOT NULL  DEFAULT TV, \"isFavorite\" BOOL DEFAULT 0, \"eqNumber\" TEXT,\"masterID\" TEXT)";
-        NSString *sqlDevice=@"CREATE TABLE IF NOT EXISTS Devices(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"sn\" TEXT, \"birth\" DATETIME, \"guarantee\" DATETIME, \"model\" TEXT, \"price\" FLOAT, \"purchase\" DATETIME, \"producer\" TEXT, \"gua_tel\" TEXT, \"power\" INTEGER, \"current\" FLOAT, \"voltage\" INTEGER, \"protocol\" TEXT, \"rID\" INTEGER, \"eNumber\" TEXT, \"htypeID\" TEXT, \"subTypeId\" INTEGER, \"typeName\" TEXT, \"subTypeName\" TEXT, \"masterID\" TEXT, \"icon_url\" TEXT, \"camera_url\" TEXT)";
+        NSString *sqlDevice=@"CREATE TABLE IF NOT EXISTS Devices(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"sn\" TEXT, \"birth\" DATETIME, \"guarantee\" DATETIME, \"model\" INTEGER, \"temperature\" INTEGER, \"fanspeed\" INTEGER, \"price\" FLOAT, \"purchase\" DATETIME, \"producer\" TEXT, \"gua_tel\" TEXT, \"power\" INTEGER, \"bright\" INTEGER, \"color\" TEXT, \"position\" INTEGER,  \"current\" FLOAT, \"voltage\" INTEGER, \"protocol\" TEXT, \"rID\" INTEGER, \"eNumber\" TEXT, \"htypeID\" TEXT, \"subTypeId\" INTEGER, \"typeName\" TEXT, \"subTypeName\" TEXT, \"masterID\" TEXT, \"icon_url\" TEXT, \"camera_url\" TEXT)";
         NSString *sqlScene=@"CREATE TABLE IF NOT EXISTS \"Scenes\" (\"ID\" INT PRIMARY KEY  NOT NULL ,\"NAME\" TEXT NOT NULL ,\"roomName\" TEXT,\"pic\" TEXT DEFAULT (null) ,\"rId\" INTEGER,\"sType\" INTEGER, \"snumber\" TEXT,\"isFavorite\" BOOL,\"totalVisited\" INTEGER,\"masterID\" TEXT ,\"status\" INTEGER DEFAULT (0))";
         NSString *sqlChat = @"CREATE TABLE IF NOT EXISTS chats(\"ID\" INTEGER PRIMARY KEY  NOT NULL ,nickname varchar(20),portrait varchar(100),username varchar(20),user_id integer)";
         NSString *sqlCatalog = @"CREATE TABLE IF NOT EXISTS catalog(\"ID\" INTEGER PRIMARY KEY  NOT NULL ,catalogName varchar(20))";
@@ -2880,6 +2908,11 @@
 
 + (void) writeDevices:(NSArray *)rooms
 {
+    if(rooms.count ==0 || rooms == nil)
+    {
+        return;
+    }
+    
     FMDatabase *db = [SQLManager connetdb];
     if([db open])
     {
@@ -2895,13 +2928,14 @@
             }
             for(NSDictionary *equip in equipmentList)
             {
-                NSString *sql = [NSString stringWithFormat:@"insert into Devices values(%d,'%@',%@,%@,%@,%@,%@,%@,%@,'%@',%@,%@,%@,%@,%ld,'%@','%@',%@,'%@','%@','%ld','%@','%@')",[equip[@"equipment_id"] intValue],equip[@"name"],NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,(long)rId,equip[@"number"],equip[@"htype_id"],equip[@"subtype_id"],equip[@"type_name"],equip[@"subtype_name"],[[DeviceInfo defaultManager] masterID],equip[@"imgurl"],equip[@"cameraurl"]]; //cameraurl
+                NSString *masterID = [NSString stringWithFormat:@"%ld", [[DeviceInfo defaultManager] masterID]];
+                int subtypeID = [equip[@"subtype_id"] intValue];
+                
+                NSString *sql = [NSString stringWithFormat:@"insert into Devices values(%d, '%@', '%@', '%@', '%@', %d, %d, %d, %f, '%@', '%@', '%@', %d, %d, '%@', %d, %f, %d, '%@', '%ld', '%@', '%@', '%d', '%@', '%@', '%@', '%@', '%@')",[equip[@"equipment_id"] intValue], equip[@"name"], NULL, NULL, NULL,0,25, 0, 1005.5, NULL, NULL, NULL, 0, 0, @"FFFF", 0, 0.1, 220, @"none",(long)rId, equip[@"number"], equip[@"htype_id"], subtypeID, equip[@"type_name"], equip[@"subtype_name"], masterID, equip[@"imgurl"], equip[@"cameraurl"]];
                 
                 BOOL result = [db executeUpdate:sql];
-                
                 if(result)
                 {
-                    [self writeCatalog:[equip[@"subtype_id"] intValue] name:equip[@"subtype_name"] db:db];
                     NSLog(@"insert 成功");
                 }else{
                     NSLog(@"insert 失败");
@@ -3004,6 +3038,24 @@
     }
     
     [db close];
+}
+
+//更新设备状态
++ (BOOL)updateDeviceStatus:(Device *)deviceInfo {
+    FMDatabase *db = [SQLManager connetdb];
+    
+    BOOL ret = NO;
+    if([db open])
+    {
+        
+        NSString *sql = [NSString stringWithFormat:@"update Devices set power = %ld,  bright = %ld,  color = '%@',  position = %ld,  temperature = %ld,  fanspeed = %ld,  model = %ld  where ID = %ld and masterID = '%ld'",(long)deviceInfo.power, (long)deviceInfo.bright, deviceInfo.color, (long)deviceInfo.position, (long)deviceInfo.temperature, (long)deviceInfo.fanspeed, (long)deviceInfo.air_model, (long)deviceInfo.eID, [[DeviceInfo defaultManager] masterID]];
+        
+        ret = [db executeUpdate:sql];
+        
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return ret;
 }
 
 @end
