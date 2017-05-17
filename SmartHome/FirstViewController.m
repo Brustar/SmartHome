@@ -63,6 +63,8 @@
 @property (weak, nonatomic) IBOutlet UIView *iconeView;
 @property (nonatomic, strong) NSMutableArray *shortcutsArray;
 
+@property (weak, nonatomic) IBOutlet UILabel *ShowHeadImage;//是否有新消息的图标
+
 @end
 
 @implementation FirstViewController
@@ -93,8 +95,20 @@
     _baseTabbarController.tabBar.hidden = YES;
     int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
     self.numberLabel.text = [NSString stringWithFormat:@"%d" ,unread];
+    
+    if ([self.numberLabel.text isEqualToString:@"0"]) {
+        self.ShowHeadImage.hidden = YES;
+    }else{
+        self.ShowHeadImage.hidden = NO;
+    }
     [self getScenesFromPlist];
- 
+    [self getPlist];
+    [self setBtn];
+   
+}
+
+-(void)getPlist
+{
     NSArray  *paths  =  NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
     NSString *docDir = [paths objectAtIndex:0];
     NSString *filePath = [docDir stringByAppendingPathComponent:@"Title.plist"];
@@ -116,10 +130,8 @@
             [DetailSet addObject:[DetailArray objectAtIndex:r]];
         }
         NSArray * detail = [DetailSet allObjects];
-        self.TakeTurnsWordsLabel.text = detail[0];
+        self.markedWordsLabel.text = detail[0];
     }
-
-       [self setBtn];
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -133,6 +145,7 @@
     if (_afNetworkReachabilityManager.reachableViaWWAN) {
         NSLog(@"WWAN: %d", _afNetworkReachabilityManager.reachableViaWWAN);
     }
+   
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -162,6 +175,7 @@
     [self setUIMessage];
     [self chatConnect];
     [self getScenesFromPlist];
+    [self setBtn];
    
 }
 
@@ -172,6 +186,8 @@
     _IconeImageView.layer.cornerRadius = _IconeImageView.bounds.size.height/2;
     _numberLabel.layer.masksToBounds = YES;
     _numberLabel.layer.cornerRadius = _numberLabelView.bounds.size.height / 2;
+    self.ShowHeadImage.layer.masksToBounds = YES;
+    self.ShowHeadImage.layer.cornerRadius = self.ShowHeadImage.width /2;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doTap:)];
     UITapGestureRecognizer *Headtap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(HeadDoTap:)];
     _HeadImageView.userInteractionEnabled = YES;
@@ -362,6 +378,11 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         self.chatlabel.text =[NSString stringWithFormat:@"%@ : %@" , nickname, tip];
         self.numberLabel.text = [NSString stringWithFormat:@"%d" ,unread<0?0:unread];
+        if ([self.numberLabel.text isEqualToString:@"0"]) {
+            self.ShowHeadImage.hidden = YES;
+        }else{
+            self.ShowHeadImage.hidden = NO;
+        }
         [self.IconeImageView sd_setImageWithURL:[NSURL URLWithString:protrait] placeholderImage:[UIImage imageNamed:@"logo"] options:SDWebImageRetryFailed];
     });
 
@@ -392,42 +413,49 @@
 
 -(void)setBtn
 {
-    
-    _firstBtn.selected = !_firstBtn.selected;
-    _TwoBtn.selected = !_TwoBtn.selected;
-    _ThreeBtn.selected = !_ThreeBtn.selected;
-    _TwoBtn.titleLabel.font = [UIFont systemFontOfSize:10];
-    _ThreeBtn.titleLabel.font = [UIFont systemFontOfSize:10];
-    _firstBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+      _firstBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+      _TwoBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+      _ThreeBtn.titleLabel.font = [UIFont systemFontOfSize:10];
     if (_shortcutsArray.count != 0) {
         if (_shortcutsArray.count == 1) {
-            Scene * info = _shortcutsArray[0];
-            [_firstBtn setTitle:info.sceneName forState:UIControlStateNormal];
+            _info1 = _shortcutsArray[0];
+            [_firstBtn setTitle:_info1.sceneName forState:UIControlStateNormal];
             _firstBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+            _firstBtn.hidden = NO;
             _TwoBtn.hidden = YES;
-//          _ThreeBtn.hidden  = YES;
-            
+            _ThreeBtn.hidden = NO;
+            [_ThreeBtn setTitle:@"" forState:UIControlStateNormal];
+            [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular4"] forState:UIControlStateNormal];
         }if(_shortcutsArray.count == 2) {
-            Scene * info1 = _shortcutsArray[0];
-            Scene * info2 = _shortcutsArray[1];
-            [_firstBtn setTitle:info1.sceneName forState:UIControlStateNormal];
-            [_TwoBtn setTitle:info2.sceneName forState:UIControlStateNormal];
-//           _ThreeBtn.hidden = YES;
-        }
-        if (_shortcutsArray.count == 3) {
-            Scene * info1 = _shortcutsArray[0];
-            Scene * info2 = _shortcutsArray[1];
-            Scene * info3 = _shortcutsArray[2];
-            [_firstBtn setTitle:info1.sceneName forState:UIControlStateNormal];
-            [_TwoBtn setTitle:info2.sceneName forState:UIControlStateNormal];
-            [_ThreeBtn setTitle:info3.sceneName forState:UIControlStateNormal];
+            _info1 = _shortcutsArray[0];
+            _info2 = _shortcutsArray[1];
+            [_firstBtn setTitle:_info1.sceneName forState:UIControlStateNormal];
+            [_TwoBtn setTitle:_info2.sceneName forState:UIControlStateNormal];
+            _firstBtn.hidden = NO;
+            _TwoBtn.hidden = NO;
+            _ThreeBtn.hidden = NO;
+            [_ThreeBtn setTitle:@"" forState:UIControlStateNormal];
+            [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular4"] forState:UIControlStateNormal];
+        
+        }if (_shortcutsArray.count == 3) {
+            _info1 = _shortcutsArray[0];
+            _info2 = _shortcutsArray[1];
+             _info3 = _shortcutsArray[2];
+            [_firstBtn setTitle:_info1.sceneName forState:UIControlStateNormal];
+            [_TwoBtn setTitle:_info2.sceneName forState:UIControlStateNormal];
+            [_ThreeBtn setTitle:_info3.sceneName forState:UIControlStateNormal];
             [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular3"] forState:UIControlStateNormal];
+            _firstBtn.hidden = NO;
+            _TwoBtn.hidden = NO;
+            _ThreeBtn.hidden = NO;
         }
     }else{
         _ThreeBtn.center = CGPointMake(self.view.center.x, self.view.center.y);
         [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular4"] forState:UIControlStateNormal];
+        [_ThreeBtn setTitle:@"" forState:UIControlStateNormal];
         _firstBtn.hidden = YES;
         _TwoBtn.hidden = YES;
+        _ThreeBtn.hidden = NO;
         
     }
 }
@@ -468,7 +496,16 @@
     [_naviMiddletBtn setTitle:[UD objectForKey:@"homename"] forState:UIControlStateNormal];
     [_naviMiddletBtn addTarget:self action:@selector(MiddleBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     _naviLeftBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"clound_white" imgHighlight:@"clound_white" target:self action:@selector(leftBtnClicked:)];
-    _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"music_white" imgHighlight:@"music_white" target:self action:@selector(rightBtnClicked:)];
+    
+    NSString *music_icon = nil;
+    NSInteger isPlaying = [[UD objectForKey:@"IsPlaying"] integerValue];
+    if (isPlaying) {
+        music_icon = @"music-red";
+    }else {
+        music_icon = @"music_white";
+    }
+    
+    _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:music_icon imgHighlight:music_icon target:self action:@selector(rightBtnClicked:)];
     [self setNaviBarLeftBtn:_naviLeftBtn];
     [self setNaviBarRightBtn:_naviRightBtn];
     [self setNaviMiddletBtn:_naviMiddletBtn];
@@ -599,6 +636,54 @@
         [self.navigationController pushViewController:_conversationVC animated:YES];
     });
 }
+
+- (IBAction)FirstBtn:(id)sender {
+     _firstBtn.selected = !_firstBtn.selected;
+    if (_firstBtn.selected) {
+        [_firstBtn setBackgroundImage:[UIImage imageNamed:@"circular2"] forState:UIControlStateSelected];
+        [[SceneManager defaultManager] startScene:_info1.sceneID];
+        [SQLManager updateSceneStatus:1 sceneID:_info1.sceneID];//更新数据库
+    }else{
+        [_firstBtn setBackgroundImage:[UIImage imageNamed:@"circular3"] forState:UIControlStateNormal];
+        [[SceneManager defaultManager] poweroffAllDevice:_info1.sceneID];
+        [SQLManager updateSceneStatus:0 sceneID:_info1.sceneID];//更新数据库
+    }
+}
+
+- (IBAction)TwoBtn:(id)sender {
+     _TwoBtn.selected = !_TwoBtn.selected;
+    if (_TwoBtn.selected) {
+        [_TwoBtn setBackgroundImage:[UIImage imageNamed:@"circular2"] forState:UIControlStateSelected];
+        [[SceneManager defaultManager] startScene:_info2.sceneID];
+        [SQLManager updateSceneStatus:1 sceneID:_info2.sceneID];//更新数据库
+    }else{
+        [_TwoBtn setBackgroundImage:[UIImage imageNamed:@"circular3"] forState:UIControlStateNormal];
+        [[SceneManager defaultManager] poweroffAllDevice:_info2.sceneID];
+        [SQLManager updateSceneStatus:0 sceneID:_info2.sceneID];//更新数据库
+    }
+    
+}
+- (IBAction)ThreeBtn:(id)sender {
+      _ThreeBtn.selected = !_ThreeBtn.selected;
+    if ([_ThreeBtn.currentTitle isEqualToString:@""]) {
+        self.socialView.hidden = YES;
+        UIStoryboard * myInfoStoryBoard = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
+        SceneShortcutsViewController * shortcutKeyVC = [myInfoStoryBoard instantiateViewControllerWithIdentifier:@"SceneShortcutsVC"];
+        [self.navigationController pushViewController:shortcutKeyVC animated:YES];
+    }else{
+        if (_ThreeBtn.selected) {
+            [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular2"] forState:UIControlStateSelected];
+            [[SceneManager defaultManager] startScene:_info3.sceneID];
+            [SQLManager updateSceneStatus:1 sceneID:_info3.sceneID];//更新数据库
+        }else{
+            [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular3"] forState:UIControlStateNormal];
+            [[SceneManager defaultManager] poweroffAllDevice:_info3.sceneID];
+            [SQLManager updateSceneStatus:0 sceneID:_info3.sceneID];//更新数据库
+        }
+    }
+    
+}
+
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
 

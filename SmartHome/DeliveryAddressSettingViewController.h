@@ -37,5 +37,6 @@
 @property (weak, nonatomic) IBOutlet UISwitch *defaultSwitch;
 
 - (IBAction)areaBtnClicked:(id)sender;
+- (IBAction)selectAreaBtnClicked:(id)sender;
 @property (nonatomic ,strong) AddressPickerView * pickerView;
 @end

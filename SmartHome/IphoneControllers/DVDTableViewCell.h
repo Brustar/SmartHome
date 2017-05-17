@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol DVDTableViewCellDelegate;
+
 @interface DVDTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *DVDNameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *YLImageView;
@@ -24,4 +26,15 @@
 //房间id
 @property (nonatomic,assign) NSInteger roomID;
 @property (strong, nonatomic) Scene *scene;
+@property (nonatomic, assign) id<DVDTableViewCellDelegate>delegate;
+
+@end
+
+
+@protocol DVDTableViewCellDelegate <NSObject>
+
+@optional
+- (void)onDVDSwitchBtnClicked:(UIButton *)btn;
+- (void)onDVDSliderValueChanged:(UISlider *)slider;
+
 @end

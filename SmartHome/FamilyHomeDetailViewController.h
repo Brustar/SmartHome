@@ -11,6 +11,8 @@
 #import "SQLManager.h"
 #import "UIButton+WebCache.h"
 #import "NewLightCell.h"
+#import "NewColourCell.h"
+#import "FMTableViewCell.h"
 #import "AireTableViewCell.h"
 #import "CurtainTableViewCell.h"
 #import "TVTableViewCell.h"

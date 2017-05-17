@@ -9,6 +9,8 @@
 #import "CustomViewController.h"
 #import "Device.h"
 #import "NewLightCell.h"
+#import "NewColourCell.h"
+#import "FMTableViewCell.h"
 #import "AireTableViewCell.h"
 #import "CurtainTableViewCell.h"
 #import "TVTableViewCell.h"
@@ -21,7 +23,7 @@
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 
-@interface DeviceTimerSettingViewController : CustomViewController<UITableViewDataSource, UITableViewDelegate,  HttpDelegate, NewLightCellDelegate>
+@interface DeviceTimerSettingViewController : CustomViewController<UITableViewDataSource, UITableViewDelegate,  HttpDelegate, NewLightCellDelegate, NewColourCellDelegate, CurtainTableViewCellDelegate, AireTableViewCellDelegate, TVTableViewCellDelegate, DVDTableViewCellDelegate, BjMusicTableViewCellDelegate, FMTableViewCellDelegate, ScreenCurtainCellDelegate, OtherTableViewCellDelegate>
 
 @property(nonatomic, strong) UITableView *timerTableView;
 @property(nonatomic, strong) Device *device;
@@ -33,5 +35,8 @@
 @property(nonatomic, strong) NSMutableString *startValue;
 @property(nonatomic, strong) NSMutableString *repeatString;
 @property (nonatomic,strong) UIButton * naviRightBtn;
+@property(nonatomic, strong) NSString *switchBtnString;//开关按钮指令字符串
+@property(nonatomic, strong) NSString *sliderBtnString;//滑动按钮指令字符串
+@property(nonatomic, strong) NSString *FMChannelSliderString;//FM频道指令字符串
 
 @end

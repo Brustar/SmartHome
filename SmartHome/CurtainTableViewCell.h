@@ -5,6 +5,9 @@
 //  Created by 逸云科技 on 16/6/2.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
+
+@protocol CurtainTableViewCellDelegate;
+
 @interface CurtainTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *label;
 @property (weak, nonatomic) IBOutlet UISlider *slider;
@@ -18,5 +21,15 @@
 @property (weak, nonatomic) IBOutlet UIButton *AddcurtainBtn;
 @property (strong, nonatomic) Scene *scene;
 @property (nonatomic,weak) NSString *sceneid;
+@property (nonatomic, assign) id<CurtainTableViewCellDelegate>delegate;
+
+@end
+
+
+@protocol CurtainTableViewCellDelegate <NSObject>
+
+@optional
+- (void)onCurtainOpenBtnClicked:(UIButton *)btn;
+- (void)onCurtainSliderBtnValueChanged:(UISlider *)slider;
 
 @end

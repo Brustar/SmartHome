@@ -32,7 +32,6 @@
 		0F43B0FD1CF3E86A00F3D9F0 /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F43B0FC1CF3E86A00F3D9F0 /* iflyMSC.framework */; };
 		0F43B1001CF3ED4B00F3D9F0 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F43B0FF1CF3ED4B00F3D9F0 /* CoreTelephony.framework */; };
 		0F43B1031CF4055300F3D9F0 /* IATConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F43B1021CF4055300F3D9F0 /* IATConfig.m */; };
-		0F4556B61EC9345900C786AF /* ECMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4556B51EC9345900C786AF /* ECMessage.m */; };
 		0F477FC61D2F94B3004FA361 /* NetStatusManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F477FC51D2F94B3004FA361 /* NetStatusManager.m */; };
 		0F49CB6C1E7A1DBF00D46ECC /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F49CB6B1E7A1DBF00D46ECC /* Login.storyboard */; };
 		0F49CB701E7A1EA100D46ECC /* Devices.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F49CB6F1E7A1EA100D46ECC /* Devices.storyboard */; };
@@ -149,6 +148,8 @@
 		0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7B0B51D1380BF003C2D52 /* AirController.m */; };
 		0FF92B661D9224640098DD54 /* TVChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF92B651D9224640098DD54 /* TVChannel.m */; };
 		2E0297271E4C4C7600BBC520 /* MySubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0297261E4C4C7600BBC520 /* MySubView.m */; };
+		2E03E2FA1ECA904F00487319 /* SeneLightModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E03E2F91ECA904F00487319 /* SeneLightModel.m */; };
+		2E03E3001ECAD57E00487319 /* ECMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E03E2FF1ECAD57E00487319 /* ECMessage.m */; };
 		2E04198B1EB89F42004D70B9 /* FSLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0419881EB89F42004D70B9 /* FSLineChart.m */; };
 		2E04198C1EB89F42004D70B9 /* UIColor+FSPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E04198A1EB89F42004D70B9 /* UIColor+FSPalette.m */; };
 		2E04198E1EB8A370004D70B9 /* MyInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E04198D1EB8A370004D70B9 /* MyInfo.storyboard */; };
@@ -487,8 +488,6 @@
 		0F43B0FF1CF3ED4B00F3D9F0 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		0F43B1011CF4055300F3D9F0 /* IATConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IATConfig.h; sourceTree = "<group>"; };
 		0F43B1021CF4055300F3D9F0 /* IATConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IATConfig.m; sourceTree = "<group>"; };
-		0F4556B41EC9345900C786AF /* ECMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECMessage.h; sourceTree = "<group>"; };
-		0F4556B51EC9345900C786AF /* ECMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECMessage.m; sourceTree = "<group>"; };
 		0F477FC41D2F94B3004FA361 /* NetStatusManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetStatusManager.h; sourceTree = "<group>"; };
 		0F477FC51D2F94B3004FA361 /* NetStatusManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetStatusManager.m; sourceTree = "<group>"; };
 		0F49CB6B1E7A1DBF00D46ECC /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
@@ -795,6 +794,10 @@
 		0FF92B651D9224640098DD54 /* TVChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVChannel.m; sourceTree = "<group>"; };
 		2E0297251E4C4C7600BBC520 /* MySubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySubView.h; sourceTree = "<group>"; };
 		2E0297261E4C4C7600BBC520 /* MySubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySubView.m; sourceTree = "<group>"; };
+		2E03E2F81ECA904F00487319 /* SeneLightModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeneLightModel.h; sourceTree = "<group>"; };
+		2E03E2F91ECA904F00487319 /* SeneLightModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeneLightModel.m; sourceTree = "<group>"; };
+		2E03E2FE1ECAD57E00487319 /* ECMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECMessage.h; sourceTree = "<group>"; };
+		2E03E2FF1ECAD57E00487319 /* ECMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECMessage.m; sourceTree = "<group>"; };
 		2E0419871EB89F42004D70B9 /* FSLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSLineChart.h; sourceTree = "<group>"; };
 		2E0419881EB89F42004D70B9 /* FSLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSLineChart.m; sourceTree = "<group>"; };
 		2E0419891EB89F42004D70B9 /* UIColor+FSPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FSPalette.h"; sourceTree = "<group>"; };
@@ -1354,8 +1357,6 @@
 				CD5134361E8D07FD00C2EDAF /* Goods.m */,
 				CD4F12481EB452D800E0B301 /* Address.h */,
 				CD4F12491EB452D800E0B301 /* Address.m */,
-				0F4556B41EC9345900C786AF /* ECMessage.h */,
-				0F4556B51EC9345900C786AF /* ECMessage.m */,
 			);
 			name = entity;
 			sourceTree = "<group>";
@@ -1451,6 +1452,8 @@
 				F65DB33C1D2B5AB2002A815C /* RegisterDetailController.m */,
 				0F4B3BFE1D2A13870002E75E /* MSGController.h */,
 				0F4B3BFF1D2A13870002E75E /* MSGController.m */,
+				2E03E2FE1ECAD57E00487319 /* ECMessage.h */,
+				2E03E2FF1ECAD57E00487319 /* ECMessage.m */,
 				2E6CEDBD1DE5DE8B000979BE /* DetailMSGViewController.h */,
 				2E6CEDBE1DE5DE8B000979BE /* DetailMSGViewController.m */,
 				F645BD451D76E3D8005BFB7A /* FavorController.h */,
@@ -2599,6 +2602,8 @@
 		F64EF7F81D8FB710003C1C48 /* IphoneControllers */ = {
 			isa = PBXGroup;
 			children = (
+				2E03E2F81ECA904F00487319 /* SeneLightModel.h */,
+				2E03E2F91ECA904F00487319 /* SeneLightModel.m */,
 				2EBABC6F1E835E950093EF3A /* TableViewCell */,
 				2EA897C31E31B8FA002CA904 /* Iphoneimage */,
 				2EA897AA1E31B25E002CA904 /* YZNavigationMenuView.h */,
@@ -3321,6 +3326,7 @@
 				0F25178A1CFD8C6500491A6C /* PackManager.m in Sources */,
 				F67F1F811D3CC46C00F2B7E5 /* AboutUsController.m in Sources */,
 				0F295A601D2E092900F23F21 /* HttpManager.m in Sources */,
+				2E03E3001ECAD57E00487319 /* ECMessage.m in Sources */,
 				CDF90B411E1E425D009043B9 /* RoomDetailViewController.m in Sources */,
 				0F180FC31D0E4C7400392F4C /* NetvController.m in Sources */,
 				F66DFF2B1D5188BF0005E882 /* EditSceneCell.m in Sources */,
@@ -3465,7 +3471,6 @@
 				F645BD471D76E3D8005BFB7A /* FavorController.m in Sources */,
 				2E6CEDBF1DE5DE8B000979BE /* DetailMSGViewController.m in Sources */,
 				2EF75C7C1EB2CAE00055147D /* ShortcutKeyCell.m in Sources */,
-				0F4556B61EC9345900C786AF /* ECMessage.m in Sources */,
 				0FB42E231CF6F9E8007DE64F /* SocketManager.m in Sources */,
 				0F6AB86F1D782D9D0041E39C /* SunCount.m in Sources */,
 				2E192CA71EBB2D3F00458541 /* CKCircleView.m in Sources */,
@@ -3474,6 +3479,7 @@
 				2E08EFC41EBC668A007F9FE1 /* PhotoGraphViewConteoller.m in Sources */,
 				F65B7D271D34E9E00059CFA4 /* MySettingViewController.m in Sources */,
 				F62CD87D1D950453001C66CE /* IphoneAirController.m in Sources */,
+				2E03E2FA1ECA904F00487319 /* SeneLightModel.m in Sources */,
 				0F9EA72D1DDB026C00223ED8 /* NSString+RegMatch.m in Sources */,
 				CD7863B71E8CF18200F42AC0 /* VipServiceListViewController.m in Sources */,
 				CDB8B85E1EB1EBD2003AA894 /* UserInfo.m in Sources */,

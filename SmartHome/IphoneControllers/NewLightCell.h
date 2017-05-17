@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *NewLightNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *NewLightPowerBtn;
 @property (weak, nonatomic) IBOutlet UISlider *NewLightSlider;
-@property(nonatomic, strong)NSString * deviceid;
+@property(nonatomic, copy)NSString * deviceid;
 @property (nonatomic,weak) NSString *sceneid;
 //房间id
 @property (nonatomic,assign) NSInteger roomID;

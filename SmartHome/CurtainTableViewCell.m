@@ -44,20 +44,30 @@
         NSData *data=[[DeviceInfo defaultManager] roll:self.slider.value * 100 deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
-    }if ([sender isEqual:self.open]) {
+        
+        if (_delegate && [_delegate respondsToSelector:@selector(onCurtainSliderBtnValueChanged:)]) {
+            [_delegate onCurtainSliderBtnValueChanged:sender];
+        }
+    }
+    
+    if ([sender isEqual:self.open]) {
         
         self.open.selected = !self.open.selected;
         if (self.open.selected) {
             self.slider.value=1;
-            [self.open setImage:[UIImage imageNamed:@"bd_icon_wd_off"] forState:UIControlStateNormal];
+            [self.open setImage:[UIImage imageNamed:@"bd_icon_wd_on"] forState:UIControlStateNormal];
         }else{
             self.slider.value=0;
-            [self.open setImage:[UIImage imageNamed:@"bd_icon_wd_on"] forState:UIControlStateNormal];
+            [self.open setImage:[UIImage imageNamed:@"bd_icon_wd_off"] forState:UIControlStateNormal];
         }
         
         NSData *data=[[DeviceInfo defaultManager] toogle:self.open.selected deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
+        
+        if (_delegate && [_delegate respondsToSelector:@selector(onCurtainOpenBtnClicked:)]) {
+            [_delegate onCurtainOpenBtnClicked:sender];
+        }
     }
     Curtain *device=[[Curtain alloc] init];
     [device setDeviceID:[self.deviceid intValue]];

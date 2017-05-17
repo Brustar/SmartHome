@@ -293,7 +293,7 @@
     [theSegue setValue:self.deviceid forKey:@"deviceid"];
 }
 
--(void) changeVolume
+-(void)changeVolume
 {
     NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volume.value*100 deviceID:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];

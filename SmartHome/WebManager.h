@@ -7,6 +7,7 @@
 //
 #import "MBProgressHUD+NJ.h"
 #import "CustomViewController.h"
+#import "WeChatPayManager.h"
 @interface WebManager : CustomViewController <UIWebViewDelegate, UIAlertViewDelegate>
 
 @property (retain, nonatomic) IBOutlet UIWebView *webView;

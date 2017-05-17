@@ -44,6 +44,7 @@
     [self.deviceTableView registerNib:[UINib nibWithNibName:@"ScreenCurtainCell" bundle:nil] forCellReuseIdentifier:@"ScreenCurtainCell"];//幕布ScreenCurtainCell
     [self.deviceTableView registerNib:[UINib nibWithNibName:@"DVDTableViewCell" bundle:nil] forCellReuseIdentifier:@"DVDTableViewCell"];//DVD
     [self.deviceTableView registerNib:[UINib nibWithNibName:@"BjMusicTableViewCell" bundle:nil] forCellReuseIdentifier:@"BjMusicTableViewCell"];//背景音乐
+    [self.deviceTableView registerNib:[UINib nibWithNibName:@"FMTableViewCell" bundle:nil] forCellReuseIdentifier:@"FMTableViewCell"];//FM收音机
 }
 
 - (void)countOfDeviceType {
@@ -227,7 +228,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return _lightArray.count;//灯光
+        return _lightArray.count;//灯光(01:开关灯 02:调光灯 03:调色灯)
     }else if (section == 1){
         return _curtainArray.count;//窗帘
     }else if (section == 2){
@@ -246,16 +247,48 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {//灯光
-        NewLightCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewLightCell" forIndexPath:indexPath];
-        cell.backgroundColor = [UIColor clearColor];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.AddLightBtn.hidden = YES;
-        cell.LightConstraint.constant = 10;
         Device *device = [SQLManager getDeviceWithDeviceID:[_lightArray[indexPath.row] intValue]];
-        cell.NewLightNameLabel.text = device.name;
-        cell.NewLightSlider.continuous = NO;
-        cell.deviceid = _lightArray[indexPath.row];
-        return cell;
+        if (device.hTypeId == 1) { //开关灯(不需要Slider)
+            NewColourCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewColourCell" forIndexPath:indexPath];
+            cell.backgroundColor = [UIColor clearColor];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.AddColourLightBtn.hidden = YES;
+            cell.ColourLightConstraint.constant = 10;
+            cell.colourNameLabel.text = device.name;
+            cell.colourSlider.continuous = NO;
+            cell.colourSlider.hidden = YES;
+            cell.supimageView.hidden = YES;
+            cell.lowImageView.hidden = YES;
+            cell.highImageView.hidden = YES;
+            cell.deviceid = _lightArray[indexPath.row];
+            return cell;
+        }else if (device.hTypeId == 2) { //调光灯
+            NewLightCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewLightCell" forIndexPath:indexPath];
+            cell.backgroundColor = [UIColor clearColor];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.AddLightBtn.hidden = YES;
+            cell.LightConstraint.constant = 10;
+            cell.NewLightNameLabel.text = device.name;
+            cell.NewLightSlider.continuous = NO;
+            cell.NewLightSlider.hidden = NO;
+            cell.deviceid = _lightArray[indexPath.row];
+            return cell;
+        }else if (device.hTypeId == 3) { //调色灯
+            NewColourCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewColourCell" forIndexPath:indexPath];
+            cell.backgroundColor = [UIColor clearColor];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.AddColourLightBtn.hidden = YES;
+            cell.ColourLightConstraint.constant = 10;
+            cell.colourNameLabel.text = device.name;
+            cell.colourSlider.continuous = NO;
+            cell.colourSlider.hidden = NO;
+            cell.supimageView.hidden = NO;
+            cell.lowImageView.hidden = NO;
+            cell.highImageView.hidden = NO;
+            cell.deviceid = _lightArray[indexPath.row];
+            return cell;
+        }
+        
     }else if (indexPath.section == 1) {//窗帘
         CurtainTableViewCell *curtainCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
         curtainCell.backgroundColor =[UIColor clearColor];
@@ -311,6 +344,14 @@
             dvdCell.DVDConstraint.constant = 10;
             dvdCell.DVDNameLabel.text = device.name;
             return dvdCell;
+        }else if (device.hTypeId == 15) { //FM收音机
+            FMTableViewCell * FMCell = [tableView dequeueReusableCellWithIdentifier:@"FMTableViewCell" forIndexPath:indexPath];
+            FMCell.backgroundColor =[UIColor clearColor];
+            FMCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            FMCell.AddFmBtn.hidden = YES;
+            FMCell.FMLayouConstraint.constant = 10;
+            FMCell.FMNameLabel.text = device.name;
+            return FMCell;
         }else if (device.hTypeId == 17) { //幕布
             ScreenCurtainCell * ScreenCell = [tableView dequeueReusableCellWithIdentifier:@"ScreenCurtainCell" forIndexPath:indexPath];
             ScreenCell.backgroundColor =[UIColor clearColor];
@@ -327,15 +368,7 @@
             otherCell.OtherConstraint.constant = 10;
             otherCell.NameLabel.text = device.name;
             return otherCell;
-        }else if (device.hTypeId == 11) { //机顶盒
-            OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
-            otherCell.backgroundColor =[UIColor clearColor];
-            otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
-            otherCell.AddOtherBtn.hidden = YES;
-            otherCell.OtherConstraint.constant = 10;
-            otherCell.NameLabel.text = device.name;
-            return otherCell;
-        }else if (device.hTypeId == 12) { //网络电视
+        }else if (device.hTypeId == 11) { //电视（以前叫机顶盒）
             TVTableViewCell * tvCell = [tableView dequeueReusableCellWithIdentifier:@"TVTableViewCell" forIndexPath:indexPath];
             tvCell.backgroundColor =[UIColor clearColor];
             tvCell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -351,7 +384,7 @@
             otherCell.OtherConstraint.constant = 10;
             otherCell.NameLabel.text = device.name;
             return otherCell;
-        }else { //影音其他类型（如：FM）
+        }else { //影音其他类型
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
             otherCell.backgroundColor =[UIColor clearColor];
             otherCell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -418,12 +451,22 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 3) {
+    
+    if (indexPath.section == 0) { //灯光： 1:开关灯cell高度50;   2,  3:调光灯，调色灯cell高度100
+        Device *device = [SQLManager getDeviceWithDeviceID:[_lightArray[indexPath.row] intValue]];
+        if (device.hTypeId == 1) {
+            return 70;
+        }else {
+            return 100;
+        }
+    }
+    
+    else if (indexPath.section == 3) {
         Device *device = [SQLManager getDeviceWithDeviceID:[_multiMediaArray[indexPath.row] intValue]];
         
-        if (device.hTypeId == 12 || device.hTypeId == 13) {
+        if (device.hTypeId == 11 || device.hTypeId == 12 || device.hTypeId == 13 || device.hTypeId == 15) {
             return 150;
-        }else if (device.hTypeId == 11 || device.hTypeId == 16) {
+        }else if (device.hTypeId == 16 || device.hTypeId == 18) {
             return 50;
         }else {
             return 100;

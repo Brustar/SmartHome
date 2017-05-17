@@ -166,6 +166,10 @@
     [self.pickerView show];
 }
 
+- (IBAction)selectAreaBtnClicked:(id)sender {
+    [self.pickerView show];
+}
+
 - (AddressPickerView *)pickerView{
     if (!_pickerView) {
         _pickerView = [[AddressPickerView alloc] initWithFrame:CGRectMake(0, UI_SCREEN_HEIGHT , UI_SCREEN_WIDTH, 215)];

@@ -37,6 +37,7 @@
 #import "NewLightCell.h"
 #import "FMTableViewCell.h"
 #import "IphoneNewAddSceneVC.h"
+#import "SeneLightModel.h"
 
 
 @interface IphoneEditSceneController ()<TouchSubViewDelegate,UITableViewDelegate,UITableViewDataSource>//IphoneTypeViewDelegate
@@ -110,8 +111,6 @@
     {
         self.saveBarBtn.enabled = NO;
     }
-//    [self setupSubTypeView];
-    
     TouchSubViewController * touchVC = [[TouchSubViewController alloc] init];
     touchVC.delegate = self;
     [self getButtonUI];
@@ -122,7 +121,9 @@
         self.TableViewConstraint.constant = -60;
         
     }
-//       self.tableView.allowsSelection = NO;
+    
+    
+
 }
 - (void)setupNaviBar {
     
@@ -191,24 +192,56 @@
 //柔和
 - (IBAction)gentleBtn:(id)sender {
     
-    [[SceneManager defaultManager] gloom:[self.sceneid intValue]];
+    for (int i = 0; i < _lightArray.count; i++) {
+        
+//        self.sceneid = _lightArray[i];
+        SeneLightModel *model = _lightArray[i];
+        model.sene_light_model = SENE_LIGHTS_MODEL_SOFT;
+        NSLog(@"id:%@",model.ID);
+        [[SceneManager defaultManager] gloom:[model.ID intValue]];
+        //修改ui
+    }
+    
+
+    [self.tableView reloadData];
+  
 }
 
 //正常
 - (IBAction)normalBtn:(id)sender {
-    [[SceneManager defaultManager] romantic:[self.sceneid intValue]];
+    
+//    [[SceneManager defaultManager] romantic:[self.sceneid intValue]];
+    for (int i = 0; i < _lightArray.count; i++) {
+        
+        //        self.sceneid = _lightArray[i];
+        SeneLightModel *model = _lightArray[i];
+        model.sene_light_model = SENE_LIGHTS_MODEL_NORMAL;
+        [[SceneManager defaultManager] romantic:[model.ID intValue]];
+        //修改ui
+    }
+    [self.tableView reloadData];
 }
 
 //明亮
 - (IBAction)brightBtn:(id)sender {
     
-   [[SceneManager defaultManager] sprightly:[self.sceneid intValue]];
+//   [[SceneManager defaultManager] sprightly:[self.sceneid intValue]];
+    for (int i = 0; i < _lightArray.count; i++) {
+        
+        //        self.sceneid = _lightArray[i];
+        SeneLightModel *model = _lightArray[i];
+        model.sene_light_model = SENE_LIGHTS_MODEL_BRIGHT;
+        [[SceneManager defaultManager] sprightly:[model.ID intValue]];
+        //修改ui
+    }
+    [self.tableView reloadData];
 }
 
 -(void)getUI
 {
     _lightArr = [[NSMutableArray alloc] init];//场景下的所有设备
     _lightArray = [[NSMutableArray alloc] init];
+    
     _ColourLightArr = [[NSMutableArray alloc] init];
     _SwitchLightArr = [[NSMutableArray alloc] init];
     _CurtainArray = [[NSMutableArray alloc] init];
@@ -246,7 +279,13 @@
     {
         _htypeID = [SQLManager deviceHtypeIDByDeviceID:[lightArr[i] intValue]];
         if (_htypeID == 2) {//调光灯
-            [_lightArray addObject:lightArr[i]];
+//            [_lightArray addObject:lightArr[i]];
+            SeneLightModel  *seneLight = [[SeneLightModel alloc] init];
+            seneLight.ID = lightArr[i];
+            seneLight.value = 0.0f;
+            seneLight.sene_light_model = SENE_LIGHTS_MODEL_CUSTOMER;
+            [self.lightArray addObject:seneLight];
+            
         }else if (_htypeID == 1){//开关灯
              [_SwitchLightArr addObject:lightArr[i]];
         }else if (_htypeID == 3){//调色灯
@@ -265,8 +304,9 @@
             [_ProjectArray addObject:lightArr[i]];
         }else if (_htypeID == 12){//机顶盒
             [_NetVArray addObject:lightArr[i]];
-        }
-        else if (_htypeID == 14){//背景音乐
+        }else if (_htypeID == 15){//FM
+            [_FMArray addObject:lightArr[i]];
+        }else if (_htypeID == 14){//背景音乐
             [_BJMusicArray addObject:lightArr[i]];
         }else if (_htypeID == 17){//幕布
             [_MBArray addObject:lightArr[i]];
@@ -552,10 +592,30 @@
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
         //cell.roomID = self.roomID;
        // cell.sceneID = self.sceneid;
-        Device *device = [SQLManager getDeviceWithDeviceID:[_lightArray[indexPath.row] intValue]];
+//        Device *device = [SQLManager getDeviceWithDeviceID:[_lightArray[indexPath.row] intValue]];
+       SeneLightModel *model = self.lightArray[indexPath.row];
+       Device   *device = [SQLManager getDeviceWithDeviceID:[model.ID intValue]];
         cell.NewLightNameLabel.text = device.name;
         cell.NewLightSlider.continuous = NO;
-        cell.deviceid = _lightArray[indexPath.row];
+       switch (model.sene_light_model) {
+           case SENE_LIGHTS_MODEL_SOFT://
+               [cell.NewLightSlider setValue:0.2f];
+               break;
+           case SENE_LIGHTS_MODEL_NORMAL:
+               [cell.NewLightSlider setValue:0.5f];
+               break;
+           case SENE_LIGHTS_MODEL_BRIGHT:
+               [cell.NewLightSlider setValue:0.9f];
+               break;
+           case SENE_LIGHTS_MODEL_CUSTOMER:
+               [cell.NewLightSlider setValue:(float)model.value];
+               break;
+           default:
+               break;
+       }
+//        [cell.NewLightSlider setValue:20.0f];
+//        cell.deviceid = _lightArray[indexPath.row];
+        cell.deviceid = model.ID;
        
         return cell;
    }if (indexPath.section == 1) {//调色灯
@@ -577,7 +637,8 @@
        newColourCell.supimageView.hidden = YES;
        newColourCell.lowImageView.hidden = YES;
        newColourCell.highImageView.hidden = YES;
-       
+       newColourCell.colourSlider.hidden = YES;
+    
        return newColourCell;
    }
     if (indexPath.section == 3) {//空调
@@ -629,6 +690,7 @@
         otherCell.backgroundColor = [UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_ProjectArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
+        otherCell.deviceid = _ProjectArray[indexPath.row];
         
         return otherCell;
     }if (indexPath.section == 8) {//FM
@@ -636,6 +698,9 @@
         FMCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_FMArray[indexPath.row] intValue]];
         FMCell.FMNameLabel.text = device.name;
+        FMCell.deviceid = _FMArray[indexPath.row];
+        FMCell.AddFmBtn.hidden = YES;
+        FMCell.FMLayouConstraint.constant = 5;
         
         return FMCell;
     }if (indexPath.section == 9) {//机顶盒
@@ -645,6 +710,7 @@
         otherCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_NetVArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
+        otherCell.deviceid = _NetVArray[indexPath.row];
         
         return otherCell;
     }if (indexPath.section == 10) {//幕布
@@ -654,6 +720,7 @@
         ScreenCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_MBArray[indexPath.row] intValue]];
         ScreenCell.ScreenCurtainLabel.text = device.name;
+        ScreenCell.deviceid = _MBArray[indexPath.row];
         
         return ScreenCell;
     }if (indexPath.section == 11) {//背景音乐
@@ -663,6 +730,7 @@
         BjMusicCell.BJmusicConstraint.constant = 10;
         Device *device = [SQLManager getDeviceWithDeviceID:[_BJMusicArray[indexPath.row] intValue]];
         BjMusicCell.BjMusicNameLb.text = device.name;
+        BjMusicCell.deviceid = _BJMusicArray[indexPath.row];
         
         return BjMusicCell;
     }if (indexPath.section == 12) {//其他
@@ -670,6 +738,7 @@
         otherCell.AddOtherBtn.hidden = YES;
         otherCell.OtherConstraint.constant = 10;
         otherCell.backgroundColor = [UIColor clearColor];
+        otherCell.deviceid = _OtherArray[indexPath.row];
         if (_OtherArray.count) {
             Device *device = [SQLManager getDeviceWithDeviceID:[_OtherArray[indexPath.row] intValue]];
             if (device.name == nil) {

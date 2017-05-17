@@ -27,14 +27,16 @@
 }
 - (IBAction)save:(id)sender {
     
-     Amplifier *device=[[Amplifier alloc] init];
+        Amplifier *device=[[Amplifier alloc] init];
+        [device setDeviceID:[self.deviceid intValue]];
+        [device setWaiting: device.waiting];
     if (sender == self.ScreenCurtainBtn) {
         self.ScreenCurtainBtn.selected = !self.ScreenCurtainBtn.selected;
         if (self.ScreenCurtainBtn.selected) {
-            [self.ScreenCurtainBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+            [self.ScreenCurtainBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
         }else{
             
-            [self.ScreenCurtainBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
+            [self.ScreenCurtainBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
             NSData *data=[[DeviceInfo defaultManager] toogle:device.waiting deviceID:self.deviceid];
             SocketManager *sock=[SocketManager defaultManager];
             [sock.socket writeData:data withTimeout:1 tag:1];
@@ -46,23 +48,19 @@
         }else{
             [self.AddScreenCurtainBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
         }
+        
+        [_scene setSceneID:[self.sceneid intValue]];
+        [_scene setRoomID:self.roomID];
+        [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+        
+        [_scene setReadonly:NO];
+        
+        NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+        [_scene setDevices:devices];
+        
+        [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
     }
-    
-   
-    [device setDeviceID:[self.deviceid intValue]];
-    [device setWaiting: device.waiting];
-    
-    
-    [_scene setSceneID:[self.sceneid intValue]];
-    [_scene setRoomID:self.roomID];
-    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-    
-    [_scene setReadonly:NO];
-    
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
-    
-    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+  
 }
 //升
 - (IBAction)upBtn:(id)sender {
@@ -70,6 +68,10 @@
     NSData *data = [[DeviceInfo defaultManager] upScreenByDeviceID:self.deviceid];
     SocketManager *sock = [SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];//up
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(onUPBtnClicked:)]) {
+        [_delegate onUPBtnClicked:sender];
+    }
 }
 //降
 - (IBAction)downBtn:(id)sender {
@@ -77,7 +79,10 @@
     NSData *data = [[DeviceInfo defaultManager] downScreenByDeviceID:self.deviceid];
     SocketManager *sock = [SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
-
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(onDownBtnClicked:)]) {
+        [_delegate onDownBtnClicked:sender];
+    }
 }
 //停
 - (IBAction)stopBtn:(id)sender {
@@ -95,6 +100,10 @@
         NSData *data = [[DeviceInfo defaultManager] stopScreenByDeviceID:self.deviceid];
         SocketManager *sock = [SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
+    }
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(onStopBtnClicked:)]) {
+        [_delegate onStopBtnClicked:sender];
     }
 }
 

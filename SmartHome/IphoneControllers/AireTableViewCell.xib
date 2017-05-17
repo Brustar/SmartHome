@@ -38,10 +38,10 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="客厅空调" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ci-ZD-g6F">
-                        <rect key="frame" x="18" y="8" width="100" height="41.5"/>
+                        <rect key="frame" x="5" y="0.0" width="100" height="49.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="100" id="yOM-v8-WxP"/>
+                            <constraint firstAttribute="width" constant="100" id="gvL-oP-aYM"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -89,29 +89,28 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Yqf-zh-nqL" firstAttribute="leading" secondItem="4Ci-ZD-g6F" secondAttribute="leading" id="6pM-LG-WPl"/>
                     <constraint firstItem="5Gp-k8-Gvg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="15" id="77c-g8-ZWs"/>
                     <constraint firstAttribute="bottomMargin" secondItem="8Ux-fc-F6y" secondAttribute="bottom" constant="4" id="8lK-dx-4Aq"/>
                     <constraint firstAttribute="trailingMargin" secondItem="8Ux-fc-F6y" secondAttribute="trailing" constant="10" id="AiG-Zj-4av"/>
+                    <constraint firstItem="4Ci-ZD-g6F" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="BFQ-LT-XsA"/>
                     <constraint firstAttribute="trailingMargin" secondItem="9yv-2g-L2p" secondAttribute="trailing" constant="20" id="Ede-RQ-T3O"/>
                     <constraint firstItem="8Ux-fc-F6y" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="50" id="Ffm-Oi-SZZ"/>
                     <constraint firstItem="5b9-uL-jLe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="6" id="H2v-Vm-vjH"/>
                     <constraint firstAttribute="bottomMargin" secondItem="9yv-2g-L2p" secondAttribute="bottom" constant="3" id="RXd-6o-TyL"/>
                     <constraint firstAttribute="trailingMargin" secondItem="m1O-G7-5Ud" secondAttribute="trailing" constant="60" id="T4f-8k-k9L"/>
                     <constraint firstAttribute="bottomMargin" secondItem="Yqf-zh-nqL" secondAttribute="bottom" constant="3" id="WeX-nR-ANx"/>
-                    <constraint firstItem="4Ci-ZD-g6F" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Wga-Rc-fB3"/>
                     <constraint firstItem="0cu-aa-C0a" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="XCx-tc-oqJ"/>
                     <constraint firstItem="9yv-2g-L2p" firstAttribute="leading" secondItem="5Gp-k8-Gvg" secondAttribute="trailing" constant="8" id="ZeY-A6-dKP"/>
                     <constraint firstAttribute="trailingMargin" secondItem="5b9-uL-jLe" secondAttribute="trailing" constant="10" id="dkh-kX-wVD"/>
                     <constraint firstItem="Yqf-zh-nqL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="eMN-Yx-kSV"/>
                     <constraint firstAttribute="trailingMargin" secondItem="Dmh-EL-E3l" secondAttribute="trailing" constant="20" id="fVp-vz-IzL"/>
                     <constraint firstItem="m1O-G7-5Ud" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="fvr-mX-kFD"/>
-                    <constraint firstItem="0cu-aa-C0a" firstAttribute="top" secondItem="4Ci-ZD-g6F" secondAttribute="bottom" id="izS-El-1ZB"/>
-                    <constraint firstItem="4Ci-ZD-g6F" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="kRw-rB-JO5"/>
                     <constraint firstItem="0cu-aa-C0a" firstAttribute="top" secondItem="Dmh-EL-E3l" secondAttribute="bottom" id="m4w-nI-Shl"/>
                     <constraint firstAttribute="bottomMargin" secondItem="5Gp-k8-Gvg" secondAttribute="bottom" constant="5.5" id="nBJ-D7-waT"/>
                     <constraint firstAttribute="trailing" secondItem="0cu-aa-C0a" secondAttribute="trailing" id="tYY-sy-hO9"/>
+                    <constraint firstItem="4Ci-ZD-g6F" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="w5f-79-dmc"/>
                     <constraint firstAttribute="bottom" secondItem="0cu-aa-C0a" secondAttribute="bottom" id="wXB-TM-jbc"/>
+                    <constraint firstItem="0cu-aa-C0a" firstAttribute="top" secondItem="4Ci-ZD-g6F" secondAttribute="bottom" id="yUX-dH-72p"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -122,7 +121,7 @@
                 <outlet property="AireSwitchBtn" destination="m1O-G7-5Ud" id="j83-HB-Tzg"/>
                 <outlet property="temperatureLabel" destination="5Gp-k8-Gvg" id="J1b-ls-SkR"/>
             </connections>
-            <point key="canvasLocation" x="-322" y="46.5"/>
+            <point key="canvasLocation" x="-322.5" y="46"/>
         </tableViewCell>
     </objects>
     <resources>

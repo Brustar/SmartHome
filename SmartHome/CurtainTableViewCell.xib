@@ -44,13 +44,13 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="前窗" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wSV-oJ-oCF">
-                        <rect key="frame" x="18" y="8" width="100" height="41"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="前窗" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wSV-oJ-oCF">
+                        <rect key="frame" x="5" y="0.0" width="100" height="49"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="100" id="hCH-XQ-Pt7"/>
+                            <constraint firstAttribute="width" constant="100" id="60p-ZC-ti3"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -89,16 +89,17 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="oan-hq-829" firstAttribute="top" secondItem="v0o-gc-D44" secondAttribute="bottom" constant="15" id="7jy-LR-VVi"/>
-                    <constraint firstItem="iSc-I9-hAk" firstAttribute="top" secondItem="wSV-oJ-oCF" secondAttribute="bottom" id="DzV-SD-Dg2"/>
+                    <constraint firstItem="wSV-oJ-oCF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="Cmu-Sc-et9"/>
                     <constraint firstAttribute="trailing" secondItem="iSc-I9-hAk" secondAttribute="trailing" id="FUz-pL-dcM"/>
                     <constraint firstItem="7Nj-MA-dDP" firstAttribute="top" secondItem="v0o-gc-D44" secondAttribute="bottom" constant="7" id="KAQ-qX-j6v"/>
                     <constraint firstItem="f41-dM-kxv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="Kn4-mr-WM0"/>
                     <constraint firstAttribute="bottomMargin" secondItem="LqQ-g3-yDX" secondAttribute="bottom" constant="11.5" id="NNc-Yz-53a"/>
-                    <constraint firstItem="wSV-oJ-oCF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="NRM-qL-Sxo"/>
                     <constraint firstAttribute="bottom" secondItem="iSc-I9-hAk" secondAttribute="bottom" id="PcM-Vg-WLE"/>
+                    <constraint firstItem="iSc-I9-hAk" firstAttribute="top" secondItem="wSV-oJ-oCF" secondAttribute="bottom" id="XGM-zC-gOh"/>
                     <constraint firstAttribute="bottomMargin" secondItem="tNT-YH-Tpj" secondAttribute="bottom" constant="4.5" id="Ysb-j1-fAT"/>
                     <constraint firstItem="LqQ-g3-yDX" firstAttribute="leading" secondItem="tNT-YH-Tpj" secondAttribute="trailing" constant="10" id="Yu0-Bd-ST1"/>
                     <constraint firstItem="iSc-I9-hAk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="fC5-dA-12y"/>
+                    <constraint firstItem="wSV-oJ-oCF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="fG9-Qp-3Sz"/>
                     <constraint firstAttribute="trailingMargin" secondItem="oan-hq-829" secondAttribute="trailing" constant="60" id="fwK-aR-qxM"/>
                     <constraint firstAttribute="bottomMargin" secondItem="f41-dM-kxv" secondAttribute="bottom" constant="11.5" id="kJf-Wu-Mr2"/>
                     <constraint firstAttribute="trailingMargin" secondItem="v0o-gc-D44" secondAttribute="trailing" constant="10" id="m37-ZX-aXh"/>
@@ -106,7 +107,6 @@
                     <constraint firstItem="tNT-YH-Tpj" firstAttribute="leading" secondItem="f41-dM-kxv" secondAttribute="trailing" constant="10" id="ruO-YG-rHa"/>
                     <constraint firstAttribute="trailingMargin" secondItem="LqQ-g3-yDX" secondAttribute="trailing" constant="16" id="uNo-xp-IRM"/>
                     <constraint firstAttribute="trailingMargin" secondItem="7Nj-MA-dDP" secondAttribute="trailing" constant="10" id="vet-nB-BJL"/>
-                    <constraint firstItem="wSV-oJ-oCF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="xHj-Wm-K2D"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -117,7 +117,7 @@
                 <outlet property="slider" destination="tNT-YH-Tpj" id="efJ-Ru-ZA9"/>
                 <outlet property="valueLabel" destination="v0o-gc-D44" id="3nQ-hN-evr"/>
             </connections>
-            <point key="canvasLocation" x="637.5" y="544"/>
+            <point key="canvasLocation" x="491.5" y="525"/>
         </tableViewCell>
     </objects>
     <resources>
