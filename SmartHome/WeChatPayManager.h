@@ -14,5 +14,5 @@
 
 + (instancetype)sharedInstance;
 - (void)doPayWithPrepayId:(NSString *)prepayId;
-- (void)weixinPay;
+- (void)weixinPayWithOrderID:(NSInteger)orderID;
 @end

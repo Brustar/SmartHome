@@ -42,18 +42,91 @@
         return;
     }
     
-    if (_switchBtnString.length <= 0 ) {
-        _switchBtnString = @"01000000";
+    if (_device.hTypeId == 1 || _device.hTypeId == 2 || _device.hTypeId == 3) { //灯光
+        if (_switchBtnString.length <= 0 ) {
+            _switchBtnString = @"01000000";  //默认开灯
+        }
+        
+        _startValue = [NSMutableString string];
+         [_startValue appendString:_switchBtnString];
+    }else if (_device.subTypeId == 7) {  //窗帘
+        
+        if (_switchBtnString.length <= 0 ) {
+            _switchBtnString = @"01000000";  //默认开
+        }
+        
+        if (_sliderBtnString.length <= 0) {
+            _sliderBtnString = @"2AFF0000";
+        }
+        
+        _startValue = [NSMutableString string];
+        [_startValue appendString:_switchBtnString];
+        [_startValue appendString:@","];
+        [_startValue appendString:_sliderBtnString];
+    }else if (_device.hTypeId == 31) { //空调
+        
+        if (_switchBtnString.length <= 0 ) {
+            _switchBtnString = @"01000000";  //默认开
+        }
+        
+        if (_sliderBtnString.length <= 0) {
+            _sliderBtnString = @"6AFF0000";  //默认（温度）
+        }
+        
+        _startValue = [NSMutableString string];
+        [_startValue appendString:_switchBtnString];
+        [_startValue appendString:@","];
+        [_startValue appendString:_sliderBtnString];
+    }else if (_device.hTypeId == 11 || _device.hTypeId == 13 || _device.hTypeId == 14) {  //TV, DVD, 背景音乐
+        
+        if (_switchBtnString.length <= 0 ) {
+            _switchBtnString = @"01000000";  //默认开
+        }
+        
+        if (_sliderBtnString.length <= 0) {
+            _sliderBtnString = @"AAFF0000";  //默认值 (音量)
+        }
+        
+        _startValue = [NSMutableString string];
+        [_startValue appendString:_switchBtnString];
+        [_startValue appendString:@","];
+        [_startValue appendString:_sliderBtnString];
+    }else if (_device.hTypeId == 15) {  //FM收音机
+        
+        if (_switchBtnString.length <= 0 ) {
+            _switchBtnString = @"01000000";  //默认开
+        }
+        
+        if (_sliderBtnString.length <= 0) {
+            _sliderBtnString = @"AAFF0000";  //默认值 (音量)
+        }
+        
+        if (_FMChannelSliderString.length <= 0) {
+            _FMChannelSliderString = @"3AFFFF00";//默认值 (频道)
+        }
+        
+        _startValue = [NSMutableString string];
+        [_startValue appendString:_switchBtnString];
+        [_startValue appendString:@","];
+        [_startValue appendString:_sliderBtnString];
+        [_startValue appendString:@","];
+        [_startValue appendString:_FMChannelSliderString];
+    }else if (_device.hTypeId == 17) {  //幕布
+        if (_switchBtnString.length <= 0 ) {
+            _switchBtnString = @"34000000";  //默认降
+        }
+        
+        _startValue = [NSMutableString string];
+        [_startValue appendString:_switchBtnString];
+    }else {
+        if (_switchBtnString.length <= 0 ) {
+            _switchBtnString = @"01000000";  //默认开
+        }
+        
+        _startValue = [NSMutableString string];
+        [_startValue appendString:_switchBtnString];
     }
     
-    if (_sliderBtnString.length <= 0) {
-        _sliderBtnString =  @"2AFF0000";
-    }
-    
-    _startValue = [NSMutableString string];
-    [_startValue appendString:_switchBtnString];
-    [_startValue appendString:@","];
-    [_startValue appendString:_sliderBtnString];
     
     NSString *url = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [UD objectForKey:@"AuthorToken"];

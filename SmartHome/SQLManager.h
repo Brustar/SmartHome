@@ -190,4 +190,5 @@
 +(NSArray *)getAllRoomsInfoWithoutIsAll;
 +(NSArray *)getAllDevicesInfo:(int)roomID;
 + (NSArray *)getAllSceneOrderByRoomID;
++ (BOOL)updateDeviceStatus:(Device *)deviceInfo;
 @end

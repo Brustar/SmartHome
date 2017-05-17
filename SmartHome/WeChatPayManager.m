@@ -127,14 +127,14 @@ NSString * const WXAPIKey = @"e2a0b1c7dCloudSmartHome1z2y3x4qq";
 }
 
 #pragma mark - WeXinPay Request
-- (void)weixinPay {
+- (void)weixinPayWithOrderID:(NSInteger)orderID {
     NSString *authorToken = [UD objectForKey:@"AuthorToken"];
-    NSString *url = [NSString stringWithFormat:@"%@/WxPay/UnitOrderPage.aspx", [IOManager httpAddr]];
+    NSString *url = [NSString stringWithFormat:@"%@/WxPay/weixin_pay.aspx", [IOManager httpAddr]];
     
     if (authorToken.length >0) {
         NSDictionary *dict = @{@"token":authorToken,
                                @"trade_type":@"APP",
-                               @"goods_id":@(1)
+                               @"id":@(orderID)
                                };
         
         HttpManager *http = [HttpManager defaultManager];
