@@ -123,16 +123,21 @@
         [button setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"sp_on"]] forState:UIControlStateSelected];
         __block int interval = [self.SLabel.text intValue];
         self.scheculer = [NSTimer scheduledTimerWithTimeInterval:1.0 repeats:YES block:^(NSTimer *timer){
+            int t = [self.SLabel.text intValue];
             [button setTitle:[NSString stringWithFormat:@"%d",interval] forState:UIControlStateNormal];
-            if (interval==0) {
-                button.selected = NO;
-                self.second.hidden = YES;
-                [button setTitle:@"" forState:UIControlStateNormal];
-                NSData *data = [[DeviceInfo defaultManager] toogle:NO deviceID:self.deviceid];
-                [[[SocketManager defaultManager] socket] writeData:data withTimeout:1 tag:1];
-                [timer invalidate];
+            if(t > 0){
+                if (interval==0) {
+                    button.selected = NO;
+                    self.second.hidden = YES;
+                    [button setTitle:@"" forState:UIControlStateNormal];
+                    NSData *data = [[DeviceInfo defaultManager] toogle:NO deviceID:self.deviceid];
+                    [[[SocketManager defaultManager] socket] writeData:data withTimeout:1 tag:1];
+                    [timer invalidate];
+                }
+                interval--;
+            }else{
+                interval++;
             }
-            interval--;
         }];
         
         
