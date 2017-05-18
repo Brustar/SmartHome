@@ -169,7 +169,8 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     {
         if ([device isKindOfClass:[Light class]] && ((Light*)device).deviceID == [self.deviceid intValue]) {
             float brightness_f = (float)((Light *)device).brightness;
-            int degree = brightness_f*MAX_ROTATE_DEGREE/100;
+            
+            float degree = M_PI*brightness_f/MAX_ROTATE_DEGREE;
             self.tranformView.transform = CGAffineTransformMakeRotation(degree);
             //self.detailCell.valueLabel.text = [NSString stringWithFormat:@"%d%%", (int)(self.detailCell.bright.value * 100)];
             self.switcher.isOn=((Light*)device).isPoweron;
@@ -191,7 +192,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     if (state == 0x0a) {
         //self.detailCell.bright.value=[dic[@"r"] intValue];
         float brightness_f = [dic[@"r"] intValue];
-        int degree = brightness_f*MAX_ROTATE_DEGREE/100;
+        float degree = M_PI*brightness_f/MAX_ROTATE_DEGREE;
         self.tranformView.transform = CGAffineTransformMakeRotation(degree);
     }
     if (state == 0x0b) {
@@ -402,6 +403,13 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     NSLog(@"percent:%d",percent);
     self.tranformView.tag = percent;
     
+    if (degree>0) {
+        //[self.switcher setIsOn:YES];
+        [self.switcher setCustomKnobImage:[UIImage imageNamed:@"lighting_on"]
+              inactiveBackgroundImage:nil
+                activeBackgroundImage:nil];
+    }
+    
     NSData *data=[[DeviceInfo defaultManager] changeBright:self.tranformView.tag deviceID:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:2];
@@ -430,6 +438,8 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 #pragma mark - ORBSwitchDelegate
 - (void)orbSwitchToggled:(ORBSwitch *)switchObj withNewValue:(BOOL)newValue {
     NSLog(@"Switch toggled: new state is %@", (newValue) ? @"ON" : @"OFF");
+    float degree = newValue?M_PI*3/4:0;
+    self.tranformView.transform = CGAffineTransformMakeRotation(degree);
     NSData *data=[[DeviceInfo defaultManager] toogleLight:self.switcher.isOn deviceID:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
