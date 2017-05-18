@@ -238,38 +238,19 @@
 //进入聊天页面
 -(void)setRCIM
 {
-    
-    [[RCIM sharedRCIM] logout]; 
-    NSString *token = [UD objectForKey:@"rctoken"];
     NSString *groupID = [[UD objectForKey:@"HostID"] description];
     NSString *homename = [UD objectForKey:@"homename"];
-    [MBProgressHUD showMessage:@"login..."];
-    [[RCIM sharedRCIM] connectWithToken:token success:^(NSString *userId) {
-        NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
-        
-        RCGroup *aGroupInfo = [[RCGroup alloc]initWithGroupId:groupID groupName:homename portraitUri:@""];
-        ConversationViewController *_conversationVC = [[ConversationViewController alloc] init];
-        _conversationVC.conversationType = ConversationType_GROUP;
-        _conversationVC.targetId = aGroupInfo.groupId;
-        [_conversationVC setTitle: [NSString stringWithFormat:@"%@",aGroupInfo.groupName]];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUD];
-            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            [appDelegate.LeftSlideVC closeLeftView];//关闭左侧抽屉
-            _conversationVC.hidesBottomBarWhenPushed = YES;
-            [appDelegate.mainTabBarController.selectedViewController pushViewController:_conversationVC animated:YES];
-        });
-    } error:^(RCConnectErrorCode status) {
-        NSLog(@"登陆的错误码为:%ld", (long)status);
-        [MBProgressHUD hideHUD];
-    } tokenIncorrect:^{
-        //token过期或者不正确。
-        //如果设置了token有效期并且token过期，请重新请求您的服务器获取新的token
-        //如果没有设置token有效期却提示token错误，请检查您客户端和服务器的appkey是否匹配，还有检查您获取token的流程。
-        NSLog(@"token错误");
-        [MBProgressHUD hideHUD];
-    }];
+
+    RCGroup *aGroupInfo = [[RCGroup alloc]initWithGroupId:groupID groupName:homename portraitUri:@""];
+    ConversationViewController *_conversationVC = [[ConversationViewController alloc] init];
+    _conversationVC.conversationType = ConversationType_GROUP;
+    _conversationVC.targetId = aGroupInfo.groupId;
+    [_conversationVC setTitle: [NSString stringWithFormat:@"%@",aGroupInfo.groupName]];
     
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate.LeftSlideVC closeLeftView];//关闭左侧抽屉
+    _conversationVC.hidesBottomBarWhenPushed = YES;
+    [appDelegate.mainTabBarController.selectedViewController pushViewController:_conversationVC animated:YES];
 }
 
 - (void)addNotifications {
