@@ -15,6 +15,7 @@
 #import <math.h>
 #import "CKCircleView.h"
 #import "WeekdaysVC.h"
+#import "HTCircularSlider.h"
 
 @interface IphoneNewAddSceneTimerVC ()<CKCircleViewDelegate,WeekdaysVCDelegate>
 @property (nonatomic,strong) Scene *scene;
@@ -73,18 +74,63 @@
     self.schedule.endTime = self.endTimeLabel.text;
     self.RepetitionLable.text = @"永不";
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(iphoneSelectWeek:) name:@"SelectWeek" object:nil];
-    [self setCustomerSlider];
+//    [self setCustomerSlider];
+     [self initSlider];
+}
+-(void) initSlider
+{
+    int sliderSize = 90;
+    
+    CGRect frame = CGRectMake(self.view.center.x-sliderSize, self.view.center.y-sliderSize, sliderSize*2, sliderSize*2);
+    HTCircularSlider *slider = [[HTCircularSlider alloc] initWithFrame:frame];
+    [self.view addSubview:slider];
+    [slider addTarget:self action:@selector(onValueChange:) forControlEvents:UIControlEventValueChanged];
+    
+    slider.handleImage = [UIImage imageNamed:@"schedule_pointer"];
+    
+    slider.handleSize = CGPointMake(28/2, 27/2);
+    slider.maximumValue = 24;
+    slider.value = 0;
+    slider.trackAlpha = 0.6;
+    slider.tag = 0;
+    slider.radius = sliderSize;
+    
+    sliderSize = 65;
+    frame = CGRectMake(self.view.center.x-sliderSize, self.view.center.y-sliderSize, sliderSize*2, sliderSize*2);
+    HTCircularSlider *second = [[HTCircularSlider alloc] initWithFrame:frame];
+//    [self.view addSubview:second];
+    [second addTarget:self action:@selector(onValueChange:) forControlEvents:UIControlEventValueChanged];
+    
+    second.handleImage = [UIImage imageNamed:@"schedule_thumb"];
+    second.handleSize = CGPointMake(28/2, 27/2);
+    
+    second.maximumValue = 16;
+    second.value = 0;
+    second.trackAlpha = 0.6;
+    second.tag = 1;
+    second.radius = sliderSize;
+}
+
+
+- (void)onValueChange:(HTCircularSlider *)slider {
+    NSLog(@"%f", slider.value);
+    
+        float dec = slider.value-(int)slider.value;
+        int second = (int)(dec*60);
+        NSString *pattern = second>9?@"%d:%d":@"%d:0%d";
+        
+        int hint = (int)slider.value;
+        int hour = hint >= 12 ? hint - 12 : hint + 12;
+        self.starTimeLabel.text = [NSString stringWithFormat:pattern,hour,second];
+    
 }
 -(void)setCustomerSlider
 {
     int sliderSize = 90;
-    CGRect width = CGRectMake(self.view.center.x-sliderSize, self.view.center.y-sliderSize, sliderSize*2, sliderSize*2);
-    self.dialView = [[CKCircleView alloc] initWithFrame:width];
-
+    CGRect frame = CGRectMake(self.view.center.x-sliderSize, self.view.center.y-sliderSize-40, sliderSize*2, sliderSize*2);
+    self.dialView = [[CKCircleView alloc] initWithFrame:frame];
     self.dialView.delegate = self;
-
-    self.dialView.center = CGPointMake(self.timingImage.center.x, self.timingImage.center.y);
-   
+    self.dialView.center = CGPointMake(40/2, 51/2);
     //轨道路径颜色
     self.dialView.arcColor = [UIColor colorWithRed:82/255.0 green:83/255.0 blue:85/255.0 alpha:0.8];
     //圆盘背景色
@@ -93,7 +139,7 @@
     self.dialView.dialColor = [UIColor clearColor];
     self.dialView.dialColor2 = [UIColor clearColor];
     self.dialView.arcRadius = 80;
-//    self.dialView.units = @"小时";
+
     //最小值
     self.dialView.minNum = 0;
     //最大值
