@@ -314,7 +314,7 @@
                 FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
                 [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
                 NSLog(@"离线模式");
-                
+
             }
         }
         else if(status == AFNetworkReachabilityStatusReachableViaWiFi) //WIFI
@@ -701,7 +701,7 @@
 #pragma mark - TCP recv delegate
 - (void)recv:(NSData *)data withTag:(long)tag
 {
-    [self updateInterfaceWithReachability];
+    
 }
 
 @end

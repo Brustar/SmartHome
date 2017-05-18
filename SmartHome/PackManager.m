@@ -31,7 +31,12 @@ Proto createProto()
     Proto proto;
     proto.head=PROTOCOL_HEAD;
     proto.tail=PROTOCOL_TAIL;
-
+    proto.cmd = 0;
+    proto.action.RValue = 0;
+    proto.action.G = 0;
+    proto.action.B = 0;
+    proto.action.state = 0;
+    
     proto.masterID = CFSwapInt16BigToHost( [[[NSUserDefaults standardUserDefaults] objectForKey:@"HostID"] intValue]);
     return proto;
 }
