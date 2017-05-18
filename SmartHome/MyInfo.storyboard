@@ -242,15 +242,17 @@
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w7i-1m-bJl">
                                         <rect key="frame" x="3" y="3" width="183" height="44"/>
-                                        <state key="normal" title="4月" backgroundImage="frm_redd_nol">
+                                        <state key="normal" title="4月">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <state key="selected" backgroundImage="frm_redd_nol"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MTJ-kW-W2O">
                                         <rect key="frame" x="189" y="3" width="183" height="44"/>
                                         <state key="normal" title="历史">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <state key="selected" backgroundImage="frm_redd_rightl"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1091,6 +1093,7 @@
         <image name="delete_white" width="25" height="25"/>
         <image name="frm_curve_nol" width="366" height="178"/>
         <image name="frm_redd_nol" width="183" height="32"/>
+        <image name="frm_redd_rightl" width="183" height="32"/>
         <image name="frm_whitee_nol" width="366" height="32"/>
         <image name="icon_choose _nol" width="18" height="18"/>
         <image name="line_horizontal_white" width="373" height="48"/>

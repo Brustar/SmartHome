@@ -16,6 +16,7 @@
 #import "CKCircleView.h"
 #import "WeekdaysVC.h"
 #import "HTCircularSlider.h"
+#import "IphoneEditSceneController.h"
 
 @interface IphoneNewAddSceneTimerVC ()<CKCircleViewDelegate,WeekdaysVCDelegate>
 @property (nonatomic,strong) Scene *scene;
@@ -23,8 +24,10 @@
 @property (nonatomic,strong) NSMutableDictionary *weeks;
 @property (nonatomic,strong) UIButton * naviRightBtn;
 @property CKCircleView * dialView;
+@property  HTCircularSlider *slider;
 @property (nonatomic,strong)WeekdaysVC * weekDaysVC;
 @property (weak, nonatomic) IBOutlet UIImageView *timingImage;
+@property (nonatomic,strong) NSArray * viewControllerArrs;
 
 @end
 
@@ -52,8 +55,6 @@
         {
             [_scene setValuesForKeysWithDictionary:plistDic];
         }
-        
-        
     }
     return _scene;
 }
@@ -75,42 +76,25 @@
     self.RepetitionLable.text = @"永不";
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(iphoneSelectWeek:) name:@"SelectWeek" object:nil];
 //    [self setCustomerSlider];
-     [self initSlider];
+//     [self initSlider];
 }
 -(void) initSlider
 {
     int sliderSize = 90;
     
     CGRect frame = CGRectMake(self.view.center.x-sliderSize, self.view.center.y-sliderSize, sliderSize*2, sliderSize*2);
-    HTCircularSlider *slider = [[HTCircularSlider alloc] initWithFrame:frame];
-    [self.view addSubview:slider];
-    [slider addTarget:self action:@selector(onValueChange:) forControlEvents:UIControlEventValueChanged];
-    
-    slider.handleImage = [UIImage imageNamed:@"schedule_pointer"];
-    
-    slider.handleSize = CGPointMake(28/2, 27/2);
-    slider.maximumValue = 24;
-    slider.value = 0;
-    slider.trackAlpha = 0.6;
-    slider.tag = 0;
-    slider.radius = sliderSize;
-    
-    sliderSize = 65;
-    frame = CGRectMake(self.view.center.x-sliderSize, self.view.center.y-sliderSize, sliderSize*2, sliderSize*2);
-    HTCircularSlider *second = [[HTCircularSlider alloc] initWithFrame:frame];
-//    [self.view addSubview:second];
-    [second addTarget:self action:@selector(onValueChange:) forControlEvents:UIControlEventValueChanged];
-    
-    second.handleImage = [UIImage imageNamed:@"schedule_thumb"];
-    second.handleSize = CGPointMake(28/2, 27/2);
-    
-    second.maximumValue = 16;
-    second.value = 0;
-    second.trackAlpha = 0.6;
-    second.tag = 1;
-    second.radius = sliderSize;
-}
+    self.slider = [[HTCircularSlider alloc] initWithFrame:frame];
+    [self.view addSubview:self.slider];
+    [self.slider addTarget:self action:@selector(onValueChange:) forControlEvents:UIControlEventValueChanged];
+    self.slider.handleImage = [UIImage imageNamed:@"schedule_pointer"];
+    self.slider.handleSize = CGPointMake(15/2, 51/2);
+    self.slider.maximumValue = 24;
+    self.slider.value = 0;
+    self.slider.trackAlpha = 0.6;
+    self.slider.tag = 0;
+    self.slider.radius = sliderSize;
 
+}
 
 - (void)onValueChange:(HTCircularSlider *)slider {
     NSLog(@"%f", slider.value);
@@ -171,16 +155,39 @@
 }
 -(void)rightBtnClicked:(UIButton *)btn
 {
-    self.scene.schedules = @[self.schedule];
-    [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
-    
-    NSDictionary *dic = @{
-                          @"startDay":self.starTimeLabel.text,
-                          @"endDay":self.endTimeLabel.text,
-                          @"repeat":self.RepetitionLable.text,
-                          @"weekArray":_weekArray
-                          };
-    [NC postNotificationName:@"AddSceneOrDeviceTimerNotification" object:nil userInfo:dic];
+    _viewControllerArrs =self.navigationController.viewControllers;
+    NSInteger vcCount = _viewControllerArrs.count;
+    UIViewController * lastVC = _viewControllerArrs[vcCount -2];
+    UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+    IphoneEditSceneController * iphoneEditSceneVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneEditSceneController"];
+    if ([lastVC isKindOfClass:[iphoneEditSceneVC class]]) {
+        
+        [DeviceInfo defaultManager].isPhotoLibrary = NO;
+        //场景ID不变
+        NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
+        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+        Scene * scene = [[Scene alloc] init];
+        if (plistDic) {
+            [scene setValuesForKeysWithDictionary:plistDic];
+            
+            [[SceneManager defaultManager] editScene:scene];
+        }
+        
+    }else{
+        
+        self.scene.schedules = @[self.schedule];
+        [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
+        
+        NSDictionary *dic = @{
+                              @"startDay":self.starTimeLabel.text,
+                              @"endDay":self.endTimeLabel.text,
+                              @"repeat":self.RepetitionLable.text,
+                              @"weekArray":_weekArray
+                              };
+        [NC postNotificationName:@"AddSceneOrDeviceTimerNotification" object:nil userInfo:dic];
+    }
+  
     [self.navigationController popViewControllerAnimated:YES];
 
 }
@@ -188,24 +195,32 @@
     
     UIStoryboard * HomeStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
     if (_weekDaysVC == nil) {
-        self.DrawView.hidden = YES;
+        self.timingImage.hidden = YES;
         self.dialView.hidden = YES;
+        self.TimerView.hidden = YES;
+        self.slider.hidden = YES;
         _weekDaysVC = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"WeekdaysVC"];
         _weekDaysVC.delegate = self;
         [self.view addSubview:_weekDaysVC.view];
         [self.view bringSubviewToFront:_weekDaysVC.view];
         
     }else {
-        self.DrawView.hidden = NO;
+        self.TimerView.hidden = NO;
         self.dialView.hidden = NO;
+        self.timingImage.hidden = NO;
+        self.slider.hidden = NO;
         [_weekDaysVC.view removeFromSuperview];
         _weekDaysVC = nil;
     }
 }
 -(void)onWeekButtonClicked:(UIButton *)button
 {
-    self.DrawView.hidden = NO;
+    
+//    self.DrawView.hidden = NO;
+    self.slider.hidden = NO;
     self.dialView.hidden = NO;
+    self.timingImage.hidden = NO;
+    self.TimerView.hidden = NO;
     if (_weekDaysVC) {
         [_weekDaysVC.view removeFromSuperview];
         _weekDaysVC = nil;
@@ -307,14 +322,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

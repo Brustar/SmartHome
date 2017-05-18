@@ -463,6 +463,7 @@
                     <navigationItem key="navigationItem" id="cdJ-K8-cbD"/>
                     <connections>
                         <outlet property="RepetitionLable" destination="YDs-YH-YJh" id="PWn-F6-XEU"/>
+                        <outlet property="TimerView" destination="0Ml-IB-SIs" id="OWk-Zr-O1N"/>
                         <outlet property="endTimeLabel" destination="KQo-X9-dnP" id="meg-hc-ALd"/>
                         <outlet property="starTimeLabel" destination="0OQ-Ou-0lL" id="lMt-rX-sfK"/>
                         <outlet property="timingImage" destination="fn9-d7-eEB" id="fMI-d7-Moy"/>

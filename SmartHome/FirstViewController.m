@@ -171,7 +171,7 @@
     [self setupNaviBar];
     [self showNetStateView];
     //开启网络状况监听器
-    
+    [self updateInterfaceWithReachability];
     [self setUIMessage];
     [self chatConnect];
     [self getScenesFromPlist];
@@ -311,9 +311,9 @@
                 
             }else if (info.connectState == offLine) {
                 [FirstBlockSelf setNetState:netState_notConnect];
+                FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
+                [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
                 NSLog(@"离线模式");
-               FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
-              [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
                 
             }
         }
@@ -334,27 +334,28 @@
                 
             }else if (info.connectState == offLine) {
                 [FirstBlockSelf setNetState:netState_notConnect];
-                 FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
-                 [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
+                FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
+                [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
                 NSLog(@"离线模式");
                 
                 
             }
         }else if(status == AFNetworkReachabilityStatusNotReachable){ //没有网络(断网)
             [FirstBlockSelf setNetState:netState_notConnect];
-             FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
-             [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
+            FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
+            [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
+            
             NSLog(@"离线模式");
             
         }else if (status == AFNetworkReachabilityStatusUnknown) { //未知网络
             [FirstBlockSelf setNetState:netState_notConnect];
             FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
-             [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
+            [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
             
         }
     }];
     
-    [_afNetworkReachabilityManager startMonitoring];//开启网络监视器；
+     [_afNetworkReachabilityManager startMonitoring];//开启网络监视器；
     
 }
 -(void) chatConnect

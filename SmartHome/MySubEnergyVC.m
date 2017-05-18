@@ -35,7 +35,8 @@
 @property (nonatomic,strong) NSMutableArray * minute_timeArr;
 @property (nonatomic,strong) NSMutableArray * eidArr;
 @property (nonatomic,strong) NSMutableArray * historyArr;
-
+@property(nonatomic,strong)UIButton *clickButton;
+@property(nonatomic,strong)UIButton *selectedButton;
 
 @end
 
@@ -75,15 +76,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
     [self setNaviBarTitle:@"智能账单"];
     [self.monthBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.historyBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-    [self.TVEnergy addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-    [self.AireEnergy addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.TVEnergy addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.AireEnergy addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
      self.TimerView.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
-    self.deviceTitleLabel.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
-    DeviceInfo *device = [DeviceInfo defaultManager];
+     self.deviceTitleLabel.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
+      DeviceInfo *device = [DeviceInfo defaultManager];
     if ([device.db isEqualToString:SMART_DB]) {
 //        [self sendRequestToGetEenrgy];
     }else {
@@ -102,7 +102,7 @@
                 self.tableView.tableFooterView = view;
                 [self loadChartWithDates];//下面的曲线图
                  [self setTime];
-                self.tableView.allowsSelection = NO;
+                 self.tableView.allowsSelection = NO;
                  [self setUpRoomView];
         
     
@@ -185,11 +185,9 @@
     _chartWithDates.labelForIndex = ^(NSUInteger item) {
         return months[item];
     };
-    
     _chartWithDates.labelForValue = ^(CGFloat value) {
         return [NSString stringWithFormat:@"%.02f", value];
     };
-    
     [_chartWithDates setChartData:chartData];//下面的曲线图
 }
 -(void)sendRequestToGetEenrgy
@@ -320,8 +318,6 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
-
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -334,34 +330,27 @@
 }
 -(void)save:(UIButton *)sender
 {
+    if (self.clickButton != sender) {
+       [self sendRequestToGetEenrgy];
+    }
+    if (sender.selected == NO) {
+        sender.selected = YES;
+       [self sendHistoryGetEenrgy];
+        [self changeClickButton:sender];
+    }
+      self.clickButton = sender;
+}
+-(void)changeClickButton:(UIButton *)sender{
     
-//      self.historyBtn.selected = !self.monthBtn.selected;
-    //当月能耗
-    if (sender == self.monthBtn) {
-         self.monthBtn.selected = !self.monthBtn.selected;
-        if (self.monthBtn.selected) {
-            [self.monthBtn setBackgroundImage:[UIImage imageNamed:@"frm_red_nol"] forState:UIControlStateSelected];
-            [self sendRequestToGetEenrgy];
-        }else{
-            [self.monthBtn setBackgroundImage:nil forState:UIControlStateNormal];
-        }
-    }
-    //历史查询
-    if (sender == self.historyBtn) {
-        self.historyBtn.selected = !self.historyBtn.selected;
-        if (self.historyBtn.selected) {
-            [self.historyBtn setBackgroundImage:[UIImage imageNamed:@"frm_redd_rightl"] forState:UIControlStateSelected];
-            [self sendHistoryGetEenrgy];
-        }else{
-            [self.historyBtn setBackgroundImage:nil forState:UIControlStateNormal];
-        }
-    }
+    self.selectedButton.selected = NO;
+    self.selectedButton = sender;
+    sender.selected = YES;
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 
 @end

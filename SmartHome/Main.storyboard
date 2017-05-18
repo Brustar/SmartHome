@@ -2428,9 +2428,9 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nVy-nK-tpc">
-                                            <rect key="frame" x="15" y="20" width="60" height="30"/>
+                                            <rect key="frame" x="15" y="20" width="120" height="30"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="60" id="arE-LP-omT"/>
+                                                <constraint firstAttribute="width" constant="120" id="arE-LP-omT"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2556,7 +2556,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UfZ-a5-oF5" id="Rm6-rt-7d2">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="42.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u04-ME-Qpg">
@@ -8703,24 +8703,24 @@ layer.masksToBoundslayer.masksToBounds
         <image name="wifi" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nIi-Kc-QDm"/>
         <segue reference="uCb-ME-O7C"/>
+        <segue reference="nIi-Kc-QDm"/>
         <segue reference="QfD-HS-G6N"/>
-        <segue reference="3pI-26-H7E"/>
-        <segue reference="wSR-hk-rTP"/>
+        <segue reference="PRs-sg-E1F"/>
+        <segue reference="5K5-wE-mZz"/>
         <segue reference="ya3-gG-p8O"/>
-        <segue reference="U1p-eR-Biy"/>
+        <segue reference="X9P-hg-DXo"/>
+        <segue reference="fHn-Cm-7Q7"/>
+        <segue reference="vKk-7C-VKf"/>
+        <segue reference="Vzc-yi-Jnw"/>
+        <segue reference="a9T-LN-ZVX"/>
+        <segue reference="tt4-nB-rfe"/>
         <segue reference="vdf-Gi-dZf"/>
         <segue reference="JQm-bA-TWz"/>
         <segue reference="pWG-oz-Opr"/>
-        <segue reference="tt4-nB-rfe"/>
-        <segue reference="l23-e3-J0C"/>
         <segue reference="tdV-sS-d5j"/>
-        <segue reference="X9P-hg-DXo"/>
-        <segue reference="vKk-7C-VKf"/>
-        <segue reference="fHn-Cm-7Q7"/>
-        <segue reference="Vzc-yi-Jnw"/>
-        <segue reference="a9T-LN-ZVX"/>
-        <segue reference="dA1-We-bRA"/>
+        <segue reference="l23-e3-J0C"/>
+        <segue reference="dRU-hd-aVS"/>
+        <segue reference="3pI-26-H7E"/>
     </inferredMetricsTieBreakers>
 </document>
