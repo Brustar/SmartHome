@@ -226,7 +226,7 @@ static NSString *const airCellIdentifier = @"airCell";
     
     if (!self.paramView) {
         self.paramView = [[YALContextMenuTableView alloc]initWithTableViewDelegateDataSource:self];
-        self.paramView.animationDuration = 0.15;
+        self.paramView.animationDuration = 0.05;
         //optional - implement custom YALContextMenuTableView custom protocol
         self.paramView.yalDelegate = self;
         //optional - implement menu items layout
