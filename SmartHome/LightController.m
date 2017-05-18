@@ -444,7 +444,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 
 - (IBAction)loadCatalog:(id)sender {
     self.lightCatalog = ((UIButton *)sender).tag;
-    self.btnPen.hidden=(self.lightCatalog == 3?NO:YES);
+    self.base.hidden = self.btnPen.hidden = (self.lightCatalog == 3?NO:YES);
     self.tranformView.hidden=(self.lightCatalog == 2?NO:YES);
     NSString *catalogID = [NSString stringWithFormat:@"0%ld",((UIButton *)sender).tag];
     [self initiateMenuOptions:catalogID];

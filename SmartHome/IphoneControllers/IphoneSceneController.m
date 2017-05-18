@@ -540,6 +540,7 @@ static NSString * const CYPhotoId = @"photo";
     [DeviceInfo defaultManager].isPhotoLibrary = NO;
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
+
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
      if (indexPath.row+1 >= self.scenes.count) {
