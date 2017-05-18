@@ -16,9 +16,16 @@
 #import "UIViewController+Navigator.h"
 
 @interface WettingController ()
+
 @property (weak, nonatomic) IBOutlet UILabel *HLabel;
 @property (weak, nonatomic) IBOutlet UILabel *SLabel;
 @property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
+@property (weak, nonatomic) IBOutlet UIImageView *start;
+@property (weak, nonatomic) IBOutlet UIImageView *timer;
+@property (weak, nonatomic) IBOutlet UIImageView *line;
+@property (weak, nonatomic) IBOutlet UIImageView *base;
+@property (weak, nonatomic) IBOutlet UILabel *second;
+@property (nonatomic,assign) NSTimer *scheculer;
 
 @end
 
@@ -71,7 +78,10 @@
 
 - (void)onValueChange:(HTCircularSlider *)slider {
     NSLog(@"%f", slider.value);
+    self.HLabel.hidden = self.SLabel.hidden = self.start.hidden = self.line.hidden = self.timer.hidden = slider.value==0;
+    [self.base setImage:[UIImage imageNamed:slider.value>0?@"flower_schedule":@"sp_base"]];
     
+    [self.base setImage:[UIImage imageNamed:@"wet_schedule"]];
     if (slider.tag == 0) {
         float dec = slider.value-(int)slider.value;
         int second = (int)(dec*60);
@@ -110,12 +120,29 @@
     [button setSelected:!button.isSelected];
     if (button.isSelected) {
         //selected
-        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"device_on"]] forState:UIControlStateSelected];
+        [button setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"sp_on"]] forState:UIControlStateSelected];
+        __block int interval = [self.SLabel.text intValue];
+        self.scheculer = [NSTimer scheduledTimerWithTimeInterval:1.0 repeats:YES block:^(NSTimer *timer){
+            [button setTitle:[NSString stringWithFormat:@"%d",interval] forState:UIControlStateNormal];
+            if (interval==0) {
+                button.selected = NO;
+                self.second.hidden = YES;
+                [button setTitle:@"" forState:UIControlStateNormal];
+                NSData *data = [[DeviceInfo defaultManager] toogle:NO deviceID:self.deviceid];
+                [[[SocketManager defaultManager] socket] writeData:data withTimeout:1 tag:1];
+                [timer invalidate];
+            }
+            interval--;
+        }];
+        
+        
     }else{
         //normal
-        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"device_off"]] forState:UIControlStateNormal];
+        [button setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"sp_off"]] forState:UIControlStateNormal];
+        [button setTitle:@"" forState:UIControlStateNormal];
+        [self.scheculer invalidate];
     }
-    
+    self.second.hidden = !button.isSelected;
     NSData *data = [[DeviceInfo defaultManager] toogle:button.isSelected deviceID:self.deviceid];
     [[[SocketManager defaultManager] socket] writeData:data withTimeout:1 tag:1];
 }
