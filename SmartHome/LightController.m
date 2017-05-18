@@ -451,7 +451,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     // init YALContextMenuTableView tableView
     if (!self.contextMenuTableView) {
         self.contextMenuTableView = [[YALContextMenuTableView alloc]initWithTableViewDelegateDataSource:self];
-        self.contextMenuTableView.animationDuration = 0.15;
+        self.contextMenuTableView.animationDuration = 0.05;
         //optional - implement custom YALContextMenuTableView custom protocol
         self.contextMenuTableView.yalDelegate = self;
         //optional - implement menu items layout
