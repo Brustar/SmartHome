@@ -171,7 +171,7 @@
     [self setupNaviBar];
     [self showNetStateView];
     //开启网络状况监听器
-    
+    [self updateInterfaceWithReachability];
     [self setUIMessage];
     [self chatConnect];
     [self getScenesFromPlist];
@@ -312,9 +312,8 @@
             }else if (info.connectState == offLine) {
                 [FirstBlockSelf setNetState:netState_notConnect];
                 NSLog(@"离线模式");
-               FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
-              [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
-                
+                FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
+                [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
             }
         }
         else if(status == AFNetworkReachabilityStatusReachableViaWiFi) //WIFI
@@ -700,7 +699,7 @@
 #pragma mark - TCP recv delegate
 - (void)recv:(NSData *)data withTag:(long)tag
 {
-    [self updateInterfaceWithReachability];
+    
 }
 
 @end
