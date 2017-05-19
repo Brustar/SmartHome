@@ -21,7 +21,8 @@
     // Initialization code
     [self.OtherSwitchBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.AddOtherBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-    
+    [self.OtherSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
+    [self.OtherSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
 }
 
 - (IBAction)save:(id)sender {
@@ -34,7 +35,6 @@
         if (self.OtherSwitchBtn.selected) {
             [self.OtherSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
         }else{
-            
             [self.OtherSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
         }
         NSData *data=[[DeviceInfo defaultManager] toogle:self.OtherSwitchBtn.selected deviceID:self.deviceid];

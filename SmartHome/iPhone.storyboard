@@ -2698,13 +2698,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V1O-4c-kCN">
-                                <rect key="frame" x="0.0" y="123" width="375" height="1"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="OQ8-E4-tPn"/>
-                                </constraints>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="59" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Lex-vC-Otg">
                                 <rect key="frame" x="0.0" y="124" width="375" height="543"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2728,10 +2721,12 @@
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zBz-OI-08x">
                                                     <rect key="frame" x="301" y="14" width="46" height="30"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="46" id="K9x-XF-iZN"/>
                                                         <constraint firstAttribute="height" constant="30" id="dqB-4Y-rLd"/>
                                                     </constraints>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <state key="normal" backgroundImage="dvd_btn_switch_on"/>
                                                     <connections>
                                                         <action selector="deviceTimerBtnClicked:" destination="Qld-cR-r5g" eventType="touchUpInside" id="rEW-sf-NHu"/>
@@ -2771,8 +2766,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="2tV-Lp-rRp" firstAttribute="top" secondItem="Lex-vC-Otg" secondAttribute="bottom" id="DW3-np-gyl"/>
-                            <constraint firstItem="V1O-4c-kCN" firstAttribute="leading" secondItem="dYE-Ji-TVg" secondAttribute="leading" id="Eyu-Ou-5lG"/>
-                            <constraint firstItem="Lex-vC-Otg" firstAttribute="top" secondItem="V1O-4c-kCN" secondAttribute="bottom" id="IBc-bm-wDk"/>
                             <constraint firstItem="Lex-vC-Otg" firstAttribute="leading" secondItem="dYE-Ji-TVg" secondAttribute="leading" id="Kc9-X2-Pku"/>
                             <constraint firstItem="gWo-oN-0bZ" firstAttribute="top" secondItem="dYE-Ji-TVg" secondAttribute="top" id="LXM-5P-VyS"/>
                             <constraint firstItem="2tV-Lp-rRp" firstAttribute="top" secondItem="gWo-oN-0bZ" secondAttribute="bottom" id="Yez-TH-H8M"/>
@@ -2780,7 +2773,6 @@
                             <constraint firstAttribute="trailing" secondItem="gWo-oN-0bZ" secondAttribute="trailing" id="cP5-0K-VvW"/>
                             <constraint firstItem="Lex-vC-Otg" firstAttribute="top" secondItem="dYE-Ji-TVg" secondAttribute="top" constant="124" id="eAM-z6-E3V"/>
                             <constraint firstAttribute="trailing" secondItem="Lex-vC-Otg" secondAttribute="trailing" id="jsv-yI-1C3"/>
-                            <constraint firstAttribute="trailing" secondItem="V1O-4c-kCN" secondAttribute="trailing" id="mGQ-pd-tWt"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2Ln-iF-Ugx"/>
@@ -3999,8 +3991,8 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="qN8-z6-Gb7"/>
-        <segue reference="jfc-yL-NEI"/>
         <segue reference="WeN-Qz-0Az"/>
+        <segue reference="qN8-z6-Gb7"/>
+        <segue reference="lPv-wZ-EAG"/>
     </inferredMetricsTieBreakers>
 </document>

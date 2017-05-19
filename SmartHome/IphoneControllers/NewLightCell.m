@@ -26,6 +26,8 @@
     [self.NewLightPowerBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.AddLightBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.NewLightSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
+    [self.NewLightPowerBtn setImage:[UIImage imageNamed:@"lv_icon_light_off"] forState:UIControlStateNormal];
+    [self.NewLightPowerBtn setImage:[UIImage imageNamed:@"lv_icon_light_on"] forState:UIControlStateSelected];
 }
 - (IBAction)save:(id)sender {
     
@@ -67,11 +69,10 @@
              
          }
         self.NewLightPowerBtn.selected = !self.NewLightPowerBtn.selected;
-        if (!self.NewLightPowerBtn.selected) {
-            [self.NewLightPowerBtn setImage:[UIImage imageNamed:@"lv_icon_light_off"] forState:UIControlStateNormal];
-          
-        }else{
+        if (self.NewLightPowerBtn.selected) {
             [self.NewLightPowerBtn setImage:[UIImage imageNamed:@"lv_icon_light_on"] forState:UIControlStateSelected];
+        }else{
+            [self.NewLightPowerBtn setImage:[UIImage imageNamed:@"lv_icon_light_off"] forState:UIControlStateNormal];
            
        }
          

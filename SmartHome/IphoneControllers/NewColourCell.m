@@ -31,6 +31,9 @@
     [self.AddColourLightBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.colourBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.colourSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
+    
+    [self.colourBtn setImage:[UIImage imageNamed:@"lv_icon_light_on"] forState:UIControlStateSelected];
+    [self.colourBtn setImage:[UIImage imageNamed:@"lv_icon_light_off"] forState:UIControlStateNormal];
 }
 
 - (IBAction)save:(id)sender {

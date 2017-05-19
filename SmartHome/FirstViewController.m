@@ -171,7 +171,7 @@
     [self setupNaviBar];
     [self showNetStateView];
     //开启网络状况监听器
-    
+    [self updateInterfaceWithReachability];
     [self setUIMessage];
     [self chatConnect];
     [self getScenesFromPlist];

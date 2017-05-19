@@ -23,6 +23,7 @@
 @property (nonatomic) int tag;
 @property(nonatomic,assign)BOOL isPhotoLibrary;
 + (instancetype)defaultManager;
+- (void)sendPost:(NSString *)url param:(NSDictionary *)params showProgressHUD:(BOOL)show;
 - (void)sendPost:(NSString *)url param:(NSDictionary *)params;
 - (void)sendGet:(NSString *)url param:(NSDictionary *)params;
 - (void)sendGet:(NSString *)url param:(NSDictionary *)params header:(NSDictionary *)header;

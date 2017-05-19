@@ -27,7 +27,197 @@
 }
 
 - (void)rightBtnClicked:(UIButton *)btn {
-    [self addDeviceTimer];
+    
+    if (_isEditMode) {
+        [self editDeviceTimer];
+    }else {
+        [self addDeviceTimer];
+    }
+}
+
+- (void)editDeviceTimer {
+    if (_startTime.length <=0 || _endTime.length <=0) {
+        [MBProgressHUD showError:@"请选择时段"];
+        return;
+    }
+    
+    if (_repeatition.length <= 0 && self.repeatString.length <= 0) {
+        [MBProgressHUD showError:@"请选择重复选项"];
+        return;
+    }
+    
+    if (_device.hTypeId == 1 || _device.hTypeId == 2 || _device.hTypeId == 3) { //灯光
+        if (_switchBtnString.length <= 0 ) {
+            _switchBtnString = @"01000000";  //默认开灯
+            if (self.power == 1) {
+                _switchBtnString = @"01000000";
+            }else {
+                _switchBtnString = @"00000000";
+            }
+        }
+        
+        _startValue = [NSMutableString string];
+        [_startValue appendString:_switchBtnString];
+    }else if (_device.subTypeId == 7) {  //窗帘
+        
+        if (_switchBtnString.length <= 0 ) {
+            _switchBtnString = @"01000000";  //默认开
+            if (self.power == 1) {
+                _switchBtnString = @"01000000";
+            }else {
+                _switchBtnString = @"00000000";
+            }
+        }
+        
+        if (_sliderBtnString.length <= 0) {
+            _sliderBtnString = @"2AFF0000";
+            
+            NSString *hexString = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%2x", (int)self.position]];
+            if (hexString.length == 2) {
+                _sliderBtnString = [NSString stringWithFormat:@"2A%@0000", hexString];
+            }else {
+                _sliderBtnString = @"2AFF0000";//默认值
+            }
+            
+        }
+        
+        _startValue = [NSMutableString string];
+        [_startValue appendString:_switchBtnString];
+        [_startValue appendString:@","];
+        [_startValue appendString:_sliderBtnString];
+    }else if (_device.hTypeId == 31) { //空调
+        
+        if (_switchBtnString.length <= 0 ) {
+            _switchBtnString = @"01000000";  //默认开
+            if (self.power == 1) {
+                _switchBtnString = @"01000000";
+            }else {
+                _switchBtnString = @"00000000";
+            }
+        }
+        
+        if (_sliderBtnString.length <= 0) {
+            _sliderBtnString = @"6AFF0000";  //默认（温度）
+            
+            NSString *hexString = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%2x", (int)lroundf(self.temperature)]];
+            if (hexString.length == 2) {
+                _sliderBtnString = [NSString stringWithFormat:@"6A%@0000", hexString];
+            }else {
+                _sliderBtnString = @"6AFF0000";//默认值
+            }
+            
+        }
+        
+        _startValue = [NSMutableString string];
+        [_startValue appendString:_switchBtnString];
+        [_startValue appendString:@","];
+        [_startValue appendString:_sliderBtnString];
+    }else if (_device.hTypeId == 11 || _device.hTypeId == 13 || _device.hTypeId == 14) {  //TV, DVD, 背景音乐
+        
+        if (_switchBtnString.length <= 0 ) {
+            _switchBtnString = @"01000000";  //默认开
+            if (self.power == 1) {
+                _switchBtnString = @"01000000";
+            }else {
+                _switchBtnString = @"00000000";
+            }
+        }
+        
+        if (_sliderBtnString.length <= 0) {
+            _sliderBtnString = @"AAFF0000";  //默认值 (音量)
+            
+            NSString *hexString = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%2x", (int)self.volume]];
+            if (hexString.length == 2) {
+                _sliderBtnString = [NSString stringWithFormat:@"AA%@0000", hexString];
+            }else {
+                _sliderBtnString = @"AAFF0000";//默认值 (背景音乐音量)
+            }
+        }
+        
+        _startValue = [NSMutableString string];
+        [_startValue appendString:_switchBtnString];
+        [_startValue appendString:@","];
+        [_startValue appendString:_sliderBtnString];
+    }else if (_device.hTypeId == 15) {  //FM收音机
+        
+        if (_switchBtnString.length <= 0 ) {
+            _switchBtnString = @"01000000";  //默认开
+            
+            if (self.power == 1) {
+                _switchBtnString = @"01000000";
+            }else {
+                _switchBtnString = @"00000000";
+            }
+        }
+        
+        if (_sliderBtnString.length <= 0) {
+            _sliderBtnString = @"AAFF0000";  //默认值 (音量)
+            
+            NSString *hexString = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%2x", (int)self.volume]];
+            if (hexString.length == 2) {
+                _sliderBtnString = [NSString stringWithFormat:@"AA%@0000", hexString];
+            }else {
+                _sliderBtnString = @"AAFF0000";//默认值 (背景音乐音量)
+            }
+        }
+        
+        if (_FMChannelSliderString.length <= 0) {
+            _FMChannelSliderString = @"3AFFFF00";//默认值 (频道)
+        }
+        
+        _startValue = [NSMutableString string];
+        [_startValue appendString:_switchBtnString];
+        [_startValue appendString:@","];
+        [_startValue appendString:_sliderBtnString];
+        [_startValue appendString:@","];
+        [_startValue appendString:_FMChannelSliderString];
+    }else if (_device.hTypeId == 17) {  //幕布
+        if (_switchBtnString.length <= 0 ) {
+            _switchBtnString = @"34000000";  //默认降
+            
+            if (self.power == 1) {
+                _switchBtnString = @"34000000";
+            }else {
+                _switchBtnString = @"33000000";
+            }
+        }
+        
+        _startValue = [NSMutableString string];
+        [_startValue appendString:_switchBtnString];
+    }else {
+        if (_switchBtnString.length <= 0 ) {
+            _switchBtnString = @"01000000";  //默认开
+            
+            if (self.power == 1) {
+                _switchBtnString = @"01000000";
+            }else {
+                _switchBtnString = @"00000000";
+            }
+        }
+        
+        _startValue = [NSMutableString string];
+        [_startValue appendString:_switchBtnString];
+    }
+    
+    
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
+    NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
+    
+    if (auothorToken.length >0) {
+        NSDictionary *dict = @{@"token":auothorToken,
+                               @"optype":@(2),
+                               @"isactive":@(_isActive),
+                               @"starttime":_startTime,
+                               @"endtime":_endTime,
+                               @"weekvalue":_repeatString,
+                               @"startvalue":_startValue,
+                               @"scheduleid":@(self.scheduleId)
+                               };
+        HttpManager *http = [HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = 2;
+        [http sendPost:url param:dict];
+    }
 }
 
 - (void)addDeviceTimer {
@@ -155,11 +345,27 @@
         
         if ([responseObject[@"result"] intValue] == 0) {
             [MBProgressHUD showSuccess:@"添加成功"];
-            [self.navigationController popViewControllerAnimated:YES];
-            //[self.navigationController popToViewController:vc animated:YES];
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            [NC postNotificationName:@"AddDeviceTimerSucceedNotification" object:nil];
+            
+            for (UIViewController *vc in self.navigationController.viewControllers) {
+                if ([vc isKindOfClass:[DeviceListTimeVC class]]) {
+                    [self.navigationController popToViewController:vc animated:YES];
+                    break;
+                }
+            }
+            
         }else {
             [MBProgressHUD showSuccess:@"添加失败"];
+        }
+    }else if (tag == 2) {
+        if ([responseObject[@"result"] intValue] == 0) {
+            [MBProgressHUD showSuccess:@"修改成功"];
+            [NC postNotificationName:@"AddDeviceTimerSucceedNotification" object:nil];
+            
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        }else {
+            [MBProgressHUD showSuccess:@"修改失败"];
         }
     }
 }
@@ -249,6 +455,8 @@
         else {
             return 100.0f;
         }
+    }else if (indexPath.section == 1) {
+        return 60.0f;
     }
     
     return 44.0f;
@@ -257,7 +465,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         if (self.device.subTypeId == 1) { //灯光
-            if (self.device.hTypeId == 1) { //调光灯
+            if (self.device.hTypeId == 1) { //开关灯
                 NewColourCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewColourCell" forIndexPath:indexPath];
                 cell.delegate = self;
                 cell.backgroundColor = [UIColor clearColor];
@@ -271,6 +479,7 @@
                 cell.lowImageView.hidden = YES;
                 cell.highImageView.hidden = YES;
                 cell.deviceid = [NSString stringWithFormat:@"%d", self.device.eID];
+                cell.colourBtn.selected = self.power;
                 return cell;
             }else if (self.device.hTypeId == 2) { //调光灯
                 NewLightCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewLightCell" forIndexPath:indexPath];
@@ -282,6 +491,8 @@
                 cell.NewLightNameLabel.text = self.device.name;
                 cell.NewLightSlider.continuous = NO;
                 cell.deviceid = [NSString stringWithFormat:@"%d", self.device.eID];
+                cell.NewLightPowerBtn.selected = self.power;
+                cell.NewLightSlider.value = (float)self.bright/100.0f;
                 return cell;
                 
             }else if (self.device.hTypeId == 3) {  //调色灯
@@ -298,6 +509,7 @@
                 cell.lowImageView.hidden = YES;
                 cell.highImageView.hidden = YES;
                 cell.deviceid = [NSString stringWithFormat:@"%d", self.device.eID];
+                cell.colourBtn.selected = self.power;
                 return cell;
             }
             
@@ -311,7 +523,8 @@
             curtainCell.roomID = (int)self.roomID;
             curtainCell.label.text = self.device.name;
             curtainCell.deviceid = [NSString stringWithFormat:@"%d", self.device.eID];
-            
+            curtainCell.open.selected = self.power;
+            curtainCell.slider.value = (float)self.position/100.0f;
             return curtainCell;
         }else if (self.device.hTypeId == 31) {  //空调
             AireTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"AireTableViewCell" forIndexPath:indexPath];
@@ -323,6 +536,8 @@
             aireCell.roomID = (int)self.roomID;
             aireCell.AireNameLabel.text = self.device.name;
             aireCell.deviceid = [NSString stringWithFormat:@"%d", self.device.eID];
+            aireCell.AireSwitchBtn.selected = self.power;
+            aireCell.AireSlider.value = self.temperature;
             return aireCell;
         }else if (self.device.hTypeId == 14) { //背景音乐
             BjMusicTableViewCell * BjMusicCell = [tableView dequeueReusableCellWithIdentifier:@"BjMusicTableViewCell" forIndexPath:indexPath];
@@ -332,6 +547,8 @@
             BjMusicCell.AddBjmusicBtn.hidden = YES;
             BjMusicCell.BJmusicConstraint.constant = 10;
             BjMusicCell.BjMusicNameLb.text = self.device.name;
+            BjMusicCell.BjPowerButton.selected = self.power;
+            BjMusicCell.BjSlider.value = (float)self.volume/100.0f;
             return BjMusicCell;
         }else if (self.device.hTypeId == 13) { //DVD
             DVDTableViewCell * dvdCell = [tableView dequeueReusableCellWithIdentifier:@"DVDTableViewCell" forIndexPath:indexPath];
@@ -341,6 +558,8 @@
             dvdCell.AddDvdBtn.hidden = YES;
             dvdCell.DVDConstraint.constant = 10;
             dvdCell.DVDNameLabel.text = self.device.name;
+            dvdCell.DVDSwitchBtn.selected = self.power;
+            dvdCell.DVDSlider.value = (float)self.volume/100.0f;
             return dvdCell;
         }else if (self.device.hTypeId == 15) { //FM收音机
             FMTableViewCell * FMCell = [tableView dequeueReusableCellWithIdentifier:@"FMTableViewCell" forIndexPath:indexPath];
@@ -350,6 +569,8 @@
             FMCell.AddFmBtn.hidden = YES;
             FMCell.FMLayouConstraint.constant = 10;
             FMCell.FMNameLabel.text = self.device.name;
+            FMCell.FMSwitchBtn.selected = self.power;
+            FMCell.FMSlider.value = (float)self.volume/100.0f;
             return FMCell;
         }else if (self.device.hTypeId == 17) { //幕布
             ScreenCurtainCell * ScreenCell = [tableView dequeueReusableCellWithIdentifier:@"ScreenCurtainCell" forIndexPath:indexPath];
@@ -359,6 +580,7 @@
             ScreenCell.AddScreenCurtainBtn.hidden = YES;
             ScreenCell.ScreenCurtainConstraint.constant = 10;
             ScreenCell.ScreenCurtainLabel.text = self.device.name;
+            
             return ScreenCell;
         }else if (self.device.hTypeId == 16) { //投影仪(只有开关)
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
@@ -368,6 +590,7 @@
             otherCell.AddOtherBtn.hidden = YES;
             otherCell.OtherConstraint.constant = 10;
             otherCell.NameLabel.text = self.device.name;
+            otherCell.OtherSwitchBtn.selected = self.power;
             return otherCell;
         }else if (self.device.hTypeId == 11) { //电视（以前叫机顶盒）
             TVTableViewCell * tvCell = [tableView dequeueReusableCellWithIdentifier:@"TVTableViewCell" forIndexPath:indexPath];
@@ -377,6 +600,8 @@
             tvCell.AddTvDeviceBtn.hidden = YES;
             tvCell.TVConstraint.constant = 10;
             tvCell.TVNameLabel.text = self.device.name;
+            tvCell.TVSwitchBtn.selected = self.power;
+            tvCell.TVSlider.value = (float)self.volume/100.0f;
             return tvCell;
         }/*else if (self.device.hTypeId == 12) { //网络电视
             TVTableViewCell * tvCell = [tableView dequeueReusableCellWithIdentifier:@"TVTableViewCell" forIndexPath:indexPath];
@@ -394,6 +619,7 @@
             otherCell.AddOtherBtn.hidden = YES;
             otherCell.OtherConstraint.constant = 10;
             otherCell.NameLabel.text = self.device.name;
+            otherCell.OtherSwitchBtn.selected = self.power;
             return otherCell;
         }else { //其他类型: 智能浇花，智能投食，推窗器
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
@@ -403,6 +629,7 @@
             otherCell.AddOtherBtn.hidden = YES;
             otherCell.OtherConstraint.constant = 10;
             otherCell.NameLabel.text = self.device.name;
+            otherCell.OtherSwitchBtn.selected = self.power;
             return otherCell;
         }
         
@@ -416,26 +643,38 @@
         cell.backgroundColor = [UIColor clearColor];
         
         //时间段 label
-        UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 12, UI_SCREEN_WIDTH-160, 20)];
+        UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 38, UI_SCREEN_WIDTH-40, 20)];
         timeLabel.textColor = [UIColor whiteColor];
         timeLabel.backgroundColor = [UIColor clearColor];
         timeLabel.textAlignment = NSTextAlignmentLeft;
         timeLabel.font = [UIFont systemFontOfSize:15];
         timeLabel.adjustsFontSizeToFitWidth = YES;
-        if (_startTime.length >0 && _endTime.length >0 && _repeatition.length >0) {
-            timeLabel.text = [NSString stringWithFormat:@"%@-%@, %@", _startTime, _endTime, _repeatition];
+        
+        if (!_isEditMode) {
+            if (_startTime.length >0 && _endTime.length >0 && _repeatition.length >0) {
+                timeLabel.text = [NSString stringWithFormat:@"%@-%@, %@", _startTime, _endTime, _repeatition];
+            }
+        }else { //编辑模式
+            
+            if (_repeatition.length >0) {
+                timeLabel.text = [NSString stringWithFormat:@"%@-%@, %@", _startTime, _endTime, _repeatition];
+            }else {
+                timeLabel.text = [NSString stringWithFormat:@"%@-%@, %@", self.startTime, self.endTime, [self repeatString:self.repeatString]];
+            }
+            
         }
+        
         [cell.contentView addSubview:timeLabel];
         
         return cell;
     }else if (indexPath.section == 2) {
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-        cell.textLabel.text = @"立即启动";
+        cell.textLabel.text = @"启用定时";
         cell.textLabel.textColor = [UIColor whiteColor];
         cell.textLabel.font = [UIFont systemFontOfSize:15];
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        UIButton *activeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 23)];
+        UIButton *activeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 52, 34)];
         activeBtn.selected = _isActive;
         [activeBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
         [activeBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
@@ -659,6 +898,93 @@
         _switchBtnString = @"01000000";//开
     }else {
         _switchBtnString = @"00000000";//关
+    }
+}
+
+
+- (NSString *)repeatString:(NSString *)weekString {
+    if (weekString.length <= 0) {
+        return @"永不";
+    }else {
+        NSMutableArray *weekArray = [NSMutableArray array];
+        for(int i =0; i < [weekString length]; i++) {
+            NSString *subStr = [weekString substringWithRange:NSMakeRange(i, 1)];
+            [weekArray addObject:subStr];
+        }
+        
+        if (weekArray.count >0) {
+            NSMutableDictionary *weeksDict = [NSMutableDictionary dictionary];
+            for(NSString *weekStr in weekArray) {
+                weeksDict[weekStr] = @"1";
+            }
+            
+            int week[7] = {0}; //初始化 7天全为0
+            
+            for (NSString *key in [weeksDict allKeys]) {
+                int index = [key intValue];
+                int select = [weeksDict[key] intValue];
+                
+                week[index] = select;
+            }
+            
+            NSMutableString *display = [NSMutableString string];
+            
+            if (week[1] == 0 && week[2] == 0 && week[3] == 0 && week[4] == 0 && week[5] == 0 && week[0] == 0 && week[6] == 0) {
+                [display appendString:@"永不"];
+            }
+            else if (week[1] == 1 && week[2] == 1 && week[3] == 1 && week[4] == 1 && week[5] == 1 && week[0] == 1 && week[6] == 1) {
+                [display appendString:@"每天"];
+            }
+            else if (week[1] == 1 && week[2] == 1 && week[3] == 1 && week[4] == 1 && week[5] == 1 && week[0] == 0 && week[6] == 0) {
+                [display appendString:@"工作日"];
+            }
+            else if ( week[1] == 0 && week[2] == 0 && week[3] == 0 && week[4] == 0 && week[5] == 0 && week[0] == 1 && week[6] == 1 ) {
+                [display appendString:@"周末"];
+            }
+            else {
+                for (int i = 1; i < 7; i++) {
+                    if (week[i] == 1) {
+                        switch (i) {
+                            case 1:
+                                [display appendString:@"周一、"];
+                                break;
+                                
+                            case 2:
+                                [display appendString:@"周二、"];
+                                break;
+                                
+                            case 3:
+                                [display appendString:@"周三、"];
+                                break;
+                                
+                            case 4:
+                                [display appendString:@"周四、"];
+                                break;
+                                
+                            case 5:
+                                [display appendString:@"周五、"];
+                                break;
+                                
+                            case 6:
+                                [display appendString:@"周六、"];
+                                break;
+                                
+                            default:
+                                break;
+                        }
+                    }
+                }
+                if (week[0] == 1) {
+                    [display appendString:@"周日、"];
+                }
+            }
+            
+            return display;
+            
+        }else {
+            return @"永不";
+        }
+        
     }
 }
 
