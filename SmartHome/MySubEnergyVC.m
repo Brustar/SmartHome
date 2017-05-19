@@ -256,22 +256,7 @@
     VC.titleName = dict[@"ename"];
     [self.navigationController pushViewController:VC animated:YES];
 }
-<<<<<<< HEAD
 
-=======
--(void)save:(UIButton *)sender
-{
-    if (self.clickButton != sender) {
-       [self sendRequestToGetEenrgy];
-    }
-    if (sender.selected == NO) {
-        sender.selected = YES;
-//       [self sendHistoryGetEenrgy];
-        [self changeClickButton:sender];
-    }
-      self.clickButton = sender;
-}
->>>>>>> 06a59d6f12ccd95efe3b8d67c292a5e082bc5fb7
 -(void)changeClickButton:(UIButton *)sender{
     
     self.selectedButton.selected = NO;
