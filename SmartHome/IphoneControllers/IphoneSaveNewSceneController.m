@@ -16,7 +16,7 @@
 #import "MBProgressHUD+NJ.h"
 #import "IphoneSceneController.h"
 
-@interface IphoneSaveNewSceneController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,PhotoGraphViewConteollerDelegate,UINavigationControllerDelegate>
+@interface IphoneSaveNewSceneController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,PhotoGraphViewConteollerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *sceneName;//输入场景名的输入框
 @property (weak, nonatomic) IBOutlet UIButton *sceneImageBtn;//选择场景图片的button
 @property (nonatomic,strong) UIImage *selectSceneImg;
@@ -96,6 +96,7 @@
 //        http.tag = 1;
 //        [http sendPost:url param:dict];
 //    }
+   
     NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
@@ -103,10 +104,8 @@
     Scene *scene = [[Scene alloc]initWhithoutSchedule];
     scene.roomID = self.roomId;
     [scene setValuesForKeysWithDictionary:plistDic];
-//    [[DeviceInfo defaultManager] setEditingScene:NO];
-    
+    [[DeviceInfo defaultManager] setEditingScene:NO];
     [[SceneManager defaultManager] addScene:scene withName:self.sceneName.text withImage:self.selectSceneImg];
-    
     UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     IphoneSceneController * iphoneSceneVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
     [self.navigationController pushViewController:iphoneSceneVC animated:YES];
@@ -221,31 +220,4 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-
-    [super viewWillAppear:animated];
-    self.navigationController.delegate=self;
-    
-}
-
-- (void)navigationController:(UINavigationController*)navigationController willShowViewController:(UIViewController*)viewController animated:(BOOL)animated{
-       
-    UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-    IphoneSceneController * iphoneSceneVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
-    if([[viewController class]isSubclassOfClass:[iphoneSceneVC class]]) {
-        
-        ///执行刷新操作
-        [iphoneSceneVC setUpRoomView];
-        
-    }
-    
-    ///删除代理，防止该controller销毁后引起navigationController.delegate指向野指针造成崩溃
-    
-    if(![[viewController class]isSubclassOfClass:[self class]]) {
-        
-        self.navigationController.delegate=nil;
-        
-    }
-    
-}
 @end

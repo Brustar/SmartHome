@@ -138,7 +138,7 @@
                     if([db open])
                     {
 //                        (%d,'%@','','%@',%ld,%d,null,null,null,'%ld',%d)
-                        NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%ld,%d,'%@',%d,null,null,'%ld')",scene.sceneID,name,roomName,[sceneDict objectForKey:@"image_url"],(long)scene.roomID,2,@"0",0,[[DeviceInfo defaultManager] masterID]];
+                         NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%ld,%d,'%@',%d,null,'%ld','%d')",scene.sceneID,name,roomName,[sceneDict objectForKey:@"image_url"],(long)scene.roomID,2,@"0",0,[[DeviceInfo defaultManager] masterID],0];
                         BOOL result = [db executeUpdate:sql];
                         if(result)
                         {   [MBProgressHUD showSuccess:@"新增成功"];
