@@ -157,7 +157,7 @@
     }];
     [alertVC addAction:saveNewAction];
     [alertVC addAction:saveAction];
-    UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"编辑场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"编辑定时" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //重新编辑场景的定时
         
         UIStoryboard * sceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];

@@ -117,6 +117,7 @@
         Scene *scene = [[Scene alloc] initWhithoutSchedule];
         scene.sceneID = self.sceneID;
         scene.roomID = self.roomid;
+//        scene.schedules
         //保证场景id不变
         [[SceneManager defaultManager] editScene:scene];
     

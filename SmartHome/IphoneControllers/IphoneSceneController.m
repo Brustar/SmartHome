@@ -327,7 +327,7 @@ static NSString * const CYPhotoId = @"photo";
     NSString *imageName = @"i-add";
     [self.scenes addObject:imageName];
 
-//    [self.FirstCollectionView reloadData];
+    [self.FirstCollectionView reloadData];
     
 }
 
@@ -343,7 +343,7 @@ static NSString * const CYPhotoId = @"photo";
         NSString *imageName = @"i-add";
         [self.scenes addObject:imageName];
     }
-    [self setUpRoomView];
+//    [self setUpRoomView];
 
     BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     baseTabbarController.tabbarPanel.hidden = NO;
