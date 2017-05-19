@@ -16,8 +16,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //[MBProgressHUD showMessage:@"请稍候..."];
     [self initDataSource];
     [self initUI];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    //[MBProgressHUD hideHUD];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [MBProgressHUD hideHUD];
 }
 
 - (void)initUI {

@@ -10,8 +10,10 @@
 #import "MonitorViewController.h"
 #import "SQLManager.h"
 #import "NewLightCell.h"
+#import "NewColourCell.h"
+#import "HttpManager.h"
 
-@interface FamilyDynamicDeviceAdjustViewController : CustomViewController<UITableViewDelegate, UITableViewDataSource>
+@interface FamilyDynamicDeviceAdjustViewController : CustomViewController<UITableViewDelegate, UITableViewDataSource, HttpDelegate>
 @property (weak, nonatomic) IBOutlet UIView *monitorView;
 @property (weak, nonatomic) IBOutlet UITableView *deviceTableView;
 

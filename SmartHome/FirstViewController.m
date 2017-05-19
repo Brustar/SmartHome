@@ -104,7 +104,12 @@
     [self getScenesFromPlist];
     [self getPlist];
     [self setBtn];
-   
+    
+    if (unread>0){
+        self.chatlabel.text =[NSString stringWithFormat:@"%@" , @"您有新消息"];
+    }else{
+        self.chatlabel.text =[NSString stringWithFormat:@"%@" , @"暂无新消息"];
+    }
 }
 
 -(void)getPlist
@@ -145,7 +150,6 @@
     if (_afNetworkReachabilityManager.reachableViaWWAN) {
         NSLog(@"WWAN: %d", _afNetworkReachabilityManager.reachableViaWWAN);
     }
-   
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -363,6 +367,7 @@
     [[RCIM sharedRCIM] connectWithToken:token success:^(NSString *userId) {
         NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
         [RCIM sharedRCIM].receiveMessageDelegate=self;
+        [[RCIMClient sharedRCIMClient] setDeviceToken:[[DeviceInfo defaultManager] pushToken]];
     } error:nil tokenIncorrect:nil];
 }
 
@@ -505,7 +510,7 @@
 }
 -(void)MiddleBtnClicked:(UIButton *)btn
 {
-    _naviMiddletBtn.selected = !_naviMiddletBtn.selected;
+   /* _naviMiddletBtn.selected = !_naviMiddletBtn.selected;
     if (_naviMiddletBtn.selected) {
         if (_hostListViewController == nil) {
             self.CoverView.hidden = NO;
@@ -524,7 +529,7 @@
             _hostListViewController.delegate = nil;
             _hostListViewController = nil;
         }
-    }
+    }*/
 
 }
 
