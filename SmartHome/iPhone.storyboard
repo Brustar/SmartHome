@@ -2641,11 +2641,11 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zBz-OI-08x">
-                                                    <rect key="frame" x="301" y="14" width="46" height="30"/>
+                                                    <rect key="frame" x="291" y="11" width="56" height="36"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="46" id="K9x-XF-iZN"/>
-                                                        <constraint firstAttribute="height" constant="30" id="dqB-4Y-rLd"/>
+                                                        <constraint firstAttribute="width" constant="56" id="K9x-XF-iZN"/>
+                                                        <constraint firstAttribute="height" constant="36" id="dqB-4Y-rLd"/>
                                                     </constraints>
                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <state key="normal" backgroundImage="dvd_btn_switch_on"/>
@@ -2654,7 +2654,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00-14:00，周一，周二，周三，周四，周五，" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cI4-SQ-r9m">
-                                                    <rect key="frame" x="10" y="38.5" width="281" height="14.5"/>
+                                                    <rect key="frame" x="10" y="38.5" width="271" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.56862745098039214" green="0.5725490196078431" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>

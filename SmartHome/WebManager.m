@@ -68,6 +68,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self addNotifications];
     [self setNaviBarTitle:self.naviTitle];
     [MBProgressHUD showMessage:@"加载中..."];
     
@@ -85,6 +86,30 @@
 {
     [super viewDidUnload];
     [self setWebView:nil];
+}
+
+- (void)addNotifications {
+    [NC addObserver:self selector:@selector(onWeChatPaySuccess:) name:@"WeChatPaySuccess" object:nil];
+    [NC addObserver:self selector:@selector(onWeChatPayFailed:) name:@"WeChatPayFailed" object:nil];
+    
+}
+
+- (void)removeNotifications {
+    [NC removeObserver:self];
+}
+
+- (void)onWeChatPaySuccess:(NSNotification *)noti {
+    int userID = [[UD objectForKey:@"UserID"] intValue];
+    self.oauthUrl = [[IOManager httpAddr] stringByAppendingString:[NSString stringWithFormat:@"/ui/PaySuccess.aspx?user_id=%d", userID]];
+    self.naviTitle = @"支付成功";
+    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:self.oauthUrl]
+                                            cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                        timeoutInterval:60.0];
+    [self.webView loadRequest:request];
+}
+
+- (void)onWeChatPayFailed:(NSNotification *)noti {
+    [MBProgressHUD showError:@"支付失败"];
 }
 
 #pragma mark - UIWebView delegate
@@ -110,9 +135,9 @@
         // NOTE: 如果跳转失败，则跳转itune下载支付宝App
         if (!bSucc) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                           message:@"未检测到支付宝客户端，请安装后重试。"
+                                                           message:@"未检测到支付宝客户端，请用网页版支付。"
                                                           delegate:self
-                                                 cancelButtonTitle:@"立即安装"
+                                                 cancelButtonTitle:@"确定"
                                                  otherButtonTitles:nil];
             [alert show];
         }
@@ -149,9 +174,9 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     // NOTE: 跳转itune下载支付宝App
-    NSString* urlStr = @"https://itunes.apple.com/cn/app/zhi-fu-bao-qian-bao-yu-e-bao/id333206289?mt=8";
-    NSURL *downloadUrl = [NSURL URLWithString:urlStr];
-    [[UIApplication sharedApplication] openURL:downloadUrl];
+    //NSString* urlStr = @"https://itunes.apple.com/cn/app/zhi-fu-bao-qian-bao-yu-e-bao/id333206289?mt=8";
+    //NSURL *downloadUrl = [NSURL URLWithString:urlStr];
+    //[[UIApplication sharedApplication] openURL:downloadUrl];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
@@ -168,6 +193,10 @@
 - (void)cancel:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)dealloc {
+    [self removeNotifications];
 }
 
 @end

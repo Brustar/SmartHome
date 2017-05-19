@@ -510,7 +510,7 @@
 }
 -(void)MiddleBtnClicked:(UIButton *)btn
 {
-    _naviMiddletBtn.selected = !_naviMiddletBtn.selected;
+   /* _naviMiddletBtn.selected = !_naviMiddletBtn.selected;
     if (_naviMiddletBtn.selected) {
         if (_hostListViewController == nil) {
             self.CoverView.hidden = NO;
@@ -529,7 +529,7 @@
             _hostListViewController.delegate = nil;
             _hostListViewController = nil;
         }
-    }
+    }*/
 
 }
 
