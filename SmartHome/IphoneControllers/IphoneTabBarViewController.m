@@ -11,7 +11,7 @@
 #import "IphoneDeviceListController.h"
 #import "IphoneRealSceneController.h"
 #import "IphoneProfileController.h"
-#import "IphoneFamilyViewController.h"
+//#import "IphoneFamilyViewController.h"
 #import "MySettingViewController.h"
 #import "UITabBar+BadgeValue.h"
 
@@ -40,10 +40,10 @@
 }
 -(void)creaTabBarController
 {
-    IphoneFamilyViewController * familyVC = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"iphoneFamilyViewController"];
-    UINavigationController * naVC1= [[UINavigationController alloc] initWithRootViewController:familyVC];
-    familyVC.title = @"家庭";
-    familyVC.tabBarItem.image = [UIImage imageNamed:@"family-Mysetting"];
+    //IphoneFamilyViewController * familyVC = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"iphoneFamilyViewController"];
+    //UINavigationController * naVC1= [[UINavigationController alloc] initWithRootViewController:familyVC];
+    //familyVC.title = @"家庭";
+    //familyVC.tabBarItem.image = [UIImage imageNamed:@"family-Mysetting"];
     IphoneSceneController *scene = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
     UINavigationController * naVC2 = [[UINavigationController alloc] initWithRootViewController:scene];
     scene.title = @"场景";
@@ -69,7 +69,7 @@
     }
   
     
-    self.viewControllers = @[naVC1,naVC2,naVC3,naVC5];
+    //self.viewControllers = @[naVC1,naVC2,naVC3,naVC5];
 
 }
 

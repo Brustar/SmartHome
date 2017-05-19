@@ -13,19 +13,19 @@
 #import "IOManager.h"
 #import "IQKeyboardManager.h"
 #import "ECloudTabBarController.h"
-#import "IphoneMainController.h"
+
 #import "MSGController.h"
 #import "ECloudTabBar.h"
 #import "IphoneSceneController.h"
 #import "VoiceOrderController.h"
 #import "IphoneFavorController.h"
-#import "IphoneFamilyViewController.h"
+
 #import "IphoneTabBarViewController.h"
 #import "WXApi.h"
 #import "WeChatPayManager.h"
 #import <RongIMKit/RongIMKit.h>
 #import "RCDataManager.h"
-//#import "SmartHome-Swift.h"
+
 
 @implementation AppDelegate
 

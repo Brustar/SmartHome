@@ -543,17 +543,26 @@ static NSString * const CYPhotoId = @"photo";
     
     [self.currentCell.imageView setImage:self.selectSceneImg];
     //场景ID不变
-    self.sceneID = self.selectedSId;
-    NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
-    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
-    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+//    self.sceneID = self.selectedSId;
+//    NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
+//    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+//    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+//    
+//    Scene *scene = [[Scene alloc] init];
+//    if (plistDic) {
+//        [scene setValuesForKeysWithDictionary:plistDic];
+//    
+//        [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
+//    }
     
-    Scene *scene = [[Scene alloc] init];
-    if (plistDic) {
-        [scene setValuesForKeysWithDictionary:plistDic];
+    Scene *scene = [[Scene alloc] initWhithoutSchedule];
+    scene.sceneID = self.currentCell.sceneID;
+    scene.roomID = self.roomID;
+    [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
     
-        [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
-    }
+    [self.currentCell.imageView setImage:self.selectSceneImg];
+    
+    
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {

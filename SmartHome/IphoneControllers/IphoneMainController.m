@@ -11,7 +11,7 @@
 #import "IphoneDeviceListController.h"
 #import "IphoneRealSceneController.h"
 #import "IphoneProfileController.h"
-#import "IphoneFamilyViewController.h"
+
 #import "ProfileFaultsViewController.h"
 #import "ServiceRecordViewController.h"
 #import "MySubEnergyVC.h"
@@ -88,9 +88,9 @@
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIStoryboard *iphoneBoard  = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
    // ProfileFaultsViewController * profileFaultsVC = [storyBoard instantiateViewControllerWithIdentifier:@"MyDefaultViewController"];
-    IphoneFamilyViewController * familyVC = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"iphoneFamilyViewController"];
+    //IphoneFamilyViewController * familyVC = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"iphoneFamilyViewController"];
    // [self setupVc:profileFaultsVC title:@"我的故障"];
-    [self setupVc:familyVC title:@"家庭"];
+    //[self setupVc:familyVC title:@"家庭"];
     
     IphoneSceneController *scene = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
     //ServiceRecordViewController * serviceRecordVC = [storyBoard instantiateViewControllerWithIdentifier:@"ServiceRecordViewController"];
@@ -115,8 +115,8 @@
     [self setupVc:mysettingVC title:@"设置"];
     
      if ([[UD objectForKey:@"HostID"] intValue] == 258) {
-        IphoneFamilyViewController * familyVC = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"iphoneFamilyViewController"];
-           [self setupVc:familyVC title:@"家庭"];
+        //IphoneFamilyViewController * familyVC = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"iphoneFamilyViewController"];
+           //[self setupVc:familyVC title:@"家庭"];
          IphoneSceneController *scene = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
          [self setupVc:scene title:@"场景"];
              IphoneDeviceListController *deviceList = [[UIStoryboard storyboardWithName:@"iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"IphoneDeviceListController"];

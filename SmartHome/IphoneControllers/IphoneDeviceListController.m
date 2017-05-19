@@ -15,7 +15,7 @@
 #import "IphoneDVDController.h"
 #import "IphoneNetTvController.h"
 #import "FMController.h"
-#import "IphoneAirController.h"
+
 #import "PluginViewController.h"
 #import "CameraController.h"
 #import "GuardController.h"
@@ -26,7 +26,7 @@
 #import "AmplifierController.h"
 #import "WindowSlidingController.h"
 #import "BgMusicController.h"
-#import "IphoneLightController.h"
+
 #import "AppDelegate.h"
 #import "CYLineLayout.h"
 #import "CYPhotoCell.h"
