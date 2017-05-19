@@ -39,7 +39,7 @@
 }
 
 - (void)refreshUI {
-    [self.headerBtn sd_setImageWithURL:[NSURL URLWithString:_userInfomation.headImgURL] forState:UIControlStateNormal placeholderImage:nil];
+    [self.headerBtn sd_setImageWithURL:[NSURL URLWithString:_userInfomation.headImgURL] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portrait"]];
     
     self.nameLabel.text = [NSString stringWithFormat:@"-- %@, %@身份 --", _userInfomation.nickName, _userTypeStr];
     
@@ -215,7 +215,7 @@
         cell.textLabel.text = @"购物车";
     }else if (indexPath.section == 4) {
         cell.textLabel.text = @"昵称";
-        UILabel *nickLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
+        UILabel *nickLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 20)];
         nickLabel.textAlignment = NSTextAlignmentRight;
         nickLabel.textColor = [UIColor lightGrayColor];
         nickLabel.font = [UIFont systemFontOfSize:15];
@@ -237,21 +237,22 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    int userID = [[UD objectForKey:@"UserID"] intValue];
     if (indexPath.section == 0) {
         //VIP会员
-        WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:@"/ui/Vip.aspx"] title:@"VIP会员"];
+        WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:[NSString stringWithFormat:@"/ui/Vip.aspx?user_id=%d", userID]] title:@"VIP会员"];
         [self.navigationController pushViewController:web animated:YES];
     }else if (indexPath.section == 1) {
         //服务商城
-        WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:@"/ui/GoodsList.aspx"] title:@"服务商城"];
+        WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:[NSString stringWithFormat:@"/ui/GoodsList.aspx?user_id=%d", userID]] title:@"服务商城"];
         [self.navigationController pushViewController:web animated:YES];
     }else if (indexPath.section == 2) {
         //我的订单
-        WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:@"/ui/OrderQuery.aspx"] title:@"我的订单"];
+        WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:[NSString stringWithFormat:@"/ui/OrderQuery.aspx?user_id=%d", userID]] title:@"我的订单"];
         [self.navigationController pushViewController:web animated:YES];
     }else if (indexPath.section == 3) {
         //购物车
-        WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:@"/ui/Cart.aspx"] title:@"购物车"];
+        WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:[NSString stringWithFormat:@"/ui/Cart.aspx?user_id=%d", userID]] title:@"购物车"];
         [self.navigationController pushViewController:web animated:YES];
     }
 }
@@ -336,7 +337,7 @@
                    BOOL succeed = [SQLManager updateUserPortraitUrlByID:(int)_userInfomation.userID url:portrait];//更新User表
                     if (succeed) {
                          [MBProgressHUD showSuccess:@"更新头像成功"];
-                        [self.headerBtn sd_setImageWithURL:[NSURL URLWithString:portrait] forState:UIControlStateNormal placeholderImage:nil];
+                        [self.headerBtn sd_setImageWithURL:[NSURL URLWithString:portrait] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portrait"]];
                         _userInfomation.headImgURL = portrait;
                         [NC postNotificationName:@"refreshPortrait" object:portrait];
                     }else {

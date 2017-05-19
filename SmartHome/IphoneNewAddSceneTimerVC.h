@@ -17,5 +17,6 @@
 @property (nonatomic, strong) NSMutableArray *weekArray;
 @property (weak, nonatomic) IBOutlet UIView *TimerView;
 @property (nonatomic,assign) int sceneID;
+@property (nonatomic,assign) int roomid;
 
 @end

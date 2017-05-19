@@ -16,6 +16,7 @@
 #import "WeekdaysVC.h"
 #import "IphoneEditSceneController.h"
 #import "SmartHome-Swift.h"
+#import "Scene.h"
 
 @interface IphoneNewAddSceneTimerVC ()<WeekdaysVCDelegate,TenClockDelegate>
 @property (nonatomic,strong) Scene *scene;
@@ -112,17 +113,13 @@
     if ([lastVC isKindOfClass:[iphoneEditSceneVC class]]) {
         
         [DeviceInfo defaultManager].isPhotoLibrary = NO;
-        //场景ID不变
-        NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
-        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
-        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
-        Scene * scene = [[Scene alloc] init];
-        if (plistDic) {
-            [scene setValuesForKeysWithDictionary:plistDic];
-            
-            [[SceneManager defaultManager] editScene:scene];
-        }
-        
+
+        Scene *scene = [[Scene alloc] initWhithoutSchedule];
+        scene.sceneID = self.sceneID;
+        scene.roomID = self.roomid;
+        //保证场景id不变
+        [[SceneManager defaultManager] editScene:scene];
+    
     }else{
         
         self.scene.schedules = @[self.schedule];

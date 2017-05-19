@@ -26,6 +26,8 @@
     [self.AddTvDeviceBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.TVSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     self.TVSlider.continuous = NO;
+    [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
+    [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
 }
 - (IBAction)save:(id)sender {
     
@@ -41,7 +43,6 @@
         if (self.TVSwitchBtn.selected) {
             [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
         }else{
-            
             [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
         }
         NSData *data=nil;

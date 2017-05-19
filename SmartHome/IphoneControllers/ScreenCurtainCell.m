@@ -23,7 +23,8 @@
     [self.ScreenCurtainBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.UPBtn setImage:[UIImage imageNamed:@"icon_up_prd"] forState:UIControlStateHighlighted];
     [self.DownBtn setImage:[UIImage imageNamed:@"icon_dw_prd"] forState:UIControlStateHighlighted];
-   
+    [self.ScreenCurtainBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
+    [self.ScreenCurtainBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
 }
 - (IBAction)save:(id)sender {
     

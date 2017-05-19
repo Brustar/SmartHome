@@ -2415,7 +2415,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ffS-7l-M5F">
-                                            <rect key="frame" x="640" y="20" width="108" height="30"/>
+                                            <rect key="frame" x="286" y="20" width="108" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="9k8-V5-m4L"/>
                                                 <constraint firstAttribute="width" constant="108" id="lNg-zK-zTA"/>
@@ -2427,12 +2427,12 @@
                                                 <action selector="changeIdentityType:" destination="32B-S0-cG4" eventType="touchUpInside" id="og1-LG-G5G"/>
                                             </connections>
                                         </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nVy-nK-tpc">
-                                            <rect key="frame" x="15" y="20" width="120" height="30"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="一辈子太长，我只需当下" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nVy-nK-tpc">
+                                            <rect key="frame" x="15" y="20" width="200" height="30"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="120" id="arE-LP-omT"/>
+                                                <constraint firstAttribute="width" constant="200" id="arE-LP-omT"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -2560,17 +2560,17 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u04-ME-Qpg">
-                                                    <rect key="frame" x="10" y="6" width="100" height="30"/>
+                                                    <rect key="frame" x="10" y="6" width="200" height="30"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="100" id="OLX-mH-QFn"/>
+                                                        <constraint firstAttribute="width" constant="200" id="OLX-mH-QFn"/>
                                                         <constraint firstAttribute="height" constant="30" id="dCS-Q2-qeP"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUO-JT-LWA">
-                                                    <rect key="frame" x="628" y="6" width="100" height="30"/>
+                                                    <rect key="frame" x="274" y="6" width="100" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="gb1-z5-Vt6"/>
                                                         <constraint firstAttribute="width" constant="100" id="lqi-DH-UVU"/>
@@ -2580,7 +2580,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wjG-k7-3Dk">
-                                                    <rect key="frame" x="748" y="14" width="10" height="15"/>
+                                                    <rect key="frame" x="394" y="14" width="10" height="15"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="BXo-bJ-SQz"/>

@@ -164,6 +164,7 @@
         
         IphoneNewAddSceneTimerVC * newTimerVC = [sceneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneNewAddSceneTimerVC"];
         newTimerVC.sceneID = self.sceneID;
+        newTimerVC.roomid = self.roomID;
         
         [self.navigationController pushViewController:newTimerVC animated:YES];
        
