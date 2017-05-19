@@ -70,7 +70,7 @@
     //开启网络状况监听器
     [self updateInterfaceWithReachability];
     
-    [self fetchRoomDeviceStatus];//获取房间设备状态，温度，湿度
+    [self fetchRoomDeviceStatus];//获取房间设备状态，温度，湿度, PM2.5
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
@@ -88,7 +88,7 @@
         HttpManager *http=[HttpManager defaultManager];
         http.delegate = self;
         http.tag = 4;
-        [http sendPost:url param:dict];
+        [http sendPost:url param:dict showProgressHUD:NO];
     }
 }
 
@@ -148,6 +148,11 @@
 
 - (void)addNotifications {
     [NC addObserver:self selector:@selector(netWorkDidChangedNotification:) name:@"NetWorkDidChangedNotification" object:nil];
+    [NC addObserver:self selector:@selector(refreshRoomDeviceStatus:) name:@"refreshRoomDeviceStatusNotification" object:nil];
+}
+
+- (void)refreshRoomDeviceStatus:(NSNotification *)noti {
+    [self fetchRoomDeviceStatus];//获取房间设备状态，温度，湿度, PM2.5
 }
 
 - (void)netWorkDidChangedNotification:(NSNotification *)noti {
@@ -226,6 +231,7 @@
 {
     if(tag == 4) {
         if ([responseObject[@"result"] intValue] == 0) {
+            [_roomArray removeAllObjects];
             NSArray *roomStatusList = responseObject[@"room_status_list"];
             if ([roomStatusList isKindOfClass:[NSArray class]]) {
                 for (NSDictionary *roomStatus in roomStatusList) {

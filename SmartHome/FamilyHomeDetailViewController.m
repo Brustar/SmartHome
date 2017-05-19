@@ -23,6 +23,11 @@
     [self fetchDevicesStatus];//获取所有设备的状态
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [NC postNotificationName:@"refreshRoomDeviceStatusNotification" object:nil];
+}
+
 - (void)initUI {
     _isGloom = NO;
     _isRomantic = NO;
