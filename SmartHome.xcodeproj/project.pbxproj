@@ -261,7 +261,7 @@
 		CDEE5EA81EC3EC5900A5779D /* launchingAnimation.gif in Resources */ = {isa = PBXBuildFile; fileRef = CDEE5EA71EC3EC5900A5779D /* launchingAnimation.gif */; };
 		CDEE5EAC1ECDD82E00A5779D /* portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = CDEE5EAB1ECDD82E00A5779D /* portrait.png */; };
 		CDEE5EAE1ECEC07E00A5779D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDEE5EAD1ECEC07E00A5779D /* Assets.xcassets */; };
-		CDEE5EB01ECF0B1C00A5779D /* demo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CDEE5EAF1ECF0B1C00A5779D /* demo.mp4 */; };
+		CDEE5EB21ECF379F00A5779D /* demo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CDEE5EB11ECF379F00A5779D /* demo.mp4 */; };
 		CDF1573A1E7AAD4C00499AC5 /* BaseNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF157371E7AAD4C00499AC5 /* BaseNavController.m */; };
 		CDF1573B1E7AAD4C00499AC5 /* BaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF157391E7AAD4C00499AC5 /* BaseTabBarController.m */; };
 		CDF157401E7AADC700499AC5 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF1573C1E7AADC700499AC5 /* LeftViewController.m */; };
@@ -942,7 +942,7 @@
 		CDEE5EA71EC3EC5900A5779D /* launchingAnimation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = launchingAnimation.gif; sourceTree = "<group>"; };
 		CDEE5EAB1ECDD82E00A5779D /* portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = portrait.png; sourceTree = "<group>"; };
 		CDEE5EAD1ECEC07E00A5779D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CDEE5EAF1ECF0B1C00A5779D /* demo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = demo.mp4; sourceTree = "<group>"; };
+		CDEE5EB11ECF379F00A5779D /* demo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = demo.mp4; sourceTree = "<group>"; };
 		CDF157361E7AAD4C00499AC5 /* BaseNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavController.h; sourceTree = "<group>"; };
 		CDF157371E7AAD4C00499AC5 /* BaseNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavController.m; sourceTree = "<group>"; };
 		CDF157381E7AAD4C00499AC5 /* BaseTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarController.h; sourceTree = "<group>"; };
@@ -1830,7 +1830,7 @@
 		0F6ADFDC1E7134ED00BFF67F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				CDEE5EAF1ECF0B1C00A5779D /* demo.mp4 */,
+				CDEE5EB11ECF379F00A5779D /* demo.mp4 */,
 				CDEE5EA71EC3EC5900A5779D /* launchingAnimation.gif */,
 				CDF78C591E9CC3C500F8B20C /* NaviBarBg.png */,
 				CDEC868C1E99E32B009EC245 /* Family */,
@@ -2671,7 +2671,6 @@
 				CDF90B431E2F0676009043B9 /* realScene.plist in Resources */,
 				CD78A8301E3379C200060466 /* 255_221.plist in Resources */,
 				CD7DDA0D1E81298600638DB3 /* loginButton@2x.png in Resources */,
-				CDEE5EB01ECF0B1C00A5779D /* demo.mp4 in Resources */,
 				CDF389281E30A91200657C8B /* energyDetail.plist in Resources */,
 				0F49CB701E7A1EA100D46ECC /* Devices.storyboard in Resources */,
 				2EBABC831E83787B0093EF3A /* ScreenTableViewCell.xib in Resources */,
@@ -2699,6 +2698,7 @@
 				F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */,
 				0F49CB7E1E7A204300D46ECC /* Scene-iPad.storyboard in Resources */,
 				CDFB9DF21E5DCB4D00BFECCE /* SceneTimerList.plist in Resources */,
+				CDEE5EB21ECF379F00A5779D /* demo.mp4 in Resources */,
 				0F49CB7C1E7A204300D46ECC /* Login-iPad.storyboard in Resources */,
 				0F49CB7B1E7A204300D46ECC /* Home-iPad.storyboard in Resources */,
 				CDF90B451E2F4B14009043B9 /* planeScene.plist in Resources */,
