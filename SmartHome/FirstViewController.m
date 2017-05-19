@@ -104,7 +104,12 @@
     [self getScenesFromPlist];
     [self getPlist];
     [self setBtn];
-   
+    
+    if (unread>0){
+        self.chatlabel.text =[NSString stringWithFormat:@"%@" , @"您有新消息"];
+    }else{
+        self.chatlabel.text =[NSString stringWithFormat:@"%@" , @"暂无新消息"];
+    }
 }
 
 -(void)getPlist
@@ -145,7 +150,6 @@
     if (_afNetworkReachabilityManager.reachableViaWWAN) {
         NSLog(@"WWAN: %d", _afNetworkReachabilityManager.reachableViaWWAN);
     }
-   
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

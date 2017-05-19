@@ -144,6 +144,12 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     [self initSwitch];
     Device *device = [SQLManager singleLightByRoom:self.roomID];
     self.deviceid = self.deviceid?self.deviceid:[NSString stringWithFormat:@"%d",device.eID];
+    
+    NSString *dviceType = [SQLManager getEType:[self.deviceid integerValue]];
+    
+    self.tranformView.hidden = ![dviceType isEqualToString:@"02"];
+    self.base.hidden = ![dviceType isEqualToString:@"03"];
+    
     self.lightName.text = device.name;
     self.scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     if ([self.sceneid intValue]>0) {
@@ -400,7 +406,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     NSLog(@"degree:%f",degree);
     int percent = degree*100/MAX_ROTATE_DEGREE;
     percent = percent < 0?0:percent;
-    NSLog(@"percent:%d",percent);
+    
     self.tranformView.tag = percent;
     
     if (degree>0) {
@@ -408,6 +414,8 @@ static NSString *const menuCellIdentifier = @"rotationCell";
         [self.switcher setCustomKnobImage:[UIImage imageNamed:@"lighting_on"]
               inactiveBackgroundImage:nil
                 activeBackgroundImage:nil];
+    }else{
+        self.tranformView.transform = CGAffineTransformMakeRotation(0);
     }
     
     NSData *data=[[DeviceInfo defaultManager] changeBright:self.tranformView.tag deviceID:self.deviceid];
