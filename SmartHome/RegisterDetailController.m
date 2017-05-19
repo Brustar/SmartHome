@@ -13,7 +13,6 @@
 #import "IOManager.h"
 #import "WebManager.h"
 #import "NSString+RegMatch.h"
-#import "LoginController.h"
 
 @interface RegisterDetailController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *authorNum;
