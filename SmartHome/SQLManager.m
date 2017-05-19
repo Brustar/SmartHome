@@ -249,6 +249,25 @@
     return typeName;
 }
 
++ (NSString *)getSubTypeNameByDeviceID:(int)eId
+{
+    FMDatabase *db = [self connetdb];
+    NSString *subTypeName = @"";
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT subTypeName FROM Devices where ID = %d and masterID = '%ld'",eId,[[DeviceInfo defaultManager] masterID]];
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            subTypeName = [resultSet stringForColumn:@"subTypeName"];
+            
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return subTypeName;
+}
+
 +(NSString*)lightTypeNameByDeviceID:(int)eId
 {
     FMDatabase *db = [self connetdb];
@@ -3048,7 +3067,7 @@
     if([db open])
     {
         
-        NSString *sql = [NSString stringWithFormat:@"update Devices set power = %ld,  bright = %ld,  color = '%@',  position = %ld,  temperature = %ld,  fanspeed = %ld,  model = %ld  where ID = %ld and masterID = '%ld'",(long)deviceInfo.power, (long)deviceInfo.bright, deviceInfo.color, (long)deviceInfo.position, (long)deviceInfo.temperature, (long)deviceInfo.fanspeed, (long)deviceInfo.air_model, (long)deviceInfo.eID, [[DeviceInfo defaultManager] masterID]];
+        NSString *sql = [NSString stringWithFormat:@"update Devices set power = %ld,  bright = %ld,  color = '%@',  position = %ld,  temperature = %ld,  fanspeed = %ld,  model = %ld  where ID = %d and masterID = '%ld'",(long)deviceInfo.power, (long)deviceInfo.bright, deviceInfo.color, (long)deviceInfo.position, (long)deviceInfo.temperature, (long)deviceInfo.fanspeed, (long)deviceInfo.air_model, deviceInfo.eID, [[DeviceInfo defaultManager] masterID]];
         
         ret = [db executeUpdate:sql];
         

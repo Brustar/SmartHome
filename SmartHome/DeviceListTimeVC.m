@@ -25,11 +25,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self addNotifications];
     [self initDataSource];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.separatorColor = [UIColor lightGrayColor];
     [self setupNaviBar];
     [self fetchDeviceTimerList];
 }
+
+- (void)addNotifications {
+    [NC addObserver:self selector:@selector(addDeviceTimerSucceedNotification:) name:@"AddDeviceTimerSucceedNotification" object:nil];
+}
+
+- (void)addDeviceTimerSucceedNotification:(NSNotification *)noti {
+    [self fetchDeviceTimerList];
+}
+
+- (void)removeNotifications {
+    [NC removeObserver:self];
+}
+
 - (void)setupNaviBar {
     [self setNaviBarTitle:@"定时器"]; //设置标题
     _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"deviceTimeadd" imgHighlight:@"deviceTimeadd" target:self action:@selector(rightBtnClicked:)];
@@ -68,17 +83,35 @@
     return 40.0f;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 20.0f;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 59.0f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 20.0)];
+    footer.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
+    UIImageView *line1 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 0.5)];
+    line1.image = [UIImage imageNamed:@"login_line"];
+    [footer addSubview:line1];
+    
+    return footer;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 40)];
     view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 0.5)];
-    line.backgroundColor = [UIColor whiteColor];
-    [view addSubview:line];
+    UIImageView *line1 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 0.5)];
+    line1.image = [UIImage imageNamed:@"login_line"];
+    [view addSubview:line1];
+    
+    UIImageView *line2 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 39.5, UI_SCREEN_WIDTH, 0.5)];
+    line2.image = [UIImage imageNamed:@"login_line"];
+    [view addSubview:line2];
     
     UILabel *roomNameLabel = [[UILabel alloc] init];
     roomNameLabel.frame = CGRectMake(20, 10, 100, 20);
@@ -159,6 +192,59 @@
                     [self deleteDeviceTimerWithTimerId:[timerDict[@"schedule_id"] integerValue]];
                     
                 }
+            }
+        }
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *roomDict = _timerList[indexPath.section];
+    if (roomDict && [roomDict isKindOfClass:[NSDictionary class]]) {
+        NSArray *scheduleList = roomDict[@"schedule_list"];
+        if (scheduleList && [scheduleList isKindOfClass:[NSArray class]]) {
+            NSDictionary *timerDict = scheduleList[indexPath.row];
+            if (timerDict && [timerDict isKindOfClass:[NSDictionary class]]) {
+                DeviceTimerInfo *info = [[DeviceTimerInfo alloc] init];
+                info.timerID = [timerDict[@"schedule_id"] integerValue];
+                info.eID = [timerDict[@"equipment_id"] intValue];
+                info.startTime = timerDict[@"starttime"];
+                info.endTime = timerDict[@"endtime"];
+                info.repetition = timerDict[@"week_value"];
+                info.isActive = [timerDict[@"isactive"] integerValue];
+                info.deviceName = timerDict[@"ename"];
+                info.htype = timerDict[@"htype"];
+                
+                //设备状态
+                info.power = [timerDict[@"status"] intValue];
+                info.bright = [timerDict[@"bright"] intValue];
+                info.color = timerDict[@"color"];
+                info.position = [timerDict[@"position"] intValue];
+                info.temperature = [timerDict[@"temperature"] intValue];
+                info.volume = [timerDict[@"volume"] intValue];
+                
+                //构造Device对象
+                Device *deviceInfo = [SQLManager getDeviceWithDeviceID:info.eID];
+                
+                DeviceTimerSettingViewController *vc = [[DeviceTimerSettingViewController alloc] init];
+                vc.device = deviceInfo;
+                vc.roomID = deviceInfo.rID;
+                vc.scheduleId = info.timerID;
+                vc.startTime = info.startTime;
+                vc.endTime = info.endTime;
+                vc.repeatString = [NSMutableString stringWithString:info.repetition];
+                vc.isActive = info.isActive;
+                vc.isEditMode = YES;
+                
+                //设备状态
+                vc.power = info.power;
+                vc.bright = info.bright;
+                vc.color = info.color;
+                vc.position = info.position;
+                vc.temperature = info.temperature;
+                vc.volume = info.volume;
+                
+                [self.navigationController pushViewController:vc animated:YES];
+                
             }
         }
     }
@@ -255,6 +341,10 @@
             [MBProgressHUD showError:responseObject[@"msg"]];
         }
     }
+}
+
+- (void)dealloc {
+    [self removeNotifications];
 }
 
 @end

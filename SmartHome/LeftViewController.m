@@ -29,10 +29,9 @@
     [self.view addSubview:bgButton];
     
     _myTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:_myTableView.frame];
-    imageView.image = [UIImage imageNamed:@"background"];
-    _myTableView.backgroundView = imageView;
-   // _myTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
+    UIView *bgView = [[UIView alloc] initWithFrame:_myTableView.frame];
+    bgView.backgroundColor = [UIColor colorWithRed:30.0/255.0 green:29.0/255.0 blue:34.0/255.0 alpha:1.0];
+    _myTableView.backgroundView = bgView;
     _myTableView.dataSource = self;
     _myTableView.delegate  = self;
     _myTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
@@ -140,7 +139,7 @@
     headButton.frame = CGRectMake((CGRectGetWidth(view.frame)-100)/2, 60, 100, 100);
     headButton.layer.cornerRadius = 50;
     headButton.layer.masksToBounds = YES;
-    [headButton sd_setImageWithURL:[NSURL URLWithString:_userInfo.headImgURL] forState:UIControlStateNormal placeholderImage:nil];
+    [headButton sd_setImageWithURL:[NSURL URLWithString:_userInfo.headImgURL] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portrait"]];
     [view addSubview:headButton];
     [headButton addTarget:self action:@selector(headButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     _headerBtn = headButton;
@@ -152,11 +151,16 @@
     nameLabel.textAlignment = NSTextAlignmentCenter;
     [view addSubview:nameLabel];
     
-    //VIP
-    if ([_userInfo.vip isEqualToString:@"1"]) {  //VIP: 1(会员)   0(非会员)
+      //VIP
         UIButton *vipBtn = [[UIButton alloc] initWithFrame:CGRectMake(FX(headButton)+10, CGRectGetMaxY(nameLabel.frame)+10, 30, 15)];
         vipBtn.userInteractionEnabled = NO;
-        [vipBtn setBackgroundImage:[UIImage imageNamed:@"VIP_icon"] forState:UIControlStateNormal];
+        
+        if ([_userInfo.vip isEqualToString:@"1"]) {   //VIP: 1(会员)   0(非会员)
+           [vipBtn setBackgroundImage:[UIImage imageNamed:@"VIP_icon"] forState:UIControlStateNormal];
+        }else {
+           [vipBtn setBackgroundImage:[UIImage imageNamed:@"NoVIP_icon"] forState:UIControlStateNormal];
+        }
+    
         vipBtn.titleLabel.font = [UIFont boldSystemFontOfSize:11];
         vipBtn.titleLabel.textColor = [UIColor whiteColor];
         [vipBtn setTitle:@"VIP" forState:UIControlStateNormal];
@@ -169,7 +173,7 @@
         vipLabel.textColor = [UIColor whiteColor];
         vipLabel.text = @"VIP会员";
         [view addSubview:vipLabel];
-    }
+
     
     
     return view;
@@ -187,7 +191,7 @@
 
 - (UIView *)setupTableFooter {
     UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 100)];
-    footer.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
+    footer.backgroundColor = [UIColor colorWithRed:30.0/255.0 green:29.0/255.0 blue:34.0/255.0 alpha:1.0];
     
     //设置
     UIButton *settingBtn = [[UIButton alloc] initWithFrame:CGRectMake(40, 80, 50, 20)];
@@ -259,7 +263,7 @@
 
 - (void)refreshPortrait:(NSNotification *)noti {
     NSString *portraitUrl = noti.object;
-    [_headerBtn sd_setImageWithURL:[NSURL URLWithString:portraitUrl] forState:UIControlStateNormal placeholderImage:nil];
+    [_headerBtn sd_setImageWithURL:[NSURL URLWithString:portraitUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portrait"]];
 }
 
 - (void)removeNotifications {

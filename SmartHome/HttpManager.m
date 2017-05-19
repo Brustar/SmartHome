@@ -24,6 +24,46 @@
     return sharedInstance;
 }
 
+- (void) sendPost:(NSString *)url param:(NSDictionary *)params showProgressHUD:(BOOL)show
+{
+    if (![NetStatusManager reachable]) {
+        [MBProgressHUD showError:@"当前网络不可用，请检查你的网络设置"];
+        return;
+    }
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    
+    if (show) {
+        [MBProgressHUD showMessage:@"请稍候..."];
+    }
+    
+    
+    [mgr POST:url parameters:params progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        [MBProgressHUD hideHUD];
+        NSLog(@"success:%@",responseObject);
+        if (self.tag>0) {
+            [self.delegate httpHandler:responseObject tag:self.tag];
+        }else{
+            [self.delegate httpHandler:responseObject];
+        }
+        
+        if (show) {
+            [MBProgressHUD hideHUD];
+        }
+        
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"failure:%@",error.userInfo);
+        
+        if (show) {
+            [MBProgressHUD hideHUD];
+        }
+        
+        [MBProgressHUD showError:@"网络请求错误"];
+        
+    }];
+    
+}
+
 - (void) sendPost:(NSString *)url param:(NSDictionary *)params
 {
     if (![NetStatusManager reachable]) {

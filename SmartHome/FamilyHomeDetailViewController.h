@@ -24,6 +24,7 @@
 #import "SceneManager.h"
 #import "IphoneEditSceneController.h"
 #import "SceneManager.h"
+#import "HttpManager.h"
 
 #define SceneCellWidth  (self.sceneListCollectionView.frame.size.width-6.0)/3
 #define SceneCellHeight  self.sceneListCollectionView.frame.size.height
@@ -31,7 +32,7 @@
 #define minimumLineSpacing 3.0
 
 
-@interface FamilyHomeDetailViewController : CustomViewController<UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate,UITableViewDataSource>
+@interface FamilyHomeDetailViewController : CustomViewController<UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate,UITableViewDataSource, HttpDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *softButton;
 @property (weak, nonatomic) IBOutlet UIButton *normalButton;
@@ -57,7 +58,9 @@
 @property (nonatomic,strong) NSMutableArray * lightArr;//调光
 
 @property (nonatomic,assign) NSInteger deviceType_count;//设备种类数量
-
+@property (nonatomic, assign) BOOL isGloom;
+@property (nonatomic, assign) BOOL isRomantic;
+@property (nonatomic, assign) BOOL isSprightly;
 
 
 

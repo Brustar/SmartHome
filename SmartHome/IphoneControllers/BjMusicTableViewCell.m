@@ -29,7 +29,8 @@
     [self.BjPowerButton addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.BjSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     self.BjSlider.continuous = NO;
-    
+    [self.BjPowerButton setImage:[UIImage imageNamed:@"music-red"] forState:UIControlStateSelected];
+    [self.BjPowerButton setImage:[UIImage imageNamed:@"music_white"] forState:UIControlStateNormal];
 }
 
 - (IBAction)save:(id)sender {

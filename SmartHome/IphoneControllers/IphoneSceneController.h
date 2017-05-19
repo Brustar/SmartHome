@@ -10,9 +10,12 @@
 #import "CustomViewController.h"
 #import "NowMusicController.h"
 #import "AFNetworkReachabilityManager.h"
+#import "IphoneRoomView.h"
 
 @interface IphoneSceneController : CustomViewController<NowMusicControllerDelegate>
 
+
+@property (strong, nonatomic) IBOutlet IphoneRoomView *roomView;
 @property (nonatomic,strong) NSString * shortcutName;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -20,4 +23,8 @@
 @property (nonatomic, readonly) UIButton *naviLeftBtn;
 @property (nonatomic, strong) NowMusicController * nowMusicController;
 @property(nonatomic, strong) AFNetworkReachabilityManager *afNetworkReachabilityManager;
+
+-(void)setUpRoomView;
+
+
 @end
