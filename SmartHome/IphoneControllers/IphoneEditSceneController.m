@@ -32,7 +32,7 @@
 #import "TouchSubViewController.h"
 #import "HttpManager.h"
 #import "IphoneDevicesController.h"
-#import "IphoneLightController.h"
+
 #import "NewColourCell.h"
 #import "NewLightCell.h"
 #import "FMTableViewCell.h"

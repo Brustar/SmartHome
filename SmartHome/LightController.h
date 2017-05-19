@@ -5,7 +5,7 @@
 //  Created by Brustar on 16/5/20.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
-#import "HRSampleColorPickerViewController.h"
+
 #import "public.h"
 #import "SceneManager.h"
 #import "Light.h"
@@ -21,7 +21,7 @@
 
 @property (nonatomic, readonly) CustomNaviBarView *viewNaviBar;
 
-@property (strong, nonatomic) IBOutlet HRColorPickerView *colorPickerView;
+//@property (strong, nonatomic) IBOutlet HRColorPickerView *colorPickerView;
 
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic,weak) NSString *deviceid;

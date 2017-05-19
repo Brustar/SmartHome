@@ -26,7 +26,7 @@
 #import "AmplifierController.h"
 #import "WindowSlidingController.h"
 #import "BgMusicController.h"
-#import "IphoneLightController.h"
+
 #import "AppDelegate.h"
 #import "CYLineLayout.h"
 #import "CYPhotoCell.h"

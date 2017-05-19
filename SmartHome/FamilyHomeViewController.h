@@ -17,10 +17,10 @@
 #import "PackManager.h"
 #import "SocketManager.h"
 #import "SceneManager.h"
-#import "IphoneLightController.h"
+
 #import "IPhoneRoom.h"
 #import "DeviceInfo.h"
-//#import "ObjectFunction.h"
+
 
 #import "AppDelegate.h"
 #import "FamilyHomeCell.h"

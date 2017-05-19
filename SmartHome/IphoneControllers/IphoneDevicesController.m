@@ -15,7 +15,7 @@
 #import "IphoneDVDController.h"
 #import "IphoneNetTvController.h"
 #import "FMController.h"
-//#import "IphoneAirController.h"
+
 #import "PluginViewController.h"
 #import "CameraController.h"
 #import "GuardController.h"
@@ -30,7 +30,7 @@
 #import "IPhoneSceneDVDVC.h"
 #import "IPhoneTVVC.h"
 #import "IPhoneNetVV.h"
-#import "IphoneLightController.h"
+
 
 
 @interface IphoneDevicesController ()<UITableViewDelegate,UITableViewDataSource>
@@ -101,13 +101,13 @@
     }else if([typeName isEqualToString:@"灯光"])
     {
 //        LightController *ligthVC = [storyBoard instantiateViewControllerWithIdentifier:@"LightController"];
-          IphoneLightController * ligthVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"LightController"];
+          /*IphoneLightController * ligthVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"LightController"];
         ligthVC.roomID = self.roomId;
 //        ligthVC.showLightView = NO;
         ligthVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneId];
 //        ligthVC.isAddDevice = YES;
         [self.navigationController pushViewController:ligthVC animated:YES];
-        
+        */
     }else if([typeName isEqualToString:@"窗帘"])
     {
         CurtainController *curtainVC = [storyBoard instantiateViewControllerWithIdentifier:@"CurtainController"];

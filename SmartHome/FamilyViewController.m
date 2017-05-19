@@ -20,7 +20,7 @@
 #import "PackManager.h"
 #import "SocketManager.h"
 #import "SceneManager.h"
-#import "IphoneLightController.h"
+
 #import "LightController.h"
 #import "IPhoneRoom.h"
 #import "DeviceInfo.h"

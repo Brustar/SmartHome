@@ -84,15 +84,6 @@
 		0FABF91F1D06AA4E000892D8 /* DVDController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FABF91E1D06AA4E000892D8 /* DVDController.m */; };
 		0FADA44A1CEBF8AE00777901 /* SceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FADA4491CEBF8AE00777901 /* SceneManager.m */; };
 		0FAF74AD1CEE9A9600432713 /* LightController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF74AC1CEE9A9600432713 /* LightController.m */; };
-		0FAF74BF1CEEA17C00432713 /* HRBrightnessCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF74B01CEEA17C00432713 /* HRBrightnessCursor.m */; };
-		0FAF74C01CEEA17C00432713 /* HRBrightnessSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF74B21CEEA17C00432713 /* HRBrightnessSlider.m */; };
-		0FAF74C11CEEA17C00432713 /* HRColorCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF74B41CEEA17C00432713 /* HRColorCursor.m */; };
-		0FAF74C21CEEA17C00432713 /* HRColorInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF74B61CEEA17C00432713 /* HRColorInfoView.m */; };
-		0FAF74C31CEEA17C00432713 /* HRColorMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF74B81CEEA17C00432713 /* HRColorMapView.m */; };
-		0FAF74C41CEEA17C00432713 /* HRColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF74BA1CEEA17C00432713 /* HRColorPickerView.m */; };
-		0FAF74C51CEEA17C00432713 /* HRHSVColorUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF74BC1CEEA17C00432713 /* HRHSVColorUtil.m */; };
-		0FAF74C61CEEA17C00432713 /* UIImage+CoreGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF74BE1CEEA17C00432713 /* UIImage+CoreGraphics.m */; };
-		0FAF74C91CEEB37200432713 /* HRSampleColorPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF74C81CEEB37200432713 /* HRSampleColorPickerViewController.m */; };
 		0FAF8FEF1CE18C41000557BD /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF8FEE1CE18C41000557BD /* DeviceInfo.m */; };
 		0FAF8FF51CE1B514000557BD /* VolumeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF8FF41CE1B514000557BD /* VolumeManager.m */; };
 		0FAF8FFB1CE1D9BC000557BD /* UploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF8FFA1CE1D9BC000557BD /* UploadManager.m */; };
@@ -158,7 +149,6 @@
 		2E1495101DE474EF00141629 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9ADF711CE2DC020052F3BC /* libz.tbd */; };
 		2E192CA71EBB2D3F00458541 /* CKCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E192CA61EBB2D3F00458541 /* CKCircleView.m */; };
 		2E2B57195D5A936F7BD15641 /* libPods-SmartHome.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9FD66F09F2092DE805E0F5B /* libPods-SmartHome.a */; };
-		2E5E5FE91DE1F1A9006F0C8F /* IphoneLightController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5E5FE81DE1F1A9006F0C8F /* IphoneLightController.m */; };
 		2E5E5FEC1DE22AC8006F0C8F /* LightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5E5FEB1DE22AC8006F0C8F /* LightCell.m */; };
 		2E6328081E03C3C6000D7BE9 /* IphoneSceneAirVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6328071E03C3C6000D7BE9 /* IphoneSceneAirVC.m */; };
 		2E63280B1E03C993000D7BE9 /* IPhoneSceneDVDVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E63280A1E03C993000D7BE9 /* IPhoneSceneDVDVC.m */; };
@@ -630,24 +620,6 @@
 		0FADA4491CEBF8AE00777901 /* SceneManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneManager.m; sourceTree = "<group>"; };
 		0FAF74AB1CEE9A9600432713 /* LightController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightController.h; sourceTree = "<group>"; };
 		0FAF74AC1CEE9A9600432713 /* LightController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LightController.m; sourceTree = "<group>"; };
-		0FAF74AF1CEEA17C00432713 /* HRBrightnessCursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRBrightnessCursor.h; sourceTree = "<group>"; };
-		0FAF74B01CEEA17C00432713 /* HRBrightnessCursor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRBrightnessCursor.m; sourceTree = "<group>"; };
-		0FAF74B11CEEA17C00432713 /* HRBrightnessSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRBrightnessSlider.h; sourceTree = "<group>"; };
-		0FAF74B21CEEA17C00432713 /* HRBrightnessSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRBrightnessSlider.m; sourceTree = "<group>"; };
-		0FAF74B31CEEA17C00432713 /* HRColorCursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRColorCursor.h; sourceTree = "<group>"; };
-		0FAF74B41CEEA17C00432713 /* HRColorCursor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRColorCursor.m; sourceTree = "<group>"; };
-		0FAF74B51CEEA17C00432713 /* HRColorInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRColorInfoView.h; sourceTree = "<group>"; };
-		0FAF74B61CEEA17C00432713 /* HRColorInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRColorInfoView.m; sourceTree = "<group>"; };
-		0FAF74B71CEEA17C00432713 /* HRColorMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRColorMapView.h; sourceTree = "<group>"; };
-		0FAF74B81CEEA17C00432713 /* HRColorMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRColorMapView.m; sourceTree = "<group>"; };
-		0FAF74B91CEEA17C00432713 /* HRColorPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRColorPickerView.h; sourceTree = "<group>"; };
-		0FAF74BA1CEEA17C00432713 /* HRColorPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRColorPickerView.m; sourceTree = "<group>"; };
-		0FAF74BB1CEEA17C00432713 /* HRHSVColorUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRHSVColorUtil.h; sourceTree = "<group>"; };
-		0FAF74BC1CEEA17C00432713 /* HRHSVColorUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRHSVColorUtil.m; sourceTree = "<group>"; };
-		0FAF74BD1CEEA17C00432713 /* UIImage+CoreGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CoreGraphics.h"; sourceTree = "<group>"; };
-		0FAF74BE1CEEA17C00432713 /* UIImage+CoreGraphics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CoreGraphics.m"; sourceTree = "<group>"; };
-		0FAF74C71CEEB37200432713 /* HRSampleColorPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRSampleColorPickerViewController.h; sourceTree = "<group>"; };
-		0FAF74C81CEEB37200432713 /* HRSampleColorPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRSampleColorPickerViewController.m; sourceTree = "<group>"; };
 		0FAF8FED1CE18C41000557BD /* DeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceInfo.h; sourceTree = "<group>"; };
 		0FAF8FEE1CE18C41000557BD /* DeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInfo.m; sourceTree = "<group>"; };
 		0FAF8FF31CE1B514000557BD /* VolumeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeManager.h; sourceTree = "<group>"; };
@@ -772,8 +744,6 @@
 		2E12CC151E7FC04800C7D006 /* IphoneNewEditSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneNewEditSceneController.m; sourceTree = "<group>"; };
 		2E192CA51EBB2D3F00458541 /* CKCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKCircleView.h; sourceTree = "<group>"; };
 		2E192CA61EBB2D3F00458541 /* CKCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKCircleView.m; sourceTree = "<group>"; };
-		2E5E5FE71DE1F1A9006F0C8F /* IphoneLightController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneLightController.h; sourceTree = "<group>"; };
-		2E5E5FE81DE1F1A9006F0C8F /* IphoneLightController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneLightController.m; sourceTree = "<group>"; };
 		2E5E5FEA1DE22AC8006F0C8F /* LightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightCell.h; sourceTree = "<group>"; };
 		2E5E5FEB1DE22AC8006F0C8F /* LightCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LightCell.m; sourceTree = "<group>"; };
 		2E6328061E03C3C6000D7BE9 /* IphoneSceneAirVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneSceneAirVC.h; sourceTree = "<group>"; };
@@ -1804,7 +1774,6 @@
 				0FB205E41CDC302E00B5E87E /* public */,
 				0F01D53E1CDC6C4B00DAC267 /* entity */,
 				0FAF98971CE40F27009BDBB5 /* QRCodeReader */,
-				0FAF74AE1CEEA16700432713 /* HRColorPicker */,
 				0F6423421DE57C83003379FC /* FFMpegDecoder */,
 				0FD3DEA61D3F181000AF7765 /* SCWave */,
 			);
@@ -1910,31 +1879,6 @@
 				0FABB33B1EAF22FC0089A5A4 /* ContextMenuCell.m */,
 			);
 			name = ContextMenuCell;
-			sourceTree = "<group>";
-		};
-		0FAF74AE1CEEA16700432713 /* HRColorPicker */ = {
-			isa = PBXGroup;
-			children = (
-				0FAF74C71CEEB37200432713 /* HRSampleColorPickerViewController.h */,
-				0FAF74C81CEEB37200432713 /* HRSampleColorPickerViewController.m */,
-				0FAF74AF1CEEA17C00432713 /* HRBrightnessCursor.h */,
-				0FAF74B01CEEA17C00432713 /* HRBrightnessCursor.m */,
-				0FAF74B11CEEA17C00432713 /* HRBrightnessSlider.h */,
-				0FAF74B21CEEA17C00432713 /* HRBrightnessSlider.m */,
-				0FAF74B31CEEA17C00432713 /* HRColorCursor.h */,
-				0FAF74B41CEEA17C00432713 /* HRColorCursor.m */,
-				0FAF74B51CEEA17C00432713 /* HRColorInfoView.h */,
-				0FAF74B61CEEA17C00432713 /* HRColorInfoView.m */,
-				0FAF74B71CEEA17C00432713 /* HRColorMapView.h */,
-				0FAF74B81CEEA17C00432713 /* HRColorMapView.m */,
-				0FAF74B91CEEA17C00432713 /* HRColorPickerView.h */,
-				0FAF74BA1CEEA17C00432713 /* HRColorPickerView.m */,
-				0FAF74BB1CEEA17C00432713 /* HRHSVColorUtil.h */,
-				0FAF74BC1CEEA17C00432713 /* HRHSVColorUtil.m */,
-				0FAF74BD1CEEA17C00432713 /* UIImage+CoreGraphics.h */,
-				0FAF74BE1CEEA17C00432713 /* UIImage+CoreGraphics.m */,
-			);
-			name = HRColorPicker;
 			sourceTree = "<group>";
 		};
 		0FAF98971CE40F27009BDBB5 /* QRCodeReader */ = {
@@ -2495,8 +2439,6 @@
 				F62E05621DAB39F80096BF00 /* IphoneProfileController.m */,
 				F62E05641DAB68620096BF00 /* IphoneEditSceneController.h */,
 				F62E05651DAB68620096BF00 /* IphoneEditSceneController.m */,
-				2E5E5FE71DE1F1A9006F0C8F /* IphoneLightController.h */,
-				2E5E5FE81DE1F1A9006F0C8F /* IphoneLightController.m */,
 				2EC8A58E1E372C51002A5042 /* IphoneDeviceLightVC.h */,
 				2EC8A58F1E372C51002A5042 /* IphoneDeviceLightVC.m */,
 				2E5E5FEA1DE22AC8006F0C8F /* LightCell.h */,
@@ -3076,7 +3018,6 @@
 				2EBABC781E8360FB0093EF3A /* TVTableViewCell.m in Sources */,
 				CD4F124A1EB452D800E0B301 /* Address.m in Sources */,
 				F61896381D87B06300DBE6CD /* ScreenCurtainController.m in Sources */,
-				0FAF74BF1CEEA17C00432713 /* HRBrightnessCursor.m in Sources */,
 				2E8715D31EA06EFF006D3FB0 /* NowMusicController.m in Sources */,
 				0F4B3C741E7BE57A00102DD3 /* WeChatPayController.mm in Sources */,
 				0F7426C21EBB362F00D686B8 /* WettingController.m in Sources */,
@@ -3109,7 +3050,6 @@
 				CDEC86981E9A44F9009EC245 /* FamilyHomeViewController.m in Sources */,
 				0FCAA40C1D1945BB00C1E58C /* BgMusicController.m in Sources */,
 				0FB35C681DB0CECA00B48EA7 /* Plugin.m in Sources */,
-				0FAF74C51CEEA17C00432713 /* HRHSVColorUtil.m in Sources */,
 				0FBEFE2A1D24F0C10084244F /* WebManager.m in Sources */,
 				2EEE536B1E3061930026F97D /* IphoneDetailViewController.m in Sources */,
 				0F6ADFE01E7136B500BFF67F /* RCDataManager.m in Sources */,
@@ -3149,8 +3089,6 @@
 				CDF90B411E1E425D009043B9 /* RoomDetailViewController.m in Sources */,
 				0F180FC31D0E4C7400392F4C /* NetvController.m in Sources */,
 				F66DFF2B1D5188BF0005E882 /* EditSceneCell.m in Sources */,
-				2E5E5FE91DE1F1A9006F0C8F /* IphoneLightController.m in Sources */,
-				0FAF74C11CEEA17C00432713 /* HRColorCursor.m in Sources */,
 				CD7DDA131E825E9C00638DB3 /* RegistFirstStepViewController.m in Sources */,
 				2E0183FF1ECDE43300E3705F /* SwiftModel.swift in Sources */,
 				F680AAB71DD94565001D1807 /* FamilyCell.m in Sources */,
@@ -3165,7 +3103,6 @@
 				CD9F0AB81EB78DD0007B0CF7 /* DeliveryAddressSettingViewController.m in Sources */,
 				F6755A4F1D406552002394F3 /* ECloudTabBarController.m in Sources */,
 				CDF157541E7BA3F600499AC5 /* UIView_extra.m in Sources */,
-				0FAF74C41CEEA17C00432713 /* HRColorPickerView.m in Sources */,
 				F6280D531D966218009108ED /* IphoneAddFmController.m in Sources */,
 				0FF92B661D9224640098DD54 /* TVChannel.m in Sources */,
 				0F11654F1D7418EE00A01B8F /* Amplifier.m in Sources */,
@@ -3190,7 +3127,6 @@
 				0FAF8FFB1CE1D9BC000557BD /* UploadManager.m in Sources */,
 				F6359B001CFFC4DC0035EB31 /* ColourTableViewCell.m in Sources */,
 				0FA1E09E1D533BFA001CA819 /* PluginCell.m in Sources */,
-				0FAF74C61CEEA17C00432713 /* UIImage+CoreGraphics.m in Sources */,
 				F66596E61D3F5DBC0082716A /* AddNewScenseController.m in Sources */,
 				0F180FC91D0E4E6500392F4C /* GuardController.m in Sources */,
 				0FAF98A71CE40F3C009BDBB5 /* QRToggleTorchButton.m in Sources */,
@@ -3231,7 +3167,6 @@
 				0FABF91C1D06AA35000892D8 /* TVController.m in Sources */,
 				F6BF2AED1D86556500A3C9D5 /* HostIDSController.m in Sources */,
 				F62337901D70675B00ADAD00 /* TVIconController.m in Sources */,
-				0FAF74C31CEEA17C00432713 /* HRColorMapView.m in Sources */,
 				0FADA44A1CEBF8AE00777901 /* SceneManager.m in Sources */,
 				0FA96D521EB033FE001DDF39 /* UIView+Popup.m in Sources */,
 				2ECDCC901E9E3623004C68BE /* BjMusicTableViewCell.m in Sources */,
@@ -3266,7 +3201,6 @@
 				2EF75C811EB32D390055147D /* DeviceTimingViewController.m in Sources */,
 				0FB205E91CDC312A00B5E87E /* IOManager.m in Sources */,
 				F66596DA1D3F12FB0082716A /* EnergyOfDeviceController.m in Sources */,
-				0FAF74C01CEEA17C00432713 /* HRBrightnessSlider.m in Sources */,
 				F635CCBB1D4356650078B148 /* MyCenterSplitController.m in Sources */,
 				2E12CC161E7FC04800C7D006 /* IphoneNewEditSceneController.m in Sources */,
 				F6251F741D541D8A000A5A47 /* Device.m in Sources */,
@@ -3305,11 +3239,9 @@
 				0FCF43311CE09039009BFDD9 /* IbeaconManager.m in Sources */,
 				2E04198B1EB89F42004D70B9 /* FSLineChart.m in Sources */,
 				0FCFB3801CF28F6F00B37DD3 /* Light.m in Sources */,
-				0FAF74C21CEEA17C00432713 /* HRColorInfoView.m in Sources */,
 				0FCFB39B1CF2950D00B37DD3 /* BgMusic.m in Sources */,
 				0F8A78511E9F7C8C0050F0D9 /* UIImageView+Badge.m in Sources */,
 				2E01840C1ECDE77C00E3705F /* CoreGraphicsExtensions.swift in Sources */,
-				0FAF74C91CEEB37200432713 /* HRSampleColorPickerViewController.m in Sources */,
 				0FCFB38C1CF293A500B37DD3 /* DVD.m in Sources */,
 				CD4F12441EB316EF00E0B301 /* DeliveryAddressViewController.m in Sources */,
 				2E925D8D1E5E73CD008E327B /* ECEngerController.m in Sources */,
