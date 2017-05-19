@@ -74,6 +74,8 @@
         [deviceColorArray addObjectsFromArray:@[Dev_OFF_COLOR,Air_ON_COLOR,AV_ON_COLOR]];
     }else if (info.lightStatus == 0 && info.airconditionerStatus == 0 && info.mediaStatus == 1) {
         [deviceColorArray addObjectsFromArray:@[Dev_OFF_COLOR,Dev_OFF_COLOR,AV_ON_COLOR]];
+    }else if (info.lightStatus == 1 && info.airconditionerStatus == 0 && info.mediaStatus == 1) {
+        [deviceColorArray addObjectsFromArray:@[Light_ON_COLOR,Dev_OFF_COLOR,AV_ON_COLOR]];
     }
     
     

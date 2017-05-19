@@ -370,6 +370,7 @@
             otherCell.OtherConstraint.constant = 10;
             otherCell.NameLabel.text = device.name;
             otherCell.OtherSwitchBtn.selected = device.power;//开关
+            otherCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
             return otherCell;
         }
         
@@ -385,6 +386,7 @@
             BjMusicCell.BJmusicConstraint.constant = 10;
             BjMusicCell.BjMusicNameLb.text = device.name;
             BjMusicCell.BjPowerButton.selected = device.power;//开关
+            BjMusicCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
             return BjMusicCell;
         }else if (device.hTypeId == 13) { //DVD
             DVDTableViewCell * dvdCell = [tableView dequeueReusableCellWithIdentifier:@"DVDTableViewCell" forIndexPath:indexPath];
@@ -394,6 +396,7 @@
             dvdCell.DVDConstraint.constant = 10;
             dvdCell.DVDNameLabel.text = device.name;
             dvdCell.DVDSwitchBtn.selected = device.power;//开关
+            dvdCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
             return dvdCell;
         }else if (device.hTypeId == 15) { //FM收音机
             FMTableViewCell * FMCell = [tableView dequeueReusableCellWithIdentifier:@"FMTableViewCell" forIndexPath:indexPath];
@@ -403,6 +406,7 @@
             FMCell.FMLayouConstraint.constant = 10;
             FMCell.FMNameLabel.text = device.name;
             FMCell.FMSwitchBtn.selected = device.power;//开关
+            FMCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
             return FMCell;
         }else if (device.hTypeId == 17) { //幕布
             ScreenCurtainCell * ScreenCell = [tableView dequeueReusableCellWithIdentifier:@"ScreenCurtainCell" forIndexPath:indexPath];
@@ -412,6 +416,7 @@
             ScreenCell.ScreenCurtainConstraint.constant = 10;
             ScreenCell.ScreenCurtainLabel.text = device.name;
             ScreenCell.ScreenCurtainBtn.selected = device.power;//开关
+            ScreenCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
             return ScreenCell;
         }else if (device.hTypeId == 16) { //投影仪(只有开关)
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
@@ -421,6 +426,7 @@
             otherCell.OtherConstraint.constant = 10;
             otherCell.NameLabel.text = device.name;
             otherCell.OtherSwitchBtn.selected = device.power;//开关
+            otherCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
             return otherCell;
         }else if (device.hTypeId == 11) { //电视（以前叫机顶盒）
             TVTableViewCell * tvCell = [tableView dequeueReusableCellWithIdentifier:@"TVTableViewCell" forIndexPath:indexPath];
@@ -430,6 +436,7 @@
             tvCell.TVConstraint.constant = 10;
             tvCell.TVNameLabel.text = device.name;
             tvCell.TVSwitchBtn.selected = device.power;//开关
+            tvCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
             return tvCell;
         }else if (device.hTypeId == 18) { //功放
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
@@ -439,6 +446,7 @@
             otherCell.OtherConstraint.constant = 10;
             otherCell.NameLabel.text = device.name;
             otherCell.OtherSwitchBtn.selected = device.power;//开关
+            otherCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
             return otherCell;
         }else { //影音其他类型
             OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
@@ -448,6 +456,7 @@
             otherCell.OtherConstraint.constant = 10;
             otherCell.NameLabel.text = device.name;
             otherCell.OtherSwitchBtn.selected = device.power;//开关
+            otherCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
             return otherCell;
         }
         
@@ -462,6 +471,7 @@
         otherCell.OtherConstraint.constant = 10;
         otherCell.NameLabel.text = device.name;
         otherCell.OtherSwitchBtn.selected = device.power;//开关
+        otherCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
         return otherCell;
         
     }/*else if (indexPath.section == 5) {//安防
