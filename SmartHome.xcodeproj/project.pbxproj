@@ -146,6 +146,13 @@
 		0FF410DC1CDAF76300C7F4A1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410DB1CDAF76300C7F4A1 /* CoreBluetooth.framework */; };
 		0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7B0B51D1380BF003C2D52 /* AirController.m */; };
 		0FF92B661D9224640098DD54 /* TVChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF92B651D9224640098DD54 /* TVChannel.m */; };
+		2E0183FF1ECDE43300E3705F /* SwiftModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0183FE1ECDE43300E3705F /* SwiftModel.swift */; };
+		2E0184091ECDE77C00E3705F /* AvoidingSubviewScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0184011ECDE77C00E3705F /* AvoidingSubviewScrollViewDelegate.swift */; };
+		2E01840A1ECDE77C00E3705F /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0184021ECDE77C00E3705F /* Clock.swift */; };
+		2E01840B1ECDE77C00E3705F /* CoreAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0184031ECDE77C00E3705F /* CoreAnimation.swift */; };
+		2E01840C1ECDE77C00E3705F /* CoreGraphicsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0184041ECDE77C00E3705F /* CoreGraphicsExtensions.swift */; };
+		2E01840D1ECDE77C00E3705F /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0184051ECDE77C00E3705F /* DateExtensions.swift */; };
+		2E01840E1ECDE77C00E3705F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E0184061ECDE77C00E3705F /* Info.plist */; };
 		2E0297271E4C4C7600BBC520 /* MySubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0297261E4C4C7600BBC520 /* MySubView.m */; };
 		2E03E2FA1ECA904F00487319 /* SeneLightModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E03E2F91ECA904F00487319 /* SeneLightModel.m */; };
 		2E03E3001ECAD57E00487319 /* ECMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E03E2FF1ECAD57E00487319 /* ECMessage.m */; };
@@ -790,6 +797,16 @@
 		0FF92B631D9222220098DD54 /* SQLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLManager.h; sourceTree = "<group>"; };
 		0FF92B641D9224640098DD54 /* TVChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVChannel.h; sourceTree = "<group>"; };
 		0FF92B651D9224640098DD54 /* TVChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVChannel.m; sourceTree = "<group>"; };
+		2E0183FD1ECDE43300E3705F /* SmartHome-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SmartHome-Bridging-Header.h"; sourceTree = "<group>"; };
+		2E0183FE1ECDE43300E3705F /* SwiftModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftModel.swift; path = ../SwiftModel.swift; sourceTree = "<group>"; };
+		2E0184011ECDE77C00E3705F /* AvoidingSubviewScrollViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvoidingSubviewScrollViewDelegate.swift; sourceTree = "<group>"; };
+		2E0184021ECDE77C00E3705F /* Clock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
+		2E0184031ECDE77C00E3705F /* CoreAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreAnimation.swift; sourceTree = "<group>"; };
+		2E0184041ECDE77C00E3705F /* CoreGraphicsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreGraphicsExtensions.swift; sourceTree = "<group>"; };
+		2E0184051ECDE77C00E3705F /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
+		2E0184061ECDE77C00E3705F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2E0184071ECDE77C00E3705F /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		2E0184081ECDE77C00E3705F /* TenClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TenClock.h; sourceTree = "<group>"; };
 		2E0297251E4C4C7600BBC520 /* MySubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySubView.h; sourceTree = "<group>"; };
 		2E0297261E4C4C7600BBC520 /* MySubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySubView.m; sourceTree = "<group>"; };
 		2E03E2F81ECA904F00487319 /* SeneLightModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeneLightModel.h; sourceTree = "<group>"; };
@@ -1369,6 +1386,7 @@
 				0F032D451CC9B12700D1920D /* Products */,
 				5CEAD34143E7289FAFA6E86D /* Pods */,
 				F6DAFF50D58D29D0493A07C7 /* Frameworks */,
+				2E0183FD1ECDE43300E3705F /* SmartHome-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1963,6 +1981,7 @@
 		0F6ADFDD1E71354000BFF67F /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				2E0184001ECDE77C00E3705F /* 10Clock */,
 				0F7426B41EBAC78B00D686B8 /* CircularSlider */,
 				0F8A784E1E9F7C1D0050F0D9 /* UI */,
 				0F49CB7F1E7A21E800D46ECC /* ORBSwitch */,
@@ -2134,6 +2153,21 @@
 			name = Devices;
 			sourceTree = "<group>";
 		};
+		2E0184001ECDE77C00E3705F /* 10Clock */ = {
+			isa = PBXGroup;
+			children = (
+				2E0184011ECDE77C00E3705F /* AvoidingSubviewScrollViewDelegate.swift */,
+				2E0184021ECDE77C00E3705F /* Clock.swift */,
+				2E0184031ECDE77C00E3705F /* CoreAnimation.swift */,
+				2E0184041ECDE77C00E3705F /* CoreGraphicsExtensions.swift */,
+				2E0184051ECDE77C00E3705F /* DateExtensions.swift */,
+				2E0184061ECDE77C00E3705F /* Info.plist */,
+				2E0184071ECDE77C00E3705F /* module.modulemap */,
+				2E0184081ECDE77C00E3705F /* TenClock.h */,
+			);
+			path = 10Clock;
+			sourceTree = "<group>";
+		};
 		2E0419861EB89F42004D70B9 /* FSLineChart */ = {
 			isa = PBXGroup;
 			children = (
@@ -2203,6 +2237,7 @@
 		2E7B64BB1E9B66A9001F7469 /* SceneAddVC */ = {
 			isa = PBXGroup;
 			children = (
+				2E0183FE1ECDE43300E3705F /* SwiftModel.swift */,
 				2E192CA51EBB2D3F00458541 /* CKCircleView.h */,
 				2E192CA61EBB2D3F00458541 /* CKCircleView.m */,
 				2EEFF7481E9649A0008F2C7F /* IphoneNewAddSceneVC.h */,
@@ -2960,6 +2995,7 @@
 				0F49CB6C1E7A1DBF00D46ECC /* Login.storyboard in Resources */,
 				2E925DA51E5E857D008E327B /* all_6.jpg in Resources */,
 				CDF157511E7AB2C000499AC5 /* leftbackiamge.png in Resources */,
+				2E01840E1ECDE77C00E3705F /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3281,6 +3317,7 @@
 				F6FD00A21DDDD470009ABA64 /* TouchSubViewController.m in Sources */,
 				0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */,
 				0F6AB8701D782D9D0041E39C /* SunString.m in Sources */,
+				2E01840B1ECDE77C00E3705F /* CoreAnimation.swift in Sources */,
 				CDEE5EA11EC2A84800A5779D /* LaunchingViewController.m in Sources */,
 				2E5E5FEC1DE22AC8006F0C8F /* LightCell.m in Sources */,
 				CDEC86981E9A44F9009EC245 /* FamilyHomeViewController.m in Sources */,
@@ -3307,6 +3344,7 @@
 				F65AF6DA1D3375700048A4E5 /* ProfileFaultsCell.m in Sources */,
 				F646C0B91D91173000DF1728 /* IphoneRoomView.m in Sources */,
 				0FABF91F1D06AA4E000892D8 /* DVDController.m in Sources */,
+				2E0184091ECDE77C00E3705F /* AvoidingSubviewScrollViewDelegate.swift in Sources */,
 				0FEE12771D20C53400811947 /* TXHRrettyRuler.m in Sources */,
 				F64EF7FE1D8FBCC1003C1C48 /* IphoneSceneController.m in Sources */,
 				2E7B64C21E9B6ABC001F7469 /* WeekDaysCell.m in Sources */,
@@ -3330,6 +3368,7 @@
 				2E5E5FE91DE1F1A9006F0C8F /* IphoneLightController.m in Sources */,
 				0FAF74C11CEEA17C00432713 /* HRColorCursor.m in Sources */,
 				CD7DDA131E825E9C00638DB3 /* RegistFirstStepViewController.m in Sources */,
+				2E0183FF1ECDE43300E3705F /* SwiftModel.swift in Sources */,
 				F680AAB71DD94565001D1807 /* FamilyCell.m in Sources */,
 				2EF75C7D1EB2CAE00055147D /* ShortcutKeyViewController.m in Sources */,
 				2E7B64BF1E9B6796001F7469 /* IphoneNewAddSceneTimerVC.m in Sources */,
@@ -3396,6 +3435,7 @@
 				2EA2A83B1E1DCDA600092D41 /* AreaSubSettingViewController.m in Sources */,
 				CDEC86921E9A1D22009EC245 /* FamilyHomeCell.m in Sources */,
 				2EB516F91E9CEB3F0064B18E /* AddDeviceCell.m in Sources */,
+				2E01840D1ECDE77C00E3705F /* DateExtensions.swift in Sources */,
 				0F032D4C1CC9B12700D1920D /* AppDelegate.m in Sources */,
 				0FB205ED1CDC3D3700B5E87E /* AudioManager.m in Sources */,
 				F68A5DD81D782D8400601612 /* ECSearchView.m in Sources */,
@@ -3433,6 +3473,7 @@
 				F6755A4C1D4063FA002394F3 /* ECloudTabBar.m in Sources */,
 				0FAF8FEF1CE18C41000557BD /* DeviceInfo.m in Sources */,
 				2E7B64B81E9B3188001F7469 /* IphoneNewAddSceneCell.m in Sources */,
+				2E01840A1ECDE77C00E3705F /* Clock.swift in Sources */,
 				2EDE04611E45777B00BC8E0B /* WebViewMangerVC.m in Sources */,
 				0F4B3C001D2A13870002E75E /* MSGController.m in Sources */,
 				0F6183FA1EA9A24600000EAD /* NewLightCell.m in Sources */,
@@ -3491,6 +3532,7 @@
 				0FAF74C21CEEA17C00432713 /* HRColorInfoView.m in Sources */,
 				0FCFB39B1CF2950D00B37DD3 /* BgMusic.m in Sources */,
 				0F8A78511E9F7C8C0050F0D9 /* UIImageView+Badge.m in Sources */,
+				2E01840C1ECDE77C00E3705F /* CoreGraphicsExtensions.swift in Sources */,
 				0FAF74C91CEEB37200432713 /* HRSampleColorPickerViewController.m in Sources */,
 				0FCFB38C1CF293A500B37DD3 /* DVD.m in Sources */,
 				CD4F12441EB316EF00E0B301 /* DeliveryAddressViewController.m in Sources */,
@@ -3697,6 +3739,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "SmartHome-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -3744,6 +3789,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "SmartHome-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -3751,6 +3798,7 @@
 		0F032D7B1CC9B12700D1920D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = SmartHomeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -3763,6 +3811,7 @@
 		0F032D7C1CC9B12700D1920D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = SmartHomeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -3775,6 +3824,7 @@
 		0F032D7E1CC9B12700D1920D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = SmartHomeUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHomeUITests;
@@ -3786,6 +3836,7 @@
 		0F032D7F1CC9B12700D1920D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = SmartHomeUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHomeUITests;

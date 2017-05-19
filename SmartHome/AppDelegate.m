@@ -25,6 +25,7 @@
 #import "WeChatPayManager.h"
 #import <RongIMKit/RongIMKit.h>
 #import "RCDataManager.h"
+//#import "SmartHome-Swift.h"
 
 @implementation AppDelegate
 
@@ -70,6 +71,10 @@
     
     [[RCIM sharedRCIM] initWithAppKey:@"8brlm7uf8tsb3"];
     [RCIM sharedRCIM].userInfoDataSource = [RCDataManager shareManager];
+    
+//    SwiftModel *model = [SwiftModel new];
+//    NSLog(@"name:%@",model.name);
+//    [model sayhelloWithWord:@"gaomingyang"];
     
     return YES;
 }
