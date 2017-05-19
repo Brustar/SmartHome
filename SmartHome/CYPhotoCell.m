@@ -9,6 +9,7 @@
 #import "CYPhotoCell.h"
 #import "SceneManager.h"
 #import "Scene.h"
+#import "SQLManager.h"
 
 
 @interface CYPhotoCell()<UIGestureRecognizerDelegate,UIActionSheetDelegate>
@@ -38,15 +39,22 @@
 //开关
 - (IBAction)powerBtn:(id)sender {
     
-    self.powerBtn.selected = !self.powerBtn.selected;
-    if (self.powerBtn.selected) {
-        [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
-        [[SceneManager defaultManager] startScene:self.sceneID];
-        
-    }else{
-        [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
-        [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];
-    }
+  self.powerBtn.selected = !self.powerBtn.selected;
+    Scene * scene = [[Scene alloc] init];
+//  if (self.powerBtn.selected) {
+     if (scene) {
+         if (scene.status == 0) {
+             [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
+             [[SceneManager defaultManager] startScene:self.sceneID];
+             [SQLManager updateSceneStatus:1 sceneID:self.sceneID];//更新数据库
+         }else if (scene.status == 1){
+             [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
+             [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];
+             [SQLManager updateSceneStatus:0 sceneID:scene.sceneID];//更新数据库
+          }
+      }
+//    }
+    
 }
 //定时
 - (IBAction)timingBtn:(id)sender {

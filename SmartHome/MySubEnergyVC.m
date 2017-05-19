@@ -335,7 +335,7 @@
     }
     if (sender.selected == NO) {
         sender.selected = YES;
-       [self sendHistoryGetEenrgy];
+//       [self sendHistoryGetEenrgy];
         [self changeClickButton:sender];
     }
       self.clickButton = sender;

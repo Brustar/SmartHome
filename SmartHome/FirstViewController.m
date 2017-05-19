@@ -356,7 +356,6 @@
     }];
     
      [_afNetworkReachabilityManager startMonitoring];//开启网络监视器；
-    
 }
 -(void) chatConnect
 {
