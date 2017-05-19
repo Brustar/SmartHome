@@ -11,7 +11,6 @@
 		0F020A231DE3D9330034869F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F020A221DE3D9330034869F /* LaunchScreen.storyboard */; };
 		0F032D491CC9B12700D1920D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F032D481CC9B12700D1920D /* main.m */; };
 		0F032D4C1CC9B12700D1920D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F032D4B1CC9B12700D1920D /* AppDelegate.m */; };
-		0F032D5A1CC9B12700D1920D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F032D591CC9B12700D1920D /* Assets.xcassets */; };
 		0F032D681CC9B12700D1920D /* SmartHomeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F032D671CC9B12700D1920D /* SmartHomeTests.m */; };
 		0F032D731CC9B12700D1920D /* SmartHomeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F032D721CC9B12700D1920D /* SmartHomeUITests.m */; };
 		0F094AC31E94CD3A00977123 /* Keypad.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F094AC21E94CD3A00977123 /* Keypad.m */; };
@@ -146,6 +145,13 @@
 		0FF410DC1CDAF76300C7F4A1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410DB1CDAF76300C7F4A1 /* CoreBluetooth.framework */; };
 		0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7B0B51D1380BF003C2D52 /* AirController.m */; };
 		0FF92B661D9224640098DD54 /* TVChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF92B651D9224640098DD54 /* TVChannel.m */; };
+		2E0183FF1ECDE43300E3705F /* SwiftModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0183FE1ECDE43300E3705F /* SwiftModel.swift */; };
+		2E0184091ECDE77C00E3705F /* AvoidingSubviewScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0184011ECDE77C00E3705F /* AvoidingSubviewScrollViewDelegate.swift */; };
+		2E01840A1ECDE77C00E3705F /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0184021ECDE77C00E3705F /* Clock.swift */; };
+		2E01840B1ECDE77C00E3705F /* CoreAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0184031ECDE77C00E3705F /* CoreAnimation.swift */; };
+		2E01840C1ECDE77C00E3705F /* CoreGraphicsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0184041ECDE77C00E3705F /* CoreGraphicsExtensions.swift */; };
+		2E01840D1ECDE77C00E3705F /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0184051ECDE77C00E3705F /* DateExtensions.swift */; };
+		2E01840E1ECDE77C00E3705F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E0184061ECDE77C00E3705F /* Info.plist */; };
 		2E0297271E4C4C7600BBC520 /* MySubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0297261E4C4C7600BBC520 /* MySubView.m */; };
 		2E03E2FA1ECA904F00487319 /* SeneLightModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E03E2F91ECA904F00487319 /* SeneLightModel.m */; };
 		2E03E3001ECAD57E00487319 /* ECMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E03E2FF1ECAD57E00487319 /* ECMessage.m */; };
@@ -296,6 +302,7 @@
 		CDEE5EA61EC33DC100A5779D /* CoreTextArcView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEE5EA51EC33DC100A5779D /* CoreTextArcView.m */; };
 		CDEE5EA81EC3EC5900A5779D /* launchingAnimation.gif in Resources */ = {isa = PBXBuildFile; fileRef = CDEE5EA71EC3EC5900A5779D /* launchingAnimation.gif */; };
 		CDEE5EAC1ECDD82E00A5779D /* portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = CDEE5EAB1ECDD82E00A5779D /* portrait.png */; };
+		CDEE5EAE1ECEC07E00A5779D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDEE5EAD1ECEC07E00A5779D /* Assets.xcassets */; };
 		CDF1573A1E7AAD4C00499AC5 /* BaseNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF157371E7AAD4C00499AC5 /* BaseNavController.m */; };
 		CDF1573B1E7AAD4C00499AC5 /* BaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF157391E7AAD4C00499AC5 /* BaseTabBarController.m */; };
 		CDF157401E7AADC700499AC5 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF1573C1E7AADC700499AC5 /* LeftViewController.m */; };
@@ -442,7 +449,6 @@
 		0F032D481CC9B12700D1920D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0F032D4A1CC9B12700D1920D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0F032D4B1CC9B12700D1920D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		0F032D591CC9B12700D1920D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0F032D5E1CC9B12700D1920D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0F032D631CC9B12700D1920D /* SmartHomeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmartHomeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F032D671CC9B12700D1920D /* SmartHomeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmartHomeTests.m; sourceTree = "<group>"; };
@@ -791,6 +797,16 @@
 		0FF92B631D9222220098DD54 /* SQLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLManager.h; sourceTree = "<group>"; };
 		0FF92B641D9224640098DD54 /* TVChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVChannel.h; sourceTree = "<group>"; };
 		0FF92B651D9224640098DD54 /* TVChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVChannel.m; sourceTree = "<group>"; };
+		2E0183FD1ECDE43300E3705F /* SmartHome-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SmartHome-Bridging-Header.h"; sourceTree = "<group>"; };
+		2E0183FE1ECDE43300E3705F /* SwiftModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftModel.swift; path = ../SwiftModel.swift; sourceTree = "<group>"; };
+		2E0184011ECDE77C00E3705F /* AvoidingSubviewScrollViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvoidingSubviewScrollViewDelegate.swift; sourceTree = "<group>"; };
+		2E0184021ECDE77C00E3705F /* Clock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
+		2E0184031ECDE77C00E3705F /* CoreAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreAnimation.swift; sourceTree = "<group>"; };
+		2E0184041ECDE77C00E3705F /* CoreGraphicsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreGraphicsExtensions.swift; sourceTree = "<group>"; };
+		2E0184051ECDE77C00E3705F /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
+		2E0184061ECDE77C00E3705F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2E0184071ECDE77C00E3705F /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		2E0184081ECDE77C00E3705F /* TenClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TenClock.h; sourceTree = "<group>"; };
 		2E0297251E4C4C7600BBC520 /* MySubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySubView.h; sourceTree = "<group>"; };
 		2E0297261E4C4C7600BBC520 /* MySubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySubView.m; sourceTree = "<group>"; };
 		2E03E2F81ECA904F00487319 /* SeneLightModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeneLightModel.h; sourceTree = "<group>"; };
@@ -1039,6 +1055,7 @@
 		CDEE5EA51EC33DC100A5779D /* CoreTextArcView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreTextArcView.m; sourceTree = "<group>"; };
 		CDEE5EA71EC3EC5900A5779D /* launchingAnimation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = launchingAnimation.gif; sourceTree = "<group>"; };
 		CDEE5EAB1ECDD82E00A5779D /* portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = portrait.png; sourceTree = "<group>"; };
+		CDEE5EAD1ECEC07E00A5779D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CDF157361E7AAD4C00499AC5 /* BaseNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavController.h; sourceTree = "<group>"; };
 		CDF157371E7AAD4C00499AC5 /* BaseNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavController.m; sourceTree = "<group>"; };
 		CDF157381E7AAD4C00499AC5 /* BaseTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarController.h; sourceTree = "<group>"; };
@@ -1371,6 +1388,7 @@
 				0F032D451CC9B12700D1920D /* Products */,
 				5CEAD34143E7289FAFA6E86D /* Pods */,
 				F6DAFF50D58D29D0493A07C7 /* Frameworks */,
+				2E0183FD1ECDE43300E3705F /* SmartHome-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1551,6 +1569,7 @@
 		0F032D471CC9B12700D1920D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CDEE5EAD1ECEC07E00A5779D /* Assets.xcassets */,
 				CDFB9DF11E5DCB4D00BFECCE /* SceneTimerList.plist */,
 				CD78A8311E337C1600060466 /* 255_216.plist */,
 				CD78A82F1E3379C200060466 /* 255_221.plist */,
@@ -1567,7 +1586,6 @@
 				CDF90B421E2F0676009043B9 /* realScene.plist */,
 				CDF90B441E2F4B14009043B9 /* planeScene.plist */,
 				0FBEFE2B1D24F3100084244F /* PrefixHeader.pch */,
-				0F032D591CC9B12700D1920D /* Assets.xcassets */,
 				0FAF98BC1CE466B0009BDBB5 /* SmartHome.entitlements */,
 				0F032D5E1CC9B12700D1920D /* Info.plist */,
 				0F032D481CC9B12700D1920D /* main.m */,
@@ -1965,6 +1983,7 @@
 		0F6ADFDD1E71354000BFF67F /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				2E0184001ECDE77C00E3705F /* 10Clock */,
 				0F7426B41EBAC78B00D686B8 /* CircularSlider */,
 				0F8A784E1E9F7C1D0050F0D9 /* UI */,
 				0F49CB7F1E7A21E800D46ECC /* ORBSwitch */,
@@ -2136,6 +2155,21 @@
 			name = Devices;
 			sourceTree = "<group>";
 		};
+		2E0184001ECDE77C00E3705F /* 10Clock */ = {
+			isa = PBXGroup;
+			children = (
+				2E0184011ECDE77C00E3705F /* AvoidingSubviewScrollViewDelegate.swift */,
+				2E0184021ECDE77C00E3705F /* Clock.swift */,
+				2E0184031ECDE77C00E3705F /* CoreAnimation.swift */,
+				2E0184041ECDE77C00E3705F /* CoreGraphicsExtensions.swift */,
+				2E0184051ECDE77C00E3705F /* DateExtensions.swift */,
+				2E0184061ECDE77C00E3705F /* Info.plist */,
+				2E0184071ECDE77C00E3705F /* module.modulemap */,
+				2E0184081ECDE77C00E3705F /* TenClock.h */,
+			);
+			path = 10Clock;
+			sourceTree = "<group>";
+		};
 		2E0419861EB89F42004D70B9 /* FSLineChart */ = {
 			isa = PBXGroup;
 			children = (
@@ -2205,6 +2239,7 @@
 		2E7B64BB1E9B66A9001F7469 /* SceneAddVC */ = {
 			isa = PBXGroup;
 			children = (
+				2E0183FE1ECDE43300E3705F /* SwiftModel.swift */,
 				2E192CA51EBB2D3F00458541 /* CKCircleView.h */,
 				2E192CA61EBB2D3F00458541 /* CKCircleView.m */,
 				2EEFF7481E9649A0008F2C7F /* IphoneNewAddSceneVC.h */,
@@ -2822,6 +2857,7 @@
 					0F032D431CC9B12700D1920D = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = C8JS65F469;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -2894,6 +2930,7 @@
 				0F49CB7A1E7A204300D46ECC /* Devices-iPad.storyboard in Resources */,
 				CDF1574E1E7AB2AF00499AC5 /* icon_tabbar_merchant_selected@2x.png in Resources */,
 				F60FDB471D003FD500AB04BE /* CurtainTableViewCell.xib in Resources */,
+				CDEE5EAE1ECEC07E00A5779D /* Assets.xcassets in Resources */,
 				2E925D9E1E5E857D008E327B /* 4.jpg in Resources */,
 				CD7DDA151E826C3B00638DB3 /* backBtn@2x.png in Resources */,
 				CDF389241E306D2400657C8B /* maintaininfo.plist in Resources */,
@@ -2901,7 +2938,6 @@
 				CD93E3B11E8081B0003CCAA9 /* login_line@2x.png in Resources */,
 				2EC266291EA4BEAF003DC979 /* FMTableViewCell.xib in Resources */,
 				2E925DA21E5E857D008E327B /* 8.jpg in Resources */,
-				0F032D5A1CC9B12700D1920D /* Assets.xcassets in Resources */,
 				CDF3892C1E30B86500657C8B /* msgList.plist in Resources */,
 				2E925DA71E5E857D008E327B /* all_8.jpg in Resources */,
 				2E6A065C1EA743B50022B681 /* NewColourCell.xib in Resources */,
@@ -2963,6 +2999,7 @@
 				0F49CB6C1E7A1DBF00D46ECC /* Login.storyboard in Resources */,
 				2E925DA51E5E857D008E327B /* all_6.jpg in Resources */,
 				CDF157511E7AB2C000499AC5 /* leftbackiamge.png in Resources */,
+				2E01840E1ECDE77C00E3705F /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3284,6 +3321,7 @@
 				F6FD00A21DDDD470009ABA64 /* TouchSubViewController.m in Sources */,
 				0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */,
 				0F6AB8701D782D9D0041E39C /* SunString.m in Sources */,
+				2E01840B1ECDE77C00E3705F /* CoreAnimation.swift in Sources */,
 				CDEE5EA11EC2A84800A5779D /* LaunchingViewController.m in Sources */,
 				2E5E5FEC1DE22AC8006F0C8F /* LightCell.m in Sources */,
 				CDEC86981E9A44F9009EC245 /* FamilyHomeViewController.m in Sources */,
@@ -3310,6 +3348,7 @@
 				F65AF6DA1D3375700048A4E5 /* ProfileFaultsCell.m in Sources */,
 				F646C0B91D91173000DF1728 /* IphoneRoomView.m in Sources */,
 				0FABF91F1D06AA4E000892D8 /* DVDController.m in Sources */,
+				2E0184091ECDE77C00E3705F /* AvoidingSubviewScrollViewDelegate.swift in Sources */,
 				0FEE12771D20C53400811947 /* TXHRrettyRuler.m in Sources */,
 				F64EF7FE1D8FBCC1003C1C48 /* IphoneSceneController.m in Sources */,
 				2E7B64C21E9B6ABC001F7469 /* WeekDaysCell.m in Sources */,
@@ -3333,6 +3372,7 @@
 				2E5E5FE91DE1F1A9006F0C8F /* IphoneLightController.m in Sources */,
 				0FAF74C11CEEA17C00432713 /* HRColorCursor.m in Sources */,
 				CD7DDA131E825E9C00638DB3 /* RegistFirstStepViewController.m in Sources */,
+				2E0183FF1ECDE43300E3705F /* SwiftModel.swift in Sources */,
 				F680AAB71DD94565001D1807 /* FamilyCell.m in Sources */,
 				2EF75C7D1EB2CAE00055147D /* ShortcutKeyViewController.m in Sources */,
 				2E7B64BF1E9B6796001F7469 /* IphoneNewAddSceneTimerVC.m in Sources */,
@@ -3399,6 +3439,7 @@
 				2EA2A83B1E1DCDA600092D41 /* AreaSubSettingViewController.m in Sources */,
 				CDEC86921E9A1D22009EC245 /* FamilyHomeCell.m in Sources */,
 				2EB516F91E9CEB3F0064B18E /* AddDeviceCell.m in Sources */,
+				2E01840D1ECDE77C00E3705F /* DateExtensions.swift in Sources */,
 				0F032D4C1CC9B12700D1920D /* AppDelegate.m in Sources */,
 				0FB205ED1CDC3D3700B5E87E /* AudioManager.m in Sources */,
 				F68A5DD81D782D8400601612 /* ECSearchView.m in Sources */,
@@ -3436,6 +3477,7 @@
 				F6755A4C1D4063FA002394F3 /* ECloudTabBar.m in Sources */,
 				0FAF8FEF1CE18C41000557BD /* DeviceInfo.m in Sources */,
 				2E7B64B81E9B3188001F7469 /* IphoneNewAddSceneCell.m in Sources */,
+				2E01840A1ECDE77C00E3705F /* Clock.swift in Sources */,
 				2EDE04611E45777B00BC8E0B /* WebViewMangerVC.m in Sources */,
 				0F4B3C001D2A13870002E75E /* MSGController.m in Sources */,
 				0F6183FA1EA9A24600000EAD /* NewLightCell.m in Sources */,
@@ -3494,6 +3536,7 @@
 				0FAF74C21CEEA17C00432713 /* HRColorInfoView.m in Sources */,
 				0FCFB39B1CF2950D00B37DD3 /* BgMusic.m in Sources */,
 				0F8A78511E9F7C8C0050F0D9 /* UIImageView+Badge.m in Sources */,
+				2E01840C1ECDE77C00E3705F /* CoreGraphicsExtensions.swift in Sources */,
 				0FAF74C91CEEB37200432713 /* HRSampleColorPickerViewController.m in Sources */,
 				0FCFB38C1CF293A500B37DD3 /* DVD.m in Sources */,
 				CD4F12441EB316EF00E0B301 /* DeliveryAddressViewController.m in Sources */,
@@ -3661,11 +3704,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SmartHome/SmartHome.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: shi zi (75UU58685N)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: shi zi (75UU58685N)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = C8JS65F469;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3697,7 +3743,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_OBJC_BRIDGING_HEADER = "SmartHome-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -3705,12 +3754,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CE54136C9EEF8F51E8FBEEDE /* Pods-SmartHome.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SmartHome/SmartHome.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: shi zi (C8JS65F469)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: shi zi (C8JS65F469)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = C8JS65F469;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3742,13 +3793,16 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_OBJC_BRIDGING_HEADER = "SmartHome-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
 		0F032D7B1CC9B12700D1920D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = SmartHomeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -3761,6 +3815,7 @@
 		0F032D7C1CC9B12700D1920D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = SmartHomeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -3773,6 +3828,7 @@
 		0F032D7E1CC9B12700D1920D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = SmartHomeUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHomeUITests;
@@ -3784,6 +3840,7 @@
 		0F032D7F1CC9B12700D1920D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = SmartHomeUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHomeUITests;

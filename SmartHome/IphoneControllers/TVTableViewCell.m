@@ -57,18 +57,21 @@
         self.AddTvDeviceBtn.selected = !self.AddTvDeviceBtn.selected;
         if (self.AddTvDeviceBtn.selected) {
             [self.AddTvDeviceBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+            
+            [_scene setSceneID:[self.sceneid intValue]];
+            [_scene setRoomID:self.roomID];
+            [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+            
+            [_scene setReadonly:NO];
+            
+            NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+            [_scene setDevices:devices];
+            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+            
         }else{
             [self.AddTvDeviceBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
         }
-        [_scene setSceneID:[self.sceneid intValue]];
-        [_scene setRoomID:self.roomID];
-        [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-        
-        [_scene setReadonly:NO];
-        
-        NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-        [_scene setDevices:devices];
-        [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+  
     }else if (sender == self.TVSlider){
         NSData *data=[[DeviceInfo defaultManager] changeVolume:self.TVSlider.value*100 deviceID:self.deviceid];
 //        self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];

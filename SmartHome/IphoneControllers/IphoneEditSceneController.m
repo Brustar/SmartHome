@@ -38,6 +38,7 @@
 #import "FMTableViewCell.h"
 #import "IphoneNewAddSceneVC.h"
 #import "SeneLightModel.h"
+#import "IphoneNewAddSceneTimerVC.h"
 
 
 @interface IphoneEditSceneController ()<TouchSubViewDelegate,UITableViewDelegate,UITableViewDataSource>//IphoneTypeViewDelegate
@@ -121,9 +122,6 @@
         self.TableViewConstraint.constant = -60;
         
     }
-    
-    
-
 }
 - (void)setupNaviBar {
     
@@ -158,6 +156,20 @@
         
     }];
     [alertVC addAction:saveNewAction];
+    [alertVC addAction:saveAction];
+    UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"编辑场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //重新编辑场景的定时
+        
+        UIStoryboard * sceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
+        
+        IphoneNewAddSceneTimerVC * newTimerVC = [sceneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneNewAddSceneTimerVC"];
+        newTimerVC.sceneID = self.sceneID;
+        
+        [self.navigationController pushViewController:newTimerVC animated:YES];
+       
+        
+    }];
+    [alertVC addAction:editAction];
 //    UIAlertAction *favScene = [UIAlertAction actionWithTitle:@"收藏场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
 //        
 //        
@@ -175,12 +187,12 @@
 }
 -(void)getButtonUI
 {
-    [self.gentleBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 60)];
-    [self.gentleBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 60, 0, 0)];
-    [self.normalBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 60)];
-    [self.normalBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 60, 0, 0)];
-    [self.brightBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 60)];
-    [self.brightBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 60, 0, 0)];
+//    [self.gentleBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 60)];
+//    [self.gentleBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 60, 0, 0)];
+//    [self.normalBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 60)];
+//    [self.normalBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 60, 0, 0)];
+//    [self.brightBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 60)];
+//    [self.brightBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 60, 0, 0)];
     [_gentleBtn setBackgroundImage:[UIImage imageNamed:@"Scene-bedroomJJ"] forState:UIControlStateNormal];
     [_gentleBtn setBackgroundImage:[UIImage imageNamed:@"Scene-bedroom_05_2"] forState:UIControlStateDisabled];
     [_normalBtn setBackgroundImage:[UIImage imageNamed:@"Scene-bedroomJJ"] forState:UIControlStateNormal];

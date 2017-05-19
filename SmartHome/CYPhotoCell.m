@@ -8,83 +8,69 @@
 
 #import "CYPhotoCell.h"
 #import "SceneManager.h"
+#import "Scene.h"
+#import "SQLManager.h"
+
 
 @interface CYPhotoCell()<UIGestureRecognizerDelegate,UIActionSheetDelegate>
 
-@property(nonatomic,strong)UILongPressGestureRecognizer *lgPress;
 @end
 
 @implementation CYPhotoCell
 
-- (IBAction)powerBtnAction:(id)sender {
-    NSLog(@"power btn");
-}
--(void)useLongPressGesture
-{
-    self.lgPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
-    self.lgPress.delegate = self;
-//    [self addGestureRecognizer:self.lgPress];
-}
-- (IBAction)seleteSendPowBtn:(id)sender {
-    self.seleteSendPowBtn.selected = !self.seleteSendPowBtn.selected;
-    if (self.seleteSendPowBtn.selected) {
-        [self.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"closeScene"] forState:UIControlStateSelected];
-        [[SceneManager defaultManager] startScene:self.sceneID];
-    }else{
-        [self.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"startScene"] forState:UIControlStateNormal];
-        [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];
-    }
-    
-}
 - (void)awakeFromNib {
     [super awakeFromNib];
-//    self.imageView.layer.borderColor = [UIColor whiteColor].CGColor;
-//    self.imageView.layer.borderWidth = 10;
-}
-- (void)setSceneInfo:(Scene *)info {
-     self.sceneStatus = info.status;
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString: info.picName] placeholderImage:[UIImage imageNamed:@"PL"]];
 
 }
+//删除
 - (IBAction)doDeleteBtn:(id)sender {
-    [self.delegate sceneDeleteAction:self];
-}
--(void)handleLongPress:(UILongPressGestureRecognizer *)lgr
-{
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"温馨提示 " delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"收藏场景"
-                                              otherButtonTitles:@"更换图片", nil];
-//    sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
-  
     
-    [sheet showInView:self];
-    
-    NSLog(@"8980-08-");
-    
-}
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 0) {
-        NSLog(@"---------1----------");
-        actionSheet.hidden = YES;
-    }else if (buttonIndex == 1){
-        NSLog(@"---------2----------");
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"温馨提示 " delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"预置台标"
-                                                  otherButtonTitles:@"本地图库",@"现在拍摄", nil];
-        //    sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
-        
-        [sheet showInView:self];
-                
+    self.deleteBtn.selected = !self.deleteBtn.selected;
+    if (self.deleteBtn.selected) {
+         [self.deleteBtn setBackgroundImage:[UIImage imageNamed:@"delete_white"] forState:UIControlStateSelected];
+    }else{
+         [self.deleteBtn setBackgroundImage:[UIImage imageNamed:@"delete_white"] forState:UIControlStateSelected];
+    }
+    if (_delegate && [_delegate respondsToSelector:@selector(sceneDeleteAction:)]) {
+          [self.delegate sceneDeleteAction:self];
     }
 }
 
--(void)unUseLongPressGesture
-{
-    if(self.lgPress != nil)
-    {
-        [self.lgPress removeTarget:self action:@selector(handleLongPress:)];
+//开关
+- (IBAction)powerBtn:(id)sender {
+    
+  self.powerBtn.selected = !self.powerBtn.selected;
+         if (self.powerBtn.selected) {
+             [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
+             [[SceneManager defaultManager] startScene:self.sceneID];
+             [SQLManager updateSceneStatus:1 sceneID:self.sceneID];//更新数据库
+         }{
+             [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
+             [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];
+             [SQLManager updateSceneStatus:0 sceneID:self.sceneID];//更新数据库
+          }
+
+}
+//定时
+- (IBAction)timingBtn:(id)sender {
+    
+    self.seleteSendPowBtn.selected = !self.seleteSendPowBtn.selected;
+    
+    if (self.seleteSendPowBtn.selected) {
+        
+        [self.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock2"] forState:UIControlStateSelected];
+    }else{
+        [self.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock1"] forState:UIControlStateNormal];
     }
 }
--(void)dealloc{
-    [self unUseLongPressGesture];
-}
+//- (void)setSceneInfo:(Scene *)info {
+//    self.SceneName.text = info.sceneName;
+//    self.sceneStatus = info.status;
+//    [self.imageView sd_setImageWithURL:[NSURL URLWithString: info.picName] placeholderImage:[UIImage imageNamed:@"PL"]];
+//    if (self.sceneStatus == 0) {
+//        [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
+//    }else if (self.sceneStatus == 1) {
+//        [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateNormal];
+//    }
+//}
 @end

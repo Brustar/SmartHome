@@ -14,8 +14,9 @@
 #import "PhotoGraphViewConteoller.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
+#import "IphoneSceneController.h"
 
-@interface IphoneSaveNewSceneController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,PhotoGraphViewConteollerDelegate>
+@interface IphoneSaveNewSceneController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,PhotoGraphViewConteollerDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *sceneName;//输入场景名的输入框
 @property (weak, nonatomic) IBOutlet UIButton *sceneImageBtn;//选择场景图片的button
 @property (nonatomic,strong) UIImage *selectSceneImg;
@@ -105,7 +106,10 @@
 //    [[DeviceInfo defaultManager] setEditingScene:NO];
     
     [[SceneManager defaultManager] addScene:scene withName:self.sceneName.text withImage:self.selectSceneImg];
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+    IphoneSceneController * iphoneSceneVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
+    [self.navigationController pushViewController:iphoneSceneVC animated:YES];
 }
 - (void)httpHandler:(id)responseObject tag:(int)tag
 {
@@ -113,15 +117,16 @@
         
         if ([responseObject[@"result"] intValue] == 0) {
             [MBProgressHUD showSuccess:@"添加成功"];
-            [self.navigationController popViewControllerAnimated:YES];
-            //[self.navigationController popToViewController:vc animated:YES];
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+            IphoneSceneController * iphoneSceneVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
+            [self.navigationController pushViewController:iphoneSceneVC animated:YES];
         }else {
             [MBProgressHUD showSuccess:@"添加失败"];
         }
     }
 }
 - (IBAction)sceneImageBtn:(id)sender {
+    
     UIAlertController * alerController = [UIAlertController alertControllerWithTitle:@"温馨提示选择场景图片" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
     
     [alerController addAction:[UIAlertAction actionWithTitle:@"现在就拍" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -216,5 +221,31 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated{
 
+    [super viewWillAppear:animated];
+    self.navigationController.delegate=self;
+    
+}
+
+- (void)navigationController:(UINavigationController*)navigationController willShowViewController:(UIViewController*)viewController animated:(BOOL)animated{
+       
+    UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+    IphoneSceneController * iphoneSceneVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
+    if([[viewController class]isSubclassOfClass:[iphoneSceneVC class]]) {
+        
+        ///执行刷新操作
+        [iphoneSceneVC setUpRoomView];
+        
+    }
+    
+    ///删除代理，防止该controller销毁后引起navigationController.delegate指向野指针造成崩溃
+    
+    if(![[viewController class]isSubclassOfClass:[self class]]) {
+        
+        self.navigationController.delegate=nil;
+        
+    }
+    
+}
 @end

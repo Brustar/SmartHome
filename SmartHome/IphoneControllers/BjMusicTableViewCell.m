@@ -75,18 +75,20 @@
         self.AddBjmusicBtn.selected = !self.AddBjmusicBtn.selected;
         if (self.AddBjmusicBtn.selected) {
             [self.AddBjmusicBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
+            [_scene setSceneID:[self.sceneid intValue]];
+            [_scene setRoomID:self.roomID];
+            [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+            [_scene setReadonly:NO];
+            
+            NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+            [_scene setDevices:devices];
+            
+            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+            
         }else{
             [self.AddBjmusicBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
         }
-        [_scene setSceneID:[self.sceneid intValue]];
-        [_scene setRoomID:self.roomID];
-        [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-        [_scene setReadonly:NO];
-        
-        NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-        [_scene setDevices:devices];
-        
-        [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+      
     }else if (sender == self.BjSlider){
         NSData *data=[[DeviceInfo defaultManager] changeVolume:self.BjSlider.value deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];

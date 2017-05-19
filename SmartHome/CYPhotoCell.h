@@ -10,12 +10,13 @@
 #import "UIImageView+WebCache.h"
 
 @class CYPhotoCell;
+
 @protocol CYPhotoCellDelegate <NSObject>
 
-@optional
+//@optional
 
 -(void)sceneDeleteAction:(CYPhotoCell *)cell;
-- (void)powerBtnAction:(UIButton *)sender sceneStatus:(int)status;
+-(void)powerBtnAction:(UIButton *)sender sceneStatus:(int)status;
 
 @end
 
@@ -27,21 +28,14 @@
 @property (weak, nonatomic) IBOutlet UIButton *powerBtn;
 @property (weak, nonatomic) IBOutlet UIButton *deleteBtn;
 @property (weak, nonatomic) IBOutlet UIButton *seleteSendPowBtn;
+@property (weak, nonatomic) IBOutlet UILabel *SceneName;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *PowerBtnCenterContraint;//定时按钮隐藏改变的约束
 
 @property (nonatomic,weak) id<CYPhotoCellDelegate> delegate;
-@property (weak, nonatomic) IBOutlet UILabel *sceneLabel;
 
 @property (nonatomic, assign) int sceneStatus;//场景状态
 @property (weak, nonatomic) IBOutlet UIImageView *subImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *icon;
-
-- (IBAction)powerBtnAction:(UIButton *)sender;
-
-- (void)setSceneInfo:(Scene *)info;
-
-
--(void)useLongPressGesture;
--(void)unUseLongPressGesture;
-
-
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *SceneNameTopConstraint;
+//- (void)setSceneInfo:(Scene *)info;
 @end

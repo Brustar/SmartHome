@@ -22,6 +22,7 @@
 @property (nonatomic,copy) NSString *roomname;
 @property (nonatomic,strong) NSMutableArray *eqinfoList;
 
+
 @end
 
 @implementation RoomModel
@@ -62,9 +63,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    _deviceArray = [NSMutableArray array];
     _bgmusicNameS = [[NSMutableArray alloc] init];
-//    _AllRooms = [SQLManager getAllRoomsInfo];
      _AllRooms = [[NSMutableArray alloc] init];
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
@@ -96,9 +95,7 @@
 #pragma mark - Http callback
 - (void)httpHandler:(id)responseObject tag:(int)tag
 {
-//            _AllRooms = [[NSMutableArray alloc] init];
     if(tag == 1) {
-//        [_deviceArray removeAllObjects];
         [self.AllRooms removeAllObjects];
         if ([responseObject[@"result"] intValue] == 0) {
             NSArray *roomList = responseObject[@"current_player_list"];
@@ -110,9 +107,7 @@
                         NSArray *equipmentList = room[@"eqinfoList"];
                         RoomModel *roomMODEL = [RoomModel new];
                         roomMODEL.roomname = rName;
-//                         [_AllRooms addObject:rName];
                         if ([equipmentList isKindOfClass:[NSArray class]]) {
-//
                             for (NSDictionary *device in equipmentList) {
                                 if ([device isKindOfClass:[NSDictionary class]]) {
                                     Device *devInfo = [[Device alloc] init];
@@ -121,7 +116,6 @@
                                     devInfo.name = device[@"eqname"];
                                     
                                     [roomMODEL.eqinfoList addObject:devInfo];
-//                                    [_deviceArray addObject:devInfo];
                                     
                                 }
                             }
@@ -275,22 +269,10 @@
     return self.AllRooms.count;
 
 }
-//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-//{
-//    RoomModel *model = self.AllRooms[section];
-//    
-//    //    Device *devInfo = model.eqinfoList[indexPath.row];
-//    
-//  return  model.roomname;
-//
-//}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
- 
-    
-//    return self.deviceArray.count;
     RoomModel *model = self.AllRooms[section];
-    
     return  model.eqinfoList.count;
 }
 
@@ -305,12 +287,13 @@
     cell.backgroundColor = [UIColor clearColor];
     [cell.textLabel setTextColor:[UIColor whiteColor]];
     RoomModel *model = self.AllRooms[indexPath.section];
-    
     Device *devInfo = model.eqinfoList[indexPath.row];
+    self.seleteSection = indexPath.section;
+    self.seleteRow = indexPath.row;
     cell.textLabel.text = devInfo.name;
     cell.tag = devInfo.eID;
     //cell的点击颜色
-    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(100, 0, self.view.bounds.size.width, 0)];
     view.backgroundColor = [UIColor colorWithRed:67/255.0 green:68/255.0 blue:69/255.0 alpha:1];
     
     cell.selectedBackgroundView = view;
@@ -322,35 +305,34 @@
 {
     
      UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
-//     Device *devInfo = _deviceArray[indexPath.row];
-    RoomModel *model = self.AllRooms[indexPath.section];
-    
-    Device *devInfo = model.eqinfoList[indexPath.row];
+     RoomModel *model = self.AllRooms[indexPath.section];
+     Device *devInfo = model.eqinfoList[indexPath.row];
      self.deviceid = [NSString stringWithFormat:@"%d",devInfo.eID];
+     self.seleteSection = indexPath.section;
+     self.seleteRow = indexPath.row;
       NSLog(@"%ld",cell.tag);
 
     
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(20, 0, self.view.bounds.size.width, 50)];
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];
     view.backgroundColor = [UIColor clearColor];
     view.userInteractionEnabled = YES;
-    UILabel * NameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, 50)];
+    UILabel * NameLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 100, 50)];
     NameLabel.textColor = [UIColor whiteColor];
-    
     RoomModel *model = self.AllRooms[section];
-    
-    //    Device *devInfo = model.eqinfoList[indexPath.row];
-    
     NameLabel.text =  model.roomname;
     [view addSubview:NameLabel];
-    UIView * view1 = [[UIView alloc] initWithFrame:CGRectMake(20, 49, self.view.bounds.size.width, 1)];
+    //线
+    UIView * view1 = [[UIView alloc] initWithFrame:CGRectMake(0, 49, self.view.bounds.size.width, 1)];
     view1.backgroundColor = [UIColor redColor];
     [view addSubview:view1];
-    UIButton * OpenBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width-150, 15, 30, 30)];
+    
+    UIButton *OpenBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    OpenBtn.frame = CGRectMake(self.view.bounds.size.width-150, 15, 30, 30);
     OpenBtn.backgroundColor = [UIColor clearColor];
-    OpenBtn.tag = 100+1;
+    OpenBtn.tag = section;
     [OpenBtn addTarget:self action:@selector(StopBtn:) forControlEvents:UIControlEventTouchUpInside];
     [OpenBtn setImage:[UIImage imageNamed:@"Video-close"] forState:UIControlStateNormal];
     
@@ -360,10 +342,10 @@
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView * footerView = [[UIView alloc] init];
-    footerView.frame = CGRectMake(20, 0, self.view.bounds.size.width, 10);
+    footerView.frame = CGRectMake(0, 0, self.view.bounds.size.width, 10);
     footerView.backgroundColor = [UIColor clearColor];
     UILabel * line = [[UILabel alloc] init];
-    line.frame = CGRectMake(20, 0, self.view.bounds.size.width, 0.5);
+    line.frame = CGRectMake(0, 0, self.view.bounds.size.width, 0.5);
     line.backgroundColor = [UIColor whiteColor];
     [footerView addSubview:line];
     
@@ -376,11 +358,16 @@
 
 -(void)StopBtn:(UIButton *)bbt
 {
-    //关指令
-    NSData *data=[[DeviceInfo defaultManager] close:self.deviceid];
-    SocketManager *sock=[SocketManager defaultManager];
-    [sock.socket writeData:data withTimeout:1 tag:1];
     
+    RoomModel *model = self.AllRooms[bbt.tag];
+    Device *devInfo = model.eqinfoList[self.seleteRow];
+    self.deviceid = [NSString stringWithFormat:@"%d",devInfo.eID];
+    for (int i = 0; i < model.eqinfoList.count; i ++) {
+        //关指令
+        NSData *data=[[DeviceInfo defaultManager] close:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {

@@ -311,10 +311,10 @@
                 
             }else if (info.connectState == offLine) {
                 [FirstBlockSelf setNetState:netState_notConnect];
+                FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
+                [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
                 NSLog(@"离线模式");
-               FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
-              [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
-                
+
             }
         }
         else if(status == AFNetworkReachabilityStatusReachableViaWiFi) //WIFI
@@ -334,28 +334,28 @@
                 
             }else if (info.connectState == offLine) {
                 [FirstBlockSelf setNetState:netState_notConnect];
-                 FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
-                 [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
+                FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
+                [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
                 NSLog(@"离线模式");
                 
                 
             }
         }else if(status == AFNetworkReachabilityStatusNotReachable){ //没有网络(断网)
             [FirstBlockSelf setNetState:netState_notConnect];
-             FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
-             [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
+            FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
+            [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
+            
             NSLog(@"离线模式");
             
         }else if (status == AFNetworkReachabilityStatusUnknown) { //未知网络
             [FirstBlockSelf setNetState:netState_notConnect];
             FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
-             [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
+            [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
             
         }
     }];
     
-    [_afNetworkReachabilityManager startMonitoring];//开启网络监视器；
-    
+     [_afNetworkReachabilityManager startMonitoring];//开启网络监视器；
 }
 -(void) chatConnect
 {
@@ -463,18 +463,11 @@
 //社交平台的弹出事件
 -(void)HeadDoTap:(UITapGestureRecognizer *)tap
 {
-
-    _baseTabbarController.tabbarPanel.hidden = YES;
+         _baseTabbarController.tabbarPanel.hidden = YES;
      if (self.socialView.hidden) {
         self.socialView.hidden = NO;
-//        _UserNameLabel.hidden = YES;
-//        _WelcomeLabel.hidden = YES;
-//         self.chatlabel.text = [NSString stringWithFormat:@"123:%d",_roomID++];
-     
      }else{
          self.socialView.hidden = YES;
-//        _UserNameLabel.hidden = NO;
-//        _WelcomeLabel.hidden = NO;
         _baseTabbarController.tabbarPanel.hidden = NO;
          self.chatlabel.text = @"456";
     }
@@ -552,6 +545,9 @@
 }
 
 - (void)leftBtnClicked:(UIButton *)btn {
+    
+    self.socialView.hidden = YES;
+    _baseTabbarController.tabbarPanel.hidden = NO;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     if (appDelegate.LeftSlideVC.closed)
@@ -607,8 +603,6 @@
 
 //正在播放的点击事件
 - (IBAction)playerBarBtn:(id)sender {
-
-    
     UIStoryboard * HomeStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
     NowMusicController * nowMusicController = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"NowMusicController"];
     [self.navigationController pushViewController:nowMusicController animated:YES];
@@ -617,6 +611,10 @@
 
 //点击未读消息的事件
 - (IBAction)UnreadButton:(id)sender {
+    
+    self.socialView.hidden = YES;
+    _baseTabbarController.tabbarPanel.hidden = NO;
+    
     [self setRCIM];
 }
 
@@ -686,7 +684,6 @@
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-
       self.socialView.hidden = YES;
     _baseTabbarController.tabbarPanel.hidden = NO;
 }
@@ -703,7 +700,7 @@
 #pragma mark - TCP recv delegate
 - (void)recv:(NSData *)data withTag:(long)tag
 {
-    [self updateInterfaceWithReachability];
+    
 }
 
 @end

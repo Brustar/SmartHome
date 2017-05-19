@@ -13,16 +13,20 @@
 #import "NSString+RegMatch.h"
 #import "MBProgressHUD+NJ.h"
 #import <math.h>
-#import "CKCircleView.h"
 #import "WeekdaysVC.h"
+#import "IphoneEditSceneController.h"
+#import "SmartHome-Swift.h"
 
-@interface IphoneNewAddSceneTimerVC ()<CKCircleViewDelegate,WeekdaysVCDelegate>
+@interface IphoneNewAddSceneTimerVC ()<WeekdaysVCDelegate,TenClockDelegate>
 @property (nonatomic,strong) Scene *scene;
 @property (nonatomic,strong) Schedule *schedule;
 @property (nonatomic,strong) NSMutableDictionary *weeks;
 @property (nonatomic,strong) UIButton * naviRightBtn;
-@property CKCircleView * dialView;
 @property (nonatomic,strong)WeekdaysVC * weekDaysVC;
+@property (weak, nonatomic) IBOutlet UIImageView *timingImage;
+@property (nonatomic,strong) NSArray * viewControllerArrs;
+@property (nonatomic,strong) NSDateFormatter  *dateFormatter;
+@property (weak, nonatomic) IBOutlet TenClock *clock;
 
 @end
 
@@ -40,18 +44,14 @@
 {
     if(!_scene)
     {
-        
         NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
         NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
         NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
-        
         _scene = [[Scene alloc] initWhithoutSchedule];
         if(plistDic)
         {
             [_scene setValuesForKeysWithDictionary:plistDic];
         }
-        
-        
     }
     return _scene;
 }
@@ -72,34 +72,16 @@
     self.schedule.endTime = self.endTimeLabel.text;
     self.RepetitionLable.text = @"永不";
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(iphoneSelectWeek:) name:@"SelectWeek" object:nil];
-    [self setCustomerSlider];
-}
--(void)setCustomerSlider
-{
-//    CGFloat width = self.view.frame.size.width;
     
-    self.dialView = [[CKCircleView alloc] initWithFrame:CGRectMake(0, 0, 265, 265)];
-    self.dialView.delegate = self;
-
-    self.dialView.center = CGPointMake(self.DrawView.center.x, self.DrawView.center.y);
-    //轨道路径颜色
-    self.dialView.arcColor = [UIColor colorWithRed:82/255.0 green:83/255.0 blue:85/255.0 alpha:0.8];
-    //圆盘背景色
-    self.dialView.backColor = [UIColor clearColor];
-    //开始拨号键颜色
-    self.dialView.dialColor = [UIColor clearColor];
-    self.dialView.dialColor2 = [UIColor clearColor];
-    self.dialView.arcRadius = 80;
-//    self.dialView.units = @"小时";
-    //最小值
-    self.dialView.minNum = 0;
-    //最大值
-    self.dialView.maxNum = 23;
-    //中间文字颜色
-    self.dialView.labelColor = [UIColor redColor];
-    self.dialView.labelFont = [UIFont systemFontOfSize:20.0];
-    [self.view addSubview: self.dialView];
-
+    NSDate *date = [NSDate date];
+    self.clock.startDate = date;
+    NSTimeInterval interval = 60 * 60 * 8;
+    self.clock.endDate = [NSDate dateWithTimeInterval:interval sinceDate:date];
+    [self.clock update];
+    self.clock.delegate = self;
+    
+    self.starTimeLabel.text = [self.dateFormatter stringFromDate:self.clock.startDate];
+    self.endTimeLabel.text = [self.dateFormatter stringFromDate:self.clock.endDate];
 }
 
 #pragma mark -- CKCircleViewDelegate
@@ -122,16 +104,39 @@
 }
 -(void)rightBtnClicked:(UIButton *)btn
 {
-    self.scene.schedules = @[self.schedule];
-    [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
-    
-    NSDictionary *dic = @{
-                          @"startDay":self.starTimeLabel.text,
-                          @"endDay":self.endTimeLabel.text,
-                          @"repeat":self.RepetitionLable.text,
-                          @"weekArray":_weekArray
-                          };
-    [NC postNotificationName:@"AddSceneOrDeviceTimerNotification" object:nil userInfo:dic];
+    _viewControllerArrs =self.navigationController.viewControllers;
+    NSInteger vcCount = _viewControllerArrs.count;
+    UIViewController * lastVC = _viewControllerArrs[vcCount -2];
+    UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+    IphoneEditSceneController * iphoneEditSceneVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneEditSceneController"];
+    if ([lastVC isKindOfClass:[iphoneEditSceneVC class]]) {
+        
+        [DeviceInfo defaultManager].isPhotoLibrary = NO;
+        //场景ID不变
+        NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
+        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+        Scene * scene = [[Scene alloc] init];
+        if (plistDic) {
+            [scene setValuesForKeysWithDictionary:plistDic];
+            
+            [[SceneManager defaultManager] editScene:scene];
+        }
+        
+    }else{
+        
+        self.scene.schedules = @[self.schedule];
+        [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
+        
+        NSDictionary *dic = @{
+                              @"startDay":self.starTimeLabel.text,
+                              @"endDay":self.endTimeLabel.text,
+                              @"repeat":self.RepetitionLable.text,
+                              @"weekArray":_weekArray
+                              };
+        [NC postNotificationName:@"AddSceneOrDeviceTimerNotification" object:nil userInfo:dic];
+    }
+  
     [self.navigationController popViewControllerAnimated:YES];
 
 }
@@ -139,24 +144,27 @@
     
     UIStoryboard * HomeStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
     if (_weekDaysVC == nil) {
-        self.DrawView.hidden = YES;
-        self.dialView.hidden = YES;
+        self.timingImage.hidden = YES;
+        self.TimerView.hidden = YES;
+        self.clock.hidden = YES;
         _weekDaysVC = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"WeekdaysVC"];
         _weekDaysVC.delegate = self;
         [self.view addSubview:_weekDaysVC.view];
         [self.view bringSubviewToFront:_weekDaysVC.view];
         
     }else {
-        self.DrawView.hidden = NO;
-        self.dialView.hidden = NO;
+        self.TimerView.hidden = NO;
+        self.timingImage.hidden = NO;
+        self.clock.hidden = NO;
         [_weekDaysVC.view removeFromSuperview];
         _weekDaysVC = nil;
     }
 }
 -(void)onWeekButtonClicked:(UIButton *)button
 {
-    self.DrawView.hidden = NO;
-    self.dialView.hidden = NO;
+    self.timingImage.hidden = NO;
+    self.TimerView.hidden = NO;
+    self.clock.hidden = NO;
     if (_weekDaysVC) {
         [_weekDaysVC.view removeFromSuperview];
         _weekDaysVC = nil;
@@ -252,20 +260,29 @@
     [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
 
 }
+#pragma mark -- TenClockDelegate
+-(void)timesChanged:(TenClock *)clock startDate:(NSDate *)startDate endDate:(NSDate *)endDate{
+    NSLog(@"startDate:%@--endDate:%@",startDate,endDate);
+}
 
+-(void)timesUpdated:(TenClock *)clock startDate:(NSDate *)startDate endDate:(NSDate *)endDate{
+    self.starTimeLabel.text = [self.dateFormatter stringFromDate:startDate];
+    self.endTimeLabel.text = [self.dateFormatter stringFromDate:endDate];
+}
+
+#pragma mark -- lazy load
+-(NSDateFormatter  *)dateFormatter{
+    if (!_dateFormatter) {
+        _dateFormatter = [[NSDateFormatter alloc] init];
+        // hh:mm a
+        [_dateFormatter setDateFormat:@"hh:mm a"];
+    }
+    return  _dateFormatter;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

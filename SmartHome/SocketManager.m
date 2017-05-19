@@ -66,7 +66,7 @@
         return;
     }
     
-    [udpSocket receiveWithTimeout:5000 tag:1]; //接收数据
+    [udpSocket receiveWithTimeout:5 tag:1]; //接收数据
 }
 
 -(void)initTcp:(NSString *)addr port:(int)port delegate:(id)delegate
@@ -211,6 +211,7 @@
 
 -(void)onUdpSocket:(AsyncUdpSocket *)sock didNotReceiveDataWithTag:(long)tag dueToError:(NSError *)error
 {
+    [self connectTcp];
     NSLog(@"didNotReceiveDataWithTag.");
 }
 
