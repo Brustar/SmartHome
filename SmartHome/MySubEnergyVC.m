@@ -33,30 +33,15 @@
 @property (weak, nonatomic) IBOutlet IphoneRoomView *roomView;
 @property (nonatomic,strong) NSMutableArray * enameArr;
 @property (nonatomic,strong) NSMutableArray * minute_timeArr;
-@property (nonatomic,strong) NSMutableArray * eidArr;
-@property (nonatomic,strong) NSMutableArray * historyArr;
+@property (nonatomic,strong) NSMutableArray * devicesData;
+
 @property(nonatomic,strong)UIButton *clickButton;
 @property(nonatomic,strong)UIButton *selectedButton;
 
 @end
 
 @implementation MySubEnergyVC
--(NSMutableArray *)historyArr
-{
-    if (!_historyArr) {
-        _historyArr = [NSMutableArray array];
-    }
 
-    return _historyArr;
-}
--(NSMutableArray *)eidArr
-{
-    if (!_eidArr) {
-        _eidArr = [NSMutableArray array];
-    }
-    
-    return _eidArr;
-}
 -(NSMutableArray *)enameArr
 {
     if (!_enameArr) {
@@ -77,36 +62,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setNaviBarTitle:@"智能账单"];
-    [self.monthBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-    [self.historyBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-//    [self.TVEnergy addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-//    [self.AireEnergy addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-     self.TimerView.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
-     self.deviceTitleLabel.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
-      DeviceInfo *device = [DeviceInfo defaultManager];
-    if ([device.db isEqualToString:SMART_DB]) {
-//        [self sendRequestToGetEenrgy];
-    }else {
-        NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"energylist" ofType:@"plist"]];
-        NSArray *arr = plistDict[@"energy_stat_list"];
-        for(NSDictionary *dic in arr)
-        {
-            NSDictionary *energy = @{@"eid":dic[@"eid"],@"ename":dic[@"ename"],@"minute_time":dic[@"minute_time"]};
-            [self.enameArr addObject:energy];
-            
-        }
-        [self.tableView reloadData];
-    }
-               UIView *view = [[UIView alloc] init];
-               [view setBackgroundColor:[UIColor clearColor]];
-                self.tableView.tableFooterView = view;
-                [self loadChartWithDates];//下面的曲线图
-                 [self setTime];
-                 self.tableView.allowsSelection = NO;
-                 [self setUpRoomView];
-        
+    [self sendRequestToGetEenrgy];
+    self.TimerView.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
+    self.deviceTitleLabel.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
+
+    UIView *view = [[UIView alloc] init];
+    [view setBackgroundColor:[UIColor clearColor]];
+    self.tableView.tableFooterView = view;
     
+    [self setTime];
+    self.tableView.allowsSelection = NO;
+    [self setUpRoomView];
 }
+
 -(void)setUpRoomView
 {
     NSMutableArray * arr =[NSMutableArray arrayWithObjects:@"空调",@"网络电视", nil];
@@ -114,23 +82,13 @@
     self.roomView.delegate = self;
   
     [self.roomView setSelectButton:0];
-    if ([arr count]>0) {
-        [self iphoneRoomView:self.roomView didSelectButton:0];
-    }
 }
 
 - (void)iphoneRoomView:(UIView *)view didSelectButton:(int)index
 {
     self.roomIndex = index;
-    if (index == 0) {
-        
-         [self sendRequestToGetEenrgy];
-        
-    }else {
-        
-        
-    }
     
+    [self loadChartWithDates:self.devicesData[index]];//下面的曲线图
 }
 
 -(void)setTime
@@ -161,19 +119,19 @@
 }
 #pragma mark - Setting up the chart
 
-- (void)loadChartWithDates {
+- (void)loadChartWithDates:(NSArray *)data {
+    NSMutableArray *chartData = [NSMutableArray new];
     
-//    NSMutableArray* chartData = [NSMutableArray arrayWithCapacity:7];
-//    for(int i=0;i<7;i++) {
-//        chartData[i] = [NSNumber numberWithFloat: (float)i / 30.0f + (float)(rand() % 100) / 100.0f];
-//    }
-    NSArray * chartData = @[@"0",@"50",@"100",@"150",@"200",@"250",@"300"];
-    
-    NSArray* months = @[@"01", @"05", @"10", @"15", @"20", @"25", @"30"];
-    
+    NSMutableArray *months = [NSMutableArray new];
+    for(NSDictionary *obj in data)
+    {
+        [chartData addObject:obj[@"energy"]];
+        NSString *day = [[obj[@"time"] description] substringFromIndex:8];
+        [months addObject:day];
+    }
     // Setting up the line chart
     _chartWithDates.verticalGridStep = 7;
-    _chartWithDates.horizontalGridStep = 6;
+    _chartWithDates.horizontalGridStep = 4;
     _chartWithDates.fillColor = nil;
     _chartWithDates.displayDataPoint = YES;
     _chartWithDates.dataPointColor = [UIColor whiteColor];
@@ -190,6 +148,7 @@
     };
     [_chartWithDates setChartData:chartData];//下面的曲线图
 }
+
 -(void)sendRequestToGetEenrgy
 {
     NSString *url = [NSString stringWithFormat:@"%@Cloud/energy_list.aspx",[IOManager httpAddr]];
@@ -202,59 +161,29 @@
         [http sendPost:url param:dic];
     }
 }
--(void)sendHistoryGetEenrgy
-{
-    NSString *url = [NSString stringWithFormat:@"%@Cloud/energy_list.aspx",[IOManager httpAddr]];
-    NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    if (authorToken) {
-        NSDictionary *dic = @{@"token":authorToken,@"optype":[NSNumber numberWithInteger:2]};
-        HttpManager *http = [HttpManager defaultManager];
-        http.delegate = self;
-        http.tag =2;
-        [http sendPost:url param:dic];
-    }
-}
+
 -(void)httpHandler:(id)responseObject tag:(int)tag
 {
     [self.enameArr removeAllObjects];
+    
     if(tag == 1)
     {
         if([responseObject[@"result"] intValue] == 0)
         {
             NSArray *message = responseObject[@"eq_energy_list"];
+            self.devicesData =[NSMutableArray new];
             if ([message isKindOfClass:[NSArray class]]) {
                 for(NSDictionary *dic in message)
                 {
                     NSDictionary *energy = @{@"eid":dic[@"eid"],@"ename":dic[@"ename"],@"today_energy":dic[@"today_energy"],@"month_energy":dic[@"month_energy"]};
-                     NSArray * listArr = dic[@"list"];
-                    if ([listArr isKindOfClass:[NSArray class]]) {
-                        
-                        NSDictionary * historYenergy = @{@"time":@"time",@"energy":@"energy"};
-                        
-                        [self.historyArr addObject:historYenergy];
-                    }
-                    
+                    NSArray * listArr = dic[@"list"];
                     [self.enameArr addObject:energy];
                     
+                    [self.devicesData addObject:listArr];
+                    [self iphoneRoomView:self.roomView didSelectButton:0];
                 }
             }
            
-            [self.tableView reloadData];
-        }else {
-            [MBProgressHUD showError:responseObject[@"Msg"]];
-        }
-    } if(tag == 2)
-    {
-        if([responseObject[@"result"] intValue] == 0)
-        {
-            NSArray *message = responseObject[@"energy_stat_list"];
-            for(NSDictionary *dic in message)
-            {
-                NSDictionary *energy = @{@"eid":dic[@"eid"],@"ename":dic[@"ename"],@"minute_time":dic[@"minute_time"]};
-                
-                [self.enameArr addObject:energy];
-                
-            }
             [self.tableView reloadData];
         }else {
             [MBProgressHUD showError:responseObject[@"Msg"]];
@@ -291,9 +220,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
     return self.enameArr.count;
-
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -301,23 +228,24 @@
      MySubEnergyCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         NSDictionary * dict = self.enameArr[indexPath.row];
         cell.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
-//    cell.backgroundColor = [UIColor clearColor];
+
         cell.deviceName.text =[NSString stringWithFormat:@"%@", dict[@"ename"]];
     if (dict[@"today_energy"]) {
-         cell.DayKWLabel.text = [NSString stringWithFormat:@"%.fwk.h",[dict[@"today_energy"] floatValue]];
+         cell.DayKWLabel.text = [NSString stringWithFormat:@"%.f",[dict[@"today_energy"] floatValue]];
     }else{
-         cell.DayKWLabel.text = [NSString stringWithFormat:@"%.fwk.h",[dict[@"minute_time"] floatValue]];
+         cell.DayKWLabel.text = [NSString stringWithFormat:@"%.f",[dict[@"minute_time"] floatValue]];
     }
     
     if (dict[@"month_energy"]) {
-         cell.MonthKWLabel.text = [NSString stringWithFormat:@"%.fwk.h",[dict[@"month_energy"] floatValue]];
+         cell.MonthKWLabel.text = [NSString stringWithFormat:@"%.f",[dict[@"month_energy"] floatValue]];
     }else{
-        cell.MonthKWLabel.text = @"0wk.h";
+        cell.MonthKWLabel.text = @"0";
     }
     
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -328,18 +256,7 @@
     VC.titleName = dict[@"ename"];
     [self.navigationController pushViewController:VC animated:YES];
 }
--(void)save:(UIButton *)sender
-{
-    if (self.clickButton != sender) {
-       [self sendRequestToGetEenrgy];
-    }
-    if (sender.selected == NO) {
-        sender.selected = YES;
-       [self sendHistoryGetEenrgy];
-        [self changeClickButton:sender];
-    }
-      self.clickButton = sender;
-}
+
 -(void)changeClickButton:(UIButton *)sender{
     
     self.selectedButton.selected = NO;
