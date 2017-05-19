@@ -411,15 +411,11 @@ static NSString * const CYPhotoId = @"photo";
     }else{
         CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
          cell.delegate = self;
-<<<<<<< HEAD
+
         Scene *scene = self.scenes[indexPath.row];
        
         cell.sceneID = scene.sceneID;
-=======
-         self.scene = self.scenes[indexPath.row];
-//         [cell setSceneInfo:self.scene];
-        cell.sceneID = self.scene.sceneID;
->>>>>>> df481409b298cba50a5762d5ca93abad5d8307a5
+
         if (self.scenes.count == 0) {
             [MBProgressHUD showSuccess:@"暂时没有全屋场景"];
         }
@@ -447,13 +443,9 @@ static NSString * const CYPhotoId = @"photo";
         [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];
         cell.deleteBtn.hidden = NO;
         cell.powerBtn.hidden = NO;
-<<<<<<< HEAD
 
-=======
-//        cell.seleteSendPowBtn.hidden = NO;
         [cell.powerBtn addTarget:self action:@selector(powerBtn:) forControlEvents:UIControlEventTouchUpInside];
-        
->>>>>>> df481409b298cba50a5762d5ca93abad5d8307a5
+
         return cell;
        
     }
