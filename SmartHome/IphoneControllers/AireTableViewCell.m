@@ -76,8 +76,8 @@
        
     }else if (sender == self.AireSlider){
         
-        self.temperatureLabel.text = [NSString stringWithFormat:@"%ld°C", lroundf(self.AireSlider.value)];
-        NSData *data=[[DeviceInfo defaultManager] toogle:self.AireSlider.value  deviceID:self.deviceid];
+        self.temperatureLabel.text = [NSString stringWithFormat:@"%ld°C", lroundf(self.AireSlider.value)];        
+        NSData *data=[[DeviceInfo defaultManager] changeTemperature:0x6A deviceID:self.deviceid value:lroundf(self.AireSlider.value)];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
         

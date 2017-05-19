@@ -60,8 +60,6 @@
 		0F6423501DE57CA1003379FC /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2D36721D11555100C46DE5 /* libavcodec.a */; };
 		0F6423511DE57CA1003379FC /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2D366C1D11555100C46DE5 /* libavdevice.a */; };
 		0F6423521DE57CA1003379FC /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2D366D1D11555100C46DE5 /* libavfilter.a */; };
-		0F6AB86F1D782D9D0041E39C /* SunCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6AB86C1D782D9D0041E39C /* SunCount.m */; };
-		0F6AB8701D782D9D0041E39C /* SunString.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6AB86E1D782D9D0041E39C /* SunString.m */; };
 		0F6ADFE01E7136B500BFF67F /* RCDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6ADFDF1E7136B500BFF67F /* RCDataManager.m */; };
 		0F6ADFE31E7136C500BFF67F /* ConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6ADFE21E7136C500BFF67F /* ConversationViewController.m */; };
 		0F7426B71EBAC7A000D686B8 /* HTCircularSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7426B61EBAC7A000D686B8 /* HTCircularSlider.m */; };
@@ -119,7 +117,6 @@
 		0FC0FFDD1CF57E58000F71D5 /* TouchImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC0FFDC1CF57E58000F71D5 /* TouchImage.m */; };
 		0FC119771D6FE5E0001DA19A /* Screen.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC119761D6FE5E0001DA19A /* Screen.m */; };
 		0FC1197A1D6FE61C001DA19A /* Projector.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC119791D6FE61C001DA19A /* Projector.m */; };
-		0FC3DE851D236CFF00A03482 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC3DE841D236CFF00A03482 /* LoginController.m */; };
 		0FC41BAF1D6DA3DD000D4451 /* VoiceOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC41BAE1D6DA3DD000D4451 /* VoiceOrderController.m */; };
 		0FC5CC6C1D93CB9600839D8F /* WinOpener.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC5CC6B1D93CB9600839D8F /* WinOpener.m */; };
 		0FC7FDC11CED6CC700F91BDF /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC7FDC01CED6CC700F91BDF /* libsqlite3.tbd */; };
@@ -629,10 +626,6 @@
 		0F6423B81DE57E26003379FC /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
 		0F6423BA1DE57E26003379FC /* swscale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = swscale.h; sourceTree = "<group>"; };
 		0F6423BB1DE57E26003379FC /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
-		0F6AB86B1D782D9D0041E39C /* SunCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SunCount.h; sourceTree = "<group>"; };
-		0F6AB86C1D782D9D0041E39C /* SunCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SunCount.m; sourceTree = "<group>"; };
-		0F6AB86D1D782D9D0041E39C /* SunString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SunString.h; sourceTree = "<group>"; };
-		0F6AB86E1D782D9D0041E39C /* SunString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SunString.m; sourceTree = "<group>"; };
 		0F6ADFDE1E7136B500BFF67F /* RCDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDataManager.h; sourceTree = "<group>"; };
 		0F6ADFDF1E7136B500BFF67F /* RCDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDataManager.m; sourceTree = "<group>"; };
 		0F6ADFE11E7136C500BFF67F /* ConversationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationViewController.h; sourceTree = "<group>"; };
@@ -747,8 +740,6 @@
 		0FC119761D6FE5E0001DA19A /* Screen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Screen.m; sourceTree = "<group>"; };
 		0FC119781D6FE61C001DA19A /* Projector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Projector.h; sourceTree = "<group>"; };
 		0FC119791D6FE61C001DA19A /* Projector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Projector.m; sourceTree = "<group>"; };
-		0FC3DE831D236CFF00A03482 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
-		0FC3DE841D236CFF00A03482 /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
 		0FC41BAD1D6DA3DD000D4451 /* VoiceOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceOrderController.h; sourceTree = "<group>"; };
 		0FC41BAE1D6DA3DD000D4451 /* VoiceOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceOrderController.m; sourceTree = "<group>"; };
 		0FC5CC6A1D93CB9600839D8F /* WinOpener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WinOpener.h; sourceTree = "<group>"; };
@@ -1464,8 +1455,6 @@
 				0FF7B0B51D1380BF003C2D52 /* AirController.m */,
 				0FCAA40A1D1945BB00C1E58C /* BgMusicController.h */,
 				0FCAA40B1D1945BB00C1E58C /* BgMusicController.m */,
-				0FC3DE831D236CFF00A03482 /* LoginController.h */,
-				0FC3DE841D236CFF00A03482 /* LoginController.m */,
 				F65DB33D1D2B5AB2002A815C /* RegisterPhoneNumController.h */,
 				F65DB33E1D2B5AB2002A815C /* RegisterPhoneNumController.m */,
 				F65DB33B1D2B5AB2002A815C /* RegisterDetailController.h */,
@@ -1897,17 +1886,6 @@
 			path = libswscale;
 			sourceTree = "<group>";
 		};
-		0F6AB86A1D782D9D0041E39C /* Astronomy */ = {
-			isa = PBXGroup;
-			children = (
-				0F6AB86B1D782D9D0041E39C /* SunCount.h */,
-				0F6AB86C1D782D9D0041E39C /* SunCount.m */,
-				0F6AB86D1D782D9D0041E39C /* SunString.h */,
-				0F6AB86E1D782D9D0041E39C /* SunString.m */,
-			);
-			path = Astronomy;
-			sourceTree = SOURCE_ROOT;
-		};
 		0F6ADFD71E71329400BFF67F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -1919,7 +1897,6 @@
 				F63AE02E1D11540F00BE17DC /* PrettyRuler */,
 				0FAF98971CE40F27009BDBB5 /* QRCodeReader */,
 				0FAF74AE1CEEA16700432713 /* HRColorPicker */,
-				0F6AB86A1D782D9D0041E39C /* Astronomy */,
 				0F6423421DE57C83003379FC /* FFMpegDecoder */,
 				0FD3DEA61D3F181000AF7765 /* SCWave */,
 			);
@@ -3324,7 +3301,6 @@
 				F618963B1D87B08300DBE6CD /* ProjectController.m in Sources */,
 				F6FD00A21DDDD470009ABA64 /* TouchSubViewController.m in Sources */,
 				0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */,
-				0F6AB8701D782D9D0041E39C /* SunString.m in Sources */,
 				2E01840B1ECDE77C00E3705F /* CoreAnimation.swift in Sources */,
 				CDEE5EA11EC2A84800A5779D /* LaunchingViewController.m in Sources */,
 				2E5E5FEC1DE22AC8006F0C8F /* LightCell.m in Sources */,
@@ -3504,7 +3480,6 @@
 				0FDB34441E79269500DA53BB /* LayerUtil.m in Sources */,
 				F62CFA4A1DAC952F006410F7 /* IphoneRoomListController.m in Sources */,
 				F67F1F741D3C6AA200F2B7E5 /* SystemCell.m in Sources */,
-				0FC3DE851D236CFF00A03482 /* LoginController.m in Sources */,
 				F66596E31D3F25810082716A /* SceneCell.m in Sources */,
 				F6457C451DD5523C00CA3A72 /* IphoneFamilyViewController.m in Sources */,
 				F6423C221D9A4B7400AAB3CE /* DeviceOfFixTimerViewController.m in Sources */,
@@ -3518,7 +3493,6 @@
 				2E6CEDBF1DE5DE8B000979BE /* DetailMSGViewController.m in Sources */,
 				2EF75C7C1EB2CAE00055147D /* ShortcutKeyCell.m in Sources */,
 				0FB42E231CF6F9E8007DE64F /* SocketManager.m in Sources */,
-				0F6AB86F1D782D9D0041E39C /* SunCount.m in Sources */,
 				2E192CA71EBB2D3F00458541 /* CKCircleView.m in Sources */,
 				0FCFB3861CF2912700B37DD3 /* TV.m in Sources */,
 				2E12CC101E7F5E3000C7D006 /* CYLineLayout.m in Sources */,

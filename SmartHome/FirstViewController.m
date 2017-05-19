@@ -367,6 +367,7 @@
     [[RCIM sharedRCIM] connectWithToken:token success:^(NSString *userId) {
         NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
         [RCIM sharedRCIM].receiveMessageDelegate=self;
+        [[RCIMClient sharedRCIMClient] setDeviceToken:[[DeviceInfo defaultManager] pushToken]];
     } error:nil tokenIncorrect:nil];
 }
 

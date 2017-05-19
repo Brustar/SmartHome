@@ -49,6 +49,8 @@
              [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];
              [SQLManager updateSceneStatus:0 sceneID:self.sceneID];//更新数据库
           }
+    
+    NSLog(@"power");
 
 }
 //定时

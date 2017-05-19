@@ -15,7 +15,7 @@
 #import "QRCodeReaderViewController.h"
 #import "CryptoManager.h"
 #import "RegisterPhoneNumController.h"
-#import "SunCount.h"
+//#import "SunCount.h"
 #import <CoreLocation/CoreLocation.h>
 #import "PackManager.h"
 #import "IphoneTabBarViewController.h"
@@ -288,10 +288,10 @@
 - (void)locationManager:(CLLocationManager *)manager
     didUpdateToLocation:(CLLocation *)newLocation
            fromLocation:(CLLocation *)oldLocation{
-    [SunCount sunrisetWithLongitude:newLocation.coordinate.longitude andLatitude:newLocation.coordinate.latitude
+    /*[SunCount sunrisetWithLongitude:newLocation.coordinate.longitude andLatitude:newLocation.coordinate.latitude
                         andResponse:^(SunString *str){
                             NSLog(@"%@,%@,%@,%@",str.dayspring, str.sunrise,str.sunset,str.dusk);
                             self.antronomicalTimes = @[str.dayspring,str.sunrise,str.sunset,str.dusk];
-                        }];
+                        }];*/
 }
 @end
