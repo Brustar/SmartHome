@@ -409,6 +409,7 @@
     
     NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
     NSString *URL = [NSString stringWithFormat:@"%@Cloud/scene_edit.aspx",[IOManager httpAddr]];
+    //int x = arc4random() % 100;
     [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName imgData:imgData imgFileName:[NSString stringWithFormat:@"scene_%d.png",newScene.sceneID] completion:^(id responseObject) {
         
         NSLog(@"scene_edit --- responseObject: %@", responseObject);
@@ -417,6 +418,7 @@
         NSString *msg = [responseObject objectForKey:@"msg"];
         
         if(result.integerValue == 0) { //成功
+            
             [SQLManager updateScenePic:[NSString stringWithFormat:@"http://115.28.151.85:8082/UploadFiles/images/scene/scene_%d.png",newScene.sceneID] sceneID:newScene.sceneID];
             [MBProgressHUD showSuccess:@"保存成功"];
         }else { //失败

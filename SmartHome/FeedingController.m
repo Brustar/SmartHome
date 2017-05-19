@@ -34,6 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
+    self.deviceid = [SQLManager singleDeviceWithCatalogID:feeding byRoom:self.roomID];
     NSArray *menus = [SQLManager singleProductByRoom:self.roomID];
     [self initMenuContainer:self.menuContainer andArray:menus andID:self.deviceid];
     [self naviToDevice];
