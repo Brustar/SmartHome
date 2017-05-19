@@ -190,7 +190,7 @@
 
 - (IBAction)tryBtnClicked:(id)sender {
     
-    AVPlayer *player = [[AVPlayer alloc] initWithURL:[[NSBundle mainBundle] URLForResource:@"demo.mov" withExtension:nil]];
+    AVPlayer *player = [[AVPlayer alloc] initWithURL:[[NSBundle mainBundle] URLForResource:@"demo.mp4" withExtension:nil]];
     
     _avPlayerVC = [[AVPlayerViewController alloc] init];
     _avPlayerVC.player = player;
