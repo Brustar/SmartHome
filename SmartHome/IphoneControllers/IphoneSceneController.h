@@ -14,7 +14,7 @@
 @interface IphoneSceneController : CustomViewController<NowMusicControllerDelegate>
 
 @property (nonatomic,strong) NSString * shortcutName;
-@property (nonatomic,strong) Scene *scene;
+
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, readonly) UIButton *naviRightBtn;
 @property (nonatomic, readonly) UIButton *naviLeftBtn;
