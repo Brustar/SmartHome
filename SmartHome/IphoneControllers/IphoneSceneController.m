@@ -415,6 +415,7 @@ static NSString * const CYPhotoId = @"photo";
         Scene *scene = self.scenes[indexPath.row];
        
         cell.sceneID = scene.sceneID;
+        cell.sceneStatus = scene.status;
 
         if (self.scenes.count == 0) {
             [MBProgressHUD showSuccess:@"暂时没有全屋场景"];
@@ -443,14 +444,13 @@ static NSString * const CYPhotoId = @"photo";
         [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];
         cell.deleteBtn.hidden = NO;
         cell.powerBtn.hidden = NO;
-
 //        cell.seleteSendPowBtn.hidden = NO;
 //        [cell.powerBtn addTarget:self action:@selector(powerBtn:) forControlEvents:UIControlEventTouchUpInside];
-//        if (self.scene.status == 0) {
-//            [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
-//        }else if (self.scene.status == 1) {
-//            [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateNormal];
-//        }
+        if (scene.status == 0) {
+            [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
+        }else if (scene.status == 1) {
+            [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateNormal];
+        }
 
         return cell;
        
@@ -540,29 +540,12 @@ static NSString * const CYPhotoId = @"photo";
 {
     self.selectSceneImg = [UIImage imageNamed:imgName];
     [DeviceInfo defaultManager].isPhotoLibrary = NO;
-    
     [self.currentCell.imageView setImage:self.selectSceneImg];
-    //场景ID不变
-//    self.sceneID = self.selectedSId;
-//    NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
-//    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
-//    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
-//    
-//    Scene *scene = [[Scene alloc] init];
-//    if (plistDic) {
-//        [scene setValuesForKeysWithDictionary:plistDic];
-//    
-//        [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
-//    }
-    
     Scene *scene = [[Scene alloc] initWhithoutSchedule];
     scene.sceneID = self.currentCell.sceneID;
     scene.roomID = self.roomID;
     [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
-    
     [self.currentCell.imageView setImage:self.selectSceneImg];
-    
-    
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {

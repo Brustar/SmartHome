@@ -215,6 +215,7 @@
     [[SceneManager defaultManager] startScene:scene.sceneID];
     IphoneEditSceneController *vc = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneEditSceneController"];
     vc.sceneID = scene.sceneID;
+    vc.roomID = (int)scene.roomID;
     [self.navigationController pushViewController:vc animated:YES];
     
     /*UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
@@ -508,7 +509,7 @@
     if (indexPath.section == 0) { //灯光： 1:开关灯cell高度50;   2,  3:调光灯，调色灯cell高度100
         Device *device = [SQLManager getDeviceWithDeviceID:[_lightArray[indexPath.row] intValue]];
         if (device.hTypeId == 1) {
-            return 70;
+            return 100;
         }else {
             return 100;
         }
