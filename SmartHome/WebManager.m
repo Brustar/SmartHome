@@ -126,10 +126,9 @@
         return NO;
     }
     
-    if ([request.URL.scheme hasPrefix:@"wxpay"]) {   //微信支付指令
-        //[[WeChatPayManager sharedInstance] weixinPayWithOrderID:198];
+    if ([request.URL.absoluteString hasPrefix:@"wxpay"]) {   //微信支付指令
         
-        NSString *str = request.URL.scheme;
+        NSString *str = request.URL.absoluteString;
         if (str.length >0) {
             NSArray *payStringArray = [str componentsSeparatedByString:@":"];
             NSString *orderID = nil;
