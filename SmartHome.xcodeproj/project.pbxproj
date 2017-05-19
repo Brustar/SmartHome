@@ -70,10 +70,6 @@
 		0F8D76D01D9A1B9700DDD063 /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8D76CF1D9A1B9700DDD063 /* Schedule.m */; };
 		0F91AA171CDC798700094C25 /* PrintObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F91AA161CDC798700094C25 /* PrintObject.m */; };
 		0F9232E11EB85CE3008B1F37 /* AirMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F9232E01EB85CE3008B1F37 /* AirMenuCell.xib */; };
-		0F96A1641D17F37C00E1594F /* RulerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F96A15D1D17F37C00E1594F /* RulerItem.m */; };
-		0F96A1651D17F37C00E1594F /* RulerItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F96A15F1D17F37C00E1594F /* RulerItemModel.m */; };
-		0F96A1661D17F37C00E1594F /* RulerLeftTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F96A1611D17F37C00E1594F /* RulerLeftTagView.m */; };
-		0F96A1671D17F37C00E1594F /* RulerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F96A1631D17F37C00E1594F /* RulerView.m */; };
 		0F9EA72D1DDB026C00223ED8 /* NSString+RegMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9EA72C1DDB026C00223ED8 /* NSString+RegMatch.m */; };
 		0FA0FD661D057C430041CE96 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA0FD651D057C430041CE96 /* AddressBook.framework */; };
 		0FA1E09E1D533BFA001CA819 /* PluginCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA1E09D1D533BFA001CA819 /* PluginCell.m */; };
@@ -136,8 +132,6 @@
 		0FD3DEAD1D3F186800AF7765 /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD3DEAC1D3F186800AF7765 /* Globals.m */; };
 		0FDB34441E79269500DA53BB /* LayerUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDB34431E79269500DA53BB /* LayerUtil.m */; };
 		0FE78BB61DCFB091009B4767 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FE78BB51DCFB091009B4767 /* Images.xcassets */; };
-		0FEE12761D20C53400811947 /* TXHRulerScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEE12721D20C53400811947 /* TXHRulerScrollView.m */; };
-		0FEE12771D20C53400811947 /* TXHRrettyRuler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEE12741D20C53400811947 /* TXHRrettyRuler.m */; };
 		0FF410DA1CDAE67100C7F4A1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410D91CDAE67100C7F4A1 /* CoreLocation.framework */; };
 		0FF410DC1CDAF76300C7F4A1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410DB1CDAF76300C7F4A1 /* CoreBluetooth.framework */; };
 		0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7B0B51D1380BF003C2D52 /* AirController.m */; };
@@ -346,10 +340,8 @@
 		F625A6181D4C8EF700B696E5 /* ProfileListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F625A6171D4C8EF700B696E5 /* ProfileListController.m */; };
 		F625A61B1D4C99EC00B696E5 /* RoomListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F625A61A1D4C99EC00B696E5 /* RoomListController.m */; };
 		F6280D4A1D961C62009108ED /* IphoneAddTVChannelController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6280D491D961C62009108ED /* IphoneAddTVChannelController.m */; };
-		F6280D4D1D9651CE009108ED /* IphoneFMController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6280D4C1D9651CE009108ED /* IphoneFMController.m */; };
 		F6280D531D966218009108ED /* IphoneAddFmController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6280D521D966218009108ED /* IphoneAddFmController.m */; };
 		F62CD87A1D94BE99001C66CE /* IphoneTVController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CD8791D94BE99001C66CE /* IphoneTVController.m */; };
-		F62CD87D1D950453001C66CE /* IphoneAirController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CD87C1D950453001C66CE /* IphoneAirController.m */; };
 		F62CFA411DAC699D006410F7 /* IphoneTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CFA401DAC699D006410F7 /* IphoneTypeView.m */; };
 		F62CFA441DAC90DD006410F7 /* IphoneSaveNewSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CFA431DAC90DD006410F7 /* IphoneSaveNewSceneController.m */; };
 		F62CFA471DAC92F3006410F7 /* IphoneRealSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CFA461DAC92F3006410F7 /* IphoneRealSceneController.m */; };
@@ -645,14 +637,6 @@
 		0F91AA151CDC798700094C25 /* PrintObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintObject.h; sourceTree = "<group>"; };
 		0F91AA161CDC798700094C25 /* PrintObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintObject.m; sourceTree = "<group>"; };
 		0F9232E01EB85CE3008B1F37 /* AirMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AirMenuCell.xib; sourceTree = "<group>"; };
-		0F96A15C1D17F37C00E1594F /* RulerItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RulerItem.h; path = PrettyRuler/RulerItem.h; sourceTree = SOURCE_ROOT; };
-		0F96A15D1D17F37C00E1594F /* RulerItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RulerItem.m; path = PrettyRuler/RulerItem.m; sourceTree = SOURCE_ROOT; };
-		0F96A15E1D17F37C00E1594F /* RulerItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RulerItemModel.h; path = PrettyRuler/RulerItemModel.h; sourceTree = SOURCE_ROOT; };
-		0F96A15F1D17F37C00E1594F /* RulerItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RulerItemModel.m; path = PrettyRuler/RulerItemModel.m; sourceTree = SOURCE_ROOT; };
-		0F96A1601D17F37C00E1594F /* RulerLeftTagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RulerLeftTagView.h; path = PrettyRuler/RulerLeftTagView.h; sourceTree = SOURCE_ROOT; };
-		0F96A1611D17F37C00E1594F /* RulerLeftTagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RulerLeftTagView.m; path = PrettyRuler/RulerLeftTagView.m; sourceTree = SOURCE_ROOT; };
-		0F96A1621D17F37C00E1594F /* RulerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RulerView.h; path = PrettyRuler/RulerView.h; sourceTree = SOURCE_ROOT; };
-		0F96A1631D17F37C00E1594F /* RulerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RulerView.m; path = PrettyRuler/RulerView.m; sourceTree = SOURCE_ROOT; };
 		0F9ADF711CE2DC020052F3BC /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		0F9EA72B1DDB026C00223ED8 /* NSString+RegMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+RegMatch.h"; sourceTree = "<group>"; };
 		0F9EA72C1DDB026C00223ED8 /* NSString+RegMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+RegMatch.m"; sourceTree = "<group>"; };
@@ -777,10 +761,6 @@
 		0FDB34421E79269500DA53BB /* LayerUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerUtil.h; sourceTree = "<group>"; };
 		0FDB34431E79269500DA53BB /* LayerUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayerUtil.m; sourceTree = "<group>"; };
 		0FE78BB51DCFB091009B4767 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		0FEE12721D20C53400811947 /* TXHRulerScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TXHRulerScrollView.m; path = PrettyRuler/TXHRulerScrollView.m; sourceTree = SOURCE_ROOT; };
-		0FEE12731D20C53400811947 /* TXHRulerScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TXHRulerScrollView.h; path = PrettyRuler/TXHRulerScrollView.h; sourceTree = SOURCE_ROOT; };
-		0FEE12741D20C53400811947 /* TXHRrettyRuler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TXHRrettyRuler.m; path = PrettyRuler/TXHRrettyRuler.m; sourceTree = SOURCE_ROOT; };
-		0FEE12751D20C53400811947 /* TXHRrettyRuler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TXHRrettyRuler.h; path = PrettyRuler/TXHRrettyRuler.h; sourceTree = SOURCE_ROOT; };
 		0FF410D91CDAE67100C7F4A1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0FF410DB1CDAF76300C7F4A1 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		0FF7B0B41D1380BF003C2D52 /* AirController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirController.h; sourceTree = "<group>"; };
@@ -1117,14 +1097,10 @@
 		F625A61A1D4C99EC00B696E5 /* RoomListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomListController.m; sourceTree = "<group>"; };
 		F6280D481D961C62009108ED /* IphoneAddTVChannelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneAddTVChannelController.h; sourceTree = "<group>"; };
 		F6280D491D961C62009108ED /* IphoneAddTVChannelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneAddTVChannelController.m; sourceTree = "<group>"; };
-		F6280D4B1D9651CE009108ED /* IphoneFMController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneFMController.h; sourceTree = "<group>"; };
-		F6280D4C1D9651CE009108ED /* IphoneFMController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneFMController.m; sourceTree = "<group>"; };
 		F6280D511D966218009108ED /* IphoneAddFmController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneAddFmController.h; sourceTree = "<group>"; };
 		F6280D521D966218009108ED /* IphoneAddFmController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneAddFmController.m; sourceTree = "<group>"; };
 		F62CD8781D94BE99001C66CE /* IphoneTVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneTVController.h; sourceTree = "<group>"; };
 		F62CD8791D94BE99001C66CE /* IphoneTVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneTVController.m; sourceTree = "<group>"; };
-		F62CD87B1D950453001C66CE /* IphoneAirController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneAirController.h; sourceTree = "<group>"; };
-		F62CD87C1D950453001C66CE /* IphoneAirController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneAirController.m; sourceTree = "<group>"; };
 		F62CFA3F1DAC699D006410F7 /* IphoneTypeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneTypeView.h; sourceTree = "<group>"; };
 		F62CFA401DAC699D006410F7 /* IphoneTypeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneTypeView.m; sourceTree = "<group>"; };
 		F62CFA421DAC90DD006410F7 /* IphoneSaveNewSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneSaveNewSceneController.h; sourceTree = "<group>"; };
@@ -1892,7 +1868,6 @@
 				0F6ADFDB1E71349500BFF67F /* IM */,
 				0FB205E41CDC302E00B5E87E /* public */,
 				0F01D53E1CDC6C4B00DAC267 /* entity */,
-				F63AE02E1D11540F00BE17DC /* PrettyRuler */,
 				0FAF98971CE40F27009BDBB5 /* QRCodeReader */,
 				0FAF74AE1CEEA16700432713 /* HRColorPicker */,
 				0F6423421DE57C83003379FC /* FFMpegDecoder */,
@@ -2591,26 +2566,6 @@
 			name = CustomNavigationBar;
 			sourceTree = "<group>";
 		};
-		F63AE02E1D11540F00BE17DC /* PrettyRuler */ = {
-			isa = PBXGroup;
-			children = (
-				0FEE12721D20C53400811947 /* TXHRulerScrollView.m */,
-				0FEE12731D20C53400811947 /* TXHRulerScrollView.h */,
-				0FEE12741D20C53400811947 /* TXHRrettyRuler.m */,
-				0FEE12751D20C53400811947 /* TXHRrettyRuler.h */,
-				0F96A15C1D17F37C00E1594F /* RulerItem.h */,
-				0F96A15D1D17F37C00E1594F /* RulerItem.m */,
-				0F96A15E1D17F37C00E1594F /* RulerItemModel.h */,
-				0F96A15F1D17F37C00E1594F /* RulerItemModel.m */,
-				0F96A1601D17F37C00E1594F /* RulerLeftTagView.h */,
-				0F96A1611D17F37C00E1594F /* RulerLeftTagView.m */,
-				0F96A1621D17F37C00E1594F /* RulerView.h */,
-				0F96A1631D17F37C00E1594F /* RulerView.m */,
-			);
-			name = PrettyRuler;
-			path = PrettyRulerClass;
-			sourceTree = "<group>";
-		};
 		F64EF7F81D8FB710003C1C48 /* IphoneControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -2636,12 +2591,8 @@
 				F62CD8791D94BE99001C66CE /* IphoneTVController.m */,
 				F6280D481D961C62009108ED /* IphoneAddTVChannelController.h */,
 				F6280D491D961C62009108ED /* IphoneAddTVChannelController.m */,
-				F6280D4B1D9651CE009108ED /* IphoneFMController.h */,
-				F6280D4C1D9651CE009108ED /* IphoneFMController.m */,
 				F6280D511D966218009108ED /* IphoneAddFmController.h */,
 				F6280D521D966218009108ED /* IphoneAddFmController.m */,
-				F62CD87B1D950453001C66CE /* IphoneAirController.h */,
-				F62CD87C1D950453001C66CE /* IphoneAirController.m */,
 				F659110A1D967383002CFBB7 /* IphoneNetTvController.h */,
 				F659110B1D967383002CFBB7 /* IphoneNetTvController.m */,
 				F663CA5D1D98A733001F87F3 /* IphoneDVDController.h */,
@@ -3274,7 +3225,6 @@
 				0F7426C21EBB362F00D686B8 /* WettingController.m in Sources */,
 				F62CFA471DAC92F3006410F7 /* IphoneRealSceneController.m in Sources */,
 				0FAF98A31CE40F3C009BDBB5 /* QRCameraSwitchButton.m in Sources */,
-				F6280D4D1D9651CE009108ED /* IphoneFMController.m in Sources */,
 				0FD3DEAA1D3F183D00AF7765 /* SCWaveAnimationView.m in Sources */,
 				CDFB9DF51E64125500BFECCE /* DeviceTimerCell.m in Sources */,
 				F651640D1D3766C900A6F5FA /* MyEnergyViewController.m in Sources */,
@@ -3284,7 +3234,6 @@
 				CD4F12471EB4400A00E0B301 /* DeliveryAddressCell.m in Sources */,
 				2EDC0E901DEC072700F95BE0 /* IPhoneRoom.m in Sources */,
 				0F49CB821E7A21FF00D46ECC /* ORBSwitch.m in Sources */,
-				0FEE12761D20C53400811947 /* TXHRulerScrollView.m in Sources */,
 				F659110C1D967383002CFBB7 /* IphoneNetTvController.m in Sources */,
 				F64EF7FB1D8FB738003C1C48 /* IphoneMainController.m in Sources */,
 				CDFB9DF81E641F8E00BFECCE /* DeviceTimerInfo.m in Sources */,
@@ -3325,7 +3274,6 @@
 				F646C0B91D91173000DF1728 /* IphoneRoomView.m in Sources */,
 				0FABF91F1D06AA4E000892D8 /* DVDController.m in Sources */,
 				2E0184091ECDE77C00E3705F /* AvoidingSubviewScrollViewDelegate.swift in Sources */,
-				0FEE12771D20C53400811947 /* TXHRrettyRuler.m in Sources */,
 				F64EF7FE1D8FBCC1003C1C48 /* IphoneSceneController.m in Sources */,
 				2E7B64C21E9B6ABC001F7469 /* WeekDaysCell.m in Sources */,
 				F66DFF281D5184730005E882 /* EditSceneController.m in Sources */,
@@ -3380,7 +3328,6 @@
 				0FC1197A1D6FE61C001DA19A /* Projector.m in Sources */,
 				F6B91F6F1D100EF700592FB0 /* DVCollectionViewCell.m in Sources */,
 				CDF1573B1E7AAD4C00499AC5 /* BaseTabBarController.m in Sources */,
-				0F96A1641D17F37C00E1594F /* RulerItem.m in Sources */,
 				F67091BC1D93BF300002DDC5 /* WindowSlidingController.m in Sources */,
 				F64407D61DAE3BAD0032BEDF /* IphoneFavorController.m in Sources */,
 				CDF78C581E9CB24600F8B20C /* CustomViewController.m in Sources */,
@@ -3462,7 +3409,6 @@
 				2EBABC731E835EC70093EF3A /* AireTableViewCell.m in Sources */,
 				F65AF6D41D3370770048A4E5 /* ProfileFaultsViewController.m in Sources */,
 				2EF75C811EB32D390055147D /* DeviceTimingViewController.m in Sources */,
-				0F96A1671D17F37C00E1594F /* RulerView.m in Sources */,
 				0FB205E91CDC312A00B5E87E /* IOManager.m in Sources */,
 				F66596DA1D3F12FB0082716A /* EnergyOfDeviceController.m in Sources */,
 				0FAF74C01CEEA17C00432713 /* HRBrightnessSlider.m in Sources */,
@@ -3494,7 +3440,6 @@
 				2E12CC101E7F5E3000C7D006 /* CYLineLayout.m in Sources */,
 				2E08EFC41EBC668A007F9FE1 /* PhotoGraphViewConteoller.m in Sources */,
 				F65B7D271D34E9E00059CFA4 /* MySettingViewController.m in Sources */,
-				F62CD87D1D950453001C66CE /* IphoneAirController.m in Sources */,
 				2E03E2FA1ECA904F00487319 /* SeneLightModel.m in Sources */,
 				0F9EA72D1DDB026C00223ED8 /* NSString+RegMatch.m in Sources */,
 				CD7863B71E8CF18200F42AC0 /* VipServiceListViewController.m in Sources */,
@@ -3503,7 +3448,6 @@
 				F65DB3411D2B5AB2002A815C /* RegisterDetailController.m in Sources */,
 				0FAF98A61CE40F3C009BDBB5 /* QRCodeReaderViewController.m in Sources */,
 				0F8D76D01D9A1B9700DDD063 /* Schedule.m in Sources */,
-				0F96A1661D17F37C00E1594F /* RulerLeftTagView.m in Sources */,
 				0FCF43311CE09039009BFDD9 /* IbeaconManager.m in Sources */,
 				2E04198B1EB89F42004D70B9 /* FSLineChart.m in Sources */,
 				0FCFB3801CF28F6F00B37DD3 /* Light.m in Sources */,
@@ -3546,7 +3490,6 @@
 				CD43046F1E0B674000B594F4 /* FamilyViewController.m in Sources */,
 				F69C82361D363A4D002DE6D7 /* ServiceRecordCell.m in Sources */,
 				F65164101D37672700A6F5FA /* MyEnergyCell.m in Sources */,
-				0F96A1651D17F37C00E1594F /* RulerItemModel.m in Sources */,
 				F6251F711D541885000A5A47 /* PluginViewController.m in Sources */,
 				CD9F0AC31EB861F5007B0CF7 /* City.m in Sources */,
 				0FC5CC6C1D93CB9600839D8F /* WinOpener.m in Sources */,

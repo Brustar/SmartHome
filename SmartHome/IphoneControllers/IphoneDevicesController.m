@@ -15,7 +15,7 @@
 #import "IphoneDVDController.h"
 #import "IphoneNetTvController.h"
 #import "FMController.h"
-#import "IphoneAirController.h"
+//#import "IphoneAirController.h"
 #import "PluginViewController.h"
 #import "CameraController.h"
 #import "GuardController.h"
@@ -137,13 +137,13 @@
          [self.navigationController pushViewController:fmVC animated:YES];
     }else if([typeName isEqualToString:@"空调"])
     {
-        IphoneAirController *airVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneAirController"];
+        /*IphoneAirController *airVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneAirController"];
 //        IphoneSceneAirVC * airVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneSceneAirVC"];
         airVC.roomID = self.roomId;
         airVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneId];
         airVC.isAddDevice = YES;
         [self.navigationController pushViewController:airVC animated:YES];
-        
+        */
     }else if([typeName isEqualToString:@"机顶盒"]){
 //        IphoneNetTvController *netVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneNetTvController"];
         IPhoneNetVV * netVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IPhoneNetVV"];

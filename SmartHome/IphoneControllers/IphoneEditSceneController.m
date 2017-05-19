@@ -17,7 +17,7 @@
 #import "IphoneDVDController.h"
 #import "IphoneNetTvController.h"
 #import "FMController.h"
-#import "IphoneAirController.h"
+
 #import "PluginViewController.h"
 #import "CameraController.h"
 #import "GuardController.h"

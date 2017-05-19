@@ -27,8 +27,8 @@
 #import "ScreenCurtainController.h"
 #import "ProjectController.h"
 #import "IphoneTVController.h"
-#import "IphoneAirController.h"
-#import "IphoneFMController.h"
+//#import "IphoneAirController.h"
+
 #import "IphoneDVDController.h"
 #import "IphoneNetTvController.h"
 #import "SQLManager.h"
@@ -191,11 +191,11 @@
     }else if([typeName isEqualToString:@"FM"])
     {
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
-            
+            /*
             IphoneFMController *IphonefmVC = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneFMController"];
             
             IphonefmVC.deviceid = [NSString stringWithFormat:@"%d",eId];
-            [self.navigationController pushViewController:IphonefmVC animated:YES];
+            [self.navigationController pushViewController:IphonefmVC animated:YES];*/
         }else{
             
             FMController *fmVC = [storyBoard instantiateViewControllerWithIdentifier:@"FMController"];
@@ -218,12 +218,12 @@
         }
     }else if([typeName isEqualToString:@"空调"]){
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
-            
+            /*
             IphoneAirController *air = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneAirController"];
             
             air.deviceid = [NSString stringWithFormat:@"%d",eId];
             [self.navigationController pushViewController:air animated:YES];
-            
+            */
         }else{
             
             AirController *airVC = [storyBoard instantiateViewControllerWithIdentifier:@"AirController"];
