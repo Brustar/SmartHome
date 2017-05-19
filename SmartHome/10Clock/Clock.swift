@@ -347,11 +347,12 @@ open class TenClock : UIControl{
         stText.position = topTailLayer.center
         endText.position = topHeadLayer.center
         let    stImgLayer = CALayer()
-        stImgLayer.contents = UIImage(named: "schedule_pointer")?.cgImage
+        stImgLayer.contents = UIImage(named: "btn_choose_nol")?.cgImage
+//        stImgLayer.frame = CGRect(0,0,2,20)
         stImgLayer.contentsGravity = kCAGravityCenter
         stImgLayer.position = topHeadLayer.center
         let    endImgLayer = CALayer()
-        endImgLayer.contents = UIImage(named: "schedule_pointer")?.cgImage
+        endImgLayer.contents = UIImage(named: "btn_choose_nol")?.cgImage
         endImgLayer.contentsGravity = kCAGravityCenter
         endImgLayer.position = topTailLayer.center
         

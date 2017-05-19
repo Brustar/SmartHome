@@ -40,21 +40,16 @@
 - (IBAction)powerBtn:(id)sender {
     
   self.powerBtn.selected = !self.powerBtn.selected;
-    Scene * scene = [[Scene alloc] init];
-//  if (self.powerBtn.selected) {
-     if (scene) {
-         if (scene.status == 0) {
+         if (self.powerBtn.selected) {
              [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
              [[SceneManager defaultManager] startScene:self.sceneID];
              [SQLManager updateSceneStatus:1 sceneID:self.sceneID];//更新数据库
-         }else if (scene.status == 1){
+         }{
              [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
              [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];
-             [SQLManager updateSceneStatus:0 sceneID:scene.sceneID];//更新数据库
+             [SQLManager updateSceneStatus:0 sceneID:self.sceneID];//更新数据库
           }
-      }
-//    }
-    
+
 }
 //定时
 - (IBAction)timingBtn:(id)sender {
@@ -68,5 +63,14 @@
         [self.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock1"] forState:UIControlStateNormal];
     }
 }
-
+//- (void)setSceneInfo:(Scene *)info {
+//    self.SceneName.text = info.sceneName;
+//    self.sceneStatus = info.status;
+//    [self.imageView sd_setImageWithURL:[NSURL URLWithString: info.picName] placeholderImage:[UIImage imageNamed:@"PL"]];
+//    if (self.sceneStatus == 0) {
+//        [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
+//    }else if (self.sceneStatus == 1) {
+//        [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateNormal];
+//    }
+//}
 @end

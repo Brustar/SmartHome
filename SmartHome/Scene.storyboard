@@ -393,7 +393,7 @@
                                     <constraint firstItem="SXE-wx-32V" firstAttribute="top" secondItem="ogE-sZ-ZFn" secondAttribute="bottom" constant="18" id="zUY-sO-wHY"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timing_btn_nol" translatesAutoresizingMaskIntoConstraints="NO" id="fn9-d7-eEB">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tm_center_nol" translatesAutoresizingMaskIntoConstraints="NO" id="fn9-d7-eEB">
                                 <rect key="frame" x="0.0" y="201" width="375" height="385"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
@@ -774,6 +774,6 @@
         <image name="line_horizontal_white" width="373" height="48"/>
         <image name="save_icon_nc_normal" width="21" height="23"/>
         <image name="save_icon_open_normal" width="9" height="16"/>
-        <image name="timing_btn_nol" width="375" height="385"/>
+        <image name="tm_center_nol" width="375" height="385"/>
     </resources>
 </document>

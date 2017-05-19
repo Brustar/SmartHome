@@ -37,5 +37,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *subImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *icon;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *SceneNameTopConstraint;
-
+//- (void)setSceneInfo:(Scene *)info;
 @end

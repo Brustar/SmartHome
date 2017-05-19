@@ -16,7 +16,7 @@
 #import "MBProgressHUD+NJ.h"
 #import "IphoneSceneController.h"
 
-@interface IphoneSaveNewSceneController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,PhotoGraphViewConteollerDelegate>
+@interface IphoneSaveNewSceneController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,PhotoGraphViewConteollerDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *sceneName;//输入场景名的输入框
 @property (weak, nonatomic) IBOutlet UIButton *sceneImageBtn;//选择场景图片的button
 @property (nonatomic,strong) UIImage *selectSceneImg;
@@ -221,5 +221,31 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated{
 
+    [super viewWillAppear:animated];
+    self.navigationController.delegate=self;
+    
+}
+
+- (void)navigationController:(UINavigationController*)navigationController willShowViewController:(UIViewController*)viewController animated:(BOOL)animated{
+       
+    UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+    IphoneSceneController * iphoneSceneVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
+    if([[viewController class]isSubclassOfClass:[iphoneSceneVC class]]) {
+        
+        ///执行刷新操作
+        [iphoneSceneVC setUpRoomView];
+        
+    }
+    
+    ///删除代理，防止该controller销毁后引起navigationController.delegate指向野指针造成崩溃
+    
+    if(![[viewController class]isSubclassOfClass:[self class]]) {
+        
+        self.navigationController.delegate=nil;
+        
+    }
+    
+}
 @end
