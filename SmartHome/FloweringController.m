@@ -35,6 +35,7 @@
     [super viewDidLoad];
     if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
     NSArray *menus = [SQLManager singleProductByRoom:self.roomID];
+    self.deviceid = [SQLManager singleDeviceWithCatalogID:flowering byRoom:self.roomID];
     [self initMenuContainer:self.menuContainer andArray:menus andID:self.deviceid];
     [self naviToDevice];
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];

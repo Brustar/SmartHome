@@ -209,7 +209,7 @@ static NSString * const CYPhotoId = @"photo";
 }
 
 - (void)netWorkDidChangedNotification:(NSNotification *)noti {
-    [_afNetworkReachabilityManager startMonitoring];//开启网络监视器；
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];//开启网络监视器；
 }
 
 - (void)removeNotifications {
@@ -319,7 +319,7 @@ static NSString * const CYPhotoId = @"photo";
 {
     self.roomIndex = index;
     Room *room = self.roomList[index];
-//    self.scenes = [SQLManager getScensByRoomId:room.rId];
+
     NSArray *tmpArr = [SQLManager getScensByRoomId:room.rId];
     self.selectedRoomID = room.rId;
     [self.scenes removeAllObjects];
@@ -330,6 +330,7 @@ static NSString * const CYPhotoId = @"photo";
 //    [self.FirstCollectionView reloadData];
     
 }
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -343,7 +344,6 @@ static NSString * const CYPhotoId = @"photo";
         [self.scenes addObject:imageName];
     }
     [self setUpRoomView];
-    [self.FirstCollectionView reloadData];
 
     BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     baseTabbarController.tabbarPanel.hidden = NO;

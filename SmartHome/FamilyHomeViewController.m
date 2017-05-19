@@ -51,6 +51,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self addNotifications];
     [self setupNaviBar];
     [self showNetStateView];
     self.lightIcon.layer.cornerRadius =  self.lightIcon.frame.size.width/2;
@@ -105,43 +106,56 @@
             if (info.connectState==outDoor) {
                 [blockSelf setNetState:netState_outDoor_4G];
                 NSLog(@"外出模式-4g");
-               // [self.netBarBtnItem setImage:[UIImage imageNamed:@"4g"]];
-            }
-            if (info.connectState==offLine) {
+            }else if (info.connectState == atHome){
+                [blockSelf setNetState:netState_atHome_4G];
+                NSLog(@"在家模式-4G");
+                
+            }else if (info.connectState == offLine) {
                 [blockSelf setNetState:netState_notConnect];
                 NSLog(@"离线模式");
-                //[self.netBarBtnItem setImage:[UIImage imageNamed:@"4g"]];
+                
             }
+            
         }
         else if(status == AFNetworkReachabilityStatusReachableViaWiFi) //WIFI
         {
-            if (info.connectState==atHome) {
+            if (info.connectState == atHome) {
                 [blockSelf setNetState:netState_atHome_WIFI];
-                NSLog(@"在家模式");
-                //[self.netBarBtnItem setImage:[UIImage imageNamed:@"atHome"]];
+                NSLog(@"在家模式-WIFI");
                 
-            }else if (info.connectState==outDoor){
-                [blockSelf setNetState:netState_atHome_4G];
-                NSLog(@"外出模式");
-                //[self.netBarBtnItem setImage:[UIImage imageNamed:@"Iphonewifi"]];
-            }else if (info.connectState==offLine) {
+                
+            }else if (info.connectState == outDoor){
+                [blockSelf setNetState:netState_outDoor_WIFI];
+                NSLog(@"外出模式-WIFI");
+                
+            }else if (info.connectState == offLine) {
                 [blockSelf setNetState:netState_notConnect];
                 NSLog(@"离线模式");
-                //[self.netBarBtnItem setImage:[UIImage imageNamed:@"Iphonewifi"]];
+                
                 
             }
         }else if(status == AFNetworkReachabilityStatusNotReachable){ //没有网络(断网)
             [blockSelf setNetState:netState_notConnect];
             NSLog(@"离线模式");
-           // [self.netBarBtnItem setImage:[UIImage imageNamed:@"breakWifi"]];
         }else if (status == AFNetworkReachabilityStatusUnknown) { //未知网络
             [blockSelf setNetState:netState_notConnect];
-           // [self.netBarBtnItem setImage:[UIImage imageNamed:@"breakWifi"]];
         }
     }];
     
     [_afNetworkReachabilityManager startMonitoring];//开启网络监视器；
     
+}
+
+- (void)addNotifications {
+    [NC addObserver:self selector:@selector(netWorkDidChangedNotification:) name:@"NetWorkDidChangedNotification" object:nil];
+}
+
+- (void)netWorkDidChangedNotification:(NSNotification *)noti {
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];//开启网络监视器；
+}
+
+- (void)removeNotifications {
+    [NC removeObserver:self];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -250,5 +264,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc {
+    [self removeNotifications];
+}
 
 @end
