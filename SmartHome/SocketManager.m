@@ -184,6 +184,7 @@
 
 -(void)onSocketDidDisconnect:(AsyncSocket *)sock
 {
+    //[NC postNotificationName:@"NetWorkDidChangedNotification" object:nil];
     NSLog(@"sorry the connect is failure %ld",sock.userData);
     DeviceInfo *device=[DeviceInfo defaultManager];
     device.connectState=offLine;
@@ -192,8 +193,6 @@
     }else if (sock.userData == SocketOfflineByUser) {// 如果由用户断开，不进行重连
         return;
     }
-    
-    [NC postNotificationName:@"NetWorkDidChangedNotification" object:nil];
 }
 
 #pragma mark  - UDP delegate
