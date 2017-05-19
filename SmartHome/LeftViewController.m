@@ -194,7 +194,11 @@
     footer.backgroundColor = [UIColor colorWithRed:30.0/255.0 green:29.0/255.0 blue:34.0/255.0 alpha:1.0];
     
     //设置
-    UIButton *settingBtn = [[UIButton alloc] initWithFrame:CGRectMake(40, 80, 50, 20)];
+    CGFloat settingY = 80.0f;
+    if (UI_SCREEN_WIDTH == 320) {
+        settingY = 0.0f;
+    }
+    UIButton *settingBtn = [[UIButton alloc] initWithFrame:CGRectMake(40, settingY, 50, 20)];
     [settingBtn setTitle:@"设置" forState:UIControlStateNormal];
     [settingBtn setImage:[UIImage imageNamed:@"my_setting"] forState:UIControlStateNormal];
     settingBtn.titleLabel.font = [UIFont systemFontOfSize:16.0f];
@@ -208,6 +212,7 @@
     skinBtn.titleLabel.font = [UIFont systemFontOfSize:16.0f];
     [skinBtn addTarget:self action:@selector(skinBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [footer addSubview:skinBtn];
+    skinBtn.hidden = YES;
     
     return footer;
 }

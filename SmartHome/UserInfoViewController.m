@@ -376,7 +376,9 @@
 
 - (void)chargeBtnClicked:(UIButton *)btn {
     //VIP支付页面
-    
+    int userID = [[UD objectForKey:@"UserID"] intValue];
+    WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:[NSString stringWithFormat:@"/ui/Vip.aspx?user_id=%d", userID]] title:@"VIP会员"];
+    [self.navigationController pushViewController:web animated:YES];
 }
 
 @end
