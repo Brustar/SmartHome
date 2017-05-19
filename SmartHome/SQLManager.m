@@ -873,6 +873,7 @@
     [db close];
     return [array copy];
 }
+
 +(NSString *)getEType:(NSInteger)eID
 {
     NSString * htypeID=nil;
