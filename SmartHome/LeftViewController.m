@@ -113,6 +113,7 @@
         
     }else if ([item isEqualToString:@"家庭动态"]) {
         //家庭动态
+        [MBProgressHUD showMessage:@"请稍候..."];
         FamilyDynamicViewController *vc = [familyStoryBoard instantiateViewControllerWithIdentifier:@"FamilyDynamicVC"];
         vc.hidesBottomBarWhenPushed = YES;
         [appDelegate.mainTabBarController.selectedViewController pushViewController:vc animated:YES];

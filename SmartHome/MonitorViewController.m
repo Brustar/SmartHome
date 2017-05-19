@@ -17,16 +17,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initUI];
-    [self setupTimer];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
     _video = [[RTSPPlayer alloc] initWithVideo:self.cameraURL usesTcp:YES];
     _video.outputWidth =  Video_Output_Width;
     _video.outputHeight = Video_Output_Height;
     
+    [self setupTimer];
 }
 
 - (void)setupTimer {
