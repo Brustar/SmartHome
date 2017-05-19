@@ -130,8 +130,8 @@
         [months addObject:day];
     }
     // Setting up the line chart
-    _chartWithDates.verticalGridStep = 7;
-    _chartWithDates.horizontalGridStep = 4;
+    _chartWithDates.verticalGridStep = 8;
+    _chartWithDates.horizontalGridStep = (int)[months count];
     _chartWithDates.fillColor = nil;
     _chartWithDates.displayDataPoint = YES;
     _chartWithDates.dataPointColor = [UIColor whiteColor];
@@ -242,7 +242,7 @@
         cell.MonthKWLabel.text = @"0";
     }
     
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -251,7 +251,7 @@
     
     UIStoryboard * board = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ENenViewController * VC = [board instantiateViewControllerWithIdentifier:@"ENenViewController"];
-      NSDictionary * dict = self.enameArr[indexPath.row];
+    NSDictionary * dict = self.enameArr[indexPath.row];
     VC.eqid = [dict[@"eid"] intValue];
     VC.titleName = dict[@"ename"];
     [self.navigationController pushViewController:VC animated:YES];
