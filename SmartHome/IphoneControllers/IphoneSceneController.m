@@ -344,7 +344,7 @@ static NSString * const CYPhotoId = @"photo";
     }
     [self setUpRoomView];
     [self.FirstCollectionView reloadData];
-    
+
     BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     baseTabbarController.tabbarPanel.hidden = NO;
     baseTabbarController.tabBar.hidden = YES;
