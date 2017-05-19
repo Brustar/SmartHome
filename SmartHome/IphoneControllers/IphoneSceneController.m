@@ -62,7 +62,7 @@
 @property (nonatomic,strong) UILongPressGestureRecognizer *lgPress;
 @property (nonatomic,strong) UIImage *selectSceneImg;
 @property (nonatomic,strong) CYPhotoCell *currentCell;
-@property (nonatomic,assign) int status;
+//@property (nonatomic,assign) int status;
 
 @end
 
@@ -442,28 +442,36 @@ static NSString * const CYPhotoId = @"photo";
         cell.deleteBtn.hidden = NO;
         cell.powerBtn.hidden = NO;
 //        cell.seleteSendPowBtn.hidden = NO;
-        [cell.powerBtn addTarget:self action:@selector(powerBtn:) forControlEvents:UIControlEventTouchUpInside];
+//        [cell.powerBtn addTarget:self action:@selector(powerBtn:) forControlEvents:UIControlEventTouchUpInside];
+//        if (self.scene.status == 0) {
+//            [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
+//        }else if (self.scene.status == 1) {
+//            [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateNormal];
+//        }
+        cell.powerBtn.tag = indexPath.row;
         
         return cell;
        
     }
     
 }
--(void)powerBtn:(UIButton *)btn
-{
-    Scene *scene = self.scenes[btn.tag];
-    if (scene) {
-        if (scene.status == 0) { //点击前，场景是关闭状态，需打开场景
-            [[SceneManager defaultManager] startScene:scene.sceneID];//打开场景
-            [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];//更新数据库
-        }else if (scene.status == 1) { //点击前，场景是打开状态，需关闭场景
-            [[SceneManager defaultManager] poweroffAllDevice:scene.sceneID];//关闭场景
-            [SQLManager updateSceneStatus:0 sceneID:scene.sceneID];//更新数据库
-        }
-        
-        [self.FirstCollectionView reloadData];
-    }
-}
+//-(void)powerBtn:(UIButton *)btn
+//{
+//    Scene *scene = self.scenes[btn.tag];
+//    if (scene) {
+//        if (scene.status == 0) { //点击前，场景是关闭状态，需打开场景
+//            [btn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
+//            [[SceneManager defaultManager] startScene:scene.sceneID];//打开场景
+//            [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];//更新数据库
+//        }else if (scene.status == 1) { //点击前，场景是打开状态，需关闭场景
+//            [btn setBackgroundImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
+//            [[SceneManager defaultManager] poweroffAllDevice:scene.sceneID];//关闭场景
+//            [SQLManager updateSceneStatus:0 sceneID:scene.sceneID];//更新数据库
+//        }
+//        
+//        [self.FirstCollectionView reloadData];
+//    }
+//}
 
 -(void)handleLongPress:(UILongPressGestureRecognizer *)lgr
 {
