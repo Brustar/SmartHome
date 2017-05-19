@@ -81,7 +81,7 @@
 }
 
 - (void)netWorkDidChangedNotification:(NSNotification *)noti {
-    [_afNetworkReachabilityManager startMonitoring];//开启网络监视器；
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];//开启网络监视器；
 }
 
 - (void)removeNotifications {
