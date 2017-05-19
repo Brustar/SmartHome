@@ -411,18 +411,20 @@ static NSString * const CYPhotoId = @"photo";
     }else{
         CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
          cell.delegate = self;
-         self.scene = self.scenes[indexPath.row];
-//         [cell setSceneInfo:self.scene];
-        cell.sceneID = self.scene.sceneID;
+
+        Scene *scene = self.scenes[indexPath.row];
+       
+        cell.sceneID = scene.sceneID;
+
         if (self.scenes.count == 0) {
             [MBProgressHUD showSuccess:@"暂时没有全屋场景"];
         }
-        NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.scene.sceneID];
+        NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,scene.sceneID];
         NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
         NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
         NSArray * schedules = plistDic[@"schedules"];
-        self.scene.schedules = schedules;
-        if (self.scene.schedules.count == 0) {
+        scene.schedules = schedules;
+        if (scene.schedules.count == 0) {
             cell.seleteSendPowBtn.hidden = YES;
             cell.PowerBtnCenterContraint.constant = 35;
         }else{
@@ -432,18 +434,18 @@ static NSString * const CYPhotoId = @"photo";
         self.selectedSId = cell.sceneID;
       
         cell.subImageView.image = [UIImage imageNamed:@"Scene-bedroomTSQ"];
-        cell.tag = self.scene.sceneID;
-        cell.SceneName.text = self.scene.sceneName;
+        cell.tag = scene.sceneID;
+        cell.SceneName.text = scene.sceneName;
         self.lgPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
         self.lgPress.delegate = self;
         [collectionView addGestureRecognizer:self.lgPress];
-        [cell.imageView sd_setImageWithURL:[NSURL URLWithString: self.scene.picName] placeholderImage:[UIImage imageNamed:@"PL"]];
+        [cell.imageView sd_setImageWithURL:[NSURL URLWithString: scene.picName] placeholderImage:[UIImage imageNamed:@"PL"]];
         [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];
         cell.deleteBtn.hidden = NO;
         cell.powerBtn.hidden = NO;
-//        cell.seleteSendPowBtn.hidden = NO;
+
         [cell.powerBtn addTarget:self action:@selector(powerBtn:) forControlEvents:UIControlEventTouchUpInside];
-        
+
         return cell;
        
     }
@@ -510,29 +512,22 @@ static NSString * const CYPhotoId = @"photo";
         
     }];
 }
+
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     [DeviceInfo defaultManager].isPhotoLibrary = NO;
     self.selectSceneImg = info[UIImagePickerControllerOriginalImage];
-
-    //场景ID不变
-    self.sceneID = self.selectedSId;
-    NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
-    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
-    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
     
-    Scene *scene = [[Scene alloc] init];
-    
-    if (plistDic) {
-        [scene setValuesForKeysWithDictionary:plistDic];
-    
-        [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
-    }
+    Scene *scene = [[Scene alloc] initWhithoutSchedule];
+    scene.sceneID = self.currentCell.sceneID;
+    scene.roomID = self.roomID;
+    [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
     
     [self.currentCell.imageView setImage:self.selectSceneImg];
     
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
+
 -(void)PhotoIconController:(PhotoGraphViewConteoller *)iconVC withImgName:(NSString *)imgName
 {
     self.selectSceneImg = [UIImage imageNamed:imgName];

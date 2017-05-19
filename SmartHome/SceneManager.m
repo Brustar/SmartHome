@@ -397,68 +397,19 @@
     newScene.sceneName = [SQLManager getSceneName:newScene.sceneID];
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:fileName];
     NSData *imgData = UIImageJPEGRepresentation(newSceneImage, 0.5);
-    NSDictionary *parameter;
-    if(newScene.schedules.count > 0) //有定时
-    {
-        for (Schedule *schedule in newScene.schedules) {
-            if(schedule.deviceID != 0) {  //控制场景的定时
-                if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID >0)
-                {
-                    parameter = @{
-                                  @"token":[UD objectForKey:@"AuthorToken"],
-                                  @"optype":@(0),
-                                  @"scenceid":@(newScene.sceneID),
-                                  @"scencename":newScene.sceneName,
-                                  @"roomid":@(newScene.roomID),
-                                  @"isplan":@(1),
-                                  @"plistname":fileName,
-                                  @"scencefile":scenePath,
-                                  @"starttime":schedule.startTime,
-                                  @"endtime":schedule.endTime,
-                                  @"astronomicaltime":@(schedule.astronomicalStartID),
-                                  @"starttype":@(1),
-                                  @"weekvalue":schedule.weekDays
-                                  };
-                }
-            }else { //控制设备的定时
-                parameter = @{
-                              @"token":[UD objectForKey:@"AuthorToken"],
-                              @"optype":@(0),
-                              @"scenceid":@(newScene.sceneID),
-                              @"scencename":newScene.sceneName,
-                              @"roomid":@(newScene.roomID),
-                              @"isplan":@(1),
-                              @"plistname":fileName,
-                              @"scencefile":scenePath,
-                              @"starttime":schedule.startTime,
-                              @"endtime":schedule.endTime,
-                              @"astronomicaltime":@(schedule.astronomicalStartID),
-                              @"starttype":@(1),
-                              @"weekvalue":schedule.weekDays
-                              };
-            }
-        }
-    }else{ //没有定时
-        
-        if (newScene.sceneName && newScene.picName && fileName && newScene.roomID) {
-            
-            parameter = @{
-                          @"token":[UD objectForKey:@"AuthorToken"],
-                          @"optype":@(0),
-                          @"scenceid":@(newScene.sceneID),
-                          @"scencename":newScene.sceneName,
-                          @"roomid":@(newScene.roomID),
-                          @"isplan":@(2),
-                          @"plistname":fileName,
-                          @"scencefile":scenePath
-                          };
-        }
-        
-    }
+    NSDictionary *parameter = @{
+                                @"token":[UD objectForKey:@"AuthorToken"],
+                                @"optype":@(0),
+                                @"scenceid":@(newScene.sceneID),
+                                @"scencename":newScene.sceneName,
+                                @"roomid":@(newScene.roomID),
+                                @"plistname":fileName,
+                                @"scencefile":scenePath
+                                };
     
     NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
     NSString *URL = [NSString stringWithFormat:@"%@Cloud/scene_edit.aspx",[IOManager httpAddr]];
-    [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName imgData:imgData imgFileName:@"" completion:^(id responseObject) {
+    [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName imgData:imgData imgFileName:[NSString stringWithFormat:@"scene_%d.png",newScene.sceneID] completion:^(id responseObject) {
         
         NSLog(@"scene_edit --- responseObject: %@", responseObject);
         
@@ -466,7 +417,7 @@
         NSString *msg = [responseObject objectForKey:@"msg"];
         
         if(result.integerValue == 0) { //成功
-            [SQLManager updateScenePic:[NSString stringWithFormat:@"http://115.28.151.85:8082/UploadFiles/images/scene/%f.png",[[NSDate date] timeIntervalSince1970]] sceneID:newScene.sceneID];
+            [SQLManager updateScenePic:[NSString stringWithFormat:@"http://115.28.151.85:8082/UploadFiles/images/scene/scene_%d.png",newScene.sceneID] sceneID:newScene.sceneID];
             [MBProgressHUD showSuccess:@"保存成功"];
         }else { //失败
             [MBProgressHUD showError:msg];
