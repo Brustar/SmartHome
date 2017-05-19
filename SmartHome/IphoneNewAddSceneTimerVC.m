@@ -13,21 +13,20 @@
 #import "NSString+RegMatch.h"
 #import "MBProgressHUD+NJ.h"
 #import <math.h>
-#import "CKCircleView.h"
 #import "WeekdaysVC.h"
-#import "HTCircularSlider.h"
 #import "IphoneEditSceneController.h"
+#import "SmartHome-Swift.h"
 
-@interface IphoneNewAddSceneTimerVC ()<CKCircleViewDelegate,WeekdaysVCDelegate>
+@interface IphoneNewAddSceneTimerVC ()<WeekdaysVCDelegate,TenClockDelegate>
 @property (nonatomic,strong) Scene *scene;
 @property (nonatomic,strong) Schedule *schedule;
 @property (nonatomic,strong) NSMutableDictionary *weeks;
 @property (nonatomic,strong) UIButton * naviRightBtn;
-@property CKCircleView * dialView;
-@property  HTCircularSlider *slider;
 @property (nonatomic,strong)WeekdaysVC * weekDaysVC;
 @property (weak, nonatomic) IBOutlet UIImageView *timingImage;
 @property (nonatomic,strong) NSArray * viewControllerArrs;
+@property (nonatomic,strong) NSDateFormatter  *dateFormatter;
+@property (weak, nonatomic) IBOutlet TenClock *clock;
 
 @end
 
@@ -45,11 +44,9 @@
 {
     if(!_scene)
     {
-        
         NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
         NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
         NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
-        
         _scene = [[Scene alloc] initWhithoutSchedule];
         if(plistDic)
         {
@@ -75,64 +72,16 @@
     self.schedule.endTime = self.endTimeLabel.text;
     self.RepetitionLable.text = @"永不";
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(iphoneSelectWeek:) name:@"SelectWeek" object:nil];
-//    [self setCustomerSlider];
-//     [self initSlider];
-}
--(void) initSlider
-{
-    int sliderSize = 90;
     
-    CGRect frame = CGRectMake(self.view.center.x-sliderSize, self.view.center.y-sliderSize, sliderSize*2, sliderSize*2);
-    self.slider = [[HTCircularSlider alloc] initWithFrame:frame];
-    [self.view addSubview:self.slider];
-    [self.slider addTarget:self action:@selector(onValueChange:) forControlEvents:UIControlEventValueChanged];
-    self.slider.handleImage = [UIImage imageNamed:@"schedule_pointer"];
-    self.slider.handleSize = CGPointMake(15/2, 51/2);
-    self.slider.maximumValue = 24;
-    self.slider.value = 0;
-    self.slider.trackAlpha = 0.6;
-    self.slider.tag = 0;
-    self.slider.radius = sliderSize;
-
-}
-
-- (void)onValueChange:(HTCircularSlider *)slider {
-    NSLog(@"%f", slider.value);
+    NSDate *date = [NSDate date];
+    self.clock.startDate = date;
+    NSTimeInterval interval = 60 * 60 * 8;
+    self.clock.endDate = [NSDate dateWithTimeInterval:interval sinceDate:date];
+    [self.clock update];
+    self.clock.delegate = self;
     
-        float dec = slider.value-(int)slider.value;
-        int second = (int)(dec*60);
-        NSString *pattern = second>9?@"%d:%d":@"%d:0%d";
-        
-        int hint = (int)slider.value;
-        int hour = hint >= 12 ? hint - 12 : hint + 12;
-        self.starTimeLabel.text = [NSString stringWithFormat:pattern,hour,second];
-    
-}
--(void)setCustomerSlider
-{
-    int sliderSize = 90;
-    CGRect frame = CGRectMake(self.view.center.x-sliderSize, self.view.center.y-sliderSize-40, sliderSize*2, sliderSize*2);
-    self.dialView = [[CKCircleView alloc] initWithFrame:frame];
-    self.dialView.delegate = self;
-    self.dialView.center = CGPointMake(40/2, 51/2);
-    //轨道路径颜色
-    self.dialView.arcColor = [UIColor colorWithRed:82/255.0 green:83/255.0 blue:85/255.0 alpha:0.8];
-    //圆盘背景色
-    self.dialView.backColor = [UIColor clearColor];
-    //开始拨号键颜色
-    self.dialView.dialColor = [UIColor clearColor];
-    self.dialView.dialColor2 = [UIColor clearColor];
-    self.dialView.arcRadius = 80;
-
-    //最小值
-    self.dialView.minNum = 0;
-    //最大值
-    self.dialView.maxNum = 23;
-    //中间文字颜色
-    self.dialView.labelColor = [UIColor redColor];
-    self.dialView.labelFont = [UIFont systemFontOfSize:20.0];
-    [self.view addSubview: self.dialView];
-
+    self.starTimeLabel.text = [self.dateFormatter stringFromDate:self.clock.startDate];
+    self.endTimeLabel.text = [self.dateFormatter stringFromDate:self.clock.endDate];
 }
 
 #pragma mark -- CKCircleViewDelegate
@@ -196,9 +145,8 @@
     UIStoryboard * HomeStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
     if (_weekDaysVC == nil) {
         self.timingImage.hidden = YES;
-        self.dialView.hidden = YES;
         self.TimerView.hidden = YES;
-        self.slider.hidden = YES;
+        self.clock.hidden = YES;
         _weekDaysVC = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"WeekdaysVC"];
         _weekDaysVC.delegate = self;
         [self.view addSubview:_weekDaysVC.view];
@@ -206,21 +154,17 @@
         
     }else {
         self.TimerView.hidden = NO;
-        self.dialView.hidden = NO;
         self.timingImage.hidden = NO;
-        self.slider.hidden = NO;
+        self.clock.hidden = NO;
         [_weekDaysVC.view removeFromSuperview];
         _weekDaysVC = nil;
     }
 }
 -(void)onWeekButtonClicked:(UIButton *)button
 {
-    
-//    self.DrawView.hidden = NO;
-    self.slider.hidden = NO;
-    self.dialView.hidden = NO;
     self.timingImage.hidden = NO;
     self.TimerView.hidden = NO;
+    self.clock.hidden = NO;
     if (_weekDaysVC) {
         [_weekDaysVC.view removeFromSuperview];
         _weekDaysVC = nil;
@@ -316,7 +260,25 @@
     [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
 
 }
+#pragma mark -- TenClockDelegate
+-(void)timesChanged:(TenClock *)clock startDate:(NSDate *)startDate endDate:(NSDate *)endDate{
+    NSLog(@"startDate:%@--endDate:%@",startDate,endDate);
+}
 
+-(void)timesUpdated:(TenClock *)clock startDate:(NSDate *)startDate endDate:(NSDate *)endDate{
+    self.starTimeLabel.text = [self.dateFormatter stringFromDate:startDate];
+    self.endTimeLabel.text = [self.dateFormatter stringFromDate:endDate];
+}
+
+#pragma mark -- lazy load
+-(NSDateFormatter  *)dateFormatter{
+    if (!_dateFormatter) {
+        _dateFormatter = [[NSDateFormatter alloc] init];
+        // hh:mm a
+        [_dateFormatter setDateFormat:@"hh:mm a"];
+    }
+    return  _dateFormatter;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -400,30 +400,30 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Ml-IB-SIs" userLabel="TimerView">
                                 <rect key="frame" x="114" y="320" width="147" height="147"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0OQ-Ou-0lL">
-                                        <rect key="frame" x="57" y="32" width="43" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0OQ-Ou-0lL">
+                                        <rect key="frame" x="38.5" y="32" width="80" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="bXm-sj-zeW"/>
-                                            <constraint firstAttribute="width" constant="43" id="kuf-0L-GEs"/>
+                                            <constraint firstAttribute="width" constant="80" id="kuf-0L-GEs"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="yht-n2-jNt"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQo-X9-dnP">
-                                        <rect key="frame" x="57" y="94" width="43" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQo-X9-dnP">
+                                        <rect key="frame" x="38.5" y="94" width="80" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="FwX-Bq-dky"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="Vls-9m-hxZ"/>
-                                            <constraint firstAttribute="width" constant="43" id="nXg-kM-YZr"/>
+                                            <constraint firstAttribute="width" constant="80" id="nXg-kM-YZr"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2D7-bH-08P">
-                                        <rect key="frame" x="72" y="65" width="2" height="17"/>
+                                        <rect key="frame" x="77.5" y="65" width="2" height="17"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="JeD-vZ-uuT"/>
@@ -436,7 +436,7 @@
                                 <constraints>
                                     <constraint firstItem="0OQ-Ou-0lL" firstAttribute="top" secondItem="0Ml-IB-SIs" secondAttribute="top" constant="32" id="0OM-Yk-sec"/>
                                     <constraint firstAttribute="width" constant="147" id="GNt-7a-Bcb"/>
-                                    <constraint firstItem="2D7-bH-08P" firstAttribute="centerX" secondItem="0Ml-IB-SIs" secondAttribute="centerX" id="LyT-XW-Yk1"/>
+                                    <constraint firstItem="2D7-bH-08P" firstAttribute="centerX" secondItem="0Ml-IB-SIs" secondAttribute="centerX" constant="5" id="LyT-XW-Yk1"/>
                                     <constraint firstItem="2D7-bH-08P" firstAttribute="centerY" secondItem="0Ml-IB-SIs" secondAttribute="centerY" id="QoE-4V-RWa"/>
                                     <constraint firstAttribute="height" constant="147" id="jP2-Ae-2y7"/>
                                     <constraint firstItem="0OQ-Ou-0lL" firstAttribute="centerX" secondItem="0Ml-IB-SIs" secondAttribute="centerX" constant="5" id="nRj-Rk-Bln"/>
@@ -444,11 +444,21 @@
                                     <constraint firstItem="KQo-X9-dnP" firstAttribute="centerX" secondItem="0Ml-IB-SIs" secondAttribute="centerX" constant="5" id="xvs-Gp-auZ"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hC1-Bq-ver" customClass="TenClock" customModule="SmartHome" customModuleProvider="target">
+                                <rect key="frame" x="85" y="291" width="205" height="205"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="205" id="OJf-XF-c89"/>
+                                    <constraint firstAttribute="width" constant="205" id="bEi-ko-4mO"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="hC1-Bq-ver" firstAttribute="centerX" secondItem="aau-dc-TYk" secondAttribute="centerX" id="5l2-VO-0tZ"/>
                             <constraint firstItem="0Ml-IB-SIs" firstAttribute="centerY" secondItem="fn9-d7-eEB" secondAttribute="centerY" id="Gug-a1-a3O"/>
                             <constraint firstItem="fn9-d7-eEB" firstAttribute="centerY" secondItem="aau-dc-TYk" secondAttribute="centerY" constant="60" id="H3s-6h-Cao"/>
+                            <constraint firstItem="hC1-Bq-ver" firstAttribute="centerY" secondItem="aau-dc-TYk" secondAttribute="centerY" constant="60" id="PPS-gN-BAZ"/>
                             <constraint firstAttribute="trailing" secondItem="Feg-z9-7jQ" secondAttribute="trailing" id="XL0-ZT-Lje"/>
                             <constraint firstItem="QGe-MX-LOa" firstAttribute="top" secondItem="sua-Mb-jOO" secondAttribute="bottom" constant="44" id="ZN5-hY-rLk"/>
                             <constraint firstItem="Feg-z9-7jQ" firstAttribute="top" secondItem="sua-Mb-jOO" secondAttribute="bottom" constant="64" id="hWo-u5-6yL"/>
@@ -464,6 +474,7 @@
                     <connections>
                         <outlet property="RepetitionLable" destination="YDs-YH-YJh" id="PWn-F6-XEU"/>
                         <outlet property="TimerView" destination="0Ml-IB-SIs" id="OWk-Zr-O1N"/>
+                        <outlet property="clock" destination="hC1-Bq-ver" id="1nH-5d-ypv"/>
                         <outlet property="endTimeLabel" destination="KQo-X9-dnP" id="meg-hc-ALd"/>
                         <outlet property="starTimeLabel" destination="0OQ-Ou-0lL" id="lMt-rX-sfK"/>
                         <outlet property="timingImage" destination="fn9-d7-eEB" id="fMI-d7-Moy"/>

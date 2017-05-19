@@ -533,7 +533,6 @@ static NSString * const CYPhotoId = @"photo";
     
         [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
     }
-    
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -554,10 +553,11 @@ static NSString * const CYPhotoId = @"photo";
          Scene *scene = self.scenes[indexPath.row];
          self.selectedSId = scene.sceneID;
 //         CYPhotoCell *cell = (CYPhotoCell*)[collectionView cellForItemAtIndexPath:indexPath];
-             
-             [self performSegueWithIdentifier:@"iphoneEditSegue" sender:self];
+         if (scene.status == 0) {
              [[SceneManager defaultManager] startScene:scene.sceneID];
-         
+             [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];
+         }
+             [self performSegueWithIdentifier:@"iphoneEditSegue" sender:self];
      }
   
 }
@@ -579,7 +579,6 @@ static NSString * const CYPhotoId = @"photo";
 
 -(void)powerBtnAction:(UIButton *)sender sceneStatus:(int)status
 {
-
 
 }
 //删除场景
@@ -671,7 +670,6 @@ static NSString * const CYPhotoId = @"photo";
         [theSegue setValue:[NSNumber numberWithInt:self.selectedSId] forKey:@"sceneID"];
         [theSegue setValue:[NSNumber numberWithInt:room.rId] forKey:@"roomID"];
     }
-    
 }
 
 #pragma mark -- lazy load
