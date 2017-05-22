@@ -9,13 +9,13 @@ target 'SmartHome' do
     pod 'GTMBase64', '~> 1.0.0'
 	pod 'MBProgressHUD'
 	pod 'Reachability', '~> 3.0.0'
-	#pod 'QRCodeReader'
+	pod 'QRCodeReaderViewController', '~> 4.0.2'
 	pod 'KxMenu'
 	pod 'SCSiriWaveformView'
     pod 'SDWebImage'
 	pod 'IQKeyboardManager'
 	pod 'RBStoryboardLink', '~> 0.1'
-	#pod 'PrettyRuler', '~> 2.1.1'
+	
 	pod 'CocoaAsyncSocket', '~>7.4.3'
 
     pod 'RongCloudIMKit'

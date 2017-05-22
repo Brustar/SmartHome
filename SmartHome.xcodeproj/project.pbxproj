@@ -88,11 +88,6 @@
 		0FAF8FEF1CE18C41000557BD /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF8FEE1CE18C41000557BD /* DeviceInfo.m */; };
 		0FAF8FF51CE1B514000557BD /* VolumeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF8FF41CE1B514000557BD /* VolumeManager.m */; };
 		0FAF8FFB1CE1D9BC000557BD /* UploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF8FFA1CE1D9BC000557BD /* UploadManager.m */; };
-		0FAF98A31CE40F3C009BDBB5 /* QRCameraSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF98991CE40F3C009BDBB5 /* QRCameraSwitchButton.m */; };
-		0FAF98A41CE40F3C009BDBB5 /* QRCodeReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF989B1CE40F3C009BDBB5 /* QRCodeReader.m */; };
-		0FAF98A51CE40F3C009BDBB5 /* QRCodeReaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF989E1CE40F3C009BDBB5 /* QRCodeReaderView.m */; };
-		0FAF98A61CE40F3C009BDBB5 /* QRCodeReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF98A01CE40F3C009BDBB5 /* QRCodeReaderViewController.m */; };
-		0FAF98A71CE40F3C009BDBB5 /* QRToggleTorchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF98A21CE40F3C009BDBB5 /* QRToggleTorchButton.m */; };
 		0FAF98B31CE42A3B009BDBB5 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FAF98B21CE42A3B009BDBB5 /* libicucore.tbd */; };
 		0FAF98B61CE45EC9009BDBB5 /* CryptoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAF98B51CE45EC9009BDBB5 /* CryptoManager.m */; };
 		0FB205E91CDC312A00B5E87E /* IOManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB205E81CDC312A00B5E87E /* IOManager.m */; };
@@ -627,17 +622,6 @@
 		0FAF8FF41CE1B514000557BD /* VolumeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VolumeManager.m; sourceTree = "<group>"; };
 		0FAF8FF91CE1D9BC000557BD /* UploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadManager.h; sourceTree = "<group>"; };
 		0FAF8FFA1CE1D9BC000557BD /* UploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadManager.m; sourceTree = "<group>"; };
-		0FAF98981CE40F3C009BDBB5 /* QRCameraSwitchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QRCameraSwitchButton.h; path = QRCodeReader/QRCameraSwitchButton.h; sourceTree = SOURCE_ROOT; };
-		0FAF98991CE40F3C009BDBB5 /* QRCameraSwitchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QRCameraSwitchButton.m; path = QRCodeReader/QRCameraSwitchButton.m; sourceTree = SOURCE_ROOT; };
-		0FAF989A1CE40F3C009BDBB5 /* QRCodeReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QRCodeReader.h; path = QRCodeReader/QRCodeReader.h; sourceTree = SOURCE_ROOT; };
-		0FAF989B1CE40F3C009BDBB5 /* QRCodeReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QRCodeReader.m; path = QRCodeReader/QRCodeReader.m; sourceTree = SOURCE_ROOT; };
-		0FAF989C1CE40F3C009BDBB5 /* QRCodeReaderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QRCodeReaderDelegate.h; path = QRCodeReader/QRCodeReaderDelegate.h; sourceTree = SOURCE_ROOT; };
-		0FAF989D1CE40F3C009BDBB5 /* QRCodeReaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QRCodeReaderView.h; path = QRCodeReader/QRCodeReaderView.h; sourceTree = SOURCE_ROOT; };
-		0FAF989E1CE40F3C009BDBB5 /* QRCodeReaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QRCodeReaderView.m; path = QRCodeReader/QRCodeReaderView.m; sourceTree = SOURCE_ROOT; };
-		0FAF989F1CE40F3C009BDBB5 /* QRCodeReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QRCodeReaderViewController.h; path = QRCodeReader/QRCodeReaderViewController.h; sourceTree = SOURCE_ROOT; };
-		0FAF98A01CE40F3C009BDBB5 /* QRCodeReaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QRCodeReaderViewController.m; path = QRCodeReader/QRCodeReaderViewController.m; sourceTree = SOURCE_ROOT; };
-		0FAF98A11CE40F3C009BDBB5 /* QRToggleTorchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QRToggleTorchButton.h; path = QRCodeReader/QRToggleTorchButton.h; sourceTree = SOURCE_ROOT; };
-		0FAF98A21CE40F3C009BDBB5 /* QRToggleTorchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QRToggleTorchButton.m; path = QRCodeReader/QRToggleTorchButton.m; sourceTree = SOURCE_ROOT; };
 		0FAF98B21CE42A3B009BDBB5 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		0FAF98B41CE45EC9009BDBB5 /* CryptoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CryptoManager.h; sourceTree = "<group>"; };
 		0FAF98B51CE45EC9009BDBB5 /* CryptoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CryptoManager.m; sourceTree = "<group>"; };
@@ -1773,7 +1757,6 @@
 				0F6ADFDB1E71349500BFF67F /* IM */,
 				0FB205E41CDC302E00B5E87E /* public */,
 				0F01D53E1CDC6C4B00DAC267 /* entity */,
-				0FAF98971CE40F27009BDBB5 /* QRCodeReader */,
 				0F6423421DE57C83003379FC /* FFMpegDecoder */,
 				0FD3DEA61D3F181000AF7765 /* SCWave */,
 			);
@@ -1880,24 +1863,6 @@
 				0FABB33B1EAF22FC0089A5A4 /* ContextMenuCell.m */,
 			);
 			name = ContextMenuCell;
-			sourceTree = "<group>";
-		};
-		0FAF98971CE40F27009BDBB5 /* QRCodeReader */ = {
-			isa = PBXGroup;
-			children = (
-				0FAF98981CE40F3C009BDBB5 /* QRCameraSwitchButton.h */,
-				0FAF98991CE40F3C009BDBB5 /* QRCameraSwitchButton.m */,
-				0FAF989A1CE40F3C009BDBB5 /* QRCodeReader.h */,
-				0FAF989B1CE40F3C009BDBB5 /* QRCodeReader.m */,
-				0FAF989C1CE40F3C009BDBB5 /* QRCodeReaderDelegate.h */,
-				0FAF989D1CE40F3C009BDBB5 /* QRCodeReaderView.h */,
-				0FAF989E1CE40F3C009BDBB5 /* QRCodeReaderView.m */,
-				0FAF989F1CE40F3C009BDBB5 /* QRCodeReaderViewController.h */,
-				0FAF98A01CE40F3C009BDBB5 /* QRCodeReaderViewController.m */,
-				0FAF98A11CE40F3C009BDBB5 /* QRToggleTorchButton.h */,
-				0FAF98A21CE40F3C009BDBB5 /* QRToggleTorchButton.m */,
-			);
-			name = QRCodeReader;
 			sourceTree = "<group>";
 		};
 		0FB205E41CDC302E00B5E87E /* public */ = {
@@ -2534,6 +2499,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0F032D771CC9B12700D1920D /* Build configuration list for PBXNativeTarget "SmartHome" */;
 			buildPhases = (
+				78406D952F0D8F4FAFE918DF /* 📦 Check Pods Manifest.lock */,
 				70B41E7DAFB2516668C204F1 /* [CP] Check Pods Manifest.lock */,
 				A6AA72E81750E5551DB3BF43 /* [CP] Check Pods Manifest.lock */,
 				7111AFB52FC0151747BC17C8 /* [CP] Check Pods Manifest.lock */,
@@ -2554,6 +2520,8 @@
 				901B98770BA9652E39727DC8 /* [CP] Copy Pods Resources */,
 				96D783ECF2FC5954ED57287C /* √î¬£√∏‚àö¬∫‚àö¬®¬¨‚àÇ Embed Pods Frameworks */,
 				4ABB1A0B0312B56BE2774A85 /* √î¬£√∏‚àö¬∫‚àö¬®¬¨‚àÇ Copy Pods Resources */,
+				4E52A7E76F61C3C8884FFFFE /* 📦 Embed Pods Frameworks */,
+				F169192FBFAB7CFE1569E0C4 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2838,6 +2806,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		4E52A7E76F61C3C8884FFFFE /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		526834747F80F77E4EA860E8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2891,6 +2874,21 @@
 			inputPaths = (
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		78406D952F0D8F4FAFE918DF /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3003,6 +3001,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		F169192FBFAB7CFE1569E0C4 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -3023,7 +3036,6 @@
 				0F4B3C741E7BE57A00102DD3 /* WeChatPayController.mm in Sources */,
 				0F7426C21EBB362F00D686B8 /* WettingController.m in Sources */,
 				F62CFA471DAC92F3006410F7 /* IphoneRealSceneController.m in Sources */,
-				0FAF98A31CE40F3C009BDBB5 /* QRCameraSwitchButton.m in Sources */,
 				0FD3DEAA1D3F183D00AF7765 /* SCWaveAnimationView.m in Sources */,
 				CDFB9DF51E64125500BFECCE /* DeviceTimerCell.m in Sources */,
 				F651640D1D3766C900A6F5FA /* MyEnergyViewController.m in Sources */,
@@ -3059,7 +3071,6 @@
 				0FABB33C1EAF22FC0089A5A4 /* ContextMenuCell.m in Sources */,
 				F6642A811D4220100003D56B /* DeviceListController.m in Sources */,
 				0F094AC61E94CDC100977123 /* Key.m in Sources */,
-				0FAF98A41CE40F3C009BDBB5 /* QRCodeReader.m in Sources */,
 				CD9F0AC41EB861F5007B0CF7 /* Province.m in Sources */,
 				0F7426B71EBAC7A000D686B8 /* HTCircularSlider.m in Sources */,
 				F62E05661DAB68620096BF00 /* IphoneEditSceneController.m in Sources */,
@@ -3129,7 +3140,6 @@
 				0FA1E09E1D533BFA001CA819 /* PluginCell.m in Sources */,
 				F66596E61D3F5DBC0082716A /* AddNewScenseController.m in Sources */,
 				0F180FC91D0E4E6500392F4C /* GuardController.m in Sources */,
-				0FAF98A71CE40F3C009BDBB5 /* QRToggleTorchButton.m in Sources */,
 				2EBABC7D1E8361C50093EF3A /* OtherTableViewCell.m in Sources */,
 				0F25FE5E1CEB0C0A0063E834 /* SceneList.m in Sources */,
 				F625A6181D4C8EF700B696E5 /* ProfileListController.m in Sources */,
@@ -3234,7 +3244,6 @@
 				CDB8B85E1EB1EBD2003AA894 /* UserInfo.m in Sources */,
 				0F7426C11EBB362F00D686B8 /* FeedingController.m in Sources */,
 				F65DB3411D2B5AB2002A815C /* RegisterDetailController.m in Sources */,
-				0FAF98A61CE40F3C009BDBB5 /* QRCodeReaderViewController.m in Sources */,
 				0F8D76D01D9A1B9700DDD063 /* Schedule.m in Sources */,
 				0FCF43311CE09039009BFDD9 /* IbeaconManager.m in Sources */,
 				2E04198B1EB89F42004D70B9 /* FSLineChart.m in Sources */,
@@ -3267,7 +3276,6 @@
 				2E8AC52F1E7BAE350002E717 /* FirstViewController.m in Sources */,
 				F663CA661D98D131001F87F3 /* IphoneDevicesController.m in Sources */,
 				F6755A581D40D450002394F3 /* ECloudButton.m in Sources */,
-				0FAF98A51CE40F3C009BDBB5 /* QRCodeReaderView.m in Sources */,
 				F69C82331D363376002DE6D7 /* ServiceRecordViewController.m in Sources */,
 				F66596E01D3F25610082716A /* SceneController.m in Sources */,
 				2E12CC0A1E7F5DC400C7D006 /* FirstSceneViewController.m in Sources */,
