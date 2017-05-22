@@ -15,6 +15,7 @@
 		0F032D731CC9B12700D1920D /* SmartHomeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F032D721CC9B12700D1920D /* SmartHomeUITests.m */; };
 		0F094AC31E94CD3A00977123 /* Keypad.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F094AC21E94CD3A00977123 /* Keypad.m */; };
 		0F094AC61E94CDC100977123 /* Key.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F094AC51E94CDC100977123 /* Key.m */; };
+		0F0A40111ED2CDF0002003C4 /* demo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0F0A40101ED2CDF0002003C4 /* demo.mp4 */; };
 		0F11654F1D7418EE00A01B8F /* Amplifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F11654E1D7418EE00A01B8F /* Amplifier.m */; };
 		0F180FC31D0E4C7400392F4C /* NetvController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F180FC21D0E4C7400392F4C /* NetvController.m */; };
 		0F180FC61D0E4E5000392F4C /* FMController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F180FC51D0E4E5000392F4C /* FMController.m */; };
@@ -407,6 +408,7 @@
 		0F094AC21E94CD3A00977123 /* Keypad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Keypad.m; sourceTree = "<group>"; };
 		0F094AC41E94CDC100977123 /* Key.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Key.h; sourceTree = "<group>"; };
 		0F094AC51E94CDC100977123 /* Key.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Key.m; sourceTree = "<group>"; };
+		0F0A40101ED2CDF0002003C4 /* demo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = demo.mp4; sourceTree = "<group>"; };
 		0F11654D1D7418EE00A01B8F /* Amplifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Amplifier.h; sourceTree = "<group>"; };
 		0F11654E1D7418EE00A01B8F /* Amplifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Amplifier.m; sourceTree = "<group>"; };
 		0F180FC11D0E4C7400392F4C /* NetvController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetvController.h; sourceTree = "<group>"; };
@@ -645,7 +647,6 @@
 		0FB205EA1CDC350D00B5E87E /* public.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = public.h; sourceTree = "<group>"; };
 		0FB205EB1CDC3D3700B5E87E /* AudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioManager.h; sourceTree = "<group>"; };
 		0FB205EC1CDC3D3700B5E87E /* AudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioManager.m; sourceTree = "<group>"; };
-		0FB2E1D31ED27BEA00389ECB /* demo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = demo.mp4; sourceTree = "<group>"; };
 		0FB35C661DB0CECA00B48EA7 /* Plugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plugin.h; sourceTree = "<group>"; };
 		0FB35C671DB0CECA00B48EA7 /* Plugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plugin.m; sourceTree = "<group>"; };
 		0FB42E1C1CF681A7007DE64F /* planeScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = planeScene.h; sourceTree = "<group>"; };
@@ -1827,7 +1828,7 @@
 		0F6ADFDC1E7134ED00BFF67F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				0FB2E1D31ED27BEA00389ECB /* demo.mp4 */,
+				0F0A40101ED2CDF0002003C4 /* demo.mp4 */,
 				CDEE5EA71EC3EC5900A5779D /* launchingAnimation.gif */,
 				CDF78C591E9CC3C500F8B20C /* NaviBarBg.png */,
 				CDEC868C1E99E32B009EC245 /* Family */,
@@ -2694,6 +2695,7 @@
 				F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */,
 				0F49CB7E1E7A204300D46ECC /* Scene-iPad.storyboard in Resources */,
 				CDFB9DF21E5DCB4D00BFECCE /* SceneTimerList.plist in Resources */,
+				0F0A40111ED2CDF0002003C4 /* demo.mp4 in Resources */,
 				0F49CB7C1E7A204300D46ECC /* Login-iPad.storyboard in Resources */,
 				0F49CB7B1E7A204300D46ECC /* Home-iPad.storyboard in Resources */,
 				CDF90B451E2F4B14009043B9 /* planeScene.plist in Resources */,
