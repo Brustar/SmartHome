@@ -7,7 +7,6 @@
 //
 
 #import "ProjectController.h"
-#import "DetailTableViewCell.h"
 #import "SQLManager.h"
 #import "SocketManager.h"
 #import "Scene.h"

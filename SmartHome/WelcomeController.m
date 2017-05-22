@@ -18,7 +18,6 @@
 //#import "SunCount.h"
 #import <CoreLocation/CoreLocation.h>
 #import "PackManager.h"
-#import "IphoneTabBarViewController.h"
 
 @interface WelcomeController ()<QRCodeReaderDelegate,UIScrollViewDelegate,UIGestureRecognizerDelegate,UIPageViewControllerDelegate,NSLayoutManagerDelegate,CLLocationManagerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *knowView;
@@ -87,21 +86,7 @@
 }
 
 - (IBAction)demo:(id)sender {
-    DeviceInfo *info=[DeviceInfo defaultManager];
-        info.db=@"demoDB";
-        info.masterID = 255l;
-    
-    [DeviceInfo defaultManager].masterID = 255l;
-    
-    [[NSUserDefaults standardUserDefaults] objectForKey:@"HostID"];
-    [SQLManager initDemoSQlite];
-    
-    if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-    {
-        [self performSegueWithIdentifier:@"iphoneMainController" sender:self];
-    }else{
-        [self performSegueWithIdentifier:@"gotoMainController" sender:self];
-    }
+
 
 }
 

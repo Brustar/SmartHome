@@ -13,9 +13,7 @@
 #import "IphoneDeviceListController.h"
 #import "LightController.h"
 #import "CurtainController.h"
-#import "IphoneTVController.h"
-#import "IphoneDVDController.h"
-#import "IphoneNetTvController.h"
+
 #import "FMController.h"
 #import "PluginViewController.h"
 #import "CameraController.h"
@@ -30,7 +28,6 @@
 #import "CollectionViewCell.h"
 #import "TouchSubViewController.h"
 #import "HttpManager.h"
-#import "IphoneDevicesController.h"
 #import "NewColourCell.h"
 #import "NewLightCell.h"
 #import "FMTableViewCell.h"

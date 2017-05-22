@@ -11,9 +11,7 @@
 #import "Room.h"
 #import "LightController.h"
 #import "CurtainController.h"
-#import "IphoneTVController.h"
-#import "IphoneDVDController.h"
-#import "IphoneNetTvController.h"
+
 #import "FMController.h"
 
 #import "PluginViewController.h"

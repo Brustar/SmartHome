@@ -26,12 +26,7 @@
 #import "MBProgressHUD+NJ.h"
 #import "ScreenCurtainController.h"
 #import "ProjectController.h"
-#import "IphoneTVController.h"
-//#import "IphoneAirController.h"
 
-#import "IphoneDVDController.h"
-#import "IphoneNetTvController.h"
-#import "SQLManager.h"
 #import "Device.h"
 #import "BgMusicController.h"
 #import "WindowSlidingController.h"
@@ -144,12 +139,12 @@
         if([typeName isEqualToString:@"网络电视"])
     {
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
-            
+            /*
             IphoneTVController *tvc = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneTVController"];
             
             tvc.deviceid = [NSString stringWithFormat:@"%d",eId];
             [self.navigationController pushViewController:tvc animated:YES];
-            
+            */
         }else{
             
             TVController *tVC = [storyBoard instantiateViewControllerWithIdentifier:@"TVController"];
@@ -175,11 +170,11 @@
     }else if([typeName isEqualToString:@"DVD"])
     {
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
-            
+            /*
             IphoneDVDController * IphoneDVD = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneDVDController"];
             IphoneDVD.deviceid = [NSString stringWithFormat:@"%d",eId];
             [self.navigationController pushViewController:IphoneDVD animated:YES];
-            
+            */
         }else{
             
             DVDController *dvdVC = [storyBoard instantiateViewControllerWithIdentifier:@"DVDController"];
@@ -206,10 +201,11 @@
 
     }else if([typeName isEqualToString:@"机顶盒"]){
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
+            /*
             IphoneNetTvController * Iphonenet = [iphoneBoard instantiateViewControllerWithIdentifier:@"IphoneNetTvController"];
             Iphonenet.deviceid = [NSString stringWithFormat:@"%d",eId];
             [self.navigationController pushViewController:Iphonenet animated:YES];
-            
+            */
         }else{
             
             NetvController *netVC = [storyBoard instantiateViewControllerWithIdentifier:@"NetvController"];
