@@ -25,6 +25,7 @@
 #import "WeChatPayManager.h"
 #import <RongIMKit/RongIMKit.h>
 #import "RCDataManager.h"
+#import "IpadFirstViewController.h"
 
 
 @implementation AppDelegate
@@ -80,9 +81,13 @@
 }
 
 - (void)loadingLaunchingViewController {
+ if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
     LaunchingViewController *launchingVC = [[LaunchingViewController alloc] init];
     self.window.rootViewController = launchingVC;
     [self.window makeKeyAndVisible];
+           
+ }
+    
 }
 
 - (void)loadingLoginViewController {
@@ -111,8 +116,6 @@
         }
         
         [self.window makeKeyAndVisible];
-        
-        
         
     }else {
         //已登录时

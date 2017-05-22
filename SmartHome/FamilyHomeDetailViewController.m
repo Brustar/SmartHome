@@ -375,7 +375,6 @@
             return otherCell;
         }
         
-        
     }else if (indexPath.section == 3) {//影音
         Device *device = [SQLManager getDeviceWithDeviceID:[_multiMediaArray[indexPath.row] intValue]];
         

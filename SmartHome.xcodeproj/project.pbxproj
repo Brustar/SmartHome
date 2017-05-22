@@ -134,6 +134,7 @@
 		2E01840C1ECDE77C00E3705F /* CoreGraphicsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0184041ECDE77C00E3705F /* CoreGraphicsExtensions.swift */; };
 		2E01840D1ECDE77C00E3705F /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0184051ECDE77C00E3705F /* DateExtensions.swift */; };
 		2E01840E1ECDE77C00E3705F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E0184061ECDE77C00E3705F /* Info.plist */; };
+		2E0184101ECF40A200E3705F /* demo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2E01840F1ECF40A200E3705F /* demo.mp4 */; };
 		2E0297271E4C4C7600BBC520 /* MySubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0297261E4C4C7600BBC520 /* MySubView.m */; };
 		2E03E2FA1ECA904F00487319 /* SeneLightModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E03E2F91ECA904F00487319 /* SeneLightModel.m */; };
 		2E03E3001ECAD57E00487319 /* ECMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E03E2FF1ECAD57E00487319 /* ECMessage.m */; };
@@ -196,6 +197,10 @@
 		2EC8A5901E372C51002A5042 /* IphoneDeviceLightVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC8A58F1E372C51002A5042 /* IphoneDeviceLightVC.m */; };
 		2EC8A5931E372D75002A5042 /* ColourCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC8A5921E372D75002A5042 /* ColourCell.m */; };
 		2EC9B8281EB1BFE500F382AD /* PushSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC9B8271EB1BFE500F382AD /* PushSettingCell.m */; };
+		2ECD5B161ED276DC0091880D /* IpadFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECD5B151ED276DC0091880D /* IpadFirstViewController.m */; };
+		2ECD5B1A1ED28D6E0091880D /* IpadSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECD5B191ED28D6E0091880D /* IpadSceneViewController.m */; };
+		2ECD5B261ED2D8150091880D /* IpadSceneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECD5B241ED2D8150091880D /* IpadSceneCell.m */; };
+		2ECD5B271ED2D8150091880D /* IpadSceneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2ECD5B251ED2D8150091880D /* IpadSceneCell.xib */; };
 		2ECDCC901E9E3623004C68BE /* BjMusicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECDCC8E1E9E3623004C68BE /* BjMusicTableViewCell.m */; };
 		2ECDCC911E9E3623004C68BE /* BjMusicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2ECDCC8F1E9E3623004C68BE /* BjMusicTableViewCell.xib */; };
 		2ED42B931E35B41E00592A03 /* IphoneAirCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ED42B921E35B41E00592A03 /* IphoneAirCell.m */; };
@@ -719,6 +724,7 @@
 		2E0184061ECDE77C00E3705F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E0184071ECDE77C00E3705F /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		2E0184081ECDE77C00E3705F /* TenClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TenClock.h; sourceTree = "<group>"; };
+		2E01840F1ECF40A200E3705F /* demo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = demo.mp4; sourceTree = "<group>"; };
 		2E0297251E4C4C7600BBC520 /* MySubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySubView.h; sourceTree = "<group>"; };
 		2E0297261E4C4C7600BBC520 /* MySubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySubView.m; sourceTree = "<group>"; };
 		2E03E2F81ECA904F00487319 /* SeneLightModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeneLightModel.h; sourceTree = "<group>"; };
@@ -828,6 +834,13 @@
 		2EC8A5921E372D75002A5042 /* ColourCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColourCell.m; sourceTree = "<group>"; };
 		2EC9B8261EB1BFE500F382AD /* PushSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushSettingCell.h; sourceTree = "<group>"; };
 		2EC9B8271EB1BFE500F382AD /* PushSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushSettingCell.m; sourceTree = "<group>"; };
+		2ECD5B141ED276DC0091880D /* IpadFirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpadFirstViewController.h; sourceTree = "<group>"; };
+		2ECD5B151ED276DC0091880D /* IpadFirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IpadFirstViewController.m; sourceTree = "<group>"; };
+		2ECD5B181ED28D6E0091880D /* IpadSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpadSceneViewController.h; sourceTree = "<group>"; };
+		2ECD5B191ED28D6E0091880D /* IpadSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IpadSceneViewController.m; sourceTree = "<group>"; };
+		2ECD5B231ED2D8150091880D /* IpadSceneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpadSceneCell.h; sourceTree = "<group>"; };
+		2ECD5B241ED2D8150091880D /* IpadSceneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IpadSceneCell.m; sourceTree = "<group>"; };
+		2ECD5B251ED2D8150091880D /* IpadSceneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IpadSceneCell.xib; sourceTree = "<group>"; };
 		2ECDCC8D1E9E3623004C68BE /* BjMusicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BjMusicTableViewCell.h; sourceTree = "<group>"; };
 		2ECDCC8E1E9E3623004C68BE /* BjMusicTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BjMusicTableViewCell.m; sourceTree = "<group>"; };
 		2ECDCC8F1E9E3623004C68BE /* BjMusicTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BjMusicTableViewCell.xib; sourceTree = "<group>"; };
@@ -1783,6 +1796,7 @@
 		0F6ADFD81E7133BB00BFF67F /* UI3.0 */ = {
 			isa = PBXGroup;
 			children = (
+				2ECD5B101ED276480091880D /* ipadControllers */,
 				0F6ADFDC1E7134ED00BFF67F /* Resource */,
 				0F6ADFDA1E71343600BFF67F /* Controllers */,
 				0F6ADFD91E71341F00BFF67F /* Storyboards */,
@@ -1828,6 +1842,7 @@
 		0F6ADFDC1E7134ED00BFF67F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				2E01840F1ECF40A200E3705F /* demo.mp4 */,
 				CDEE5EA71EC3EC5900A5779D /* launchingAnimation.gif */,
 				CDF78C591E9CC3C500F8B20C /* NaviBarBg.png */,
 				CDEC868C1E99E32B009EC245 /* Family */,
@@ -2203,6 +2218,36 @@
 				2E6A065A1EA743B50022B681 /* NewColourCell.xib */,
 			);
 			name = TableViewCell;
+			sourceTree = "<group>";
+		};
+		2ECD5B101ED276480091880D /* ipadControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2ECD5B171ED28D530091880D /* ipadSceneVC */,
+				2ECD5B111ED276710091880D /* ipadFirstVC */,
+			);
+			name = ipadControllers;
+			sourceTree = "<group>";
+		};
+		2ECD5B111ED276710091880D /* ipadFirstVC */ = {
+			isa = PBXGroup;
+			children = (
+				2ECD5B141ED276DC0091880D /* IpadFirstViewController.h */,
+				2ECD5B151ED276DC0091880D /* IpadFirstViewController.m */,
+			);
+			name = ipadFirstVC;
+			sourceTree = "<group>";
+		};
+		2ECD5B171ED28D530091880D /* ipadSceneVC */ = {
+			isa = PBXGroup;
+			children = (
+				2ECD5B181ED28D6E0091880D /* IpadSceneViewController.h */,
+				2ECD5B191ED28D6E0091880D /* IpadSceneViewController.m */,
+				2ECD5B231ED2D8150091880D /* IpadSceneCell.h */,
+				2ECD5B241ED2D8150091880D /* IpadSceneCell.m */,
+				2ECD5B251ED2D8150091880D /* IpadSceneCell.xib */,
+			);
+			name = ipadSceneVC;
 			sourceTree = "<group>";
 		};
 		2EDE045E1E45772000BC8E0B /* WebViewManger */ = {
@@ -2687,6 +2732,7 @@
 				2EC266291EA4BEAF003DC979 /* FMTableViewCell.xib in Resources */,
 				CDF3892C1E30B86500657C8B /* msgList.plist in Resources */,
 				2E6A065C1EA743B50022B681 /* NewColourCell.xib in Resources */,
+				2ECD5B271ED2D8150091880D /* IpadSceneCell.xib in Resources */,
 				0F49CB7D1E7A204300D46ECC /* MyInfo-iPad.storyboard in Resources */,
 				CD78A8321E337C1600060466 /* 255_216.plist in Resources */,
 				CDF389321E30EA8900657C8B /* hostUserList.plist in Resources */,
@@ -2695,6 +2741,7 @@
 				F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */,
 				0F49CB7E1E7A204300D46ECC /* Scene-iPad.storyboard in Resources */,
 				CDFB9DF21E5DCB4D00BFECCE /* SceneTimerList.plist in Resources */,
+				2E0184101ECF40A200E3705F /* demo.mp4 in Resources */,
 				0F49CB7C1E7A204300D46ECC /* Login-iPad.storyboard in Resources */,
 				0F49CB7B1E7A204300D46ECC /* Home-iPad.storyboard in Resources */,
 				CDF90B451E2F4B14009043B9 /* planeScene.plist in Resources */,
@@ -3068,6 +3115,7 @@
 				2EEFF74A1E9649A0008F2C7F /* IphoneNewAddSceneVC.m in Sources */,
 				F65AF6DA1D3375700048A4E5 /* ProfileFaultsCell.m in Sources */,
 				F646C0B91D91173000DF1728 /* IphoneRoomView.m in Sources */,
+				2ECD5B261ED2D8150091880D /* IpadSceneCell.m in Sources */,
 				0FABF91F1D06AA4E000892D8 /* DVDController.m in Sources */,
 				2E0184091ECDE77C00E3705F /* AvoidingSubviewScrollViewDelegate.swift in Sources */,
 				F64EF7FE1D8FBCC1003C1C48 /* IphoneSceneController.m in Sources */,
@@ -3098,6 +3146,7 @@
 				2EB516F41E9CE3A40064B18E /* ScreenCurtainCell.m in Sources */,
 				0F91AA171CDC798700094C25 /* PrintObject.m in Sources */,
 				0F3CCF3B1D0F97B70058A320 /* CameraController.m in Sources */,
+				2ECD5B161ED276DC0091880D /* IpadFirstViewController.m in Sources */,
 				2EC266281EA4BEAF003DC979 /* FMTableViewCell.m in Sources */,
 				0FC0FFDA1CF577C0000F71D5 /* RealScene.m in Sources */,
 				CD9F0AB81EB78DD0007B0CF7 /* DeliveryAddressSettingViewController.m in Sources */,
@@ -3255,6 +3304,7 @@
 				2E04198C1EB89F42004D70B9 /* UIColor+FSPalette.m in Sources */,
 				F663CA631D98C5FE001F87F3 /* IphoneAddSceneController.m in Sources */,
 				2ED42B931E35B41E00592A03 /* IphoneAirCell.m in Sources */,
+				2ECD5B1A1ED28D6E0091880D /* IpadSceneViewController.m in Sources */,
 				CDEC86951E9A21F4009EC245 /* RoomStatus.m in Sources */,
 				0F6423491DE57C83003379FC /* AudioStreamer.m in Sources */,
 				F65838D41D39D3BB004210AC /* WelcomeController.m in Sources */,
@@ -3449,7 +3499,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "SmartHome-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -3457,6 +3507,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CE54136C9EEF8F51E8FBEEDE /* Pods-SmartHome.release.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SmartHome/SmartHome.entitlements;
@@ -3498,7 +3549,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SmartHome-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

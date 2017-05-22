@@ -10,7 +10,6 @@
 #import "PackManager.h" 
 #import "SocketManager.h"
 #import "SQLManager.h"
-
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "SceneManager.h"

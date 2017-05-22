@@ -60,8 +60,6 @@
         [center postNotificationName:@"subType" object:nil userInfo:dict];
     }
     
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {

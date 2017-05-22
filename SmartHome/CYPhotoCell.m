@@ -38,17 +38,6 @@
 
 //开关
 - (IBAction)powerBtn:(id)sender {
-    
-//  self.powerBtn.selected = !self.powerBtn.selected;
-//         if (self.powerBtn.selected) {
-//             [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
-//             [[SceneManager defaultManager] startScene:self.sceneID];
-//             [SQLManager updateSceneStatus:1 sceneID:self.sceneID];//更新数据库
-//         }{
-//             [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
-//             [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];
-//             [SQLManager updateSceneStatus:0 sceneID:self.sceneID];//更新数据库
-//          }
         if (self.sceneStatus == 0) { //点击前，场景是关闭状态，需打开场景
              [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
             [[SceneManager defaultManager] startScene:self.sceneID];//打开场景
@@ -75,14 +64,5 @@
         [self.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock1"] forState:UIControlStateNormal];
     }
 }
-//- (void)setSceneInfo:(Scene *)info {
-//    self.SceneName.text = info.sceneName;
-//    self.sceneStatus = info.status;
-//    [self.imageView sd_setImageWithURL:[NSURL URLWithString: info.picName] placeholderImage:[UIImage imageNamed:@"PL"]];
-//    if (self.sceneStatus == 0) {
-//        [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
-//    }else if (self.sceneStatus == 1) {
-//        [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateNormal];
-//    }
-//}
+
 @end
