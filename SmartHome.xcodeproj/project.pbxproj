@@ -147,8 +147,6 @@
 		2E5E5FEC1DE22AC8006F0C8F /* LightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5E5FEB1DE22AC8006F0C8F /* LightCell.m */; };
 		2E6328081E03C3C6000D7BE9 /* IphoneSceneAirVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6328071E03C3C6000D7BE9 /* IphoneSceneAirVC.m */; };
 		2E63280B1E03C993000D7BE9 /* IPhoneSceneDVDVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E63280A1E03C993000D7BE9 /* IPhoneSceneDVDVC.m */; };
-		2E63280E1E03CB06000D7BE9 /* IPhoneTVVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E63280D1E03CB06000D7BE9 /* IPhoneTVVC.m */; };
-		2E6328111E03CE4B000D7BE9 /* IPhoneNetVV.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6328101E03CE4B000D7BE9 /* IPhoneNetVV.m */; };
 		2E6A065B1EA743B50022B681 /* NewColourCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6A06591EA743B50022B681 /* NewColourCell.m */; };
 		2E6A065C1EA743B50022B681 /* NewColourCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E6A065A1EA743B50022B681 /* NewColourCell.xib */; };
 		2E6CEDBF1DE5DE8B000979BE /* DetailMSGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6CEDBE1DE5DE8B000979BE /* DetailMSGViewController.m */; };
@@ -203,7 +201,6 @@
 		2EF75C7D1EB2CAE00055147D /* ShortcutKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF75C7B1EB2CAE00055147D /* ShortcutKeyViewController.m */; };
 		2EF75C811EB32D390055147D /* DeviceTimingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF75C801EB32D390055147D /* DeviceTimingViewController.m */; };
 		2EFB6B591E665C440058F305 /* UITabBar+BadgeValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFB6B581E665C440058F305 /* UITabBar+BadgeValue.m */; };
-		2EFFECA11E12161100C13D3E /* FixTimeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFFECA01E12161100C13D3E /* FixTimeListViewController.m */; };
 		CD43046F1E0B674000B594F4 /* FamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD43046E1E0B674000B594F4 /* FamilyViewController.m */; };
 		CD4F12441EB316EF00E0B301 /* DeliveryAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4F12431EB316EF00E0B301 /* DeliveryAddressViewController.m */; };
 		CD4F12471EB4400A00E0B301 /* DeliveryAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4F12461EB4400A00E0B301 /* DeliveryAddressCell.m */; };
@@ -294,9 +291,6 @@
 		F6251F771D542508000A5A47 /* SQLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6251F761D542508000A5A47 /* SQLManager.m */; };
 		F625A6181D4C8EF700B696E5 /* ProfileListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F625A6171D4C8EF700B696E5 /* ProfileListController.m */; };
 		F625A61B1D4C99EC00B696E5 /* RoomListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F625A61A1D4C99EC00B696E5 /* RoomListController.m */; };
-		F6280D4A1D961C62009108ED /* IphoneAddTVChannelController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6280D491D961C62009108ED /* IphoneAddTVChannelController.m */; };
-		F6280D531D966218009108ED /* IphoneAddFmController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6280D521D966218009108ED /* IphoneAddFmController.m */; };
-		F62CD87A1D94BE99001C66CE /* IphoneTVController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CD8791D94BE99001C66CE /* IphoneTVController.m */; };
 		F62CFA411DAC699D006410F7 /* IphoneTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CFA401DAC699D006410F7 /* IphoneTypeView.m */; };
 		F62CFA441DAC90DD006410F7 /* IphoneSaveNewSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CFA431DAC90DD006410F7 /* IphoneSaveNewSceneController.m */; };
 		F62CFA471DAC92F3006410F7 /* IphoneRealSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62CFA461DAC92F3006410F7 /* IphoneRealSceneController.m */; };
@@ -324,17 +318,13 @@
 		F65164141D3780C500A6F5FA /* TVLogoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F65164131D3780C500A6F5FA /* TVLogoCell.m */; };
 		F65838D41D39D3BB004210AC /* WelcomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65838D31D39D3BB004210AC /* WelcomeController.m */; };
 		F65838DA1D3A2A43004210AC /* MsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F65838D91D3A2A43004210AC /* MsgCell.m */; };
-		F659110C1D967383002CFBB7 /* IphoneNetTvController.m in Sources */ = {isa = PBXBuildFile; fileRef = F659110B1D967383002CFBB7 /* IphoneNetTvController.m */; };
 		F65AF6D41D3370770048A4E5 /* ProfileFaultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65AF6D31D3370770048A4E5 /* ProfileFaultsViewController.m */; };
 		F65AF6DA1D3375700048A4E5 /* ProfileFaultsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F65AF6D91D3375700048A4E5 /* ProfileFaultsCell.m */; };
 		F65B7D271D34E9E00059CFA4 /* MySettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65B7D261D34E9E00059CFA4 /* MySettingViewController.m */; };
 		F65DB3411D2B5AB2002A815C /* RegisterDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65DB33C1D2B5AB2002A815C /* RegisterDetailController.m */; };
 		F65DB3421D2B5AB2002A815C /* RegisterPhoneNumController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65DB33E1D2B5AB2002A815C /* RegisterPhoneNumController.m */; };
 		F65FF4AB1D61C57100C12271 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F65FF4A91D61AC3D00C12271 /* SearchViewController.m */; };
-		F663CA5F1D98A733001F87F3 /* IphoneDVDController.m in Sources */ = {isa = PBXBuildFile; fileRef = F663CA5E1D98A733001F87F3 /* IphoneDVDController.m */; };
 		F663CA631D98C5FE001F87F3 /* IphoneAddSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = F663CA621D98C5FE001F87F3 /* IphoneAddSceneController.m */; };
-		F663CA661D98D131001F87F3 /* IphoneDevicesController.m in Sources */ = {isa = PBXBuildFile; fileRef = F663CA651D98D131001F87F3 /* IphoneDevicesController.m */; };
-		F663CA691D990138001F87F3 /* IphoneFixTimerController.m in Sources */ = {isa = PBXBuildFile; fileRef = F663CA681D990138001F87F3 /* IphoneFixTimerController.m */; };
 		F6642A781D41F55E0003D56B /* ScenseSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6642A771D41F55E0003D56B /* ScenseSplitViewController.m */; };
 		F6642A811D4220100003D56B /* DeviceListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6642A801D4220100003D56B /* DeviceListController.m */; };
 		F66596DA1D3F12FB0082716A /* EnergyOfDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = F66596D91D3F12FB0082716A /* EnergyOfDeviceController.m */; };
@@ -733,10 +723,6 @@
 		2E6328071E03C3C6000D7BE9 /* IphoneSceneAirVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneSceneAirVC.m; sourceTree = "<group>"; };
 		2E6328091E03C993000D7BE9 /* IPhoneSceneDVDVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPhoneSceneDVDVC.h; sourceTree = "<group>"; };
 		2E63280A1E03C993000D7BE9 /* IPhoneSceneDVDVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPhoneSceneDVDVC.m; sourceTree = "<group>"; };
-		2E63280C1E03CB06000D7BE9 /* IPhoneTVVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPhoneTVVC.h; sourceTree = "<group>"; };
-		2E63280D1E03CB06000D7BE9 /* IPhoneTVVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPhoneTVVC.m; sourceTree = "<group>"; };
-		2E63280F1E03CE4B000D7BE9 /* IPhoneNetVV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPhoneNetVV.h; sourceTree = "<group>"; };
-		2E6328101E03CE4B000D7BE9 /* IPhoneNetVV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPhoneNetVV.m; sourceTree = "<group>"; };
 		2E6A06581EA743B50022B681 /* NewColourCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewColourCell.h; sourceTree = "<group>"; };
 		2E6A06591EA743B50022B681 /* NewColourCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewColourCell.m; sourceTree = "<group>"; };
 		2E6A065A1EA743B50022B681 /* NewColourCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewColourCell.xib; sourceTree = "<group>"; };
@@ -835,8 +821,6 @@
 		2EF75C801EB32D390055147D /* DeviceTimingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceTimingViewController.m; sourceTree = "<group>"; };
 		2EFB6B571E665C440058F305 /* UITabBar+BadgeValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+BadgeValue.h"; sourceTree = "<group>"; };
 		2EFB6B581E665C440058F305 /* UITabBar+BadgeValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+BadgeValue.m"; sourceTree = "<group>"; };
-		2EFFEC9F1E12161100C13D3E /* FixTimeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixTimeListViewController.h; sourceTree = "<group>"; };
-		2EFFECA01E12161100C13D3E /* FixTimeListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixTimeListViewController.m; sourceTree = "<group>"; };
 		9B45FF693457BA21BA43CE05 /* Pods-SmartHome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.debug.xcconfig"; sourceTree = "<group>"; };
 		CD43046D1E0B674000B594F4 /* FamilyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyViewController.h; sourceTree = "<group>"; };
 		CD43046E1E0B674000B594F4 /* FamilyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyViewController.m; sourceTree = "<group>"; };
@@ -985,12 +969,6 @@
 		F625A6171D4C8EF700B696E5 /* ProfileListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileListController.m; sourceTree = "<group>"; };
 		F625A6191D4C99EC00B696E5 /* RoomListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomListController.h; sourceTree = "<group>"; };
 		F625A61A1D4C99EC00B696E5 /* RoomListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomListController.m; sourceTree = "<group>"; };
-		F6280D481D961C62009108ED /* IphoneAddTVChannelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneAddTVChannelController.h; sourceTree = "<group>"; };
-		F6280D491D961C62009108ED /* IphoneAddTVChannelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneAddTVChannelController.m; sourceTree = "<group>"; };
-		F6280D511D966218009108ED /* IphoneAddFmController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneAddFmController.h; sourceTree = "<group>"; };
-		F6280D521D966218009108ED /* IphoneAddFmController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneAddFmController.m; sourceTree = "<group>"; };
-		F62CD8781D94BE99001C66CE /* IphoneTVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneTVController.h; sourceTree = "<group>"; };
-		F62CD8791D94BE99001C66CE /* IphoneTVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneTVController.m; sourceTree = "<group>"; };
 		F62CFA3F1DAC699D006410F7 /* IphoneTypeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneTypeView.h; sourceTree = "<group>"; };
 		F62CFA401DAC699D006410F7 /* IphoneTypeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneTypeView.m; sourceTree = "<group>"; };
 		F62CFA421DAC90DD006410F7 /* IphoneSaveNewSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneSaveNewSceneController.h; sourceTree = "<group>"; };
@@ -1042,8 +1020,6 @@
 		F65838D31D39D3BB004210AC /* WelcomeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeController.m; sourceTree = "<group>"; };
 		F65838D81D3A2A43004210AC /* MsgCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgCell.h; sourceTree = "<group>"; };
 		F65838D91D3A2A43004210AC /* MsgCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgCell.m; sourceTree = "<group>"; };
-		F659110A1D967383002CFBB7 /* IphoneNetTvController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneNetTvController.h; sourceTree = "<group>"; };
-		F659110B1D967383002CFBB7 /* IphoneNetTvController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneNetTvController.m; sourceTree = "<group>"; };
 		F65AF6D21D3370770048A4E5 /* ProfileFaultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileFaultsViewController.h; sourceTree = "<group>"; };
 		F65AF6D31D3370770048A4E5 /* ProfileFaultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileFaultsViewController.m; sourceTree = "<group>"; };
 		F65AF6D81D3375700048A4E5 /* ProfileFaultsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileFaultsCell.h; sourceTree = "<group>"; };
@@ -1056,14 +1032,8 @@
 		F65DB33E1D2B5AB2002A815C /* RegisterPhoneNumController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterPhoneNumController.m; sourceTree = "<group>"; };
 		F65FF4A81D61AC3D00C12271 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		F65FF4A91D61AC3D00C12271 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
-		F663CA5D1D98A733001F87F3 /* IphoneDVDController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneDVDController.h; sourceTree = "<group>"; };
-		F663CA5E1D98A733001F87F3 /* IphoneDVDController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneDVDController.m; sourceTree = "<group>"; };
 		F663CA611D98C5FE001F87F3 /* IphoneAddSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneAddSceneController.h; sourceTree = "<group>"; };
 		F663CA621D98C5FE001F87F3 /* IphoneAddSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneAddSceneController.m; sourceTree = "<group>"; };
-		F663CA641D98D131001F87F3 /* IphoneDevicesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneDevicesController.h; sourceTree = "<group>"; };
-		F663CA651D98D131001F87F3 /* IphoneDevicesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneDevicesController.m; sourceTree = "<group>"; };
-		F663CA671D990138001F87F3 /* IphoneFixTimerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneFixTimerController.h; sourceTree = "<group>"; };
-		F663CA681D990138001F87F3 /* IphoneFixTimerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneFixTimerController.m; sourceTree = "<group>"; };
 		F6642A761D41F55E0003D56B /* ScenseSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScenseSplitViewController.h; sourceTree = "<group>"; };
 		F6642A771D41F55E0003D56B /* ScenseSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScenseSplitViewController.m; sourceTree = "<group>"; };
 		F6642A7F1D4220100003D56B /* DeviceListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceListController.h; sourceTree = "<group>"; };
@@ -2381,22 +2351,8 @@
 				F64EF8001D8FDCE7003C1C48 /* IphoneDeviceListController.m */,
 				F646C0B71D91173000DF1728 /* IphoneRoomView.h */,
 				F646C0B81D91173000DF1728 /* IphoneRoomView.m */,
-				F62CD8781D94BE99001C66CE /* IphoneTVController.h */,
-				F62CD8791D94BE99001C66CE /* IphoneTVController.m */,
-				F6280D481D961C62009108ED /* IphoneAddTVChannelController.h */,
-				F6280D491D961C62009108ED /* IphoneAddTVChannelController.m */,
-				F6280D511D966218009108ED /* IphoneAddFmController.h */,
-				F6280D521D966218009108ED /* IphoneAddFmController.m */,
-				F659110A1D967383002CFBB7 /* IphoneNetTvController.h */,
-				F659110B1D967383002CFBB7 /* IphoneNetTvController.m */,
-				F663CA5D1D98A733001F87F3 /* IphoneDVDController.h */,
-				F663CA5E1D98A733001F87F3 /* IphoneDVDController.m */,
 				F663CA611D98C5FE001F87F3 /* IphoneAddSceneController.h */,
 				F663CA621D98C5FE001F87F3 /* IphoneAddSceneController.m */,
-				F663CA641D98D131001F87F3 /* IphoneDevicesController.h */,
-				F663CA651D98D131001F87F3 /* IphoneDevicesController.m */,
-				F663CA671D990138001F87F3 /* IphoneFixTimerController.h */,
-				F663CA681D990138001F87F3 /* IphoneFixTimerController.m */,
 				2E801EF91E2621C70039A6D9 /* fixTimer */,
 				F62E05611DAB39F80096BF00 /* IphoneProfileController.h */,
 				F62E05621DAB39F80096BF00 /* IphoneProfileController.m */,
@@ -2433,12 +2389,6 @@
 				2E6328071E03C3C6000D7BE9 /* IphoneSceneAirVC.m */,
 				2E6328091E03C993000D7BE9 /* IPhoneSceneDVDVC.h */,
 				2E63280A1E03C993000D7BE9 /* IPhoneSceneDVDVC.m */,
-				2E63280C1E03CB06000D7BE9 /* IPhoneTVVC.h */,
-				2E63280D1E03CB06000D7BE9 /* IPhoneTVVC.m */,
-				2E63280F1E03CE4B000D7BE9 /* IPhoneNetVV.h */,
-				2E6328101E03CE4B000D7BE9 /* IPhoneNetVV.m */,
-				2EFFEC9F1E12161100C13D3E /* FixTimeListViewController.h */,
-				2EFFECA01E12161100C13D3E /* FixTimeListViewController.m */,
 				2E7CD6061E14B80C002D0541 /* FixTimeListCell.h */,
 				2E7CD6071E14B80C002D0541 /* FixTimeListCell.m */,
 				2EEE53691E3061930026F97D /* IphoneDetailViewController.h */,
@@ -3025,7 +2975,6 @@
 				CD9F0AD01EB9BC9C007B0CF7 /* HostListCell.m in Sources */,
 				2EBE210F1E497595003D53A4 /* ForgotViewController.m in Sources */,
 				0F7426BA1EBAC8D800D686B8 /* FloweringController.m in Sources */,
-				F6280D4A1D961C62009108ED /* IphoneAddTVChannelController.m in Sources */,
 				F65164141D3780C500A6F5FA /* TVLogoCell.m in Sources */,
 				2EBABC781E8360FB0093EF3A /* TVTableViewCell.m in Sources */,
 				CD4F124A1EB452D800E0B301 /* Address.m in Sources */,
@@ -3043,7 +2992,6 @@
 				CD4F12471EB4400A00E0B301 /* DeliveryAddressCell.m in Sources */,
 				2EDC0E901DEC072700F95BE0 /* IPhoneRoom.m in Sources */,
 				0F49CB821E7A21FF00D46ECC /* ORBSwitch.m in Sources */,
-				F659110C1D967383002CFBB7 /* IphoneNetTvController.m in Sources */,
 				F64EF7FB1D8FB738003C1C48 /* IphoneMainController.m in Sources */,
 				CDFB9DF81E641F8E00BFECCE /* DeviceTimerInfo.m in Sources */,
 				CDEE5E951EC1AC6000A5779D /* SelectRoomViewController.m in Sources */,
@@ -3112,14 +3060,12 @@
 				CD9F0AB81EB78DD0007B0CF7 /* DeliveryAddressSettingViewController.m in Sources */,
 				F6755A4F1D406552002394F3 /* ECloudTabBarController.m in Sources */,
 				CDF157541E7BA3F600499AC5 /* UIView_extra.m in Sources */,
-				F6280D531D966218009108ED /* IphoneAddFmController.m in Sources */,
 				0FF92B661D9224640098DD54 /* TVChannel.m in Sources */,
 				0F11654F1D7418EE00A01B8F /* Amplifier.m in Sources */,
 				CDBEFF531EA616CD00258B1E /* FamilyHomeDetailSceneCell.m in Sources */,
 				F630C3621D38C3E5008880BB /* AreaSettingCell.m in Sources */,
 				CDF1573A1E7AAD4C00499AC5 /* BaseNavController.m in Sources */,
 				2E7CD6081E14B80C002D0541 /* FixTimeListCell.m in Sources */,
-				2E63280E1E03CB06000D7BE9 /* IPhoneTVVC.m in Sources */,
 				0FCFB3981CF2947500B37DD3 /* EntranceGuard.m in Sources */,
 				F64EF8011D8FDCE7003C1C48 /* IphoneDeviceListController.m in Sources */,
 				2EA99E901E1C9A0100659065 /* MySubEnergyVC.m in Sources */,
@@ -3144,7 +3090,6 @@
 				2EA2A8541E1E2BEA00092D41 /* ENenViewController.m in Sources */,
 				2EA2A8571E1E2C7800092D41 /* EnenCell.m in Sources */,
 				0FCFB3891CF2929900B37DD3 /* Aircon.m in Sources */,
-				F62CD87A1D94BE99001C66CE /* IphoneTVController.m in Sources */,
 				F62CFA411DAC699D006410F7 /* IphoneTypeView.m in Sources */,
 				0F1F3BCA1D2B85EA00B2641C /* MBProgressHUD+NJ.m in Sources */,
 				F625A61B1D4C99EC00B696E5 /* RoomListController.m in Sources */,
@@ -3202,7 +3147,6 @@
 				2EDE04611E45777B00BC8E0B /* WebViewMangerVC.m in Sources */,
 				0F4B3C001D2A13870002E75E /* MSGController.m in Sources */,
 				0F6183FA1EA9A24600000EAD /* NewLightCell.m in Sources */,
-				2E6328111E03CE4B000D7BE9 /* IPhoneNetVV.m in Sources */,
 				2EA2A84A1E1E275900092D41 /* MySubEnergyCell.m in Sources */,
 				2EBABC731E835EC70093EF3A /* AireTableViewCell.m in Sources */,
 				F65AF6D41D3370770048A4E5 /* ProfileFaultsViewController.m in Sources */,
@@ -3215,7 +3159,6 @@
 				F6251F771D542508000A5A47 /* SQLManager.m in Sources */,
 				2EBABC871E839F2E0093EF3A /* DVDTableViewCell.m in Sources */,
 				CDB8B84A1EB1D3AE003AA894 /* FamilyDynamicViewController.m in Sources */,
-				2EFFECA11E12161100C13D3E /* FixTimeListViewController.m in Sources */,
 				0FDB34441E79269500DA53BB /* LayerUtil.m in Sources */,
 				F62CFA4A1DAC952F006410F7 /* IphoneRoomListController.m in Sources */,
 				F67F1F741D3C6AA200F2B7E5 /* SystemCell.m in Sources */,
@@ -3226,7 +3169,6 @@
 				F65DB3421D2B5AB2002A815C /* RegisterPhoneNumController.m in Sources */,
 				F6359AFB1CFFBC910035EB31 /* DetailTableViewCell.m in Sources */,
 				F65838DA1D3A2A43004210AC /* MsgCell.m in Sources */,
-				F663CA691D990138001F87F3 /* IphoneFixTimerController.m in Sources */,
 				F645BD471D76E3D8005BFB7A /* FavorController.m in Sources */,
 				2E6CEDBF1DE5DE8B000979BE /* DetailMSGViewController.m in Sources */,
 				2EF75C7C1EB2CAE00055147D /* ShortcutKeyCell.m in Sources */,
@@ -3268,11 +3210,9 @@
 				CDEC86891E976EC9009EC245 /* RegistFirstStepForPhoneViewController.m in Sources */,
 				CDEE5E921EBEEBC900A5779D /* FamilyDynamicDeviceAdjustViewController.m in Sources */,
 				F65FF4AB1D61C57100C12271 /* SearchViewController.m in Sources */,
-				F663CA5F1D98A733001F87F3 /* IphoneDVDController.m in Sources */,
 				F6A1C02E1D586D7500856E00 /* Room.m in Sources */,
 				0F64234A1DE57C83003379FC /* RTSPPlayer.m in Sources */,
 				2E8AC52F1E7BAE350002E717 /* FirstViewController.m in Sources */,
-				F663CA661D98D131001F87F3 /* IphoneDevicesController.m in Sources */,
 				F6755A581D40D450002394F3 /* ECloudButton.m in Sources */,
 				F69C82331D363376002DE6D7 /* ServiceRecordViewController.m in Sources */,
 				F66596E01D3F25610082716A /* SceneController.m in Sources */,
