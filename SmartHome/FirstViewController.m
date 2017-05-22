@@ -630,14 +630,12 @@
     NSString *homename = [UD objectForKey:@"homename"];
     
     RCGroup *aGroupInfo = [[RCGroup alloc]initWithGroupId:groupID groupName:homename portraitUri:@""];
-    ConversationViewController *_conversationVC = [[ConversationViewController alloc] init];
-    _conversationVC.conversationType = ConversationType_GROUP;
-    _conversationVC.targetId = aGroupInfo.groupId;
-    [_conversationVC setTitle: [NSString stringWithFormat:@"%@",aGroupInfo.groupName]];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [MBProgressHUD hideHUD];
-        [self.navigationController pushViewController:_conversationVC animated:YES];
-    });
+    ConversationViewController *conversationVC = [[ConversationViewController alloc] init];
+    conversationVC.conversationType = ConversationType_GROUP;
+    conversationVC.targetId = aGroupInfo.groupId;
+    [conversationVC setTitle: [NSString stringWithFormat:@"%@",aGroupInfo.groupName]];
+    
+    [self.navigationController pushViewController:conversationVC animated:YES];
 }
 
 - (IBAction)FirstBtn:(id)sender {
