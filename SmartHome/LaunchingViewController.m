@@ -28,7 +28,11 @@
     // 设定位置和大小
     CGRect frame = CGRectMake(0,0,UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT);
     // 读取gif图片数据
-    NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"launchingAnimation" ofType:@"gif"]];
+    NSString *launchAnimation = @"launchingAnimation";
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        launchAnimation = @"iPadLaunchAnimation";
+    }
+    NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:launchAnimation ofType:@"gif"]];
     // view生成
     UIWebView *webView = [[UIWebView alloc] initWithFrame:frame];
     webView.userInteractionEnabled = NO;//用户不可交互
