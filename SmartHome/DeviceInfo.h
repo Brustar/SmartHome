@@ -82,8 +82,7 @@ enum{
 @property (nonatomic, strong) NSString *masterIP;
 //主机端口
 @property (nonatomic) int masterPort;
-//演示和真实操作DB数据库名字
-@property (nonatomic, strong) NSString *db;
+
 //连接状态
 @property (nonatomic) int connectState;
 //判断是不是调用了相册

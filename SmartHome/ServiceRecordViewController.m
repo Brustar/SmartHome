@@ -267,28 +267,15 @@
 //好评
 - (IBAction)clickGoodCommnet:(id)sender {
     
-    DeviceInfo *device = [DeviceInfo defaultManager];
-    if ([device.db isEqualToString:SMART_DB]) {
-    
-         [self sendCommentType:1];
-    }else { //体验
-        [MBProgressHUD showSuccess:@"评价成功"];
-        self.coverView.hidden = YES;
-        self.commentView.hidden = YES;
-    }
+    [self sendCommentType:1];
    
 }
 
 //还有故障
 - (IBAction)clickStillHaveFault:(id)sender {
-    DeviceInfo *device = [DeviceInfo defaultManager];
-    if ([device.db isEqualToString:SMART_DB]) {
-        [self sendCommentType:2];
-    }else {  //体验
-        [MBProgressHUD showSuccess:@"评价成功"];
-        self.coverView.hidden = YES;
-        self.commentView.hidden = YES;
-    }
+
+    [self sendCommentType:2];
+
 }
 
 //评价

@@ -62,7 +62,8 @@
     UIView *view = [[UIView alloc] init];
     [view setBackgroundColor:[UIColor clearColor]];
     self.tableView.tableFooterView = view;
-    
+    [self sendRequest:url withTag:2];
+    /*
     DeviceInfo *device = [DeviceInfo defaultManager];
     if ([device.db isEqualToString:SMART_DB]) {
         [self sendRequest:url withTag:2];
@@ -88,7 +89,7 @@
         }
         [self.tableView reloadData];
     }
-    
+    */
     
 }
 
@@ -238,14 +239,6 @@
 }
 -(void)switchChange:(UIButton *)sender
 {
-    
-    //体验用户
-    DeviceInfo *device = [DeviceInfo defaultManager];
-    if (![device.db isEqualToString:SMART_DB]) {
-        [MBProgressHUD showSuccess:@"设置权限成功"];
-        return;
-    }
-    
     //注册用户
     UIButton *exchangeBtn = sender;
     exchangeBtn.selected = !exchangeBtn.selected;
@@ -296,9 +289,6 @@
 //点击转换身份按钮
 - (IBAction)changeIdentityType:(UIButton *)sender {
     
-    
-     DeviceInfo *device = [DeviceInfo defaultManager];
-    
     if ([self.userName.text isEqualToString:[UD objectForKey:@"UserName"]] && [[UD objectForKey:@"UserType"] integerValue] == 2) {
         [MBProgressHUD showError:@"你是普通用户，无权限操作"];
         //return;
@@ -323,9 +313,6 @@
             sender.titleLabel.text= @"转化为普通身份";
         }
         [alertVC dismissViewControllerAnimated:YES completion:nil];
-        if (![device.db isEqualToString:SMART_DB]) {
-            [MBProgressHUD showSuccess:@"转化成功"];
-        }
     }];
     [alertVC addAction:cancelAction];
     [alertVC addAction:sureAction];

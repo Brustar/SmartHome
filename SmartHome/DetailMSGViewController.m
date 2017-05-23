@@ -38,34 +38,8 @@
     _msgArr = [NSMutableArray array];
     self.isEditing = YES;
     if (self.itemID) {
-        
-        DeviceInfo *device = [DeviceInfo defaultManager];
-        if ([device.db isEqualToString:SMART_DB]) {
-             [self setupNaviBar];
-             [self sendRequestForDetailMsgWithItemId:_itemID];
-        }else {
-            NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"msgList" ofType:@"plist"]];
-            NSArray *arr = plistDict[@"notify_list"];
-            if ([arr isKindOfClass:[NSArray class]]) {
-                for(NSDictionary *dicDetail in arr)
-                {
-                    if ([dicDetail isKindOfClass:[NSDictionary class]] && dicDetail[@"description"]) {
-                        
-                        if ([dicDetail[@"notify_id"] integerValue] == self.actcode.integerValue) {
-                            ECMessage *msg = [ECMessage new];
-                            msg.descr = dicDetail[@"description"];
-                            msg.atime = dicDetail[@"addtime"];
-                            msg.MID = [dicDetail[@"notify_id"] intValue];
-                            msg.readed = [dicDetail[@"isread"] intValue];
-                            [self.msgArr addObject:msg];
-                        }
-                    }
-                }
-            }
-            
-            [self.tableView reloadData];
-        }
-        
+         [self setupNaviBar];
+         [self sendRequestForDetailMsgWithItemId:_itemID];
     }
     
     [self createImage];

@@ -77,8 +77,8 @@
     self.coverView.hidden = YES;
     self.pushTypeView.hidden = YES;
     self.tableView.tableFooterView = [UIView new];
-    
-    DeviceInfo *device = [DeviceInfo defaultManager];
+    [self sendRequest];
+    /*DeviceInfo *device = [DeviceInfo defaultManager];
     if ([device.db isEqualToString:SMART_DB]) {
         [self sendRequest];
     }else {
@@ -94,7 +94,7 @@
         }
         [self.tableView reloadData];
     }
-    
+    */
 }
 //获得所有设置请求
 -(void)sendRequest
@@ -247,38 +247,22 @@
 }
 
 - (IBAction)clickSureBtn:(id)sender {
-    DeviceInfo *device = [DeviceInfo defaultManager];
-    
     self.coverView.hidden = YES;
     self.pushTypeView.hidden = YES;
     PushSettingCell *cell = [self.tableView cellForRowAtIndexPath:self.indexPath];
-//    NSArray *item = self.recordIDs[self.indexPath.section];
+
     NSNumber *recordID = self.recordIDs[self.indexPath.row];
     if(self.tag == 0)
     {
         cell.TypeLabel.text = @"信息推送";
+        [self setUserNotifyWay:1 andRecord:recordID];
         
-        if ([device.db isEqualToString:SMART_DB]) {
-            [self setUserNotifyWay:1 andRecord:recordID];
-        }else {
-            [MBProgressHUD showSuccess:@"修改成功"];
-        }
-        
-    }else if(self.tag == 1)
-    {
+    }else if(self.tag == 1){
         cell.TypeLabel.text = @"短信通知";
-        if ([device.db isEqualToString:SMART_DB]) {
-            [self setUserNotifyWay:2 andRecord:recordID];
-        }else {
-            [MBProgressHUD showSuccess:@"修改成功"];
-        }
+        [self setUserNotifyWay:2 andRecord:recordID];
     }else{
         cell.TypeLabel.text = @"不通知";
-        if ([device.db isEqualToString:SMART_DB]) {
-            [self setUserNotifyWay:3 andRecord:recordID];
-        }else {
-            [MBProgressHUD showSuccess:@"修改成功"];
-        }
+        [self setUserNotifyWay:3 andRecord:recordID];
     }
 }
 
