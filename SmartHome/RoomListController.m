@@ -218,15 +218,7 @@
     self.timeIntervalSlider.continuous = YES;
     [self.timeIntervalSlider addTarget:self action:@selector(timeIntervalSliderValueChanged:) forControlEvents:UIControlEventValueChanged];
     
-    
-    
-    DeviceInfo *device = [DeviceInfo defaultManager];
-    if ([device.db isEqualToString:SMART_DB]) {
-        self.clickFixTimeBtn.hidden = YES;
-    }else {
-        self.clickFixTimeBtn.hidden = YES;
-    }
-    
+    self.clickFixTimeBtn.hidden = YES;
 }
 
 - (void)timeIntervalSliderValueChanged:(UISlider *)sender {

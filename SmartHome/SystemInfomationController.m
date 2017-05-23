@@ -64,26 +64,19 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSArray *array;
-    DeviceInfo *device = [DeviceInfo defaultManager];
-    if ([device.db isEqualToString:SMART_DB]){
+    
     NSArray  *paths  =  NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
     
     NSString *docDir = [paths objectAtIndex:0];
     
     NSString *filePath = [docDir stringByAppendingPathComponent:@"gainHome.plist"];
     
-      array = [[NSArray alloc] initWithContentsOfFile:filePath];
-    }else{
-        
-        array = @[@"逸云智家",@"2",@"快思聪",@"CP3"];
-    }
+    array = [[NSArray alloc] initWithContentsOfFile:filePath];
+    
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.textLabel.text = self.titles[indexPath.row];
-    
-//    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 30)];
-//    view.backgroundColor = [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1];
-//    cell.selectedBackgroundView = view;
+
     if ([cell.textLabel.text isEqualToString:@"家庭名称"]) {
          cell.detailTextLabel.text = array[0];
     }else if ([cell.textLabel.text isEqualToString:@"主机编号"]){

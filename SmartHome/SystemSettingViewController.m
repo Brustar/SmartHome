@@ -46,16 +46,16 @@
     }
     return _recordIDs;
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setNaviBarTitle:@"系统设置"];
     self.automaticallyAdjustsScrollViewInsets = NO;
-//    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
-//    self.navigationItem.leftBarButtonItem = returnItem;
 
     self.tableView.tableFooterView = [UIView new];
-    
+    [self sendRequest];
+    /*
     DeviceInfo *device = [DeviceInfo defaultManager];
     if ([device.db isEqualToString:SMART_DB]) {
         [self sendRequest];
@@ -74,8 +74,8 @@
         
         [self.tableView reloadData];
     }
-    
-       self.tableView.allowsSelection = NO;
+    */
+    self.tableView.allowsSelection = NO;
 
     
 }
@@ -174,12 +174,6 @@
 -(void)changSwithchValue:(UIButton *)sender
 {
     sender.selected = !sender.selected;
-    //体验
-    DeviceInfo *device = [DeviceInfo defaultManager];
-    if (![device.db isEqualToString:SMART_DB]) {
-        [MBProgressHUD showSuccess:@"系统权限成功"];
-        return;
-    }
     
     if(sender.selected)
     {
