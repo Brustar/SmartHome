@@ -140,7 +140,7 @@
         
     }
 }
-
+//输入语音的按钮
 - (IBAction)startVoice:(id)sender {
     
     [self.recorder prepareToRecord];
