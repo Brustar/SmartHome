@@ -28,7 +28,8 @@
 #import "FamilyHomeDetailViewController.h"
 #import "NowMusicController.h"
 
-#define  CollectionCellWidth self.roomCollectionView.frame.size.width / 2.0 -20
+#define  CollectionCellWidth  self.roomCollectionView.frame.size.width / 2.0 -20
+#define  iPadCollectionCellWidth  self.roomCollectionView.frame.size.width / 3.0 -40
 #define  minSpace 20
 #define  maxSpace 40
 
