@@ -3340,7 +3340,7 @@
 			baseConfigurationReference = 9B45FF693457BA21BA43CE05 /* Pods-SmartHome.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-6";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SmartHome/SmartHome.entitlements;
@@ -3377,7 +3377,7 @@
 					"$(PROJECT_DIR)/FFmpeg-iOS/lib",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Ecloud.SmartsHome;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3393,7 +3393,7 @@
 			baseConfigurationReference = CE54136C9EEF8F51E8FBEEDE /* Pods-SmartHome.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-6";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SmartHome/SmartHome.entitlements;
@@ -3429,7 +3429,7 @@
 					"$(PROJECT_DIR)/FFmpeg-iOS/lib",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Ecloud.SmartsHome;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

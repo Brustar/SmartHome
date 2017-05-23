@@ -17,36 +17,16 @@
       "idiom" : "iphone",
       "filename" : "29.png",
       "scale" : "1x"
-<<<<<<< HEAD
-=======
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "87@2x.png",
-      "scale" : "2x"
->>>>>>> 717d54878f70c4f128f6a76ae81c75e0f8027495
-    },
-    {
-      "size" : "29x29",
-      "idiom" : "iphone",
-<<<<<<< HEAD
       "filename" : "58.png",
-=======
-      "filename" : "87.png",
-      "scale" : "3x"
-    },
-    {
-      "size" : "40x40",
-      "idiom" : "iphone",
-      "filename" : "80.png",
->>>>>>> 717d54878f70c4f128f6a76ae81c75e0f8027495
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-<<<<<<< HEAD
       "filename" : "87.png",
       "scale" : "3x"
     },
@@ -54,39 +34,18 @@
       "size" : "40x40",
       "idiom" : "iphone",
       "filename" : "80.png",
-=======
-      "filename" : "120.png",
-      "scale" : "3x"
-    },
-    {
-      "size" : "57x57",
-      "idiom" : "iphone",
-      "filename" : "57@3x.png",
-      "scale" : "1x"
-    },
-    {
-      "size" : "57x57",
-      "idiom" : "iphone",
-      "filename" : "57@3x-1.png",
-      "scale" : "2x"
-    },
-    {
-      "size" : "60x60",
-      "idiom" : "iphone",
-      "filename" : "120-1.png",
->>>>>>> 717d54878f70c4f128f6a76ae81c75e0f8027495
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-<<<<<<< HEAD
       "filename" : "120.png",
       "scale" : "3x"
     },
     {
-      "idiom" : "iphone",
       "size" : "57x57",
+      "idiom" : "iphone",
+      "filename" : "57.png",
       "scale" : "1x"
     },
     {
@@ -104,9 +63,6 @@
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "180.png",
-      "scale" : "3x"
-=======
       "filename" : "180.png",
       "scale" : "3x"
     },
@@ -131,7 +87,7 @@
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "87@2x-1.png",
+      "filename" : "58-1.png",
       "scale" : "2x"
     },
     {
@@ -187,7 +143,6 @@
       "idiom" : "ipad",
       "filename" : "167.png",
       "scale" : "2x"
->>>>>>> 717d54878f70c4f128f6a76ae81c75e0f8027495
     }
   ],
   "info" : {
