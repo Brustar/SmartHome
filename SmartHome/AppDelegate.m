@@ -13,18 +13,16 @@
 #import "IOManager.h"
 #import "IQKeyboardManager.h"
 #import "ECloudTabBarController.h"
-
 #import "MSGController.h"
 #import "ECloudTabBar.h"
 #import "IphoneSceneController.h"
 #import "VoiceOrderController.h"
 #import "IphoneFavorController.h"
-
-#import "IphoneTabBarViewController.h"
 #import "WXApi.h"
 #import "WeChatPayManager.h"
 #import <RongIMKit/RongIMKit.h>
 #import "RCDataManager.h"
+#import "IpadFirstViewController.h"
 
 
 @implementation AppDelegate
@@ -72,17 +70,17 @@
     [[RCIM sharedRCIM] initWithAppKey:@"8brlm7uf8tsb3"];
     [RCIM sharedRCIM].userInfoDataSource = [RCDataManager shareManager];
     
-//    SwiftModel *model = [SwiftModel new];
-//    NSLog(@"name:%@",model.name);
-//    [model sayhelloWithWord:@"gaomingyang"];
-    
     return YES;
 }
 
 - (void)loadingLaunchingViewController {
-    LaunchingViewController *launchingVC = [[LaunchingViewController alloc] init];
-    self.window.rootViewController = launchingVC;
-    [self.window makeKeyAndVisible];
+     //if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        LaunchingViewController *launchingVC = [[LaunchingViewController alloc] init];
+        self.window.rootViewController = launchingVC;
+        [self.window makeKeyAndVisible];
+               
+     //}
+    
 }
 
 - (void)loadingLoginViewController {
@@ -91,7 +89,7 @@
     [device deviceGenaration];
     device.db=SMART_DB;
     // Override point for customization after application launch.
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+    //if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         UIStoryboard *loginStoryBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
         
@@ -111,10 +109,22 @@
         }
         
         [self.window makeKeyAndVisible];
+
         
-        
-        
-    }else {
+    }
+//    else {
+//        //已登录时
+//        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]) {
+//            ECloudTabBarController *ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ECloudTabBarController"];
+//            self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//            self.window.rootViewController = ecloudVC;
+//        }
+//    }
+
+    /*
+    }
+    
+    else {
         //已登录时
         if ([[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]) {
             ECloudTabBarController *ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ECloudTabBarController"];
@@ -122,8 +132,7 @@
             self.window.rootViewController = ecloudVC;
         }
     }
-
-}
+*/
 
 -(void)kickout
 {
@@ -176,6 +185,8 @@
                 NSDictionary *dic = @{@"type":[NSNumber numberWithInt:2],@"subType":[NSNumber numberWithInt:0]};
                 NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
                 [center postNotificationName:@"myMsg" object:nil userInfo:dic];
+            }else{
+                [self gotoConversation];
             }
             
             [alertVC dismissViewControllerAnimated:YES completion:nil];
@@ -187,6 +198,20 @@
         return;
     }
     [self handlePush:userInfo];
+}
+
+-(void) gotoConversation
+{
+    NSString *groupID = [[UD objectForKey:@"HostID"] description];
+    NSString *homename = [UD objectForKey:@"homename"];
+    
+    RCGroup *aGroupInfo = [[RCGroup alloc]initWithGroupId:groupID groupName:homename portraitUri:@""];
+    ConversationViewController *conversationVC = [[ConversationViewController alloc] init];
+    conversationVC.conversationType = ConversationType_GROUP;
+    conversationVC.targetId = aGroupInfo.groupId;
+    [conversationVC setTitle: [NSString stringWithFormat:@"%@",aGroupInfo.groupName]];
+    
+    [self.mainTabBarController.selectedViewController pushViewController:conversationVC animated:YES];
 }
 
 //处理推送及跳转,发送请求更新badge 消息itemID = 123;类型typeID = 456;
@@ -201,7 +226,8 @@
         NSDictionary *dic = @{@"type":[NSNumber numberWithInt:2],@"subType":[NSNumber numberWithInt:0]};
         NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
         [center postNotificationName:@"myMsg" object:nil userInfo:dic];
-        
+    }else{
+        [self gotoConversation];
     }
 }
 

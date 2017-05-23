@@ -12,24 +12,20 @@
 
 
 @interface CurtainTableViewCell ()
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *sliderWidthConstraint;
+
 
 @end
 @implementation CurtainTableViewCell
 
 - (void)awakeFromNib {
+    
     [super awakeFromNib];
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-    {
-        self.sliderWidthConstraint.constant = [[UIScreen mainScreen] bounds].size.width *0.3;
-        
-    }
-//    self = [[[NSBundle mainBundle] loadNibNamed:@"CurtainTableViewCell" owner:self options:nil] lastObject];
+
     self.slider.continuous = NO;
     [self.slider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     [self.open addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.close addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-     [self.AddcurtainBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    [self.AddcurtainBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     self.selectionStyle = UITableViewCellSelectionStyleGray;
     
     [self.slider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];

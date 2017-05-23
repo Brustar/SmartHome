@@ -9,7 +9,7 @@
 #define windowType @"智能推窗器"
 
 #import "WindowSlidingController.h"
-#import "DetailTableViewCell.h"
+
 #import "SQLManager.h"
 #import "SocketManager.h"
 #import "WinOpener.h"
@@ -22,7 +22,7 @@
 
 @property (nonatomic,strong) NSMutableArray *windowSlidNames;
 @property (nonatomic,strong) NSMutableArray *windowSlidIds;
-@property (nonatomic,strong) DetailTableViewCell *cell;
+
 @property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
 @property (nonatomic,strong) ORBSwitch *switcher;
 @end
@@ -100,14 +100,10 @@
 
 -(IBAction)save:(id)sender
 {
-    if ([sender isEqual:self.cell.power]) {
-        NSData *data=[[DeviceInfo defaultManager] toogle:self.cell.power.isOn deviceID:self.deviceid];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:1];
-    }
+
     WinOpener *device=[[WinOpener alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
-    [device setPushing: self.cell.power.isOn];
+    
     [_scene setSceneID:[self.sceneid intValue]];
     [_scene setRoomID:self.roomID];
     [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];

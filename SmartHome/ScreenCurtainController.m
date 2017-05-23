@@ -7,7 +7,7 @@
 //
 
 #import "ScreenCurtainController.h"
-#import "DetailTableViewCell.h"
+
 #import "SQLManager.h"
 #import "SocketManager.h"
 #import "Amplifier.h"
@@ -19,7 +19,7 @@
 
 @property (nonatomic,strong) NSMutableArray *screenCurtainNames;
 @property (nonatomic,strong) NSMutableArray *screenCurtainIds;
-@property (nonatomic,strong) DetailTableViewCell *cell;
+
 @property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
 
 @end
@@ -98,14 +98,8 @@
 
 -(IBAction)save:(id)sender
 {
-    if ([sender isEqual:self.cell.power]) {
-        NSData *data=[[DeviceInfo defaultManager] toogle:self.cell.power.isOn deviceID:self.deviceid];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:1];
-    }
     Amplifier *device=[[Amplifier alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
-    [device setWaiting: self.cell.power.isOn];
     
     
     [_scene setSceneID:[self.sceneid intValue]];

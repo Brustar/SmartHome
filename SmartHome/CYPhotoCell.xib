@@ -128,7 +128,7 @@
                 <outlet property="seleteSendPowBtn" destination="bc1-Vx-05B" id="U4g-aZ-6BT"/>
                 <outlet property="subImageView" destination="uFD-in-MAA" id="j0b-D8-KDU"/>
             </connections>
-            <point key="canvasLocation" x="-196" y="-12"/>
+            <point key="canvasLocation" x="-291" y="-32"/>
         </collectionViewCell>
     </objects>
     <resources>

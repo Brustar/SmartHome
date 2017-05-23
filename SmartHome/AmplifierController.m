@@ -8,7 +8,7 @@
 //
 
 #import "AmplifierController.h"
-#import "DetailTableViewCell.h"
+
 #import "SQLManager.h"
 #import "SocketManager.h"
 #import "Amplifier.h"

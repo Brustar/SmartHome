@@ -726,13 +726,14 @@ NSArray *array = [NSArray arrayWithObjects:
             [self gainHome_room_infoDataTo:responseObject[@"home_room_info"]];
             //写每日提醒
             [self remindListTo:responseObject[@"remind_list"]];
-            
+            [self gotoIPhoneMainViewController];
+            /*
             if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
             {
                 [self gotoIPhoneMainViewController];
             }else {
                 [self goToViewController];
-            }
+            }*/
         }else{
             [MBProgressHUD showError:responseObject[@"msg"]];
         }

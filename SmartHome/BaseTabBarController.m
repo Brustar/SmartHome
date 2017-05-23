@@ -7,8 +7,8 @@
 //
 
 #import "BaseTabBarController.h"
-
 #import "BaseNavController.h"
+#import "IpadFirstViewController.h"
 
 @interface BaseTabBarController ()
 
@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor blackColor];
     //创建子控制器
     [self createSubCtrls];
     //创建TabbarPanel
@@ -65,18 +65,19 @@
     UIStoryboard *iPhoneStoryBoard  = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     UIStoryboard *HomeStoryBoard  = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
     UIStoryboard *devicesStoryBoard  = [UIStoryboard storyboardWithName:@"Devices" bundle:nil];
+    UIStoryboard * HomeIpadStoryBoard = [UIStoryboard storyboardWithName:@"Home-iPad" bundle:nil];
     //第三级控制器
     //设备
     IphoneDeviceListController *deviceListVC = [devicesStoryBoard instantiateViewControllerWithIdentifier:@"devicesController"];
-    
-
+    UIViewController * familyVC;
+ if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
     //HOME
-    FirstViewController *familyVC = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"FirstViewController"];
-         
-
-    //场景
+     familyVC = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"FirstViewController"];
+ }else{
+     familyVC = [HomeIpadStoryBoard instantiateViewControllerWithIdentifier:@"IpadFirstViewController"];
+ }
     IphoneSceneController *sceneVC = [iPhoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
-    
+
     
     //创建数组
     NSArray *viewCtrls = @[deviceListVC, familyVC, sceneVC];

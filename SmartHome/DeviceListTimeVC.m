@@ -7,7 +7,7 @@
 //
 
 #import "DeviceListTimeVC.h"
-#import "IphoneAddSceneController.h"
+
 #import "IphoneNewAddSceneVC.h"
 #import "SQLManager.h"
 #import "Room.h"
