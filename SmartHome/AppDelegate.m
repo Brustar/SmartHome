@@ -89,7 +89,7 @@
         if (self.window == nil) {
             self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         }
-        
+
         UIStoryboard *loginStoryBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
         
         //已登录时,自动登录
@@ -108,10 +108,8 @@
         }
         
         [self.window makeKeyAndVisible];
-
   
 }
-
 
 -(void)kickout
 {

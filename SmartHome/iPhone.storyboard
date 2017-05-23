@@ -355,7 +355,7 @@
                                                 <constraint firstAttribute="height" constant="1" id="XaM-1Y-apz"/>
                                             </constraints>
                                         </view>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="urp-Zr-oHH">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clound_white" translatesAutoresizingMaskIntoConstraints="NO" id="urp-Zr-oHH">
                                             <rect key="frame" x="80" y="40" width="100" height="99"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="100" id="YUY-0h-EJJ"/>
@@ -1374,7 +1374,7 @@
                                                 <constraint firstAttribute="width" constant="80" id="Jjm-Yh-dnQ"/>
                                                 <constraint firstAttribute="height" constant="80" id="fQI-gh-mAN"/>
                                             </constraints>
-                                            <state key="normal" backgroundImage="logo"/>
+                                            <state key="normal" backgroundImage="clound_white"/>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="auA-aO-F2z">
                                             <rect key="frame" x="160.5" y="95" width="54" height="27"/>
@@ -2457,12 +2457,12 @@
         <image name="alarm clock1" width="25" height="25"/>
         <image name="background" width="375" height="667"/>
         <image name="close2" width="25" height="25"/>
+        <image name="clound_white" width="25" height="18"/>
         <image name="delete" width="32" height="32"/>
         <image name="dvd_btn_switch_on" width="36" height="23"/>
         <image name="i-add" width="32" height="32"/>
         <image name="line2" width="1" height="1"/>
         <image name="line_horizontal_white" width="373" height="48"/>
-        <image name="logo" width="180" height="180"/>
         <image name="lv_icon_light_bright" width="15" height="15"/>
         <image name="lv_icon_light_normal" width="13" height="14"/>
         <image name="lv_icon_light_soft" width="10" height="13"/>

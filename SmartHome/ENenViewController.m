@@ -51,26 +51,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self sendRequestToGetEenrgyWithEqid:self.eqid];
-    /*
-    DeviceInfo *device = [DeviceInfo defaultManager];
-    if ([device.db isEqualToString:SMART_DB]) {
-        [self sendRequestToGetEenrgyWithEqid:self.eqid];
-    }else {
-        NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"energyDetail" ofType:@"plist"]];
-        NSArray *arr = plistDict[@"eq_energy_list"];
-        for(NSDictionary *dic in arr)
-        {
-            NSDictionary *energy = @{@"minute_time":dic[@"minute_time"],@"energy":dic[@"energy"],@"dateflag":dic[@"dateflag"]};
-            NSArray * array = dic[@"switch_list"];
-            for (NSDictionary * timeDict in array) {
-                [self.startTimeArr addObject:timeDict[@"starttimne"]];
-                [self.endTimeArr addObject:timeDict[@"endtimne"]];
-            }
-            NSLog(@"---%@----",array);
-            [self.dateArr addObject:energy];
-        }
-        [self.tableView reloadData];
-    }*/
+
     self.title = self.titleName;
     UIView *view = [[UIView alloc] init];
     [view setBackgroundColor:[UIColor clearColor]];

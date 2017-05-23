@@ -65,7 +65,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="xS1-uV-Iyf">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clound_white" translatesAutoresizingMaskIntoConstraints="NO" id="xS1-uV-Iyf">
                                                     <rect key="frame" x="20" y="7" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="40" id="3fY-QO-6sF"/>
@@ -1666,10 +1666,10 @@
     </scenes>
     <resources>
         <image name="background" width="414" height="736"/>
+        <image name="clound_white" width="28" height="20"/>
         <image name="dir_right" width="12" height="24"/>
         <image name="dvd_btn_switch_on" width="36" height="23"/>
         <image name="login_icon.png" width="80" height="86"/>
-        <image name="logo" width="180" height="180"/>
         <image name="projection" width="375" height="49"/>
         <image name="setting-frm_nol" width="297" height="38"/>
         <image name="sff" width="15" height="11"/>

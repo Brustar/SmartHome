@@ -63,34 +63,6 @@
     [view setBackgroundColor:[UIColor clearColor]];
     self.tableView.tableFooterView = view;
     [self sendRequest:url withTag:2];
-    /*
-    DeviceInfo *device = [DeviceInfo defaultManager];
-    if ([device.db isEqualToString:SMART_DB]) {
-        [self sendRequest:url withTag:2];
-    }else {
-        NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"hostUserList" ofType:@"plist"]];
-        NSArray *arr = plistDict[@"host_user_list"];
-        if ([arr isKindOfClass:[NSArray class]]) {
-            for(NSDictionary *messageList in arr)
-            {
-                NSNumber *userID = messageList[@"userid"];
-                if(self.usrID == userID)
-                {
-                    NSArray *inforList = messageList[@"room_user_list"];
-                    for(NSDictionary *info  in inforList)
-                    {
-                        [self.areasArr addObject:info[@"room_name"]];
-                        [self.opens addObject:info[@"isopen"]];
-                        [self.recoredIDs addObject:info[@"roomuser_id"]];
-                    }
-                    
-                }
-            }
-        }
-        [self.tableView reloadData];
-    }
-    */
-    
 }
 
 -(void)sendRequest:(NSString *)url withTag:(int)i

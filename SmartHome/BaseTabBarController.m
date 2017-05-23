@@ -77,8 +77,6 @@
      familyVC = [HomeIpadStoryBoard instantiateViewControllerWithIdentifier:@"IpadFirstViewController"];
  }
     IphoneSceneController *sceneVC = [iPhoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
-
-    
     //创建数组
     NSArray *viewCtrls = @[deviceListVC, familyVC, sceneVC];
     

@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomViewController.h"
 
-@interface IpadFirstViewController : UIViewController
+@interface IpadFirstViewController : CustomViewController
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end
