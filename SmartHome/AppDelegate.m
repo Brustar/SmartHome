@@ -110,14 +110,15 @@
         
         [self.window makeKeyAndVisible];
         
-    }else {
-        //已登录时
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]) {
-            ECloudTabBarController *ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ECloudTabBarController"];
-            self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-            self.window.rootViewController = ecloudVC;
-        }
     }
+//    else {
+//        //已登录时
+//        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]) {
+//            ECloudTabBarController *ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ECloudTabBarController"];
+//            self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//            self.window.rootViewController = ecloudVC;
+//        }
+//    }
 
 }
 
