@@ -27,9 +27,6 @@
 - (void)setupAnimationViewForLaunching {
     // 设定位置和大小
     CGRect frame = CGRectMake(0,0,UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT);
-    //frame.size = [UIImage imageNamed:@"welcome.gif"].size;
-    //    frame.size.width = [UIImage imageNamed:@"启动页640.gif"].size.width / 2;
-    //    frame.size.height = [UIImage imageNamed:@"启动页640.gif"].size.height / 2;
     // 读取gif图片数据
     NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"launchingAnimation" ofType:@"gif"]];
     // view生成

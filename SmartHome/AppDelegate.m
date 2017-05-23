@@ -43,6 +43,7 @@
     
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device deviceGenaration];
+     device.db = SMART_DB;
    
     //登录后每次系统启动自动更新云端配置，第一次安装此处不更新，登录的时候再更新
     [device initConfig];
@@ -73,18 +74,22 @@
 }
 
 - (void)loadingLaunchingViewController {
-    LaunchingViewController *launchingVC = [[LaunchingViewController alloc] init];
-    self.window.rootViewController = launchingVC;
-    [self.window makeKeyAndVisible];
+        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        LaunchingViewController *launchingVC = [[LaunchingViewController alloc] init];
+        self.window.rootViewController = launchingVC;
+        [self.window makeKeyAndVisible];
 }
 
 - (void)loadingLoginViewController {
     
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device deviceGenaration];
-    // Override point for customization after application launch.
+    device.db=SMART_DB;
+        
+        if (self.window == nil) {
+            self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        }
 
-        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         UIStoryboard *loginStoryBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
         
         //已登录时,自动登录
@@ -103,6 +108,7 @@
         }
         
         [self.window makeKeyAndVisible];
+  
 }
 
 -(void)kickout
