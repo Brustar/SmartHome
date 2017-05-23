@@ -21,15 +21,23 @@
     CGFloat pm25Y = 80.0f;
     CGFloat radius = -80.0f;
     
-    if (UI_SCREEN_WIDTH == 375) {
-        pm25X = -75.0f;
-        pm25Y = 60.0f;
-        radius = -70.0f;
-    }else if (UI_SCREEN_WIDTH == 320) {
-        pm25X = -88.0f;
-        pm25Y = 40.0f;
-        radius = -60.0f;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        if (UI_SCREEN_WIDTH == 375) {
+            pm25X = -75.0f;
+            pm25Y = 60.0f;
+            radius = -70.0f;
+        }else if (UI_SCREEN_WIDTH == 320) {
+            pm25X = -88.0f;
+            pm25Y = 40.0f;
+            radius = -60.0f;
+        }
+    }else {
+        pm25X = -10.0f;
+        pm25Y = 170.0f;
+        radius = -95.0f;
     }
+    
+    
     
     
     UIFont *font = [UIFont systemFontOfSize:10.0];
@@ -54,11 +62,17 @@
 
 - (void)addRingForDevice:(RoomStatus *)info {
     CGFloat ringR = 57;
-    if (UI_SCREEN_WIDTH == 414) {
-        ringR = 67;
-    }else if (UI_SCREEN_WIDTH == 320) {
-        ringR = 47;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        if (UI_SCREEN_WIDTH == 414) {
+            ringR = 67;
+        }else if (UI_SCREEN_WIDTH == 320) {
+            ringR = 47;
+        }
+    }else {
+        ringR = 102;
     }
+    
+    
     NSMutableArray *deviceColorArray = [NSMutableArray array];
     if (info.lightStatus == 0 && info.airconditionerStatus == 0 && info.mediaStatus == 0) {
         [deviceColorArray addObjectsFromArray:@[Dev_OFF_COLOR,Dev_OFF_COLOR,Dev_OFF_COLOR]];
@@ -85,11 +99,16 @@
 - (void)addRingForPM25:(RoomStatus *)info {
     
     CGFloat ringR = 75;
-    if (UI_SCREEN_WIDTH == 414) {
-        ringR = 85;
-    }else if (UI_SCREEN_WIDTH == 320) {
-        ringR = 65;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        if (UI_SCREEN_WIDTH == 414) {
+            ringR = 85;
+        }else if (UI_SCREEN_WIDTH == 320) {
+            ringR = 65;
+        }
+    }else {
+        ringR = 130;
     }
+    
     
     [LayerUtil createRingForPM25:ringR pos:CGPointMake(self.frame.size.width/2, self.frame.size.width/2) colors:@[PM25_COLOR] pm25Value:[info.pm25 floatValue] container:self];
 }

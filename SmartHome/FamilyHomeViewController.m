@@ -214,7 +214,11 @@
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(CollectionCellWidth, CollectionCellWidth);
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        return CGSizeMake(iPadCollectionCellWidth, iPadCollectionCellWidth);
+    }else {
+        return CGSizeMake(CollectionCellWidth, CollectionCellWidth);
+    }
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
