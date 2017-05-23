@@ -319,16 +319,13 @@ static NSString * const CYPhotoId = @"photo";
 {
     self.roomIndex = index;
     Room *room = self.roomList[index];
-
     NSArray *tmpArr = [SQLManager getScensByRoomId:room.rId];
     self.selectedRoomID = room.rId;
     [self.scenes removeAllObjects];
     [self.scenes addObjectsFromArray:tmpArr];
     NSString *imageName = @"i-add";
     [self.scenes addObject:imageName];
-
     [self.FirstCollectionView reloadData];
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -343,8 +340,6 @@ static NSString * const CYPhotoId = @"photo";
         NSString *imageName = @"i-add";
         [self.scenes addObject:imageName];
     }
-//    [self setUpRoomView];
-
     BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     baseTabbarController.tabbarPanel.hidden = NO;
     baseTabbarController.tabBar.hidden = YES;
@@ -528,7 +523,6 @@ static NSString * const CYPhotoId = @"photo";
     [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
     [self.currentCell.imageView setImage:self.selectSceneImg];
 }
-
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [DeviceInfo defaultManager].isPhotoLibrary = NO;
     [picker dismissViewControllerAnimated:YES completion:nil];
@@ -599,6 +593,12 @@ static NSString * const CYPhotoId = @"photo";
   
 }
 
+-(void)refreshTableView:(CYPhotoCell *)cell
+{
+    [self setUpRoomView];
+//    [self.FirstCollectionView reloadData];
+
+}
 -(void)httpHandler:(id) responseObject tag:(int)tag
 {
     if((tag = 1))

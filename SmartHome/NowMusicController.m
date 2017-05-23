@@ -325,28 +325,41 @@
     NameLabel.text =  model.roomname;
     [view addSubview:NameLabel];
     //线
-    UIView * view1 = [[UIView alloc] initWithFrame:CGRectMake(0, 49, self.view.bounds.size.width, 1)];
-    view1.backgroundColor = [UIColor redColor];
-    [view addSubview:view1];
-    
+    UIView * view1;
     UIButton *OpenBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    OpenBtn.frame = CGRectMake(self.view.bounds.size.width-150, 15, 30, 30);
     OpenBtn.backgroundColor = [UIColor clearColor];
     OpenBtn.tag = section;
     [OpenBtn addTarget:self action:@selector(StopBtn:) forControlEvents:UIControlEventTouchUpInside];
     [OpenBtn setImage:[UIImage imageNamed:@"Video-close"] forState:UIControlStateNormal];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        
+        view1 = [[UIView alloc] initWithFrame:CGRectMake(0, 49, self.view.bounds.size.width, 1)];
+        OpenBtn.frame = CGRectMake(self.view.bounds.size.width-150, 15, 30, 30);
+        
+    }else {
+         view1 = [[UIView alloc] initWithFrame:CGRectMake(10, 49, self.view.bounds.size.width-150, 1)];
+         OpenBtn.frame = CGRectMake(self.view.bounds.size.width-180, 15, 30, 30);
+    }
     
+    view1.backgroundColor = [UIColor redColor];
+    [view addSubview:view1];
     [view addSubview:OpenBtn];
     return view;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    UIView * footerView = [[UIView alloc] init];
-    footerView.frame = CGRectMake(0, 0, self.view.bounds.size.width, 10);
-    footerView.backgroundColor = [UIColor clearColor];
-    UILabel * line = [[UILabel alloc] init];
-    line.frame = CGRectMake(0, 0, self.view.bounds.size.width, 0.5);
-    line.backgroundColor = [UIColor whiteColor];
+       UIView * footerView = [[UIView alloc] init];
+       footerView.backgroundColor = [UIColor clearColor];
+       UILabel * line = [[UILabel alloc] init];
+       line.backgroundColor = [UIColor whiteColor];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        footerView.frame = CGRectMake(0, 0, self.view.bounds.size.width, 10);
+        line.frame = CGRectMake(0, 0, self.view.bounds.size.width, 0.5);
+    }else{
+        footerView.frame = CGRectMake(10, 0, self.view.bounds.size.width-150, 10);
+        line.frame = CGRectMake(10, 0, self.view.bounds.size.width-150, 0.5);
+    }
+   
     [footerView addSubview:line];
     
     return footerView;

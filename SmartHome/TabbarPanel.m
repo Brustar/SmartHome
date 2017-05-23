@@ -28,7 +28,6 @@
     CGFloat buttonWidth = subBgWidth/3;
     CGFloat buttonHeight = 50;
     CGFloat btnTitleFontSize = 15;
-    
     _pannelBgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, bgHeight)];
     _pannelBgView.image = [UIImage imageNamed:@"background"];
     _pannelBgView.userInteractionEnabled = YES;
