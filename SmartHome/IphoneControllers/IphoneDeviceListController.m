@@ -223,7 +223,7 @@ static NSString * const CYPhotoId = @"photo";
     CGRect frame = CGRectMake(0, 130, collectionW, collectionH);
     // 创建布局
     CYLineLayout *layout = [[CYLineLayout alloc] init];
-    if (([UIScreen mainScreen].bounds.size.height == 568.0)) {
+    if (([UIScreen mainScreen].bounds.size.height <= 568.0)) {
         layout.itemSize = CGSizeMake(collectionW-50, collectionH-20);
     }else{
         layout.itemSize = CGSizeMake(collectionW-90, collectionH-20);
