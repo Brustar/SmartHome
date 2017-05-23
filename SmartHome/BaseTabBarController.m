@@ -65,13 +65,17 @@
     UIStoryboard *iPhoneStoryBoard  = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     UIStoryboard *HomeStoryBoard  = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
     UIStoryboard *devicesStoryBoard  = [UIStoryboard storyboardWithName:@"Devices" bundle:nil];
+    UIStoryboard * HomeIpadStoryBoard = [UIStoryboard storyboardWithName:@"Home-iPad" bundle:nil];
     //第三级控制器
     //设备
     IphoneDeviceListController *deviceListVC = [devicesStoryBoard instantiateViewControllerWithIdentifier:@"devicesController"];
-
+    UIViewController * familyVC;
+ if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
     //HOME
-    FirstViewController * familyVC = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"FirstViewController"];
-    
+     familyVC = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"FirstViewController"];
+ }else{
+     familyVC = [HomeIpadStoryBoard instantiateViewControllerWithIdentifier:@"IpadFirstViewController"];
+ }
     IphoneSceneController *sceneVC = [iPhoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
 
     

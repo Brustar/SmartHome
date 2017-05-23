@@ -39,7 +39,7 @@
 //开关
 - (IBAction)powerBtn:(id)sender {
         if (self.sceneStatus == 0) { //点击前，场景是关闭状态，需打开场景
-             [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
+             [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateNormal];
             [[SceneManager defaultManager] startScene:self.sceneID];//打开场景
             [SQLManager updateSceneStatus:1 sceneID:self.sceneID];//更新数据库
         }else if (self.sceneStatus == 1) { //点击前，场景是打开状态，需关闭场景

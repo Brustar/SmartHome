@@ -7,6 +7,7 @@
 //
 
 #import "IpadFirstViewController.h"
+#import "FamilyHomeViewController.h"
 
 @interface IpadFirstViewController ()
 
@@ -24,9 +25,10 @@
 
 -(void)doTap:(UIGestureRecognizer *)dap
 {
-
-
-
+    UIStoryboard *iPhoneStoryBoard  = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
+    FamilyHomeViewController *familyVC = [iPhoneStoryBoard instantiateViewControllerWithIdentifier:@"familyHomeVC"];
+    familyVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:familyVC animated:YES];
 
 }
 - (void)didReceiveMemoryWarning {
