@@ -155,8 +155,6 @@
 		2E801EFF1E262B0B0039A6D9 /* WeekdaysVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E801EFE1E262B0B0039A6D9 /* WeekdaysVC.m */; };
 		2E8715D31EA06EFF006D3FB0 /* NowMusicController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E8715D21EA06EFF006D3FB0 /* NowMusicController.m */; };
 		2E8AC52F1E7BAE350002E717 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E8AC52E1E7BAE350002E717 /* FirstViewController.m */; };
-		2E925D8D1E5E73CD008E327B /* ECEngerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E925D8C1E5E73CD008E327B /* ECEngerController.m */; };
-		2E925D901E5E744C008E327B /* ECPickDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E925D8F1E5E744C008E327B /* ECPickDataViewController.m */; };
 		2E9EA8811E8D0DC200A1AA63 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E9EA8801E8D0DC200A1AA63 /* iPhone.storyboard */; };
 		2EA2A83B1E1DCDA600092D41 /* AreaSubSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A83A1E1DCDA600092D41 /* AreaSubSettingViewController.m */; };
 		2EA2A84A1E1E275900092D41 /* MySubEnergyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A8491E1E275900092D41 /* MySubEnergyCell.m */; };
@@ -216,7 +214,6 @@
 		CD7DDA151E826C3B00638DB3 /* backBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7DDA141E826C3B00638DB3 /* backBtn@2x.png */; };
 		CD93E3AA1E8077F1003CCAA9 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD93E3A91E8077F1003CCAA9 /* LoginViewController.m */; };
 		CD93E3AD1E807AFD003CCAA9 /* login_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD93E3AC1E807AFD003CCAA9 /* login_icon@2x.png */; };
-		CD93E3AF1E807CC2003CCAA9 /* login_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD93E3AE1E807CC2003CCAA9 /* login_bg@2x.png */; };
 		CD93E3B11E8081B0003CCAA9 /* login_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD93E3B01E8081B0003CCAA9 /* login_line@2x.png */; };
 		CD9F0AB81EB78DD0007B0CF7 /* DeliveryAddressSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9F0AB71EB78DD0007B0CF7 /* DeliveryAddressSettingViewController.m */; };
 		CD9F0AC11EB861F5007B0CF7 /* address.txt in Resources */ = {isa = PBXBuildFile; fileRef = CD9F0ABA1EB861F5007B0CF7 /* address.txt */; };
@@ -734,10 +731,6 @@
 		2E8715D21EA06EFF006D3FB0 /* NowMusicController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NowMusicController.m; sourceTree = "<group>"; };
 		2E8AC52D1E7BAE350002E717 /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		2E8AC52E1E7BAE350002E717 /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		2E925D8B1E5E73CD008E327B /* ECEngerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECEngerController.h; sourceTree = "<group>"; };
-		2E925D8C1E5E73CD008E327B /* ECEngerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECEngerController.m; sourceTree = "<group>"; };
-		2E925D8E1E5E744C008E327B /* ECPickDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPickDataViewController.h; sourceTree = "<group>"; };
-		2E925D8F1E5E744C008E327B /* ECPickDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPickDataViewController.m; sourceTree = "<group>"; };
 		2E9EA8801E8D0DC200A1AA63 /* iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhone.storyboard; sourceTree = "<group>"; };
 		2EA2A8391E1DCDA600092D41 /* AreaSubSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaSubSettingViewController.h; sourceTree = "<group>"; };
 		2EA2A83A1E1DCDA600092D41 /* AreaSubSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaSubSettingViewController.m; sourceTree = "<group>"; };
@@ -839,7 +832,6 @@
 		CD93E3A81E8077F1003CCAA9 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		CD93E3A91E8077F1003CCAA9 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		CD93E3AC1E807AFD003CCAA9 /* login_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon@2x.png"; sourceTree = "<group>"; };
-		CD93E3AE1E807CC2003CCAA9 /* login_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_bg@2x.png"; sourceTree = "<group>"; };
 		CD93E3B01E8081B0003CCAA9 /* login_line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_line@2x.png"; sourceTree = "<group>"; };
 		CD9F0AB61EB78DD0007B0CF7 /* DeliveryAddressSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryAddressSettingViewController.h; sourceTree = "<group>"; };
 		CD9F0AB71EB78DD0007B0CF7 /* DeliveryAddressSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliveryAddressSettingViewController.m; sourceTree = "<group>"; };
@@ -1343,10 +1335,6 @@
 				F635CCBA1D4356650078B148 /* MyCenterSplitController.m */,
 				F625A6161D4C8EF700B696E5 /* ProfileListController.h */,
 				F625A6171D4C8EF700B696E5 /* ProfileListController.m */,
-				2E925D8B1E5E73CD008E327B /* ECEngerController.h */,
-				2E925D8C1E5E73CD008E327B /* ECEngerController.m */,
-				2E925D8E1E5E744C008E327B /* ECPickDataViewController.h */,
-				2E925D8F1E5E744C008E327B /* ECPickDataViewController.m */,
 				F6251F6F1D541885000A5A47 /* PluginViewController.h */,
 				F6251F701D541885000A5A47 /* PluginViewController.m */,
 				0FA1E09C1D533BFA001CA819 /* PluginCell.h */,
@@ -2243,7 +2231,6 @@
 				CD7DDA081E81168F00638DB3 /* login_name@2x.png */,
 				CD7DDA061E81168000638DB3 /* login_pwd@2x.png */,
 				CD93E3AC1E807AFD003CCAA9 /* login_icon@2x.png */,
-				CD93E3AE1E807CC2003CCAA9 /* login_bg@2x.png */,
 				CD93E3B01E8081B0003CCAA9 /* login_line@2x.png */,
 			);
 			name = Login;
@@ -2627,7 +2614,6 @@
 				CDF78C5A1E9CC3C500F8B20C /* NaviBarBg.png in Resources */,
 				0FABB3401EAF23470089A5A4 /* ContextMenuCell.xib in Resources */,
 				0FABB33E1EAF232A0089A5A4 /* MenuCell.xib in Resources */,
-				CD93E3AF1E807CC2003CCAA9 /* login_bg@2x.png in Resources */,
 				2EBABC791E8360FB0093EF3A /* TVTableViewCell.xib in Resources */,
 				0F020A231DE3D9330034869F /* LaunchScreen.storyboard in Resources */,
 				CDF389221E305B4400657C8B /* breakdownlist.plist in Resources */,
@@ -3029,7 +3015,6 @@
 				F66596DD1D3F1DAD0082716A /* EnegryOfDeviceCell.m in Sources */,
 				F618141D1DB5B0C7003B0741 /* PushSettingController.m in Sources */,
 				2EB2A4721E237F05003F01DB /* DeviceListTimeVC.m in Sources */,
-				2E925D901E5E744C008E327B /* ECPickDataViewController.m in Sources */,
 				F6DC641E1DEC17710056EC00 /* RoomDeviceController.m in Sources */,
 				2EC9B8281EB1BFE500F382AD /* PushSettingCell.m in Sources */,
 				0F25178A1CFD8C6500491A6C /* PackManager.m in Sources */,
@@ -3182,7 +3167,6 @@
 				2E01840C1ECDE77C00E3705F /* CoreGraphicsExtensions.swift in Sources */,
 				0FCFB38C1CF293A500B37DD3 /* DVD.m in Sources */,
 				CD4F12441EB316EF00E0B301 /* DeliveryAddressViewController.m in Sources */,
-				2E925D8D1E5E73CD008E327B /* ECEngerController.m in Sources */,
 				2EBABC821E83787B0093EF3A /* ScreenTableViewCell.m in Sources */,
 				F617771D1DCC23AC00B382D4 /* CollectionViewCell.m in Sources */,
 				0FAF98B61CE45EC9009BDBB5 /* CryptoManager.m in Sources */,
