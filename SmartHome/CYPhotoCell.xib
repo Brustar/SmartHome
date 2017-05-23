@@ -68,7 +68,7 @@
                                 </constraints>
                                 <state key="normal" backgroundImage="close_white"/>
                                 <connections>
-                                    <action selector="powerBtn:" destination="gTV-IL-0wX" eventType="touchUpInside" id="2hY-3X-Ho1"/>
+                                    <action selector="powerBtn:" destination="gTV-IL-0wX" eventType="touchUpInside" id="aMf-y4-07m"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bc1-Vx-05B">

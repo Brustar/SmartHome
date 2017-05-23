@@ -1,4 +1,4 @@
-#import "CustomViewController.h"
+
 //
 //  PluginViewController.h
 //  SmartHome
@@ -9,6 +9,7 @@
 //#import <HomeKit/HomeKit.h>
 
 #define DEVICE_TYPE @"智能单品"
+#import "CustomViewController.h"
 
 @interface PluginViewController : CustomViewController//<HMHomeManagerDelegate, HMHomeDelegate>
 

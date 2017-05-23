@@ -155,8 +155,6 @@
 		2E801EFF1E262B0B0039A6D9 /* WeekdaysVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E801EFE1E262B0B0039A6D9 /* WeekdaysVC.m */; };
 		2E8715D31EA06EFF006D3FB0 /* NowMusicController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E8715D21EA06EFF006D3FB0 /* NowMusicController.m */; };
 		2E8AC52F1E7BAE350002E717 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E8AC52E1E7BAE350002E717 /* FirstViewController.m */; };
-		2E925D8D1E5E73CD008E327B /* ECEngerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E925D8C1E5E73CD008E327B /* ECEngerController.m */; };
-		2E925D901E5E744C008E327B /* ECPickDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E925D8F1E5E744C008E327B /* ECPickDataViewController.m */; };
 		2E9EA8811E8D0DC200A1AA63 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E9EA8801E8D0DC200A1AA63 /* iPhone.storyboard */; };
 		2EA2A83B1E1DCDA600092D41 /* AreaSubSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A83A1E1DCDA600092D41 /* AreaSubSettingViewController.m */; };
 		2EA2A84A1E1E275900092D41 /* MySubEnergyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A8491E1E275900092D41 /* MySubEnergyCell.m */; };
@@ -733,10 +731,6 @@
 		2E8715D21EA06EFF006D3FB0 /* NowMusicController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NowMusicController.m; sourceTree = "<group>"; };
 		2E8AC52D1E7BAE350002E717 /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		2E8AC52E1E7BAE350002E717 /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		2E925D8B1E5E73CD008E327B /* ECEngerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECEngerController.h; sourceTree = "<group>"; };
-		2E925D8C1E5E73CD008E327B /* ECEngerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECEngerController.m; sourceTree = "<group>"; };
-		2E925D8E1E5E744C008E327B /* ECPickDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPickDataViewController.h; sourceTree = "<group>"; };
-		2E925D8F1E5E744C008E327B /* ECPickDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPickDataViewController.m; sourceTree = "<group>"; };
 		2E9EA8801E8D0DC200A1AA63 /* iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhone.storyboard; sourceTree = "<group>"; };
 		2EA2A8391E1DCDA600092D41 /* AreaSubSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaSubSettingViewController.h; sourceTree = "<group>"; };
 		2EA2A83A1E1DCDA600092D41 /* AreaSubSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaSubSettingViewController.m; sourceTree = "<group>"; };
@@ -1341,10 +1335,6 @@
 				F635CCBA1D4356650078B148 /* MyCenterSplitController.m */,
 				F625A6161D4C8EF700B696E5 /* ProfileListController.h */,
 				F625A6171D4C8EF700B696E5 /* ProfileListController.m */,
-				2E925D8B1E5E73CD008E327B /* ECEngerController.h */,
-				2E925D8C1E5E73CD008E327B /* ECEngerController.m */,
-				2E925D8E1E5E744C008E327B /* ECPickDataViewController.h */,
-				2E925D8F1E5E744C008E327B /* ECPickDataViewController.m */,
 				F6251F6F1D541885000A5A47 /* PluginViewController.h */,
 				F6251F701D541885000A5A47 /* PluginViewController.m */,
 				0FA1E09C1D533BFA001CA819 /* PluginCell.h */,
@@ -3025,7 +3015,6 @@
 				F66596DD1D3F1DAD0082716A /* EnegryOfDeviceCell.m in Sources */,
 				F618141D1DB5B0C7003B0741 /* PushSettingController.m in Sources */,
 				2EB2A4721E237F05003F01DB /* DeviceListTimeVC.m in Sources */,
-				2E925D901E5E744C008E327B /* ECPickDataViewController.m in Sources */,
 				F6DC641E1DEC17710056EC00 /* RoomDeviceController.m in Sources */,
 				2EC9B8281EB1BFE500F382AD /* PushSettingCell.m in Sources */,
 				0F25178A1CFD8C6500491A6C /* PackManager.m in Sources */,
@@ -3178,7 +3167,6 @@
 				2E01840C1ECDE77C00E3705F /* CoreGraphicsExtensions.swift in Sources */,
 				0FCFB38C1CF293A500B37DD3 /* DVD.m in Sources */,
 				CD4F12441EB316EF00E0B301 /* DeliveryAddressViewController.m in Sources */,
-				2E925D8D1E5E73CD008E327B /* ECEngerController.m in Sources */,
 				2EBABC821E83787B0093EF3A /* ScreenTableViewCell.m in Sources */,
 				F617771D1DCC23AC00B382D4 /* CollectionViewCell.m in Sources */,
 				0FAF98B61CE45EC9009BDBB5 /* CryptoManager.m in Sources */,

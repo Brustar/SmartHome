@@ -8,7 +8,6 @@
 //
 
 #import "AmplifierController.h"
-
 #import "SQLManager.h"
 #import "SocketManager.h"
 #import "Amplifier.h"
