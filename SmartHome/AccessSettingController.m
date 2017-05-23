@@ -97,29 +97,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.userTableView.tableFooterView = [UIView new];
     NSString *url = [NSString stringWithFormat:@"%@Cloud/user_listall.aspx",[IOManager httpAddr]];
-    //DeviceInfo *device = [DeviceInfo defaultManager];
-    //if ([device.db isEqualToString:SMART_DB]) {
-        [self sendRequest:url withTag:1];
-    /*}else {
-        NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"userList" ofType:@"plist"]];
-        NSArray *arr = plistDict[@"user_list"];
-        if ([arr isKindOfClass:[NSArray class]]) {
-            for(NSDictionary *userDetail in arr)
-            {
-                NSString *userName = userDetail[@"username"];
-                NSString *userType = userDetail[@"usertype"];
-                NSString *userID = userDetail[@"user_id"];
-                [self.userArr addObject:userName];
-                [self.managerType addObject:userType];
-                [self.userIDArr addObject:userID];
-                
-            }
-            
-        }
-        [self.userTableView reloadData];
-    }
-    */
-    
+    [self sendRequest:url withTag:1];
 }
 -(void)sendRequest:(NSString *)url withTag:(int)i
 {
