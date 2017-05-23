@@ -25,13 +25,7 @@
     
     
     DeviceInfo *device = [DeviceInfo defaultManager];
-    if ([device.db isEqualToString:SMART_DB]) {
-        [self sendRequestForGettingSceneConfig:@"Cloud/scene_config_list.aspx" withTag:1];//平面配置请求
-    }else{ //体验：读本地planeScene.plist
-        [self getAllDevicesAndRoomsWithPlistFilePath:[[NSBundle mainBundle] pathForResource:@"planeScene" ofType:@"plist"]];
-    }
-    
-    
+    [self sendRequestForGettingSceneConfig:@"Cloud/scene_config_list.aspx" withTag:1];//平面配置请求
 }
 -(void)viewWillAppear:(BOOL)animated
 {

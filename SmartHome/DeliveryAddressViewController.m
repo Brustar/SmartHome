@@ -183,6 +183,28 @@
 
 - (void)onDeleteBtnClicked:(UIButton *)btn {
     
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        if ( _addressArray.count > btn.tag ) {
+            Address *info = [_addressArray objectAtIndex:btn.tag];
+            if (info) {
+                NSString *url = [NSString stringWithFormat:@"%@Cloud/user_address.aspx",[IOManager httpAddr]];
+                NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
+                
+                if (auothorToken.length >0) {
+                    NSDictionary *dict = @{@"token":auothorToken,
+                                           @"optype":@(1),
+                                           @"rid":@(info.addressID)
+                                           };
+                    HttpManager *http=[HttpManager defaultManager];
+                    http.delegate = self;
+                    http.tag = 3;
+                    [http sendPost:url param:dict];
+                }
+            }
+        }
+        return;
+    }
+    
     UIAlertController * alerController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
     [alerController addAction:[UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {

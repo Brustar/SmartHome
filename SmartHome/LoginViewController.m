@@ -97,8 +97,13 @@
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width * i , 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
         
         //将要加载的图片放入imageView 中
-        //UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%d",i+1]];
-        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"welcome%d", i+1]];
+        NSString *welcomeStr = @"welcome";
+        
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+            welcomeStr = @"iPadWelcome";
+        }
+        
+        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%d", welcomeStr,i+1]];
         imageView.image = image;
         [_scrollView addSubview:imageView];
     }

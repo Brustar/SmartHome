@@ -43,6 +43,7 @@
     
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device deviceGenaration];
+     device.db = SMART_DB;
    
     //登录后每次系统启动自动更新云端配置，第一次安装此处不更新，登录的时候再更新
     [device initConfig];
@@ -73,22 +74,22 @@
 }
 
 - (void)loadingLaunchingViewController {
-     //if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         LaunchingViewController *launchingVC = [[LaunchingViewController alloc] init];
         self.window.rootViewController = launchingVC;
         [self.window makeKeyAndVisible];
-               
-     //}
-    
 }
 
 - (void)loadingLoginViewController {
     
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device deviceGenaration];
-    // Override point for customization after application launch.
-    //if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    device.db=SMART_DB;
+        
+        if (self.window == nil) {
+            self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        }
+
         UIStoryboard *loginStoryBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
         
         //已登录时,自动登录
@@ -107,30 +108,8 @@
         }
         
         [self.window makeKeyAndVisible];
-
-        
-    }
-//    else {
-//        //已登录时
-//        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]) {
-//            ECloudTabBarController *ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ECloudTabBarController"];
-//            self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-//            self.window.rootViewController = ecloudVC;
-//        }
-//    }
-
-    /*
-    }
-    
-    else {
-        //已登录时
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]) {
-            ECloudTabBarController *ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ECloudTabBarController"];
-            self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-            self.window.rootViewController = ecloudVC;
-        }
-    }
-*/
+  
+}
 
 -(void)kickout
 {

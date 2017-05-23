@@ -20,6 +20,9 @@
 
 - (void)initUI {
     CGFloat leadingGap = 20;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        leadingGap = 300;
+    }
     CGFloat topGap = 10;
     CGFloat btnTopGap = 0;
     CGFloat bgHeight = self.frame.size.height;

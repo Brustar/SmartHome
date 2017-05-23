@@ -119,7 +119,6 @@
 		0FD3DEAA1D3F183D00AF7765 /* SCWaveAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD3DEA91D3F183D00AF7765 /* SCWaveAnimationView.m */; };
 		0FD3DEAD1D3F186800AF7765 /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD3DEAC1D3F186800AF7765 /* Globals.m */; };
 		0FDB34441E79269500DA53BB /* LayerUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDB34431E79269500DA53BB /* LayerUtil.m */; };
-		0FE78BB61DCFB091009B4767 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FE78BB51DCFB091009B4767 /* Images.xcassets */; };
 		0FF410DA1CDAE67100C7F4A1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410D91CDAE67100C7F4A1 /* CoreLocation.framework */; };
 		0FF410DC1CDAF76300C7F4A1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF410DB1CDAF76300C7F4A1 /* CoreBluetooth.framework */; };
 		0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF7B0B51D1380BF003C2D52 /* AirController.m */; };
@@ -224,6 +223,8 @@
 		CD9F0AC41EB861F5007B0CF7 /* Province.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9F0AC01EB861F5007B0CF7 /* Province.m */; };
 		CD9F0ACD1EB9A94E007B0CF7 /* HostListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9F0ACC1EB9A94E007B0CF7 /* HostListViewController.m */; };
 		CD9F0AD01EB9BC9C007B0CF7 /* HostListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9F0ACF1EB9BC9C007B0CF7 /* HostListCell.m */; };
+		CDA9EEC11ED40F6900CB4D7D /* launchingAnimation.gif in Resources */ = {isa = PBXBuildFile; fileRef = CDA9EEC01ED40F6900CB4D7D /* launchingAnimation.gif */; };
+		CDA9EEC51ED4288900CB4D7D /* iPadLaunchAnimation.gif in Resources */ = {isa = PBXBuildFile; fileRef = CDA9EEC41ED4288900CB4D7D /* iPadLaunchAnimation.gif */; };
 		CDB8B84A1EB1D3AE003AA894 /* FamilyDynamicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B8491EB1D3AE003AA894 /* FamilyDynamicViewController.m */; };
 		CDB8B84D1EB1D421003AA894 /* MonitorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B84C1EB1D421003AA894 /* MonitorViewController.m */; };
 		CDB8B8501EB1D4B4003AA894 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB8B84F1EB1D4B4003AA894 /* UserInfoViewController.m */; };
@@ -244,7 +245,6 @@
 		CDEE5E9B1EC1DF8300A5779D /* DeviceTimerSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEE5E9A1EC1DF8300A5779D /* DeviceTimerSettingViewController.m */; };
 		CDEE5EA11EC2A84800A5779D /* LaunchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEE5EA01EC2A84800A5779D /* LaunchingViewController.m */; };
 		CDEE5EA61EC33DC100A5779D /* CoreTextArcView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEE5EA51EC33DC100A5779D /* CoreTextArcView.m */; };
-		CDEE5EA81EC3EC5900A5779D /* launchingAnimation.gif in Resources */ = {isa = PBXBuildFile; fileRef = CDEE5EA71EC3EC5900A5779D /* launchingAnimation.gif */; };
 		CDEE5EAC1ECDD82E00A5779D /* portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = CDEE5EAB1ECDD82E00A5779D /* portrait.png */; };
 		CDEE5EAE1ECEC07E00A5779D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDEE5EAD1ECEC07E00A5779D /* Assets.xcassets */; };
 		CDF1573A1E7AAD4C00499AC5 /* BaseNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF157371E7AAD4C00499AC5 /* BaseNavController.m */; };
@@ -672,7 +672,6 @@
 		0FD3DEAC1D3F186800AF7765 /* Globals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Globals.m; sourceTree = "<group>"; };
 		0FDB34421E79269500DA53BB /* LayerUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerUtil.h; sourceTree = "<group>"; };
 		0FDB34431E79269500DA53BB /* LayerUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayerUtil.m; sourceTree = "<group>"; };
-		0FE78BB51DCFB091009B4767 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0FF410D91CDAE67100C7F4A1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0FF410DB1CDAF76300C7F4A1 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		0FF7B0B41D1380BF003C2D52 /* AirController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirController.h; sourceTree = "<group>"; };
@@ -849,6 +848,8 @@
 		CD9F0ACC1EB9A94E007B0CF7 /* HostListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostListViewController.m; sourceTree = "<group>"; };
 		CD9F0ACE1EB9BC9C007B0CF7 /* HostListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostListCell.h; sourceTree = "<group>"; };
 		CD9F0ACF1EB9BC9C007B0CF7 /* HostListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostListCell.m; sourceTree = "<group>"; };
+		CDA9EEC01ED40F6900CB4D7D /* launchingAnimation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = launchingAnimation.gif; sourceTree = "<group>"; };
+		CDA9EEC41ED4288900CB4D7D /* iPadLaunchAnimation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = iPadLaunchAnimation.gif; sourceTree = "<group>"; };
 		CDB8B8481EB1D3AE003AA894 /* FamilyDynamicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyDynamicViewController.h; sourceTree = "<group>"; };
 		CDB8B8491EB1D3AE003AA894 /* FamilyDynamicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyDynamicViewController.m; sourceTree = "<group>"; };
 		CDB8B84B1EB1D421003AA894 /* MonitorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonitorViewController.h; sourceTree = "<group>"; };
@@ -887,7 +888,6 @@
 		CDEE5EA01EC2A84800A5779D /* LaunchingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchingViewController.m; sourceTree = "<group>"; };
 		CDEE5EA41EC33DC100A5779D /* CoreTextArcView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreTextArcView.h; sourceTree = "<group>"; };
 		CDEE5EA51EC33DC100A5779D /* CoreTextArcView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreTextArcView.m; sourceTree = "<group>"; };
-		CDEE5EA71EC3EC5900A5779D /* launchingAnimation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = launchingAnimation.gif; sourceTree = "<group>"; };
 		CDEE5EAB1ECDD82E00A5779D /* portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = portrait.png; sourceTree = "<group>"; };
 		CDEE5EAD1ECEC07E00A5779D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CDF157361E7AAD4C00499AC5 /* BaseNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavController.h; sourceTree = "<group>"; };
@@ -1359,7 +1359,6 @@
 				F67091BB1D93BF300002DDC5 /* WindowSlidingController.m */,
 				F618141B1DB5B0C7003B0741 /* PushSettingController.h */,
 				F618141C1DB5B0C7003B0741 /* PushSettingController.m */,
-				0FE78BB51DCFB091009B4767 /* Images.xcassets */,
 			);
 			path = SmartHome;
 			sourceTree = "<group>";
@@ -1756,8 +1755,9 @@
 		0F6ADFDC1E7134ED00BFF67F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				CDA9EEC01ED40F6900CB4D7D /* launchingAnimation.gif */,
+				CDA9EEC41ED4288900CB4D7D /* iPadLaunchAnimation.gif */,
 				2E01840F1ECF40A200E3705F /* demo.mp4 */,
-				CDEE5EA71EC3EC5900A5779D /* launchingAnimation.gif */,
 				CDF78C591E9CC3C500F8B20C /* NaviBarBg.png */,
 				CDEC868C1E99E32B009EC245 /* Family */,
 				CD93E3AB1E807AD3003CCAA9 /* Login */,
@@ -2577,6 +2577,7 @@
 				0F49CB721E7A1EAE00D46ECC /* Scene.storyboard in Resources */,
 				0F6183FB1EA9A24600000EAD /* NewLightCell.xib in Resources */,
 				0F49CB7A1E7A204300D46ECC /* Devices-iPad.storyboard in Resources */,
+				CDA9EEC51ED4288900CB4D7D /* iPadLaunchAnimation.gif in Resources */,
 				F60FDB471D003FD500AB04BE /* CurtainTableViewCell.xib in Resources */,
 				CDEE5EAE1ECEC07E00A5779D /* Assets.xcassets in Resources */,
 				CD7DDA151E826C3B00638DB3 /* backBtn@2x.png in Resources */,
@@ -2599,6 +2600,7 @@
 				0F49CB7C1E7A204300D46ECC /* Login-iPad.storyboard in Resources */,
 				0F49CB7B1E7A204300D46ECC /* Home-iPad.storyboard in Resources */,
 				CDF90B451E2F4B14009043B9 /* planeScene.plist in Resources */,
+				CDA9EEC11ED40F6900CB4D7D /* launchingAnimation.gif in Resources */,
 				0F49CB741E7A1F0500D46ECC /* Home.storyboard in Resources */,
 				CDEE5EAC1ECDD82E00A5779D /* portrait.png in Resources */,
 				F668AF251D53413B0079587F /* Main.storyboard in Resources */,
@@ -2606,8 +2608,6 @@
 				CDEC868B1E99CD7B009EC245 /* Family.storyboard in Resources */,
 				CDF3892E1E30CFD000657C8B /* userPushNotifyList.plist in Resources */,
 				CD7DDA071E81168000638DB3 /* login_pwd@2x.png in Resources */,
-				0FE78BB61DCFB091009B4767 /* Images.xcassets in Resources */,
-				CDEE5EA81EC3EC5900A5779D /* launchingAnimation.gif in Resources */,
 				CDF389261E30A31300657C8B /* energylist.plist in Resources */,
 				2EBABC741E835EC70093EF3A /* AireTableViewCell.xib in Resources */,
 				2EB516F51E9CE3A40064B18E /* ScreenCurtainCell.xib in Resources */,
@@ -2825,7 +2825,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		7B4EC63A298C6E6A66AD1643 /* [CP] Check Pods Manifest.lock */ = {
@@ -3256,7 +3256,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: shi zi (75UU58685N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: shi zi (75UU58685N)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
