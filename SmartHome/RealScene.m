@@ -73,12 +73,7 @@
     [sock.socket writeData:data withTimeout:1 tag:1];
     NSLog(@"TCP请求Data:%@", data);
     
-    DeviceInfo *device = [DeviceInfo defaultManager];
-    if ([device.db isEqualToString:SMART_DB]) {
-       [self sendRequestForGettingSceneConfig:@"Cloud/scene_config_list.aspx" withTag:1];//实景配置请求
-    }else{ //体验：读本地realScene.plist
-        [self showRoomNameAndBackgroundImgWithFilePath:[[NSBundle mainBundle] pathForResource:@"realScene" ofType:@"plist"]];
-    }
+    [self sendRequestForGettingSceneConfig:@"Cloud/scene_config_list.aspx" withTag:1];//实景配置请求
     
     //先读缓存
     self.tempValue.text = [NSString stringWithFormat:@"%d°C",[[UD objectForKey:@"TempValue"] intValue]];
@@ -189,13 +184,10 @@
 #pragma mark - TCP recv delegate
 - (void)recv:(NSData *)data withTag:(long)tag
 {
-    DeviceInfo *device = [DeviceInfo defaultManager];
     NSLog(@"TCP收到的data:%@", data);
     Proto proto = protocolFromData(data);
     if (CFSwapInt16BigToHost(proto.masterID) != [[UD objectForKey:@"HostID"] intValue]) {
-        if ([device.db isEqualToString:SMART_DB]) {
              return;
-        }
     }
     
      if (tag==0) {

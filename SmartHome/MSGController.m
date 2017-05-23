@@ -107,13 +107,11 @@
 {
     [super viewWillAppear:animated];
     
-     DeviceInfo *device = [DeviceInfo defaultManager];
-    if ([device.db isEqualToString:SMART_DB]) {
-        [self.itemIdArrs removeAllObjects];
-        [self.itemNameArrs removeAllObjects];
-        [self.unreadcountArr removeAllObjects];
-        [self creatItemID];
-    }
+    [self.itemIdArrs removeAllObjects];
+    [self.itemNameArrs removeAllObjects];
+    [self.unreadcountArr removeAllObjects];
+    [self creatItemID];
+    
 
 }
 -(void)viewWillDisappear:(BOOL)animated
@@ -126,23 +124,6 @@
     [super viewDidLoad];
     [MBProgressHUD hideHUD];
     [self setNaviBarTitle:@"通知"];
-    DeviceInfo *device = [DeviceInfo defaultManager];
-    if ([device.db isEqualToString:SMART_DB]) {
-//        [self creatItemID];
-    }else {
-        NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"msgTypeList" ofType:@"plist"]];
-        NSArray *arr = plistDict[@"notify_type_list"];
-        if ([arr isKindOfClass:[NSArray class]]) {
-            for(NSDictionary *dicDetail in arr)
-            {
-                [self.itemIdArrs addObject:dicDetail[@"item_id"]];
-                [self.actcodeArrs addObject:dicDetail[@"actcode"]];
-                [self.itemNameArrs addObject:dicDetail[@"item_name"]];
-                [self.unreadcountArr addObject:dicDetail[@"unreadcount"]];
-            }
-        }
-        [self.tableView reloadData];
-    }
     
 }
 -(void)sendRequestForDetailMsgWithItemId:(int)itemID
@@ -281,11 +262,6 @@
     DetailMSGViewController * MSGVC = [oneStoryBoard instantiateViewControllerWithIdentifier:@"DetailMSGViewController"];
     _itemid = self.itemIdArrs[indexPath.row];
     MSGVC.itemID = [_itemid intValue];
-      DeviceInfo *device = [DeviceInfo defaultManager];
-    if (![device.db isEqualToString:SMART_DB]){
-        MSGVC.actcode = self.actcodeArrs[indexPath.row];
-    }
-   
     [self.navigationController pushViewController:MSGVC animated:YES];
 }
 

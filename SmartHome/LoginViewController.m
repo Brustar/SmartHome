@@ -607,10 +607,6 @@ NSArray *array = [NSArray arrayWithObjects:
 -(void) httpHandler:(id) responseObject tag:(int)tag
 {
     DeviceInfo *info=[DeviceInfo defaultManager];
-    if ([responseObject[@"result"] intValue]==0)
-    {
-        info.db=SMART_DB;
-    }
     
     if(tag == 1)
     {

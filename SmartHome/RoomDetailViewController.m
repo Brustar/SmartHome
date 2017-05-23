@@ -42,12 +42,6 @@
     //房间名
     self.navigationItem.title = [SQLManager getRoomNameByRoomID:self.roomID];
     
-    DeviceInfo *device = [DeviceInfo defaultManager];
-    if (![device.db isEqualToString:SMART_DB]) {
-        
-        [DeviceInfo defaultManager].masterID = 255l;
-    }
-    
 }
 
 - (void)initDataSource {
@@ -196,10 +190,6 @@
             //ligthVC.showLightView = NO;
             ligthVC.roomID = self.roomID;
             
-            if (![device.db isEqualToString:SMART_DB]) {
-                ligthVC.roomID = 1;
-            }
-            
             //ligthVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
             [self addViewAndVC:ligthVC];
             
@@ -208,11 +198,7 @@
             CurtainController *curtainVC = [storyBoard instantiateViewControllerWithIdentifier:@"CurtainController"];
             curtainVC.roomID = self.roomID;
             
-            if (![device.db isEqualToString:SMART_DB]) {
-                curtainVC.roomID = 1;
-            }
             
-            //curtainVC.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
             [self addViewAndVC:curtainVC];
             
             
