@@ -80,7 +80,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="TimerLabel" destination="rIc-Ct-fvg" id="EJv-sf-iob"/>
                         <outlet property="imageView" destination="ipP-vP-gEp" id="B0g-En-ySC"/>
+                        <outlet property="messageLabel" destination="znc-Gk-qLl" id="IRV-D2-cua"/>
+                        <outlet property="temperatureLabel" destination="dtO-gh-eVe" id="Yyp-hE-3D9"/>
+                        <outlet property="weatherImage" destination="3q8-e6-dKc" id="pVq-3G-W76"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aki-DR-wsH" userLabel="First Responder" sceneMemberID="firstResponder"/>

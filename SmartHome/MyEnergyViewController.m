@@ -283,7 +283,7 @@
         
         view.frame = CGRectMake(orignX, orignY, viewW, viewH);
         
-        img.image = [UIImage imageNamed:@"logo"];
+        img.image = [UIImage imageNamed:@"clound_white"];
         [img setContentMode:UIViewContentModeScaleAspectFit];
         
         [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
