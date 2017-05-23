@@ -74,12 +74,12 @@
 }
 
 - (void)loadingLaunchingViewController {
- if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-    LaunchingViewController *launchingVC = [[LaunchingViewController alloc] init];
-    self.window.rootViewController = launchingVC;
-    [self.window makeKeyAndVisible];
-           
- }
+     //if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        LaunchingViewController *launchingVC = [[LaunchingViewController alloc] init];
+        self.window.rootViewController = launchingVC;
+        [self.window makeKeyAndVisible];
+               
+     //}
     
 }
 
@@ -89,7 +89,7 @@
     [device deviceGenaration];
     device.db=SMART_DB;
     // Override point for customization after application launch.
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+    //if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         UIStoryboard *loginStoryBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
         
@@ -109,8 +109,10 @@
         }
         
         [self.window makeKeyAndVisible];
-        
-    }else {
+    /*
+    }
+    
+    else {
         //已登录时
         if ([[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"]) {
             ECloudTabBarController *ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ECloudTabBarController"];
@@ -118,7 +120,7 @@
             self.window.rootViewController = ecloudVC;
         }
     }
-
+*/
 }
 
 -(void)kickout
