@@ -158,6 +158,9 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncLight:) name:@"light" object:nil];
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
+    //查询设备状态
+    NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
+    [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -262,8 +265,8 @@ static NSString *const menuCellIdentifier = @"rotationCell";
         return;
     }
     //同步设备状态
-    if(proto.cmd == 0x01 && proto.action.state == 0x7D){
-        self.switcher.isOn = proto.action.RValue;
+    if(proto.cmd == 0x9A){
+        self.switcher.isOn = proto.action.state;
     }
     if (tag == 0 && (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON || proto.action.state == 0x0b || proto.action.state == 0x0a)) {
         NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
