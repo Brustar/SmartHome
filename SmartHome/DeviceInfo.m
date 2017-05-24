@@ -28,6 +28,18 @@
 
 -(void)initConfig
 {
+    float appVersion = [[UD objectForKey:@"AppVersion"] floatValue];
+    float currentVersion = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] floatValue];
+    if (currentVersion > appVersion) {
+        NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:SMART_DB];
+        [IOManager removeFile:dbPath];
+        [UD removeObjectForKey:@"room_version"];
+        [UD removeObjectForKey:@"equipment_version"];
+        [UD removeObjectForKey:@"scence_version"];
+        [UD removeObjectForKey:@"tv_version"];
+        [UD removeObjectForKey:@"fm_version"];
+        [IOManager writeUserdefault:@(currentVersion) forKey:@"AppVersion"];
+    }
     //创建sqlite数据库及结构
     [SQLManager initSQlite];
 }
