@@ -109,10 +109,12 @@
         info.connectState=atHome;
         
         [IOManager writeUserdefault:[NSNumber numberWithLong:[PackManager dataToUInt16:masterID]] forKey:@"masterID"];
-        [self initTcp:[PackManager NSDataToIP:ip] port:(int)[PackManager dataToUInt16:port] delegate:nil];
-        
-        [self.socket writeData:[[DeviceInfo defaultManager] author] withTimeout:-1 tag:0];
-        [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:0];
+        //release 不能马上去连，要暂停0.1S,再连从服务器，不然会崩溃
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(100 * NSEC_PER_MSEC)), dispatch_get_main_queue(), ^{
+            [self initTcp:[PackManager NSDataToIP:ip] port:(int)[PackManager dataToUInt16:port] delegate:nil];
+            [self.socket writeData:[[DeviceInfo defaultManager] author] withTimeout:-1 tag:0];
+            [self.socket readDataToData:[NSData dataWithBytes:"\xEA" length:1] withTimeout:-1 tag:0];
+        });
     }else{
         [self connectTcp];
     }

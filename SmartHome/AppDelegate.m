@@ -43,7 +43,6 @@
     
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device deviceGenaration];
-     device.db = SMART_DB;
    
     //登录后每次系统启动自动更新云端配置，第一次安装此处不更新，登录的时候再更新
     [device initConfig];
@@ -84,7 +83,6 @@
     
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device deviceGenaration];
-    device.db=SMART_DB;
         
         if (self.window == nil) {
             self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

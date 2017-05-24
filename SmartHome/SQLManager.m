@@ -22,7 +22,6 @@
     return [FMDatabase databaseWithPath:dbPath];
 }
 
-
 //从数据中获取该房间的所有设备信息（按房间号）
 +(NSArray *)getAllDevicesInfo:(int)roomID
 {

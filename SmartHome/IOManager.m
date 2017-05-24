@@ -146,8 +146,10 @@
 + (void) removeFile:(NSString *)file
 {
     NSFileManager *defaultManager = [NSFileManager defaultManager];
-    BOOL ret = [defaultManager removeItemAtPath:file error: nil];
-    NSAssert(ret,@"删除文件失败");
+    if([defaultManager fileExistsAtPath:file] == YES){
+        BOOL ret = [defaultManager removeItemAtPath:file error: nil];
+        NSAssert(ret,@"删除文件失败");
+    }
 }
 
 + (BOOL) createFile:(NSString *)filePath {
