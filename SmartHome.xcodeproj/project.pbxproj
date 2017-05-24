@@ -137,7 +137,7 @@
 		2E04198C1EB89F42004D70B9 /* UIColor+FSPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E04198A1EB89F42004D70B9 /* UIColor+FSPalette.m */; };
 		2E04198E1EB8A370004D70B9 /* MyInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E04198D1EB8A370004D70B9 /* MyInfo.storyboard */; };
 		2E08EFC41EBC668A007F9FE1 /* PhotoGraphViewConteoller.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E08EFC21EBC668A007F9FE1 /* PhotoGraphViewConteoller.m */; };
-		2E12CC0A1E7F5DC400C7D006 /* FirstSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CC091E7F5DC400C7D006 /* FirstSceneViewController.m */; };
+		2E094AD11ED579A700C07EDF /* IpadSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E094AD01ED579A700C07EDF /* IpadSceneViewController.m */; };
 		2E12CC101E7F5E3000C7D006 /* CYLineLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CC0C1E7F5E3000C7D006 /* CYLineLayout.m */; };
 		2E12CC111E7F5E3000C7D006 /* CYPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CC0E1E7F5E3000C7D006 /* CYPhotoCell.m */; };
 		2E12CC121E7F5E3000C7D006 /* CYPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E12CC0F1E7F5E3000C7D006 /* CYPhotoCell.xib */; };
@@ -701,8 +701,8 @@
 		2E04198D1EB8A370004D70B9 /* MyInfo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyInfo.storyboard; sourceTree = "<group>"; };
 		2E08EFC11EBC668A007F9FE1 /* PhotoGraphViewConteoller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoGraphViewConteoller.h; sourceTree = "<group>"; };
 		2E08EFC21EBC668A007F9FE1 /* PhotoGraphViewConteoller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoGraphViewConteoller.m; sourceTree = "<group>"; };
-		2E12CC081E7F5DC400C7D006 /* FirstSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstSceneViewController.h; sourceTree = "<group>"; };
-		2E12CC091E7F5DC400C7D006 /* FirstSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstSceneViewController.m; sourceTree = "<group>"; };
+		2E094ACF1ED579A700C07EDF /* IpadSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpadSceneViewController.h; sourceTree = "<group>"; };
+		2E094AD01ED579A700C07EDF /* IpadSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IpadSceneViewController.m; sourceTree = "<group>"; };
 		2E12CC0B1E7F5E3000C7D006 /* CYLineLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYLineLayout.h; sourceTree = "<group>"; };
 		2E12CC0C1E7F5E3000C7D006 /* CYLineLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYLineLayout.m; sourceTree = "<group>"; };
 		2E12CC0D1E7F5E3000C7D006 /* CYPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYPhotoCell.h; sourceTree = "<group>"; };
@@ -778,8 +778,6 @@
 		2EC9B8271EB1BFE500F382AD /* PushSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushSettingCell.m; sourceTree = "<group>"; };
 		2ECD5B141ED276DC0091880D /* IpadFirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpadFirstViewController.h; sourceTree = "<group>"; };
 		2ECD5B151ED276DC0091880D /* IpadFirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IpadFirstViewController.m; sourceTree = "<group>"; };
-		2ECD5B181ED28D6E0091880D /* IpadSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpadSceneViewController.h; sourceTree = "<group>"; };
-		2ECD5B191ED28D6E0091880D /* IpadSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IpadSceneViewController.m; sourceTree = "<group>"; };
 		2ECD5B231ED2D8150091880D /* IpadSceneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpadSceneCell.h; sourceTree = "<group>"; };
 		2ECD5B241ED2D8150091880D /* IpadSceneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IpadSceneCell.m; sourceTree = "<group>"; };
 		2ECD5B251ED2D8150091880D /* IpadSceneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IpadSceneCell.xib; sourceTree = "<group>"; };
@@ -1967,15 +1965,6 @@
 			name = FirstVC;
 			sourceTree = "<group>";
 		};
-		2E7B64BA1E9B6686001F7469 /* SceneVC */ = {
-			isa = PBXGroup;
-			children = (
-				2E12CC081E7F5DC400C7D006 /* FirstSceneViewController.h */,
-				2E12CC091E7F5DC400C7D006 /* FirstSceneViewController.m */,
-			);
-			name = SceneVC;
-			sourceTree = "<group>";
-		};
 		2E7B64BB1E9B66A9001F7469 /* SceneAddVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -2132,8 +2121,8 @@
 		2ECD5B171ED28D530091880D /* ipadSceneVC */ = {
 			isa = PBXGroup;
 			children = (
-				2ECD5B181ED28D6E0091880D /* IpadSceneViewController.h */,
-				2ECD5B191ED28D6E0091880D /* IpadSceneViewController.m */,
+				2E094ACF1ED579A700C07EDF /* IpadSceneViewController.h */,
+				2E094AD01ED579A700C07EDF /* IpadSceneViewController.m */,
 				2ECD5B231ED2D8150091880D /* IpadSceneCell.h */,
 				2ECD5B241ED2D8150091880D /* IpadSceneCell.m */,
 				2ECD5B251ED2D8150091880D /* IpadSceneCell.xib */,
@@ -2160,7 +2149,6 @@
 				2E8715D01EA06EB3006D3FB0 /* MusicController */,
 				2E7B64BC1E9B66FA001F7469 /* SceneEditVC */,
 				2E7B64BB1E9B66A9001F7469 /* SceneAddVC */,
-				2E7B64BA1E9B6686001F7469 /* SceneVC */,
 				2E7B64B91E9B666A001F7469 /* FirstVC */,
 			);
 			name = Controller;
@@ -2998,6 +2986,7 @@
 				CD9F0AC41EB861F5007B0CF7 /* Province.m in Sources */,
 				0F7426B71EBAC7A000D686B8 /* HTCircularSlider.m in Sources */,
 				F62E05661DAB68620096BF00 /* IphoneEditSceneController.m in Sources */,
+				2E094AD11ED579A700C07EDF /* IpadSceneViewController.m in Sources */,
 				F60E71CA1D796BE6008863DB /* AmplifierController.m in Sources */,
 				F60FDB461D003FD500AB04BE /* CurtainTableViewCell.m in Sources */,
 				CDBEFF501EA5FEBF00258B1E /* FamilyHomeDetailViewController.m in Sources */,
@@ -3188,7 +3177,6 @@
 				F6755A581D40D450002394F3 /* ECloudButton.m in Sources */,
 				F69C82331D363376002DE6D7 /* ServiceRecordViewController.m in Sources */,
 				F66596E01D3F25610082716A /* SceneController.m in Sources */,
-				2E12CC0A1E7F5DC400C7D006 /* FirstSceneViewController.m in Sources */,
 				F6755A5E1D40D576002394F3 /* ECloudMoreView.m in Sources */,
 				0FAF74AD1CEE9A9600432713 /* LightController.m in Sources */,
 				CD43046F1E0B674000B594F4 /* FamilyViewController.m in Sources */,

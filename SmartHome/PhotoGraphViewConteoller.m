@@ -26,6 +26,7 @@
 {
     return 1;
 }
+
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return self.PhotoIcons.count;
@@ -37,6 +38,16 @@
     cell.backgroundView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:self.PhotoIcons[indexPath.row]]];
     
     return cell;
+}
+
+//定义每个UICollectionViewCell 的大小
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        
+         return CGSizeMake(160, 160);
+    }
+     return CGSizeMake(300, 300);
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

@@ -9,6 +9,7 @@
 #import "BaseTabBarController.h"
 #import "BaseNavController.h"
 #import "IpadFirstViewController.h"
+#import "IpadSceneViewController.h"
 
 @interface BaseTabBarController ()
 
@@ -66,17 +67,27 @@
     UIStoryboard *HomeStoryBoard  = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
     UIStoryboard *devicesStoryBoard  = [UIStoryboard storyboardWithName:@"Devices" bundle:nil];
     UIStoryboard * HomeIpadStoryBoard = [UIStoryboard storyboardWithName:@"Home-iPad" bundle:nil];
+    UIStoryboard * SceneIpadStoryBoard = [UIStoryboard storyboardWithName:@"Scene-iPad" bundle:nil];
     //第三级控制器
     //设备
     IphoneDeviceListController *deviceListVC = [devicesStoryBoard instantiateViewControllerWithIdentifier:@"devicesController"];
+    
+    //HOME
     UIViewController * familyVC;
  if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-    //HOME
      familyVC = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"FirstViewController"];
  }else{
      familyVC = [HomeIpadStoryBoard instantiateViewControllerWithIdentifier:@"IpadFirstViewController"];
  }
-    IphoneSceneController *sceneVC = [iPhoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
+    //场景
+    UIViewController * sceneVC;
+ if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+     
+     sceneVC = [iPhoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
+ }else{
+     sceneVC = [SceneIpadStoryBoard instantiateViewControllerWithIdentifier:@"IpadSceneViewController"];
+ }
+    
     //创建数组
     NSArray *viewCtrls = @[deviceListVC, familyVC, sceneVC];
     

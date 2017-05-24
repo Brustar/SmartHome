@@ -34,7 +34,7 @@
 @property (nonatomic,strong) NSMutableArray * enameArr;
 @property (nonatomic,strong) NSMutableArray * minute_timeArr;
 @property (nonatomic,strong) NSMutableArray * devicesData;
-
+@property (nonatomic,strong) NSMutableArray *chartData;
 @property(nonatomic,strong)UIButton *clickButton;
 @property(nonatomic,strong)UIButton *selectedButton;
 
@@ -88,7 +88,16 @@
 {
     self.roomIndex = index;
     
-    [self loadChartWithDates:self.devicesData[index]];//下面的曲线图
+    if (self.devicesData.count > index) {
+          _chartWithDates.hidden = NO;
+          [self loadChartWithDates:self.devicesData[index]];//下面的曲线图
+        
+    }else{
+           _chartWithDates.hidden = YES;
+         [MBProgressHUD showSuccess:@"暂无此设备的数据"];
+        
+    }
+   
 }
 
 -(void)setTime
@@ -120,12 +129,13 @@
 #pragma mark - Setting up the chart
 
 - (void)loadChartWithDates:(NSArray *)data {
-    NSMutableArray *chartData = [NSMutableArray new];
+    
+     _chartData= [NSMutableArray new];
     
     NSMutableArray *months = [NSMutableArray new];
     for(NSDictionary *obj in data)
     {
-        [chartData addObject:obj[@"energy"]];
+        [_chartData addObject:obj[@"energy"]];
         NSString *day = [[obj[@"time"] description] substringFromIndex:8];
         [months addObject:day];
     }
@@ -146,7 +156,7 @@
     _chartWithDates.labelForValue = ^(CGFloat value) {
         return [NSString stringWithFormat:@"%.02f", value];
     };
-    [_chartWithDates setChartData:chartData];//下面的曲线图
+    [_chartWithDates setChartData:_chartData];//下面的曲线图
 }
 
 -(void)sendRequestToGetEenrgy

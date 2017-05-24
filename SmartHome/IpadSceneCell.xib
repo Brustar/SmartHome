@@ -161,6 +161,7 @@
                 <outlet property="SceneName" destination="0Ww-8g-LwM" id="Mrg-pt-aVV"/>
                 <outlet property="deleteBtn" destination="ICl-Af-Cjn" id="bTI-Bp-omy"/>
                 <outlet property="imageView" destination="Sgs-jP-X6Q" id="Lwa-P5-T9I"/>
+                <outlet property="partternBtnView" destination="AO0-oc-0hR" id="V8e-AB-9Gh"/>
                 <outlet property="powerBtn" destination="Jgu-HF-cXS" id="WcQ-om-Rbe"/>
                 <outlet property="seleteSendPowBtn" destination="TBG-d7-sxX" id="7Dy-aL-8SD"/>
                 <outlet property="subImageView" destination="FLq-qI-ZrZ" id="J4X-oj-h18"/>
