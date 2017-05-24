@@ -11,12 +11,12 @@
 #import "Room.h"
 #import "LightController.h"
 #import "CurtainController.h"
-
+#import "TVController.h"
 #import "FMController.h"
-
+#import "FloweringController.h"
 #import "PluginViewController.h"
 #import "CameraController.h"
-#import "GuardController.h"
+#import "AirController.h"
 #import "ScreenCurtainController.h"
 #import "ProjectController.h"
 #import "IphoneRoomView.h"
@@ -24,7 +24,7 @@
 #import "AmplifierController.h"
 #import "WindowSlidingController.h"
 #import "BgMusicController.h"
-
+#import "IPadMenuController.h"
 #import "AppDelegate.h"
 #import "CYLineLayout.h"
 #import "CYPhotoCell.h"
@@ -72,7 +72,7 @@ static NSString * const CYPhotoId = @"photo";
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
-    baseTabbarController.tabbarPanel.hidden = YES;
+    baseTabbarController.tabbarPanel.hidden = [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone;
     
     if (_nowMusicController) {
         [_nowMusicController.view removeFromSuperview];
@@ -273,6 +273,38 @@ static NSString * const CYPhotoId = @"photo";
     }
 }
 
+-(void) UISplit:(NSArray *)controllers
+{
+    if ([controllers count]==2){ 
+        CustomViewController *root = [[CustomViewController alloc] init];
+        
+        //初始化UISplitViewController
+        UISplitViewController *splitVC = [[UISplitViewController alloc] init];
+        
+        //配置分屏视图界面外观
+        splitVC.preferredDisplayMode = UISplitViewControllerDisplayModeAutomatic;
+        //调整masterViewController的宽度，按百分比调整
+        splitVC.preferredPrimaryColumnWidthFraction = 0.25;
+        splitVC.viewControllers = controllers;
+        
+        for(UIView *v in [[[controllers lastObject] view] subviews])
+        {
+            float width = [UIScreen mainScreen].bounds.size.width;
+            v.transform = CGAffineTransformMakeTranslation(width*0.25/-2, 0);
+            
+        }
+        
+        [root.view addSubview:splitVC.view];
+        [root addChildViewController:splitVC];
+        [self.navigationController pushViewController:root animated:YES];
+        
+    }
+    
+    if ([controllers count]==1){
+        [self.navigationController pushViewController:[controllers firstObject] animated:YES];
+    }
+}
+
 -(NSString *) seguaName:(int) typeID
 {
     switch (typeID) {
@@ -292,12 +324,52 @@ static NSString * const CYPhotoId = @"photo";
     return NULL;
 }
 
+-(NSArray *)calcontroller:(int) typeID
+{
+    NSArray *controllers = @[];
+    IPadMenuController *menu = [[IPadMenuController alloc] init];
+    Room *room = self.rooms[self.roomIndex];
+    id device;
+    switch (typeID) {
+        case cata_light:
+            device = [[LightController alloc] init];
+            ((LightController*)device).roomID = room.rId;
+            
+            return @[menu,device];
+        case cata_curtain:
+            device = [[CurtainController alloc] init];
+            ((CurtainController*)device).roomID = room.rId;
+            return @[device];
+        case cata_env:
+            device = [[AirController alloc] init];
+            ((AirController*)device).roomID = room.rId;
+            return @[device];
+        case cata_single_product:
+            device = [[FloweringController alloc] init];
+            ((FloweringController*)device).roomID = room.rId;
+            return @[menu,device];
+        case cata_media:
+            device = [[TVController alloc] init];
+            ((TVController*)device).roomID = room.rId;
+            return @[menu,device];
+        default:
+            break;
+    }
+    
+    return controllers;
+}
+
 -(void)goDeviceByRoomID:(NSString *)typeID
 {
     int type = [typeID intValue];
-    NSString *segua = [self seguaName:type];
-    if (segua) {
-        [self performSegueWithIdentifier:segua sender:self];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        NSString *segua = [self seguaName:type];
+        if (segua) {
+            [self performSegueWithIdentifier:segua sender:self];
+        }
+    }else{
+        NSArray *controllers = [self calcontroller:type];
+        [self UISplit:controllers];
     }
 }
 
