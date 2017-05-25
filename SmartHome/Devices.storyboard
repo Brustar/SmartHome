@@ -28,7 +28,7 @@
         <!--AirCondition-->
         <scene sceneID="O4I-m7-YWH">
             <objects>
-                <viewController id="rZG-4r-cjU" userLabel="AirCondition" customClass="AirController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AirController" id="rZG-4r-cjU" userLabel="AirCondition" customClass="AirController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bDP-kR-KBH"/>
                         <viewControllerLayoutGuide type="bottom" id="k52-o1-F5d"/>
@@ -678,7 +678,7 @@
         <!--Lighting-->
         <scene sceneID="TgK-5T-LFN">
             <objects>
-                <viewController id="N6p-qn-auk" userLabel="Lighting" customClass="LightController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LightController" id="N6p-qn-auk" userLabel="Lighting" customClass="LightController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GfI-0o-EXN"/>
                         <viewControllerLayoutGuide type="bottom" id="Uh2-ix-B4O"/>
@@ -771,8 +771,10 @@
                     </view>
                     <connections>
                         <outlet property="base" destination="cNa-Uw-OPg" id="NcH-sI-P65"/>
+                        <outlet property="bottom" destination="szb-d8-h4d" id="vqd-SJ-6xJ"/>
                         <outlet property="btnPen" destination="qbi-rs-2ri" id="s4T-3i-QaA"/>
                         <outlet property="lightName" destination="Ejp-Uz-H6K" id="7bh-0o-kDI"/>
+                        <outlet property="top" destination="Pbb-Ct-zjz" id="KYS-xf-1Dq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZg-pE-92P" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -782,7 +784,7 @@
         <!--Curtain-->
         <scene sceneID="viu-5O-afp">
             <objects>
-                <viewController id="H8M-dY-i5L" userLabel="Curtain" customClass="CurtainController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CurtainController" id="H8M-dY-i5L" userLabel="Curtain" customClass="CurtainController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3Zk-b9-EJa"/>
                         <viewControllerLayoutGuide type="bottom" id="IiD-hf-KPb"/>
