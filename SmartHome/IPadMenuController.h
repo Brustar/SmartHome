@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IPadMenuController : UIViewController
+@interface IPadMenuController : UITableViewController
+
+@property (nonatomic) int typeID;
+
+@property (nonatomic) int roomID;
+
+@property (nonatomic,copy) NSArray *types;
 
 @end

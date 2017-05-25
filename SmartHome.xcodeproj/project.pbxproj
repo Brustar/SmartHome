@@ -65,6 +65,8 @@
 		0F6423521DE57CA1003379FC /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2D366D1D11555100C46DE5 /* libavfilter.a */; };
 		0F6ADFE01E7136B500BFF67F /* RCDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6ADFDF1E7136B500BFF67F /* RCDataManager.m */; };
 		0F6ADFE31E7136C500BFF67F /* ConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6ADFE21E7136C500BFF67F /* ConversationViewController.m */; };
+		0F7273721ED6BAA700AF1475 /* LeftMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F7273711ED6BAA700AF1475 /* LeftMenuCell.xib */; };
+		0F7273751ED6BB8600AF1475 /* LeftMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7273741ED6BB8600AF1475 /* LeftMenuCell.m */; };
 		0F7426B71EBAC7A000D686B8 /* HTCircularSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7426B61EBAC7A000D686B8 /* HTCircularSlider.m */; };
 		0F7426BA1EBAC8D800D686B8 /* FloweringController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7426B91EBAC8D800D686B8 /* FloweringController.m */; };
 		0F7426C11EBB362F00D686B8 /* FeedingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7426BE1EBB362F00D686B8 /* FeedingController.m */; };
@@ -565,6 +567,9 @@
 		0F6ADFE11E7136C500BFF67F /* ConversationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationViewController.h; sourceTree = "<group>"; };
 		0F6ADFE21E7136C500BFF67F /* ConversationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationViewController.m; sourceTree = "<group>"; };
 		0F6C46491EA9AE9600F857E9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		0F7273711ED6BAA700AF1475 /* LeftMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftMenuCell.xib; sourceTree = "<group>"; };
+		0F7273731ED6BB8600AF1475 /* LeftMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuCell.h; sourceTree = "<group>"; };
+		0F7273741ED6BB8600AF1475 /* LeftMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuCell.m; sourceTree = "<group>"; };
 		0F7426B51EBAC7A000D686B8 /* HTCircularSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTCircularSlider.h; sourceTree = "<group>"; };
 		0F7426B61EBAC7A000D686B8 /* HTCircularSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTCircularSlider.m; sourceTree = "<group>"; };
 		0F7426B81EBAC8D800D686B8 /* FloweringController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FloweringController.h; sourceTree = "<group>"; };
@@ -1888,12 +1893,15 @@
 				0F7426BE1EBB362F00D686B8 /* FeedingController.m */,
 				0F7426BF1EBB362F00D686B8 /* WettingController.h */,
 				0F7426C01EBB362F00D686B8 /* WettingController.m */,
-				0F9232E01EB85CE3008B1F37 /* AirMenuCell.xib */,
 				0FABB33D1EAF232A0089A5A4 /* MenuCell.xib */,
+				0F9232E01EB85CE3008B1F37 /* AirMenuCell.xib */,
 				0F7426B81EBAC8D800D686B8 /* FloweringController.h */,
 				0F7426B91EBAC8D800D686B8 /* FloweringController.m */,
 				0F3D93D01ED55C8100652205 /* IPadMenuController.h */,
 				0F3D93D11ED55C8100652205 /* IPadMenuController.m */,
+				0F7273711ED6BAA700AF1475 /* LeftMenuCell.xib */,
+				0F7273731ED6BB8600AF1475 /* LeftMenuCell.h */,
+				0F7273741ED6BB8600AF1475 /* LeftMenuCell.m */,
 			);
 			name = Devices;
 			sourceTree = "<group>";
@@ -2611,6 +2619,7 @@
 				0F020A231DE3D9330034869F /* LaunchScreen.storyboard in Resources */,
 				CDF389221E305B4400657C8B /* breakdownlist.plist in Resources */,
 				CD7DDA0B1E81297D00638DB3 /* registButton@2x.png in Resources */,
+				0F7273721ED6BAA700AF1475 /* LeftMenuCell.xib in Resources */,
 				F6359B011CFFC4DC0035EB31 /* ColourTableViewCell.xib in Resources */,
 				2E04198E1EB8A370004D70B9 /* MyInfo.storyboard in Resources */,
 				2EB516FA1E9CEB3F0064B18E /* AddDeviceCell.xib in Resources */,
@@ -3079,6 +3088,7 @@
 				2EA2A83B1E1DCDA600092D41 /* AreaSubSettingViewController.m in Sources */,
 				CDEC86921E9A1D22009EC245 /* FamilyHomeCell.m in Sources */,
 				2EB516F91E9CEB3F0064B18E /* AddDeviceCell.m in Sources */,
+				0F7273751ED6BB8600AF1475 /* LeftMenuCell.m in Sources */,
 				2E01840D1ECDE77C00E3705F /* DateExtensions.swift in Sources */,
 				0F032D4C1CC9B12700D1920D /* AppDelegate.m in Sources */,
 				0FB205ED1CDC3D3700B5E87E /* AudioManager.m in Sources */,

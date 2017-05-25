@@ -318,8 +318,9 @@ static NSString * const CYPhotoId = @"photo";
 {
     NSArray *controllers = @[];
     IPadMenuController *menu = [[IPadMenuController alloc] init];
+    menu.typeID = typeID;
     Room *room = self.rooms[self.roomIndex];
-    
+    menu.roomID = room.rId;
     UIStoryboard *devicesStoryBoard  = [UIStoryboard storyboardWithName:@"Devices" bundle:nil];
     id device;
     switch (typeID) {

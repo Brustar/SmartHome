@@ -148,7 +148,7 @@
     self.backgroundColor = [UIColor clearColor];
     
     // 默认左侧显示返回按钮
-    _btnBack = [[self class] createNormalNaviBarBtnByTitle:@"返回" imgNormal:@"backBtn" imgHighlight:@"backBtn" target:self action:@selector(btnBack:)];
+    _btnBack = [[self class] createNormalNaviBarBtnByTitle:@"" imgNormal:@"backBtn" imgHighlight:@"backBtn" target:self action:@selector(btnBack:)];
     
     _labelTitle = [[UILabel alloc] initWithFrame:CGRectZero];
     _labelTitle.backgroundColor = [UIColor clearColor];

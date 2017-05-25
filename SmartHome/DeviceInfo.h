@@ -92,7 +92,7 @@ enum{
 
 - (void) deviceGenaration;
 - (void) initConfig;
-
++(UIViewController *)calcController:(NSUInteger)uid;
 #pragma mark - public
 -(NSData *) author;
 -(NSData *)startScenenAtMaster:(int)sceneid;

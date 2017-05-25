@@ -21,6 +21,14 @@
                                                dismissType:PopupViewDismissTypeBounceOutToBottom
                                                   maskType:PopupViewMaskTypeDimmed
                             shouldDismissOnBackgroundTouch:YES shouldDismissOnContentTouch:NO];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        popup = [PopupView popupViewWithContentView:self
+                                           showType:PopupViewShowTypeBounceInFromLeft
+                                        dismissType:PopupViewDismissTypeBounceOutToRight
+                                           maskType:PopupViewMaskTypeDimmed
+                     shouldDismissOnBackgroundTouch:YES shouldDismissOnContentTouch:NO];
+    }
     [popup showWithLayout:layout];
 }
 

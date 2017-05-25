@@ -66,26 +66,14 @@ static NSString *const menuCellIdentifier = @"rotationCell";
         [view dismiss];
     }];
     
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 5.0, 80.0, 35.0)];
+    title.text = @"颜色面板";
+    [title setFont:[UIFont systemFontOfSize:13.0]];
     
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    
-    [btn setTitle:@"颜色面板" forState:UIControlStateNormal];
-    
-    btn.frame = CGRectMake(5.0, 5.0, 80.0, 35.0);
-    [btn setTitleColor:[UIColor blackColor]forState:UIControlStateNormal];
-    btn.titleLabel.font = [UIFont systemFontOfSize:13.0];
+    [title setTextColor:[UIColor blackColor]];
 
-    //[btn addTarget:self action:@selector(upInside) forControlEvents:UIControlEventTouchUpInside];
-    [view addSubview:btn];
-    
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    
-    [button setTitle:@"图片面板" forState:UIControlStateNormal];
-    
-    button.frame = CGRectMake(220.0, 5.0, 80.0, 35.0);
-    [button setTitleColor:[UIColor blackColor]forState:UIControlStateNormal];
-    button.titleLabel.font = [UIFont systemFontOfSize:13.0];
-    //[view addSubview:button];
+    [view addSubview:title];
+
     [view addSubview:colorPicker];
     [view show];
 }
@@ -261,8 +249,13 @@ static NSString *const menuCellIdentifier = @"rotationCell";
         return;
     }
     //同步设备状态
-    if(proto.cmd == 0x9A){
-        self.switcher.isOn = proto.action.state;
+    if(proto.cmd == 0x01 && (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) ){
+        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+        if ([devID intValue]==[self.deviceid intValue]) {
+            [self.switcher setCustomKnobImage:[UIImage imageNamed:proto.action.state?@"lighting_on":@"lighting_off"]
+                  inactiveBackgroundImage:nil
+                    activeBackgroundImage:nil];
+        }
     }
     if (tag == 0 && (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON || proto.action.state == 0x0b || proto.action.state == 0x0a)) {
         NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
@@ -450,6 +443,13 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 
 }
 
+-(void)visibleUI:(Device *)device
+{
+    self.lightName.text = device.name;
+    NSUInteger h = [SQLManager deviceHtypeIDByDeviceID:device.eID];
+    self.base.hidden = self.btnPen.hidden = h!=3;
+}
+
 - (IBAction)loadCatalog:(id)sender {
     self.lightCatalog = ((UIButton *)sender).tag;
     self.base.hidden = self.btnPen.hidden = (self.lightCatalog == 3?NO:YES);
@@ -490,8 +490,9 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 
 #pragma mark - UITableViewDataSource, UITableViewDelegate
 - (void)tableView:(YALContextMenuTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.lightName.text = [[self.lights objectAtIndex:indexPath.row] objectForKey:@"name"];
-    self.deviceid = [[self.lights objectAtIndex:indexPath.row] objectForKey:@"id"];
+    Device *device = [self.lights objectAtIndex:indexPath.row];
+    self.lightName.text = device.name;
+    self.deviceid = [NSString stringWithFormat:@"%d", device.eID];
     //查询设备状态
     NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
     [[SocketManager defaultManager].socket writeData:data withTimeout:1 tag:1];
@@ -509,10 +510,10 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 - (UITableViewCell *)tableView:(YALContextMenuTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     ContextMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:menuCellIdentifier forIndexPath:indexPath];
-    
+    Device *device = [self.lights objectAtIndex:indexPath.row];
     if (cell) {
         cell.backgroundColor = [UIColor clearColor];
-        cell.menuTitleLabel.text = [[self.lights objectAtIndex:indexPath.row] objectForKey:@"name"];
+        cell.menuTitleLabel.text = device.name;
         [cell setContraint:self.lightCatalog];
     }
     
