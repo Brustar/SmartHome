@@ -277,20 +277,17 @@ static NSString * const CYPhotoId = @"photo";
 {
     if ([controllers count]==2){ 
         CustomViewController *root = [[CustomViewController alloc] init];
-
         //初始化UISplitViewController
         UISplitViewController *splitVC = [[UISplitViewController alloc] init];
-        
         //配置分屏视图界面外观
         splitVC.preferredDisplayMode = UISplitViewControllerDisplayModeAutomatic;
         //调整masterViewController的宽度，按百分比调整
         splitVC.preferredPrimaryColumnWidthFraction = 0.25;
         splitVC.viewControllers = controllers;
-
         [root.view addSubview:splitVC.view];
         [root addChildViewController:splitVC];
         [self.navigationController pushViewController:root animated:YES];
-        
+        [root setNaviBarTitle:[[controllers lastObject] title]];
     }
     
     if ([controllers count]==1){
