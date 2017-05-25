@@ -146,6 +146,10 @@
 		2E1495101DE474EF00141629 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9ADF711CE2DC020052F3BC /* libz.tbd */; };
 		2E192CA71EBB2D3F00458541 /* CKCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E192CA61EBB2D3F00458541 /* CKCircleView.m */; };
 		2E2B57195D5A936F7BD15641 /* libPods-SmartHome.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9FD66F09F2092DE805E0F5B /* libPods-SmartHome.a */; };
+		2E4297FF1ED66BAD003F4A76 /* IpadDeviceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E4297FE1ED66BAD003F4A76 /* IpadDeviceListViewController.m */; };
+		2E4298021ED66CBA003F4A76 /* IpadDeviceTypeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E4298011ED66CBA003F4A76 /* IpadDeviceTypeVC.m */; };
+		2E4298061ED67870003F4A76 /* IpadDeviceTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E4298041ED67870003F4A76 /* IpadDeviceTypeCell.m */; };
+		2E42980A1ED6B53B003F4A76 /* IpadSceneDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E4298091ED6B53B003F4A76 /* IpadSceneDetailVC.m */; };
 		2E5E5FEC1DE22AC8006F0C8F /* LightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5E5FEB1DE22AC8006F0C8F /* LightCell.m */; };
 		2E6A065B1EA743B50022B681 /* NewColourCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E6A06591EA743B50022B681 /* NewColourCell.m */; };
 		2E6A065C1EA743B50022B681 /* NewColourCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E6A065A1EA743B50022B681 /* NewColourCell.xib */; };
@@ -715,6 +719,14 @@
 		2E12CC151E7FC04800C7D006 /* IphoneNewEditSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneNewEditSceneController.m; sourceTree = "<group>"; };
 		2E192CA51EBB2D3F00458541 /* CKCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKCircleView.h; sourceTree = "<group>"; };
 		2E192CA61EBB2D3F00458541 /* CKCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKCircleView.m; sourceTree = "<group>"; };
+		2E4297FD1ED66BAD003F4A76 /* IpadDeviceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpadDeviceListViewController.h; sourceTree = "<group>"; };
+		2E4297FE1ED66BAD003F4A76 /* IpadDeviceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IpadDeviceListViewController.m; sourceTree = "<group>"; };
+		2E4298001ED66CBA003F4A76 /* IpadDeviceTypeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpadDeviceTypeVC.h; sourceTree = "<group>"; };
+		2E4298011ED66CBA003F4A76 /* IpadDeviceTypeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IpadDeviceTypeVC.m; sourceTree = "<group>"; };
+		2E4298031ED67870003F4A76 /* IpadDeviceTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpadDeviceTypeCell.h; sourceTree = "<group>"; };
+		2E4298041ED67870003F4A76 /* IpadDeviceTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IpadDeviceTypeCell.m; sourceTree = "<group>"; };
+		2E4298081ED6B53B003F4A76 /* IpadSceneDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpadSceneDetailVC.h; sourceTree = "<group>"; };
+		2E4298091ED6B53B003F4A76 /* IpadSceneDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IpadSceneDetailVC.m; sourceTree = "<group>"; };
 		2E5E5FEA1DE22AC8006F0C8F /* LightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightCell.h; sourceTree = "<group>"; };
 		2E5E5FEB1DE22AC8006F0C8F /* LightCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LightCell.m; sourceTree = "<group>"; };
 		2E6A06581EA743B50022B681 /* NewColourCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewColourCell.h; sourceTree = "<group>"; };
@@ -2131,6 +2143,14 @@
 				2ECD5B231ED2D8150091880D /* IpadSceneCell.h */,
 				2ECD5B241ED2D8150091880D /* IpadSceneCell.m */,
 				2ECD5B251ED2D8150091880D /* IpadSceneCell.xib */,
+				2E4297FD1ED66BAD003F4A76 /* IpadDeviceListViewController.h */,
+				2E4297FE1ED66BAD003F4A76 /* IpadDeviceListViewController.m */,
+				2E4298001ED66CBA003F4A76 /* IpadDeviceTypeVC.h */,
+				2E4298011ED66CBA003F4A76 /* IpadDeviceTypeVC.m */,
+				2E4298081ED6B53B003F4A76 /* IpadSceneDetailVC.h */,
+				2E4298091ED6B53B003F4A76 /* IpadSceneDetailVC.m */,
+				2E4298031ED67870003F4A76 /* IpadDeviceTypeCell.h */,
+				2E4298041ED67870003F4A76 /* IpadDeviceTypeCell.m */,
 			);
 			name = ipadSceneVC;
 			sourceTree = "<group>";
@@ -2983,6 +3003,7 @@
 				0FB35C681DB0CECA00B48EA7 /* Plugin.m in Sources */,
 				0FBEFE2A1D24F0C10084244F /* WebManager.m in Sources */,
 				2EEE536B1E3061930026F97D /* IphoneDetailViewController.m in Sources */,
+				2E4298061ED67870003F4A76 /* IpadDeviceTypeCell.m in Sources */,
 				0F6ADFE01E7136B500BFF67F /* RCDataManager.m in Sources */,
 				F630C35F1D38B4FF008880BB /* AccessSettingController.m in Sources */,
 				0FABB33C1EAF22FC0089A5A4 /* ContextMenuCell.m in Sources */,
@@ -3057,6 +3078,7 @@
 				0F180FC91D0E4E6500392F4C /* GuardController.m in Sources */,
 				2EBABC7D1E8361C50093EF3A /* OtherTableViewCell.m in Sources */,
 				0F25FE5E1CEB0C0A0063E834 /* SceneList.m in Sources */,
+				2E42980A1ED6B53B003F4A76 /* IpadSceneDetailVC.m in Sources */,
 				0F0A40171ED2EBA6002003C4 /* FixTimeListCell.m in Sources */,
 				F625A6181D4C8EF700B696E5 /* ProfileListController.m in Sources */,
 				2EA2A8541E1E2BEA00092D41 /* ENenViewController.m in Sources */,
@@ -3156,6 +3178,7 @@
 				0F8D76D01D9A1B9700DDD063 /* Schedule.m in Sources */,
 				0FCF43311CE09039009BFDD9 /* IbeaconManager.m in Sources */,
 				2E04198B1EB89F42004D70B9 /* FSLineChart.m in Sources */,
+				2E4297FF1ED66BAD003F4A76 /* IpadDeviceListViewController.m in Sources */,
 				0FCFB3801CF28F6F00B37DD3 /* Light.m in Sources */,
 				0FCFB39B1CF2950D00B37DD3 /* BgMusic.m in Sources */,
 				0F8A78511E9F7C8C0050F0D9 /* UIImageView+Badge.m in Sources */,
@@ -3177,6 +3200,7 @@
 				CDEC86891E976EC9009EC245 /* RegistFirstStepForPhoneViewController.m in Sources */,
 				CDEE5E921EBEEBC900A5779D /* FamilyDynamicDeviceAdjustViewController.m in Sources */,
 				F65FF4AB1D61C57100C12271 /* SearchViewController.m in Sources */,
+				2E4298021ED66CBA003F4A76 /* IpadDeviceTypeVC.m in Sources */,
 				F6A1C02E1D586D7500856E00 /* Room.m in Sources */,
 				0F64234A1DE57C83003379FC /* RTSPPlayer.m in Sources */,
 				2E8AC52F1E7BAE350002E717 /* FirstViewController.m in Sources */,

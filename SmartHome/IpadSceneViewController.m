@@ -19,12 +19,14 @@
 #import "HttpManager.h"
 #import "BaseTabBarController.h"
 #import "AppDelegate.h"
+#import "IpadDeviceListViewController.h"
+//#import "IpadDeviceTypeVC.h"
 
 static NSString * const IpadSceneId = @"photo";
 
 @interface IpadSceneViewController ()<IphoneRoomViewDelegate,UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IpadSceneCellDelegate,PhotoGraphViewConteollerDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
-@property (nonatomic,assign) int roomID;
+
 @property (nonatomic,strong) NSArray *roomList;
 @property (nonatomic,strong)NSMutableArray *scenes;
 @property (nonatomic,strong) UICollectionView * FirstCollectionView;
@@ -357,13 +359,21 @@ static NSString * const IpadSceneId = @"photo";
     }else{
         Scene *scene = self.scenes[indexPath.row];
         self.selectedSId = scene.sceneID;
-        CYPhotoCell *cell = (CYPhotoCell*)[collectionView cellForItemAtIndexPath:indexPath];
-        if (scene.status == 0) {
-            [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
-            [[SceneManager defaultManager] startScene:scene.sceneID];
-            [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];
-        }
-        [self performSegueWithIdentifier:@"iphoneEditSegue" sender:self];
+//        IpadSceneCell *cell = (IpadSceneCell*)[collectionView cellForItemAtIndexPath:indexPath];
+//        if (scene.status == 0) {
+//            [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
+//            [[SceneManager defaultManager] startScene:scene.sceneID];
+//            [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];
+//        }
+//        [self performSegueWithIdentifier:@"iphoneEditSegue" sender:self];
+        UIStoryboard *SceneiPadStoryBoard = [UIStoryboard storyboardWithName:@"Scene-iPad" bundle:nil];
+        IpadDeviceListViewController * listVC = [SceneiPadStoryBoard instantiateViewControllerWithIdentifier:@"IpadDeviceListViewController"];
+         listVC.roomID = self.selectedRoomID;
+        listVC.sceneID = self.selectedSId;
+//        IpadDeviceTypeVC * ipadDeviceTypeVC = [SceneiPadStoryBoard instantiateViewControllerWithIdentifier:@"IpadDeviceTypeVC"];
+//        ipadDeviceTypeVC.roomID = self.selectedRoomID;
+        [self presentViewController:listVC animated:YES completion:nil];
+        
     }
     
 }

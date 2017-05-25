@@ -12,5 +12,6 @@
 
 @interface IpadSceneViewController : CustomViewController
 @property (weak, nonatomic) IBOutlet IphoneRoomView *roomView;
+@property (nonatomic,assign) int roomID;
 
 @end
