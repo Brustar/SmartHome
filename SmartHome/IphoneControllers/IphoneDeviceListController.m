@@ -277,7 +277,7 @@ static NSString * const CYPhotoId = @"photo";
 {
     if ([controllers count]==2){ 
         CustomViewController *root = [[CustomViewController alloc] init];
-        
+
         //初始化UISplitViewController
         UISplitViewController *splitVC = [[UISplitViewController alloc] init];
         
@@ -286,14 +286,7 @@ static NSString * const CYPhotoId = @"photo";
         //调整masterViewController的宽度，按百分比调整
         splitVC.preferredPrimaryColumnWidthFraction = 0.25;
         splitVC.viewControllers = controllers;
-        
-        for(UIView *v in [[[controllers lastObject] view] subviews])
-        {
-            float width = [UIScreen mainScreen].bounds.size.width;
-            v.transform = CGAffineTransformMakeTranslation(width*0.25/-2, 0);
-            
-        }
-        
+
         [root.view addSubview:splitVC.view];
         [root addChildViewController:splitVC];
         [self.navigationController pushViewController:root animated:YES];
@@ -329,27 +322,29 @@ static NSString * const CYPhotoId = @"photo";
     NSArray *controllers = @[];
     IPadMenuController *menu = [[IPadMenuController alloc] init];
     Room *room = self.rooms[self.roomIndex];
+    
+    UIStoryboard *devicesStoryBoard  = [UIStoryboard storyboardWithName:@"Devices" bundle:nil];
     id device;
     switch (typeID) {
         case cata_light:
-            device = [[LightController alloc] init];
+            device = [devicesStoryBoard instantiateViewControllerWithIdentifier:@"LightController"];
             ((LightController*)device).roomID = room.rId;
             
             return @[menu,device];
         case cata_curtain:
-            device = [[CurtainController alloc] init];
+            device = [devicesStoryBoard instantiateViewControllerWithIdentifier:@"CurtainController"];
             ((CurtainController*)device).roomID = room.rId;
             return @[device];
         case cata_env:
-            device = [[AirController alloc] init];
+            device = [devicesStoryBoard instantiateViewControllerWithIdentifier:@"AirController"];
             ((AirController*)device).roomID = room.rId;
             return @[device];
         case cata_single_product:
-            device = [[FloweringController alloc] init];
+            device = [devicesStoryBoard instantiateViewControllerWithIdentifier:@"FloweringController"];
             ((FloweringController*)device).roomID = room.rId;
             return @[menu,device];
         case cata_media:
-            device = [[TVController alloc] init];
+            device = [devicesStoryBoard instantiateViewControllerWithIdentifier:@"TVController"];
             ((TVController*)device).roomID = room.rId;
             return @[menu,device];
         default:

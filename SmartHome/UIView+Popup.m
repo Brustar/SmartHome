@@ -29,4 +29,34 @@
     [self dismissPresentingPopup];
 }
 
+// Recursively travel down the view tree, increasing the indentation level for children
+- (void) dumpView:(int) indent into:(NSMutableString *) outstring
+{
+    for (int i = 0; i < indent; i++) [outstring appendString:@"--"];
+    [outstring appendFormat:@"[%2d] %@\n", indent, [[self class] description]];
+    for (UIView *view in [self subviews]) [view dumpView:indent + 1 into:outstring];
+}
+
+// Start the tree recursion at level 0 with the root view
+- (void) displayViews
+{
+    NSMutableString *outstring = [[NSMutableString alloc] init];
+    [self dumpView:0 into:outstring];
+    NSLog(@"%@",outstring);
+}
+
+-(void) constraintToCenter:(int)size
+{
+    self.translatesAutoresizingMaskIntoConstraints = NO;
+    NSLayoutConstraint * constraintX = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f];
+    //创建y居中的约束
+    NSLayoutConstraint* constraintY = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:0.0f];
+    
+    //创建宽度约束
+    NSLayoutConstraint * constraintW = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:size];
+    //创建高度约束
+    NSLayoutConstraint * constraintH = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:size];
+    constraintH.active=constraintX.active = constraintY.active = constraintW.active =YES;
+}
+
 @end

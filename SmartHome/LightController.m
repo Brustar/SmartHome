@@ -37,8 +37,8 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 @property (nonatomic,assign) long lightCatalog;
 @property (nonatomic,strong) YALContextMenuTableView* contextMenuTableView;
 @property (nonatomic,strong) ORBSwitch *switcher;
-
-- (IBAction)selectTypeOfLight:(UISegmentedControl *)sender;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottom;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *top;
 
 @end
 
@@ -161,14 +161,10 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     //查询设备状态
     NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
     [sock.socket writeData:data withTimeout:1 tag:1];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        self.bottom.constant = 125.0;
+        self.top.constant = 0;
+    }
 }
 
 -(void) syncUI
@@ -306,14 +302,6 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     return RGBStrValueArr;
 }
 
-- (IBAction)selectTypeOfLight:(UISegmentedControl *)sender {
-    
-    //self.detailCell.label.text = self.lNames[sender.selectedSegmentIndex];
-    //self.deviceid = [self.lIDs objectAtIndex:self.segmentLight.selectedSegmentIndex];
-    [self syncUI];
-    //[self.tableView reloadData];
-}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
@@ -429,20 +417,20 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 {
     self.base.layer.cornerRadius = 120;
     self.tranformView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 240, 240)];
-    self.tranformView.center = CGPointMake(self.view.bounds.size.width / 2,
-                                  self.view.bounds.size.height / 2);
+    
     self.tranformView.image = [UIImage imageNamed:@"glory"];
     self.tranformView.hidden = YES;
     
     self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:[UIImage imageNamed:@"lighting_off"] inactiveBackgroundImage:nil activeBackgroundImage:nil frame:CGRectMake(0, 0, 194, 194)];
-    self.switcher.center = CGPointMake(self.view.bounds.size.width / 2,
-                                  self.view.bounds.size.height / 2);
-    //self.switcher.layer.cornerRadius = 194/2;
+    
     self.switcher.knobRelativeHeight = 1.0f;
     self.switcher.delegate = self;
     [self.view addSubview:self.switcher];
 
     [self.view addSubview:self.tranformView];
+    
+    [self.tranformView constraintToCenter:240];
+    [self.switcher constraintToCenter:194];
 }
 
 #pragma mark - ORBSwitchDelegate
