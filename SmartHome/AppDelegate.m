@@ -241,7 +241,7 @@
     if ([DeviceInfo defaultManager].isPhotoLibrary) {
         return UIInterfaceOrientationMaskAll;
     }else {
-        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        if (ON_IPAD) {
                 return UIInterfaceOrientationMaskLandscape;
         }else{
             return UIInterfaceOrientationMaskPortrait;

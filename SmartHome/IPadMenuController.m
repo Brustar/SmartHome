@@ -21,8 +21,8 @@ static NSString *const leftMenuCell = @"leftMenuCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    [self.tableView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"frm_left_nol"]]];
+    // Do any additional setup after loading the view.s
+    [self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"frm_left_nol"]]];
     
     self.types = [SQLManager typeName:self.typeID byRoom:self.roomID];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

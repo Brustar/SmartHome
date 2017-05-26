@@ -183,7 +183,7 @@
 
 - (void)onDeleteBtnClicked:(UIButton *)btn {
     
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+    if (ON_IPAD) {
         if ( _addressArray.count > btn.tag ) {
             Address *info = [_addressArray objectAtIndex:btn.tag];
             if (info) {

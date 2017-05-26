@@ -75,6 +75,9 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     [view addSubview:title];
 
     [view addSubview:colorPicker];
+    if (ON_IPAD) {
+        view.transform = CGAffineTransformMakeRotation(-M_PI_2);
+    }
     [view show];
 }
 
@@ -149,7 +152,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     //查询设备状态
     NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
     [sock.socket writeData:data withTimeout:1 tag:1];
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+    if (ON_IPAD) {
         self.bottom.constant = 125.0;
         self.top.constant = 0;
     }
