@@ -92,6 +92,21 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnCHUP;
 @property (weak, nonatomic) IBOutlet UIButton *btnCHDown;
 @property (weak, nonatomic) IBOutlet UIButton *btnPower;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *vLeft;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *vRight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cBottom;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cLeft;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cRight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *mButtonLeft;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *mButtonTop;
+@property (weak, nonatomic) IBOutlet UIButton *keypad;
+@property (weak, nonatomic) IBOutlet UIButton *btnHome;
+@property (weak, nonatomic) IBOutlet UIButton *btnBack;
+@property (weak, nonatomic) IBOutlet UIButton *btnSwitch;
+@property (weak, nonatomic) IBOutlet UIImageView *ear;
+@property (weak, nonatomic) IBOutlet UIButton *CHDown;
+@property (weak, nonatomic) IBOutlet UIButton *CHUP;
 
 @end
 
@@ -229,6 +244,16 @@
     
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
+    
+    if (ON_IPAD) {
+        self.menuTop.constant = self.cLeft.constant = 0;
+        self.vLeft.constant = self.vRight.constant = 100;
+        self.mButtonLeft.constant = 530;
+        self.cRight.constant = -200;
+        self.mButtonTop.constant = 40;
+        self.cBottom.constant = 440;
+        self.keypad.hidden = self.btnHome.hidden = self.btnBack.hidden = self.btnSwitch.hidden = self.CHUP.hidden = self.CHDown.hidden = self.ear.hidden = NO;
+    }
 }
 
 -(void) initSlider

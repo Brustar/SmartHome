@@ -508,9 +508,9 @@
     {
         NSString *sql ;
         if ([self isWholeHouse:roomID]) {
-            sql = [NSString stringWithFormat:@"SELECT distinct typeName,htypeid FROM Devices where subtypeid = %d",typeID];
+            sql = [NSString stringWithFormat:@"SELECT distinct typeName,htypeid FROM Devices where subtypeid = %d order by htypeID",typeID];
         }else{
-            sql = [NSString stringWithFormat:@"SELECT distinct typeName,htypeid FROM Devices where subtypeid = %d and rID = '%d'",typeID,roomID];
+            sql = [NSString stringWithFormat:@"SELECT distinct typeName,htypeid FROM Devices where subtypeid = %d and rID = '%d order by htypeID'",typeID,roomID];
         }
         FMResultSet *resultSet = [db executeQuery:sql];
         int i=0;
