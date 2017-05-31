@@ -38,6 +38,20 @@ static NSString *const airCellIdentifier = @"airCell";
 @property (weak, nonatomic) IBOutlet UIImageView *tempreturePan;
 @property (nonatomic,strong) ORBSwitch *switcher;
 @property (nonatomic,strong) NSMutableArray *visitedBtns;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuLeft;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuRight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *controlBottom;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *controlRight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *controlLeft;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *subControlLeft;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *subControlRight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *diskLeft;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *diskRight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *diskTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rdiskTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ldiskTop;
+
 
 @end
 
@@ -91,6 +105,15 @@ static NSString *const airCellIdentifier = @"airCell";
     NSString *humidityID = [SQLManager singleDeviceWithCatalogID:50 byRoom:self.roomID];
     data = [[DeviceInfo defaultManager] query:humidityID];
     [sock.socket writeData:data withTimeout:1 tag:1];
+    if (ON_IPAD) {
+        self.menuTop.constant = self.controlBottom.constant = 80;
+        self.menuLeft.constant = self.menuRight.constant =self.controlLeft.constant=self.controlRight.constant = 240;
+        self.subControlLeft.constant = 20;
+        self.subControlRight.constant = -20;
+        self.diskLeft.constant= self.diskRight.constant = 180;
+        self.ldiskTop.constant = self.rdiskTop.constant = 300;
+        self.diskTop.constant = -260;
+    }
 }
 
 -(void) initSwitch
