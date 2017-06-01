@@ -7,7 +7,6 @@
 //
 
 #import "IpadFirstViewController.h"
-#import "FamilyHomeViewController.h"
 #import "BaseTabBarController.h"
 
 @interface IpadFirstViewController ()
@@ -54,15 +53,15 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
-    _baseTabbarController.tabbarPanel.hidden = YES;
+    //_baseTabbarController =  (BaseTabBarController *)self.tabBarController;
+    //_baseTabbarController.tabbarPanel.hidden = YES;
 }
 -(void)doTap:(UIGestureRecognizer *)dap
 {
-    UIStoryboard *iPhoneStoryBoard  = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
-    FamilyHomeViewController *familyVC = [iPhoneStoryBoard instantiateViewControllerWithIdentifier:@"familyHomeVC"];
-    familyVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:familyVC animated:YES];
+    UIStoryboard *planeGraphStoryBoard  = [UIStoryboard storyboardWithName:@"PlaneGraph" bundle:nil];
+    PlaneGraphViewController *planeGraphVC = [planeGraphStoryBoard instantiateViewControllerWithIdentifier:@"PlaneGraphVC"];
+    planeGraphVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:planeGraphVC animated:YES];
 
 }
 - (void)setupNaviBar {

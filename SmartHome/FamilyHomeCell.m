@@ -32,9 +32,9 @@
             radius = -60.0f;
         }
     }else {
-        pm25X = -10.0f;
-        pm25Y = 170.0f;
-        radius = -95.0f;
+        pm25X = -80.0f;
+        pm25Y = 56.0f;
+        radius = -66.0f;
     }
     
     
@@ -55,8 +55,10 @@
     [self addSubview:pm25Label];
     [self bringSubviewToFront:pm25Label];
     
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+       [self addRingForDevice:info];
+    }
     
-    [self addRingForDevice:info];
     [self addRingForPM25:info];
 }
 

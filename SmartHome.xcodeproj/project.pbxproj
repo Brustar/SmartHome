@@ -212,6 +212,8 @@
 		CD7DDA0F1E82583700638DB3 /* pullBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7DDA0E1E82583700638DB3 /* pullBtn@2x.png */; };
 		CD7DDA131E825E9C00638DB3 /* RegistFirstStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7DDA121E825E9C00638DB3 /* RegistFirstStepViewController.m */; };
 		CD7DDA151E826C3B00638DB3 /* backBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7DDA141E826C3B00638DB3 /* backBtn@2x.png */; };
+		CD8CFCCF1ED6844700B49712 /* PlaneGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8CFCCE1ED6844600B49712 /* PlaneGraphViewController.m */; };
+		CD8CFCD11ED6873000B49712 /* PlaneGraph.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD8CFCD01ED6873000B49712 /* PlaneGraph.storyboard */; };
 		CD93E3AA1E8077F1003CCAA9 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD93E3A91E8077F1003CCAA9 /* LoginViewController.m */; };
 		CD93E3AD1E807AFD003CCAA9 /* login_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD93E3AC1E807AFD003CCAA9 /* login_icon@2x.png */; };
 		CD93E3B11E8081B0003CCAA9 /* login_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD93E3B01E8081B0003CCAA9 /* login_line@2x.png */; };
@@ -829,6 +831,9 @@
 		CD7DDA111E825E9C00638DB3 /* RegistFirstStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistFirstStepViewController.h; sourceTree = "<group>"; };
 		CD7DDA121E825E9C00638DB3 /* RegistFirstStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistFirstStepViewController.m; sourceTree = "<group>"; };
 		CD7DDA141E826C3B00638DB3 /* backBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backBtn@2x.png"; sourceTree = "<group>"; };
+		CD8CFCCD1ED6844600B49712 /* PlaneGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaneGraphViewController.h; sourceTree = "<group>"; };
+		CD8CFCCE1ED6844600B49712 /* PlaneGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaneGraphViewController.m; sourceTree = "<group>"; };
+		CD8CFCD01ED6873000B49712 /* PlaneGraph.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PlaneGraph.storyboard; sourceTree = "<group>"; };
 		CD93E3A81E8077F1003CCAA9 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		CD93E3A91E8077F1003CCAA9 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		CD93E3AC1E807AFD003CCAA9 /* login_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon@2x.png"; sourceTree = "<group>"; };
@@ -1458,6 +1463,7 @@
 				0F49CB771E7A204300D46ECC /* Login-iPad.storyboard */,
 				0F49CB781E7A204300D46ECC /* MyInfo-iPad.storyboard */,
 				0F49CB791E7A204300D46ECC /* Scene-iPad.storyboard */,
+				CD8CFCD01ED6873000B49712 /* PlaneGraph.storyboard */,
 			);
 			name = iPad;
 			sourceTree = "<group>";
@@ -1727,6 +1733,7 @@
 		0F6ADFDA1E71343600BFF67F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				CD8CFCCC1ED6829A00B49712 /* PlaneGraph */,
 				CDEE5E9E1EC2A7DD00A5779D /* LaunchingViewController */,
 				0FF5CD4E1EA7695E0027E2DC /* Devices */,
 				CDEC868F1E9A1CBB009EC245 /* FamilyViewController */,
@@ -2206,6 +2213,15 @@
 			name = RegistViewController;
 			sourceTree = "<group>";
 		};
+		CD8CFCCC1ED6829A00B49712 /* PlaneGraph */ = {
+			isa = PBXGroup;
+			children = (
+				CD8CFCCD1ED6844600B49712 /* PlaneGraphViewController.h */,
+				CD8CFCCE1ED6844600B49712 /* PlaneGraphViewController.m */,
+			);
+			name = PlaneGraph;
+			sourceTree = "<group>";
+		};
 		CD93E3A71E807740003CCAA9 /* LoginViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -2591,6 +2607,7 @@
 				CDF389301E30E39500657C8B /* userList.plist in Resources */,
 				CDEC86841E960E92009EC245 /* background.png in Resources */,
 				F6359AFC1CFFBC910035EB31 /* DetailTableViewCell.xib in Resources */,
+				CD8CFCD11ED6873000B49712 /* PlaneGraph.storyboard in Resources */,
 				0F49CB7E1E7A204300D46ECC /* Scene-iPad.storyboard in Resources */,
 				CDFB9DF21E5DCB4D00BFECCE /* SceneTimerList.plist in Resources */,
 				2E0184101ECF40A200E3705F /* demo.mp4 in Resources */,
@@ -3031,6 +3048,7 @@
 				2E801EFF1E262B0B0039A6D9 /* WeekdaysVC.m in Sources */,
 				2EB516F41E9CE3A40064B18E /* ScreenCurtainCell.m in Sources */,
 				0F91AA171CDC798700094C25 /* PrintObject.m in Sources */,
+				CD8CFCCF1ED6844700B49712 /* PlaneGraphViewController.m in Sources */,
 				0F3CCF3B1D0F97B70058A320 /* CameraController.m in Sources */,
 				2ECD5B161ED276DC0091880D /* IpadFirstViewController.m in Sources */,
 				2EC266281EA4BEAF003DC979 /* FMTableViewCell.m in Sources */,
