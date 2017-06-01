@@ -163,6 +163,9 @@
 		2E8715D31EA06EFF006D3FB0 /* NowMusicController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E8715D21EA06EFF006D3FB0 /* NowMusicController.m */; };
 		2E8AC52F1E7BAE350002E717 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E8AC52E1E7BAE350002E717 /* FirstViewController.m */; };
 		2E9EA8811E8D0DC200A1AA63 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E9EA8801E8D0DC200A1AA63 /* iPhone.storyboard */; };
+		2E9F4BDA1EDFA4B20039BFE9 /* AddIpadSceneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E9F4BD91EDFA4B20039BFE9 /* AddIpadSceneVC.m */; };
+		2E9F4BDD1EDFA57C0039BFE9 /* IpadAddDeviceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E9F4BDC1EDFA57C0039BFE9 /* IpadAddDeviceVC.m */; };
+		2E9F4BE01EDFA5AB0039BFE9 /* IpadAddDeviceTypeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E9F4BDF1EDFA5AB0039BFE9 /* IpadAddDeviceTypeVC.m */; };
 		2EA2A83B1E1DCDA600092D41 /* AreaSubSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A83A1E1DCDA600092D41 /* AreaSubSettingViewController.m */; };
 		2EA2A84A1E1E275900092D41 /* MySubEnergyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A8491E1E275900092D41 /* MySubEnergyCell.m */; };
 		2EA2A8541E1E2BEA00092D41 /* ENenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A8531E1E2BEA00092D41 /* ENenViewController.m */; };
@@ -752,6 +755,12 @@
 		2E8AC52D1E7BAE350002E717 /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		2E8AC52E1E7BAE350002E717 /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		2E9EA8801E8D0DC200A1AA63 /* iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhone.storyboard; sourceTree = "<group>"; };
+		2E9F4BD81EDFA4B20039BFE9 /* AddIpadSceneVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddIpadSceneVC.h; sourceTree = "<group>"; };
+		2E9F4BD91EDFA4B20039BFE9 /* AddIpadSceneVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddIpadSceneVC.m; sourceTree = "<group>"; };
+		2E9F4BDB1EDFA57C0039BFE9 /* IpadAddDeviceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpadAddDeviceVC.h; sourceTree = "<group>"; };
+		2E9F4BDC1EDFA57C0039BFE9 /* IpadAddDeviceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IpadAddDeviceVC.m; sourceTree = "<group>"; };
+		2E9F4BDE1EDFA5AB0039BFE9 /* IpadAddDeviceTypeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpadAddDeviceTypeVC.h; sourceTree = "<group>"; };
+		2E9F4BDF1EDFA5AB0039BFE9 /* IpadAddDeviceTypeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IpadAddDeviceTypeVC.m; sourceTree = "<group>"; };
 		2EA2A8391E1DCDA600092D41 /* AreaSubSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaSubSettingViewController.h; sourceTree = "<group>"; };
 		2EA2A83A1E1DCDA600092D41 /* AreaSubSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaSubSettingViewController.m; sourceTree = "<group>"; };
 		2EA2A8481E1E275900092D41 /* MySubEnergyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySubEnergyCell.h; sourceTree = "<group>"; };
@@ -1981,6 +1990,13 @@
 			name = My;
 			sourceTree = "<group>";
 		};
+		2E581CAF1EDEB6E000874469 /* ipadTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ipadTableViewCell;
+			sourceTree = "<group>";
+		};
 		2E7B64B91E9B666A001F7469 /* FirstVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -2146,8 +2162,15 @@
 		2ECD5B171ED28D530091880D /* ipadSceneVC */ = {
 			isa = PBXGroup;
 			children = (
+				2E581CAF1EDEB6E000874469 /* ipadTableViewCell */,
 				2E094ACF1ED579A700C07EDF /* IpadSceneViewController.h */,
 				2E094AD01ED579A700C07EDF /* IpadSceneViewController.m */,
+				2E9F4BD81EDFA4B20039BFE9 /* AddIpadSceneVC.h */,
+				2E9F4BD91EDFA4B20039BFE9 /* AddIpadSceneVC.m */,
+				2E9F4BDB1EDFA57C0039BFE9 /* IpadAddDeviceVC.h */,
+				2E9F4BDC1EDFA57C0039BFE9 /* IpadAddDeviceVC.m */,
+				2E9F4BDE1EDFA5AB0039BFE9 /* IpadAddDeviceTypeVC.h */,
+				2E9F4BDF1EDFA5AB0039BFE9 /* IpadAddDeviceTypeVC.m */,
 				2ECD5B231ED2D8150091880D /* IpadSceneCell.h */,
 				2ECD5B241ED2D8150091880D /* IpadSceneCell.m */,
 				2ECD5B251ED2D8150091880D /* IpadSceneCell.xib */,
@@ -3001,6 +3024,7 @@
 				CDB8B8531EB1D550003AA894 /* SceneShortcutsViewController.m in Sources */,
 				CD5134371E8D07FD00C2EDAF /* Goods.m in Sources */,
 				CD93E3AA1E8077F1003CCAA9 /* LoginViewController.m in Sources */,
+				2E9F4BDD1EDFA57C0039BFE9 /* IpadAddDeviceVC.m in Sources */,
 				F618963B1D87B08300DBE6CD /* ProjectController.m in Sources */,
 				F6FD00A21DDDD470009ABA64 /* TouchSubViewController.m in Sources */,
 				0FF7B0B61D1380BF003C2D52 /* AirController.m in Sources */,
@@ -3090,6 +3114,7 @@
 				2E42980A1ED6B53B003F4A76 /* IpadSceneDetailVC.m in Sources */,
 				0F0A40171ED2EBA6002003C4 /* FixTimeListCell.m in Sources */,
 				F625A6181D4C8EF700B696E5 /* ProfileListController.m in Sources */,
+				2E9F4BDA1EDFA4B20039BFE9 /* AddIpadSceneVC.m in Sources */,
 				2EA2A8541E1E2BEA00092D41 /* ENenViewController.m in Sources */,
 				2EA2A8571E1E2C7800092D41 /* EnenCell.m in Sources */,
 				0FCFB3891CF2929900B37DD3 /* Aircon.m in Sources */,
@@ -3227,6 +3252,7 @@
 				0FC5CC6C1D93CB9600839D8F /* WinOpener.m in Sources */,
 				0F032D491CC9B12700D1920D /* main.m in Sources */,
 				F64111DC1D4F1E6100E8099D /* FixTimeRepeatController.m in Sources */,
+				2E9F4BE01EDFA5AB0039BFE9 /* IpadAddDeviceTypeVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

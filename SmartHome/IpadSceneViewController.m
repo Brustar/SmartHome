@@ -21,11 +21,11 @@
 #import "AppDelegate.h"
 #import "IpadDeviceListViewController.h"
 //#import "IpadDeviceTypeVC.h"
+#import "AddIpadSceneVC.h"
 
 static NSString * const IpadSceneId = @"photo";
 
 @interface IpadSceneViewController ()<IphoneRoomViewDelegate,UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IpadSceneCellDelegate,PhotoGraphViewConteollerDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
-
 
 @property (nonatomic,strong) NSArray *roomList;
 @property (nonatomic,strong)NSMutableArray *scenes;
@@ -196,7 +196,6 @@ static NSString * const IpadSceneId = @"photo";
     self.automaticallyAdjustsScrollViewInsets = NO;//
     // 注册
     [self.FirstCollectionView registerNib:[UINib nibWithNibName:NSStringFromClass([IpadSceneCell class]) bundle:nil] forCellWithReuseIdentifier:IpadSceneId];
-    
 }
 
 #pragma  mark - UICollectionViewDelegate
@@ -245,7 +244,6 @@ static NSString * const IpadSceneId = @"photo";
             cell.PowerBtnCenterContraint.constant = 0;
         }
         self.selectedSId = cell.sceneID;
-        
         cell.subImageView.image = [UIImage imageNamed:@"Scene-bedroomTSQ"];
         cell.tag = scene.sceneID;
         cell.SceneName.text = scene.sceneName;
@@ -284,7 +282,6 @@ static NSString * const IpadSceneId = @"photo";
         picker.allowsEditing = YES;
         picker.sourceType = UIImagePickerControllerSourceTypeCamera;
         [self presentViewController:picker animated:YES completion:NULL];
-        
         
     }]];
     [alerController addAction:[UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -351,27 +348,19 @@ static NSString * const IpadSceneId = @"photo";
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row+1 >= self.scenes.count) {
-        UIStoryboard * SceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
-        IphoneNewAddSceneVC * iphoneNewAddSceneVC = [SceneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneNewAddSceneVC"];
-        iphoneNewAddSceneVC.roomID = self.selectedRoomID;
-        [self.navigationController pushViewController:iphoneNewAddSceneVC animated:YES];
+        UIStoryboard * SceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene-iPad" bundle:nil];
+        AddIpadSceneVC * AddIpadSceneVC = [SceneStoryBoard instantiateViewControllerWithIdentifier:@"AddIpadSceneVC"];
+        AddIpadSceneVC.roomID = self.selectedRoomID;
+     
+         [self presentViewController:AddIpadSceneVC animated:YES completion:nil];
         
     }else{
         Scene *scene = self.scenes[indexPath.row];
         self.selectedSId = scene.sceneID;
-//        IpadSceneCell *cell = (IpadSceneCell*)[collectionView cellForItemAtIndexPath:indexPath];
-//        if (scene.status == 0) {
-//            [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
-//            [[SceneManager defaultManager] startScene:scene.sceneID];
-//            [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];
-//        }
-//        [self performSegueWithIdentifier:@"iphoneEditSegue" sender:self];
         UIStoryboard *SceneiPadStoryBoard = [UIStoryboard storyboardWithName:@"Scene-iPad" bundle:nil];
         IpadDeviceListViewController * listVC = [SceneiPadStoryBoard instantiateViewControllerWithIdentifier:@"IpadDeviceListViewController"];
          listVC.roomID = self.selectedRoomID;
-        listVC.sceneID = self.selectedSId;
-//        IpadDeviceTypeVC * ipadDeviceTypeVC = [SceneiPadStoryBoard instantiateViewControllerWithIdentifier:@"IpadDeviceTypeVC"];
-//        ipadDeviceTypeVC.roomID = self.selectedRoomID;
+         listVC.sceneID = self.selectedSId;
         [self presentViewController:listVC animated:YES completion:nil];
         
     }
