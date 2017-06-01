@@ -23,6 +23,7 @@
 @property (nonatomic,strong) NSMutableArray *amplifierIDArr;
 @property (nonatomic,strong) ORBSwitch *switcher;
 @property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuTop;
 @end
 
 @implementation AmplifierController
@@ -91,6 +92,10 @@
                 self.switcher.isOn=((Amplifier *)[_scene.devices objectAtIndex:i]).waiting;
             }
         }
+    }
+    
+    if (ON_IPAD) {
+        self.menuTop.constant = 0;
     }
 }
 
