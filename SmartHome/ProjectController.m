@@ -13,6 +13,7 @@
 #import "SceneManager.h"
 #import "ORBSwitch.h"
 #import "UIViewController+Navigator.h"
+#import "UIView+Popup.h"
 
 @interface ProjectController ()<ORBSwitchDelegate>
 
@@ -99,6 +100,7 @@
     self.switcher.delegate = self;
     
     [self.view addSubview:self.switcher];
+    [self.switcher constraintToCenter:375];
 }
 
 -(IBAction)save:(id)sender

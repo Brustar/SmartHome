@@ -15,6 +15,7 @@
 #import "PackManager.h"
 #import "ORBSwitch.h"
 #import "UIViewController+Navigator.h"
+#import "UIView+Popup.h"
 
 @interface AmplifierController ()<ORBSwitchDelegate>
 
@@ -76,7 +77,7 @@
     if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 功放",roomName]];
-    self.deviceid = [self.amplifierIDArr objectAtIndex:0];
+    self.deviceid = [self.amplifierIDArr firstObject];
     [self initSwitcher];
     NSArray *menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
     [self initMenuContainer:self.menuContainer andArray:menus andID:self.deviceid];
@@ -103,6 +104,7 @@
     self.switcher.delegate = self;
     
     [self.view addSubview:self.switcher];
+    [self.switcher constraintToCenter:375];
 }
 
 -(IBAction)save:(id)sender

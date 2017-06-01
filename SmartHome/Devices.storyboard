@@ -1052,16 +1052,8 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="control_banner" translatesAutoresizingMaskIntoConstraints="NO" id="uw0-3M-Ang">
                                 <rect key="frame" x="0.0" y="1296" width="1024" height="60"/>
                             </imageView>
-                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fbi-90-npd">
-                                <rect key="frame" x="357.5" y="1303" width="103" height="47"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" image="DVD_previous" backgroundImage="control_button"/>
-                                <connections>
-                                    <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="KVA-Tz-C8y"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="srS-ye-4XO">
-                                <rect key="frame" x="563.5" y="1303" width="103" height="47"/>
+                                <rect key="frame" x="911" y="1303" width="103" height="47"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" image="DVD_next" backgroundImage="control_button"/>
                                 <connections>
@@ -1075,10 +1067,10 @@
                                 <rect key="frame" x="16" y="1246" width="10" height="8"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_hight" translatesAutoresizingMaskIntoConstraints="NO" id="Hqi-yX-Tmb" userLabel="voice_high">
-                                <rect key="frame" x="992" y="1245" width="12" height="10"/>
+                                <rect key="frame" x="984" y="1245" width="12" height="10"/>
                             </imageView>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Of9-QP-3Cz">
-                                <rect key="frame" x="31" y="1235" width="962" height="31"/>
+                                <rect key="frame" x="29" y="1234.5" width="966" height="31"/>
                             </slider>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dir_pad" translatesAutoresizingMaskIntoConstraints="NO" id="ngC-Cm-pYg">
                                 <rect key="frame" x="349" y="520" width="326" height="326"/>
@@ -1135,14 +1127,14 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zC7-jj-JeS" userLabel="Button_menu">
-                                <rect key="frame" x="16" y="114" width="61" height="60"/>
+                                <rect key="frame" x="30" y="114" width="61" height="60"/>
                                 <state key="normal" image="TV_menu" backgroundImage="mode_button"/>
                                 <connections>
                                     <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="81Q-ci-rVm"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Duh-R2-so8" userLabel="Button_pop">
-                                <rect key="frame" x="943" y="114" width="61" height="60"/>
+                                <rect key="frame" x="933" y="114" width="61" height="60"/>
                                 <state key="normal" image="DVD_pop" backgroundImage="mode_button"/>
                                 <connections>
                                     <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="Mep-i5-Jtd"/>
@@ -1154,6 +1146,14 @@
                                 <state key="normal" image="DVD_play" backgroundImage="control_button"/>
                                 <connections>
                                     <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="hEB-Iu-b73"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fbi-90-npd">
+                                <rect key="frame" x="10" y="1303" width="103" height="47"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" image="DVD_previous" backgroundImage="control_button"/>
+                                <connections>
+                                    <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="KVA-Tz-C8y"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1171,38 +1171,38 @@
                             <constraint firstItem="EXC-9f-YxU" firstAttribute="top" secondItem="5Dk-vt-itd" secondAttribute="bottom" id="Epl-cl-jGN"/>
                             <constraint firstItem="QME-gX-nXa" firstAttribute="centerX" secondItem="ngC-Cm-pYg" secondAttribute="centerX" id="KXh-SD-SA0"/>
                             <constraint firstItem="JP8-bG-F58" firstAttribute="leading" secondItem="IZ1-uJ-g38" secondAttribute="leading" id="LPF-jQ-WDq"/>
-                            <constraint firstItem="zC7-jj-JeS" firstAttribute="leading" secondItem="Rx7-Gc-ytg" secondAttribute="leading" id="MhF-iM-pkT"/>
+                            <constraint firstItem="srS-ye-4XO" firstAttribute="trailing" secondItem="uw0-3M-Ang" secondAttribute="trailing" constant="-10" id="MBm-xv-ynY"/>
                             <constraint firstItem="JP8-bG-F58" firstAttribute="top" secondItem="5Dk-vt-itd" secondAttribute="bottom" constant="44" id="PG2-z0-uBa"/>
                             <constraint firstItem="Pfv-UU-Wsq" firstAttribute="centerY" secondItem="ngC-Cm-pYg" secondAttribute="centerY" id="POg-Aa-bxQ"/>
                             <constraint firstItem="Dfe-ES-qjk" firstAttribute="centerY" secondItem="ngC-Cm-pYg" secondAttribute="centerY" id="RmM-0s-QVh"/>
                             <constraint firstItem="Fbi-90-npd" firstAttribute="centerY" secondItem="uw0-3M-Ang" secondAttribute="centerY" id="SDe-jN-qnp"/>
                             <constraint firstItem="Rx7-Gc-ytg" firstAttribute="centerY" secondItem="xwz-I6-8aj" secondAttribute="centerY" constant="-3" id="SRW-aT-r7V"/>
+                            <constraint firstItem="Hqi-yX-Tmb" firstAttribute="leading" secondItem="xwz-I6-8aj" secondAttribute="trailing" constant="-40" id="T8b-3J-CvK"/>
+                            <constraint firstItem="zC7-jj-JeS" firstAttribute="leading" secondItem="IZ1-uJ-g38" secondAttribute="leadingMargin" constant="10" id="TdG-1z-7W5"/>
                             <constraint firstItem="zC7-jj-JeS" firstAttribute="top" secondItem="JP8-bG-F58" secondAttribute="bottom" constant="10" id="UtI-5a-f01"/>
                             <constraint firstItem="wkp-hZ-I2O" firstAttribute="centerX" secondItem="uw0-3M-Ang" secondAttribute="centerX" id="V6z-HY-qje"/>
                             <constraint firstItem="YYP-xB-YNL" firstAttribute="centerY" secondItem="ngC-Cm-pYg" secondAttribute="centerY" constant="-80" id="WuI-pL-ZNg"/>
                             <constraint firstItem="Pfv-UU-Wsq" firstAttribute="centerX" secondItem="ngC-Cm-pYg" secondAttribute="centerX" constant="80" id="YC9-mo-tC4"/>
                             <constraint firstItem="srS-ye-4XO" firstAttribute="width" secondItem="wkp-hZ-I2O" secondAttribute="width" id="Z8U-Vc-cCq"/>
                             <constraint firstItem="a5u-K4-QQB" firstAttribute="top" secondItem="EXC-9f-YxU" secondAttribute="bottom" id="ZMC-WL-l65"/>
+                            <constraint firstItem="Fbi-90-npd" firstAttribute="leading" secondItem="uw0-3M-Ang" secondAttribute="leading" constant="10" id="bsI-hh-SOT"/>
                             <constraint firstItem="ngC-Cm-pYg" firstAttribute="centerX" secondItem="IZ1-uJ-g38" secondAttribute="centerX" id="cwa-9u-Lf5"/>
                             <constraint firstItem="uw0-3M-Ang" firstAttribute="top" secondItem="xwz-I6-8aj" secondAttribute="bottom" constant="20" id="d2o-EK-D1a"/>
-                            <constraint firstItem="wkp-hZ-I2O" firstAttribute="leading" secondItem="Fbi-90-npd" secondAttribute="trailing" id="fWQ-KJ-7cb"/>
                             <constraint firstItem="Of9-QP-3Cz" firstAttribute="centerY" secondItem="xwz-I6-8aj" secondAttribute="centerY" constant="-3" id="kO1-FM-sbe"/>
                             <constraint firstItem="a5u-K4-QQB" firstAttribute="top" secondItem="uw0-3M-Ang" secondAttribute="bottom" constant="10" id="kfq-Gu-hcd"/>
                             <constraint firstItem="xwz-I6-8aj" firstAttribute="leading" secondItem="Rx7-Gc-ytg" secondAttribute="trailing" constant="-26" id="mZr-Qj-4c5"/>
                             <constraint firstItem="QME-gX-nXa" firstAttribute="centerY" secondItem="ngC-Cm-pYg" secondAttribute="centerY" constant="80" id="nVx-Pb-i0S"/>
                             <constraint firstAttribute="trailing" secondItem="uw0-3M-Ang" secondAttribute="trailing" id="ndd-0S-JyV"/>
-                            <constraint firstItem="srS-ye-4XO" firstAttribute="leading" secondItem="wkp-hZ-I2O" secondAttribute="trailing" id="oLG-gw-i9p"/>
                             <constraint firstItem="ngC-Cm-pYg" firstAttribute="centerY" secondItem="IZ1-uJ-g38" secondAttribute="centerY" id="qd4-Yw-4P0"/>
                             <constraint firstAttribute="trailing" secondItem="JP8-bG-F58" secondAttribute="trailing" id="rAH-VI-cJy"/>
                             <constraint firstItem="Of9-QP-3Cz" firstAttribute="centerX" secondItem="xwz-I6-8aj" secondAttribute="centerX" id="s2m-XO-D6J"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Hqi-yX-Tmb" secondAttribute="trailing" id="sgu-p9-WsT"/>
                             <constraint firstItem="EXC-9f-YxU" firstAttribute="leading" secondItem="IZ1-uJ-g38" secondAttribute="leading" id="siN-Je-Qjv"/>
                             <constraint firstItem="YYP-xB-YNL" firstAttribute="centerX" secondItem="ngC-Cm-pYg" secondAttribute="centerX" id="smt-G1-plg"/>
                             <constraint firstItem="uw0-3M-Ang" firstAttribute="leading" secondItem="IZ1-uJ-g38" secondAttribute="leading" id="u7h-gu-aux"/>
                             <constraint firstItem="Dfe-ES-qjk" firstAttribute="centerX" secondItem="ngC-Cm-pYg" secondAttribute="centerX" constant="-80" id="uhT-eM-jdn"/>
+                            <constraint firstItem="Of9-QP-3Cz" firstAttribute="leading" secondItem="Rx7-Gc-ytg" secondAttribute="trailing" constant="5" id="vQx-4j-LYt"/>
                             <constraint firstItem="Se0-pD-Pfe" firstAttribute="centerY" secondItem="ngC-Cm-pYg" secondAttribute="centerY" id="zf4-FD-Nl9"/>
-                            <constraint firstItem="Of9-QP-3Cz" firstAttribute="leading" secondItem="IZ1-uJ-g38" secondAttribute="leadingMargin" constant="13" id="znA-RT-V1x"/>
-                            <constraint firstItem="Duh-R2-so8" firstAttribute="trailing" secondItem="IZ1-uJ-g38" secondAttribute="trailingMargin" id="zpr-SR-Wt0"/>
+                            <constraint firstItem="Duh-R2-so8" firstAttribute="trailing" secondItem="IZ1-uJ-g38" secondAttribute="trailingMargin" constant="-10" id="zpr-SR-Wt0"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1216,7 +1216,13 @@
                         <outlet property="btnPrevoius" destination="Fbi-90-npd" id="4vc-Zp-dCB"/>
                         <outlet property="btnRight" destination="Pfv-UU-Wsq" id="9WT-AG-A3T"/>
                         <outlet property="btnUP" destination="YYP-xB-YNL" id="dyB-Ju-ezX"/>
+                        <outlet property="controlBottom" destination="kfq-Gu-hcd" id="miq-IP-eSi"/>
+                        <outlet property="controlLeft" destination="u7h-gu-aux" id="D6S-Mb-BUY"/>
+                        <outlet property="controlRight" destination="ndd-0S-JyV" id="upA-7S-75x"/>
                         <outlet property="menuContainer" destination="JP8-bG-F58" id="zfc-dJ-9f0"/>
+                        <outlet property="menuTop" destination="PG2-z0-uBa" id="sbH-ZX-zAV"/>
+                        <outlet property="voiceLeft" destination="1yY-fw-Z7V" id="B51-8Z-12M"/>
+                        <outlet property="voiceRight" destination="3lB-Yf-FJC" id="wQz-p6-fsq"/>
                         <outlet property="volume" destination="Of9-QP-3Cz" id="RlY-xD-13d"/>
                     </connections>
                 </viewController>

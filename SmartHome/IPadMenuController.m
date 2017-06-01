@@ -52,6 +52,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
         [self.tableView reloadData];
     }else if(device.hTypeId>=10){
         //多媒体或智能单品
+        [[DeviceInfo defaultManager] setRoomID:self.roomID];
         [self showDetailViewController:[DeviceInfo calcController:device.hTypeId] sender:self];
     }
     
