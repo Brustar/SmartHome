@@ -410,6 +410,7 @@ static NSString * const CYPhotoId = @"photo";
         Scene *scene = self.scenes[indexPath.row];
        
         cell.sceneID = scene.sceneID;
+        cell.roomID = self.selectedRoomID;
         cell.sceneStatus = scene.status;
 
         if (self.scenes.count == 0) {
@@ -547,6 +548,13 @@ static NSString * const CYPhotoId = @"photo";
              [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];
          }
              [self performSegueWithIdentifier:@"iphoneEditSegue" sender:self];
+         
+         NSArray *tmpArr = [SQLManager getScensByRoomId:self.selectedRoomID];
+         [self.scenes removeAllObjects];
+         [self.scenes addObjectsFromArray:tmpArr];
+         NSString *imageName = @"i-add";
+         [self.scenes addObject:imageName];
+         [self.FirstCollectionView reloadData];
      }
   
 }
@@ -595,8 +603,15 @@ static NSString * const CYPhotoId = @"photo";
 
 -(void)refreshTableView:(CYPhotoCell *)cell
 {
-    [self setUpRoomView];
-//    [self.FirstCollectionView reloadData];
+    
+    NSArray *tmpArr = [SQLManager getScensByRoomId:self.selectedRoomID];
+    [self.scenes removeAllObjects];
+    [self.scenes addObjectsFromArray:tmpArr];
+    NSString *imageName = @"i-add";
+    [self.scenes addObject:imageName];
+    
+//    [self setUpRoomView];
+    [self.FirstCollectionView reloadData];
 
 }
 -(void)httpHandler:(id) responseObject tag:(int)tag

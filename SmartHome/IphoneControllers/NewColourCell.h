@@ -22,7 +22,7 @@
 @property(nonatomic, strong) NSString * deviceid;
 @property (nonatomic,strong) NSString *sceneid;
 //房间id
-@property (nonatomic,assign) NSInteger roomID;
+@property (nonatomic,assign) int roomID;
 @property (strong, nonatomic) Scene *scene;
 @property (nonatomic, assign) id<NewColourCellDelegate>delegate;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ColourNameTopConstraint;

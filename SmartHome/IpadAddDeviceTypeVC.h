@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomViewController.h"
 
-@interface IpadAddDeviceTypeVC : UIViewController
+@interface IpadAddDeviceTypeVC :CustomViewController
 
 @property (nonatomic,strong) NSArray * deviceIdArr;
 @property (nonatomic,weak) NSString *sceneid;

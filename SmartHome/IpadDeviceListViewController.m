@@ -32,17 +32,22 @@
 -(void)IpadDeviceType:(IpadDeviceTypeVC *)centerListVC selected:(NSInteger)row
 {
      self.DevicesArr = [SQLManager getDeviceIDsBySeneId:self.sceneID];
+     self.devices = [NSMutableArray array];
     
-    for(int i = 0; i < self.DevicesArr.count; i++){
-        
-         _htypeID = [SQLManager deviceHtypeIDByDeviceID:[self.DevicesArr[i] intValue]];
-    }
     UIStoryboard * SceneIpadStoryBoard = [UIStoryboard storyboardWithName:@"Scene-iPad" bundle:nil];
     IpadSceneDetailVC * ipadSceneDetailVC = [SceneIpadStoryBoard instantiateViewControllerWithIdentifier:@"IpadSceneDetailVC"];
     
     switch (row) {
         case 0:{
-             self.devices = [SQLManager getDevicesIDWithRoomID:self.roomID SubTypeName:@"灯光"];
+            
+            for(int i = 0; i < self.DevicesArr.count; i++){
+                
+                NSString *deviceTypeName = [SQLManager getSubTypeNameByDeviceID:[self.DevicesArr[i] intValue]];
+                if ([deviceTypeName isEqualToString:@"灯光"]) {
+                    [self.devices addObject:self.DevicesArr[i]];
+                }
+            }
+            
             ipadSceneDetailVC.deviceIdArr = self.devices;
             
             [self showDetailViewController:ipadSceneDetailVC sender:self];
@@ -50,25 +55,64 @@
             break;
         }
         case 1:{
-              self.devices = [SQLManager getDevicesIDWithRoomID:self.roomID SubTypeName:@"影音"];
+
+            for(int i = 0; i < self.DevicesArr.count; i++){
+                
+                NSString *deviceTypeName = [SQLManager getSubTypeNameByDeviceID:[self.DevicesArr[i] intValue]];
+                if ([deviceTypeName isEqualToString:@"影音"]) {
+                    [self.devices addObject:self.DevicesArr[i]];
+                }
+            }
             ipadSceneDetailVC.deviceIdArr = self.devices;
             [self showDetailViewController:ipadSceneDetailVC sender:self];
             break;
         }
         case 2:{
-            self.devices = [SQLManager getDevicesIDWithRoomID:self.roomID SubTypeName:@"环境"];
+
+            for(int i = 0; i < self.DevicesArr.count; i++){
+                
+                NSString *deviceTypeName = [SQLManager getSubTypeNameByDeviceID:[self.DevicesArr[i] intValue]];
+                if ([deviceTypeName isEqualToString:@"环境"]) {
+                    [self.devices addObject:self.DevicesArr[i]];
+                }
+            }
             ipadSceneDetailVC.deviceIdArr = self.devices;
             [self showDetailViewController:ipadSceneDetailVC sender:self];
             break;
         }
         case 3:{
-              self.devices = [SQLManager getDevicesIDWithRoomID:self.roomID SubTypeName:@"窗帘"];
+
+            for(int i = 0; i < self.DevicesArr.count; i++){
+                
+                NSString *deviceTypeName = [SQLManager getSubTypeNameByDeviceID:[self.DevicesArr[i] intValue]];
+                if ([deviceTypeName isEqualToString:@"窗帘"]) {
+                    [self.devices addObject:self.DevicesArr[i]];
+                }
+            }
             ipadSceneDetailVC.deviceIdArr = self.devices;
             [self showDetailViewController:ipadSceneDetailVC sender:self];
             break;
         }
         case 4:{
-              self.devices = [SQLManager getDevicesIDWithRoomID:self.roomID SubTypeName:@"智能单品"];
+            for(int i = 0; i < self.DevicesArr.count; i++){
+                
+                NSString *deviceTypeName = [SQLManager getSubTypeNameByDeviceID:[self.DevicesArr[i] intValue]];
+                if ([deviceTypeName isEqualToString:@"智能单品"]) {
+                    [self.devices addObject:self.DevicesArr[i]];
+                }
+            }
+            ipadSceneDetailVC.deviceIdArr = self.devices;
+            [self showDetailViewController:ipadSceneDetailVC sender:self];
+            break;
+        }
+        case 5:{
+            for(int i = 0; i < self.DevicesArr.count; i++){
+                
+                NSString *deviceTypeName = [SQLManager getSubTypeNameByDeviceID:[self.DevicesArr[i] intValue]];
+                if ([deviceTypeName isEqualToString:@"安防"]) {
+                    [self.devices addObject:self.DevicesArr[i]];
+                }
+            }
             ipadSceneDetailVC.deviceIdArr = self.devices;
             [self showDetailViewController:ipadSceneDetailVC sender:self];
             break;

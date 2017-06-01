@@ -208,7 +208,6 @@
         [[SceneManager defaultManager] gloom:[model.ID intValue]];
         //修改ui
     }
-    
 
     [self.tableView reloadData];
   
@@ -595,31 +594,34 @@
         cell.LightConstraint.constant = 10;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
-        //cell.roomID = self.roomID;
-       // cell.sceneID = self.sceneid;
-//        Device *device = [SQLManager getDeviceWithDeviceID:[_lightArray[indexPath.row] intValue]];
        SeneLightModel *model = self.lightArray[indexPath.row];
        Device   *device = [SQLManager getDeviceWithDeviceID:[model.ID intValue]];
         cell.NewLightNameLabel.text = device.name;
         cell.NewLightSlider.continuous = NO;
+        cell.NewLightPowerBtn.selected = device.power;//开关状态
        switch (model.sene_light_model) {
            case SENE_LIGHTS_MODEL_SOFT://
                [cell.NewLightSlider setValue:0.2f];
+               cell.NewLightPowerBtn.selected = YES;
                break;
            case SENE_LIGHTS_MODEL_NORMAL:
                [cell.NewLightSlider setValue:0.5f];
+               cell.NewLightPowerBtn.selected = YES;
+               
                break;
            case SENE_LIGHTS_MODEL_BRIGHT:
                [cell.NewLightSlider setValue:0.9f];
+               cell.NewLightPowerBtn.selected = YES;
+               
                break;
            case SENE_LIGHTS_MODEL_CUSTOMER:
                [cell.NewLightSlider setValue:(float)model.value];
+                cell.NewLightPowerBtn.selected = YES;
+               
                break;
            default:
                break;
        }
-//        [cell.NewLightSlider setValue:20.0f];
-//        cell.deviceid = _lightArray[indexPath.row];
         cell.deviceid = model.ID;
        
         return cell;

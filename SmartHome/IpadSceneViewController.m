@@ -357,12 +357,25 @@ static NSString * const IpadSceneId = @"photo";
     }else{
         Scene *scene = self.scenes[indexPath.row];
         self.selectedSId = scene.sceneID;
+      
+        IpadSceneCell *cell = (IpadSceneCell*)[collectionView cellForItemAtIndexPath:indexPath];
+        if (scene.status == 0) {
+            [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
+            [[SceneManager defaultManager] startScene:scene.sceneID];
+            [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];
+        }
         UIStoryboard *SceneiPadStoryBoard = [UIStoryboard storyboardWithName:@"Scene-iPad" bundle:nil];
         IpadDeviceListViewController * listVC = [SceneiPadStoryBoard instantiateViewControllerWithIdentifier:@"IpadDeviceListViewController"];
          listVC.roomID = self.selectedRoomID;
          listVC.sceneID = self.selectedSId;
         [self presentViewController:listVC animated:YES completion:nil];
         
+        NSArray *tmpArr = [SQLManager getScensByRoomId:self.selectedRoomID];
+        [self.scenes removeAllObjects];
+        [self.scenes addObjectsFromArray:tmpArr];
+        NSString *imageName = @"i-add";
+        [self.scenes addObject:imageName];
+        [self.FirstCollectionView reloadData];
     }
     
 }
@@ -462,5 +475,17 @@ static NSString * const IpadSceneId = @"photo";
 {
     
 }
-
+-(void)refreshTableView:(CYPhotoCell *)cell
+{
+    
+    NSArray *tmpArr = [SQLManager getScensByRoomId:self.selectedRoomID];
+    [self.scenes removeAllObjects];
+    [self.scenes addObjectsFromArray:tmpArr];
+    NSString *imageName = @"i-add";
+    [self.scenes addObject:imageName];
+    
+    //    [self setUpRoomView];
+    [self.FirstCollectionView reloadData];
+    
+}
 @end

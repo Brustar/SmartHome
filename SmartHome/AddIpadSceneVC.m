@@ -77,6 +77,13 @@
             
             break;
         }
+        case 5:{
+            
+            self.devices = [SQLManager getDevicesIDWithRoomID:self.roomID SubTypeName:@"安防"];
+            ipadAddDeviceTypeVC.deviceIdArr = self.devices;
+            
+            [self showDetailViewController:ipadAddDeviceTypeVC sender:self];
+        }
             
         default:
             break;

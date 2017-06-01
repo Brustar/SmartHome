@@ -17,6 +17,7 @@
 
 -(void)sceneDeleteAction:(IpadSceneCell *)cell;
 -(void)powerBtnAction:(UIButton *)sender sceneStatus:(int)status;
+-(void)refreshTableView:(IpadSceneCell *)cell;
 
 @end
 

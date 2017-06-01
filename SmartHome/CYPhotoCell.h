@@ -26,10 +26,13 @@
 @property (nonatomic, copy) NSString *imageName;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (nonatomic,assign) int sceneID;
+@property (nonatomic,assign) int roomID;
 @property (weak, nonatomic) IBOutlet UIButton *powerBtn;
 @property (weak, nonatomic) IBOutlet UIButton *deleteBtn;
 @property (weak, nonatomic) IBOutlet UIButton *seleteSendPowBtn;
 @property (weak, nonatomic) IBOutlet UILabel *SceneName;
+@property (nonatomic, assign) int roomIndex;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *PowerBtnCenterContraint;//定时按钮隐藏改变的约束
 
 @property (nonatomic,weak) id<CYPhotoCellDelegate> delegate;

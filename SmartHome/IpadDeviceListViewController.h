@@ -28,6 +28,6 @@
 //智能单品
 @property (nonatomic,strong) NSArray * PluginArray;
 
-@property (strong, nonatomic) NSArray *devices;
+@property (strong, nonatomic) NSMutableArray *devices;
 
 @end

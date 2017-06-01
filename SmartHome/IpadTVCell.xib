@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="IpadTVCell" rowHeight="212" id="73C-gj-U2L" customClass="IpadTVCell">
+            <rect key="frame" x="0.0" y="0.0" width="481" height="202"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="73C-gj-U2L" id="JgS-ov-4LL">
+                <rect key="frame" x="0.0" y="0.0" width="481" height="201.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ipad-frm_adjust_nol" translatesAutoresizingMaskIntoConstraints="NO" id="haH-tK-vIX">
+                        <rect key="frame" x="1" y="126" width="479" height="85"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="85" id="ubf-as-XJe"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ipad-frm_adjustt_nol" translatesAutoresizingMaskIntoConstraints="NO" id="Hww-mA-mWm">
+                        <rect key="frame" x="28" y="158.5" width="425" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="dl0-mk-pou"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_icon_voi_high" translatesAutoresizingMaskIntoConstraints="NO" id="tu7-Qh-gUq">
+                        <rect key="frame" x="37" y="163.5" width="10" height="10"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="242-FL-92f"/>
+                            <constraint firstAttribute="width" constant="10" id="CcZ-B6-GQ6"/>
+                        </constraints>
+                    </imageView>
+                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Cdz-aX-j1t">
+                        <rect key="frame" x="65" y="153.5" width="346" height="31"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="WQ4-Kq-qGc"/>
+                        </constraints>
+                    </slider>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bd_icon_voi_high" translatesAutoresizingMaskIntoConstraints="NO" id="OS4-sM-q8I">
+                        <rect key="frame" x="429" y="161.5" width="15" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="15" id="405-cO-e0a"/>
+                            <constraint firstAttribute="height" constant="15" id="BAY-vM-5WX"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="客厅电视" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="szB-8K-rDR">
+                        <rect key="frame" x="5" y="0.0" width="140" height="51.5"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="140" id="HfM-Uf-QeG"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dvd_frm_choice__normal" translatesAutoresizingMaskIntoConstraints="NO" id="oLo-GC-C1Q">
+                        <rect key="frame" x="0.0" y="51.5" width="481" height="85"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="85" id="FiC-VY-sJL"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E17-LE-4YC">
+                        <rect key="frame" x="25.5" y="69" width="90" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="gca-do-5AC"/>
+                            <constraint firstAttribute="width" constant="90" id="vKX-f9-utU"/>
+                        </constraints>
+                        <state key="normal" image="icon_reduce_normal" backgroundImage="ipad-btn_selete_nol"/>
+                        <connections>
+                            <action selector="channelReduce:" destination="73C-gj-U2L" eventType="touchUpInside" id="t6O-F4-3ED"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KMR-zP-SSc">
+                        <rect key="frame" x="195.5" y="69" width="90" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="HeW-vp-aBu"/>
+                            <constraint firstAttribute="width" constant="90" id="xVw-XM-fq9"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" image="icon_ch_normal" backgroundImage="ipad-btn_selete_nol"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V6h-qN-MvF">
+                        <rect key="frame" x="365.5" y="69" width="90" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="KMP-M8-8hv"/>
+                            <constraint firstAttribute="width" constant="90" id="Lmz-QN-4eU"/>
+                        </constraints>
+                        <state key="normal" image="icon_add_normal" backgroundImage="ipad-btn_selete_nol"/>
+                        <connections>
+                            <action selector="channelAdd:" destination="73C-gj-U2L" eventType="touchUpInside" id="K6j-qT-hnq"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CFY-Q8-gek">
+                        <rect key="frame" x="425" y="0.0" width="46" height="46"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="46" id="1Jj-7G-vll"/>
+                            <constraint firstAttribute="width" constant="46" id="vK8-Lf-AgL"/>
+                        </constraints>
+                        <state key="normal" image="ipad-icon_add_nol"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g5Z-I6-nHN">
+                        <rect key="frame" x="360" y="11" width="55" height="35"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="55" id="Puq-R6-rM4"/>
+                            <constraint firstAttribute="height" constant="35" id="hjp-gb-gdS"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="dvd_btn_switch_off"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Hww-mA-mWm" firstAttribute="top" secondItem="oLo-GC-C1Q" secondAttribute="bottom" constant="22" id="0Ay-P0-Vwa"/>
+                    <constraint firstItem="KMR-zP-SSc" firstAttribute="leading" secondItem="E17-LE-4YC" secondAttribute="trailing" constant="80" id="0ip-dJ-nRZ"/>
+                    <constraint firstItem="oLo-GC-C1Q" firstAttribute="leading" secondItem="JgS-ov-4LL" secondAttribute="leading" id="3RV-0C-lnN"/>
+                    <constraint firstAttribute="trailing" secondItem="CFY-Q8-gek" secondAttribute="trailing" constant="10" id="3ir-Aq-8Q0"/>
+                    <constraint firstItem="tu7-Qh-gUq" firstAttribute="leading" secondItem="JgS-ov-4LL" secondAttribute="leadingMargin" constant="29" id="9am-9Z-c2D"/>
+                    <constraint firstItem="haH-tK-vIX" firstAttribute="leading" secondItem="JgS-ov-4LL" secondAttribute="leading" constant="1" id="9hR-3N-W7o"/>
+                    <constraint firstItem="CFY-Q8-gek" firstAttribute="top" secondItem="JgS-ov-4LL" secondAttribute="top" id="FzO-a6-1VN"/>
+                    <constraint firstItem="oLo-GC-C1Q" firstAttribute="top" secondItem="szB-8K-rDR" secondAttribute="bottom" id="HnS-Te-eRR"/>
+                    <constraint firstAttribute="trailing" secondItem="haH-tK-vIX" secondAttribute="trailing" constant="1" id="L4r-t6-uR8"/>
+                    <constraint firstItem="szB-8K-rDR" firstAttribute="leading" secondItem="JgS-ov-4LL" secondAttribute="leading" constant="5" id="NwF-ug-9kh"/>
+                    <constraint firstItem="OS4-sM-q8I" firstAttribute="leading" secondItem="Cdz-aX-j1t" secondAttribute="trailing" constant="20" id="PLK-hi-y7k"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="OS4-sM-q8I" secondAttribute="trailing" constant="29" id="Qub-8I-Rf4"/>
+                    <constraint firstItem="Hww-mA-mWm" firstAttribute="leading" secondItem="JgS-ov-4LL" secondAttribute="leadingMargin" constant="20" id="SlG-yw-lCa"/>
+                    <constraint firstAttribute="trailing" secondItem="oLo-GC-C1Q" secondAttribute="trailing" id="TxK-s7-x8H"/>
+                    <constraint firstItem="Cdz-aX-j1t" firstAttribute="leading" secondItem="tu7-Qh-gUq" secondAttribute="trailing" constant="20" id="Vlu-vV-Vcl"/>
+                    <constraint firstItem="V6h-qN-MvF" firstAttribute="centerY" secondItem="oLo-GC-C1Q" secondAttribute="centerY" id="ZOP-Tq-pyx"/>
+                    <constraint firstItem="OS4-sM-q8I" firstAttribute="centerY" secondItem="Hww-mA-mWm" secondAttribute="centerY" id="ZRq-j6-18b"/>
+                    <constraint firstItem="g5Z-I6-nHN" firstAttribute="top" secondItem="JgS-ov-4LL" secondAttribute="topMargin" constant="3" id="a9O-Or-sqX"/>
+                    <constraint firstItem="Hww-mA-mWm" firstAttribute="centerY" secondItem="haH-tK-vIX" secondAttribute="centerY" id="acF-3h-ZAw"/>
+                    <constraint firstItem="E17-LE-4YC" firstAttribute="centerY" secondItem="oLo-GC-C1Q" secondAttribute="centerY" id="bYy-ZY-Foq"/>
+                    <constraint firstItem="CFY-Q8-gek" firstAttribute="leading" secondItem="g5Z-I6-nHN" secondAttribute="trailing" constant="10" id="bzC-ig-1G3"/>
+                    <constraint firstItem="KMR-zP-SSc" firstAttribute="centerY" secondItem="oLo-GC-C1Q" secondAttribute="centerY" id="dbU-6p-W9e"/>
+                    <constraint firstItem="Cdz-aX-j1t" firstAttribute="centerY" secondItem="haH-tK-vIX" secondAttribute="centerY" id="evg-M4-5pb"/>
+                    <constraint firstItem="tu7-Qh-gUq" firstAttribute="centerY" secondItem="Hww-mA-mWm" secondAttribute="centerY" id="fHH-NK-vp7"/>
+                    <constraint firstItem="KMR-zP-SSc" firstAttribute="centerX" secondItem="oLo-GC-C1Q" secondAttribute="centerX" id="iS7-eB-nJQ"/>
+                    <constraint firstItem="V6h-qN-MvF" firstAttribute="leading" secondItem="KMR-zP-SSc" secondAttribute="trailing" constant="80" id="keH-bf-DCY"/>
+                    <constraint firstItem="szB-8K-rDR" firstAttribute="top" secondItem="JgS-ov-4LL" secondAttribute="top" id="rxE-Q0-lq8"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Hww-mA-mWm" secondAttribute="trailing" constant="20" id="tpe-SZ-C1U"/>
+                    <constraint firstAttribute="bottom" secondItem="haH-tK-vIX" secondAttribute="bottom" constant="-9.5" id="yUH-6l-31H"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="AddTvDeviceBtn" destination="CFY-Q8-gek" id="xeS-iH-FE4"/>
+                <outlet property="TVNameLabel" destination="szB-8K-rDR" id="XOE-Ht-kbj"/>
+                <outlet property="TVSlider" destination="Cdz-aX-j1t" id="jAD-80-g1P"/>
+                <outlet property="TVSwitchBtn" destination="g5Z-I6-nHN" id="dfz-8R-nvK"/>
+            </connections>
+            <point key="canvasLocation" x="95" y="-5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="bd_icon_voi_high" width="11" height="9"/>
+        <image name="dvd_btn_switch_off" width="34" height="23"/>
+        <image name="dvd_frm_choice__normal" width="336" height="47"/>
+        <image name="icon_add_normal" width="15" height="15"/>
+        <image name="icon_ch_normal" width="14" height="9"/>
+        <image name="icon_reduce_normal" width="14" height="1"/>
+        <image name="ipad-btn_selete_nol" width="45" height="21"/>
+        <image name="ipad-frm_adjust_nol" width="337" height="33"/>
+        <image name="ipad-frm_adjustt_nol" width="209" height="10"/>
+        <image name="ipad-icon_add_nol" width="15" height="15"/>
+    </resources>
+</document>

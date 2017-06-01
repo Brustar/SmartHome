@@ -27,6 +27,9 @@
 #import "AddDeviceCell.h"
 #import "IphoneNewAddSceneVC.h"
 #import "MBProgressHUD+NJ.h"
+#import "IpadNewLightCell.h"
+#import "IpadTVCell.h"
+#import "IpadAireTableViewCell.h"
 
 
 @interface IpadAddDeviceTypeVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -65,6 +68,7 @@
     self.tableView.tableFooterView = [UIView new];
     
 }
+
 -(void)getUI
 {
     _lightArr = [[NSMutableArray alloc] init];//场景下的所有设备
@@ -88,9 +92,9 @@
     _IntelligentArray = [[NSMutableArray alloc] init];
     _ColourLightArr = [[NSMutableArray alloc] init];
     _SwitchLightArr = [[NSMutableArray alloc] init];
-    [self.tableView registerNib:[UINib nibWithNibName:@"AireTableViewCell" bundle:nil] forCellReuseIdentifier:@"AireTableViewCell"];//空调
+    [self.tableView registerNib:[UINib nibWithNibName:@"IpadAireTableViewCell" bundle:nil] forCellReuseIdentifier:@"IpadAireTableViewCell"];//空调
     [self.tableView registerNib:[UINib nibWithNibName:@"CurtainTableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainTableViewCell"];//窗帘
-    [self.tableView registerNib:[UINib nibWithNibName:@"TVTableViewCell" bundle:nil] forCellReuseIdentifier:@"TVTableViewCell"];//网络电视
+    [self.tableView registerNib:[UINib nibWithNibName:@"IpadTVCell" bundle:nil] forCellReuseIdentifier:@"IpadTVCell"];//网络电视
     [self.tableView registerNib:[UINib nibWithNibName:@"NewColourCell" bundle:nil] forCellReuseIdentifier:@"NewColourCell"];//调色灯
     [self.tableView registerNib:[UINib nibWithNibName:@"OtherTableViewCell" bundle:nil] forCellReuseIdentifier:@"OtherTableViewCell"];//其他
     [self.tableView registerNib:[UINib nibWithNibName:@"ScreenTableViewCell" bundle:nil] forCellReuseIdentifier:@"ScreenTableViewCell"];//幕布ScreenCurtainCell
@@ -98,7 +102,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"DVDTableViewCell" bundle:nil] forCellReuseIdentifier:@"DVDTableViewCell"];//DVD
     [self.tableView registerNib:[UINib nibWithNibName:@"BjMusicTableViewCell" bundle:nil] forCellReuseIdentifier:@"BjMusicTableViewCell"];//背景音乐
     [self.tableView registerNib:[UINib nibWithNibName:@"AddDeviceCell" bundle:nil] forCellReuseIdentifier:@"AddDeviceCell"];//添加设备的cell
-    [self.tableView registerNib:[UINib nibWithNibName:@"NewLightCell" bundle:nil] forCellReuseIdentifier:@"NewLightCell"];//调光灯
+     [self.tableView registerNib:[UINib nibWithNibName:@"IpadNewLightCell" bundle:nil] forCellReuseIdentifier:@"IpadNewLightCell"];//调光灯
     [self.tableView registerNib:[UINib nibWithNibName:@"FMTableViewCell" bundle:nil] forCellReuseIdentifier:@"FMTableViewCell"];//FM
     //    NSArray *lightArr = [SQLManager getDeviceIDsBySeneId:self.sceneID];
     
@@ -183,7 +187,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {//调灯光
-        NewLightCell * cell = [tableView dequeueReusableCellWithIdentifier:@"NewLightCell" forIndexPath:indexPath];
+        IpadNewLightCell * cell = [tableView dequeueReusableCellWithIdentifier:@"IpadNewLightCell" forIndexPath:indexPath];
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
         SeneLightModel *model = self.lightArray[indexPath.row];
@@ -231,7 +235,7 @@
         return newColourCell;
     }
     if (indexPath.section == 3) {//空调
-        AireTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"AireTableViewCell" forIndexPath:indexPath];
+        IpadAireTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"IpadAireTableViewCell" forIndexPath:indexPath];
         aireCell.backgroundColor =[UIColor clearColor];
         aireCell.roomID = self.roomID;
         aireCell.sceneid = self.sceneid;
@@ -251,7 +255,7 @@
         
         return aireCell;
     }if (indexPath.section == 5) {//TV
-        TVTableViewCell * TVCell = [tableView dequeueReusableCellWithIdentifier:@"TVTableViewCell" forIndexPath:indexPath];
+        TVTableViewCell * TVCell = [tableView dequeueReusableCellWithIdentifier:@"IpadTVCell" forIndexPath:indexPath];
         TVCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_TVArray[indexPath.row] intValue]];
         TVCell.TVNameLabel.text = device.name;
@@ -325,11 +329,14 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 5 || indexPath.section == 6 || indexPath.section == 8) {
+    if ( indexPath.section == 6 || indexPath.section == 8 || indexPath.section == 0 || indexPath.section == 3) {
         return 150;
     }
     if (indexPath.section == 9 || indexPath.section == 7 || indexPath.section == 12) {
         return 50;
+    }
+    if (indexPath.section == 5 ) {
+        return 210;
     }
     return 100;
 }

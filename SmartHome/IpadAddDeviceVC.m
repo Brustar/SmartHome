@@ -9,6 +9,7 @@
 #import "IpadAddDeviceVC.h"
 #import "IpadDeviceTypeCell.h"
 #import "SQLManager.h"
+#import "IphoneSaveNewSceneController.h"
 
 @interface IpadAddDeviceVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -27,8 +28,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.SubTypeNameArr = @[@"照明",@"影音",@"空调",@"窗帘",@"智能单品"];
-    self.SubTypeIconeImage = @[@"icon_light_nol",@"icon_vdo_nol",@"icon_airconditioner_nol",@"icon_windowcurtains_nol",@"icon_Intelligence_nol"];
+    self.SubTypeNameArr = @[@"灯光",@"影音",@"环境",@"窗帘",@"智能单品",@"安防"];
+    self.SubTypeIconeImage = @[@"icon_light_nol",@"icon_vdo_nol",@"icon_airconditioner_nol",@"icon_windowcurtains_nol",@"icon_Intelligence_nol",@"ipad-icon_safe_nol"];
     self.roomList = [SQLManager getDevicesSubTypeNamesWithRoomID:self.roomID];
     self.tableView.tableFooterView = [UIView new];
     [self setupNaviBar];
@@ -61,6 +62,12 @@
 }
 -(void)rightBtnClicked:(UIButton *)rightBtn
 {
+        UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+        IphoneSaveNewSceneController * iphoneSaveNewScene = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneSaveNewSceneController"];
+        // [self presentViewController:iphoneSaveNewScene animated:YES completion:nil];
+        iphoneSaveNewScene.roomId = self.roomID;
+        [self.navigationController pushViewController:iphoneSaveNewScene animated:YES];
+        //[self performSegueWithIdentifier:@"iphoneAddNewScene" sender:self];
     
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

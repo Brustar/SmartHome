@@ -233,7 +233,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cLG-eE-x0Y">
-                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                                <rect key="frame" x="40" y="64" width="334" height="672"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Hto-my-mjg" id="DHa-ff-APq"/>
@@ -243,11 +243,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="cLG-eE-x0Y" secondAttribute="trailing" id="5UD-4V-7Qf"/>
+                            <constraint firstAttribute="trailing" secondItem="cLG-eE-x0Y" secondAttribute="trailing" constant="40" id="5UD-4V-7Qf"/>
                             <constraint firstItem="PZl-5e-tdG" firstAttribute="top" secondItem="ssW-em-7FD" secondAttribute="top" id="Pfo-z5-RoH"/>
                             <constraint firstItem="50l-wG-dEa" firstAttribute="top" secondItem="cLG-eE-x0Y" secondAttribute="bottom" id="WZL-O3-7dZ"/>
                             <constraint firstItem="50l-wG-dEa" firstAttribute="top" secondItem="PZl-5e-tdG" secondAttribute="bottom" id="eV3-gJ-JBc"/>
-                            <constraint firstItem="cLG-eE-x0Y" firstAttribute="leading" secondItem="ssW-em-7FD" secondAttribute="leading" id="rJe-Ty-NsS"/>
+                            <constraint firstItem="cLG-eE-x0Y" firstAttribute="leading" secondItem="ssW-em-7FD" secondAttribute="leading" constant="40" id="rJe-Ty-NsS"/>
                             <constraint firstAttribute="trailing" secondItem="PZl-5e-tdG" secondAttribute="trailing" id="tOn-Y8-Jgz"/>
                             <constraint firstItem="cLG-eE-x0Y" firstAttribute="top" secondItem="Woq-xp-239" secondAttribute="bottom" constant="44" id="vXX-Jf-ICi"/>
                             <constraint firstItem="PZl-5e-tdG" firstAttribute="leading" secondItem="ssW-em-7FD" secondAttribute="leading" id="zrS-EA-aEj"/>

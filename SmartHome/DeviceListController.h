@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface DeviceListController : UIViewController
-@property (strong, nonatomic) NSArray *devices;
+@property (strong, nonatomic) NSMutableArray *devices;
 @property (strong, nonatomic) NSArray *segues;
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic,assign) int deviceid;
