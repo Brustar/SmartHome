@@ -1,11 +1,10 @@
 //
-//  FamilyHomeViewController.h
+//  PlaneGraphViewController.h
 //  SmartHome
 //
-//  Created by KobeBryant on 2017/4/9.
+//  Created by KobeBryant on 2017/5/25.
 //  Copyright © 2017年 Brustar. All rights reserved.
 //
-
 #import <UIKit/UIKit.h>
 #import <AFNetworking.h>
 #import "HttpManager.h"
@@ -25,14 +24,13 @@
 #import "FamilyHomeDetailViewController.h"
 #import "NowMusicController.h"
 
-#define  CollectionCellWidth  self.roomCollectionView.frame.size.width / 2.0 -20
-#define  iPadCollectionCellWidth  self.roomCollectionView.frame.size.width / 3.0 -40
+#define  CollectionCell_W  self.roomStatusCollectionView.frame.size.width -40
+#define  iPadCollectionCellW  self.roomStatusCollectionView.frame.size.width / 3.0 -40
 #define  minSpace 20
 #define  maxSpace 40
 
-@interface FamilyHomeViewController : CustomViewController<UICollectionViewDataSource,UICollectionViewDelegate,HttpDelegate, NowMusicControllerDelegate>
-
-@property (weak, nonatomic) IBOutlet UICollectionView *roomCollectionView;
+@interface PlaneGraphViewController : CustomViewController<UICollectionViewDelegate, UICollectionViewDataSource,HttpDelegate, NowMusicControllerDelegate>
+@property (weak, nonatomic) IBOutlet UICollectionView *roomStatusCollectionView;
 @property (nonatomic, strong) NSMutableArray *roomArray;
 @property(nonatomic, strong) AFNetworkReachabilityManager *afNetworkReachabilityManager;
 @property (weak, nonatomic) IBOutlet UIImageView *lightIcon;
@@ -40,4 +38,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *airIcon;
 @property (nonatomic, readonly) UIButton *naviRightBtn;
 @property (nonatomic, strong) NowMusicController * nowMusicController;
+@property (weak, nonatomic) IBOutlet UIScrollView *floorScrollView;
+
 @end

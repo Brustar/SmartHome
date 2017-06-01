@@ -38,6 +38,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnPrevoius;
 @property (weak, nonatomic) IBOutlet UIButton *btnNext;
 @property (weak, nonatomic) IBOutlet UIButton *btnPlay;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *voiceLeft;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *voiceRight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *controlLeft;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *controlRight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *controlBottom;
 
 @end
 
@@ -104,6 +110,13 @@
     
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
+    
+    if (ON_IPAD) {
+        self.menuTop.constant = 0;
+        self.voiceLeft.constant = self.voiceRight.constant = 100;
+        self.controlLeft.constant = self.controlRight.constant = 200;
+        self.controlBottom.constant = 160;
+    }
 }
 
 -(void) initSlider

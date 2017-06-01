@@ -13,6 +13,7 @@
 #import "SceneManager.h"
 #import "ORBSwitch.h"
 #import "UIViewController+Navigator.h"
+#import "UIView+Popup.h"
 
 @interface ProjectController ()<ORBSwitchDelegate>
 
@@ -20,6 +21,7 @@
 @property (nonatomic,strong) NSMutableArray *projectIds;
 @property (nonatomic,strong) ORBSwitch *switcher;
 @property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuTop;
 
 @end
 
@@ -87,6 +89,10 @@
             }
         }
     }
+    
+    if (ON_IPAD) {
+        self.menuTop.constant = 0;
+    }
 }
 
 -(void) initSwitcher
@@ -99,6 +105,7 @@
     self.switcher.delegate = self;
     
     [self.view addSubview:self.switcher];
+    [self.switcher constraintToCenter:375];
 }
 
 -(IBAction)save:(id)sender

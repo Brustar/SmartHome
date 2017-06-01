@@ -16,10 +16,11 @@
 #import "SceneManager.h"
 #import "UIViewController+Navigator.h"
 #import "ORBSwitch.h"
+#import "UIView+Popup.h"
 
 @interface WindowSlidingController ()<ORBSwitchDelegate>
 
-
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuTop;
 @property (nonatomic,strong) NSMutableArray *windowSlidNames;
 @property (nonatomic,strong) NSMutableArray *windowSlidIds;
 
@@ -84,6 +85,9 @@
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - %@",roomName,windowType]];
     self.deviceid = [SQLManager singleDeviceWithCatalogID:windowOpener byRoom:self.roomID];
     [self initSwitcher];
+    if (ON_IPAD) {
+        self.menuTop.constant = 0;
+    }
 }
 
 -(void) initSwitcher
@@ -96,6 +100,7 @@
     self.switcher.delegate = self;
     
     [self.view addSubview:self.switcher];
+    [self.switcher constraintToCenter:375];
 }
 
 -(IBAction)save:(id)sender

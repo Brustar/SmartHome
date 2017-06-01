@@ -7,7 +7,6 @@
 //
 
 #import "IpadFirstViewController.h"
-#import "FamilyHomeViewController.h"
 #import "BaseTabBarController.h"
 
 @interface IpadFirstViewController ()
@@ -57,10 +56,10 @@
 }
 -(void)doTap:(UIGestureRecognizer *)dap
 {
-    UIStoryboard *iPhoneStoryBoard  = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
-    FamilyHomeViewController *familyVC = [iPhoneStoryBoard instantiateViewControllerWithIdentifier:@"familyHomeVC"];
-    familyVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:familyVC animated:YES];
+    UIStoryboard *planeGraphStoryBoard  = [UIStoryboard storyboardWithName:@"PlaneGraph" bundle:nil];
+    PlaneGraphViewController *planeGraphVC = [planeGraphStoryBoard instantiateViewControllerWithIdentifier:@"PlaneGraphVC"];
+    planeGraphVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:planeGraphVC animated:YES];
 
 }
 - (void)setupNaviBar {

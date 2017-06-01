@@ -21,7 +21,7 @@
 @property (nonatomic,strong) NSMutableArray *screenCurtainIds;
 
 @property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
-
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuTop;
 @end
 
 @implementation ScreenCurtainController
@@ -94,6 +94,10 @@
     NSArray *menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
     [self initMenuContainer:self.menuContainer andArray:menus andID:self.deviceid];
     [self naviToDevice];
+    
+    if (ON_IPAD) {
+        self.menuTop.constant = 0;
+    }
 }
 
 -(IBAction)save:(id)sender

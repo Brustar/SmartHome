@@ -22,7 +22,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.s
-    [self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"frm_left_nol"]]];
+    [self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ipad-frm_left_nol"]]];
     
     self.types = [SQLManager typeName:self.typeID byRoom:self.roomID];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -52,6 +52,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
         [self.tableView reloadData];
     }else if(device.hTypeId>=10){
         //多媒体或智能单品
+        [[DeviceInfo defaultManager] setRoomID:self.roomID];
         [self showDetailViewController:[DeviceInfo calcController:device.hTypeId] sender:self];
     }
     

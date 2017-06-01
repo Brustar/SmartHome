@@ -14,6 +14,7 @@
 #import "IOManager.h"
 #import "SQLManager.h"
 #import "UIViewController+Navigator.h"
+#import "UIView+Popup.h"
 
 @interface WettingController ()
 
@@ -26,7 +27,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView *base;
 @property (weak, nonatomic) IBOutlet UILabel *second;
 @property (nonatomic,assign) NSTimer *scheculer;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuTop;
 
+@property(nonatomic) int interval;
 @end
 
 @implementation WettingController
@@ -41,6 +44,9 @@
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 智能浇花",roomName]];
     [self initSlider];
+    if (ON_IPAD) {
+        self.menuTop.constant = 0;
+    }
 }
 
 -(void) initSlider
@@ -59,7 +65,7 @@
     slider.value = 0;
     slider.tag = 0;
     slider.radius = sliderSize;
-    
+    [slider constraintToCenter:sliderSize*2];
     sliderSize = 65;
     frame = CGRectMake(self.view.center.x-sliderSize, self.view.center.y-sliderSize, sliderSize*2, sliderSize*2);
     HTCircularSlider *second = [[HTCircularSlider alloc] initWithFrame:frame];
@@ -74,6 +80,7 @@
     second.trackAlpha = 0.6;
     second.tag = 1;
     second.radius = sliderSize;
+    [second constraintToCenter:sliderSize*2];
 }
 
 
@@ -115,6 +122,28 @@
     [IOManager writeScene:[NSString stringWithFormat:@"schedule_%@.plist",self.deviceid] scene:sch];
 }
 
+-(IBAction)timing:(id)sender
+{
+    NSTimer *timer  = (NSTimer*)sender;
+    UIButton *button = [self.view viewWithTag:99];
+    
+    int t = [self.SLabel.text intValue];
+    [button setTitle:[NSString stringWithFormat:@"%d",self.interval] forState:UIControlStateNormal];
+    if(t > 0){
+        if (self.interval==0) {
+            button.selected = NO;
+            self.second.hidden = YES;
+            [button setTitle:@"" forState:UIControlStateNormal];
+            NSData *data = [[DeviceInfo defaultManager] toogle:NO deviceID:self.deviceid];
+            [[[SocketManager defaultManager] socket] writeData:data withTimeout:1 tag:1];
+            [timer invalidate];
+        }
+        self.interval--;
+    }else{
+        self.interval++;
+    }
+}
+
 - (IBAction)start:(id)sender {
     UIButton *button = (UIButton *)sender;
     
@@ -122,7 +151,10 @@
     if (button.isSelected) {
         //selected
         [button setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"sp_on"]] forState:UIControlStateSelected];
-        __block int interval = [self.SLabel.text intValue];
+        self.interval = [self.SLabel.text intValue];
+        
+        self.scheculer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timing:) userInfo:nil repeats:YES];
+        /*
         self.scheculer = [NSTimer scheduledTimerWithTimeInterval:1.0 repeats:YES block:^(NSTimer *timer){
             int t = [self.SLabel.text intValue];
             [button setTitle:[NSString stringWithFormat:@"%d",interval] forState:UIControlStateNormal];
@@ -140,7 +172,7 @@
                 interval++;
             }
         }];
-        
+        */
         
     }else{
         //normal

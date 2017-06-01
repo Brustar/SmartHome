@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomViewController.h"
+#import "PlaneGraphViewController.h"
 
 @interface IpadFirstViewController : CustomViewController
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
