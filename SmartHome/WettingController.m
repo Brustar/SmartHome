@@ -28,6 +28,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *second;
 @property (nonatomic,assign) NSTimer *scheculer;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuTop;
+
+@property(nonatomic) int interval;
 @end
 
 @implementation WettingController
@@ -120,6 +122,28 @@
     [IOManager writeScene:[NSString stringWithFormat:@"schedule_%@.plist",self.deviceid] scene:sch];
 }
 
+-(IBAction)timing:(id)sender
+{
+    NSTimer *timer  = (NSTimer*)sender;
+    UIButton *button = [self.view viewWithTag:99];
+    
+    int t = [self.SLabel.text intValue];
+    [button setTitle:[NSString stringWithFormat:@"%d",self.interval] forState:UIControlStateNormal];
+    if(t > 0){
+        if (self.interval==0) {
+            button.selected = NO;
+            self.second.hidden = YES;
+            [button setTitle:@"" forState:UIControlStateNormal];
+            NSData *data = [[DeviceInfo defaultManager] toogle:NO deviceID:self.deviceid];
+            [[[SocketManager defaultManager] socket] writeData:data withTimeout:1 tag:1];
+            [timer invalidate];
+        }
+        self.interval--;
+    }else{
+        self.interval++;
+    }
+}
+
 - (IBAction)start:(id)sender {
     UIButton *button = (UIButton *)sender;
     
@@ -127,7 +151,10 @@
     if (button.isSelected) {
         //selected
         [button setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"sp_on"]] forState:UIControlStateSelected];
-        __block int interval = [self.SLabel.text intValue];
+        self.interval = [self.SLabel.text intValue];
+        
+        self.scheculer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timing:) userInfo:nil repeats:YES];
+        /*
         self.scheculer = [NSTimer scheduledTimerWithTimeInterval:1.0 repeats:YES block:^(NSTimer *timer){
             int t = [self.SLabel.text intValue];
             [button setTitle:[NSString stringWithFormat:@"%d",interval] forState:UIControlStateNormal];
@@ -145,7 +172,7 @@
                 interval++;
             }
         }];
-        
+        */
         
     }else{
         //normal
