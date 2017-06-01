@@ -182,14 +182,20 @@
             data=[device sweepDown:self.deviceid];
             break;
         case 7:
-            data=[device previous:self.deviceid];
+            data=[device next:self.deviceid];
             break;
         case 8:
             btn.selected = !btn.selected;
             data=[device toogle:btn.selected deviceID:self.deviceid];
             break;
         case 9:
-            data=[device next:self.deviceid];
+            data=[device previous:self.deviceid];
+            break;
+        case 10:
+            data=[device home:self.deviceid];
+            break;
+        case 11:
+            data=[device back:self.deviceid];
             break;
 
         default:
