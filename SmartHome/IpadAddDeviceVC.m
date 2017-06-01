@@ -1,17 +1,18 @@
 //
-//  IpadDeviceTypeVC.m
+//  IpadAddDeviceVC.m
 //  SmartHome
 //
-//  Created by zhaona on 2017/5/25.
+//  Created by zhaona on 2017/6/1.
 //  Copyright © 2017年 Brustar. All rights reserved.
 //
 
-#import "IpadDeviceTypeVC.h"
+#import "IpadAddDeviceVC.h"
 #import "IpadDeviceTypeCell.h"
 #import "SQLManager.h"
 
-@interface IpadDeviceTypeVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface IpadAddDeviceVC ()<UITableViewDelegate,UITableViewDataSource>
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) NSArray * roomList;
 @property (nonatomic,strong) NSArray * SubTypeNameArr;
 @property (nonatomic,strong) NSArray * SubTypeIconeImage;
@@ -20,23 +21,32 @@
 
 @end
 
-@implementation IpadDeviceTypeVC
+@implementation IpadAddDeviceVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Do any additional setup after loading the view.
     
     self.SubTypeNameArr = @[@"照明",@"影音",@"空调",@"窗帘",@"智能单品"];
     self.SubTypeIconeImage = @[@"icon_light_nol",@"icon_vdo_nol",@"icon_airconditioner_nol",@"icon_windowcurtains_nol",@"icon_Intelligence_nol"];
-      self.roomList = [SQLManager getDevicesSubTypeNamesWithRoomID:self.roomID];
-      [self setupNaviBar];
+    self.roomList = [SQLManager getDevicesSubTypeNamesWithRoomID:self.roomID];
+    self.tableView.tableFooterView = [UIView new];
+    [self setupNaviBar];
+    
+}
+#pragma mark - Table view data source
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    //    return self.roomList.count;
+    return self.SubTypeNameArr.count;
 }
 - (void)setupNaviBar {
     
     [self setNaviBarTitle:[UD objectForKey:@"homename"]]; //设置标题
     _naviLeftBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"backBtn" imgHighlight:@"backBtn" target:self action:@selector(leftBtnClicked:)];
     
-//    _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"" imgHighlight:@"" target:self action:@selector(rightBtnClicked:)];
+    //    _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"" imgHighlight:@"" target:self action:@selector(rightBtnClicked:)];
     _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
     [self setNaviBarLeftBtn:_naviLeftBtn];
     [self setNaviBarRightBtn:_naviRightBtn];
@@ -51,21 +61,8 @@
 }
 -(void)rightBtnClicked:(UIButton *)rightBtn
 {
-
+    
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - Table view data source
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-//    return self.roomList.count;
-    return self.SubTypeNameArr.count;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     IpadDeviceTypeCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
@@ -77,10 +74,21 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self.delegate respondsToSelector:@selector(IpadDeviceType:selected:)]) {
-    
-        [self.delegate IpadDeviceType:self selected:indexPath.row];
+    if ([self.delegate respondsToSelector:@selector(IpadAddDeviceVC:selected:)]) {
+        
+        [self.delegate IpadAddDeviceVC:self selected:indexPath.row];
     }
 }
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    return 64;
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
 
 @end

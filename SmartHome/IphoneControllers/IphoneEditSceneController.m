@@ -301,8 +301,6 @@
             [_AirArray addObject:lightArr[i]];
         }else if (_htypeID == 21){//窗帘
             [_CurtainArray addObject:lightArr[i]];
-        }else if ([_typeName isEqualToString:@"FM"]){
-            [_FMArray addObject:lightArr[i]];
         }else if (_htypeID == 11){//网路电视
             [_TVArray addObject:lightArr[i]];
         }else if (_htypeID == 13){//DVD

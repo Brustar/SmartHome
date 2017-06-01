@@ -20,6 +20,12 @@
 @interface IpadDeviceTypeVC : CustomViewController
 
 @property (nonatomic,assign) int roomID;
+
+//场景id
+@property (nonatomic,assign) int sceneID;
+//场景下的所有设备
+@property (nonatomic,strong) NSArray *DevicesArr;
+
 @property (nonatomic,weak) id<IpadDeviceTypeVCDelegate> delegate;
 
 @end

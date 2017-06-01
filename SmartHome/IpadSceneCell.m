@@ -31,7 +31,7 @@
     }
 }
 
-//开关
+//开关 
 - (IBAction)powerBtn:(id)sender {
     
     if (self.sceneStatus == 0) { //点击前，场景是关闭状态，需打开场景
