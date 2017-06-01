@@ -115,7 +115,7 @@
         self.menuTop.constant = 0;
         self.voiceLeft.constant = self.voiceRight.constant = 100;
         self.controlLeft.constant = self.controlRight.constant = 200;
-        self.controlBottom.constant = 100;
+        self.controlBottom.constant = 160;
     }
 }
 
