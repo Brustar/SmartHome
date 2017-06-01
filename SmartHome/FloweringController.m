@@ -14,6 +14,7 @@
 #import "IOManager.h"
 #import "SQLManager.h"
 #import "UIViewController+Navigator.h"
+#import "UIView+Popup.h"
 
 @interface FloweringController ()
 
@@ -46,7 +47,7 @@
 -(void) initSlider
 {
     int sliderSize = 90;
-    CGRect frame = CGRectMake(self.view.center.x-sliderSize, self.view.center.y-sliderSize, sliderSize*2, sliderSize*2);//CGRectInset(self.view.bounds, 0, 0);
+    CGRect frame = CGRectMake(self.view.center.x-sliderSize, self.view.center.y-sliderSize, sliderSize*2, sliderSize*2);
     
     HTCircularSlider *slider = [[HTCircularSlider alloc] initWithFrame:frame];
     [self.view addSubview:slider];
@@ -59,7 +60,7 @@
     slider.value = -180;
     slider.tag = 0;
     slider.radius = sliderSize;
-    
+    [slider constraintToCenter:sliderSize*2];
     sliderSize = 65;
     frame = CGRectMake(self.view.center.x-sliderSize, self.view.center.y-sliderSize, sliderSize*2, sliderSize*2);
     HTCircularSlider *second = [[HTCircularSlider alloc] initWithFrame:frame];
@@ -74,6 +75,7 @@
     second.trackAlpha = 0.6;
     second.tag = 1;
     second.radius = sliderSize;
+    [second constraintToCenter:sliderSize*2];
 }
 
 

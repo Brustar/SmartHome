@@ -46,9 +46,10 @@
     NSLog(@"getUserInfoWithUserId ----- %@", userID);
     RCUserInfo *info = nil;
     NSArray *s = [SQLManager queryChat:userID];
-    info = [[RCUserInfo alloc] initWithUserId:userID name:[s objectAtIndex:0] portrait:[s objectAtIndex:1]];
+    if ([s count]>0) {
+        info = [[RCUserInfo alloc] initWithUserId:userID name:[s firstObject] portrait:[s lastObject]];
+    }
     return info;
 }
 
 @end
-
