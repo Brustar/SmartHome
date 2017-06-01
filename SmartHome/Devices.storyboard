@@ -926,14 +926,17 @@
                                     <action selector="shuffle:" destination="3WJ-Xx-j8F" eventType="touchUpInside" id="4aF-ws-eo7"/>
                                 </connections>
                             </button>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dir_ear" translatesAutoresizingMaskIntoConstraints="NO" id="op7-Nd-QQ6">
+                                <rect key="frame" x="328" y="512" width="368" height="262"/>
+                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disk_base" translatesAutoresizingMaskIntoConstraints="NO" id="ppE-xr-BIY" userLabel="Disk_base">
-                                <rect key="frame" x="349.5" y="480.5" width="326" height="326"/>
+                                <rect key="frame" x="349" y="480" width="326" height="326"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disk" translatesAutoresizingMaskIntoConstraints="NO" id="8Jv-DU-IJx">
-                                <rect key="frame" x="413.5" y="544.5" width="198" height="198"/>
+                                <rect key="frame" x="413" y="544" width="198" height="198"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stylus" translatesAutoresizingMaskIntoConstraints="NO" id="eNc-XU-aF9">
-                                <rect key="frame" x="551.5" y="530.5" width="43" height="166"/>
+                                <rect key="frame" x="551" y="530" width="43" height="166"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_banner" translatesAutoresizingMaskIntoConstraints="NO" id="vAe-Qd-8DW">
                                 <rect key="frame" x="20" y="1229" width="984" height="47"/>
@@ -942,7 +945,7 @@
                                 <rect key="frame" x="20" y="1296" width="984" height="60"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_low" translatesAutoresizingMaskIntoConstraints="NO" id="Z1H-En-stj">
-                                <rect key="frame" x="40" y="1246" width="12" height="8"/>
+                                <rect key="frame" x="40" y="1246" width="10" height="8"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="voice_hight" translatesAutoresizingMaskIntoConstraints="NO" id="OGY-zp-fiZ" userLabel="voice_high">
                                 <rect key="frame" x="972" y="1245" width="12" height="10"/>
@@ -962,14 +965,14 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rvx-d6-XTw">
-                                <rect key="frame" x="489.5" y="1303" width="46" height="46"/>
+                                <rect key="frame" x="489" y="1303" width="46" height="46"/>
                                 <state key="normal" image="DVD_play" backgroundImage="music_button_control"/>
                                 <connections>
                                     <action selector="playMusic:" destination="3WJ-Xx-j8F" eventType="touchUpInside" id="3Dg-wY-OR0"/>
                                 </connections>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="het-ld-Z3p">
-                                <rect key="frame" x="51" y="1235" width="922" height="31"/>
+                                <rect key="frame" x="53" y="1235" width="918" height="31"/>
                             </slider>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="SAr-gJ-eSm">
                                 <rect key="frame" x="0.0" y="64" width="1024" height="40"/>
@@ -977,26 +980,54 @@
                                     <constraint firstAttribute="height" constant="40" id="VL6-RS-zKw"/>
                                 </constraints>
                             </stackView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bev-nV-7Mb">
+                                <rect key="frame" x="656" y="627" width="10" height="22"/>
+                                <state key="normal" image="DVD_next"/>
+                                <connections>
+                                    <action selector="nextMusic:" destination="3WJ-Xx-j8F" eventType="touchUpInside" id="p2j-Or-Lz3"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="COY-vM-XAM">
+                                <rect key="frame" x="358" y="627" width="10" height="22"/>
+                                <state key="normal" image="DVD_previous"/>
+                                <connections>
+                                    <action selector="previousMusic:" destination="3WJ-Xx-j8F" eventType="touchUpInside" id="Qto-55-rQZ"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uv7-AJ-NnR">
+                                <rect key="frame" x="908" y="116" width="46" height="46"/>
+                                <state key="normal" image="DVD_play" backgroundImage="music_button_control"/>
+                                <connections>
+                                    <action selector="playMusic:" destination="3WJ-Xx-j8F" eventType="touchUpInside" id="uD2-5Z-zhk"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="SK9-QX-auL" firstAttribute="top" secondItem="V5i-h9-pg4" secondAttribute="bottom" id="1x7-y6-Xxf"/>
                             <constraint firstItem="vAe-Qd-8DW" firstAttribute="leading" secondItem="Wt4-9B-3Md" secondAttribute="leadingMargin" id="5OV-sA-eEJ"/>
+                            <constraint firstItem="op7-Nd-QQ6" firstAttribute="centerX" secondItem="ppE-xr-BIY" secondAttribute="centerX" id="8rf-4W-H7k"/>
+                            <constraint firstItem="Bev-nV-7Mb" firstAttribute="trailing" secondItem="op7-Nd-QQ6" secondAttribute="trailing" constant="-30" id="BFk-cQ-l1u"/>
                             <constraint firstItem="1xc-iO-7Dh" firstAttribute="centerY" secondItem="sVV-IE-K2n" secondAttribute="centerY" id="CFZ-dQ-osj"/>
                             <constraint firstItem="het-ld-Z3p" firstAttribute="centerY" secondItem="vAe-Qd-8DW" secondAttribute="centerY" constant="-3" id="Ctk-es-UpQ"/>
                             <constraint firstItem="eNc-XU-aF9" firstAttribute="centerX" secondItem="ppE-xr-BIY" secondAttribute="centerX" constant="60" id="EdD-rq-vVu"/>
                             <constraint firstItem="SAr-gJ-eSm" firstAttribute="leading" secondItem="Wt4-9B-3Md" secondAttribute="leading" id="Ef0-A1-g8O"/>
                             <constraint firstAttribute="trailingMargin" secondItem="vAe-Qd-8DW" secondAttribute="trailing" id="Eh9-v6-i9L"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Uv7-AJ-NnR" secondAttribute="trailing" constant="50" id="HV3-IN-51G"/>
                             <constraint firstItem="OGY-zp-fiZ" firstAttribute="trailing" secondItem="vAe-Qd-8DW" secondAttribute="trailing" constant="-20" id="I5p-kx-p5l"/>
+                            <constraint firstItem="op7-Nd-QQ6" firstAttribute="centerY" secondItem="ppE-xr-BIY" secondAttribute="centerY" id="JFZ-v3-7Ng"/>
                             <constraint firstItem="wir-ch-GS4" firstAttribute="top" secondItem="Nas-3f-VDd" secondAttribute="top" id="JRl-g8-cIr"/>
                             <constraint firstItem="8Jv-DU-IJx" firstAttribute="centerX" secondItem="ppE-xr-BIY" secondAttribute="centerX" id="KHY-hw-TzH"/>
                             <constraint firstItem="vAe-Qd-8DW" firstAttribute="centerX" secondItem="ppE-xr-BIY" secondAttribute="centerX" id="KUD-d4-9Gf"/>
                             <constraint firstItem="SAr-gJ-eSm" firstAttribute="top" secondItem="bWa-hy-6kj" secondAttribute="bottom" constant="44" id="Ljl-Uf-6D6"/>
                             <constraint firstItem="V5i-h9-pg4" firstAttribute="top" secondItem="bWa-hy-6kj" secondAttribute="bottom" id="M4G-YN-X0c"/>
                             <constraint firstItem="sVV-IE-K2n" firstAttribute="leading" secondItem="Wt4-9B-3Md" secondAttribute="leadingMargin" id="MI6-Th-k4a"/>
+                            <constraint firstItem="COY-vM-XAM" firstAttribute="leading" secondItem="op7-Nd-QQ6" secondAttribute="leading" constant="30" id="MoY-xC-Vg1"/>
                             <constraint firstItem="fKF-pW-e6s" firstAttribute="centerY" secondItem="sVV-IE-K2n" secondAttribute="centerY" id="OzV-Bi-CX6"/>
                             <constraint firstItem="eNc-XU-aF9" firstAttribute="centerY" secondItem="ppE-xr-BIY" secondAttribute="centerY" constant="-30" id="P1n-38-MFS"/>
+                            <constraint firstItem="Uv7-AJ-NnR" firstAttribute="centerY" secondItem="Nas-3f-VDd" secondAttribute="centerY" id="P2k-uT-SkP"/>
                             <constraint firstItem="sVV-IE-K2n" firstAttribute="top" secondItem="vAe-Qd-8DW" secondAttribute="bottom" constant="20" id="QRL-en-aNO"/>
+                            <constraint firstItem="COY-vM-XAM" firstAttribute="centerY" secondItem="op7-Nd-QQ6" secondAttribute="centerY" constant="-5" id="RqD-F9-C4d"/>
                             <constraint firstItem="V5i-h9-pg4" firstAttribute="leading" secondItem="Wt4-9B-3Md" secondAttribute="leading" id="SsT-lG-ynY"/>
                             <constraint firstAttribute="trailing" secondItem="V5i-h9-pg4" secondAttribute="trailing" id="T7b-z8-mPs"/>
                             <constraint firstItem="Z1H-En-stj" firstAttribute="centerY" secondItem="vAe-Qd-8DW" secondAttribute="centerY" constant="-3" id="VlC-6i-cnb"/>
@@ -1009,23 +1040,32 @@
                             <constraint firstItem="OGY-zp-fiZ" firstAttribute="centerY" secondItem="vAe-Qd-8DW" secondAttribute="centerY" constant="-3" id="ic3-q2-onJ"/>
                             <constraint firstItem="wir-ch-GS4" firstAttribute="top" secondItem="SAr-gJ-eSm" secondAttribute="bottom" constant="5" id="iz9-N9-VXA"/>
                             <constraint firstItem="ppE-xr-BIY" firstAttribute="centerY" secondItem="V5i-h9-pg4" secondAttribute="centerY" constant="-50" id="jKu-cK-MyT"/>
-                            <constraint firstItem="OGY-zp-fiZ" firstAttribute="leading" secondItem="het-ld-Z3p" secondAttribute="trailing" constant="1" id="jqK-Ye-YIT"/>
                             <constraint firstItem="Nas-3f-VDd" firstAttribute="leading" secondItem="Wt4-9B-3Md" secondAttribute="leadingMargin" id="kv2-9g-bJg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="wir-ch-GS4" secondAttribute="trailing" id="owA-pa-2pN"/>
                             <constraint firstItem="8Jv-DU-IJx" firstAttribute="centerY" secondItem="ppE-xr-BIY" secondAttribute="centerY" id="pkD-G5-ZsE"/>
-                            <constraint firstItem="het-ld-Z3p" firstAttribute="leading" secondItem="Z1H-En-stj" secondAttribute="trailing" constant="1" id="qRT-Kf-PVy"/>
+                            <constraint firstItem="het-ld-Z3p" firstAttribute="leading" secondItem="Z1H-En-stj" secondAttribute="trailing" constant="5" id="qRT-Kf-PVy"/>
                             <constraint firstItem="Rvx-d6-XTw" firstAttribute="centerX" secondItem="sVV-IE-K2n" secondAttribute="centerX" id="qzb-u1-YR9"/>
+                            <constraint firstItem="Bev-nV-7Mb" firstAttribute="centerY" secondItem="op7-Nd-QQ6" secondAttribute="centerY" constant="-5" id="s5h-S9-lmn"/>
                             <constraint firstItem="SK9-QX-auL" firstAttribute="top" secondItem="sVV-IE-K2n" secondAttribute="bottom" constant="10" id="u1K-LI-xWx"/>
                             <constraint firstItem="het-ld-Z3p" firstAttribute="centerX" secondItem="vAe-Qd-8DW" secondAttribute="centerX" id="wpW-PV-0Lu"/>
                             <constraint firstItem="1xc-iO-7Dh" firstAttribute="trailing" secondItem="sVV-IE-K2n" secondAttribute="trailing" constant="-10" id="xVc-Tc-czQ"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnNext" destination="Bev-nV-7Mb" id="7vf-Hm-1dT"/>
                         <outlet property="diskView" destination="8Jv-DU-IJx" id="4a0-So-vFF"/>
+                        <outlet property="ear" destination="op7-Nd-QQ6" id="wZ8-fa-mQG"/>
+                        <outlet property="ipadPlay" destination="Uv7-AJ-NnR" id="ooA-BM-x5s"/>
                         <outlet property="lastBtn" destination="fKF-pW-e6s" id="Cdy-jO-ucv"/>
                         <outlet property="menuContainer" destination="SAr-gJ-eSm" id="7F9-Eu-rQl"/>
+                        <outlet property="menuTop" destination="Ljl-Uf-6D6" id="bxl-Iq-Ovb"/>
                         <outlet property="nextBtn" destination="1xc-iO-7Dh" id="lDt-ay-SKG"/>
                         <outlet property="playBtn" destination="Rvx-d6-XTw" id="dVX-m8-XZC"/>
+                        <outlet property="prevoius" destination="COY-vM-XAM" id="V33-nP-e6z"/>
+                        <outlet property="shuffleRight" destination="owA-pa-2pN" id="qsk-13-tqg"/>
+                        <outlet property="shuffleTop" destination="iz9-N9-VXA" id="tqP-qT-OZu"/>
+                        <outlet property="voiceLeft" destination="5OV-sA-eEJ" id="OlP-7a-HlU"/>
+                        <outlet property="voiceRight" destination="Eh9-v6-i9L" id="2L4-Lt-L9K"/>
                         <outlet property="voiceSlider" destination="het-ld-Z3p" id="asT-kJ-fe3"/>
                         <outlet property="volume" destination="het-ld-Z3p" id="aYN-0Z-Wf5"/>
                     </connections>

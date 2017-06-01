@@ -32,6 +32,15 @@
 @property (weak, nonatomic) IBOutlet UIImageView *next;
 @property (weak, nonatomic) IBOutlet UISlider *voiceSlider;
 @property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *voiceLeft;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *voiceRight;
+@property (weak, nonatomic) IBOutlet UIImageView *ear;
+@property (weak, nonatomic) IBOutlet UIButton *btnNext;
+@property (weak, nonatomic) IBOutlet UIButton *prevoius;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *shuffleRight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *shuffleTop;
+@property (weak, nonatomic) IBOutlet UIButton *ipadPlay;
 
 @end
 
@@ -135,6 +144,14 @@ BOOL animating;
     }
     
     [self.lastBtn setBackgroundImage:[UIImage imageNamed:@"control_button_pressed"] forState:UIControlStateSelected];
+    
+    if (ON_IPAD) {
+        self.menuTop.constant = 0;
+        self.voiceLeft.constant = self.voiceRight.constant = 100;
+        self.shuffleTop.constant = 40;
+        self.shuffleRight.constant = 600;
+        self.ear.hidden = self.btnNext.hidden = self.prevoius.hidden = self.ipadPlay.hidden = NO;
+    }
 }
 
 -(void)changeVolume
