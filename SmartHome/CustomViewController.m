@@ -113,6 +113,7 @@
     if (_viewNaviBar)
     {
         [_viewNaviBar setTitle:strTitle];
+        self.title = strTitle;
     }else{APP_ASSERT_STOP}
 }
 

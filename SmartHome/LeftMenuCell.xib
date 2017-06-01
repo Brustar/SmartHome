@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="leftMenuCell" id="iD8-Mr-eGm" customClass="LeftMenuCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iD8-Mr-eGm" id="rgA-38-EIL">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="left_menu_normal" translatesAutoresizingMaskIntoConstraints="NO" id="kDc-UW-QCS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="leftMenuCell" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t5S-jK-gPc">
+                        <rect key="frame" x="48" y="24" width="38" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="t5S-jK-gPc" firstAttribute="centerY" secondItem="rgA-38-EIL" secondAttribute="centerY" id="26C-Xf-aAA"/>
+                    <constraint firstItem="kDc-UW-QCS" firstAttribute="leading" secondItem="rgA-38-EIL" secondAttribute="leading" id="9FR-5I-OhU"/>
+                    <constraint firstItem="t5S-jK-gPc" firstAttribute="leading" secondItem="rgA-38-EIL" secondAttribute="leadingMargin" constant="40" id="N9U-lP-YxX"/>
+                    <constraint firstAttribute="trailing" secondItem="kDc-UW-QCS" secondAttribute="trailing" id="QsH-Bg-dRx"/>
+                    <constraint firstAttribute="bottom" secondItem="kDc-UW-QCS" secondAttribute="bottom" id="pju-7V-jyX"/>
+                    <constraint firstItem="kDc-UW-QCS" firstAttribute="top" secondItem="rgA-38-EIL" secondAttribute="top" id="vLC-5n-P1f"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+            <connections>
+                <outlet property="cellBG" destination="kDc-UW-QCS" id="tPV-es-aLi"/>
+                <outlet property="lbl" destination="t5S-jK-gPc" id="PZb-5T-hUW"/>
+            </connections>
+            <point key="canvasLocation" x="262.5" y="399"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="left_menu_normal" width="125" height="29"/>
+    </resources>
+</document>

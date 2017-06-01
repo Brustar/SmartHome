@@ -10,7 +10,7 @@
 #import "SceneManager.h"
 #import "Light.h"
 #import "ColourTableViewCell.h"
-
+#import "Device.h"
 #import "SocketManager.h"
 #import "CustomNaviBarView.h"
 #import "CustomViewController.h"
@@ -27,6 +27,6 @@
 @property (nonatomic,assign) int roomID;
 @property (nonatomic,assign) BOOL isAddDevice;
 
-@property (strong, nonatomic) Scene *scene;
+-(void)visibleUI:(Device *)device;
 
 @end

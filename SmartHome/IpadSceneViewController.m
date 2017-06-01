@@ -2,7 +2,7 @@
 //  IpadSceneViewController.m
 //  SmartHome
 //
-//  Created by zhaona on 2017/5/22.
+//  Created by zhaona on 2017/5/24.
 //  Copyright © 2017年 Brustar. All rights reserved.
 //
 
@@ -17,11 +17,16 @@
 #import "IpadSceneCell.h"
 #import "IphoneNewAddSceneVC.h"
 #import "HttpManager.h"
+#import "BaseTabBarController.h"
+#import "AppDelegate.h"
+#import "IpadDeviceListViewController.h"
+//#import "IpadDeviceTypeVC.h"
+#import "AddIpadSceneVC.h"
 
 static NSString * const IpadSceneId = @"photo";
 
-@interface IpadSceneViewController ()<IphoneRoomViewDelegate,UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IpadSceneCellDelegate,UIViewControllerPreviewingDelegate,PhotoGraphViewConteollerDelegate,UIViewControllerPreviewingDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
-@property (nonatomic,assign) int roomID;
+@interface IpadSceneViewController ()<IphoneRoomViewDelegate,UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IpadSceneCellDelegate,PhotoGraphViewConteollerDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+
 @property (nonatomic,strong) NSArray *roomList;
 @property (nonatomic,strong)NSMutableArray *scenes;
 @property (nonatomic,strong) UICollectionView * FirstCollectionView;
@@ -32,6 +37,10 @@ static NSString * const IpadSceneId = @"photo";
 @property (nonatomic,assign) int selectedRoomID;
 @property (nonatomic,strong) UIImage * selectSceneImg;
 @property (nonatomic,assign) int sceneID;
+@property (nonatomic, readonly) UIButton *naviRightBtn;
+@property (nonatomic, readonly) UIButton *naviLeftBtn;
+@property (nonatomic, readonly) UIButton *naviMiddletBtn;
+@property (nonatomic,strong) BaseTabBarController *baseTabbarController;
 
 @end
 
@@ -46,17 +55,74 @@ static NSString * const IpadSceneId = @"photo";
     }
     return _scenes;
 }
-
-//- (void)dealloc {
-//    [self removeNotifications];
-//}
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.roomList = [SQLManager getAllRoomsInfo];
     [self setUpRoomView];
     [self reachNotification];
+    [self setupNaviBar];
     [self setUI];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
+    _baseTabbarController.tabbarPanel.hidden = NO;
+    _baseTabbarController.tabBar.hidden = YES;
+    
+}
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
+    _baseTabbarController.tabbarPanel.hidden = NO;
+    _baseTabbarController.tabBar.hidden = YES;
+}
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
+    _baseTabbarController.tabbarPanel.hidden = YES;
+}
+- (void)setupNaviBar {
+    
+//    [self setNaviBarTitle:[UD objectForKey:@"homename"]]; //设置标题
+    _naviMiddletBtn = [[UIButton alloc] init];
+    [_naviMiddletBtn setTitle:[UD objectForKey:@"homename"] forState:UIControlStateNormal];
+    //    [_naviMiddletBtn addTarget:self action:@selector(MiddleBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    _naviLeftBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"clound_white" imgHighlight:@"clound_white" target:self action:@selector(leftBtnClicked:)];
+    
+    NSString *music_icon = nil;
+    NSInteger isPlaying = [[UD objectForKey:@"IsPlaying"] integerValue];
+    if (isPlaying) {
+        music_icon = @"music-red";
+    }else {
+        music_icon = @"music_white";
+    }
+    
+        _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:music_icon imgHighlight:music_icon target:self action:@selector(rightBtnClicked:)];
+    [self setNaviBarLeftBtn:_naviLeftBtn];
+        [self setNaviBarRightBtn:_naviRightBtn];
+        [self setNaviMiddletBtn:_naviMiddletBtn];
+}
+-(void)rightBtnClicked:(UIButton *)btn
+{
+
+
+}
+- (void)leftBtnClicked:(UIButton *)btn {
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    if (appDelegate.LeftSlideVC.closed)
+    {
+        [appDelegate.LeftSlideVC openLeftView];
+    }
+    else
+    {
+        [appDelegate.LeftSlideVC closeLeftView];
+    }
 }
 -(void)setUpRoomView
 {
@@ -130,7 +196,6 @@ static NSString * const IpadSceneId = @"photo";
     self.automaticallyAdjustsScrollViewInsets = NO;//
     // 注册
     [self.FirstCollectionView registerNib:[UINib nibWithNibName:NSStringFromClass([IpadSceneCell class]) bundle:nil] forCellWithReuseIdentifier:IpadSceneId];
-    
 }
 
 #pragma  mark - UICollectionViewDelegate
@@ -146,11 +211,12 @@ static NSString * const IpadSceneId = @"photo";
         cell.imageView.image = [UIImage imageNamed:@"AddScene-ImageView"];
         cell.subImageView.image = [UIImage imageNamed:@"AddSceneBtn"];
         cell.sceneID = 0;
-        cell.SceneName.text = @"点击添加场景";
+        cell.SceneName.text = @" ";
         cell.SceneNameTopConstraint.constant = 40;
         cell.deleteBtn.hidden = YES;
         cell.powerBtn.hidden = YES;
         cell.seleteSendPowBtn.hidden = YES;
+        cell.partternBtnView.hidden = YES;
         
         return cell;
     }else{
@@ -178,7 +244,6 @@ static NSString * const IpadSceneId = @"photo";
             cell.PowerBtnCenterContraint.constant = 0;
         }
         self.selectedSId = cell.sceneID;
-        
         cell.subImageView.image = [UIImage imageNamed:@"Scene-bedroomTSQ"];
         cell.tag = scene.sceneID;
         cell.SceneName.text = scene.sceneName;
@@ -186,9 +251,10 @@ static NSString * const IpadSceneId = @"photo";
         self.lgPress.delegate = self;
         [collectionView addGestureRecognizer:self.lgPress];
         [cell.imageView sd_setImageWithURL:[NSURL URLWithString: scene.picName] placeholderImage:[UIImage imageNamed:@"PL"]];
-        [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];
+//        [self registerForPreviewingWithDelegate:self sourceView:cell.contentView];
         cell.deleteBtn.hidden = NO;
         cell.powerBtn.hidden = NO;
+        cell.partternBtnView.hidden = NO;
         cell.delegate = self;
         if (scene.status == 0) {
             [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
@@ -217,7 +283,6 @@ static NSString * const IpadSceneId = @"photo";
         picker.sourceType = UIImagePickerControllerSourceTypeCamera;
         [self presentViewController:picker animated:YES completion:NULL];
         
-        
     }]];
     [alerController addAction:[UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
@@ -242,10 +307,11 @@ static NSString * const IpadSceneId = @"photo";
     [alerController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
     }]];
-    
-    [self presentViewController:alerController animated:YES completion:^{
-        
-    }];
+    UIPopoverPresentationController *popPresenter = [alerController
+                                                     popoverPresentationController];
+    popPresenter.sourceView = self.currentCell;
+    popPresenter.sourceRect = self.currentCell.bounds;
+    [self presentViewController:alerController animated:YES completion:nil];
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
@@ -282,21 +348,21 @@ static NSString * const IpadSceneId = @"photo";
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row+1 >= self.scenes.count) {
-        UIStoryboard * SceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
-        IphoneNewAddSceneVC * iphoneNewAddSceneVC = [SceneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneNewAddSceneVC"];
-        iphoneNewAddSceneVC.roomID = self.selectedRoomID;
-        [self.navigationController pushViewController:iphoneNewAddSceneVC animated:YES];
-       
+        UIStoryboard * SceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene-iPad" bundle:nil];
+        AddIpadSceneVC * AddIpadSceneVC = [SceneStoryBoard instantiateViewControllerWithIdentifier:@"AddIpadSceneVC"];
+        AddIpadSceneVC.roomID = self.selectedRoomID;
+     
+         [self presentViewController:AddIpadSceneVC animated:YES completion:nil];
+        
     }else{
         Scene *scene = self.scenes[indexPath.row];
         self.selectedSId = scene.sceneID;
-        CYPhotoCell *cell = (CYPhotoCell*)[collectionView cellForItemAtIndexPath:indexPath];
-        if (scene.status == 0) {
-            [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
-            [[SceneManager defaultManager] startScene:scene.sceneID];
-            [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];
-        }
-        [self performSegueWithIdentifier:@"iphoneEditSegue" sender:self];
+        UIStoryboard *SceneiPadStoryBoard = [UIStoryboard storyboardWithName:@"Scene-iPad" bundle:nil];
+        IpadDeviceListViewController * listVC = [SceneiPadStoryBoard instantiateViewControllerWithIdentifier:@"IpadDeviceListViewController"];
+         listVC.roomID = self.selectedRoomID;
+         listVC.sceneID = self.selectedSId;
+        [self presentViewController:listVC animated:YES completion:nil];
+        
     }
     
 }
@@ -396,19 +462,5 @@ static NSString * const IpadSceneId = @"photo";
 {
     
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

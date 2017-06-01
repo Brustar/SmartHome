@@ -14,13 +14,13 @@
 #import "IQKeyboardManager.h"
 #import "ECloudTabBarController.h"
 #import "MSGController.h"
-#import "ECloudTabBar.h"
+
 #import "IphoneSceneController.h"
 #import "VoiceOrderController.h"
 #import "IphoneFavorController.h"
 #import "WXApi.h"
 #import "WeChatPayManager.h"
-#import <RongIMKit/RongIMKit.h>
+
 #import "RCDataManager.h"
 #import "IpadFirstViewController.h"
 
@@ -132,6 +132,7 @@
     DeviceInfo *info=[DeviceInfo defaultManager];
     info.pushToken=[PackManager hexStringFromData:deviceToken];
     NSLog(@"deviceToken: %@", info.pushToken);
+    [[RCIMClient sharedRCIMClient] setDeviceToken:info.pushToken];
 }
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
@@ -241,7 +242,7 @@
     if ([DeviceInfo defaultManager].isPhotoLibrary) {
         return UIInterfaceOrientationMaskAll;
     }else {
-        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        if (ON_IPAD) {
                 return UIInterfaceOrientationMaskLandscape;
         }else{
             return UIInterfaceOrientationMaskPortrait;

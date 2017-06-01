@@ -61,6 +61,9 @@ enum{
 
 #define KICK_OUT @"kicking"
 
+#define ON_IPAD ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+#define ON_IPONE ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+
 @interface DeviceInfo : NSObject
 //是否编辑场景时
 @property (nonatomic) bool editingScene;
@@ -92,7 +95,7 @@ enum{
 
 - (void) deviceGenaration;
 - (void) initConfig;
-
++(UIViewController *)calcController:(NSUInteger)uid;
 #pragma mark - public
 -(NSData *) author;
 -(NSData *)startScenenAtMaster:(int)sceneid;

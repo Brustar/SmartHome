@@ -299,8 +299,10 @@
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
-            NSDictionary *dic = @{@"id":[resultSet stringForColumn:@"id"],@"name":[resultSet stringForColumn:@"NAME"]};
-            [names addObject:dic];
+            Device *device = [Device new];
+            device.eID = [[resultSet stringForColumn:@"id"] intValue];
+            device.name = [resultSet stringForColumn:@"NAME"];
+            [names addObject:device];
         }
     }
     [db closeOpenResultSets];
@@ -498,40 +500,45 @@
     
 }
 
-+(NSArray*)getSubTypeNameByRoomID:(int)rID
++ (NSMutableArray *)typeName:(int)typeID byRoom:(int) roomID
 {
-    NSMutableArray *subTypes = [NSMutableArray array];
+    NSMutableArray *subTypes = [NSMutableArray new];
     FMDatabase *db = [self connetdb];
     if([db open])
     {
-        long masterID =  [[DeviceInfo defaultManager] masterID];
-        
-        NSString *sql = [NSString stringWithFormat:@"SELECT distinct subTypeName FROM Devices where rID = %d and masterID = '%ld'",rID, masterID];
+        NSString *sql ;
+        if ([self isWholeHouse:roomID]) {
+            sql = [NSString stringWithFormat:@"SELECT distinct typeName,htypeid FROM Devices where subtypeid = %d order by htypeID",typeID];
+        }else{
+            sql = [NSString stringWithFormat:@"SELECT distinct typeName,htypeid FROM Devices where subtypeid = %d and rID = '%d order by htypeID'",typeID,roomID];
+        }
         FMResultSet *resultSet = [db executeQuery:sql];
+        int i=0;
         while ([resultSet next])
         {
-            NSString *subTypeName = [resultSet stringForColumn:@"subTypeName"];
-            [subTypes addObject:subTypeName];
+            Device *device = [Device new];
+            device.typeName = [resultSet stringForColumn:@"typeName"];
+            device.hTypeId = [[resultSet stringForColumn:@"htypeid"] intValue];
+            device.rID = ++i;
+            [subTypes addObject:device];
 
         }
     }
     [db closeOpenResultSets];
     [db close];
-    return [subTypes copy];
-
+    return subTypes;
 }
 
 //根据房间ID获取该房间的所有设备ID
 + (NSArray *)deviceIdsByRoomId:(int)roomID
 {
-    
     NSMutableArray *deviceDIs = [NSMutableArray array];
     FMDatabase *db = [self connetdb];
     if([db open])
     {
         long masterID =  [[DeviceInfo defaultManager] masterID];
         NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %d and masterID = '%ld'",roomID, masterID];
-      
+        
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {

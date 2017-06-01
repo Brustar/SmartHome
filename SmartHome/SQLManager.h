@@ -77,7 +77,7 @@
 
 + (NSString *)deviceIDWithRoomID:(NSInteger)roomID withType:(NSString *)type;
 //根据房间ID 获取所有的设备大类
-+(NSArray*)getSubTypeNameByRoomID:(int)rID;
++(NSMutableArray*)typeName:(int)typeID byRoom:(int) roomID;
 //根据房间ID 和设备大类找到对应的设备小类
 +(NSArray *)getDeviceTypeName:(int)rID subTypeName:(NSString *)subTypeName;
 

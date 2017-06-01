@@ -37,8 +37,8 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 @property (nonatomic,assign) long lightCatalog;
 @property (nonatomic,strong) YALContextMenuTableView* contextMenuTableView;
 @property (nonatomic,strong) ORBSwitch *switcher;
-
-- (IBAction)selectTypeOfLight:(UISegmentedControl *)sender;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottom;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *top;
 
 @end
 
@@ -66,27 +66,18 @@ static NSString *const menuCellIdentifier = @"rotationCell";
         [view dismiss];
     }];
     
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 5.0, 80.0, 35.0)];
+    title.text = @"颜色面板";
+    [title setFont:[UIFont systemFontOfSize:13.0]];
     
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    
-    [btn setTitle:@"颜色面板" forState:UIControlStateNormal];
-    
-    btn.frame = CGRectMake(5.0, 5.0, 80.0, 35.0);
-    [btn setTitleColor:[UIColor blackColor]forState:UIControlStateNormal];
-    btn.titleLabel.font = [UIFont systemFontOfSize:13.0];
+    [title setTextColor:[UIColor blackColor]];
 
-    //[btn addTarget:self action:@selector(upInside) forControlEvents:UIControlEventTouchUpInside];
-    [view addSubview:btn];
-    
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    
-    [button setTitle:@"图片面板" forState:UIControlStateNormal];
-    
-    button.frame = CGRectMake(220.0, 5.0, 80.0, 35.0);
-    [button setTitleColor:[UIColor blackColor]forState:UIControlStateNormal];
-    button.titleLabel.font = [UIFont systemFontOfSize:13.0];
-    //[view addSubview:button];
+    [view addSubview:title];
+
     [view addSubview:colorPicker];
+    if (ON_IPAD) {
+        view.transform = CGAffineTransformMakeRotation(-M_PI_2);
+    }
     [view show];
 }
 
@@ -150,58 +141,15 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     self.base.hidden = ![dviceType isEqualToString:@"03"];
     
     self.lightName.text = device.name;
-    self.scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
-    if ([self.sceneid intValue]>0) {
-        [self syncUI];
-    }
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncLight:) name:@"light" object:nil];
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
--(void) syncUI
-{
-    for(id device in self.scene.devices)
-    {
-        if ([device isKindOfClass:[Light class]] && ((Light*)device).deviceID == [self.deviceid intValue]) {
-            float brightness_f = (float)((Light *)device).brightness;
-            
-            float degree = M_PI*brightness_f/MAX_ROTATE_DEGREE;
-            self.tranformView.transform = CGAffineTransformMakeRotation(degree);
-            //self.detailCell.valueLabel.text = [NSString stringWithFormat:@"%d%%", (int)(self.detailCell.bright.value * 100)];
-            self.switcher.isOn=((Light*)device).isPoweron;
-            if ([((Light*)device).color count]>2) {
-                self.base.backgroundColor=[UIColor colorWithRed:[[((Light*)device).color firstObject] intValue]/255.0 green:[[((Light*)device).color objectAtIndex:1] intValue]/255.0  blue:[[((Light*)device).color lastObject] intValue]/255.0  alpha:1];
-            }
-        }
-    }
-}
-
--(IBAction)syncLight:(id)sender
-{
-    NSNotification * notice = (NSNotification *)sender;
-    NSDictionary *dic= [notice userInfo];
-    int state = [dic[@"state"] intValue];
-    if (state == PROTOCOL_OFF || state == PROTOCOL_ON) {
-        self.switcher.isOn = (bool)state;
-    }
-    if (state == 0x0a) {
-        //self.detailCell.bright.value=[dic[@"r"] intValue];
-        float brightness_f = [dic[@"r"] intValue];
-        float degree = M_PI*brightness_f/MAX_ROTATE_DEGREE;
-        self.tranformView.transform = CGAffineTransformMakeRotation(degree);
-    }
-    if (state == 0x0b) {
-        self.base.backgroundColor=[UIColor colorWithRed:[dic[@"r"] intValue]/255.0 green:[dic[@"g"] intValue]/255.0  blue:[dic[@"b"] intValue]/255.0  alpha:1];
+    //查询设备状态
+    NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+    if (ON_IPAD) {
+        self.bottom.constant = 125.0;
+        self.top.constant = 0;
     }
 }
 
@@ -244,15 +192,17 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     {
         [device setBrightness:(int)self.tranformView.tag];
     }
-    [_scene setSceneID:[self.sceneid intValue]];
-    [_scene setRoomID:self.roomID];
-    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
     
-    [_scene setReadonly:NO];
+    Scene *scene = [Scene new];
+    [scene setSceneID:[self.sceneid intValue]];
+    [scene setRoomID:self.roomID];
+    [scene setMasterID:[[DeviceInfo defaultManager] masterID]];
     
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
-    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+    [scene setReadonly:NO];
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
+    [scene setDevices:devices];
+    [[SceneManager defaultManager] addScene:scene withName:nil withImage:[UIImage imageNamed:@""]];
 }
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
@@ -262,18 +212,24 @@ static NSString *const menuCellIdentifier = @"rotationCell";
         return;
     }
     //同步设备状态
-    if(proto.cmd == 0x01 && proto.action.state == 0x7D){
-        self.switcher.isOn = proto.action.RValue;
-    }
-    if (tag == 0 && (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON || proto.action.state == 0x0b || proto.action.state == 0x0a)) {
+    if(proto.cmd == 0x01){
         NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
         if ([devID intValue]==[self.deviceid intValue]) {
-            //创建一个消息对象
-            NSNotification * notice = [NSNotification notificationWithName:@"light" object:nil userInfo:@{@"state":@(proto.action.state),@"r":@(proto.action.RValue),@"g":@(proto.action.G),@"b":@(proto.action.B)}];
-            //发送消息
-            [[NSNotificationCenter defaultCenter] postNotification:notice];
+            if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) {
+                [self.switcher setCustomKnobImage:[UIImage imageNamed:proto.action.state?@"lighting_on":@"lighting_off"]
+                          inactiveBackgroundImage:nil
+                            activeBackgroundImage:nil];
+            }else if(proto.action.state == 0x1A){
+                int brightness_f = proto.action.RValue;
+                float degree = M_PI*brightness_f/MAX_ROTATE_DEGREE;
+                self.tranformView.transform = CGAffineTransformMakeRotation(degree);
+            }else if(proto.action.state == 0x1B){
+                self.base.backgroundColor=[UIColor colorWithRed:proto.action.RValue/255.0 green:proto.action.G/255.0  blue:proto.action.B/255.0  alpha:1];
+            }
+            
         }
     }
+
 }
 
 //将UIColor转换为RGB值
@@ -301,14 +257,6 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     }
     //返回保存RGB值的数组
     return RGBStrValueArr;
-}
-
-- (IBAction)selectTypeOfLight:(UISegmentedControl *)sender {
-    
-    //self.detailCell.label.text = self.lNames[sender.selectedSegmentIndex];
-    //self.deviceid = [self.lIDs objectAtIndex:self.segmentLight.selectedSegmentIndex];
-    [self syncUI];
-    //[self.tableView reloadData];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -345,11 +293,6 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     [[SceneManager defaultManager] dimingScene:[self.sceneid intValue] brightness:[self.deviceid intValue]];
     //[self.lightSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     
-}
-
--(void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"light" object:nil];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -426,20 +369,20 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 {
     self.base.layer.cornerRadius = 120;
     self.tranformView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 240, 240)];
-    self.tranformView.center = CGPointMake(self.view.bounds.size.width / 2,
-                                  self.view.bounds.size.height / 2);
+    
     self.tranformView.image = [UIImage imageNamed:@"glory"];
     self.tranformView.hidden = YES;
     
     self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:[UIImage imageNamed:@"lighting_off"] inactiveBackgroundImage:nil activeBackgroundImage:nil frame:CGRectMake(0, 0, 194, 194)];
-    self.switcher.center = CGPointMake(self.view.bounds.size.width / 2,
-                                  self.view.bounds.size.height / 2);
-    //self.switcher.layer.cornerRadius = 194/2;
+    
     self.switcher.knobRelativeHeight = 1.0f;
     self.switcher.delegate = self;
     [self.view addSubview:self.switcher];
 
     [self.view addSubview:self.tranformView];
+    
+    [self.tranformView constraintToCenter:240];
+    [self.switcher constraintToCenter:194];
 }
 
 #pragma mark - ORBSwitchDelegate
@@ -457,6 +400,13 @@ static NSString *const menuCellIdentifier = @"rotationCell";
           inactiveBackgroundImage:nil
             activeBackgroundImage:nil];
 
+}
+
+-(void)visibleUI:(Device *)device
+{
+    self.lightName.text = device.name;
+    NSUInteger h = [SQLManager deviceHtypeIDByDeviceID:device.eID];
+    self.base.hidden = self.btnPen.hidden = h!=3;
 }
 
 - (IBAction)loadCatalog:(id)sender {
@@ -499,8 +449,9 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 
 #pragma mark - UITableViewDataSource, UITableViewDelegate
 - (void)tableView:(YALContextMenuTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.lightName.text = [[self.lights objectAtIndex:indexPath.row] objectForKey:@"name"];
-    self.deviceid = [[self.lights objectAtIndex:indexPath.row] objectForKey:@"id"];
+    Device *device = [self.lights objectAtIndex:indexPath.row];
+    self.lightName.text = device.name;
+    self.deviceid = [NSString stringWithFormat:@"%d", device.eID];
     //查询设备状态
     NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
     [[SocketManager defaultManager].socket writeData:data withTimeout:1 tag:1];
@@ -518,10 +469,10 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 - (UITableViewCell *)tableView:(YALContextMenuTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     ContextMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:menuCellIdentifier forIndexPath:indexPath];
-    
+    Device *device = [self.lights objectAtIndex:indexPath.row];
     if (cell) {
         cell.backgroundColor = [UIColor clearColor];
-        cell.menuTitleLabel.text = [[self.lights objectAtIndex:indexPath.row] objectForKey:@"name"];
+        cell.menuTitleLabel.text = device.name;
         [cell setContraint:self.lightCatalog];
     }
     

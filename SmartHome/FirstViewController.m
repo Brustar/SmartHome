@@ -94,7 +94,8 @@
     _baseTabbarController.tabbarPanel.hidden = NO;
     _baseTabbarController.tabBar.hidden = YES;
     int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
-    self.numberLabel.text = [NSString stringWithFormat:@"%d" ,unread];
+    
+    self.numberLabel.text = [NSString stringWithFormat:@"%d" ,unread<0?0:unread];
     
     if ([self.numberLabel.text isEqualToString:@"0"]) {
         self.ShowHeadImage.hidden = YES;
@@ -367,14 +368,17 @@
     [[RCIM sharedRCIM] connectWithToken:token success:^(NSString *userId) {
         NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
         [RCIM sharedRCIM].receiveMessageDelegate=self;
-        [[RCIMClient sharedRCIMClient] setDeviceToken:[[DeviceInfo defaultManager] pushToken]];
+        if ([[DeviceInfo defaultManager] pushToken]) {
+            [[RCIMClient sharedRCIMClient] setDeviceToken:[[DeviceInfo defaultManager] pushToken]];
+        }
     } error:nil tokenIncorrect:nil];
 }
 
 - (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left
 {
-    NSString *nickname = [[SQLManager queryChat:message.senderUserId] firstObject];
-    NSString *protrait = [[SQLManager queryChat:message.senderUserId] lastObject];
+    NSArray *info = [SQLManager queryChat:message.senderUserId];
+    NSString *nickname = [info firstObject];
+    NSString *protrait = [info lastObject];
     int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
     NSString *tip=@"您有新消息";
     if ([message.objectName isEqualToString:RCTextMessageTypeIdentifier]) {

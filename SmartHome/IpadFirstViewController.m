@@ -53,8 +53,6 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    //_baseTabbarController =  (BaseTabBarController *)self.tabBarController;
-    //_baseTabbarController.tabbarPanel.hidden = YES;
 }
 -(void)doTap:(UIGestureRecognizer *)dap
 {

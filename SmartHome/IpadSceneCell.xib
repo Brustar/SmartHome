@@ -91,10 +91,10 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AO0-oc-0hR" userLabel="View1">
                         <rect key="frame" x="0.0" y="400" width="329" height="50"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7qq-h9-GqG">
-                                <rect key="frame" x="0.0" y="0.0" width="329" height="50"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="frm_word_nol" translatesAutoresizingMaskIntoConstraints="NO" id="7qq-h9-GqG">
+                                <rect key="frame" x="-5" y="0.0" width="339" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="4Hq-Vo-3OH"/>
+                                    <constraint firstAttribute="height" constant="60" id="4Hq-Vo-3OH"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wqd-cb-K1T">
@@ -122,12 +122,12 @@
                             <constraint firstItem="KK2-MP-eYj" firstAttribute="leading" secondItem="Vqg-f4-1E6" secondAttribute="trailing" id="Boe-pr-VBY"/>
                             <constraint firstItem="7qq-h9-GqG" firstAttribute="top" secondItem="AO0-oc-0hR" secondAttribute="top" id="Dh7-qv-ChE"/>
                             <constraint firstAttribute="height" constant="50" id="Szg-Pm-STp"/>
-                            <constraint firstAttribute="trailing" secondItem="7qq-h9-GqG" secondAttribute="trailing" id="ecO-Ar-LBj"/>
+                            <constraint firstAttribute="trailing" secondItem="7qq-h9-GqG" secondAttribute="trailing" constant="-5" id="ecO-Ar-LBj"/>
                             <constraint firstItem="KK2-MP-eYj" firstAttribute="top" secondItem="AO0-oc-0hR" secondAttribute="top" id="fYj-Ac-yNM"/>
                             <constraint firstItem="Wqd-cb-K1T" firstAttribute="leading" secondItem="AO0-oc-0hR" secondAttribute="leading" id="iCe-k3-xR3"/>
                             <constraint firstAttribute="trailing" secondItem="KK2-MP-eYj" secondAttribute="trailing" id="k2G-Vx-if3"/>
                             <constraint firstAttribute="bottom" secondItem="Vqg-f4-1E6" secondAttribute="bottom" id="kCc-Cs-QVX"/>
-                            <constraint firstItem="7qq-h9-GqG" firstAttribute="leading" secondItem="AO0-oc-0hR" secondAttribute="leading" id="lWt-NX-zrS"/>
+                            <constraint firstItem="7qq-h9-GqG" firstAttribute="leading" secondItem="AO0-oc-0hR" secondAttribute="leading" constant="-5" id="lWt-NX-zrS"/>
                             <constraint firstItem="Vqg-f4-1E6" firstAttribute="leading" secondItem="Wqd-cb-K1T" secondAttribute="trailing" id="poE-kt-hQ0"/>
                             <constraint firstItem="KK2-MP-eYj" firstAttribute="width" secondItem="Wqd-cb-K1T" secondAttribute="width" id="tdF-Xv-Qxy"/>
                             <constraint firstItem="KK2-MP-eYj" firstAttribute="height" secondItem="Wqd-cb-K1T" secondAttribute="height" id="uIl-so-ZHh"/>
@@ -161,6 +161,7 @@
                 <outlet property="SceneName" destination="0Ww-8g-LwM" id="Mrg-pt-aVV"/>
                 <outlet property="deleteBtn" destination="ICl-Af-Cjn" id="bTI-Bp-omy"/>
                 <outlet property="imageView" destination="Sgs-jP-X6Q" id="Lwa-P5-T9I"/>
+                <outlet property="partternBtnView" destination="AO0-oc-0hR" id="V8e-AB-9Gh"/>
                 <outlet property="powerBtn" destination="Jgu-HF-cXS" id="WcQ-om-Rbe"/>
                 <outlet property="seleteSendPowBtn" destination="TBG-d7-sxX" id="7Dy-aL-8SD"/>
                 <outlet property="subImageView" destination="FLq-qI-ZrZ" id="J4X-oj-h18"/>
@@ -173,5 +174,6 @@
         <image name="alarm clock1" width="25" height="25"/>
         <image name="close_white" width="25" height="25"/>
         <image name="delete_white" width="25" height="25"/>
+        <image name="frm_word_nol" width="139" height="24"/>
     </resources>
 </document>

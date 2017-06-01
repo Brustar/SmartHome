@@ -30,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *seleteSendPowBtn;
 @property (weak, nonatomic) IBOutlet UILabel *SceneName;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *PowerBtnCenterContraint;//定时按钮隐藏改变的约束
+@property (weak, nonatomic) IBOutlet UIView *partternBtnView;
 
 @property (nonatomic,weak) id<IpadSceneCellDelegate> delegate;
 

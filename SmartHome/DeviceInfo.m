@@ -26,6 +26,60 @@
     return sharedInstance;
 }
 
++(UIViewController *)calcController:(NSUInteger)uid
+{
+    
+    NSString *targetName=@"";
+    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Devices" bundle:nil];
+    
+    switch (uid) {
+        case light:
+            targetName = @"LightController";
+            break;
+        case DVDtype:
+            targetName = @"DVDController";
+            break;
+        case TVtype:
+            targetName = @"TVController";
+            break;
+        case FM:
+            targetName = @"FMController";
+            break;
+        case amplifier:
+            targetName = @"AmplifierController";
+            break;
+        case projector:
+            targetName = @"ProjectorController";
+            break;
+        case screen:
+            targetName = @"ScreenController";
+            break;
+        case bgmusic:
+            targetName = @"BgMusicController";
+            break;
+            
+        case plugin:
+            targetName = @"PluginController";
+            break;
+        case windowOpener:
+            targetName = @"WindowSlidingController";
+            break;
+        case flowering:
+            targetName = @"FloweringController";
+            break;
+        case feeding:
+            targetName = @"FeedingController";
+            break;
+            
+        case Wetting:
+            targetName = @"WettingController";
+            break;
+        default:
+            break;
+    }
+    return [storyboard instantiateViewControllerWithIdentifier:targetName];
+}
+
 -(void)initConfig
 {
     float appVersion = [[UD objectForKey:@"AppVersion"] floatValue];

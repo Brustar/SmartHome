@@ -14,4 +14,8 @@
 
 -(void) dismiss;
 
+- (void) displayViews;
+
+-(void) constraintToCenter:(int)size;
+
 @end
