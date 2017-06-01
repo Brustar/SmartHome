@@ -43,7 +43,9 @@
         [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];//关闭场景
         [SQLManager updateSceneStatus:0 sceneID:self.sceneID];//更新数据库
     }
-    
+    if (_delegate && [_delegate respondsToSelector:@selector(refreshTableView:)]) {
+        [self.delegate refreshTableView:self];
+    }
     
     NSLog(@"power");
     

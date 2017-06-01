@@ -45,6 +45,14 @@
 @property (weak, nonatomic) IBOutlet UIStackView *channelContainer;
 @property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *voiceLeft;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *voiceRight;
+@property (weak, nonatomic) IBOutlet UIImageView *ear;
+@property (weak, nonatomic) IBOutlet UIButton *btnNext;
+@property (weak, nonatomic) IBOutlet UIButton *prevoius;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuTop;
+@property (weak, nonatomic) IBOutlet UIButton *ipadPower;
+
 @end
 
 @implementation FMController
@@ -114,6 +122,13 @@
     
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
+    if (ON_IPAD) {
+        self.menuTop.constant = 0;
+        self.voiceLeft.constant = self.voiceRight.constant = 100;
+        //self.controlLeft.constant = self.controlRight.constant = 200;
+        //self.controlBottom.constant = 160;
+        self.ear.hidden = self.btnNext.hidden = self.prevoius.hidden = self.ipadPower.hidden = NO;
+    }
 }
 
 -(void)initChannelContainer

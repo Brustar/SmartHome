@@ -22,7 +22,7 @@
 @property (nonatomic,strong) NSString * sceneName;
 
 //房间id
-@property (nonatomic) NSInteger roomID;
+@property (nonatomic,assign) int roomID;
 
 //房间名
 @property (nonatomic, strong)  NSString  * roomName;

@@ -25,8 +25,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.SubTypeNameArr = @[@"照明",@"影音",@"空调",@"窗帘",@"智能单品"];
-    self.SubTypeIconeImage = @[@"icon_light_nol",@"icon_vdo_nol",@"icon_airconditioner_nol",@"icon_windowcurtains_nol",@"icon_Intelligence_nol"];
+    self.SubTypeNameArr = @[@"灯光",@"影音",@"环境",@"窗帘",@"智能单品",@"安防"];
+    self.SubTypeIconeImage = @[@"icon_light_nol",@"icon_vdo_nol",@"icon_airconditioner_nol",@"icon_windowcurtains_nol",@"icon_Intelligence_nol",@"ipad-icon_safe_nol"];
       self.roomList = [SQLManager getDevicesSubTypeNamesWithRoomID:self.roomID];
       [self setupNaviBar];
 
@@ -35,8 +35,6 @@
     
     [self setNaviBarTitle:[UD objectForKey:@"homename"]]; //设置标题
     _naviLeftBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"backBtn" imgHighlight:@"backBtn" target:self action:@selector(leftBtnClicked:)];
-    
-//    _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"" imgHighlight:@"" target:self action:@selector(rightBtnClicked:)];
     _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
     [self setNaviBarLeftBtn:_naviLeftBtn];
     [self setNaviBarRightBtn:_naviRightBtn];

@@ -14,6 +14,7 @@
 @property (nonatomic,assign) int roomID;
 //场景id
 @property (nonatomic,assign) int sceneID;
+
 @property (strong, nonatomic) NSArray *devices;
 
 @end
