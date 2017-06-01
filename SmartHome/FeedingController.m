@@ -14,6 +14,7 @@
 #import "IOManager.h"
 #import "SQLManager.h"
 #import "UIViewController+Navigator.h"
+#import "UIView+Popup.h"
 
 @interface FeedingController ()
 
@@ -26,7 +27,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *base;
 @property (weak, nonatomic) IBOutlet UILabel *second;
 @property (nonatomic,assign) NSTimer *scheculer;
-
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuTop;
 @end
 
 @implementation FeedingController
@@ -41,6 +42,9 @@
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 智能投食",roomName]];
     [self initSlider];
+    if (ON_IPAD) {
+        self.menuTop.constant = 0;
+    }
 }
 
 -(void) initSlider
@@ -59,7 +63,7 @@
     slider.value = 0;
     slider.tag = 0;
     slider.radius = sliderSize;
-    
+    [slider constraintToCenter:sliderSize*2];
     sliderSize = 65;
     frame = CGRectMake(self.view.center.x-sliderSize, self.view.center.y-sliderSize, sliderSize*2, sliderSize*2);
     HTCircularSlider *second = [[HTCircularSlider alloc] initWithFrame:frame];
@@ -74,6 +78,7 @@
     second.trackAlpha = 0.6;
     second.tag = 1;
     second.radius = sliderSize;
+    [second constraintToCenter:sliderSize*2];
 }
 
 

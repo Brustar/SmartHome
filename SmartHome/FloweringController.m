@@ -27,7 +27,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *base;
 @property (weak, nonatomic) IBOutlet UILabel *second;
 @property (nonatomic,assign) NSTimer *scheculer;
-
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuTop;
 @end
 
 @implementation FloweringController
@@ -42,6 +42,9 @@
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 智能浇花",roomName]];
     [self initSlider];
+    if (ON_IPAD) {
+        self.menuTop.constant = 0;
+    }
 }
 
 -(void) initSlider

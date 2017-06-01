@@ -1708,6 +1708,7 @@
                         <outlet property="base" destination="Li9-Nq-RVQ" id="saU-K2-hM9"/>
                         <outlet property="line" destination="fxh-Y6-ncW" id="iN5-gt-Fwh"/>
                         <outlet property="menuContainer" destination="bc9-34-sRl" id="3F5-c8-7qD"/>
+                        <outlet property="menuTop" destination="tP0-Xd-vNK" id="9OR-y0-99Y"/>
                         <outlet property="second" destination="Qy9-VE-vif" id="obi-vS-Qf2"/>
                         <outlet property="start" destination="LUh-1v-i9p" id="DBv-rO-S6c"/>
                         <outlet property="timer" destination="F9x-H8-Rwh" id="ctr-Uw-EAe"/>
@@ -1933,6 +1934,7 @@
                         <outlet property="base" destination="OdN-Qi-F3q" id="ta1-hn-V7E"/>
                         <outlet property="line" destination="tc8-8U-Mof" id="ttJ-6X-WeN"/>
                         <outlet property="menuContainer" destination="K8x-Li-c5b" id="Xd1-2U-Au8"/>
+                        <outlet property="menuTop" destination="NJ6-Qp-JvH" id="Yjd-1n-Cv9"/>
                         <outlet property="second" destination="Fpk-hC-tx9" id="pvD-Ju-Ezh"/>
                         <outlet property="start" destination="iVe-kZ-ver" id="BUK-jf-njj"/>
                         <outlet property="timer" destination="LPd-Vl-cWE" id="alW-f0-Px6"/>
@@ -2036,6 +2038,7 @@
                         <outlet property="base" destination="CY8-fp-fpR" id="zsV-Oa-Ewm"/>
                         <outlet property="line" destination="ebF-SI-fkf" id="qz3-m9-7ul"/>
                         <outlet property="menuContainer" destination="E3h-ZJ-c63" id="lPT-AJ-y60"/>
+                        <outlet property="menuTop" destination="qA3-qQ-7NJ" id="AO7-Pb-7El"/>
                         <outlet property="second" destination="LbA-fZ-Rb8" id="BqX-SO-Vbx"/>
                         <outlet property="start" destination="9a2-Jz-bRh" id="btP-fr-aP0"/>
                         <outlet property="timer" destination="EdY-rW-qlI" id="1OG-z2-CRI"/>
@@ -2080,6 +2083,7 @@
                     </view>
                     <connections>
                         <outlet property="menuContainer" destination="Jzo-rD-Fim" id="KjY-Yu-vgl"/>
+                        <outlet property="menuTop" destination="XQH-Zt-FdV" id="clo-Ff-Lbe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mve-C0-zTD" userLabel="First Responder" sceneMemberID="firstResponder"/>
