@@ -74,6 +74,10 @@ static NSString * const CYPhotoId = @"photo";
     BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     baseTabbarController.tabbarPanel.hidden = [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone;
     
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        baseTabbarController.tabbarPanel.hidden = NO;
+    }
+    
     if (_nowMusicController) {
         [_nowMusicController.view removeFromSuperview];
         _nowMusicController = nil;
