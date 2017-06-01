@@ -29,7 +29,6 @@
 
 @property (strong, nonatomic) Scene *scene;
 
-
 -(void)visibleUI:(Device *)device;
 
 @end
