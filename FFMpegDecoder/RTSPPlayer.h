@@ -68,4 +68,6 @@
 
 - (AVPacket*)readPacket;
 
+- (void)free;
+
 @end

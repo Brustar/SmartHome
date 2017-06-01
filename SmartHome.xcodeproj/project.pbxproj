@@ -224,6 +224,7 @@
 		CD7DDA151E826C3B00638DB3 /* backBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7DDA141E826C3B00638DB3 /* backBtn@2x.png */; };
 		CD8CFCCF1ED6844700B49712 /* PlaneGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8CFCCE1ED6844600B49712 /* PlaneGraphViewController.m */; };
 		CD8CFCD11ED6873000B49712 /* PlaneGraph.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD8CFCD01ED6873000B49712 /* PlaneGraph.storyboard */; };
+		CD8CFCD41EE0165E00B49712 /* DemoVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8CFCD31EE0165E00B49712 /* DemoVideoPlayerViewController.m */; };
 		CD93E3AA1E8077F1003CCAA9 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD93E3A91E8077F1003CCAA9 /* LoginViewController.m */; };
 		CD93E3AD1E807AFD003CCAA9 /* login_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD93E3AC1E807AFD003CCAA9 /* login_icon@2x.png */; };
 		CD93E3B11E8081B0003CCAA9 /* login_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD93E3B01E8081B0003CCAA9 /* login_line@2x.png */; };
@@ -861,6 +862,8 @@
 		CD8CFCCD1ED6844600B49712 /* PlaneGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaneGraphViewController.h; sourceTree = "<group>"; };
 		CD8CFCCE1ED6844600B49712 /* PlaneGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaneGraphViewController.m; sourceTree = "<group>"; };
 		CD8CFCD01ED6873000B49712 /* PlaneGraph.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PlaneGraph.storyboard; sourceTree = "<group>"; };
+		CD8CFCD21EE0165E00B49712 /* DemoVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoVideoPlayerViewController.h; sourceTree = "<group>"; };
+		CD8CFCD31EE0165E00B49712 /* DemoVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoVideoPlayerViewController.m; sourceTree = "<group>"; };
 		CD93E3A81E8077F1003CCAA9 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		CD93E3A91E8077F1003CCAA9 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		CD93E3AC1E807AFD003CCAA9 /* login_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon@2x.png"; sourceTree = "<group>"; };
@@ -2275,6 +2278,8 @@
 				CD9F0ACC1EB9A94E007B0CF7 /* HostListViewController.m */,
 				CD9F0ACE1EB9BC9C007B0CF7 /* HostListCell.h */,
 				CD9F0ACF1EB9BC9C007B0CF7 /* HostListCell.m */,
+				CD8CFCD21EE0165E00B49712 /* DemoVideoPlayerViewController.h */,
+				CD8CFCD31EE0165E00B49712 /* DemoVideoPlayerViewController.m */,
 			);
 			name = LoginViewController;
 			sourceTree = "<group>";
@@ -3054,6 +3059,7 @@
 				0FBEFE2A1D24F0C10084244F /* WebManager.m in Sources */,
 				2EEE536B1E3061930026F97D /* IphoneDetailViewController.m in Sources */,
 				2E4298061ED67870003F4A76 /* IpadDeviceTypeCell.m in Sources */,
+				CD8CFCD41EE0165E00B49712 /* DemoVideoPlayerViewController.m in Sources */,
 				0F6ADFE01E7136B500BFF67F /* RCDataManager.m in Sources */,
 				F630C35F1D38B4FF008880BB /* AccessSettingController.m in Sources */,
 				0FABB33C1EAF22FC0089A5A4 /* ContextMenuCell.m in Sources */,

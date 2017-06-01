@@ -320,7 +320,8 @@
     NSString *md5Json = [IOManager md5JsonByScenes:[NSString stringWithFormat:@"%ld",[DeviceInfo defaultManager].masterID]];
     NSDictionary *dic = @{
                           @"token":[UD objectForKey:@"AuthorToken"],
-                          @"md5Json":md5Json
+                          @"md5Json":md5Json,
+                          @"change_host":@(1)//是否是切换家庭 0:否  1:是
                           };
     
     if ([UD objectForKey:@"room_version"]) {
@@ -332,7 +333,8 @@
                 @"tv_ver":[UD objectForKey:@"tv_version"],
                 @"fm_ver":[UD objectForKey:@"fm_version"],
                 //@"chat_ver":[UD objectForKey:@"chat_version"],
-                @"md5Json":md5Json
+                @"md5Json":md5Json,
+                @"change_host":@(1)//是否是切换家庭 0:否  1:是
                 };
     }
     HttpManager *http = [HttpManager defaultManager];
