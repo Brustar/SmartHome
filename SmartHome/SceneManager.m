@@ -404,7 +404,8 @@
                                 @"scencename":newScene.sceneName,
                                 @"roomid":@(newScene.roomID),
                                 @"plistname":fileName,
-                                @"scencefile":scenePath
+                                @"scencefile":scenePath,
+                                @"imgfile":[NSString stringWithFormat:@"scene_%d.png",newScene.sceneID]
                                 };
     
     NSData *fileData = [NSData dataWithContentsOfFile:scenePath];

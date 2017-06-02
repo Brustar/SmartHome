@@ -794,7 +794,7 @@
                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QGa-1P-CGE" userLabel="Button-right">
                                 <rect key="frame" x="682.5" y="64" width="341.5" height="39"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title="调色灯带" backgroundImage="light_bar"/>
+                                <state key="normal" title="调色灯" backgroundImage="light_bar"/>
                                 <connections>
                                     <action selector="loadCatalog:" destination="N6p-qn-auk" eventType="touchUpInside" id="xXj-uT-KVA"/>
                                 </connections>
