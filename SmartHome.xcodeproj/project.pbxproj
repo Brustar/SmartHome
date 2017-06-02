@@ -134,7 +134,6 @@
 		2E01840E1ECDE77C00E3705F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E0184061ECDE77C00E3705F /* Info.plist */; };
 		2E0184101ECF40A200E3705F /* demo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2E01840F1ECF40A200E3705F /* demo.mp4 */; };
 		2E0297271E4C4C7600BBC520 /* MySubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0297261E4C4C7600BBC520 /* MySubView.m */; };
-		2E03E2FA1ECA904F00487319 /* SeneLightModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E03E2F91ECA904F00487319 /* SeneLightModel.m */; };
 		2E03E3001ECAD57E00487319 /* ECMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E03E2FF1ECAD57E00487319 /* ECMessage.m */; };
 		2E04198B1EB89F42004D70B9 /* FSLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0419881EB89F42004D70B9 /* FSLineChart.m */; };
 		2E04198C1EB89F42004D70B9 /* UIColor+FSPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E04198A1EB89F42004D70B9 /* UIColor+FSPalette.m */; };
@@ -176,7 +175,6 @@
 		2EA2A84A1E1E275900092D41 /* MySubEnergyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A8491E1E275900092D41 /* MySubEnergyCell.m */; };
 		2EA2A8541E1E2BEA00092D41 /* ENenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A8531E1E2BEA00092D41 /* ENenViewController.m */; };
 		2EA2A8571E1E2C7800092D41 /* EnenCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A8561E1E2C7800092D41 /* EnenCell.m */; };
-		2EA897AC1E31B25E002CA904 /* YZNavigationMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA897AB1E31B25E002CA904 /* YZNavigationMenuView.m */; };
 		2EA99E901E1C9A0100659065 /* MySubEnergyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA99E8F1E1C9A0100659065 /* MySubEnergyVC.m */; };
 		2EB2A4721E237F05003F01DB /* DeviceListTimeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB2A4711E237F05003F01DB /* DeviceListTimeVC.m */; };
 		2EB516F41E9CE3A40064B18E /* ScreenCurtainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EB516F21E9CE3A40064B18E /* ScreenCurtainCell.m */; };
@@ -321,7 +319,6 @@
 		F64407D61DAE3BAD0032BEDF /* IphoneFavorController.m in Sources */ = {isa = PBXBuildFile; fileRef = F64407D51DAE3BAD0032BEDF /* IphoneFavorController.m */; };
 		F645BD471D76E3D8005BFB7A /* FavorController.m in Sources */ = {isa = PBXBuildFile; fileRef = F645BD461D76E3D8005BFB7A /* FavorController.m */; };
 		F646C0B91D91173000DF1728 /* IphoneRoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = F646C0B81D91173000DF1728 /* IphoneRoomView.m */; };
-		F64EF7FB1D8FB738003C1C48 /* IphoneMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = F64EF7FA1D8FB738003C1C48 /* IphoneMainController.m */; };
 		F64EF7FE1D8FBCC1003C1C48 /* IphoneSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = F64EF7FD1D8FBCC1003C1C48 /* IphoneSceneController.m */; };
 		F64EF8011D8FDCE7003C1C48 /* IphoneDeviceListController.m in Sources */ = {isa = PBXBuildFile; fileRef = F64EF8001D8FDCE7003C1C48 /* IphoneDeviceListController.m */; };
 		F651640D1D3766C900A6F5FA /* MyEnergyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F651640C1D3766C900A6F5FA /* MyEnergyViewController.m */; };
@@ -714,8 +711,6 @@
 		2E01840F1ECF40A200E3705F /* demo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = demo.mp4; sourceTree = "<group>"; };
 		2E0297251E4C4C7600BBC520 /* MySubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySubView.h; sourceTree = "<group>"; };
 		2E0297261E4C4C7600BBC520 /* MySubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySubView.m; sourceTree = "<group>"; };
-		2E03E2F81ECA904F00487319 /* SeneLightModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeneLightModel.h; sourceTree = "<group>"; };
-		2E03E2F91ECA904F00487319 /* SeneLightModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeneLightModel.m; sourceTree = "<group>"; };
 		2E03E2FE1ECAD57E00487319 /* ECMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECMessage.h; sourceTree = "<group>"; };
 		2E03E2FF1ECAD57E00487319 /* ECMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECMessage.m; sourceTree = "<group>"; };
 		2E0419871EB89F42004D70B9 /* FSLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSLineChart.h; sourceTree = "<group>"; };
@@ -787,8 +782,6 @@
 		2EA2A8531E1E2BEA00092D41 /* ENenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENenViewController.m; sourceTree = "<group>"; };
 		2EA2A8551E1E2C7800092D41 /* EnenCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnenCell.h; sourceTree = "<group>"; };
 		2EA2A8561E1E2C7800092D41 /* EnenCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnenCell.m; sourceTree = "<group>"; };
-		2EA897AA1E31B25E002CA904 /* YZNavigationMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZNavigationMenuView.h; sourceTree = "<group>"; };
-		2EA897AB1E31B25E002CA904 /* YZNavigationMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZNavigationMenuView.m; sourceTree = "<group>"; };
 		2EA99E8E1E1C9A0100659065 /* MySubEnergyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySubEnergyVC.h; sourceTree = "<group>"; };
 		2EA99E8F1E1C9A0100659065 /* MySubEnergyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySubEnergyVC.m; sourceTree = "<group>"; };
 		2EB2A4701E237F05003F01DB /* DeviceListTimeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceListTimeVC.h; sourceTree = "<group>"; };
@@ -1032,8 +1025,6 @@
 		F645BD461D76E3D8005BFB7A /* FavorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavorController.m; sourceTree = "<group>"; };
 		F646C0B71D91173000DF1728 /* IphoneRoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneRoomView.h; sourceTree = "<group>"; };
 		F646C0B81D91173000DF1728 /* IphoneRoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneRoomView.m; sourceTree = "<group>"; };
-		F64EF7F91D8FB738003C1C48 /* IphoneMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneMainController.h; sourceTree = "<group>"; };
-		F64EF7FA1D8FB738003C1C48 /* IphoneMainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneMainController.m; sourceTree = "<group>"; };
 		F64EF7FC1D8FBCC1003C1C48 /* IphoneSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneSceneController.h; sourceTree = "<group>"; };
 		F64EF7FD1D8FBCC1003C1C48 /* IphoneSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneSceneController.m; sourceTree = "<group>"; };
 		F64EF7FF1D8FDCE7003C1C48 /* IphoneDeviceListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneDeviceListController.h; sourceTree = "<group>"; };
@@ -2418,13 +2409,7 @@
 				0F0A40161ED2EBA6002003C4 /* FixTimeListCell.m */,
 				0F0A40121ED2EAD8002003C4 /* DeviceTimerCell.h */,
 				0F0A40131ED2EAD8002003C4 /* DeviceTimerCell.m */,
-				2E03E2F81ECA904F00487319 /* SeneLightModel.h */,
-				2E03E2F91ECA904F00487319 /* SeneLightModel.m */,
 				2EBABC6F1E835E950093EF3A /* TableViewCell */,
-				2EA897AA1E31B25E002CA904 /* YZNavigationMenuView.h */,
-				2EA897AB1E31B25E002CA904 /* YZNavigationMenuView.m */,
-				F64EF7F91D8FB738003C1C48 /* IphoneMainController.h */,
-				F64EF7FA1D8FB738003C1C48 /* IphoneMainController.m */,
 				F64EF7FC1D8FBCC1003C1C48 /* IphoneSceneController.h */,
 				F64EF7FD1D8FBCC1003C1C48 /* IphoneSceneController.m */,
 				F64EF7FF1D8FDCE7003C1C48 /* IphoneDeviceListController.h */,
@@ -3065,7 +3050,6 @@
 				CD4F12471EB4400A00E0B301 /* DeliveryAddressCell.m in Sources */,
 				2EDC0E901DEC072700F95BE0 /* IPhoneRoom.m in Sources */,
 				0F49CB821E7A21FF00D46ECC /* ORBSwitch.m in Sources */,
-				F64EF7FB1D8FB738003C1C48 /* IphoneMainController.m in Sources */,
 				CDFB9DF81E641F8E00BFECCE /* DeviceTimerInfo.m in Sources */,
 				CDEE5E951EC1AC6000A5779D /* SelectRoomViewController.m in Sources */,
 				0FCFB38F1CF293B300B37DD3 /* Radio.m in Sources */,
@@ -3175,7 +3159,6 @@
 				0F1F3BCA1D2B85EA00B2641C /* MBProgressHUD+NJ.m in Sources */,
 				F625A61B1D4C99EC00B696E5 /* RoomListController.m in Sources */,
 				CDF157411E7AADC700499AC5 /* LeftSlideViewController.m in Sources */,
-				2EA897AC1E31B25E002CA904 /* YZNavigationMenuView.m in Sources */,
 				0FA4CBFA1EC045710072CE15 /* UIViewController+Navigator.m in Sources */,
 				0FC119771D6FE5E0001DA19A /* Screen.m in Sources */,
 				F62E05631DAB39F80096BF00 /* IphoneProfileController.m in Sources */,
@@ -3258,7 +3241,6 @@
 				2E12CC101E7F5E3000C7D006 /* CYLineLayout.m in Sources */,
 				2E08EFC41EBC668A007F9FE1 /* PhotoGraphViewConteoller.m in Sources */,
 				F65B7D271D34E9E00059CFA4 /* MySettingViewController.m in Sources */,
-				2E03E2FA1ECA904F00487319 /* SeneLightModel.m in Sources */,
 				0F9EA72D1DDB026C00223ED8 /* NSString+RegMatch.m in Sources */,
 				CD7863B71E8CF18200F42AC0 /* VipServiceListViewController.m in Sources */,
 				CDB8B85E1EB1EBD2003AA894 /* UserInfo.m in Sources */,

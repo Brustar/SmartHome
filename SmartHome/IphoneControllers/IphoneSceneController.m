@@ -23,7 +23,6 @@
 #import "SocketManager.h"
 #import "TouchSubViewController.h"
 #import <AFNetworking.h>
-#import "YZNavigationMenuView.h"
 #import "VoiceOrderController.h"
 #import "SearchViewController.h"
 #import "BgMusicController.h"

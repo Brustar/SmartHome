@@ -25,5 +25,8 @@
 @property(nonatomic,assign) int roomID;
 @property (nonatomic,assign) BOOL isFavor;
 @property (nonatomic,strong) NSString * sceneid;
+@property (nonatomic, assign) BOOL isGloom;
+@property (nonatomic, assign) BOOL isRomantic;
+@property (nonatomic, assign) BOOL isSprightly;
 
 @end

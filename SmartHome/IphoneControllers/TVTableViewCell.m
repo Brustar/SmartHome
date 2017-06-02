@@ -42,12 +42,21 @@
         self.TVSwitchBtn.selected = !self.TVSwitchBtn.selected;
         if (self.TVSwitchBtn.selected) {
             [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
+            NSData *data=nil;
+            DeviceInfo *device=[DeviceInfo defaultManager];
+            data=[device toogle:self.TVSwitchBtn.selected deviceID:self.deviceid];
+            SocketManager *sock=[SocketManager defaultManager];
+            [sock.socket writeData:data withTimeout:1 tag:1];
         }else{
             [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+            
+            NSData *data=nil;
+            DeviceInfo *device=[DeviceInfo defaultManager];
+            data=[device toogle:self.TVSwitchBtn.selected deviceID:self.deviceid];
+            SocketManager *sock=[SocketManager defaultManager];
+            [sock.socket writeData:data withTimeout:1 tag:1];
         }
-        NSData *data=nil;
-        DeviceInfo *device=[DeviceInfo defaultManager];
-        data=[device toogle:self.TVSwitchBtn.selected deviceID:self.deviceid];
+        
         
         if (_delegate && [_delegate respondsToSelector:@selector(onTVSwitchBtnClicked:)]) {
             [_delegate onTVSwitchBtnClicked:sender];
@@ -88,14 +97,17 @@
 - (IBAction)channelReduce:(id)sender {
     NSData *data=nil;
     DeviceInfo *device=[DeviceInfo defaultManager];
-    
     data=[device previous:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
 }
 //频道加
 - (IBAction)channelAdd:(id)sender {
     NSData *data=nil;
     DeviceInfo *device=[DeviceInfo defaultManager];
     data = [device next:self.deviceid];
+    SocketManager *sock=[SocketManager defaultManager];
+    [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

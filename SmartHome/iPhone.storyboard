@@ -39,14 +39,14 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line2" translatesAutoresizingMaskIntoConstraints="NO" id="Rlf-BW-106" customClass="line2">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line1" translatesAutoresizingMaskIntoConstraints="NO" id="Rlf-BW-106" customClass="line2">
                                         <rect key="frame" x="0.0" y="49" width="375" height="1"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="HGk-a2-6Rk"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line2" translatesAutoresizingMaskIntoConstraints="NO" id="J6k-hD-bxb">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line1" translatesAutoresizingMaskIntoConstraints="NO" id="J6k-hD-bxb">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -92,7 +92,7 @@
                             <barButtonItem image="voice" id="GTd-g7-v0E">
                                 <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </barButtonItem>
-                            <barButtonItem image="search" id="DRb-Wz-X3L">
+                            <barButtonItem title="Item" id="DRb-Wz-X3L">
                                 <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="PLA-kY-hjQ" kind="push" id="veB-nj-5Ft"/>
@@ -1014,7 +1014,7 @@
         <image name="close2" width="25" height="25"/>
         <image name="delete" width="32" height="32"/>
         <image name="dvd_btn_switch_on" width="36" height="23"/>
-        <image name="line2" width="1" height="1"/>
+        <image name="line1" width="267" height="2"/>
         <image name="line_horizontal_white" width="373" height="48"/>
         <image name="lv_icon_light_bright" width="15" height="15"/>
         <image name="lv_icon_light_normal" width="13" height="14"/>
@@ -1024,7 +1024,6 @@
         <image name="save_icon_open_normal" width="9" height="16"/>
         <image name="save_icon_photo_normal" width="27" height="25"/>
         <image name="save_line_input_normal" width="1" height="1"/>
-        <image name="search" width="32" height="32"/>
         <image name="switch" width="32" height="32"/>
         <image name="voice" width="26" height="26"/>
     </resources>

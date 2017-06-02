@@ -137,9 +137,9 @@
         Scene *scene = [[Scene alloc]init];
         [scene setValuesForKeysWithDictionary:plistDic];
         
-        
         [[SceneManager defaultManager] editScene:scene];
     }else{
+        
         IphoneSaveNewSceneController * iphoneSaveNewScene = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneSaveNewSceneController"];
         // [self presentViewController:iphoneSaveNewScene animated:YES completion:nil];
         iphoneSaveNewScene.roomId = self.roomID;

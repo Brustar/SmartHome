@@ -275,7 +275,7 @@
                                                     <action selector="UnreadButton:" destination="pvp-cq-nWV" eventType="touchUpInside" id="IzM-1u-GAM"/>
                                                 </connections>
                                             </button>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="QiZ-fM-4ar">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circular5" translatesAutoresizingMaskIntoConstraints="NO" id="QiZ-fM-4ar">
                                                 <rect key="frame" x="20" y="10" width="40" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -301,14 +301,14 @@
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line2" translatesAutoresizingMaskIntoConstraints="NO" id="ITf-gz-D5H">
                                                 <rect key="frame" x="0.0" y="60" width="375" height="1"/>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="Q6d-2b-eNf"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line2" translatesAutoresizingMaskIntoConstraints="NO" id="ZtI-bk-cro">
-                                                <rect key="frame" x="0.0" y="-1" width="375" height="1"/>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line1" translatesAutoresizingMaskIntoConstraints="NO" id="ZtI-bk-cro">
+                                                <rect key="frame" x="0.0" y="-2" width="375" height="2"/>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.81176470590000005" green="0.81568627449999997" blue="0.81960784310000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -575,9 +575,10 @@
         <image name="circular1" width="20" height="20"/>
         <image name="circular3" width="46" height="46"/>
         <image name="circular4" width="46" height="46"/>
+        <image name="circular5" width="33" height="33"/>
         <image name="close_white" width="25" height="25"/>
-        <image name="line2" width="1" height="1"/>
-        <image name="logo" width="180" height="180"/>
+        <image name="line1" width="267" height="2"/>
+        <image name="line2" width="16" height="16"/>
         <image name="music_white" width="22" height="19"/>
         <image name="reduce" width="25" height="25"/>
     </resources>

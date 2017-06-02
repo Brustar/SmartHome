@@ -79,8 +79,6 @@
         {
             [formData appendPartWithFileData:imgData name:@"ImgFile" fileName:imgFileName mimeType:@"multipart/form-data"];
         }
-            
-        
         
     } progress:nil success:^(NSURLSessionDataTask *operation, id responseObject) {
         id result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];

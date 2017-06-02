@@ -40,10 +40,15 @@
         if (self.DVDSwitchBtn.selected) {
             [self.DVDSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
              data=[[DeviceInfo defaultManager] pause:self.deviceid];
+            SocketManager *sock=[SocketManager defaultManager];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+            
         }else{
             
             [self.DVDSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
                data=[[DeviceInfo defaultManager] play:self.deviceid];
+            SocketManager *sock=[SocketManager defaultManager];
+            [sock.socket writeData:data withTimeout:1 tag:1];
         }
         
         if (_delegate && [_delegate respondsToSelector:@selector(onDVDSwitchBtnClicked:)]) {
