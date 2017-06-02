@@ -202,7 +202,7 @@
 {
     NSLog(@"onUdpSocket:%@",data);
     [self handleUDP:data];
-    return YES;
+    return NO;
 }
 
 -(void)onUdpSocket:(AsyncUdpSocket *)sock didNotSendDataWithTag:(long)tag dueToError:(NSError *)error
