@@ -467,14 +467,15 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 }
 
 - (UITableViewCell *)tableView:(YALContextMenuTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    //ContextMenuCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"MenuCell" owner:self options:nil] lastObject];
     
     ContextMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:menuCellIdentifier forIndexPath:indexPath];
     Device *device = [self.lights objectAtIndex:indexPath.row];
-    if (cell) {
+    //if (cell) {
         cell.backgroundColor = [UIColor clearColor];
         cell.menuTitleLabel.text = device.name;
         [cell setContraint:self.lightCatalog];
-    }
+    //}
     
     return cell;
 }

@@ -250,7 +250,9 @@
     
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
-    
+    //查询设备状态
+    NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
+    [sock.socket writeData:data withTimeout:1 tag:1];
     if (ON_IPAD) {
         self.menuTop.constant = self.cLeft.constant = 0;
         self.vLeft.constant = self.vRight.constant = 100;
@@ -326,9 +328,16 @@
         return;
     }
     
-    if (tag==0) {
-        if (proto.action.state == PROTOCOL_VOLUME_UP || proto.action.state == PROTOCOL_VOLUME_DOWN || proto.action.state == PROTOCOL_MUTE) {
-            self.volume.value=proto.action.RValue/100.0;
+    if (proto.cmd==0x01) {
+        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+        if ([devID intValue]==[self.deviceid intValue]) {
+            if (proto.action.state == PROTOCOL_VOLUME) {
+                self.volume.value=proto.action.RValue/100.0;
+            }
+            if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) {
+                UIButton *btn = [self.view viewWithTag:8];
+                btn.selected = proto.action.state;
+            }
         }
     }
 }

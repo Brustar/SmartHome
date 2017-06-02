@@ -404,7 +404,8 @@
                                 @"scencename":newScene.sceneName,
                                 @"roomid":@(newScene.roomID),
                                 @"plistname":fileName,
-                                @"scencefile":scenePath
+                                @"scencefile":scenePath,
+                                @"imgfile":[NSString stringWithFormat:@"scene_%d.png",newScene.sceneID]
                                 };
     
     NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
@@ -614,8 +615,8 @@
 
 - (void)poweroffAllDevice:(int)sceneid
 {
-    NSData *data=nil;
-    SocketManager *sock=[SocketManager defaultManager];
+    //NSData *data=nil;
+    //SocketManager *sock=[SocketManager defaultManager];
     
     Scene *scene=[self readSceneByID:sceneid];
     for (id device in scene.devices)

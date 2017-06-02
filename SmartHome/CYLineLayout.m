@@ -42,7 +42,7 @@
     // 水平滚动
     self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     // 设置内边距
-    CGFloat inset = (self.collectionView.frame.size.width - self.itemSize.width) * 0.5;
+    //CGFloat inset = (self.collectionView.frame.size.width - self.itemSize.width) * 0.5;
     self.sectionInset = UIEdgeInsetsMake(10, 40, 10, 40);
     //  每个item在水平方向的最小间距
     self.minimumLineSpacing = -75;

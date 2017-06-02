@@ -220,10 +220,10 @@
     for (NSString *key in dic) {
         [resultString appendFormat:@"%@",key];
     }
-    NSString *result =[NSString stringWithFormat:@"%@%@", self.resultLabel.text,resultString];
+    //NSString *result =[NSString stringWithFormat:@"%@%@", self.resultLabel.text,resultString];
     
     NSString * resultFromJson =  [self stringFromJson:resultString];
-    result= [NSString stringWithFormat:@"%@%@", self.resultLabel.text,resultFromJson];
+    NSString *result= [NSString stringWithFormat:@"%@%@", self.resultLabel.text,resultFromJson];
     self.resultLabel.text = [result stringByMatching:@"^([\\u4e00-\\u9fa5\\w]+).*" capture:1L];
     
     if (isLast){
