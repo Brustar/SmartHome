@@ -43,6 +43,10 @@
     return [IOManager newPath:@"sceneNonShortcuts"];
 }
 
++ (NSString *)familyRoomStatusPath {
+    return [IOManager newPath:@"familyRoomStatus"];
+}
+
 + (NSString *) favoritePath
 {
     return [IOManager newPath:@"favorite"];
