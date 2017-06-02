@@ -890,6 +890,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="tableLeft" destination="5fe-nL-Q5g" id="QQo-6w-lY1"/>
+                        <outlet property="tableRight" destination="rwe-8I-OlM" id="NPU-Ug-2Hx"/>
                         <outlet property="tableView" destination="M9k-H6-21t" id="mnm-FH-hWF"/>
                     </connections>
                 </viewController>
