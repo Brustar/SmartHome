@@ -44,6 +44,7 @@
         }else{
             [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
         }
+        
         NSData *data=nil;
         DeviceInfo *device=[DeviceInfo defaultManager];
         data=[device toogle:self.TVSwitchBtn.selected deviceID:self.deviceid];

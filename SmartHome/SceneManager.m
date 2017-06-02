@@ -614,8 +614,8 @@
 
 - (void)poweroffAllDevice:(int)sceneid
 {
-    NSData *data=nil;
-    SocketManager *sock=[SocketManager defaultManager];
+    //NSData *data=nil;
+    //SocketManager *sock=[SocketManager defaultManager];
     
     Scene *scene=[self readSceneByID:sceneid];
     for (id device in scene.devices)

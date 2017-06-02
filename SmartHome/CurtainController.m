@@ -97,11 +97,11 @@
     
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
-    
-    //查询设备状态
-    NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
-    [sock.socket writeData:data withTimeout:1 tag:1];
-    
+    for (id did in self.curtainIDArr) {
+        //查询设备状态
+        NSData *data = [[DeviceInfo defaultManager] query:did];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }
     [self.tableView reloadData];
     
     if (ON_IPAD) {
@@ -190,24 +190,24 @@
 -(void)recv:(NSData *)data withTag:(long)tag
 {
     Proto proto=protocolFromData(data);
-    NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
-    if (![self.curtainIDArr containsObject:devID]) {
+    int devID=[[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)] intValue];
+    if (![self.curtainIDArr containsObject:@(devID)]) {
         return;
     }
     
-    CurtainTableViewCell *cell = [self.tableView viewWithTag:proto.deviceID];
+    CurtainTableViewCell *cell = [self.tableView viewWithTag:devID];
     
     if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
         return;
     }
     //同步设备状态
-    if(proto.cmd == 0x01){
-        cell.slider.value = proto.action.state;
+    if(proto.cmd == 0x01 && proto.action.state == 0x2A){
+        cell.slider.value = proto.action.RValue/100.0;
     }
     
     if (tag==0 && (proto.action.state == 0x2A || proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON)) {
         
-        if ([devID intValue]==[self.deviceid intValue]) {
+        if (devID==[self.deviceid intValue]) {
             cell.slider.value=proto.action.RValue/100.0;
             if (proto.action.state == PROTOCOL_ON) {
                 cell.slider.value=1;

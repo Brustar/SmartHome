@@ -250,7 +250,9 @@
     
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
-    
+    //查询设备状态
+    NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
+    [sock.socket writeData:data withTimeout:1 tag:1];
     if (ON_IPAD) {
         self.menuTop.constant = self.cLeft.constant = 0;
         self.vLeft.constant = self.vRight.constant = 100;
