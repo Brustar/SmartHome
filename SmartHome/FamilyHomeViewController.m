@@ -67,11 +67,12 @@
     self.airIcon.backgroundColor = RGB(0, 172, 151, 1);
     
     _roomArray = [NSMutableArray array];
-    //开启网络状况监听器
-    [self updateInterfaceWithReachability];
     
+    [self getFamilyRoomStatusFromPlist];//获取缓存数据
     [self fetchRoomDeviceStatus];//获取房间设备状态，温度，湿度, PM2.5
     
+    //开启网络状况监听器
+    [self updateInterfaceWithReachability];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
     
@@ -230,6 +231,39 @@
     return maxSpace;
 }
 
+- (void)getFamilyRoomStatusFromPlist {
+    NSString *familyRoomStatusPath = [[IOManager familyRoomStatusPath] stringByAppendingPathComponent:@"FamilyRoomStatusList.plist"];
+    NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfFile:familyRoomStatusPath];
+    if (dictionary) {
+        NSArray *roomStatusList = dictionary[@"room_status_list"];
+        if (roomStatusList && [roomStatusList isKindOfClass:[NSArray class]]) {
+            for (NSDictionary *roomStatus in roomStatusList) {
+                if ([roomStatus isKindOfClass:[NSDictionary class]]) {
+                    RoomStatus *roomStatusInfo = [[RoomStatus alloc] init];
+                    roomStatusInfo.roomId = [roomStatus[@"roomid"] integerValue];
+                    roomStatusInfo.roomName = roomStatus[@"roomname"];
+                    roomStatusInfo.temperature = roomStatus[@"temperature"];
+                    roomStatusInfo.humidity = roomStatus[@"humidity"];
+                    roomStatusInfo.pm25 = roomStatus[@"pm"];
+                    roomStatusInfo.lightStatus = [roomStatus[@"light"] integerValue];
+                    roomStatusInfo.curtainStatus = [roomStatus[@"curtain"] integerValue];
+                    roomStatusInfo.mediaStatus = [roomStatus[@"media"] integerValue];
+                    roomStatusInfo.airconditionerStatus = [roomStatus[@"aircondition"] integerValue];
+                    
+                    if ([[UD objectForKey:@"HostID"] intValue] == 258) { //九号大院(要过滤掉没有温湿度的房间)
+                        if (roomStatusInfo.roomId == 188  || roomStatusInfo.roomId == 190  ||roomStatusInfo.roomId == 191  ||roomStatusInfo.roomId == 193  ||roomStatusInfo.roomId == 196) {
+                            [_roomArray addObject:roomStatusInfo];
+                        }
+                    }else {
+                        [_roomArray addObject:roomStatusInfo];
+                    }
+                }
+            }
+        }
+        [self.roomCollectionView reloadData];
+    }
+}
+
 #pragma mark - Http callback
 - (void)httpHandler:(id)responseObject tag:(int)tag
 {
@@ -261,6 +295,10 @@
                         
                     }
                 }
+                
+                //保存至plist(缓存)
+                NSString *familyRoomStatusPath = [[IOManager familyRoomStatusPath] stringByAppendingPathComponent:@"FamilyRoomStatusList.plist"];
+                [responseObject writeToFile:familyRoomStatusPath atomically:YES];
             }
             
             [self.roomCollectionView reloadData];

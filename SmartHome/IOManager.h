@@ -40,5 +40,6 @@
 + (NSString *) md5JsonByScenes:(NSString *)master;
 + (NSString *)sceneShortcutsPath;
 + (NSString *)sceneNonShortcutsPath;
++ (NSString *)familyRoomStatusPath;
 
 @end

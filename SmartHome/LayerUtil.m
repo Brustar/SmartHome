@@ -16,6 +16,13 @@
     CGFloat startAngle = 5/6*M_PI;
     NSInteger size = colors.count;
     
+    NSArray *subLayersArray = [NSArray arrayWithArray:[view.layer sublayers]];
+    for(CAShapeLayer *subLayer in subLayersArray) {
+        if ([subLayer isKindOfClass:[CAShapeLayer class]] && subLayer.lineWidth == 2) {
+            [subLayer removeFromSuperlayer];
+        }
+    }
+    
     for (NSInteger i=0; i < size; i++) {
         CAShapeLayer *ringLine =  [CAShapeLayer layer];
         CGMutablePathRef solidPath =  CGPathCreateMutable();
@@ -53,11 +60,17 @@
         pm25_parm = 370;
     }
     
+    NSArray *subLayersArray = [NSArray arrayWithArray:[view.layer sublayers]];
+    for(CAShapeLayer *subLayer in subLayersArray) {
+        if ([subLayer isKindOfClass:[CAShapeLayer class]] && subLayer.lineWidth == 14) {
+            [subLayer removeFromSuperlayer];
+        }
+    }
+    
     for (NSInteger i=0; i < size; i++) {
         CAShapeLayer *ringLine =  [CAShapeLayer layer];
         CGMutablePathRef solidPath =  CGPathCreateMutable();
-        ringLine.lineWidth = 14.0f ;
-        
+        ringLine.lineWidth = 14.0f;
         ringLine.fillColor = [UIColor clearColor].CGColor;
         
         ringLine.strokeColor = ((UIColor *)colors[i]).CGColor;
