@@ -23,6 +23,10 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewRightConstraint;
 @property (nonatomic,strong) NSMutableArray *curtainIDArr;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableRight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableLeft;
+
 @end
 
 @implementation CurtainController
@@ -99,6 +103,10 @@
     [sock.socket writeData:data withTimeout:1 tag:1];
     
     [self.tableView reloadData];
+    
+    if (ON_IPAD) {
+        self.tableLeft.constant = self.tableRight.constant = 100;
+    }
 }
 
 - (void)setupSegmentCurtain

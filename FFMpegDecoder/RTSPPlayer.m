@@ -178,6 +178,10 @@ initError:
     avcodec_flush_buffers(pCodecCtx);
 }
 
+- (void)free {
+    //[self dealloc1];
+}
+
 - (void)dealloc
 {
     // Free scaler

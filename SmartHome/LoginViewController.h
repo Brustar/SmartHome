@@ -29,6 +29,7 @@
 #import "DeviceInfo.h"
 #import "PackManager.h"
 #import "CryptoManager.h"
+#import "DemoVideoPlayerViewController.h" 
 
 @interface LoginViewController : UIViewController<QRCodeReaderDelegate, UITextFieldDelegate, HttpDelegate,UIActionSheetDelegate, AVPlayerViewControllerDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;

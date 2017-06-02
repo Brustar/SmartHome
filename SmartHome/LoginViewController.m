@@ -195,15 +195,9 @@
 
 - (IBAction)tryBtnClicked:(id)sender {
     
-    AVPlayer *player = [[AVPlayer alloc] initWithURL:[[NSBundle mainBundle] URLForResource:@"demo.mp4" withExtension:nil]];
+    DemoVideoPlayerViewController *demoVC = [[DemoVideoPlayerViewController alloc] init];
+    [self.navigationController pushViewController:demoVC animated:YES];
     
-    _avPlayerVC = [[AVPlayerViewController alloc] init];
-    _avPlayerVC.player = player;
-    _avPlayerVC.view.frame = self.view.bounds;
-    [self.navigationController pushViewController:_avPlayerVC animated:YES];
-    
-    player.externalPlaybackVideoGravity = AVLayerVideoGravityResizeAspectFill;//这个属性和图片填充试图的属性类似，也可以设置为自适应试图大小。
-     [player play];
 }
 
 - (void)gotoIPhoneMainViewController {
@@ -430,7 +424,8 @@ NSArray *array = [NSArray arrayWithObjects:
     NSString *md5Json = [IOManager md5JsonByScenes:[NSString stringWithFormat:@"%ld",[DeviceInfo defaultManager].masterID]];
     NSDictionary *dic = @{
                           @"token":[UD objectForKey:@"AuthorToken"],
-                          @"md5Json":md5Json
+                          @"md5Json":md5Json,
+                          @"change_host":@(0)//是否是切换家庭 0:否  1:是
                           };
     if ([UD objectForKey:@"room_version"]) {
         dic = @{
@@ -441,7 +436,8 @@ NSArray *array = [NSArray arrayWithObjects:
                 @"tv_ver":[UD objectForKey:@"tv_version"],
                 @"fm_ver":[UD objectForKey:@"fm_version"],
                 //@"chat_ver":[UD objectForKey:@"chat_version"],
-                @"md5Json":md5Json
+                @"md5Json":md5Json,
+                @"change_host":@(0)//是否是切换家庭 0:否  1:是
                 };
         }
         HttpManager *http = [HttpManager defaultManager];

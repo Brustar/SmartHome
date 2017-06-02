@@ -29,11 +29,20 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    _video = [[RTSPPlayer alloc] initWithVideo:self.cameraURL usesTcp:YES];
-    _video.outputWidth =  Video_Output_Width;
-    _video.outputHeight = Video_Output_Height;
+    if (_video == nil) {
+        _video  = [[RTSPPlayer alloc] initWithVideo:self.cameraURL usesTcp:YES];
+        _video.outputWidth =  Video_Output_Width;
+        _video.outputHeight = Video_Output_Height;
+    }
     
     [self setupTimer];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self stopTimer];
+    //[_video free];
+    //self.delegate = nil;
 }
 
 - (void)setupTimer {
@@ -47,6 +56,13 @@
                                                      selector:@selector(displayNextFrame:)
                                                      userInfo:nil
                                                       repeats:YES];
+}
+
+- (void)stopTimer {
+    if (_nextFrameTimer) {
+        [_nextFrameTimer invalidate];
+        _nextFrameTimer = nil;
+    }
 }
 
 -(void)displayNextFrame:(NSTimer *)timer
@@ -98,4 +114,5 @@
         [_delegate onFullScreenBtnClicked:sender cameraImageView:self.cameraImgView];
     }
 }
+
 @end
