@@ -112,7 +112,7 @@
         }
         _htypeID = [SQLManager deviceHtypeIDByDeviceID:[self.deviceIdArr[i] intValue]];
         if (_htypeID == 2) {//调光灯
-        [_lightArray addObject:self.lightArr[i]];
+        [_lightArray addObject:self.deviceIdArr[i]];
 
         }else if (_htypeID == 1){//开关灯
             [_SwitchLightArr addObject:self.deviceIdArr[i]];

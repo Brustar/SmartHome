@@ -103,7 +103,7 @@
     {
         _htypeID = [SQLManager deviceHtypeIDByDeviceID:[self.deviceIdArr[i] intValue]];
         if (_htypeID == 2) {//调光灯
-            [_lightArray addObject:self.lightArr[i]];
+            [_lightArray addObject:self.deviceIdArr[i]];
         }else if (_htypeID == 1){//开关灯
             [_SwitchLightArr addObject:self.deviceIdArr[i]];
         }else if (_htypeID == 3){//调色灯
@@ -190,6 +190,7 @@
         cell.deviceid = _lightArray[indexPath.row];
         cell.NewLightPowerBtn.selected = device.power;//开关状态
         cell.NewLightSlider.value = (float)device.bright/100.0f;//亮度状态
+        
 //        if (_isGloom) {
 //            cell.NewLightPowerBtn.selected = YES;//开关状态
 //            cell.NewLightSlider.value = 20.0f/100.0f;//亮度状态
