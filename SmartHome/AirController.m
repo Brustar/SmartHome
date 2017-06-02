@@ -413,11 +413,11 @@ static NSString *const airCellIdentifier = @"airCell";
     
     ContextMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:airCellIdentifier forIndexPath:indexPath];
     
-    if (cell) {
+    //if (cell) {
         cell.backgroundColor = [UIColor clearColor];
         cell.icon.image = [UIImage imageNamed:[self.params[self.currentButton-1] objectAtIndex:indexPath.row]];
         [cell setContraint:self.currentButton];
-    }
+    //}
     
     return cell;
 }

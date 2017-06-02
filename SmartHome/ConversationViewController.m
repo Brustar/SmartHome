@@ -127,12 +127,12 @@ static NSString *const menuCellIdentifier = @"groupCell";
     
     ContextMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:menuCellIdentifier forIndexPath:indexPath];
     
-    if (cell) {
+    //if (cell) {
         cell.backgroundColor = [UIColor clearColor];
         cell.menuTitleLabel.text = [self.menuTitles objectAtIndex:indexPath.row];
         NSURL *url = [NSURL URLWithString:[self.menuIcons objectAtIndex:indexPath.row]];
         [cell.menuImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"Contacts"] options:SDWebImageRetryFailed];
-    }
+    //}
     
     return cell;
 }

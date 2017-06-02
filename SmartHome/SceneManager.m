@@ -404,7 +404,8 @@
                                 @"scencename":newScene.sceneName,
                                 @"roomid":@(newScene.roomID),
                                 @"plistname":fileName,
-                                @"scencefile":scenePath
+                                @"scencefile":scenePath,
+                                @"imgfile":[NSString stringWithFormat:@"scene_%d.png",newScene.sceneID]
                                 };
     
     NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
@@ -614,17 +615,17 @@
 
 - (void)poweroffAllDevice:(int)sceneid
 {
-    NSData *data=nil;
-    SocketManager *sock=[SocketManager defaultManager];
+    //NSData *data=nil;
+    //SocketManager *sock=[SocketManager defaultManager];
     
     Scene *scene=[self readSceneByID:sceneid];
     for (id device in scene.devices)
     {
         if ([device respondsToSelector:@selector(deviceID)])
         {
-           // NSString *deviceid=[NSString stringWithFormat:@"%d", [device deviceID]];
-            //data=[[DeviceInfo defaultManager] close:deviceid];
-            //[sock.socket writeData:data withTimeout:1 tag:1];
+//            NSString *deviceid=[NSString stringWithFormat:@"%d", [device deviceID]];
+//            data=[[DeviceInfo defaultManager] close:deviceid];
+//            [sock.socket writeData:data withTimeout:1 tag:1];
         }
     }
     

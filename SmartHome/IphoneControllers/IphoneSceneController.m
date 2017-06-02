@@ -17,13 +17,13 @@
 #import "SQLManager.h"
 #import "Scene.h"
 #import "UIImageView+WebCache.h"
+#import "SDImageCache.h"
 #import "SceneManager.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "SocketManager.h"
 #import "TouchSubViewController.h"
 #import <AFNetworking.h>
-#import "YZNavigationMenuView.h"
 #import "VoiceOrderController.h"
 #import "SearchViewController.h"
 #import "BgMusicController.h"
@@ -35,7 +35,6 @@
 #import "IphoneNewAddSceneVC.h"
 #import "DeviceInfo.h"
 #import "PhotoGraphViewConteoller.h"
-
 
 #define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)  
 
@@ -513,7 +512,8 @@ static NSString * const CYPhotoId = @"photo";
     [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
     
     [self.currentCell.imageView setImage:self.selectSceneImg];
-    
+    [[SDImageCache sharedImageCache] clearDiskOnCompletion:nil];
+    [[SDImageCache sharedImageCache] clearMemory];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -526,6 +526,8 @@ static NSString * const CYPhotoId = @"photo";
     scene.sceneID = self.currentCell.sceneID;
     scene.roomID = self.roomID;
     [[SceneManager defaultManager] editScene:scene newSceneImage:self.selectSceneImg];
+    [[SDImageCache sharedImageCache] clearDiskOnCompletion:nil];
+    [[SDImageCache sharedImageCache] clearMemory];
     [self.currentCell.imageView setImage:self.selectSceneImg];
 }
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {

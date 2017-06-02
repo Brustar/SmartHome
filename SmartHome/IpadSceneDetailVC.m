@@ -16,7 +16,6 @@
 #import "NewColourCell.h"
 #import "NewLightCell.h"
 #import "FMTableViewCell.h"
-#import "SeneLightModel.h"
 #import "AireTableViewCell.h"
 #import "CurtainTableViewCell.h"
 #import "TVTableViewCell.h"
@@ -104,13 +103,7 @@
     {
         _htypeID = [SQLManager deviceHtypeIDByDeviceID:[self.deviceIdArr[i] intValue]];
         if (_htypeID == 2) {//调光灯
-            //            [_lightArray addObject:lightArr[i]];
-            SeneLightModel  *seneLight = [[SeneLightModel alloc] init];
-            seneLight.ID = self.deviceIdArr[i];
-            seneLight.value = 0.0f;
-            seneLight.sene_light_model = SENE_LIGHTS_MODEL_CUSTOMER;
-            [self.lightArray addObject:seneLight];
-            
+            [_lightArray addObject:self.lightArr[i]];
         }else if (_htypeID == 1){//开关灯
             [_SwitchLightArr addObject:self.deviceIdArr[i]];
         }else if (_htypeID == 3){//调色灯
@@ -185,37 +178,28 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {//调灯光
-        NewLightCell * cell = [tableView dequeueReusableCellWithIdentifier:@"NewLightCell" forIndexPath:indexPath];
+        NewLightCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewLightCell" forIndexPath:indexPath];
+        cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.AddLightBtn.hidden = YES;
         cell.LightConstraint.constant = 10;
-        cell.backgroundColor = [UIColor clearColor];
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
-        //cell.roomID = self.roomID;
-        // cell.sceneID = self.sceneid;
-        //        Device *device = [SQLManager getDeviceWithDeviceID:[_lightArray[indexPath.row] intValue]];
-        SeneLightModel *model = self.lightArray[indexPath.row];
-        Device   *device = [SQLManager getDeviceWithDeviceID:[model.ID intValue]];
+        Device *device = [SQLManager getDeviceWithDeviceID:[_lightArray[indexPath.row] intValue]];
         cell.NewLightNameLabel.text = device.name;
         cell.NewLightSlider.continuous = NO;
-        switch (model.sene_light_model) {
-            case SENE_LIGHTS_MODEL_SOFT://
-                [cell.NewLightSlider setValue:0.2f];
-                break;
-            case SENE_LIGHTS_MODEL_NORMAL:
-                [cell.NewLightSlider setValue:0.5f];
-                break;
-            case SENE_LIGHTS_MODEL_BRIGHT:
-                [cell.NewLightSlider setValue:0.9f];
-                break;
-            case SENE_LIGHTS_MODEL_CUSTOMER:
-                [cell.NewLightSlider setValue:(float)model.value];
-                break;
-            default:
-                break;
-        }
-        //        [cell.NewLightSlider setValue:20.0f];
-        //        cell.deviceid = _lightArray[indexPath.row];
-        cell.deviceid = model.ID;
+        cell.NewLightSlider.hidden = NO;
+        cell.deviceid = _lightArray[indexPath.row];
+        cell.NewLightPowerBtn.selected = device.power;//开关状态
+        cell.NewLightSlider.value = (float)device.bright/100.0f;//亮度状态
+//        if (_isGloom) {
+//            cell.NewLightPowerBtn.selected = YES;//开关状态
+//            cell.NewLightSlider.value = 20.0f/100.0f;//亮度状态
+//        }else if (_isRomantic) {
+//            cell.NewLightPowerBtn.selected = YES;//开关状态
+//            cell.NewLightSlider.value = 50.0f/100.0f;//亮度状态
+//        }else if (_isSprightly) {
+//            cell.NewLightPowerBtn.selected = YES;//开关状态
+//            cell.NewLightSlider.value = 90.0f/100.0f;//亮度状态
+//        }
         
         return cell;
     }if (indexPath.section == 1) {//调色灯

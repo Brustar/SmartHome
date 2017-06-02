@@ -84,7 +84,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
     
     LeftMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:leftMenuCell forIndexPath:indexPath];
     
-    if (cell) {
+    //if (cell) {
         Device *device = [self.types objectAtIndex:indexPath.row];
         cell.lbl.text = device.typeName?device.typeName:device.name;
         if (device.typeName) {
@@ -94,7 +94,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
             cell.lbl.textColor = [UIColor grayColor];
             cell.cellBG.image = [UIImage imageNamed:@"left_sub_normal"];
         }
-    }
+    //}
     
     return cell;
 }

@@ -51,10 +51,14 @@
         if (self.FMSwitchBtn.selected) {
             [self.FMSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
             data = [[DeviceInfo defaultManager] open:self.deviceid];
+            SocketManager *sock=[SocketManager defaultManager];
+            [sock.socket writeData:data withTimeout:1 tag:1];
         }else{
             
             [self.FMSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
              data = [[DeviceInfo defaultManager] close:self.deviceid];
+            SocketManager *sock=[SocketManager defaultManager];
+            [sock.socket writeData:data withTimeout:1 tag:1];
         }
         
         if (_delegate && [_delegate respondsToSelector:@selector(onFMSwitchBtnClicked:)]) {

@@ -270,7 +270,7 @@
 
     Scene *scene = [[Scene alloc] initWhithoutSchedule];
     [scene setValuesForKeysWithDictionary:plistDic];
-    scene.roomID = _roomid;
+    scene.roomID = (int)_roomid;
     [[DeviceInfo defaultManager] setEditingScene:NO];
     [[SceneManager defaultManager] addScene:scene withName:self.sceneName.text withImage:self.selectSceneImg.currentBackgroundImage];
     [self.splitViewController dismissViewControllerAnimated:YES completion:nil];

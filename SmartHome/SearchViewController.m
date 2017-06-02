@@ -135,7 +135,7 @@
     int eId =(int)[SQLManager deviceIDByDeviceName:item[indexPath.row]];
     NSString *typeName = [SQLManager deviceTypeNameByDeviceID:eId];
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIStoryboard *iphoneBoard  = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+    //UIStoryboard *iphoneBoard  = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
         if([typeName isEqualToString:@"网络电视"])
     {
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){

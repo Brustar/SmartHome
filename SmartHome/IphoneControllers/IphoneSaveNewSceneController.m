@@ -77,26 +77,6 @@
         return;
     }
     
-    
-//    NSString *url = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
-//    NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
-//    
-//    if (auothorToken){
-//        NSDictionary *dict = @{@"token":auothorToken,
-//                               @"optype":@(2),
-//                               @"isactive":@(_isActive),
-//                               @"starttime":_startTime,
-//                               @"endtime":_endTime,
-//                               @"weekvalue":_repeatString,
-//                               @"scheduleid":@(_sceneID),
-//                               @"startvalue":_startValue
-//                               };
-//        HttpManager *http = [HttpManager defaultManager];
-//        http.delegate = self;
-//        http.tag = 1;
-//        [http sendPost:url param:dict];
-//    }
-   
     NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
