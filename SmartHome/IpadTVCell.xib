@@ -108,7 +108,7 @@
                         <state key="normal" image="ipad-icon_add_nol"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g5Z-I6-nHN">
-                        <rect key="frame" x="360" y="11" width="55" height="35"/>
+                        <rect key="frame" x="358" y="11" width="55" height="35"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="55" id="Puq-R6-rM4"/>
@@ -133,12 +133,12 @@
                     <constraint firstItem="Hww-mA-mWm" firstAttribute="leading" secondItem="JgS-ov-4LL" secondAttribute="leadingMargin" constant="20" id="SlG-yw-lCa"/>
                     <constraint firstAttribute="trailing" secondItem="oLo-GC-C1Q" secondAttribute="trailing" id="TxK-s7-x8H"/>
                     <constraint firstItem="Cdz-aX-j1t" firstAttribute="leading" secondItem="tu7-Qh-gUq" secondAttribute="trailing" constant="20" id="Vlu-vV-Vcl"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="g5Z-I6-nHN" secondAttribute="trailing" constant="60" id="YVC-cC-kxf"/>
                     <constraint firstItem="V6h-qN-MvF" firstAttribute="centerY" secondItem="oLo-GC-C1Q" secondAttribute="centerY" id="ZOP-Tq-pyx"/>
                     <constraint firstItem="OS4-sM-q8I" firstAttribute="centerY" secondItem="Hww-mA-mWm" secondAttribute="centerY" id="ZRq-j6-18b"/>
                     <constraint firstItem="g5Z-I6-nHN" firstAttribute="top" secondItem="JgS-ov-4LL" secondAttribute="topMargin" constant="3" id="a9O-Or-sqX"/>
                     <constraint firstItem="Hww-mA-mWm" firstAttribute="centerY" secondItem="haH-tK-vIX" secondAttribute="centerY" id="acF-3h-ZAw"/>
                     <constraint firstItem="E17-LE-4YC" firstAttribute="centerY" secondItem="oLo-GC-C1Q" secondAttribute="centerY" id="bYy-ZY-Foq"/>
-                    <constraint firstItem="CFY-Q8-gek" firstAttribute="leading" secondItem="g5Z-I6-nHN" secondAttribute="trailing" constant="10" id="bzC-ig-1G3"/>
                     <constraint firstItem="KMR-zP-SSc" firstAttribute="centerY" secondItem="oLo-GC-C1Q" secondAttribute="centerY" id="dbU-6p-W9e"/>
                     <constraint firstItem="Cdz-aX-j1t" firstAttribute="centerY" secondItem="haH-tK-vIX" secondAttribute="centerY" id="evg-M4-5pb"/>
                     <constraint firstItem="tu7-Qh-gUq" firstAttribute="centerY" secondItem="Hww-mA-mWm" secondAttribute="centerY" id="fHH-NK-vp7"/>
@@ -151,6 +151,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="AddTvDeviceBtn" destination="CFY-Q8-gek" id="xeS-iH-FE4"/>
+                <outlet property="TVConstraint" destination="YVC-cC-kxf" id="oKm-q1-Zp1"/>
                 <outlet property="TVNameLabel" destination="szB-8K-rDR" id="XOE-Ht-kbj"/>
                 <outlet property="TVSlider" destination="Cdz-aX-j1t" id="jAD-80-g1P"/>
                 <outlet property="TVSwitchBtn" destination="g5Z-I6-nHN" id="dfz-8R-nvK"/>

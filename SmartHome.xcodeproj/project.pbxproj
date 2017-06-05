@@ -161,6 +161,8 @@
 		2E801EFF1E262B0B0039A6D9 /* WeekdaysVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E801EFE1E262B0B0039A6D9 /* WeekdaysVC.m */; };
 		2E8715D31EA06EFF006D3FB0 /* NowMusicController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E8715D21EA06EFF006D3FB0 /* NowMusicController.m */; };
 		2E8AC52F1E7BAE350002E717 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E8AC52E1E7BAE350002E717 /* FirstViewController.m */; };
+		2E9B41111EE53E470061B682 /* IpadDVDTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E9B410F1EE53E470061B682 /* IpadDVDTableViewCell.m */; };
+		2E9B41121EE53E470061B682 /* IpadDVDTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E9B41101EE53E470061B682 /* IpadDVDTableViewCell.xib */; };
 		2E9EA8811E8D0DC200A1AA63 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E9EA8801E8D0DC200A1AA63 /* iPhone.storyboard */; };
 		2E9F4BDA1EDFA4B20039BFE9 /* AddIpadSceneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E9F4BD91EDFA4B20039BFE9 /* AddIpadSceneVC.m */; };
 		2E9F4BDD1EDFA57C0039BFE9 /* IpadAddDeviceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E9F4BDC1EDFA57C0039BFE9 /* IpadAddDeviceVC.m */; };
@@ -758,6 +760,9 @@
 		2E8715D21EA06EFF006D3FB0 /* NowMusicController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NowMusicController.m; sourceTree = "<group>"; };
 		2E8AC52D1E7BAE350002E717 /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		2E8AC52E1E7BAE350002E717 /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		2E9B410E1EE53E470061B682 /* IpadDVDTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpadDVDTableViewCell.h; sourceTree = "<group>"; };
+		2E9B410F1EE53E470061B682 /* IpadDVDTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IpadDVDTableViewCell.m; sourceTree = "<group>"; };
+		2E9B41101EE53E470061B682 /* IpadDVDTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IpadDVDTableViewCell.xib; sourceTree = "<group>"; };
 		2E9EA8801E8D0DC200A1AA63 /* iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhone.storyboard; sourceTree = "<group>"; };
 		2E9F4BD81EDFA4B20039BFE9 /* AddIpadSceneVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddIpadSceneVC.h; sourceTree = "<group>"; };
 		2E9F4BD91EDFA4B20039BFE9 /* AddIpadSceneVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddIpadSceneVC.m; sourceTree = "<group>"; };
@@ -2018,6 +2023,9 @@
 				2E9F4BED1EE01EC10039BFE9 /* IpadAireTableViewCell.h */,
 				2E9F4BEE1EE01EC10039BFE9 /* IpadAireTableViewCell.m */,
 				2E9F4BEF1EE01EC10039BFE9 /* IpadAireTableViewCell.xib */,
+				2E9B410E1EE53E470061B682 /* IpadDVDTableViewCell.h */,
+				2E9B410F1EE53E470061B682 /* IpadDVDTableViewCell.m */,
+				2E9B41101EE53E470061B682 /* IpadDVDTableViewCell.xib */,
 			);
 			name = ipadTableViewCell;
 			sourceTree = "<group>";
@@ -2659,6 +2667,7 @@
 				CD93E3B11E8081B0003CCAA9 /* login_line@2x.png in Resources */,
 				2EC266291EA4BEAF003DC979 /* FMTableViewCell.xib in Resources */,
 				CDF3892C1E30B86500657C8B /* msgList.plist in Resources */,
+				2E9B41121EE53E470061B682 /* IpadDVDTableViewCell.xib in Resources */,
 				2E6A065C1EA743B50022B681 /* NewColourCell.xib in Resources */,
 				2ECD5B271ED2D8150091880D /* IpadSceneCell.xib in Resources */,
 				0F49CB7D1E7A204300D46ECC /* MyInfo-iPad.storyboard in Resources */,
@@ -3090,6 +3099,7 @@
 				0FABF91F1D06AA4E000892D8 /* DVDController.m in Sources */,
 				2E0184091ECDE77C00E3705F /* AvoidingSubviewScrollViewDelegate.swift in Sources */,
 				F64EF7FE1D8FBCC1003C1C48 /* IphoneSceneController.m in Sources */,
+				2E9B41111EE53E470061B682 /* IpadDVDTableViewCell.m in Sources */,
 				2E7B64C21E9B6ABC001F7469 /* WeekDaysCell.m in Sources */,
 				F66DFF281D5184730005E882 /* EditSceneController.m in Sources */,
 				2E9F4BEB1EE00F580039BFE9 /* IpadTVCell.m in Sources */,

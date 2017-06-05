@@ -62,7 +62,7 @@
     }else if (sender == self.AddTvDeviceBtn){
         self.AddTvDeviceBtn.selected = !self.AddTvDeviceBtn.selected;
         if (self.AddTvDeviceBtn.selected) {
-            [self.AddTvDeviceBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+            [self.AddTvDeviceBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
             
             [_scene setSceneID:[self.sceneid intValue]];
             [_scene setRoomID:self.roomID];
@@ -75,7 +75,7 @@
             [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
             
         }else{
-            [self.AddTvDeviceBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
+            [self.AddTvDeviceBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
         }
         
     }else if (sender == self.TVSlider){

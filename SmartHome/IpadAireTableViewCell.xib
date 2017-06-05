@@ -43,7 +43,7 @@
                         <constraints>
                             <constraint firstAttribute="width" constant="140" id="kNE-TM-oF8"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -73,7 +73,7 @@
                         <state key="normal" image="ipad-icon_add_nol"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axa-zE-k2y">
-                        <rect key="frame" x="408" y="32" width="55" height="35"/>
+                        <rect key="frame" x="414" y="32" width="55" height="35"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="igP-cN-pra"/>
                             <constraint firstAttribute="width" constant="55" id="sEK-Ld-iT3"/>
@@ -83,6 +83,7 @@
                     </button>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="axa-zE-k2y" secondAttribute="trailing" constant="60" id="2LU-WR-m7y"/>
                     <constraint firstItem="POj-Tw-MeJ" firstAttribute="top" secondItem="uyh-MH-d67" secondAttribute="bottom" id="4Kp-lP-Zmv"/>
                     <constraint firstAttribute="trailingMargin" secondItem="cvh-nG-3VJ" secondAttribute="trailing" constant="10" id="6fW-Rt-Y6S"/>
                     <constraint firstItem="VaN-Yd-IRv" firstAttribute="leading" secondItem="Hl1-fu-xGe" secondAttribute="leadingMargin" constant="30" id="C8v-hx-ThN"/>
@@ -94,7 +95,6 @@
                     <constraint firstAttribute="trailing" secondItem="POj-Tw-MeJ" secondAttribute="trailing" id="Zfr-Q7-iZY"/>
                     <constraint firstItem="pLo-WC-bvV" firstAttribute="centerY" secondItem="POj-Tw-MeJ" secondAttribute="centerY" id="Zxr-vw-w9Q"/>
                     <constraint firstItem="FJq-3P-VXL" firstAttribute="centerY" secondItem="POj-Tw-MeJ" secondAttribute="centerY" id="aiO-Kf-NAM"/>
-                    <constraint firstItem="cvh-nG-3VJ" firstAttribute="leading" secondItem="axa-zE-k2y" secondAttribute="trailing" constant="10" id="d26-wQ-gri"/>
                     <constraint firstItem="pLo-WC-bvV" firstAttribute="leading" secondItem="Hl1-fu-xGe" secondAttribute="leadingMargin" constant="20" id="e59-DT-puH"/>
                     <constraint firstItem="FJq-3P-VXL" firstAttribute="leading" secondItem="pLo-WC-bvV" secondAttribute="trailing" constant="10" id="iYj-9T-a66"/>
                     <constraint firstAttribute="trailingMargin" secondItem="PFi-ml-Y9x" secondAttribute="trailing" constant="29" id="mNG-bA-Jxs"/>
@@ -107,6 +107,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="AddAireBtn" destination="cvh-nG-3VJ" id="gbs-5E-C3Y"/>
+                <outlet property="AireConstraint" destination="2LU-WR-m7y" id="wPS-PC-v3J"/>
                 <outlet property="AireNameLabel" destination="uyh-MH-d67" id="7R8-oW-5gO"/>
                 <outlet property="AireSlider" destination="PFi-ml-Y9x" id="tly-2B-DUj"/>
                 <outlet property="AireSwitchBtn" destination="axa-zE-k2y" id="m1P-ku-u7L"/>

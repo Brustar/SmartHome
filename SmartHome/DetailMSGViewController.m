@@ -221,6 +221,7 @@
         ECMessage *msg = self.msgArr[indexPath.row];
         self.notify_id = msg.MID;
         if (msg.readed==0) {
+            
             [self sendRequestForMsgWithItemId:self.notify_id];
         }
     }
