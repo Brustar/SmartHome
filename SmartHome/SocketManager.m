@@ -217,7 +217,6 @@
 
 -(void)onUdpSocket:(AsyncUdpSocket *)sock didNotReceiveDataWithTag:(long)tag dueToError:(NSError *)error
 {
-    [self connectTcp];
     NSLog(@"didNotReceiveDataWithTag.");
 }
 
