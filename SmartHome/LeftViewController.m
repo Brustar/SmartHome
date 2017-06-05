@@ -20,7 +20,7 @@
     [super viewDidLoad];
     [self addNotifications];
     [self getUserInfoFromDB];
-    _itemArray = @[@"家庭成员",@"家庭动态",@"智能账单",@"通知",@"故障及保修记录",@"切换家庭账号"];
+    _itemArray = @[@"家庭成员",@"视频动态",@"智能账单",@"通知",@"故障及保修记录",@"切换家庭账号"];
 
     
     UIButton *bgButton = [[UIButton alloc] initWithFrame:self.view.frame];
@@ -111,8 +111,8 @@
         mySubEnergyVC.hidesBottomBarWhenPushed = YES;
         [appDelegate.mainTabBarController.selectedViewController pushViewController:mySubEnergyVC animated:YES];
         
-    }else if ([item isEqualToString:@"家庭动态"]) {
-        //家庭动态
+    }else if ([item isEqualToString:@"视频动态"]) {
+        //视频动态
         [MBProgressHUD showMessage:@"请稍候..."];
         FamilyDynamicViewController *vc = [familyStoryBoard instantiateViewControllerWithIdentifier:@"FamilyDynamicVC"];
         vc.hidesBottomBarWhenPushed = YES;
