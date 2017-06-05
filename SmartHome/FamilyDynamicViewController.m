@@ -53,7 +53,7 @@
         [self addChildViewController:vc];
         
     }
-    [self setNaviBarTitle:@"家庭动态"];
+    [self setNaviBarTitle:@"视频动态"];
 }
 
 - (void)initDataSource {

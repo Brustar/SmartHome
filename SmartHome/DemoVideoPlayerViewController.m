@@ -30,7 +30,7 @@
     
     _avPlayerVC = [[AVPlayerViewController alloc] init];
     _avPlayerVC.player = player;
-    _avPlayerVC.view.frame = self.view.bounds;
+    _avPlayerVC.view.frame = CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height-64);
     player.externalPlaybackVideoGravity = AVLayerVideoGravityResizeAspectFill;//这个属性和图片填充试图的属性类似，也可以设置为自适应试图大小。
     [self.view addSubview:_avPlayerVC.view];
     [player play];

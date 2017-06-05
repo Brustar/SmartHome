@@ -11,6 +11,7 @@
 #import "PackManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "SceneManager.h"
+#import "NetStatusManager.h"
 
 @implementation SocketManager
 
@@ -51,6 +52,10 @@
 
 -(void)connectUDP:(int)port
 {
+    if ([NetStatusManager isEnableWWAN]) {
+        [self connectTcp];
+        return;
+    }
     [self connectUDP:port delegate:self];
 }
 

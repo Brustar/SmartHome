@@ -78,7 +78,7 @@
     if (textField == self.pwdTextField) {
         if(![self.pwdTextField.text isPassword])
         {
-            self.tipLabel.text = @"钥匙应该是6-8位字符";
+            self.tipLabel.text = @"密码应该是6-8位字符";
             self.tipLabel.hidden = NO;
             self.tipImageView.hidden = NO;
             
@@ -89,12 +89,12 @@
     }else if (textField == self.pwd2TextField) {
         if(![self.pwd2TextField.text isPassword])
         {
-            self.tipLabel.text = @"钥匙应该是6-8位字符";
+            self.tipLabel.text = @"密码应该是6-8位字符";
             self.tipLabel.hidden = NO;
             self.tipImageView.hidden = NO;
         }else if(![self.pwdTextField.text isEqualToString:self.pwd2TextField.text])
         {
-            self.tipLabel.text = @"两把钥匙不一致";
+            self.tipLabel.text = @"两个密码不一致";
             self.tipLabel.hidden = NO;
             self.tipImageView.hidden = NO;
             
@@ -186,7 +186,7 @@
     
     if(![self.pwdTextField.text isEqualToString:self.pwd2TextField.text])
     {
-        self.tipLabel.text = @"两把钥匙不一致";
+        self.tipLabel.text = @"两个密码不一致";
         self.tipLabel.hidden = NO;
         self.tipImageView.hidden = NO;
         return;
@@ -194,7 +194,7 @@
     
     if(![self.pwdTextField.text isPassword])
     {
-        self.tipLabel.text = @"钥匙应该是6-8位字符";
+        self.tipLabel.text = @"密码应该是6-8位字符";
         self.tipLabel.hidden = NO;
         self.tipImageView.hidden = NO;
         return;

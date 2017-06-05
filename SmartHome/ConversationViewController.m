@@ -53,7 +53,7 @@ static NSString *const menuCellIdentifier = @"groupCell";
     // init YALContextMenuTableView tableView
     if (!self.contextMenuTableView) {
         self.contextMenuTableView = [[YALContextMenuTableView alloc]initWithTableViewDelegateDataSource:self];
-        self.contextMenuTableView.animationDuration = 0.15;
+        self.contextMenuTableView.animationDuration = 0.05;
         //optional - implement custom YALContextMenuTableView custom protocol
         self.contextMenuTableView.yalDelegate = self;
         //optional - implement menu items layout
@@ -102,6 +102,7 @@ static NSString *const menuCellIdentifier = @"groupCell";
         [self.menuTitles addObject: [user objectForKey:@"nickname"] ];
         [self.menuIcons addObject: [[user objectForKey:@"portrait"] description]];
     }
+    [self.contextMenuTableView reloadData];
 }
 
 #pragma mark - YALContextMenuTableViewDelegate
