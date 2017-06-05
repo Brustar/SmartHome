@@ -90,7 +90,7 @@
         
         self.AddLightBtn.selected = !self.AddLightBtn.selected;
         if (self.AddLightBtn.selected) {
-            [self.AddLightBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+            [self.AddLightBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
             [_scene setSceneID:[self.sceneid intValue]];
             [_scene setRoomID:self.roomID];
             [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
@@ -102,7 +102,7 @@
             [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
             
         }else{
-            [self.AddLightBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
+            [self.AddLightBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
             
         }
         

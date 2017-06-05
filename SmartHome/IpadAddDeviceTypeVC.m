@@ -29,6 +29,7 @@
 #import "IpadNewLightCell.h"
 #import "IpadTVCell.h"
 #import "IpadAireTableViewCell.h"
+#import "IpadDVDTableViewCell.h"
 
 
 @interface IpadAddDeviceTypeVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -98,7 +99,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"OtherTableViewCell" bundle:nil] forCellReuseIdentifier:@"OtherTableViewCell"];//其他
     [self.tableView registerNib:[UINib nibWithNibName:@"ScreenTableViewCell" bundle:nil] forCellReuseIdentifier:@"ScreenTableViewCell"];//幕布ScreenCurtainCell
     [self.tableView registerNib:[UINib nibWithNibName:@"ScreenCurtainCell" bundle:nil] forCellReuseIdentifier:@"ScreenCurtainCell"];//幕布ScreenCurtainCell
-    [self.tableView registerNib:[UINib nibWithNibName:@"DVDTableViewCell" bundle:nil] forCellReuseIdentifier:@"DVDTableViewCell"];//DVD
+    [self.tableView registerNib:[UINib nibWithNibName:@"IpadDVDTableViewCell" bundle:nil] forCellReuseIdentifier:@"IpadDVDTableViewCell"];//DVD
     [self.tableView registerNib:[UINib nibWithNibName:@"BjMusicTableViewCell" bundle:nil] forCellReuseIdentifier:@"BjMusicTableViewCell"];//背景音乐
     [self.tableView registerNib:[UINib nibWithNibName:@"AddDeviceCell" bundle:nil] forCellReuseIdentifier:@"AddDeviceCell"];//添加设备的cell
      [self.tableView registerNib:[UINib nibWithNibName:@"IpadNewLightCell" bundle:nil] forCellReuseIdentifier:@"IpadNewLightCell"];//调光灯
@@ -184,8 +185,6 @@
         IpadNewLightCell *cell = [tableView dequeueReusableCellWithIdentifier:@"IpadNewLightCell" forIndexPath:indexPath];
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.AddLightBtn.hidden = YES;
-        cell.LightConstraint.constant = 10;
         Device *device = [SQLManager getDeviceWithDeviceID:[_lightArray[indexPath.row] intValue]];
         cell.NewLightNameLabel.text = device.name;
         cell.NewLightSlider.continuous = NO;
@@ -252,7 +251,7 @@
         
         return TVCell;
     }if (indexPath.section == 6) {//DVD
-        DVDTableViewCell * DVDCell = [tableView dequeueReusableCellWithIdentifier:@"DVDTableViewCell" forIndexPath:indexPath];
+        IpadDVDTableViewCell * DVDCell = [tableView dequeueReusableCellWithIdentifier:@"IpadDVDTableViewCell" forIndexPath:indexPath];
         DVDCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_DVDArray[indexPath.row] intValue]];
         DVDCell.DVDNameLabel.text = device.name;
@@ -319,13 +318,13 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ( indexPath.section == 6 || indexPath.section == 8 || indexPath.section == 0 || indexPath.section == 3) {
+    if (indexPath.section == 8 || indexPath.section == 0 || indexPath.section == 3) {
         return 150;
     }
     if (indexPath.section == 9 || indexPath.section == 7 || indexPath.section == 12) {
-        return 50;
+        return 80;
     }
-    if (indexPath.section == 5 ) {
+    if (indexPath.section == 5 || indexPath.section == 6) {
         return 210;
     }
     return 100;

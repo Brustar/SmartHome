@@ -161,10 +161,10 @@
         NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
         NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
         
-//        Scene *scene = [[Scene alloc]init];
-           Scene *scene = [[Scene alloc]initWhithoutSchedule];
+        Scene *scene = [[Scene alloc]init];
+        scene.sceneID = self.sceneID;
         [scene setValuesForKeysWithDictionary:plistDic];
-        
+//        scene.sceneName = [SQLManager getSceneName:scene.sceneID];
         [[SceneManager defaultManager] editScene:scene];
     }];
     [alertVC addAction:saveAction];

@@ -25,6 +25,12 @@
 #import "BjMusicTableViewCell.h"
 #import "AddDeviceCell.h"
 #import "IphoneNewAddSceneVC.h"
+#import "IpadDVDTableViewCell.h"
+#import "IpadNewLightCell.h"
+#import "IpadTVCell.h"
+#import "IpadAireTableViewCell.h"
+
+
 
 @interface IpadSceneDetailVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -85,17 +91,17 @@
     _IntelligentArray = [[NSMutableArray alloc] init];
     _ColourLightArr = [[NSMutableArray alloc] init];
     _SwitchLightArr = [[NSMutableArray alloc] init];
-    [self.tableView registerNib:[UINib nibWithNibName:@"AireTableViewCell" bundle:nil] forCellReuseIdentifier:@"AireTableViewCell"];//空调
+    [self.tableView registerNib:[UINib nibWithNibName:@"IpadAireTableViewCell" bundle:nil] forCellReuseIdentifier:@"IpadAireTableViewCell"];//空调
     [self.tableView registerNib:[UINib nibWithNibName:@"CurtainTableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainTableViewCell"];//窗帘
-    [self.tableView registerNib:[UINib nibWithNibName:@"TVTableViewCell" bundle:nil] forCellReuseIdentifier:@"TVTableViewCell"];//网络电视
+    [self.tableView registerNib:[UINib nibWithNibName:@"IpadTVCell" bundle:nil] forCellReuseIdentifier:@"IpadTVCell"];//网络电视
     [self.tableView registerNib:[UINib nibWithNibName:@"NewColourCell" bundle:nil] forCellReuseIdentifier:@"NewColourCell"];//调色灯
     [self.tableView registerNib:[UINib nibWithNibName:@"OtherTableViewCell" bundle:nil] forCellReuseIdentifier:@"OtherTableViewCell"];//其他
     [self.tableView registerNib:[UINib nibWithNibName:@"ScreenTableViewCell" bundle:nil] forCellReuseIdentifier:@"ScreenTableViewCell"];//幕布ScreenCurtainCell
     [self.tableView registerNib:[UINib nibWithNibName:@"ScreenCurtainCell" bundle:nil] forCellReuseIdentifier:@"ScreenCurtainCell"];//幕布ScreenCurtainCell
-    [self.tableView registerNib:[UINib nibWithNibName:@"DVDTableViewCell" bundle:nil] forCellReuseIdentifier:@"DVDTableViewCell"];//DVD
+    [self.tableView registerNib:[UINib nibWithNibName:@"IpadDVDTableViewCell" bundle:nil] forCellReuseIdentifier:@"IpadDVDTableViewCell"];//DVD
     [self.tableView registerNib:[UINib nibWithNibName:@"BjMusicTableViewCell" bundle:nil] forCellReuseIdentifier:@"BjMusicTableViewCell"];//背景音乐
     [self.tableView registerNib:[UINib nibWithNibName:@"AddDeviceCell" bundle:nil] forCellReuseIdentifier:@"AddDeviceCell"];//添加设备的cell
-    [self.tableView registerNib:[UINib nibWithNibName:@"NewLightCell" bundle:nil] forCellReuseIdentifier:@"NewLightCell"];//调光灯
+    [self.tableView registerNib:[UINib nibWithNibName:@"IpadNewLightCell" bundle:nil] forCellReuseIdentifier:@"IpadNewLightCell"];//调光灯
     [self.tableView registerNib:[UINib nibWithNibName:@"FMTableViewCell" bundle:nil] forCellReuseIdentifier:@"FMTableViewCell"];//FM
 //    NSArray *lightArr = [SQLManager getDeviceIDsBySeneId:self.sceneID];
     
@@ -178,7 +184,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {//调灯光
-        NewLightCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewLightCell" forIndexPath:indexPath];
+        IpadNewLightCell *cell = [tableView dequeueReusableCellWithIdentifier:@"IpadNewLightCell" forIndexPath:indexPath];
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.AddLightBtn.hidden = YES;
@@ -227,7 +233,7 @@
         return newColourCell;
     }
     if (indexPath.section == 3) {//空调
-        AireTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"AireTableViewCell" forIndexPath:indexPath];
+        IpadAireTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"IpadAireTableViewCell" forIndexPath:indexPath];
         aireCell.AddAireBtn.hidden = YES;
         aireCell.AireConstraint.constant = 10;
         aireCell.backgroundColor =[UIColor clearColor];
@@ -251,7 +257,7 @@
         
         return aireCell;
     }if (indexPath.section == 5) {//TV
-        TVTableViewCell * TVCell = [tableView dequeueReusableCellWithIdentifier:@"TVTableViewCell" forIndexPath:indexPath];
+        IpadTVCell * TVCell = [tableView dequeueReusableCellWithIdentifier:@"IpadTVCell" forIndexPath:indexPath];
         TVCell.TVConstraint.constant = 10;
         TVCell.AddTvDeviceBtn.hidden = YES;
         TVCell.backgroundColor =[UIColor clearColor];
@@ -260,7 +266,7 @@
         
         return TVCell;
     }if (indexPath.section == 6) {//DVD
-        DVDTableViewCell * DVDCell = [tableView dequeueReusableCellWithIdentifier:@"DVDTableViewCell" forIndexPath:indexPath];
+        IpadDVDTableViewCell * DVDCell = [tableView dequeueReusableCellWithIdentifier:@"IpadDVDTableViewCell" forIndexPath:indexPath];
         DVDCell.AddDvdBtn.hidden = YES;
         DVDCell.DVDConstraint.constant = 10;
         DVDCell.backgroundColor =[UIColor clearColor];
@@ -359,23 +365,17 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 5 || indexPath.section == 6 || indexPath.section == 8) {
+    if (indexPath.section == 8 || indexPath.section == 0 || indexPath.section == 3) {
         return 150;
     }
-    if (indexPath.section == 9 || indexPath.section == 7 || indexPath.section == 12 || indexPath.section == 13) {
-        return 50;
+    if (indexPath.section == 9 || indexPath.section == 7 || indexPath.section == 12) {
+        return 80;
+    }
+    if (indexPath.section == 5 || indexPath.section == 6) {
+        return 210;
     }
     return 100;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
