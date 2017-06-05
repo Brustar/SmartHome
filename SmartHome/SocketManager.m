@@ -216,6 +216,11 @@
 
 -(void)onUdpSocket:(AsyncUdpSocket *)sock didNotReceiveDataWithTag:(long)tag dueToError:(NSError *)error
 {
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    if(device.connectState!=atHome)
+    {
+        [self connectTcp];
+    }
     NSLog(@"didNotReceiveDataWithTag.");
 }
 
