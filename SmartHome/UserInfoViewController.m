@@ -318,7 +318,7 @@
     NSString *str = [formatter stringFromDate:[NSDate date]];
     NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
     
-    [self saveImage:self.selectedImg withName:fileName];
+    //[self saveImage:self.selectedImg withName:fileName];
     
     NSString *url = [NSString stringWithFormat:@"%@Cloud/user_info.aspx",[IOManager httpAddr]];
     NSString *authorToken = [UD objectForKey:@"AuthorToken"];

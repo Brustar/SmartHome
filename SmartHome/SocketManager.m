@@ -52,7 +52,7 @@
 
 -(void)connectUDP:(int)port
 {
-    if ([NetStatusManager isEnableWWAN]) {
+    if (![NetStatusManager isEnableWIFI]) {
         [self connectTcp];
         return;
     }
@@ -191,7 +191,6 @@
 
 -(void)onSocketDidDisconnect:(AsyncSocket *)sock
 {
-    //[NC postNotificationName:@"NetWorkDidChangedNotification" object:nil];
     NSLog(@"sorry the connect is failure %ld",sock.userData);
     DeviceInfo *device=[DeviceInfo defaultManager];
     device.connectState=offLine;
@@ -217,7 +216,11 @@
 
 -(void)onUdpSocket:(AsyncUdpSocket *)sock didNotReceiveDataWithTag:(long)tag dueToError:(NSError *)error
 {
-    [self connectTcp];
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    if(device.connectState!=atHome)
+    {
+        [self connectTcp];
+    }
     NSLog(@"didNotReceiveDataWithTag.");
 }
 

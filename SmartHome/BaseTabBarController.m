@@ -110,10 +110,11 @@
 #pragma mark - TabbarPanel Delegate
 - (void)changeViewController:(UIButton *)sender {
     self.selectedIndex = sender.tag;
+    [NC postNotificationName:@"NetWorkDidChangedNotification" object:nil];
 }
 
 - (void)onSliderBtnClicked:(UIButton *)sender {
-    
+    [NC postNotificationName:@"NetWorkDidChangedNotification" object:nil];
 }
 
 @end
