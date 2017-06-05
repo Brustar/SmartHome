@@ -14,7 +14,7 @@
 #import "IQKeyboardManager.h"
 #import "ECloudTabBarController.h"
 #import "MSGController.h"
-
+#import "RCDataManager.h"
 #import "IphoneSceneController.h"
 #import "VoiceOrderController.h"
 #import "IphoneFavorController.h"
@@ -65,7 +65,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(kickout) name:KICK_OUT object:nil];
     
     [[RCIM sharedRCIM] initWithAppKey:@"8brlm7uf8tsb3"];
-    
+    [RCIM sharedRCIM].userInfoDataSource = [RCDataManager shareManager];
     return YES;
 }
 

@@ -19,7 +19,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "SceneShortcutsViewController.h"
 #import "TabbarPanel.h"
-#import "RCDataManager.h"
+
 #import <RongIMKit/RongIMKit.h>
 #import "ConversationViewController.h"
 #import <RBStoryboardLink.h>
@@ -641,7 +641,13 @@
     conversationVC.conversationType = ConversationType_GROUP;
     conversationVC.targetId = aGroupInfo.groupId;
     [conversationVC setTitle: [NSString stringWithFormat:@"%@",aGroupInfo.groupName]];
-    [RCIM sharedRCIM].userInfoDataSource = [RCDataManager shareManager];
+    
+    RCUserInfo *user = [[RCIM sharedRCIM] currentUserInfo];
+    NSArray *info = [SQLManager queryChat:user.userId];
+    NSString *nickname = [info firstObject];
+    NSString *protrait = [info lastObject];
+
+    [[RCIM sharedRCIM] refreshUserInfoCache:[[RCUserInfo alloc] initWithUserId:user.userId name:nickname portrait:protrait] withUserId:user.userId];
     [self.navigationController pushViewController:conversationVC animated:YES];
 }
 
