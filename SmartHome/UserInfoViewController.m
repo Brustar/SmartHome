@@ -339,7 +339,8 @@
                 if (portrait.length >0) {
                     
                    BOOL succeed = [SQLManager updateUserPortraitUrlByID:(int)_userInfomation.userID url:portrait];//更新User表
-                    if (succeed) {
+                    BOOL succeed_chats = [SQLManager updateChatsPortraitByID:(int)_userInfomation.userID url:portrait];//更新chats表
+                    if (succeed && succeed_chats) {
                          [MBProgressHUD showSuccess:@"更新头像成功"];
                         [self.headerBtn sd_setImageWithURL:[NSURL URLWithString:portrait] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portrait"]];
                         _userInfomation.headImgURL = portrait;

@@ -2347,6 +2347,19 @@
     return ret;
 }
 
+#pragma mark - chats
++ (BOOL)updateChatsPortraitByID:(int)userID url:(NSString *)url {
+    FMDatabase *db = [SQLManager connetdb];
+    if (![db open]) {
+        NSLog(@"Could not open db");
+        return NO;
+    }
+    BOOL result = [db executeUpdate:[NSString stringWithFormat:@"UPDATE chats SET portrait = '%@' where user_id = %d", url, userID]];
+    
+    [db close];
+    return result;
+}
+
 #pragma mark - User
 + (BOOL)updateUserPortraitUrlByID:(int)userID url:(NSString *)url {
     FMDatabase *db = [SQLManager connetdb];
