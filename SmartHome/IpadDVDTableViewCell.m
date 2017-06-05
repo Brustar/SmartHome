@@ -1,25 +1,25 @@
 //
-//  DVDTableViewCell.m
+//  IpadDVDTableViewCell.m
 //  SmartHome
 //
-//  Created by zhaona on 2017/3/23.
+//  Created by zhaona on 2017/6/5.
 //  Copyright © 2017年 Brustar. All rights reserved.
 //
 
-#import "DVDTableViewCell.h"
+#import "IpadDVDTableViewCell.h"
 #import "SQLManager.h"
 #import "DVD.h"
 #import "SocketManager.h"
 #import "SceneManager.h"
 
-@implementation DVDTableViewCell
+@implementation IpadDVDTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-     [self.PreviousBtn setImage:[UIImage imageNamed:@"DVD_previous_red"] forState:UIControlStateHighlighted];
-     [self.nextBtn setImage:[UIImage imageNamed:@"DVD_next_red"] forState:UIControlStateHighlighted];
-     [self.DVDSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
+    [self.PreviousBtn setImage:[UIImage imageNamed:@"DVD_previous_red"] forState:UIControlStateHighlighted];
+    [self.nextBtn setImage:[UIImage imageNamed:@"DVD_next_red"] forState:UIControlStateHighlighted];
+    [self.DVDSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
     self.DVDSlider.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
     self.DVDSlider.minimumTrackTintColor = [UIColor colorWithRed:253/255.0 green:254/255.0 blue:254/255.0 alpha:1];
     [self.AddDvdBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
@@ -30,9 +30,9 @@
 }
 - (IBAction)save:(id)sender {
     
-        DVD *device=[[DVD alloc] init];
-        [device setDeviceID:[self.deviceid intValue]];
-        [device setPoweron:device.poweron];
+    DVD *device=[[DVD alloc] init];
+    [device setDeviceID:[self.deviceid intValue]];
+    [device setPoweron:device.poweron];
     
     if (sender == self.DVDSwitchBtn) {
         NSData *data=nil;
@@ -58,7 +58,7 @@
     }else if (sender == self.AddDvdBtn){
         self.AddDvdBtn.selected = !self.AddDvdBtn.selected;
         if (self.AddDvdBtn.selected) {
-            [self.AddDvdBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+            [self.AddDvdBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
             
             [_scene setSceneID:[self.sceneid intValue]];
             [_scene setRoomID:self.roomID];
@@ -71,7 +71,7 @@
             [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
             
         }else{
-            [self.AddDvdBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
+            [self.AddDvdBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
         }
         
     }else if (sender == self.DVDSlider){
@@ -91,7 +91,7 @@
     data=[[DeviceInfo defaultManager] previous:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
-   
+    
 }
 //下一曲
 - (IBAction)nextBtn:(id)sender {
@@ -115,7 +115,7 @@
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
     }
-  
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

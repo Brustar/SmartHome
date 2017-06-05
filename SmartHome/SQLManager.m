@@ -573,12 +573,12 @@
             [lightNames addObject:light];
         }
     }
-    
+
+    [db closeOpenResultSets];
+    [db close];
     if (lightNames.count < 1) {
         return nil;
     }
-    [db closeOpenResultSets];
-    [db close];
     return [lightNames copy];
 }
 
@@ -600,11 +600,12 @@
         }
     }
     
+
+    [db closeOpenResultSets];
+    [db close];
     if (lights.count < 1) {
         return nil;
     }
-    [db closeOpenResultSets];
-    [db close];
     return [lights copy];
 }
 
@@ -626,11 +627,11 @@
         }
     }
     
+    [db closeOpenResultSets];
+    [db close];
     if (curtains.count < 1) {
         return nil;
     }
-    [db closeOpenResultSets];
-    [db close];
     return [curtains copy];
 }
 
@@ -2393,7 +2394,7 @@
         return nil;
     }
     
-    FMResultSet *resultSet = [db executeQueryWithFormat:@"select * from Users where ID = %d",userID];
+    FMResultSet *resultSet = [db executeQuery:[NSString stringWithFormat:@"select * from Users where ID = %d",userID]];
     if([resultSet next])
     {
         info.userID = [resultSet intForColumn:@"ID"];
@@ -2407,8 +2408,6 @@
         info.phoneNum = [resultSet stringForColumn:@"phoneNum"];
         info.signature = [resultSet stringForColumn:@"signature"];
         
-    }else {
-        return nil;
     }
     [db closeOpenResultSets];
     [db close];
@@ -2426,7 +2425,7 @@
         return mutabelArr;
     }
     
-    FMResultSet *resultSet = [db executeQueryWithFormat:@"select * from Channels where isFavorite = 1 and eqId = %d and parent = %@",deviceID,type];
+    FMResultSet *resultSet = [db executeQuery:[NSString stringWithFormat:@"select * from Channels where isFavorite = 1 and eqId = %d and parent = %@",deviceID,type]];
     while([resultSet next])
     {
         TVChannel *channel = [TVChannel new];

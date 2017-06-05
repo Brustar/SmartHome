@@ -19,7 +19,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "SceneShortcutsViewController.h"
 #import "TabbarPanel.h"
-
+#import "RCDataManager.h"
 #import <RongIMKit/RongIMKit.h>
 #import "ConversationViewController.h"
 #import <RBStoryboardLink.h>
@@ -62,6 +62,7 @@
 @property (nonatomic,strong) BaseTabBarController *baseTabbarController;
 @property (weak, nonatomic) IBOutlet UIView *iconeView;
 @property (nonatomic, strong) NSMutableArray *shortcutsArray;
+@property (weak, nonatomic) IBOutlet UIButton *doMessageBtn;//弹出聊天页面的按钮
 
 @property (weak, nonatomic) IBOutlet UILabel *ShowHeadImage;//是否有新消息的图标
 
@@ -101,6 +102,7 @@
         self.ShowHeadImage.hidden = YES;
     }else{
         self.ShowHeadImage.hidden = NO;
+        self.ShowHeadImage.text = [NSString stringWithFormat:@"%d" ,unread<0?0:unread];
     }
     [self getScenesFromPlist];
     [self getPlist];
@@ -200,6 +202,7 @@
     self.memberFamilyLabel.text = [NSString stringWithFormat:@"家庭成员（%@）",_familyNum];
     self.UserNameLabel.text = [NSString stringWithFormat:@"Hi! %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"Account"]];
     [_HeadImageView addGestureRecognizer:Headtap];
+    [self.doMessageBtn addTarget:self action:@selector(HeadDoTap:) forControlEvents:UIControlEventTouchUpInside];
     _calenderDayLabel.adjustsFontSizeToFitWidth = YES;
     _calenderYearLabel.adjustsFontSizeToFitWidth = YES;
     _calenderMonthLabel.adjustsFontSizeToFitWidth = YES;
@@ -410,7 +413,7 @@
                     Scene *info = [[Scene alloc] init];
                     info.sceneID = [scene[@"sceneID"] intValue];
                     info.sceneName = scene[@"sceneName"];
-                    info.roomID = [scene[@"roomID"] integerValue];
+                    info.roomID = [scene[@"roomID"] intValue];
                     info.roomName = scene[@"roomName"];
                     
                     [_shortcutsArray addObject:info];
@@ -638,7 +641,7 @@
     conversationVC.conversationType = ConversationType_GROUP;
     conversationVC.targetId = aGroupInfo.groupId;
     [conversationVC setTitle: [NSString stringWithFormat:@"%@",aGroupInfo.groupName]];
-    
+    [RCIM sharedRCIM].userInfoDataSource = [RCDataManager shareManager];
     [self.navigationController pushViewController:conversationVC animated:YES];
 }
 
@@ -646,9 +649,11 @@
      _firstBtn.selected = !_firstBtn.selected;
     if (_firstBtn.selected) {
         [_firstBtn setBackgroundImage:[UIImage imageNamed:@"circular2"] forState:UIControlStateSelected];
+        [_firstBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [[SceneManager defaultManager] startScene:_info1.sceneID];
         [SQLManager updateSceneStatus:1 sceneID:_info1.sceneID];//更新数据库
     }else{
+        [_firstBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_firstBtn setBackgroundImage:[UIImage imageNamed:@"circular3"] forState:UIControlStateNormal];
         [[SceneManager defaultManager] poweroffAllDevice:_info1.sceneID];
         [SQLManager updateSceneStatus:0 sceneID:_info1.sceneID];//更新数据库
@@ -659,9 +664,11 @@
      _TwoBtn.selected = !_TwoBtn.selected;
     if (_TwoBtn.selected) {
         [_TwoBtn setBackgroundImage:[UIImage imageNamed:@"circular2"] forState:UIControlStateSelected];
+        [_TwoBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [[SceneManager defaultManager] startScene:_info2.sceneID];
         [SQLManager updateSceneStatus:1 sceneID:_info2.sceneID];//更新数据库
     }else{
+        [_TwoBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_TwoBtn setBackgroundImage:[UIImage imageNamed:@"circular3"] forState:UIControlStateNormal];
         [[SceneManager defaultManager] poweroffAllDevice:_info2.sceneID];
         [SQLManager updateSceneStatus:0 sceneID:_info2.sceneID];//更新数据库
@@ -678,9 +685,11 @@
     }else{
         if (_ThreeBtn.selected) {
             [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular2"] forState:UIControlStateSelected];
+            [_ThreeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [[SceneManager defaultManager] startScene:_info3.sceneID];
             [SQLManager updateSceneStatus:1 sceneID:_info3.sceneID];//更新数据库
         }else{
+             [_ThreeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular3"] forState:UIControlStateNormal];
             [[SceneManager defaultManager] poweroffAllDevice:_info3.sceneID];
             [SQLManager updateSceneStatus:0 sceneID:_info3.sceneID];//更新数据库

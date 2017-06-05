@@ -67,11 +67,12 @@
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9po-Xv-wqd">
                         <rect key="frame" x="327" y="15" width="30" height="30"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="HHO-aE-PyI"/>
                             <constraint firstAttribute="width" constant="30" id="ylo-FL-L2g"/>
                         </constraints>
-                        <state key="normal" image="icon_add_normal"/>
+                        <state key="normal" image="ipad-icon_add_nol"/>
                     </button>
                 </subviews>
                 <constraints>
@@ -101,11 +102,11 @@
                 <outlet property="NewLightPowerBtn" destination="Twl-lQ-Y4P" id="gMT-aV-PCl"/>
                 <outlet property="NewLightSlider" destination="BCT-l9-XwR" id="GXc-cN-vA2"/>
             </connections>
-            <point key="canvasLocation" x="-51.5" y="-1"/>
+            <point key="canvasLocation" x="-329" y="-236"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="icon_add_normal" width="15" height="15"/>
+        <image name="ipad-icon_add_nol" width="14" height="14"/>
         <image name="lv_fm_adjust_normal" width="336" height="47"/>
         <image name="lv_icon_adjust_high" width="14" height="14"/>
         <image name="lv_icon_adjust_low" width="10" height="10"/>

@@ -53,7 +53,7 @@
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zSF-lz-6Bs">
-                        <rect key="frame" x="358" y="11" width="46" height="46"/>
+                        <rect key="frame" x="364" y="11" width="46" height="46"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="46" id="fDm-ga-jYX"/>
@@ -85,6 +85,7 @@
                     <constraint firstItem="pWi-ic-JRQ" firstAttribute="top" secondItem="4XC-eG-fQJ" secondAttribute="bottom" constant="14" id="71u-Uu-bHI"/>
                     <constraint firstItem="NKP-YB-D4e" firstAttribute="leading" secondItem="jCq-fN-y5f" secondAttribute="trailing" constant="20" id="BvI-vM-NjI"/>
                     <constraint firstItem="pWi-ic-JRQ" firstAttribute="top" secondItem="dTH-FG-nXb" secondAttribute="bottom" id="C2r-c0-xQ0"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="zSF-lz-6Bs" secondAttribute="trailing" constant="60" id="K9v-ZU-Ra7"/>
                     <constraint firstItem="jCq-fN-y5f" firstAttribute="leading" secondItem="rBa-Jj-Gd2" secondAttribute="leadingMargin" constant="29" id="NaC-t6-zY6"/>
                     <constraint firstAttribute="trailingMargin" secondItem="gS1-4N-yPq" secondAttribute="trailing" constant="29" id="Nlj-D4-kuB"/>
                     <constraint firstItem="dTH-FG-nXb" firstAttribute="top" secondItem="rBa-Jj-Gd2" secondAttribute="top" id="QWQ-uV-I1d"/>
@@ -101,12 +102,12 @@
                     <constraint firstItem="jCq-fN-y5f" firstAttribute="centerY" secondItem="fFl-vq-wzY" secondAttribute="centerY" id="l7W-U1-S4q"/>
                     <constraint firstAttribute="trailingMargin" secondItem="fFl-vq-wzY" secondAttribute="trailing" constant="20" id="p2S-wJ-EUa"/>
                     <constraint firstAttribute="trailingMargin" secondItem="4XC-eG-fQJ" secondAttribute="trailing" constant="10" id="ryX-ti-vbh"/>
-                    <constraint firstItem="4XC-eG-fQJ" firstAttribute="leading" secondItem="zSF-lz-6Bs" secondAttribute="trailing" constant="10" id="vAy-lO-4Yb"/>
                     <constraint firstItem="fFl-vq-wzY" firstAttribute="leading" secondItem="rBa-Jj-Gd2" secondAttribute="leadingMargin" constant="20" id="vgp-lY-Plx"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="AddLightBtn" destination="4XC-eG-fQJ" id="KLN-Xy-bN8"/>
+                <outlet property="LightConstraint" destination="K9v-ZU-Ra7" id="V0k-ha-pnt"/>
                 <outlet property="NewLightNameLabel" destination="dTH-FG-nXb" id="wL8-iY-jSa"/>
                 <outlet property="NewLightPowerBtn" destination="zSF-lz-6Bs" id="whe-HU-GAt"/>
                 <outlet property="NewLightSlider" destination="NKP-YB-D4e" id="UIb-S9-mcm"/>

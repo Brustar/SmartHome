@@ -89,7 +89,6 @@
             info.phoneNum = responseObject[@"phone"];
             info.vip = responseObject[@"vip"];
             info.endDate = responseObject[@"end_date"];
-            
             _userInfomation = info;
             
             [self refreshUI];
