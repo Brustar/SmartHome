@@ -52,10 +52,10 @@
 
 -(void)connectUDP:(int)port
 {
-    /*if ([NetStatusManager isEnableWWAN]) {
+    if (![NetStatusManager isEnableWIFI]) {
         [self connectTcp];
         return;
-    }*/
+    }
     [self connectUDP:port delegate:self];
 }
 
