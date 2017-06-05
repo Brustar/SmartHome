@@ -65,15 +65,20 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    HostListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"hostsCell"];
-    if(!cell)
-    {
-        cell = [[HostListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"hostsCell"];
-    }
+    HostListCell *cell =  [[HostListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"hostsCell"];
     
     NSString *host = nil;
     if (indexPath.row < _hostArray.count) {
         host = [_hostArray[indexPath.row] stringValue];
+    
+        if ([_selectedHost isEqualToString:host]) {
+            UIImageView *selectView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 16, 12)];
+            selectView.image = [UIImage imageNamed:@"family_select"];
+            cell.accessoryView = selectView;
+        }else {
+            cell.accessoryView = nil;
+        }
+        
     }
     
     if (indexPath.row < _homeNameArray.count) {
@@ -82,15 +87,7 @@
     }
     
     
-     cell.textLabel.textColor = [UIColor whiteColor];
-    
-    if ([_selectedHost isEqualToString:host]) {
-        UIImageView *selectView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 16, 12)];
-        selectView.image = [UIImage imageNamed:@"family_select"];
-        cell.accessoryView = selectView;
-    }else {
-        cell.accessoryView = nil;
-    }
+    cell.textLabel.textColor = [UIColor whiteColor];
     
     cell.backgroundColor = [UIColor colorWithRed:30.0/255.0 green:29.0/255.0 blue:34.0/255.0 alpha:1];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
