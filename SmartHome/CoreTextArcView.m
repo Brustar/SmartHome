@@ -302,7 +302,7 @@ static void PrepareGlyphArcInfo(CTLineRef line, CFIndex glyphCount, GlyphArcInfo
 	
 		// Create the attributed string
     NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:self.text attributes:attributesDict];
-	
+    CFBridgingRelease(fontRef);
     return attrString;
 }
 
