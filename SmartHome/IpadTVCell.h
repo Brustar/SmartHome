@@ -19,6 +19,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *AddTvDeviceBtn;
 @property(nonatomic, strong)NSString * deviceid;
 @property (nonatomic,weak) NSString *sceneid;
+
+@property (weak, nonatomic) IBOutlet UIButton *channelReduceBtn;
+
+@property (weak, nonatomic) IBOutlet UIButton *channelAddBtn;
+
 //房间id
 @property (nonatomic,assign) int roomID;
 @property (strong, nonatomic) Scene *scene;

@@ -136,6 +136,8 @@
         
         Scene *scene = [[Scene alloc]init];
         [scene setValuesForKeysWithDictionary:plistDic];
+        scene.roomID = self.roomID;
+        scene.sceneID = self.sceneID;
         
         [[SceneManager defaultManager] editScene:scene];
     }else{

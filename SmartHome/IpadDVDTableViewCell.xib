@@ -38,7 +38,7 @@
                         </constraints>
                     </imageView>
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="DnU-I4-LTw">
-                        <rect key="frame" x="65" y="153.5" width="346" height="31"/>
+                        <rect key="frame" x="65" y="151.5" width="346" height="31"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="dl5-Ao-0mN"/>
                         </constraints>
@@ -121,7 +121,7 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="DnU-I4-LTw" firstAttribute="centerY" secondItem="UhE-if-ioN" secondAttribute="centerY" id="1nZ-nB-N7e"/>
+                    <constraint firstItem="DnU-I4-LTw" firstAttribute="centerY" secondItem="UhE-if-ioN" secondAttribute="centerY" constant="-2" id="1nZ-nB-N7e"/>
                     <constraint firstAttribute="trailing" secondItem="ZIH-hr-tJ3" secondAttribute="trailing" constant="10" id="3pT-8V-G7E"/>
                     <constraint firstItem="4aX-Af-Pca" firstAttribute="top" secondItem="aGH-E7-tVt" secondAttribute="topMargin" constant="3" id="BtW-VV-GpV"/>
                     <constraint firstAttribute="trailing" secondItem="UhE-if-ioN" secondAttribute="trailing" constant="1" id="D5u-if-GOM"/>
@@ -173,7 +173,7 @@
         <image name="ipad-btn_selete_nol" width="45" height="21"/>
         <image name="ipad-frm_adjust_nol" width="337" height="33"/>
         <image name="ipad-frm_adjustt_nol" width="209" height="10"/>
-        <image name="ipad-icon_add_nol" width="15" height="15"/>
+        <image name="ipad-icon_add_nol" width="19" height="19"/>
         <image name="ipad-icon_lt_nol" width="19" height="20"/>
         <image name="ipad-icon_rt_nol" width="20" height="20"/>
         <image name="ipad-icon_st_nol" width="7" height="19"/>

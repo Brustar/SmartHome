@@ -19,6 +19,8 @@
     // Initialization code
     
     [self.TVSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
+    [self.channelReduceBtn setImage:[UIImage imageNamed:@"icon_vored_prd"] forState:UIControlStateHighlighted];
+    [self.channelAddBtn setImage:[UIImage imageNamed:@"icon_add_pre"] forState:UIControlStateHighlighted];
     self.TVSlider.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
     self.TVSlider.minimumTrackTintColor = [UIColor colorWithRed:253/255.0 green:254/255.0 blue:254/255.0 alpha:1];
     [self.TVSwitchBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];

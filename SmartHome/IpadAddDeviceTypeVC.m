@@ -14,14 +14,10 @@
 #import "TouchSubViewController.h"
 #import "HttpManager.h"
 #import "NewColourCell.h"
-#import "NewLightCell.h"
 #import "FMTableViewCell.h"
-#import "AireTableViewCell.h"
 #import "CurtainTableViewCell.h"
-#import "TVTableViewCell.h"
 #import "ScreenCurtainCell.h"
 #import "OtherTableViewCell.h"
-#import "DVDTableViewCell.h"
 #import "BjMusicTableViewCell.h"
 #import "AddDeviceCell.h"
 #import "IphoneNewAddSceneVC.h"
@@ -244,7 +240,7 @@
         
         return aireCell;
     }if (indexPath.section == 5) {//TV
-        TVTableViewCell * TVCell = [tableView dequeueReusableCellWithIdentifier:@"IpadTVCell" forIndexPath:indexPath];
+        IpadTVCell * TVCell = [tableView dequeueReusableCellWithIdentifier:@"IpadTVCell" forIndexPath:indexPath];
         TVCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_TVArray[indexPath.row] intValue]];
         TVCell.TVNameLabel.text = device.name;

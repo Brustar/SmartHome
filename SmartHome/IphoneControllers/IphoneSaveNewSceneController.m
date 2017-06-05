@@ -84,11 +84,16 @@
     Scene *scene = [[Scene alloc]initWhithoutSchedule];
     scene.roomID = self.roomId;
     [scene setValuesForKeysWithDictionary:plistDic];
-    [[DeviceInfo defaultManager] setEditingScene:NO];
-    [[SceneManager defaultManager] addScene:scene withName:self.sceneName.text withImage:self.selectSceneImg];
-    UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-    IphoneSceneController * iphoneSceneVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
-    [self.navigationController pushViewController:iphoneSceneVC animated:YES];
+    if (scene.devices.count != 0) {
+        [[DeviceInfo defaultManager] setEditingScene:NO];
+        [[SceneManager defaultManager] addScene:scene withName:self.sceneName.text withImage:self.selectSceneImg];
+        UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+        IphoneSceneController * iphoneSceneVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
+        [self.navigationController pushViewController:iphoneSceneVC animated:YES];
+    }else{
+        [MBProgressHUD showSuccess:@"请先选择设备"];
+    }
+  
 }
 - (void)httpHandler:(id)responseObject tag:(int)tag
 {
