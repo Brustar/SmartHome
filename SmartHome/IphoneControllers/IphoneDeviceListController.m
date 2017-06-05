@@ -48,6 +48,7 @@ static NSString * const CYPhotoId = @"photo";
 
 @property (nonatomic,strong)UICollectionView * FirstCollectionView;
 @property (weak, nonatomic) IBOutlet UILabel *DeviceNameLabel;
+@property (nonatomic,strong) BaseTabBarController *baseTabbarController;
 
 
 @end
@@ -57,9 +58,9 @@ static NSString * const CYPhotoId = @"photo";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
-    baseTabbarController.tabbarPanel.hidden = NO;
-    baseTabbarController.tabBar.hidden = YES;
+    _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
+    _baseTabbarController.tabbarPanel.hidden = NO;
+    _baseTabbarController.tabBar.hidden = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -113,9 +114,11 @@ static NSString * const CYPhotoId = @"photo";
         {
             if (info.connectState == offLine) {
                 [FirstBlockSelf setNetState:netState_notConnect];
+                [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage  imageNamed:@"slider"] forState:UIControlStateNormal];
                 NSLog(@"离线模式");
             }else{
                 [FirstBlockSelf setNetState:netState_outDoor_4G];
+                [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"Scene-selected"] forState:UIControlStateNormal];
                 NSLog(@"外出模式-4G");
             }
         }
@@ -123,25 +126,31 @@ static NSString * const CYPhotoId = @"photo";
         {
             if (info.connectState == atHome) {
                 [FirstBlockSelf setNetState:netState_atHome_WIFI];
+                [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"Scene-selected"] forState:UIControlStateNormal];
                 NSLog(@"在家模式-WIFI");
                 
                 
             }else if (info.connectState == outDoor){
                 [FirstBlockSelf setNetState:netState_outDoor_WIFI];
+                [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"Scene-selected"] forState:UIControlStateNormal];
                 NSLog(@"外出模式-WIFI");
                 
             }else if (info.connectState == offLine) {
                 [FirstBlockSelf setNetState:netState_notConnect];
+                [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
                 NSLog(@"离线模式");
                 
                 
             }
         }else if(status == AFNetworkReachabilityStatusNotReachable){ //没有网络(断网)
             [FirstBlockSelf setNetState:netState_notConnect];
+            [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
             NSLog(@"离线模式");
             
         }else if (status == AFNetworkReachabilityStatusUnknown) { //未知网络
             [FirstBlockSelf setNetState:netState_notConnect];
+            [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
+            NSLog(@"离线模式");
             
         }
     }];
