@@ -191,7 +191,7 @@
 
 -(void)onSocketDidDisconnect:(AsyncSocket *)sock
 {
-    //[NC postNotificationName:@"NetWorkDidChangedNotification" object:nil];
+    [NC postNotificationName:@"NetWorkDidChangedNotification" object:nil];
     NSLog(@"sorry the connect is failure %ld",sock.userData);
     DeviceInfo *device=[DeviceInfo defaultManager];
     device.connectState=offLine;
