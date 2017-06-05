@@ -82,7 +82,7 @@
 }
 
 - (void)netWorkDidChangedNotification:(NSNotification *)noti {
-    [self updateInterfaceWithReachability];
+    [self refreshUI];
 }
 
 - (void)removeNotifications {
@@ -177,13 +177,14 @@
     
     [self setupNaviBar];
     [self showNetStateView];
-    //开启网络状况监听器
-    [self updateInterfaceWithReachability];
+    
     [self setUIMessage];
     [self chatConnect];
     [self getScenesFromPlist];
     [self setBtn];
    
+    //开启网络状况监听器
+    [self updateInterfaceWithReachability];
 }
 
 -(void)setUIMessage
@@ -294,6 +295,51 @@
 {
     [self setRCIM];
 }
+
+- (void)refreshUI {
+    DeviceInfo *info = [DeviceInfo defaultManager];
+    if([[AFNetworkReachabilityManager sharedManager] isReachableViaWWAN]) { //手机自带网络
+        if (info.connectState == offLine) {
+            [self setNetState:netState_notConnect];
+            self.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
+            [self.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage  imageNamed:@"slider"] forState:UIControlStateNormal];
+            NSLog(@"离线模式");
+        }else{
+            [self setNetState:netState_outDoor_4G];
+            self.SubImageView.image = [UIImage imageNamed:@"circular"];
+            [self.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"Scene-selected"] forState:UIControlStateNormal];
+            NSLog(@"外出模式-4G");
+        }
+    }else if ([[AFNetworkReachabilityManager sharedManager] isReachableViaWiFi]) { //WIFI
+        
+        if (info.connectState == atHome) {
+            [self setNetState:netState_atHome_WIFI];
+            self.SubImageView.image = [UIImage imageNamed:@"circular"];
+            [self.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"Scene-selected"] forState:UIControlStateNormal];
+            NSLog(@"在家模式-WIFI");
+            
+            
+        }else if (info.connectState == outDoor){
+            [self setNetState:netState_outDoor_WIFI];
+            self.SubImageView.image = [UIImage imageNamed:@"circular"];
+            [self.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"Scene-selected"] forState:UIControlStateNormal];
+            NSLog(@"外出模式-WIFI");
+            
+        }else if (info.connectState == offLine) {
+            [self setNetState:netState_notConnect];
+            self.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
+            [self.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
+            NSLog(@"离线模式");
+        }
+        
+    }else {  //没有网络(断网)
+        [self setNetState:netState_notConnect];
+        self.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
+        [self.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
+        NSLog(@"离线模式");
+    }
+}
+
 //处理连接改变后的情况
 - (void)updateInterfaceWithReachability
 {
