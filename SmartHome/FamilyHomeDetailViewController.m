@@ -510,7 +510,7 @@
         return otherCell;
     }*/
     
-    return nil;
+    return [UITableViewCell new];
 }
 
 

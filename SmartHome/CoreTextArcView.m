@@ -280,12 +280,12 @@ static void PrepareGlyphArcInfo(CTLineRef line, CFIndex glyphCount, GlyphArcInfo
 @dynamic attributedString;
 - (NSAttributedString *)attributedString {
 		// Create an attributed string with the current font and string.
-    assert(self.font != nil);
-    assert(self.text != nil);
+    //assert(self.font != nil);
+    //assert(self.text != nil);
 	
-		// Create our attributes...
+    // Create our attributes...
 	
-		// font
+    // font
     CTFontRef fontRef = CTFontCreateWithName((CFStringRef)self.font.fontName, self.font.pointSize, NULL);
 	
 		// color

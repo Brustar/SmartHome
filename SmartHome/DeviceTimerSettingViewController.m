@@ -684,7 +684,7 @@
         return cell;
     }
     
-    return nil;
+    return [UITableViewCell new];
 }
 
 - (void)activeBtnClicked:(UIButton *)btn {
