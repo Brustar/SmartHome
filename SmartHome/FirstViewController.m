@@ -19,7 +19,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "SceneShortcutsViewController.h"
 #import "TabbarPanel.h"
-
+#import "RCDataManager.h"
 #import <RongIMKit/RongIMKit.h>
 #import "ConversationViewController.h"
 #import <RBStoryboardLink.h>
@@ -638,7 +638,7 @@
     conversationVC.conversationType = ConversationType_GROUP;
     conversationVC.targetId = aGroupInfo.groupId;
     [conversationVC setTitle: [NSString stringWithFormat:@"%@",aGroupInfo.groupName]];
-    
+    [RCIM sharedRCIM].userInfoDataSource = [RCDataManager shareManager];
     [self.navigationController pushViewController:conversationVC animated:YES];
 }
 
