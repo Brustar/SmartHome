@@ -38,7 +38,7 @@
                         </constraints>
                     </imageView>
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Cdz-aX-j1t">
-                        <rect key="frame" x="65" y="153.5" width="346" height="31"/>
+                        <rect key="frame" x="65" y="151.5" width="346" height="31"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="WQ4-Kq-qGc"/>
                         </constraints>
@@ -140,7 +140,7 @@
                     <constraint firstItem="Hww-mA-mWm" firstAttribute="centerY" secondItem="haH-tK-vIX" secondAttribute="centerY" id="acF-3h-ZAw"/>
                     <constraint firstItem="E17-LE-4YC" firstAttribute="centerY" secondItem="oLo-GC-C1Q" secondAttribute="centerY" id="bYy-ZY-Foq"/>
                     <constraint firstItem="KMR-zP-SSc" firstAttribute="centerY" secondItem="oLo-GC-C1Q" secondAttribute="centerY" id="dbU-6p-W9e"/>
-                    <constraint firstItem="Cdz-aX-j1t" firstAttribute="centerY" secondItem="haH-tK-vIX" secondAttribute="centerY" id="evg-M4-5pb"/>
+                    <constraint firstItem="Cdz-aX-j1t" firstAttribute="centerY" secondItem="haH-tK-vIX" secondAttribute="centerY" constant="-2" id="evg-M4-5pb"/>
                     <constraint firstItem="tu7-Qh-gUq" firstAttribute="centerY" secondItem="Hww-mA-mWm" secondAttribute="centerY" id="fHH-NK-vp7"/>
                     <constraint firstItem="KMR-zP-SSc" firstAttribute="centerX" secondItem="oLo-GC-C1Q" secondAttribute="centerX" id="iS7-eB-nJQ"/>
                     <constraint firstItem="V6h-qN-MvF" firstAttribute="leading" secondItem="KMR-zP-SSc" secondAttribute="trailing" constant="80" id="keH-bf-DCY"/>
@@ -155,6 +155,8 @@
                 <outlet property="TVNameLabel" destination="szB-8K-rDR" id="XOE-Ht-kbj"/>
                 <outlet property="TVSlider" destination="Cdz-aX-j1t" id="jAD-80-g1P"/>
                 <outlet property="TVSwitchBtn" destination="g5Z-I6-nHN" id="dfz-8R-nvK"/>
+                <outlet property="channelAddBtn" destination="V6h-qN-MvF" id="0Fu-vR-4To"/>
+                <outlet property="channelReduceBtn" destination="E17-LE-4YC" id="Rol-HH-hUs"/>
             </connections>
             <point key="canvasLocation" x="95" y="-5"/>
         </tableViewCell>
@@ -169,6 +171,6 @@
         <image name="ipad-btn_selete_nol" width="45" height="21"/>
         <image name="ipad-frm_adjust_nol" width="337" height="33"/>
         <image name="ipad-frm_adjustt_nol" width="209" height="10"/>
-        <image name="ipad-icon_add_nol" width="15" height="15"/>
+        <image name="ipad-icon_add_nol" width="19" height="19"/>
     </resources>
 </document>

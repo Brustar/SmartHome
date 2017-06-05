@@ -394,6 +394,7 @@
             self.ShowHeadImage.hidden = YES;
         }else{
             self.ShowHeadImage.hidden = NO;
+            self.ShowHeadImage.text = [NSString stringWithFormat:@"%d" ,unread<0?0:unread];
         }
         [self.IconeImageView sd_setImageWithURL:[NSURL URLWithString:protrait] placeholderImage:[UIImage imageNamed:@"logo"] options:SDWebImageRetryFailed];
     });

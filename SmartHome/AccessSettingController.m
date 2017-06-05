@@ -88,6 +88,14 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [self.userArr removeAllObjects];
+    [self.managerType removeAllObjects];
+    [self.userIDArr removeAllObjects];
+    
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/user_listall.aspx",[IOManager httpAddr]];
+    [self sendRequest:url withTag:1];
+    [self.userTableView reloadData];
 
 }
 - (void)viewDidLoad {
@@ -96,8 +104,7 @@
     [self setNaviBarTitle:@"权限控制"];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.userTableView.tableFooterView = [UIView new];
-    NSString *url = [NSString stringWithFormat:@"%@Cloud/user_listall.aspx",[IOManager httpAddr]];
-    [self sendRequest:url withTag:1];
+   
 }
 -(void)sendRequest:(NSString *)url withTag:(int)i
 {

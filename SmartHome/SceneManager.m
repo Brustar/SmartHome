@@ -1,4 +1,5 @@
- //
+
+//
 //  SceneManager.m
 //  SmartHome
 //
@@ -355,8 +356,11 @@
         }
     }else{ //没有定时
         
-        if (newScene.sceneName && newScene.picName && fileName && newScene.roomID) {
-            
+//        if (newScene.sceneName && newScene.picName && fileName && newScene.roomID) {
+        if (fileName) {
+            if (newScene.sceneName == nil) {
+                newScene.sceneName = @" ";
+            }
             parameter = @{
                           @"token":[UD objectForKey:@"AuthorToken"],
                           @"optype":@(0),

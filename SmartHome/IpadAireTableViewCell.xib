@@ -58,7 +58,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="PFi-ml-Y9x">
-                        <rect key="frame" x="108" y="100" width="394" height="31"/>
+                        <rect key="frame" x="108" y="98.5" width="394" height="31"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="8gH-p9-72y"/>
                         </constraints>
@@ -87,7 +87,7 @@
                     <constraint firstItem="POj-Tw-MeJ" firstAttribute="top" secondItem="uyh-MH-d67" secondAttribute="bottom" id="4Kp-lP-Zmv"/>
                     <constraint firstAttribute="trailingMargin" secondItem="cvh-nG-3VJ" secondAttribute="trailing" constant="10" id="6fW-Rt-Y6S"/>
                     <constraint firstItem="VaN-Yd-IRv" firstAttribute="leading" secondItem="Hl1-fu-xGe" secondAttribute="leadingMargin" constant="30" id="C8v-hx-ThN"/>
-                    <constraint firstItem="PFi-ml-Y9x" firstAttribute="centerY" secondItem="FJq-3P-VXL" secondAttribute="centerY" id="HaW-D9-2ea"/>
+                    <constraint firstItem="PFi-ml-Y9x" firstAttribute="centerY" secondItem="FJq-3P-VXL" secondAttribute="centerY" constant="-2" id="HaW-D9-2ea"/>
                     <constraint firstItem="POj-Tw-MeJ" firstAttribute="leading" secondItem="Hl1-fu-xGe" secondAttribute="leading" id="Jqo-Ud-5l1"/>
                     <constraint firstItem="POj-Tw-MeJ" firstAttribute="top" secondItem="cvh-nG-3VJ" secondAttribute="bottom" constant="1" id="PIo-Fu-x12"/>
                     <constraint firstItem="uyh-MH-d67" firstAttribute="leading" secondItem="Hl1-fu-xGe" secondAttribute="leading" constant="5" id="T9I-1b-vuB"/>
@@ -113,13 +113,13 @@
                 <outlet property="AireSwitchBtn" destination="axa-zE-k2y" id="m1P-ku-u7L"/>
                 <outlet property="temperatureLabel" destination="VaN-Yd-IRv" id="NAF-uk-luD"/>
             </connections>
-            <point key="canvasLocation" x="-86.5" y="-47.5"/>
+            <point key="canvasLocation" x="161" y="-79"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="dvd_btn_switch_off" width="34" height="23"/>
         <image name="dvd_frm_choice__normal" width="336" height="47"/>
-        <image name="ipad-icon_add_nol" width="15" height="15"/>
+        <image name="ipad-icon_add_nol" width="19" height="19"/>
         <image name="ktv_btn_ajt" width="269" height="20"/>
         <image name="ktv_btn_show" width="36" height="20"/>
     </resources>

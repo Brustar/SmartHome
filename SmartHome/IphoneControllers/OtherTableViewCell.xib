@@ -57,6 +57,7 @@
             <connections>
                 <outlet property="AddOtherBtn" destination="7yR-HS-KRG" id="NJr-aP-Zbl"/>
                 <outlet property="NameLabel" destination="QTR-CU-OME" id="vod-I0-Cys"/>
+                <outlet property="OtherConstraint" destination="yPb-yT-iDp" id="qOc-5M-p59"/>
                 <outlet property="OtherSwitchBtn" destination="YJM-5P-DIA" id="YFT-H5-5oM"/>
             </connections>
             <point key="canvasLocation" x="32.5" y="113"/>

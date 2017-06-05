@@ -17,8 +17,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    [self.PreviousBtn setImage:[UIImage imageNamed:@"DVD_previous_red"] forState:UIControlStateHighlighted];
-    [self.nextBtn setImage:[UIImage imageNamed:@"DVD_next_red"] forState:UIControlStateHighlighted];
+    [self.PreviousBtn setImage:[UIImage imageNamed:@"ipad-icon_lt_prd"] forState:UIControlStateHighlighted];
+    [self.nextBtn setImage:[UIImage imageNamed:@"ipad-icon_rt_prd"] forState:UIControlStateHighlighted];
     [self.DVDSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
     self.DVDSlider.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
     self.DVDSlider.minimumTrackTintColor = [UIColor colorWithRed:253/255.0 green:254/255.0 blue:254/255.0 alpha:1];
@@ -105,12 +105,12 @@
     NSData *data=nil;
     self.stopBtn.selected = !self.stopBtn.selected;
     if (self.stopBtn.selected) {
-        [self.stopBtn setImage:[UIImage imageNamed:@"DVD_pause"] forState:UIControlStateNormal];
+        [self.stopBtn setImage:[UIImage imageNamed:@"ipad-icon_st_prd"] forState:UIControlStateNormal];
         data=[[DeviceInfo defaultManager] pause:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
     }else{
-        [self.stopBtn setImage:[UIImage imageNamed:@"DVD_play"] forState:UIControlStateNormal];
+        [self.stopBtn setImage:[UIImage imageNamed:@"ipad-icon_st_nol"] forState:UIControlStateNormal];
         data=[[DeviceInfo defaultManager] play:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
