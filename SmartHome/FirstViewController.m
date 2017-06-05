@@ -82,7 +82,7 @@
 }
 
 - (void)netWorkDidChangedNotification:(NSNotification *)noti {
-    [[AFNetworkReachabilityManager sharedManager] startMonitoring];//开启网络监视器；
+    [self updateInterfaceWithReachability];
 }
 
 - (void)removeNotifications {
@@ -305,24 +305,18 @@
         DeviceInfo *info = [DeviceInfo defaultManager];
         if(status == AFNetworkReachabilityStatusReachableViaWWAN) //手机自带网络
         {
-            if (info.connectState == outDoor) {
+            if (info.connectState == offLine) {
+                [FirstBlockSelf setNetState:netState_notConnect];
+                FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
+                [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
+                NSLog(@"离线模式");
+                
+            }else{
                 [FirstBlockSelf setNetState:netState_outDoor_4G];
                 FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"circular"];
                 [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"Scene-selected"] forState:UIControlStateNormal];
                 NSLog(@"外出模式-4G");
                 
-            }else if (info.connectState == atHome){
-                [FirstBlockSelf setNetState:netState_atHome_4G];
-                FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"circular"];
-                [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"Scene-selected"] forState:UIControlStateNormal];
-                NSLog(@"在家模式-4G");
-                
-            }else if (info.connectState == offLine) {
-                [FirstBlockSelf setNetState:netState_notConnect];
-                FirstBlockSelf.SubImageView.image = [UIImage imageNamed:@"UNcircular"];
-                [FirstBlockSelf.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
-                NSLog(@"离线模式");
-
             }
         }
         else if(status == AFNetworkReachabilityStatusReachableViaWiFi) //WIFI

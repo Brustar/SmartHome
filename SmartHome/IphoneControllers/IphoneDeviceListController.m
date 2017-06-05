@@ -111,18 +111,12 @@ static NSString * const CYPhotoId = @"photo";
         DeviceInfo *info = [DeviceInfo defaultManager];
         if(status == AFNetworkReachabilityStatusReachableViaWWAN) //手机自带网络
         {
-            if (info.connectState == outDoor) {
-                [FirstBlockSelf setNetState:netState_outDoor_4G];
-                NSLog(@"外出模式-4G");
-                
-            }else if (info.connectState == atHome){
-                [FirstBlockSelf setNetState:netState_atHome_4G];
-                NSLog(@"在家模式-4G");
-                
-            }else if (info.connectState == offLine) {
+            if (info.connectState == offLine) {
                 [FirstBlockSelf setNetState:netState_notConnect];
                 NSLog(@"离线模式");
-                
+            }else{
+                [FirstBlockSelf setNetState:netState_outDoor_4G];
+                NSLog(@"外出模式-4G");
             }
         }
         else if(status == AFNetworkReachabilityStatusReachableViaWiFi) //WIFI
@@ -161,7 +155,7 @@ static NSString * const CYPhotoId = @"photo";
 }
 
 - (void)netWorkDidChangedNotification:(NSNotification *)noti {
-    [[AFNetworkReachabilityManager sharedManager] startMonitoring];//开启网络监视器；
+    [self updateInterfaceWithReachability];
 }
 
 - (void)removeNotifications {
