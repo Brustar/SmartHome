@@ -102,6 +102,7 @@ static NSString *const menuCellIdentifier = @"groupCell";
         [self.menuTitles addObject: [user objectForKey:@"nickname"] ];
         [self.menuIcons addObject: [[user objectForKey:@"portrait"] description]];
     }
+    [self.contextMenuTableView reloadData];
 }
 
 #pragma mark - YALContextMenuTableViewDelegate
