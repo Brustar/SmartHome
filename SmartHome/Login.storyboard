@@ -72,7 +72,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_pwd.png" translatesAutoresizingMaskIntoConstraints="NO" id="VTM-W7-24g" userLabel="pwdIcon">
                                 <rect key="frame" x="30" y="335" width="18" height="21"/>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="家庭名称" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="nz4-4Y-bvl" userLabel="nameText">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" 用户名" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="nz4-4Y-bvl" userLabel="nameText">
                                 <rect key="frame" x="70" y="285" width="240" height="20"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -83,7 +83,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="家庭钥匙" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Psq-FR-s7k" userLabel="pwdText">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Psq-FR-s7k" userLabel="pwdText">
                                 <rect key="frame" x="70" y="335" width="240" height="20"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -96,7 +96,7 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kVk-ig-yHA">
                                 <rect key="frame" x="30" y="390" width="77" height="30"/>
-                                <state key="normal" title="丢失钥匙？">
+                                <state key="normal" title="忘记密码？">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -529,7 +529,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_pwd.png" translatesAutoresizingMaskIntoConstraints="NO" id="kmi-nq-Lq6" userLabel="pwdIcon">
                                 <rect key="frame" x="30" y="415" width="18" height="21"/>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入家庭名称" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UsH-k5-J6D" userLabel="name">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入用户名" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UsH-k5-J6D" userLabel="name">
                                 <rect key="frame" x="70" y="315" width="240" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="5bZ-BC-VBi"/>
@@ -539,7 +539,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入家庭钥匙" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e5w-zT-cjB" userLabel="pwd">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e5w-zT-cjB" userLabel="pwd">
                                 <rect key="frame" x="70" y="365" width="240" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="oqR-Gg-43F"/>
@@ -549,7 +549,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请确认家庭钥匙" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ed6-x5-qdg" userLabel="pwd">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请确认密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ed6-x5-qdg" userLabel="pwd">
                                 <rect key="frame" x="70" y="415" width="240" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="bOB-Xg-3LM"/>
@@ -566,7 +566,7 @@
                                     <constraint firstAttribute="height" constant="14" id="ZJe-lk-ycG"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="两把钥匙不一致" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="01i-jd-2h4" userLabel="tip">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="两个密码不一致" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="01i-jd-2h4" userLabel="tip">
                                 <rect key="frame" x="60" y="476" width="240" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="NBl-lL-CFy"/>

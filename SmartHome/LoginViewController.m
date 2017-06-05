@@ -189,7 +189,7 @@
 }
 
 - (IBAction)forgetPwdBtnClicked:(id)sender {
-    WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:@"/user/update_pwd.aspx"] title:@"找回钥匙"];
+    WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:@"/user/update_pwd.aspx"] title:@"找回密码"];
     [self.navigationController pushViewController:web animated:YES];
 }
 
@@ -212,13 +212,13 @@
     
     if ([self.nameTextField.text isEqualToString:@""])
     {
-        [MBProgressHUD showError:@"请输入家庭名称或手机号"];
+        [MBProgressHUD showError:@"请输入用户名或手机号"];
         return;
     }
     
     if ([self.pwdTextField.text isEqualToString:@""])
     {
-        [MBProgressHUD showError:@"请输入家庭钥匙"];
+        [MBProgressHUD showError:@"请输入密码"];
         return;
     }
     
