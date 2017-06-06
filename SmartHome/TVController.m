@@ -221,21 +221,22 @@
     [self.btnOK setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
     [self.btnCHUP setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
     [self.btnCHDown setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
-    
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+    VolumeManager *volume=[VolumeManager defaultManager];
+    [volume start];
     
     [self initSlider];
     NSArray *menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
     [self initMenuContainer:self.menuContainer andArray:menus andID:self.deviceid];
+    if ([self.deviceid isEqualToString:@""]) {
+        return;
+    }
     [self naviToDevice];
     [self initChannelContainer];
     self.eNumber = [SQLManager getENumber:[self.deviceid intValue]];
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(changeVolume) forControlEvents:UIControlEventValueChanged];
-    
-    DeviceInfo *device=[DeviceInfo defaultManager];
-    [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-    VolumeManager *volume=[VolumeManager defaultManager];
-    [volume start];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];

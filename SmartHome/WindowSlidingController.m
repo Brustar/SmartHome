@@ -92,7 +92,7 @@
 
 -(void) initSwitcher
 {
-    self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:[UIImage imageNamed:@"plugin_off"] inactiveBackgroundImage:nil activeBackgroundImage:nil frame:CGRectMake(0, 0, 750/2, 750/2)];
+    self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:nil inactiveBackgroundImage:[UIImage imageNamed:@"plugin_off"] activeBackgroundImage:[UIImage imageNamed:@"plugin_on"] frame:CGRectMake(0, 0, 750/2, 750/2)];
     self.switcher.center = CGPointMake(self.view.bounds.size.width / 2,
                                        self.view.bounds.size.height / 2);
     
@@ -125,17 +125,16 @@
 }
 
 #pragma mark - ORBSwitchDelegate
-- (void)orbSwitchToggled:(ORBSwitch *)switchObj withNewValue:(BOOL)newValue {
+- (void)orbSwitchToggled:(ORBSwitch *)switchObj withNewValue:(BOOL)newValue
+{
     NSLog(@"Switch toggled: new state is %@", (newValue) ? @"ON" : @"OFF");
     NSData *data=[[DeviceInfo defaultManager] toogle:self.switcher.isOn deviceID:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
-- (void)orbSwitchToggleAnimationFinished:(ORBSwitch *)switchObj {
-    [switchObj setCustomKnobImage:[UIImage imageNamed:(switchObj.isOn) ? @"plugin_on" : @"plugin_off"]
-          inactiveBackgroundImage:nil
-            activeBackgroundImage:nil];
+- (void)orbSwitchToggleAnimationFinished:(ORBSwitch *)switchObj
+{
     
 }
 

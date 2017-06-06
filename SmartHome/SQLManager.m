@@ -2425,7 +2425,7 @@
         return mutabelArr;
     }
     
-    FMResultSet *resultSet = [db executeQuery:[NSString stringWithFormat:@"select * from Channels where isFavorite = 1 and eqId = %d and parent = %@",deviceID,type]];
+    FMResultSet *resultSet = [db executeQuery:[NSString stringWithFormat:@"select * from Channels where isFavorite = 1 and eqId = %d and parent = '%@'",deviceID,type]];
     while([resultSet next])
     {
         TVChannel *channel = [TVChannel new];

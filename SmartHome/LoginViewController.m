@@ -688,15 +688,12 @@ NSArray *array = [NSArray arrayWithObjects:
             if (!_isTheSameUser) { //如果不是同一个用户, 或者是同一个用户，但卸载重装了App
                 if ([self.hostIDS count] >0) {
                     int mid = [self.hostIDS[0] intValue];
-                    //切换帐号后，版本号归零
-                    if (mid != [[UD objectForKey:@"HostID"] intValue]) {
-                        [UD removeObjectForKey:@"room_version"];
-                        [UD removeObjectForKey:@"equipment_version"];
-                        [UD removeObjectForKey:@"scence_version"];
-                        [UD removeObjectForKey:@"tv_version"];
-                        [UD removeObjectForKey:@"fm_version"];
-                    }
                     
+                    [UD removeObjectForKey:@"room_version"];
+                    [UD removeObjectForKey:@"equipment_version"];
+                    [UD removeObjectForKey:@"scence_version"];
+                    [UD removeObjectForKey:@"tv_version"];
+                    [UD removeObjectForKey:@"fm_version"];
                     //更新UD的@"HostID"， 更新DeviceInfo的 masterID
                     [IOManager writeUserdefault:@(mid) forKey:@"HostID"];
                     info.masterID = mid;

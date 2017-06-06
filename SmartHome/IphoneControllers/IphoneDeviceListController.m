@@ -400,7 +400,7 @@ static NSString * const CYPhotoId = @"photo";
 -(void)goDeviceByRoomID:(NSString *)typeID
 {
     int type = [typeID intValue];
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+    if (ON_IPONE) {
         NSString *segua = [self seguaName:type];
         if (segua) {
             [self performSegueWithIdentifier:segua sender:self];

@@ -29,6 +29,7 @@ static NSString *const airCellIdentifier = @"airCell";
 @property (weak, nonatomic) IBOutlet UILabel *pmLabel;
 @property (weak, nonatomic) IBOutlet UILabel *noiseLabel;
 @property (strong, nonatomic) IBOutlet YALContextMenuTableView *paramView;
+@property (weak, nonatomic) IBOutlet UILabel *currentTemp;
 @property (weak, nonatomic) IBOutlet UIImageView *pm_clock_hand;
 @property (weak, nonatomic) IBOutlet UIImageView *humidity_hand;
 @property (weak, nonatomic) IBOutlet UIButton *disk;
@@ -118,7 +119,7 @@ static NSString *const airCellIdentifier = @"airCell";
 
 -(void) initSwitch
 {
-    self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:[UIImage imageNamed:@"air_control_off"] inactiveBackgroundImage:nil activeBackgroundImage:nil frame:CGRectMake(0, 0, 122, 122)];
+    self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:nil inactiveBackgroundImage:[UIImage imageNamed:@"air_control_off"] activeBackgroundImage:[UIImage imageNamed:@"air_control_cool"] frame:CGRectMake(0, 0, 122, 122)];
     
     self.switcher.knobRelativeHeight = 1.0f;
     self.switcher.delegate = self;
@@ -159,9 +160,10 @@ static NSString *const airCellIdentifier = @"airCell";
         return;
     }
     
-    if (tag==0) {
+    if (proto.cmd==0x01) {
+        
         if (proto.action.state==0x6A) {
-            self.showTemLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
+            self.currentTemp.text = [NSString stringWithFormat:@"Current:%d°C",proto.action.RValue];
         }
         if (proto.action.state==0x8A) {
             NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
@@ -182,11 +184,12 @@ static NSString *const airCellIdentifier = @"airCell";
             }
             [self.pm_clock_hand rotate:value];
         }
-        /*
-        if (proto.action.state==0x7E) {
-            NSString *valueString = [NSString stringWithFormat:@"%d db",proto.action.RValue];
-            self.noiseLabel.text = valueString;
-        }*/
+        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+        if ([devID intValue]==[self.deviceid intValue]) {
+            if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) {
+                self.switcher.isOn = proto.action.state;
+            }
+        }
     }
 }
 - (IBAction)changeMode:(id)sender {
@@ -206,13 +209,19 @@ static NSString *const airCellIdentifier = @"airCell";
     }
     
     if (self.currentMode == 1) {
-        self.showTemLabel.textColor = [UIColor colorWithRed:215/255.0 green:57/255.0 blue:78/255.0 alpha:1.0];
-        self.airMode = !self.currentMode;
-    }
-    
-    if (self.currentMode == 0){
         self.showTemLabel.textColor = [UIColor colorWithRed:33/255.0 green:119/255.0 blue:175/255.0 alpha:1.0];
         self.airMode = !self.currentMode;
+        [self.switcher setCustomKnobImage:nil
+              inactiveBackgroundImage:[UIImage imageNamed:@"air_control_off"]
+                activeBackgroundImage:[UIImage imageNamed:@"air_control_cool"]];
+        }
+    
+    if (self.currentMode == 0){
+        self.showTemLabel.textColor = [UIColor colorWithRed:215/255.0 green:57/255.0 blue:78/255.0 alpha:1.0];
+        self.airMode = !self.currentMode;
+        [self.switcher setCustomKnobImage:nil
+                  inactiveBackgroundImage:[UIImage imageNamed:@"air_control_off"]
+                    activeBackgroundImage:[UIImage imageNamed:@"air_control_heat"]];
     }
     
     if (self.currentMode < 2){
@@ -310,10 +319,9 @@ static NSString *const airCellIdentifier = @"airCell";
     if (self.airMode == 1) {
         img = @"air_control_heat";
     }
-    [switchObj setCustomKnobImage:[UIImage imageNamed:(switchObj.isOn) ? img : @"air_control_off"]
-          inactiveBackgroundImage:nil
-            activeBackgroundImage:nil];
-    
+    [switchObj setCustomKnobImage:nil
+          inactiveBackgroundImage:[UIImage imageNamed:@"air_control_off"]
+            activeBackgroundImage:[UIImage imageNamed:img]];
 }
 
 #pragma mark - UITouchDelegate
