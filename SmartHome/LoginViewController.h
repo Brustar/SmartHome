@@ -29,11 +29,29 @@
 #import "DeviceInfo.h"
 #import "PackManager.h"
 #import "CryptoManager.h"
-#import "DemoVideoPlayerViewController.h" 
+#import "DemoVideoPlayerViewController.h"
 
 @interface LoginViewController : UIViewController<QRCodeReaderDelegate, UITextFieldDelegate, HttpDelegate,UIActionSheetDelegate, AVPlayerViewControllerDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *pwdTextField;
+@property (weak, nonatomic) IBOutlet UIButton *loginBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *loginBtnTrailing;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *loginBtnLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *loginBtnBottom;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *registBtnTrailing;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *registBtnLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *registBtnBottom;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *line1Trailing;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *line1Leading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *line1Top;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *line2Trailing;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *line2Leading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *line2Top;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *line3Trailing;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *line3Leading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *line3Top;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *nameIconLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pwdIconLeading;
 
 @property (nonatomic,strong) NSMutableArray * home_room_infoArr;
 @property (nonatomic,strong) NSString *UserTypeStr;
