@@ -162,7 +162,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DeviceInfo *device = [DeviceInfo defaultManager];
+    //DeviceInfo *device = [DeviceInfo defaultManager];
     if(tableView == self.deviceTypeTableView)
     {
         self.deviceSubTypes = [NSMutableArray arrayWithArray:[SQLManager getDeviceTypeName:self.roomID subTypeName:_deviceTypes[indexPath.row]]];

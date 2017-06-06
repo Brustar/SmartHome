@@ -132,8 +132,22 @@
     if (page.currentPage == 2) {
         
         //调用方法，使滑动图消失
+        //[self scrollViewDisappear];
+    }
+}
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+    int current = scrollView.contentOffset.x/[UIScreen mainScreen].bounds.size.width;
+    
+    //根据scrollView 的位置对page 的当前页赋值
+    UIPageControl *page = (UIPageControl *)[self.view viewWithTag:201];
+    page.currentPage = current;
+    
+    //当显示到最后一页时，让滑动图消失
+    if (page.currentPage == 2) {
         [self scrollViewDisappear];
     }
+
 }
 
 -(void)scrollViewDisappear{
@@ -143,9 +157,9 @@
     UIPageControl *page = (UIPageControl *)[self.view viewWithTag:201];
     
     //设置滑动图消失的动画效果图
-    [UIView animateWithDuration:3.0f animations:^{
+    [UIView animateWithDuration:1.0f animations:^{
         
-        scrollView.center = CGPointMake(self.view.frame.size.width/2, 1.5 * self.view.frame.size.height);
+        scrollView.center = CGPointMake(-self.view.frame.size.width/2, self.view.frame.size.height/2);
         
     } completion:^(BOOL finished) {
         
