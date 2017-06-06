@@ -29,6 +29,7 @@ static NSString *const airCellIdentifier = @"airCell";
 @property (weak, nonatomic) IBOutlet UILabel *pmLabel;
 @property (weak, nonatomic) IBOutlet UILabel *noiseLabel;
 @property (strong, nonatomic) IBOutlet YALContextMenuTableView *paramView;
+@property (weak, nonatomic) IBOutlet UILabel *currentTemp;
 @property (weak, nonatomic) IBOutlet UIImageView *pm_clock_hand;
 @property (weak, nonatomic) IBOutlet UIImageView *humidity_hand;
 @property (weak, nonatomic) IBOutlet UIButton *disk;
@@ -162,7 +163,7 @@ static NSString *const airCellIdentifier = @"airCell";
     if (proto.cmd==0x01) {
         
         if (proto.action.state==0x6A) {
-            self.showTemLabel.text = [NSString stringWithFormat:@"%d°C",proto.action.RValue];
+            self.currentTemp.text = [NSString stringWithFormat:@"Current:%d°C",proto.action.RValue];
         }
         if (proto.action.state==0x8A) {
             NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
