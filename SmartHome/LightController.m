@@ -216,9 +216,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
         NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
         if ([devID intValue]==[self.deviceid intValue]) {
             if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) {
-                [self.switcher setCustomKnobImage:[UIImage imageNamed:proto.action.state?@"lighting_on":@"lighting_off"]
-                          inactiveBackgroundImage:nil
-                            activeBackgroundImage:nil];
+                self.switcher.isOn = proto.action.state;
             }else if(proto.action.state == 0x1A){
                 int brightness_f = proto.action.RValue;
                 float degree = M_PI*brightness_f/MAX_ROTATE_DEGREE;
@@ -352,10 +350,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     self.tranformView.tag = percent;
     
     if (degree>0) {
-        //[self.switcher setIsOn:YES];
-        [self.switcher setCustomKnobImage:[UIImage imageNamed:@"lighting_on"]
-              inactiveBackgroundImage:nil
-                activeBackgroundImage:nil];
+        [self.switcher setIsOn:YES];
     }else{
         self.tranformView.transform = CGAffineTransformMakeRotation(0);
     }
@@ -373,7 +368,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     self.tranformView.image = [UIImage imageNamed:@"glory"];
     self.tranformView.hidden = YES;
     
-    self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:[UIImage imageNamed:@"lighting_off"] inactiveBackgroundImage:nil activeBackgroundImage:nil frame:CGRectMake(0, 0, 194, 194)];
+    self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:nil inactiveBackgroundImage:[UIImage imageNamed:@"lighting_off"] activeBackgroundImage:[UIImage imageNamed:@"lighting_on"] frame:CGRectMake(0, 0, 194, 194)];
     
     self.switcher.knobRelativeHeight = 1.0f;
     self.switcher.delegate = self;
@@ -396,9 +391,6 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 }
 
 - (void)orbSwitchToggleAnimationFinished:(ORBSwitch *)switchObj {
-    [switchObj setCustomKnobImage:[UIImage imageNamed:(switchObj.isOn) ? @"lighting_on" : @"lighting_off"]
-          inactiveBackgroundImage:nil
-            activeBackgroundImage:nil];
 
 }
 
