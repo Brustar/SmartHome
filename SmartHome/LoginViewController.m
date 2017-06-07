@@ -333,7 +333,11 @@
             dispatch_once(&onceToken, ^{
                 QRCodeReader *reader = [QRCodeReader readerWithMetadataObjectTypes:@[AVMetadataObjectTypeQRCode]];
                 vc = [QRCodeReaderViewController readerWithCancelButtonTitle:@"取消" codeReader:reader startScanningAtLoad:YES showSwitchCameraButton:YES showTorchButton:YES];
-                vc.modalPresentationStyle = UIModalPresentationFormSheet;
+                if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+                    vc.modalPresentationStyle = UIModalPresentationFormSheet;
+                }
+                
+                
             });
             vc.delegate = self;
             
@@ -341,7 +345,12 @@
                 NSLog(@"Completion with result: %@", resultAsString);
             }];
             
-            [self presentViewController:vc animated:YES completion:NULL];
+            if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+                [self presentViewController:vc animated:YES completion:NULL];
+            }else {
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            
         }
         else {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"标题" message:@"不能打开摄像头，请确认授权使用摄像头" preferredStyle:UIAlertControllerStyleAlert];
@@ -375,7 +384,11 @@ NSArray *array = [NSArray arrayWithObjects:
 #pragma mark - QRCode Delegate
 - (void)readerDidCancel:(QRCodeReaderViewController *)reader
 {
-    [self dismissViewControllerAnimated:YES completion:NULL];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+         [self dismissViewControllerAnimated:YES completion:NULL];
+    }else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result
@@ -386,48 +399,72 @@ NSArray *array = [NSArray arrayWithObjects:
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
     UIViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"registFirstStepVC"];
     
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-        //result 格式： hostid @ hostname @ userType
-        NSArray* list = [result componentsSeparatedByString:@"@"];
-        if([list count] > 2)
-        {
-            self.masterId = list[0];
-            self.hostName = list[1];
-            [vc setValue:self.masterId forKey:@"masterStr"];
-            [vc setValue:self.hostName forKey:@"hostName"];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        [self dismissViewControllerAnimated:YES completion:^{
+            
+            //result 格式： hostid @ hostname @ userType
+            NSArray* list = [result componentsSeparatedByString:@"@"];
+            if([list count] > 2)
+            {
+                self.masterId = list[0];
+                self.hostName = list[1];
+                [vc setValue:self.masterId forKey:@"masterStr"];
+                [vc setValue:self.hostName forKey:@"hostName"];
+                
+                
+                if ([@"1" isEqualToString:list[2]]) {
+                    self.role=@"主人";
+                }else{
+                    self.role=@"客人";
+                }
+                [vc setValue:self.role forKey:@"suerTypeStr"];
+            }
             
             
-            if ([@"1" isEqualToString:list[2]]) {
-                self.role=@"主人";
-            }else{
-                self.role=@"客人";
+            else
+            {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"非法的二维码" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+                [alert addAction:okAction];
+                [self presentViewController:alert animated:YES completion:nil];
             }
-            [vc setValue:self.role forKey:@"suerTypeStr"];
-        }
+        }];
+    }else {
+        [self.navigationController popViewControllerAnimated:YES];
         
         
-        /*if([list count] > 1)
-        {
-            self.masterId = list[0];
-            [vc setValue:@([self.masterId intValue]) forKey:@"masterStr"];
-            if ([@"1" isEqualToString:list[1]]) {
-                self.role=@"主人";
-            }else{
-                self.role=@"客人";
+            
+            //result 格式： hostid @ hostname @ userType
+            NSArray* list = [result componentsSeparatedByString:@"@"];
+            if([list count] > 2)
+            {
+                self.masterId = list[0];
+                self.hostName = list[1];
+                [vc setValue:self.masterId forKey:@"masterStr"];
+                [vc setValue:self.hostName forKey:@"hostName"];
+                
+                
+                if ([@"1" isEqualToString:list[2]]) {
+                    self.role=@"主人";
+                }else{
+                    self.role=@"客人";
+                }
+                [vc setValue:self.role forKey:@"suerTypeStr"];
             }
-            [vc setValue:self.role forKey:@"suerTypeStr"];
-        }*/
+            
+            
+            else
+            {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"非法的二维码" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+                [alert addAction:okAction];
+                [self presentViewController:alert animated:YES completion:nil];
+            }
         
         
-        else
-        {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"非法的二维码" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
-            [alert addAction:okAction];
-            [self presentViewController:alert animated:YES completion:nil];
-        }
-    }];
+    }
+    
+    
     [self.navigationController pushViewController:vc animated:YES];
     
 }

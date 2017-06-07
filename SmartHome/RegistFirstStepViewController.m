@@ -26,7 +26,38 @@
     [self.phoneNumTextField setValue:[UIColor grayColor] forKeyPath:@"_placeholderLabel.textColor"];
     
     self.countryCode = @"86";//默认国家码
-    
+    [self adjustIpadUI];
+}
+
+- (void)adjustIpadUI {
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        
+        self.line1Leading.constant = 260;
+        self.line1Trailing.constant = 260;
+        self.line2Leading.constant = self.line1Leading.constant;
+        self.line2Trailing.constant = self.line1Trailing.constant;
+        self.line3Leading.constant = self.line1Leading.constant;
+        self.line3Trailing.constant = self.line1Trailing.constant;
+        
+        self.homeLabelLeading.constant = self.line1Leading.constant + 30;
+        self.homeNameLabelLeading.constant = self.homeLabelLeading.constant + 80;
+        self.authLabelLeading.constant = self.homeLabelLeading.constant;
+        self.authNameLabelLeading.constant = self.authLabelLeading.constant + 80;
+        
+        self.countryCodeLeading.constant = self.homeLabelLeading.constant;
+        self.phoneNumLeading.constant = self.countryCodeLeading.constant;
+        self.phoneNumTextFieldLeading.constant = self.phoneNumLeading.constant + 80;
+        self.phoneNumTextFieldWidth.constant = 300;
+        self.pullBtnTrailing.constant = self.line1Trailing.constant + 20;
+        self.countryCodeTableTrailing.constant = self.line1Trailing.constant;
+        self.countryCodeTableLeading.constant = self.line1Leading.constant;
+        self.nextBtnTrailing.constant = self.line1Trailing.constant + 90;
+        self.nextBtnLeading.constant = self.line1Leading.constant + 90;
+        self.tips1Leading.constant = self.nextBtnLeading.constant + 40;
+        self.tips2Leading.constant = self.tips1Leading.constant + 240;
+        self.tips3Leading.constant = self.tips1Leading.constant;
+        self.protocolBtnLeading.constant = self.tips1Leading.constant + 70;
+    }
 }
 
 - (void)backBtnAction:(UIButton *)btn {

@@ -433,10 +433,33 @@
                     </view>
                     <connections>
                         <outlet property="authLabel" destination="Tab-J5-rxv" id="6hh-wq-hTp"/>
+                        <outlet property="authLabelLeading" destination="23v-BE-3ih" id="B8o-IS-oTt"/>
+                        <outlet property="authNameLabelLeading" destination="Ash-XP-uJJ" id="7ve-bs-iTz"/>
                         <outlet property="countryCodeLabel" destination="1JC-WN-TR2" id="61K-ac-gdZ"/>
+                        <outlet property="countryCodeLeading" destination="Xiy-n6-QDW" id="Rwp-Zj-PEa"/>
+                        <outlet property="countryCodeTableLeading" destination="h6i-ve-qpd" id="KVH-HP-RK3"/>
+                        <outlet property="countryCodeTableTrailing" destination="wXf-bJ-s5P" id="HKG-eu-a17"/>
                         <outlet property="countryCodeTableView" destination="obl-xh-O7o" id="iZM-w4-OLk"/>
                         <outlet property="homeLabel" destination="yVE-J1-6Ge" id="lUy-KZ-ECe"/>
+                        <outlet property="homeLabelLeading" destination="T4H-zp-Yim" id="eMt-Lz-qhj"/>
+                        <outlet property="homeNameLabelLeading" destination="zyR-xc-7du" id="2b8-jS-fBU"/>
+                        <outlet property="line1Leading" destination="WDg-SE-DdG" id="q7v-at-3el"/>
+                        <outlet property="line1Trailing" destination="WTH-pU-hji" id="CQ0-Le-fpK"/>
+                        <outlet property="line2Leading" destination="7FM-9i-d2h" id="KYi-WK-BQp"/>
+                        <outlet property="line2Trailing" destination="bRP-1x-UcD" id="RLj-2F-xIq"/>
+                        <outlet property="line3Leading" destination="h78-UR-cC3" id="p0f-2T-zsR"/>
+                        <outlet property="line3Trailing" destination="UoT-tT-eoI" id="ZeD-No-aWw"/>
+                        <outlet property="nextBtnLeading" destination="ZbC-8Q-vja" id="3C2-gb-TN8"/>
+                        <outlet property="nextBtnTrailing" destination="snu-Ls-wNf" id="13e-8t-bhb"/>
+                        <outlet property="phoneNumLeading" destination="1aS-bD-EXW" id="SRa-JY-cLD"/>
                         <outlet property="phoneNumTextField" destination="rWA-iL-aNh" id="7oi-gl-icE"/>
+                        <outlet property="phoneNumTextFieldLeading" destination="WDe-Tf-vN0" id="I6z-Av-aDp"/>
+                        <outlet property="phoneNumTextFieldWidth" destination="MSy-S6-d7K" id="Bbd-b7-KbM"/>
+                        <outlet property="protocolBtnLeading" destination="scC-TL-D5O" id="UzD-5d-O1X"/>
+                        <outlet property="pullBtnTrailing" destination="2YV-cM-Mle" id="ZCy-3j-1hw"/>
+                        <outlet property="tips1Leading" destination="Xaa-uJ-NSm" id="8I0-V7-4eU"/>
+                        <outlet property="tips2Leading" destination="Hwz-HO-eEN" id="05v-t2-B8R"/>
+                        <outlet property="tips3Leading" destination="wcI-iU-g6G" id="VvQ-Iv-LJz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iHC-nI-zpM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -669,13 +692,43 @@
                     </view>
                     <connections>
                         <outlet property="checkCodeBtn" destination="bdw-ec-ShK" id="I6e-2g-SSa"/>
+                        <outlet property="checkCodeBtnTrailing" destination="1KX-Uw-WVM" id="86Q-Bd-BDk"/>
+                        <outlet property="checkCodeFieldLeading" destination="PY5-9Q-Vld" id="yLI-tA-49n"/>
+                        <outlet property="checkCodeFieldWidth" destination="t27-6t-y11" id="5nh-OR-LiZ"/>
                         <outlet property="checkCodeTextField" destination="cfN-uv-duS" id="FOv-Qh-XAS"/>
+                        <outlet property="line1Leading" destination="Nab-UJ-bH3" id="wvj-xv-0ji"/>
+                        <outlet property="line1Trailing" destination="K1e-DZ-pZQ" id="W8U-XI-Hi9"/>
+                        <outlet property="line2Leading" destination="yHG-lp-75S" id="iWp-be-ZC7"/>
+                        <outlet property="line2Trailing" destination="ZCb-2O-DU7" id="isY-2F-nd7"/>
+                        <outlet property="line3Leading" destination="zPl-OD-27I" id="Owb-GF-fuS"/>
+                        <outlet property="line3Trailing" destination="4aY-oA-SHr" id="nv9-Tx-O2B"/>
+                        <outlet property="line4Leading" destination="gRm-Lf-NFE" id="32H-PS-BBW"/>
+                        <outlet property="line4Trailing" destination="45m-ZY-2PG" id="62w-Oa-GaL"/>
+                        <outlet property="line5Leading" destination="SOE-ZJ-j6E" id="Mhb-jd-wxx"/>
+                        <outlet property="line5Trailing" destination="IdW-nn-53Z" id="eXT-HF-DYP"/>
+                        <outlet property="line6Leading" destination="2MR-B9-bQs" id="RiR-Xf-SvP"/>
+                        <outlet property="line6Trailing" destination="DdD-WN-fD8" id="xHt-ux-oEr"/>
+                        <outlet property="nameIconLeading" destination="E4q-oC-f6I" id="Tsg-8M-zF2"/>
                         <outlet property="nameTextField" destination="UsH-k5-J6D" id="kyI-hP-BwK"/>
+                        <outlet property="nameTextFieldLeading" destination="eqd-Ct-Sbx" id="ekO-bX-rPs"/>
+                        <outlet property="nameTextFieldWidth" destination="otv-Iv-pKs" id="Y2W-3V-a3t"/>
+                        <outlet property="nextBtnLeading" destination="PCH-cG-vwi" id="PPI-Qc-eB5"/>
+                        <outlet property="nextBtnTrailing" destination="Hlq-C0-fmN" id="0LR-xY-j18"/>
                         <outlet property="phoneNumLabel" destination="N4K-9h-Xim" id="J20-ls-TLK"/>
+                        <outlet property="phoneNumLabelLeading" destination="oF9-wa-TjL" id="vYu-2R-a5o"/>
+                        <outlet property="phoneNumLeading" destination="kan-9U-oOZ" id="lZF-G4-3uo"/>
+                        <outlet property="pwd2IconLeading" destination="MCL-Pa-oXJ" id="9mm-pi-Ydh"/>
                         <outlet property="pwd2TextField" destination="Ed6-x5-qdg" id="E6D-YM-EOd"/>
+                        <outlet property="pwd2TextFieldLeading" destination="xsm-Py-4pM" id="hdI-O5-FL2"/>
+                        <outlet property="pwd2TextFieldWidth" destination="bOB-Xg-3LM" id="fcC-fu-anG"/>
+                        <outlet property="pwdIconLeading" destination="Mv4-fC-EvU" id="GQB-be-BQA"/>
                         <outlet property="pwdTextField" destination="e5w-zT-cjB" id="1G9-Ya-ewZ"/>
+                        <outlet property="pwdTextFieldLeading" destination="Gru-M3-evR" id="DGv-MJ-Nab"/>
+                        <outlet property="pwdTextFieldWidth" destination="txP-MH-FI5" id="B71-Cv-gIf"/>
+                        <outlet property="tipIconLeading" destination="3zL-Rw-51t" id="0q9-NE-26T"/>
                         <outlet property="tipImageView" destination="Lpl-mt-H5T" id="KFj-zo-zIF"/>
                         <outlet property="tipLabel" destination="01i-jd-2h4" id="jjy-L6-64W"/>
+                        <outlet property="tipLabelLeading" destination="RU3-hK-X18" id="h35-dp-66N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="opj-Z6-HYQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -869,8 +922,27 @@
                     </view>
                     <connections>
                         <outlet property="countryCodeLabel" destination="vH6-Rq-XKm" id="36F-6H-mlH"/>
+                        <outlet property="countryCodeLeading" destination="Vhr-4J-fLd" id="n4i-GF-2xT"/>
+                        <outlet property="countryCodeTableLeading" destination="Fgo-w2-AaD" id="mEg-7F-Mjf"/>
+                        <outlet property="countryCodeTableTrailing" destination="eys-fA-qwY" id="6GE-qJ-blx"/>
                         <outlet property="countryCodeTableView" destination="du2-5F-Mh9" id="KdN-ng-4x6"/>
+                        <outlet property="line1Leading" destination="El0-85-RpK" id="N0Y-Ho-cci"/>
+                        <outlet property="line1Trailing" destination="QEn-Yf-VB2" id="dMG-3S-Mcp"/>
+                        <outlet property="line2Leading" destination="p1Q-Dl-6hG" id="ixX-eG-CFb"/>
+                        <outlet property="line2Trailing" destination="nTg-ME-L1x" id="vyN-bM-QiM"/>
+                        <outlet property="line3Leading" destination="nuG-Hc-4uB" id="dln-V9-ZrU"/>
+                        <outlet property="line3Trailing" destination="6Ai-87-0Gc" id="BMi-1C-fgU"/>
+                        <outlet property="nextBtnLeading" destination="6Zn-qa-wGF" id="Emh-N1-u4O"/>
+                        <outlet property="nextBtnTrailing" destination="9KV-tV-sqo" id="Q3x-kN-Pad"/>
+                        <outlet property="phoneNumLabelLeading" destination="VZd-Wz-OLa" id="7q3-CJ-EvF"/>
                         <outlet property="phoneNumTextField" destination="Vy5-Lc-u1r" id="rp6-2q-g2Q"/>
+                        <outlet property="phoneNumTextFieldLeading" destination="oMx-fp-XW7" id="ZZL-Cn-8kY"/>
+                        <outlet property="phoneNumTextFieldWidth" destination="glH-iA-6Xo" id="koK-FK-mV3"/>
+                        <outlet property="protocolBtnLeading" destination="0Qt-TE-umy" id="MOU-BI-JuK"/>
+                        <outlet property="pullBtnTrailing" destination="4if-H8-YSJ" id="Dwe-Lv-KXE"/>
+                        <outlet property="tips1Leading" destination="Kcf-rn-dgd" id="lTz-IO-BcT"/>
+                        <outlet property="tips2Leading" destination="e4y-qh-mKi" id="451-NQ-en7"/>
+                        <outlet property="tips3Leading" destination="9Ik-l3-TKK" id="e9z-XA-P8T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WIW-bM-fTs" userLabel="First Responder" sceneMemberID="firstResponder"/>
