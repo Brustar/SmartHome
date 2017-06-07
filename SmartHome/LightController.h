@@ -15,7 +15,7 @@
 #import "CustomNaviBarView.h"
 #import "CustomViewController.h"
 
-#define MAX_ROTATE_DEGREE 135
+#define MAX_ROTATE_DEGREE 175
 
 @interface LightController : CustomViewController<TcpRecvDelegate>
 

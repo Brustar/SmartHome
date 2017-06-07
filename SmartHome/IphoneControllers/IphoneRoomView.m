@@ -12,6 +12,7 @@
 @property (nonatomic,strong) NSMutableArray *btns;
 @property (nonatomic, weak) UIButton *selectedButton;
 @property (nonatomic, assign) int selectedButtonCount;
+@property (nonatomic) bool fromStoreboard;
 @end
 @implementation IphoneRoomView
 
@@ -34,7 +35,6 @@
     self = [super initWithFrame:frame];
     if(self)
     {
-        self.frame = frame;
         self.sv = [[UIScrollView alloc] init];
         [self addSubview:self.sv];
         self.sv.bounces = NO;
@@ -46,6 +46,7 @@
     self = [super initWithCoder:aDecoder];
     if(self)
     {
+        self.fromStoreboard = YES;
         self.sv = [[UIScrollView alloc] init];
         [self addSubview:self.sv];
         self.sv.bounces = NO;
@@ -173,8 +174,9 @@
     if (self.dataArray.count < 1) {
         return;
     }
-    
-    //[self setViewFrame];
+    if (self.fromStoreboard) {
+        [self setViewFrame];
+    }
 }
 
 @end
