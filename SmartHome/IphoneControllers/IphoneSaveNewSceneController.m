@@ -43,6 +43,12 @@
        [self setupNaviBar];
        [self creatUI];
 }
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+}
 -(void)creatUI
 {
     _isActive = 1;
@@ -92,6 +98,7 @@
         [self.navigationController pushViewController:iphoneSceneVC animated:YES];
     }else{
         [MBProgressHUD showSuccess:@"请先选择设备"];
+        [self.navigationController popViewControllerAnimated:YES];
     }
   
 }

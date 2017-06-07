@@ -42,6 +42,7 @@ static NSString * const IpadSceneId = @"photo";
 @property (nonatomic, readonly) UIButton *naviMiddletBtn;
 @property (nonatomic,strong) BaseTabBarController *baseTabbarController;
 
+
 @end
 
 @implementation IpadSceneViewController
@@ -430,6 +431,7 @@ static NSString * const IpadSceneId = @"photo";
                         [[SceneManager defaultManager] delScene:scene];
                         [MBProgressHUD showSuccess:@"删除成功"];
                         [self setUpRoomView];
+                      
                         [self.FirstCollectionView reloadData];
                     }else {
                         NSLog(@"scene 不存在！");

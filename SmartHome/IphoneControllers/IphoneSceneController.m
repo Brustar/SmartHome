@@ -54,14 +54,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *AddSceneBtn;
 @property (nonatomic,strong) NSArray * arrayData;
 @property (nonatomic,assign) int sceneID;
-//@property (nonatomic,strong) YZNavigationMenuView *menuView;
 @property (strong, nonatomic) IBOutlet UIButton *titleButton;
 @property (nonatomic,strong) HostIDSController *hostVC;
 @property (nonatomic,strong) UICollectionView * FirstCollectionView;
 @property (nonatomic,strong) UILongPressGestureRecognizer *lgPress;
 @property (nonatomic,strong) UIImage *selectSceneImg;
 @property (nonatomic,strong) CYPhotoCell *currentCell;
-//@property (nonatomic,assign) int status;
 @property (nonatomic,strong) BaseTabBarController *baseTabbarController;
 
 @end
