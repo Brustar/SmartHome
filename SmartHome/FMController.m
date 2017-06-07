@@ -113,6 +113,7 @@
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 收音机",roomName]];
     [self initSlider];
+    self.menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
     if (self.menus.count<6) {
         [self initMenuContainer:self.menuContainer andArray:self.menus andID:self.deviceid];
     }else{
