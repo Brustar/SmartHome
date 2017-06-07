@@ -198,9 +198,7 @@ static NSString *const airCellIdentifier = @"airCell";
     NSArray *imgRed = @[@"cool_red",@"heat_red",@"wet_red",@"wind_red",@""];
     UIButton *btn = (UIButton *)sender;
     self.currentMode=(int)btn.tag;
-    [btn setTitleColor:[UIColor colorWithRed:215/255.0 green:57/255.0 blue:78/255.0 alpha:1.0] forState:UIControlStateNormal];
-    
-    [btn setImage:[UIImage imageNamed:[imgRed objectAtIndex:self.currentMode]] forState:UIControlStateNormal];
+
     for (UIButton *b in self.visitedBtns) {
         if(b.tag!=self.currentMode){
             [b setImage:[UIImage imageNamed:[imgBlue objectAtIndex:b.tag]] forState:UIControlStateNormal];
@@ -223,7 +221,13 @@ static NSString *const airCellIdentifier = @"airCell";
                   inactiveBackgroundImage:[UIImage imageNamed:@"air_control_off"]
                     activeBackgroundImage:[UIImage imageNamed:@"air_control_heat"]];
     }
-    
+    if (self.airMode == 0) {
+        [btn setTitleColor:[UIColor colorWithRed:33/255.0 green:119/255.0 blue:175/255.0 alpha:1.0] forState:UIControlStateNormal];
+    }else{
+        [btn setTitleColor:[UIColor colorWithRed:215/255.0 green:57/255.0 blue:78/255.0 alpha:1.0] forState:UIControlStateNormal];
+        
+        [btn setImage:[UIImage imageNamed:[imgRed objectAtIndex:self.currentMode]] forState:UIControlStateNormal];
+    }
     if (self.currentMode < 2){
         for (int i=1; i<16; i++) {
             UIView *viewblue = [self.view viewWithTag:i+100];
