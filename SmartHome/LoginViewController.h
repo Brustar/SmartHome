@@ -52,6 +52,12 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *line3Top;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *nameIconLeading;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *pwdIconLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *nameTextFieldLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *nameTextFieldWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pwdTextFieldLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pwdTextFieldWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *forgetBtnLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tryBtnTrailing;
 
 @property (nonatomic,strong) NSMutableArray * home_room_infoArr;
 @property (nonatomic,strong) NSString *UserTypeStr;

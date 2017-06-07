@@ -38,6 +38,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background.png" translatesAutoresizingMaskIntoConstraints="NO" id="yhr-Ec-e0T" userLabel="bg">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="4fl-Hr-xJc" userLabel="logo">
                                 <rect key="frame" x="167" y="100" width="80" height="86"/>
                                 <constraints>
@@ -127,9 +130,6 @@
                                     <action selector="registBtnClicked:" destination="hnP-DE-crO" eventType="touchUpInside" id="eUB-95-vbG"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background.png" translatesAutoresizingMaskIntoConstraints="NO" id="yhr-Ec-e0T" userLabel="bg">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -173,6 +173,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="KxA-mV-EBB"/>
                     <connections>
+                        <outlet property="forgetBtnLeading" destination="BgQ-LO-WcH" id="bMR-y8-lRY"/>
                         <outlet property="line1Leading" destination="Y97-1K-zdY" id="2mQ-X2-kOx"/>
                         <outlet property="line1Top" destination="t4p-gh-paX" id="SEK-EO-cds"/>
                         <outlet property="line1Trailing" destination="6vZ-xh-9fi" id="Ld5-AH-SrD"/>
@@ -188,11 +189,16 @@
                         <outlet property="loginBtnTrailing" destination="lcC-s8-OSP" id="4R6-8P-n6d"/>
                         <outlet property="nameIconLeading" destination="acg-jY-THA" id="FYe-AA-xJV"/>
                         <outlet property="nameTextField" destination="nz4-4Y-bvl" id="3Qe-Sg-TqQ"/>
+                        <outlet property="nameTextFieldLeading" destination="4Bf-cD-OuI" id="szS-Dw-lyc"/>
+                        <outlet property="nameTextFieldWidth" destination="pBG-Hp-cIz" id="302-9Z-byW"/>
                         <outlet property="pwdIconLeading" destination="IoE-Dx-eOi" id="eiR-FT-bPv"/>
                         <outlet property="pwdTextField" destination="Psq-FR-s7k" id="zZx-Ly-Zzt"/>
+                        <outlet property="pwdTextFieldLeading" destination="OnH-aD-eXu" id="byI-Lc-p9E"/>
+                        <outlet property="pwdTextFieldWidth" destination="G5d-Q8-TKn" id="VHS-Uh-kIh"/>
                         <outlet property="registBtnBottom" destination="vji-aV-bgh" id="fBp-fT-j6v"/>
                         <outlet property="registBtnLeading" destination="tGP-ki-PK2" id="6kH-8E-7op"/>
                         <outlet property="registBtnTrailing" destination="yf8-16-pXW" id="B83-p0-jTC"/>
+                        <outlet property="tryBtnTrailing" destination="ec4-my-Ps7" id="2KB-QJ-O9q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pWV-Dg-oUV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -897,7 +903,7 @@
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head_bg" translatesAutoresizingMaskIntoConstraints="NO" id="Arr-zK-PPd" userLabel="headBg">
-                                <rect key="frame" x="127" y="129" width="160" height="160"/>
+                                <rect key="frame" x="127.66666666666669" y="129" width="160" height="160"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="160" id="sok-wp-R3L"/>
                                     <constraint firstAttribute="width" constant="160" id="z6T-lM-56f"/>
