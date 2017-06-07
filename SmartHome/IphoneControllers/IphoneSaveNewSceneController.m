@@ -47,8 +47,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
+  
 }
+
 -(void)creatUI
 {
     _isActive = 1;
@@ -87,12 +88,12 @@
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
     
-    Scene *scene = [[Scene alloc]initWhithoutSchedule];
-    scene.roomID = self.roomId;
-    [scene setValuesForKeysWithDictionary:plistDic];
-    if (scene.devices.count != 0) {
+    _scene = [[Scene alloc]initWhithoutSchedule];
+    _scene.roomID = self.roomId;
+    [_scene setValuesForKeysWithDictionary:plistDic];
+    if (_scene.devices.count != 0) {
         [[DeviceInfo defaultManager] setEditingScene:NO];
-        [[SceneManager defaultManager] addScene:scene withName:self.sceneName.text withImage:self.selectSceneImg];
+        [[SceneManager defaultManager] addScene:_scene withName:self.sceneName.text withImage:self.selectSceneImg];
         UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
         IphoneSceneController * iphoneSceneVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
         [self.navigationController pushViewController:iphoneSceneVC animated:YES];
@@ -206,7 +207,11 @@
     }
     _isActive = self.startSceneBtn.selected;
 }
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

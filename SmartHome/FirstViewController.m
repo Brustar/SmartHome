@@ -546,9 +546,9 @@
     NSString *music_icon = nil;
     NSInteger isPlaying = [[UD objectForKey:@"IsPlaying"] integerValue];
     if (isPlaying) {
-        music_icon = @"music-red";
+        music_icon = @"Ipad-NowMusic-red";
     }else {
-        music_icon = @"music_white";
+        music_icon = @"Ipad-NowMusic";
     }
     
     _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:music_icon imgHighlight:music_icon target:self action:@selector(rightBtnClicked:)];
