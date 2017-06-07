@@ -93,7 +93,7 @@
         [deviceNames addObject:deviceName];
     }
     
-    IphoneRoomView *menu = [[IphoneRoomView alloc] initWithFrame:CGRectMake(0,0, 320, 40)];
+    IphoneRoomView *menu = [[IphoneRoomView alloc] initWithFrame:CGRectMake(0,0, [UIScreen mainScreen].bounds.size.width, 40)];
     
     menu.dataArray = deviceNames;
     menu.delegate = self;
@@ -113,6 +113,7 @@
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 收音机",roomName]];
     [self initSlider];
+    self.menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
     if (self.menus.count<6) {
         [self initMenuContainer:self.menuContainer andArray:self.menus andID:self.deviceid];
     }else{
@@ -495,8 +496,7 @@
     if([keyPath isEqualToString:@"volume"])
     {
         DeviceInfo *device=[DeviceInfo defaultManager];
-        self.volume.value=[[device valueForKey:@"volume"] floatValue]*100;
-
+        self.volume.value=[[device valueForKey:@"volume"] floatValue];
     }
 }
 

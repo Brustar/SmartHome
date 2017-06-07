@@ -116,7 +116,7 @@ BOOL animating;
         [deviceNames addObject:deviceName];
     }
     
-    IphoneRoomView *menu = [[IphoneRoomView alloc] initWithFrame:CGRectMake(0,0, 320, 40)];
+    IphoneRoomView *menu = [[IphoneRoomView alloc] initWithFrame:CGRectMake(0,0, [UIScreen mainScreen].bounds.size.width, 40)];
     
     menu.dataArray = deviceNames;
     menu.delegate = self;
@@ -185,7 +185,7 @@ BOOL animating;
 
 -(void)changeVolume
 {
-    NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volume.value deviceID:self.deviceid];
+    NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volume.value*100 deviceID:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
 }

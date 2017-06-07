@@ -61,6 +61,17 @@
             
         }else{
             [self.AddScreenCurtainBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
+            
+            [_scene setSceneID:[self.sceneid intValue]];
+            [_scene setRoomID:self.roomID];
+            [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
+            
+            [_scene setReadonly:NO];
+            NSMutableArray *devices = [NSMutableArray arrayWithObject:[NSString stringWithFormat:@"@%d",device.deviceID]];
+            
+            [devices removeObject:[NSString stringWithFormat:@"@%d",device.deviceID]];
+            [_scene setDevices:devices];
+            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
         }
     }
   
