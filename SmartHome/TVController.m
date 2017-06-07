@@ -11,11 +11,11 @@
 #import "SceneManager.h"
 #import "TVChannel.h"
 #import "DVCollectionViewCell.h"
-#import "TVLogoCell.h"
+
 #import "MBProgressHUD+NJ.h"
 #import "KxMenu.h"
 #import "VolumeManager.h"
-
+#import "IphoneRoomView.h"
 #import "SocketManager.h"
 #import "SQLManager.h"
 #import "HttpManager.h"
@@ -58,7 +58,7 @@
 @end
 
 
-@interface TVController ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,TVLogoCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,TVIconControllerDelegate>
+@interface TVController ()<UIScrollViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,IphoneRoomViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *unstoreLabel;
 
@@ -70,7 +70,6 @@
 @property (nonatomic,strong) NSArray *btnTitles;
 
 @property (nonatomic,strong) NSMutableArray *allFavourTVChannels;
-@property (nonatomic,strong) TVLogoCell *cell;
 
 //编辑电视属性
 @property (weak, nonatomic) IBOutlet UITextField *channelName;
@@ -81,6 +80,7 @@
 @property (nonatomic,strong) NSString *eNumber;
 @property (nonatomic,strong) NSString *chooseImg;
 @property (nonatomic,strong) UIImage *chooseImage;
+@property (nonatomic,strong) NSArray *menus;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnMenu;
 @property (weak, nonatomic) IBOutlet UIButton *btnUP;
@@ -205,6 +205,29 @@
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
+-(void)setUpRoomScrollerView
+{
+    NSMutableArray *deviceNames = [NSMutableArray array];
+    
+    for (Device *device in self.menus) {
+        NSString *deviceName = device.typeName;
+        [deviceNames addObject:deviceName];
+    }
+    
+    IphoneRoomView *menu = [[IphoneRoomView alloc] initWithFrame:CGRectMake(0,0, 320, 40)];
+
+    menu.dataArray = deviceNames;
+    menu.delegate = self;
+
+    [menu setSelectButton:0];
+    [self.menuContainer addSubview:menu];
+}
+
+- (void)iphoneRoomView:(UIView *)view didSelectButton:(int)index {
+    Device *device = self.menus[index];
+    [self.navigationController pushViewController:[DeviceInfo calcController:device.hTypeId] animated:NO];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
@@ -227,10 +250,14 @@
     [volume start];
     
     [self initSlider];
-    NSArray *menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
-    [self initMenuContainer:self.menuContainer andArray:menus andID:self.deviceid];
-    if ([self.deviceid isEqualToString:@""]) {
-        return;
+    self.menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
+    if (self.menus.count<6) {
+        [self initMenuContainer:self.menuContainer andArray:self.menus andID:self.deviceid];
+        if ([self.deviceid isEqualToString:@""]) {
+            return;
+        }
+    }else{
+        [self setUpRoomScrollerView];
     }
     [self naviToDevice];
     [self initChannelContainer];
@@ -366,75 +393,6 @@
     }
 }
 
-#pragma mark - UICollectionViewDelgate
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    if(collectionView == self.tvLogoCollectionView)
-    {
-        if(self.allFavourTVChannels.count % 4 == 0)
-        {
-            return self.allFavourTVChannels.count;
-        }else{
-            int i = 4 - self.allFavourTVChannels.count % 4;
-            return  self.allFavourTVChannels.count + i;
-        }
-       
-    }
-    return self.btnTitles.count + 1;
-}
-
--(UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    if(collectionView  == self.tvLogoCollectionView)
-    {
-        TVLogoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"tvLogoCell" forIndexPath:indexPath];
-        cell.delegate = self;
-        [cell hiddenEditBtnAndDeleteBtn];
-        if(indexPath.row > self.allFavourTVChannels.count -1)
-        {
-            cell.label.text = @"";
-            cell.imgView.image = nil;
-            cell.userInteractionEnabled = NO;
-        }else{
-            TVChannel *channel = self.allFavourTVChannels[indexPath.row];
-            if (channel) {
-                [cell.imgView sd_setImageWithURL:[NSURL URLWithString:channel.channel_pic] placeholderImage:[UIImage imageNamed:@"placeholder"]];
-                cell.label.text = channel.channel_name;
-                [cell useLongPressGesture];
-            }
-        }
-        
-        return cell;
-    }
-    DVCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell" forIndexPath:indexPath];
-    if(indexPath.row == self.btnTitles.count)
-    {
-        [cell.btn setImage:[UIImage imageNamed:@"quiet"] forState:UIControlStateNormal];
-        [cell.btn addTarget:self action:@selector(domute:) forControlEvents:UIControlEventTouchUpInside];
-        
-    }else{
-        [cell.btn setTitle:[NSString stringWithFormat:@"%@",self.btnTitles[indexPath.row]] forState:UIControlStateNormal];
-        [cell.btn addTarget:self action:@selector(switchProgram:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return cell;
-}
-
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    if(collectionView == self.tvLogoCollectionView)
-    {
-        TVLogoCell *cell =(TVLogoCell*)[collectionView cellForItemAtIndexPath:indexPath];
-        [cell hiddenEditBtnAndDeleteBtn];
-        [cell useLongPressGesture];
-        
-        int channelValue=(int)[[self.allFavourTVChannels objectAtIndex:indexPath.row] channel_number];
-        NSData *data=[[DeviceInfo defaultManager] switchProgram:channelValue deviceID:self.deviceid];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:1];
-    }
-
-}
 
 -(IBAction)switchProgram:(id)sender
 {
@@ -464,34 +422,6 @@
         [sock.socket writeData:data withTimeout:1 tag:1];
     }
     [self.timer invalidate];
-}
-
-#pragma mark - TVLogoCellDelegate
--(void)tvDeleteAction:(TVLogoCell *)cell
-{
-    self.cell = cell;
-    
-    NSIndexPath *indexPath = [self.tvLogoCollectionView indexPathForCell:cell];
-    TVChannel *channel = self.allFavourTVChannels[indexPath.row];
-    //发送删除频道请求
-    NSString *url = [NSString stringWithFormat:@"%@TVChannelRemove.aspx",[IOManager httpAddr]];
-    NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    NSDictionary *dic = @{@"AuthorToken":authorToken,@"RecordID":[NSNumber numberWithInteger:channel.channel_id]};
-    HttpManager *http = [HttpManager defaultManager];
-    http.delegate = self;
-    http.tag = 2;
-    [http sendPost:url param:dic];
-   
-    
-}
--(void)tvEditAction:(TVLogoCell *)cell
-{
-    NSIndexPath *indexPath = [self.tvLogoCollectionView indexPathForCell:cell];
-    TVChannel *channel = self.allFavourTVChannels[indexPath.row];
-    [self.editChannelImgBtn setBackgroundImage:cell.imgView.image forState:UIControlStateNormal];
-    self.channelName.text = channel.channel_name;
-    self.channeNumber.text = [NSString stringWithFormat:@"%ld",(long)channel.channel_number];
-    [self showCoverView];
 }
 
 -(void)showCoverView
@@ -566,40 +496,6 @@
     self.tvLogoCollectionView.backgroundColor = [UIColor lightGrayColor];
     [self.tvLogoCollectionView reloadData];
 
-}
-
--(void) httpHandler:(id) responseObject tag:(int)tag
-{
-    if(tag == 1)
-    {
-        if([responseObject[@"Result"] intValue] == 0)
-        {
-            [self storChannelToSql:responseObject];
-            
-        }else{
-            [MBProgressHUD showError:responseObject[@"Msg"]];
-    }
-    }else if(tag == 2)
-    {
-        if([responseObject[@"Result"] intValue] == 0)
-        {
-            NSIndexPath *indexPath = [self.tvLogoCollectionView indexPathForCell:self.cell];
-            TVChannel *channel = self.allFavourTVChannels[indexPath.row];
-            
-            //从数据库中删除数据
-            BOOL isSuccess = [SQLManager deleteChannelForChannelID:channel.channel_id];
-            if(!isSuccess)
-            {
-                [MBProgressHUD showError:@"删除失败，请稍后再试"];
-                return;
-            }
-            [self.allFavourTVChannels removeObject:channel];
-            [self.tvLogoCollectionView reloadData];
-
-        }else{
-            [MBProgressHUD showError:responseObject[@"Msg"]];
-        }
-    }
 }
 
 -(void)writeTVChannelsConfigDataToSQL:(NSDictionary *)responseObject withParent:(NSString *)parent

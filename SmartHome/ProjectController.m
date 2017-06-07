@@ -15,15 +15,15 @@
 #import "UIViewController+Navigator.h"
 #import "UIView+Popup.h"
 #import "PackManager.h"
-
-@interface ProjectController ()<ORBSwitchDelegate>
+#import "IphoneRoomView.h"
+@interface ProjectController ()<ORBSwitchDelegate,IphoneRoomViewDelegate>
 
 @property (nonatomic,strong) NSMutableArray *projectNames;
 @property (nonatomic,strong) NSMutableArray *projectIds;
 @property (nonatomic,strong) ORBSwitch *switcher;
 @property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuTop;
-
+@property (nonatomic,strong) NSArray *menus;
 @end
 
 @implementation ProjectController
@@ -70,16 +70,43 @@
     return _projectNames;
 }
 
+-(void)setUpRoomScrollerView
+{
+    NSMutableArray *deviceNames = [NSMutableArray array];
+    
+    for (Device *device in self.menus) {
+        NSString *deviceName = device.typeName;
+        [deviceNames addObject:deviceName];
+    }
+    
+    IphoneRoomView *menu = [[IphoneRoomView alloc] initWithFrame:CGRectMake(0,0, 320, 40)];
+    
+    menu.dataArray = deviceNames;
+    menu.delegate = self;
+    
+    [menu setSelectButton:0];
+    [self.menuContainer addSubview:menu];
+}
+
+- (void)iphoneRoomView:(UIView *)view didSelectButton:(int)index {
+    Device *device = self.menus[index];
+    [self.navigationController pushViewController:[DeviceInfo calcController:device.hTypeId] animated:NO];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 投影机",roomName]];
     [self initSwitcher];
-    
-    NSArray *menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
+        
     self.deviceid = [SQLManager singleDeviceWithCatalogID:projector byRoom: self.roomID];
-    [self initMenuContainer:self.menuContainer andArray:menus andID:self.deviceid];
+    self.menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
+    if (self.menus.count<6) {
+        [self initMenuContainer:self.menuContainer andArray:self.menus andID:self.deviceid];
+    }else{
+        [self setUpRoomScrollerView];
+    }
     [self naviToDevice];
     _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     if ([self.sceneid intValue]>0) {
