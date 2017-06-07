@@ -80,6 +80,20 @@
         self.registBtnLeading.constant = self.loginBtnLeading.constant;
         self.registBtnTrailing.constant = self.loginBtnTrailing.constant;
         self.registBtnBottom.constant = 30;
+        self.line1Leading.constant = 260;
+        self.line1Trailing.constant = 260;
+        self.line2Leading.constant = self.line1Leading.constant;
+        self.line2Trailing.constant = self.line1Trailing.constant;
+        self.line3Leading.constant = self.line1Leading.constant;
+        self.line3Trailing.constant = self.line1Trailing.constant;
+        self.nameIconLeading.constant = self.line1Leading.constant + 30;
+        self.pwdIconLeading.constant = self.nameIconLeading.constant;
+        self.nameTextFieldLeading.constant = self.nameIconLeading.constant + 40;
+        self.nameTextFieldWidth.constant = 300;
+        self.pwdTextFieldLeading.constant = self.nameTextFieldLeading.constant;
+        self.pwdTextFieldWidth.constant = self.nameTextFieldWidth.constant;
+        self.forgetBtnLeading.constant = self.nameIconLeading.constant;
+        self.tryBtnTrailing.constant = self.line1Trailing.constant + 30;
     }
 
 }
