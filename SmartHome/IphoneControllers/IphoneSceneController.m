@@ -146,6 +146,44 @@ static NSString * const CYPhotoId = @"photo";
 
 }
 
+- (void)refreshUI {
+    DeviceInfo *info = [DeviceInfo defaultManager];
+    if([[AFNetworkReachabilityManager sharedManager] isReachableViaWWAN]) { //手机自带网络
+        if (info.connectState == offLine) {
+            [self setNetState:netState_notConnect];
+            [self.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage  imageNamed:@"slider"] forState:UIControlStateNormal];
+            NSLog(@"离线模式");
+        }else{
+            [self setNetState:netState_outDoor_4G];
+            [self.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"Scene-selected"] forState:UIControlStateNormal];
+            NSLog(@"外出模式-4G");
+        }
+    }else if ([[AFNetworkReachabilityManager sharedManager] isReachableViaWiFi]) { //WIFI
+        
+        if (info.connectState == atHome) {
+            [self setNetState:netState_atHome_WIFI];
+            [self.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"Scene-selected"] forState:UIControlStateNormal];
+            NSLog(@"在家模式-WIFI");
+            
+            
+        }else if (info.connectState == outDoor){
+            [self setNetState:netState_outDoor_WIFI];
+            [self.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"Scene-selected"] forState:UIControlStateNormal];
+            NSLog(@"外出模式-WIFI");
+            
+        }else if (info.connectState == offLine) {
+            [self setNetState:netState_notConnect];
+            [self.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
+            NSLog(@"离线模式");
+        }
+        
+    }else {
+        [self setNetState:netState_notConnect];
+        [self.baseTabbarController.tabbarPanel.sliderBtn setBackgroundImage:[UIImage imageNamed:@"slider"] forState:UIControlStateNormal];
+        NSLog(@"离线模式");
+    }
+}
+
 //处理连接改变后的情况
 - (void)updateInterfaceWithReachability
 {
@@ -154,6 +192,9 @@ static NSString * const CYPhotoId = @"photo";
     _afNetworkReachabilityManager = [AFNetworkReachabilityManager sharedManager];
     
     [_afNetworkReachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        
+        [NC postNotificationName:@"NetWorkDidChangedNotification" object:nil];
+        
         DeviceInfo *info = [DeviceInfo defaultManager];
         if(status == AFNetworkReachabilityStatusReachableViaWWAN) //手机自带网络
         {
@@ -209,7 +250,7 @@ static NSString * const CYPhotoId = @"photo";
 }
 
 - (void)netWorkDidChangedNotification:(NSNotification *)noti {
-    [self updateInterfaceWithReachability];
+    [self refreshUI];
 }
 
 - (void)removeNotifications {

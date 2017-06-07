@@ -29,6 +29,19 @@
     }
     return _btns;
 }
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if(self)
+    {
+        self.frame = frame;
+        self.sv = [[UIScrollView alloc] init];
+        [self addSubview:self.sv];
+        self.sv.bounces = NO;
+    }
+    return self;
+}
+
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if(self)
@@ -161,7 +174,7 @@
         return;
     }
     
-    [self setViewFrame];
+    //[self setViewFrame];
 }
 
 @end

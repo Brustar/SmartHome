@@ -72,7 +72,33 @@
         [self showScrollView];//显示滑动图
     }
 
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        self.loginBtnLeading.constant = 350;
+        self.loginBtnTrailing.constant = 350;
+        self.loginBtnBottom.constant = 80;
+        self.registBtnLeading.constant = self.loginBtnLeading.constant;
+        self.registBtnTrailing.constant = self.loginBtnTrailing.constant;
+        self.registBtnBottom.constant = 30;
+        self.line1Leading.constant = 260;
+        self.line1Trailing.constant = 260;
+        self.line2Leading.constant = self.line1Leading.constant;
+        self.line2Trailing.constant = self.line1Trailing.constant;
+        self.line3Leading.constant = self.line1Leading.constant;
+        self.line3Trailing.constant = self.line1Trailing.constant;
+        self.nameIconLeading.constant = self.line1Leading.constant + 30;
+        self.pwdIconLeading.constant = self.nameIconLeading.constant;
+        self.nameTextFieldLeading.constant = self.nameIconLeading.constant + 40;
+        self.nameTextFieldWidth.constant = 300;
+        self.pwdTextFieldLeading.constant = self.nameTextFieldLeading.constant;
+        self.pwdTextFieldWidth.constant = self.nameTextFieldWidth.constant;
+        self.forgetBtnLeading.constant = self.nameIconLeading.constant;
+        self.tryBtnTrailing.constant = self.line1Trailing.constant + 30;
+    }
+
 }
+
+
 
 #pragma mark - 滑动图
 
@@ -132,8 +158,22 @@
     if (page.currentPage == 2) {
         
         //调用方法，使滑动图消失
+        //[self scrollViewDisappear];
+    }
+}
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+    int current = scrollView.contentOffset.x/[UIScreen mainScreen].bounds.size.width;
+    
+    //根据scrollView 的位置对page 的当前页赋值
+    UIPageControl *page = (UIPageControl *)[self.view viewWithTag:201];
+    page.currentPage = current;
+    
+    //当显示到最后一页时，让滑动图消失
+    if (page.currentPage == 2) {
         [self scrollViewDisappear];
     }
+
 }
 
 -(void)scrollViewDisappear{
@@ -143,9 +183,9 @@
     UIPageControl *page = (UIPageControl *)[self.view viewWithTag:201];
     
     //设置滑动图消失的动画效果图
-    [UIView animateWithDuration:3.0f animations:^{
+    [UIView animateWithDuration:1.0f animations:^{
         
-        scrollView.center = CGPointMake(self.view.frame.size.width/2, 1.5 * self.view.frame.size.height);
+        scrollView.center = CGPointMake(-self.view.frame.size.width/2, self.view.frame.size.height/2);
         
     } completion:^(BOOL finished) {
         
@@ -674,15 +714,12 @@ NSArray *array = [NSArray arrayWithObjects:
             if (!_isTheSameUser) { //如果不是同一个用户, 或者是同一个用户，但卸载重装了App
                 if ([self.hostIDS count] >0) {
                     int mid = [self.hostIDS[0] intValue];
-                    //切换帐号后，版本号归零
-                    if (mid != [[UD objectForKey:@"HostID"] intValue]) {
-                        [UD removeObjectForKey:@"room_version"];
-                        [UD removeObjectForKey:@"equipment_version"];
-                        [UD removeObjectForKey:@"scence_version"];
-                        [UD removeObjectForKey:@"tv_version"];
-                        [UD removeObjectForKey:@"fm_version"];
-                    }
                     
+                    [UD removeObjectForKey:@"room_version"];
+                    [UD removeObjectForKey:@"equipment_version"];
+                    [UD removeObjectForKey:@"scence_version"];
+                    [UD removeObjectForKey:@"tv_version"];
+                    [UD removeObjectForKey:@"fm_version"];
                     //更新UD的@"HostID"， 更新DeviceInfo的 masterID
                     [IOManager writeUserdefault:@(mid) forKey:@"HostID"];
                     info.masterID = mid;

@@ -1396,9 +1396,9 @@
     {
         NSString *sql;
         if ([self isWholeHouse:roomID]) {
-            sql = [NSString stringWithFormat:@"select id,typename,htypeid from devices where subtypeid = 3 order by htypeID limit 0,7"];
+            sql = [NSString stringWithFormat:@"select id,typename,htypeid from devices where subtypeid = 3 order by htypeID"];
         }else{
-            sql = [NSString stringWithFormat:@"select id,typename,htypeid from devices where subtypeid = 3 and rid=%d order by htypeID limit 0,7",roomID];
+            sql = [NSString stringWithFormat:@"select id,typename,htypeid from devices where subtypeid = 3 and rid=%d order by htypeID",roomID];
         }
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
@@ -2425,7 +2425,7 @@
         return mutabelArr;
     }
     
-    FMResultSet *resultSet = [db executeQuery:[NSString stringWithFormat:@"select * from Channels where isFavorite = 1 and eqId = %d and parent = %@",deviceID,type]];
+    FMResultSet *resultSet = [db executeQuery:[NSString stringWithFormat:@"select * from Channels where isFavorite = 1 and eqId = %d and parent = '%@'",deviceID,type]];
     while([resultSet next])
     {
         TVChannel *channel = [TVChannel new];

@@ -14,15 +14,16 @@
 #import "ORBSwitch.h"
 #import "UIViewController+Navigator.h"
 #import "UIView+Popup.h"
-
-@interface ProjectController ()<ORBSwitchDelegate>
+#import "PackManager.h"
+#import "IphoneRoomView.h"
+@interface ProjectController ()<ORBSwitchDelegate,IphoneRoomViewDelegate>
 
 @property (nonatomic,strong) NSMutableArray *projectNames;
 @property (nonatomic,strong) NSMutableArray *projectIds;
 @property (nonatomic,strong) ORBSwitch *switcher;
 @property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuTop;
-
+@property (nonatomic,strong) NSArray *menus;
 @end
 
 @implementation ProjectController
@@ -69,16 +70,43 @@
     return _projectNames;
 }
 
+-(void)setUpRoomScrollerView
+{
+    NSMutableArray *deviceNames = [NSMutableArray array];
+    
+    for (Device *device in self.menus) {
+        NSString *deviceName = device.typeName;
+        [deviceNames addObject:deviceName];
+    }
+    
+    IphoneRoomView *menu = [[IphoneRoomView alloc] initWithFrame:CGRectMake(0,0, 320, 40)];
+    
+    menu.dataArray = deviceNames;
+    menu.delegate = self;
+    
+    [menu setSelectButton:0];
+    [self.menuContainer addSubview:menu];
+}
+
+- (void)iphoneRoomView:(UIView *)view didSelectButton:(int)index {
+    Device *device = self.menus[index];
+    [self.navigationController pushViewController:[DeviceInfo calcController:device.hTypeId] animated:NO];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 投影机",roomName]];
     [self initSwitcher];
-    
-    NSArray *menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
+        
     self.deviceid = [SQLManager singleDeviceWithCatalogID:projector byRoom: self.roomID];
-    [self initMenuContainer:self.menuContainer andArray:menus andID:self.deviceid];
+    self.menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
+    if (self.menus.count<6) {
+        [self initMenuContainer:self.menuContainer andArray:self.menus andID:self.deviceid];
+    }else{
+        [self setUpRoomScrollerView];
+    }
     [self naviToDevice];
     _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     if ([self.sceneid intValue]>0) {
@@ -90,6 +118,12 @@
         }
     }
     
+    SocketManager *sock = [SocketManager defaultManager];
+    sock.delegate = self;
+    //查询设备状态
+    NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+    
     if (ON_IPAD) {
         self.menuTop.constant = 0;
     }
@@ -97,7 +131,7 @@
 
 -(void) initSwitcher
 {
-    self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:[UIImage imageNamed:@"plugin_off"] inactiveBackgroundImage:nil activeBackgroundImage:nil frame:CGRectMake(0, 0, 750/2, 750/2)];
+    self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:nil inactiveBackgroundImage:[UIImage imageNamed:@"plugin_off"] activeBackgroundImage:[UIImage imageNamed:@"plugin_on"] frame:CGRectMake(0, 0, 750/2, 750/2)];
     self.switcher.center = CGPointMake(self.view.bounds.size.width / 2,
                                        self.view.bounds.size.height / 2);
     
@@ -127,6 +161,22 @@
     
 }
 
+#pragma mark - TCP recv delegate
+-(void)recv:(NSData *)data withTag:(long)tag
+{
+    Proto proto=protocolFromData(data);
+    
+    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
+        return;
+    }
+    
+    if (proto.cmd==0x01 && (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON)) {
+        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+        if ([devID intValue]==[self.deviceid intValue]) {
+            self.switcher.isOn=proto.action.state;
+        }
+    }
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
@@ -147,10 +197,8 @@
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
-- (void)orbSwitchToggleAnimationFinished:(ORBSwitch *)switchObj {
-    [switchObj setCustomKnobImage:[UIImage imageNamed:(switchObj.isOn) ? @"plugin_on" : @"plugin_off"]
-          inactiveBackgroundImage:nil
-            activeBackgroundImage:nil];
+- (void)orbSwitchToggleAnimationFinished:(ORBSwitch *)switchObj
+{
     
 }
 
