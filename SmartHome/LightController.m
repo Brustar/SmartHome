@@ -325,7 +325,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
      atan2f 是求反正切函数 参考:http://blog.csdn.net/chinabinlang/article/details/6802686
      */
     CGFloat angle = atan2f(currentPoint.y - center.y, currentPoint.x - center.x) - atan2f(previousPoint.y - center.y, previousPoint.x - center.x);
-    
+    NSLog(@"angel:=%f,degree:%f",angle,degree);
     if (degree<0) {
         if (angle<0) {
             return;
