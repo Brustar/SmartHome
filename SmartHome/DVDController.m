@@ -12,20 +12,20 @@
 #import "DVCollectionViewCell.h"
 #import "VolumeManager.h"
 #import "SocketManager.h"
-
+#import "IphoneRoomView.h"
 #import "SQLManager.h"
 #import "PackManager.h"
 #import "Light.h"
 #import "UIViewController+Navigator.h"
 
 #define size 350
-@interface DVDController ()<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface DVDController ()<UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate>
 @property (weak, nonatomic) IBOutlet UISlider *volume;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightViewWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightViewHight;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic,strong) NSArray *dvImages;
-
+@property (nonatomic,strong) NSArray *menus;
 @property (weak, nonatomic) IBOutlet UIButton *btnMenu;
 @property (weak, nonatomic) IBOutlet UIButton *btnPop;
 @property (weak, nonatomic) IBOutlet UIButton *btnUP;
@@ -68,14 +68,41 @@
  
 }
 
+-(void)setUpRoomScrollerView
+{
+    NSMutableArray *deviceNames = [NSMutableArray array];
+    
+    for (Device *device in self.menus) {
+        NSString *deviceName = device.typeName;
+        [deviceNames addObject:deviceName];
+    }
+    
+    IphoneRoomView *menu = [[IphoneRoomView alloc] initWithFrame:CGRectMake(0,0, 320, 40)];
+    
+    menu.dataArray = deviceNames;
+    menu.delegate = self;
+    
+    [menu setSelectButton:0];
+    [self.menuContainer addSubview:menu];
+}
+
+- (void)iphoneRoomView:(UIView *)view didSelectButton:(int)index {
+    Device *device = self.menus[index];
+    [self.navigationController pushViewController:[DeviceInfo calcController:device.hTypeId] animated:NO];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - DVD",roomName]];
     [self initSlider];
-    NSArray *menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
-    [self initMenuContainer:self.menuContainer andArray:menus andID:self.deviceid];
+    self.menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
+    if (self.menus.count<6) {
+        [self initMenuContainer:self.menuContainer andArray:self.menus andID:self.deviceid];
+    }else{
+        [self setUpRoomScrollerView];
+    }
     [self naviToDevice];
     
     [self.btnMenu setImage:[UIImage imageNamed:@"TV_menu_red"] forState:UIControlStateHighlighted];

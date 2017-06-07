@@ -16,9 +16,9 @@
 #import "ORBSwitch.h"
 #import "UIViewController+Navigator.h"
 #import "UIView+Popup.h"
-
-@interface AmplifierController ()<ORBSwitchDelegate>
-
+#import "IphoneRoomView.h"
+@interface AmplifierController ()<ORBSwitchDelegate,IphoneRoomViewDelegate>
+@property (nonatomic,strong) NSArray *menus;
 @property (nonatomic,strong) NSMutableArray *amplifierNames;
 @property (nonatomic,strong) NSMutableArray *amplifierIDArr;
 @property (nonatomic,strong) ORBSwitch *switcher;
@@ -72,6 +72,28 @@
     return _amplifierNames;
 }
 
+-(void)setUpRoomScrollerView
+{
+    NSMutableArray *deviceNames = [NSMutableArray array];
+    
+    for (Device *device in self.menus) {
+        NSString *deviceName = device.typeName;
+        [deviceNames addObject:deviceName];
+    }
+    
+    IphoneRoomView *menu = [[IphoneRoomView alloc] initWithFrame:CGRectMake(0,0, 320, 40)];
+    
+    menu.dataArray = deviceNames;
+    menu.delegate = self;
+    
+    [menu setSelectButton:0];
+    [self.menuContainer addSubview:menu];
+}
+
+- (void)iphoneRoomView:(UIView *)view didSelectButton:(int)index {
+    Device *device = self.menus[index];
+    [self.navigationController pushViewController:[DeviceInfo calcController:device.hTypeId] animated:NO];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -80,8 +102,14 @@
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 功放",roomName]];
     self.deviceid = [self.amplifierIDArr firstObject];
     [self initSwitcher];
-    NSArray *menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
-    [self initMenuContainer:self.menuContainer andArray:menus andID:self.deviceid];
+    
+    self.menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
+    if (self.menus.count<6) {
+        [self initMenuContainer:self.menuContainer andArray:self.menus andID:self.deviceid];
+    }else{
+        [self setUpRoomScrollerView];
+    }
+    
     [self naviToDevice];
     
     _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];

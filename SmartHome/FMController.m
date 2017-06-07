@@ -7,7 +7,7 @@
 //
 #import "FMController.h"
 #import "FMCollectionViewCell.h"
-
+#import "IphoneRoomView.h"
 #import "SceneManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "VolumeManager.h"
@@ -19,11 +19,11 @@
 #import "TVChannel.h"
 #import "UIViewController+Navigator.h"
 
-@interface FMController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate,UIGestureRecognizerDelegate,FMCollectionViewCellDelegate>
+@interface FMController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate,UIGestureRecognizerDelegate,FMCollectionViewCellDelegate,IphoneRoomViewDelegate>
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollerContentViewWidth;
 @property (nonatomic,strong) NSMutableArray *allFavouriteChannels;
-
+@property (nonatomic,strong) NSArray *menus;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UILabel *numberOfChannel;
 @property (weak, nonatomic) IBOutlet UIView *fmView;
@@ -84,14 +84,40 @@
     
 }
 
+-(void)setUpRoomScrollerView
+{
+    NSMutableArray *deviceNames = [NSMutableArray array];
+    
+    for (Device *device in self.menus) {
+        NSString *deviceName = device.typeName;
+        [deviceNames addObject:deviceName];
+    }
+    
+    IphoneRoomView *menu = [[IphoneRoomView alloc] initWithFrame:CGRectMake(0,0, 320, 40)];
+    
+    menu.dataArray = deviceNames;
+    menu.delegate = self;
+    
+    [menu setSelectButton:0];
+    [self.menuContainer addSubview:menu];
+}
+
+- (void)iphoneRoomView:(UIView *)view didSelectButton:(int)index {
+    Device *device = self.menus[index];
+    [self.navigationController pushViewController:[DeviceInfo calcController:device.hTypeId] animated:NO];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 收音机",roomName]];
     [self initSlider];
-    NSArray *menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
-    [self initMenuContainer:self.menuContainer andArray:menus andID:self.deviceid];
+    if (self.menus.count<6) {
+        [self initMenuContainer:self.menuContainer andArray:self.menus andID:self.deviceid];
+    }else{
+        [self setUpRoomScrollerView];
+    }
     [self naviToDevice];
     [self initChannelContainer];
     
