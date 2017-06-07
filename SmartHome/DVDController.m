@@ -18,7 +18,6 @@
 #import "Light.h"
 #import "UIViewController+Navigator.h"
 
-#define size 350
 @interface DVDController ()<UICollectionViewDelegate,UICollectionViewDataSource,IphoneRoomViewDelegate>
 @property (weak, nonatomic) IBOutlet UISlider *volume;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightViewWidth;
@@ -77,7 +76,7 @@
         [deviceNames addObject:deviceName];
     }
     
-    IphoneRoomView *menu = [[IphoneRoomView alloc] initWithFrame:CGRectMake(0,0, 320, 40)];
+    IphoneRoomView *menu = [[IphoneRoomView alloc] initWithFrame:CGRectMake(0,0, [UIScreen mainScreen].bounds.size.width, 40)];
     
     menu.dataArray = deviceNames;
     menu.delegate = self;
@@ -160,13 +159,6 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)updateViewConstraints
-{
-    [super updateViewConstraints];
-    self.rightViewHight.constant = size;
-    self.rightViewWidth.constant = size;
-}
-
 -(void) changeVolume
 {
     NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volume.value*100 deviceID:self.deviceid];
@@ -215,19 +207,7 @@
     if([keyPath isEqualToString:@"volume"])
     {
         DeviceInfo *device=[DeviceInfo defaultManager];
-        self.volume.value=[[device valueForKey:@"volume"] floatValue]*100;
-        /*
-        KEVolumeUtil *volumeManager=[KEVolumeUtil shareInstance];
-        NSData *data=nil;
-        if (volumeManager.willup) {
-            data = [device volumeUp:self.deviceid];
-        }else{
-            data = [device volumeDown:self.deviceid];
-        }
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:1];
-        */
-        [self save:nil];
+        self.volume.value=[[device valueForKey:@"volume"] floatValue];
     }
 }
 

@@ -108,12 +108,12 @@
         NSData *ip=[data subdataWithRange:NSMakeRange(4, 4)];
         NSData *port=[data subdataWithRange:NSMakeRange(8, 2)];
         
-        info.masterID=(long)[PackManager dataToUInt16:masterID];
+        //info.masterID=(long)[PackManager dataToUInt16:masterID];
         info.masterIP=[PackManager NSDataToIP:ip];
         info.masterPort=(int)[PackManager dataToUInt16:port];
         info.connectState=atHome;
         
-        [IOManager writeUserdefault:[NSNumber numberWithLong:[PackManager dataToUInt16:masterID]] forKey:@"masterID"];
+        //[IOManager writeUserdefault:[NSNumber numberWithLong:[PackManager dataToUInt16:masterID]] forKey:@"masterID"];
         //release 不能马上去连，要暂停0.1S,再连从服务器，不然会崩溃
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(100 * NSEC_PER_MSEC)), dispatch_get_main_queue(), ^{
             [self initTcp:[PackManager NSDataToIP:ip] port:(int)[PackManager dataToUInt16:port] delegate:nil];

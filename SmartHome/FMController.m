@@ -93,7 +93,7 @@
         [deviceNames addObject:deviceName];
     }
     
-    IphoneRoomView *menu = [[IphoneRoomView alloc] initWithFrame:CGRectMake(0,0, 320, 40)];
+    IphoneRoomView *menu = [[IphoneRoomView alloc] initWithFrame:CGRectMake(0,0, [UIScreen mainScreen].bounds.size.width, 40)];
     
     menu.dataArray = deviceNames;
     menu.delegate = self;
@@ -496,8 +496,7 @@
     if([keyPath isEqualToString:@"volume"])
     {
         DeviceInfo *device=[DeviceInfo defaultManager];
-        self.volume.value=[[device valueForKey:@"volume"] floatValue]*100;
-
+        self.volume.value=[[device valueForKey:@"volume"] floatValue];
     }
 }
 

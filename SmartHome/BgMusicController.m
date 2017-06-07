@@ -116,7 +116,7 @@ BOOL animating;
         [deviceNames addObject:deviceName];
     }
     
-    IphoneRoomView *menu = [[IphoneRoomView alloc] initWithFrame:CGRectMake(0,0, 320, 40)];
+    IphoneRoomView *menu = [[IphoneRoomView alloc] initWithFrame:CGRectMake(0,0, [UIScreen mainScreen].bounds.size.width, 40)];
     
     menu.dataArray = deviceNames;
     menu.delegate = self;
