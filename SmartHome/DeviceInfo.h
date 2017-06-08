@@ -98,6 +98,7 @@ enum{
 +(UIViewController *)calcController:(NSUInteger)uid;
 #pragma mark - public
 -(NSData *) author;
+
 -(NSData *)startScenenAtMaster:(int)sceneid;
 -(NSData *)query:(NSString *)deviceID;
 
