@@ -403,10 +403,11 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 
 - (IBAction)loadCatalog:(id)sender {
     self.lightCatalog = ((UIButton *)sender).tag;
-    self.base.hidden = self.btnPen.hidden = (self.lightCatalog == 3?NO:YES);
-    self.tranformView.hidden=(self.lightCatalog == 2?NO:YES);
-    NSString *catalogID = [NSString stringWithFormat:@"0%ld",((UIButton *)sender).tag];
-    [self initiateMenuOptions:catalogID];
+    int htype = [[SQLManager getEType:[self.deviceid integerValue]] intValue];
+    self.base.hidden = self.btnPen.hidden = (htype == 3?NO:YES);
+    self.tranformView.hidden=(htype == 2?NO:YES);
+
+    [self initiateMenuOptions:self.lightCatalog];
     // init YALContextMenuTableView tableView
     if (!self.contextMenuTableView) {
         self.contextMenuTableView = [[YALContextMenuTableView alloc]initWithTableViewDelegateDataSource:self];
@@ -429,7 +430,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 }
 
 #pragma mark - Local methods
-- (void)initiateMenuOptions:(NSString *)catalogID {
+- (void)initiateMenuOptions:(long)catalogID {
     self.lights = [SQLManager devicesWithCatalogID:catalogID room:self.roomID];
     [self.contextMenuTableView reloadData];
 }
@@ -459,15 +460,11 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 }
 
 - (UITableViewCell *)tableView:(YALContextMenuTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    //ContextMenuCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"MenuCell" owner:self options:nil] lastObject];
-    
     ContextMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:menuCellIdentifier forIndexPath:indexPath];
     Device *device = [self.lights objectAtIndex:indexPath.row];
-    //if (cell) {
-        cell.backgroundColor = [UIColor clearColor];
-        cell.menuTitleLabel.text = device.name;
-        [cell setContraint:self.lightCatalog];
-    //}
+    cell.backgroundColor = [UIColor clearColor];
+    cell.menuTitleLabel.text = device.name;
+    [cell setContraint:self.lightCatalog];
     
     return cell;
 }
