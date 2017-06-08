@@ -196,7 +196,7 @@
     _btnLeft = btn;
     if (_btnLeft)
     {
-        _btnLeft.frame = Rect(0, 22.0f, 80.0, 40.0);
+        _btnLeft.frame = Rect(-16, 22.0f, 80.0, 40.0);
         [self addSubview:_btnLeft];
     }else{}
 }
