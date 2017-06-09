@@ -16,5 +16,6 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *cameraList;
 @property (nonatomic, strong) NSMutableArray *cameraIDArray;
+@property (nonatomic, strong) UIView *fullScreenViewBg;
 @property (nonatomic, strong) UIImageView *fullScreenImageView;
 @end

@@ -39,5 +39,5 @@
 @optional
 - (void)onAdjustBtnClicked:(UIButton *)sender;
 - (void)onFullScreenBtnClicked:(UIButton *)sender  cameraImageView:(UIImageView *)imageView;
-
+- (void)showFullScreenViewByImage:(UIImage *)img;
 @end

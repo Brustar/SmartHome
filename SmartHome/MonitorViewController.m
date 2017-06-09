@@ -33,9 +33,11 @@
         _video  = [[RTSPPlayer alloc] initWithVideo:self.cameraURL usesTcp:YES];
         _video.outputWidth =  Video_Output_Width;
         _video.outputHeight = Video_Output_Height;
+        
+        [self setupTimer];
+    }else {
+        [self startTimer];
     }
-    
-    [self setupTimer];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -50,18 +52,33 @@
     
     [_video seekTime:0.0];
     
-    [_nextFrameTimer invalidate];
     _nextFrameTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/30
                                                        target:self
                                                      selector:@selector(displayNextFrame:)
                                                      userInfo:nil
                                                       repeats:YES];
+
+    [_nextFrameTimer setFireDate:[NSDate distantPast]];
+}
+
+- (void)startTimer {
+    if ([_nextFrameTimer isValid]) {
+        [_nextFrameTimer setFireDate:[NSDate distantPast]];
+    }else {
+        _nextFrameTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/30
+                                                           target:self
+                                                         selector:@selector(displayNextFrame:)
+                                                         userInfo:nil
+                                                          repeats:YES];
+        
+        [_nextFrameTimer setFireDate:[NSDate distantPast]];
+    }
 }
 
 - (void)stopTimer {
     if (_nextFrameTimer) {
-        [_nextFrameTimer invalidate];
-        _nextFrameTimer = nil;
+        [_nextFrameTimer setFireDate:[NSDate distantFuture]];
+        //_nextFrameTimer = nil;
     }
 }
 
@@ -74,6 +91,9 @@
         return;
     }
     self.cameraImgView.image = _video.currentImage;
+    if (_delegate && [_delegate respondsToSelector:@selector(showFullScreenViewByImage:)]) {
+        [_delegate showFullScreenViewByImage:_video.currentImage];
+    }
     float frameTime = 1.0/([NSDate timeIntervalSinceReferenceDate]-startTime);
     if (_lastFrameTime<0) {
         _lastFrameTime = frameTime;
@@ -113,6 +133,11 @@
     if (_delegate && [_delegate respondsToSelector:@selector(onFullScreenBtnClicked:cameraImageView:)]) {
         [_delegate onFullScreenBtnClicked:sender cameraImageView:self.cameraImgView];
     }
+}
+
+- (void)dealloc {
+    [_nextFrameTimer invalidate];
+    _nextFrameTimer = nil;
 }
 
 @end

@@ -72,7 +72,6 @@
 
 
 #pragma mark - MonitorViewControllerDelegate
-
 - (void)onAdjustBtnClicked:(UIButton *)sender {
     NSInteger index = sender.tag;
     NSString *cameraURL = [SQLManager getCameraUrlByDeviceID:[_cameraIDArray[index] intValue]];
@@ -89,18 +88,28 @@
 }
 
 - (void)onFullScreenBtnClicked:(UIButton *)sender  cameraImageView:(UIImageView *)imageView {
-    UIImageView *fullScreenView = [[UIImageView alloc] initWithFrame:self.view.frame];
-    self.fullScreenImageView = fullScreenView;
-    [self.view addSubview:fullScreenView];
-    fullScreenView.image = imageView.image;
-    fullScreenView.userInteractionEnabled = YES;
+    UIView *fullScreenBg = [[UIView alloc] initWithFrame:self.view.bounds];
+    fullScreenBg.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
+    _fullScreenImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 200, UI_SCREEN_WIDTH, 300)];
+    [fullScreenBg addSubview:_fullScreenImageView];
+    self.fullScreenViewBg = fullScreenBg;
+    [self.view addSubview:fullScreenBg];
+    _fullScreenImageView.image = imageView.image;
+    fullScreenBg.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeView)];
-    [fullScreenView addGestureRecognizer:tapGesture];
-    [self shakeToShow:fullScreenView];
+    [fullScreenBg addGestureRecognizer:tapGesture];
+    [self shakeToShow:fullScreenBg];
 }
 
--(void)closeView{
-    [self.fullScreenImageView removeFromSuperview];
+- (void)showFullScreenViewByImage:(UIImage *)img {
+    if (_fullScreenImageView) {
+        _fullScreenImageView.image = img;
+    }
+}
+
+- (void)closeView {
+    [self.fullScreenViewBg removeFromSuperview];
+    _fullScreenImageView = nil;
 }
 - (void)shakeToShow:(UIView *)aView{
     CAKeyframeAnimation* animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
