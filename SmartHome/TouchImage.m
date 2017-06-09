@@ -36,6 +36,11 @@
 }
 
 - (void)addRoom:(NSArray *)array {
+    
+    if (_roomArray == nil) {
+        _roomArray = [NSMutableArray array];
+    }
+    
     [_roomArray removeAllObjects];
     
     if (array.count >0) {
