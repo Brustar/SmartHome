@@ -36,7 +36,7 @@
 
 //根据roomID 从Devices 表 查询出 subTypeName字段(可能有重复数据，要去重)
 + (NSArray *)getDevicesSubTypeNamesWithRoomID:(int)roomID;
-
++ (NSArray *)allTypeinRoom:(int)roomID;
 //根据roomID和subTypeName字段 从Devices 表 查询出 htypeID字段(可能有重复数据，要去重)
 + (NSArray *)getDevicesIDWithRoomID:(int)roomID SubTypeName:(NSString *)subTypeName;
 

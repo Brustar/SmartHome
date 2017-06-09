@@ -28,6 +28,7 @@
 #import "AppDelegate.h"
 #import "CYLineLayout.h"
 #import "CYPhotoCell.h"
+#import "IPadDevicesView.h"
 
 static NSString * const CYPhotoId = @"photo";
 @interface IphoneDeviceListController ()<IphoneRoomViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
@@ -49,7 +50,9 @@ static NSString * const CYPhotoId = @"photo";
 @property (nonatomic,strong)UICollectionView * FirstCollectionView;
 @property (weak, nonatomic) IBOutlet UILabel *DeviceNameLabel;
 @property (nonatomic,strong) BaseTabBarController *baseTabbarController;
-
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuRight;
+@property (weak, nonatomic) IBOutlet UIButton *switcher;
+@property (weak, nonatomic) IPadDevicesView *deviceView;
 
 @end
 
@@ -193,8 +196,7 @@ static NSString * const CYPhotoId = @"photo";
         }
     }];
     
-    [_afNetworkReachabilityManager startMonitoring];//开启网络监视器；
-    
+    [_afNetworkReachabilityManager startMonitoring];//开启网络监视器
 }
 
 - (void)addNotifications {
@@ -294,6 +296,19 @@ static NSString * const CYPhotoId = @"photo";
     }
 }
 
+- (IBAction)switchUI:(id)sender {
+    UIButton *btn =(UIButton *)sender;
+    btn.selected = !btn.selected;
+    if (btn.selected) {
+        [btn setImage:[UIImage imageNamed:@"switch_device"] forState:UIControlStateNormal];
+        
+    }else{
+        [btn setImage:[UIImage imageNamed:@"switch_room"] forState:UIControlStateNormal];
+        
+    }
+    self.deviceView.hidden = !btn.selected;
+}
+
 -(void)getUI
 {
     // 创建CollectionView
@@ -318,6 +333,20 @@ static NSString * const CYPhotoId = @"photo";
     self.automaticallyAdjustsScrollViewInsets = NO;
     // 注册
     [self.FirstCollectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CYPhotoCell class]) bundle:nil] forCellWithReuseIdentifier:CYPhotoId];
+    
+    if (ON_IPAD) {
+        layout.itemSize = CGSizeMake(450, 540);
+        self.menuRight.constant = 100;
+        self.switcher.hidden = NO;
+        NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"IPadDevices" owner:self options:nil];
+        
+        self.deviceView = array[0];
+        Room *room = self.rooms[self.roomIndex];
+        self.deviceView.roomID = room.rId;
+        [self.deviceView initData];
+        self.deviceView.hidden = YES;
+        [self.view addSubview:self.deviceView];
+    }
 }
 
 -(void)setUpRoomScrollerView

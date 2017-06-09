@@ -10,6 +10,7 @@
 #import "SQLManager.h"
 #import "LeftMenuCell.h"
 #import "LightController.h"
+#import "Device.h"
 
 @interface IPadMenuController ()
 
@@ -23,11 +24,30 @@ static NSString *const leftMenuCell = @"leftMenuCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.s
     [self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ipad-frm_left_nol"]]];
-    
-    self.types = [SQLManager typeName:self.typeID byRoom:self.roomID];
+    if (self.typeID == light) {
+        self.types = [self lights];
+    }else{
+        self.types = [SQLManager typeName:self.typeID byRoom:self.roomID];
+    }
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = [UIColor blackColor];
     UINib *cellNib = [UINib nibWithNibName:@"LeftMenuCell" bundle:nil];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:leftMenuCell];
+}
+
+-(NSArray *)lights
+{
+    NSMutableArray *types = [[NSMutableArray alloc] init];
+    NSArray *uitypes=@[@"射灯",@"灯带",@"调色灯"];
+    int i=0;
+    for (NSString *name in uitypes) {
+        Device *d=[Device new];
+        d.typeName = name;
+        d.hTypeId = ++i;
+        d.rID = d.hTypeId;
+        [types addObject:d];
+    }
+    return types;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,7 +59,13 @@ static NSString *const leftMenuCell = @"leftMenuCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSMutableArray *temp = [NSMutableArray new];
-    NSArray *ts = [SQLManager typeName:self.typeID byRoom:self.roomID];
+    
+    NSArray *ts;
+    if (self.typeID == light) {
+        ts = [self lights];
+    }else{
+        ts = [SQLManager typeName:self.typeID byRoom:self.roomID];
+    }
     Device *device = [self.types objectAtIndex:indexPath.row];
     //NSString *typeid = [NSString stringWithFormat:@"0%ld", device.hTypeId];
     if (device.hTypeId >0 && device.hTypeId<10) {
@@ -84,18 +110,16 @@ static NSString *const leftMenuCell = @"leftMenuCell";
     
     LeftMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:leftMenuCell forIndexPath:indexPath];
     
-    //if (cell) {
-        Device *device = [self.types objectAtIndex:indexPath.row];
-        cell.lbl.text = device.typeName?device.typeName:device.name;
-        if (device.typeName) {
-            cell.lbl.textColor = [UIColor whiteColor];
-            cell.cellBG.image = [UIImage imageNamed:@"left_menu_normal"];
-        }else{
-            cell.lbl.textColor = [UIColor grayColor];
-            cell.cellBG.image = [UIImage imageNamed:@"left_sub_normal"];
-        }
-    //}
-    
+    Device *device = [self.types objectAtIndex:indexPath.row];
+    cell.lbl.text = device.typeName?device.typeName:device.name;
+    if (device.typeName) {
+        cell.lbl.textColor = [UIColor whiteColor];
+        cell.cellBG.image = [UIImage imageNamed:@"left_menu_normal"];
+    }else{
+        cell.lbl.textColor = [UIColor grayColor];
+        cell.cellBG.image = [UIImage imageNamed:@"left_sub_normal"];
+    }
+    cell.backgroundView.backgroundColor = [UIColor blackColor];
     return cell;
 }
 
