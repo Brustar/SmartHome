@@ -74,6 +74,8 @@
 		0F8A78511E9F7C8C0050F0D9 /* UIImageView+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8A78501E9F7C8C0050F0D9 /* UIImageView+Badge.m */; };
 		0F8D76D01D9A1B9700DDD063 /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8D76CF1D9A1B9700DDD063 /* Schedule.m */; };
 		0F91AA171CDC798700094C25 /* PrintObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F91AA161CDC798700094C25 /* PrintObject.m */; };
+		0F9214C71EE9241E0088D5DA /* keyPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F9214C61EE9241E0088D5DA /* keyPad.xib */; };
+		0F9214CA1EE92C4F0088D5DA /* KeypadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9214C91EE92C4F0088D5DA /* KeypadView.m */; };
 		0F9232E11EB85CE3008B1F37 /* AirMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F9232E01EB85CE3008B1F37 /* AirMenuCell.xib */; };
 		0F9EA72D1DDB026C00223ED8 /* NSString+RegMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9EA72C1DDB026C00223ED8 /* NSString+RegMatch.m */; };
 		0FA0FD661D057C430041CE96 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA0FD651D057C430041CE96 /* AddressBook.framework */; };
@@ -599,6 +601,9 @@
 		0F8D76CF1D9A1B9700DDD063 /* Schedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Schedule.m; sourceTree = "<group>"; };
 		0F91AA151CDC798700094C25 /* PrintObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintObject.h; sourceTree = "<group>"; };
 		0F91AA161CDC798700094C25 /* PrintObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintObject.m; sourceTree = "<group>"; };
+		0F9214C61EE9241E0088D5DA /* keyPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = keyPad.xib; sourceTree = "<group>"; };
+		0F9214C81EE92C4F0088D5DA /* KeypadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeypadView.h; sourceTree = "<group>"; };
+		0F9214C91EE92C4F0088D5DA /* KeypadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeypadView.m; sourceTree = "<group>"; };
 		0F9232E01EB85CE3008B1F37 /* AirMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AirMenuCell.xib; sourceTree = "<group>"; };
 		0F9ADF711CE2DC020052F3BC /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		0F9EA72B1DDB026C00223ED8 /* NSString+RegMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+RegMatch.h"; sourceTree = "<group>"; };
@@ -1944,6 +1949,9 @@
 				0F7273711ED6BAA700AF1475 /* LeftMenuCell.xib */,
 				0F7273731ED6BB8600AF1475 /* LeftMenuCell.h */,
 				0F7273741ED6BB8600AF1475 /* LeftMenuCell.m */,
+				0F9214C61EE9241E0088D5DA /* keyPad.xib */,
+				0F9214C81EE92C4F0088D5DA /* KeypadView.h */,
+				0F9214C91EE92C4F0088D5DA /* KeypadView.m */,
 			);
 			name = Devices;
 			sourceTree = "<group>";
@@ -2662,6 +2670,7 @@
 				F60FDB471D003FD500AB04BE /* CurtainTableViewCell.xib in Resources */,
 				CDEE5EAE1ECEC07E00A5779D /* Assets.xcassets in Resources */,
 				CD7DDA151E826C3B00638DB3 /* backBtn@2x.png in Resources */,
+				0F9214C71EE9241E0088D5DA /* keyPad.xib in Resources */,
 				CDF389241E306D2400657C8B /* maintaininfo.plist in Resources */,
 				CD9F0AC11EB861F5007B0CF7 /* address.txt in Resources */,
 				CD93E3B11E8081B0003CCAA9 /* login_line@2x.png in Resources */,
@@ -3062,6 +3071,7 @@
 				CDFB9DF81E641F8E00BFECCE /* DeviceTimerInfo.m in Sources */,
 				CDEE5E951EC1AC6000A5779D /* SelectRoomViewController.m in Sources */,
 				0FCFB38F1CF293B300B37DD3 /* Radio.m in Sources */,
+				0F9214CA1EE92C4F0088D5DA /* KeypadView.m in Sources */,
 				2E6A065B1EA743B50022B681 /* NewColourCell.m in Sources */,
 				CDB8B8531EB1D550003AA894 /* SceneShortcutsViewController.m in Sources */,
 				CD5134371E8D07FD00C2EDAF /* Goods.m in Sources */,

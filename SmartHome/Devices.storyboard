@@ -565,6 +565,9 @@
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jTD-VA-L4b">
                                 <rect key="frame" x="250" y="342" width="70" height="69"/>
                                 <state key="normal" backgroundImage="keypad"/>
+                                <connections>
+                                    <action selector="keyChannel:" destination="ZhE-q2-gFO" eventType="touchUpInside" id="UAc-aW-oxg"/>
+                                </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ulH-vN-ofH">
                                 <rect key="frame" x="0.0" y="114" width="61" height="60"/>

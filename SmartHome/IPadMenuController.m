@@ -41,10 +41,10 @@ static NSString *const leftMenuCell = @"leftMenuCell";
     NSMutableArray *temp = [NSMutableArray new];
     NSArray *ts = [SQLManager typeName:self.typeID byRoom:self.roomID];
     Device *device = [self.types objectAtIndex:indexPath.row];
-    NSString *typeid = [NSString stringWithFormat:@"0%ld", device.hTypeId];
+    //NSString *typeid = [NSString stringWithFormat:@"0%ld", device.hTypeId];
     if (device.hTypeId >0 && device.hTypeId<10) {
         [temp addObjectsFromArray:ts];
-        NSArray *arr = [SQLManager devicesWithCatalogID:typeid room:self.roomID];
+        NSArray *arr = [SQLManager devicesWithCatalogID:device.hTypeId room:self.roomID];
         for (id obj in arr) {
             [temp insertObject:obj atIndex:device.rID];
         }

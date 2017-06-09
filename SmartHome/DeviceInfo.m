@@ -411,9 +411,11 @@
     return [self action:0x17 deviceID:deviceID];
 }
 
--(NSData *) switchProgram:(uint8_t)program deviceID:(NSString *)deviceID
+-(NSData *) switchProgram:(uint16_t)program deviceID:(NSString *)deviceID
 {
-    return [self action:0x3A deviceID:deviceID value:program];
+    uint8_t r = program/256;
+    uint8_t g = program%256;
+    return [self action:0x3A deviceID:deviceID R:r G:g B:0];
 }
 
 -(NSData *) changeTVolume:(uint8_t)percent deviceID:(NSString *)deviceID

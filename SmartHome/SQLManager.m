@@ -284,7 +284,7 @@
     return deviceID;
 }
 
-+ (NSArray *)devicesWithCatalogID:(NSString *)catalogID room:(int)roomID
++ (NSArray *)devicesWithCatalogID:(long)catalogID room:(int)roomID
 {
     FMDatabase *db = [self connetdb];
     NSMutableArray *names = [NSMutableArray new];
@@ -292,9 +292,9 @@
     {
         NSString *sql;
         if ([self isWholeHouse:roomID]) {
-            sql = [NSString stringWithFormat:@"SELECT id,NAME FROM Devices where htypeid = '%@'",catalogID];
+            sql = [NSString stringWithFormat:@"SELECT id,NAME FROM Devices where UITypeOfLight = '%ld'",catalogID];
         }else{
-            sql = [NSString stringWithFormat:@"SELECT id,NAME FROM Devices where htypeid = '%@' and rid = %d",catalogID,roomID];
+            sql = [NSString stringWithFormat:@"SELECT id,NAME FROM Devices where UITypeOfLight = '%ld' and rid = %d",catalogID,roomID];
         }
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])

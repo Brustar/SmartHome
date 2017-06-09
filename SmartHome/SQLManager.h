@@ -59,7 +59,7 @@
 +(NSString *)deviceTypeNameByDeviceID:(int)eId;
 + (NSArray *)getSwitchLightByRoom:(int) roomID;//开关灯
 +(NSString *)lightTypeNameByDeviceID:(int)eId;
-+(NSArray *)devicesWithCatalogID:(NSString *)catalogID room:(int)roomID;
++(NSArray *)devicesWithCatalogID:(long)catalogID room:(int)roomID;
 +(NSString *) singleDeviceWithCatalogID:(int)catalogID byRoom:(int)roomID;
 +(NSArray *)deviceSubTypeByRoomId:(NSInteger)roomID;
 +(NSArray *)deviceTypeIDByRoom:(NSInteger)roomID;
