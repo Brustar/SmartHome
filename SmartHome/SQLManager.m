@@ -543,9 +543,7 @@
         while ([resultSet next])
         {
             int deviceID = [resultSet intForColumn:@"ID"];
-            
-            
-                [deviceDIs addObject:[NSNumber numberWithInt:deviceID]];
+            [deviceDIs addObject:[NSNumber numberWithInt:deviceID]];
             
         }
     }
@@ -1150,9 +1148,9 @@
     {
         NSString *sql = nil;
         if ([self isWholeHouse:roomID]) {
-            sql = [NSString stringWithFormat:@"SELECT DISTINCT subTypeName FROM Devices where masterID = '%ld' and subTypeName<>'感应器'",[[DeviceInfo defaultManager] masterID]];
+            sql = [NSString stringWithFormat:@"SELECT DISTINCT subTypeName FROM Devices where masterID = '%ld' and subtypeid<>6",[[DeviceInfo defaultManager] masterID]];
         }else{
-            sql = [NSString stringWithFormat:@"SELECT DISTINCT subTypeName FROM Devices where rID = %d and masterID = '%ld' and subTypeName<>'感应器'",roomID,[[DeviceInfo defaultManager] masterID]];
+            sql = [NSString stringWithFormat:@"SELECT DISTINCT subTypeName FROM Devices where rID = %d and masterID = '%ld' and subtypeid<>6",roomID,[[DeviceInfo defaultManager] masterID]];
         }
         
         FMResultSet *resultSet = [db executeQuery:sql];
@@ -1168,9 +1166,40 @@
     [db closeOpenResultSets];
     [db close];
     return subTypeNames;
-    
 }
-//根据roomID和subTypeName字段 从Devices 表 查询出 ID字段(可能有重复数据，要去重)
+
++ (NSArray *)allTypeinRoom:(int)roomID
+{
+    NSMutableArray *subTypeNames = [NSMutableArray array];
+    FMDatabase *db = [self connetdb];
+    
+    if([db open])
+    {
+        NSString *sql = nil;
+        if ([self isWholeHouse:roomID]) {
+            sql = [NSString stringWithFormat:@"SELECT DISTINCT subTypeName,subtypeid FROM Devices where masterID = '%ld' and subtypeid<>6",[[DeviceInfo defaultManager] masterID]];
+        }else{
+            sql = [NSString stringWithFormat:@"SELECT DISTINCT subTypeName,subtypeid FROM Devices where rID = %d and masterID = '%ld' and subtypeid<>6",roomID,[[DeviceInfo defaultManager] masterID]];
+        }
+        
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while([resultSet next])
+        {
+            Device *device = [Device new];
+            NSString *subTypeName = [resultSet stringForColumn:@"subTypeName"];
+            if (subTypeName) {
+                device.subTypeName = subTypeName;
+                device.subTypeId = [resultSet intForColumn:@"subTypeid"];
+                [subTypeNames addObject:device];
+            }
+            
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return subTypeNames;
+}
+
 + (NSArray *)getDevicesIDWithRoomID:(int)roomID SubTypeName:(NSString *)subTypeName
 {
     NSMutableArray *htypeIDs = [NSMutableArray array];
@@ -1180,9 +1209,9 @@
     {
         NSString *sql = nil;
         if ([self isWholeHouse:roomID]) {
-        sql = [NSString stringWithFormat:@"SELECT DISTINCT ID FROM Devices where subTypeName = '%@' and masterID = '%ld'",subTypeName,[[DeviceInfo defaultManager] masterID]];
+        sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where subTypeName = '%@' and masterID = '%ld'",subTypeName,[[DeviceInfo defaultManager] masterID]];
         }else{
-        sql = [NSString stringWithFormat:@"SELECT DISTINCT ID FROM Devices where rID = %d and subTypeName = '%@' and masterID = '%ld'",roomID,subTypeName,[[DeviceInfo defaultManager] masterID]];
+        sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %d and subTypeName = '%@' and masterID = '%ld'",roomID,subTypeName,[[DeviceInfo defaultManager] masterID]];
         }
         
         FMResultSet *resultSet = [db executeQuery:sql];

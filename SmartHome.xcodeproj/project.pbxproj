@@ -51,6 +51,8 @@
 		0F4B3C751E7BE57A00102DD3 /* CommonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4B3C721E7BE57A00102DD3 /* CommonUtil.m */; };
 		0F4B3C7A1E7BEDE300102DD3 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F4B3C781E7BED4E00102DD3 /* libxml2.tbd */; };
 		0F4B49801CFEB13500D93DD2 /* CurtainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4B497F1CFEB13500D93DD2 /* CurtainController.m */; };
+		0F5F909B1EEA506900BACC3E /* IPadDevices.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F5F909A1EEA506900BACC3E /* IPadDevices.xib */; };
+		0F5F909E1EEA723700BACC3E /* IPadDevicesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F5F909D1EEA723700BACC3E /* IPadDevicesView.m */; };
 		0F6183FA1EA9A24600000EAD /* NewLightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6183F81EA9A24600000EAD /* NewLightCell.m */; };
 		0F6183FB1EA9A24600000EAD /* NewLightCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F6183F91EA9A24600000EAD /* NewLightCell.xib */; };
 		0F6423491DE57C83003379FC /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6423441DE57C83003379FC /* AudioStreamer.m */; };
@@ -473,6 +475,9 @@
 		0F4B3C7E1E7BEE1D00102DD3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0F4B497E1CFEB13500D93DD2 /* CurtainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurtainController.h; sourceTree = "<group>"; };
 		0F4B497F1CFEB13500D93DD2 /* CurtainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurtainController.m; sourceTree = "<group>"; };
+		0F5F909A1EEA506900BACC3E /* IPadDevices.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPadDevices.xib; sourceTree = "<group>"; };
+		0F5F909C1EEA723700BACC3E /* IPadDevicesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPadDevicesView.h; sourceTree = "<group>"; };
+		0F5F909D1EEA723700BACC3E /* IPadDevicesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPadDevicesView.m; sourceTree = "<group>"; };
 		0F6183F71EA9A24600000EAD /* NewLightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewLightCell.h; sourceTree = "<group>"; };
 		0F6183F81EA9A24600000EAD /* NewLightCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewLightCell.m; sourceTree = "<group>"; };
 		0F6183F91EA9A24600000EAD /* NewLightCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewLightCell.xib; sourceTree = "<group>"; };
@@ -1952,6 +1957,9 @@
 				0F9214C61EE9241E0088D5DA /* keyPad.xib */,
 				0F9214C81EE92C4F0088D5DA /* KeypadView.h */,
 				0F9214C91EE92C4F0088D5DA /* KeypadView.m */,
+				0F5F909A1EEA506900BACC3E /* IPadDevices.xib */,
+				0F5F909C1EEA723700BACC3E /* IPadDevicesView.h */,
+				0F5F909D1EEA723700BACC3E /* IPadDevicesView.m */,
 			);
 			name = Devices;
 			sourceTree = "<group>";
@@ -2674,6 +2682,7 @@
 				CDF389241E306D2400657C8B /* maintaininfo.plist in Resources */,
 				CD9F0AC11EB861F5007B0CF7 /* address.txt in Resources */,
 				CD93E3B11E8081B0003CCAA9 /* login_line@2x.png in Resources */,
+				0F5F909B1EEA506900BACC3E /* IPadDevices.xib in Resources */,
 				2EC266291EA4BEAF003DC979 /* FMTableViewCell.xib in Resources */,
 				CDF3892C1E30B86500657C8B /* msgList.plist in Resources */,
 				2E9B41121EE53E470061B682 /* IpadDVDTableViewCell.xib in Resources */,
@@ -3056,6 +3065,7 @@
 				2EBABC781E8360FB0093EF3A /* TVTableViewCell.m in Sources */,
 				CD4F124A1EB452D800E0B301 /* Address.m in Sources */,
 				F61896381D87B06300DBE6CD /* ScreenCurtainController.m in Sources */,
+				0F5F909E1EEA723700BACC3E /* IPadDevicesView.m in Sources */,
 				2E8715D31EA06EFF006D3FB0 /* NowMusicController.m in Sources */,
 				0F4B3C741E7BE57A00102DD3 /* WeChatPayController.mm in Sources */,
 				0F7426C21EBB362F00D686B8 /* WettingController.m in Sources */,
