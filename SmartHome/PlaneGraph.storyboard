@@ -36,7 +36,7 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BorderBg" translatesAutoresizingMaskIntoConstraints="NO" id="wib-Rb-la7" userLabel="BorderBg">
                                         <rect key="frame" x="220" y="114" width="764" height="510"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlaneGraph" translatesAutoresizingMaskIntoConstraints="NO" id="gVv-Nr-DMk" userLabel="PlaneGraph">
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlaneGraph" translatesAutoresizingMaskIntoConstraints="NO" id="gVv-Nr-DMk" userLabel="PlaneGraph" customClass="TouchImage">
                                         <rect key="frame" x="260" y="144" width="684" height="450"/>
                                     </imageView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Sgh-Ny-ymp">
@@ -190,6 +190,7 @@
                     </view>
                     <connections>
                         <outlet property="floorScrollView" destination="ORV-VF-xhN" id="kZs-K8-fKO"/>
+                        <outlet property="planeGraph" destination="gVv-Nr-DMk" id="Tbv-cz-vxt"/>
                         <outlet property="roomStatusCollectionView" destination="Sgh-Ny-ymp" id="Vg5-kN-Lvs"/>
                     </connections>
                 </viewController>

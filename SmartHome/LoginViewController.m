@@ -215,8 +215,15 @@
     [super viewWillAppear:animated];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    
+    [self.nameTextField resignFirstResponder];
+    [self.pwdTextField resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {

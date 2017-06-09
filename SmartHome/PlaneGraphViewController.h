@@ -7,6 +7,7 @@
 //
 #import <UIKit/UIKit.h>
 #import <AFNetworking.h>
+#import "AFHTTPSessionManager.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "Scene.h"
@@ -23,13 +24,15 @@
 #import "CustomViewController.h"
 #import "FamilyHomeDetailViewController.h"
 #import "NowMusicController.h"
+#import "TouchImage.h"
+#import "UIImageView+WebCache.h"
 
 #define  CollectionCell_W  self.roomStatusCollectionView.frame.size.width -40
 #define  iPadCollectionCellW  self.roomStatusCollectionView.frame.size.width / 3.0 -40
 #define  minSpace 20
 #define  maxSpace 40
 
-@interface PlaneGraphViewController : CustomViewController<UICollectionViewDelegate, UICollectionViewDataSource,HttpDelegate, NowMusicControllerDelegate>
+@interface PlaneGraphViewController : CustomViewController<UICollectionViewDelegate, UICollectionViewDataSource,HttpDelegate, NowMusicControllerDelegate, TouchImageDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *roomStatusCollectionView;
 @property (nonatomic, strong) NSMutableArray *roomArray;
 @property(nonatomic, strong) AFNetworkReachabilityManager *afNetworkReachabilityManager;
@@ -39,5 +42,6 @@
 @property (nonatomic, readonly) UIButton *naviRightBtn;
 @property (nonatomic, strong) NowMusicController * nowMusicController;
 @property (weak, nonatomic) IBOutlet UIScrollView *floorScrollView;
+@property (weak, nonatomic) IBOutlet TouchImage *planeGraph;
 
 @end
