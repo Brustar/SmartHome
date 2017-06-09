@@ -16,6 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self addNotifications];
     [self setupNaviBar];
     [self showNetStateView];
@@ -41,20 +42,64 @@
     
     self.roomStatusCollectionView.backgroundColor = [UIColor clearColor];
     
-   // UIImageView *ipadBg = [[UIImageView alloc] initWithFrame:self.roomStatusCollectionView.bounds];
-   //ipadBg.image = [UIImage imageNamed:@"LeftFrameBg"];
-   //[self.view insertSubview:ipadBg belowSubview:self.roomStatusCollectionView];
-   // [self.view bringSubviewToFront:self.roomStatusCollectionView];
-    
     _roomArray = [NSMutableArray array];
     //开启网络状况监听器
     [self updateInterfaceWithReachability];
+    [self setupPlaneGraph];
+    //[self fetchRoomDeviceStatus];//获取房间设备状态，温度，湿度, PM2.5
     
-    [self fetchRoomDeviceStatus];//获取房间设备状态，温度，湿度, PM2.5
+    [self performSelector:@selector(fetchRoomDeviceStatus) withObject:nil afterDelay:2];
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
 }
+
+#pragma mark - TouchImageDelegate
+- (void)openRoom:(NSNumber *)roomId {
+    //鉴权一下
+    int roomAuth = [SQLManager getRoomAuthority:roomId.intValue];
+    if (roomAuth == 1) {
+        UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
+        FamilyHomeDetailViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"familyHomeDetailVC"];
+        vc.roomID = [roomId integerValue];
+        //vc.roomName
+        [self.navigationController pushViewController:vc animated:YES];
+    }else {
+        [MBProgressHUD showError:@"你无权限打开此房间"];
+    }
+}
+
+- (void)setupPlaneGraph {
+    self.planeGraph.viewFrom=PLANE_IMAGE;
+    self.planeGraph.delegate = self;
+    
+    //先读缓存，没有缓存数据，再请求服务器获取
+    [self getPlaneGraphConfiguration];
+}
+
+//获取平面图配置
+- (void)getPlaneGraphConfiguration
+{
+    NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
+    
+    if (auothorToken.length >0) {
+    
+    NSString *url = [NSString stringWithFormat:@"%@%@",[IOManager httpAddr], @"Cloud/scene_config_list.aspx"];
+    
+    NSDictionary *dic = @{
+                          @"token":  auothorToken,
+                          @"optype": @(1)
+                          };
+    
+    HttpManager *http = [HttpManager defaultManager];
+    http.delegate = self;
+    http.tag = 1;
+    [http sendPost:url param:dic];
+   
+    }
+}
+
+#pragma mark -
 
 - (void)setupNaviBar {
     [self setNaviBarTitle:[UD objectForKey:@"homename"]]; //设置标题
@@ -277,7 +322,26 @@
 #pragma mark - Http callback
 - (void)httpHandler:(id)responseObject tag:(int)tag
 {
-    if(tag == 4) {
+    if (tag == 1) {
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            if ([responseObject[@"result"] integerValue] == 0) {
+                NSDictionary *infoDict = responseObject[@"info"];
+                if ([infoDict isKindOfClass:[NSDictionary class]]) {
+                    NSString *bgImgUrl = infoDict[@"imgpath"];//设置平面背景
+                    if (bgImgUrl.length >0) {
+                        [self.planeGraph sd_setImageWithURL:[NSURL URLWithString:bgImgUrl] placeholderImage:[UIImage imageNamed:@"PlaneGraph"] options:SDWebImageRetryFailed];
+                    }
+                    NSString *plistURL = infoDict[@"plist_path"];
+                    if (plistURL.length >0) {
+                        //下载plist
+                        [self downloadPlist:plistURL];
+                    }
+                }
+            }
+        }
+    }
+    
+    else if(tag == 4) {
         if ([responseObject[@"result"] intValue] == 0) {
             [_roomArray removeAllObjects];
             NSArray *roomStatusList = responseObject[@"room_status_list"];
@@ -307,7 +371,145 @@
                 }
             }
             
-            [self.roomStatusCollectionView reloadData];
+            [self.roomStatusCollectionView reloadData];//左侧房间信息圆盘
+            
+            [self getAllDevicesStatusIcon];//平面图房间设备状态icon
+        }
+    }
+}
+
+//下载场景plist文件到本地
+-(void)downloadPlist:(NSString *)plistURL
+{
+    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:plistURL]];
+    NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+        //下载进度
+        NSLog(@"%@",downloadProgress);
+        
+    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        
+        //下载到哪个文件夹
+        NSString *path = [[IOManager planeScenePath] stringByAppendingPathComponent:response.suggestedFilename];
+        
+        return [NSURL fileURLWithPath:path];
+        
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        NSLog(@"planeGraphPlistFile下载完了 %@",filePath);
+        
+        NSString *plistFilePath = [[filePath absoluteString] substringFromIndex:7];
+        //保存到UD
+        [UD setObject:plistFilePath forKey:@"Plane_Graph_PlistFile"];
+        [UD synchronize];
+        
+        //获取所有房间的区域信息
+        [self getAllRoomsRectWithPlistFilePath:plistFilePath];
+        
+    }];
+    
+    [task resume];
+}
+
+//根据plist文件获取全屋所有房间的区域信息
+- (void)getAllRoomsRectWithPlistFilePath:(NSString *)plistFilePath {
+    NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:plistFilePath];
+    NSLog(@"planeScenePlistFilePath: %@", plistFilePath);
+    NSLog(@"planeScenePlistDict: %@", plistDic);
+    
+    //获取全屋设备
+//    NSArray *deviceArray = [plistDic objectForKey:@"devices"];
+//    if ([deviceArray isKindOfClass:[NSArray class]] && deviceArray.count >0) {
+//        [self addLights:deviceArray];
+//    }
+    
+    //获取所有房间
+    NSArray *roomArray = [plistDic objectForKey:@"rooms"];
+    if ([roomArray isKindOfClass:[NSArray class]] && roomArray.count >0) {
+        [self.planeGraph addRoom:roomArray];
+    }
+}
+
+- (void)getAllDevicesStatusIcon {
+    NSString *plistFilePath = [UD objectForKey:@"Plane_Graph_PlistFile"];
+    if (plistFilePath.length >0) {
+        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:plistFilePath];
+        NSArray *deviceIconPositionArray = [plistDic objectForKey:@"room_positions"];
+        if ([deviceIconPositionArray isKindOfClass:[NSArray class]]) {
+            
+            for (NSDictionary *dict in deviceIconPositionArray) {
+                
+                //roomID
+                NSNumber *roomID = [dict objectForKey:@"roomID"];
+                
+                for (RoomStatus *roomInfo in self.roomArray) {
+                    if (roomInfo.roomId == [roomID integerValue]) {
+                        NSString *iconRectStr = [dict objectForKey:@"rect"];
+                        CGRect iconRect = CGRectFromString(iconRectStr);
+                        
+                        CGFloat temp_origin_x = iconRect.origin.x;
+                        CGFloat iconWidth = 20.0f;
+                        CGFloat iconHeight = 20.0f;
+                        CGFloat gap = 6.0f;
+                        
+                        if (roomInfo.lightStatus == 1) {
+                            UIButton *lightIcon = [[UIButton alloc] initWithFrame:CGRectMake(temp_origin_x, iconRect.origin.y, iconWidth, iconHeight)];
+                            [lightIcon setBackgroundImage:[UIImage imageNamed:@"planeLightIcon"] forState:UIControlStateNormal];
+                            lightIcon.tag = 777;
+                            
+                            UIView *lastIcon = [self.planeGraph viewWithTag:777];
+                            [lastIcon removeFromSuperview];
+                            
+                            [self.planeGraph addSubview:lightIcon];
+                            
+                            temp_origin_x += (iconWidth + gap);
+                        }else {
+                            UIView *lastIcon = [self.planeGraph viewWithTag:777];
+                            [lastIcon removeFromSuperview];
+                        }
+                        
+                        if (roomInfo.airconditionerStatus == 1) {
+                            UIButton *airIcon = [[UIButton alloc] initWithFrame:CGRectMake(temp_origin_x, iconRect.origin.y, iconWidth, iconHeight)];
+                            
+                            [airIcon setBackgroundImage:[UIImage imageNamed:@"planeAirIcon"] forState:UIControlStateNormal];
+                            airIcon.tag = 888;
+                            
+                            UIView *lastIcon = [self.planeGraph viewWithTag:888];
+                            [lastIcon removeFromSuperview];
+                            
+                            [self.planeGraph addSubview:airIcon];
+                            
+                            temp_origin_x += (iconWidth + gap);
+                        }else {
+                            UIView *lastIcon = [self.planeGraph viewWithTag:888];
+                            [lastIcon removeFromSuperview];
+                        }
+                        
+                        if (roomInfo.mediaStatus == 1) {
+                            UIButton *mediaIcon = [[UIButton alloc] initWithFrame:CGRectMake(temp_origin_x, iconRect.origin.y, iconWidth, iconHeight)];
+                            
+                            [mediaIcon setBackgroundImage:[UIImage imageNamed:@"planeMediaIcon"] forState:UIControlStateNormal];
+                            mediaIcon.tag = 999;
+                            
+                            
+                            UIView *lastIcon = [self.planeGraph viewWithTag:999];
+                            [lastIcon removeFromSuperview];
+                            
+                            [self.planeGraph addSubview:mediaIcon];
+                            
+                            temp_origin_x += (iconWidth + gap);
+                        }else {
+                            UIView *lastIcon = [self.planeGraph viewWithTag:999];
+                            [lastIcon removeFromSuperview];
+                        }
+                        
+                        break;
+                    }
+                }
+                
+            }
+            
         }
     }
 }

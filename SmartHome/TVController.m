@@ -11,7 +11,7 @@
 #import "SceneManager.h"
 #import "TVChannel.h"
 #import "DVCollectionViewCell.h"
-
+#import "UIView+Popup.h"
 #import "MBProgressHUD+NJ.h"
 #import "KxMenu.h"
 #import "VolumeManager.h"
@@ -27,7 +27,7 @@
 #import "IQKeyBoardManager.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import "UIViewController+Navigator.h"
-
+#import "KeypadView.h"
 @interface UIImagePickerController (LandScapeImagePicker)
 
 - (UIStatusBarStyle)preferredStatusBarStyle;
@@ -66,8 +66,6 @@
 
 @property (weak, nonatomic) IBOutlet UICollectionView *tvLogoCollectionView;
 @property (weak, nonatomic) IBOutlet UICollectionView *numbersCollectionView;
-
-@property (nonatomic,strong) NSArray *btnTitles;
 
 @property (nonatomic,strong) NSMutableArray *allFavourTVChannels;
 
@@ -111,15 +109,6 @@
 @end
 
 @implementation TVController
-
--(NSArray *)btnTitles
-{
-    if(!_btnTitles)   
-    {
-        _btnTitles = @[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"0"];
-    }
-    return _btnTitles;
-}
 
 -(NSMutableArray*)allFavourTVChannels
 {
@@ -226,6 +215,15 @@
 - (void)iphoneRoomView:(UIView *)view didSelectButton:(int)index {
     Device *device = self.menus[index];
     [self.navigationController pushViewController:[DeviceInfo calcController:device.hTypeId] animated:NO];
+}
+
+- (IBAction)keyChannel:(id)sender {
+    NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"keyPad" owner:self options:nil];
+    
+    KeypadView *view = array[0];
+    view.deviceid = self.deviceid;
+    view.transform = CGAffineTransformMakeRotation(M_PI_2);
+    [view show];
 }
 
 - (void)viewDidLoad {

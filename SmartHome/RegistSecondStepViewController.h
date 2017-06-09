@@ -25,6 +25,36 @@
 @property (weak, nonatomic) IBOutlet UIImageView *tipImageView;
 @property (weak, nonatomic) IBOutlet UILabel *tipLabel;
 @property (nonatomic, strong) NSString *phoneNum;//手机号码
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *phoneNumLabelLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *phoneNumLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *line1Trailing;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *line1Leading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *line2Trailing;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *line2Leading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *line3Trailing;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *line3Leading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *line4Trailing;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *line4Leading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *line5Trailing;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *line5Leading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *line6Trailing;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *line6Leading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *checkCodeFieldLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *checkCodeFieldWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *checkCodeBtnTrailing;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *nameIconLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pwdIconLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pwd2IconLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *nameTextFieldLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *nameTextFieldWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pwdTextFieldLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pwdTextFieldWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pwd2TextFieldLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pwd2TextFieldWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tipIconLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tipLabelLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *nextBtnTrailing;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *nextBtnLeading;
 
 @property (nonatomic,assign) int cType;
 @property (nonatomic,strong) NSString  *masterID;

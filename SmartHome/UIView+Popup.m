@@ -22,10 +22,10 @@
                                                   maskType:PopupViewMaskTypeDimmed
                             shouldDismissOnBackgroundTouch:YES shouldDismissOnContentTouch:NO];
     
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+    if (ON_IPAD) {
         popup = [PopupView popupViewWithContentView:self
-                                           showType:PopupViewShowTypeBounceInFromLeft
-                                        dismissType:PopupViewDismissTypeBounceOutToRight
+                                           showType:PopupViewShowTypeBounceInFromRight
+                                        dismissType:PopupViewDismissTypeBounceOutToLeft
                                            maskType:PopupViewMaskTypeDimmed
                      shouldDismissOnBackgroundTouch:YES shouldDismissOnContentTouch:NO];
     }

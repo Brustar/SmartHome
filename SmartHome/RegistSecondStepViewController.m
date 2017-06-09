@@ -35,6 +35,44 @@
     self.pwdTextField.delegate = self;
     self.pwd2TextField.delegate = self;
     [self setNaviBarTitle:@"注册"];
+    
+    [self adjustIpadUI];
+}
+
+- (void)adjustIpadUI {
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        
+        self.line1Leading.constant = 260;
+        self.line1Trailing.constant = 260;
+        self.line2Leading.constant = self.line1Leading.constant;
+        self.line2Trailing.constant = self.line1Trailing.constant;
+        self.line3Leading.constant = self.line1Leading.constant;
+        self.line3Trailing.constant = self.line1Trailing.constant;
+        self.line4Leading.constant = self.line1Leading.constant;
+        self.line4Trailing.constant = self.line1Trailing.constant;
+        self.line5Leading.constant = self.line1Leading.constant;
+        self.line5Trailing.constant = self.line1Trailing.constant;
+        self.line6Leading.constant = self.line1Leading.constant;
+        self.line6Trailing.constant = self.line1Trailing.constant;
+        self.phoneNumLabelLeading.constant = self.line1Leading.constant + 30;
+        self.phoneNumLeading.constant = self.phoneNumLabelLeading.constant + 80;
+        self.checkCodeFieldLeading.constant = self.phoneNumLabelLeading.constant;
+        self.checkCodeFieldWidth.constant = 200;
+        self.checkCodeBtnTrailing.constant = self.line1Trailing.constant;
+        self.nameIconLeading.constant = self.phoneNumLabelLeading.constant;
+        self.pwdIconLeading.constant = self.nameIconLeading.constant;
+        self.pwd2IconLeading.constant = self.pwdIconLeading.constant;
+        self.nameTextFieldLeading.constant = self.nameIconLeading.constant + 40;
+        self.nameTextFieldWidth.constant = 300;
+        self.pwdTextFieldLeading.constant = self.nameTextFieldLeading.constant;
+        self.pwdTextFieldWidth.constant = self.nameTextFieldWidth.constant;
+        self.pwd2TextFieldLeading.constant = self.pwdTextFieldLeading.constant;
+        self.pwd2TextFieldWidth.constant = self.pwdTextFieldWidth.constant;
+        self.tipIconLeading.constant = self.pwd2IconLeading.constant;
+        self.tipLabelLeading.constant = self.tipIconLeading.constant + 30;
+        self.nextBtnTrailing.constant = self.line1Trailing.constant + 90;
+        self.nextBtnLeading.constant = self.line1Leading.constant + 90;
+    }
 }
 
 #pragma  mark - 手机验证码
