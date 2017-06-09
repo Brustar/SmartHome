@@ -473,6 +473,9 @@
                     <navigationItem key="navigationItem" id="cdJ-K8-cbD"/>
                     <connections>
                         <outlet property="RepetitionLable" destination="YDs-YH-YJh" id="PWn-F6-XEU"/>
+                        <outlet property="SupView" destination="Feg-z9-7jQ" id="tKX-kA-dpF"/>
+                        <outlet property="TimViewLeadingConstraint" destination="nKa-df-5ao" id="U0f-YX-1Q5"/>
+                        <outlet property="TimeViewTrailingConstraint" destination="XL0-ZT-Lje" id="nNH-Op-mnD"/>
                         <outlet property="TimerView" destination="0Ml-IB-SIs" id="OWk-Zr-O1N"/>
                         <outlet property="clock" destination="hC1-Bq-ver" id="1nH-5d-ypv"/>
                         <outlet property="endTimeLabel" destination="KQo-X9-dnP" id="meg-hc-ALd"/>
@@ -598,7 +601,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="重复" id="gZ5-FA-uZw"/>
                     <connections>
+                        <outlet property="TableViewTopConstraint" destination="cMN-UX-7HE" id="Kb0-kn-Csu"/>
+                        <outlet property="tableViewLeadingConstraint" destination="x3D-gZ-5sv" id="yvd-gS-T0Y"/>
+                        <outlet property="tableViewtrailingConstraint" destination="v4M-ld-JM1" id="cJH-TN-UU6"/>
                         <outlet property="tableview" destination="sqU-TG-6PA" id="imM-5N-pYx"/>
+                        <outlet property="tableviewBottomConstraint" destination="RR0-PH-QIA" id="plC-Wr-B6L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="epM-VF-0gI" userLabel="First Responder" sceneMemberID="firstResponder"/>

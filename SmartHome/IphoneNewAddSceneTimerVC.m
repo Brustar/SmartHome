@@ -28,6 +28,9 @@
 @property (nonatomic,strong) NSArray * viewControllerArrs;
 @property (nonatomic,strong) NSDateFormatter  *dateFormatter;
 @property (weak, nonatomic) IBOutlet TenClock *clock;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *TimViewLeadingConstraint;//到父视图左边的距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *TimeViewTrailingConstraint;//到父视图右边的距离
+@property (weak, nonatomic) IBOutlet UIView *SupView;
 
 @end
 
@@ -63,6 +66,20 @@
         // Custom initialization
     }
     return self;
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        
+        self.TimViewLeadingConstraint.constant = 200;
+        self.TimeViewTrailingConstraint.constant = 200;
+        
+        self.SupView.backgroundColor = [UIColor colorWithRed:25/255.0 green:25/255.0 blue:29/255.0 alpha:1];
+    }
+    
 }
 - (void)viewDidLoad{
     [super viewDidLoad];

@@ -12,6 +12,12 @@
 @interface WeekdaysVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (nonatomic,strong) NSMutableArray * dataArr;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *TableViewTopConstraint;//tableView到上面的距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewLeadingConstraint;//tableView到左边的距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewtrailingConstraint;//tableView到右边的距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableviewBottomConstraint;//tableView到下边的距离
+
 @end
 
 @implementation WeekdaysVC
@@ -24,6 +30,21 @@
     UIView *view = [[UIView alloc] init];
     [view setBackgroundColor:[UIColor clearColor]];
     self.tableview.tableFooterView = view;
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        self.TableViewTopConstraint.constant = 300;
+        self.tableViewLeadingConstraint.constant = 200;
+        self.tableViewtrailingConstraint.constant = 200;
+        self.tableviewBottomConstraint.constant = 90;
+        
+        self.tableview.backgroundColor = [UIColor colorWithRed:25/255.0 green:25/255.0 blue:29/255.0 alpha:1];
+    }
     
 }
 
@@ -108,7 +129,6 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 
 {
-    
     return 50;
     
 }

@@ -60,10 +60,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-  
       [self getUI];
       self.tableView.tableFooterView = [UIView new];
 }
+
+-(void)refreshData:(NSArray *)data
+{
+    
+    self.deviceIdArr = data;
+    [self getUI];
+    [self.tableView reloadData];
+    
+}
+
 -(void)getUI
 {
     _lightArr = [[NSMutableArray alloc] init];//场景下的所有设备

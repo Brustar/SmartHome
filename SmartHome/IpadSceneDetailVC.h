@@ -17,4 +17,6 @@
 @property (nonatomic,assign) int roomID;
 @property(nonatomic,assign) int sceneID;
 
+-(void)refreshData:(NSArray *)data;
+
 @end

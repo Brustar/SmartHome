@@ -41,5 +41,6 @@
 + (NSString *)sceneShortcutsPath;
 + (NSString *)sceneNonShortcutsPath;
 + (NSString *)familyRoomStatusPath;
++ (NSString *)FirstVCPath;
 
 @end

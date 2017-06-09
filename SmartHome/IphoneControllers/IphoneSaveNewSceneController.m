@@ -30,6 +30,9 @@
 @property(nonatomic, strong) NSString *repeatition;
 @property(nonatomic, strong) NSMutableString *startValue;
 @property(nonatomic, strong) NSMutableString *repeatString;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *SupViewConstraintLeading;//到做父视图左边的距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *SupViewTrailingConstraint;//到父视图右边的距离
+@property (weak, nonatomic) IBOutlet UIView *supView;
 
 @end
 
@@ -47,6 +50,14 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        
+        self.SupViewConstraintLeading.constant = 200;
+        self.SupViewTrailingConstraint.constant = 200;
+        
+        self.supView.backgroundColor = [UIColor colorWithRed:25/255.0 green:25/255.0 blue:29/255.0 alpha:1];
+    }
   
 }
 
@@ -91,16 +102,13 @@
     _scene = [[Scene alloc]initWhithoutSchedule];
     _scene.roomID = self.roomId;
     [_scene setValuesForKeysWithDictionary:plistDic];
-    if (_scene.devices.count != 0) {
+
         [[DeviceInfo defaultManager] setEditingScene:NO];
         [[SceneManager defaultManager] addScene:_scene withName:self.sceneName.text withImage:self.selectSceneImg];
         UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
         IphoneSceneController * iphoneSceneVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
         [self.navigationController pushViewController:iphoneSceneVC animated:YES];
-    }else{
-        [MBProgressHUD showSuccess:@"请先选择设备"];
-        [self.navigationController popViewControllerAnimated:YES];
-    }
+
   
 }
 - (void)httpHandler:(id)responseObject tag:(int)tag

@@ -18,7 +18,6 @@
 @property (nonatomic,strong) NSArray * SubTypeNameArr;
 @property (nonatomic,strong) NSArray * SubTypeIconeImage;
 @property (nonatomic, readonly) UIButton *naviRightBtn;
-@property (nonatomic, readonly) UIButton *naviLeftBtn;
 
 @end
 
@@ -42,24 +41,17 @@
     //    return self.roomList.count;
     return self.SubTypeNameArr.count;
 }
+
 - (void)setupNaviBar {
     
     [self setNaviBarTitle:[UD objectForKey:@"homename"]]; //设置标题
-    _naviLeftBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"backBtn" imgHighlight:@"backBtn" target:self action:@selector(leftBtnClicked:)];
-    
-    //    _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"" imgHighlight:@"" target:self action:@selector(rightBtnClicked:)];
     _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
-    [self setNaviBarLeftBtn:_naviLeftBtn];
+    
     [self setNaviBarRightBtn:_naviRightBtn];
+
 }
--(void)leftBtnClicked:(UIButton *)leftBtn
-{
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-        self.modalTransitionStyle = UIModalTransitionStylePartialCurl;
-        
-    }];
-}
+
+
 -(void)rightBtnClicked:(UIButton *)rightBtn
 {
         UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];

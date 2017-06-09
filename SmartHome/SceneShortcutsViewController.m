@@ -62,7 +62,7 @@
                     Scene *info = [[Scene alloc] init];
                     info.sceneID = [scene[@"sceneID"] intValue];
                     info.sceneName = scene[@"sceneName"];
-                    info.roomID = [scene[@"roomID"] integerValue];
+                    info.roomID = [scene[@"roomID"] intValue];
                     info.roomName = scene[@"roomName"];
                     
                     [_shortcutsArray addObject:info];
@@ -82,7 +82,7 @@
                         Scene *info = [[Scene alloc] init];
                         info.sceneID = [scene[@"sceneID"] intValue];
                         info.sceneName = scene[@"sceneName"];
-                        info.roomID = [scene[@"roomID"] integerValue];
+                        info.roomID = [scene[@"roomID"] intValue];
                         info.roomName = scene[@"roomName"];
                         
                         [_nonShortcutsArray addObject:info];

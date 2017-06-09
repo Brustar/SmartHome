@@ -152,7 +152,6 @@ static NSString *const menuCellIdentifier = @"rotationCell";
         self.top.constant = 0;
     }
 }
-
 - (NSDictionary *)getRGBDictionaryByColor:(UIColor *)originColor
 {
     CGFloat r=0,g=0,b=0,a=0;

@@ -167,7 +167,7 @@
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ipad-MessageIcon" translatesAutoresizingMaskIntoConstraints="NO" id="TZv-R0-6cB">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ipad-MessageIcon1" translatesAutoresizingMaskIntoConstraints="NO" id="TZv-R0-6cB">
                                 <rect key="frame" x="167" y="481" width="40" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="qch-NS-sXZ"/>
@@ -581,7 +581,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Ipad-MessageIcon" width="24" height="20"/>
+        <image name="Ipad-MessageIcon1" width="26" height="22"/>
         <image name="Video-add" width="25" height="25"/>
         <image name="Video-frame2" width="288" height="359"/>
         <image name="background" width="375" height="667"/>

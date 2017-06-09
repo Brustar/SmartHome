@@ -286,7 +286,7 @@
         self.vLeft.constant = self.vRight.constant = 100;
         self.mButtonLeft.constant = 530;
         self.cRight.constant = -200;
-        self.mButtonTop.constant = 40;
+        self.mButtonTop.constant =40;
         self.cBottom.constant = 440;
         self.keypad.hidden = self.btnHome.hidden = self.btnBack.hidden = self.btnSwitch.hidden = self.CHUP.hidden = self.CHDown.hidden = self.ear.hidden = NO;
     }

@@ -59,12 +59,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    [self getUI];
     self.tableView.tableFooterView = [UIView new];
     
 }
+-(void)refreshData:(NSArray *)data
+{
 
+    self.deviceIdArr = data;
+     [self getUI];
+     [self.tableView reloadData];
+
+}
 -(void)getUI
 {
     _lightArr = [[NSMutableArray alloc] init];//场景下的所有设备
@@ -183,6 +188,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         Device *device = [SQLManager getDeviceWithDeviceID:[_lightArray[indexPath.row] intValue]];
         cell.NewLightNameLabel.text = device.name;
+        cell.roomID = self.roomID;
         cell.NewLightSlider.continuous = NO;
         cell.NewLightSlider.hidden = NO;
         cell.deviceid = _lightArray[indexPath.row];
@@ -205,6 +211,7 @@
         newColourCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[indexPath.row] intValue]];
         newColourCell.colourNameLabel.text = device.name;
+        newColourCell.roomID = self.roomID;
         
         return newColourCell;
     }if (indexPath.section == 2) {//开关灯
@@ -212,6 +219,7 @@
         newColourCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_SwitchLightArr[indexPath.row] intValue]];
         newColourCell.colourNameLabel.text = device.name;
+        newColourCell.roomID = self.roomID;
         newColourCell.supimageView.hidden = YES;
         newColourCell.lowImageView.hidden = YES;
         newColourCell.highImageView.hidden = YES;
@@ -244,6 +252,7 @@
         TVCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_TVArray[indexPath.row] intValue]];
         TVCell.TVNameLabel.text = device.name;
+        TVCell.roomID = self.roomID;
         
         return TVCell;
     }if (indexPath.section == 6) {//DVD
@@ -251,6 +260,7 @@
         DVDCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_DVDArray[indexPath.row] intValue]];
         DVDCell.DVDNameLabel.text = device.name;
+        DVDCell.roomID = self.roomID;
         
         return DVDCell;
     }if (indexPath.section == 7) {//投影
@@ -259,6 +269,7 @@
         Device *device = [SQLManager getDeviceWithDeviceID:[_ProjectArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
         otherCell.deviceid = _ProjectArray[indexPath.row];
+        otherCell.roomID = self.roomID;
         
         return otherCell;
     }if (indexPath.section == 8) {//FM
@@ -267,6 +278,7 @@
         Device *device = [SQLManager getDeviceWithDeviceID:[_FMArray[indexPath.row] intValue]];
         FMCell.FMNameLabel.text = device.name;
         FMCell.deviceid = _FMArray[indexPath.row];
+        FMCell.roomID = self.roomID;
         
         return FMCell;
     }if (indexPath.section == 9) {//机顶盒
@@ -275,6 +287,7 @@
         Device *device = [SQLManager getDeviceWithDeviceID:[_NetVArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
         otherCell.deviceid = _NetVArray[indexPath.row];
+        otherCell.roomID = self.roomID;
         
         return otherCell;
     }if (indexPath.section == 10) {//幕布
@@ -283,6 +296,7 @@
         Device *device = [SQLManager getDeviceWithDeviceID:[_MBArray[indexPath.row] intValue]];
         ScreenCell.ScreenCurtainLabel.text = device.name;
         ScreenCell.deviceid = _MBArray[indexPath.row];
+        ScreenCell.roomID = self.roomID;
         
         return ScreenCell;
     }if (indexPath.section == 11) {//背景音乐
@@ -291,6 +305,7 @@
         Device *device = [SQLManager getDeviceWithDeviceID:[_BJMusicArray[indexPath.row] intValue]];
         BjMusicCell.BjMusicNameLb.text = device.name;
         BjMusicCell.deviceid = _BJMusicArray[indexPath.row];
+        BjMusicCell.roomID = self.roomID;
         
         return BjMusicCell;
     }
@@ -298,6 +313,7 @@
         OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
         otherCell.backgroundColor = [UIColor clearColor];
         otherCell.deviceid = _OtherArray[indexPath.row];
+        otherCell.roomID = self.roomID;
         if (_OtherArray.count) {
             Device *device = [SQLManager getDeviceWithDeviceID:[_OtherArray[indexPath.row] intValue]];
             if (device.name == nil) {
