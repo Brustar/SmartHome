@@ -137,7 +137,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-
 - (IBAction)weekButton:(id)sender {
     
     if (_delegate && [_delegate respondsToSelector:@selector(onWeekButtonClicked:)]) {
