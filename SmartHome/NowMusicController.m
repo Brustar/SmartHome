@@ -245,7 +245,7 @@
         _playState = 0;
         [btn setBackgroundImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
         //发送停止指令
-        NSData *data=[[DeviceInfo defaultManager] pause:self.deviceid];
+        NSData *data=[[DeviceInfo defaultManager] stop:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
         if (BLUETOOTH_MUSIC) {

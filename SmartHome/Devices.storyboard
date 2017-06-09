@@ -717,6 +717,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kRY-Ap-2vQ" customClass="IphoneRoomView">
                                 <rect key="frame" x="0.0" y="64" width="320" height="58"/>
                             </view>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lZ6-td-RCA">
+                                <rect key="frame" x="253" y="79.5" width="31" height="27"/>
+                                <state key="normal" image="switch_room"/>
+                                <connections>
+                                    <action selector="switchUI:" destination="nUk-gN-3oy" eventType="touchUpInside" id="feT-hd-p5v"/>
+                                </connections>
+                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line_horizontal_white" translatesAutoresizingMaskIntoConstraints="NO" id="URX-7i-rKA">
                                 <rect key="frame" x="0.0" y="64" width="320" height="58"/>
                                 <constraints>
@@ -727,12 +734,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="HID-aO-r7h" secondAttribute="bottom" constant="150" id="29P-8h-Oqy"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="lZ6-td-RCA" secondAttribute="trailing" constant="20" id="7az-bz-1d6"/>
                             <constraint firstItem="HID-aO-r7h" firstAttribute="centerX" secondItem="kRY-Ap-2vQ" secondAttribute="centerX" id="Bax-hg-lxq"/>
                             <constraint firstItem="URX-7i-rKA" firstAttribute="width" secondItem="kRY-Ap-2vQ" secondAttribute="width" id="E4F-l9-nd6"/>
                             <constraint firstItem="URX-7i-rKA" firstAttribute="centerY" secondItem="kRY-Ap-2vQ" secondAttribute="centerY" id="FP1-eO-IN5"/>
                             <constraint firstItem="czn-zT-rFA" firstAttribute="top" secondItem="gbA-W3-z1w" secondAttribute="bottom" id="NjH-UZ-UI1"/>
                             <constraint firstItem="URX-7i-rKA" firstAttribute="height" secondItem="kRY-Ap-2vQ" secondAttribute="height" id="RHE-Bm-NNI"/>
                             <constraint firstAttribute="trailing" secondItem="czn-zT-rFA" secondAttribute="trailing" id="Tf1-Df-0xW"/>
+                            <constraint firstItem="lZ6-td-RCA" firstAttribute="centerY" secondItem="kRY-Ap-2vQ" secondAttribute="centerY" id="Xqp-Vv-bXY"/>
                             <constraint firstItem="Gf8-TD-Xz9" firstAttribute="top" secondItem="czn-zT-rFA" secondAttribute="bottom" id="aQo-G8-CaN"/>
                             <constraint firstItem="kRY-Ap-2vQ" firstAttribute="leading" secondItem="bso-BX-j0c" secondAttribute="leading" id="gKb-FM-P4B"/>
                             <constraint firstAttribute="trailing" secondItem="kRY-Ap-2vQ" secondAttribute="trailing" id="n9m-Hc-lnu"/>
@@ -748,6 +757,8 @@
                     <connections>
                         <outlet property="DeviceNameLabel" destination="HID-aO-r7h" id="FPh-g9-wzM"/>
                         <outlet property="iphoneRoomView" destination="kRY-Ap-2vQ" id="lX2-nN-XBc"/>
+                        <outlet property="menuRight" destination="n9m-Hc-lnu" id="EUe-3h-ZNq"/>
+                        <outlet property="switcher" destination="lZ6-td-RCA" id="Qjy-3G-E53"/>
                         <segue destination="3WJ-Xx-j8F" kind="show" identifier="bgmusic" id="H04-Wv-Pdj"/>
                         <segue destination="N6p-qn-auk" kind="show" identifier="lighting" id="X1E-Oi-lt0"/>
                         <segue destination="H8M-dY-i5L" kind="show" identifier="curtain" id="cpm-h9-Ghc"/>
@@ -2164,6 +2175,7 @@
         <image name="sp_base" width="375" height="385"/>
         <image name="sp_off" width="73" height="73"/>
         <image name="stylus" width="43" height="166"/>
+        <image name="switch_room" width="31" height="27"/>
         <image name="voice_banner" width="335" height="47"/>
         <image name="voice_hight" width="12" height="10"/>
         <image name="voice_low" width="10" height="8"/>

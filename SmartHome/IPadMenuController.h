@@ -14,6 +14,6 @@
 
 @property (nonatomic) int roomID;
 
-@property (nonatomic,copy) NSArray *types;
+@property (nonatomic,strong) NSArray *types;
 
 @end

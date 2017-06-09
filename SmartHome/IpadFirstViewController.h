@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "CustomViewController.h"
 #import "PlaneGraphViewController.h"
+#import <AFNetworking.h>
 
 @interface IpadFirstViewController : CustomViewController
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property(nonatomic, strong) AFNetworkReachabilityManager *afNetworkReachabilityManager;
 
 @end

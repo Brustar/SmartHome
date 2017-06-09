@@ -116,7 +116,6 @@
     [self setupNaviBar];
     [self fetchDevicesStatus];//获取所有设备的状态
     if (_lightArray.count == 0 && _SwitchLightArr.count == 0 && _ColourLightArr.count == 0) {
-        
         self.patternView.hidden = YES;
         self.TableViewConstraint.constant = -60;
         
@@ -175,7 +174,7 @@
         
     }];
     [alertVC addAction:saveNewAction];
-    [alertVC addAction:saveAction];
+   
     UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"编辑定时" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //重新编辑场景的定时
         
@@ -495,9 +494,6 @@
                 
                 //刷新UI
                 [self.tableView reloadData];
-                
-                
-                
                 
             }else {
                 NSLog(@"设备状态获取失败！");

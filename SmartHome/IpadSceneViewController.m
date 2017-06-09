@@ -23,6 +23,7 @@
 //#import "IpadDeviceTypeVC.h"
 #import "AddIpadSceneVC.h"
 
+
 static NSString * const IpadSceneId = @"photo";
 
 @interface IpadSceneViewController ()<IphoneRoomViewDelegate,UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,IpadSceneCellDelegate,PhotoGraphViewConteollerDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
@@ -97,13 +98,47 @@ static NSString * const IpadSceneId = @"photo";
     NSString *music_icon = nil;
     NSInteger isPlaying = [[UD objectForKey:@"IsPlaying"] integerValue];
     if (isPlaying) {
-        music_icon = @"music-red";
+        music_icon = @"Ipad-NowMusic-red";
     }else {
-        music_icon = @"music_white";
+        music_icon = @"Ipad-NowMusic";
     }
     
         _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:music_icon imgHighlight:music_icon target:self action:@selector(rightBtnClicked:)];
-    [self setNaviBarLeftBtn:_naviLeftBtn];
+    if (isPlaying) {
+        UIImageView * imageView = _naviRightBtn.imageView ;
+        
+        imageView.animationImages = [NSArray arrayWithObjects:
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red2"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red3"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red4"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red5"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red6"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red7"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red8"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red9"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red10"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red11"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red12"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red13"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red14"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red15"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red16"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red17"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red18"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red19"],
+                                     
+                                     nil];
+        
+        //设置动画总时间
+        imageView.animationDuration = 2.0;
+        //设置重复次数，0表示无限
+        imageView.animationRepeatCount = 0;
+        //开始动画
+        if (! imageView.isAnimating) {
+            [imageView startAnimating];
+        }
+    }
+        [self setNaviBarLeftBtn:_naviLeftBtn];
         [self setNaviBarRightBtn:_naviRightBtn];
         [self setNaviMiddletBtn:_naviMiddletBtn];
 }
@@ -349,11 +384,12 @@ static NSString * const IpadSceneId = @"photo";
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row+1 >= self.scenes.count) {
-        UIStoryboard * SceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene-iPad" bundle:nil];
-        AddIpadSceneVC * AddIpadSceneVC = [SceneStoryBoard instantiateViewControllerWithIdentifier:@"AddIpadSceneVC"];
-        AddIpadSceneVC.roomID = self.selectedRoomID;
-     
-         [self presentViewController:AddIpadSceneVC animated:YES completion:nil];
+
+        AddIpadSceneVC * AddIpadVC = [[AddIpadSceneVC alloc] init];
+        AddIpadVC.roomID = self.selectedRoomID;
+        
+        [self.navigationController pushViewController:AddIpadVC animated:YES];
+    
         
     }else{
         Scene *scene = self.scenes[indexPath.row];
@@ -365,11 +401,12 @@ static NSString * const IpadSceneId = @"photo";
             [[SceneManager defaultManager] startScene:scene.sceneID];
             [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];
         }
-        UIStoryboard *SceneiPadStoryBoard = [UIStoryboard storyboardWithName:@"Scene-iPad" bundle:nil];
-        IpadDeviceListViewController * listVC = [SceneiPadStoryBoard instantiateViewControllerWithIdentifier:@"IpadDeviceListViewController"];
+//        UIStoryboard *SceneiPadStoryBoard = [UIStoryboard storyboardWithName:@"Scene-iPad" bundle:nil];
+//        IpadDeviceListViewController * listVC = [SceneiPadStoryBoard instantiateViewControllerWithIdentifier:@"IpadDeviceListViewController"];
+        IpadDeviceListViewController * listVC = [[IpadDeviceListViewController alloc] init];
          listVC.roomID = self.selectedRoomID;
          listVC.sceneID = self.selectedSId;
-        [self presentViewController:listVC animated:YES completion:nil];
+        [self.navigationController pushViewController:listVC animated:YES];
         
         NSArray *tmpArr = [SQLManager getScensByRoomId:self.selectedRoomID];
         [self.scenes removeAllObjects];

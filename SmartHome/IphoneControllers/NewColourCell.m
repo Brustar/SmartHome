@@ -34,6 +34,7 @@
     
     [self.colourBtn setImage:[UIImage imageNamed:@"lv_icon_light_on"] forState:UIControlStateSelected];
     [self.colourBtn setImage:[UIImage imageNamed:@"lv_icon_light_off"] forState:UIControlStateNormal];
+    
 }
 
 - (IBAction)save:(id)sender {

@@ -107,12 +107,46 @@
     NSString *music_icon = nil;
     NSInteger isPlaying = [[UD objectForKey:@"IsPlaying"] integerValue];
     if (isPlaying) {
-        music_icon = @"music-red";
+        music_icon = @"Ipad-NowMusic-red";
     }else {
-        music_icon = @"music_white";
+        music_icon = @"Ipad-NowMusic";
     }
     
     _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:music_icon imgHighlight:music_icon target:self action:@selector(rightBtnClicked:)];
+    if (isPlaying) {
+        UIImageView * imageView = _naviRightBtn.imageView ;
+        
+        imageView.animationImages = [NSArray arrayWithObjects:
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red2"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red3"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red4"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red5"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red6"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red7"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red8"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red9"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red10"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red11"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red12"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red13"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red14"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red15"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red16"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red17"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red18"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red19"],
+                                     
+                                     nil];
+        
+        //设置动画总时间
+        imageView.animationDuration = 2.0;
+        //设置重复次数，0表示无限
+        imageView.animationRepeatCount = 0;
+        //开始动画
+        if (! imageView.isAnimating) {
+            [imageView startAnimating];
+        }
+    }
     [self setNaviBarRightBtn:_naviRightBtn];
 }
 

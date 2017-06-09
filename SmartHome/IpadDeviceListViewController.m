@@ -12,6 +12,10 @@
 
 @interface IpadDeviceListViewController ()<IpadDeviceTypeVCDelegate>
 @property (nonatomic,assign) NSInteger htypeID;
+@property (nonatomic,strong) IpadDeviceTypeVC * leftVC;
+@property (nonatomic,strong) IpadSceneDetailVC * rightVC;
+@property (nonatomic,strong) UIButton * naviRightBtn;
+
 
 @end
 
@@ -19,23 +23,49 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // 初始化分割视图控制器
+    UISplitViewController *splitViewController = [[UISplitViewController alloc] init];
+    
+    //初始化左边视图控制器
+    UIStoryboard * SceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene-iPad" bundle:nil];
+    self.leftVC= [SceneStoryBoard instantiateViewControllerWithIdentifier:@"IpadDeviceTypeVC"];
+    
+    self.leftVC.delegate = self;
+    //初始化右边视图控制器
+    self.rightVC = [SceneStoryBoard instantiateViewControllerWithIdentifier:@"IpadSceneDetailVC"];
+    
+    // 设置分割面板的 2 个视图控制器
+    splitViewController.viewControllers = @[self.leftVC, self.rightVC];
+    
+    // 添加到窗口
+    [self addChildViewController:splitViewController];
     //配置分屏视图界面外观
-    self.preferredDisplayMode = UISplitViewControllerDisplayModeAutomatic;
+    splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAutomatic;
     //调整masterViewController的宽度，按百分比调整
-    self.preferredPrimaryColumnWidthFraction = 0.25;
-    IpadDeviceTypeVC * ipadTypeVC  = [self.childViewControllers firstObject];
-    ipadTypeVC.roomID = self.roomID;
-    ipadTypeVC.delegate = self;
-    ipadTypeVC.sceneID = self.sceneID;
-    self.presentsWithGesture = NO;
+    splitViewController.preferredPrimaryColumnWidthFraction = 0.25;
+    
+    [self.view addSubview:splitViewController.view];
+    
+    [self setupNaviBar];
+}
+
+- (void)setupNaviBar {
+    
+    [self setNaviBarTitle:@"添加场景"]; //设置标题
+    
+    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
+    
+    [self setNaviBarRightBtn:_naviRightBtn];
+}
+
+- (void)rightBtnClicked:(UIButton *)btn {
+    
 }
 -(void)IpadDeviceType:(IpadDeviceTypeVC *)centerListVC selected:(NSInteger)row
 {
      self.DevicesArr = [SQLManager getDeviceIDsBySeneId:self.sceneID];
      self.devices = [NSMutableArray array];
-    
-    UIStoryboard * SceneIpadStoryBoard = [UIStoryboard storyboardWithName:@"Scene-iPad" bundle:nil];
-    IpadSceneDetailVC * ipadSceneDetailVC = [SceneIpadStoryBoard instantiateViewControllerWithIdentifier:@"IpadSceneDetailVC"];
     
     switch (row) {
         case 0:{
@@ -48,9 +78,7 @@
                 }
             }
             
-            ipadSceneDetailVC.deviceIdArr = self.devices;
-            
-            [self showDetailViewController:ipadSceneDetailVC sender:self];
+             [self.rightVC refreshData:self.devices];
 
             break;
         }
@@ -63,8 +91,7 @@
                     [self.devices addObject:self.DevicesArr[i]];
                 }
             }
-            ipadSceneDetailVC.deviceIdArr = self.devices;
-            [self showDetailViewController:ipadSceneDetailVC sender:self];
+            [self.rightVC refreshData:self.devices];
             break;
         }
         case 2:{
@@ -76,8 +103,7 @@
                     [self.devices addObject:self.DevicesArr[i]];
                 }
             }
-            ipadSceneDetailVC.deviceIdArr = self.devices;
-            [self showDetailViewController:ipadSceneDetailVC sender:self];
+             [self.rightVC refreshData:self.devices];
             break;
         }
         case 3:{
@@ -89,8 +115,7 @@
                     [self.devices addObject:self.DevicesArr[i]];
                 }
             }
-            ipadSceneDetailVC.deviceIdArr = self.devices;
-            [self showDetailViewController:ipadSceneDetailVC sender:self];
+               [self.rightVC refreshData:self.devices];
             break;
         }
         case 4:{
@@ -101,8 +126,7 @@
                     [self.devices addObject:self.DevicesArr[i]];
                 }
             }
-            ipadSceneDetailVC.deviceIdArr = self.devices;
-            [self showDetailViewController:ipadSceneDetailVC sender:self];
+             [self.rightVC refreshData:self.devices];
             break;
         }
         case 5:{
@@ -113,8 +137,7 @@
                     [self.devices addObject:self.DevicesArr[i]];
                 }
             }
-            ipadSceneDetailVC.deviceIdArr = self.devices;
-            [self showDetailViewController:ipadSceneDetailVC sender:self];
+            [self.rightVC refreshData:self.devices];
             break;
         }
        

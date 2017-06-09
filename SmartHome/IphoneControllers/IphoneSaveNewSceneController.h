@@ -12,6 +12,7 @@
 @interface IphoneSaveNewSceneController : CustomViewController
 @property (nonatomic,assign) int sceneID;
 @property (nonatomic,assign) int roomId;
-//@property (nonatomic,strong) NSString *chooseImgeName;
+@property (nonatomic,strong)Scene *scene;
+
 
 @end

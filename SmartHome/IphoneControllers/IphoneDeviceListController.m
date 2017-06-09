@@ -28,6 +28,7 @@
 #import "AppDelegate.h"
 #import "CYLineLayout.h"
 #import "CYPhotoCell.h"
+#import "IPadDevicesView.h"
 
 static NSString * const CYPhotoId = @"photo";
 @interface IphoneDeviceListController ()<IphoneRoomViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
@@ -49,7 +50,9 @@ static NSString * const CYPhotoId = @"photo";
 @property (nonatomic,strong)UICollectionView * FirstCollectionView;
 @property (weak, nonatomic) IBOutlet UILabel *DeviceNameLabel;
 @property (nonatomic,strong) BaseTabBarController *baseTabbarController;
-
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuRight;
+@property (weak, nonatomic) IBOutlet UIButton *switcher;
+@property (weak, nonatomic) IPadDevicesView *deviceView;
 
 @end
 
@@ -193,8 +196,7 @@ static NSString * const CYPhotoId = @"photo";
         }
     }];
     
-    [_afNetworkReachabilityManager startMonitoring];//开启网络监视器；
-    
+    [_afNetworkReachabilityManager startMonitoring];//开启网络监视器
 }
 
 - (void)addNotifications {
@@ -216,12 +218,46 @@ static NSString * const CYPhotoId = @"photo";
     NSString *music_icon = nil;
     NSInteger isPlaying = [[UD objectForKey:@"IsPlaying"] integerValue];
     if (isPlaying) {
-        music_icon = @"music-red";
+        music_icon = @"Ipad-NowMusic-red";
     }else {
-        music_icon = @"music_white";
+        music_icon = @"Ipad-NowMusic";
     }
     
     _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:music_icon imgHighlight:music_icon target:self action:@selector(rightBtnClicked:)];
+    if (isPlaying) {
+        UIImageView * imageView = _naviRightBtn.imageView ;
+        
+        imageView.animationImages = [NSArray arrayWithObjects:
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red2"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red3"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red4"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red5"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red6"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red7"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red8"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red9"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red10"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red11"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red12"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red13"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red14"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red15"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red16"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red17"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red18"],
+                                     [UIImage imageNamed:@"Ipad-NowMusic-red19"],
+                                     
+                                     nil];
+        
+        //设置动画总时间
+        imageView.animationDuration = 2.0;
+        //设置重复次数，0表示无限
+        imageView.animationRepeatCount = 0;
+        //开始动画
+        if (! imageView.isAnimating) {
+            [imageView startAnimating];
+        }
+    }
     [self setNaviBarLeftBtn:_naviLeftBtn];
     [self setNaviBarRightBtn:_naviRightBtn];
 }
@@ -260,6 +296,19 @@ static NSString * const CYPhotoId = @"photo";
     }
 }
 
+- (IBAction)switchUI:(id)sender {
+    UIButton *btn =(UIButton *)sender;
+    btn.selected = !btn.selected;
+    if (btn.selected) {
+        [btn setImage:[UIImage imageNamed:@"switch_device"] forState:UIControlStateNormal];
+        
+    }else{
+        [btn setImage:[UIImage imageNamed:@"switch_room"] forState:UIControlStateNormal];
+        
+    }
+    self.deviceView.hidden = !btn.selected;
+}
+
 -(void)getUI
 {
     // 创建CollectionView
@@ -284,6 +333,20 @@ static NSString * const CYPhotoId = @"photo";
     self.automaticallyAdjustsScrollViewInsets = NO;
     // 注册
     [self.FirstCollectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CYPhotoCell class]) bundle:nil] forCellWithReuseIdentifier:CYPhotoId];
+    
+    if (ON_IPAD) {
+        layout.itemSize = CGSizeMake(450, 540);
+        self.menuRight.constant = 100;
+        self.switcher.hidden = NO;
+        NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"IPadDevices" owner:self options:nil];
+        
+        self.deviceView = array[0];
+        Room *room = self.rooms[self.roomIndex];
+        self.deviceView.roomID = room.rId;
+        [self.deviceView initData];
+        self.deviceView.hidden = YES;
+        [self.view addSubview:self.deviceView];
+    }
 }
 
 -(void)setUpRoomScrollerView

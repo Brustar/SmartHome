@@ -46,7 +46,11 @@
 + (NSString *)familyRoomStatusPath {
     return [IOManager newPath:@"familyRoomStatus"];
 }
++ (NSString *)FirstVCPath
+{
+    return [IOManager newPath:@"FirstVCPath"];
 
+}
 + (NSString *) favoritePath
 {
     return [IOManager newPath:@"favorite"];

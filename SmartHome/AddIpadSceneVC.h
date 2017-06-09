@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomViewController.h"
 
-@interface AddIpadSceneVC : UISplitViewController
+
+@interface AddIpadSceneVC :CustomViewController
 
 
 @property (nonatomic,assign) int roomID;
@@ -16,5 +18,8 @@
 @property (nonatomic,assign) int sceneID;
 
 @property (strong, nonatomic) NSArray *devices;
+@property (nonatomic, strong) Scene * scene;
+@property (nonatomic, readonly) UIButton *naviRightBtn;
+@property (nonatomic, readonly) UIButton *naviLeftBtn;
 
 @end

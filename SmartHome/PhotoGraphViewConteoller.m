@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.PhotoIcons = @[@"PhotoIcon1", @"PhotoIcon2", @"PhotoIcon3", @"PhotoIcon4", @"PhotoIcon5", @"PhotoIcon6", @"PhotoIcon7", @"PhotoIcon8", @"PhotoIcon9", @"PhotoIcon10"];
+    self.PhotoIcons = @[@"PhotoIcon1", @"PhotoIcon2", @"PhotoIcon3", @"PhotoIcon4", @"PhotoIcon5", @"PhotoIcon6", @"PhotoIcon7", @"PhotoIcon8", @"PhotoIcon9", @"PhotoIcon10",@"PhotoIcon11",@"PhotoIcon12",@"PhotoIcon13",@"PhotoIcon14",@"PhotoIcon15",@"PhotoIcon16",@"PhotoIcon17",@"PhotoIcon18",@"PhotoIcon19",@"PhotoIcon20",];
     //[self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
     self.automaticallyAdjustsScrollViewInsets = NO;
 }
