@@ -32,22 +32,35 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self addNotifications];
+    [self connect];
     self.imageView.userInteractionEnabled = YES;
     self.messageLabel.layer.cornerRadius = self.messageLabel.bounds.size.width/2;
     self.messageLabel.layer.masksToBounds = YES;
      UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doTap:)];
     [self.imageView addGestureRecognizer:tap];
     [self setupNaviBar];
+    [self showNetStateView];
     [self setTimer];
     [self getWeekdayStringFromDate];
-    [self addNotifications];
-    [self showNetStateView];
+    
     //开启网络状况监听器
     [self updateInterfaceWithReachability];
     
     
 }
+
+- (void)connect
+{
+    SocketManager *sock = [SocketManager defaultManager];
+    if ([[UD objectForKey:@"HostType"] intValue]) {
+        [sock connectUDP:[IOManager C4Port]];
+    }else{
+        [sock connectUDP:[IOManager crestronPort]];
+    }
+    sock.delegate = self;
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

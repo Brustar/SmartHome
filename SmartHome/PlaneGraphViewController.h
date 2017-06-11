@@ -43,5 +43,6 @@
 @property (nonatomic, strong) NowMusicController * nowMusicController;
 @property (weak, nonatomic) IBOutlet UIScrollView *floorScrollView;
 @property (weak, nonatomic) IBOutlet TouchImage *planeGraph;
+@property (nonatomic,strong) BaseTabBarController *baseTabbarController;
 
 @end

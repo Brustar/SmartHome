@@ -48,7 +48,7 @@
     [self setupPlaneGraph];
     //[self fetchRoomDeviceStatus];//获取房间设备状态，温度，湿度, PM2.5
     
-    [self performSelector:@selector(fetchRoomDeviceStatus) withObject:nil afterDelay:2];
+    //[self performSelector:@selector(fetchRoomDeviceStatus) withObject:nil afterDelay:2];
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
@@ -62,7 +62,7 @@
         UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
         FamilyHomeDetailViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"familyHomeDetailVC"];
         vc.roomID = [roomId integerValue];
-        //vc.roomName
+        vc.roomName = [SQLManager getRoomNameByRoomID:[roomId intValue]];
         [self.navigationController pushViewController:vc animated:YES];
     }else {
         [MBProgressHUD showError:@"你无权限打开此房间"];
@@ -267,7 +267,21 @@
         NSLog(@"WWAN: %d", _afNetworkReachabilityManager.reachableViaWWAN);
     }
     
+    _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
+    _baseTabbarController.tabbarPanel.hidden = NO;
+    _baseTabbarController.tabBar.hidden = YES;
+    
 }
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
+    _baseTabbarController.tabbarPanel.hidden = NO;
+    _baseTabbarController.tabBar.hidden = YES;
+    
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
@@ -415,20 +429,14 @@
 //根据plist文件获取全屋所有房间的区域信息
 - (void)getAllRoomsRectWithPlistFilePath:(NSString *)plistFilePath {
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:plistFilePath];
-    NSLog(@"planeScenePlistFilePath: %@", plistFilePath);
-    NSLog(@"planeScenePlistDict: %@", plistDic);
-    
-    //获取全屋设备
-//    NSArray *deviceArray = [plistDic objectForKey:@"devices"];
-//    if ([deviceArray isKindOfClass:[NSArray class]] && deviceArray.count >0) {
-//        [self addLights:deviceArray];
-//    }
     
     //获取所有房间
     NSArray *roomArray = [plistDic objectForKey:@"rooms"];
     if ([roomArray isKindOfClass:[NSArray class]] && roomArray.count >0) {
         [self.planeGraph addRoom:roomArray];
     }
+    
+    [self fetchRoomDeviceStatus];
 }
 
 - (void)getAllDevicesStatusIcon {
@@ -448,13 +456,14 @@
                         NSString *iconRectStr = [dict objectForKey:@"rect"];
                         CGRect iconRect = CGRectFromString(iconRectStr);
                         
-                        CGFloat temp_origin_x = iconRect.origin.x;
+                        CGFloat temp_origin_x = iconRect.origin.x +50;
+                        CGFloat temp_origin_y = iconRect.origin.y +50;
                         CGFloat iconWidth = 20.0f;
                         CGFloat iconHeight = 20.0f;
                         CGFloat gap = 6.0f;
                         
                         if (roomInfo.lightStatus == 1) {
-                            UIButton *lightIcon = [[UIButton alloc] initWithFrame:CGRectMake(temp_origin_x, iconRect.origin.y, iconWidth, iconHeight)];
+                            UIButton *lightIcon = [[UIButton alloc] initWithFrame:CGRectMake(temp_origin_x, temp_origin_y, iconWidth, iconHeight)];
                             [lightIcon setBackgroundImage:[UIImage imageNamed:@"planeLightIcon"] forState:UIControlStateNormal];
                             lightIcon.tag = 777;
                             
@@ -470,7 +479,7 @@
                         }
                         
                         if (roomInfo.airconditionerStatus == 1) {
-                            UIButton *airIcon = [[UIButton alloc] initWithFrame:CGRectMake(temp_origin_x, iconRect.origin.y, iconWidth, iconHeight)];
+                            UIButton *airIcon = [[UIButton alloc] initWithFrame:CGRectMake(temp_origin_x, temp_origin_y, iconWidth, iconHeight)];
                             
                             [airIcon setBackgroundImage:[UIImage imageNamed:@"planeAirIcon"] forState:UIControlStateNormal];
                             airIcon.tag = 888;
@@ -487,7 +496,7 @@
                         }
                         
                         if (roomInfo.mediaStatus == 1) {
-                            UIButton *mediaIcon = [[UIButton alloc] initWithFrame:CGRectMake(temp_origin_x, iconRect.origin.y, iconWidth, iconHeight)];
+                            UIButton *mediaIcon = [[UIButton alloc] initWithFrame:CGRectMake(temp_origin_x, temp_origin_y, iconWidth, iconHeight)];
                             
                             [mediaIcon setBackgroundImage:[UIImage imageNamed:@"planeMediaIcon"] forState:UIControlStateNormal];
                             mediaIcon.tag = 999;
