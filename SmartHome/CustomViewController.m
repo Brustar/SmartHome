@@ -13,8 +13,6 @@
 
 @interface CustomViewController ()
 
-@property (nonatomic, readonly) CustomNaviBarView *m_viewNaviBar;
-
 @end
 
 @implementation CustomViewController
@@ -51,6 +49,14 @@
     
     //背景
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[[UIImage imageNamed:@"background"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)]]];
+}
+
+- (void)adjustNaviBarFrameForSplitView {
+    _viewNaviBar.frame = Rect(0.0f, 0.0f, [CustomNaviBarView barSizeForSplitView].width, [CustomNaviBarView barSize].height);  
+}
+
+- (void)adjustTitleFrameForSplitView {
+    [_viewNaviBar adjustTitleFrameForSplitView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -132,6 +138,16 @@
         [_viewNaviBar setRightBtn:btn];
     }else{APP_ASSERT_STOP}
 }
+
+- (void)setNaviBarRightBtnForSplitView:(UIButton *)btn {
+    if (_viewNaviBar)
+    {
+        [_viewNaviBar setRightBtnForSplitView:btn];
+    }else{APP_ASSERT_STOP}
+}
+
+
+
 -(void)setNaviMiddletBtn:(UIButton *)btn
 {
     if (_viewNaviBar) {

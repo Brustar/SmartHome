@@ -350,15 +350,21 @@
     
     self.MessageView.hidden = YES;
     self.CoverView.hidden = YES;
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    if (appDelegate.LeftSlideVC.closed)
-    {
-        [appDelegate.LeftSlideVC openLeftView];
-    }
-    else
-    {
-        [appDelegate.LeftSlideVC closeLeftView];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        iPadMyViewController *myVC = [[iPadMyViewController alloc] init];
+        [self.navigationController pushViewController:myVC animated:YES];
+    }else {
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        
+        if (appDelegate.LeftSlideVC.closed)
+        {
+            [appDelegate.LeftSlideVC openLeftView];
+        }
+        else
+        {
+            [appDelegate.LeftSlideVC closeLeftView];
+        }
     }
 }
 -(void)getWeekdayStringFromDate {

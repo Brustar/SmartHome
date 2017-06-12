@@ -14,11 +14,13 @@
 @property (nonatomic, weak) UIViewController *m_viewCtrlParent;
 @property (nonatomic, readonly) BOOL m_bIsCurrStateMiniMode;
 
-
++ (CGRect)rightBtnFrameForSplitView;
 + (CGRect)rightBtnFrame;
 + (CGSize)barBtnSize;
++ (CGSize)barSizeForSplitView;
 + (CGSize)barSize;
 + (CGRect)titleViewFrame;
++ (CGRect)titleViewFrameForSplitView;
 
 // 创建一个导航条按钮：使用默认的按钮图片。
 + (UIButton *)createNormalNaviBarBtnByTitle:(NSString *)strTitle target:(id)target action:(SEL)action;
@@ -34,6 +36,7 @@
 - (void)setBackBtn:(UIButton *)btn;
 - (void)setLeftBtn:(UIButton *)btn;
 - (void)setRightBtn:(UIButton *)btn;
+- (void)setRightBtnForSplitView:(UIButton *)btn;
 - (void)setMiddleBtn:(UIButton *)btn;
 - (void)setTitle:(NSString *)strTitle;
 
@@ -47,6 +50,6 @@
 - (void)showNetStateView;
 //设置网络状态
 - (void)setNetState:(int)state;
-
+- (void)adjustTitleFrameForSplitView;
 
 @end

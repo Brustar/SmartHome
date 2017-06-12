@@ -23,10 +23,10 @@
     _itemArray = @[@"家庭成员",@"视频动态",@"智能账单",@"通知",@"故障及保修记录",@"切换家庭账号"];
 
     
-    UIButton *bgButton = [[UIButton alloc] initWithFrame:self.view.frame];
-    [bgButton setBackgroundImage:[UIImage imageNamed:@"my_bg_side_nol"] forState:UIControlStateNormal];
-    [bgButton addTarget:self action:@selector(bgButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:bgButton];
+    _bgButton = [[UIButton alloc] initWithFrame:self.view.frame];
+    [_bgButton setBackgroundImage:[UIImage imageNamed:@"my_bg_side_nol"] forState:UIControlStateNormal];
+    [_bgButton addTarget:self action:@selector(bgButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_bgButton];
     
     _myTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     UIView *bgView = [[UIView alloc] initWithFrame:_myTableView.frame];
@@ -81,12 +81,23 @@
         cell.imageView.image = [UIImage imageNamed:@"my_exchange"];
     }
     
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSString *item = [_itemArray objectAtIndex:indexPath.row];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        if (_delegate && [_delegate respondsToSelector:@selector(didSelectItem:)]) {
+            [_delegate didSelectItem:item];
+        }
+    }else {
     
     UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIStoryboard *myInfoStoryBoard  = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
@@ -95,7 +106,7 @@
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate.LeftSlideVC closeLeftView];//关闭左侧抽屉
     
-    NSString *item = [_itemArray objectAtIndex:indexPath.row];
+   
     if ([item isEqualToString:@"故障及保修记录"]) {
         ProfileFaultsViewController *profileFaultsVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"MyDefaultViewController"];
         profileFaultsVC.hidesBottomBarWhenPushed = YES;
@@ -129,11 +140,20 @@
         vc.hidesBottomBarWhenPushed = YES;
         [appDelegate.mainTabBarController.selectedViewController pushViewController:vc animated:YES];
     }
+        
+  }
     
 }
 
 - (UIView *)setupTableHeader {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH-100, 250)];
+    
+    CGFloat headerWidth = UI_SCREEN_WIDTH-100;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        headerWidth = UI_SCREEN_WIDTH/4;
+    }
+    
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, headerWidth, 250)];
     view.backgroundColor = [UIColor clearColor];
     
     UIButton *headButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -145,7 +165,7 @@
     [headButton addTarget:self action:@selector(headButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     _headerBtn = headButton;
     
-    UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(headButton.frame)+10, UI_SCREEN_WIDTH-100, 20)];
+    UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(headButton.frame)+10, headerWidth, 20)];
     nameLabel.text = _userInfo.userName;
     nameLabel.textColor = [UIColor whiteColor];
     nameLabel.font = [UIFont systemFontOfSize:15.0];
@@ -223,6 +243,13 @@
 }
 
 - (void)settingBtnClicked:(UIButton *)btn {
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        if (_delegate && [_delegate respondsToSelector:@selector(didSelectItem:)]) {
+            [_delegate didSelectItem:@"设置"];
+        }
+    }else {
+    
      UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate.LeftSlideVC closeLeftView];//关闭左侧抽屉
@@ -230,19 +257,26 @@
     MySettingViewController *mysettingVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"MySettingViewController"];
     mysettingVC.hidesBottomBarWhenPushed = YES;
     [appDelegate.mainTabBarController.selectedViewController pushViewController:mysettingVC animated:YES];
+        
+    }
 }
 
 
 - (void)headButtonClicked:(UIButton *)btn {
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        if (_delegate && [_delegate respondsToSelector:@selector(didSelectItem:)]) {
+            [_delegate didSelectItem:@"头像"];
+        }
+    }else {
+    
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
     [appDelegate.LeftSlideVC closeLeftView];//关闭左侧抽屉
-    
     UIStoryboard *loginStoryBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
     UIViewController *vc = [loginStoryBoard instantiateViewControllerWithIdentifier:@"userinfoVC"];
     vc.hidesBottomBarWhenPushed = YES;
     [appDelegate.mainTabBarController.selectedViewController pushViewController:vc animated:YES];
-    
+  }
 }
 
 //进入聊天页面

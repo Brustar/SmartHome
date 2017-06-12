@@ -49,6 +49,12 @@
     [self setNaviBarTitle:@"定时器"]; //设置标题
     _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"deviceTimeadd" imgHighlight:@"deviceTimeadd" target:self action:@selector(rightBtnClicked:)];
     [self setNaviBarRightBtn:_naviRightBtn];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [self adjustNaviBarFrameForSplitView];
+        [self adjustTitleFrameForSplitView];
+        [self setNaviBarRightBtnForSplitView:_naviRightBtn];
+    }
 }
 -(void)rightBtnClicked:(UIButton *)btn
 {
