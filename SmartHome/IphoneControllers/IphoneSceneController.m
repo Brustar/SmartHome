@@ -35,6 +35,8 @@
 #import "IphoneNewAddSceneVC.h"
 #import "DeviceInfo.h"
 #import "PhotoGraphViewConteoller.h"
+#import "AddIpadSceneVC.h"
+#import "IpadDeviceListViewController.h"
 
 #define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)  
 
@@ -306,6 +308,9 @@ static NSString * const CYPhotoId = @"photo";
     }else{
         layout.itemSize = CGSizeMake(collectionW-90, collectionH-20);
     }
+    if (ON_IPAD) {
+        layout.itemSize = CGSizeMake(450, 540);
+    }
     self.FirstCollectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
     self.FirstCollectionView.backgroundColor = [UIColor clearColor];
     self.FirstCollectionView.dataSource = self;
@@ -535,9 +540,13 @@ static NSString * const CYPhotoId = @"photo";
 {
     NSIndexPath *indexPath = [self.FirstCollectionView indexPathForItemAtPoint:[lgr locationInView:self.FirstCollectionView]];
     self.currentCell = (CYPhotoCell *)[self.FirstCollectionView cellForItemAtIndexPath:indexPath];
-    
-    UIAlertController * alerController = [UIAlertController alertControllerWithTitle:@"温馨提示更换场景图片" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
-    
+    UIAlertController * alerController;
+    if (ON_IPAD) {
+        alerController = [UIAlertController alertControllerWithTitle:@"温馨提示更换场景图片" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    }else{
+         alerController = [UIAlertController alertControllerWithTitle:@"温馨提示更换场景图片" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+    }
+   
     [alerController addAction:[UIAlertAction actionWithTitle:@"现在就拍" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
             UIImagePickerController *picker = [[UIImagePickerController alloc] init];
@@ -614,13 +623,30 @@ static NSString * const CYPhotoId = @"photo";
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
      if (indexPath.row+1 >= self.scenes.count) {
-         UIStoryboard * SceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
-         IphoneNewAddSceneVC * iphoneNewAddSceneVC = [SceneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneNewAddSceneVC"];
-         iphoneNewAddSceneVC.roomID = self.selectedRoomID;
-         [self.navigationController pushViewController:iphoneNewAddSceneVC animated:YES];
+        
+         if (ON_IPAD) {
+             AddIpadSceneVC * AddIpadVC = [[AddIpadSceneVC alloc] init];
+             AddIpadVC.roomID = self.selectedRoomID;
+             
+             [self.navigationController pushViewController:AddIpadVC animated:YES];
+         }else{
+             UIStoryboard * SceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
+             IphoneNewAddSceneVC * iphoneNewAddSceneVC = [SceneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneNewAddSceneVC"];
+             iphoneNewAddSceneVC.roomID = self.selectedRoomID;
+             [self.navigationController pushViewController:iphoneNewAddSceneVC animated:YES];
+         }
          
-//         [self performSegueWithIdentifier:@"iphoneAddSceneSegue" sender:self];IphoneNewAddSceneVC
      }else{
+        
+         if (ON_IPAD) {
+             IpadDeviceListViewController * listVC = [[IpadDeviceListViewController alloc] init];
+             listVC.roomID = self.selectedRoomID;
+             listVC.sceneID = self.selectedSId;
+             [self.navigationController pushViewController:listVC animated:YES];
+         }else{
+             [self performSegueWithIdentifier:@"iphoneEditSegue" sender:self];
+         }
+         
          Scene *scene = self.scenes[indexPath.row];
          self.selectedSId = scene.sceneID;
          CYPhotoCell *cell = (CYPhotoCell*)[collectionView cellForItemAtIndexPath:indexPath];
@@ -629,8 +655,6 @@ static NSString * const CYPhotoId = @"photo";
              [[SceneManager defaultManager] startScene:scene.sceneID];
              [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];
          }
-             [self performSegueWithIdentifier:@"iphoneEditSegue" sender:self];
-         
          NSArray *tmpArr = [SQLManager getScensByRoomId:self.selectedRoomID];
          [self.scenes removeAllObjects];
          [self.scenes addObjectsFromArray:tmpArr];

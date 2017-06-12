@@ -10,6 +10,7 @@
 #import "IpadDeviceTypeVC.h"
 #import "SQLManager.h"
 #import "CustomViewController.h"
+#import "NowMusicController.h"
 
 @interface IpadDeviceListViewController : CustomViewController
 
@@ -21,5 +22,7 @@
 @property (nonatomic,strong) NSArray *DevicesArr;
 
 @property (strong, nonatomic) NSMutableArray *devices;
+
+
 
 @end

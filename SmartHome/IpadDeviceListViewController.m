@@ -10,7 +10,7 @@
 #import "IpadSceneDetailVC.h"
 
 
-@interface IpadDeviceListViewController ()<IpadDeviceTypeVCDelegate>
+@interface IpadDeviceListViewController ()<IpadDeviceTypeVCDelegate,NowMusicControllerDelegate>
 @property (nonatomic,assign) NSInteger htypeID;
 @property (nonatomic,strong) IpadDeviceTypeVC * leftVC;
 @property (nonatomic,strong) IpadSceneDetailVC * rightVC;
@@ -60,8 +60,10 @@
 }
 
 - (void)rightBtnClicked:(UIButton *)btn {
-    
+   
 }
+
+
 -(void)IpadDeviceType:(IpadDeviceTypeVC *)centerListVC selected:(NSInteger)row
 {
      self.DevicesArr = [SQLManager getDeviceIDsBySeneId:self.sceneID];

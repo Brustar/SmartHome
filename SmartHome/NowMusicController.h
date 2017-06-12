@@ -28,6 +28,14 @@
 @property (nonatomic, assign) NSInteger playState;//播放状态： 0:停止 1:播放
 @property (nonatomic, assign) id<NowMusicControllerDelegate>delegate;
 - (IBAction)bgBtnClicked:(id)sender;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ViewTrailingConstraint;//视图到右边的距离
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ViewleadingConstraint;//视图到左边的距离
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewConstraint;//tableview到右边父视图的距离
+
+
 @end
 
 

@@ -1348,7 +1348,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JoT-8c-YVd">
-                                <rect key="frame" x="50" y="666" width="314" height="40"/>
+                                <rect key="frame" x="50" y="596" width="314" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="aKb-D6-3Ah"/>
                                 </constraints>
@@ -1370,7 +1370,7 @@
                             <constraint firstAttribute="trailing" secondItem="h6x-RN-3gG" secondAttribute="trailing" id="Kzk-5Y-QwD"/>
                             <constraint firstAttribute="trailingMargin" secondItem="JoT-8c-YVd" secondAttribute="trailing" constant="30" id="NBS-CS-Mzg"/>
                             <constraint firstItem="h6x-RN-3gG" firstAttribute="top" secondItem="t1T-g5-zcK" secondAttribute="bottom" id="l7U-0h-dBK"/>
-                            <constraint firstItem="fPP-hA-bYw" firstAttribute="top" secondItem="JoT-8c-YVd" secondAttribute="bottom" constant="30" id="npd-1t-JCD"/>
+                            <constraint firstItem="fPP-hA-bYw" firstAttribute="top" secondItem="JoT-8c-YVd" secondAttribute="bottom" constant="100" id="npd-1t-JCD"/>
                             <constraint firstItem="h6x-RN-3gG" firstAttribute="leading" secondItem="O18-tO-G44" secondAttribute="leading" id="q51-7M-8qg"/>
                             <constraint firstItem="fPP-hA-bYw" firstAttribute="top" secondItem="Hdz-Md-E1l" secondAttribute="bottom" constant="150" id="xZo-2I-EL6"/>
                         </constraints>

@@ -99,6 +99,9 @@
                                                             <constraint firstAttribute="height" constant="60" id="xrE-HV-Gh5"/>
                                                         </constraints>
                                                         <state key="normal" backgroundImage="Ipad-icon_dw_nol"/>
+                                                        <connections>
+                                                            <action selector="TwoBtn:" destination="0SV-ZH-hzW" eventType="touchUpInside" id="0sS-jn-57g"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LkT-la-gFe">
                                                         <rect key="frame" x="375.5" y="27" width="60" height="60"/>
@@ -107,6 +110,9 @@
                                                             <constraint firstAttribute="height" constant="60" id="rgv-w1-hJh"/>
                                                         </constraints>
                                                         <state key="normal" backgroundImage="Ipad-icon_add_nol"/>
+                                                        <connections>
+                                                            <action selector="ThreeBtn:" destination="0SV-ZH-hzW" eventType="touchUpInside" id="3Mi-n6-nT6"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FtK-iw-nWJ">
                                                         <rect key="frame" x="175.5" y="27" width="60" height="60"/>
@@ -114,7 +120,10 @@
                                                             <constraint firstAttribute="width" constant="60" id="EPE-Cm-Z9A"/>
                                                             <constraint firstAttribute="height" constant="60" id="Hru-6j-fdH"/>
                                                         </constraints>
-                                                        <state key="normal" backgroundImage="Ipad-icon_dw_prd"/>
+                                                        <state key="normal" backgroundImage="Ipad-icon_dw_nol"/>
+                                                        <connections>
+                                                            <action selector="FirstBtn:" destination="0SV-ZH-hzW" eventType="touchUpInside" id="pDi-bH-ihC"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.88627450980392153" green="0.8901960784313725" blue="0.89411764705882346" alpha="1" colorSpace="calibratedRGB"/>
@@ -212,7 +221,11 @@
                     <connections>
                         <outlet property="CoverView" destination="pCB-q8-Gji" id="A5M-ae-dbB"/>
                         <outlet property="MessageBtnDo" destination="cL1-6l-cBd" id="Ic8-4W-2O9"/>
+                        <outlet property="MessageView" destination="jeA-y9-xzN" id="BXP-me-pET"/>
+                        <outlet property="ThreeBtn" destination="LkT-la-gFe" id="ePb-bN-FRG"/>
                         <outlet property="TimerLabel" destination="rIc-Ct-fvg" id="EJv-sf-iob"/>
+                        <outlet property="TwoBtn" destination="XIy-yD-K4Q" id="aR8-sp-MWF"/>
+                        <outlet property="firstBtn" destination="FtK-iw-nWJ" id="fqX-a7-vLm"/>
                         <outlet property="imageView" destination="ipP-vP-gEp" id="B0g-En-ySC"/>
                         <outlet property="messageLabel" destination="znc-Gk-qLl" id="IRV-D2-cua"/>
                         <outlet property="temperatureLabel" destination="dtO-gh-eVe" id="Yyp-hE-3D9"/>
@@ -228,7 +241,6 @@
         <image name="Ipad-bg_transparent_nol" width="512" height="384"/>
         <image name="Ipad-icon_add_nol" width="28" height="28"/>
         <image name="Ipad-icon_dw_nol" width="28" height="28"/>
-        <image name="Ipad-icon_dw_prd" width="28" height="28"/>
         <image name="IpadSceneBg" width="512" height="384"/>
     </resources>
 </document>

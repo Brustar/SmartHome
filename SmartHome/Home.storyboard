@@ -571,8 +571,11 @@
                     <connections>
                         <outlet property="AddBtn" destination="gn6-OL-JNN" id="rcW-eY-slF"/>
                         <outlet property="MusicTableView" destination="pT3-hy-Z5V" id="pXT-OQ-lVH"/>
+                        <outlet property="ViewTrailingConstraint" destination="hma-9q-lI8" id="Nyo-Hj-EX7"/>
+                        <outlet property="ViewleadingConstraint" destination="IjE-ON-llJ" id="qIj-GV-hq8"/>
                         <outlet property="loseBtn" destination="U5p-4i-YB0" id="KQ7-Zf-A8K"/>
                         <outlet property="powerBtn" destination="juE-r4-YVk" id="eho-oc-1lg"/>
+                        <outlet property="tableViewConstraint" destination="OkF-Cm-C6j" id="Xr9-Kc-QzJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TxG-dg-Pmj" userLabel="First Responder" sceneMemberID="firstResponder"/>

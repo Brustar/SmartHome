@@ -11,8 +11,13 @@
 #import "PlaneGraphViewController.h"
 #import <AFNetworking.h>
 
-@interface IpadFirstViewController : CustomViewController
+@interface IpadFirstViewController : CustomViewController<NowMusicControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property(nonatomic, strong) AFNetworkReachabilityManager *afNetworkReachabilityManager;
+@property (nonatomic, strong) NowMusicController * nowMusicController;
+@property (nonatomic, strong) NSMutableArray *shortcutsArray;
+@property (nonatomic,strong) Scene * info1;
+@property (nonatomic,strong) Scene * info2;
+@property (nonatomic,strong) Scene * info3;
 
 @end

@@ -67,7 +67,7 @@
     UIStoryboard *HomeStoryBoard  = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
     UIStoryboard *devicesStoryBoard  = [UIStoryboard storyboardWithName:@"Devices" bundle:nil];
     UIStoryboard * HomeIpadStoryBoard = [UIStoryboard storyboardWithName:@"Home-iPad" bundle:nil];
-    UIStoryboard * SceneIpadStoryBoard = [UIStoryboard storyboardWithName:@"Scene-iPad" bundle:nil];
+//    UIStoryboard * SceneIpadStoryBoard = [UIStoryboard storyboardWithName:@"Scene-iPad" bundle:nil];
     //第三级控制器
     //设备
     IphoneDeviceListController *deviceListVC = [devicesStoryBoard instantiateViewControllerWithIdentifier:@"devicesController"];
@@ -81,12 +81,12 @@
  }
     //场景
     UIViewController * sceneVC;
- if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-     
+// if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+    
      sceneVC = [iPhoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
- }else{
-     sceneVC = [SceneIpadStoryBoard instantiateViewControllerWithIdentifier:@"IpadSceneViewController"];
- }
+// }else{
+//     sceneVC = [SceneIpadStoryBoard instantiateViewControllerWithIdentifier:@"IpadSceneViewController"];
+// }
     
     //创建数组
     NSArray *viewCtrls = @[deviceListVC, familyVC, sceneVC];

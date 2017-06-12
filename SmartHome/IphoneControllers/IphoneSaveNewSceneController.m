@@ -127,7 +127,14 @@
 }
 - (IBAction)sceneImageBtn:(id)sender {
     
-    UIAlertController * alerController = [UIAlertController alertControllerWithTitle:@"温馨提示选择场景图片" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController * alerController;
+    if (ON_IPAD) {
+        
+        alerController = [UIAlertController alertControllerWithTitle:@"温馨提示选择场景图片" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        
+    }else{
+          alerController = [UIAlertController alertControllerWithTitle:@"温馨提示选择场景图片" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+    }
     
     [alerController addAction:[UIAlertAction actionWithTitle:@"现在就拍" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
@@ -166,10 +173,10 @@
         
     }]];
     
-    [self presentViewController:alerController animated:YES completion:^{
-        
-    }];
-
+        [self presentViewController:alerController animated:YES completion:^{
+            
+        }];
+   
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
