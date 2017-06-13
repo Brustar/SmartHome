@@ -10,7 +10,7 @@
 #import "BaseTabBarController.h"
 #import "VoiceOrderController.h"
 
-@interface IpadFirstViewController ()
+@interface IpadFirstViewController ()<RCIMReceiveMessageDelegate>
 @property (nonatomic,strong) BaseTabBarController *baseTabbarController;
 @property (nonatomic, readonly) UIButton *naviRightBtn;
 @property (nonatomic, readonly) UIButton *naviLeftBtn;
@@ -76,7 +76,9 @@
     _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     _baseTabbarController.tabbarPanel.hidden = NO;
     _baseTabbarController.tabBar.hidden = YES;
+    int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
     
+    self.messageLabel.text = [NSString stringWithFormat:@"%d" ,unread<0?0:unread];
     [self getScenesFromPlist];
     [self setBtn];
 
@@ -432,6 +434,40 @@
     self.TimerLabel.text = [NSString stringWithFormat:@"%ld.%ld.%ld",year,month,day];
 
 }
+
+-(void) chatConnect
+{
+    NSString *token = [UD objectForKey:@"rctoken"];
+    [[RCIM sharedRCIM] connectWithToken:token success:^(NSString *userId) {
+        NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
+        [RCIM sharedRCIM].receiveMessageDelegate=self;
+        if ([[DeviceInfo defaultManager] pushToken]) {
+            [[RCIMClient sharedRCIMClient] setDeviceToken:[[DeviceInfo defaultManager] pushToken]];
+        }
+    } error:nil tokenIncorrect:nil];
+}
+
+//进入聊天页面
+-(void)setRCIM
+{
+    NSString *groupID = [[UD objectForKey:@"HostID"] description];
+    NSString *homename = [UD objectForKey:@"homename"];
+    
+    RCGroup *aGroupInfo = [[RCGroup alloc]initWithGroupId:groupID groupName:homename portraitUri:@""];
+    ConversationViewController *conversationVC = [[ConversationViewController alloc] init];
+    conversationVC.conversationType = ConversationType_GROUP;
+    conversationVC.targetId = aGroupInfo.groupId;
+    [conversationVC setTitle: [NSString stringWithFormat:@"%@",aGroupInfo.groupName]];
+    
+    RCUserInfo *user = [[RCIM sharedRCIM] currentUserInfo];
+    NSArray *info = [SQLManager queryChat:user.userId];
+    NSString *nickname = [info firstObject];
+    NSString *protrait = [info lastObject];
+    
+    [[RCIM sharedRCIM] refreshUserInfoCache:[[RCUserInfo alloc] initWithUserId:user.userId name:nickname portrait:protrait] withUserId:user.userId];
+    [self.navigationController pushViewController:conversationVC animated:YES];
+}
+
 //弹出聊天框
 - (IBAction)MessageBtnDo:(id)sender {
     
@@ -450,7 +486,7 @@
 //回复消息的按钮
 - (IBAction)replyBtn:(id)sender {
     
-    
+    [self setRCIM];
 }
 
 - (IBAction)FirstBtn:(id)sender {
