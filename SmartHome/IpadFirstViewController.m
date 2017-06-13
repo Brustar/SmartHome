@@ -60,7 +60,7 @@
     [self showNetStateView];
     [self setTimer];
     [self getWeekdayStringFromDate];
-    
+    [self chatConnect];
     //开启网络状况监听器
     [self updateInterfaceWithReachability];
     
@@ -87,6 +87,12 @@
     int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
     
     self.messageLabel.text = [NSString stringWithFormat:@"%d" ,unread<0?0:unread];
+    self.FamilyMenberLabel.text = [NSString stringWithFormat:@"家庭成员（%@）",[[NSUserDefaults standardUserDefaults] objectForKey:@"familyNum"]];
+    if (unread == 0) {
+        self.messageLabel2.text = [NSString stringWithFormat:@"%@" , @"暂无新消息"];
+        self.messageLabel1.text = @"";
+        
+    }
     [self getScenesFromPlist];
     [self setBtn];
 
@@ -441,6 +447,26 @@
     NSInteger day=[conponent day];
     self.TimerLabel.text = [NSString stringWithFormat:@"%ld.%ld.%ld",year,month,day];
 
+}
+
+- (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left
+{
+    NSArray *info = [SQLManager queryChat:message.senderUserId];
+    NSString *nickname = [info firstObject];
+    NSString *protrait = [info lastObject];
+    int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
+    NSString *tip=@"您有新消息";
+    if ([message.objectName isEqualToString:RCTextMessageTypeIdentifier]) {
+        tip = message.content.conversationDigest;
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.messageLabel1.text = self.messageLabel2.text;
+        self.messageLabel2.text =[NSString stringWithFormat:@"%@ : %@" , nickname, tip];
+        self.messageLabel.text = [NSString stringWithFormat:@"%d" ,unread<0?0:unread];
+        self.Icone1Image.image = self.IconeImage2.image;
+        [self.IconeImage2 sd_setImageWithURL:[NSURL URLWithString:protrait] placeholderImage:[UIImage imageNamed:@"logo"] options:SDWebImageRetryFailed];
+    });
+    
 }
 
 -(void) chatConnect
