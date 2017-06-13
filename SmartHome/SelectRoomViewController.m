@@ -17,8 +17,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setNaviBarTitle:@"选择房间"];
-
-    _roomTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT-64) style:UITableViewStylePlain];
+    
+    CGFloat tableWidth = UI_SCREEN_WIDTH;
+    if (ON_IPAD) {
+        tableWidth = UI_SCREEN_WIDTH*3/4;
+        [self adjustNaviBarFrameForSplitView];
+        [self adjustTitleFrameForSplitView];
+    }
+    
+    _roomTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, tableWidth, UI_SCREEN_HEIGHT-64) style:UITableViewStylePlain];
     _roomTableView.dataSource = self;
     _roomTableView.delegate = self;
     _roomTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];

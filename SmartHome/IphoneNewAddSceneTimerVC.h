@@ -18,5 +18,6 @@
 @property (weak, nonatomic) IBOutlet UIView *TimerView;
 @property (nonatomic,assign) int sceneID;
 @property (nonatomic,assign) int roomid;
+@property (nonatomic, assign) BOOL isShowInSplitView;
 
 @end

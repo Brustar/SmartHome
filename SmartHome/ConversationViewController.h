@@ -14,6 +14,7 @@
 
 @property (nonatomic, readonly) CustomNaviBarView *m_viewNaviBar;
 @property (nonatomic, readonly) UIButton *naviRightBtn;
+@property (nonatomic, assign) BOOL isShowInSplitView;//ipad版，聊天页面在splitView中展示
 
 - (void)setNaviBarTitle:(NSString *)strTitle;
 

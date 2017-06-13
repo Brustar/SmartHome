@@ -25,6 +25,7 @@
 #import "IphoneEditSceneController.h"
 #import "SceneManager.h"
 #import "HttpManager.h"
+#import "IpadDeviceListViewController.h"
 
 #define SceneCellWidth  (self.sceneListCollectionView.frame.size.width-6.0)/3
 #define SceneCellHeight  self.sceneListCollectionView.frame.size.height

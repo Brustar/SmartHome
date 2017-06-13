@@ -24,6 +24,12 @@
     [self setNaviBarTitle:@"定时设置"]; //设置标题
     _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
     [self setNaviBarRightBtn:_naviRightBtn];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [self adjustNaviBarFrameForSplitView];
+        [self adjustTitleFrameForSplitView];
+        [self setNaviBarRightBtnForSplitView:_naviRightBtn];
+    }
 }
 
 - (void)rightBtnClicked:(UIButton *)btn {
@@ -376,7 +382,12 @@
     _startValue = [NSMutableString string];
     [_startValue appendString:@"01000000"];//默认开
     
-    _timerTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT-64) style:UITableViewStylePlain];
+    CGFloat tableWidth = UI_SCREEN_WIDTH;
+    if (ON_IPAD) {
+        tableWidth = UI_SCREEN_WIDTH*3/4;
+    }
+    
+    _timerTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, tableWidth, UI_SCREEN_HEIGHT-64) style:UITableViewStylePlain];
     _timerTableView.dataSource = self;
     _timerTableView.delegate = self;
     _timerTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
@@ -697,6 +708,7 @@
     if (indexPath.section == 1) {
         UIStoryboard * sceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
         IphoneNewAddSceneTimerVC * timerVC = [sceneStoryBoard  instantiateViewControllerWithIdentifier:@"IphoneNewAddSceneTimerVC"];
+        timerVC.isShowInSplitView = YES;
         timerVC.naviTitle = @"设备定时";
         [self.navigationController pushViewController:timerVC animated:YES];
     }

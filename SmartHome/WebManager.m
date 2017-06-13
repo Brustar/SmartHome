@@ -59,6 +59,9 @@
 - (void)loadView {
     [super loadView];
     CGRect rect = CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height-44);
+    if (ON_IPAD && _isShowInSplitView) {
+        rect = CGRectMake(0, 44, UI_SCREEN_WIDTH*3/4, self.view.frame.size.height-44);
+    }
     self.webView = [[UIWebView alloc] initWithFrame:rect];
     self.webView.delegate = self;
     self.webView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
@@ -70,6 +73,12 @@
     [super viewDidLoad];
     [self addNotifications];
     [self setNaviBarTitle:self.naviTitle];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad && _isShowInSplitView) {
+        [self adjustNaviBarFrameForSplitView];
+        [self adjustTitleFrameForSplitView];
+    }
+    
     [MBProgressHUD showMessage:@"加载中..."];
     
     if([self.html isEqualToString:@""]){

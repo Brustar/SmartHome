@@ -117,8 +117,13 @@
     [self setNaviBarTitle:_naviTitle]; //设置标题
     _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
     _naviRightBtn.tintColor = [UIColor whiteColor];
-    //    [self setNaviBarLeftBtn:_naviLeftBtn];
     [self setNaviBarRightBtn:_naviRightBtn];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad && _isShowInSplitView) {
+        [self adjustNaviBarFrameForSplitView];
+        [self adjustTitleFrameForSplitView];
+        [self setNaviBarRightBtnForSplitView:_naviRightBtn];
+    }
 }
 -(void)rightBtnClicked:(UIButton *)btn
 {

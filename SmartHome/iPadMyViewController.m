@@ -41,14 +41,44 @@
     _leftVC.myTableView.frame = _leftVC.view.frame;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
+    baseTabbarController.tabbarPanel.hidden = YES;
+    baseTabbarController.tabBar.hidden = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
+    baseTabbarController.tabbarPanel.hidden = NO;
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [_rootVC.m_viewNaviBar setBackBtn:nil];
     _rootVC.m_viewNaviBar.m_viewCtrlParent = self;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+//进入聊天页面
+-(void)setRCIM
+{
+    NSString *groupID = [[UD objectForKey:@"HostID"] description];
+    NSString *homename = [UD objectForKey:@"homename"];
+    
+    RCGroup *aGroupInfo = [[RCGroup alloc]initWithGroupId:groupID groupName:homename portraitUri:@""];
+    ConversationViewController *_conversationVC = [[ConversationViewController alloc] init];
+    _conversationVC.isShowInSplitView = YES;
+    _conversationVC.conversationType = ConversationType_GROUP;
+    _conversationVC.targetId = aGroupInfo.groupId;
+    [_conversationVC setTitle: [NSString stringWithFormat:@"%@",aGroupInfo.groupName]];
+    _conversationVC.hidesBottomBarWhenPushed = YES;
+    [_rightVC pushViewController:_conversationVC animated:YES];
 }
 
 #pragma mark - LeftViewControllerDelegate
@@ -65,7 +95,7 @@
         
     }else if ([item isEqualToString:@"家庭成员"]) {
         //家庭成员(聊天页面)
-        //[self setRCIM];
+        [self setRCIM];
         
     }else if ([item isEqualToString:@"智能账单"]) {
         
@@ -98,6 +128,8 @@
         MySettingViewController *mysettingVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"MySettingViewController"];
         mysettingVC.hidesBottomBarWhenPushed = YES;
         [_rightVC pushViewController:mysettingVC animated:YES];
+    }else if ([item isEqualToString:@"返回"]) {
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 

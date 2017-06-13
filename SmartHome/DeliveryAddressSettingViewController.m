@@ -28,6 +28,12 @@
     
     _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(saveBtnClicked:)];
     [self setNaviBarRightBtn:_naviRightBtn];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [self adjustNaviBarFrameForSplitView];
+        [self adjustTitleFrameForSplitView];
+        [self setNaviBarRightBtnForSplitView:_naviRightBtn];
+    }
 }
 
 - (void)saveBtnClicked:(UIButton *)btn {
@@ -172,7 +178,13 @@
 
 - (AddressPickerView *)pickerView{
     if (!_pickerView) {
-        _pickerView = [[AddressPickerView alloc] initWithFrame:CGRectMake(0, UI_SCREEN_HEIGHT , UI_SCREEN_WIDTH, 215)];
+        
+        CGFloat pickerViewWidth = UI_SCREEN_WIDTH;
+        if (ON_IPAD) {
+            pickerViewWidth = UI_SCREEN_WIDTH*3/4;
+        }
+        
+        _pickerView = [[AddressPickerView alloc] initWithFrame:CGRectMake(0, UI_SCREEN_HEIGHT , pickerViewWidth, 215)];
         _pickerView.delegate = self;
     }
     return _pickerView;

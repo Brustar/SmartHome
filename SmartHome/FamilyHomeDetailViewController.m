@@ -258,22 +258,22 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIStoryboard *iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-    //[self.navigationController popToRootViewControllerAnimated:YES];
-    
     Scene *scene = self.sceneArray[indexPath.row];
+    
+    if (ON_IPAD) {
+        IpadDeviceListViewController * listVC = [[IpadDeviceListViewController alloc] init];
+        listVC.roomID = (int)scene.roomID;
+        listVC.sceneID = scene.sceneID;
+        [self.navigationController pushViewController:listVC animated:YES];
+    }else {
+    
+    UIStoryboard *iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     [[SceneManager defaultManager] startScene:scene.sceneID];
     IphoneEditSceneController *vc = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneEditSceneController"];
     vc.sceneID = scene.sceneID;
     vc.roomID = (int)scene.roomID;
     [self.navigationController pushViewController:vc animated:YES];
-    
-    /*UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
-    FamilyHomeDetailViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"familyHomeDetailVC"];
-    RoomStatus *roomInfo = self.roomArray[indexPath.row];
-    vc.roomID = roomInfo.roomId;
-    vc.roomName = roomInfo.roomName;
-    [self.navigationController pushViewController:vc animated:YES];*/
+  }
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -46,6 +46,27 @@ static NSString *const menuCellIdentifier = @"groupCell";
     
     _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"Contacts" imgHighlight:@"Contacts" target:self action:@selector(rightBtnClicked:)];
     [self setNaviBarRightBtn:_naviRightBtn];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad && _isShowInSplitView) {
+        [self adjustNaviBarFrameForSplitView];
+        [self adjustTitleFrameForSplitView];
+        [self setNaviBarRightBtnForSplitView:_naviRightBtn];
+    }
+}
+
+- (void)adjustNaviBarFrameForSplitView {
+    _viewNaviBar.frame = Rect(0.0f, 0.0f, [CustomNaviBarView barSizeForSplitView].width, [CustomNaviBarView barSize].height);
+}
+
+- (void)adjustTitleFrameForSplitView {
+    [_viewNaviBar adjustTitleFrameForSplitView];
+}
+
+- (void)setNaviBarRightBtnForSplitView:(UIButton *)btn {
+    if (_viewNaviBar)
+    {
+        [_viewNaviBar setRightBtnForSplitView:btn];
+    }else{APP_ASSERT_STOP}
 }
 
 - (void)rightBtnClicked:(UIButton *)sender {

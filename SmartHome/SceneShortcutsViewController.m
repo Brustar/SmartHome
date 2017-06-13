@@ -24,17 +24,29 @@
     [self setNaviBarTitle:@"场景快捷键"];
     _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(saveBtnClicked:)];
     [self setNaviBarRightBtn:_naviRightBtn];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad && _isShowInSplitView) {
+        [self adjustNaviBarFrameForSplitView];
+        [self adjustTitleFrameForSplitView];
+        [self setNaviBarRightBtnForSplitView:_naviRightBtn];
+    }
 }
 
 - (UIView *)setupTableHeader {
-    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 100)];
+    
+    CGFloat headerWidth = UI_SCREEN_WIDTH;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad && _isShowInSplitView) {
+        headerWidth = UI_SCREEN_WIDTH*3/4;
+    }
+    
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, headerWidth, 100)];
     header.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
-    UILabel *tips1 = [[UILabel alloc] initWithFrame:CGRectMake(50, 25, UI_SCREEN_WIDTH-100, 20)];
+    UILabel *tips1 = [[UILabel alloc] initWithFrame:CGRectMake(50, 25, headerWidth-100, 20)];
     tips1.textColor = [UIColor lightGrayColor];
     tips1.font = [UIFont systemFontOfSize:15.0];
     tips1.textAlignment = NSTextAlignmentCenter;
     tips1.text = @"在下方选择你需要添加到首页的场景";
-    UILabel *tips2 = [[UILabel alloc] initWithFrame:CGRectMake(50, 55, UI_SCREEN_WIDTH-100, 20)];
+    UILabel *tips2 = [[UILabel alloc] initWithFrame:CGRectMake(50, 55, headerWidth-100, 20)];
     tips2.textColor = [UIColor lightGrayColor];
     tips2.font = [UIFont systemFontOfSize:15.0];
     tips2.textAlignment = NSTextAlignmentCenter;

@@ -54,6 +54,11 @@
         
     }
     [self setNaviBarTitle:@"视频动态"];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [self adjustNaviBarFrameForSplitView];
+        [self adjustTitleFrameForSplitView];
+    }
 }
 
 - (void)initDataSource {

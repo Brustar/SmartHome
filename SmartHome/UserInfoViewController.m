@@ -240,18 +240,22 @@
     if (indexPath.section == 0) {
         //VIP会员
         WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:[NSString stringWithFormat:@"/ui/Vip.aspx?user_id=%d", userID]] title:@"VIP会员"];
+        web.isShowInSplitView = YES;
         [self.navigationController pushViewController:web animated:YES];
     }else if (indexPath.section == 1) {
         //服务商城
         WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:[NSString stringWithFormat:@"/ui/GoodsList.aspx?user_id=%d", userID]] title:@"服务商城"];
+        web.isShowInSplitView = YES;
         [self.navigationController pushViewController:web animated:YES];
     }else if (indexPath.section == 2) {
         //我的订单
         WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:[NSString stringWithFormat:@"/ui/OrderQuery.aspx?user_id=%d", userID]] title:@"我的订单"];
+        web.isShowInSplitView = YES;
         [self.navigationController pushViewController:web animated:YES];
     }else if (indexPath.section == 3) {
         //购物车
         WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:[NSString stringWithFormat:@"/ui/Cart.aspx?user_id=%d", userID]] title:@"购物车"];
+        web.isShowInSplitView = YES;
         [self.navigationController pushViewController:web animated:YES];
     }
 }

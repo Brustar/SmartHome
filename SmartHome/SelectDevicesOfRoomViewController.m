@@ -23,7 +23,14 @@
 - (void)initUI {
     [self setNaviBarTitle:@"选择设备"];
     
-    _deviceTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT-64) style:UITableViewStylePlain];
+    CGFloat tableWidth = UI_SCREEN_WIDTH;
+    if (ON_IPAD) {
+        tableWidth = UI_SCREEN_WIDTH*3/4;
+        [self adjustNaviBarFrameForSplitView];
+        [self adjustTitleFrameForSplitView];
+    }
+    
+    _deviceTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, tableWidth, UI_SCREEN_HEIGHT-64) style:UITableViewStylePlain];
     _deviceTableView.dataSource = self;
     _deviceTableView.delegate = self;
     _deviceTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];

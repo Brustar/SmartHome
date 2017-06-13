@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LeftViewController.h"
 #import "CustomViewController.h"
+#import "BaseTabBarController.h"
 
 @interface iPadMyViewController : UIViewController<LeftViewControllerDelegate>
 

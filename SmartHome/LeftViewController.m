@@ -145,6 +145,12 @@
     
 }
 
+- (void)backBtnClicked:(UIButton *)btn {
+    if (_delegate && [_delegate respondsToSelector:@selector(didSelectItem:)]) {
+        [_delegate didSelectItem:@"返回"];
+    }
+}
+
 - (UIView *)setupTableHeader {
     
     CGFloat headerWidth = UI_SCREEN_WIDTH-100;
@@ -155,6 +161,12 @@
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, headerWidth, 250)];
     view.backgroundColor = [UIColor clearColor];
+    
+    UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 20, 40, 40)];
+    [backBtn setImage:[UIImage imageNamed:@"backBtn"] forState:UIControlStateNormal];
+    [backBtn setImage:[UIImage imageNamed:@"backBtn"] forState:UIControlStateHighlighted];
+    [backBtn addTarget:self action:@selector(backBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:backBtn];
     
     UIButton *headButton = [UIButton buttonWithType:UIButtonTypeCustom];
     headButton.frame = CGRectMake((CGRectGetWidth(view.frame)-100)/2, 60, 100, 100);
