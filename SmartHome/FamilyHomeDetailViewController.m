@@ -598,9 +598,6 @@
                 //刷新UI
                 [self.deviceTableView reloadData];
                 
-                
-                
-                
             }else {
                 NSLog(@"设备状态获取失败！");
             }

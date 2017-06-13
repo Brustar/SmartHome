@@ -80,6 +80,27 @@
                                     <action selector="MessageBtnDo:" destination="0SV-ZH-hzW" eventType="touchUpInside" id="sBE-PX-smR"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="夜深了，可以做个好梦啦！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vqg-Tg-fzN">
+                                <rect key="frame" x="233" y="628" width="558" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="558" id="hQF-xG-E7O"/>
+                                    <constraint firstAttribute="height" constant="21" id="zce-ta-CJa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGe-nQ-HQE" userLabel="VoiceButton">
+                                <rect key="frame" x="500.5" y="588" width="24" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="mC8-Nd-S13"/>
+                                    <constraint firstAttribute="height" constant="35" id="qYk-bS-bar"/>
+                                </constraints>
+                                <state key="normal" image="Voice"/>
+                                <connections>
+                                    <action selector="VoiceBtn:" destination="0SV-ZH-hzW" eventType="touchUpInside" id="zOK-ks-tMa"/>
+                                </connections>
+                            </button>
                             <view hidden="YES" alpha="0.94999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pCB-q8-Gji" userLabel="CoverView">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <subviews>
@@ -197,6 +218,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Vqg-Tg-fzN" firstAttribute="centerX" secondItem="lj2-At-zkc" secondAttribute="centerX" id="3bc-Zu-UaS"/>
+                            <constraint firstItem="bGe-nQ-HQE" firstAttribute="centerX" secondItem="lj2-At-zkc" secondAttribute="centerX" id="4Ev-BN-V6V"/>
                             <constraint firstItem="gkp-n2-zHK" firstAttribute="top" secondItem="pCB-q8-Gji" secondAttribute="bottom" id="AR3-sw-e4E"/>
                             <constraint firstItem="H4Q-Fx-aZX" firstAttribute="centerX" secondItem="lj2-At-zkc" secondAttribute="centerX" id="AdD-oi-tcO"/>
                             <constraint firstItem="ipP-vP-gEp" firstAttribute="top" secondItem="lj2-At-zkc" secondAttribute="top" id="E97-fw-Zf8"/>
@@ -207,7 +230,9 @@
                             <constraint firstAttribute="trailingMargin" secondItem="znc-Gk-qLl" secondAttribute="trailing" constant="89" id="OUo-fa-ylT"/>
                             <constraint firstItem="dtO-gh-eVe" firstAttribute="centerX" secondItem="lj2-At-zkc" secondAttribute="centerX" id="VvU-Bt-Cmv"/>
                             <constraint firstItem="rIc-Ct-fvg" firstAttribute="top" secondItem="DCi-NA-ykR" secondAttribute="bottom" constant="230" id="YPY-By-Yfw"/>
+                            <constraint firstItem="gkp-n2-zHK" firstAttribute="top" secondItem="bGe-nQ-HQE" secondAttribute="bottom" constant="145" id="ZTW-Ey-3S6"/>
                             <constraint firstItem="dtO-gh-eVe" firstAttribute="top" secondItem="H4Q-Fx-aZX" secondAttribute="bottom" constant="2" id="aN3-VR-0Vb"/>
+                            <constraint firstItem="Vqg-Tg-fzN" firstAttribute="top" secondItem="bGe-nQ-HQE" secondAttribute="bottom" constant="5" id="bCC-oN-G0G"/>
                             <constraint firstItem="gkp-n2-zHK" firstAttribute="top" secondItem="znc-Gk-qLl" secondAttribute="bottom" constant="330" id="eMu-IY-JJa"/>
                             <constraint firstItem="gkp-n2-zHK" firstAttribute="top" secondItem="ipP-vP-gEp" secondAttribute="bottom" id="f05-Pl-wHq"/>
                             <constraint firstAttribute="trailing" secondItem="ipP-vP-gEp" secondAttribute="trailing" id="hLc-bG-NQy"/>
@@ -225,9 +250,11 @@
                         <outlet property="ThreeBtn" destination="LkT-la-gFe" id="ePb-bN-FRG"/>
                         <outlet property="TimerLabel" destination="rIc-Ct-fvg" id="EJv-sf-iob"/>
                         <outlet property="TwoBtn" destination="XIy-yD-K4Q" id="aR8-sp-MWF"/>
+                        <outlet property="VoiceBtn" destination="bGe-nQ-HQE" id="cLv-nJ-WcL"/>
                         <outlet property="firstBtn" destination="FtK-iw-nWJ" id="fqX-a7-vLm"/>
                         <outlet property="imageView" destination="ipP-vP-gEp" id="B0g-En-ySC"/>
                         <outlet property="messageLabel" destination="znc-Gk-qLl" id="IRV-D2-cua"/>
+                        <outlet property="remindLabel" destination="Vqg-Tg-fzN" id="hf3-dI-YAx"/>
                         <outlet property="temperatureLabel" destination="dtO-gh-eVe" id="Yyp-hE-3D9"/>
                         <outlet property="weekDayLabel" destination="H4Q-Fx-aZX" id="aQm-eg-VdJ"/>
                     </connections>
@@ -242,5 +269,6 @@
         <image name="Ipad-icon_add_nol" width="28" height="28"/>
         <image name="Ipad-icon_dw_nol" width="28" height="28"/>
         <image name="IpadSceneBg" width="512" height="384"/>
+        <image name="Voice" width="11" height="19"/>
     </resources>
 </document>

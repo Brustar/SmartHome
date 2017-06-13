@@ -7,6 +7,7 @@
 //
 
 #import "AboutUsController.h"
+#import "WebManager.h"
 
 @interface AboutUsController ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -26,15 +27,12 @@
   
     [self setNaviBarTitle:@"关于我们"];
     self.automaticallyAdjustsScrollViewInsets = NO;
-//    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
-//    self.navigationItem.leftBarButtonItem = returnItem;
     self.tableView.tableFooterView = [UIView new];
     self.tableView.tableHeaderView = self.headView;
-    
-    self.titles = @[@"版本说明",@"隐私安全政策"];
+    self.titles = @[@"版本说明",@"隐私与安全政策"];
     self.version.text =[NSString stringWithFormat:@"版本号%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
-    self.tableView.allowsSelection = NO;
-    // Do any additional setup after loading the view.
+//    self.tableView.allowsSelection = NO;
+    
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -46,26 +44,41 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
     cell.textLabel.text = self.titles[indexPath.row];
+    
+    
+    //cell的点击颜色
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];
+    view.backgroundColor = [UIColor clearColor];
+    
+    cell.selectedBackgroundView = view;
+    
     return cell;
 }
 
-//- (IBAction)clickRetunBtn:(id)sender {
-//    [self.navigationController popViewControllerAnimated:NO];
-//}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    if (indexPath.row == 0) {
+        
+        WebManager * web = [[WebManager alloc] initWithUrl:@"http://115.28.151.85:8082/article.aspx" title:@"版本说明"];
+        
+        [self.navigationController pushViewController:web animated:YES];
+        
+    }if (indexPath.row == 1) {
+        
+        WebManager * web = [[WebManager alloc] initWithUrl:@"http://115.28.151.85:8082/article.aspx" title:@"隐私与安全政策"];
+    
+        [self.navigationController pushViewController:web animated:YES];
+        
+    }
+
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

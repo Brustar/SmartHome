@@ -8,6 +8,7 @@
 
 #import "IpadFirstViewController.h"
 #import "BaseTabBarController.h"
+#import "VoiceOrderController.h"
 
 @interface IpadFirstViewController ()
 @property (nonatomic,strong) BaseTabBarController *baseTabbarController;
@@ -29,6 +30,9 @@
 @property (weak, nonatomic) IBOutlet UIButton * firstBtn;
 @property (weak, nonatomic) IBOutlet UIButton * TwoBtn;
 @property (weak, nonatomic) IBOutlet UIButton * ThreeBtn;
+@property (weak, nonatomic) IBOutlet UIButton *VoiceBtn;//点击进入语音
+
+@property (weak, nonatomic) IBOutlet UILabel *remindLabel;//每日提醒的label
 
 
 @end
@@ -360,6 +364,8 @@
     {
         [appDelegate.LeftSlideVC closeLeftView];
     }
+   
+    
 }
 -(void)getWeekdayStringFromDate {
     
@@ -492,6 +498,14 @@
             [SQLManager updateSceneStatus:0 sceneID:_info3.sceneID];//更新数据库
         }
     }
+    
+}
+- (IBAction)VoiceBtn:(id)sender {
+    
+    UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+    VoiceOrderController * voiceVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"VoiceOrderController"];
+    
+    [self.navigationController pushViewController:voiceVC animated:YES];
     
 }
 
