@@ -17,10 +17,42 @@
 @property (weak, nonatomic) IBOutlet UIImageView *headImg;
 @property (weak, nonatomic) IBOutlet UIView *footView;
 @property (weak, nonatomic) IBOutlet UIView *headView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ViewConstraint;//版权的视图到底部父视图的距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewConstraintTrailing;//tableView到右边父视图的距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewConstraintLeading;//tableView到左边父视图的距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *View1ConstraintLeading;//线1到左边父视图的距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *View1ConstraintTrailing;//线1到右边父视图的距离
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *View2ConstraintLeading;//线2到左边父视图的距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *View2ConstraintTrailing;//线2到右边父视图的距离
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *HeadImageTopConstraint;//headImage到顶部的距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewConstraintTop;//tableview到headimage的距离
+@property (weak, nonatomic) IBOutlet UIView *View3;
 
 @end
 
 @implementation AboutUsController
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    if (ON_IPAD) {
+        
+        self.ViewConstraint.constant = 120;
+        self.tableViewConstraintTrailing.constant = 20;
+        self.tableViewConstraintLeading.constant = 20;
+        self.View1ConstraintLeading.constant = 20;
+        self.View1ConstraintTrailing.constant = 20;
+        self.View2ConstraintLeading.constant = 20;
+        self.View2ConstraintTrailing.constant = 20;
+        self.HeadImageTopConstraint.constant = 150;
+        self.tableViewConstraintTop.constant = 180;
+        self.View3.hidden = NO;
+    }else{
+        self.View3.hidden = YES;
+    }
+
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -72,6 +104,48 @@
         
     }
 
+}
+
+-(void)viewDidLayoutSubviews
+
+{
+    
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        
+        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
+        
+    }
+    
+    
+    
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        
+        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,0,0,0)];
+        
+    }
+    
+}
+
+
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+
+{
+    
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+        
+    }
+    
+    
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+        
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -30,6 +30,10 @@
 @property (nonatomic,strong) NSMutableArray * timesArr;
 @property (nonatomic,strong) NSMutableArray * recordID;
 @property (nonatomic ,strong) NSMutableArray * isreadArr;
+@property (weak, nonatomic) IBOutlet UIView *view3;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewConstraintLeading;//tableView到左边父视图的距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewConstraintTrailing;//tableView到右边父视图的距离
 
 @end
 
@@ -111,6 +115,16 @@
     [self.itemNameArrs removeAllObjects];
     [self.unreadcountArr removeAllObjects];
     [self creatItemID];
+    if (ON_IPAD) {
+
+        self.view3.hidden = NO;
+//        self.tableViewConstraintLeading.constant = 20;
+//        self.tableViewConstraintTrailing.constant = 20;
+        
+    }else{
+        
+        self.view3.hidden = YES;
+    }
     
 
 }
@@ -240,6 +254,7 @@
     static NSString *CellIdentifier = @"msgCell";
     MsgCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
+    
     cell.title.text = self.itemNameArrs[indexPath.row];
     cell.countLabel.text = [NSString stringWithFormat:@"%@",self.unreadcountArr[indexPath.row]];
     self.unreadcount = [self.unreadcountArr[indexPath.row] integerValue];
@@ -276,6 +291,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     return 40;
 }
 @end

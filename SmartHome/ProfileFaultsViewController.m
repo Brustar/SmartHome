@@ -24,6 +24,7 @@
 - (IBAction)clickCancleBtn:(id)sender;
 - (IBAction)clickSureBtn:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UIView *View1;
 
 @end
 
@@ -70,6 +71,16 @@
     return _statusArr;
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    if (ON_IPAD) {
+        self.View1.hidden = NO;
+    }else{
+        
+        self.View1.hidden = YES;
+    }
+
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.footerView.hidden = YES;
