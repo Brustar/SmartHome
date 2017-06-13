@@ -33,7 +33,7 @@
 +(NSArray *)getAllScene;
 //根据房间ID得到该房间的所有设备
 +(NSArray *)devicesByRoomId:(NSInteger)roomId;
-
++(NSArray *)deviceOfRoom:(int) roomID;
 //根据roomID 从Devices 表 查询出 subTypeName字段(可能有重复数据，要去重)
 + (NSArray *)getDevicesSubTypeNamesWithRoomID:(int)roomID;
 + (NSArray *)allTypeinRoom:(int)roomID;
