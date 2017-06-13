@@ -28,6 +28,10 @@
 
 #define SceneCellWidth  (self.sceneListCollectionView.frame.size.width-6.0)/3
 #define SceneCellHeight  self.sceneListCollectionView.frame.size.height
+#define iPadSceneCellWidth  self.sceneListCollectionView.frame.size.width
+
+#define iPadSceneCellHeight  self.sceneListCollectionView.frame.size.width
+
 #define CollectionCellSpace 0.0
 #define minimumLineSpacing 3.0
 
@@ -62,6 +66,21 @@
 @property (nonatomic, assign) BOOL isRomantic;
 @property (nonatomic, assign) BOOL isSprightly;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewTrailing;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTrailing;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewBottom;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTop;
+@property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *collectionViewFlowLayout;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *softBtnLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *softBtnWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *normalBtnLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *normalBtnWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *brightBtnLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *brightBtnWidth;
 
 
 - (IBAction)softBtnClicked:(id)sender;
