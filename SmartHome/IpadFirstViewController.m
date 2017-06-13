@@ -34,6 +34,14 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *remindLabel;//每日提醒的label
 
+@property (weak, nonatomic) IBOutlet UILabel *FamilyMenberLabel;//家庭成员Label
+
+@property (weak, nonatomic) IBOutlet UILabel *messageLabel1;//第一个显示消息的label
+@property (weak, nonatomic) IBOutlet UIImageView *Icone1Image;//第一个消息的头像
+
+@property (weak, nonatomic) IBOutlet UILabel *messageLabel2;//第二个显示消息的label
+
+@property (weak, nonatomic) IBOutlet UIImageView *IconeImage2;//第二个消息的头像
 
 @end
 

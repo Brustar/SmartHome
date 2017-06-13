@@ -148,7 +148,7 @@
                 <outlet property="FMSlider" destination="3Pw-CA-AFl" id="6PH-ne-6IE"/>
                 <outlet property="FMSwitchBtn" destination="V1H-l4-DmA" id="YAd-3F-Abt"/>
             </connections>
-            <point key="canvasLocation" x="-44.5" y="11"/>
+            <point key="canvasLocation" x="56" y="-8"/>
         </tableViewCell>
     </objects>
     <resources>

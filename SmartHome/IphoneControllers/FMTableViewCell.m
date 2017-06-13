@@ -24,12 +24,24 @@
     self.FMSlider.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
     self.FMSlider.minimumTrackTintColor = [UIColor colorWithRed:253/255.0 green:254/255.0 blue:254/255.0 alpha:1];
     //设置结点左边背景
-    UIImage *trackLeftImage = [[UIImage imageNamed:@"ss"]stretchableImageWithLeftCapWidth:14 topCapHeight:0];
+    UIImage *trackLeftImage;
+    if (ON_IPAD) {
+        trackLeftImage = [[UIImage imageNamed:@"Ipad-fm_adjustt"]stretchableImageWithLeftCapWidth:14 topCapHeight:0];
+    }else{
+        trackLeftImage = [[UIImage imageNamed:@"ss"]stretchableImageWithLeftCapWidth:14 topCapHeight:0];
+    }
+  
     [self.FMChannelSlider setMinimumTrackImage:trackLeftImage forState:UIControlStateNormal];
     self.FMChannelSlider.continuous = NO;
     self.FMSlider.continuous = NO;
     //设置结点右边背景
-    UIImage *trackRightImage = [[UIImage imageNamed:@"ss"]stretchableImageWithLeftCapWidth:14 topCapHeight:0];
+    UIImage *trackRightImage;
+    if (ON_IPAD) {
+          trackRightImage = [[UIImage imageNamed:@"Ipad-fm_adjustt"]stretchableImageWithLeftCapWidth:14 topCapHeight:0];
+    }else{
+         trackRightImage = [[UIImage imageNamed:@"ss"]stretchableImageWithLeftCapWidth:14 topCapHeight:0];
+    }
+    
     [self.FMChannelSlider setMaximumTrackImage:trackRightImage forState:UIControlStateNormal];
     [self.AddFmBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.FMSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];//音量
