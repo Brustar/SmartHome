@@ -17,6 +17,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setNaviBarTitle:@"切换家庭账号"];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [self adjustNaviBarFrameForSplitView];
+        [self adjustTitleFrameForSplitView];
+    }
     _selectedHost = [[UD objectForKey:@"HostID"] stringValue];
     _hostArray = [NSMutableArray array];
     _homeNameArray = [NSMutableArray array];

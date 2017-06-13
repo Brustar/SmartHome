@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CustomViewController.h"
 #import "PlaneGraphViewController.h"
+#import "iPadMyViewController.h"
 #import <AFNetworking.h>
 
 @interface IpadFirstViewController : CustomViewController<NowMusicControllerDelegate>

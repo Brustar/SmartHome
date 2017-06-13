@@ -30,6 +30,7 @@
 @property(nonatomic, strong) UIButton *headerBtn;
 @property(nonatomic, strong) UITableView *myTableView;
 @property(nonatomic, assign) id<LeftViewControllerDelegate>delegate;
+@property(nonatomic, strong) UIButton *bgButton;
 @end
 
 
@@ -38,5 +39,6 @@
 
 @optional
 - (void)onBackgroundBtnClicked:(UIButton *)btn;
+- (void)didSelectItem:(NSString *)item;
 
 @end

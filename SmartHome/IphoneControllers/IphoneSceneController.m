@@ -124,6 +124,12 @@ static NSString * const CYPhotoId = @"photo";
 }
 
 - (void)leftBtnClicked:(UIButton *)btn {
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        iPadMyViewController *myVC = [[iPadMyViewController alloc] init];
+        [self.navigationController pushViewController:myVC animated:YES];
+    }else {
+    
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     if (appDelegate.LeftSlideVC.closed)
@@ -134,6 +140,7 @@ static NSString * const CYPhotoId = @"photo";
     {
         [appDelegate.LeftSlideVC closeLeftView];
     }
+  }
 }
 
 - (void)rightBtnClicked:(UIButton *)btn {

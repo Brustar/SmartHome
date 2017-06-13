@@ -11,6 +11,8 @@
 
 @interface CustomViewController : UIViewController
 
+@property (nonatomic, readonly) CustomNaviBarView *m_viewNaviBar;
+
 - (void)bringNaviBarToTopmost;
 - (void)naviToDevice;
 
@@ -18,11 +20,13 @@
 - (void)setNaviBarTitle:(NSString *)strTitle;
 - (void)setNaviBarLeftBtn:(UIButton *)btn;
 - (void)setNaviBarRightBtn:(UIButton *)btn;
+- (void)setNaviBarRightBtnForSplitView:(UIButton *)btn;
 - (void)setNaviMiddletBtn:(UIButton *)btn;
 - (void)naviBarAddCoverView:(UIView *)view;
 - (void)naviBarAddCoverViewOnTitleView:(UIView *)view;
 - (void)naviBarRemoveCoverView:(UIView *)view;
-
+- (void)adjustNaviBarFrameForSplitView;
 - (void)showNetStateView;
 - (void)setNetState:(int)state;
+- (void)adjustTitleFrameForSplitView;
 @end
