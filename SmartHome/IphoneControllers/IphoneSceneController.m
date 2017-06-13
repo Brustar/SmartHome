@@ -645,15 +645,6 @@ static NSString * const CYPhotoId = @"photo";
          
      }else{
         
-         if (ON_IPAD) {
-             IpadDeviceListViewController * listVC = [[IpadDeviceListViewController alloc] init];
-             listVC.roomID = self.selectedRoomID;
-             listVC.sceneID = self.selectedSId;
-             [self.navigationController pushViewController:listVC animated:YES];
-         }else{
-             [self performSegueWithIdentifier:@"iphoneEditSegue" sender:self];
-         }
-         
          Scene *scene = self.scenes[indexPath.row];
          self.selectedSId = scene.sceneID;
          CYPhotoCell *cell = (CYPhotoCell*)[collectionView cellForItemAtIndexPath:indexPath];
@@ -661,6 +652,15 @@ static NSString * const CYPhotoId = @"photo";
              [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
              [[SceneManager defaultManager] startScene:scene.sceneID];
              [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];
+         }
+         
+         if (ON_IPAD) {
+             IpadDeviceListViewController * listVC = [[IpadDeviceListViewController alloc] init];
+             listVC.roomID = self.selectedRoomID;
+             listVC.sceneID = self.selectedSId;
+             [self.navigationController pushViewController:listVC animated:YES];
+         }else{
+             [self performSegueWithIdentifier:@"iphoneEditSegue" sender:self];
          }
          NSArray *tmpArr = [SQLManager getScensByRoomId:self.selectedRoomID];
          [self.scenes removeAllObjects];
