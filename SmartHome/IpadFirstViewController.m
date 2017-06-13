@@ -93,6 +93,31 @@
         self.messageLabel1.text = @"";
         
     }
+    NSArray *history = [[RCIMClient sharedRCIMClient] getHistoryMessages:ConversationType_GROUP targetId:[[UD objectForKey:@"HostID"] description] oldestMessageId:[[UD objectForKey:@"messageid"] longValue] count:2];
+    if ([history count]>1) {
+        RCMessage *m1 = [history lastObject];
+        RCMessage *m2 = [history firstObject];
+        
+        NSArray *info = [SQLManager queryChat:m1.senderUserId];
+        NSString *nickname = [info firstObject];
+        NSString *protrait = [info lastObject];
+        NSString *tip=@"您有新消息";
+        if ([m1.objectName isEqualToString:RCTextMessageTypeIdentifier]) {
+            tip = m1.content.conversationDigest;
+        }
+        self.messageLabel1.text = [NSString stringWithFormat:@"%@ : %@" , nickname, tip];
+        [self.Icone1Image sd_setImageWithURL:[NSURL URLWithString:protrait] placeholderImage:[UIImage imageNamed:@"logo"] options:SDWebImageRetryFailed];
+        
+        info = [SQLManager queryChat:m2.senderUserId];
+        nickname = [info firstObject];
+        protrait = [info lastObject];
+        
+        if ([m2.objectName isEqualToString:RCTextMessageTypeIdentifier]) {
+            tip = m2.content.conversationDigest;
+        }
+        self.messageLabel2.text =[NSString stringWithFormat:@"%@ : %@" , nickname, tip];
+        [self.IconeImage2 sd_setImageWithURL:[NSURL URLWithString:protrait] placeholderImage:[UIImage imageNamed:@"logo"] options:SDWebImageRetryFailed];
+    }
     [self getScenesFromPlist];
     [self setBtn];
 
@@ -451,6 +476,7 @@
 
 - (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left
 {
+    [IOManager writeUserdefault:@(message.messageId) forKey:@"messageid"];
     NSArray *info = [SQLManager queryChat:message.senderUserId];
     NSString *nickname = [info firstObject];
     NSString *protrait = [info lastObject];
@@ -492,7 +518,6 @@
     conversationVC.conversationType = ConversationType_GROUP;
     conversationVC.targetId = aGroupInfo.groupId;
     [conversationVC setTitle: [NSString stringWithFormat:@"%@",aGroupInfo.groupName]];
-    
     RCUserInfo *user = [[RCIM sharedRCIM] currentUserInfo];
     NSArray *info = [SQLManager queryChat:user.userId];
     NSString *nickname = [info firstObject];
