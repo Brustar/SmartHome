@@ -19,5 +19,6 @@
 @property (nonatomic, readonly) UIButton *naviLeftBtn;
 @property (nonatomic, strong) NowMusicController * nowMusicController;
 @property(nonatomic, strong) AFNetworkReachabilityManager *afNetworkReachabilityManager;
+@property(nonatomic) bool showDevices;
 
 @end
