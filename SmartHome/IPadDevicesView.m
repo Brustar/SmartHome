@@ -101,6 +101,14 @@ static NSString *const leftMenuCell = @"leftMenuCell";
         UITableViewCell *cell = [self.content viewWithTag:[devID intValue]];
         NSIndexPath *path = [self.content indexPathForCell:cell];
         Device *device = [self.devices objectAtIndex:path.row];
+        if(proto.action.state == 0x1A){
+            if (device.hTypeId == 2) {
+                ((IpadNewLightCell *)cell).NewLightSlider.value = (float)proto.action.RValue/100.0f;
+            }
+            if (device.hTypeId == 3) {
+                ((NewColourCell *)cell).colourSlider.value = (float)proto.action.RValue/100.0f;
+            }
+        }
         if (proto.action.state == PROTOCOL_ON || proto.action.state == PROTOCOL_OFF) {
             switch (device.hTypeId) {
                 case 2:
@@ -185,7 +193,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 cell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
                 cell.NewLightPowerBtn.selected = device.power;//开关状态
                 cell.NewLightSlider.value = (float)device.bright/100.0f;//亮度状态
-                
+                cell.tag = device.eID;
                 return cell;
             }
             case 3:
@@ -196,7 +204,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 newColourCell.backgroundColor =[UIColor clearColor];
                 
                 newColourCell.colourNameLabel.text = device.name;
-                
+                newColourCell.tag = device.eID;
                 return newColourCell;
             }case 1:
             {
@@ -204,7 +212,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 newColourCell.AddColourLightBtn.hidden = YES;
                 newColourCell.ColourLightConstraint.constant = 10;
                 newColourCell.backgroundColor =[UIColor clearColor];
-                
+                newColourCell.tag = device.eID;
                 newColourCell.colourNameLabel.text = device.name;
                 newColourCell.supimageView.hidden = YES;
                 newColourCell.lowImageView.hidden = YES;
@@ -222,6 +230,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 aireCell.roomID = self.roomID;
                 aireCell.AireNameLabel.text = device.name;
                 aireCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
+                aireCell.tag = device.eID;
                 return aireCell;
             }
             case curtain:
@@ -234,7 +243,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 
                 aireCell.label.text = device.name;
                 aireCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
-                
+                aireCell.tag = device.eID;
                 return aireCell;
             }
             case TVtype:
@@ -245,7 +254,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 TVCell.backgroundColor =[UIColor clearColor];
                 
                 TVCell.TVNameLabel.text = device.name;
-                
+                TVCell.tag = device.eID;
                 return TVCell;
             }
             case DVDtype:
@@ -254,7 +263,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 DVDCell.AddDvdBtn.hidden = YES;
                 DVDCell.DVDConstraint.constant = 10;
                 DVDCell.backgroundColor =[UIColor clearColor];
-                
+                DVDCell.tag = device.eID;
                 DVDCell.DVDNameLabel.text = device.name;
                 return DVDCell;
             }
@@ -266,7 +275,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 FMCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
                 FMCell.AddFmBtn.hidden = YES;
                 FMCell.FMLayouConstraint.constant = 5;
-                
+                FMCell.tag = device.eID;
                 return FMCell;
             }
             case screen:
@@ -278,7 +287,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 
                 ScreenCell.ScreenCurtainLabel.text = device.name;
                 ScreenCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
-                
+                ScreenCell.tag = device.eID;
                 return ScreenCell;
             }
             case bgmusic:
@@ -287,7 +296,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 BjMusicCell.backgroundColor = [UIColor clearColor];
                 BjMusicCell.AddBjmusicBtn.hidden = YES;
                 BjMusicCell.BJmusicConstraint.constant = 10;
-                
+                BjMusicCell.tag = device.eID;
                 BjMusicCell.BjMusicNameLb.text = device.name;
                 BjMusicCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
                 
@@ -305,6 +314,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 }else{
                     otherCell.NameLabel.text = device.name;
                 }
+                otherCell.tag = device.eID;
                 return otherCell;
             }
         }
