@@ -14,6 +14,11 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) NSArray *titles;
 @property (nonatomic,strong) NSMutableArray * dicArr;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableviewLeadingConstraint;//左边距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableviewTrailingConstraint;//右边距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *view1TrailingConstraint;//右边距离
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *view1LeadingConstraint;//左边距离
 
 @end
 
@@ -25,6 +30,14 @@
     }
     
     return _dicArr;
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    self.tableviewLeadingConstraint.constant = 20;
+    self.tableviewTrailingConstraint.constant = 20;
+    self.view1LeadingConstraint.constant = 20;
+    self.view1TrailingConstraint.constant = 20;
+
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -76,6 +89,9 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.textLabel.text = self.titles[indexPath.row];
+    if (ON_IPAD) {
+        cell.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
+    }
 
     if ([cell.textLabel.text isEqualToString:@"家庭名称"]) {
          cell.detailTextLabel.text = array[0];

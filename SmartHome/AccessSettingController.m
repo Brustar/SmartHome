@@ -30,6 +30,14 @@
 @property (nonatomic,strong) AreaSettingCell *cell;
 @property (nonatomic,strong) NSIndexPath *selectedIndexPath;
 @property (nonatomic,assign) int usertype;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableviewTrailingConstraint;//右边距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableviewLeadingConstraint;//左边距离
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *view1TrailingConstraint;//右边距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *view1LeadingConstraint;//左边距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTopConstraint;//顶部的距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *view1TopConstraint;
+
 @end
 
 @implementation AccessSettingController
@@ -92,6 +100,14 @@
     [self.userArr removeAllObjects];
     [self.managerType removeAllObjects];
     [self.userIDArr removeAllObjects];
+    if (ON_IPAD) {
+        self.tableviewTrailingConstraint.constant = 20;
+        self.tableviewLeadingConstraint.constant = 20;
+        self.tableViewTopConstraint.constant = 80;
+        self.view1TrailingConstraint.constant = 20;
+        self.view1LeadingConstraint.constant = 20;
+        self.view1TopConstraint.constant = 80;
+    }
     
     NSString *url = [NSString stringWithFormat:@"%@Cloud/user_listall.aspx",[IOManager httpAddr]];
     [self sendRequest:url withTag:1];
