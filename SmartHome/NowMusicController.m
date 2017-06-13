@@ -59,6 +59,11 @@
 {
     
     [super viewWillAppear:YES];
+    if (ON_IPAD) {
+        self.ViewleadingConstraint.constant = 200;
+        self.ViewTrailingConstraint.constant = 200;
+        self.tableViewConstraint.constant = 30;
+    }
   
 }
 - (void)viewDidLoad {
@@ -337,8 +342,8 @@
         OpenBtn.frame = CGRectMake(self.view.bounds.size.width-150, 15, 30, 30);
         
     }else {
-         view1 = [[UIView alloc] initWithFrame:CGRectMake(10, 49, self.view.bounds.size.width-150, 1)];
-         OpenBtn.frame = CGRectMake(self.view.bounds.size.width-180, 15, 30, 30);
+         view1 = [[UIView alloc] initWithFrame:CGRectMake(10, 49, self.view.bounds.size.width-480, 1)];
+         OpenBtn.frame = CGRectMake(self.view.bounds.size.width-520, 15, 30, 30);
     }
     
     view1.backgroundColor = [UIColor redColor];
@@ -357,7 +362,7 @@
         line.frame = CGRectMake(0, 0, self.view.bounds.size.width, 0.5);
     }else{
         footerView.frame = CGRectMake(10, 0, self.view.bounds.size.width-150, 10);
-        line.frame = CGRectMake(10, 0, self.view.bounds.size.width-150, 0.5);
+        line.frame = CGRectMake(10, 0, self.view.bounds.size.width-480, 0.5);
     }
    
     [footerView addSubview:line];

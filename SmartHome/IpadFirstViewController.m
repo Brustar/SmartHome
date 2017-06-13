@@ -8,6 +8,7 @@
 
 #import "IpadFirstViewController.h"
 #import "BaseTabBarController.h"
+#import "VoiceOrderController.h"
 
 @interface IpadFirstViewController ()
 @property (nonatomic,strong) BaseTabBarController *baseTabbarController;
@@ -15,6 +16,7 @@
 @property (nonatomic, readonly) UIButton *naviLeftBtn;
 @property (nonatomic, readonly) UIButton *naviMiddletBtn;
 @property (nonatomic,strong) NSString * weekStr;
+@property (weak, nonatomic) IBOutlet UIView *MessageView;//聊天的视图
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;//显示未读消息的Label
 @property (weak, nonatomic) IBOutlet UIButton *MessageBtnDo;//点击弹出聊天页面的按钮
 @property (weak, nonatomic) IBOutlet UILabel *TimerLabel;//显示日期的label
@@ -24,6 +26,13 @@
 @property (weak, nonatomic) IBOutlet UIView *CoverView;
 @property (nonatomic,strong) NSString * WeekDayStr;
 @property (nonatomic,strong) NSString * locationString;
+
+@property (weak, nonatomic) IBOutlet UIButton * firstBtn;
+@property (weak, nonatomic) IBOutlet UIButton * TwoBtn;
+@property (weak, nonatomic) IBOutlet UIButton * ThreeBtn;
+@property (weak, nonatomic) IBOutlet UIButton *VoiceBtn;//点击进入语音
+
+@property (weak, nonatomic) IBOutlet UILabel *remindLabel;//每日提醒的label
 
 
 @end
@@ -67,6 +76,9 @@
     _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     _baseTabbarController.tabbarPanel.hidden = NO;
     _baseTabbarController.tabBar.hidden = YES;
+    
+    [self getScenesFromPlist];
+    [self setBtn];
 
 }
 -(void)viewDidAppear:(BOOL)animated
@@ -80,6 +92,79 @@
 {
     [super viewWillDisappear:animated];
 }
+
+- (void)getScenesFromPlist
+{
+    _shortcutsArray = [[NSMutableArray alloc] init];
+    NSString *shortcutsPath = [[IOManager sceneShortcutsPath] stringByAppendingPathComponent:@"sceneShortcuts.plist"];
+    NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfFile:shortcutsPath];
+    if (dictionary) {
+        NSArray *scenesArray = dictionary[@"Scenes"];
+        if (scenesArray && [scenesArray isKindOfClass:[NSArray class]]) {
+            for (NSDictionary *scene in scenesArray) {
+                if ([scene isKindOfClass:[NSDictionary class]]) {
+                    Scene *info = [[Scene alloc] init];
+                    info.sceneID = [scene[@"sceneID"] intValue];
+                    info.sceneName = scene[@"sceneName"];
+                    info.roomID = [scene[@"roomID"] intValue];
+                    info.roomName = scene[@"roomName"];
+                    
+                    [_shortcutsArray addObject:info];
+                }
+            }
+        }
+    }
+}
+
+-(void)setBtn
+{
+    _firstBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+    _TwoBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+    _ThreeBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+    if (_shortcutsArray.count != 0) {
+        if (_shortcutsArray.count == 1) {
+            _info1 = _shortcutsArray[0];
+            [_firstBtn setTitle:_info1.sceneName forState:UIControlStateNormal];
+            _firstBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+            _firstBtn.hidden = NO;
+            _TwoBtn.hidden = YES;
+            _ThreeBtn.hidden = NO;
+            [_ThreeBtn setTitle:@"" forState:UIControlStateNormal];
+            [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular4"] forState:UIControlStateNormal];
+        }if(_shortcutsArray.count == 2) {
+            _info1 = _shortcutsArray[0];
+            _info2 = _shortcutsArray[1];
+            [_firstBtn setTitle:_info1.sceneName forState:UIControlStateNormal];
+            [_TwoBtn setTitle:_info2.sceneName forState:UIControlStateNormal];
+            _firstBtn.hidden = NO;
+            _TwoBtn.hidden = NO;
+            _ThreeBtn.hidden = NO;
+            [_ThreeBtn setTitle:@"" forState:UIControlStateNormal];
+            [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular4"] forState:UIControlStateNormal];
+            
+        }if (_shortcutsArray.count == 3) {
+            _info1 = _shortcutsArray[0];
+            _info2 = _shortcutsArray[1];
+            _info3 = _shortcutsArray[2];
+            [_firstBtn setTitle:_info1.sceneName forState:UIControlStateNormal];
+            [_TwoBtn setTitle:_info2.sceneName forState:UIControlStateNormal];
+            [_ThreeBtn setTitle:_info3.sceneName forState:UIControlStateNormal];
+            [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular3"] forState:UIControlStateNormal];
+            _firstBtn.hidden = NO;
+            _TwoBtn.hidden = NO;
+            _ThreeBtn.hidden = NO;
+        }
+    }else{
+        _ThreeBtn.center = CGPointMake(self.view.center.x, self.view.center.y);
+        [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular4"] forState:UIControlStateNormal];
+        [_ThreeBtn setTitle:@"" forState:UIControlStateNormal];
+        _firstBtn.hidden = YES;
+        _TwoBtn.hidden = YES;
+        _ThreeBtn.hidden = NO;
+        
+    }
+}
+
 -(void)doTap:(UIGestureRecognizer *)dap
 {
     UIStoryboard *planeGraphStoryBoard  = [UIStoryboard storyboardWithName:@"PlaneGraph" bundle:nil];
@@ -246,19 +331,47 @@
 -(void)rightBtnClicked:(UIButton *)btn
 {
     
+    UIStoryboard * HomeStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
     
+    if (_nowMusicController == nil) {
+        _nowMusicController = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"NowMusicController"];
+        _nowMusicController.delegate = self;
+        [self.view addSubview:_nowMusicController.view];
+    }else {
+        [_nowMusicController.view removeFromSuperview];
+        _nowMusicController = nil;
+    }
+
+}
+
+- (void)onBgButtonClicked:(UIButton *)sender {
+    if (_nowMusicController) {
+        [_nowMusicController.view removeFromSuperview];
+        _nowMusicController = nil;
+    }
 }
 - (void)leftBtnClicked:(UIButton *)btn {
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    if (appDelegate.LeftSlideVC.closed)
-    {
-        [appDelegate.LeftSlideVC openLeftView];
+    self.MessageView.hidden = YES;
+    self.CoverView.hidden = YES;
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        iPadMyViewController *myVC = [[iPadMyViewController alloc] init];
+        [self.navigationController pushViewController:myVC animated:YES];
+    }else {
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        
+        if (appDelegate.LeftSlideVC.closed)
+        {
+            [appDelegate.LeftSlideVC openLeftView];
+        }
+        else
+        {
+            [appDelegate.LeftSlideVC closeLeftView];
+        }
     }
-    else
-    {
-        [appDelegate.LeftSlideVC closeLeftView];
-    }
+   
+    
 }
 -(void)getWeekdayStringFromDate {
     
@@ -325,8 +438,10 @@
     _baseTabbarController.tabbarPanel.hidden = YES;
     if (self.CoverView.hidden) {
         self.CoverView.hidden = NO;
+        self.MessageView.hidden = NO;
     }else{
         self.CoverView.hidden = YES;
+        self.MessageView.hidden = YES;
         _baseTabbarController.tabbarPanel.hidden = NO;
 //        self.chatlabel.text = @"456";
     }
@@ -338,9 +453,72 @@
     
 }
 
+- (IBAction)FirstBtn:(id)sender {
+    _firstBtn.selected = !_firstBtn.selected;
+    if (_firstBtn.selected) {
+        [_firstBtn setBackgroundImage:[UIImage imageNamed:@"circular2"] forState:UIControlStateSelected];
+        [_firstBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [[SceneManager defaultManager] startScene:_info1.sceneID];
+        [SQLManager updateSceneStatus:1 sceneID:_info1.sceneID];//更新数据库
+    }else{
+        [_firstBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_firstBtn setBackgroundImage:[UIImage imageNamed:@"circular3"] forState:UIControlStateNormal];
+        [[SceneManager defaultManager] poweroffAllDevice:_info1.sceneID];
+        [SQLManager updateSceneStatus:0 sceneID:_info1.sceneID];//更新数据库
+    }
+}
+
+- (IBAction)TwoBtn:(id)sender {
+    _TwoBtn.selected = !_TwoBtn.selected;
+    if (_TwoBtn.selected) {
+        [_TwoBtn setBackgroundImage:[UIImage imageNamed:@"circular2"] forState:UIControlStateSelected];
+        [_TwoBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [[SceneManager defaultManager] startScene:_info2.sceneID];
+        [SQLManager updateSceneStatus:1 sceneID:_info2.sceneID];//更新数据库
+    }else{
+        [_TwoBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_TwoBtn setBackgroundImage:[UIImage imageNamed:@"circular3"] forState:UIControlStateNormal];
+        [[SceneManager defaultManager] poweroffAllDevice:_info2.sceneID];
+        [SQLManager updateSceneStatus:0 sceneID:_info2.sceneID];//更新数据库
+    }
+    
+}
+- (IBAction)ThreeBtn:(id)sender {
+    _ThreeBtn.selected = !_ThreeBtn.selected;
+    if ([_ThreeBtn.currentTitle isEqualToString:@""]) {
+        self.MessageView.hidden = YES;
+        self.CoverView.hidden = YES;
+        UIStoryboard * myInfoStoryBoard = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
+        SceneShortcutsViewController * shortcutKeyVC = [myInfoStoryBoard instantiateViewControllerWithIdentifier:@"SceneShortcutsVC"];
+        [self.navigationController pushViewController:shortcutKeyVC animated:YES];
+    }else{
+        if (_ThreeBtn.selected) {
+            [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular2"] forState:UIControlStateSelected];
+            [_ThreeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [[SceneManager defaultManager] startScene:_info3.sceneID];
+            [SQLManager updateSceneStatus:1 sceneID:_info3.sceneID];//更新数据库
+        }else{
+            [_ThreeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular3"] forState:UIControlStateNormal];
+            [[SceneManager defaultManager] poweroffAllDevice:_info3.sceneID];
+            [SQLManager updateSceneStatus:0 sceneID:_info3.sceneID];//更新数据库
+        }
+    }
+    
+}
+- (IBAction)VoiceBtn:(id)sender {
+    
+    UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+    VoiceOrderController * voiceVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"VoiceOrderController"];
+    
+    [self.navigationController pushViewController:voiceVC animated:YES];
+    
+}
+
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     self.CoverView.hidden = YES;
+     self.MessageView.hidden = YES;
     _baseTabbarController.tabbarPanel.hidden = NO;
 }
 

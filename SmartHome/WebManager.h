@@ -20,7 +20,6 @@
 
 - (id)initWithHtml:(NSString *)html;
 - (id)initWithUrl:(NSString *)aUrl title:(NSString *)title;
-
 + (void) show:(NSString *)aUrl;
 
 @end

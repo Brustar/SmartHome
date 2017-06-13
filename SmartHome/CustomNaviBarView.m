@@ -41,7 +41,11 @@
 
 + (CGRect)rightBtnFrame
 {
-   return Rect(UI_SCREEN_WIDTH-[[self class] barBtnSize].width, 22.0f, [[self class] barBtnSize].width, [[self class] barBtnSize].height);
+    return Rect(UI_SCREEN_WIDTH-[[self class] barBtnSize].width, 22.0f, [[self class] barBtnSize].width, [[self class] barBtnSize].height);
+}
+
++ (CGRect)rightBtnFrameForSplitView {
+    return Rect(UI_SCREEN_WIDTH*3/4-[[self class] barBtnSize].width, 22.0f, [[self class] barBtnSize].width, [[self class] barBtnSize].height);
 }
 
 + (CGSize)barBtnSize
@@ -51,7 +55,11 @@
 
 + (CGSize)barSize
 {
-   return Size(UI_SCREEN_WIDTH, 64.0f);
+    return Size(UI_SCREEN_WIDTH, 64.0f);
+}
+
++ (CGSize)barSizeForSplitView {
+    return Size(UI_SCREEN_WIDTH*3/4, 64.0f);
 }
 
 + (CGRect)titleViewFrame
@@ -62,6 +70,10 @@
 + (CGRect)titleViewFrameForNet
 {
     return Rect((UI_SCREEN_WIDTH-190.0f)/2, 15.0f, 190.0f, 40.0f);
+}
+
++ (CGRect)titleViewFrameForSplitView {
+    return Rect((UI_SCREEN_WIDTH*3/4-190.0f)/2, 22.0f, 190.0f, 40.0f);
 }
 
 // 创建一个导航条按钮：使用默认的按钮图片。
@@ -180,6 +192,10 @@
     [self setBackBtn:_btnBack];
 }
 
+- (void)adjustTitleFrameForSplitView {
+    _labelTitle.frame = [[self class] titleViewFrameForSplitView];
+}
+
 - (void)setTitle:(NSString *)strTitle
 {
     [_labelTitle setText:strTitle];
@@ -242,6 +258,21 @@
     if (_btnRight)
     {
         _btnRight.frame = [[self class] rightBtnFrame];
+        [self addSubview:_btnRight];
+    }else{}
+}
+
+- (void)setRightBtnForSplitView:(UIButton *)btn {
+    if (_btnRight)
+    {
+        [_btnRight removeFromSuperview];
+        _btnRight = nil;
+    }else{}
+    
+    _btnRight = btn;
+    if (_btnRight)
+    {
+        _btnRight.frame = [[self class] rightBtnFrameForSplitView];
         [self addSubview:_btnRight];
     }else{}
 }

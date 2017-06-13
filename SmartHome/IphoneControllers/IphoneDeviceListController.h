@@ -10,6 +10,7 @@
 #import "CustomViewController.h"
 #import "NowMusicController.h"
 #import "AFNetworkReachabilityManager.h"
+#import "iPadMyViewController.h"
 
 @interface IphoneDeviceListController : CustomViewController<NowMusicControllerDelegate>
 

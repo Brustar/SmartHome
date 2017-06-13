@@ -15,13 +15,13 @@
 
 + (void)show:(NSString *)aUrl
 {
-    /*WebManager *web = [[WebManager alloc] initWithUrl:aUrl title:@"逸云科技"];
+    WebManager *web = [[WebManager alloc] initWithUrl:aUrl title:@"逸云科技"];
     UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:web];
     web.navigationController.navigationBarHidden = NO;
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     UIViewController *rootViewController = window.rootViewController;
     [rootViewController dismissViewControllerAnimated:NO completion:nil];
-    [rootViewController presentViewController:controller animated:YES completion:nil];*/
+    [rootViewController presentViewController:controller animated:YES completion:nil];
 }
 
 - (id)initWithHtml:(NSString *)html

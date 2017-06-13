@@ -261,6 +261,7 @@
 		CDEC86921E9A1D22009EC245 /* FamilyHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEC86911E9A1D22009EC245 /* FamilyHomeCell.m */; };
 		CDEC86951E9A21F4009EC245 /* RoomStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEC86941E9A21F4009EC245 /* RoomStatus.m */; };
 		CDEC86981E9A44F9009EC245 /* FamilyHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEC86971E9A44F9009EC245 /* FamilyHomeViewController.m */; };
+		CDEE58D11EEE8A920023C669 /* iPadMyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEE58D01EEE8A910023C669 /* iPadMyViewController.m */; };
 		CDEE5E921EBEEBC900A5779D /* FamilyDynamicDeviceAdjustViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEE5E911EBEEBC900A5779D /* FamilyDynamicDeviceAdjustViewController.m */; };
 		CDEE5E951EC1AC6000A5779D /* SelectRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEE5E941EC1AC6000A5779D /* SelectRoomViewController.m */; };
 		CDEE5E981EC1B35800A5779D /* SelectDevicesOfRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDEE5E971EC1B35800A5779D /* SelectDevicesOfRoomViewController.m */; };
@@ -932,6 +933,8 @@
 		CDEC86941E9A21F4009EC245 /* RoomStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomStatus.m; sourceTree = "<group>"; };
 		CDEC86961E9A44F9009EC245 /* FamilyHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyHomeViewController.h; sourceTree = "<group>"; };
 		CDEC86971E9A44F9009EC245 /* FamilyHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyHomeViewController.m; sourceTree = "<group>"; };
+		CDEE58CF1EEE8A910023C669 /* iPadMyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPadMyViewController.h; sourceTree = "<group>"; };
+		CDEE58D01EEE8A910023C669 /* iPadMyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPadMyViewController.m; sourceTree = "<group>"; };
 		CDEE5E901EBEEBC900A5779D /* FamilyDynamicDeviceAdjustViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyDynamicDeviceAdjustViewController.h; sourceTree = "<group>"; };
 		CDEE5E911EBEEBC900A5779D /* FamilyDynamicDeviceAdjustViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyDynamicDeviceAdjustViewController.m; sourceTree = "<group>"; };
 		CDEE5E931EC1AC6000A5779D /* SelectRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectRoomViewController.h; sourceTree = "<group>"; };
@@ -2193,6 +2196,7 @@
 		2ECD5B101ED276480091880D /* ipadControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CDEE58CE1EEE89910023C669 /* iPadMyVC */,
 				2ECD5B171ED28D530091880D /* ipadSceneVC */,
 				2ECD5B111ED276710091880D /* ipadFirstVC */,
 			);
@@ -2376,6 +2380,15 @@
 				CDBEFF521EA616CD00258B1E /* FamilyHomeDetailSceneCell.m */,
 			);
 			name = FamilyViewController;
+			sourceTree = "<group>";
+		};
+		CDEE58CE1EEE89910023C669 /* iPadMyVC */ = {
+			isa = PBXGroup;
+			children = (
+				CDEE58CF1EEE8A910023C669 /* iPadMyViewController.h */,
+				CDEE58D01EEE8A910023C669 /* iPadMyViewController.m */,
+			);
+			name = iPadMyVC;
 			sourceTree = "<group>";
 		};
 		CDEE5E9E1EC2A7DD00A5779D /* LaunchingViewController */ = {
@@ -3276,6 +3289,7 @@
 				CDB8B85E1EB1EBD2003AA894 /* UserInfo.m in Sources */,
 				0F7426C11EBB362F00D686B8 /* FeedingController.m in Sources */,
 				F65DB3411D2B5AB2002A815C /* RegisterDetailController.m in Sources */,
+				CDEE58D11EEE8A920023C669 /* iPadMyViewController.m in Sources */,
 				0F8D76D01D9A1B9700DDD063 /* Schedule.m in Sources */,
 				0FCF43311CE09039009BFDD9 /* IbeaconManager.m in Sources */,
 				2E04198B1EB89F42004D70B9 /* FSLineChart.m in Sources */,
