@@ -32,10 +32,24 @@
 @property (nonatomic,strong) SystemSettingViewController *sySetVC;
 @property (nonatomic,strong) SystemInfomationController *inforVC;
 @property (nonatomic,strong) AboutUsController *aboutVC;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTopConstraint;//顶部的距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewLeadingConstraint;//左边的距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTainlingConstraint;//右边的距离
 
 @end
 
 @implementation MySettingViewController
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    if (ON_IPAD) {
+        
+        self.tableViewTopConstraint.constant = 60;
+        self.tableViewLeadingConstraint.constant = 20;
+        self.tableViewTainlingConstraint.constant = 20;
+    }
+
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

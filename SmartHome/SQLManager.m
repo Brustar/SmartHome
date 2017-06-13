@@ -358,6 +358,36 @@
     return [arr copy];
 }
 
++(NSArray *)deviceOfRoom:(int) roomID
+{
+    NSMutableArray *devices = [NSMutableArray array];
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        long masterID =  [[DeviceInfo defaultManager] masterID];
+        NSString *sql;
+        if ([self isWholeHouse:roomID]) {
+            sql= [NSString stringWithFormat:@"SELECT ID,name,subtypeid,htypeid,rid FROM Devices where subTypeId<>6 and subTypeId<>4 and masterID = '%ld'",masterID];
+        }else{
+            sql= [NSString stringWithFormat:@"SELECT ID,name,subtypeid,htypeid,rid FROM Devices where rID = %d and subTypeId<>6 and subTypeId<>4 and masterID = '%ld'",roomID, masterID];
+        }
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+            Device *device = [Device new];
+            device.eID = [resultSet intForColumn:@"ID"];
+            device.name = [resultSet stringForColumn:@"name"];
+            device.subTypeId = [resultSet intForColumn:@"subtypeid"];
+            device.hTypeId = [resultSet intForColumn:@"htypeid"];
+            device.rID = [resultSet intForColumn:@"rid"];
+            [devices addObject:device];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return [devices copy];
+}
+
 + (BOOL)isWholeHouse:(NSInteger)eId
 {
     FMDatabase *db = [self connetdb];
@@ -550,7 +580,6 @@
     [db closeOpenResultSets];
     [db close];
     return [deviceDIs copy];
-
 }
 
 
@@ -1136,7 +1165,6 @@
     }
     
     return [deviceIDs copy];
-
 }
 
 //根据roomID 从Devices 表 查询出 subTypeName字段(可能有重复数据，要去重)
@@ -1177,9 +1205,9 @@
     {
         NSString *sql = nil;
         if ([self isWholeHouse:roomID]) {
-            sql = [NSString stringWithFormat:@"SELECT DISTINCT subTypeName,subtypeid FROM Devices where masterID = '%ld' and subtypeid<>6",[[DeviceInfo defaultManager] masterID]];
+            sql = [NSString stringWithFormat:@"SELECT DISTINCT subTypeName,subtypeid FROM Devices where masterID = '%ld' and subtypeid<>6 and subTypeId<>4",[[DeviceInfo defaultManager] masterID]];
         }else{
-            sql = [NSString stringWithFormat:@"SELECT DISTINCT subTypeName,subtypeid FROM Devices where rID = %d and masterID = '%ld' and subtypeid<>6",roomID,[[DeviceInfo defaultManager] masterID]];
+            sql = [NSString stringWithFormat:@"SELECT DISTINCT subTypeName,subtypeid FROM Devices where rID = %d and masterID = '%ld' and subtypeid<>6 and subTypeId<>4",roomID,[[DeviceInfo defaultManager] masterID]];
         }
         
         FMResultSet *resultSet = [db executeQuery:sql];

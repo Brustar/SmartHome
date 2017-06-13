@@ -308,12 +308,11 @@ static NSString * const CYPhotoId = @"photo";
     btn.selected = !btn.selected;
     if (btn.selected) {
         [btn setImage:[UIImage imageNamed:@"switch_device"] forState:UIControlStateNormal];
-        
     }else{
         [btn setImage:[UIImage imageNamed:@"switch_room"] forState:UIControlStateNormal];
-        
     }
     self.deviceView.hidden = !btn.selected;
+    self.showDevices= btn.selected;
 }
 
 -(void)getUI
@@ -375,9 +374,21 @@ static NSString * const CYPhotoId = @"photo";
 }
 
 - (void)iphoneRoomView:(UIView *)view didSelectButton:(int)index {
+    self.roomIndex = index;
+    Room *room = self.rooms[index];
+    if (ON_IPAD && self.showDevices) {
+        if ([SQLManager isWholeHouse:room.rId]) {
+            self.deviceView.devices = self.deviceView.temp;
+        }else{
+            NSPredicate *pred = [NSPredicate predicateWithFormat:@"rID==%d", room.rId];
+            self.deviceView.devices = [self.deviceView.temp filteredArrayUsingPredicate:pred];
+        }
+        [self.deviceView.content reloadData];
+        
+        return;
+    }
+    
     if (view == self.iphoneRoomView) {
-        self.roomIndex = index;
-        Room *room = self.rooms[index];
         self.devices = [SQLManager getCatalogWithRoomID:room.rId];
         
         if (self.devices.count < 1) {
@@ -386,6 +397,7 @@ static NSString * const CYPhotoId = @"photo";
         }
         [self.FirstCollectionView reloadData];
     }
+    
 }
 
 -(void) UISplit:(NSArray *)controllers

@@ -7,6 +7,7 @@
 //
 
 #import "AboutUsController.h"
+#import "WebManager.h"
 
 @interface AboutUsController ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -16,25 +17,54 @@
 @property (weak, nonatomic) IBOutlet UIImageView *headImg;
 @property (weak, nonatomic) IBOutlet UIView *footView;
 @property (weak, nonatomic) IBOutlet UIView *headView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ViewConstraint;//版权的视图到底部父视图的距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewConstraintTrailing;//tableView到右边父视图的距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewConstraintLeading;//tableView到左边父视图的距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *View1ConstraintLeading;//线1到左边父视图的距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *View1ConstraintTrailing;//线1到右边父视图的距离
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *View2ConstraintLeading;//线2到左边父视图的距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *View2ConstraintTrailing;//线2到右边父视图的距离
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *HeadImageTopConstraint;//headImage到顶部的距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewConstraintTop;//tableview到headimage的距离
+@property (weak, nonatomic) IBOutlet UIView *View3;
 
 @end
 
 @implementation AboutUsController
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    if (ON_IPAD) {
+        
+        self.ViewConstraint.constant = 120;
+        self.tableViewConstraintTrailing.constant = 20;
+        self.tableViewConstraintLeading.constant = 20;
+        self.View1ConstraintLeading.constant = 20;
+        self.View1ConstraintTrailing.constant = 20;
+        self.View2ConstraintLeading.constant = 20;
+        self.View2ConstraintTrailing.constant = 20;
+        self.HeadImageTopConstraint.constant = 150;
+        self.tableViewConstraintTop.constant = 180;
+        self.View3.hidden = NO;
+    }else{
+        self.View3.hidden = YES;
+    }
+
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
   
     [self setNaviBarTitle:@"关于我们"];
     self.automaticallyAdjustsScrollViewInsets = NO;
-//    UIBarButtonItem *returnItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(clickRetunBtn:)];
-//    self.navigationItem.leftBarButtonItem = returnItem;
     self.tableView.tableFooterView = [UIView new];
     self.tableView.tableHeaderView = self.headView;
-    
-    self.titles = @[@"版本说明",@"隐私安全政策"];
+    self.titles = @[@"版本说明",@"隐私与安全政策"];
     self.version.text =[NSString stringWithFormat:@"版本号%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
-    self.tableView.allowsSelection = NO;
-    // Do any additional setup after loading the view.
+//    self.tableView.allowsSelection = NO;
+    
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -46,26 +76,83 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
     cell.textLabel.text = self.titles[indexPath.row];
+    
+    
+    //cell的点击颜色
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];
+    view.backgroundColor = [UIColor clearColor];
+    
+    cell.selectedBackgroundView = view;
+    
     return cell;
 }
 
-//- (IBAction)clickRetunBtn:(id)sender {
-//    [self.navigationController popViewControllerAnimated:NO];
-//}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    if (indexPath.row == 0) {
+        
+        WebManager * web = [[WebManager alloc] initWithUrl:@"http://115.28.151.85:8082/article.aspx" title:@"版本说明"];
+        
+        [self.navigationController pushViewController:web animated:YES];
+        
+    }if (indexPath.row == 1) {
+        
+        WebManager * web = [[WebManager alloc] initWithUrl:@"http://115.28.151.85:8082/article.aspx" title:@"隐私与安全政策"];
+    
+        [self.navigationController pushViewController:web animated:YES];
+        
+    }
+
+}
+
+-(void)viewDidLayoutSubviews
+
+{
+    
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        
+        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
+        
+    }
+    
+    
+    
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        
+        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,0,0,0)];
+        
+    }
+    
+}
+
+
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+
+{
+    
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+        
+    }
+    
+    
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+        
+    }
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

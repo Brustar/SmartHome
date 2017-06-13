@@ -17,6 +17,15 @@
 @property (nonatomic,strong) NSMutableArray *opens;
 @property (nonatomic,strong) NSMutableArray *recordIDs;
 @property (nonatomic,strong) NSNumber *recordID;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableviewtrailingConstraint;//右边距离
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableviewleadingConstraint;//左边距离
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *view1LeadingConstraint;//左边
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *view1TrailingConstraint;
+
+
 @end
 
 @implementation SystemSettingViewController
@@ -46,7 +55,17 @@
     }
     return _recordIDs;
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    if (ON_IPAD) {
+        
+        self.tableviewleadingConstraint.constant = 20;
+        self.tableviewtrailingConstraint.constant = 20;
+        self.view1LeadingConstraint.constant = 20;
+        self.view1TrailingConstraint.constant = 20;
+    }
 
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     

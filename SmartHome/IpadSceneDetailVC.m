@@ -202,17 +202,6 @@
         cell.NewLightPowerBtn.selected = device.power;//开关状态
         cell.NewLightSlider.value = (float)device.bright/100.0f;//亮度状态
         
-//        if (_isGloom) {
-//            cell.NewLightPowerBtn.selected = YES;//开关状态
-//            cell.NewLightSlider.value = 20.0f/100.0f;//亮度状态
-//        }else if (_isRomantic) {
-//            cell.NewLightPowerBtn.selected = YES;//开关状态
-//            cell.NewLightSlider.value = 50.0f/100.0f;//亮度状态
-//        }else if (_isSprightly) {
-//            cell.NewLightPowerBtn.selected = YES;//开关状态
-//            cell.NewLightSlider.value = 90.0f/100.0f;//亮度状态
-//        }
-        
         return cell;
     }if (indexPath.section == 1) {//调色灯
         NewColourCell * newColourCell = [tableView dequeueReusableCellWithIdentifier:@"NewColourCell" forIndexPath:indexPath];

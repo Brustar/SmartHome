@@ -30,6 +30,12 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *typeBtns;
 @property (nonatomic,strong) NSArray * array;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableviewLeadingConstraint;//左边距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableviewTrailingConstraint;//右边距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *view1LeadingConstrain;//左边距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *view1TrailingConstraint;//右边距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pushTypeViewConstraintLeading;//左边距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pushTypeConstraintTrailing;//右边距离
 
 @end
 
@@ -68,7 +74,18 @@
     }
     return _recordIDs;
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    if (ON_IPAD) {
+        self.tableviewLeadingConstraint.constant = 20;
+        self.tableviewTrailingConstraint.constant = 20;
+        self.view1TrailingConstraint.constant = 20;
+        self.view1LeadingConstrain.constant = 20;
+        self.pushTypeConstraintTrailing.constant = 20;
+        self.pushTypeViewConstraintLeading.constant = 20;
+    }
 
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -153,7 +170,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PushSettingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PushSettingCell" forIndexPath:indexPath];
-//    cell.backgroundColor = [UIColor lightGrayColor];
+    cell.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
     cell.SettingNameLabel.text = self.names[indexPath.row];
 //    cell.TypeLabel.hidden = YES;
     
