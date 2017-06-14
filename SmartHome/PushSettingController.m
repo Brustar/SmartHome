@@ -90,6 +90,10 @@
     [super viewDidLoad];
 
     [self setNaviBarTitle:@"推送设置"];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [self adjustNaviBarFrameForSplitView];
+        [self adjustTitleFrameForSplitView];
+    }
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.coverView.hidden = YES;
     self.pushTypeView.hidden = YES;

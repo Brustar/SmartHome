@@ -538,9 +538,9 @@
     {
         NSString *sql ;
         if ([self isWholeHouse:roomID]) {
-            sql = [NSString stringWithFormat:@"SELECT distinct typeName,htypeid FROM Devices where subtypeid = %d order by htypeID",typeID];
+            sql = [NSString stringWithFormat:@"SELECT distinct typeName,htypeid FROM Devices where htypeid<>45 and subtypeid = %d order by htypeID",typeID];
         }else{
-            sql = [NSString stringWithFormat:@"SELECT distinct typeName,htypeid FROM Devices where subtypeid = %d and rID = '%d order by htypeID'",typeID,roomID];
+            sql = [NSString stringWithFormat:@"SELECT distinct typeName,htypeid FROM Devices where htypeid<>45 and subtypeid = %d and rID = '%d order by htypeID'",typeID,roomID];
         }
         FMResultSet *resultSet = [db executeQuery:sql];
         int i=0;
@@ -1061,9 +1061,9 @@
     NSMutableArray *catalogs = [NSMutableArray new];
     NSString *sql;
     if ([self isWholeHouse:roomID]) {
-        sql = @"select subtypename,subtypeid from devices where subtypeid<>6 and subtypeid<>4 and subtypeid<>0  group by subtypeid";
+        sql = @"select subtypename,subtypeid from devices where subtypeid<>6 and subtypeid<>0  group by subtypeid";
     }else{
-        sql = [NSString stringWithFormat:@"select subtypename,subtypeid from devices where subtypeid<>6 and subtypeid<>4 and subtypeid<>0 and rid = %d group by subtypeid" ,roomID];
+        sql = [NSString stringWithFormat:@"select subtypename,subtypeid from devices where subtypeid<>6 and subtypeid<>0 and rid = %d group by subtypeid" ,roomID];
     }
     
     FMDatabase *db = [self connetdb];

@@ -21,6 +21,11 @@
 //房间id
 @property (nonatomic,assign) int roomID;
 @property (strong, nonatomic) Scene *scene;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *BjmusicHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bdIconLeadingConstraint;//音量小距离左边的距离
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bgIconTadilingConst;//音量小距离右边的距离
+
 @property (nonatomic, assign) id<BjMusicTableViewCellDelegate>delegate;
 
 @end

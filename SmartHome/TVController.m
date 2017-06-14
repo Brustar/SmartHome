@@ -222,7 +222,7 @@
     
     KeypadView *view = array[0];
     view.deviceid = self.deviceid;
-    view.transform = CGAffineTransformMakeRotation(M_PI_2);
+    view.transform = CGAffineTransformMakeRotation(-M_PI_2);
     [view show];
 }
 

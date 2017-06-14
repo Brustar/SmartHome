@@ -59,7 +59,7 @@
                             <constraint firstAttribute="height" constant="46" id="fDm-ga-jYX"/>
                             <constraint firstAttribute="width" constant="46" id="wIs-Kg-1aO"/>
                         </constraints>
-                        <state key="normal" backgroundImage="ipad-icon_light_on"/>
+                        <state key="normal" image="lv_icon_light_on"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4XC-eG-fQJ">
                         <rect key="frame" x="414" y="11" width="46" height="46"/>
@@ -119,8 +119,8 @@
         <image name="ipad-frm_adjust_nol" width="337" height="33"/>
         <image name="ipad-frm_adjustt_nol" width="209" height="10"/>
         <image name="ipad-icon_add_nol" width="19" height="19"/>
-        <image name="ipad-icon_light_on" width="23" height="23"/>
         <image name="lv_icon_adjust_high" width="14" height="14"/>
         <image name="lv_icon_adjust_low" width="10" height="10"/>
+        <image name="lv_icon_light_on" width="36" height="36"/>
     </resources>
 </document>

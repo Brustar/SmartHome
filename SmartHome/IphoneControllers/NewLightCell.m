@@ -11,6 +11,7 @@
 #import "Light.h"
 #import "SocketManager.h"
 #import "SceneManager.h"
+#import "PackManager.h" 
 
 @implementation NewLightCell
 
@@ -27,7 +28,17 @@
     [self.NewLightSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     [self.NewLightPowerBtn setImage:[UIImage imageNamed:@"lv_icon_light_off"] forState:UIControlStateNormal];
     [self.NewLightPowerBtn setImage:[UIImage imageNamed:@"lv_icon_light_on"] forState:UIControlStateSelected];
+    SocketManager *sock=[SocketManager defaultManager];
+    sock.delegate=self;
+    //查询设备状态
+    NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
+    [sock.socket writeData:data withTimeout:1 tag:1];
     
+    if (ON_IPAD) {
+        self.supImageViewHeight.constant = 85;
+        self.NewLightNameLabel.font = [UIFont systemFontOfSize:17];
+         [self.AddLightBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
+    }
     
 }
 - (IBAction)save:(id)sender {
@@ -92,7 +103,12 @@
            self.AddLightBtn.selected = !self.AddLightBtn.selected;
        
         if (self.AddLightBtn.selected) {
-            [self.AddLightBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+            if (ON_IPAD) {
+                 [self.AddLightBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
+            }else{
+                 [self.AddLightBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+            }
+           
             [_scene setSceneID:[self.sceneid intValue]];
             [_scene setRoomID:self.roomID];
             [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
@@ -104,8 +120,12 @@
             [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
             
          }else{
-            [self.AddLightBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
-             
+             if (ON_IPAD) {
+                  [self.AddLightBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
+             }else{
+                  [self.AddLightBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
+             }
+           
              [_scene setSceneID:[self.sceneid intValue]];
              [_scene setRoomID:self.roomID];
              [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
@@ -125,5 +145,29 @@
      }
 
 }
-
+#pragma mark - TCP recv delegate
+-(void)recv:(NSData *)data withTag:(long)tag
+{
+    Proto proto=protocolFromData(data);
+    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
+        return;
+    }
+    //同步设备状态
+    if(proto.cmd == 0x01){
+        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+        if ([devID intValue]==[self.deviceid intValue]) {
+            if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) {
+                self.NewLightPowerBtn.selected = proto.action.state;
+            }else if(proto.action.state == 0x1A){
+                int brightness_f = proto.action.RValue;
+//                float degree = M_PI*brightness_f/MAX_ROTATE_DEGREE;
+//                self.tranformView.transform = CGAffineTransformMakeRotation(degree);
+            }else if(proto.action.state == 0x1B){
+//                self.base.backgroundColor=[UIColor colorWithRed:proto.action.RValue/255.0 green:proto.action.G/255.0  blue:proto.action.B/255.0  alpha:1];
+            }
+            
+        }
+    }
+    
+}
 @end

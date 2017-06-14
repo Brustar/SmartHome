@@ -34,7 +34,11 @@
     
     [self.colourBtn setImage:[UIImage imageNamed:@"lv_icon_light_on"] forState:UIControlStateSelected];
     [self.colourBtn setImage:[UIImage imageNamed:@"lv_icon_light_off"] forState:UIControlStateNormal];
-    
+    if (ON_IPAD) {
+        self.SupImageViewHeight.constant = 85;
+        self.colourNameLabel.font = [UIFont systemFontOfSize:17];
+       [self.AddColourLightBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
+    }
 }
 
 - (IBAction)save:(id)sender {
@@ -63,7 +67,13 @@
     }else if (sender == self.AddColourLightBtn){
         self.AddColourLightBtn.selected = !self.AddColourLightBtn.selected;
         if (self.AddColourLightBtn.selected) {
-            [self.AddColourLightBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+            
+            if (ON_IPAD) {
+                 [self.AddColourLightBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
+            }else{
+                 [self.AddColourLightBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+            }
+           
             
             [_scene setSceneID:[self.sceneid intValue]];
             [_scene setRoomID:self.roomID];
@@ -76,7 +86,12 @@
             [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
             
         }else{
-            [self.AddColourLightBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
+            if (ON_IPAD) {
+                 [self.AddColourLightBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
+            }else{
+                 [self.AddColourLightBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
+            }
+           
             
             [_scene setSceneID:[self.sceneid intValue]];
             [_scene setRoomID:self.roomID];

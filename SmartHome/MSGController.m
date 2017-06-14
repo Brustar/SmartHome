@@ -146,6 +146,10 @@
     [super viewDidLoad];
     [MBProgressHUD hideHUD];
     [self setNaviBarTitle:@"通知"];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [self adjustNaviBarFrameForSplitView];
+        [self adjustTitleFrameForSplitView];
+    }
     
 }
 -(void)sendRequestForDetailMsgWithItemId:(int)itemID

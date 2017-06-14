@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *close;
 @property (weak, nonatomic) IBOutlet UILabel *valueLabel;
 @property (weak, nonatomic) IBOutlet UIButton *open;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *supImageViewHeight;
 
 @property (nonatomic,assign) int roomID;
 @property (weak,nonatomic) NSString *deviceid;

@@ -22,6 +22,9 @@
 //@property (nonatomic,assign) NSInteger sceneID;
 @property (weak, nonatomic) IBOutlet UIButton *AddLightBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *LightConstraint;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *supImageViewHeight;
+
 @property (nonatomic, assign) id<NewLightCellDelegate> delegate;
 
 @end

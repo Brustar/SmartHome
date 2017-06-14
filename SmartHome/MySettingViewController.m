@@ -62,6 +62,10 @@
 - (void)setupNaviBar {
     
     [self setNaviBarTitle:@"设置"]; //设置标题
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [self adjustNaviBarFrameForSplitView];
+        [self adjustTitleFrameForSplitView];
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

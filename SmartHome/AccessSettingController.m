@@ -118,6 +118,10 @@
     [super viewDidLoad];
   
     [self setNaviBarTitle:@"权限控制"];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [self adjustNaviBarFrameForSplitView];
+        [self adjustTitleFrameForSplitView];
+    }
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.userTableView.tableFooterView = [UIView new];
    

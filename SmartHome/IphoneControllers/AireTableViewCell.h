@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *AireConstraint;
 @property (nonatomic, assign) id<AireTableViewCellDelegate>delegate;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *supImageViewHeight;
 
 
 @end

@@ -22,9 +22,10 @@
 #import "AddDeviceCell.h"
 #import "IphoneNewAddSceneVC.h"
 #import "IpadDVDTableViewCell.h"
-#import "IpadNewLightCell.h"
+//#import "IpadNewLightCell.h"
+#import "NewLightCell.h"
 #import "IpadTVCell.h"
-#import "IpadAireTableViewCell.h"
+#import "AireTableViewCell.h"
 
 
 
@@ -96,7 +97,7 @@
     _IntelligentArray = [[NSMutableArray alloc] init];
     _ColourLightArr = [[NSMutableArray alloc] init];
     _SwitchLightArr = [[NSMutableArray alloc] init];
-    [self.tableView registerNib:[UINib nibWithNibName:@"IpadAireTableViewCell" bundle:nil] forCellReuseIdentifier:@"IpadAireTableViewCell"];//空调
+    [self.tableView registerNib:[UINib nibWithNibName:@"AireTableViewCell" bundle:nil] forCellReuseIdentifier:@"AireTableViewCell"];//空调
     [self.tableView registerNib:[UINib nibWithNibName:@"CurtainTableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainTableViewCell"];//窗帘
     [self.tableView registerNib:[UINib nibWithNibName:@"IpadTVCell" bundle:nil] forCellReuseIdentifier:@"IpadTVCell"];//网络电视
     [self.tableView registerNib:[UINib nibWithNibName:@"NewColourCell" bundle:nil] forCellReuseIdentifier:@"NewColourCell"];//调色灯
@@ -106,7 +107,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"IpadDVDTableViewCell" bundle:nil] forCellReuseIdentifier:@"IpadDVDTableViewCell"];//DVD
     [self.tableView registerNib:[UINib nibWithNibName:@"BjMusicTableViewCell" bundle:nil] forCellReuseIdentifier:@"BjMusicTableViewCell"];//背景音乐
     [self.tableView registerNib:[UINib nibWithNibName:@"AddDeviceCell" bundle:nil] forCellReuseIdentifier:@"AddDeviceCell"];//添加设备的cell
-    [self.tableView registerNib:[UINib nibWithNibName:@"IpadNewLightCell" bundle:nil] forCellReuseIdentifier:@"IpadNewLightCell"];//调光灯
+    [self.tableView registerNib:[UINib nibWithNibName:@"NewLightCell" bundle:nil] forCellReuseIdentifier:@"NewLightCell"];//调光灯
     [self.tableView registerNib:[UINib nibWithNibName:@"FMTableViewCell" bundle:nil] forCellReuseIdentifier:@"FMTableViewCell"];//FM
 //    NSArray *lightArr = [SQLManager getDeviceIDsBySeneId:self.sceneID];
     
@@ -189,7 +190,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {//调灯光
-        IpadNewLightCell *cell = [tableView dequeueReusableCellWithIdentifier:@"IpadNewLightCell" forIndexPath:indexPath];
+        NewLightCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewLightCell" forIndexPath:indexPath];
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.AddLightBtn.hidden = YES;
@@ -227,7 +228,7 @@
         return newColourCell;
     }
     if (indexPath.section == 3) {//空调
-        IpadAireTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"IpadAireTableViewCell" forIndexPath:indexPath];
+        AireTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"IAireTableViewCell" forIndexPath:indexPath];
         aireCell.AddAireBtn.hidden = YES;
         aireCell.AireConstraint.constant = 10;
         aireCell.backgroundColor =[UIColor clearColor];
@@ -359,17 +360,16 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 8 || indexPath.section == 0 || indexPath.section == 3) {
+    if ( indexPath.section == 0 || indexPath.section == 3 || indexPath.section == 10 || indexPath.section == 11 || indexPath.section == 1 || indexPath.section == 2 || indexPath.section == 4) {
         return 150;
     }
     if (indexPath.section == 9 || indexPath.section == 7 || indexPath.section == 12) {
         return 80;
     }
-    if (indexPath.section == 5 || indexPath.section == 6) {
+    if (indexPath.section == 5 || indexPath.section == 6 || indexPath.section == 8 ) {
         return 210;
     }
     return 100;
 }
-
 
 @end

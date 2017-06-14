@@ -70,6 +70,10 @@
     [super viewDidLoad];
     
     [self setNaviBarTitle:@"系统设置"];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [self adjustNaviBarFrameForSplitView];
+        [self adjustTitleFrameForSplitView];
+    }
     self.automaticallyAdjustsScrollViewInsets = NO;
 
     self.tableView.tableFooterView = [UIView new];
