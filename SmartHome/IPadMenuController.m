@@ -20,6 +20,14 @@ static NSString *const leftMenuCell = @"leftMenuCell";
 
 @implementation IPadMenuController
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    if (self.typeID != light) {
+        Device *device = [self.types objectAtIndex:0];
+        [self showDetailViewController:[DeviceInfo calcController:device.hTypeId] sender:self];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.s
