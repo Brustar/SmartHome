@@ -599,7 +599,7 @@
                                     <action selector="controlCmd:" destination="ZhE-q2-gFO" eventType="touchUpInside" id="seq-Gd-mof"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WNJ-XC-xjc">
+                            <button hidden="YES" opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WNJ-XC-xjc">
                                 <rect key="frame" x="518" y="492" width="30" height="30"/>
                                 <state key="normal" title="CH-">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
