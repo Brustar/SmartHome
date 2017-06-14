@@ -38,6 +38,12 @@
     UIImage *trackRightImage;
     if (ON_IPAD) {
           trackRightImage = [[UIImage imageNamed:@"Ipad-fm_adjustt"]stretchableImageWithLeftCapWidth:14 topCapHeight:0];
+        self.IpadHomePageBgHeight.constant = 85;
+        self.FMchoiceHeight.constant = 85;
+        self.FMNameLabel.font = [UIFont systemFontOfSize:17];
+        self.fmchannelSliderTopConstraint.constant = -10;
+         [self.AddFmBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
+        
     }else{
          trackRightImage = [[UIImage imageNamed:@"ss"]stretchableImageWithLeftCapWidth:14 topCapHeight:0];
     }
@@ -80,7 +86,11 @@
     }else if (sender == self.AddFmBtn) {
         self.AddFmBtn.selected = !self.AddFmBtn.selected;
         if (self.AddFmBtn.selected) {
-            [self.AddFmBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+            if (ON_IPAD) {
+                [self.AddFmBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
+            }else{
+                [self.AddFmBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+            }
             
             [_scene setSceneID:[self.sceneid intValue]];
             [_scene setRoomID:self.roomID];
@@ -94,8 +104,12 @@
             [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
             
         }else{
-            [self.AddFmBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
-            
+            if (ON_IPAD) {
+                 [self.AddFmBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
+            }else{
+                 [self.AddFmBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
+            }
+           
             [_scene setSceneID:[self.sceneid intValue]];
             [_scene setRoomID:self.roomID];
             [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];

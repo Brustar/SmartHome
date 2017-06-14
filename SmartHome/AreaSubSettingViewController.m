@@ -55,6 +55,10 @@
     // Do any additional setup after loading the view.
 
     [self setNaviBarTitle:@"权限设置"];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [self adjustNaviBarFrameForSplitView];
+        [self adjustTitleFrameForSplitView];
+    }
     self.tableView.tableHeaderView = self.headerView;
     NSString *url = [NSString stringWithFormat:@"%@Cloud/room_authority.aspx",[IOManager httpAddr]];
     self.userName.text = self.userNameTitle;

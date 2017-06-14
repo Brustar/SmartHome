@@ -24,7 +24,21 @@
 //房间id
 @property (nonatomic,assign) int roomID;
 @property (strong, nonatomic) Scene *scene;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *upBtnLeadingConst;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *upBtnConstraint;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *downBtnConst;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *downBtnConstraint;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ImageSupViewHeightConstraint;
+
 @property (nonatomic, assign) id<ScreenCurtainCellDelegate>delegate;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *dvdImageViewConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *downBtnBottomConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *stopBtnBottomConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *stopBtnHeightConst;
 
 @end
 

@@ -452,6 +452,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view alpha="0.84999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CDT-4E-5HN">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tfP-gB-6bQ" userLabel="bg">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -563,9 +567,13 @@
                             <constraint firstItem="57D-bi-KJo" firstAttribute="top" secondItem="Nxw-dE-3MV" secondAttribute="bottom" constant="168" id="aBq-OL-0Kl"/>
                             <constraint firstItem="tfP-gB-6bQ" firstAttribute="leading" secondItem="4Wy-ln-wJ2" secondAttribute="leading" id="bHH-Je-y2z"/>
                             <constraint firstAttribute="bottom" secondItem="tfP-gB-6bQ" secondAttribute="bottom" id="bVo-bO-7ad"/>
+                            <constraint firstItem="CDT-4E-5HN" firstAttribute="top" secondItem="4Wy-ln-wJ2" secondAttribute="top" id="doF-ZV-PUV"/>
+                            <constraint firstAttribute="trailing" secondItem="CDT-4E-5HN" secondAttribute="trailing" id="ebb-ee-eza"/>
                             <constraint firstAttribute="trailing" secondItem="Nxw-dE-3MV" secondAttribute="trailing" constant="35" id="hma-9q-lI8"/>
                             <constraint firstItem="Nxw-dE-3MV" firstAttribute="top" secondItem="eng-QB-5iB" secondAttribute="bottom" constant="80" id="k0Z-dt-qVq"/>
+                            <constraint firstItem="CDT-4E-5HN" firstAttribute="leading" secondItem="4Wy-ln-wJ2" secondAttribute="leading" id="lNQ-VV-2RT"/>
                             <constraint firstItem="tfP-gB-6bQ" firstAttribute="top" secondItem="4Wy-ln-wJ2" secondAttribute="top" id="npK-2v-v3k"/>
+                            <constraint firstAttribute="bottom" secondItem="CDT-4E-5HN" secondAttribute="bottom" id="xKZ-r9-Cli"/>
                         </constraints>
                     </view>
                     <connections>
@@ -584,7 +592,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Ipad-MessageIcon1" width="26" height="22"/>
+        <image name="Ipad-MessageIcon1" width="28" height="24"/>
         <image name="Video-add" width="25" height="25"/>
         <image name="Video-frame2" width="288" height="359"/>
         <image name="background" width="375" height="667"/>

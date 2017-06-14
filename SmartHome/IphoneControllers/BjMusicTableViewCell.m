@@ -31,6 +31,14 @@
     self.BjSlider.continuous = NO;
     [self.BjPowerButton setImage:[UIImage imageNamed:@"music-red"] forState:UIControlStateSelected];
     [self.BjPowerButton setImage:[UIImage imageNamed:@"music_white"] forState:UIControlStateNormal];
+    
+    if (ON_IPAD) {
+        self.BjmusicHeightConstraint.constant = 85;
+        self.bdIconLeadingConstraint.constant = 33;
+        self.bgIconTadilingConst.constant = 33;
+        self.BjMusicNameLb.font = [UIFont systemFontOfSize:17];
+           [self.AddBjmusicBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
+    }
 }
 
 - (IBAction)save:(id)sender {
@@ -74,7 +82,12 @@
     }else if (sender == self.AddBjmusicBtn){
         self.AddBjmusicBtn.selected = !self.AddBjmusicBtn.selected;
         if (self.AddBjmusicBtn.selected) {
-             [self.AddBjmusicBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+            if (ON_IPAD) {
+                [self.AddBjmusicBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
+            }else{
+                [self.AddBjmusicBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+            }
+           
            
             [_scene setSceneID:[self.sceneid intValue]];
             [_scene setRoomID:self.roomID];
@@ -87,8 +100,11 @@
             [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
             
         }else{
-             [self.AddBjmusicBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
-           
+            if (ON_IPAD) {
+                 [self.AddBjmusicBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
+            }else{
+                 [self.AddBjmusicBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
+            }
             
             [_scene setSceneID:[self.sceneid intValue]];
             [_scene setRoomID:self.roomID];

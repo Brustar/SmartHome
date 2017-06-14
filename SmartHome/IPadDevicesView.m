@@ -274,7 +274,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 FMCell.FMNameLabel.text = device.name;
                 FMCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
                 FMCell.AddFmBtn.hidden = YES;
-                FMCell.FMLayouConstraint.constant = 5;
+//                FMCell.FMLayouConstraint.constant = 5;
                 FMCell.tag = device.eID;
                 return FMCell;
             }

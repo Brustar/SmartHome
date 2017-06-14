@@ -22,6 +22,10 @@
 
 - (void)setupNaviBar {
     [self setNaviBarTitle:@"场景快捷键"];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [self adjustNaviBarFrameForSplitView];
+        [self adjustTitleFrameForSplitView];
+    }
     _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(saveBtnClicked:)];
     [self setNaviBarRightBtn:_naviRightBtn];
     

@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     // 初始化分割视图控制器
     UISplitViewController *splitViewController = [[UISplitViewController alloc] init];
     
@@ -52,7 +52,9 @@
 
 - (void)setupNaviBar {
     
-    [self setNaviBarTitle:@"添加场景"]; //设置标题
+    NSString * roomName =[SQLManager getRoomNameByRoomID:self.roomID];
+    self.title = [SQLManager getSceneName:self.sceneID];
+    [self setNaviBarTitle:[NSString stringWithFormat:@"%@-%@",roomName,self.title]]; //设置标题
     
     _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
     

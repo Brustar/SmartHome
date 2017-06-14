@@ -35,7 +35,11 @@
     NSInteger n = _cameraIDArray.count;
     CGFloat gap = 10.0f;
     CGFloat itemHeight = 260.0f;
-    _cameraList.contentSize = CGSizeMake(UI_SCREEN_WIDTH, (itemHeight+gap)*n);
+    if (ON_IPAD) {
+        itemHeight = 480;
+    }
+    _cameraList.contentSize = CGSizeMake(0, (itemHeight+gap)*n);
+
     
     for (NSInteger i = 0; i < n ; i++) {
         NSString *cameraURL = [SQLManager getCameraUrlByDeviceID:[_cameraIDArray[i] intValue]];
@@ -54,7 +58,6 @@
         
     }
     [self setNaviBarTitle:@"视频动态"];
-    
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         [self adjustNaviBarFrameForSplitView];
         [self adjustTitleFrameForSplitView];
@@ -93,12 +96,18 @@
 }
 
 - (void)onFullScreenBtnClicked:(UIButton *)sender  cameraImageView:(UIImageView *)imageView {
-    UIView *fullScreenBg = [[UIView alloc] initWithFrame:self.view.bounds];
+    UIView *fullScreenBg = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT)];
     fullScreenBg.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
-    _fullScreenImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 200, UI_SCREEN_WIDTH, 300)];
+    CGFloat fullHeight = 300;
+    CGFloat full_Y = 200;
+    if (ON_IPAD) {
+        fullHeight = 768;
+        full_Y = 0;
+    }
+    _fullScreenImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, full_Y, UI_SCREEN_WIDTH, fullHeight)];
     [fullScreenBg addSubview:_fullScreenImageView];
     self.fullScreenViewBg = fullScreenBg;
-    [self.view addSubview:fullScreenBg];
+    [self.tabBarController.view addSubview:fullScreenBg];
     _fullScreenImageView.image = imageView.image;
     fullScreenBg.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeView)];

@@ -43,6 +43,10 @@
     [super viewDidLoad];
    
        [self setNaviBarTitle:@"系统信息"];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [self adjustNaviBarFrameForSplitView];
+        [self adjustTitleFrameForSplitView];
+    }
        self.automaticallyAdjustsScrollViewInsets = NO;
        self.titles = @[@"家庭名称",@"主机编号",@"主机品牌",@"主机型号"];
        self.tableView.tableFooterView = [UIView new];

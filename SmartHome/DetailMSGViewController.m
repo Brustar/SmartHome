@@ -47,6 +47,10 @@
 - (void)setupNaviBar {
    
     [self setNaviBarTitle:@"消息通知"];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [self adjustNaviBarFrameForSplitView];
+        [self adjustTitleFrameForSplitView];
+    }
     
     _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"编辑" target:self action:@selector(rightBtnClicked:)];
     [self setNaviBarRightBtn:_naviRightBtn];

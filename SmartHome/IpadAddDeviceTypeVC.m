@@ -22,9 +22,10 @@
 #import "AddDeviceCell.h"
 #import "IphoneNewAddSceneVC.h"
 #import "MBProgressHUD+NJ.h"
-#import "IpadNewLightCell.h"
+//#import "IpadNewLightCell.h"
+#import "NewLightCell.h"
 #import "IpadTVCell.h"
-#import "IpadAireTableViewCell.h"
+#import "AireTableViewCell.h"
 #import "IpadDVDTableViewCell.h"
 
 
@@ -60,6 +61,7 @@
     [super viewDidLoad];
     
     self.tableView.tableFooterView = [UIView new];
+       self.tableView.allowsSelection = NO;
     
 }
 -(void)refreshData:(NSArray *)data
@@ -93,7 +95,7 @@
     _IntelligentArray = [[NSMutableArray alloc] init];
     _ColourLightArr = [[NSMutableArray alloc] init];
     _SwitchLightArr = [[NSMutableArray alloc] init];
-    [self.tableView registerNib:[UINib nibWithNibName:@"IpadAireTableViewCell" bundle:nil] forCellReuseIdentifier:@"IpadAireTableViewCell"];//空调
+    [self.tableView registerNib:[UINib nibWithNibName:@"AireTableViewCell" bundle:nil] forCellReuseIdentifier:@"AireTableViewCell"];//空调
     [self.tableView registerNib:[UINib nibWithNibName:@"CurtainTableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainTableViewCell"];//窗帘
     [self.tableView registerNib:[UINib nibWithNibName:@"IpadTVCell" bundle:nil] forCellReuseIdentifier:@"IpadTVCell"];//网络电视
     [self.tableView registerNib:[UINib nibWithNibName:@"NewColourCell" bundle:nil] forCellReuseIdentifier:@"NewColourCell"];//调色灯
@@ -103,7 +105,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"IpadDVDTableViewCell" bundle:nil] forCellReuseIdentifier:@"IpadDVDTableViewCell"];//DVD
     [self.tableView registerNib:[UINib nibWithNibName:@"BjMusicTableViewCell" bundle:nil] forCellReuseIdentifier:@"BjMusicTableViewCell"];//背景音乐
     [self.tableView registerNib:[UINib nibWithNibName:@"AddDeviceCell" bundle:nil] forCellReuseIdentifier:@"AddDeviceCell"];//添加设备的cell
-     [self.tableView registerNib:[UINib nibWithNibName:@"IpadNewLightCell" bundle:nil] forCellReuseIdentifier:@"IpadNewLightCell"];//调光灯
+     [self.tableView registerNib:[UINib nibWithNibName:@"NewLightCell" bundle:nil] forCellReuseIdentifier:@"NewLightCell"];//调光灯
     [self.tableView registerNib:[UINib nibWithNibName:@"FMTableViewCell" bundle:nil] forCellReuseIdentifier:@"FMTableViewCell"];//FM
     //    NSArray *lightArr = [SQLManager getDeviceIDsBySeneId:self.sceneID];
     
@@ -183,7 +185,9 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {//调灯光
-        IpadNewLightCell *cell = [tableView dequeueReusableCellWithIdentifier:@"IpadNewLightCell" forIndexPath:indexPath];
+        
+         [self.tableView setSeparatorStyle: UITableViewCellSeparatorStyleNone];
+        NewLightCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewLightCell" forIndexPath:indexPath];
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         Device *device = [SQLManager getDeviceWithDeviceID:[_lightArray[indexPath.row] intValue]];
@@ -207,6 +211,7 @@
         
         return cell;
     }if (indexPath.section == 1) {//调色灯
+         [self.tableView setSeparatorStyle: UITableViewCellSeparatorStyleNone];
         NewColourCell * newColourCell = [tableView dequeueReusableCellWithIdentifier:@"NewColourCell" forIndexPath:indexPath];
         newColourCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[indexPath.row] intValue]];
@@ -215,6 +220,7 @@
         
         return newColourCell;
     }if (indexPath.section == 2) {//开关灯
+         [self.tableView setSeparatorStyle: UITableViewCellSeparatorStyleNone];
         NewColourCell * newColourCell = [tableView dequeueReusableCellWithIdentifier:@"NewColourCell" forIndexPath:indexPath];
         newColourCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_SwitchLightArr[indexPath.row] intValue]];
@@ -224,11 +230,13 @@
         newColourCell.lowImageView.hidden = YES;
         newColourCell.highImageView.hidden = YES;
         newColourCell.colourSlider.hidden = YES;
+        newColourCell.subImageView.hidden = YES;
         
         return newColourCell;
     }
     if (indexPath.section == 3) {//空调
-        IpadAireTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"IpadAireTableViewCell" forIndexPath:indexPath];
+         [self.tableView setSeparatorStyle: UITableViewCellSeparatorStyleNone];
+        AireTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"AireTableViewCell" forIndexPath:indexPath];
         aireCell.backgroundColor =[UIColor clearColor];
         aireCell.roomID = self.roomID;
         aireCell.sceneid = self.sceneid;
@@ -238,6 +246,7 @@
         
         return aireCell;
     }if (indexPath.section == 4) {//窗帘
+         [self.tableView setSeparatorStyle: UITableViewCellSeparatorStyleNone];
         CurtainTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
         aireCell.backgroundColor = [UIColor clearColor];
         aireCell.roomID = self.roomID;
@@ -248,6 +257,7 @@
         
         return aireCell;
     }if (indexPath.section == 5) {//TV
+         [self.tableView setSeparatorStyle: UITableViewCellSeparatorStyleNone];
         IpadTVCell * TVCell = [tableView dequeueReusableCellWithIdentifier:@"IpadTVCell" forIndexPath:indexPath];
         TVCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_TVArray[indexPath.row] intValue]];
@@ -256,6 +266,7 @@
         
         return TVCell;
     }if (indexPath.section == 6) {//DVD
+         [self.tableView setSeparatorStyle: UITableViewCellSeparatorStyleNone];
         IpadDVDTableViewCell * DVDCell = [tableView dequeueReusableCellWithIdentifier:@"IpadDVDTableViewCell" forIndexPath:indexPath];
         DVDCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_DVDArray[indexPath.row] intValue]];
@@ -264,6 +275,7 @@
         
         return DVDCell;
     }if (indexPath.section == 7) {//投影
+         [self.tableView setSeparatorStyle: UITableViewCellSeparatorStyleNone];
         OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
         otherCell.backgroundColor = [UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_ProjectArray[indexPath.row] intValue]];
@@ -273,6 +285,7 @@
         
         return otherCell;
     }if (indexPath.section == 8) {//FM
+         [self.tableView setSeparatorStyle: UITableViewCellSeparatorStyleNone];
         FMTableViewCell * FMCell = [tableView dequeueReusableCellWithIdentifier:@"FMTableViewCell" forIndexPath:indexPath];
         FMCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_FMArray[indexPath.row] intValue]];
@@ -291,6 +304,7 @@
         
         return otherCell;
     }if (indexPath.section == 10) {//幕布
+         [self.tableView setSeparatorStyle: UITableViewCellSeparatorStyleNone];
         ScreenCurtainCell * ScreenCell = [tableView dequeueReusableCellWithIdentifier:@"ScreenCurtainCell" forIndexPath:indexPath];
         ScreenCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_MBArray[indexPath.row] intValue]];
@@ -300,6 +314,7 @@
         
         return ScreenCell;
     }if (indexPath.section == 11) {//背景音乐
+         [self.tableView setSeparatorStyle: UITableViewCellSeparatorStyleNone];
         BjMusicTableViewCell * BjMusicCell = [tableView dequeueReusableCellWithIdentifier:@"BjMusicTableViewCell" forIndexPath:indexPath];
         BjMusicCell.backgroundColor = [UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_BJMusicArray[indexPath.row] intValue]];
@@ -309,7 +324,8 @@
         
         return BjMusicCell;
     }
-    
+     [self.tableView setSeparatorStyle: UITableViewCellSeparatorStyleSingleLine];
+     [self.tableView setSeparatorColor:[UIColor lightGrayColor]];
         OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
         otherCell.backgroundColor = [UIColor clearColor];
         otherCell.deviceid = _OtherArray[indexPath.row];
@@ -330,13 +346,13 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 8 || indexPath.section == 0 || indexPath.section == 3) {
+    if ( indexPath.section == 0 || indexPath.section == 3 || indexPath.section == 10 || indexPath.section == 11 || indexPath.section == 1 || indexPath.section == 2 || indexPath.section == 4) {
         return 150;
     }
     if (indexPath.section == 9 || indexPath.section == 7 || indexPath.section == 12) {
         return 80;
     }
-    if (indexPath.section == 5 || indexPath.section == 6) {
+    if (indexPath.section == 5 || indexPath.section == 6 || indexPath.section == 8 ) {
         return 210;
     }
     return 100;

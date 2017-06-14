@@ -528,8 +528,18 @@
                     </view>
                     <connections>
                         <outlet property="adjustBtn" destination="T5C-GP-Hcp" id="INc-bS-dae"/>
+                        <outlet property="adjustBtnBottom" destination="BFy-mx-oAs" id="Ejk-5y-vEW"/>
+                        <outlet property="adjustBtnLeading" destination="h6q-dZ-2we" id="I7y-oh-14r"/>
                         <outlet property="cameraImgView" destination="l5W-2z-RSA" id="bUs-Ke-joa"/>
+                        <outlet property="cameraViewBottom" destination="cZ8-6b-hkx" id="BYP-HE-LG9"/>
+                        <outlet property="cameraViewLeading" destination="rKw-MB-kpp" id="ylx-EE-dnm"/>
+                        <outlet property="cameraViewTop" destination="piF-y2-S9q" id="yxz-D3-MFx"/>
+                        <outlet property="cameraViewTrailing" destination="y3P-kp-gIf" id="p1i-NL-LKy"/>
                         <outlet property="fullScreenBtn" destination="6jJ-Vp-CpM" id="5j4-a5-zEr"/>
+                        <outlet property="fullScreenBtnBottom" destination="iZn-Pg-2uv" id="szY-Fo-DN9"/>
+                        <outlet property="fullScreenBtnTrailing" destination="3ty-HZ-I2n" id="M3p-59-iyp"/>
+                        <outlet property="monitorViewHeight" destination="BbO-9e-4sB" id="H3N-15-8fY"/>
+                        <outlet property="rNameLabelBottom" destination="C7H-YC-kxB" id="wUd-Zy-0h7"/>
                         <outlet property="roomNameLabel" destination="PFI-dA-eiC" id="MUN-Cp-L78"/>
                     </connections>
                 </viewController>
@@ -576,8 +586,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="deviceTableTop" destination="uR0-Ci-Nty" id="F6v-XM-405"/>
                         <outlet property="deviceTableView" destination="dlA-Xi-AOS" id="W1G-Ky-p2g"/>
                         <outlet property="monitorView" destination="F5k-9Z-kIJ" id="r59-Nd-Cfq"/>
+                        <outlet property="monitorViewHeight" destination="K21-mi-A2w" id="qzG-My-rjx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xeL-48-DM0" userLabel="First Responder" sceneMemberID="firstResponder"/>

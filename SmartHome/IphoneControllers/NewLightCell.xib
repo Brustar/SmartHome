@@ -18,50 +18,57 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lv_fm_adjust_normal" translatesAutoresizingMaskIntoConstraints="NO" id="ieh-Kl-c79">
-                        <rect key="frame" x="0.0" y="50" width="375" height="50"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ipad-HomePageBg" translatesAutoresizingMaskIntoConstraints="NO" id="ieh-Kl-c79">
+                        <rect key="frame" x="0.0" y="52" width="375" height="50"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="50" id="13E-mP-fXY"/>
+                            <constraint firstAttribute="height" constant="50" id="PlJ-zN-gje"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ipad-HomePagesubBg" translatesAutoresizingMaskIntoConstraints="NO" id="L7P-wF-na9">
+                        <rect key="frame" x="20" y="67" width="335" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="f99-Fk-PSO"/>
                         </constraints>
                     </imageView>
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="BCT-l9-XwR">
-                        <rect key="frame" x="44" y="56.5" width="288" height="31"/>
+                        <rect key="frame" x="46" y="60" width="278" height="31"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="yS5-yv-9mQ"/>
+                            <constraint firstAttribute="height" constant="30" id="u84-eg-hz1"/>
                         </constraints>
                     </slider>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lv_icon_adjust_low" translatesAutoresizingMaskIntoConstraints="NO" id="APZ-gF-ecb">
-                        <rect key="frame" x="21" y="66" width="15" height="15"/>
+                        <rect key="frame" x="23" y="69" width="15" height="15"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="15" id="alx-pC-n9o"/>
-                            <constraint firstAttribute="width" constant="15" id="ihe-2K-61k"/>
+                            <constraint firstAttribute="height" constant="15" id="SFd-ee-kB9"/>
+                            <constraint firstAttribute="width" constant="15" id="cwy-3l-EEF"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="床边灯带" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTF-1g-872">
-                        <rect key="frame" x="8" y="8" width="131" height="42"/>
+                        <rect key="frame" x="8" y="-3" width="131" height="50"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="131" id="QDa-hS-jSk"/>
+                            <constraint firstAttribute="width" constant="131" id="nAZ-wf-MNA"/>
+                            <constraint firstAttribute="height" constant="50" id="wo7-d5-gf5"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lv_icon_adjust_high" translatesAutoresizingMaskIntoConstraints="NO" id="of2-8z-iVL">
-                        <rect key="frame" x="340" y="63" width="20" height="20"/>
+                        <rect key="frame" x="332" y="67" width="20" height="20"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="A6Q-1J-TmI"/>
-                            <constraint firstAttribute="width" constant="20" id="BE1-sc-Cox"/>
+                            <constraint firstAttribute="height" constant="20" id="cdb-QC-T3e"/>
+                            <constraint firstAttribute="width" constant="20" id="tNH-YZ-yd9"/>
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Twl-lQ-Y4P">
                         <rect key="frame" x="277" y="14" width="30" height="30"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="cdk-1f-Ndf"/>
-                            <constraint firstAttribute="width" constant="30" id="ehe-Tx-Jk6"/>
+                            <constraint firstAttribute="width" constant="30" id="S5t-Ro-kGr"/>
+                            <constraint firstAttribute="height" constant="30" id="jrE-48-zco"/>
                         </constraints>
                         <state key="normal" image="lv_icon_light_off"/>
                     </button>
@@ -69,45 +76,49 @@
                         <rect key="frame" x="327" y="15" width="30" height="30"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="HHO-aE-PyI"/>
-                            <constraint firstAttribute="width" constant="30" id="ylo-FL-L2g"/>
+                            <constraint firstAttribute="height" constant="30" id="5IL-gK-EBO"/>
+                            <constraint firstAttribute="width" constant="30" id="Uum-vJ-fUI"/>
                         </constraints>
                         <state key="normal" image="icon_add_normal"/>
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="of2-8z-iVL" firstAttribute="leading" secondItem="BCT-l9-XwR" secondAttribute="trailing" constant="10" id="38a-4l-Wuf"/>
-                    <constraint firstItem="ieh-Kl-c79" firstAttribute="top" secondItem="eTF-1g-872" secondAttribute="bottom" id="7Yr-fU-c2Q"/>
-                    <constraint firstItem="BCT-l9-XwR" firstAttribute="leading" secondItem="APZ-gF-ecb" secondAttribute="trailing" constant="10" id="8yE-sU-h2a"/>
-                    <constraint firstAttribute="trailing" secondItem="ieh-Kl-c79" secondAttribute="trailing" id="AHE-m5-cSn"/>
-                    <constraint firstItem="eTF-1g-872" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="KcJ-W8-zoX"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="Twl-lQ-Y4P" secondAttribute="trailing" constant="60" id="N40-WN-3r3"/>
-                    <constraint firstItem="9po-Xv-wqd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="Pto-bg-OaM"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="9po-Xv-wqd" secondAttribute="trailing" constant="10" id="QcC-7d-hfy"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="BCT-l9-XwR" secondAttribute="bottom" constant="5" id="UYb-6g-ysF"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="of2-8z-iVL" secondAttribute="bottom" constant="9" id="Za6-6F-uzA"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="APZ-gF-ecb" secondAttribute="bottom" constant="11" id="cGr-gb-OuB"/>
-                    <constraint firstItem="ieh-Kl-c79" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="esK-Ou-1F7"/>
-                    <constraint firstItem="eTF-1g-872" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="lYQ-gO-W3d"/>
-                    <constraint firstItem="APZ-gF-ecb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="13" id="mFc-yl-VWI"/>
-                    <constraint firstItem="eTF-1g-872" firstAttribute="centerY" secondItem="Twl-lQ-Y4P" secondAttribute="centerY" id="nNg-cD-ci1"/>
-                    <constraint firstAttribute="bottom" secondItem="ieh-Kl-c79" secondAttribute="bottom" id="pJY-Ws-kxe"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="of2-8z-iVL" secondAttribute="trailing" constant="7" id="u2Z-X9-Aao"/>
+                    <constraint firstItem="of2-8z-iVL" firstAttribute="centerY" secondItem="L7P-wF-na9" secondAttribute="centerY" id="79X-JY-nMg"/>
+                    <constraint firstItem="eTF-1g-872" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="7kA-LU-mLR"/>
+                    <constraint firstItem="ieh-Kl-c79" firstAttribute="top" secondItem="9po-Xv-wqd" secondAttribute="bottom" constant="7" id="AC6-W7-2ke"/>
+                    <constraint firstItem="of2-8z-iVL" firstAttribute="leading" secondItem="BCT-l9-XwR" secondAttribute="trailing" constant="10" id="Bql-Yc-Uhp"/>
+                    <constraint firstItem="APZ-gF-ecb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="15" id="Bt4-kt-CFW"/>
+                    <constraint firstItem="L7P-wF-na9" firstAttribute="centerY" secondItem="ieh-Kl-c79" secondAttribute="centerY" id="EGP-2W-sSe"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="9po-Xv-wqd" secondAttribute="trailing" constant="10" id="I5G-7u-sZW"/>
+                    <constraint firstItem="ieh-Kl-c79" firstAttribute="top" secondItem="Twl-lQ-Y4P" secondAttribute="bottom" constant="8" id="S8H-fT-ao9"/>
+                    <constraint firstAttribute="trailing" secondItem="L7P-wF-na9" secondAttribute="trailing" constant="20" id="W6K-Sj-cC9"/>
+                    <constraint firstAttribute="bottom" secondItem="ieh-Kl-c79" secondAttribute="bottom" constant="-2.5" id="amt-xp-eHI"/>
+                    <constraint firstItem="APZ-gF-ecb" firstAttribute="centerY" secondItem="L7P-wF-na9" secondAttribute="centerY" id="bJv-dE-lZE"/>
+                    <constraint firstAttribute="trailing" secondItem="ieh-Kl-c79" secondAttribute="trailing" id="dPY-TE-kX4"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Twl-lQ-Y4P" secondAttribute="trailing" constant="60" id="fwH-sK-uNr"/>
+                    <constraint firstItem="BCT-l9-XwR" firstAttribute="centerY" secondItem="L7P-wF-na9" secondAttribute="centerY" constant="-2" id="nzC-HG-3ka"/>
+                    <constraint firstItem="BCT-l9-XwR" firstAttribute="leading" secondItem="APZ-gF-ecb" secondAttribute="trailing" constant="10" id="oPk-UV-KBW"/>
+                    <constraint firstItem="ieh-Kl-c79" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="pGR-OG-sR8"/>
+                    <constraint firstItem="L7P-wF-na9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="qp5-mL-zO5"/>
+                    <constraint firstItem="ieh-Kl-c79" firstAttribute="top" secondItem="eTF-1g-872" secondAttribute="bottom" constant="5" id="rHV-dY-8bp"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="of2-8z-iVL" secondAttribute="trailing" constant="15" id="ze5-yY-3zw"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="AddLightBtn" destination="9po-Xv-wqd" id="T2z-ks-6gK"/>
-                <outlet property="LightConstraint" destination="N40-WN-3r3" id="y6c-x4-EgB"/>
+                <outlet property="LightConstraint" destination="fwH-sK-uNr" id="79u-Pk-45H"/>
                 <outlet property="NewLightNameLabel" destination="eTF-1g-872" id="QgK-jq-n9H"/>
                 <outlet property="NewLightPowerBtn" destination="Twl-lQ-Y4P" id="gMT-aV-PCl"/>
                 <outlet property="NewLightSlider" destination="BCT-l9-XwR" id="GXc-cN-vA2"/>
+                <outlet property="supImageViewHeight" destination="PlJ-zN-gje" id="1Q8-2O-cKr"/>
             </connections>
-            <point key="canvasLocation" x="-329" y="-236"/>
+            <point key="canvasLocation" x="-329.5" y="-236"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="Ipad-HomePageBg" width="337" height="38"/>
+        <image name="Ipad-HomePagesubBg" width="296" height="10"/>
         <image name="icon_add_normal" width="15" height="15"/>
-        <image name="lv_fm_adjust_normal" width="336" height="47"/>
         <image name="lv_icon_adjust_high" width="14" height="14"/>
         <image name="lv_icon_adjust_low" width="10" height="10"/>
         <image name="lv_icon_light_off" width="11" height="17"/>
