@@ -8,7 +8,9 @@
 #import "MBProgressHUD+NJ.h"
 #import "CustomViewController.h"
 #import "WeChatPayManager.h"
-@interface WebManager : CustomViewController <UIWebViewDelegate, UIAlertViewDelegate>
+#import "DeliveryAddressSettingViewController.h"
+
+@interface WebManager : CustomViewController <UIWebViewDelegate, UIAlertViewDelegate, CustomNaviBarViewDelegate>
 
 @property (retain, nonatomic) IBOutlet UIWebView *webView;
 @property (nonatomic, retain) NSString *oauthUrl;

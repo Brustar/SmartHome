@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "Utilities.h"
 
+@protocol CustomNaviBarViewDelegate;
+
 @interface CustomNaviBarView : UIView
 
 @property (nonatomic, weak) UIViewController *m_viewCtrlParent;
 @property (nonatomic, readonly) BOOL m_bIsCurrStateMiniMode;
+@property (nonatomic, assign) id<CustomNaviBarViewDelegate>delegate;
 
 + (CGRect)rightBtnFrameForSplitView;
 + (CGRect)rightBtnFrame;
@@ -51,5 +54,12 @@
 //设置网络状态
 - (void)setNetState:(int)state;
 - (void)adjustTitleFrameForSplitView;
+
+@end
+
+@protocol CustomNaviBarViewDelegate <NSObject>
+
+@optional
+- (void)onBackBtnClicked:(id)sender;
 
 @end
