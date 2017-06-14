@@ -1208,14 +1208,14 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zC7-jj-JeS" userLabel="Button_menu">
-                                <rect key="frame" x="40" y="114" width="61" height="60"/>
+                                <rect key="frame" x="40" y="124" width="61" height="60"/>
                                 <state key="normal" image="TV_menu" backgroundImage="mode_button"/>
                                 <connections>
                                     <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="81Q-ci-rVm"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Duh-R2-so8" userLabel="Button_pop">
-                                <rect key="frame" x="667" y="114" width="61" height="60"/>
+                                <rect key="frame" x="667" y="124" width="61" height="60"/>
                                 <state key="normal" image="DVD_pop" backgroundImage="mode_button"/>
                                 <connections>
                                     <action selector="control:" destination="NLK-XW-5Jq" eventType="touchUpInside" id="Mep-i5-Jtd"/>
@@ -1259,7 +1259,7 @@
                             <constraint firstItem="Fbi-90-npd" firstAttribute="centerY" secondItem="uw0-3M-Ang" secondAttribute="centerY" id="SDe-jN-qnp"/>
                             <constraint firstItem="Rx7-Gc-ytg" firstAttribute="centerY" secondItem="xwz-I6-8aj" secondAttribute="centerY" constant="-3" id="SRW-aT-r7V"/>
                             <constraint firstItem="zC7-jj-JeS" firstAttribute="leading" secondItem="IZ1-uJ-g38" secondAttribute="leadingMargin" constant="20" id="TdG-1z-7W5"/>
-                            <constraint firstItem="zC7-jj-JeS" firstAttribute="top" secondItem="JP8-bG-F58" secondAttribute="bottom" constant="10" id="UtI-5a-f01"/>
+                            <constraint firstItem="zC7-jj-JeS" firstAttribute="top" secondItem="JP8-bG-F58" secondAttribute="bottom" constant="20" id="UtI-5a-f01"/>
                             <constraint firstItem="wkp-hZ-I2O" firstAttribute="centerX" secondItem="uw0-3M-Ang" secondAttribute="centerX" id="V6z-HY-qje"/>
                             <constraint firstItem="YYP-xB-YNL" firstAttribute="centerY" secondItem="ngC-Cm-pYg" secondAttribute="centerY" constant="-80" id="WuI-pL-ZNg"/>
                             <constraint firstItem="Pfv-UU-Wsq" firstAttribute="centerX" secondItem="ngC-Cm-pYg" secondAttribute="centerX" constant="80" id="YC9-mo-tC4"/>

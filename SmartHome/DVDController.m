@@ -143,7 +143,7 @@
     if (ON_IPAD) {
         self.menuTop.constant = 0;
         self.voiceLeft.constant = self.voiceRight.constant = 100;
-        self.controlLeft.constant = self.controlRight.constant = 200;
+        self.controlLeft.constant = self.controlRight.constant = 150;
         self.controlBottom.constant = 160;
         [(CustomViewController *)self.splitViewController.parentViewController setNaviBarTitle:self.title];
     }
