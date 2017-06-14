@@ -23,7 +23,7 @@
     [self.AddOtherBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.OtherSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
     [self.OtherSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
-      if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+      if (ON_IPAD) {
           
           self.NameLabel.font = [UIFont systemFontOfSize:17];
           [self.AddOtherBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
@@ -53,11 +53,12 @@
     }else if (sender == self.AddOtherBtn){
         self.AddOtherBtn.selected = !self.AddOtherBtn.selected;
         if (self.AddOtherBtn.selected) {
-             if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-                  [self.AddOtherBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
-             }else{
-                 [self.AddOtherBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
+             if (ON_IPAD) {
                  
+                  [self.AddOtherBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
+             }else{
+                
+                 [self.AddOtherBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
                  
              }
             [_scene setSceneID:[self.sceneid intValue]];
@@ -72,10 +73,11 @@
             
             
         }else{
-             if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-                  [self.AddOtherBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
+             if (ON_IPAD) {
+                 
+                  [self.AddOtherBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
              }else{
-                 [self.AddOtherBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
+                [self.AddOtherBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
              }
             
             [_scene setSceneID:[self.sceneid intValue]];

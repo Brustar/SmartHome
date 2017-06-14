@@ -11,5 +11,6 @@
 @interface IpadDeviceTypeCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *SubTypeIconeImage;
 @property (weak, nonatomic) IBOutlet UILabel *SubTypeNameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *cellBackgroundImageView;
 
 @end

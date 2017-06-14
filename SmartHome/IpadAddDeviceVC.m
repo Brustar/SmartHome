@@ -14,6 +14,7 @@
 @interface IpadAddDeviceVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @property (nonatomic,strong) NSArray * roomList;
 @property (nonatomic,strong) NSArray * SubTypeNameArr;
 @property (nonatomic,strong) NSArray * SubTypeIconeImage;
@@ -73,11 +74,14 @@
     cell.SubTypeNameLabel.text = self.SubTypeNameArr[indexPath.row];
     cell.SubTypeIconeImage.image = [UIImage imageNamed:self.SubTypeIconeImage[indexPath.row]];
     
+  
+    
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if ([self.delegate respondsToSelector:@selector(IpadAddDeviceVC:selected:)]) {
         
         [self.delegate IpadAddDeviceVC:self selected:indexPath.row];
