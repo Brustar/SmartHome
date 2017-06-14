@@ -126,7 +126,7 @@
         [self setUpRoomScrollerView];
     }
     [self naviToDevice];
-    [self.btnPause setImage:[UIImage imageNamed:@"ipad-icon_st_prd"] forState:UIControlStateHighlighted];
+    [self.btnPause setImage:[UIImage imageNamed:@"screen_pause_red"] forState:UIControlStateHighlighted];
     [self.btnUP setImage:[UIImage imageNamed:@"screen_up_red"] forState:UIControlStateHighlighted];
     [self.btnDown setImage:[UIImage imageNamed:@"screen_down_red"] forState:UIControlStateHighlighted];
     if (ON_IPAD) {
