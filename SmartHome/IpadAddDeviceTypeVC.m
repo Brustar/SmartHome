@@ -22,11 +22,11 @@
 #import "AddDeviceCell.h"
 #import "IphoneNewAddSceneVC.h"
 #import "MBProgressHUD+NJ.h"
-//#import "IpadNewLightCell.h"
 #import "NewLightCell.h"
 #import "IpadTVCell.h"
 #import "AireTableViewCell.h"
 #import "IpadDVDTableViewCell.h"
+#import "PowerLightCell.h"
 
 
 @interface IpadAddDeviceTypeVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -107,6 +107,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"AddDeviceCell" bundle:nil] forCellReuseIdentifier:@"AddDeviceCell"];//添加设备的cell
      [self.tableView registerNib:[UINib nibWithNibName:@"NewLightCell" bundle:nil] forCellReuseIdentifier:@"NewLightCell"];//调光灯
     [self.tableView registerNib:[UINib nibWithNibName:@"FMTableViewCell" bundle:nil] forCellReuseIdentifier:@"FMTableViewCell"];//FM
+     [self.tableView registerNib:[UINib nibWithNibName:@"PowerLightCell" bundle:nil] forCellReuseIdentifier:@"PowerLightCell"];//开关灯
     //    NSArray *lightArr = [SQLManager getDeviceIDsBySeneId:self.sceneID];
     
     for(int i = 0; i <self.deviceIdArr.count; i++)
@@ -221,17 +222,11 @@
         return newColourCell;
     }if (indexPath.section == 2) {//开关灯
          [self.tableView setSeparatorStyle: UITableViewCellSeparatorStyleNone];
-        NewColourCell * newColourCell = [tableView dequeueReusableCellWithIdentifier:@"NewColourCell" forIndexPath:indexPath];
+        PowerLightCell * newColourCell = [tableView dequeueReusableCellWithIdentifier:@"PowerLightCell" forIndexPath:indexPath];
         newColourCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_SwitchLightArr[indexPath.row] intValue]];
-        newColourCell.colourNameLabel.text = device.name;
+        newColourCell.powerLightNameLabel.text = device.name;
         newColourCell.roomID = self.roomID;
-        newColourCell.supimageView.hidden = YES;
-        newColourCell.lowImageView.hidden = YES;
-        newColourCell.highImageView.hidden = YES;
-        newColourCell.colourSlider.hidden = YES;
-        newColourCell.subImageView.hidden = YES;
-        
         return newColourCell;
     }
     if (indexPath.section == 3) {//空调
@@ -346,10 +341,10 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ( indexPath.section == 0 || indexPath.section == 3 || indexPath.section == 10 || indexPath.section == 11 || indexPath.section == 1 || indexPath.section == 2 || indexPath.section == 4) {
+    if ( indexPath.section == 0 || indexPath.section == 3 || indexPath.section == 10 || indexPath.section == 11 || indexPath.section == 1  || indexPath.section == 4) {
         return 150;
     }
-    if (indexPath.section == 9 || indexPath.section == 7 || indexPath.section == 12) {
+    if (indexPath.section == 9 || indexPath.section == 7 || indexPath.section == 12 || indexPath.section == 2) {
         return 80;
     }
     if (indexPath.section == 5 || indexPath.section == 6 || indexPath.section == 8 ) {

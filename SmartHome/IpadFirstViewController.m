@@ -42,6 +42,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel2;//第二个显示消息的label
 
 @property (weak, nonatomic) IBOutlet UIImageView *IconeImage2;//第二个消息的头像
+@property (weak, nonatomic) IBOutlet UIImageView *DUPImageView;//闪烁提醒的图标
 
 @end
 
@@ -120,7 +121,35 @@
     }
     [self getScenesFromPlist];
     [self setBtn];
+    [self getPlist];
 
+}
+-(void)getPlist
+{
+    NSArray  *paths  =  NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+    NSString *docDir = [paths objectAtIndex:0];
+    NSString *filePath = [docDir stringByAppendingPathComponent:@"Title.plist"];
+    NSString *filePath1 = [docDir stringByAppendingPathComponent:@"Detail.plist"];
+    NSArray * TitleArray = [[NSArray alloc] initWithContentsOfFile:filePath];
+    NSArray * DetailArray = [[NSArray alloc] initWithContentsOfFile:filePath1];
+    NSMutableSet *titleSet = [[NSMutableSet alloc] init];
+    NSMutableSet *DetailSet = [[NSMutableSet alloc] init];
+    if (TitleArray.count!=0) {
+        while ([titleSet count] < 1) {
+            int r = arc4random() % [TitleArray count];
+            [titleSet addObject:[TitleArray objectAtIndex:r]];
+        }
+        NSArray * title = [titleSet allObjects];
+        NSString * SubStr  = title[0];
+        
+        while ([DetailSet count] < 1) {
+            int r = arc4random() % [DetailArray count];
+            [DetailSet addObject:[DetailArray objectAtIndex:r]];
+        }
+        NSArray * detail = [DetailSet allObjects];
+        NSString * SupStr = detail[0];
+        self.remindLabel.text = [NSString stringWithFormat:@"%@%@!",SubStr,SupStr];
+    }
 }
 -(void)viewDidAppear:(BOOL)animated
 {

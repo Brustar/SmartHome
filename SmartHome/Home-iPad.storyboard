@@ -56,16 +56,23 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="znc-Gk-qLl">
-                                <rect key="frame" x="893" y="416" width="22" height="22"/>
-                                <color key="backgroundColor" red="0.4823529411764706" green="0.15294117647058825" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="913" y="408" width="15" height="15"/>
+                                <color key="backgroundColor" red="0.48760308159999999" green="0.13273111979999999" blue="0.31089952259999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="jcR-NG-RdW"/>
-                                    <constraint firstAttribute="width" constant="22" id="n1J-al-1Da"/>
+                                    <constraint firstAttribute="height" constant="15" id="hVI-53-tJz"/>
+                                    <constraint firstAttribute="width" constant="15" id="yIV-f1-uzI"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ipad-HomePage-Icone" translatesAutoresizingMaskIntoConstraints="NO" id="l5R-QX-7Sx">
+                                <rect key="frame" x="891" y="417" width="28" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="7WB-n0-n5N"/>
+                                    <constraint firstAttribute="width" constant="28" id="Mph-Ga-hDQ"/>
+                                </constraints>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cL1-6l-cBd">
                                 <rect key="frame" x="835" y="369" width="135" height="122"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -101,7 +108,7 @@
                                     <action selector="VoiceBtn:" destination="0SV-ZH-hzW" eventType="touchUpInside" id="zOK-ks-tMa"/>
                                 </connections>
                             </button>
-                            <view hidden="YES" alpha="0.94999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pCB-q8-Gji" userLabel="CoverView">
+                            <view hidden="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pCB-q8-Gji" userLabel="CoverView">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ipad-bg_transparent_nol" translatesAutoresizingMaskIntoConstraints="NO" id="q4N-Nm-Hg7">
@@ -284,31 +291,34 @@
                         <constraints>
                             <constraint firstItem="Vqg-Tg-fzN" firstAttribute="centerX" secondItem="lj2-At-zkc" secondAttribute="centerX" id="3bc-Zu-UaS"/>
                             <constraint firstItem="bGe-nQ-HQE" firstAttribute="centerX" secondItem="lj2-At-zkc" secondAttribute="centerX" id="4Ev-BN-V6V"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="znc-Gk-qLl" secondAttribute="trailing" constant="76" id="8VC-x1-kqr"/>
                             <constraint firstItem="gkp-n2-zHK" firstAttribute="top" secondItem="pCB-q8-Gji" secondAttribute="bottom" id="AR3-sw-e4E"/>
                             <constraint firstItem="H4Q-Fx-aZX" firstAttribute="centerX" secondItem="lj2-At-zkc" secondAttribute="centerX" id="AdD-oi-tcO"/>
                             <constraint firstItem="ipP-vP-gEp" firstAttribute="top" secondItem="lj2-At-zkc" secondAttribute="top" id="E97-fw-Zf8"/>
+                            <constraint firstItem="gkp-n2-zHK" firstAttribute="top" secondItem="znc-Gk-qLl" secondAttribute="bottom" constant="345" id="Fjh-BU-Hwi"/>
                             <constraint firstItem="dtO-gh-eVe" firstAttribute="top" secondItem="rIc-Ct-fvg" secondAttribute="bottom" constant="25" id="JBF-7S-zvc"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="l5R-QX-7Sx" secondAttribute="trailing" constant="85" id="Lvr-CK-ewd"/>
                             <constraint firstItem="pCB-q8-Gji" firstAttribute="top" secondItem="lj2-At-zkc" secondAttribute="top" id="LxG-ap-X9H"/>
                             <constraint firstAttribute="trailing" secondItem="pCB-q8-Gji" secondAttribute="trailing" id="NW5-zv-F6p"/>
                             <constraint firstItem="ipP-vP-gEp" firstAttribute="leading" secondItem="lj2-At-zkc" secondAttribute="leading" id="OPd-Sm-Zyq"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="znc-Gk-qLl" secondAttribute="trailing" constant="89" id="OUo-fa-ylT"/>
                             <constraint firstItem="dtO-gh-eVe" firstAttribute="centerX" secondItem="lj2-At-zkc" secondAttribute="centerX" id="VvU-Bt-Cmv"/>
                             <constraint firstItem="rIc-Ct-fvg" firstAttribute="top" secondItem="DCi-NA-ykR" secondAttribute="bottom" constant="230" id="YPY-By-Yfw"/>
                             <constraint firstItem="gkp-n2-zHK" firstAttribute="top" secondItem="bGe-nQ-HQE" secondAttribute="bottom" constant="145" id="ZTW-Ey-3S6"/>
                             <constraint firstItem="dtO-gh-eVe" firstAttribute="top" secondItem="H4Q-Fx-aZX" secondAttribute="bottom" constant="2" id="aN3-VR-0Vb"/>
                             <constraint firstItem="Vqg-Tg-fzN" firstAttribute="top" secondItem="bGe-nQ-HQE" secondAttribute="bottom" constant="5" id="bCC-oN-G0G"/>
-                            <constraint firstItem="gkp-n2-zHK" firstAttribute="top" secondItem="znc-Gk-qLl" secondAttribute="bottom" constant="330" id="eMu-IY-JJa"/>
                             <constraint firstItem="gkp-n2-zHK" firstAttribute="top" secondItem="ipP-vP-gEp" secondAttribute="bottom" id="f05-Pl-wHq"/>
                             <constraint firstAttribute="trailing" secondItem="ipP-vP-gEp" secondAttribute="trailing" id="hLc-bG-NQy"/>
                             <constraint firstItem="gkp-n2-zHK" firstAttribute="top" secondItem="cL1-6l-cBd" secondAttribute="bottom" constant="277" id="lhN-S9-q5K"/>
                             <constraint firstItem="pCB-q8-Gji" firstAttribute="leading" secondItem="lj2-At-zkc" secondAttribute="leading" id="mQc-Ra-Sv8"/>
                             <constraint firstItem="H4Q-Fx-aZX" firstAttribute="top" secondItem="rIc-Ct-fvg" secondAttribute="bottom" constant="2" id="pwb-fA-ica"/>
+                            <constraint firstItem="gkp-n2-zHK" firstAttribute="top" secondItem="l5R-QX-7Sx" secondAttribute="bottom" constant="327" id="t2f-uy-z33"/>
                             <constraint firstItem="rIc-Ct-fvg" firstAttribute="centerX" secondItem="lj2-At-zkc" secondAttribute="centerX" id="z2q-u9-GhM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="cL1-6l-cBd" secondAttribute="trailing" constant="34" id="zAm-uK-MUm"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="CoverView" destination="pCB-q8-Gji" id="A5M-ae-dbB"/>
+                        <outlet property="DUPImageView" destination="l5R-QX-7Sx" id="a0o-pl-kwC"/>
                         <outlet property="FamilyMenberLabel" destination="b3h-2M-oWD" id="FFG-fK-wp9"/>
                         <outlet property="Icone1Image" destination="8FZ-Kx-aaq" id="sGT-8d-SwS"/>
                         <outlet property="IconeImage2" destination="s32-N6-sAb" id="POW-qZ-7Kv"/>
@@ -340,5 +350,6 @@
         <image name="IpadSceneBg" width="512" height="384"/>
         <image name="Voice" width="11" height="19"/>
         <image name="circular5" width="33" height="33"/>
+        <image name="ipad-HomePage-Icone" width="14" height="12"/>
     </resources>
 </document>

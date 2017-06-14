@@ -32,6 +32,7 @@
 #import "FMTableViewCell.h"
 #import "IphoneNewAddSceneVC.h"
 #import "IphoneNewAddSceneTimerVC.h"
+#import "PowerLightCell.h"
 
 
 
@@ -316,6 +317,7 @@
      [self.tableView registerNib:[UINib nibWithNibName:@"AddDeviceCell" bundle:nil] forCellReuseIdentifier:@"AddDeviceCell"];//添加设备的cell
      [self.tableView registerNib:[UINib nibWithNibName:@"NewLightCell" bundle:nil] forCellReuseIdentifier:@"NewLightCell"];//调光灯
      [self.tableView registerNib:[UINib nibWithNibName:@"FMTableViewCell" bundle:nil] forCellReuseIdentifier:@"FMTableViewCell"];//FM
+    [self.tableView registerNib:[UINib nibWithNibName:@"PowerLightCell" bundle:nil] forCellReuseIdentifier:@"PowerLightCell"];//开关灯
     NSArray *lightArr = [SQLManager getDeviceIDsBySeneId:self.sceneID];
  
     for(int i = 0; i <lightArr.count; i++)
@@ -693,19 +695,15 @@
        
        return newColourCell;
    }if (indexPath.section == 2) {//开关灯
-       NewColourCell * newColourCell = [tableView dequeueReusableCellWithIdentifier:@"NewColourCell" forIndexPath:indexPath];
-       newColourCell.AddColourLightBtn.hidden = YES;
-       newColourCell.ColourLightConstraint.constant = 10;
+       PowerLightCell * newColourCell = [tableView dequeueReusableCellWithIdentifier:@"PowerLightCell" forIndexPath:indexPath];
+       newColourCell.addPowerLightBtn.hidden = YES;
+       newColourCell.powerBtnConstraint.constant = 10;
        newColourCell.backgroundColor =[UIColor clearColor];
        Device *device = [SQLManager getDeviceWithDeviceID:[_SwitchLightArr[indexPath.row] intValue]];
-       newColourCell.colourNameLabel.text = device.name;
-       newColourCell.supimageView.hidden = YES;
-       newColourCell.lowImageView.hidden = YES;
-       newColourCell.highImageView.hidden = YES;
-       newColourCell.colourSlider.hidden = YES;
-       newColourCell.colourBtn.selected = device.power;//开关状态
+       newColourCell.powerLightNameLabel.text = device.name;
+       newColourCell.powerLightBtn.selected = device.power;//开关状态
        if (_isGloom || _isRomantic || _isSprightly) {
-           newColourCell.colourBtn.selected = YES;
+           newColourCell.powerLightBtn.selected = YES;
        }
     
        return newColourCell;
@@ -844,7 +842,7 @@
     if (indexPath.section == 5 || indexPath.section == 6 || indexPath.section == 8) {
         return 150;
     }
-    if (indexPath.section == 9 || indexPath.section == 7 || indexPath.section == 12 || indexPath.section == 13) {
+    if (indexPath.section == 9 || indexPath.section == 7 || indexPath.section == 12 || indexPath.section == 13 || indexPath.section == 2) {
         return 50;
     }
     return 100;
