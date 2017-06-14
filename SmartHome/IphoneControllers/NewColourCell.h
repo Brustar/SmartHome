@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *lowImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *highImageView;
 @property (weak, nonatomic) IBOutlet UIButton *AddColourLightBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *subImageView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ColourLightConstraint;
 @property(nonatomic, strong) NSString * deviceid;
 @property (nonatomic,strong) NSString *sceneid;
@@ -26,6 +27,7 @@
 @property (strong, nonatomic) Scene *scene;
 @property (nonatomic, assign) id<NewColourCellDelegate>delegate;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ColourNameTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *SupImageViewHeight;
 
 @end
 

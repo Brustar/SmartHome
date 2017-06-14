@@ -58,6 +58,10 @@
     [super viewDidLoad];
   
     [self setNaviBarTitle:@"关于我们"];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [self adjustNaviBarFrameForSplitView];
+        [self adjustTitleFrameForSplitView];
+    }
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = [UIView new];
     self.tableView.tableHeaderView = self.headView;

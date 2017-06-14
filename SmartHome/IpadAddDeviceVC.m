@@ -33,6 +33,11 @@
     self.tableView.tableFooterView = [UIView new];
     [self setupNaviBar];
     
+//    if ([self.delegate respondsToSelector:@selector(IpadAddDeviceVC:selected:)]) {
+//        
+//        [self.delegate IpadAddDeviceVC:self selected:0];
+//    }
+    
 }
 #pragma mark - Table view data source
 

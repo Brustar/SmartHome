@@ -31,6 +31,11 @@
     
     [self.AireSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
     [self.AireSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+    if (ON_IPAD) {
+        self.supImageViewHeight.constant = 85;
+        self.AireNameLabel.font = [UIFont systemFontOfSize:17];
+        [self.AddAireBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
+    }
 }
 
 - (IBAction)save:(id)sender {
@@ -58,7 +63,12 @@
     }else if (sender == self.AddAireBtn){
         self.AddAireBtn.selected = !self.AddAireBtn.selected;
         if (self.AddAireBtn.selected) {
-            [self.AddAireBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+            
+            if (ON_IPAD) {
+                [self.AddAireBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
+            }else{
+                 [self.AddAireBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+            }
             
             [_scene setSceneID:[self.sceneid intValue]];
             [_scene setRoomID:self.roomID];
@@ -71,7 +81,11 @@
             [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
             
         }else{
-            [self.AddAireBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
+            if (ON_IPAD) {
+                [self.AddAireBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
+            }else{
+                [self.AddAireBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
+            }
             
             [_scene setSceneID:[self.sceneid intValue]];
             [_scene setRoomID:self.roomID];

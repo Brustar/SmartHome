@@ -25,6 +25,9 @@
 @property (nonatomic,assign) int roomID;
 @property (strong, nonatomic) Scene *scene;
 @property (nonatomic, assign) id<FMTableViewCellDelegate>delegate;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *IpadHomePageBgHeight;//
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *FMchoiceHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *fmchannelSliderTopConstraint;
 
 @end
 

@@ -34,6 +34,11 @@
     
     [self.open setImage:[UIImage imageNamed:@"bd_icon_wd_on"] forState:UIControlStateSelected];
     [self.open setImage:[UIImage imageNamed:@"bd_icon_wd_off"] forState:UIControlStateNormal];
+    if (ON_IPAD) {
+        self.supImageViewHeight.constant = 85;
+        self.label.font = [UIFont systemFontOfSize:17];
+        [self.AddcurtainBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
+    }
 }
 
 
@@ -81,8 +86,11 @@
         self.AddcurtainBtn.selected = !self.AddcurtainBtn.selected;
         NSLog(@"%d",self.AddcurtainBtn.selected);
         if (self.AddcurtainBtn.selected) {
-             [self.AddcurtainBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
-        
+            if (ON_IPAD) {
+                [self.AddcurtainBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
+            }else{
+                [self.AddcurtainBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+            }
             [_scene setSceneID:[self.sceneid intValue]];
             [_scene setRoomID:self.roomID];
             [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
@@ -92,8 +100,12 @@
             [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
            
         }else{
-           [self.AddcurtainBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
-            
+            if (ON_IPAD) {
+                 [self.AddcurtainBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
+            }else{
+                 [self.AddcurtainBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
+            }
+          
             [_scene setSceneID:[self.sceneid intValue]];
             [_scene setRoomID:self.roomID];
             [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];

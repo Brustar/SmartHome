@@ -25,6 +25,22 @@
     [self.DownBtn setImage:[UIImage imageNamed:@"icon_dw_prd"] forState:UIControlStateHighlighted];
     [self.ScreenCurtainBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
     [self.ScreenCurtainBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+    
+    if (ON_IPAD) {
+        
+        self.upBtnLeadingConst.constant = 100;
+        self.downBtnConst.constant = 100;
+        self.upBtnConstraint.constant = 100;
+        self.downBtnConstraint.constant = 100;
+        self.ImageSupViewHeightConstraint.constant = 85;
+        self.stopBtnHeightConst.constant = 60;
+        self.ScreenCurtainLabel.font = [UIFont systemFontOfSize:17];
+        [self.UPBtn setBackgroundImage:[UIImage imageNamed:@"ipad-btn_selete_nol"] forState:UIControlStateNormal];
+        [self.DownBtn setBackgroundImage:[UIImage imageNamed:@"ipad-btn_selete_nol"] forState:UIControlStateNormal];
+        [self.stopBtn setBackgroundImage:[UIImage imageNamed:@"ipad-btn_selete_nol"] forState:UIControlStateNormal];
+        [self.AddScreenCurtainBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
+      
+    }
 }
 - (IBAction)save:(id)sender {
     
@@ -45,8 +61,12 @@
     }else if (sender == self.AddScreenCurtainBtn){
         self.AddScreenCurtainBtn.selected = !self.AddScreenCurtainBtn.selected;
         if (self.AddScreenCurtainBtn.selected) {
-            [self.AddScreenCurtainBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
-            
+            if (ON_IPAD) {
+                 [self.AddScreenCurtainBtn setImage:[UIImage imageNamed:@"ipad-icon_reduce_nol"] forState:UIControlStateNormal];
+            }else{
+                 [self.AddScreenCurtainBtn setImage:[UIImage imageNamed:@"icon_reduce_normal"] forState:UIControlStateNormal];
+            }
+           
             [_scene setSceneID:[self.sceneid intValue]];
             [_scene setRoomID:self.roomID];
             [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
@@ -60,8 +80,12 @@
             
             
         }else{
-            [self.AddScreenCurtainBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
-            
+            if (ON_IPAD) {
+                   [self.AddScreenCurtainBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
+            }else{
+                [self.AddScreenCurtainBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
+            }
+         
             [_scene setSceneID:[self.sceneid intValue]];
             [_scene setRoomID:self.roomID];
             [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
