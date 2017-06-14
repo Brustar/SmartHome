@@ -53,6 +53,51 @@
     [self.deviceTableView registerNib:[UINib nibWithNibName:@"DVDTableViewCell" bundle:nil] forCellReuseIdentifier:@"DVDTableViewCell"];//DVD
     [self.deviceTableView registerNib:[UINib nibWithNibName:@"BjMusicTableViewCell" bundle:nil] forCellReuseIdentifier:@"BjMusicTableViewCell"];//背景音乐
     [self.deviceTableView registerNib:[UINib nibWithNibName:@"FMTableViewCell" bundle:nil] forCellReuseIdentifier:@"FMTableViewCell"];//FM收音机
+    
+    
+    [self adjustUI];
+}
+
+- (void)adjustUI {
+    
+    CGFloat leadingGap = 20;
+    CGFloat trailingGap = 20;
+    CGFloat centerGap = 0;
+    CGFloat btnWidth = (UI_SCREEN_WIDTH-leadingGap-trailingGap-centerGap*2)/3;
+    
+    self.softBtnLeading.constant = leadingGap;
+    self.softBtnWidth.constant = btnWidth;
+    self.normalBtnLeading.constant = self.softBtnLeading.constant+self.softBtnWidth.constant;
+    self.normalBtnWidth.constant = self.softBtnWidth.constant;
+    self.brightBtnLeading.constant = self.normalBtnLeading.constant+self.normalBtnWidth.constant;
+    self.brightBtnWidth.constant = self.softBtnWidth.constant;
+    
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        
+        centerGap = 80;
+        btnWidth = (UI_SCREEN_WIDTH*3/4-leadingGap-trailingGap-centerGap*2)/3;
+        
+        
+        
+        
+        self.tableViewLeading.constant = UI_SCREEN_WIDTH/4 + 20;
+        self.tableViewTop.constant = 130;
+        self.tableViewBottom.constant = 80;
+        self.collectionViewTop.constant = 64;
+        self.collectionViewTrailing.constant = UI_SCREEN_WIDTH*3/4;
+        self.collectionViewLeading.constant = 0;
+        self.collectionViewHeight.constant = UI_SCREEN_HEIGHT-80-64;
+        [self.collectionViewFlowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+        self.softBtnLeading.constant = self.tableViewLeading.constant;
+        self.softBtnWidth.constant = btnWidth;
+        self.normalBtnLeading.constant = self.softBtnLeading.constant+self.softBtnWidth.constant+centerGap;
+        self.normalBtnWidth.constant = self.softBtnWidth.constant;
+        self.brightBtnLeading.constant = self.normalBtnLeading.constant+self.normalBtnWidth.constant+centerGap;
+        self.brightBtnWidth.constant = self.softBtnWidth.constant;
+        
+        
+    }
 }
 
 - (void)countOfDeviceType {
@@ -213,26 +258,30 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIStoryboard *iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-    //[self.navigationController popToRootViewControllerAnimated:YES];
-    
     Scene *scene = self.sceneArray[indexPath.row];
+    
+    if (ON_IPAD) {
+        IpadDeviceListViewController * listVC = [[IpadDeviceListViewController alloc] init];
+        listVC.roomID = (int)scene.roomID;
+        listVC.sceneID = scene.sceneID;
+        [self.navigationController pushViewController:listVC animated:YES];
+    }else {
+    
+    UIStoryboard *iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     [[SceneManager defaultManager] startScene:scene.sceneID];
     IphoneEditSceneController *vc = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneEditSceneController"];
     vc.sceneID = scene.sceneID;
     vc.roomID = (int)scene.roomID;
     [self.navigationController pushViewController:vc animated:YES];
-    
-    /*UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
-    FamilyHomeDetailViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"familyHomeDetailVC"];
-    RoomStatus *roomInfo = self.roomArray[indexPath.row];
-    vc.roomID = roomInfo.roomId;
-    vc.roomName = roomInfo.roomName;
-    [self.navigationController pushViewController:vc animated:YES];*/
+  }
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(SceneCellWidth, SceneCellHeight);
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        return CGSizeMake(iPadSceneCellWidth, iPadSceneCellHeight);
+    }else {
+        return CGSizeMake(SceneCellWidth, SceneCellHeight);
+    }
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section

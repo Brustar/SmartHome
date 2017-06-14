@@ -182,7 +182,7 @@
     [self chatConnect];
     [self getScenesFromPlist];
     [self setBtn];
-   
+    
     //开启网络状况监听器
     [self updateInterfaceWithReachability];
 }

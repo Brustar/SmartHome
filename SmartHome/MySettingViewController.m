@@ -276,6 +276,7 @@
           if (indexPath.row == 0) {
               //场景快捷键
               SceneShortcutsViewController *vc = [myInfoStoryBoard instantiateViewControllerWithIdentifier:@"SceneShortcutsVC"];
+              vc.isShowInSplitView = YES;
               [self.navigationController pushViewController:vc animated:YES];
           }else if(indexPath.row == 1){
               //定时器

@@ -17,5 +17,6 @@
 @property (nonatomic, strong) NSMutableArray *shortcutsArray;
 @property (nonatomic, strong) NSMutableArray *nonShortcutsArray;
 @property (nonatomic, strong) UIButton * naviRightBtn;
+@property (nonatomic, assign) BOOL isShowInSplitView;//ipad版，在splitView中展示
 
 @end

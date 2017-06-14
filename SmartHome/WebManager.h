@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSArray *platformNameArray;
 @property (nonatomic, retain) NSArray *platformGameObjectArray;
 @property (nonatomic, strong) NSString *naviTitle;
+@property (nonatomic, assign) BOOL isShowInSplitView;
 
 - (id)initWithHtml:(NSString *)html;
 - (id)initWithUrl:(NSString *)aUrl title:(NSString *)title;

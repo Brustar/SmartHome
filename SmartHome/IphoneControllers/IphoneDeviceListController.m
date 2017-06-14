@@ -29,6 +29,7 @@
 #import "CYLineLayout.h"
 #import "CYPhotoCell.h"
 #import "IPadDevicesView.h"
+#import "GuardController.h"
 
 static NSString * const CYPhotoId = @"photo";
 @interface IphoneDeviceListController ()<IphoneRoomViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
@@ -41,7 +42,6 @@ static NSString * const CYPhotoId = @"photo";
 @property (nonatomic,strong) UIButton *typeSelectedBtn;
 @property (nonatomic,strong) UIButton *selectedRoomBtn;
 @property (nonatomic,strong) NSArray *rooms;
-@property (nonatomic,strong) NSArray *icons;
 
 @property (weak, nonatomic) UIViewController *currentViewController;
 @property (weak, nonatomic) IBOutlet IphoneRoomView *iphoneRoomView;
@@ -98,7 +98,6 @@ static NSString * const CYPhotoId = @"photo";
     
     [self setUpRoomScrollerView];
     [self getUI];
-    self.icons = @[@"cata_light",@"cata_env",@"cata_media",@"cata_single_product",@"cata_curtain"];
     
     //开启网络状况监听器
     [self updateInterfaceWithReachability];
@@ -435,6 +434,8 @@ static NSString * const CYPhotoId = @"photo";
             return @"flowering";
         case cata_media:
             return @"TV";
+        case cata_security:
+            return @"doorclock";
         default:
             break;
     }
@@ -471,6 +472,10 @@ static NSString * const CYPhotoId = @"photo";
         case cata_media:
             device = [devicesStoryBoard instantiateViewControllerWithIdentifier:@"TVController"];
             ((TVController*)device).roomID = room.rId;
+            return @[menu,device];
+        case cata_security:
+            device = [devicesStoryBoard instantiateViewControllerWithIdentifier:@"GuardController"];
+            ((GuardController*)device).roomID = room.rId;
             return @[menu,device];
         default:
             break;
@@ -535,19 +540,18 @@ static NSString * const CYPhotoId = @"photo";
 {
     CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
     
-        cell.deleteBtn.hidden = YES;
-        cell.powerBtn.hidden = YES;
-        cell.seleteSendPowBtn.hidden = YES;
-        Device * device = self.devices[indexPath.row];
-        cell.SceneName.text = device.subTypeName;
-        cell.SceneNameTopConstraint.constant = 40;
+    cell.deleteBtn.hidden = YES;
+    cell.powerBtn.hidden = YES;
+    cell.seleteSendPowBtn.hidden = YES;
+    Device * device = self.devices[indexPath.row];
+    cell.SceneName.text = device.subTypeName;
+    cell.SceneNameTopConstraint.constant = 40;
     NSString *imgName = [NSString stringWithFormat:@"catalog_%ld",(long)indexPath.row];
     UIImage *img = [UIImage imageNamed:imgName];
     [cell.imageView sd_setImageWithURL:nil placeholderImage:img];
-    if ([self.icons count]>indexPath.row) {
-        cell.icon.hidden = NO;
-        cell.icon.image = [UIImage imageNamed:[self.icons objectAtIndex:indexPath.row]];
-    }
+    
+    cell.icon.hidden = NO;
+    cell.icon.image = [UIImage imageNamed:[NSString stringWithFormat:@"cata_%ld",device.subTypeId]];
     
     return cell;
 }

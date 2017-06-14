@@ -10,7 +10,7 @@
 #import "BaseTabBarController.h"
 #import "VoiceOrderController.h"
 
-@interface IpadFirstViewController ()
+@interface IpadFirstViewController ()<RCIMReceiveMessageDelegate>
 @property (nonatomic,strong) BaseTabBarController *baseTabbarController;
 @property (nonatomic, readonly) UIButton *naviRightBtn;
 @property (nonatomic, readonly) UIButton *naviLeftBtn;
@@ -60,7 +60,7 @@
     [self showNetStateView];
     [self setTimer];
     [self getWeekdayStringFromDate];
-    
+    [self chatConnect];
     //开启网络状况监听器
     [self updateInterfaceWithReachability];
     
@@ -84,7 +84,40 @@
     _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     _baseTabbarController.tabbarPanel.hidden = NO;
     _baseTabbarController.tabBar.hidden = YES;
+    int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
     
+    self.messageLabel.text = [NSString stringWithFormat:@"%d" ,unread<0?0:unread];
+    self.FamilyMenberLabel.text = [NSString stringWithFormat:@"家庭成员（%@）",[[NSUserDefaults standardUserDefaults] objectForKey:@"familyNum"]];
+    if (unread == 0) {
+        self.messageLabel2.text = [NSString stringWithFormat:@"%@" , @"暂无新消息"];
+        self.messageLabel1.text = @"";
+        
+    }
+    NSArray *history = [[RCIMClient sharedRCIMClient] getHistoryMessages:ConversationType_GROUP targetId:[[UD objectForKey:@"HostID"] description] oldestMessageId:[[UD objectForKey:@"messageid"] longValue] count:2];
+    if ([history count]>1) {
+        RCMessage *m1 = [history lastObject];
+        RCMessage *m2 = [history firstObject];
+        
+        NSArray *info = [SQLManager queryChat:m1.senderUserId];
+        NSString *nickname = [info firstObject];
+        NSString *protrait = [info lastObject];
+        NSString *tip=@"您有新消息";
+        if ([m1.objectName isEqualToString:RCTextMessageTypeIdentifier]) {
+            tip = m1.content.conversationDigest;
+        }
+        self.messageLabel1.text = [NSString stringWithFormat:@"%@ : %@" , nickname, tip];
+        [self.Icone1Image sd_setImageWithURL:[NSURL URLWithString:protrait] placeholderImage:[UIImage imageNamed:@"logo"] options:SDWebImageRetryFailed];
+        
+        info = [SQLManager queryChat:m2.senderUserId];
+        nickname = [info firstObject];
+        protrait = [info lastObject];
+        
+        if ([m2.objectName isEqualToString:RCTextMessageTypeIdentifier]) {
+            tip = m2.content.conversationDigest;
+        }
+        self.messageLabel2.text =[NSString stringWithFormat:@"%@ : %@" , nickname, tip];
+        [self.IconeImage2 sd_setImageWithURL:[NSURL URLWithString:protrait] placeholderImage:[UIImage imageNamed:@"logo"] options:SDWebImageRetryFailed];
+    }
     [self getScenesFromPlist];
     [self setBtn];
 
@@ -440,6 +473,60 @@
     self.TimerLabel.text = [NSString stringWithFormat:@"%ld.%ld.%ld",year,month,day];
 
 }
+
+- (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left
+{
+    [IOManager writeUserdefault:@(message.messageId) forKey:@"messageid"];
+    NSArray *info = [SQLManager queryChat:message.senderUserId];
+    NSString *nickname = [info firstObject];
+    NSString *protrait = [info lastObject];
+    int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
+    NSString *tip=@"您有新消息";
+    if ([message.objectName isEqualToString:RCTextMessageTypeIdentifier]) {
+        tip = message.content.conversationDigest;
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.messageLabel1.text = self.messageLabel2.text;
+        self.messageLabel2.text =[NSString stringWithFormat:@"%@ : %@" , nickname, tip];
+        self.messageLabel.text = [NSString stringWithFormat:@"%d" ,unread<0?0:unread];
+        self.Icone1Image.image = self.IconeImage2.image;
+        [self.IconeImage2 sd_setImageWithURL:[NSURL URLWithString:protrait] placeholderImage:[UIImage imageNamed:@"logo"] options:SDWebImageRetryFailed];
+    });
+    
+}
+
+-(void) chatConnect
+{
+    NSString *token = [UD objectForKey:@"rctoken"];
+    [[RCIM sharedRCIM] connectWithToken:token success:^(NSString *userId) {
+        NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
+        [RCIM sharedRCIM].receiveMessageDelegate=self;
+        if ([[DeviceInfo defaultManager] pushToken]) {
+            [[RCIMClient sharedRCIMClient] setDeviceToken:[[DeviceInfo defaultManager] pushToken]];
+        }
+    } error:nil tokenIncorrect:nil];
+}
+
+//进入聊天页面
+-(void)setRCIM
+{
+    NSString *groupID = [[UD objectForKey:@"HostID"] description];
+    NSString *homename = [UD objectForKey:@"homename"];
+    
+    RCGroup *aGroupInfo = [[RCGroup alloc]initWithGroupId:groupID groupName:homename portraitUri:@""];
+    ConversationViewController *conversationVC = [[ConversationViewController alloc] init];
+    conversationVC.conversationType = ConversationType_GROUP;
+    conversationVC.targetId = aGroupInfo.groupId;
+    [conversationVC setTitle: [NSString stringWithFormat:@"%@",aGroupInfo.groupName]];
+    RCUserInfo *user = [[RCIM sharedRCIM] currentUserInfo];
+    NSArray *info = [SQLManager queryChat:user.userId];
+    NSString *nickname = [info firstObject];
+    NSString *protrait = [info lastObject];
+    
+    [[RCIM sharedRCIM] refreshUserInfoCache:[[RCUserInfo alloc] initWithUserId:user.userId name:nickname portrait:protrait] withUserId:user.userId];
+    [self.navigationController pushViewController:conversationVC animated:YES];
+}
+
 //弹出聊天框
 - (IBAction)MessageBtnDo:(id)sender {
     
@@ -458,7 +545,7 @@
 //回复消息的按钮
 - (IBAction)replyBtn:(id)sender {
     
-    
+    [self setRCIM];
 }
 
 - (IBAction)FirstBtn:(id)sender {
