@@ -1597,8 +1597,8 @@
                                     <constraint firstAttribute="height" constant="40" id="b3t-mf-P9C"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="uTs-8t-uT3">
-                                <rect key="frame" x="264" y="359" width="240" height="306"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="uTs-8t-uT3">
+                                <rect key="frame" x="264" y="337" width="240" height="350"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kls-PV-UND">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="102"/>
@@ -1611,14 +1611,14 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FaR-CJ-GFP">
-                                        <rect key="frame" x="0.0" y="102" width="240" height="102"/>
+                                        <rect key="frame" x="0.0" y="124.5" width="240" height="101"/>
                                         <state key="normal" image="screen_pause" backgroundImage="screen_control_btn"/>
                                         <connections>
                                             <action selector="stopBtnAction:" destination="5Gm-3R-5T0" eventType="touchUpInside" id="SBd-BN-ej2"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a8C-S8-IXo">
-                                        <rect key="frame" x="0.0" y="204" width="240" height="102"/>
+                                        <rect key="frame" x="0.0" y="248" width="240" height="102"/>
                                         <state key="normal" image="screen_down" backgroundImage="screen_control_btn"/>
                                         <connections>
                                             <action selector="downBtnAction:" destination="5Gm-3R-5T0" eventType="touchUpInside" id="N9f-KT-3ZB"/>
@@ -1626,8 +1626,8 @@
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="350" id="Fo4-MH-xhC"/>
                                     <constraint firstItem="a8C-S8-IXo" firstAttribute="height" secondItem="Kls-PV-UND" secondAttribute="height" id="MAQ-hU-1SM"/>
-                                    <constraint firstItem="FaR-CJ-GFP" firstAttribute="height" secondItem="Kls-PV-UND" secondAttribute="height" id="Rul-dG-HWt"/>
                                     <constraint firstItem="a8C-S8-IXo" firstAttribute="height" secondItem="Kls-PV-UND" secondAttribute="height" id="arD-bd-NyB"/>
                                     <constraint firstItem="a8C-S8-IXo" firstAttribute="width" secondItem="Kls-PV-UND" secondAttribute="width" id="eXz-ox-TAn"/>
                                 </constraints>
@@ -1647,6 +1647,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnDown" destination="a8C-S8-IXo" id="ZQQ-4f-F3O"/>
+                        <outlet property="btnPause" destination="FaR-CJ-GFP" id="bPA-o2-LGM"/>
+                        <outlet property="btnUP" destination="Kls-PV-UND" id="Owe-6b-7d8"/>
                         <outlet property="menuContainer" destination="9jX-aR-yte" id="2TY-OF-wbz"/>
                         <outlet property="menuTop" destination="g59-Xx-Wvb" id="JnC-Xe-vKb"/>
                     </connections>
