@@ -238,7 +238,7 @@
     [self.btnLeft setImage:[UIImage imageNamed:@"dir_left_red"]  forState:UIControlStateHighlighted];
     [self.btnRight setImage:[UIImage imageNamed:@"dir_right_red"]  forState:UIControlStateHighlighted];
     [self.btnPower setImage:[UIImage imageNamed:@"TV_on"] forState:UIControlStateSelected];
-    
+    [self.btnSwitch setImage:[UIImage imageNamed:@"TV_on"] forState:UIControlStateSelected];
     [self.btnOK setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
     [self.btnCHUP setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
     [self.btnCHDown setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];

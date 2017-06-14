@@ -125,7 +125,7 @@
     self.hzLabel.transform = CGAffineTransformMakeRotation(M_PI/2 + M_PI);
     self.collectionView.pagingEnabled = YES;
     [self.power setImage:[UIImage imageNamed:@"TV_on"] forState:UIControlStateSelected];
-    
+    [self.ipadPower setImage:[UIImage imageNamed:@"TV_on"] forState:UIControlStateSelected];
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(changeVolume) forControlEvents:UIControlEventValueChanged];
     

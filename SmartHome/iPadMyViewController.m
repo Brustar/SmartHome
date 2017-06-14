@@ -73,12 +73,11 @@
     
     RCGroup *aGroupInfo = [[RCGroup alloc]initWithGroupId:groupID groupName:homename portraitUri:@""];
     ConversationViewController *_conversationVC = [[ConversationViewController alloc] init];
-    _conversationVC.isShowInSplitView = YES;
     _conversationVC.conversationType = ConversationType_GROUP;
     _conversationVC.targetId = aGroupInfo.groupId;
     [_conversationVC setTitle: [NSString stringWithFormat:@"%@",aGroupInfo.groupName]];
     _conversationVC.hidesBottomBarWhenPushed = YES;
-    [_rightVC pushViewController:_conversationVC animated:YES];
+    [self.navigationController pushViewController:_conversationVC animated:YES];
 }
 
 #pragma mark - LeftViewControllerDelegate

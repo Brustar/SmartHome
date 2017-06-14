@@ -24,5 +24,7 @@
 
 @property (nonatomic,strong) NSMutableArray * lightArray;//灯光(存储的是设备id)
 @property (nonatomic, strong) NSMutableArray *deviceIDArray;//该房间的所有设备ID
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *monitorViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *deviceTableTop;
 
 @end

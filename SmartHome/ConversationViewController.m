@@ -11,6 +11,7 @@
 #import "ContextMenuCell.h"
 #import "SQLManager.h"
 #import "UIImageView+WebCache.h"
+#import "BaseTabBarController.h"
 
 static NSString *const menuCellIdentifier = @"groupCell";
 @interface ConversationViewController ()<UITableViewDelegate,UITableViewDataSource,YALContextMenuTableViewDelegate>
@@ -29,6 +30,13 @@ static NSString *const menuCellIdentifier = @"groupCell";
     // Do any additional setup after loading the view.
     //设置需要显示哪些类型的会话
     
+}
+
+- (void)viewWillAppear:(BOOL)animated { 
+    [super viewWillAppear:animated];
+    BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
+    baseTabbarController.tabbarPanel.hidden = YES;
+    baseTabbarController.tabBar.hidden = YES;
 }
 
 - (void)leftBarButtonItemPressed:(id)sender
