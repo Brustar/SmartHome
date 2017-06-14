@@ -230,7 +230,8 @@
     [super viewDidLoad];
     if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
-    [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 电视",roomName]];
+    self.title = [NSString stringWithFormat:@"%@ - 电视",roomName];
+    [self setNaviBarTitle:self.title];
     
     [self.btnMenu setImage:[UIImage imageNamed:@"TV_menu_red"] forState:UIControlStateHighlighted];
     [self.btnUP setImage:[UIImage imageNamed:@"dir_up_red"]  forState:UIControlStateHighlighted];
@@ -287,6 +288,7 @@
         self.mButtonTop.constant =40;
         self.cBottom.constant = 440;
         self.keypad.hidden = self.btnHome.hidden = self.btnBack.hidden = self.btnSwitch.hidden = self.CHUP.hidden = self.CHDown.hidden = self.ear.hidden = NO;
+        [(CustomViewController *)self.splitViewController.parentViewController setNaviBarTitle:self.title];
     }
 }
 
