@@ -25,6 +25,8 @@ static NSString *const leftMenuCell = @"leftMenuCell";
     if (self.typeID != light) {
         Device *device = [self.types objectAtIndex:0];
         [self showDetailViewController:[DeviceInfo calcController:device.hTypeId] sender:self];
+        
+        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
     }
 }
 
