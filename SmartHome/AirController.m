@@ -75,6 +75,11 @@ static NSString *const airCellIdentifier = @"airCell";
     self.disk.enabled = NO;
     [self initSwitch];
     self.tempreturePan.transform = CGAffineTransformMakeRotation(MIX_TEMP_ROTATE_DEGREE);
+    for (int i=8; i<16; i++) {
+        UIView *viewblue = [self.view viewWithTag:i+100];
+        viewblue.hidden = YES;
+    }
+    
     self.visitedBtns = [NSMutableArray new];
     self.params=@[@[@"speed_fast",@"speed_middle",@"speed_slow"],@[@"speed_dir_down",@"speed_dir_up"]];
     self.paramView.scrollEnabled=NO;
