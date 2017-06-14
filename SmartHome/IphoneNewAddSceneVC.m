@@ -451,10 +451,11 @@
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
         cell.roomID = self.roomID;
         cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+        cell.deviceid = _lightArray[indexPath.row];
         Device * device = [SQLManager getDeviceWithDeviceHtypeID:[_lightArray[indexPath.row] intValue]];
         cell.NewLightNameLabel.text = device.name;
         cell.NewLightSlider.continuous = NO;
-        cell.deviceid = _lightArray[indexPath.row];
+       
          _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
         cell.scene = _scene;
         

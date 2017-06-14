@@ -17,6 +17,7 @@
 @property (nonatomic,strong) NSArray * SubTypeIconeImage;
 @property (nonatomic, readonly) UIButton *naviRightBtn;
 @property (nonatomic, readonly) UIButton *naviLeftBtn;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -30,6 +31,18 @@
       self.roomList = [SQLManager getDevicesSubTypeNamesWithRoomID:self.roomID];
       [self setupNaviBar];
 
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+    
+    if ([self.delegate respondsToSelector:@selector(IpadDeviceType:selected:)]) {
+        
+        [self.delegate IpadDeviceType:self selected:0];
+    }
+    
 }
 - (void)setupNaviBar {
     

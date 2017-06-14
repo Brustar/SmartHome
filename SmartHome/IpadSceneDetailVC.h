@@ -16,7 +16,9 @@
 @property (nonatomic,weak) NSString *deviceid;
 @property (nonatomic,assign) int roomID;
 @property(nonatomic,assign) int sceneID;
-
+@property (nonatomic, assign) BOOL isGloom;
+@property (nonatomic, assign) BOOL isRomantic;
+@property (nonatomic, assign) BOOL isSprightly;
 -(void)refreshData:(NSArray *)data;
 
 @end

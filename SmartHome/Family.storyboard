@@ -70,7 +70,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="piA-cT-Bgk">
-                                                    <rect key="frame" x="58" y="113" width="60" height="20"/>
+                                                    <rect key="frame" x="58" y="112" width="60" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="Ddq-vh-vM9"/>
                                                         <constraint firstAttribute="width" constant="60" id="iCa-hc-Tjn"/>

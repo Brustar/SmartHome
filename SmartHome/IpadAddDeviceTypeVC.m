@@ -194,6 +194,8 @@
         Device *device = [SQLManager getDeviceWithDeviceID:[_lightArray[indexPath.row] intValue]];
         cell.NewLightNameLabel.text = device.name;
         cell.roomID = self.roomID;
+        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+        cell.deviceid = _lightArray[indexPath.row];
         cell.NewLightSlider.continuous = NO;
         cell.NewLightSlider.hidden = NO;
         cell.deviceid = _lightArray[indexPath.row];
@@ -218,6 +220,8 @@
         Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[indexPath.row] intValue]];
         newColourCell.colourNameLabel.text = device.name;
         newColourCell.roomID = self.roomID;
+        newColourCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+        newColourCell.deviceid = _ColourLightArr[indexPath.row];
         
         return newColourCell;
     }if (indexPath.section == 2) {//开关灯
@@ -227,6 +231,8 @@
         Device *device = [SQLManager getDeviceWithDeviceID:[_SwitchLightArr[indexPath.row] intValue]];
         newColourCell.powerLightNameLabel.text = device.name;
         newColourCell.roomID = self.roomID;
+        newColourCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+        newColourCell.deviceid = _SwitchLightArr[indexPath.row];
         return newColourCell;
     }
     if (indexPath.section == 3) {//空调
@@ -237,6 +243,8 @@
         aireCell.sceneid = self.sceneid;
         Device *device = [SQLManager getDeviceWithDeviceID:[_AirArray[indexPath.row] intValue]];
         aireCell.AireNameLabel.text = device.name;
+        aireCell.deviceid = _AirArray[indexPath.row];
+        aireCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         aireCell.deviceid = _AirArray[indexPath.row];
         
         return aireCell;
@@ -249,6 +257,8 @@
         Device *device = [SQLManager getDeviceWithDeviceID:[_CurtainArray[indexPath.row] intValue]];
         aireCell.label.text = device.name;
         aireCell.deviceid = _CurtainArray[indexPath.row];
+        aireCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+        aireCell.deviceid = _CurtainArray[indexPath.row];
         
         return aireCell;
     }if (indexPath.section == 5) {//TV
@@ -258,6 +268,8 @@
         Device *device = [SQLManager getDeviceWithDeviceID:[_TVArray[indexPath.row] intValue]];
         TVCell.TVNameLabel.text = device.name;
         TVCell.roomID = self.roomID;
+        TVCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+        TVCell.deviceid = _TVArray[indexPath.row];
         
         return TVCell;
     }if (indexPath.section == 6) {//DVD
@@ -267,6 +279,8 @@
         Device *device = [SQLManager getDeviceWithDeviceID:[_DVDArray[indexPath.row] intValue]];
         DVDCell.DVDNameLabel.text = device.name;
         DVDCell.roomID = self.roomID;
+        DVDCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+        DVDCell.deviceid = _DVDArray[indexPath.row];
         
         return DVDCell;
     }if (indexPath.section == 7) {//投影
@@ -277,6 +291,8 @@
         otherCell.NameLabel.text = device.name;
         otherCell.deviceid = _ProjectArray[indexPath.row];
         otherCell.roomID = self.roomID;
+        otherCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+        otherCell.deviceid = _ProjectArray[indexPath.row];
         
         return otherCell;
     }if (indexPath.section == 8) {//FM
@@ -287,6 +303,8 @@
         FMCell.FMNameLabel.text = device.name;
         FMCell.deviceid = _FMArray[indexPath.row];
         FMCell.roomID = self.roomID;
+        FMCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+        FMCell.deviceid = _FMArray[indexPath.row];
         
         return FMCell;
     }if (indexPath.section == 9) {//机顶盒
@@ -296,6 +314,8 @@
         otherCell.NameLabel.text = device.name;
         otherCell.deviceid = _NetVArray[indexPath.row];
         otherCell.roomID = self.roomID;
+        otherCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+        otherCell.deviceid = _NetVArray[indexPath.row];
         
         return otherCell;
     }if (indexPath.section == 10) {//幕布
@@ -306,6 +326,8 @@
         ScreenCell.ScreenCurtainLabel.text = device.name;
         ScreenCell.deviceid = _MBArray[indexPath.row];
         ScreenCell.roomID = self.roomID;
+        ScreenCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+        ScreenCell.deviceid = _MBArray[indexPath.row];
         
         return ScreenCell;
     }if (indexPath.section == 11) {//背景音乐
@@ -316,6 +338,8 @@
         BjMusicCell.BjMusicNameLb.text = device.name;
         BjMusicCell.deviceid = _BJMusicArray[indexPath.row];
         BjMusicCell.roomID = self.roomID;
+        BjMusicCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+        BjMusicCell.deviceid = _BJMusicArray[indexPath.row];
         
         return BjMusicCell;
     }
@@ -325,6 +349,8 @@
         otherCell.backgroundColor = [UIColor clearColor];
         otherCell.deviceid = _OtherArray[indexPath.row];
         otherCell.roomID = self.roomID;
+        otherCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+        otherCell.deviceid = _OtherArray[indexPath.row];
         if (_OtherArray.count) {
             Device *device = [SQLManager getDeviceWithDeviceID:[_OtherArray[indexPath.row] intValue]];
             if (device.name == nil) {

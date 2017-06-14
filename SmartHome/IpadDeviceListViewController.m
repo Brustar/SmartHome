@@ -71,6 +71,7 @@
      self.DevicesArr = [SQLManager getDeviceIDsBySeneId:self.sceneID];
      self.devices = [NSMutableArray array];
     
+    
     switch (row) {
         case 0:{
             
@@ -83,6 +84,7 @@
             }
             
              [self.rightVC refreshData:self.devices];
+             self.leftVC.DevicesArr = self.devices;
 
             break;
         }
@@ -96,6 +98,7 @@
                 }
             }
             [self.rightVC refreshData:self.devices];
+            self.leftVC.DevicesArr = self.devices;
             break;
         }
         case 2:{
@@ -108,6 +111,7 @@
                 }
             }
              [self.rightVC refreshData:self.devices];
+             self.leftVC.DevicesArr = self.devices;
             break;
         }
         case 3:{
@@ -120,6 +124,7 @@
                 }
             }
                [self.rightVC refreshData:self.devices];
+               self.leftVC.DevicesArr = self.devices;
             break;
         }
         case 4:{
@@ -131,6 +136,7 @@
                 }
             }
              [self.rightVC refreshData:self.devices];
+             self.leftVC.DevicesArr = self.devices;
             break;
         }
         case 5:{
@@ -142,6 +148,7 @@
                 }
             }
             [self.rightVC refreshData:self.devices];
+             self.leftVC.DevicesArr = self.devices;
             break;
         }
        
