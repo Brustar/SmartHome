@@ -72,27 +72,91 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hb9-2B-AN6">
-                                <rect key="frame" x="40" y="64" width="334" height="592"/>
+                                <rect key="frame" x="40" y="126" width="334" height="530"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="CtA-hI-je9" id="enw-1r-sWZ"/>
                                     <outlet property="delegate" destination="CtA-hI-je9" id="0F0-uU-cvL"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rhC-df-GZe" userLabel="patternView">
+                                <rect key="frame" x="40" y="66" width="334" height="60"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ipad-PatternBg" translatesAutoresizingMaskIntoConstraints="NO" id="dwt-HG-fuc">
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="60"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8On-zc-cGX">
+                                        <rect key="frame" x="0.0" y="0.0" width="111" height="60"/>
+                                        <state key="normal" title="柔和" image="lv_icon_light_soft" backgroundImage="Scene-bedroomJJ">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="gentleBtn:" destination="CtA-hI-je9" eventType="touchUpInside" id="Lpj-Da-bTD"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghj-Eu-67W">
+                                        <rect key="frame" x="111" y="0.0" width="112" height="60"/>
+                                        <state key="normal" title="正常" image="lv_icon_light_normal" backgroundImage="Scene-bedroomJJ">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="normalBtn:" destination="CtA-hI-je9" eventType="touchUpInside" id="eO5-25-UdE"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQp-zC-wUS">
+                                        <rect key="frame" x="223" y="0.0" width="111" height="60"/>
+                                        <state key="normal" title="明亮" image="lv_icon_light_bright" backgroundImage="Scene-bedroomJJ">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="brightBtn:" destination="CtA-hI-je9" eventType="touchUpInside" id="Xpd-PZ-Zz1"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="8On-zc-cGX" firstAttribute="leading" secondItem="rhC-df-GZe" secondAttribute="leading" id="0tm-cB-1X9"/>
+                                    <constraint firstItem="dwt-HG-fuc" firstAttribute="top" secondItem="rhC-df-GZe" secondAttribute="top" id="3xA-mW-hM1"/>
+                                    <constraint firstAttribute="bottom" secondItem="ghj-Eu-67W" secondAttribute="bottom" id="4fb-lb-iwZ"/>
+                                    <constraint firstItem="dQp-zC-wUS" firstAttribute="leading" secondItem="ghj-Eu-67W" secondAttribute="trailing" id="6fu-kC-74m"/>
+                                    <constraint firstAttribute="trailing" secondItem="dwt-HG-fuc" secondAttribute="trailing" id="7m4-qt-0Pu"/>
+                                    <constraint firstItem="ghj-Eu-67W" firstAttribute="width" secondItem="8On-zc-cGX" secondAttribute="width" id="AtC-0J-kKE"/>
+                                    <constraint firstItem="ghj-Eu-67W" firstAttribute="leading" secondItem="8On-zc-cGX" secondAttribute="trailing" id="CnJ-NO-fPP"/>
+                                    <constraint firstItem="dwt-HG-fuc" firstAttribute="leading" secondItem="rhC-df-GZe" secondAttribute="leading" id="N0e-GN-8P5"/>
+                                    <constraint firstItem="dQp-zC-wUS" firstAttribute="top" secondItem="rhC-df-GZe" secondAttribute="top" id="NLg-UU-P7S"/>
+                                    <constraint firstItem="ghj-Eu-67W" firstAttribute="top" secondItem="rhC-df-GZe" secondAttribute="top" id="aq8-4H-02g"/>
+                                    <constraint firstItem="8On-zc-cGX" firstAttribute="top" secondItem="rhC-df-GZe" secondAttribute="top" id="bCH-6h-327"/>
+                                    <constraint firstItem="ghj-Eu-67W" firstAttribute="height" secondItem="8On-zc-cGX" secondAttribute="height" id="bcC-ze-n7J"/>
+                                    <constraint firstItem="dQp-zC-wUS" firstAttribute="height" secondItem="8On-zc-cGX" secondAttribute="height" id="gv2-tI-3wm"/>
+                                    <constraint firstAttribute="bottom" secondItem="dwt-HG-fuc" secondAttribute="bottom" id="jqY-TR-ojT"/>
+                                    <constraint firstAttribute="bottom" secondItem="8On-zc-cGX" secondAttribute="bottom" id="n0K-CB-esa"/>
+                                    <constraint firstItem="dQp-zC-wUS" firstAttribute="width" secondItem="8On-zc-cGX" secondAttribute="width" id="o1Q-Sx-hVM"/>
+                                    <constraint firstAttribute="height" constant="60" id="rGu-Ur-1Mz"/>
+                                    <constraint firstAttribute="bottom" secondItem="dQp-zC-wUS" secondAttribute="bottom" id="trQ-ao-3Cq"/>
+                                    <constraint firstAttribute="trailing" secondItem="dQp-zC-wUS" secondAttribute="trailing" id="xgk-Gc-b2h"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="5Kt-1d-6qf" secondAttribute="trailing" id="4CZ-bG-lQR"/>
-                            <constraint firstItem="hb9-2B-AN6" firstAttribute="top" secondItem="6PS-oM-R3T" secondAttribute="bottom" constant="44" id="6XU-3h-0HI"/>
+                            <constraint firstItem="hb9-2B-AN6" firstAttribute="top" secondItem="6PS-oM-R3T" secondAttribute="bottom" constant="106" id="6XU-3h-0HI"/>
+                            <constraint firstItem="hb9-2B-AN6" firstAttribute="top" secondItem="rhC-df-GZe" secondAttribute="bottom" id="Lz4-St-AhQ"/>
                             <constraint firstItem="5Kt-1d-6qf" firstAttribute="leading" secondItem="Rm5-YI-Jgi" secondAttribute="leading" id="M79-c9-52U"/>
                             <constraint firstItem="WHF-ZW-KVR" firstAttribute="top" secondItem="5Kt-1d-6qf" secondAttribute="bottom" id="XtX-qw-og2"/>
                             <constraint firstItem="WHF-ZW-KVR" firstAttribute="top" secondItem="hb9-2B-AN6" secondAttribute="bottom" constant="80" id="cRY-Nx-MWt"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="rhC-df-GZe" secondAttribute="trailing" constant="20" id="h9c-9e-Kda"/>
                             <constraint firstItem="5Kt-1d-6qf" firstAttribute="top" secondItem="Rm5-YI-Jgi" secondAttribute="top" id="jy1-se-HkT"/>
                             <constraint firstItem="hb9-2B-AN6" firstAttribute="leading" secondItem="Rm5-YI-Jgi" secondAttribute="leading" constant="40" id="kDc-Yy-wVr"/>
+                            <constraint firstItem="rhC-df-GZe" firstAttribute="leading" secondItem="Rm5-YI-Jgi" secondAttribute="leadingMargin" constant="20" id="m3j-di-BpW"/>
                             <constraint firstAttribute="trailing" secondItem="hb9-2B-AN6" secondAttribute="trailing" constant="40" id="xR8-4S-myB"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="brightBtn" destination="dQp-zC-wUS" id="rlO-hE-6Fe"/>
+                        <outlet property="gentleBtn" destination="8On-zc-cGX" id="DQR-WC-dR2"/>
+                        <outlet property="normalBtn" destination="ghj-Eu-67W" id="UUb-tE-dah"/>
+                        <outlet property="patternView" destination="rhC-df-GZe" id="hs0-Wk-YQj"/>
                         <outlet property="tableView" destination="hb9-2B-AN6" id="qof-Mr-WNn"/>
                     </connections>
                 </viewController>
@@ -212,6 +276,9 @@
                             <constraint firstItem="1aX-VB-844" firstAttribute="top" secondItem="Xws-Ks-uxe" secondAttribute="bottom" constant="44" id="l2d-ns-kdC"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="1aX-VB-844" id="Wlw-yt-dhd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TQC-3F-9ac" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -383,11 +450,16 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Ipad-PatternBg" width="333" height="31"/>
+        <image name="Scene-bedroomJJ" width="62" height="29"/>
         <image name="background" width="414" height="736"/>
         <image name="icon_light_nol" width="16" height="16"/>
         <image name="icon_right_nol" width="16" height="16"/>
         <image name="ipad-btn_choose_nol" width="125" height="30"/>
         <image name="ipad-frm_left_nol" width="127" height="303"/>
         <image name="line_horizontal_white" width="414" height="53"/>
+        <image name="lv_icon_light_bright" width="15" height="15"/>
+        <image name="lv_icon_light_normal" width="13" height="14"/>
+        <image name="lv_icon_light_soft" width="10" height="13"/>
     </resources>
 </document>

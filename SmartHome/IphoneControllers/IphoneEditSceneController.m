@@ -44,9 +44,9 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveBarBtn;
 @property (weak, nonatomic) UIViewController *currentViewController;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIButton *gentleBtn;//柔和
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *TableViewConstraint;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *TableViewConstraint;
+@property (weak, nonatomic) IBOutlet UIButton *gentleBtn;//柔和
 @property (weak, nonatomic) IBOutlet UIButton *normalBtn;//正常
 @property (weak, nonatomic) IBOutlet UIView *patternView;//三种模式的父视图
 
@@ -101,7 +101,9 @@
 //     _AllDeviceArr = [SQLManager getDeviceIDWithRoomID:self.roomID sceneID:self.sceneID];
     self.title = [SQLManager getSceneName:self.sceneID];
     self.typeArr = [SQLManager getSubTydpeBySceneID:self.sceneID];//设备大类作为分组
-   
+    [self.gentleBtn setBackgroundImage:[UIImage imageNamed:@"choose"] forState:UIControlStateSelected];
+    [self.normalBtn setBackgroundImage:[UIImage imageNamed:@"choose"] forState:UIControlStateSelected];
+    [self.brightBtn setBackgroundImage:[UIImage imageNamed:@"choose"] forState:UIControlStateSelected];
     [self getUI];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
@@ -664,6 +666,8 @@
        cell.LightConstraint.constant = 10;
        Device *device = [SQLManager getDeviceWithDeviceID:[_lightArray[indexPath.row] intValue]];
        cell.NewLightNameLabel.text = device.name;
+//       cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+       cell.deviceid = _lightArray[indexPath.row];
        cell.NewLightSlider.continuous = NO;
        cell.NewLightSlider.hidden = NO;
        cell.deviceid = _lightArray[indexPath.row];
@@ -686,6 +690,8 @@
        newColourCell.AddColourLightBtn.hidden = YES;
        newColourCell.ColourLightConstraint.constant = 10;
        newColourCell.backgroundColor =[UIColor clearColor];
+//       newColourCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+       newColourCell.deviceid = _ColourLightArr[indexPath.row];
         Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[indexPath.row] intValue]];
        newColourCell.colourNameLabel.text = device.name;
        newColourCell.colourBtn.selected = device.power;//开关状态
@@ -700,6 +706,8 @@
        newColourCell.powerBtnConstraint.constant = 10;
        newColourCell.backgroundColor =[UIColor clearColor];
        Device *device = [SQLManager getDeviceWithDeviceID:[_SwitchLightArr[indexPath.row] intValue]];
+//       newColourCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+       newColourCell.deviceid = _SwitchLightArr[indexPath.row];
        newColourCell.powerLightNameLabel.text = device.name;
        newColourCell.powerLightBtn.selected = device.power;//开关状态
        if (_isGloom || _isRomantic || _isSprightly) {
@@ -716,6 +724,8 @@
         aireCell.roomID = self.roomID;
         aireCell.sceneid = self.sceneid;
          Device *device = [SQLManager getDeviceWithDeviceID:[_AirArray[indexPath.row] intValue]];
+//        aireCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+        aireCell.deviceid = _AirArray[indexPath.row];
         aireCell.AireNameLabel.text = device.name;
         aireCell.deviceid = _AirArray[indexPath.row];
         
@@ -728,6 +738,8 @@
         aireCell.roomID = self.roomID;
         aireCell.sceneid = self.sceneid;
         Device *device = [SQLManager getDeviceWithDeviceID:[_CurtainArray[indexPath.row] intValue]];
+//        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+        aireCell.deviceid = _CurtainArray[indexPath.row];
         aireCell.label.text = device.name;
         aireCell.deviceid = _CurtainArray[indexPath.row];
         
@@ -738,6 +750,8 @@
         TVCell.AddTvDeviceBtn.hidden = YES;
         TVCell.backgroundColor =[UIColor clearColor];
           Device *device = [SQLManager getDeviceWithDeviceID:[_TVArray[indexPath.row] intValue]];
+//        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+        TVCell.deviceid = _TVArray[indexPath.row];
         TVCell.TVNameLabel.text = device.name;
         
         return TVCell;
@@ -747,6 +761,8 @@
         DVDCell.DVDConstraint.constant = 10;
         DVDCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_DVDArray[indexPath.row] intValue]];
+//        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+        DVDCell.deviceid = _DVDArray[indexPath.row];
         DVDCell.DVDNameLabel.text = device.name;
         
         return DVDCell;
@@ -757,6 +773,8 @@
         otherCell.backgroundColor = [UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_ProjectArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
+//        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+        otherCell.deviceid = _ProjectArray[indexPath.row];
         otherCell.deviceid = _ProjectArray[indexPath.row];
         
         return otherCell;
@@ -765,6 +783,8 @@
         FMCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_FMArray[indexPath.row] intValue]];
         FMCell.FMNameLabel.text = device.name;
+//        FMCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+        FMCell.deviceid = _FMArray[indexPath.row];
         FMCell.deviceid = _FMArray[indexPath.row];
         FMCell.AddFmBtn.hidden = YES;
         FMCell.FMLayouConstraint.constant = 5;
@@ -777,6 +797,8 @@
         otherCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_NetVArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
+//        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+        otherCell.deviceid = _NetVArray[indexPath.row];
         otherCell.deviceid = _NetVArray[indexPath.row];
         
         return otherCell;
@@ -787,6 +809,8 @@
         ScreenCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_MBArray[indexPath.row] intValue]];
         ScreenCell.ScreenCurtainLabel.text = device.name;
+//        ScreenCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+        ScreenCell.deviceid = _MBArray[indexPath.row];
         ScreenCell.deviceid = _MBArray[indexPath.row];
         
         return ScreenCell;
@@ -797,6 +821,8 @@
         BjMusicCell.BJmusicConstraint.constant = 10;
         Device *device = [SQLManager getDeviceWithDeviceID:[_BJMusicArray[indexPath.row] intValue]];
         BjMusicCell.BjMusicNameLb.text = device.name;
+//        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+        BjMusicCell.deviceid = _BJMusicArray[indexPath.row];
         BjMusicCell.deviceid = _BJMusicArray[indexPath.row];
         
         return BjMusicCell;

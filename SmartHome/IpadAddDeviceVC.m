@@ -34,13 +34,17 @@
     self.tableView.tableFooterView = [UIView new];
     [self setupNaviBar];
     
-   
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+      [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+    if ([self.delegate respondsToSelector:@selector(IpadAddDeviceVC:selected:)]) {
+        
+        [self.delegate IpadAddDeviceVC:self selected:0];
+    }
 
 }
 #pragma mark - Table view data source
