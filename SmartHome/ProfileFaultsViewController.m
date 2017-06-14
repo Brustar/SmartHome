@@ -91,6 +91,7 @@
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         [self adjustNaviBarFrameForSplitView];
         [self adjustTitleFrameForSplitView];
+        [self setNaviBarLeftBtn:nil];
     }
     
     //获取所有故障信息

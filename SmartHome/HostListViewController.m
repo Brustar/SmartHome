@@ -20,6 +20,7 @@
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         [self adjustNaviBarFrameForSplitView];
         [self adjustTitleFrameForSplitView];
+        [self setNaviBarLeftBtn:nil];
     }
     _selectedHost = [[UD objectForKey:@"HostID"] stringValue];
     _hostArray = [NSMutableArray array];

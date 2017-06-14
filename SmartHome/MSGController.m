@@ -149,6 +149,7 @@
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         [self adjustNaviBarFrameForSplitView];
         [self adjustTitleFrameForSplitView];
+        [self setNaviBarLeftBtn:nil];
     }
     
 }
