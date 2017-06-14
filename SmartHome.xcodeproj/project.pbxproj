@@ -151,6 +151,8 @@
 		2E1495101DE474EF00141629 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9ADF711CE2DC020052F3BC /* libz.tbd */; };
 		2E192CA71EBB2D3F00458541 /* CKCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E192CA61EBB2D3F00458541 /* CKCircleView.m */; };
 		2E2B57195D5A936F7BD15641 /* libPods-SmartHome.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9FD66F09F2092DE805E0F5B /* libPods-SmartHome.a */; };
+		2E2D92CE1EF1067C0007B90A /* PowerLightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D92CC1EF1067C0007B90A /* PowerLightCell.m */; };
+		2E2D92CF1EF1067C0007B90A /* PowerLightCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E2D92CD1EF1067C0007B90A /* PowerLightCell.xib */; };
 		2E4297FF1ED66BAD003F4A76 /* IpadDeviceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E4297FE1ED66BAD003F4A76 /* IpadDeviceListViewController.m */; };
 		2E4298021ED66CBA003F4A76 /* IpadDeviceTypeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E4298011ED66CBA003F4A76 /* IpadDeviceTypeVC.m */; };
 		2E4298061ED67870003F4A76 /* IpadDeviceTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E4298041ED67870003F4A76 /* IpadDeviceTypeCell.m */; };
@@ -744,6 +746,9 @@
 		2E12CC151E7FC04800C7D006 /* IphoneNewEditSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneNewEditSceneController.m; sourceTree = "<group>"; };
 		2E192CA51EBB2D3F00458541 /* CKCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKCircleView.h; sourceTree = "<group>"; };
 		2E192CA61EBB2D3F00458541 /* CKCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKCircleView.m; sourceTree = "<group>"; };
+		2E2D92CB1EF1067C0007B90A /* PowerLightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerLightCell.h; sourceTree = "<group>"; };
+		2E2D92CC1EF1067C0007B90A /* PowerLightCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerLightCell.m; sourceTree = "<group>"; };
+		2E2D92CD1EF1067C0007B90A /* PowerLightCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PowerLightCell.xib; sourceTree = "<group>"; };
 		2E4297FD1ED66BAD003F4A76 /* IpadDeviceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpadDeviceListViewController.h; sourceTree = "<group>"; };
 		2E4297FE1ED66BAD003F4A76 /* IpadDeviceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IpadDeviceListViewController.m; sourceTree = "<group>"; };
 		2E4298001ED66CBA003F4A76 /* IpadDeviceTypeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpadDeviceTypeVC.h; sourceTree = "<group>"; };
@@ -2189,6 +2194,9 @@
 				2E6A06581EA743B50022B681 /* NewColourCell.h */,
 				2E6A06591EA743B50022B681 /* NewColourCell.m */,
 				2E6A065A1EA743B50022B681 /* NewColourCell.xib */,
+				2E2D92CB1EF1067C0007B90A /* PowerLightCell.h */,
+				2E2D92CC1EF1067C0007B90A /* PowerLightCell.m */,
+				2E2D92CD1EF1067C0007B90A /* PowerLightCell.xib */,
 			);
 			name = TableViewCell;
 			sourceTree = "<group>";
@@ -2720,6 +2728,7 @@
 				CDEE5EAC1ECDD82E00A5779D /* portrait.png in Resources */,
 				F668AF251D53413B0079587F /* Main.storyboard in Resources */,
 				2E12CC121E7F5E3000C7D006 /* CYPhotoCell.xib in Resources */,
+				2E2D92CF1EF1067C0007B90A /* PowerLightCell.xib in Resources */,
 				CDEC868B1E99CD7B009EC245 /* Family.storyboard in Resources */,
 				CDF3892E1E30CFD000657C8B /* userPushNotifyList.plist in Resources */,
 				CD7DDA071E81168000638DB3 /* login_pwd@2x.png in Resources */,
@@ -3302,6 +3311,7 @@
 				CD4F12441EB316EF00E0B301 /* DeliveryAddressViewController.m in Sources */,
 				2EBABC821E83787B0093EF3A /* ScreenTableViewCell.m in Sources */,
 				F617771D1DCC23AC00B382D4 /* CollectionViewCell.m in Sources */,
+				2E2D92CE1EF1067C0007B90A /* PowerLightCell.m in Sources */,
 				0FAF98B61CE45EC9009BDBB5 /* CryptoManager.m in Sources */,
 				2EEE536E1E309C5D0026F97D /* MyView.m in Sources */,
 				F62CFA441DAC90DD006410F7 /* IphoneSaveNewSceneController.m in Sources */,

@@ -28,6 +28,7 @@
 #import "DeviceListTimeVC.h"
 #import "DeviceTimingViewController.h"
 #import "IphoneEditSceneController.h"
+#import "PowerLightCell.h"
 
 
 @interface IphoneNewAddSceneVC ()<UITableViewDelegate,UITableViewDataSource,IphoneRoomViewDelegate>
@@ -165,6 +166,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"BjMusicTableViewCell" bundle:nil] forCellReuseIdentifier:@"BjMusicTableViewCell"];//背景音乐
     [self.tableView registerNib:[UINib nibWithNibName:@"NewLightCell" bundle:nil] forCellReuseIdentifier:@"NewLightCell"];//背景音乐
     [self.tableView registerNib:[UINib nibWithNibName:@"FMTableViewCell" bundle:nil] forCellReuseIdentifier:@"FMTableViewCell"];//FM
+     [self.tableView registerNib:[UINib nibWithNibName:@"PowerLightCell" bundle:nil] forCellReuseIdentifier:@"PowerLightCell"];//开关灯
 }
 - (void)setupNaviBar {
     [self setNaviBarTitle:@"添加场景"]; //设置标题
@@ -471,17 +473,12 @@
         
         return newColourCell;
     }if (indexPath.section == 2) {//开关灯
-        NewColourCell * newColourCell = [tableView dequeueReusableCellWithIdentifier:@"NewColourCell" forIndexPath:indexPath];
+        PowerLightCell * newColourCell = [tableView dequeueReusableCellWithIdentifier:@"PowerLightCell" forIndexPath:indexPath];
         newColourCell.roomID = self.roomID;
         newColourCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         newColourCell.backgroundColor =[UIColor clearColor];
          Device * device = [SQLManager getDeviceWithDeviceHtypeID:[_SwitchLightArr[indexPath.row] intValue]];
-        newColourCell.colourNameLabel.text = device.name;
-        newColourCell.supimageView.hidden = YES;
-        newColourCell.lowImageView.hidden = YES;
-        newColourCell.highImageView.hidden = YES;
-        newColourCell.colourSlider.continuous = NO;
-        newColourCell.colourSlider.hidden = YES;
+        newColourCell.powerLightNameLabel.text = device.name;
         newColourCell.deviceid = _SwitchLightArr[indexPath.row];
          _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
         newColourCell.scene = _scene;
@@ -625,7 +622,7 @@
     if (indexPath.section == 5 || indexPath.section == 6 || indexPath.section == 8) {
         return 150;
     }
-    if (indexPath.section == 9 || indexPath.section == 7 || indexPath.section == 12 ) {
+    if (indexPath.section == 9 || indexPath.section == 7 || indexPath.section == 12 || indexPath.section == 2) {
         return 50;
     }
     return 100;

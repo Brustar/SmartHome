@@ -29,11 +29,11 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YJM-5P-DIA">
-                        <rect key="frame" x="260" y="7" width="55" height="35"/>
+                        <rect key="frame" x="260" y="6.5" width="55" height="35"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="35" id="5kO-T3-88h"/>
-                            <constraint firstAttribute="width" constant="55" id="d4m-ez-m46"/>
+                            <constraint firstAttribute="height" constant="35" id="XBq-N2-buU"/>
+                            <constraint firstAttribute="width" constant="55" id="q9m-fz-bj3"/>
                         </constraints>
                         <state key="normal" backgroundImage="dvd_btn_switch_off"/>
                     </button>
@@ -48,10 +48,10 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="YJM-5P-DIA" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="13o-Vi-qgk"/>
+                    <constraint firstAttribute="trailing" secondItem="YJM-5P-DIA" secondAttribute="trailing" constant="60" id="5i8-zf-anK"/>
                     <constraint firstItem="7yR-HS-KRG" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="AO0-IQ-Bhe"/>
+                    <constraint firstItem="YJM-5P-DIA" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="AuD-cJ-cdN"/>
                     <constraint firstItem="7yR-HS-KRG" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Nbw-Ya-Z73"/>
-                    <constraint firstItem="7yR-HS-KRG" firstAttribute="leading" secondItem="YJM-5P-DIA" secondAttribute="trailing" constant="22" id="WQS-4S-FCc"/>
                     <constraint firstItem="QTR-CU-OME" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="a9J-nd-2mZ"/>
                     <constraint firstAttribute="bottom" secondItem="QTR-CU-OME" secondAttribute="bottom" id="chs-a4-HBk"/>
                     <constraint firstItem="QTR-CU-OME" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="s4r-Pu-ZUk"/>
@@ -60,9 +60,10 @@
             <connections>
                 <outlet property="AddOtherBtn" destination="7yR-HS-KRG" id="NJr-aP-Zbl"/>
                 <outlet property="NameLabel" destination="QTR-CU-OME" id="vod-I0-Cys"/>
+                <outlet property="OtherConstraint" destination="5i8-zf-anK" id="TSq-Ki-P3z"/>
                 <outlet property="OtherSwitchBtn" destination="YJM-5P-DIA" id="YFT-H5-5oM"/>
             </connections>
-            <point key="canvasLocation" x="32.5" y="113"/>
+            <point key="canvasLocation" x="207" y="108"/>
         </tableViewCell>
     </objects>
     <resources>

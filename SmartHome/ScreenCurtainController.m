@@ -112,7 +112,8 @@
     [super viewDidLoad];
     if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
-    [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 幕布",roomName]];
+    self.title = [NSString stringWithFormat:@"%@ - 幕布",roomName];
+    [self setNaviBarTitle:self.title];
     self.deviceid =[SQLManager singleDeviceWithCatalogID:screen byRoom:self.roomID];
     self.menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
     if (self.menus.count<6) {
@@ -124,6 +125,7 @@
     
     if (ON_IPAD) {
         self.menuTop.constant = 0;
+        [(CustomViewController *)self.splitViewController.parentViewController setNaviBarTitle:self.title];
     }
 }
 

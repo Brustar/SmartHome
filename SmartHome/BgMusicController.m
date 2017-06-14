@@ -135,7 +135,8 @@ BOOL animating;
     [super viewDidLoad];
     if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
-    [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 背景音乐",roomName]];
+    self.title = [NSString stringWithFormat:@"%@ - 背景音乐",roomName];
+    [self setNaviBarTitle:self.title];
     [self initSlider];
     self.menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
     if (self.menus.count<6) {
@@ -182,6 +183,7 @@ BOOL animating;
         self.shuffleTop.constant = 40;
         self.shuffleRight.constant = 600;
         self.ear.hidden = self.btnNext.hidden = self.prevoius.hidden = self.ipadPlay.hidden = NO;
+        [(CustomViewController *)self.splitViewController.parentViewController setNaviBarTitle:self.title];
     }
 }
 

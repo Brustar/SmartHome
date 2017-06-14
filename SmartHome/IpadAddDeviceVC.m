@@ -14,6 +14,7 @@
 @interface IpadAddDeviceVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @property (nonatomic,strong) NSArray * roomList;
 @property (nonatomic,strong) NSArray * SubTypeNameArr;
 @property (nonatomic,strong) NSArray * SubTypeIconeImage;
@@ -33,11 +34,14 @@
     self.tableView.tableFooterView = [UIView new];
     [self setupNaviBar];
     
-//    if ([self.delegate respondsToSelector:@selector(IpadAddDeviceVC:selected:)]) {
-//        
-//        [self.delegate IpadAddDeviceVC:self selected:0];
-//    }
+   
     
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
 }
 #pragma mark - Table view data source
 
@@ -56,7 +60,6 @@
 
 }
 
-
 -(void)rightBtnClicked:(UIButton *)rightBtn
 {
         UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
@@ -73,11 +76,14 @@
     cell.SubTypeNameLabel.text = self.SubTypeNameArr[indexPath.row];
     cell.SubTypeIconeImage.image = [UIImage imageNamed:self.SubTypeIconeImage[indexPath.row]];
     
+  
+    
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if ([self.delegate respondsToSelector:@selector(IpadAddDeviceVC:selected:)]) {
         
         [self.delegate IpadAddDeviceVC:self selected:indexPath.row];

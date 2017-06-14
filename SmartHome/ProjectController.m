@@ -97,7 +97,8 @@
     [super viewDidLoad];
     if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
-    [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 投影机",roomName]];
+    self.title = [NSString stringWithFormat:@"%@ - 投影机",roomName];
+    [self setNaviBarTitle:self.title];
     [self initSwitcher];
         
     self.deviceid = [SQLManager singleDeviceWithCatalogID:projector byRoom: self.roomID];
@@ -126,6 +127,7 @@
     
     if (ON_IPAD) {
         self.menuTop.constant = 0;
+        [(CustomViewController *)self.splitViewController.parentViewController setNaviBarTitle:self.title];
     }
 }
 

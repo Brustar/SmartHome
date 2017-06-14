@@ -190,6 +190,7 @@
                                         <connections>
                                             <outlet property="SubTypeIconeImage" destination="xDD-85-0wy" id="kPY-1m-ZMe"/>
                                             <outlet property="SubTypeNameLabel" destination="SVn-EJ-Wfm" id="X4a-tz-aOP"/>
+                                            <outlet property="cellBackgroundImageView" destination="ymY-Qc-bm8" id="TSV-Vg-QYx"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
