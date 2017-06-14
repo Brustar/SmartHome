@@ -62,6 +62,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setNaviBarTitle:@"智能账单"];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [self adjustNaviBarFrameForSplitView];
+        [self adjustTitleFrameForSplitView];
+    }
+    
     [self sendRequestToGetEenrgy];
     self.TimerView.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
     self.deviceTitleLabel.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];

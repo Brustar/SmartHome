@@ -105,6 +105,20 @@
 - (void)initUI {
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
     self.roomNameLabel.text = self.roomName;
+    
+    if (ON_IPAD) {
+        self.monitorViewHeight.constant = 480;
+        self.cameraViewTop.constant = 50;
+        self.cameraViewBottom.constant = 80;
+        self.cameraViewLeading.constant = 50;
+        self.cameraViewTrailing.constant = 50;
+        self.adjustBtnLeading.constant = 50;
+        self.adjustBtnBottom.constant = 40;
+        self.fullScreenBtnTrailing.constant = self.adjustBtnLeading.constant;
+        self.fullScreenBtnBottom.constant = self.adjustBtnBottom.constant;
+        self.rNameLabelBottom.constant = self.fullScreenBtnBottom.constant;
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning {

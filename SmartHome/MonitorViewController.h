@@ -27,6 +27,16 @@
 @property (nonatomic) float lastFrameTime;
 @property (nonatomic, retain) NSTimer *nextFrameTimer;
 @property (nonatomic, assign) id<MonitorViewControllerDelegate> delegate;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *monitorViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cameraViewTrailing;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cameraViewLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cameraViewBottom;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cameraViewTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *adjustBtnLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *adjustBtnBottom;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *fullScreenBtnTrailing;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *fullScreenBtnBottom;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rNameLabelBottom;
 
 - (IBAction)adjustBtnClicked:(id)sender;
 - (IBAction)fullScreenBtnClicked:(id)sender;

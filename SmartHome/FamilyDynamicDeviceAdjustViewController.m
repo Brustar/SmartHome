@@ -23,6 +23,10 @@
 
 - (void)initUI {
     [self setNaviBarTitle:self.roomName];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [self adjustNaviBarFrameForSplitView];
+        [self adjustTitleFrameForSplitView];
+    }
     [self setupMonitorView];
     [self.deviceTableView registerNib:[UINib nibWithNibName:@"NewLightCell" bundle:nil] forCellReuseIdentifier:@"NewLightCell"];//灯光
     [self.deviceTableView registerNib:[UINib nibWithNibName:@"NewColourCell" bundle:nil] forCellReuseIdentifier:@"NewColourCell"];//调色灯
@@ -31,6 +35,11 @@
     self.deviceTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
     self.deviceTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.deviceTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    if (ON_IPAD) {
+        self.monitorViewHeight.constant = 520;
+        self.deviceTableTop.constant = 570;
+    }
 }
 
 - (void)getLights {
