@@ -11,6 +11,7 @@
 #import "MonitorViewController.h"
 #import "FamilyDynamicDeviceAdjustViewController.h"
 #import "MBProgressHUD+NJ.h"
+#import <AFNetworking.h>
 
 @interface FamilyDynamicViewController : CustomViewController<UIScrollViewDelegate, MonitorViewControllerDelegate>
 

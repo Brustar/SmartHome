@@ -16,9 +16,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //[MBProgressHUD showMessage:@"请稍候..."];
-    [self initDataSource];
-    [self initUI];
+    
+    if ([self checkNetWork]) {
+        [self initDataSource];
+        [self initUI];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -29,6 +31,16 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [MBProgressHUD hideHUD];
+}
+
+- (BOOL)checkNetWork {
+    if (![[AFNetworkReachabilityManager sharedManager] isReachable]) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:@"网络异常，请检查网络"];
+        return NO;
+    }else {
+        return YES;
+    }
 }
 
 - (void)initUI {

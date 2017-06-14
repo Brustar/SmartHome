@@ -76,6 +76,12 @@
     }
 }
 
+#pragma mark - TCP recv delegate
+- (void)recv:(NSData *)data withTag:(long)tag
+{
+    
+}
+
 - (void)connect
 {
     SocketManager *sock = [SocketManager defaultManager];
