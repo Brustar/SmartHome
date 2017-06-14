@@ -99,7 +99,8 @@
     [super viewDidLoad];
     if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
-    [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 功放",roomName]];
+    self.title = [NSString stringWithFormat:@"%@ - 功放",roomName];
+    [self setNaviBarTitle:self.title];
     self.deviceid = [self.amplifierIDArr firstObject];
     [self initSwitcher];
     
@@ -129,6 +130,7 @@
     
     if (ON_IPAD) {
         self.menuTop.constant = 0;
+        [(CustomViewController *)self.splitViewController.parentViewController setNaviBarTitle:self.title];
     }
 }
 

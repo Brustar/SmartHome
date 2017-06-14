@@ -94,7 +94,8 @@
     [super viewDidLoad];
     if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
-    [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - DVD",roomName]];
+    self.title = [NSString stringWithFormat:@"%@ - DVD",roomName];
+    [self setNaviBarTitle:self.title];
     [self initSlider];
     self.menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
     if (self.menus.count<6) {
@@ -144,6 +145,7 @@
         self.voiceLeft.constant = self.voiceRight.constant = 100;
         self.controlLeft.constant = self.controlRight.constant = 200;
         self.controlBottom.constant = 160;
+        [(CustomViewController *)self.splitViewController.parentViewController setNaviBarTitle:self.title];
     }
 }
 

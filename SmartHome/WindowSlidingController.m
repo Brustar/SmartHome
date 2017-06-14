@@ -82,11 +82,13 @@
     [self naviToDevice];
     
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
-    [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - %@",roomName,windowType]];
+    self.title = [NSString stringWithFormat:@"%@ - %@",roomName,windowType];
+    [self setNaviBarTitle:self.title];
     self.deviceid = [SQLManager singleDeviceWithCatalogID:windowOpener byRoom:self.roomID];
     [self initSwitcher];
     if (ON_IPAD) {
         self.menuTop.constant = 0;
+        [(CustomViewController *)self.splitViewController.parentViewController setNaviBarTitle:self.title];
     }
 }
 
