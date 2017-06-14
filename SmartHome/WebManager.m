@@ -73,6 +73,8 @@
     [super viewDidLoad];
     [self addNotifications];
     [self setNaviBarTitle:self.naviTitle];
+    self.m_viewNaviBar.delegate = self;
+    self.m_viewNaviBar.m_viewCtrlParent = nil;
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad && _isShowInSplitView) {
         [self adjustNaviBarFrameForSplitView];
@@ -100,7 +102,11 @@
 - (void)addNotifications {
     [NC addObserver:self selector:@selector(onWeChatPaySuccess:) name:@"WeChatPaySuccess" object:nil];
     [NC addObserver:self selector:@selector(onWeChatPayFailed:) name:@"WeChatPayFailed" object:nil];
-    
+    [NC addObserver:self selector:@selector(fetchAddressList) name:@"fetchAddressListNotification" object:nil];
+}
+
+- (void)fetchAddressList {
+    [_webView reload];
 }
 
 - (void)removeNotifications {
@@ -137,6 +143,10 @@
     // NOTE: ------  对alipays:相关的scheme处理 -------
     // NOTE: 若遇到支付宝相关scheme，则跳转到本地支付宝App
     NSString* reqUrl = request.URL.absoluteString;
+    
+    
+    ////////////////////////////////////////////////   支付宝支付   //////////////////////////////////////////////////
+    
     if ([reqUrl hasPrefix:@"alipays://"] || [reqUrl hasPrefix:@"alipay://"]) {
         // NOTE: 跳转支付宝App
         BOOL bSucc = [[UIApplication sharedApplication] openURL:request.URL];
@@ -153,12 +163,15 @@
         return NO;
     }
     
+    ////////////////////////////////////////////////   关闭页面   ///////////////////////////////////////////////////
     
     if([request.URL.scheme isEqualToString:@"ecloud"])
     {
         [self cancel:nil];
         return NO;
     }
+    
+    ////////////////////////////////////////////////   微信支付   ///////////////////////////////////////////////////
     
     if ([request.URL.absoluteString hasPrefix:@"wxpay"]) {   //微信支付指令
         
@@ -174,7 +187,15 @@
                 [[WeChatPayManager sharedInstance] weixinPayWithOrderID:[orderID integerValue]];
             }
         }
-        
+        return NO;
+    }
+    
+    //////////////////////////////////////////////   增加地址   /////////////////////////////////////////////////////
+    if ([reqUrl hasPrefix:@"addr://"]) {
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
+        DeliveryAddressSettingViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"DeliveryAddressSettingVC"];
+        vc.optype = 3;// 添加
+        [self.navigationController pushViewController:vc animated:YES];
     }
     
     return YES;
@@ -206,6 +227,15 @@
 
 - (void)dealloc {
     [self removeNotifications];
+}
+
+#pragma mark - CustomNaviBarViewDelegate
+- (void)onBackBtnClicked:(id)sender {
+    if ([_webView canGoBack]) {
+        [_webView goBack];
+    }else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 @end
