@@ -38,6 +38,7 @@
     _myTableView.tableHeaderView = [self setupTableHeader];
     _myTableView.tableFooterView = [self setupTableFooter];
     [self.view addSubview:_myTableView];
+    self.view.backgroundColor = [UIColor colorWithRed:30.0/255.0 green:29.0/255.0 blue:34.0/255.0 alpha:1.0];
 }
 
 - (void)bgButtonClicked:(UIButton *)btn {
@@ -162,11 +163,13 @@
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, headerWidth, 250)];
     view.backgroundColor = [UIColor clearColor];
     
-    UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 20, 40, 40)];
-    [backBtn setImage:[UIImage imageNamed:@"backBtn"] forState:UIControlStateNormal];
-    [backBtn setImage:[UIImage imageNamed:@"backBtn"] forState:UIControlStateHighlighted];
-    [backBtn addTarget:self action:@selector(backBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [view addSubview:backBtn];
+    if (ON_IPAD) {
+        UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 20, 40, 40)];
+        [backBtn setImage:[UIImage imageNamed:@"backBtn"] forState:UIControlStateNormal];
+        [backBtn setImage:[UIImage imageNamed:@"backBtn"] forState:UIControlStateHighlighted];
+        [backBtn addTarget:self action:@selector(backBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [view addSubview:backBtn];
+    }
     
     UIButton *headButton = [UIButton buttonWithType:UIButtonTypeCustom];
     headButton.frame = CGRectMake((CGRectGetWidth(view.frame)-100)/2, 60, 100, 100);
