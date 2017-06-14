@@ -1025,9 +1025,9 @@
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uv7-AJ-NnR">
                                 <rect key="frame" x="208" y="116" width="46" height="46"/>
-                                <state key="normal" image="DVD_play" backgroundImage="music_button_control"/>
+                                <state key="normal" image="TV_off" backgroundImage="music_button_control"/>
                                 <connections>
-                                    <action selector="playMusic:" destination="3WJ-Xx-j8F" eventType="touchUpInside" id="uD2-5Z-zhk"/>
+                                    <action selector="toogle:" destination="3WJ-Xx-j8F" eventType="touchUpInside" id="TLi-sG-hDm"/>
                                 </connections>
                             </button>
                         </subviews>
