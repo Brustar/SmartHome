@@ -34,11 +34,14 @@
     self.tableView.tableFooterView = [UIView new];
     [self setupNaviBar];
     
-//    if ([self.delegate respondsToSelector:@selector(IpadAddDeviceVC:selected:)]) {
-//        
-//        [self.delegate IpadAddDeviceVC:self selected:0];
-//    }
+   
     
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
 }
 #pragma mark - Table view data source
 
@@ -56,7 +59,6 @@
     [self setNaviBarRightBtn:_naviRightBtn];
 
 }
-
 
 -(void)rightBtnClicked:(UIButton *)rightBtn
 {

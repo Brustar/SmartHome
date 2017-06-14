@@ -108,7 +108,7 @@
                                     <action selector="VoiceBtn:" destination="0SV-ZH-hzW" eventType="touchUpInside" id="zOK-ks-tMa"/>
                                 </connections>
                             </button>
-                            <view hidden="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pCB-q8-Gji" userLabel="CoverView">
+                            <view hidden="YES" alpha="0.94999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pCB-q8-Gji" userLabel="CoverView">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ipad-bg_transparent_nol" translatesAutoresizingMaskIntoConstraints="NO" id="q4N-Nm-Hg7">
