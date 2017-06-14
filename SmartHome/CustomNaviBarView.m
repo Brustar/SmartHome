@@ -283,7 +283,11 @@
     if (self.m_viewCtrlParent)
     {
         [self.m_viewCtrlParent.navigationController popViewControllerAnimated:YES];
-    }else{APP_ASSERT_STOP}
+    }else{
+        if (_delegate && [_delegate respondsToSelector:@selector(onBackBtnClicked:)]) {
+            [_delegate onBackBtnClicked:sender];
+        }
+    }
 }
 
 - (void)showNetStateView {

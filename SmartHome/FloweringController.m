@@ -42,10 +42,12 @@
     [self initMenuContainer:self.menuContainer andArray:menus andID:self.deviceid];
     [self naviToDevice];
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
-    [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 智能浇花",roomName]];
+    self.title = [NSString stringWithFormat:@"%@ - 智能浇花",roomName];
+    [self setNaviBarTitle:self.title];
     [self initSlider];
     if (ON_IPAD) {
         self.menuTop.constant = 0;
+        [(CustomViewController *)self.splitViewController.parentViewController setNaviBarTitle:self.title];
     }
 }
 

@@ -21,7 +21,11 @@
 @property (nonatomic,strong) NSMutableArray *screenCurtainIds;
 @property (nonatomic,strong) NSArray *menus;
 @property (weak, nonatomic) IBOutlet UIStackView *menuContainer;
+@property (weak, nonatomic) IBOutlet UIButton *btnPause;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuTop;
+@property (weak, nonatomic) IBOutlet UIButton *btnUP;
+@property (weak, nonatomic) IBOutlet UIButton *btnDown;
+
 @end
 
 @implementation ScreenCurtainController
@@ -112,7 +116,8 @@
     [super viewDidLoad];
     if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
-    [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 幕布",roomName]];
+    self.title = [NSString stringWithFormat:@"%@ - 幕布",roomName];
+    [self setNaviBarTitle:self.title];
     self.deviceid =[SQLManager singleDeviceWithCatalogID:screen byRoom:self.roomID];
     self.menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
     if (self.menus.count<6) {
@@ -121,9 +126,12 @@
         [self setUpRoomScrollerView];
     }
     [self naviToDevice];
-    
+    [self.btnPause setImage:[UIImage imageNamed:@"screen_pause_red"] forState:UIControlStateHighlighted];
+    [self.btnUP setImage:[UIImage imageNamed:@"screen_up_red"] forState:UIControlStateHighlighted];
+    [self.btnDown setImage:[UIImage imageNamed:@"screen_down_red"] forState:UIControlStateHighlighted];
     if (ON_IPAD) {
         self.menuTop.constant = 0;
+        [(CustomViewController *)self.splitViewController.parentViewController setNaviBarTitle:self.title];
     }
 }
 

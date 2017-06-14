@@ -111,7 +111,8 @@
     [super viewDidLoad];
     if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
-    [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 收音机",roomName]];
+    self.title = [NSString stringWithFormat:@"%@ - 收音机",roomName];
+    [self setNaviBarTitle:self.title];
     [self initSlider];
     self.menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
     if (self.menus.count<6) {
@@ -155,8 +156,7 @@
     if (ON_IPAD) {
         self.menuTop.constant = 0;
         self.voiceLeft.constant = self.voiceRight.constant = 100;
-        //self.controlLeft.constant = self.controlRight.constant = 200;
-        //self.controlBottom.constant = 160;
+        [(CustomViewController *)self.splitViewController.parentViewController setNaviBarTitle:self.title];
         self.ear.hidden = self.btnNext.hidden = self.prevoius.hidden = self.ipadPower.hidden = NO;
     }
 }

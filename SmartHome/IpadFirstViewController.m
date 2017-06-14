@@ -43,7 +43,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *IconeImage2;//第二个消息的头像
 @property (weak, nonatomic) IBOutlet UIImageView *DUPImageView;//闪烁提醒的图标
-
+@property (nonatomic,assign) NSTimer *scheculer;
 @end
 
 @implementation IpadFirstViewController
@@ -65,6 +65,20 @@
     //开启网络状况监听器
     [self updateInterfaceWithReachability];
     
+    self.scheculer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timing:) userInfo:nil repeats:YES];
+}
+
+-(IBAction)timing:(id)sender
+{
+    int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
+    if (unread>0) {
+        self.DUPImageView.hidden=!self.DUPImageView.hidden;
+    }
+}
+
+#pragma mark - TCP recv delegate
+- (void)recv:(NSData *)data withTag:(long)tag
+{
     
 }
 
@@ -651,6 +665,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+-(void)dealloc
+{
+    [self.scheculer invalidate];
+}
 
 @end
