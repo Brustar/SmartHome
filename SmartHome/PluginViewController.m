@@ -5,7 +5,7 @@
 //  Created by 逸云科技 on 16/8/5.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
-
+#import "UIView+Popup.h"
 #import "PluginViewController.h"
 #import "SocketManager.h"
 #import "UIViewController+Navigator.h"
@@ -85,30 +85,36 @@
     [self initMenuContainer:self.menuContainer andArray:menus andID:self.deviceid];
     [self naviToDevice];
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
-    [self setNaviBarTitle:[NSString stringWithFormat:@"%@ - 智能插座",roomName]];
+    self.title = [NSString stringWithFormat:@"%@ - 智能插座",roomName];
+    [self setNaviBarTitle:self.title];
+    if (ON_IPAD) {
+        [(CustomViewController *)self.splitViewController.parentViewController setNaviBarTitle:self.title];
+    }
+    
     [self initSwitcher];
-//    [self initPlugin];
-//    [self initHomekitPlugin];
+
     [self setupSegment];
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
-//    self.scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     
     //查询设备状态
     NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
     [sock.socket writeData:data withTimeout:1 tag:1];
+    
+    
+    self.menuContainer.hidden = ON_IPAD;
 }
 
 -(void) initSwitcher
 {
     self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:nil inactiveBackgroundImage:[UIImage imageNamed:@"plugin_off"] activeBackgroundImage:[UIImage imageNamed:@"plugin_on"] frame:CGRectMake(0, 0, 750/2, 750/2)];
-    self.switcher.center = CGPointMake(self.view.bounds.size.width / 2,
-                                       self.view.bounds.size.height / 2);
+    //self.switcher.center = CGPointMake(self.view.bounds.size.width / 2,self.view.bounds.size.height / 2);
     
     self.switcher.knobRelativeHeight = 1.0f;
     self.switcher.delegate = self;
     
     [self.view addSubview:self.switcher];
+    [self.switcher constraintToCenter:375];
 }
 
 -(void)setupSegment
