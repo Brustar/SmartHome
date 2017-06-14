@@ -1792,7 +1792,7 @@
         <!--doorclock-->
         <scene sceneID="zsA-i0-MLJ">
             <objects>
-                <viewController id="syP-8K-5fM" userLabel="doorclock" customClass="GuardController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GuardController" id="syP-8K-5fM" userLabel="doorclock" customClass="GuardController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JKV-PK-1ex"/>
                         <viewControllerLayoutGuide type="bottom" id="VT7-mV-pg9"/>
@@ -1804,7 +1804,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="9Ay-vN-we6">
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xba-cr-GiT">
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xba-cr-GiT">
                                 <rect key="frame" x="16" y="64" width="288" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="748" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IRo-Mn-lTp">

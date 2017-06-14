@@ -76,7 +76,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 
     [view addSubview:colorPicker];
     if (ON_IPAD) {
-        view.transform = CGAffineTransformMakeRotation(M_PI_2);
+        view.transform = CGAffineTransformMakeRotation(-M_PI_2);
     }
     [view show];
 }

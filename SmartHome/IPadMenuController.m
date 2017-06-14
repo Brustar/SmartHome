@@ -67,7 +67,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
         ts = [SQLManager typeName:self.typeID byRoom:self.roomID];
     }
     Device *device = [self.types objectAtIndex:indexPath.row];
-    //NSString *typeid = [NSString stringWithFormat:@"0%ld", device.hTypeId];
+    
     if (device.hTypeId >0 && device.hTypeId<10) {
         [temp addObjectsFromArray:ts];
         NSArray *arr = [SQLManager devicesWithCatalogID:device.hTypeId room:self.roomID];

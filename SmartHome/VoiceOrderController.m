@@ -271,7 +271,7 @@
         i++;
     }
     if (ON_IPAD) {
-        view.transform = CGAffineTransformMakeRotation(M_PI_2);
+        view.transform = CGAffineTransformMakeRotation(-M_PI_2);
     }
     [view show];
 }
