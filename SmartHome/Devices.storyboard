@@ -61,7 +61,7 @@
                                             <action selector="changeMode:" destination="rZG-4r-cjU" eventType="touchUpInside" id="mmm-xj-G4I"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="40y-Fw-9Iu">
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="40y-Fw-9Iu">
                                         <rect key="frame" x="160" y="0.0" width="80" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <state key="normal" title=" 除湿" image="wet" backgroundImage="light_bar"/>
@@ -69,7 +69,7 @@
                                             <action selector="changeMode:" destination="rZG-4r-cjU" eventType="touchUpInside" id="Vte-IV-grQ"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gy3-2E-69f">
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gy3-2E-69f">
                                         <rect key="frame" x="240" y="0.0" width="80" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <state key="normal" title=" 抽风" image="wind" backgroundImage="light_bar"/>
@@ -1025,9 +1025,9 @@
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uv7-AJ-NnR">
                                 <rect key="frame" x="208" y="116" width="46" height="46"/>
-                                <state key="normal" image="DVD_play" backgroundImage="music_button_control"/>
+                                <state key="normal" image="TV_off" backgroundImage="music_button_control"/>
                                 <connections>
-                                    <action selector="playMusic:" destination="3WJ-Xx-j8F" eventType="touchUpInside" id="uD2-5Z-zhk"/>
+                                    <action selector="toogle:" destination="3WJ-Xx-j8F" eventType="touchUpInside" id="TLi-sG-hDm"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1359,14 +1359,14 @@
                                 <rect key="frame" x="6" y="268" width="10" height="22"/>
                                 <state key="normal" image="DVD_previous"/>
                                 <connections>
-                                    <action selector="nextMusic:" destination="3WJ-Xx-j8F" eventType="touchUpInside" id="W0f-9y-UEp"/>
+                                    <action selector="control:" destination="C1t-VG-vPd" eventType="touchUpInside" id="FVi-SQ-uvi"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s9y-df-Bsr">
+                            <button hidden="YES" opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s9y-df-Bsr">
                                 <rect key="frame" x="304" y="268" width="10" height="22"/>
                                 <state key="normal" image="DVD_next"/>
                                 <connections>
-                                    <action selector="previousMusic:" destination="3WJ-Xx-j8F" eventType="touchUpInside" id="Ue9-D1-VJp"/>
+                                    <action selector="control:" destination="C1t-VG-vPd" eventType="touchUpInside" id="Z8B-7q-atM"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fm_pad" translatesAutoresizingMaskIntoConstraints="NO" id="OYD-cH-kiE">
