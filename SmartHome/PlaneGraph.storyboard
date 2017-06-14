@@ -40,7 +40,7 @@
                                         <rect key="frame" x="260" y="144" width="684" height="450"/>
                                     </imageView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Sgh-Ny-ymp">
-                                        <rect key="frame" x="0.0" y="90" width="200" height="664"/>
+                                        <rect key="frame" x="0.0" y="90" width="200" height="564"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="eWd-gy-yCy"/>
@@ -52,7 +52,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <imageView key="backgroundView" hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="bil-me-hF0">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="564"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </imageView>
                                         <cells>
@@ -159,7 +159,7 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Sgh-Ny-ymp" secondAttribute="trailing" constant="824" id="0rK-1h-TsD"/>
                                     <constraint firstItem="wib-Rb-la7" firstAttribute="bottom" secondItem="5W7-nq-nol" secondAttribute="bottom" constant="-130" id="1Ob-PV-I11"/>
-                                    <constraint firstItem="U1E-Fh-aZS" firstAttribute="bottom" secondItem="Sgh-Ny-ymp" secondAttribute="bottom" id="95t-vT-5Gg"/>
+                                    <constraint firstItem="U1E-Fh-aZS" firstAttribute="bottom" secondItem="Sgh-Ny-ymp" secondAttribute="bottom" constant="100" id="95t-vT-5Gg"/>
                                     <constraint firstAttribute="trailing" secondItem="U1E-Fh-aZS" secondAttribute="trailing" constant="824" id="HSj-Fh-xsN"/>
                                     <constraint firstItem="Sgh-Ny-ymp" firstAttribute="top" secondItem="ORV-VF-xhN" secondAttribute="top" constant="90" id="JqT-xg-tVl"/>
                                     <constraint firstItem="gVv-Nr-DMk" firstAttribute="top" secondItem="wib-Rb-la7" secondAttribute="top" constant="30" id="JsX-IP-TaQ"/>
