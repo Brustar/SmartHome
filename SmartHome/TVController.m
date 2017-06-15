@@ -197,10 +197,14 @@
 -(void)setUpRoomScrollerView
 {
     NSMutableArray *deviceNames = [NSMutableArray array];
-    
+    int index=0,i=0;
     for (Device *device in self.menus) {
         NSString *deviceName = device.typeName;
         [deviceNames addObject:deviceName];
+        if (device.hTypeId == TVtype) {
+            index = i;
+        }
+        i++;
     }
     
     IphoneRoomView *menu = [[IphoneRoomView alloc] initWithFrame:CGRectMake(0,0, [UIScreen mainScreen].bounds.size.width, 40)];
@@ -208,7 +212,7 @@
     menu.dataArray = deviceNames;
     menu.delegate = self;
 
-    [menu setSelectButton:0];
+    [menu setSelectButton:index];
     [self.menuContainer addSubview:menu];
 }
 
@@ -252,9 +256,6 @@
     self.menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
     if (self.menus.count<6) {
         [self initMenuContainer:self.menuContainer andArray:self.menus andID:self.deviceid];
-        if ([self.deviceid isEqualToString:@""]) {
-            return;
-        }
     }else{
         [self setUpRoomScrollerView];
     }

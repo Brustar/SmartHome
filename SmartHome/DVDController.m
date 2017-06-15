@@ -70,10 +70,14 @@
 -(void)setUpRoomScrollerView
 {
     NSMutableArray *deviceNames = [NSMutableArray array];
-    
+    int index = 0,i = 0;
     for (Device *device in self.menus) {
         NSString *deviceName = device.typeName;
         [deviceNames addObject:deviceName];
+        if (device.hTypeId == DVDtype) {
+            index = i;
+        }
+        i++;
     }
     
     IphoneRoomView *menu = [[IphoneRoomView alloc] initWithFrame:CGRectMake(0,0, [UIScreen mainScreen].bounds.size.width, 40)];
@@ -81,7 +85,7 @@
     menu.dataArray = deviceNames;
     menu.delegate = self;
     
-    [menu setSelectButton:0];
+    [menu setSelectButton:index];
     [self.menuContainer addSubview:menu];
 }
 
