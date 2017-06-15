@@ -282,7 +282,11 @@ static NSString * const CYPhotoId = @"photo";
 }
 
 - (void)rightBtnClicked:(UIButton *)btn {
-    //[self performSegueWithIdentifier:@"FM" sender:self];
+    NSInteger isPlaying = [[UD objectForKey:@"IsPlaying"] integerValue];
+    if (isPlaying == 0) {
+        [MBProgressHUD showError:@"没有正在播放的设备"];
+        return;
+    }
     
     UIStoryboard * HomeStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
     if (_nowMusicController == nil) {

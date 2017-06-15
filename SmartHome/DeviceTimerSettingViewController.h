@@ -23,6 +23,9 @@
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "DeviceListTimeVC.h"
+#import "IpadDVDTableViewCell.h"
+#import "IpadTVCell.h"
+#import "PowerLightCell.h"
 
 @interface DeviceTimerSettingViewController : CustomViewController<UITableViewDataSource, UITableViewDelegate,  HttpDelegate, NewLightCellDelegate, NewColourCellDelegate, CurtainTableViewCellDelegate, AireTableViewCellDelegate, TVTableViewCellDelegate, DVDTableViewCellDelegate, BjMusicTableViewCellDelegate, FMTableViewCellDelegate, ScreenCurtainCellDelegate, OtherTableViewCellDelegate>
 

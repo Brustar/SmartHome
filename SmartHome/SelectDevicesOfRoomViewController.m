@@ -18,6 +18,7 @@
     [super viewDidLoad];
     [self initUI];
     [self initDataSource];
+    [self fetchDevicesStatus];
 }
 
 - (void)initUI {
@@ -116,6 +117,62 @@
     vc.device = info;
     vc.roomID = self.roomID;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - 获取房间设备状态
+- (void)fetchDevicesStatus {
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/equipment_status_list.aspx",[IOManager httpAddr]];
+    NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
+    
+    if (auothorToken.length >0) {
+        NSDictionary *dict = @{@"token":auothorToken,
+                               @"optype":@(2),
+                               @"roomid":@(self.roomID)
+                               };
+        HttpManager *http = [HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = 1;
+        [http sendPost:url param:dict showProgressHUD:NO];
+    }
+    
+}
+
+#pragma mark - Http Delegate
+- (void)httpHandler:(id)responseObject tag:(int)tag
+{
+    if (tag == 1) {
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSLog(@"responseObject:%@", responseObject);
+            if ([responseObject[@"result"] integerValue] == 0) {
+                NSArray *deviceArray = responseObject[@"equipment_status_list"];
+                
+                if ([deviceArray isKindOfClass:[NSArray class]] && deviceArray.count >0 ) {
+                    for(NSDictionary *device in deviceArray) {
+                        if ([device isKindOfClass:[NSDictionary class]]) {
+                            Device *devInfo = [[Device alloc] init];
+                            devInfo.eID = [device[@"equipmentid"] intValue];
+                            devInfo.hTypeId = [device[@"htype"] integerValue];
+                            devInfo.power = [device[@"status"] integerValue];
+                            devInfo.bright = [device[@"bright"] integerValue];
+                            devInfo.color = device[@"color"];
+                            devInfo.position = [device[@"position"] integerValue];
+                            devInfo.temperature = [device[@"temperature"] integerValue];
+                            devInfo.fanspeed = [device[@"fanspeed"] integerValue];
+                            devInfo.air_model = [device[@"model"] integerValue];
+                            
+                            [SQLManager updateDeviceStatus:devInfo];
+                        }
+                    }
+                }
+                
+                
+            }else {
+                NSLog(@"设备状态获取失败！");
+            }
+        }else {
+            NSLog(@"设备状态获取失败！");
+        }
+    }
 }
 
 @end

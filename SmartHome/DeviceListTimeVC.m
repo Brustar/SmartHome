@@ -115,9 +115,9 @@
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 40)];
     view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
-    UIImageView *line1 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 0.5)];
+    /*UIImageView *line1 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 0.5)];
     line1.image = [UIImage imageNamed:@"login_line"];
-    [view addSubview:line1];
+    [view addSubview:line1];*/
     
     UIImageView *line2 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 39.5, UI_SCREEN_WIDTH, 0.5)];
     line2.image = [UIImage imageNamed:@"login_line"];
@@ -126,7 +126,7 @@
     UILabel *roomNameLabel = [[UILabel alloc] init];
     roomNameLabel.frame = CGRectMake(20, 10, 100, 20);
     roomNameLabel.textAlignment = NSTextAlignmentLeft;
-    roomNameLabel.textColor = [UIColor whiteColor];
+    roomNameLabel.textColor = [UIColor grayColor];
     [view addSubview:roomNameLabel];
     
     NSDictionary *roomDict = _timerList[section];
