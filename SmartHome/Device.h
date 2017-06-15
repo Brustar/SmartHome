@@ -35,7 +35,7 @@ typedef NS_ENUM(NSUInteger, catalog) {
     cata_security,
     cata_single_product,
     
-    cata_curtain=7
+    cata_curtain = 7
 };
 
 @interface Device : NSObject

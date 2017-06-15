@@ -70,7 +70,9 @@
         case feeding:
             targetName = @"FeedingController";
             break;
-            
+        case doorclock:
+            targetName = @"GuardController";
+            break;
         case Wetting:
             targetName = @"WettingController";
             break;
