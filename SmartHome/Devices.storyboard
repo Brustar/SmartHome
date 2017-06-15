@@ -556,10 +556,10 @@
                                     <action selector="controlCmd:" destination="ZhE-q2-gFO" eventType="touchUpInside" id="5zi-eL-qND"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ACd-Ac-nHX">
-                                <rect key="frame" x="100" y="124" width="220" height="40"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ACd-Ac-nHX">
+                                <rect key="frame" x="100" y="116.5" width="220" height="55"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="3hP-UN-DZP"/>
+                                    <constraint firstAttribute="height" constant="55" id="3hP-UN-DZP"/>
                                 </constraints>
                             </stackView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jTD-VA-L4b">
@@ -1499,7 +1499,7 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                             </imageView>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plugin_on" translatesAutoresizingMaskIntoConstraints="NO" id="wTy-fX-dz2">
-                                <rect key="frame" x="-27.5" y="91.5" width="375" height="385"/>
+                                <rect key="frame" x="87.5" y="211.5" width="145" height="145"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9Vd-tX-xFS">
                                 <rect key="frame" x="16" y="64" width="288" height="40"/>
@@ -1545,7 +1545,7 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                             </imageView>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plugin_on" translatesAutoresizingMaskIntoConstraints="NO" id="WOa-AO-aoR">
-                                <rect key="frame" x="-27.5" y="91.5" width="375" height="385"/>
+                                <rect key="frame" x="87.5" y="211.5" width="145" height="145"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="2cw-Gc-ckp">
                                 <rect key="frame" x="0.0" y="64" width="320" height="40"/>
@@ -2178,7 +2178,7 @@
         <image name="line_horizontal_white" width="373" height="48"/>
         <image name="mode_button" width="61" height="60"/>
         <image name="music_button_control" width="46" height="46"/>
-        <image name="plugin_on" width="375" height="385"/>
+        <image name="plugin_on" width="145" height="145"/>
         <image name="pm2.5" width="141" height="141"/>
         <image name="repeat_white" width="12" height="12"/>
         <image name="schedule_line" width="64" height="1"/>

@@ -230,7 +230,7 @@
     [super viewDidLoad];
     if(self.roomID == 0) self.roomID = (int)[DeviceInfo defaultManager].roomID;
     NSString *roomName = [SQLManager getRoomNameByRoomID:self.roomID];
-    self.title = [NSString stringWithFormat:@"%@ - 电视",roomName];
+    self.title = [NSString stringWithFormat:@"%@ - 网络电视",roomName];
     [self setNaviBarTitle:self.title];
     
     [self.btnMenu setImage:[UIImage imageNamed:@"TV_menu_red"] forState:UIControlStateHighlighted];

@@ -133,7 +133,7 @@
 
 -(void) initSwitcher
 {
-    self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:nil inactiveBackgroundImage:[UIImage imageNamed:@"plugin_off"] activeBackgroundImage:[UIImage imageNamed:@"plugin_on"] frame:CGRectMake(0, 0, 750/2, 750/2)];
+    self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:nil inactiveBackgroundImage:[UIImage imageNamed:@"plugin_off"] activeBackgroundImage:[UIImage imageNamed:@"plugin_on"] frame:CGRectMake(0, 0, SWITCH_SIZE, SWITCH_SIZE)];
     self.switcher.center = CGPointMake(self.view.bounds.size.width / 2,
                                        self.view.bounds.size.height / 2);
     
@@ -141,7 +141,7 @@
     self.switcher.delegate = self;
     
     [self.view addSubview:self.switcher];
-    [self.switcher constraintToCenter:375];
+    [self.switcher constraintToCenter:SWITCH_SIZE];
 }
 
 -(IBAction)save:(id)sender
