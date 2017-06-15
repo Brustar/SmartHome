@@ -26,6 +26,9 @@
 #import "SceneManager.h"
 #import "HttpManager.h"
 #import "IpadDeviceListViewController.h"
+#import "IpadDVDTableViewCell.h"
+#import "IpadTVCell.h"
+#import "PowerLightCell.h"
 
 #define SceneCellWidth  (self.sceneListCollectionView.frame.size.width-6.0)/3
 #define SceneCellHeight  self.sceneListCollectionView.frame.size.height

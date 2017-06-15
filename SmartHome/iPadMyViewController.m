@@ -25,6 +25,7 @@
     _leftVC.view.frame = CGRectMake(0, 0, UI_SCREEN_WIDTH/4, UI_SCREEN_HEIGHT-80);
     //初始化右边视图控制器
     _rootVC = [[CustomViewController alloc] init];
+    [_rootVC setNaviBarLeftBtn:nil];
     _rightVC = [[UINavigationController alloc] initWithRootViewController:_rootVC];
     _rightVC.navigationBar.hidden = YES;
     // 设置分割面板的 2 个视图控制器
@@ -46,6 +47,7 @@
     BaseTabBarController *baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     baseTabbarController.tabbarPanel.hidden = YES;
     baseTabbarController.tabBar.hidden = YES;
+    [_rootVC setNaviBarLeftBtn:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -128,6 +130,7 @@
         mysettingVC.hidesBottomBarWhenPushed = YES;
         [_rightVC pushViewController:mysettingVC animated:YES];
     }else if ([item isEqualToString:@"返回"]) {
+        [NC postNotificationName:@"StopTimerNotification" object:nil];
         [self.navigationController popViewControllerAnimated:YES];
     }
 }

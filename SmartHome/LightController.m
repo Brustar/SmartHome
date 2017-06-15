@@ -352,6 +352,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
         [self.switcher setIsOn:YES];
     }else{
         self.tranformView.transform = CGAffineTransformMakeRotation(0);
+        [self.switcher setIsOn:NO];
     }
     
     NSData *data=[[DeviceInfo defaultManager] changeBright:self.tranformView.tag deviceID:self.deviceid];

@@ -16,14 +16,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self addNotifications];
     [self initUI];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -45,6 +44,18 @@
     [self stopTimer];
     //[_video free];
     //self.delegate = nil;
+}
+
+- (void)addNotifications {
+    [NC addObserver:self selector:@selector(stopTimerNotification:) name:@"StopTimerNotification" object:nil];
+}
+
+- (void)stopTimerNotification:(NSNotification *) noti {
+    [self stopTimer];
+}
+
+- (void)removeNotifications {
+    [NC removeObserver:self];
 }
 
 - (void)setupTimer {
@@ -150,6 +161,7 @@
 }
 
 - (void)dealloc {
+    [self removeNotifications];
     [_nextFrameTimer invalidate];
     _nextFrameTimer = nil;
 }

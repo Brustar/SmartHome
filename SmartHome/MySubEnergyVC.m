@@ -65,6 +65,7 @@
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         [self adjustNaviBarFrameForSplitView];
         [self adjustTitleFrameForSplitView];
+        [self setNaviBarLeftBtn:nil];
     }
     [self sendRequestToGetEenrgy];
     self.TimerView.backgroundColor = [UIColor colorWithRed:29/255.0 green:30/255.0 blue:34/255.0 alpha:1];
