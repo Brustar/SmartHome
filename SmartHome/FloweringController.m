@@ -159,7 +159,6 @@
         if (button.isSelected) {
             //selected
             [button setImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
-            
             self.scheculer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startNow:) userInfo:nil repeats:YES];
         }else{
             //normal
