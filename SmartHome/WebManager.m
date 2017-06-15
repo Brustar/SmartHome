@@ -60,7 +60,7 @@
     [super loadView];
     CGRect rect = CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height-44);
     if (ON_IPAD && _isShowInSplitView) {
-        rect = CGRectMake(0, 44, UI_SCREEN_WIDTH*3/4, self.view.frame.size.height-44);
+        rect = CGRectMake(0, 44, UI_SCREEN_WIDTH*3/4, self.view.frame.size.height+4);
     }
     self.webView = [[UIWebView alloc] initWithFrame:rect];
     self.webView.delegate = self;
@@ -91,6 +91,8 @@
     }else{
         [self.webView loadHTMLString:self.html baseURL:nil];
     }
+    
+    self.view.backgroundColor = [UIColor blueColor];
 }
 
 - (void)viewDidUnload

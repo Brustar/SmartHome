@@ -31,6 +31,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [MBProgressHUD hideHUD];
+    
 }
 
 - (BOOL)checkNetWork {
