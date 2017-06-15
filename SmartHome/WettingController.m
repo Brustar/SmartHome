@@ -28,7 +28,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *second;
 @property (nonatomic,assign) NSTimer *scheculer;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuTop;
-
+@property (weak, nonatomic) IBOutlet UIButton *btnCmd;
 @property(nonatomic) int interval;
 @end
 
@@ -47,6 +47,7 @@
     [self initSlider];
     if (ON_IPAD) {
         self.menuTop.constant = 0;
+        self.btnCmd.hidden = self.second.hidden = YES;
         [(CustomViewController *)self.splitViewController.parentViewController setNaviBarTitle:self.title];
     }
 }

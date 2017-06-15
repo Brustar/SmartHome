@@ -28,6 +28,16 @@
 @property (weak, nonatomic) IBOutlet UILabel *second;
 @property (nonatomic,assign) NSTimer *scheculer;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *menuTop;
+@property (weak, nonatomic) IBOutlet UIButton *btnCmd;
+
+@property (weak, nonatomic) IBOutlet UILabel *schduleLbl;
+@property (weak, nonatomic) IBOutlet UILabel *immediateLbl;
+@property (weak, nonatomic) IBOutlet UIButton *schduleBtn;
+@property (weak, nonatomic) IBOutlet UIButton *immediateBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *timeBase;
+@property (weak, nonatomic) IBOutlet UILabel *timeLbl;
+@property (weak, nonatomic) IBOutlet UIView *schLine;
+@property (weak, nonatomic) IBOutlet UIView *immedLine;
 
 @property(nonatomic) int interval;
 @end
@@ -47,6 +57,9 @@
     [self initSlider];
     if (ON_IPAD) {
         self.menuTop.constant = 0;
+        self.btnCmd.hidden = self.second.hidden = YES;
+        
+        self.schLine.hidden = self.schduleBtn.hidden = self.schduleLbl.hidden = self.immedLine.hidden = self.immediateBtn.hidden = self.immediateLbl.hidden = self.timeLbl.hidden = self.timeBase.hidden = NO;
         [(CustomViewController *)self.splitViewController.parentViewController setNaviBarTitle:self.title];
     }
 }
@@ -112,10 +125,10 @@
     [button setSelected:!button.isSelected];
     if (button.isSelected) {
         //selected
-        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"clock_red"]] forState:UIControlStateSelected];
+        [button setImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateSelected];
     }else{
         //normal
-        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"clock_white"]] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateNormal];
     }
     
     Schedule *sch = [[Schedule alloc] initWhithoutSchedule];
@@ -125,41 +138,51 @@
     [IOManager writeScene:[NSString stringWithFormat:@"schedule_%@.plist",self.deviceid] scene:sch];
 }
 
+-(IBAction)startNow:(id)sender
+{
+    self.interval ++;
+    int min = self.interval/60;
+    int second = self.interval%60;
+    NSString *matter =@"%d:%d";
+    if (second<10) {
+        matter =@"%d:0%d";
+    }
+    self.timeLbl.text = [NSString stringWithFormat:matter,min,second];
+}
+
 - (IBAction)start:(id)sender {
     UIButton *button = (UIButton *)sender;
 
     [button setSelected:!button.isSelected];
-    if (button.isSelected) {
-        //selected
-        [button setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"sp_on"]] forState:UIControlStateSelected];
-        self.interval = [self.SLabel.text intValue];
-        self.scheculer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timing:) userInfo:nil repeats:YES];
-        /*self.scheculer = [NSTimer scheduledTimerWithTimeInterval:1.0 repeats:YES block:^(NSTimer *timer){
-            int t = [self.SLabel.text intValue];
-            [button setTitle:[NSString stringWithFormat:@"%d",interval] forState:UIControlStateNormal];
-            if(t > 0){
-                if (interval==0) {
-                    button.selected = NO;
-                    self.second.hidden = YES;
-                    [button setTitle:@"" forState:UIControlStateNormal];
-                    NSData *data = [[DeviceInfo defaultManager] toogle:NO deviceID:self.deviceid];
-                    [[[SocketManager defaultManager] socket] writeData:data withTimeout:1 tag:1];
-                    [timer invalidate];
-                }
-                interval--;
-            }else{
-                interval++;
-            }
-        }];
-        */
-        
+    
+    if (ON_IPAD) {
+        if (button.isSelected) {
+            //selected
+            [button setImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
+            
+            self.scheculer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startNow:) userInfo:nil repeats:YES];
+        }else{
+            //normal
+            [button setImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+            self.timeLbl.text = @"00:00";
+            self.interval = 0;
+            [self.scheculer invalidate];
+        }
     }else{
-        //normal
-        [button setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"sp_off"]] forState:UIControlStateNormal];
-        [button setTitle:@"" forState:UIControlStateNormal];
-        [self.scheculer invalidate];
+        if (button.isSelected) {
+            //selected
+            [button setBackgroundImage:[UIImage imageNamed:@"sp_on"] forState:UIControlStateSelected];
+            self.interval = [self.SLabel.text intValue];
+            self.scheculer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timing:) userInfo:nil repeats:YES];
+        }else{
+            //normal
+            [button setBackgroundImage:[UIImage imageNamed:@"sp_off"] forState:UIControlStateNormal];
+            [button setTitle:@"" forState:UIControlStateNormal];
+            [self.scheculer invalidate];
+        }
+        self.second.hidden = !button.isSelected;
     }
-    self.second.hidden = !button.isSelected;
+    
     NSData *data = [[DeviceInfo defaultManager] toogle:button.isSelected deviceID:self.deviceid];
     [[[SocketManager defaultManager] socket] writeData:data withTimeout:1 tag:1];
 }
