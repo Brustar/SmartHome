@@ -154,9 +154,4 @@
      [theSegue setValue:self.deviceid forKey:@"deviceid"];
  }
 
--(void) dealloc
-{
-    [self.timer invalidate];
-}
-
 @end

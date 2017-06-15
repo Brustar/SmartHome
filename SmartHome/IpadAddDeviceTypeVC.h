@@ -16,6 +16,7 @@
 @property (nonatomic,weak) NSString *deviceid;
 @property (nonatomic,assign) int roomID;
 @property(nonatomic,assign) int sceneID;
+@property (nonatomic,strong) Scene * scene;
 
 
 -(void)refreshData:(NSArray *)data;

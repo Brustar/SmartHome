@@ -28,6 +28,17 @@ static NSString *const leftMenuCell = @"leftMenuCell";
         [self showDetailViewController:[DeviceInfo calcController:device.hTypeId] sender:self];
         
         [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+    }else{
+        NSArray *ts = [self lights];
+        NSMutableArray *temp = [NSMutableArray new];
+        [temp addObjectsFromArray:ts];
+        NSArray *arr = [SQLManager devicesWithCatalogID:1 room:self.roomID];
+        for (id obj in arr) {
+            [temp insertObject:obj atIndex:1];
+        }
+        self.types = temp;
+        //[self.tableView reloadData];
+        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
     }
 }
 

@@ -425,7 +425,7 @@ static NSString * const IpadSceneId = @"photo";
     NSIndexPath *indexPath = [self.FirstCollectionView indexPathForItemAtPoint:[lgr locationInView:self.FirstCollectionView]];
     self.currentCell = (IpadSceneCell *)[self.FirstCollectionView cellForItemAtIndexPath:indexPath];
     
-    UIAlertController * alerController = [UIAlertController alertControllerWithTitle:@"温馨提示更换场景图片" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController * alerController = [UIAlertController alertControllerWithTitle:@"更换场景图片" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
     
     [alerController addAction:[UIAlertAction actionWithTitle:@"现在就拍" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         

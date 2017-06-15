@@ -144,6 +144,13 @@ static NSString * const CYPhotoId = @"photo";
 }
 
 - (void)rightBtnClicked:(UIButton *)btn {
+    
+    NSInteger isPlaying = [[UD objectForKey:@"IsPlaying"] integerValue];
+    if (isPlaying == 0) {
+        [MBProgressHUD showMessage:@"没有正在播放的设备"];
+        return;
+    }
+    
     UIStoryboard * HomeStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
     if (_nowMusicController == nil) {
         _nowMusicController = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"NowMusicController"];
@@ -549,9 +556,9 @@ static NSString * const CYPhotoId = @"photo";
     self.currentCell = (CYPhotoCell *)[self.FirstCollectionView cellForItemAtIndexPath:indexPath];
     UIAlertController * alerController;
     if (ON_IPAD) {
-        alerController = [UIAlertController alertControllerWithTitle:@"温馨提示更换场景图片" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        alerController = [UIAlertController alertControllerWithTitle:@"更换场景图片" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     }else{
-         alerController = [UIAlertController alertControllerWithTitle:@"温馨提示更换场景图片" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+         alerController = [UIAlertController alertControllerWithTitle:@"更换场景图片" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
     }
    
     [alerController addAction:[UIAlertAction actionWithTitle:@"现在就拍" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

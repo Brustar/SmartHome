@@ -16,6 +16,7 @@
 #import "DeviceTimingViewController.h"
 #import "SceneManager.h"
 #import "IphoneSaveNewSceneController.h"
+#import "IpadDeviceListViewController.h"
 
 @interface AddIpadSceneVC ()<IpadAddDeviceVCDelegate>
 
@@ -46,6 +47,7 @@
     self.rightVC = [SceneStoryBoard instantiateViewControllerWithIdentifier:@"IpadAddDeviceTypeVC"];
     self.rightVC.roomID = self.roomID;
     self.rightVC.sceneID = self.sceneID;
+    self.rightVC.scene  = _scene;
     // 设置分割面板的 2 个视图控制器
     splitViewController.viewControllers = @[self.leftVC, self.rightVC];
     
@@ -57,7 +59,7 @@
     splitViewController.preferredPrimaryColumnWidthFraction = 0.25;
     
     [self.view addSubview:splitViewController.view];
-    _scene = [[Scene alloc] init];
+//    _scene = [[Scene alloc] init];
     [self setupNaviBar];
     
 }
@@ -79,19 +81,21 @@
     UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     UIStoryboard * SceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
     DeviceListTimeVC * deviceListVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"iPhoneDeviceListTimeVC"];
-    IphoneEditSceneController * iphoneEditSceneVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneEditSceneController"];
+    
+    IpadDeviceListViewController * ipadDeviceListVC = [[IpadDeviceListViewController alloc] init];
+    
     if ([lastVC isKindOfClass:[deviceListVC class]]) {
         DeviceTimingViewController * deviceTimingVC = [SceneStoryBoard instantiateViewControllerWithIdentifier:@"DeviceTimingViewController"];
         [self.navigationController pushViewController:deviceTimingVC animated:YES];
         
-    }else if ([lastVC isKindOfClass:[iphoneEditSceneVC class]]) {
+    }else if ([lastVC isKindOfClass:[ipadDeviceListVC class]]) {
         
         //场景ID不变
         NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
         NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
         NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
         
-//        _scene = [[Scene alloc]init];
+        _scene = [[Scene alloc]init];
         [_scene setValuesForKeysWithDictionary:plistDic];
         _scene.roomID = self.roomID;
         _scene.sceneID = self.sceneID;
@@ -105,12 +109,12 @@
             iphoneSaveNewScene.roomId = self.roomID;
             [self.navigationController pushViewController:iphoneSaveNewScene animated:YES];
 //        }
-//
+
 //        else{
 //            [MBProgressHUD showSuccess:@"请先选择设备"];
 //            
 //        }
-        
+    
     }
     
 }
