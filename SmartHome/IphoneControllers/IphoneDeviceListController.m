@@ -282,7 +282,11 @@ static NSString * const CYPhotoId = @"photo";
 }
 
 - (void)rightBtnClicked:(UIButton *)btn {
-    //[self performSegueWithIdentifier:@"FM" sender:self];
+    NSInteger isPlaying = [[UD objectForKey:@"IsPlaying"] integerValue];
+    if (isPlaying == 0) {
+        [MBProgressHUD showError:@"没有正在播放的设备"];
+        return;
+    }
     
     UIStoryboard * HomeStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
     if (_nowMusicController == nil) {
@@ -421,6 +425,29 @@ static NSString * const CYPhotoId = @"photo";
     }
 }
 
+-(NSString *) storyIDByroom:(int)type
+{
+    switch (type) {
+        case TVtype:
+            return @"TV";
+        case DVDtype:
+            return @"DVD";
+        case FM:
+            return @"FM";
+        case bgmusic:
+            return @"bgmusic";
+        case amplifier:
+            return @"amplifier";
+        case screen:
+            return @"screen";
+        case projector:
+            return @"projector";
+        default:
+            break;
+    }
+    return @"";
+}
+
 -(NSString *) seguaName:(int) typeID
 {
     switch (typeID) {
@@ -433,7 +460,13 @@ static NSString * const CYPhotoId = @"photo";
         case cata_single_product:
             return @"flowering";
         case cata_media:
-            return @"TV";
+        {
+            Room *room = self.rooms[self.roomIndex];
+            int rid = room.rId;
+            int type = [SQLManager currentDevicesOfRoom:rid];
+            
+            return [self storyIDByroom:type];
+        }
         case cata_security:
             return @"doorclock";
         default:

@@ -73,10 +73,14 @@
 -(void)setUpRoomScrollerView
 {
     NSMutableArray *deviceNames = [NSMutableArray array];
-    
+    int index = 0,i = 0;
     for (Device *device in self.menus) {
         NSString *deviceName = device.typeName;
         [deviceNames addObject:deviceName];
+        if (device.hTypeId == projector) {
+            index = i;
+        }
+        i++;
     }
     
     IphoneRoomView *menu = [[IphoneRoomView alloc] initWithFrame:CGRectMake(0,0, [UIScreen mainScreen].bounds.size.width, 40)];
@@ -84,7 +88,7 @@
     menu.dataArray = deviceNames;
     menu.delegate = self;
     
-    [menu setSelectButton:0];
+    [menu setSelectButton:index];
     [self.menuContainer addSubview:menu];
 }
 
@@ -133,7 +137,7 @@
 
 -(void) initSwitcher
 {
-    self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:nil inactiveBackgroundImage:[UIImage imageNamed:@"plugin_off"] activeBackgroundImage:[UIImage imageNamed:@"plugin_on"] frame:CGRectMake(0, 0, 750/2, 750/2)];
+    self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:nil inactiveBackgroundImage:[UIImage imageNamed:@"plugin_off"] activeBackgroundImage:[UIImage imageNamed:@"plugin_on"] frame:CGRectMake(0, 0, SWITCH_SIZE, SWITCH_SIZE)];
     self.switcher.center = CGPointMake(self.view.bounds.size.width / 2,
                                        self.view.bounds.size.height / 2);
     
@@ -141,7 +145,7 @@
     self.switcher.delegate = self;
     
     [self.view addSubview:self.switcher];
-    [self.switcher constraintToCenter:375];
+    [self.switcher constraintToCenter:SWITCH_SIZE];
 }
 
 -(IBAction)save:(id)sender

@@ -1427,9 +1427,9 @@
     {
         NSString *sql;
         if ([self isWholeHouse:roomID]) {
-            sql = [NSString stringWithFormat:@"SELECT id,name FROM devices where subTypeid ='%@'",LIGHT_DEVICE_TYPE];
+            sql = [NSString stringWithFormat:@"SELECT id,name FROM devices where UITypeOfLight ='%@' order by id desc",LIGHT_DEVICE_TYPE];
         }else{
-            sql = [NSString stringWithFormat:@"SELECT id,name FROM devices where rid=%d and subTypeid ='%@'",roomID,LIGHT_DEVICE_TYPE];
+            sql = [NSString stringWithFormat:@"SELECT id,name FROM devices where rid=%d and UITypeOfLight ='%@' order by id desc",roomID,LIGHT_DEVICE_TYPE];
         }
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
@@ -1441,6 +1441,28 @@
     [db closeOpenResultSets];
     [db close];
     return light;
+}
+
++(int) currentDevicesOfRoom:(int)roomID
+{
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        NSString *sql;
+        if ([self isWholeHouse:roomID]) {
+            sql = [NSString stringWithFormat:@"select htypeid from devices  where subtypeid = 3 order by htypeID LIMIT 1"];
+        }else{
+            sql = [NSString stringWithFormat:@"select htypeid from devices  where subtypeid = 3 and rid =%d order by htypeID LIMIT 1",roomID];
+        }
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            return [resultSet intForColumn:@"htypeid"];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return 0;
 }
 
 //多媒体UI菜单

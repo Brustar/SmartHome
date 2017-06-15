@@ -73,6 +73,19 @@
 {
     [super viewWillAppear:animated];
     
+    if (self.startTimeStr.length >0) {
+        self.starTimeLabel.text = self.startTimeStr;
+    }
+    
+    if (self.endTimeStr.length >0) {
+        self.endTimeLabel.text = self.endTimeStr;
+    }
+    
+    if (self.repeatitionStr.length >0) {
+        self.RepetitionLable.text = self.repeatitionStr;
+    }
+    
+    
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         
         self.TimViewLeadingConstraint.constant = 200;
@@ -82,6 +95,11 @@
     }
     
 }
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
 - (void)viewDidLoad{
     [super viewDidLoad];
     _weekArray = [NSMutableArray array];
@@ -99,8 +117,8 @@
     [self.clock update];
     self.clock.delegate = self;
     
-    self.starTimeLabel.text = [self.dateFormatter stringFromDate:self.clock.startDate];
-    self.endTimeLabel.text = [self.dateFormatter stringFromDate:self.clock.endDate];
+    //self.starTimeLabel.text = [self.dateFormatter stringFromDate:self.clock.startDate];
+    //self.endTimeLabel.text = [self.dateFormatter stringFromDate:self.clock.endDate];
 }
 
 #pragma mark -- CKCircleViewDelegate
@@ -171,6 +189,13 @@
         _weekDaysVC = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"WeekdaysVC"];
         _weekDaysVC.delegate = self;
         [self.view addSubview:_weekDaysVC.view];
+        
+        if (ON_IPAD && _isShowInSplitView) {
+            CGRect tempFrame = _weekDaysVC.view.frame;
+            tempFrame.origin.x = -120;
+            _weekDaysVC.view.frame = tempFrame;
+        }
+        
         [self.view bringSubviewToFront:_weekDaysVC.view];
         
     }else {

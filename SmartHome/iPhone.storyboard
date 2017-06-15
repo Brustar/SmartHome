@@ -598,7 +598,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="空调" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="taf-jW-upb">
-                                                    <rect key="frame" x="10" y="5" width="100" height="24"/>
+                                                    <rect key="frame" x="20" y="5" width="100" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="1re-ww-ceI"/>
                                                         <constraint firstAttribute="width" constant="100" id="rK6-Lk-OA8"/>
@@ -621,7 +621,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00-14:00，周一，周二，周三，周四，周五，" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cI4-SQ-r9m">
-                                                    <rect key="frame" x="10" y="38.5" width="271" height="14.5"/>
+                                                    <rect key="frame" x="20" y="38.5" width="261" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.56862745098039214" green="0.5725490196078431" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -630,9 +630,9 @@
                                             <constraints>
                                                 <constraint firstItem="zBz-OI-08x" firstAttribute="leading" secondItem="cI4-SQ-r9m" secondAttribute="trailing" constant="10" id="1xG-3A-jpp"/>
                                                 <constraint firstItem="zBz-OI-08x" firstAttribute="centerY" secondItem="fbW-d7-gRL" secondAttribute="centerY" id="3UM-dI-Tev"/>
-                                                <constraint firstItem="taf-jW-upb" firstAttribute="leading" secondItem="fbW-d7-gRL" secondAttribute="leading" constant="10" id="FF6-kp-cNJ"/>
+                                                <constraint firstItem="taf-jW-upb" firstAttribute="leading" secondItem="fbW-d7-gRL" secondAttribute="leading" constant="20" id="FF6-kp-cNJ"/>
                                                 <constraint firstItem="taf-jW-upb" firstAttribute="top" secondItem="fbW-d7-gRL" secondAttribute="top" constant="5" id="gbL-aK-yAG"/>
-                                                <constraint firstItem="cI4-SQ-r9m" firstAttribute="leading" secondItem="fbW-d7-gRL" secondAttribute="leading" constant="10" id="kZ0-iL-j1M"/>
+                                                <constraint firstItem="cI4-SQ-r9m" firstAttribute="leading" secondItem="fbW-d7-gRL" secondAttribute="leading" constant="20" id="kZ0-iL-j1M"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="zBz-OI-08x" secondAttribute="trailing" constant="20" id="kt1-zI-fJb"/>
                                                 <constraint firstAttribute="bottom" secondItem="cI4-SQ-r9m" secondAttribute="bottom" constant="5" id="v3T-Y4-nB2"/>
                                             </constraints>
