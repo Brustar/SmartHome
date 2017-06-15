@@ -1443,6 +1443,28 @@
     return light;
 }
 
++(int) currentDevicesOfRoom:(int)roomID
+{
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        NSString *sql;
+        if ([self isWholeHouse:roomID]) {
+            sql = [NSString stringWithFormat:@"select htypeid from devices  where subtypeid = 3 order by htypeID LIMIT 1"];
+        }else{
+            sql = [NSString stringWithFormat:@"select htypeid from devices  where subtypeid = 3 and rid =%d order by htypeID LIMIT 1",roomID];
+        }
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            return [resultSet intForColumn:@"htypeid"];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return 0;
+}
+
 //多媒体UI菜单
 +(NSArray *)mediaDeviceNamesByRoom:(int)roomID
 {
