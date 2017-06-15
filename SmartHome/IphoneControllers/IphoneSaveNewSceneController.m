@@ -111,20 +111,7 @@
 
   
 }
-- (void)httpHandler:(id)responseObject tag:(int)tag
-{
-    if(tag == 1) {
-        
-        if ([responseObject[@"result"] intValue] == 0) {
-            [MBProgressHUD showSuccess:@"添加成功"];
-            UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-            IphoneSceneController * iphoneSceneVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
-            [self.navigationController pushViewController:iphoneSceneVC animated:YES];
-        }else {
-            [MBProgressHUD showSuccess:@"添加失败"];
-        }
-    }
-}
+
 - (IBAction)sceneImageBtn:(id)sender {
     
     UIAlertController * alerController;
@@ -221,6 +208,38 @@
         [self.startSceneBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
     }
     _isActive = self.startSceneBtn.selected;
+    
+    
+    
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
+    NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
+    
+    if (auothorToken.length >0) {
+        NSDictionary *dict = @{@"token":auothorToken,
+                               @"optype":@(6),
+                               @"isactive":@(_isActive),
+                               @"starttime":_startTime,
+                               @"endtime":_endTime,
+                               @"weekvalue":_repeatString,
+                               @"startvalue":_startValue,
+                               @"scene_id":@(_scene.sceneID),
+                               };
+        HttpManager *http = [HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = 1;
+        [http sendPost:url param:dict];
+    }
+}
+- (void)httpHandler:(id)responseObject tag:(int)tag
+{
+    if(tag == 1) {
+        
+        if ([responseObject[@"result"] intValue] == 0) {
+            [MBProgressHUD showSuccess:@"添加成功"];
+        }else {
+            [MBProgressHUD showSuccess:@"添加失败"];
+        }
+    }
 }
 -(void)dealloc
 {

@@ -11,7 +11,7 @@
 
 @interface CustomViewController : UIViewController
 
-@property (nonatomic, readonly) CustomNaviBarView *m_viewNaviBar;
+@property (nonatomic, readonly) CustomNaviBarView * m_viewNaviBar;
 
 - (void)bringNaviBarToTopmost;
 - (void)naviToDevice;

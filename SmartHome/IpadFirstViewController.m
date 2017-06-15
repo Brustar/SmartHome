@@ -10,7 +10,7 @@
 #import "BaseTabBarController.h"
 #import "VoiceOrderController.h"
 
-@interface IpadFirstViewController ()<RCIMReceiveMessageDelegate>
+@interface IpadFirstViewController ()<RCIMReceiveMessageDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic,strong) BaseTabBarController *baseTabbarController;
 @property (nonatomic, readonly) UIButton *naviRightBtn;
 @property (nonatomic, readonly) UIButton *naviLeftBtn;
@@ -64,6 +64,9 @@
     [self chatConnect];
     //开启网络状况监听器
     [self updateInterfaceWithReachability];
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(bigMap:)];
+    recognizer.delegate = self;
+    [self.CoverView addGestureRecognizer:recognizer];
     
     self.scheculer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timing:) userInfo:nil repeats:YES];
 }
@@ -74,6 +77,20 @@
     if (unread>0) {
         self.DUPImageView.hidden=!self.DUPImageView.hidden;
     }
+}
+-(void)bigMap:(UITapGestureRecognizer *)ttp
+{
+        self.CoverView.hidden = YES;
+         self.MessageView.hidden = YES;
+    _baseTabbarController.tabbarPanel.hidden = NO;
+}
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    if ([touch.view isDescendantOfView:self.MessageView]) {
+        return NO;
+    }
+    
+    return YES;
 }
 
 #pragma mark - TCP recv delegate
@@ -106,7 +123,12 @@
     if (unread == 0) {
         self.messageLabel2.text = [NSString stringWithFormat:@"%@" , @"暂无新消息"];
         self.messageLabel1.text = @"";
+        self.Icone1Image.hidden = YES;
+        self.IconeImage2.hidden = YES;
         
+    }else{
+        self.Icone1Image.hidden = NO;
+        self.IconeImage2.hidden = NO;
     }
     NSArray *history = [[RCIMClient sharedRCIMClient] getHistoryMessages:ConversationType_GROUP targetId:[[UD objectForKey:@"HostID"] description] oldestMessageId:[[UD objectForKey:@"messageid"] longValue] count:2];
     if ([history count]>1) {
@@ -659,12 +681,12 @@
     
 }
 
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    self.CoverView.hidden = YES;
-     self.MessageView.hidden = YES;
-    _baseTabbarController.tabbarPanel.hidden = NO;
-}
+//-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+//{
+////    self.CoverView.hidden = YES;
+////     self.MessageView.hidden = YES;
+//    _baseTabbarController.tabbarPanel.hidden = NO;
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -26,6 +26,7 @@
 #import "UploadManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "Plugin.h"
+#import "IphoneSceneController.h"
 
 @implementation SceneManager
 
@@ -87,7 +88,8 @@
                                       @"imgname":imgFileName,
                                       @"scencefile":scenePath,
                                       @"isplan":@(1),
-                                      @"roomid":@(scene.roomID)
+                                      @"roomid":@(scene.roomID),
+                                      @"isactive":@(0)
                                       };
                     }
                 }else { //控制设备的定时
@@ -98,7 +100,8 @@
                                    @"imgname":imgFileName,
                                    @"scencefile":scenePath,
                                    @"isplan":@(1),
-                                   @"roomid":@(scene.roomID)
+                                   @"roomid":@(scene.roomID),
+                                   @"isactive":@(0)
                                    };
                 }
             }
@@ -109,8 +112,9 @@
                           @"scencename":name,
                           @"imgname":imgFileName,
                           @"scencefile":scenePath,
-                          @"isplan":@(2),
-                          @"roomid":@(scene.roomID)
+                          @"isplan":@(0),
+                          @"roomid":@(scene.roomID),
+                          @"isactive":@(0)
                           };
         }
        //NSData *imgData = UIImagePNGRepresentation(image);
@@ -208,7 +212,8 @@
                                       @"imgname":imgFileName,
                                       @"scencefile":scenePath,
                                       @"isplan":@(1),
-                                      @"roomid":@(scene.roomID)
+                                      @"roomid":@(scene.roomID),
+                                      @"isactive":@(0)
                                       };
                     }
                 }else { //控制设备的定时
@@ -219,7 +224,8 @@
                                   @"imgname":imgFileName,
                                   @"scencefile":scenePath,
                                   @"isplan":@(1),
-                                  @"roomid":@(scene.roomID)
+                                  @"roomid":@(scene.roomID),
+                                  @"isactive":@(0)
                                   };
                 }
             }
@@ -230,8 +236,9 @@
                           @"scencename":name,
                           @"imgname":imgFileName,
                           @"scencefile":scenePath,
-                          @"isplan":@(2),
-                          @"roomid":@(scene.roomID)
+                          @"isplan":@(0),
+                          @"roomid":@(scene.roomID),
+                          @"isactive":@(0)
                           };
         }
 
@@ -333,7 +340,8 @@
                                   @"endtime":schedule.endTime,
                                   @"astronomicaltime":@(schedule.astronomicalStartID),
                                   @"starttype":@(1),
-                                  @"weekvalue":schedule.weekDays
+                                  @"weekvalue":schedule.weekDays,
+                                  @"isactive":@(0)
                                   };
                 }
             }else { //控制设备的定时
@@ -350,26 +358,25 @@
                               @"endtime":schedule.endTime,
                               @"astronomicaltime":@(schedule.astronomicalStartID),
                               @"starttype":@(1),
-                              @"weekvalue":schedule.weekDays
+                              @"weekvalue":schedule.weekDays,
+                              @"isactive":@(0)
                               };
             }
         }
     }else{ //没有定时
         
-//        if (newScene.sceneName && newScene.picName && fileName && newScene.roomID) {
-        if (fileName) {
-            if (newScene.sceneName == nil) {
-                newScene.sceneName = @" ";
-            }
+        if (newScene.sceneName && newScene.picName && fileName && newScene.roomID) {
+        
             parameter = @{
                           @"token":[UD objectForKey:@"AuthorToken"],
                           @"optype":@(0),
                           @"scenceid":@(newScene.sceneID),
                           @"scencename":newScene.sceneName,
                           @"roomid":@(newScene.roomID),
-                          @"isplan":@(2),
+                          @"isplan":@(0),
                           @"plistname":fileName,
-                          @"scencefile":scenePath
+                          @"scencefile":scenePath,
+                          @"isactive":@(0)
                           };
         }
         
@@ -619,8 +626,8 @@
 
 - (void)poweroffAllDevice:(int)sceneid
 {
-    //NSData *data=nil;
-    //SocketManager *sock=[SocketManager defaultManager];
+//    NSData *data=nil;
+//    SocketManager *sock=[SocketManager defaultManager];
     
     Scene *scene=[self readSceneByID:sceneid];
     for (id device in scene.devices)
