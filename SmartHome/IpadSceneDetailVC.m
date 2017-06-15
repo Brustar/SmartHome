@@ -57,6 +57,7 @@
 @property (weak, nonatomic) IBOutlet UIView *patternView;//三种模式的父视图
 
 @property (weak, nonatomic) IBOutlet UIButton *brightBtn;//明亮
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *TableViewConstraint;
 
 @end
 
@@ -74,6 +75,12 @@
     [self.gentleBtn setBackgroundImage:[UIImage imageNamed:@"ipad-btn_choose_prd"] forState:UIControlStateSelected];
     [self.normalBtn setBackgroundImage:[UIImage imageNamed:@"ipad-btn_choose_prd"] forState:UIControlStateSelected];
     [self.brightBtn setBackgroundImage:[UIImage imageNamed:@"ipad-btn_choose_prd"] forState:UIControlStateSelected];
+//    if (_lightArray.count == 0 && _SwitchLightArr.count == 0 && _ColourLightArr.count == 0) {
+//        self.patternView.hidden = YES;
+//        self.TableViewConstraint.constant = 44;
+//        
+//    }
+    
 }
 
 -(void)refreshData:(NSArray *)data

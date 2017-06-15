@@ -86,7 +86,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="60"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8On-zc-cGX">
-                                        <rect key="frame" x="0.0" y="0.0" width="111" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="111.33333333333334" height="60"/>
                                         <state key="normal" title="柔和" image="lv_icon_light_soft" backgroundImage="Scene-bedroomJJ">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -95,7 +95,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghj-Eu-67W">
-                                        <rect key="frame" x="111" y="0.0" width="112" height="60"/>
+                                        <rect key="frame" x="111.33333333333333" y="0.0" width="111.33333333333336" height="60"/>
                                         <state key="normal" title="正常" image="lv_icon_light_normal" backgroundImage="Scene-bedroomJJ">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -104,7 +104,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQp-zC-wUS">
-                                        <rect key="frame" x="223" y="0.0" width="111" height="60"/>
+                                        <rect key="frame" x="222.66666666666671" y="0.0" width="111.33333333333329" height="60"/>
                                         <state key="normal" title="明亮" image="lv_icon_light_bright" backgroundImage="Scene-bedroomJJ">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
