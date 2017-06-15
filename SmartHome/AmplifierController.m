@@ -137,8 +137,6 @@
 -(void) initSwitcher
 {
     self.switcher = [[ORBSwitch alloc] initWithCustomKnobImage:nil inactiveBackgroundImage:[UIImage imageNamed:@"plugin_off"] activeBackgroundImage:[UIImage imageNamed:@"plugin_on"] frame:CGRectMake(0, 0, 750/2, 750/2)];
-    self.switcher.center = CGPointMake(self.view.bounds.size.width / 2,
-                                       self.view.bounds.size.height / 2);
     
     self.switcher.knobRelativeHeight = 1.0f;
     self.switcher.delegate = self;

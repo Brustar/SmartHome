@@ -1427,9 +1427,9 @@
     {
         NSString *sql;
         if ([self isWholeHouse:roomID]) {
-            sql = [NSString stringWithFormat:@"SELECT id,name FROM devices where subTypeid ='%@'",LIGHT_DEVICE_TYPE];
+            sql = [NSString stringWithFormat:@"SELECT id,name FROM devices where UITypeOfLight ='%@' order by id desc",LIGHT_DEVICE_TYPE];
         }else{
-            sql = [NSString stringWithFormat:@"SELECT id,name FROM devices where rid=%d and subTypeid ='%@'",roomID,LIGHT_DEVICE_TYPE];
+            sql = [NSString stringWithFormat:@"SELECT id,name FROM devices where rid=%d and UITypeOfLight ='%@' order by id desc",roomID,LIGHT_DEVICE_TYPE];
         }
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
