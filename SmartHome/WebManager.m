@@ -175,18 +175,34 @@
     
     if ([request.URL.absoluteString hasPrefix:@"wxpay"]) {   //微信支付指令
         
-        NSString *str = request.URL.absoluteString;
-        if (str.length >0) {
-            NSArray *payStringArray = [str componentsSeparatedByString:@":"];
-            NSString *orderID = nil;
-            if (payStringArray.count >1) {
-                orderID = payStringArray[1];
+        if ([WXApi isWXAppInstalled] && [WXApi isWXAppSupportApi]) {
+            NSString *str = request.URL.absoluteString;
+            if (str.length >0) {
+                NSArray *payStringArray = [str componentsSeparatedByString:@":"];
+                NSString *orderID = nil;
+                if (payStringArray.count >1) {
+                    orderID = payStringArray[1];
+                }else {
+                    [MBProgressHUD showError:@"支付参数错误"];
+                    return NO;
+                }
+                
+                if (orderID.length >0) {
+                    [[WeChatPayManager sharedInstance] weixinPayWithOrderID:[orderID integerValue]];
+                }else {
+                    [MBProgressHUD showError:@"支付参数错误"];
+                    return NO;
+                }
             }
-            
-            if (orderID.length >0) {
-                [[WeChatPayManager sharedInstance] weixinPayWithOrderID:[orderID integerValue]];
-            }
+        }else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                            message:@"未检测到微信客户端，无法支付。"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"确定"
+                                                  otherButtonTitles:nil];
+            [alert show];
         }
+        
         return NO;
     }
     

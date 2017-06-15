@@ -130,6 +130,7 @@
         mysettingVC.hidesBottomBarWhenPushed = YES;
         [_rightVC pushViewController:mysettingVC animated:YES];
     }else if ([item isEqualToString:@"返回"]) {
+        [NC postNotificationName:@"StopTimerNotification" object:nil];
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
