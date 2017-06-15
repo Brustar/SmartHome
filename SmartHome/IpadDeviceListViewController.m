@@ -38,6 +38,7 @@
     //初始化右边视图控制器
     self.rightVC = [SceneStoryBoard instantiateViewControllerWithIdentifier:@"IpadSceneDetailVC"];
     
+    
     // 设置分割面板的 2 个视图控制器
     splitViewController.viewControllers = @[self.leftVC, self.rightVC];
     
@@ -127,6 +128,8 @@
 {
      self.DevicesArr = [SQLManager getDeviceIDsBySeneId:self.sceneID];
      self.devices = [NSMutableArray array];
+     self.leftVC.roomID = self.roomID;
+     self.leftVC.sceneID = self.sceneID;
     
     
     switch (row) {

@@ -171,7 +171,7 @@
 #pragma UItableViewDelegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 14;
+    return 13;
 
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -201,10 +201,11 @@
         return _MBArray.count;//幕布
     }if (section == 11){
         return _BJMusicArray.count;//背景音乐
-    }if (section == 12){
-        return _OtherArray.count;//其他
     }
-    return 1;
+//    if (section == 12){
+        return _OtherArray.count;//其他
+//    }
+//    return 1;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -362,7 +363,8 @@
         BjMusicCell.deviceid = _BJMusicArray[indexPath.row];
         
         return BjMusicCell;
-    }if (indexPath.section == 12) {//其他
+    }
+//    if (indexPath.section == 12) {//其他
         OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
         otherCell.AddOtherBtn.hidden = YES;
         otherCell.OtherConstraint.constant = 10;
@@ -379,11 +381,11 @@
         }
         
         return otherCell;
-    }
-    AddDeviceCell * addDeviceCell = [tableView dequeueReusableCellWithIdentifier:@"AddDeviceCell" forIndexPath:indexPath];
-    addDeviceCell.backgroundColor = [UIColor clearColor];
-    
-    return addDeviceCell;
+//    }
+//    AddDeviceCell * addDeviceCell = [tableView dequeueReusableCellWithIdentifier:@"AddDeviceCell" forIndexPath:indexPath];
+//    addDeviceCell.backgroundColor = [UIColor clearColor];
+//    
+//    return addDeviceCell;
 
 }
 

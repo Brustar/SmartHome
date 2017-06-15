@@ -16,6 +16,7 @@
 #import "DeviceTimingViewController.h"
 #import "SceneManager.h"
 #import "IphoneSaveNewSceneController.h"
+#import "IpadDeviceListViewController.h"
 
 @interface AddIpadSceneVC ()<IpadAddDeviceVCDelegate>
 
@@ -80,12 +81,14 @@
     UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     UIStoryboard * SceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
     DeviceListTimeVC * deviceListVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"iPhoneDeviceListTimeVC"];
-    IphoneEditSceneController * iphoneEditSceneVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneEditSceneController"];
+    
+    IpadDeviceListViewController * ipadDeviceListVC = [[IpadDeviceListViewController alloc] init];
+    
     if ([lastVC isKindOfClass:[deviceListVC class]]) {
         DeviceTimingViewController * deviceTimingVC = [SceneStoryBoard instantiateViewControllerWithIdentifier:@"DeviceTimingViewController"];
         [self.navigationController pushViewController:deviceTimingVC animated:YES];
         
-    }else if ([lastVC isKindOfClass:[iphoneEditSceneVC class]]) {
+    }else if ([lastVC isKindOfClass:[ipadDeviceListVC class]]) {
         
         //场景ID不变
         NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
