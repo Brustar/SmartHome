@@ -20,6 +20,7 @@
     [self.PreviousBtn setImage:[UIImage imageNamed:@"ipad-icon_lt_prd"] forState:UIControlStateHighlighted];
     [self.nextBtn setImage:[UIImage imageNamed:@"ipad-icon_rt_prd"] forState:UIControlStateHighlighted];
     [self.DVDSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
+    self.DVDSlider.continuous = NO;
     self.DVDSlider.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
     self.DVDSlider.minimumTrackTintColor = [UIColor colorWithRed:253/255.0 green:254/255.0 blue:254/255.0 alpha:1];
     [self.AddDvdBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];

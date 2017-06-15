@@ -549,9 +549,9 @@ static NSString * const CYPhotoId = @"photo";
     self.currentCell = (CYPhotoCell *)[self.FirstCollectionView cellForItemAtIndexPath:indexPath];
     UIAlertController * alerController;
     if (ON_IPAD) {
-        alerController = [UIAlertController alertControllerWithTitle:@"温馨提示更换场景图片" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        alerController = [UIAlertController alertControllerWithTitle:@"更换场景图片" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     }else{
-         alerController = [UIAlertController alertControllerWithTitle:@"温馨提示更换场景图片" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+         alerController = [UIAlertController alertControllerWithTitle:@"更换场景图片" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
     }
    
     [alerController addAction:[UIAlertAction actionWithTitle:@"现在就拍" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

@@ -759,6 +759,7 @@
         DVDTableViewCell * DVDCell = [tableView dequeueReusableCellWithIdentifier:@"DVDTableViewCell" forIndexPath:indexPath];
         DVDCell.AddDvdBtn.hidden = YES;
         DVDCell.DVDConstraint.constant = 10;
+        DVDCell.DVDSlider.continuous = NO;
         DVDCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_DVDArray[indexPath.row] intValue]];
 //        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];

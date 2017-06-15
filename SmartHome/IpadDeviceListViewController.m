@@ -8,6 +8,9 @@
 
 #import "IpadDeviceListViewController.h"
 #import "IpadSceneDetailVC.h"
+#import "IphoneNewAddSceneTimerVC.h"
+#import "SceneManager.h"
+#import "IphoneSaveNewSceneController.h"
 
 
 @interface IpadDeviceListViewController ()<IpadDeviceTypeVCDelegate,NowMusicControllerDelegate>
@@ -34,6 +37,7 @@
     self.leftVC.delegate = self;
     //初始化右边视图控制器
     self.rightVC = [SceneStoryBoard instantiateViewControllerWithIdentifier:@"IpadSceneDetailVC"];
+    
     
     // 设置分割面板的 2 个视图控制器
     splitViewController.viewControllers = @[self.leftVC, self.rightVC];
@@ -63,6 +67,60 @@
 
 - (void)rightBtnClicked:(UIButton *)btn {
    
+    //     [self performSegueWithIdentifier:@"storeNewScene" sender:self];
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请选择" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *saveAction = [UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //场景ID不变
+        NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
+        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+        Scene *scene = [[Scene alloc]init];
+        [scene setValuesForKeysWithDictionary:plistDic];
+        scene.sceneID = self.sceneID;
+        scene.roomID = self.roomID;
+        scene.sceneName = [SQLManager getSceneName:scene.sceneID];
+        [[SceneManager defaultManager] editScene:scene];
+    }];
+    [alertVC addAction:saveAction];
+    UIAlertAction *saveNewAction = [UIAlertAction actionWithTitle:@"另存为新场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //另存为场景，新的场景ID
+        
+//        [self performSegueWithIdentifier:@"storeNewScene" sender:self];
+        UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+        IphoneSaveNewSceneController * iphoneSaveNewSceneVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneSaveNewSceneController"];
+        iphoneSaveNewSceneVC.roomId = self.roomID;
+        [self.navigationController pushViewController:iphoneSaveNewSceneVC animated:YES];
+        
+    }];
+    [alertVC addAction:saveNewAction];
+    
+    UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"编辑定时" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //重新编辑场景的定时
+        
+        UIStoryboard * sceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
+        
+        IphoneNewAddSceneTimerVC * newTimerVC = [sceneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneNewAddSceneTimerVC"];
+        newTimerVC.sceneID = self.sceneID;
+        newTimerVC.roomid = self.roomID;
+        
+        [self.navigationController pushViewController:newTimerVC animated:YES];
+        
+        
+    }];
+    [alertVC addAction:editAction];
+    //    UIAlertAction *favScene = [UIAlertAction actionWithTitle:@"收藏场景" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    //
+    //
+    //        [self favorScene];
+    //
+    //    }];
+    //    [alertVC addAction:favScene];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [alertVC dismissViewControllerAnimated:YES completion:nil];
+    }];
+    [alertVC addAction:cancelAction];
+    [[DeviceInfo defaultManager] setEditingScene:NO];
+    [self presentViewController:alertVC animated:YES completion:nil];
 }
 
 
@@ -70,6 +128,8 @@
 {
      self.DevicesArr = [SQLManager getDeviceIDsBySeneId:self.sceneID];
      self.devices = [NSMutableArray array];
+     self.leftVC.roomID = self.roomID;
+     self.leftVC.sceneID = self.sceneID;
     
     
     switch (row) {
