@@ -9,8 +9,9 @@
 #import "CustomViewController.h"
 #import "SQLManager.h"
 #import "DeviceTimerSettingViewController.h"
+#import "HttpManager.h"
 
-@interface SelectDevicesOfRoomViewController : CustomViewController<UITableViewDelegate, UITableViewDataSource>
+@interface SelectDevicesOfRoomViewController : CustomViewController<UITableViewDelegate, UITableViewDataSource, HttpDelegate>
 
 @property(nonatomic, assign) NSInteger roomID;
 @property(nonatomic, strong) NSMutableArray *deviceArray;
