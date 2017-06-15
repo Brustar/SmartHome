@@ -415,8 +415,8 @@
 -(void)rightBtnClicked:(UIButton *)btn
 {
     NSInteger isPlaying = [[UD objectForKey:@"IsPlaying"] integerValue];
-    if (isPlaying == 0) {
-        [MBProgressHUD showMessage:@"没有正在播放的设备"];
+    if (isPlaying == 1) {
+        [MBProgressHUD showError:@"没有正在播放的设备"];
         return;
     }
     

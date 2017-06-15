@@ -147,7 +147,7 @@ static NSString * const CYPhotoId = @"photo";
     
     NSInteger isPlaying = [[UD objectForKey:@"IsPlaying"] integerValue];
     if (isPlaying == 0) {
-        [MBProgressHUD showMessage:@"没有正在播放的设备"];
+        [MBProgressHUD showError:@"没有正在播放的设备"];
         return;
     }
     
