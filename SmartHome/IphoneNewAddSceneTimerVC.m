@@ -17,6 +17,7 @@
 #import "IphoneEditSceneController.h"
 #import "SmartHome-Swift.h"
 #import "Scene.h"
+#import "IpadDeviceListViewController.h"
 
 @interface IphoneNewAddSceneTimerVC ()<WeekdaysVCDelegate,TenClockDelegate>
 @property (nonatomic,strong) Scene *scene;
@@ -130,9 +131,9 @@
     _viewControllerArrs =self.navigationController.viewControllers;
     NSInteger vcCount = _viewControllerArrs.count;
     UIViewController * lastVC = _viewControllerArrs[vcCount -2];
-    UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-    IphoneEditSceneController * iphoneEditSceneVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneEditSceneController"];
-    if ([lastVC isKindOfClass:[iphoneEditSceneVC class]]) {
+
+    IpadDeviceListViewController * ipadDeviceListVC = [[IpadDeviceListViewController alloc] init];
+    if ([lastVC isKindOfClass:[ipadDeviceListVC class]]) {
         
         [DeviceInfo defaultManager].isPhotoLibrary = NO;
 
