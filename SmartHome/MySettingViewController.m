@@ -71,6 +71,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     if (ON_IPAD) {
         
         self.tableViewTopConstraint.constant = 60;

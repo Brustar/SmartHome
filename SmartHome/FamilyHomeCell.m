@@ -12,8 +12,19 @@
 
 - (void)setRoomAndDeviceStatus:(RoomStatus *)info {
     self.roomNameLabel.text = info.roomName;
-    self.temperatureLabel.text = [NSString stringWithFormat:@"%@℃", info.temperature];
-    self.humidityLabel.text = [NSString stringWithFormat:@"%@%@", info.humidity, @"%"];
+    
+    if (info.temperature.integerValue >0) {
+        self.temperatureLabel.text = [NSString stringWithFormat:@"%@℃", info.temperature];
+    }else {
+        self.temperatureLabel.text = [NSString stringWithFormat:@"%@℃", @"--"];
+    }
+    
+    if (info.humidity.integerValue >0) {
+        self.humidityLabel.text = [NSString stringWithFormat:@"%@%@", info.humidity, @"%"];
+    }else {
+        self.humidityLabel.text = [NSString stringWithFormat:@"%@%@", @"--", @"%"];
+    }
+    
     self.pm25Label.hidden = YES;
     NSString *pm25 = [NSString stringWithFormat:@"%@%@%@", @"PM2.5:", info.pm25, @"μg/m³"];
     
@@ -108,7 +119,7 @@
             ringR = 65;
         }
     }else {
-        ringR = 130;
+        ringR = 75;
     }
     
     

@@ -584,7 +584,7 @@ static NSString * const CYPhotoId = @"photo";
     [cell.imageView sd_setImageWithURL:nil placeholderImage:img];
     
     cell.icon.hidden = NO;
-    cell.icon.image = [UIImage imageNamed:[NSString stringWithFormat:@"cata_%ld",device.subTypeId]];
+    cell.icon.image = [UIImage imageNamed:[NSString stringWithFormat:@"cata_%ld",(long)device.subTypeId]];
     
     return cell;
 }
@@ -592,7 +592,7 @@ static NSString * const CYPhotoId = @"photo";
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     Device *device = self.devices[indexPath.row];
-    [self goDeviceByRoomID:[NSString stringWithFormat:@"%ld",device.subTypeId]];
+    [self goDeviceByRoomID:[NSString stringWithFormat:@"%ld",(long)device.subTypeId]];
 }
 
 - (void)dealloc {

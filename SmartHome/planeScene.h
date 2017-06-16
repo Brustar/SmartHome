@@ -18,6 +18,6 @@
 @interface planeScene : UIViewController<TouchImageDelegate>
 
 @property (strong, nonatomic) IBOutlet TouchImage *planeimg;
-@property (nonatomic) int deviceID;
+//@property (nonatomic) int deviceID;
 
 @end

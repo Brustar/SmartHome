@@ -16,7 +16,7 @@
 @property (nonatomic,assign) int roomID;
 //场景id
 @property (nonatomic,assign) int sceneID;
-@property(nonatomic,assign) int deviceID;
+//@property(nonatomic,assign) int deviceID;
 @property (strong, nonatomic) NSArray *devices;
 @property (nonatomic, strong) Scene * scene;
 @property (nonatomic, readonly) UIButton *naviRightBtn;

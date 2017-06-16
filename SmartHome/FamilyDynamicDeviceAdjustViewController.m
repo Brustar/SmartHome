@@ -67,7 +67,7 @@
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
     MonitorViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"MonitorVC"];
     vc.cameraURL = self.cameraURL;
-    vc.deviceID = self.deviceID;
+    vc.deviceid = self.deviceid;
     vc.view.frame = CGRectMake(0, 0, FW(self.monitorView), FH(self.monitorView));
     [self.monitorView addSubview:vc.view];
     [self addChildViewController:vc];

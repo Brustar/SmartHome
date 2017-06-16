@@ -395,7 +395,7 @@
     if([db open])
     {
         long masterID =  [[DeviceInfo defaultManager] masterID];
-        NSString *sql = [NSString stringWithFormat:@"select isAll from rooms where ID = %ld and masterID = '%ld'",eId,masterID];
+        NSString *sql = [NSString stringWithFormat:@"select isAll from rooms where ID = %ld and masterID = '%ld'",(long)eId,masterID];
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
@@ -772,7 +772,7 @@
         if ([self isWholeHouse:roomID]) {
             sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where subtypeid = \'%@\' and masterID = '%ld'",subtypeid,[device masterID]];
         }else{
-        sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and subtypeid = \'%@\' and masterID = '%ld'",roomID,subtypeid,[device masterID]];
+        sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where rID = %ld and subtypeid = \'%@\' and masterID = '%ld'",(long)roomID,subtypeid,[device masterID]];
         }
         
         FMResultSet *resultSet = [db executeQuery:sql];
@@ -2459,7 +2459,7 @@
         NSLog(@"Could not open db");
         return NO;
     }
-    BOOL result = [db executeUpdate:[NSString stringWithFormat:@"insert or replace into Users values(%ld, %ld, '%@', '%@', '%@',  %ld, %ld, '%@', '%@', '%@', null, null, null, null);", info.userID, info.userType, info.userName, info.nickName, info.vip, info.age, info.sex, info.headImgURL, info.phoneNum, info.signature]];
+    BOOL result = [db executeUpdate:[NSString stringWithFormat:@"insert or replace into Users values(%ld, %ld, '%@', '%@', '%@',  %ld, %ld, '%@', '%@', '%@', null, null, null, null);", (long)info.userID, (long)info.userType, info.userName, info.nickName, info.vip, (long)info.age, (long)info.sex, info.headImgURL, info.phoneNum, info.signature]];
     
     [db close];
     return result;

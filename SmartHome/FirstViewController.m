@@ -236,7 +236,7 @@
     
     NSLog(@"-------%@",locationString);
     NSCalendar * cal=[NSCalendar currentCalendar];
-    NSUInteger unitFlags=NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit;
+    NSUInteger unitFlags=NSCalendarUnitDay|NSCalendarUnitMonth|NSCalendarUnitYear;
     NSDateComponents * conponent= [cal components:unitFlags fromDate:senddate];
     NSInteger year=[conponent year];
     NSInteger month=[conponent month];

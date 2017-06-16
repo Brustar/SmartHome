@@ -33,6 +33,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     self.tableviewLeadingConstraint.constant = 20;
     self.tableviewTrailingConstraint.constant = 20;
     self.view1LeadingConstraint.constant = 20;

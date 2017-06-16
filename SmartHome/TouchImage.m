@@ -13,7 +13,7 @@
 
 
 @interface TouchImage()
-@property (nonatomic,assign) int deviceID;
+@property (nonatomic,assign) int deviceid;
 @end
 @implementation TouchImage
 
@@ -252,7 +252,7 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     id theSegue = segue.destinationViewController;
-    [theSegue setValue:[NSNumber numberWithInt:self.deviceID] forKey:@"deviceid"];
+    [theSegue setValue:[NSNumber numberWithInt:self.deviceid] forKey:@"deviceid"];
     
 }
 @end

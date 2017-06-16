@@ -77,9 +77,9 @@
         scene.schedules = [schedulesTemp copy];
         if(scene.schedules.count > 0)
         {
-            for (Schedule *schedule in scene.schedules) {
-                if(schedule.deviceID == 0) { //控制场景的定时
-                    if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID >0)
+            //for (Schedule *schedule in scene.schedules) {
+                //if(schedule.deviceID == 0) { //控制场景的定时
+                    /*if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID >0)
                     {
                         parameter = @{
                                       @"token":[UD objectForKey:@"AuthorToken"],
@@ -91,8 +91,8 @@
                                       @"roomid":@(scene.roomID),
                                       @"isactive":@(isactive)
                                       };
-                    }
-                }else { //控制设备的定时
+                    }*/
+                //}else { //控制设备的定时
                      parameter = @{
                                    @"token":[UD objectForKey:@"AuthorToken"],
                                    @"optype":@(0),
@@ -103,8 +103,8 @@
                                    @"roomid":@(scene.roomID),
                                    @"isactive":@(isactive)
                                    };
-                }
-            }
+                //}
+            //}
         }else {
             parameter = @{
                           @"token":[UD objectForKey:@"AuthorToken"],
@@ -201,9 +201,9 @@
         
         if(scene.schedules.count > 0)
         {
-            for (Schedule *schedule in scene.schedules) {
-                if(schedule.deviceID == 0) { //控制场景的定时
-                    if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID >0)
+            //for (Schedule *schedule in scene.schedules) {
+                //if(schedule.deviceID == 0) { //控制场景的定时
+                    /*if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID >0)
                     {
                         parameter = @{
                                       @"token":[UD objectForKey:@"AuthorToken"],
@@ -214,8 +214,8 @@
                                       @"isplan":@(1),
                                       @"roomid":@(scene.roomID)
                                       };
-                    }
-                }else { //控制设备的定时
+                    }*/
+                //}else { //控制设备的定时
                     parameter = @{
                                   @"token":[UD objectForKey:@"AuthorToken"],
                                   @"optype":@(0),
@@ -225,8 +225,8 @@
                                   @"isplan":@(1),
                                   @"roomid":@(scene.roomID)
                                   };
-                }
-            }
+                //}
+            //}
         }else {
             parameter = @{
                           @"token":[UD objectForKey:@"AuthorToken"],
@@ -321,21 +321,21 @@
     if(newScene.schedules.count > 0) //有定时
     {
         for (Schedule *schedule in newScene.schedules) {
-            if(schedule.deviceID == 0) {  //控制场景的定时
-                if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID >0)
-                {
-                    parameter = @{
-                                  @"token":[UD objectForKey:@"AuthorToken"],
-                                  @"optype":@(7),
-                                  @"Plist":fileName,
-                                  @"starttime":schedule.startTime,
-                                  @"endtime":schedule.endTime,
-                                  @"weekvalue":schedule.weekDays,
-                                  @"isactive":@(newScene.isactive),
-                                  @"sceneid":@(newScene.sceneID)
-                                  };
-                }
-            }else { //控制设备的定时
+//            if(schedule.deviceID == 0) {  //控制场景的定时
+//                if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID >0)
+////                {
+//                    parameter = @{
+//                                  @"token":[UD objectForKey:@"AuthorToken"],
+//                                  @"optype":@(7),
+//                                  @"Plist":fileName,
+//                                  @"starttime":schedule.startTime,
+//                                  @"endtime":schedule.endTime,
+//                                  @"weekvalue":schedule.weekDays,
+//                                  @"isactive":@(newScene.isactive),
+//                                  @"sceneid":@(newScene.sceneID)
+//                                  };
+//                }
+//            }else { //控制设备的定时
                 parameter = @{
                               @"token":[UD objectForKey:@"AuthorToken"],
                               @"optype":@(7),
@@ -346,7 +346,7 @@
                               @"isactive":@(newScene.isactive),
                               @"sceneid":@(newScene.sceneID)
                               };
-            }
+//            }
         }
     }else{ //没有定时
         
@@ -395,8 +395,8 @@
     if(newScene.schedules.count > 0) //有定时
     {
         for (Schedule *schedule in newScene.schedules) {
-            if(schedule.deviceID == 0) {  //控制场景的定时
-                if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID >0)
+            //if(schedule.deviceID == 0) {  //控制场景的定时
+                /*if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID >0)
                 {
                     parameter = @{
                                   @"token":[UD objectForKey:@"AuthorToken"],
@@ -413,8 +413,8 @@
                                   @"starttype":@(1),
                                   @"weekvalue":schedule.weekDays
                                   };
-                }
-            }else { //控制设备的定时
+                }*/
+            //}else { //控制设备的定时
                 parameter = @{
                               @"token":[UD objectForKey:@"AuthorToken"],
                               @"optype":@(0),
@@ -426,11 +426,11 @@
                               @"scencefile":scenePath,
                               @"starttime":schedule.startTime,
                               @"endtime":schedule.endTime,
-                              @"astronomicaltime":@(schedule.astronomicalStartID),
+                              //@"astronomicaltime":@(schedule.astronomicalStartID),
                               @"starttype":@(1),
                               @"weekvalue":schedule.weekDays
                               };
-            }
+            //}
         }
     }else{ //没有定时
         
@@ -568,10 +568,10 @@
                 schedule.endTime=sch[@"endTime"];
                 schedule.startDate = sch[@"startDay"];
                 schedule.endDate = sch[@"endDay"];
-                schedule.deviceID=[sch[@"deviceID"] intValue];
-                schedule.openToValue=[sch[@"openTovalue"] intValue];
-                schedule.astronomicalStartID=[sch[@"astronomicalStartID"] intValue];
-                schedule.astronomicalEndID=[sch[@"astronomicalEndID"] intValue];
+                //schedule.deviceID=[sch[@"deviceID"] intValue];
+                //schedule.openToValue=[sch[@"openTovalue"] intValue];
+                //schedule.astronomicalStartID=[sch[@"astronomicalStartID"] intValue];
+                //schedule.astronomicalEndID=[sch[@"astronomicalEndID"] intValue];
                 schedule.weekDays=sch[@"weekDays"];
                 [schedules addObject:schedule];
             }
@@ -694,17 +694,17 @@
 
 - (void)poweroffAllDevice:(int)sceneid
 {
-//    NSData *data=nil;
-//    SocketManager *sock=[SocketManager defaultManager];
+    NSData *data=nil;
+    SocketManager *sock=[SocketManager defaultManager];
     
     Scene *scene=[self readSceneByID:sceneid];
     for (id device in scene.devices)
     {
         if ([device respondsToSelector:@selector(deviceID)])
         {
-//            NSString *deviceid=[NSString stringWithFormat:@"%d", [device deviceID]];
-//            data=[[DeviceInfo defaultManager] close:deviceid];
-//            [sock.socket writeData:data withTimeout:1 tag:1];
+            NSString *deviceid=[NSString stringWithFormat:@"%d",[device deviceID]];
+            data=[[DeviceInfo defaultManager] close:deviceid];
+            [sock.socket writeData:data withTimeout:1 tag:1];
         }
     }
     

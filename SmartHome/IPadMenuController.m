@@ -22,6 +22,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     if (self.typeID != light) {
         Device *device = [self.types objectAtIndex:0];
         [[DeviceInfo defaultManager] setRoomID:self.roomID];
@@ -120,8 +121,13 @@ static NSString *const leftMenuCell = @"leftMenuCell";
     return 64.0f;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section;
+{
+    return 64.0f;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 64;
+    return 64.0f;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

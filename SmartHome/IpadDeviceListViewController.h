@@ -14,7 +14,7 @@
 
 @interface IpadDeviceListViewController : CustomViewController
 
-@property(nonatomic,assign) int deviceID;
+//@property(nonatomic,assign) int deviceID;
 @property (nonatomic,assign) int roomID;
 //场景id
 @property (nonatomic,assign) int sceneID;

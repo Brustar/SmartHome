@@ -494,7 +494,7 @@
     
     NSDateComponents*comps;
     
-    comps =[calendar components:(NSWeekCalendarUnit | NSWeekdayCalendarUnit |NSWeekdayOrdinalCalendarUnit)
+    comps =[calendar components:(NSCalendarUnitWeekOfMonth | NSCalendarUnitWeekday | NSCalendarUnitWeekdayOrdinal)
             
                        fromDate:date];
     NSInteger weekday = [comps weekday]; // 星期几（注意，周日是“1”，周一是“2”。。。。）
@@ -536,12 +536,12 @@
         self.imageView.image = [UIImage imageNamed:@"IpadSceneBg"];
     }
     NSCalendar * cal=[NSCalendar currentCalendar];
-    NSUInteger unitFlags=NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit;
+    NSUInteger unitFlags=NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear;
     NSDateComponents * conponent= [cal components:unitFlags fromDate:senddate];
     NSInteger year=[conponent year];
     NSInteger month=[conponent month];
     NSInteger day=[conponent day];
-    self.TimerLabel.text = [NSString stringWithFormat:@"%ld.%ld.%ld",year,month,day];
+    self.TimerLabel.text = [NSString stringWithFormat:@"%ld.%ld.%ld",(long)year,(long)month,(long)day];
 
 }
 
