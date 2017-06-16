@@ -39,6 +39,8 @@
 @property (nonatomic,weak) id<CYPhotoCellDelegate> delegate;
 
 @property (nonatomic, assign) int sceneStatus;//场景状态
+@property (nonatomic, assign) int isplan;//是否有定时
+@property (nonatomic, assign) int isactive;
 @property (weak, nonatomic) IBOutlet UIImageView *subImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *icon;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *SceneNameTopConstraint;
