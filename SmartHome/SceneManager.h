@@ -39,7 +39,7 @@
 //保证newScene的ID不变只改变场景定时
 - (void)editSceneTimer:(Scene *)newScene;
 -(NSArray *)addDevice2Scene:(Scene *)scene withDeivce:(id)device withId:(int)deviceID;
-
+-(NSArray *)subDeviceFromScene:(Scene *)scene withDeivce:(int)deviceID;
 -(void) startScene:(int)sceneid;
 -(void) poweroffAllDevice:(int)sceneid;
 

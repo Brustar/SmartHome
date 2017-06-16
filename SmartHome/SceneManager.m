@@ -142,7 +142,6 @@
                     FMDatabase *db = [SQLManager connetdb];
                     if([db open])
                     {
-//                        (%d,'%@','','%@',%ld,%d,null,null,null,'%ld',%d)
                          NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%ld,%d,'%@',%d,null,'%ld','%d')",scene.sceneID,name,roomName,[sceneDict objectForKey:@"image_url"],(long)scene.roomID,2,@"0",0,[[DeviceInfo defaultManager] masterID],0];
                         BOOL result = [db executeUpdate:sql];
                         if(result)
@@ -1026,6 +1025,13 @@
         array=[NSArray arrayWithObject:device];
     }
     return array;
+}
+
+-(NSArray *)subDeviceFromScene:(Scene *)scene withDeivce:(int)deviceID
+{
+    NSArray *devices = scene.devices;
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"deviceID != %d",deviceID];
+    return [devices filteredArrayUsingPredicate:pred];
 }
 
 -(NSArray*)allDeviceIDs:(int)sceneid
