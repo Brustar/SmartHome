@@ -226,7 +226,12 @@
     
     KeypadView *view = array[0];
     view.deviceid = self.deviceid;
-    view.transform = CGAffineTransformMakeRotation(-M_PI_2);
+    if ([[UIDevice currentDevice] orientation]==UIDeviceOrientationLandscapeRight) {
+        view.transform = CGAffineTransformMakeRotation(M_PI_2);
+    }else{
+        view.transform = CGAffineTransformMakeRotation(-M_PI_2);
+    }
+    
     [view show];
 }
 

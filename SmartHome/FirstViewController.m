@@ -181,7 +181,7 @@
     [self setUIMessage];
     [self chatConnect];
     [self getScenesFromPlist];
-    [self setBtn];
+    //[self setBtn];
     
     //开启网络状况监听器
     [self updateInterfaceWithReachability];
@@ -476,7 +476,6 @@
             _firstBtn.titleLabel.font = [UIFont systemFontOfSize:10];
             _firstBtn.hidden = NO;
             _TwoBtn.hidden = YES;
-            _ThreeBtn.hidden = NO;
             [_ThreeBtn setTitle:@"" forState:UIControlStateNormal];
             [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular4"] forState:UIControlStateNormal];
         }if(_shortcutsArray.count == 2) {
@@ -486,7 +485,6 @@
             [_TwoBtn setTitle:_info2.sceneName forState:UIControlStateNormal];
             _firstBtn.hidden = NO;
             _TwoBtn.hidden = NO;
-            _ThreeBtn.hidden = NO;
             [_ThreeBtn setTitle:@"" forState:UIControlStateNormal];
             [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular4"] forState:UIControlStateNormal];
         
@@ -500,16 +498,12 @@
             [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular3"] forState:UIControlStateNormal];
             _firstBtn.hidden = NO;
             _TwoBtn.hidden = NO;
-            _ThreeBtn.hidden = NO;
         }
     }else{
-        _ThreeBtn.center = CGPointMake(self.view.center.x, self.view.center.y);
         [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular4"] forState:UIControlStateNormal];
         [_ThreeBtn setTitle:@"" forState:UIControlStateNormal];
         _firstBtn.hidden = YES;
         _TwoBtn.hidden = YES;
-        _ThreeBtn.hidden = NO;
-        
     }
 }
 

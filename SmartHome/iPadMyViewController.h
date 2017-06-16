@@ -16,5 +16,6 @@
 @property(nonatomic, strong) LeftViewController *leftVC;
 @property(nonatomic, strong) UINavigationController *rightVC;
 @property(nonatomic, strong) CustomViewController *rootVC;
+@property(nonatomic, strong) NSString *currentItem;
 
 @end

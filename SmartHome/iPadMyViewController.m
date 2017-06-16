@@ -84,6 +84,13 @@
 
 #pragma mark - LeftViewControllerDelegate
 - (void)didSelectItem:(NSString *)item {
+    
+    if (_currentItem.length >0 && [_currentItem isEqualToString:item]) {
+        return;
+    }else {
+        _currentItem = [NSString stringWithString:item];
+    
+    [NC postNotificationName:@"StopTimerNotification" object:nil];  
     [_rightVC popToRootViewControllerAnimated:NO];
     UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIStoryboard *myInfoStoryBoard  = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
@@ -133,6 +140,8 @@
         [NC postNotificationName:@"StopTimerNotification" object:nil];
         [self.navigationController popViewControllerAnimated:YES];
     }
+        
+  }
 }
 
 @end
