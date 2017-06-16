@@ -398,7 +398,7 @@
         cell.NewLightSlider.continuous = NO;
          _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
         cell.scene = _scene;
-        [cell query:[NSString stringWithFormat:@"%d", device.eID]];
+        [cell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
         
         return cell;
     }if (indexPath.section == 1) {//调色灯
@@ -411,7 +411,7 @@
         newColourCell.colourSlider.continuous = NO;
         newColourCell.deviceid = _ColourLightArr[indexPath.row];
          _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
-        [newColourCell query:[NSString stringWithFormat:@"%d", device.eID]];
+        [newColourCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
         newColourCell.scene = _scene;
         
         return newColourCell;
@@ -424,7 +424,7 @@
         newColourCell.powerLightNameLabel.text = device.name;
         newColourCell.deviceid = _SwitchLightArr[indexPath.row];
          _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
-        [newColourCell query:[NSString stringWithFormat:@"%d", device.eID]];
+        [newColourCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
         newColourCell.scene = _scene;
         
         return newColourCell;
@@ -453,7 +453,7 @@
         aireCell.deviceid = _CurtainArray[indexPath.row];
         aireCell.slider.continuous = NO;
          _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
-        [aireCell query:[NSString stringWithFormat:@"%d", device.eID]];
+        [aireCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
         aireCell.scene = _scene;
         
         return aireCell;
