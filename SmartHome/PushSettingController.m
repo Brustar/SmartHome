@@ -76,6 +76,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     if (ON_IPAD) {
         self.tableviewLeadingConstraint.constant = 20;
         self.tableviewTrailingConstraint.constant = 20;

@@ -159,7 +159,7 @@
             if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) {
                 self.NewLightPowerBtn.selected = proto.action.state;
             }else if(proto.action.state == 0x1A){
-                int brightness_f = proto.action.RValue;
+                //int brightness_f = proto.action.RValue;
 //                float degree = M_PI*brightness_f/MAX_ROTATE_DEGREE;
 //                self.tranformView.transform = CGAffineTransformMakeRotation(degree);
             }else if(proto.action.state == 0x1B){

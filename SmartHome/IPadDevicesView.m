@@ -152,13 +152,14 @@ static NSString *const leftMenuCell = @"leftMenuCell";
     if (tableView.tag == 1) {
         Device *device = [self.devices objectAtIndex:indexPath.row];
         NSInteger type = device.hTypeId;
-        if (type == FM || type == 2 || type == 1) {
+        if (type == curtain || type== air || type == 1 || type == 2 || type == 3 || type == bgmusic || type == screen) {
             return 150;
         }
-        if (type == DVDtype || type == TVtype) {
+        if (type == DVDtype || type == TVtype || type == FM) {
             return 210;
         }
-        return 100;
+        
+        return 80;
     }
     return 64;
 }

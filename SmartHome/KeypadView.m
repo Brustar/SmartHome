@@ -20,7 +20,7 @@
 */
 - (IBAction)keyPress:(id)sender {
     UIButton *keypad = (UIButton *)sender;
-    self.channelValue.text = [NSString stringWithFormat:@"%@%ld",self.channelValue.text , keypad.tag];
+    self.channelValue.text = [NSString stringWithFormat:@"%@%d",self.channelValue.text , (int)keypad.tag];
 }
 
 - (IBAction)backspace:(id)sender {

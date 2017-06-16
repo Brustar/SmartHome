@@ -422,7 +422,7 @@
             aireCell.roomID = (int)self.roomID;
             aireCell.AireNameLabel.text = device.name;
             aireCell.deviceid = _environmentArray[indexPath.row];
-            aireCell.temperatureLabel.text = [NSString stringWithFormat:@"%ld℃", device.temperature];
+            aireCell.temperatureLabel.text = [NSString stringWithFormat:@"%ld℃", (long)device.temperature];
             aireCell.AireSlider.value = device.temperature;//温度
             aireCell.AireSwitchBtn.selected = device.power;//开关
             return aireCell;
