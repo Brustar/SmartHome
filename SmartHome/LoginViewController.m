@@ -755,7 +755,7 @@ NSArray *array = [NSArray arrayWithObjects:
             }
             
             
-            if (!_isTheSameUser) { //如果不是同一个用户, 或者是同一个用户，但卸载重装了App
+            //if (!_isTheSameUser) { //如果不是同一个用户, 或者是同一个用户，但卸载重装了App
                 if ([self.hostIDS count] >0) {
                     int mid = [self.hostIDS[0] intValue];
                     
@@ -768,7 +768,7 @@ NSArray *array = [NSArray arrayWithObjects:
                     [IOManager writeUserdefault:@(mid) forKey:@"HostID"];
                     info.masterID = mid;
                 }
-            }
+           // }
             
             
             [IOManager writeUserdefault:responseObject[@"rctoken"] forKey:@"rctoken"];

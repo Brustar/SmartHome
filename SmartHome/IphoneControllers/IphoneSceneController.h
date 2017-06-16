@@ -23,6 +23,8 @@
 @property (nonatomic, readonly) UIButton *naviLeftBtn;
 @property (nonatomic, strong) NowMusicController * nowMusicController;
 @property(nonatomic, strong) AFNetworkReachabilityManager *afNetworkReachabilityManager;
+@property (nonatomic, strong) NSNumber *isActive;
+@property (nonatomic, assign) int timeSceneID;//要定时的场景ID
 
 -(void)setUpRoomView;
 
