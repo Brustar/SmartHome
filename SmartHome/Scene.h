@@ -43,6 +43,9 @@
 //是否启用定时
 @property (assign,nonatomic) int isactive;
 
+//是否有定时
+@property (nonatomic, assign) int isplan;
+
 - (instancetype)initWhithoutSchedule;
 
 @end
