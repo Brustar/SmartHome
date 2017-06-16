@@ -23,7 +23,7 @@
 @property (strong, nonatomic) Scene *scene;
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic, assign) id<CurtainTableViewCellDelegate>delegate;
--(void) query:(NSString *)deviceid;
+-(void) query:(NSString *)deviceid delegate:(id)delegate;
 
 @end
 

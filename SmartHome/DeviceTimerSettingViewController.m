@@ -361,8 +361,10 @@
                 }
             }
             
+        }else if ([responseObject[@"result"] intValue] == 500) { //该设备已添加定时
+            [MBProgressHUD showError:responseObject[@"msg"]];
         }else {
-            [MBProgressHUD showSuccess:@"添加失败"];
+            [MBProgressHUD showError:@"添加失败"];
         }
     }else if (tag == 2) {
         if ([responseObject[@"result"] intValue] == 0) {

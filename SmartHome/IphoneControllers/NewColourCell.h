@@ -28,7 +28,7 @@
 @property (nonatomic, assign) id<NewColourCellDelegate>delegate;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ColourNameTopConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *SupImageViewHeight;
--(void) query:(NSString *)deviceid;
+-(void) query:(NSString *)deviceid delegate:(id)delegate;
 
 @end
 

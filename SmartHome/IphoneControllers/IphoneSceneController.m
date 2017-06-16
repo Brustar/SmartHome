@@ -782,7 +782,13 @@ static NSString * const CYPhotoId = @"photo";
         }
     }else if (tag == 2) { //启动／停止 场景定时
         if([responseObject[@"result"] intValue] == 0) {
-            [MBProgressHUD showSuccess:responseObject[@"msg"]];
+          BOOL success = [SQLManager updateSceneIsActive:_isActive.integerValue sceneID:_timeSceneID];
+            if (success) {
+                [MBProgressHUD showSuccess:responseObject[@"msg"]];
+            }else {
+                [MBProgressHUD showError:@"操作失败"];
+            }
+            
         }else {
             [MBProgressHUD showError:@"操作失败"];
         }
@@ -814,7 +820,8 @@ static NSString * const CYPhotoId = @"photo";
 #pragma mark - CYPhotoCellDelegate
 - (void)onTimingBtnClicked:(UIButton *)sender sceneID:(int)sceneID {
     
-    NSNumber *isActive = @(sender.selected);
+    _isActive = @(sender.selected);
+    _timeSceneID = sceneID;
     
     NSString *url = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
@@ -823,7 +830,7 @@ static NSString * const CYPhotoId = @"photo";
         NSDictionary *dict = @{@"token":auothorToken,
                                @"optype":@(8),
                                @"sceneid":@(sceneID),
-                               @"isactive":isActive
+                               @"isactive":_isActive
                                };
         HttpManager *http = [HttpManager defaultManager];
         http.delegate = self;

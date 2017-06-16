@@ -41,11 +41,11 @@
        [self.AddColourLightBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
     }
 }
--(void) query:(NSString *)deviceid
+-(void) query:(NSString *)deviceid delegate:(id)delegate
 {
     self.deviceid = deviceid;
     SocketManager *sock=[SocketManager defaultManager];
-    sock.delegate=self;
+    sock.delegate=delegate;
     //查询设备状态
     NSData *data = [[DeviceInfo defaultManager] query:deviceid];
     [sock.socket writeData:data withTimeout:1 tag:1];
@@ -114,11 +114,7 @@
         }
         
     }else if (sender == self.colourSlider){
-        //调光灯
-//        NSData *data=[[DeviceInfo defaultManager] changeBright:self.NewL.value*100 deviceID:self.deviceid];
-//        NSData * data =[[DeviceInfo defaultManager] changeColor:<#(NSString *)#> R:<#(uint8_t)#> G:<#(uint8_t)#> B:<#(uint8_t)#>];
-//        SocketManager *sock=[SocketManager defaultManager];
-//        [sock.socket writeData:data withTimeout:1 tag:1];
+
     }
    
 }

@@ -15,12 +15,6 @@
 
 @implementation NewLightCell
 
--(id)awakeAfterUsingCoder:(NSCoder *)aDecoder
-{
-    NSLog(@"-----");
-    return self;
-}
-
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
@@ -44,11 +38,11 @@
     
 }
 
--(void) query:(NSString *)deviceid
+-(void) query:(NSString *)deviceid delegate:(id)delegate
 {
     self.deviceid = deviceid;
     SocketManager *sock=[SocketManager defaultManager];
-    sock.delegate=self;
+    sock.delegate=delegate;
     //查询设备状态
     NSData *data = [[DeviceInfo defaultManager] query:deviceid];
     [sock.socket writeData:data withTimeout:1 tag:1];

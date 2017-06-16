@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HttpManager.h"
+#import "AFHTTPSessionManager.h"
 
 enum{
     offLine,  //离线
@@ -64,7 +66,7 @@ enum{
 #define ON_IPAD ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
 #define ON_IPONE ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
 #define SWITCH_SIZE 290
-@interface DeviceInfo : NSObject
+@interface DeviceInfo : NSObject<HttpDelegate>
 //是否编辑场景时
 @property (nonatomic) bool editingScene;
 //ios设备的音量
