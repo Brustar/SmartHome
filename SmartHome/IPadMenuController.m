@@ -22,6 +22,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     if (self.typeID != light) {
         Device *device = [self.types objectAtIndex:0];
         [[DeviceInfo defaultManager] setRoomID:self.roomID];

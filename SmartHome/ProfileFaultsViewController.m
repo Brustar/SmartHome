@@ -73,6 +73,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     if (ON_IPAD) {
         self.View1.hidden = NO;
     }else{

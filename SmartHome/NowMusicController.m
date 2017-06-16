@@ -315,10 +315,8 @@
      self.deviceid = [NSString stringWithFormat:@"%d",devInfo.eID];
      self.seleteSection = indexPath.section;
      self.seleteRow = indexPath.row;
-      NSLog(@"%ld",cell.tag);
-
-    
 }
+
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];

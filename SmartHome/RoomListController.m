@@ -531,68 +531,6 @@
     return selected;
 }
 
-//右下角的定时按钮
-- (IBAction)clickFixTimeBtn:(id)sender {
-    UIButton *btn = (UIButton *)sender;
-    
-    if (![self hasSelectedDevice]) {
-        [MBProgressHUD showError:@"先选择设备，再设置定时"];
-        return;
-    }
-    
-    if(btn.selected)
-    {
-        self.timeView.hidden = YES;
-        self.dataPicker.hidden = YES;
-        self.ShowSettingDataView.hidden = YES;
-    }else {
-        
-        self.timeView.hidden =  NO;
-        //_timeView.backgroundColor = [UIColor redColor];
-        self.ShowSettingDataView.hidden = NO;
-        //_ShowSettingDataView.backgroundColor = [UIColor greenColor];
-        //        self.dataPicker.hidden = NO;
-        
-        NSString  *astronomicealTime = @"1";
-        NSDictionary *dic;
-        int isPlane;
-        int playType;
-        if([self.startTimeBtn.titleLabel.text isEqualToString:@"设置"])
-        {
-            isPlane = 2;
-        }else {
-            if([self.startTimeBtn.titleLabel.text isEqualToString:@"黎明"]){
-                astronomicealTime = @"1";
-            }else if([self.startTimeBtn.titleLabel.text isEqualToString:@"日出"]){
-                astronomicealTime = @"2";
-            }else if([self.startTimeBtn.titleLabel.text isEqualToString:@"日落"]){
-                astronomicealTime = @"3";
-            }else {
-                astronomicealTime = @"4";
-            }
-            
-            if(astronomicealTime)
-            {
-                playType = 2;
-            }else{
-                playType = 1;
-            }
-            isPlane = 1;
-        }
-      
-        dic = @{
-                @"astronomicealTime":astronomicealTime,
-                @"playType":[NSNumber numberWithInt:playType],
-                @"startTime":self.startTimeBtn.titleLabel.text,
-                @"endTime":self.endTimeBtn.titleLabel.text,
-                @"isPane":[NSNumber numberWithInt:isPlane]
-                };
-        
-    }
-    
-    btn.selected = !btn.selected;
-}
-
 //设置开始时间，结束时间
 - (IBAction)setTimeOnClick:(UIButton *)sender {
     
@@ -698,13 +636,13 @@
     }
     
     self.scene.schedules = [schedulesTemp copy];
-    
+    /*
     NSInteger deviceID = 0;
     
     if (![deviceName isEqualToString:@"场景"]) {
         deviceID = [SQLManager deviceIDByDeviceName:deviceName];
     }
-    
+    */
     for (int i = 0; i < self.scene.schedules.count; i++) {
         Schedule *schedule = self.scene.schedules[i];
         
