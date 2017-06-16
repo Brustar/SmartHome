@@ -77,7 +77,7 @@
         scene.schedules = [schedulesTemp copy];
         if(scene.schedules.count > 0)
         {
-            for (Schedule *schedule in scene.schedules) {
+            //for (Schedule *schedule in scene.schedules) {
                 //if(schedule.deviceID == 0) { //控制场景的定时
                     /*if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID >0)
                     {
@@ -104,7 +104,7 @@
                                    @"isactive":@(0)
                                    };
                 //}
-            }
+            //}
         }else {
             parameter = @{
                           @"token":[UD objectForKey:@"AuthorToken"],
@@ -201,7 +201,7 @@
         
         if(scene.schedules.count > 0)
         {
-            for (Schedule *schedule in scene.schedules) {
+            //for (Schedule *schedule in scene.schedules) {
                 //if(schedule.deviceID == 0) { //控制场景的定时
                     /*if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID >0)
                     {
@@ -228,7 +228,7 @@
                                   @"isactive":@(0)
                                   };
                 //}
-            }
+            //}
         }else {
             parameter = @{
                           @"token":[UD objectForKey:@"AuthorToken"],
