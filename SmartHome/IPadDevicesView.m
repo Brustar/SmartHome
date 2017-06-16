@@ -63,7 +63,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
     [self.menu registerNib:cellNib forCellReuseIdentifier:leftMenuCell];
     
     self.content.allowsSelection = NO;
-    [self.content registerNib:[UINib nibWithNibName:@"IpadAireTableViewCell" bundle:nil] forCellReuseIdentifier:@"IpadAireTableViewCell"];//空调
+    [self.content registerNib:[UINib nibWithNibName:@"AireTableViewCell" bundle:nil] forCellReuseIdentifier:@"AireTableViewCell"];//空调
     [self.content registerNib:[UINib nibWithNibName:@"CurtainTableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainTableViewCell"];//窗帘
     [self.content registerNib:[UINib nibWithNibName:@"IpadTVCell" bundle:nil] forCellReuseIdentifier:@"IpadTVCell"];//网络电视
     [self.content registerNib:[UINib nibWithNibName:@"NewColourCell" bundle:nil] forCellReuseIdentifier:@"NewColourCell"];//调色灯
@@ -77,6 +77,67 @@ static NSString *const leftMenuCell = @"leftMenuCell";
     [self.content registerNib:[UINib nibWithNibName:@"FMTableViewCell" bundle:nil] forCellReuseIdentifier:@"FMTableViewCell"];//FM
     
     [self.content registerNib:[UINib nibWithNibName:@"PowerLightCell" bundle:nil] forCellReuseIdentifier:@"PowerLightCell"];//开关灯
+}
+
+#pragma mark - TCP recv delegate
+-(void)recv:(NSData *)data withTag:(long)tag
+{
+    Proto proto=protocolFromData(data);
+    
+    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
+        return;
+    }
+    
+    if (proto.cmd==0x01) {
+        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+        UITableViewCell *cell = [self.content viewWithTag:[devID intValue]];
+        if(proto.action.state == 0x1A){
+            if (proto.deviceType == 2) {
+                ((NewLightCell *)cell).NewLightSlider.value = (float)proto.action.RValue/100.0f;
+            }
+            if (proto.deviceType == 3) {
+                ((NewColourCell *)cell).colourSlider.value = (float)proto.action.RValue/100.0f;
+            }
+        }
+        if (proto.action.state == PROTOCOL_ON || proto.action.state == PROTOCOL_OFF) {
+            switch (proto.deviceType) {
+                case 2:
+                    ((NewLightCell *)cell).NewLightPowerBtn.selected = proto.action.state;
+                    break;
+                case 1:
+                    ((PowerLightCell *)cell).powerLightBtn.hidden = !proto.action.state;
+                    break;
+                case 3:
+                    ((NewColourCell *)cell).AddColourLightBtn.hidden = !proto.action.state;
+                    break;
+                case air:
+                    ((AireTableViewCell *)cell).AddAireBtn.hidden = !proto.action.state;
+                    break;
+                case curtain:
+                    ((CurtainTableViewCell *)cell).AddcurtainBtn.hidden = !proto.action.state;
+                    break;
+                case TVtype:
+                    ((IpadTVCell *)cell).AddTvDeviceBtn.hidden = !proto.action.state;
+                    break;
+                case DVDtype:
+                    ((IpadDVDTableViewCell *)cell).AddDvdBtn.hidden = !proto.action.state;
+                    break;
+                case FM:
+                    ((FMTableViewCell *)cell).AddFmBtn.hidden = !proto.action.state;
+                    break;
+                case screen:
+                    ((ScreenCurtainCell *)cell).AddScreenCurtainBtn.hidden = !proto.action.state;
+                    break;
+                case bgmusic:
+                    ((BjMusicTableViewCell *)cell).AddBjmusicBtn.hidden = !proto.action.state;
+                    break;
+                default:
+                    ((OtherTableViewCell *)cell).AddOtherBtn.hidden = !proto.action.state;
+                    break;
+            }
+        }
+        
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -124,7 +185,8 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 cell.NewLightSlider.hidden = NO;
                 cell.NewLightPowerBtn.selected = device.power;//开关状态
                 cell.NewLightSlider.value = (float)device.bright/100.0f;//亮度状态
-                [cell query:[NSString stringWithFormat:@"%d", device.eID]];
+                [cell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
+                cell.tag = device.eID;
                 return cell;
             }
             case 3:
@@ -135,7 +197,8 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 newColourCell.backgroundColor =[UIColor clearColor];
                 
                 newColourCell.colourNameLabel.text = device.name;
-                [newColourCell query:[NSString stringWithFormat:@"%d", device.eID]];
+                [newColourCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
+                newColourCell.tag = device.eID;
                 return newColourCell;
             }
             case 1:
@@ -144,14 +207,14 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 newColourCell.addPowerLightBtn.hidden = YES;
                 newColourCell.powerBtnConstraint.constant = 10;
                 newColourCell.backgroundColor =[UIColor clearColor];
-                [newColourCell query:[NSString stringWithFormat:@"%d", device.eID]];
+                [newColourCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
                 newColourCell.powerLightNameLabel.text = device.name;
-                
+                newColourCell.tag = device.eID;
                 return newColourCell;
             }
             case air:
             {
-                AireTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"IpadAireTableViewCell" forIndexPath:indexPath];
+                AireTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"AireTableViewCell" forIndexPath:indexPath];
                 aireCell.AddAireBtn.hidden = YES;
                 aireCell.AireConstraint.constant = 10;
                 aireCell.backgroundColor =[UIColor clearColor];
@@ -167,9 +230,9 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 aireCell.AddcurtainBtn.hidden = YES;
                 aireCell.curtainContraint.constant = 10;
                 aireCell.roomID = self.roomID;
-                
+                aireCell.tag = device.eID;
                 aireCell.label.text = device.name;
-                [aireCell query:[NSString stringWithFormat:@"%d", device.eID]];
+                [aireCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
                 return aireCell;
             }
             case TVtype:

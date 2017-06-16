@@ -26,7 +26,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *supImageViewHeight;
 
 @property (nonatomic, assign) id<NewLightCellDelegate> delegate;
--(void) query:(NSString *)deviceid;
+-(void) query:(NSString *)deviceid delegate:(id)delegate;
 @end
 
 
