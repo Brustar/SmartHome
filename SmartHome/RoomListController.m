@@ -194,16 +194,16 @@
     
     if (self.scene.schedules.count > 0) {
         for (Schedule *scheduleTemp in self.scene.schedules) {
-            if (scheduleTemp.deviceID == 0) {
+            //if (scheduleTemp.deviceID == 0) {
                 schedule = scheduleTemp;
-                break;
-            }
+                //break;
+            //}
         }
     }
     
     if (schedule == nil) {
         schedule = [[Schedule alloc] initWhithoutSchedule];
-        schedule.deviceID = 0;
+        //schedule.deviceID = 0;
         
         NSMutableArray *schedules = [NSMutableArray arrayWithArray:self.scene.schedules];
         [schedules addObject:schedule];
@@ -363,20 +363,20 @@
         [sches enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
             Schedule *schedule = obj;
             //根据deviceID 来判断是修改旧的定时，还是新增定时
-            if (schedule.deviceID == self.schedule.deviceID) { //已存在的schedule，对它进行修改即可
-                schedule.astronomicalStartID = self.schedule.astronomicalStartID;
-                schedule.astronomicalEndID = self.schedule.astronomicalEndID;
+            //if (schedule.deviceID == self.schedule.deviceID) { //已存在的schedule，对它进行修改即可
+                //schedule.astronomicalStartID = self.schedule.astronomicalStartID;
+                //schedule.astronomicalEndID = self.schedule.astronomicalEndID;
                 schedule.interval = self.schedule.interval;
                 schedule.startDate = self.schedule.startDate;
                 schedule.endDate = self.schedule.endDate;
                 schedule.startTime = self.schedule.startTime;
                 schedule.endTime = self.schedule.endTime;
-                schedule.openToValue = self.schedule.openToValue;
+                //schedule.openToValue = self.schedule.openToValue;
                 schedule.weekDays = self.schedule.weekDays;
                 
                 shouldAdd = NO;
                 *stop = YES;
-            }
+            //}
             
         }];
         
@@ -650,7 +650,7 @@
         [self.startTimeBtn setTitle:@"黄昏" forState:UIControlStateNormal];
     }
     
-    self.schedule.astronomicalStartID=(int)btn.tag + 1;
+    //self.schedule.astronomicalStartID=(int)btn.tag + 1;
     
     [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
 
@@ -708,14 +708,14 @@
     for (int i = 0; i < self.scene.schedules.count; i++) {
         Schedule *schedule = self.scene.schedules[i];
         
-        if (deviceID == schedule.deviceID) {
+        //if (deviceID == schedule.deviceID) {
             self.schedule = schedule;
-            return;
-        }
+            //return;
+        //}
     }
     
     Schedule *schedule = [[Schedule alloc] initWhithoutSchedule];
-    schedule.deviceID = (int)deviceID;
+    //schedule.deviceID = (int)deviceID;
     NSMutableArray *schedules = [NSMutableArray arrayWithArray:self.scene.schedules];
     [schedules addObject:schedule];
     self.scene.schedules = [schedules copy];
@@ -807,20 +807,20 @@
             [sches enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
                 Schedule *schedule = obj;
                 //根据deviceID 来判断是修改旧的定时，还是新增定时
-                if (schedule.deviceID == self.schedule.deviceID) { //已存在的schedule，对它进行修改即可
-                    schedule.astronomicalStartID = self.schedule.astronomicalStartID;
-                    schedule.astronomicalEndID = self.schedule.astronomicalEndID;
+                //if (schedule.deviceID == self.schedule.deviceID) { //已存在的schedule，对它进行修改即可
+                    //schedule.astronomicalStartID = self.schedule.astronomicalStartID;
+                    //schedule.astronomicalEndID = self.schedule.astronomicalEndID;
                     schedule.interval = self.schedule.interval;
                     schedule.startDate = self.schedule.startDate;
                     schedule.endDate = self.schedule.endDate;
                     schedule.startTime = self.schedule.startTime;
                     schedule.endTime = self.schedule.endTime;
-                    schedule.openToValue = self.schedule.openToValue;
+                    //schedule.openToValue = self.schedule.openToValue;
                     schedule.weekDays = self.schedule.weekDays;
                     
                     shouldAdd = NO;
                     *stop = YES;
-                }
+                //}
                 
             }];
             
@@ -886,20 +886,20 @@
             [sches enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
                 Schedule *schedule = obj;
                 //根据deviceID 来判断是修改旧的定时，还是新增定时
-                if (schedule.deviceID == self.schedule.deviceID) { //已存在的schedule，对它进行修改即可
-                    schedule.astronomicalStartID = self.schedule.astronomicalStartID;
-                    schedule.astronomicalEndID = self.schedule.astronomicalEndID;
+                //if (schedule.deviceID == self.schedule.deviceID) { //已存在的schedule，对它进行修改即可
+                    //schedule.astronomicalStartID = self.schedule.astronomicalStartID;
+                    //schedule.astronomicalEndID = self.schedule.astronomicalEndID;
                     schedule.interval = self.schedule.interval;
                     schedule.startDate = self.schedule.startDate;
                     schedule.endDate = self.schedule.endDate;
                     schedule.startTime = self.schedule.startTime;
                     schedule.endTime = self.schedule.endTime;
-                    schedule.openToValue = self.schedule.openToValue;
+                    //schedule.openToValue = self.schedule.openToValue;
                     schedule.weekDays = self.schedule.weekDays;
                     
                     shouldAdd = NO;
                     *stop = YES;
-                }
+                //}
                 
             }];
             

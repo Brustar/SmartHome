@@ -78,8 +78,8 @@
         if(scene.schedules.count > 0)
         {
             for (Schedule *schedule in scene.schedules) {
-                if(schedule.deviceID == 0) { //控制场景的定时
-                    if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID >0)
+                //if(schedule.deviceID == 0) { //控制场景的定时
+                    /*if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID >0)
                     {
                         parameter = @{
                                       @"token":[UD objectForKey:@"AuthorToken"],
@@ -91,8 +91,8 @@
                                       @"roomid":@(scene.roomID),
                                       @"isactive":@(0)
                                       };
-                    }
-                }else { //控制设备的定时
+                    }*/
+                //}else { //控制设备的定时
                      parameter = @{
                                    @"token":[UD objectForKey:@"AuthorToken"],
                                    @"optype":@(0),
@@ -103,7 +103,7 @@
                                    @"roomid":@(scene.roomID),
                                    @"isactive":@(0)
                                    };
-                }
+                //}
             }
         }else {
             parameter = @{
@@ -202,8 +202,8 @@
         if(scene.schedules.count > 0)
         {
             for (Schedule *schedule in scene.schedules) {
-                if(schedule.deviceID == 0) { //控制场景的定时
-                    if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID >0)
+                //if(schedule.deviceID == 0) { //控制场景的定时
+                    /*if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID >0)
                     {
                         parameter = @{
                                       @"token":[UD objectForKey:@"AuthorToken"],
@@ -215,8 +215,8 @@
                                       @"roomid":@(scene.roomID),
                                       @"isactive":@(0)
                                       };
-                    }
-                }else { //控制设备的定时
+                    }*/
+                //}else { //控制设备的定时
                     parameter = @{
                                   @"token":[UD objectForKey:@"AuthorToken"],
                                   @"optype":@(0),
@@ -227,7 +227,7 @@
                                   @"roomid":@(scene.roomID),
                                   @"isactive":@(0)
                                   };
-                }
+                //}
             }
         }else {
             parameter = @{
@@ -324,8 +324,8 @@
     if(newScene.schedules.count > 0) //有定时
     {
         for (Schedule *schedule in newScene.schedules) {
-            if(schedule.deviceID == 0) {  //控制场景的定时
-                if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID >0)
+            //if(schedule.deviceID == 0) {  //控制场景的定时
+                /*if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID >0)
                 {
                     parameter = @{
                                   @"token":[UD objectForKey:@"AuthorToken"],
@@ -343,8 +343,8 @@
                                   @"weekvalue":schedule.weekDays,
                                   @"isactive":@(0)
                                   };
-                }
-            }else { //控制设备的定时
+                }*/
+            //}else { //控制设备的定时
                 parameter = @{
                               @"token":[UD objectForKey:@"AuthorToken"],
                               @"optype":@(0),
@@ -356,12 +356,12 @@
                               @"scencefile":scenePath,
                               @"starttime":schedule.startTime,
                               @"endtime":schedule.endTime,
-                              @"astronomicaltime":@(schedule.astronomicalStartID),
+                              //@"astronomicaltime":@(schedule.astronomicalStartID),
                               @"starttype":@(1),
                               @"weekvalue":schedule.weekDays,
                               @"isactive":@(0)
                               };
-            }
+            //}
         }
     }else{ //没有定时
         
@@ -500,10 +500,10 @@
                 schedule.endTime=sch[@"endTime"];
                 schedule.startDate = sch[@"startDay"];
                 schedule.endDate = sch[@"endDay"];
-                schedule.deviceID=[sch[@"deviceID"] intValue];
-                schedule.openToValue=[sch[@"openTovalue"] intValue];
-                schedule.astronomicalStartID=[sch[@"astronomicalStartID"] intValue];
-                schedule.astronomicalEndID=[sch[@"astronomicalEndID"] intValue];
+                //schedule.deviceID=[sch[@"deviceID"] intValue];
+                //schedule.openToValue=[sch[@"openTovalue"] intValue];
+                //schedule.astronomicalStartID=[sch[@"astronomicalStartID"] intValue];
+                //schedule.astronomicalEndID=[sch[@"astronomicalEndID"] intValue];
                 schedule.weekDays=sch[@"weekDays"];
                 [schedules addObject:schedule];
             }
