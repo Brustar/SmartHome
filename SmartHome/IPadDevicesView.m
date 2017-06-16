@@ -61,7 +61,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
     UINib *cellNib = [UINib nibWithNibName:@"LeftMenuCell" bundle:nil];
     [self.menu registerNib:cellNib forCellReuseIdentifier:leftMenuCell];
     
-    
+    self.content.allowsSelection = NO;
     [self.content registerNib:[UINib nibWithNibName:@"IpadAireTableViewCell" bundle:nil] forCellReuseIdentifier:@"IpadAireTableViewCell"];//空调
     [self.content registerNib:[UINib nibWithNibName:@"CurtainTableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainTableViewCell"];//窗帘
     [self.content registerNib:[UINib nibWithNibName:@"IpadTVCell" bundle:nil] forCellReuseIdentifier:@"IpadTVCell"];//网络电视
@@ -152,7 +152,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
     if (tableView.tag == 1) {
         Device *device = [self.devices objectAtIndex:indexPath.row];
         NSInteger type = device.hTypeId;
-        if (type == curtain || type== air || type == 1 || type == 2 || type == 3 || type == bgmusic || type == screen) {
+        if (type == 21 || type== air || type == 1 || type == 2 || type == 3 || type == bgmusic || type == screen) {
             return 150;
         }
         if (type == DVDtype || type == TVtype || type == FM) {
@@ -207,7 +207,8 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 newColourCell.colourNameLabel.text = device.name;
                 newColourCell.tag = device.eID;
                 return newColourCell;
-            }case 1:
+            }
+            case 1:
             {
                 NewColourCell * newColourCell = [tableView dequeueReusableCellWithIdentifier:@"NewColourCell" forIndexPath:indexPath];
                 newColourCell.AddColourLightBtn.hidden = YES;
@@ -234,7 +235,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 aireCell.tag = device.eID;
                 return aireCell;
             }
-            case curtain:
+            case 21://curtain:
             {
                 CurtainTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
                 aireCell.backgroundColor = [UIColor clearColor];

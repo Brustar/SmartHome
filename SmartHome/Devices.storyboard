@@ -1391,7 +1391,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="eJ9-16-nnm">
-                                <rect key="frame" x="20" y="114" width="984" height="60"/>
+                                <rect key="frame" x="20" y="110" width="984" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="wop-jE-cMs"/>
                                 </constraints>
@@ -1409,7 +1409,7 @@
                                 </constraints>
                             </slider>
                             <button hidden="YES" opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsJ-CH-eJc">
-                                <rect key="frame" x="908" y="100" width="46" height="46"/>
+                                <rect key="frame" x="908" y="115" width="46" height="46"/>
                                 <state key="normal" image="TV_off" backgroundImage="music_button_control"/>
                                 <connections>
                                     <action selector="control:" destination="C1t-VG-vPd" eventType="touchUpInside" id="Biw-db-t4c"/>
@@ -1426,11 +1426,11 @@
                             <constraint firstItem="BJT-6L-I0r" firstAttribute="centerX" secondItem="OYD-cH-kiE" secondAttribute="centerX" id="AMS-68-mHH"/>
                             <constraint firstItem="B5b-5d-YbS" firstAttribute="leading" secondItem="VCs-hY-lfX" secondAttribute="leading" constant="20" id="Bot-zN-j9o"/>
                             <constraint firstItem="gd6-mH-pDE" firstAttribute="trailing" secondItem="VCs-hY-lfX" secondAttribute="trailing" constant="-20" id="CyY-LD-t3o"/>
-                            <constraint firstItem="eJ9-16-nnm" firstAttribute="top" secondItem="HbV-nV-oPQ" secondAttribute="bottom" constant="10" id="EIy-Yb-hkG"/>
+                            <constraint firstItem="eJ9-16-nnm" firstAttribute="top" secondItem="nbV-9z-oL6" secondAttribute="bottom" constant="90" id="IuT-up-RaE"/>
                             <constraint firstItem="BJT-6L-I0r" firstAttribute="top" secondItem="OYD-cH-kiE" secondAttribute="bottom" constant="-115" id="J94-D2-0oU"/>
                             <constraint firstItem="VCs-hY-lfX" firstAttribute="centerX" secondItem="hpL-mC-xY9" secondAttribute="centerX" id="KIb-qP-iGe"/>
                             <constraint firstItem="xmy-If-QIN" firstAttribute="leading" secondItem="NBF-4l-7DA" secondAttribute="leading" constant="30" id="Ll1-fg-UuR"/>
-                            <constraint firstItem="gsJ-CH-eJc" firstAttribute="top" secondItem="nbV-9z-oL6" secondAttribute="bottom" constant="80" id="OC5-F6-AtY"/>
+                            <constraint firstItem="gsJ-CH-eJc" firstAttribute="top" secondItem="nbV-9z-oL6" secondAttribute="bottom" constant="95" id="OC5-F6-AtY"/>
                             <constraint firstItem="nEu-kP-7hW" firstAttribute="top" secondItem="u1g-Po-WfV" secondAttribute="bottom" id="OcD-Pg-22A"/>
                             <constraint firstItem="eJ9-16-nnm" firstAttribute="leading" secondItem="B5b-5d-YbS" secondAttribute="leading" id="PrF-W5-PTE"/>
                             <constraint firstItem="a6t-6x-bQ2" firstAttribute="centerX" secondItem="OYD-cH-kiE" secondAttribute="centerX" constant="-3" id="QPu-Jm-Vaz"/>
