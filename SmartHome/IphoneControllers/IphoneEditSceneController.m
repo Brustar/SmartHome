@@ -33,6 +33,7 @@
 #import "IphoneNewAddSceneVC.h"
 #import "IphoneNewAddSceneTimerVC.h"
 #import "PowerLightCell.h"
+#import "PackManager.h"
 
 
 
@@ -860,6 +861,67 @@
         devicesVC.sceneID = self.sceneID;
         [self.navigationController pushViewController:devicesVC animated:YES];
 //        [self performSegueWithIdentifier:@"NewAddDeviceSegue" sender:self];
+        
+    }
+}
+
+#pragma mark - TCP recv delegate
+-(void)recv:(NSData *)data withTag:(long)tag
+{
+    Proto proto=protocolFromData(data);
+    
+    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
+        return;
+    }
+    
+    if (proto.cmd==0x01) {
+        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+        UITableViewCell *cell = [self.tableView viewWithTag:[devID intValue]];
+        if(proto.action.state == 0x1A){
+            if (proto.deviceType == 2) {
+                ((NewLightCell *)cell).NewLightSlider.value = (float)proto.action.RValue/100.0f;
+            }
+            if (proto.deviceType == 3) {
+                ((NewColourCell *)cell).colourSlider.value = (float)proto.action.RValue/100.0f;
+            }
+        }
+        if (proto.action.state == PROTOCOL_ON || proto.action.state == PROTOCOL_OFF) {
+            switch (proto.deviceType) {
+                case 2:
+                    ((NewLightCell *)cell).NewLightPowerBtn.selected = proto.action.state;
+                    break;
+                case 1:
+                    ((PowerLightCell *)cell).powerLightBtn.hidden = !proto.action.state;
+                    break;
+                case 3:
+                    ((NewColourCell *)cell).AddColourLightBtn.hidden = !proto.action.state;
+                    break;
+                case air:
+                    ((AireTableViewCell *)cell).AddAireBtn.hidden = !proto.action.state;
+                    break;
+                case curtain:
+                    ((CurtainTableViewCell *)cell).AddcurtainBtn.hidden = !proto.action.state;
+                    break;
+                case TVtype:
+                    ((TVTableViewCell *)cell).AddTvDeviceBtn.hidden = !proto.action.state;
+                    break;
+                case DVDtype:
+                    ((DVDTableViewCell *)cell).AddDvdBtn.hidden = !proto.action.state;
+                    break;
+                case FM:
+                    ((FMTableViewCell *)cell).AddFmBtn.hidden = !proto.action.state;
+                    break;
+                case screen:
+                    ((ScreenCurtainCell *)cell).AddScreenCurtainBtn.hidden = !proto.action.state;
+                    break;
+                case bgmusic:
+                    ((BjMusicTableViewCell *)cell).AddBjmusicBtn.hidden = !proto.action.state;
+                    break;
+                default:
+                    ((OtherTableViewCell *)cell).AddOtherBtn.hidden = !proto.action.state;
+                    break;
+            }
+        }
         
     }
 }
