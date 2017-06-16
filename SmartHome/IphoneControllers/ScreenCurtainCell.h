@@ -40,7 +40,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *stopBtnBottomConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *stopBtnHeightConst;
 
-//-(void) query:(NSString *)deviceid;
+-(void) query:(NSString *)deviceid;
 
 @end
 
