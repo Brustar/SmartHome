@@ -174,9 +174,9 @@
     if (self.dataArray.count < 1) {
         return;
     }
-    if (self.fromStoreboard) {
+    //if (self.fromStoreboard) {
         [self setViewFrame];
-    }
+    //}
 }
 
 @end
