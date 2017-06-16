@@ -13,11 +13,12 @@
 
 @protocol CYPhotoCellDelegate <NSObject>
 
-//@optional
+@optional
 
 -(void)sceneDeleteAction:(CYPhotoCell *)cell;
 -(void)powerBtnAction:(UIButton *)sender sceneStatus:(int)status;
 -(void)refreshTableView:(CYPhotoCell *)cell;
+- (void)onTimingBtnClicked:(UIButton *)sender;
 
 @end
 
