@@ -78,6 +78,8 @@
             scene.picName = [resultSet stringForColumn:@"pic"];
             scene.roomID =     [resultSet intForColumn:@"rId"];
             scene.roomName = [resultSet stringForColumn:@"roomName"];
+            scene.isplan = [resultSet intForColumn:@"isplan"];
+            scene.isactive = [resultSet intForColumn:@"isactive"];
             [deviceModels addObject:scene];
         }
     }
@@ -104,6 +106,8 @@
             scene.picName = [resultSet stringForColumn:@"pic"];
             scene.roomID =     [resultSet intForColumn:@"rId"];
             scene.roomName = [resultSet stringForColumn:@"roomName"];
+            scene.isplan = [resultSet intForColumn:@"isplan"];
+            scene.isactive = [resultSet intForColumn:@"isactive"];
             [deviceModels addObject:scene];
         }
     }
@@ -1047,7 +1051,7 @@
             sceneID = [resultSet intForColumn:@"ID"]+1;
         }
         
-        sql=[NSString stringWithFormat:@"insert into Scenes values(%d,'%@','','%@',%ld,%d,null,null,null,'%ld',%d)",sceneID,name,img,(long)scene.roomID,2, masterID,0];
+        sql=[NSString stringWithFormat:@"insert into Scenes values(%d,'%@','','%@',%ld,%d,null,null,null,'%ld',%d,%d,%d)",sceneID,name,img,(long)scene.roomID,2, masterID,0, scene.isplan, scene.isactive];
         [db executeUpdate:sql];
     }
     [db closeOpenResultSets];
@@ -2001,7 +2005,7 @@
         NSString *sqlRoom=@"CREATE TABLE IF NOT EXISTS Rooms(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"PM25\" INTEGER, \"NOISE\" INTEGER, \"TEMPTURE\" INTEGER, \"CO2\" INTEGER, \"moisture\" INTEGER, \"imgUrl\" TEXT,\"ibeacon\" INTEGER,\"totalVisited\" INTEGER,\"masterID\" TEXT,\"openforcurrentuser\" INTEGER,\"isAll\" INTEGER)";
         NSString *sqlChannel=@"CREATE TABLE IF NOT EXISTS Channels (\"id\" INTEGER PRIMARY KEY  NOT NULL  UNIQUE ,\"eqId\" INTEGER,\"channelValue\" INTEGER,\"cNumber\" INTEGER, \"Channel_name\" TEXT,\"Channel_pic\" TEXT, \"parent\" CHAR(2) NOT NULL  DEFAULT TV, \"isFavorite\" BOOL DEFAULT 0, \"eqNumber\" TEXT,\"masterID\" TEXT)";
         NSString *sqlDevice=@"CREATE TABLE IF NOT EXISTS Devices(ID INT PRIMARY KEY NOT NULL, NAME TEXT NOT NULL, \"sn\" TEXT, \"birth\" DATETIME, \"guarantee\" DATETIME, \"model\" INTEGER, \"temperature\" INTEGER, \"fanspeed\" INTEGER, \"price\" FLOAT, \"purchase\" DATETIME, \"producer\" TEXT, \"gua_tel\" TEXT, \"power\" INTEGER, \"bright\" INTEGER, \"color\" TEXT, \"position\" INTEGER,  \"current\" FLOAT, \"voltage\" INTEGER, \"protocol\" TEXT, \"rID\" INTEGER, \"eNumber\" TEXT, \"htypeID\" TEXT, \"subTypeId\" INTEGER, \"typeName\" TEXT, \"subTypeName\" TEXT, \"masterID\" TEXT, \"icon_url\" TEXT, \"camera_url\" TEXT, \"UITypeOfLight\" INTEGER)";
-        NSString *sqlScene=@"CREATE TABLE IF NOT EXISTS \"Scenes\" (\"ID\" INT PRIMARY KEY  NOT NULL ,\"NAME\" TEXT NOT NULL ,\"roomName\" TEXT,\"pic\" TEXT DEFAULT (null) ,\"rId\" INTEGER,\"sType\" INTEGER, \"snumber\" TEXT,\"isFavorite\" BOOL,\"totalVisited\" INTEGER,\"masterID\" TEXT ,\"status\" INTEGER DEFAULT (0))";
+        NSString *sqlScene=@"CREATE TABLE IF NOT EXISTS \"Scenes\" (\"ID\" INT PRIMARY KEY  NOT NULL ,\"NAME\" TEXT NOT NULL ,\"roomName\" TEXT,\"pic\" TEXT DEFAULT (null) ,\"rId\" INTEGER,\"sType\" INTEGER, \"snumber\" TEXT,\"isFavorite\" BOOL,\"totalVisited\" INTEGER,\"masterID\" TEXT ,\"status\" INTEGER DEFAULT (0), \"isplan\" INTEGER, \"isactive\" INTEGER)";
         NSString *sqlChat = @"CREATE TABLE IF NOT EXISTS chats(\"ID\" INTEGER PRIMARY KEY  NOT NULL ,nickname varchar(20),portrait varchar(100),username varchar(20),user_id integer)";
         NSString *sqlCatalog = @"CREATE TABLE IF NOT EXISTS catalog(\"ID\" INTEGER PRIMARY KEY  NOT NULL ,catalogName varchar(20))";
         NSString *sqlUser = @"CREATE TABLE IF NOT EXISTS Users(ID INT PRIMARY KEY NOT NULL, userType INTEGER, userName TEXT, nickName TEXT, vip TEXT, age INTEGER, sex INTEGER, portraitUrl TEXT, phoneNum TEXT, signature TEXT, extra1 TEXT, extra2 TEXT, extra3 TEXT, extra4 TEXT)";
@@ -2059,6 +2063,8 @@
             scene.isFavorite = [resultSet boolForColumn:@"isFavorite"];
             
             scene.roomID = [resultSet intForColumn:@"rId"];
+            scene.isplan = [resultSet intForColumn:@"isplan"];
+            scene.isactive = [resultSet intForColumn:@"isactive"];
             
             [sceneModles addObject:scene];
             
@@ -2115,6 +2121,8 @@
     scene.picName =[resultSet stringForColumn:@"pic"];
     scene.isFavorite = [resultSet boolForColumn:@"isFavorite"];
     scene.roomID = [resultSet intForColumn:@"rId"];
+    scene.isplan = [resultSet intForColumn:@"isplan"];
+    scene.isactive = [resultSet intForColumn:@"isactive"];
     int sType = [resultSet intForColumn:@"sType"];
     if(sType == 1)
     {
@@ -2174,6 +2182,8 @@
             scene.sceneID = [resultSet intForColumn:@"ID"];
             scene.picName = [resultSet stringForColumn:@"pic"];
             scene.status = [resultSet intForColumn:@"status"];
+            scene.isplan = [resultSet intForColumn:@"isplan"];
+            scene.isactive = [resultSet intForColumn:@"isactive"];
             
             [scens addObject:scene];
         }
@@ -2220,6 +2230,8 @@
             scene.sceneName = [resultSet stringForColumn:@"NAME"];
             scene.sceneID = [resultSet intForColumn:@"ID"];
             scene.picName = [resultSet stringForColumn:@"pic"];
+            scene.isplan = [resultSet intForColumn:@"isplan"];
+            scene.isactive = [resultSet intForColumn:@"isactive"];
             [scens addObject:scene];
         }
     }
@@ -2364,6 +2376,25 @@
     [db closeOpenResultSets];
     [db close];
     return rName;
+}
+
++ (BOOL)updateSceneIsActive:(NSInteger)isActive sceneID:(int)sceneID
+{
+    FMDatabase *db = [SQLManager connetdb];
+    
+    BOOL ret = NO;
+    if([db open])
+    {
+        long masterID =  [[DeviceInfo defaultManager] masterID];
+        
+        NSString *sql = [NSString stringWithFormat:@"update Scenes set isactive = %ld where ID = %d and masterID = '%ld'",isActive,sceneID, masterID];
+        
+        ret = [db executeUpdate:sql];
+        
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return ret;
 }
 
 + (BOOL)updateScenePic:(NSString *)img sceneID:(int)sceneID
@@ -2598,12 +2629,15 @@
                 int sType = [sceneInfoDic[@"type"] intValue];
                 NSString *sNumber = sceneInfoDic[@"snumber"];
                 NSString *urlImage = sceneInfoDic[@"image_url"];
+                NSInteger isplan = [sceneInfoDic[@"isplan"] integerValue];
+                NSInteger isactive = [sceneInfoDic[@"isactive"] integerValue];
+                
                 if(sceneInfoDic[@"plist_url"])
                 {
                     NSString *urlPlist = sceneInfoDic[@"plist_url"];
                     [plists addObject:urlPlist];
                 }
-                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,'%@',%d,null,'%ld', %d)",sId,sName,rName,urlImage,room_id,sType,sNumber,isFavorite,[DeviceInfo defaultManager].masterID, 0];
+                NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%d,%d,'%@',%d,null,'%ld', %d, %ld, %ld)",sId,sName,rName,urlImage,room_id,sType,sNumber,isFavorite,[DeviceInfo defaultManager].masterID, 0, isplan, isactive];
                 BOOL result = [db executeUpdate:sql];
                 if(result)
                 {
