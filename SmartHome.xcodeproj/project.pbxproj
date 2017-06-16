@@ -172,12 +172,8 @@
 		2E9F4BDA1EDFA4B20039BFE9 /* AddIpadSceneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E9F4BD91EDFA4B20039BFE9 /* AddIpadSceneVC.m */; };
 		2E9F4BDD1EDFA57C0039BFE9 /* IpadAddDeviceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E9F4BDC1EDFA57C0039BFE9 /* IpadAddDeviceVC.m */; };
 		2E9F4BE01EDFA5AB0039BFE9 /* IpadAddDeviceTypeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E9F4BDF1EDFA5AB0039BFE9 /* IpadAddDeviceTypeVC.m */; };
-		2E9F4BE61EDFFD7D0039BFE9 /* IpadNewLightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E9F4BE41EDFFD7D0039BFE9 /* IpadNewLightCell.m */; };
-		2E9F4BE71EDFFD7D0039BFE9 /* IpadNewLightCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E9F4BE51EDFFD7D0039BFE9 /* IpadNewLightCell.xib */; };
 		2E9F4BEB1EE00F580039BFE9 /* IpadTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E9F4BE91EE00F580039BFE9 /* IpadTVCell.m */; };
 		2E9F4BEC1EE00F580039BFE9 /* IpadTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E9F4BEA1EE00F580039BFE9 /* IpadTVCell.xib */; };
-		2E9F4BF01EE01EC10039BFE9 /* IpadAireTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E9F4BEE1EE01EC10039BFE9 /* IpadAireTableViewCell.m */; };
-		2E9F4BF11EE01EC10039BFE9 /* IpadAireTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E9F4BEF1EE01EC10039BFE9 /* IpadAireTableViewCell.xib */; };
 		2EA2A83B1E1DCDA600092D41 /* AreaSubSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A83A1E1DCDA600092D41 /* AreaSubSettingViewController.m */; };
 		2EA2A84A1E1E275900092D41 /* MySubEnergyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A8491E1E275900092D41 /* MySubEnergyCell.m */; };
 		2EA2A8541E1E2BEA00092D41 /* ENenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2A8531E1E2BEA00092D41 /* ENenViewController.m */; };
@@ -783,15 +779,9 @@
 		2E9F4BDC1EDFA57C0039BFE9 /* IpadAddDeviceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IpadAddDeviceVC.m; sourceTree = "<group>"; };
 		2E9F4BDE1EDFA5AB0039BFE9 /* IpadAddDeviceTypeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpadAddDeviceTypeVC.h; sourceTree = "<group>"; };
 		2E9F4BDF1EDFA5AB0039BFE9 /* IpadAddDeviceTypeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IpadAddDeviceTypeVC.m; sourceTree = "<group>"; };
-		2E9F4BE31EDFFD7D0039BFE9 /* IpadNewLightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpadNewLightCell.h; sourceTree = "<group>"; };
-		2E9F4BE41EDFFD7D0039BFE9 /* IpadNewLightCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IpadNewLightCell.m; sourceTree = "<group>"; };
-		2E9F4BE51EDFFD7D0039BFE9 /* IpadNewLightCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IpadNewLightCell.xib; sourceTree = "<group>"; };
 		2E9F4BE81EE00F580039BFE9 /* IpadTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpadTVCell.h; sourceTree = "<group>"; };
 		2E9F4BE91EE00F580039BFE9 /* IpadTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IpadTVCell.m; sourceTree = "<group>"; };
 		2E9F4BEA1EE00F580039BFE9 /* IpadTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IpadTVCell.xib; sourceTree = "<group>"; };
-		2E9F4BED1EE01EC10039BFE9 /* IpadAireTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpadAireTableViewCell.h; sourceTree = "<group>"; };
-		2E9F4BEE1EE01EC10039BFE9 /* IpadAireTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IpadAireTableViewCell.m; sourceTree = "<group>"; };
-		2E9F4BEF1EE01EC10039BFE9 /* IpadAireTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IpadAireTableViewCell.xib; sourceTree = "<group>"; };
 		2EA2A8391E1DCDA600092D41 /* AreaSubSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaSubSettingViewController.h; sourceTree = "<group>"; };
 		2EA2A83A1E1DCDA600092D41 /* AreaSubSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaSubSettingViewController.m; sourceTree = "<group>"; };
 		2EA2A8481E1E275900092D41 /* MySubEnergyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySubEnergyCell.h; sourceTree = "<group>"; };
@@ -2035,15 +2025,9 @@
 		2E581CAF1EDEB6E000874469 /* ipadTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				2E9F4BE31EDFFD7D0039BFE9 /* IpadNewLightCell.h */,
-				2E9F4BE41EDFFD7D0039BFE9 /* IpadNewLightCell.m */,
-				2E9F4BE51EDFFD7D0039BFE9 /* IpadNewLightCell.xib */,
 				2E9F4BE81EE00F580039BFE9 /* IpadTVCell.h */,
 				2E9F4BE91EE00F580039BFE9 /* IpadTVCell.m */,
 				2E9F4BEA1EE00F580039BFE9 /* IpadTVCell.xib */,
-				2E9F4BED1EE01EC10039BFE9 /* IpadAireTableViewCell.h */,
-				2E9F4BEE1EE01EC10039BFE9 /* IpadAireTableViewCell.m */,
-				2E9F4BEF1EE01EC10039BFE9 /* IpadAireTableViewCell.xib */,
 				2E9B410E1EE53E470061B682 /* IpadDVDTableViewCell.h */,
 				2E9B410F1EE53E470061B682 /* IpadDVDTableViewCell.m */,
 				2E9B41101EE53E470061B682 /* IpadDVDTableViewCell.xib */,
@@ -2683,7 +2667,6 @@
 				0F49CB701E7A1EA100D46ECC /* Devices.storyboard in Resources */,
 				2EBABC831E83787B0093EF3A /* ScreenTableViewCell.xib in Resources */,
 				0FBEFE271D24A5020084244F /* netconfig.plist in Resources */,
-				2E9F4BF11EE01EC10039BFE9 /* IpadAireTableViewCell.xib in Resources */,
 				CD7DDA091E81168F00638DB3 /* login_name@2x.png in Resources */,
 				0F9232E11EB85CE3008B1F37 /* AirMenuCell.xib in Resources */,
 				2ECDCC911E9E3623004C68BE /* BjMusicTableViewCell.xib in Resources */,
@@ -2718,7 +2701,6 @@
 				0F49CB7B1E7A204300D46ECC /* Home-iPad.storyboard in Resources */,
 				CDF90B451E2F4B14009043B9 /* planeScene.plist in Resources */,
 				CDA9EEC11ED40F6900CB4D7D /* launchingAnimation.gif in Resources */,
-				2E9F4BE71EDFFD7D0039BFE9 /* IpadNewLightCell.xib in Resources */,
 				0F49CB741E7A1F0500D46ECC /* Home.storyboard in Resources */,
 				CDEE5EAC1ECDD82E00A5779D /* portrait.png in Resources */,
 				F668AF251D53413B0079587F /* Main.storyboard in Resources */,
@@ -3152,7 +3134,6 @@
 				2E03E3001ECAD57E00487319 /* ECMessage.m in Sources */,
 				CDF90B411E1E425D009043B9 /* RoomDetailViewController.m in Sources */,
 				0F180FC31D0E4C7400392F4C /* NetvController.m in Sources */,
-				2E9F4BF01EE01EC10039BFE9 /* IpadAireTableViewCell.m in Sources */,
 				F66DFF2B1D5188BF0005E882 /* EditSceneCell.m in Sources */,
 				CD7DDA131E825E9C00638DB3 /* RegistFirstStepViewController.m in Sources */,
 				F680AAB71DD94565001D1807 /* FamilyCell.m in Sources */,
@@ -3263,7 +3244,6 @@
 				F66596DA1D3F12FB0082716A /* EnergyOfDeviceController.m in Sources */,
 				F635CCBB1D4356650078B148 /* MyCenterSplitController.m in Sources */,
 				2E12CC161E7FC04800C7D006 /* IphoneNewEditSceneController.m in Sources */,
-				2E9F4BE61EDFFD7D0039BFE9 /* IpadNewLightCell.m in Sources */,
 				F6251F741D541D8A000A5A47 /* Device.m in Sources */,
 				F6251F771D542508000A5A47 /* SQLManager.m in Sources */,
 				2EBABC871E839F2E0093EF3A /* DVDTableViewCell.m in Sources */,

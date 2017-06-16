@@ -11,6 +11,7 @@
 #import "Aircon.h"
 #import "SocketManager.h"
 #import "SceneManager.h"
+#import "PackManager.h"
 
 @implementation AireTableViewCell
 
@@ -37,7 +38,15 @@
         [self.AddAireBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
     }
 }
-
+-(void) query:(NSString *)deviceid
+{
+    self.deviceid = deviceid;
+    SocketManager *sock=[SocketManager defaultManager];
+    sock.delegate=self;
+    //查询设备状态
+    NSData *data = [[DeviceInfo defaultManager] query:deviceid];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
 - (IBAction)save:(id)sender {
     
         Aircon *device=[[Aircon alloc] init];
@@ -111,6 +120,48 @@
     }
 
     
+}
+
+#pragma mark - TCP recv delegate
+-(void)recv:(NSData *)data withTag:(long)tag
+{
+    Proto proto=protocolFromData(data);
+    
+    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
+        return;
+    }
+    
+    if (proto.cmd==0x01) {
+        
+        if (proto.action.state==0x6A) {
+            self.temperatureLabel.text = [NSString stringWithFormat:@"Current:%d°C",proto.action.RValue];
+        }
+//        if (proto.action.state==0x8A) {
+//            NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
+//            self.wetLabel.text = valueString;
+//            [self.humidity_hand rotate:30+proto.action.RValue*100/300];
+//        }
+//        if (proto.action.state==0x7F) {
+//            NSString *valueString = [NSString stringWithFormat:@"%d",proto.action.RValue];
+//            self.pmLabel.text = valueString;
+//            
+//            float value = 30+proto.action.RValue*200/100;
+//            if (proto.action.RValue>100 && proto.action.RValue<200) {
+//                value = 230+proto.action.RValue*40/100;
+//            }
+//            if (proto.action.RValue>200)
+//            {
+//                value = 240+proto.action.RValue*60/300;
+//            }
+//            [self.pm_clock_hand rotate:value];
+//        }
+        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+        if ([devID intValue]==[self.deviceid intValue]) {
+            if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) {
+                self.AddAireBtn.selected = proto.action.state;
+            }
+        }
+    }
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

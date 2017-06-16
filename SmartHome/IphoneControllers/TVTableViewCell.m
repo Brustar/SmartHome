@@ -36,6 +36,16 @@
     NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
+
+-(void) query:(NSString *)deviceid
+{
+    self.deviceid = deviceid;
+    SocketManager *sock=[SocketManager defaultManager];
+    sock.delegate=self;
+    //查询设备状态
+    NSData *data = [[DeviceInfo defaultManager] query:deviceid];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
 - (IBAction)save:(id)sender {
     
                 TV *device=[[TV alloc] init];

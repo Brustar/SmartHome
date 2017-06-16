@@ -9,6 +9,8 @@
 #import "CurtainTableViewCell.h"
 #import "SocketManager.h"
 #import "SceneManager.h"
+#import "PackManager.h"
+#import "SQLManager.h"
 
 
 @interface CurtainTableViewCell ()
@@ -41,7 +43,15 @@
     }
 }
 
-
+-(void) query:(NSString *)deviceid delegate:(id)delegate
+{
+    self.deviceid = deviceid;
+    SocketManager *sock=[SocketManager defaultManager];
+    sock.delegate=delegate;
+    //查询设备状态
+    NSData *data = [[DeviceInfo defaultManager] query:deviceid];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
 -(IBAction)save:(id)sender
 {
     if ([sender isEqual:self.slider]) {
@@ -142,6 +152,30 @@
 
 }
 
+#pragma mark - TCP recv delegate
+-(void)recv:(NSData *)data withTag:(long)tag
+{
+    Proto proto=protocolFromData(data);
+    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
+        return;
+    }
+    //同步设备状态
+    if(proto.cmd == 0x01 && proto.action.state == 0x2A){
+        self.slider.value = proto.action.RValue/100.0;
+        NSString *icon = self.slider.value == 0 ? @"bd_icon_wd_off": @"bd_icon_wd_on";
+        [self.open setImage:[UIImage imageNamed: icon] forState:UIControlStateNormal];
+    }
+    
+    if (tag==0 && (proto.action.state == 0x2A || proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON)) {
+        
+//        if (devID==[self.deviceid intValue]) {
+            self.slider.value=proto.action.RValue/100.0;
+            if (proto.action.state == PROTOCOL_ON) {
+                self.slider.value=1;
+//            }
+        }
+    }
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

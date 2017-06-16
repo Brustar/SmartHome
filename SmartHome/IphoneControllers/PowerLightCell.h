@@ -18,5 +18,6 @@
 @property (nonatomic,assign) int roomID;
 @property (strong, nonatomic) Scene *scene;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *powerBtnConstraint;
+-(void) query:(NSString *)deviceid delegate:(id)delegate;
 
 @end

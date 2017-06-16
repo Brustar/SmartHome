@@ -11,6 +11,7 @@
 #import "TV.h"
 #import "SocketManager.h"
 #import "SceneManager.h"
+#import "PackManager.h"
 
 @implementation IpadTVCell
 
@@ -29,6 +30,16 @@
     self.TVSlider.continuous = NO;
     [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
     [self.TVSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+}
+
+-(void) query:(NSString *)deviceid
+{
+    self.deviceid = deviceid;
+    SocketManager *sock=[SocketManager defaultManager];
+    sock.delegate=self;
+    //查询设备状态
+    NSData *data = [[DeviceInfo defaultManager] query:deviceid];
+    [sock.socket writeData:data withTimeout:1 tag:1];
 }
 - (IBAction)save:(id)sender {
     
@@ -121,7 +132,28 @@
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
-
+#pragma mark - TCP recv delegate
+-(void)recv:(NSData *)data withTag:(long)tag
+{
+    Proto proto=protocolFromData(data);
+    
+    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
+        return;
+    }
+    
+    if (proto.cmd==0x01) {
+        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+        if ([devID intValue]==[self.deviceid intValue]) {
+            if (proto.action.state == PROTOCOL_VOLUME) {
+                self.TVSlider.value=proto.action.RValue/100.0;
+            }
+            if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) {
+                UIButton *btn = [self viewWithTag:8];
+                btn.selected = proto.action.state;
+            }
+        }
+    }
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

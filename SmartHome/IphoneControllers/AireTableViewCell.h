@@ -25,7 +25,7 @@
 @property (nonatomic, assign) id<AireTableViewCellDelegate>delegate;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *supImageViewHeight;
-
+-(void) query:(NSString *)deviceid;
 
 @end
 

@@ -12,6 +12,7 @@
 #import "SocketManager.h"
 #import "SceneManager.h"
 #import "Radio.h"
+#import "PackManager.h"
 
 
 @implementation FMTableViewCell
@@ -56,6 +57,17 @@
     [self.FMSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
     [self.FMSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
 }
+
+-(void) query:(NSString *)deviceid
+{
+    self.deviceid = deviceid;
+    SocketManager *sock=[SocketManager defaultManager];
+    sock.delegate=self;
+    //查询设备状态
+    NSData *data = [[DeviceInfo defaultManager] query:deviceid];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
 - (IBAction)save:(id)sender {
     
         Radio *device=[[Radio alloc] init];
@@ -147,7 +159,24 @@
     }
   
 }
-
+#pragma mark - TCP recv delegate
+-(void)recv:(NSData *)data withTag:(long)tag
+{
+    Proto proto=protocolFromData(data);
+    
+    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
+        return;
+    }
+    
+    if (proto.cmd==0x01) {
+        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+        if ([devID intValue]==[self.deviceid intValue]) {
+            if (proto.action.state == PROTOCOL_VOLUME) {
+                self.FMSlider.value=proto.action.RValue/100.0;
+            }
+        }
+    }
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

@@ -28,6 +28,7 @@
 @property (nonatomic,assign) int roomID;
 @property (strong, nonatomic) Scene *scene;
 @property (nonatomic, assign) id<IpadTVCellDelegate>delegate;
+-(void) query:(NSString *)deviceid;
 
 @end
 

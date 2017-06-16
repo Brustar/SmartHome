@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *IpadHomePageBgHeight;//
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *FMchoiceHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *fmchannelSliderTopConstraint;
+-(void) query:(NSString *)deviceid;
 
 @end
 
