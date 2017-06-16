@@ -16,4 +16,5 @@
 @property (nonatomic,strong) NSArray *devices;
 @property (nonatomic,strong) NSArray *temp;
 -(void)initData;
+
 @end
