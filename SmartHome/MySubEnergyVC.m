@@ -124,10 +124,10 @@
     NSInteger year=[conponent year];
     NSInteger month=[conponent month];
     NSInteger day=[conponent day];
-    _YearLabel.text = [NSString stringWithFormat:@"%ld年",year];
-    _monthLabel.text = [NSString stringWithFormat:@"%ld月",month];
-    _IntradayLable.text = [NSString stringWithFormat:@"%ld日",day];
-    [_monthBtn setTitle:[NSString stringWithFormat:@"%ld月",month] forState:UIControlStateNormal];
+    _YearLabel.text = [NSString stringWithFormat:@"%ld年",(long)year];
+    _monthLabel.text = [NSString stringWithFormat:@"%ld月",(long)month];
+    _IntradayLable.text = [NSString stringWithFormat:@"%ld日",(long)day];
+    [_monthBtn setTitle:[NSString stringWithFormat:@"%ld月",(long)month] forState:UIControlStateNormal];
     
 
 }

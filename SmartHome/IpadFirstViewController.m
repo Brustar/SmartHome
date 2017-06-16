@@ -541,7 +541,7 @@
     NSInteger year=[conponent year];
     NSInteger month=[conponent month];
     NSInteger day=[conponent day];
-    self.TimerLabel.text = [NSString stringWithFormat:@"%ld.%ld.%ld",year,month,day];
+    self.TimerLabel.text = [NSString stringWithFormat:@"%ld.%ld.%ld",(long)year,(long)month,(long)day];
 
 }
 
