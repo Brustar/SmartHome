@@ -15,12 +15,6 @@
 
 @implementation NewLightCell
 
--(id)awakeAfterUsingCoder:(NSCoder *)aDecoder
-{
-    NSLog(@"-----");
-    return self;
-}
-
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

@@ -122,10 +122,8 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 cell.NewLightNameLabel.text = device.name;
                 cell.NewLightSlider.continuous = NO;
                 cell.NewLightSlider.hidden = NO;
-                //cell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
                 cell.NewLightPowerBtn.selected = device.power;//开关状态
                 cell.NewLightSlider.value = (float)device.bright/100.0f;//亮度状态
-                //cell.tag = device.eID;
                 [cell query:[NSString stringWithFormat:@"%d", device.eID]];
                 return cell;
             }
@@ -137,7 +135,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 newColourCell.backgroundColor =[UIColor clearColor];
                 
                 newColourCell.colourNameLabel.text = device.name;
-                newColourCell.tag = device.eID;
+                [newColourCell query:[NSString stringWithFormat:@"%d", device.eID]];
                 return newColourCell;
             }
             case 1:
@@ -146,7 +144,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 newColourCell.addPowerLightBtn.hidden = YES;
                 newColourCell.powerBtnConstraint.constant = 10;
                 newColourCell.backgroundColor =[UIColor clearColor];
-                newColourCell.tag = device.eID;
+                [newColourCell query:[NSString stringWithFormat:@"%d", device.eID]];
                 newColourCell.powerLightNameLabel.text = device.name;
                 
                 return newColourCell;
@@ -159,8 +157,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 aireCell.backgroundColor =[UIColor clearColor];
                 aireCell.roomID = self.roomID;
                 aireCell.AireNameLabel.text = device.name;
-                aireCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
-                aireCell.tag = device.eID;
+                [aireCell query:[NSString stringWithFormat:@"%d", device.eID]];
                 return aireCell;
             }
             case 21://curtain:
@@ -172,8 +169,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 aireCell.roomID = self.roomID;
                 
                 aireCell.label.text = device.name;
-                aireCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
-                aireCell.tag = device.eID;
+                [aireCell query:[NSString stringWithFormat:@"%d", device.eID]];
                 return aireCell;
             }
             case TVtype:
@@ -184,7 +180,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 TVCell.backgroundColor =[UIColor clearColor];
                 
                 TVCell.TVNameLabel.text = device.name;
-                TVCell.tag = device.eID;
+                [TVCell query:[NSString stringWithFormat:@"%d", device.eID]];
                 return TVCell;
             }
             case DVDtype:
@@ -193,7 +189,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 DVDCell.AddDvdBtn.hidden = YES;
                 DVDCell.DVDConstraint.constant = 10;
                 DVDCell.backgroundColor =[UIColor clearColor];
-                DVDCell.tag = device.eID;
+                [DVDCell query:[NSString stringWithFormat:@"%d", device.eID]];
                 DVDCell.DVDNameLabel.text = device.name;
                 return DVDCell;
             }
@@ -205,7 +201,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 FMCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
                 FMCell.AddFmBtn.hidden = YES;
                 FMCell.FMLayouConstraint.constant = 10;
-                FMCell.tag = device.eID;
+                [FMCell query:[NSString stringWithFormat:@"%d", device.eID]];
                 return FMCell;
             }
             case screen:
@@ -216,8 +212,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 ScreenCell.backgroundColor =[UIColor clearColor];
                 
                 ScreenCell.ScreenCurtainLabel.text = device.name;
-                ScreenCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
-                ScreenCell.tag = device.eID;
+                [ScreenCell query:[NSString stringWithFormat:@"%d", device.eID]];
                 return ScreenCell;
             }
             case bgmusic:
@@ -226,9 +221,9 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 BjMusicCell.backgroundColor = [UIColor clearColor];
                 BjMusicCell.AddBjmusicBtn.hidden = YES;
                 BjMusicCell.BJmusicConstraint.constant = 10;
-                BjMusicCell.tag = device.eID;
+                
                 BjMusicCell.BjMusicNameLb.text = device.name;
-                BjMusicCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
+                [BjMusicCell query:[NSString stringWithFormat:@"%d", device.eID]];
                 
                 return BjMusicCell;
             }
@@ -238,13 +233,13 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 otherCell.AddOtherBtn.hidden = YES;
                 otherCell.OtherConstraint.constant = 10;
                 otherCell.backgroundColor = [UIColor clearColor];
-                otherCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
+                
                 if (device.name == nil) {
                     otherCell.NameLabel.text = @"";
                 }else{
                     otherCell.NameLabel.text = device.name;
                 }
-                otherCell.tag = device.eID;
+                [otherCell query:[NSString stringWithFormat:@"%d", device.eID]];
                 return otherCell;
             }
         }
@@ -259,9 +254,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView.tag == 1) {
-        
-    }else{
+    if (tableView.tag == 0) {
         Device *device = [self.menus objectAtIndex:indexPath.row];
         NSPredicate *pred = [NSPredicate predicateWithFormat:@"subTypeId==%ld", device.subTypeId];
         self.devices = [self.temp filteredArrayUsingPredicate:pred];
