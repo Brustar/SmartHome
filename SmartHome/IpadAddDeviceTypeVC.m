@@ -201,7 +201,7 @@
         cell.deviceid = _lightArray[indexPath.row];
         cell.NewLightPowerBtn.selected = device.power;//开关状态
         cell.NewLightSlider.value = (float)device.bright/100.0f;//亮度状态
-        [cell query:[NSString stringWithFormat:@"%d", device.eID]];
+        [cell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
         cell.scene = _scene;
 
@@ -217,7 +217,7 @@
         newColourCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         newColourCell.deviceid = _ColourLightArr[indexPath.row];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
-        [newColourCell query:[NSString stringWithFormat:@"%d", device.eID]];
+        [newColourCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
         newColourCell.scene = _scene;
 
         
@@ -232,7 +232,7 @@
         newColourCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         newColourCell.deviceid = _SwitchLightArr[indexPath.row];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
-        [newColourCell query:[NSString stringWithFormat:@"%d", device.eID]];
+        [newColourCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
         newColourCell.scene = _scene;
 
         
@@ -267,7 +267,7 @@
         aireCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         aireCell.deviceid = _CurtainArray[indexPath.row];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
-        [aireCell query:[NSString stringWithFormat:@"%d", device.eID]];
+        [aireCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
         aireCell.scene = _scene;
 
         
