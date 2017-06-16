@@ -61,10 +61,15 @@
     self.seleteSendPowBtn.selected = !self.seleteSendPowBtn.selected;
     
     if (self.seleteSendPowBtn.selected) {
-        
         [self.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock2"] forState:UIControlStateSelected];
+        
     }else{
         [self.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock1"] forState:UIControlStateNormal];
+    }
+    
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(onTimingBtnClicked:)]) {
+        [_delegate onTimingBtnClicked:sender];
     }
 }
 
