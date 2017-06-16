@@ -12,6 +12,7 @@
 #import "SceneManager.h"
 #import "BgMusic.h"
 #import "AudioManager.h"
+#import "PackManager.h"
 
 
 #define BLUETOOTH_MUSIC false
@@ -41,6 +42,15 @@
     }
 }
 
+-(void) query:(NSString *)deviceid
+{
+    self.deviceid = deviceid;
+    SocketManager *sock=[SocketManager defaultManager];
+    sock.delegate=self;
+    //查询设备状态
+    NSData *data = [[DeviceInfo defaultManager] query:deviceid];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
 - (IBAction)save:(id)sender {
     
         BgMusic *device=[[BgMusic alloc] init];
@@ -132,6 +142,25 @@
         
         if (_delegate && [_delegate respondsToSelector:@selector(onBjSliderValueChanged:)]) {
             [_delegate onBjSliderValueChanged:sender];
+        }
+    }
+}
+
+#pragma mark - TCP recv delegate
+-(void)recv:(NSData *)data withTag:(long)tag
+{
+    Proto proto=protocolFromData(data);
+    
+    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
+        return;
+    }
+    
+    if (proto.cmd==0x01) {
+        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+        if ([devID intValue]==[self.deviceid intValue]) {
+            if (proto.action.state == PROTOCOL_VOLUME) {
+                self.BjSlider.value=proto.action.RValue/100.0;
+            }
         }
     }
 }

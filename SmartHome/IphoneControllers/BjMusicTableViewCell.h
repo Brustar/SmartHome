@@ -27,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bgIconTadilingConst;//音量小距离右边的距离
 
 @property (nonatomic, assign) id<BjMusicTableViewCellDelegate>delegate;
+-(void) query:(NSString *)deviceid;
 
 @end
 
