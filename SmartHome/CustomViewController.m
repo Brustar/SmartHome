@@ -128,7 +128,7 @@
     if (_viewNaviBar)
     {
         [_viewNaviBar setLeftBtn:btn];
-    }else{APP_ASSERT_STOP}
+    }
 }
 
 - (void)setNaviBarRightBtn:(UIButton *)btn

@@ -119,7 +119,7 @@
             ringR = 65;
         }
     }else {
-        ringR = 85;
+        ringR = 75;
     }
     
     
