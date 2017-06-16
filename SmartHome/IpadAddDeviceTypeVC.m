@@ -201,7 +201,7 @@
         cell.deviceid = _lightArray[indexPath.row];
         cell.NewLightPowerBtn.selected = device.power;//开关状态
         cell.NewLightSlider.value = (float)device.bright/100.0f;//亮度状态
-        
+        [cell query:[NSString stringWithFormat:@"%d", device.eID]];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
         cell.scene = _scene;
 
@@ -217,6 +217,7 @@
         newColourCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         newColourCell.deviceid = _ColourLightArr[indexPath.row];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
+        [newColourCell query:[NSString stringWithFormat:@"%d", device.eID]];
         newColourCell.scene = _scene;
 
         
@@ -231,6 +232,7 @@
         newColourCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         newColourCell.deviceid = _SwitchLightArr[indexPath.row];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
+        [newColourCell query:[NSString stringWithFormat:@"%d", device.eID]];
         newColourCell.scene = _scene;
 
         
@@ -248,6 +250,7 @@
         aireCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         aireCell.deviceid = _AirArray[indexPath.row];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
+        [aireCell query:[NSString stringWithFormat:@"%d", device.eID]];
         aireCell.scene = _scene;
 
         
@@ -264,6 +267,7 @@
         aireCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         aireCell.deviceid = _CurtainArray[indexPath.row];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
+        [aireCell query:[NSString stringWithFormat:@"%d", device.eID]];
         aireCell.scene = _scene;
 
         
@@ -278,6 +282,7 @@
         TVCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         TVCell.deviceid = _TVArray[indexPath.row];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
+        [TVCell query:[NSString stringWithFormat:@"%d", device.eID]];
         TVCell.scene = _scene;
 
         
@@ -292,6 +297,7 @@
         DVDCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         DVDCell.deviceid = _DVDArray[indexPath.row];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
+        [DVDCell query:[NSString stringWithFormat:@"%d", device.eID]];
         DVDCell.scene = _scene;
 
         
@@ -307,6 +313,7 @@
         otherCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         otherCell.deviceid = _ProjectArray[indexPath.row];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
+        [otherCell query:[NSString stringWithFormat:@"%d", device.eID]];
         otherCell.scene = _scene;
 
         
@@ -322,6 +329,7 @@
         FMCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         FMCell.deviceid = _FMArray[indexPath.row];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
+        [FMCell query:[NSString stringWithFormat:@"%d", device.eID]];
         FMCell.scene = _scene;
 
         
@@ -336,6 +344,7 @@
         otherCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         otherCell.deviceid = _NetVArray[indexPath.row];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
+        [otherCell query:[NSString stringWithFormat:@"%d", device.eID]];
         otherCell.scene = _scene;
 
         
@@ -352,6 +361,7 @@
         ScreenCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         ScreenCell.deviceid = _MBArray[indexPath.row];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
+        [ScreenCell query:[NSString stringWithFormat:@"%d", device.eID]];
         ScreenCell.scene = _scene;
 
         
@@ -367,6 +377,7 @@
         BjMusicCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         BjMusicCell.deviceid = _BJMusicArray[indexPath.row];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
+        [BjMusicCell query:[NSString stringWithFormat:@"%d", device.eID]];
         BjMusicCell.scene = _scene;
 
         
@@ -385,6 +396,7 @@
 
         if (_OtherArray.count) {
             Device *device = [SQLManager getDeviceWithDeviceID:[_OtherArray[indexPath.row] intValue]];
+            [otherCell query:[NSString stringWithFormat:@"%d", device.eID]];
             if (device.name == nil) {
                 otherCell.NameLabel.text = @"";
             }else{

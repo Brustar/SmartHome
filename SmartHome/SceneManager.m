@@ -55,13 +55,15 @@
         NSString *imgFileName = [NSString stringWithFormat:@"%@.png", str];
 
         //同步云端
-    
+        
+        
         NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
         NSString *scenePath = [[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
         
         NSString *URL = [NSString stringWithFormat:@"%@Cloud/scene_add.aspx",[IOManager httpAddr]];
         NSString *fileName = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,scene.sceneID];
         NSDictionary *parameter;
+        int isplan;
         
         NSMutableArray *schedulesTemp = [NSMutableArray array];
         
@@ -102,6 +104,7 @@
                                    @"roomid":@(scene.roomID),
                                    @"isactive":@(isactive)
                                    };
+            isplan = 1;
                 //}
             //}
         }else {
@@ -115,6 +118,7 @@
                           @"roomid":@(scene.roomID),
                           @"isactive":@(isactive)
                           };
+            isplan = 0;
         }
        //NSData *imgData = UIImagePNGRepresentation(image);
         NSData *imgData = UIImageJPEGRepresentation(image, 0.5);
@@ -141,7 +145,7 @@
                     FMDatabase *db = [SQLManager connetdb];
                     if([db open])
                     {
-                         NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%ld,%d,'%@',%d,null,'%ld','%d')",scene.sceneID,name,roomName,[sceneDict objectForKey:@"image_url"],(long)scene.roomID,2,@"0",0,[[DeviceInfo defaultManager] masterID],0];
+                         NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%ld,%d,'%@',%d,null,'%ld','%d','%d','%ld')",scene.sceneID,name,roomName,[sceneDict objectForKey:@"image_url"],(long)scene.roomID,2,@"0",0,[[DeviceInfo defaultManager] masterID],0,isplan,isactive];
                         BOOL result = [db executeUpdate:sql];
                         if(result)
                         {   [MBProgressHUD showSuccess:@"新增成功"];

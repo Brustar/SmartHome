@@ -510,16 +510,18 @@ static NSString * const CYPhotoId = @"photo";
         cell.sceneID = scene.sceneID;
         cell.roomID = self.selectedRoomID;
         cell.sceneStatus = scene.status;
+        cell.isplan = scene.isplan;
+        cell.isactive = scene.isactive;
 
         if (self.scenes.count == 0) {
             [MBProgressHUD showSuccess:@"暂时没有全屋场景"];
         }
-        NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,scene.sceneID];
-        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
-        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
-        NSArray * schedules = plistDic[@"schedules"];
-        scene.schedules = schedules;
-        if (scene.schedules.count == 0) {
+//        NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,scene.sceneID];
+//        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+//        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+//        NSArray * schedules = plistDic[@"schedules"];
+//        scene.schedules = schedules;
+        if (cell.isplan == 0) {
             cell.seleteSendPowBtn.hidden = YES;
             cell.PowerBtnCenterContraint.constant = 35;
         }else{
