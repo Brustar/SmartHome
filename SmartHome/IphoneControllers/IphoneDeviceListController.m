@@ -386,6 +386,7 @@ static NSString * const CYPhotoId = @"photo";
             NSPredicate *pred = [NSPredicate predicateWithFormat:@"rID==%d", room.rId];
             self.deviceView.devices = [self.deviceView.temp filteredArrayUsingPredicate:pred];
         }
+        self.deviceView.roomID = room.rId;
         [self.deviceView.content reloadData];
         
         return;

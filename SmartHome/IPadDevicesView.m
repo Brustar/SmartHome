@@ -232,7 +232,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
                 aireCell.roomID = self.roomID;
                 aireCell.tag = device.eID;
                 aireCell.label.text = device.name;
-                [aireCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
+                [aireCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:nil];
                 return aireCell;
             }
             case TVtype:
@@ -320,6 +320,10 @@ static NSString *const leftMenuCell = @"leftMenuCell";
     if (tableView.tag == 0) {
         Device *device = [self.menus objectAtIndex:indexPath.row];
         NSPredicate *pred = [NSPredicate predicateWithFormat:@"subTypeId==%ld", device.subTypeId];
+        if(![SQLManager isWholeHouse:self.roomID])
+        {
+            pred = [NSPredicate predicateWithFormat:@"subTypeId==%ld && rID=%d", device.subTypeId,self.roomID];
+        }
         self.devices = [self.temp filteredArrayUsingPredicate:pred];
         [self.content reloadData];
     }
