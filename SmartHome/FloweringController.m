@@ -125,10 +125,10 @@
     [button setSelected:!button.isSelected];
     if (button.isSelected) {
         //selected
-        [button setImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateSelected];
+        [button setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateSelected];
     }else{
         //normal
-        [button setImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateNormal];
+        [button setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateNormal];
     }
     
     Schedule *sch = [[Schedule alloc] initWhithoutSchedule];
@@ -158,11 +158,11 @@
     if (ON_IPAD) {
         if (button.isSelected) {
             //selected
-            [button setImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
+            [button setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
             self.scheculer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startNow:) userInfo:nil repeats:YES];
         }else{
             //normal
-            [button setImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+            [button setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
             self.timeLbl.text = @"00:00";
             self.interval = 0;
             [self.scheculer invalidate];

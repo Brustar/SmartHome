@@ -1725,17 +1725,25 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="No8-I2-v6T">
-                                <rect key="frame" x="928" y="77.5" width="36" height="23"/>
+                                <rect key="frame" x="909" y="71" width="55" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="55" id="NcY-Kd-16y"/>
+                                    <constraint firstAttribute="height" constant="35" id="ucU-6S-a9g"/>
+                                </constraints>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal" image="dvd_btn_switch_on"/>
+                                <state key="normal" backgroundImage="dvd_btn_switch_on"/>
                                 <connections>
                                     <action selector="save:" destination="PiN-hn-P2b" eventType="touchUpInside" id="zhM-bD-gcD"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k5x-Kz-BZ5">
-                                <rect key="frame" x="930" y="648.5" width="34" height="23"/>
+                                <rect key="frame" x="909" y="642.5" width="55" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="5Ka-C9-qHt"/>
+                                    <constraint firstAttribute="width" constant="55" id="f9u-mI-peq"/>
+                                </constraints>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal" image="dvd_btn_switch_off"/>
+                                <state key="normal" backgroundImage="dvd_btn_switch_off"/>
                                 <connections>
                                     <action selector="start:" destination="PiN-hn-P2b" eventType="touchUpInside" id="ngj-Dp-RbK"/>
                                 </connections>
@@ -2045,17 +2053,25 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uuE-RB-88i">
-                                <rect key="frame" x="930" y="648" width="34" height="23"/>
+                                <rect key="frame" x="909" y="642" width="55" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="55" id="AoJ-5o-HNX"/>
+                                    <constraint firstAttribute="height" constant="35" id="lQL-eo-GyP"/>
+                                </constraints>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal" image="dvd_btn_switch_off"/>
+                                <state key="normal" backgroundImage="dvd_btn_switch_off"/>
                                 <connections>
                                     <action selector="start:" destination="EnX-rM-1f5" eventType="touchUpInside" id="gGF-aZ-na2"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kFp-hE-gvS">
-                                <rect key="frame" x="928" y="77" width="36" height="23"/>
+                                <rect key="frame" x="909" y="71" width="55" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="d5x-17-w2L"/>
+                                    <constraint firstAttribute="width" constant="55" id="xVA-sj-RiQ"/>
+                                </constraints>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal" image="dvd_btn_switch_on"/>
+                                <state key="normal" backgroundImage="dvd_btn_switch_on"/>
                                 <connections>
                                     <action selector="save:" destination="EnX-rM-1f5" eventType="touchUpInside" id="qR2-xw-QSk"/>
                                 </connections>
@@ -2227,17 +2243,25 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hGO-Pl-aHb">
-                                <rect key="frame" x="930" y="648" width="34" height="23"/>
+                                <rect key="frame" x="909" y="642" width="55" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="55" id="Vwg-UO-5mT"/>
+                                    <constraint firstAttribute="height" constant="35" id="nHp-6o-QeF"/>
+                                </constraints>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal" image="dvd_btn_switch_off"/>
+                                <state key="normal" backgroundImage="dvd_btn_switch_off"/>
                                 <connections>
                                     <action selector="start:" destination="Fr9-DY-QUJ" eventType="touchUpInside" id="EmA-bd-CHh"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tj4-b6-Agv">
-                                <rect key="frame" x="928" y="77" width="36" height="23"/>
+                                <rect key="frame" x="909" y="71" width="55" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="1qX-dN-X4Z"/>
+                                    <constraint firstAttribute="width" constant="55" id="Yfn-ro-WHx"/>
+                                </constraints>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal" image="dvd_btn_switch_on"/>
+                                <state key="normal" backgroundImage="dvd_btn_switch_on"/>
                                 <connections>
                                     <action selector="save:" destination="Fr9-DY-QUJ" eventType="touchUpInside" id="55d-9q-5SX"/>
                                 </connections>
