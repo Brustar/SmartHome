@@ -453,6 +453,11 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     Device *device = [self.lights objectAtIndex:indexPath.row];
     self.lightName.text = device.name;
     self.deviceid = [NSString stringWithFormat:@"%d", device.eID];
+    
+    NSString *dviceType = [SQLManager getEType:[self.deviceid integerValue]];
+    
+    self.tranformView.hidden = ![dviceType isEqualToString:@"02"];
+    self.base.hidden = ![dviceType isEqualToString:@"03"];
     //查询设备状态
     NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
     [[SocketManager defaultManager].socket writeData:data withTimeout:1 tag:1];
