@@ -18,7 +18,7 @@
 -(void)sceneDeleteAction:(CYPhotoCell *)cell;
 -(void)powerBtnAction:(UIButton *)sender sceneStatus:(int)status;
 -(void)refreshTableView:(CYPhotoCell *)cell;
-- (void)onTimingBtnClicked:(UIButton *)sender;
+- (void)onTimingBtnClicked:(UIButton *)sender sceneID:(int)sceneID;
 
 @end
 

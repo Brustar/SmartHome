@@ -736,7 +736,7 @@ static NSString * const CYPhotoId = @"photo";
 }
 -(void)httpHandler:(id) responseObject tag:(int)tag
 {
-    if((tag = 1))
+    if(tag == 1)
     {
         if([responseObject[@"result"] intValue] == 0)
         {
@@ -778,6 +778,12 @@ static NSString * const CYPhotoId = @"photo";
             
             [self.navigationController popViewControllerAnimated:YES];
         }
+    }else if (tag == 2) { //启动／停止 场景定时
+        if([responseObject[@"result"] intValue] == 0) {
+            [MBProgressHUD showSuccess:responseObject[@"msg"]];
+        }else {
+            [MBProgressHUD showError:@"操作失败"];
+        }
     }
 }
 
@@ -800,6 +806,27 @@ static NSString * const CYPhotoId = @"photo";
         
         [theSegue setValue:[NSNumber numberWithInt:self.selectedSId] forKey:@"sceneID"];
         [theSegue setValue:[NSNumber numberWithInt:room.rId] forKey:@"roomID"];
+    }
+}
+
+#pragma mark - CYPhotoCellDelegate
+- (void)onTimingBtnClicked:(UIButton *)sender sceneID:(int)sceneID {
+    
+    NSNumber *isActive = @(sender.selected);
+    
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
+    NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
+    
+    if (auothorToken.length >0) {
+        NSDictionary *dict = @{@"token":auothorToken,
+                               @"optype":@(8),
+                               @"sceneid":@(sceneID),
+                               @"isactive":isActive
+                               };
+        HttpManager *http = [HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = 2;
+        [http sendPost:url param:dict];
     }
 }
 

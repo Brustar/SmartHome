@@ -68,8 +68,8 @@
     }
     
     
-    if (_delegate && [_delegate respondsToSelector:@selector(onTimingBtnClicked:)]) {
-        [_delegate onTimingBtnClicked:sender];
+    if (_delegate && [_delegate respondsToSelector:@selector(onTimingBtnClicked:sceneID:)]) {
+        [_delegate onTimingBtnClicked:sender sceneID:self.sceneID];
     }
 }
 
