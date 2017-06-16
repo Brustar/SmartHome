@@ -1065,9 +1065,9 @@
     NSMutableArray *catalogs = [NSMutableArray new];
     NSString *sql;
     if ([self isWholeHouse:roomID]) {
-        sql = @"select subtypename,subtypeid from devices where subtypeid<>6 and subtypeid<>0  group by subtypeid";
+        sql = @"select subtypename,subtypeid from devices where subtypeid<>6 and subtypeid<>0 and htypeid<>45 group by subtypeid";
     }else{
-        sql = [NSString stringWithFormat:@"select subtypename,subtypeid from devices where subtypeid<>6 and subtypeid<>0 and rid = %d group by subtypeid" ,roomID];
+        sql = [NSString stringWithFormat:@"select subtypename,subtypeid from devices where subtypeid<>6 and subtypeid<>0 and htypeid<>45 and rid = %d group by subtypeid" ,roomID];
     }
     
     FMDatabase *db = [self connetdb];
