@@ -15,6 +15,12 @@
 
 @implementation NewLightCell
 
+-(id)awakeAfterUsingCoder:(NSCoder *)aDecoder
+{
+    NSLog(@"-----");
+    return self;
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
@@ -28,11 +34,7 @@
     [self.NewLightSlider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     [self.NewLightPowerBtn setImage:[UIImage imageNamed:@"lv_icon_light_off"] forState:UIControlStateNormal];
     [self.NewLightPowerBtn setImage:[UIImage imageNamed:@"lv_icon_light_on"] forState:UIControlStateSelected];
-    SocketManager *sock=[SocketManager defaultManager];
-    sock.delegate=self;
-    //查询设备状态
-    NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
-    [sock.socket writeData:data withTimeout:1 tag:1];
+    
     
     if (ON_IPAD) {
         self.supImageViewHeight.constant = 85;
@@ -41,6 +43,17 @@
     }
     
 }
+
+-(void) query:(NSString *)deviceid
+{
+    self.deviceid = deviceid;
+    SocketManager *sock=[SocketManager defaultManager];
+    sock.delegate=self;
+    //查询设备状态
+    NSData *data = [[DeviceInfo defaultManager] query:deviceid];
+    [sock.socket writeData:data withTimeout:1 tag:1];
+}
+
 - (IBAction)save:(id)sender {
     
     Light *device=[[Light alloc] init];
@@ -157,13 +170,9 @@
             if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) {
                 self.NewLightPowerBtn.selected = proto.action.state;
             }else if(proto.action.state == 0x1A){
-                //int brightness_f = proto.action.RValue;
-//                float degree = M_PI*brightness_f/MAX_ROTATE_DEGREE;
-//                self.tranformView.transform = CGAffineTransformMakeRotation(degree);
-            }else if(proto.action.state == 0x1B){
-//                self.base.backgroundColor=[UIColor colorWithRed:proto.action.RValue/255.0 green:proto.action.G/255.0  blue:proto.action.B/255.0  alpha:1];
+                float brightness_f = proto.action.RValue/100.0;
+                self.NewLightSlider.value = brightness_f;
             }
-            
         }
     }
     
