@@ -111,6 +111,8 @@ enum{
 -(NSData *) play:(NSString *)deviceID;
 -(NSData *) pause:(NSString *)deviceID;
 -(NSData *) stop:(NSString *)deviceID;
+-(NSData *) ON:(NSString *)deviceID;
+-(NSData *) OFF:(NSString *)deviceID;
 
 -(NSData *) changeVolume:(uint8_t)percent deviceID:(NSString *)deviceID; //mute:pecent=0
 -(NSData *) mute:(NSString *)deviceID;

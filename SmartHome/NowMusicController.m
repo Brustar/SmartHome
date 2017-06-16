@@ -374,7 +374,9 @@
 
 -(void)StopBtn:(UIButton *)bbt
 {
+   
     RoomModel *model = self.AllRooms[bbt.tag];
+    self.seleteRow = bbt.tag;
     Device *devInfo = model.eqinfoList[self.seleteRow];
     self.deviceid = [NSString stringWithFormat:@"%d",devInfo.eID];
     for (int i = 0; i < model.eqinfoList.count; i ++) {

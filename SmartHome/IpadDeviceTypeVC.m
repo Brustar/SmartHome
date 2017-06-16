@@ -46,6 +46,14 @@
         
         [self.delegate IpadDeviceType:self selected:0];
     }
+    if (self.DevicesArr.count == 0) {
+        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+        
+        if ([self.delegate respondsToSelector:@selector(IpadDeviceType:selected:)]) {
+            
+            [self.delegate IpadDeviceType:self selected:1];
+        }
+    }
     
 }
 - (void)setupNaviBar {

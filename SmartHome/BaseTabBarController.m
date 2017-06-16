@@ -9,7 +9,7 @@
 #import "BaseTabBarController.h"
 #import "BaseNavController.h"
 #import "IpadFirstViewController.h"
-#import "IpadSceneViewController.h"
+
 
 @interface BaseTabBarController ()
 

@@ -272,7 +272,7 @@
     [scene setValuesForKeysWithDictionary:plistDic];
     scene.roomID = (int)_roomid;
     [[DeviceInfo defaultManager] setEditingScene:NO];
-    [[SceneManager defaultManager] addScene:scene withName:self.sceneName.text withImage:self.selectSceneImg.currentBackgroundImage];
+    [[SceneManager defaultManager] addScene:scene withName:self.sceneName.text withImage:self.selectSceneImg.currentBackgroundImage withiSactive:0];
     [self.splitViewController dismissViewControllerAnimated:YES completion:nil];
     
     NSDictionary *dic = @{@"type":[NSNumber numberWithInt:0],@"subType":[NSNumber numberWithInteger:self.roomid ]};

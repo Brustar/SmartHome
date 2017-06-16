@@ -32,14 +32,43 @@
 @property (nonatomic,strong) SystemSettingViewController *sySetVC;
 @property (nonatomic,strong) SystemInfomationController *inforVC;
 @property (nonatomic,strong) AboutUsController *aboutVC;
+@property (nonatomic,strong) NSMutableArray *userArr;
+@property (nonatomic,strong) NSMutableArray *managerType;
+@property (nonatomic,strong) NSMutableArray *userIDArr;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTopConstraint;//顶部的距离
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewLeadingConstraint;//左边的距离
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTainlingConstraint;//右边的距离
+@property (nonatomic,assign) BOOL Seccess;
 
 @end
 
 @implementation MySettingViewController
-
+-(NSMutableArray *)userArr
+{
+    if(!_userArr)
+    {
+        _userArr = [NSMutableArray array];
+        
+        
+    }
+    return _userArr;
+}
+-(NSMutableArray *)managerType{
+    if(!_managerType)
+    {
+        _managerType = [NSMutableArray array];
+        
+    }
+    return _managerType;
+}
+-(NSMutableArray *)userIDArr
+{
+    if(!_userIDArr)
+    {
+        _userIDArr = [NSMutableArray array];
+    }
+    return _userIDArr;
+}
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -57,8 +86,23 @@
 
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.tableFooterView = [UIView new];
-//    self.tableView.backgroundColor =  [UIColor colorWithRed:241/255.0 green:240/255.0 blue:246/255.0 alpha:1];
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/user_listall.aspx",[IOManager httpAddr]];
+    [self sendRequest:url withTag:2];
     [self setupNaviBar];
+
+}
+
+-(void)sendRequest:(NSString *)url withTag:(int)i
+{
+    NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    if (auothorToken) {
+        NSDictionary *dict = @{@"token":auothorToken,@"optype":[NSNumber numberWithInteger:0]};
+        HttpManager *http=[HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = 2;
+        [http sendPost:url param:dict];
+    }
+    
 }
 - (void)setupNaviBar {
     
@@ -270,8 +314,15 @@
                [self.navigationController pushViewController:systemInfoVC animated:YES];
            }
        }else {
-           AccessSettingController * accessVC = [MainBoard instantiateViewControllerWithIdentifier:@"AccessSettingController"];
-           [self.navigationController pushViewController:accessVC animated:YES];
+          
+           if (_Seccess) {
+               AccessSettingController * accessVC = [MainBoard instantiateViewControllerWithIdentifier:@"AccessSettingController"];
+               [self.navigationController pushViewController:accessVC animated:YES];
+           }else{
+               
+               [MBProgressHUD showError:@"您为普通用户， 无权限访问"];
+           }
+           
         }
         
       }else if (indexPath.section == 2){
@@ -409,11 +460,7 @@
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"AuthorToken"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [[SocketManager defaultManager] cutOffSocket];
-            
-            
-            //self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModePrimaryHidden;
-            //[self performSegueWithIdentifier:@"goLogin" sender:self];
-            
+
             [self gotoLoginViewController];
             
             
@@ -422,6 +469,32 @@
         }
 
     }
+    if(tag == 2)
+    {
+        if([responseObject[@"result"] intValue]==0)
+        {
+            _Seccess = YES;
+            NSArray *arr = responseObject[@"user_list"];
+            for(NSDictionary *userDetail in arr)
+            {
+                NSString *userName = userDetail[@"username"];
+                NSString *userType = userDetail[@"usertype"];
+                NSString *userID = userDetail[@"user_id"];
+                [self.userArr addObject:userName];
+                [self.managerType addObject:userType];
+                [self.userIDArr addObject:userID];
+                
+            }
+      
+        }else{
+            
+            _Seccess = NO;
+            
+        }
+        
+    }
+    
+    NSLog(@"Seccess:%d",_Seccess);
     
 }
 -(void)gotoAppStoreToComment

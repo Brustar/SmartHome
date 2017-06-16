@@ -81,7 +81,7 @@
             
             NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
             [_scene setDevices:devices];
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
             
         }else{
             [self.AddTvDeviceBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
@@ -92,12 +92,11 @@
             
             [_scene setReadonly:NO];
 
-            
-             NSMutableArray *devices = [NSMutableArray arrayWithObject:[NSString stringWithFormat:@"@%d",device.deviceID]];
-             [devices removeObject:[NSString stringWithFormat:@"@%d",device.deviceID]];
+            //删除当前场景的当前硬件
+            NSArray *devices = [[SceneManager defaultManager] subDeviceFromScene:_scene withDeivce:device.deviceID];
             
             [_scene setDevices:devices];
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
         }
   
     }else if (sender == self.TVSlider){

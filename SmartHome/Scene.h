@@ -40,6 +40,9 @@
 //定时列表
 @property (strong,nonatomic) NSArray *schedules;
 
+//是否启用定时
+@property (assign,nonatomic) int isactive;
+
 - (instancetype)initWhithoutSchedule;
 
 @end

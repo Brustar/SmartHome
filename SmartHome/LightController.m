@@ -205,7 +205,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
     [scene setDevices:devices];
-    [[SceneManager defaultManager] addScene:scene withName:nil withImage:[UIImage imageNamed:@""]];
+    [[SceneManager defaultManager] addScene:scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
 }
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag

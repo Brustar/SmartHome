@@ -264,7 +264,7 @@
         return newColourCell;
     }
     if (indexPath.section == 3) {//空调
-        AireTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"IAireTableViewCell" forIndexPath:indexPath];
+        AireTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"AireTableViewCell" forIndexPath:indexPath];
         aireCell.AddAireBtn.hidden = YES;
         aireCell.AireConstraint.constant = 10;
         aireCell.backgroundColor =[UIColor clearColor];
