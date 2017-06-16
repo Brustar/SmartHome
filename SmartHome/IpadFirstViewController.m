@@ -261,7 +261,7 @@
             _ThreeBtn.hidden = NO;
         }
     }else{
-        _ThreeBtn.center = CGPointMake(self.view.center.x, self.view.center.y);
+       
         [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular4"] forState:UIControlStateNormal];
         [_ThreeBtn setTitle:@"" forState:UIControlStateNormal];
         _firstBtn.hidden = YES;

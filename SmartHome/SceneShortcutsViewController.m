@@ -7,9 +7,10 @@
 //
 
 #import "SceneShortcutsViewController.h"
+#import "IpadFirstViewController.h"
 
 @interface SceneShortcutsViewController ()
-
+@property (nonatomic,strong) NSArray * viewControllerArrs;
 @end
 
 @implementation SceneShortcutsViewController
@@ -21,18 +22,33 @@
 }
 
 - (void)setupNaviBar {
-    [self setNaviBarTitle:@"场景快捷键"];
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        [self adjustNaviBarFrameForSplitView];
-        [self adjustTitleFrameForSplitView];
-    }
-    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(saveBtnClicked:)];
-    [self setNaviBarRightBtn:_naviRightBtn];
     
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad && _isShowInSplitView) {
-        [self adjustNaviBarFrameForSplitView];
-        [self adjustTitleFrameForSplitView];
-        [self setNaviBarRightBtnForSplitView:_naviRightBtn];
+    _viewControllerArrs =self.navigationController.viewControllers;
+    NSInteger vcCount = _viewControllerArrs.count;
+    UIViewController * lastVC = _viewControllerArrs[vcCount -2];
+    UIStoryboard * HomeStoryBoard = [UIStoryboard storyboardWithName:@"Home-iPad" bundle:nil];
+    IpadFirstViewController * iPadFirstVC = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"IpadFirstViewController"];
+    
+    if ([lastVC isKindOfClass:[iPadFirstVC class]]) {
+        [self setNaviBarTitle:@"场景快捷键"];
+        _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(saveBtnClicked:)];
+         [self setNaviBarRightBtn:_naviRightBtn];
+        
+    }else{
+       
+        [self setNaviBarTitle:@"场景快捷键"];
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+            [self adjustNaviBarFrameForSplitView];
+            [self adjustTitleFrameForSplitView];
+        }
+        _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(saveBtnClicked:)];
+        [self setNaviBarRightBtn:_naviRightBtn];
+        
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad && _isShowInSplitView) {
+            [self adjustNaviBarFrameForSplitView];
+            [self adjustTitleFrameForSplitView];
+            [self setNaviBarRightBtnForSplitView:_naviRightBtn];
+        }
     }
 }
 
