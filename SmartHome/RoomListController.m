@@ -390,7 +390,7 @@
     
     self.scene.schedules = sches;
     self.clickFixTimeBtn.tintColor=[UIColor redColor];
-    [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
+    [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
     
 }
 
@@ -503,7 +503,7 @@
        
         self.schedule.weekDays = weekValue;
         
-        [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
+        [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
     }else {
         [MBProgressHUD showError:@"请先设置时间"];
     }
@@ -652,7 +652,7 @@
     
     self.schedule.astronomicalStartID=(int)btn.tag + 1;
     
-    [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
+    [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
 
 }
 
@@ -833,7 +833,7 @@
         
         
         self.scene.schedules = sches;
-        [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
+        [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
     }
     
 }
@@ -912,7 +912,7 @@
         
         self.scene.schedules = sches;
         
-        [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
+        [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
     }
 }
 @end

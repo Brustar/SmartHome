@@ -33,7 +33,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-  
     // 初始化分割视图控制器
     UISplitViewController *splitViewController = [[UISplitViewController alloc] init];
     
@@ -47,7 +46,8 @@
     self.rightVC = [SceneStoryBoard instantiateViewControllerWithIdentifier:@"IpadAddDeviceTypeVC"];
     self.rightVC.roomID = self.roomID;
     self.rightVC.sceneID = self.sceneID;
-    self.rightVC.scene  = _scene;
+     _scene = self.rightVC.scene;
+    
     // 设置分割面板的 2 个视图控制器
     splitViewController.viewControllers = @[self.leftVC, self.rightVC];
     
@@ -66,7 +66,7 @@
 
 - (void)setupNaviBar {
     
-    [self setNaviBarTitle:@"添加场景"]; //设置标题
+    [self setNaviBarTitle:@"添加设备"]; //设置标题
 
     _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
    
@@ -103,17 +103,18 @@
         [[SceneManager defaultManager] editScene:_scene];
         
     }else{
-//        if (_scene.devices.count != 0) {
+         _scene = self.rightVC.scene;
+        if (_scene.devices.count != 0) {
         
             IphoneSaveNewSceneController * iphoneSaveNewScene = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneSaveNewSceneController"];
             iphoneSaveNewScene.roomId = self.roomID;
             [self.navigationController pushViewController:iphoneSaveNewScene animated:YES];
-//        }
+        }
 
-//        else{
-//            [MBProgressHUD showSuccess:@"请先选择设备"];
-//            
-//        }
+        else{
+            [MBProgressHUD showSuccess:@"请先选择设备"];
+            
+        }
     
     }
     
@@ -128,6 +129,7 @@
         case 0:{
             
             self.devices = [SQLManager getDevicesIDWithRoomID:self.roomID SubTypeName:@"灯光"];
+            self.leftVC.Array = self.devices;
 
             [self.rightVC refreshData:self.devices];
 
@@ -135,28 +137,28 @@
         }
         case 1:{
             self.devices = [SQLManager getDevicesIDWithRoomID:self.roomID SubTypeName:@"影音"];
-            
+            self.leftVC.Array = self.devices;
              [self.rightVC refreshData:self.devices];
             
             break;
         }
         case 2:{
             self.devices = [SQLManager getDevicesIDWithRoomID:self.roomID SubTypeName:@"环境"];
-            
+            self.leftVC.Array = self.devices;
                [self.rightVC refreshData:self.devices];
             
             break;
         }
         case 3:{
             self.devices = [SQLManager getDevicesIDWithRoomID:self.roomID SubTypeName:@"窗帘"];
-            
+            self.leftVC.Array = self.devices;
                [self.rightVC refreshData:self.devices];
             
             break;
         }
         case 4:{
             self.devices = [SQLManager getDevicesIDWithRoomID:self.roomID SubTypeName:@"智能单品"];
-            
+            self.leftVC.Array = self.devices;
                [self.rightVC refreshData:self.devices];
             
             break;
@@ -164,7 +166,7 @@
         case 5:{
             
             self.devices = [SQLManager getDevicesIDWithRoomID:self.roomID SubTypeName:@"安防"];
-            
+            self.leftVC.Array = self.devices;
                [self.rightVC refreshData:self.devices];
         }
             

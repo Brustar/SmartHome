@@ -23,7 +23,7 @@
 + (instancetype) defaultManager;
 
 
-- (void) addScene:(Scene *)scene withName:(NSString *)name withImage:(UIImage *)image;
+- (void) addScene:(Scene *)scene withName:(NSString *)name withImage:(UIImage *)image withiSactive:(NSInteger)isactive;
 
 - (NSData *)getRealSceneData;
 
@@ -36,7 +36,8 @@
 - (Scene *)readSceneByID:(int)sceneid;
 -(void)saveAsNewScene:(Scene *)scene withName:(NSString *)name withPic:(UIImage *)image;
 - (void)editScene:(Scene *)newScene newSceneImage:(UIImage *)newSceneImage;//给场景换图
-
+//保证newScene的ID不变只改变场景定时
+- (void)editSceneTimer:(Scene *)newScene;
 -(NSArray *)addDevice2Scene:(Scene *)scene withDeivce:(id)device withId:(int)deviceID;
 
 -(void) startScene:(int)sceneid;

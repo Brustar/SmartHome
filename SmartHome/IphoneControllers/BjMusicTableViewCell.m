@@ -52,7 +52,8 @@
         if (self.BjPowerButton.selected) {
             [self.BjPowerButton setImage:[UIImage imageNamed:@"music-red"] forState:UIControlStateSelected];
             //发送停止指令
-            NSData *data=[[DeviceInfo defaultManager] pause:self.deviceid];
+//            NSData *data=[[DeviceInfo defaultManager] pause:self.deviceid];
+             NSData * data = [[DeviceInfo defaultManager] ON:self.deviceid];
             SocketManager *sock=[SocketManager defaultManager];
             [sock.socket writeData:data withTimeout:1 tag:1];
             if (BLUETOOTH_MUSIC) {
@@ -64,7 +65,8 @@
             
             [self.BjPowerButton setImage:[UIImage imageNamed:@"music_white"] forState:UIControlStateNormal];
             //发送播放指令
-            NSData *data=[[DeviceInfo defaultManager] play:self.deviceid];
+//            NSData *data=[[DeviceInfo defaultManager] play:self.deviceid];
+              NSData * data = [[DeviceInfo defaultManager] OFF:self.deviceid];
             SocketManager *sock=[SocketManager defaultManager];
             [sock.socket writeData:data withTimeout:1 tag:1];
             
@@ -97,7 +99,7 @@
             NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
             [_scene setDevices:devices];
             
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
             
         }else{
             if (ON_IPAD) {
@@ -115,7 +117,7 @@
              NSMutableArray *devices = [NSMutableArray arrayWithObject:[NSString stringWithFormat:@"@%d",device.deviceID]];
             [devices removeObject:[NSString stringWithFormat:@"@%d",device.deviceID]];
             [_scene setDevices:devices];
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
         }
       
     }else if (sender == self.BjSlider){

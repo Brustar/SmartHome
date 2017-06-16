@@ -45,6 +45,7 @@
        [self reachNotification];
        [self setupNaviBar];
        [self creatUI];
+       self.startSceneBtn.selected = YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -63,9 +64,14 @@
 
 -(void)creatUI
 {
-    _isActive = 1;
-    _startValue = [NSMutableString string];
-    [_startValue appendString:@"01000000"];//默认开
+     _isActive = 1;
+     _startValue = [NSMutableString string];
+     [_startValue appendString:@"01000000"];//默认开
+    if (_isActive == 1) {
+        [_startValue appendString:@"01000000"];//默认开
+    }else{
+        [_startValue appendString:@"00000000"];
+    }
 
 }
 - (void)setupNaviBar {
@@ -104,7 +110,7 @@
     [_scene setValuesForKeysWithDictionary:plistDic];
 
         [[DeviceInfo defaultManager] setEditingScene:NO];
-        [[SceneManager defaultManager] addScene:_scene withName:self.sceneName.text withImage:self.selectSceneImg];
+        [[SceneManager defaultManager] addScene:_scene withName:self.sceneName.text withImage:self.selectSceneImg withiSactive:_isActive];
         UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
         IphoneSceneController * iphoneSceneVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
         [self.navigationController pushViewController:iphoneSceneVC animated:YES];
@@ -203,44 +209,15 @@
     
     self.startSceneBtn.selected = !self.startSceneBtn.selected;
     if (self.startSceneBtn.selected) {
-         [self.startSceneBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
+         [self.startSceneBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateSelected];
     }else{
-        [self.startSceneBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
+        [self.startSceneBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateNormal];
     }
-    _isActive = self.startSceneBtn.selected;
+    _isActive = !self.startSceneBtn.selected;
+    NSLog(@"_isActive:%ld",(long)_isActive);
     
-    
-    
-    NSString *url = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
-    NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
-    
-    if (auothorToken.length >0) {
-        NSDictionary *dict = @{@"token":auothorToken,
-                               @"optype":@(6),
-                               @"isactive":@(_isActive),
-                               @"starttime":_startTime,
-                               @"endtime":_endTime,
-                               @"weekvalue":_repeatString,
-                               @"startvalue":_startValue,
-                               @"scene_id":@(_scene.sceneID),
-                               };
-        HttpManager *http = [HttpManager defaultManager];
-        http.delegate = self;
-        http.tag = 1;
-        [http sendPost:url param:dict];
-    }
 }
-- (void)httpHandler:(id)responseObject tag:(int)tag
-{
-    if(tag == 1) {
-        
-        if ([responseObject[@"result"] intValue] == 0) {
-            [MBProgressHUD showSuccess:@"添加成功"];
-        }else {
-            [MBProgressHUD showSuccess:@"添加失败"];
-        }
-    }
-}
+
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];

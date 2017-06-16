@@ -69,7 +69,7 @@
             
             NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
             [_scene setDevices:devices];
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
             
             
         }else{
@@ -90,7 +90,7 @@
         
             [devices removeObject:[NSString stringWithFormat:@"@%d",device.deviceID]];
             [_scene setDevices:devices];
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
            
         }
        

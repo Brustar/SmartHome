@@ -169,7 +169,7 @@
      [self.tableView registerNib:[UINib nibWithNibName:@"PowerLightCell" bundle:nil] forCellReuseIdentifier:@"PowerLightCell"];//开关灯
 }
 - (void)setupNaviBar {
-    [self setNaviBarTitle:@"添加场景"]; //设置标题
+    [self setNaviBarTitle:@"添加设备"]; //设置标题
     _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
     _naviRightBtn.tintColor = [UIColor whiteColor];
 //    [self setNaviBarLeftBtn:_naviLeftBtn]; DeviceListTimeVC

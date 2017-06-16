@@ -315,7 +315,14 @@
 {
     return [self action:PROTOCOL_STOP deviceID:deviceID];
 }
-
+-(NSData *) ON:(NSString *)deviceID
+{
+    return [self action:PROTOCOL_ON deviceID:deviceID];
+}
+-(NSData *) OFF:(NSString *)deviceID
+{
+   return [self action:PROTOCOL_OFF deviceID:deviceID];
+}
 -(NSData *) changeVolume:(uint8_t)percent deviceID:(NSString *)deviceID
 {
     if (deviceID) {
@@ -520,6 +527,7 @@
 {
     return [self action:0x45 deviceID:deviceID];
 }
+
 
 -(NSData *) shuffle:(NSString *)deviceID
 {
