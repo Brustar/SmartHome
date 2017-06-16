@@ -173,8 +173,8 @@
     {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.contentMode = UIViewContentModeScaleAspectFit;
-        
-        [btn setTitle:ch.channel_name  forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"mode_button"] forState:UIControlStateNormal];
+        [btn setTitle:ch.channel_name forState:UIControlStateNormal];
         [[btn rac_signalForControlEvents:UIControlEventTouchUpInside]
          subscribeNext:^(id x) {
              NSData *data = [[DeviceInfo defaultManager] switchProgram:ch.channel_number deviceID:self.deviceid];
