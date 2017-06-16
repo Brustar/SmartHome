@@ -23,6 +23,8 @@
 //场景id
 @property (nonatomic,assign) int sceneID;
 
+@property (nonatomic,strong) NSArray * Array;
+
 @property (nonatomic,weak) id<IpadAddDeviceVCDelegate> delegate;
 
 @end

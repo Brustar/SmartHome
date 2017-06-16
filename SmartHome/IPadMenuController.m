@@ -54,6 +54,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
     }
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor blackColor];
+    
     UINib *cellNib = [UINib nibWithNibName:@"LeftMenuCell" bundle:nil];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:leftMenuCell];
 }
@@ -124,6 +125,10 @@ static NSString *const leftMenuCell = @"leftMenuCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section;
 {
     return 64.0f;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section {
+    view.tintColor = [UIColor clearColor];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

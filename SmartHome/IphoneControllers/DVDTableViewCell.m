@@ -39,14 +39,14 @@
         self.DVDSwitchBtn.selected = !self.DVDSwitchBtn.selected;
         if (self.DVDSwitchBtn.selected) {
             [self.DVDSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
-            data=[[DeviceInfo defaultManager] pause:self.deviceid];
+            data=[[DeviceInfo defaultManager] ON:self.deviceid];
             SocketManager *sock=[SocketManager defaultManager];
             [sock.socket writeData:data withTimeout:1 tag:1];
             
         }else{
             
             [self.DVDSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
-            data=[[DeviceInfo defaultManager] play:self.deviceid];
+            data=[[DeviceInfo defaultManager] OFF:self.deviceid];
             SocketManager *sock=[SocketManager defaultManager];
             [sock.socket writeData:data withTimeout:1 tag:1];
         }
@@ -68,7 +68,7 @@
             
             NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
             [_scene setDevices:devices];
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
             
         }else{
             [self.AddDvdBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
@@ -79,11 +79,11 @@
             
             [_scene setReadonly:NO];
 
-            NSMutableArray *devices = [NSMutableArray arrayWithObject:[NSString stringWithFormat:@"@%d",device.deviceID]];
-             [devices removeObject:[NSString stringWithFormat:@"@%d",device.deviceID]];
+            //删除当前场景的当前硬件
+            NSArray *devices = [[SceneManager defaultManager] subDeviceFromScene:_scene withDeivce:device.deviceID];
             
             [_scene setDevices:devices];
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
         }
         
     }else if (sender == self.DVDSlider){

@@ -153,7 +153,7 @@ static NSString *const airCellIdentifier = @"airCell";
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
     [_scene setDevices:devices];
     
-    [[SceneManager defaultManager] addScene:_scene withName:@"" withImage:[UIImage imageNamed:@""]];
+    [[SceneManager defaultManager] addScene:_scene withName:@"" withImage:[UIImage imageNamed:@""] withiSactive:0];
 }
 
 #pragma mark - TCP recv delegate

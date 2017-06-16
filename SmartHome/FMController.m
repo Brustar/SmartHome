@@ -173,8 +173,8 @@
     {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.contentMode = UIViewContentModeScaleAspectFit;
-        
-        [btn setTitle:ch.channel_name  forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"mode_button"] forState:UIControlStateNormal];
+        [btn setTitle:ch.channel_name forState:UIControlStateNormal];
         [[btn rac_signalForControlEvents:UIControlEventTouchUpInside]
          subscribeNext:^(id x) {
              NSData *data = [[DeviceInfo defaultManager] switchProgram:ch.channel_number deviceID:self.deviceid];
@@ -367,7 +367,7 @@
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
     [_scene setDevices:devices];
     
-    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""]];
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
     
 }
 //收藏当前频道

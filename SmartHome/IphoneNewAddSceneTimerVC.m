@@ -153,8 +153,17 @@
     IpadDeviceListViewController * ipadDeviceListVC = [[IpadDeviceListViewController alloc] init];
     if ([lastVC isKindOfClass:[ipadDeviceListVC class]]) {
         
+        self.scene.schedules = @[self.schedule];
+//        [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
+        
+        NSDictionary *dic = @{
+                              @"startDay":self.starTimeLabel.text,
+                              @"endDay":self.endTimeLabel.text,
+                              @"repeat":self.RepetitionLable.text,
+                              @"weekArray":_weekArray
+                              };
+        [NC postNotificationName:@"AddSceneOrDeviceTimerNotification" object:nil userInfo:dic];
         [DeviceInfo defaultManager].isPhotoLibrary = NO;
-
         Scene *scene = [[Scene alloc] initWhithoutSchedule];
         scene.sceneID = self.sceneID;
         scene.roomID = self.roomid;
@@ -165,7 +174,7 @@
     }else{
         
         self.scene.schedules = @[self.schedule];
-        [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
+        [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
         
         NSDictionary *dic = @{
                               @"startDay":self.starTimeLabel.text,
@@ -303,7 +312,7 @@
     
     self.schedule.weekDays = weekValue;
     
-    [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""]];
+    [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
 
 }
 #pragma mark -- TenClockDelegate

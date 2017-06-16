@@ -76,7 +76,11 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 
     [view addSubview:colorPicker];
     if (ON_IPAD) {
-        view.transform = CGAffineTransformMakeRotation(-M_PI_2);
+        if ([[UIDevice currentDevice] orientation]==UIDeviceOrientationLandscapeRight) {
+            view.transform = CGAffineTransformMakeRotation(M_PI_2);
+        }else{
+            view.transform = CGAffineTransformMakeRotation(-M_PI_2);
+        }
     }
     [view show];
 }
@@ -201,7 +205,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     
     NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:scene withDeivce:device withId:device.deviceID];
     [scene setDevices:devices];
-    [[SceneManager defaultManager] addScene:scene withName:nil withImage:[UIImage imageNamed:@""]];
+    [[SceneManager defaultManager] addScene:scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
 }
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
@@ -218,7 +222,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
                 self.switcher.isOn = proto.action.state;
             }else if(proto.action.state == 0x1A){
                 int brightness_f = proto.action.RValue;
-                float degree = M_PI*brightness_f/MAX_ROTATE_DEGREE;
+                float degree = M_PI*brightness_f/100;
                 self.tranformView.transform = CGAffineTransformMakeRotation(degree);
             }else if(proto.action.state == 0x1B){
                 self.base.backgroundColor=[UIColor colorWithRed:proto.action.RValue/255.0 green:proto.action.G/255.0  blue:proto.action.B/255.0  alpha:1];

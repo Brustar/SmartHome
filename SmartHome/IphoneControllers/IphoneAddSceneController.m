@@ -256,7 +256,7 @@
         Scene *scene = [[Scene alloc]initWhithoutSchedule];
         [scene setValuesForKeysWithDictionary:plistDic];
         [[DeviceInfo defaultManager] setEditingScene:NO];
-        [[SceneManager defaultManager] addScene:scene withName:self.sceneSubName.text withImage:self.selectSceneImg];
+        [[SceneManager defaultManager] addScene:scene withName:self.sceneSubName.text withImage:self.selectSceneImg withiSactive:0];
         [self.navigationController popViewControllerAnimated:YES];
 }
 
