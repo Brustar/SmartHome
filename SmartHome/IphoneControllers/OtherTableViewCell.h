@@ -21,6 +21,7 @@
 @property (nonatomic,assign) int roomID;
 @property (strong, nonatomic) Scene *scene;
 @property (nonatomic, assign) id<OtherTableViewCellDelegate>delegate;
+-(void) query:(NSString *)deviceid;
 
 @end
 
