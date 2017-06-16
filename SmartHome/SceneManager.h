@@ -38,7 +38,7 @@
 - (void)editScene:(Scene *)newScene newSceneImage:(UIImage *)newSceneImage;//给场景换图
 
 -(NSArray *)addDevice2Scene:(Scene *)scene withDeivce:(id)device withId:(int)deviceID;
-
+-(NSArray *)subDeviceFromScene:(Scene *)scene withDeivce:(int)deviceID;
 -(void) startScene:(int)sceneid;
 -(void) poweroffAllDevice:(int)sceneid;
 
