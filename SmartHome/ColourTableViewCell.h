@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lable;
 @property (weak, nonatomic) IBOutlet UIView *colourView;
 @property (weak, nonatomic) IBOutlet UISwitch *lightSwitch;
-@property (nonatomic, assign) int deviceID;
+@property (nonatomic, assign) int deviceid;
 @property (nonatomic, assign) id<ColourTableViewCellDelegate> delegate;
 - (IBAction)lightSwitchChanged:(id)sender;
 

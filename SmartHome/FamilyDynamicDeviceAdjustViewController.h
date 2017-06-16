@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIView *monitorView;
 @property (weak, nonatomic) IBOutlet UITableView *deviceTableView;
 
-@property (nonatomic, strong) NSString *deviceID;
+@property (nonatomic, strong) NSString *deviceid;
 @property (nonatomic, strong) NSString *cameraURL;
 @property (nonatomic, assign) NSInteger roomID;
 @property (nonatomic, strong) NSString *roomName;

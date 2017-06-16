@@ -13,7 +13,7 @@
 @interface IphoneAddSceneController : CustomViewController
 @property (nonatomic,assign) int roomId;
 @property(nonatomic,assign) int sceneID;
-@property(nonatomic,assign) int deviceID;
+//@property(nonatomic,assign) int deviceID;
 //@property(nonatomic,assign) int roomID;
 @property (nonatomic,assign) BOOL isFavor;
 @property (nonatomic,strong) FixTimeListCell * cell;

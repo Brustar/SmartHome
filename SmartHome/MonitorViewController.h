@@ -16,7 +16,7 @@
 @protocol MonitorViewControllerDelegate;
 
 @interface MonitorViewController : UIViewController
-@property (nonatomic, strong) NSString *deviceID;
+@property (nonatomic, strong) NSString *deviceid;
 @property (nonatomic, strong) NSString *cameraURL;
 @property (nonatomic, strong) NSString *roomName;
 @property (weak, nonatomic) IBOutlet UIImageView *cameraImgView;
