@@ -64,7 +64,7 @@
         vc.adjustBtn.tag = i;
         vc.cameraURL = cameraURL;
         vc.roomName = roomName;
-        vc.deviceID = [_cameraIDArray[i] stringValue];
+        vc.deviceid = [_cameraIDArray[i] stringValue];
         vc.view.frame = CGRectMake(0, gap*(i+1) + i*itemHeight, FW(self.cameraList), itemHeight);
         [self.cameraList addSubview:vc.view];
         [self addChildViewController:vc];
@@ -105,7 +105,7 @@
     vc.roomID = rID;
     vc.roomName = roomName;
     vc.cameraURL = cameraURL;
-    vc.deviceID = [_cameraIDArray[index] stringValue];
+    vc.deviceid = [_cameraIDArray[index] stringValue];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
