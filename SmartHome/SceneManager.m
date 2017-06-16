@@ -55,8 +55,7 @@
         NSString *imgFileName = [NSString stringWithFormat:@"%@.png", str];
 
         //同步云端
-        
-        
+    
         NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
         NSString *scenePath = [[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
         

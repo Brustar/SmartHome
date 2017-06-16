@@ -86,9 +86,8 @@
             
             [_scene setReadonly:NO];
 
-             NSMutableArray *devices = [NSMutableArray arrayWithObject:[NSString stringWithFormat:@"@%d",device.deviceID]];
-        
-            [devices removeObject:[NSString stringWithFormat:@"@%d",device.deviceID]];
+            //删除当前场景的当前硬件
+            NSArray *devices = [[SceneManager defaultManager] subDeviceFromScene:_scene withDeivce:device.deviceID];
             [_scene setDevices:devices];
             [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
            
