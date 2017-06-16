@@ -309,7 +309,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-     UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+     //UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
      RoomModel *model = self.AllRooms[indexPath.section];
      Device *devInfo = model.eqinfoList[indexPath.row];
      self.deviceid = [NSString stringWithFormat:@"%d",devInfo.eID];

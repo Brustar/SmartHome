@@ -514,7 +514,7 @@
                             
                             [self.planeGraph addSubview:mediaIcon];
                             
-                            temp_origin_x += (iconWidth + gap);
+                            //temp_origin_x += (iconWidth + gap);
                         }else {
                             UIView *lastIcon = [self.planeGraph viewWithTag:999];
                             [lastIcon removeFromSuperview];
