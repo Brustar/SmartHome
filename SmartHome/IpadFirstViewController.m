@@ -123,8 +123,8 @@
     if (unread == 0) {
         self.messageLabel2.text = [NSString stringWithFormat:@"%@" , @"暂无新消息"];
         self.messageLabel1.text = @"";
-        self.Icone1Image.hidden = YES;
-        self.IconeImage2.hidden = YES;
+//        self.Icone1Image.hidden = YES;
+//        self.IconeImage2.hidden = YES;
         
     }else{
         self.Icone1Image.hidden = NO;
@@ -560,6 +560,16 @@
         self.messageLabel1.text = self.messageLabel2.text;
         self.messageLabel2.text =[NSString stringWithFormat:@"%@ : %@" , nickname, tip];
         self.messageLabel.text = [NSString stringWithFormat:@"%d" ,unread<0?0:unread];
+        if (unread == 0) {
+            self.messageLabel2.text = [NSString stringWithFormat:@"%@" , @"暂无新消息"];
+            self.messageLabel1.text = @"";
+            self.Icone1Image.hidden = YES;
+            self.IconeImage2.hidden = YES;
+            
+        }else{
+            self.Icone1Image.hidden = NO;
+            self.IconeImage2.hidden = NO;
+        }
         self.Icone1Image.image = self.IconeImage2.image;
         [self.IconeImage2 sd_setImageWithURL:[NSURL URLWithString:protrait] placeholderImage:[UIImage imageNamed:@"logo"] options:SDWebImageRetryFailed];
     });

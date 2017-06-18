@@ -269,12 +269,12 @@
                       {
                           NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%ld,%d,'%@',%d,null,null,'%ld')",scene.sceneID,name,roomName,imgUrl,(long)scene.roomID,2,@"0",0,[[DeviceInfo defaultManager] masterID]];
                           BOOL result = [db executeUpdate:sql];
-                          if(result)
-                          {   [MBProgressHUD showSuccess:@"新增成功"];
+                          if (result) {
+                              [MBProgressHUD showError:@"新增成功"];
                               NSLog(@"新增场景，入库成功！");
-                          }else {
+                          }else{
                               [MBProgressHUD showError:@"新增失败"];
-                              NSLog(@"新增场景，入库失败！");
+                               NSLog(@"新增场景，入库失败！");
                           }
                       }
                       [db close];
