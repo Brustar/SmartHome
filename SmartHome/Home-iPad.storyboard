@@ -336,6 +336,7 @@
                         <outlet property="messageLabel2" destination="KSz-mK-q8d" id="xXr-wu-fUD"/>
                         <outlet property="remindLabel" destination="Vqg-Tg-fzN" id="hf3-dI-YAx"/>
                         <outlet property="temperatureLabel" destination="dtO-gh-eVe" id="Yyp-hE-3D9"/>
+                        <outlet property="threeBtnleading" destination="3bv-2h-qtS" id="iH6-cc-SGI"/>
                         <outlet property="weekDayLabel" destination="H4Q-Fx-aZX" id="aQm-eg-VdJ"/>
                     </connections>
                 </viewController>

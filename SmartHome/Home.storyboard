@@ -434,6 +434,7 @@
                         <outlet property="playerBarBtn" destination="pPD-b2-xtb" id="QFy-b3-4KP"/>
                         <outlet property="socialView" destination="cWZ-EQ-wKU" id="b3i-Qy-vfC"/>
                         <outlet property="subView" destination="wLc-g5-vRN" id="PJ6-Yl-aUX"/>
+                        <outlet property="threeBtnLeadingConstraint" destination="KAO-LV-DEw" id="vjY-A8-TPW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hqu-Mb-ya2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -601,7 +602,7 @@
         <image name="circular3" width="46" height="46"/>
         <image name="circular4" width="46" height="46"/>
         <image name="circular5" width="33" height="33"/>
-        <image name="close_white" width="25" height="25"/>
+        <image name="close_white" width="41" height="40"/>
         <image name="line1" width="267" height="2"/>
         <image name="line2" width="16" height="16"/>
         <image name="music_white" width="22" height="19"/>
