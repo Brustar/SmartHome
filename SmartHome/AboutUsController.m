@@ -93,17 +93,17 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    NSString *addr = [NSString stringWithFormat:@"%@article.aspx",[IOManager httpAddr] ];
     
     if (indexPath.row == 0) {
         
-        WebManager * web = [[WebManager alloc] initWithUrl:@"http://115.28.151.85:8082/article.aspx" title:@"版本说明"];
+        WebManager * web = [[WebManager alloc] initWithUrl:addr title:@"版本说明"];
         web.isShowInSplitView = YES;
         [self.navigationController pushViewController:web animated:YES];
         
     }if (indexPath.row == 1) {
         
-        WebManager * web = [[WebManager alloc] initWithUrl:@"http://115.28.151.85:8082/article.aspx" title:@"隐私与安全政策"];
+        WebManager * web = [[WebManager alloc] initWithUrl:addr title:@"隐私与安全政策"];
         web.isShowInSplitView = YES;
         [self.navigationController pushViewController:web animated:YES];
         

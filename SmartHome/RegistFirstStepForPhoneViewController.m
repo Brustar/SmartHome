@@ -149,7 +149,7 @@
 
 //加载到服务协议h5界面
 - (IBAction)serviceAgreement:(id)sender {
-    [WebManager show:@"http://115.28.151.85:8082/article.aspx?articleid=1"];
+    [WebManager show:[NSString stringWithFormat:@"%@article.aspx?articleid=1",[IOManager httpAddr]]];
     
     [self performSegueWithIdentifier:@"webViewManger" sender:self];
 }

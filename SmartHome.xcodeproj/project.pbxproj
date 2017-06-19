@@ -286,7 +286,6 @@
 		CDF78C581E9CB24600F8B20C /* CustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF78C571E9CB24600F8B20C /* CustomViewController.m */; };
 		CDF78C5A1E9CC3C500F8B20C /* NaviBarBg.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF78C591E9CC3C500F8B20C /* NaviBarBg.png */; };
 		CDF90B411E1E425D009043B9 /* RoomDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF90B401E1E425D009043B9 /* RoomDetailViewController.m */; };
-		CDF90B431E2F0676009043B9 /* realScene.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF90B421E2F0676009043B9 /* realScene.plist */; };
 		CDF90B451E2F4B14009043B9 /* planeScene.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF90B441E2F4B14009043B9 /* planeScene.plist */; };
 		CDFB9DF21E5DCB4D00BFECCE /* SceneTimerList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDFB9DF11E5DCB4D00BFECCE /* SceneTimerList.plist */; };
 		CDFB9DF81E641F8E00BFECCE /* DeviceTimerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFB9DF71E641F8E00BFECCE /* DeviceTimerInfo.m */; };
@@ -968,7 +967,6 @@
 		CDF78C591E9CC3C500F8B20C /* NaviBarBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NaviBarBg.png; sourceTree = "<group>"; };
 		CDF90B3F1E1E425D009043B9 /* RoomDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomDetailViewController.h; sourceTree = "<group>"; };
 		CDF90B401E1E425D009043B9 /* RoomDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomDetailViewController.m; sourceTree = "<group>"; };
-		CDF90B421E2F0676009043B9 /* realScene.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = realScene.plist; sourceTree = "<group>"; };
 		CDF90B441E2F4B14009043B9 /* planeScene.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = planeScene.plist; sourceTree = "<group>"; };
 		CDFB9DF11E5DCB4D00BFECCE /* SceneTimerList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SceneTimerList.plist; sourceTree = "<group>"; };
 		CDFB9DF61E641F8E00BFECCE /* DeviceTimerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceTimerInfo.h; sourceTree = "<group>"; };
@@ -1429,7 +1427,6 @@
 				CDF389251E30A31300657C8B /* energylist.plist */,
 				CDF389231E306D2400657C8B /* maintaininfo.plist */,
 				CDF389211E305B4400657C8B /* breakdownlist.plist */,
-				CDF90B421E2F0676009043B9 /* realScene.plist */,
 				CDF90B441E2F4B14009043B9 /* planeScene.plist */,
 				0FBEFE2B1D24F3100084244F /* PrefixHeader.pch */,
 				0FAF98BC1CE466B0009BDBB5 /* SmartHome.entitlements */,
@@ -2607,7 +2604,7 @@
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = C8JS65F469;
 						LastSwiftMigration = 0830;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -2659,7 +2656,6 @@
 				2EBABC881E839F2E0093EF3A /* DVDTableViewCell.xib in Resources */,
 				2E9EA8811E8D0DC200A1AA63 /* iPhone.storyboard in Resources */,
 				CDF389341E30F27500657C8B /* userHabitList.plist in Resources */,
-				CDF90B431E2F0676009043B9 /* realScene.plist in Resources */,
 				2E9F4BEC1EE00F580039BFE9 /* IpadTVCell.xib in Resources */,
 				CD78A8301E3379C200060466 /* 255_221.plist in Resources */,
 				CD7DDA0D1E81298600638DB3 /* loginButton@2x.png in Resources */,
@@ -3450,11 +3446,11 @@
 				CODE_SIGN_ENTITLEMENTS = SmartHome/SmartHome.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: shi zi (75UU58685N)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: shi zi (75UU58685N)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = C8JS65F469;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3483,8 +3479,8 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "62cbec92-fd5d-4e6b-afb6-b4eb75285b96";
+				PROVISIONING_PROFILE_SPECIFIER = profileDis2.0;
 				SWIFT_OBJC_BRIDGING_HEADER = "SmartHome-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -3504,10 +3500,10 @@
 				CODE_SIGN_ENTITLEMENTS = SmartHome/SmartHome.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: shi zi (C8JS65F469)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: shi zi (C8JS65F469)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: shi zi (C8JS65F469)";
 				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = C8JS65F469;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3536,8 +3532,8 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "62cbec92-fd5d-4e6b-afb6-b4eb75285b96";
+				PROVISIONING_PROFILE_SPECIFIER = profileDis2.0;
 				SWIFT_OBJC_BRIDGING_HEADER = "SmartHome-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
