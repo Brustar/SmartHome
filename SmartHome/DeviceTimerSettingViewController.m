@@ -517,6 +517,7 @@
                 powerCell.backgroundColor = [UIColor clearColor];
                 powerCell.powerBtnConstraint.constant = 10;
                 powerCell.powerLightNameLabel.text = self.device.name;
+                powerCell.powerLightNameLabel.font = [UIFont systemFontOfSize:16];
                 powerCell.addPowerLightBtn.hidden = YES;
                 powerCell.deviceid = [NSString stringWithFormat:@"%d", self.device.eID];
                 powerCell.powerLightBtn.selected = self.device.power;//开关状态
@@ -529,6 +530,7 @@
                 cell.AddLightBtn.hidden = YES;
                 cell.LightConstraint.constant = 10;
                 cell.NewLightNameLabel.text = self.device.name;
+                cell.NewLightNameLabel.font = [UIFont systemFontOfSize:16];
                 cell.NewLightSlider.continuous = NO;
                 cell.deviceid = [NSString stringWithFormat:@"%d", self.device.eID];
                 cell.NewLightPowerBtn.selected = self.power;
@@ -543,6 +545,7 @@
                 cell.AddColourLightBtn.hidden = YES;
                 cell.ColourLightConstraint.constant = 10;
                 cell.colourNameLabel.text = self.device.name;
+                cell.colourNameLabel.font = [UIFont systemFontOfSize:16];
                 cell.colourSlider.continuous = NO;
                 cell.colourSlider.hidden = NO;
                 cell.supimageView.hidden = NO;
@@ -562,6 +565,7 @@
             curtainCell.curtainContraint.constant = 10;
             curtainCell.roomID = (int)self.roomID;
             curtainCell.label.text = self.device.name;
+            curtainCell.label.font = [UIFont systemFontOfSize:16];
             curtainCell.deviceid = [NSString stringWithFormat:@"%d", self.device.eID];
             curtainCell.open.selected = self.power;
             curtainCell.slider.value = (float)self.position/100.0f;
@@ -575,6 +579,7 @@
             aireCell.AireConstraint.constant = 10;
             aireCell.roomID = (int)self.roomID;
             aireCell.AireNameLabel.text = self.device.name;
+            aireCell.AireNameLabel.font = [UIFont systemFontOfSize:16];
             aireCell.deviceid = [NSString stringWithFormat:@"%d", self.device.eID];
             aireCell.AireSwitchBtn.selected = self.power;
             aireCell.AireSlider.value = self.temperature;
@@ -587,6 +592,7 @@
             BjMusicCell.AddBjmusicBtn.hidden = YES;
             BjMusicCell.BJmusicConstraint.constant = 10;
             BjMusicCell.BjMusicNameLb.text = self.device.name;
+            BjMusicCell.BjMusicNameLb.font = [UIFont systemFontOfSize:16];
             BjMusicCell.BjPowerButton.selected = self.power;
             BjMusicCell.BjSlider.value = (float)self.volume/100.0f;
             return BjMusicCell;
@@ -599,6 +605,7 @@
                 dvdCell.AddDvdBtn.hidden = YES;
                 dvdCell.DVDConstraint.constant = 10;
                 dvdCell.DVDNameLabel.text = self.device.name;
+                dvdCell.DVDNameLabel.font = [UIFont systemFontOfSize:16];
                 dvdCell.DVDSwitchBtn.selected = self.device.power;//开关
                 dvdCell.deviceid = [NSString stringWithFormat:@"%d", self.device.eID];
                 return dvdCell;
@@ -611,6 +618,7 @@
             dvdCell.AddDvdBtn.hidden = YES;
             dvdCell.DVDConstraint.constant = 10;
             dvdCell.DVDNameLabel.text = self.device.name;
+            dvdCell.DVDNameLabel.font = [UIFont systemFontOfSize:16];
             dvdCell.DVDSwitchBtn.selected = self.power;
             dvdCell.DVDSlider.value = (float)self.volume/100.0f;
             return dvdCell;
@@ -623,6 +631,7 @@
             FMCell.AddFmBtn.hidden = YES;
             FMCell.FMLayouConstraint.constant = 10;
             FMCell.FMNameLabel.text = self.device.name;
+            FMCell.FMNameLabel.font = [UIFont systemFontOfSize:16];
             FMCell.FMSwitchBtn.selected = self.power;
             FMCell.FMSlider.value = (float)self.volume/100.0f;
             return FMCell;
@@ -634,6 +643,7 @@
             ScreenCell.AddScreenCurtainBtn.hidden = YES;
             ScreenCell.ScreenCurtainConstraint.constant = 10;
             ScreenCell.ScreenCurtainLabel.text = self.device.name;
+            ScreenCell.ScreenCurtainLabel.font = [UIFont systemFontOfSize:16];
             
             return ScreenCell;
         }else if (self.device.hTypeId == 16) { //投影仪(只有开关)
@@ -644,6 +654,7 @@
             otherCell.AddOtherBtn.hidden = YES;
             otherCell.OtherConstraint.constant = 10;
             otherCell.NameLabel.text = self.device.name;
+            otherCell.NameLabel.font = [UIFont systemFontOfSize:16];
             otherCell.OtherSwitchBtn.selected = self.power;
             return otherCell;
         }else if (self.device.hTypeId == 11) { //电视（以前叫机顶盒）
@@ -655,6 +666,7 @@
                 tvCell.AddTvDeviceBtn.hidden = YES;
                 tvCell.TVConstraint.constant = 10;
                 tvCell.TVNameLabel.text = self.device.name;
+                tvCell.TVNameLabel.font = [UIFont systemFontOfSize:16];
                 tvCell.TVSwitchBtn.selected = self.device.power;//开关
                 tvCell.deviceid = [NSString stringWithFormat:@"%d", self.device.eID];
                 return tvCell;
@@ -667,6 +679,7 @@
             tvCell.AddTvDeviceBtn.hidden = YES;
             tvCell.TVConstraint.constant = 10;
             tvCell.TVNameLabel.text = self.device.name;
+            tvCell.TVNameLabel.font = [UIFont systemFontOfSize:16];
             tvCell.TVSwitchBtn.selected = self.power;
             tvCell.TVSlider.value = (float)self.volume/100.0f;
             return tvCell;
@@ -687,6 +700,7 @@
             otherCell.AddOtherBtn.hidden = YES;
             otherCell.OtherConstraint.constant = 10;
             otherCell.NameLabel.text = self.device.name;
+            otherCell.NameLabel.font = [UIFont systemFontOfSize:16];
             otherCell.OtherSwitchBtn.selected = self.power;
             return otherCell;
         }else { //其他类型: 智能浇花，智能投食，推窗器
@@ -697,6 +711,7 @@
             otherCell.AddOtherBtn.hidden = YES;
             otherCell.OtherConstraint.constant = 10;
             otherCell.NameLabel.text = self.device.name;
+            otherCell.NameLabel.font = [UIFont systemFontOfSize:16];
             otherCell.OtherSwitchBtn.selected = self.power;
             return otherCell;
         }
@@ -756,7 +771,11 @@
         
         
         //启动按钮
-        UIButton *activeBtn = [[UIButton alloc] initWithFrame:CGRectMake(UI_SCREEN_WIDTH*3/4-52-16, 8, 52, 34)];
+        CGFloat width = UI_SCREEN_WIDTH;
+        if (ON_IPAD) {
+            width = UI_SCREEN_WIDTH*3/4;
+        }
+        UIButton *activeBtn = [[UIButton alloc] initWithFrame:CGRectMake(width-52-16, 8, 52, 34)];
         activeBtn.selected = self.isActive;
         [activeBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
         [activeBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_off"] forState:UIControlStateNormal];
