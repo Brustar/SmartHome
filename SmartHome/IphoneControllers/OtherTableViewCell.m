@@ -20,6 +20,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    [IOManager removeTempFile];
+    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     [self.OtherSwitchBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.AddOtherBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.OtherSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
