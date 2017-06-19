@@ -501,7 +501,7 @@
         
         if(result.integerValue == 0) { //成功
             
-            [SQLManager updateScenePic:[NSString stringWithFormat:@"http://115.28.151.85:8082/UploadFiles/images/scene/scene_%d.png",newScene.sceneID] sceneID:newScene.sceneID];
+            [SQLManager updateScenePic:[NSString stringWithFormat:@"%@UploadFiles/images/scene/scene_%d.png",[IOManager httpAddr],newScene.sceneID] sceneID:newScene.sceneID];
             [MBProgressHUD showSuccess:@"保存成功"];
         }else { //失败
             [MBProgressHUD showError:msg];
