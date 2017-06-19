@@ -149,7 +149,7 @@
 {
     NSLog(@"socket连接成功,host:%@,port:%d",host,port);
     DeviceInfo *device=[DeviceInfo defaultManager];
-    if ([host isEqualToString:[IOManager tcpAddr]] && port == device.masterPort) {
+    if (port == device.masterPort) {
         device.connectState=outDoor;
     }else{
         device.connectState=atHome;

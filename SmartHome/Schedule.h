@@ -19,7 +19,7 @@
 @property (nonatomic,assign) int interval;
 
 @property(nonatomic, strong) NSString* startDate;
-@property(nonatomic, strong) NSString* endDate;
+//@property(nonatomic, strong) NSString* endDate;
 
 @property(nonatomic, strong) NSString* startTime;
 @property(nonatomic, strong) NSString* endTime;
