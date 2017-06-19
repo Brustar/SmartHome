@@ -569,7 +569,7 @@
                 schedule.startTime=sch[@"startTime"];
                 schedule.endTime=sch[@"endTime"];
                 schedule.startDate = sch[@"startDay"];
-                schedule.endDate = sch[@"endDay"];
+                //schedule.endDate = sch[@"endDay"];
                 //schedule.deviceID=[sch[@"deviceID"] intValue];
                 //schedule.openToValue=[sch[@"openTovalue"] intValue];
                 //schedule.astronomicalStartID=[sch[@"astronomicalStartID"] intValue];

@@ -368,7 +368,7 @@
                 //schedule.astronomicalEndID = self.schedule.astronomicalEndID;
                 schedule.interval = self.schedule.interval;
                 schedule.startDate = self.schedule.startDate;
-                schedule.endDate = self.schedule.endDate;
+                //schedule.endDate = self.schedule.endDate;
                 schedule.startTime = self.schedule.startTime;
                 schedule.endTime = self.schedule.endTime;
                 //schedule.openToValue = self.schedule.openToValue;
@@ -750,7 +750,7 @@
                     //schedule.astronomicalEndID = self.schedule.astronomicalEndID;
                     schedule.interval = self.schedule.interval;
                     schedule.startDate = self.schedule.startDate;
-                    schedule.endDate = self.schedule.endDate;
+                    //schedule.endDate = self.schedule.endDate;
                     schedule.startTime = self.schedule.startTime;
                     schedule.endTime = self.schedule.endTime;
                     //schedule.openToValue = self.schedule.openToValue;
@@ -803,7 +803,7 @@
             BOOL compareResult = [prettyDate laterDate:self.starDataBtn.titleLabel.text];
         if (compareResult) {
             [self.endDataBtn setTitle:prettyDate forState:UIControlStateNormal];
-            self.schedule.endDate = prettyDate;
+            //self.schedule.endDate = prettyDate;
             self.clickFixTimeBtn.tintColor = [UIColor redColor];
             self.isSceneSetDate = YES;
         }else {
@@ -829,7 +829,7 @@
                     //schedule.astronomicalEndID = self.schedule.astronomicalEndID;
                     schedule.interval = self.schedule.interval;
                     schedule.startDate = self.schedule.startDate;
-                    schedule.endDate = self.schedule.endDate;
+                    //schedule.endDate = self.schedule.endDate;
                     schedule.startTime = self.schedule.startTime;
                     schedule.endTime = self.schedule.endTime;
                     //schedule.openToValue = self.schedule.openToValue;
