@@ -27,6 +27,8 @@
 @property (nonatomic, readonly) UIButton *naviMiddletBtn;
 @property(nonatomic, strong) AFNetworkReachabilityManager *afNetworkReachabilityManager;
 @property (weak, nonatomic) IBOutlet UIView *SupView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *threeBtnLeadingConstraint;
+
 @property (nonatomic, strong) NowMusicController * nowMusicController;
 @property (nonatomic, strong) HostIDSController *hostListViewController;//主机列表
 @property (weak, nonatomic) IBOutlet UIView *CoverView;

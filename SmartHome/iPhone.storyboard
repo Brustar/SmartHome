@@ -1034,7 +1034,7 @@
     </scenes>
     <resources>
         <image name="Voice" width="11" height="19"/>
-        <image name="alarm clock1" width="25" height="25"/>
+        <image name="alarm clock1" width="40" height="40"/>
         <image name="background" width="375" height="667"/>
         <image name="close2" width="25" height="25"/>
         <image name="delete" width="32" height="32"/>

@@ -504,6 +504,7 @@
         [_ThreeBtn setTitle:@"" forState:UIControlStateNormal];
         _firstBtn.hidden = YES;
         _TwoBtn.hidden = YES;
+        self.threeBtnLeadingConstraint.constant = -45;
     }
 }
 

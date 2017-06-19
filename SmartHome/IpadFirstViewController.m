@@ -43,6 +43,8 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *IconeImage2;//第二个消息的头像
 @property (weak, nonatomic) IBOutlet UIImageView *DUPImageView;//闪烁提醒的图标
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *threeBtnleading;
+
 @property (nonatomic,assign) NSTimer *scheculer;
 @end
 
@@ -267,6 +269,7 @@
         _firstBtn.hidden = YES;
         _TwoBtn.hidden = YES;
         _ThreeBtn.hidden = NO;
+        self.threeBtnleading.constant = -60;
         
     }
 }
