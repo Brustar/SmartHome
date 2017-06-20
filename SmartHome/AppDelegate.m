@@ -297,6 +297,7 @@
     }
     //注册微信
     [WXApi registerApp:@"wxc5cab7f2a6ed90b3" withDescription:@"EcloudApp2.1"];
+    [[DeviceInfo defaultManager] deviceGenaration];
     [[DeviceInfo defaultManager] initConfig];
     
     [self loadingLaunchingViewController];
