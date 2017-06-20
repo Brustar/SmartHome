@@ -289,8 +289,13 @@
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    //注册微信
+    [WXApi registerApp:@"wxc5cab7f2a6ed90b3" withDescription:@"EcloudApp2.1"];
+    [[DeviceInfo defaultManager] initConfig];
     [self loadingLaunchingViewController];
     [self performSelector:@selector(loadingLoginViewController) withObject:nil afterDelay:6];//动画启动页执行完毕后，执行登录／tabbar页面
+    [[RCIM sharedRCIM] initWithAppKey:@"8brlm7uf8tsb3"];
+    [RCIM sharedRCIM].userInfoDataSource = [RCDataManager shareManager];
     return [WXApi handleOpenURL:url delegate:[WeChatPayManager sharedInstance]];
 }
 
