@@ -26,7 +26,7 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+
     //注册微信
     [WXApi registerApp:@"wxc5cab7f2a6ed90b3" withDescription:@"EcloudApp2.1"];
     
@@ -289,8 +289,10 @@
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    
-   return  [WXApi handleOpenURL:url delegate:[WeChatPayManager sharedInstance]];
+
+    [self loadingLaunchingViewController];
+    [self performSelector:@selector(loadingLoginViewController) withObject:nil afterDelay:6];//动画启动页执行完毕后，执行登录／tabbar页面
+    return [WXApi handleOpenURL:url delegate:[WeChatPayManager sharedInstance]];
 
 }
 

@@ -18,7 +18,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-   
+    [IOManager removeTempFile];
+    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     self.AireSlider.minimumValue = 16;
     self.AireSlider.maximumValue = 30;
     self.AireSlider.value = 1;

@@ -19,6 +19,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
+    [IOManager removeTempFile];
+    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     [self.AddScreenCurtainBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.ScreenCurtainBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.UPBtn setImage:[UIImage imageNamed:@"icon_up_prd"] forState:UIControlStateHighlighted];

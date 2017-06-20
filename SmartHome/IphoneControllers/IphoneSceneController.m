@@ -778,7 +778,9 @@ static NSString * const CYPhotoId = @"photo";
                 [MBProgressHUD showError:responseObject[@"msg"]];
             }
             
-            [self.navigationController popViewControllerAnimated:YES];
+            UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+            IphoneSceneController * iphonesceneVC = [storyBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
+            [self.navigationController pushViewController:iphonesceneVC animated:YES];
         }
     }else if (tag == 2) { //启动／停止 场景定时
         if([responseObject[@"result"] intValue] == 0) {

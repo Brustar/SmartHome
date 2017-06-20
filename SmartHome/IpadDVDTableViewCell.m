@@ -18,6 +18,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
+    [IOManager removeTempFile];
+    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     [self.PreviousBtn setImage:[UIImage imageNamed:@"ipad-icon_lt_prd"] forState:UIControlStateHighlighted];
     [self.nextBtn setImage:[UIImage imageNamed:@"ipad-icon_rt_prd"] forState:UIControlStateHighlighted];
     [self.DVDSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];

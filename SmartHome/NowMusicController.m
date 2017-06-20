@@ -376,7 +376,7 @@
 {
     RoomModel *model = self.AllRooms[bbt.tag];
     self.seleteRow = bbt.tag;
-    if (self.seleteRow>bbt.tag) {
+//    if (self.seleteRow>bbt.tag) {
         Device *devInfo = model.eqinfoList[self.seleteRow];
         self.deviceid = [NSString stringWithFormat:@"%d",devInfo.eID];
         for (int i = 0; i < model.eqinfoList.count; i ++) {
@@ -385,7 +385,7 @@
             SocketManager *sock=[SocketManager defaultManager];
             [sock.socket writeData:data withTimeout:1 tag:1];
         }
-    }
+//    }
    
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

@@ -126,6 +126,7 @@
     NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
     BOOL ret = [sceneData writeToFile:scenePath atomically:YES];
     NSAssert(ret,@"写文件失败");
+    
 }
 
 + (void) writeScene:(NSString *)sceneFile scene:(id)sceneData
@@ -135,6 +136,7 @@
     BOOL ret = [dic writeToFile:scenePath atomically:YES];
 
     NSAssert(ret,@"写文件失败");
+    
 }
 
 + (void) writeJpg:(UIImage *)jpg path:(NSString *)jpgPath
