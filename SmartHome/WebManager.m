@@ -177,7 +177,7 @@
     
     if ([request.URL.absoluteString hasPrefix:@"wxpay"]) {   //微信支付指令
         
-        if ([WXApi isWXAppInstalled] && [WXApi isWXAppSupportApi]) {
+        //if ([WXApi isWXAppInstalled]) {  //[WXApi isWXAppSupportApi]
             NSString *str = request.URL.absoluteString;
             if (str.length >0) {
                 NSArray *payStringArray = [str componentsSeparatedByString:@":"];
@@ -196,14 +196,14 @@
                     return NO;
                 }
             }
-        }else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                            message:@"未检测到微信客户端，无法支付。"
-                                                           delegate:self
-                                                  cancelButtonTitle:@"确定"
-                                                  otherButtonTitles:nil];
-            [alert show];
-        }
+        //}else {
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+//                                                            message:@"未检测到微信客户端，无法支付。"
+//                                                           delegate:self
+//                                                  cancelButtonTitle:@"确定"
+//                                                  otherButtonTitles:nil];
+//            [alert show];
+        //}
         
         return NO;
     }
