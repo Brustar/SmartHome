@@ -276,6 +276,23 @@
 
 -(void)doTap:(UIGestureRecognizer *)dap
 {
+    
+//    // 设定位置和大小
+//    CGRect frame = CGRectMake(0,0,UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT);
+//    // 读取gif图片数据
+//    NSString *launchAnimation = @"ipadFirstViewVC";
+////    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+////        launchAnimation = @"iPadLaunchAnimation";
+////    }
+//    NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:launchAnimation ofType:@"gif"]];
+//    // view生成
+//    UIWebView *webView = [[UIWebView alloc] initWithFrame:frame];
+//    webView.userInteractionEnabled = NO;//用户不可交互
+//    [webView loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
+//    webView.scalesPageToFit = YES;
+//    webView.tag = 20171;
+//    [self.view addSubview:webView];
+    
     UIStoryboard *planeGraphStoryBoard  = [UIStoryboard storyboardWithName:@"PlaneGraph" bundle:nil];
     PlaneGraphViewController *planeGraphVC = [planeGraphStoryBoard instantiateViewControllerWithIdentifier:@"PlaneGraphVC"];
     planeGraphVC.hidesBottomBarWhenPushed = YES;
