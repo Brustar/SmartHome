@@ -1,4 +1,3 @@
-
 // !$*UTF8*$!
 {
 	archiveVersion = 1;
@@ -136,7 +135,6 @@
 		2E01840B1ECDE77C00E3705F /* CoreAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0184031ECDE77C00E3705F /* CoreAnimation.swift */; };
 		2E01840C1ECDE77C00E3705F /* CoreGraphicsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0184041ECDE77C00E3705F /* CoreGraphicsExtensions.swift */; };
 		2E01840D1ECDE77C00E3705F /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0184051ECDE77C00E3705F /* DateExtensions.swift */; };
-		2E01840E1ECDE77C00E3705F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E0184061ECDE77C00E3705F /* Info.plist */; };
 		2E0184101ECF40A200E3705F /* demo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2E01840F1ECF40A200E3705F /* demo.mp4 */; };
 		2E0297271E4C4C7600BBC520 /* MySubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0297261E4C4C7600BBC520 /* MySubView.m */; };
 		2E03E3001ECAD57E00487319 /* ECMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E03E2FF1ECAD57E00487319 /* ECMessage.m */; };
@@ -715,7 +713,6 @@
 		2E0184031ECDE77C00E3705F /* CoreAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreAnimation.swift; sourceTree = "<group>"; };
 		2E0184041ECDE77C00E3705F /* CoreGraphicsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreGraphicsExtensions.swift; sourceTree = "<group>"; };
 		2E0184051ECDE77C00E3705F /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
-		2E0184061ECDE77C00E3705F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E0184071ECDE77C00E3705F /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		2E0184081ECDE77C00E3705F /* TenClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TenClock.h; sourceTree = "<group>"; };
 		2E01840F1ECF40A200E3705F /* demo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = demo.mp4; sourceTree = "<group>"; };
@@ -1965,7 +1962,6 @@
 				2E0184031ECDE77C00E3705F /* CoreAnimation.swift */,
 				2E0184041ECDE77C00E3705F /* CoreGraphicsExtensions.swift */,
 				2E0184051ECDE77C00E3705F /* DateExtensions.swift */,
-				2E0184061ECDE77C00E3705F /* Info.plist */,
 				2E0184071ECDE77C00E3705F /* module.modulemap */,
 				2E0184081ECDE77C00E3705F /* TenClock.h */,
 			);
@@ -2542,10 +2538,10 @@
 				0F032D421CC9B12700D1920D /* Resources */,
 				9C97EFC5A754784A9B85D9D0 /* [CP] Embed Pods Frameworks */,
 				901B98770BA9652E39727DC8 /* [CP] Copy Pods Resources */,
-				96D783ECF2FC5954ED57287C /* √î¬£√∏‚àö¬∫‚àö¬®¬¨‚àÇ Embed Pods Frameworks */,
-				4ABB1A0B0312B56BE2774A85 /* √î¬£√∏‚àö¬∫‚àö¬®¬¨‚àÇ Copy Pods Resources */,
-				4E52A7E76F61C3C8884FFFFE /* 📦 Embed Pods Frameworks */,
-				F169192FBFAB7CFE1569E0C4 /* 📦 Copy Pods Resources */,
+				96D783ECF2FC5954ED57287C /* ‚àö√Æ¬¨¬£‚àö‚àè‚Äö√†√∂¬¨‚à´‚Äö√†√∂¬¨¬Æ¬¨¬®‚Äö√†√á Embed Pods Frameworks */,
+				4ABB1A0B0312B56BE2774A85 /* ‚àö√Æ¬¨¬£‚àö‚àè‚Äö√†√∂¬¨‚à´‚Äö√†√∂¬¨¬Æ¬¨¬®‚Äö√†√á Copy Pods Resources */,
+				4E52A7E76F61C3C8884FFFFE /* üì¶ Embed Pods Frameworks */,
+				F169192FBFAB7CFE1569E0C4 /* üì¶ Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2725,7 +2721,6 @@
 				2EB516FA1E9CEB3F0064B18E /* AddDeviceCell.xib in Resources */,
 				CD93E3AD1E807AFD003CCAA9 /* login_icon@2x.png in Resources */,
 				0F49CB6C1E7A1DBF00D46ECC /* Login.storyboard in Resources */,
-				2E01840E1ECDE77C00E3705F /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2806,14 +2801,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		4ABB1A0B0312B56BE2774A85 /* √î¬£√∏‚àö¬∫‚àö¬®¬¨‚àÇ Copy Pods Resources */ = {
+		4ABB1A0B0312B56BE2774A85 /* ‚àö√Æ¬¨¬£‚àö‚àè‚Äö√†√∂¬¨‚à´‚Äö√†√∂¬¨¬Æ¬¨¬®‚Äö√†√á Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "√î¬£√∏‚àö¬∫‚àö¬®¬¨‚àÇ Copy Pods Resources";
+			name = "‚àö√Æ¬¨¬£‚àö‚àè‚Äö√†√∂¬¨‚à´‚Äö√†√∂¬¨¬Æ¬¨¬®‚Äö√†√á Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2836,14 +2831,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		4E52A7E76F61C3C8884FFFFE /* 📦 Embed Pods Frameworks */ = {
+		4E52A7E76F61C3C8884FFFFE /* üì¶ Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "üì¶ Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2956,14 +2951,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		96D783ECF2FC5954ED57287C /* √î¬£√∏‚àö¬∫‚àö¬®¬¨‚àÇ Embed Pods Frameworks */ = {
+		96D783ECF2FC5954ED57287C /* ‚àö√Æ¬¨¬£‚àö‚àè‚Äö√†√∂¬¨‚à´‚Äö√†√∂¬¨¬Æ¬¨¬®‚Äö√†√á Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "√î¬£√∏‚àö¬∫‚àö¬®¬¨‚àÇ Embed Pods Frameworks";
+			name = "‚àö√Æ¬¨¬£‚àö‚àè‚Äö√†√∂¬¨‚à´‚Äö√†√∂¬¨¬Æ¬¨¬®‚Äö√†√á Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3031,14 +3026,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		F169192FBFAB7CFE1569E0C4 /* 📦 Copy Pods Resources */ = {
+		F169192FBFAB7CFE1569E0C4 /* üì¶ Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "üì¶ Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3632,4 +3627,3 @@
 	};
 	rootObject = 0F032D3C1CC9B12700D1920D /* Project object */;
 }
-

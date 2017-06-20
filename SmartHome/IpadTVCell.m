@@ -18,7 +18,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    
+    [IOManager removeTempFile];
+    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     [self.TVSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
     [self.channelReduceBtn setImage:[UIImage imageNamed:@"icon_vored_prd"] forState:UIControlStateHighlighted];
     [self.channelAddBtn setImage:[UIImage imageNamed:@"icon_add_pre"] forState:UIControlStateHighlighted];
