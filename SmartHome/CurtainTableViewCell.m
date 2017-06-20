@@ -22,7 +22,8 @@
 - (void)awakeFromNib {
     
     [super awakeFromNib];
-
+    [IOManager removeTempFile];
+    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     self.slider.continuous = NO;
     [self.slider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     [self.open addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
