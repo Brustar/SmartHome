@@ -77,9 +77,7 @@
 }
 
 - (void)loadingLoginViewController {
-    
     DeviceInfo *device=[DeviceInfo defaultManager];
-    [device deviceGenaration];
         
         if (self.window == nil) {
             self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -102,7 +100,7 @@
             self.window.rootViewController = vc;
         }
         
-        [self.window makeKeyAndVisible];
+        //[self.window makeKeyAndVisible];
   
 }
 
@@ -290,14 +288,12 @@
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options {
     
-    
     if ([url.absoluteString hasPrefix:@"wxc5cab7f2a6ed90b3"]) {
-        
         return [WXApi handleOpenURL:url delegate:[WeChatPayManager sharedInstance]];
     }
     //注册微信
     [WXApi registerApp:@"wxc5cab7f2a6ed90b3" withDescription:@"EcloudApp2.1"];
-    [[DeviceInfo defaultManager] deviceGenaration];
+    
     [[DeviceInfo defaultManager] initConfig];
     
     [self loadingLaunchingViewController];
