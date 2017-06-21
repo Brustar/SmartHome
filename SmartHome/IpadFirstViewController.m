@@ -71,6 +71,7 @@
     [self.CoverView addGestureRecognizer:recognizer];
     
     self.scheculer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timing:) userInfo:nil repeats:YES];
+   
 }
 
 -(IBAction)timing:(id)sender
@@ -239,6 +240,7 @@
             _ThreeBtn.hidden = NO;
             [_ThreeBtn setTitle:@"" forState:UIControlStateNormal];
             [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular4"] forState:UIControlStateNormal];
+             self.threeBtnleading.constant = 40;
         }if(_shortcutsArray.count == 2) {
             _info1 = _shortcutsArray[0];
             _info2 = _shortcutsArray[1];
@@ -249,6 +251,7 @@
             _ThreeBtn.hidden = NO;
             [_ThreeBtn setTitle:@"" forState:UIControlStateNormal];
             [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular4"] forState:UIControlStateNormal];
+             self.threeBtnleading.constant = 40;
             
         }if (_shortcutsArray.count == 3) {
             _info1 = _shortcutsArray[0];
@@ -261,6 +264,7 @@
             _firstBtn.hidden = NO;
             _TwoBtn.hidden = NO;
             _ThreeBtn.hidden = NO;
+             self.threeBtnleading.constant = 40;
         }
     }else{
        
@@ -276,22 +280,23 @@
 
 -(void)doTap:(UIGestureRecognizer *)dap
 {
-    
-//    // 设定位置和大小
-//    CGRect frame = CGRectMake(0,0,UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT);
-//    // 读取gif图片数据
-//    NSString *launchAnimation = @"ipadFirstViewVC";
-////    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-////        launchAnimation = @"iPadLaunchAnimation";
-////    }
-//    NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:launchAnimation ofType:@"gif"]];
-//    // view生成
-//    UIWebView *webView = [[UIWebView alloc] initWithFrame:frame];
-//    webView.userInteractionEnabled = NO;//用户不可交互
-//    [webView loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
-//    webView.scalesPageToFit = YES;
-//    webView.tag = 20171;
-//    [self.view addSubview:webView];
+ /*
+                // 设定位置和大小
+                CGRect frame = CGRectMake(0,0,UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT);
+                // 读取gif图片数据
+                NSString *launchAnimation = @"ipadFirstViewVC";
+            //    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+            //        launchAnimation = @"iPadLaunchAnimation";
+            //    }
+                NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:launchAnimation ofType:@"gif"]];
+                // view生成
+                UIWebView *webView = [[UIWebView alloc] initWithFrame:frame];
+                webView.userInteractionEnabled = NO;//用户不可交互
+                [webView loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
+                webView.scalesPageToFit = YES;
+                webView.tag = 20171;
+                [self.view addSubview:webView];
+    */
     
     UIStoryboard *planeGraphStoryBoard  = [UIStoryboard storyboardWithName:@"PlaneGraph" bundle:nil];
     PlaneGraphViewController *planeGraphVC = [planeGraphStoryBoard instantiateViewControllerWithIdentifier:@"PlaneGraphVC"];
@@ -727,5 +732,6 @@
 {
     [self.scheculer invalidate];
 }
+
 
 @end

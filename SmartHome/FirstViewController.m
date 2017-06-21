@@ -476,8 +476,10 @@
             _firstBtn.titleLabel.font = [UIFont systemFontOfSize:10];
             _firstBtn.hidden = NO;
             _TwoBtn.hidden = YES;
+            _ThreeBtn.hidden = NO;
             [_ThreeBtn setTitle:@"" forState:UIControlStateNormal];
             [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular4"] forState:UIControlStateNormal];
+            self.threeBtnLeadingConstraint.constant = 30;
         }if(_shortcutsArray.count == 2) {
             _info1 = _shortcutsArray[0];
             _info2 = _shortcutsArray[1];
@@ -485,8 +487,10 @@
             [_TwoBtn setTitle:_info2.sceneName forState:UIControlStateNormal];
             _firstBtn.hidden = NO;
             _TwoBtn.hidden = NO;
+            _ThreeBtn.hidden = NO;
             [_ThreeBtn setTitle:@"" forState:UIControlStateNormal];
             [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular4"] forState:UIControlStateNormal];
+            self.threeBtnLeadingConstraint.constant = 30;
         
         }if (_shortcutsArray.count == 3) {
             _info1 = _shortcutsArray[0];
@@ -498,12 +502,15 @@
             [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular3"] forState:UIControlStateNormal];
             _firstBtn.hidden = NO;
             _TwoBtn.hidden = NO;
+            _ThreeBtn.hidden = NO;
+            self.threeBtnLeadingConstraint.constant = 30;
         }
     }else{
         [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular4"] forState:UIControlStateNormal];
         [_ThreeBtn setTitle:@"" forState:UIControlStateNormal];
         _firstBtn.hidden = YES;
         _TwoBtn.hidden = YES;
+        _ThreeBtn.hidden = NO;
         self.threeBtnLeadingConstraint.constant = -45;
     }
 }
