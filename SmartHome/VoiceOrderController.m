@@ -24,6 +24,7 @@
 @interface VoiceOrderController ()
 @property (weak, nonatomic) IBOutlet UIView *exmapleView;
 @property (weak, nonatomic) IBOutlet UILabel *sampleLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *btnLeadingConstrain;
 
 @property (nonatomic,assign) int sceneID;
 
@@ -33,6 +34,15 @@
 @end
 
 @implementation VoiceOrderController
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    if (ON_IPAD) {
+        
+        self.btnLeadingConstrain.constant = 110;
+    }
+
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
