@@ -9,6 +9,9 @@
 #import "IpadFirstViewController.h"
 #import "BaseTabBarController.h"
 #import "VoiceOrderController.h"
+#import <ImageIO/ImageIO.h>
+
+#define ANIMATION_TIME 3
 
 @interface IpadFirstViewController ()<RCIMReceiveMessageDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic,strong) BaseTabBarController *baseTabbarController;
@@ -280,30 +283,43 @@
 
 -(void)doTap:(UIGestureRecognizer *)dap
 {
- /*
-                // 设定位置和大小
-                CGRect frame = CGRectMake(0,0,UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT);
-                // 读取gif图片数据
-                NSString *launchAnimation = @"ipadFirstViewVC";
-            //    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-            //        launchAnimation = @"iPadLaunchAnimation";
-            //    }
-                NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:launchAnimation ofType:@"gif"]];
-                // view生成
-                UIWebView *webView = [[UIWebView alloc] initWithFrame:frame];
-                webView.userInteractionEnabled = NO;//用户不可交互
-                [webView loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
-                webView.scalesPageToFit = YES;
-                webView.tag = 20171;
-                [self.view addSubview:webView];
-    */
+    
+    // 设定位置和大小
+    CGRect frame = CGRectMake(0,0,UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT);
+    // 读取gif图片数据
+    NSString *launchAnimation = @"ipadFirstViewVC";
+    
+    //test uiimageview
+    NSURL *fileUrl = [[NSBundle mainBundle] URLForResource:launchAnimation withExtension:@"gif"]; //加载GIF图片
+    CGImageSourceRef gifSource = CGImageSourceCreateWithURL((CFURLRef) fileUrl, NULL); //将GIF图片转换成对应的图片源
+    size_t frameCout = CGImageSourceGetCount(gifSource); //获取其中图片源个数，即由多少帧图片组成
+    NSMutableArray *frames = [[NSMutableArray alloc] init]; //定义数组存储拆分出来的图片
+    for (size_t i = 0; i < frameCout; i++) {
+        CGImageRef imageRef = CGImageSourceCreateImageAtIndex(gifSource, i, NULL); //从GIF图片中取出源图片
+        UIImage *imageName = [UIImage imageWithCGImage:imageRef];//将图片源转换成UIimageView能使用的图片源
+        [frames addObject:imageName]; //将图片加入数组中
+        CGImageRelease(imageRef);
+    }
+    UIImageView *gifImageView = [[UIImageView alloc] initWithFrame:frame];
+    gifImageView.animationImages = frames; //将图片数组加入UIImageView动画数组中
+    gifImageView.animationDuration = ANIMATION_TIME;//每次动画时长
+    [gifImageView setAnimationRepeatCount:1];
+    [gifImageView startAnimating];
+    [self.view addSubview:gifImageView];
+    [self performSelector:@selector(doOtherAction) withObject:nil afterDelay:ANIMATION_TIME];
+
+}
+
+-(void)doOtherAction{
     
     UIStoryboard *planeGraphStoryBoard  = [UIStoryboard storyboardWithName:@"PlaneGraph" bundle:nil];
     PlaneGraphViewController *planeGraphVC = [planeGraphStoryBoard instantiateViewControllerWithIdentifier:@"PlaneGraphVC"];
     planeGraphVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:planeGraphVC animated:YES];
-
+//    [self.navigationController pushViewController:planeGraphVC animated:YES];
+    [planeGraphVC setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    [self presentViewController:planeGraphVC animated:YES completion:nil];
 }
+
 - (void)addNotifications {
     [NC addObserver:self selector:@selector(netWorkDidChangedNotification:) name:@"NetWorkDidChangedNotification" object:nil];
 }
