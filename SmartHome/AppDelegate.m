@@ -82,9 +82,6 @@
             UIViewController *vc = [loginStoryBoard instantiateViewControllerWithIdentifier:@"loginNavController"];//未登录，进入登录页面
             self.window.rootViewController = vc;
         }
-        
-        //[self.window makeKeyAndVisible];
-  
 }
 
 -(void)kickout
@@ -274,8 +271,6 @@
         return [WXApi handleOpenURL:url delegate:[WeChatPayManager sharedInstance]];
     }
     
-    [self loadingLaunchingViewController];
-    [self performSelector:@selector(loadingLoginViewController) withObject:nil afterDelay:6];
     return YES;
 }
 
