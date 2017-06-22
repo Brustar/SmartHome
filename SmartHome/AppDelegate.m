@@ -7,29 +7,27 @@
 //
 
 #import "AppDelegate.h"
-#import "SocketManager.h"
 #import "PackManager.h"
-#import "HttpManager.h"
-#import "IOManager.h"
-#import "IQKeyboardManager.h"
-#import "ECloudTabBarController.h"
-#import "MSGController.h"
 #import "RCDataManager.h"
-#import "IphoneSceneController.h"
-#import "VoiceOrderController.h"
-#import "IphoneFavorController.h"
 #import "WXApi.h"
 #import "WeChatPayManager.h"
-#import "IpadFirstViewController.h"
-
+#import "LaunchingViewController.h"
 
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
++(void) initialize {
     //注册微信
     [WXApi registerApp:@"wxc5cab7f2a6ed90b3" withDescription:@"EcloudApp2.1"];
-    
+    //初始化数据库
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    [device initConfig];
+    [device deviceGenaration];
+    //注册融云
+    [[RCIM sharedRCIM] initWithAppKey:@"8brlm7uf8tsb3"];
+    [RCIM sharedRCIM].userInfoDataSource = [RCDataManager shareManager];
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     //app未开启时处理推送
     if (launchOptions) {
         //截取apns推送的消息
@@ -39,21 +37,8 @@
         return YES;
     }
     
-    DeviceInfo *device=[DeviceInfo defaultManager];
-    [device deviceGenaration];
-   
-    //登录后每次系统启动自动更新云端配置，第一次安装此处不更新，登录的时候再更新
-    [device initConfig];
-    
-    
     [self loadingLaunchingViewController];
     [self performSelector:@selector(loadingLoginViewController) withObject:nil afterDelay:6];//动画启动页执行完毕后，执行登录／tabbar页面
-    
-    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
-    manager.enable = YES;
-    manager.shouldResignOnTouchOutside = YES;
-    manager.shouldToolbarUsesTextFieldTintColor = YES;
-    manager.enableAutoToolbar = YES;
    
     //动态加载自定义的ShortcutItem
     if (application.shortcutItems.count == 0) {
@@ -63,9 +48,7 @@
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(kickout) name:KICK_OUT object:nil];
-    
-    [[RCIM sharedRCIM] initWithAppKey:@"8brlm7uf8tsb3"];
-    [RCIM sharedRCIM].userInfoDataSource = [RCDataManager shareManager];
+
     return YES;
 }
 
@@ -287,20 +270,12 @@
 }
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options {
-    
     if ([url.absoluteString hasPrefix:@"wxc5cab7f2a6ed90b3"]) {
         return [WXApi handleOpenURL:url delegate:[WeChatPayManager sharedInstance]];
     }
-    //注册微信
-    [WXApi registerApp:@"wxc5cab7f2a6ed90b3" withDescription:@"EcloudApp2.1"];
-    
-    [[DeviceInfo defaultManager] initConfig];
     
     [self loadingLaunchingViewController];
-    [self performSelector:@selector(loadingLoginViewController) withObject:nil afterDelay:6];//动画启动页执行完毕后，执行登录／tabbar页面
-    [[RCIM sharedRCIM] initWithAppKey:@"8brlm7uf8tsb3"];
-    [RCIM sharedRCIM].userInfoDataSource = [RCDataManager shareManager];
-    
+    [self performSelector:@selector(loadingLoginViewController) withObject:nil afterDelay:6];
     return YES;
 }
 

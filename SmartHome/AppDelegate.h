@@ -5,12 +5,8 @@
 //  Created by Brustar on 16/4/22.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
-
 #import "LeftSlideViewController.h"
 #import "BaseTabBarController.h"
-#import "LeftViewController.h"
-#import "LaunchingViewController.h"
-#import "MBProgressHUD+NJ.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

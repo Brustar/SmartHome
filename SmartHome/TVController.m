@@ -24,10 +24,11 @@
 #import "TVIconController.h"
 #import "UploadManager.h"
 #import "UIImageView+WebCache.h"
-#import "IQKeyBoardManager.h"
+
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import "UIViewController+Navigator.h"
 #import "KeypadView.h"
+
 @interface UIImagePickerController (LandScapeImagePicker)
 
 - (UIStatusBarStyle)preferredStatusBarStyle;
