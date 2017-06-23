@@ -25,6 +25,13 @@
     //注册融云
     [[RCIM sharedRCIM] initWithAppKey:@"8brlm7uf8tsb3"];
     [RCIM sharedRCIM].userInfoDataSource = [RCDataManager shareManager];
+    UIApplication *application = [UIApplication sharedApplication];
+    //动态加载自定义的ShortcutItem
+    if (application.shortcutItems.count == 0) {
+        UIMutableApplicationShortcutItem *itemVoice =[[UIMutableApplicationShortcutItem alloc]initWithType:[NSString stringWithFormat:@"%@.second",[[NSBundle mainBundle] bundleIdentifier]] localizedTitle:@"语音控制" localizedSubtitle:nil icon:[UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeCloud] userInfo:nil];
+        
+        application.shortcutItems = @[itemVoice];
+    }
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -39,13 +46,6 @@
     
     [self loadingLaunchingViewController];
     [self performSelector:@selector(loadingLoginViewController) withObject:nil afterDelay:6];//动画启动页执行完毕后，执行登录／tabbar页面
-   
-    //动态加载自定义的ShortcutItem
-    if (application.shortcutItems.count == 0) {
-        UIMutableApplicationShortcutItem *itemVoice =[[UIMutableApplicationShortcutItem alloc]initWithType:[NSString stringWithFormat:@"%@.second",[[NSBundle mainBundle] bundleIdentifier]] localizedTitle:@"语音控制" localizedSubtitle:nil icon:[UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeCloud] userInfo:nil];
-        
-        application.shortcutItems = @[itemVoice];
-    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(kickout) name:KICK_OUT object:nil];
 
