@@ -2434,6 +2434,7 @@
     return ret;
 }
 
+
 +(BOOL)updateTotalVisited:(int)roomID
 {
     FMDatabase *db = [SQLManager connetdb];
@@ -2470,7 +2471,18 @@
     [db close];
     return result;
 }
-
+#pragma mark - chats
++ (BOOL)updateChatsPortraitByID:(int)userID userName:(NSString *)userName nickName:(NSString *)nickName {
+    FMDatabase *db = [SQLManager connetdb];
+    if (![db open]) {
+        NSLog(@"Could not open db");
+        return NO;
+    }
+    BOOL result = [db executeUpdate:[NSString stringWithFormat:@"UPDATE chats SET nickname = '%@' where user_id = %d and username = '%@'", userName, userID,userName]];
+    
+    [db close];
+    return result;
+}
 #pragma mark - User
 + (BOOL)updateUserPortraitUrlByID:(int)userID url:(NSString *)url {
     FMDatabase *db = [SQLManager connetdb];

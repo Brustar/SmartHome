@@ -975,7 +975,7 @@
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head_bg" translatesAutoresizingMaskIntoConstraints="NO" id="Arr-zK-PPd" userLabel="headBg">
-                                <rect key="frame" x="128" y="129" width="160" height="160"/>
+                                <rect key="frame" x="127" y="129" width="160" height="160"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="160" id="sok-wp-R3L"/>
                                     <constraint firstAttribute="width" constant="160" id="z6T-lM-56f"/>
@@ -1028,6 +1028,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="UserinfoLeadingConstraint" destination="VJ5-pi-UJb" id="WLu-SY-xbB"/>
+                        <outlet property="UserinfoTrailingConstraint" destination="3d8-k4-F6u" id="JgY-jJ-EEc"/>
                         <outlet property="headerBtn" destination="zQQ-A6-Ymm" id="8pc-i8-iKY"/>
                         <outlet property="nameLabel" destination="7Yx-dY-7UQ" id="0GR-Gq-Rwu"/>
                         <outlet property="userinfoTableView" destination="DDV-lb-u0B" id="U69-ZU-kH7"/>
@@ -1066,7 +1068,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_line.png" translatesAutoresizingMaskIntoConstraints="NO" id="ERL-sI-r4b" userLabel="line2">
-                                                    <rect key="frame" x="0.0" y="42" width="414" height="0.0"/>
+                                                    <rect key="frame" x="0.0" y="43.333333333333336" width="414" height="0.0"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="0.5" id="wae-bQ-VSi"/>
                                                     </constraints>

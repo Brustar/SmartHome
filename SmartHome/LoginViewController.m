@@ -72,7 +72,6 @@
         [self showScrollView];//显示滑动图
     }
 
-    
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         self.loginBtnLeading.constant = 350;
         self.loginBtnTrailing.constant = 350;

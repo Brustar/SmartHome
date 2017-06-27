@@ -187,6 +187,8 @@
     nameLabel.textAlignment = NSTextAlignmentCenter;
     [view addSubview:nameLabel];
     
+    _nickNameLabel = nameLabel;
+    
       //VIP
         UIButton *vipBtn = [[UIButton alloc] initWithFrame:CGRectMake(FX(headButton)+10, CGRectGetMaxY(nameLabel.frame)+10, 30, 15)];
         vipBtn.userInteractionEnabled = NO;
@@ -314,13 +316,19 @@
 
 - (void)addNotifications {
     [NC addObserver:self selector:@selector(refreshPortrait:) name:@"refreshPortrait" object:nil];
+     [NC addObserver:self selector:@selector(refreshNickName:) name:@"refreshNickName" object:nil];
 }
 
 - (void)refreshPortrait:(NSNotification *)noti {
     NSString *portraitUrl = noti.object;
     [_headerBtn sd_setImageWithURL:[NSURL URLWithString:portraitUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portrait"]];
 }
+-(void)refreshNickName:(NSNotification *)fication
+{
+    NSString * nickName = fication.object;
+    _nickNameLabel.text = nickName;
 
+}
 - (void)removeNotifications {
     [NC removeObserver:self];
 }

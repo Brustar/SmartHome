@@ -196,4 +196,5 @@
 + (NSString *)getSubTypeNameByDeviceID:(int)eId;//根据设备id查询设备大类的名字
 + (BOOL)updateChatsPortraitByID:(int)userID url:(NSString *)url;
 + (BOOL)updateSceneIsActive:(NSInteger)isActive sceneID:(int)sceneID;
++ (BOOL)updateChatsPortraitByID:(int)userID userName:(NSString *)userName nickName:(NSString *)nickName;
 @end

@@ -151,6 +151,8 @@
 		2E2B57195D5A936F7BD15641 /* libPods-SmartHome.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9FD66F09F2092DE805E0F5B /* libPods-SmartHome.a */; };
 		2E2D92CE1EF1067C0007B90A /* PowerLightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D92CC1EF1067C0007B90A /* PowerLightCell.m */; };
 		2E2D92CF1EF1067C0007B90A /* PowerLightCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E2D92CD1EF1067C0007B90A /* PowerLightCell.xib */; };
+		2E2EA7871EFCBE0C0030EB46 /* ChangeNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2EA7861EFCBE0C0030EB46 /* ChangeNameViewController.m */; };
+		2E2EA78A1EFD0EC70030EB46 /* ChangePassWordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2EA7891EFD0EC70030EB46 /* ChangePassWordVC.m */; };
 		2E4297FF1ED66BAD003F4A76 /* IpadDeviceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E4297FE1ED66BAD003F4A76 /* IpadDeviceListViewController.m */; };
 		2E4298021ED66CBA003F4A76 /* IpadDeviceTypeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E4298011ED66CBA003F4A76 /* IpadDeviceTypeVC.m */; };
 		2E4298061ED67870003F4A76 /* IpadDeviceTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E4298041ED67870003F4A76 /* IpadDeviceTypeCell.m */; };
@@ -207,7 +209,11 @@
 		2EEE536B1E3061930026F97D /* IphoneDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EEE536A1E3061930026F97D /* IphoneDetailViewController.m */; };
 		2EEE536E1E309C5D0026F97D /* MyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EEE536D1E309C5D0026F97D /* MyView.m */; };
 		2EEFF74A1E9649A0008F2C7F /* IphoneNewAddSceneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EEFF7491E9649A0008F2C7F /* IphoneNewAddSceneVC.m */; };
-		2EF51C231EF92DF4008D1D01 /* ipadFirstViewVC.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2EF51C221EF92DF4008D1D01 /* ipadFirstViewVC.gif */; };
+		2EF5B0241F02517C00C369C6 /* ipadFirstViewVC.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2EF5B0231F02517C00C369C6 /* ipadFirstViewVC.gif */; };
+		2EF5B0261F0251EF00C369C6 /* night.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2EF5B0251F0251EF00C369C6 /* night.gif */; };
+		2EF5B0281F02521C00C369C6 /* snowing.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2EF5B0271F02521C00C369C6 /* snowing.gif */; };
+		2EF5B02A1F02523E00C369C6 /* rain.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2EF5B0291F02523E00C369C6 /* rain.gif */; };
+		2EF5B02C1F02525300C369C6 /* cloudy.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2EF5B02B1F02525300C369C6 /* cloudy.gif */; };
 		2EF75C7C1EB2CAE00055147D /* ShortcutKeyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF75C791EB2CAE00055147D /* ShortcutKeyCell.m */; };
 		2EF75C7D1EB2CAE00055147D /* ShortcutKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF75C7B1EB2CAE00055147D /* ShortcutKeyViewController.m */; };
 		2EF75C811EB32D390055147D /* DeviceTimingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF75C801EB32D390055147D /* DeviceTimingViewController.m */; };
@@ -740,6 +746,10 @@
 		2E2D92CB1EF1067C0007B90A /* PowerLightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerLightCell.h; sourceTree = "<group>"; };
 		2E2D92CC1EF1067C0007B90A /* PowerLightCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerLightCell.m; sourceTree = "<group>"; };
 		2E2D92CD1EF1067C0007B90A /* PowerLightCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PowerLightCell.xib; sourceTree = "<group>"; };
+		2E2EA7851EFCBE0C0030EB46 /* ChangeNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeNameViewController.h; sourceTree = "<group>"; };
+		2E2EA7861EFCBE0C0030EB46 /* ChangeNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeNameViewController.m; sourceTree = "<group>"; };
+		2E2EA7881EFD0EC70030EB46 /* ChangePassWordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePassWordVC.h; sourceTree = "<group>"; };
+		2E2EA7891EFD0EC70030EB46 /* ChangePassWordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePassWordVC.m; sourceTree = "<group>"; };
 		2E4297FD1ED66BAD003F4A76 /* IpadDeviceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpadDeviceListViewController.h; sourceTree = "<group>"; };
 		2E4297FE1ED66BAD003F4A76 /* IpadDeviceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IpadDeviceListViewController.m; sourceTree = "<group>"; };
 		2E4298001ED66CBA003F4A76 /* IpadDeviceTypeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpadDeviceTypeVC.h; sourceTree = "<group>"; };
@@ -839,7 +849,11 @@
 		2EEE536F1E309E510026F97D /* CGLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGLine.h; sourceTree = "<group>"; };
 		2EEFF7481E9649A0008F2C7F /* IphoneNewAddSceneVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IphoneNewAddSceneVC.h; sourceTree = "<group>"; };
 		2EEFF7491E9649A0008F2C7F /* IphoneNewAddSceneVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IphoneNewAddSceneVC.m; sourceTree = "<group>"; };
-		2EF51C221EF92DF4008D1D01 /* ipadFirstViewVC.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ipadFirstViewVC.gif; sourceTree = "<group>"; };
+		2EF5B0231F02517C00C369C6 /* ipadFirstViewVC.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ipadFirstViewVC.gif; sourceTree = "<group>"; };
+		2EF5B0251F0251EF00C369C6 /* night.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = night.gif; sourceTree = "<group>"; };
+		2EF5B0271F02521C00C369C6 /* snowing.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = snowing.gif; sourceTree = "<group>"; };
+		2EF5B0291F02523E00C369C6 /* rain.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = rain.gif; sourceTree = "<group>"; };
+		2EF5B02B1F02525300C369C6 /* cloudy.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = cloudy.gif; sourceTree = "<group>"; };
 		2EF75C781EB2CAE00055147D /* ShortcutKeyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortcutKeyCell.h; sourceTree = "<group>"; };
 		2EF75C791EB2CAE00055147D /* ShortcutKeyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortcutKeyCell.m; sourceTree = "<group>"; };
 		2EF75C7A1EB2CAE00055147D /* ShortcutKeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortcutKeyViewController.h; sourceTree = "<group>"; };
@@ -1803,7 +1817,11 @@
 		0F6ADFDC1E7134ED00BFF67F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				2EF51C221EF92DF4008D1D01 /* ipadFirstViewVC.gif */,
+				2EF5B02B1F02525300C369C6 /* cloudy.gif */,
+				2EF5B0291F02523E00C369C6 /* rain.gif */,
+				2EF5B0271F02521C00C369C6 /* snowing.gif */,
+				2EF5B0251F0251EF00C369C6 /* night.gif */,
+				2EF5B0231F02517C00C369C6 /* ipadFirstViewVC.gif */,
 				CDA9EEC01ED40F6900CB4D7D /* launchingAnimation.gif */,
 				CDA9EEC41ED4288900CB4D7D /* iPadLaunchAnimation.gif */,
 				2E01840F1ECF40A200E3705F /* demo.mp4 */,
@@ -2470,6 +2488,10 @@
 				F680AAB61DD94565001D1807 /* FamilyCell.m */,
 				2EEE53691E3061930026F97D /* IphoneDetailViewController.h */,
 				2EEE536A1E3061930026F97D /* IphoneDetailViewController.m */,
+				2E2EA7851EFCBE0C0030EB46 /* ChangeNameViewController.h */,
+				2E2EA7861EFCBE0C0030EB46 /* ChangeNameViewController.m */,
+				2E2EA7881EFD0EC70030EB46 /* ChangePassWordVC.h */,
+				2E2EA7891EFD0EC70030EB46 /* ChangePassWordVC.m */,
 			);
 			path = IphoneControllers;
 			sourceTree = "<group>";
@@ -2657,6 +2679,7 @@
 				2E9EA8811E8D0DC200A1AA63 /* iPhone.storyboard in Resources */,
 				CDF389341E30F27500657C8B /* userHabitList.plist in Resources */,
 				2E9F4BEC1EE00F580039BFE9 /* IpadTVCell.xib in Resources */,
+				2EF5B0281F02521C00C369C6 /* snowing.gif in Resources */,
 				CD78A8301E3379C200060466 /* 255_221.plist in Resources */,
 				CD7DDA0D1E81298600638DB3 /* loginButton@2x.png in Resources */,
 				CDF389281E30A91200657C8B /* energyDetail.plist in Resources */,
@@ -2664,6 +2687,7 @@
 				2EBABC831E83787B0093EF3A /* ScreenTableViewCell.xib in Resources */,
 				0FBEFE271D24A5020084244F /* netconfig.plist in Resources */,
 				CD7DDA091E81168F00638DB3 /* login_name@2x.png in Resources */,
+				2EF5B0261F0251EF00C369C6 /* night.gif in Resources */,
 				0F9232E11EB85CE3008B1F37 /* AirMenuCell.xib in Resources */,
 				2ECDCC911E9E3623004C68BE /* BjMusicTableViewCell.xib in Resources */,
 				0F49CB721E7A1EAE00D46ECC /* Scene.storyboard in Resources */,
@@ -2675,8 +2699,9 @@
 				CD7DDA151E826C3B00638DB3 /* backBtn@2x.png in Resources */,
 				0F9214C71EE9241E0088D5DA /* keyPad.xib in Resources */,
 				CDF389241E306D2400657C8B /* maintaininfo.plist in Resources */,
-				2EF51C231EF92DF4008D1D01 /* ipadFirstViewVC.gif in Resources */,
+				2EF5B02A1F02523E00C369C6 /* rain.gif in Resources */,
 				CD9F0AC11EB861F5007B0CF7 /* address.txt in Resources */,
+				2EF5B0241F02517C00C369C6 /* ipadFirstViewVC.gif in Resources */,
 				CD93E3B11E8081B0003CCAA9 /* login_line@2x.png in Resources */,
 				0F5F909B1EEA506900BACC3E /* IPadDevices.xib in Resources */,
 				2EC266291EA4BEAF003DC979 /* FMTableViewCell.xib in Resources */,
@@ -2701,6 +2726,7 @@
 				0F49CB741E7A1F0500D46ECC /* Home.storyboard in Resources */,
 				CDEE5EAC1ECDD82E00A5779D /* portrait.png in Resources */,
 				F668AF251D53413B0079587F /* Main.storyboard in Resources */,
+				2EF5B02C1F02525300C369C6 /* cloudy.gif in Resources */,
 				2E12CC121E7F5E3000C7D006 /* CYPhotoCell.xib in Resources */,
 				2E2D92CF1EF1067C0007B90A /* PowerLightCell.xib in Resources */,
 				CDEC868B1E99CD7B009EC245 /* Family.storyboard in Resources */,
@@ -3224,6 +3250,7 @@
 				0FCFB3951CF2943100B37DD3 /* Camera.m in Sources */,
 				CDEC86801E95EBAB009EC245 /* TabbarPanel.m in Sources */,
 				CD9F0ACD1EB9A94E007B0CF7 /* HostListViewController.m in Sources */,
+				2E2EA78A1EFD0EC70030EB46 /* ChangePassWordVC.m in Sources */,
 				0F6ADFE31E7136C500BFF67F /* ConversationViewController.m in Sources */,
 				CD7863B31E84D2A800F42AC0 /* RegistSecondStepViewController.m in Sources */,
 				F6755A4C1D4063FA002394F3 /* ECloudTabBar.m in Sources */,
@@ -3283,6 +3310,7 @@
 				F617771D1DCC23AC00B382D4 /* CollectionViewCell.m in Sources */,
 				2E2D92CE1EF1067C0007B90A /* PowerLightCell.m in Sources */,
 				0FAF98B61CE45EC9009BDBB5 /* CryptoManager.m in Sources */,
+				2E2EA7871EFCBE0C0030EB46 /* ChangeNameViewController.m in Sources */,
 				2EEE536E1E309C5D0026F97D /* MyView.m in Sources */,
 				F62CFA441DAC90DD006410F7 /* IphoneSaveNewSceneController.m in Sources */,
 				2EC8A5901E372C51002A5042 /* IphoneDeviceLightVC.m in Sources */,

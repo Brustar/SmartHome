@@ -21,6 +21,7 @@
 #import <RongIMKit/RongIMKit.h>
 #import "ConversationViewController.h"
 #import "UIButton+WebCache.h"
+#import "UploadManager.h"
 
 @protocol LeftViewControllerDelegate;
 
@@ -28,6 +29,7 @@
 @property(nonatomic, strong) NSArray *itemArray;
 @property(nonatomic, strong) UserInfo *userInfo;
 @property(nonatomic, strong) UIButton *headerBtn;
+@property (nonatomic,strong) UILabel * nickNameLabel;
 @property(nonatomic, strong) UITableView *myTableView;
 @property(nonatomic, assign) id<LeftViewControllerDelegate>delegate;
 @property(nonatomic, strong) UIButton *bgButton;

@@ -11,7 +11,7 @@
 #import "VoiceOrderController.h"
 #import <ImageIO/ImageIO.h>
 
-#define ANIMATION_TIME 3
+#define ANIMATION_TIME 2
 
 @interface IpadFirstViewController ()<RCIMReceiveMessageDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic,strong) BaseTabBarController *baseTabbarController;
@@ -34,7 +34,7 @@
 @property (weak, nonatomic) IBOutlet UIButton * TwoBtn;
 @property (weak, nonatomic) IBOutlet UIButton * ThreeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *VoiceBtn;//点击进入语音
-
+@property (nonatomic,assign) int result;
 @property (weak, nonatomic) IBOutlet UILabel *remindLabel;//每日提醒的label
 
 @property (weak, nonatomic) IBOutlet UILabel *FamilyMenberLabel;//家庭成员Label
@@ -280,14 +280,19 @@
         
     }
 }
-
+//点击首页跳转到家庭首页
 -(void)doTap:(UIGestureRecognizer *)dap
 {
     
     // 设定位置和大小
     CGRect frame = CGRectMake(0,0,UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT);
     // 读取gif图片数据
-    NSString *launchAnimation = @"ipadFirstViewVC";
+    NSString *launchAnimation;
+    if(_result>0){
+        launchAnimation = @"night";
+    }else{
+        launchAnimation = @"ipadFirstViewVC";
+    }
     
     //test uiimageview
     NSURL *fileUrl = [[NSBundle mainBundle] URLForResource:launchAnimation withExtension:@"gif"]; //加载GIF图片
@@ -570,8 +575,8 @@
     
     NSLog(@"-------%@",_locationString);
     
-    int result= [_locationString compare:@"19:00"];
-    if(result>0){
+    _result= [_locationString compare:@"19:00"];
+    if(_result>0){
         self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-night"];
     }else{
         self.imageView.image = [UIImage imageNamed:@"IpadSceneBg"];
