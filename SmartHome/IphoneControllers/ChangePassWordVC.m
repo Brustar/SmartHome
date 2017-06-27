@@ -8,12 +8,14 @@
 
 #import "ChangePassWordVC.h"
 #import "MBProgressHUD+NJ.h"
+#import "HttpManager.h"
+#import "CryptoManager.h"
 
 @interface ChangePassWordVC ()
 
 @property (weak, nonatomic) IBOutlet UILabel *NameLabel;//自己的用户名
 @property (weak, nonatomic) IBOutlet UITextField *passWordField;//密码
-@property (weak, nonatomic) IBOutlet UITextField *confirmedPsd;
+@property (weak, nonatomic) IBOutlet UITextField *confirmedPsd;//再次确认
 @property (nonatomic, readonly) UIButton *naviRightBtn;
 
 
@@ -36,14 +38,42 @@
     }
     self.NameLabel.text = self.nameStr;
     self.passWordField.placeholder = @"请设置逸云密码";
-    [self.passWordField setTextColor:[UIColor redColor]];
     self.confirmedPsd.placeholder = @"请再次填入";
-    [self.confirmedPsd setTextColor:[UIColor redColor]];
+   
+    
+}
+
+-(void)sendRequest
+{
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/user_info.aspx",[IOManager httpAddr]];
+    NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    if (auothorToken) {
+        NSDictionary *dict = @{@"token":auothorToken,@"optype":[NSNumber numberWithInteger:3],@"psw":[self.passWordField.text md5],@"psw2":[self.confirmedPsd.text md5]};
+        HttpManager *http=[HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = 1;
+        [http sendPost:url param:dict];
+    }
+}
+
+-(void)httpHandler:(id)responseObject tag:(int)tag
+{
+    if(tag == 1)
+    {
+        if([responseObject[@"result"] intValue]==0)
+        {
+            [MBProgressHUD showSuccess:@"修改密码成功"];
+            
+        }else{
+            [MBProgressHUD showError:responseObject[@"修改密码失败"]];
+        }
+        
+    }
     
 }
 -(void)rightBtnClicked:(UIButton *)bbt
 {
-    [MBProgressHUD showSuccess:@"保存成功"];
+    [self sendRequest];
     
     [self.navigationController popViewControllerAnimated:YES];
     
