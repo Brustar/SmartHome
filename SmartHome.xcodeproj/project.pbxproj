@@ -2541,10 +2541,10 @@
 				0F032D421CC9B12700D1920D /* Resources */,
 				9C97EFC5A754784A9B85D9D0 /* [CP] Embed Pods Frameworks */,
 				901B98770BA9652E39727DC8 /* [CP] Copy Pods Resources */,
-				96D783ECF2FC5954ED57287C /* ‚àö√Æ¬¨¬£‚àö‚àè‚Äö√†√∂¬¨‚à´‚Äö√†√∂¬¨¬Æ¬¨¬®‚Äö√†√á Embed Pods Frameworks */,
-				4ABB1A0B0312B56BE2774A85 /* ‚àö√Æ¬¨¬£‚àö‚àè‚Äö√†√∂¬¨‚à´‚Äö√†√∂¬¨¬Æ¬¨¬®‚Äö√†√á Copy Pods Resources */,
-				4E52A7E76F61C3C8884FFFFE /* üì¶ Embed Pods Frameworks */,
-				F169192FBFAB7CFE1569E0C4 /* üì¶ Copy Pods Resources */,
+				96D783ECF2FC5954ED57287C /* ‚àö√Æ¬¨¬£‚àö‚àè‚Äö√†√∂¬¨‚à´‚Äö√†√∂¬¨¬Æ¬¨¬®‚Äö√†√á Embed Pods Frameworks */,
+				4ABB1A0B0312B56BE2774A85 /* ‚àö√Æ¬¨¬£‚àö‚àè‚Äö√†√∂¬¨‚à´‚Äö√†√∂¬¨¬Æ¬¨¬®‚Äö√†√á Copy Pods Resources */,
+				4E52A7E76F61C3C8884FFFFE /* üì¶ Embed Pods Frameworks */,
+				F169192FBFAB7CFE1569E0C4 /* üì¶ Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2604,7 +2604,7 @@
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = C8JS65F469;
 						LastSwiftMigration = 0830;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -2805,7 +2805,7 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		4ABB1A0B0312B56BE2774A85 /* ‚àö√Æ¬¨¬£‚àö‚àè‚Äö√†√∂¬¨‚à´‚Äö√†√∂¬¨¬Æ¬¨¬®‚Äö√†√á Copy Pods Resources */ = {
+		4ABB1A0B0312B56BE2774A85 /* ‚àö√Æ¬¨¬£‚àö‚àè‚Äö√†√∂¬¨‚à´‚Äö√†√∂¬¨¬Æ¬¨¬®‚Äö√†√á Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2835,7 +2835,7 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		4E52A7E76F61C3C8884FFFFE /* üì¶ Embed Pods Frameworks */ = {
+		4E52A7E76F61C3C8884FFFFE /* üì¶ Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2922,7 +2922,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		7B4EC63A298C6E6A66AD1643 /* [CP] Check Pods Manifest.lock */ = {
@@ -2955,7 +2955,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		96D783ECF2FC5954ED57287C /* ‚àö√Æ¬¨¬£‚àö‚àè‚Äö√†√∂¬¨‚à´‚Äö√†√∂¬¨¬Æ¬¨¬®‚Äö√†√á Embed Pods Frameworks */ = {
+		96D783ECF2FC5954ED57287C /* ‚àö√Æ¬¨¬£‚àö‚àè‚Äö√†√∂¬¨‚à´‚Äö√†√∂¬¨¬Æ¬¨¬®‚Äö√†√á Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3030,7 +3030,7 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		F169192FBFAB7CFE1569E0C4 /* üì¶ Copy Pods Resources */ = {
+		F169192FBFAB7CFE1569E0C4 /* üì¶ Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3445,11 +3445,11 @@
 				CODE_SIGN_ENTITLEMENTS = SmartHome/SmartHome.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: shi zi (75UU58685N)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: shi zi (75UU58685N)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = C8JS65F469;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3478,8 +3478,8 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "62cbec92-fd5d-4e6b-afb6-b4eb75285b96";
-				PROVISIONING_PROFILE_SPECIFIER = profileDis2.0;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SmartHome-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -3498,10 +3498,10 @@
 				CODE_SIGN_ENTITLEMENTS = SmartHome/SmartHome.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: shi zi (C8JS65F469)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: shi zi (C8JS65F469)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = C8JS65F469;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3530,8 +3530,8 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ecloud.SmartHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "62cbec92-fd5d-4e6b-afb6-b4eb75285b96";
-				PROVISIONING_PROFILE_SPECIFIER = profileDis2.0;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SmartHome-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

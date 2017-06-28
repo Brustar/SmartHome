@@ -13,7 +13,7 @@ target 'SmartHome' do
 	pod 'KxMenu'
 	pod 'SCSiriWaveformView'
     pod 'SDWebImage'
-    #pod 'IQKeyboardManager'
+    pod 'IQKeyboardManager'
 	pod 'RBStoryboardLink', '~> 0.1'
 	
 	pod 'CocoaAsyncSocket', '~>7.4.3'

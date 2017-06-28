@@ -12,6 +12,7 @@
 #import "WXApi.h"
 #import "WeChatPayManager.h"
 #import "LaunchingViewController.h"
+#import "IQKeyboardManager.h"
 
 @implementation AppDelegate
 
@@ -25,6 +26,13 @@
     //注册融云
     [[RCIM sharedRCIM] initWithAppKey:@"8brlm7uf8tsb3"];
     [RCIM sharedRCIM].userInfoDataSource = [RCDataManager shareManager];
+    
+    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
+    manager.enable = YES;
+    manager.shouldResignOnTouchOutside = YES;
+    manager.shouldToolbarUsesTextFieldTintColor = YES;
+    manager.enableAutoToolbar = YES;
+    
     UIApplication *application = [UIApplication sharedApplication];
     //动态加载自定义的ShortcutItem
     if (application.shortcutItems.count == 0) {
