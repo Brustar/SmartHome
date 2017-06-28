@@ -13,6 +13,7 @@
 #import "NowMusicController.h"
 #import <AFNetworking.h>
 #import "HostIDSController.h"
+#import "UserInfo.h"
 
 @interface FirstViewController : CustomViewController<NowMusicControllerDelegate, HostIDSControllerDelegate>
 @property (nonatomic, assign) NSInteger playState;//播放状态： 0:停止 1:播放
@@ -28,7 +29,7 @@
 @property(nonatomic, strong) AFNetworkReachabilityManager *afNetworkReachabilityManager;
 @property (weak, nonatomic) IBOutlet UIView *SupView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *threeBtnLeadingConstraint;
-
+@property (nonatomic, strong) UserInfo *userInfomation;
 @property (nonatomic, strong) NowMusicController * nowMusicController;
 @property (nonatomic, strong) HostIDSController *hostListViewController;//主机列表
 @property (weak, nonatomic) IBOutlet UIView *CoverView;

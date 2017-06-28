@@ -201,7 +201,10 @@
     _HeadImageView.userInteractionEnabled = YES;
     _familyNum = [[NSUserDefaults standardUserDefaults] objectForKey:@"familyNum"];
     self.memberFamilyLabel.text = [NSString stringWithFormat:@"家庭成员（%@）",_familyNum];
-    self.UserNameLabel.text = [NSString stringWithFormat:@"Hi! %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"Account"]];
+//    self.UserNameLabel.text = [NSString stringWithFormat:@"Hi! %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"Account"]];
+    int userID = [[UD objectForKey:@"UserID"] intValue];
+    _userInfomation = [SQLManager getUserInfo:userID];
+    self.UserNameLabel.text = [NSString stringWithFormat:@"Hi! %@",_userInfomation.nickName];
     [_HeadImageView addGestureRecognizer:Headtap];
     [self.doMessageBtn addTarget:self action:@selector(HeadDoTap:) forControlEvents:UIControlEventTouchUpInside];
     _calenderDayLabel.adjustsFontSizeToFitWidth = YES;

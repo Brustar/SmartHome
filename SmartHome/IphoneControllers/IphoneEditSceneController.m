@@ -671,7 +671,6 @@
        cell.deviceid = _lightArray[indexPath.row];
        cell.NewLightSlider.continuous = NO;
        cell.NewLightSlider.hidden = NO;
-       cell.deviceid = _lightArray[indexPath.row];
        cell.NewLightPowerBtn.selected = device.power;//开关状态
        cell.NewLightSlider.value = (float)device.bright/100.0f;//亮度状态
        if (_isGloom) {
@@ -728,7 +727,6 @@
 //        aireCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         aireCell.deviceid = _AirArray[indexPath.row];
         aireCell.AireNameLabel.text = device.name;
-        aireCell.deviceid = _AirArray[indexPath.row];
         
         return aireCell;
     }if (indexPath.section == 4) {//窗帘
@@ -742,7 +740,7 @@
 //        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         aireCell.deviceid = _CurtainArray[indexPath.row];
         aireCell.label.text = device.name;
-        aireCell.deviceid = _CurtainArray[indexPath.row];
+        
         
         return aireCell;
     }if (indexPath.section == 5) {//TV
@@ -787,7 +785,6 @@
         FMCell.FMNameLabel.text = device.name;
 //        FMCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         FMCell.deviceid = _FMArray[indexPath.row];
-        FMCell.deviceid = _FMArray[indexPath.row];
         FMCell.AddFmBtn.hidden = YES;
         FMCell.FMLayouConstraint.constant = 5;
         
@@ -801,7 +798,6 @@
         otherCell.NameLabel.text = device.name;
 //        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         otherCell.deviceid = _NetVArray[indexPath.row];
-        otherCell.deviceid = _NetVArray[indexPath.row];
         
         return otherCell;
     }if (indexPath.section == 10) {//幕布
@@ -812,7 +808,6 @@
         Device *device = [SQLManager getDeviceWithDeviceID:[_MBArray[indexPath.row] intValue]];
         ScreenCell.ScreenCurtainLabel.text = device.name;
 //        ScreenCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        ScreenCell.deviceid = _MBArray[indexPath.row];
         ScreenCell.deviceid = _MBArray[indexPath.row];
         
         return ScreenCell;
@@ -825,7 +820,7 @@
         BjMusicCell.BjMusicNameLb.text = device.name;
 //        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         BjMusicCell.deviceid = _BJMusicArray[indexPath.row];
-        BjMusicCell.deviceid = _BJMusicArray[indexPath.row];
+        
         
         return BjMusicCell;
     }if (indexPath.section == 12) {//其他

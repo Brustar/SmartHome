@@ -340,7 +340,6 @@
         FMCell.deviceid = _FMArray[indexPath.row];
         FMCell.roomID = self.roomID;
         FMCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        FMCell.deviceid = _FMArray[indexPath.row];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
         [FMCell query:[NSString stringWithFormat:@"%d", device.eID]];
         FMCell.scene = _scene;
@@ -372,7 +371,6 @@
         ScreenCell.deviceid = _MBArray[indexPath.row];
         ScreenCell.roomID = self.roomID;
         ScreenCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        ScreenCell.deviceid = _MBArray[indexPath.row];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
         [ScreenCell query:[NSString stringWithFormat:@"%d", device.eID]];
         ScreenCell.scene = _scene;
@@ -388,7 +386,6 @@
         BjMusicCell.deviceid = _BJMusicArray[indexPath.row];
         BjMusicCell.roomID = self.roomID;
         BjMusicCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        BjMusicCell.deviceid = _BJMusicArray[indexPath.row];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
         [BjMusicCell query:[NSString stringWithFormat:@"%d", device.eID]];
         BjMusicCell.scene = _scene;
@@ -403,7 +400,6 @@
         otherCell.deviceid = _OtherArray[indexPath.row];
         otherCell.roomID = self.roomID;
         otherCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        otherCell.deviceid = _OtherArray[indexPath.row];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
         otherCell.scene = _scene;
 

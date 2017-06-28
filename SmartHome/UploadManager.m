@@ -21,8 +21,6 @@
     return sharedInstance;
 }
 
-
-
 - (void)uploadImage:(UIImage *) img url:(NSString *) url dic:(NSDictionary *)dic fileName:(NSString *)fileName completion:(void (^)(id responseObject))completion
 {
     [MBProgressHUD showMessage:@"请稍候..."];
@@ -55,10 +53,7 @@
         NSLog(@"错误 %@", error.localizedDescription);
     }];
 }
--(void)uploadNickName:(NSString *)nickname userName:(NSString *)username dic:(NSDictionary *)dic completion:(void (^)(id responseObject))completion
-{
 
-}
 
 - (void)uploadScene:(NSData *)sceneData url:(NSString *) url dic:(NSDictionary *)dic fileName:(NSString *)fileName imgData:(NSData *)imgData imgFileName:(NSString *)imgFileName completion:(void (^)(id responseObject))completion
 
@@ -93,7 +88,6 @@
             [MBProgressHUD showError:result[@"msg"]];
         }
 
-        
        
     } failure:^(NSURLSessionDataTask *operation, NSError *error) {
         NSLog(@"错误 %@", error.localizedDescription);

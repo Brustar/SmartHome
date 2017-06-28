@@ -438,7 +438,6 @@
         aireCell.AireNameLabel.text = device.name;
         aireCell.deviceid = _AirArray[indexPath.row];
         aireCell.AireSlider.continuous = NO;
-        aireCell.deviceid = _AirArray[indexPath.row];
          _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
         [aireCell query:[NSString stringWithFormat:@"%d", device.eID]];
         aireCell.scene = _scene;
@@ -491,7 +490,7 @@
         OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
         otherCell.roomID = self.roomID;
         otherCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        otherCell.deviceid = _OtherArray[indexPath.row];
+        otherCell.deviceid = _ProjectArray[indexPath.row];
         otherCell.backgroundColor = [UIColor clearColor];
         Device * device = [SQLManager getDeviceWithDeviceHtypeID:[_ProjectArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
@@ -530,7 +529,7 @@
         ScreenCurtainCell * ScreenCell = [tableView dequeueReusableCellWithIdentifier:@"ScreenCurtainCell" forIndexPath:indexPath];
         ScreenCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         ScreenCell.roomID = self.roomID;
-        ScreenCell.deviceid = _ProjectArray[indexPath.row];
+        ScreenCell.deviceid = _MBArray[indexPath.row];
         ScreenCell.backgroundColor =[UIColor clearColor];
         Device * device = [SQLManager getDeviceWithDeviceHtypeID:[_MBArray[indexPath.row] intValue]];
         ScreenCell.ScreenCurtainLabel.text = device.name;

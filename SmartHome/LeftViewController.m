@@ -12,14 +12,27 @@
 
 @interface LeftViewController ()<UITableViewDelegate,UITableViewDataSource>
 
+
+@property (nonatomic,strong)NSMutableArray * unreadcountArr;
+
 @end
 
 @implementation LeftViewController
+
+-(NSMutableArray *)unreadcountArr
+{
+    if (!_unreadcountArr) {
+        _unreadcountArr = [NSMutableArray array];
+    }
+    
+    return _unreadcountArr;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addNotifications];
     [self getUserInfoFromDB];
+    [self creatItemID];
     _itemArray = @[@"家庭成员",@"视频动态",@"智能账单",@"通知",@"故障及保修记录",@"切换家庭账号"];
 
     
@@ -75,6 +88,25 @@
     }else if (indexPath.row == 2) {
         cell.imageView.image = [UIImage imageNamed:@"my_cloud"];
     }else if (indexPath.row == 3) {
+        
+        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(75, 10, 10, 10)];
+        label.backgroundColor = [UIColor redColor];
+        label.layer.masksToBounds = YES;
+        label.layer.cornerRadius = 5;
+        [cell addSubview:label];
+        NSMutableArray * subArr = [NSMutableArray array];
+        for (int i = 0; i < self.unreadcountArr.count; i ++) {
+            if ([self.unreadcountArr[i] intValue] == 0) {
+                [subArr addObject:self.unreadcountArr[i]];
+            }
+            if (self.unreadcountArr.count == subArr.count) {
+                label.hidden = YES;
+            }
+            else{
+               label.hidden = NO;
+            }
+            
+        }
         cell.imageView.image = [UIImage imageNamed:@"my_msg"];
     }else if (indexPath.row == 4) {
         cell.imageView.image = [UIImage imageNamed:@"my_alert"];
@@ -145,7 +177,42 @@
   }
     
 }
-
+-(void)creatItemID
+{
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/notify.aspx",[IOManager httpAddr]];
+    NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    if (auothorToken) {
+        NSDictionary *dict = @{@"token":auothorToken,@"optype":[NSNumber numberWithInteger:2]};
+        HttpManager *http=[HttpManager defaultManager];
+        http.tag = 1;
+        http.delegate = self;
+        [http sendPost:url param:dict];
+    }
+}
+-(void) httpHandler:(id) responseObject tag:(int)tag
+{
+    if (tag == 1) {
+        if ([responseObject[@"result"] intValue]==0)
+        {
+            
+            NSArray *dic = responseObject[@"notify_type_list"];
+            
+            if ([dic isKindOfClass:[NSArray class]]) {
+                for(NSDictionary *dicDetail in dic)
+                {
+                    
+                    [self.unreadcountArr addObject:dicDetail[@"unreadcount"]];
+                }
+            }
+            
+            [self.myTableView reloadData];
+        }else{
+            [MBProgressHUD showError:responseObject[@"Msg"]];
+        }
+        
+    }
+    
+}
 - (void)backBtnClicked:(UIButton *)btn {
     if (_delegate && [_delegate respondsToSelector:@selector(didSelectItem:)]) {
         [_delegate didSelectItem:@"返回"];

@@ -221,7 +221,6 @@
         cell.deviceid = _lightArray[indexPath.row];
         cell.NewLightSlider.continuous = NO;
         cell.NewLightSlider.hidden = NO;
-        cell.deviceid = _lightArray[indexPath.row];
         cell.NewLightPowerBtn.selected = device.power;//开关状态
         cell.NewLightSlider.value = (float)device.bright/100.0f;//亮度状态
         if (_isGloom) {

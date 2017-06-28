@@ -62,6 +62,7 @@
     {
         if([responseObject[@"result"] intValue]==0)
         {
+//            [UD setObject:self.passWordField.text  forKey:@"Password"];
             [MBProgressHUD showSuccess:@"修改密码成功"];
             
         }else{

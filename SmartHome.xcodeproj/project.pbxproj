@@ -214,6 +214,7 @@
 		2EF5B0281F02521C00C369C6 /* snowing.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2EF5B0271F02521C00C369C6 /* snowing.gif */; };
 		2EF5B02A1F02523E00C369C6 /* rain.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2EF5B0291F02523E00C369C6 /* rain.gif */; };
 		2EF5B02C1F02525300C369C6 /* cloudy.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2EF5B02B1F02525300C369C6 /* cloudy.gif */; };
+		2EF5B02E1F02657700C369C6 /* haze.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2EF5B02D1F02657700C369C6 /* haze.gif */; };
 		2EF75C7C1EB2CAE00055147D /* ShortcutKeyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF75C791EB2CAE00055147D /* ShortcutKeyCell.m */; };
 		2EF75C7D1EB2CAE00055147D /* ShortcutKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF75C7B1EB2CAE00055147D /* ShortcutKeyViewController.m */; };
 		2EF75C811EB32D390055147D /* DeviceTimingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF75C801EB32D390055147D /* DeviceTimingViewController.m */; };
@@ -854,6 +855,7 @@
 		2EF5B0271F02521C00C369C6 /* snowing.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = snowing.gif; sourceTree = "<group>"; };
 		2EF5B0291F02523E00C369C6 /* rain.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = rain.gif; sourceTree = "<group>"; };
 		2EF5B02B1F02525300C369C6 /* cloudy.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = cloudy.gif; sourceTree = "<group>"; };
+		2EF5B02D1F02657700C369C6 /* haze.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = haze.gif; sourceTree = "<group>"; };
 		2EF75C781EB2CAE00055147D /* ShortcutKeyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortcutKeyCell.h; sourceTree = "<group>"; };
 		2EF75C791EB2CAE00055147D /* ShortcutKeyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortcutKeyCell.m; sourceTree = "<group>"; };
 		2EF75C7A1EB2CAE00055147D /* ShortcutKeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortcutKeyViewController.h; sourceTree = "<group>"; };
@@ -1817,6 +1819,7 @@
 		0F6ADFDC1E7134ED00BFF67F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				2EF5B02D1F02657700C369C6 /* haze.gif */,
 				2EF5B02B1F02525300C369C6 /* cloudy.gif */,
 				2EF5B0291F02523E00C369C6 /* rain.gif */,
 				2EF5B0271F02521C00C369C6 /* snowing.gif */,
@@ -2726,6 +2729,7 @@
 				0F49CB741E7A1F0500D46ECC /* Home.storyboard in Resources */,
 				CDEE5EAC1ECDD82E00A5779D /* portrait.png in Resources */,
 				F668AF251D53413B0079587F /* Main.storyboard in Resources */,
+				2EF5B02E1F02657700C369C6 /* haze.gif in Resources */,
 				2EF5B02C1F02525300C369C6 /* cloudy.gif in Resources */,
 				2E12CC121E7F5E3000C7D006 /* CYPhotoCell.xib in Resources */,
 				2E2D92CF1EF1067C0007B90A /* PowerLightCell.xib in Resources */,
