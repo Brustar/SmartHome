@@ -18,4 +18,6 @@
 @property (strong, nonatomic) LeftSlideViewController *LeftSlideVC;//侧滑视图VC
 @property (strong, nonatomic) BaseTabBarController *mainTabBarController;//主视图TabBarVC
 
+@property (nonatomic,strong) LeftViewController * leftview;
+
 @end

@@ -27,15 +27,18 @@
     
     return _unreadcountArr;
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.unreadcountArr removeAllObjects];
+    [self creatItemID];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addNotifications];
     [self getUserInfoFromDB];
-    [self creatItemID];
+//    [self creatItemID];
     _itemArray = @[@"家庭成员",@"视频动态",@"智能账单",@"通知",@"故障及保修记录",@"切换家庭账号"];
-
-    
     _bgButton = [[UIButton alloc] initWithFrame:self.view.frame];
     [_bgButton setBackgroundImage:[UIImage imageNamed:@"my_bg_side_nol"] forState:UIControlStateNormal];
     [_bgButton addTarget:self action:@selector(bgButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -89,25 +92,30 @@
         cell.imageView.image = [UIImage imageNamed:@"my_cloud"];
     }else if (indexPath.row == 3) {
         
-        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(75, 10, 10, 10)];
+        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(90, 12, 20, 20)];
         label.backgroundColor = [UIColor redColor];
         label.layer.masksToBounds = YES;
-        label.layer.cornerRadius = 5;
+        label.layer.cornerRadius = 10;
+        label.hidden = YES;
         [cell addSubview:label];
-        NSMutableArray * subArr = [NSMutableArray array];
+        cell.imageView.image = [UIImage imageNamed:@"my_msg"];
+//        NSMutableArray * subArr = [NSMutableArray array];
+         _sum = 0;
         for (int i = 0; i < self.unreadcountArr.count; i ++) {
-            if ([self.unreadcountArr[i] intValue] == 0) {
-                [subArr addObject:self.unreadcountArr[i]];
-            }
-            if (self.unreadcountArr.count == subArr.count) {
-                label.hidden = YES;
-            }
-            else{
-               label.hidden = NO;
-            }
+            _sum += [self.unreadcountArr[i] integerValue];
             
         }
-        cell.imageView.image = [UIImage imageNamed:@"my_msg"];
+        if (_sum == 0) {
+            label.hidden = YES;
+        }else{
+            label.hidden = NO;
+        }
+        label.text = [NSString stringWithFormat:@"%d",_sum];
+        label.textColor = [UIColor whiteColor];
+        label.font = [UIFont systemFontOfSize:12];
+        label.textAlignment = NSTextAlignmentCenter;
+        [NC postNotificationName:@"Sum" object:[NSString stringWithFormat:@"%d",_sum]];
+       
     }else if (indexPath.row == 4) {
         cell.imageView.image = [UIImage imageNamed:@"my_alert"];
     }else if (indexPath.row == 5) {

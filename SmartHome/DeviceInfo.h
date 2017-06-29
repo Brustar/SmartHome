@@ -57,7 +57,7 @@ enum{
     iPadPro
 };
 
-#define SMART_DB @"smartDB"
+#define SMART_DB @"smartDB.db"
 
 #define KICK_OUT @"kicking"
 

@@ -51,6 +51,8 @@
 
 //显示网络状态视图
 - (void)showNetStateView;
+//未读消息的图示
+-(void)showMassegeLabel;
 //设置网络状态
 - (void)setNetState:(int)state;
 - (void)adjustTitleFrameForSplitView;

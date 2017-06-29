@@ -57,16 +57,14 @@
         if([responseObject[@"result"] intValue]==0)
         {
                 NSInteger userID = [[UD objectForKey:@"UserID"] integerValue];
-                BOOL succeed = [SQLManager updateUserPortraitUrlByID:(int)userID url:self.changeNameTextField.text];//更新User表
-                BOOL succeed_chats = [SQLManager updateChatsPortraitByID:(int)userID userName:self.changeNameTextField.text nickName:self.changeNameTextField.text];//更新chats表
+                BOOL   succeed = [SQLManager updateUserNickNameByID:(int)userID nickName:self.changeNameTextField.text];//更新User表
+                BOOL succeed_chats = [SQLManager updateChatsPortraitByID:(int)userID nickname:self.changeNameTextField.text];//更新chats表
                 if (succeed && succeed_chats) {
                     [MBProgressHUD showSuccess:@"更新昵称成功"];
-                    _userInfomation.nickName = self.changeNameTextField.text;
-                    _userInfomation.userName = self.changeNameTextField.text;
                 [NC postNotificationName:@"refreshNickName" object:self.changeNameTextField.text];
                
                    }
-           [MBProgressHUD showSuccess:@"保存成功"];
+            [MBProgressHUD showSuccess:@"保存成功"];
            
         }else{
             [MBProgressHUD showError:responseObject[@"保存失败"]];

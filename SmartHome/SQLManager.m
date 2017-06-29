@@ -18,7 +18,7 @@
 +(FMDatabase *)connetdb
 {
     NSString *dbPath = [[IOManager sqlitePath] stringByAppendingPathComponent:SMART_DB];
-    
+    NSLog(@"dbPath:%@",dbPath);
     return [FMDatabase databaseWithPath:dbPath];
 }
 
@@ -2472,13 +2472,13 @@
     return result;
 }
 #pragma mark - chats
-+ (BOOL)updateChatsPortraitByID:(int)userID userName:(NSString *)userName nickName:(NSString *)nickName {
++ (BOOL)updateChatsPortraitByID:(int)userID nickname:(NSString *)nickname {
     FMDatabase *db = [SQLManager connetdb];
     if (![db open]) {
         NSLog(@"Could not open db");
         return NO;
     }
-    BOOL result = [db executeUpdate:[NSString stringWithFormat:@"UPDATE chats SET nickname = '%@' where user_id = %d and username = '%@'", userName, userID,userName]];
+    BOOL result = [db executeUpdate:[NSString stringWithFormat:@"UPDATE chats SET nickname = '%@' where user_id = %d", nickname, userID]];
     
     [db close];
     return result;
@@ -2491,6 +2491,20 @@
         return NO;
     }
     BOOL result = [db executeUpdate:[NSString stringWithFormat:@"UPDATE Users SET portraitUrl = '%@' where ID = %d", url, userID]];
+    
+    [db close];
+    return result;
+}
+
++ (BOOL)updateUserNickNameByID:(int)userID nickName:(NSString *)nickName {
+    FMDatabase *db = [SQLManager connetdb];
+    if (![db open]) {
+        NSLog(@"Could not open db");
+        return NO;
+    }
+    NSString *sqlStr = [NSString stringWithFormat:@"UPDATE Users SET nickName = '%@' where ID = %d", nickName, userID];
+    BOOL result = [db executeUpdate:sqlStr];
+    NSLog(@"upDateUserNickNameSql:%@",sqlStr);
     
     [db close];
     return result;

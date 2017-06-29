@@ -94,6 +94,7 @@ static NSString * const CYPhotoId = @"photo";
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self setupNaviBar];
     [self showNetStateView];
+    [self showMassegeLabel];
     self.rooms = [SQLManager getAllRoomsInfo];
     
     [self setUpRoomScrollerView];

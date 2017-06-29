@@ -10,10 +10,11 @@
 #import "BaseTabBarController.h"
 #import "VoiceOrderController.h"
 #import <ImageIO/ImageIO.h>
+#import "LeftViewController.h"
 
-#define ANIMATION_TIME 2
+#define ANIMATION_TIME 1
 
-@interface IpadFirstViewController ()<RCIMReceiveMessageDelegate,UIGestureRecognizerDelegate>
+@interface IpadFirstViewController ()<RCIMReceiveMessageDelegate,UIGestureRecognizerDelegate,LeftViewControllerDelegate>
 @property (nonatomic,strong) BaseTabBarController *baseTabbarController;
 @property (nonatomic, readonly) UIButton *naviRightBtn;
 @property (nonatomic, readonly) UIButton *naviLeftBtn;
@@ -64,6 +65,7 @@
     [self.imageView addGestureRecognizer:tap];
     [self setupNaviBar];
     [self showNetStateView];
+    [self showMassegeLabel];
     [self setTimer];
     [self getWeekdayStringFromDate];
     [self chatConnect];
@@ -736,7 +738,10 @@
     [self.navigationController pushViewController:voiceVC animated:YES];
     
 }
-
+-(void)showMassegeView
+{
+    [self showMassegeLabel];
+}
 //-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 //{
 ////    self.CoverView.hidden = YES;

@@ -33,6 +33,7 @@
 @property(nonatomic, strong) UITableView *myTableView;
 @property(nonatomic, assign) id<LeftViewControllerDelegate>delegate;
 @property(nonatomic, strong) UIButton *bgButton;
+@property(nonatomic,assign)int sum;
 @end
 
 
@@ -40,6 +41,7 @@
 @protocol LeftViewControllerDelegate <NSObject>
 
 @optional
+
 - (void)onBackgroundBtnClicked:(UIButton *)btn;
 - (void)didSelectItem:(NSString *)item;
 

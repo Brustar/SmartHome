@@ -94,8 +94,12 @@
     _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     _baseTabbarController.tabbarPanel.hidden = NO;
     _baseTabbarController.tabBar.hidden = YES;
+    int userID = [[UD objectForKey:@"UserID"] intValue];
+    _userInfomation = [SQLManager getUserInfo:userID];
+    self.UserNameLabel.text = [NSString stringWithFormat:@"Hi! %@",_userInfomation.nickName];
     int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
-    
+    [self showMassegeLabel];
+   
     self.numberLabel.text = [NSString stringWithFormat:@"%d" ,unread<0?0:unread];
     
     if ([self.numberLabel.text isEqualToString:@"0"]) {
@@ -177,8 +181,9 @@
     
     [self setupNaviBar];
     [self showNetStateView];
-    
+
     [self setUIMessage];
+   
     [self chatConnect];
     [self getScenesFromPlist];
     //[self setBtn];
@@ -202,9 +207,7 @@
     _familyNum = [[NSUserDefaults standardUserDefaults] objectForKey:@"familyNum"];
     self.memberFamilyLabel.text = [NSString stringWithFormat:@"家庭成员（%@）",_familyNum];
 //    self.UserNameLabel.text = [NSString stringWithFormat:@"Hi! %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"Account"]];
-    int userID = [[UD objectForKey:@"UserID"] intValue];
-    _userInfomation = [SQLManager getUserInfo:userID];
-    self.UserNameLabel.text = [NSString stringWithFormat:@"Hi! %@",_userInfomation.nickName];
+   
     [_HeadImageView addGestureRecognizer:Headtap];
     [self.doMessageBtn addTarget:self action:@selector(HeadDoTap:) forControlEvents:UIControlEventTouchUpInside];
     _calenderDayLabel.adjustsFontSizeToFitWidth = YES;
