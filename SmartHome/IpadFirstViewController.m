@@ -12,7 +12,7 @@
 #import <ImageIO/ImageIO.h>
 #import "LeftViewController.h"
 
-#define ANIMATION_TIME 1
+#define ANIMATION_TIME 2
 
 @interface IpadFirstViewController ()<RCIMReceiveMessageDelegate,UIGestureRecognizerDelegate,LeftViewControllerDelegate>
 @property (nonatomic,strong) BaseTabBarController *baseTabbarController;
@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *TimerLabel;//显示日期的label
 @property (weak, nonatomic) IBOutlet UILabel *temperatureLabel;//温度
 @property (weak, nonatomic) IBOutlet UILabel *weekDayLabel;
+@property (weak, nonatomic) IBOutlet UILabel *cityLabel;//地方名字的显示
 
 @property (weak, nonatomic) IBOutlet UIView *CoverView;
 @property (nonatomic,strong) NSString * WeekDayStr;
@@ -48,6 +49,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *IconeImage2;//第二个消息的头像
 @property (weak, nonatomic) IBOutlet UIImageView *DUPImageView;//闪烁提醒的图标
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *threeBtnleading;
+@property (nonatomic,strong) NSString * weahter;
 
 @property (nonatomic,assign) NSTimer *scheculer;
 @end
@@ -166,7 +168,55 @@
     [self getScenesFromPlist];
     [self setBtn];
     [self getPlist];
+    [self getWeather];
 
+}
+
+-(void)getWeather
+{
+    NSString *url = [NSString stringWithFormat:@"%@cloud/weather.aspx",[IOManager httpAddr]];
+    NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    if (auothorToken) {
+        NSDictionary *dict = @{@"token":auothorToken,@"code":@"shenzhen"};
+        HttpManager *http=[HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = 1;
+        [http sendPost:url param:dict];
+    }
+}
+-(void)httpHandler:(id)responseObject tag:(int)tag
+{
+    if(tag == 1)
+    {
+        if([responseObject[@"result"] intValue]==0)
+        {
+            NSString * temp1 = responseObject[@"temp1"];
+            NSString * temp2 = responseObject[@"temp2"];
+            NSString * weather = responseObject[@"weather"];
+            self.weahter = weather;
+            self.temperatureLabel.text = [NSString stringWithFormat:@"低温%@ ℃~高温%@ ℃",temp2,temp1];
+             if ([weather rangeOfString:@"多云"].location != NSNotFound) {
+                 self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-Overcast"];
+             }if ([weather rangeOfString:@"雨"].location != NSNotFound) {
+                 self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-rain"];
+             }if ([weather rangeOfString:@"雪"].location != NSNotFound) {
+                 self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-snow"];
+             }if ([weather rangeOfString:@"雾霾"].location != NSNotFound) {
+                 self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-haze"];
+             }if ([weather rangeOfString:@"晴"].location != NSNotFound) {
+                 if(_result>0){
+                     self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-night"];
+                 }else{
+                      self.imageView.image = [UIImage imageNamed:@"IpadSceneBg"];
+                 }
+             }
+            
+        }else{
+            [MBProgressHUD showError:responseObject[@"保存失败"]];
+        }
+        
+    }
+    
 }
 -(void)getPlist
 {
@@ -285,15 +335,25 @@
 //点击首页跳转到家庭首页
 -(void)doTap:(UIGestureRecognizer *)dap
 {
-    
     // 设定位置和大小
     CGRect frame = CGRectMake(0,0,UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT);
     // 读取gif图片数据
     NSString *launchAnimation;
-    if(_result>0){
-        launchAnimation = @"night";
-    }else{
-        launchAnimation = @"ipadFirstViewVC";
+
+    if ([self.weahter rangeOfString:@"多云"].location != NSNotFound) {
+        launchAnimation = @"cloudy";
+    }if ([self.weahter rangeOfString:@"雨"].location != NSNotFound) {
+        launchAnimation = @"rain";
+    }if ([self.weahter rangeOfString:@"雪"].location != NSNotFound) {
+        launchAnimation = @"snowing";
+    }if ([self.weahter rangeOfString:@"雾霾"].location != NSNotFound) {
+        launchAnimation = @"haze";
+    }if ([self.weahter rangeOfString:@"晴"].location != NSNotFound) {
+            if(_result>0){
+                launchAnimation = @"night";
+            }else{
+                launchAnimation = @"ipadFirstViewVC";
+            }
     }
     
     //test uiimageview
@@ -578,11 +638,11 @@
     NSLog(@"-------%@",_locationString);
     
     _result= [_locationString compare:@"19:00"];
-    if(_result>0){
-        self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-night"];
-    }else{
-        self.imageView.image = [UIImage imageNamed:@"IpadSceneBg"];
-    }
+//    if(_result>0){
+//        self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-night"];
+//    }else{
+//        self.imageView.image = [UIImage imageNamed:@"IpadSceneBg"];
+//    }
     NSCalendar * cal=[NSCalendar currentCalendar];
     NSUInteger unitFlags=NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear;
     NSDateComponents * conponent= [cal components:unitFlags fromDate:senddate];

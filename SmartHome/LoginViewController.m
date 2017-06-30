@@ -769,7 +769,6 @@ NSArray *array = [NSArray arrayWithObjects:
                 }
            // }
             
-            
             [IOManager writeUserdefault:responseObject[@"rctoken"] forKey:@"rctoken"];
             [IOManager writeUserdefault:responseObject[@"homename"] forKey:@"homename"];
             [self writeChatListConfigDataToSQL:responseObject[@"userList"]];

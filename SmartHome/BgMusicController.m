@@ -18,6 +18,8 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import "UIViewController+Navigator.h"
 #import "IphoneRoomView.h"
+#import "VolumeManager.h"
+
 @interface BgMusicController ()<IphoneRoomViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UISlider *volume;
@@ -157,17 +159,10 @@ BOOL animating;
 
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(changeVolume) forControlEvents:UIControlEventValueChanged];
-    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
-    
-    if ([self.sceneid intValue]>0) {
-        for(int i=0;i<[_scene.devices count];i++)
-        {
-            if ([[_scene.devices objectAtIndex:i] isKindOfClass:[BgMusic class]]) {
-                self.volume.value=((BgMusic*)[_scene.devices objectAtIndex:i]).bgvolume;
-                self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
-            }
-        }
-    }
+
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+    [[VolumeManager defaultManager] start];
     
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
@@ -196,23 +191,6 @@ BOOL animating;
     NSData *data=[[DeviceInfo defaultManager] changeVolume:self.volume.value*100 deviceID:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
-}
-
--(IBAction)save:(id)sender
-{
-    BgMusic *device=[[BgMusic alloc] init];
-    [device setDeviceID:[self.deviceid intValue]];
-    [device setBgvolume:self.volume.value];
-    
-    [_scene setSceneID:[self.sceneid intValue]];
-    [_scene setRoomID:self.roomID];
-    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-    [_scene setReadonly:NO];
-    
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
-    
-    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
 }
 
 #pragma mark - TCP recv delegate
@@ -397,6 +375,8 @@ BOOL animating;
         [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification object:audio.musicPlayer];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMusicPlayerControllerVolumeDidChangeNotification object:audio.musicPlayer];
     }
+    DeviceInfo *device=[DeviceInfo defaultManager];
+    [device removeObserver:self forKeyPath:@"volume" context:nil];
 }
 
 @end
