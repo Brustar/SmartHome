@@ -370,8 +370,8 @@
                 self.volume.value=proto.action.RValue/100.0;
             }
             if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) {
-                UIButton *btn = [self.view viewWithTag:8];
-                btn.selected = proto.action.state;
+                self.btnSwitch.selected = proto.action.state;
+                self.btnPower.selected = proto.action.state;
             }
         }
     }
