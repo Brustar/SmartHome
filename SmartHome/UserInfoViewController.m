@@ -29,52 +29,49 @@
     self.DetialArray = @[@"/ui/Vip.aspx?user_id=%d",@"/ui/GoodsList.aspx?user_id=%d",@"/ui/OrderQuery.aspx?user_id=%d",@"/ui/Cart.aspx?user_id=%d"];
     
     
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+    if (ON_IPAD) {
         [self adjustNaviBarFrameForSplitView];
         [self adjustTitleFrameForSplitView];
         [self setNaviBarLeftBtn:nil];
     }
-    
-    [self initUI];
+
     [self getUserInfoFromDB];
     [self fetchUserInfo];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
+
     if (ON_IPAD) {
         self.UserinfoLeadingConstraint.constant = 20;
         self.UserinfoTrailingConstraint.constant = 20;
     }
 
+     [self.userinfoTableView reloadData];
 }
-- (void)initUI {
+
+- (void)refreshUI {
+    
     NSInteger userType = [[UD objectForKey:@"UserType"] integerValue];
     if (userType == 1) {
         _userTypeStr = @"主人";
     }else {
         _userTypeStr = @"客人";
     }
-    
     self.nameLabel.text = [NSString stringWithFormat:@"-- %@, %@身份 --", _userInfomation.nickName, _userTypeStr];
-    
+    [self.headerBtn sd_setImageWithURL:[NSURL URLWithString:_userInfomation.headImgURL] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portrait"]];
     self.headerBtn.layer.cornerRadius = self.headerBtn.frame.size.width/2;
     self.headerBtn.layer.masksToBounds = YES;
     self.userinfoTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
     self.userinfoTableView.tableFooterView = [UIView new];
-}
-
-- (void)refreshUI {
-    [self.headerBtn sd_setImageWithURL:[NSURL URLWithString:_userInfomation.headImgURL] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portrait"]];
-    
-    self.nameLabel.text = [NSString stringWithFormat:@"-- %@, %@身份 --", _userInfomation.nickName, _userTypeStr];
-    
     [self.userinfoTableView reloadData];
 }
 
 - (void)getUserInfoFromDB {
+    
     int userID = [[UD objectForKey:@"UserID"] intValue];
     _userInfomation = [SQLManager getUserInfo:userID];
+    
     [self refreshUI];
 }
 

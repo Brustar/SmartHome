@@ -39,8 +39,6 @@
     self.NameLabel.text = self.nameStr;
     self.passWordField.placeholder = @"请设置逸云密码";
     self.confirmedPsd.placeholder = @"请再次填入";
-   
-    
 }
 
 -(void)sendRequest
@@ -48,7 +46,7 @@
     NSString *url = [NSString stringWithFormat:@"%@Cloud/user_info.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     if (auothorToken) {
-        NSDictionary *dict = @{@"token":auothorToken,@"optype":[NSNumber numberWithInteger:3],@"psw":[self.passWordField.text md5],@"psw2":[self.confirmedPsd.text md5]};
+        NSDictionary *dict = @{@"token":auothorToken,@"optype":[NSNumber numberWithInteger:4],@"psw":[self.passWordField.text md5],@"psw2":[self.confirmedPsd.text md5]};
         HttpManager *http=[HttpManager defaultManager];
         http.delegate = self;
         http.tag = 1;
@@ -62,7 +60,6 @@
     {
         if([responseObject[@"result"] intValue]==0)
         {
-//            [UD setObject:self.passWordField.text  forKey:@"Password"];
             [MBProgressHUD showSuccess:@"修改密码成功"];
             
         }else{
@@ -74,9 +71,14 @@
 }
 -(void)rightBtnClicked:(UIButton *)bbt
 {
-    [self sendRequest];
-    
-    [self.navigationController popViewControllerAnimated:YES];
+    if ([self.passWordField.text compare:self.confirmedPsd.text] == NSOrderedSame) {
+         [self sendRequest];
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        
+        [MBProgressHUD showError:@"两次密码不相同"];
+    }
+   
     
 }
 - (void)didReceiveMemoryWarning {

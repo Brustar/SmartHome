@@ -342,8 +342,6 @@
                 if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
                     vc.modalPresentationStyle = UIModalPresentationFormSheet;
                 }
-                
-                
             });
             vc.delegate = self;
             
@@ -417,7 +415,6 @@ NSArray *array = [NSArray arrayWithObjects:
                 [vc setValue:self.masterId forKey:@"masterStr"];
                 [vc setValue:self.hostName forKey:@"hostName"];
                 
-                
                 if ([@"1" isEqualToString:list[2]]) {
                     self.role=@"主人";
                 }else{
@@ -425,8 +422,6 @@ NSArray *array = [NSArray arrayWithObjects:
                 }
                 [vc setValue:self.role forKey:@"suerTypeStr"];
             }
-            
-            
             else
             {
                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"非法的二维码" preferredStyle:UIAlertControllerStyleAlert];
@@ -438,8 +433,6 @@ NSArray *array = [NSArray arrayWithObjects:
     }else {
         [self.navigationController popViewControllerAnimated:YES];
         
-        
-            
             //result 格式： hostid @ hostname @ userType
             NSArray* list = [result componentsSeparatedByString:@"@"];
             if([list count] > 2)
@@ -674,8 +667,6 @@ NSArray *array = [NSArray arrayWithObjects:
         [TitleArray writeToFile:filePath atomically:YES];
         [DetailArray writeToFile:filePath1 atomically:YES];
     }
-    
-    
 
 }
 -(void) writeChatListConfigDataToSQL:(NSArray *)users
@@ -742,7 +733,6 @@ NSArray *array = [NSArray arrayWithObjects:
                     [self.homeNameArray addObject:host[@"homename"]];
                 }
             }
-            
             
             //缓存HostIDS， HomeNameList
             if (self.hostIDS) {

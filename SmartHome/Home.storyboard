@@ -186,10 +186,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi！石总" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="taI-P7-os3">
-                                <rect key="frame" x="128" y="526" width="120" height="20"/>
+                                <rect key="frame" x="88" y="526" width="200" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Ga3-fT-MaD"/>
-                                    <constraint firstAttribute="width" constant="120" id="h7Y-Hh-YEJ"/>
+                                    <constraint firstAttribute="width" constant="200" id="h7Y-Hh-YEJ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

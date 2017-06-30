@@ -254,7 +254,7 @@
     _headerBtn = headButton;
     
     UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(headButton.frame)+10, headerWidth, 20)];
-    nameLabel.text = _userInfo.userName;
+    nameLabel.text = _userInfo.nickName;
     nameLabel.textColor = [UIColor whiteColor];
     nameLabel.font = [UIFont systemFontOfSize:15.0];
     nameLabel.textAlignment = NSTextAlignmentCenter;
@@ -388,7 +388,7 @@
 }
 
 - (void)addNotifications {
-    [NC addObserver:self selector:@selector(refreshPortrait:) name:@"refreshPortrait" object:nil];
+     [NC addObserver:self selector:@selector(refreshPortrait:) name:@"refreshPortrait" object:nil];
      [NC addObserver:self selector:@selector(refreshNickName:) name:@"refreshNickName" object:nil];
 }
 
