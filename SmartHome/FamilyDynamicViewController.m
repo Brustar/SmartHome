@@ -64,15 +64,8 @@
         vc.roomName = roomName;
         vc.deviceid = [_cameraIDArray[i] stringValue];
         vc.view.frame = CGRectMake(0, gap*(i+1) + i*itemHeight, FW(self.cameraList), itemHeight);
-//    if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) { //如果是主人，
         [self.cameraList addSubview:vc.view];
         [self addChildViewController:vc];
-//    }
-//    else{
-//        
-//        [self.cameraList addSubview:vc.view];
-//    }
-        
     }
     [self setNaviBarTitle:@"视频动态"];
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {

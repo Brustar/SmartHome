@@ -235,7 +235,6 @@
         }
         NSArray * title = [titleSet allObjects];
         NSString * SubStr  = title[0];
-        
         while ([DetailSet count] < 1) {
             int r = arc4random() % [DetailArray count];
             [DetailSet addObject:[DetailArray objectAtIndex:r]];
@@ -597,11 +596,8 @@
     
     
     NSDate*date = [NSDate date];
-    
     NSCalendar*calendar = [NSCalendar currentCalendar];
-    
     NSDateComponents*comps;
-    
     comps =[calendar components:(NSCalendarUnitWeekOfMonth | NSCalendarUnitWeekday | NSCalendarUnitWeekdayOrdinal)
             
                        fromDate:date];
@@ -628,21 +624,10 @@
 {
     //获取系统时间
     NSDate * senddate=[NSDate date];
-    
     NSDateFormatter *dateformatter=[[NSDateFormatter alloc] init];
-    
     [dateformatter setDateFormat:@"HH:mm"];
-    
     _locationString=[dateformatter stringFromDate:senddate];
-    
-    NSLog(@"-------%@",_locationString);
-    
     _result= [_locationString compare:@"19:00"];
-//    if(_result>0){
-//        self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-night"];
-//    }else{
-//        self.imageView.image = [UIImage imageNamed:@"IpadSceneBg"];
-//    }
     NSCalendar * cal=[NSCalendar currentCalendar];
     NSUInteger unitFlags=NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear;
     NSDateComponents * conponent= [cal components:unitFlags fromDate:senddate];
@@ -798,16 +783,6 @@
     [self.navigationController pushViewController:voiceVC animated:YES];
     
 }
--(void)showMassegeView
-{
-    [self showMassegeLabel];
-}
-//-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-//{
-////    self.CoverView.hidden = YES;
-////     self.MessageView.hidden = YES;
-//    _baseTabbarController.tabbarPanel.hidden = NO;
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

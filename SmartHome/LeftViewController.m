@@ -139,7 +139,6 @@
             [_delegate didSelectItem:item];
         }
     }else {
-    
     UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIStoryboard *myInfoStoryBoard  = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
     UIStoryboard *familyStoryBoard = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
@@ -162,12 +161,17 @@
         [appDelegate.mainTabBarController.selectedViewController pushViewController:mySubEnergyVC animated:YES];
         
     }else if ([item isEqualToString:@"视频动态"]) {
-        //视频动态
-        [MBProgressHUD showMessage:@"请稍候..."];
-        FamilyDynamicViewController *vc = [familyStoryBoard instantiateViewControllerWithIdentifier:@"FamilyDynamicVC"];
-        vc.hidesBottomBarWhenPushed = YES;
-        [appDelegate.mainTabBarController.selectedViewController pushViewController:vc animated:YES];
-        
+         //视频动态
+       if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) { //如果是主人，
+//            [MBProgressHUD showMessage:@"请稍候..."];
+            FamilyDynamicViewController *vc = [familyStoryBoard instantiateViewControllerWithIdentifier:@"FamilyDynamicVC"];
+            vc.hidesBottomBarWhenPushed = YES;
+            [appDelegate.mainTabBarController.selectedViewController pushViewController:vc animated:YES];
+       }else{
+           
+           [MBProgressHUD showError:@"你是普通用户无权查看"];
+       }
+    
     }else if ([item isEqualToString:@"通知"]) {
         MSGController *msgVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"MSGController"];
         msgVC.hidesBottomBarWhenPushed = YES;
