@@ -109,7 +109,7 @@
         NSData *port=[data subdataWithRange:NSMakeRange(8, 2)];
              
         info.masterIP=[PackManager NSDataToIP:ip];
-        info.masterPort=(int)[PackManager dataToUInt16:port];
+        //info.masterPort=(int)[PackManager dataToUInt16:port];
         info.connectState=atHome;
 
         //release 不能马上去连，要暂停0.1S,再连从服务器，不然会崩溃
