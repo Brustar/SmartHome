@@ -11,13 +11,14 @@
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "ECMessage.h"
+#import "LeftViewController.h"
 
 @interface DetailMSGViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic,strong) NSMutableArray * msgArr;
-
+@property (nonatomic,strong) UIButton * leftBtn;
 @property (nonatomic,assign) BOOL isEditing;
 @property (nonatomic,assign) NSInteger notify_id;
 @property (nonatomic,assign) NSInteger unreadcount;
@@ -48,7 +49,13 @@
    
     [self setNaviBarTitle:@"消息通知"];
     _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"编辑" target:self action:@selector(rightBtnClicked:)];
+    if (ON_IPAD) {
+          _leftBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"backBtn" imgHighlight:@"backBtn" target:self action:@selector(leftBtnClicked:)];
+         [self setNaviBarLeftBtn:_leftBtn];
+    }
+    
     [self setNaviBarRightBtn:_naviRightBtn];
+   
 
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         [self adjustNaviBarFrameForSplitView];
@@ -56,7 +63,14 @@
         [self setNaviBarRightBtnForSplitView:_naviRightBtn];
     }
 }
-
+-(void)leftBtnClicked:(UIButton *)btn
+{
+     [self.navigationController popViewControllerAnimated:YES];
+//     LeftViewController * leftVC = [[LeftViewController alloc] init];
+//     [leftVC refreshUI];
+   
+    
+}
 -(void)rightBtnClicked:(UIButton *)btn
 {
     if (btn.selected) {

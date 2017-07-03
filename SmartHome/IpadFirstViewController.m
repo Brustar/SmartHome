@@ -12,7 +12,7 @@
 #import <ImageIO/ImageIO.h>
 #import "LeftViewController.h"
 
-#define ANIMATION_TIME 2
+#define ANIMATION_TIME 1
 
 @interface IpadFirstViewController ()<RCIMReceiveMessageDelegate,UIGestureRecognizerDelegate,LeftViewControllerDelegate>
 @property (nonatomic,strong) BaseTabBarController *baseTabbarController;
@@ -192,18 +192,19 @@
         {
             NSString * temp1 = responseObject[@"temp1"];
             NSString * temp2 = responseObject[@"temp2"];
-            NSString * weather = responseObject[@"weather"];
-            self.weahter = weather;
+//            NSString * weather = responseObject[@"weather"];
+            NSString * weather_curr = responseObject[@"weather_curr"];
+            self.weahter = weather_curr;
             self.temperatureLabel.text = [NSString stringWithFormat:@"低温%@ ℃~高温%@ ℃",temp2,temp1];
-             if ([weather rangeOfString:@"多云"].location != NSNotFound) {
+             if ([weather_curr rangeOfString:@"多云"].location != NSNotFound) {
                  self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-Overcast"];
-             }if ([weather rangeOfString:@"雨"].location != NSNotFound) {
+             }if ([weather_curr rangeOfString:@"雨"].location != NSNotFound) {
                  self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-rain"];
-             }if ([weather rangeOfString:@"雪"].location != NSNotFound) {
+             }if ([weather_curr rangeOfString:@"雪"].location != NSNotFound) {
                  self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-snow"];
-             }if ([weather rangeOfString:@"雾霾"].location != NSNotFound) {
+             }if ([weather_curr rangeOfString:@"雾霾"].location != NSNotFound) {
                  self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-haze"];
-             }if ([weather rangeOfString:@"晴"].location != NSNotFound) {
+             }if ([weather_curr rangeOfString:@"晴"].location != NSNotFound) {
                  if(_result>0){
                      self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-night"];
                  }else{
@@ -686,7 +687,6 @@
 {
     NSString *groupID = [[UD objectForKey:@"HostID"] description];
     NSString *homename = [UD objectForKey:@"homename"];
-    
     RCGroup *aGroupInfo = [[RCGroup alloc]initWithGroupId:groupID groupName:homename portraitUri:@""];
     ConversationViewController *conversationVC = [[ConversationViewController alloc] init];
     conversationVC.conversationType = ConversationType_GROUP;
@@ -696,7 +696,6 @@
     NSArray *info = [SQLManager queryChat:user.userId];
     NSString *nickname = [info firstObject];
     NSString *protrait = [info lastObject];
-    
     [[RCIM sharedRCIM] refreshUserInfoCache:[[RCUserInfo alloc] initWithUserId:user.userId name:nickname portrait:protrait] withUserId:user.userId];
     [self.navigationController pushViewController:conversationVC animated:YES];
 }
@@ -783,7 +782,6 @@
     [self.navigationController pushViewController:voiceVC animated:YES];
     
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

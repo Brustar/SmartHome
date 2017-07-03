@@ -24,11 +24,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setNaviBarTitle:@"个人信息"];
-    
+
     self.TitleArray = @[@"VIP会员",@"服务商城",@"我的订单",@"购物车",@"昵称",@"电话",@"逸云密码"];
     self.DetialArray = @[@"/ui/Vip.aspx?user_id=%d",@"/ui/GoodsList.aspx?user_id=%d",@"/ui/OrderQuery.aspx?user_id=%d",@"/ui/Cart.aspx?user_id=%d"];
-    
-    
     if (ON_IPAD) {
         [self adjustNaviBarFrameForSplitView];
         [self adjustTitleFrameForSplitView];
@@ -41,7 +39,8 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-
+//    [self getUserInfoFromDB];
+//    [self fetchUserInfo];
     if (ON_IPAD) {
         self.UserinfoLeadingConstraint.constant = 20;
         self.UserinfoTrailingConstraint.constant = 20;
@@ -249,7 +248,6 @@
        
         [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
            
-            
             
         }]];
         [alertController addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {

@@ -27,17 +27,19 @@
     
     return _unreadcountArr;
 }
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.unreadcountArr removeAllObjects];
-    [self creatItemID];
+
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addNotifications];
     [self getUserInfoFromDB];
-//    [self creatItemID];
+    if (ON_IPONE) {
+         [self creatItemID];
+    }
     _itemArray = @[@"家庭成员",@"视频动态",@"智能账单",@"通知",@"故障及保修记录",@"切换家庭账号"];
     _bgButton = [[UIButton alloc] initWithFrame:self.view.frame];
     [_bgButton setBackgroundImage:[UIImage imageNamed:@"my_bg_side_nol"] forState:UIControlStateNormal];
@@ -114,7 +116,7 @@
         label.textColor = [UIColor whiteColor];
         label.font = [UIFont systemFontOfSize:12];
         label.textAlignment = NSTextAlignmentCenter;
-        [NC postNotificationName:@"Sum" object:[NSString stringWithFormat:@"%d",_sum]];
+        [NC postNotificationName:@"SumNumber" object:[NSString stringWithFormat:@"%d",_sum]];
        
     }else if (indexPath.row == 4) {
         cell.imageView.image = [UIImage imageNamed:@"my_alert"];
@@ -413,5 +415,10 @@
 - (void)dealloc {
     [self removeNotifications];
 }
-
+-(void)refreshUI
+{
+    [self.unreadcountArr removeAllObjects];
+    [self creatItemID];
+    
+}
 @end

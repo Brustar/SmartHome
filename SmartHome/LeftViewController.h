@@ -34,6 +34,9 @@
 @property(nonatomic, assign) id<LeftViewControllerDelegate>delegate;
 @property(nonatomic, strong) UIButton *bgButton;
 @property(nonatomic,assign)int sum;
+
+- (void)refreshUI;
+
 @end
 
 
