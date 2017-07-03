@@ -65,6 +65,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *doMessageBtn;//弹出聊天页面的按钮
 
 @property (weak, nonatomic) IBOutlet UILabel *ShowHeadImage;//是否有新消息的图标
+@property (nonatomic,assign) int sum;
 
 @end
 
@@ -79,12 +80,21 @@
 
 - (void)addNotifications {
     [NC addObserver:self selector:@selector(netWorkDidChangedNotification:) name:@"NetWorkDidChangedNotification" object:nil];
+    [NC addObserver:self selector:@selector(SumNumber:) name:@"SumNumber" object:nil];
 }
 
 - (void)netWorkDidChangedNotification:(NSNotification *)noti {
     [self refreshUI];
 }
-
+-(void)SumNumber:(NSNotification *)no
+{
+    NSString * sumNumber = no.object;
+    _sum = [sumNumber intValue];
+    
+    if (_sum != 0) {
+     [self showMassegeLabel];
+    }
+}
 - (void)removeNotifications {
     [NC removeObserver:self];
 }
@@ -98,7 +108,7 @@
     _userInfomation = [SQLManager getUserInfo:userID];
     self.UserNameLabel.text = [NSString stringWithFormat:@"Hi! %@",_userInfomation.nickName];
     int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
-    [self showMassegeLabel];
+    [self addNotifications];
    
     self.numberLabel.text = [NSString stringWithFormat:@"%d" ,unread<0?0:unread];
     
@@ -176,7 +186,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self addNotifications];
     [self connect];
     
     [self setupNaviBar];

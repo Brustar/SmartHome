@@ -38,7 +38,7 @@
     [self addNotifications];
     [self getUserInfoFromDB];
     if (ON_IPONE) {
-         [self creatItemID];
+     [self creatItemID];
     }
     _itemArray = @[@"家庭成员",@"视频动态",@"智能账单",@"通知",@"故障及保修记录",@"切换家庭账号"];
     _bgButton = [[UIButton alloc] initWithFrame:self.view.frame];

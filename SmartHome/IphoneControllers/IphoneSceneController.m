@@ -48,7 +48,7 @@
 @property (nonatomic,assign) int roomID;
 @property (nonatomic,strong) NSArray *roomList;
 @property (nonatomic,strong) UIButton *selectedRoomBtn;
-
+@property (nonatomic,assign) int sum;
 @property (nonatomic,strong)NSMutableArray *scenes;
 @property (nonatomic, assign) int roomIndex;
 @property (nonatomic,assign) int selectedSId;
@@ -172,11 +172,11 @@ static NSString * const CYPhotoId = @"photo";
 }
 - (void)viewDidLoad {
       [super viewDidLoad];
-      [self addNotifications];
+//      [self addNotifications];
       self.automaticallyAdjustsScrollViewInsets = NO;
       [self setupNaviBar];
       [self showNetStateView];
-      [self showMassegeLabel];
+//      [self showMassegeLabel];
       self.roomList = [SQLManager getAllRoomsInfo];
       [self setUpRoomView];
       [self reachNotification];
@@ -298,8 +298,17 @@ static NSString * const CYPhotoId = @"photo";
 
 - (void)addNotifications {
     [NC addObserver:self selector:@selector(netWorkDidChangedNotification:) name:@"NetWorkDidChangedNotification" object:nil];
+     [NC addObserver:self selector:@selector(SumNumber:) name:@"SumNumber" object:nil];
 }
-
+-(void)SumNumber:(NSNotification *)no
+{
+    NSString * sumNumber = no.object;
+    _sum = [sumNumber intValue];
+    
+    if (_sum != 0) {
+        [self showMassegeLabel];
+    }
+}
 - (void)netWorkDidChangedNotification:(NSNotification *)noti {
     [self refreshUI];
 }
@@ -438,6 +447,7 @@ static NSString * const CYPhotoId = @"photo";
     _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     _baseTabbarController.tabbarPanel.hidden = NO;
     _baseTabbarController.tabBar.hidden = YES;
+     [self addNotifications];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
