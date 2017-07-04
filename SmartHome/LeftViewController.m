@@ -357,7 +357,6 @@
     }
 }
 
-
 - (void)headButtonClicked:(UIButton *)btn {
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
