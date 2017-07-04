@@ -28,6 +28,13 @@ typedef NS_ENUM(NSUInteger, deviceType) {
     Wetting
 };
 
+typedef NS_ENUM(NSUInteger, hType) {
+    switchLight = 1,
+    dimmarLight = 2,
+    colorLight = 3,
+    blind = 33
+};
+
 typedef NS_ENUM(NSUInteger, catalog) {
     cata_light = 1,
     cata_env ,

@@ -97,8 +97,6 @@
 
 }
 
-
-
 #pragma mark - 滑动图
 
 -(void) showScrollView{

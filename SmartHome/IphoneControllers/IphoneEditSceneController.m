@@ -118,30 +118,11 @@
     touchVC.delegate = self;
     [self getButtonUI];
     [self setupNaviBar];
-    [self fetchDevicesStatus];//获取所有设备的状态
     if (_lightArray.count == 0 && _SwitchLightArr.count == 0 && _ColourLightArr.count == 0) {
         self.patternView.hidden = YES;
         self.TableViewConstraint.constant = -60;
         
     }
-}
-
-#pragma mark - 获取房间设备状态
-- (void)fetchDevicesStatus {
-    NSString *url = [NSString stringWithFormat:@"%@Cloud/equipment_status_list.aspx",[IOManager httpAddr]];
-    NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
-    
-    if (auothorToken.length >0) {
-        NSDictionary *dict = @{@"token":auothorToken,
-                               @"optype":@(2),
-                               @"roomid":@(self.roomID)
-                               };
-        HttpManager *http = [HttpManager defaultManager];
-        http.delegate = self;
-        http.tag = 1;
-        [http sendPost:url param:dict showProgressHUD:NO];
-    }
-    
 }
 
 - (void)setupNaviBar {
@@ -472,41 +453,6 @@
 
 -(void)httpHandler:(id) responseObject tag:(int)tag
 {
-    if (tag == 1) {
-        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-            NSLog(@"responseObject:%@", responseObject);
-            if ([responseObject[@"result"] integerValue] == 0) {
-                NSArray *deviceArray = responseObject[@"equipment_status_list"];
-                
-                if ([deviceArray isKindOfClass:[NSArray class]] && deviceArray.count >0 ) {
-                    for(NSDictionary *device in deviceArray) {
-                        if ([device isKindOfClass:[NSDictionary class]]) {
-                            Device *devInfo = [[Device alloc] init];
-                            devInfo.eID = [device[@"equipmentid"] intValue];
-                            devInfo.hTypeId = [device[@"htype"] integerValue];
-                            devInfo.power = [device[@"status"] integerValue];
-                            devInfo.bright = [device[@"bright"] integerValue];
-                            devInfo.color = device[@"color"];
-                            devInfo.position = [device[@"position"] integerValue];
-                            devInfo.temperature = [device[@"temperature"] integerValue];
-                            devInfo.fanspeed = [device[@"fanspeed"] integerValue];
-                            devInfo.air_model = [device[@"model"] integerValue];
-                            
-                            [SQLManager updateDeviceStatus:devInfo];
-                        }
-                    }
-                }
-                
-                //刷新UI
-                [self.tableView reloadData];
-                
-            }else {
-                NSLog(@"设备状态获取失败！");
-            }
-        }else {
-            NSLog(@"设备状态获取失败！");
-        }
-    }
     if (tag == 3) {
         if([responseObject[@"result"] intValue] == 0)
         {
@@ -660,6 +606,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
    if (indexPath.section == 0) {//调灯光
+       
        NewLightCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewLightCell" forIndexPath:indexPath];
        cell.backgroundColor = [UIColor clearColor];
        cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -725,6 +672,8 @@
         aireCell.sceneid = self.sceneid;
          Device *device = [SQLManager getDeviceWithDeviceID:[_AirArray[indexPath.row] intValue]];
 //        aireCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+        aireCell.AireSwitchBtn.selected = device.power;
+        aireCell.AireSlider.value = device.temperature;
         aireCell.deviceid = _AirArray[indexPath.row];
         aireCell.AireNameLabel.text = device.name;
         
@@ -737,6 +686,8 @@
         aireCell.roomID = self.roomID;
         aireCell.sceneid = self.sceneid;
         Device *device = [SQLManager getDeviceWithDeviceID:[_CurtainArray[indexPath.row] intValue]];
+        aireCell.slider.value = (float)device.position/100.0f;
+        aireCell.open.selected = device.power;
 //        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         aireCell.deviceid = _CurtainArray[indexPath.row];
         aireCell.label.text = device.name;
@@ -749,6 +700,8 @@
         TVCell.AddTvDeviceBtn.hidden = YES;
         TVCell.backgroundColor =[UIColor clearColor];
           Device *device = [SQLManager getDeviceWithDeviceID:[_TVArray[indexPath.row] intValue]];
+        TVCell.TVSwitch.selected = device.power;
+        TVCell.TVSlider.value = (float)device.voltage/100.f;
 //        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         TVCell.deviceid = _TVArray[indexPath.row];
         TVCell.TVNameLabel.text = device.name;
@@ -761,6 +714,8 @@
         DVDCell.DVDSlider.continuous = NO;
         DVDCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_DVDArray[indexPath.row] intValue]];
+        DVDCell.DVDSwitchBtn.selected = device.power;
+        DVDCell.DVDSlider.value = (float)device.voltage/100.f;
 //        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         DVDCell.deviceid = _DVDArray[indexPath.row];
         DVDCell.DVDNameLabel.text = device.name;
@@ -773,6 +728,7 @@
         otherCell.backgroundColor = [UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_ProjectArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
+        otherCell.OtherSwitchBtn.selected = device.power;
 //        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         otherCell.deviceid = _ProjectArray[indexPath.row];
         otherCell.deviceid = _ProjectArray[indexPath.row];
@@ -783,6 +739,7 @@
         FMCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_FMArray[indexPath.row] intValue]];
         FMCell.FMNameLabel.text = device.name;
+        FMCell.FMSwitchBtn.selected = device.power;
 //        FMCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         FMCell.deviceid = _FMArray[indexPath.row];
         FMCell.AddFmBtn.hidden = YES;
@@ -807,6 +764,7 @@
         ScreenCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_MBArray[indexPath.row] intValue]];
         ScreenCell.ScreenCurtainLabel.text = device.name;
+        ScreenCell.ScreenCurtainBtn.selected = device.power;
 //        ScreenCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         ScreenCell.deviceid = _MBArray[indexPath.row];
         
@@ -818,6 +776,7 @@
         BjMusicCell.BJmusicConstraint.constant = 10;
         Device *device = [SQLManager getDeviceWithDeviceID:[_BJMusicArray[indexPath.row] intValue]];
         BjMusicCell.BjMusicNameLb.text = device.name;
+        BjMusicCell.BjPowerButton.selected = device.power;
 //        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         BjMusicCell.deviceid = _BJMusicArray[indexPath.row];
         
@@ -829,8 +788,10 @@
         otherCell.OtherConstraint.constant = 10;
         otherCell.backgroundColor = [UIColor clearColor];
         otherCell.deviceid = _OtherArray[indexPath.row];
+      
         if (_OtherArray.count) {
             Device *device = [SQLManager getDeviceWithDeviceID:[_OtherArray[indexPath.row] intValue]];
+            otherCell.OtherSwitchBtn.selected = device.power;
             if (device.name == nil) {
                 otherCell.NameLabel.text = @"";
             }else{

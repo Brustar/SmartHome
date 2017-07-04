@@ -101,19 +101,19 @@ static NSString *const leftMenuCell = @"leftMenuCell";
         }
         if (proto.action.state == PROTOCOL_ON || proto.action.state == PROTOCOL_OFF) {
             switch (proto.deviceType) {
-                case 2:
+                case dimmarLight:
                     ((NewLightCell *)cell).NewLightPowerBtn.selected = proto.action.state;
                     break;
-                case 1:
+                case switchLight:
                     ((PowerLightCell *)cell).powerLightBtn.hidden = !proto.action.state;
                     break;
-                case 3:
+                case colorLight:
                     ((NewColourCell *)cell).AddColourLightBtn.hidden = !proto.action.state;
                     break;
                 case air:
                     ((AireTableViewCell *)cell).AddAireBtn.hidden = !proto.action.state;
                     break;
-                case curtain:
+                case blind:
                     ((CurtainTableViewCell *)cell).AddcurtainBtn.hidden = !proto.action.state;
                     break;
                 case TVtype:

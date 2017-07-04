@@ -181,7 +181,7 @@
         HttpManager *http=[HttpManager defaultManager];
         http.delegate = self;
         http.tag = 1;
-        [http sendPost:url param:dict];
+        [http sendPost:url param:dict showProgressHUD:NO];
     }
 }
 -(void)httpHandler:(id)responseObject tag:(int)tag
