@@ -553,7 +553,9 @@ NSArray *array = [NSArray arrayWithObjects:
     }
     NSArray *plists = [SQLManager writeScenes:rooms];
     for (NSString *s in plists) {
-        [self downloadPlsit:s];
+        if (![s isEqualToString:@""]) {
+            [self downloadPlsit:s];
+        }
     }
 }
 
@@ -579,7 +581,7 @@ NSArray *array = [NSArray arrayWithObjects:
         
         //下载到哪个文件夹
         NSString *path = [[IOManager scenesPath] stringByAppendingPathComponent:response.suggestedFilename];
-        
+        [IOManager removeFile:path];
         
         return [NSURL fileURLWithPath:path];
         
