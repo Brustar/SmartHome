@@ -75,11 +75,12 @@ static NSString *const airCellIdentifier = @"airCell";
     self.disk.enabled = NO;
     [self initSwitch];
     self.tempreturePan.transform = CGAffineTransformMakeRotation(MIX_TEMP_ROTATE_DEGREE);
-    for (int i=8; i<16; i++) {
+    
+    self.currentDegree = 22;
+    for (int i=self.currentDegree-14; i<16; i++) {
         UIView *viewblue = [self.view viewWithTag:i+100];
         viewblue.hidden = YES;
     }
-    
     self.visitedBtns = [NSMutableArray new];
     self.params=@[@[@"speed_fast",@"speed_middle",@"speed_slow"],@[@"speed_dir_down",@"speed_dir_up"]];
     self.paramView.scrollEnabled=NO;
@@ -130,6 +131,14 @@ static NSString *const airCellIdentifier = @"airCell";
         
         if (proto.action.state==0x6A) {
             self.currentTemp.text = [NSString stringWithFormat:@"Current:%d°C",proto.action.RValue];
+            self.currentDegree = proto.action.RValue;
+            
+            for (int i=1; i<16; i++) {
+                UIView *viewblue = [self.view viewWithTag:i+100];
+                viewblue.hidden = self.currentDegree - 15 || self.airMode == 1;
+                UIView *viewred = [self.view viewWithTag:i+200];
+                viewred.hidden = self.currentDegree - 15 || self.airMode == 0;
+            }
         }
         if (proto.action.state==0x8A) {
             NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
@@ -194,12 +203,13 @@ static NSString *const airCellIdentifier = @"airCell";
         
         [btn setImage:[UIImage imageNamed:[imgRed objectAtIndex:self.currentMode]] forState:UIControlStateNormal];
     }
+    
     if (self.currentMode < 2){
         for (int i=1; i<16; i++) {
             UIView *viewblue = [self.view viewWithTag:i+100];
-            viewblue.hidden = self.airMode == 1;
+            viewblue.hidden = i>self.currentDegree-15 || self.airMode == 1;
             UIView *viewred = [self.view viewWithTag:i+200];
-            viewred.hidden = self.airMode == 0;
+            viewred.hidden = i>self.currentDegree-15 || self.airMode == 0;
         }
     }
     
