@@ -42,6 +42,9 @@
 -(void) setContraint:(long)tag
 {
     self.imagealign.constant = (tag - 2)*([[UIScreen mainScreen] bounds].size.width-122)/2;
+    if (ON_IPAD) {
+        self.imagealign.constant = (tag - 2)*200;
+    }
 }
 
 @end

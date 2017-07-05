@@ -84,21 +84,6 @@ static NSString *const airCellIdentifier = @"airCell";
     self.params=@[@[@"speed_fast",@"speed_middle",@"speed_slow"],@[@"speed_dir_down",@"speed_dir_up"]];
     self.paramView.scrollEnabled=NO;
     
-    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
-    if ([self.sceneid intValue]>0) {
-        for(int i=0;i<[_scene.devices count];i++)
-        {
-            if ([[_scene.devices objectAtIndex:i] isKindOfClass:[Aircon class]]) {
-                
-                self.showTemLabel.text = [NSString stringWithFormat:@"%d°C", ((Aircon*)[_scene.devices objectAtIndex:i]).temperature];
-                self.currentMode=((Aircon*)[_scene.devices objectAtIndex:i]).mode;
-                self.currentLevel=((Aircon*)[_scene.devices objectAtIndex:i]).WindLevel;
-                self.currentDirection=((Aircon*)[_scene.devices objectAtIndex:i]).Windirection;
-                self.currentTiming=((Aircon*)[_scene.devices objectAtIndex:i]).timing;
-            }
-        }
-    }
-    
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
     
@@ -130,30 +115,6 @@ static NSString *const airCellIdentifier = @"airCell";
     self.switcher.delegate = self;
 
     [self.container addSubview:self.switcher];
-}
-
--(IBAction)save:(id)sender
-{
-    Aircon *device = [[Aircon alloc]init];
-    [device setDeviceID:[self.deviceid intValue]];
-    
-    [device setMode:self.currentMode];
-    [device setWindLevel:self.currentLevel];
-    [device setWindirection:self.currentDirection];
-    [device setTiming:self.currentTiming];
-    
-    [device setTemperature:[self.showTemLabel.text intValue]];
-    
-    
-    [_scene setSceneID:[self.sceneid intValue]];
-    [_scene setRoomID:self.roomID];
-    [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
-    [_scene setReadonly:NO];
-    
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
-    
-    [[SceneManager defaultManager] addScene:_scene withName:@"" withImage:[UIImage imageNamed:@""] withiSactive:0];
 }
 
 #pragma mark - TCP recv delegate
@@ -262,10 +223,13 @@ static NSString *const airCellIdentifier = @"airCell";
 
 -(IBAction)changeButton:(id)sender
 {
-    self.currentButton=(int)((UIButton *)sender).tag;
-    [self.paramView reloadData];
+    UIButton *btn =(UIButton *)sender;
+    self.currentButton=(int)btn.tag;
     
-    if (!self.paramView) {
+    if (self.paramView) {
+        [self.paramView dismisWithIndexPath:0];
+        self.paramView = nil;
+    }else{
         self.paramView = [[YALContextMenuTableView alloc]initWithTableViewDelegateDataSource:self];
         self.paramView.animationDuration = 0.05;
         //optional - implement custom YALContextMenuTableView custom protocol
@@ -277,10 +241,15 @@ static NSString *const airCellIdentifier = @"airCell";
         //register nib
         UINib *cellNib = [UINib nibWithNibName:@"AirMenuCell" bundle:nil];
         [self.paramView registerNib:cellNib forCellReuseIdentifier:airCellIdentifier];
-    }
     
-    // it is better to use this method only for proper animation
-    [self.paramView showInView:self.view withEdgeInsets:UIEdgeInsetsMake(0,0,-70,0) animated:YES];
+    
+        // it is better to use this method only for proper animation
+        int bottom = -70;
+        if (ON_IPAD) {
+            bottom = -140;
+        }
+        [self.paramView showInView:self.view withEdgeInsets:UIEdgeInsetsMake(0,0,bottom,0) animated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
