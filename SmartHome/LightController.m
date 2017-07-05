@@ -420,7 +420,10 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 
     [self initiateMenuOptions:self.lightCatalog];
     // init YALContextMenuTableView tableView
-    if (!self.contextMenuTableView) {
+    if (self.contextMenuTableView) {
+        [self.contextMenuTableView dismisWithIndexPath:0];
+        self.contextMenuTableView = nil;
+    }else{
         self.contextMenuTableView = [[YALContextMenuTableView alloc]initWithTableViewDelegateDataSource:self];
         self.contextMenuTableView.animationDuration = 0.05;
         //optional - implement custom YALContextMenuTableView custom protocol
@@ -432,11 +435,11 @@ static NSString *const menuCellIdentifier = @"rotationCell";
         //register nib
         UINib *cellNib = [UINib nibWithNibName:@"MenuCell" bundle:nil];
         [self.contextMenuTableView registerNib:cellNib forCellReuseIdentifier:menuCellIdentifier];
-    }
     
-    // it is better to use this method only for proper animation
-    if ([self.lights count]>0) {
-        [self.contextMenuTableView showInView:self.view withEdgeInsets:UIEdgeInsetsMake(80+22,0,0,0) animated:YES];
+        // it is better to use this method only for proper animation
+        if ([self.lights count]>0) {
+            [self.contextMenuTableView showInView:self.view withEdgeInsets:UIEdgeInsetsMake(80+22,0,0,0) animated:YES];
+        }
     }
 }
 
