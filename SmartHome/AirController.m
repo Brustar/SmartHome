@@ -280,7 +280,11 @@ static NSString *const airCellIdentifier = @"airCell";
     }
     
     // it is better to use this method only for proper animation
-    [self.paramView showInView:self.view withEdgeInsets:UIEdgeInsetsMake(0,0,-70,0) animated:YES];
+    int bottom = -70;
+    if (ON_IPAD) {
+        bottom = -140;
+    }
+    [self.paramView showInView:self.view withEdgeInsets:UIEdgeInsetsMake(0,0,bottom,0) animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
