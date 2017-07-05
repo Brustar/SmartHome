@@ -130,6 +130,7 @@
      self.devices = [NSMutableArray array];
      self.leftVC.roomID = self.roomID;
      self.leftVC.sceneID = self.sceneID;
+     self.rightVC.sceneID = self.sceneID;
     
     
     switch (row) {
