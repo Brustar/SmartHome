@@ -61,7 +61,7 @@ static NSString *const leftMenuCell = @"leftMenuCell";
     
     UINib *cellNib = [UINib nibWithNibName:@"LeftMenuCell" bundle:nil];
     [self.menu registerNib:cellNib forCellReuseIdentifier:leftMenuCell];
-    
+    //deselect
     self.content.allowsSelection = NO;
     [self.content registerNib:[UINib nibWithNibName:@"AireTableViewCell" bundle:nil] forCellReuseIdentifier:@"AireTableViewCell"];//空调
     [self.content registerNib:[UINib nibWithNibName:@"CurtainTableViewCell" bundle:nil] forCellReuseIdentifier:@"CurtainTableViewCell"];//窗帘
