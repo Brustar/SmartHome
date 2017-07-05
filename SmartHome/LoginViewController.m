@@ -761,7 +761,7 @@ NSArray *array = [NSArray arrayWithObjects:
             
             [IOManager writeUserdefault:responseObject[@"rctoken"] forKey:@"rctoken"];
             [IOManager writeUserdefault:responseObject[@"homename"] forKey:@"homename"];
-            [self writeChatListConfigDataToSQL:responseObject[@"userList"]];
+            [self writeChatListConfigDataToSQL:responseObject[@"userlist"]];
             [self sendRequestForGettingConfigInfos:@"Cloud/load_config_data.aspx" withTag:2];
             
             //直接登录主机
