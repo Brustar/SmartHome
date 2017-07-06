@@ -500,6 +500,22 @@
         ScreenCell.ScreenCurtainConstraint.constant = 10;
         ScreenCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_MBArray[indexPath.row] intValue]];
+        if(dictionary)
+        {
+            int waiting;//开关
+            for (NSDictionary *dic in [dictionary objectForKey:@"devices"]){
+                
+                if([dic objectForKey:@"deviceID"])
+                {
+                    deviceID = [dic[@"deviceID"] intValue];
+                    
+                }
+                if (deviceID == [_MBArray[indexPath.row] intValue]) {
+                    waiting = [dic[@"waiting"] intValue];
+                    ScreenCell.ScreenCurtainBtn.selected = waiting;
+                }
+            }
+        }
         ScreenCell.ScreenCurtainLabel.text = device.name;
         ScreenCell.deviceid = _MBArray[indexPath.row];
         
@@ -510,6 +526,23 @@
         BjMusicCell.AddBjmusicBtn.hidden = YES;
         BjMusicCell.BJmusicConstraint.constant = 10;
         Device *device = [SQLManager getDeviceWithDeviceID:[_BJMusicArray[indexPath.row] intValue]];
+        if(dictionary)
+        {
+            int poweron;//开关
+            int bgvolume;//音量
+            for (NSDictionary *dic in [dictionary objectForKey:@"devices"]){
+                if([dic objectForKey:@"deviceID"])
+                {
+                    deviceID = [dic[@"deviceID"] intValue];
+                }
+                if (deviceID == [_BJMusicArray[indexPath.row] intValue]) {
+                    poweron = [dic[@"poweron"] intValue];
+                    bgvolume = [dic[@"bgvolume"] intValue];
+                    BjMusicCell.BjPowerButton.selected = poweron;
+                    BjMusicCell.BjSlider.value = (float)bgvolume / 100.0f;
+                }
+            }
+        }
         BjMusicCell.BjMusicNameLb.text = device.name;
         BjMusicCell.deviceid = _BJMusicArray[indexPath.row];
         

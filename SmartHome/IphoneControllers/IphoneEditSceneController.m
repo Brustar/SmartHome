@@ -37,6 +37,7 @@
 
 
 
+
 @interface IphoneEditSceneController ()<TouchSubViewDelegate,UITableViewDelegate,UITableViewDataSource>//IphoneTypeViewDelegate
 
 @property (weak, nonatomic) IBOutlet IphoneTypeView *subTypeView;//设备大View
@@ -130,7 +131,7 @@
      NSString * roomName =[SQLManager getRoomNameByRoomID:self.roomID];
      self.title = [SQLManager getSceneName:self.sceneID];
      [self setNaviBarTitle:[NSString stringWithFormat:@"%@-%@",roomName,self.title]]; //设置标题
-    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
+    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"编辑" target:self action:@selector(rightBtnClicked:)];
     _naviRightBtn.tintColor = [UIColor whiteColor];
     //    [self setNaviBarLeftBtn:_naviLeftBtn];
     [self setNaviBarRightBtn:_naviRightBtn];
@@ -164,8 +165,43 @@
         //重新编辑场景的定时
         
         UIStoryboard * sceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
-        
         IphoneNewAddSceneTimerVC * newTimerVC = [sceneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneNewAddSceneTimerVC"];
+//        NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
+//        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+//        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+//        NSArray * schedules = plistDic[@"schedules"];
+//        Scene * scene = [[Scene alloc] init];
+//        scene.schedules = schedules;
+//        if (scene.schedules.count > 0) {
+//            for(NSDictionary *dict in schedules)
+//            {
+//                    NSString *startTime = dict[@"startTime"];
+//                    NSString *endTime = dict[@"endTime"];
+//                    NSArray * weekDays = dict[@"weekDays"];
+//                for (NSString * day in weekDays) {
+//                    NSString * dayStr;
+//                    if ([day isEqualToString:@"0"])  {
+//                        dayStr = @"周日";
+//                    }if ([day isEqualToString:@"1"]) {
+//                        dayStr = @"周一";
+//                    }if ([day isEqualToString:@"2"]) {
+//                        dayStr = @"周二";
+//                    }if ([day isEqualToString:@"3"]) {
+//                        dayStr = @"周三";
+//                    }if ([day isEqualToString:@"4"]) {
+//                        dayStr = @"周四";
+//                    }if ([day isEqualToString:@"5"]) {
+//                        dayStr = @"周五";
+//                    }if ([day isEqualToString:@"5"]) {
+//                        dayStr = @"周五";
+//                    }
+//                }
+//                    newTimerVC.startTimeStr = startTime;
+//                    newTimerVC.endTimeStr = endTime;
+//                    newTimerVC.repeatitionStr =[weekDays componentsJoinedByString:@","];
+//            }
+//        }
+        
         newTimerVC.sceneID = self.sceneID;
         newTimerVC.roomid = self.roomID;
         
@@ -912,6 +948,22 @@
         ScreenCell.ScreenCurtainConstraint.constant = 10;
         ScreenCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_MBArray[indexPath.row] intValue]];
+        if(dictionary)
+        {
+            int waiting;//开关
+            for (NSDictionary *dic in [dictionary objectForKey:@"devices"]){
+                
+                if([dic objectForKey:@"deviceID"])
+                {
+                    deviceID = [dic[@"deviceID"] intValue];
+                    
+                }
+                if (deviceID == [_MBArray[indexPath.row] intValue]) {
+                    waiting = [dic[@"waiting"] intValue];
+                    ScreenCell.ScreenCurtainBtn.selected = waiting;
+                }
+            }
+        }
         ScreenCell.ScreenCurtainLabel.text = device.name;
         ScreenCell.ScreenCurtainBtn.selected = device.power;
 //        ScreenCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];

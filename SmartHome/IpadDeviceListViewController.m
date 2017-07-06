@@ -59,8 +59,7 @@
     NSString * roomName =[SQLManager getRoomNameByRoomID:self.roomID];
     self.title = [SQLManager getSceneName:self.sceneID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@-%@",roomName,self.title]]; //设置标题
-    
-    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
+    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"编辑" target:self action:@selector(rightBtnClicked:)];
     
     [self setNaviBarRightBtn:_naviRightBtn];
 }

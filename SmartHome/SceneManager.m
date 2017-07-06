@@ -369,7 +369,7 @@
     }
     
     NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
-    NSString *URL = [NSString stringWithFormat:@"%@Cloud/eq _timing.aspx",[IOManager httpAddr]];
+    NSString *URL = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
     [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName imgData:nil imgFileName:@"" completion:^(id responseObject) {
         
         NSLog(@"scene_edit --- responseObject: %@", responseObject);

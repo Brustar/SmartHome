@@ -52,7 +52,7 @@
 
 + (CGSize)barBtnSize
 {
-   return Size(60.0f, 40.0f);
+   return Size(80.0f, 40.0f);
 }
 
 + (CGSize)barSize

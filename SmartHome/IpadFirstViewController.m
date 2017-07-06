@@ -190,12 +190,13 @@
     {
         if([responseObject[@"result"] intValue]==0)
         {
-            NSString * temp1 = responseObject[@"temp1"];
-            NSString * temp2 = responseObject[@"temp2"];
+//            NSString * temp1 = responseObject[@"temp1"];
+//            NSString * temp2 = responseObject[@"temp2"];
+            NSString * temperature_curr = responseObject[@"temperature_curr"];
 //            NSString * weather = responseObject[@"weather"];
             NSString * weather_curr = responseObject[@"weather_curr"];
             self.weahter = weather_curr;
-            self.temperatureLabel.text = [NSString stringWithFormat:@"低温%@ ℃~高温%@ ℃",temp2,temp1];
+            self.temperatureLabel.text = [NSString stringWithFormat:@"当前%@",temperature_curr];
              if ([weather_curr rangeOfString:@"多云"].location != NSNotFound) {
                  self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-Overcast"];
              }if ([weather_curr rangeOfString:@"雨"].location != NSNotFound) {

@@ -68,7 +68,7 @@
     
     [self setNaviBarTitle:@"添加设备"]; //设置标题
 
-    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
+    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"下一步" target:self action:@selector(rightBtnClicked:)];
    
     [self setNaviBarRightBtn:_naviRightBtn];
 }

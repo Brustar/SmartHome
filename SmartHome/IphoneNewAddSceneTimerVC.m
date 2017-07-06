@@ -134,7 +134,7 @@
 
 - (void)setupNaviBar {
     [self setNaviBarTitle:_naviTitle]; //设置标题
-    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
+    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"确定" target:self action:@selector(rightBtnClicked:)];
     _naviRightBtn.tintColor = [UIColor whiteColor];
     [self setNaviBarRightBtn:_naviRightBtn];
     
@@ -165,7 +165,7 @@
         [[SceneManager defaultManager] editScene:scene];
     
     }else{
-        
+        /*
         self.scene.schedules = @[self.schedule];
         [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
         
@@ -176,6 +176,17 @@
                               @"weekArray":_weekArray
                               };
         [NC postNotificationName:@"AddSceneOrDeviceTimerNotification" object:nil userInfo:dic];
+        */
+        //场景ID不变
+        NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
+        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+        Scene *scene = [[Scene alloc]init];
+        [scene setValuesForKeysWithDictionary:plistDic];
+        scene.sceneID = self.sceneID;
+        scene.roomID = self.roomid;
+        scene.sceneName = [SQLManager getSceneName:scene.sceneID];
+        [[SceneManager defaultManager] editScene:scene];
     }
   
     [self.navigationController popViewControllerAnimated:YES];
