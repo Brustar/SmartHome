@@ -400,7 +400,8 @@ static NSString * const CYPhotoId = @"photo";
         }
         self.deviceView.roomID = room.rId;
         [self.deviceView.content reloadData];
-        
+        NSIndexPath *selected = [self.deviceView.menu indexPathForSelectedRow];
+        if(selected) [self.deviceView.menu deselectRowAtIndexPath:selected animated:NO];
         return;
     }
     
@@ -433,7 +434,7 @@ static NSString * const CYPhotoId = @"photo";
         [root setNaviBarTitle:[[controllers lastObject] title]];
     }
     
-    if ([controllers count]==1){
+    if ([controllers count] == 1){
         [self.navigationController pushViewController:[controllers firstObject] animated:YES];
     }
 }

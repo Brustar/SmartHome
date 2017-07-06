@@ -132,7 +132,7 @@
      self.rightVC.sceneID = self.sceneID;
     
     
-    switch (row) {
+     switch (row) {
         case 0:{
             
             for(int i = 0; i < self.DevicesArr.count; i++){
@@ -217,6 +217,7 @@
             
     }
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
