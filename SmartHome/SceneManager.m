@@ -559,7 +559,7 @@
     NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfFile:scenePath];
     if (dictionary) {
         Scene *scene=nil;
-        if ([dictionary objectForKey:@"startTime"]) {
+        if ([dictionary objectForKey:@"schedules"]) {
             scene=[[Scene alloc] init];
             
             [scene setSceneName:@""];
@@ -569,11 +569,7 @@
                 schedule.startTime=sch[@"startTime"];
                 schedule.endTime=sch[@"endTime"];
                 schedule.startDate = sch[@"startDay"];
-                //schedule.endDate = sch[@"endDay"];
-                //schedule.deviceID=[sch[@"deviceID"] intValue];
-                //schedule.openToValue=[sch[@"openTovalue"] intValue];
-                //schedule.astronomicalStartID=[sch[@"astronomicalStartID"] intValue];
-                //schedule.astronomicalEndID=[sch[@"astronomicalEndID"] intValue];
+
                 schedule.weekDays=sch[@"weekDays"];
                 [schedules addObject:schedule];
             }

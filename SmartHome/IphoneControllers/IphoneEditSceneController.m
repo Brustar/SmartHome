@@ -136,20 +136,14 @@
     //    [self setNaviBarLeftBtn:_naviLeftBtn];
     [self setNaviBarRightBtn:_naviRightBtn];
 }
+
 -(void)rightBtnClicked:(UIButton *)bbi
 {
-//     [self performSegueWithIdentifier:@"storeNewScene" sender:self];
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请选择" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *saveAction = [UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //场景ID不变
-        NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
-        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
-        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
-        Scene *scene = [[Scene alloc]init];
-        [scene setValuesForKeysWithDictionary:plistDic];
-        scene.sceneID = self.sceneID;
-        scene.roomID = self.roomID;
-        scene.sceneName = [SQLManager getSceneName:scene.sceneID];
+        Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
+        //scene.devices = devices;
+        
         [[SceneManager defaultManager] editScene:scene];
     }];
     [alertVC addAction:saveAction];
