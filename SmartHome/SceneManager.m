@@ -569,7 +569,6 @@
                 schedule.startTime=sch[@"startTime"];
                 schedule.endTime=sch[@"endTime"];
                 schedule.startDate = sch[@"startDay"];
-
                 schedule.weekDays=sch[@"weekDays"];
                 [schedules addObject:schedule];
             }
