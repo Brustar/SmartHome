@@ -47,7 +47,7 @@
     TV *device=[[TV alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     //    [device setIsPoweron:device.poweron];
-    [device setPoweron:device.poweron];
+    [device setPoweron:self.TVSwitchBtn.selected];
     [device setVolume:self.TVSlider.value*100];
     
     if (sender == self.TVSwitchBtn) {
@@ -83,10 +83,7 @@
             [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
             
             [_scene setReadonly:NO];
-            
-            NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-            [_scene setDevices:devices];
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
+         
             
         }else{
             [self.AddTvDeviceBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
@@ -115,6 +112,11 @@
             [_delegate onTVSliderValueChanged:sender];
         }
     }
+    
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
     
 }
 //频道减

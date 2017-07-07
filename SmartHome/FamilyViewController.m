@@ -69,7 +69,7 @@
     sock.delegate = self;
     DeviceInfo *device =[DeviceInfo defaultManager];
     if (device.connectState == outDoor && device.masterID) {
-        NSData *data = [[SceneManager defaultManager] getRealSceneData];
+        NSData *data = [[DeviceInfo defaultManager] getRealSceneData];
         [sock.socket writeData:data withTimeout:1 tag:0];
         [timer invalidate];
     }

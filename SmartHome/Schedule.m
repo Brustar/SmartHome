@@ -9,6 +9,7 @@
 #import "Schedule.h"
 
 @implementation Schedule
+
 - (instancetype)initWhithoutSchedule
 {
     self = [super init];
@@ -16,10 +17,9 @@
     {
         [self setStartTime:@""];
         [self setEndTime:@""];
-        //[self setStartDate:@""];
-        //[self setEndDate:@""];
         [self setWeekDays:@[]];
     }
     return self;
 }
+
 @end

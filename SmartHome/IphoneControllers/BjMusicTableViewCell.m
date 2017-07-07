@@ -57,6 +57,7 @@
         BgMusic *device=[[BgMusic alloc] init];
         [device setDeviceID:[self.deviceid intValue]];
         [device setBgvolume:device.bgvolume];
+        [device setPoweron:self.BjPowerButton.selected];
     
     if (sender == self.BjPowerButton) {
         self.BjPowerButton.selected = !self.BjPowerButton.selected;
@@ -106,12 +107,7 @@
             [_scene setRoomID:self.roomID];
             [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
             [_scene setReadonly:NO];
-            
-            NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-            [_scene setDevices:devices];
-            
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
-            
+          
         }else{
             if (ON_IPAD) {
                  [self.AddBjmusicBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
@@ -145,6 +141,12 @@
             [_delegate onBjSliderValueChanged:sender];
         }
     }
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
+    
 }
 
 #pragma mark - TCP recv delegate

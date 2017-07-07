@@ -58,7 +58,7 @@
     
         Amplifier *device=[[Amplifier alloc] init];
         [device setDeviceID:[self.deviceid intValue]];
-        [device setWaiting: device.waiting];
+        [device setWaiting: self.ScreenCurtainBtn.selected];
     if (sender == self.ScreenCurtainBtn) {
         self.ScreenCurtainBtn.selected = !self.ScreenCurtainBtn.selected;
         if (self.ScreenCurtainBtn.selected) {
@@ -85,10 +85,7 @@
             
             [_scene setReadonly:NO];
             
-            NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-            [_scene setDevices:devices];
-            
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
+         
             
             
         }else{
@@ -109,6 +106,11 @@
             [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
         }
     }
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
   
 }
 //升

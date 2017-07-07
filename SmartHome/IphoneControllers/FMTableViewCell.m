@@ -75,6 +75,7 @@
         [device setDeviceID:[self.deviceid intValue]];
         [device setRvolume:device.rvolume];
         [device setChannel:device.channel];
+
     
     if (sender == self.FMSwitchBtn) {
          NSData *data=nil;
@@ -111,10 +112,7 @@
             
             [_scene setReadonly:NO];
             
-            NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-            [_scene setDevices:devices];
-            
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
+     
             
         }else{
             if (ON_IPAD) {
@@ -158,6 +156,11 @@
             [_delegate onFMChannelSliderValueChanged:sender];
         }
     }
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
   
 }
 #pragma mark - TCP recv delegate

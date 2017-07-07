@@ -284,7 +284,7 @@
     
     self.schedule.weekDays = weekValue;
     
-//    [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
+    [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
 
 }
 #pragma mark -- TenClockDelegate

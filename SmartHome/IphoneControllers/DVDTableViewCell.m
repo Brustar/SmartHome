@@ -46,7 +46,7 @@
     
         DVD *device=[[DVD alloc] init];
         [device setDeviceID:[self.deviceid intValue]];
-        [device setPoweron:device.poweron];
+        [device setPoweron:self.DVDSwitchBtn.selected];
     
     if (sender == self.DVDSwitchBtn) {
         NSData *data=nil;
@@ -79,10 +79,7 @@
             [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
             
             [_scene setReadonly:NO];
-            
-            NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-            [_scene setDevices:devices];
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
+          
             
         }else{
             [self.AddDvdBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
@@ -110,6 +107,10 @@
             [_delegate onDVDSliderValueChanged:sender];
         }
     }
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
 }
 //上一曲
 - (IBAction)Previous:(id)sender {

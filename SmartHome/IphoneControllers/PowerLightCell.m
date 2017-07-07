@@ -45,7 +45,7 @@
     
     Light *device=[[Light alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
-    [device setIsPoweron:device.isPoweron];
+    [device setIsPoweron:self.powerLightBtn.selected];
     [device setColor:@[]];
     
     if (sender == self.powerLightBtn) {
@@ -77,11 +77,7 @@
             [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
             
             [_scene setReadonly:NO];
-            
-            NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-            [_scene setDevices:devices];
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
-            
+          
         }else{
             if (ON_IPAD) {
                 [self.addPowerLightBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
@@ -102,6 +98,12 @@
         }
         
     }
+    
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
+    
     
 }
 #pragma mark - TCP recv delegate

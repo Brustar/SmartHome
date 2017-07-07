@@ -363,21 +363,11 @@
         [sches enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
             Schedule *schedule = obj;
             //根据deviceID 来判断是修改旧的定时，还是新增定时
-            //if (schedule.deviceID == self.schedule.deviceID) { //已存在的schedule，对它进行修改即可
-                //schedule.astronomicalStartID = self.schedule.astronomicalStartID;
-                //schedule.astronomicalEndID = self.schedule.astronomicalEndID;
-                schedule.interval = self.schedule.interval;
-                //schedule.startDate = self.schedule.startDate;
-                //schedule.endDate = self.schedule.endDate;
-                schedule.startTime = self.schedule.startTime;
-                schedule.endTime = self.schedule.endTime;
-                //schedule.openToValue = self.schedule.openToValue;
-                schedule.weekDays = self.schedule.weekDays;
-                
-                shouldAdd = NO;
-                *stop = YES;
-            //}
-            
+            schedule.interval = self.schedule.interval;
+            schedule.startTime = self.schedule.startTime;
+            schedule.endTime = self.schedule.endTime;
+            schedule.weekDays = self.schedule.weekDays;
+            shouldAdd = NO;
         }];
         
         if (shouldAdd) {
@@ -745,21 +735,11 @@
             [sches enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
                 Schedule *schedule = obj;
                 //根据deviceID 来判断是修改旧的定时，还是新增定时
-                //if (schedule.deviceID == self.schedule.deviceID) { //已存在的schedule，对它进行修改即可
-                    //schedule.astronomicalStartID = self.schedule.astronomicalStartID;
-                    //schedule.astronomicalEndID = self.schedule.astronomicalEndID;
-                    schedule.interval = self.schedule.interval;
-                    //schedule.startDate = self.schedule.startDate;
-                    //schedule.endDate = self.schedule.endDate;
-                    schedule.startTime = self.schedule.startTime;
-                    schedule.endTime = self.schedule.endTime;
-                    //schedule.openToValue = self.schedule.openToValue;
-                    schedule.weekDays = self.schedule.weekDays;
-                    
-                    shouldAdd = NO;
-                    *stop = YES;
-                //}
-                
+                schedule.interval = self.schedule.interval;
+                schedule.startTime = self.schedule.startTime;
+                schedule.endTime = self.schedule.endTime;
+                schedule.weekDays = self.schedule.weekDays;
+                shouldAdd = NO;
             }];
             
             if (shouldAdd) {
@@ -815,30 +795,18 @@
         
       //修改场景的plist文件，把定时信息写进去（结束日期）
         NSMutableArray *sches=[self.scene.schedules mutableCopy];
-        
-        
         //遍历 schedules
         if (sches && sches.count >0) {
-            
             __block BOOL shouldAdd = YES;
             [sches enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
                 Schedule *schedule = obj;
                 //根据deviceID 来判断是修改旧的定时，还是新增定时
-                //if (schedule.deviceID == self.schedule.deviceID) { //已存在的schedule，对它进行修改即可
-                    //schedule.astronomicalStartID = self.schedule.astronomicalStartID;
-                    //schedule.astronomicalEndID = self.schedule.astronomicalEndID;
-                    schedule.interval = self.schedule.interval;
-                    //schedule.startDate = self.schedule.startDate;
-                    //schedule.endDate = self.schedule.endDate;
-                    schedule.startTime = self.schedule.startTime;
-                    schedule.endTime = self.schedule.endTime;
-                    //schedule.openToValue = self.schedule.openToValue;
-                    schedule.weekDays = self.schedule.weekDays;
-                    
-                    shouldAdd = NO;
-                    *stop = YES;
-                //}
+                schedule.interval = self.schedule.interval;
+                schedule.startTime = self.schedule.startTime;
+                schedule.endTime = self.schedule.endTime;
+                schedule.weekDays = self.schedule.weekDays;
                 
+                shouldAdd = NO;
             }];
             
             if (shouldAdd) {

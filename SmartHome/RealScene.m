@@ -69,7 +69,7 @@
     SocketManager *sock = [SocketManager defaultManager];
     sock.delegate = self;
     
-    NSData *data = [[SceneManager defaultManager] getRealSceneData];
+    NSData *data = [[DeviceInfo defaultManager] getRealSceneData];
     [sock.socket writeData:data withTimeout:1 tag:1];
     NSLog(@"TCP请求Data:%@", data);
     

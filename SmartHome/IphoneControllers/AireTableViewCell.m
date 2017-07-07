@@ -52,7 +52,7 @@
     
         Aircon *device=[[Aircon alloc] init];
         [device setDeviceID:[self.deviceid intValue]];
-        [device setWaiting:device.waiting];
+        [device setWaiting:self.AireSwitchBtn.selected];
         //    [device setTemperature:[self.showTemLabel.text intValue]];
     
     if (sender == self.AireSwitchBtn) {
@@ -85,10 +85,7 @@
             [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
             
             [_scene setReadonly:NO];
-            
-            NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-            [_scene setDevices:devices];
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
+           
             
         }else{
             if (ON_IPAD) {
@@ -121,6 +118,9 @@
     }
 
     
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
 }
 
 #pragma mark - TCP recv delegate
