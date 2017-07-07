@@ -22,10 +22,7 @@
 
 + (instancetype) defaultManager;
 
-
 - (void) addScene:(Scene *)scene withName:(NSString *)name withImage:(UIImage *)image withiSactive:(NSInteger)isactive;
-
-- (NSData *)getRealSceneData;
 
 - (void) delScene:(Scene *)scene;
 

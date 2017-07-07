@@ -101,6 +101,7 @@ enum{
 
 -(NSData *)startScenenAtMaster:(int)sceneid;
 -(NSData *)query:(NSString *)deviceID;
+- (NSData *)getRealSceneData;
 
 //TV,DVD,NETV,BGMusic
 -(NSData *) previous:(NSString *)deviceID;
