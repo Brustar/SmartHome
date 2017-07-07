@@ -16,7 +16,7 @@
     {
         [self setStartTime:@""];
         [self setEndTime:@""];
-        [self setStartDate:@""];
+        //[self setStartDate:@""];
         //[self setEndDate:@""];
         [self setWeekDays:@[]];
     }

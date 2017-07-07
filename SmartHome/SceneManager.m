@@ -568,7 +568,7 @@
                 Schedule *schedule=[[Schedule alloc] init];
                 schedule.startTime=sch[@"startTime"];
                 schedule.endTime=sch[@"endTime"];
-                schedule.startDate = sch[@"startDay"];
+                //schedule.startDate = sch[@"startDay"];
                 schedule.weekDays=sch[@"weekDays"];
                 [schedules addObject:schedule];
             }
@@ -580,6 +580,7 @@
         scene.readonly=[[dictionary objectForKey:@"readonly"] boolValue];
         scene.picName=[dictionary objectForKey:@"picName"];
         scene.roomID=[[dictionary objectForKey:@"roomID"] intValue];
+        scene.roomName=[dictionary objectForKey:@"roomName"];
         scene.masterID=[[dictionary objectForKey:@"masterID"] intValue];
         
         NSMutableArray *devices=[[NSMutableArray alloc] init];

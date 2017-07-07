@@ -367,7 +367,7 @@
                 //schedule.astronomicalStartID = self.schedule.astronomicalStartID;
                 //schedule.astronomicalEndID = self.schedule.astronomicalEndID;
                 schedule.interval = self.schedule.interval;
-                schedule.startDate = self.schedule.startDate;
+                //schedule.startDate = self.schedule.startDate;
                 //schedule.endDate = self.schedule.endDate;
                 schedule.startTime = self.schedule.startTime;
                 schedule.endTime = self.schedule.endTime;
@@ -708,7 +708,7 @@
                     [dateF setDateFormat:@"yy/MM/dd EEEE HH:mm"];
                     NSString *prettyD = [dateF stringFromDate:myDate];
                     [self.starDataBtn setTitle:prettyD forState:UIControlStateNormal];
-                    self.schedule.startDate = prettyDate;
+                    //self.schedule.startDate = prettyDate;
                     self.clickFixTimeBtn.tintColor = [UIColor redColor];
                     self.isSceneSetDate = YES;
                 }else {
@@ -723,7 +723,7 @@
                 NSString *prettyD = [dateF stringFromDate:myDate];
                 [self.starDataBtn setTitle:prettyD forState:UIControlStateNormal];
                 
-                self.schedule.startDate = prettyDate;
+                //self.schedule.startDate = prettyDate;
                 self.clickFixTimeBtn.tintColor = [UIColor redColor];
                 self.isSceneSetDate = YES;
             }
@@ -749,7 +749,7 @@
                     //schedule.astronomicalStartID = self.schedule.astronomicalStartID;
                     //schedule.astronomicalEndID = self.schedule.astronomicalEndID;
                     schedule.interval = self.schedule.interval;
-                    schedule.startDate = self.schedule.startDate;
+                    //schedule.startDate = self.schedule.startDate;
                     //schedule.endDate = self.schedule.endDate;
                     schedule.startTime = self.schedule.startTime;
                     schedule.endTime = self.schedule.endTime;
@@ -828,7 +828,7 @@
                     //schedule.astronomicalStartID = self.schedule.astronomicalStartID;
                     //schedule.astronomicalEndID = self.schedule.astronomicalEndID;
                     schedule.interval = self.schedule.interval;
-                    schedule.startDate = self.schedule.startDate;
+                    //schedule.startDate = self.schedule.startDate;
                     //schedule.endDate = self.schedule.endDate;
                     schedule.startTime = self.schedule.startTime;
                     schedule.endTime = self.schedule.endTime;
