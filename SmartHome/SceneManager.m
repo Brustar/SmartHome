@@ -327,6 +327,7 @@
     }];
     
 }
+
 //保证newScene的ID不变
 - (void)editScene:(Scene *)newScene
 {
