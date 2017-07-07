@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <RongIMKit/RongIMKit.h>
 #import "CustomNaviBarView.h"
+#import "LoadMaskHelper.h"
 
-@interface ConversationViewController : RCConversationViewController
+@interface ConversationViewController : RCConversationViewController<SingleMaskViewDelegate>
 
 @property (nonatomic, readonly) CustomNaviBarView *m_viewNaviBar;
 @property (nonatomic, readonly) UIButton *naviRightBtn;

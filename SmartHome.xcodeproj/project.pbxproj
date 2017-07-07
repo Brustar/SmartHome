@@ -136,7 +136,6 @@
 		2E01840C1ECDE77C00E3705F /* CoreGraphicsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0184041ECDE77C00E3705F /* CoreGraphicsExtensions.swift */; };
 		2E01840D1ECDE77C00E3705F /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0184051ECDE77C00E3705F /* DateExtensions.swift */; };
 		2E01840E1ECDE77C00E3705F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E0184061ECDE77C00E3705F /* Info.plist */; };
-		2E0184101ECF40A200E3705F /* demo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2E01840F1ECF40A200E3705F /* demo.mp4 */; };
 		2E0297271E4C4C7600BBC520 /* MySubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0297261E4C4C7600BBC520 /* MySubView.m */; };
 		2E03E3001ECAD57E00487319 /* ECMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E03E2FF1ECAD57E00487319 /* ECMessage.m */; };
 		2E04198B1EB89F42004D70B9 /* FSLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0419881EB89F42004D70B9 /* FSLineChart.m */; };
@@ -212,12 +211,17 @@
 		2EF75C7D1EB2CAE00055147D /* ShortcutKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF75C7B1EB2CAE00055147D /* ShortcutKeyViewController.m */; };
 		2EF75C811EB32D390055147D /* DeviceTimingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF75C801EB32D390055147D /* DeviceTimingViewController.m */; };
 		CD43046F1E0B674000B594F4 /* FamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD43046E1E0B674000B594F4 /* FamilyViewController.m */; };
+		CD4304F11F0C7F10006A71AF /* iPhoneDemo.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD4304F01F0C7F10006A71AF /* iPhoneDemo.gif */; };
+		CD4304F31F0C8AAA006A71AF /* iPadDemo.gif in Resources */ = {isa = PBXBuildFile; fileRef = CD4304F21F0C8AAA006A71AF /* iPadDemo.gif */; };
 		CD4F12441EB316EF00E0B301 /* DeliveryAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4F12431EB316EF00E0B301 /* DeliveryAddressViewController.m */; };
 		CD4F12471EB4400A00E0B301 /* DeliveryAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4F12461EB4400A00E0B301 /* DeliveryAddressCell.m */; };
 		CD4F124A1EB452D800E0B301 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4F12491EB452D800E0B301 /* Address.m */; };
 		CD5134371E8D07FD00C2EDAF /* Goods.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5134361E8D07FD00C2EDAF /* Goods.m */; };
 		CD51343A1E8E369700C2EDAF /* WeChatPayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5134391E8E369700C2EDAF /* WeChatPayManager.m */; };
 		CD51343F1E92807600C2EDAF /* tipIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD51343E1E92807500C2EDAF /* tipIcon@2x.png */; };
+		CD67A4D41EFCEEDD00EBEAA4 /* LoadMaskHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD67A4D31EFCEEDD00EBEAA4 /* LoadMaskHelper.m */; };
+		CD67A4D71EFCEFB000EBEAA4 /* SingleMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD67A4D61EFCEFB000EBEAA4 /* SingleMaskView.m */; };
+		CD67A4DA1EFCF01C00EBEAA4 /* UIView+SetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = CD67A4D91EFCF01C00EBEAA4 /* UIView+SetRect.m */; };
 		CD7863B31E84D2A800F42AC0 /* RegistSecondStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7863B21E84D2A800F42AC0 /* RegistSecondStepViewController.m */; };
 		CD7863B71E8CF18200F42AC0 /* VipServiceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7863B61E8CF18200F42AC0 /* VipServiceListViewController.m */; };
 		CD78A8301E3379C200060466 /* 255_221.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD78A82F1E3379C200060466 /* 255_221.plist */; };
@@ -718,7 +722,6 @@
 		2E0184061ECDE77C00E3705F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E0184071ECDE77C00E3705F /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		2E0184081ECDE77C00E3705F /* TenClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TenClock.h; sourceTree = "<group>"; };
-		2E01840F1ECF40A200E3705F /* demo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = demo.mp4; sourceTree = "<group>"; };
 		2E0297251E4C4C7600BBC520 /* MySubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySubView.h; sourceTree = "<group>"; };
 		2E0297261E4C4C7600BBC520 /* MySubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySubView.m; sourceTree = "<group>"; };
 		2E03E2FE1ECAD57E00487319 /* ECMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECMessage.h; sourceTree = "<group>"; };
@@ -850,6 +853,8 @@
 		9B45FF693457BA21BA43CE05 /* Pods-SmartHome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.debug.xcconfig"; sourceTree = "<group>"; };
 		CD43046D1E0B674000B594F4 /* FamilyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyViewController.h; sourceTree = "<group>"; };
 		CD43046E1E0B674000B594F4 /* FamilyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyViewController.m; sourceTree = "<group>"; };
+		CD4304F01F0C7F10006A71AF /* iPhoneDemo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = iPhoneDemo.gif; sourceTree = "<group>"; };
+		CD4304F21F0C8AAA006A71AF /* iPadDemo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = iPadDemo.gif; sourceTree = "<group>"; };
 		CD4F12421EB316EF00E0B301 /* DeliveryAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryAddressViewController.h; sourceTree = "<group>"; };
 		CD4F12431EB316EF00E0B301 /* DeliveryAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliveryAddressViewController.m; sourceTree = "<group>"; };
 		CD4F12451EB4400A00E0B301 /* DeliveryAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryAddressCell.h; sourceTree = "<group>"; };
@@ -861,6 +866,12 @@
 		CD5134381E8E369700C2EDAF /* WeChatPayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeChatPayManager.h; sourceTree = "<group>"; };
 		CD5134391E8E369700C2EDAF /* WeChatPayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeChatPayManager.m; sourceTree = "<group>"; };
 		CD51343E1E92807500C2EDAF /* tipIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tipIcon@2x.png"; sourceTree = "<group>"; };
+		CD67A4D21EFCEEDD00EBEAA4 /* LoadMaskHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadMaskHelper.h; sourceTree = "<group>"; };
+		CD67A4D31EFCEEDD00EBEAA4 /* LoadMaskHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadMaskHelper.m; sourceTree = "<group>"; };
+		CD67A4D51EFCEFB000EBEAA4 /* SingleMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleMaskView.h; sourceTree = "<group>"; };
+		CD67A4D61EFCEFB000EBEAA4 /* SingleMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleMaskView.m; sourceTree = "<group>"; };
+		CD67A4D81EFCF01C00EBEAA4 /* UIView+SetRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SetRect.h"; sourceTree = "<group>"; };
+		CD67A4D91EFCF01C00EBEAA4 /* UIView+SetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SetRect.m"; sourceTree = "<group>"; };
 		CD7863B11E84D2A800F42AC0 /* RegistSecondStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistSecondStepViewController.h; sourceTree = "<group>"; };
 		CD7863B21E84D2A800F42AC0 /* RegistSecondStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistSecondStepViewController.m; sourceTree = "<group>"; };
 		CD7863B51E8CF18200F42AC0 /* VipServiceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VipServiceListViewController.h; sourceTree = "<group>"; };
@@ -1259,6 +1270,7 @@
 		0F032D461CC9B12700D1920D /* SmartHome */ = {
 			isa = PBXGroup;
 			children = (
+				CD67A4D11EFCEE9400EBEAA4 /* MaskView */,
 				CDF78C521E9CA80A00F8B20C /* CustomNavigationBar */,
 				CDF157351E7AACE600499AC5 /* CustomTabbarController */,
 				0F6ADFD81E7133BB00BFF67F /* UI3.0 */,
@@ -1806,9 +1818,10 @@
 		0F6ADFDC1E7134ED00BFF67F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				CD4304F21F0C8AAA006A71AF /* iPadDemo.gif */,
+				CD4304F01F0C7F10006A71AF /* iPhoneDemo.gif */,
 				CDA9EEC01ED40F6900CB4D7D /* launchingAnimation.gif */,
 				CDA9EEC41ED4288900CB4D7D /* iPadLaunchAnimation.gif */,
-				2E01840F1ECF40A200E3705F /* demo.mp4 */,
 				CDF78C591E9CC3C500F8B20C /* NaviBarBg.png */,
 				CDEC868C1E99E32B009EC245 /* Family */,
 				CD93E3AB1E807AD3003CCAA9 /* Login */,
@@ -2268,6 +2281,19 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		CD67A4D11EFCEE9400EBEAA4 /* MaskView */ = {
+			isa = PBXGroup;
+			children = (
+				CD67A4D21EFCEEDD00EBEAA4 /* LoadMaskHelper.h */,
+				CD67A4D31EFCEEDD00EBEAA4 /* LoadMaskHelper.m */,
+				CD67A4D51EFCEFB000EBEAA4 /* SingleMaskView.h */,
+				CD67A4D61EFCEFB000EBEAA4 /* SingleMaskView.m */,
+				CD67A4D81EFCF01C00EBEAA4 /* UIView+SetRect.h */,
+				CD67A4D91EFCF01C00EBEAA4 /* UIView+SetRect.m */,
+			);
+			name = MaskView;
+			sourceTree = "<group>";
+		};
 		CD7863B41E8CF13A00F42AC0 /* MyInfoViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -2679,6 +2705,7 @@
 				CD7DDA151E826C3B00638DB3 /* backBtn@2x.png in Resources */,
 				0F9214C71EE9241E0088D5DA /* keyPad.xib in Resources */,
 				CDF389241E306D2400657C8B /* maintaininfo.plist in Resources */,
+				CD4304F11F0C7F10006A71AF /* iPhoneDemo.gif in Resources */,
 				CD9F0AC11EB861F5007B0CF7 /* address.txt in Resources */,
 				CD93E3B11E8081B0003CCAA9 /* login_line@2x.png in Resources */,
 				0F5F909B1EEA506900BACC3E /* IPadDevices.xib in Resources */,
@@ -2696,7 +2723,6 @@
 				CD8CFCD11ED6873000B49712 /* PlaneGraph.storyboard in Resources */,
 				0F49CB7E1E7A204300D46ECC /* Scene-iPad.storyboard in Resources */,
 				CDFB9DF21E5DCB4D00BFECCE /* SceneTimerList.plist in Resources */,
-				2E0184101ECF40A200E3705F /* demo.mp4 in Resources */,
 				0F49CB7C1E7A204300D46ECC /* Login-iPad.storyboard in Resources */,
 				0F49CB7B1E7A204300D46ECC /* Home-iPad.storyboard in Resources */,
 				CDF90B451E2F4B14009043B9 /* planeScene.plist in Resources */,
@@ -2704,6 +2730,7 @@
 				0F49CB741E7A1F0500D46ECC /* Home.storyboard in Resources */,
 				CDEE5EAC1ECDD82E00A5779D /* portrait.png in Resources */,
 				F668AF251D53413B0079587F /* Main.storyboard in Resources */,
+				CD4304F31F0C8AAA006A71AF /* iPadDemo.gif in Resources */,
 				2E12CC121E7F5E3000C7D006 /* CYPhotoCell.xib in Resources */,
 				2E2D92CF1EF1067C0007B90A /* PowerLightCell.xib in Resources */,
 				CDEC868B1E99CD7B009EC245 /* Family.storyboard in Resources */,
@@ -3077,6 +3104,7 @@
 				CD4F12471EB4400A00E0B301 /* DeliveryAddressCell.m in Sources */,
 				2EDC0E901DEC072700F95BE0 /* IPhoneRoom.m in Sources */,
 				0F49CB821E7A21FF00D46ECC /* ORBSwitch.m in Sources */,
+				CD67A4D41EFCEEDD00EBEAA4 /* LoadMaskHelper.m in Sources */,
 				CDFB9DF81E641F8E00BFECCE /* DeviceTimerInfo.m in Sources */,
 				CDEE5E951EC1AC6000A5779D /* SelectRoomViewController.m in Sources */,
 				0FCFB38F1CF293B300B37DD3 /* Radio.m in Sources */,
@@ -3150,6 +3178,7 @@
 				CD9F0AB81EB78DD0007B0CF7 /* DeliveryAddressSettingViewController.m in Sources */,
 				F6755A4F1D406552002394F3 /* ECloudTabBarController.m in Sources */,
 				CDF157541E7BA3F600499AC5 /* UIView_extra.m in Sources */,
+				CD67A4D71EFCEFB000EBEAA4 /* SingleMaskView.m in Sources */,
 				0FF92B661D9224640098DD54 /* TVChannel.m in Sources */,
 				0F11654F1D7418EE00A01B8F /* Amplifier.m in Sources */,
 				CDBEFF531EA616CD00258B1E /* FamilyHomeDetailSceneCell.m in Sources */,
@@ -3271,6 +3300,7 @@
 				CD7863B71E8CF18200F42AC0 /* VipServiceListViewController.m in Sources */,
 				CDB8B85E1EB1EBD2003AA894 /* UserInfo.m in Sources */,
 				0F7426C11EBB362F00D686B8 /* FeedingController.m in Sources */,
+				CD67A4DA1EFCF01C00EBEAA4 /* UIView+SetRect.m in Sources */,
 				F65DB3411D2B5AB2002A815C /* RegisterDetailController.m in Sources */,
 				CDEE58D11EEE8A920023C669 /* iPadMyViewController.m in Sources */,
 				0F8D76D01D9A1B9700DDD063 /* Schedule.m in Sources */,

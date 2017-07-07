@@ -26,13 +26,14 @@
 #import "NowMusicController.h"
 #import "TouchImage.h"
 #import "UIImageView+WebCache.h"
+#import "LoadMaskHelper.h"
 
 #define  CollectionCell_W  self.roomStatusCollectionView.frame.size.width -40
 #define  iPadCollectionCellW  self.roomStatusCollectionView.frame.size.width / 3.0 -40
 #define  minSpace 20
 #define  maxSpace 40
 
-@interface PlaneGraphViewController : CustomViewController<UICollectionViewDelegate, UICollectionViewDataSource,HttpDelegate, NowMusicControllerDelegate, TouchImageDelegate>
+@interface PlaneGraphViewController : CustomViewController<UICollectionViewDelegate, UICollectionViewDataSource,HttpDelegate, NowMusicControllerDelegate, TouchImageDelegate, SingleMaskViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *roomStatusCollectionView;
 @property (nonatomic, strong) NSMutableArray *roomArray;
 @property(nonatomic, strong) AFNetworkReachabilityManager *afNetworkReachabilityManager;

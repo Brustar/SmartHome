@@ -27,9 +27,9 @@ static NSString *const menuCellIdentifier = @"groupCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNaviBar];
-    // Do any additional setup after loading the view.
-    //设置需要显示哪些类型的会话
     
+    //显示蒙版
+    [LoadMaskHelper showMaskWithType:ChatView onView:self.tabBarController.view delay:0.5 delegate:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated { 
@@ -165,6 +165,53 @@ static NSString *const menuCellIdentifier = @"groupCell";
     //}
     
     return cell;
+}
+
+#pragma mark - SingleMaskViewDelegate
+- (void)onTransparentBtnClicked:(UIButton *)btn {
+    [self initiateMenuOptions];
+    // init YALContextMenuTableView tableView
+    if (!self.contextMenuTableView) {
+        self.contextMenuTableView = [[YALContextMenuTableView alloc]initWithTableViewDelegateDataSource:self];
+        self.contextMenuTableView.animationDuration = 0.05;
+        //optional - implement custom YALContextMenuTableView custom protocol
+        self.contextMenuTableView.yalDelegate = self;
+        //optional - implement menu items layout
+        self.contextMenuTableView.menuItemsSide = Left;
+        self.contextMenuTableView.menuItemsAppearanceDirection = FromTopToBottom;
+        
+        //register nib
+        UINib *cellNib = [UINib nibWithNibName:@"ContextMenuCell" bundle:nil];
+        [self.contextMenuTableView registerNib:cellNib forCellReuseIdentifier:menuCellIdentifier];
+    }
+    
+    // it is better to use this method only for proper animation
+    [self.contextMenuTableView showInView:self.view withEdgeInsets:UIEdgeInsetsMake(20,0,0,0) animated:YES];
+}
+
+- (void)onNextButtonClicked:(UIButton *)btn pageType:(PageTye)pageType {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)onSkipButtonClicked:(UIButton *)btn {
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageChatBtn];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageEnterChat];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageEnterFamily];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageScene];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageDevice];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageCloud];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewChatView];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewFamilyHome];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewFamilyHomeDetail];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewScene];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewSceneDetail];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewDevice];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewDeviceAir];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewLeftView];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewSettingView];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewAccessControl];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewSceneAdd];
+    [UD synchronize];
 }
 
 @end

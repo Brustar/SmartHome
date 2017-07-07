@@ -10,8 +10,9 @@
 #import "LeftViewController.h"
 #import "CustomViewController.h"
 #import "BaseTabBarController.h"
+#import "LoadMaskHelper.h"
 
-@interface iPadMyViewController : UIViewController<LeftViewControllerDelegate>
+@interface iPadMyViewController : UIViewController<LeftViewControllerDelegate, SingleMaskViewDelegate>
 
 @property(nonatomic, strong) LeftViewController *leftVC;
 @property(nonatomic, strong) UINavigationController *rightVC;

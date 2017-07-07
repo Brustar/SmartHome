@@ -24,13 +24,14 @@
 #import "CustomViewController.h"
 #import "FamilyHomeDetailViewController.h"
 #import "NowMusicController.h"
+#import "LoadMaskHelper.h"
 
 #define  CollectionCellWidth  self.roomCollectionView.frame.size.width / 2.0 -20
 #define  iPadCollectionCellWidth  self.roomCollectionView.frame.size.width / 3.0 -40
 #define  minSpace 20
 #define  maxSpace 40
 
-@interface FamilyHomeViewController : CustomViewController<UICollectionViewDataSource,UICollectionViewDelegate,HttpDelegate, NowMusicControllerDelegate>
+@interface FamilyHomeViewController : CustomViewController<UICollectionViewDataSource,UICollectionViewDelegate,HttpDelegate, NowMusicControllerDelegate, SingleMaskViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *roomCollectionView;
 @property (nonatomic, strong) NSMutableArray *roomArray;

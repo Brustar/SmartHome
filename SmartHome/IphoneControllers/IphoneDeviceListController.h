@@ -11,8 +11,9 @@
 #import "NowMusicController.h"
 #import "AFNetworkReachabilityManager.h"
 #import "iPadMyViewController.h"
+#import "LoadMaskHelper.h"
 
-@interface IphoneDeviceListController : CustomViewController<NowMusicControllerDelegate>
+@interface IphoneDeviceListController : CustomViewController<NowMusicControllerDelegate, SingleMaskViewDelegate>
 
 @property (nonatomic,strong) Scene *scene;
 

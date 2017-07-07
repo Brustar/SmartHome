@@ -64,6 +64,8 @@ static NSString * const CYPhotoId = @"photo";
     _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     _baseTabbarController.tabbarPanel.hidden = NO;
     _baseTabbarController.tabBar.hidden = YES;
+    
+    [LoadMaskHelper showMaskWithType:DeviceHome onView:self.tabBarController.view delay:0.5 delegate:self];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -597,6 +599,38 @@ static NSString * const CYPhotoId = @"photo";
 
 - (void)dealloc {
     [self removeNotifications];
+}
+
+#pragma mark - SingleMaskViewDelegate
+- (void)onNextButtonClicked:(UIButton *)btn pageType:(PageTye)pageType {
+    Device *device = self.devices[1];
+    [self goDeviceByRoomID:[NSString stringWithFormat:@"%ld",(long)device.subTypeId]];
+}
+
+- (void)onSkipButtonClicked:(UIButton *)btn {
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageChatBtn];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageEnterChat];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageEnterFamily];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageScene];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageDevice];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageCloud];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewChatView];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewFamilyHome];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewFamilyHomeDetail];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewScene];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewSceneDetail];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewDevice];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewDeviceAir];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewLeftView];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewSettingView];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewAccessControl];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewSceneAdd];
+    [UD synchronize];
+}
+
+- (void)onTransparentBtnClicked:(UIButton *)btn {
+    Device *device = self.devices[1];
+    [self goDeviceByRoomID:[NSString stringWithFormat:@"%ld",(long)device.subTypeId]];
 }
 
 @end

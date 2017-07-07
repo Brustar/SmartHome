@@ -242,12 +242,84 @@
 
 - (IBAction)tryBtnClicked:(id)sender {
     
-    DemoVideoPlayerViewController *demoVC = [[DemoVideoPlayerViewController alloc] init];
-    [self.navigationController pushViewController:demoVC animated:YES];
+    //demo标识
+    [UD setObject:@"YES" forKey:IsDemo];
+    [UD synchronize];
     
+    //加载动画
+    [self launchingAnimationViewForDemo];
+    [self performSelector:@selector(loginForDemo) withObject:nil afterDelay:5];// 5秒后执行登录
+}
+
+- (void)launchingAnimationViewForDemo {
+    // 设定位置和大小
+    CGRect frame = CGRectMake(0,0,UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT);
+    // 读取gif图片数据
+    NSString *launchAnimation = @"iPhoneDemo";
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        launchAnimation = @"iPadDemo";
+    }
+    NSData *gif = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:launchAnimation ofType:@"gif"]];
+    // view生成
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:frame];
+    webView.userInteractionEnabled = NO;//用户不可交互
+    [webView loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
+    webView.scalesPageToFit = YES;
+    webView.tag = 20177;
+    [self.view addSubview:webView];
+}
+
+- (void)loginForDemo {
+    
+    NSString *url = [NSString stringWithFormat:@"%@login/login.aspx",[IOManager httpAddr]];
+    NSString *userName = @"ecloud";
+    NSString *passwd = @"ecloud";
+    
+    DeviceInfo *info = [DeviceInfo defaultManager];
+    NSString *pushToken;
+    if(info.pushToken)
+    {
+        pushToken = info.pushToken;
+    }else {
+        pushToken = @"777";
+    }
+    
+    //手机终端类型：1，手机 2，iPad
+    NSInteger clientType = 1;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        clientType = 2;
+    }
+    
+    NSInteger userNameType = 1;//用户名登录
+    if([userName isMobileNumber])
+    {
+        userNameType = 2;//手机号登录
+    }
+    
+    NSInteger currentHostId = 256;//  逸云智家
+    
+    NSDictionary *dict = @{
+                           @"account":userName,
+                           @"logintype":@(userNameType),
+                           @"password":[passwd md5],
+                           @"pushtoken":pushToken,
+                           @"devicetype":@(clientType),
+                           @"hostid":@(currentHostId)
+                           };
+    NSLog(@"%@ === login params ===: ", dict);
+    
+    
+    HttpManager *http = [HttpManager defaultManager];
+    http.delegate = self;
+    http.tag = 1;
+    [http sendPost:url param:dict];
 }
 
 - (void)gotoIPhoneMainViewController {
+    //先移除动画
+    UIView *view = [self.view viewWithTag:20177];
+    [view removeFromSuperview];
+    
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.mainTabBarController = [[BaseTabBarController alloc] init];
     LeftViewController *leftVC = [[LeftViewController alloc] init];
@@ -256,6 +328,9 @@
 }
 
 - (IBAction)loginBtnClicked:(id)sender {
+    
+    [UD setObject:@"NO" forKey:IsDemo]; //不是Demo版
+    [UD synchronize];
     
     if ([self.nameTextField.text isEqualToString:@""])
     {

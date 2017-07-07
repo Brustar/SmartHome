@@ -143,7 +143,7 @@
     if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
         //alert
         NSString *msg=[[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] description];
-        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"是否查看推送的消息" message:msg preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"通知" message:msg preferredStyle:UIAlertControllerStyleAlert];
         [self.window.rootViewController presentViewController: alertVC animated:YES completion:nil];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             [alertVC dismissViewControllerAnimated:YES completion:nil];

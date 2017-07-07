@@ -323,6 +323,7 @@
     _baseTabbarController.tabbarPanel.hidden = NO;
     _baseTabbarController.tabBar.hidden = YES;
     
+    [LoadMaskHelper showMaskWithType:FamilyHome onView:self.tabBarController.view delay:0.5 delegate:self];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -578,6 +579,46 @@
 
 - (void)dealloc {
     [self removeNotifications];
+}
+
+#pragma mark - SingleMaskViewDelegate
+- (void)onNextButtonClicked:(UIButton *)btn pageType:(PageTye)pageType {
+    UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
+    FamilyHomeDetailViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"familyHomeDetailVC"];
+    RoomStatus *roomInfo = self.roomArray[0];
+    vc.roomID = roomInfo.roomId;
+    vc.roomName = roomInfo.roomName;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)onSkipButtonClicked:(UIButton *)btn {
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageChatBtn];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageEnterChat];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageEnterFamily];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageScene];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageDevice];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageCloud];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewChatView];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewFamilyHome];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewFamilyHomeDetail];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewScene];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewSceneDetail];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewDevice];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewDeviceAir];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewLeftView];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewSettingView];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewAccessControl];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewSceneAdd];
+    [UD synchronize];
+}
+
+- (void)onTransparentBtnClicked:(UIButton *)btn {
+    UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
+    FamilyHomeDetailViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"familyHomeDetailVC"];
+    RoomStatus *roomInfo = self.roomArray[0];
+    vc.roomID = roomInfo.roomId;
+    vc.roomName = roomInfo.roomName;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

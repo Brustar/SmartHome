@@ -13,8 +13,9 @@
 #import "NowMusicController.h"
 #import <AFNetworking.h>
 #import "HostIDSController.h"
+#import "LoadMaskHelper.h"
 
-@interface FirstViewController : CustomViewController<NowMusicControllerDelegate, HostIDSControllerDelegate>
+@interface FirstViewController : CustomViewController<NowMusicControllerDelegate, HostIDSControllerDelegate, SingleMaskViewDelegate>
 @property (nonatomic, assign) NSInteger playState;//播放状态： 0:停止 1:播放
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic,weak) NSString *deviceid;

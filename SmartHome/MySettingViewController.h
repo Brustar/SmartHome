@@ -10,7 +10,9 @@
 #import "PushSettingController.h"
 #import "CustomViewController.h"
 #import "SceneShortcutsViewController.h"
-@interface MySettingViewController : CustomViewController
+#import "LoadMaskHelper.h"
+
+@interface MySettingViewController : CustomViewController<SingleMaskViewDelegate>
 
 
 

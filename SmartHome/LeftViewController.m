@@ -41,6 +41,18 @@
     self.view.backgroundColor = [UIColor colorWithRed:30.0/255.0 green:29.0/255.0 blue:34.0/255.0 alpha:1.0];
 }
 
+- (void)showMaskViewNotification:(NSNotification *)noti {
+    [LoadMaskHelper showMaskWithType:LeftView onView:self.view delay:0.5 delegate:self];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
 - (void)bgButtonClicked:(UIButton *)btn {
     if (_delegate && [_delegate respondsToSelector:@selector(onBackgroundBtnClicked:)]) {
         [_delegate onBackgroundBtnClicked:btn];
@@ -314,6 +326,7 @@
 
 - (void)addNotifications {
     [NC addObserver:self selector:@selector(refreshPortrait:) name:@"refreshPortrait" object:nil];
+    [NC addObserver:self selector:@selector(showMaskViewNotification:) name:@"ShowMaskViewNotification" object:nil];
 }
 
 - (void)refreshPortrait:(NSNotification *)noti {
@@ -327,6 +340,58 @@
 
 - (void)dealloc {
     [self removeNotifications];
+}
+
+#pragma mark - SingleMaskViewDelegate
+- (void)onNextButtonClicked:(UIButton *)btn pageType:(PageTye)pageType {
+    UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate.LeftSlideVC closeLeftView];//关闭左侧抽屉
+    
+    MySettingViewController *mysettingVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"MySettingViewController"];
+    mysettingVC.hidesBottomBarWhenPushed = YES;
+    [appDelegate.mainTabBarController.selectedViewController pushViewController:mysettingVC animated:YES];
+}
+
+- (void)onSkipButtonClicked:(UIButton *)btn {
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageChatBtn];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageEnterChat];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageEnterFamily];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageScene];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageDevice];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageCloud];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewChatView];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewFamilyHome];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewFamilyHomeDetail];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewScene];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewSceneDetail];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewDevice];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewDeviceAir];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewLeftView];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewSettingView];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewAccessControl];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewSceneAdd];
+    [UD synchronize];
+}
+
+- (void)onTransparentBtnClicked:(UIButton *)btn {
+    if (btn.tag == 1) { // 点击头像
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        [appDelegate.LeftSlideVC closeLeftView];//关闭左侧抽屉
+        UIStoryboard *loginStoryBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+        UIViewController *vc = [loginStoryBoard instantiateViewControllerWithIdentifier:@"userinfoVC"];
+        vc.hidesBottomBarWhenPushed = YES;
+        [appDelegate.mainTabBarController.selectedViewController pushViewController:vc animated:YES];
+        
+    }else if (btn.tag == 2) {  //点击设置
+        UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        [appDelegate.LeftSlideVC closeLeftView];//关闭左侧抽屉
+        
+        MySettingViewController *mysettingVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"MySettingViewController"];
+        mysettingVC.hidesBottomBarWhenPushed = YES;
+        [appDelegate.mainTabBarController.selectedViewController pushViewController:mysettingVC animated:YES];
+    }
 }
 
 @end

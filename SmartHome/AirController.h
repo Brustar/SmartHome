@@ -6,6 +6,9 @@
 //  Created by Brustar on 16/6/17.
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
+
+#import "LoadMaskHelper.h"
+
 typedef NS_ENUM(NSUInteger,mode)
 {
     heat,
@@ -18,7 +21,7 @@ typedef NS_ENUM(NSUInteger,wind)
     direction
 };
 
-@interface AirController : CustomViewController
+@interface AirController : CustomViewController<SingleMaskViewDelegate>
 
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic,weak) NSString *deviceid;
