@@ -142,8 +142,23 @@
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请选择" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *saveAction = [UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
+        NSMutableArray *ds = [[scene devices] mutableCopy];
+        
         NSArray *devices = [[SceneManager defaultManager] readSceneByID:0].devices;
-        scene.devices = devices;
+
+        
+        for(int i = 0;i<ds.count;i++){
+            for (int j=0; j<devices.count; j++) {
+                if ([[ds objectAtIndex:i] class] == [[devices objectAtIndex:j] class] && [[ds objectAtIndex:i] deviceID] == [[devices objectAtIndex:j] deviceID] ) {
+                    [ds removeObjectAtIndex:i];
+                }
+            }
+        }
+
+        NSArray *temp = [ds arrayByAddingObjectsFromArray:devices];
+        
+        scene.devices = temp;
+
         [[SceneManager defaultManager] editScene:scene];
     }];
     [alertVC addAction:saveAction];

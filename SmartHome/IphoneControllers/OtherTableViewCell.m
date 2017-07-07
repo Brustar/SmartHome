@@ -46,6 +46,7 @@
         Amplifier *device=[[Amplifier alloc] init];
         [device setDeviceID:[self.deviceid intValue]];
         [device setWaiting: self.OtherSwitchBtn.selected];
+    
     if (sender == self.OtherSwitchBtn) {
         self.OtherSwitchBtn.selected = !self.OtherSwitchBtn.selected;
         if (self.OtherSwitchBtn.selected) {
