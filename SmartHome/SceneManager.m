@@ -716,20 +716,6 @@
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
 
-//获取实景数据（温度，湿度，PM2.5，噪音）
-- (NSData *)getRealSceneData{
-    uint8_t cmd = 0x8A;
-    Proto proto = createProto();
-    proto.cmd = cmd;
-    proto.action.state = 0x00;
-    proto.action.RValue = 0x00;
-    proto.action.G = 0x00;
-    proto.action.B = 0x00;
-    proto.deviceID = 0x00;
-    proto.deviceType = 0x8A;
-    return dataFromProtocol(proto);
-}
-
 -(void) dimingRoom:(int)roomid brightness:(int)bright
 {
     SocketManager *sock=[SocketManager defaultManager];
