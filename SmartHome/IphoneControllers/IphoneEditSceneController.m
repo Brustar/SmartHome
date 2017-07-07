@@ -142,7 +142,8 @@
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请选择" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *saveAction = [UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
-        //scene.devices = devices;
+        NSArray *devices = [[SceneManager defaultManager] readSceneByID:0].devices;
+        scene.devices = devices;
         
         [[SceneManager defaultManager] editScene:scene];
     }];

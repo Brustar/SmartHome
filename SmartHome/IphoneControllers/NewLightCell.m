@@ -53,10 +53,11 @@
     
     Light *device=[[Light alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
-    [device setIsPoweron:self.NewLightPowerBtn.selected];
+    [device setIsPoweron:self.NewLightPowerBtn.selected || self.NewLightSlider.value > 0];
     [device setBrightness:self.NewLightSlider.value * 100];
     [device setColor:@[]];
-    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
     if (sender == self.NewLightSlider){
         
         float value = self.NewLightSlider.value;
@@ -79,12 +80,9 @@
          
          if(isOn){
              //让slider的值等于1
-             
              self.NewLightSlider.value = 0;
-             
          }else{
              //让slider的值为0
-             
              self.NewLightSlider.value = 1;
              
          }
@@ -125,7 +123,7 @@
             
             NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
             [_scene setDevices:devices];
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
+            
             
          }else{
              if (ON_IPAD) {
@@ -143,13 +141,10 @@
              //删除当前场景的当前硬件
              NSArray *devices = [[SceneManager defaultManager] subDeviceFromScene:_scene withDeivce:device.deviceID];
              [_scene setDevices:devices];
-             [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
           
          }
-       
-        
-     }
-
+    }
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
 }
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
