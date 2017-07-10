@@ -134,8 +134,7 @@
 }
 -(void)rightBtnClicked:(UIButton *)btn
 {
-//        self.scene.schedules = @[self.schedule];
-//        [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
+    
     _viewControllerArrs =self.navigationController.viewControllers;
     NSInteger vcCount = _viewControllerArrs.count;
     UIViewController * lastVC = _viewControllerArrs[vcCount -2];
@@ -143,6 +142,8 @@
     IphoneSaveNewSceneController * iphoneSaveNewSceneVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneSaveNewSceneController"];
    
     if ([lastVC isKindOfClass:[iphoneSaveNewSceneVC class]]) {
+        self.scene.schedules = @[self.schedule];
+        [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
         NSDictionary *dic = @{
                               @"startDay":self.starTimeLabel.text,
                               @"endDay":self.endTimeLabel.text,
