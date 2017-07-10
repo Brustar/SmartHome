@@ -21,11 +21,8 @@
 #import <RongIMKit/RongIMKit.h>
 #import "ConversationViewController.h"
 #import "UIButton+WebCache.h"
-<<<<<<< HEAD
 #import "LoadMaskHelper.h"
-=======
 #import "UploadManager.h"
->>>>>>> d454077bc43b86759ed458298f77879a81cc468a
 
 @protocol LeftViewControllerDelegate;
 

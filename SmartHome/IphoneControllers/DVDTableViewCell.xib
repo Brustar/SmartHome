@@ -76,13 +76,6 @@
                             <action selector="nextBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ebs-xB-i98"/>
                         </connections>
                     </button>
-                    <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="OqP-ir-MRF">
-                        <rect key="frame" x="307" y="7" width="42" height="40"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="40" id="JDz-EP-gKW"/>
-                            <constraint firstAttribute="width" constant="40" id="vyT-dA-14D"/>
-                        </constraints>
-                    </switch>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="75B-Ud-NQ6">
                         <rect key="frame" x="136.5" y="57" width="102" height="43.5"/>
                         <state key="normal" image="DVD_play" backgroundImage="dvd_btn_adjust_normal"/>
@@ -114,7 +107,6 @@
                     <constraint firstItem="UYH-Br-BuW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="49" id="IVS-ad-rDR"/>
                     <constraint firstItem="je0-2Y-f1l" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="JEE-OA-GAo"/>
                     <constraint firstItem="NYR-NW-O6b" firstAttribute="top" secondItem="F7B-y2-2nU" secondAttribute="bottom" constant="2" id="K8h-9C-4eR"/>
-                    <constraint firstItem="F7B-y2-2nU" firstAttribute="top" secondItem="OqP-ir-MRF" secondAttribute="bottom" constant="5" id="KoR-wY-KOV"/>
                     <constraint firstItem="wYW-1Y-DcS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="Lj8-Z5-Put"/>
                     <constraint firstItem="aQ4-Nq-8mW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="6" id="LpR-Wf-r8M"/>
                     <constraint firstAttribute="trailingMargin" secondItem="UYH-Br-BuW" secondAttribute="trailing" constant="6" id="MAC-pY-5LJ"/>
@@ -134,7 +126,6 @@
                     <constraint firstItem="75B-Ud-NQ6" firstAttribute="width" secondItem="aQ4-Nq-8mW" secondAttribute="width" id="g4a-Uk-wz6"/>
                     <constraint firstItem="F7B-y2-2nU" firstAttribute="top" secondItem="je0-2Y-f1l" secondAttribute="bottom" id="gQ9-86-olV"/>
                     <constraint firstItem="UYH-Br-BuW" firstAttribute="leading" secondItem="75B-Ud-NQ6" secondAttribute="trailing" constant="20" id="gVN-Te-gpF"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="OqP-ir-MRF" secondAttribute="trailing" constant="20" id="gdB-i0-LMj"/>
                     <constraint firstAttribute="bottom" secondItem="M28-8e-zHA" secondAttribute="bottom" id="hWq-gg-CrD"/>
                     <constraint firstItem="je0-2Y-f1l" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="jYc-UK-rUF"/>
                     <constraint firstAttribute="bottomMargin" secondItem="NYR-NW-O6b" secondAttribute="bottom" constant="5.5" id="pp8-AK-xUG"/>

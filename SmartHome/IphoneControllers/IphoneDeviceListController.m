@@ -64,12 +64,8 @@ static NSString * const CYPhotoId = @"photo";
     _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     _baseTabbarController.tabbarPanel.hidden = NO;
     _baseTabbarController.tabBar.hidden = YES;
-<<<<<<< HEAD
-    
+    [self addNotifications];
     [LoadMaskHelper showMaskWithType:DeviceHome onView:self.tabBarController.view delay:0.5 delegate:self];
-=======
-     [self addNotifications];
->>>>>>> d454077bc43b86759ed458298f77879a81cc468a
 }
 
 - (void)viewDidAppear:(BOOL)animated {

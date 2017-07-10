@@ -128,7 +128,7 @@
         self.chatlabel.text =[NSString stringWithFormat:@"%@" , @"暂无新消息"];
     }
     
-    
+ /////////////////////////////////////  Mask View  ////////////////////////////////////////
     NSString *KeyStr = [UD objectForKey:ShowMaskViewHomePageChatBtn];
     if (KeyStr.length <=0) {
         [LoadMaskHelper showMaskWithType:HomePageChatBtn onView:self.tabBarController.view delay:0.5 delegate:self];

@@ -447,8 +447,8 @@ static NSString * const CYPhotoId = @"photo";
     _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     _baseTabbarController.tabbarPanel.hidden = NO;
     _baseTabbarController.tabBar.hidden = YES;
-<<<<<<< HEAD
     
+    [self addNotifications];
     
     NSString *KeyStr = [UD objectForKey:ShowMaskViewScene];
     if(KeyStr.length <=0){
@@ -459,10 +459,6 @@ static NSString * const CYPhotoId = @"photo";
             [LoadMaskHelper showMaskWithType:SceneHomeAdd onView:self.tabBarController.view delay:0.5 delegate:self];
         }
     }
-    
-=======
-     [self addNotifications];
->>>>>>> d454077bc43b86759ed458298f77879a81cc468a
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

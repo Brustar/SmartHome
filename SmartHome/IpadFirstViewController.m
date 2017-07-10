@@ -825,7 +825,6 @@
     [self.scheculer invalidate];
 }
 
-<<<<<<< HEAD
 #pragma mark - SingleMaskViewDelegate
 - (void)onNextButtonClicked:(UIButton *)btn pageType:(PageTye)pageType {
     if (pageType == HomePageChatBtn) {

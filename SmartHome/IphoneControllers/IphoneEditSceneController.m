@@ -35,9 +35,6 @@
 #import "PowerLightCell.h"
 #import "PackManager.h"
 
-
-
-
 @interface IphoneEditSceneController ()<TouchSubViewDelegate,UITableViewDelegate,UITableViewDataSource>//IphoneTypeViewDelegate
 
 @property (weak, nonatomic) IBOutlet IphoneTypeView *subTypeView;//设备大View
@@ -126,7 +123,6 @@
     }
 }
 
-<<<<<<< HEAD
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -151,8 +147,6 @@
     
 }
 
-=======
->>>>>>> d454077bc43b86759ed458298f77879a81cc468a
 - (void)setupNaviBar {
     
      NSString * roomName =[SQLManager getRoomNameByRoomID:self.roomID];
@@ -173,9 +167,8 @@
         
         NSArray *devices = [[SceneManager defaultManager] readSceneByID:0].devices;
 
-        
-        for(int i = 0;i<ds.count;i++){
-            for (int j=0; j<devices.count; j++) {
+        for (int j=(int)devices.count-1; j>=0; j--) {
+            for(int i = (int)ds.count-1;i>=0;i--){
                 if ([[ds objectAtIndex:i] class] == [[devices objectAtIndex:j] class] && [[ds objectAtIndex:i] deviceID] == [[devices objectAtIndex:j] deviceID] ) {
                     [ds removeObjectAtIndex:i];
                 }
@@ -245,12 +238,6 @@
 }
 -(void)getButtonUI
 {
-//    [self.gentleBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 60)];
-//    [self.gentleBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 60, 0, 0)];
-//    [self.normalBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 60)];
-//    [self.normalBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 60, 0, 0)];
-//    [self.brightBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 60)];
-//    [self.brightBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 60, 0, 0)];
     [_gentleBtn setBackgroundImage:[UIImage imageNamed:@"Scene-bedroomJJ"] forState:UIControlStateNormal];
     [_gentleBtn setBackgroundImage:[UIImage imageNamed:@"Scene-bedroom_05_2"] forState:UIControlStateDisabled];
     [_normalBtn setBackgroundImage:[UIImage imageNamed:@"Scene-bedroomJJ"] forState:UIControlStateNormal];

@@ -564,17 +564,17 @@
                 [maskView addImage:[UIImage imageNamed:@"mask23"] withFrame:CGRectMake(50, 50, 463/2, 274/2)];
                 
                 // 添加蒙版透明区
-                [maskView addTransparentRect:CGRectMake(15, 30, 30, 30) withRadius:10];
+                [maskView addTransparentRect:CGRectMake(25, 30, 30, 30) withRadius:10];
                 //透明按钮
-                [maskView addTransparentBtn:CGRectMake(15, 30, 30, 30) tag:6];// 云按钮
+                [maskView addTransparentBtn:CGRectMake(25, 30, 30, 30) tag:6];// 云按钮
             }else {
                 // 添加蒙版图片
                 [maskView addImage:[UIImage imageNamed:@"mask24pad"] withFrame:CGRectMake(50, 50, 560/2, 340/2)];
                 
                 // 添加蒙版透明区
-                [maskView addTransparentRect:CGRectMake(15, 30, 30, 30) withRadius:10];
+                [maskView addTransparentRect:CGRectMake(25, 30, 30, 30) withRadius:10];
                 //透明按钮
-                [maskView addTransparentBtn:CGRectMake(15, 30, 30, 30) tag:6];// 云按钮
+                [maskView addTransparentBtn:CGRectMake(25, 30, 30, 30) tag:6];// 云按钮
             }
         }
             
@@ -588,9 +588,9 @@
             [maskView addImage:[UIImage imageNamed:@"mask3"] withFrame:CGRectMake(UI_SCREEN_WIDTH-270, 40, 199, 104)];
             
             // 添加蒙版透明区
-            [maskView addTransparentRect:CGRectMake(UI_SCREEN_WIDTH-45, 26, 30, 30) withRadius:1];
+            [maskView addTransparentRect:CGRectMake(UI_SCREEN_WIDTH-55, 26, 30, 30) withRadius:1];
             //透明按钮
-            [maskView addTransparentBtn:CGRectMake(UI_SCREEN_WIDTH-45, 26, 30, 30) tag:1];// 下拉列表按钮
+            [maskView addTransparentBtn:CGRectMake(UI_SCREEN_WIDTH-55, 26, 30, 30) tag:1];// 下拉列表按钮
         }
             break;
             

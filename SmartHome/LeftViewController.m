@@ -28,11 +28,6 @@
     return _unreadcountArr;
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-
-}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addNotifications];
@@ -405,13 +400,9 @@
 }
 
 - (void)addNotifications {
-<<<<<<< HEAD
     [NC addObserver:self selector:@selector(refreshPortrait:) name:@"refreshPortrait" object:nil];
     [NC addObserver:self selector:@selector(showMaskViewNotification:) name:@"ShowMaskViewNotification" object:nil];
-=======
-     [NC addObserver:self selector:@selector(refreshPortrait:) name:@"refreshPortrait" object:nil];
-     [NC addObserver:self selector:@selector(refreshNickName:) name:@"refreshNickName" object:nil];
->>>>>>> d454077bc43b86759ed458298f77879a81cc468a
+    [NC addObserver:self selector:@selector(refreshNickName:) name:@"refreshNickName" object:nil];
 }
 
 - (void)refreshPortrait:(NSNotification *)noti {
@@ -431,7 +422,6 @@
 - (void)dealloc {
     [self removeNotifications];
 }
-<<<<<<< HEAD
 
 #pragma mark - SingleMaskViewDelegate
 - (void)onNextButtonClicked:(UIButton *)btn pageType:(PageTye)pageType {
@@ -485,12 +475,11 @@
     }
 }
 
-=======
 -(void)refreshUI
 {
     [self.unreadcountArr removeAllObjects];
     [self creatItemID];
     
 }
->>>>>>> d454077bc43b86759ed458298f77879a81cc468a
+
 @end

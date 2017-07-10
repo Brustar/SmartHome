@@ -13,11 +13,8 @@
 #import "NowMusicController.h"
 #import <AFNetworking.h>
 #import "HostIDSController.h"
-<<<<<<< HEAD
 #import "LoadMaskHelper.h"
-=======
 #import "UserInfo.h"
->>>>>>> d454077bc43b86759ed458298f77879a81cc468a
 
 @interface FirstViewController : CustomViewController<NowMusicControllerDelegate, HostIDSControllerDelegate, SingleMaskViewDelegate>
 @property (nonatomic, assign) NSInteger playState;//播放状态： 0:停止 1:播放

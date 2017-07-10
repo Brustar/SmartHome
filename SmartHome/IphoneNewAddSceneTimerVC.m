@@ -18,6 +18,8 @@
 #import "SmartHome-Swift.h"
 #import "Scene.h"
 #import "IpadDeviceListViewController.h"
+#import "IphoneSaveNewSceneController.h"
+
 
 @interface IphoneNewAddSceneTimerVC ()<WeekdaysVCDelegate,TenClockDelegate>
 @property (nonatomic,strong) Scene *scene;
@@ -45,21 +47,7 @@
     }
     return _weeks;
 }
--(Scene *)scene
-{
-    if(!_scene)
-    {
-        NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
-        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
-        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
-        _scene = [[Scene alloc] initWhithoutSchedule];
-        if(plistDic)
-        {
-            [_scene setValuesForKeysWithDictionary:plistDic];
-        }
-    }
-    return _scene;
-}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -146,9 +134,16 @@
 }
 -(void)rightBtnClicked:(UIButton *)btn
 {
+    
+    _viewControllerArrs =self.navigationController.viewControllers;
+    NSInteger vcCount = _viewControllerArrs.count;
+    UIViewController * lastVC = _viewControllerArrs[vcCount -2];
+    UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+    IphoneSaveNewSceneController * iphoneSaveNewSceneVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneSaveNewSceneController"];
+   
+    if ([lastVC isKindOfClass:[iphoneSaveNewSceneVC class]]) {
         self.scene.schedules = @[self.schedule];
         [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
-        
         NSDictionary *dic = @{
                               @"startDay":self.starTimeLabel.text,
                               @"endDay":self.endTimeLabel.text,
@@ -156,6 +151,17 @@
                               @"weekArray":_weekArray
                               };
         [NC postNotificationName:@"AddSceneOrDeviceTimerNotification" object:nil userInfo:dic];
+        
+    }else{
+        _scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
+        Schedule *sch = [[Schedule alloc] init];
+        sch.startTime = self.starTimeLabel.text;
+        sch.endTime = self.endTimeLabel.text;
+        sch.weekDays = [self.RepetitionLable.text componentsSeparatedByString:@"、"];
+        _scene.schedules = @[sch];
+        [[SceneManager defaultManager] editSceneTimer:_scene];
+    }
+    
   
     [self.navigationController popViewControllerAnimated:YES];
 
