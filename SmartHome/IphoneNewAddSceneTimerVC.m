@@ -47,6 +47,25 @@
     }
     return _weeks;
 }
+-(Scene *)scene
+{
+    if(!_scene)
+    {
+        
+        NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
+        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+        
+        _scene = [[Scene alloc] initWhithoutSchedule];
+        if(plistDic)
+        {
+            [_scene setValuesForKeysWithDictionary:plistDic];
+        }
+        
+        
+    }
+    return _scene;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -142,7 +161,7 @@
     IphoneSaveNewSceneController * iphoneSaveNewSceneVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneSaveNewSceneController"];
    
     if ([lastVC isKindOfClass:[iphoneSaveNewSceneVC class]]) {
-        self.scene.schedules = @[self.schedule];
+        _scene.schedules = @[self.schedule];
         [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
         NSDictionary *dic = @{
                               @"startDay":self.starTimeLabel.text,
