@@ -41,6 +41,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *avIcon;
 @property (weak, nonatomic) IBOutlet UIImageView *airIcon;
 @property (nonatomic, readonly) UIButton *naviRightBtn;
+@property (nonatomic,strong) UIButton * leftBtn;
 @property (nonatomic, strong) NowMusicController * nowMusicController;
 @property (weak, nonatomic) IBOutlet UIScrollView *floorScrollView;
 @property (weak, nonatomic) IBOutlet TouchImage *planeGraph;

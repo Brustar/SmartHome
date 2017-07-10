@@ -1020,6 +1020,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnLeadingConstrain" destination="BLm-cn-H8I" id="sDg-L7-ZqN"/>
                         <outlet property="exmapleView" destination="lkX-K1-NxL" id="Qde-F3-PIQ"/>
                         <outlet property="resultLabel" destination="kze-0v-Chi" id="Px3-lR-Ejj"/>
                         <outlet property="sampleLabel" destination="e2k-hN-IJO" id="GGM-gs-4bJ"/>
@@ -1034,7 +1035,7 @@
     </scenes>
     <resources>
         <image name="Voice" width="11" height="19"/>
-        <image name="alarm clock1" width="25" height="25"/>
+        <image name="alarm clock1" width="40" height="40"/>
         <image name="background" width="375" height="667"/>
         <image name="close2" width="25" height="25"/>
         <image name="delete" width="32" height="32"/>
@@ -1059,6 +1060,6 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="oQd-1K-1B2"/>
+        <segue reference="vWH-k8-ixo"/>
     </inferredMetricsTieBreakers>
 </document>

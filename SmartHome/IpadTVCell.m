@@ -18,7 +18,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    
+    [IOManager removeTempFile];
+    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     [self.TVSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
     [self.channelReduceBtn setImage:[UIImage imageNamed:@"icon_vored_prd"] forState:UIControlStateHighlighted];
     [self.channelAddBtn setImage:[UIImage imageNamed:@"icon_add_pre"] forState:UIControlStateHighlighted];
@@ -46,7 +47,7 @@
     TV *device=[[TV alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     //    [device setIsPoweron:device.poweron];
-    [device setPoweron:device.poweron];
+    [device setPoweron:self.TVSwitchBtn.selected];
     [device setVolume:self.TVSlider.value*100];
     
     if (sender == self.TVSwitchBtn) {
@@ -82,10 +83,7 @@
             [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
             
             [_scene setReadonly:NO];
-            
-            NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-            [_scene setDevices:devices];
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
+         
             
         }else{
             [self.AddTvDeviceBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
@@ -114,6 +112,11 @@
             [_delegate onTVSliderValueChanged:sender];
         }
     }
+    
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
     
 }
 //频道减

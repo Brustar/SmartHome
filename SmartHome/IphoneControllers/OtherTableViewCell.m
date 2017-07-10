@@ -20,6 +20,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    [IOManager removeTempFile];
+    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     [self.OtherSwitchBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.AddOtherBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.OtherSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
@@ -43,7 +45,8 @@
     
         Amplifier *device=[[Amplifier alloc] init];
         [device setDeviceID:[self.deviceid intValue]];
-        [device setWaiting: device.waiting];
+        [device setWaiting: self.OtherSwitchBtn.selected];
+    
     if (sender == self.OtherSwitchBtn) {
         self.OtherSwitchBtn.selected = !self.OtherSwitchBtn.selected;
         if (self.OtherSwitchBtn.selected) {
@@ -75,10 +78,7 @@
             [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
             
             [_scene setReadonly:NO];
-            
-            NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-            [_scene setDevices:devices];
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
+        
             
             
         }else{
@@ -103,7 +103,10 @@
         }
        
     }
-  
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
 }
 
 - (IBAction)AddOtherBtn:(id)sender {

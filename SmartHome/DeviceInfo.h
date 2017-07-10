@@ -57,7 +57,7 @@ enum{
     iPadPro
 };
 
-#define SMART_DB @"smartDB"
+#define SMART_DB @"smartDB.db"
 
 #define KICK_OUT @"kicking"
 
@@ -101,6 +101,7 @@ enum{
 
 -(NSData *)startScenenAtMaster:(int)sceneid;
 -(NSData *)query:(NSString *)deviceID;
+- (NSData *)getRealSceneData;
 
 //TV,DVD,NETV,BGMusic
 -(NSData *) previous:(NSString *)deviceID;

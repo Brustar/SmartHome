@@ -389,12 +389,15 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     NSLog(@"Switch toggled: new state is %@", (newValue) ? @"ON" : @"OFF");
     float degree = newValue?M_PI*3/4:0;
     self.tranformView.transform = CGAffineTransformMakeRotation(degree);
-    NSData *data=[[DeviceInfo defaultManager] toogleLight:self.switcher.isOn deviceID:self.deviceid];
+    __block NSData *data=[[DeviceInfo defaultManager] toogleLight:self.switcher.isOn deviceID:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
     if (newValue) {
-        data = [[DeviceInfo defaultManager] query:self.deviceid];
-        [sock.socket writeData:data withTimeout:1 tag:1];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(50 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            data = [[DeviceInfo defaultManager] query:self.deviceid];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+        });
+        
     }
 }
 
@@ -417,7 +420,10 @@ static NSString *const menuCellIdentifier = @"rotationCell";
 
     [self initiateMenuOptions:self.lightCatalog];
     // init YALContextMenuTableView tableView
-    if (!self.contextMenuTableView) {
+    if (self.contextMenuTableView) {
+        [self.contextMenuTableView dismisWithIndexPath:0];
+        self.contextMenuTableView = nil;
+    }else{
         self.contextMenuTableView = [[YALContextMenuTableView alloc]initWithTableViewDelegateDataSource:self];
         self.contextMenuTableView.animationDuration = 0.05;
         //optional - implement custom YALContextMenuTableView custom protocol
@@ -429,11 +435,11 @@ static NSString *const menuCellIdentifier = @"rotationCell";
         //register nib
         UINib *cellNib = [UINib nibWithNibName:@"MenuCell" bundle:nil];
         [self.contextMenuTableView registerNib:cellNib forCellReuseIdentifier:menuCellIdentifier];
-    }
     
-    // it is better to use this method only for proper animation
-    if ([self.lights count]>0) {
-        [self.contextMenuTableView showInView:self.view withEdgeInsets:UIEdgeInsetsMake(80+22,0,0,0) animated:YES];
+        // it is better to use this method only for proper animation
+        if ([self.lights count]>0) {
+            [self.contextMenuTableView showInView:self.view withEdgeInsets:UIEdgeInsetsMake(80+22,0,0,0) animated:YES];
+        }
     }
 }
 

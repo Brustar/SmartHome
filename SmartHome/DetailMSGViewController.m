@@ -11,13 +11,14 @@
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "ECMessage.h"
+#import "LeftViewController.h"
 
 @interface DetailMSGViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic,strong) NSMutableArray * msgArr;
-
+@property (nonatomic,strong) UIButton * leftBtn;
 @property (nonatomic,assign) BOOL isEditing;
 @property (nonatomic,assign) NSInteger notify_id;
 @property (nonatomic,assign) NSInteger unreadcount;
@@ -48,7 +49,13 @@
    
     [self setNaviBarTitle:@"消息通知"];
     _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"编辑" target:self action:@selector(rightBtnClicked:)];
+    if (ON_IPAD) {
+          _leftBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"backBtn" imgHighlight:@"backBtn" target:self action:@selector(leftBtnClicked:)];
+         [self setNaviBarLeftBtn:_leftBtn];
+    }
+    
     [self setNaviBarRightBtn:_naviRightBtn];
+   
 
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         [self adjustNaviBarFrameForSplitView];
@@ -56,7 +63,14 @@
         [self setNaviBarRightBtnForSplitView:_naviRightBtn];
     }
 }
-
+-(void)leftBtnClicked:(UIButton *)btn
+{
+     [self.navigationController popViewControllerAnimated:YES];
+//     LeftViewController * leftVC = [[LeftViewController alloc] init];
+//     [leftVC refreshUI];
+   
+    
+}
 -(void)rightBtnClicked:(UIButton *)btn
 {
     if (btn.selected) {
@@ -158,7 +172,7 @@
     }else if (tag == 3){
         if ([responseObject[@"result"] intValue] == 0) {
             //self.isreadArr[self.selectId] = @"1";
-            [self sendRequestForDetailMsgWithItemId:_itemID];
+//            [self sendRequestForDetailMsgWithItemId:_itemID];
         }else {
             
             [MBProgressHUD showError:responseObject[@"Msg"]];
@@ -187,21 +201,20 @@
         ECMessage *msg = self.msgArr[indexPath.row];
         cell.timeLable.text = msg.atime;
         self.itemID = msg.MID;
-        
         self.unreadcount = msg.readed;
         cell.title.text = msg.descr;
         cell.title.adjustsFontSizeToFitWidth = YES;
+        cell.title.textColor = [UIColor whiteColor];
+        cell.timeLable.textColor = [UIColor whiteColor];
     }
     if (self.unreadcount == 0) {//未读消息
         cell.unreadcountImage.hidden = YES;
         cell.countLabel.hidden       = YES;
-        cell.title.textColor = [UIColor redColor];
-        cell.timeLable.textColor = [UIColor redColor];
+        [self sendRequestForMsgWithItemId:self.itemID];
+        
     }else if(self.unreadcount == 1){
         cell.unreadcountImage.hidden = YES;
         cell.countLabel.hidden       = YES;
-        cell.title.textColor = [UIColor whiteColor];
-        cell.timeLable.textColor = [UIColor whiteColor];
     }
     
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];
@@ -227,7 +240,7 @@
         self.notify_id = msg.MID;
         if (msg.readed==0) {
             
-            [self sendRequestForMsgWithItemId:self.notify_id];
+//            [self sendRequestForMsgWithItemId:self.notify_id];
         }
     }
     

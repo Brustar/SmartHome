@@ -22,6 +22,7 @@
     //初始化左边视图控制器
     _leftVC = [[LeftViewController alloc] init];
     _leftVC.delegate = self;
+    [_leftVC refreshUI];
     _leftVC.view.frame = CGRectMake(0, 0, UI_SCREEN_WIDTH/4, UI_SCREEN_HEIGHT-80);
     //初始化右边视图控制器
     _rootVC = [[CustomViewController alloc] init];
@@ -124,6 +125,7 @@
         MSGController *msgVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"MSGController"];
         msgVC.hidesBottomBarWhenPushed = YES;
         [_rightVC pushViewController:msgVC animated:YES];
+       
         
     }else if ([item isEqualToString:@"切换家庭账号"]) {
         

@@ -22,7 +22,8 @@
 - (void)awakeFromNib {
     
     [super awakeFromNib];
-
+    [IOManager removeTempFile];
+    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     self.slider.continuous = NO;
     [self.slider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     [self.open addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
@@ -47,7 +48,7 @@
 {
     self.deviceid = deviceid;
     SocketManager *sock=[SocketManager defaultManager];
-    sock.delegate=delegate;
+    sock.delegate= delegate?delegate:self;
     //查询设备状态
     NSData *data = [[DeviceInfo defaultManager] query:deviceid];
     [sock.socket writeData:data withTimeout:1 tag:1];
@@ -105,9 +106,7 @@
             [_scene setRoomID:self.roomID];
             [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
             [_scene setReadonly:NO];
-            NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-            [_scene setDevices:devices];
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
+           
            
         }else{
             if (ON_IPAD) {
@@ -130,6 +129,10 @@
         }
       
     }
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
   
 }
 

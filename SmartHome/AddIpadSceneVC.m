@@ -68,7 +68,7 @@
     
     [self setNaviBarTitle:@"添加设备"]; //设置标题
 
-    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
+    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"下一步" target:self action:@selector(rightBtnClicked:)];
    
     [self setNaviBarRightBtn:_naviRightBtn];
 }
@@ -104,20 +104,20 @@
         
     }else{
          _scene = self.rightVC.scene;
-        if (_scene.devices.count != 0) {
+//        if (_scene.devices.count != 0) {
         
             IphoneSaveNewSceneController * iphoneSaveNewScene = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneSaveNewSceneController"];
             iphoneSaveNewScene.roomId = self.roomID;
             [self.navigationController pushViewController:iphoneSaveNewScene animated:YES];
-        }
+//        }
 
-        else{
-            [MBProgressHUD showSuccess:@"请先选择设备"];
-            
-        }
+//        else{
+//            [MBProgressHUD showSuccess:@"请先选择设备"];
+//            
+//        }
     
     }
-    
+
 }
 -(void)IpadAddDeviceVC:(IpadAddDeviceVC *)centerListVC selected:(NSInteger)row
 {

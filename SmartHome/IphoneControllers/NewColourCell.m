@@ -18,7 +18,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    
+    [IOManager removeTempFile];
+    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     [self.colourSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
     self.colourSlider.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
     self.colourSlider.minimumTrackTintColor = [UIColor colorWithRed:253/255.0 green:254/255.0 blue:254/255.0 alpha:1];
@@ -54,7 +55,7 @@
     
         Light *device=[[Light alloc] init];
         [device setDeviceID:[self.deviceid intValue]];
-        [device setIsPoweron:device.isPoweron];
+        [device setIsPoweron:self.colourBtn.selected];
         [device setColor:@[]];
     
     if (sender == self.colourBtn) {
@@ -90,9 +91,7 @@
             
             [_scene setReadonly:NO];
             
-            NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-            [_scene setDevices:devices];
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
+         
             
         }else{
             if (ON_IPAD) {
@@ -116,6 +115,10 @@
     }else if (sender == self.colourSlider){
 
     }
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
    
 }
 #pragma mark - TCP recv delegate

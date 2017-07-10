@@ -27,6 +27,7 @@
 - (void)naviBarRemoveCoverView:(UIView *)view;
 - (void)adjustNaviBarFrameForSplitView;
 - (void)showNetStateView;
+- (void)showMassegeLabel;
 - (void)setNetState:(int)state;
 - (void)adjustTitleFrameForSplitView;
 @end

@@ -12,17 +12,35 @@
 
 @interface LeftViewController ()<UITableViewDelegate,UITableViewDataSource>
 
+
+@property (nonatomic,strong)NSMutableArray * unreadcountArr;
+
 @end
 
 @implementation LeftViewController
 
+-(NSMutableArray *)unreadcountArr
+{
+    if (!_unreadcountArr) {
+        _unreadcountArr = [NSMutableArray array];
+    }
+    
+    return _unreadcountArr;
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addNotifications];
     [self getUserInfoFromDB];
+    if (ON_IPONE) {
+     [self creatItemID];
+    }
     _itemArray = @[@"家庭成员",@"视频动态",@"智能账单",@"通知",@"故障及保修记录",@"切换家庭账号"];
-
-    
     _bgButton = [[UIButton alloc] initWithFrame:self.view.frame];
     [_bgButton setBackgroundImage:[UIImage imageNamed:@"my_bg_side_nol"] forState:UIControlStateNormal];
     [_bgButton addTarget:self action:@selector(bgButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -87,7 +105,31 @@
     }else if (indexPath.row == 2) {
         cell.imageView.image = [UIImage imageNamed:@"my_cloud"];
     }else if (indexPath.row == 3) {
+        
+        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(90, 12, 20, 20)];
+        label.backgroundColor = [UIColor redColor];
+        label.layer.masksToBounds = YES;
+        label.layer.cornerRadius = 10;
+        label.hidden = YES;
+        [cell addSubview:label];
         cell.imageView.image = [UIImage imageNamed:@"my_msg"];
+//        NSMutableArray * subArr = [NSMutableArray array];
+         _sum = 0;
+        for (int i = 0; i < self.unreadcountArr.count; i ++) {
+            _sum += [self.unreadcountArr[i] integerValue];
+            
+        }
+        if (_sum == 0) {
+            label.hidden = YES;
+        }else{
+            label.hidden = NO;
+        }
+        label.text = [NSString stringWithFormat:@"%d",_sum];
+        label.textColor = [UIColor whiteColor];
+        label.font = [UIFont systemFontOfSize:12];
+        label.textAlignment = NSTextAlignmentCenter;
+        [NC postNotificationName:@"SumNumber" object:[NSString stringWithFormat:@"%d",_sum]];
+       
     }else if (indexPath.row == 4) {
         cell.imageView.image = [UIImage imageNamed:@"my_alert"];
     }else if (indexPath.row == 5) {
@@ -111,15 +153,12 @@
             [_delegate didSelectItem:item];
         }
     }else {
-    
     UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIStoryboard *myInfoStoryBoard  = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
     UIStoryboard *familyStoryBoard = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
     UIStoryboard *loginStoryBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate.LeftSlideVC closeLeftView];//关闭左侧抽屉
-    
-   
     if ([item isEqualToString:@"故障及保修记录"]) {
         ProfileFaultsViewController *profileFaultsVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"MyDefaultViewController"];
         profileFaultsVC.hidesBottomBarWhenPushed = YES;
@@ -136,12 +175,17 @@
         [appDelegate.mainTabBarController.selectedViewController pushViewController:mySubEnergyVC animated:YES];
         
     }else if ([item isEqualToString:@"视频动态"]) {
-        //视频动态
-        [MBProgressHUD showMessage:@"请稍候..."];
-        FamilyDynamicViewController *vc = [familyStoryBoard instantiateViewControllerWithIdentifier:@"FamilyDynamicVC"];
-        vc.hidesBottomBarWhenPushed = YES;
-        [appDelegate.mainTabBarController.selectedViewController pushViewController:vc animated:YES];
-        
+         //视频动态
+       if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) { //如果是主人，
+//            [MBProgressHUD showMessage:@"请稍候..."];
+            FamilyDynamicViewController *vc = [familyStoryBoard instantiateViewControllerWithIdentifier:@"FamilyDynamicVC"];
+            vc.hidesBottomBarWhenPushed = YES;
+            [appDelegate.mainTabBarController.selectedViewController pushViewController:vc animated:YES];
+       }else{
+           
+           [MBProgressHUD showError:@"你是普通用户无权查看"];
+       }
+    
     }else if ([item isEqualToString:@"通知"]) {
         MSGController *msgVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"MSGController"];
         msgVC.hidesBottomBarWhenPushed = YES;
@@ -157,7 +201,42 @@
   }
     
 }
-
+-(void)creatItemID
+{
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/notify.aspx",[IOManager httpAddr]];
+    NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    if (auothorToken) {
+        NSDictionary *dict = @{@"token":auothorToken,@"optype":[NSNumber numberWithInteger:2]};
+        HttpManager *http=[HttpManager defaultManager];
+        http.tag = 1;
+        http.delegate = self;
+        [http sendPost:url param:dict];
+    }
+}
+-(void) httpHandler:(id) responseObject tag:(int)tag
+{
+    if (tag == 1) {
+        if ([responseObject[@"result"] intValue]==0)
+        {
+            
+            NSArray *dic = responseObject[@"notify_type_list"];
+            
+            if ([dic isKindOfClass:[NSArray class]]) {
+                for(NSDictionary *dicDetail in dic)
+                {
+                    
+                    [self.unreadcountArr addObject:dicDetail[@"unreadcount"]];
+                }
+            }
+            
+            [self.myTableView reloadData];
+        }else{
+            [MBProgressHUD showError:responseObject[@"Msg"]];
+        }
+        
+    }
+    
+}
 - (void)backBtnClicked:(UIButton *)btn {
     if (_delegate && [_delegate respondsToSelector:@selector(didSelectItem:)]) {
         [_delegate didSelectItem:@"返回"];
@@ -193,11 +272,13 @@
     _headerBtn = headButton;
     
     UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(headButton.frame)+10, headerWidth, 20)];
-    nameLabel.text = _userInfo.userName;
+    nameLabel.text = _userInfo.nickName;
     nameLabel.textColor = [UIColor whiteColor];
     nameLabel.font = [UIFont systemFontOfSize:15.0];
     nameLabel.textAlignment = NSTextAlignmentCenter;
     [view addSubview:nameLabel];
+    
+    _nickNameLabel = nameLabel;
     
       //VIP
         UIButton *vipBtn = [[UIButton alloc] initWithFrame:CGRectMake(FX(headButton)+10, CGRectGetMaxY(nameLabel.frame)+10, 30, 15)];
@@ -288,7 +369,6 @@
     }
 }
 
-
 - (void)headButtonClicked:(UIButton *)btn {
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
@@ -325,15 +405,25 @@
 }
 
 - (void)addNotifications {
+<<<<<<< HEAD
     [NC addObserver:self selector:@selector(refreshPortrait:) name:@"refreshPortrait" object:nil];
     [NC addObserver:self selector:@selector(showMaskViewNotification:) name:@"ShowMaskViewNotification" object:nil];
+=======
+     [NC addObserver:self selector:@selector(refreshPortrait:) name:@"refreshPortrait" object:nil];
+     [NC addObserver:self selector:@selector(refreshNickName:) name:@"refreshNickName" object:nil];
+>>>>>>> d454077bc43b86759ed458298f77879a81cc468a
 }
 
 - (void)refreshPortrait:(NSNotification *)noti {
     NSString *portraitUrl = noti.object;
     [_headerBtn sd_setImageWithURL:[NSURL URLWithString:portraitUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portrait"]];
 }
+-(void)refreshNickName:(NSNotification *)fication
+{
+    NSString * nickName = fication.object;
+    _nickNameLabel.text = nickName;
 
+}
 - (void)removeNotifications {
     [NC removeObserver:self];
 }
@@ -341,6 +431,7 @@
 - (void)dealloc {
     [self removeNotifications];
 }
+<<<<<<< HEAD
 
 #pragma mark - SingleMaskViewDelegate
 - (void)onNextButtonClicked:(UIButton *)btn pageType:(PageTye)pageType {
@@ -394,4 +485,12 @@
     }
 }
 
+=======
+-(void)refreshUI
+{
+    [self.unreadcountArr removeAllObjects];
+    [self creatItemID];
+    
+}
+>>>>>>> d454077bc43b86759ed458298f77879a81cc468a
 @end

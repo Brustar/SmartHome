@@ -27,6 +27,7 @@
 #import "AireTableViewCell.h"
 #import "IpadDVDTableViewCell.h"
 #import "PowerLightCell.h"
+#import "PackManager.h"
 
 
 @interface IpadAddDeviceTypeVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -201,7 +202,10 @@
         cell.deviceid = _lightArray[indexPath.row];
         cell.NewLightPowerBtn.selected = device.power;//开关状态
         cell.NewLightSlider.value = (float)device.bright/100.0f;//亮度状态
-        [cell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
+
+//        [cell query:[NSString stringWithFormat:@"%d", device.eID]];
+         [cell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
+
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
         cell.scene = _scene;
 
@@ -217,7 +221,10 @@
         newColourCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         newColourCell.deviceid = _ColourLightArr[indexPath.row];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
-        [newColourCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
+
+//        [newColourCell query:[NSString stringWithFormat:@"%d", device.eID]];
+         [newColourCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
+
         newColourCell.scene = _scene;
 
         
@@ -232,7 +239,10 @@
         newColourCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         newColourCell.deviceid = _SwitchLightArr[indexPath.row];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
-        [newColourCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
+
+//        [newColourCell query:[NSString stringWithFormat:@"%d", device.eID]];
+         [newColourCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
+
         newColourCell.scene = _scene;
 
         
@@ -267,7 +277,10 @@
         aireCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         aireCell.deviceid = _CurtainArray[indexPath.row];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
-        [aireCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
+
+//        [aireCell query:[NSString stringWithFormat:@"%d", device.eID]];
+         [aireCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
+
         aireCell.scene = _scene;
 
         
@@ -327,7 +340,6 @@
         FMCell.deviceid = _FMArray[indexPath.row];
         FMCell.roomID = self.roomID;
         FMCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        FMCell.deviceid = _FMArray[indexPath.row];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
         [FMCell query:[NSString stringWithFormat:@"%d", device.eID]];
         FMCell.scene = _scene;
@@ -359,7 +371,6 @@
         ScreenCell.deviceid = _MBArray[indexPath.row];
         ScreenCell.roomID = self.roomID;
         ScreenCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        ScreenCell.deviceid = _MBArray[indexPath.row];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
         [ScreenCell query:[NSString stringWithFormat:@"%d", device.eID]];
         ScreenCell.scene = _scene;
@@ -375,7 +386,6 @@
         BjMusicCell.deviceid = _BJMusicArray[indexPath.row];
         BjMusicCell.roomID = self.roomID;
         BjMusicCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        BjMusicCell.deviceid = _BJMusicArray[indexPath.row];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
         [BjMusicCell query:[NSString stringWithFormat:@"%d", device.eID]];
         BjMusicCell.scene = _scene;
@@ -390,7 +400,6 @@
         otherCell.deviceid = _OtherArray[indexPath.row];
         otherCell.roomID = self.roomID;
         otherCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        otherCell.deviceid = _OtherArray[indexPath.row];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
         otherCell.scene = _scene;
 
@@ -409,6 +418,67 @@
 
 }
 
+#pragma mark - TCP recv delegate
+-(void)recv:(NSData *)data withTag:(long)tag
+{
+    Proto proto=protocolFromData(data);
+    
+    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
+        return;
+    }
+    
+    if (proto.cmd==0x01) {
+        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+        UITableViewCell *cell = [self.tableView viewWithTag:[devID intValue]];
+        if(proto.action.state == 0x1A){
+            if (proto.deviceType == 2) {
+                ((NewLightCell *)cell).NewLightSlider.value = (float)proto.action.RValue/100.0f;
+            }
+            if (proto.deviceType == 3) {
+                ((NewColourCell *)cell).colourSlider.value = (float)proto.action.RValue/100.0f;
+            }
+        }
+        if (proto.action.state == PROTOCOL_ON || proto.action.state == PROTOCOL_OFF) {
+            switch (proto.deviceType) {
+                case 2:
+                    ((NewLightCell *)cell).NewLightPowerBtn.selected = proto.action.state;
+                    break;
+                case 1:
+                    ((PowerLightCell *)cell).powerLightBtn.hidden = !proto.action.state;
+                    break;
+                case 3:
+                    ((NewColourCell *)cell).AddColourLightBtn.hidden = !proto.action.state;
+                    break;
+                case air:
+                    ((AireTableViewCell *)cell).AddAireBtn.hidden = !proto.action.state;
+                    break;
+                case curtain:
+                    ((CurtainTableViewCell *)cell).AddcurtainBtn.hidden = !proto.action.state;
+                    break;
+                case TVtype:
+                    ((IpadTVCell *)cell).AddTvDeviceBtn.hidden = !proto.action.state;
+                    break;
+                case DVDtype:
+                    ((IpadDVDTableViewCell *)cell).AddDvdBtn.hidden = !proto.action.state;
+                    break;
+                case FM:
+                    ((FMTableViewCell *)cell).AddFmBtn.hidden = !proto.action.state;
+                    break;
+                case screen:
+                    ((ScreenCurtainCell *)cell).AddScreenCurtainBtn.hidden = !proto.action.state;
+                    break;
+                case bgmusic:
+                    ((BjMusicTableViewCell *)cell).AddBjmusicBtn.hidden = !proto.action.state;
+                    break;
+                default:
+                    ((OtherTableViewCell *)cell).AddOtherBtn.hidden = !proto.action.state;
+                    break;
+            }
+        }
+        
+    }
+}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ( indexPath.section == 0 || indexPath.section == 3 || indexPath.section == 10 || indexPath.section == 11 || indexPath.section == 1  || indexPath.section == 4) {
@@ -422,6 +492,8 @@
     }
     return 100;
 }
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

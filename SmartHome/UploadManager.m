@@ -21,8 +21,6 @@
     return sharedInstance;
 }
 
-
-
 - (void)uploadImage:(UIImage *) img url:(NSString *) url dic:(NSDictionary *)dic fileName:(NSString *)fileName completion:(void (^)(id responseObject))completion
 {
     [MBProgressHUD showMessage:@"请稍候..."];
@@ -90,7 +88,6 @@
             [MBProgressHUD showError:result[@"msg"]];
         }
 
-        
        
     } failure:^(NSURLSessionDataTask *operation, NSError *error) {
         NSLog(@"错误 %@", error.localizedDescription);

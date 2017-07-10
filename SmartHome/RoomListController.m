@@ -363,21 +363,11 @@
         [sches enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
             Schedule *schedule = obj;
             //根据deviceID 来判断是修改旧的定时，还是新增定时
-            //if (schedule.deviceID == self.schedule.deviceID) { //已存在的schedule，对它进行修改即可
-                //schedule.astronomicalStartID = self.schedule.astronomicalStartID;
-                //schedule.astronomicalEndID = self.schedule.astronomicalEndID;
-                schedule.interval = self.schedule.interval;
-                schedule.startDate = self.schedule.startDate;
-                schedule.endDate = self.schedule.endDate;
-                schedule.startTime = self.schedule.startTime;
-                schedule.endTime = self.schedule.endTime;
-                //schedule.openToValue = self.schedule.openToValue;
-                schedule.weekDays = self.schedule.weekDays;
-                
-                shouldAdd = NO;
-                *stop = YES;
-            //}
-            
+            schedule.interval = self.schedule.interval;
+            schedule.startTime = self.schedule.startTime;
+            schedule.endTime = self.schedule.endTime;
+            schedule.weekDays = self.schedule.weekDays;
+            shouldAdd = NO;
         }];
         
         if (shouldAdd) {
@@ -708,7 +698,7 @@
                     [dateF setDateFormat:@"yy/MM/dd EEEE HH:mm"];
                     NSString *prettyD = [dateF stringFromDate:myDate];
                     [self.starDataBtn setTitle:prettyD forState:UIControlStateNormal];
-                    self.schedule.startDate = prettyDate;
+                    //self.schedule.startDate = prettyDate;
                     self.clickFixTimeBtn.tintColor = [UIColor redColor];
                     self.isSceneSetDate = YES;
                 }else {
@@ -723,7 +713,7 @@
                 NSString *prettyD = [dateF stringFromDate:myDate];
                 [self.starDataBtn setTitle:prettyD forState:UIControlStateNormal];
                 
-                self.schedule.startDate = prettyDate;
+                //self.schedule.startDate = prettyDate;
                 self.clickFixTimeBtn.tintColor = [UIColor redColor];
                 self.isSceneSetDate = YES;
             }
@@ -745,21 +735,11 @@
             [sches enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
                 Schedule *schedule = obj;
                 //根据deviceID 来判断是修改旧的定时，还是新增定时
-                //if (schedule.deviceID == self.schedule.deviceID) { //已存在的schedule，对它进行修改即可
-                    //schedule.astronomicalStartID = self.schedule.astronomicalStartID;
-                    //schedule.astronomicalEndID = self.schedule.astronomicalEndID;
-                    schedule.interval = self.schedule.interval;
-                    schedule.startDate = self.schedule.startDate;
-                    schedule.endDate = self.schedule.endDate;
-                    schedule.startTime = self.schedule.startTime;
-                    schedule.endTime = self.schedule.endTime;
-                    //schedule.openToValue = self.schedule.openToValue;
-                    schedule.weekDays = self.schedule.weekDays;
-                    
-                    shouldAdd = NO;
-                    *stop = YES;
-                //}
-                
+                schedule.interval = self.schedule.interval;
+                schedule.startTime = self.schedule.startTime;
+                schedule.endTime = self.schedule.endTime;
+                schedule.weekDays = self.schedule.weekDays;
+                shouldAdd = NO;
             }];
             
             if (shouldAdd) {
@@ -803,7 +783,7 @@
             BOOL compareResult = [prettyDate laterDate:self.starDataBtn.titleLabel.text];
         if (compareResult) {
             [self.endDataBtn setTitle:prettyDate forState:UIControlStateNormal];
-            self.schedule.endDate = prettyDate;
+            //self.schedule.endDate = prettyDate;
             self.clickFixTimeBtn.tintColor = [UIColor redColor];
             self.isSceneSetDate = YES;
         }else {
@@ -815,30 +795,18 @@
         
       //修改场景的plist文件，把定时信息写进去（结束日期）
         NSMutableArray *sches=[self.scene.schedules mutableCopy];
-        
-        
         //遍历 schedules
         if (sches && sches.count >0) {
-            
             __block BOOL shouldAdd = YES;
             [sches enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
                 Schedule *schedule = obj;
                 //根据deviceID 来判断是修改旧的定时，还是新增定时
-                //if (schedule.deviceID == self.schedule.deviceID) { //已存在的schedule，对它进行修改即可
-                    //schedule.astronomicalStartID = self.schedule.astronomicalStartID;
-                    //schedule.astronomicalEndID = self.schedule.astronomicalEndID;
-                    schedule.interval = self.schedule.interval;
-                    schedule.startDate = self.schedule.startDate;
-                    schedule.endDate = self.schedule.endDate;
-                    schedule.startTime = self.schedule.startTime;
-                    schedule.endTime = self.schedule.endTime;
-                    //schedule.openToValue = self.schedule.openToValue;
-                    schedule.weekDays = self.schedule.weekDays;
-                    
-                    shouldAdd = NO;
-                    *stop = YES;
-                //}
+                schedule.interval = self.schedule.interval;
+                schedule.startTime = self.schedule.startTime;
+                schedule.endTime = self.schedule.endTime;
+                schedule.weekDays = self.schedule.weekDays;
                 
+                shouldAdd = NO;
             }];
             
             if (shouldAdd) {

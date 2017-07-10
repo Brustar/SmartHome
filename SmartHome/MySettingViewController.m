@@ -324,7 +324,6 @@
                
                [MBProgressHUD showError:@"您为普通用户， 无权限访问"];
            }
-           
         }
         
       }else if (indexPath.section == 2){

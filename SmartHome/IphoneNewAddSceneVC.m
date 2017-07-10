@@ -29,6 +29,7 @@
 #import "DeviceTimingViewController.h"
 #import "IphoneEditSceneController.h"
 #import "PowerLightCell.h"
+#import "PackManager.h"
 
 
 @interface IphoneNewAddSceneVC ()<UITableViewDelegate,UITableViewDataSource,IphoneRoomViewDelegate>
@@ -111,7 +112,7 @@
 }
 - (void)setupNaviBar {
     [self setNaviBarTitle:@"添加设备"]; //设置标题
-    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
+    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"下一步" target:self action:@selector(rightBtnClicked:)];
     _naviRightBtn.tintColor = [UIColor whiteColor];
 //    [self setNaviBarLeftBtn:_naviLeftBtn]; DeviceListTimeVC
     [self setNaviBarRightBtn:_naviRightBtn];
@@ -131,28 +132,42 @@
         
     }else if ([lastVC isKindOfClass:[iphoneEditSceneVC class]]) {
         
-        //场景ID不变
-        NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
-        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
-        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+//        //场景ID不变
+//        NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
+//        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+//        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+//        
+//        _scene = [[Scene alloc]init];
+//        [_scene setValuesForKeysWithDictionary:plistDic];
+//        _scene.roomID = self.roomID;
+//        _scene.sceneID = self.sceneID;
         
-        _scene = [[Scene alloc]init];
-        [_scene setValuesForKeysWithDictionary:plistDic];
-        _scene.roomID = self.roomID;
-        _scene.sceneID = self.sceneID;
+        Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
+        NSMutableArray *ds = [[scene devices] mutableCopy];
+        NSArray *devices = [[SceneManager defaultManager] readSceneByID:0].devices;
+        for(int i = 0;i<ds.count;i++){
+            for (int j=0; j<devices.count; j++) {
+                if ([[ds objectAtIndex:i] class] == [[devices objectAtIndex:j] class] && [[ds objectAtIndex:i] deviceID] == [[devices objectAtIndex:j] deviceID] ) {
+                    [ds removeObjectAtIndex:i];
+                }
+            }
+        }
+        NSArray *temp = [ds arrayByAddingObjectsFromArray:devices];
+        
+        scene.devices = temp;
         
         [[SceneManager defaultManager] editScene:_scene];
     }else{
         
-        if (_scene.devices.count != 0) {
-          
+//        if (_scene.devices.count != 0) {
+        
             IphoneSaveNewSceneController * iphoneSaveNewScene = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneSaveNewSceneController"];
             iphoneSaveNewScene.roomId = self.roomID;
             [self.navigationController pushViewController:iphoneSaveNewScene animated:YES];
-        }else{
-            [MBProgressHUD showSuccess:@"请先选择设备"];
-            
-        }
+//        }else{
+//            [MBProgressHUD showSuccess:@"请先选择设备"];
+//            
+//        }
        
     }
  
@@ -437,7 +452,6 @@
         aireCell.AireNameLabel.text = device.name;
         aireCell.deviceid = _AirArray[indexPath.row];
         aireCell.AireSlider.continuous = NO;
-        aireCell.deviceid = _AirArray[indexPath.row];
          _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
         [aireCell query:[NSString stringWithFormat:@"%d", device.eID]];
         aireCell.scene = _scene;
@@ -490,7 +504,7 @@
         OtherTableViewCell * otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherTableViewCell" forIndexPath:indexPath];
         otherCell.roomID = self.roomID;
         otherCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        otherCell.deviceid = _OtherArray[indexPath.row];
+        otherCell.deviceid = _ProjectArray[indexPath.row];
         otherCell.backgroundColor = [UIColor clearColor];
         Device * device = [SQLManager getDeviceWithDeviceHtypeID:[_ProjectArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
@@ -529,7 +543,7 @@
         ScreenCurtainCell * ScreenCell = [tableView dequeueReusableCellWithIdentifier:@"ScreenCurtainCell" forIndexPath:indexPath];
         ScreenCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         ScreenCell.roomID = self.roomID;
-        ScreenCell.deviceid = _ProjectArray[indexPath.row];
+        ScreenCell.deviceid = _MBArray[indexPath.row];
         ScreenCell.backgroundColor =[UIColor clearColor];
         Device * device = [SQLManager getDeviceWithDeviceHtypeID:[_MBArray[indexPath.row] intValue]];
         ScreenCell.ScreenCurtainLabel.text = device.name;
@@ -570,6 +584,66 @@
         }
         return otherCell;
     
+}
+#pragma mark - TCP recv delegate
+-(void)recv:(NSData *)data withTag:(long)tag
+{
+    Proto proto=protocolFromData(data);
+    
+    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
+        return;
+    }
+    
+    if (proto.cmd==0x01) {
+        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+        UITableViewCell *cell = [self.tableView viewWithTag:[devID intValue]];
+        if(proto.action.state == 0x1A){
+            if (proto.deviceType == 2) {
+                ((NewLightCell *)cell).NewLightSlider.value = (float)proto.action.RValue/100.0f;
+            }
+            if (proto.deviceType == 3) {
+                ((NewColourCell *)cell).colourSlider.value = (float)proto.action.RValue/100.0f;
+            }
+        }
+        if (proto.action.state == PROTOCOL_ON || proto.action.state == PROTOCOL_OFF) {
+            switch (proto.deviceType) {
+                case 2:
+                    ((NewLightCell *)cell).NewLightPowerBtn.selected = proto.action.state;
+                    break;
+                case 1:
+                    ((PowerLightCell *)cell).powerLightBtn.hidden = !proto.action.state;
+                    break;
+                case 3:
+                    ((NewColourCell *)cell).AddColourLightBtn.hidden = !proto.action.state;
+                    break;
+                case air:
+                    ((AireTableViewCell *)cell).AddAireBtn.hidden = !proto.action.state;
+                    break;
+                case curtain:
+                    ((CurtainTableViewCell *)cell).AddcurtainBtn.hidden = !proto.action.state;
+                    break;
+                case TVtype:
+                    ((TVTableViewCell *)cell).AddTvDeviceBtn.hidden = !proto.action.state;
+                    break;
+                case DVDtype:
+                    ((DVDTableViewCell *)cell).AddDvdBtn.hidden = !proto.action.state;
+                    break;
+                case FM:
+                    ((FMTableViewCell *)cell).AddFmBtn.hidden = !proto.action.state;
+                    break;
+                case screen:
+                    ((ScreenCurtainCell *)cell).AddScreenCurtainBtn.hidden = !proto.action.state;
+                    break;
+                case bgmusic:
+                    ((BjMusicTableViewCell *)cell).AddBjmusicBtn.hidden = !proto.action.state;
+                    break;
+                default:
+                    ((OtherTableViewCell *)cell).AddOtherBtn.hidden = !proto.action.state;
+                    break;
+            }
+        }
+        
+    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

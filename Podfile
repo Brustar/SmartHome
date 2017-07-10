@@ -13,14 +13,14 @@ target 'SmartHome' do
 	pod 'KxMenu'
 	pod 'SCSiriWaveformView'
     pod 'SDWebImage'
-	pod 'IQKeyboardManager'
+    pod 'IQKeyboardManager'
 	pod 'RBStoryboardLink', '~> 0.1'
 	
 	pod 'CocoaAsyncSocket', '~>7.4.3'
 
     pod 'RongCloudIMKit'
     
-#	pod 'FSLineChart'
+    #pod 'FSLineChart'
 	pod 'libWeChatSDK', '~>1.5'
 	pod 'AliPay', '~> 2.1.2'
     #pod 'ReactiveCocoa', '~> 5.0.0'

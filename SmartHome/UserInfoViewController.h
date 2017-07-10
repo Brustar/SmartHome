@@ -23,5 +23,7 @@
 @property (nonatomic, strong) NSString *userTypeStr;
 @property (nonatomic, strong) UIImage *selectedImg;//选择的头像图片
 - (IBAction)headerBtnClicked:(id)sender;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *UserinfoTrailingConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *UserinfoLeadingConstraint;
 
 @end

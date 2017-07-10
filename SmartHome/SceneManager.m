@@ -1,4 +1,3 @@
-
 //
 //  SceneManager.m
 //  SmartHome
@@ -46,17 +45,12 @@
 {
     if (name.length >0) {
         
-        // int sceneid=[SQLManager saveMaxSceneId:scene name:name pic:@""];
-        // scene.sceneID=sceneid;
-        
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"yyyyMMddHHmmss";
         NSString *str = [formatter stringFromDate:[NSDate date]];
         NSString *imgFileName = [NSString stringWithFormat:@"%@.png", str];
 
         //同步云端
-        
-        
         NSString *sceneFile = [NSString stringWithFormat:@"%@_0.plist",SCENE_FILE_NAME];
         NSString *scenePath = [[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
         
@@ -78,35 +72,17 @@
         scene.schedules = [schedulesTemp copy];
         if(scene.schedules.count > 0)
         {
-            //for (Schedule *schedule in scene.schedules) {
-                //if(schedule.deviceID == 0) { //控制场景的定时
-                    /*if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID >0)
-                    {
-                        parameter = @{
-                                      @"token":[UD objectForKey:@"AuthorToken"],
-                                      @"optype":@(0),
-                                      @"scencename":name,
-                                      @"imgname":imgFileName,
-                                      @"scencefile":scenePath,
-                                      @"isplan":@(1),
-                                      @"roomid":@(scene.roomID),
-                                      @"isactive":@(isactive)
-                                      };
-                    }*/
-                //}else { //控制设备的定时
-                     parameter = @{
-                                   @"token":[UD objectForKey:@"AuthorToken"],
-                                   @"optype":@(0),
-                                   @"scencename":name,
-                                   @"imgname":imgFileName,
-                                   @"scencefile":scenePath,
-                                   @"isplan":@(1),
-                                   @"roomid":@(scene.roomID),
-                                   @"isactive":@(isactive)
-                                   };
+             parameter = @{
+                           @"token":[UD objectForKey:@"AuthorToken"],
+                           @"optype":@(0),
+                           @"scencename":name,
+                           @"imgname":imgFileName,
+                           @"scencefile":scenePath,
+                           @"isplan":@(1),
+                           @"roomid":@(scene.roomID),
+                           @"isactive":@(isactive)
+                           };
             isplan = 1;
-                //}
-            //}
         }else {
             parameter = @{
                           @"token":[UD objectForKey:@"AuthorToken"],
@@ -120,7 +96,6 @@
                           };
             isplan = 0;
         }
-       //NSData *imgData = UIImagePNGRepresentation(image);
         NSData *imgData = UIImageJPEGRepresentation(image, 0.5);
         NSLog(@"imgDataSize: %.2f M", (float)imgData.length/1024/1024);
         
@@ -197,38 +172,21 @@
         NSLog(@"imgDataSize: %.2f M", (float)imgData.length/1024/1024);
         
         NSDictionary *parameter;
-        //int sceneid = [SQLManager saveMaxSceneId:scene name:name pic:@""];
-        //scene.sceneID = sceneid;
         scene.sceneName = name;
         
         if(scene.schedules.count > 0)
         {
-            //for (Schedule *schedule in scene.schedules) {
-                //if(schedule.deviceID == 0) { //控制场景的定时
-                    /*if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID >0)
-                    {
-                        parameter = @{
-                                      @"token":[UD objectForKey:@"AuthorToken"],
-                                      @"optype":@(0),
-                                      @"scencename":name,
-                                      @"imgname":imgFileName,
-                                      @"scencefile":scenePath,
-                                      @"isplan":@(1),
-                                      @"roomid":@(scene.roomID)
-                                      };
-                    }*/
-                //}else { //控制设备的定时
-                    parameter = @{
-                                  @"token":[UD objectForKey:@"AuthorToken"],
-                                  @"optype":@(0),
-                                  @"scencename":name,
-                                  @"imgname":imgFileName,
-                                  @"scencefile":scenePath,
-                                  @"isplan":@(1),
-                                  @"roomid":@(scene.roomID)
-                                  };
-                //}
-            //}
+
+            parameter = @{
+                          @"token":[UD objectForKey:@"AuthorToken"],
+                          @"optype":@(0),
+                          @"scencename":name,
+                          @"imgname":imgFileName,
+                          @"scencefile":scenePath,
+                          @"isplan":@(1),
+                          @"roomid":@(scene.roomID)
+                          };
+
         }else {
             parameter = @{
                           @"token":[UD objectForKey:@"AuthorToken"],
@@ -269,12 +227,12 @@
                       {
                           NSString *sql = [NSString stringWithFormat:@"insert into Scenes values(%d,'%@','%@','%@',%ld,%d,'%@',%d,null,null,'%ld')",scene.sceneID,name,roomName,imgUrl,(long)scene.roomID,2,@"0",0,[[DeviceInfo defaultManager] masterID]];
                           BOOL result = [db executeUpdate:sql];
-                          if(result)
-                          {   [MBProgressHUD showSuccess:@"新增成功"];
+                          if (result) {
+                              [MBProgressHUD showError:@"新增成功"];
                               NSLog(@"新增场景，入库成功！");
-                          }else {
+                          }else{
                               [MBProgressHUD showError:@"新增失败"];
-                              NSLog(@"新增场景，入库失败！");
+                               NSLog(@"新增场景，入库失败！");
                           }
                       }
                       [db close];
@@ -323,32 +281,16 @@
     if(newScene.schedules.count > 0) //有定时
     {
         for (Schedule *schedule in newScene.schedules) {
-//            if(schedule.deviceID == 0) {  //控制场景的定时
-//                if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID >0)
-////                {
-//                    parameter = @{
-//                                  @"token":[UD objectForKey:@"AuthorToken"],
-//                                  @"optype":@(7),
-//                                  @"Plist":fileName,
-//                                  @"starttime":schedule.startTime,
-//                                  @"endtime":schedule.endTime,
-//                                  @"weekvalue":schedule.weekDays,
-//                                  @"isactive":@(newScene.isactive),
-//                                  @"sceneid":@(newScene.sceneID)
-//                                  };
-//                }
-//            }else { //控制设备的定时
-                parameter = @{
-                              @"token":[UD objectForKey:@"AuthorToken"],
-                              @"optype":@(7),
-                              @"Plist":fileName,
-                              @"starttime":schedule.startTime,
-                              @"endtime":schedule.endTime,
-                              @"weekvalue":schedule.weekDays,
-                              @"isactive":@(newScene.isactive),
-                              @"sceneid":@(newScene.sceneID)
-                              };
-//            }
+            parameter = @{
+                          @"token":[UD objectForKey:@"AuthorToken"],
+                          @"optype":@(7),
+                          @"Plist":fileName,
+                          @"starttime":schedule.startTime,
+                          @"endtime":schedule.endTime,
+                          @"weekvalue":schedule.weekDays,
+                          @"isactive":@(newScene.isactive),
+                          @"sceneid":@(newScene.sceneID)
+                          };
         }
     }else{ //没有定时
         
@@ -369,7 +311,7 @@
     }
     
     NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
-    NSString *URL = [NSString stringWithFormat:@"%@Cloud/eq _timing.aspx",[IOManager httpAddr]];
+    NSString *URL = [NSString stringWithFormat:@"%@Cloud/eq_timing.aspx",[IOManager httpAddr]];
     [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName imgData:nil imgFileName:@"" completion:^(id responseObject) {
         
         NSLog(@"scene_edit --- responseObject: %@", responseObject);
@@ -385,6 +327,7 @@
     }];
     
 }
+
 //保证newScene的ID不变
 - (void)editScene:(Scene *)newScene
 {
@@ -397,26 +340,6 @@
     if(newScene.schedules.count > 0) //有定时
     {
         for (Schedule *schedule in newScene.schedules) {
-            //if(schedule.deviceID == 0) {  //控制场景的定时
-                /*if(![schedule.startTime isEqualToString:@""] || schedule.astronomicalStartID >0)
-                {
-                    parameter = @{
-                                  @"token":[UD objectForKey:@"AuthorToken"],
-                                  @"optype":@(0),
-                                  @"scenceid":@(newScene.sceneID),
-                                  @"scencename":newScene.sceneName,
-                                  @"roomid":@(newScene.roomID),
-                                  @"isplan":@(1),
-                                  @"plistname":fileName,
-                                  @"scencefile":scenePath,
-                                  @"starttime":schedule.startTime,
-                                  @"endtime":schedule.endTime,
-                                  @"astronomicaltime":@(schedule.astronomicalStartID),
-                                  @"starttype":@(1),
-                                  @"weekvalue":schedule.weekDays
-                                  };
-                }*/
-            //}else { //控制设备的定时
                 parameter = @{
                               @"token":[UD objectForKey:@"AuthorToken"],
                               @"optype":@(0),
@@ -428,11 +351,9 @@
                               @"scencefile":scenePath,
                               @"starttime":schedule.startTime,
                               @"endtime":schedule.endTime,
-                              //@"astronomicaltime":@(schedule.astronomicalStartID),
                               @"starttype":@(1),
                               @"weekvalue":schedule.weekDays
                               };
-            //}
         }
     }else{ //没有定时
         
@@ -463,6 +384,7 @@
         
         if(result.integerValue == 0) { //成功
             [MBProgressHUD showSuccess:@"保存成功"];
+            [IOManager removeTempFile];
         }else { //失败
             [MBProgressHUD showError:msg];
         }
@@ -491,18 +413,17 @@
     
     NSData *fileData = [NSData dataWithContentsOfFile:scenePath];
     NSString *URL = [NSString stringWithFormat:@"%@Cloud/scene_edit.aspx",[IOManager httpAddr]];
-    //int x = arc4random() % 100;
+
     [[UploadManager defaultManager] uploadScene:fileData url:URL dic:parameter fileName:fileName imgData:imgData imgFileName:[NSString stringWithFormat:@"scene_%d.png",newScene.sceneID] completion:^(id responseObject) {
-        
-        NSLog(@"scene_edit --- responseObject: %@", responseObject);
         
         NSNumber *result = [responseObject objectForKey:@"result"];
         NSString *msg = [responseObject objectForKey:@"msg"];
         
         if(result.integerValue == 0) { //成功
             
-            [SQLManager updateScenePic:[NSString stringWithFormat:@"http://115.28.151.85:8082/UploadFiles/images/scene/scene_%d.png",newScene.sceneID] sceneID:newScene.sceneID];
+            [SQLManager updateScenePic:[NSString stringWithFormat:@"%@UploadFiles/images/scene/scene_%d.png",[IOManager httpAddr],newScene.sceneID] sceneID:newScene.sceneID];
             [MBProgressHUD showSuccess:@"保存成功"];
+            
         }else { //失败
             [MBProgressHUD showError:msg];
         }
@@ -512,11 +433,6 @@
 //收藏场景
 - (BOOL)favoriteScene:(Scene *)newScene
 {
-//    NSString *scenePath = [[IOManager favoritePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%d.plist" , SCENE_FILE_NAME, newScene.sceneID]];
-//    NSDictionary *dic = [PrintObject getObjectData:newScene];
-//    BOOL ret = [dic writeToFile:scenePath atomically:YES];
-    
-    
        // 写sqlite更新场景表的isFavorite字段
         FMDatabase *db = [SQLManager connetdb];
         if (![db open]) {
@@ -528,6 +444,7 @@
         [db close];
     return result;
 }
+
 -(void)deleteFavoriteScene:(Scene *)scene withName:(NSString *)name
 {
     
@@ -559,7 +476,7 @@
     NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfFile:scenePath];
     if (dictionary) {
         Scene *scene=nil;
-        if ([dictionary objectForKey:@"startTime"]) {
+        if ([dictionary objectForKey:@"schedules"]) {
             scene=[[Scene alloc] init];
             
             [scene setSceneName:@""];
@@ -568,12 +485,6 @@
                 Schedule *schedule=[[Schedule alloc] init];
                 schedule.startTime=sch[@"startTime"];
                 schedule.endTime=sch[@"endTime"];
-                schedule.startDate = sch[@"startDay"];
-                schedule.endDate = sch[@"endDay"];
-                //schedule.deviceID=[sch[@"deviceID"] intValue];
-                //schedule.openToValue=[sch[@"openTovalue"] intValue];
-                //schedule.astronomicalStartID=[sch[@"astronomicalStartID"] intValue];
-                //schedule.astronomicalEndID=[sch[@"astronomicalEndID"] intValue];
                 schedule.weekDays=sch[@"weekDays"];
                 [schedules addObject:schedule];
             }
@@ -585,6 +496,7 @@
         scene.readonly=[[dictionary objectForKey:@"readonly"] boolValue];
         scene.picName=[dictionary objectForKey:@"picName"];
         scene.roomID=[[dictionary objectForKey:@"roomID"] intValue];
+        scene.roomName=[dictionary objectForKey:@"roomName"];
         scene.masterID=[[dictionary objectForKey:@"masterID"] intValue];
         
         NSMutableArray *devices=[[NSMutableArray alloc] init];
@@ -716,22 +628,8 @@
 - (void)getRealSceneAllDevicesStatusData {
     NSData *data = nil;
     SocketManager *sock = [SocketManager defaultManager];
-    data = [self getRealSceneData];
+    data = [[DeviceInfo defaultManager] getRealSceneData];
     [sock.socket writeData:data withTimeout:1 tag:1];
-}
-
-//获取实景数据（温度，湿度，PM2.5，噪音）
-- (NSData *)getRealSceneData{
-    uint8_t cmd = 0x8A;
-    Proto proto = createProto();
-    proto.cmd = cmd;
-    proto.action.state = 0x00;
-    proto.action.RValue = 0x00;
-    proto.action.G = 0x00;
-    proto.action.B = 0x00;
-    proto.deviceID = 0x00;
-    proto.deviceType = 0x8A;
-    return dataFromProtocol(proto);
 }
 
 -(void) dimingRoom:(int)roomid brightness:(int)bright
@@ -1012,7 +910,6 @@
         if (!array) {
             array= [NSArray new];
         }
-        
         //if ([self inDeviceArray:array device:deviceID]==-1) {
             int i=[self inArray:[self allDeviceIDs:scene.sceneID] device:deviceID];
             if (i>=0) {
@@ -1022,7 +919,6 @@
             }else{
                 array=[array arrayByAddingObject:device];
             }
-            
         //}
     }else{
         array=[NSArray arrayWithObject:device];

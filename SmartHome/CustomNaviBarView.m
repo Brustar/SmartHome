@@ -23,6 +23,7 @@
 @property (nonatomic, readonly) UIButton *m_btnRight;
 @property (nonatomic, readonly) UIButton *m_btnMiddle;
 @property (nonatomic, readonly) BOOL m_bIsBlur;
+@property (nonatomic, readonly) UILabel * MassegeLabel;
 
 
 @end
@@ -37,6 +38,7 @@
 @synthesize m_bIsBlur = _bIsBlur;
 @synthesize m_netStateView = _netStateView;
 @synthesize m_btnMiddle = _btnMiddle;
+@synthesize MassegeLabel = _MassegeLabel;
 
 
 + (CGRect)rightBtnFrame
@@ -50,7 +52,7 @@
 
 + (CGSize)barBtnSize
 {
-   return Size(60.0f, 40.0f);
+   return Size(80.0f, 40.0f);
 }
 
 + (CGSize)barSize
@@ -299,7 +301,16 @@
     _netStateView.userInteractionEnabled = NO;
     [self addSubview:_netStateView];
 }
-
+-(void)showMassegeLabel
+{
+    _MassegeLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 33, 6, 6)];
+    _MassegeLabel.backgroundColor = [UIColor redColor];
+    _MassegeLabel.layer.masksToBounds = YES;
+    _MassegeLabel.layer.cornerRadius = 3;
+    
+    [self addSubview:_MassegeLabel];
+    
+}
 - (void)setNetState:(int)state {
     if (state == netState_outDoor_4G) {
         [_netStateView setTitle:@"" forState:UIControlStateNormal];

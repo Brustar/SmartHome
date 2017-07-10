@@ -20,7 +20,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    
+    [IOManager removeTempFile];
+    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     [self.FMSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
     self.FMSlider.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
     self.FMSlider.minimumTrackTintColor = [UIColor colorWithRed:253/255.0 green:254/255.0 blue:254/255.0 alpha:1];
@@ -74,6 +75,7 @@
         [device setDeviceID:[self.deviceid intValue]];
         [device setRvolume:device.rvolume];
         [device setChannel:device.channel];
+
     
     if (sender == self.FMSwitchBtn) {
          NSData *data=nil;
@@ -110,10 +112,7 @@
             
             [_scene setReadonly:NO];
             
-            NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-            [_scene setDevices:devices];
-            
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
+     
             
         }else{
             if (ON_IPAD) {
@@ -157,6 +156,11 @@
             [_delegate onFMChannelSliderValueChanged:sender];
         }
     }
+    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    
+    [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
   
 }
 #pragma mark - TCP recv delegate

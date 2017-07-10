@@ -109,7 +109,7 @@
         NSData *port=[data subdataWithRange:NSMakeRange(8, 2)];
              
         info.masterIP=[PackManager NSDataToIP:ip];
-        info.masterPort=(int)[PackManager dataToUInt16:port];
+        //info.masterPort=(int)[PackManager dataToUInt16:port];
         info.connectState=atHome;
 
         //release 不能马上去连，要暂停0.1S,再连从服务器，不然会崩溃
@@ -149,7 +149,7 @@
 {
     NSLog(@"socket连接成功,host:%@,port:%d",host,port);
     DeviceInfo *device=[DeviceInfo defaultManager];
-    if ([host isEqualToString:[IOManager tcpAddr]] && port == device.masterPort) {
+    if (port == device.masterPort) {
         device.connectState=outDoor;
     }else{
         device.connectState=atHome;

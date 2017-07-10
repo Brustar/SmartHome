@@ -33,6 +33,8 @@
 #import "IphoneNewAddSceneVC.h"
 #import "IphoneNewAddSceneTimerVC.h"
 #import "PowerLightCell.h"
+#import "PackManager.h"
+
 
 
 
@@ -117,7 +119,6 @@
     touchVC.delegate = self;
     [self getButtonUI];
     [self setupNaviBar];
-    [self fetchDevicesStatus];//获取所有设备的状态
     if (_lightArray.count == 0 && _SwitchLightArr.count == 0 && _ColourLightArr.count == 0) {
         self.patternView.hidden = YES;
         self.TableViewConstraint.constant = -60;
@@ -125,6 +126,7 @@
     }
 }
 
+<<<<<<< HEAD
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -149,30 +151,41 @@
     
 }
 
+=======
+>>>>>>> d454077bc43b86759ed458298f77879a81cc468a
 - (void)setupNaviBar {
     
      NSString * roomName =[SQLManager getRoomNameByRoomID:self.roomID];
      self.title = [SQLManager getSceneName:self.sceneID];
      [self setNaviBarTitle:[NSString stringWithFormat:@"%@-%@",roomName,self.title]]; //设置标题
-    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
+    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"编辑" target:self action:@selector(rightBtnClicked:)];
     _naviRightBtn.tintColor = [UIColor whiteColor];
     //    [self setNaviBarLeftBtn:_naviLeftBtn];
     [self setNaviBarRightBtn:_naviRightBtn];
 }
+
 -(void)rightBtnClicked:(UIButton *)bbi
 {
-//     [self performSegueWithIdentifier:@"storeNewScene" sender:self];
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请选择" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *saveAction = [UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //场景ID不变
-        NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
-        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
-        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
-        Scene *scene = [[Scene alloc]init];
-        [scene setValuesForKeysWithDictionary:plistDic];
-        scene.sceneID = self.sceneID;
-        scene.roomID = self.roomID;
-        scene.sceneName = [SQLManager getSceneName:scene.sceneID];
+        Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
+        NSMutableArray *ds = [[scene devices] mutableCopy];
+        
+        NSArray *devices = [[SceneManager defaultManager] readSceneByID:0].devices;
+
+        
+        for(int i = 0;i<ds.count;i++){
+            for (int j=0; j<devices.count; j++) {
+                if ([[ds objectAtIndex:i] class] == [[devices objectAtIndex:j] class] && [[ds objectAtIndex:i] deviceID] == [[devices objectAtIndex:j] deviceID] ) {
+                    [ds removeObjectAtIndex:i];
+                }
+            }
+        }
+
+        NSArray *temp = [ds arrayByAddingObjectsFromArray:devices];
+        
+        scene.devices = temp;
+
         [[SceneManager defaultManager] editScene:scene];
     }];
     [alertVC addAction:saveAction];
@@ -188,8 +201,25 @@
         //重新编辑场景的定时
         
         UIStoryboard * sceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
-        
         IphoneNewAddSceneTimerVC * newTimerVC = [sceneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneNewAddSceneTimerVC"];
+        NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
+        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+        NSArray * schedules = plistDic[@"schedules"];
+        Scene * scene = [[Scene alloc] init];
+        scene.schedules = schedules;
+        if (scene.schedules.count > 0) {
+            for(NSDictionary *dict in schedules)
+            {
+                    NSString *startTime = dict[@"startTime"];
+                    NSString *endTime = dict[@"endTime"];
+                    NSArray * weekDays = dict[@"weekDays"];
+                    newTimerVC.startTimeStr = startTime;
+                    newTimerVC.endTimeStr = endTime;
+                    newTimerVC.repeatitionStr =[weekDays componentsJoinedByString:@","];
+            }
+        }
+        
         newTimerVC.sceneID = self.sceneID;
         newTimerVC.roomid = self.roomID;
         
@@ -477,41 +507,6 @@
 
 -(void)httpHandler:(id) responseObject tag:(int)tag
 {
-    if (tag == 1) {
-        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-            NSLog(@"responseObject:%@", responseObject);
-            if ([responseObject[@"result"] integerValue] == 0) {
-                NSArray *deviceArray = responseObject[@"equipment_status_list"];
-                
-                if ([deviceArray isKindOfClass:[NSArray class]] && deviceArray.count >0 ) {
-                    for(NSDictionary *device in deviceArray) {
-                        if ([device isKindOfClass:[NSDictionary class]]) {
-                            Device *devInfo = [[Device alloc] init];
-                            devInfo.eID = [device[@"equipmentid"] intValue];
-                            devInfo.hTypeId = [device[@"htype"] integerValue];
-                            devInfo.power = [device[@"status"] integerValue];
-                            devInfo.bright = [device[@"bright"] integerValue];
-                            devInfo.color = device[@"color"];
-                            devInfo.position = [device[@"position"] integerValue];
-                            devInfo.temperature = [device[@"temperature"] integerValue];
-                            devInfo.fanspeed = [device[@"fanspeed"] integerValue];
-                            devInfo.air_model = [device[@"model"] integerValue];
-                            
-                            [SQLManager updateDeviceStatus:devInfo];
-                        }
-                    }
-                }
-                
-                //刷新UI
-                [self.tableView reloadData];
-                
-            }else {
-                NSLog(@"设备状态获取失败！");
-            }
-        }else {
-            NSLog(@"设备状态获取失败！");
-        }
-    }
     if (tag == 3) {
         if([responseObject[@"result"] intValue] == 0)
         {
@@ -664,6 +659,16 @@
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    NSString *hostID = SCENE_FILE_NAME;
+     int deviceID = 0;
+     int ispower;
+     int  brightness;
+    //读取场景文件
+    NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",hostID,self.sceneID];
+    NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+    NSDictionary *dictionary = [[NSDictionary alloc] initWithContentsOfFile:scenePath];
+ 
    if (indexPath.section == 0) {//调灯光
        NewLightCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewLightCell" forIndexPath:indexPath];
        cell.backgroundColor = [UIColor clearColor];
@@ -676,9 +681,25 @@
        cell.deviceid = _lightArray[indexPath.row];
        cell.NewLightSlider.continuous = NO;
        cell.NewLightSlider.hidden = NO;
-       cell.deviceid = _lightArray[indexPath.row];
-       cell.NewLightPowerBtn.selected = device.power;//开关状态
-       cell.NewLightSlider.value = (float)device.bright/100.0f;//亮度状态
+       if(dictionary)
+       {
+           for (NSDictionary *dic in [dictionary objectForKey:@"devices"]){
+               
+               if([dic objectForKey:@"deviceID"])
+               {
+                   deviceID = [dic[@"deviceID"] intValue];
+                   
+               }
+               if (deviceID == [_lightArray[indexPath.row] intValue]) {
+                  
+                   ispower = [dic[@"isPoweron"] intValue];
+                   brightness =[dic[@"brightness"] intValue];
+                   cell.NewLightPowerBtn.selected = ispower;
+                   cell.NewLightSlider.value = (float)brightness / 100.0f;
+               }
+              
+           }
+        }
        if (_isGloom) {
            cell.NewLightPowerBtn.selected = YES;//开关状态
            cell.NewLightSlider.value = 20.0f/100.0f;//亮度状态
@@ -700,7 +721,25 @@
        newColourCell.deviceid = _ColourLightArr[indexPath.row];
         Device *device = [SQLManager getDeviceWithDeviceID:[_ColourLightArr[indexPath.row] intValue]];
        newColourCell.colourNameLabel.text = device.name;
-       newColourCell.colourBtn.selected = device.power;//开关状态
+       
+       if(dictionary)
+       {
+           for (NSDictionary *dic in [dictionary objectForKey:@"devices"]){
+               
+               if([dic objectForKey:@"deviceID"])
+               {
+                   deviceID = [dic[@"deviceID"] intValue];
+                   
+               }
+               if (deviceID == [_ColourLightArr[indexPath.row] intValue]) {
+                   
+                   ispower = [dic[@"isPoweron"] intValue];
+                   newColourCell.colourBtn.selected = ispower;//开关状态
+                 
+               }
+               
+           }
+       }
        if (_isGloom || _isRomantic || _isSprightly) {
            newColourCell.colourBtn.selected = YES;
        }
@@ -715,7 +754,25 @@
 //       newColourCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
        newColourCell.deviceid = _SwitchLightArr[indexPath.row];
        newColourCell.powerLightNameLabel.text = device.name;
-       newColourCell.powerLightBtn.selected = device.power;//开关状态
+       
+       if(dictionary)
+       {
+           for (NSDictionary *dic in [dictionary objectForKey:@"devices"]){
+               
+               if([dic objectForKey:@"deviceID"])
+               {
+                   deviceID = [dic[@"deviceID"] intValue];
+                   
+               }
+               if (deviceID == [_SwitchLightArr[indexPath.row] intValue]) {
+                   
+                   ispower = [dic[@"isPoweron"] intValue];
+                   newColourCell.powerLightBtn.selected = ispower;//开关状态
+                   
+               }
+               
+           }
+       }
        if (_isGloom || _isRomantic || _isSprightly) {
            newColourCell.powerLightBtn.selected = YES;
        }
@@ -730,10 +787,34 @@
         aireCell.roomID = self.roomID;
         aireCell.sceneid = self.sceneid;
          Device *device = [SQLManager getDeviceWithDeviceID:[_AirArray[indexPath.row] intValue]];
+        if(dictionary)
+        {
+            int waiting;
+            int temperature;
+            for (NSDictionary *dic in [dictionary objectForKey:@"devices"]){
+                
+                if([dic objectForKey:@"deviceID"])
+                {
+                    deviceID = [dic[@"deviceID"] intValue];
+                    
+                }
+                if (deviceID == [_AirArray[indexPath.row] intValue]) {
+                    
+                    waiting = [dic[@"waiting"] intValue];
+                    temperature = [dic[@"temperature"] intValue];
+                    aireCell.AireSwitchBtn.selected = waiting;
+                    aireCell.AireSlider.value = (float)temperature / 100.0f;
+                    aireCell.temperatureLabel.text = [NSString stringWithFormat:@"%ld°C", lroundf(aireCell.AireSlider.value)];
+                    
+                }
+                
+            }
+        }
 //        aireCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+      
+        aireCell.AireSlider.value = device.temperature;
         aireCell.deviceid = _AirArray[indexPath.row];
         aireCell.AireNameLabel.text = device.name;
-        aireCell.deviceid = _AirArray[indexPath.row];
         
         return aireCell;
     }if (indexPath.section == 4) {//窗帘
@@ -744,10 +825,36 @@
         aireCell.roomID = self.roomID;
         aireCell.sceneid = self.sceneid;
         Device *device = [SQLManager getDeviceWithDeviceID:[_CurtainArray[indexPath.row] intValue]];
+        if(dictionary)
+        {
+            int openvalue;
+            for (NSDictionary *dic in [dictionary objectForKey:@"devices"]){
+                
+                if([dic objectForKey:@"deviceID"])
+                {
+                    deviceID = [dic[@"deviceID"] intValue];
+                    
+                }
+                if (deviceID == [_CurtainArray[indexPath.row] intValue]) {
+                    
+                    openvalue = [dic[@"openvalue"] intValue];
+                    aireCell.slider.value = (float)openvalue/100.0f;
+                    if (aireCell.slider.value > 0) {
+                        aireCell.open.selected = YES;
+                    }if (aireCell.slider.value == 0) {
+                        aireCell.open.selected = NO;
+                    }
+                    
+                }
+                
+            }
+        }
+      
+       
 //        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         aireCell.deviceid = _CurtainArray[indexPath.row];
         aireCell.label.text = device.name;
-        aireCell.deviceid = _CurtainArray[indexPath.row];
+        
         
         return aireCell;
     }if (indexPath.section == 5) {//TV
@@ -756,6 +863,30 @@
         TVCell.AddTvDeviceBtn.hidden = YES;
         TVCell.backgroundColor =[UIColor clearColor];
           Device *device = [SQLManager getDeviceWithDeviceID:[_TVArray[indexPath.row] intValue]];
+        if(dictionary)
+        {
+            int poweron;//开关
+            int volume;//音量
+            for (NSDictionary *dic in [dictionary objectForKey:@"devices"]){
+                
+                if([dic objectForKey:@"deviceID"])
+                {
+                    deviceID = [dic[@"deviceID"] intValue];
+                    
+                }
+                if (deviceID == [_TVArray[indexPath.row] intValue]) {
+                    
+                    poweron = [dic[@"poweron"] intValue];
+                    volume = [dic[@"volume"] intValue];
+                    TVCell.TVSwitch.selected = poweron;
+                    TVCell.TVSlider.value = (float)volume/100.f;
+                    
+                }
+                
+            }
+        }
+        
+        
 //        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         TVCell.deviceid = _TVArray[indexPath.row];
         TVCell.TVNameLabel.text = device.name;
@@ -768,6 +899,26 @@
         DVDCell.DVDSlider.continuous = NO;
         DVDCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_DVDArray[indexPath.row] intValue]];
+        if(dictionary)
+        {
+            int poweron;//开关
+            int dvolume;//音量
+            for (NSDictionary *dic in [dictionary objectForKey:@"devices"]){
+                
+                if([dic objectForKey:@"deviceID"])
+                {
+                    deviceID = [dic[@"deviceID"] intValue];
+                    
+                }
+                if (deviceID == [_DVDArray[indexPath.row] intValue]) {
+                    poweron = [dic[@"poweron"] intValue];
+                    dvolume = [dic[@"volume"] intValue];
+                    DVDCell.DVDSwitchBtn.selected = poweron;
+                    DVDCell.DVDSlider.value = (float)dvolume/100.f;
+                }
+            }
+        }
+       
 //        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         DVDCell.deviceid = _DVDArray[indexPath.row];
         DVDCell.DVDNameLabel.text = device.name;
@@ -780,6 +931,7 @@
         otherCell.backgroundColor = [UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_ProjectArray[indexPath.row] intValue]];
         otherCell.NameLabel.text = device.name;
+        otherCell.OtherSwitchBtn.selected = device.power;
 //        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         otherCell.deviceid = _ProjectArray[indexPath.row];
         otherCell.deviceid = _ProjectArray[indexPath.row];
@@ -790,8 +942,8 @@
         FMCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_FMArray[indexPath.row] intValue]];
         FMCell.FMNameLabel.text = device.name;
+        FMCell.FMSwitchBtn.selected = device.power;
 //        FMCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        FMCell.deviceid = _FMArray[indexPath.row];
         FMCell.deviceid = _FMArray[indexPath.row];
         FMCell.AddFmBtn.hidden = YES;
         FMCell.FMLayouConstraint.constant = 5;
@@ -806,7 +958,6 @@
         otherCell.NameLabel.text = device.name;
 //        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         otherCell.deviceid = _NetVArray[indexPath.row];
-        otherCell.deviceid = _NetVArray[indexPath.row];
         
         return otherCell;
     }if (indexPath.section == 10) {//幕布
@@ -815,9 +966,25 @@
         ScreenCell.ScreenCurtainConstraint.constant = 10;
         ScreenCell.backgroundColor =[UIColor clearColor];
         Device *device = [SQLManager getDeviceWithDeviceID:[_MBArray[indexPath.row] intValue]];
+        if(dictionary)
+        {
+            int waiting;//开关
+            for (NSDictionary *dic in [dictionary objectForKey:@"devices"]){
+                
+                if([dic objectForKey:@"deviceID"])
+                {
+                    deviceID = [dic[@"deviceID"] intValue];
+                    
+                }
+                if (deviceID == [_MBArray[indexPath.row] intValue]) {
+                    waiting = [dic[@"waiting"] intValue];
+                    ScreenCell.ScreenCurtainBtn.selected = waiting;
+                }
+            }
+        }
         ScreenCell.ScreenCurtainLabel.text = device.name;
+        ScreenCell.ScreenCurtainBtn.selected = device.power;
 //        ScreenCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        ScreenCell.deviceid = _MBArray[indexPath.row];
         ScreenCell.deviceid = _MBArray[indexPath.row];
         
         return ScreenCell;
@@ -827,9 +994,26 @@
         BjMusicCell.AddBjmusicBtn.hidden = YES;
         BjMusicCell.BJmusicConstraint.constant = 10;
         Device *device = [SQLManager getDeviceWithDeviceID:[_BJMusicArray[indexPath.row] intValue]];
+        if(dictionary)
+        {
+            int poweron;//开关
+            int bgvolume;//音量
+            for (NSDictionary *dic in [dictionary objectForKey:@"devices"]){
+                if([dic objectForKey:@"deviceID"])
+                {
+                    deviceID = [dic[@"deviceID"] intValue];
+                }
+                if (deviceID == [_BJMusicArray[indexPath.row] intValue]) {
+                    poweron = [dic[@"poweron"] intValue];
+                    bgvolume = [dic[@"bgvolume"] intValue];
+                    BjMusicCell.BjPowerButton.selected = poweron;
+                    BjMusicCell.BjSlider.value = (float)bgvolume / 100.0f;
+                }
+            }
+        }
         BjMusicCell.BjMusicNameLb.text = device.name;
+        BjMusicCell.BjPowerButton.selected = device.power;
 //        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        BjMusicCell.deviceid = _BJMusicArray[indexPath.row];
         BjMusicCell.deviceid = _BJMusicArray[indexPath.row];
         
         return BjMusicCell;
@@ -841,6 +1025,23 @@
         otherCell.deviceid = _OtherArray[indexPath.row];
         if (_OtherArray.count) {
             Device *device = [SQLManager getDeviceWithDeviceID:[_OtherArray[indexPath.row] intValue]];
+            if(dictionary)
+            {
+                int waiting;//开关
+                for (NSDictionary *dic in [dictionary objectForKey:@"devices"]){
+                    
+                    if([dic objectForKey:@"deviceID"])
+                    {
+                        deviceID = [dic[@"deviceID"] intValue];
+                        
+                    }
+                    if (deviceID == [_OtherArray[indexPath.row] intValue]) {
+                        waiting = [dic[@"waiting"] intValue];
+                        otherCell.OtherSwitchBtn.selected = waiting;
+                    }
+                }
+            }
+           
             if (device.name == nil) {
                 otherCell.NameLabel.text = @"";
             }else{
@@ -866,6 +1067,67 @@
         devicesVC.sceneID = self.sceneID;
         [self.navigationController pushViewController:devicesVC animated:YES];
 //        [self performSegueWithIdentifier:@"NewAddDeviceSegue" sender:self];
+        
+    }
+}
+
+#pragma mark - TCP recv delegate
+-(void)recv:(NSData *)data withTag:(long)tag
+{
+    Proto proto=protocolFromData(data);
+    
+    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
+        return;
+    }
+    
+    if (proto.cmd==0x01) {
+        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+        UITableViewCell *cell = [self.tableView viewWithTag:[devID intValue]];
+        if(proto.action.state == 0x1A){
+            if (proto.deviceType == 2) {
+                ((NewLightCell *)cell).NewLightSlider.value = (float)proto.action.RValue/100.0f;
+            }
+            if (proto.deviceType == 3) {
+                ((NewColourCell *)cell).colourSlider.value = (float)proto.action.RValue/100.0f;
+            }
+        }
+        if (proto.action.state == PROTOCOL_ON || proto.action.state == PROTOCOL_OFF) {
+            switch (proto.deviceType) {
+                case 2:
+                    ((NewLightCell *)cell).NewLightPowerBtn.selected = proto.action.state;
+                    break;
+                case 1:
+                    ((PowerLightCell *)cell).powerLightBtn.hidden = !proto.action.state;
+                    break;
+                case 3:
+                    ((NewColourCell *)cell).AddColourLightBtn.hidden = !proto.action.state;
+                    break;
+                case air:
+                    ((AireTableViewCell *)cell).AddAireBtn.hidden = !proto.action.state;
+                    break;
+                case curtain:
+                    ((CurtainTableViewCell *)cell).AddcurtainBtn.hidden = !proto.action.state;
+                    break;
+                case TVtype:
+                    ((TVTableViewCell *)cell).AddTvDeviceBtn.hidden = !proto.action.state;
+                    break;
+                case DVDtype:
+                    ((DVDTableViewCell *)cell).AddDvdBtn.hidden = !proto.action.state;
+                    break;
+                case FM:
+                    ((FMTableViewCell *)cell).AddFmBtn.hidden = !proto.action.state;
+                    break;
+                case screen:
+                    ((ScreenCurtainCell *)cell).AddScreenCurtainBtn.hidden = !proto.action.state;
+                    break;
+                case bgmusic:
+                    ((BjMusicTableViewCell *)cell).AddBjmusicBtn.hidden = !proto.action.state;
+                    break;
+                default:
+                    ((OtherTableViewCell *)cell).AddOtherBtn.hidden = !proto.action.state;
+                    break;
+            }
+        }
         
     }
 }

@@ -855,21 +855,21 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="68"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gHd-79-pGK">
-                                                    <rect key="frame" x="8" y="14" width="268" height="20"/>
+                                                    <rect key="frame" x="8" y="14" width="248" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="N9o-Zg-cDC"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.37254901960784315" green="0.37254901960784315" blue="0.37647058823529411" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmn-1c-vBM">
-                                                    <rect key="frame" x="286" y="16" width="120" height="16"/>
+                                                    <rect key="frame" x="266" y="16" width="140" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="16" id="2d1-98-NBH"/>
-                                                        <constraint firstAttribute="width" constant="120" id="I0h-ZG-jJ7"/>
+                                                        <constraint firstAttribute="width" constant="140" id="I0h-ZG-jJ7"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" red="0.37254901960784315" green="0.37254901960784315" blue="0.37647058823529411" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>

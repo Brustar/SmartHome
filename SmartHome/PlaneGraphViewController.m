@@ -20,6 +20,7 @@
     [self addNotifications];
     [self setupNaviBar];
     [self showNetStateView];
+//    [self showMassegeLabel];
     self.lightIcon.layer.cornerRadius =  self.lightIcon.frame.size.width/2;
     self.lightIcon.layer.masksToBounds = YES;
     self.lightIcon.backgroundColor = RGB(243, 152, 0, 1);
@@ -148,7 +149,12 @@
         music_icon = @"Ipad-NowMusic";
     }
     
+//    - (void)setBackBtn:(UIButton *)btn;
+//    - (void)setLeftBtn:(UIButton *)btn;
+    
+    
     _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:music_icon imgHighlight:music_icon target:self action:@selector(rightBtnClicked:)];
+    _leftBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"backBtn" imgHighlight:@"backBtn" target:self action:@selector(leftBtnClicked:)];
     if (isPlaying) {
         UIImageView * imageView = _naviRightBtn.imageView ;
         
@@ -184,6 +190,7 @@
         }
     }
     [self setNaviBarRightBtn:_naviRightBtn];
+    [self setNaviBarLeftBtn:_leftBtn];
 }
 
 - (void)rightBtnClicked:(UIButton *)btn {
@@ -206,6 +213,11 @@
     }
 }
 
+-(void)leftBtnClicked:(UIButton *)btn
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+
+}
 - (void)onBgButtonClicked:(UIButton *)sender {
     if (_nowMusicController) {
         [_nowMusicController.view removeFromSuperview];

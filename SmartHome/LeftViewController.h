@@ -21,7 +21,11 @@
 #import <RongIMKit/RongIMKit.h>
 #import "ConversationViewController.h"
 #import "UIButton+WebCache.h"
+<<<<<<< HEAD
 #import "LoadMaskHelper.h"
+=======
+#import "UploadManager.h"
+>>>>>>> d454077bc43b86759ed458298f77879a81cc468a
 
 @protocol LeftViewControllerDelegate;
 
@@ -29,9 +33,14 @@
 @property(nonatomic, strong) NSArray *itemArray;
 @property(nonatomic, strong) UserInfo *userInfo;
 @property(nonatomic, strong) UIButton *headerBtn;
+@property (nonatomic,strong) UILabel * nickNameLabel;
 @property(nonatomic, strong) UITableView *myTableView;
 @property(nonatomic, assign) id<LeftViewControllerDelegate>delegate;
 @property(nonatomic, strong) UIButton *bgButton;
+@property(nonatomic,assign)int sum;
+
+- (void)refreshUI;
+
 @end
 
 
@@ -39,6 +48,7 @@
 @protocol LeftViewControllerDelegate <NSObject>
 
 @optional
+
 - (void)onBackgroundBtnClicked:(UIButton *)btn;
 - (void)didSelectItem:(NSString *)item;
 

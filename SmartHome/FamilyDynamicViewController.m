@@ -52,8 +52,6 @@
         itemHeight = 480;
     }
     _cameraList.contentSize = CGSizeMake(0, (itemHeight+gap)*n);
-
-    
     for (NSInteger i = 0; i < n ; i++) {
         NSString *cameraURL = [SQLManager getCameraUrlByDeviceID:[_cameraIDArray[i] intValue]];
         NSInteger rID = [SQLManager getRoomIDByDeviceID:[_cameraIDArray[i] intValue]];
@@ -68,7 +66,6 @@
         vc.view.frame = CGRectMake(0, gap*(i+1) + i*itemHeight, FW(self.cameraList), itemHeight);
         [self.cameraList addSubview:vc.view];
         [self addChildViewController:vc];
-        
     }
     [self setNaviBarTitle:@"视频动态"];
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {

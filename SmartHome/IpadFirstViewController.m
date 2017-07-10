@@ -9,8 +9,12 @@
 #import "IpadFirstViewController.h"
 #import "BaseTabBarController.h"
 #import "VoiceOrderController.h"
+#import <ImageIO/ImageIO.h>
+#import "LeftViewController.h"
 
-@interface IpadFirstViewController ()<RCIMReceiveMessageDelegate,UIGestureRecognizerDelegate>
+#define ANIMATION_TIME 1
+
+@interface IpadFirstViewController ()<RCIMReceiveMessageDelegate,UIGestureRecognizerDelegate,LeftViewControllerDelegate>
 @property (nonatomic,strong) BaseTabBarController *baseTabbarController;
 @property (nonatomic, readonly) UIButton *naviRightBtn;
 @property (nonatomic, readonly) UIButton *naviLeftBtn;
@@ -22,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *TimerLabel;//显示日期的label
 @property (weak, nonatomic) IBOutlet UILabel *temperatureLabel;//温度
 @property (weak, nonatomic) IBOutlet UILabel *weekDayLabel;
+@property (weak, nonatomic) IBOutlet UILabel *cityLabel;//地方名字的显示
 
 @property (weak, nonatomic) IBOutlet UIView *CoverView;
 @property (nonatomic,strong) NSString * WeekDayStr;
@@ -31,7 +36,7 @@
 @property (weak, nonatomic) IBOutlet UIButton * TwoBtn;
 @property (weak, nonatomic) IBOutlet UIButton * ThreeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *VoiceBtn;//点击进入语音
-
+@property (nonatomic,assign) int result;
 @property (weak, nonatomic) IBOutlet UILabel *remindLabel;//每日提醒的label
 
 @property (weak, nonatomic) IBOutlet UILabel *FamilyMenberLabel;//家庭成员Label
@@ -43,6 +48,9 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *IconeImage2;//第二个消息的头像
 @property (weak, nonatomic) IBOutlet UIImageView *DUPImageView;//闪烁提醒的图标
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *threeBtnleading;
+@property (nonatomic,strong) NSString * weahter;
+
 @property (nonatomic,assign) NSTimer *scheculer;
 @end
 
@@ -59,6 +67,7 @@
     [self.imageView addGestureRecognizer:tap];
     [self setupNaviBar];
     [self showNetStateView];
+    [self showMassegeLabel];
     [self setTimer];
     [self getWeekdayStringFromDate];
     [self chatConnect];
@@ -69,6 +78,7 @@
     [self.CoverView addGestureRecognizer:recognizer];
     
     self.scheculer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timing:) userInfo:nil repeats:YES];
+   
 }
 
 -(IBAction)timing:(id)sender
@@ -123,8 +133,8 @@
     if (unread == 0) {
         self.messageLabel2.text = [NSString stringWithFormat:@"%@" , @"暂无新消息"];
         self.messageLabel1.text = @"";
-        self.Icone1Image.hidden = YES;
-        self.IconeImage2.hidden = YES;
+//        self.Icone1Image.hidden = YES;
+//        self.IconeImage2.hidden = YES;
         
     }else{
         self.Icone1Image.hidden = NO;
@@ -158,7 +168,9 @@
     [self getScenesFromPlist];
     [self setBtn];
     [self getPlist];
-
+    [self getWeather];
+    
+ ////////////////////////////////////// Mask View /////////////////////////////////////////
     NSString *KeyStr = [UD objectForKey:ShowMaskViewHomePageChatBtn];
     if (KeyStr.length <=0) {
         [LoadMaskHelper showMaskWithType:HomePageChatBtn onView:self.tabBarController.view delay:0.5 delegate:self];
@@ -188,6 +200,55 @@
             }
         }
     }
+
+}
+
+-(void)getWeather
+{
+    NSString *url = [NSString stringWithFormat:@"%@cloud/weather.aspx",[IOManager httpAddr]];
+    NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    if (auothorToken) {
+        NSDictionary *dict = @{@"token":auothorToken,@"code":@"shenzhen"};
+        HttpManager *http=[HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = 1;
+        [http sendPost:url param:dict showProgressHUD:NO];
+    }
+}
+-(void)httpHandler:(id)responseObject tag:(int)tag
+{
+    if(tag == 1)
+    {
+        if([responseObject[@"result"] intValue]==0)
+        {
+//            NSString * temp1 = responseObject[@"temp1"];
+//            NSString * temp2 = responseObject[@"temp2"];
+            NSString * temperature_curr = responseObject[@"temperature_curr"];
+//            NSString * weather = responseObject[@"weather"];
+            NSString * weather_curr = responseObject[@"weather_curr"];
+            self.weahter = weather_curr;
+            self.temperatureLabel.text = [NSString stringWithFormat:@"当前%@",temperature_curr];
+             if ([weather_curr rangeOfString:@"多云"].location != NSNotFound) {
+                 self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-Overcast"];
+             }if ([weather_curr rangeOfString:@"雨"].location != NSNotFound) {
+                 self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-rain"];
+             }if ([weather_curr rangeOfString:@"雪"].location != NSNotFound) {
+                 self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-snow"];
+             }if ([weather_curr rangeOfString:@"雾霾"].location != NSNotFound) {
+                 self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-haze"];
+             }if ([weather_curr rangeOfString:@"晴"].location != NSNotFound) {
+                 if(_result>0){
+                     self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-night"];
+                 }else{
+                      self.imageView.image = [UIImage imageNamed:@"IpadSceneBg"];
+                 }
+             }
+            
+        }else{
+            [MBProgressHUD showError:responseObject[@"保存失败"]];
+        }
+        
+    }
     
 }
 
@@ -208,7 +269,6 @@
         }
         NSArray * title = [titleSet allObjects];
         NSString * SubStr  = title[0];
-        
         while ([DetailSet count] < 1) {
             int r = arc4random() % [DetailArray count];
             [DetailSet addObject:[DetailArray objectAtIndex:r]];
@@ -268,6 +328,7 @@
             _ThreeBtn.hidden = NO;
             [_ThreeBtn setTitle:@"" forState:UIControlStateNormal];
             [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular4"] forState:UIControlStateNormal];
+             self.threeBtnleading.constant = 40;
         }if(_shortcutsArray.count == 2) {
             _info1 = _shortcutsArray[0];
             _info2 = _shortcutsArray[1];
@@ -278,6 +339,7 @@
             _ThreeBtn.hidden = NO;
             [_ThreeBtn setTitle:@"" forState:UIControlStateNormal];
             [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular4"] forState:UIControlStateNormal];
+             self.threeBtnleading.constant = 40;
             
         }if (_shortcutsArray.count == 3) {
             _info1 = _shortcutsArray[0];
@@ -290,6 +352,7 @@
             _firstBtn.hidden = NO;
             _TwoBtn.hidden = NO;
             _ThreeBtn.hidden = NO;
+             self.threeBtnleading.constant = 40;
         }
     }else{
        
@@ -298,18 +361,65 @@
         _firstBtn.hidden = YES;
         _TwoBtn.hidden = YES;
         _ThreeBtn.hidden = NO;
+        self.threeBtnleading.constant = -60;
         
     }
 }
-
+//点击首页跳转到家庭首页
 -(void)doTap:(UIGestureRecognizer *)dap
 {
+    // 设定位置和大小
+    CGRect frame = CGRectMake(0,0,UI_SCREEN_WIDTH, UI_SCREEN_HEIGHT);
+    // 读取gif图片数据
+    NSString *launchAnimation;
+
+    if ([self.weahter rangeOfString:@"多云"].location != NSNotFound) {
+        launchAnimation = @"cloudy";
+    }if ([self.weahter rangeOfString:@"雨"].location != NSNotFound) {
+        launchAnimation = @"rain";
+    }if ([self.weahter rangeOfString:@"雪"].location != NSNotFound) {
+        launchAnimation = @"snowing";
+    }if ([self.weahter rangeOfString:@"雾霾"].location != NSNotFound) {
+        launchAnimation = @"haze";
+    }if ([self.weahter rangeOfString:@"晴"].location != NSNotFound) {
+            if(_result>0){
+                launchAnimation = @"night";
+            }else{
+                launchAnimation = @"ipadFirstViewVC";
+            }
+    }
+    
+    //test uiimageview
+    NSURL *fileUrl = [[NSBundle mainBundle] URLForResource:launchAnimation withExtension:@"gif"]; //加载GIF图片
+    CGImageSourceRef gifSource = CGImageSourceCreateWithURL((CFURLRef) fileUrl, NULL); //将GIF图片转换成对应的图片源
+    size_t frameCout = CGImageSourceGetCount(gifSource); //获取其中图片源个数，即由多少帧图片组成
+    NSMutableArray *frames = [[NSMutableArray alloc] init]; //定义数组存储拆分出来的图片
+    for (size_t i = 0; i < frameCout; i++) {
+        CGImageRef imageRef = CGImageSourceCreateImageAtIndex(gifSource, i, NULL); //从GIF图片中取出源图片
+        UIImage *imageName = [UIImage imageWithCGImage:imageRef];//将图片源转换成UIimageView能使用的图片源
+        [frames addObject:imageName]; //将图片加入数组中
+        CGImageRelease(imageRef);
+    }
+    UIImageView *gifImageView = [[UIImageView alloc] initWithFrame:frame];
+    gifImageView.animationImages = frames; //将图片数组加入UIImageView动画数组中
+    gifImageView.animationDuration = ANIMATION_TIME;//每次动画时长
+    [gifImageView setAnimationRepeatCount:1];
+    [gifImageView startAnimating];
+    [self.view addSubview:gifImageView];
+    [self performSelector:@selector(doOtherAction) withObject:nil afterDelay:ANIMATION_TIME];
+
+}
+
+-(void)doOtherAction{
+    
     UIStoryboard *planeGraphStoryBoard  = [UIStoryboard storyboardWithName:@"PlaneGraph" bundle:nil];
     PlaneGraphViewController *planeGraphVC = [planeGraphStoryBoard instantiateViewControllerWithIdentifier:@"PlaneGraphVC"];
     planeGraphVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:planeGraphVC animated:YES];
-
+//    [self.navigationController pushViewController:planeGraphVC animated:YES];
+    [planeGraphVC setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    [self presentViewController:planeGraphVC animated:YES completion:nil];
 }
+
 - (void)addNotifications {
     [NC addObserver:self selector:@selector(netWorkDidChangedNotification:) name:@"NetWorkDidChangedNotification" object:nil];
 }
@@ -520,11 +630,8 @@
     
     
     NSDate*date = [NSDate date];
-    
     NSCalendar*calendar = [NSCalendar currentCalendar];
-    
     NSDateComponents*comps;
-    
     comps =[calendar components:(NSCalendarUnitWeekOfMonth | NSCalendarUnitWeekday | NSCalendarUnitWeekdayOrdinal)
             
                        fromDate:date];
@@ -551,21 +658,10 @@
 {
     //获取系统时间
     NSDate * senddate=[NSDate date];
-    
     NSDateFormatter *dateformatter=[[NSDateFormatter alloc] init];
-    
     [dateformatter setDateFormat:@"HH:mm"];
-    
     _locationString=[dateformatter stringFromDate:senddate];
-    
-    NSLog(@"-------%@",_locationString);
-    
-    int result= [_locationString compare:@"19:00"];
-    if(result>0){
-        self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-night"];
-    }else{
-        self.imageView.image = [UIImage imageNamed:@"IpadSceneBg"];
-    }
+    _result= [_locationString compare:@"19:00"];
     NSCalendar * cal=[NSCalendar currentCalendar];
     NSUInteger unitFlags=NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear;
     NSDateComponents * conponent= [cal components:unitFlags fromDate:senddate];
@@ -591,6 +687,16 @@
         self.messageLabel1.text = self.messageLabel2.text;
         self.messageLabel2.text =[NSString stringWithFormat:@"%@ : %@" , nickname, tip];
         self.messageLabel.text = [NSString stringWithFormat:@"%d" ,unread<0?0:unread];
+        if (unread == 0) {
+            self.messageLabel2.text = [NSString stringWithFormat:@"%@" , @"暂无新消息"];
+            self.messageLabel1.text = @"";
+            self.Icone1Image.hidden = YES;
+            self.IconeImage2.hidden = YES;
+            
+        }else{
+            self.Icone1Image.hidden = NO;
+            self.IconeImage2.hidden = NO;
+        }
         self.Icone1Image.image = self.IconeImage2.image;
         [self.IconeImage2 sd_setImageWithURL:[NSURL URLWithString:protrait] placeholderImage:[UIImage imageNamed:@"logo"] options:SDWebImageRetryFailed];
     });
@@ -614,7 +720,6 @@
 {
     NSString *groupID = [[UD objectForKey:@"HostID"] description];
     NSString *homename = [UD objectForKey:@"homename"];
-    
     RCGroup *aGroupInfo = [[RCGroup alloc]initWithGroupId:groupID groupName:homename portraitUri:@""];
     ConversationViewController *conversationVC = [[ConversationViewController alloc] init];
     conversationVC.conversationType = ConversationType_GROUP;
@@ -624,7 +729,6 @@
     NSArray *info = [SQLManager queryChat:user.userId];
     NSString *nickname = [info firstObject];
     NSString *protrait = [info lastObject];
-    
     [[RCIM sharedRCIM] refreshUserInfoCache:[[RCUserInfo alloc] initWithUserId:user.userId name:nickname portrait:protrait] withUserId:user.userId];
     [self.navigationController pushViewController:conversationVC animated:YES];
 }
@@ -711,14 +815,6 @@
     [self.navigationController pushViewController:voiceVC animated:YES];
     
 }
-
-//-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-//{
-////    self.CoverView.hidden = YES;
-////     self.MessageView.hidden = YES;
-//    _baseTabbarController.tabbarPanel.hidden = NO;
-//}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -729,6 +825,7 @@
     [self.scheculer invalidate];
 }
 
+<<<<<<< HEAD
 #pragma mark - SingleMaskViewDelegate
 - (void)onNextButtonClicked:(UIButton *)btn pageType:(PageTye)pageType {
     if (pageType == HomePageChatBtn) {

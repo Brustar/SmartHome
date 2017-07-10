@@ -110,6 +110,11 @@
     [_viewNaviBar showNetStateView];
 }
 
+-(void)showMassegeLabel
+{
+    [_viewNaviBar showMassegeLabel];
+
+}
 - (void)setNetState:(int)state {
     [_viewNaviBar setNetState:state];
 }

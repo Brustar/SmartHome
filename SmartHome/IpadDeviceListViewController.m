@@ -64,8 +64,7 @@
     NSString * roomName =[SQLManager getRoomNameByRoomID:self.roomID];
     self.title = [SQLManager getSceneName:self.sceneID];
     [self setNaviBarTitle:[NSString stringWithFormat:@"%@-%@",roomName,self.title]]; //设置标题
-    
-    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
+    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"编辑" target:self action:@selector(rightBtnClicked:)];
     
     [self setNaviBarRightBtn:_naviRightBtn];
 }
@@ -135,9 +134,10 @@
      self.devices = [NSMutableArray array];
      self.leftVC.roomID = self.roomID;
      self.leftVC.sceneID = self.sceneID;
+     self.rightVC.sceneID = self.sceneID;
     
     
-    switch (row) {
+     switch (row) {
         case 0:{
             
             for(int i = 0; i < self.DevicesArr.count; i++){
@@ -222,6 +222,7 @@
             
     }
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

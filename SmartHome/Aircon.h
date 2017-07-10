@@ -12,6 +12,8 @@
 
 //设备id
 @property (nonatomic) int deviceID;
+//开关状态
+@property (nonatomic) bool poweron;
 //温度
 @property (nonatomic) int temperature;
 //风向

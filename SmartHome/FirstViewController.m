@@ -65,6 +65,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *doMessageBtn;//弹出聊天页面的按钮
 
 @property (weak, nonatomic) IBOutlet UILabel *ShowHeadImage;//是否有新消息的图标
+@property (nonatomic,assign) int sum;
 
 @end
 
@@ -79,12 +80,21 @@
 
 - (void)addNotifications {
     [NC addObserver:self selector:@selector(netWorkDidChangedNotification:) name:@"NetWorkDidChangedNotification" object:nil];
+    [NC addObserver:self selector:@selector(SumNumber:) name:@"SumNumber" object:nil];
 }
 
 - (void)netWorkDidChangedNotification:(NSNotification *)noti {
     [self refreshUI];
 }
-
+-(void)SumNumber:(NSNotification *)no
+{
+    NSString * sumNumber = no.object;
+    _sum = [sumNumber intValue];
+    
+    if (_sum != 0) {
+     [self showMassegeLabel];
+    }
+}
 - (void)removeNotifications {
     [NC removeObserver:self];
 }
@@ -94,8 +104,12 @@
     _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     _baseTabbarController.tabbarPanel.hidden = NO;
     _baseTabbarController.tabBar.hidden = YES;
+    int userID = [[UD objectForKey:@"UserID"] intValue];
+    _userInfomation = [SQLManager getUserInfo:userID];
+    self.UserNameLabel.text = [NSString stringWithFormat:@"Hi! %@",_userInfomation.nickName];
     int unread = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
-    
+    [self addNotifications];
+   
     self.numberLabel.text = [NSString stringWithFormat:@"%d" ,unread<0?0:unread];
     
     if ([self.numberLabel.text isEqualToString:@"0"]) {
@@ -204,13 +218,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self addNotifications];
     [self connect];
     
     [self setupNaviBar];
     [self showNetStateView];
-    
+
     [self setUIMessage];
+   
     [self chatConnect];
     [self getScenesFromPlist];
     //[self setBtn];
@@ -233,7 +247,8 @@
     _HeadImageView.userInteractionEnabled = YES;
     _familyNum = [[NSUserDefaults standardUserDefaults] objectForKey:@"familyNum"];
     self.memberFamilyLabel.text = [NSString stringWithFormat:@"家庭成员（%@）",_familyNum];
-    self.UserNameLabel.text = [NSString stringWithFormat:@"Hi! %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"Account"]];
+//    self.UserNameLabel.text = [NSString stringWithFormat:@"Hi! %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"Account"]];
+   
     [_HeadImageView addGestureRecognizer:Headtap];
     [self.doMessageBtn addTarget:self action:@selector(HeadDoTap:) forControlEvents:UIControlEventTouchUpInside];
     _calenderDayLabel.adjustsFontSizeToFitWidth = YES;
@@ -508,8 +523,10 @@
             _firstBtn.titleLabel.font = [UIFont systemFontOfSize:10];
             _firstBtn.hidden = NO;
             _TwoBtn.hidden = YES;
+            _ThreeBtn.hidden = NO;
             [_ThreeBtn setTitle:@"" forState:UIControlStateNormal];
             [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular4"] forState:UIControlStateNormal];
+            self.threeBtnLeadingConstraint.constant = 30;
         }if(_shortcutsArray.count == 2) {
             _info1 = _shortcutsArray[0];
             _info2 = _shortcutsArray[1];
@@ -517,8 +534,10 @@
             [_TwoBtn setTitle:_info2.sceneName forState:UIControlStateNormal];
             _firstBtn.hidden = NO;
             _TwoBtn.hidden = NO;
+            _ThreeBtn.hidden = NO;
             [_ThreeBtn setTitle:@"" forState:UIControlStateNormal];
             [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular4"] forState:UIControlStateNormal];
+            self.threeBtnLeadingConstraint.constant = 30;
         
         }if (_shortcutsArray.count == 3) {
             _info1 = _shortcutsArray[0];
@@ -530,12 +549,16 @@
             [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular3"] forState:UIControlStateNormal];
             _firstBtn.hidden = NO;
             _TwoBtn.hidden = NO;
+            _ThreeBtn.hidden = NO;
+            self.threeBtnLeadingConstraint.constant = 30;
         }
     }else{
         [_ThreeBtn setBackgroundImage:[UIImage imageNamed:@"circular4"] forState:UIControlStateNormal];
         [_ThreeBtn setTitle:@"" forState:UIControlStateNormal];
         _firstBtn.hidden = YES;
         _TwoBtn.hidden = YES;
+        _ThreeBtn.hidden = NO;
+        self.threeBtnLeadingConstraint.constant = -45;
     }
 }
 

@@ -36,8 +36,10 @@ typedef NS_ENUM(NSUInteger,wind)
 @property (nonatomic) int currentDirection;
 @property (nonatomic) int currentTiming;
 
+@property (nonatomic) int currentDegree;
+
 @property (nonatomic,assign) int roomID;
-@property (strong, nonatomic) Scene *scene;
+
 @property (nonatomic,assign) BOOL isAddDevice;
 
 @end

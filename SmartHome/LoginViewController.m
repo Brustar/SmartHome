@@ -72,7 +72,6 @@
         [self showScrollView];//显示滑动图
     }
 
-    
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         self.loginBtnLeading.constant = 350;
         self.loginBtnTrailing.constant = 350;
@@ -97,8 +96,6 @@
     }
 
 }
-
-
 
 #pragma mark - 滑动图
 
@@ -418,8 +415,6 @@
                 if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
                     vc.modalPresentationStyle = UIModalPresentationFormSheet;
                 }
-                
-                
             });
             vc.delegate = self;
             
@@ -493,7 +488,6 @@ NSArray *array = [NSArray arrayWithObjects:
                 [vc setValue:self.masterId forKey:@"masterStr"];
                 [vc setValue:self.hostName forKey:@"hostName"];
                 
-                
                 if ([@"1" isEqualToString:list[2]]) {
                     self.role=@"主人";
                 }else{
@@ -501,8 +495,6 @@ NSArray *array = [NSArray arrayWithObjects:
                 }
                 [vc setValue:self.role forKey:@"suerTypeStr"];
             }
-            
-            
             else
             {
                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"非法的二维码" preferredStyle:UIAlertControllerStyleAlert];
@@ -514,8 +506,6 @@ NSArray *array = [NSArray arrayWithObjects:
     }else {
         [self.navigationController popViewControllerAnimated:YES];
         
-        
-            
             //result 格式： hostid @ hostname @ userType
             NSArray* list = [result componentsSeparatedByString:@"@"];
             if([list count] > 2)
@@ -636,7 +626,9 @@ NSArray *array = [NSArray arrayWithObjects:
     }
     NSArray *plists = [SQLManager writeScenes:rooms];
     for (NSString *s in plists) {
-        [self downloadPlsit:s];
+        if (![s isEqualToString:@""]) {
+            [self downloadPlsit:s];
+        }
     }
 }
 
@@ -662,7 +654,7 @@ NSArray *array = [NSArray arrayWithObjects:
         
         //下载到哪个文件夹
         NSString *path = [[IOManager scenesPath] stringByAppendingPathComponent:response.suggestedFilename];
-        
+        [IOManager removeFile:path];
         
         return [NSURL fileURLWithPath:path];
         
@@ -750,8 +742,6 @@ NSArray *array = [NSArray arrayWithObjects:
         [TitleArray writeToFile:filePath atomically:YES];
         [DetailArray writeToFile:filePath1 atomically:YES];
     }
-    
-    
 
 }
 -(void) writeChatListConfigDataToSQL:(NSArray *)users
@@ -819,7 +809,6 @@ NSArray *array = [NSArray arrayWithObjects:
                 }
             }
             
-            
             //缓存HostIDS， HomeNameList
             if (self.hostIDS) {
                 [IOManager writeUserdefault:self.hostIDS forKey:@"HostIDS"];
@@ -845,10 +834,9 @@ NSArray *array = [NSArray arrayWithObjects:
                 }
            // }
             
-            
             [IOManager writeUserdefault:responseObject[@"rctoken"] forKey:@"rctoken"];
             [IOManager writeUserdefault:responseObject[@"homename"] forKey:@"homename"];
-            [self writeChatListConfigDataToSQL:responseObject[@"userList"]];
+            [self writeChatListConfigDataToSQL:responseObject[@"userlist"]];
             [self sendRequestForGettingConfigInfos:@"Cloud/load_config_data.aspx" withTag:2];
             
             //直接登录主机

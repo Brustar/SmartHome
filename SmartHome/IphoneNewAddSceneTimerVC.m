@@ -134,7 +134,7 @@
 
 - (void)setupNaviBar {
     [self setNaviBarTitle:_naviTitle]; //设置标题
-    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
+    _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"确定" target:self action:@selector(rightBtnClicked:)];
     _naviRightBtn.tintColor = [UIColor whiteColor];
     [self setNaviBarRightBtn:_naviRightBtn];
     
@@ -146,33 +146,6 @@
 }
 -(void)rightBtnClicked:(UIButton *)btn
 {
-    _viewControllerArrs =self.navigationController.viewControllers;
-    NSInteger vcCount = _viewControllerArrs.count;
-    UIViewController * lastVC = _viewControllerArrs[vcCount -2];
-
-    IpadDeviceListViewController * ipadDeviceListVC = [[IpadDeviceListViewController alloc] init];
-    if ([lastVC isKindOfClass:[ipadDeviceListVC class]]) {
-        
-        self.scene.schedules = @[self.schedule];
-//        [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
-        
-        NSDictionary *dic = @{
-                              @"startDay":self.starTimeLabel.text,
-                              @"endDay":self.endTimeLabel.text,
-                              @"repeat":self.RepetitionLable.text,
-                              @"weekArray":_weekArray
-                              };
-        [NC postNotificationName:@"AddSceneOrDeviceTimerNotification" object:nil userInfo:dic];
-        [DeviceInfo defaultManager].isPhotoLibrary = NO;
-        Scene *scene = [[Scene alloc] initWhithoutSchedule];
-        scene.sceneID = self.sceneID;
-        scene.roomID = self.roomid;
-//        scene.schedules
-        //保证场景id不变
-        [[SceneManager defaultManager] editScene:scene];
-    
-    }else{
-        
         self.scene.schedules = @[self.schedule];
         [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
         
@@ -183,7 +156,6 @@
                               @"weekArray":_weekArray
                               };
         [NC postNotificationName:@"AddSceneOrDeviceTimerNotification" object:nil userInfo:dic];
-    }
   
     [self.navigationController popViewControllerAnimated:YES];
 

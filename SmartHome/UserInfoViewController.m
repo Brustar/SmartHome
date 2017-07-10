@@ -7,8 +7,15 @@
 //
 
 #import "UserInfoViewController.h"
+#import "ChangeNameViewController.h"
+#import "CryptoManager.h"
+#import "ChangePassWordVC.h"
 
-@interface UserInfoViewController ()
+@interface UserInfoViewController ()<UITextFieldDelegate>
+
+@property (nonatomic,strong) NSArray * TitleArray;
+@property (nonatomic,strong) NSArray * DetialArray;
+@property (nonatomic,strong) NSString * powerStr;
 
 @end
 
@@ -17,45 +24,53 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setNaviBarTitle:@"个人信息"];
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+
+    self.TitleArray = @[@"VIP会员",@"服务商城",@"我的订单",@"购物车",@"昵称",@"电话",@"逸云密码"];
+    self.DetialArray = @[@"/ui/Vip.aspx?user_id=%d",@"/ui/GoodsList.aspx?user_id=%d",@"/ui/OrderQuery.aspx?user_id=%d",@"/ui/Cart.aspx?user_id=%d"];
+    if (ON_IPAD) {
         [self adjustNaviBarFrameForSplitView];
         [self adjustTitleFrameForSplitView];
         [self setNaviBarLeftBtn:nil];
     }
-    
-    [self initUI];
+
     [self getUserInfoFromDB];
     [self fetchUserInfo];
 }
 
-- (void)initUI {
+-(void)viewWillAppear:(BOOL)animated
+{
+//    [self getUserInfoFromDB];
+//    [self fetchUserInfo];
+    if (ON_IPAD) {
+        self.UserinfoLeadingConstraint.constant = 20;
+        self.UserinfoTrailingConstraint.constant = 20;
+    }
+
+     [self.userinfoTableView reloadData];
+}
+
+- (void)refreshUI {
+    
     NSInteger userType = [[UD objectForKey:@"UserType"] integerValue];
     if (userType == 1) {
         _userTypeStr = @"主人";
     }else {
         _userTypeStr = @"客人";
     }
-    
     self.nameLabel.text = [NSString stringWithFormat:@"-- %@, %@身份 --", _userInfomation.nickName, _userTypeStr];
-    
+    [self.headerBtn sd_setImageWithURL:[NSURL URLWithString:_userInfomation.headImgURL] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portrait"]];
     self.headerBtn.layer.cornerRadius = self.headerBtn.frame.size.width/2;
     self.headerBtn.layer.masksToBounds = YES;
     self.userinfoTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
     self.userinfoTableView.tableFooterView = [UIView new];
-}
-
-- (void)refreshUI {
-    [self.headerBtn sd_setImageWithURL:[NSURL URLWithString:_userInfomation.headImgURL] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portrait"]];
-    
-    self.nameLabel.text = [NSString stringWithFormat:@"-- %@, %@身份 --", _userInfomation.nickName, _userTypeStr];
-    
     [self.userinfoTableView reloadData];
 }
 
 - (void)getUserInfoFromDB {
+    
     int userID = [[UD objectForKey:@"UserID"] intValue];
     _userInfomation = [SQLManager getUserInfo:userID];
+    
     [self refreshUI];
 }
 
@@ -105,7 +120,7 @@
 
 #pragma mark - UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 6;
+    return self.TitleArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -127,55 +142,34 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
    
-    if (section == 0 || section == 1 || section == 2 || section == 3) {
-        UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 8.0)];
-        footer.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 0.5)];
-        line.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"login_line"]];
-        [footer addSubview:line];
-        
-        return footer;
-    }
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 8.0)];
+    footer.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 0.5)];
+    line.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"login_line"]];
+    [footer addSubview:line];
     
-    if (section == 5) {
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UI_SCREEN_WIDTH, 0.5)];
-        line.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"login_line"]];
-        
-        return line;
-    }
-    
-    return nil;
+    return footer;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-    if (section == 0 || section == 1 || section == 2 || section == 3) {
-        return 8.0f;
-    }
-    
-    if (section == 5) {
-        return 0.5f;
-    }
-    return 0;
+    return 8.0f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *identifier = @"userinfoCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.backgroundColor = [UIColor clearColor];
     cell.backgroundView = nil;
     cell.accessoryType = UITableViewCellAccessoryNone;
-    if (indexPath.section == 0 || indexPath.section == 1 || indexPath.section == 2 || indexPath.section == 3) {
-        cell.backgroundColor = [UIColor colorWithRed:30.0/255.0 green:29.0/255.0 blue:34.0/255.0 alpha:1];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
+    cell.backgroundColor = [UIColor colorWithRed:30.0/255.0 green:29.0/255.0 blue:34.0/255.0 alpha:1];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.textLabel.font = [UIFont systemFontOfSize:15];
-    
+    cell.textLabel.text = self.TitleArray[indexPath.section];
     if (indexPath.section == 0) {
         if ([_userInfomation.vip isEqualToString:@"1"]) {
             cell.imageView.image = [UIImage imageNamed:@"VIP_icon"];
@@ -212,61 +206,73 @@
             cell.imageView.image = nil;
             cell.accessoryView = nil;
         }
-        cell.textLabel.text = @"VIP会员";
-    }else if (indexPath.section == 1) {
-        cell.textLabel.text = @"服务商城";
-    }else if (indexPath.section == 2) {
-        cell.textLabel.text = @"我的订单";
-    }else if (indexPath.section == 3) {
-        cell.textLabel.text = @"购物车";
-    }else if (indexPath.section == 4) {
-        cell.textLabel.text = @"昵称";
-        UILabel *nickLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 20)];
-        nickLabel.textAlignment = NSTextAlignmentRight;
-        nickLabel.textColor = [UIColor lightGrayColor];
-        nickLabel.font = [UIFont systemFontOfSize:15];
-        nickLabel.backgroundColor = [UIColor clearColor];
-        nickLabel.text = _userInfomation.nickName;
-        cell.accessoryView = nickLabel;
-    }else if (indexPath.section == 5) {
-        cell.textLabel.text = @"电话";
-        UILabel *phoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
-        phoneLabel.textAlignment = NSTextAlignmentRight;
-        phoneLabel.textColor = [UIColor lightGrayColor];
-        phoneLabel.font = [UIFont systemFontOfSize:15];
-        phoneLabel.backgroundColor = [UIColor clearColor];
-        phoneLabel.text = _userInfomation.phoneNum;
-        cell.accessoryView = phoneLabel;
+    }if (indexPath.section == 4) {
+        cell.detailTextLabel.text = _userInfomation.nickName;
+    }if (indexPath.section == 5) {
+         cell.detailTextLabel.text = _userInfomation.phoneNum;
     }
-    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     int userID = [[UD objectForKey:@"UserID"] intValue];
-    if (indexPath.section == 0) {
+    
+    if (indexPath.section == 0 || indexPath.section == 1 || indexPath.section == 2 || indexPath.section == 3) {
         //VIP会员
-        WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:[NSString stringWithFormat:@"/ui/Vip.aspx?user_id=%d", userID]] title:@"VIP会员"];
-        web.isShowInSplitView = YES;
-        [self.navigationController pushViewController:web animated:YES];
-    }else if (indexPath.section == 1) {
-        //服务商城
-        WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:[NSString stringWithFormat:@"/ui/GoodsList.aspx?user_id=%d", userID]] title:@"服务商城"];
-        web.isShowInSplitView = YES;
-        [self.navigationController pushViewController:web animated:YES];
-    }else if (indexPath.section == 2) {
-        //我的订单
-        WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:[NSString stringWithFormat:@"/ui/OrderQuery.aspx?user_id=%d", userID]] title:@"我的订单"];
-        web.isShowInSplitView = YES;
-        [self.navigationController pushViewController:web animated:YES];
-    }else if (indexPath.section == 3) {
-        //购物车
-        WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:[NSString stringWithFormat:@"/ui/Cart.aspx?user_id=%d", userID]] title:@"购物车"];
+        WebManager *web = [[WebManager alloc] initWithUrl:[[IOManager httpAddr] stringByAppendingString:[NSString stringWithFormat:self.DetialArray[indexPath.section], userID]] title:self.TitleArray[indexPath.section]];
         web.isShowInSplitView = YES;
         [self.navigationController pushViewController:web animated:YES];
     }
-}
+    else if (indexPath.section == 4){
+        UIStoryboard * MyInfoStoryBoard = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
+        ChangeNameViewController * changeNameVC = [MyInfoStoryBoard instantiateViewControllerWithIdentifier:@"ChangeNameViewController"];
+        
+        [self.navigationController pushViewController:changeNameVC animated:YES];
+        
+    }else if (indexPath.section == 6){
+        
+        UIAlertController * alertController = [UIAlertController alertControllerWithTitle: @"验证原密码"
+                                                                                  message: @"为了保障你的数据安全，修改密码前请输入原密码"
+                                                                           preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+            textField.placeholder = @"请输入原密码";
+            textField.textColor = [UIColor blackColor];
+            textField.secureTextEntry = YES;
+            textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+            textField.borderStyle = UITextBorderStyleNone;
+//            textField.text = self.powerStr;
+            textField.delegate = self;
+            textField.secureTextEntry = YES;
+         
+        }];
+       
+        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+           
+            
+        }]];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
 
+//            UITextField *PWDField = [alertController textFields.];
+//            NSString * textPWD=PWDField.text;//获取输入的密码
+            
+        }]];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+}
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if ([textField.text isEqualToString:[[[NSUserDefaults standardUserDefaults] objectForKey:@"Password"] decryptWithDes:DES_KEY]]) {
+        
+        UIStoryboard * MyInfoStoryBoard = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
+        ChangePassWordVC * changePassWordVC = [MyInfoStoryBoard instantiateViewControllerWithIdentifier:@"ChangePassWordVC"];
+        changePassWordVC.nameStr = _userInfomation.nickName;
+        
+        [self.navigationController pushViewController:changePassWordVC animated:YES];
+    }else{
+          [MBProgressHUD showError:@"原密码输入错误"];
+    }
+
+}
 - (IBAction)headerBtnClicked:(id)sender {
     
     UIAlertController * alerController = [UIAlertController alertControllerWithTitle:@"更换头像" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
