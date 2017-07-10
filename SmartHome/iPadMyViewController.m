@@ -86,10 +86,10 @@
 #pragma mark - LeftViewControllerDelegate
 - (void)didSelectItem:(NSString *)item {
     
-    if (_currentItem.length >0 && [_currentItem isEqualToString:item]) {
-        return;
-    }else {
-        _currentItem = [NSString stringWithString:item];
+//    if (_currentItem.length >0 && [_currentItem isEqualToString:item]) {
+//        return;
+//    }else {
+//        _currentItem = [NSString stringWithString:item];
     
     [NC postNotificationName:@"StopTimerNotification" object:nil];  
     [_rightVC popToRootViewControllerAnimated:NO];
@@ -144,6 +144,6 @@
     }
         
   }
-}
+//}
 
 @end

@@ -2434,7 +2434,6 @@
     return ret;
 }
 
-
 +(BOOL)updateTotalVisited:(int)roomID
 {
     FMDatabase *db = [SQLManager connetdb];

@@ -178,7 +178,8 @@
         sch.endTime = self.endTimeLabel.text;
         sch.weekDays = [self.RepetitionLable.text componentsSeparatedByString:@"、"];
         _scene.schedules = @[sch];
-        [[SceneManager defaultManager] editSceneTimer:_scene];
+//        [[SceneManager defaultManager] editSceneTimer:_scene];
+        [[SceneManager defaultManager] editScene:_scene];
     }
     
   
