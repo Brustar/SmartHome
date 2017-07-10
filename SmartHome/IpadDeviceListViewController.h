@@ -11,8 +11,9 @@
 #import "SQLManager.h"
 #import "CustomViewController.h"
 #import "NowMusicController.h"
+#import "LoadMaskHelper.h"
 
-@interface IpadDeviceListViewController : CustomViewController
+@interface IpadDeviceListViewController : CustomViewController<SingleMaskViewDelegate>
 
 //@property(nonatomic,assign) int deviceID;
 @property (nonatomic,assign) int roomID;

@@ -14,8 +14,39 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self initUI];
+        [self addNotifications];
     }
     return self;
+}
+
+- (void)addNotifications {
+    [NC addObserver:self selector:@selector(tabbarPanelClickedNotification:) name:@"TabbarPanelClickedNotification" object:nil];
+    [NC addObserver:self selector:@selector(tabbarPanelClickedNotificationDevice:) name:@"TabbarPanelClickedNotificationDevice" object:nil];
+    [NC addObserver:self selector:@selector(tabbarPanelClickedNotificationHome:) name:@"TabbarPanelClickedNotificationHome" object:nil];
+}
+
+- (void)tabbarPanelClickedNotification:(NSNotification *)noti {
+    _sliderBtn.center = _sceneBtn.center;
+    [_sliderBtn setTitle:_sceneBtn.titleLabel.text forState:UIControlStateNormal];
+    if (_delegate && [_delegate respondsToSelector:@selector(changeViewController:)]) {
+        [_delegate changeViewController:_sceneBtn];
+    }
+}
+
+- (void)tabbarPanelClickedNotificationDevice:(NSNotification *)noti {
+    _sliderBtn.center = _deviceBtn.center;
+    [_sliderBtn setTitle:_deviceBtn.titleLabel.text forState:UIControlStateNormal];
+    if (_delegate && [_delegate respondsToSelector:@selector(changeViewController:)]) {
+        [_delegate changeViewController:_deviceBtn];
+    }
+}
+
+- (void)tabbarPanelClickedNotificationHome:(NSNotification *)noti {
+    _sliderBtn.center = _homeBtn.center;
+    [_sliderBtn setTitle:_homeBtn.titleLabel.text forState:UIControlStateNormal];
+    if (_delegate && [_delegate respondsToSelector:@selector(changeViewController:)]) {
+        [_delegate changeViewController:_homeBtn];
+    }
 }
 
 - (void)initUI {
@@ -168,6 +199,14 @@
         
     }
     
+}
+
+- (void)removeNotifications {
+    [NC removeObserver:self];
+}
+
+- (void)dealloc {
+    [self removeNotifications];
 }
 
 @end

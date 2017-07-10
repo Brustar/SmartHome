@@ -11,8 +11,9 @@
 #import "PlaneGraphViewController.h"
 #import "iPadMyViewController.h"
 #import <AFNetworking.h>
+#import "LoadMaskHelper.h"
 
-@interface IpadFirstViewController : CustomViewController<NowMusicControllerDelegate>
+@interface IpadFirstViewController : CustomViewController<NowMusicControllerDelegate, SingleMaskViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property(nonatomic, strong) AFNetworkReachabilityManager *afNetworkReachabilityManager;
 @property (nonatomic, strong) NowMusicController * nowMusicController;

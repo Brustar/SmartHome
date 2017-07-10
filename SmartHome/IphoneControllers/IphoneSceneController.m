@@ -447,7 +447,18 @@ static NSString * const CYPhotoId = @"photo";
     _baseTabbarController =  (BaseTabBarController *)self.tabBarController;
     _baseTabbarController.tabbarPanel.hidden = NO;
     _baseTabbarController.tabBar.hidden = YES;
-     [self addNotifications];
+    
+    [self addNotifications];
+    
+    NSString *KeyStr = [UD objectForKey:ShowMaskViewScene];
+    if(KeyStr.length <=0){
+        [LoadMaskHelper showMaskWithType:SceneHome onView:self.tabBarController.view delay:0.5 delegate:self];
+    }else {
+        NSString *KeyStr = [UD objectForKey:ShowMaskViewSceneAdd];
+        if(KeyStr.length <=0) {
+            [LoadMaskHelper showMaskWithType:SceneHomeAdd onView:self.tabBarController.view delay:0.5 delegate:self];
+        }
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -864,6 +875,106 @@ static NSString * const CYPhotoId = @"photo";
 
 - (void)dealloc {
     [self removeNotifications];
+}
+
+#pragma mark - SingleMaskViewDelegate
+- (void)onNextButtonClicked:(UIButton *)btn pageType:(PageTye)pageType {
+    
+    if (pageType == SceneHome) {
+        NSInteger index = 0;
+        //    if (ON_IPAD) {
+        //        index = 1;
+        //    }
+        
+        Scene *scene = self.scenes[index];
+        self.selectedSId = scene.sceneID;
+        CYPhotoCell *cell = (CYPhotoCell*)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathWithIndex:index]];
+        if (scene.status == 0) {
+            [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
+            [[SceneManager defaultManager] startScene:scene.sceneID];
+            [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];
+        }
+        
+        if (ON_IPAD) {
+            IpadDeviceListViewController * listVC = [[IpadDeviceListViewController alloc] init];
+            listVC.roomID = self.selectedRoomID;
+            listVC.sceneID = self.selectedSId;
+            [self.navigationController pushViewController:listVC animated:YES];
+        }else{
+            [self performSegueWithIdentifier:@"iphoneEditSegue" sender:self];
+        }
+        NSArray *tmpArr = [SQLManager getScensByRoomId:self.selectedRoomID];
+        [self.scenes removeAllObjects];
+        [self.scenes addObjectsFromArray:tmpArr];
+        NSString *imageName = @"i-add";
+        [self.scenes addObject:imageName];
+        [self.FirstCollectionView reloadData];
+    }else if (pageType == SceneHomeAdd) {
+        [NC postNotificationName:@"TabbarPanelClickedNotificationHome" object:nil];
+    }
+}
+
+- (void)onSkipButtonClicked:(UIButton *)btn {
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageChatBtn];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageEnterChat];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageEnterFamily];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageScene];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageDevice];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageCloud];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewChatView];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewFamilyHome];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewFamilyHomeDetail];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewScene];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewSceneDetail];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewDevice];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewDeviceAir];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewLeftView];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewSettingView];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewAccessControl];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewSceneAdd];
+    [UD synchronize];
+}
+
+- (void)onTransparentBtnClicked:(UIButton *)btn {
+    
+    if (btn.tag == 1) {
+        Scene *scene = self.scenes[0];
+        self.selectedSId = scene.sceneID;
+        CYPhotoCell *cell = (CYPhotoCell*)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathWithIndex:0]];
+        if (scene.status == 0) {
+            [cell.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateSelected];
+            [[SceneManager defaultManager] startScene:scene.sceneID];
+            [SQLManager updateSceneStatus:1 sceneID:scene.sceneID];
+        }
+        
+        if (ON_IPAD) {
+            IpadDeviceListViewController * listVC = [[IpadDeviceListViewController alloc] init];
+            listVC.roomID = self.selectedRoomID;
+            listVC.sceneID = self.selectedSId;
+            [self.navigationController pushViewController:listVC animated:YES];
+        }else{
+            [self performSegueWithIdentifier:@"iphoneEditSegue" sender:self];
+        }
+        NSArray *tmpArr = [SQLManager getScensByRoomId:self.selectedRoomID];
+        [self.scenes removeAllObjects];
+        [self.scenes addObjectsFromArray:tmpArr];
+        NSString *imageName = @"i-add";
+        [self.scenes addObject:imageName];
+        [self.FirstCollectionView reloadData];
+    }else if (btn.tag == 2) { //添加场景
+        if (ON_IPAD) {
+            AddIpadSceneVC * AddIpadVC = [[AddIpadSceneVC alloc] init];
+            AddIpadVC.roomID = self.selectedRoomID;
+            
+            [self.navigationController pushViewController:AddIpadVC animated:YES];
+        }else{
+            UIStoryboard * SceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
+            IphoneNewAddSceneVC * iphoneNewAddSceneVC = [SceneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneNewAddSceneVC"];
+            iphoneNewAddSceneVC.roomID = self.selectedRoomID;
+            [self.navigationController pushViewController:iphoneNewAddSceneVC animated:YES];
+        }
+    }
+    
 }
 
 @end

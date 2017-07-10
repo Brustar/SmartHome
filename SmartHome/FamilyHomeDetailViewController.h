@@ -29,6 +29,7 @@
 #import "IpadDVDTableViewCell.h"
 #import "IpadTVCell.h"
 #import "PowerLightCell.h"
+#import "LoadMaskHelper.h"
 
 #define SceneCellWidth  (self.sceneListCollectionView.frame.size.width-6.0)/3
 #define SceneCellHeight  self.sceneListCollectionView.frame.size.height
@@ -40,7 +41,7 @@
 #define minimumLineSpacing 3.0
 
 
-@interface FamilyHomeDetailViewController : CustomViewController<UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate,UITableViewDataSource, HttpDelegate>
+@interface FamilyHomeDetailViewController : CustomViewController<UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate,UITableViewDataSource, HttpDelegate, SingleMaskViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *softButton;
 @property (weak, nonatomic) IBOutlet UIButton *normalButton;

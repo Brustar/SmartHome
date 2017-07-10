@@ -18,8 +18,9 @@
 #import "ScreenCurtainCell.h"
 #import "AddDeviceCell.h"
 #import "BjMusicTableViewCell.h"
+#import "LoadMaskHelper.h"
 
-@interface IphoneEditSceneController : CustomViewController
+@interface IphoneEditSceneController : CustomViewController<SingleMaskViewDelegate>
 @property(nonatomic,assign) int sceneID;
 //@property(nonatomic,assign) int deviceID;
 @property(nonatomic,assign) int roomID;

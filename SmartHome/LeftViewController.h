@@ -21,11 +21,12 @@
 #import <RongIMKit/RongIMKit.h>
 #import "ConversationViewController.h"
 #import "UIButton+WebCache.h"
+#import "LoadMaskHelper.h"
 #import "UploadManager.h"
 
 @protocol LeftViewControllerDelegate;
 
-@interface LeftViewController : UIViewController
+@interface LeftViewController : UIViewController<SingleMaskViewDelegate>
 @property(nonatomic, strong) NSArray *itemArray;
 @property(nonatomic, strong) UserInfo *userInfo;
 @property(nonatomic, strong) UIButton *headerBtn;

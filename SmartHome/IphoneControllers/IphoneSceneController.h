@@ -11,8 +11,9 @@
 #import "NowMusicController.h"
 #import "AFNetworkReachabilityManager.h"
 #import "IphoneRoomView.h"
+#import "LoadMaskHelper.h"
 
-@interface IphoneSceneController : CustomViewController<NowMusicControllerDelegate>
+@interface IphoneSceneController : CustomViewController<NowMusicControllerDelegate, SingleMaskViewDelegate>
 
 
 @property (strong, nonatomic) IBOutlet IphoneRoomView *roomView;

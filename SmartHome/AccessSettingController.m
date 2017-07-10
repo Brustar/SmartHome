@@ -113,6 +113,7 @@
     [self sendRequest:url withTag:1];
     [self.userTableView reloadData];
 
+    [LoadMaskHelper showMaskWithType:AccessControl onView:self.tabBarController.view delay:0.5 delegate:self];
 }
 
 
@@ -367,6 +368,48 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - SingleMaskViewDelegate
+- (void)onNextButtonClicked:(UIButton *)btn pageType:(PageTye)pageType {
+    [MBProgressHUD showError:@"已经是最后一步了"];
+}
+
+- (void)onSkipButtonClicked:(UIButton *)btn {
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageChatBtn];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageEnterChat];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageEnterFamily];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageScene];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageDevice];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageCloud];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewChatView];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewFamilyHome];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewFamilyHomeDetail];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewScene];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewSceneDetail];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewDevice];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewDeviceAir];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewLeftView];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewSettingView];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewAccessControl];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewSceneAdd];
+    [UD synchronize];
+}
+
+- (void)onTransparentBtnClicked:(UIButton *)btn {
+//    self.usrID = self.userIDArr[1];
+//    AreaSettingCell *cell = [_userTableView cellForRowAtIndexPath:[NSIndexPath indexPathWithIndex:1]];
+//    self.cell = cell;
+//    self.selectedIndexPath = [NSIndexPath indexPathWithIndex:1];
+//    self.userName.text = cell.areaLabel.text;
+//    
+//    UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    AreaSubSettingViewController *AreaSubVC = [storyBoard instantiateViewControllerWithIdentifier:@"AccessSubSettingVC"];
+//    [self.navigationController pushViewController:AreaSubVC animated:YES];
+//    AreaSubVC.usrID = self.userIDArr[1];
+//    AreaSubVC.userNameTitle = cell.areaLabel.text;
+//    AreaSubVC.identityType = self.identityType;
+//    AreaSubVC.detailTextName = cell.detialLabel.text;
 }
 
 

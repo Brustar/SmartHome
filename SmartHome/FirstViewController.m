@@ -127,6 +127,38 @@
     }else{
         self.chatlabel.text =[NSString stringWithFormat:@"%@" , @"暂无新消息"];
     }
+    
+ /////////////////////////////////////  Mask View  ////////////////////////////////////////
+    NSString *KeyStr = [UD objectForKey:ShowMaskViewHomePageChatBtn];
+    if (KeyStr.length <=0) {
+        [LoadMaskHelper showMaskWithType:HomePageChatBtn onView:self.tabBarController.view delay:0.5 delegate:self];
+    }else {
+        NSString *KeyStr = [UD objectForKey:ShowMaskViewHomePageEnterChat];
+        if (KeyStr.length <=0) {
+            [LoadMaskHelper showMaskWithType:HomePageEnterChat onView:self.tabBarController.view delay:0.5 delegate:self];
+        }else {
+            NSString *KeyStr = [UD objectForKey:ShowMaskViewHomePageEnterFamily];
+            if(KeyStr.length <=0) {
+                [LoadMaskHelper showMaskWithType:HomePageEnterFamily onView:self.tabBarController.view delay:0.5 delegate:self];
+            }else {
+                NSString *KeyStr = [UD objectForKey:ShowMaskViewHomePageScene];
+                if(KeyStr.length <=0){
+                    [LoadMaskHelper showMaskWithType:HomePageScene onView:self.tabBarController.view delay:0.5 delegate:self];
+                }else {
+                    NSString *KeyStr = [UD objectForKey:ShowMaskViewHomePageDevice];
+                    if(KeyStr.length <=0){
+                        [LoadMaskHelper showMaskWithType:HomePageDevice onView:self.tabBarController.view delay:0.5 delegate:self];
+                    }else {
+                        NSString *KeyStr = [UD objectForKey:ShowMaskViewHomePageCloud];
+                        if(KeyStr.length <=0){
+                            [LoadMaskHelper showMaskWithType:HomePageCloud onView:self.tabBarController.view delay:0.5 delegate:self];
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
 }
 
 -(void)getPlist
@@ -822,6 +854,119 @@
 - (void)recv:(NSData *)data withTag:(long)tag
 {
     
+}
+
+#pragma mark - SingleMaskViewDelegate
+- (void)onNextButtonClicked:(UIButton *)btn pageType:(PageTye)pageType {
+    if (pageType == HomePageChatBtn) {
+        _baseTabbarController.tabbarPanel.hidden = YES;
+        if (self.socialView.hidden) {
+            self.socialView.hidden = NO;
+        }else{
+            self.socialView.hidden = YES;
+            _baseTabbarController.tabbarPanel.hidden = NO;
+            self.chatlabel.text = @"456";
+        }
+        
+        [LoadMaskHelper showMaskWithType:HomePageEnterChat onView:self.tabBarController.view delay:0.5 delegate:self];
+    }else if (pageType == HomePageEnterChat) {
+        self.socialView.hidden = YES;
+        _baseTabbarController.tabbarPanel.hidden = NO;
+        
+        [self setRCIM];
+    }else if (pageType == HomePageEnterFamily) {
+        UIStoryboard *iPhoneStoryBoard  = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
+        FamilyHomeViewController *familyVC = [iPhoneStoryBoard instantiateViewControllerWithIdentifier:@"familyHomeVC"];
+        familyVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:familyVC animated:YES];
+        
+    }else if (pageType == HomePageScene) {
+        [NC postNotificationName:@"TabbarPanelClickedNotification" object:nil];
+        
+    }else if (pageType == HomePageDevice) {
+        [NC postNotificationName:@"TabbarPanelClickedNotificationDevice" object:nil];
+        
+    }else if (pageType == HomePageCloud) {
+        self.socialView.hidden = YES;
+        _baseTabbarController.tabbarPanel.hidden = NO;
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        
+        if (appDelegate.LeftSlideVC.closed)
+        {
+            [appDelegate.LeftSlideVC openLeftView];
+        }
+        else
+        {
+            [appDelegate.LeftSlideVC closeLeftView];
+        }
+        
+        [NC postNotificationName:@"ShowMaskViewNotification" object:nil];
+    }
+}
+
+- (void)onSkipButtonClicked:(UIButton *)btn {
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageChatBtn];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageEnterChat];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageEnterFamily];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageScene];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageDevice];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageCloud];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewChatView];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewFamilyHome];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewFamilyHomeDetail];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewScene];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewSceneDetail];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewDevice];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewDeviceAir];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewLeftView];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewSettingView];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewAccessControl];
+    [UD setObject:@"haveShownMask" forKey:ShowMaskViewSceneAdd];
+    [UD synchronize];
+}
+
+- (void)onTransparentBtnClicked:(UIButton *)btn {
+    if (btn.tag == 1) { //聊天按钮
+        _baseTabbarController.tabbarPanel.hidden = YES;
+        if (self.socialView.hidden) {
+            self.socialView.hidden = NO;
+        }else{
+            self.socialView.hidden = YES;
+            _baseTabbarController.tabbarPanel.hidden = NO;
+            self.chatlabel.text = @"456";
+        }
+        
+        [LoadMaskHelper showMaskWithType:HomePageEnterChat onView:self.tabBarController.view delay:0.5 delegate:self];
+    }else if (btn.tag == 2) { //进入聊天
+        self.socialView.hidden = YES;
+        _baseTabbarController.tabbarPanel.hidden = NO;
+        
+        [self setRCIM];
+    }else if (btn.tag == 3) { //进入家庭
+        UIStoryboard *iPhoneStoryBoard  = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
+        FamilyHomeViewController *familyVC = [iPhoneStoryBoard instantiateViewControllerWithIdentifier:@"familyHomeVC"];
+        familyVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:familyVC animated:YES];
+    }else if (btn.tag == 4) {  // 进入场景
+        [NC postNotificationName:@"TabbarPanelClickedNotification" object:nil];
+    }else if (btn.tag == 5) {  //进入设备
+        [NC postNotificationName:@"TabbarPanelClickedNotificationDevice" object:nil];
+    }else if (btn.tag == 6) {  //点击“云”，进入侧滑页面
+        self.socialView.hidden = YES;
+        _baseTabbarController.tabbarPanel.hidden = NO;
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        
+        if (appDelegate.LeftSlideVC.closed)
+        {
+            [appDelegate.LeftSlideVC openLeftView];
+        }
+        else
+        {
+            [appDelegate.LeftSlideVC closeLeftView];
+        }
+        
+        [NC postNotificationName:@"ShowMaskViewNotification" object:nil];
+    }
 }
 
 @end

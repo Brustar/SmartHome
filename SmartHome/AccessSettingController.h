@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomViewController.h"
+#import "LoadMaskHelper.h"
 
-@interface AccessSettingController : CustomViewController
+@interface AccessSettingController : CustomViewController<SingleMaskViewDelegate>
 
 @end

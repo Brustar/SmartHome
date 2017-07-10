@@ -33,6 +33,48 @@
 #define SecurityType      @"安防"
 #define SensorType        @"感应器"
 
+//蒙版
+#define ShowMaskViewHomePageChatBtn         @"ShowMaskViewHomePageChatBtn"           //是否显示过蒙版
+#define ShowMaskViewHomePageEnterChat       @"ShowMaskViewHomePageEnterChat"
+#define ShowMaskViewHomePageEnterFamily     @"ShowMaskViewHomePageEnterFamily"
+#define ShowMaskViewHomePageScene           @"ShowMaskViewHomePageScene"
+#define ShowMaskViewHomePageDevice          @"ShowMaskViewHomePageDevice"
+#define ShowMaskViewHomePageCloud           @"ShowMaskViewHomePageCloud"
+#define ShowMaskViewChatView                @"ShowMaskViewChatView"
+#define ShowMaskViewFamilyHome              @"ShowMaskViewFamilyHome"
+#define ShowMaskViewFamilyHomeDetail        @"ShowMaskViewFamilyHomeDetail"
+#define ShowMaskViewScene                   @"ShowMaskViewScene"
+#define ShowMaskViewSceneAdd                @"ShowMaskViewSceneAdd"
+#define ShowMaskViewSceneDetail             @"ShowMaskViewSceneDetail"
+#define ShowMaskViewDevice                  @"ShowMaskViewDevice"
+#define ShowMaskViewDeviceAir               @"ShowMaskViewDeviceAir"
+#define ShowMaskViewLeftView                @"ShowMaskViewLeftView"
+#define ShowMaskViewSettingView             @"ShowMaskViewSettingView"
+#define ShowMaskViewAccessControl           @"ShowMaskViewAccessControl"
+#define IsDemo                              @"IsDemo"
+
+typedef enum : NSUInteger {
+    
+    HomePageChatBtn,          //  主页聊天按钮
+    HomePageEnterChat,        //  进入聊天
+    ChatView,                 //  聊天页面
+    HomePageEnterFamily,      //  进入家庭
+    FamilyHome,               //  家庭首页
+    FamilyHomeDetail,         //  家庭详情
+    HomePageScene,            //  首页场景
+    SceneHome,                //  场景首页
+    SceneHomeAdd,             //  添加场景
+    SceneDetail,              //  场景详情
+    HomePageDevice,           //  首页设备
+    DeviceHome,               //  设备首页
+    DeviceAir,                //  设备空调
+    HomePageCloud,            //  首页云
+    LeftView,                 //  侧滑页面
+    SettingView,              //  设置页面
+    AccessControl,            //  权限控制
+    
+} PageTye;
+
 #define UI_SCREEN_WIDTH       ([[UIScreen mainScreen] bounds].size.width)
 #define UI_SCREEN_HEIGHT      ([[UIScreen mainScreen] bounds].size.height)
 #define UD                    [NSUserDefaults standardUserDefaults]
