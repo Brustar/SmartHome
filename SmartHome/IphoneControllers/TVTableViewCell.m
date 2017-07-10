@@ -51,7 +51,7 @@
     
                 TV *device=[[TV alloc] init];
                 [device setDeviceID:[self.deviceid intValue]];
-                [device setPoweron:self.TVSwitch.selected];
+                [device setPoweron:self.TVSwitchBtn.selected];
                 [device setVolume:self.TVSlider.value*100];
     
     if (sender == self.TVSwitchBtn) {

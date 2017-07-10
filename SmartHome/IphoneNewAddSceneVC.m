@@ -131,17 +131,6 @@
         [self.navigationController pushViewController:deviceTimingVC animated:YES];
         
     }else if ([lastVC isKindOfClass:[iphoneEditSceneVC class]]) {
-        
-//        //场景ID不变
-//        NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
-//        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
-//        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
-//        
-//        _scene = [[Scene alloc]init];
-//        [_scene setValuesForKeysWithDictionary:plistDic];
-//        _scene.roomID = self.roomID;
-//        _scene.sceneID = self.sceneID;
-        
         Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
         NSMutableArray *ds = [[scene devices] mutableCopy];
         NSArray *devices = [[SceneManager defaultManager] readSceneByID:0].devices;

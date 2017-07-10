@@ -99,13 +99,6 @@
                             <action selector="channelAdd:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Ij3-Ah-Liv"/>
                         </connections>
                     </button>
-                    <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="XDC-WQ-BWg">
-                        <rect key="frame" x="307" y="11.5" width="42" height="40"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="40" id="Jqg-GP-MCx"/>
-                            <constraint firstAttribute="height" constant="40" id="tg8-JP-kol"/>
-                        </constraints>
-                    </switch>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xOF-yf-IDB">
                         <rect key="frame" x="260" y="15" width="55" height="35"/>
                         <constraints>
@@ -131,7 +124,6 @@
                     <constraint firstItem="pnd-J7-sYa" firstAttribute="top" secondItem="r1c-Qd-2y6" secondAttribute="bottom" constant="12" id="44f-9H-rsN"/>
                     <constraint firstAttribute="trailing" secondItem="xOF-yf-IDB" secondAttribute="trailing" constant="60" id="4p4-j9-COc"/>
                     <constraint firstAttribute="trailingMargin" secondItem="SAb-M2-Mdf" secondAttribute="trailing" constant="15" id="5Re-G4-k0b"/>
-                    <constraint firstItem="e3e-Vd-xcZ" firstAttribute="top" secondItem="XDC-WQ-BWg" secondAttribute="bottom" constant="3" id="70J-td-yeK"/>
                     <constraint firstAttribute="bottomMargin" secondItem="SAb-M2-Mdf" secondAttribute="bottom" constant="11.5" id="83O-zi-g3E"/>
                     <constraint firstAttribute="trailing" secondItem="pnd-J7-sYa" secondAttribute="trailing" id="BIR-Hn-7t4"/>
                     <constraint firstItem="pnd-J7-sYa" firstAttribute="top" secondItem="7DU-dS-c5S" secondAttribute="bottom" constant="3" id="E9D-ro-I0P"/>
@@ -143,7 +135,6 @@
                     <constraint firstItem="68P-ou-Xax" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="15" id="O2z-q1-dyJ"/>
                     <constraint firstItem="xOF-yf-IDB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="P3Y-Dg-ayj"/>
                     <constraint firstAttribute="bottom" secondItem="pnd-J7-sYa" secondAttribute="bottom" id="Ppe-fC-gqf"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="XDC-WQ-BWg" secondAttribute="trailing" constant="20" id="Q7N-6x-hQ9"/>
                     <constraint firstItem="pnd-J7-sYa" firstAttribute="top" secondItem="iTa-SA-Jqr" secondAttribute="bottom" constant="12" id="Tbv-kd-kmy"/>
                     <constraint firstItem="pnd-J7-sYa" firstAttribute="top" secondItem="e3e-Vd-xcZ" secondAttribute="bottom" constant="-5" id="V6y-HA-0VI"/>
                     <constraint firstItem="tWF-t6-Y9g" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="WGu-O8-Y4E"/>
@@ -162,7 +153,6 @@
                 <outlet property="TVConstraint" destination="4p4-j9-COc" id="91m-pY-B0J"/>
                 <outlet property="TVNameLabel" destination="tWF-t6-Y9g" id="TRf-sJ-vTB"/>
                 <outlet property="TVSlider" destination="dKl-4X-Ia9" id="rB4-Qv-6yn"/>
-                <outlet property="TVSwitch" destination="XDC-WQ-BWg" id="pmx-VE-HSp"/>
                 <outlet property="TVSwitchBtn" destination="xOF-yf-IDB" id="aXY-Vz-M9m"/>
             </connections>
             <point key="canvasLocation" x="-119.5" y="75.5"/>
