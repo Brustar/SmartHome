@@ -276,8 +276,10 @@ BOOL animating;
     btn.selected = !btn.selected;
     if (btn.selected) {
         data = [[DeviceInfo defaultManager] open:self.deviceid];
+        [self startSpin];
     }else{
         data = [[DeviceInfo defaultManager] close:self.deviceid];
+        [self stopSpin];
     }
     
     SocketManager *sock=[SocketManager defaultManager];
