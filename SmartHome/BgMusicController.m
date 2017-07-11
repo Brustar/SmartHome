@@ -141,7 +141,7 @@ BOOL animating;
 
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-    [[VolumeManager defaultManager] start];
+    [[VolumeManager defaultManager] start:nil];
     
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
