@@ -92,6 +92,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _deviceArray = [NSMutableArray array];
     [self addNotifications];
     [self setupNaviBar];
     [self showNetStateView];
@@ -351,6 +352,49 @@
             [self.roomCollectionView reloadData];
         }
     }
+}
+
+#pragma mark - TCP recv delegate
+-(void)recv:(NSData *)data withTag:(long)tag
+{
+    Proto proto=protocolFromData(data);
+    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
+        return;
+    }
+    //同步设备状态
+    if(proto.cmd == 0x01){
+        
+        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+        Device *device = [SQLManager getDeviceWithDeviceID:devID.intValue];
+        
+        if (proto.action.state==0x6A) { //温度
+          device.currTemp  = proto.action.RValue;
+            
+        }
+        if (proto.action.state==0x8A) { // 湿度
+            device.humidity = proto.action.RValue;
+        }
+        if (proto.action.state==0x7F) { // PM2.5
+            device.pm25 = proto.action.RValue;
+        }
+        
+        if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) { //开关
+            device.power = proto.action.state;
+        }
+        
+        [_deviceArray addObject:device];
+        
+        // 判断是否结束
+        if (1) {
+            // 处理接收到的数据（按房间分组）
+            [self handleData];
+        }
+    }
+    
+}
+
+- (void)handleData {
+    
 }
 
 #pragma mark - SingleMaskViewDelegate

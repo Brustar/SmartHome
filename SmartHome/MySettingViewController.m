@@ -437,6 +437,27 @@
 }
 
 - (void)gotoLoginViewController {
+    
+    /*[UD setObject:@"" forKey:ShowMaskViewHomePageChatBtn];
+    [UD setObject:@"" forKey:ShowMaskViewHomePageEnterChat];
+    [UD setObject:@"" forKey:ShowMaskViewHomePageEnterFamily];
+    [UD setObject:@"" forKey:ShowMaskViewHomePageScene];
+    [UD setObject:@"" forKey:ShowMaskViewHomePageDevice];
+    [UD setObject:@"" forKey:ShowMaskViewHomePageCloud];
+    [UD setObject:@"" forKey:ShowMaskViewChatView];
+    [UD setObject:@"" forKey:ShowMaskViewFamilyHome];
+    [UD setObject:@"" forKey:ShowMaskViewFamilyHomeDetail];
+    [UD setObject:@"" forKey:ShowMaskViewScene];
+    [UD setObject:@"" forKey:ShowMaskViewSceneDetail];
+    [UD setObject:@"" forKey:ShowMaskViewDevice];
+    [UD setObject:@"" forKey:ShowMaskViewDeviceAir];
+    [UD setObject:@"" forKey:ShowMaskViewLeftView];
+    [UD setObject:@"" forKey:ShowMaskViewSettingView];
+    [UD setObject:@"" forKey:ShowMaskViewAccessControl];
+    [UD setObject:@"" forKey:ShowMaskViewSceneAdd];
+    [UD synchronize];*/
+    
+    
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
     UIViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"loginNavController"];//进入登录页面
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
