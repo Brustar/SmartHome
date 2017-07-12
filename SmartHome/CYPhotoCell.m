@@ -38,11 +38,26 @@
 
 //开关
 - (IBAction)powerBtn:(id)sender {
-    
+   
+    NSMutableArray * sceneArrID =[NSMutableArray array];
+    NSArray * seceneArr = [SQLManager getScensByRoomId:self.roomID];
+    for (int i = 0; i < seceneArr.count; i ++) {
+        Scene * scene = [[Scene alloc] init];
+        scene = seceneArr[i];
+        NSString * sceneID = [NSString stringWithFormat:@"%d",scene.sceneID];
+        [sceneArrID addObject:sceneID];
+    }
+  
     if (self.sceneStatus == 0) { //点击前，场景是关闭状态，需打开场景
              [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateNormal];
-            [[SceneManager defaultManager] startScene:self.sceneID];//打开场景
-            [SQLManager updateSceneStatus:1 sceneID:self.sceneID];//更新数据库
+        if([sceneArrID containsObject:[NSString stringWithFormat:@"%d",self.sceneID]]) {
+               [[SceneManager defaultManager] startScene:self.sceneID];//打开场景
+               [SQLManager updateSceneStatus:1 sceneID:self.sceneID];//更新数据库
+        }else{
+               [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];//关闭场景
+               [SQLManager updateSceneStatus:0 sceneID:self.sceneID];//更新数据库
+        }
+        
     }else if (self.sceneStatus == 1) { //点击前，场景是打开状态，需关闭场景
             [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
             [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];//关闭场景

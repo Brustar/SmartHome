@@ -422,7 +422,7 @@
                     
                     poweron = [dic[@"poweron"] intValue];
                     volume = [dic[@"volume"] intValue];
-                    TVCell.TVSwitch.selected = poweron;
+                    TVCell.TVSwitchBtn.selected = poweron;
                     TVCell.TVSlider.value = (float)volume/100.f;
                     
                 }
@@ -453,7 +453,7 @@
                 }
                 if (deviceID == [_DVDArray[indexPath.row] intValue]) {
                     poweron = [dic[@"poweron"] intValue];
-                    dvolume = [dic[@"volume"] intValue];
+                    dvolume = [dic[@"dvolume"] intValue];
                     DVDCell.DVDSwitchBtn.selected = poweron;
                     DVDCell.DVDSlider.value = (float)dvolume/100.f;
                 }

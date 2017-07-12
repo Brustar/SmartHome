@@ -75,8 +75,13 @@
 }
 -(void)rightBtnClicked:(UIButton *)bbt
 {
-    [self sendRequest];
     
+    NSString *isDemo = [UD objectForKey:IsDemo];
+    if ([isDemo isEqualToString:@"YES"]) {
+        [MBProgressHUD showSuccess:@"真实用户才可以修改成功"];
+    }else{
+         [self sendRequest];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 
 }

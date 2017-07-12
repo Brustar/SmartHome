@@ -20,8 +20,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    [IOManager removeTempFile];
-    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+//     [IOManager removeTempFile];
+    
     [self.OtherSwitchBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.AddOtherBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.OtherSwitchBtn setBackgroundImage:[UIImage imageNamed:@"dvd_btn_switch_on"] forState:UIControlStateSelected];
@@ -42,7 +42,7 @@
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
 - (IBAction)save:(id)sender {
-    
+    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
         Amplifier *device=[[Amplifier alloc] init];
         [device setDeviceID:[self.deviceid intValue]];
         [device setWaiting: self.OtherSwitchBtn.selected];
@@ -82,6 +82,7 @@
             
             
         }else{
+           
              if (ON_IPAD) {
                  
                   [self.AddOtherBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
@@ -98,7 +99,7 @@
             //删除当前场景的当前硬件
             NSArray *devices = [[SceneManager defaultManager] subDeviceFromScene:_scene withDeivce:device.deviceID];
             [_scene setDevices:devices];
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
+//            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
            
         }
        

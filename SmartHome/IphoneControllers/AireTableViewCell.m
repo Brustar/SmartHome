@@ -18,8 +18,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    [IOManager removeTempFile];
-    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+  
+//    [IOManager removeTempFile];
     self.AireSlider.minimumValue = 16;
     self.AireSlider.maximumValue = 30;
     self.AireSlider.value = 1;
@@ -49,7 +49,7 @@
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
 - (IBAction)save:(id)sender {
-    
+     _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
         Aircon *device=[[Aircon alloc] init];
         [device setDeviceID:[self.deviceid intValue]];
         [device setWaiting:self.AireSwitchBtn.selected];
@@ -88,6 +88,7 @@
            
             
         }else{
+            
             if (ON_IPAD) {
                 [self.AddAireBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
             }else{
@@ -102,7 +103,7 @@
             //删除当前场景的当前硬件
             NSArray *devices = [[SceneManager defaultManager] subDeviceFromScene:_scene withDeivce:device.deviceID];
             [_scene setDevices:devices];
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
+//            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
         }
        
     }else if (sender == self.AireSlider){

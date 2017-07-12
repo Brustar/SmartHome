@@ -303,7 +303,7 @@
 }
 -(void)showMassegeLabel
 {
-    _MassegeLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 33, 6, 6)];
+    _MassegeLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 33, 6, 6)];
     _MassegeLabel.backgroundColor = [UIColor redColor];
     _MassegeLabel.layer.masksToBounds = YES;
     _MassegeLabel.layer.cornerRadius = 3;

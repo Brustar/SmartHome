@@ -147,17 +147,17 @@
         
         [[SceneManager defaultManager] editScene:_scene];
     }else{
-        
-//        if (_scene.devices.count != 0) {
+         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
+        if (_scene.devices.count != 0) {
         
             IphoneSaveNewSceneController * iphoneSaveNewScene = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneSaveNewSceneController"];
             iphoneSaveNewScene.roomId = self.roomID;
             [self.navigationController pushViewController:iphoneSaveNewScene animated:YES];
-//        }else{
-//            [MBProgressHUD showSuccess:@"请先选择设备"];
-//            
-//        }
-       
+        }else{
+            [MBProgressHUD showSuccess:@"请先选择设备"];
+            
+        }
+    
     }
  
 }

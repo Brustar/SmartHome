@@ -82,10 +82,25 @@
     
     if (self.startTimeStr.length >0) {
         self.starTimeLabel.text = self.startTimeStr;
+//       
+//        //将传入时间转化成需要的格式
+//        NSDateFormatter *format=[[NSDateFormatter alloc]init];
+//        [format setDateFormat:@"HH:mm"];
+//        NSDate *fromdate=[format dateFromString:self.startTimeStr];
+//        NSTimeZone *fromzone = [NSTimeZone systemTimeZone];
+//        NSInteger frominterval = [fromzone secondsFromGMTForDate:fromdate];
+//        NSDate *fromDate = [fromdate dateByAddingTimeInterval:frominterval];
+//        fromDate = [self.clock angleToTime:1];
+       
     }
     
     if (self.endTimeStr.length >0) {
         self.endTimeLabel.text = self.endTimeStr;
+//        //将传入时间转化成需要的格式
+//        NSDateFormatter *format=[[NSDateFormatter alloc]init];
+//        [format setDateFormat:@"HH:mm"];
+//        NSDate *endDate=[format dateFromString:self.endTimeStr];
+//        endDate = [self.clock angleToTime:1];
     }
     
     if (self.repeatitionStr.length >0) {
@@ -140,7 +155,7 @@
 }
 
 - (void)setupNaviBar {
-    [self setNaviBarTitle:_naviTitle]; //设置标题
+    [self setNaviBarTitle:@"添加定时"]; //设置标题
     _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"确定" target:self action:@selector(rightBtnClicked:)];
     _naviRightBtn.tintColor = [UIColor whiteColor];
     [self setNaviBarRightBtn:_naviRightBtn];
@@ -178,11 +193,10 @@
         sch.endTime = self.endTimeLabel.text;
         sch.weekDays = [self.RepetitionLable.text componentsSeparatedByString:@"、"];
         _scene.schedules = @[sch];
-//        [[SceneManager defaultManager] editSceneTimer:_scene];
-        [[SceneManager defaultManager] editScene:_scene];
+        [[SceneManager defaultManager] editSceneTimer:_scene];
+//        [[SceneManager defaultManager] editScene:_scene];
     }
-    
-  
+
     [self.navigationController popViewControllerAnimated:YES];
 
 }
@@ -322,6 +336,7 @@
     self.starTimeLabel.text = [self.dateFormatter stringFromDate:startDate];
     self.endTimeLabel.text = [self.dateFormatter stringFromDate:endDate];
 }
+
 
 #pragma mark -- lazy load
 -(NSDateFormatter  *)dateFormatter{

@@ -20,8 +20,8 @@
     [super awakeFromNib];
     // Initialization code
     
-    [IOManager removeTempFile];
-    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+//     [IOManager removeTempFile];
+   
     [self.AddScreenCurtainBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.ScreenCurtainBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.UPBtn setImage:[UIImage imageNamed:@"icon_up_prd"] forState:UIControlStateHighlighted];
@@ -55,7 +55,7 @@
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
 - (IBAction)save:(id)sender {
-    
+     _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
         Amplifier *device=[[Amplifier alloc] init];
         [device setDeviceID:[self.deviceid intValue]];
         [device setWaiting: self.ScreenCurtainBtn.selected];
@@ -89,6 +89,7 @@
             
             
         }else{
+           
             if (ON_IPAD) {
                    [self.AddScreenCurtainBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
             }else{
@@ -103,7 +104,7 @@
             //删除当前场景的当前硬件
             NSArray *devices = [[SceneManager defaultManager] subDeviceFromScene:_scene withDeivce:device.deviceID];
             [_scene setDevices:devices];
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
+//            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
         }
     }
     

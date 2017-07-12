@@ -19,8 +19,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    [IOManager removeTempFile];
-    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+   
+//   [IOManager removeTempFile];
     [self.TVSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
     self.TVSlider.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
     self.TVSlider.minimumTrackTintColor = [UIColor colorWithRed:253/255.0 green:254/255.0 blue:254/255.0 alpha:1];
@@ -48,7 +48,7 @@
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
 - (IBAction)save:(id)sender {
-    
+      _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
                 TV *device=[[TV alloc] init];
                 [device setDeviceID:[self.deviceid intValue]];
                 [device setPoweron:self.TVSwitchBtn.selected];
@@ -90,6 +90,7 @@
             [_scene setReadonly:NO];
             
         }else{
+            
             [self.AddTvDeviceBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
             
             [_scene setSceneID:[self.sceneid intValue]];
@@ -102,7 +103,7 @@
             NSArray *devices = [[SceneManager defaultManager] subDeviceFromScene:_scene withDeivce:device.deviceID];
             
             [_scene setDevices:devices];
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
+//            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
         }
   
     }else if (sender == self.TVSlider){

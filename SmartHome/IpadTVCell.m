@@ -18,8 +18,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    [IOManager removeTempFile];
-    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+  
     [self.TVSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
     [self.channelReduceBtn setImage:[UIImage imageNamed:@"icon_vored_prd"] forState:UIControlStateHighlighted];
     [self.channelAddBtn setImage:[UIImage imageNamed:@"icon_add_pre"] forState:UIControlStateHighlighted];
@@ -43,7 +42,7 @@
     [sock.socket writeData:data withTimeout:1 tag:1];
 }
 - (IBAction)save:(id)sender {
-    
+     _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     TV *device=[[TV alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     //    [device setIsPoweron:device.poweron];
@@ -86,6 +85,7 @@
          
             
         }else{
+//              [IOManager removeTempFile];
             [self.AddTvDeviceBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
             
             [_scene setSceneID:[self.sceneid intValue]];
@@ -98,7 +98,7 @@
             NSArray *devices = [[SceneManager defaultManager] subDeviceFromScene:_scene withDeivce:device.deviceID];
             
             [_scene setDevices:devices];
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
+//            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
             
         }
         

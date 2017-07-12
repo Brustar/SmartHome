@@ -729,12 +729,17 @@ static NSString * const CYPhotoId = @"photo";
     self.sceneID = (int)cell.tag;
     UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"是否删除“%@”场景？",self.currentCell.SceneName.text] preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-        NSString *url = [NSString stringWithFormat:@"%@Cloud/scene_delete.aspx",[IOManager httpAddr]];
-        NSDictionary *dict = @{@"token":[UD objectForKey:@"AuthorToken"], @"scenceid":@(self.sceneID),@"optype":@(1)};
-        HttpManager *http=[HttpManager defaultManager];
-        http.delegate=self;
-        http.tag = 1;
-        [http sendPost:url param:dict];
+         NSString *isDemo = [UD objectForKey:IsDemo];
+        if ([isDemo isEqualToString:@"YES"]) {
+            [MBProgressHUD showSuccess:@"真实用户才可以操作"];
+        }else{
+            NSString *url = [NSString stringWithFormat:@"%@Cloud/scene_delete.aspx",[IOManager httpAddr]];
+            NSDictionary *dict = @{@"token":[UD objectForKey:@"AuthorToken"], @"scenceid":@(self.sceneID),@"optype":@(1)};
+            HttpManager *http=[HttpManager defaultManager];
+            http.delegate=self;
+            http.tag = 1;
+            [http sendPost:url param:dict];
+        }
         
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {

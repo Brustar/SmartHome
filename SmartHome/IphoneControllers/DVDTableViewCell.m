@@ -19,8 +19,8 @@
     [super awakeFromNib];
     // Initialization code
     
-    [IOManager removeTempFile];
-    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+//      [IOManager removeTempFile];
+   
      [self.PreviousBtn setImage:[UIImage imageNamed:@"DVD_previous_red"] forState:UIControlStateHighlighted];
      [self.nextBtn setImage:[UIImage imageNamed:@"DVD_next_red"] forState:UIControlStateHighlighted];
      [self.DVDSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
@@ -43,10 +43,11 @@
 }
 
 - (IBAction)save:(id)sender {
-    
+     _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
         DVD *device=[[DVD alloc] init];
         [device setDeviceID:[self.deviceid intValue]];
         [device setPoweron:self.DVDSwitchBtn.selected];
+        [device setDvolume:self.DVDSlider.value * 100];
     
     if (sender == self.DVDSwitchBtn) {
         NSData *data=nil;
@@ -82,6 +83,8 @@
           
             
         }else{
+            
+          
             [self.AddDvdBtn setImage:[UIImage imageNamed:@"icon_add_normal"] forState:UIControlStateNormal];
             
             [_scene setSceneID:[self.sceneid intValue]];
@@ -94,7 +97,7 @@
             NSArray *devices = [[SceneManager defaultManager] subDeviceFromScene:_scene withDeivce:device.deviceID];
             
             [_scene setDevices:devices];
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
+//            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
         }
         
     }else if (sender == self.DVDSlider){

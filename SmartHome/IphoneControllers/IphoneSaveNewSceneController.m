@@ -106,11 +106,19 @@
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
     
     _scene = [[Scene alloc]initWhithoutSchedule];
-    _scene.roomID = self.roomId;
     [_scene setValuesForKeysWithDictionary:plistDic];
 
-        [[DeviceInfo defaultManager] setEditingScene:NO];
+    [[DeviceInfo defaultManager] setEditingScene:NO];
+     NSString *isDemo = [UD objectForKey:IsDemo];
+    if ([isDemo isEqualToString:@"YES"]) {
+        
+        [MBProgressHUD showError:@"登录之后才可以真正添加场景"];
+        
+    }else{
+        
         [[SceneManager defaultManager] addScene:_scene withName:self.sceneName.text withImage:self.selectSceneImg withiSactive:_isActive];
+    }
+    
         UIStoryboard * iphoneStoryBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
         IphoneSceneController * iphoneSceneVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
         [self.navigationController pushViewController:iphoneSceneVC animated:YES];

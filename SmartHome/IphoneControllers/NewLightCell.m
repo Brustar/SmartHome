@@ -18,8 +18,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-     [IOManager removeTempFile];
-    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+    
+//   [IOManager removeTempFile];
     [self.NewLightSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
 //    self.NewLightSlider.layer.borderWidth = 10;
     self.NewLightSlider.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
@@ -50,7 +50,7 @@
 }
 
 - (IBAction)save:(id)sender {
-    
+    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     Light *device=[[Light alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setIsPoweron:self.NewLightPowerBtn.selected || self.NewLightSlider.value > 0];
@@ -126,6 +126,7 @@
             
             
          }else{
+             
              if (ON_IPAD) {
                   [self.AddLightBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
              }else{
@@ -141,6 +142,7 @@
              //删除当前场景的当前硬件
              NSArray *devices = [[SceneManager defaultManager] subDeviceFromScene:_scene withDeivce:device.deviceID];
              [_scene setDevices:devices];
+//             [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
           
          }
 
