@@ -8,7 +8,13 @@
 
 @interface VolumeManager : NSObject
 
+@property (nonatomic, readwrite) float launchVolume;
+@property (nonatomic, copy) dispatch_block_t upBlock;
+@property (nonatomic, copy) dispatch_block_t downBlock;
+@property (nonatomic, retain) UIView *volumeView;
+
 + (instancetype)defaultManager;
--(void) start;
+-(void) start:(UIView *)view;
+-(void) stop;
 
 @end

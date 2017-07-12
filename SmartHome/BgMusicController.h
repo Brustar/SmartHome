@@ -8,8 +8,6 @@
 #include "CustomNaviBarView.h"
 #include "CustomViewController.h"
 
-#define BLUETOOTH_MUSIC false
-
 @interface BgMusicController : CustomViewController
 
 @property (nonatomic,weak) NSString *sceneid;

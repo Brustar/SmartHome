@@ -8,6 +8,7 @@
 
 #import "VolumeManager.h"
 #import <AudioToolbox/AudioSession.h>
+#import <MediaPlayer/MediaPlayer.h>
 
 @implementation VolumeManager
 
@@ -21,7 +22,7 @@
     return sharedInstance;
 }
 
--(void) start
+-(void) start:(UIView *)view
 {
     AudioSessionInitialize(NULL, NULL, NULL, NULL);
     AudioSessionSetActive(true);
@@ -29,6 +30,24 @@
                                     volumeListenerCallback,
                                     (__bridge void *)(self)
                                     );
+    if (view) {
+        self.launchVolume = [[MPMusicPlayerController applicationMusicPlayer] volume];
+        CGRect frame = CGRectMake(0, -100, 10, 0);
+        self.volumeView = [[MPVolumeView alloc] initWithFrame:frame];
+        [self.volumeView sizeToFit];
+        [view addSubview: self.volumeView];
+    }
+}
+
+-(void) stop
+{
+    AudioSessionRemovePropertyListenerWithUserData(kAudioSessionProperty_CurrentHardwareOutputVolume, volumeListenerCallback, (__bridge void *)(self));
+    [self.volumeView removeFromSuperview];
+    self.volumeView = nil;
+    self.upBlock = nil;
+    self.downBlock = nil;
+    AudioSessionSetActive(NO);
+    
 }
 
 void volumeListenerCallback (void *inClientData,AudioSessionPropertyID inID,UInt32 inDataSize,const void *inData)
@@ -38,6 +57,33 @@ void volumeListenerCallback (void *inClientData,AudioSessionPropertyID inID,UInt
     NSLog(@"volumeListenerCallback %f", volume);
 
     [[DeviceInfo defaultManager] setValue:[NSString stringWithFormat:@"%f",volume] forKey:@"volume"];
+    
+    if (volume > [(__bridge VolumeManager*)inClientData launchVolume])
+    {
+        [(__bridge VolumeManager*)inClientData volumeUp];
+    }
+    else if (volume < [(__bridge VolumeManager*)inClientData launchVolume])
+    {
+        [(__bridge VolumeManager*)inClientData volumeDown];
+    }
+}
+
+-(void) volumeUp
+{
+    if (self.upBlock)
+    {
+        [[MPMusicPlayerController applicationMusicPlayer] setVolume:self.launchVolume];
+        self.upBlock();
+    }
+}
+
+-(void) volumeDown
+{
+    if (self.downBlock)
+    {
+        [[MPMusicPlayerController applicationMusicPlayer] setVolume:self.launchVolume];
+        self.downBlock();
+    }
 }
 
 @end

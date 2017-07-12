@@ -256,7 +256,7 @@
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     VolumeManager *volume=[VolumeManager defaultManager];
-    [volume start];
+    [volume start:nil];
     
     [self initSlider];
     self.menus = [SQLManager mediaDeviceNamesByRoom:self.roomID];
@@ -397,6 +397,7 @@
     {
         DeviceInfo *device=[DeviceInfo defaultManager];
         self.volume.value=[[device valueForKey:@"volume"] floatValue];
+        [self changeVolume];
     }
 }
 
