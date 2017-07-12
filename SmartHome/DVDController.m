@@ -129,10 +129,12 @@
     [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     VolumeManager *volume=[VolumeManager defaultManager];
     volume.upBlock = ^{
+        self.volume.value += 0.01;
         NSData *data = [[DeviceInfo defaultManager] volumeUp:self.deviceid];
         [sock.socket writeData:data withTimeout:1 tag:1];
     };
     volume.downBlock = ^{
+        self.volume.value -= 0.01;
         NSData *data = [[DeviceInfo defaultManager] volumeDown:self.deviceid];
         [sock.socket writeData:data withTimeout:1 tag:1];
     };
@@ -155,7 +157,7 @@
     [self.volume setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
     self.volume.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
     self.volume.minimumTrackTintColor = [UIColor colorWithRed:253/255.0 green:254/255.0 blue:254/255.0 alpha:1];
-    self.volume.enabled = NO;
+    self.volume.userInteractionEnabled = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -328,7 +330,14 @@
     }
 }
 
--(void)dealloc
+-(void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    VolumeManager *volume=[VolumeManager defaultManager];
+    [volume stop];
+}
+
+-(void) dealloc
 {
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device removeObserver:self forKeyPath:@"volume" context:nil];

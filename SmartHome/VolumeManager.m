@@ -33,10 +33,21 @@
     if (view) {
         self.launchVolume = [[MPMusicPlayerController applicationMusicPlayer] volume];
         CGRect frame = CGRectMake(0, -100, 10, 0);
-        MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame:frame];
-        [volumeView sizeToFit];
-        [view addSubview: volumeView];
+        self.volumeView = [[MPVolumeView alloc] initWithFrame:frame];
+        [self.volumeView sizeToFit];
+        [view addSubview: self.volumeView];
     }
+}
+
+-(void) stop
+{
+    AudioSessionRemovePropertyListenerWithUserData(kAudioSessionProperty_CurrentHardwareOutputVolume, volumeListenerCallback, (__bridge void *)(self));
+    [self.volumeView removeFromSuperview];
+    self.volumeView = nil;
+    self.upBlock = nil;
+    self.downBlock = nil;
+    AudioSessionSetActive(NO);
+    
 }
 
 void volumeListenerCallback (void *inClientData,AudioSessionPropertyID inID,UInt32 inDataSize,const void *inData)
