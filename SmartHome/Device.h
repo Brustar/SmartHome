@@ -64,6 +64,9 @@ typedef NS_ENUM(NSUInteger, catalog) {
 @property (nonatomic, assign) NSInteger temperature;//空调的设定温度
 @property (nonatomic, assign) NSInteger fanspeed;//空调风速
 @property (nonatomic, assign) NSInteger air_model;//空调模式:制冷，制热，送风，除湿
+@property (nonatomic, assign) int humidity;//湿度
+@property (nonatomic, assign) int pm25;//PM2.5
+@property (nonatomic, assign) int currTemp;//当前的室内温度
 @property (nonatomic,assign) double current;
 @property (nonatomic,assign) NSInteger voltage;
 @property (nonatomic,strong) NSString *protocol;

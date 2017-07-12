@@ -91,12 +91,15 @@ static NSString *const airCellIdentifier = @"airCell";
     NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
     [sock.socket writeData:data withTimeout:1 tag:1];
     
+    //  PM2.5
     NSString *pmID = [SQLManager singleDeviceWithCatalogID:55 byRoom:self.roomID];
     data = [[DeviceInfo defaultManager] query:pmID];
     [sock.socket writeData:data withTimeout:1 tag:1];
+    //  湿度
     NSString *humidityID = [SQLManager singleDeviceWithCatalogID:50 byRoom:self.roomID];
     data = [[DeviceInfo defaultManager] query:humidityID];
     [sock.socket writeData:data withTimeout:1 tag:1];
+    
     if (ON_IPAD) {
         self.menuTop.constant = self.controlBottom.constant = 80;
         self.menuLeft.constant = self.menuRight.constant =self.controlLeft.constant=self.controlRight.constant = 240;
@@ -134,7 +137,7 @@ static NSString *const airCellIdentifier = @"airCell";
     
     if (proto.cmd==0x01) {
         
-        if (proto.action.state==0x6A) {
+        if (proto.action.state==0x6A) { //温度
             self.currentTemp.text = [NSString stringWithFormat:@"Current:%d°C",proto.action.RValue];
             self.currentDegree = proto.action.RValue;
             
@@ -145,12 +148,12 @@ static NSString *const airCellIdentifier = @"airCell";
                 viewred.hidden = self.currentDegree - 15 || self.airMode == 0;
             }
         }
-        if (proto.action.state==0x8A) {
+        if (proto.action.state==0x8A) { // 湿度
             NSString *valueString = [NSString stringWithFormat:@"%d %%",proto.action.RValue];
             self.wetLabel.text = valueString;
             [self.humidity_hand rotate:30+proto.action.RValue*100/300];
         }
-        if (proto.action.state==0x7F) {
+        if (proto.action.state==0x7F) { // PM2.5
             NSString *valueString = [NSString stringWithFormat:@"%d",proto.action.RValue];
             self.pmLabel.text = valueString;
             

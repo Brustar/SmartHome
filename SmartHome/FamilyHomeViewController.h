@@ -31,7 +31,7 @@
 #define  minSpace 20
 #define  maxSpace 40
 
-@interface FamilyHomeViewController : CustomViewController<UICollectionViewDataSource,UICollectionViewDelegate,HttpDelegate, NowMusicControllerDelegate, SingleMaskViewDelegate>
+@interface FamilyHomeViewController : CustomViewController<UICollectionViewDataSource,UICollectionViewDelegate, HttpDelegate, TcpRecvDelegate, NowMusicControllerDelegate, SingleMaskViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *roomCollectionView;
 @property (nonatomic, strong) NSMutableArray *roomArray;
@@ -41,4 +41,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *airIcon;
 @property (nonatomic, readonly) UIButton *naviRightBtn;
 @property (nonatomic, strong) NowMusicController * nowMusicController;
+@property (nonatomic, strong) NSMutableArray *deviceArray;
 @end
