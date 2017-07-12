@@ -138,7 +138,7 @@
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     VolumeManager *volume=[VolumeManager defaultManager];
-    [volume start];
+    [volume start:nil];
     // Do any additional setup after loading the view.
     _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     if ([self.sceneid intValue]>0) {

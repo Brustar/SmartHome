@@ -75,14 +75,23 @@
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请选择" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *saveAction = [UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //场景ID不变
-        NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
-        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
-        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
-        Scene *scene = [[Scene alloc]init];
-        [scene setValuesForKeysWithDictionary:plistDic];
-        scene.sceneID = self.sceneID;
-        scene.roomID = self.roomID;
-        scene.sceneName = [SQLManager getSceneName:scene.sceneID];
+        Scene *scene = [[SceneManager defaultManager] readSceneByID:self.sceneID];
+        NSMutableArray *ds = [[scene devices] mutableCopy];
+        
+        NSArray *devices = [[SceneManager defaultManager] readSceneByID:0].devices;
+        
+        for (int j=(int)devices.count-1; j>=0; j--) {
+            for(int i = (int)ds.count-1;i>=0;i--){
+                if ([[ds objectAtIndex:i] class] == [[devices objectAtIndex:j] class] && [[ds objectAtIndex:i] deviceID] == [[devices objectAtIndex:j] deviceID] ) {
+                    [ds removeObjectAtIndex:i];
+                }
+            }
+        }
+        
+        NSArray *temp = [ds arrayByAddingObjectsFromArray:devices];
+        
+        scene.devices = temp;
+        
         [[SceneManager defaultManager] editScene:scene];
     }];
     [alertVC addAction:saveAction];
@@ -102,8 +111,25 @@
         //重新编辑场景的定时
         
         UIStoryboard * sceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
-        
         IphoneNewAddSceneTimerVC * newTimerVC = [sceneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneNewAddSceneTimerVC"];
+        NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,self.sceneID];
+        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
+        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
+        NSArray * schedules = plistDic[@"schedules"];
+        Scene * scene = [[Scene alloc] init];
+        scene.schedules = schedules;
+        if (scene.schedules.count > 0) {
+            for(NSDictionary *dict in schedules)
+            {
+                NSString *startTime = dict[@"startTime"];
+                NSString *endTime = dict[@"endTime"];
+                NSArray * weekDays = dict[@"weekDays"];
+                newTimerVC.startTimeStr = startTime;
+                newTimerVC.endTimeStr = endTime;
+                newTimerVC.repeatitionStr =[weekDays componentsJoinedByString:@","];
+            }
+        }
+        
         newTimerVC.sceneID = self.sceneID;
         newTimerVC.roomid = self.roomID;
         

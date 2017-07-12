@@ -109,7 +109,7 @@
                     
                     if ([room isKindOfClass:[NSDictionary class]]) {
                         NSString *rName = room[@"roomname"];
-                        NSArray *equipmentList = room[@"eqinfoList"];
+                        NSArray *equipmentList = room[@"eqinfolist"];
                         RoomModel *roomMODEL = [RoomModel new];
                         roomMODEL.roomname = rName;
                         if ([equipmentList isKindOfClass:[NSArray class]]) {
@@ -381,9 +381,11 @@
         self.deviceid = [NSString stringWithFormat:@"%d",devInfo.eID];
         for (int i = 0; i < model.eqinfoList.count; i ++) {
             //关指令
-            NSData *data=[[DeviceInfo defaultManager] close:self.deviceid];
+            NSData *data=[[DeviceInfo defaultManager] OFF:self.deviceid];
             SocketManager *sock=[SocketManager defaultManager];
             [sock.socket writeData:data withTimeout:1 tag:1];
+            
+            
         }
 //    }
    

@@ -123,24 +123,23 @@
     
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(changeVolume) forControlEvents:UIControlEventValueChanged];
-    
+    SocketManager *sock=[SocketManager defaultManager];
+    sock.delegate=self;
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     VolumeManager *volume=[VolumeManager defaultManager];
-    [volume start];
-
-    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
-    if ([self.sceneid intValue]>0) {
-        for(int i=0;i<[_scene.devices count];i++)
-        {
-            if ([[_scene.devices objectAtIndex:i] isKindOfClass:[DVD class]]) {
-                self.volume.value=((DVD*)[_scene.devices objectAtIndex:i]).dvolume/100.0;
-            }
-        }
-    }
+    volume.upBlock = ^{
+        self.volume.value += 0.01;
+        NSData *data = [[DeviceInfo defaultManager] volumeUp:self.deviceid];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    };
+    volume.downBlock = ^{
+        self.volume.value -= 0.01;
+        NSData *data = [[DeviceInfo defaultManager] volumeDown:self.deviceid];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    };
+    [volume start:self.view];
     
-    SocketManager *sock=[SocketManager defaultManager];
-    sock.delegate=self;
     //查询设备状态
     NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
     [sock.socket writeData:data withTimeout:1 tag:1];
@@ -158,6 +157,7 @@
     [self.volume setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
     self.volume.maximumTrackTintColor = [UIColor colorWithRed:16/255.0 green:17/255.0 blue:21/255.0 alpha:1];
     self.volume.minimumTrackTintColor = [UIColor colorWithRed:253/255.0 green:254/255.0 blue:254/255.0 alpha:1];
+    self.volume.userInteractionEnabled = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -213,7 +213,8 @@
     if([keyPath isEqualToString:@"volume"])
     {
         DeviceInfo *device=[DeviceInfo defaultManager];
-        self.volume.value=[[device valueForKey:@"volume"] floatValue];
+        //self.volume.value=[[device valueForKey:@"volume"] floatValue];
+        //[self changeVolume];
     }
 }
 
@@ -329,7 +330,14 @@
     }
 }
 
--(void)dealloc
+-(void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    VolumeManager *volume=[VolumeManager defaultManager];
+    [volume stop];
+}
+
+-(void) dealloc
 {
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device removeObserver:self forKeyPath:@"volume" context:nil];

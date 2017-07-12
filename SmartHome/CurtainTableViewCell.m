@@ -55,7 +55,19 @@
 }
 -(IBAction)save:(id)sender
 {
+    
+    Curtain *device=[[Curtain alloc] init];
+    [device setDeviceID:[self.deviceid intValue]];
+    [device setOpenvalue:self.slider.value * 100];
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
+    
     if ([sender isEqual:self.slider]) {
+        if (self.slider.value > 0) {
+            self.open.selected = YES;
+        }else{
+            self.open.selected = NO;
+        }
         NSData *data=[[DeviceInfo defaultManager] roll:self.slider.value * 100 deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:2];
@@ -84,9 +96,7 @@
             [_delegate onCurtainOpenBtnClicked:sender];
         }
     }
-     Curtain *device=[[Curtain alloc] init];
-    [device setDeviceID:[self.deviceid intValue]];
-    [device setOpenvalue:self.slider.value * 100];
+  
     
     if ([sender isEqual:self.open]) {
         [device setOpenvalue:100];
@@ -120,18 +130,11 @@
             [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
             
             [_scene setReadonly:NO];
-            //删除当前场景的当前硬件
-            NSMutableArray *devices = [NSMutableArray arrayWithObject:[NSString stringWithFormat:@"@%d",device.deviceID]];
-            [devices removeObject:[NSString stringWithFormat:@"@%d",device.deviceID]];
 
-            [_scene setDevices:devices];
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
         }
       
     }
     
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
     [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
   
 }

@@ -85,23 +85,6 @@ BOOL animating;
     animating = NO;
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-    
-    [super viewWillAppear:YES];
-
-    if (BLUETOOTH_MUSIC) {
-        AudioManager *audio=[AudioManager defaultManager];
-        
-        [audio.musicPlayer beginGeneratingPlaybackNotifications];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(musicPlayerStatedChanged:) name:MPMusicPlayerControllerPlaybackStateDidChangeNotification object:audio.musicPlayer];//播放时的操作（下一曲、上一曲、暂停）
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nowPlayingItemIsChanged:) name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification object:audio.musicPlayer];//正在播放的曲目
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(volumeIsChanged:) name:MPMusicPlayerControllerVolumeDidChangeNotification object:audio.musicPlayer];//调节音量的
-    }
-}
-
 -(void) initSlider
 {
     [self.voiceSlider setThumbImage:[UIImage imageNamed:@"lv_btn_adjust_normal"] forState:UIControlStateNormal];
@@ -152,24 +135,16 @@ BOOL animating;
     }
     [self naviToDevice];
     self.deviceid = [SQLManager singleDeviceWithCatalogID:bgmusic byRoom:self.roomID];
-    
-    float vol = BLUETOOTH_MUSIC ? 0 : [[AVAudioSession sharedInstance] outputVolume];
-    self.volume.value=vol*100;
-    self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
 
     self.volume.continuous = NO;
     [self.volume addTarget:self action:@selector(changeVolume) forControlEvents:UIControlEventValueChanged];
 
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device addObserver:self forKeyPath:@"volume" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
-    [[VolumeManager defaultManager] start];
+    [[VolumeManager defaultManager] start:nil];
     
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
-    if (BLUETOOTH_MUSIC) {
-        AudioManager *audio=[AudioManager defaultManager];
-        [audio initMusicAndPlay];
-    }
     
     [self.lastBtn setBackgroundImage:[UIImage imageNamed:@"control_button_pressed"] forState:UIControlStateSelected];
     [self.ipadPlay setImage:[UIImage imageNamed:@"TV_on"] forState:UIControlStateSelected];
@@ -212,63 +187,6 @@ BOOL animating;
     }
 }
 
-#pragma mark - MusicPlayer delegate
--(void)musicPlayerStatedChanged:(NSNotification *)paramNotification
-{
-    NSLog(@"Player State Changed");
-    self.songTitle.text=[self titleOfNowPlaying];
-    NSNumber * stateAsObject = [paramNotification.userInfo objectForKey:@"MPMusicPlayerControllerPlaybackStateKey"];
-    NSInteger state = [stateAsObject integerValue];
-    switch (state) {
-        case MPMusicPlaybackStateStopped:
-            
-            break;
-        case MPMusicPlaybackStatePlaying:
-            break;
-        case MPMusicPlaybackStatePaused:
-            break;
-        case MPMusicPlaybackStateInterrupted:
-            break;
-        case MPMusicPlaybackStateSeekingForward:
-            break;
-        case MPMusicPlaybackStateSeekingBackward:
-            break;
-            
-        default:
-            break;
-    }
-}
-
--(void)nowPlayingItemIsChanged:(NSNotification *)paramNotification
-{
-    NSLog(@"Playing Item is Changed");
-    self.songTitle.text=[self titleOfNowPlaying];
-}
-
--(void)volumeIsChanged:(NSNotification *)paramNotification
-{
-    NSLog(@"Volume Is Changed");
-    AudioManager *audio=[AudioManager defaultManager];
-    self.volume.value=audio.musicPlayer.volume*100;
-    self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
-    //[self save:nil];
-}
-
--(NSString*)titleOfNowPlaying
-{
-    AudioManager *audio=[AudioManager defaultManager];
-    if( audio.musicPlayer == nil ) {
-        return @"music Player is nil.";
-    }
-    
-    MPMediaItem* item = audio.musicPlayer.nowPlayingItem;
-    if( item == nil ) {
-        return @"playing.";
-    }
-    NSString* title = [item valueForKey:MPMediaItemPropertyTitle];
-    return title;
-}
-
 - (IBAction)toogle:(id)sender {
     UIButton *btn = (UIButton *)sender;
     NSData *data;
@@ -276,8 +194,10 @@ BOOL animating;
     btn.selected = !btn.selected;
     if (btn.selected) {
         data = [[DeviceInfo defaultManager] open:self.deviceid];
+        [self startSpin];
     }else{
         data = [[DeviceInfo defaultManager] close:self.deviceid];
+        [self stopSpin];
     }
     
     SocketManager *sock=[SocketManager defaultManager];
@@ -300,35 +220,18 @@ BOOL animating;
     NSData *data=[[DeviceInfo defaultManager] next:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
-    if (BLUETOOTH_MUSIC) {
-        AudioManager *audio= [AudioManager defaultManager];
-        
-        if ([[audio musicPlayer] indexOfNowPlayingItem]<audio.songs.count-1) {
-            [[audio musicPlayer] skipToNextItem];
-        }
-    }
 }
 
 - (IBAction)previousMusic:(id)sender {
     NSData *data=[[DeviceInfo defaultManager] previous:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
-    if (BLUETOOTH_MUSIC) {
-        AudioManager *audio= [AudioManager defaultManager];
-        if ([[audio musicPlayer] indexOfNowPlayingItem]>0) {
-            [[audio musicPlayer] skipToPreviousItem];
-        }
-    }
 }
 
 - (IBAction)pauseMusic:(id)sender {
     NSData *data=[[DeviceInfo defaultManager] pause:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
-    if (BLUETOOTH_MUSIC) {
-        AudioManager *audio= [AudioManager defaultManager];
-        [[audio musicPlayer] pause];
-    }
 }
 
 - (IBAction)playMusic:(id)sender {
@@ -340,11 +243,6 @@ BOOL animating;
         NSData *data=[[DeviceInfo defaultManager] play:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
-        
-        if (BLUETOOTH_MUSIC) {
-            AudioManager *audio= [AudioManager defaultManager];
-            [[audio musicPlayer] play];
-        }
         [self startSpin];
     }else{
        [btn setImage:[UIImage imageNamed:@"DVD_play"] forState:UIControlStateNormal];
@@ -352,29 +250,24 @@ BOOL animating;
         NSData *data=[[DeviceInfo defaultManager] pause:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
-        if (BLUETOOTH_MUSIC) {
-            AudioManager *audio= [AudioManager defaultManager];
-            [[audio musicPlayer] pause];
-        }
         [self stopSpin];
     }
     
     
 }
 
-- (IBAction)addSongsToMusicPlayer:(id)sender
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    //[[AudioManager defaultManager] addSongsToMusicPlayer:self.navigationController];
+    if([keyPath isEqualToString:@"volume"])
+    {
+        DeviceInfo *device=[DeviceInfo defaultManager];
+        self.volume.value=[[device valueForKey:@"volume"] floatValue];
+        [self changeVolume];
+    }
 }
 
 -(void)dealloc
 {
-    if (BLUETOOTH_MUSIC) {
-        AudioManager *audio= [AudioManager defaultManager];
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMusicPlayerControllerPlaybackStateDidChangeNotification object:audio.musicPlayer];
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification object:audio.musicPlayer];
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMusicPlayerControllerVolumeDidChangeNotification object:audio.musicPlayer];
-    }
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device removeObserver:self forKeyPath:@"volume" context:nil];
 }
