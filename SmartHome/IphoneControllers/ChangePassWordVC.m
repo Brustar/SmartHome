@@ -71,15 +71,19 @@
 }
 -(void)rightBtnClicked:(UIButton *)bbt
 {
-    if ([self.passWordField.text compare:self.confirmedPsd.text] == NSOrderedSame) {
-         [self sendRequest];
-        [self.navigationController popViewControllerAnimated:YES];
+    NSString *isDemo = [UD objectForKey:IsDemo];
+    if ([isDemo isEqualToString:@"YES"]) {
+        [MBProgressHUD showSuccess:@"真实用户才可以修改成功"];
+         [self.navigationController popViewControllerAnimated:YES];
     }else{
-        
-        [MBProgressHUD showError:@"两次密码不相同"];
+        if ([self.passWordField.text compare:self.confirmedPsd.text] == NSOrderedSame) {
+            [self sendRequest];
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            
+            [MBProgressHUD showError:@"两次密码不相同"];
+        }
     }
-   
-    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

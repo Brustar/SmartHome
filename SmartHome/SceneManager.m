@@ -284,7 +284,7 @@
             parameter = @{
                           @"token":[UD objectForKey:@"AuthorToken"],
                           @"optype":@(7),
-                          @"plist":fileName,
+                          @"plist":scenePath,
                           @"starttime":schedule.startTime,
                           @"endtime":schedule.endTime,
                           @"weekvalue":schedule.weekDays,

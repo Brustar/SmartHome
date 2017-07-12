@@ -210,7 +210,7 @@
     if (self.unreadcount == 0) {//未读消息
         cell.unreadcountImage.hidden = YES;
         cell.countLabel.hidden       = YES;
-        [self sendRequestForMsgWithItemId:self.itemID];
+//        [self sendRequestForMsgWithItemId:self.itemID];
         
     }else if(self.unreadcount == 1){
         cell.unreadcountImage.hidden = YES;

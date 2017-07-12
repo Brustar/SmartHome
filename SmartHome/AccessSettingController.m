@@ -330,15 +330,17 @@
         [alertVC dismissViewControllerAnimated:YES completion:nil];
     }];
     UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        //删除用户
-        [self deleteOrChangeManagerType:1 userID:_usrID withTag:3 usertype:[NSNumber numberWithInt:self.usertype]];
-        
-        
-        [self.managerType removeObjectAtIndex:indexPath.row];
-        [self.userArr removeObjectAtIndex:indexPath.row];
-        [self.userTableView reloadData];
-        [alertVC dismissViewControllerAnimated:YES completion:nil];
+        NSString *isDemo = [UD objectForKey:IsDemo];
+        if ([isDemo isEqualToString:@"YES"]) {
+            [MBProgressHUD showSuccess:@"此操作你没有权限"];
+        }else{
+            //删除用户
+            [self deleteOrChangeManagerType:1 userID:_usrID withTag:3 usertype:[NSNumber numberWithInt:self.usertype]];
+            [self.managerType removeObjectAtIndex:indexPath.row];
+            [self.userArr removeObjectAtIndex:indexPath.row];
+            [self.userTableView reloadData];
+            [alertVC dismissViewControllerAnimated:YES completion:nil];
+        }
     }];
     [alertVC addAction:cancelAction];
     [alertVC addAction:sureAction];
