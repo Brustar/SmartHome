@@ -106,7 +106,6 @@
     NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
     
     _scene = [[Scene alloc]initWhithoutSchedule];
-    _scene.roomID = self.roomId;
     [_scene setValuesForKeysWithDictionary:plistDic];
 
     [[DeviceInfo defaultManager] setEditingScene:NO];

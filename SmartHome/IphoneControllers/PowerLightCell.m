@@ -18,8 +18,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    [IOManager removeTempFile];
-    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
+    
+//     [IOManager removeTempFile];
     [self.addPowerLightBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.powerLightBtn addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
     [self.powerLightBtn setImage:[UIImage imageNamed:@"lv_icon_light_on"] forState:UIControlStateSelected];
@@ -42,7 +42,7 @@
 }
 
 - (IBAction)save:(id)sender {
-    
+    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     Light *device=[[Light alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setIsPoweron:self.powerLightBtn.selected];
@@ -79,6 +79,7 @@
             [_scene setReadonly:NO];
           
         }else{
+           
             if (ON_IPAD) {
                 [self.addPowerLightBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
             }else{
@@ -94,7 +95,7 @@
             //删除当前场景的当前硬件
             NSArray *devices = [[SceneManager defaultManager] subDeviceFromScene:_scene withDeivce:device.deviceID];
             [_scene setDevices:devices];
-            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
+//            [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
         }
         
     }

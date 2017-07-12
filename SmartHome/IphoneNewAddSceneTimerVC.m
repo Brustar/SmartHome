@@ -82,25 +82,25 @@
     
     if (self.startTimeStr.length >0) {
         self.starTimeLabel.text = self.startTimeStr;
-       
-        //将传入时间转化成需要的格式
-        NSDateFormatter *format=[[NSDateFormatter alloc]init];
-        [format setDateFormat:@"HH:mm"];
-        NSDate *fromdate=[format dateFromString:self.startTimeStr];
-        NSTimeZone *fromzone = [NSTimeZone systemTimeZone];
-        NSInteger frominterval = [fromzone secondsFromGMTForDate:fromdate];
-        NSDate *fromDate = [fromdate dateByAddingTimeInterval:frominterval];
-        fromDate = [self.clock angleToTime:1];
+//       
+//        //将传入时间转化成需要的格式
+//        NSDateFormatter *format=[[NSDateFormatter alloc]init];
+//        [format setDateFormat:@"HH:mm"];
+//        NSDate *fromdate=[format dateFromString:self.startTimeStr];
+//        NSTimeZone *fromzone = [NSTimeZone systemTimeZone];
+//        NSInteger frominterval = [fromzone secondsFromGMTForDate:fromdate];
+//        NSDate *fromDate = [fromdate dateByAddingTimeInterval:frominterval];
+//        fromDate = [self.clock angleToTime:1];
        
     }
     
     if (self.endTimeStr.length >0) {
         self.endTimeLabel.text = self.endTimeStr;
-        //将传入时间转化成需要的格式
-        NSDateFormatter *format=[[NSDateFormatter alloc]init];
-        [format setDateFormat:@"HH:mm"];
-        NSDate *endDate=[format dateFromString:self.endTimeStr];
-        endDate = [self.clock angleToTime:1];
+//        //将传入时间转化成需要的格式
+//        NSDateFormatter *format=[[NSDateFormatter alloc]init];
+//        [format setDateFormat:@"HH:mm"];
+//        NSDate *endDate=[format dateFromString:self.endTimeStr];
+//        endDate = [self.clock angleToTime:1];
     }
     
     if (self.repeatitionStr.length >0) {
