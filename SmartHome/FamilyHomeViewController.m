@@ -92,10 +92,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _deviceArray = [NSMutableArray array];
+    
     [self addNotifications];
     [self setupNaviBar];
     [self showNetStateView];
+    
     self.lightIcon.layer.cornerRadius =  self.lightIcon.frame.size.width/2;
     self.lightIcon.layer.masksToBounds = YES;
     self.lightIcon.backgroundColor = RGB(243, 152, 0, 1);
@@ -108,16 +109,26 @@
     self.airIcon.layer.masksToBounds = YES;
     self.airIcon.backgroundColor = RGB(0, 172, 151, 1);
     
-    _roomArray = [NSMutableArray array];
-    
-    [self getFamilyRoomStatusFromPlist];//获取缓存数据
-    [self fetchRoomDeviceStatus];//获取房间设备状态，温度，湿度, PM2.5
+    //获取房间状态
+    [self getRoomStateInfoByTcp];
     
     //开启网络状况监听器
     [self updateInterfaceWithReachability];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
     
+}
+
+- (void)getRoomStateInfoByTcp {
+    _deviceArray = [NSMutableArray array];
+    _roomArray = [NSMutableArray array];
+   [_roomArray addObjectsFromArray:[SQLManager getAllRoomsInfoWithoutIsAll]];
+    
+    //TCP 获取房间状态
+    SocketManager *sock = [SocketManager defaultManager];
+    sock.delegate = self;
+    NSData *data = [[DeviceInfo defaultManager] getRoomStateData];
+    [sock.socket writeData:data withTimeout:1 tag:100];
 }
 
 - (void)fetchRoomDeviceStatus {
@@ -195,7 +206,7 @@
 }
 
 - (void)refreshRoomDeviceStatus:(NSNotification *)noti {
-    [self fetchRoomDeviceStatus];//获取房间设备状态，温度，湿度, PM2.5
+    [self getRoomStateInfoByTcp];//获取房间设备状态，温度，湿度, PM2.5
 }
 
 - (void)netWorkDidChangedNotification:(NSNotification *)noti {
@@ -245,7 +256,7 @@
 {
     FamilyHomeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"familyHomePageCell" forIndexPath:indexPath];
     
-    RoomStatus *roomInfo = self.roomArray[indexPath.row];
+    Room *roomInfo = self.roomArray[indexPath.row];
     
     [cell setRoomAndDeviceStatus:roomInfo];
     
@@ -256,9 +267,9 @@
 {
     UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
     FamilyHomeDetailViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"familyHomeDetailVC"];
-    RoomStatus *roomInfo = self.roomArray[indexPath.row];
-    vc.roomID = roomInfo.roomId;
-    vc.roomName = roomInfo.roomName;
+    Room *roomInfo = self.roomArray[indexPath.row];
+    vc.roomID = roomInfo.rId;
+    vc.roomName = roomInfo.rName;
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -357,44 +368,78 @@
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
-    Proto proto=protocolFromData(data);
-    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
-        return;
-    }
-    //同步设备状态
-    if(proto.cmd == 0x01){
-        
-        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
-        Device *device = [SQLManager getDeviceWithDeviceID:devID.intValue];
-        
-        if (proto.action.state==0x6A) { //温度
-          device.currTemp  = proto.action.RValue;
+    if (tag == 100) {
+        Proto proto=protocolFromData(data);
+        if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
+            return;
+        }
+        //同步设备状态
+        if(proto.cmd == 0x01){
+            
+            NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+            Device *device = [SQLManager getDeviceWithDeviceID:devID.intValue];
+            
+            device.actionState = proto.action.state;
+            
+            if (proto.action.state==0x6A) { //温度
+                device.currTemp  = proto.action.RValue;
+                
+            }
+            if (proto.action.state==0x8A) { // 湿度
+                device.humidity = proto.action.RValue;
+            }
+            if (proto.action.state==0x7F) { // PM2.5
+                device.pm25 = proto.action.RValue;
+            }
+            
+            if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) { //开关
+                device.power = proto.action.state;
+            }
+            
+            [_deviceArray addObject:device];
             
         }
-        if (proto.action.state==0x8A) { // 湿度
-            device.humidity = proto.action.RValue;
-        }
-        if (proto.action.state==0x7F) { // PM2.5
-            device.pm25 = proto.action.RValue;
-        }
         
-        if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) { //开关
-            device.power = proto.action.state;
-        }
-        
-        [_deviceArray addObject:device];
-        
-        // 判断是否结束
-        if (1) {
-            // 处理接收到的数据（按房间分组）
+        if (proto.cmd == 0x06) { //  结束标志
+            // 处理接收到的数据
             [self handleData];
+            [self.roomCollectionView reloadData];
         }
     }
-    
 }
 
 - (void)handleData {
+    [_roomArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+        Room *room = (Room *)obj;
+        [_deviceArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+          
+            Device *device = (Device *)obj;
+            if (device.rID == room.rId) {
+                
+                if (device.actionState == 0x6A) {   //温度
+                    room.tempture = device.currTemp;
+                }else if (device.actionState == 0x8A) {   // 湿度
+                    room.humidity = device.humidity;
+                }else if (device.actionState == 0x7F) {   //PM2.5
+                    room.pm25 = device.pm25;
+                }else if (device.actionState == PROTOCOL_OFF) {  // 关
+                    
+                }else if (device.actionState == PROTOCOL_ON) {   // 开
+                    if (device.subTypeId == 1) {   //灯光
+                        room.lightStatus = 1;
+                    }else if(device.subTypeId == 2) {   //空调
+                        room.airStatus = 1;
+                    }else if (device.subTypeId == 3) {    //影音
+                        room.avStatus = 1;
+                    }
+                }
+                
+                
+            }
+            
+        }];
     
+    }];
 }
 
 #pragma mark - SingleMaskViewDelegate
@@ -402,9 +447,9 @@
     UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
     FamilyHomeDetailViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"familyHomeDetailVC"];
     if (self.roomArray.count >1) {
-        RoomStatus *roomInfo = self.roomArray[1];
-        vc.roomID = roomInfo.roomId;
-        vc.roomName = roomInfo.roomName;
+        Room *roomInfo = self.roomArray[1];
+        vc.roomID = roomInfo.rId;
+        vc.roomName = roomInfo.rName;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
@@ -434,9 +479,9 @@
     UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Family" bundle:nil];
     FamilyHomeDetailViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"familyHomeDetailVC"];
     if (self.roomArray.count >1) {
-        RoomStatus *roomInfo = self.roomArray[1];
-        vc.roomID = roomInfo.roomId;
-        vc.roomName = roomInfo.roomName;
+        Room *roomInfo = self.roomArray[1];
+        vc.roomID = roomInfo.rId;
+        vc.roomName = roomInfo.rName;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

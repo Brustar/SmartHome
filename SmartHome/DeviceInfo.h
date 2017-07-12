@@ -177,4 +177,6 @@ enum{
 -(NSData *) repeat:(NSString *)deviceID;
 -(NSData *) shuffle:(NSString *)deviceID;
 
+- (NSData *)getRoomStateData;//获取房间状态信息（灯，影音，空调，温度，湿度，PM2.5）
+
 @end

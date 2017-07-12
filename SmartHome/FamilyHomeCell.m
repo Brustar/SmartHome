@@ -10,23 +10,23 @@
 
 @implementation FamilyHomeCell
 
-- (void)setRoomAndDeviceStatus:(RoomStatus *)info {
-    self.roomNameLabel.text = info.roomName;
+- (void)setRoomAndDeviceStatus:(Room *)info {
+    self.roomNameLabel.text = info.rName;
     
-    if (info.temperature.integerValue >0) {
-        self.temperatureLabel.text = [NSString stringWithFormat:@"%@℃", info.temperature];
+    if (info.tempture >0) {
+        self.temperatureLabel.text = [NSString stringWithFormat:@"%ld℃", info.tempture];
     }else {
         self.temperatureLabel.text = [NSString stringWithFormat:@"%@℃", @"--"];
     }
     
-    if (info.humidity.integerValue >0) {
-        self.humidityLabel.text = [NSString stringWithFormat:@"%@%@", info.humidity, @"%"];
+    if (info.humidity >0) {
+        self.humidityLabel.text = [NSString stringWithFormat:@"%ld%@", info.humidity, @"%"];
     }else {
         self.humidityLabel.text = [NSString stringWithFormat:@"%@%@", @"--", @"%"];
     }
     
     self.pm25Label.hidden = YES;
-    NSString *pm25 = [NSString stringWithFormat:@"%@%@%@", @"PM2.5:", info.pm25, @"μg/m³"];
+    NSString *pm25 = [NSString stringWithFormat:@"%@%ld%@", @"PM2.5:", info.pm25, @"μg/m³"];
     
     CGFloat pm25X = -66.0f;
     CGFloat pm25Y = 80.0f;
@@ -73,7 +73,7 @@
     [self addRingForPM25:info];
 }
 
-- (void)addRingForDevice:(RoomStatus *)info {
+- (void)addRingForDevice:(Room *)info {
     CGFloat ringR = 57;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         if (UI_SCREEN_WIDTH == 414) {
@@ -87,21 +87,21 @@
     
     
     NSMutableArray *deviceColorArray = [NSMutableArray array];
-    if (info.lightStatus == 0 && info.airconditionerStatus == 0 && info.mediaStatus == 0) {
+    if (info.lightStatus == 0 && info.airStatus == 0 && info.avStatus == 0) {
         [deviceColorArray addObjectsFromArray:@[Dev_OFF_COLOR,Dev_OFF_COLOR,Dev_OFF_COLOR]];
-    }else if (info.lightStatus == 1 && info.airconditionerStatus == 0 && info.mediaStatus == 0) {
+    }else if (info.lightStatus == 1 && info.airStatus == 0 && info.avStatus == 0) {
         [deviceColorArray addObjectsFromArray:@[Light_ON_COLOR,Dev_OFF_COLOR,Dev_OFF_COLOR]];
-    }else if (info.lightStatus == 1 && info.airconditionerStatus == 1 && info.mediaStatus == 0) {
+    }else if (info.lightStatus == 1 && info.airStatus == 1 && info.avStatus == 0) {
         [deviceColorArray addObjectsFromArray:@[Light_ON_COLOR,Air_ON_COLOR,Dev_OFF_COLOR]];
-    }else if (info.lightStatus == 1 && info.airconditionerStatus == 1 && info.mediaStatus == 1) {
+    }else if (info.lightStatus == 1 && info.airStatus == 1 && info.avStatus == 1) {
         [deviceColorArray addObjectsFromArray:@[Light_ON_COLOR,Air_ON_COLOR,AV_ON_COLOR]];
-    }else if (info.lightStatus == 0 && info.airconditionerStatus == 1 && info.mediaStatus == 0) {
+    }else if (info.lightStatus == 0 && info.airStatus == 1 && info.avStatus == 0) {
         [deviceColorArray addObjectsFromArray:@[Dev_OFF_COLOR,Air_ON_COLOR,Dev_OFF_COLOR]];
-    }else if (info.lightStatus == 0 && info.airconditionerStatus == 1 && info.mediaStatus == 1) {
+    }else if (info.lightStatus == 0 && info.airStatus == 1 && info.avStatus == 1) {
         [deviceColorArray addObjectsFromArray:@[Dev_OFF_COLOR,Air_ON_COLOR,AV_ON_COLOR]];
-    }else if (info.lightStatus == 0 && info.airconditionerStatus == 0 && info.mediaStatus == 1) {
+    }else if (info.lightStatus == 0 && info.airStatus == 0 && info.avStatus == 1) {
         [deviceColorArray addObjectsFromArray:@[Dev_OFF_COLOR,Dev_OFF_COLOR,AV_ON_COLOR]];
-    }else if (info.lightStatus == 1 && info.airconditionerStatus == 0 && info.mediaStatus == 1) {
+    }else if (info.lightStatus == 1 && info.airStatus == 0 && info.avStatus == 1) {
         [deviceColorArray addObjectsFromArray:@[Light_ON_COLOR,Dev_OFF_COLOR,AV_ON_COLOR]];
     }
     
@@ -109,7 +109,7 @@
     [LayerUtil createRing:ringR pos:CGPointMake(self.frame.size.width/2, self.frame.size.width/2) colors:deviceColorArray container:self];
 }
 
-- (void)addRingForPM25:(RoomStatus *)info {
+- (void)addRingForPM25:(Room *)info {
     
     CGFloat ringR = 75;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
@@ -123,7 +123,7 @@
     }
     
     
-    [LayerUtil createRingForPM25:ringR pos:CGPointMake(self.frame.size.width/2, self.frame.size.width/2) colors:@[PM25_COLOR] pm25Value:[info.pm25 floatValue] container:self];
+    [LayerUtil createRingForPM25:ringR pos:CGPointMake(self.frame.size.width/2, self.frame.size.width/2) colors:@[PM25_COLOR] pm25Value:info.pm25 container:self];
 }
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RoomStatus.h"
+#import "Room.h"
 #import "LayerUtil.h"
 #import "CoreTextArcView.h"
 
@@ -23,9 +23,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *temperatureLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pm25Label;
 
-- (void)setRoomAndDeviceStatus:(RoomStatus *)info;//设置房间名字，温／湿度/PM2.5，设备开关状态
+- (void)setRoomAndDeviceStatus:(Room *)info;//设置房间名字，温／湿度/PM2.5，设备开关状态
 
-- (void)addRingForDevice:(RoomStatus *)info;
-- (void)addRingForPM25:(RoomStatus *)info;
+- (void)addRingForDevice:(Room *)info;
+- (void)addRingForPM25:(Room *)info;
 
 @end
