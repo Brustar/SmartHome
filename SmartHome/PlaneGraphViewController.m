@@ -154,7 +154,7 @@
     
     
     _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:music_icon imgHighlight:music_icon target:self action:@selector(rightBtnClicked:)];
-    _leftBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:@"backBtn" imgHighlight:@"backBtn" target:self action:@selector(leftBtnClicked:)];
+
     if (isPlaying) {
         UIImageView * imageView = _naviRightBtn.imageView ;
         
@@ -190,7 +190,7 @@
         }
     }
     [self setNaviBarRightBtn:_naviRightBtn];
-    [self setNaviBarLeftBtn:_leftBtn];
+
 }
 
 - (void)rightBtnClicked:(UIButton *)btn {
@@ -213,11 +213,6 @@
     }
 }
 
--(void)leftBtnClicked:(UIButton *)btn
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-
-}
 - (void)onBgButtonClicked:(UIButton *)sender {
     if (_nowMusicController) {
         [_nowMusicController.view removeFromSuperview];
