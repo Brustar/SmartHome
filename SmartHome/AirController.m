@@ -323,7 +323,6 @@ static NSString *const airCellIdentifier = @"airCell";
 #pragma mark - UITouchDelegate
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    
     UITouch *touch = [touches anyObject];
     
     NSUInteger toucheNum = [[event allTouches] count];//有几个手指触摸屏幕
