@@ -73,6 +73,7 @@
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     if (auothorToken) {
         NSDictionary *dict = @{@"token":auothorToken,@"optype":[NSNumber numberWithInteger:1],@"nickname":self.changeNameTextField.text};
+        NSLog(@"%@",self.changeNameTextField.text);
         HttpManager *http=[HttpManager defaultManager];
         http.delegate = self;
         http.tag = 1;
