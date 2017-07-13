@@ -33,7 +33,7 @@
 #define  minSpace 20
 #define  maxSpace 40
 
-@interface PlaneGraphViewController : CustomViewController<UICollectionViewDelegate, UICollectionViewDataSource,HttpDelegate, NowMusicControllerDelegate, TouchImageDelegate, SingleMaskViewDelegate>
+@interface PlaneGraphViewController : CustomViewController<UICollectionViewDelegate, UICollectionViewDataSource,HttpDelegate, NowMusicControllerDelegate, TouchImageDelegate, SingleMaskViewDelegate, TcpRecvDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *roomStatusCollectionView;
 @property (nonatomic, strong) NSMutableArray *roomArray;
 @property(nonatomic, strong) AFNetworkReachabilityManager *afNetworkReachabilityManager;
@@ -45,5 +45,6 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *floorScrollView;
 @property (weak, nonatomic) IBOutlet TouchImage *planeGraph;
 @property (nonatomic,strong) BaseTabBarController *baseTabbarController;
+@property (nonatomic, strong) NSMutableArray *deviceArray;
 
 @end
