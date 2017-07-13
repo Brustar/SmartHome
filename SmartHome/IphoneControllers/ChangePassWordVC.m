@@ -29,7 +29,11 @@
     
     [self setNaviBarTitle:@"设置新密码"];
     _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
-    
+     _naviRightBtn.enabled = NO;
+     [_naviRightBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+     [self.confirmedPsd addTarget:self action:@selector(endediting) forControlEvents:UIControlEventEditingDidEnd];
+     [self.passWordField addTarget:self action:@selector(endediting) forControlEvents:UIControlEventEditingDidEnd];
+
     [self setNaviBarRightBtn:_naviRightBtn];
     if (ON_IPAD) {
         [self adjustNaviBarFrameForSplitView];
@@ -37,10 +41,19 @@
         [self setNaviBarRightBtnForSplitView:_naviRightBtn];
     }
     self.NameLabel.text = self.nameStr;
-    self.passWordField.placeholder = @"请设置逸云密码";
-    self.confirmedPsd.placeholder = @"请再次填入";
+    [self.passWordField setValue:[UIColor grayColor] forKeyPath:@"_placeholderLabel.textColor"];
+    [self.confirmedPsd setValue:[UIColor grayColor] forKeyPath:@"_placeholderLabel.textColor"];
+   
 }
-
+-(void)endediting
+{
+    if (self.confirmedPsd.text.length == 0) {
+        _naviRightBtn.enabled = NO;
+        [_naviRightBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+    }else{
+        _naviRightBtn.enabled = YES;
+    }
+}
 -(void)sendRequest
 {
     NSString *url = [NSString stringWithFormat:@"%@Cloud/user_info.aspx",[IOManager httpAddr]];

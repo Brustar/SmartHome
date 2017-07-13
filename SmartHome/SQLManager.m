@@ -7,7 +7,7 @@
 //
 
 #import "SQLManager.h"
-
+#import "CryptoManager.h"
 #import "DeviceInfo.h"
 #import "Room.h"
 #import "Scene.h"
@@ -2515,7 +2515,7 @@
         NSLog(@"Could not open db");
         return NO;
     }
-    BOOL result = [db executeUpdate:[NSString stringWithFormat:@"insert or replace into Users values(%ld, %ld, '%@', '%@', '%@',  %ld, %ld, '%@', '%@', '%@', null, null, null, null);", (long)info.userID, (long)info.userType, info.userName, info.nickName, info.vip, (long)info.age, (long)info.sex, info.headImgURL, info.phoneNum, info.signature]];
+    BOOL result = [db executeUpdate:[NSString stringWithFormat:@"insert or replace into Users values(%ld, %ld, '%@', '%@', '%@',  %ld, %ld, '%@', '%@', '%@', null, null, null, null);", (long)info.userID, (long)info.userType, info.userName, [info.nickName decodeBase], info.vip, (long)info.age, (long)info.sex, info.headImgURL, info.phoneNum, info.signature]];
     
     [db close];
     return result;
