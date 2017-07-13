@@ -59,9 +59,9 @@
     self.nameTextField.delegate = self;
     self.pwdTextField.delegate = self;
     
-    self.nameTextField.text = [[NSUserDefaults  standardUserDefaults] objectForKey:@"Account"];
+    //self.nameTextField.text = [[NSUserDefaults  standardUserDefaults] objectForKey:@"Account"];
     userType = [[UD objectForKey:@"Type"] intValue];
-    self.pwdTextField.text = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Password"] decryptWithDes:DES_KEY];
+    //self.pwdTextField.text = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Password"] decryptWithDes:DES_KEY];
     UserType =[[UD objectForKey:@"UserType"] intValue];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -763,7 +763,13 @@ NSArray *array = [NSArray arrayWithObjects:
         if ([responseObject[@"result"] intValue]==0) {
             
             //登录成功，才缓存用户账号，密码，登录类型
-            [IOManager writeUserdefault:self.nameTextField.text forKey:@"Account"];
+            NSString *isDemo = [UD objectForKey:IsDemo];
+            if ([isDemo isEqualToString:@"YES"]) {
+                [IOManager writeUserdefault:@"DemoUser" forKey:@"Account"];
+            }else {
+                [IOManager writeUserdefault:self.nameTextField.text forKey:@"Account"];
+            }
+            
             [IOManager writeUserdefault:[NSNumber numberWithInteger:self.userType] forKey:@"Type"];
             [IOManager writeUserdefault:responseObject[@"isplaying"] forKey:@"IsPlaying"];//正在播放标识
             [IOManager writeUserdefault:[self.pwdTextField.text encryptWithDes:DES_KEY] forKey:@"Password"];

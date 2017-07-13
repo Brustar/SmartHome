@@ -39,8 +39,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-//    [self getUserInfoFromDB];
-//    [self fetchUserInfo];
+     [self addNotifications];
     if (ON_IPAD) {
         self.UserinfoLeadingConstraint.constant = 20;
         self.UserinfoTrailingConstraint.constant = 20;
@@ -48,7 +47,17 @@
 
      [self.userinfoTableView reloadData];
 }
-
+- (void)addNotifications {
+   
+    [NC addObserver:self selector:@selector(refreshNickName:) name:@"refreshNickName" object:nil];
+}
+-(void)refreshNickName:(NSNotification *)fication
+{
+    NSString * nickName = fication.object;
+    _userInfomation.nickName = nickName;
+    [self refreshUI];
+    
+}
 - (void)refreshUI {
     
     NSInteger userType = [[UD objectForKey:@"UserType"] integerValue];
