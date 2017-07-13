@@ -107,9 +107,37 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="humidity" translatesAutoresizingMaskIntoConstraints="NO" id="bqa-Zt-nu0">
                                 <rect key="frame" x="10" y="124" width="141" height="141"/>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wic-Uq-Uwc" userLabel="humidity_hand">
+                                <rect key="frame" x="77.5" y="187" width="6" height="41"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="clock_hand" translatesAutoresizingMaskIntoConstraints="NO" id="iMv-zx-G27" userLabel="humidity_clock_hand">
+                                        <rect key="frame" x="-0.5" y="0.0" width="6" height="41"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="8Iy-fI-su9"/>
+                                    <constraint firstAttribute="width" constant="6" id="ama-01-8IQ"/>
+                                </constraints>
+                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pm2.5" translatesAutoresizingMaskIntoConstraints="NO" id="416-2C-dGu">
                                 <rect key="frame" x="853" y="124" width="141" height="141"/>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1pT-sS-XJR" userLabel="pm_hand">
+                                <rect key="frame" x="920.5" y="187" width="6" height="41"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="clock_hand" translatesAutoresizingMaskIntoConstraints="NO" id="FVV-L9-XEE" userLabel="pm_clock_hand">
+                                        <rect key="frame" x="-0.5" y="0.0" width="6" height="41"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="hCC-g7-WBH"/>
+                                    <constraint firstAttribute="width" constant="6" id="rIq-fm-OWN"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Frd-EU-W7z" userLabel="disk">
                                 <rect key="frame" x="349" y="185" width="326" height="326"/>
                                 <state key="normal" image="air_base"/>
@@ -177,7 +205,7 @@
                                     <action selector="changeMode:" destination="rZG-4r-cjU" eventType="touchUpInside" id="QxK-0c-KQO"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XzR-uw-rsU">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XzR-uw-rsU" userLabel="pan">
                                 <rect key="frame" x="392" y="253" width="239" height="239"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Air_glory" translatesAutoresizingMaskIntoConstraints="NO" id="lRp-H9-4uS">
@@ -199,12 +227,6 @@
                                     <constraint firstAttribute="height" constant="122" id="VJ7-Ib-ftI"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock_hand" translatesAutoresizingMaskIntoConstraints="NO" id="FVV-L9-XEE" userLabel="pm_clock_hand">
-                                <rect key="frame" x="920" y="187" width="6" height="41"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock_hand" translatesAutoresizingMaskIntoConstraints="NO" id="iMv-zx-G27" userLabel="humidity_clock_hand">
-                                <rect key="frame" x="78" y="187" width="6" height="41"/>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" tag="101" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="air_dot_blue" translatesAutoresizingMaskIntoConstraints="NO" id="Pqi-Su-29H" userLabel="air_dot_blue_16">
                                 <rect key="frame" x="431" y="378" width="6" height="6"/>
                             </imageView>
@@ -336,7 +358,6 @@
                             <constraint firstItem="lqj-OD-bSw" firstAttribute="centerY" secondItem="416-2C-dGu" secondAttribute="centerY" constant="10" id="8no-Jn-rg2"/>
                             <constraint firstItem="3YW-mv-bOb" firstAttribute="centerY" secondItem="Frd-EU-W7z" secondAttribute="centerY" constant="-56" id="9aT-FR-ucq"/>
                             <constraint firstAttribute="trailing" secondItem="Jnm-1r-xpE" secondAttribute="trailing" id="9v7-vI-xTL"/>
-                            <constraint firstItem="nvL-WE-vqh" firstAttribute="centerY" secondItem="iMv-zx-G27" secondAttribute="centerY" id="9zg-bq-NGd"/>
                             <constraint firstItem="1Hq-fE-z7m" firstAttribute="centerX" secondItem="xdI-lZ-RTf" secondAttribute="centerX" id="AOU-3S-5fv"/>
                             <constraint firstItem="XzR-uw-rsU" firstAttribute="centerY" secondItem="1QX-zF-SNF" secondAttribute="centerY" constant="-11" id="BCa-db-gbf"/>
                             <constraint firstItem="ATR-fO-sIw" firstAttribute="centerX" secondItem="3YW-mv-bOb" secondAttribute="centerX" id="BS4-2z-N8t"/>
@@ -348,8 +369,7 @@
                             <constraint firstItem="ba2-IP-nb6" firstAttribute="centerX" secondItem="aaM-uw-fQQ" secondAttribute="centerX" id="Ei6-Cd-E8y"/>
                             <constraint firstItem="FpM-l1-sfN" firstAttribute="centerX" secondItem="YRk-Yw-OX5" secondAttribute="centerX" id="Ery-AO-kAc"/>
                             <constraint firstItem="FpM-l1-sfN" firstAttribute="centerY" secondItem="YRk-Yw-OX5" secondAttribute="centerY" id="Fwi-bB-nf0"/>
-                            <constraint firstItem="iMv-zx-G27" firstAttribute="centerY" secondItem="bqa-Zt-nu0" secondAttribute="centerY" constant="13" id="GV8-dd-NkX"/>
-                            <constraint firstItem="FVV-L9-XEE" firstAttribute="centerX" secondItem="416-2C-dGu" secondAttribute="centerX" id="GWY-Ky-RxP"/>
+                            <constraint firstItem="Wic-Uq-Uwc" firstAttribute="centerY" secondItem="bqa-Zt-nu0" secondAttribute="centerY" constant="13" id="HNK-0w-BFi"/>
                             <constraint firstAttribute="trailingMargin" secondItem="h9F-4O-d1l" secondAttribute="trailing" constant="60" id="HPD-1U-KOv"/>
                             <constraint firstItem="bTh-HF-cqv" firstAttribute="top" secondItem="bDP-kR-KBH" secondAttribute="bottom" constant="44" id="HW1-aQ-6md"/>
                             <constraint firstItem="kih-wX-oYB" firstAttribute="centerY" secondItem="CuY-yd-ZOa" secondAttribute="centerY" id="IMW-za-U9A"/>
@@ -364,11 +384,11 @@
                             <constraint firstAttribute="trailingMargin" secondItem="416-2C-dGu" secondAttribute="trailing" constant="10" id="Ncs-Vm-cbI"/>
                             <constraint firstItem="aaM-uw-fQQ" firstAttribute="centerY" secondItem="Frd-EU-W7z" secondAttribute="centerY" constant="-29" id="Nvk-3p-NTq"/>
                             <constraint firstItem="ba2-IP-nb6" firstAttribute="centerY" secondItem="aaM-uw-fQQ" secondAttribute="centerY" id="QXl-tI-JmH"/>
-                            <constraint firstItem="iMv-zx-G27" firstAttribute="centerX" secondItem="bqa-Zt-nu0" secondAttribute="centerX" id="QzQ-ge-pNh"/>
                             <constraint firstItem="Abj-Of-tAL" firstAttribute="centerX" secondItem="ddW-Ue-bnR" secondAttribute="centerX" id="ReM-PG-PLg"/>
                             <constraint firstItem="WWd-JJ-45g" firstAttribute="centerY" secondItem="Jnm-1r-xpE" secondAttribute="centerY" id="S3R-Q0-NCH"/>
                             <constraint firstItem="Bhe-Ph-avk" firstAttribute="centerX" secondItem="Frd-EU-W7z" secondAttribute="centerX" constant="74" id="SwV-cc-Q5E"/>
                             <constraint firstItem="Dyo-he-TZE" firstAttribute="centerY" secondItem="Frd-EU-W7z" secondAttribute="centerY" constant="33" id="U0d-aS-Cdi"/>
+                            <constraint firstItem="1pT-sS-XJR" firstAttribute="centerY" secondItem="416-2C-dGu" secondAttribute="centerY" constant="13" id="UHm-1i-LXQ"/>
                             <constraint firstItem="nvL-WE-vqh" firstAttribute="leading" secondItem="1QX-zF-SNF" secondAttribute="leadingMargin" constant="39" id="USE-KG-Adp"/>
                             <constraint firstItem="WWd-JJ-45g" firstAttribute="trailing" secondItem="Jnm-1r-xpE" secondAttribute="trailing" constant="-5" id="VgA-yN-9nG"/>
                             <constraint firstItem="Dyo-he-TZE" firstAttribute="centerX" secondItem="Frd-EU-W7z" secondAttribute="centerX" constant="-78" id="WG2-cV-Kuc"/>
@@ -380,10 +400,12 @@
                             <constraint firstItem="5s4-i7-ira" firstAttribute="centerY" secondItem="syB-Ch-Od3" secondAttribute="centerY" id="atW-tC-KWK"/>
                             <constraint firstItem="416-2C-dGu" firstAttribute="top" secondItem="bDP-kR-KBH" secondAttribute="bottom" constant="104" id="bPB-ah-NtR"/>
                             <constraint firstItem="mGQ-8k-r0K" firstAttribute="centerX" secondItem="Frd-EU-W7z" secondAttribute="centerX" constant="37" id="c1A-Ge-ncs"/>
+                            <constraint firstItem="Wic-Uq-Uwc" firstAttribute="centerX" secondItem="bqa-Zt-nu0" secondAttribute="centerX" id="c6k-xg-v4t"/>
                             <constraint firstItem="Jnm-1r-xpE" firstAttribute="leading" secondItem="1QX-zF-SNF" secondAttribute="leading" id="cDf-hR-o3N"/>
                             <constraint firstItem="syB-Ch-Od3" firstAttribute="centerX" secondItem="Frd-EU-W7z" secondAttribute="centerX" constant="74" id="d0S-4w-usq"/>
                             <constraint firstItem="h9F-4O-d1l" firstAttribute="centerX" secondItem="lqj-OD-bSw" secondAttribute="centerX" id="eYE-td-aLw"/>
                             <constraint firstItem="ei2-zo-KB5" firstAttribute="centerY" secondItem="RAp-mu-gNW" secondAttribute="centerY" id="fpH-6X-Wzm"/>
+                            <constraint firstItem="1pT-sS-XJR" firstAttribute="centerX" secondItem="416-2C-dGu" secondAttribute="centerX" id="g0I-6K-MTq"/>
                             <constraint firstItem="gqn-iL-x6w" firstAttribute="centerY" secondItem="U66-Ii-cf4" secondAttribute="centerY" id="gn8-kj-QAc"/>
                             <constraint firstItem="bqa-Zt-nu0" firstAttribute="leading" secondItem="1QX-zF-SNF" secondAttribute="leading" constant="10" id="hBg-D0-ddn"/>
                             <constraint firstItem="ei2-zo-KB5" firstAttribute="leading" secondItem="Jnm-1r-xpE" secondAttribute="leading" constant="5" id="hxb-Jh-SCX"/>
@@ -406,7 +428,6 @@
                             <constraint firstItem="kih-wX-oYB" firstAttribute="centerX" secondItem="CuY-yd-ZOa" secondAttribute="centerX" id="rGf-Xb-ehL"/>
                             <constraint firstItem="YRk-Yw-OX5" firstAttribute="centerY" secondItem="Frd-EU-W7z" secondAttribute="centerY" constant="-65" id="rOZ-aU-L6t"/>
                             <constraint firstItem="syB-Ch-Od3" firstAttribute="centerY" secondItem="Frd-EU-W7z" secondAttribute="centerY" constant="-9" id="rZb-sX-FAR"/>
-                            <constraint firstItem="FVV-L9-XEE" firstAttribute="centerY" secondItem="416-2C-dGu" secondAttribute="centerY" constant="13" id="rnV-lZ-fBU"/>
                             <constraint firstItem="9pe-Vl-6Ez" firstAttribute="centerX" secondItem="mGQ-8k-r0K" secondAttribute="centerX" id="sEn-Kd-8uj"/>
                             <constraint firstItem="GeX-Ow-7B7" firstAttribute="centerY" secondItem="XzR-uw-rsU" secondAttribute="centerY" id="sHe-xf-BqD"/>
                             <constraint firstItem="axb-Mm-tPs" firstAttribute="centerY" secondItem="ija-D6-jkm" secondAttribute="centerY" id="sNX-ZZ-Obs"/>
@@ -415,6 +436,7 @@
                             <constraint firstItem="Bhe-Ph-avk" firstAttribute="centerY" secondItem="Frd-EU-W7z" secondAttribute="centerY" constant="33" id="tgO-0d-bCO"/>
                             <constraint firstItem="kvm-ZG-GWR" firstAttribute="centerY" secondItem="Bhe-Ph-avk" secondAttribute="centerY" id="ucE-Sr-Ph3"/>
                             <constraint firstItem="Frd-EU-W7z" firstAttribute="centerX" secondItem="1QX-zF-SNF" secondAttribute="centerX" id="vNP-QA-qtE"/>
+                            <constraint firstItem="nvL-WE-vqh" firstAttribute="centerY" secondItem="Wic-Uq-Uwc" secondAttribute="centerY" id="wTm-Gc-LsG"/>
                             <constraint firstItem="1Hq-fE-z7m" firstAttribute="centerY" secondItem="xdI-lZ-RTf" secondAttribute="centerY" id="yJi-2n-GEj"/>
                             <constraint firstItem="Frd-EU-W7z" firstAttribute="top" secondItem="bqa-Zt-nu0" secondAttribute="bottom" constant="-80" id="zxt-Y7-N7g"/>
                         </constraints>
