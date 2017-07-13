@@ -316,7 +316,7 @@
 
 +(Device*)deviceMdoelByFMResultSet:(FMResultSet *)resultSet 
 {
-    Device *device = [Device new];
+    Device *device = [[Device alloc] init];
     device.eID = [resultSet intForColumn:@"ID"];
     device.name = [resultSet stringForColumn:@"NAME"];
     device.sn = [resultSet stringForColumn:@"sn"];

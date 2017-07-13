@@ -377,7 +377,7 @@
     [MBProgressHUD showError:@"已经是最后一步了"];
 }
 
-- (void)onSkipButtonClicked:(UIButton *)btn {
+- (void)onSkipButtonClicked:(UIButton *)btn pageType:(PageTye)pageType {
     [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageChatBtn];
     [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageEnterChat];
     [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageEnterFamily];

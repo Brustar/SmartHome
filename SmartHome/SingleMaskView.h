@@ -63,7 +63,7 @@
 
 @optional
 - (void)onNextButtonClicked:(UIButton *)btn pageType:(PageTye)pageType;
-- (void)onSkipButtonClicked:(UIButton *)btn;
+- (void)onSkipButtonClicked:(UIButton *)btn pageType:(PageTye)pageType;
 - (void)onTransparentBtnClicked:(UIButton *)btn;
 
 @end

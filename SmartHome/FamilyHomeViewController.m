@@ -368,44 +368,43 @@
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
-    if (tag == 100) {
         Proto proto=protocolFromData(data);
         if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
             return;
         }
         //同步设备状态
-        if(proto.cmd == 0x01){
+        if(proto.cmd == 0x01) {
             
             NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
             Device *device = [SQLManager getDeviceWithDeviceID:devID.intValue];
             
-            device.actionState = proto.action.state;
-            
-            if (proto.action.state==0x6A) { //温度
-                device.currTemp  = proto.action.RValue;
+            if (device) {
+                device.actionState = proto.action.state;
                 
-            }
-            if (proto.action.state==0x8A) { // 湿度
-                device.humidity = proto.action.RValue;
-            }
-            if (proto.action.state==0x7F) { // PM2.5
-                device.pm25 = proto.action.RValue;
+                if (proto.action.state==0x6A) { //温度
+                    device.currTemp  = proto.action.RValue;
+                    
+                }
+                if (proto.action.state==0x8A) { // 湿度
+                    device.humidity = proto.action.RValue;
+                }
+                if (proto.action.state==0x7F) { // PM2.5
+                    device.pm25 = proto.action.RValue;
+                }
+                
+                if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) { //开关
+                    device.power = proto.action.state;
+                }
+                
+                [_deviceArray addObject:device];
             }
             
-            if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) { //开关
-                device.power = proto.action.state;
-            }
-            
-            [_deviceArray addObject:device];
-            
-        }
-        
-        if (proto.cmd == 0x06) { //  结束标志
+        }else if (proto.cmd == 0x06) { //  结束标志
             // 处理接收到的数据
             [self handleData];
             [self.roomCollectionView reloadData];
         }
-    }
+    
 }
 
 - (void)handleData {
@@ -454,25 +453,11 @@
     }
 }
 
-- (void)onSkipButtonClicked:(UIButton *)btn {
-    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageChatBtn];
-    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageEnterChat];
-    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageEnterFamily];
-    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageScene];
-    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageDevice];
-    [UD setObject:@"haveShownMask" forKey:ShowMaskViewHomePageCloud];
-    [UD setObject:@"haveShownMask" forKey:ShowMaskViewChatView];
-    [UD setObject:@"haveShownMask" forKey:ShowMaskViewFamilyHome];
+- (void)onSkipButtonClicked:(UIButton *)btn pageType:(PageTye)pageType {
     [UD setObject:@"haveShownMask" forKey:ShowMaskViewFamilyHomeDetail];
-    [UD setObject:@"haveShownMask" forKey:ShowMaskViewScene];
-    [UD setObject:@"haveShownMask" forKey:ShowMaskViewSceneDetail];
-    [UD setObject:@"haveShownMask" forKey:ShowMaskViewDevice];
-    [UD setObject:@"haveShownMask" forKey:ShowMaskViewDeviceAir];
-    [UD setObject:@"haveShownMask" forKey:ShowMaskViewLeftView];
-    [UD setObject:@"haveShownMask" forKey:ShowMaskViewSettingView];
-    [UD setObject:@"haveShownMask" forKey:ShowMaskViewAccessControl];
-    [UD setObject:@"haveShownMask" forKey:ShowMaskViewSceneAdd];
     [UD synchronize];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)onTransparentBtnClicked:(UIButton *)btn {

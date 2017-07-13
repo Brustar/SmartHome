@@ -74,8 +74,8 @@
 
 - (void)skipBtnClicked:(UIButton *)btn {
     [self dismissMaskView];
-    if (_delegate && [_delegate respondsToSelector:@selector(onSkipButtonClicked:)]) {
-        [_delegate onSkipButtonClicked:btn];
+    if (_delegate && [_delegate respondsToSelector:@selector(onSkipButtonClicked: pageType:)]) {
+        [_delegate onSkipButtonClicked:btn pageType:self.pageType];
     }
 }
 

@@ -604,7 +604,7 @@
                     width = 190;
                 }
                 // 添加蒙版图片1
-                [maskView addImage:[UIImage imageNamed:@"maskFamily"] withFrame:CGRectMake(5, 70, width, width)];
+                //[maskView addImage:[UIImage imageNamed:@"maskFamily"] withFrame:CGRectMake(5, 70, width, width)];
                 
                 CGFloat ori_y = 240;
                 if (UI_SCREEN_WIDTH == 414) {
@@ -619,13 +619,17 @@
                 if (UI_SCREEN_WIDTH == 414) {
                     width2 = 132;
                 }
-                // 添加蒙版透明区
+                // 添加蒙版透明区(小圆)
                 [maskView addTransparentOvalRect:CGRectMake(UI_SCREEN_WIDTH/2+48, 92, width2, width2)];
-                //透明按钮
+                //透明按钮 (小圆)
                 [maskView addTransparentBtn:CGRectMake(UI_SCREEN_WIDTH/2+50, 90, width2, width2) tag:1];// 表盘按钮
+                
+                // 添加蒙版透明区(大圆)
+                [maskView addTransparentOvalRect:CGRectMake(5, 70, width, width)];
+                
             }else {
                 // 添加蒙版图片1
-                [maskView addImage:[UIImage imageNamed:@"maskFamily"] withFrame:CGRectMake(20, 310, 160, 160)];
+                //[maskView addImage:[UIImage imageNamed:@"maskFamily"] withFrame:CGRectMake(20, 310, 160, 160)];
                 // 添加蒙版图片2
                 [maskView addImage:[UIImage imageNamed:@"mask6pad"] withFrame:CGRectMake(180, 130, 781/2, 188/2)];
                 // 添加蒙版图片3
@@ -636,9 +640,13 @@
                 [maskView addImage:[UIImage imageNamed:@"mask8pad"] withFrame:CGRectMake(UI_SCREEN_WIDTH/2-186/2-90, UI_SCREEN_HEIGHT/2+130, 186/2, 35/2)];
 
                 
-                // 添加蒙版透明区
+                // 添加蒙版透明区(小圆)
                 [maskView addTransparentOvalRect:CGRectMake(45, 135, 112, 112)];
-                // 透明按钮
+                
+                // 添加蒙版透明区(大圆)
+                [maskView addTransparentOvalRect:CGRectMake(20, 310, 160, 160)];
+                
+                // 透明按钮 (小圆)
                 [maskView addTransparentBtn:CGRectMake(45, 135, 112, 112) tag:1];// 表盘按钮
             }
             
