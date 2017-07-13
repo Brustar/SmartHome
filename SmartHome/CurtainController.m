@@ -225,9 +225,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CurtainTableViewCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"CurtainTableViewCell" owner:self options:nil] lastObject];
-     cell.slider.continuous = NO;
-    //[cell.slider addTarget:self action:@selector(changeCurtain:) forControlEvents:UIControlEventValueChanged];
-    //[cell.open addTarget:self action:@selector(toggleCurtain:) forControlEvents:UIControlEventTouchUpInside];
+    cell.slider.continuous = NO;
 
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -244,11 +242,7 @@
 //设置表头高度
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (ON_IPAD) {
-        return 64.0f;
-    }else{
-        return 0.0f;
-    }
+    return 0.0f;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
@@ -258,7 +252,11 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    if (ON_IPAD) {
+        return 150.0f;
+    }else{
+        return 100;
+    }
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
