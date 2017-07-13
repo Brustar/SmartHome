@@ -159,7 +159,7 @@
     
     
     _naviRightBtn = [CustomNaviBarView createImgNaviBarBtnByImgNormal:music_icon imgHighlight:music_icon target:self action:@selector(rightBtnClicked:)];
-    
+
     if (isPlaying) {
         UIImageView * imageView = _naviRightBtn.imageView ;
         

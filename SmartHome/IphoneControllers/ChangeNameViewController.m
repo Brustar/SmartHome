@@ -29,13 +29,43 @@
     
     [self setNaviBarTitle:@"更改名称"];
     _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
-    
+    [self.changeNameTextField addTarget:self action:@selector(endediting) forControlEvents:UIControlEventEditingDidEnd];
     [self setNaviBarRightBtn:_naviRightBtn];
     if (ON_IPAD) {
         [self adjustNaviBarFrameForSplitView];
         [self adjustTitleFrameForSplitView];
         [self setNaviBarRightBtnForSplitView:_naviRightBtn];
     }
+}
+-(void)endediting
+
+{
+    
+    if (self.changeNameTextField.text.length == 0) {
+        _naviRightBtn.enabled = NO;
+        [_naviRightBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+    }else{
+        _naviRightBtn.enabled = YES;
+    }
+    NSLog(@"停止编辑");
+    
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    int userID = [[UD objectForKey:@"UserID"] intValue];
+    _userInfomation = [SQLManager getUserInfo:userID];
+    self.changeNameTextField.text = [NSString stringWithFormat:@"%@",_userInfomation.nickName];
+    
+}
+
+- (BOOL)becomeFirstResponder
+
+{
+    [super becomeFirstResponder];
+    
+    return [self.changeNameTextField becomeFirstResponder];
+    
 }
 -(void)sendRequest
 {
@@ -90,14 +120,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
