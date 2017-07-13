@@ -143,9 +143,9 @@ static NSString *const airCellIdentifier = @"airCell";
             
             for (int i=1; i<16; i++) {
                 UIView *viewblue = [self.view viewWithTag:i+100];
-                viewblue.hidden = self.currentDegree - 15 || self.airMode == 1;
+                viewblue.hidden = self.currentDegree - i<=16 || self.airMode == 1;
                 UIView *viewred = [self.view viewWithTag:i+200];
-                viewred.hidden = self.currentDegree - 15 || self.airMode == 0;
+                viewred.hidden = self.currentDegree - i<=16 || self.airMode == 0;
             }
         }
         if (proto.action.state==0x8A) { // 湿度
