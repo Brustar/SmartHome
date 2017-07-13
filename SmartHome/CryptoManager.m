@@ -102,4 +102,17 @@
     return result;
 }
 
+//编码
+- (NSString *)encodeBase:(NSString *)str;
+{
+    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+    return [GTMBase64 stringByEncodingData:data];
+}
+//解码
+- (NSString *)decodeBase:(NSString *)str;
+{
+    NSData *data = [GTMBase64 decodeString:str];
+    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+}
+
 @end
