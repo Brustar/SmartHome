@@ -415,9 +415,9 @@
     UIStoryboard *planeGraphStoryBoard  = [UIStoryboard storyboardWithName:@"PlaneGraph" bundle:nil];
     PlaneGraphViewController *planeGraphVC = [planeGraphStoryBoard instantiateViewControllerWithIdentifier:@"PlaneGraphVC"];
     planeGraphVC.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:planeGraphVC animated:YES];
-    [planeGraphVC setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-    [self presentViewController:planeGraphVC animated:YES completion:nil];
+    [self.navigationController pushViewController:planeGraphVC animated:NO];
+   // [planeGraphVC setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+// [self presentViewController:planeGraphVC animated:YES completion:nil];
 }
 
 - (void)addNotifications {
