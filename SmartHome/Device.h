@@ -74,9 +74,10 @@ typedef NS_ENUM(NSUInteger, catalog) {
 @property (nonatomic,strong) NSString *rName;//房间名
 @property (nonatomic,assign) NSInteger eNumber;
 @property (nonatomic,assign) NSInteger hTypeId;
-@property (nonatomic,assign) NSInteger subTypeId;
+@property (nonatomic,assign) NSInteger subTypeId;//设备大类
 @property (nonatomic,strong) NSString *typeName;
 @property (nonatomic,strong) NSString *subTypeName;
+@property (nonatomic, assign) uint8_t actionState;
 
 + (instancetype)deviceWithDict:(NSDictionary *)dict;
 @end
