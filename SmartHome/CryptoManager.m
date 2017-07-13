@@ -103,16 +103,16 @@
 }
 
 //编码
-- (NSString *)encodeBase:(NSString *)str;
+- (NSString *)encodeBase;
 {
-    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [self dataUsingEncoding:NSUTF16StringEncoding];
     return [GTMBase64 stringByEncodingData:data];
 }
 //解码
-- (NSString *)decodeBase:(NSString *)str;
+- (NSString *)decodeBase;
 {
-    NSData *data = [GTMBase64 decodeString:str];
-    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSData *data = [GTMBase64 decodeString:self];
+    return [[NSString alloc] initWithData:data encoding:NSUTF16StringEncoding];
 }
 
 @end

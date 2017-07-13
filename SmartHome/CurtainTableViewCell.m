@@ -22,8 +22,6 @@
 - (void)awakeFromNib {
     
     [super awakeFromNib];
-    [IOManager removeTempFile];
-    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     self.slider.continuous = NO;
     [self.slider addTarget:self action:@selector(save:) forControlEvents:UIControlEventValueChanged];
     [self.open addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
@@ -55,7 +53,7 @@
 }
 -(IBAction)save:(id)sender
 {
-    
+    _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
     Curtain *device=[[Curtain alloc] init];
     [device setDeviceID:[self.deviceid intValue]];
     [device setOpenvalue:self.slider.value * 100];
@@ -119,6 +117,8 @@
            
            
         }else{
+            
+//             [IOManager removeTempFile];
             if (ON_IPAD) {
                  [self.AddcurtainBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
             }else{

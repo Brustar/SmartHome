@@ -10,7 +10,7 @@
 #import "MBProgressHUD+NJ.h"
 #import "HttpManager.h"
 #import "SQLManager.h"
-
+#import "CryptoManager.h"
 
 @interface ChangeNameViewController ()
 
@@ -72,7 +72,7 @@
     NSString *url = [NSString stringWithFormat:@"%@Cloud/user_info.aspx",[IOManager httpAddr]];
     NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     if (auothorToken) {
-        NSDictionary *dict = @{@"token":auothorToken,@"optype":[NSNumber numberWithInteger:1],@"nickname":self.changeNameTextField.text};
+        NSDictionary *dict = @{@"token":auothorToken,@"optype":[NSNumber numberWithInteger:1],@"nickname":[self.changeNameTextField.text encodeBase]};
         NSLog(@"%@",self.changeNameTextField.text);
         HttpManager *http=[HttpManager defaultManager];
         http.delegate = self;
@@ -91,9 +91,9 @@
                 BOOL   succeed = [SQLManager updateUserNickNameByID:(int)userID nickName:self.changeNameTextField.text];//更新User表
                 BOOL succeed_chats = [SQLManager updateChatsPortraitByID:(int)userID nickname:self.changeNameTextField.text];//更新chats表
                 if (succeed && succeed_chats) {
-                    [MBProgressHUD showSuccess:@"更新昵称成功"];
+                [MBProgressHUD showSuccess:@"更新昵称成功"];
                 [NC postNotificationName:@"refreshNickName" object:self.changeNameTextField.text];
-               
+                    
                    }
             [MBProgressHUD showSuccess:@"保存成功"];
            

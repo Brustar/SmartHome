@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *headerBtn;
 @property (weak, nonatomic) IBOutlet UITableView *userinfoTableView;
 @property (nonatomic, strong) UserInfo *userInfomation;
+@property (nonatomic, strong)  UserInfo *info;
 @property (nonatomic, strong) NSString *userTypeStr;
 @property (nonatomic, strong) UIImage *selectedImg;//选择的头像图片
 - (IBAction)headerBtnClicked:(id)sender;

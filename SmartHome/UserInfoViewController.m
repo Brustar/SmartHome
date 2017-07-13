@@ -67,7 +67,7 @@
         _userTypeStr = @"客人";
     }
     self.nameLabel.text = [NSString stringWithFormat:@"-- %@, %@身份 --", _userInfomation.nickName, _userTypeStr];
-    [self.headerBtn sd_setImageWithURL:[NSURL URLWithString:_userInfomation.headImgURL] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portrait"]];
+    [self.headerBtn sd_setImageWithURL:[NSURL URLWithString:_info.headImgURL] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portrait"]];
     self.headerBtn.layer.cornerRadius = self.headerBtn.frame.size.width/2;
     self.headerBtn.layer.masksToBounds = YES;
     self.userinfoTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
@@ -114,13 +114,13 @@
     if(tag == 1) {
         if ([responseObject[@"result"] intValue] == 0) {
             
-            UserInfo *info = [[UserInfo alloc] init];
-            info.nickName = responseObject[@"nickname"];
-            info.headImgURL = responseObject[@"portrait"];
-            info.phoneNum = responseObject[@"phone"];
-            info.vip = responseObject[@"vip"];
-            info.endDate = responseObject[@"end_date"];
-            _userInfomation = info;
+            _info = [[UserInfo alloc] init];
+            _info.nickName = responseObject[@"nickname"];
+            _info.headImgURL = responseObject[@"portrait"];
+            _info.phoneNum = responseObject[@"phone"];
+            _info.vip = responseObject[@"vip"];
+            _info.endDate = responseObject[@"end_date"];
+//            _userInfomation = info;
             
             [self refreshUI];
         }
@@ -167,7 +167,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *identifier = @"userinfoCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
     }
@@ -180,7 +180,7 @@
     cell.textLabel.font = [UIFont systemFontOfSize:15];
     cell.textLabel.text = self.TitleArray[indexPath.section];
     if (indexPath.section == 0) {
-        if ([_userInfomation.vip isEqualToString:@"1"]) {
+        if ([_info.vip isEqualToString:@"1"]) {
             cell.imageView.image = [UIImage imageNamed:@"VIP_icon"];
             UILabel *vipLabel = [[UILabel alloc] initWithFrame:CGRectMake(4, -2, 20, 15)];
             vipLabel.textAlignment = NSTextAlignmentCenter;
@@ -196,7 +196,7 @@
             dateLabel.textColor = [UIColor lightGrayColor];
             dateLabel.font = [UIFont systemFontOfSize:15];
             dateLabel.backgroundColor = [UIColor clearColor];
-            dateLabel.text = [NSString stringWithFormat:@"%@ 到期", _userInfomation.endDate];
+            dateLabel.text = [NSString stringWithFormat:@"%@ 到期", _info.endDate];
             [view addSubview:dateLabel];
             
             UIButton *chargeBtn = [[UIButton alloc] initWithFrame:CGRectMake(160, 11, 40, 22)];
@@ -218,7 +218,7 @@
     }if (indexPath.section == 4) {
         cell.detailTextLabel.text = _userInfomation.nickName;
     }if (indexPath.section == 5) {
-         cell.detailTextLabel.text = _userInfomation.phoneNum;
+         cell.detailTextLabel.text = _info.phoneNum;
     }
     return cell;
 }
@@ -240,48 +240,42 @@
         
     }else if (indexPath.section == 6){
         
-        UIAlertController * alertController = [UIAlertController alertControllerWithTitle: @"验证原密码"
-                                                                                  message: @"为了保障你的数据安全，修改密码前请输入原密码"
-                                                                           preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-            textField.placeholder = @"请输入原密码";
-            textField.textColor = [UIColor blackColor];
-            textField.secureTextEntry = YES;
-            textField.clearButtonMode = UITextFieldViewModeWhileEditing;
-            textField.borderStyle = UITextBorderStyleNone;
-//            textField.text = self.powerStr;
-            textField.delegate = self;
-            textField.secureTextEntry = YES;
-         
-        }];
-       
-        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-           
-            
-        }]];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"验证原密码" message:@"为保障你的数据安全，修改密码前请输入原密码" preferredStyle:UIAlertControllerStyleAlert];
+            //增加确定按钮；
+      
+            [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                //获取第1个输入框；
+                UITextField *userNameTextField = alertController.textFields.firstObject;
 
-//            UITextField *PWDField = [alertController textFields.];
-//            NSString * textPWD=PWDField.text;//获取输入的密码
+                if ([userNameTextField.text isEqualToString:[[[NSUserDefaults standardUserDefaults] objectForKey:@"Password"] decryptWithDes:DES_KEY]]) {
+                    
+                    UIStoryboard * MyInfoStoryBoard = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
+                    ChangePassWordVC * changePassWordVC = [MyInfoStoryBoard instantiateViewControllerWithIdentifier:@"ChangePassWordVC"];
+                    changePassWordVC.nameStr = _userInfomation.nickName;
+                    
+                    [self.navigationController pushViewController:changePassWordVC animated:YES];
+                }else{
+                    [MBProgressHUD showError:@"原密码输入错误"];
+                }
+
+                
+            }]];
             
-        }]];
-        [self presentViewController:alertController animated:YES completion:nil];
+            //增加取消按钮；
+            [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
+        
+            [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+                textField.placeholder = @"请输入原密码";
+                textField.secureTextEntry = YES;
+            }];
+        
+            
+            [self presentViewController:alertController animated:true completion:nil];  
+            
+        
     }
 }
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    if ([textField.text isEqualToString:[[[NSUserDefaults standardUserDefaults] objectForKey:@"Password"] decryptWithDes:DES_KEY]]) {
-        
-        UIStoryboard * MyInfoStoryBoard = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
-        ChangePassWordVC * changePassWordVC = [MyInfoStoryBoard instantiateViewControllerWithIdentifier:@"ChangePassWordVC"];
-        changePassWordVC.nameStr = _userInfomation.nickName;
-        
-        [self.navigationController pushViewController:changePassWordVC animated:YES];
-    }else{
-          [MBProgressHUD showError:@"原密码输入错误"];
-    }
 
-}
 - (IBAction)headerBtnClicked:(id)sender {
     
     UIAlertController * alerController = [UIAlertController alertControllerWithTitle:@"更换头像" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
@@ -374,7 +368,7 @@
                     if (succeed && succeed_chats) {
                          [MBProgressHUD showSuccess:@"更新头像成功"];
                         [self.headerBtn sd_setImageWithURL:[NSURL URLWithString:portrait] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"portrait"]];
-                        _userInfomation.headImgURL = portrait;
+                        _info.headImgURL = portrait;
                         [NC postNotificationName:@"refreshPortrait" object:portrait];
                     }else {
                         [MBProgressHUD showError:@"更新头像失败"];

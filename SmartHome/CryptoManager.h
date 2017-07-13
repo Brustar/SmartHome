@@ -20,8 +20,8 @@
 - (NSString *)decryptWithDes:(NSString *)key;
 
 //编码
-- (NSString *)encodeBase:(NSString *)data;
+- (NSString *)encodeBase;
 //解码
-- (NSString *)decodeBase:(NSString *)data;
+- (NSString *)decodeBase;
 
 @end
