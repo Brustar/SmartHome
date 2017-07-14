@@ -59,9 +59,9 @@
     self.nameTextField.delegate = self;
     self.pwdTextField.delegate = self;
     
-    //self.nameTextField.text = [[NSUserDefaults  standardUserDefaults] objectForKey:@"Account"];
+    self.nameTextField.text = [[NSUserDefaults  standardUserDefaults] objectForKey:@"Account"];
     userType = [[UD objectForKey:@"Type"] intValue];
-    //self.pwdTextField.text = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Password"] decryptWithDes:DES_KEY];
+    self.pwdTextField.text = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Password"] decryptWithDes:DES_KEY];
     UserType =[[UD objectForKey:@"UserType"] intValue];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

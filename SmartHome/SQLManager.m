@@ -746,6 +746,26 @@
     return [array copy];
 }
 
++ (NSArray *)getDeviceIDsBySubTypeId:(int)subTypeId
+{
+    NSMutableArray *array = [NSMutableArray array];
+    FMDatabase *db = [self connetdb];
+    if([db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"SELECT ID FROM Devices where subTypeId = '%d' and masterID = '%ld'", subTypeId, [[DeviceInfo defaultManager] masterID]];
+        
+        FMResultSet *resultSet = [db executeQuery:sql];
+        while ([resultSet next])
+        {
+            int eId = [resultSet intForColumn:@"ID"];
+            [array addObject:[NSNumber numberWithInt:eId]];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return [array copy];
+}
+
 +(NSArray *)getDeviceByTypeName:(NSString  *)typeid andRoomID:(NSInteger)roomID
 {
     NSMutableArray *array = [NSMutableArray array];
