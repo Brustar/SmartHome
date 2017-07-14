@@ -112,7 +112,11 @@
 - (NSString *)decodeBase;
 {
     NSData *data = [GTMBase64 decodeString:self];
-    return [[NSString alloc] initWithData:data encoding:NSUTF16StringEncoding];
+    if (data) {
+        return [[NSString alloc] initWithData:data encoding:NSUTF16StringEncoding];
+    }else{
+        return self;
+    }
 }
 
 @end

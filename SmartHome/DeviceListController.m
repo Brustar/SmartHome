@@ -21,8 +21,6 @@
 #import "MBProgressHUD+NJ.h"
 #import "AmplifierController.h"
 #import "UploadManager.h"
-#import "ECloudTabBarController.h"
-#import "ECloudTabBar.h"
 
 @interface DeviceListController ()<UITableViewDelegate,UITableViewDataSource,UISplitViewControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 

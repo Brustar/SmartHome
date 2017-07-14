@@ -7,7 +7,6 @@
 //
 
 #import "WebManager.h"
-#import "ECloudTabBarController.h"
 #import "RegisterPhoneNumController.h"
 
 

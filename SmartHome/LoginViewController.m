@@ -59,9 +59,9 @@
     self.nameTextField.delegate = self;
     self.pwdTextField.delegate = self;
     
-    //self.nameTextField.text = [[NSUserDefaults  standardUserDefaults] objectForKey:@"Account"];
+    self.nameTextField.text = [[NSUserDefaults  standardUserDefaults] objectForKey:@"Account"];
     userType = [[UD objectForKey:@"Type"] intValue];
-    //self.pwdTextField.text = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Password"] decryptWithDes:DES_KEY];
+    self.pwdTextField.text = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Password"] decryptWithDes:DES_KEY];
     UserType =[[UD objectForKey:@"UserType"] intValue];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -273,13 +273,6 @@
     NSString *passwd = @"ecloud";
     
     DeviceInfo *info = [DeviceInfo defaultManager];
-    NSString *pushToken;
-    if(info.pushToken)
-    {
-        pushToken = info.pushToken;
-    }else {
-        pushToken = @"777";
-    }
     
     //手机终端类型：1，手机 2，iPad
     NSInteger clientType = 1;
@@ -299,7 +292,7 @@
                            @"account":userName,
                            @"logintype":@(userNameType),
                            @"password":[passwd md5],
-                           @"pushtoken":pushToken,
+                           @"pushtoken":info.pushToken?info.pushToken:@"",
                            @"devicetype":@(clientType),
                            @"hostid":@(currentHostId)
                            };
@@ -350,13 +343,6 @@
     }
     
     DeviceInfo *info=[DeviceInfo defaultManager];
-    NSString *pushToken;
-    if(info.pushToken)
-    {
-        pushToken = info.pushToken;
-    }else{
-        pushToken = @"777";
-    }
     
     //手机终端类型：1，手机 2，iPad
     NSInteger clientType = 1;
@@ -380,7 +366,7 @@
                            @"account":self.nameTextField.text,
                            @"logintype":@(userType),
                            @"password":[self.pwdTextField.text md5],
-                           @"pushtoken":pushToken,
+                           @"pushtoken":info.pushToken?info.pushToken:@"",
                            @"devicetype":@(clientType),
                            @"hostid":@(currentHostId)
                            };
@@ -885,12 +871,6 @@ NSArray *array = [NSArray arrayWithObjects:
             [MBProgressHUD showError:responseObject[@"msg"]];
         }
     }
-}
-
-- (void)goToViewController
-{
-    ECloudTabBarController *ecloudVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ECloudTabBarController"];
-    [self presentViewController:ecloudVC animated:YES completion:nil];
 }
 
 -(void)sendRequestToHostWithTag:(int)tag andRow:(int)row
