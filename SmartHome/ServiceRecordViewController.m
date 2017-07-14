@@ -230,8 +230,6 @@
     }else {
         [MBProgressHUD showError:@"请选择要删除的记录"];
     }
-
-    
     [self clickCancelDeleteBtn:nil];
     
     [self.tableView reloadData];

@@ -56,7 +56,7 @@
       _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
         BgMusic *device=[[BgMusic alloc] init];
         [device setDeviceID:[self.deviceid intValue]];
-        [device setBgvolume:device.bgvolume];
+        [device setBgvolume:self.BjSlider.value * 100.0f];
         [device setPoweron:self.BjPowerButton.selected];
     
     if (sender == self.BjPowerButton) {

@@ -556,6 +556,22 @@
         otherCell.deviceid = _OtherArray[indexPath.row];
         if (_OtherArray.count) {
             Device *device = [SQLManager getDeviceWithDeviceID:[_OtherArray[indexPath.row] intValue]];
+            if(dictionary)
+            {
+                int waiting;//开关
+                for (NSDictionary *dic in [dictionary objectForKey:@"devices"]){
+                    
+                    if([dic objectForKey:@"deviceID"])
+                    {
+                        deviceID = [dic[@"deviceID"] intValue];
+                        
+                    }
+                    if (deviceID == [_OtherArray[indexPath.row] intValue]) {
+                        waiting = [dic[@"waiting"] intValue];
+                        otherCell.OtherSwitchBtn.selected = waiting;
+                    }
+                }
+            }
             if (device.name == nil) {
                 otherCell.NameLabel.text = @"";
             }else{

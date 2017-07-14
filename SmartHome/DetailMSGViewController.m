@@ -240,7 +240,7 @@
         self.notify_id = msg.MID;
         if (msg.readed==0) {
             
-//            [self sendRequestForMsgWithItemId:self.notify_id];
+//            [self sendRequestForMsgWithItemId:_itemID];
         }
     }
     
@@ -302,7 +302,7 @@
     NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
     NSString *url = [NSString stringWithFormat:@"%@Cloud/notify.aspx",[IOManager httpAddr]];
     if (authorToken) {
-        NSDictionary *dic = @{@"token":authorToken,@"optype":[NSNumber numberWithInteger:5],@"notify_id":[NSNumber numberWithInteger:itemID]};
+        NSDictionary *dic = @{@"token":authorToken,@"optype":[NSNumber numberWithInteger:5],@"itemid":[NSNumber numberWithInteger:itemID]};
         HttpManager *http=[HttpManager defaultManager];
         http.delegate = self;
         http.tag = 3;
