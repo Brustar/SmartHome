@@ -1621,7 +1621,7 @@
         FMResultSet *resultSet = [db executeQuery:sql];
         if ([resultSet next])
         {
-            [temp addObject: [resultSet stringForColumn:@"nickname"]];
+            [temp addObject: [[resultSet stringForColumn:@"nickname"] decodeBase]];
             [temp addObject: [resultSet stringForColumn:@"portrait"]];
         }
     }
@@ -1641,7 +1641,7 @@
         FMResultSet *resultSet = [db executeQuery:sql];
         while ([resultSet next])
         {
-            [temp addObject: @{@"nickname":[resultSet stringForColumn:@"nickname"],@"portrait":[resultSet stringForColumn:@"portrait"]}];
+            [temp addObject: @{@"nickname":[[resultSet stringForColumn:@"nickname"] decodeBase],@"portrait":[resultSet stringForColumn:@"portrait"]}];
         }
     }
     [db closeOpenResultSets];

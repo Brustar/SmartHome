@@ -6,7 +6,6 @@
 //  Copyright © 2017年 ECloud. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import <AVKit/AVKit.h>
 #import "AppDelegate.h"
 #import "HttpManager.h"
@@ -23,7 +22,7 @@
 #import "ProfileFaultsViewController.h"
 #import "ServiceRecordViewController.h"
 #import "RegisterDetailController.h"
-#import "ECloudTabBarController.h"
+
 #import "SQLManager.h"
 #import "FMDatabase.h"
 #import "DeviceInfo.h"
