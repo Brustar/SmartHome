@@ -143,7 +143,7 @@
         [deviceIDs addObjectsFromArray:avIDs];
     }
     
-    _totalCmds = deviceIDs.count + _roomArray.count*3;
+    //_totalCmds = deviceIDs.count + _roomArray.count*3;
     
     SocketManager *sock = [SocketManager defaultManager];
     sock.delegate = self;

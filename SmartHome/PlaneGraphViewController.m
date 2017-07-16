@@ -59,11 +59,51 @@
     _roomArray = [NSMutableArray array];
     [_roomArray addObjectsFromArray:[SQLManager getAllRoomsInfoWithoutIsAll]];
     
-    //TCP 获取房间状态
+    
+    //查询所有房间的设备ID（灯，空调，影音）
+    NSArray *lightIDs = [SQLManager getDeviceIDsBySubTypeId:1];
+    NSArray *airIDs = [SQLManager getDeviceIDsBySubTypeId:2];
+    NSArray *avIDs = [SQLManager getDeviceIDsBySubTypeId:3];
+    
+    NSMutableArray *deviceIDs = [[NSMutableArray alloc] init];
+    if (lightIDs.count >0) {
+        [deviceIDs addObjectsFromArray:lightIDs];
+    }
+    
+    if (airIDs.count >0) {
+        [deviceIDs addObjectsFromArray:airIDs];
+    }
+    
+    if (avIDs.count >0) {
+        [deviceIDs addObjectsFromArray:avIDs];
+    }
+    
+    
     SocketManager *sock = [SocketManager defaultManager];
     sock.delegate = self;
-    NSData *data = [[DeviceInfo defaultManager] getRoomStateData];
-    [sock.socket writeData:data withTimeout:1 tag:100];
+    
+    [deviceIDs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        
+        NSData *data = [[DeviceInfo defaultManager] query:[obj stringValue]];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }];
+    
+    
+    
+    [_roomArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        
+        Room *room = (Room *)obj;
+        //  PM2.5
+        NSString *pmID = [SQLManager singleDeviceWithCatalogID:55 byRoom:room.rId];
+        NSData *data = [[DeviceInfo defaultManager] query:pmID];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+        //  湿度
+        NSString *humidityID = [SQLManager singleDeviceWithCatalogID:50 byRoom:room.rId];
+        data = [[DeviceInfo defaultManager] query:humidityID];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }];
+    
+    
 }
 
 #pragma mark - TouchImageDelegate
@@ -392,17 +432,17 @@
 #pragma mark - TCP recv delegate
 -(void)recv:(NSData *)data withTag:(long)tag
 {
-    if (tag == 100) {
-        Proto proto=protocolFromData(data);
-        if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
-            return;
-        }
-        //同步设备状态
-        if(proto.cmd == 0x01) {
-            
-            NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
-            Device *device = [SQLManager getDeviceWithDeviceID:devID.intValue];
-            
+    Proto proto=protocolFromData(data);
+    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
+        return;
+    }
+    //同步设备状态
+    if(proto.cmd == 0x01) {
+        
+        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+        Device *device = [SQLManager getDeviceWithDeviceID:devID.intValue];
+        
+        if (device) {
             device.actionState = proto.action.state;
             
             if (proto.action.state==0x6A) { //温度
@@ -421,15 +461,17 @@
             }
             
             [_deviceArray addObject:device];
-            
         }
         
-        if (proto.cmd == 0x06) { //  结束标志
-            // 处理接收到的数据
-            [self handleData];
-            [self.roomStatusCollectionView reloadData];
-        }
     }
+    
+    [self showRoomStatus];
+}
+
+- (void)showRoomStatus {
+    // 处理接收到的数据
+    [self handleData];
+    [self.roomStatusCollectionView reloadData];
 }
 
 - (void)handleData {
