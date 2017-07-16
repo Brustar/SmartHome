@@ -359,10 +359,6 @@
 		F66DFF281D5184730005E882 /* EditSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = F66DFF271D5184730005E882 /* EditSceneController.m */; };
 		F66DFF2B1D5188BF0005E882 /* EditSceneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F66DFF2A1D5188BF0005E882 /* EditSceneCell.m */; };
 		F67091BC1D93BF300002DDC5 /* WindowSlidingController.m in Sources */ = {isa = PBXBuildFile; fileRef = F67091BB1D93BF300002DDC5 /* WindowSlidingController.m */; };
-		F6755A4C1D4063FA002394F3 /* ECloudTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F6755A4B1D4063FA002394F3 /* ECloudTabBar.m */; };
-		F6755A4F1D406552002394F3 /* ECloudTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6755A4E1D406552002394F3 /* ECloudTabBarController.m */; };
-		F6755A581D40D450002394F3 /* ECloudButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F6755A571D40D450002394F3 /* ECloudButton.m */; };
-		F6755A5E1D40D576002394F3 /* ECloudMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = F6755A5D1D40D576002394F3 /* ECloudMoreView.m */; };
 		F67F1F711D3C69DC00F2B7E5 /* SystemSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F67F1F701D3C69DC00F2B7E5 /* SystemSettingViewController.m */; };
 		F67F1F741D3C6AA200F2B7E5 /* SystemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F67F1F731D3C6AA200F2B7E5 /* SystemCell.m */; };
 		F67F1F771D3C719D00F2B7E5 /* SystemInfomationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F67F1F761D3C719D00F2B7E5 /* SystemInfomationController.m */; };
@@ -1112,14 +1108,6 @@
 		F67091B91D9375620002DDC5 /* AreaSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaSettingCell.h; sourceTree = "<group>"; };
 		F67091BA1D93BF300002DDC5 /* WindowSlidingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindowSlidingController.h; sourceTree = "<group>"; };
 		F67091BB1D93BF300002DDC5 /* WindowSlidingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WindowSlidingController.m; sourceTree = "<group>"; };
-		F6755A4A1D4063FA002394F3 /* ECloudTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECloudTabBar.h; sourceTree = "<group>"; };
-		F6755A4B1D4063FA002394F3 /* ECloudTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECloudTabBar.m; sourceTree = "<group>"; };
-		F6755A4D1D406552002394F3 /* ECloudTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECloudTabBarController.h; sourceTree = "<group>"; };
-		F6755A4E1D406552002394F3 /* ECloudTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECloudTabBarController.m; sourceTree = "<group>"; };
-		F6755A561D40D450002394F3 /* ECloudButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECloudButton.h; sourceTree = "<group>"; };
-		F6755A571D40D450002394F3 /* ECloudButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECloudButton.m; sourceTree = "<group>"; };
-		F6755A5C1D40D576002394F3 /* ECloudMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECloudMoreView.h; sourceTree = "<group>"; };
-		F6755A5D1D40D576002394F3 /* ECloudMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECloudMoreView.m; sourceTree = "<group>"; };
 		F67F1F6F1D3C69DC00F2B7E5 /* SystemSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemSettingViewController.h; sourceTree = "<group>"; };
 		F67F1F701D3C69DC00F2B7E5 /* SystemSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemSettingViewController.m; sourceTree = "<group>"; };
 		F67F1F721D3C6AA200F2B7E5 /* SystemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemCell.h; sourceTree = "<group>"; };
@@ -1927,14 +1915,6 @@
 				0F477FC51D2F94B3004FA361 /* NetStatusManager.m */,
 				0FF92B631D9222220098DD54 /* SQLManager.h */,
 				F6251F761D542508000A5A47 /* SQLManager.m */,
-				F6755A4A1D4063FA002394F3 /* ECloudTabBar.h */,
-				F6755A4B1D4063FA002394F3 /* ECloudTabBar.m */,
-				F6755A4D1D406552002394F3 /* ECloudTabBarController.h */,
-				F6755A4E1D406552002394F3 /* ECloudTabBarController.m */,
-				F6755A561D40D450002394F3 /* ECloudButton.h */,
-				F6755A571D40D450002394F3 /* ECloudButton.m */,
-				F6755A5C1D40D576002394F3 /* ECloudMoreView.h */,
-				F6755A5D1D40D576002394F3 /* ECloudMoreView.m */,
 				F68A5DD61D782D8400601612 /* ECSearchView.h */,
 				F68A5DD71D782D8400601612 /* ECSearchView.m */,
 				0F9EA72B1DDB026C00223ED8 /* NSString+RegMatch.h */,
@@ -3218,7 +3198,6 @@
 				2EC266281EA4BEAF003DC979 /* FMTableViewCell.m in Sources */,
 				0FC0FFDA1CF577C0000F71D5 /* RealScene.m in Sources */,
 				CD9F0AB81EB78DD0007B0CF7 /* DeliveryAddressSettingViewController.m in Sources */,
-				F6755A4F1D406552002394F3 /* ECloudTabBarController.m in Sources */,
 				CDF157541E7BA3F600499AC5 /* UIView_extra.m in Sources */,
 				0FF92B661D9224640098DD54 /* TVChannel.m in Sources */,
 				0F11654F1D7418EE00A01B8F /* Amplifier.m in Sources */,
@@ -3302,7 +3281,6 @@
 				2E2EA78A1EFD0EC70030EB46 /* ChangePassWordVC.m in Sources */,
 				0F6ADFE31E7136C500BFF67F /* ConversationViewController.m in Sources */,
 				CD7863B31E84D2A800F42AC0 /* RegistSecondStepViewController.m in Sources */,
-				F6755A4C1D4063FA002394F3 /* ECloudTabBar.m in Sources */,
 				0FAF8FEF1CE18C41000557BD /* DeviceInfo.m in Sources */,
 				2E7B64B81E9B3188001F7469 /* IphoneNewAddSceneCell.m in Sources */,
 				2E01840A1ECDE77C00E3705F /* Clock.swift in Sources */,
@@ -3377,10 +3355,8 @@
 				F6A1C02E1D586D7500856E00 /* Room.m in Sources */,
 				0F64234A1DE57C83003379FC /* RTSPPlayer.m in Sources */,
 				2E8AC52F1E7BAE350002E717 /* FirstViewController.m in Sources */,
-				F6755A581D40D450002394F3 /* ECloudButton.m in Sources */,
 				F69C82331D363376002DE6D7 /* ServiceRecordViewController.m in Sources */,
 				F66596E01D3F25610082716A /* SceneController.m in Sources */,
-				F6755A5E1D40D576002394F3 /* ECloudMoreView.m in Sources */,
 				0FAF74AD1CEE9A9600432713 /* LightController.m in Sources */,
 				CD43046F1E0B674000B594F4 /* FamilyViewController.m in Sources */,
 				F69C82361D363A4D002DE6D7 /* ServiceRecordCell.m in Sources */,

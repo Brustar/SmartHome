@@ -16,6 +16,7 @@
 @property (nonatomic,strong) NSArray * TitleArray;
 @property (nonatomic,strong) NSArray * DetialArray;
 @property (nonatomic,strong) NSString * powerStr;
+@property (nonatomic,strong) UITextField *userNameTextField;
 
 @end
 
@@ -124,7 +125,31 @@
             
             [self refreshUI];
         }
-    }
+    }if (tag == 2) {
+       
+                if([responseObject[@"result"] intValue]==0)
+                {
+                    UIStoryboard * MyInfoStoryBoard = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
+                    ChangePassWordVC * changePassWordVC = [MyInfoStoryBoard instantiateViewControllerWithIdentifier:@"ChangePassWordVC"];
+                    changePassWordVC.nameStr = _userInfomation.nickName;
+                    
+                    [self.navigationController pushViewController:changePassWordVC animated:YES];
+                    
+                }else{
+                    
+//                    [MBProgressHUD showError:@"原密码输入错误"];
+                    
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"密码输入错误，请重新输入" preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    // 添加按钮
+                    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                        
+                        [self passoward];
+                    }]];
+                    
+                    [self presentViewController:alert animated:YES completion:nil];
+                }
+           }
 }
 
 #pragma mark - UITableViewDelegate
@@ -240,42 +265,52 @@
         
     }else if (indexPath.section == 6){
         
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"验证原密码" message:@"为保障你的数据安全，修改密码前请输入原密码" preferredStyle:UIAlertControllerStyleAlert];
-            //增加确定按钮；
-      
-            [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                //获取第1个输入框；
-                UITextField *userNameTextField = alertController.textFields.firstObject;
-
-                if ([userNameTextField.text isEqualToString:[[[NSUserDefaults standardUserDefaults] objectForKey:@"Password"] decryptWithDes:DES_KEY]]) {
-                    
-                    UIStoryboard * MyInfoStoryBoard = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
-                    ChangePassWordVC * changePassWordVC = [MyInfoStoryBoard instantiateViewControllerWithIdentifier:@"ChangePassWordVC"];
-                    changePassWordVC.nameStr = _userInfomation.nickName;
-                    
-                    [self.navigationController pushViewController:changePassWordVC animated:YES];
-                }else{
-                    [MBProgressHUD showError:@"原密码输入错误"];
-                }
-
-                
-            }]];
-            
-            //增加取消按钮；
-            [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
-        
-            [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-                textField.placeholder = @"请输入原密码";
-                textField.secureTextEntry = YES;
-            }];
-        
-            
-            [self presentViewController:alertController animated:true completion:nil];  
-            
+               [self passoward];
         
     }
 }
+-(void)sendRequest
+{
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/user_info.aspx",[IOManager httpAddr]];
+    NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    if (auothorToken) {
+        NSDictionary *dict = @{@"token":auothorToken,@"optype":[NSNumber numberWithInteger:3],@"originalPsw":[_userNameTextField.text md5]};
+        HttpManager *http=[HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = 2;
+        [http sendPost:url param:dict];
+    }
+}
 
+-(void)passoward
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"验证原密码" message:@"为保障你的数据安全，修改密码前请输入原密码" preferredStyle:UIAlertControllerStyleAlert];
+    
+    //增加取消按钮；
+    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
+    
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"请输入原密码";
+        textField.secureTextEntry = YES;
+    }];
+    //增加确定按钮；
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //获取第1个输入框；
+       _userNameTextField = alertController.textFields.firstObject;
+        
+//        if ([userNameTextField.text isEqualToString:[[[NSUserDefaults standardUserDefaults] objectForKey:@"Password"] decryptWithDes:DES_KEY]]) {
+        
+            [self sendRequest];
+       
+        
+        
+    }]];
+    
+    [self presentViewController:alertController animated:true completion:nil];
+    
+
+}
 - (IBAction)headerBtnClicked:(id)sender {
     
     UIAlertController * alerController = [UIAlertController alertControllerWithTitle:@"更换头像" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];

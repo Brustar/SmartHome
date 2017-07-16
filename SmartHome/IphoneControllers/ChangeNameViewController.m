@@ -40,7 +40,6 @@
 -(void)endediting
 
 {
-    
     if (self.changeNameTextField.text.length == 0) {
         _naviRightBtn.enabled = NO;
         [_naviRightBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
@@ -53,6 +52,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    _naviRightBtn.enabled = NO;
+     [_naviRightBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
     int userID = [[UD objectForKey:@"UserID"] intValue];
     _userInfomation = [SQLManager getUserInfo:userID];
     self.changeNameTextField.text = [NSString stringWithFormat:@"%@",_userInfomation.nickName];
@@ -106,14 +107,24 @@
 }
 -(void)rightBtnClicked:(UIButton *)bbt
 {
-    
-    NSString *isDemo = [UD objectForKey:IsDemo];
-    if ([isDemo isEqualToString:@"YES"]) {
-        [MBProgressHUD showSuccess:@"真实用户才可以修改成功"];
+    if (self.changeNameTextField.text.length == 0) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"没有输入名字，请重新填写" preferredStyle:UIAlertControllerStyleAlert];
+      
+        [alert addAction:[UIAlertAction actionWithTitle:@"我知道了" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+         
+        }]];
+      
+        [self presentViewController:alert animated:YES completion:nil];
     }else{
-         [self sendRequest];
+        NSString *isDemo = [UD objectForKey:IsDemo];
+        if ([isDemo isEqualToString:@"YES"]) {
+            [MBProgressHUD showSuccess:@"真实用户才可以修改成功"];
+        }else{
+            [self sendRequest];
+        }
+        [self.navigationController popViewControllerAnimated:YES];
     }
-    [self.navigationController popViewControllerAnimated:YES];
+    
 
 }
 - (void)didReceiveMemoryWarning {

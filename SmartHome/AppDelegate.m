@@ -70,26 +70,26 @@
 - (void)loadingLoginViewController {
     DeviceInfo *device=[DeviceInfo defaultManager];
         
-        if (self.window == nil) {
-            self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        }
+    if (self.window == nil) {
+        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    }
 
-        UIStoryboard *loginStoryBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+    UIStoryboard *loginStoryBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+    
+    //已登录时,自动登录
+    if ([UD objectForKey:@"AuthorToken"]) {
         
-        //已登录时,自动登录
-        if ([UD objectForKey:@"AuthorToken"]) {
-            
-            self.mainTabBarController = [[BaseTabBarController alloc] init];
-            LeftViewController *leftVC = [[LeftViewController alloc] init];
-            self.LeftSlideVC = [[LeftSlideViewController alloc] initWithLeftView:leftVC andMainView:self.mainTabBarController];
-            self.window.rootViewController = self.LeftSlideVC;
-            if (device.masterID == 0) {
-                device.masterID = [[[NSUserDefaults standardUserDefaults] objectForKey:@"HostID"] intValue];
-            }
-        }else {
-            UIViewController *vc = [loginStoryBoard instantiateViewControllerWithIdentifier:@"loginNavController"];//未登录，进入登录页面
-            self.window.rootViewController = vc;
+        self.mainTabBarController = [[BaseTabBarController alloc] init];
+        LeftViewController *leftVC = [[LeftViewController alloc] init];
+        self.LeftSlideVC = [[LeftSlideViewController alloc] initWithLeftView:leftVC andMainView:self.mainTabBarController];
+        self.window.rootViewController = self.LeftSlideVC;
+        if (device.masterID == 0) {
+            device.masterID = [[[NSUserDefaults standardUserDefaults] objectForKey:@"HostID"] intValue];
         }
+    }else {
+        UIViewController *vc = [loginStoryBoard instantiateViewControllerWithIdentifier:@"loginNavController"];//未登录，进入登录页面
+        self.window.rootViewController = vc;
+    }
 }
 
 -(void)kickout
@@ -136,14 +136,11 @@
         }];
         UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             //跳转
-            int type=[[userInfo objectForKey:@"typeID"] intValue];
             int item=[[userInfo objectForKey:@"itemID"] intValue];
-            if(item && type)
+            if(item)
             {
                 //跳转
-                NSDictionary *dic = @{@"type":[NSNumber numberWithInt:2],@"subType":[NSNumber numberWithInt:0]};
-                NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-                [center postNotificationName:@"myMsg" object:nil userInfo:dic];
+                [self gotoMSG];
             }else{
                 [self gotoConversation];
             }
@@ -157,6 +154,16 @@
         return;
     }
     [self handlePush:userInfo];
+}
+
+-(void) gotoMSG
+{
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    MSGController *MSG = [storyBoard instantiateViewControllerWithIdentifier:@"MSGController"];
+    
+    [self loadingLoginViewController];
+    [self.mainTabBarController.selectedViewController pushViewController:MSG animated:YES];
+    
 }
 
 -(void) gotoConversation
@@ -173,18 +180,15 @@
     [self.mainTabBarController.selectedViewController pushViewController:conversationVC animated:YES];
 }
 
-//处理推送及跳转,发送请求更新badge 消息itemID = 123;类型typeID = 456;
+//处理推送及跳转,发送请求更新badge 消息itemID
 -(void) handlePush:(NSDictionary *)userInfo
 {
-    int type=[[userInfo objectForKey:@"typeID"] intValue];
     int item=[[userInfo objectForKey:@"itemID"] intValue];
     
-    if(item && type)
+    if(item)
     {
         //跳转
-        NSDictionary *dic = @{@"type":[NSNumber numberWithInt:2],@"subType":[NSNumber numberWithInt:0]};
-        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-        [center postNotificationName:@"myMsg" object:nil userInfo:dic];
+        [self gotoMSG];
     }else{
         [self gotoConversation];
     }
