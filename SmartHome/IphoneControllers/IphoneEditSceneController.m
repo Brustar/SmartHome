@@ -798,8 +798,6 @@
             }
         }
 //        aireCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-      
-        aireCell.AireSlider.value = device.temperature;
         aireCell.deviceid = _AirArray[indexPath.row];
         aireCell.AireNameLabel.text = device.name;
         
@@ -970,7 +968,6 @@
             }
         }
         ScreenCell.ScreenCurtainLabel.text = device.name;
-        ScreenCell.ScreenCurtainBtn.selected = device.power;
 //        ScreenCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         ScreenCell.deviceid = _MBArray[indexPath.row];
         
@@ -999,7 +996,7 @@
             }
         }
         BjMusicCell.BjMusicNameLb.text = device.name;
-        BjMusicCell.BjPowerButton.selected = device.power;
+  
 //        cell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
         BjMusicCell.deviceid = _BJMusicArray[indexPath.row];
         

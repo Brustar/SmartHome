@@ -75,7 +75,7 @@
 {
     [super viewWillAppear:animated];
     if (ON_IPAD) {
-        self.View1.hidden = NO;
+        self.View1.hidden = YES;
     }else{
         
         self.View1.hidden = YES;

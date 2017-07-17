@@ -406,6 +406,7 @@
         
         return cell;
     }if (indexPath.section == 1) {//调色灯
+
         NewColourCell * newColourCell = [tableView dequeueReusableCellWithIdentifier:@"NewColourCell" forIndexPath:indexPath];
         newColourCell.roomID = self.roomID;
         newColourCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];

@@ -121,7 +121,7 @@
     [self creatItemID];
     if (ON_IPAD) {
 
-        self.view3.hidden = NO;
+        self.view3.hidden = YES;
         self.tableViewConstraintLeading.constant = 20;
         self.tableViewConstraintTrailing.constant = 20;
         self.View1TrailingConstraint.constant = 20;
@@ -224,6 +224,15 @@
         }else{
             [MBProgressHUD showError:responseObject[@"Msg"]];
         }
+    }if (tag == 3) {
+        if ([responseObject[@"result"] intValue]==0)
+        {
+
+            [MBProgressHUD showSuccess:responseObject[@"Msg"]];
+            
+        }else{
+            [MBProgressHUD showError:@"操作失败"];
+        }
     }
 
 }
@@ -294,9 +303,21 @@
     DetailMSGViewController * MSGVC = [oneStoryBoard instantiateViewControllerWithIdentifier:@"DetailMSGViewController"];
     _itemid = self.itemIdArrs[indexPath.row];
     MSGVC.itemID = [_itemid intValue];
-    [self.navigationController pushViewController:MSGVC animated:YES];
+     [self sendRequestForMsgWithItemId:[_itemid integerValue]];
+     [self.navigationController pushViewController:MSGVC animated:YES];
 }
-
+-(void)sendRequestForMsgWithItemId:(NSInteger)itemID
+{
+    NSString *authorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/notify.aspx",[IOManager httpAddr]];
+    if (authorToken) {
+        NSDictionary *dic = @{@"token":authorToken,@"optype":[NSNumber numberWithInteger:5],@"itemid":[NSNumber numberWithInteger:itemID]};
+        HttpManager *http=[HttpManager defaultManager];
+        http.delegate = self;
+        http.tag = 3;
+        [http sendPost:url param:dic];
+    }
+}
 //编辑操作
 -(void)startEdit:(UIBarButtonItem *)btn
 {

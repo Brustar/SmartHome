@@ -10,6 +10,7 @@
 #import "MBProgressHUD+NJ.h"
 #import "HttpManager.h"
 #import "CryptoManager.h"
+#import "NSString+RegMatch.h"
 
 @interface ChangePassWordVC ()
 
@@ -31,7 +32,7 @@
     _naviRightBtn = [CustomNaviBarView createNormalNaviBarBtnByTitle:@"保存" target:self action:@selector(rightBtnClicked:)];
      _naviRightBtn.enabled = NO;
      [_naviRightBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
-     [self.confirmedPsd addTarget:self action:@selector(endediting) forControlEvents:UIControlEventEditingDidEnd];
+     [self.confirmedPsd addTarget:self action:@selector(confirmedPsdEndediting) forControlEvents:UIControlEventEditingDidEnd];
      [self.passWordField addTarget:self action:@selector(endediting) forControlEvents:UIControlEventEditingDidEnd];
 
     [self setNaviBarRightBtn:_naviRightBtn];
@@ -47,12 +48,29 @@
 }
 -(void)endediting
 {
-    if (self.confirmedPsd.text.length == 0) {
+    if(![self.passWordField.text isPassword])
+    {
+        [MBProgressHUD showError:@"密码应该是6-8位字符"];
         _naviRightBtn.enabled = NO;
         [_naviRightBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+        return;
+    }else{
+         _naviRightBtn.enabled = YES;
+    }
+    
+}
+-(void)confirmedPsdEndediting
+{
+   if (![self.passWordField.text isEqualToString:self.confirmedPsd.text])
+    {
+        [MBProgressHUD showError:@"两次密码不匹配"];
+        _naviRightBtn.enabled = NO;
+        [_naviRightBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+        return;
     }else{
         _naviRightBtn.enabled = YES;
     }
+    
 }
 -(void)sendRequest
 {
@@ -84,19 +102,17 @@
 }
 -(void)rightBtnClicked:(UIButton *)bbt
 {
+   
     NSString *isDemo = [UD objectForKey:IsDemo];
     if ([isDemo isEqualToString:@"YES"]) {
         [MBProgressHUD showSuccess:@"真实用户才可以修改成功"];
-         [self.navigationController popViewControllerAnimated:YES];
+        
     }else{
-        if ([self.passWordField.text compare:self.confirmedPsd.text] == NSOrderedSame) {
-            [self sendRequest];
-            [self.navigationController popViewControllerAnimated:YES];
-        }else{
-            
-            [MBProgressHUD showError:@"两次密码不相同"];
-        }
+        
+         [self sendRequest];
     }
+    
+     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
