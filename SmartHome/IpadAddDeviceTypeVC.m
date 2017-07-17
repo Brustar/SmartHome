@@ -4,7 +4,7 @@
 //
 //  Created by zhaona on 2017/6/1.
 //  Copyright © 2017年 Brustar. All rights reserved.
-//
+//Ipad添加设备界面
 
 #import "IpadAddDeviceTypeVC.h"
 #import "NewLightCell.h"
@@ -267,24 +267,22 @@
         return aireCell;
     }if (indexPath.section == 4) {//窗帘
          [self.tableView setSeparatorStyle: UITableViewCellSeparatorStyleNone];
-        CurtainTableViewCell * aireCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
-        aireCell.backgroundColor = [UIColor clearColor];
-        aireCell.roomID = self.roomID;
-        aireCell.sceneid = self.sceneid;
+        CurtainTableViewCell * CurtainCell = [tableView dequeueReusableCellWithIdentifier:@"CurtainTableViewCell" forIndexPath:indexPath];
+        CurtainCell.backgroundColor = [UIColor clearColor];
+        CurtainCell.roomID = self.roomID;
+        CurtainCell.sceneid = self.sceneid;
         Device *device = [SQLManager getDeviceWithDeviceID:[_CurtainArray[indexPath.row] intValue]];
-        aireCell.label.text = device.name;
-        aireCell.deviceid = _CurtainArray[indexPath.row];
-        aireCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
-        aireCell.deviceid = _CurtainArray[indexPath.row];
+        CurtainCell.label.text = device.name;
+        CurtainCell.deviceid = _CurtainArray[indexPath.row];
+        CurtainCell.sceneid = [NSString stringWithFormat:@"%d",self.sceneID];
+        CurtainCell.deviceid = _CurtainArray[indexPath.row];
         _scene=[[SceneManager defaultManager] readSceneByID:self.sceneID];
+         [CurtainCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
 
-//        [aireCell query:[NSString stringWithFormat:@"%d", device.eID]];
-         [aireCell query:[NSString stringWithFormat:@"%d", device.eID] delegate:self];
-
-        aireCell.scene = _scene;
+        CurtainCell.scene = _scene;
 
         
-        return aireCell;
+        return CurtainCell;
     }if (indexPath.section == 5) {//TV
          [self.tableView setSeparatorStyle: UITableViewCellSeparatorStyleNone];
         IpadTVCell * TVCell = [tableView dequeueReusableCellWithIdentifier:@"IpadTVCell" forIndexPath:indexPath];

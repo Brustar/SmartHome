@@ -10,6 +10,7 @@
 #import "SceneManager.h"
 #import "Scene.h"
 #import "SQLManager.h"
+#import "MBProgressHUD+NJ.h"
 
 
 @interface CYPhotoCell()<UIGestureRecognizerDelegate,UIActionSheetDelegate>
@@ -39,35 +40,46 @@
 //开关
 - (IBAction)powerBtn:(id)sender {
    
-    NSMutableArray * sceneArrID =[NSMutableArray array];
-    NSArray * seceneArr = [SQLManager getScensByRoomId:self.roomID];
-    for (int i = 0; i < seceneArr.count; i ++) {
-        Scene * scene = [[Scene alloc] init];
-        scene = seceneArr[i];
-        NSString * sceneID = [NSString stringWithFormat:@"%d",scene.sceneID];
-        [sceneArrID addObject:sceneID];
-    }
-  
-    if (self.sceneStatus == 0) { //点击前，场景是关闭状态，需打开场景
-             [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateNormal];
-        if([sceneArrID containsObject:[NSString stringWithFormat:@"%d",self.sceneID]]) {
-               [[SceneManager defaultManager] startScene:self.sceneID];//打开场景
-               [SQLManager updateSceneStatus:1 sceneID:self.sceneID];//更新数据库
-        }else{
-               [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];//关闭场景
-               [SQLManager updateSceneStatus:0 sceneID:self.sceneID];//更新数据库
+    NSString *isDemo = [UD objectForKey:IsDemo];
+    if ([isDemo isEqualToString:@"YES"]) {
+        [MBProgressHUD showSuccess:@"真实用户才可以操作"];
+        if (self.sceneStatus == 0) { //点击前，场景是关闭状态，需打开场景
+            [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateNormal];
+             [SQLManager updateSceneStatus:1 sceneID:self.sceneID];//更新数据库
+        }else if (self.sceneStatus == 1) { //点击前，场景是打开状态，需关闭场景
+            [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
+             [SQLManager updateSceneStatus:0 sceneID:self.sceneID];//更新数据库
         }
         
-    }else if (self.sceneStatus == 1) { //点击前，场景是打开状态，需关闭场景
+    }else{
+        NSMutableArray * sceneArrID =[NSMutableArray array];
+        NSArray * seceneArr = [SQLManager getScensByRoomId:self.roomID];
+        for (int i = 0; i < seceneArr.count; i ++) {
+            Scene * scene = [[Scene alloc] init];
+            scene = seceneArr[i];
+            NSString * sceneID = [NSString stringWithFormat:@"%d",scene.sceneID];
+            [sceneArrID addObject:sceneID];
+        }
+        
+        if (self.sceneStatus == 0) { //点击前，场景是关闭状态，需打开场景
+            [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateNormal];
+            if([sceneArrID containsObject:[NSString stringWithFormat:@"%d",self.sceneID]]) {
+                [[SceneManager defaultManager] startScene:self.sceneID];//打开场景
+                [SQLManager updateSceneStatus:1 sceneID:self.sceneID];//更新数据库
+            }else{
+                [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];//关闭场景
+                [SQLManager updateSceneStatus:0 sceneID:self.sceneID];//更新数据库
+            }
+            
+        }else if (self.sceneStatus == 1) { //点击前，场景是打开状态，需关闭场景
             [self.powerBtn setBackgroundImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
             [[SceneManager defaultManager] poweroffAllDevice:self.sceneID];//关闭场景
             [SQLManager updateSceneStatus:0 sceneID:self.sceneID];//更新数据库
         }
-    if (_delegate && [_delegate respondsToSelector:@selector(refreshTableView:)]) {
-        [self.delegate refreshTableView:self];
+        if (_delegate && [_delegate respondsToSelector:@selector(refreshTableView:)]) {
+            [self.delegate refreshTableView:self];
         }
-
-    NSLog(@"power");
+    }
 
 }
 //定时
@@ -81,11 +93,16 @@
     }else{
         [self.seleteSendPowBtn setBackgroundImage:[UIImage imageNamed:@"alarm clock1"] forState:UIControlStateNormal];
     }
-    
-    
-    if (_delegate && [_delegate respondsToSelector:@selector(onTimingBtnClicked:sceneID:)]) {
-        [_delegate onTimingBtnClicked:sender sceneID:self.sceneID];
+    NSString *isDemo = [UD objectForKey:IsDemo];
+    if ([isDemo isEqualToString:@"YES"]) {
+        [MBProgressHUD showSuccess:@"真实用户才可以操作"];
+    }else{
+        if (_delegate && [_delegate respondsToSelector:@selector(onTimingBtnClicked:sceneID:)]) {
+            [_delegate onTimingBtnClicked:sender sceneID:self.sceneID];
+        }
     }
+    
+    
 }
 
 @end

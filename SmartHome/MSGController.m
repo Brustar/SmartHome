@@ -303,7 +303,7 @@
     DetailMSGViewController * MSGVC = [oneStoryBoard instantiateViewControllerWithIdentifier:@"DetailMSGViewController"];
     _itemid = self.itemIdArrs[indexPath.row];
     MSGVC.itemID = [_itemid intValue];
-     [self sendRequestForMsgWithItemId:[_itemid integerValue]];
+//     [self sendRequestForMsgWithItemId:[_itemid integerValue]];
      [self.navigationController pushViewController:MSGVC animated:YES];
 }
 -(void)sendRequestForMsgWithItemId:(NSInteger)itemID

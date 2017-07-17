@@ -52,8 +52,11 @@
      _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
         Aircon *device=[[Aircon alloc] init];
         [device setDeviceID:[self.deviceid intValue]];
-        [device setWaiting:self.AireSwitchBtn.selected];
-        //    [device setTemperature:[self.showTemLabel.text intValue]];
+        [device setPoweron:self.AireSwitchBtn.selected];
+//    [NSString stringWithFormat:@"%ld°C", lroundf(self.AireSlider.value)]
+        [device setTemperature:(int)lroundf(self.AireSlider.value)];
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
     
     if (sender == self.AireSwitchBtn) {
         self.AireSwitchBtn.selected = !self.AireSwitchBtn.selected;
@@ -119,8 +122,7 @@
     }
 
     
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
+   
     [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
 }
 

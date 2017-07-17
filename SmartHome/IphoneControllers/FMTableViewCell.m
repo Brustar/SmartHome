@@ -76,7 +76,8 @@
         [device setRvolume:device.rvolume];
         [device setChannel:device.channel];
 
-    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
     if (sender == self.FMSwitchBtn) {
          NSData *data=nil;
         self.FMSwitchBtn.selected = !self.FMSwitchBtn.selected;
@@ -158,8 +159,7 @@
         }
     }
     
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
+   
     
     [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
   

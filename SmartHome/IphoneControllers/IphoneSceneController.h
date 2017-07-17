@@ -29,5 +29,5 @@
 
 -(void)setUpRoomView;
 
-
+-(void)refreshSceneUI;
 @end

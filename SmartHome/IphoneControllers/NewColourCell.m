@@ -57,7 +57,8 @@
         [device setDeviceID:[self.deviceid intValue]];
         [device setIsPoweron:self.colourBtn.selected];
         [device setColor:@[]];
-    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
     if (sender == self.colourBtn) {
         self.colourBtn.selected = !self.colourBtn.selected;
         if (self.colourBtn.selected) {
@@ -117,8 +118,7 @@
 
     }
     
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
+   
     [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
    
 }

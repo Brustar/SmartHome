@@ -337,7 +337,7 @@
         aireCell.AireNameLabel.text = device.name;
         if(dictionary)
         {
-            int waiting;
+            int poweron;
             int temperature;
             for (NSDictionary *dic in [dictionary objectForKey:@"devices"]){
                 
@@ -348,10 +348,10 @@
                 }
                 if (deviceID == [_AirArray[indexPath.row] intValue]) {
                     
-                    waiting = [dic[@"waiting"] intValue];
+                    poweron = [dic[@"poweron"] intValue];
                     temperature = [dic[@"temperature"] intValue];
-                    aireCell.AireSwitchBtn.selected = waiting;
-                    aireCell.AireSlider.value = (float)temperature / 100.0f;
+                    aireCell.AireSwitchBtn.selected = poweron;
+                    aireCell.AireSlider.value = temperature;
                     aireCell.temperatureLabel.text = [NSString stringWithFormat:@"%ld°C", lroundf(aireCell.AireSlider.value)];
                     
                 }

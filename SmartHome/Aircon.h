@@ -25,6 +25,6 @@
 //定时
 @property (nonatomic) int timing;
 //是否打开
-@property (nonatomic) bool waiting;
+//@property (nonatomic) bool waiting;
 
 @end
