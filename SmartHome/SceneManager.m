@@ -573,6 +573,7 @@
                 device.WindLevel=[[dic objectForKey:@"WindLevel"] intValue];
                 device.Windirection=[[dic objectForKey:@"Windirection"] intValue];
                 device.mode=[[dic objectForKey:@"mode"] intValue];
+//                device.poweron=[[dic objectForKey:@"poweron"] intValue];
                 [devices addObject:device];
             }
             if ([dic objectForKey:@"dropped"]) {
