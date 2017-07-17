@@ -46,7 +46,8 @@
         Amplifier *device=[[Amplifier alloc] init];
         [device setDeviceID:[self.deviceid intValue]];
         [device setWaiting: self.OtherSwitchBtn.selected];
-    
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
     if (sender == self.OtherSwitchBtn) {
         self.OtherSwitchBtn.selected = !self.OtherSwitchBtn.selected;
         if (self.OtherSwitchBtn.selected) {
@@ -105,8 +106,7 @@
        
     }
     
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
+   
     [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
 }
 

@@ -979,5 +979,9 @@ static NSString * const CYPhotoId = @"photo";
     }
     
 }
-
+-(void)refreshSceneUI
+{
+    [self setUpRoomView];
+    [self.FirstCollectionView reloadData];
+}
 @end

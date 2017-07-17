@@ -45,6 +45,7 @@
     
     [self createImage];
 }
+
 - (void)setupNaviBar {
    
     [self setNaviBarTitle:@"消息通知"];
@@ -266,29 +267,35 @@
 }
 
 - (IBAction)clickDeleteBtn:(id)sender {
-    //放置要删除的对象
-    NSMutableArray *deleteArray = [NSMutableArray array];
-    
-    // 要删除的row
-    NSArray *selectedArray = [self.tableView indexPathsForSelectedRows];
-    
-    for (NSIndexPath *indexPath in selectedArray) {
-        if (self.msgArr[indexPath.row]) {
-              [deleteArray addObject:self.msgArr[indexPath.row]];
+    NSString *isDemo = [UD objectForKey:IsDemo];
+    if ([isDemo isEqualToString:@"YES"]) {
+           [MBProgressHUD showSuccess:@"真实用户才可以操作"];
+           [self.tableView reloadData];
+    }else{
+        //放置要删除的对象
+        NSMutableArray *deleteArray = [NSMutableArray array];
+        
+        // 要删除的row
+        NSArray *selectedArray = [self.tableView indexPathsForSelectedRows];
+        
+        for (NSIndexPath *indexPath in selectedArray) {
+            if (self.msgArr[indexPath.row]) {
+                [deleteArray addObject:self.msgArr[indexPath.row]];
+            }
         }
+        // 先删除数据源
+        for (id obj in deleteArray) {
+            [self.msgArr removeObject:obj];
+        }
+        
+        if(deleteArray.count != 0)
+        {
+            [self sendDeleteRequestWithArray:[deleteArray copy]];
+        }else {
+            [MBProgressHUD showError:@"请选择要删除的记录"];
+        }
+        [self.tableView reloadData];
     }
-    // 先删除数据源
-    for (id obj in deleteArray) {
-        [self.msgArr removeObject:obj];
-    }
-    
-    if(deleteArray.count != 0)
-    {
-        [self sendDeleteRequestWithArray:[deleteArray copy]];
-    }else {
-        [MBProgressHUD showError:@"请选择要删除的记录"];
-    }
-    [self.tableView reloadData];
     
 }
 

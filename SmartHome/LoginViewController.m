@@ -295,7 +295,7 @@
                            @"account":userName,
                            @"logintype":@(userNameType),
                            @"password":[passwd md5],
-                           @"pushtoken":info.pushToken?info.pushToken:@"",
+                           @"pushtoken":info.pushToken?info.pushToken:@" ",
                            @"devicetype":@(clientType),
                            @"hostid":@(currentHostId)
                            };
@@ -369,7 +369,7 @@
                            @"account":self.nameTextField.text,
                            @"logintype":@(userType),
                            @"password":[self.pwdTextField.text md5],
-                           @"pushtoken":info.pushToken?info.pushToken:@"",
+                           @"pushtoken":info.pushToken?info.pushToken:@" ",
                            @"devicetype":@(clientType),
                            @"hostid":@(currentHostId)
                            };

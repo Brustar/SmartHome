@@ -49,6 +49,8 @@
     [device setPoweron:self.TVSwitchBtn.selected];
     [device setVolume:self.TVSlider.value*100];
     
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
     if (sender == self.TVSwitchBtn) {
         
         self.TVSwitchBtn.selected = !self.TVSwitchBtn.selected;
@@ -114,8 +116,6 @@
     }
     
     
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
     [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
     
 }

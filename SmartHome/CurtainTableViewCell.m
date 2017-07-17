@@ -118,7 +118,6 @@
            
         }else{
             
-//             [IOManager removeTempFile];
             if (ON_IPAD) {
                  [self.AddcurtainBtn setImage:[UIImage imageNamed:@"ipad-icon_add_nol"] forState:UIControlStateNormal];
             }else{
@@ -130,6 +129,10 @@
             [_scene setMasterID:[[DeviceInfo defaultManager] masterID]];
             
             [_scene setReadonly:NO];
+            
+            //删除当前场景的当前硬件
+            NSArray *devices = [[SceneManager defaultManager] subDeviceFromScene:_scene withDeivce:device.deviceID];
+            [_scene setDevices:devices];
 
         }
       

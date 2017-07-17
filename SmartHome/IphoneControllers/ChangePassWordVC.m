@@ -108,8 +108,22 @@
         [MBProgressHUD showSuccess:@"真实用户才可以修改成功"];
         
     }else{
+        if(![self.passWordField.text isPassword])
+        {
+            [MBProgressHUD showError:@"密码应该是6-8位字符"];
+            _naviRightBtn.enabled = NO;
+            [_naviRightBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+            return;
+        }if (![self.passWordField.text isEqualToString:self.confirmedPsd.text])
+        {
+            [MBProgressHUD showError:@"两次密码不匹配"];
+            _naviRightBtn.enabled = NO;
+            [_naviRightBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+            return;
+        }else{
+             [self sendRequest];
+        }
         
-         [self sendRequest];
     }
     
      [self.navigationController popViewControllerAnimated:YES];

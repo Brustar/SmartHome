@@ -59,6 +59,11 @@
  */
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
+    //0.计算可见的矩形框属性
+    CGRect visiableRect;
+    visiableRect.size = self.collectionView.frame.size;
+    visiableRect.origin = self.collectionView.contentOffset;
+    
     // 获得super已经计算好的布局属性
     NSArray *array = [super layoutAttributesForElementsInRect:rect] ;
     
@@ -67,14 +72,18 @@
     
     // 在原有布局属性的基础上，进行微调
     for (UICollectionViewLayoutAttributes *attrs in array) {
+        //如果遍历的item和可见的矩形框的frame不相交,即不e是可见的,就直接跳过,只对可见的item进行放缩
+        if (!CGRectIntersectsRect(visiableRect, attrs.frame)) continue;
         // cell的中心点x 和 collectionView最中心点的x值 的间距
         CGFloat delta = ABS(attrs.center.x - centerX);
         
         // 根据间距值 计算 cell的缩放比例
         CGFloat scale = 1 - delta / self.collectionView.frame.size.width;
-        
+        if (scale<1) {
+            attrs.alpha = 0.5;
+        }
         // 设置缩放比例
-        attrs.transform = CGAffineTransformMakeScale(scale, scale);
+        attrs.transform = CGAffineTransformMakeScale(scale, scale);//(delta<30?scale:0.8,delta<30?scale:0.8);
 
     }
     return array;
@@ -108,12 +117,6 @@
     
     // 修改原有的偏移量
     proposedContentOffset.x += minDelta;
-    
-    if (([UIScreen mainScreen].bounds.size.height == 568.0)) {
-        self.scrollOffset = (proposedContentOffset.x-15)/(self.itemSize.width-75);
-    }else{
-        self.scrollOffset = (proposedContentOffset.x+5)/(self.itemSize.width-75);
-    }
     
     return proposedContentOffset;
 }

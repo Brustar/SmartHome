@@ -126,6 +126,9 @@
                         {   [MBProgressHUD showSuccess:@"新增成功"];
                             NSLog(@"新增场景，入库成功！");
                              [IOManager removeTempFile];
+                            UIStoryboard * board = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+                            IphoneSceneController * sceneVC = [board instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
+                             [sceneVC refreshSceneUI];
                         }else {
                             [MBProgressHUD showSuccess:@"新增失败"];
                             NSLog(@"新增场景，入库失败！");
@@ -570,6 +573,7 @@
                 device.WindLevel=[[dic objectForKey:@"WindLevel"] intValue];
                 device.Windirection=[[dic objectForKey:@"Windirection"] intValue];
                 device.mode=[[dic objectForKey:@"mode"] intValue];
+//                device.poweron=[[dic objectForKey:@"poweron"] intValue];
                 [devices addObject:device];
             }
             if ([dic objectForKey:@"dropped"]) {
