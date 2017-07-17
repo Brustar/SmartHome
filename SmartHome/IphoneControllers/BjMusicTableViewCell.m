@@ -58,6 +58,8 @@
         [device setDeviceID:[self.deviceid intValue]];
         [device setBgvolume:self.BjSlider.value * 100.0f];
         [device setPoweron:self.BjPowerButton.selected];
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
     
     if (sender == self.BjPowerButton) {
         self.BjPowerButton.selected = !self.BjPowerButton.selected;
@@ -143,8 +145,7 @@
         }
     }
     
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
+   
     
     [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
     

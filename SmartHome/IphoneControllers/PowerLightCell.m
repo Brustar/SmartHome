@@ -48,6 +48,8 @@
     [device setIsPoweron:self.powerLightBtn.selected];
     [device setColor:@[]];
     
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
     if (sender == self.powerLightBtn) {
         self.powerLightBtn.selected = !self.powerLightBtn.selected;
         if (self.powerLightBtn.selected) {
@@ -100,9 +102,7 @@
         
     }
     
-    
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
+   
     [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
     
     

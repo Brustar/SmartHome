@@ -58,6 +58,8 @@
      _scene=[[SceneManager defaultManager] readSceneByID:[self.sceneid intValue]];
         Amplifier *device=[[Amplifier alloc] init];
         [device setDeviceID:[self.deviceid intValue]];
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
         [device setWaiting: self.ScreenCurtainBtn.selected];
     if (sender == self.ScreenCurtainBtn) {
         self.ScreenCurtainBtn.selected = !self.ScreenCurtainBtn.selected;
@@ -108,8 +110,7 @@
         }
     }
     
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
+  
     
     [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
   

@@ -54,6 +54,8 @@
         [device setDeviceID:[self.deviceid intValue]];
         [device setWaiting:self.AireSwitchBtn.selected];
         //    [device setTemperature:[self.showTemLabel.text intValue]];
+    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
+    [_scene setDevices:devices];
     
     if (sender == self.AireSwitchBtn) {
         self.AireSwitchBtn.selected = !self.AireSwitchBtn.selected;
@@ -119,8 +121,7 @@
     }
 
     
-    NSArray *devices=[[SceneManager defaultManager] addDevice2Scene:_scene withDeivce:device withId:device.deviceID];
-    [_scene setDevices:devices];
+   
     [[SceneManager defaultManager] addScene:_scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
 }
 
