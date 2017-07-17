@@ -23,8 +23,9 @@
 #import "BjMusicTableViewCell.h"
 #import "SceneManager.h"
 #import "IphoneEditSceneController.h"
-#import "SceneManager.h"
 #import "HttpManager.h"
+#import "SocketManager.h"
+#import "PackManager.h"
 #import "IpadDeviceListViewController.h"
 #import "IpadDVDTableViewCell.h"
 #import "IpadTVCell.h"
@@ -41,7 +42,7 @@
 #define minimumLineSpacing 3.0
 
 
-@interface FamilyHomeDetailViewController : CustomViewController<UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate,UITableViewDataSource, HttpDelegate, SingleMaskViewDelegate>
+@interface FamilyHomeDetailViewController : CustomViewController<UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate,UITableViewDataSource, HttpDelegate, SingleMaskViewDelegate, TcpRecvDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *softButton;
 @property (weak, nonatomic) IBOutlet UIButton *normalButton;

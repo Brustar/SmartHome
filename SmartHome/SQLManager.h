@@ -199,4 +199,5 @@
 + (BOOL)updateChatsPortraitByID:(int)userID nickname:(NSString *)nickname;
 + (BOOL)updateUserNickNameByID:(int)userID nickName:(NSString *)nickName;
 + (NSArray *)getDeviceIDsBySubTypeId:(int)subTypeId;
++ (NSArray *)getDeviceIDsByRid:(NSInteger)rId;
 @end
