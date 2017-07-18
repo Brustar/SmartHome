@@ -29,5 +29,9 @@
 @property (nonatomic, assign) BOOL isGloom;
 @property (nonatomic, assign) BOOL isRomantic;
 @property (nonatomic, assign) BOOL isSprightly;
+@property(nonatomic, strong) NSString *startTime;
+@property(nonatomic, strong) NSString *endTime;
+@property(nonatomic, strong) NSString *repeatition;
+@property(nonatomic, strong) NSMutableString *repeatString;
 
 @end

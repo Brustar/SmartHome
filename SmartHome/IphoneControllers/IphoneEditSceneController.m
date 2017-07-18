@@ -129,24 +129,6 @@
     [LoadMaskHelper showMaskWithType:SceneDetail onView:self.tabBarController.view delay:0.5 delegate:self];
 }
 
-#pragma mark - 获取房间设备状态
-- (void)fetchDevicesStatus {
-    NSString *url = [NSString stringWithFormat:@"%@Cloud/equipment_status_list.aspx",[IOManager httpAddr]];
-    NSString *auothorToken = [UD objectForKey:@"AuthorToken"];
-    
-    if (auothorToken.length >0) {
-        NSDictionary *dict = @{@"token":auothorToken,
-                               @"optype":@(2),
-                               @"roomid":@(self.roomID)
-                               };
-        HttpManager *http = [HttpManager defaultManager];
-        http.delegate = self;
-        http.tag = 1;
-        [http sendPost:url param:dict showProgressHUD:NO];
-    }
-    
-}
-
 - (void)setupNaviBar {
     
      NSString * roomName =[SQLManager getRoomNameByRoomID:self.roomID];
@@ -207,10 +189,35 @@
                     NSString *startTime = dict[@"startTime"];
                     NSString *endTime = dict[@"endTime"];
                     NSArray * weekDays = dict[@"weekDays"];
+                    NSMutableString *strSelete = [NSMutableString string];
+                for (int i = 0; i < weekDays.count; i++) {
+                    if ([weekDays[i] intValue]== 0) {
+                        [strSelete appendString:@"周日、"];
+                    }if ([weekDays[i] intValue]== 1) {
+                         [strSelete appendString:@"周一、"];
+                    }if ([weekDays[i] intValue]== 2) {
+                         [strSelete appendString:@"周二、"];
+                    }if ([weekDays[i] intValue]== 3) {
+                         [strSelete appendString:@"周三、"];
+                    }if ([weekDays[i] intValue]== 4) {
+                         [strSelete appendString:@"周四、"];
+                    }if ([weekDays[i] intValue]== 5) {
+                         [strSelete appendString:@"周五、"];
+                    }if ([weekDays[i] intValue]== 6) {
+                         [strSelete appendString:@"周六、"];
+                    }
+                         
+            }
                     newTimerVC.startTimeStr = startTime;
                     newTimerVC.endTimeStr = endTime;
-                    newTimerVC.repeatitionStr =[weekDays componentsJoinedByString:@","];
+                    newTimerVC.repeatitionStr =[NSString stringWithFormat:@"%@",strSelete];
+                if ([newTimerVC.repeatitionStr isEqualToString:@"周一、周二、周三、周四、周五、"]) {
+                    newTimerVC.repeatitionStr = @"工作日";
+                }if ([newTimerVC.repeatitionStr isEqualToString:@"周日、周六、"]) {
+                     newTimerVC.repeatitionStr = @"周末";
+                }
             }
+            
         }
         
         newTimerVC.sceneID = self.sceneID;
