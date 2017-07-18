@@ -58,16 +58,19 @@
     
     self.nameTextField.delegate = self;
     self.pwdTextField.delegate = self;
-    
-    self.nameTextField.text = [[NSUserDefaults  standardUserDefaults] objectForKey:@"Account"];
     userType = [[UD objectForKey:@"Type"] intValue];
-    self.pwdTextField.text = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Password"] decryptWithDes:DES_KEY];
     UserType =[[UD objectForKey:@"UserType"] intValue];
     
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    if ([[UD objectForKey:@"Account"] isEqualToString:@"DemoUser"]) {
+        self.nameTextField.text = @"";
+        self.pwdTextField.text = @"";
+    }else {
+        self.nameTextField.text = [UD objectForKey:@"Account"];
+        self.pwdTextField.text = [[UD objectForKey:@"Password"] decryptWithDes:DES_KEY];
+    }
     
     //判断滑动图是否出现过，第一次调用时“isScrollViewAppear” 这个key 对应的值是nil，会进入if中
-    if (![@"YES" isEqualToString:[userDefaults objectForKey:@"isScrollViewAppear"]]) {
+    if (![@"YES" isEqualToString:[UD objectForKey:@"isScrollViewAppear"]]) {
         
         [self showScrollView];//显示滑动图
     }

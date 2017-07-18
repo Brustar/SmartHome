@@ -648,6 +648,9 @@
                 
                 // 透明按钮 (小圆)
                 [maskView addTransparentBtn:CGRectMake(45, 135, 112, 112) tag:1];// 表盘按钮
+                
+                //透明按钮（设备小图标）
+                [maskView addTransparentBtn:CGRectMake(UI_SCREEN_WIDTH/2-186/2-90, UI_SCREEN_HEIGHT/2+130, 186/2, 35/2) tag:2];
             }
             
         }

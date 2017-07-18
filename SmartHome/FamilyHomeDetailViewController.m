@@ -20,7 +20,7 @@
     [self initUI];
     [self getAllScenes];//获取所有场景
     [self getAllDevices];//获取所有设备
-    [self fetchDevicesStatus];//获取所有设备的状态
+    [self getDeviceStateInfoByTcp];//TCP 获取所有设备状态
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -455,6 +455,7 @@
             BjMusicCell.BJmusicConstraint.constant = 10;
             BjMusicCell.BjMusicNameLb.text = device.name;
             BjMusicCell.BjPowerButton.selected = device.power;//开关
+            BjMusicCell.BjSlider.value = device.volume/100.0;//音量
             BjMusicCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
             return BjMusicCell;
         }else if (device.hTypeId == 13) { //DVD
@@ -467,6 +468,7 @@
                 dvdCell.DVDConstraint.constant = 10;
                 dvdCell.DVDNameLabel.text = device.name;
                 dvdCell.DVDSwitchBtn.selected = device.power;//开关
+                dvdCell.DVDSlider.value = device.volume/100.0;//音量
                 dvdCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
                 return dvdCell;
             }else {
@@ -477,6 +479,7 @@
                 dvdCell.DVDConstraint.constant = 10;
                 dvdCell.DVDNameLabel.text = device.name;
                 dvdCell.DVDSwitchBtn.selected = device.power;//开关
+                dvdCell.DVDSlider.value = device.volume;//音量
                 dvdCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
                 return dvdCell;
             }
@@ -490,6 +493,7 @@
             FMCell.FMLayouConstraint.constant = 10;
             FMCell.FMNameLabel.text = device.name;
             FMCell.FMSwitchBtn.selected = device.power;//开关
+            FMCell.FMSlider.value = device.volume;//音量
             FMCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
             return FMCell;
         }else if (device.hTypeId == 17) { //幕布
@@ -522,6 +526,7 @@
                 tvCell.TVConstraint.constant = 10;
                 tvCell.TVNameLabel.text = device.name;
                 tvCell.TVSwitchBtn.selected = device.power;//开关
+                tvCell.TVSlider.value = device.volume;//音量
                 tvCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
                 return tvCell;
             }else {
@@ -532,6 +537,7 @@
                 tvCell.TVConstraint.constant = 10;
                 tvCell.TVNameLabel.text = device.name;
                 tvCell.TVSwitchBtn.selected = device.power;//开关
+                tvCell.TVSlider.value = device.volume;//音量
                 tvCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
                 return tvCell;
             }
@@ -704,6 +710,75 @@
         [http sendPost:url param:dict showProgressHUD:NO];
     }
     
+}
+
+- (void)getDeviceStateInfoByTcp {
+    
+    //查询所有的设备ID
+    NSArray *devIDs = [SQLManager getDeviceIDsByRid:self.roomID];
+    
+    NSMutableArray *deviceIDs = [[NSMutableArray alloc] init];
+    if (devIDs.count >0) {
+        [deviceIDs addObjectsFromArray:devIDs];
+    }
+    
+    SocketManager *sock = [SocketManager defaultManager];
+    sock.delegate = self;
+    
+    [deviceIDs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        
+        NSData *data = [[DeviceInfo defaultManager] query:[obj stringValue]];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+    }];
+}
+
+#pragma mark - TCP recv delegate
+-(void)recv:(NSData *)data withTag:(long)tag
+{
+    Proto proto=protocolFromData(data);
+    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
+        return;
+    }
+    //同步设备状态
+    if(proto.cmd == 0x01) {
+        
+        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+        Device *device = [SQLManager getDeviceWithDeviceID:devID.intValue];
+        
+        if (device) {
+            device.actionState = proto.action.state;
+            
+            if(proto.action.state == 0x6A) { //温度
+                device.temperature  = proto.action.RValue;
+                
+            }
+            
+            else if(proto.action.state == 0x1A) { //亮度
+                device.bright = proto.action.RValue;
+            }
+            
+            else if(proto.action.state == 0x1B) { //颜色
+                device.color = [NSString stringWithFormat:@"%d,%d,%d", proto.action.RValue, proto.action.G, proto.action.B];
+            }
+            
+            else if (proto.action.state == 0x2A) { //窗帘的位置
+                device.position = proto.action.RValue;
+            }
+            
+            else if (proto.action.state == PROTOCOL_VOLUME) { //音量 
+                device.volume = proto.action.RValue;
+            }
+            
+            else if (proto.action.state == PROTOCOL_OFF || proto.action.state == PROTOCOL_ON) { //开关
+                device.power = proto.action.state;
+            }
+            
+            [SQLManager updateDeviceStatus:device];
+            
+            [self.deviceTableView reloadData];//刷新UI
+        }
+        
+    }
 }
 
 #pragma mark - Http Delegate
