@@ -176,10 +176,8 @@
     IphoneSaveNewSceneController * iphoneSaveNewSceneVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"IphoneSaveNewSceneController"];
    
     if ([lastVC isKindOfClass:[iphoneSaveNewSceneVC class]]) {
-//        _scene.schedules = @[self.schedule];
         self.schedule.startTime = self.starTimeLabel.text;
         self.schedule.endTime = self.endTimeLabel.text;
-        self.schedule.weekDays = [self.RepetitionLable.text componentsSeparatedByString:@"、"];
         _scene.schedules = @[self.schedule];
         [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
         NSDictionary *dic = @{
@@ -195,10 +193,10 @@
         Schedule *sch = [[Schedule alloc] init];
         sch.startTime = self.starTimeLabel.text;
         sch.endTime = self.endTimeLabel.text;
-        sch.weekDays = [self.RepetitionLable.text componentsSeparatedByString:@"、"];
+        sch.weekDays = self.schedule.weekDays;
         _scene.schedules = @[sch];
         [[SceneManager defaultManager] editSceneTimer:_scene];
-//        [[SceneManager defaultManager] editScene:_scene];
+
     }
 
     [self.navigationController popViewControllerAnimated:YES];
