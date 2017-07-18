@@ -16,14 +16,13 @@
 #import "SQLManager.h"
 
 @interface UserInfoViewController : CustomViewController<UITableViewDelegate, UITableViewDataSource, HttpDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UIButton *headerBtn;
+@property (strong, nonatomic) UILabel *nameLabel;
+@property (strong, nonatomic) UIButton *headerBtn;
 @property (weak, nonatomic) IBOutlet UITableView *userinfoTableView;
-@property (nonatomic, strong) UserInfo *userInfomation;
+@property (nonatomic, strong)  UserInfo *userInfomation;
 @property (nonatomic, strong)  UserInfo *info;
 @property (nonatomic, strong) NSString *userTypeStr;
 @property (nonatomic, strong) UIImage *selectedImg;//选择的头像图片
-- (IBAction)headerBtnClicked:(id)sender;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *UserinfoTrailingConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *UserinfoLeadingConstraint;
 

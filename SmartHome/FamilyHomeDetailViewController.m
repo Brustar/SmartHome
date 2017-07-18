@@ -270,7 +270,7 @@
     FamilyHomeDetailSceneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"familySceneCell" forIndexPath:indexPath];
     
     Scene *scene = self.sceneArray[indexPath.row];
-    [cell.sceneButton sd_setBackgroundImageWithURL:[NSURL URLWithString:scene.picName] forState:UIControlStateNormal];
+    [cell.sceneButton sd_setBackgroundImageWithURL:[NSURL URLWithString:scene.picName] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"PhotoIcon9"]];
     [cell.sceneButton setTitle:scene.sceneName forState:UIControlStateNormal];
     
     
