@@ -532,12 +532,14 @@
                 TV *device=[[TV alloc] init];
                 device.deviceID=[[dic objectForKey:@"deviceID"] intValue];
                 device.volume=[[dic objectForKey:@"volume"] intValue];
+                device.poweron = [[dic objectForKey:@"poweron"] intValue];
                 [devices addObject:device];
             }
             if ([dic objectForKey:@"dvolume"]) {
                 DVD *device=[[DVD alloc] init];
                 device.deviceID=[[dic objectForKey:@"deviceID"] intValue];
                 device.dvolume=[[dic objectForKey:@"dvolume"] intValue];
+                device.poweron = [[dic objectForKey:@"poweron"] intValue];
                 [devices addObject:device];
             }
             if ([dic objectForKey:@"rvolume"]) {
@@ -557,6 +559,7 @@
                 BgMusic *device=[[BgMusic alloc] init];
                 device.deviceID=[[dic objectForKey:@"deviceID"] intValue];
                 device.bgvolume=[[dic objectForKey:@"bgvolume"] intValue];
+                device.poweron = [[dic objectForKey:@"poweron"] intValue];
                 [devices addObject:device];
             }
             if ([dic objectForKey:@"unlock"]) {
@@ -573,7 +576,7 @@
                 device.WindLevel=[[dic objectForKey:@"WindLevel"] intValue];
                 device.Windirection=[[dic objectForKey:@"Windirection"] intValue];
                 device.mode=[[dic objectForKey:@"mode"] intValue];
-//                device.poweron=[[dic objectForKey:@"poweron"] intValue];
+                device.poweron=[[dic objectForKey:@"poweron"] intValue];
                 [devices addObject:device];
             }
             if ([dic objectForKey:@"dropped"]) {
