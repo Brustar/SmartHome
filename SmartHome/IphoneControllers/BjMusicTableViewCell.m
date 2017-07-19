@@ -130,14 +130,9 @@
         }
       
     }else if (sender == self.BjSlider){
-        NSData *data=[[DeviceInfo defaultManager] changeVolume:self.BjSlider.value deviceID:self.deviceid];
+        NSData *data=[[DeviceInfo defaultManager] changeVolume:self.BjSlider.value*100 deviceID:self.deviceid];
         SocketManager *sock=[SocketManager defaultManager];
         [sock.socket writeData:data withTimeout:1 tag:1];
-//        self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.BjSlider.value];
-        if (BLUETOOTH_MUSIC) {
-            AudioManager *audio=[AudioManager defaultManager];
-            [audio.musicPlayer setVolume:self.BjSlider.value/100.0];
-        }
         
         
         if (_delegate && [_delegate respondsToSelector:@selector(onBjSliderValueChanged:)]) {

@@ -43,9 +43,9 @@
     self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     // 设置内边距
     //CGFloat inset = (self.collectionView.frame.size.width - self.itemSize.width) * 0.5;
-    self.sectionInset = UIEdgeInsetsMake(10, 40, 10, 40);
+    self.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
     //  每个item在水平方向的最小间距
-    self.minimumLineSpacing = -75;
+    self.minimumLineSpacing = 0;
 }
 
 /**
@@ -76,14 +76,17 @@
         if (!CGRectIntersectsRect(visiableRect, attrs.frame)) continue;
         // cell的中心点x 和 collectionView最中心点的x值 的间距
         CGFloat delta = ABS(attrs.center.x - centerX);
-        
-        // 根据间距值 计算 cell的缩放比例
-        CGFloat scale = 1 - delta / self.collectionView.frame.size.width;
-        if (scale<1) {
-            attrs.alpha = 0.5;
+        float maxScalce = 1.4;
+        if (ON_IPAD) {
+            maxScalce = 1.2;
+        }
+        // 根据间距值 计算 cell的缩放比例 1.4
+        CGFloat scale = maxScalce - delta / self.collectionView.frame.size.width;
+        if (scale>1) {
+            scale = 1;
         }
         // 设置缩放比例
-        attrs.transform = CGAffineTransformMakeScale(scale, scale);//(delta<30?scale:0.8,delta<30?scale:0.8);
+        attrs.transform = CGAffineTransformMakeScale(scale,scale);
 
     }
     return array;

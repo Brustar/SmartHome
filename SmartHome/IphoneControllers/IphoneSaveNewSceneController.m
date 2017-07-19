@@ -123,7 +123,6 @@
         IphoneSceneController * iphoneSceneVC = [iphoneStoryBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
         [self.navigationController pushViewController:iphoneSceneVC animated:YES];
 
-  
 }
 
 - (IBAction)sceneImageBtn:(id)sender {

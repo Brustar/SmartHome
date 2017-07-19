@@ -538,11 +538,6 @@ static NSString * const CYPhotoId = @"photo";
         if (self.scenes.count == 0) {
             [MBProgressHUD showSuccess:@"暂时没有全屋场景"];
         }
-//        NSString *sceneFile = [NSString stringWithFormat:@"%@_%d.plist",SCENE_FILE_NAME,scene.sceneID];
-//        NSString *scenePath=[[IOManager scenesPath] stringByAppendingPathComponent:sceneFile];
-//        NSDictionary *plistDic = [NSDictionary dictionaryWithContentsOfFile:scenePath];
-//        NSArray * schedules = plistDic[@"schedules"];
-//        scene.schedules = schedules;
         if (cell.isplan == 0) {
             cell.seleteSendPowBtn.hidden = YES;
             cell.PowerBtnCenterContraint.constant = 35;
@@ -807,7 +802,7 @@ static NSString * const CYPhotoId = @"photo";
             
             UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
             IphoneSceneController * iphonesceneVC = [storyBoard instantiateViewControllerWithIdentifier:@"iphoneSceneController"];
-            [self.navigationController pushViewController:iphonesceneVC animated:YES];
+            [self.navigationController pushViewController:iphonesceneVC animated:NO];
         }
     }else if (tag == 2) { //启动／停止 场景定时
         if([responseObject[@"result"] intValue] == 0) {
@@ -981,7 +976,9 @@ static NSString * const CYPhotoId = @"photo";
 }
 -(void)refreshSceneUI
 {
+    self.roomList = [SQLManager getAllRoomsInfo];
     [self setUpRoomView];
     [self.FirstCollectionView reloadData];
+
 }
 @end

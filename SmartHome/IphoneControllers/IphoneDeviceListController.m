@@ -92,11 +92,11 @@ static NSString * const CYPhotoId = @"photo";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self addNotifications];
+
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self setupNaviBar];
     [self showNetStateView];
-//    [self showMassegeLabel];
+
     self.rooms = [SQLManager getAllRoomsInfo];
     
     [self setUpRoomScrollerView];
@@ -340,12 +340,11 @@ static NSString * const CYPhotoId = @"photo";
     // 创建布局
     CYLineLayout *layout = [[CYLineLayout alloc] init];
     if (([UIScreen mainScreen].bounds.size.height <= 568.0)) {
-        layout.itemSize = CGSizeMake(collectionW-50, collectionH-20);
+        layout.itemSize = CGSizeMake(collectionW-100, collectionH-20);
     }else{
-        layout.itemSize = CGSizeMake(collectionW-90, collectionH-20);
+        layout.itemSize = CGSizeMake(collectionW-140, collectionH-20);
     }
 
-    //layout.itemSize = CGSizeMake(collectionW-110, collectionH-20);
     self.FirstCollectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
     self.FirstCollectionView.backgroundColor = [UIColor clearColor];
     self.FirstCollectionView.dataSource = self;
