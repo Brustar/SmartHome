@@ -175,6 +175,7 @@ static NSString *const airCellIdentifier = @"airCell";
         }
     }
 }
+
 - (IBAction)changeMode:(id)sender {
     uint8_t cmd=0;
     NSArray *imgBlue = @[@"cool",@"heat",@"wet",@"wind",@""];
@@ -292,9 +293,9 @@ static NSString *const airCellIdentifier = @"airCell";
 
 
 - (void)changedCurrentTemperature:(CGFloat)currentValue {
-    NSInteger value = round(currentValue);
+    self.currentDegree = round(currentValue);
     
-    NSData *data=[[DeviceInfo defaultManager] changeTemperature:0x6A deviceID:self.deviceid value:value];
+    NSData *data=[[DeviceInfo defaultManager] changeTemperature:0x6A deviceID:self.deviceid value:self.currentDegree];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
 }

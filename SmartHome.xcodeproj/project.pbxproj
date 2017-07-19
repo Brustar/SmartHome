@@ -41,7 +41,6 @@
 		0F49CB741E7A1F0500D46ECC /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F49CB731E7A1F0500D46ECC /* Home.storyboard */; };
 		0F49CB7A1E7A204300D46ECC /* Devices-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F49CB751E7A204300D46ECC /* Devices-iPad.storyboard */; };
 		0F49CB7B1E7A204300D46ECC /* Home-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F49CB761E7A204300D46ECC /* Home-iPad.storyboard */; };
-		0F49CB7C1E7A204300D46ECC /* Login-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F49CB771E7A204300D46ECC /* Login-iPad.storyboard */; };
 		0F49CB7D1E7A204300D46ECC /* MyInfo-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F49CB781E7A204300D46ECC /* MyInfo-iPad.storyboard */; };
 		0F49CB7E1E7A204300D46ECC /* Scene-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F49CB791E7A204300D46ECC /* Scene-iPad.storyboard */; };
 		0F49CB821E7A21FF00D46ECC /* ORBSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F49CB811E7A21FF00D46ECC /* ORBSwitch.m */; };
@@ -459,7 +458,6 @@
 		0F49CB731E7A1F0500D46ECC /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		0F49CB751E7A204300D46ECC /* Devices-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Devices-iPad.storyboard"; sourceTree = "<group>"; };
 		0F49CB761E7A204300D46ECC /* Home-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Home-iPad.storyboard"; sourceTree = "<group>"; };
-		0F49CB771E7A204300D46ECC /* Login-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Login-iPad.storyboard"; sourceTree = "<group>"; };
 		0F49CB781E7A204300D46ECC /* MyInfo-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "MyInfo-iPad.storyboard"; sourceTree = "<group>"; };
 		0F49CB791E7A204300D46ECC /* Scene-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Scene-iPad.storyboard"; sourceTree = "<group>"; };
 		0F49CB801E7A21FF00D46ECC /* ORBSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORBSwitch.h; sourceTree = "<group>"; };
@@ -1518,7 +1516,6 @@
 			children = (
 				0F49CB751E7A204300D46ECC /* Devices-iPad.storyboard */,
 				0F49CB761E7A204300D46ECC /* Home-iPad.storyboard */,
-				0F49CB771E7A204300D46ECC /* Login-iPad.storyboard */,
 				0F49CB781E7A204300D46ECC /* MyInfo-iPad.storyboard */,
 				0F49CB791E7A204300D46ECC /* Scene-iPad.storyboard */,
 				CD8CFCD01ED6873000B49712 /* PlaneGraph.storyboard */,
@@ -2728,7 +2725,6 @@
 				CD8CFCD11ED6873000B49712 /* PlaneGraph.storyboard in Resources */,
 				0F49CB7E1E7A204300D46ECC /* Scene-iPad.storyboard in Resources */,
 				CDFB9DF21E5DCB4D00BFECCE /* SceneTimerList.plist in Resources */,
-				0F49CB7C1E7A204300D46ECC /* Login-iPad.storyboard in Resources */,
 				0F49CB7B1E7A204300D46ECC /* Home-iPad.storyboard in Resources */,
 				CDF90B451E2F4B14009043B9 /* planeScene.plist in Resources */,
 				CDA9EEC11ED40F6900CB4D7D /* launchingAnimation.gif in Resources */,

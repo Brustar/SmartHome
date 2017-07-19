@@ -33,6 +33,8 @@
         [self adjustTitleFrameForSplitView];
         [self setNaviBarLeftBtn:nil];
     }
+    
+    [self.userinfoTableView setTableHeaderView:[self setupTableHeader]];
 
     [self getUserInfoFromDB];
     [self fetchUserInfo];
@@ -48,6 +50,34 @@
 
      [self.userinfoTableView reloadData];
 }
+
+- (UIView *)setupTableHeader {
+    
+    CGFloat width = UI_SCREEN_WIDTH;
+    if (ON_IPAD) {
+        width = UI_SCREEN_WIDTH*3/4;
+    }
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, 330)];
+    view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
+    
+    UIImageView *headBg = [[UIImageView alloc] initWithFrame:CGRectMake((width-160)/2, (330-160)/2-20, 160, 160)];
+    headBg.image = [UIImage imageNamed:@"head_bg"];
+    [view addSubview:headBg];
+    
+    _headerBtn = [[UIButton alloc] initWithFrame:CGRectMake((width-110)/2, (330-110)/2-27, 110, 110)];
+    [_headerBtn addTarget:self action:@selector(headerBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:_headerBtn];
+    
+    _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(headBg.frame)+40, width, 20)];
+    _nameLabel.font = [UIFont systemFontOfSize:16];
+    _nameLabel.textColor = [UIColor lightGrayColor];
+    _nameLabel.textAlignment = NSTextAlignmentCenter;
+    [view addSubview:_nameLabel];
+    
+    return view;
+}
+
 - (void)addNotifications {
    
     [NC addObserver:self selector:@selector(refreshNickName:) name:@"refreshNickName" object:nil];
@@ -72,7 +102,7 @@
     self.headerBtn.layer.cornerRadius = self.headerBtn.frame.size.width/2;
     self.headerBtn.layer.masksToBounds = YES;
     self.userinfoTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]];
-    self.userinfoTableView.tableFooterView = [UIView new];
+    self.userinfoTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self.userinfoTableView reloadData];
 }
 
@@ -311,7 +341,7 @@
     
 
 }
-- (IBAction)headerBtnClicked:(id)sender {
+- (void)headerBtnClicked:(id)sender {
     
     UIAlertController * alerController = [UIAlertController alertControllerWithTitle:@"更换头像" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
     
