@@ -124,10 +124,37 @@
                 NSString *startTime = dict[@"startTime"];
                 NSString *endTime = dict[@"endTime"];
                 NSArray * weekDays = dict[@"weekDays"];
+                NSMutableString *strSelete = [NSMutableString string];
+                for (int i = 0; i < weekDays.count; i++) {
+                    if ([weekDays[i] intValue]== 0) {
+                        [strSelete appendString:@"周日、"];
+                    }if ([weekDays[i] intValue]== 1) {
+                        [strSelete appendString:@"周一、"];
+                    }if ([weekDays[i] intValue]== 2) {
+                        [strSelete appendString:@"周二、"];
+                    }if ([weekDays[i] intValue]== 3) {
+                        [strSelete appendString:@"周三、"];
+                    }if ([weekDays[i] intValue]== 4) {
+                        [strSelete appendString:@"周四、"];
+                    }if ([weekDays[i] intValue]== 5) {
+                        [strSelete appendString:@"周五、"];
+                    }if ([weekDays[i] intValue]== 6) {
+                        [strSelete appendString:@"周六、"];
+                    }
+                    
+                }
                 newTimerVC.startTimeStr = startTime;
                 newTimerVC.endTimeStr = endTime;
-                newTimerVC.repeatitionStr =[weekDays componentsJoinedByString:@","];
+                newTimerVC.repeatitionStr =[NSString stringWithFormat:@"%@",strSelete];
+                if ([newTimerVC.repeatitionStr isEqualToString:@"周一、周二、周三、周四、周五、"]) {
+                    newTimerVC.repeatitionStr = @"工作日";
+                }if ([newTimerVC.repeatitionStr isEqualToString:@"周日、周六、"]) {
+                    newTimerVC.repeatitionStr = @"周末";
+                }if ([newTimerVC.repeatitionStr isEqualToString:@"周日、周一、周二、周三、周四、周五、周六、"]) {
+                    newTimerVC.repeatitionStr = @"每天";
+                }
             }
+            
         }
         
         newTimerVC.sceneID = self.sceneID;

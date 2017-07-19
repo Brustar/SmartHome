@@ -215,6 +215,8 @@
                     newTimerVC.repeatitionStr = @"工作日";
                 }if ([newTimerVC.repeatitionStr isEqualToString:@"周日、周六、"]) {
                      newTimerVC.repeatitionStr = @"周末";
+                }if ([newTimerVC.repeatitionStr isEqualToString:@"周日、周一、周二、周三、周四、周五、周六、"]) {
+                     newTimerVC.repeatitionStr = @"每天";
                 }
             }
             
