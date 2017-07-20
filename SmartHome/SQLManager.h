@@ -129,7 +129,7 @@
 +(NSArray *)getDeviceTypeNameWithScenID:(int)sceneId subTypeName:(NSString *)subTypeName;
 
 +(void)initSQlite;
-
++(int)getIsAllRoomIdByIsAll:(NSInteger)isAll;
 //根据房间ID找调光灯
 + (NSArray *)getDimmerByRoom:(int) roomID;
 //根据房间ID找开合帘

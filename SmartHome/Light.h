@@ -6,6 +6,7 @@
 //  Copyright © 2016年 Brustar. All rights reserved.
 //
 #import <Foundation/Foundation.h>
+
 @interface Light : NSObject
 
 //设备id

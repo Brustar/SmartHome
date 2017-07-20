@@ -327,10 +327,10 @@ static NSString * const CYPhotoId = @"photo";
     CYLineLayout *layout = [[CYLineLayout alloc] init];
     DeviceInfo *device=[DeviceInfo defaultManager];
     [device deviceGenaration];
-    if (([UIScreen mainScreen].bounds.size.height == 568.0)) {
-        layout.itemSize = CGSizeMake(collectionW-50, collectionH-20);
+    if (([UIScreen mainScreen].bounds.size.height <= 568.0)) {
+        layout.itemSize = CGSizeMake(collectionW-100, collectionH-20);
     }else{
-        layout.itemSize = CGSizeMake(collectionW-90, collectionH-20);
+        layout.itemSize = CGSizeMake(collectionW-140, collectionH-20);
     }
     if (ON_IPAD) {
         layout.itemSize = CGSizeMake(450, 540);
@@ -525,16 +525,14 @@ static NSString * const CYPhotoId = @"photo";
         return cell;
     }else{
         CYPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CYPhotoId forIndexPath:indexPath];
-         cell.delegate = self;
-
+        cell.delegate = self;
         Scene *scene = self.scenes[indexPath.row];
-       
         cell.sceneID = scene.sceneID;
         cell.roomID = self.selectedRoomID;
         cell.sceneStatus = scene.status;
         cell.isplan = scene.isplan;
         cell.isactive = scene.isactive;
-
+        cell.SceneNameTopConstraint.constant = 5;
         if (self.scenes.count == 0) {
             [MBProgressHUD showSuccess:@"暂时没有全屋场景"];
         }
