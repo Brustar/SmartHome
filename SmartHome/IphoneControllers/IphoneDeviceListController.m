@@ -596,7 +596,6 @@ static NSString * const CYPhotoId = @"photo";
     NSString *imgName = [NSString stringWithFormat:@"catalog_%ld",(long)indexPath.row];
     UIImage *img = [UIImage imageNamed:imgName];
     [cell.imageView sd_setImageWithURL:nil placeholderImage:img];
-    
     cell.icon.hidden = NO;
     cell.icon.image = [UIImage imageNamed:[NSString stringWithFormat:@"cata_%ld",(long)device.subTypeId]];
     
