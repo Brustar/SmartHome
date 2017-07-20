@@ -228,7 +228,7 @@
             NSString * weather_curr = responseObject[@"weather_curr"];
             self.weahter = weather_curr;
             self.temperatureLabel.text = [NSString stringWithFormat:@"当前%@",temperature_curr];
-             if ([weather_curr rangeOfString:@"多云"].location != NSNotFound) {
+             if ([weather_curr rangeOfString:@"多云"].location != NSNotFound ||[weather_curr rangeOfString:@"阴"].location != NSNotFound) {
                  self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-Overcast"];
              }if ([weather_curr rangeOfString:@"雨"].location != NSNotFound) {
                  self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-rain"];
@@ -373,7 +373,7 @@
     // 读取gif图片数据
     NSString *launchAnimation;
 
-    if ([self.weahter rangeOfString:@"多云"].location != NSNotFound) {
+    if ([self.weahter rangeOfString:@"多云"].location != NSNotFound ||[self.weahter rangeOfString:@"阴"].location != NSNotFound) {
         launchAnimation = @"cloudy";
     }if ([self.weahter rangeOfString:@"雨"].location != NSNotFound) {
         launchAnimation = @"rain";

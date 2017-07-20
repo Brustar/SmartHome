@@ -642,8 +642,8 @@
                         
                         if (roomInfo.lightStatus == 1) {
                             UIButton *lightIcon = [[UIButton alloc] initWithFrame:CGRectMake(temp_origin_x, temp_origin_y, iconWidth, iconHeight)];
-                            //[lightIcon setBackgroundImage:[UIImage imageNamed:@"planeLightIcon"] forState:UIControlStateNormal];
-                            lightIcon.backgroundColor = [UIColor orangeColor];
+                            [lightIcon setBackgroundImage:[UIImage imageNamed:@"planeLightIcon"] forState:UIControlStateNormal];
+                            //lightIcon.backgroundColor = [UIColor orangeColor];
                             lightIcon.tag = 777;
                             
                             UIView *lastIcon = [self.planeGraph viewWithTag:777];
@@ -660,8 +660,8 @@
                         if (roomInfo.airStatus == 1) {
                             UIButton *airIcon = [[UIButton alloc] initWithFrame:CGRectMake(temp_origin_x, temp_origin_y, iconWidth, iconHeight)];
                             
-                            //[airIcon setBackgroundImage:[UIImage imageNamed:@"planeAirIcon"] forState:UIControlStateNormal];
-                            airIcon.backgroundColor = [UIColor blueColor];
+                            [airIcon setBackgroundImage:[UIImage imageNamed:@"planeAirIcon"] forState:UIControlStateNormal];
+                            //airIcon.backgroundColor = [UIColor blueColor];
                             airIcon.tag = 888;
                             
                             UIView *lastIcon = [self.planeGraph viewWithTag:888];
@@ -678,8 +678,8 @@
                         if (roomInfo.avStatus == 1) {
                             UIButton *mediaIcon = [[UIButton alloc] initWithFrame:CGRectMake(temp_origin_x, temp_origin_y, iconWidth, iconHeight)];
                             
-                           // [mediaIcon setBackgroundImage:[UIImage imageNamed:@"planeMediaIcon"] forState:UIControlStateNormal];
-                            mediaIcon.backgroundColor = [UIColor redColor];
+                            [mediaIcon setBackgroundImage:[UIImage imageNamed:@"planeMediaIcon"] forState:UIControlStateNormal];
+                            //mediaIcon.backgroundColor = [UIColor redColor];
                             mediaIcon.tag = 999;
                             
                             

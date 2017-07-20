@@ -849,12 +849,31 @@
 - (void)dealloc {
     [self removeNotifications];
 }
-
 #pragma mark - TCP recv delegate
-- (void)recv:(NSData *)data withTag:(long)tag
+-(void)recv:(NSData *)data withTag:(long)tag
 {
+    Proto proto=protocolFromData(data);
     
+    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
+        return;
+    }
+    
+    if (proto.cmd==0x01) {
+        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+        if ([devID intValue]==[self.deviceid intValue]) {
+            if (proto.action.state == PROTOCOL_VOLUME) {
+                NSLog(@"有音量");
+            }if (proto.action.state == PROTOCOL_ON) {
+                NSLog(@"开启状态");
+                [IOManager writeUserdefault:@"1" forKey:@"IsPlaying"];
+            }if (proto.action.state == PROTOCOL_OFF) {
+                NSLog(@"关闭状态");
+                [IOManager writeUserdefault:@"0" forKey:@"IsPlaying"];
+            }
+        }
+    }
 }
+
 
 #pragma mark - SingleMaskViewDelegate
 - (void)onNextButtonClicked:(UIButton *)btn pageType:(PageTye)pageType {

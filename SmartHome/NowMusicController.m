@@ -70,6 +70,8 @@
     [super viewDidLoad];
     _bgmusicNameS = [[NSMutableArray alloc] init];
      _AllRooms = [[NSMutableArray alloc] init];
+    self.roomID = [SQLManager getIsAllRoomIdByIsAll:1];
+    self.deviceid = [SQLManager singleDeviceWithCatalogID:bgmusic byRoom:self.roomID];
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
     if (BLUETOOTH_MUSIC) {
@@ -77,9 +79,12 @@
         [audio initMusicAndPlay];
     }
     _Volume = 0;
- 
+    //查询设备状态
+    NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
+    [sock.socket writeData:data withTimeout:1 tag:1];
     [self fetchPlayingEquipmentList];
      self.MusicTableView.tableFooterView = [UIView new];
+    
 }
 
 - (void)fetchPlayingEquipmentList {
@@ -147,14 +152,21 @@
         return;
     }
     
-    if (tag==0) {
-        if (proto.action.state == PROTOCOL_VOLUME_UP || proto.action.state == PROTOCOL_VOLUME_DOWN || proto.action.state == PROTOCOL_MUTE)
-        {
-//            self.volume.value=proto.action.RValue/100.0;
+    if (proto.cmd==0x01) {
+        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+        if ([devID intValue]==[self.deviceid intValue]) {
+            if (proto.action.state == PROTOCOL_VOLUME) {
+                NSLog(@"有音量");
+            }if (proto.action.state == PROTOCOL_ON) {
+                NSLog(@"开启状态");
+                [IOManager writeUserdefault:@"1" forKey:@"IsPlaying"];
+            }if (proto.action.state == PROTOCOL_OFF) {
+                NSLog(@"关闭状态");
+                [IOManager writeUserdefault:@"0" forKey:@"IsPlaying"];
+            }
         }
     }
 }
-
 #pragma mark - MusicPlayer delegate
 -(void)musicPlayerStatedChanged:(NSNotification *)paramNotification
 {
@@ -203,14 +215,9 @@
         _Volume -= 10;
         _loseBtn.titleLabel.text = [NSString stringWithFormat:@"%d",_Volume];
     }
-    NSData *data=[[DeviceInfo defaultManager] changeVolume:[_loseBtn.titleLabel.text intValue] deviceID:self.deviceid];
+    NSData *data=[[DeviceInfo defaultManager] changeVolume:_Volume deviceID:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
-//    self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
-    if (BLUETOOTH_MUSIC) {
-        AudioManager *audio=[AudioManager defaultManager];
-        [audio.musicPlayer setVolume:[_loseBtn.titleLabel.text intValue]/100.0];
-    }
 }
 //加音量
 - (IBAction)additionVolume:(id)sender {
@@ -219,14 +226,9 @@
         _loseBtn.titleLabel.text = [NSString stringWithFormat:@"%d",_Volume];
     }
     
-    NSData *data=[[DeviceInfo defaultManager] changeVolume:[_loseBtn.titleLabel.text intValue] deviceID:self.deviceid];
+    NSData *data=[[DeviceInfo defaultManager] changeVolume:_Volume deviceID:self.deviceid];
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
-    //    self.voiceValue.text = [NSString stringWithFormat:@"%d%%",(int)self.volume.value];
-    if (BLUETOOTH_MUSIC) {
-        AudioManager *audio=[AudioManager defaultManager];
-        [audio.musicPlayer setVolume:[_loseBtn.titleLabel.text intValue]/100.0];
-    }
 }
 
 //开关

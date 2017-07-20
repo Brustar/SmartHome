@@ -392,7 +392,26 @@
     [db close];
     return [devices copy];
 }
++(int)getIsAllRoomIdByIsAll:(NSInteger)isAll
+{
+    FMDatabase *db = [self connetdb];
+    int eId = 0;
+    if([db open])
+    {
+         long masterID =  [[DeviceInfo defaultManager] masterID];
+        NSString *sql = [NSString stringWithFormat:@"select ID from rooms where isAll = %ld and masterID = '%ld'",isAll,masterID];
+        
+        FMResultSet *resultSet = [db executeQuery:sql];
+        if ([resultSet next])
+        {
+            eId = [resultSet intForColumn:@"ID"];
+        }
+    }
+    [db closeOpenResultSets];
+    [db close];
+    return eId;
 
+}
 + (BOOL)isWholeHouse:(NSInteger)eId
 {
     FMDatabase *db = [self connetdb];

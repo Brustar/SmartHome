@@ -760,7 +760,7 @@ NSArray *array = [NSArray arrayWithObjects:
             }
             
             [IOManager writeUserdefault:[NSNumber numberWithInteger:self.userType] forKey:@"Type"];
-            [IOManager writeUserdefault:responseObject[@"isplaying"] forKey:@"IsPlaying"];//正在播放标识
+//            [IOManager writeUserdefault:responseObject[@"isplaying"] forKey:@"IsPlaying"];//正在播放标识
             [IOManager writeUserdefault:[self.pwdTextField.text encryptWithDes:DES_KEY] forKey:@"Password"];
             
             [IOManager writeUserdefault:responseObject[@"token"] forKey:@"AuthorToken"];
