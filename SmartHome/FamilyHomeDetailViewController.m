@@ -479,7 +479,7 @@
                 dvdCell.DVDConstraint.constant = 10;
                 dvdCell.DVDNameLabel.text = device.name;
                 dvdCell.DVDSwitchBtn.selected = device.power;//开关
-                dvdCell.DVDSlider.value = device.volume;//音量
+                dvdCell.DVDSlider.value = device.volume/100.0;//音量
                 dvdCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
                 return dvdCell;
             }
@@ -493,7 +493,7 @@
             FMCell.FMLayouConstraint.constant = 10;
             FMCell.FMNameLabel.text = device.name;
             FMCell.FMSwitchBtn.selected = device.power;//开关
-            FMCell.FMSlider.value = device.volume;//音量
+            FMCell.FMSlider.value = device.volume/100.0;//音量
             FMCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
             return FMCell;
         }else if (device.hTypeId == 17) { //幕布
@@ -526,7 +526,7 @@
                 tvCell.TVConstraint.constant = 10;
                 tvCell.TVNameLabel.text = device.name;
                 tvCell.TVSwitchBtn.selected = device.power;//开关
-                tvCell.TVSlider.value = device.volume;//音量
+                tvCell.TVSlider.value = device.volume/100.0;//音量
                 tvCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
                 return tvCell;
             }else {
@@ -537,7 +537,7 @@
                 tvCell.TVConstraint.constant = 10;
                 tvCell.TVNameLabel.text = device.name;
                 tvCell.TVSwitchBtn.selected = device.power;//开关
-                tvCell.TVSlider.value = device.volume;//音量
+                tvCell.TVSlider.value = device.volume/100.0;//音量
                 tvCell.deviceid = [NSString stringWithFormat:@"%d", device.eID];
                 return tvCell;
             }

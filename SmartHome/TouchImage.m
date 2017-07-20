@@ -46,6 +46,18 @@
     if (array.count >0) {
         [_roomArray addObjectsFromArray:array];
     }
+    
+    //画区域
+    /*[_roomArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+    
+        NSString *rectStr = [obj objectForKey:@"rect"];
+        CGRect rect = CGRectFromString(rectStr);
+        NSLog(@"rectStr: %@", rectStr);
+        UIView *roomView = [[UIView alloc] initWithFrame:rect];
+        roomView.backgroundColor = [UIColor colorWithRed:idx*100/255.0 green:88/255.0 blue:188/255.0 alpha:0.5];
+        [self addSubview:roomView];
+        
+    }];*/
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
