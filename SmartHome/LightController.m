@@ -145,7 +145,7 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     self.base.hidden = ![dviceType isEqualToString:@"03"];
     
     self.lightName.text = device.name;
-
+    
     SocketManager *sock=[SocketManager defaultManager];
     sock.delegate=self;
     //查询设备状态
@@ -393,7 +393,8 @@ static NSString *const menuCellIdentifier = @"rotationCell";
     SocketManager *sock=[SocketManager defaultManager];
     [sock.socket writeData:data withTimeout:1 tag:1];
     if (newValue) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(50 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.tranformView.transform = CGAffineTransformMakeRotation(M_PI);
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             data = [[DeviceInfo defaultManager] query:self.deviceid];
             [sock.socket writeData:data withTimeout:1 tag:1];
         });
