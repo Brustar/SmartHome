@@ -174,7 +174,7 @@ static NSString * const CYPhotoId = @"photo";
       [super viewDidLoad];
 //      [self addNotifications];
       self.automaticallyAdjustsScrollViewInsets = NO;
-      [self setupNaviBar];
+    
       [self showNetStateView];
 //      [self showMassegeLabel];
       self.roomList = [SQLManager getAllRoomsInfo];
@@ -459,6 +459,8 @@ static NSString * const CYPhotoId = @"photo";
             [LoadMaskHelper showMaskWithType:SceneHomeAdd onView:self.tabBarController.view delay:0.5 delegate:self];
         }
     }
+    
+     [self setupNaviBar];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -974,9 +976,11 @@ static NSString * const CYPhotoId = @"photo";
 }
 -(void)refreshSceneUI
 {
+   
     self.roomList = [SQLManager getAllRoomsInfo];
     [self setUpRoomView];
     [self.FirstCollectionView reloadData];
+   
 
 }
 @end

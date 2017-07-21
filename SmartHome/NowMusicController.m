@@ -72,17 +72,16 @@
      _AllRooms = [[NSMutableArray alloc] init];
     self.roomID = [SQLManager getIsAllRoomIdByIsAll:1];
     self.deviceid = [SQLManager singleDeviceWithCatalogID:bgmusic byRoom:self.roomID];
-    SocketManager *sock=[SocketManager defaultManager];
-    sock.delegate=self;
+    self.deviceName = [SQLManager deviceNameByDeviceID:[self.deviceid intValue]];
+    self.roomName = [SQLManager getRoomNameByDeviceID:[self.deviceid intValue]];
+
     if (BLUETOOTH_MUSIC) {
         AudioManager *audio=[AudioManager defaultManager];
         [audio initMusicAndPlay];
     }
     _Volume = 0;
-    //查询设备状态
-    NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
-    [sock.socket writeData:data withTimeout:1 tag:1];
-    [self fetchPlayingEquipmentList];
+
+//    [self fetchPlayingEquipmentList];
      self.MusicTableView.tableFooterView = [UIView new];
     
 }
@@ -139,31 +138,6 @@
             }
             
             [self.MusicTableView reloadData];
-        }
-    }
-}
-
-#pragma mark - TCP recv delegate
--(void)recv:(NSData *)data withTag:(long)tag
-{
-    Proto proto=protocolFromData(data);
-    
-    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
-        return;
-    }
-    
-    if (proto.cmd==0x01) {
-        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
-        if ([devID intValue]==[self.deviceid intValue]) {
-            if (proto.action.state == PROTOCOL_VOLUME) {
-                NSLog(@"有音量");
-            }if (proto.action.state == PROTOCOL_ON) {
-                NSLog(@"开启状态");
-                [IOManager writeUserdefault:@"1" forKey:@"IsPlaying"];
-            }if (proto.action.state == PROTOCOL_OFF) {
-                NSLog(@"关闭状态");
-                [IOManager writeUserdefault:@"0" forKey:@"IsPlaying"];
-            }
         }
     }
 }
@@ -234,33 +208,23 @@
 //开关
 - (IBAction)switchPower:(id)sender {
     
-    UIButton *btn = (UIButton *)sender;
+        UIButton *btn = (UIButton *)sender;
+        [btn setSelected:!btn.isSelected];
+        if (btn.isSelected) {
+            [btn setImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateNormal];
+            //发送播放指令
+            NSData *data=[[DeviceInfo defaultManager] play:self.deviceid];
+            SocketManager *sock=[SocketManager defaultManager];
+            [sock.socket writeData:data withTimeout:1 tag:1];
     
-    if (_playState == 0) {
-        _playState = 1;
-        [btn setBackgroundImage:[UIImage imageNamed:@"close_red"] forState:UIControlStateNormal];
-        //发送播放指令
-        NSData *data=[[DeviceInfo defaultManager] play:self.deviceid];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:1];
-        
-        if (BLUETOOTH_MUSIC) {
-            AudioManager *audio= [AudioManager defaultManager];
-            [[audio musicPlayer] play];
+        }else{
+            [btn setImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
+            // 发送停止指令
+            NSData *data=[[DeviceInfo defaultManager] pause:self.deviceid];
+            SocketManager *sock=[SocketManager defaultManager];
+            [sock.socket writeData:data withTimeout:1 tag:1];
+    
         }
-    }else if (_playState == 1) {
-        _playState = 0;
-        [btn setBackgroundImage:[UIImage imageNamed:@"close_white"] forState:UIControlStateNormal];
-        //发送停止指令
-        NSData *data=[[DeviceInfo defaultManager] stop:self.deviceid];
-        SocketManager *sock=[SocketManager defaultManager];
-        [sock.socket writeData:data withTimeout:1 tag:1];
-        if (BLUETOOTH_MUSIC) {
-            AudioManager *audio= [AudioManager defaultManager];
-            [[audio musicPlayer] pause];
-        }
-        
-    }
 }
 -(void)dealloc
 {
@@ -273,14 +237,18 @@
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.AllRooms.count;
+//    return self.AllRooms.count;
+    return 1;
 
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    RoomModel *model = self.AllRooms[section];
-    return  model.eqinfoList.count;
+//    RoomModel *model = self.AllRooms[section];
+//    return  model.eqinfoList.count;
+    
+    
+    return 1;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -293,12 +261,13 @@
     }
     cell.backgroundColor = [UIColor clearColor];
     [cell.textLabel setTextColor:[UIColor whiteColor]];
-    RoomModel *model = self.AllRooms[indexPath.section];
-    Device *devInfo = model.eqinfoList[indexPath.row];
-    self.seleteSection = indexPath.section;
-    self.seleteRow = indexPath.row;
-    cell.textLabel.text = devInfo.name;
-    cell.tag = devInfo.eID;
+//    RoomModel *model = self.AllRooms[indexPath.section];
+//    Device *devInfo = model.eqinfoList[indexPath.row];
+//    self.seleteSection = indexPath.section;
+//    self.seleteRow = indexPath.row;
+//    cell.textLabel.text = devInfo.name;
+     cell.textLabel.text = self.deviceName;
+//    cell.tag = devInfo.eID;
     //cell的点击颜色
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(100, 0, self.view.bounds.size.width, 0)];
     view.backgroundColor = [UIColor colorWithRed:67/255.0 green:68/255.0 blue:69/255.0 alpha:1];
@@ -311,10 +280,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-     //UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
-     RoomModel *model = self.AllRooms[indexPath.section];
-     Device *devInfo = model.eqinfoList[indexPath.row];
-     self.deviceid = [NSString stringWithFormat:@"%d",devInfo.eID];
+//     //UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+//     RoomModel *model = self.AllRooms[indexPath.section];
+//     Device *devInfo = model.eqinfoList[indexPath.row];
+//     self.deviceid = [NSString stringWithFormat:@"%d",devInfo.eID];
      self.seleteSection = indexPath.section;
      self.seleteRow = indexPath.row;
 }
@@ -326,8 +295,9 @@
     view.userInteractionEnabled = YES;
     UILabel * NameLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 100, 50)];
     NameLabel.textColor = [UIColor whiteColor];
-    RoomModel *model = self.AllRooms[section];
-    NameLabel.text =  model.roomname;
+//    RoomModel *model = self.AllRooms[section];
+//    NameLabel.text =  model.roomname;
+    NameLabel.text = self.roomName;
     [view addSubview:NameLabel];
     //线
     UIView * view1;
@@ -376,20 +346,12 @@
 
 -(void)StopBtn:(UIButton *)bbt
 {
-    RoomModel *model = self.AllRooms[bbt.tag];
-    self.seleteRow = bbt.tag;
-//    if (self.seleteRow>bbt.tag) {
-        Device *devInfo = model.eqinfoList[self.seleteRow];
-        self.deviceid = [NSString stringWithFormat:@"%d",devInfo.eID];
-        for (int i = 0; i < model.eqinfoList.count; i ++) {
-            //关指令
-            NSData *data=[[DeviceInfo defaultManager] OFF:self.deviceid];
-            SocketManager *sock=[SocketManager defaultManager];
-            [sock.socket writeData:data withTimeout:1 tag:1];
-            
-            
-        }
-//    }
+
+        NSData *data=[[DeviceInfo defaultManager] pause:self.deviceid];
+        SocketManager *sock=[SocketManager defaultManager];
+        [sock.socket writeData:data withTimeout:1 tag:1];
+      
+
    
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

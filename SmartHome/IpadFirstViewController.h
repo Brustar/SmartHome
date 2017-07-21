@@ -12,6 +12,8 @@
 #import "iPadMyViewController.h"
 #import "AFNetworking.h"
 #import "LoadMaskHelper.h"
+#import "SocketManager.h"
+#import "SceneManager.h"
 
 @interface IpadFirstViewController : CustomViewController<NowMusicControllerDelegate, SingleMaskViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;

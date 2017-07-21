@@ -14,7 +14,7 @@
 
 #define ANIMATION_TIME 1
 
-@interface IpadFirstViewController ()<RCIMReceiveMessageDelegate,UIGestureRecognizerDelegate,LeftViewControllerDelegate>
+@interface IpadFirstViewController ()<RCIMReceiveMessageDelegate,UIGestureRecognizerDelegate,LeftViewControllerDelegate,HttpDelegate,TcpRecvDelegate>
 @property (nonatomic,strong) BaseTabBarController *baseTabbarController;
 @property (nonatomic, readonly) UIButton *naviRightBtn;
 @property (nonatomic, readonly) UIButton *naviLeftBtn;
@@ -27,11 +27,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *temperatureLabel;//温度
 @property (weak, nonatomic) IBOutlet UILabel *weekDayLabel;
 @property (weak, nonatomic) IBOutlet UILabel *cityLabel;//地方名字的显示
-
+@property (nonatomic,strong) NSMutableArray * unreadcountArr;
 @property (weak, nonatomic) IBOutlet UIView *CoverView;
 @property (nonatomic,strong) NSString * WeekDayStr;
 @property (nonatomic,strong) NSString * locationString;
-
+@property (nonatomic,assign) int sum;
 @property (weak, nonatomic) IBOutlet UIButton * firstBtn;
 @property (weak, nonatomic) IBOutlet UIButton * TwoBtn;
 @property (weak, nonatomic) IBOutlet UIButton * ThreeBtn;
@@ -50,12 +50,20 @@
 @property (weak, nonatomic) IBOutlet UIImageView *DUPImageView;//闪烁提醒的图标
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *threeBtnleading;
 @property (nonatomic,strong) NSString * weahter;
-
+@property (nonatomic,weak) NSString *deviceid;
+@property (nonatomic,assign) int roomID;
 @property (nonatomic,assign) NSTimer *scheculer;
 @end
 
 @implementation IpadFirstViewController
-
+-(NSMutableArray *)unreadcountArr
+{
+    if (!_unreadcountArr) {
+        _unreadcountArr = [NSMutableArray array];
+    }
+    
+    return _unreadcountArr;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addNotifications];
@@ -65,9 +73,9 @@
     self.messageLabel.layer.masksToBounds = YES;
      UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doTap:)];
     [self.imageView addGestureRecognizer:tap];
-    [self setupNaviBar];
+   
     [self showNetStateView];
-    [self showMassegeLabel];
+//    [self showMassegeLabel];
     [self setTimer];
     [self getWeekdayStringFromDate];
     [self chatConnect];
@@ -78,7 +86,21 @@
     [self.CoverView addGestureRecognizer:recognizer];
     
     self.scheculer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timing:) userInfo:nil repeats:YES];
+    
+ 
    
+}
+-(void)creatItemID
+{
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/notify.aspx",[IOManager httpAddr]];
+    NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    if (auothorToken) {
+        NSDictionary *dict = @{@"token":auothorToken,@"optype":[NSNumber numberWithInteger:2]};
+        HttpManager *http=[HttpManager defaultManager];
+        http.tag = 2;
+        http.delegate = self;
+        [http sendPost:url param:dict];
+    }
 }
 
 -(IBAction)timing:(id)sender
@@ -103,12 +125,6 @@
     return YES;
 }
 
-#pragma mark - TCP recv delegate
-- (void)recv:(NSData *)data withTag:(long)tag
-{
-    
-}
-
 - (void)connect
 {
     SocketManager *sock = [SocketManager defaultManager];
@@ -130,6 +146,14 @@
     
     self.messageLabel.text = [NSString stringWithFormat:@"%d" ,unread<0?0:unread];
     self.FamilyMenberLabel.text = [NSString stringWithFormat:@"家庭成员（%@）",[[NSUserDefaults standardUserDefaults] objectForKey:@"familyNum"]];
+    SocketManager *sock=[SocketManager defaultManager];
+    sock.delegate=self;
+    self.roomID = [SQLManager getIsAllRoomIdByIsAll:1];
+    self.deviceid = [SQLManager singleDeviceWithCatalogID:bgmusic byRoom:self.roomID];
+    
+    //查询设备状态
+    NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
+    [sock.socket writeData:data withTimeout:1 tag:1];
     if (unread == 0) {
         self.messageLabel2.text = [NSString stringWithFormat:@"%@" , @"暂无新消息"];
         self.messageLabel1.text = @"";
@@ -169,6 +193,14 @@
     [self setBtn];
     [self getPlist];
     [self getWeather];
+//    [self creatItemID];
+    
+    _sum = 0;
+    for (int i = 0; i < self.unreadcountArr.count; i ++) {
+        _sum += [self.unreadcountArr[i] integerValue];
+        
+    }
+    [NC postNotificationName:@"SumNumber" object:[NSString stringWithFormat:@"%d",_sum]];
     
  ////////////////////////////////////// Mask View /////////////////////////////////////////
     NSString *KeyStr = [UD objectForKey:ShowMaskViewHomePageChatBtn];
@@ -200,7 +232,7 @@
             }
         }
     }
-
+     [self setupNaviBar];
 }
 
 -(void)getWeather
@@ -246,6 +278,23 @@
             
         }else{
             [MBProgressHUD showError:responseObject[@"保存失败"]];
+        }
+        
+    } if (tag == 2) {
+        if ([responseObject[@"result"] intValue]==0)
+        {
+            
+            NSArray *dic = responseObject[@"notify_type_list"];
+            
+            if ([dic isKindOfClass:[NSArray class]]) {
+                for(NSDictionary *dicDetail in dic)
+                {
+                    
+                    [self.unreadcountArr addObject:dicDetail[@"unreadcount"]];
+                }
+            }
+        }else{
+            [MBProgressHUD showError:responseObject[@"Msg"]];
         }
         
     }
@@ -419,9 +468,19 @@
 
 - (void)addNotifications {
     [NC addObserver:self selector:@selector(netWorkDidChangedNotification:) name:@"NetWorkDidChangedNotification" object:nil];
+    [NC addObserver:self selector:@selector(SumNumber:) name:@"SumNumber" object:nil];
 }
 - (void)netWorkDidChangedNotification:(NSNotification *)noti {
     [self refreshUI];
+}
+-(void)SumNumber:(NSNotification *)no
+{
+    NSString * sumNumber = no.object;
+    _sum = [sumNumber intValue];
+    
+    if (_sum != 0) {
+        [self showMassegeLabel];
+    }
 }
 - (void)refreshUI {
     DeviceInfo *info = [DeviceInfo defaultManager];
@@ -946,5 +1005,31 @@
     }
     
 }
+
+#pragma mark - TCP recv delegate
+-(void)recv:(NSData *)data withTag:(long)tag
+{
+    Proto proto=protocolFromData(data);
+    
+    if (CFSwapInt16BigToHost(proto.masterID) != [[DeviceInfo defaultManager] masterID]) {
+        return;
+    }
+    
+    if (proto.cmd==0x01) {
+        NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
+        if ([devID intValue]==[self.deviceid intValue]) {
+            if (proto.action.state == PROTOCOL_VOLUME) {
+                NSLog(@"有音量");
+            }if (proto.action.state == PROTOCOL_ON) {
+                NSLog(@"开启状态");
+                [IOManager writeUserdefault:@"1" forKey:@"IsPlaying"];
+            }if (proto.action.state == PROTOCOL_OFF) {
+                NSLog(@"关闭状态");
+                [IOManager writeUserdefault:@"0" forKey:@"IsPlaying"];
+            }
+        }
+    }
+}
+
 
 @end

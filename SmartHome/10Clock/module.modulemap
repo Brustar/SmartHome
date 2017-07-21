@@ -1,6 +1,0 @@
-framework module TenClock {
-    umbrella header "TenClock.h"
-    
-    export *
-    module * { export * }
-}

@@ -256,7 +256,7 @@
     self.leftTableview.center = CGPointMake((kScreenWidth - kMainPageDistance) * 0.5, kScreenHeight * 0.5);
     self.leftTableview.transform = CGAffineTransformScale(CGAffineTransformIdentity,1.0,1.0);
     [self.view bringSubviewToFront:self.leftVC.view];
-    [self.leftVC refreshUI];
+//    [self.leftVC refreshUI];
     self.contentView.alpha = 0;
     
     [UIView commitAnimations];

@@ -18,7 +18,7 @@
     [super viewDidLoad];
     
     [self addNotifications];
-    [self setupNaviBar];
+    
     [self showNetStateView];
 //    [self showMassegeLabel];
     self.lightIcon.layer.cornerRadius =  self.lightIcon.frame.size.width/2;
@@ -375,6 +375,8 @@
     _baseTabbarController.tabBar.hidden = YES;
     
     [LoadMaskHelper showMaskWithType:FamilyHome onView:self.tabBarController.view delay:0.5 delegate:self];
+    
+    [self setupNaviBar];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
