@@ -225,12 +225,15 @@
                 info.htype = timerDict[@"htype"];
                 
                 //设备状态
-                info.power = [timerDict[@"status"] intValue];
-                info.bright = [timerDict[@"bright"] intValue];
-                info.color = timerDict[@"color"];
-                info.position = [timerDict[@"position"] intValue];
-                info.temperature = [timerDict[@"temperature"] intValue];
-                info.volume = [timerDict[@"volume"] intValue];
+                NSDictionary *startValueDict = timerDict[@"start_value"];
+                if ([startValueDict isKindOfClass:[NSDictionary class]]) {
+                    info.power = [startValueDict[@"status"] intValue];
+                    info.bright = [startValueDict[@"bright"] intValue];
+                    info.color = startValueDict[@"color"];
+                    info.position = [startValueDict[@"position"] intValue];
+                    info.temperature = [startValueDict[@"temperature"] intValue];
+                    info.volume = [startValueDict[@"volume"] intValue];
+                }
                 
                 //构造Device对象
                 Device *deviceInfo = [SQLManager getDeviceWithDeviceID:info.eID];

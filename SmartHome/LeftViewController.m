@@ -141,6 +141,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    if (![self checkNetWork]) {
+        return;
+    }
+    
     NSString *item = [_itemArray objectAtIndex:indexPath.row];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
@@ -172,12 +176,10 @@
     }else if ([item isEqualToString:@"视频动态"]) {
          //视频动态
        if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) { //如果是主人，
-//            [MBProgressHUD showMessage:@"请稍候..."];
             FamilyDynamicViewController *vc = [familyStoryBoard instantiateViewControllerWithIdentifier:@"FamilyDynamicVC"];
             vc.hidesBottomBarWhenPushed = YES;
             [appDelegate.mainTabBarController.selectedViewController pushViewController:vc animated:YES];
-       }else{
-           
+       }else {
            [MBProgressHUD showError:@"你是普通用户无权查看"];
        }
     
@@ -196,6 +198,17 @@
   }
     
 }
+
+- (BOOL)checkNetWork {
+    if (![[AFNetworkReachabilityManager sharedManager] isReachable]) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:@"网络异常，请检查网络"];
+        return NO;
+    }else {
+        return YES;
+    }
+}
+
 -(void)creatItemID
 {
     NSString *url = [NSString stringWithFormat:@"%@Cloud/notify.aspx",[IOManager httpAddr]];
