@@ -12,16 +12,14 @@
 #import "Schedule.h"
 #import "NSString+RegMatch.h"
 #import "MBProgressHUD+NJ.h"
-#import <math.h>
 #import "WeekdaysVC.h"
 #import "IphoneEditSceneController.h"
-#import "SmartHome-Swift.h"
 #import "Scene.h"
 #import "IpadDeviceListViewController.h"
 #import "IphoneSaveNewSceneController.h"
+#import "HGCircularSlider-Swift.h"
 
-
-@interface IphoneNewAddSceneTimerVC ()<WeekdaysVCDelegate,TenClockDelegate>
+@interface IphoneNewAddSceneTimerVC ()<WeekdaysVCDelegate>
 @property (nonatomic,strong) Scene *scene;
 @property (nonatomic,strong) Schedule *schedule;
 @property (nonatomic,strong) NSMutableDictionary *weeks;
@@ -30,7 +28,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *timingImage;
 @property (nonatomic,strong) NSArray * viewControllerArrs;
 @property (nonatomic,strong) NSDateFormatter  *dateFormatter;
-@property (weak, nonatomic) IBOutlet TenClock *clock;
+
+@property (weak, nonatomic) IBOutlet RangeCircularSlider *rangClock;
+
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *TimViewLeadingConstraint;//到父视图左边的距离
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *TimeViewTrailingConstraint;//到父视图右边的距离
 @property (weak, nonatomic) IBOutlet UIView *SupView;
@@ -79,28 +80,19 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+
     if (self.startTimeStr.length >0) {
         self.starTimeLabel.text = self.startTimeStr;
-//       
-//        //将传入时间转化成需要的格式
-//        NSDateFormatter *format=[[NSDateFormatter alloc]init];
-//        [format setDateFormat:@"HH:mm"];
-//        NSDate *fromdate=[format dateFromString:self.startTimeStr];
-//        NSTimeZone *fromzone = [NSTimeZone systemTimeZone];
-//        NSInteger frominterval = [fromzone secondsFromGMTForDate:fromdate];
-//        NSDate *fromDate = [fromdate dateByAddingTimeInterval:frominterval];
-//        fromDate = [self.clock angleToTime:1];
        
+        NSArray *temp=[self.starTimeLabel.text componentsSeparatedByString:@":"];
+        self.rangClock.startPointValue = [temp[0] intValue]* 60 * 60+ [temp[1] intValue]*60;
+      
     }
-    
     if (self.endTimeStr.length >0) {
         self.endTimeLabel.text = self.endTimeStr;
-//        //将传入时间转化成需要的格式
-//        NSDateFormatter *format=[[NSDateFormatter alloc]init];
-//        [format setDateFormat:@"HH:mm"];
-//        NSDate *endDate=[format dateFromString:self.endTimeStr];
-//        endDate = [self.clock angleToTime:1];
+        NSArray *temp=[self.endTimeLabel.text componentsSeparatedByString:@":"];
+        self.rangClock.endPointValue = [temp[0] intValue]* 60 * 60+ [temp[1] intValue]*60;
+
     }
     
     if (self.repeatitionStr.length >0) {
@@ -131,27 +123,18 @@
     self.schedule.endTime = self.endTimeLabel.text;
     self.RepetitionLable.text = @"永不";
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(iphoneSelectWeek:) name:@"SelectWeek" object:nil];
-    
-    NSDate *date = [NSDate date];
-    self.clock.startDate = date;
-    NSTimeInterval interval = 60 * 60 * 8;
-    self.clock.endDate = [NSDate dateWithTimeInterval:interval sinceDate:date];
-    [self.clock update];
-    self.clock.delegate = self;
-    
-    //self.starTimeLabel.text = [self.dateFormatter stringFromDate:self.clock.startDate];
-    //self.endTimeLabel.text = [self.dateFormatter stringFromDate:self.clock.endDate];
-}
 
-#pragma mark -- CKCircleViewDelegate
--(void)startTextChange:(NSString *)startText{
-    NSLog(@"startText:%@",startText);
-    self.starTimeLabel.text = [NSString stringWithFormat:@"%@",startText];
-}
+    CGFloat dayInSeconds = 12 * 60 * 60;
+    self.rangClock.maximumValue = dayInSeconds;
+    self.rangClock.startThumbImage = [UIImage imageNamed:@"ipad-sss"];
+    self.rangClock.endThumbImage = [UIImage imageNamed:@"ipad-END"];
+    self.rangClock.startPointValue = 3 * 60 * 60;
+    self.rangClock.endPointValue = 8 * 60 * 60;
+    self.rangClock.alpha = 0.8;
+    
+    [self updateTexts:self.rangClock];
+    
 
--(void)endTextChange:(NSString *)endText{
-    NSLog(@"endText:%@",endText);
-    self.endTimeLabel.text = [NSString stringWithFormat:@"%@",endText];
 }
 
 - (void)setupNaviBar {
@@ -168,6 +151,18 @@
 }
 -(void)rightBtnClicked:(UIButton *)btn
 {
+    if (self.isDeviceTimer) {
+        NSDictionary *dic = @{
+                              @"startDay":self.starTimeLabel.text,
+                              @"endDay":self.endTimeLabel.text,
+                              @"repeat":self.RepetitionLable.text,
+                              @"weekArray":_weekArray
+                              };
+        [NC postNotificationName:@"AddSceneOrDeviceTimerNotification" object:nil userInfo:dic];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }else {
+    
     
     _viewControllerArrs =self.navigationController.viewControllers;
     NSInteger vcCount = _viewControllerArrs.count;
@@ -200,7 +195,7 @@
     }
 
     [self.navigationController popViewControllerAnimated:YES];
-
+   }
 }
 - (IBAction)SelectWeek:(id)sender {
     
@@ -208,7 +203,7 @@
     if (_weekDaysVC == nil) {
         self.timingImage.hidden = YES;
         self.TimerView.hidden = YES;
-        self.clock.hidden = YES;
+        self.rangClock.hidden = YES;
         _weekDaysVC = [HomeStoryBoard instantiateViewControllerWithIdentifier:@"WeekdaysVC"];
         _weekDaysVC.delegate = self;
         [self.view addSubview:_weekDaysVC.view];
@@ -224,7 +219,7 @@
     }else {
         self.TimerView.hidden = NO;
         self.timingImage.hidden = NO;
-        self.clock.hidden = NO;
+        self.rangClock.hidden = NO;
         [_weekDaysVC.view removeFromSuperview];
         _weekDaysVC = nil;
     }
@@ -233,7 +228,7 @@
 {
     self.timingImage.hidden = NO;
     self.TimerView.hidden = NO;
-    self.clock.hidden = NO;
+    self.rangClock.hidden = NO;
     if (_weekDaysVC) {
         [_weekDaysVC.view removeFromSuperview];
         _weekDaysVC = nil;
@@ -329,23 +324,51 @@
     [[SceneManager defaultManager] addScene:self.scene withName:nil withImage:[UIImage imageNamed:@""] withiSactive:0];
 
 }
-#pragma mark -- TenClockDelegate
--(void)timesChanged:(TenClock *)clock startDate:(NSDate *)startDate endDate:(NSDate *)endDate{
-    NSLog(@"startDate:%@--endDate:%@",startDate,endDate);
+
+- (IBAction)updateTexts:(id)sender {
+    self.rangClock.startPointValue = [self adjustValue:self.rangClock.startPointValue];
+    self.rangClock.endPointValue = [self adjustValue:self.rangClock.endPointValue];
+    
+    NSDate *bedtimeDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:self.rangClock.startPointValue];
+
+    self.starTimeLabel.text = [self tranDate:bedtimeDate];
+    
+    NSDate *wakeDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:self.rangClock.endPointValue];
+    self.endTimeLabel.text = [self tranDate:wakeDate];
 }
 
--(void)timesUpdated:(TenClock *)clock startDate:(NSDate *)startDate endDate:(NSDate *)endDate{
-    self.starTimeLabel.text = [self.dateFormatter stringFromDate:startDate];
-    self.endTimeLabel.text = [self.dateFormatter stringFromDate:endDate];
+-(NSString *) tranDate:(NSDate*) date
+{
+    _dateFormatter = [[NSDateFormatter alloc] init];
+    // hh:mm a
+    [_dateFormatter setDateFormat:@"HH:mm"];
+    NSTimeZone* localzone = [NSTimeZone localTimeZone];
+    NSTimeZone* GTMzone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    
+    [_dateFormatter setTimeZone:GTMzone];
+    
+    NSDate *day = [NSDate dateWithTimeInterval:-8*3600 sinceDate:date];
+    
+    [_dateFormatter setTimeZone:localzone];
+    
+    return [_dateFormatter stringFromDate:day];
 }
 
+-(CGFloat)adjustValue:(CGFloat)value
+{
+    
+    CGFloat minutes = value / 60;
+    CGFloat adjustedMinutes =  ceil(minutes / 5.0) * 5;
+    return adjustedMinutes * 60;
 
+}
 #pragma mark -- lazy load
 -(NSDateFormatter  *)dateFormatter{
     if (!_dateFormatter) {
+        
         _dateFormatter = [[NSDateFormatter alloc] init];
         // hh:mm a
-        [_dateFormatter setDateFormat:@"hh:mm a"];
+        [_dateFormatter setDateFormat:@"HH:mm"];
     }
     return  _dateFormatter;
 }

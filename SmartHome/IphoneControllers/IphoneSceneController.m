@@ -23,7 +23,7 @@
 #import "MBProgressHUD+NJ.h"
 #import "SocketManager.h"
 #import "TouchSubViewController.h"
-#import <AFNetworking.h>
+#import "AFNetworking.h"
 #import "VoiceOrderController.h"
 #import "SearchViewController.h"
 #import "BgMusicController.h"
@@ -543,7 +543,7 @@ static NSString * const CYPhotoId = @"photo";
             cell.PowerBtnCenterContraint.constant = 35;
         }else{
             cell.seleteSendPowBtn.hidden = NO;
-//            cell.PowerBtnCenterContraint.constant = 0;
+            cell.PowerBtnCenterContraint.constant = 0;
         }
         self.selectedSId = cell.sceneID;
       

@@ -8,8 +8,8 @@
 
 #import "NetStatusManager.h"
 #import <SystemConfiguration/CaptiveNetwork.h>
-#import <AFNetworking.h>
-#import <Reachability.h>
+#import "AFNetworking.h"
+#import "Reachability.h"
 #include <netdb.h>
 #import <ifaddrs.h>
 #import <net/if.h>

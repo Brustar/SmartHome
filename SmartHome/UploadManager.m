@@ -7,7 +7,7 @@
 //
 
 #import "UploadManager.h"
-#import <AFNetworking.h>
+#import "AFNetworking.h"
 #import "MBProgressHUD+NJ.h"
 @implementation UploadManager
 

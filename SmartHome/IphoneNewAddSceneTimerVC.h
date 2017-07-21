@@ -22,5 +22,6 @@
 @property (nonatomic,assign) int sceneID;
 @property (nonatomic,assign) int roomid;
 @property (nonatomic, assign) BOOL isShowInSplitView;
+@property (nonatomic, assign) BOOL isDeviceTimer;// YES: 设备定时 NO: 场景定时
 
 @end

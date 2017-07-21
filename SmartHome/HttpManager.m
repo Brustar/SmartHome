@@ -7,7 +7,7 @@
 //
 
 #import "HttpManager.h"
-#import <AFNetworking.h>
+#import "AFNetworking.h"
 #import "MBProgressHUD+NJ.h"
 #import "NetStatusManager.h"
 
@@ -27,7 +27,7 @@
 - (void) sendPost:(NSString *)url param:(NSDictionary *)params showProgressHUD:(BOOL)show
 {
     if (![NetStatusManager reachable]) {
-        [MBProgressHUD showError:@"当前网络不可用，请检查你的网络设置"];
+        [MBProgressHUD showError:@"网络异常，请检查你的网络"];
         return;
     }
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
@@ -67,7 +67,7 @@
 - (void) sendPost:(NSString *)url param:(NSDictionary *)params
 {
     if (![NetStatusManager reachable]) {
-        [MBProgressHUD showError:@"当前网络不可用，请检查你的网络设置"];
+        [MBProgressHUD showError:@"网络异常，请检查你的网络"];
         return;
     }
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
@@ -92,7 +92,7 @@
 - (void) sendGet:(NSString *)url param:(NSDictionary *)params
 {
     if (![NetStatusManager reachable]) {
-        [MBProgressHUD showError:@"当前网络不可用，请检查你的网络设置"];
+        [MBProgressHUD showError:@"网络异常，请检查你的网络"];
         return;
     }
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
@@ -117,7 +117,7 @@
 - (void)sendGet:(NSString *)url param:(NSDictionary *)params header:(NSDictionary *)header
 {
     if (![NetStatusManager reachable]) {
-        [MBProgressHUD showError:@"当前网络不可用，请检查你的网络设置"];
+        [MBProgressHUD showError:@"网络异常，请检查你的网络"];
         return;
     }
     [MBProgressHUD showMessage:@"请稍候..."];

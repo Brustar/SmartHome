@@ -84,13 +84,27 @@
     [self.navigationController pushViewController:_conversationVC animated:YES];
 }
 
+- (BOOL)checkNetWork {
+    if (![[AFNetworkReachabilityManager sharedManager] isReachable]) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:@"网络异常，请检查网络"];
+        return NO;
+    }else {
+        return YES;
+    }
+}
+
 #pragma mark - LeftViewControllerDelegate
 - (void)didSelectItem:(NSString *)item {
     
-//    if (_currentItem.length >0 && [_currentItem isEqualToString:item]) {
-//        return;
-//    }else {
-//        _currentItem = [NSString stringWithString:item];
+    if (![self checkNetWork]) {
+        return;
+    }
+    
+    if (_currentItem.length >0 && [_currentItem isEqualToString:item]) {
+        return;
+    }else {
+        _currentItem = [NSString stringWithString:item];
     
     [NC postNotificationName:@"StopTimerNotification" object:nil];  
     [_rightVC popToRootViewControllerAnimated:NO];
@@ -114,11 +128,17 @@
         [_rightVC pushViewController:mySubEnergyVC animated:YES];
         
     }else if ([item isEqualToString:@"视频动态"]) {
+        
+        if ([[IOManager getUserDefaultForKey:@"UserType"] integerValue] == 1) { //如果是主人，
+        
         //视频动态
-        [MBProgressHUD showMessage:@"请稍候..."];
         FamilyDynamicViewController *vc = [familyStoryBoard instantiateViewControllerWithIdentifier:@"FamilyDynamicVC"];
         vc.hidesBottomBarWhenPushed = YES;
         [_rightVC pushViewController:vc animated:YES];
+        
+        }else {
+             [MBProgressHUD showError:@"你是普通用户无权查看"];
+        }
         
     }else if ([item isEqualToString:@"通知"]) {
         MSGController *msgVC = [mainStoryBoard instantiateViewControllerWithIdentifier:@"MSGController"];
@@ -145,7 +165,7 @@
     }
         
   }
-//}
+}
 
 #pragma mark - SingleMaskViewDelegate
 - (void)onNextButtonClicked:(UIButton *)btn pageType:(PageTye)pageType {

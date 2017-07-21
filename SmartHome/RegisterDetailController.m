@@ -7,7 +7,7 @@
 //
 
 #import "RegisterDetailController.h"
-#import <AFNetworking.h>
+#import "AFNetworking.h"
 #import "CryptoManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "IOManager.h"

@@ -50,10 +50,13 @@
         return @"永不";
     }else {
         NSMutableArray *weekArray = [NSMutableArray array];
-        for(int i =0; i < [weekString length]; i++) {
-           NSString *subStr = [weekString substringWithRange:NSMakeRange(i, 1)];
-            [weekArray addObject:subStr];
+        NSArray *arr = [weekString componentsSeparatedByString:@","];
+        if (arr.count >0) {
+            [weekArray addObjectsFromArray:arr];
         }
+        
+        //weekArray 删除最后一个元素, 最后一个元素是空白字符
+        [weekArray removeObjectAtIndex:weekArray.count-1];
         
         if (weekArray.count >0) {
             NSMutableDictionary *weeksDict = [NSMutableDictionary dictionary];
