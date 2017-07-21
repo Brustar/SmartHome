@@ -541,7 +541,7 @@ static NSString * const CYPhotoId = @"photo";
             cell.PowerBtnCenterContraint.constant = 35;
         }else{
             cell.seleteSendPowBtn.hidden = NO;
-            cell.PowerBtnCenterContraint.constant = 0;
+//            cell.PowerBtnCenterContraint.constant = 0;
         }
         self.selectedSId = cell.sceneID;
       

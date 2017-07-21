@@ -19,7 +19,6 @@
 #import <AVFoundation/AVFoundation.h>
 #import "SceneShortcutsViewController.h"
 #import "TabbarPanel.h"
-
 #import <RongIMKit/RongIMKit.h>
 #import "ConversationViewController.h"
 #import <RBStoryboardLink.h>
@@ -63,13 +62,22 @@
 @property (weak, nonatomic) IBOutlet UIView *iconeView;
 @property (nonatomic, strong) NSMutableArray *shortcutsArray;
 @property (weak, nonatomic) IBOutlet UIButton *doMessageBtn;//弹出聊天页面的按钮
-
+@property (nonatomic,strong) NSMutableArray * unreadcountArr;
 @property (weak, nonatomic) IBOutlet UILabel *ShowHeadImage;//是否有新消息的图标
 @property (nonatomic,assign) int sum;
 
 @end
 
 @implementation FirstViewController
+
+-(NSMutableArray *)unreadcountArr
+{
+    if (!_unreadcountArr) {
+        _unreadcountArr = [NSMutableArray array];
+    }
+    
+    return _unreadcountArr;
+}
 -(NSArray *)dataArr
 {
     if (_dataArr == nil) {
@@ -121,7 +129,22 @@
     [self getScenesFromPlist];
     [self getPlist];
     [self setBtn];
+    [self creatItemID];
     
+    _sum = 0;
+    for (int i = 0; i < self.unreadcountArr.count; i ++) {
+        _sum += [self.unreadcountArr[i] integerValue];
+        
+    }
+    [NC postNotificationName:@"SumNumber" object:[NSString stringWithFormat:@"%d",_sum]];
+    SocketManager *sock=[SocketManager defaultManager];
+    sock.delegate=self;
+    self.roomID = [SQLManager getIsAllRoomIdByIsAll:1];
+    self.deviceid = [SQLManager singleDeviceWithCatalogID:bgmusic byRoom:self.roomID];
+    
+    //查询设备状态
+    NSData *data = [[DeviceInfo defaultManager] query:self.deviceid];
+    [sock.socket writeData:data withTimeout:1 tag:1];
     if (unread>0){
         self.chatlabel.text =[NSString stringWithFormat:@"%@" , @"您有新消息"];
     }else{
@@ -160,7 +183,43 @@
     }
     
 }
+-(void)creatItemID
+{
+    NSString *url = [NSString stringWithFormat:@"%@Cloud/notify.aspx",[IOManager httpAddr]];
+    NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
+    if (auothorToken) {
+        NSDictionary *dict = @{@"token":auothorToken,@"optype":[NSNumber numberWithInteger:2]};
+        HttpManager *http=[HttpManager defaultManager];
+        http.tag = 1;
+        http.delegate = self;
+        [http sendPost:url param:dict];
+    }
+}
 
+
+-(void)httpHandler:(id)responseObject tag:(int)tag
+{
+    [self.unreadcountArr removeAllObjects];
+    if (tag == 1) {
+        if ([responseObject[@"result"] intValue]==0)
+        {
+            
+            NSArray *dic = responseObject[@"notify_type_list"];
+            
+            if ([dic isKindOfClass:[NSArray class]]) {
+                for(NSDictionary *dicDetail in dic)
+                {
+                    
+                    [self.unreadcountArr addObject:dicDetail[@"unreadcount"]];
+                }
+            }
+        }else{
+            [MBProgressHUD showError:responseObject[@"Msg"]];
+        }
+        
+    }
+    
+}
 -(void)getPlist
 {
     NSArray  *paths  =  NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);

@@ -1,4 +1,4 @@
-//
+ //
 //  LeftViewController.m
 //
 //  Created by kobe on 17/3/15.
@@ -13,28 +13,14 @@
 @interface LeftViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 
-@property (nonatomic,strong)NSMutableArray * unreadcountArr;
-
 @end
 
 @implementation LeftViewController
-
--(NSMutableArray *)unreadcountArr
-{
-    if (!_unreadcountArr) {
-        _unreadcountArr = [NSMutableArray array];
-    }
-    
-    return _unreadcountArr;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addNotifications];
     [self getUserInfoFromDB];
-    if (ON_IPONE) {
-     [self creatItemID];
-    }
     _itemArray = @[@"家庭成员",@"视频动态",@"智能账单",@"通知",@"故障及保修记录",@"切换家庭账号"];
     _bgButton = [[UIButton alloc] initWithFrame:self.view.frame];
     [_bgButton setBackgroundImage:[UIImage imageNamed:@"my_bg_side_nol"] forState:UIControlStateNormal];
@@ -60,6 +46,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -100,20 +87,13 @@
     }else if (indexPath.row == 2) {
         cell.imageView.image = [UIImage imageNamed:@"my_cloud"];
     }else if (indexPath.row == 3) {
+        cell.imageView.image = [UIImage imageNamed:@"my_msg"];
         
         UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(90, 12, 20, 20)];
         label.backgroundColor = [UIColor redColor];
         label.layer.masksToBounds = YES;
         label.layer.cornerRadius = 10;
-        label.hidden = YES;
         [cell addSubview:label];
-        cell.imageView.image = [UIImage imageNamed:@"my_msg"];
-//        NSMutableArray * subArr = [NSMutableArray array];
-         _sum = 0;
-        for (int i = 0; i < self.unreadcountArr.count; i ++) {
-            _sum += [self.unreadcountArr[i] integerValue];
-            
-        }
         if (_sum == 0) {
             label.hidden = YES;
         }else{
@@ -123,7 +103,8 @@
         label.textColor = [UIColor whiteColor];
         label.font = [UIFont systemFontOfSize:12];
         label.textAlignment = NSTextAlignmentCenter;
-        [NC postNotificationName:@"SumNumber" object:[NSString stringWithFormat:@"%d",_sum]];
+     
+
        
     }else if (indexPath.row == 4) {
         cell.imageView.image = [UIImage imageNamed:@"my_alert"];
@@ -138,6 +119,9 @@
     return cell;
 }
 
+- (void)removeNotifications {
+    [NC removeObserver:self];
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
@@ -196,42 +180,8 @@
   }
     
 }
--(void)creatItemID
-{
-    NSString *url = [NSString stringWithFormat:@"%@Cloud/notify.aspx",[IOManager httpAddr]];
-    NSString *auothorToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"AuthorToken"];
-    if (auothorToken) {
-        NSDictionary *dict = @{@"token":auothorToken,@"optype":[NSNumber numberWithInteger:2]};
-        HttpManager *http=[HttpManager defaultManager];
-        http.tag = 1;
-        http.delegate = self;
-        [http sendPost:url param:dict];
-    }
-}
--(void) httpHandler:(id) responseObject tag:(int)tag
-{
-    if (tag == 1) {
-        if ([responseObject[@"result"] intValue]==0)
-        {
-            
-            NSArray *dic = responseObject[@"notify_type_list"];
-            
-            if ([dic isKindOfClass:[NSArray class]]) {
-                for(NSDictionary *dicDetail in dic)
-                {
-                    
-                    [self.unreadcountArr addObject:dicDetail[@"unreadcount"]];
-                }
-            }
-            
-            [self.myTableView reloadData];
-        }else{
-            [MBProgressHUD showError:responseObject[@"Msg"]];
-        }
-        
-    }
-    
-}
+
+
 - (void)backBtnClicked:(UIButton *)btn {
     if (_delegate && [_delegate respondsToSelector:@selector(didSelectItem:)]) {
         [_delegate didSelectItem:@"返回"];
@@ -403,6 +353,7 @@
     [NC addObserver:self selector:@selector(refreshPortrait:) name:@"refreshPortrait" object:nil];
     [NC addObserver:self selector:@selector(showMaskViewNotification:) name:@"ShowMaskViewNotification" object:nil];
     [NC addObserver:self selector:@selector(refreshNickName:) name:@"refreshNickName" object:nil];
+    [NC addObserver:self selector:@selector(SumNumber:) name:@"SumNumber" object:nil];
 }
 
 - (void)refreshPortrait:(NSNotification *)noti {
@@ -415,10 +366,12 @@
     _nickNameLabel.text = nickName;
 
 }
-- (void)removeNotifications {
-    [NC removeObserver:self];
+-(void)SumNumber:(NSNotification *)no
+{
+    NSString * sumNumber = no.object;
+    _sum = [sumNumber intValue];
+    
 }
-
 - (void)dealloc {
     [self removeNotifications];
 }
@@ -458,13 +411,6 @@
         mysettingVC.hidesBottomBarWhenPushed = YES;
         [appDelegate.mainTabBarController.selectedViewController pushViewController:mysettingVC animated:YES];
     }
-}
-
--(void)refreshUI
-{
-    [self.unreadcountArr removeAllObjects];
-    [self creatItemID];
-    
 }
 
 @end
