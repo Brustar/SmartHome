@@ -63,6 +63,9 @@
     
     [pm25Label showsLineMetrics];
     pm25Label.backgroundColor = [UIColor clearColor];
+    pm25Label.tag = 10777;
+    UIView *view = [self viewWithTag:10777];
+    [view removeFromSuperview];
     [self addSubview:pm25Label];
     [self bringSubviewToFront:pm25Label];
     
