@@ -43,7 +43,7 @@
 {
     self.deviceid = deviceid;
     SocketManager *sock=[SocketManager defaultManager];
-    sock.delegate=self;
+    //sock.delegate=self;
     //查询设备状态
     NSData *data = [[DeviceInfo defaultManager] query:deviceid];
     [sock.socket writeData:data withTimeout:1 tag:1];

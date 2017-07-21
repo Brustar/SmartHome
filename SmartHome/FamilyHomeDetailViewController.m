@@ -745,6 +745,9 @@
         NSString *devID=[SQLManager getDeviceIDByENumber:CFSwapInt16BigToHost(proto.deviceID)];
         Device *device = [SQLManager getDeviceWithDeviceID:devID.intValue];
         
+        //Device *device = [[Device alloc] init];
+       // device.eID = [devID intValue];
+        
         if (device) {
             device.actionState = proto.action.state;
             
