@@ -20,6 +20,8 @@
     if ([self checkNetWork]) {
         [self initDataSource];
         [self initUI];
+        
+        _startDate = [NSDate date];
     }
 }
 
@@ -29,6 +31,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
     [MBProgressHUD hideHUD];
 }
 
@@ -127,6 +130,18 @@
 - (void)showFullScreenViewByImage:(UIImage *)img {
     if (_fullScreenImageView) {
         _fullScreenImageView.image = img;
+    }
+}
+
+- (void)timeoutTimerWillStop:(BOOL)stop {
+    if (!stop) {
+        _endDate = [NSDate date];
+        NSTimeInterval seconds = [_endDate timeIntervalSinceDate:_startDate];
+        if (seconds >10) {
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showError:@"请求超时，请稍后再试"];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }
 }
 

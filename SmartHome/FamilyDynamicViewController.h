@@ -19,4 +19,6 @@
 @property (nonatomic, strong) NSMutableArray *cameraIDArray;
 @property (nonatomic, strong) UIView *fullScreenViewBg;
 @property (nonatomic, strong) UIImageView *fullScreenImageView;
+@property (nonatomic, strong) NSDate *startDate;
+@property (nonatomic, strong) NSDate *endDate;
 @end

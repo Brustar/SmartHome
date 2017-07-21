@@ -18,6 +18,14 @@
     [super viewDidLoad];
     [self addNotifications];
     [self initUI];
+    
+//    if (_video == nil) {
+//        _video = [[RTSPPlayer alloc] initWithVideo:self.cameraURL usesTcp:YES];
+//        _video.outputWidth =  Video_Output_Width;
+//        _video.outputHeight = Video_Output_Height;
+//    }
+//    
+     [self setupTimer];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -95,13 +103,23 @@
 
 -(void)displayNextFrame:(NSTimer *)timer
 {
+    self.cameraImgView.image = _video.currentImage;
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(timeoutTimerWillStop:)]) {
+        if (self.cameraImgView.image == nil) {
+            [_delegate timeoutTimerWillStop:NO];
+        }
+    }
+    
+    
     NSTimeInterval startTime = [NSDate timeIntervalSinceReferenceDate];
     if (![_video stepFrame]) {
         [timer invalidate];
         [_video closeAudio];
         return;
     }
-    self.cameraImgView.image = _video.currentImage;
+    
+    
     if (_delegate && [_delegate respondsToSelector:@selector(showFullScreenViewByImage:)]) {
         [_delegate showFullScreenViewByImage:_video.currentImage];
     }
