@@ -129,7 +129,7 @@
     [self getScenesFromPlist];
     [self getPlist];
     [self setBtn];
-    [self creatItemID];
+//    [self creatItemID];
     
     _sum = 0;
     for (int i = 0; i < self.unreadcountArr.count; i ++) {
@@ -181,7 +181,7 @@
             }
         }
     }
-    
+     [self setupNaviBar];
 }
 -(void)creatItemID
 {
@@ -279,7 +279,7 @@
     [super viewDidLoad];
     [self connect];
     
-    [self setupNaviBar];
+   
     [self showNetStateView];
 
     [self setUIMessage];

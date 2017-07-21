@@ -20,7 +20,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *powerBtn;//开关按钮
 @property (nonatomic,weak) NSString *sceneid;
 @property (nonatomic,weak) NSString *deviceid;
+@property (nonatomic,strong) NSString * deviceName;
 @property (nonatomic,assign) int roomID;
+@property (nonatomic,assign) NSString * roomName;
 @property (nonatomic,assign) NSInteger seleteSection;
 @property (nonatomic,assign) NSInteger seleteRow;
 @property (strong, nonatomic) Scene *scene;

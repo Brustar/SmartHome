@@ -73,7 +73,7 @@
     self.messageLabel.layer.masksToBounds = YES;
      UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doTap:)];
     [self.imageView addGestureRecognizer:tap];
-    [self setupNaviBar];
+   
     [self showNetStateView];
 //    [self showMassegeLabel];
     [self setTimer];
@@ -232,7 +232,7 @@
             }
         }
     }
-
+     [self setupNaviBar];
 }
 
 -(void)getWeather

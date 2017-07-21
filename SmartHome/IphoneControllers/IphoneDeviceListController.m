@@ -66,6 +66,7 @@ static NSString * const CYPhotoId = @"photo";
     _baseTabbarController.tabBar.hidden = YES;
     [self addNotifications];
     [LoadMaskHelper showMaskWithType:DeviceHome onView:self.tabBarController.view delay:0.5 delegate:self];
+     [self setupNaviBar];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -94,7 +95,7 @@ static NSString * const CYPhotoId = @"photo";
     [super viewDidLoad];
 
     self.automaticallyAdjustsScrollViewInsets = NO;
-    [self setupNaviBar];
+   
     [self showNetStateView];
 
     self.rooms = [SQLManager getAllRoomsInfo];
