@@ -262,13 +262,13 @@
             self.temperatureLabel.text = [NSString stringWithFormat:@"当前%@",temperature_curr];
              if ([weather_curr rangeOfString:@"多云"].location != NSNotFound ||[weather_curr rangeOfString:@"阴"].location != NSNotFound) {
                  self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-Overcast"];
-             }if ([weather_curr rangeOfString:@"雨"].location != NSNotFound) {
+             }else if([weather_curr rangeOfString:@"雨"].location != NSNotFound) {
                  self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-rain"];
-             }if ([weather_curr rangeOfString:@"雪"].location != NSNotFound) {
+             }else if ([weather_curr rangeOfString:@"雪"].location != NSNotFound) {
                  self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-snow"];
-             }if ([weather_curr rangeOfString:@"雾霾"].location != NSNotFound) {
+             }else if ([weather_curr rangeOfString:@"雾霾"].location != NSNotFound) {
                  self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-haze"];
-             }if ([weather_curr rangeOfString:@"晴"].location != NSNotFound) {
+             }else if([weather_curr rangeOfString:@"晴"].location != NSNotFound) {
                  if(_result>0){
                      self.imageView.image = [UIImage imageNamed:@"IpadSceneBg-night"];
                  }else{
@@ -424,13 +424,13 @@
 
     if ([self.weahter rangeOfString:@"多云"].location != NSNotFound ||[self.weahter rangeOfString:@"阴"].location != NSNotFound) {
         launchAnimation = @"cloudy";
-    }if ([self.weahter rangeOfString:@"雨"].location != NSNotFound) {
+    }else if([self.weahter rangeOfString:@"雨"].location != NSNotFound) {
         launchAnimation = @"rain";
-    }if ([self.weahter rangeOfString:@"雪"].location != NSNotFound) {
+    }else if  ([self.weahter rangeOfString:@"雪"].location != NSNotFound) {
         launchAnimation = @"snowing";
-    }if ([self.weahter rangeOfString:@"雾霾"].location != NSNotFound) {
+    }else if ([self.weahter rangeOfString:@"雾霾"].location != NSNotFound) {
         launchAnimation = @"haze";
-    }if ([self.weahter rangeOfString:@"晴"].location != NSNotFound) {
+    }else if([self.weahter rangeOfString:@"晴"].location != NSNotFound) {
             if(_result>0){
                 launchAnimation = @"night";
             }else{
