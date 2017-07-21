@@ -7,7 +7,7 @@
 //
 
 #import "HttpManager.h"
-#import <AFNetworking.h>
+#import "AFNetworking.h"
 #import "MBProgressHUD+NJ.h"
 #import "NetStatusManager.h"
 

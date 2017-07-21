@@ -10,7 +10,7 @@
 #import "CustomViewController.h"
 #import "PlaneGraphViewController.h"
 #import "iPadMyViewController.h"
-#import <AFNetworking.h>
+#import "AFNetworking.h"
 #import "LoadMaskHelper.h"
 
 @interface IpadFirstViewController : CustomViewController<NowMusicControllerDelegate, SingleMaskViewDelegate>

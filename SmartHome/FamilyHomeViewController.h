@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <AFNetworking.h>
+#import "AFNetworking.h"
 #import "HttpManager.h"
 #import "MBProgressHUD+NJ.h"
 #import "Scene.h"

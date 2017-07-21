@@ -19,7 +19,7 @@
 #import "Scene.h"
 #import "IpadDeviceListViewController.h"
 #import "IphoneSaveNewSceneController.h"
-
+#import "HGCircularSlider-Swift.h"
 
 @interface IphoneNewAddSceneTimerVC ()<WeekdaysVCDelegate,TenClockDelegate>
 @property (nonatomic,strong) Scene *scene;
