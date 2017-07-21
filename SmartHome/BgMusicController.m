@@ -183,6 +183,17 @@ BOOL animating;
             if (proto.action.state == PROTOCOL_VOLUME) {
                 self.volume.value=proto.action.RValue/100.0;
             }
+            if (proto.action.state == PROTOCOL_ON || proto.action.state == PROTOCOL_OFF) {
+                self.ipadPlay.selected = proto.action.state;
+                self.playBtn.selected = proto.action.state;
+            }
+            if (proto.action.state == PROTOCOL_ON) {
+                [self startSpin];
+            }
+            if (proto.action.state == PROTOCOL_OFF) {
+                [self stopSpin];
+            }
+            
         }
     }
 }
