@@ -187,6 +187,13 @@ BOOL animating;
                 self.ipadPlay.selected = proto.action.state;
                 self.playBtn.selected = proto.action.state;
             }
+            if (proto.action.state == PROTOCOL_ON) {
+                [self startSpin];
+            }
+            if (proto.action.state == PROTOCOL_OFF) {
+                [self stopSpin];
+            }
+            
         }
     }
 }
