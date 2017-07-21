@@ -22,7 +22,7 @@
 
 #import <RongIMKit/RongIMKit.h>
 #import "ConversationViewController.h"
-#import <RBStoryboardLink.h>
+#import "RBStoryboardLink.h"
 #import "IOManager.h"
 #import "NowMusicController.h"
 #import "UIImageView+WebCache.h"

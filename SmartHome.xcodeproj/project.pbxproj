@@ -72,6 +72,7 @@
 		0F7426BA1EBAC8D800D686B8 /* FloweringController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7426B91EBAC8D800D686B8 /* FloweringController.m */; };
 		0F7426C11EBB362F00D686B8 /* FeedingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7426BE1EBB362F00D686B8 /* FeedingController.m */; };
 		0F7426C21EBB362F00D686B8 /* WettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7426C01EBB362F00D686B8 /* WettingController.m */; };
+		0F7722E71F21D4150003AF7F /* HGCircularSlider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7722E61F21D4150003AF7F /* HGCircularSlider.framework */; };
 		0F8A78511E9F7C8C0050F0D9 /* UIImageView+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8A78501E9F7C8C0050F0D9 /* UIImageView+Badge.m */; };
 		0F8D76D01D9A1B9700DDD063 /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F8D76CF1D9A1B9700DDD063 /* Schedule.m */; };
 		0F91AA171CDC798700094C25 /* PrintObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F91AA161CDC798700094C25 /* PrintObject.m */; };
@@ -146,7 +147,6 @@
 		2E12CC161E7FC04800C7D006 /* IphoneNewEditSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CC151E7FC04800C7D006 /* IphoneNewEditSceneController.m */; };
 		2E1495101DE474EF00141629 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9ADF711CE2DC020052F3BC /* libz.tbd */; };
 		2E192CA71EBB2D3F00458541 /* CKCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E192CA61EBB2D3F00458541 /* CKCircleView.m */; };
-		2E2B57195D5A936F7BD15641 /* libPods-SmartHome.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9FD66F09F2092DE805E0F5B /* libPods-SmartHome.a */; };
 		2E2D92CE1EF1067C0007B90A /* PowerLightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D92CC1EF1067C0007B90A /* PowerLightCell.m */; };
 		2E2D92CF1EF1067C0007B90A /* PowerLightCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E2D92CD1EF1067C0007B90A /* PowerLightCell.xib */; };
 		2E2EA7871EFCBE0C0030EB46 /* ChangeNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2EA7861EFCBE0C0030EB46 /* ChangeNameViewController.m */; };
@@ -216,6 +216,7 @@
 		2EF75C7C1EB2CAE00055147D /* ShortcutKeyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF75C791EB2CAE00055147D /* ShortcutKeyCell.m */; };
 		2EF75C7D1EB2CAE00055147D /* ShortcutKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF75C7B1EB2CAE00055147D /* ShortcutKeyViewController.m */; };
 		2EF75C811EB32D390055147D /* DeviceTimingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF75C801EB32D390055147D /* DeviceTimingViewController.m */; };
+		39951F658604DC8E80FE9361 /* Pods_SmartHome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB719EB6AD94BADA3066D54C /* Pods_SmartHome.framework */; };
 		CD43046F1E0B674000B594F4 /* FamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD43046E1E0B674000B594F4 /* FamilyViewController.m */; };
 		CD4F12441EB316EF00E0B301 /* DeliveryAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4F12431EB316EF00E0B301 /* DeliveryAddressViewController.m */; };
 		CD4F12471EB4400A00E0B301 /* DeliveryAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4F12461EB4400A00E0B301 /* DeliveryAddressCell.m */; };
@@ -602,6 +603,7 @@
 		0F7426BE1EBB362F00D686B8 /* FeedingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedingController.m; sourceTree = "<group>"; };
 		0F7426BF1EBB362F00D686B8 /* WettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WettingController.h; sourceTree = "<group>"; };
 		0F7426C01EBB362F00D686B8 /* WettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WettingController.m; sourceTree = "<group>"; };
+		0F7722E61F21D4150003AF7F /* HGCircularSlider.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HGCircularSlider.framework; path = "../../Library/Developer/Xcode/DerivedData/SmartHome-bzdxonqdgyklqggxnmuaonxnrkmv/Build/Products/Debug-iphoneos/HGCircularSlider/HGCircularSlider.framework"; sourceTree = "<group>"; };
 		0F8A784F1E9F7C8C0050F0D9 /* UIImageView+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Badge.h"; sourceTree = "<group>"; };
 		0F8A78501E9F7C8C0050F0D9 /* UIImageView+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Badge.m"; sourceTree = "<group>"; };
 		0F8D76CE1D9A1B9700DDD063 /* Schedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Schedule.h; sourceTree = "<group>"; };
@@ -860,6 +862,7 @@
 		2EF75C7F1EB32D390055147D /* DeviceTimingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceTimingViewController.h; sourceTree = "<group>"; };
 		2EF75C801EB32D390055147D /* DeviceTimingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceTimingViewController.m; sourceTree = "<group>"; };
 		9B45FF693457BA21BA43CE05 /* Pods-SmartHome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.debug.xcconfig"; sourceTree = "<group>"; };
+		AB719EB6AD94BADA3066D54C /* Pods_SmartHome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartHome.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD43046D1E0B674000B594F4 /* FamilyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyViewController.h; sourceTree = "<group>"; };
 		CD43046E1E0B674000B594F4 /* FamilyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyViewController.m; sourceTree = "<group>"; };
 		CD4F12421EB316EF00E0B301 /* DeliveryAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryAddressViewController.h; sourceTree = "<group>"; };
@@ -1134,7 +1137,6 @@
 		F6DC641D1DEC17710056EC00 /* RoomDeviceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomDeviceController.m; sourceTree = "<group>"; };
 		F6FD00A01DDDD470009ABA64 /* TouchSubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchSubViewController.h; sourceTree = "<group>"; };
 		F6FD00A11DDDD470009ABA64 /* TouchSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchSubViewController.m; sourceTree = "<group>"; };
-		F9FD66F09F2092DE805E0F5B /* libPods-SmartHome.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SmartHome.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1142,6 +1144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F7722E71F21D4150003AF7F /* HGCircularSlider.framework in Frameworks */,
 				0F4B3C7A1E7BEDE300102DD3 /* libxml2.tbd in Frameworks */,
 				0F64234C1DE57CA1003379FC /* libavformat.a in Frameworks */,
 				0F64234D1DE57CA1003379FC /* libavutil.a in Frameworks */,
@@ -1164,7 +1167,7 @@
 				0FF410DC1CDAF76300C7F4A1 /* CoreBluetooth.framework in Frameworks */,
 				0FF410DA1CDAE67100C7F4A1 /* CoreLocation.framework in Frameworks */,
 				0FA658FC1CD9DB3F005AC4B4 /* MediaPlayer.framework in Frameworks */,
-				2E2B57195D5A936F7BD15641 /* libPods-SmartHome.a in Frameworks */,
+				39951F658604DC8E80FE9361 /* Pods_SmartHome.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2505,6 +2508,7 @@
 		F6DAFF50D58D29D0493A07C7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0F7722E61F21D4150003AF7F /* HGCircularSlider.framework */,
 				0F6C46491EA9AE9600F857E9 /* QuartzCore.framework */,
 				0F4B3C7D1E7BEE1D00102DD3 /* CoreFoundation.framework */,
 				0F4B3C7E1E7BEE1D00102DD3 /* Foundation.framework */,
@@ -2523,7 +2527,7 @@
 				0F2D36541D11528300C46DE5 /* VideoToolbox.framework */,
 				0F2D36521D11527500C46DE5 /* CoreMedia.framework */,
 				0FA0FD651D057C430041CE96 /* AddressBook.framework */,
-				F9FD66F09F2092DE805E0F5B /* libPods-SmartHome.a */,
+				AB719EB6AD94BADA3066D54C /* Pods_SmartHome.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2958,7 +2962,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		7B4EC63A298C6E6A66AD1643 /* [CP] Check Pods Manifest.lock */ = {
