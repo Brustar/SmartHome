@@ -168,6 +168,18 @@
 }
 -(void)rightBtnClicked:(UIButton *)btn
 {
+    if (self.isDeviceTimer) {
+        NSDictionary *dic = @{
+                              @"startDay":self.starTimeLabel.text,
+                              @"endDay":self.endTimeLabel.text,
+                              @"repeat":self.RepetitionLable.text,
+                              @"weekArray":_weekArray
+                              };
+        [NC postNotificationName:@"AddSceneOrDeviceTimerNotification" object:nil userInfo:dic];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }else {
+    
     
     _viewControllerArrs =self.navigationController.viewControllers;
     NSInteger vcCount = _viewControllerArrs.count;
@@ -200,7 +212,7 @@
     }
 
     [self.navigationController popViewControllerAnimated:YES];
-
+   }
 }
 - (IBAction)SelectWeek:(id)sender {
     

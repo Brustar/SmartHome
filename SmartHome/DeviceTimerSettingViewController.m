@@ -798,6 +798,7 @@
     if (indexPath.section == 1) {
         UIStoryboard * sceneStoryBoard = [UIStoryboard storyboardWithName:@"Scene" bundle:nil];
         IphoneNewAddSceneTimerVC * timerVC = [sceneStoryBoard  instantiateViewControllerWithIdentifier:@"IphoneNewAddSceneTimerVC"];
+        timerVC.isDeviceTimer = YES;
         if (_repeatition.length >0) {
             timerVC.repeatitionStr = _repeatition;
         }else {
@@ -844,7 +845,7 @@
         
         for (int i=0; i < 7; i++) {
             if ([weekArray[i] intValue] == 1) {
-                [_repeatString appendString:[NSString stringWithFormat:@"%d", i]];
+                [_repeatString appendString:[NSString stringWithFormat:@"%d,", i]];
             }
         }
     }
@@ -1026,10 +1027,13 @@
         return @"永不";
     }else {
         NSMutableArray *weekArray = [NSMutableArray array];
-        for(int i =0; i < [weekString length]; i++) {
-            NSString *subStr = [weekString substringWithRange:NSMakeRange(i, 1)];
-            [weekArray addObject:subStr];
+        NSArray *arr = [weekString componentsSeparatedByString:@","];
+        if (arr.count >0) {
+            [weekArray addObjectsFromArray:arr];
         }
+        
+        //weekArray 删除最后一个元素, 最后一个元素是空白字符
+        [weekArray removeObjectAtIndex:weekArray.count-1];
         
         if (weekArray.count >0) {
             NSMutableDictionary *weeksDict = [NSMutableDictionary dictionary];

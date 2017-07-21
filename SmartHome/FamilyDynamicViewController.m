@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [MBProgressHUD showMessage:@"请稍后...."];
     if ([self checkNetWork]) {
         [self initDataSource];
         [self initUI];
@@ -25,13 +25,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    //[MBProgressHUD hideHUD];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [MBProgressHUD hideHUD];
-    
 }
 
 - (BOOL)checkNetWork {
